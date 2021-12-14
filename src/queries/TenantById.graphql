@@ -1,0 +1,36 @@
+query TenantById($id: Int!) {
+	tenants_by_pk(id: $id) {
+		id
+		first_name
+		last_name
+		email
+		phone
+		dob
+		civilid
+		second_name
+		third_name
+		leases(order_by: { end_date: desc }) {
+			id
+			start_date
+			end_date
+			monthly_rent
+			is_signed
+			is_expired
+			license
+			unit {
+				id
+				property_id
+				client_id_s
+			}
+			transactions(order_by: { due_date: desc }) {
+				id
+				is_paid
+				amount
+				lease_id
+				receipt_url
+				created_at
+				due_date
+			}
+		}
+	}
+}

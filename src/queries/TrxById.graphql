@@ -1,0 +1,15 @@
+query TrxById($id: Int!) {
+	transactions_by_pk(id: $id) {
+		id
+		amount
+	}
+}
+
+query Trx2ById($id: Int!) {
+	transactions_by_pk(id: $id) {
+		id
+		is_paid
+		memo
+		created_at
+	}
+}

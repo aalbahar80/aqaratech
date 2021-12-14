@@ -1,0 +1,12 @@
+query ClientList($limit: Int, $offset: Int, $order_by: [clients_order_by!] = {})
+@cached {
+	clients(order_by: $order_by, limit: $limit, offset: $offset) {
+		id
+		first_name
+		last_name
+		is_active
+		civilid
+		email
+		phone
+	}
+}

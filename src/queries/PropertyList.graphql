@@ -1,0 +1,16 @@
+query PropertyList(
+	$limit: Int
+	$offset: Int
+	$order_by: [properties_order_by!] = {}
+) @cached {
+	properties(order_by: $order_by, limit: $limit, offset: $offset) {
+		id
+		client_id
+		area
+		block
+		street
+		avenue
+		number
+		coordinates
+	}
+}

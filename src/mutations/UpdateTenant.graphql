@@ -1,0 +1,13 @@
+mutation UpdateTenant($id: Int!, $_set: tenants_set_input) {
+	update_tenants_by_pk(pk_columns: { id: $id }, _set: $_set) {
+		id
+		first_name
+		last_name
+		email
+		dob
+		civilid
+		phone
+		second_name
+		third_name
+	}
+}
