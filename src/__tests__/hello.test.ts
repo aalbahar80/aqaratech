@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Hello from '../routes/hello.svelte';
 import { render } from '@testing-library/svelte';
 
