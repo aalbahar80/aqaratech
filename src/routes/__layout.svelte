@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../styles/tailwind-output.css';
+	import '../styles/tailwind.css';
 	import Wrapper from '../Wrapper.svelte';
 	import Header from '$components/Header.svelte';
 	import { onDestroy } from 'svelte';

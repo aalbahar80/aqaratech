@@ -42,7 +42,7 @@
 			{#each $_fieldList.fieldList as { fieldName, visibile }}
 				{#if visibile}
 					{#if fieldName === 'actions'}
-						<th>
+						<th class="sticky">
 							<!-- <ModalEdit existing={row} />
 							<ModalDelete id={row.id} /> -->
 							<a
