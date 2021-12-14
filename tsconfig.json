@@ -20,7 +20,8 @@
 			"$components/*": ["./src/components/*"],
 			"$generated/*": ["./src/generated/*"],
 			"$routes/*": ["./src/routes/*"],
-		}
+		},
+		"noEmit": true,
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte", "./jest-setup.ts"]
 }
