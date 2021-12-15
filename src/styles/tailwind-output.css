@@ -2227,6 +2227,9 @@ html {
   --tw-translate-x: -100%;
   transform: var(--tw-transform);
 }
+.transform {
+  transform: var(--tw-transform);
+}
 @-webkit-keyframes pulse {
 
   50% {

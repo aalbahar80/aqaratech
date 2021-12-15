@@ -8,15 +8,29 @@
 	import type * as yup from 'yup';
 	import type { DocumentNode } from 'graphql';
 	import type { FieldList } from '$components/form/Field';
-	import { mutation, OperationStore, operationStore } from '@urql/svelte';
+	import {
+		mutation,
+		OperationStore,
+		operationStore,
+		query
+	} from '@urql/svelte';
 	import { failureToast, successToast } from '$components/toasts';
 	import { page } from '$app/stores';
+	import { parseISO } from 'date-fns';
 
 	export let fieldList: FieldList;
 	export let insertDoc: DocumentNode = undefined;
 	export let updateDoc: DocumentNode = undefined;
+	export let byIdDoc: DocumentNode = undefined;
+	export let graphQlName: string = undefined;
 
 	export let existing = undefined;
+	export let edit = false;
+	if (edit) {
+		const abc = operationStore(byIdDoc, { id: parseInt($page.params.id) });
+		query(abc);
+		existing = $abc.data[graphQlName];
+	}
 
 	// insert mutation
 	const insertStore = operationStore(insertDoc);
@@ -27,25 +41,36 @@
 	const updateMutation = mutation(updateStore);
 
 	const schema = fieldList.getValidations();
-	const { form, isValid, isSubmitting, reset } = createForm<
-		yup.InferType<typeof schema>,
-		ValidatorConfig
-	>({
-		extend: [validator, reporter],
-		validateSchema: schema,
-		onSubmit: async (values) => {
-			console.log(values);
-			!existing
-				? await insertForm(insertMutation(values))
-				: await insertForm(
-						updateMutation({
-							id: existing.id,
-							_set: { ...values }
-						})
-				  );
-			console.dir(values);
-		}
-	});
+	const { form, isValid, isSubmitting, reset, validate, data, errors } =
+		createForm({
+			extend: [validator, reporter],
+			validateSchema: schema,
+			onSubmit: async (values) => {
+				console.log(values);
+				!existing
+					? await insertForm(insertMutation(values))
+					: await insertForm(
+							updateMutation({
+								id: existing.id,
+								_set: { ...values }
+							})
+					  );
+				console.dir(values);
+			},
+			// transform: (values) => ({
+			// 	...values,
+			// 	start_date: parseISO(values.start_date),
+			// 	end_date: parseISO(values.end_date)
+			// }),
+			validate: (values) => {
+				const errors = {};
+				if (parseISO(values.start_date) > parseISO(values.end_date)) {
+					errors.start_date = 'Start date must be before end date';
+					errors.end_date = 'End date must be after start date';
+				}
+				return errors;
+			}
+		});
 
 	const insertForm = async (theMutation: Promise<OperationStore>) => {
 		await theMutation.then((result) => {
@@ -110,3 +135,7 @@
 		</div>
 	</div>
 </form>
+
+<button on:click={validate}>validate</button>
+<button on:click={() => console.log($data)}>debug</button>
+<button on:click={() => console.log($errors)}>debug</button>

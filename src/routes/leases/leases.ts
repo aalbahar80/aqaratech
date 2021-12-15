@@ -1,13 +1,28 @@
 import { Field, FieldList } from '$components/form/Field';
-import { DeleteLeaseDocument, LeaseListDocument } from '$generated/graphql';
+import { page } from '$app/stores';
+import {
+	DeleteLeaseDocument,
+	InsertLeaseDocument,
+	LeaseListDocument,
+	UpdateLeaseDocument
+} from '$generated/graphql';
 import * as yup from 'yup';
+import {
+	LeaseByIdDocument,
+	LeaseByIdQuery,
+	LeaseByIdQueryVariables
+} from '$generated/graphql';
+import { operationStore, query } from '@urql/svelte';
 
 const title = 'Leases';
 const graphQlName = 'leases';
 
 const docs = {
 	delete: DeleteLeaseDocument,
-	list: LeaseListDocument
+	list: LeaseListDocument,
+	insert: InsertLeaseDocument,
+	update: UpdateLeaseDocument,
+	byId: LeaseByIdDocument
 };
 
 // refactor FieldList to array of Field objects
@@ -21,23 +36,13 @@ const fieldList = new FieldList([
 		fieldName: 'start_date',
 		title: 'Start',
 		inputType: 'date',
-		validation: yup.date().required().typeError('Invalid Date')
+		validation: yup.string().defined()
 	}),
 	new Field({
 		fieldName: 'end_date',
 		title: 'End',
 		inputType: 'date',
-		validation: yup
-			.date()
-			// .min(parseDate(yup.ref('start_date').getValue))
-			.when(
-				'start_date',
-				(start_date, yup) =>
-					start_date &&
-					yup.min(start_date, 'End date cannot be before start date')
-			)
-			.required()
-			.typeError('Invalid Date')
+		validation: yup.string().defined()
 	}),
 	new Field({
 		fieldName: 'is_expired',

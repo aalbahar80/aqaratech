@@ -5735,6 +5735,21 @@ export type DeleteTenantMutationVariables = Exact<{
 
 export type DeleteTenantMutation = { __typename?: 'mutation_root', delete_tenants_by_pk?: { __typename?: 'tenants', id: number } | null | undefined };
 
+export type InsertLeaseMutationVariables = Exact<{
+  object?: InputMaybe<Leases_Insert_Input>;
+}>;
+
+
+export type InsertLeaseMutation = { __typename?: 'mutation_root', insert_leases_one?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+
+export type UpdateLeaseMutationVariables = Exact<{
+  id: Scalars['Int'];
+  _set?: InputMaybe<Leases_Set_Input>;
+}>;
+
+
+export type UpdateLeaseMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+
 export type InsertTenantMutationVariables = Exact<{
   first_name?: InputMaybe<Scalars['String']>;
   last_name?: InputMaybe<Scalars['String']>;
@@ -5859,6 +5874,38 @@ export const DeleteTenantDocument = gql`
     mutation DeleteTenant($id: Int!) {
   delete_tenants_by_pk(id: $id) {
     id
+  }
+}
+    `;
+export const InsertLeaseDocument = gql`
+    mutation InsertLease($object: leases_insert_input = {}) {
+  insert_leases_one(object: $object) {
+    id
+    deposit
+    end_date
+    is_expired
+    is_signed
+    license
+    monthly_rent
+    start_date
+    tenant_id
+    unit_id
+  }
+}
+    `;
+export const UpdateLeaseDocument = gql`
+    mutation UpdateLease($id: Int!, $_set: leases_set_input) {
+  update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    id
+    deposit
+    end_date
+    is_expired
+    is_signed
+    license
+    monthly_rent
+    start_date
+    tenant_id
+    unit_id
   }
 }
     `;
@@ -6044,6 +6091,8 @@ export type DeletePropertyMutationStore = OperationStore<DeletePropertyMutation,
 export type DeleteUnitMutationStore = OperationStore<DeleteUnitMutation, DeleteUnitMutationVariables>;
 export type DeleteLeaseMutationStore = OperationStore<DeleteLeaseMutation, DeleteLeaseMutationVariables>;
 export type DeleteTenantMutationStore = OperationStore<DeleteTenantMutation, DeleteTenantMutationVariables>;
+export type InsertLeaseMutationStore = OperationStore<InsertLeaseMutation, InsertLeaseMutationVariables>;
+export type UpdateLeaseMutationStore = OperationStore<UpdateLeaseMutation, UpdateLeaseMutationVariables>;
 export type InsertTenantMutationStore = OperationStore<InsertTenantMutation, InsertTenantMutationVariables>;
 export type UpdateTenantMutationStore = OperationStore<UpdateTenantMutation, UpdateTenantMutationVariables>;
 export type ClientListQueryStore = OperationStore<ClientListQuery, ClientListQueryVariables>;
