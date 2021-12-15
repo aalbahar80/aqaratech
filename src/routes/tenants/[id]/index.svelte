@@ -1,3 +1,13 @@
+<script context="module" lang="ts">
+	export async function load({ page }) {
+		const id = page.params.id;
+
+		if (id === 'add') {
+			return;
+		}
+	}
+</script>
+
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
@@ -29,10 +39,10 @@
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
 	$: crumbData = {
-		clientId: $tenant?.data?.tenants_by_pk?.leases[0].unit.client_id_s,
-		propertyId: $tenant?.data?.tenants_by_pk?.leases[0].unit.property_id,
-		unitId: $tenant?.data?.tenants_by_pk?.leases[0].unit.id,
-		leaseId: $tenant?.data?.tenants_by_pk?.leases[0].id,
+		clientId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.client_id_s,
+		propertyId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.property_id,
+		unitId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.id,
+		leaseId: $tenant?.data?.tenants_by_pk?.leases[0]?.id,
 		tenantId: $tenant?.data?.tenants_by_pk?.id
 	};
 </script>
@@ -50,9 +60,9 @@
 			<div
 				class="grid items-center flex-grow grid-cols-3 p-8 card bg-base-200 rounded-box gap-y-8"
 			>
-				<button class="col-start-3 btn btn-ghost btn-xs"
+				<a href={`${$page.path}/edit`} class="col-start-3 btn btn-ghost btn-xs"
 					><Fa class="pr-2" icon={faPen} />
-					Edit</button
+					Edit</a
 				>
 
 				<Fa class="col-start-1" icon={faUserCircle} />

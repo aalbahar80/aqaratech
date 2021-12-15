@@ -48,6 +48,6 @@ export class FieldList {
 			}
 			return acc;
 		}, {});
-		return yup.object().shape(schema);
+		return yup.object(schema);
 	}
 }

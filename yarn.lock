@@ -1290,6 +1290,32 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@felte/common@0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@felte/common/-/common-0.5.3.tgz#b20d1c49d672eb75a868b77a55b0fc74128a5926"
+  integrity sha512-yVi7mhFdKeuU1d/yodCnqgP5pJXVz+SiARc5XrDRgxlsreUvp/rrdvhRmL94y0p+wPu2Dmr0FCc5aYiDgh/IsQ==
+
+"@felte/core@0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@felte/core/-/core-0.2.6.tgz#4c5ec29c2775d9e0912b91a9987848c4ce147cc5"
+  integrity sha512-d1xV92OtKdt9Vf2jQ4+FZX4RKhikYQjGXIbLQInmhgnBzOMmxKlh7NMmOGyOdIXyIKlzoLIWkjRyw3ubdP6opw==
+  dependencies:
+    "@felte/common" "0.5.3"
+
+"@felte/reporter-svelte@^0.3.18":
+  version "0.3.18"
+  resolved "https://registry.yarnpkg.com/@felte/reporter-svelte/-/reporter-svelte-0.3.18.tgz#4d6c4b78dcd360192e5456b85a0f563e8766cad0"
+  integrity sha512-ljt4zI0tw/3JeyeYUMESfd+CVK76ELsbV/NTzZP37oR42u4xPMh93QO9pO2511Fe5DZlzVtrGWxmioWEyNfkWQ==
+  dependencies:
+    "@felte/common" "0.5.3"
+
+"@felte/validator-yup@^0.2.10":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@felte/validator-yup/-/validator-yup-0.2.10.tgz#959415304842c7060c39fcd98b8051ae21df0305"
+  integrity sha512-MFY/gVV3FKa33yXzkafMStBQY4ithmSpUB7hQ7rEJoiSYijyyZLGZGctToge9YoCpj7up3dWSfNPEI/wyYQ5Gg==
+  dependencies:
+    "@felte/common" "0.5.3"
+
 "@fortawesome/fontawesome-common-types@^0.2.36":
   version "0.2.36"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.36.tgz#b44e52db3b6b20523e0c57ef8c42d315532cb903"
@@ -6876,6 +6902,13 @@ fbjs@^3.0.0:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.30"
+
+felte@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/felte/-/felte-0.8.6.tgz#748af356e5b8cfe75df061b3718145e53ffcc4e0"
+  integrity sha512-hmi4F5VqJUOgyb++FtoHof7HOcDK1LG+MGah9yh1JLQBJ4VzUbUoY0zggVmwrkeO/UYiCNhFlZivRd1L5576Sw==
+  dependencies:
+    "@felte/core" "0.2.6"
 
 figgy-pudding@^3.5.1:
   version "3.5.2"

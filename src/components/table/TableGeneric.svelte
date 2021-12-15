@@ -10,6 +10,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 	import type { Writable } from 'svelte/store';
+	import { page } from '$app/stores';
 
 	const { getGraphQlName, getFieldList, getIsFetching } = getContext(key);
 	const _fieldList: SvelteStore<FieldList> = getFieldList();
@@ -67,6 +68,7 @@
 
 <div class="flex justify-between py-2">
 	<ModalEdit />
+	<a href={`${$page.path}/add`}>Add</a>
 	<ColumnToggle />
 </div>
 

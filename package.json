@@ -21,6 +21,8 @@
   "devDependencies": {
     "@auth0/auth0-spa-js": "^1.19.3",
     "@babel/core": "^7.16.5",
+    "@felte/reporter-svelte": "^0.3.18",
+    "@felte/validator-yup": "^0.2.10",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/introspection": "^2.1.0",
@@ -59,6 +61,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-storybook": "^0.5.0",
     "eslint-plugin-svelte3": "^3.2.1",
+    "felte": "^0.8.6",
     "jest": "^27.4.5",
     "msw": "^0.36.1",
     "msw-storybook-addon": "^1.4.1",

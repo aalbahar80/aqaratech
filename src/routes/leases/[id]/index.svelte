@@ -1,3 +1,14 @@
+<script context="module" lang="ts">
+	/** @type {import('@sveltejs/kit').Load} */
+	export async function load({ page }) {
+		const id = page.params.id;
+
+		if (id === 'add') {
+			return;
+		}
+	}
+</script>
+
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
@@ -41,7 +52,6 @@
 
 <BreadCrumbs {...crumbData} />
 {JSON.stringify($lease)}
-
 <button class="btn btn-secondary" class:loading on:click={getPDF}
 	>Generate PDF</button
 >

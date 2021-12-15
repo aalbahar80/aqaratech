@@ -19,31 +19,31 @@
 
 	$: crumbs = [
 		{
-			name: 'client',
+			name: 'clients',
 			title: 'Client',
 			href: `/clients/${clientId}`,
 			icon: faFolderOpen
 		},
 		{
-			name: 'property',
+			name: 'properties',
 			title: 'Property',
 			href: `/properties/${propertyId}`,
 			icon: faBuilding
 		},
 		{
-			name: 'unit',
+			name: 'units',
 			title: 'Unit',
 			href: `/units/${unitId}`,
 			icon: faDoorOpen
 		},
 		{
-			name: 'lease',
+			name: 'leases',
 			title: 'Lease',
 			href: `/leases/${leaseId}`,
 			icon: faFileSignature
 		},
 		{
-			name: 'tenant',
+			name: 'tenants',
 			title: 'Tenant',
 			href: `/tenants/${tenantId}`,
 			icon: faUser
@@ -53,12 +53,12 @@
 
 <div class="my-4 text-sm breadcrumbs">
 	<ul>
-		{#each crumbs as { title, href, icon }}
+		{#each crumbs as { title, href, icon, name }}
 			<li>
 				<a
 					{href}
 					class="link link-hover"
-					class:link-secondary={$page.path == href}
+					class:link-secondary={$page.path.startsWith(`/${name}`)}
 				>
 					<div class="mr-2">
 						<Fa {icon} />
