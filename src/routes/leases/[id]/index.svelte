@@ -1,14 +1,16 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page }) {
 		const id = page.params.id;
+
+		// //RECONSDIER LATER
+		// return;
 
 		if (id === 'add') {
 			return;
 		}
 	}
-</script>
-
+</script> -->
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
@@ -56,4 +58,4 @@
 	>Generate PDF</button
 >
 
-<button class="btn btn-secondary" class:loading>Renew Lease</button>
+<a href="{$page.path}/edit" class="btn btn-secondary" class:loading>Edit</a>

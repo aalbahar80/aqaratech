@@ -1,18 +1,12 @@
 import { Field, FieldList } from '$components/form/Field';
-import { page } from '$app/stores';
 import {
 	DeleteLeaseDocument,
 	InsertLeaseDocument,
+	LeaseByIdDocument,
 	LeaseListDocument,
 	UpdateLeaseDocument
 } from '$generated/graphql';
 import * as yup from 'yup';
-import {
-	LeaseByIdDocument,
-	LeaseByIdQuery,
-	LeaseByIdQueryVariables
-} from '$generated/graphql';
-import { operationStore, query } from '@urql/svelte';
 
 const title = 'Leases';
 const graphQlName = 'leases';
@@ -94,4 +88,7 @@ const fieldList = new FieldList([
 	})
 ]);
 const info = { title, graphQlName, docs, fieldList };
+export const get = () => {
+	return { body: 'something' };
+};
 export default info;

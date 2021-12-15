@@ -15,23 +15,13 @@
 		query
 	} from '@urql/svelte';
 	import { failureToast, successToast } from '$components/toasts';
-	import { page } from '$app/stores';
 	import { parseISO } from 'date-fns';
 
 	export let fieldList: FieldList;
 	export let insertDoc: DocumentNode = undefined;
 	export let updateDoc: DocumentNode = undefined;
-	export let byIdDoc: DocumentNode = undefined;
-	export let graphQlName: string = undefined;
 
 	export let existing = undefined;
-	export let edit = false;
-	if (edit) {
-		const abc = operationStore(byIdDoc, { id: parseInt($page.params.id) });
-		query(abc);
-		existing = $abc.data[graphQlName];
-	}
-
 	// insert mutation
 	const insertStore = operationStore(insertDoc);
 	const insertMutation = mutation(insertStore);
