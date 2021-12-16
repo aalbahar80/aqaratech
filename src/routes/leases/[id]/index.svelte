@@ -1,16 +1,17 @@
-<!-- <script context="module" lang="ts">
+<script context="module" lang="ts">
 	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page }) {
 		const id = page.params.id;
 
-		// //RECONSDIER LATER
-		// return;
-
 		if (id === 'add') {
+			// Go to add page instead
 			return;
+		} else {
+			return {};
 		}
 	}
-</script> -->
+</script>
+
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';

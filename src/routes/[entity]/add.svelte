@@ -14,5 +14,6 @@
 </script>
 
 {#if _entity}
+	{console.log('correct', docs.insert)}
 	<AddGeneric {fieldList} insertDoc={docs.insert} />
 {/if}

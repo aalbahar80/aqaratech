@@ -5841,6 +5841,14 @@ export type UnitListQueryVariables = Exact<{
 
 export type UnitListQuery = { __typename?: 'query_root', units: Array<{ __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined }> };
 
+export type FiveLeaseMutationVariables = Exact<{
+  id: Scalars['Int'];
+  _set?: InputMaybe<Leases_Set_Input>;
+}>;
+
+
+export type FiveLeaseMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+
 
 export const DeleteClientDocument = gql`
     mutation DeleteClient($id: Int!) {
@@ -6086,6 +6094,22 @@ export const UnitListDocument = gql`
   }
 }
     `;
+export const FiveLeaseDocument = gql`
+    mutation FiveLease($id: Int!, $_set: leases_set_input) {
+  update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    id
+    deposit
+    end_date
+    is_expired
+    is_signed
+    license
+    monthly_rent
+    start_date
+    tenant_id
+    unit_id
+  }
+}
+    `;
 export type DeleteClientMutationStore = OperationStore<DeleteClientMutation, DeleteClientMutationVariables>;
 export type DeletePropertyMutationStore = OperationStore<DeletePropertyMutation, DeletePropertyMutationVariables>;
 export type DeleteUnitMutationStore = OperationStore<DeleteUnitMutation, DeleteUnitMutationVariables>;
@@ -6104,6 +6128,7 @@ export type TenantListQueryStore = OperationStore<TenantListQuery, TenantListQue
 export type TrxByIdQueryStore = OperationStore<TrxByIdQuery, TrxByIdQueryVariables>;
 export type Trx2ByIdQueryStore = OperationStore<Trx2ByIdQuery, Trx2ByIdQueryVariables>;
 export type UnitListQueryStore = OperationStore<UnitListQuery, UnitListQueryVariables>;
+export type FiveLeaseMutationStore = OperationStore<FiveLeaseMutation, FiveLeaseMutationVariables>;
 export type WithTypename<T extends { __typename?: any }> = { [K in Exclude<keyof T, '__typename'>]?: T[K] } & { __typename: NonNullable<T['__typename']> };
 
 export type GraphCacheKeysConfig = {

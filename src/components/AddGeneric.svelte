@@ -25,28 +25,45 @@
 	// insert mutation
 	const insertStore = operationStore(insertDoc);
 	const insertMutation = mutation(insertStore);
+	console.log('INSERT DOC HERE', insertDoc);
 
 	// update mutation
 	const updateStore = operationStore(updateDoc);
 	const updateMutation = mutation(updateStore);
+	console.log(updateDoc);
+
+	const handleSubmit = async (values) => {
+		console.log(values);
+		try {
+			if (existing) {
+				// console.log('updateDoc is', updateDoc);
+				// console.log('updateMut is', updateDoc);
+				// console.log('values', values);
+				// console.log('id', existing.id);
+				// await updateMutation({
+				// 	id: existing.id,
+				// 	_set: values
+				// });
+				await insertMutation({ object: values });
+			} else {
+				await insertMutation({ object: values });
+			}
+			successToast('Success');
+		} catch (e) {
+			console.log(e);
+			failureToast(e.message);
+		} finally {
+			console.log(values);
+			console.log({ ...values });
+		}
+	};
 
 	const schema = fieldList.getValidations();
 	const { form, isValid, isSubmitting, reset, validate, data, errors } =
 		createForm({
 			extend: [validator, reporter],
 			validateSchema: schema,
-			onSubmit: async (values) => {
-				console.log(values);
-				!existing
-					? await insertForm(insertMutation(values))
-					: await insertForm(
-							updateMutation({
-								id: existing.id,
-								_set: { ...values }
-							})
-					  );
-				console.dir(values);
-			},
+			onSubmit: handleSubmit,
 			// transform: (values) => ({
 			// 	...values,
 			// 	start_date: parseISO(values.start_date),
@@ -62,24 +79,24 @@
 			}
 		});
 
-	const insertForm = async (theMutation: Promise<OperationStore>) => {
-		await theMutation.then((result) => {
-			if (result.error) {
-				console.error('An error occured', result.error);
-				failureToast('Error occured');
-			} else if (result.data) {
-				console.log('Mutation successful', result.data);
-				successToast(!existing ? 'Added successfully' : 'Changes saved');
-				reset();
-			}
-		});
-	};
+	// const insertForm = async (theMutation: Promise<OperationStore>) => {
+	// 	await theMutation.then((result) => {
+	// 		if (result.error) {
+	// 			console.error('An error occured', result.error);
+	// 			failureToast('Error occured');
+	// 		} else if (result.data) {
+	// 			console.log('Mutation successful', result.data);
+	// 			successToast(!existing ? 'Added successfully' : 'Changes saved');
+	// 			reset();
+	// 		}
+	// 	});
+	// };
 </script>
 
 <form use:form>
 	<div class="max-w-4xl mx-auto px-6">
 		<div class="grid grid-cols-1 gap-2 mt-8 max-w-md justify-self-center">
-			{#each fieldList.fieldList as { title, fieldName, inputType, editable } (fieldName)}
+			{#each fieldList.fieldList as { title, fieldName, inputType, editable }}
 				{#if editable}
 					<ValidationMessage for={fieldName} let:messages={message}>
 						<div class="form-control">
@@ -128,4 +145,4 @@
 
 <button on:click={validate}>validate</button>
 <button on:click={() => console.log($data)}>debug</button>
-<button on:click={() => console.log($errors)}>debug</button>
+<button on:click={() => console.log($errors)}>errors</button>

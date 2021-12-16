@@ -20,7 +20,7 @@ const docs = {
 };
 
 // refactor FieldList to array of Field objects
-const fieldList = new FieldList([
+export const fieldList = new FieldList([
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
