@@ -667,10 +667,6 @@ html {
     transform: rotate(1turn);
   }
 }
-.btn-group {
-  display: flex;
-  flex-wrap: wrap;
-}
 .btn-group>input[type=radio].btn {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1001,27 +997,6 @@ html {
   display: flex;
   justify-content: flex-end;
   margin-top: 1.5rem;
-}
-.navbar {
-  display: flex;
-  align-items: center;
-  padding: var(--navbar-padding, .5rem);
-  min-height: 4rem;
-}
-.navbar>* {
-  display: flex;
-  align-items: center;
-}
-.navbar-start {
-  width: 50%;
-  justify-content: flex-start;
-}
-.navbar-center {
-  flex-shrink: 0;
-}
-.navbar-end {
-  width: 50%;
-  justify-content: flex-end;
 }
 .progress {
   -webkit-appearance: none;
@@ -2183,18 +2158,11 @@ html {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
 .mt-8 {
   margin-top: 2rem;
 }
 .mr-2 {
   margin-right: 0.5rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 .mb-5 {
   margin-bottom: 1.25rem;
@@ -2204,9 +2172,6 @@ html {
 }
 .mt-10 {
   margin-top: 2.5rem;
-}
-.inline-block {
-  display: inline-block;
 }
 .flex {
   display: flex;
@@ -2232,9 +2197,6 @@ html {
 .h-screen {
   height: 100vh;
 }
-.h-6 {
-  height: 1.5rem;
-}
 .h-12 {
   height: 3rem;
 }
@@ -2252,9 +2214,6 @@ html {
 }
 .w-4\/5 {
   width: 80%;
-}
-.w-6 {
-  width: 1.5rem;
 }
 .w-full {
   width: 100%;
@@ -2277,14 +2236,11 @@ html {
 .max-w-md {
   max-width: 28rem;
 }
-.max-w-screen-2xl {
-  max-width: 1536px;
-}
 .max-w-lg {
   max-width: 32rem;
 }
-.flex-auto {
-  flex: 1 1 auto;
+.max-w-screen-2xl {
+  max-width: 1536px;
 }
 .flex-grow {
   flex-grow: 1;
@@ -2336,12 +2292,6 @@ html {
 .flex-col {
   flex-direction: column;
 }
-.flex-nowrap {
-  flex-wrap: nowrap;
-}
-.place-content-center {
-  place-content: center;
-}
 .place-content-between {
   place-content: space-between;
 }
@@ -2350,9 +2300,6 @@ html {
 }
 .items-center {
   align-items: center;
-}
-.items-stretch {
-  align-items: stretch;
 }
 .justify-end {
   justify-content: flex-end;
@@ -2483,10 +2430,6 @@ html {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 .pl-2 {
   padding-left: 0.5rem;

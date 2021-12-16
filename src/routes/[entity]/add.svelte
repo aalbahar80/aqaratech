@@ -23,9 +23,8 @@
 
 	export let docs;
 	export let fieldList: Field[];
-
-	console.log(fieldList);
 </script>
 
-<p>{JSON.stringify(fieldList)}</p>
-<AddGeneric {fieldList} insertDoc={docs.insert} />
+{#if fieldList}
+	<AddGeneric {fieldList} insertDoc={docs.insert} />
+{/if}

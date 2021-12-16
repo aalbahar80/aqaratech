@@ -1,11 +1,11 @@
-import { Field, FieldList } from '$components/form/Field';
+import { Field } from '$components/form/Field';
 import {
 	DeleteTenantDocument,
 	InsertTenantDocument,
 	TenantListDocument,
 	UpdateTenantDocument
 } from '$generated/graphql';
-import * as yup from 'yup';
+import { z } from 'zod';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
@@ -17,7 +17,7 @@ const docs = {
 	update: UpdateTenantDocument
 };
 
-const fieldList: FieldList = new FieldList([
+const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
@@ -27,33 +27,33 @@ const fieldList: FieldList = new FieldList([
 		fieldName: 'first_name',
 		title: 'First Name',
 		inputType: 'text',
-		validation: yup.string().required()
+		validation: z.string().nonempty()
 	}),
 	new Field({
 		fieldName: 'last_name',
 		title: 'Last Name',
 		inputType: 'text',
-		validation: yup.string().required()
+		validation: z.string().nonempty()
 	}),
 	new Field({
 		fieldName: 'email',
 		title: 'Email',
 		inputType: 'email',
-		validation: yup.string().nullable().email()
+		validation: z.string().email().nonempty()
 	}),
 	new Field({
 		fieldName: 'phone',
 		title: 'Phone',
-		inputType: 'tel',
-		validation: yup
-			.string()
-			.nullable()
-			.matches(/^[0-9]{8}$/, {
-				message: 'Must be an 8 digit number',
-				excludeEmptyString: true
-			})
+		inputType: 'tel'
+		// validation: yup
+		// 	.string()
+		// 	.nullable()
+		// 	.matches(/^[0-9]{8}$/, {
+		// 		message: 'Must be an 8 digit number',
+		// 		excludeEmptyString: true
+		// 	})
 	})
-]);
+];
 
 const info = { title, graphqlName, docs, fieldList };
 export default info;

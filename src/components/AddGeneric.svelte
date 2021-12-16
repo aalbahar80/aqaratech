@@ -4,13 +4,14 @@
 		svelteReporter as reporter,
 		ValidationMessage
 	} from '@felte/reporter-svelte';
-	import { validator, ValidatorConfig } from '@felte/validator-yup';
+
+	import { validator } from '@felte/validator-zod';
+	import { z } from 'zod';
 	import type { DocumentNode } from 'graphql';
 	import { Field } from '$components/form/Field';
 	import { mutation, operationStore } from '@urql/svelte';
 	import { failureToast, successToast } from '$components/toasts';
 	import { parseISO } from 'date-fns';
-	import * as yup from 'yup';
 
 	export let fieldList: Field[];
 	export let insertDoc: DocumentNode = undefined;
@@ -45,7 +46,7 @@
 		}
 	};
 
-	const fieldList2 = [
+	const fieldList2: Field[] = [
 		new Field({
 			fieldName: 'id',
 			title: 'ID',
@@ -55,13 +56,13 @@
 			fieldName: 'start_date',
 			title: 'Start',
 			inputType: 'date',
-			validation: yup.string().required()
+			validation: z.string().nonempty()
 		}),
 		new Field({
 			fieldName: 'end_date',
 			title: 'End',
 			inputType: 'date',
-			validation: yup.string().required()
+			validation: z.string().nonempty()
 		}),
 		new Field({
 			fieldName: 'is_expired',
@@ -76,30 +77,32 @@
 		new Field({
 			fieldName: 'monthly_rent',
 			title: 'Rent (KD)',
-			inputType: 'number',
-			validation: yup
-				.number()
-				.required()
-				.positive()
-				.typeError('Must be a positive number')
+			inputType: 'number'
+			// validation: yup
+			// 	.number()
+			// 	.required()
+			// 	.positive()
+			// 	.typeError('Must be a positive number')
 		}),
 		new Field({
 			fieldName: 'deposit',
 			title: 'Deposit (KD)',
 			inputType: 'number',
-			validation: yup
-				.number()
-				.transform((currentValue, originalValue) => {
-					return originalValue === '' ? null : currentValue;
-				})
-				.nullable()
-				.typeError('Amount must be a number')
-				.positive()
+			validation: z.string().nonempty()
+			// validation: yup
+			// 	.number()
+			// 	.transform((currentValue, originalValue) => {
+			// 		return originalValue === '' ? null : currentValue;
+			// 	})
+			// 	.nullable()
+			// 	.typeError('Amount must be a number')
+			// 	.positive()
 		}),
 		new Field({
 			fieldName: 'license',
 			title: 'License',
-			validation: yup.string()
+			validation: z.string().nonempty()
+			// validation: yup.string()
 		}),
 		new Field({
 			fieldName: 'Lease_id',
@@ -113,11 +116,25 @@
 		})
 	];
 
-	const schema = Field.getValidations(fieldList);
-	const schema2 = Field.getValidations(fieldList2);
+	let schema;
+	if (fieldList) {
+		schema = Field.getZodValidations(fieldList);
+	}
+
+	// const schema = fieldList?.reduce((acc, field) => {
+	// 	if (field.editable && field.validation) {
+	// 		acc[field.fieldName] = field.validation;
+	// 	}
+	// 	return acc;
+	// }, {});
+
+	// const schema = z.object({
+	// 	email: z.string().email().nonempty(),
+	// 	license: z.string().nonempty()
+	// });
 
 	const { form, isValid, isSubmitting, reset, validate, data, errors } =
-		createForm<yup.InferType<typeof schema>, ValidatorConfig>({
+		createForm({
 			extend: [validator, reporter],
 			validateSchema: schema,
 			onSubmit: handleForm,
@@ -132,6 +149,8 @@
 		});
 </script>
 
+{@debug fieldList}
+{@debug fieldList2}
 <form use:form>
 	<div class="max-w-4xl mx-auto px-6">
 		<div class="grid grid-cols-1 gap-2 mt-8 max-w-md justify-self-center">
@@ -141,11 +160,7 @@
 						<div class="form-control">
 							<label class="label" for={fieldName}>
 								<span class="label-text"
-									>{`${title}${
-										schema?.fields[fieldName]?.spec?.presence != 'optional'
-											? '*'
-											: ''
-									}`}</span
+									>{`${title}${true != true ? '*' : ''}`}</span
 								>
 							</label>
 							<input
@@ -184,7 +199,6 @@
 
 <button on:click={validate}>validate</button>
 <button on:click={() => console.log($data)}>debug</button>
-<button on:click={() => console.log(schema)}>scehma</button>
-<button on:click={() => console.log(schema2)}>scehma2</button>
+<button on:click={() => console.log(schema)}>schema</button>
 <button on:click={() => console.log(form)}>form</button>
 <button on:click={() => console.log($errors)}>errors</button>

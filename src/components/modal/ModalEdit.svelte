@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import ModalGeneric from '$components/modal/ModalGeneric.svelte';
 	import { key } from '$components/keyyy';
 	import { getContext } from 'svelte';
@@ -147,4 +147,4 @@
 			</div>
 		</form>
 	</div>
-</ModalGeneric>
+</ModalGeneric> -->

@@ -21,8 +21,6 @@
   "devDependencies": {
     "@auth0/auth0-spa-js": "^1.19.3",
     "@babel/core": "^7.16.5",
-    "@felte/reporter-svelte": "^0.3.18",
-    "@felte/validator-yup": "^0.2.10",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/introspection": "^2.1.0",
@@ -61,7 +59,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-storybook": "^0.5.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "felte": "^0.8.6",
     "jest": "^27.4.5",
     "msw": "^0.36.1",
     "msw-storybook-addon": "^1.4.1",
@@ -82,15 +79,19 @@
     "ts-jest": "^27.1.1",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.4",
-    "yup": "^0.32.11"
+    "typescript": "^4.5.4"
   },
   "type": "module",
   "dependencies": {
+    "@felte/reporter-svelte": "^0.3.19",
+    "@felte/validator-yup": "^0.2.11",
+    "@felte/validator-zod": "^0.3.6",
     "@urql/exchange-graphcache": "^4.3.5",
     "@urql/svelte": "^1.3.2",
+    "felte": "^0.8.7",
     "graphql": "^16.0.1",
-    "urql": "^2.0.5"
+    "urql": "^2.0.5",
+    "zod": "^3.11.6"
   },
   "msw": {
     "workerDirectory": "public"

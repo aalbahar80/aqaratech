@@ -1,6 +1,5 @@
-import type { BaseSchema } from 'yup';
-import * as yup from 'yup';
-
+// import * as yup from 'yup';
+import * as zod from 'zod';
 export class Field {
 	fieldName: string;
 	title?: string;
@@ -10,7 +9,7 @@ export class Field {
 	hideable?: boolean;
 	sortable?: boolean;
 	width?: number;
-	validation?: BaseSchema;
+	validation?;
 	constructor(field: Field) {
 		this.fieldName = field.fieldName;
 		this.title = field.title || field.fieldName;
@@ -22,13 +21,41 @@ export class Field {
 		this.width = field.width;
 		this.validation = field.validation;
 	}
-	static getValidations(fieldList: Field[]) {
+
+	// static getYupValidations(fieldList: Field[]) {
+	// 	const schema = fieldList.reduce((acc, field) => {
+	// 		if (field.editable && field.validation) {
+	// 			acc[field.fieldName] = field.validation;
+	// 		}
+	// 		return acc;
+	// 	}, {});
+	// 	return yup.object(schema);
+	// }
+
+	static getZodValidations(fieldList: Field[]) {
 		const schema = fieldList.reduce((acc, field) => {
 			if (field.editable && field.validation) {
 				acc[field.fieldName] = field.validation;
 			}
 			return acc;
 		}, {});
-		return yup.object().shape(schema);
+		return zod.object(schema);
 	}
 }
+
+// defin Field interface
+// export interface FieldInter {
+// 	fieldName: string;
+// 	title?: string;
+// 	inputType?: string;
+// 	editable?: boolean;
+// 	visibile?: boolean;
+// 	hideable?: boolean;
+// 	sortable?: boolean;
+// 	width?: number;
+// 	validation?;
+// }
+
+// function createField(field: FieldInter) {
+// 	return new Field(field);
+// }

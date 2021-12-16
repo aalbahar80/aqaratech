@@ -1,7 +1,7 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import * as yup from 'yup';
-
+// import * as yup from 'yup';
+import { z } from 'zod';
 const title = 'Leases';
 const graphqlName = 'leases';
 const graphqlNamePk = 'leases_by_pk';
@@ -98,13 +98,13 @@ const fieldList = [
 		fieldName: 'start_date',
 		title: 'Start',
 		inputType: 'date',
-		validation: yup.string().required()
+		validation: z.string().nonempty()
 	}),
 	new Field({
 		fieldName: 'end_date',
 		title: 'End',
 		inputType: 'date',
-		validation: yup.string().required()
+		validation: z.string().nonempty()
 	}),
 	new Field({
 		fieldName: 'is_expired',
@@ -119,30 +119,32 @@ const fieldList = [
 	new Field({
 		fieldName: 'monthly_rent',
 		title: 'Rent (KD)',
-		inputType: 'number',
-		validation: yup
-			.number()
-			.required()
-			.positive()
-			.typeError('Must be a positive number')
+		inputType: 'number'
+		// validation: yup
+		// 	.number()
+		// 	.required()
+		// 	.positive()
+		// 	.typeError('Must be a positive number')
 	}),
 	new Field({
 		fieldName: 'deposit',
 		title: 'Deposit (KD)',
 		inputType: 'number',
-		validation: yup
-			.number()
-			.transform((currentValue, originalValue) => {
-				return originalValue === '' ? null : currentValue;
-			})
-			.nullable()
-			.typeError('Amount must be a number')
-			.positive()
+		validation: z.string().nonempty()
+		// validation: yup
+		// 	.number()
+		// 	.transform((currentValue, originalValue) => {
+		// 		return originalValue === '' ? null : currentValue;
+		// 	})
+		// 	.nullable()
+		// 	.typeError('Amount must be a number')
+		// 	.positive()
 	}),
 	new Field({
 		fieldName: 'license',
 		title: 'License',
-		validation: yup.string()
+		validation: z.string().nonempty()
+		// validation: yup.string()
 	}),
 	new Field({
 		fieldName: 'Lease_id',
