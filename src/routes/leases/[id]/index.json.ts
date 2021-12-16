@@ -1,5 +1,5 @@
 import { gql } from '@urql/svelte';
-import { Field, FieldList } from '$components/form/Field';
+import { Field } from '$components/form/Field';
 import * as yup from 'yup';
 
 const title = 'Leases';
@@ -88,7 +88,7 @@ const list = gql`
 	}
 `;
 
-const fieldList = new FieldList([
+const fieldList = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
@@ -98,13 +98,13 @@ const fieldList = new FieldList([
 		fieldName: 'start_date',
 		title: 'Start',
 		inputType: 'date',
-		validation: yup.string().defined()
+		validation: yup.string().required()
 	}),
 	new Field({
 		fieldName: 'end_date',
 		title: 'End',
 		inputType: 'date',
-		validation: yup.string().defined()
+		validation: yup.string().required()
 	}),
 	new Field({
 		fieldName: 'is_expired',
@@ -154,7 +154,7 @@ const fieldList = new FieldList([
 		title: 'Unit ID',
 		editable: false
 	})
-]);
+];
 
 const docs = {
 	insert: insert,

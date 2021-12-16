@@ -5,19 +5,14 @@
 		ValidationMessage
 	} from '@felte/reporter-svelte';
 	import { validator, ValidatorConfig } from '@felte/validator-yup';
-	import type * as yup from 'yup';
 	import type { DocumentNode } from 'graphql';
-	import type { FieldList } from '$components/form/Field';
-	import {
-		mutation,
-		OperationStore,
-		operationStore,
-		query
-	} from '@urql/svelte';
+	import { Field } from '$components/form/Field';
+	import { mutation, operationStore } from '@urql/svelte';
 	import { failureToast, successToast } from '$components/toasts';
 	import { parseISO } from 'date-fns';
+	import * as yup from 'yup';
 
-	export let fieldList: FieldList;
+	export let fieldList: Field[];
 	export let insertDoc: DocumentNode = undefined;
 	export let updateDoc: DocumentNode = undefined;
 
@@ -25,15 +20,12 @@
 	// insert mutation
 	const insertStore = operationStore(insertDoc);
 	const insertMutation = mutation(insertStore);
-	console.log('INSERT DOC HERE', insertDoc);
 
 	// update mutation
 	const updateStore = operationStore(updateDoc);
 	const updateMutation = mutation(updateStore);
-	console.log(updateDoc);
 
-	const handleSubmit = async (values) => {
-		console.log(values);
+	const handleForm = async (values) => {
 		try {
 			if (existing) {
 				await updateMutation({
@@ -50,22 +42,85 @@
 			console.log(e);
 			failureToast(e.message);
 		} finally {
-			console.log(values);
-			console.log({ ...values });
 		}
 	};
 
-	const schema = fieldList.getValidations();
+	const fieldList2 = [
+		new Field({
+			fieldName: 'id',
+			title: 'ID',
+			editable: false
+		}),
+		new Field({
+			fieldName: 'start_date',
+			title: 'Start',
+			inputType: 'date',
+			validation: yup.string().required()
+		}),
+		new Field({
+			fieldName: 'end_date',
+			title: 'End',
+			inputType: 'date',
+			validation: yup.string().required()
+		}),
+		new Field({
+			fieldName: 'is_expired',
+			title: 'Expired?',
+			editable: false
+		}),
+		new Field({
+			fieldName: 'is_signed',
+			title: 'Signed?',
+			editable: false
+		}),
+		new Field({
+			fieldName: 'monthly_rent',
+			title: 'Rent (KD)',
+			inputType: 'number',
+			validation: yup
+				.number()
+				.required()
+				.positive()
+				.typeError('Must be a positive number')
+		}),
+		new Field({
+			fieldName: 'deposit',
+			title: 'Deposit (KD)',
+			inputType: 'number',
+			validation: yup
+				.number()
+				.transform((currentValue, originalValue) => {
+					return originalValue === '' ? null : currentValue;
+				})
+				.nullable()
+				.typeError('Amount must be a number')
+				.positive()
+		}),
+		new Field({
+			fieldName: 'license',
+			title: 'License',
+			validation: yup.string()
+		}),
+		new Field({
+			fieldName: 'Lease_id',
+			title: 'Lease ID',
+			editable: false
+		}),
+		new Field({
+			fieldName: 'unit_id',
+			title: 'Unit ID',
+			editable: false
+		})
+	];
+
+	const schema = Field.getValidations(fieldList);
+	const schema2 = Field.getValidations(fieldList2);
+
 	const { form, isValid, isSubmitting, reset, validate, data, errors } =
-		createForm({
+		createForm<yup.InferType<typeof schema>, ValidatorConfig>({
 			extend: [validator, reporter],
 			validateSchema: schema,
-			onSubmit: handleSubmit,
-			// transform: (values) => ({
-			// 	...values,
-			// 	start_date: parseISO(values.start_date),
-			// 	end_date: parseISO(values.end_date)
-			// }),
+			onSubmit: handleForm,
 			validate: (values) => {
 				const errors = {};
 				if (parseISO(values.start_date) > parseISO(values.end_date)) {
@@ -75,25 +130,12 @@
 				return errors;
 			}
 		});
-
-	// const insertForm = async (theMutation: Promise<OperationStore>) => {
-	// 	await theMutation.then((result) => {
-	// 		if (result.error) {
-	// 			console.error('An error occured', result.error);
-	// 			failureToast('Error occured');
-	// 		} else if (result.data) {
-	// 			console.log('Mutation successful', result.data);
-	// 			successToast(!existing ? 'Added successfully' : 'Changes saved');
-	// 			reset();
-	// 		}
-	// 	});
-	// };
 </script>
 
 <form use:form>
 	<div class="max-w-4xl mx-auto px-6">
 		<div class="grid grid-cols-1 gap-2 mt-8 max-w-md justify-self-center">
-			{#each fieldList.fieldList as { title, fieldName, inputType, editable }}
+			{#each fieldList as { title, fieldName, inputType, editable }}
 				{#if editable}
 					<ValidationMessage for={fieldName} let:messages={message}>
 						<div class="form-control">
@@ -142,4 +184,7 @@
 
 <button on:click={validate}>validate</button>
 <button on:click={() => console.log($data)}>debug</button>
+<button on:click={() => console.log(schema)}>scehma</button>
+<button on:click={() => console.log(schema2)}>scehma2</button>
+<button on:click={() => console.log(form)}>form</button>
 <button on:click={() => console.log($errors)}>errors</button>

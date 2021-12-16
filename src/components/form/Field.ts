@@ -22,27 +22,8 @@ export class Field {
 		this.width = field.width;
 		this.validation = field.validation;
 	}
-}
-
-// a class to represent a list of fields
-export class FieldList {
-	fieldList: Field[];
-	constructor(fieldList: Field[]) {
-		this.fieldList = [
-			new Field({
-				fieldName: 'actions',
-				title: 'Details',
-				editable: false,
-				sortable: false,
-				hideable: false
-			}),
-			...fieldList
-		];
-	}
-
-	// get validations for all fields
-	getValidations() {
-		const schema = this.fieldList.reduce((acc, field) => {
+	static getValidations(fieldList: Field[]) {
+		const schema = fieldList.reduce((acc, field) => {
 			if (field.editable && field.validation) {
 				acc[field.fieldName] = field.validation;
 			}

@@ -19,11 +19,13 @@
 
 <script lang="ts">
 	import AddGeneric from '$components/AddGeneric.svelte';
-	import { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 
 	export let docs;
-	export let fieldList;
-	fieldList = new FieldList(fieldList.fieldList);
+	export let fieldList: Field[];
+
+	console.log(fieldList);
 </script>
 
+<p>{JSON.stringify(fieldList)}</p>
 <AddGeneric {fieldList} insertDoc={docs.insert} />
