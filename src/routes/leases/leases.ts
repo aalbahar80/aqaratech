@@ -1,10 +1,8 @@
 import { Field, FieldList } from '$components/form/Field';
 import {
 	DeleteLeaseDocument,
-	InsertLeaseDocument,
 	LeaseByIdDocument,
-	LeaseListDocument,
-	UpdateLeaseDocument
+	LeaseListDocument
 } from '$generated/graphql';
 import * as yup from 'yup';
 
@@ -14,8 +12,6 @@ const graphQlName = 'leases';
 const docs = {
 	delete: DeleteLeaseDocument,
 	list: LeaseListDocument,
-	insert: InsertLeaseDocument,
-	update: UpdateLeaseDocument,
 	byId: LeaseByIdDocument
 };
 

@@ -5721,34 +5721,12 @@ export type DeleteUnitMutationVariables = Exact<{
 
 export type DeleteUnitMutation = { __typename?: 'mutation_root', delete_units_by_pk?: { __typename?: 'units', id: number } | null | undefined };
 
-export type DeleteLeaseMutationVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type DeleteLeaseMutation = { __typename?: 'mutation_root', delete_leases_by_pk?: { __typename?: 'leases', id: number } | null | undefined };
-
 export type DeleteTenantMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
 export type DeleteTenantMutation = { __typename?: 'mutation_root', delete_tenants_by_pk?: { __typename?: 'tenants', id: number } | null | undefined };
-
-export type InsertLeaseMutationVariables = Exact<{
-  object?: InputMaybe<Leases_Insert_Input>;
-}>;
-
-
-export type InsertLeaseMutation = { __typename?: 'mutation_root', insert_leases_one?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
-
-export type UpdateLeaseMutationVariables = Exact<{
-  id: Scalars['Int'];
-  _set?: InputMaybe<Leases_Set_Input>;
-}>;
-
-
-export type UpdateLeaseMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
 
 export type InsertTenantMutationVariables = Exact<{
   first_name?: InputMaybe<Scalars['String']>;
@@ -5841,13 +5819,27 @@ export type UnitListQueryVariables = Exact<{
 
 export type UnitListQuery = { __typename?: 'query_root', units: Array<{ __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined }> };
 
-export type FiveLeaseMutationVariables = Exact<{
+export type LeaseInsertMutationVariables = Exact<{
+  object?: InputMaybe<Leases_Insert_Input>;
+}>;
+
+
+export type LeaseInsertMutation = { __typename?: 'mutation_root', insert_leases_one?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+
+export type LeaseUpdateMutationVariables = Exact<{
   id: Scalars['Int'];
   _set?: InputMaybe<Leases_Set_Input>;
 }>;
 
 
-export type FiveLeaseMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+export type LeaseUpdateMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+
+export type DeleteLeaseMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteLeaseMutation = { __typename?: 'mutation_root', delete_leases_by_pk?: { __typename?: 'leases', id: number } | null | undefined };
 
 
 export const DeleteClientDocument = gql`
@@ -5871,49 +5863,10 @@ export const DeleteUnitDocument = gql`
   }
 }
     `;
-export const DeleteLeaseDocument = gql`
-    mutation DeleteLease($id: Int!) {
-  delete_leases_by_pk(id: $id) {
-    id
-  }
-}
-    `;
 export const DeleteTenantDocument = gql`
     mutation DeleteTenant($id: Int!) {
   delete_tenants_by_pk(id: $id) {
     id
-  }
-}
-    `;
-export const InsertLeaseDocument = gql`
-    mutation InsertLease($object: leases_insert_input = {}) {
-  insert_leases_one(object: $object) {
-    id
-    deposit
-    end_date
-    is_expired
-    is_signed
-    license
-    monthly_rent
-    start_date
-    tenant_id
-    unit_id
-  }
-}
-    `;
-export const UpdateLeaseDocument = gql`
-    mutation UpdateLease($id: Int!, $_set: leases_set_input) {
-  update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    id
-    deposit
-    end_date
-    is_expired
-    is_signed
-    license
-    monthly_rent
-    start_date
-    tenant_id
-    unit_id
   }
 }
     `;
@@ -6094,8 +6047,24 @@ export const UnitListDocument = gql`
   }
 }
     `;
-export const FiveLeaseDocument = gql`
-    mutation FiveLease($id: Int!, $_set: leases_set_input) {
+export const LeaseInsertDocument = gql`
+    mutation LeaseInsert($object: leases_insert_input = {}) {
+  insert_leases_one(object: $object) {
+    id
+    deposit
+    end_date
+    is_expired
+    is_signed
+    license
+    monthly_rent
+    start_date
+    tenant_id
+    unit_id
+  }
+}
+    `;
+export const LeaseUpdateDocument = gql`
+    mutation LeaseUpdate($id: Int!, $_set: leases_set_input) {
   update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
     id
     deposit
@@ -6110,13 +6079,17 @@ export const FiveLeaseDocument = gql`
   }
 }
     `;
+export const DeleteLeaseDocument = gql`
+    mutation DeleteLease($id: Int!) {
+  delete_leases_by_pk(id: $id) {
+    id
+  }
+}
+    `;
 export type DeleteClientMutationStore = OperationStore<DeleteClientMutation, DeleteClientMutationVariables>;
 export type DeletePropertyMutationStore = OperationStore<DeletePropertyMutation, DeletePropertyMutationVariables>;
 export type DeleteUnitMutationStore = OperationStore<DeleteUnitMutation, DeleteUnitMutationVariables>;
-export type DeleteLeaseMutationStore = OperationStore<DeleteLeaseMutation, DeleteLeaseMutationVariables>;
 export type DeleteTenantMutationStore = OperationStore<DeleteTenantMutation, DeleteTenantMutationVariables>;
-export type InsertLeaseMutationStore = OperationStore<InsertLeaseMutation, InsertLeaseMutationVariables>;
-export type UpdateLeaseMutationStore = OperationStore<UpdateLeaseMutation, UpdateLeaseMutationVariables>;
 export type InsertTenantMutationStore = OperationStore<InsertTenantMutation, InsertTenantMutationVariables>;
 export type UpdateTenantMutationStore = OperationStore<UpdateTenantMutation, UpdateTenantMutationVariables>;
 export type ClientListQueryStore = OperationStore<ClientListQuery, ClientListQueryVariables>;
@@ -6128,7 +6101,9 @@ export type TenantListQueryStore = OperationStore<TenantListQuery, TenantListQue
 export type TrxByIdQueryStore = OperationStore<TrxByIdQuery, TrxByIdQueryVariables>;
 export type Trx2ByIdQueryStore = OperationStore<Trx2ByIdQuery, Trx2ByIdQueryVariables>;
 export type UnitListQueryStore = OperationStore<UnitListQuery, UnitListQueryVariables>;
-export type FiveLeaseMutationStore = OperationStore<FiveLeaseMutation, FiveLeaseMutationVariables>;
+export type LeaseInsertMutationStore = OperationStore<LeaseInsertMutation, LeaseInsertMutationVariables>;
+export type LeaseUpdateMutationStore = OperationStore<LeaseUpdateMutation, LeaseUpdateMutationVariables>;
+export type DeleteLeaseMutationStore = OperationStore<DeleteLeaseMutation, DeleteLeaseMutationVariables>;
 export type WithTypename<T extends { __typename?: any }> = { [K in Exclude<keyof T, '__typename'>]?: T[K] } & { __typename: NonNullable<T['__typename']> };
 
 export type GraphCacheKeysConfig = {

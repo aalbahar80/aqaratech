@@ -40,15 +40,16 @@
 				// console.log('updateMut is', updateDoc);
 				// console.log('values', values);
 				// console.log('id', existing.id);
-				// await updateMutation({
-				// 	id: existing.id,
-				// 	_set: values
-				// });
-				await insertMutation({ object: values });
+				await updateMutation({
+					id: existing.id,
+					_set: values
+				});
+				successToast('Success');
 			} else {
 				await insertMutation({ object: values });
+				successToast('Success');
+				reset();
 			}
-			successToast('Success');
 		} catch (e) {
 			console.log(e);
 			failureToast(e.message);

@@ -1,19 +1,29 @@
-<script lang="ts">
-	import AddGeneric from '$components/AddGeneric.svelte';
-	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
+<script context="module" lang="ts">
+	/** @type {import('@sveltejs/kit').Load} */
+	export async function load({ page, fetch }) {
+		const entity = page.params.entity;
+		const id = page.params.id;
+		const url = `/${entity}/${id}.json`;
+		const response = await fetch(url);
+		const data = await response.json();
+		const { docs, fieldList } = data;
 
-	let _entity, docs, title, graphQlName, fieldList;
-	const entity = $page.path.split('/')[1];
-	const path = `../${entity}/${entity}`;
-
-	onMount(async () => {
-		_entity = (await import(path)).default;
-		({ docs, title, graphQlName, fieldList } = _entity);
-	});
+		return {
+			props: {
+				docs,
+				fieldList
+			}
+		};
+	}
 </script>
 
-{#if _entity}
-	{console.log('correct', docs.insert)}
-	<AddGeneric {fieldList} insertDoc={docs.insert} />
-{/if}
+<script lang="ts">
+	import AddGeneric from '$components/AddGeneric.svelte';
+	import { FieldList } from '$components/form/Field';
+
+	export let docs;
+	export let fieldList;
+	fieldList = new FieldList(fieldList.fieldList);
+</script>
+
+<AddGeneric {fieldList} insertDoc={docs.insert} />

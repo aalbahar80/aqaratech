@@ -15,13 +15,6 @@ mutation DeleteUnit($id: Int!) {
 		id
 	}
 }
-
-mutation DeleteLease($id: Int!) {
-	delete_leases_by_pk(id: $id) {
-		id
-	}
-}
-
 mutation DeleteTenant($id: Int!) {
 	delete_tenants_by_pk(id: $id) {
 		id

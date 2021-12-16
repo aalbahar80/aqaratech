@@ -1,22 +1,26 @@
 import { fieldList } from '../leases';
-import {
-	DeleteLeaseDocument,
-	InsertLeaseDocument,
-	LeaseByIdDocument,
-	LeaseListDocument,
-	UpdateLeaseDocument
-} from '$generated/graphql';
+import { LeaseByIdDocument, LeaseListDocument } from '$generated/graphql';
 import { gql } from '@urql/svelte';
 
-const docs = {
-	delete: DeleteLeaseDocument,
-	list: LeaseListDocument,
-	insert: InsertLeaseDocument,
-	byId: LeaseByIdDocument
-};
+const insert = gql`
+	mutation LeaseInsert($object: leases_insert_input = {}) {
+		insert_leases_one(object: $object) {
+			id
+			deposit
+			end_date
+			is_expired
+			is_signed
+			license
+			monthly_rent
+			start_date
+			tenant_id
+			unit_id
+		}
+	}
+`;
 
-const update5 = gql`
-	mutation FiveLease($id: Int!, $_set: leases_set_input) {
+const update = gql`
+	mutation LeaseUpdate($id: Int!, $_set: leases_set_input) {
 		update_leases_by_pk(pk_columns: { id: $id }, _set: $_set) {
 			id
 			deposit
@@ -32,16 +36,28 @@ const update5 = gql`
 	}
 `;
 
+const del = gql`
+	mutation DeleteLease($id: Int!) {
+		delete_leases_by_pk(id: $id) {
+			id
+		}
+	}
+`;
+
+const docs = {
+	insert: insert,
+	update: update,
+	del: del,
+	list: LeaseListDocument,
+	byId: LeaseByIdDocument
+};
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get() {
 	return {
 		body: {
 			docs: docs,
-			sdocs: JSON.stringify(docs),
-			updateDoc: UpdateLeaseDocument.loc.source,
 			fieldList: fieldList,
-			graphqlName: 'leases_by_pk',
-			update5: update5
+			graphqlName: 'leases_by_pk'
 		}
 	};
 }

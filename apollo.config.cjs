@@ -1,7 +1,7 @@
 module.exports = {
 	client: {
 		service: {
-			name: 'your-service-name',
+			name: 'nov22test',
 			url: 'https://nov22test.hasura.app/v1/graphql',
 			headers: {
 				'x-hasura-admin-secret':
