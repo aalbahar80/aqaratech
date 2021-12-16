@@ -22,13 +22,12 @@
 	import type { DocumentNode } from 'graphql';
 	import { page } from '$app/stores';
 	import AddGeneric from '$components/AddGeneric.svelte';
-	import { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 
 	export let docs;
 	export let graphqlNamePk: string;
-	export let fieldList;
-	fieldList = new FieldList(fieldList.fieldList);
+	export let fieldList: Field[];
 
 	const thing = operationStore(docs.byId, { id: $page.params.id });
 	query(thing);

@@ -3,12 +3,12 @@
 	import type { DocumentNode } from 'graphql';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 	import TableGeneric from './table/TableGeneric.svelte';
 	import ModalEdit from '$components/modal/ModalEdit.svelte';
 
 	export let graphqlName: string;
-	export let fieldList: FieldList;
+	export let fieldList: Field[];
 
 	export let listDoc: DocumentNode;
 	export let insertDoc: DocumentNode = undefined;

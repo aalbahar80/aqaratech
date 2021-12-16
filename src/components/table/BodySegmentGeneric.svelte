@@ -5,7 +5,7 @@
 	import { getContext } from 'svelte';
 	import ModalDelete from '$components/modal/ModalDelete.svelte';
 	import ModalEdit from '$components/modal/ModalEdit.svelte';
-	import type { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 	import isFetching from '$components/table/TableGeneric.svelte';
@@ -16,7 +16,7 @@
 	const { getListDoc, getFieldList, getGraphQlName, getIsFetching } =
 		getContext(key);
 	const queryDocument: DocumentNode = getListDoc();
-	const _fieldList: SvelteStore<FieldList> = getFieldList();
+	const _fieldList: SvelteStore<Field[]> = getFieldList();
 	const graphqlName: string = getGraphQlName();
 	let isFetching: Writable<boolean> = getIsFetching();
 
@@ -39,7 +39,7 @@
 {#if $PageQuery.data?.[graphqlName]}
 	{#each $PageQuery.data?.[graphqlName] as row}
 		<tr class="hover">
-			{#each $_fieldList.fieldList as { fieldName, visibile }}
+			{#each $_fieldList as { fieldName, visibile }}
 				{#if visibile}
 					{#if fieldName === 'actions'}
 						<th class="sticky">

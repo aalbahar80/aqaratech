@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { key } from '$components/keyyy';
-	import type { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 
 	const { getFieldList } = getContext(key);
-	const _fieldList: SvelteStore<FieldList> = getFieldList();
+	const _fieldList: SvelteStore<Field[]> = getFieldList();
 
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +25,7 @@
 			<li class="self-center menu-title">
 				<span> Show/Hide </span>
 			</li>
-			{#each $_fieldList.fieldList as { title, visibile, hideable }}
+			{#each $_fieldList as { title, visibile, hideable }}
 				{#if hideable}
 					<li>
 						<!-- svelte-ignore a11y-missing-attribute -->

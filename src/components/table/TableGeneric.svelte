@@ -3,7 +3,7 @@
 	import ColumnToggle from '$components/table/ColumnToggle.svelte';
 	import SortIndicator from '$components/table/SortIndicator.svelte';
 	import BodySegmentGeneric from '$components/table/BodySegmentGeneric.svelte';
-	import type { Field, FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 	import { getContext } from 'svelte';
 	import { key } from '$components/keyyy';
 	import ModalEdit from '$components/modal/ModalEdit.svelte';
@@ -13,7 +13,7 @@
 	import { page } from '$app/stores';
 
 	const { getGraphQlName, getFieldList, getIsFetching } = getContext(key);
-	const _fieldList: SvelteStore<FieldList> = getFieldList();
+	const _fieldList: SvelteStore<Field[]> = getFieldList();
 
 	const isFetching: Writable<boolean> = getIsFetching();
 
@@ -77,7 +77,7 @@
 	<table class="table w-full table-compact table-zebra border-separate">
 		<thead>
 			<tr>
-				{#each $_fieldList.fieldList as { fieldName, title, visibile, sortable }}
+				{#each $_fieldList as { fieldName, title, visibile, sortable }}
 					{#if visibile}
 						<th
 							id={fieldName}

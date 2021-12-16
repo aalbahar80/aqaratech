@@ -21,7 +21,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { DocumentNode } from 'graphql';
-	import { FieldList } from '$components/form/Field';
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 	export let docs;
 	export let graphqlNamePk;

@@ -1,5 +1,5 @@
 import { gql } from '@urql/svelte';
-import { Field, FieldList } from '$components/form/Field';
+import { Field } from '$components/form/Field';
 import * as yup from 'yup';
 
 const title = 'Clients';
@@ -66,7 +66,7 @@ const list = gql`
 	${clientDetailsFragment}
 `;
 
-const fieldList: FieldList = new FieldList([
+const fieldList: Field[] = [
 	new Field({ fieldName: 'id', title: 'ID', editable: false }),
 	new Field({
 		fieldName: 'first_name',
@@ -91,7 +91,7 @@ const fieldList: FieldList = new FieldList([
 			excludeEmptyString: true
 		})
 	})
-]);
+];
 
 const docs = {
 	insert: insert,

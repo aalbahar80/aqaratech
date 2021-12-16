@@ -2157,11 +2157,11 @@ html {
 .z-20 {
   z-index: 20;
 }
-.col-span-full {
-  grid-column: 1 / -1;
-}
 .col-span-2 {
   grid-column: span 2 / span 2;
+}
+.col-span-full {
+  grid-column: 1 / -1;
 }
 .col-span-3 {
   grid-column: span 3 / span 3;
@@ -2390,11 +2390,6 @@ html {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .self-center {
   align-self: center;

@@ -22,11 +22,10 @@
 <script lang="ts">
 	import IndexGeneric from '$components/IndexGeneric.svelte';
 	import { page } from '$app/stores';
-	import { FieldList } from '$components/form/Field';
+	import type { Field } from '$components/form/Field';
 	export let graphqlName;
 	export let docs;
-	export let fieldList;
-	fieldList = new FieldList(fieldList.fieldList);
+	export let fieldList: Field[];
 </script>
 
 <svelte:head>
