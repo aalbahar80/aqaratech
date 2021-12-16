@@ -8,7 +8,7 @@ import {
 import * as yup from 'yup';
 
 const title = 'Tenants';
-const graphQlName = 'tenants';
+const graphqlName = 'tenants';
 
 const docs = {
 	delete: DeleteTenantDocument,
@@ -55,5 +55,5 @@ const fieldList: FieldList = new FieldList([
 	})
 ]);
 
-const info = { title, graphQlName, docs, fieldList };
+const info = { title, graphqlName, docs, fieldList };
 export default info;

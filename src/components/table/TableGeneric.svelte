@@ -67,8 +67,9 @@
 </script>
 
 <div class="flex justify-between py-2">
-	<ModalEdit />
-	<a href={`${$page.path}/add`}>Add</a>
+	<a class="btn btn-lg lg:btn-wide btn-primary" href={`${$page.path}/add`}
+		>New</a
+	>
 	<ColumnToggle />
 </div>
 

@@ -16,15 +16,32 @@ const cache = cacheExchange<GraphCacheConfig>({
 	schema: mySchema,
 	resolvers: {
 		query_root: {
-			transactions_by_pk: (parent, args, cache, info) => {
-				// This runs and works well
-				return { __typename: 'transactions', id: args.id };
+			clients_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'clients', id: args.id };
+			},
+			properties_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'properties', id: args.id };
+			},
+			units_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'units', id: args.id };
+			},
+			leases_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'leases', id: args.id };
 			},
 			tenants_by_pk: (parent, args, cache, info) => {
 				return { __typename: 'tenants', id: args.id };
 			},
-			leases_by_pk: (parent, args, cache, info) => {
-				return { __typename: 'leases', id: args.id };
+			transactions_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'transactions', id: args.id };
+			},
+			expenses_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'expenses', id: args.id };
+			},
+			listings_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'listings', id: args.id };
+			},
+			maintenance_orders_by_pk: (parent, args, cache, info) => {
+				return { __typename: 'maintenance_orders', id: args.id };
 			}
 		}
 	}

@@ -17,7 +17,7 @@
 		getContext(key);
 	const queryDocument: DocumentNode = getListDoc();
 	const _fieldList: SvelteStore<FieldList> = getFieldList();
-	const graphQlName: string = getGraphQlName();
+	const graphqlName: string = getGraphQlName();
 	let isFetching: Writable<boolean> = getIsFetching();
 
 	const PageQuery = operationStore(queryDocument, segmentVars);
@@ -36,8 +36,8 @@
 	{isFetching.set(false)}
 {/if} -->
 
-{#if $PageQuery.data?.[graphQlName]}
-	{#each $PageQuery.data?.[graphQlName] as row}
+{#if $PageQuery.data?.[graphqlName]}
+	{#each $PageQuery.data?.[graphqlName] as row}
 		<tr class="hover">
 			{#each $_fieldList.fieldList as { fieldName, visibile }}
 				{#if visibile}
@@ -46,8 +46,8 @@
 							<!-- <ModalEdit existing={row} />
 							<ModalDelete id={row.id} /> -->
 							<a
-								href={`/${graphQlName}/${row.id}`}
-								class="btn btn-primary btn-sm lg:btn-md">Details</a
+								href={`/${graphqlName}/${row.id}`}
+								class="btn btn-outline btn-primary btn-sm lg:btn-md">Details</a
 							>
 						</th>
 					{:else}

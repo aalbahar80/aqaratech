@@ -1,28 +1,41 @@
+<script context="module" lang="ts">
+	/** @type {import('@sveltejs/kit').Load} */
+	export async function load({ page, fetch }) {
+		const entity = page.params.entity;
+		const id = page.params.id;
+		const url = `/${entity}/${id}.json`;
+		const response = await fetch(url);
+		const data = await response.json();
+		const { docs, fieldList, graphqlName } = data;
+		console.dir(fieldList);
+
+		return {
+			props: {
+				graphqlName,
+				docs,
+				fieldList
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import IndexGeneric from '$components/IndexGeneric.svelte';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-
-	let _entity, docs, title, graphQlName, fieldList;
-	const entity = $page.path.split('/')[1];
-	const path = `../${entity}/${entity}`;
-
-	onMount(async () => {
-		_entity = (await import(path)).default;
-		({ docs, title, graphQlName, fieldList } = _entity);
-	});
+	import { FieldList } from '$components/form/Field';
+	export let graphqlName;
+	export let docs;
+	export let fieldList;
+	fieldList = new FieldList(fieldList.fieldList);
 </script>
 
 <svelte:head>
-	<title>{entity}</title>
+	<title>{$page.params.entity}</title>
 </svelte:head>
 
-{#if _entity}
-	<IndexGeneric
-		{title}
-		{graphQlName}
-		{fieldList}
-		listDoc={docs.list}
-		deleteDoc={docs.delete}
-	/>
-{/if}
+<IndexGeneric
+	{graphqlName}
+	{fieldList}
+	listDoc={docs.list}
+	deleteDoc={docs.del}
+/>

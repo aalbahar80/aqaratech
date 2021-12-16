@@ -36,10 +36,6 @@
 		console.log(values);
 		try {
 			if (existing) {
-				// console.log('updateDoc is', updateDoc);
-				// console.log('updateMut is', updateDoc);
-				// console.log('values', values);
-				// console.log('id', existing.id);
 				await updateMutation({
 					id: existing.id,
 					_set: values

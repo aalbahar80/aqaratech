@@ -1148,6 +1148,13 @@ html {
   --tw-text-opacity: 1;
   color: hsla(var(--s) / var(--tw-text-opacity, 1));
 }
+.btn-outline.btn-accent .badge-outline {
+  background-color: transparent;
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--a) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--a) / var(--tw-text-opacity, 1));
+}
 .btn-outline:hover .badge {
   --tw-bg-opacity: 1;
   background-color: hsla(var(--b2) / var(--tw-bg-opacity, 1));
@@ -1352,6 +1359,20 @@ html {
   border-color: transparent;
   text-decoration: underline;
 }
+.btn-outline {
+  background-color: transparent;
+  border-color: currentColor;
+  --tw-text-opacity: 1;
+  color: hsla(var(--bc) / var(--tw-text-opacity, 1));
+}
+.btn-outline:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--bc) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--bc) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--b1) / var(--tw-text-opacity, 1));
+}
 .btn-outline.btn-primary {
   --tw-text-opacity: 1;
   color: hsla(var(--p) / var(--tw-text-opacity, 1));
@@ -1375,6 +1396,54 @@ html {
   border-color: hsla(var(--sf) / var(--tw-border-opacity, 1));
   --tw-text-opacity: 1;
   color: hsla(var(--sc) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-accent {
+  --tw-text-opacity: 1;
+  color: hsla(var(--a) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-accent:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--af) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--af) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--ac) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-success {
+  --tw-text-opacity: 1;
+  color: hsla(var(--su) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-success:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--su) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--su) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--nc) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-info {
+  --tw-text-opacity: 1;
+  color: hsla(var(--in) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-info:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--in) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--in) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--nc) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-warning {
+  --tw-text-opacity: 1;
+  color: hsla(var(--wa) / var(--tw-text-opacity, 1));
+}
+.btn-outline.btn-warning:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--wa) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--wa) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--nc) / var(--tw-text-opacity, 1));
 }
 .btn-outline.btn-error {
   --tw-text-opacity: 1;
@@ -2321,6 +2390,11 @@ html {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .self-center {
   align-self: center;

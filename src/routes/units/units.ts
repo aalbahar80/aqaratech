@@ -2,7 +2,7 @@ import { Field, FieldList } from '$components/form/Field';
 import { DeleteUnitDocument, UnitListDocument } from '$generated/graphql';
 
 const title = 'Units';
-const graphQlName = 'units';
+const graphqlName = 'units';
 
 const docs = {
 	delete: DeleteUnitDocument,
@@ -58,5 +58,5 @@ const fieldList: FieldList = new FieldList([
 		inputType: 'number'
 	})
 ]);
-const info = { title, graphQlName, docs, fieldList };
+const info = { title, graphqlName, docs, fieldList };
 export default info;

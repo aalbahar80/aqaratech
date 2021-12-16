@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { PropertyListDocument } from '../../generated/graphql';
 
 const title = 'Properties';
-const graphQlName = 'properties';
+const graphqlName = 'properties';
 const docs = {
 	delete: DeletePropertyDocument,
 	list: PropertyListDocument
@@ -51,5 +51,5 @@ const fieldList: FieldList = new FieldList([
 	})
 ]);
 
-const info = { title, graphQlName, docs, fieldList };
+const info = { title, graphqlName, docs, fieldList };
 export default info;
