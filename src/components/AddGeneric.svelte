@@ -1,18 +1,17 @@
 <script lang="ts">
-	import { createForm } from 'felte';
+	import type { Field } from '$components/form/Field';
+	import { failureToast, successToast } from '$components/toasts';
+	import { v } from '$lib/Validations';
 	import {
 		svelteReporter as reporter,
 		ValidationMessage
 	} from '@felte/reporter-svelte';
-
 	import { validator } from '@felte/validator-zod';
-	import { z } from 'zod';
-	import type { DocumentNode } from 'graphql';
-	import { Field } from '$components/form/Field';
 	import { mutation, operationStore } from '@urql/svelte';
-	import { failureToast, successToast } from '$components/toasts';
-	import { parseISO } from 'date-fns';
+	import { createForm } from 'felte';
+	import type { DocumentNode } from 'graphql';
 
+	export let entity: string;
 	export let fieldList: Field[];
 	export let insertDoc: DocumentNode = undefined;
 	export let updateDoc: DocumentNode = undefined;
@@ -46,111 +45,14 @@
 		}
 	};
 
-	const fieldList2: Field[] = [
-		new Field({
-			fieldName: 'id',
-			title: 'ID',
-			editable: false
-		}),
-		new Field({
-			fieldName: 'start_date',
-			title: 'Start',
-			inputType: 'date',
-			validation: z.string().nonempty()
-		}),
-		new Field({
-			fieldName: 'end_date',
-			title: 'End',
-			inputType: 'date',
-			validation: z.string().nonempty()
-		}),
-		new Field({
-			fieldName: 'is_expired',
-			title: 'Expired?',
-			editable: false
-		}),
-		new Field({
-			fieldName: 'is_signed',
-			title: 'Signed?',
-			editable: false
-		}),
-		new Field({
-			fieldName: 'monthly_rent',
-			title: 'Rent (KD)',
-			inputType: 'number'
-			// validation: yup
-			// 	.number()
-			// 	.required()
-			// 	.positive()
-			// 	.typeError('Must be a positive number')
-		}),
-		new Field({
-			fieldName: 'deposit',
-			title: 'Deposit (KD)',
-			inputType: 'number',
-			validation: z.string().nonempty()
-			// validation: yup
-			// 	.number()
-			// 	.transform((currentValue, originalValue) => {
-			// 		return originalValue === '' ? null : currentValue;
-			// 	})
-			// 	.nullable()
-			// 	.typeError('Amount must be a number')
-			// 	.positive()
-		}),
-		new Field({
-			fieldName: 'license',
-			title: 'License',
-			validation: z.string().nonempty()
-			// validation: yup.string()
-		}),
-		new Field({
-			fieldName: 'Lease_id',
-			title: 'Lease ID',
-			editable: false
-		}),
-		new Field({
-			fieldName: 'unit_id',
-			title: 'Unit ID',
-			editable: false
-		})
-	];
-
-	let schema;
-	if (fieldList) {
-		schema = Field.getZodValidations(fieldList);
-	}
-
-	// const schema = fieldList?.reduce((acc, field) => {
-	// 	if (field.editable && field.validation) {
-	// 		acc[field.fieldName] = field.validation;
-	// 	}
-	// 	return acc;
-	// }, {});
-
-	// const schema = z.object({
-	// 	email: z.string().email().nonempty(),
-	// 	license: z.string().nonempty()
-	// });
-
 	const { form, isValid, isSubmitting, reset, validate, data, errors } =
 		createForm({
 			extend: [validator, reporter],
-			validateSchema: schema,
-			onSubmit: handleForm,
-			validate: (values) => {
-				const errors = {};
-				if (parseISO(values.start_date) > parseISO(values.end_date)) {
-					errors.start_date = 'Start date must be before end date';
-					errors.end_date = 'End date must be after start date';
-				}
-				return errors;
-			}
+			validateSchema: v[entity],
+			onSubmit: handleForm
 		});
 </script>
 
-{@debug fieldList}
-{@debug fieldList2}
 <form use:form>
 	<div class="max-w-4xl mx-auto px-6">
 		<div class="grid grid-cols-1 gap-2 mt-8 max-w-md justify-self-center">
@@ -159,9 +61,7 @@
 					<ValidationMessage for={fieldName} let:messages={message}>
 						<div class="form-control">
 							<label class="label" for={fieldName}>
-								<span class="label-text"
-									>{`${title}${true != true ? '*' : ''}`}</span
-								>
+								<span class="label-text">{`${title}`}</span>
 							</label>
 							<input
 								id={fieldName}
@@ -199,6 +99,6 @@
 
 <button on:click={validate}>validate</button>
 <button on:click={() => console.log($data)}>debug</button>
-<button on:click={() => console.log(schema)}>schema</button>
-<button on:click={() => console.log(form)}>form</button>
+<button on:click={() => console.log(fieldList)}>fieldList</button>
 <button on:click={() => console.log($errors)}>errors</button>
+<!-- <button on:click={() => console.log(leaseValidation)}>leaseValidation</button> -->

@@ -1,7 +1,5 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-// import * as yup from 'yup';
-import { z } from 'zod';
 const title = 'Leases';
 const graphqlName = 'leases';
 const graphqlNamePk = 'leases_by_pk';
@@ -97,14 +95,12 @@ const fieldList = [
 	new Field({
 		fieldName: 'start_date',
 		title: 'Start',
-		inputType: 'date',
-		validation: z.string().nonempty()
+		inputType: 'date'
 	}),
 	new Field({
 		fieldName: 'end_date',
 		title: 'End',
-		inputType: 'date',
-		validation: z.string().nonempty()
+		inputType: 'date'
 	}),
 	new Field({
 		fieldName: 'is_expired',
@@ -120,31 +116,15 @@ const fieldList = [
 		fieldName: 'monthly_rent',
 		title: 'Rent (KD)',
 		inputType: 'number'
-		// validation: yup
-		// 	.number()
-		// 	.required()
-		// 	.positive()
-		// 	.typeError('Must be a positive number')
 	}),
 	new Field({
 		fieldName: 'deposit',
 		title: 'Deposit (KD)',
-		inputType: 'number',
-		validation: z.string().nonempty()
-		// validation: yup
-		// 	.number()
-		// 	.transform((currentValue, originalValue) => {
-		// 		return originalValue === '' ? null : currentValue;
-		// 	})
-		// 	.nullable()
-		// 	.typeError('Amount must be a number')
-		// 	.positive()
+		inputType: 'number'
 	}),
 	new Field({
 		fieldName: 'license',
-		title: 'License',
-		validation: z.string().nonempty()
-		// validation: yup.string()
+		title: 'License'
 	}),
 	new Field({
 		fieldName: 'Lease_id',

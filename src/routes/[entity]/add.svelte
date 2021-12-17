@@ -11,7 +11,8 @@
 		return {
 			props: {
 				docs,
-				fieldList
+				fieldList,
+				entity
 			}
 		};
 	}
@@ -23,8 +24,9 @@
 
 	export let docs;
 	export let fieldList: Field[];
+	export let entity: string;
 </script>
 
 {#if fieldList}
-	<AddGeneric {fieldList} insertDoc={docs.insert} />
+	<AddGeneric {fieldList} {entity} insertDoc={docs.insert} />
 {/if}

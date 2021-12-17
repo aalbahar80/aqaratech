@@ -72,7 +72,6 @@ export function formatDateDiff(date: string): DateDiff {
 		fullText: ``
 	};
 }
-
 // a function that omits a key from an object
 export function omit<T extends object, K extends keyof T>(
 	obj: T,

@@ -22,6 +22,19 @@ export class Field {
 		this.validation = field.validation;
 	}
 
+	// toObject(field: Field) {
+	// 	return {
+	// 		fieldName: field.fieldName,
+	// 		title: field.title || field.fieldName,
+	// 		inputType: field.inputType || 'text',
+	// 		editable: field.editable === undefined || field.editable === true,
+	// 		visibile: field.visibile === undefined || field.visibile === true,
+	// 		hideable: field.hideable === undefined || field.hideable === true,
+	// 		sortable: field.sortable === undefined || field.sortable === true,
+	// 		width: field.width,
+	// 		validation: field.validation
+	// 	};
+
 	// static getYupValidations(fieldList: Field[]) {
 	// 	const schema = fieldList.reduce((acc, field) => {
 	// 		if (field.editable && field.validation) {
@@ -43,19 +56,29 @@ export class Field {
 	}
 }
 
-// defin Field interface
-// export interface FieldInter {
-// 	fieldName: string;
-// 	title?: string;
-// 	inputType?: string;
-// 	editable?: boolean;
-// 	visibile?: boolean;
-// 	hideable?: boolean;
-// 	sortable?: boolean;
-// 	width?: number;
-// 	validation?;
-// }
+// defin Field interfaces
+export interface FieldInter {
+	fieldName: string;
+	title?: string;
+	inputType?: string;
+	editable?: boolean;
+	visibile?: boolean;
+	hideable?: boolean;
+	sortable?: boolean;
+	width?: number;
+	validation?;
+}
 
-// function createField(field: FieldInter) {
-// 	return new Field(field);
-// }
+function createField(field: Field): FieldInter {
+	return {
+		fieldName: field.fieldName,
+		title: field.title || field.fieldName,
+		inputType: field.inputType || 'text',
+		editable: field.editable === undefined || field.editable === true,
+		visibile: field.visibile === undefined || field.visibile === true,
+		hideable: field.hideable === undefined || field.hideable === true,
+		sortable: field.sortable === undefined || field.sortable === true,
+		width: field.width,
+		validation: field.validation
+	};
+}
