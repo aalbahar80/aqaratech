@@ -1,6 +1,5 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import * as yup from 'yup';
 
 const title = 'Clients';
 const graphqlName = 'clients';
@@ -70,26 +69,19 @@ const fieldList: Field[] = [
 	new Field({ fieldName: 'id', title: 'ID', editable: false }),
 	new Field({
 		fieldName: 'first_name',
-		title: 'First Name',
-		validation: yup.string().required()
+		title: 'First Name'
 	}),
 	new Field({
 		fieldName: 'last_name',
-		title: 'Last Name',
-		validation: yup.string().required()
+		title: 'Last Name'
 	}),
 	new Field({
 		fieldName: 'email',
-		title: 'Email',
-		validation: yup.string().email()
+		title: 'Email'
 	}),
 	new Field({
 		fieldName: 'phone',
-		title: 'Phone',
-		validation: yup.string().matches(/^[0-9]{8}$/, {
-			message: 'Must be an 8 digit number',
-			excludeEmptyString: true
-		})
+		title: 'Phone'
 	})
 ];
 

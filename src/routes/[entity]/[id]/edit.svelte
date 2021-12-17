@@ -12,7 +12,8 @@
 			props: {
 				docs,
 				fieldList,
-				graphqlNamePk
+				graphqlNamePk,
+				entity
 			}
 		};
 	}
@@ -28,6 +29,7 @@
 	export let docs;
 	export let graphqlNamePk: string;
 	export let fieldList: Field[];
+	export let entity: string;
 
 	const thing = operationStore(docs.byId, { id: $page.params.id });
 	query(thing);
@@ -40,6 +42,7 @@
 {:else}
 	<AddGeneric
 		{fieldList}
+		{entity}
 		existing={$thing.data[graphqlNamePk]}
 		updateDoc={docs.update}
 	/>

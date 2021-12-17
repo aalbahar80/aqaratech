@@ -17,10 +17,11 @@
 	export let updateDoc: DocumentNode = undefined;
 
 	export let existing = undefined;
+	$: noErrorMsg = Object.values($errors).every((e) => e === null);
+
 	// insert mutation
 	const insertStore = operationStore(insertDoc);
 	const insertMutation = mutation(insertStore);
-
 	// update mutation
 	const updateStore = operationStore(updateDoc);
 	const updateMutation = mutation(updateStore);
@@ -45,12 +46,20 @@
 		}
 	};
 
-	const { form, isValid, isSubmitting, reset, validate, data, errors } =
-		createForm({
-			extend: [validator, reporter],
-			validateSchema: v[entity],
-			onSubmit: handleForm
-		});
+	const {
+		form,
+		isValid,
+		isSubmitting,
+		reset,
+		validate,
+		data,
+		errors,
+		isDirty
+	} = createForm({
+		extend: [validator, reporter],
+		validateSchema: v[entity] || v.fallback,
+		onSubmit: handleForm
+	});
 </script>
 
 <form use:form>
@@ -88,9 +97,10 @@
 				{/if}
 			{/each}
 			<button
+				onclick={() => console.log('sdfs')}
 				class="btn btn-primary"
 				class:loading={$isSubmitting}
-				disabled={!$isValid}
+				disabled={!noErrorMsg}
 				type="submit">Submit</button
 			>
 		</div>
@@ -99,6 +109,6 @@
 
 <button on:click={validate}>validate</button>
 <button on:click={() => console.log($data)}>debug</button>
+<button on:click={() => console.log(form)}>form</button>
 <button on:click={() => console.log(fieldList)}>fieldList</button>
-<button on:click={() => console.log($errors)}>errors</button>
-<!-- <button on:click={() => console.log(leaseValidation)}>leaseValidation</button> -->
+<button on:click={() => console.log($errors)}>err</button>

@@ -27,6 +27,4 @@
 	export let entity: string;
 </script>
 
-{#if fieldList}
-	<AddGeneric {fieldList} {entity} insertDoc={docs.insert} />
-{/if}
+<AddGeneric {fieldList} {entity} insertDoc={docs.insert} />

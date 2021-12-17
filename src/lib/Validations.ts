@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { parseISO } from 'date-fns';
 
-const leaseValidation = z
+const leases = z
 	.object({
 		// validate that start_date is an iso string
 		start_date: z.string().refine((val) => Date.parse(val), {
@@ -24,6 +24,15 @@ const leaseValidation = z
 		message: 'End date must be after end date'
 	});
 
+const clients = z.object({
+	first_name: z.string().min(1, { message: 'Required' }),
+	last_name: z.string().min(1, { message: 'Required' }),
+	email: z.string().email(),
+	phone: z.string().min(8).and(z.string().max(8)).or(z.literal(''))
+});
+
 export const v = {
-	leases: leaseValidation
+	fallback: z.object({}),
+	leases,
+	clients
 };

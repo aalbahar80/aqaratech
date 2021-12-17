@@ -3,7 +3,7 @@
 	import ColumnToggle from '$components/table/ColumnToggle.svelte';
 	import SortIndicator from '$components/table/SortIndicator.svelte';
 	import BodySegmentGeneric from '$components/table/BodySegmentGeneric.svelte';
-	import type { Field } from '$components/form/Field';
+	import { Field } from '$components/form/Field';
 	import { getContext } from 'svelte';
 	import { key } from '$components/keyyy';
 	import ModalEdit from '$components/modal/ModalEdit.svelte';
@@ -13,7 +13,8 @@
 	import { page } from '$app/stores';
 
 	const { getGraphQlName, getFieldList, getIsFetching } = getContext(key);
-	const _fieldList: SvelteStore<Field[]> = getFieldList();
+	let _fieldList: SvelteStore<Field[]> = getFieldList();
+	$_fieldList = Field.addLinkField(_fieldList);
 
 	const isFetching: Writable<boolean> = getIsFetching();
 
