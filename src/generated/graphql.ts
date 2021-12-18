@@ -5700,68 +5700,6 @@ export type Users_Variance_Order_By = {
   tenant_id?: InputMaybe<Order_By>;
 };
 
-export type DeleteClientMutationVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type DeleteClientMutation = { __typename?: 'mutation_root', delete_clients_by_pk?: { __typename?: 'clients', id: number } | null | undefined };
-
-export type DeletePropertyMutationVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type DeletePropertyMutation = { __typename?: 'mutation_root', delete_properties_by_pk?: { __typename?: 'properties', id: number } | null | undefined };
-
-export type DeleteUnitMutationVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type DeleteUnitMutation = { __typename?: 'mutation_root', delete_units_by_pk?: { __typename?: 'units', id: number } | null | undefined };
-
-export type DeleteTenantMutationVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type DeleteTenantMutation = { __typename?: 'mutation_root', delete_tenants_by_pk?: { __typename?: 'tenants', id: number } | null | undefined };
-
-export type InsertTenantMutationVariables = Exact<{
-  first_name?: InputMaybe<Scalars['String']>;
-  last_name?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type InsertTenantMutation = { __typename?: 'mutation_root', insert_tenants_one?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined } | null | undefined };
-
-export type UpdateTenantMutationVariables = Exact<{
-  id: Scalars['Int'];
-  _set?: InputMaybe<Tenants_Set_Input>;
-}>;
-
-
-export type UpdateTenantMutation = { __typename?: 'mutation_root', update_tenants_by_pk?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, phone?: string | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined } | null | undefined };
-
-export type TenantByIdQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
-
-
-export type TenantByIdQuery = { __typename?: 'query_root', tenants_by_pk?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined, leases: Array<{ __typename?: 'leases', id: number, start_date?: any | null | undefined, end_date?: any | null | undefined, monthly_rent?: number | null | undefined, is_signed?: boolean | null | undefined, is_expired?: boolean | null | undefined, license?: string | null | undefined, unit?: { __typename?: 'units', id: number, property_id?: number | null | undefined, client_id_s?: number | null | undefined } | null | undefined, transactions: Array<{ __typename?: 'transactions', id: number, is_paid?: boolean | null | undefined, amount?: number | null | undefined, lease_id?: number | null | undefined, receipt_url?: string | null | undefined, created_at?: any | null | undefined, due_date?: any | null | undefined }> }> } | null | undefined };
-
-export type TenantListQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by: Array<Tenants_Order_By> | Tenants_Order_By;
-}>;
-
-
-export type TenantListQuery = { __typename?: 'query_root', tenants: Array<{ __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined }> };
-
 export type TrxByIdQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -5776,118 +5714,207 @@ export type Trx2ByIdQueryVariables = Exact<{
 
 export type Trx2ByIdQuery = { __typename?: 'query_root', transactions_by_pk?: { __typename?: 'transactions', id: number, is_paid?: boolean | null | undefined, memo?: string | null | undefined, created_at?: any | null | undefined } | null | undefined };
 
-export type UnitListQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Units_Order_By> | Units_Order_By>;
-}>;
-
-
-export type UnitListQuery = { __typename?: 'query_root', units: Array<{ __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined }> };
-
 export type DetailsFragment = { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined };
 
-export type ClientInsertMutationVariables = Exact<{
+export type ClientsInsertMutationVariables = Exact<{
   object?: InputMaybe<Clients_Insert_Input>;
 }>;
 
 
-export type ClientInsertMutation = { __typename?: 'mutation_root', insert_clients_one?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
+export type ClientsInsertMutation = { __typename?: 'mutation_root', insert_clients_one?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
 
-export type ClientUpdateMutationVariables = Exact<{
+export type ClientsUpdateMutationVariables = Exact<{
   id: Scalars['Int'];
   _set?: InputMaybe<Clients_Set_Input>;
 }>;
 
 
-export type ClientUpdateMutation = { __typename?: 'mutation_root', update_clients_by_pk?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
+export type ClientsUpdateMutation = { __typename?: 'mutation_root', update_clients_by_pk?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
 
-export type ClientByIdQueryVariables = Exact<{
+export type DeleteClientsMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type ClientByIdQuery = { __typename?: 'query_root', clients_by_pk?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
+export type DeleteClientsMutation = { __typename?: 'mutation_root', delete_clients_by_pk?: { __typename?: 'clients', id: number } | null | undefined };
 
-export type ClientListQueryVariables = Exact<{
+export type ClientsByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type ClientsByIdQuery = { __typename?: 'query_root', clients_by_pk?: { __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined } | null | undefined };
+
+export type ClientsListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Clients_Order_By> | Clients_Order_By>;
 }>;
 
 
-export type ClientListQuery = { __typename?: 'query_root', clients: Array<{ __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined }> };
+export type ClientsListQuery = { __typename?: 'query_root', clients: Array<{ __typename?: 'clients', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, civilid?: any | null | undefined, is_active?: boolean | null | undefined }> };
 
-export type LeaseInsertMutationVariables = Exact<{
+export type LeasesDetailsFragment = { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined };
+
+export type LeasesInsertMutationVariables = Exact<{
   object?: InputMaybe<Leases_Insert_Input>;
 }>;
 
 
-export type LeaseInsertMutation = { __typename?: 'mutation_root', insert_leases_one?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+export type LeasesInsertMutation = { __typename?: 'mutation_root', insert_leases_one?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
 
-export type LeaseUpdateMutationVariables = Exact<{
+export type LeasesUpdateMutationVariables = Exact<{
   id: Scalars['Int'];
   _set?: InputMaybe<Leases_Set_Input>;
 }>;
 
 
-export type LeaseUpdateMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
+export type LeasesUpdateMutation = { __typename?: 'mutation_root', update_leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined } | null | undefined };
 
-export type DeleteLeaseMutationVariables = Exact<{
+export type DeleteLeasesMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type DeleteLeaseMutation = { __typename?: 'mutation_root', delete_leases_by_pk?: { __typename?: 'leases', id: number } | null | undefined };
+export type DeleteLeasesMutation = { __typename?: 'mutation_root', delete_leases_by_pk?: { __typename?: 'leases', id: number } | null | undefined };
 
-export type LeaseByIdQueryVariables = Exact<{
+export type LeasesByIdQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type LeaseByIdQuery = { __typename?: 'query_root', leases_by_pk?: { __typename?: 'leases', id: number, start_date?: any | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, monthly_rent?: number | null | undefined, license?: string | null | undefined, deposit?: number | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined, unit?: { __typename?: 'units', id: number, client_id_s?: number | null | undefined, property_id?: number | null | undefined } | null | undefined } | null | undefined };
+export type LeasesByIdQuery = { __typename?: 'query_root', leases_by_pk?: { __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined, unit?: { __typename?: 'units', id: number, client_id_s?: number | null | undefined, property_id?: number | null | undefined } | null | undefined } | null | undefined };
 
-export type LeaseListQueryVariables = Exact<{
+export type LeasesListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Leases_Order_By> | Leases_Order_By>;
 }>;
 
 
-export type LeaseListQuery = { __typename?: 'query_root', leases: Array<{ __typename?: 'leases', id: number, start_date?: any | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, monthly_rent?: number | null | undefined, deposit?: number | null | undefined, license?: string | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined }> };
+export type LeasesListQuery = { __typename?: 'query_root', leases: Array<{ __typename?: 'leases', id: number, deposit?: number | null | undefined, end_date?: any | null | undefined, is_expired?: boolean | null | undefined, is_signed?: boolean | null | undefined, license?: string | null | undefined, monthly_rent?: number | null | undefined, start_date?: any | null | undefined, tenant_id?: number | null | undefined, unit_id?: number | null | undefined }> };
 
 export type PropertiesDetailsFragment = { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined };
 
-export type PropertyInsertMutationVariables = Exact<{
+export type PropertiesInsertMutationVariables = Exact<{
   object?: InputMaybe<Properties_Insert_Input>;
 }>;
 
 
-export type PropertyInsertMutation = { __typename?: 'mutation_root', insert_properties_one?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined } | null | undefined };
+export type PropertiesInsertMutation = { __typename?: 'mutation_root', insert_properties_one?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined } | null | undefined };
 
-export type PropertyUpdateMutationVariables = Exact<{
+export type PropertiesUpdateMutationVariables = Exact<{
   id: Scalars['Int'];
   _set?: InputMaybe<Properties_Set_Input>;
 }>;
 
 
-export type PropertyUpdateMutation = { __typename?: 'mutation_root', update_properties_by_pk?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined } | null | undefined };
+export type PropertiesUpdateMutation = { __typename?: 'mutation_root', update_properties_by_pk?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined } | null | undefined };
 
-export type PropertyByIdQueryVariables = Exact<{
+export type DeletePropertiesMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type PropertyByIdQuery = { __typename?: 'query_root', properties_by_pk?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined, units: Array<{ __typename?: 'units', id: number, client_id_s?: number | null | undefined, property_id?: number | null | undefined }> } | null | undefined };
+export type DeletePropertiesMutation = { __typename?: 'mutation_root', delete_properties_by_pk?: { __typename?: 'properties', id: number } | null | undefined };
 
-export type PropertyListQueryVariables = Exact<{
+export type PropertiesByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type PropertiesByIdQuery = { __typename?: 'query_root', properties_by_pk?: { __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined, units: Array<{ __typename?: 'units', id: number, client_id_s?: number | null | undefined, property_id?: number | null | undefined }> } | null | undefined };
+
+export type PropertiesListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Properties_Order_By> | Properties_Order_By>;
 }>;
 
 
-export type PropertyListQuery = { __typename?: 'query_root', properties: Array<{ __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined }> };
+export type PropertiesListQuery = { __typename?: 'query_root', properties: Array<{ __typename?: 'properties', id: number, client_id?: number | null | undefined, area?: string | null | undefined, block?: string | null | undefined, street?: string | null | undefined, avenue?: string | null | undefined, number?: string | null | undefined, coordinates?: any | null | undefined }> };
+
+export type TenantsDetailsFragment = { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined };
+
+export type TenantsCrumbsFragment = { __typename?: 'tenants', id: number, leases: Array<{ __typename?: 'leases', id: number, start_date?: any | null | undefined, end_date?: any | null | undefined, unit?: { __typename?: 'units', id: number, property?: { __typename?: 'properties', id: number, client?: { __typename?: 'clients', id: number } | null | undefined } | null | undefined } | null | undefined }> };
+
+export type TenantsInsertMutationVariables = Exact<{
+  object?: InputMaybe<Tenants_Insert_Input>;
+}>;
+
+
+export type TenantsInsertMutation = { __typename?: 'mutation_root', insert_tenants_one?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined } | null | undefined };
+
+export type TenantsUpdateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  _set?: InputMaybe<Tenants_Set_Input>;
+}>;
+
+
+export type TenantsUpdateMutation = { __typename?: 'mutation_root', update_tenants_by_pk?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined } | null | undefined };
+
+export type DeleteTenantsMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteTenantsMutation = { __typename?: 'mutation_root', delete_tenants_by_pk?: { __typename?: 'tenants', id: number } | null | undefined };
+
+export type TenantsByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type TenantsByIdQuery = { __typename?: 'query_root', tenants_by_pk?: { __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined, leases: Array<{ __typename?: 'leases', id: number, start_date?: any | null | undefined, end_date?: any | null | undefined, unit?: { __typename?: 'units', id: number, property?: { __typename?: 'properties', id: number, client?: { __typename?: 'clients', id: number } | null | undefined } | null | undefined } | null | undefined }> } | null | undefined };
+
+export type TenantsListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Tenants_Order_By> | Tenants_Order_By>;
+}>;
+
+
+export type TenantsListQuery = { __typename?: 'query_root', tenants: Array<{ __typename?: 'tenants', id: number, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, phone?: string | null | undefined, dob?: any | null | undefined, civilid?: any | null | undefined, second_name?: string | null | undefined, third_name?: string | null | undefined }> };
+
+export type UnitsDetailsFragment = { __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined };
+
+export type UnitsInsertMutationVariables = Exact<{
+  object?: InputMaybe<Units_Insert_Input>;
+}>;
+
+
+export type UnitsInsertMutation = { __typename?: 'mutation_root', insert_units_one?: { __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined } | null | undefined };
+
+export type UnitsUpdateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  _set?: InputMaybe<Units_Set_Input>;
+}>;
+
+
+export type UnitsUpdateMutation = { __typename?: 'mutation_root', update_units_by_pk?: { __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined } | null | undefined };
+
+export type DeleteUnitsMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteUnitsMutation = { __typename?: 'mutation_root', delete_units_by_pk?: { __typename?: 'units', id: number } | null | undefined };
+
+export type UnitsByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type UnitsByIdQuery = { __typename?: 'query_root', units_by_pk?: { __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined } | null | undefined };
+
+export type UnitsListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Units_Order_By> | Units_Order_By>;
+}>;
+
+
+export type UnitsListQuery = { __typename?: 'query_root', units: Array<{ __typename?: 'units', id: number, is_vacant?: boolean | null | undefined, rent_market?: number | null | undefined, size?: number | null | undefined, type?: string | null | undefined, unit_number?: string | null | undefined, usage?: string | null | undefined, bed?: any | null | undefined, bath?: any | null | undefined, floor?: string | null | undefined, property_id?: number | null | undefined, client_id_s?: number | null | undefined }> };
 
 export const DetailsFragmentDoc = gql`
     fragment details on clients {
@@ -5898,6 +5925,20 @@ export const DetailsFragmentDoc = gql`
   phone
   civilid
   is_active
+}
+    `;
+export const LeasesDetailsFragmentDoc = gql`
+    fragment leasesDetails on leases {
+  id
+  deposit
+  end_date
+  is_expired
+  is_signed
+  license
+  monthly_rent
+  start_date
+  tenant_id
+  unit_id
 }
     `;
 export const PropertiesDetailsFragmentDoc = gql`
@@ -5912,109 +5953,52 @@ export const PropertiesDetailsFragmentDoc = gql`
   coordinates
 }
     `;
-export const DeleteClientDocument = gql`
-    mutation DeleteClient($id: Int!) {
-  delete_clients_by_pk(id: $id) {
-    id
-  }
+export const TenantsDetailsFragmentDoc = gql`
+    fragment tenantsDetails on tenants {
+  id
+  first_name
+  last_name
+  email
+  phone
+  dob
+  civilid
+  second_name
+  third_name
 }
     `;
-export const DeletePropertyDocument = gql`
-    mutation DeleteProperty($id: Int!) {
-  delete_properties_by_pk(id: $id) {
+export const TenantsCrumbsFragmentDoc = gql`
+    fragment tenantsCrumbs on tenants {
+  id
+  leases(order_by: {end_date: desc}, limit: 1) {
     id
-  }
-}
-    `;
-export const DeleteUnitDocument = gql`
-    mutation DeleteUnit($id: Int!) {
-  delete_units_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const DeleteTenantDocument = gql`
-    mutation DeleteTenant($id: Int!) {
-  delete_tenants_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const InsertTenantDocument = gql`
-    mutation InsertTenant($first_name: String, $last_name: String, $email: String, $phone: String) {
-  insert_tenants_one(
-    object: {first_name: $first_name, last_name: $last_name, email: $email, phone: $phone}
-  ) {
-    id
-    first_name
-    last_name
-    email
-    phone
-  }
-}
-    `;
-export const UpdateTenantDocument = gql`
-    mutation UpdateTenant($id: Int!, $_set: tenants_set_input) {
-  update_tenants_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    id
-    first_name
-    last_name
-    email
-    dob
-    civilid
-    phone
-    second_name
-    third_name
-  }
-}
-    `;
-export const TenantByIdDocument = gql`
-    query TenantById($id: Int!) {
-  tenants_by_pk(id: $id) {
-    id
-    first_name
-    last_name
-    email
-    phone
-    dob
-    civilid
-    second_name
-    third_name
-    leases(order_by: {end_date: desc}) {
+    start_date
+    end_date
+    unit {
       id
-      start_date
-      end_date
-      monthly_rent
-      is_signed
-      is_expired
-      license
-      unit {
+      property {
         id
-        property_id
-        client_id_s
-      }
-      transactions(order_by: {due_date: desc}) {
-        id
-        is_paid
-        amount
-        lease_id
-        receipt_url
-        created_at
-        due_date
+        client {
+          id
+        }
       }
     }
   }
 }
     `;
-export const TenantListDocument = gql`
-    query TenantList($limit: Int, $offset: Int, $order_by: [tenants_order_by!]!) @cached {
-  tenants(limit: $limit, offset: $offset, order_by: $order_by) {
-    id
-    first_name
-    last_name
-    email
-    phone
-  }
+export const UnitsDetailsFragmentDoc = gql`
+    fragment unitsDetails on units {
+  id
+  is_vacant
+  rent_market
+  size
+  type
+  unit_number
+  usage
+  bed
+  bath
+  floor
+  property_id
+  client_id_s
 }
     `;
 export const TrxByIdDocument = gql`
@@ -6035,104 +6019,66 @@ export const Trx2ByIdDocument = gql`
   }
 }
     `;
-export const UnitListDocument = gql`
-    query UnitList($limit: Int, $offset: Int, $order_by: [units_order_by!] = {}) @cached {
-  units(order_by: $order_by, limit: $limit, offset: $offset) {
-    id
-    is_vacant
-    rent_market
-    size
-    type
-    unit_number
-    usage
-    bed
-    bath
-    floor
-    property_id
-    client_id_s
-  }
-}
-    `;
-export const ClientInsertDocument = gql`
-    mutation ClientInsert($object: clients_insert_input = {}) {
+export const ClientsInsertDocument = gql`
+    mutation ClientsInsert($object: clients_insert_input = {}) {
   insert_clients_one(object: $object) {
     ...details
   }
 }
     ${DetailsFragmentDoc}`;
-export const ClientUpdateDocument = gql`
-    mutation ClientUpdate($id: Int!, $_set: clients_set_input) {
+export const ClientsUpdateDocument = gql`
+    mutation ClientsUpdate($id: Int!, $_set: clients_set_input) {
   update_clients_by_pk(pk_columns: {id: $id}, _set: $_set) {
     ...details
   }
 }
     ${DetailsFragmentDoc}`;
-export const ClientByIdDocument = gql`
-    query ClientById($id: Int!) {
+export const DeleteClientsDocument = gql`
+    mutation DeleteClients($id: Int!) {
+  delete_clients_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export const ClientsByIdDocument = gql`
+    query ClientsById($id: Int!) {
   clients_by_pk(id: $id) {
     ...details
   }
 }
     ${DetailsFragmentDoc}`;
-export const ClientListDocument = gql`
-    query ClientList($limit: Int, $offset: Int, $order_by: [clients_order_by!] = {}) @cached {
+export const ClientsListDocument = gql`
+    query ClientsList($limit: Int, $offset: Int, $order_by: [clients_order_by!] = {}) @cached {
   clients(order_by: $order_by, limit: $limit, offset: $offset) {
     ...details
   }
 }
     ${DetailsFragmentDoc}`;
-export const LeaseInsertDocument = gql`
-    mutation LeaseInsert($object: leases_insert_input = {}) {
+export const LeasesInsertDocument = gql`
+    mutation LeasesInsert($object: leases_insert_input = {}) {
   insert_leases_one(object: $object) {
-    id
-    deposit
-    end_date
-    is_expired
-    is_signed
-    license
-    monthly_rent
-    start_date
-    tenant_id
-    unit_id
+    ...leasesDetails
   }
 }
-    `;
-export const LeaseUpdateDocument = gql`
-    mutation LeaseUpdate($id: Int!, $_set: leases_set_input) {
+    ${LeasesDetailsFragmentDoc}`;
+export const LeasesUpdateDocument = gql`
+    mutation LeasesUpdate($id: Int!, $_set: leases_set_input) {
   update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    id
-    deposit
-    end_date
-    is_expired
-    is_signed
-    license
-    monthly_rent
-    start_date
-    tenant_id
-    unit_id
+    ...leasesDetails
   }
 }
-    `;
-export const DeleteLeaseDocument = gql`
-    mutation DeleteLease($id: Int!) {
+    ${LeasesDetailsFragmentDoc}`;
+export const DeleteLeasesDocument = gql`
+    mutation DeleteLeases($id: Int!) {
   delete_leases_by_pk(id: $id) {
     id
   }
 }
     `;
-export const LeaseByIdDocument = gql`
-    query LeaseById($id: Int!) {
+export const LeasesByIdDocument = gql`
+    query LeasesById($id: Int!) {
   leases_by_pk(id: $id) {
-    id
-    start_date
-    end_date
-    is_expired
-    is_signed
-    monthly_rent
-    license
-    deposit
-    tenant_id
-    unit_id
+    ...leasesDetails
     unit {
       id
       client_id_s
@@ -6140,39 +6086,37 @@ export const LeaseByIdDocument = gql`
     }
   }
 }
-    `;
-export const LeaseListDocument = gql`
-    query LeaseList($limit: Int, $offset: Int, $order_by: [leases_order_by!] = {}) @cached {
+    ${LeasesDetailsFragmentDoc}`;
+export const LeasesListDocument = gql`
+    query LeasesList($limit: Int, $offset: Int, $order_by: [leases_order_by!] = {}) @cached {
   leases(order_by: $order_by, limit: $limit, offset: $offset) {
-    id
-    start_date
-    end_date
-    is_expired
-    is_signed
-    monthly_rent
-    deposit
-    license
-    tenant_id
-    unit_id
+    ...leasesDetails
   }
 }
-    `;
-export const PropertyInsertDocument = gql`
-    mutation PropertyInsert($object: properties_insert_input = {}) {
+    ${LeasesDetailsFragmentDoc}`;
+export const PropertiesInsertDocument = gql`
+    mutation PropertiesInsert($object: properties_insert_input = {}) {
   insert_properties_one(object: $object) {
     ...propertiesDetails
   }
 }
     ${PropertiesDetailsFragmentDoc}`;
-export const PropertyUpdateDocument = gql`
-    mutation PropertyUpdate($id: Int!, $_set: properties_set_input) {
+export const PropertiesUpdateDocument = gql`
+    mutation PropertiesUpdate($id: Int!, $_set: properties_set_input) {
   update_properties_by_pk(pk_columns: {id: $id}, _set: $_set) {
     ...propertiesDetails
   }
 }
     ${PropertiesDetailsFragmentDoc}`;
-export const PropertyByIdDocument = gql`
-    query PropertyById($id: Int!) {
+export const DeletePropertiesDocument = gql`
+    mutation DeleteProperties($id: Int!) {
+  delete_properties_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export const PropertiesByIdDocument = gql`
+    query PropertiesById($id: Int!) {
   properties_by_pk(id: $id) {
     ...propertiesDetails
     units {
@@ -6183,37 +6127,112 @@ export const PropertyByIdDocument = gql`
   }
 }
     ${PropertiesDetailsFragmentDoc}`;
-export const PropertyListDocument = gql`
-    query PropertyList($limit: Int, $offset: Int, $order_by: [properties_order_by!] = {}) @cached {
+export const PropertiesListDocument = gql`
+    query PropertiesList($limit: Int, $offset: Int, $order_by: [properties_order_by!] = {}) @cached {
   properties(order_by: $order_by, limit: $limit, offset: $offset) {
     ...propertiesDetails
   }
 }
     ${PropertiesDetailsFragmentDoc}`;
-export type DeleteClientMutationStore = OperationStore<DeleteClientMutation, DeleteClientMutationVariables>;
-export type DeletePropertyMutationStore = OperationStore<DeletePropertyMutation, DeletePropertyMutationVariables>;
-export type DeleteUnitMutationStore = OperationStore<DeleteUnitMutation, DeleteUnitMutationVariables>;
-export type DeleteTenantMutationStore = OperationStore<DeleteTenantMutation, DeleteTenantMutationVariables>;
-export type InsertTenantMutationStore = OperationStore<InsertTenantMutation, InsertTenantMutationVariables>;
-export type UpdateTenantMutationStore = OperationStore<UpdateTenantMutation, UpdateTenantMutationVariables>;
-export type TenantByIdQueryStore = OperationStore<TenantByIdQuery, TenantByIdQueryVariables>;
-export type TenantListQueryStore = OperationStore<TenantListQuery, TenantListQueryVariables>;
+export const TenantsInsertDocument = gql`
+    mutation TenantsInsert($object: tenants_insert_input = {}) {
+  insert_tenants_one(object: $object) {
+    ...tenantsDetails
+  }
+}
+    ${TenantsDetailsFragmentDoc}`;
+export const TenantsUpdateDocument = gql`
+    mutation TenantsUpdate($id: Int!, $_set: tenants_set_input) {
+  update_tenants_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    ...tenantsDetails
+  }
+}
+    ${TenantsDetailsFragmentDoc}`;
+export const DeleteTenantsDocument = gql`
+    mutation DeleteTenants($id: Int!) {
+  delete_tenants_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export const TenantsByIdDocument = gql`
+    query TenantsById($id: Int!) {
+  tenants_by_pk(id: $id) {
+    ...tenantsDetails
+    ...tenantsCrumbs
+  }
+}
+    ${TenantsDetailsFragmentDoc}
+${TenantsCrumbsFragmentDoc}`;
+export const TenantsListDocument = gql`
+    query TenantsList($limit: Int, $offset: Int, $order_by: [tenants_order_by!] = {}) @cached {
+  tenants(order_by: $order_by, limit: $limit, offset: $offset) {
+    ...tenantsDetails
+  }
+}
+    ${TenantsDetailsFragmentDoc}`;
+export const UnitsInsertDocument = gql`
+    mutation UnitsInsert($object: units_insert_input = {}) {
+  insert_units_one(object: $object) {
+    ...unitsDetails
+  }
+}
+    ${UnitsDetailsFragmentDoc}`;
+export const UnitsUpdateDocument = gql`
+    mutation UnitsUpdate($id: Int!, $_set: units_set_input) {
+  update_units_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    ...unitsDetails
+  }
+}
+    ${UnitsDetailsFragmentDoc}`;
+export const DeleteUnitsDocument = gql`
+    mutation DeleteUnits($id: Int!) {
+  delete_units_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export const UnitsByIdDocument = gql`
+    query UnitsById($id: Int!) {
+  units_by_pk(id: $id) {
+    ...unitsDetails
+  }
+}
+    ${UnitsDetailsFragmentDoc}`;
+export const UnitsListDocument = gql`
+    query UnitsList($limit: Int, $offset: Int, $order_by: [units_order_by!] = {}) @cached {
+  units(order_by: $order_by, limit: $limit, offset: $offset) {
+    ...unitsDetails
+  }
+}
+    ${UnitsDetailsFragmentDoc}`;
 export type TrxByIdQueryStore = OperationStore<TrxByIdQuery, TrxByIdQueryVariables>;
 export type Trx2ByIdQueryStore = OperationStore<Trx2ByIdQuery, Trx2ByIdQueryVariables>;
-export type UnitListQueryStore = OperationStore<UnitListQuery, UnitListQueryVariables>;
-export type ClientInsertMutationStore = OperationStore<ClientInsertMutation, ClientInsertMutationVariables>;
-export type ClientUpdateMutationStore = OperationStore<ClientUpdateMutation, ClientUpdateMutationVariables>;
-export type ClientByIdQueryStore = OperationStore<ClientByIdQuery, ClientByIdQueryVariables>;
-export type ClientListQueryStore = OperationStore<ClientListQuery, ClientListQueryVariables>;
-export type LeaseInsertMutationStore = OperationStore<LeaseInsertMutation, LeaseInsertMutationVariables>;
-export type LeaseUpdateMutationStore = OperationStore<LeaseUpdateMutation, LeaseUpdateMutationVariables>;
-export type DeleteLeaseMutationStore = OperationStore<DeleteLeaseMutation, DeleteLeaseMutationVariables>;
-export type LeaseByIdQueryStore = OperationStore<LeaseByIdQuery, LeaseByIdQueryVariables>;
-export type LeaseListQueryStore = OperationStore<LeaseListQuery, LeaseListQueryVariables>;
-export type PropertyInsertMutationStore = OperationStore<PropertyInsertMutation, PropertyInsertMutationVariables>;
-export type PropertyUpdateMutationStore = OperationStore<PropertyUpdateMutation, PropertyUpdateMutationVariables>;
-export type PropertyByIdQueryStore = OperationStore<PropertyByIdQuery, PropertyByIdQueryVariables>;
-export type PropertyListQueryStore = OperationStore<PropertyListQuery, PropertyListQueryVariables>;
+export type ClientsInsertMutationStore = OperationStore<ClientsInsertMutation, ClientsInsertMutationVariables>;
+export type ClientsUpdateMutationStore = OperationStore<ClientsUpdateMutation, ClientsUpdateMutationVariables>;
+export type DeleteClientsMutationStore = OperationStore<DeleteClientsMutation, DeleteClientsMutationVariables>;
+export type ClientsByIdQueryStore = OperationStore<ClientsByIdQuery, ClientsByIdQueryVariables>;
+export type ClientsListQueryStore = OperationStore<ClientsListQuery, ClientsListQueryVariables>;
+export type LeasesInsertMutationStore = OperationStore<LeasesInsertMutation, LeasesInsertMutationVariables>;
+export type LeasesUpdateMutationStore = OperationStore<LeasesUpdateMutation, LeasesUpdateMutationVariables>;
+export type DeleteLeasesMutationStore = OperationStore<DeleteLeasesMutation, DeleteLeasesMutationVariables>;
+export type LeasesByIdQueryStore = OperationStore<LeasesByIdQuery, LeasesByIdQueryVariables>;
+export type LeasesListQueryStore = OperationStore<LeasesListQuery, LeasesListQueryVariables>;
+export type PropertiesInsertMutationStore = OperationStore<PropertiesInsertMutation, PropertiesInsertMutationVariables>;
+export type PropertiesUpdateMutationStore = OperationStore<PropertiesUpdateMutation, PropertiesUpdateMutationVariables>;
+export type DeletePropertiesMutationStore = OperationStore<DeletePropertiesMutation, DeletePropertiesMutationVariables>;
+export type PropertiesByIdQueryStore = OperationStore<PropertiesByIdQuery, PropertiesByIdQueryVariables>;
+export type PropertiesListQueryStore = OperationStore<PropertiesListQuery, PropertiesListQueryVariables>;
+export type TenantsInsertMutationStore = OperationStore<TenantsInsertMutation, TenantsInsertMutationVariables>;
+export type TenantsUpdateMutationStore = OperationStore<TenantsUpdateMutation, TenantsUpdateMutationVariables>;
+export type DeleteTenantsMutationStore = OperationStore<DeleteTenantsMutation, DeleteTenantsMutationVariables>;
+export type TenantsByIdQueryStore = OperationStore<TenantsByIdQuery, TenantsByIdQueryVariables>;
+export type TenantsListQueryStore = OperationStore<TenantsListQuery, TenantsListQueryVariables>;
+export type UnitsInsertMutationStore = OperationStore<UnitsInsertMutation, UnitsInsertMutationVariables>;
+export type UnitsUpdateMutationStore = OperationStore<UnitsUpdateMutation, UnitsUpdateMutationVariables>;
+export type DeleteUnitsMutationStore = OperationStore<DeleteUnitsMutation, DeleteUnitsMutationVariables>;
+export type UnitsByIdQueryStore = OperationStore<UnitsByIdQuery, UnitsByIdQueryVariables>;
+export type UnitsListQueryStore = OperationStore<UnitsListQuery, UnitsListQueryVariables>;
 export type WithTypename<T extends { __typename?: any }> = { [K in Exclude<keyof T, '__typename'>]?: T[K] } & { __typename: NonNullable<T['__typename']> };
 
 export type GraphCacheKeysConfig = {

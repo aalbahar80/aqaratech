@@ -18,7 +18,7 @@ const clientDetailsFragment = gql`
 `;
 
 const insert = gql`
-	mutation ClientInsert($object: clients_insert_input = {}) {
+	mutation ClientsInsert($object: clients_insert_input = {}) {
 		insert_clients_one(object: $object) {
 			...details
 		}
@@ -27,7 +27,7 @@ const insert = gql`
 `;
 
 const update = gql`
-	mutation ClientUpdate($id: Int!, $_set: clients_set_input) {
+	mutation ClientsUpdate($id: Int!, $_set: clients_set_input) {
 		update_clients_by_pk(pk_columns: { id: $id }, _set: $_set) {
 			...details
 		}
@@ -36,7 +36,7 @@ const update = gql`
 `;
 
 const deleteQuery = gql`
-	mutation DeleteClient($id: Int!) {
+	mutation DeleteClients($id: Int!) {
 		delete_clients_by_pk(id: $id) {
 			id
 		}
@@ -44,7 +44,7 @@ const deleteQuery = gql`
 `;
 
 const byId = gql`
-	query ClientById($id: Int!) {
+	query ClientsById($id: Int!) {
 		clients_by_pk(id: $id) {
 			...details
 		}
@@ -53,7 +53,7 @@ const byId = gql`
 `;
 
 const list = gql`
-	query ClientList(
+	query ClientsList(
 		$limit: Int
 		$offset: Int
 		$order_by: [clients_order_by!] = {}

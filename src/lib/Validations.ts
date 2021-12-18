@@ -31,8 +31,24 @@ const clients = z.object({
 	phone: z.string().min(8).and(z.string().max(8)).or(z.literal(''))
 });
 
+const tenants = z.object({
+	first_name: z.string().min(1, { message: 'Required' }),
+	last_name: z.string().min(1, { message: 'Required' }),
+	email: z.string().email(),
+	phone: z.string().min(8).and(z.string().max(8)).or(z.literal(''))
+});
+
+const properties = z.object({
+	area: z.string().min(1, { message: 'Required' }),
+	block: z.string().min(1, { message: 'Required' }),
+	street: z.string().min(1, { message: 'Required' }),
+	number: z.string().min(1, { message: 'Required' })
+});
+
 export const v = {
 	fallback: z.object({}),
 	leases,
-	clients
+	clients,
+	properties,
+	tenants
 };

@@ -7,7 +7,6 @@
 		const response = await fetch(url);
 		const data = await response.json();
 		const { docs, fieldList, graphqlName } = data;
-		console.dir(fieldList);
 
 		return {
 			props: {

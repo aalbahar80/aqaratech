@@ -4,42 +4,41 @@ const title = 'Leases';
 const graphqlName = 'leases';
 const graphqlNamePk = 'leases_by_pk';
 
+const leasesDetailsFragment = gql`
+	fragment leasesDetails on leases {
+		id
+		deposit
+		end_date
+		is_expired
+		is_signed
+		license
+		monthly_rent
+		start_date
+		tenant_id
+		unit_id
+	}
+`;
+
 const insert = gql`
-	mutation LeaseInsert($object: leases_insert_input = {}) {
+	mutation LeasesInsert($object: leases_insert_input = {}) {
 		insert_leases_one(object: $object) {
-			id
-			deposit
-			end_date
-			is_expired
-			is_signed
-			license
-			monthly_rent
-			start_date
-			tenant_id
-			unit_id
+			...leasesDetails
 		}
 	}
+	${leasesDetailsFragment}
 `;
 
 const update = gql`
-	mutation LeaseUpdate($id: Int!, $_set: leases_set_input) {
+	mutation LeasesUpdate($id: Int!, $_set: leases_set_input) {
 		update_leases_by_pk(pk_columns: { id: $id }, _set: $_set) {
-			id
-			deposit
-			end_date
-			is_expired
-			is_signed
-			license
-			monthly_rent
-			start_date
-			tenant_id
-			unit_id
+			...leasesDetails
 		}
 	}
+	${leasesDetailsFragment}
 `;
 
 const deleteQuery = gql`
-	mutation DeleteLease($id: Int!) {
+	mutation DeleteLeases($id: Int!) {
 		delete_leases_by_pk(id: $id) {
 			id
 		}
@@ -47,18 +46,9 @@ const deleteQuery = gql`
 `;
 
 const byId = gql`
-	query LeaseById($id: Int!) {
+	query LeasesById($id: Int!) {
 		leases_by_pk(id: $id) {
-			id
-			start_date
-			end_date
-			is_expired
-			is_signed
-			monthly_rent
-			license
-			deposit
-			tenant_id
-			unit_id
+			...leasesDetails
 			unit {
 				id
 				client_id_s
@@ -66,24 +56,20 @@ const byId = gql`
 			}
 		}
 	}
+	${leasesDetailsFragment}
 `;
 
 const list = gql`
-	query LeaseList($limit: Int, $offset: Int, $order_by: [leases_order_by!] = {})
-	@cached {
+	query LeasesList(
+		$limit: Int
+		$offset: Int
+		$order_by: [leases_order_by!] = {}
+	) @cached {
 		leases(order_by: $order_by, limit: $limit, offset: $offset) {
-			id
-			start_date
-			end_date
-			is_expired
-			is_signed
-			monthly_rent
-			deposit
-			license
-			tenant_id
-			unit_id
+			...leasesDetails
 		}
 	}
+	${leasesDetailsFragment}
 `;
 
 const fieldList = [

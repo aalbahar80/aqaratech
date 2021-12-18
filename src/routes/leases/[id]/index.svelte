@@ -16,9 +16,9 @@
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
 	import {
-		LeaseByIdQuery,
-		LeaseByIdQueryVariables,
-		LeaseByIdDocument
+		LeasesByIdQuery,
+		LeasesByIdQueryVariables,
+		LeasesByIdDocument
 	} from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 
@@ -26,8 +26,8 @@
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 
-	const lease = operationStore<LeaseByIdQuery, LeaseByIdQueryVariables>(
-		LeaseByIdDocument,
+	const lease = operationStore<LeasesByIdQuery, LeasesByIdQueryVariables>(
+		LeasesByIdDocument,
 		{
 			id: parseInt($page.params.id)
 		}

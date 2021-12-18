@@ -1,9 +1,12 @@
 <script context="module" lang="ts">
+	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page }) {
 		const id = page.params.id;
 
 		if (id === 'add') {
 			return;
+		} else {
+			return {};
 		}
 	}
 </script>
@@ -12,9 +15,9 @@
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
 	import {
-		TenantByIdQuery,
-		TenantByIdQueryVariables,
-		TenantByIdDocument
+		TenantsByIdQuery,
+		TenantsByIdQueryVariables,
+		TenantsByIdDocument
 	} from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
@@ -30,8 +33,8 @@
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 
-	const tenant = operationStore<TenantByIdQuery, TenantByIdQueryVariables>(
-		TenantByIdDocument,
+	const tenant = operationStore<TenantsByIdQuery, TenantsByIdQueryVariables>(
+		TenantsByIdDocument,
 		{
 			id: parseInt($page.params.id)
 		}
@@ -39,14 +42,16 @@
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
 	$: crumbData = {
-		clientId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.client_id_s,
-		propertyId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.property_id,
+		clientId:
+			$tenant?.data?.tenants_by_pk?.leases[0]?.unit?.property?.client?.id,
+		propertyId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.property?.id,
 		unitId: $tenant?.data?.tenants_by_pk?.leases[0]?.unit?.id,
 		leaseId: $tenant?.data?.tenants_by_pk?.leases[0]?.id,
 		tenantId: $tenant?.data?.tenants_by_pk?.id
 	};
 </script>
 
+{JSON.stringify($tenant)}
 <div class="flex justify-center">
 	<div class="grid grid-cols-2 gap-4 space-y-4 max-w-screen-2xl">
 		{#if $tenant.fetching}
@@ -98,12 +103,12 @@
 				Transactions
 			</div>
 
-			<div class="grid mt-8 gap-y-4">
+			<!-- <div class="grid mt-8 gap-y-4">
 				{#each $tenant?.data?.tenants_by_pk?.leases as lease (lease.id)}
 					<LeaseDropdown {lease} />
 					<a href={`/sample/${lease.id}`}>side</a>
 				{/each}
-			</div>
+			</div> -->
 		{/if}
 	</div>
 </div>

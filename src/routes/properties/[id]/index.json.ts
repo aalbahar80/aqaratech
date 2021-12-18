@@ -1,6 +1,5 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import * as yup from 'yup';
 
 const title = 'Properties';
 const graphqlName = 'properties';
@@ -20,7 +19,7 @@ const propertiesDetailsFragment = gql`
 `;
 
 const insert = gql`
-	mutation PropertyInsert($object: properties_insert_input = {}) {
+	mutation PropertiesInsert($object: properties_insert_input = {}) {
 		insert_properties_one(object: $object) {
 			...propertiesDetails
 		}
@@ -29,7 +28,7 @@ const insert = gql`
 `;
 
 const update = gql`
-	mutation PropertyUpdate($id: Int!, $_set: properties_set_input) {
+	mutation PropertiesUpdate($id: Int!, $_set: properties_set_input) {
 		update_properties_by_pk(pk_columns: { id: $id }, _set: $_set) {
 			...propertiesDetails
 		}
@@ -38,7 +37,7 @@ const update = gql`
 `;
 
 const deleteQuery = gql`
-	mutation DeleteProperty($id: Int!) {
+	mutation DeleteProperties($id: Int!) {
 		delete_properties_by_pk(id: $id) {
 			id
 		}
@@ -46,7 +45,7 @@ const deleteQuery = gql`
 `;
 
 const byId = gql`
-	query PropertyById($id: Int!) {
+	query PropertiesById($id: Int!) {
 		properties_by_pk(id: $id) {
 			...propertiesDetails
 			units {
@@ -60,7 +59,7 @@ const byId = gql`
 `;
 
 const list = gql`
-	query PropertyList(
+	query PropertiesList(
 		$limit: Int
 		$offset: Int
 		$order_by: [properties_order_by!] = {}
@@ -84,23 +83,11 @@ const fieldList: Field[] = [
 	}),
 	new Field({
 		fieldName: 'block',
-		title: 'Block',
-		validation: yup
-			.number()
-			.required()
-			.min(1)
-			.max(13)
-			.typeError('Must be a number')
+		title: 'Block'
 	}),
 	new Field({
 		fieldName: 'street',
-		title: 'St',
-		validation: yup
-			.string()
-			.required()
-			.min(1)
-			.max(13)
-			.typeError('Must be a string')
+		title: 'St'
 	}),
 	new Field({
 		fieldName: 'avenue',

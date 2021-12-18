@@ -1,8 +1,8 @@
 import { Field } from './Field';
 // @ponicode
-describe('Field.Field.addLinkField', () => {
+describe('Field.addLinkField', () => {
 	test('0', () => {
-		const result = Field.addLinkField([
+		let result: any = Field.addLinkField([
 			new Field({ fieldName: 'id', title: 'ID', editable: false }),
 			new Field({
 				fieldName: 'first_name',
