@@ -85,6 +85,8 @@ const fieldList: Field[] = [
 	})
 ];
 
+const key = {};
+
 const docs = {
 	insert: insert,
 	update: update,
@@ -100,7 +102,8 @@ export async function get() {
 			graphqlName,
 			graphqlNamePk,
 			docs: docs,
-			fieldList: fieldList
+			fieldList: fieldList,
+			key
 		}
 	};
 }

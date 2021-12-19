@@ -69,6 +69,21 @@ const byId = gql`
 	query TenantsById($id: Int!) {
 		tenants_by_pk(id: $id) {
 			...tenantsDetails
+			id
+			leases(order_by: { end_date: desc }, limit: 1) {
+				id
+				start_date
+				end_date
+				unit {
+					id
+					property {
+						id
+						client {
+							id
+						}
+					}
+				}
+			}
 		}
 	}
 	${tenantsDetailsFragment}

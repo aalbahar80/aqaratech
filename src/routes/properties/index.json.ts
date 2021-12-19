@@ -48,11 +48,6 @@ const byId = gql`
 	query PropertiesById($id: Int!) {
 		properties_by_pk(id: $id) {
 			...propertiesDetails
-			units {
-				id
-				client_id_s
-				property_id
-			}
 		}
 	}
 	${propertiesDetailsFragment}
@@ -100,6 +95,8 @@ const fieldList: Field[] = [
 	})
 ];
 
+const key = {};
+
 const docs = {
 	insert: insert,
 	update: update,
@@ -115,7 +112,8 @@ export async function get() {
 			graphqlName,
 			graphqlNamePk,
 			docs: docs,
-			fieldList: fieldList
+			fieldList: fieldList,
+			key
 		}
 	};
 }

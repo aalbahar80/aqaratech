@@ -2,8 +2,7 @@
 	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page, fetch }) {
 		const entity = page.params.entity;
-		const id = page.params.id;
-		const url = `/${entity}/${id}.json`;
+		const url = `/${entity}.json`;
 		const response = await fetch(url);
 		const data = await response.json();
 		const { docs, fieldList, graphqlNamePk } = data;

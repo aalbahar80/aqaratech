@@ -11,8 +11,6 @@
 	export let fieldList: Field[];
 
 	export let listDoc: DocumentNode;
-	export let insertDoc: DocumentNode = undefined;
-	export let updateDoc: DocumentNode = undefined;
 	export let deleteDoc: DocumentNode;
 
 	export const fieldListStore = writable(Field.addLinkField(fieldList));
@@ -22,8 +20,6 @@
 		getFieldList: () => fieldListStore,
 		getGraphQlName: () => graphqlName,
 		getListDoc: () => listDoc,
-		getInsertDoc: () => insertDoc,
-		getUpdateDoc: () => updateDoc,
 		getDeleteDoc: () => deleteDoc,
 		getIsFetching: () => isFetchingStore
 	});

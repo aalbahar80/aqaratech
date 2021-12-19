@@ -6159,11 +6159,24 @@ export const TenantsByIdDocument = gql`
     query TenantsById($id: Int!) {
   tenants_by_pk(id: $id) {
     ...tenantsDetails
-    ...tenantsCrumbs
+    id
+    leases(order_by: {end_date: desc}, limit: 1) {
+      id
+      start_date
+      end_date
+      unit {
+        id
+        property {
+          id
+          client {
+            id
+          }
+        }
+      }
+    }
   }
 }
-    ${TenantsDetailsFragmentDoc}
-${TenantsCrumbsFragmentDoc}`;
+    ${TenantsDetailsFragmentDoc}`;
 export const TenantsListDocument = gql`
     query TenantsList($limit: Int, $offset: Int, $order_by: [tenants_order_by!] = {}) @cached {
   tenants(order_by: $order_by, limit: $limit, offset: $offset) {
