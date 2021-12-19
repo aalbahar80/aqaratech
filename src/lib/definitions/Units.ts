@@ -59,8 +59,11 @@ const byId = gql`
 `;
 
 const list = gql`
-	query UnitsList($limit: Int, $offset: Int, $order_by: [units_order_by!] = {})
-	@cached {
+	query UnitsList(
+		$limit: Int
+		$offset: Int
+		$order_by: [units_order_by!] = {}
+	) {
 		units(order_by: $order_by, limit: $limit, offset: $offset) {
 			...unitsDetails
 		}

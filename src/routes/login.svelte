@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import auth from '$lib/services/auth';
 	import { isAuthenticated, user } from '$lib/stores/auth';
@@ -34,4 +34,4 @@
 	<button class="btn btn-primary" on:click={logout}>Logout</button>
 {:else}
 	<button class="btn btn-primary" on:click={login}>Login</button>
-{/if} -->
+{/if}

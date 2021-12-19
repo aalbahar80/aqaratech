@@ -101,16 +101,3 @@ export default <entity>{
 	docs,
 	fieldList
 };
-
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
-	return {
-		body: {
-			title,
-			graphqlName,
-			graphqlNamePk,
-			docs: docs,
-			fieldList: fieldList
-		}
-	};
-}

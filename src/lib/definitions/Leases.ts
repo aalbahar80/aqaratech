@@ -1,5 +1,6 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
+import type { entity } from './types';
 const title = 'Leases';
 const graphqlName = 'leases';
 const graphqlNamePk = 'leases_by_pk';
@@ -64,7 +65,7 @@ const list = gql`
 		$limit: Int
 		$offset: Int
 		$order_by: [leases_order_by!] = {}
-	) @cached {
+	) {
 		leases(order_by: $order_by, limit: $limit, offset: $offset) {
 			...leasesDetails
 		}
@@ -131,15 +132,11 @@ const docs = {
 	list: list,
 	byId: byId
 };
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
-	return {
-		body: {
-			title,
-			graphqlName,
-			graphqlNamePk,
-			docs: docs,
-			fieldList: fieldList
-		}
-	};
-}
+
+export default <entity>{
+	title,
+	graphqlName,
+	graphqlNamePk,
+	docs,
+	fieldList
+};
