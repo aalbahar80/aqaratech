@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ page }) {
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = async ({ page }) => {
 		const id = page.params.id;
 
 		if (id === 'add') {
@@ -8,17 +8,13 @@
 		} else {
 			return {};
 		}
-	}
+	};
 </script>
 
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
-	import {
-		TenantsByIdQuery,
-		TenantsByIdQueryVariables,
-		TenantsByIdDocument
-	} from '$generated/graphql';
+	import { TenantsByIdDocument } from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import {
@@ -33,12 +29,9 @@
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 
-	const tenant = operationStore<TenantsByIdQuery, TenantsByIdQueryVariables>(
-		TenantsByIdDocument,
-		{
-			id: parseInt($page.params.id)
-		}
-	);
+	const tenant = operationStore(TenantsByIdDocument, {
+		id: parseInt($page.params.id)
+	});
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
 	// $: crumbData = {

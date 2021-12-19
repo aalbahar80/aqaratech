@@ -1,13 +1,12 @@
 import type { OperationStore } from '@urql/svelte';
 import type { Resolver as GraphCacheResolver, UpdateResolver as GraphCacheUpdateResolver, OptimisticMutationResolver as GraphCacheOptimisticMutationResolver, StorageAdapter as GraphCacheStorageAdapter } from '@urql/exchange-graphcache';
 import type { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast';
-import gql from 'graphql-tag';
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -5916,289 +5915,6 @@ export type Trx2ByIdQueryVariables = Exact<{
 
 export type Trx2ByIdQuery = { __typename?: 'query_root', transactions_by_pk?: { __typename?: 'transactions', id: number, is_paid?: boolean | null | undefined, memo?: string | null | undefined, created_at?: any | null | undefined } | null | undefined };
 
-export const DetailsFragmentDoc = gql`
-    fragment details on clients {
-  id
-  first_name
-  last_name
-  email
-  phone
-  civilid
-  is_active
-}
-    `;
-export const LeasesDetailsFragmentDoc = gql`
-    fragment leasesDetails on leases {
-  id
-  deposit
-  end_date
-  is_expired
-  is_signed
-  license
-  monthly_rent
-  start_date
-  tenant_id
-  unit_id
-}
-    `;
-export const PropertiesDetailsFragmentDoc = gql`
-    fragment propertiesDetails on properties {
-  id
-  client_id
-  area
-  block
-  street
-  avenue
-  number
-  coordinates
-}
-    `;
-export const TenantsDetailsFragmentDoc = gql`
-    fragment tenantsDetails on tenants {
-  id
-  first_name
-  last_name
-  email
-  phone
-  dob
-  civilid
-  second_name
-  third_name
-}
-    `;
-export const TenantsCrumbsFragmentDoc = gql`
-    fragment tenantsCrumbs on tenants {
-  id
-  leases(order_by: {end_date: desc}, limit: 1) {
-    id
-    start_date
-    end_date
-    unit {
-      id
-      property {
-        id
-        client {
-          id
-        }
-      }
-    }
-  }
-}
-    `;
-export const UnitsDetailsFragmentDoc = gql`
-    fragment unitsDetails on units {
-  id
-  is_vacant
-  rent_market
-  size
-  type
-  unit_number
-  usage
-  bed
-  bath
-  floor
-  property_id
-  client_id_s
-}
-    `;
-export const ClientsInsertDocument = gql`
-    mutation ClientsInsert($object: clients_insert_input = {}) {
-  insert_clients_one(object: $object) {
-    ...details
-  }
-}
-    ${DetailsFragmentDoc}`;
-export const ClientsUpdateDocument = gql`
-    mutation ClientsUpdate($id: Int!, $_set: clients_set_input) {
-  update_clients_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    ...details
-  }
-}
-    ${DetailsFragmentDoc}`;
-export const DeleteClientsDocument = gql`
-    mutation DeleteClients($id: Int!) {
-  delete_clients_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const ClientsByIdDocument = gql`
-    query ClientsById($id: Int!) {
-  clients_by_pk(id: $id) {
-    ...details
-  }
-}
-    ${DetailsFragmentDoc}`;
-export const ClientsListDocument = gql`
-    query ClientsList($limit: Int, $offset: Int, $order_by: [clients_order_by!] = {}) {
-  clients(order_by: $order_by, limit: $limit, offset: $offset) {
-    ...details
-  }
-}
-    ${DetailsFragmentDoc}`;
-export const LeasesInsertDocument = gql`
-    mutation LeasesInsert($object: leases_insert_input = {}) {
-  insert_leases_one(object: $object) {
-    ...leasesDetails
-  }
-}
-    ${LeasesDetailsFragmentDoc}`;
-export const LeasesUpdateDocument = gql`
-    mutation LeasesUpdate($id: Int!, $_set: leases_set_input) {
-  update_leases_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    ...leasesDetails
-  }
-}
-    ${LeasesDetailsFragmentDoc}`;
-export const DeleteLeasesDocument = gql`
-    mutation DeleteLeases($id: Int!) {
-  delete_leases_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const LeasesByIdDocument = gql`
-    query LeasesById($id: Int!) {
-  leases_by_pk(id: $id) {
-    ...leasesDetails
-    unit {
-      id
-      client_id_s
-      property_id
-    }
-  }
-}
-    ${LeasesDetailsFragmentDoc}`;
-export const LeasesListDocument = gql`
-    query LeasesList($limit: Int, $offset: Int, $order_by: [leases_order_by!] = {}) {
-  leases(order_by: $order_by, limit: $limit, offset: $offset) {
-    ...leasesDetails
-  }
-}
-    ${LeasesDetailsFragmentDoc}`;
-export const PropertiesInsertDocument = gql`
-    mutation PropertiesInsert($object: properties_insert_input = {}) {
-  insert_properties_one(object: $object) {
-    ...propertiesDetails
-  }
-}
-    ${PropertiesDetailsFragmentDoc}`;
-export const PropertiesUpdateDocument = gql`
-    mutation PropertiesUpdate($id: Int!, $_set: properties_set_input) {
-  update_properties_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    ...propertiesDetails
-  }
-}
-    ${PropertiesDetailsFragmentDoc}`;
-export const DeletePropertiesDocument = gql`
-    mutation DeleteProperties($id: Int!) {
-  delete_properties_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const PropertiesByIdDocument = gql`
-    query PropertiesById($id: Int!) {
-  properties_by_pk(id: $id) {
-    ...propertiesDetails
-  }
-}
-    ${PropertiesDetailsFragmentDoc}`;
-export const PropertiesListDocument = gql`
-    query PropertiesList($limit: Int, $offset: Int, $order_by: [properties_order_by!] = {}) {
-  properties(order_by: $order_by, limit: $limit, offset: $offset) {
-    ...propertiesDetails
-  }
-}
-    ${PropertiesDetailsFragmentDoc}`;
-export const TenantsInsertDocument = gql`
-    mutation TenantsInsert($object: tenants_insert_input = {}) {
-  insert_tenants_one(object: $object) {
-    ...tenantsDetails
-  }
-}
-    ${TenantsDetailsFragmentDoc}`;
-export const TenantsUpdateDocument = gql`
-    mutation TenantsUpdate($id: Int!, $_set: tenants_set_input) {
-  update_tenants_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    ...tenantsDetails
-  }
-}
-    ${TenantsDetailsFragmentDoc}`;
-export const DeleteTenantsDocument = gql`
-    mutation DeleteTenants($id: Int!) {
-  delete_tenants_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const TenantsByIdDocument = gql`
-    query TenantsById($id: Int!) {
-  tenants_by_pk(id: $id) {
-    ...tenantsDetails
-  }
-}
-    ${TenantsDetailsFragmentDoc}`;
-export const TenantsListDocument = gql`
-    query TenantsList($limit: Int, $offset: Int, $order_by: [tenants_order_by!] = {}) {
-  tenants(order_by: $order_by, limit: $limit, offset: $offset) {
-    ...tenantsDetails
-  }
-}
-    ${TenantsDetailsFragmentDoc}`;
-export const UnitsInsertDocument = gql`
-    mutation UnitsInsert($object: units_insert_input = {}) {
-  insert_units_one(object: $object) {
-    ...unitsDetails
-  }
-}
-    ${UnitsDetailsFragmentDoc}`;
-export const UnitsUpdateDocument = gql`
-    mutation UnitsUpdate($id: Int!, $_set: units_set_input) {
-  update_units_by_pk(pk_columns: {id: $id}, _set: $_set) {
-    ...unitsDetails
-  }
-}
-    ${UnitsDetailsFragmentDoc}`;
-export const DeleteUnitsDocument = gql`
-    mutation DeleteUnits($id: Int!) {
-  delete_units_by_pk(id: $id) {
-    id
-  }
-}
-    `;
-export const UnitsByIdDocument = gql`
-    query UnitsById($id: Int!) {
-  units_by_pk(id: $id) {
-    ...unitsDetails
-  }
-}
-    ${UnitsDetailsFragmentDoc}`;
-export const UnitsListDocument = gql`
-    query UnitsList($limit: Int, $offset: Int, $order_by: [units_order_by!] = {}) {
-  units(order_by: $order_by, limit: $limit, offset: $offset) {
-    ...unitsDetails
-  }
-}
-    ${UnitsDetailsFragmentDoc}`;
-export const TrxByIdDocument = gql`
-    query TrxById($id: Int!) {
-  transactions_by_pk(id: $id) {
-    id
-    amount
-  }
-}
-    `;
-export const Trx2ByIdDocument = gql`
-    query Trx2ById($id: Int!) {
-  transactions_by_pk(id: $id) {
-    id
-    is_paid
-    memo
-    created_at
-  }
-}
-    `;
 export type ClientsInsertMutationStore = OperationStore<ClientsInsertMutation, ClientsInsertMutationVariables>;
 export type ClientsUpdateMutationStore = OperationStore<ClientsUpdateMutation, ClientsUpdateMutationVariables>;
 export type DeleteClientsMutationStore = OperationStore<DeleteClientsMutation, DeleteClientsMutationVariables>;
@@ -7640,3 +7356,36 @@ export type GraphCacheConfig = {
   resolvers?: GraphCacheResolvers,
   storage?: GraphCacheStorageAdapter
 };
+export const DetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"details"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"clients"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"civilid"}},{"kind":"Field","name":{"kind":"Name","value":"is_active"}}]}}]} as unknown as DocumentNode<DetailsFragment, unknown>;
+export const LeasesDetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"leasesDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"leases"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"deposit"}},{"kind":"Field","name":{"kind":"Name","value":"end_date"}},{"kind":"Field","name":{"kind":"Name","value":"is_expired"}},{"kind":"Field","name":{"kind":"Name","value":"is_signed"}},{"kind":"Field","name":{"kind":"Name","value":"license"}},{"kind":"Field","name":{"kind":"Name","value":"monthly_rent"}},{"kind":"Field","name":{"kind":"Name","value":"start_date"}},{"kind":"Field","name":{"kind":"Name","value":"tenant_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}}]}}]} as unknown as DocumentNode<LeasesDetailsFragment, unknown>;
+export const PropertiesDetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"propertiesDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"properties"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"client_id"}},{"kind":"Field","name":{"kind":"Name","value":"area"}},{"kind":"Field","name":{"kind":"Name","value":"block"}},{"kind":"Field","name":{"kind":"Name","value":"street"}},{"kind":"Field","name":{"kind":"Name","value":"avenue"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"}}]}}]} as unknown as DocumentNode<PropertiesDetailsFragment, unknown>;
+export const TenantsDetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"tenantsDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"tenants"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"dob"}},{"kind":"Field","name":{"kind":"Name","value":"civilid"}},{"kind":"Field","name":{"kind":"Name","value":"second_name"}},{"kind":"Field","name":{"kind":"Name","value":"third_name"}}]}}]} as unknown as DocumentNode<TenantsDetailsFragment, unknown>;
+export const TenantsCrumbsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"tenantsCrumbs"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"tenants"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"leases"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"end_date"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"start_date"}},{"kind":"Field","name":{"kind":"Name","value":"end_date"}},{"kind":"Field","name":{"kind":"Name","value":"unit"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"property"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"client"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<TenantsCrumbsFragment, unknown>;
+export const UnitsDetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"unitsDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"units"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_vacant"}},{"kind":"Field","name":{"kind":"Name","value":"rent_market"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"unit_number"}},{"kind":"Field","name":{"kind":"Name","value":"usage"}},{"kind":"Field","name":{"kind":"Name","value":"bed"}},{"kind":"Field","name":{"kind":"Name","value":"bath"}},{"kind":"Field","name":{"kind":"Name","value":"floor"}},{"kind":"Field","name":{"kind":"Name","value":"property_id"}},{"kind":"Field","name":{"kind":"Name","value":"client_id_s"}}]}}]} as unknown as DocumentNode<UnitsDetailsFragment, unknown>;
+export const ClientsInsertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ClientsInsert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"clients_insert_input"}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_clients_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"details"}}]}}]}},...DetailsFragmentDoc.definitions]} as unknown as DocumentNode<ClientsInsertMutation, ClientsInsertMutationVariables>;
+export const ClientsUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ClientsUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"clients_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_clients_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"details"}}]}}]}},...DetailsFragmentDoc.definitions]} as unknown as DocumentNode<ClientsUpdateMutation, ClientsUpdateMutationVariables>;
+export const DeleteClientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteClients"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_clients_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteClientsMutation, DeleteClientsMutationVariables>;
+export const ClientsByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ClientsById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clients_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"details"}}]}}]}},...DetailsFragmentDoc.definitions]} as unknown as DocumentNode<ClientsByIdQuery, ClientsByIdQueryVariables>;
+export const ClientsListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ClientsList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"clients_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clients"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"details"}}]}}]}},...DetailsFragmentDoc.definitions]} as unknown as DocumentNode<ClientsListQuery, ClientsListQueryVariables>;
+export const LeasesInsertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LeasesInsert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"leases_insert_input"}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_leases_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"leasesDetails"}}]}}]}},...LeasesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<LeasesInsertMutation, LeasesInsertMutationVariables>;
+export const LeasesUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LeasesUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"leases_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_leases_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"leasesDetails"}}]}}]}},...LeasesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<LeasesUpdateMutation, LeasesUpdateMutationVariables>;
+export const DeleteLeasesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteLeases"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_leases_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteLeasesMutation, DeleteLeasesMutationVariables>;
+export const LeasesByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LeasesById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"leases_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"leasesDetails"}},{"kind":"Field","name":{"kind":"Name","value":"unit"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"client_id_s"}},{"kind":"Field","name":{"kind":"Name","value":"property_id"}}]}}]}}]}},...LeasesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<LeasesByIdQuery, LeasesByIdQueryVariables>;
+export const LeasesListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LeasesList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"leases_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"leases"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"leasesDetails"}}]}}]}},...LeasesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<LeasesListQuery, LeasesListQueryVariables>;
+export const PropertiesInsertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PropertiesInsert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"properties_insert_input"}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_properties_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"propertiesDetails"}}]}}]}},...PropertiesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<PropertiesInsertMutation, PropertiesInsertMutationVariables>;
+export const PropertiesUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PropertiesUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"properties_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_properties_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"propertiesDetails"}}]}}]}},...PropertiesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<PropertiesUpdateMutation, PropertiesUpdateMutationVariables>;
+export const DeletePropertiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteProperties"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_properties_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeletePropertiesMutation, DeletePropertiesMutationVariables>;
+export const PropertiesByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PropertiesById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"properties_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"propertiesDetails"}}]}}]}},...PropertiesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<PropertiesByIdQuery, PropertiesByIdQueryVariables>;
+export const PropertiesListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PropertiesList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"properties_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"properties"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"propertiesDetails"}}]}}]}},...PropertiesDetailsFragmentDoc.definitions]} as unknown as DocumentNode<PropertiesListQuery, PropertiesListQueryVariables>;
+export const TenantsInsertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"TenantsInsert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"tenants_insert_input"}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_tenants_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"tenantsDetails"}}]}}]}},...TenantsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<TenantsInsertMutation, TenantsInsertMutationVariables>;
+export const TenantsUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"TenantsUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"tenants_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_tenants_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"tenantsDetails"}}]}}]}},...TenantsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<TenantsUpdateMutation, TenantsUpdateMutationVariables>;
+export const DeleteTenantsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteTenants"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_tenants_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteTenantsMutation, DeleteTenantsMutationVariables>;
+export const TenantsByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TenantsById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tenants_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"tenantsDetails"}}]}}]}},...TenantsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<TenantsByIdQuery, TenantsByIdQueryVariables>;
+export const TenantsListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TenantsList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"tenants_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tenants"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"tenantsDetails"}}]}}]}},...TenantsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<TenantsListQuery, TenantsListQueryVariables>;
+export const UnitsInsertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnitsInsert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"units_insert_input"}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_units_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"unitsDetails"}}]}}]}},...UnitsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<UnitsInsertMutation, UnitsInsertMutationVariables>;
+export const UnitsUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnitsUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_set"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"units_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_units_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_set"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"unitsDetails"}}]}}]}},...UnitsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<UnitsUpdateMutation, UnitsUpdateMutationVariables>;
+export const DeleteUnitsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteUnits"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_units_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteUnitsMutation, DeleteUnitsMutationVariables>;
+export const UnitsByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UnitsById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"units_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"unitsDetails"}}]}}]}},...UnitsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<UnitsByIdQuery, UnitsByIdQueryVariables>;
+export const UnitsListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UnitsList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"units_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"units"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order_by"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"unitsDetails"}}]}}]}},...UnitsDetailsFragmentDoc.definitions]} as unknown as DocumentNode<UnitsListQuery, UnitsListQueryVariables>;
+export const TrxByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TrxById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transactions_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}}]}}]} as unknown as DocumentNode<TrxByIdQuery, TrxByIdQueryVariables>;
+export const Trx2ByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Trx2ById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transactions_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_paid"}},{"kind":"Field","name":{"kind":"Name","value":"memo"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]} as unknown as DocumentNode<Trx2ByIdQuery, Trx2ByIdQueryVariables>;

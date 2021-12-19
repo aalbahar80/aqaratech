@@ -18,10 +18,11 @@ module.exports = {
 			plugins: [
 				'typescript',
 				'typescript-operations',
-				'typescript-urql',
+				// 'typescript-urql', // replaced with typed-document-node, make life easier
 				'urql-svelte-operations-store',
 				// https://github.com/FormidableLabs/urql/issues/901
-				'typescript-urql-graphcache'
+				'typescript-urql-graphcache',
+				'typed-document-node'
 			],
 			config: {
 				useTypeImports: true,
