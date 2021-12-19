@@ -104,6 +104,18 @@ const docs = {
 	list: list,
 	byId: byId
 };
+
+const all = {
+	title,
+	graphqlName,
+	graphqlNamePk,
+	docs: docs,
+	fieldList: fieldList,
+	key
+};
+
+export default all;
+
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get() {
 	return {

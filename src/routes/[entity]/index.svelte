@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page, fetch, session, stuff }) {
 		const entity = page.params.entity;
@@ -11,39 +11,36 @@
 			props: {
 				graphqlName,
 				docs,
-				fieldList,
-				key
+				fieldList
 			}
 		};
 	}
-</script>
-
+</script> -->
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { Field } from '$components/form/Field';
 	import IndexGeneric from '$components/IndexGeneric.svelte';
 	import NewTable from '$components/table/NewTable.svelte';
-	import TableGeneric from '$components/table/TableGeneric.svelte';
-	// import { key } from '$components/keyyy';
+	import ab from '$lib/mystuff/abc';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	export let graphqlName;
-	export let docs;
-	export let fieldList: Field[];
+	import { invalidate } from '$app/navigation';
 
-	let segmentVarsList = writable([3]);
-	setContext(graphqlName, {
-		getsvr: () => segmentVarsList
-	});
+	$: entity = $page.params.entity;
+	console.log('entity: ', $page.params.entity);
 
-	console.log('segmentVarsList', $segmentVarsList);
+	$: docs = ab[$page.params.entity].docs;
+	$: graphqlName = ab[$page.params.entity].graphqlName;
+	$: fieldList = ab[$page.params.entity].fieldList;
+	$: title = ab[$page.params.entity].title;
 </script>
 
 <svelte:head>
-	<title>{$page.params.entity}</title>
+	<title>{title}</title>
 </svelte:head>
 
 <IndexGeneric
+	{entity}
 	{graphqlName}
 	{fieldList}
 	listDoc={docs.list}
