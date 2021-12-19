@@ -23,6 +23,7 @@
     "@babel/core": "^7.16.5",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/gql-tag-operations-preset": "^1.2.1",
     "@graphql-codegen/introspection": "^2.1.0",
     "@graphql-codegen/named-operations-object": "^2.2.0",
     "@graphql-codegen/typed-document-node": "^2.2.1",

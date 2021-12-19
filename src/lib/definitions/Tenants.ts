@@ -1,4 +1,4 @@
-import { gql } from '@urql/svelte';
+import { gql } from '@urql/core';
 import { Field } from '$components/form/Field';
 import type { entity } from './types';
 
@@ -20,25 +20,25 @@ const tenantsDetailsFragment = gql`
 	}
 `;
 
-const tenantsCrumbsFragment = gql`
-	fragment tenantsCrumbs on tenants {
-		id
-		leases(order_by: { end_date: desc }, limit: 1) {
-			id
-			start_date
-			end_date
-			unit {
-				id
-				property {
-					id
-					client {
-						id
-					}
-				}
-			}
-		}
-	}
-`;
+// const tenantsCrumbsFragment = gql`
+// 	fragment tenantsCrumbs on tenants {
+// 		id
+// 		leases(order_by: { end_date: desc }, limit: 1) {
+// 			id
+// 			start_date
+// 			end_date
+// 			unit {
+// 				id
+// 				property {
+// 					id
+// 					client {
+// 						id
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// `;
 
 const insert = gql`
 	mutation TenantsInsert($object: tenants_insert_input = {}) {

@@ -15,7 +15,7 @@
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
 	import { TenantsByIdDocument } from '$generated/graphql';
-	import { operationStore, query } from '@urql/svelte';
+	import { gql, operationStore, query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import {
 		faUserCircle,
@@ -28,6 +28,7 @@
 	import { formatDateDiff, omit } from '$lib/utils';
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
+	import CrumbsTenant from '$components/breadcrumbs/CrumbsTenant.svelte';
 
 	const tenant = operationStore(TenantsByIdDocument, {
 		id: parseInt($page.params.id)
@@ -44,6 +45,8 @@
 	// };
 </script>
 
+<a class="btn btn-md" href={`/tenants/${parseInt($page.params.id) + 1}`}>next</a
+>
 {JSON.stringify($tenant)}
 <div class="flex justify-center">
 	<div class="grid grid-cols-2 gap-4 space-y-4 max-w-screen-2xl">
@@ -53,6 +56,7 @@
 			<p>Error: {$tenant.error.message}</p>
 		{:else}
 			<div class="col-span-full">
+				<CrumbsTenant id={$page.params.id} />
 				<!-- <BreadCrumbs {...crumbData} /> -->
 			</div>
 			<div

@@ -2010,6 +2010,13 @@ html {
   min-height: 2rem;
   font-size: .875rem;
 }
+.btn-md {
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: 3rem;
+  font-size: .875rem;
+}
 .btn-lg {
   height: 4rem;
   padding-left: 1.5rem;
@@ -2051,6 +2058,12 @@ html {
   height: 2rem;
   padding: 0;
   width: 2rem;
+}
+.btn-circle.btn-md {
+  border-radius: 9999px;
+  height: 3rem;
+  padding: 0;
+  width: 3rem;
 }
 .btn-circle.btn-lg {
   border-radius: 9999px;
