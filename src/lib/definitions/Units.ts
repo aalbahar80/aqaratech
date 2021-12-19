@@ -1,5 +1,6 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
+import type { entity } from './types';
 
 const title = 'Units';
 const graphqlName = 'units';
@@ -123,15 +124,11 @@ const docs = {
 	list: list,
 	byId: byId
 };
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
-	return {
-		body: {
-			title,
-			graphqlName,
-			graphqlNamePk,
-			docs: docs,
-			fieldList: fieldList
-		}
-	};
-}
+
+export default <entity>{
+	title,
+	graphqlName,
+	graphqlNamePk,
+	docs,
+	fieldList
+};

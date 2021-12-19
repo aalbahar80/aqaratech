@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { onMount } from 'svelte';
 	import auth from '$lib/services/auth';
 	import { isAuthenticated, user } from '$lib/stores/auth';
@@ -29,10 +29,9 @@
 	{#if $user.picture}
 		<img src={$user.picture} alt={user.name} />
 	{:else}
-		<!-- svelte-ignore a11y-img-redundant-alt -->
 		<img src="https://source.unsplash.com/random/400x300" alt="Random Photo" />
 	{/if}
 	<button class="btn btn-primary" on:click={logout}>Logout</button>
 {:else}
 	<button class="btn btn-primary" on:click={login}>Login</button>
-{/if}
+{/if} -->

@@ -4,8 +4,7 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Field } from '$components/form/Field';
-	import TableGeneric from './table/TableGeneric.svelte';
-	import ModalEdit from '$components/modal/ModalEdit.svelte';
+	import TableGeneric from '$components/table/TableGeneric.svelte';
 
 	export let graphqlName: string;
 	export let fieldList: Field[];

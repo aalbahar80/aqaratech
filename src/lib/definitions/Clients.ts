@@ -1,5 +1,6 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
+import type { entity } from './types';
 
 const title = 'Clients';
 const graphqlName = 'clients';
@@ -57,7 +58,7 @@ const list = gql`
 		$limit: Int
 		$offset: Int
 		$order_by: [clients_order_by!] = {}
-	) @cached {
+	) {
 		clients(order_by: $order_by, limit: $limit, offset: $offset) {
 			...details
 		}
@@ -85,8 +86,6 @@ const fieldList: Field[] = [
 	})
 ];
 
-const key = {};
-
 const docs = {
 	insert: insert,
 	update: update,
@@ -95,16 +94,14 @@ const docs = {
 	byId: byId
 };
 
-const all = {
+export default <entity>{
 	title,
 	graphqlName,
 	graphqlNamePk,
-	docs: docs,
-	fieldList: fieldList,
-	key
+	docs,
+	fieldList
 };
 
-export default all;
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get() {
 	return {
@@ -113,8 +110,7 @@ export async function get() {
 			graphqlName,
 			graphqlNamePk,
 			docs: docs,
-			fieldList: fieldList,
-			key
+			fieldList: fieldList
 		}
 	};
 }

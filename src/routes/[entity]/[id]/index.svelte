@@ -1,37 +1,16 @@
-<script context="module" lang="ts">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ page, fetch }) {
-		const entity = page.params.entity;
-		const url = `/${entity}.json`;
-		const response = await fetch(url);
-		const data = await response.json();
-		const { docs, fieldList, graphqlNamePk } = data;
-
-		return {
-			props: {
-				docs,
-				fieldList,
-				graphqlNamePk
-			}
-		};
-	}
-</script>
-
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { DocumentNode } from 'graphql';
-	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
-	export let docs;
-	export let graphqlNamePk: string;
+	import { operationStore, query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faPen } from '@fortawesome/free-solid-svg-icons';
+	import ref from '$lib/definitions/ref';
+
+	const entity = $page.params.entity;
+	const { docs, graphqlNamePk } = ref[entity];
 	const thing = operationStore(docs.byId, { id: $page.params.id });
 	query(thing);
 </script>
 
-generic index/id
-{JSON.stringify($thing)}
-{@debug $thing}
 {#if $thing.fetching}
 	<p>loading</p>
 {:else if $thing?.data[graphqlNamePk]}
