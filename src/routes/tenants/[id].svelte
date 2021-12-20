@@ -1,11 +1,18 @@
 <script context="module" lang="ts">
+	import * as gql from './_[id].gql';
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = ({ page }) => {
+	export const load: Load = async ({ page, stuff }) => {
 		const id = page.params.id;
 		if (id === 'add') {
 			return;
 		} else {
-			return {};
+			return {
+				props: {
+					ptenant: await stuff.query(gql.TenantsByIdLocalDocument, {
+						id
+					})
+				}
+			};
 		}
 	};
 </script>
@@ -14,7 +21,7 @@
 	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
 	import { TenantsByIdDocument } from '$generated/graphql';
-	import { gql, operationStore, query } from '@urql/svelte';
+	import { operationStore, query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import {
 		faUserCircle,
@@ -29,6 +36,8 @@
 	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
 	import CrumbsTenant from '$components/breadcrumbs/CrumbsTenant.svelte';
 
+	export let ptenant;
+	query(ptenant);
 	$: id = $page.params.id;
 	const tenant = operationStore(TenantsByIdDocument, {
 		id: parseInt(id)
@@ -49,14 +58,18 @@
 	// };
 </script>
 
+<br />
+{JSON.stringify($ptenant)}
+<br />
+<br />
+<br />
+
 {#key id}
 	<p>id is {id}</p>
 	<a sveltekit:prefetch class="btn btn-md" href={`/tenants/${parseInt(id) - 1}`}
 		>prev</a
 	>
-	<a sveltekit:prefetch class="btn btn-md" href={`/tenants/${parseInt(id) + 1}`}
-		>next</a
-	>
+	<a sveltekit:prefetch class="btn btn-md" href={`/tenants/2`}>next</a>
 	{JSON.stringify($tenant)}
 	<div class="flex justify-center">
 		<div class="grid grid-cols-2 gap-4 space-y-4 max-w-screen-2xl">

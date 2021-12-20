@@ -37,7 +37,7 @@
 {/if} -->
 
 {#if $PageQuery.data?.[graphqlName]}
-	{#each $PageQuery.data?.[graphqlName] as row}
+	{#each $PageQuery.data?.[graphqlName] as row (row.id)}
 		<tr class="hover">
 			{#each $_fieldList as { fieldName, visibile }}
 				{#if visibile}

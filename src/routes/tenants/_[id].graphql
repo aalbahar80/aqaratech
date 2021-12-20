@@ -1,0 +1,25 @@
+query TenantsByIdLocal($id: Int!) {
+	tenants_by_pk(id: $id) {
+		id
+		first_name
+		last_name
+		email
+		phone
+		dob
+		civilid
+		second_name
+		third_name
+	}
+}
+
+# fragment tenantsDetails on tenants {
+# 	id
+# 	first_name
+# 	last_name
+# 	email
+# 	phone
+# 	dob
+# 	civilid
+# 	second_name
+# 	third_name
+# }

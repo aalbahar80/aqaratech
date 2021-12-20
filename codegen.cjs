@@ -41,6 +41,42 @@ module.exports = {
 		// https://github.com/dotansimha/graphql-code-generator/blob/master/packages/plugins/other/urql-introspection/src/index.ts
 		'./src/NEWgraphql.schema.json': {
 			plugins: ['urql-introspection']
+		},
+		'./src': {
+			preset: 'near-operation-file',
+			presetConfig: {
+				baseTypesPath: './generated/graphql',
+				extension: '.gql.ts'
+			},
+			plugins: [
+				'typescript-operations',
+				'typed-document-node'
+			],
+			config: {
+				flattenGeneratedTypes: true,
+				useTypeImports: true,
+				useTypeImports: true,
+				enumsAsTypes: true,
+			  
+				omitOperationSuffix: true,
+				dedupeOperationSuffix: true,
+				exportFragmentSpreadSubTypes: true,
+				experimentalFragmentVariables: true,
+				addUnderscoreToArgsType: true,
+			  
+				// onlyOperationTypes: true,
+				preResolveTypes: true,
+			  
+				// namingConvention: 'keep',
+			  
+				// scalars:
+				//   UnsignedInt: number
+				//   URL: string
+				//   JSON: any # string | number | boolean | null | Array<Scalars['JSON']> | Scalars['JSONObject']
+				//   JSONObject: Record<string, any>
+				//   Date: string
+				//   DateTime: string
+			}
 		}
 	}
 };
