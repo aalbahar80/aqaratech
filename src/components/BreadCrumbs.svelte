@@ -9,6 +9,7 @@
 		faFolderOpen
 	} from '@fortawesome/free-solid-svg-icons';
 	// TODO: remove defaults
+	export let loading: boolean;
 	export let clientId: number;
 	export let propertyId: number;
 	export let unitId: number;
@@ -51,22 +52,26 @@
 	];
 </script>
 
-<div class="my-4 text-sm breadcrumbs">
-	<ul>
-		{#each crumbs as { title, href, icon, name }}
-			<li>
-				<a
-					{href}
-					class="link link-hover"
-					class:link-secondary={$page.path.startsWith(`/${name}`)}
-				>
-					<div class="mr-2">
-						<Fa {icon} />
-					</div>
+{#if loading}
+	<p>placeholder here</p>
+{:else}
+	<div class="my-4 text-sm breadcrumbs">
+		<ul>
+			{#each crumbs as { title, href, icon, name }}
+				<li>
+					<a
+						{href}
+						class="link link-hover"
+						class:link-secondary={$page.path.startsWith(`/${name}`)}
+					>
+						<div class="mr-2">
+							<Fa {icon} />
+						</div>
 
-					{title}
-				</a>
-			</li>
-		{/each}
-	</ul>
-</div>
+						{title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
