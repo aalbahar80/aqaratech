@@ -3027,6 +3027,11 @@
     resolve-from "^5.0.0"
     store2 "^2.12.0"
 
+"@sveltejs/adapter-static@^1.0.0-next.22":
+  version "1.0.0-next.22"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-static/-/adapter-static-1.0.0-next.22.tgz#d615cf419c902aba8383c18fd839c7679437bf06"
+  integrity sha512-Dc1V9Z72dA7caVwNxxzl9Jhcq4uN9N1udA2GKNTLMu3aWX3Cq+v6C2CddY9Aazr+F9h6J0vi9AienuH+ySRXzQ==
+
 "@sveltejs/adapter-vercel@next":
   version "1.0.0-next.32"
   resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.32.tgz#90a8c1078a477a81d16cfd0efb27e5df2dc90189"

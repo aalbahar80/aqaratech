@@ -68,7 +68,7 @@
 			stuff: {
 				...stuff,
 				client,
-				query: async (query, variables, context, normalize) => {
+				query: async (query, variables, context) => {
 					const store = operationStore(query, variables, context);
 					const result = await client
 						.query(store.query, store.variables, store.context)

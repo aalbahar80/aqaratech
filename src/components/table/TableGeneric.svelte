@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Order_By } from '../../generated/graphql';
+	import { order_by } from '$generated/graphql';
 	import ColumnToggle from '$components/table/ColumnToggle.svelte';
 	import SortIndicator from '$components/table/SortIndicator.svelte';
 	import BodySegmentGeneric from '$components/table/BodySegmentGeneric.svelte';
@@ -18,7 +18,7 @@
 	const isFetching: Writable<boolean> = getIsFetching();
 
 	const segmentSize = 40;
-	let sortingInfo: any = { id: Order_By.Asc };
+	let sortingInfo: any = { id: order_by.asc };
 	let segmentVarsList = [
 		{
 			limit: segmentSize,
@@ -36,14 +36,14 @@
 			// already sorting by this field
 			// just invert the direction
 			const direction =
-				sortingInfo[_fieldLabel] == Order_By.Desc
-					? Order_By.Asc
-					: Order_By.Desc;
+				sortingInfo[_fieldLabel] == order_by.desc
+					? order_by.asc
+					: order_by.desc;
 			sortingInfo = {
 				[_fieldLabel]: direction
 			};
 		} else {
-			sortingInfo = { [_fieldLabel]: Order_By.Asc };
+			sortingInfo = { [_fieldLabel]: order_by.asc };
 		}
 
 		// reassign segmentVarsList completely to trigger rerender

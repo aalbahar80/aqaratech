@@ -8,6 +8,11 @@
 	<title>Aqaratech Admin</title>
 </svelte:head>
 
+<a sveltekit:prefetch class="link" href={`/tenants/3`}>3 fixed</a>
+<a sveltekit:prefetch class="link" href={`/tenants/4`}>4 fixed</a>
+<a sveltekit:prefetch class="link" href={`/tenants/5`}>5 fixed</a>
+<a sveltekit:prefetch class="link" href={`/pholder`}>pholder</a>
+
 <div class="min-h-full hero bg-base-200">
 	<div class="text-center hero-content">
 		<div class="max-w-md">

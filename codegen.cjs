@@ -27,9 +27,10 @@ module.exports = {
 			config: {
 				useTypeImports: true,
 				// skipTypename: false,
-				withHooks: false
+				withHooks: false,
 				// withHOC: false,
 				// withComponent: false,
+				namingConvention: 'keep',
 			}
 		},
 		// OG introspection
@@ -67,7 +68,7 @@ module.exports = {
 				// onlyOperationTypes: true,
 				preResolveTypes: true,
 			  
-				// namingConvention: 'keep',
+				namingConvention: 'keep',
 			  
 				// scalars:
 				//   UnsignedInt: number
