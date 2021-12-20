@@ -39,6 +39,7 @@
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
 	import CrumbsTenant from '$components/breadcrumbs/CrumbsTenant.svelte';
+	import { prefetch } from '$app/navigation';
 
 	export let tenant;
 	export let id;
@@ -69,7 +70,9 @@
 >
 <a sveltekit:prefetch class="link" href={`/tenants/3`}>3 fixed</a>
 <a sveltekit:prefetch class="link" href={`/tenants/4`}>4 fixed</a>
-<a sveltekit:prefetch class="link" href={`/tenants/5`}>5 fixed</a>
+<button class="link" on:click={() => prefetch(`/tenants/3`)}>prefetch 3</button>
+<button class="link" on:click={() => prefetch(`/tenants/4`)}>prefetch 4</button>
+<button class="link" on:click={() => prefetch(`/tenants/5`)}>prefetch 5</button>
 {JSON.stringify($tenant)}
 <div class="flex justify-center">
 	<div class="grid grid-cols-2 gap-4 space-y-4 max-w-screen-2xl">
