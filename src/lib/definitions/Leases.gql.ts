@@ -2,7 +2,7 @@ import type * as Types from '../../generated/graphql';
 
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type LeasesInsertVariables = Types.Exact<{
-  object?: Types.InputMaybe<Types.Leases_Insert_Input>;
+  object?: Types.InputMaybe<Types.leases_insert_input>;
 }>;
 
 
@@ -10,7 +10,7 @@ export type LeasesInsert = { __typename?: 'mutation_root', insert_leases_one?: {
 
 export type LeasesUpdateVariables = Types.Exact<{
   id: Types.Scalars['Int'];
-  _set?: Types.InputMaybe<Types.Leases_Set_Input>;
+  _set?: Types.InputMaybe<Types.leases_set_input>;
 }>;
 
 
@@ -33,7 +33,7 @@ export type LeasesById = { __typename?: 'query_root', leases_by_pk?: { __typenam
 export type LeasesListVariables = Types.Exact<{
   limit?: Types.InputMaybe<Types.Scalars['Int']>;
   offset?: Types.InputMaybe<Types.Scalars['Int']>;
-  order_by?: Types.InputMaybe<Array<Types.Leases_Order_By> | Types.Leases_Order_By>;
+  order_by?: Types.InputMaybe<Array<Types.leases_order_by> | Types.leases_order_by>;
 }>;
 
 

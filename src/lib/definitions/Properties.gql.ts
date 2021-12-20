@@ -2,7 +2,7 @@ import type * as Types from '../../generated/graphql';
 
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type PropertiesInsertVariables = Types.Exact<{
-  object?: Types.InputMaybe<Types.Properties_Insert_Input>;
+  object?: Types.InputMaybe<Types.properties_insert_input>;
 }>;
 
 
@@ -10,7 +10,7 @@ export type PropertiesInsert = { __typename?: 'mutation_root', insert_properties
 
 export type PropertiesUpdateVariables = Types.Exact<{
   id: Types.Scalars['Int'];
-  _set?: Types.InputMaybe<Types.Properties_Set_Input>;
+  _set?: Types.InputMaybe<Types.properties_set_input>;
 }>;
 
 
@@ -33,7 +33,7 @@ export type PropertiesById = { __typename?: 'query_root', properties_by_pk?: { _
 export type PropertiesListVariables = Types.Exact<{
   limit?: Types.InputMaybe<Types.Scalars['Int']>;
   offset?: Types.InputMaybe<Types.Scalars['Int']>;
-  order_by?: Types.InputMaybe<Array<Types.Properties_Order_By> | Types.Properties_Order_By>;
+  order_by?: Types.InputMaybe<Array<Types.properties_order_by> | Types.properties_order_by>;
 }>;
 
 
