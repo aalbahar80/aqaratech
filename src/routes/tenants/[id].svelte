@@ -61,19 +61,6 @@
 </script>
 
 <!-- {#key id} -->
-<p>id is {id}</p>
-<a sveltekit:prefetch class="btn btn-md" href={`/tenants/${parseInt(id) - 1}`}
-	>prev</a
->
-<a sveltekit:prefetch class="btn btn-md" href={`/tenants/${parseInt(id) + 1}`}
-	>next</a
->
-<a sveltekit:prefetch class="link" href={`/tenants/3`}>3 fixed</a>
-<a sveltekit:prefetch class="link" href={`/tenants/4`}>4 fixed</a>
-<button class="link" on:click={() => prefetch(`/tenants/3`)}>prefetch 3</button>
-<button class="link" on:click={() => prefetch(`/tenants/4`)}>prefetch 4</button>
-<button class="link" on:click={() => prefetch(`/tenants/5`)}>prefetch 5</button>
-{JSON.stringify($tenant)}
 <div class="flex justify-center">
 	<div class="grid grid-cols-2 gap-4 space-y-4 max-w-screen-2xl">
 		{#if $tenant.fetching}
