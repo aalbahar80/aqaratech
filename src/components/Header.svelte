@@ -36,7 +36,7 @@
 	class="grid grid-flow-row grid-cols-2 py-2 shadow-lg lg:grid-cols-3 justify-items-center justify-self-stretch bg-neutral text-neutral-content"
 >
 	<div class="self-center px-4 justify-self-start">
-		<a href="/" class="text-lg font-bold ">Aqaratech</a>
+		<a href="/" class="text-lg font-bold ">RE Co</a>
 	</div>
 	<div class="hidden lg:flex">
 		{#each navLinkList as { href, name }}
@@ -73,7 +73,7 @@
 	>
 		<ul class="py-3 overflow-y-auto text-3xl menu text-base-content">
 			<li class="menu-title">
-				<span> Aqaratech </span>
+				<span> RE Co </span>
 			</li>
 			{#each navLinkList as { href, name }}
 				<li class:bordered={$page.path === href}>

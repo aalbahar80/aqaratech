@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Aqaratech Admin</title>
+	<title>RE Co Admin</title>
 </svelte:head>
 
 <a sveltekit:prefetch class="link" href={`/tenants/3`}>3 fixed</a>
