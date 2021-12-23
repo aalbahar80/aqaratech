@@ -57,6 +57,8 @@
     "@zerodevx/svelte-toast": "^0.6.2",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
+    "carbon-components-svelte": "^0.50.2",
+    "carbon-preprocess-svelte": "^0.6.0",
     "concurrently": "^6.4.0",
     "cross-env": "^7.0.3",
     "daisyui": "^1.16.5",

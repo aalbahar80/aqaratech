@@ -85,6 +85,8 @@
 
 <script lang="ts">
 	import '../styles/tailwind.css';
+	// import 'carbon-components-svelte/css/all.css';
+
 	import Wrapper from '../Wrapper.svelte';
 	import Header from '$components/Header.svelte';
 	import { onDestroy } from 'svelte';

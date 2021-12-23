@@ -36,7 +36,7 @@
 	class="grid grid-flow-row grid-cols-2 py-2 shadow-lg lg:grid-cols-3 justify-items-center justify-self-stretch bg-neutral text-neutral-content"
 >
 	<div class="self-center px-4 justify-self-start">
-		<a href="/" class="text-lg font-bold ">RE Co</a>
+		<a href="/" class="text-lg font-bold text-neutral-content">RE Co</a>
 	</div>
 	<div class="hidden lg:flex">
 		{#each navLinkList as { href, name }}

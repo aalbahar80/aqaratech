@@ -38,9 +38,9 @@
 	import { formatDateDiff, omit } from '$lib/utils';
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
-	import CrumbsTenant from '$components/breadcrumbs/CrumbsTenant.svelte';
+	import CrumbsCarbon from '$components/breadcrumbs/CrumbsCarbon.svelte';
 	import { prefetch } from '$app/navigation';
-
+	// import 'carbon-components-svelte/css/g100.css';
 	export let tenant;
 	export let id;
 	// const id = $page.params.id;
@@ -69,6 +69,7 @@
 			<p>Error: {$tenant.error.message}</p>
 		{:else}
 			<div class="col-span-full">
+				<CrumbsCarbon />
 				<!-- <CrumbsTenant {id} /> -->
 				<!-- <BreadCrumbs {...crumbData} /> -->
 			</div>

@@ -3,12 +3,18 @@ import path from 'path';
 // import vercel from '@sveltejs/adapter-vercel';
 // import adapter from '@sveltejs/adapter-static';
 import adapter from '@sveltejs/adapter-auto';
+import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
+import { elements } from "carbon-preprocess-svelte";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: preprocess(),
+	preprocess: [
+		preprocess(),
+		optimizeImports(),
+		// elements()
+	],
 
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
@@ -23,7 +29,8 @@ const config = {
 					$routes: path.resolve('./src/routes'),
 					$lib: path.resolve('./src/lib')
 				}
-			}
+			},
+			plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
 		}
 	}
 };

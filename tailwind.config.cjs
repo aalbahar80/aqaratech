@@ -9,6 +9,8 @@ module.exports = {
 		require('daisyui')
 	],
 	daisyui: {
-		themes: ['dracula', 'emerald']
+		themes: ['dracula', 'emerald'],
+		// themes: false
+		styled: false
 	}
 };
