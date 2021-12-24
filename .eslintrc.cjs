@@ -4,12 +4,17 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		'prettier',
 		'plugin:storybook/recommended',
-    'airbnb-base',
-    'airbnb-typescript/base',
+		'airbnb-base',
+		'airbnb-typescript/base',
 	],
+	rules: {
+		indent: 'off',
+		'no-tabs': 0,
+		'@typescript-eslint/indent': [2, 'tab'],
+	},
 	plugins: ['svelte3', '@typescript-eslint'],
 	ignorePatterns: ['*.cjs'],
 	overrides: [
@@ -24,8 +29,8 @@ module.exports = {
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2019,
-    project: './tsconfig.json',
-    extraFileExtensions: ['.svelte'],
+		project: './tsconfig.json',
+		extraFileExtensions: ['.svelte'],
 	},
 	env: {
 		browser: true,
