@@ -22,5 +22,5 @@ fetch('https://nov22test.hasura.app/v1/graphql', {
 	.then((result) => result.json())
 	.then(({ data }) => {
 		const minified = minifyIntrospectionQuery(getIntrospectedSchema(data));
-		fs.writeFileSync('./FROMSCRIPTschema.json', JSON.stringify(minified));
+		fs.writeFileSync('./src/FROMSCRIPTschema.json', JSON.stringify(minified));
 	});

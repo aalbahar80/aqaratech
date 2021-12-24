@@ -9473,6 +9473,11 @@ junk@^3.1.0:
   resolved "https://registry.yarnpkg.com/junk/-/junk-3.1.0.tgz#31499098d902b7e98c5d9b9c80f43457a88abfa1"
   integrity sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==
 
+just-capitalize@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/just-capitalize/-/just-capitalize-3.0.1.tgz#f8a78c2cca7bff5a3d71ac11c680f5d1cddc94a4"
+  integrity sha512-GPvagN7Y2IdNFdFh8wRtE0AoxjA+0zAOF+XS8i2Di+aNdTZ0SAb5bARqjklOxVgIUTBfTv6MqqrRmdGjnLbkQA==
+
 just-insert@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/just-insert/-/just-insert-3.0.1.tgz#8534a09551de42b9916f5ff8092838273f8b9c99"
