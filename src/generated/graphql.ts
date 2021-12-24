@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { OperationStore } from '@urql/svelte';
 import type {
 	Resolver as GraphCacheResolver,

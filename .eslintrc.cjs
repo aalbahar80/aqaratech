@@ -22,6 +22,14 @@ module.exports = {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
 		},
+		{
+			files: ['*.graphql'],
+			parser: '@graphql-eslint/eslint-plugin',
+			plugins: ['@graphql-eslint'],
+			rules: {
+				'@graphql-eslint/known-type-names': 'error',
+			},
+		},
 	],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),

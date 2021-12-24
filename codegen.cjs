@@ -16,6 +16,8 @@ module.exports = {
 	generates: {
 		'./src/generated/graphql.ts': {
 			plugins: [
+				{ add: { content: '/* eslint-disable */' } },
+
 				'typescript',
 				'typescript-operations',
 				// 'typescript-urql', // replaced with typed-document-node, make life easier
@@ -49,7 +51,11 @@ module.exports = {
 				baseTypesPath: './generated/graphql',
 				extension: '.gql.ts',
 			},
-			plugins: ['typescript-operations', 'typed-document-node'],
+			plugins: [
+				{ add: { content: '/* eslint-disable */' } },
+				'typescript-operations',
+				'typed-document-node',
+			],
 			config: {
 				flattenGeneratedTypes: true,
 				useTypeImports: true,
