@@ -18,7 +18,7 @@ export function formatDate(date: string): string {
 	return new Date(date).toLocaleDateString('en-US', {
 		month: 'short',
 		day: 'numeric',
-		year: 'numeric'
+		year: 'numeric',
 	});
 }
 
@@ -29,7 +29,8 @@ interface DateDiff {
 	fullText: string;
 }
 
-// define a function that takes an ISO date and returns the days remaining in days, or months, or years
+// define a function that takes an ISO date
+// returns the days remaining in days, or months, or years
 export function formatDateDiff(date: string): DateDiff {
 	const days = Math.abs(daysLeftFromISO(date));
 	if (days < 7) {
@@ -37,7 +38,7 @@ export function formatDateDiff(date: string): DateDiff {
 			pretext: 'in',
 			main: `${days}`,
 			unit: 'days',
-			fullText: `in ${days} days`
+			fullText: `in ${days} days`,
 		};
 	}
 	if (days > 6 && days < 30) {
@@ -45,7 +46,7 @@ export function formatDateDiff(date: string): DateDiff {
 			pretext: 'in',
 			main: `${Math.ceil(days / 7)}`,
 			unit: 'weeks',
-			fullText: `in ${Math.ceil(days / 7)} weeks`
+			fullText: `in ${Math.ceil(days / 7)} weeks`,
 		};
 	}
 	if (days > 29 && days < 365) {
@@ -53,7 +54,7 @@ export function formatDateDiff(date: string): DateDiff {
 			pretext: 'in',
 			main: `${Math.ceil(days / 30)}`,
 			unit: 'months',
-			fullText: `in ${Math.ceil(days / 30)} months`
+			fullText: `in ${Math.ceil(days / 30)} months`,
 		};
 	}
 
@@ -62,20 +63,20 @@ export function formatDateDiff(date: string): DateDiff {
 			pretext: 'in',
 			main: `${Math.ceil(days / 365)}`,
 			unit: 'years',
-			fullText: `in ${Math.ceil(days / 365)} years`
+			fullText: `in ${Math.ceil(days / 365)} years`,
 		};
 	}
 	return {
 		pretext: '',
 		main: '',
 		unit: '',
-		fullText: ``
+		fullText: ``,
 	};
 }
 // a function that omits a key from an object
 export function omit<T extends object, K extends keyof T>(
 	obj: T,
-	key: K
+	key: K,
 ): Omit<T, K> {
 	const { [key]: value, ...rest } = obj;
 	return rest;

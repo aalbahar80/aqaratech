@@ -6,10 +6,10 @@ module.exports = {
 				headers: {
 					// Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
 					'x-hasura-admin-secret':
-						'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd'
-				}
-			}
-		}
+						'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
+				},
+			},
+		},
 	],
 	documents: ['./src/**/*.graphql', './src/**/*.ts', './src/**/*.svelte'],
 	overwrite: true,
@@ -22,7 +22,7 @@ module.exports = {
 				'urql-svelte-operations-store',
 				// https://github.com/FormidableLabs/urql/issues/901
 				'typescript-urql-graphcache',
-				'typed-document-node'
+				'typed-document-node',
 			],
 			config: {
 				useTypeImports: true,
@@ -31,45 +31,42 @@ module.exports = {
 				// withHOC: false,
 				// withComponent: false,
 				namingConvention: 'keep',
-			}
+			},
 		},
 		// OG introspection
 		'./src/graphql.schema.json': {
-			plugins: ['introspection']
+			plugins: ['introspection'],
 		},
 		// not sure what's different than OG
 		// it doesn't seem to minify...?
 		// https://github.com/dotansimha/graphql-code-generator/blob/master/packages/plugins/other/urql-introspection/src/index.ts
 		'./src/NEWgraphql.schema.json': {
-			plugins: ['urql-introspection']
+			plugins: ['urql-introspection'],
 		},
 		'./src': {
 			preset: 'near-operation-file',
 			presetConfig: {
 				baseTypesPath: './generated/graphql',
-				extension: '.gql.ts'
+				extension: '.gql.ts',
 			},
-			plugins: [
-				'typescript-operations',
-				'typed-document-node'
-			],
+			plugins: ['typescript-operations', 'typed-document-node'],
 			config: {
 				flattenGeneratedTypes: true,
 				useTypeImports: true,
 				useTypeImports: true,
 				enumsAsTypes: true,
-			  
+
 				omitOperationSuffix: true,
 				dedupeOperationSuffix: true,
 				exportFragmentSpreadSubTypes: true,
 				experimentalFragmentVariables: true,
 				addUnderscoreToArgsType: true,
-			  
+
 				// onlyOperationTypes: true,
 				preResolveTypes: true,
-			  
+
 				namingConvention: 'keep',
-			  
+
 				// scalars:
 				//   UnsignedInt: number
 				//   URL: string
@@ -77,7 +74,10 @@ module.exports = {
 				//   JSONObject: Record<string, any>
 				//   Date: string
 				//   DateTime: string
-			}
-		}
-	}
+			},
+		},
+	},
+	hooks: {
+		afterAllFileWrite: ['prettier --write'],
+	},
 };
