@@ -5838,11 +5838,6 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-daisyui@^1.16.5:
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-1.16.5.tgz#f63680d7cc807379cd2e35afe3e6c4596cd7c902"
-  integrity sha512-34nXxyQ0M8CWv8OE8/+jEasBbw5pipBNgWkC4HVsOVDgZ0Y5jD7UgcvosOmm+pEBgZHWNze2Ocwi9NUDge6gHg==
-
 data-urls@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/data-urls/-/data-urls-2.0.0.tgz#156485a72963a970f5d5821aaf642bef2bf2db9b"
@@ -13488,11 +13483,6 @@ text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
-
-theme-change@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/theme-change/-/theme-change-2.0.2.tgz#142aa0669fde5ca7e625f5d3c09074ebb5bdb374"
-  integrity sha512-YvQqavf8nlGB3J7PdO0zLLhSLlgYhrqZL6By3FuzFIlWBsPTSPG/V98cHJllK3mmU97Jecei8XYiHalhy2umUw==
 
 throat@^6.0.1:
   version "6.0.1"

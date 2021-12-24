@@ -4,7 +4,6 @@
 	import { isAuthenticated, user } from '$lib/stores/auth';
 	import { goto } from '$app/navigation';
 	import type { Auth0Client } from '@auth0/auth0-spa-js';
-
 	let auth0Client: Auth0Client;
 
 	onMount(async () => {
@@ -29,7 +28,7 @@
 	{#if $user.picture}
 		<img src={$user.picture} alt={user.name} />
 	{:else}
-		<img src="https://source.unsplash.com/random/400x300" alt="Random Photo" />
+		<img src="https://source.unsplash.com/random/400x300" alt="Random" />
 	{/if}
 	<button class="btn btn-primary" on:click={logout}>Logout</button>
 {:else}
