@@ -92,6 +92,7 @@
 	import { onDestroy } from 'svelte';
 	import { setClient } from '@urql/svelte';
 	import type { Client } from '@urql/svelte';
+	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
 	export let client: Client;
 	setClient(client);
 
@@ -101,12 +102,15 @@
 </script>
 
 <Wrapper>
-	<div class="absolute inset-0">
-		<div class="flex flex-col h-screen">
-			<Header />
-			<main class="contents">
-				<slot />
-			</main>
-		</div>
-	</div>
+	<Header />
+	<Content>
+		<Grid>
+			<Row>
+				<Column>
+					<h1>Welcome</h1>
+					<slot />
+				</Column>
+			</Row>
+		</Grid>
+	</Content>
 </Wrapper>
