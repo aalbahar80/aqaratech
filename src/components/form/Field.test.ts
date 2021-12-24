@@ -6,20 +6,20 @@ describe('Field.addLinkField', () => {
 			new Field({ fieldName: 'id', title: 'ID', editable: false }),
 			new Field({
 				fieldName: 'first_name',
-				title: 'First Name'
+				title: 'First Name',
 			}),
 			new Field({
 				fieldName: 'last_name',
-				title: 'Last Name'
+				title: 'Last Name',
 			}),
 			new Field({
 				fieldName: 'email',
-				title: 'Email'
+				title: 'Email',
 			}),
 			new Field({
 				fieldName: 'phone',
-				title: 'Phone'
-			})
+				title: 'Phone',
+			}),
 		]);
 		expect(result).toStrictEqual([
 			new Field({
@@ -27,25 +27,25 @@ describe('Field.addLinkField', () => {
 				title: 'Details',
 				editable: false,
 				sortable: false,
-				hideable: true
+				hideable: true,
 			}),
 			new Field({ fieldName: 'id', title: 'ID', editable: false }),
 			new Field({
 				fieldName: 'first_name',
-				title: 'First Name'
+				title: 'First Name',
 			}),
 			new Field({
 				fieldName: 'last_name',
-				title: 'Last Name'
+				title: 'Last Name',
 			}),
 			new Field({
 				fieldName: 'email',
-				title: 'Email'
+				title: 'Email',
 			}),
 			new Field({
 				fieldName: 'phone',
-				title: 'Phone'
-			})
+				title: 'Phone',
+			}),
 		]);
 	});
 });

@@ -34,6 +34,9 @@ module.exports = {
 				// withComponent: false,
 				namingConvention: 'keep',
 			},
+			// hooks: {
+			// 	afterAllFileWrite: ['prettier --write', 'eslint --fix'],
+			// },
 		},
 		// OG introspection
 		'./src/graphql.schema.json': {
@@ -53,6 +56,7 @@ module.exports = {
 			},
 			plugins: [
 				{ add: { content: '/* eslint-disable */' } },
+
 				'typescript-operations',
 				'typed-document-node',
 			],
@@ -81,6 +85,9 @@ module.exports = {
 				//   Date: string
 				//   DateTime: string
 			},
+			// hooks: {
+			// 	afterAllFileWrite: ['prettier --write', 'eslint --fix'],
+			// },
 		},
 	},
 	hooks: {
