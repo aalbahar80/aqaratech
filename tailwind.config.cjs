@@ -4,13 +4,13 @@ module.exports = {
 		extend: {}
 	},
 	plugins: [
-		require('@tailwindcss/typography'),
+		// require('@tailwindcss/typography'),
 		// require('@tailwindcss/forms'),
-		require('daisyui')
+		// require('daisyui')
 	],
-	daisyui: {
-		themes: ['dracula', 'emerald'],
-		// themes: false
-		styled: false
-	}
+	// daisyui: {
+	// 	themes: ['dracula', 'emerald'],
+	// 	// themes: false
+	// 	styled: false
+	// }
 };
