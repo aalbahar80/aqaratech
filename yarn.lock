@@ -9473,6 +9473,11 @@ junk@^3.1.0:
   resolved "https://registry.yarnpkg.com/junk/-/junk-3.1.0.tgz#31499098d902b7e98c5d9b9c80f43457a88abfa1"
   integrity sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==
 
+just-insert@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/just-insert/-/just-insert-3.0.1.tgz#8534a09551de42b9916f5ff8092838273f8b9c99"
+  integrity sha512-p9f1efHbmdL4ddsrZuf+w0L5yHgPnpfLYLzD+rXX65+ZDJ5aGveUOqIfA1BcWuLbhACD461w2qlj/PMe6u6eFQ==
+
 just-throttle@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/just-throttle/-/just-throttle-2.3.1.tgz#ef4a0710073bb4b0faf7dad1bc4ccabaeec4d0e6"

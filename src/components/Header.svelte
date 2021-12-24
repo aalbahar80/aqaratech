@@ -10,10 +10,13 @@
 		SideNavMenuItem,
 		SideNavLink,
 		SideNavDivider,
-		SkipToContent
+		SkipToContent,
+		Theme
 	} from 'carbon-components-svelte';
+	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 
 	let isSideNavOpen = false;
+	let theme: CarbonTheme = 'g90';
 
 	const navLinkList = [
 		{ text: 'Clients', href: '/clients' },
@@ -38,6 +41,18 @@
 			<HeaderNavItem href="/" text="Link 2" />
 			<HeaderNavItem href="/" text="Link 3" />
 		</HeaderNavMenu>
+		<Theme
+			bind:theme
+			persist
+			persistKey="__carbon-theme"
+			render="select"
+			select={{
+				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
+				labelText: 'Select a theme',
+				// inline: true,
+				hideLabel: true
+			}}
+		/>
 		<HeaderNavItem href="/" text="Link 4" />
 	</HeaderNav>
 </Header>
