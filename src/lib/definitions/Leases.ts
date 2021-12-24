@@ -1,6 +1,7 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
 import type { entity } from './types';
+
 const title = 'Leases';
 const graphqlName = 'leases';
 const graphqlNamePk = 'leases_by_pk';

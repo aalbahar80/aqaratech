@@ -37,6 +37,12 @@ module.exports = {
 	],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
+		'import/resolver': {
+			typescript: {},
+			node: {
+				extensions: ['.js', '.jsx', '.ts', '.tsx'],
+			},
+		},
 	},
 	parserOptions: {
 		sourceType: 'module',
