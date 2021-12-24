@@ -1,7 +1,7 @@
 module.exports = {
 	content: ['./src/**/*.svelte'],
 	theme: {
-		extend: {}
+		extend: {},
 	},
 	plugins: [
 		// require('@tailwindcss/typography'),

@@ -4,7 +4,7 @@
 	import { v } from '$lib/Validations';
 	import {
 		svelteReporter as reporter,
-		ValidationMessage
+		ValidationMessage,
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
@@ -31,7 +31,7 @@
 			if (existing) {
 				await updateMutation({
 					id: existing.id,
-					_set: values
+					_set: values,
 				});
 				successToast('Success');
 			} else {
@@ -54,11 +54,11 @@
 		validate,
 		data,
 		errors,
-		isDirty
+		isDirty,
 	} = createForm({
 		extend: [validator, reporter],
 		validateSchema: v[entity] || v.fallback,
-		onSubmit: handleForm
+		onSubmit: handleForm,
 	});
 </script>
 

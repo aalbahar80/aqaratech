@@ -33,7 +33,7 @@
 		propertyId: $crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.property?.id,
 		unitId: $crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.id,
 		leaseId: $crumbs?.data?.tenants_by_pk?.leases[0]?.id,
-		tenantId: $crumbs?.data?.tenants_by_pk?.id
+		tenantId: $crumbs?.data?.tenants_by_pk?.id,
 	};
 
 	$: loading = $crumbs.fetching || $crumbs.stale;

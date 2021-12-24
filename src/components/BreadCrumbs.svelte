@@ -6,7 +6,7 @@
 		faDoorOpen,
 		faFileSignature,
 		faUser,
-		faFolderOpen
+		faFolderOpen,
 	} from '@fortawesome/free-solid-svg-icons';
 	// TODO: remove defaults
 	export let loading: boolean;
@@ -23,32 +23,32 @@
 			name: 'clients',
 			title: 'Client',
 			href: `/clients/${clientId}`,
-			icon: faFolderOpen
+			icon: faFolderOpen,
 		},
 		{
 			name: 'properties',
 			title: 'Property',
 			href: `/properties/${propertyId}`,
-			icon: faBuilding
+			icon: faBuilding,
 		},
 		{
 			name: 'units',
 			title: 'Unit',
 			href: `/units/${unitId}`,
-			icon: faDoorOpen
+			icon: faDoorOpen,
 		},
 		{
 			name: 'leases',
 			title: 'Lease',
 			href: `/leases/${leaseId}`,
-			icon: faFileSignature
+			icon: faFileSignature,
 		},
 		{
 			name: 'tenants',
 			title: 'Tenant',
 			href: `/tenants/${tenantId}`,
-			icon: faUser
-		}
+			icon: faUser,
+		},
 	];
 </script>
 

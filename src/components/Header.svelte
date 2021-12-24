@@ -11,7 +11,7 @@
 		SideNavLink,
 		SideNavDivider,
 		SkipToContent,
-		Theme
+		Theme,
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 
@@ -23,7 +23,7 @@
 		{ text: 'Properties', href: '/properties' },
 		{ text: 'Units', href: '/units' },
 		{ text: 'Leases', href: '/leases' },
-		{ text: 'Tenants', href: '/tenants' }
+		{ text: 'Tenants', href: '/tenants' },
 	];
 </script>
 
@@ -50,7 +50,7 @@
 				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
 				labelText: 'Select a theme',
 				// inline: true,
-				hideLabel: true
+				hideLabel: true,
 			}}
 		/>
 		<HeaderNavItem href="/" text="Link 4" />

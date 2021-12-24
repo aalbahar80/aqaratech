@@ -10,7 +10,7 @@
 		OverflowMenu,
 		OverflowMenuItem,
 		Pagination,
-		DataTableSkeleton
+		DataTableSkeleton,
 	} from 'carbon-components-svelte';
 	import { order_by } from '$generated/graphql';
 	import type { Field } from '$components/form/Field';
@@ -31,13 +31,13 @@
 	const headers: DataTableHeader[] = insert(
 		$_fieldList.map((v) => ({
 			key: v.fieldName,
-			value: v.title
+			value: v.title,
 		})),
 		{
 			key: 'overflow',
-			empty: true
+			empty: true,
 		},
-		99
+		99,
 	);
 
 	const pageSizes = [10, 25, 100];
@@ -47,7 +47,7 @@
 	$: queryVars = {
 		limit: pageSize,
 		offset: (pageIndex - 1) * pageSize,
-		order_by: sortingInfo
+		order_by: sortingInfo,
 	};
 
 	$: PageQuery.variables = queryVars;

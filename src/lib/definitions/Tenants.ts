@@ -92,28 +92,28 @@ const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'first_name',
 		title: 'First Name',
-		inputType: 'text'
+		inputType: 'text',
 	}),
 	new Field({
 		fieldName: 'last_name',
 		title: 'Last Name',
-		inputType: 'text'
+		inputType: 'text',
 	}),
 	new Field({
 		fieldName: 'email',
 		title: 'Email',
-		inputType: 'email'
+		inputType: 'email',
 	}),
 	new Field({
 		fieldName: 'phone',
 		title: 'Phone',
-		inputType: 'tel'
-	})
+		inputType: 'tel',
+	}),
 ];
 
 const docs = {
@@ -121,7 +121,7 @@ const docs = {
 	update: update,
 	del: deleteQuery,
 	list: list,
-	byId: byId
+	byId: byId,
 };
 
 export default <entity>{
@@ -129,5 +129,5 @@ export default <entity>{
 	graphqlName,
 	graphqlNamePk,
 	docs,
-	fieldList
+	fieldList,
 };

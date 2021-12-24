@@ -5,8 +5,8 @@
 		const todo = await res.json();
 		return {
 			props: {
-				todo
-			}
+				todo,
+			},
 		};
 	};
 </script>

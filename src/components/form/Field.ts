@@ -39,9 +39,9 @@ export class Field {
 				title: 'Details',
 				editable: false,
 				sortable: false,
-				hideable: true
+				hideable: true,
 			}),
-			...fieldList
+			...fieldList,
 		];
 	}
 }

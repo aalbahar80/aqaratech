@@ -75,49 +75,49 @@ const fieldList = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'is_vacant',
 		title: 'Vacant?',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'rent_market',
 		title: 'Market Rent',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'size',
 		title: 'Size m²',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'type',
-		title: 'Type'
+		title: 'Type',
 	}),
 	new Field({
 		fieldName: 'unit_number',
-		title: 'Number'
+		title: 'Number',
 	}),
 	new Field({
 		fieldName: 'usage',
-		title: 'Usage'
+		title: 'Usage',
 	}),
 	new Field({
 		fieldName: 'bed',
 		title: 'Beds',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'bath',
 		title: 'Baths',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'floor',
-		title: 'Floor'
-	})
+		title: 'Floor',
+	}),
 ];
 
 const docs = {
@@ -125,7 +125,7 @@ const docs = {
 	update: update,
 	del: deleteQuery,
 	list: list,
-	byId: byId
+	byId: byId,
 };
 
 export default <entity>{
@@ -133,5 +133,5 @@ export default <entity>{
 	graphqlName,
 	graphqlNamePk,
 	docs,
-	fieldList
+	fieldList,
 };

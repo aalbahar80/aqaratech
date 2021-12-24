@@ -10,10 +10,10 @@
 			return {
 				props: {
 					tenant: await stuff.query(gql.TenantsByIdLocalDocument, {
-						id
+						id,
 					}),
-					id
-				}
+					id,
+				},
 			};
 		}
 	};
@@ -33,7 +33,7 @@
 		faPhone,
 		faIdCard,
 		faBirthdayCake,
-		faPen
+		faPen,
 	} from '@fortawesome/free-solid-svg-icons';
 	import { formatDateDiff, omit } from '$lib/utils';
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';

@@ -4,7 +4,7 @@ import path from 'path';
 // import adapter from '@sveltejs/adapter-static';
 import adapter from '@sveltejs/adapter-auto';
 import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
-import { elements } from "carbon-preprocess-svelte";
+import { elements } from 'carbon-preprocess-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -27,12 +27,12 @@ const config = {
 					$components: path.resolve('./src/components'),
 					$generated: path.resolve('./src/generated'),
 					$routes: path.resolve('./src/routes'),
-					$lib: path.resolve('./src/lib')
-				}
+					$lib: path.resolve('./src/lib'),
+				},
 			},
 			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
-		}
-	}
+		},
+	},
 };
 
 export default config;

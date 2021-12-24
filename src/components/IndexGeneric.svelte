@@ -21,7 +21,7 @@
 		getGraphQlName: () => graphqlName,
 		getListDoc: () => listDoc,
 		getDeleteDoc: () => deleteDoc,
-		getIsFetching: () => isFetchingStore
+		getIsFetching: () => isFetchingStore,
 	});
 </script>
 

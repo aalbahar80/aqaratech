@@ -39,9 +39,9 @@
 					},
 					maintenance_orders_by_pk: (parent, args, cache, info) => {
 						return { __typename: 'maintenance_orders', id: args.id };
-					}
-				}
-			}
+					},
+				},
+			},
 		});
 
 		const client = await createClient({
@@ -60,8 +60,8 @@
 				dedupExchange,
 				cache,
 				//ssr,
-				fetchExchange
-			]
+				fetchExchange,
+			],
 		});
 
 		return {
@@ -76,9 +76,9 @@
 					Object.assign(get(store), result);
 
 					return store;
-				}
+				},
 			},
-			props: { client }
+			props: { client },
 		};
 	};
 </script>

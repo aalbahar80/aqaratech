@@ -4,7 +4,7 @@ import * as fs from 'fs';
 
 import {
 	getIntrospectedSchema,
-	minifyIntrospectionQuery
+	minifyIntrospectionQuery,
 } from '@urql/introspection';
 
 fetch('https://nov22test.hasura.app/v1/graphql', {
@@ -12,12 +12,12 @@ fetch('https://nov22test.hasura.app/v1/graphql', {
 	headers: {
 		'Content-Type': 'application/json',
 		'x-hasura-admin-secret':
-			'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd'
+			'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
 	},
 	body: JSON.stringify({
 		variables: {},
-		query: getIntrospectionQuery({ descriptions: false })
-	})
+		query: getIntrospectionQuery({ descriptions: false }),
+	}),
 })
 	.then((result) => result.json())
 	.then(({ data }) => {

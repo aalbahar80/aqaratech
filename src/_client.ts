@@ -3,7 +3,7 @@ import {
 	initClient,
 	dedupExchange,
 	ssrExchange,
-	fetchExchange
+	fetchExchange,
 } from '@urql/svelte';
 import { devtoolsExchange } from '@urql/devtools';
 import rawSchema from './FROMSCRIPTschema.json';
@@ -42,9 +42,9 @@ const cache = cacheExchange<GraphCacheConfig>({
 			},
 			maintenance_orders_by_pk: (parent, args, cache, info) => {
 				return { __typename: 'maintenance_orders', id: args.id };
-			}
-		}
-	}
+			},
+		},
+	},
 });
 
 export default createClient({
@@ -52,16 +52,16 @@ export default createClient({
 	fetchOptions: {
 		headers: {
 			'x-hasura-admin-secret':
-				'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd'
-		}
+				'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
+		},
 	},
 	exchanges: [
 		// devtoolsExchange,
 		dedupExchange,
 		cache,
 		//ssr,
-		fetchExchange
-	]
+		fetchExchange,
+	],
 	// maskTypename: true,
 	// requestPolicy: 'cache-and-network'
 });

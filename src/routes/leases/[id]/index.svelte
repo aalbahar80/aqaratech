@@ -23,7 +23,7 @@
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 
 	const lease = operationStore(LeasesByIdDocument, {
-		id: parseInt($page.params.id)
+		id: parseInt($page.params.id),
 	});
 	query(lease);
 	$: result = $lease?.data?.leases_by_pk;
@@ -32,7 +32,7 @@
 		propertyId: $lease?.data?.leases_by_pk?.unit?.property_id,
 		unitId: $lease?.data?.leases_by_pk?.unit_id,
 		leaseId: $lease?.data?.leases_by_pk?.id,
-		tenantId: $lease?.data?.leases_by_pk?.tenant_id
+		tenantId: $lease?.data?.leases_by_pk?.tenant_id,
 	};
 
 	let loading = false;

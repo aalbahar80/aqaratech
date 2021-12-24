@@ -71,29 +71,29 @@ const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'area',
-		title: 'Area'
+		title: 'Area',
 	}),
 	new Field({
 		fieldName: 'block',
-		title: 'Block'
+		title: 'Block',
 	}),
 	new Field({
 		fieldName: 'street',
-		title: 'St'
+		title: 'St',
 	}),
 	new Field({
 		fieldName: 'avenue',
 		title: 'Ave',
-		visibile: false
+		visibile: false,
 	}),
 	new Field({
 		fieldName: 'number',
-		title: 'Number'
-	})
+		title: 'Number',
+	}),
 ];
 
 const docs = {
@@ -101,7 +101,7 @@ const docs = {
 	update: update,
 	del: deleteQuery,
 	list: list,
-	byId: byId
+	byId: byId,
 };
 
 export default <entity>{
@@ -109,5 +109,5 @@ export default <entity>{
 	graphqlName,
 	graphqlNamePk,
 	docs,
-	fieldList
+	fieldList,
 };

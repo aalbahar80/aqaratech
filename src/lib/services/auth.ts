@@ -6,7 +6,7 @@ import config from '$lib/config/auth_config';
 async function createClient() {
 	const auth0Client = await createAuth0Client({
 		domain: config.domain,
-		client_id: config.clientId
+		client_id: config.clientId,
 	});
 
 	return auth0Client;
@@ -35,7 +35,7 @@ function logout(client) {
 const auth = {
 	createClient,
 	loginWithPopup,
-	logout
+	logout,
 };
 
 export default auth;

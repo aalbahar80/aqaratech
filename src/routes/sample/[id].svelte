@@ -3,15 +3,15 @@
 	import {
 		Trx2ByIdQuery,
 		Trx2ByIdQueryVariables,
-		Trx2ByIdDocument
+		Trx2ByIdDocument,
 	} from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 
 	const trx2 = operationStore<Trx2ByIdQuery, Trx2ByIdQueryVariables>(
 		Trx2ByIdDocument,
 		{
-			id: parseInt($page.params.id)
-		}
+			id: parseInt($page.params.id),
+		},
 	);
 	query(trx2);
 </script>

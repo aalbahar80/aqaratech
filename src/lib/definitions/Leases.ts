@@ -78,52 +78,52 @@ const fieldList = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'start_date',
 		title: 'Start',
-		inputType: 'date'
+		inputType: 'date',
 	}),
 	new Field({
 		fieldName: 'end_date',
 		title: 'End',
-		inputType: 'date'
+		inputType: 'date',
 	}),
 	new Field({
 		fieldName: 'is_expired',
 		title: 'Expired?',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'is_signed',
 		title: 'Signed?',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'monthly_rent',
 		title: 'Rent (KD)',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'deposit',
 		title: 'Deposit (KD)',
-		inputType: 'number'
+		inputType: 'number',
 	}),
 	new Field({
 		fieldName: 'license',
-		title: 'License'
+		title: 'License',
 	}),
 	new Field({
 		fieldName: 'Lease_id',
 		title: 'Lease ID',
-		editable: false
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'unit_id',
 		title: 'Unit ID',
-		editable: false
-	})
+		editable: false,
+	}),
 ];
 
 const docs = {
@@ -131,7 +131,7 @@ const docs = {
 	update: update,
 	del: deleteQuery,
 	list: list,
-	byId: byId
+	byId: byId,
 };
 
 export default <entity>{
@@ -139,5 +139,5 @@ export default <entity>{
 	graphqlName,
 	graphqlNamePk,
 	docs,
-	fieldList
+	fieldList,
 };

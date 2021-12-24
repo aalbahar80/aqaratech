@@ -18,7 +18,7 @@
 			first_name: 'Mohammad',
 			last_name: 'Salah',
 			email: 'moSalah@gmail.com',
-			phone: '12345678'
+			phone: '12345678',
 		}}
 	/>
 </Story>
@@ -30,7 +30,7 @@
 			first_name: 'iwillfail',
 			last_name: 'Salah',
 			email: 'moSalah@gmail.com',
-			phone: '12345678'
+			phone: '12345678',
 		}}
 	/>
 </Story>
