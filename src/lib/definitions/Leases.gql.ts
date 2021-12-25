@@ -86,8 +86,17 @@ export type LeasesById = {
 					| {
 							__typename?: 'units';
 							id: number;
-							client_id_s?: number | null | undefined;
-							property_id?: number | null | undefined;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client?:
+											| { __typename?: 'clients'; id: number }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
 					  }
 					| null
 					| undefined;
@@ -367,11 +376,29 @@ export const LeasesByIdDocument = {
 											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 											{
 												kind: 'Field',
-												name: { kind: 'Name', value: 'client_id_s' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'property_id' },
+												name: { kind: 'Name', value: 'property' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'id' },
+														},
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'client' },
+															selectionSet: {
+																kind: 'SelectionSet',
+																selections: [
+																	{
+																		kind: 'Field',
+																		name: { kind: 'Name', value: 'id' },
+																	},
+																],
+															},
+														},
+													],
+												},
 											},
 										],
 									},

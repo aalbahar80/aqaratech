@@ -28,8 +28,8 @@
 	query(lease);
 	$: result = $lease?.data?.leases_by_pk;
 	$: crumbData = {
-		clientId: $lease?.data?.leases_by_pk?.unit?.client_id_s,
-		propertyId: $lease?.data?.leases_by_pk?.unit?.property_id,
+		clientId: $lease?.data?.leases_by_pk?.unit?.property?.client?.id,
+		propertyId: $lease?.data?.leases_by_pk?.unit?.property?.id,
 		unitId: $lease?.data?.leases_by_pk?.unit_id,
 		leaseId: $lease?.data?.leases_by_pk?.id,
 		tenantId: $lease?.data?.leases_by_pk?.tenant_id,

@@ -19,7 +19,6 @@ const unitsDetailsFragment = gql`
 		bath
 		floor
 		property_id
-		client_id_s
 	}
 `;
 

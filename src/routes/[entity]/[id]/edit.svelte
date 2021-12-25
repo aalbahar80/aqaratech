@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import AddGeneric from '$components/AddGeneric.svelte';
+	import AddC from '$components/AddC.svelte';
 	import ref from '$lib/definitions/ref';
 	import { operationStore, query } from '@urql/svelte';
 
@@ -17,7 +17,7 @@
 {:else if $thing.error}
 	<p>Error: {$thing.error.message}</p>
 {:else}
-	<AddGeneric
+	<AddC
 		{fieldList}
 		{entity}
 		existing={$thing.data[graphqlNamePk]}

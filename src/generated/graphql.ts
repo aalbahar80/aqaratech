@@ -4620,8 +4620,6 @@ export type units = {
 	__typename?: 'units';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
-	/** A computed field, executes function "client_id" */
-	client_id_s?: Maybe<Scalars['Int']>;
 	/** fetch data from the table: "expenses" */
 	expenses: Array<expenses>;
 	/** An aggregate relationship */
@@ -4803,7 +4801,6 @@ export type units_bool_exp = {
 	_or?: InputMaybe<Array<units_bool_exp>>;
 	bath?: InputMaybe<numeric_comparison_exp>;
 	bed?: InputMaybe<numeric_comparison_exp>;
-	client_id_s?: InputMaybe<Int_comparison_exp>;
 	expenses?: InputMaybe<expenses_bool_exp>;
 	floor?: InputMaybe<String_comparison_exp>;
 	id?: InputMaybe<Int_comparison_exp>;
@@ -4940,7 +4937,6 @@ export type units_on_conflict = {
 export type units_order_by = {
 	bath?: InputMaybe<order_by>;
 	bed?: InputMaybe<order_by>;
-	client_id_s?: InputMaybe<order_by>;
 	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
 	floor?: InputMaybe<order_by>;
 	id?: InputMaybe<order_by>;
@@ -5741,8 +5737,17 @@ export type LeasesByIdQuery = {
 					| {
 							__typename?: 'units';
 							id: number;
-							client_id_s?: number | null | undefined;
-							property_id?: number | null | undefined;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client?:
+											| { __typename?: 'clients'; id: number }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
 					  }
 					| null
 					| undefined;
@@ -6016,7 +6021,6 @@ export type unitsDetailsFragment = {
 	bath?: any | null | undefined;
 	floor?: string | null | undefined;
 	property_id?: number | null | undefined;
-	client_id_s?: number | null | undefined;
 };
 
 export type UnitsInsertMutationVariables = Exact<{
@@ -6039,7 +6043,6 @@ export type UnitsInsertMutation = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -6066,7 +6069,6 @@ export type UnitsUpdateMutation = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -6101,7 +6103,6 @@ export type UnitsByIdQuery = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -6128,7 +6129,6 @@ export type UnitsListQuery = {
 		bath?: any | null | undefined;
 		floor?: string | null | undefined;
 		property_id?: number | null | undefined;
-		client_id_s?: number | null | undefined;
 	}>;
 };
 
@@ -10027,11 +10027,6 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['numeric'] | string
 		>;
-		client_id_s?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
 		expenses?: GraphCacheResolver<
 			WithTypename<units>,
 			unitsExpensesArgs,
@@ -11760,7 +11755,6 @@ export const unitsDetailsFragmentDoc = {
 					{ kind: 'Field', name: { kind: 'Name', value: 'bath' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'floor' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'property_id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'client_id_s' } },
 				],
 			},
 		},
@@ -12317,11 +12311,29 @@ export const LeasesByIdDocument = {
 											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 											{
 												kind: 'Field',
-												name: { kind: 'Name', value: 'client_id_s' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'property_id' },
+												name: { kind: 'Name', value: 'property' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'id' },
+														},
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'client' },
+															selectionSet: {
+																kind: 'SelectionSet',
+																selections: [
+																	{
+																		kind: 'Field',
+																		name: { kind: 'Name', value: 'id' },
+																	},
+																],
+															},
+														},
+													],
+												},
 											},
 										],
 									},

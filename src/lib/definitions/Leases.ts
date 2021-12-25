@@ -53,8 +53,12 @@ const byId = gql`
 			...leasesDetails
 			unit {
 				id
-				client_id_s
-				property_id
+				property {
+					id
+					client {
+						id
+					}
+				}
 			}
 		}
 	}

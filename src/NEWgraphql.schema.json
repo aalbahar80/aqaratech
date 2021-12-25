@@ -12472,14 +12472,6 @@
 						"args": []
 					},
 					{
-						"name": "client_id_s",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "expenses",
 						"type": {
 							"kind": "NON_NULL",

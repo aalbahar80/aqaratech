@@ -101,16 +101,7 @@
 	});
 </script>
 
-<Wrapper>
-	<Header />
-	<Content>
-		<Grid>
-			<Row>
-				<Column>
-					<h1>Welcome</h1>
-					<slot />
-				</Column>
-			</Row>
-		</Grid>
-	</Content>
-</Wrapper>
+<Header />
+<Content>
+	<slot />
+</Content>

@@ -34169,18 +34169,6 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "client_id_s",
-						"description": "A computed field, executes function \"client_id\"",
-						"args": [],
-						"type": {
-							"kind": "SCALAR",
-							"name": "Int",
-							"ofType": null
-						},
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
 						"name": "expenses",
 						"description": "fetch data from the table: \"expenses\"",
 						"args": [
@@ -35752,18 +35740,6 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "client_id_s",
-						"description": null,
-						"type": {
-							"kind": "INPUT_OBJECT",
-							"name": "Int_comparison_exp",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
 						"name": "expenses",
 						"description": null,
 						"type": {
@@ -36924,18 +36900,6 @@
 					},
 					{
 						"name": "bed",
-						"description": null,
-						"type": {
-							"kind": "ENUM",
-							"name": "order_by",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "client_id_s",
 						"description": null,
 						"type": {
 							"kind": "ENUM",

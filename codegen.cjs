@@ -1,13 +1,13 @@
 module.exports = {
 	schema: [
 		{
-			'https://nov22test.hasura.app/v1/graphql': {
+			'https://hasura-xf70.onrender.com/v1/graphql': {
 				// 'https://nov22test.hasura.app/v1beta1/relay': {
-				headers: {
-					// Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
-					'x-hasura-admin-secret':
-						'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
-				},
+				// headers: {
+				// 	// Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
+				// 	'x-hasura-admin-secret':
+				// 		'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
+				// },
 			},
 		},
 	],

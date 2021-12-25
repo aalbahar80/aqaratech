@@ -22,7 +22,6 @@ export type UnitsInsert = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -49,7 +48,6 @@ export type UnitsUpdate = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -84,7 +82,6 @@ export type UnitsById = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
-				client_id_s?: number | null | undefined;
 		  }
 		| null
 		| undefined;
@@ -113,7 +110,6 @@ export type UnitsList = {
 		bath?: any | null | undefined;
 		floor?: string | null | undefined;
 		property_id?: number | null | undefined;
-		client_id_s?: number | null | undefined;
 	}>;
 };
 
@@ -168,7 +164,6 @@ export const UnitsInsertDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'bath' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'floor' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'property_id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'client_id_s' } },
 							],
 						},
 					},
@@ -249,7 +244,6 @@ export const UnitsUpdateDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'bath' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'floor' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'property_id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'client_id_s' } },
 							],
 						},
 					},
@@ -350,7 +344,6 @@ export const UnitsByIdDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'bath' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'floor' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'property_id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'client_id_s' } },
 							],
 						},
 					},
@@ -448,7 +441,6 @@ export const UnitsListDocument = {
 								{ kind: 'Field', name: { kind: 'Name', value: 'bath' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'floor' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'property_id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'client_id_s' } },
 							],
 						},
 					},
