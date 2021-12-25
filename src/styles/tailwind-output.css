@@ -464,6 +464,25 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
+.w-6 {
+  width: 1.5rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.min-w-full {
+  min-width: 100%;
+}
+.min-w-max {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+.min-w-fit {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -473,7 +492,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-screen-2xl {
   max-width: 1536px;
 }
+.max-w-screen-sm {
+  max-width: 640px;
+}
 .flex-grow {
+  flex-grow: 1;
+}
+.grow {
   flex-grow: 1;
 }
 .grid-cols-1 {
@@ -588,10 +613,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:max-w-lg {
     max-width: 32rem;
   }
+
+  .md\:max-w-md {
+    max-width: 28rem;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (min-width: 1024px) {
 
   .lg\:max-w-lg {
     max-width: 32rem;
+  }
+
+  .lg\:max-w-md {
+    max-width: 28rem;
   }
 }

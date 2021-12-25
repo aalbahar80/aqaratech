@@ -112,7 +112,7 @@
 	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
 </script>
 
-<div class="lg:max-w-lg">
+<div class="max-w-md">
 	<Form on:submit={handleSubmit}>
 		{#each fieldList as { title, fieldName, inputType, editable }}
 			{#if editable}
@@ -132,7 +132,7 @@
 			{/if}
 		{/each}
 
-		<Row>
+		<div class="grid grid-cols-1 md:grid-cols-2 items-center">
 			<Button kind="ghost" on:click={reset}>Reset</Button>
 			{#if state !== 'dormant'}
 				<span>
@@ -143,6 +143,6 @@
 					>{`${existing ? 'Edit' : 'Create new'} ${entity}`}
 				</Button>
 			{/if}
-		</Row>
+		</div>
 	</Form>
 </div>
