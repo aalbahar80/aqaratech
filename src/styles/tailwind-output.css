@@ -423,14 +423,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 .mt-8 {
   margin-top: 2rem;
 }
@@ -449,9 +441,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex {
   display: flex;
 }
-.table {
-  display: table;
-}
 .grid {
   display: grid;
 }
@@ -464,41 +453,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
-.w-6 {
-  width: 1.5rem;
-}
-.w-10 {
-  width: 2.5rem;
-}
-.min-w-full {
-  min-width: 100%;
-}
-.min-w-max {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
-}
-.min-w-fit {
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
+.max-w-md {
+  max-width: 28rem;
 }
 .max-w-4xl {
   max-width: 56rem;
 }
-.max-w-md {
-  max-width: 28rem;
-}
 .max-w-screen-2xl {
   max-width: 1536px;
 }
-.max-w-screen-sm {
-  max-width: 640px;
-}
 .flex-grow {
-  flex-grow: 1;
-}
-.grow {
   flex-grow: 1;
 }
 .grid-cols-1 {
@@ -567,9 +531,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-center {
   text-align: center;
 }
-.align-middle {
-  vertical-align: middle;
-}
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -602,33 +563,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .filter {
   filter: var(--tw-filter);
 }
-@media (min-width: 640px) {
-
-  .sm\:max-w-lg {
-    max-width: 32rem;
-  }
-}
 @media (min-width: 768px) {
-
-  .md\:max-w-lg {
-    max-width: 32rem;
-  }
-
-  .md\:max-w-md {
-    max-width: 28rem;
-  }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-
-  .lg\:max-w-lg {
-    max-width: 32rem;
-  }
-
-  .lg\:max-w-md {
-    max-width: 28rem;
   }
 }

@@ -5532,111 +5532,41 @@ export type users_variance_order_by = {
 	tenant_id?: InputMaybe<order_by>;
 };
 
-export type detailsFragment = {
-	__typename?: 'clients';
-	id: number;
-	first_name?: string | null | undefined;
-	last_name?: string | null | undefined;
-	email?: string | null | undefined;
-	phone?: string | null | undefined;
-	civilid?: any | null | undefined;
-	is_active?: boolean | null | undefined;
-};
-
-export type ClientsInsertMutationVariables = Exact<{
-	object?: InputMaybe<clients_insert_input>;
-}>;
-
-export type ClientsInsertMutation = {
-	__typename?: 'mutation_root';
-	insert_clients_one?:
-		| {
-				__typename?: 'clients';
-				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				civilid?: any | null | undefined;
-				is_active?: boolean | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
-export type ClientsUpdateMutationVariables = Exact<{
-	id: Scalars['Int'];
-	_set?: InputMaybe<clients_set_input>;
-}>;
-
-export type ClientsUpdateMutation = {
-	__typename?: 'mutation_root';
-	update_clients_by_pk?:
-		| {
-				__typename?: 'clients';
-				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				civilid?: any | null | undefined;
-				is_active?: boolean | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
-export type DeleteClientsMutationVariables = Exact<{
+export type TenantBreadcrumbsQueryVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeleteClientsMutation = {
-	__typename?: 'mutation_root';
-	delete_clients_by_pk?:
-		| { __typename?: 'clients'; id: number }
-		| null
-		| undefined;
-};
-
-export type ClientsByIdQueryVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type ClientsByIdQuery = {
+export type TenantBreadcrumbsQuery = {
 	__typename?: 'query_root';
-	clients_by_pk?:
+	tenants_by_pk?:
 		| {
-				__typename?: 'clients';
+				__typename?: 'tenants';
 				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				civilid?: any | null | undefined;
-				is_active?: boolean | null | undefined;
+				leases: Array<{
+					__typename?: 'leases';
+					id: number;
+					unit?:
+						| {
+								__typename?: 'units';
+								id: number;
+								property?:
+									| {
+											__typename?: 'properties';
+											id: number;
+											client?:
+												| { __typename?: 'clients'; id: number }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+						  }
+						| null
+						| undefined;
+				}>;
 		  }
 		| null
 		| undefined;
-};
-
-export type ClientsListQueryVariables = Exact<{
-	limit?: InputMaybe<Scalars['Int']>;
-	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by> | clients_order_by>;
-}>;
-
-export type ClientsListQuery = {
-	__typename?: 'query_root';
-	clients: Array<{
-		__typename?: 'clients';
-		id: number;
-		first_name?: string | null | undefined;
-		last_name?: string | null | undefined;
-		email?: string | null | undefined;
-		phone?: string | null | undefined;
-		civilid?: any | null | undefined;
-		is_active?: boolean | null | undefined;
-	}>;
 };
 
 export type leasesDetailsFragment = {
@@ -6189,25 +6119,9 @@ export type TenantsByIdLocalQuery = {
 		| undefined;
 };
 
-export type ClientsInsertMutationStore = OperationStore<
-	ClientsInsertMutation,
-	ClientsInsertMutationVariables
->;
-export type ClientsUpdateMutationStore = OperationStore<
-	ClientsUpdateMutation,
-	ClientsUpdateMutationVariables
->;
-export type DeleteClientsMutationStore = OperationStore<
-	DeleteClientsMutation,
-	DeleteClientsMutationVariables
->;
-export type ClientsByIdQueryStore = OperationStore<
-	ClientsByIdQuery,
-	ClientsByIdQueryVariables
->;
-export type ClientsListQueryStore = OperationStore<
-	ClientsListQuery,
-	ClientsListQueryVariables
+export type TenantBreadcrumbsQueryStore = OperationStore<
+	TenantBreadcrumbsQuery,
+	TenantBreadcrumbsQueryVariables
 >;
 export type LeasesInsertMutationStore = OperationStore<
 	LeasesInsertMutation,
@@ -11625,31 +11539,6 @@ export type GraphCacheConfig = {
 	resolvers?: GraphCacheResolvers;
 	storage?: GraphCacheStorageAdapter;
 };
-export const detailsFragmentDoc = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'FragmentDefinition',
-			name: { kind: 'Name', value: 'details' },
-			typeCondition: {
-				kind: 'NamedType',
-				name: { kind: 'Name', value: 'clients' },
-			},
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'is_active' } },
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<detailsFragment, unknown>;
 export const leasesDetailsFragmentDoc = {
 	kind: 'Document',
 	definitions: [
@@ -11760,146 +11649,13 @@ export const unitsDetailsFragmentDoc = {
 		},
 	],
 } as unknown as DocumentNode<unitsDetailsFragment, unknown>;
-export const ClientsInsertDocument = {
+export const TenantBreadcrumbsDocument = {
 	kind: 'Document',
 	definitions: [
 		{
 			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'ClientsInsert' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'object' },
-					},
-					type: {
-						kind: 'NamedType',
-						name: { kind: 'Name', value: 'clients_insert_input' },
-					},
-					defaultValue: { kind: 'ObjectValue', fields: [] },
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'insert_clients_one' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'object' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'object' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'details' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...detailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<
-	ClientsInsertMutation,
-	ClientsInsertMutationVariables
->;
-export const ClientsUpdateDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'ClientsUpdate' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: '_set' } },
-					type: {
-						kind: 'NamedType',
-						name: { kind: 'Name', value: 'clients_set_input' },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'update_clients_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'pk_columns' },
-								value: {
-									kind: 'ObjectValue',
-									fields: [
-										{
-											kind: 'ObjectField',
-											name: { kind: 'Name', value: 'id' },
-											value: {
-												kind: 'Variable',
-												name: { kind: 'Name', value: 'id' },
-											},
-										},
-									],
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: '_set' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: '_set' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'details' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...detailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<
-	ClientsUpdateMutation,
-	ClientsUpdateMutationVariables
->;
-export const DeleteClientsDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'DeleteClients' },
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantBreadcrumbs' },
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
@@ -11915,7 +11671,7 @@ export const DeleteClientsDocument = {
 				selections: [
 					{
 						kind: 'Field',
-						name: { kind: 'Name', value: 'delete_clients_by_pk' },
+						name: { kind: 'Name', value: 'tenants_by_pk' },
 						arguments: [
 							{
 								kind: 'Argument',
@@ -11930,6 +11686,76 @@ export const DeleteClientsDocument = {
 							kind: 'SelectionSet',
 							selections: [
 								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'leases' },
+									arguments: [
+										{
+											kind: 'Argument',
+											name: { kind: 'Name', value: 'order_by' },
+											value: {
+												kind: 'ObjectValue',
+												fields: [
+													{
+														kind: 'ObjectField',
+														name: { kind: 'Name', value: 'end_date' },
+														value: { kind: 'EnumValue', value: 'desc' },
+													},
+												],
+											},
+										},
+										{
+											kind: 'Argument',
+											name: { kind: 'Name', value: 'limit' },
+											value: { kind: 'IntValue', value: '1' },
+										},
+									],
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'unit' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'id' },
+														},
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'property' },
+															selectionSet: {
+																kind: 'SelectionSet',
+																selections: [
+																	{
+																		kind: 'Field',
+																		name: { kind: 'Name', value: 'id' },
+																	},
+																	{
+																		kind: 'Field',
+																		name: { kind: 'Name', value: 'client' },
+																		selectionSet: {
+																			kind: 'SelectionSet',
+																			selections: [
+																				{
+																					kind: 'Field',
+																					name: { kind: 'Name', value: 'id' },
+																				},
+																			],
+																		},
+																	},
+																],
+															},
+														},
+													],
+												},
+											},
+										],
+									},
+								},
 							],
 						},
 					},
@@ -11938,149 +11764,9 @@ export const DeleteClientsDocument = {
 		},
 	],
 } as unknown as DocumentNode<
-	DeleteClientsMutation,
-	DeleteClientsMutationVariables
+	TenantBreadcrumbsQuery,
+	TenantBreadcrumbsQueryVariables
 >;
-export const ClientsByIdDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'ClientsById' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'clients_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'details' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...detailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<ClientsByIdQuery, ClientsByIdQueryVariables>;
-export const ClientsListDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'ClientsList' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'limit' },
-					},
-					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'offset' },
-					},
-					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'order_by' },
-					},
-					type: {
-						kind: 'ListType',
-						type: {
-							kind: 'NonNullType',
-							type: {
-								kind: 'NamedType',
-								name: { kind: 'Name', value: 'clients_order_by' },
-							},
-						},
-					},
-					defaultValue: { kind: 'ObjectValue', fields: [] },
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'clients' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'order_by' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'order_by' },
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'limit' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'limit' },
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'offset' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'offset' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'details' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...detailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<ClientsListQuery, ClientsListQueryVariables>;
 export const LeasesInsertDocument = {
 	kind: 'Document',
 	definitions: [

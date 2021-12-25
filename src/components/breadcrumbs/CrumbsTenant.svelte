@@ -27,6 +27,8 @@
 	const crumbs = operationStore(crumbsText, { id });
 	query(crumbs);
 
+	const getCrumbs = $crumbs?.data?.tenants_by_pk;
+
 	$: crumbData = {
 		clientId:
 			$crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.property?.client?.id,

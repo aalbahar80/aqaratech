@@ -27,7 +27,7 @@ module.exports = {
 			processor: 'svelte3/svelte3',
 		},
 		{
-			files: ['*.graphql'],
+			files: ['*.graphql', '*.svelte'],
 			parser: '@graphql-eslint/eslint-plugin',
 			plugins: ['@graphql-eslint'],
 			rules: {

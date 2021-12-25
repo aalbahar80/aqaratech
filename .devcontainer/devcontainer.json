@@ -29,7 +29,8 @@
 		"albert.tabout",
 		"oderwat.indent-rainbow",
 		"ponicode.ponicode",
-		"usernamehw.errorlens"
+		"usernamehw.errorlens",
+		"graphql.vscode-graphql"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

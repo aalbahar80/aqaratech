@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Fa from 'svelte-fa/src/fa.svelte';
+	import { Breadcrumb } from 'carbon-components-svelte';
+	import BreadcrumbItem from 'carbon-components-svelte/src/Breadcrumb/BreadcrumbItem.svelte';
+	import { Button } from 'carbon-components-svelte';
 	import {
 		faBuilding,
 		faDoorOpen,
@@ -50,28 +53,17 @@
 			icon: faUser,
 		},
 	];
+
+	$: console.log(clientId);
 </script>
 
-{#if loading}
-	<p>placeholder here</p>
-{:else}
-	<div class="my-4 text-sm breadcrumbs">
-		<ul>
-			{#each crumbs as { title, href, icon, name }}
-				<li>
-					<a
-						{href}
-						class="link link-hover"
-						class:link-secondary={$page.path.startsWith(`/${name}`)}
-					>
-						<div class="mr-2">
-							<Fa {icon} />
-						</div>
+{JSON.stringify(leaseId)}
+<Breadcrumb skeleton={loading}>
+	{#each crumbs as { title, href, name }}
+		<BreadcrumbItem {href} isCurrentPage={$page.path.startsWith(`/${name}`)}>
+			{title}
+		</BreadcrumbItem>
+	{/each}
+</Breadcrumb>
 
-						{title}
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
-{/if}
+<Button href={`/tenants/${tenantId + 1}`}>Next</Button>
