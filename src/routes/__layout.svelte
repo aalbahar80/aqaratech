@@ -49,7 +49,9 @@
 			fetch,
 			// dev: browser && dev
 			// url: 'https://hasura-xf70.onrender.com/v1/graphql',
-			url: 'http://localhost:3000/api/graphql',
+			// TODO: change this url in prod
+			// url: 'http://localhost:3000/api/graphql',
+			url: '/api/graphql',
 			// fetchOptions: {
 			// 	headers: {
 			// 		'x-hasura-admin-secret': 'myadminsecret',
