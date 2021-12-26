@@ -1,7 +1,7 @@
 query TenantsByIdLocal($id: Int!, $with_crumbs: Boolean!) {
 	tenants_by_pk(id: $id) {
 		...tenantsDetails
-		...crumbs
+		...crumbs @include(if: $with_crumbs)
 		pastLeases: leases {
 			...pastLeases
 		}
