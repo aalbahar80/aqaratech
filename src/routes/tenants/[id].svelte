@@ -12,7 +12,7 @@
 				props: {
 					tenant: await stuff.query(gql.TenantsByIdLocalDocument, {
 						id,
-						with_crumbs: false,
+						with_crumbs: true,
 						with_past_leases: false,
 					}),
 					id,

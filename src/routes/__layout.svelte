@@ -48,14 +48,14 @@
 			// Pass in the fetch from sveltekit to have access to serialized requests during hydration
 			fetch,
 			// dev: browser && dev
-			url: 'https://hasura-xf70.onrender.com/v1/graphql',
-			fetchOptions: {
-				headers: {
-					'x-hasura-admin-secret':
-						'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
-				},
-				// credentials: 'include',
-			},
+			// url: 'https://hasura-xf70.onrender.com/v1/graphql',
+			url: 'http://localhost:3000/api/graphql',
+			// fetchOptions: {
+			// 	headers: {
+			// 		'x-hasura-admin-secret': 'myadminsecret',
+			// 	},
+			// 	// credentials: 'include',
+			// },
 			exchanges: [
 				// devtoolsExchange,
 				dedupExchange,
