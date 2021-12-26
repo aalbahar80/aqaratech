@@ -1,6 +1,7 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
 import type { entity } from './types';
+import { TenantsByIdLocalDocument } from '$generated/graphql';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
@@ -92,7 +93,7 @@ const docs = {
 	update: update,
 	del: deleteQuery,
 	list: list,
-	byId: byId,
+	byId: TenantsByIdLocalDocument,
 };
 
 export default <entity>{
