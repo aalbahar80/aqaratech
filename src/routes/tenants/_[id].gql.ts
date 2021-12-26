@@ -5,6 +5,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 export type TenantsByIdLocalVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
 	with_crumbs: Types.Scalars['Boolean'];
+	with_past_leases: Types.Scalars['Boolean'];
 }>;
 
 export type TenantsByIdLocal = {
@@ -21,7 +22,7 @@ export type TenantsByIdLocal = {
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
-				leases: Array<{
+				leases?: Array<{
 					__typename?: 'leases';
 					id: number;
 					unit?:
@@ -53,44 +54,15 @@ export type TenantsByIdLocal = {
 		  }
 		| null
 		| undefined;
-	breadcrumbs?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				leases: Array<{
-					__typename?: 'leases';
-					id: number;
-					unit?:
-						| {
-								__typename?: 'units';
-								id: number;
-								property?:
-									| {
-											__typename?: 'properties';
-											id: number;
-											client?:
-												| { __typename?: 'clients'; id: number }
-												| null
-												| undefined;
-									  }
-									| null
-									| undefined;
-						  }
-						| null
-						| undefined;
-				}>;
-		  }
-		| null
-		| undefined;
 };
 
-export type TenantBreadcrumbsLocalVariables = Types.Exact<{
+export type TenantBreadcrumbsVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
 }>;
 
-export type TenantBreadcrumbsLocal = {
+export type TenantBreadcrumbs = {
 	__typename?: 'query_root';
-	breadcrumbs?:
+	tenants_by_pk?:
 		| {
 				__typename?: 'tenants';
 				id: number;
@@ -142,6 +114,20 @@ export const TenantsByIdLocalDocument = {
 					variable: {
 						kind: 'Variable',
 						name: { kind: 'Name', value: 'with_crumbs' },
+					},
+					type: {
+						kind: 'NonNullType',
+						type: {
+							kind: 'NamedType',
+							name: { kind: 'Name', value: 'Boolean' },
+						},
+					},
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'with_past_leases' },
 					},
 					type: {
 						kind: 'NonNullType',
@@ -204,6 +190,22 @@ export const TenantsByIdLocalDocument = {
 											value: { kind: 'IntValue', value: '1' },
 										},
 									],
+									directives: [
+										{
+											kind: 'Directive',
+											name: { kind: 'Name', value: 'include' },
+											arguments: [
+												{
+													kind: 'Argument',
+													name: { kind: 'Name', value: 'if' },
+													value: {
+														kind: 'Variable',
+														name: { kind: 'Name', value: 'with_crumbs' },
+													},
+												},
+											],
+										},
+									],
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
@@ -254,6 +256,22 @@ export const TenantsByIdLocalDocument = {
 									kind: 'Field',
 									alias: { kind: 'Name', value: 'pastLeases' },
 									name: { kind: 'Name', value: 'leases' },
+									directives: [
+										{
+											kind: 'Directive',
+											name: { kind: 'Name', value: 'include' },
+											arguments: [
+												{
+													kind: 'Argument',
+													name: { kind: 'Name', value: 'if' },
+													value: {
+														kind: 'Variable',
+														name: { kind: 'Name', value: 'with_past_leases' },
+													},
+												},
+											],
+										},
+									],
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
@@ -276,125 +294,18 @@ export const TenantsByIdLocalDocument = {
 							],
 						},
 					},
-					{
-						kind: 'Field',
-						alias: { kind: 'Name', value: 'breadcrumbs' },
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						directives: [
-							{
-								kind: 'Directive',
-								name: { kind: 'Name', value: 'include' },
-								arguments: [
-									{
-										kind: 'Argument',
-										name: { kind: 'Name', value: 'if' },
-										value: {
-											kind: 'Variable',
-											name: { kind: 'Name', value: 'with_crumbs' },
-										},
-									},
-								],
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{
-									kind: 'Field',
-									name: { kind: 'Name', value: 'leases' },
-									arguments: [
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'order_by' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'end_date' },
-														value: { kind: 'EnumValue', value: 'desc' },
-													},
-												],
-											},
-										},
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'limit' },
-											value: { kind: 'IntValue', value: '1' },
-										},
-									],
-									selectionSet: {
-										kind: 'SelectionSet',
-										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'unit' },
-												selectionSet: {
-													kind: 'SelectionSet',
-													selections: [
-														{
-															kind: 'Field',
-															name: { kind: 'Name', value: 'id' },
-														},
-														{
-															kind: 'Field',
-															name: { kind: 'Name', value: 'property' },
-															selectionSet: {
-																kind: 'SelectionSet',
-																selections: [
-																	{
-																		kind: 'Field',
-																		name: { kind: 'Name', value: 'id' },
-																	},
-																	{
-																		kind: 'Field',
-																		name: { kind: 'Name', value: 'client' },
-																		selectionSet: {
-																			kind: 'SelectionSet',
-																			selections: [
-																				{
-																					kind: 'Field',
-																					name: { kind: 'Name', value: 'id' },
-																				},
-																			],
-																		},
-																	},
-																],
-															},
-														},
-													],
-												},
-											},
-										],
-									},
-								},
-							],
-						},
-					},
 				],
 			},
 		},
 	],
 } as unknown as DocumentNode<TenantsByIdLocal, TenantsByIdLocalVariables>;
-export const TenantBreadcrumbsLocalDocument = {
+export const TenantBreadcrumbsDocument = {
 	kind: 'Document',
 	definitions: [
 		{
 			kind: 'OperationDefinition',
 			operation: 'query',
-			name: { kind: 'Name', value: 'TenantBreadcrumbsLocal' },
+			name: { kind: 'Name', value: 'TenantBreadcrumbs' },
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
@@ -410,7 +321,6 @@ export const TenantBreadcrumbsLocalDocument = {
 				selections: [
 					{
 						kind: 'Field',
-						alias: { kind: 'Name', value: 'breadcrumbs' },
 						name: { kind: 'Name', value: 'tenants_by_pk' },
 						arguments: [
 							{
@@ -503,7 +413,4 @@ export const TenantBreadcrumbsLocalDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<
-	TenantBreadcrumbsLocal,
-	TenantBreadcrumbsLocalVariables
->;
+} as unknown as DocumentNode<TenantBreadcrumbs, TenantBreadcrumbsVariables>;

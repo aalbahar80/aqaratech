@@ -1,21 +1,16 @@
 <script lang="ts">
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
-	import { TenantBreadcrumbsDocument } from './_CrumbsCarbon.gql';
 	import { query, operationStore } from '@urql/svelte';
 	import { page } from '$app/stores';
-	import { TenantBreadcrumbsLocalDocument } from '$generated/graphql';
+	import { TenantBreadcrumbsDocument } from '$routes/tenants/_[id].gql';
 
 	$: id = parseInt($page.params.id);
 
 	const crumbs = operationStore(TenantBreadcrumbsDocument, { id });
 	query(crumbs);
 
-	const crumbsLocal = operationStore(TenantBreadcrumbsLocalDocument, { id });
-	query(crumbsLocal);
 	// reassign query variables to retrigger query
 	$: crumbs.variables = { id };
-	$: crumbsLocal.variables = { id };
-	$: console.log($crumbsLocal);
 
 	$: crumbData = {
 		clientId:

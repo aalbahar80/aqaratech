@@ -5532,43 +5532,6 @@ export type users_variance_order_by = {
 	tenant_id?: InputMaybe<order_by>;
 };
 
-export type TenantBreadcrumbsQueryVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TenantBreadcrumbsQuery = {
-	__typename?: 'query_root';
-	tenants_by_pk?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				leases: Array<{
-					__typename?: 'leases';
-					id: number;
-					unit?:
-						| {
-								__typename?: 'units';
-								id: number;
-								property?:
-									| {
-											__typename?: 'properties';
-											id: number;
-											client?:
-												| { __typename?: 'clients'; id: number }
-												| null
-												| undefined;
-									  }
-									| null
-									| undefined;
-						  }
-						| null
-						| undefined;
-				}>;
-		  }
-		| null
-		| undefined;
-};
-
 export type detailsFragment = {
 	__typename?: 'clients';
 	id: number;
@@ -6000,29 +5963,6 @@ export type DeleteTenantsMutation = {
 		| undefined;
 };
 
-export type TenantsByIdQueryVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TenantsByIdQuery = {
-	__typename?: 'query_root';
-	tenants_by_pk?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				dob?: any | null | undefined;
-				civilid?: any | null | undefined;
-				second_name?: string | null | undefined;
-				third_name?: string | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
 export type TenantsListQueryVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -6206,6 +6146,7 @@ export type Trx2ByIdQuery = {
 export type TenantsByIdLocalQueryVariables = Exact<{
 	id: Scalars['Int'];
 	with_crumbs: Scalars['Boolean'];
+	with_past_leases: Scalars['Boolean'];
 }>;
 
 export type TenantsByIdLocalQuery = {
@@ -6254,7 +6195,15 @@ export type TenantsByIdLocalQuery = {
 		  }
 		| null
 		| undefined;
-	breadcrumbs?:
+};
+
+export type TenantBreadcrumbsQueryVariables = Exact<{
+	id: Scalars['Int'];
+}>;
+
+export type TenantBreadcrumbsQuery = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
 		| {
 				__typename?: 'tenants';
 				id: number;
@@ -6285,41 +6234,17 @@ export type TenantsByIdLocalQuery = {
 		| undefined;
 };
 
-export type TenantBreadcrumbsLocalQueryVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TenantBreadcrumbsLocalQuery = {
-	__typename?: 'query_root';
-	breadcrumbs?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				leases: Array<{
-					__typename?: 'leases';
-					id: number;
-					unit?:
-						| {
-								__typename?: 'units';
-								id: number;
-								property?:
-									| {
-											__typename?: 'properties';
-											id: number;
-											client?:
-												| { __typename?: 'clients'; id: number }
-												| null
-												| undefined;
-									  }
-									| null
-									| undefined;
-						  }
-						| null
-						| undefined;
-				}>;
-		  }
-		| null
-		| undefined;
+export type tenantDetailsFragment = {
+	__typename?: 'tenants';
+	id: number;
+	first_name?: string | null | undefined;
+	last_name?: string | null | undefined;
+	email?: string | null | undefined;
+	phone?: string | null | undefined;
+	dob?: any | null | undefined;
+	civilid?: any | null | undefined;
+	second_name?: string | null | undefined;
+	third_name?: string | null | undefined;
 };
 
 export type crumbsFragment = {
@@ -6357,10 +6282,6 @@ export type pastLeasesFragment = {
 	is_expired?: boolean | null | undefined;
 };
 
-export type TenantBreadcrumbsQueryStore = OperationStore<
-	TenantBreadcrumbsQuery,
-	TenantBreadcrumbsQueryVariables
->;
 export type ClientsInsertMutationStore = OperationStore<
 	ClientsInsertMutation,
 	ClientsInsertMutationVariables
@@ -6433,10 +6354,6 @@ export type DeleteTenantsMutationStore = OperationStore<
 	DeleteTenantsMutation,
 	DeleteTenantsMutationVariables
 >;
-export type TenantsByIdQueryStore = OperationStore<
-	TenantsByIdQuery,
-	TenantsByIdQueryVariables
->;
 export type TenantsListQueryStore = OperationStore<
 	TenantsListQuery,
 	TenantsListQueryVariables
@@ -6473,9 +6390,9 @@ export type TenantsByIdLocalQueryStore = OperationStore<
 	TenantsByIdLocalQuery,
 	TenantsByIdLocalQueryVariables
 >;
-export type TenantBreadcrumbsLocalQueryStore = OperationStore<
-	TenantBreadcrumbsLocalQuery,
-	TenantBreadcrumbsLocalQueryVariables
+export type TenantBreadcrumbsQueryStore = OperationStore<
+	TenantBreadcrumbsQuery,
+	TenantBreadcrumbsQueryVariables
 >;
 export type WithTypename<T extends { __typename?: any }> = {
 	[K in Exclude<keyof T, '__typename'>]?: T[K];
@@ -11936,6 +11853,33 @@ export const unitsDetailsFragmentDoc = {
 		},
 	],
 } as unknown as DocumentNode<unitsDetailsFragment, unknown>;
+export const tenantDetailsFragmentDoc = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'tenantDetails' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'tenants' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<tenantDetailsFragment, unknown>;
 export const crumbsFragmentDoc = {
 	kind: 'Document',
 	definitions: [
@@ -12044,124 +11988,6 @@ export const pastLeasesFragmentDoc = {
 		},
 	],
 } as unknown as DocumentNode<pastLeasesFragment, unknown>;
-export const TenantBreadcrumbsDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantBreadcrumbs' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{
-									kind: 'Field',
-									name: { kind: 'Name', value: 'leases' },
-									arguments: [
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'order_by' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'end_date' },
-														value: { kind: 'EnumValue', value: 'desc' },
-													},
-												],
-											},
-										},
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'limit' },
-											value: { kind: 'IntValue', value: '1' },
-										},
-									],
-									selectionSet: {
-										kind: 'SelectionSet',
-										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'unit' },
-												selectionSet: {
-													kind: 'SelectionSet',
-													selections: [
-														{
-															kind: 'Field',
-															name: { kind: 'Name', value: 'id' },
-														},
-														{
-															kind: 'Field',
-															name: { kind: 'Name', value: 'property' },
-															selectionSet: {
-																kind: 'SelectionSet',
-																selections: [
-																	{
-																		kind: 'Field',
-																		name: { kind: 'Name', value: 'id' },
-																	},
-																	{
-																		kind: 'Field',
-																		name: { kind: 'Name', value: 'client' },
-																		selectionSet: {
-																			kind: 'SelectionSet',
-																			selections: [
-																				{
-																					kind: 'Field',
-																					name: { kind: 'Name', value: 'id' },
-																				},
-																			],
-																		},
-																	},
-																],
-															},
-														},
-													],
-												},
-											},
-										],
-									},
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<
-	TenantBreadcrumbsQuery,
-	TenantBreadcrumbsQueryVariables
->;
 export const ClientsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13342,55 +13168,6 @@ export const DeleteTenantsDocument = {
 	DeleteTenantsMutation,
 	DeleteTenantsMutationVariables
 >;
-export const TenantsByIdDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantsById' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantsDetails' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...tenantsDetailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<TenantsByIdQuery, TenantsByIdQueryVariables>;
 export const TenantsListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13918,6 +13695,20 @@ export const TenantsByIdLocalDocument = {
 						},
 					},
 				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'with_past_leases' },
+					},
+					type: {
+						kind: 'NonNullType',
+						type: {
+							kind: 'NamedType',
+							name: { kind: 'Name', value: 'Boolean' },
+						},
+					},
+				},
 			],
 			selectionSet: {
 				kind: 'SelectionSet',
@@ -13940,16 +13731,48 @@ export const TenantsByIdLocalDocument = {
 							selections: [
 								{
 									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantsDetails' },
+									name: { kind: 'Name', value: 'tenantDetails' },
 								},
 								{
 									kind: 'FragmentSpread',
 									name: { kind: 'Name', value: 'crumbs' },
+									directives: [
+										{
+											kind: 'Directive',
+											name: { kind: 'Name', value: 'include' },
+											arguments: [
+												{
+													kind: 'Argument',
+													name: { kind: 'Name', value: 'if' },
+													value: {
+														kind: 'Variable',
+														name: { kind: 'Name', value: 'with_crumbs' },
+													},
+												},
+											],
+										},
+									],
 								},
 								{
 									kind: 'Field',
 									alias: { kind: 'Name', value: 'pastLeases' },
 									name: { kind: 'Name', value: 'leases' },
+									directives: [
+										{
+											kind: 'Directive',
+											name: { kind: 'Name', value: 'include' },
+											arguments: [
+												{
+													kind: 'Argument',
+													name: { kind: 'Name', value: 'if' },
+													value: {
+														kind: 'Variable',
+														name: { kind: 'Name', value: 'with_past_leases' },
+													},
+												},
+											],
+										},
+									],
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
@@ -13963,50 +13786,10 @@ export const TenantsByIdLocalDocument = {
 							],
 						},
 					},
-					{
-						kind: 'Field',
-						alias: { kind: 'Name', value: 'breadcrumbs' },
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						directives: [
-							{
-								kind: 'Directive',
-								name: { kind: 'Name', value: 'include' },
-								arguments: [
-									{
-										kind: 'Argument',
-										name: { kind: 'Name', value: 'if' },
-										value: {
-											kind: 'Variable',
-											name: { kind: 'Name', value: 'with_crumbs' },
-										},
-									},
-								],
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'crumbs' },
-								},
-							],
-						},
-					},
 				],
 			},
 		},
-		...tenantsDetailsFragmentDoc.definitions,
+		...tenantDetailsFragmentDoc.definitions,
 		...crumbsFragmentDoc.definitions,
 		...pastLeasesFragmentDoc.definitions,
 	],
@@ -14014,13 +13797,13 @@ export const TenantsByIdLocalDocument = {
 	TenantsByIdLocalQuery,
 	TenantsByIdLocalQueryVariables
 >;
-export const TenantBreadcrumbsLocalDocument = {
+export const TenantBreadcrumbsDocument = {
 	kind: 'Document',
 	definitions: [
 		{
 			kind: 'OperationDefinition',
 			operation: 'query',
-			name: { kind: 'Name', value: 'TenantBreadcrumbsLocal' },
+			name: { kind: 'Name', value: 'TenantBreadcrumbs' },
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
@@ -14036,7 +13819,6 @@ export const TenantBreadcrumbsLocalDocument = {
 				selections: [
 					{
 						kind: 'Field',
-						alias: { kind: 'Name', value: 'breadcrumbs' },
 						name: { kind: 'Name', value: 'tenants_by_pk' },
 						arguments: [
 							{
@@ -14064,6 +13846,6 @@ export const TenantBreadcrumbsLocalDocument = {
 		...crumbsFragmentDoc.definitions,
 	],
 } as unknown as DocumentNode<
-	TenantBreadcrumbsLocalQuery,
-	TenantBreadcrumbsLocalQueryVariables
+	TenantBreadcrumbsQuery,
+	TenantBreadcrumbsQueryVariables
 >;
