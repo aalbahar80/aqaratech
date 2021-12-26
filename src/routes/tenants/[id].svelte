@@ -11,6 +11,7 @@
 				props: {
 					tenant: await stuff.query(gql.TenantsByIdLocalDocument, {
 						id,
+						with_crumbs: true,
 					}),
 					id,
 				},
@@ -21,8 +22,10 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
-	import BreadCrumbs from '$components/BreadCrumbs.svelte';
-	import { TenantsByIdDocument } from '$generated/graphql';
+	import {
+		TenantsByIdDocument,
+		TenantBreadcrumbsDocument,
+	} from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 	// import type { OperationStore } from 'src/global';
 	import Fa from 'svelte-fa/src/fa.svelte';
@@ -38,11 +41,10 @@
 	import { formatDateDiff, omit } from '$lib/utils';
 	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
-	import CrumbsCarbon from '$components/breadcrumbs/CrumbsCarbon.svelte';
+	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
 	import { prefetch } from '$app/navigation';
 	// import 'carbon-components-svelte/css/g100.css';
 	export let tenant;
-	export let id;
 	// const id = $page.params.id;
 	// $: tenant.variables = {
 	// 	id: parseInt(id)
@@ -69,8 +71,7 @@
 			<p>Error: {$tenant.error.message}</p>
 		{:else}
 			<div class="col-span-full">
-				<CrumbsCarbon />
-				<!-- <CrumbsTenant {id} /> -->
+				<TenantBreadcrumbs />
 				<!-- <BreadCrumbs {...crumbData} /> -->
 			</div>
 			<div

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Fa from 'svelte-fa/src/fa.svelte';
-	import { Breadcrumb } from 'carbon-components-svelte';
+	import { Breadcrumb, ButtonSet } from 'carbon-components-svelte';
 	import BreadcrumbItem from 'carbon-components-svelte/src/Breadcrumb/BreadcrumbItem.svelte';
 	import { Button } from 'carbon-components-svelte';
 	import {
@@ -54,10 +54,9 @@
 		},
 	];
 
-	$: console.log(clientId);
+	$: id = parseInt($page.params.id);
 </script>
 
-{JSON.stringify(leaseId)}
 <Breadcrumb skeleton={loading}>
 	{#each crumbs as { title, href, name }}
 		<BreadcrumbItem {href} isCurrentPage={$page.path.startsWith(`/${name}`)}>
@@ -66,4 +65,7 @@
 	{/each}
 </Breadcrumb>
 
-<Button href={`/tenants/${tenantId + 1}`}>Next</Button>
+<ButtonSet>
+	<Button href={`/${$page.path.split('/')[1]}/${id - 1}`}>Previous</Button>
+	<Button href={`/${$page.path.split('/')[1]}/${id + 1}`}>Next</Button>
+</ButtonSet>

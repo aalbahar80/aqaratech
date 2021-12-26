@@ -3,12 +3,19 @@
 	import { TenantBreadcrumbsDocument } from './_CrumbsCarbon.gql';
 	import { query, operationStore } from '@urql/svelte';
 	import { page } from '$app/stores';
+	import { TenantBreadcrumbsLocalDocument } from '$generated/graphql';
 
-	const id = parseInt($page.params.id);
-	$: console.log(id);
+	$: id = parseInt($page.params.id);
 
 	const crumbs = operationStore(TenantBreadcrumbsDocument, { id });
 	query(crumbs);
+
+	const crumbsLocal = operationStore(TenantBreadcrumbsLocalDocument, { id });
+	query(crumbsLocal);
+	// reassign query variables to retrigger query
+	$: crumbs.variables = { id };
+	$: crumbsLocal.variables = { id };
+	$: console.log($crumbsLocal);
 
 	$: crumbData = {
 		clientId:

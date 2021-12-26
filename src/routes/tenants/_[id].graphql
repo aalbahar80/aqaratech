@@ -1,25 +1,56 @@
-query TenantsByIdLocal($id: Int!) {
+query TenantsByIdLocal($id: Int!, $with_crumbs: Boolean!) {
 	tenants_by_pk(id: $id) {
-		id
-		first_name
-		last_name
-		email
-		phone
-		dob
-		civilid
-		second_name
-		third_name
+		...tenantsDetails
+		...crumbs
+		pastLeases: leases {
+			...pastLeases
+		}
+	}
+	breadcrumbs: tenants_by_pk(id: $id) @include(if: $with_crumbs) {
+		...crumbs
+	}
+	# pastLeases: leases(order_by: { end_date: desc }) {
+	# 	id
+	# }
+}
+
+query TenantBreadcrumbsLocal($id: Int!) {
+	breadcrumbs: tenants_by_pk(id: $id) {
+		...crumbs
 	}
 }
 
-# fragment tenantsDetails on tenants {
-# 	id
-# 	first_name
-# 	last_name
-# 	email
-# 	phone
-# 	dob
-# 	civilid
-# 	second_name
-# 	third_name
-# }
+fragment tenantsDetails on tenants {
+	id
+	first_name
+	last_name
+	email
+	phone
+	dob
+	civilid
+	second_name
+	third_name
+}
+
+fragment crumbs on tenants {
+	id
+	leases(order_by: { end_date: desc }, limit: 1) {
+		id
+		unit {
+			id
+			property {
+				id
+				client {
+					id
+				}
+			}
+		}
+	}
+}
+
+fragment pastLeases on leases {
+	id
+	start_date
+	end_date
+	is_expired
+}

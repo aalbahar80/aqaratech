@@ -2,6 +2,7 @@
 import type * as Types from '../../generated/graphql';
 
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { tenantsDetails } from '../../routes/tenants/_[id].gql';
 export type TenantsInsertVariables = Types.Exact<{
 	object?: Types.InputMaybe<Types.tenants_insert_input>;
 }>;
