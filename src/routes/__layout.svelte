@@ -49,12 +49,13 @@
 			fetch,
 			// dev: browser && dev
 			url: 'https://hasura-xf70.onrender.com/v1/graphql',
-			// fetchOptions: {
-			// 	headers: {
-			// 		'x-hasura-admin-secret':
-			// 			'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd'
-			// 	}
-			// },
+			fetchOptions: {
+				headers: {
+					'x-hasura-admin-secret':
+						'WvSsTe4GMxin4Z8DCuyAoLNNNFiXFw3JMWzUJG62TiJ02kFGhLOfuiR7DJWy2FQd',
+				},
+				// credentials: 'include',
+			},
 			exchanges: [
 				// devtoolsExchange,
 				dedupExchange,
@@ -95,10 +96,6 @@
 	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
 	export let client: Client;
 	setClient(client);
-
-	onDestroy(() => {
-		console.log('destroyed layout');
-	});
 </script>
 
 <Header />

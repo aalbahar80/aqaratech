@@ -12,7 +12,7 @@
 				props: {
 					tenant: await stuff.query(gql.TenantsByIdLocalDocument, {
 						id,
-						with_crumbs: true,
+						with_crumbs: false,
 						with_past_leases: false,
 					}),
 					id,
@@ -25,7 +25,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { operationStore, query } from '@urql/svelte';
-	// import type { OperationStore } from 'src/global';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	// import type { TenantsByIdLocalDocument } from './_[id].gql';
 	import {

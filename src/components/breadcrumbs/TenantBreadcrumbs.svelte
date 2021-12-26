@@ -1,10 +1,12 @@
 <script lang="ts">
-	import BreadCrumbs from '$components/BreadCrumbs.svelte';
-	import { query, operationStore } from '@urql/svelte';
 	import { page } from '$app/stores';
+	import BreadCrumbs from '$components/BreadCrumbs.svelte';
 	import { TenantBreadcrumbsDocument } from '$routes/tenants/_[id].gql';
+	import { operationStore, query } from '@urql/svelte';
+	import { Button, ButtonSet } from 'carbon-components-svelte';
 
 	$: id = parseInt($page.params.id);
+	$: console.log(id);
 
 	const crumbs = operationStore(TenantBreadcrumbsDocument, { id });
 	query(crumbs);
@@ -23,3 +25,7 @@
 </script>
 
 <BreadCrumbs {...crumbData} loading={$crumbs.fetching || $crumbs.stale} />
+<ButtonSet>
+	<Button href={`/${$page.path.split('/')[1]}/${id - 1}`}>Previous</Button>
+	<Button href={`/${$page.path.split('/')[1]}/${id + 1}`}>Next</Button>
+</ButtonSet>
