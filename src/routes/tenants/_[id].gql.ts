@@ -50,6 +50,10 @@ export type TenantsByIdLocal = {
 					start_date?: any | null | undefined;
 					end_date?: any | null | undefined;
 					is_expired?: boolean | null | undefined;
+					is_signed?: boolean | null | undefined;
+					monthly_rent?: number | null | undefined;
+					unit_id?: number | null | undefined;
+					deposit?: number | null | undefined;
 				}>;
 		  }
 		| null
@@ -87,6 +91,32 @@ export type TenantBreadcrumbs = {
 						  }
 						| null
 						| undefined;
+				}>;
+		  }
+		| null
+		| undefined;
+};
+
+export type TenantPastLeasesVariables = Types.Exact<{
+	id: Types.Scalars['Int'];
+}>;
+
+export type TenantPastLeases = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				pastLeases: Array<{
+					__typename?: 'leases';
+					id: number;
+					start_date?: any | null | undefined;
+					end_date?: any | null | undefined;
+					is_expired?: boolean | null | undefined;
+					is_signed?: boolean | null | undefined;
+					monthly_rent?: number | null | undefined;
+					unit_id?: number | null | undefined;
+					deposit?: number | null | undefined;
 				}>;
 		  }
 		| null
@@ -288,6 +318,22 @@ export const TenantsByIdLocalDocument = {
 												kind: 'Field',
 												name: { kind: 'Name', value: 'is_expired' },
 											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'is_signed' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'monthly_rent' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'unit_id' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'deposit' },
+											},
 										],
 									},
 								},
@@ -414,3 +460,103 @@ export const TenantBreadcrumbsDocument = {
 		},
 	],
 } as unknown as DocumentNode<TenantBreadcrumbs, TenantBreadcrumbsVariables>;
+export const TenantPastLeasesDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantPastLeases' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{
+									kind: 'Field',
+									alias: { kind: 'Name', value: 'pastLeases' },
+									name: { kind: 'Name', value: 'leases' },
+									arguments: [
+										{
+											kind: 'Argument',
+											name: { kind: 'Name', value: 'order_by' },
+											value: {
+												kind: 'ObjectValue',
+												fields: [
+													{
+														kind: 'ObjectField',
+														name: { kind: 'Name', value: 'end_date' },
+														value: { kind: 'EnumValue', value: 'desc' },
+													},
+												],
+											},
+										},
+									],
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'start_date' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'end_date' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'is_expired' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'is_signed' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'monthly_rent' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'unit_id' },
+											},
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'deposit' },
+											},
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<TenantPastLeases, TenantPastLeasesVariables>;

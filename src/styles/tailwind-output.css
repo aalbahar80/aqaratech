@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.2 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.7 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -148,7 +148,7 @@ sup {
 table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
-  border-collapse: collapse;  /* 3 */
+  border-collapse: collapse; /* 3 */
 }
 
 /*
@@ -313,18 +313,18 @@ textarea {
 */
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
 input::placeholder,
 textarea::placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
@@ -379,7 +379,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 [hidden] {
   display: none;
 }
-
 *, ::before, ::after {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
@@ -400,20 +399,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .invisible {
   visibility: hidden;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
 .col-span-full {
   grid-column: 1 / -1;
 }
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-.col-start-3 {
-  grid-column-start: 3;
-}
 .col-start-1 {
   grid-column-start: 1;
+}
+.col-end-3 {
+  grid-column-end: 3;
 }
 .mx-auto {
   margin-left: auto;
@@ -434,6 +433,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex {
   display: flex;
 }
+.inline-flex {
+  display: inline-flex;
+}
 .grid {
   display: grid;
 }
@@ -446,6 +448,27 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
+.w-max {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.w-auto {
+  width: auto;
+}
+.min-w-full {
+  min-width: 100%;
+}
+.min-w-max {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+.min-w-fit {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
 .max-w-md {
   max-width: 28rem;
 }
@@ -455,23 +478,37 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-screen-2xl {
   max-width: 1536px;
 }
+.max-w-max {
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
 .flex-grow {
   flex-grow: 1;
+}
+.grow {
+  flex-grow: 1;
+}
+.grid-flow-col {
+  grid-auto-flow: column;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .items-center {
   align-items: center;
-}
-.justify-center {
-  justify-content: center;
 }
 .justify-evenly {
   justify-content: space-evenly;
@@ -511,12 +548,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-8 {
   padding: 2rem;
 }
+.p-20 {
+  padding: 5rem;
+}
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-.pr-2 {
-  padding-right: 0.5rem;
 }
 .pl-2 {
   padding-left: 0.5rem;
@@ -555,6 +592,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 768px) {
 
   .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

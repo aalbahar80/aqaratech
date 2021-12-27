@@ -18,7 +18,6 @@
 	import { LeasesByIdDocument } from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 
-	import LeaseDropdown from '$components/LeaseDropdown.svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 

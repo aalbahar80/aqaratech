@@ -915,7 +915,7 @@ export enum expenses_types_enum {
 	HVAC = 'HVAC',
 	INSURANCE = 'INSURANCE',
 	INTERNET = 'INTERNET',
-	LANDCAPING = 'LANDCAPING',
+	LANDSCAPING = 'LANDSCAPING',
 	MANAGEMENT_FEES = 'MANAGEMENT_FEES',
 	PLUMBING = 'PLUMBING',
 	SATELLITE = 'SATELLITE',
@@ -6169,6 +6169,10 @@ export type TenantsByIdLocalQuery = {
 					start_date?: any | null | undefined;
 					end_date?: any | null | undefined;
 					is_expired?: boolean | null | undefined;
+					is_signed?: boolean | null | undefined;
+					monthly_rent?: number | null | undefined;
+					unit_id?: number | null | undefined;
+					deposit?: number | null | undefined;
 				}>;
 				leases: Array<{
 					__typename?: 'leases';
@@ -6234,6 +6238,32 @@ export type TenantBreadcrumbsQuery = {
 		| undefined;
 };
 
+export type TenantPastLeasesQueryVariables = Exact<{
+	id: Scalars['Int'];
+}>;
+
+export type TenantPastLeasesQuery = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				pastLeases: Array<{
+					__typename?: 'leases';
+					id: number;
+					start_date?: any | null | undefined;
+					end_date?: any | null | undefined;
+					is_expired?: boolean | null | undefined;
+					is_signed?: boolean | null | undefined;
+					monthly_rent?: number | null | undefined;
+					unit_id?: number | null | undefined;
+					deposit?: number | null | undefined;
+				}>;
+		  }
+		| null
+		| undefined;
+};
+
 export type tenantDetailsFragment = {
 	__typename?: 'tenants';
 	id: number;
@@ -6280,6 +6310,10 @@ export type pastLeasesFragment = {
 	start_date?: any | null | undefined;
 	end_date?: any | null | undefined;
 	is_expired?: boolean | null | undefined;
+	is_signed?: boolean | null | undefined;
+	monthly_rent?: number | null | undefined;
+	unit_id?: number | null | undefined;
+	deposit?: number | null | undefined;
 };
 
 export type ClientsInsertMutationStore = OperationStore<
@@ -6393,6 +6427,10 @@ export type TenantsByIdLocalQueryStore = OperationStore<
 export type TenantBreadcrumbsQueryStore = OperationStore<
 	TenantBreadcrumbsQuery,
 	TenantBreadcrumbsQueryVariables
+>;
+export type TenantPastLeasesQueryStore = OperationStore<
+	TenantPastLeasesQuery,
+	TenantPastLeasesQueryVariables
 >;
 export type WithTypename<T extends { __typename?: any }> = {
 	[K in Exclude<keyof T, '__typename'>]?: T[K];
@@ -11983,6 +12021,10 @@ export const pastLeasesFragmentDoc = {
 					{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'monthly_rent' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
 				],
 			},
 		},
@@ -13848,4 +13890,83 @@ export const TenantBreadcrumbsDocument = {
 } as unknown as DocumentNode<
 	TenantBreadcrumbsQuery,
 	TenantBreadcrumbsQueryVariables
+>;
+export const TenantPastLeasesDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantPastLeases' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{
+									kind: 'Field',
+									alias: { kind: 'Name', value: 'pastLeases' },
+									name: { kind: 'Name', value: 'leases' },
+									arguments: [
+										{
+											kind: 'Argument',
+											name: { kind: 'Name', value: 'order_by' },
+											value: {
+												kind: 'ObjectValue',
+												fields: [
+													{
+														kind: 'ObjectField',
+														name: { kind: 'Name', value: 'end_date' },
+														value: { kind: 'EnumValue', value: 'desc' },
+													},
+												],
+											},
+										},
+									],
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{
+												kind: 'FragmentSpread',
+												name: { kind: 'Name', value: 'pastLeases' },
+											},
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...pastLeasesFragmentDoc.definitions,
+	],
+} as unknown as DocumentNode<
+	TenantPastLeasesQuery,
+	TenantPastLeasesQueryVariables
 >;

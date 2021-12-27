@@ -1,8 +1,12 @@
-query TenantsByIdLocal($id: Int!, $with_crumbs: Boolean!, $with_past_leases: Boolean!) {
+query TenantsByIdLocal(
+	$id: Int!
+	$with_crumbs: Boolean!
+	$with_past_leases: Boolean!
+) {
 	tenants_by_pk(id: $id) {
 		...tenantDetails
 		...crumbs @include(if: $with_crumbs)
-		pastLeases: leases @include(if: $with_past_leases){
+		pastLeases: leases @include(if: $with_past_leases) {
 			...pastLeases
 		}
 	}
@@ -13,7 +17,14 @@ query TenantBreadcrumbs($id: Int!) {
 		...crumbs
 	}
 }
-
+query TenantPastLeases($id: Int!) {
+	tenants_by_pk(id: $id) {
+		id
+		pastLeases: leases(order_by: { end_date: desc }) {
+			...pastLeases
+		}
+	}
+}
 fragment tenantDetails on tenants {
 	id
 	first_name
@@ -47,4 +58,8 @@ fragment pastLeases on leases {
 	start_date
 	end_date
 	is_expired
+	is_signed
+	monthly_rent
+	unit_id
+	deposit
 }
