@@ -4,3 +4,5 @@ extensions:
   endpoints:
     default:
       url: https://hasura-xf70.onrender.com/v1/graphql
+      headers:
+        x-hasura-admin-secret: myadminsecret
