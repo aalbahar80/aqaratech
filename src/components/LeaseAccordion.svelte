@@ -9,8 +9,9 @@
 	import { operationStore, query } from '@urql/svelte';
 	import { getProgress } from '$lib/utils';
 	import { formatDistance, parseISO } from 'date-fns';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import { ArrowRight16 } from 'carbon-icons-svelte';
+	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
+
+	import { Launch24 } from 'carbon-icons-svelte';
 
 	$: id = parseInt($page.params.id);
 	$: console.log(id);
@@ -34,7 +35,7 @@
 
 <Accordion skeleton={$leases.fetching}>
 	{#each $leases.data?.tenants_by_pk?.pastLeases as { id, start_date, end_date, monthly_rent, deposit }, i}
-		<AccordionItem open={i === 0}>
+		<AccordionItem size="xl" open={i === 0}>
 			<div slot="title">
 				<h5>{`Lease #${id}`}</h5>
 				<ProgressBar
@@ -44,17 +45,15 @@
 					helperText="Expiry: {expiryText(end_date)}"
 				/>
 			</div>
-			<div class="grid grid-cols-2 grid-flow-col gap-y-4 p-4">
-				<Button
-					class="col-span-1 col-end-3"
-					icon={ArrowRight16}
-					kind="secondary"
-					size="small"
+			<div class="grid grid-cols-1 grid-flow-col items-center">
+				<Link
+					size="lg"
+					icon={Launch24}
 					href={`/leases/${id}`}
 					sveltekit:prefetch
 				>
 					Details
-				</Button>
+				</Link>
 				<p class="col-start-1">{`Rent: ${monthly_rent}`}</p>
 				<p class="col-start-1">{`Deposit: ${deposit}`}</p>
 			</div>

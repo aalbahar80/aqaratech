@@ -54,11 +54,11 @@
 	{/each}
 </Breadcrumb>
 
-<ButtonSet>
+<!-- <ButtonSet>
 	<Button href={`/${$page.path.split('/')[1]}/${id - 1}`} sveltekit:prefetch
 		>Previous</Button
 	>
 	<Button href={`/${$page.path.split('/')[1]}/${id + 1}`} sveltekit:prefetch
 		>Next</Button
 	>
-</ButtonSet>
+</ButtonSet> -->

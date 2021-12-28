@@ -507,8 +507,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.flex-col {
+  flex-direction: column;
+}
+.items-end {
+  align-items: flex-end;
+}
 .items-center {
   align-items: center;
+}
+.items-baseline {
+  align-items: baseline;
 }
 .justify-evenly {
   justify-content: space-evenly;
@@ -557,6 +566,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-2 {
   padding-left: 0.5rem;
+}
+.pr-4 {
+  padding-right: 1rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .text-center {
   text-align: center;
