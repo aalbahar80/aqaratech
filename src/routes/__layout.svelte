@@ -6,9 +6,21 @@
 	import { dedupExchange, ssrExchange, fetchExchange } from '@urql/svelte';
 	import rawSchema from '../FROMSCRIPTschema.json';
 	import type { GraphCacheConfig } from '$generated/graphql';
+	import { Auth0Client } from '@auth0/auth0-spa-js';
+	import auth from '$lib/services/auth';
+	import { isAuthenticated, user } from '$lib/stores/auth';
 
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch, stuff }) => {
+	export const load: Load = async ({ fetch, stuff, session }) => {
+		// check session. If user not logged in, redirect to login page
+		// let auth0Client = await auth.createClient();
+		// console.log(auth0Client);
+		console.log('session is: ', session);
+		console.log('isAuthenticated is: ', get(isAuthenticated));
+		// if (browser && !get(isAuthenticated)) {
+		// 	return { redirect: '/login', status: 302 };
+		// }
+
 		const cache = cacheExchange<GraphCacheConfig>({
 			schema: rawSchema,
 			resolvers: {
@@ -96,6 +108,7 @@
 	import { setClient } from '@urql/svelte';
 	import type { Client } from '@urql/svelte';
 	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
+
 	export let client: Client;
 	setClient(client);
 </script>

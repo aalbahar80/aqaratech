@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import Login from './login.svelte';
+	// import Login fro./login/login.sveltelte';
 
 	export const prerender = true;
 </script>
@@ -16,7 +16,7 @@
 				wvoluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
 				quasi. In deleniti eaque aut repudiandae et a id nisi.
 			</p>
-			<Login />
+			<!-- <Login /> -->
 		</div>
 	</div>
 </div>

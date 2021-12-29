@@ -3,6 +3,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const post: RequestHandler = async (request) => {
+	
 	const res = await fetch('https://hasura-xf70.onrender.com/v1/graphql', {
 		headers: {
 			'x-hasura-admin-secret': 'myadminsecret',

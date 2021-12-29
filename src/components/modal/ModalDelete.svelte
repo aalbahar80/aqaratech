@@ -1,10 +1,12 @@
 <script lang="ts">
-	import ModalGeneric from '$components/modal/ModalGeneric.svelte';
+	// import ModalGeneric from '$components/modal/ModalGeneric.svelte';
+	import ModalGeneric from '../modal/ModalGeneric.svelte';
 	import { key } from '$components/keyyy';
 	import { mutation, operationStore } from '@urql/svelte';
 	import type { DocumentNode } from 'graphql';
 	import { getContext } from 'svelte';
-	import { failureToast, successToast } from '$components/toasts';
+	// import { failureToast, successToast } from '$components/toasts';
+	import { failureToast, successToast } from '../toasts';
 
 	export let id: number;
 	let loading = false;

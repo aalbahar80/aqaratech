@@ -18,6 +18,12 @@ module.exports = {
 		// indent: 'off',
 		// 'no-tabs': 0,
 		// '@typescript-eslint/indent': [2, 'tab'],
+		'import/no-extraneous-dependencies': [
+			'error',
+			{
+				devDependencies: true,
+			},
+		],
 	},
 	plugins: ['svelte3', '@typescript-eslint'],
 	ignorePatterns: ['*.cjs'],
@@ -40,7 +46,7 @@ module.exports = {
 		'import/resolver': {
 			typescript: {},
 			node: {
-				extensions: ['.js', '.jsx', '.ts', '.tsx'],
+				extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
 			},
 		},
 	},
