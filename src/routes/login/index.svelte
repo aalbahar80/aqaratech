@@ -13,17 +13,20 @@
 		user.set(await auth0Client.getUser());
 	});
 
-	function login() {
+	async function login() {
 		console.log('logging in');
-		auth.loginWithPopup(auth0Client).then(() => {
-			goto('/');
-		});
+		await auth.loginWithPopup(auth0Client);
+		const claims = await auth0Client.getIdTokenClaims();
+		console.log(claims);
+		goto('/');
 	}
 
 	function logout() {
 		auth.logout(auth0Client);
 	}
 </script>
+
+<a href="/">Go Home</a>
 
 {#if $isAuthenticated}
 	<h2>Hey {$user.name}!</h2>

@@ -452,11 +452,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-4xl {
   max-width: 56rem;
 }
-.max-w-screen-2xl {
-  max-width: 1536px;
-}
 .max-w-7xl {
   max-width: 80rem;
+}
+.max-w-screen-2xl {
+  max-width: 1536px;
 }
 .flex-grow {
   flex-grow: 1;
