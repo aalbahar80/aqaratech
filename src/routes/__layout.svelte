@@ -11,13 +11,23 @@
 	import { isAuthenticated, user } from '$lib/stores/auth';
 
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch, stuff, session }) => {
+	export const load: Load = async ({ fetch, stuff, session, page }) => {
 		// check session. If user not logged in, redirect to login page
 		// let auth0Client = await auth.createClient();
 		// console.log(auth0Client);
 		// console.log('session is: ', JSON.parse(session));
 		console.log('layout session:', session.user);
+		const unprotected = ['/login', '/logout', '/callback', '/landing'];
+		if (
+			(session.user === '' || session.user === null) &&
+			!unprotected.includes(page.path) &&
+			browser
+		) {
+			return { redirect: '/landing', status: 302 };
+		}
+
 		// if (browser && !get(isAuthenticated)) {
+
 		// 	return { redirect: '/login', status: 302 };
 		// }
 
