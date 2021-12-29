@@ -68,7 +68,7 @@
 		<SideNavMenu text="Dashboards">
 			<SideNavMenuItem href="/" text="Link 1" />
 			<SideNavMenuItem href="/" text="Link 2" />
-			<SideNavMenuItem href="/" text="Link 3" />
+			<SideNavMenuItem href="/login" text="Login Page" />
 		</SideNavMenu>
 	</SideNavItems>
 </SideNav>
