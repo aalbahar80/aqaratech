@@ -15,8 +15,8 @@
 		// check session. If user not logged in, redirect to login page
 		// let auth0Client = await auth.createClient();
 		// console.log(auth0Client);
-		console.log('session is: ', session);
-		console.log('isAuthenticated is: ', get(isAuthenticated));
+		// console.log('session is: ', JSON.parse(session));
+		console.log('layout session:', session.user);
 		// if (browser && !get(isAuthenticated)) {
 		// 	return { redirect: '/login', status: 302 };
 		// }
