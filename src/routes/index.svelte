@@ -13,8 +13,10 @@
 		<div class="max-w-md">
 			<h1 class="mb-5 text-5xl font-bold">Hello there</h1>
 			<p class="mb-5">
-				wvoluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-				quasi. In deleniti eaque aut repudiandae et a id nisi.
+				<a href="/login2">Login2</a>
+				<a href="/logout">Logout</a>
+				wvoluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi.
+				In deleniti eaque aut repudiandae et a id nisi.
 			</p>
 			<!-- <Login /> -->
 		</div>
