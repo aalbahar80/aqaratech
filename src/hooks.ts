@@ -1,12 +1,33 @@
+/* eslint-disable import/prefer-default-export */
 // /* eslint-disable import/no-extraneous-dependencies */
 // // /* eslint-disable */
-// import type { Handle, GetSession } from '@sveltejs/kit';
+import type { Handle, GetSession } from '@sveltejs/kit';
+
 // import { get } from 'svelte/store';
 // import { isAuthenticated } from '$lib/stores/auth';
 // // import { get } from 'svelte/store';
-// // import * as cookie from 'cookie';
+import * as cookie from 'cookie';
 // // import { isAuthenticated, user } from '$lib/stores/auth';
 
+export const handle: Handle = async ({ request, resolve }) => {
+	console.log(request)
+	const cookies = cookie.parse(request.headers.cookie || '');
+	request.locals.user = cookies.user;
+
+	const response = await resolve(request);
+
+	response.headers['set-cookie'] = `user=${
+		request.locals.user || ''
+	}; path=/; HttpOnly`;
+
+	return response;
+};
+
+export const getSession: GetSession = async (request) => {
+	return {
+		user: request.locals.user,
+	};
+};
 // // export const handle: Handle = async ({ request, resolve }) => {
 // // 	console.log('request was made');
 
