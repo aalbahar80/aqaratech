@@ -7,7 +7,6 @@
 	import rawSchema from '../FROMSCRIPTschema.json';
 	import type { GraphCacheConfig } from '$generated/graphql';
 
-	import { BroadcastChannel } from 'broadcast-channel';
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, stuff, session, url }) => {
 		// check session. If user not logged in, redirect to login page
@@ -15,18 +14,9 @@
 		const shouldRedirect =
 			isEmpty(session.user) && !unprotected.includes(url.pathname);
 		console.log({ shouldRedirect, session, browser, url: url.toJSON() });
-		const signedIn = new BroadcastChannel('signed-in');
-		// if (session.user === '' || session.user === null) {
-		// 	signedIn.postMessage(false);
-		// }
 		if (shouldRedirect) {
 			return { redirect: '/landing', status: 302 };
 		}
-
-		// if (browser && !get(isAuthenticated)) {
-
-		// 	return { redirect: '/login', status: 302 };
-		// }
 
 		const cache = cacheExchange<GraphCacheConfig>({
 			// @ts-ignore
@@ -110,32 +100,13 @@
 	import '../styles/tailwind.css';
 	import 'carbon-components-svelte/css/all.css';
 
-	import Wrapper from '../Wrapper.svelte';
 	import Header from '$components/Header.svelte';
 	import { setClient } from '@urql/svelte';
 	import type { Client } from '@urql/svelte';
-	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
-	import { session } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { Content } from 'carbon-components-svelte';
 	import isEmpty from 'just-is-empty';
 	export let client: Client;
 	setClient(client);
-
-	const signedIn = new BroadcastChannel('signed-in');
-	signedIn.addEventListener('message', async (event) => {
-		// event.data should say if signed in or not
-		// but we don't need it?
-		console.log('body of event listener');
-		console.log({ event });
-		if (browser && event === false) {
-			goto('/landing');
-			// $session = { user: null };
-		}
-		// const response = await fetch('/current-session', {
-		// 	method: 'GET',
-		// });
-		// $session = await response.json();
-	});
 </script>
 
 <Header />
