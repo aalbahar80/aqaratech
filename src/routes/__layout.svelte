@@ -134,8 +134,8 @@
 		console.log('body of event listener');
 		console.log({ event });
 		if (browser && event === false) {
-			// goto('/');
-			$session = { user: null };
+			goto('/landing');
+			// $session = { user: null };
 		}
 		// const response = await fetch('/current-session', {
 		// 	method: 'GET',
