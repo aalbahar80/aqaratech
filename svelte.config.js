@@ -30,6 +30,8 @@ const config = {
 					$lib: path.resolve('./src/lib'),
 				},
 			},
+			optimizeDeps: { include: ['broadcast-channel'] },
+
 			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
 		},
 	},
