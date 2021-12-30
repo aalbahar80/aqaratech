@@ -10,14 +10,10 @@
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, stuff, session, url }) => {
 		// check session. If user not logged in, redirect to login page
-		// let auth0Client = await auth.createClient();
-		// console.log(auth0Client);
-		// console.log('session is: ', JSON.parse(session));
-		console.log('layout session:', session.user);
 		const unprotected = ['/login', '/logout', '/callback', '/landing'];
 		const shouldRedirect =
 			isEmpty(session.user) && !unprotected.includes(url.pathname);
-		console.log({ shouldRedirect, session, browser, url });
+		console.log({ shouldRedirect, session, browser, url: url.toJSON() });
 		const signedIn = new BroadcastChannel('signed-in');
 		// if (session.user === '' || session.user === null) {
 		// 	signedIn.postMessage(false);
@@ -115,7 +111,6 @@
 
 	import Wrapper from '../Wrapper.svelte';
 	import Header from '$components/Header.svelte';
-	import { onDestroy } from 'svelte';
 	import { setClient } from '@urql/svelte';
 	import type { Client } from '@urql/svelte';
 	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
@@ -124,7 +119,6 @@
 	import { goto } from '$app/navigation';
 	import isEmpty from 'just-is-empty';
 
-	console.log('layout here');
 	export let client: Client;
 	setClient(client);
 
