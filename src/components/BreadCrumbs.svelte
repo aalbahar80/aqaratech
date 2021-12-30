@@ -48,7 +48,7 @@
 
 <Breadcrumb skeleton={loading}>
 	{#each crumbs as { title, href, name }}
-		<BreadcrumbItem isCurrentPage={$page.path.startsWith(`/${name}`)}>
+		<BreadcrumbItem isCurrentPage={$page.url.pathname.startsWith(`/${name}`)}>
 			<Link sveltekit:prefetch {href}>{title}</Link>
 		</BreadcrumbItem>
 	{/each}

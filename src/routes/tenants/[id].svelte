@@ -3,8 +3,8 @@
 	import { TenantsByIdLocalDocument } from './_[id].gql';
 	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = async ({ page, stuff, fetch }) => {
-		const id = page.params.id;
+	export const load: Load = async ({ params, stuff, fetch }) => {
+		const id = params.id;
 		if (id === 'add') {
 			return;
 		} else {
@@ -62,14 +62,18 @@
 		<TenantBreadcrumbs />
 		<div class="flex flex-col items-end">
 			<Link
-				href={`/${$page.path.split('/')[1]}/${parseInt($page.params.id) - 1}`}
+				href={`/${$page.url.pathname.split('/')[1]}/${
+					parseInt($page.params.id) - 1
+				}`}
 				sveltekit:prefetch
 			>
 				<span class="pr-2">Previous</span>
 				<ArrowLeft16 />
 			</Link>
 			<Link
-				href={`/${$page.path.split('/')[1]}/${parseInt($page.params.id) + 1}`}
+				href={`/${$page.url.pathname.split('/')[1]}/${
+					parseInt($page.params.id) + 1
+				}`}
 				sveltekit:prefetch
 			>
 				<span class="pr-2">Next</span>

@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ page }) {
-		const id = page.params.id;
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = async ({ params }) => {
+		const id = params.id;
 
 		if (id === 'add') {
 			// Go to add page instead
@@ -9,7 +9,7 @@
 		} else {
 			return {};
 		}
-	}
+	};
 </script>
 
 <script lang="ts">
@@ -51,4 +51,6 @@
 	>Generate PDF</button
 >
 
-<a href="{$page.path}/edit" class="btn btn-secondary" class:loading>Edit</a>
+<a href="{$page.url.pathname}/edit" class="btn btn-secondary" class:loading
+	>Edit</a
+>

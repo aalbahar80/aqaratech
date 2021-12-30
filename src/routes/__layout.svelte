@@ -8,7 +8,7 @@
 	import type { GraphCacheConfig } from '$generated/graphql';
 
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch, stuff, session, page }) => {
+	export const load: Load = async ({ fetch, stuff, session, url }) => {
 		// check session. If user not logged in, redirect to login page
 		// let auth0Client = await auth.createClient();
 		// console.log(auth0Client);
@@ -17,8 +17,8 @@
 		const unprotected = ['/login', '/logout', '/callback', '/landing'];
 		const shouldRedirect =
 			(session.user === '' || session.user === null) &&
-			!unprotected.includes(page.path);
-		console.log({ shouldRedirect, session, browser, page });
+			!unprotected.includes(url.pathname);
+		console.log({ shouldRedirect, session, browser, url });
 		const signedIn = new BroadcastChannel('signed-in');
 		if (session.user === '' || session.user === null) {
 			signedIn.postMessage(false);
@@ -33,6 +33,7 @@
 		// }
 
 		const cache = cacheExchange<GraphCacheConfig>({
+			// @ts-ignore
 			schema: rawSchema,
 			resolvers: {
 				query_root: {

@@ -78,15 +78,21 @@
 					</ToolbarMenuItem>
 					<ToolbarMenuItem danger>Delete</ToolbarMenuItem>
 				</ToolbarMenu>
-				<Button href={`${$page.path}/add`}>New</Button>
+				<Button href={`${$page.url.pathname}/add`}>New</Button>
 			</ToolbarContent>
 		</Toolbar>
 
 		<span slot="cell" let:row let:cell>
 			{#if cell.key === 'overflow'}
 				<OverflowMenu flipped>
-					<OverflowMenuItem href={`${$page.path}/${row.id}`} text="Details" />
-					<OverflowMenuItem href={`${$page.path}/${row.id}/edit`} text="Edit" />
+					<OverflowMenuItem
+						href={`${$page.url.pathname}/${row.id}`}
+						text="Details"
+					/>
+					<OverflowMenuItem
+						href={`${$page.url.pathname}/${row.id}/edit`}
+						text="Edit"
+					/>
 					<OverflowMenuItem danger text="Delete" />
 				</OverflowMenu>
 			{:else}{cell.value}{/if}
