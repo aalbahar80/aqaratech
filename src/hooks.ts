@@ -3,9 +3,8 @@ import type { Handle, GetSession } from '@sveltejs/kit';
 import cookie from 'cookie';
 import { session } from '$app/stores';
 
-
 export const handle: Handle = async ({ request, resolve }) => {
-	const cookies = cookie.parse(request.headers.cookie || null);
+	const cookies = cookie.parse(request.headers.cookie || '');
 	console.log({ cookies });
 	request.locals.user = cookies.user;
 

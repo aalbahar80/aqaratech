@@ -16,13 +16,12 @@
 		console.log('layout session:', session.user);
 		const unprotected = ['/login', '/logout', '/callback', '/landing'];
 		const shouldRedirect =
-			(session.user === '' || session.user === null) &&
-			!unprotected.includes(url.pathname);
+			isEmpty(session.user) && !unprotected.includes(url.pathname);
 		console.log({ shouldRedirect, session, browser, url });
 		const signedIn = new BroadcastChannel('signed-in');
-		if (session.user === '' || session.user === null) {
-			signedIn.postMessage(false);
-		}
+		// if (session.user === '' || session.user === null) {
+		// 	signedIn.postMessage(false);
+		// }
 		if (shouldRedirect) {
 			return { redirect: '/landing', status: 302 };
 		}
@@ -123,6 +122,7 @@
 	import { session } from '$app/stores';
 	import { BroadcastChannel } from 'broadcast-channel';
 	import { goto } from '$app/navigation';
+	import isEmpty from 'just-is-empty';
 
 	console.log('layout here');
 	export let client: Client;

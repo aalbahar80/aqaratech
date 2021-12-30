@@ -24,9 +24,10 @@ module.exports = {
 				devDependencies: true,
 			},
 		],
-		"import/prefer-default-export": "off"
+		'import/prefer-default-export': 'off',
+		'import/no-unresolved': 'error',
 	},
-	plugins: ['svelte3', '@typescript-eslint'],
+	plugins: ['svelte3', '@typescript-eslint', 'import'],
 	ignorePatterns: ['*.cjs'],
 	overrides: [
 		{
@@ -45,7 +46,10 @@ module.exports = {
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
 		'import/resolver': {
-			typescript: {},
+			typescript: {
+				alwaysTryTypes: true,
+				project: './tsconfig.json',
+			},
 			node: {
 				extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
 			},
