@@ -26,6 +26,7 @@ module.exports = {
 		],
 		'import/prefer-default-export': 'off',
 		'import/no-unresolved': 'error',
+		'no-console': 'off',
 	},
 	plugins: ['svelte3', '@typescript-eslint', 'import'],
 	ignorePatterns: ['*.cjs'],
