@@ -6,9 +6,6 @@
 	import { dedupExchange, ssrExchange, fetchExchange } from '@urql/svelte';
 	import rawSchema from '../FROMSCRIPTschema.json';
 	import type { GraphCacheConfig } from '$generated/graphql';
-	import { Auth0Client } from '@auth0/auth0-spa-js';
-	import auth from '$lib/services/auth';
-	import { isAuthenticated, user } from '$lib/stores/auth';
 
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, stuff, session, page }) => {
@@ -18,11 +15,15 @@
 		// console.log('session is: ', JSON.parse(session));
 		console.log('layout session:', session.user);
 		const unprotected = ['/login', '/logout', '/callback', '/landing'];
-		if (
+		const shouldRedirect =
 			(session.user === '' || session.user === null) &&
-			!unprotected.includes(page.path) &&
-			browser
-		) {
+			!unprotected.includes(page.path);
+		console.log({ shouldRedirect, session, browser, page });
+		const signedIn = new BroadcastChannel('signed-in');
+		if (session.user === '' || session.user === null) {
+			signedIn.postMessage(false);
+		}
+		if (shouldRedirect) {
 			return { redirect: '/landing', status: 302 };
 		}
 
@@ -118,9 +119,29 @@
 	import { setClient } from '@urql/svelte';
 	import type { Client } from '@urql/svelte';
 	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
+	import { session } from '$app/stores';
+	import { BroadcastChannel } from 'broadcast-channel';
+	import { goto } from '$app/navigation';
 
+	console.log('layout here');
 	export let client: Client;
 	setClient(client);
+
+	const signedIn = new BroadcastChannel('signed-in');
+	signedIn.addEventListener('message', async (event) => {
+		// event.data should say if signed in or not
+		// but we don't need it?
+		console.log('body of event listener');
+		console.log({ event });
+		if (browser && event === false) {
+			// goto('/');
+			$session = { user: null };
+		}
+		// const response = await fetch('/current-session', {
+		// 	method: 'GET',
+		// });
+		// $session = await response.json();
+	});
 </script>
 
 <Header />
