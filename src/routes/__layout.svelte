@@ -7,6 +7,7 @@
 	import rawSchema from '../FROMSCRIPTschema.json';
 	import type { GraphCacheConfig } from '$generated/graphql';
 
+	import { BroadcastChannel } from 'broadcast-channel';
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, stuff, session, url }) => {
 		// check session. If user not logged in, redirect to login page
@@ -115,10 +116,8 @@
 	import type { Client } from '@urql/svelte';
 	import { Content, Grid, Row, Column } from 'carbon-components-svelte';
 	import { session } from '$app/stores';
-	import { BroadcastChannel } from 'broadcast-channel';
 	import { goto } from '$app/navigation';
 	import isEmpty from 'just-is-empty';
-
 	export let client: Client;
 	setClient(client);
 

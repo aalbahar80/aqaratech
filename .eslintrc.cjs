@@ -47,10 +47,7 @@ module.exports = {
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
 		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
-				project: './tsconfig.json',
-			},
+			typescript: {},
 			node: {
 				extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
 			},
