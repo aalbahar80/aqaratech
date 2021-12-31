@@ -55,16 +55,17 @@
 	query(pageQuery);
 </script>
 
-<button on:drop={() => {}}>dsfj</button>
 {#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
-{:else}
+{/if}
+<div class:hidden={$pageQuery.fetching}>
 	<DataTable
 		on:click:header={(h) => {
 			const field = h.detail.header.key;
 			const order = h.detail.sortDirection;
+			console.log({ field }, { order });
 			sortingInfo = {
-				field: order === 'ascending' ? order_by.asc : order_by.desc,
+				[field]: order === 'ascending' ? order_by.asc : order_by.desc,
 			};
 		}}
 		zebra
@@ -106,10 +107,10 @@
 			{:else}{cell.value}{/if}
 		</span>
 	</DataTable>
-	<Pagination
-		totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
-		{pageSizes}
-		bind:pageSize
-		bind:page={pageIndex}
-	/>
-{/if}
+</div>
+<Pagination
+	totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
+	{pageSizes}
+	bind:pageSize
+	bind:page={pageIndex}
+/>
