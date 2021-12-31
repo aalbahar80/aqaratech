@@ -29,5 +29,14 @@
 		"src/**/*.svelte",
 		"./jest-setup.ts"
 	],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules/*",
+		"dist/*",
+		".svelte/*",
+		".svelte-kit/*",
+		"build/*",
+		"coverage/*",
+		".vercel_build_output/*",
+		"functions/*"
+	]
 }

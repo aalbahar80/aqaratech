@@ -1,3 +1,5 @@
+/* jshint esversion: 9 */
+
 module.exports = {
 	root: true,
 	parser: '@typescript-eslint/parser',
