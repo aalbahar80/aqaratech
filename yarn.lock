@@ -3093,13 +3093,12 @@
   dependencies:
     esbuild "^0.13.15"
 
-"@sveltejs/kit@^1.0.0-next.208":
-  version "1.0.0-next.210"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.210.tgz#c75bba50f9f85dca8e07ae929733f109b984bcd5"
-  integrity sha512-Lf0Kb076njOCy9OU1/BPR1gLKTJ9auSGEjaKpgmueLcuRHmnsCh5tNX738uVPQJyJBdRkCVdCdurpFKSkuSyew==
+"@sveltejs/kit@^1.0.0-next.211":
+  version "1.0.0-next.211"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.211.tgz#7f205df3903e7b4ced05c2078ad02b1e6aa35a55"
+  integrity sha512-jS28R40H6BypK5rSVUzNmQW3NaBTFijj4fJPEtx8YeSLuzqm7ZGl3wwqF+FRxisP6oyz2GkYSARRxzemDOfn9A==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
-    cheap-watch "^1.0.4"
     sade "^1.7.4"
     vite "^2.7.2"
 
@@ -5188,11 +5187,6 @@ chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
-
-cheap-watch@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/cheap-watch/-/cheap-watch-1.0.4.tgz#0bcb4a3a8fbd9d5327936493f6b56baa668d8fef"
-  integrity sha512-QR/9FrtRL5fjfUJBhAKCdi0lSRQ3rVRRum3GF9wDKp2TJbEIMGhUEr2yU8lORzm9Isdjx7/k9S0DFDx+z5VGtw==
 
 chokidar@^2.1.8:
   version "2.1.8"
