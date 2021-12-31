@@ -35,30 +35,30 @@ module.exports = {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
 		},
-		{
-			files: ['*.graphql', '*.svelte'],
-			parser: '@graphql-eslint/eslint-plugin',
-			plugins: ['@graphql-eslint'],
-			rules: {
-				'@graphql-eslint/known-type-names': 'error',
-			},
-		},
+		// {
+		// 	files: ['*.graphql', '*.svelte'],
+		// 	parser: '@graphql-eslint/eslint-plugin',
+		// 	plugins: ['@graphql-eslint'],
+		// 	rules: {
+		// 		'@graphql-eslint/known-type-names': 'error',
+		// 	},
+		// },
 	],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
-		'import/resolver': {
-			typescript: {},
-			node: {
-				extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
-			},
-		},
+		// 'import/resolver': {
+		// 	typescript: {},
+		// 	node: {
+		// 		extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
+		// 	},
+		// },
 	},
 	parserOptions: {
 		sourceType: 'module',
-		ecmaVersion: 2019,
+		ecmaVersion: 2020,
 		// tsconfigRootDir: __dirname,
-		project: './tsconfig.json',
-		extraFileExtensions: ['.svelte'],
+		// project: 'tsconfig.json',
+		// extraFileExtensions: ['.svelte'],
 	},
 	env: {
 		browser: true,
