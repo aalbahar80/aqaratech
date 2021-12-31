@@ -55,7 +55,7 @@
 	query(PageQuery);
 </script>
 
-{#if PageQuery.fetching}
+{#if $PageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else}
 	<DataTable
