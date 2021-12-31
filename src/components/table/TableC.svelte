@@ -55,21 +55,17 @@
 	query(pageQuery);
 </script>
 
+<button on:drop={() => {}}>dsfj</button>
 {#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else}
 	<DataTable
 		on:click:header={(h) => {
-			// h.detail.
-			// if (h.detail.key === 'overflow') return;
-			// const df = 23;
-			// sortingInfo = {
-			// 	[h.key]: h.sortDirection === 'asc' ? order_by.desc : order_by.asc,
-			// };
-			// pageQuery.variables = {
-			// 	...queryVars,
-			// 	order_by: sortingInfo,
-			// };
+			const field = h.detail.header.key;
+			const order = h.detail.sortDirection;
+			sortingInfo = {
+				field: order === 'ascending' ? order_by.asc : order_by.desc,
+			};
 		}}
 		zebra
 		sortable
