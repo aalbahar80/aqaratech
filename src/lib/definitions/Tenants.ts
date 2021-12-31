@@ -47,19 +47,6 @@ const deleteQuery = gql`
 	}
 `;
 
-const list = gql`
-	query TenantsList(
-		$limit: Int
-		$offset: Int
-		$order_by: [tenants_order_by!] = {}
-	) {
-		tenants(order_by: $order_by, limit: $limit, offset: $offset) {
-			...tenantsDetails
-		}
-	}
-	${tenantsDetailsFragment}
-`;
-
 const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
@@ -92,7 +79,6 @@ const docs = {
 	insert: insert,
 	update: update,
 	del: deleteQuery,
-	list: list,
 	byId: TenantsByIdLocalDocument,
 };
 

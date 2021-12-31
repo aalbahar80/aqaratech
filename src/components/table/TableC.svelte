@@ -37,7 +37,7 @@
 			key: 'overflow',
 			empty: true,
 		},
-		99,
+		99, // insert after the last field
 	);
 
 	const pageSizes = [10, 25, 100];
@@ -50,21 +50,33 @@
 		order_by: sortingInfo,
 	};
 
-	$: PageQuery.variables = queryVars;
-	const PageQuery = operationStore(queryDocument, queryVars);
-	query(PageQuery);
+	$: pageQuery.variables = queryVars;
+	const pageQuery = operationStore(queryDocument, queryVars);
+	query(pageQuery);
 </script>
 
-{#if $PageQuery.fetching}
+{#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else}
 	<DataTable
+		on:click:header={(h) => {
+			// h.detail.
+			// if (h.detail.key === 'overflow') return;
+			// const df = 23;
+			// sortingInfo = {
+			// 	[h.key]: h.sortDirection === 'asc' ? order_by.desc : order_by.asc,
+			// };
+			// pageQuery.variables = {
+			// 	...queryVars,
+			// 	order_by: sortingInfo,
+			// };
+		}}
 		zebra
 		sortable
 		title={capitalize(graphqlName)}
 		description="Your organization's active load balancers."
 		{headers}
-		rows={$PageQuery.data?.[graphqlName]}
+		rows={$pageQuery.data?.[graphqlName]}
 	>
 		<Toolbar>
 			<ToolbarContent>
@@ -99,7 +111,7 @@
 		</span>
 	</DataTable>
 	<Pagination
-		totalItems={102}
+		totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
 		{pageSizes}
 		bind:pageSize
 		bind:page={pageIndex}

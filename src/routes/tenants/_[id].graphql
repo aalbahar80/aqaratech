@@ -63,3 +63,18 @@ fragment pastLeases on leases {
 	unit_id
 	deposit
 }
+
+query TenantsList(
+	$limit: Int
+	$offset: Int
+	$order_by: [tenants_order_by!] = {}
+) {
+	tenants(order_by: $order_by, limit: $limit, offset: $offset) {
+		...tenantDetails
+	}
+	agg: tenants_aggregate {
+		aggregate {
+			count
+		}
+	}
+}

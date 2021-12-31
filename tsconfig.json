@@ -28,5 +28,6 @@
 		"src/**/*.ts",
 		"src/**/*.svelte",
 		"./jest-setup.ts"
-	]
+	],
+	"exclude": ["node_modules"]
 }

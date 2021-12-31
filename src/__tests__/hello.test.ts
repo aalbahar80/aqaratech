@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 
-import Hello from '../routes/hello.svelte';
 import { render } from '@testing-library/svelte';
+import Hello from '../routes/hello.svelte';
 
 test('Welcome the user', () => {
 	const { getByText } = render(Hello, { props: { name: 'John' } });

@@ -5963,28 +5963,6 @@ export type DeleteTenantsMutation = {
 		| undefined;
 };
 
-export type TenantsListQueryVariables = Exact<{
-	limit?: InputMaybe<Scalars['Int']>;
-	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by> | tenants_order_by>;
-}>;
-
-export type TenantsListQuery = {
-	__typename?: 'query_root';
-	tenants: Array<{
-		__typename?: 'tenants';
-		id: number;
-		first_name?: string | null | undefined;
-		last_name?: string | null | undefined;
-		email?: string | null | undefined;
-		phone?: string | null | undefined;
-		dob?: any | null | undefined;
-		civilid?: any | null | undefined;
-		second_name?: string | null | undefined;
-		third_name?: string | null | undefined;
-	}>;
-};
-
 export type unitsDetailsFragment = {
 	__typename?: 'units';
 	id: number;
@@ -6316,6 +6294,35 @@ export type pastLeasesFragment = {
 	deposit?: number | null | undefined;
 };
 
+export type TenantsListQueryVariables = Exact<{
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<tenants_order_by> | tenants_order_by>;
+}>;
+
+export type TenantsListQuery = {
+	__typename?: 'query_root';
+	tenants: Array<{
+		__typename?: 'tenants';
+		id: number;
+		first_name?: string | null | undefined;
+		last_name?: string | null | undefined;
+		email?: string | null | undefined;
+		phone?: string | null | undefined;
+		dob?: any | null | undefined;
+		civilid?: any | null | undefined;
+		second_name?: string | null | undefined;
+		third_name?: string | null | undefined;
+	}>;
+	agg: {
+		__typename?: 'tenants_aggregate';
+		aggregate?:
+			| { __typename?: 'tenants_aggregate_fields'; count: number }
+			| null
+			| undefined;
+	};
+};
+
 export type ClientsInsertMutationStore = OperationStore<
 	ClientsInsertMutation,
 	ClientsInsertMutationVariables
@@ -6388,10 +6395,6 @@ export type DeleteTenantsMutationStore = OperationStore<
 	DeleteTenantsMutation,
 	DeleteTenantsMutationVariables
 >;
-export type TenantsListQueryStore = OperationStore<
-	TenantsListQuery,
-	TenantsListQueryVariables
->;
 export type UnitsInsertMutationStore = OperationStore<
 	UnitsInsertMutation,
 	UnitsInsertMutationVariables
@@ -6431,6 +6434,10 @@ export type TenantBreadcrumbsQueryStore = OperationStore<
 export type TenantPastLeasesQueryStore = OperationStore<
 	TenantPastLeasesQuery,
 	TenantPastLeasesQueryVariables
+>;
+export type TenantsListQueryStore = OperationStore<
+	TenantsListQuery,
+	TenantsListQueryVariables
 >;
 export type WithTypename<T extends { __typename?: any }> = {
 	[K in Exclude<keyof T, '__typename'>]?: T[K];
@@ -13210,97 +13217,6 @@ export const DeleteTenantsDocument = {
 	DeleteTenantsMutation,
 	DeleteTenantsMutationVariables
 >;
-export const TenantsListDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantsList' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'limit' },
-					},
-					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'offset' },
-					},
-					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'order_by' },
-					},
-					type: {
-						kind: 'ListType',
-						type: {
-							kind: 'NonNullType',
-							type: {
-								kind: 'NamedType',
-								name: { kind: 'Name', value: 'tenants_order_by' },
-							},
-						},
-					},
-					defaultValue: { kind: 'ObjectValue', fields: [] },
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'order_by' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'order_by' },
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'limit' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'limit' },
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'offset' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'offset' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantsDetails' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...tenantsDetailsFragmentDoc.definitions,
-	],
-} as unknown as DocumentNode<TenantsListQuery, TenantsListQueryVariables>;
 export const UnitsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13970,3 +13886,114 @@ export const TenantPastLeasesDocument = {
 	TenantPastLeasesQuery,
 	TenantPastLeasesQueryVariables
 >;
+export const TenantsListDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantsList' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'offset' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'tenants_order_by' },
+							},
+						},
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'offset' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'offset' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'agg' },
+						name: { kind: 'Name', value: 'tenants_aggregate' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'aggregate' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'count' } },
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...tenantDetailsFragmentDoc.definitions,
+	],
+} as unknown as DocumentNode<TenantsListQuery, TenantsListQueryVariables>;

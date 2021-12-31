@@ -123,6 +123,37 @@ export type TenantPastLeases = {
 		| undefined;
 };
 
+export type TenantsListVariables = Types.Exact<{
+	limit?: Types.InputMaybe<Types.Scalars['Int']>;
+	offset?: Types.InputMaybe<Types.Scalars['Int']>;
+	order_by?: Types.InputMaybe<
+		Array<Types.tenants_order_by> | Types.tenants_order_by
+	>;
+}>;
+
+export type TenantsList = {
+	__typename?: 'query_root';
+	tenants: Array<{
+		__typename?: 'tenants';
+		id: number;
+		first_name?: string | null | undefined;
+		last_name?: string | null | undefined;
+		email?: string | null | undefined;
+		phone?: string | null | undefined;
+		dob?: any | null | undefined;
+		civilid?: any | null | undefined;
+		second_name?: string | null | undefined;
+		third_name?: string | null | undefined;
+	}>;
+	agg: {
+		__typename?: 'tenants_aggregate';
+		aggregate?:
+			| { __typename?: 'tenants_aggregate_fields'; count: number }
+			| null
+			| undefined;
+	};
+};
+
 export const TenantsByIdLocalDocument = {
 	kind: 'Document',
 	definitions: [
@@ -560,3 +591,118 @@ export const TenantPastLeasesDocument = {
 		},
 	],
 } as unknown as DocumentNode<TenantPastLeases, TenantPastLeasesVariables>;
+export const TenantsListDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantsList' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'offset' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'tenants_order_by' },
+							},
+						},
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'offset' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'offset' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+							],
+						},
+					},
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'agg' },
+						name: { kind: 'Name', value: 'tenants_aggregate' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'aggregate' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'count' } },
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<TenantsList, TenantsListVariables>;
