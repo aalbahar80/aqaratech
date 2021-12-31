@@ -38,6 +38,14 @@ module.exports = {
 		{
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
+			rulse: {
+				// https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
+				'import/first': 'off',
+				'import/no-duplicates': 'off',
+				'import/no-mutable-exports': 'off',
+				'import/no-unresolved': 'off',
+				// 'import/no-extraneous-dependencies': 'off',
+			},
 		},
 		// {
 		// 	files: ['*.graphql', '*.svelte'],

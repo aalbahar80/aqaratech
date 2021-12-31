@@ -3062,14 +3062,14 @@
     resolve-from "^5.0.0"
     store2 "^2.12.0"
 
-"@sveltejs/adapter-auto@^1.0.0-next.6":
-  version "1.0.0-next.6"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-1.0.0-next.6.tgz#5eb5e625e81920f955ae68fe6be3688dfc3697a0"
-  integrity sha512-3cSxTAmomcIj6RQzhUf4O4Q5+FHCIW1s5kTsUMlnUrhs0NNELT8zfjsZ33qJSYSVma51ozo3V8N9HEJP+Ha4ow==
+"@sveltejs/adapter-auto@^1.0.0-next.7":
+  version "1.0.0-next.7"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-1.0.0-next.7.tgz#4f715cc3b167b0c60496cf31ddea8a53595c434b"
+  integrity sha512-PGuTgW6bdzKgJJy8a12OCN9ob7/I8ixfWjbBVpKpbjHGc5NmNcS70LoTU55BgVTI7ELp9VoZaJsGFoYp+X5WEw==
   dependencies:
     "@sveltejs/adapter-cloudflare" "1.0.0-next.5"
     "@sveltejs/adapter-netlify" "1.0.0-next.37"
-    "@sveltejs/adapter-vercel" "1.0.0-next.33"
+    "@sveltejs/adapter-vercel" "1.0.0-next.34"
 
 "@sveltejs/adapter-cloudflare@1.0.0-next.5":
   version "1.0.0-next.5"
@@ -3087,10 +3087,10 @@
     esbuild "^0.13.15"
     tiny-glob "^0.2.9"
 
-"@sveltejs/adapter-vercel@1.0.0-next.33":
-  version "1.0.0-next.33"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.33.tgz#9fbeafb9cd4212918990e4caa7cc7109e286853e"
-  integrity sha512-7an9TyvF+oSaj35WZC1nReajLyq647T3+IXEzG8/MzsTs3oJ2nnIOkrSfCSdeZ7uKZ+Q2TGPjDbloDnrMoRkYA==
+"@sveltejs/adapter-vercel@1.0.0-next.34":
+  version "1.0.0-next.34"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.34.tgz#8bdf5ce1fbaddbc08790a6090131eb7dd5c44550"
+  integrity sha512-TQDQK2wjDQkoSkNVuFVu4a/hzqKIWCGL15Zi7zQv740ZSd6F2Lg9QHlFfEXMglu6mhoep084h6JiLtzavNiZeA==
   dependencies:
     esbuild "^0.13.15"
 
