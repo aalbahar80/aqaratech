@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import type { Handle, GetSession } from '@sveltejs/kit';
 import cookie from 'cookie';
 

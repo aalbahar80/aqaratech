@@ -18,12 +18,12 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'no-console': 'off',
 		// 'import/no-unresolved': 'error',
-		// 'import/no-extraneous-dependencies': [
-		// 	'error',
-		// 	{
-		// 		devDependencies: true,
-		// 	},
-		// ],
+		'import/no-extraneous-dependencies': [
+			'error',
+			{
+				devDependencies: true,
+			},
+		],
 	},
 	plugins: ['svelte3', '@typescript-eslint', 'import'],
 	ignorePatterns: ['*.cjs', '*.js'],

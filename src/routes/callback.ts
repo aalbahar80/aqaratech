@@ -1,14 +1,12 @@
-/* eslint-disable import/prefer-default-export */
 //  Endpoint for redirection from GitHub after authorization...
 import type { RequestHandler } from '@sveltejs/kit';
 
 const tokenURL = 'https://dev-eehvhdp2.eu.auth0.com/oauth/token';
 const userURL = 'https://dev-eehvhdp2.eu.auth0.com/userinfo';
 
-const clientId = 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct';
-const redirectUri = 'http://localhost:3000/callback';
-const secret =
-	'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf';
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
+const secret = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
 export const get: RequestHandler = async (req) => {
 	// export async function get(req): RequestHandler {
 
