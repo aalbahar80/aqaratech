@@ -2,7 +2,7 @@ import preprocess from 'svelte-preprocess';
 import path from 'path';
 import adapter from '@sveltejs/adapter-auto';
 import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
-import { elements } from 'carbon-preprocess-svelte';
+// import { elements } from 'carbon-preprocess-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,7 +17,6 @@ const config = {
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		// adapter: vercel(),
 		adapter: adapter(),
 		vite: {
 			resolve: {
@@ -28,9 +27,7 @@ const config = {
 					$lib: path.resolve('./src/lib'),
 				},
 			},
-			// optimizeDeps: { include: ['broadcast-channel'] },
-
-			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
+			plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
 		},
 	},
 };
