@@ -19,7 +19,8 @@ module.exports = {
 	rules: {
 		'import/prefer-default-export': 'off',
 		'no-console': 'off',
-		// 'import/no-unresolved': 'error',
+		'import/no-unresolved': 'off',
+		'import/extensions': 'off',
 		'import/no-extraneous-dependencies': [
 			'error',
 			{

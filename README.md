@@ -43,6 +43,14 @@ npm run build
 Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
 
 ```bash
+yarn run check 
+```
+
+```bash
 yarn eslint . --ext .ts,.svelte,.graphql
 ```
 > graphql eslint linter not fully wired up. See eslint config file.
+
+```bash
+yarn run jest
+```

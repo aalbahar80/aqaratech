@@ -52,6 +52,10 @@
 					},
 				},
 			},
+			keys: {
+				tenants_aggregate: () => null,
+				tenants_aggregate_fields: () => null,
+			},
 		});
 
 		const client = await createClient({

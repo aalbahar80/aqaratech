@@ -15,6 +15,7 @@ export const get: RequestHandler = async (req) => {
 	const code = req.url.searchParams.get('code');
 	//  ...to get an access_token for the authorized user from GitHub...
 	const tokens = await getTokens(code);
+    console.log("🚀 ~ file: callback.ts ~ line 18 ~ get ~ tokens", tokens)
 	//  ...to get the user information from Github
 	const usermaybe = await getUser(tokens.access_token);
 	// console.log(usermaybe)
