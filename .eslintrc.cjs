@@ -29,7 +29,7 @@ module.exports = {
 		],
 	},
 	plugins: ['svelte3', '@typescript-eslint', 'import'],
-	ignorePatterns: ['*.cjs', '*.js'],
+	ignorePatterns: ['*.cjs', 'svelte.config.js'],
 	overrides: [
 		{
 			files: ['*.svelte'],

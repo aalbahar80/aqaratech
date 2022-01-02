@@ -1,7 +1,5 @@
 import preprocess from 'svelte-preprocess';
 import path from 'path';
-// import vercel from '@sveltejs/adapter-vercel';
-// import adapter from '@sveltejs/adapter-static';
 import adapter from '@sveltejs/adapter-auto';
 import { optimizeImports, optimizeCss } from 'carbon-preprocess-svelte';
 import { elements } from 'carbon-preprocess-svelte';
