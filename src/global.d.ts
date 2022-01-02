@@ -12,7 +12,7 @@ export type OperationStore<
 
 export type Crumb = {
 	name: string;
-	title?: string
+	title?: string;
 	href: string;
 	id?: string;
 };
