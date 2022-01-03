@@ -5,7 +5,7 @@ import type * as Types from '../../generated/graphql';
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type PropertiesInsertVariables = Types.Exact<{
-	object?: Types.InputMaybe<Types.properties_insert_input>;
+	object?: Types.InputMaybe<Types.Properties_Insert_Input>;
 }>;
 
 export type PropertiesInsert = {
@@ -28,7 +28,7 @@ export type PropertiesInsert = {
 
 export type PropertiesUpdateVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
-	_set?: Types.InputMaybe<Types.properties_set_input>;
+	_set?: Types.InputMaybe<Types.Properties_Set_Input>;
 }>;
 
 export type PropertiesUpdate = {
@@ -87,7 +87,7 @@ export type PropertiesListVariables = Types.Exact<{
 	limit?: Types.InputMaybe<Types.Scalars['Int']>;
 	offset?: Types.InputMaybe<Types.Scalars['Int']>;
 	order_by?: Types.InputMaybe<
-		Array<Types.properties_order_by> | Types.properties_order_by
+		Array<Types.Properties_Order_By> | Types.Properties_Order_By
 	>;
 }>;
 

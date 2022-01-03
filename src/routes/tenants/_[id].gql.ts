@@ -129,7 +129,7 @@ export type TenantsListVariables = Types.Exact<{
 	limit?: Types.InputMaybe<Types.Scalars['Int']>;
 	offset?: Types.InputMaybe<Types.Scalars['Int']>;
 	order_by?: Types.InputMaybe<
-		Array<Types.tenants_order_by> | Types.tenants_order_by
+		Array<Types.Tenants_Order_By> | Types.Tenants_Order_By
 	>;
 }>;
 

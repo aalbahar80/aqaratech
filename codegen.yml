@@ -16,14 +16,17 @@ generates:
       - introspection
   ./src/generated/graphql.ts:
     plugins:
+      - add:
+          content:
+            - '// THIS FILE IS GENERATED, DO NOT EDIT!'
+            - '/* eslint-disable */'
       - typescript
       - typescript-operations
       - urql-svelte-operations-store
-      - typescript-urql-graphcache
       - typed-document-node
+      - typescript-urql-graphcache
     config:
       useTypeImports: true
-      namingConvention: keep
   src/:
     preset: near-operation-file
     presetConfig:
@@ -41,7 +44,7 @@ generates:
       # addOperationExport: true
       flattenGeneratedTypes: true
 
-config:
+config:  
   # use "import type" instead of "import"
   useTypeImports: true
   # turn enums into types
@@ -51,12 +54,10 @@ config:
   dedupeOperationSuffix: true
   exportFragmentSpreadSubTypes: true
   experimentalFragmentVariables: true
-  addUnderscoreToArgsType: true
 
   # onlyOperationTypes: true
   preResolveTypes: true
 
-  namingConvention: keep
 
   scalars:
     date: string

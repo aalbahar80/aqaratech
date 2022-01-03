@@ -1,3 +1,5 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
+/* eslint-disable */
 import type { OperationStore } from '@urql/svelte';
 import type {
 	Resolver as GraphCacheResolver,
@@ -33,7 +35,7 @@ export type Scalars = {
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
-export type Boolean_comparison_exp = {
+export type Boolean_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['Boolean']>;
 	_gt?: InputMaybe<Scalars['Boolean']>;
 	_gte?: InputMaybe<Scalars['Boolean']>;
@@ -46,7 +48,7 @@ export type Boolean_comparison_exp = {
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
-export type Int_comparison_exp = {
+export type Int_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['Int']>;
 	_gt?: InputMaybe<Scalars['Int']>;
 	_gte?: InputMaybe<Scalars['Int']>;
@@ -59,7 +61,7 @@ export type Int_comparison_exp = {
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
-export type String_comparison_exp = {
+export type String_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['String']>;
 	_gt?: InputMaybe<Scalars['String']>;
 	_gte?: InputMaybe<Scalars['String']>;
@@ -92,7 +94,7 @@ export type String_comparison_exp = {
 };
 
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
-export type bigint_comparison_exp = {
+export type Bigint_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['bigint']>;
 	_gt?: InputMaybe<Scalars['bigint']>;
 	_gte?: InputMaybe<Scalars['bigint']>;
@@ -105,193 +107,193 @@ export type bigint_comparison_exp = {
 };
 
 /** columns and relationships of "clients" */
-export type clients = {
+export type Clients = {
 	__typename?: 'clients';
 	civilid?: Maybe<Scalars['bigint']>;
 	email?: Maybe<Scalars['String']>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	first_name?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	is_active?: Maybe<Scalars['Boolean']>;
 	last_name?: Maybe<Scalars['String']>;
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	phone?: Maybe<Scalars['String']>;
 	/** An array relationship */
-	properties: Array<properties>;
+	properties: Array<Properties>;
 	/** An aggregate relationship */
-	properties_aggregate: properties_aggregate;
+	properties_aggregate: Properties_Aggregate;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
 	/** An array relationship */
-	users: Array<users>;
+	users: Array<Users>;
 	/** An aggregate relationship */
-	users_aggregate: users_aggregate;
+	users_aggregate: Users_Aggregate;
 };
 
 /** columns and relationships of "clients" */
-export type clients_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type ClientsExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type ClientsExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type ClientsMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type ClientsMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_propertiesArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type ClientsPropertiesArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_properties_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type ClientsProperties_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_usersArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type ClientsUsersArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** columns and relationships of "clients" */
-export type clients_users_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type ClientsUsers_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** aggregated selection of "clients" */
-export type clients_aggregate = {
+export type Clients_Aggregate = {
 	__typename?: 'clients_aggregate';
-	aggregate?: Maybe<clients_aggregate_fields>;
-	nodes: Array<clients>;
+	aggregate?: Maybe<Clients_Aggregate_Fields>;
+	nodes: Array<Clients>;
 };
 
 /** aggregate fields of "clients" */
-export type clients_aggregate_fields = {
+export type Clients_Aggregate_Fields = {
 	__typename?: 'clients_aggregate_fields';
-	avg?: Maybe<clients_avg_fields>;
+	avg?: Maybe<Clients_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<clients_max_fields>;
-	min?: Maybe<clients_min_fields>;
-	stddev?: Maybe<clients_stddev_fields>;
-	stddev_pop?: Maybe<clients_stddev_pop_fields>;
-	stddev_samp?: Maybe<clients_stddev_samp_fields>;
-	sum?: Maybe<clients_sum_fields>;
-	var_pop?: Maybe<clients_var_pop_fields>;
-	var_samp?: Maybe<clients_var_samp_fields>;
-	variance?: Maybe<clients_variance_fields>;
+	max?: Maybe<Clients_Max_Fields>;
+	min?: Maybe<Clients_Min_Fields>;
+	stddev?: Maybe<Clients_Stddev_Fields>;
+	stddev_pop?: Maybe<Clients_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Clients_Stddev_Samp_Fields>;
+	sum?: Maybe<Clients_Sum_Fields>;
+	var_pop?: Maybe<Clients_Var_Pop_Fields>;
+	var_samp?: Maybe<Clients_Var_Samp_Fields>;
+	variance?: Maybe<Clients_Variance_Fields>;
 };
 
 /** aggregate fields of "clients" */
-export type clients_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<clients_select_column>>;
+export type Clients_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Clients_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type clients_avg_fields = {
+export type Clients_Avg_Fields = {
 	__typename?: 'clients_avg_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "clients". All fields are combined with a logical 'AND'. */
-export type clients_bool_exp = {
-	_and?: InputMaybe<Array<clients_bool_exp>>;
-	_not?: InputMaybe<clients_bool_exp>;
-	_or?: InputMaybe<Array<clients_bool_exp>>;
-	civilid?: InputMaybe<bigint_comparison_exp>;
-	email?: InputMaybe<String_comparison_exp>;
-	expenses?: InputMaybe<expenses_bool_exp>;
-	first_name?: InputMaybe<String_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	is_active?: InputMaybe<Boolean_comparison_exp>;
-	last_name?: InputMaybe<String_comparison_exp>;
-	maintenance_orders?: InputMaybe<maintenance_orders_bool_exp>;
-	phone?: InputMaybe<String_comparison_exp>;
-	properties?: InputMaybe<properties_bool_exp>;
-	second_name?: InputMaybe<String_comparison_exp>;
-	third_name?: InputMaybe<String_comparison_exp>;
-	users?: InputMaybe<users_bool_exp>;
+export type Clients_Bool_Exp = {
+	_and?: InputMaybe<Array<Clients_Bool_Exp>>;
+	_not?: InputMaybe<Clients_Bool_Exp>;
+	_or?: InputMaybe<Array<Clients_Bool_Exp>>;
+	civilid?: InputMaybe<Bigint_Comparison_Exp>;
+	email?: InputMaybe<String_Comparison_Exp>;
+	expenses?: InputMaybe<Expenses_Bool_Exp>;
+	first_name?: InputMaybe<String_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	is_active?: InputMaybe<Boolean_Comparison_Exp>;
+	last_name?: InputMaybe<String_Comparison_Exp>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	phone?: InputMaybe<String_Comparison_Exp>;
+	properties?: InputMaybe<Properties_Bool_Exp>;
+	second_name?: InputMaybe<String_Comparison_Exp>;
+	third_name?: InputMaybe<String_Comparison_Exp>;
+	users?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "clients" */
-export type clients_constraint =
+export type Clients_Constraint =
 	/** unique or primary key constraint */
 	'clients_pkey';
 
 /** input type for incrementing numeric columns in table "clients" */
-export type clients_inc_input = {
+export type Clients_Inc_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "clients" */
-export type clients_insert_input = {
+export type Clients_Insert_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	email?: InputMaybe<Scalars['String']>;
-	expenses?: InputMaybe<expenses_arr_rel_insert_input>;
+	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	first_name?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	is_active?: InputMaybe<Scalars['Boolean']>;
 	last_name?: InputMaybe<Scalars['String']>;
-	maintenance_orders?: InputMaybe<maintenance_orders_arr_rel_insert_input>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Arr_Rel_Insert_Input>;
 	phone?: InputMaybe<Scalars['String']>;
-	properties?: InputMaybe<properties_arr_rel_insert_input>;
+	properties?: InputMaybe<Properties_Arr_Rel_Insert_Input>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
-	users?: InputMaybe<users_arr_rel_insert_input>;
+	users?: InputMaybe<Users_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
-export type clients_max_fields = {
+export type Clients_Max_Fields = {
 	__typename?: 'clients_max_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	email?: Maybe<Scalars['String']>;
@@ -304,7 +306,7 @@ export type clients_max_fields = {
 };
 
 /** aggregate min on columns */
-export type clients_min_fields = {
+export type Clients_Min_Fields = {
 	__typename?: 'clients_min_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	email?: Maybe<Scalars['String']>;
@@ -317,52 +319,52 @@ export type clients_min_fields = {
 };
 
 /** response of any mutation on the table "clients" */
-export type clients_mutation_response = {
+export type Clients_Mutation_Response = {
 	__typename?: 'clients_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<clients>;
+	returning: Array<Clients>;
 };
 
 /** input type for inserting object relation for remote table "clients" */
-export type clients_obj_rel_insert_input = {
-	data: clients_insert_input;
+export type Clients_Obj_Rel_Insert_Input = {
+	data: Clients_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<clients_on_conflict>;
+	on_conflict?: InputMaybe<Clients_On_Conflict>;
 };
 
 /** on conflict condition type for table "clients" */
-export type clients_on_conflict = {
-	constraint: clients_constraint;
-	update_columns?: Array<clients_update_column>;
-	where?: InputMaybe<clients_bool_exp>;
+export type Clients_On_Conflict = {
+	constraint: Clients_Constraint;
+	update_columns?: Array<Clients_Update_Column>;
+	where?: InputMaybe<Clients_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "clients". */
-export type clients_order_by = {
-	civilid?: InputMaybe<order_by>;
-	email?: InputMaybe<order_by>;
-	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
-	first_name?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	is_active?: InputMaybe<order_by>;
-	last_name?: InputMaybe<order_by>;
-	maintenance_orders_aggregate?: InputMaybe<maintenance_orders_aggregate_order_by>;
-	phone?: InputMaybe<order_by>;
-	properties_aggregate?: InputMaybe<properties_aggregate_order_by>;
-	second_name?: InputMaybe<order_by>;
-	third_name?: InputMaybe<order_by>;
-	users_aggregate?: InputMaybe<users_aggregate_order_by>;
+export type Clients_Order_By = {
+	civilid?: InputMaybe<Order_By>;
+	email?: InputMaybe<Order_By>;
+	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
+	first_name?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	is_active?: InputMaybe<Order_By>;
+	last_name?: InputMaybe<Order_By>;
+	maintenance_orders_aggregate?: InputMaybe<Maintenance_Orders_Aggregate_Order_By>;
+	phone?: InputMaybe<Order_By>;
+	properties_aggregate?: InputMaybe<Properties_Aggregate_Order_By>;
+	second_name?: InputMaybe<Order_By>;
+	third_name?: InputMaybe<Order_By>;
+	users_aggregate?: InputMaybe<Users_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: clients */
-export type clients_pk_columns_input = {
+export type Clients_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "clients" */
-export type clients_select_column =
+export type Clients_Select_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
@@ -383,7 +385,7 @@ export type clients_select_column =
 	| 'third_name';
 
 /** input type for updating data in table "clients" */
-export type clients_set_input = {
+export type Clients_Set_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	email?: InputMaybe<Scalars['String']>;
 	first_name?: InputMaybe<Scalars['String']>;
@@ -396,35 +398,35 @@ export type clients_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type clients_stddev_fields = {
+export type Clients_Stddev_Fields = {
 	__typename?: 'clients_stddev_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type clients_stddev_pop_fields = {
+export type Clients_Stddev_Pop_Fields = {
 	__typename?: 'clients_stddev_pop_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type clients_stddev_samp_fields = {
+export type Clients_Stddev_Samp_Fields = {
 	__typename?: 'clients_stddev_samp_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type clients_sum_fields = {
+export type Clients_Sum_Fields = {
 	__typename?: 'clients_sum_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	id?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "clients" */
-export type clients_update_column =
+export type Clients_Update_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
@@ -445,28 +447,28 @@ export type clients_update_column =
 	| 'third_name';
 
 /** aggregate var_pop on columns */
-export type clients_var_pop_fields = {
+export type Clients_Var_Pop_Fields = {
 	__typename?: 'clients_var_pop_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type clients_var_samp_fields = {
+export type Clients_Var_Samp_Fields = {
 	__typename?: 'clients_var_samp_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type clients_variance_fields = {
+export type Clients_Variance_Fields = {
 	__typename?: 'clients_variance_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
-export type date_comparison_exp = {
+export type Date_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['date']>;
 	_gt?: InputMaybe<Scalars['date']>;
 	_gte?: InputMaybe<Scalars['date']>;
@@ -479,82 +481,82 @@ export type date_comparison_exp = {
 };
 
 /** columns and relationships of "expenses" */
-export type expenses = {
+export type Expenses = {
 	__typename?: 'expenses';
 	amount?: Maybe<Scalars['Int']>;
-	category?: Maybe<expenses_types_enum>;
+	category?: Maybe<Expenses_Types_Enum>;
 	/** An object relationship */
-	client?: Maybe<clients>;
+	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
 	date_post?: Maybe<Scalars['date']>;
 	/** An object relationship */
-	expenses_type?: Maybe<expenses_types>;
+	expenses_type?: Maybe<Expenses_Types>;
 	id: Scalars['Int'];
 	/** An object relationship */
-	maintenance_order?: Maybe<maintenance_orders>;
+	maintenance_order?: Maybe<Maintenance_Orders>;
 	maintenance_order_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	property?: Maybe<properties>;
+	property?: Maybe<Properties>;
 	property_id?: Maybe<Scalars['Int']>;
 	/** An object relationship */
-	unit?: Maybe<units>;
+	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
 };
 
 /** aggregated selection of "expenses" */
-export type expenses_aggregate = {
+export type Expenses_Aggregate = {
 	__typename?: 'expenses_aggregate';
-	aggregate?: Maybe<expenses_aggregate_fields>;
-	nodes: Array<expenses>;
+	aggregate?: Maybe<Expenses_Aggregate_Fields>;
+	nodes: Array<Expenses>;
 };
 
 /** aggregate fields of "expenses" */
-export type expenses_aggregate_fields = {
+export type Expenses_Aggregate_Fields = {
 	__typename?: 'expenses_aggregate_fields';
-	avg?: Maybe<expenses_avg_fields>;
+	avg?: Maybe<Expenses_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<expenses_max_fields>;
-	min?: Maybe<expenses_min_fields>;
-	stddev?: Maybe<expenses_stddev_fields>;
-	stddev_pop?: Maybe<expenses_stddev_pop_fields>;
-	stddev_samp?: Maybe<expenses_stddev_samp_fields>;
-	sum?: Maybe<expenses_sum_fields>;
-	var_pop?: Maybe<expenses_var_pop_fields>;
-	var_samp?: Maybe<expenses_var_samp_fields>;
-	variance?: Maybe<expenses_variance_fields>;
+	max?: Maybe<Expenses_Max_Fields>;
+	min?: Maybe<Expenses_Min_Fields>;
+	stddev?: Maybe<Expenses_Stddev_Fields>;
+	stddev_pop?: Maybe<Expenses_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Expenses_Stddev_Samp_Fields>;
+	sum?: Maybe<Expenses_Sum_Fields>;
+	var_pop?: Maybe<Expenses_Var_Pop_Fields>;
+	var_samp?: Maybe<Expenses_Var_Samp_Fields>;
+	variance?: Maybe<Expenses_Variance_Fields>;
 };
 
 /** aggregate fields of "expenses" */
-export type expenses_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<expenses_select_column>>;
+export type Expenses_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Expenses_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "expenses" */
-export type expenses_aggregate_order_by = {
-	avg?: InputMaybe<expenses_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<expenses_max_order_by>;
-	min?: InputMaybe<expenses_min_order_by>;
-	stddev?: InputMaybe<expenses_stddev_order_by>;
-	stddev_pop?: InputMaybe<expenses_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<expenses_stddev_samp_order_by>;
-	sum?: InputMaybe<expenses_sum_order_by>;
-	var_pop?: InputMaybe<expenses_var_pop_order_by>;
-	var_samp?: InputMaybe<expenses_var_samp_order_by>;
-	variance?: InputMaybe<expenses_variance_order_by>;
+export type Expenses_Aggregate_Order_By = {
+	avg?: InputMaybe<Expenses_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Expenses_Max_Order_By>;
+	min?: InputMaybe<Expenses_Min_Order_By>;
+	stddev?: InputMaybe<Expenses_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Expenses_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Expenses_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Expenses_Sum_Order_By>;
+	var_pop?: InputMaybe<Expenses_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Expenses_Var_Samp_Order_By>;
+	variance?: InputMaybe<Expenses_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "expenses" */
-export type expenses_arr_rel_insert_input = {
-	data: Array<expenses_insert_input>;
+export type Expenses_Arr_Rel_Insert_Input = {
+	data: Array<Expenses_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<expenses_on_conflict>;
+	on_conflict?: InputMaybe<Expenses_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type expenses_avg_fields = {
+export type Expenses_Avg_Fields = {
 	__typename?: 'expenses_avg_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -565,43 +567,43 @@ export type expenses_avg_fields = {
 };
 
 /** order by avg() on columns of table "expenses" */
-export type expenses_avg_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Avg_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "expenses". All fields are combined with a logical 'AND'. */
-export type expenses_bool_exp = {
-	_and?: InputMaybe<Array<expenses_bool_exp>>;
-	_not?: InputMaybe<expenses_bool_exp>;
-	_or?: InputMaybe<Array<expenses_bool_exp>>;
-	amount?: InputMaybe<Int_comparison_exp>;
-	category?: InputMaybe<expenses_types_enum_comparison_exp>;
-	client?: InputMaybe<clients_bool_exp>;
-	client_id?: InputMaybe<Int_comparison_exp>;
-	date_post?: InputMaybe<date_comparison_exp>;
-	expenses_type?: InputMaybe<expenses_types_bool_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	maintenance_order?: InputMaybe<maintenance_orders_bool_exp>;
-	maintenance_order_id?: InputMaybe<Int_comparison_exp>;
-	memo?: InputMaybe<String_comparison_exp>;
-	property?: InputMaybe<properties_bool_exp>;
-	property_id?: InputMaybe<Int_comparison_exp>;
-	unit?: InputMaybe<units_bool_exp>;
-	unit_id?: InputMaybe<Int_comparison_exp>;
+export type Expenses_Bool_Exp = {
+	_and?: InputMaybe<Array<Expenses_Bool_Exp>>;
+	_not?: InputMaybe<Expenses_Bool_Exp>;
+	_or?: InputMaybe<Array<Expenses_Bool_Exp>>;
+	amount?: InputMaybe<Int_Comparison_Exp>;
+	category?: InputMaybe<Expenses_Types_Enum_Comparison_Exp>;
+	client?: InputMaybe<Clients_Bool_Exp>;
+	client_id?: InputMaybe<Int_Comparison_Exp>;
+	date_post?: InputMaybe<Date_Comparison_Exp>;
+	expenses_type?: InputMaybe<Expenses_Types_Bool_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	maintenance_order?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	maintenance_order_id?: InputMaybe<Int_Comparison_Exp>;
+	memo?: InputMaybe<String_Comparison_Exp>;
+	property?: InputMaybe<Properties_Bool_Exp>;
+	property_id?: InputMaybe<Int_Comparison_Exp>;
+	unit?: InputMaybe<Units_Bool_Exp>;
+	unit_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "expenses" */
-export type expenses_constraint =
+export type Expenses_Constraint =
 	/** unique or primary key constraint */
 	'expenses_pkey';
 
 /** input type for incrementing numeric columns in table "expenses" */
-export type expenses_inc_input = {
+export type Expenses_Inc_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -611,25 +613,25 @@ export type expenses_inc_input = {
 };
 
 /** input type for inserting data into table "expenses" */
-export type expenses_insert_input = {
+export type Expenses_Insert_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
-	category?: InputMaybe<expenses_types_enum>;
-	client?: InputMaybe<clients_obj_rel_insert_input>;
+	category?: InputMaybe<Expenses_Types_Enum>;
+	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	date_post?: InputMaybe<Scalars['date']>;
-	expenses_type?: InputMaybe<expenses_types_obj_rel_insert_input>;
+	expenses_type?: InputMaybe<Expenses_Types_Obj_Rel_Insert_Input>;
 	id?: InputMaybe<Scalars['Int']>;
-	maintenance_order?: InputMaybe<maintenance_orders_obj_rel_insert_input>;
+	maintenance_order?: InputMaybe<Maintenance_Orders_Obj_Rel_Insert_Input>;
 	maintenance_order_id?: InputMaybe<Scalars['Int']>;
 	memo?: InputMaybe<Scalars['String']>;
-	property?: InputMaybe<properties_obj_rel_insert_input>;
+	property?: InputMaybe<Properties_Obj_Rel_Insert_Input>;
 	property_id?: InputMaybe<Scalars['Int']>;
-	unit?: InputMaybe<units_obj_rel_insert_input>;
+	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type expenses_max_fields = {
+export type Expenses_Max_Fields = {
 	__typename?: 'expenses_max_fields';
 	amount?: Maybe<Scalars['Int']>;
 	client_id?: Maybe<Scalars['Int']>;
@@ -642,19 +644,19 @@ export type expenses_max_fields = {
 };
 
 /** order by max() on columns of table "expenses" */
-export type expenses_max_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	date_post?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Max_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	date_post?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type expenses_min_fields = {
+export type Expenses_Min_Fields = {
 	__typename?: 'expenses_min_fields';
 	amount?: Maybe<Scalars['Int']>;
 	client_id?: Maybe<Scalars['Int']>;
@@ -667,58 +669,58 @@ export type expenses_min_fields = {
 };
 
 /** order by min() on columns of table "expenses" */
-export type expenses_min_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	date_post?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Min_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	date_post?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "expenses" */
-export type expenses_mutation_response = {
+export type Expenses_Mutation_Response = {
 	__typename?: 'expenses_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<expenses>;
+	returning: Array<Expenses>;
 };
 
 /** on conflict condition type for table "expenses" */
-export type expenses_on_conflict = {
-	constraint: expenses_constraint;
-	update_columns?: Array<expenses_update_column>;
-	where?: InputMaybe<expenses_bool_exp>;
+export type Expenses_On_Conflict = {
+	constraint: Expenses_Constraint;
+	update_columns?: Array<Expenses_Update_Column>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "expenses". */
-export type expenses_order_by = {
-	amount?: InputMaybe<order_by>;
-	category?: InputMaybe<order_by>;
-	client?: InputMaybe<clients_order_by>;
-	client_id?: InputMaybe<order_by>;
-	date_post?: InputMaybe<order_by>;
-	expenses_type?: InputMaybe<expenses_types_order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order?: InputMaybe<maintenance_orders_order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	property?: InputMaybe<properties_order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit?: InputMaybe<units_order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	category?: InputMaybe<Order_By>;
+	client?: InputMaybe<Clients_Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	date_post?: InputMaybe<Order_By>;
+	expenses_type?: InputMaybe<Expenses_Types_Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order?: InputMaybe<Maintenance_Orders_Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	property?: InputMaybe<Properties_Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit?: InputMaybe<Units_Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: expenses */
-export type expenses_pk_columns_input = {
+export type Expenses_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "expenses" */
-export type expenses_select_column =
+export type Expenses_Select_Column =
 	/** column name */
 	| 'amount'
 	/** column name */
@@ -739,9 +741,9 @@ export type expenses_select_column =
 	| 'unit_id';
 
 /** input type for updating data in table "expenses" */
-export type expenses_set_input = {
+export type Expenses_Set_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
-	category?: InputMaybe<expenses_types_enum>;
+	category?: InputMaybe<Expenses_Types_Enum>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	date_post?: InputMaybe<Scalars['date']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -752,7 +754,7 @@ export type expenses_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type expenses_stddev_fields = {
+export type Expenses_Stddev_Fields = {
 	__typename?: 'expenses_stddev_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -763,17 +765,17 @@ export type expenses_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "expenses" */
-export type expenses_stddev_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Stddev_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type expenses_stddev_pop_fields = {
+export type Expenses_Stddev_Pop_Fields = {
 	__typename?: 'expenses_stddev_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -784,17 +786,17 @@ export type expenses_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "expenses" */
-export type expenses_stddev_pop_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Stddev_Pop_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type expenses_stddev_samp_fields = {
+export type Expenses_Stddev_Samp_Fields = {
 	__typename?: 'expenses_stddev_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -805,17 +807,17 @@ export type expenses_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "expenses" */
-export type expenses_stddev_samp_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Stddev_Samp_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type expenses_sum_fields = {
+export type Expenses_Sum_Fields = {
 	__typename?: 'expenses_sum_fields';
 	amount?: Maybe<Scalars['Int']>;
 	client_id?: Maybe<Scalars['Int']>;
@@ -826,81 +828,81 @@ export type expenses_sum_fields = {
 };
 
 /** order by sum() on columns of table "expenses" */
-export type expenses_sum_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Sum_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "expenses_types" */
-export type expenses_types = {
+export type Expenses_Types = {
 	__typename?: 'expenses_types';
 	description?: Maybe<Scalars['String']>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	value: Scalars['String'];
 };
 
 /** columns and relationships of "expenses_types" */
-export type expenses_types_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Expenses_TypesExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "expenses_types" */
-export type expenses_types_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Expenses_TypesExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** aggregated selection of "expenses_types" */
-export type expenses_types_aggregate = {
+export type Expenses_Types_Aggregate = {
 	__typename?: 'expenses_types_aggregate';
-	aggregate?: Maybe<expenses_types_aggregate_fields>;
-	nodes: Array<expenses_types>;
+	aggregate?: Maybe<Expenses_Types_Aggregate_Fields>;
+	nodes: Array<Expenses_Types>;
 };
 
 /** aggregate fields of "expenses_types" */
-export type expenses_types_aggregate_fields = {
+export type Expenses_Types_Aggregate_Fields = {
 	__typename?: 'expenses_types_aggregate_fields';
 	count: Scalars['Int'];
-	max?: Maybe<expenses_types_max_fields>;
-	min?: Maybe<expenses_types_min_fields>;
+	max?: Maybe<Expenses_Types_Max_Fields>;
+	min?: Maybe<Expenses_Types_Min_Fields>;
 };
 
 /** aggregate fields of "expenses_types" */
-export type expenses_types_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<expenses_types_select_column>>;
+export type Expenses_Types_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Expenses_Types_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Boolean expression to filter rows from the table "expenses_types". All fields are combined with a logical 'AND'. */
-export type expenses_types_bool_exp = {
-	_and?: InputMaybe<Array<expenses_types_bool_exp>>;
-	_not?: InputMaybe<expenses_types_bool_exp>;
-	_or?: InputMaybe<Array<expenses_types_bool_exp>>;
-	description?: InputMaybe<String_comparison_exp>;
-	expenses?: InputMaybe<expenses_bool_exp>;
-	value?: InputMaybe<String_comparison_exp>;
+export type Expenses_Types_Bool_Exp = {
+	_and?: InputMaybe<Array<Expenses_Types_Bool_Exp>>;
+	_not?: InputMaybe<Expenses_Types_Bool_Exp>;
+	_or?: InputMaybe<Array<Expenses_Types_Bool_Exp>>;
+	description?: InputMaybe<String_Comparison_Exp>;
+	expenses?: InputMaybe<Expenses_Bool_Exp>;
+	value?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "expenses_types" */
-export type expenses_types_constraint =
+export type Expenses_Types_Constraint =
 	/** unique or primary key constraint */
 	'expenses_types_pkey';
 
-export type expenses_types_enum =
+export type Expenses_Types_Enum =
 	| 'AMENITIES'
 	| 'CARETAKER'
 	| 'ELECTRICITY'
@@ -915,92 +917,92 @@ export type expenses_types_enum =
 	| 'WATER';
 
 /** Boolean expression to compare columns of type "expenses_types_enum". All fields are combined with logical 'AND'. */
-export type expenses_types_enum_comparison_exp = {
-	_eq?: InputMaybe<expenses_types_enum>;
-	_in?: InputMaybe<Array<expenses_types_enum>>;
+export type Expenses_Types_Enum_Comparison_Exp = {
+	_eq?: InputMaybe<Expenses_Types_Enum>;
+	_in?: InputMaybe<Array<Expenses_Types_Enum>>;
 	_is_null?: InputMaybe<Scalars['Boolean']>;
-	_neq?: InputMaybe<expenses_types_enum>;
-	_nin?: InputMaybe<Array<expenses_types_enum>>;
+	_neq?: InputMaybe<Expenses_Types_Enum>;
+	_nin?: InputMaybe<Array<Expenses_Types_Enum>>;
 };
 
 /** input type for inserting data into table "expenses_types" */
-export type expenses_types_insert_input = {
+export type Expenses_Types_Insert_Input = {
 	description?: InputMaybe<Scalars['String']>;
-	expenses?: InputMaybe<expenses_arr_rel_insert_input>;
+	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	value?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type expenses_types_max_fields = {
+export type Expenses_Types_Max_Fields = {
 	__typename?: 'expenses_types_max_fields';
 	description?: Maybe<Scalars['String']>;
 	value?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
-export type expenses_types_min_fields = {
+export type Expenses_Types_Min_Fields = {
 	__typename?: 'expenses_types_min_fields';
 	description?: Maybe<Scalars['String']>;
 	value?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "expenses_types" */
-export type expenses_types_mutation_response = {
+export type Expenses_Types_Mutation_Response = {
 	__typename?: 'expenses_types_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<expenses_types>;
+	returning: Array<Expenses_Types>;
 };
 
 /** input type for inserting object relation for remote table "expenses_types" */
-export type expenses_types_obj_rel_insert_input = {
-	data: expenses_types_insert_input;
+export type Expenses_Types_Obj_Rel_Insert_Input = {
+	data: Expenses_Types_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<expenses_types_on_conflict>;
+	on_conflict?: InputMaybe<Expenses_Types_On_Conflict>;
 };
 
 /** on conflict condition type for table "expenses_types" */
-export type expenses_types_on_conflict = {
-	constraint: expenses_types_constraint;
-	update_columns?: Array<expenses_types_update_column>;
-	where?: InputMaybe<expenses_types_bool_exp>;
+export type Expenses_Types_On_Conflict = {
+	constraint: Expenses_Types_Constraint;
+	update_columns?: Array<Expenses_Types_Update_Column>;
+	where?: InputMaybe<Expenses_Types_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "expenses_types". */
-export type expenses_types_order_by = {
-	description?: InputMaybe<order_by>;
-	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
-	value?: InputMaybe<order_by>;
+export type Expenses_Types_Order_By = {
+	description?: InputMaybe<Order_By>;
+	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
+	value?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: expenses_types */
-export type expenses_types_pk_columns_input = {
+export type Expenses_Types_Pk_Columns_Input = {
 	value: Scalars['String'];
 };
 
 /** select columns of table "expenses_types" */
-export type expenses_types_select_column =
+export type Expenses_Types_Select_Column =
 	/** column name */
 	| 'description'
 	/** column name */
 	| 'value';
 
 /** input type for updating data in table "expenses_types" */
-export type expenses_types_set_input = {
+export type Expenses_Types_Set_Input = {
 	description?: InputMaybe<Scalars['String']>;
 	value?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "expenses_types" */
-export type expenses_types_update_column =
+export type Expenses_Types_Update_Column =
 	/** column name */
 	| 'description'
 	/** column name */
 	| 'value';
 
 /** update columns of table "expenses" */
-export type expenses_update_column =
+export type Expenses_Update_Column =
 	/** column name */
 	| 'amount'
 	/** column name */
@@ -1021,7 +1023,7 @@ export type expenses_update_column =
 	| 'unit_id';
 
 /** aggregate var_pop on columns */
-export type expenses_var_pop_fields = {
+export type Expenses_Var_Pop_Fields = {
 	__typename?: 'expenses_var_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -1032,17 +1034,17 @@ export type expenses_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "expenses" */
-export type expenses_var_pop_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Var_Pop_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type expenses_var_samp_fields = {
+export type Expenses_Var_Samp_Fields = {
 	__typename?: 'expenses_var_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -1053,17 +1055,17 @@ export type expenses_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "expenses" */
-export type expenses_var_samp_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Var_Samp_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type expenses_variance_fields = {
+export type Expenses_Variance_Fields = {
 	__typename?: 'expenses_variance_fields';
 	amount?: Maybe<Scalars['Float']>;
 	client_id?: Maybe<Scalars['Float']>;
@@ -1074,17 +1076,17 @@ export type expenses_variance_fields = {
 };
 
 /** order by variance() on columns of table "expenses" */
-export type expenses_variance_order_by = {
-	amount?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_order_id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Expenses_Variance_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_order_id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "leases" */
-export type leases = {
+export type Leases = {
 	__typename?: 'leases';
 	deposit?: Maybe<Scalars['Int']>;
 	end_date?: Maybe<Scalars['date']>;
@@ -1096,88 +1098,88 @@ export type leases = {
 	monthly_rent?: Maybe<Scalars['Int']>;
 	start_date?: Maybe<Scalars['date']>;
 	/** An object relationship */
-	tenant?: Maybe<tenants>;
+	tenant?: Maybe<Tenants>;
 	tenant_id?: Maybe<Scalars['Int']>;
 	/** An array relationship */
-	transactions: Array<transactions>;
+	transactions: Array<Transactions>;
 	/** An aggregate relationship */
-	transactions_aggregate: transactions_aggregate;
+	transactions_aggregate: Transactions_Aggregate;
 	/** An object relationship */
-	unit?: Maybe<units>;
+	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
 };
 
 /** columns and relationships of "leases" */
-export type leases_transactionsArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type LeasesTransactionsArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
 /** columns and relationships of "leases" */
-export type leases_transactions_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type LeasesTransactions_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
 /** aggregated selection of "leases" */
-export type leases_aggregate = {
+export type Leases_Aggregate = {
 	__typename?: 'leases_aggregate';
-	aggregate?: Maybe<leases_aggregate_fields>;
-	nodes: Array<leases>;
+	aggregate?: Maybe<Leases_Aggregate_Fields>;
+	nodes: Array<Leases>;
 };
 
 /** aggregate fields of "leases" */
-export type leases_aggregate_fields = {
+export type Leases_Aggregate_Fields = {
 	__typename?: 'leases_aggregate_fields';
-	avg?: Maybe<leases_avg_fields>;
+	avg?: Maybe<Leases_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<leases_max_fields>;
-	min?: Maybe<leases_min_fields>;
-	stddev?: Maybe<leases_stddev_fields>;
-	stddev_pop?: Maybe<leases_stddev_pop_fields>;
-	stddev_samp?: Maybe<leases_stddev_samp_fields>;
-	sum?: Maybe<leases_sum_fields>;
-	var_pop?: Maybe<leases_var_pop_fields>;
-	var_samp?: Maybe<leases_var_samp_fields>;
-	variance?: Maybe<leases_variance_fields>;
+	max?: Maybe<Leases_Max_Fields>;
+	min?: Maybe<Leases_Min_Fields>;
+	stddev?: Maybe<Leases_Stddev_Fields>;
+	stddev_pop?: Maybe<Leases_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Leases_Stddev_Samp_Fields>;
+	sum?: Maybe<Leases_Sum_Fields>;
+	var_pop?: Maybe<Leases_Var_Pop_Fields>;
+	var_samp?: Maybe<Leases_Var_Samp_Fields>;
+	variance?: Maybe<Leases_Variance_Fields>;
 };
 
 /** aggregate fields of "leases" */
-export type leases_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<leases_select_column>>;
+export type Leases_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Leases_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "leases" */
-export type leases_aggregate_order_by = {
-	avg?: InputMaybe<leases_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<leases_max_order_by>;
-	min?: InputMaybe<leases_min_order_by>;
-	stddev?: InputMaybe<leases_stddev_order_by>;
-	stddev_pop?: InputMaybe<leases_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<leases_stddev_samp_order_by>;
-	sum?: InputMaybe<leases_sum_order_by>;
-	var_pop?: InputMaybe<leases_var_pop_order_by>;
-	var_samp?: InputMaybe<leases_var_samp_order_by>;
-	variance?: InputMaybe<leases_variance_order_by>;
+export type Leases_Aggregate_Order_By = {
+	avg?: InputMaybe<Leases_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Leases_Max_Order_By>;
+	min?: InputMaybe<Leases_Min_Order_By>;
+	stddev?: InputMaybe<Leases_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Leases_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Leases_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Leases_Sum_Order_By>;
+	var_pop?: InputMaybe<Leases_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Leases_Var_Samp_Order_By>;
+	variance?: InputMaybe<Leases_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "leases" */
-export type leases_arr_rel_insert_input = {
-	data: Array<leases_insert_input>;
+export type Leases_Arr_Rel_Insert_Input = {
+	data: Array<Leases_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<leases_on_conflict>;
+	on_conflict?: InputMaybe<Leases_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type leases_avg_fields = {
+export type Leases_Avg_Fields = {
 	__typename?: 'leases_avg_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1187,41 +1189,41 @@ export type leases_avg_fields = {
 };
 
 /** order by avg() on columns of table "leases" */
-export type leases_avg_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Avg_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "leases". All fields are combined with a logical 'AND'. */
-export type leases_bool_exp = {
-	_and?: InputMaybe<Array<leases_bool_exp>>;
-	_not?: InputMaybe<leases_bool_exp>;
-	_or?: InputMaybe<Array<leases_bool_exp>>;
-	deposit?: InputMaybe<Int_comparison_exp>;
-	end_date?: InputMaybe<date_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	is_expired?: InputMaybe<Boolean_comparison_exp>;
-	is_signed?: InputMaybe<Boolean_comparison_exp>;
-	license?: InputMaybe<String_comparison_exp>;
-	monthly_rent?: InputMaybe<Int_comparison_exp>;
-	start_date?: InputMaybe<date_comparison_exp>;
-	tenant?: InputMaybe<tenants_bool_exp>;
-	tenant_id?: InputMaybe<Int_comparison_exp>;
-	transactions?: InputMaybe<transactions_bool_exp>;
-	unit?: InputMaybe<units_bool_exp>;
-	unit_id?: InputMaybe<Int_comparison_exp>;
+export type Leases_Bool_Exp = {
+	_and?: InputMaybe<Array<Leases_Bool_Exp>>;
+	_not?: InputMaybe<Leases_Bool_Exp>;
+	_or?: InputMaybe<Array<Leases_Bool_Exp>>;
+	deposit?: InputMaybe<Int_Comparison_Exp>;
+	end_date?: InputMaybe<Date_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	is_expired?: InputMaybe<Boolean_Comparison_Exp>;
+	is_signed?: InputMaybe<Boolean_Comparison_Exp>;
+	license?: InputMaybe<String_Comparison_Exp>;
+	monthly_rent?: InputMaybe<Int_Comparison_Exp>;
+	start_date?: InputMaybe<Date_Comparison_Exp>;
+	tenant?: InputMaybe<Tenants_Bool_Exp>;
+	tenant_id?: InputMaybe<Int_Comparison_Exp>;
+	transactions?: InputMaybe<Transactions_Bool_Exp>;
+	unit?: InputMaybe<Units_Bool_Exp>;
+	unit_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "leases" */
-export type leases_constraint =
+export type Leases_Constraint =
 	/** unique or primary key constraint */
 	'leases_pkey';
 
 /** input type for incrementing numeric columns in table "leases" */
-export type leases_inc_input = {
+export type Leases_Inc_Input = {
 	deposit?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
 	monthly_rent?: InputMaybe<Scalars['Int']>;
@@ -1230,7 +1232,7 @@ export type leases_inc_input = {
 };
 
 /** input type for inserting data into table "leases" */
-export type leases_insert_input = {
+export type Leases_Insert_Input = {
 	deposit?: InputMaybe<Scalars['Int']>;
 	end_date?: InputMaybe<Scalars['date']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -1238,15 +1240,15 @@ export type leases_insert_input = {
 	license?: InputMaybe<Scalars['String']>;
 	monthly_rent?: InputMaybe<Scalars['Int']>;
 	start_date?: InputMaybe<Scalars['date']>;
-	tenant?: InputMaybe<tenants_obj_rel_insert_input>;
+	tenant?: InputMaybe<Tenants_Obj_Rel_Insert_Input>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
-	transactions?: InputMaybe<transactions_arr_rel_insert_input>;
-	unit?: InputMaybe<units_obj_rel_insert_input>;
+	transactions?: InputMaybe<Transactions_Arr_Rel_Insert_Input>;
+	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type leases_max_fields = {
+export type Leases_Max_Fields = {
 	__typename?: 'leases_max_fields';
 	deposit?: Maybe<Scalars['Int']>;
 	end_date?: Maybe<Scalars['date']>;
@@ -1259,19 +1261,19 @@ export type leases_max_fields = {
 };
 
 /** order by max() on columns of table "leases" */
-export type leases_max_order_by = {
-	deposit?: InputMaybe<order_by>;
-	end_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	license?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	start_date?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Max_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	end_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	license?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	start_date?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type leases_min_fields = {
+export type Leases_Min_Fields = {
 	__typename?: 'leases_min_fields';
 	deposit?: Maybe<Scalars['Int']>;
 	end_date?: Maybe<Scalars['date']>;
@@ -1284,64 +1286,64 @@ export type leases_min_fields = {
 };
 
 /** order by min() on columns of table "leases" */
-export type leases_min_order_by = {
-	deposit?: InputMaybe<order_by>;
-	end_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	license?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	start_date?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Min_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	end_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	license?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	start_date?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "leases" */
-export type leases_mutation_response = {
+export type Leases_Mutation_Response = {
 	__typename?: 'leases_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<leases>;
+	returning: Array<Leases>;
 };
 
 /** input type for inserting object relation for remote table "leases" */
-export type leases_obj_rel_insert_input = {
-	data: leases_insert_input;
+export type Leases_Obj_Rel_Insert_Input = {
+	data: Leases_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<leases_on_conflict>;
+	on_conflict?: InputMaybe<Leases_On_Conflict>;
 };
 
 /** on conflict condition type for table "leases" */
-export type leases_on_conflict = {
-	constraint: leases_constraint;
-	update_columns?: Array<leases_update_column>;
-	where?: InputMaybe<leases_bool_exp>;
+export type Leases_On_Conflict = {
+	constraint: Leases_Constraint;
+	update_columns?: Array<Leases_Update_Column>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "leases". */
-export type leases_order_by = {
-	deposit?: InputMaybe<order_by>;
-	end_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	is_expired?: InputMaybe<order_by>;
-	is_signed?: InputMaybe<order_by>;
-	license?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	start_date?: InputMaybe<order_by>;
-	tenant?: InputMaybe<tenants_order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	transactions_aggregate?: InputMaybe<transactions_aggregate_order_by>;
-	unit?: InputMaybe<units_order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	end_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	is_expired?: InputMaybe<Order_By>;
+	is_signed?: InputMaybe<Order_By>;
+	license?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	start_date?: InputMaybe<Order_By>;
+	tenant?: InputMaybe<Tenants_Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	transactions_aggregate?: InputMaybe<Transactions_Aggregate_Order_By>;
+	unit?: InputMaybe<Units_Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: leases */
-export type leases_pk_columns_input = {
+export type Leases_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "leases" */
-export type leases_select_column =
+export type Leases_Select_Column =
 	/** column name */
 	| 'deposit'
 	/** column name */
@@ -1362,7 +1364,7 @@ export type leases_select_column =
 	| 'unit_id';
 
 /** input type for updating data in table "leases" */
-export type leases_set_input = {
+export type Leases_Set_Input = {
 	deposit?: InputMaybe<Scalars['Int']>;
 	end_date?: InputMaybe<Scalars['date']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -1375,7 +1377,7 @@ export type leases_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type leases_stddev_fields = {
+export type Leases_Stddev_Fields = {
 	__typename?: 'leases_stddev_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1385,16 +1387,16 @@ export type leases_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "leases" */
-export type leases_stddev_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Stddev_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type leases_stddev_pop_fields = {
+export type Leases_Stddev_Pop_Fields = {
 	__typename?: 'leases_stddev_pop_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1404,16 +1406,16 @@ export type leases_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "leases" */
-export type leases_stddev_pop_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Stddev_Pop_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type leases_stddev_samp_fields = {
+export type Leases_Stddev_Samp_Fields = {
 	__typename?: 'leases_stddev_samp_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1423,16 +1425,16 @@ export type leases_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "leases" */
-export type leases_stddev_samp_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Stddev_Samp_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type leases_sum_fields = {
+export type Leases_Sum_Fields = {
 	__typename?: 'leases_sum_fields';
 	deposit?: Maybe<Scalars['Int']>;
 	id?: Maybe<Scalars['Int']>;
@@ -1442,16 +1444,16 @@ export type leases_sum_fields = {
 };
 
 /** order by sum() on columns of table "leases" */
-export type leases_sum_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Sum_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "leases" */
-export type leases_update_column =
+export type Leases_Update_Column =
 	/** column name */
 	| 'deposit'
 	/** column name */
@@ -1472,7 +1474,7 @@ export type leases_update_column =
 	| 'unit_id';
 
 /** aggregate var_pop on columns */
-export type leases_var_pop_fields = {
+export type Leases_Var_Pop_Fields = {
 	__typename?: 'leases_var_pop_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1482,16 +1484,16 @@ export type leases_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "leases" */
-export type leases_var_pop_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Var_Pop_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type leases_var_samp_fields = {
+export type Leases_Var_Samp_Fields = {
 	__typename?: 'leases_var_samp_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1501,16 +1503,16 @@ export type leases_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "leases" */
-export type leases_var_samp_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Var_Samp_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type leases_variance_fields = {
+export type Leases_Variance_Fields = {
 	__typename?: 'leases_variance_fields';
 	deposit?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1520,16 +1522,16 @@ export type leases_variance_fields = {
 };
 
 /** order by variance() on columns of table "leases" */
-export type leases_variance_order_by = {
-	deposit?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	monthly_rent?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Leases_Variance_Order_By = {
+	deposit?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	monthly_rent?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "listings" */
-export type listings = {
+export type Listings = {
 	__typename?: 'listings';
 	available_on?: Maybe<Scalars['date']>;
 	description?: Maybe<Scalars['String']>;
@@ -1538,114 +1540,114 @@ export type listings = {
 	lease_length?: Maybe<Scalars['String']>;
 	title?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	unit?: Maybe<units>;
+	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
 };
 
 /** aggregated selection of "listings" */
-export type listings_aggregate = {
+export type Listings_Aggregate = {
 	__typename?: 'listings_aggregate';
-	aggregate?: Maybe<listings_aggregate_fields>;
-	nodes: Array<listings>;
+	aggregate?: Maybe<Listings_Aggregate_Fields>;
+	nodes: Array<Listings>;
 };
 
 /** aggregate fields of "listings" */
-export type listings_aggregate_fields = {
+export type Listings_Aggregate_Fields = {
 	__typename?: 'listings_aggregate_fields';
-	avg?: Maybe<listings_avg_fields>;
+	avg?: Maybe<Listings_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<listings_max_fields>;
-	min?: Maybe<listings_min_fields>;
-	stddev?: Maybe<listings_stddev_fields>;
-	stddev_pop?: Maybe<listings_stddev_pop_fields>;
-	stddev_samp?: Maybe<listings_stddev_samp_fields>;
-	sum?: Maybe<listings_sum_fields>;
-	var_pop?: Maybe<listings_var_pop_fields>;
-	var_samp?: Maybe<listings_var_samp_fields>;
-	variance?: Maybe<listings_variance_fields>;
+	max?: Maybe<Listings_Max_Fields>;
+	min?: Maybe<Listings_Min_Fields>;
+	stddev?: Maybe<Listings_Stddev_Fields>;
+	stddev_pop?: Maybe<Listings_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Listings_Stddev_Samp_Fields>;
+	sum?: Maybe<Listings_Sum_Fields>;
+	var_pop?: Maybe<Listings_Var_Pop_Fields>;
+	var_samp?: Maybe<Listings_Var_Samp_Fields>;
+	variance?: Maybe<Listings_Variance_Fields>;
 };
 
 /** aggregate fields of "listings" */
-export type listings_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<listings_select_column>>;
+export type Listings_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Listings_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "listings" */
-export type listings_aggregate_order_by = {
-	avg?: InputMaybe<listings_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<listings_max_order_by>;
-	min?: InputMaybe<listings_min_order_by>;
-	stddev?: InputMaybe<listings_stddev_order_by>;
-	stddev_pop?: InputMaybe<listings_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<listings_stddev_samp_order_by>;
-	sum?: InputMaybe<listings_sum_order_by>;
-	var_pop?: InputMaybe<listings_var_pop_order_by>;
-	var_samp?: InputMaybe<listings_var_samp_order_by>;
-	variance?: InputMaybe<listings_variance_order_by>;
+export type Listings_Aggregate_Order_By = {
+	avg?: InputMaybe<Listings_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Listings_Max_Order_By>;
+	min?: InputMaybe<Listings_Min_Order_By>;
+	stddev?: InputMaybe<Listings_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Listings_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Listings_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Listings_Sum_Order_By>;
+	var_pop?: InputMaybe<Listings_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Listings_Var_Samp_Order_By>;
+	variance?: InputMaybe<Listings_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "listings" */
-export type listings_arr_rel_insert_input = {
-	data: Array<listings_insert_input>;
+export type Listings_Arr_Rel_Insert_Input = {
+	data: Array<Listings_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<listings_on_conflict>;
+	on_conflict?: InputMaybe<Listings_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type listings_avg_fields = {
+export type Listings_Avg_Fields = {
 	__typename?: 'listings_avg_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "listings" */
-export type listings_avg_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Avg_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "listings". All fields are combined with a logical 'AND'. */
-export type listings_bool_exp = {
-	_and?: InputMaybe<Array<listings_bool_exp>>;
-	_not?: InputMaybe<listings_bool_exp>;
-	_or?: InputMaybe<Array<listings_bool_exp>>;
-	available_on?: InputMaybe<date_comparison_exp>;
-	description?: InputMaybe<String_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	is_active?: InputMaybe<Boolean_comparison_exp>;
-	lease_length?: InputMaybe<String_comparison_exp>;
-	title?: InputMaybe<String_comparison_exp>;
-	unit?: InputMaybe<units_bool_exp>;
-	unit_id?: InputMaybe<Int_comparison_exp>;
+export type Listings_Bool_Exp = {
+	_and?: InputMaybe<Array<Listings_Bool_Exp>>;
+	_not?: InputMaybe<Listings_Bool_Exp>;
+	_or?: InputMaybe<Array<Listings_Bool_Exp>>;
+	available_on?: InputMaybe<Date_Comparison_Exp>;
+	description?: InputMaybe<String_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	is_active?: InputMaybe<Boolean_Comparison_Exp>;
+	lease_length?: InputMaybe<String_Comparison_Exp>;
+	title?: InputMaybe<String_Comparison_Exp>;
+	unit?: InputMaybe<Units_Bool_Exp>;
+	unit_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "listings" */
-export type listings_constraint =
+export type Listings_Constraint =
 	/** unique or primary key constraint */
 	'listings_pkey';
 
 /** input type for incrementing numeric columns in table "listings" */
-export type listings_inc_input = {
+export type Listings_Inc_Input = {
 	id?: InputMaybe<Scalars['Int']>;
 	unit_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "listings" */
-export type listings_insert_input = {
+export type Listings_Insert_Input = {
 	available_on?: InputMaybe<Scalars['date']>;
 	description?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	is_active?: InputMaybe<Scalars['Boolean']>;
 	lease_length?: InputMaybe<Scalars['String']>;
 	title?: InputMaybe<Scalars['String']>;
-	unit?: InputMaybe<units_obj_rel_insert_input>;
+	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type listings_max_fields = {
+export type Listings_Max_Fields = {
 	__typename?: 'listings_max_fields';
 	available_on?: Maybe<Scalars['date']>;
 	description?: Maybe<Scalars['String']>;
@@ -1656,17 +1658,17 @@ export type listings_max_fields = {
 };
 
 /** order by max() on columns of table "listings" */
-export type listings_max_order_by = {
-	available_on?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_length?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Max_Order_By = {
+	available_on?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_length?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type listings_min_fields = {
+export type Listings_Min_Fields = {
 	__typename?: 'listings_min_fields';
 	available_on?: Maybe<Scalars['date']>;
 	description?: Maybe<Scalars['String']>;
@@ -1677,50 +1679,50 @@ export type listings_min_fields = {
 };
 
 /** order by min() on columns of table "listings" */
-export type listings_min_order_by = {
-	available_on?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_length?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Min_Order_By = {
+	available_on?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_length?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "listings" */
-export type listings_mutation_response = {
+export type Listings_Mutation_Response = {
 	__typename?: 'listings_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<listings>;
+	returning: Array<Listings>;
 };
 
 /** on conflict condition type for table "listings" */
-export type listings_on_conflict = {
-	constraint: listings_constraint;
-	update_columns?: Array<listings_update_column>;
-	where?: InputMaybe<listings_bool_exp>;
+export type Listings_On_Conflict = {
+	constraint: Listings_Constraint;
+	update_columns?: Array<Listings_Update_Column>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "listings". */
-export type listings_order_by = {
-	available_on?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	is_active?: InputMaybe<order_by>;
-	lease_length?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit?: InputMaybe<units_order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Order_By = {
+	available_on?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	is_active?: InputMaybe<Order_By>;
+	lease_length?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit?: InputMaybe<Units_Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: listings */
-export type listings_pk_columns_input = {
+export type Listings_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "listings" */
-export type listings_select_column =
+export type Listings_Select_Column =
 	/** column name */
 	| 'available_on'
 	/** column name */
@@ -1737,7 +1739,7 @@ export type listings_select_column =
 	| 'unit_id';
 
 /** input type for updating data in table "listings" */
-export type listings_set_input = {
+export type Listings_Set_Input = {
 	available_on?: InputMaybe<Scalars['date']>;
 	description?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -1748,59 +1750,59 @@ export type listings_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type listings_stddev_fields = {
+export type Listings_Stddev_Fields = {
 	__typename?: 'listings_stddev_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "listings" */
-export type listings_stddev_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Stddev_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type listings_stddev_pop_fields = {
+export type Listings_Stddev_Pop_Fields = {
 	__typename?: 'listings_stddev_pop_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "listings" */
-export type listings_stddev_pop_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Stddev_Pop_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type listings_stddev_samp_fields = {
+export type Listings_Stddev_Samp_Fields = {
 	__typename?: 'listings_stddev_samp_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "listings" */
-export type listings_stddev_samp_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Stddev_Samp_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type listings_sum_fields = {
+export type Listings_Sum_Fields = {
 	__typename?: 'listings_sum_fields';
 	id?: Maybe<Scalars['Int']>;
 	unit_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "listings" */
-export type listings_sum_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Sum_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "listings" */
-export type listings_update_column =
+export type Listings_Update_Column =
 	/** column name */
 	| 'available_on'
 	/** column name */
@@ -1817,142 +1819,142 @@ export type listings_update_column =
 	| 'unit_id';
 
 /** aggregate var_pop on columns */
-export type listings_var_pop_fields = {
+export type Listings_Var_Pop_Fields = {
 	__typename?: 'listings_var_pop_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "listings" */
-export type listings_var_pop_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Var_Pop_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type listings_var_samp_fields = {
+export type Listings_Var_Samp_Fields = {
 	__typename?: 'listings_var_samp_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "listings" */
-export type listings_var_samp_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Var_Samp_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type listings_variance_fields = {
+export type Listings_Variance_Fields = {
 	__typename?: 'listings_variance_fields';
 	id?: Maybe<Scalars['Float']>;
 	unit_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "listings" */
-export type listings_variance_order_by = {
-	id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Listings_Variance_Order_By = {
+	id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "maintenance_orders" */
-export type maintenance_orders = {
+export type Maintenance_Orders = {
 	__typename?: 'maintenance_orders';
 	/** An object relationship */
-	client?: Maybe<clients>;
+	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
 	completed_at?: Maybe<Scalars['timestamptz']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	description?: Maybe<Scalars['String']>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	id: Scalars['Int'];
 	/** An object relationship */
-	property?: Maybe<properties>;
+	property?: Maybe<Properties>;
 	property_id?: Maybe<Scalars['Int']>;
 	status?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	tenant?: Maybe<tenants>;
+	tenant?: Maybe<Tenants>;
 	tenant_id?: Maybe<Scalars['Int']>;
 	title?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	unit?: Maybe<units>;
+	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
 };
 
 /** columns and relationships of "maintenance_orders" */
-export type maintenance_orders_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Maintenance_OrdersExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "maintenance_orders" */
-export type maintenance_orders_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Maintenance_OrdersExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** aggregated selection of "maintenance_orders" */
-export type maintenance_orders_aggregate = {
+export type Maintenance_Orders_Aggregate = {
 	__typename?: 'maintenance_orders_aggregate';
-	aggregate?: Maybe<maintenance_orders_aggregate_fields>;
-	nodes: Array<maintenance_orders>;
+	aggregate?: Maybe<Maintenance_Orders_Aggregate_Fields>;
+	nodes: Array<Maintenance_Orders>;
 };
 
 /** aggregate fields of "maintenance_orders" */
-export type maintenance_orders_aggregate_fields = {
+export type Maintenance_Orders_Aggregate_Fields = {
 	__typename?: 'maintenance_orders_aggregate_fields';
-	avg?: Maybe<maintenance_orders_avg_fields>;
+	avg?: Maybe<Maintenance_Orders_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<maintenance_orders_max_fields>;
-	min?: Maybe<maintenance_orders_min_fields>;
-	stddev?: Maybe<maintenance_orders_stddev_fields>;
-	stddev_pop?: Maybe<maintenance_orders_stddev_pop_fields>;
-	stddev_samp?: Maybe<maintenance_orders_stddev_samp_fields>;
-	sum?: Maybe<maintenance_orders_sum_fields>;
-	var_pop?: Maybe<maintenance_orders_var_pop_fields>;
-	var_samp?: Maybe<maintenance_orders_var_samp_fields>;
-	variance?: Maybe<maintenance_orders_variance_fields>;
+	max?: Maybe<Maintenance_Orders_Max_Fields>;
+	min?: Maybe<Maintenance_Orders_Min_Fields>;
+	stddev?: Maybe<Maintenance_Orders_Stddev_Fields>;
+	stddev_pop?: Maybe<Maintenance_Orders_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Maintenance_Orders_Stddev_Samp_Fields>;
+	sum?: Maybe<Maintenance_Orders_Sum_Fields>;
+	var_pop?: Maybe<Maintenance_Orders_Var_Pop_Fields>;
+	var_samp?: Maybe<Maintenance_Orders_Var_Samp_Fields>;
+	variance?: Maybe<Maintenance_Orders_Variance_Fields>;
 };
 
 /** aggregate fields of "maintenance_orders" */
-export type maintenance_orders_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type Maintenance_Orders_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "maintenance_orders" */
-export type maintenance_orders_aggregate_order_by = {
-	avg?: InputMaybe<maintenance_orders_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<maintenance_orders_max_order_by>;
-	min?: InputMaybe<maintenance_orders_min_order_by>;
-	stddev?: InputMaybe<maintenance_orders_stddev_order_by>;
-	stddev_pop?: InputMaybe<maintenance_orders_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<maintenance_orders_stddev_samp_order_by>;
-	sum?: InputMaybe<maintenance_orders_sum_order_by>;
-	var_pop?: InputMaybe<maintenance_orders_var_pop_order_by>;
-	var_samp?: InputMaybe<maintenance_orders_var_samp_order_by>;
-	variance?: InputMaybe<maintenance_orders_variance_order_by>;
+export type Maintenance_Orders_Aggregate_Order_By = {
+	avg?: InputMaybe<Maintenance_Orders_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Maintenance_Orders_Max_Order_By>;
+	min?: InputMaybe<Maintenance_Orders_Min_Order_By>;
+	stddev?: InputMaybe<Maintenance_Orders_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Maintenance_Orders_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Maintenance_Orders_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Maintenance_Orders_Sum_Order_By>;
+	var_pop?: InputMaybe<Maintenance_Orders_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Maintenance_Orders_Var_Samp_Order_By>;
+	variance?: InputMaybe<Maintenance_Orders_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "maintenance_orders" */
-export type maintenance_orders_arr_rel_insert_input = {
-	data: Array<maintenance_orders_insert_input>;
+export type Maintenance_Orders_Arr_Rel_Insert_Input = {
+	data: Array<Maintenance_Orders_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
+	on_conflict?: InputMaybe<Maintenance_Orders_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type maintenance_orders_avg_fields = {
+export type Maintenance_Orders_Avg_Fields = {
 	__typename?: 'maintenance_orders_avg_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -1962,43 +1964,43 @@ export type maintenance_orders_avg_fields = {
 };
 
 /** order by avg() on columns of table "maintenance_orders" */
-export type maintenance_orders_avg_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Avg_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "maintenance_orders". All fields are combined with a logical 'AND'. */
-export type maintenance_orders_bool_exp = {
-	_and?: InputMaybe<Array<maintenance_orders_bool_exp>>;
-	_not?: InputMaybe<maintenance_orders_bool_exp>;
-	_or?: InputMaybe<Array<maintenance_orders_bool_exp>>;
-	client?: InputMaybe<clients_bool_exp>;
-	client_id?: InputMaybe<Int_comparison_exp>;
-	completed_at?: InputMaybe<timestamptz_comparison_exp>;
-	created_at?: InputMaybe<timestamptz_comparison_exp>;
-	description?: InputMaybe<String_comparison_exp>;
-	expenses?: InputMaybe<expenses_bool_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	property?: InputMaybe<properties_bool_exp>;
-	property_id?: InputMaybe<Int_comparison_exp>;
-	status?: InputMaybe<String_comparison_exp>;
-	tenant?: InputMaybe<tenants_bool_exp>;
-	tenant_id?: InputMaybe<Int_comparison_exp>;
-	title?: InputMaybe<String_comparison_exp>;
-	unit?: InputMaybe<units_bool_exp>;
-	unit_id?: InputMaybe<Int_comparison_exp>;
+export type Maintenance_Orders_Bool_Exp = {
+	_and?: InputMaybe<Array<Maintenance_Orders_Bool_Exp>>;
+	_not?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	_or?: InputMaybe<Array<Maintenance_Orders_Bool_Exp>>;
+	client?: InputMaybe<Clients_Bool_Exp>;
+	client_id?: InputMaybe<Int_Comparison_Exp>;
+	completed_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	description?: InputMaybe<String_Comparison_Exp>;
+	expenses?: InputMaybe<Expenses_Bool_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	property?: InputMaybe<Properties_Bool_Exp>;
+	property_id?: InputMaybe<Int_Comparison_Exp>;
+	status?: InputMaybe<String_Comparison_Exp>;
+	tenant?: InputMaybe<Tenants_Bool_Exp>;
+	tenant_id?: InputMaybe<Int_Comparison_Exp>;
+	title?: InputMaybe<String_Comparison_Exp>;
+	unit?: InputMaybe<Units_Bool_Exp>;
+	unit_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "maintenance_orders" */
-export type maintenance_orders_constraint =
+export type Maintenance_Orders_Constraint =
 	/** unique or primary key constraint */
 	'maintenance_orders_pkey';
 
 /** input type for incrementing numeric columns in table "maintenance_orders" */
-export type maintenance_orders_inc_input = {
+export type Maintenance_Orders_Inc_Input = {
 	client_id?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
 	property_id?: InputMaybe<Scalars['Int']>;
@@ -2007,26 +2009,26 @@ export type maintenance_orders_inc_input = {
 };
 
 /** input type for inserting data into table "maintenance_orders" */
-export type maintenance_orders_insert_input = {
-	client?: InputMaybe<clients_obj_rel_insert_input>;
+export type Maintenance_Orders_Insert_Input = {
+	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	completed_at?: InputMaybe<Scalars['timestamptz']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	description?: InputMaybe<Scalars['String']>;
-	expenses?: InputMaybe<expenses_arr_rel_insert_input>;
+	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	id?: InputMaybe<Scalars['Int']>;
-	property?: InputMaybe<properties_obj_rel_insert_input>;
+	property?: InputMaybe<Properties_Obj_Rel_Insert_Input>;
 	property_id?: InputMaybe<Scalars['Int']>;
 	status?: InputMaybe<Scalars['String']>;
-	tenant?: InputMaybe<tenants_obj_rel_insert_input>;
+	tenant?: InputMaybe<Tenants_Obj_Rel_Insert_Input>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
 	title?: InputMaybe<Scalars['String']>;
-	unit?: InputMaybe<units_obj_rel_insert_input>;
+	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type maintenance_orders_max_fields = {
+export type Maintenance_Orders_Max_Fields = {
 	__typename?: 'maintenance_orders_max_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	completed_at?: Maybe<Scalars['timestamptz']>;
@@ -2041,21 +2043,21 @@ export type maintenance_orders_max_fields = {
 };
 
 /** order by max() on columns of table "maintenance_orders" */
-export type maintenance_orders_max_order_by = {
-	client_id?: InputMaybe<order_by>;
-	completed_at?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	status?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Max_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	completed_at?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	status?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type maintenance_orders_min_fields = {
+export type Maintenance_Orders_Min_Fields = {
 	__typename?: 'maintenance_orders_min_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	completed_at?: Maybe<Scalars['timestamptz']>;
@@ -2070,68 +2072,68 @@ export type maintenance_orders_min_fields = {
 };
 
 /** order by min() on columns of table "maintenance_orders" */
-export type maintenance_orders_min_order_by = {
-	client_id?: InputMaybe<order_by>;
-	completed_at?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	status?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Min_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	completed_at?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	status?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "maintenance_orders" */
-export type maintenance_orders_mutation_response = {
+export type Maintenance_Orders_Mutation_Response = {
 	__typename?: 'maintenance_orders_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<maintenance_orders>;
+	returning: Array<Maintenance_Orders>;
 };
 
 /** input type for inserting object relation for remote table "maintenance_orders" */
-export type maintenance_orders_obj_rel_insert_input = {
-	data: maintenance_orders_insert_input;
+export type Maintenance_Orders_Obj_Rel_Insert_Input = {
+	data: Maintenance_Orders_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
+	on_conflict?: InputMaybe<Maintenance_Orders_On_Conflict>;
 };
 
 /** on conflict condition type for table "maintenance_orders" */
-export type maintenance_orders_on_conflict = {
-	constraint: maintenance_orders_constraint;
-	update_columns?: Array<maintenance_orders_update_column>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+export type Maintenance_Orders_On_Conflict = {
+	constraint: Maintenance_Orders_Constraint;
+	update_columns?: Array<Maintenance_Orders_Update_Column>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "maintenance_orders". */
-export type maintenance_orders_order_by = {
-	client?: InputMaybe<clients_order_by>;
-	client_id?: InputMaybe<order_by>;
-	completed_at?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	description?: InputMaybe<order_by>;
-	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
-	id?: InputMaybe<order_by>;
-	property?: InputMaybe<properties_order_by>;
-	property_id?: InputMaybe<order_by>;
-	status?: InputMaybe<order_by>;
-	tenant?: InputMaybe<tenants_order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	title?: InputMaybe<order_by>;
-	unit?: InputMaybe<units_order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Order_By = {
+	client?: InputMaybe<Clients_Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	completed_at?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	description?: InputMaybe<Order_By>;
+	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
+	id?: InputMaybe<Order_By>;
+	property?: InputMaybe<Properties_Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	status?: InputMaybe<Order_By>;
+	tenant?: InputMaybe<Tenants_Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	title?: InputMaybe<Order_By>;
+	unit?: InputMaybe<Units_Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: maintenance_orders */
-export type maintenance_orders_pk_columns_input = {
+export type Maintenance_Orders_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "maintenance_orders" */
-export type maintenance_orders_select_column =
+export type Maintenance_Orders_Select_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
@@ -2154,7 +2156,7 @@ export type maintenance_orders_select_column =
 	| 'unit_id';
 
 /** input type for updating data in table "maintenance_orders" */
-export type maintenance_orders_set_input = {
+export type Maintenance_Orders_Set_Input = {
 	client_id?: InputMaybe<Scalars['Int']>;
 	completed_at?: InputMaybe<Scalars['timestamptz']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -2168,7 +2170,7 @@ export type maintenance_orders_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type maintenance_orders_stddev_fields = {
+export type Maintenance_Orders_Stddev_Fields = {
 	__typename?: 'maintenance_orders_stddev_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2178,16 +2180,16 @@ export type maintenance_orders_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "maintenance_orders" */
-export type maintenance_orders_stddev_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Stddev_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type maintenance_orders_stddev_pop_fields = {
+export type Maintenance_Orders_Stddev_Pop_Fields = {
 	__typename?: 'maintenance_orders_stddev_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2197,16 +2199,16 @@ export type maintenance_orders_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "maintenance_orders" */
-export type maintenance_orders_stddev_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Stddev_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type maintenance_orders_stddev_samp_fields = {
+export type Maintenance_Orders_Stddev_Samp_Fields = {
 	__typename?: 'maintenance_orders_stddev_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2216,16 +2218,16 @@ export type maintenance_orders_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "maintenance_orders" */
-export type maintenance_orders_stddev_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Stddev_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type maintenance_orders_sum_fields = {
+export type Maintenance_Orders_Sum_Fields = {
 	__typename?: 'maintenance_orders_sum_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	id?: Maybe<Scalars['Int']>;
@@ -2235,16 +2237,16 @@ export type maintenance_orders_sum_fields = {
 };
 
 /** order by sum() on columns of table "maintenance_orders" */
-export type maintenance_orders_sum_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Sum_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "maintenance_orders" */
-export type maintenance_orders_update_column =
+export type Maintenance_Orders_Update_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
@@ -2267,7 +2269,7 @@ export type maintenance_orders_update_column =
 	| 'unit_id';
 
 /** aggregate var_pop on columns */
-export type maintenance_orders_var_pop_fields = {
+export type Maintenance_Orders_Var_Pop_Fields = {
 	__typename?: 'maintenance_orders_var_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2277,16 +2279,16 @@ export type maintenance_orders_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "maintenance_orders" */
-export type maintenance_orders_var_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Var_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type maintenance_orders_var_samp_fields = {
+export type Maintenance_Orders_Var_Samp_Fields = {
 	__typename?: 'maintenance_orders_var_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2296,16 +2298,16 @@ export type maintenance_orders_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "maintenance_orders" */
-export type maintenance_orders_var_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Var_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type maintenance_orders_variance_fields = {
+export type Maintenance_Orders_Variance_Fields = {
 	__typename?: 'maintenance_orders_variance_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -2315,547 +2317,547 @@ export type maintenance_orders_variance_fields = {
 };
 
 /** order by variance() on columns of table "maintenance_orders" */
-export type maintenance_orders_variance_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
-	unit_id?: InputMaybe<order_by>;
+export type Maintenance_Orders_Variance_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
+	unit_id?: InputMaybe<Order_By>;
 };
 
 /** mutation root */
-export type mutation_root = {
+export type Mutation_Root = {
 	__typename?: 'mutation_root';
 	/** delete data from the table: "clients" */
-	delete_clients?: Maybe<clients_mutation_response>;
+	delete_clients?: Maybe<Clients_Mutation_Response>;
 	/** delete single row from the table: "clients" */
-	delete_clients_by_pk?: Maybe<clients>;
+	delete_clients_by_pk?: Maybe<Clients>;
 	/** delete data from the table: "expenses" */
-	delete_expenses?: Maybe<expenses_mutation_response>;
+	delete_expenses?: Maybe<Expenses_Mutation_Response>;
 	/** delete single row from the table: "expenses" */
-	delete_expenses_by_pk?: Maybe<expenses>;
+	delete_expenses_by_pk?: Maybe<Expenses>;
 	/** delete data from the table: "expenses_types" */
-	delete_expenses_types?: Maybe<expenses_types_mutation_response>;
+	delete_expenses_types?: Maybe<Expenses_Types_Mutation_Response>;
 	/** delete single row from the table: "expenses_types" */
-	delete_expenses_types_by_pk?: Maybe<expenses_types>;
+	delete_expenses_types_by_pk?: Maybe<Expenses_Types>;
 	/** delete data from the table: "leases" */
-	delete_leases?: Maybe<leases_mutation_response>;
+	delete_leases?: Maybe<Leases_Mutation_Response>;
 	/** delete single row from the table: "leases" */
-	delete_leases_by_pk?: Maybe<leases>;
+	delete_leases_by_pk?: Maybe<Leases>;
 	/** delete data from the table: "listings" */
-	delete_listings?: Maybe<listings_mutation_response>;
+	delete_listings?: Maybe<Listings_Mutation_Response>;
 	/** delete single row from the table: "listings" */
-	delete_listings_by_pk?: Maybe<listings>;
+	delete_listings_by_pk?: Maybe<Listings>;
 	/** delete data from the table: "maintenance_orders" */
-	delete_maintenance_orders?: Maybe<maintenance_orders_mutation_response>;
+	delete_maintenance_orders?: Maybe<Maintenance_Orders_Mutation_Response>;
 	/** delete single row from the table: "maintenance_orders" */
-	delete_maintenance_orders_by_pk?: Maybe<maintenance_orders>;
+	delete_maintenance_orders_by_pk?: Maybe<Maintenance_Orders>;
 	/** delete data from the table: "properties" */
-	delete_properties?: Maybe<properties_mutation_response>;
+	delete_properties?: Maybe<Properties_Mutation_Response>;
 	/** delete single row from the table: "properties" */
-	delete_properties_by_pk?: Maybe<properties>;
+	delete_properties_by_pk?: Maybe<Properties>;
 	/** delete data from the table: "tenants" */
-	delete_tenants?: Maybe<tenants_mutation_response>;
+	delete_tenants?: Maybe<Tenants_Mutation_Response>;
 	/** delete single row from the table: "tenants" */
-	delete_tenants_by_pk?: Maybe<tenants>;
+	delete_tenants_by_pk?: Maybe<Tenants>;
 	/** delete data from the table: "transactions" */
-	delete_transactions?: Maybe<transactions_mutation_response>;
+	delete_transactions?: Maybe<Transactions_Mutation_Response>;
 	/** delete single row from the table: "transactions" */
-	delete_transactions_by_pk?: Maybe<transactions>;
+	delete_transactions_by_pk?: Maybe<Transactions>;
 	/** delete data from the table: "units" */
-	delete_units?: Maybe<units_mutation_response>;
+	delete_units?: Maybe<Units_Mutation_Response>;
 	/** delete single row from the table: "units" */
-	delete_units_by_pk?: Maybe<units>;
+	delete_units_by_pk?: Maybe<Units>;
 	/** delete data from the table: "users" */
-	delete_users?: Maybe<users_mutation_response>;
+	delete_users?: Maybe<Users_Mutation_Response>;
 	/** delete single row from the table: "users" */
-	delete_users_by_pk?: Maybe<users>;
+	delete_users_by_pk?: Maybe<Users>;
 	/** insert data into the table: "clients" */
-	insert_clients?: Maybe<clients_mutation_response>;
+	insert_clients?: Maybe<Clients_Mutation_Response>;
 	/** insert a single row into the table: "clients" */
-	insert_clients_one?: Maybe<clients>;
+	insert_clients_one?: Maybe<Clients>;
 	/** insert data into the table: "expenses" */
-	insert_expenses?: Maybe<expenses_mutation_response>;
+	insert_expenses?: Maybe<Expenses_Mutation_Response>;
 	/** insert a single row into the table: "expenses" */
-	insert_expenses_one?: Maybe<expenses>;
+	insert_expenses_one?: Maybe<Expenses>;
 	/** insert data into the table: "expenses_types" */
-	insert_expenses_types?: Maybe<expenses_types_mutation_response>;
+	insert_expenses_types?: Maybe<Expenses_Types_Mutation_Response>;
 	/** insert a single row into the table: "expenses_types" */
-	insert_expenses_types_one?: Maybe<expenses_types>;
+	insert_expenses_types_one?: Maybe<Expenses_Types>;
 	/** insert data into the table: "leases" */
-	insert_leases?: Maybe<leases_mutation_response>;
+	insert_leases?: Maybe<Leases_Mutation_Response>;
 	/** insert a single row into the table: "leases" */
-	insert_leases_one?: Maybe<leases>;
+	insert_leases_one?: Maybe<Leases>;
 	/** insert data into the table: "listings" */
-	insert_listings?: Maybe<listings_mutation_response>;
+	insert_listings?: Maybe<Listings_Mutation_Response>;
 	/** insert a single row into the table: "listings" */
-	insert_listings_one?: Maybe<listings>;
+	insert_listings_one?: Maybe<Listings>;
 	/** insert data into the table: "maintenance_orders" */
-	insert_maintenance_orders?: Maybe<maintenance_orders_mutation_response>;
+	insert_maintenance_orders?: Maybe<Maintenance_Orders_Mutation_Response>;
 	/** insert a single row into the table: "maintenance_orders" */
-	insert_maintenance_orders_one?: Maybe<maintenance_orders>;
+	insert_maintenance_orders_one?: Maybe<Maintenance_Orders>;
 	/** insert data into the table: "properties" */
-	insert_properties?: Maybe<properties_mutation_response>;
+	insert_properties?: Maybe<Properties_Mutation_Response>;
 	/** insert a single row into the table: "properties" */
-	insert_properties_one?: Maybe<properties>;
+	insert_properties_one?: Maybe<Properties>;
 	/** insert data into the table: "tenants" */
-	insert_tenants?: Maybe<tenants_mutation_response>;
+	insert_tenants?: Maybe<Tenants_Mutation_Response>;
 	/** insert a single row into the table: "tenants" */
-	insert_tenants_one?: Maybe<tenants>;
+	insert_tenants_one?: Maybe<Tenants>;
 	/** insert data into the table: "transactions" */
-	insert_transactions?: Maybe<transactions_mutation_response>;
+	insert_transactions?: Maybe<Transactions_Mutation_Response>;
 	/** insert a single row into the table: "transactions" */
-	insert_transactions_one?: Maybe<transactions>;
+	insert_transactions_one?: Maybe<Transactions>;
 	/** insert data into the table: "units" */
-	insert_units?: Maybe<units_mutation_response>;
+	insert_units?: Maybe<Units_Mutation_Response>;
 	/** insert a single row into the table: "units" */
-	insert_units_one?: Maybe<units>;
+	insert_units_one?: Maybe<Units>;
 	/** insert data into the table: "users" */
-	insert_users?: Maybe<users_mutation_response>;
+	insert_users?: Maybe<Users_Mutation_Response>;
 	/** insert a single row into the table: "users" */
-	insert_users_one?: Maybe<users>;
+	insert_users_one?: Maybe<Users>;
 	/** update data of the table: "clients" */
-	update_clients?: Maybe<clients_mutation_response>;
+	update_clients?: Maybe<Clients_Mutation_Response>;
 	/** update single row of the table: "clients" */
-	update_clients_by_pk?: Maybe<clients>;
+	update_clients_by_pk?: Maybe<Clients>;
 	/** update data of the table: "expenses" */
-	update_expenses?: Maybe<expenses_mutation_response>;
+	update_expenses?: Maybe<Expenses_Mutation_Response>;
 	/** update single row of the table: "expenses" */
-	update_expenses_by_pk?: Maybe<expenses>;
+	update_expenses_by_pk?: Maybe<Expenses>;
 	/** update data of the table: "expenses_types" */
-	update_expenses_types?: Maybe<expenses_types_mutation_response>;
+	update_expenses_types?: Maybe<Expenses_Types_Mutation_Response>;
 	/** update single row of the table: "expenses_types" */
-	update_expenses_types_by_pk?: Maybe<expenses_types>;
+	update_expenses_types_by_pk?: Maybe<Expenses_Types>;
 	/** update data of the table: "leases" */
-	update_leases?: Maybe<leases_mutation_response>;
+	update_leases?: Maybe<Leases_Mutation_Response>;
 	/** update single row of the table: "leases" */
-	update_leases_by_pk?: Maybe<leases>;
+	update_leases_by_pk?: Maybe<Leases>;
 	/** update data of the table: "listings" */
-	update_listings?: Maybe<listings_mutation_response>;
+	update_listings?: Maybe<Listings_Mutation_Response>;
 	/** update single row of the table: "listings" */
-	update_listings_by_pk?: Maybe<listings>;
+	update_listings_by_pk?: Maybe<Listings>;
 	/** update data of the table: "maintenance_orders" */
-	update_maintenance_orders?: Maybe<maintenance_orders_mutation_response>;
+	update_maintenance_orders?: Maybe<Maintenance_Orders_Mutation_Response>;
 	/** update single row of the table: "maintenance_orders" */
-	update_maintenance_orders_by_pk?: Maybe<maintenance_orders>;
+	update_maintenance_orders_by_pk?: Maybe<Maintenance_Orders>;
 	/** update data of the table: "properties" */
-	update_properties?: Maybe<properties_mutation_response>;
+	update_properties?: Maybe<Properties_Mutation_Response>;
 	/** update single row of the table: "properties" */
-	update_properties_by_pk?: Maybe<properties>;
+	update_properties_by_pk?: Maybe<Properties>;
 	/** update data of the table: "tenants" */
-	update_tenants?: Maybe<tenants_mutation_response>;
+	update_tenants?: Maybe<Tenants_Mutation_Response>;
 	/** update single row of the table: "tenants" */
-	update_tenants_by_pk?: Maybe<tenants>;
+	update_tenants_by_pk?: Maybe<Tenants>;
 	/** update data of the table: "transactions" */
-	update_transactions?: Maybe<transactions_mutation_response>;
+	update_transactions?: Maybe<Transactions_Mutation_Response>;
 	/** update single row of the table: "transactions" */
-	update_transactions_by_pk?: Maybe<transactions>;
+	update_transactions_by_pk?: Maybe<Transactions>;
 	/** update data of the table: "units" */
-	update_units?: Maybe<units_mutation_response>;
+	update_units?: Maybe<Units_Mutation_Response>;
 	/** update single row of the table: "units" */
-	update_units_by_pk?: Maybe<units>;
+	update_units_by_pk?: Maybe<Units>;
 	/** update data of the table: "users" */
-	update_users?: Maybe<users_mutation_response>;
+	update_users?: Maybe<Users_Mutation_Response>;
 	/** update single row of the table: "users" */
-	update_users_by_pk?: Maybe<users>;
+	update_users_by_pk?: Maybe<Users>;
 };
 
 /** mutation root */
-export type mutation_root_delete_clientsArgs = {
-	where: clients_bool_exp;
+export type Mutation_RootDelete_ClientsArgs = {
+	where: Clients_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_clients_by_pkArgs = {
+export type Mutation_RootDelete_Clients_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_expensesArgs = {
-	where: expenses_bool_exp;
+export type Mutation_RootDelete_ExpensesArgs = {
+	where: Expenses_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_expenses_by_pkArgs = {
+export type Mutation_RootDelete_Expenses_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_expenses_typesArgs = {
-	where: expenses_types_bool_exp;
+export type Mutation_RootDelete_Expenses_TypesArgs = {
+	where: Expenses_Types_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_expenses_types_by_pkArgs = {
+export type Mutation_RootDelete_Expenses_Types_By_PkArgs = {
 	value: Scalars['String'];
 };
 
 /** mutation root */
-export type mutation_root_delete_leasesArgs = {
-	where: leases_bool_exp;
+export type Mutation_RootDelete_LeasesArgs = {
+	where: Leases_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_leases_by_pkArgs = {
+export type Mutation_RootDelete_Leases_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_listingsArgs = {
-	where: listings_bool_exp;
+export type Mutation_RootDelete_ListingsArgs = {
+	where: Listings_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_listings_by_pkArgs = {
+export type Mutation_RootDelete_Listings_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_maintenance_ordersArgs = {
-	where: maintenance_orders_bool_exp;
+export type Mutation_RootDelete_Maintenance_OrdersArgs = {
+	where: Maintenance_Orders_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_maintenance_orders_by_pkArgs = {
+export type Mutation_RootDelete_Maintenance_Orders_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_propertiesArgs = {
-	where: properties_bool_exp;
+export type Mutation_RootDelete_PropertiesArgs = {
+	where: Properties_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_properties_by_pkArgs = {
+export type Mutation_RootDelete_Properties_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_tenantsArgs = {
-	where: tenants_bool_exp;
+export type Mutation_RootDelete_TenantsArgs = {
+	where: Tenants_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_tenants_by_pkArgs = {
+export type Mutation_RootDelete_Tenants_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_transactionsArgs = {
-	where: transactions_bool_exp;
+export type Mutation_RootDelete_TransactionsArgs = {
+	where: Transactions_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_transactions_by_pkArgs = {
+export type Mutation_RootDelete_Transactions_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_unitsArgs = {
-	where: units_bool_exp;
+export type Mutation_RootDelete_UnitsArgs = {
+	where: Units_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_units_by_pkArgs = {
+export type Mutation_RootDelete_Units_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_delete_usersArgs = {
-	where: users_bool_exp;
+export type Mutation_RootDelete_UsersArgs = {
+	where: Users_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_delete_users_by_pkArgs = {
+export type Mutation_RootDelete_Users_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_root_insert_clientsArgs = {
-	objects: Array<clients_insert_input>;
-	on_conflict?: InputMaybe<clients_on_conflict>;
+export type Mutation_RootInsert_ClientsArgs = {
+	objects: Array<Clients_Insert_Input>;
+	on_conflict?: InputMaybe<Clients_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_clients_oneArgs = {
-	object: clients_insert_input;
-	on_conflict?: InputMaybe<clients_on_conflict>;
+export type Mutation_RootInsert_Clients_OneArgs = {
+	object: Clients_Insert_Input;
+	on_conflict?: InputMaybe<Clients_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_expensesArgs = {
-	objects: Array<expenses_insert_input>;
-	on_conflict?: InputMaybe<expenses_on_conflict>;
+export type Mutation_RootInsert_ExpensesArgs = {
+	objects: Array<Expenses_Insert_Input>;
+	on_conflict?: InputMaybe<Expenses_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_expenses_oneArgs = {
-	object: expenses_insert_input;
-	on_conflict?: InputMaybe<expenses_on_conflict>;
+export type Mutation_RootInsert_Expenses_OneArgs = {
+	object: Expenses_Insert_Input;
+	on_conflict?: InputMaybe<Expenses_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_expenses_typesArgs = {
-	objects: Array<expenses_types_insert_input>;
-	on_conflict?: InputMaybe<expenses_types_on_conflict>;
+export type Mutation_RootInsert_Expenses_TypesArgs = {
+	objects: Array<Expenses_Types_Insert_Input>;
+	on_conflict?: InputMaybe<Expenses_Types_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_expenses_types_oneArgs = {
-	object: expenses_types_insert_input;
-	on_conflict?: InputMaybe<expenses_types_on_conflict>;
+export type Mutation_RootInsert_Expenses_Types_OneArgs = {
+	object: Expenses_Types_Insert_Input;
+	on_conflict?: InputMaybe<Expenses_Types_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_leasesArgs = {
-	objects: Array<leases_insert_input>;
-	on_conflict?: InputMaybe<leases_on_conflict>;
+export type Mutation_RootInsert_LeasesArgs = {
+	objects: Array<Leases_Insert_Input>;
+	on_conflict?: InputMaybe<Leases_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_leases_oneArgs = {
-	object: leases_insert_input;
-	on_conflict?: InputMaybe<leases_on_conflict>;
+export type Mutation_RootInsert_Leases_OneArgs = {
+	object: Leases_Insert_Input;
+	on_conflict?: InputMaybe<Leases_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_listingsArgs = {
-	objects: Array<listings_insert_input>;
-	on_conflict?: InputMaybe<listings_on_conflict>;
+export type Mutation_RootInsert_ListingsArgs = {
+	objects: Array<Listings_Insert_Input>;
+	on_conflict?: InputMaybe<Listings_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_listings_oneArgs = {
-	object: listings_insert_input;
-	on_conflict?: InputMaybe<listings_on_conflict>;
+export type Mutation_RootInsert_Listings_OneArgs = {
+	object: Listings_Insert_Input;
+	on_conflict?: InputMaybe<Listings_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_maintenance_ordersArgs = {
-	objects: Array<maintenance_orders_insert_input>;
-	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
+export type Mutation_RootInsert_Maintenance_OrdersArgs = {
+	objects: Array<Maintenance_Orders_Insert_Input>;
+	on_conflict?: InputMaybe<Maintenance_Orders_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_maintenance_orders_oneArgs = {
-	object: maintenance_orders_insert_input;
-	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
+export type Mutation_RootInsert_Maintenance_Orders_OneArgs = {
+	object: Maintenance_Orders_Insert_Input;
+	on_conflict?: InputMaybe<Maintenance_Orders_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_propertiesArgs = {
-	objects: Array<properties_insert_input>;
-	on_conflict?: InputMaybe<properties_on_conflict>;
+export type Mutation_RootInsert_PropertiesArgs = {
+	objects: Array<Properties_Insert_Input>;
+	on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_properties_oneArgs = {
-	object: properties_insert_input;
-	on_conflict?: InputMaybe<properties_on_conflict>;
+export type Mutation_RootInsert_Properties_OneArgs = {
+	object: Properties_Insert_Input;
+	on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_tenantsArgs = {
-	objects: Array<tenants_insert_input>;
-	on_conflict?: InputMaybe<tenants_on_conflict>;
+export type Mutation_RootInsert_TenantsArgs = {
+	objects: Array<Tenants_Insert_Input>;
+	on_conflict?: InputMaybe<Tenants_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_tenants_oneArgs = {
-	object: tenants_insert_input;
-	on_conflict?: InputMaybe<tenants_on_conflict>;
+export type Mutation_RootInsert_Tenants_OneArgs = {
+	object: Tenants_Insert_Input;
+	on_conflict?: InputMaybe<Tenants_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_transactionsArgs = {
-	objects: Array<transactions_insert_input>;
-	on_conflict?: InputMaybe<transactions_on_conflict>;
+export type Mutation_RootInsert_TransactionsArgs = {
+	objects: Array<Transactions_Insert_Input>;
+	on_conflict?: InputMaybe<Transactions_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_transactions_oneArgs = {
-	object: transactions_insert_input;
-	on_conflict?: InputMaybe<transactions_on_conflict>;
+export type Mutation_RootInsert_Transactions_OneArgs = {
+	object: Transactions_Insert_Input;
+	on_conflict?: InputMaybe<Transactions_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_unitsArgs = {
-	objects: Array<units_insert_input>;
-	on_conflict?: InputMaybe<units_on_conflict>;
+export type Mutation_RootInsert_UnitsArgs = {
+	objects: Array<Units_Insert_Input>;
+	on_conflict?: InputMaybe<Units_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_units_oneArgs = {
-	object: units_insert_input;
-	on_conflict?: InputMaybe<units_on_conflict>;
+export type Mutation_RootInsert_Units_OneArgs = {
+	object: Units_Insert_Input;
+	on_conflict?: InputMaybe<Units_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_usersArgs = {
-	objects: Array<users_insert_input>;
-	on_conflict?: InputMaybe<users_on_conflict>;
+export type Mutation_RootInsert_UsersArgs = {
+	objects: Array<Users_Insert_Input>;
+	on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_insert_users_oneArgs = {
-	object: users_insert_input;
-	on_conflict?: InputMaybe<users_on_conflict>;
+export type Mutation_RootInsert_Users_OneArgs = {
+	object: Users_Insert_Input;
+	on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 /** mutation root */
-export type mutation_root_update_clientsArgs = {
-	_inc?: InputMaybe<clients_inc_input>;
-	_set?: InputMaybe<clients_set_input>;
-	where: clients_bool_exp;
+export type Mutation_RootUpdate_ClientsArgs = {
+	_inc?: InputMaybe<Clients_Inc_Input>;
+	_set?: InputMaybe<Clients_Set_Input>;
+	where: Clients_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_clients_by_pkArgs = {
-	_inc?: InputMaybe<clients_inc_input>;
-	_set?: InputMaybe<clients_set_input>;
-	pk_columns: clients_pk_columns_input;
+export type Mutation_RootUpdate_Clients_By_PkArgs = {
+	_inc?: InputMaybe<Clients_Inc_Input>;
+	_set?: InputMaybe<Clients_Set_Input>;
+	pk_columns: Clients_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_expensesArgs = {
-	_inc?: InputMaybe<expenses_inc_input>;
-	_set?: InputMaybe<expenses_set_input>;
-	where: expenses_bool_exp;
+export type Mutation_RootUpdate_ExpensesArgs = {
+	_inc?: InputMaybe<Expenses_Inc_Input>;
+	_set?: InputMaybe<Expenses_Set_Input>;
+	where: Expenses_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_expenses_by_pkArgs = {
-	_inc?: InputMaybe<expenses_inc_input>;
-	_set?: InputMaybe<expenses_set_input>;
-	pk_columns: expenses_pk_columns_input;
+export type Mutation_RootUpdate_Expenses_By_PkArgs = {
+	_inc?: InputMaybe<Expenses_Inc_Input>;
+	_set?: InputMaybe<Expenses_Set_Input>;
+	pk_columns: Expenses_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_expenses_typesArgs = {
-	_set?: InputMaybe<expenses_types_set_input>;
-	where: expenses_types_bool_exp;
+export type Mutation_RootUpdate_Expenses_TypesArgs = {
+	_set?: InputMaybe<Expenses_Types_Set_Input>;
+	where: Expenses_Types_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_expenses_types_by_pkArgs = {
-	_set?: InputMaybe<expenses_types_set_input>;
-	pk_columns: expenses_types_pk_columns_input;
+export type Mutation_RootUpdate_Expenses_Types_By_PkArgs = {
+	_set?: InputMaybe<Expenses_Types_Set_Input>;
+	pk_columns: Expenses_Types_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_leasesArgs = {
-	_inc?: InputMaybe<leases_inc_input>;
-	_set?: InputMaybe<leases_set_input>;
-	where: leases_bool_exp;
+export type Mutation_RootUpdate_LeasesArgs = {
+	_inc?: InputMaybe<Leases_Inc_Input>;
+	_set?: InputMaybe<Leases_Set_Input>;
+	where: Leases_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_leases_by_pkArgs = {
-	_inc?: InputMaybe<leases_inc_input>;
-	_set?: InputMaybe<leases_set_input>;
-	pk_columns: leases_pk_columns_input;
+export type Mutation_RootUpdate_Leases_By_PkArgs = {
+	_inc?: InputMaybe<Leases_Inc_Input>;
+	_set?: InputMaybe<Leases_Set_Input>;
+	pk_columns: Leases_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_listingsArgs = {
-	_inc?: InputMaybe<listings_inc_input>;
-	_set?: InputMaybe<listings_set_input>;
-	where: listings_bool_exp;
+export type Mutation_RootUpdate_ListingsArgs = {
+	_inc?: InputMaybe<Listings_Inc_Input>;
+	_set?: InputMaybe<Listings_Set_Input>;
+	where: Listings_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_listings_by_pkArgs = {
-	_inc?: InputMaybe<listings_inc_input>;
-	_set?: InputMaybe<listings_set_input>;
-	pk_columns: listings_pk_columns_input;
+export type Mutation_RootUpdate_Listings_By_PkArgs = {
+	_inc?: InputMaybe<Listings_Inc_Input>;
+	_set?: InputMaybe<Listings_Set_Input>;
+	pk_columns: Listings_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_maintenance_ordersArgs = {
-	_inc?: InputMaybe<maintenance_orders_inc_input>;
-	_set?: InputMaybe<maintenance_orders_set_input>;
-	where: maintenance_orders_bool_exp;
+export type Mutation_RootUpdate_Maintenance_OrdersArgs = {
+	_inc?: InputMaybe<Maintenance_Orders_Inc_Input>;
+	_set?: InputMaybe<Maintenance_Orders_Set_Input>;
+	where: Maintenance_Orders_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_maintenance_orders_by_pkArgs = {
-	_inc?: InputMaybe<maintenance_orders_inc_input>;
-	_set?: InputMaybe<maintenance_orders_set_input>;
-	pk_columns: maintenance_orders_pk_columns_input;
+export type Mutation_RootUpdate_Maintenance_Orders_By_PkArgs = {
+	_inc?: InputMaybe<Maintenance_Orders_Inc_Input>;
+	_set?: InputMaybe<Maintenance_Orders_Set_Input>;
+	pk_columns: Maintenance_Orders_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_propertiesArgs = {
-	_inc?: InputMaybe<properties_inc_input>;
-	_set?: InputMaybe<properties_set_input>;
-	where: properties_bool_exp;
+export type Mutation_RootUpdate_PropertiesArgs = {
+	_inc?: InputMaybe<Properties_Inc_Input>;
+	_set?: InputMaybe<Properties_Set_Input>;
+	where: Properties_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_properties_by_pkArgs = {
-	_inc?: InputMaybe<properties_inc_input>;
-	_set?: InputMaybe<properties_set_input>;
-	pk_columns: properties_pk_columns_input;
+export type Mutation_RootUpdate_Properties_By_PkArgs = {
+	_inc?: InputMaybe<Properties_Inc_Input>;
+	_set?: InputMaybe<Properties_Set_Input>;
+	pk_columns: Properties_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_tenantsArgs = {
-	_inc?: InputMaybe<tenants_inc_input>;
-	_set?: InputMaybe<tenants_set_input>;
-	where: tenants_bool_exp;
+export type Mutation_RootUpdate_TenantsArgs = {
+	_inc?: InputMaybe<Tenants_Inc_Input>;
+	_set?: InputMaybe<Tenants_Set_Input>;
+	where: Tenants_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_tenants_by_pkArgs = {
-	_inc?: InputMaybe<tenants_inc_input>;
-	_set?: InputMaybe<tenants_set_input>;
-	pk_columns: tenants_pk_columns_input;
+export type Mutation_RootUpdate_Tenants_By_PkArgs = {
+	_inc?: InputMaybe<Tenants_Inc_Input>;
+	_set?: InputMaybe<Tenants_Set_Input>;
+	pk_columns: Tenants_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_transactionsArgs = {
-	_inc?: InputMaybe<transactions_inc_input>;
-	_set?: InputMaybe<transactions_set_input>;
-	where: transactions_bool_exp;
+export type Mutation_RootUpdate_TransactionsArgs = {
+	_inc?: InputMaybe<Transactions_Inc_Input>;
+	_set?: InputMaybe<Transactions_Set_Input>;
+	where: Transactions_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_transactions_by_pkArgs = {
-	_inc?: InputMaybe<transactions_inc_input>;
-	_set?: InputMaybe<transactions_set_input>;
-	pk_columns: transactions_pk_columns_input;
+export type Mutation_RootUpdate_Transactions_By_PkArgs = {
+	_inc?: InputMaybe<Transactions_Inc_Input>;
+	_set?: InputMaybe<Transactions_Set_Input>;
+	pk_columns: Transactions_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_unitsArgs = {
-	_inc?: InputMaybe<units_inc_input>;
-	_set?: InputMaybe<units_set_input>;
-	where: units_bool_exp;
+export type Mutation_RootUpdate_UnitsArgs = {
+	_inc?: InputMaybe<Units_Inc_Input>;
+	_set?: InputMaybe<Units_Set_Input>;
+	where: Units_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_units_by_pkArgs = {
-	_inc?: InputMaybe<units_inc_input>;
-	_set?: InputMaybe<units_set_input>;
-	pk_columns: units_pk_columns_input;
+export type Mutation_RootUpdate_Units_By_PkArgs = {
+	_inc?: InputMaybe<Units_Inc_Input>;
+	_set?: InputMaybe<Units_Set_Input>;
+	pk_columns: Units_Pk_Columns_Input;
 };
 
 /** mutation root */
-export type mutation_root_update_usersArgs = {
-	_inc?: InputMaybe<users_inc_input>;
-	_set?: InputMaybe<users_set_input>;
-	where: users_bool_exp;
+export type Mutation_RootUpdate_UsersArgs = {
+	_inc?: InputMaybe<Users_Inc_Input>;
+	_set?: InputMaybe<Users_Set_Input>;
+	where: Users_Bool_Exp;
 };
 
 /** mutation root */
-export type mutation_root_update_users_by_pkArgs = {
-	_inc?: InputMaybe<users_inc_input>;
-	_set?: InputMaybe<users_set_input>;
-	pk_columns: users_pk_columns_input;
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+	_inc?: InputMaybe<Users_Inc_Input>;
+	_set?: InputMaybe<Users_Set_Input>;
+	pk_columns: Users_Pk_Columns_Input;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
-export type numeric_comparison_exp = {
+export type Numeric_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['numeric']>;
 	_gt?: InputMaybe<Scalars['numeric']>;
 	_gte?: InputMaybe<Scalars['numeric']>;
@@ -2868,7 +2870,7 @@ export type numeric_comparison_exp = {
 };
 
 /** column ordering options */
-export type order_by =
+export type Order_By =
 	/** in ascending order, nulls last */
 	| 'asc'
 	/** in ascending order, nulls first */
@@ -2883,7 +2885,7 @@ export type order_by =
 	| 'desc_nulls_last';
 
 /** Boolean expression to compare columns of type "point". All fields are combined with logical 'AND'. */
-export type point_comparison_exp = {
+export type Point_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['point']>;
 	_gt?: InputMaybe<Scalars['point']>;
 	_gte?: InputMaybe<Scalars['point']>;
@@ -2896,198 +2898,198 @@ export type point_comparison_exp = {
 };
 
 /** columns and relationships of "properties" */
-export type properties = {
+export type Properties = {
 	__typename?: 'properties';
 	area?: Maybe<Scalars['String']>;
 	avenue?: Maybe<Scalars['String']>;
 	block?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	client?: Maybe<clients>;
+	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
 	coordinates?: Maybe<Scalars['point']>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	id: Scalars['Int'];
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	number?: Maybe<Scalars['String']>;
 	street?: Maybe<Scalars['String']>;
 	/** An array relationship */
-	units: Array<units>;
+	units: Array<Units>;
 	/** An aggregate relationship */
-	units_aggregate: units_aggregate;
+	units_aggregate: Units_Aggregate;
 };
 
 /** columns and relationships of "properties" */
-export type properties_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type PropertiesExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "properties" */
-export type properties_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type PropertiesExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "properties" */
-export type properties_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type PropertiesMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "properties" */
-export type properties_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type PropertiesMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "properties" */
-export type properties_unitsArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type PropertiesUnitsArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
 /** columns and relationships of "properties" */
-export type properties_units_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type PropertiesUnits_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
 /** aggregated selection of "properties" */
-export type properties_aggregate = {
+export type Properties_Aggregate = {
 	__typename?: 'properties_aggregate';
-	aggregate?: Maybe<properties_aggregate_fields>;
-	nodes: Array<properties>;
+	aggregate?: Maybe<Properties_Aggregate_Fields>;
+	nodes: Array<Properties>;
 };
 
 /** aggregate fields of "properties" */
-export type properties_aggregate_fields = {
+export type Properties_Aggregate_Fields = {
 	__typename?: 'properties_aggregate_fields';
-	avg?: Maybe<properties_avg_fields>;
+	avg?: Maybe<Properties_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<properties_max_fields>;
-	min?: Maybe<properties_min_fields>;
-	stddev?: Maybe<properties_stddev_fields>;
-	stddev_pop?: Maybe<properties_stddev_pop_fields>;
-	stddev_samp?: Maybe<properties_stddev_samp_fields>;
-	sum?: Maybe<properties_sum_fields>;
-	var_pop?: Maybe<properties_var_pop_fields>;
-	var_samp?: Maybe<properties_var_samp_fields>;
-	variance?: Maybe<properties_variance_fields>;
+	max?: Maybe<Properties_Max_Fields>;
+	min?: Maybe<Properties_Min_Fields>;
+	stddev?: Maybe<Properties_Stddev_Fields>;
+	stddev_pop?: Maybe<Properties_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Properties_Stddev_Samp_Fields>;
+	sum?: Maybe<Properties_Sum_Fields>;
+	var_pop?: Maybe<Properties_Var_Pop_Fields>;
+	var_samp?: Maybe<Properties_Var_Samp_Fields>;
+	variance?: Maybe<Properties_Variance_Fields>;
 };
 
 /** aggregate fields of "properties" */
-export type properties_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<properties_select_column>>;
+export type Properties_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Properties_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "properties" */
-export type properties_aggregate_order_by = {
-	avg?: InputMaybe<properties_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<properties_max_order_by>;
-	min?: InputMaybe<properties_min_order_by>;
-	stddev?: InputMaybe<properties_stddev_order_by>;
-	stddev_pop?: InputMaybe<properties_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<properties_stddev_samp_order_by>;
-	sum?: InputMaybe<properties_sum_order_by>;
-	var_pop?: InputMaybe<properties_var_pop_order_by>;
-	var_samp?: InputMaybe<properties_var_samp_order_by>;
-	variance?: InputMaybe<properties_variance_order_by>;
+export type Properties_Aggregate_Order_By = {
+	avg?: InputMaybe<Properties_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Properties_Max_Order_By>;
+	min?: InputMaybe<Properties_Min_Order_By>;
+	stddev?: InputMaybe<Properties_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Properties_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Properties_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Properties_Sum_Order_By>;
+	var_pop?: InputMaybe<Properties_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Properties_Var_Samp_Order_By>;
+	variance?: InputMaybe<Properties_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "properties" */
-export type properties_arr_rel_insert_input = {
-	data: Array<properties_insert_input>;
+export type Properties_Arr_Rel_Insert_Input = {
+	data: Array<Properties_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<properties_on_conflict>;
+	on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type properties_avg_fields = {
+export type Properties_Avg_Fields = {
 	__typename?: 'properties_avg_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "properties" */
-export type properties_avg_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Avg_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "properties". All fields are combined with a logical 'AND'. */
-export type properties_bool_exp = {
-	_and?: InputMaybe<Array<properties_bool_exp>>;
-	_not?: InputMaybe<properties_bool_exp>;
-	_or?: InputMaybe<Array<properties_bool_exp>>;
-	area?: InputMaybe<String_comparison_exp>;
-	avenue?: InputMaybe<String_comparison_exp>;
-	block?: InputMaybe<String_comparison_exp>;
-	client?: InputMaybe<clients_bool_exp>;
-	client_id?: InputMaybe<Int_comparison_exp>;
-	coordinates?: InputMaybe<point_comparison_exp>;
-	expenses?: InputMaybe<expenses_bool_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	maintenance_orders?: InputMaybe<maintenance_orders_bool_exp>;
-	number?: InputMaybe<String_comparison_exp>;
-	street?: InputMaybe<String_comparison_exp>;
-	units?: InputMaybe<units_bool_exp>;
+export type Properties_Bool_Exp = {
+	_and?: InputMaybe<Array<Properties_Bool_Exp>>;
+	_not?: InputMaybe<Properties_Bool_Exp>;
+	_or?: InputMaybe<Array<Properties_Bool_Exp>>;
+	area?: InputMaybe<String_Comparison_Exp>;
+	avenue?: InputMaybe<String_Comparison_Exp>;
+	block?: InputMaybe<String_Comparison_Exp>;
+	client?: InputMaybe<Clients_Bool_Exp>;
+	client_id?: InputMaybe<Int_Comparison_Exp>;
+	coordinates?: InputMaybe<Point_Comparison_Exp>;
+	expenses?: InputMaybe<Expenses_Bool_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	number?: InputMaybe<String_Comparison_Exp>;
+	street?: InputMaybe<String_Comparison_Exp>;
+	units?: InputMaybe<Units_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "properties" */
-export type properties_constraint =
+export type Properties_Constraint =
 	/** unique or primary key constraint */
 	'properties_pkey';
 
 /** input type for incrementing numeric columns in table "properties" */
-export type properties_inc_input = {
+export type Properties_Inc_Input = {
 	client_id?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "properties" */
-export type properties_insert_input = {
+export type Properties_Insert_Input = {
 	area?: InputMaybe<Scalars['String']>;
 	avenue?: InputMaybe<Scalars['String']>;
 	block?: InputMaybe<Scalars['String']>;
-	client?: InputMaybe<clients_obj_rel_insert_input>;
+	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	coordinates?: InputMaybe<Scalars['point']>;
-	expenses?: InputMaybe<expenses_arr_rel_insert_input>;
+	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	id?: InputMaybe<Scalars['Int']>;
-	maintenance_orders?: InputMaybe<maintenance_orders_arr_rel_insert_input>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Arr_Rel_Insert_Input>;
 	number?: InputMaybe<Scalars['String']>;
 	street?: InputMaybe<Scalars['String']>;
-	units?: InputMaybe<units_arr_rel_insert_input>;
+	units?: InputMaybe<Units_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
-export type properties_max_fields = {
+export type Properties_Max_Fields = {
 	__typename?: 'properties_max_fields';
 	area?: Maybe<Scalars['String']>;
 	avenue?: Maybe<Scalars['String']>;
@@ -3099,18 +3101,18 @@ export type properties_max_fields = {
 };
 
 /** order by max() on columns of table "properties" */
-export type properties_max_order_by = {
-	area?: InputMaybe<order_by>;
-	avenue?: InputMaybe<order_by>;
-	block?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	number?: InputMaybe<order_by>;
-	street?: InputMaybe<order_by>;
+export type Properties_Max_Order_By = {
+	area?: InputMaybe<Order_By>;
+	avenue?: InputMaybe<Order_By>;
+	block?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	number?: InputMaybe<Order_By>;
+	street?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type properties_min_fields = {
+export type Properties_Min_Fields = {
 	__typename?: 'properties_min_fields';
 	area?: Maybe<Scalars['String']>;
 	avenue?: Maybe<Scalars['String']>;
@@ -3122,62 +3124,62 @@ export type properties_min_fields = {
 };
 
 /** order by min() on columns of table "properties" */
-export type properties_min_order_by = {
-	area?: InputMaybe<order_by>;
-	avenue?: InputMaybe<order_by>;
-	block?: InputMaybe<order_by>;
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	number?: InputMaybe<order_by>;
-	street?: InputMaybe<order_by>;
+export type Properties_Min_Order_By = {
+	area?: InputMaybe<Order_By>;
+	avenue?: InputMaybe<Order_By>;
+	block?: InputMaybe<Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	number?: InputMaybe<Order_By>;
+	street?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "properties" */
-export type properties_mutation_response = {
+export type Properties_Mutation_Response = {
 	__typename?: 'properties_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<properties>;
+	returning: Array<Properties>;
 };
 
 /** input type for inserting object relation for remote table "properties" */
-export type properties_obj_rel_insert_input = {
-	data: properties_insert_input;
+export type Properties_Obj_Rel_Insert_Input = {
+	data: Properties_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<properties_on_conflict>;
+	on_conflict?: InputMaybe<Properties_On_Conflict>;
 };
 
 /** on conflict condition type for table "properties" */
-export type properties_on_conflict = {
-	constraint: properties_constraint;
-	update_columns?: Array<properties_update_column>;
-	where?: InputMaybe<properties_bool_exp>;
+export type Properties_On_Conflict = {
+	constraint: Properties_Constraint;
+	update_columns?: Array<Properties_Update_Column>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "properties". */
-export type properties_order_by = {
-	area?: InputMaybe<order_by>;
-	avenue?: InputMaybe<order_by>;
-	block?: InputMaybe<order_by>;
-	client?: InputMaybe<clients_order_by>;
-	client_id?: InputMaybe<order_by>;
-	coordinates?: InputMaybe<order_by>;
-	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
-	id?: InputMaybe<order_by>;
-	maintenance_orders_aggregate?: InputMaybe<maintenance_orders_aggregate_order_by>;
-	number?: InputMaybe<order_by>;
-	street?: InputMaybe<order_by>;
-	units_aggregate?: InputMaybe<units_aggregate_order_by>;
+export type Properties_Order_By = {
+	area?: InputMaybe<Order_By>;
+	avenue?: InputMaybe<Order_By>;
+	block?: InputMaybe<Order_By>;
+	client?: InputMaybe<Clients_Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	coordinates?: InputMaybe<Order_By>;
+	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
+	id?: InputMaybe<Order_By>;
+	maintenance_orders_aggregate?: InputMaybe<Maintenance_Orders_Aggregate_Order_By>;
+	number?: InputMaybe<Order_By>;
+	street?: InputMaybe<Order_By>;
+	units_aggregate?: InputMaybe<Units_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: properties */
-export type properties_pk_columns_input = {
+export type Properties_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "properties" */
-export type properties_select_column =
+export type Properties_Select_Column =
 	/** column name */
 	| 'area'
 	/** column name */
@@ -3196,7 +3198,7 @@ export type properties_select_column =
 	| 'street';
 
 /** input type for updating data in table "properties" */
-export type properties_set_input = {
+export type Properties_Set_Input = {
 	area?: InputMaybe<Scalars['String']>;
 	avenue?: InputMaybe<Scalars['String']>;
 	block?: InputMaybe<Scalars['String']>;
@@ -3208,59 +3210,59 @@ export type properties_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type properties_stddev_fields = {
+export type Properties_Stddev_Fields = {
 	__typename?: 'properties_stddev_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "properties" */
-export type properties_stddev_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Stddev_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type properties_stddev_pop_fields = {
+export type Properties_Stddev_Pop_Fields = {
 	__typename?: 'properties_stddev_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "properties" */
-export type properties_stddev_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Stddev_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type properties_stddev_samp_fields = {
+export type Properties_Stddev_Samp_Fields = {
 	__typename?: 'properties_stddev_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "properties" */
-export type properties_stddev_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Stddev_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type properties_sum_fields = {
+export type Properties_Sum_Fields = {
 	__typename?: 'properties_sum_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	id?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "properties" */
-export type properties_sum_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Sum_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "properties" */
-export type properties_update_column =
+export type Properties_Update_Column =
 	/** column name */
 	| 'area'
 	/** column name */
@@ -3279,626 +3281,626 @@ export type properties_update_column =
 	| 'street';
 
 /** aggregate var_pop on columns */
-export type properties_var_pop_fields = {
+export type Properties_Var_Pop_Fields = {
 	__typename?: 'properties_var_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "properties" */
-export type properties_var_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Var_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type properties_var_samp_fields = {
+export type Properties_Var_Samp_Fields = {
 	__typename?: 'properties_var_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "properties" */
-export type properties_var_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Var_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type properties_variance_fields = {
+export type Properties_Variance_Fields = {
 	__typename?: 'properties_variance_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "properties" */
-export type properties_variance_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
+export type Properties_Variance_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
 };
 
-export type query_root = {
+export type Query_Root = {
 	__typename?: 'query_root';
 	/** fetch data from the table: "clients" */
-	clients: Array<clients>;
+	clients: Array<Clients>;
 	/** fetch aggregated fields from the table: "clients" */
-	clients_aggregate: clients_aggregate;
+	clients_aggregate: Clients_Aggregate;
 	/** fetch data from the table: "clients" using primary key columns */
-	clients_by_pk?: Maybe<clients>;
+	clients_by_pk?: Maybe<Clients>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	/** fetch data from the table: "expenses" using primary key columns */
-	expenses_by_pk?: Maybe<expenses>;
+	expenses_by_pk?: Maybe<Expenses>;
 	/** fetch data from the table: "expenses_types" */
-	expenses_types: Array<expenses_types>;
+	expenses_types: Array<Expenses_Types>;
 	/** fetch aggregated fields from the table: "expenses_types" */
-	expenses_types_aggregate: expenses_types_aggregate;
+	expenses_types_aggregate: Expenses_Types_Aggregate;
 	/** fetch data from the table: "expenses_types" using primary key columns */
-	expenses_types_by_pk?: Maybe<expenses_types>;
+	expenses_types_by_pk?: Maybe<Expenses_Types>;
 	/** An array relationship */
-	leases: Array<leases>;
+	leases: Array<Leases>;
 	/** An aggregate relationship */
-	leases_aggregate: leases_aggregate;
+	leases_aggregate: Leases_Aggregate;
 	/** fetch data from the table: "leases" using primary key columns */
-	leases_by_pk?: Maybe<leases>;
+	leases_by_pk?: Maybe<Leases>;
 	/** An array relationship */
-	listings: Array<listings>;
+	listings: Array<Listings>;
 	/** An aggregate relationship */
-	listings_aggregate: listings_aggregate;
+	listings_aggregate: Listings_Aggregate;
 	/** fetch data from the table: "listings" using primary key columns */
-	listings_by_pk?: Maybe<listings>;
+	listings_by_pk?: Maybe<Listings>;
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	/** fetch data from the table: "maintenance_orders" using primary key columns */
-	maintenance_orders_by_pk?: Maybe<maintenance_orders>;
+	maintenance_orders_by_pk?: Maybe<Maintenance_Orders>;
 	/** An array relationship */
-	properties: Array<properties>;
+	properties: Array<Properties>;
 	/** An aggregate relationship */
-	properties_aggregate: properties_aggregate;
+	properties_aggregate: Properties_Aggregate;
 	/** fetch data from the table: "properties" using primary key columns */
-	properties_by_pk?: Maybe<properties>;
+	properties_by_pk?: Maybe<Properties>;
 	/** fetch data from the table: "tenants" */
-	tenants: Array<tenants>;
+	tenants: Array<Tenants>;
 	/** fetch aggregated fields from the table: "tenants" */
-	tenants_aggregate: tenants_aggregate;
+	tenants_aggregate: Tenants_Aggregate;
 	/** fetch data from the table: "tenants" using primary key columns */
-	tenants_by_pk?: Maybe<tenants>;
+	tenants_by_pk?: Maybe<Tenants>;
 	/** An array relationship */
-	transactions: Array<transactions>;
+	transactions: Array<Transactions>;
 	/** An aggregate relationship */
-	transactions_aggregate: transactions_aggregate;
+	transactions_aggregate: Transactions_Aggregate;
 	/** fetch data from the table: "transactions" using primary key columns */
-	transactions_by_pk?: Maybe<transactions>;
+	transactions_by_pk?: Maybe<Transactions>;
 	/** An array relationship */
-	units: Array<units>;
+	units: Array<Units>;
 	/** An aggregate relationship */
-	units_aggregate: units_aggregate;
+	units_aggregate: Units_Aggregate;
 	/** fetch data from the table: "units" using primary key columns */
-	units_by_pk?: Maybe<units>;
+	units_by_pk?: Maybe<Units>;
 	/** An array relationship */
-	users: Array<users>;
+	users: Array<Users>;
 	/** An aggregate relationship */
-	users_aggregate: users_aggregate;
+	users_aggregate: Users_Aggregate;
 	/** fetch data from the table: "users" using primary key columns */
-	users_by_pk?: Maybe<users>;
+	users_by_pk?: Maybe<Users>;
 };
 
-export type query_root_clientsArgs = {
-	distinct_on?: InputMaybe<Array<clients_select_column>>;
+export type Query_RootClientsArgs = {
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by>>;
-	where?: InputMaybe<clients_bool_exp>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
 };
 
-export type query_root_clients_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<clients_select_column>>;
+export type Query_RootClients_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by>>;
-	where?: InputMaybe<clients_bool_exp>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
 };
 
-export type query_root_clients_by_pkArgs = {
+export type Query_RootClients_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Query_RootExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
-export type query_root_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Query_RootExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
-export type query_root_expenses_by_pkArgs = {
+export type Query_RootExpenses_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_expenses_typesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
+export type Query_RootExpenses_TypesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Types_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_types_order_by>>;
-	where?: InputMaybe<expenses_types_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Types_Order_By>>;
+	where?: InputMaybe<Expenses_Types_Bool_Exp>;
 };
 
-export type query_root_expenses_types_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
+export type Query_RootExpenses_Types_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Types_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_types_order_by>>;
-	where?: InputMaybe<expenses_types_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Types_Order_By>>;
+	where?: InputMaybe<Expenses_Types_Bool_Exp>;
 };
 
-export type query_root_expenses_types_by_pkArgs = {
+export type Query_RootExpenses_Types_By_PkArgs = {
 	value: Scalars['String'];
 };
 
-export type query_root_leasesArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type Query_RootLeasesArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
-export type query_root_leases_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type Query_RootLeases_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
-export type query_root_leases_by_pkArgs = {
+export type Query_RootLeases_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_listingsArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type Query_RootListingsArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
-export type query_root_listings_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type Query_RootListings_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
-export type query_root_listings_by_pkArgs = {
+export type Query_RootListings_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type Query_RootMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
-export type query_root_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type Query_RootMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
-export type query_root_maintenance_orders_by_pkArgs = {
+export type Query_RootMaintenance_Orders_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_propertiesArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type Query_RootPropertiesArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
-export type query_root_properties_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type Query_RootProperties_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
-export type query_root_properties_by_pkArgs = {
+export type Query_RootProperties_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_tenantsArgs = {
-	distinct_on?: InputMaybe<Array<tenants_select_column>>;
+export type Query_RootTenantsArgs = {
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by>>;
-	where?: InputMaybe<tenants_bool_exp>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
-export type query_root_tenants_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<tenants_select_column>>;
+export type Query_RootTenants_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by>>;
-	where?: InputMaybe<tenants_bool_exp>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
-export type query_root_tenants_by_pkArgs = {
+export type Query_RootTenants_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_transactionsArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type Query_RootTransactionsArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
-export type query_root_transactions_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type Query_RootTransactions_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
-export type query_root_transactions_by_pkArgs = {
+export type Query_RootTransactions_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_unitsArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type Query_RootUnitsArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
-export type query_root_units_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type Query_RootUnits_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
-export type query_root_units_by_pkArgs = {
+export type Query_RootUnits_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_root_usersArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type Query_RootUsersArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
-export type query_root_users_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type Query_RootUsers_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
-export type query_root_users_by_pkArgs = {
+export type Query_RootUsers_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root = {
+export type Subscription_Root = {
 	__typename?: 'subscription_root';
 	/** fetch data from the table: "clients" */
-	clients: Array<clients>;
+	clients: Array<Clients>;
 	/** fetch aggregated fields from the table: "clients" */
-	clients_aggregate: clients_aggregate;
+	clients_aggregate: Clients_Aggregate;
 	/** fetch data from the table: "clients" using primary key columns */
-	clients_by_pk?: Maybe<clients>;
+	clients_by_pk?: Maybe<Clients>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	/** fetch data from the table: "expenses" using primary key columns */
-	expenses_by_pk?: Maybe<expenses>;
+	expenses_by_pk?: Maybe<Expenses>;
 	/** fetch data from the table: "expenses_types" */
-	expenses_types: Array<expenses_types>;
+	expenses_types: Array<Expenses_Types>;
 	/** fetch aggregated fields from the table: "expenses_types" */
-	expenses_types_aggregate: expenses_types_aggregate;
+	expenses_types_aggregate: Expenses_Types_Aggregate;
 	/** fetch data from the table: "expenses_types" using primary key columns */
-	expenses_types_by_pk?: Maybe<expenses_types>;
+	expenses_types_by_pk?: Maybe<Expenses_Types>;
 	/** An array relationship */
-	leases: Array<leases>;
+	leases: Array<Leases>;
 	/** An aggregate relationship */
-	leases_aggregate: leases_aggregate;
+	leases_aggregate: Leases_Aggregate;
 	/** fetch data from the table: "leases" using primary key columns */
-	leases_by_pk?: Maybe<leases>;
+	leases_by_pk?: Maybe<Leases>;
 	/** An array relationship */
-	listings: Array<listings>;
+	listings: Array<Listings>;
 	/** An aggregate relationship */
-	listings_aggregate: listings_aggregate;
+	listings_aggregate: Listings_Aggregate;
 	/** fetch data from the table: "listings" using primary key columns */
-	listings_by_pk?: Maybe<listings>;
+	listings_by_pk?: Maybe<Listings>;
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	/** fetch data from the table: "maintenance_orders" using primary key columns */
-	maintenance_orders_by_pk?: Maybe<maintenance_orders>;
+	maintenance_orders_by_pk?: Maybe<Maintenance_Orders>;
 	/** An array relationship */
-	properties: Array<properties>;
+	properties: Array<Properties>;
 	/** An aggregate relationship */
-	properties_aggregate: properties_aggregate;
+	properties_aggregate: Properties_Aggregate;
 	/** fetch data from the table: "properties" using primary key columns */
-	properties_by_pk?: Maybe<properties>;
+	properties_by_pk?: Maybe<Properties>;
 	/** fetch data from the table: "tenants" */
-	tenants: Array<tenants>;
+	tenants: Array<Tenants>;
 	/** fetch aggregated fields from the table: "tenants" */
-	tenants_aggregate: tenants_aggregate;
+	tenants_aggregate: Tenants_Aggregate;
 	/** fetch data from the table: "tenants" using primary key columns */
-	tenants_by_pk?: Maybe<tenants>;
+	tenants_by_pk?: Maybe<Tenants>;
 	/** An array relationship */
-	transactions: Array<transactions>;
+	transactions: Array<Transactions>;
 	/** An aggregate relationship */
-	transactions_aggregate: transactions_aggregate;
+	transactions_aggregate: Transactions_Aggregate;
 	/** fetch data from the table: "transactions" using primary key columns */
-	transactions_by_pk?: Maybe<transactions>;
+	transactions_by_pk?: Maybe<Transactions>;
 	/** An array relationship */
-	units: Array<units>;
+	units: Array<Units>;
 	/** An aggregate relationship */
-	units_aggregate: units_aggregate;
+	units_aggregate: Units_Aggregate;
 	/** fetch data from the table: "units" using primary key columns */
-	units_by_pk?: Maybe<units>;
+	units_by_pk?: Maybe<Units>;
 	/** An array relationship */
-	users: Array<users>;
+	users: Array<Users>;
 	/** An aggregate relationship */
-	users_aggregate: users_aggregate;
+	users_aggregate: Users_Aggregate;
 	/** fetch data from the table: "users" using primary key columns */
-	users_by_pk?: Maybe<users>;
+	users_by_pk?: Maybe<Users>;
 };
 
-export type subscription_root_clientsArgs = {
-	distinct_on?: InputMaybe<Array<clients_select_column>>;
+export type Subscription_RootClientsArgs = {
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by>>;
-	where?: InputMaybe<clients_bool_exp>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
 };
 
-export type subscription_root_clients_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<clients_select_column>>;
+export type Subscription_RootClients_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by>>;
-	where?: InputMaybe<clients_bool_exp>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
 };
 
-export type subscription_root_clients_by_pkArgs = {
+export type Subscription_RootClients_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Subscription_RootExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
-export type subscription_root_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type Subscription_RootExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
-export type subscription_root_expenses_by_pkArgs = {
+export type Subscription_RootExpenses_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_expenses_typesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
+export type Subscription_RootExpenses_TypesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Types_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_types_order_by>>;
-	where?: InputMaybe<expenses_types_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Types_Order_By>>;
+	where?: InputMaybe<Expenses_Types_Bool_Exp>;
 };
 
-export type subscription_root_expenses_types_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
+export type Subscription_RootExpenses_Types_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Types_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_types_order_by>>;
-	where?: InputMaybe<expenses_types_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Types_Order_By>>;
+	where?: InputMaybe<Expenses_Types_Bool_Exp>;
 };
 
-export type subscription_root_expenses_types_by_pkArgs = {
+export type Subscription_RootExpenses_Types_By_PkArgs = {
 	value: Scalars['String'];
 };
 
-export type subscription_root_leasesArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type Subscription_RootLeasesArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
-export type subscription_root_leases_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type Subscription_RootLeases_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
-export type subscription_root_leases_by_pkArgs = {
+export type Subscription_RootLeases_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_listingsArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type Subscription_RootListingsArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
-export type subscription_root_listings_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type Subscription_RootListings_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
-export type subscription_root_listings_by_pkArgs = {
+export type Subscription_RootListings_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type Subscription_RootMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
-export type subscription_root_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type Subscription_RootMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
-export type subscription_root_maintenance_orders_by_pkArgs = {
+export type Subscription_RootMaintenance_Orders_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_propertiesArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type Subscription_RootPropertiesArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
-export type subscription_root_properties_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<properties_select_column>>;
+export type Subscription_RootProperties_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Properties_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by>>;
-	where?: InputMaybe<properties_bool_exp>;
+	order_by?: InputMaybe<Array<Properties_Order_By>>;
+	where?: InputMaybe<Properties_Bool_Exp>;
 };
 
-export type subscription_root_properties_by_pkArgs = {
+export type Subscription_RootProperties_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_tenantsArgs = {
-	distinct_on?: InputMaybe<Array<tenants_select_column>>;
+export type Subscription_RootTenantsArgs = {
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by>>;
-	where?: InputMaybe<tenants_bool_exp>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
-export type subscription_root_tenants_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<tenants_select_column>>;
+export type Subscription_RootTenants_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by>>;
-	where?: InputMaybe<tenants_bool_exp>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
-export type subscription_root_tenants_by_pkArgs = {
+export type Subscription_RootTenants_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_transactionsArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type Subscription_RootTransactionsArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
-export type subscription_root_transactions_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<transactions_select_column>>;
+export type Subscription_RootTransactions_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Transactions_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<transactions_order_by>>;
-	where?: InputMaybe<transactions_bool_exp>;
+	order_by?: InputMaybe<Array<Transactions_Order_By>>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
-export type subscription_root_transactions_by_pkArgs = {
+export type Subscription_RootTransactions_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_unitsArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type Subscription_RootUnitsArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
-export type subscription_root_units_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<units_select_column>>;
+export type Subscription_RootUnits_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Units_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by>>;
-	where?: InputMaybe<units_bool_exp>;
+	order_by?: InputMaybe<Array<Units_Order_By>>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
-export type subscription_root_units_by_pkArgs = {
+export type Subscription_RootUnits_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_root_usersArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type Subscription_RootUsersArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
-export type subscription_root_users_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<users_select_column>>;
+export type Subscription_RootUsers_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Users_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<users_order_by>>;
-	where?: InputMaybe<users_bool_exp>;
+	order_by?: InputMaybe<Array<Users_Order_By>>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
-export type subscription_root_users_by_pkArgs = {
+export type Subscription_RootUsers_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
 /** columns and relationships of "tenants" */
-export type tenants = {
+export type Tenants = {
 	__typename?: 'tenants';
 	civilid?: Maybe<Scalars['bigint']>;
 	dob?: Maybe<Scalars['date']>;
@@ -3907,140 +3909,140 @@ export type tenants = {
 	id: Scalars['Int'];
 	last_name?: Maybe<Scalars['String']>;
 	/** An array relationship */
-	leases: Array<leases>;
+	leases: Array<Leases>;
 	/** An aggregate relationship */
-	leases_aggregate: leases_aggregate;
+	leases_aggregate: Leases_Aggregate;
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	user?: Maybe<users>;
+	user?: Maybe<Users>;
 };
 
 /** columns and relationships of "tenants" */
-export type tenants_leasesArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type TenantsLeasesArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
 /** columns and relationships of "tenants" */
-export type tenants_leases_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type TenantsLeases_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
 /** columns and relationships of "tenants" */
-export type tenants_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type TenantsMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "tenants" */
-export type tenants_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type TenantsMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** aggregated selection of "tenants" */
-export type tenants_aggregate = {
+export type Tenants_Aggregate = {
 	__typename?: 'tenants_aggregate';
-	aggregate?: Maybe<tenants_aggregate_fields>;
-	nodes: Array<tenants>;
+	aggregate?: Maybe<Tenants_Aggregate_Fields>;
+	nodes: Array<Tenants>;
 };
 
 /** aggregate fields of "tenants" */
-export type tenants_aggregate_fields = {
+export type Tenants_Aggregate_Fields = {
 	__typename?: 'tenants_aggregate_fields';
-	avg?: Maybe<tenants_avg_fields>;
+	avg?: Maybe<Tenants_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<tenants_max_fields>;
-	min?: Maybe<tenants_min_fields>;
-	stddev?: Maybe<tenants_stddev_fields>;
-	stddev_pop?: Maybe<tenants_stddev_pop_fields>;
-	stddev_samp?: Maybe<tenants_stddev_samp_fields>;
-	sum?: Maybe<tenants_sum_fields>;
-	var_pop?: Maybe<tenants_var_pop_fields>;
-	var_samp?: Maybe<tenants_var_samp_fields>;
-	variance?: Maybe<tenants_variance_fields>;
+	max?: Maybe<Tenants_Max_Fields>;
+	min?: Maybe<Tenants_Min_Fields>;
+	stddev?: Maybe<Tenants_Stddev_Fields>;
+	stddev_pop?: Maybe<Tenants_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Tenants_Stddev_Samp_Fields>;
+	sum?: Maybe<Tenants_Sum_Fields>;
+	var_pop?: Maybe<Tenants_Var_Pop_Fields>;
+	var_samp?: Maybe<Tenants_Var_Samp_Fields>;
+	variance?: Maybe<Tenants_Variance_Fields>;
 };
 
 /** aggregate fields of "tenants" */
-export type tenants_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<tenants_select_column>>;
+export type Tenants_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Tenants_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type tenants_avg_fields = {
+export type Tenants_Avg_Fields = {
 	__typename?: 'tenants_avg_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "tenants". All fields are combined with a logical 'AND'. */
-export type tenants_bool_exp = {
-	_and?: InputMaybe<Array<tenants_bool_exp>>;
-	_not?: InputMaybe<tenants_bool_exp>;
-	_or?: InputMaybe<Array<tenants_bool_exp>>;
-	civilid?: InputMaybe<bigint_comparison_exp>;
-	dob?: InputMaybe<date_comparison_exp>;
-	email?: InputMaybe<String_comparison_exp>;
-	first_name?: InputMaybe<String_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	last_name?: InputMaybe<String_comparison_exp>;
-	leases?: InputMaybe<leases_bool_exp>;
-	maintenance_orders?: InputMaybe<maintenance_orders_bool_exp>;
-	phone?: InputMaybe<String_comparison_exp>;
-	second_name?: InputMaybe<String_comparison_exp>;
-	third_name?: InputMaybe<String_comparison_exp>;
-	user?: InputMaybe<users_bool_exp>;
+export type Tenants_Bool_Exp = {
+	_and?: InputMaybe<Array<Tenants_Bool_Exp>>;
+	_not?: InputMaybe<Tenants_Bool_Exp>;
+	_or?: InputMaybe<Array<Tenants_Bool_Exp>>;
+	civilid?: InputMaybe<Bigint_Comparison_Exp>;
+	dob?: InputMaybe<Date_Comparison_Exp>;
+	email?: InputMaybe<String_Comparison_Exp>;
+	first_name?: InputMaybe<String_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	last_name?: InputMaybe<String_Comparison_Exp>;
+	leases?: InputMaybe<Leases_Bool_Exp>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	phone?: InputMaybe<String_Comparison_Exp>;
+	second_name?: InputMaybe<String_Comparison_Exp>;
+	third_name?: InputMaybe<String_Comparison_Exp>;
+	user?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "tenants" */
-export type tenants_constraint =
+export type Tenants_Constraint =
 	/** unique or primary key constraint */
 	'tenants_pkey';
 
 /** input type for incrementing numeric columns in table "tenants" */
-export type tenants_inc_input = {
+export type Tenants_Inc_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "tenants" */
-export type tenants_insert_input = {
+export type Tenants_Insert_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
 	first_name?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	last_name?: InputMaybe<Scalars['String']>;
-	leases?: InputMaybe<leases_arr_rel_insert_input>;
-	maintenance_orders?: InputMaybe<maintenance_orders_arr_rel_insert_input>;
+	leases?: InputMaybe<Leases_Arr_Rel_Insert_Input>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Arr_Rel_Insert_Input>;
 	phone?: InputMaybe<Scalars['String']>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
-	user?: InputMaybe<users_obj_rel_insert_input>;
+	user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
-export type tenants_max_fields = {
+export type Tenants_Max_Fields = {
 	__typename?: 'tenants_max_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	dob?: Maybe<Scalars['date']>;
@@ -4054,7 +4056,7 @@ export type tenants_max_fields = {
 };
 
 /** aggregate min on columns */
-export type tenants_min_fields = {
+export type Tenants_Min_Fields = {
 	__typename?: 'tenants_min_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	dob?: Maybe<Scalars['date']>;
@@ -4068,51 +4070,51 @@ export type tenants_min_fields = {
 };
 
 /** response of any mutation on the table "tenants" */
-export type tenants_mutation_response = {
+export type Tenants_Mutation_Response = {
 	__typename?: 'tenants_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<tenants>;
+	returning: Array<Tenants>;
 };
 
 /** input type for inserting object relation for remote table "tenants" */
-export type tenants_obj_rel_insert_input = {
-	data: tenants_insert_input;
+export type Tenants_Obj_Rel_Insert_Input = {
+	data: Tenants_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<tenants_on_conflict>;
+	on_conflict?: InputMaybe<Tenants_On_Conflict>;
 };
 
 /** on conflict condition type for table "tenants" */
-export type tenants_on_conflict = {
-	constraint: tenants_constraint;
-	update_columns?: Array<tenants_update_column>;
-	where?: InputMaybe<tenants_bool_exp>;
+export type Tenants_On_Conflict = {
+	constraint: Tenants_Constraint;
+	update_columns?: Array<Tenants_Update_Column>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "tenants". */
-export type tenants_order_by = {
-	civilid?: InputMaybe<order_by>;
-	dob?: InputMaybe<order_by>;
-	email?: InputMaybe<order_by>;
-	first_name?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	last_name?: InputMaybe<order_by>;
-	leases_aggregate?: InputMaybe<leases_aggregate_order_by>;
-	maintenance_orders_aggregate?: InputMaybe<maintenance_orders_aggregate_order_by>;
-	phone?: InputMaybe<order_by>;
-	second_name?: InputMaybe<order_by>;
-	third_name?: InputMaybe<order_by>;
-	user?: InputMaybe<users_order_by>;
+export type Tenants_Order_By = {
+	civilid?: InputMaybe<Order_By>;
+	dob?: InputMaybe<Order_By>;
+	email?: InputMaybe<Order_By>;
+	first_name?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	last_name?: InputMaybe<Order_By>;
+	leases_aggregate?: InputMaybe<Leases_Aggregate_Order_By>;
+	maintenance_orders_aggregate?: InputMaybe<Maintenance_Orders_Aggregate_Order_By>;
+	phone?: InputMaybe<Order_By>;
+	second_name?: InputMaybe<Order_By>;
+	third_name?: InputMaybe<Order_By>;
+	user?: InputMaybe<Users_Order_By>;
 };
 
 /** primary key columns input for table: tenants */
-export type tenants_pk_columns_input = {
+export type Tenants_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "tenants" */
-export type tenants_select_column =
+export type Tenants_Select_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
@@ -4133,7 +4135,7 @@ export type tenants_select_column =
 	| 'third_name';
 
 /** input type for updating data in table "tenants" */
-export type tenants_set_input = {
+export type Tenants_Set_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
@@ -4146,35 +4148,35 @@ export type tenants_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type tenants_stddev_fields = {
+export type Tenants_Stddev_Fields = {
 	__typename?: 'tenants_stddev_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type tenants_stddev_pop_fields = {
+export type Tenants_Stddev_Pop_Fields = {
 	__typename?: 'tenants_stddev_pop_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type tenants_stddev_samp_fields = {
+export type Tenants_Stddev_Samp_Fields = {
 	__typename?: 'tenants_stddev_samp_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type tenants_sum_fields = {
+export type Tenants_Sum_Fields = {
 	__typename?: 'tenants_sum_fields';
 	civilid?: Maybe<Scalars['bigint']>;
 	id?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "tenants" */
-export type tenants_update_column =
+export type Tenants_Update_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
@@ -4195,28 +4197,28 @@ export type tenants_update_column =
 	| 'third_name';
 
 /** aggregate var_pop on columns */
-export type tenants_var_pop_fields = {
+export type Tenants_Var_Pop_Fields = {
 	__typename?: 'tenants_var_pop_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type tenants_var_samp_fields = {
+export type Tenants_Var_Samp_Fields = {
 	__typename?: 'tenants_var_samp_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type tenants_variance_fields = {
+export type Tenants_Variance_Fields = {
 	__typename?: 'tenants_variance_fields';
 	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
-export type timestamptz_comparison_exp = {
+export type Timestamptz_Comparison_Exp = {
 	_eq?: InputMaybe<Scalars['timestamptz']>;
 	_gt?: InputMaybe<Scalars['timestamptz']>;
 	_gte?: InputMaybe<Scalars['timestamptz']>;
@@ -4229,7 +4231,7 @@ export type timestamptz_comparison_exp = {
 };
 
 /** columns and relationships of "transactions" */
-export type transactions = {
+export type Transactions = {
 	__typename?: 'transactions';
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
@@ -4237,65 +4239,65 @@ export type transactions = {
 	id: Scalars['Int'];
 	is_paid?: Maybe<Scalars['Boolean']>;
 	/** An object relationship */
-	lease?: Maybe<leases>;
+	lease?: Maybe<Leases>;
 	lease_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
 };
 
 /** aggregated selection of "transactions" */
-export type transactions_aggregate = {
+export type Transactions_Aggregate = {
 	__typename?: 'transactions_aggregate';
-	aggregate?: Maybe<transactions_aggregate_fields>;
-	nodes: Array<transactions>;
+	aggregate?: Maybe<Transactions_Aggregate_Fields>;
+	nodes: Array<Transactions>;
 };
 
 /** aggregate fields of "transactions" */
-export type transactions_aggregate_fields = {
+export type Transactions_Aggregate_Fields = {
 	__typename?: 'transactions_aggregate_fields';
-	avg?: Maybe<transactions_avg_fields>;
+	avg?: Maybe<Transactions_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<transactions_max_fields>;
-	min?: Maybe<transactions_min_fields>;
-	stddev?: Maybe<transactions_stddev_fields>;
-	stddev_pop?: Maybe<transactions_stddev_pop_fields>;
-	stddev_samp?: Maybe<transactions_stddev_samp_fields>;
-	sum?: Maybe<transactions_sum_fields>;
-	var_pop?: Maybe<transactions_var_pop_fields>;
-	var_samp?: Maybe<transactions_var_samp_fields>;
-	variance?: Maybe<transactions_variance_fields>;
+	max?: Maybe<Transactions_Max_Fields>;
+	min?: Maybe<Transactions_Min_Fields>;
+	stddev?: Maybe<Transactions_Stddev_Fields>;
+	stddev_pop?: Maybe<Transactions_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Transactions_Stddev_Samp_Fields>;
+	sum?: Maybe<Transactions_Sum_Fields>;
+	var_pop?: Maybe<Transactions_Var_Pop_Fields>;
+	var_samp?: Maybe<Transactions_Var_Samp_Fields>;
+	variance?: Maybe<Transactions_Variance_Fields>;
 };
 
 /** aggregate fields of "transactions" */
-export type transactions_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<transactions_select_column>>;
+export type Transactions_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Transactions_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "transactions" */
-export type transactions_aggregate_order_by = {
-	avg?: InputMaybe<transactions_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<transactions_max_order_by>;
-	min?: InputMaybe<transactions_min_order_by>;
-	stddev?: InputMaybe<transactions_stddev_order_by>;
-	stddev_pop?: InputMaybe<transactions_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<transactions_stddev_samp_order_by>;
-	sum?: InputMaybe<transactions_sum_order_by>;
-	var_pop?: InputMaybe<transactions_var_pop_order_by>;
-	var_samp?: InputMaybe<transactions_var_samp_order_by>;
-	variance?: InputMaybe<transactions_variance_order_by>;
+export type Transactions_Aggregate_Order_By = {
+	avg?: InputMaybe<Transactions_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Transactions_Max_Order_By>;
+	min?: InputMaybe<Transactions_Min_Order_By>;
+	stddev?: InputMaybe<Transactions_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Transactions_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Transactions_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Transactions_Sum_Order_By>;
+	var_pop?: InputMaybe<Transactions_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Transactions_Var_Samp_Order_By>;
+	variance?: InputMaybe<Transactions_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "transactions" */
-export type transactions_arr_rel_insert_input = {
-	data: Array<transactions_insert_input>;
+export type Transactions_Arr_Rel_Insert_Input = {
+	data: Array<Transactions_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<transactions_on_conflict>;
+	on_conflict?: InputMaybe<Transactions_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type transactions_avg_fields = {
+export type Transactions_Avg_Fields = {
 	__typename?: 'transactions_avg_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4303,55 +4305,55 @@ export type transactions_avg_fields = {
 };
 
 /** order by avg() on columns of table "transactions" */
-export type transactions_avg_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Avg_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "transactions". All fields are combined with a logical 'AND'. */
-export type transactions_bool_exp = {
-	_and?: InputMaybe<Array<transactions_bool_exp>>;
-	_not?: InputMaybe<transactions_bool_exp>;
-	_or?: InputMaybe<Array<transactions_bool_exp>>;
-	amount?: InputMaybe<Int_comparison_exp>;
-	created_at?: InputMaybe<timestamptz_comparison_exp>;
-	due_date?: InputMaybe<date_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	is_paid?: InputMaybe<Boolean_comparison_exp>;
-	lease?: InputMaybe<leases_bool_exp>;
-	lease_id?: InputMaybe<Int_comparison_exp>;
-	memo?: InputMaybe<String_comparison_exp>;
-	receipt_url?: InputMaybe<String_comparison_exp>;
+export type Transactions_Bool_Exp = {
+	_and?: InputMaybe<Array<Transactions_Bool_Exp>>;
+	_not?: InputMaybe<Transactions_Bool_Exp>;
+	_or?: InputMaybe<Array<Transactions_Bool_Exp>>;
+	amount?: InputMaybe<Int_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	due_date?: InputMaybe<Date_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	is_paid?: InputMaybe<Boolean_Comparison_Exp>;
+	lease?: InputMaybe<Leases_Bool_Exp>;
+	lease_id?: InputMaybe<Int_Comparison_Exp>;
+	memo?: InputMaybe<String_Comparison_Exp>;
+	receipt_url?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "transactions" */
-export type transactions_constraint =
+export type Transactions_Constraint =
 	/** unique or primary key constraint */
 	'transactions_pkey';
 
 /** input type for incrementing numeric columns in table "transactions" */
-export type transactions_inc_input = {
+export type Transactions_Inc_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
 	lease_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "transactions" */
-export type transactions_insert_input = {
+export type Transactions_Insert_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	due_date?: InputMaybe<Scalars['date']>;
 	id?: InputMaybe<Scalars['Int']>;
 	is_paid?: InputMaybe<Scalars['Boolean']>;
-	lease?: InputMaybe<leases_obj_rel_insert_input>;
+	lease?: InputMaybe<Leases_Obj_Rel_Insert_Input>;
 	lease_id?: InputMaybe<Scalars['Int']>;
 	memo?: InputMaybe<Scalars['String']>;
 	receipt_url?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type transactions_max_fields = {
+export type Transactions_Max_Fields = {
 	__typename?: 'transactions_max_fields';
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
@@ -4363,18 +4365,18 @@ export type transactions_max_fields = {
 };
 
 /** order by max() on columns of table "transactions" */
-export type transactions_max_order_by = {
-	amount?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	due_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	receipt_url?: InputMaybe<order_by>;
+export type Transactions_Max_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	due_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	receipt_url?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type transactions_min_fields = {
+export type Transactions_Min_Fields = {
 	__typename?: 'transactions_min_fields';
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
@@ -4386,52 +4388,52 @@ export type transactions_min_fields = {
 };
 
 /** order by min() on columns of table "transactions" */
-export type transactions_min_order_by = {
-	amount?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	due_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	receipt_url?: InputMaybe<order_by>;
+export type Transactions_Min_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	due_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	receipt_url?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "transactions" */
-export type transactions_mutation_response = {
+export type Transactions_Mutation_Response = {
 	__typename?: 'transactions_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<transactions>;
+	returning: Array<Transactions>;
 };
 
 /** on conflict condition type for table "transactions" */
-export type transactions_on_conflict = {
-	constraint: transactions_constraint;
-	update_columns?: Array<transactions_update_column>;
-	where?: InputMaybe<transactions_bool_exp>;
+export type Transactions_On_Conflict = {
+	constraint: Transactions_Constraint;
+	update_columns?: Array<Transactions_Update_Column>;
+	where?: InputMaybe<Transactions_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "transactions". */
-export type transactions_order_by = {
-	amount?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	due_date?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	is_paid?: InputMaybe<order_by>;
-	lease?: InputMaybe<leases_order_by>;
-	lease_id?: InputMaybe<order_by>;
-	memo?: InputMaybe<order_by>;
-	receipt_url?: InputMaybe<order_by>;
+export type Transactions_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	due_date?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	is_paid?: InputMaybe<Order_By>;
+	lease?: InputMaybe<Leases_Order_By>;
+	lease_id?: InputMaybe<Order_By>;
+	memo?: InputMaybe<Order_By>;
+	receipt_url?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: transactions */
-export type transactions_pk_columns_input = {
+export type Transactions_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "transactions" */
-export type transactions_select_column =
+export type Transactions_Select_Column =
 	/** column name */
 	| 'amount'
 	/** column name */
@@ -4450,7 +4452,7 @@ export type transactions_select_column =
 	| 'receipt_url';
 
 /** input type for updating data in table "transactions" */
-export type transactions_set_input = {
+export type Transactions_Set_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	due_date?: InputMaybe<Scalars['date']>;
@@ -4462,7 +4464,7 @@ export type transactions_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type transactions_stddev_fields = {
+export type Transactions_Stddev_Fields = {
 	__typename?: 'transactions_stddev_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4470,14 +4472,14 @@ export type transactions_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "transactions" */
-export type transactions_stddev_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Stddev_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type transactions_stddev_pop_fields = {
+export type Transactions_Stddev_Pop_Fields = {
 	__typename?: 'transactions_stddev_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4485,14 +4487,14 @@ export type transactions_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "transactions" */
-export type transactions_stddev_pop_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Stddev_Pop_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type transactions_stddev_samp_fields = {
+export type Transactions_Stddev_Samp_Fields = {
 	__typename?: 'transactions_stddev_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4500,14 +4502,14 @@ export type transactions_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "transactions" */
-export type transactions_stddev_samp_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Stddev_Samp_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type transactions_sum_fields = {
+export type Transactions_Sum_Fields = {
 	__typename?: 'transactions_sum_fields';
 	amount?: Maybe<Scalars['Int']>;
 	id?: Maybe<Scalars['Int']>;
@@ -4515,14 +4517,14 @@ export type transactions_sum_fields = {
 };
 
 /** order by sum() on columns of table "transactions" */
-export type transactions_sum_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Sum_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "transactions" */
-export type transactions_update_column =
+export type Transactions_Update_Column =
 	/** column name */
 	| 'amount'
 	/** column name */
@@ -4541,7 +4543,7 @@ export type transactions_update_column =
 	| 'receipt_url';
 
 /** aggregate var_pop on columns */
-export type transactions_var_pop_fields = {
+export type Transactions_Var_Pop_Fields = {
 	__typename?: 'transactions_var_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4549,14 +4551,14 @@ export type transactions_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "transactions" */
-export type transactions_var_pop_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Var_Pop_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type transactions_var_samp_fields = {
+export type Transactions_Var_Samp_Fields = {
 	__typename?: 'transactions_var_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4564,14 +4566,14 @@ export type transactions_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "transactions" */
-export type transactions_var_samp_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Var_Samp_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type transactions_variance_fields = {
+export type Transactions_Variance_Fields = {
 	__typename?: 'transactions_variance_fields';
 	amount?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -4579,39 +4581,39 @@ export type transactions_variance_fields = {
 };
 
 /** order by variance() on columns of table "transactions" */
-export type transactions_variance_order_by = {
-	amount?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	lease_id?: InputMaybe<order_by>;
+export type Transactions_Variance_Order_By = {
+	amount?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	lease_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "units" */
-export type units = {
+export type Units = {
 	__typename?: 'units';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
 	/** fetch data from the table: "expenses" */
-	expenses: Array<expenses>;
+	expenses: Array<Expenses>;
 	/** An aggregate relationship */
-	expenses_aggregate: expenses_aggregate;
+	expenses_aggregate: Expenses_Aggregate;
 	floor?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	/** A computed field, executes function "is_vacant" */
 	is_vacant?: Maybe<Scalars['Boolean']>;
 	/** An array relationship */
-	leases: Array<leases>;
+	leases: Array<Leases>;
 	/** An aggregate relationship */
-	leases_aggregate: leases_aggregate;
+	leases_aggregate: Leases_Aggregate;
 	/** An array relationship */
-	listings: Array<listings>;
+	listings: Array<Listings>;
 	/** An aggregate relationship */
-	listings_aggregate: listings_aggregate;
+	listings_aggregate: Listings_Aggregate;
 	/** An array relationship */
-	maintenance_orders: Array<maintenance_orders>;
+	maintenance_orders: Array<Maintenance_Orders>;
 	/** An aggregate relationship */
-	maintenance_orders_aggregate: maintenance_orders_aggregate;
+	maintenance_orders_aggregate: Maintenance_Orders_Aggregate;
 	/** An object relationship */
-	property?: Maybe<properties>;
+	property?: Maybe<Properties>;
 	property_id?: Maybe<Scalars['Int']>;
 	rent_market?: Maybe<Scalars['Int']>;
 	size?: Maybe<Scalars['Int']>;
@@ -4621,130 +4623,130 @@ export type units = {
 };
 
 /** columns and relationships of "units" */
-export type units_expensesArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type UnitsExpensesArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_expenses_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<expenses_select_column>>;
+export type UnitsExpenses_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Expenses_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<expenses_order_by>>;
-	where?: InputMaybe<expenses_bool_exp>;
+	order_by?: InputMaybe<Array<Expenses_Order_By>>;
+	where?: InputMaybe<Expenses_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_leasesArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type UnitsLeasesArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_leases_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<leases_select_column>>;
+export type UnitsLeases_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Leases_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by>>;
-	where?: InputMaybe<leases_bool_exp>;
+	order_by?: InputMaybe<Array<Leases_Order_By>>;
+	where?: InputMaybe<Leases_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_listingsArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type UnitsListingsArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_listings_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<listings_select_column>>;
+export type UnitsListings_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Listings_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<listings_order_by>>;
-	where?: InputMaybe<listings_bool_exp>;
+	order_by?: InputMaybe<Array<Listings_Order_By>>;
+	where?: InputMaybe<Listings_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_maintenance_ordersArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type UnitsMaintenance_OrdersArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "units" */
-export type units_maintenance_orders_aggregateArgs = {
-	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
+export type UnitsMaintenance_Orders_AggregateArgs = {
+	distinct_on?: InputMaybe<Array<Maintenance_Orders_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<maintenance_orders_order_by>>;
-	where?: InputMaybe<maintenance_orders_bool_exp>;
+	order_by?: InputMaybe<Array<Maintenance_Orders_Order_By>>;
+	where?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 };
 
 /** aggregated selection of "units" */
-export type units_aggregate = {
+export type Units_Aggregate = {
 	__typename?: 'units_aggregate';
-	aggregate?: Maybe<units_aggregate_fields>;
-	nodes: Array<units>;
+	aggregate?: Maybe<Units_Aggregate_Fields>;
+	nodes: Array<Units>;
 };
 
 /** aggregate fields of "units" */
-export type units_aggregate_fields = {
+export type Units_Aggregate_Fields = {
 	__typename?: 'units_aggregate_fields';
-	avg?: Maybe<units_avg_fields>;
+	avg?: Maybe<Units_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<units_max_fields>;
-	min?: Maybe<units_min_fields>;
-	stddev?: Maybe<units_stddev_fields>;
-	stddev_pop?: Maybe<units_stddev_pop_fields>;
-	stddev_samp?: Maybe<units_stddev_samp_fields>;
-	sum?: Maybe<units_sum_fields>;
-	var_pop?: Maybe<units_var_pop_fields>;
-	var_samp?: Maybe<units_var_samp_fields>;
-	variance?: Maybe<units_variance_fields>;
+	max?: Maybe<Units_Max_Fields>;
+	min?: Maybe<Units_Min_Fields>;
+	stddev?: Maybe<Units_Stddev_Fields>;
+	stddev_pop?: Maybe<Units_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Units_Stddev_Samp_Fields>;
+	sum?: Maybe<Units_Sum_Fields>;
+	var_pop?: Maybe<Units_Var_Pop_Fields>;
+	var_samp?: Maybe<Units_Var_Samp_Fields>;
+	variance?: Maybe<Units_Variance_Fields>;
 };
 
 /** aggregate fields of "units" */
-export type units_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<units_select_column>>;
+export type Units_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Units_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "units" */
-export type units_aggregate_order_by = {
-	avg?: InputMaybe<units_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<units_max_order_by>;
-	min?: InputMaybe<units_min_order_by>;
-	stddev?: InputMaybe<units_stddev_order_by>;
-	stddev_pop?: InputMaybe<units_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<units_stddev_samp_order_by>;
-	sum?: InputMaybe<units_sum_order_by>;
-	var_pop?: InputMaybe<units_var_pop_order_by>;
-	var_samp?: InputMaybe<units_var_samp_order_by>;
-	variance?: InputMaybe<units_variance_order_by>;
+export type Units_Aggregate_Order_By = {
+	avg?: InputMaybe<Units_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Units_Max_Order_By>;
+	min?: InputMaybe<Units_Min_Order_By>;
+	stddev?: InputMaybe<Units_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Units_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Units_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Units_Sum_Order_By>;
+	var_pop?: InputMaybe<Units_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Units_Var_Samp_Order_By>;
+	variance?: InputMaybe<Units_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "units" */
-export type units_arr_rel_insert_input = {
-	data: Array<units_insert_input>;
+export type Units_Arr_Rel_Insert_Input = {
+	data: Array<Units_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<units_on_conflict>;
+	on_conflict?: InputMaybe<Units_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type units_avg_fields = {
+export type Units_Avg_Fields = {
 	__typename?: 'units_avg_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -4755,45 +4757,45 @@ export type units_avg_fields = {
 };
 
 /** order by avg() on columns of table "units" */
-export type units_avg_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Avg_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "units". All fields are combined with a logical 'AND'. */
-export type units_bool_exp = {
-	_and?: InputMaybe<Array<units_bool_exp>>;
-	_not?: InputMaybe<units_bool_exp>;
-	_or?: InputMaybe<Array<units_bool_exp>>;
-	bath?: InputMaybe<numeric_comparison_exp>;
-	bed?: InputMaybe<numeric_comparison_exp>;
-	expenses?: InputMaybe<expenses_bool_exp>;
-	floor?: InputMaybe<String_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	is_vacant?: InputMaybe<Boolean_comparison_exp>;
-	leases?: InputMaybe<leases_bool_exp>;
-	listings?: InputMaybe<listings_bool_exp>;
-	maintenance_orders?: InputMaybe<maintenance_orders_bool_exp>;
-	property?: InputMaybe<properties_bool_exp>;
-	property_id?: InputMaybe<Int_comparison_exp>;
-	rent_market?: InputMaybe<Int_comparison_exp>;
-	size?: InputMaybe<Int_comparison_exp>;
-	type?: InputMaybe<String_comparison_exp>;
-	unit_number?: InputMaybe<String_comparison_exp>;
-	usage?: InputMaybe<String_comparison_exp>;
+export type Units_Bool_Exp = {
+	_and?: InputMaybe<Array<Units_Bool_Exp>>;
+	_not?: InputMaybe<Units_Bool_Exp>;
+	_or?: InputMaybe<Array<Units_Bool_Exp>>;
+	bath?: InputMaybe<Numeric_Comparison_Exp>;
+	bed?: InputMaybe<Numeric_Comparison_Exp>;
+	expenses?: InputMaybe<Expenses_Bool_Exp>;
+	floor?: InputMaybe<String_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	is_vacant?: InputMaybe<Boolean_Comparison_Exp>;
+	leases?: InputMaybe<Leases_Bool_Exp>;
+	listings?: InputMaybe<Listings_Bool_Exp>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Bool_Exp>;
+	property?: InputMaybe<Properties_Bool_Exp>;
+	property_id?: InputMaybe<Int_Comparison_Exp>;
+	rent_market?: InputMaybe<Int_Comparison_Exp>;
+	size?: InputMaybe<Int_Comparison_Exp>;
+	type?: InputMaybe<String_Comparison_Exp>;
+	unit_number?: InputMaybe<String_Comparison_Exp>;
+	usage?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "units" */
-export type units_constraint =
+export type Units_Constraint =
 	/** unique or primary key constraint */
 	'units_pkey';
 
 /** input type for incrementing numeric columns in table "units" */
-export type units_inc_input = {
+export type Units_Inc_Input = {
 	bath?: InputMaybe<Scalars['numeric']>;
 	bed?: InputMaybe<Scalars['numeric']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -4803,16 +4805,16 @@ export type units_inc_input = {
 };
 
 /** input type for inserting data into table "units" */
-export type units_insert_input = {
+export type Units_Insert_Input = {
 	bath?: InputMaybe<Scalars['numeric']>;
 	bed?: InputMaybe<Scalars['numeric']>;
-	expenses?: InputMaybe<expenses_arr_rel_insert_input>;
+	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	floor?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
-	leases?: InputMaybe<leases_arr_rel_insert_input>;
-	listings?: InputMaybe<listings_arr_rel_insert_input>;
-	maintenance_orders?: InputMaybe<maintenance_orders_arr_rel_insert_input>;
-	property?: InputMaybe<properties_obj_rel_insert_input>;
+	leases?: InputMaybe<Leases_Arr_Rel_Insert_Input>;
+	listings?: InputMaybe<Listings_Arr_Rel_Insert_Input>;
+	maintenance_orders?: InputMaybe<Maintenance_Orders_Arr_Rel_Insert_Input>;
+	property?: InputMaybe<Properties_Obj_Rel_Insert_Input>;
 	property_id?: InputMaybe<Scalars['Int']>;
 	rent_market?: InputMaybe<Scalars['Int']>;
 	size?: InputMaybe<Scalars['Int']>;
@@ -4822,7 +4824,7 @@ export type units_insert_input = {
 };
 
 /** aggregate max on columns */
-export type units_max_fields = {
+export type Units_Max_Fields = {
 	__typename?: 'units_max_fields';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
@@ -4837,21 +4839,21 @@ export type units_max_fields = {
 };
 
 /** order by max() on columns of table "units" */
-export type units_max_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	floor?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
-	type?: InputMaybe<order_by>;
-	unit_number?: InputMaybe<order_by>;
-	usage?: InputMaybe<order_by>;
+export type Units_Max_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	floor?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
+	type?: InputMaybe<Order_By>;
+	unit_number?: InputMaybe<Order_By>;
+	usage?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type units_min_fields = {
+export type Units_Min_Fields = {
 	__typename?: 'units_min_fields';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
@@ -4866,69 +4868,69 @@ export type units_min_fields = {
 };
 
 /** order by min() on columns of table "units" */
-export type units_min_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	floor?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
-	type?: InputMaybe<order_by>;
-	unit_number?: InputMaybe<order_by>;
-	usage?: InputMaybe<order_by>;
+export type Units_Min_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	floor?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
+	type?: InputMaybe<Order_By>;
+	unit_number?: InputMaybe<Order_By>;
+	usage?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "units" */
-export type units_mutation_response = {
+export type Units_Mutation_Response = {
 	__typename?: 'units_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<units>;
+	returning: Array<Units>;
 };
 
 /** input type for inserting object relation for remote table "units" */
-export type units_obj_rel_insert_input = {
-	data: units_insert_input;
+export type Units_Obj_Rel_Insert_Input = {
+	data: Units_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<units_on_conflict>;
+	on_conflict?: InputMaybe<Units_On_Conflict>;
 };
 
 /** on conflict condition type for table "units" */
-export type units_on_conflict = {
-	constraint: units_constraint;
-	update_columns?: Array<units_update_column>;
-	where?: InputMaybe<units_bool_exp>;
+export type Units_On_Conflict = {
+	constraint: Units_Constraint;
+	update_columns?: Array<Units_Update_Column>;
+	where?: InputMaybe<Units_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "units". */
-export type units_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	expenses_aggregate?: InputMaybe<expenses_aggregate_order_by>;
-	floor?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	is_vacant?: InputMaybe<order_by>;
-	leases_aggregate?: InputMaybe<leases_aggregate_order_by>;
-	listings_aggregate?: InputMaybe<listings_aggregate_order_by>;
-	maintenance_orders_aggregate?: InputMaybe<maintenance_orders_aggregate_order_by>;
-	property?: InputMaybe<properties_order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
-	type?: InputMaybe<order_by>;
-	unit_number?: InputMaybe<order_by>;
-	usage?: InputMaybe<order_by>;
+export type Units_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
+	floor?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	is_vacant?: InputMaybe<Order_By>;
+	leases_aggregate?: InputMaybe<Leases_Aggregate_Order_By>;
+	listings_aggregate?: InputMaybe<Listings_Aggregate_Order_By>;
+	maintenance_orders_aggregate?: InputMaybe<Maintenance_Orders_Aggregate_Order_By>;
+	property?: InputMaybe<Properties_Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
+	type?: InputMaybe<Order_By>;
+	unit_number?: InputMaybe<Order_By>;
+	usage?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: units */
-export type units_pk_columns_input = {
+export type Units_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "units" */
-export type units_select_column =
+export type Units_Select_Column =
 	/** column name */
 	| 'bath'
 	/** column name */
@@ -4951,7 +4953,7 @@ export type units_select_column =
 	| 'usage';
 
 /** input type for updating data in table "units" */
-export type units_set_input = {
+export type Units_Set_Input = {
 	bath?: InputMaybe<Scalars['numeric']>;
 	bed?: InputMaybe<Scalars['numeric']>;
 	floor?: InputMaybe<Scalars['String']>;
@@ -4965,7 +4967,7 @@ export type units_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type units_stddev_fields = {
+export type Units_Stddev_Fields = {
 	__typename?: 'units_stddev_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -4976,17 +4978,17 @@ export type units_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "units" */
-export type units_stddev_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Stddev_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type units_stddev_pop_fields = {
+export type Units_Stddev_Pop_Fields = {
 	__typename?: 'units_stddev_pop_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -4997,17 +4999,17 @@ export type units_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "units" */
-export type units_stddev_pop_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Stddev_Pop_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type units_stddev_samp_fields = {
+export type Units_Stddev_Samp_Fields = {
 	__typename?: 'units_stddev_samp_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -5018,17 +5020,17 @@ export type units_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "units" */
-export type units_stddev_samp_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Stddev_Samp_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type units_sum_fields = {
+export type Units_Sum_Fields = {
 	__typename?: 'units_sum_fields';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
@@ -5039,17 +5041,17 @@ export type units_sum_fields = {
 };
 
 /** order by sum() on columns of table "units" */
-export type units_sum_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Sum_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "units" */
-export type units_update_column =
+export type Units_Update_Column =
 	/** column name */
 	| 'bath'
 	/** column name */
@@ -5072,7 +5074,7 @@ export type units_update_column =
 	| 'usage';
 
 /** aggregate var_pop on columns */
-export type units_var_pop_fields = {
+export type Units_Var_Pop_Fields = {
 	__typename?: 'units_var_pop_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -5083,17 +5085,17 @@ export type units_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "units" */
-export type units_var_pop_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Var_Pop_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type units_var_samp_fields = {
+export type Units_Var_Samp_Fields = {
 	__typename?: 'units_var_samp_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -5104,17 +5106,17 @@ export type units_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "units" */
-export type units_var_samp_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Var_Samp_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type units_variance_fields = {
+export type Units_Variance_Fields = {
 	__typename?: 'units_variance_fields';
 	bath?: Maybe<Scalars['Float']>;
 	bed?: Maybe<Scalars['Float']>;
@@ -5125,20 +5127,20 @@ export type units_variance_fields = {
 };
 
 /** order by variance() on columns of table "units" */
-export type units_variance_order_by = {
-	bath?: InputMaybe<order_by>;
-	bed?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	property_id?: InputMaybe<order_by>;
-	rent_market?: InputMaybe<order_by>;
-	size?: InputMaybe<order_by>;
+export type Units_Variance_Order_By = {
+	bath?: InputMaybe<Order_By>;
+	bed?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	property_id?: InputMaybe<Order_By>;
+	rent_market?: InputMaybe<Order_By>;
+	size?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "users" */
-export type users = {
+export type Users = {
 	__typename?: 'users';
 	/** An object relationship */
-	client?: Maybe<clients>;
+	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
@@ -5146,63 +5148,63 @@ export type users = {
 	last_seen?: Maybe<Scalars['timestamptz']>;
 	phone?: Maybe<Scalars['String']>;
 	/** An object relationship */
-	tenant?: Maybe<tenants>;
+	tenant?: Maybe<Tenants>;
 	tenant_id?: Maybe<Scalars['Int']>;
 };
 
 /** aggregated selection of "users" */
-export type users_aggregate = {
+export type Users_Aggregate = {
 	__typename?: 'users_aggregate';
-	aggregate?: Maybe<users_aggregate_fields>;
-	nodes: Array<users>;
+	aggregate?: Maybe<Users_Aggregate_Fields>;
+	nodes: Array<Users>;
 };
 
 /** aggregate fields of "users" */
-export type users_aggregate_fields = {
+export type Users_Aggregate_Fields = {
 	__typename?: 'users_aggregate_fields';
-	avg?: Maybe<users_avg_fields>;
+	avg?: Maybe<Users_Avg_Fields>;
 	count: Scalars['Int'];
-	max?: Maybe<users_max_fields>;
-	min?: Maybe<users_min_fields>;
-	stddev?: Maybe<users_stddev_fields>;
-	stddev_pop?: Maybe<users_stddev_pop_fields>;
-	stddev_samp?: Maybe<users_stddev_samp_fields>;
-	sum?: Maybe<users_sum_fields>;
-	var_pop?: Maybe<users_var_pop_fields>;
-	var_samp?: Maybe<users_var_samp_fields>;
-	variance?: Maybe<users_variance_fields>;
+	max?: Maybe<Users_Max_Fields>;
+	min?: Maybe<Users_Min_Fields>;
+	stddev?: Maybe<Users_Stddev_Fields>;
+	stddev_pop?: Maybe<Users_Stddev_Pop_Fields>;
+	stddev_samp?: Maybe<Users_Stddev_Samp_Fields>;
+	sum?: Maybe<Users_Sum_Fields>;
+	var_pop?: Maybe<Users_Var_Pop_Fields>;
+	var_samp?: Maybe<Users_Var_Samp_Fields>;
+	variance?: Maybe<Users_Variance_Fields>;
 };
 
 /** aggregate fields of "users" */
-export type users_aggregate_fields_countArgs = {
-	columns?: InputMaybe<Array<users_select_column>>;
+export type Users_Aggregate_FieldsCountArgs = {
+	columns?: InputMaybe<Array<Users_Select_Column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "users" */
-export type users_aggregate_order_by = {
-	avg?: InputMaybe<users_avg_order_by>;
-	count?: InputMaybe<order_by>;
-	max?: InputMaybe<users_max_order_by>;
-	min?: InputMaybe<users_min_order_by>;
-	stddev?: InputMaybe<users_stddev_order_by>;
-	stddev_pop?: InputMaybe<users_stddev_pop_order_by>;
-	stddev_samp?: InputMaybe<users_stddev_samp_order_by>;
-	sum?: InputMaybe<users_sum_order_by>;
-	var_pop?: InputMaybe<users_var_pop_order_by>;
-	var_samp?: InputMaybe<users_var_samp_order_by>;
-	variance?: InputMaybe<users_variance_order_by>;
+export type Users_Aggregate_Order_By = {
+	avg?: InputMaybe<Users_Avg_Order_By>;
+	count?: InputMaybe<Order_By>;
+	max?: InputMaybe<Users_Max_Order_By>;
+	min?: InputMaybe<Users_Min_Order_By>;
+	stddev?: InputMaybe<Users_Stddev_Order_By>;
+	stddev_pop?: InputMaybe<Users_Stddev_Pop_Order_By>;
+	stddev_samp?: InputMaybe<Users_Stddev_Samp_Order_By>;
+	sum?: InputMaybe<Users_Sum_Order_By>;
+	var_pop?: InputMaybe<Users_Var_Pop_Order_By>;
+	var_samp?: InputMaybe<Users_Var_Samp_Order_By>;
+	variance?: InputMaybe<Users_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "users" */
-export type users_arr_rel_insert_input = {
-	data: Array<users_insert_input>;
+export type Users_Arr_Rel_Insert_Input = {
+	data: Array<Users_Insert_Input>;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<users_on_conflict>;
+	on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type users_avg_fields = {
+export type Users_Avg_Fields = {
 	__typename?: 'users_avg_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5210,57 +5212,57 @@ export type users_avg_fields = {
 };
 
 /** order by avg() on columns of table "users" */
-export type users_avg_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Avg_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
-export type users_bool_exp = {
-	_and?: InputMaybe<Array<users_bool_exp>>;
-	_not?: InputMaybe<users_bool_exp>;
-	_or?: InputMaybe<Array<users_bool_exp>>;
-	client?: InputMaybe<clients_bool_exp>;
-	client_id?: InputMaybe<Int_comparison_exp>;
-	created_at?: InputMaybe<date_comparison_exp>;
-	email?: InputMaybe<String_comparison_exp>;
-	id?: InputMaybe<Int_comparison_exp>;
-	last_seen?: InputMaybe<timestamptz_comparison_exp>;
-	phone?: InputMaybe<String_comparison_exp>;
-	tenant?: InputMaybe<tenants_bool_exp>;
-	tenant_id?: InputMaybe<Int_comparison_exp>;
+export type Users_Bool_Exp = {
+	_and?: InputMaybe<Array<Users_Bool_Exp>>;
+	_not?: InputMaybe<Users_Bool_Exp>;
+	_or?: InputMaybe<Array<Users_Bool_Exp>>;
+	client?: InputMaybe<Clients_Bool_Exp>;
+	client_id?: InputMaybe<Int_Comparison_Exp>;
+	created_at?: InputMaybe<Date_Comparison_Exp>;
+	email?: InputMaybe<String_Comparison_Exp>;
+	id?: InputMaybe<Int_Comparison_Exp>;
+	last_seen?: InputMaybe<Timestamptz_Comparison_Exp>;
+	phone?: InputMaybe<String_Comparison_Exp>;
+	tenant?: InputMaybe<Tenants_Bool_Exp>;
+	tenant_id?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
-export type users_constraint =
+export type Users_Constraint =
 	/** unique or primary key constraint */
 	| 'users_pkey'
 	/** unique or primary key constraint */
 	| 'users_tenant_id_key';
 
 /** input type for incrementing numeric columns in table "users" */
-export type users_inc_input = {
+export type Users_Inc_Input = {
 	client_id?: InputMaybe<Scalars['Int']>;
 	id?: InputMaybe<Scalars['Int']>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "users" */
-export type users_insert_input = {
-	client?: InputMaybe<clients_obj_rel_insert_input>;
+export type Users_Insert_Input = {
+	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	last_seen?: InputMaybe<Scalars['timestamptz']>;
 	phone?: InputMaybe<Scalars['String']>;
-	tenant?: InputMaybe<tenants_obj_rel_insert_input>;
+	tenant?: InputMaybe<Tenants_Obj_Rel_Insert_Input>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type users_max_fields = {
+export type Users_Max_Fields = {
 	__typename?: 'users_max_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['date']>;
@@ -5272,18 +5274,18 @@ export type users_max_fields = {
 };
 
 /** order by max() on columns of table "users" */
-export type users_max_order_by = {
-	client_id?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	email?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	last_seen?: InputMaybe<order_by>;
-	phone?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Max_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	email?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	last_seen?: InputMaybe<Order_By>;
+	phone?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type users_min_fields = {
+export type Users_Min_Fields = {
 	__typename?: 'users_min_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['date']>;
@@ -5295,59 +5297,59 @@ export type users_min_fields = {
 };
 
 /** order by min() on columns of table "users" */
-export type users_min_order_by = {
-	client_id?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	email?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	last_seen?: InputMaybe<order_by>;
-	phone?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Min_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	email?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	last_seen?: InputMaybe<Order_By>;
+	phone?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "users" */
-export type users_mutation_response = {
+export type Users_Mutation_Response = {
 	__typename?: 'users_mutation_response';
 	/** number of rows affected by the mutation */
 	affected_rows: Scalars['Int'];
 	/** data from the rows affected by the mutation */
-	returning: Array<users>;
+	returning: Array<Users>;
 };
 
 /** input type for inserting object relation for remote table "users" */
-export type users_obj_rel_insert_input = {
-	data: users_insert_input;
+export type Users_Obj_Rel_Insert_Input = {
+	data: Users_Insert_Input;
 	/** on conflict condition */
-	on_conflict?: InputMaybe<users_on_conflict>;
+	on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 /** on conflict condition type for table "users" */
-export type users_on_conflict = {
-	constraint: users_constraint;
-	update_columns?: Array<users_update_column>;
-	where?: InputMaybe<users_bool_exp>;
+export type Users_On_Conflict = {
+	constraint: Users_Constraint;
+	update_columns?: Array<Users_Update_Column>;
+	where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "users". */
-export type users_order_by = {
-	client?: InputMaybe<clients_order_by>;
-	client_id?: InputMaybe<order_by>;
-	created_at?: InputMaybe<order_by>;
-	email?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	last_seen?: InputMaybe<order_by>;
-	phone?: InputMaybe<order_by>;
-	tenant?: InputMaybe<tenants_order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Order_By = {
+	client?: InputMaybe<Clients_Order_By>;
+	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
+	email?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	last_seen?: InputMaybe<Order_By>;
+	phone?: InputMaybe<Order_By>;
+	tenant?: InputMaybe<Tenants_Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: users */
-export type users_pk_columns_input = {
+export type Users_Pk_Columns_Input = {
 	id: Scalars['Int'];
 };
 
 /** select columns of table "users" */
-export type users_select_column =
+export type Users_Select_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
@@ -5364,7 +5366,7 @@ export type users_select_column =
 	| 'tenant_id';
 
 /** input type for updating data in table "users" */
-export type users_set_input = {
+export type Users_Set_Input = {
 	client_id?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
@@ -5375,7 +5377,7 @@ export type users_set_input = {
 };
 
 /** aggregate stddev on columns */
-export type users_stddev_fields = {
+export type Users_Stddev_Fields = {
 	__typename?: 'users_stddev_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5383,14 +5385,14 @@ export type users_stddev_fields = {
 };
 
 /** order by stddev() on columns of table "users" */
-export type users_stddev_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Stddev_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type users_stddev_pop_fields = {
+export type Users_Stddev_Pop_Fields = {
 	__typename?: 'users_stddev_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5398,14 +5400,14 @@ export type users_stddev_pop_fields = {
 };
 
 /** order by stddev_pop() on columns of table "users" */
-export type users_stddev_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Stddev_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type users_stddev_samp_fields = {
+export type Users_Stddev_Samp_Fields = {
 	__typename?: 'users_stddev_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5413,14 +5415,14 @@ export type users_stddev_samp_fields = {
 };
 
 /** order by stddev_samp() on columns of table "users" */
-export type users_stddev_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Stddev_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type users_sum_fields = {
+export type Users_Sum_Fields = {
 	__typename?: 'users_sum_fields';
 	client_id?: Maybe<Scalars['Int']>;
 	id?: Maybe<Scalars['Int']>;
@@ -5428,14 +5430,14 @@ export type users_sum_fields = {
 };
 
 /** order by sum() on columns of table "users" */
-export type users_sum_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Sum_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "users" */
-export type users_update_column =
+export type Users_Update_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
@@ -5452,7 +5454,7 @@ export type users_update_column =
 	| 'tenant_id';
 
 /** aggregate var_pop on columns */
-export type users_var_pop_fields = {
+export type Users_Var_Pop_Fields = {
 	__typename?: 'users_var_pop_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5460,14 +5462,14 @@ export type users_var_pop_fields = {
 };
 
 /** order by var_pop() on columns of table "users" */
-export type users_var_pop_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Var_Pop_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type users_var_samp_fields = {
+export type Users_Var_Samp_Fields = {
 	__typename?: 'users_var_samp_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5475,14 +5477,14 @@ export type users_var_samp_fields = {
 };
 
 /** order by var_samp() on columns of table "users" */
-export type users_var_samp_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Var_Samp_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type users_variance_fields = {
+export type Users_Variance_Fields = {
 	__typename?: 'users_variance_fields';
 	client_id?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
@@ -5490,13 +5492,13 @@ export type users_variance_fields = {
 };
 
 /** order by variance() on columns of table "users" */
-export type users_variance_order_by = {
-	client_id?: InputMaybe<order_by>;
-	id?: InputMaybe<order_by>;
-	tenant_id?: InputMaybe<order_by>;
+export type Users_Variance_Order_By = {
+	client_id?: InputMaybe<Order_By>;
+	id?: InputMaybe<Order_By>;
+	tenant_id?: InputMaybe<Order_By>;
 };
 
-export type details = {
+export type Details = {
 	__typename?: 'clients';
 	id: number;
 	first_name?: string | null | undefined;
@@ -5507,10 +5509,10 @@ export type details = {
 	is_active?: boolean | null | undefined;
 };
 
-export type detailsVariables = Exact<{ [key: string]: never }>;
+export type DetailsVariables = Exact<{ [key: string]: never }>;
 
 export type ClientsInsertVariables = Exact<{
-	object?: InputMaybe<clients_insert_input>;
+	object?: InputMaybe<Clients_Insert_Input>;
 }>;
 
 export type ClientsInsert = {
@@ -5532,7 +5534,7 @@ export type ClientsInsert = {
 
 export type ClientsUpdateVariables = Exact<{
 	id: Scalars['Int'];
-	_set?: InputMaybe<clients_set_input>;
+	_set?: InputMaybe<Clients_Set_Input>;
 }>;
 
 export type ClientsUpdate = {
@@ -5588,7 +5590,7 @@ export type ClientsById = {
 export type ClientsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<clients_order_by> | clients_order_by>;
+	order_by?: InputMaybe<Array<Clients_Order_By> | Clients_Order_By>;
 }>;
 
 export type ClientsList = {
@@ -5605,7 +5607,7 @@ export type ClientsList = {
 	}>;
 };
 
-export type leasesDetails = {
+export type LeasesDetails = {
 	__typename?: 'leases';
 	id: number;
 	deposit?: number | null | undefined;
@@ -5619,10 +5621,10 @@ export type leasesDetails = {
 	unit_id?: number | null | undefined;
 };
 
-export type leasesDetailsVariables = Exact<{ [key: string]: never }>;
+export type LeasesDetailsVariables = Exact<{ [key: string]: never }>;
 
 export type LeasesInsertVariables = Exact<{
-	object?: InputMaybe<leases_insert_input>;
+	object?: InputMaybe<Leases_Insert_Input>;
 }>;
 
 export type LeasesInsert = {
@@ -5647,7 +5649,7 @@ export type LeasesInsert = {
 
 export type LeasesUpdateVariables = Exact<{
 	id: Scalars['Int'];
-	_set?: InputMaybe<leases_set_input>;
+	_set?: InputMaybe<Leases_Set_Input>;
 }>;
 
 export type LeasesUpdate = {
@@ -5727,7 +5729,7 @@ export type LeasesById = {
 export type LeasesListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<leases_order_by> | leases_order_by>;
+	order_by?: InputMaybe<Array<Leases_Order_By> | Leases_Order_By>;
 }>;
 
 export type LeasesList = {
@@ -5747,7 +5749,7 @@ export type LeasesList = {
 	}>;
 };
 
-export type propertiesDetails = {
+export type PropertiesDetails = {
 	__typename?: 'properties';
 	id: number;
 	client_id?: number | null | undefined;
@@ -5759,10 +5761,10 @@ export type propertiesDetails = {
 	coordinates?: any | null | undefined;
 };
 
-export type propertiesDetailsVariables = Exact<{ [key: string]: never }>;
+export type PropertiesDetailsVariables = Exact<{ [key: string]: never }>;
 
 export type PropertiesInsertVariables = Exact<{
-	object?: InputMaybe<properties_insert_input>;
+	object?: InputMaybe<Properties_Insert_Input>;
 }>;
 
 export type PropertiesInsert = {
@@ -5785,7 +5787,7 @@ export type PropertiesInsert = {
 
 export type PropertiesUpdateVariables = Exact<{
 	id: Scalars['Int'];
-	_set?: InputMaybe<properties_set_input>;
+	_set?: InputMaybe<Properties_Set_Input>;
 }>;
 
 export type PropertiesUpdate = {
@@ -5843,7 +5845,7 @@ export type PropertiesById = {
 export type PropertiesListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<properties_order_by> | properties_order_by>;
+	order_by?: InputMaybe<Array<Properties_Order_By> | Properties_Order_By>;
 }>;
 
 export type PropertiesList = {
@@ -5861,7 +5863,7 @@ export type PropertiesList = {
 	}>;
 };
 
-export type tenantsDetails = {
+export type TenantsDetails = {
 	__typename?: 'tenants';
 	id: number;
 	first_name?: string | null | undefined;
@@ -5874,10 +5876,10 @@ export type tenantsDetails = {
 	third_name?: string | null | undefined;
 };
 
-export type tenantsDetailsVariables = Exact<{ [key: string]: never }>;
+export type TenantsDetailsVariables = Exact<{ [key: string]: never }>;
 
 export type TenantsInsertVariables = Exact<{
-	object?: InputMaybe<tenants_insert_input>;
+	object?: InputMaybe<Tenants_Insert_Input>;
 }>;
 
 export type TenantsInsert = {
@@ -5901,7 +5903,7 @@ export type TenantsInsert = {
 
 export type TenantsUpdateVariables = Exact<{
 	id: Scalars['Int'];
-	_set?: InputMaybe<tenants_set_input>;
+	_set?: InputMaybe<Tenants_Set_Input>;
 }>;
 
 export type TenantsUpdate = {
@@ -5935,7 +5937,7 @@ export type DeleteTenants = {
 		| undefined;
 };
 
-export type unitsDetails = {
+export type UnitsDetails = {
 	__typename?: 'units';
 	id: number;
 	is_vacant?: boolean | null | undefined;
@@ -5950,10 +5952,10 @@ export type unitsDetails = {
 	property_id?: number | null | undefined;
 };
 
-export type unitsDetailsVariables = Exact<{ [key: string]: never }>;
+export type UnitsDetailsVariables = Exact<{ [key: string]: never }>;
 
 export type UnitsInsertVariables = Exact<{
-	object?: InputMaybe<units_insert_input>;
+	object?: InputMaybe<Units_Insert_Input>;
 }>;
 
 export type UnitsInsert = {
@@ -5979,7 +5981,7 @@ export type UnitsInsert = {
 
 export type UnitsUpdateVariables = Exact<{
 	id: Scalars['Int'];
-	_set?: InputMaybe<units_set_input>;
+	_set?: InputMaybe<Units_Set_Input>;
 }>;
 
 export type UnitsUpdate = {
@@ -6040,7 +6042,7 @@ export type UnitsById = {
 export type UnitsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<units_order_by> | units_order_by>;
+	order_by?: InputMaybe<Array<Units_Order_By> | Units_Order_By>;
 }>;
 
 export type UnitsList = {
@@ -6216,7 +6218,7 @@ export type TenantPastLeases = {
 		| undefined;
 };
 
-export type tenantDetails = {
+export type TenantDetails = {
 	__typename?: 'tenants';
 	id: number;
 	first_name?: string | null | undefined;
@@ -6229,9 +6231,9 @@ export type tenantDetails = {
 	third_name?: string | null | undefined;
 };
 
-export type tenantDetailsVariables = Exact<{ [key: string]: never }>;
+export type TenantDetailsVariables = Exact<{ [key: string]: never }>;
 
-export type crumbs = {
+export type Crumbs = {
 	__typename?: 'tenants';
 	id: number;
 	leases: Array<{
@@ -6258,9 +6260,9 @@ export type crumbs = {
 	}>;
 };
 
-export type crumbsVariables = Exact<{ [key: string]: never }>;
+export type CrumbsVariables = Exact<{ [key: string]: never }>;
 
-export type pastLeases = {
+export type PastLeases = {
 	__typename?: 'leases';
 	id: number;
 	start_date?: string | null | undefined;
@@ -6272,12 +6274,12 @@ export type pastLeases = {
 	deposit?: number | null | undefined;
 };
 
-export type pastLeasesVariables = Exact<{ [key: string]: never }>;
+export type PastLeasesVariables = Exact<{ [key: string]: never }>;
 
 export type TenantsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
-	order_by?: InputMaybe<Array<tenants_order_by> | tenants_order_by>;
+	order_by?: InputMaybe<Array<Tenants_Order_By> | Tenants_Order_By>;
 }>;
 
 export type TenantsList = {
@@ -6401,5331 +6403,7 @@ export type TenantsListStore = OperationStore<
 	TenantsList,
 	TenantsListVariables
 >;
-export type WithTypename<T extends { __typename?: any }> = {
-	[K in Exclude<keyof T, '__typename'>]?: T[K];
-} & { __typename: NonNullable<T['__typename']> };
-
-export type GraphCacheKeysConfig = {
-	clients?: (data: WithTypename<clients>) => null | string;
-	clients_aggregate?: (data: WithTypename<clients_aggregate>) => null | string;
-	clients_aggregate_fields?: (
-		data: WithTypename<clients_aggregate_fields>,
-	) => null | string;
-	clients_avg_fields?: (
-		data: WithTypename<clients_avg_fields>,
-	) => null | string;
-	clients_max_fields?: (
-		data: WithTypename<clients_max_fields>,
-	) => null | string;
-	clients_min_fields?: (
-		data: WithTypename<clients_min_fields>,
-	) => null | string;
-	clients_mutation_response?: (
-		data: WithTypename<clients_mutation_response>,
-	) => null | string;
-	clients_stddev_fields?: (
-		data: WithTypename<clients_stddev_fields>,
-	) => null | string;
-	clients_stddev_pop_fields?: (
-		data: WithTypename<clients_stddev_pop_fields>,
-	) => null | string;
-	clients_stddev_samp_fields?: (
-		data: WithTypename<clients_stddev_samp_fields>,
-	) => null | string;
-	clients_sum_fields?: (
-		data: WithTypename<clients_sum_fields>,
-	) => null | string;
-	clients_var_pop_fields?: (
-		data: WithTypename<clients_var_pop_fields>,
-	) => null | string;
-	clients_var_samp_fields?: (
-		data: WithTypename<clients_var_samp_fields>,
-	) => null | string;
-	clients_variance_fields?: (
-		data: WithTypename<clients_variance_fields>,
-	) => null | string;
-	expenses?: (data: WithTypename<expenses>) => null | string;
-	expenses_aggregate?: (
-		data: WithTypename<expenses_aggregate>,
-	) => null | string;
-	expenses_aggregate_fields?: (
-		data: WithTypename<expenses_aggregate_fields>,
-	) => null | string;
-	expenses_avg_fields?: (
-		data: WithTypename<expenses_avg_fields>,
-	) => null | string;
-	expenses_max_fields?: (
-		data: WithTypename<expenses_max_fields>,
-	) => null | string;
-	expenses_min_fields?: (
-		data: WithTypename<expenses_min_fields>,
-	) => null | string;
-	expenses_mutation_response?: (
-		data: WithTypename<expenses_mutation_response>,
-	) => null | string;
-	expenses_stddev_fields?: (
-		data: WithTypename<expenses_stddev_fields>,
-	) => null | string;
-	expenses_stddev_pop_fields?: (
-		data: WithTypename<expenses_stddev_pop_fields>,
-	) => null | string;
-	expenses_stddev_samp_fields?: (
-		data: WithTypename<expenses_stddev_samp_fields>,
-	) => null | string;
-	expenses_sum_fields?: (
-		data: WithTypename<expenses_sum_fields>,
-	) => null | string;
-	expenses_types?: (data: WithTypename<expenses_types>) => null | string;
-	expenses_types_aggregate?: (
-		data: WithTypename<expenses_types_aggregate>,
-	) => null | string;
-	expenses_types_aggregate_fields?: (
-		data: WithTypename<expenses_types_aggregate_fields>,
-	) => null | string;
-	expenses_types_max_fields?: (
-		data: WithTypename<expenses_types_max_fields>,
-	) => null | string;
-	expenses_types_min_fields?: (
-		data: WithTypename<expenses_types_min_fields>,
-	) => null | string;
-	expenses_types_mutation_response?: (
-		data: WithTypename<expenses_types_mutation_response>,
-	) => null | string;
-	expenses_var_pop_fields?: (
-		data: WithTypename<expenses_var_pop_fields>,
-	) => null | string;
-	expenses_var_samp_fields?: (
-		data: WithTypename<expenses_var_samp_fields>,
-	) => null | string;
-	expenses_variance_fields?: (
-		data: WithTypename<expenses_variance_fields>,
-	) => null | string;
-	leases?: (data: WithTypename<leases>) => null | string;
-	leases_aggregate?: (data: WithTypename<leases_aggregate>) => null | string;
-	leases_aggregate_fields?: (
-		data: WithTypename<leases_aggregate_fields>,
-	) => null | string;
-	leases_avg_fields?: (data: WithTypename<leases_avg_fields>) => null | string;
-	leases_max_fields?: (data: WithTypename<leases_max_fields>) => null | string;
-	leases_min_fields?: (data: WithTypename<leases_min_fields>) => null | string;
-	leases_mutation_response?: (
-		data: WithTypename<leases_mutation_response>,
-	) => null | string;
-	leases_stddev_fields?: (
-		data: WithTypename<leases_stddev_fields>,
-	) => null | string;
-	leases_stddev_pop_fields?: (
-		data: WithTypename<leases_stddev_pop_fields>,
-	) => null | string;
-	leases_stddev_samp_fields?: (
-		data: WithTypename<leases_stddev_samp_fields>,
-	) => null | string;
-	leases_sum_fields?: (data: WithTypename<leases_sum_fields>) => null | string;
-	leases_var_pop_fields?: (
-		data: WithTypename<leases_var_pop_fields>,
-	) => null | string;
-	leases_var_samp_fields?: (
-		data: WithTypename<leases_var_samp_fields>,
-	) => null | string;
-	leases_variance_fields?: (
-		data: WithTypename<leases_variance_fields>,
-	) => null | string;
-	listings?: (data: WithTypename<listings>) => null | string;
-	listings_aggregate?: (
-		data: WithTypename<listings_aggregate>,
-	) => null | string;
-	listings_aggregate_fields?: (
-		data: WithTypename<listings_aggregate_fields>,
-	) => null | string;
-	listings_avg_fields?: (
-		data: WithTypename<listings_avg_fields>,
-	) => null | string;
-	listings_max_fields?: (
-		data: WithTypename<listings_max_fields>,
-	) => null | string;
-	listings_min_fields?: (
-		data: WithTypename<listings_min_fields>,
-	) => null | string;
-	listings_mutation_response?: (
-		data: WithTypename<listings_mutation_response>,
-	) => null | string;
-	listings_stddev_fields?: (
-		data: WithTypename<listings_stddev_fields>,
-	) => null | string;
-	listings_stddev_pop_fields?: (
-		data: WithTypename<listings_stddev_pop_fields>,
-	) => null | string;
-	listings_stddev_samp_fields?: (
-		data: WithTypename<listings_stddev_samp_fields>,
-	) => null | string;
-	listings_sum_fields?: (
-		data: WithTypename<listings_sum_fields>,
-	) => null | string;
-	listings_var_pop_fields?: (
-		data: WithTypename<listings_var_pop_fields>,
-	) => null | string;
-	listings_var_samp_fields?: (
-		data: WithTypename<listings_var_samp_fields>,
-	) => null | string;
-	listings_variance_fields?: (
-		data: WithTypename<listings_variance_fields>,
-	) => null | string;
-	maintenance_orders?: (
-		data: WithTypename<maintenance_orders>,
-	) => null | string;
-	maintenance_orders_aggregate?: (
-		data: WithTypename<maintenance_orders_aggregate>,
-	) => null | string;
-	maintenance_orders_aggregate_fields?: (
-		data: WithTypename<maintenance_orders_aggregate_fields>,
-	) => null | string;
-	maintenance_orders_avg_fields?: (
-		data: WithTypename<maintenance_orders_avg_fields>,
-	) => null | string;
-	maintenance_orders_max_fields?: (
-		data: WithTypename<maintenance_orders_max_fields>,
-	) => null | string;
-	maintenance_orders_min_fields?: (
-		data: WithTypename<maintenance_orders_min_fields>,
-	) => null | string;
-	maintenance_orders_mutation_response?: (
-		data: WithTypename<maintenance_orders_mutation_response>,
-	) => null | string;
-	maintenance_orders_stddev_fields?: (
-		data: WithTypename<maintenance_orders_stddev_fields>,
-	) => null | string;
-	maintenance_orders_stddev_pop_fields?: (
-		data: WithTypename<maintenance_orders_stddev_pop_fields>,
-	) => null | string;
-	maintenance_orders_stddev_samp_fields?: (
-		data: WithTypename<maintenance_orders_stddev_samp_fields>,
-	) => null | string;
-	maintenance_orders_sum_fields?: (
-		data: WithTypename<maintenance_orders_sum_fields>,
-	) => null | string;
-	maintenance_orders_var_pop_fields?: (
-		data: WithTypename<maintenance_orders_var_pop_fields>,
-	) => null | string;
-	maintenance_orders_var_samp_fields?: (
-		data: WithTypename<maintenance_orders_var_samp_fields>,
-	) => null | string;
-	maintenance_orders_variance_fields?: (
-		data: WithTypename<maintenance_orders_variance_fields>,
-	) => null | string;
-	properties?: (data: WithTypename<properties>) => null | string;
-	properties_aggregate?: (
-		data: WithTypename<properties_aggregate>,
-	) => null | string;
-	properties_aggregate_fields?: (
-		data: WithTypename<properties_aggregate_fields>,
-	) => null | string;
-	properties_avg_fields?: (
-		data: WithTypename<properties_avg_fields>,
-	) => null | string;
-	properties_max_fields?: (
-		data: WithTypename<properties_max_fields>,
-	) => null | string;
-	properties_min_fields?: (
-		data: WithTypename<properties_min_fields>,
-	) => null | string;
-	properties_mutation_response?: (
-		data: WithTypename<properties_mutation_response>,
-	) => null | string;
-	properties_stddev_fields?: (
-		data: WithTypename<properties_stddev_fields>,
-	) => null | string;
-	properties_stddev_pop_fields?: (
-		data: WithTypename<properties_stddev_pop_fields>,
-	) => null | string;
-	properties_stddev_samp_fields?: (
-		data: WithTypename<properties_stddev_samp_fields>,
-	) => null | string;
-	properties_sum_fields?: (
-		data: WithTypename<properties_sum_fields>,
-	) => null | string;
-	properties_var_pop_fields?: (
-		data: WithTypename<properties_var_pop_fields>,
-	) => null | string;
-	properties_var_samp_fields?: (
-		data: WithTypename<properties_var_samp_fields>,
-	) => null | string;
-	properties_variance_fields?: (
-		data: WithTypename<properties_variance_fields>,
-	) => null | string;
-	tenants?: (data: WithTypename<tenants>) => null | string;
-	tenants_aggregate?: (data: WithTypename<tenants_aggregate>) => null | string;
-	tenants_aggregate_fields?: (
-		data: WithTypename<tenants_aggregate_fields>,
-	) => null | string;
-	tenants_avg_fields?: (
-		data: WithTypename<tenants_avg_fields>,
-	) => null | string;
-	tenants_max_fields?: (
-		data: WithTypename<tenants_max_fields>,
-	) => null | string;
-	tenants_min_fields?: (
-		data: WithTypename<tenants_min_fields>,
-	) => null | string;
-	tenants_mutation_response?: (
-		data: WithTypename<tenants_mutation_response>,
-	) => null | string;
-	tenants_stddev_fields?: (
-		data: WithTypename<tenants_stddev_fields>,
-	) => null | string;
-	tenants_stddev_pop_fields?: (
-		data: WithTypename<tenants_stddev_pop_fields>,
-	) => null | string;
-	tenants_stddev_samp_fields?: (
-		data: WithTypename<tenants_stddev_samp_fields>,
-	) => null | string;
-	tenants_sum_fields?: (
-		data: WithTypename<tenants_sum_fields>,
-	) => null | string;
-	tenants_var_pop_fields?: (
-		data: WithTypename<tenants_var_pop_fields>,
-	) => null | string;
-	tenants_var_samp_fields?: (
-		data: WithTypename<tenants_var_samp_fields>,
-	) => null | string;
-	tenants_variance_fields?: (
-		data: WithTypename<tenants_variance_fields>,
-	) => null | string;
-	transactions?: (data: WithTypename<transactions>) => null | string;
-	transactions_aggregate?: (
-		data: WithTypename<transactions_aggregate>,
-	) => null | string;
-	transactions_aggregate_fields?: (
-		data: WithTypename<transactions_aggregate_fields>,
-	) => null | string;
-	transactions_avg_fields?: (
-		data: WithTypename<transactions_avg_fields>,
-	) => null | string;
-	transactions_max_fields?: (
-		data: WithTypename<transactions_max_fields>,
-	) => null | string;
-	transactions_min_fields?: (
-		data: WithTypename<transactions_min_fields>,
-	) => null | string;
-	transactions_mutation_response?: (
-		data: WithTypename<transactions_mutation_response>,
-	) => null | string;
-	transactions_stddev_fields?: (
-		data: WithTypename<transactions_stddev_fields>,
-	) => null | string;
-	transactions_stddev_pop_fields?: (
-		data: WithTypename<transactions_stddev_pop_fields>,
-	) => null | string;
-	transactions_stddev_samp_fields?: (
-		data: WithTypename<transactions_stddev_samp_fields>,
-	) => null | string;
-	transactions_sum_fields?: (
-		data: WithTypename<transactions_sum_fields>,
-	) => null | string;
-	transactions_var_pop_fields?: (
-		data: WithTypename<transactions_var_pop_fields>,
-	) => null | string;
-	transactions_var_samp_fields?: (
-		data: WithTypename<transactions_var_samp_fields>,
-	) => null | string;
-	transactions_variance_fields?: (
-		data: WithTypename<transactions_variance_fields>,
-	) => null | string;
-	units?: (data: WithTypename<units>) => null | string;
-	units_aggregate?: (data: WithTypename<units_aggregate>) => null | string;
-	units_aggregate_fields?: (
-		data: WithTypename<units_aggregate_fields>,
-	) => null | string;
-	units_avg_fields?: (data: WithTypename<units_avg_fields>) => null | string;
-	units_max_fields?: (data: WithTypename<units_max_fields>) => null | string;
-	units_min_fields?: (data: WithTypename<units_min_fields>) => null | string;
-	units_mutation_response?: (
-		data: WithTypename<units_mutation_response>,
-	) => null | string;
-	units_stddev_fields?: (
-		data: WithTypename<units_stddev_fields>,
-	) => null | string;
-	units_stddev_pop_fields?: (
-		data: WithTypename<units_stddev_pop_fields>,
-	) => null | string;
-	units_stddev_samp_fields?: (
-		data: WithTypename<units_stddev_samp_fields>,
-	) => null | string;
-	units_sum_fields?: (data: WithTypename<units_sum_fields>) => null | string;
-	units_var_pop_fields?: (
-		data: WithTypename<units_var_pop_fields>,
-	) => null | string;
-	units_var_samp_fields?: (
-		data: WithTypename<units_var_samp_fields>,
-	) => null | string;
-	units_variance_fields?: (
-		data: WithTypename<units_variance_fields>,
-	) => null | string;
-	users?: (data: WithTypename<users>) => null | string;
-	users_aggregate?: (data: WithTypename<users_aggregate>) => null | string;
-	users_aggregate_fields?: (
-		data: WithTypename<users_aggregate_fields>,
-	) => null | string;
-	users_avg_fields?: (data: WithTypename<users_avg_fields>) => null | string;
-	users_max_fields?: (data: WithTypename<users_max_fields>) => null | string;
-	users_min_fields?: (data: WithTypename<users_min_fields>) => null | string;
-	users_mutation_response?: (
-		data: WithTypename<users_mutation_response>,
-	) => null | string;
-	users_stddev_fields?: (
-		data: WithTypename<users_stddev_fields>,
-	) => null | string;
-	users_stddev_pop_fields?: (
-		data: WithTypename<users_stddev_pop_fields>,
-	) => null | string;
-	users_stddev_samp_fields?: (
-		data: WithTypename<users_stddev_samp_fields>,
-	) => null | string;
-	users_sum_fields?: (data: WithTypename<users_sum_fields>) => null | string;
-	users_var_pop_fields?: (
-		data: WithTypename<users_var_pop_fields>,
-	) => null | string;
-	users_var_samp_fields?: (
-		data: WithTypename<users_var_samp_fields>,
-	) => null | string;
-	users_variance_fields?: (
-		data: WithTypename<users_variance_fields>,
-	) => null | string;
-};
-
-export type GraphCacheResolvers = {
-	query_root?: {
-		clients?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootClientsArgs,
-			Array<WithTypename<clients> | string>
-		>;
-		clients_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootClients_aggregateArgs,
-			WithTypename<clients_aggregate> | string
-		>;
-		clients_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootClients_by_pkArgs,
-			WithTypename<clients> | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		expenses_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpenses_by_pkArgs,
-			WithTypename<expenses> | string
-		>;
-		expenses_types?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpenses_typesArgs,
-			Array<WithTypename<expenses_types> | string>
-		>;
-		expenses_types_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpenses_types_aggregateArgs,
-			WithTypename<expenses_types_aggregate> | string
-		>;
-		expenses_types_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootExpenses_types_by_pkArgs,
-			WithTypename<expenses_types> | string
-		>;
-		leases?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootLeasesArgs,
-			Array<WithTypename<leases> | string>
-		>;
-		leases_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootLeases_aggregateArgs,
-			WithTypename<leases_aggregate> | string
-		>;
-		leases_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootLeases_by_pkArgs,
-			WithTypename<leases> | string
-		>;
-		listings?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootListingsArgs,
-			Array<WithTypename<listings> | string>
-		>;
-		listings_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootListings_aggregateArgs,
-			WithTypename<listings_aggregate> | string
-		>;
-		listings_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootListings_by_pkArgs,
-			WithTypename<listings> | string
-		>;
-		maintenance_orders?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootMaintenance_ordersArgs,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-		maintenance_orders_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootMaintenance_orders_aggregateArgs,
-			WithTypename<maintenance_orders_aggregate> | string
-		>;
-		maintenance_orders_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootMaintenance_orders_by_pkArgs,
-			WithTypename<maintenance_orders> | string
-		>;
-		properties?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootPropertiesArgs,
-			Array<WithTypename<properties> | string>
-		>;
-		properties_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootProperties_aggregateArgs,
-			WithTypename<properties_aggregate> | string
-		>;
-		properties_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootProperties_by_pkArgs,
-			WithTypename<properties> | string
-		>;
-		tenants?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTenantsArgs,
-			Array<WithTypename<tenants> | string>
-		>;
-		tenants_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTenants_aggregateArgs,
-			WithTypename<tenants_aggregate> | string
-		>;
-		tenants_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTenants_by_pkArgs,
-			WithTypename<tenants> | string
-		>;
-		transactions?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTransactionsArgs,
-			Array<WithTypename<transactions> | string>
-		>;
-		transactions_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTransactions_aggregateArgs,
-			WithTypename<transactions_aggregate> | string
-		>;
-		transactions_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootTransactions_by_pkArgs,
-			WithTypename<transactions> | string
-		>;
-		units?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUnitsArgs,
-			Array<WithTypename<units> | string>
-		>;
-		units_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUnits_aggregateArgs,
-			WithTypename<units_aggregate> | string
-		>;
-		units_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUnits_by_pkArgs,
-			WithTypename<units> | string
-		>;
-		users?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUsersArgs,
-			Array<WithTypename<users> | string>
-		>;
-		users_aggregate?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUsers_aggregateArgs,
-			WithTypename<users_aggregate> | string
-		>;
-		users_by_pk?: GraphCacheResolver<
-			WithTypename<query_root>,
-			query_rootUsers_by_pkArgs,
-			WithTypename<users> | string
-		>;
-	};
-	clients?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		is_active?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		maintenance_orders?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsMaintenance_ordersArgs,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-		maintenance_orders_aggregate?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsMaintenance_orders_aggregateArgs,
-			WithTypename<maintenance_orders_aggregate> | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		properties?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsPropertiesArgs,
-			Array<WithTypename<properties> | string>
-		>;
-		properties_aggregate?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsProperties_aggregateArgs,
-			WithTypename<properties_aggregate> | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<clients>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		users?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsUsersArgs,
-			Array<WithTypename<users> | string>
-		>;
-		users_aggregate?: GraphCacheResolver<
-			WithTypename<clients>,
-			clientsUsers_aggregateArgs,
-			WithTypename<users_aggregate> | string
-		>;
-	};
-	clients_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<clients_aggregate>,
-			Record<string, never>,
-			WithTypename<clients_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<clients_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<clients> | string>
-		>;
-	};
-	clients_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			clients_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<clients_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<clients_variance_fields> | string
-		>;
-	};
-	clients_avg_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_max_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<clients_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	clients_min_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<clients_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	clients_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<clients_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<clients_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<clients> | string>
-		>;
-	};
-	clients_stddev_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_stddev_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_stddev_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_sum_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_sum_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	clients_var_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_var_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	clients_variance_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<clients_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<clients_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		category?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			expenses_types_enum | string
-		>;
-		client?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			WithTypename<clients> | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		date_post?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		expenses_type?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			WithTypename<expenses_types> | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		maintenance_order?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			WithTypename<maintenance_orders> | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		property?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			WithTypename<properties> | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			WithTypename<units> | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	expenses_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<expenses_aggregate>,
-			Record<string, never>,
-			WithTypename<expenses_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<expenses_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<expenses> | string>
-		>;
-	};
-	expenses_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			expenses_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<expenses_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_variance_fields> | string
-		>;
-	};
-	expenses_avg_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_max_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		date_post?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	expenses_min_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		date_post?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	expenses_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<expenses_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<expenses_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<expenses> | string>
-		>;
-	};
-	expenses_stddev_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_stddev_pop_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_stddev_samp_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_sum_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	expenses_types?: {
-		description?: GraphCacheResolver<
-			WithTypename<expenses_types>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<expenses_types>,
-			expenses_typesExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<expenses_types>,
-			expenses_typesExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		value?: GraphCacheResolver<
-			WithTypename<expenses_types>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	expenses_types_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<expenses_types_aggregate>,
-			Record<string, never>,
-			WithTypename<expenses_types_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<expenses_types_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<expenses_types> | string>
-		>;
-	};
-	expenses_types_aggregate_fields?: {
-		count?: GraphCacheResolver<
-			WithTypename<expenses_types_aggregate_fields>,
-			expenses_types_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<expenses_types_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_types_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<expenses_types_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<expenses_types_min_fields> | string
-		>;
-	};
-	expenses_types_max_fields?: {
-		description?: GraphCacheResolver<
-			WithTypename<expenses_types_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		value?: GraphCacheResolver<
-			WithTypename<expenses_types_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	expenses_types_min_fields?: {
-		description?: GraphCacheResolver<
-			WithTypename<expenses_types_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		value?: GraphCacheResolver<
-			WithTypename<expenses_types_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	expenses_types_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<expenses_types_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<expenses_types_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<expenses_types> | string>
-		>;
-	};
-	expenses_var_pop_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_var_samp_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	expenses_variance_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		maintenance_order_id?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<expenses_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		end_date?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		is_expired?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		is_signed?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		license?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		start_date?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		tenant?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			WithTypename<tenants> | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		transactions?: GraphCacheResolver<
-			WithTypename<leases>,
-			leasesTransactionsArgs,
-			Array<WithTypename<transactions> | string>
-		>;
-		transactions_aggregate?: GraphCacheResolver<
-			WithTypename<leases>,
-			leasesTransactions_aggregateArgs,
-			WithTypename<transactions_aggregate> | string
-		>;
-		unit?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			WithTypename<units> | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	leases_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<leases_aggregate>,
-			Record<string, never>,
-			WithTypename<leases_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<leases_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<leases> | string>
-		>;
-	};
-	leases_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			leases_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<leases_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<leases_variance_fields> | string
-		>;
-	};
-	leases_avg_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_max_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		end_date?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		license?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		start_date?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	leases_min_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		end_date?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		license?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		start_date?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	leases_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<leases_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<leases_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<leases> | string>
-		>;
-	};
-	leases_stddev_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_stddev_pop_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_stddev_samp_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_sum_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	leases_var_pop_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_var_samp_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	leases_variance_fields?: {
-		deposit?: GraphCacheResolver<
-			WithTypename<leases_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<leases_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		monthly_rent?: GraphCacheResolver<
-			WithTypename<leases_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<leases_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<leases_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings?: {
-		available_on?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		is_active?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		lease_length?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			WithTypename<units> | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	listings_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<listings_aggregate>,
-			Record<string, never>,
-			WithTypename<listings_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<listings_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<listings> | string>
-		>;
-	};
-	listings_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			listings_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<listings_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<listings_variance_fields> | string
-		>;
-	};
-	listings_avg_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_max_fields?: {
-		available_on?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		lease_length?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	listings_min_fields?: {
-		available_on?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		lease_length?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	listings_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<listings_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<listings_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<listings> | string>
-		>;
-	};
-	listings_stddev_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_stddev_pop_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_stddev_samp_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_sum_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	listings_var_pop_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_var_samp_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	listings_variance_fields?: {
-		id?: GraphCacheResolver<
-			WithTypename<listings_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<listings_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders?: {
-		client?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			WithTypename<clients> | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		completed_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			maintenance_ordersExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			maintenance_ordersExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			WithTypename<properties> | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		status?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			WithTypename<tenants> | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			WithTypename<units> | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	maintenance_orders_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-	};
-	maintenance_orders_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			maintenance_orders_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<maintenance_orders_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<maintenance_orders_variance_fields> | string
-		>;
-	};
-	maintenance_orders_avg_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_max_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		completed_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		status?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	maintenance_orders_min_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		completed_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		description?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		status?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		title?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	maintenance_orders_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<maintenance_orders_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<maintenance_orders_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-	};
-	maintenance_orders_stddev_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_stddev_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_stddev_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_sum_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	maintenance_orders_var_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_var_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	maintenance_orders_variance_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		unit_id?: GraphCacheResolver<
-			WithTypename<maintenance_orders_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties?: {
-		area?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		avenue?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		block?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		client?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			WithTypename<clients> | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		coordinates?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['point'] | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		maintenance_orders?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesMaintenance_ordersArgs,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-		maintenance_orders_aggregate?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesMaintenance_orders_aggregateArgs,
-			WithTypename<maintenance_orders_aggregate> | string
-		>;
-		number?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		street?: GraphCacheResolver<
-			WithTypename<properties>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		units?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesUnitsArgs,
-			Array<WithTypename<units> | string>
-		>;
-		units_aggregate?: GraphCacheResolver<
-			WithTypename<properties>,
-			propertiesUnits_aggregateArgs,
-			WithTypename<units_aggregate> | string
-		>;
-	};
-	properties_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<properties_aggregate>,
-			Record<string, never>,
-			WithTypename<properties_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<properties_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<properties> | string>
-		>;
-	};
-	properties_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			properties_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<properties_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<properties_variance_fields> | string
-		>;
-	};
-	properties_avg_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_max_fields?: {
-		area?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		avenue?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		block?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		number?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		street?: GraphCacheResolver<
-			WithTypename<properties_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	properties_min_fields?: {
-		area?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		avenue?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		block?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		number?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		street?: GraphCacheResolver<
-			WithTypename<properties_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	properties_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<properties_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<properties_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<properties> | string>
-		>;
-	};
-	properties_stddev_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_stddev_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_stddev_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_sum_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	properties_var_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_var_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	properties_variance_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<properties_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<properties_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		dob?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		leases?: GraphCacheResolver<
-			WithTypename<tenants>,
-			tenantsLeasesArgs,
-			Array<WithTypename<leases> | string>
-		>;
-		leases_aggregate?: GraphCacheResolver<
-			WithTypename<tenants>,
-			tenantsLeases_aggregateArgs,
-			WithTypename<leases_aggregate> | string
-		>;
-		maintenance_orders?: GraphCacheResolver<
-			WithTypename<tenants>,
-			tenantsMaintenance_ordersArgs,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-		maintenance_orders_aggregate?: GraphCacheResolver<
-			WithTypename<tenants>,
-			tenantsMaintenance_orders_aggregateArgs,
-			WithTypename<maintenance_orders_aggregate> | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		user?: GraphCacheResolver<
-			WithTypename<tenants>,
-			Record<string, never>,
-			WithTypename<users> | string
-		>;
-	};
-	tenants_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<tenants_aggregate>,
-			Record<string, never>,
-			WithTypename<tenants_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<tenants_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<tenants> | string>
-		>;
-	};
-	tenants_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			tenants_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<tenants_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<tenants_variance_fields> | string
-		>;
-	};
-	tenants_avg_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_max_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		dob?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<tenants_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	tenants_min_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		dob?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		first_name?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_name?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		second_name?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		third_name?: GraphCacheResolver<
-			WithTypename<tenants_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	tenants_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<tenants_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<tenants_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<tenants> | string>
-		>;
-	};
-	tenants_stddev_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_stddev_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_stddev_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_sum_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_sum_fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	tenants_var_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_var_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	tenants_variance_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<tenants_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<tenants_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		due_date?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		is_paid?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		lease?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			WithTypename<leases> | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		receipt_url?: GraphCacheResolver<
-			WithTypename<transactions>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	transactions_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<transactions_aggregate>,
-			Record<string, never>,
-			WithTypename<transactions_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<transactions_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<transactions> | string>
-		>;
-	};
-	transactions_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			transactions_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<transactions_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<transactions_variance_fields> | string
-		>;
-	};
-	transactions_avg_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_max_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		due_date?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		receipt_url?: GraphCacheResolver<
-			WithTypename<transactions_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	transactions_min_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		due_date?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		memo?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		receipt_url?: GraphCacheResolver<
-			WithTypename<transactions_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	transactions_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<transactions_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<transactions_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<transactions> | string>
-		>;
-	};
-	transactions_stddev_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_stddev_pop_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_stddev_samp_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_sum_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	transactions_var_pop_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_var_samp_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	transactions_variance_fields?: {
-		amount?: GraphCacheResolver<
-			WithTypename<transactions_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<transactions_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		lease_id?: GraphCacheResolver<
-			WithTypename<transactions_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		expenses?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsExpensesArgs,
-			Array<WithTypename<expenses> | string>
-		>;
-		expenses_aggregate?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsExpenses_aggregateArgs,
-			WithTypename<expenses_aggregate> | string
-		>;
-		floor?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		is_vacant?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Boolean'] | string
-		>;
-		leases?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsLeasesArgs,
-			Array<WithTypename<leases> | string>
-		>;
-		leases_aggregate?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsLeases_aggregateArgs,
-			WithTypename<leases_aggregate> | string
-		>;
-		listings?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsListingsArgs,
-			Array<WithTypename<listings> | string>
-		>;
-		listings_aggregate?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsListings_aggregateArgs,
-			WithTypename<listings_aggregate> | string
-		>;
-		maintenance_orders?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsMaintenance_ordersArgs,
-			Array<WithTypename<maintenance_orders> | string>
-		>;
-		maintenance_orders_aggregate?: GraphCacheResolver<
-			WithTypename<units>,
-			unitsMaintenance_orders_aggregateArgs,
-			WithTypename<maintenance_orders_aggregate> | string
-		>;
-		property?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			WithTypename<properties> | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		type?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_number?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		usage?: GraphCacheResolver<
-			WithTypename<units>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	units_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<units_aggregate>,
-			Record<string, never>,
-			WithTypename<units_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<units_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<units> | string>
-		>;
-	};
-	units_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			units_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<units_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<units_variance_fields> | string
-		>;
-	};
-	units_avg_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_max_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		floor?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		type?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_number?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		usage?: GraphCacheResolver<
-			WithTypename<units_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	units_min_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		floor?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		type?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		unit_number?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		usage?: GraphCacheResolver<
-			WithTypename<units_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-	};
-	units_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<units_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<units_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<units> | string>
-		>;
-	};
-	units_stddev_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_stddev_pop_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_stddev_samp_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_sum_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['numeric'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	units_var_pop_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_var_samp_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	units_variance_fields?: {
-		bath?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		bed?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		property_id?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		rent_market?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		size?: GraphCacheResolver<
-			WithTypename<units_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users?: {
-		client?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			WithTypename<clients> | string
-		>;
-		client_id?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_seen?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			WithTypename<tenants> | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	users_aggregate?: {
-		aggregate?: GraphCacheResolver<
-			WithTypename<users_aggregate>,
-			Record<string, never>,
-			WithTypename<users_aggregate_fields> | string
-		>;
-		nodes?: GraphCacheResolver<
-			WithTypename<users_aggregate>,
-			Record<string, never>,
-			Array<WithTypename<users> | string>
-		>;
-	};
-	users_aggregate_fields?: {
-		avg?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_avg_fields> | string
-		>;
-		count?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			users_aggregate_fieldsCountArgs,
-			Scalars['Int'] | string
-		>;
-		max?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_max_fields> | string
-		>;
-		min?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_min_fields> | string
-		>;
-		stddev?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_stddev_fields> | string
-		>;
-		stddev_pop?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_stddev_pop_fields> | string
-		>;
-		stddev_samp?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_stddev_samp_fields> | string
-		>;
-		sum?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_sum_fields> | string
-		>;
-		var_pop?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_var_pop_fields> | string
-		>;
-		var_samp?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_var_samp_fields> | string
-		>;
-		variance?: GraphCacheResolver<
-			WithTypename<users_aggregate_fields>,
-			Record<string, never>,
-			WithTypename<users_variance_fields> | string
-		>;
-	};
-	users_avg_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_avg_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_max_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_seen?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_max_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	users_min_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		created_at?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['date'] | string
-		>;
-		email?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		last_seen?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['timestamptz'] | string
-		>;
-		phone?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['String'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_min_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	users_mutation_response?: {
-		affected_rows?: GraphCacheResolver<
-			WithTypename<users_mutation_response>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		returning?: GraphCacheResolver<
-			WithTypename<users_mutation_response>,
-			Record<string, never>,
-			Array<WithTypename<users> | string>
-		>;
-	};
-	users_stddev_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_stddev_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_stddev_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_stddev_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_stddev_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_stddev_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_sum_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_sum_fields>,
-			Record<string, never>,
-			Scalars['Int'] | string
-		>;
-	};
-	users_var_pop_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_var_pop_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_var_samp_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_var_samp_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-	users_variance_fields?: {
-		client_id?: GraphCacheResolver<
-			WithTypename<users_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		id?: GraphCacheResolver<
-			WithTypename<users_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-		tenant_id?: GraphCacheResolver<
-			WithTypename<users_variance_fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
-	};
-};
-
-export type GraphCacheOptimisticUpdaters = {
-	delete_clients?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_clientsArgs,
-		Maybe<WithTypename<clients_mutation_response>>
-	>;
-	delete_clients_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_clients_by_pkArgs,
-		Maybe<WithTypename<clients>>
-	>;
-	delete_expenses?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_expensesArgs,
-		Maybe<WithTypename<expenses_mutation_response>>
-	>;
-	delete_expenses_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_expenses_by_pkArgs,
-		Maybe<WithTypename<expenses>>
-	>;
-	delete_expenses_types?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_expenses_typesArgs,
-		Maybe<WithTypename<expenses_types_mutation_response>>
-	>;
-	delete_expenses_types_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_expenses_types_by_pkArgs,
-		Maybe<WithTypename<expenses_types>>
-	>;
-	delete_leases?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_leasesArgs,
-		Maybe<WithTypename<leases_mutation_response>>
-	>;
-	delete_leases_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_leases_by_pkArgs,
-		Maybe<WithTypename<leases>>
-	>;
-	delete_listings?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_listingsArgs,
-		Maybe<WithTypename<listings_mutation_response>>
-	>;
-	delete_listings_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_listings_by_pkArgs,
-		Maybe<WithTypename<listings>>
-	>;
-	delete_maintenance_orders?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_maintenance_ordersArgs,
-		Maybe<WithTypename<maintenance_orders_mutation_response>>
-	>;
-	delete_maintenance_orders_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_maintenance_orders_by_pkArgs,
-		Maybe<WithTypename<maintenance_orders>>
-	>;
-	delete_properties?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_propertiesArgs,
-		Maybe<WithTypename<properties_mutation_response>>
-	>;
-	delete_properties_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_properties_by_pkArgs,
-		Maybe<WithTypename<properties>>
-	>;
-	delete_tenants?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_tenantsArgs,
-		Maybe<WithTypename<tenants_mutation_response>>
-	>;
-	delete_tenants_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_tenants_by_pkArgs,
-		Maybe<WithTypename<tenants>>
-	>;
-	delete_transactions?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_transactionsArgs,
-		Maybe<WithTypename<transactions_mutation_response>>
-	>;
-	delete_transactions_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_transactions_by_pkArgs,
-		Maybe<WithTypename<transactions>>
-	>;
-	delete_units?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_unitsArgs,
-		Maybe<WithTypename<units_mutation_response>>
-	>;
-	delete_units_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_units_by_pkArgs,
-		Maybe<WithTypename<units>>
-	>;
-	delete_users?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_usersArgs,
-		Maybe<WithTypename<users_mutation_response>>
-	>;
-	delete_users_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootDelete_users_by_pkArgs,
-		Maybe<WithTypename<users>>
-	>;
-	insert_clients?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_clientsArgs,
-		Maybe<WithTypename<clients_mutation_response>>
-	>;
-	insert_clients_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_clients_oneArgs,
-		Maybe<WithTypename<clients>>
-	>;
-	insert_expenses?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_expensesArgs,
-		Maybe<WithTypename<expenses_mutation_response>>
-	>;
-	insert_expenses_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_expenses_oneArgs,
-		Maybe<WithTypename<expenses>>
-	>;
-	insert_expenses_types?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_expenses_typesArgs,
-		Maybe<WithTypename<expenses_types_mutation_response>>
-	>;
-	insert_expenses_types_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_expenses_types_oneArgs,
-		Maybe<WithTypename<expenses_types>>
-	>;
-	insert_leases?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_leasesArgs,
-		Maybe<WithTypename<leases_mutation_response>>
-	>;
-	insert_leases_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_leases_oneArgs,
-		Maybe<WithTypename<leases>>
-	>;
-	insert_listings?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_listingsArgs,
-		Maybe<WithTypename<listings_mutation_response>>
-	>;
-	insert_listings_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_listings_oneArgs,
-		Maybe<WithTypename<listings>>
-	>;
-	insert_maintenance_orders?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_maintenance_ordersArgs,
-		Maybe<WithTypename<maintenance_orders_mutation_response>>
-	>;
-	insert_maintenance_orders_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_maintenance_orders_oneArgs,
-		Maybe<WithTypename<maintenance_orders>>
-	>;
-	insert_properties?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_propertiesArgs,
-		Maybe<WithTypename<properties_mutation_response>>
-	>;
-	insert_properties_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_properties_oneArgs,
-		Maybe<WithTypename<properties>>
-	>;
-	insert_tenants?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_tenantsArgs,
-		Maybe<WithTypename<tenants_mutation_response>>
-	>;
-	insert_tenants_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_tenants_oneArgs,
-		Maybe<WithTypename<tenants>>
-	>;
-	insert_transactions?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_transactionsArgs,
-		Maybe<WithTypename<transactions_mutation_response>>
-	>;
-	insert_transactions_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_transactions_oneArgs,
-		Maybe<WithTypename<transactions>>
-	>;
-	insert_units?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_unitsArgs,
-		Maybe<WithTypename<units_mutation_response>>
-	>;
-	insert_units_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_units_oneArgs,
-		Maybe<WithTypename<units>>
-	>;
-	insert_users?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_usersArgs,
-		Maybe<WithTypename<users_mutation_response>>
-	>;
-	insert_users_one?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootInsert_users_oneArgs,
-		Maybe<WithTypename<users>>
-	>;
-	update_clients?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_clientsArgs,
-		Maybe<WithTypename<clients_mutation_response>>
-	>;
-	update_clients_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_clients_by_pkArgs,
-		Maybe<WithTypename<clients>>
-	>;
-	update_expenses?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_expensesArgs,
-		Maybe<WithTypename<expenses_mutation_response>>
-	>;
-	update_expenses_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_expenses_by_pkArgs,
-		Maybe<WithTypename<expenses>>
-	>;
-	update_expenses_types?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_expenses_typesArgs,
-		Maybe<WithTypename<expenses_types_mutation_response>>
-	>;
-	update_expenses_types_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_expenses_types_by_pkArgs,
-		Maybe<WithTypename<expenses_types>>
-	>;
-	update_leases?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_leasesArgs,
-		Maybe<WithTypename<leases_mutation_response>>
-	>;
-	update_leases_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_leases_by_pkArgs,
-		Maybe<WithTypename<leases>>
-	>;
-	update_listings?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_listingsArgs,
-		Maybe<WithTypename<listings_mutation_response>>
-	>;
-	update_listings_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_listings_by_pkArgs,
-		Maybe<WithTypename<listings>>
-	>;
-	update_maintenance_orders?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_maintenance_ordersArgs,
-		Maybe<WithTypename<maintenance_orders_mutation_response>>
-	>;
-	update_maintenance_orders_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_maintenance_orders_by_pkArgs,
-		Maybe<WithTypename<maintenance_orders>>
-	>;
-	update_properties?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_propertiesArgs,
-		Maybe<WithTypename<properties_mutation_response>>
-	>;
-	update_properties_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_properties_by_pkArgs,
-		Maybe<WithTypename<properties>>
-	>;
-	update_tenants?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_tenantsArgs,
-		Maybe<WithTypename<tenants_mutation_response>>
-	>;
-	update_tenants_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_tenants_by_pkArgs,
-		Maybe<WithTypename<tenants>>
-	>;
-	update_transactions?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_transactionsArgs,
-		Maybe<WithTypename<transactions_mutation_response>>
-	>;
-	update_transactions_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_transactions_by_pkArgs,
-		Maybe<WithTypename<transactions>>
-	>;
-	update_units?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_unitsArgs,
-		Maybe<WithTypename<units_mutation_response>>
-	>;
-	update_units_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_units_by_pkArgs,
-		Maybe<WithTypename<units>>
-	>;
-	update_users?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_usersArgs,
-		Maybe<WithTypename<users_mutation_response>>
-	>;
-	update_users_by_pk?: GraphCacheOptimisticMutationResolver<
-		Mutation_rootUpdate_users_by_pkArgs,
-		Maybe<WithTypename<users>>
-	>;
-};
-
-export type GraphCacheUpdaters = {
-	Mutation?: {
-		delete_clients?: GraphCacheUpdateResolver<
-			{ delete_clients: Maybe<WithTypename<clients_mutation_response>> },
-			mutation_rootDelete_clientsArgs
-		>;
-		delete_clients_by_pk?: GraphCacheUpdateResolver<
-			{ delete_clients_by_pk: Maybe<WithTypename<clients>> },
-			mutation_rootDelete_clients_by_pkArgs
-		>;
-		delete_expenses?: GraphCacheUpdateResolver<
-			{ delete_expenses: Maybe<WithTypename<expenses_mutation_response>> },
-			mutation_rootDelete_expensesArgs
-		>;
-		delete_expenses_by_pk?: GraphCacheUpdateResolver<
-			{ delete_expenses_by_pk: Maybe<WithTypename<expenses>> },
-			mutation_rootDelete_expenses_by_pkArgs
-		>;
-		delete_expenses_types?: GraphCacheUpdateResolver<
-			{
-				delete_expenses_types: Maybe<
-					WithTypename<expenses_types_mutation_response>
-				>;
-			},
-			mutation_rootDelete_expenses_typesArgs
-		>;
-		delete_expenses_types_by_pk?: GraphCacheUpdateResolver<
-			{ delete_expenses_types_by_pk: Maybe<WithTypename<expenses_types>> },
-			mutation_rootDelete_expenses_types_by_pkArgs
-		>;
-		delete_leases?: GraphCacheUpdateResolver<
-			{ delete_leases: Maybe<WithTypename<leases_mutation_response>> },
-			mutation_rootDelete_leasesArgs
-		>;
-		delete_leases_by_pk?: GraphCacheUpdateResolver<
-			{ delete_leases_by_pk: Maybe<WithTypename<leases>> },
-			mutation_rootDelete_leases_by_pkArgs
-		>;
-		delete_listings?: GraphCacheUpdateResolver<
-			{ delete_listings: Maybe<WithTypename<listings_mutation_response>> },
-			mutation_rootDelete_listingsArgs
-		>;
-		delete_listings_by_pk?: GraphCacheUpdateResolver<
-			{ delete_listings_by_pk: Maybe<WithTypename<listings>> },
-			mutation_rootDelete_listings_by_pkArgs
-		>;
-		delete_maintenance_orders?: GraphCacheUpdateResolver<
-			{
-				delete_maintenance_orders: Maybe<
-					WithTypename<maintenance_orders_mutation_response>
-				>;
-			},
-			mutation_rootDelete_maintenance_ordersArgs
-		>;
-		delete_maintenance_orders_by_pk?: GraphCacheUpdateResolver<
-			{
-				delete_maintenance_orders_by_pk: Maybe<
-					WithTypename<maintenance_orders>
-				>;
-			},
-			mutation_rootDelete_maintenance_orders_by_pkArgs
-		>;
-		delete_properties?: GraphCacheUpdateResolver<
-			{ delete_properties: Maybe<WithTypename<properties_mutation_response>> },
-			mutation_rootDelete_propertiesArgs
-		>;
-		delete_properties_by_pk?: GraphCacheUpdateResolver<
-			{ delete_properties_by_pk: Maybe<WithTypename<properties>> },
-			mutation_rootDelete_properties_by_pkArgs
-		>;
-		delete_tenants?: GraphCacheUpdateResolver<
-			{ delete_tenants: Maybe<WithTypename<tenants_mutation_response>> },
-			mutation_rootDelete_tenantsArgs
-		>;
-		delete_tenants_by_pk?: GraphCacheUpdateResolver<
-			{ delete_tenants_by_pk: Maybe<WithTypename<tenants>> },
-			mutation_rootDelete_tenants_by_pkArgs
-		>;
-		delete_transactions?: GraphCacheUpdateResolver<
-			{
-				delete_transactions: Maybe<
-					WithTypename<transactions_mutation_response>
-				>;
-			},
-			mutation_rootDelete_transactionsArgs
-		>;
-		delete_transactions_by_pk?: GraphCacheUpdateResolver<
-			{ delete_transactions_by_pk: Maybe<WithTypename<transactions>> },
-			mutation_rootDelete_transactions_by_pkArgs
-		>;
-		delete_units?: GraphCacheUpdateResolver<
-			{ delete_units: Maybe<WithTypename<units_mutation_response>> },
-			mutation_rootDelete_unitsArgs
-		>;
-		delete_units_by_pk?: GraphCacheUpdateResolver<
-			{ delete_units_by_pk: Maybe<WithTypename<units>> },
-			mutation_rootDelete_units_by_pkArgs
-		>;
-		delete_users?: GraphCacheUpdateResolver<
-			{ delete_users: Maybe<WithTypename<users_mutation_response>> },
-			mutation_rootDelete_usersArgs
-		>;
-		delete_users_by_pk?: GraphCacheUpdateResolver<
-			{ delete_users_by_pk: Maybe<WithTypename<users>> },
-			mutation_rootDelete_users_by_pkArgs
-		>;
-		insert_clients?: GraphCacheUpdateResolver<
-			{ insert_clients: Maybe<WithTypename<clients_mutation_response>> },
-			mutation_rootInsert_clientsArgs
-		>;
-		insert_clients_one?: GraphCacheUpdateResolver<
-			{ insert_clients_one: Maybe<WithTypename<clients>> },
-			mutation_rootInsert_clients_oneArgs
-		>;
-		insert_expenses?: GraphCacheUpdateResolver<
-			{ insert_expenses: Maybe<WithTypename<expenses_mutation_response>> },
-			mutation_rootInsert_expensesArgs
-		>;
-		insert_expenses_one?: GraphCacheUpdateResolver<
-			{ insert_expenses_one: Maybe<WithTypename<expenses>> },
-			mutation_rootInsert_expenses_oneArgs
-		>;
-		insert_expenses_types?: GraphCacheUpdateResolver<
-			{
-				insert_expenses_types: Maybe<
-					WithTypename<expenses_types_mutation_response>
-				>;
-			},
-			mutation_rootInsert_expenses_typesArgs
-		>;
-		insert_expenses_types_one?: GraphCacheUpdateResolver<
-			{ insert_expenses_types_one: Maybe<WithTypename<expenses_types>> },
-			mutation_rootInsert_expenses_types_oneArgs
-		>;
-		insert_leases?: GraphCacheUpdateResolver<
-			{ insert_leases: Maybe<WithTypename<leases_mutation_response>> },
-			mutation_rootInsert_leasesArgs
-		>;
-		insert_leases_one?: GraphCacheUpdateResolver<
-			{ insert_leases_one: Maybe<WithTypename<leases>> },
-			mutation_rootInsert_leases_oneArgs
-		>;
-		insert_listings?: GraphCacheUpdateResolver<
-			{ insert_listings: Maybe<WithTypename<listings_mutation_response>> },
-			mutation_rootInsert_listingsArgs
-		>;
-		insert_listings_one?: GraphCacheUpdateResolver<
-			{ insert_listings_one: Maybe<WithTypename<listings>> },
-			mutation_rootInsert_listings_oneArgs
-		>;
-		insert_maintenance_orders?: GraphCacheUpdateResolver<
-			{
-				insert_maintenance_orders: Maybe<
-					WithTypename<maintenance_orders_mutation_response>
-				>;
-			},
-			mutation_rootInsert_maintenance_ordersArgs
-		>;
-		insert_maintenance_orders_one?: GraphCacheUpdateResolver<
-			{
-				insert_maintenance_orders_one: Maybe<WithTypename<maintenance_orders>>;
-			},
-			mutation_rootInsert_maintenance_orders_oneArgs
-		>;
-		insert_properties?: GraphCacheUpdateResolver<
-			{ insert_properties: Maybe<WithTypename<properties_mutation_response>> },
-			mutation_rootInsert_propertiesArgs
-		>;
-		insert_properties_one?: GraphCacheUpdateResolver<
-			{ insert_properties_one: Maybe<WithTypename<properties>> },
-			mutation_rootInsert_properties_oneArgs
-		>;
-		insert_tenants?: GraphCacheUpdateResolver<
-			{ insert_tenants: Maybe<WithTypename<tenants_mutation_response>> },
-			mutation_rootInsert_tenantsArgs
-		>;
-		insert_tenants_one?: GraphCacheUpdateResolver<
-			{ insert_tenants_one: Maybe<WithTypename<tenants>> },
-			mutation_rootInsert_tenants_oneArgs
-		>;
-		insert_transactions?: GraphCacheUpdateResolver<
-			{
-				insert_transactions: Maybe<
-					WithTypename<transactions_mutation_response>
-				>;
-			},
-			mutation_rootInsert_transactionsArgs
-		>;
-		insert_transactions_one?: GraphCacheUpdateResolver<
-			{ insert_transactions_one: Maybe<WithTypename<transactions>> },
-			mutation_rootInsert_transactions_oneArgs
-		>;
-		insert_units?: GraphCacheUpdateResolver<
-			{ insert_units: Maybe<WithTypename<units_mutation_response>> },
-			mutation_rootInsert_unitsArgs
-		>;
-		insert_units_one?: GraphCacheUpdateResolver<
-			{ insert_units_one: Maybe<WithTypename<units>> },
-			mutation_rootInsert_units_oneArgs
-		>;
-		insert_users?: GraphCacheUpdateResolver<
-			{ insert_users: Maybe<WithTypename<users_mutation_response>> },
-			mutation_rootInsert_usersArgs
-		>;
-		insert_users_one?: GraphCacheUpdateResolver<
-			{ insert_users_one: Maybe<WithTypename<users>> },
-			mutation_rootInsert_users_oneArgs
-		>;
-		update_clients?: GraphCacheUpdateResolver<
-			{ update_clients: Maybe<WithTypename<clients_mutation_response>> },
-			mutation_rootUpdate_clientsArgs
-		>;
-		update_clients_by_pk?: GraphCacheUpdateResolver<
-			{ update_clients_by_pk: Maybe<WithTypename<clients>> },
-			mutation_rootUpdate_clients_by_pkArgs
-		>;
-		update_expenses?: GraphCacheUpdateResolver<
-			{ update_expenses: Maybe<WithTypename<expenses_mutation_response>> },
-			mutation_rootUpdate_expensesArgs
-		>;
-		update_expenses_by_pk?: GraphCacheUpdateResolver<
-			{ update_expenses_by_pk: Maybe<WithTypename<expenses>> },
-			mutation_rootUpdate_expenses_by_pkArgs
-		>;
-		update_expenses_types?: GraphCacheUpdateResolver<
-			{
-				update_expenses_types: Maybe<
-					WithTypename<expenses_types_mutation_response>
-				>;
-			},
-			mutation_rootUpdate_expenses_typesArgs
-		>;
-		update_expenses_types_by_pk?: GraphCacheUpdateResolver<
-			{ update_expenses_types_by_pk: Maybe<WithTypename<expenses_types>> },
-			mutation_rootUpdate_expenses_types_by_pkArgs
-		>;
-		update_leases?: GraphCacheUpdateResolver<
-			{ update_leases: Maybe<WithTypename<leases_mutation_response>> },
-			mutation_rootUpdate_leasesArgs
-		>;
-		update_leases_by_pk?: GraphCacheUpdateResolver<
-			{ update_leases_by_pk: Maybe<WithTypename<leases>> },
-			mutation_rootUpdate_leases_by_pkArgs
-		>;
-		update_listings?: GraphCacheUpdateResolver<
-			{ update_listings: Maybe<WithTypename<listings_mutation_response>> },
-			mutation_rootUpdate_listingsArgs
-		>;
-		update_listings_by_pk?: GraphCacheUpdateResolver<
-			{ update_listings_by_pk: Maybe<WithTypename<listings>> },
-			mutation_rootUpdate_listings_by_pkArgs
-		>;
-		update_maintenance_orders?: GraphCacheUpdateResolver<
-			{
-				update_maintenance_orders: Maybe<
-					WithTypename<maintenance_orders_mutation_response>
-				>;
-			},
-			mutation_rootUpdate_maintenance_ordersArgs
-		>;
-		update_maintenance_orders_by_pk?: GraphCacheUpdateResolver<
-			{
-				update_maintenance_orders_by_pk: Maybe<
-					WithTypename<maintenance_orders>
-				>;
-			},
-			mutation_rootUpdate_maintenance_orders_by_pkArgs
-		>;
-		update_properties?: GraphCacheUpdateResolver<
-			{ update_properties: Maybe<WithTypename<properties_mutation_response>> },
-			mutation_rootUpdate_propertiesArgs
-		>;
-		update_properties_by_pk?: GraphCacheUpdateResolver<
-			{ update_properties_by_pk: Maybe<WithTypename<properties>> },
-			mutation_rootUpdate_properties_by_pkArgs
-		>;
-		update_tenants?: GraphCacheUpdateResolver<
-			{ update_tenants: Maybe<WithTypename<tenants_mutation_response>> },
-			mutation_rootUpdate_tenantsArgs
-		>;
-		update_tenants_by_pk?: GraphCacheUpdateResolver<
-			{ update_tenants_by_pk: Maybe<WithTypename<tenants>> },
-			mutation_rootUpdate_tenants_by_pkArgs
-		>;
-		update_transactions?: GraphCacheUpdateResolver<
-			{
-				update_transactions: Maybe<
-					WithTypename<transactions_mutation_response>
-				>;
-			},
-			mutation_rootUpdate_transactionsArgs
-		>;
-		update_transactions_by_pk?: GraphCacheUpdateResolver<
-			{ update_transactions_by_pk: Maybe<WithTypename<transactions>> },
-			mutation_rootUpdate_transactions_by_pkArgs
-		>;
-		update_units?: GraphCacheUpdateResolver<
-			{ update_units: Maybe<WithTypename<units_mutation_response>> },
-			mutation_rootUpdate_unitsArgs
-		>;
-		update_units_by_pk?: GraphCacheUpdateResolver<
-			{ update_units_by_pk: Maybe<WithTypename<units>> },
-			mutation_rootUpdate_units_by_pkArgs
-		>;
-		update_users?: GraphCacheUpdateResolver<
-			{ update_users: Maybe<WithTypename<users_mutation_response>> },
-			mutation_rootUpdate_usersArgs
-		>;
-		update_users_by_pk?: GraphCacheUpdateResolver<
-			{ update_users_by_pk: Maybe<WithTypename<users>> },
-			mutation_rootUpdate_users_by_pkArgs
-		>;
-	};
-	Subscription?: {
-		clients?: GraphCacheUpdateResolver<
-			{ clients: Array<WithTypename<clients>> },
-			subscription_rootClientsArgs
-		>;
-		clients_aggregate?: GraphCacheUpdateResolver<
-			{ clients_aggregate: WithTypename<clients_aggregate> },
-			subscription_rootClients_aggregateArgs
-		>;
-		clients_by_pk?: GraphCacheUpdateResolver<
-			{ clients_by_pk: Maybe<WithTypename<clients>> },
-			subscription_rootClients_by_pkArgs
-		>;
-		expenses?: GraphCacheUpdateResolver<
-			{ expenses: Array<WithTypename<expenses>> },
-			subscription_rootExpensesArgs
-		>;
-		expenses_aggregate?: GraphCacheUpdateResolver<
-			{ expenses_aggregate: WithTypename<expenses_aggregate> },
-			subscription_rootExpenses_aggregateArgs
-		>;
-		expenses_by_pk?: GraphCacheUpdateResolver<
-			{ expenses_by_pk: Maybe<WithTypename<expenses>> },
-			subscription_rootExpenses_by_pkArgs
-		>;
-		expenses_types?: GraphCacheUpdateResolver<
-			{ expenses_types: Array<WithTypename<expenses_types>> },
-			subscription_rootExpenses_typesArgs
-		>;
-		expenses_types_aggregate?: GraphCacheUpdateResolver<
-			{ expenses_types_aggregate: WithTypename<expenses_types_aggregate> },
-			subscription_rootExpenses_types_aggregateArgs
-		>;
-		expenses_types_by_pk?: GraphCacheUpdateResolver<
-			{ expenses_types_by_pk: Maybe<WithTypename<expenses_types>> },
-			subscription_rootExpenses_types_by_pkArgs
-		>;
-		leases?: GraphCacheUpdateResolver<
-			{ leases: Array<WithTypename<leases>> },
-			subscription_rootLeasesArgs
-		>;
-		leases_aggregate?: GraphCacheUpdateResolver<
-			{ leases_aggregate: WithTypename<leases_aggregate> },
-			subscription_rootLeases_aggregateArgs
-		>;
-		leases_by_pk?: GraphCacheUpdateResolver<
-			{ leases_by_pk: Maybe<WithTypename<leases>> },
-			subscription_rootLeases_by_pkArgs
-		>;
-		listings?: GraphCacheUpdateResolver<
-			{ listings: Array<WithTypename<listings>> },
-			subscription_rootListingsArgs
-		>;
-		listings_aggregate?: GraphCacheUpdateResolver<
-			{ listings_aggregate: WithTypename<listings_aggregate> },
-			subscription_rootListings_aggregateArgs
-		>;
-		listings_by_pk?: GraphCacheUpdateResolver<
-			{ listings_by_pk: Maybe<WithTypename<listings>> },
-			subscription_rootListings_by_pkArgs
-		>;
-		maintenance_orders?: GraphCacheUpdateResolver<
-			{ maintenance_orders: Array<WithTypename<maintenance_orders>> },
-			subscription_rootMaintenance_ordersArgs
-		>;
-		maintenance_orders_aggregate?: GraphCacheUpdateResolver<
-			{
-				maintenance_orders_aggregate: WithTypename<maintenance_orders_aggregate>;
-			},
-			subscription_rootMaintenance_orders_aggregateArgs
-		>;
-		maintenance_orders_by_pk?: GraphCacheUpdateResolver<
-			{ maintenance_orders_by_pk: Maybe<WithTypename<maintenance_orders>> },
-			subscription_rootMaintenance_orders_by_pkArgs
-		>;
-		properties?: GraphCacheUpdateResolver<
-			{ properties: Array<WithTypename<properties>> },
-			subscription_rootPropertiesArgs
-		>;
-		properties_aggregate?: GraphCacheUpdateResolver<
-			{ properties_aggregate: WithTypename<properties_aggregate> },
-			subscription_rootProperties_aggregateArgs
-		>;
-		properties_by_pk?: GraphCacheUpdateResolver<
-			{ properties_by_pk: Maybe<WithTypename<properties>> },
-			subscription_rootProperties_by_pkArgs
-		>;
-		tenants?: GraphCacheUpdateResolver<
-			{ tenants: Array<WithTypename<tenants>> },
-			subscription_rootTenantsArgs
-		>;
-		tenants_aggregate?: GraphCacheUpdateResolver<
-			{ tenants_aggregate: WithTypename<tenants_aggregate> },
-			subscription_rootTenants_aggregateArgs
-		>;
-		tenants_by_pk?: GraphCacheUpdateResolver<
-			{ tenants_by_pk: Maybe<WithTypename<tenants>> },
-			subscription_rootTenants_by_pkArgs
-		>;
-		transactions?: GraphCacheUpdateResolver<
-			{ transactions: Array<WithTypename<transactions>> },
-			subscription_rootTransactionsArgs
-		>;
-		transactions_aggregate?: GraphCacheUpdateResolver<
-			{ transactions_aggregate: WithTypename<transactions_aggregate> },
-			subscription_rootTransactions_aggregateArgs
-		>;
-		transactions_by_pk?: GraphCacheUpdateResolver<
-			{ transactions_by_pk: Maybe<WithTypename<transactions>> },
-			subscription_rootTransactions_by_pkArgs
-		>;
-		units?: GraphCacheUpdateResolver<
-			{ units: Array<WithTypename<units>> },
-			subscription_rootUnitsArgs
-		>;
-		units_aggregate?: GraphCacheUpdateResolver<
-			{ units_aggregate: WithTypename<units_aggregate> },
-			subscription_rootUnits_aggregateArgs
-		>;
-		units_by_pk?: GraphCacheUpdateResolver<
-			{ units_by_pk: Maybe<WithTypename<units>> },
-			subscription_rootUnits_by_pkArgs
-		>;
-		users?: GraphCacheUpdateResolver<
-			{ users: Array<WithTypename<users>> },
-			subscription_rootUsersArgs
-		>;
-		users_aggregate?: GraphCacheUpdateResolver<
-			{ users_aggregate: WithTypename<users_aggregate> },
-			subscription_rootUsers_aggregateArgs
-		>;
-		users_by_pk?: GraphCacheUpdateResolver<
-			{ users_by_pk: Maybe<WithTypename<users>> },
-			subscription_rootUsers_by_pkArgs
-		>;
-	};
-};
-
-export type GraphCacheConfig = {
-	schema?: IntrospectionData;
-	updates?: GraphCacheUpdaters;
-	keys?: GraphCacheKeysConfig;
-	optimistic?: GraphCacheOptimisticUpdaters;
-	resolvers?: GraphCacheResolvers;
-	storage?: GraphCacheStorageAdapter;
-};
-export const details = {
+export const Details = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11749,8 +6427,8 @@ export const details = {
 			},
 		},
 	],
-} as unknown as DocumentNode<details, detailsVariables>;
-export const leasesDetails = {
+} as unknown as DocumentNode<Details, DetailsVariables>;
+export const LeasesDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11777,8 +6455,8 @@ export const leasesDetails = {
 			},
 		},
 	],
-} as unknown as DocumentNode<leasesDetails, leasesDetailsVariables>;
-export const propertiesDetails = {
+} as unknown as DocumentNode<LeasesDetails, LeasesDetailsVariables>;
+export const PropertiesDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11803,8 +6481,8 @@ export const propertiesDetails = {
 			},
 		},
 	],
-} as unknown as DocumentNode<propertiesDetails, propertiesDetailsVariables>;
-export const tenantsDetails = {
+} as unknown as DocumentNode<PropertiesDetails, PropertiesDetailsVariables>;
+export const TenantsDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11830,8 +6508,8 @@ export const tenantsDetails = {
 			},
 		},
 	],
-} as unknown as DocumentNode<tenantsDetails, tenantsDetailsVariables>;
-export const unitsDetails = {
+} as unknown as DocumentNode<TenantsDetails, TenantsDetailsVariables>;
+export const UnitsDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11859,8 +6537,8 @@ export const unitsDetails = {
 			},
 		},
 	],
-} as unknown as DocumentNode<unitsDetails, unitsDetailsVariables>;
-export const tenantDetails = {
+} as unknown as DocumentNode<UnitsDetails, UnitsDetailsVariables>;
+export const TenantDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11886,8 +6564,8 @@ export const tenantDetails = {
 			},
 		},
 	],
-} as unknown as DocumentNode<tenantDetails, tenantDetailsVariables>;
-export const crumbs = {
+} as unknown as DocumentNode<TenantDetails, TenantDetailsVariables>;
+export const Crumbs = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11972,8 +6650,8 @@ export const crumbs = {
 			},
 		},
 	],
-} as unknown as DocumentNode<crumbs, crumbsVariables>;
-export const pastLeases = {
+} as unknown as DocumentNode<Crumbs, CrumbsVariables>;
+export const PastLeases = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11998,7 +6676,7 @@ export const pastLeases = {
 			},
 		},
 	],
-} as unknown as DocumentNode<pastLeases, pastLeasesVariables>;
+} as unknown as DocumentNode<PastLeases, PastLeasesVariables>;
 export const ClientsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12049,7 +6727,7 @@ export const ClientsInsertDocument = {
 				],
 			},
 		},
-		...details.definitions,
+		...Details.definitions,
 	],
 } as unknown as DocumentNode<ClientsInsert, ClientsInsertVariables>;
 export const ClientsUpdateDocument = {
@@ -12123,7 +6801,7 @@ export const ClientsUpdateDocument = {
 				],
 			},
 		},
-		...details.definitions,
+		...Details.definitions,
 	],
 } as unknown as DocumentNode<ClientsUpdate, ClientsUpdateVariables>;
 export const DeleteClientsDocument = {
@@ -12217,7 +6895,7 @@ export const ClientsByIdDocument = {
 				],
 			},
 		},
-		...details.definitions,
+		...Details.definitions,
 	],
 } as unknown as DocumentNode<ClientsById, ClientsByIdVariables>;
 export const ClientsListDocument = {
@@ -12308,7 +6986,7 @@ export const ClientsListDocument = {
 				],
 			},
 		},
-		...details.definitions,
+		...Details.definitions,
 	],
 } as unknown as DocumentNode<ClientsList, ClientsListVariables>;
 export const LeasesInsertDocument = {
@@ -12361,7 +7039,7 @@ export const LeasesInsertDocument = {
 				],
 			},
 		},
-		...leasesDetails.definitions,
+		...LeasesDetails.definitions,
 	],
 } as unknown as DocumentNode<LeasesInsert, LeasesInsertVariables>;
 export const LeasesUpdateDocument = {
@@ -12435,7 +7113,7 @@ export const LeasesUpdateDocument = {
 				],
 			},
 		},
-		...leasesDetails.definitions,
+		...LeasesDetails.definitions,
 	],
 } as unknown as DocumentNode<LeasesUpdate, LeasesUpdateVariables>;
 export const DeleteLeasesDocument = {
@@ -12565,7 +7243,7 @@ export const LeasesByIdDocument = {
 				],
 			},
 		},
-		...leasesDetails.definitions,
+		...LeasesDetails.definitions,
 	],
 } as unknown as DocumentNode<LeasesById, LeasesByIdVariables>;
 export const LeasesListDocument = {
@@ -12656,7 +7334,7 @@ export const LeasesListDocument = {
 				],
 			},
 		},
-		...leasesDetails.definitions,
+		...LeasesDetails.definitions,
 	],
 } as unknown as DocumentNode<LeasesList, LeasesListVariables>;
 export const PropertiesInsertDocument = {
@@ -12709,7 +7387,7 @@ export const PropertiesInsertDocument = {
 				],
 			},
 		},
-		...propertiesDetails.definitions,
+		...PropertiesDetails.definitions,
 	],
 } as unknown as DocumentNode<PropertiesInsert, PropertiesInsertVariables>;
 export const PropertiesUpdateDocument = {
@@ -12783,7 +7461,7 @@ export const PropertiesUpdateDocument = {
 				],
 			},
 		},
-		...propertiesDetails.definitions,
+		...PropertiesDetails.definitions,
 	],
 } as unknown as DocumentNode<PropertiesUpdate, PropertiesUpdateVariables>;
 export const DeletePropertiesDocument = {
@@ -12877,7 +7555,7 @@ export const PropertiesByIdDocument = {
 				],
 			},
 		},
-		...propertiesDetails.definitions,
+		...PropertiesDetails.definitions,
 	],
 } as unknown as DocumentNode<PropertiesById, PropertiesByIdVariables>;
 export const PropertiesListDocument = {
@@ -12968,7 +7646,7 @@ export const PropertiesListDocument = {
 				],
 			},
 		},
-		...propertiesDetails.definitions,
+		...PropertiesDetails.definitions,
 	],
 } as unknown as DocumentNode<PropertiesList, PropertiesListVariables>;
 export const TenantsInsertDocument = {
@@ -13021,7 +7699,7 @@ export const TenantsInsertDocument = {
 				],
 			},
 		},
-		...tenantsDetails.definitions,
+		...TenantsDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsInsert, TenantsInsertVariables>;
 export const TenantsUpdateDocument = {
@@ -13095,7 +7773,7 @@ export const TenantsUpdateDocument = {
 				],
 			},
 		},
-		...tenantsDetails.definitions,
+		...TenantsDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
 export const DeleteTenantsDocument = {
@@ -13193,7 +7871,7 @@ export const UnitsInsertDocument = {
 				],
 			},
 		},
-		...unitsDetails.definitions,
+		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsInsert, UnitsInsertVariables>;
 export const UnitsUpdateDocument = {
@@ -13267,7 +7945,7 @@ export const UnitsUpdateDocument = {
 				],
 			},
 		},
-		...unitsDetails.definitions,
+		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsUpdate, UnitsUpdateVariables>;
 export const DeleteUnitsDocument = {
@@ -13361,7 +8039,7 @@ export const UnitsByIdDocument = {
 				],
 			},
 		},
-		...unitsDetails.definitions,
+		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsById, UnitsByIdVariables>;
 export const UnitsListDocument = {
@@ -13452,7 +8130,7 @@ export const UnitsListDocument = {
 				],
 			},
 		},
-		...unitsDetails.definitions,
+		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsList, UnitsListVariables>;
 export const TrxByIdDocument = {
@@ -13673,9 +8351,9 @@ export const TenantsByIdLocalDocument = {
 				],
 			},
 		},
-		...tenantDetails.definitions,
-		...crumbs.definitions,
-		...pastLeases.definitions,
+		...TenantDetails.definitions,
+		...Crumbs.definitions,
+		...PastLeases.definitions,
 	],
 } as unknown as DocumentNode<TenantsByIdLocal, TenantsByIdLocalVariables>;
 export const TenantBreadcrumbsDocument = {
@@ -13724,7 +8402,7 @@ export const TenantBreadcrumbsDocument = {
 				],
 			},
 		},
-		...crumbs.definitions,
+		...Crumbs.definitions,
 	],
 } as unknown as DocumentNode<TenantBreadcrumbs, TenantBreadcrumbsVariables>;
 export const TenantPastLeasesDocument = {
@@ -13800,7 +8478,7 @@ export const TenantPastLeasesDocument = {
 				],
 			},
 		},
-		...pastLeases.definitions,
+		...PastLeases.definitions,
 	],
 } as unknown as DocumentNode<TenantPastLeases, TenantPastLeasesVariables>;
 export const TenantsListDocument = {
@@ -13911,6 +8589,5330 @@ export const TenantsListDocument = {
 				],
 			},
 		},
-		...tenantDetails.definitions,
+		...TenantDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsList, TenantsListVariables>;
+export type WithTypename<T extends { __typename?: any }> = {
+	[K in Exclude<keyof T, '__typename'>]?: T[K];
+} & { __typename: NonNullable<T['__typename']> };
+
+export type GraphCacheKeysConfig = {
+	clients?: (data: WithTypename<Clients>) => null | string;
+	clients_aggregate?: (data: WithTypename<Clients_Aggregate>) => null | string;
+	clients_aggregate_fields?: (
+		data: WithTypename<Clients_Aggregate_Fields>,
+	) => null | string;
+	clients_avg_fields?: (
+		data: WithTypename<Clients_Avg_Fields>,
+	) => null | string;
+	clients_max_fields?: (
+		data: WithTypename<Clients_Max_Fields>,
+	) => null | string;
+	clients_min_fields?: (
+		data: WithTypename<Clients_Min_Fields>,
+	) => null | string;
+	clients_mutation_response?: (
+		data: WithTypename<Clients_Mutation_Response>,
+	) => null | string;
+	clients_stddev_fields?: (
+		data: WithTypename<Clients_Stddev_Fields>,
+	) => null | string;
+	clients_stddev_pop_fields?: (
+		data: WithTypename<Clients_Stddev_Pop_Fields>,
+	) => null | string;
+	clients_stddev_samp_fields?: (
+		data: WithTypename<Clients_Stddev_Samp_Fields>,
+	) => null | string;
+	clients_sum_fields?: (
+		data: WithTypename<Clients_Sum_Fields>,
+	) => null | string;
+	clients_var_pop_fields?: (
+		data: WithTypename<Clients_Var_Pop_Fields>,
+	) => null | string;
+	clients_var_samp_fields?: (
+		data: WithTypename<Clients_Var_Samp_Fields>,
+	) => null | string;
+	clients_variance_fields?: (
+		data: WithTypename<Clients_Variance_Fields>,
+	) => null | string;
+	expenses?: (data: WithTypename<Expenses>) => null | string;
+	expenses_aggregate?: (
+		data: WithTypename<Expenses_Aggregate>,
+	) => null | string;
+	expenses_aggregate_fields?: (
+		data: WithTypename<Expenses_Aggregate_Fields>,
+	) => null | string;
+	expenses_avg_fields?: (
+		data: WithTypename<Expenses_Avg_Fields>,
+	) => null | string;
+	expenses_max_fields?: (
+		data: WithTypename<Expenses_Max_Fields>,
+	) => null | string;
+	expenses_min_fields?: (
+		data: WithTypename<Expenses_Min_Fields>,
+	) => null | string;
+	expenses_mutation_response?: (
+		data: WithTypename<Expenses_Mutation_Response>,
+	) => null | string;
+	expenses_stddev_fields?: (
+		data: WithTypename<Expenses_Stddev_Fields>,
+	) => null | string;
+	expenses_stddev_pop_fields?: (
+		data: WithTypename<Expenses_Stddev_Pop_Fields>,
+	) => null | string;
+	expenses_stddev_samp_fields?: (
+		data: WithTypename<Expenses_Stddev_Samp_Fields>,
+	) => null | string;
+	expenses_sum_fields?: (
+		data: WithTypename<Expenses_Sum_Fields>,
+	) => null | string;
+	expenses_types?: (data: WithTypename<Expenses_Types>) => null | string;
+	expenses_types_aggregate?: (
+		data: WithTypename<Expenses_Types_Aggregate>,
+	) => null | string;
+	expenses_types_aggregate_fields?: (
+		data: WithTypename<Expenses_Types_Aggregate_Fields>,
+	) => null | string;
+	expenses_types_max_fields?: (
+		data: WithTypename<Expenses_Types_Max_Fields>,
+	) => null | string;
+	expenses_types_min_fields?: (
+		data: WithTypename<Expenses_Types_Min_Fields>,
+	) => null | string;
+	expenses_types_mutation_response?: (
+		data: WithTypename<Expenses_Types_Mutation_Response>,
+	) => null | string;
+	expenses_var_pop_fields?: (
+		data: WithTypename<Expenses_Var_Pop_Fields>,
+	) => null | string;
+	expenses_var_samp_fields?: (
+		data: WithTypename<Expenses_Var_Samp_Fields>,
+	) => null | string;
+	expenses_variance_fields?: (
+		data: WithTypename<Expenses_Variance_Fields>,
+	) => null | string;
+	leases?: (data: WithTypename<Leases>) => null | string;
+	leases_aggregate?: (data: WithTypename<Leases_Aggregate>) => null | string;
+	leases_aggregate_fields?: (
+		data: WithTypename<Leases_Aggregate_Fields>,
+	) => null | string;
+	leases_avg_fields?: (data: WithTypename<Leases_Avg_Fields>) => null | string;
+	leases_max_fields?: (data: WithTypename<Leases_Max_Fields>) => null | string;
+	leases_min_fields?: (data: WithTypename<Leases_Min_Fields>) => null | string;
+	leases_mutation_response?: (
+		data: WithTypename<Leases_Mutation_Response>,
+	) => null | string;
+	leases_stddev_fields?: (
+		data: WithTypename<Leases_Stddev_Fields>,
+	) => null | string;
+	leases_stddev_pop_fields?: (
+		data: WithTypename<Leases_Stddev_Pop_Fields>,
+	) => null | string;
+	leases_stddev_samp_fields?: (
+		data: WithTypename<Leases_Stddev_Samp_Fields>,
+	) => null | string;
+	leases_sum_fields?: (data: WithTypename<Leases_Sum_Fields>) => null | string;
+	leases_var_pop_fields?: (
+		data: WithTypename<Leases_Var_Pop_Fields>,
+	) => null | string;
+	leases_var_samp_fields?: (
+		data: WithTypename<Leases_Var_Samp_Fields>,
+	) => null | string;
+	leases_variance_fields?: (
+		data: WithTypename<Leases_Variance_Fields>,
+	) => null | string;
+	listings?: (data: WithTypename<Listings>) => null | string;
+	listings_aggregate?: (
+		data: WithTypename<Listings_Aggregate>,
+	) => null | string;
+	listings_aggregate_fields?: (
+		data: WithTypename<Listings_Aggregate_Fields>,
+	) => null | string;
+	listings_avg_fields?: (
+		data: WithTypename<Listings_Avg_Fields>,
+	) => null | string;
+	listings_max_fields?: (
+		data: WithTypename<Listings_Max_Fields>,
+	) => null | string;
+	listings_min_fields?: (
+		data: WithTypename<Listings_Min_Fields>,
+	) => null | string;
+	listings_mutation_response?: (
+		data: WithTypename<Listings_Mutation_Response>,
+	) => null | string;
+	listings_stddev_fields?: (
+		data: WithTypename<Listings_Stddev_Fields>,
+	) => null | string;
+	listings_stddev_pop_fields?: (
+		data: WithTypename<Listings_Stddev_Pop_Fields>,
+	) => null | string;
+	listings_stddev_samp_fields?: (
+		data: WithTypename<Listings_Stddev_Samp_Fields>,
+	) => null | string;
+	listings_sum_fields?: (
+		data: WithTypename<Listings_Sum_Fields>,
+	) => null | string;
+	listings_var_pop_fields?: (
+		data: WithTypename<Listings_Var_Pop_Fields>,
+	) => null | string;
+	listings_var_samp_fields?: (
+		data: WithTypename<Listings_Var_Samp_Fields>,
+	) => null | string;
+	listings_variance_fields?: (
+		data: WithTypename<Listings_Variance_Fields>,
+	) => null | string;
+	maintenance_orders?: (
+		data: WithTypename<Maintenance_Orders>,
+	) => null | string;
+	maintenance_orders_aggregate?: (
+		data: WithTypename<Maintenance_Orders_Aggregate>,
+	) => null | string;
+	maintenance_orders_aggregate_fields?: (
+		data: WithTypename<Maintenance_Orders_Aggregate_Fields>,
+	) => null | string;
+	maintenance_orders_avg_fields?: (
+		data: WithTypename<Maintenance_Orders_Avg_Fields>,
+	) => null | string;
+	maintenance_orders_max_fields?: (
+		data: WithTypename<Maintenance_Orders_Max_Fields>,
+	) => null | string;
+	maintenance_orders_min_fields?: (
+		data: WithTypename<Maintenance_Orders_Min_Fields>,
+	) => null | string;
+	maintenance_orders_mutation_response?: (
+		data: WithTypename<Maintenance_Orders_Mutation_Response>,
+	) => null | string;
+	maintenance_orders_stddev_fields?: (
+		data: WithTypename<Maintenance_Orders_Stddev_Fields>,
+	) => null | string;
+	maintenance_orders_stddev_pop_fields?: (
+		data: WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+	) => null | string;
+	maintenance_orders_stddev_samp_fields?: (
+		data: WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+	) => null | string;
+	maintenance_orders_sum_fields?: (
+		data: WithTypename<Maintenance_Orders_Sum_Fields>,
+	) => null | string;
+	maintenance_orders_var_pop_fields?: (
+		data: WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+	) => null | string;
+	maintenance_orders_var_samp_fields?: (
+		data: WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+	) => null | string;
+	maintenance_orders_variance_fields?: (
+		data: WithTypename<Maintenance_Orders_Variance_Fields>,
+	) => null | string;
+	properties?: (data: WithTypename<Properties>) => null | string;
+	properties_aggregate?: (
+		data: WithTypename<Properties_Aggregate>,
+	) => null | string;
+	properties_aggregate_fields?: (
+		data: WithTypename<Properties_Aggregate_Fields>,
+	) => null | string;
+	properties_avg_fields?: (
+		data: WithTypename<Properties_Avg_Fields>,
+	) => null | string;
+	properties_max_fields?: (
+		data: WithTypename<Properties_Max_Fields>,
+	) => null | string;
+	properties_min_fields?: (
+		data: WithTypename<Properties_Min_Fields>,
+	) => null | string;
+	properties_mutation_response?: (
+		data: WithTypename<Properties_Mutation_Response>,
+	) => null | string;
+	properties_stddev_fields?: (
+		data: WithTypename<Properties_Stddev_Fields>,
+	) => null | string;
+	properties_stddev_pop_fields?: (
+		data: WithTypename<Properties_Stddev_Pop_Fields>,
+	) => null | string;
+	properties_stddev_samp_fields?: (
+		data: WithTypename<Properties_Stddev_Samp_Fields>,
+	) => null | string;
+	properties_sum_fields?: (
+		data: WithTypename<Properties_Sum_Fields>,
+	) => null | string;
+	properties_var_pop_fields?: (
+		data: WithTypename<Properties_Var_Pop_Fields>,
+	) => null | string;
+	properties_var_samp_fields?: (
+		data: WithTypename<Properties_Var_Samp_Fields>,
+	) => null | string;
+	properties_variance_fields?: (
+		data: WithTypename<Properties_Variance_Fields>,
+	) => null | string;
+	tenants?: (data: WithTypename<Tenants>) => null | string;
+	tenants_aggregate?: (data: WithTypename<Tenants_Aggregate>) => null | string;
+	tenants_aggregate_fields?: (
+		data: WithTypename<Tenants_Aggregate_Fields>,
+	) => null | string;
+	tenants_avg_fields?: (
+		data: WithTypename<Tenants_Avg_Fields>,
+	) => null | string;
+	tenants_max_fields?: (
+		data: WithTypename<Tenants_Max_Fields>,
+	) => null | string;
+	tenants_min_fields?: (
+		data: WithTypename<Tenants_Min_Fields>,
+	) => null | string;
+	tenants_mutation_response?: (
+		data: WithTypename<Tenants_Mutation_Response>,
+	) => null | string;
+	tenants_stddev_fields?: (
+		data: WithTypename<Tenants_Stddev_Fields>,
+	) => null | string;
+	tenants_stddev_pop_fields?: (
+		data: WithTypename<Tenants_Stddev_Pop_Fields>,
+	) => null | string;
+	tenants_stddev_samp_fields?: (
+		data: WithTypename<Tenants_Stddev_Samp_Fields>,
+	) => null | string;
+	tenants_sum_fields?: (
+		data: WithTypename<Tenants_Sum_Fields>,
+	) => null | string;
+	tenants_var_pop_fields?: (
+		data: WithTypename<Tenants_Var_Pop_Fields>,
+	) => null | string;
+	tenants_var_samp_fields?: (
+		data: WithTypename<Tenants_Var_Samp_Fields>,
+	) => null | string;
+	tenants_variance_fields?: (
+		data: WithTypename<Tenants_Variance_Fields>,
+	) => null | string;
+	transactions?: (data: WithTypename<Transactions>) => null | string;
+	transactions_aggregate?: (
+		data: WithTypename<Transactions_Aggregate>,
+	) => null | string;
+	transactions_aggregate_fields?: (
+		data: WithTypename<Transactions_Aggregate_Fields>,
+	) => null | string;
+	transactions_avg_fields?: (
+		data: WithTypename<Transactions_Avg_Fields>,
+	) => null | string;
+	transactions_max_fields?: (
+		data: WithTypename<Transactions_Max_Fields>,
+	) => null | string;
+	transactions_min_fields?: (
+		data: WithTypename<Transactions_Min_Fields>,
+	) => null | string;
+	transactions_mutation_response?: (
+		data: WithTypename<Transactions_Mutation_Response>,
+	) => null | string;
+	transactions_stddev_fields?: (
+		data: WithTypename<Transactions_Stddev_Fields>,
+	) => null | string;
+	transactions_stddev_pop_fields?: (
+		data: WithTypename<Transactions_Stddev_Pop_Fields>,
+	) => null | string;
+	transactions_stddev_samp_fields?: (
+		data: WithTypename<Transactions_Stddev_Samp_Fields>,
+	) => null | string;
+	transactions_sum_fields?: (
+		data: WithTypename<Transactions_Sum_Fields>,
+	) => null | string;
+	transactions_var_pop_fields?: (
+		data: WithTypename<Transactions_Var_Pop_Fields>,
+	) => null | string;
+	transactions_var_samp_fields?: (
+		data: WithTypename<Transactions_Var_Samp_Fields>,
+	) => null | string;
+	transactions_variance_fields?: (
+		data: WithTypename<Transactions_Variance_Fields>,
+	) => null | string;
+	units?: (data: WithTypename<Units>) => null | string;
+	units_aggregate?: (data: WithTypename<Units_Aggregate>) => null | string;
+	units_aggregate_fields?: (
+		data: WithTypename<Units_Aggregate_Fields>,
+	) => null | string;
+	units_avg_fields?: (data: WithTypename<Units_Avg_Fields>) => null | string;
+	units_max_fields?: (data: WithTypename<Units_Max_Fields>) => null | string;
+	units_min_fields?: (data: WithTypename<Units_Min_Fields>) => null | string;
+	units_mutation_response?: (
+		data: WithTypename<Units_Mutation_Response>,
+	) => null | string;
+	units_stddev_fields?: (
+		data: WithTypename<Units_Stddev_Fields>,
+	) => null | string;
+	units_stddev_pop_fields?: (
+		data: WithTypename<Units_Stddev_Pop_Fields>,
+	) => null | string;
+	units_stddev_samp_fields?: (
+		data: WithTypename<Units_Stddev_Samp_Fields>,
+	) => null | string;
+	units_sum_fields?: (data: WithTypename<Units_Sum_Fields>) => null | string;
+	units_var_pop_fields?: (
+		data: WithTypename<Units_Var_Pop_Fields>,
+	) => null | string;
+	units_var_samp_fields?: (
+		data: WithTypename<Units_Var_Samp_Fields>,
+	) => null | string;
+	units_variance_fields?: (
+		data: WithTypename<Units_Variance_Fields>,
+	) => null | string;
+	users?: (data: WithTypename<Users>) => null | string;
+	users_aggregate?: (data: WithTypename<Users_Aggregate>) => null | string;
+	users_aggregate_fields?: (
+		data: WithTypename<Users_Aggregate_Fields>,
+	) => null | string;
+	users_avg_fields?: (data: WithTypename<Users_Avg_Fields>) => null | string;
+	users_max_fields?: (data: WithTypename<Users_Max_Fields>) => null | string;
+	users_min_fields?: (data: WithTypename<Users_Min_Fields>) => null | string;
+	users_mutation_response?: (
+		data: WithTypename<Users_Mutation_Response>,
+	) => null | string;
+	users_stddev_fields?: (
+		data: WithTypename<Users_Stddev_Fields>,
+	) => null | string;
+	users_stddev_pop_fields?: (
+		data: WithTypename<Users_Stddev_Pop_Fields>,
+	) => null | string;
+	users_stddev_samp_fields?: (
+		data: WithTypename<Users_Stddev_Samp_Fields>,
+	) => null | string;
+	users_sum_fields?: (data: WithTypename<Users_Sum_Fields>) => null | string;
+	users_var_pop_fields?: (
+		data: WithTypename<Users_Var_Pop_Fields>,
+	) => null | string;
+	users_var_samp_fields?: (
+		data: WithTypename<Users_Var_Samp_Fields>,
+	) => null | string;
+	users_variance_fields?: (
+		data: WithTypename<Users_Variance_Fields>,
+	) => null | string;
+};
+
+export type GraphCacheResolvers = {
+	query_root?: {
+		clients?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootClientsArgs,
+			Array<WithTypename<Clients> | string>
+		>;
+		clients_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootClients_AggregateArgs,
+			WithTypename<Clients_Aggregate> | string
+		>;
+		clients_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootClients_By_PkArgs,
+			WithTypename<Clients> | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		expenses_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpenses_By_PkArgs,
+			WithTypename<Expenses> | string
+		>;
+		expenses_types?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpenses_TypesArgs,
+			Array<WithTypename<Expenses_Types> | string>
+		>;
+		expenses_types_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpenses_Types_AggregateArgs,
+			WithTypename<Expenses_Types_Aggregate> | string
+		>;
+		expenses_types_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootExpenses_Types_By_PkArgs,
+			WithTypename<Expenses_Types> | string
+		>;
+		leases?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootLeasesArgs,
+			Array<WithTypename<Leases> | string>
+		>;
+		leases_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootLeases_AggregateArgs,
+			WithTypename<Leases_Aggregate> | string
+		>;
+		leases_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootLeases_By_PkArgs,
+			WithTypename<Leases> | string
+		>;
+		listings?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootListingsArgs,
+			Array<WithTypename<Listings> | string>
+		>;
+		listings_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootListings_AggregateArgs,
+			WithTypename<Listings_Aggregate> | string
+		>;
+		listings_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootListings_By_PkArgs,
+			WithTypename<Listings> | string
+		>;
+		maintenance_orders?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootMaintenance_OrdersArgs,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+		maintenance_orders_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootMaintenance_Orders_AggregateArgs,
+			WithTypename<Maintenance_Orders_Aggregate> | string
+		>;
+		maintenance_orders_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootMaintenance_Orders_By_PkArgs,
+			WithTypename<Maintenance_Orders> | string
+		>;
+		properties?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootPropertiesArgs,
+			Array<WithTypename<Properties> | string>
+		>;
+		properties_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootProperties_AggregateArgs,
+			WithTypename<Properties_Aggregate> | string
+		>;
+		properties_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootProperties_By_PkArgs,
+			WithTypename<Properties> | string
+		>;
+		tenants?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTenantsArgs,
+			Array<WithTypename<Tenants> | string>
+		>;
+		tenants_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTenants_AggregateArgs,
+			WithTypename<Tenants_Aggregate> | string
+		>;
+		tenants_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTenants_By_PkArgs,
+			WithTypename<Tenants> | string
+		>;
+		transactions?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTransactionsArgs,
+			Array<WithTypename<Transactions> | string>
+		>;
+		transactions_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTransactions_AggregateArgs,
+			WithTypename<Transactions_Aggregate> | string
+		>;
+		transactions_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootTransactions_By_PkArgs,
+			WithTypename<Transactions> | string
+		>;
+		units?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUnitsArgs,
+			Array<WithTypename<Units> | string>
+		>;
+		units_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUnits_AggregateArgs,
+			WithTypename<Units_Aggregate> | string
+		>;
+		units_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUnits_By_PkArgs,
+			WithTypename<Units> | string
+		>;
+		users?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUsersArgs,
+			Array<WithTypename<Users> | string>
+		>;
+		users_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUsers_AggregateArgs,
+			WithTypename<Users_Aggregate> | string
+		>;
+		users_by_pk?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootUsers_By_PkArgs,
+			WithTypename<Users> | string
+		>;
+	};
+	clients?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		is_active?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		maintenance_orders?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsMaintenance_OrdersArgs,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+		maintenance_orders_aggregate?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsMaintenance_Orders_AggregateArgs,
+			WithTypename<Maintenance_Orders_Aggregate> | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		properties?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsPropertiesArgs,
+			Array<WithTypename<Properties> | string>
+		>;
+		properties_aggregate?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsProperties_AggregateArgs,
+			WithTypename<Properties_Aggregate> | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		users?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsUsersArgs,
+			Array<WithTypename<Users> | string>
+		>;
+		users_aggregate?: GraphCacheResolver<
+			WithTypename<Clients>,
+			ClientsUsers_AggregateArgs,
+			WithTypename<Users_Aggregate> | string
+		>;
+	};
+	clients_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate>,
+			Record<string, never>,
+			WithTypename<Clients_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Clients> | string>
+		>;
+	};
+	clients_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Clients_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Clients_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Clients_Variance_Fields> | string
+		>;
+	};
+	clients_avg_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_max_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	clients_min_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	clients_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Clients_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Clients_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Clients> | string>
+		>;
+	};
+	clients_stddev_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_stddev_pop_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_stddev_samp_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_sum_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Sum_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	clients_var_pop_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_var_samp_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	clients_variance_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Clients_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Clients_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		category?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Expenses_Types_Enum | string
+		>;
+		client?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			WithTypename<Clients> | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		date_post?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		expenses_type?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			WithTypename<Expenses_Types> | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		maintenance_order?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders> | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		property?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			WithTypename<Properties> | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			WithTypename<Units> | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	expenses_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate>,
+			Record<string, never>,
+			WithTypename<Expenses_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Expenses> | string>
+		>;
+	};
+	expenses_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Expenses_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Expenses_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Variance_Fields> | string
+		>;
+	};
+	expenses_avg_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_max_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		date_post?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	expenses_min_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		date_post?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	expenses_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Expenses_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Expenses_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Expenses> | string>
+		>;
+	};
+	expenses_stddev_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_stddev_pop_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_stddev_samp_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_sum_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	expenses_types?: {
+		description?: GraphCacheResolver<
+			WithTypename<Expenses_Types>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Expenses_Types>,
+			Expenses_TypesExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Expenses_Types>,
+			Expenses_TypesExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		value?: GraphCacheResolver<
+			WithTypename<Expenses_Types>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	expenses_types_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Aggregate>,
+			Record<string, never>,
+			WithTypename<Expenses_Types_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Expenses_Types> | string>
+		>;
+	};
+	expenses_types_aggregate_fields?: {
+		count?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Aggregate_Fields>,
+			Expenses_Types_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Types_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Expenses_Types_Min_Fields> | string
+		>;
+	};
+	expenses_types_max_fields?: {
+		description?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		value?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	expenses_types_min_fields?: {
+		description?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		value?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	expenses_types_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Expenses_Types_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Expenses_Types> | string>
+		>;
+	};
+	expenses_var_pop_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_var_samp_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	expenses_variance_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		maintenance_order_id?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Expenses_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		end_date?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		is_expired?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		is_signed?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		license?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		start_date?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		tenant?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			WithTypename<Tenants> | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		transactions?: GraphCacheResolver<
+			WithTypename<Leases>,
+			LeasesTransactionsArgs,
+			Array<WithTypename<Transactions> | string>
+		>;
+		transactions_aggregate?: GraphCacheResolver<
+			WithTypename<Leases>,
+			LeasesTransactions_AggregateArgs,
+			WithTypename<Transactions_Aggregate> | string
+		>;
+		unit?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			WithTypename<Units> | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	leases_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate>,
+			Record<string, never>,
+			WithTypename<Leases_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Leases> | string>
+		>;
+	};
+	leases_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Leases_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Leases_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Leases_Variance_Fields> | string
+		>;
+	};
+	leases_avg_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_max_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		end_date?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		license?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		start_date?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	leases_min_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		end_date?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		license?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		start_date?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	leases_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Leases_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Leases_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Leases> | string>
+		>;
+	};
+	leases_stddev_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_stddev_pop_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_stddev_samp_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_sum_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	leases_var_pop_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_var_samp_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	leases_variance_fields?: {
+		deposit?: GraphCacheResolver<
+			WithTypename<Leases_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Leases_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		monthly_rent?: GraphCacheResolver<
+			WithTypename<Leases_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Leases_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Leases_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings?: {
+		available_on?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		is_active?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		lease_length?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			WithTypename<Units> | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	listings_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate>,
+			Record<string, never>,
+			WithTypename<Listings_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Listings> | string>
+		>;
+	};
+	listings_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Listings_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Listings_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Listings_Variance_Fields> | string
+		>;
+	};
+	listings_avg_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_max_fields?: {
+		available_on?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		lease_length?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	listings_min_fields?: {
+		available_on?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		lease_length?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	listings_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Listings_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Listings_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Listings> | string>
+		>;
+	};
+	listings_stddev_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_stddev_pop_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_stddev_samp_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_sum_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	listings_var_pop_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_var_samp_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	listings_variance_fields?: {
+		id?: GraphCacheResolver<
+			WithTypename<Listings_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Listings_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders?: {
+		client?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			WithTypename<Clients> | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		completed_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Maintenance_OrdersExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Maintenance_OrdersExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			WithTypename<Properties> | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		status?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			WithTypename<Tenants> | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			WithTypename<Units> | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	maintenance_orders_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+	};
+	maintenance_orders_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Maintenance_Orders_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Maintenance_Orders_Variance_Fields> | string
+		>;
+	};
+	maintenance_orders_avg_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_max_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		completed_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		status?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	maintenance_orders_min_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		completed_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		description?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		status?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		title?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	maintenance_orders_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+	};
+	maintenance_orders_stddev_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_stddev_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_stddev_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_sum_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	maintenance_orders_var_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_var_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	maintenance_orders_variance_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		unit_id?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties?: {
+		area?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		avenue?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		block?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		client?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			WithTypename<Clients> | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		coordinates?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['point'] | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		maintenance_orders?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesMaintenance_OrdersArgs,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+		maintenance_orders_aggregate?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesMaintenance_Orders_AggregateArgs,
+			WithTypename<Maintenance_Orders_Aggregate> | string
+		>;
+		number?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		street?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		units?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesUnitsArgs,
+			Array<WithTypename<Units> | string>
+		>;
+		units_aggregate?: GraphCacheResolver<
+			WithTypename<Properties>,
+			PropertiesUnits_AggregateArgs,
+			WithTypename<Units_Aggregate> | string
+		>;
+	};
+	properties_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate>,
+			Record<string, never>,
+			WithTypename<Properties_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Properties> | string>
+		>;
+	};
+	properties_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Properties_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Properties_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Properties_Variance_Fields> | string
+		>;
+	};
+	properties_avg_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_max_fields?: {
+		area?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		avenue?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		block?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		number?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		street?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	properties_min_fields?: {
+		area?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		avenue?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		block?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		number?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		street?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	properties_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Properties_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Properties_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Properties> | string>
+		>;
+	};
+	properties_stddev_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_stddev_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_stddev_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_sum_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	properties_var_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_var_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	properties_variance_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Properties_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Properties_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		dob?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		leases?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			TenantsLeasesArgs,
+			Array<WithTypename<Leases> | string>
+		>;
+		leases_aggregate?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			TenantsLeases_AggregateArgs,
+			WithTypename<Leases_Aggregate> | string
+		>;
+		maintenance_orders?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			TenantsMaintenance_OrdersArgs,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+		maintenance_orders_aggregate?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			TenantsMaintenance_Orders_AggregateArgs,
+			WithTypename<Maintenance_Orders_Aggregate> | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		user?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			WithTypename<Users> | string
+		>;
+	};
+	tenants_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate>,
+			Record<string, never>,
+			WithTypename<Tenants_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Tenants> | string>
+		>;
+	};
+	tenants_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Tenants_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Tenants_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Tenants_Variance_Fields> | string
+		>;
+	};
+	tenants_avg_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_max_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		dob?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	tenants_min_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		dob?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		first_name?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_name?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		second_name?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		third_name?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	tenants_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Tenants_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Tenants_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Tenants> | string>
+		>;
+	};
+	tenants_stddev_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_stddev_pop_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_stddev_samp_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_sum_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Sum_Fields>,
+			Record<string, never>,
+			Scalars['bigint'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	tenants_var_pop_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_var_samp_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	tenants_variance_fields?: {
+		civilid?: GraphCacheResolver<
+			WithTypename<Tenants_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Tenants_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		due_date?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		is_paid?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		lease?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			WithTypename<Leases> | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		receipt_url?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	transactions_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate>,
+			Record<string, never>,
+			WithTypename<Transactions_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Transactions> | string>
+		>;
+	};
+	transactions_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Transactions_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Transactions_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Transactions_Variance_Fields> | string
+		>;
+	};
+	transactions_avg_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_max_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		due_date?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		receipt_url?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	transactions_min_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		due_date?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		memo?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		receipt_url?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	transactions_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Transactions_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Transactions_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Transactions> | string>
+		>;
+	};
+	transactions_stddev_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_stddev_pop_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_stddev_samp_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_sum_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	transactions_var_pop_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_var_samp_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	transactions_variance_fields?: {
+		amount?: GraphCacheResolver<
+			WithTypename<Transactions_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Transactions_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		lease_id?: GraphCacheResolver<
+			WithTypename<Transactions_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		expenses?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsExpensesArgs,
+			Array<WithTypename<Expenses> | string>
+		>;
+		expenses_aggregate?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsExpenses_AggregateArgs,
+			WithTypename<Expenses_Aggregate> | string
+		>;
+		floor?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		is_vacant?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
+		leases?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsLeasesArgs,
+			Array<WithTypename<Leases> | string>
+		>;
+		leases_aggregate?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsLeases_AggregateArgs,
+			WithTypename<Leases_Aggregate> | string
+		>;
+		listings?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsListingsArgs,
+			Array<WithTypename<Listings> | string>
+		>;
+		listings_aggregate?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsListings_AggregateArgs,
+			WithTypename<Listings_Aggregate> | string
+		>;
+		maintenance_orders?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsMaintenance_OrdersArgs,
+			Array<WithTypename<Maintenance_Orders> | string>
+		>;
+		maintenance_orders_aggregate?: GraphCacheResolver<
+			WithTypename<Units>,
+			UnitsMaintenance_Orders_AggregateArgs,
+			WithTypename<Maintenance_Orders_Aggregate> | string
+		>;
+		property?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			WithTypename<Properties> | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		type?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_number?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		usage?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	units_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Units_Aggregate>,
+			Record<string, never>,
+			WithTypename<Units_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Units_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Units> | string>
+		>;
+	};
+	units_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Units_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Units_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Units_Variance_Fields> | string
+		>;
+	};
+	units_avg_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_max_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		floor?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		type?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_number?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		usage?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	units_min_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		floor?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		type?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		unit_number?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		usage?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+	};
+	units_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Units_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Units_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Units> | string>
+		>;
+	};
+	units_stddev_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_stddev_pop_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_stddev_samp_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_sum_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['numeric'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	units_var_pop_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_var_samp_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	units_variance_fields?: {
+		bath?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		bed?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		property_id?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		rent_market?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		size?: GraphCacheResolver<
+			WithTypename<Units_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users?: {
+		client?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			WithTypename<Clients> | string
+		>;
+		client_id?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_seen?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			WithTypename<Tenants> | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	users_aggregate?: {
+		aggregate?: GraphCacheResolver<
+			WithTypename<Users_Aggregate>,
+			Record<string, never>,
+			WithTypename<Users_Aggregate_Fields> | string
+		>;
+		nodes?: GraphCacheResolver<
+			WithTypename<Users_Aggregate>,
+			Record<string, never>,
+			Array<WithTypename<Users> | string>
+		>;
+	};
+	users_aggregate_fields?: {
+		avg?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Avg_Fields> | string
+		>;
+		count?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Users_Aggregate_FieldsCountArgs,
+			Scalars['Int'] | string
+		>;
+		max?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Max_Fields> | string
+		>;
+		min?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Min_Fields> | string
+		>;
+		stddev?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Stddev_Fields> | string
+		>;
+		stddev_pop?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Stddev_Pop_Fields> | string
+		>;
+		stddev_samp?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Stddev_Samp_Fields> | string
+		>;
+		sum?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Sum_Fields> | string
+		>;
+		var_pop?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Var_Pop_Fields> | string
+		>;
+		var_samp?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Var_Samp_Fields> | string
+		>;
+		variance?: GraphCacheResolver<
+			WithTypename<Users_Aggregate_Fields>,
+			Record<string, never>,
+			WithTypename<Users_Variance_Fields> | string
+		>;
+	};
+	users_avg_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Avg_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_max_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_seen?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	users_min_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['date'] | string
+		>;
+		email?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		last_seen?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		phone?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	users_mutation_response?: {
+		affected_rows?: GraphCacheResolver<
+			WithTypename<Users_Mutation_Response>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		returning?: GraphCacheResolver<
+			WithTypename<Users_Mutation_Response>,
+			Record<string, never>,
+			Array<WithTypename<Users> | string>
+		>;
+	};
+	users_stddev_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_stddev_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_stddev_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Stddev_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_sum_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Sum_Fields>,
+			Record<string, never>,
+			Scalars['Int'] | string
+		>;
+	};
+	users_var_pop_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Var_Pop_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_var_samp_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Var_Samp_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+	users_variance_fields?: {
+		client_id?: GraphCacheResolver<
+			WithTypename<Users_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		id?: GraphCacheResolver<
+			WithTypename<Users_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+		tenant_id?: GraphCacheResolver<
+			WithTypename<Users_Variance_Fields>,
+			Record<string, never>,
+			Scalars['Float'] | string
+		>;
+	};
+};
+
+export type GraphCacheOptimisticUpdaters = {
+	delete_clients?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_ClientsArgs,
+		Maybe<WithTypename<Clients_Mutation_Response>>
+	>;
+	delete_clients_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Clients_By_PkArgs,
+		Maybe<WithTypename<Clients>>
+	>;
+	delete_expenses?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_ExpensesArgs,
+		Maybe<WithTypename<Expenses_Mutation_Response>>
+	>;
+	delete_expenses_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Expenses_By_PkArgs,
+		Maybe<WithTypename<Expenses>>
+	>;
+	delete_expenses_types?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Expenses_TypesArgs,
+		Maybe<WithTypename<Expenses_Types_Mutation_Response>>
+	>;
+	delete_expenses_types_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Expenses_Types_By_PkArgs,
+		Maybe<WithTypename<Expenses_Types>>
+	>;
+	delete_leases?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_LeasesArgs,
+		Maybe<WithTypename<Leases_Mutation_Response>>
+	>;
+	delete_leases_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Leases_By_PkArgs,
+		Maybe<WithTypename<Leases>>
+	>;
+	delete_listings?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_ListingsArgs,
+		Maybe<WithTypename<Listings_Mutation_Response>>
+	>;
+	delete_listings_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Listings_By_PkArgs,
+		Maybe<WithTypename<Listings>>
+	>;
+	delete_maintenance_orders?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Maintenance_OrdersArgs,
+		Maybe<WithTypename<Maintenance_Orders_Mutation_Response>>
+	>;
+	delete_maintenance_orders_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Maintenance_Orders_By_PkArgs,
+		Maybe<WithTypename<Maintenance_Orders>>
+	>;
+	delete_properties?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_PropertiesArgs,
+		Maybe<WithTypename<Properties_Mutation_Response>>
+	>;
+	delete_properties_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Properties_By_PkArgs,
+		Maybe<WithTypename<Properties>>
+	>;
+	delete_tenants?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_TenantsArgs,
+		Maybe<WithTypename<Tenants_Mutation_Response>>
+	>;
+	delete_tenants_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Tenants_By_PkArgs,
+		Maybe<WithTypename<Tenants>>
+	>;
+	delete_transactions?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_TransactionsArgs,
+		Maybe<WithTypename<Transactions_Mutation_Response>>
+	>;
+	delete_transactions_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Transactions_By_PkArgs,
+		Maybe<WithTypename<Transactions>>
+	>;
+	delete_units?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_UnitsArgs,
+		Maybe<WithTypename<Units_Mutation_Response>>
+	>;
+	delete_units_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Units_By_PkArgs,
+		Maybe<WithTypename<Units>>
+	>;
+	delete_users?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_UsersArgs,
+		Maybe<WithTypename<Users_Mutation_Response>>
+	>;
+	delete_users_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootDelete_Users_By_PkArgs,
+		Maybe<WithTypename<Users>>
+	>;
+	insert_clients?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_ClientsArgs,
+		Maybe<WithTypename<Clients_Mutation_Response>>
+	>;
+	insert_clients_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Clients_OneArgs,
+		Maybe<WithTypename<Clients>>
+	>;
+	insert_expenses?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_ExpensesArgs,
+		Maybe<WithTypename<Expenses_Mutation_Response>>
+	>;
+	insert_expenses_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Expenses_OneArgs,
+		Maybe<WithTypename<Expenses>>
+	>;
+	insert_expenses_types?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Expenses_TypesArgs,
+		Maybe<WithTypename<Expenses_Types_Mutation_Response>>
+	>;
+	insert_expenses_types_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Expenses_Types_OneArgs,
+		Maybe<WithTypename<Expenses_Types>>
+	>;
+	insert_leases?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_LeasesArgs,
+		Maybe<WithTypename<Leases_Mutation_Response>>
+	>;
+	insert_leases_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Leases_OneArgs,
+		Maybe<WithTypename<Leases>>
+	>;
+	insert_listings?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_ListingsArgs,
+		Maybe<WithTypename<Listings_Mutation_Response>>
+	>;
+	insert_listings_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Listings_OneArgs,
+		Maybe<WithTypename<Listings>>
+	>;
+	insert_maintenance_orders?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Maintenance_OrdersArgs,
+		Maybe<WithTypename<Maintenance_Orders_Mutation_Response>>
+	>;
+	insert_maintenance_orders_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Maintenance_Orders_OneArgs,
+		Maybe<WithTypename<Maintenance_Orders>>
+	>;
+	insert_properties?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_PropertiesArgs,
+		Maybe<WithTypename<Properties_Mutation_Response>>
+	>;
+	insert_properties_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Properties_OneArgs,
+		Maybe<WithTypename<Properties>>
+	>;
+	insert_tenants?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_TenantsArgs,
+		Maybe<WithTypename<Tenants_Mutation_Response>>
+	>;
+	insert_tenants_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Tenants_OneArgs,
+		Maybe<WithTypename<Tenants>>
+	>;
+	insert_transactions?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_TransactionsArgs,
+		Maybe<WithTypename<Transactions_Mutation_Response>>
+	>;
+	insert_transactions_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Transactions_OneArgs,
+		Maybe<WithTypename<Transactions>>
+	>;
+	insert_units?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_UnitsArgs,
+		Maybe<WithTypename<Units_Mutation_Response>>
+	>;
+	insert_units_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Units_OneArgs,
+		Maybe<WithTypename<Units>>
+	>;
+	insert_users?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_UsersArgs,
+		Maybe<WithTypename<Users_Mutation_Response>>
+	>;
+	insert_users_one?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootInsert_Users_OneArgs,
+		Maybe<WithTypename<Users>>
+	>;
+	update_clients?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_ClientsArgs,
+		Maybe<WithTypename<Clients_Mutation_Response>>
+	>;
+	update_clients_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Clients_By_PkArgs,
+		Maybe<WithTypename<Clients>>
+	>;
+	update_expenses?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_ExpensesArgs,
+		Maybe<WithTypename<Expenses_Mutation_Response>>
+	>;
+	update_expenses_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Expenses_By_PkArgs,
+		Maybe<WithTypename<Expenses>>
+	>;
+	update_expenses_types?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Expenses_TypesArgs,
+		Maybe<WithTypename<Expenses_Types_Mutation_Response>>
+	>;
+	update_expenses_types_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Expenses_Types_By_PkArgs,
+		Maybe<WithTypename<Expenses_Types>>
+	>;
+	update_leases?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_LeasesArgs,
+		Maybe<WithTypename<Leases_Mutation_Response>>
+	>;
+	update_leases_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Leases_By_PkArgs,
+		Maybe<WithTypename<Leases>>
+	>;
+	update_listings?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_ListingsArgs,
+		Maybe<WithTypename<Listings_Mutation_Response>>
+	>;
+	update_listings_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Listings_By_PkArgs,
+		Maybe<WithTypename<Listings>>
+	>;
+	update_maintenance_orders?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Maintenance_OrdersArgs,
+		Maybe<WithTypename<Maintenance_Orders_Mutation_Response>>
+	>;
+	update_maintenance_orders_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Maintenance_Orders_By_PkArgs,
+		Maybe<WithTypename<Maintenance_Orders>>
+	>;
+	update_properties?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_PropertiesArgs,
+		Maybe<WithTypename<Properties_Mutation_Response>>
+	>;
+	update_properties_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Properties_By_PkArgs,
+		Maybe<WithTypename<Properties>>
+	>;
+	update_tenants?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_TenantsArgs,
+		Maybe<WithTypename<Tenants_Mutation_Response>>
+	>;
+	update_tenants_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Tenants_By_PkArgs,
+		Maybe<WithTypename<Tenants>>
+	>;
+	update_transactions?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_TransactionsArgs,
+		Maybe<WithTypename<Transactions_Mutation_Response>>
+	>;
+	update_transactions_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Transactions_By_PkArgs,
+		Maybe<WithTypename<Transactions>>
+	>;
+	update_units?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_UnitsArgs,
+		Maybe<WithTypename<Units_Mutation_Response>>
+	>;
+	update_units_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Units_By_PkArgs,
+		Maybe<WithTypename<Units>>
+	>;
+	update_users?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_UsersArgs,
+		Maybe<WithTypename<Users_Mutation_Response>>
+	>;
+	update_users_by_pk?: GraphCacheOptimisticMutationResolver<
+		Mutation_RootUpdate_Users_By_PkArgs,
+		Maybe<WithTypename<Users>>
+	>;
+};
+
+export type GraphCacheUpdaters = {
+	Mutation?: {
+		delete_clients?: GraphCacheUpdateResolver<
+			{ delete_clients: Maybe<WithTypename<Clients_Mutation_Response>> },
+			Mutation_RootDelete_ClientsArgs
+		>;
+		delete_clients_by_pk?: GraphCacheUpdateResolver<
+			{ delete_clients_by_pk: Maybe<WithTypename<Clients>> },
+			Mutation_RootDelete_Clients_By_PkArgs
+		>;
+		delete_expenses?: GraphCacheUpdateResolver<
+			{ delete_expenses: Maybe<WithTypename<Expenses_Mutation_Response>> },
+			Mutation_RootDelete_ExpensesArgs
+		>;
+		delete_expenses_by_pk?: GraphCacheUpdateResolver<
+			{ delete_expenses_by_pk: Maybe<WithTypename<Expenses>> },
+			Mutation_RootDelete_Expenses_By_PkArgs
+		>;
+		delete_expenses_types?: GraphCacheUpdateResolver<
+			{
+				delete_expenses_types: Maybe<
+					WithTypename<Expenses_Types_Mutation_Response>
+				>;
+			},
+			Mutation_RootDelete_Expenses_TypesArgs
+		>;
+		delete_expenses_types_by_pk?: GraphCacheUpdateResolver<
+			{ delete_expenses_types_by_pk: Maybe<WithTypename<Expenses_Types>> },
+			Mutation_RootDelete_Expenses_Types_By_PkArgs
+		>;
+		delete_leases?: GraphCacheUpdateResolver<
+			{ delete_leases: Maybe<WithTypename<Leases_Mutation_Response>> },
+			Mutation_RootDelete_LeasesArgs
+		>;
+		delete_leases_by_pk?: GraphCacheUpdateResolver<
+			{ delete_leases_by_pk: Maybe<WithTypename<Leases>> },
+			Mutation_RootDelete_Leases_By_PkArgs
+		>;
+		delete_listings?: GraphCacheUpdateResolver<
+			{ delete_listings: Maybe<WithTypename<Listings_Mutation_Response>> },
+			Mutation_RootDelete_ListingsArgs
+		>;
+		delete_listings_by_pk?: GraphCacheUpdateResolver<
+			{ delete_listings_by_pk: Maybe<WithTypename<Listings>> },
+			Mutation_RootDelete_Listings_By_PkArgs
+		>;
+		delete_maintenance_orders?: GraphCacheUpdateResolver<
+			{
+				delete_maintenance_orders: Maybe<
+					WithTypename<Maintenance_Orders_Mutation_Response>
+				>;
+			},
+			Mutation_RootDelete_Maintenance_OrdersArgs
+		>;
+		delete_maintenance_orders_by_pk?: GraphCacheUpdateResolver<
+			{
+				delete_maintenance_orders_by_pk: Maybe<
+					WithTypename<Maintenance_Orders>
+				>;
+			},
+			Mutation_RootDelete_Maintenance_Orders_By_PkArgs
+		>;
+		delete_properties?: GraphCacheUpdateResolver<
+			{ delete_properties: Maybe<WithTypename<Properties_Mutation_Response>> },
+			Mutation_RootDelete_PropertiesArgs
+		>;
+		delete_properties_by_pk?: GraphCacheUpdateResolver<
+			{ delete_properties_by_pk: Maybe<WithTypename<Properties>> },
+			Mutation_RootDelete_Properties_By_PkArgs
+		>;
+		delete_tenants?: GraphCacheUpdateResolver<
+			{ delete_tenants: Maybe<WithTypename<Tenants_Mutation_Response>> },
+			Mutation_RootDelete_TenantsArgs
+		>;
+		delete_tenants_by_pk?: GraphCacheUpdateResolver<
+			{ delete_tenants_by_pk: Maybe<WithTypename<Tenants>> },
+			Mutation_RootDelete_Tenants_By_PkArgs
+		>;
+		delete_transactions?: GraphCacheUpdateResolver<
+			{
+				delete_transactions: Maybe<
+					WithTypename<Transactions_Mutation_Response>
+				>;
+			},
+			Mutation_RootDelete_TransactionsArgs
+		>;
+		delete_transactions_by_pk?: GraphCacheUpdateResolver<
+			{ delete_transactions_by_pk: Maybe<WithTypename<Transactions>> },
+			Mutation_RootDelete_Transactions_By_PkArgs
+		>;
+		delete_units?: GraphCacheUpdateResolver<
+			{ delete_units: Maybe<WithTypename<Units_Mutation_Response>> },
+			Mutation_RootDelete_UnitsArgs
+		>;
+		delete_units_by_pk?: GraphCacheUpdateResolver<
+			{ delete_units_by_pk: Maybe<WithTypename<Units>> },
+			Mutation_RootDelete_Units_By_PkArgs
+		>;
+		delete_users?: GraphCacheUpdateResolver<
+			{ delete_users: Maybe<WithTypename<Users_Mutation_Response>> },
+			Mutation_RootDelete_UsersArgs
+		>;
+		delete_users_by_pk?: GraphCacheUpdateResolver<
+			{ delete_users_by_pk: Maybe<WithTypename<Users>> },
+			Mutation_RootDelete_Users_By_PkArgs
+		>;
+		insert_clients?: GraphCacheUpdateResolver<
+			{ insert_clients: Maybe<WithTypename<Clients_Mutation_Response>> },
+			Mutation_RootInsert_ClientsArgs
+		>;
+		insert_clients_one?: GraphCacheUpdateResolver<
+			{ insert_clients_one: Maybe<WithTypename<Clients>> },
+			Mutation_RootInsert_Clients_OneArgs
+		>;
+		insert_expenses?: GraphCacheUpdateResolver<
+			{ insert_expenses: Maybe<WithTypename<Expenses_Mutation_Response>> },
+			Mutation_RootInsert_ExpensesArgs
+		>;
+		insert_expenses_one?: GraphCacheUpdateResolver<
+			{ insert_expenses_one: Maybe<WithTypename<Expenses>> },
+			Mutation_RootInsert_Expenses_OneArgs
+		>;
+		insert_expenses_types?: GraphCacheUpdateResolver<
+			{
+				insert_expenses_types: Maybe<
+					WithTypename<Expenses_Types_Mutation_Response>
+				>;
+			},
+			Mutation_RootInsert_Expenses_TypesArgs
+		>;
+		insert_expenses_types_one?: GraphCacheUpdateResolver<
+			{ insert_expenses_types_one: Maybe<WithTypename<Expenses_Types>> },
+			Mutation_RootInsert_Expenses_Types_OneArgs
+		>;
+		insert_leases?: GraphCacheUpdateResolver<
+			{ insert_leases: Maybe<WithTypename<Leases_Mutation_Response>> },
+			Mutation_RootInsert_LeasesArgs
+		>;
+		insert_leases_one?: GraphCacheUpdateResolver<
+			{ insert_leases_one: Maybe<WithTypename<Leases>> },
+			Mutation_RootInsert_Leases_OneArgs
+		>;
+		insert_listings?: GraphCacheUpdateResolver<
+			{ insert_listings: Maybe<WithTypename<Listings_Mutation_Response>> },
+			Mutation_RootInsert_ListingsArgs
+		>;
+		insert_listings_one?: GraphCacheUpdateResolver<
+			{ insert_listings_one: Maybe<WithTypename<Listings>> },
+			Mutation_RootInsert_Listings_OneArgs
+		>;
+		insert_maintenance_orders?: GraphCacheUpdateResolver<
+			{
+				insert_maintenance_orders: Maybe<
+					WithTypename<Maintenance_Orders_Mutation_Response>
+				>;
+			},
+			Mutation_RootInsert_Maintenance_OrdersArgs
+		>;
+		insert_maintenance_orders_one?: GraphCacheUpdateResolver<
+			{
+				insert_maintenance_orders_one: Maybe<WithTypename<Maintenance_Orders>>;
+			},
+			Mutation_RootInsert_Maintenance_Orders_OneArgs
+		>;
+		insert_properties?: GraphCacheUpdateResolver<
+			{ insert_properties: Maybe<WithTypename<Properties_Mutation_Response>> },
+			Mutation_RootInsert_PropertiesArgs
+		>;
+		insert_properties_one?: GraphCacheUpdateResolver<
+			{ insert_properties_one: Maybe<WithTypename<Properties>> },
+			Mutation_RootInsert_Properties_OneArgs
+		>;
+		insert_tenants?: GraphCacheUpdateResolver<
+			{ insert_tenants: Maybe<WithTypename<Tenants_Mutation_Response>> },
+			Mutation_RootInsert_TenantsArgs
+		>;
+		insert_tenants_one?: GraphCacheUpdateResolver<
+			{ insert_tenants_one: Maybe<WithTypename<Tenants>> },
+			Mutation_RootInsert_Tenants_OneArgs
+		>;
+		insert_transactions?: GraphCacheUpdateResolver<
+			{
+				insert_transactions: Maybe<
+					WithTypename<Transactions_Mutation_Response>
+				>;
+			},
+			Mutation_RootInsert_TransactionsArgs
+		>;
+		insert_transactions_one?: GraphCacheUpdateResolver<
+			{ insert_transactions_one: Maybe<WithTypename<Transactions>> },
+			Mutation_RootInsert_Transactions_OneArgs
+		>;
+		insert_units?: GraphCacheUpdateResolver<
+			{ insert_units: Maybe<WithTypename<Units_Mutation_Response>> },
+			Mutation_RootInsert_UnitsArgs
+		>;
+		insert_units_one?: GraphCacheUpdateResolver<
+			{ insert_units_one: Maybe<WithTypename<Units>> },
+			Mutation_RootInsert_Units_OneArgs
+		>;
+		insert_users?: GraphCacheUpdateResolver<
+			{ insert_users: Maybe<WithTypename<Users_Mutation_Response>> },
+			Mutation_RootInsert_UsersArgs
+		>;
+		insert_users_one?: GraphCacheUpdateResolver<
+			{ insert_users_one: Maybe<WithTypename<Users>> },
+			Mutation_RootInsert_Users_OneArgs
+		>;
+		update_clients?: GraphCacheUpdateResolver<
+			{ update_clients: Maybe<WithTypename<Clients_Mutation_Response>> },
+			Mutation_RootUpdate_ClientsArgs
+		>;
+		update_clients_by_pk?: GraphCacheUpdateResolver<
+			{ update_clients_by_pk: Maybe<WithTypename<Clients>> },
+			Mutation_RootUpdate_Clients_By_PkArgs
+		>;
+		update_expenses?: GraphCacheUpdateResolver<
+			{ update_expenses: Maybe<WithTypename<Expenses_Mutation_Response>> },
+			Mutation_RootUpdate_ExpensesArgs
+		>;
+		update_expenses_by_pk?: GraphCacheUpdateResolver<
+			{ update_expenses_by_pk: Maybe<WithTypename<Expenses>> },
+			Mutation_RootUpdate_Expenses_By_PkArgs
+		>;
+		update_expenses_types?: GraphCacheUpdateResolver<
+			{
+				update_expenses_types: Maybe<
+					WithTypename<Expenses_Types_Mutation_Response>
+				>;
+			},
+			Mutation_RootUpdate_Expenses_TypesArgs
+		>;
+		update_expenses_types_by_pk?: GraphCacheUpdateResolver<
+			{ update_expenses_types_by_pk: Maybe<WithTypename<Expenses_Types>> },
+			Mutation_RootUpdate_Expenses_Types_By_PkArgs
+		>;
+		update_leases?: GraphCacheUpdateResolver<
+			{ update_leases: Maybe<WithTypename<Leases_Mutation_Response>> },
+			Mutation_RootUpdate_LeasesArgs
+		>;
+		update_leases_by_pk?: GraphCacheUpdateResolver<
+			{ update_leases_by_pk: Maybe<WithTypename<Leases>> },
+			Mutation_RootUpdate_Leases_By_PkArgs
+		>;
+		update_listings?: GraphCacheUpdateResolver<
+			{ update_listings: Maybe<WithTypename<Listings_Mutation_Response>> },
+			Mutation_RootUpdate_ListingsArgs
+		>;
+		update_listings_by_pk?: GraphCacheUpdateResolver<
+			{ update_listings_by_pk: Maybe<WithTypename<Listings>> },
+			Mutation_RootUpdate_Listings_By_PkArgs
+		>;
+		update_maintenance_orders?: GraphCacheUpdateResolver<
+			{
+				update_maintenance_orders: Maybe<
+					WithTypename<Maintenance_Orders_Mutation_Response>
+				>;
+			},
+			Mutation_RootUpdate_Maintenance_OrdersArgs
+		>;
+		update_maintenance_orders_by_pk?: GraphCacheUpdateResolver<
+			{
+				update_maintenance_orders_by_pk: Maybe<
+					WithTypename<Maintenance_Orders>
+				>;
+			},
+			Mutation_RootUpdate_Maintenance_Orders_By_PkArgs
+		>;
+		update_properties?: GraphCacheUpdateResolver<
+			{ update_properties: Maybe<WithTypename<Properties_Mutation_Response>> },
+			Mutation_RootUpdate_PropertiesArgs
+		>;
+		update_properties_by_pk?: GraphCacheUpdateResolver<
+			{ update_properties_by_pk: Maybe<WithTypename<Properties>> },
+			Mutation_RootUpdate_Properties_By_PkArgs
+		>;
+		update_tenants?: GraphCacheUpdateResolver<
+			{ update_tenants: Maybe<WithTypename<Tenants_Mutation_Response>> },
+			Mutation_RootUpdate_TenantsArgs
+		>;
+		update_tenants_by_pk?: GraphCacheUpdateResolver<
+			{ update_tenants_by_pk: Maybe<WithTypename<Tenants>> },
+			Mutation_RootUpdate_Tenants_By_PkArgs
+		>;
+		update_transactions?: GraphCacheUpdateResolver<
+			{
+				update_transactions: Maybe<
+					WithTypename<Transactions_Mutation_Response>
+				>;
+			},
+			Mutation_RootUpdate_TransactionsArgs
+		>;
+		update_transactions_by_pk?: GraphCacheUpdateResolver<
+			{ update_transactions_by_pk: Maybe<WithTypename<Transactions>> },
+			Mutation_RootUpdate_Transactions_By_PkArgs
+		>;
+		update_units?: GraphCacheUpdateResolver<
+			{ update_units: Maybe<WithTypename<Units_Mutation_Response>> },
+			Mutation_RootUpdate_UnitsArgs
+		>;
+		update_units_by_pk?: GraphCacheUpdateResolver<
+			{ update_units_by_pk: Maybe<WithTypename<Units>> },
+			Mutation_RootUpdate_Units_By_PkArgs
+		>;
+		update_users?: GraphCacheUpdateResolver<
+			{ update_users: Maybe<WithTypename<Users_Mutation_Response>> },
+			Mutation_RootUpdate_UsersArgs
+		>;
+		update_users_by_pk?: GraphCacheUpdateResolver<
+			{ update_users_by_pk: Maybe<WithTypename<Users>> },
+			Mutation_RootUpdate_Users_By_PkArgs
+		>;
+	};
+	Subscription?: {
+		clients?: GraphCacheUpdateResolver<
+			{ clients: Array<WithTypename<Clients>> },
+			Subscription_RootClientsArgs
+		>;
+		clients_aggregate?: GraphCacheUpdateResolver<
+			{ clients_aggregate: WithTypename<Clients_Aggregate> },
+			Subscription_RootClients_AggregateArgs
+		>;
+		clients_by_pk?: GraphCacheUpdateResolver<
+			{ clients_by_pk: Maybe<WithTypename<Clients>> },
+			Subscription_RootClients_By_PkArgs
+		>;
+		expenses?: GraphCacheUpdateResolver<
+			{ expenses: Array<WithTypename<Expenses>> },
+			Subscription_RootExpensesArgs
+		>;
+		expenses_aggregate?: GraphCacheUpdateResolver<
+			{ expenses_aggregate: WithTypename<Expenses_Aggregate> },
+			Subscription_RootExpenses_AggregateArgs
+		>;
+		expenses_by_pk?: GraphCacheUpdateResolver<
+			{ expenses_by_pk: Maybe<WithTypename<Expenses>> },
+			Subscription_RootExpenses_By_PkArgs
+		>;
+		expenses_types?: GraphCacheUpdateResolver<
+			{ expenses_types: Array<WithTypename<Expenses_Types>> },
+			Subscription_RootExpenses_TypesArgs
+		>;
+		expenses_types_aggregate?: GraphCacheUpdateResolver<
+			{ expenses_types_aggregate: WithTypename<Expenses_Types_Aggregate> },
+			Subscription_RootExpenses_Types_AggregateArgs
+		>;
+		expenses_types_by_pk?: GraphCacheUpdateResolver<
+			{ expenses_types_by_pk: Maybe<WithTypename<Expenses_Types>> },
+			Subscription_RootExpenses_Types_By_PkArgs
+		>;
+		leases?: GraphCacheUpdateResolver<
+			{ leases: Array<WithTypename<Leases>> },
+			Subscription_RootLeasesArgs
+		>;
+		leases_aggregate?: GraphCacheUpdateResolver<
+			{ leases_aggregate: WithTypename<Leases_Aggregate> },
+			Subscription_RootLeases_AggregateArgs
+		>;
+		leases_by_pk?: GraphCacheUpdateResolver<
+			{ leases_by_pk: Maybe<WithTypename<Leases>> },
+			Subscription_RootLeases_By_PkArgs
+		>;
+		listings?: GraphCacheUpdateResolver<
+			{ listings: Array<WithTypename<Listings>> },
+			Subscription_RootListingsArgs
+		>;
+		listings_aggregate?: GraphCacheUpdateResolver<
+			{ listings_aggregate: WithTypename<Listings_Aggregate> },
+			Subscription_RootListings_AggregateArgs
+		>;
+		listings_by_pk?: GraphCacheUpdateResolver<
+			{ listings_by_pk: Maybe<WithTypename<Listings>> },
+			Subscription_RootListings_By_PkArgs
+		>;
+		maintenance_orders?: GraphCacheUpdateResolver<
+			{ maintenance_orders: Array<WithTypename<Maintenance_Orders>> },
+			Subscription_RootMaintenance_OrdersArgs
+		>;
+		maintenance_orders_aggregate?: GraphCacheUpdateResolver<
+			{
+				maintenance_orders_aggregate: WithTypename<Maintenance_Orders_Aggregate>;
+			},
+			Subscription_RootMaintenance_Orders_AggregateArgs
+		>;
+		maintenance_orders_by_pk?: GraphCacheUpdateResolver<
+			{ maintenance_orders_by_pk: Maybe<WithTypename<Maintenance_Orders>> },
+			Subscription_RootMaintenance_Orders_By_PkArgs
+		>;
+		properties?: GraphCacheUpdateResolver<
+			{ properties: Array<WithTypename<Properties>> },
+			Subscription_RootPropertiesArgs
+		>;
+		properties_aggregate?: GraphCacheUpdateResolver<
+			{ properties_aggregate: WithTypename<Properties_Aggregate> },
+			Subscription_RootProperties_AggregateArgs
+		>;
+		properties_by_pk?: GraphCacheUpdateResolver<
+			{ properties_by_pk: Maybe<WithTypename<Properties>> },
+			Subscription_RootProperties_By_PkArgs
+		>;
+		tenants?: GraphCacheUpdateResolver<
+			{ tenants: Array<WithTypename<Tenants>> },
+			Subscription_RootTenantsArgs
+		>;
+		tenants_aggregate?: GraphCacheUpdateResolver<
+			{ tenants_aggregate: WithTypename<Tenants_Aggregate> },
+			Subscription_RootTenants_AggregateArgs
+		>;
+		tenants_by_pk?: GraphCacheUpdateResolver<
+			{ tenants_by_pk: Maybe<WithTypename<Tenants>> },
+			Subscription_RootTenants_By_PkArgs
+		>;
+		transactions?: GraphCacheUpdateResolver<
+			{ transactions: Array<WithTypename<Transactions>> },
+			Subscription_RootTransactionsArgs
+		>;
+		transactions_aggregate?: GraphCacheUpdateResolver<
+			{ transactions_aggregate: WithTypename<Transactions_Aggregate> },
+			Subscription_RootTransactions_AggregateArgs
+		>;
+		transactions_by_pk?: GraphCacheUpdateResolver<
+			{ transactions_by_pk: Maybe<WithTypename<Transactions>> },
+			Subscription_RootTransactions_By_PkArgs
+		>;
+		units?: GraphCacheUpdateResolver<
+			{ units: Array<WithTypename<Units>> },
+			Subscription_RootUnitsArgs
+		>;
+		units_aggregate?: GraphCacheUpdateResolver<
+			{ units_aggregate: WithTypename<Units_Aggregate> },
+			Subscription_RootUnits_AggregateArgs
+		>;
+		units_by_pk?: GraphCacheUpdateResolver<
+			{ units_by_pk: Maybe<WithTypename<Units>> },
+			Subscription_RootUnits_By_PkArgs
+		>;
+		users?: GraphCacheUpdateResolver<
+			{ users: Array<WithTypename<Users>> },
+			Subscription_RootUsersArgs
+		>;
+		users_aggregate?: GraphCacheUpdateResolver<
+			{ users_aggregate: WithTypename<Users_Aggregate> },
+			Subscription_RootUsers_AggregateArgs
+		>;
+		users_by_pk?: GraphCacheUpdateResolver<
+			{ users_by_pk: Maybe<WithTypename<Users>> },
+			Subscription_RootUsers_By_PkArgs
+		>;
+	};
+};
+
+export type GraphCacheConfig = {
+	schema?: IntrospectionData;
+	updates?: GraphCacheUpdaters;
+	keys?: GraphCacheKeysConfig;
+	optimistic?: GraphCacheOptimisticUpdaters;
+	resolvers?: GraphCacheResolvers;
+	storage?: GraphCacheStorageAdapter;
+};
