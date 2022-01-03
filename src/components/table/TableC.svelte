@@ -60,6 +60,7 @@
 	query(pageQuery);
 </script>
 
+{JSON.stringify($pageQuery)}
 {#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {/if}
