@@ -3,19 +3,24 @@ import cookie from 'cookie';
 
 export const handle: Handle = async ({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
-	console.log(
-		'🚀 ~ file: hooks.ts ~ line 6 ~ consthandle:Handle= ~ cookies',
-		cookies,
-	);
+
 	request.locals.user = cookies.user;
 	request.locals.hasura = cookies.hasura;
 
 	const response = await resolve(request);
 
-	// TODO: samesite=strict?
+	// TODO: samesite=strict? - in prod only?
 	response.headers['set-cookie'] = [
-		cookie.serialize('user', ( request.locals.user as string ) || '', {httpOnly: true, path: '/'}),
-		cookie.serialize('hasura', ( request.locals.hasura as string ) || '', {httpOnly: true, path: '/'}),
+		cookie.serialize('user', (request.locals.user as string) || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+		}),
+		cookie.serialize('hasura', (request.locals.hasura as string) || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+		}),
 	];
 
 	return response;
