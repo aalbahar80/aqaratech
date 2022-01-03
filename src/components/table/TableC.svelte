@@ -12,7 +12,7 @@
 		Pagination,
 		DataTableSkeleton,
 	} from 'carbon-components-svelte';
-	import { order_by } from '$generated/graphql';
+	import type { Order_By } from '$generated/graphql';
 	import type { Field } from '$components/form/Field';
 	import { getContext } from 'svelte';
 	import { key } from '$components/keyyy';
@@ -43,7 +43,12 @@
 	const pageSizes = [10, 25, 100];
 	let pageSize = 10;
 	let pageIndex = 1;
-	let sortingInfo: any = { id: order_by.asc };
+
+	type SortInfo = {
+		[key: string]: Order_By;
+	};
+
+	let sortingInfo: SortInfo = { id: 'asc' };
 	$: queryVars = {
 		limit: pageSize,
 		offset: (pageIndex - 1) * pageSize,
@@ -65,7 +70,7 @@
 			const order = h.detail.sortDirection;
 			console.log({ field }, { order });
 			sortingInfo = {
-				[field]: order === 'ascending' ? order_by.asc : order_by.desc,
+				[field]: order === 'ascending' ? 'asc' : 'desc',
 			};
 		}}
 		zebra
