@@ -21,3 +21,8 @@ storybook-static/*
 #############################
 coverage
 coverage/*
+
+# graphql codegen files #
+#############################
+src/generated
+/src/generated

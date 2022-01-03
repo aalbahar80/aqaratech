@@ -15,7 +15,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte,.graphql",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "generate": "graphql-codegen --config codegen.cjs",
+    "generate": "graphql-codegen --config codegen.yml",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

@@ -1,0 +1,71 @@
+schema:
+  - https://hasura-xf70.onrender.com/v1/graphql:
+      headers:
+        x-hasura-admin-secret: myadminsecret
+        # x-hasura-role: somerole
+
+documents:
+  - './src/**/*.graphql'
+  - './src/**/*.ts'
+  - './src/**/*.svelte'
+  - '/src/**/*.svelte'
+
+generates:
+  ./src/graphql.schema.json:
+    plugins:
+      - introspection
+  ./src/generated/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - urql-svelte-operations-store
+      - typescript-urql-graphcache
+      - typed-document-node
+    config:
+      useTypeImports: true
+      namingConvention: keep
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./generated/graphql.ts
+      extension: .gql.ts
+    plugins:
+      - add:
+          content:
+            - '// THIS FILE IS GENERATED, DO NOT EDIT!'
+            - '/* eslint-disable */'
+      - typescript-operations
+      - typed-document-node
+      - urql-svelte-operations-store
+    config:
+      # addOperationExport: true
+      flattenGeneratedTypes: true
+
+config:
+  # use "import type" instead of "import"
+  useTypeImports: true
+  # turn enums into types
+  enumsAsTypes: true
+
+  omitOperationSuffix: true
+  dedupeOperationSuffix: true
+  exportFragmentSpreadSubTypes: true
+  experimentalFragmentVariables: true
+  addUnderscoreToArgsType: true
+
+  # onlyOperationTypes: true
+  preResolveTypes: true
+
+  namingConvention: keep
+
+  scalars:
+    UnsignedInt: number
+    URL: string
+    JSON: any # string | number | boolean | null | Array<Scalars['JSON']> | Scalars['JSONObject']
+    JSONObject: Record<string, any>
+    Date: string
+    DateTime: string
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write

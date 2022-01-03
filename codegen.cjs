@@ -33,10 +33,6 @@ module.exports = {
 			],
 			config: {
 				useTypeImports: true,
-				// skipTypename: false,
-				withHooks: false,
-				// withHOC: false,
-				// withComponent: false,
 				namingConvention: 'keep',
 			},
 			// hooks: {
@@ -64,10 +60,10 @@ module.exports = {
 
 				'typescript-operations',
 				'typed-document-node',
+				'urql-svelte-operations-store',
 			],
 			config: {
 				flattenGeneratedTypes: true,
-				useTypeImports: true,
 				useTypeImports: true,
 				enumsAsTypes: true,
 
