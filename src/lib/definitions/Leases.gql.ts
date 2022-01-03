@@ -1,6 +1,8 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
 import type * as Types from '../../generated/graphql';
 
+import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type LeasesInsertVariables = Types.Exact<{
 	object?: Types.InputMaybe<Types.leases_insert_input>;
@@ -13,12 +15,12 @@ export type LeasesInsert = {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 		  }
@@ -38,12 +40,12 @@ export type LeasesUpdate = {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 		  }
@@ -74,12 +76,12 @@ export type LeasesById = {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 				unit?:
@@ -119,12 +121,12 @@ export type LeasesList = {
 		__typename?: 'leases';
 		id: number;
 		deposit?: number | null | undefined;
-		end_date?: any | null | undefined;
+		end_date?: string | null | undefined;
 		is_expired?: boolean | null | undefined;
 		is_signed?: boolean | null | undefined;
 		license?: string | null | undefined;
 		monthly_rent?: number | null | undefined;
-		start_date?: any | null | undefined;
+		start_date?: string | null | undefined;
 		tenant_id?: number | null | undefined;
 		unit_id?: number | null | undefined;
 	}>;
@@ -510,3 +512,17 @@ export const LeasesListDocument = {
 		},
 	],
 } as unknown as DocumentNode<LeasesList, LeasesListVariables>;
+export type LeasesInsertStore = OperationStore<
+	LeasesInsert,
+	LeasesInsertVariables
+>;
+export type LeasesUpdateStore = OperationStore<
+	LeasesUpdate,
+	LeasesUpdateVariables
+>;
+export type DeleteLeasesStore = OperationStore<
+	DeleteLeases,
+	DeleteLeasesVariables
+>;
+export type LeasesByIdStore = OperationStore<LeasesById, LeasesByIdVariables>;
+export type LeasesListStore = OperationStore<LeasesList, LeasesListVariables>;

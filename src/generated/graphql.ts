@@ -1,4 +1,3 @@
-/* eslint-disable */
 import type { OperationStore } from '@urql/svelte';
 import type {
 	Resolver as GraphCacheResolver,
@@ -27,7 +26,7 @@ export type Scalars = {
 	Int: number;
 	Float: number;
 	bigint: any;
-	date: any;
+	date: string;
 	numeric: any;
 	point: any;
 	timestamptz: any;
@@ -136,7 +135,7 @@ export type clients = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsexpensesArgs = {
+export type clients_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -145,7 +144,7 @@ export type clientsexpensesArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsexpenses_aggregateArgs = {
+export type clients_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -154,7 +153,7 @@ export type clientsexpenses_aggregateArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsmaintenance_ordersArgs = {
+export type clients_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -163,7 +162,7 @@ export type clientsmaintenance_ordersArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsmaintenance_orders_aggregateArgs = {
+export type clients_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -172,7 +171,7 @@ export type clientsmaintenance_orders_aggregateArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientspropertiesArgs = {
+export type clients_propertiesArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -181,7 +180,7 @@ export type clientspropertiesArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsproperties_aggregateArgs = {
+export type clients_properties_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -190,7 +189,7 @@ export type clientsproperties_aggregateArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsusersArgs = {
+export type clients_usersArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -199,7 +198,7 @@ export type clientsusersArgs = {
 };
 
 /** columns and relationships of "clients" */
-export type clientsusers_aggregateArgs = {
+export type clients_users_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -231,7 +230,7 @@ export type clients_aggregate_fields = {
 };
 
 /** aggregate fields of "clients" */
-export type clients_aggregate_fieldscountArgs = {
+export type clients_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<clients_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -264,10 +263,9 @@ export type clients_bool_exp = {
 };
 
 /** unique or primary key constraints on table "clients" */
-export enum clients_constraint {
+export type clients_constraint =
 	/** unique or primary key constraint */
-	clients_pkey = 'clients_pkey',
-}
+	'clients_pkey';
 
 /** input type for incrementing numeric columns in table "clients" */
 export type clients_inc_input = {
@@ -364,26 +362,25 @@ export type clients_pk_columns_input = {
 };
 
 /** select columns of table "clients" */
-export enum clients_select_column {
+export type clients_select_column =
 	/** column name */
-	civilid = 'civilid',
+	| 'civilid'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	first_name = 'first_name',
+	| 'first_name'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_active = 'is_active',
+	| 'is_active'
 	/** column name */
-	last_name = 'last_name',
+	| 'last_name'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	second_name = 'second_name',
+	| 'second_name'
 	/** column name */
-	third_name = 'third_name',
-}
+	| 'third_name';
 
 /** input type for updating data in table "clients" */
 export type clients_set_input = {
@@ -427,26 +424,25 @@ export type clients_sum_fields = {
 };
 
 /** update columns of table "clients" */
-export enum clients_update_column {
+export type clients_update_column =
 	/** column name */
-	civilid = 'civilid',
+	| 'civilid'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	first_name = 'first_name',
+	| 'first_name'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_active = 'is_active',
+	| 'is_active'
 	/** column name */
-	last_name = 'last_name',
+	| 'last_name'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	second_name = 'second_name',
+	| 'second_name'
 	/** column name */
-	third_name = 'third_name',
-}
+	| 'third_name';
 
 /** aggregate var_pop on columns */
 export type clients_var_pop_fields = {
@@ -530,7 +526,7 @@ export type expenses_aggregate_fields = {
 };
 
 /** aggregate fields of "expenses" */
-export type expenses_aggregate_fieldscountArgs = {
+export type expenses_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<expenses_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -600,10 +596,9 @@ export type expenses_bool_exp = {
 };
 
 /** unique or primary key constraints on table "expenses" */
-export enum expenses_constraint {
+export type expenses_constraint =
 	/** unique or primary key constraint */
-	expenses_pkey = 'expenses_pkey',
-}
+	'expenses_pkey';
 
 /** input type for incrementing numeric columns in table "expenses" */
 export type expenses_inc_input = {
@@ -723,26 +718,25 @@ export type expenses_pk_columns_input = {
 };
 
 /** select columns of table "expenses" */
-export enum expenses_select_column {
+export type expenses_select_column =
 	/** column name */
-	amount = 'amount',
+	| 'amount'
 	/** column name */
-	category = 'category',
+	| 'category'
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	date_post = 'date_post',
+	| 'date_post'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	maintenance_order_id = 'maintenance_order_id',
+	| 'maintenance_order_id'
 	/** column name */
-	memo = 'memo',
+	| 'memo'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** input type for updating data in table "expenses" */
 export type expenses_set_input = {
@@ -853,7 +847,7 @@ export type expenses_types = {
 };
 
 /** columns and relationships of "expenses_types" */
-export type expenses_typesexpensesArgs = {
+export type expenses_types_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -862,7 +856,7 @@ export type expenses_typesexpensesArgs = {
 };
 
 /** columns and relationships of "expenses_types" */
-export type expenses_typesexpenses_aggregateArgs = {
+export type expenses_types_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -886,7 +880,7 @@ export type expenses_types_aggregate_fields = {
 };
 
 /** aggregate fields of "expenses_types" */
-export type expenses_types_aggregate_fieldscountArgs = {
+export type expenses_types_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<expenses_types_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -902,25 +896,23 @@ export type expenses_types_bool_exp = {
 };
 
 /** unique or primary key constraints on table "expenses_types" */
-export enum expenses_types_constraint {
+export type expenses_types_constraint =
 	/** unique or primary key constraint */
-	expenses_types_pkey = 'expenses_types_pkey',
-}
+	'expenses_types_pkey';
 
-export enum expenses_types_enum {
-	AMENITIES = 'AMENITIES',
-	CARETAKER = 'CARETAKER',
-	ELECTRICITY = 'ELECTRICITY',
-	ELEVATORS = 'ELEVATORS',
-	HVAC = 'HVAC',
-	INSURANCE = 'INSURANCE',
-	INTERNET = 'INTERNET',
-	LANDSCAPING = 'LANDSCAPING',
-	MANAGEMENT_FEES = 'MANAGEMENT_FEES',
-	PLUMBING = 'PLUMBING',
-	SATELLITE = 'SATELLITE',
-	WATER = 'WATER',
-}
+export type expenses_types_enum =
+	| 'AMENITIES'
+	| 'CARETAKER'
+	| 'ELECTRICITY'
+	| 'ELEVATORS'
+	| 'HVAC'
+	| 'INSURANCE'
+	| 'INTERNET'
+	| 'LANDSCAPING'
+	| 'MANAGEMENT_FEES'
+	| 'PLUMBING'
+	| 'SATELLITE'
+	| 'WATER';
 
 /** Boolean expression to compare columns of type "expenses_types_enum". All fields are combined with logical 'AND'. */
 export type expenses_types_enum_comparison_exp = {
@@ -988,12 +980,11 @@ export type expenses_types_pk_columns_input = {
 };
 
 /** select columns of table "expenses_types" */
-export enum expenses_types_select_column {
+export type expenses_types_select_column =
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	value = 'value',
-}
+	| 'value';
 
 /** input type for updating data in table "expenses_types" */
 export type expenses_types_set_input = {
@@ -1002,34 +993,32 @@ export type expenses_types_set_input = {
 };
 
 /** update columns of table "expenses_types" */
-export enum expenses_types_update_column {
+export type expenses_types_update_column =
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	value = 'value',
-}
+	| 'value';
 
 /** update columns of table "expenses" */
-export enum expenses_update_column {
+export type expenses_update_column =
 	/** column name */
-	amount = 'amount',
+	| 'amount'
 	/** column name */
-	category = 'category',
+	| 'category'
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	date_post = 'date_post',
+	| 'date_post'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	maintenance_order_id = 'maintenance_order_id',
+	| 'maintenance_order_id'
 	/** column name */
-	memo = 'memo',
+	| 'memo'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** aggregate var_pop on columns */
 export type expenses_var_pop_fields = {
@@ -1119,7 +1108,7 @@ export type leases = {
 };
 
 /** columns and relationships of "leases" */
-export type leasestransactionsArgs = {
+export type leases_transactionsArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -1128,7 +1117,7 @@ export type leasestransactionsArgs = {
 };
 
 /** columns and relationships of "leases" */
-export type leasestransactions_aggregateArgs = {
+export type leases_transactions_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -1160,7 +1149,7 @@ export type leases_aggregate_fields = {
 };
 
 /** aggregate fields of "leases" */
-export type leases_aggregate_fieldscountArgs = {
+export type leases_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<leases_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -1227,10 +1216,9 @@ export type leases_bool_exp = {
 };
 
 /** unique or primary key constraints on table "leases" */
-export enum leases_constraint {
+export type leases_constraint =
 	/** unique or primary key constraint */
-	leases_pkey = 'leases_pkey',
-}
+	'leases_pkey';
 
 /** input type for incrementing numeric columns in table "leases" */
 export type leases_inc_input = {
@@ -1353,26 +1341,25 @@ export type leases_pk_columns_input = {
 };
 
 /** select columns of table "leases" */
-export enum leases_select_column {
+export type leases_select_column =
 	/** column name */
-	deposit = 'deposit',
+	| 'deposit'
 	/** column name */
-	end_date = 'end_date',
+	| 'end_date'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_signed = 'is_signed',
+	| 'is_signed'
 	/** column name */
-	license = 'license',
+	| 'license'
 	/** column name */
-	monthly_rent = 'monthly_rent',
+	| 'monthly_rent'
 	/** column name */
-	start_date = 'start_date',
+	| 'start_date'
 	/** column name */
-	tenant_id = 'tenant_id',
+	| 'tenant_id'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** input type for updating data in table "leases" */
 export type leases_set_input = {
@@ -1464,26 +1451,25 @@ export type leases_sum_order_by = {
 };
 
 /** update columns of table "leases" */
-export enum leases_update_column {
+export type leases_update_column =
 	/** column name */
-	deposit = 'deposit',
+	| 'deposit'
 	/** column name */
-	end_date = 'end_date',
+	| 'end_date'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_signed = 'is_signed',
+	| 'is_signed'
 	/** column name */
-	license = 'license',
+	| 'license'
 	/** column name */
-	monthly_rent = 'monthly_rent',
+	| 'monthly_rent'
 	/** column name */
-	start_date = 'start_date',
+	| 'start_date'
 	/** column name */
-	tenant_id = 'tenant_id',
+	| 'tenant_id'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** aggregate var_pop on columns */
 export type leases_var_pop_fields = {
@@ -1580,7 +1566,7 @@ export type listings_aggregate_fields = {
 };
 
 /** aggregate fields of "listings" */
-export type listings_aggregate_fieldscountArgs = {
+export type listings_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<listings_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -1636,10 +1622,9 @@ export type listings_bool_exp = {
 };
 
 /** unique or primary key constraints on table "listings" */
-export enum listings_constraint {
+export type listings_constraint =
 	/** unique or primary key constraint */
-	listings_pkey = 'listings_pkey',
-}
+	'listings_pkey';
 
 /** input type for incrementing numeric columns in table "listings" */
 export type listings_inc_input = {
@@ -1735,22 +1720,21 @@ export type listings_pk_columns_input = {
 };
 
 /** select columns of table "listings" */
-export enum listings_select_column {
+export type listings_select_column =
 	/** column name */
-	available_on = 'available_on',
+	| 'available_on'
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_active = 'is_active',
+	| 'is_active'
 	/** column name */
-	lease_length = 'lease_length',
+	| 'lease_length'
 	/** column name */
-	title = 'title',
+	| 'title'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** input type for updating data in table "listings" */
 export type listings_set_input = {
@@ -1816,22 +1800,21 @@ export type listings_sum_order_by = {
 };
 
 /** update columns of table "listings" */
-export enum listings_update_column {
+export type listings_update_column =
 	/** column name */
-	available_on = 'available_on',
+	| 'available_on'
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_active = 'is_active',
+	| 'is_active'
 	/** column name */
-	lease_length = 'lease_length',
+	| 'lease_length'
 	/** column name */
-	title = 'title',
+	| 'title'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** aggregate var_pop on columns */
 export type listings_var_pop_fields = {
@@ -1900,7 +1883,7 @@ export type maintenance_orders = {
 };
 
 /** columns and relationships of "maintenance_orders" */
-export type maintenance_ordersexpensesArgs = {
+export type maintenance_orders_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -1909,7 +1892,7 @@ export type maintenance_ordersexpensesArgs = {
 };
 
 /** columns and relationships of "maintenance_orders" */
-export type maintenance_ordersexpenses_aggregateArgs = {
+export type maintenance_orders_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -1941,7 +1924,7 @@ export type maintenance_orders_aggregate_fields = {
 };
 
 /** aggregate fields of "maintenance_orders" */
-export type maintenance_orders_aggregate_fieldscountArgs = {
+export type maintenance_orders_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<maintenance_orders_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -2010,10 +1993,9 @@ export type maintenance_orders_bool_exp = {
 };
 
 /** unique or primary key constraints on table "maintenance_orders" */
-export enum maintenance_orders_constraint {
+export type maintenance_orders_constraint =
 	/** unique or primary key constraint */
-	maintenance_orders_pkey = 'maintenance_orders_pkey',
-}
+	'maintenance_orders_pkey';
 
 /** input type for incrementing numeric columns in table "maintenance_orders" */
 export type maintenance_orders_inc_input = {
@@ -2149,28 +2131,27 @@ export type maintenance_orders_pk_columns_input = {
 };
 
 /** select columns of table "maintenance_orders" */
-export enum maintenance_orders_select_column {
+export type maintenance_orders_select_column =
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	completed_at = 'completed_at',
+	| 'completed_at'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	status = 'status',
+	| 'status'
 	/** column name */
-	tenant_id = 'tenant_id',
+	| 'tenant_id'
 	/** column name */
-	title = 'title',
+	| 'title'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** input type for updating data in table "maintenance_orders" */
 export type maintenance_orders_set_input = {
@@ -2263,28 +2244,27 @@ export type maintenance_orders_sum_order_by = {
 };
 
 /** update columns of table "maintenance_orders" */
-export enum maintenance_orders_update_column {
+export type maintenance_orders_update_column =
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	completed_at = 'completed_at',
+	| 'completed_at'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	description = 'description',
+	| 'description'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	status = 'status',
+	| 'status'
 	/** column name */
-	tenant_id = 'tenant_id',
+	| 'tenant_id'
 	/** column name */
-	title = 'title',
+	| 'title'
 	/** column name */
-	unit_id = 'unit_id',
-}
+	| 'unit_id';
 
 /** aggregate var_pop on columns */
 export type maintenance_orders_var_pop_fields = {
@@ -2481,394 +2461,394 @@ export type mutation_root = {
 };
 
 /** mutation root */
-export type mutation_rootdelete_clientsArgs = {
+export type mutation_root_delete_clientsArgs = {
 	where: clients_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_clients_by_pkArgs = {
+export type mutation_root_delete_clients_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_expensesArgs = {
+export type mutation_root_delete_expensesArgs = {
 	where: expenses_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_expenses_by_pkArgs = {
+export type mutation_root_delete_expenses_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_expenses_typesArgs = {
+export type mutation_root_delete_expenses_typesArgs = {
 	where: expenses_types_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_expenses_types_by_pkArgs = {
+export type mutation_root_delete_expenses_types_by_pkArgs = {
 	value: Scalars['String'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_leasesArgs = {
+export type mutation_root_delete_leasesArgs = {
 	where: leases_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_leases_by_pkArgs = {
+export type mutation_root_delete_leases_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_listingsArgs = {
+export type mutation_root_delete_listingsArgs = {
 	where: listings_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_listings_by_pkArgs = {
+export type mutation_root_delete_listings_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_maintenance_ordersArgs = {
+export type mutation_root_delete_maintenance_ordersArgs = {
 	where: maintenance_orders_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_maintenance_orders_by_pkArgs = {
+export type mutation_root_delete_maintenance_orders_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_propertiesArgs = {
+export type mutation_root_delete_propertiesArgs = {
 	where: properties_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_properties_by_pkArgs = {
+export type mutation_root_delete_properties_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_tenantsArgs = {
+export type mutation_root_delete_tenantsArgs = {
 	where: tenants_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_tenants_by_pkArgs = {
+export type mutation_root_delete_tenants_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_transactionsArgs = {
+export type mutation_root_delete_transactionsArgs = {
 	where: transactions_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_transactions_by_pkArgs = {
+export type mutation_root_delete_transactions_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_unitsArgs = {
+export type mutation_root_delete_unitsArgs = {
 	where: units_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_units_by_pkArgs = {
+export type mutation_root_delete_units_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootdelete_usersArgs = {
+export type mutation_root_delete_usersArgs = {
 	where: users_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootdelete_users_by_pkArgs = {
+export type mutation_root_delete_users_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
 /** mutation root */
-export type mutation_rootinsert_clientsArgs = {
+export type mutation_root_insert_clientsArgs = {
 	objects: Array<clients_insert_input>;
 	on_conflict?: InputMaybe<clients_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_clients_oneArgs = {
+export type mutation_root_insert_clients_oneArgs = {
 	object: clients_insert_input;
 	on_conflict?: InputMaybe<clients_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_expensesArgs = {
+export type mutation_root_insert_expensesArgs = {
 	objects: Array<expenses_insert_input>;
 	on_conflict?: InputMaybe<expenses_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_expenses_oneArgs = {
+export type mutation_root_insert_expenses_oneArgs = {
 	object: expenses_insert_input;
 	on_conflict?: InputMaybe<expenses_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_expenses_typesArgs = {
+export type mutation_root_insert_expenses_typesArgs = {
 	objects: Array<expenses_types_insert_input>;
 	on_conflict?: InputMaybe<expenses_types_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_expenses_types_oneArgs = {
+export type mutation_root_insert_expenses_types_oneArgs = {
 	object: expenses_types_insert_input;
 	on_conflict?: InputMaybe<expenses_types_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_leasesArgs = {
+export type mutation_root_insert_leasesArgs = {
 	objects: Array<leases_insert_input>;
 	on_conflict?: InputMaybe<leases_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_leases_oneArgs = {
+export type mutation_root_insert_leases_oneArgs = {
 	object: leases_insert_input;
 	on_conflict?: InputMaybe<leases_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_listingsArgs = {
+export type mutation_root_insert_listingsArgs = {
 	objects: Array<listings_insert_input>;
 	on_conflict?: InputMaybe<listings_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_listings_oneArgs = {
+export type mutation_root_insert_listings_oneArgs = {
 	object: listings_insert_input;
 	on_conflict?: InputMaybe<listings_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_maintenance_ordersArgs = {
+export type mutation_root_insert_maintenance_ordersArgs = {
 	objects: Array<maintenance_orders_insert_input>;
 	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_maintenance_orders_oneArgs = {
+export type mutation_root_insert_maintenance_orders_oneArgs = {
 	object: maintenance_orders_insert_input;
 	on_conflict?: InputMaybe<maintenance_orders_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_propertiesArgs = {
+export type mutation_root_insert_propertiesArgs = {
 	objects: Array<properties_insert_input>;
 	on_conflict?: InputMaybe<properties_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_properties_oneArgs = {
+export type mutation_root_insert_properties_oneArgs = {
 	object: properties_insert_input;
 	on_conflict?: InputMaybe<properties_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_tenantsArgs = {
+export type mutation_root_insert_tenantsArgs = {
 	objects: Array<tenants_insert_input>;
 	on_conflict?: InputMaybe<tenants_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_tenants_oneArgs = {
+export type mutation_root_insert_tenants_oneArgs = {
 	object: tenants_insert_input;
 	on_conflict?: InputMaybe<tenants_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_transactionsArgs = {
+export type mutation_root_insert_transactionsArgs = {
 	objects: Array<transactions_insert_input>;
 	on_conflict?: InputMaybe<transactions_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_transactions_oneArgs = {
+export type mutation_root_insert_transactions_oneArgs = {
 	object: transactions_insert_input;
 	on_conflict?: InputMaybe<transactions_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_unitsArgs = {
+export type mutation_root_insert_unitsArgs = {
 	objects: Array<units_insert_input>;
 	on_conflict?: InputMaybe<units_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_units_oneArgs = {
+export type mutation_root_insert_units_oneArgs = {
 	object: units_insert_input;
 	on_conflict?: InputMaybe<units_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_usersArgs = {
+export type mutation_root_insert_usersArgs = {
 	objects: Array<users_insert_input>;
 	on_conflict?: InputMaybe<users_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootinsert_users_oneArgs = {
+export type mutation_root_insert_users_oneArgs = {
 	object: users_insert_input;
 	on_conflict?: InputMaybe<users_on_conflict>;
 };
 
 /** mutation root */
-export type mutation_rootupdate_clientsArgs = {
+export type mutation_root_update_clientsArgs = {
 	_inc?: InputMaybe<clients_inc_input>;
 	_set?: InputMaybe<clients_set_input>;
 	where: clients_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_clients_by_pkArgs = {
+export type mutation_root_update_clients_by_pkArgs = {
 	_inc?: InputMaybe<clients_inc_input>;
 	_set?: InputMaybe<clients_set_input>;
 	pk_columns: clients_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_expensesArgs = {
+export type mutation_root_update_expensesArgs = {
 	_inc?: InputMaybe<expenses_inc_input>;
 	_set?: InputMaybe<expenses_set_input>;
 	where: expenses_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_expenses_by_pkArgs = {
+export type mutation_root_update_expenses_by_pkArgs = {
 	_inc?: InputMaybe<expenses_inc_input>;
 	_set?: InputMaybe<expenses_set_input>;
 	pk_columns: expenses_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_expenses_typesArgs = {
+export type mutation_root_update_expenses_typesArgs = {
 	_set?: InputMaybe<expenses_types_set_input>;
 	where: expenses_types_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_expenses_types_by_pkArgs = {
+export type mutation_root_update_expenses_types_by_pkArgs = {
 	_set?: InputMaybe<expenses_types_set_input>;
 	pk_columns: expenses_types_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_leasesArgs = {
+export type mutation_root_update_leasesArgs = {
 	_inc?: InputMaybe<leases_inc_input>;
 	_set?: InputMaybe<leases_set_input>;
 	where: leases_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_leases_by_pkArgs = {
+export type mutation_root_update_leases_by_pkArgs = {
 	_inc?: InputMaybe<leases_inc_input>;
 	_set?: InputMaybe<leases_set_input>;
 	pk_columns: leases_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_listingsArgs = {
+export type mutation_root_update_listingsArgs = {
 	_inc?: InputMaybe<listings_inc_input>;
 	_set?: InputMaybe<listings_set_input>;
 	where: listings_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_listings_by_pkArgs = {
+export type mutation_root_update_listings_by_pkArgs = {
 	_inc?: InputMaybe<listings_inc_input>;
 	_set?: InputMaybe<listings_set_input>;
 	pk_columns: listings_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_maintenance_ordersArgs = {
+export type mutation_root_update_maintenance_ordersArgs = {
 	_inc?: InputMaybe<maintenance_orders_inc_input>;
 	_set?: InputMaybe<maintenance_orders_set_input>;
 	where: maintenance_orders_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_maintenance_orders_by_pkArgs = {
+export type mutation_root_update_maintenance_orders_by_pkArgs = {
 	_inc?: InputMaybe<maintenance_orders_inc_input>;
 	_set?: InputMaybe<maintenance_orders_set_input>;
 	pk_columns: maintenance_orders_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_propertiesArgs = {
+export type mutation_root_update_propertiesArgs = {
 	_inc?: InputMaybe<properties_inc_input>;
 	_set?: InputMaybe<properties_set_input>;
 	where: properties_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_properties_by_pkArgs = {
+export type mutation_root_update_properties_by_pkArgs = {
 	_inc?: InputMaybe<properties_inc_input>;
 	_set?: InputMaybe<properties_set_input>;
 	pk_columns: properties_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_tenantsArgs = {
+export type mutation_root_update_tenantsArgs = {
 	_inc?: InputMaybe<tenants_inc_input>;
 	_set?: InputMaybe<tenants_set_input>;
 	where: tenants_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_tenants_by_pkArgs = {
+export type mutation_root_update_tenants_by_pkArgs = {
 	_inc?: InputMaybe<tenants_inc_input>;
 	_set?: InputMaybe<tenants_set_input>;
 	pk_columns: tenants_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_transactionsArgs = {
+export type mutation_root_update_transactionsArgs = {
 	_inc?: InputMaybe<transactions_inc_input>;
 	_set?: InputMaybe<transactions_set_input>;
 	where: transactions_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_transactions_by_pkArgs = {
+export type mutation_root_update_transactions_by_pkArgs = {
 	_inc?: InputMaybe<transactions_inc_input>;
 	_set?: InputMaybe<transactions_set_input>;
 	pk_columns: transactions_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_unitsArgs = {
+export type mutation_root_update_unitsArgs = {
 	_inc?: InputMaybe<units_inc_input>;
 	_set?: InputMaybe<units_set_input>;
 	where: units_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_units_by_pkArgs = {
+export type mutation_root_update_units_by_pkArgs = {
 	_inc?: InputMaybe<units_inc_input>;
 	_set?: InputMaybe<units_set_input>;
 	pk_columns: units_pk_columns_input;
 };
 
 /** mutation root */
-export type mutation_rootupdate_usersArgs = {
+export type mutation_root_update_usersArgs = {
 	_inc?: InputMaybe<users_inc_input>;
 	_set?: InputMaybe<users_set_input>;
 	where: users_bool_exp;
 };
 
 /** mutation root */
-export type mutation_rootupdate_users_by_pkArgs = {
+export type mutation_root_update_users_by_pkArgs = {
 	_inc?: InputMaybe<users_inc_input>;
 	_set?: InputMaybe<users_set_input>;
 	pk_columns: users_pk_columns_input;
@@ -2888,20 +2868,19 @@ export type numeric_comparison_exp = {
 };
 
 /** column ordering options */
-export enum order_by {
+export type order_by =
 	/** in ascending order, nulls last */
-	asc = 'asc',
+	| 'asc'
 	/** in ascending order, nulls first */
-	asc_nulls_first = 'asc_nulls_first',
+	| 'asc_nulls_first'
 	/** in ascending order, nulls last */
-	asc_nulls_last = 'asc_nulls_last',
+	| 'asc_nulls_last'
 	/** in descending order, nulls first */
-	desc = 'desc',
+	| 'desc'
 	/** in descending order, nulls first */
-	desc_nulls_first = 'desc_nulls_first',
+	| 'desc_nulls_first'
 	/** in descending order, nulls last */
-	desc_nulls_last = 'desc_nulls_last',
-}
+	| 'desc_nulls_last';
 
 /** Boolean expression to compare columns of type "point". All fields are combined with logical 'AND'. */
 export type point_comparison_exp = {
@@ -2944,7 +2923,7 @@ export type properties = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesexpensesArgs = {
+export type properties_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -2953,7 +2932,7 @@ export type propertiesexpensesArgs = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesexpenses_aggregateArgs = {
+export type properties_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -2962,7 +2941,7 @@ export type propertiesexpenses_aggregateArgs = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesmaintenance_ordersArgs = {
+export type properties_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -2971,7 +2950,7 @@ export type propertiesmaintenance_ordersArgs = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesmaintenance_orders_aggregateArgs = {
+export type properties_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -2980,7 +2959,7 @@ export type propertiesmaintenance_orders_aggregateArgs = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesunitsArgs = {
+export type properties_unitsArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -2989,7 +2968,7 @@ export type propertiesunitsArgs = {
 };
 
 /** columns and relationships of "properties" */
-export type propertiesunits_aggregateArgs = {
+export type properties_units_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3021,7 +3000,7 @@ export type properties_aggregate_fields = {
 };
 
 /** aggregate fields of "properties" */
-export type properties_aggregate_fieldscountArgs = {
+export type properties_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<properties_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -3081,10 +3060,9 @@ export type properties_bool_exp = {
 };
 
 /** unique or primary key constraints on table "properties" */
-export enum properties_constraint {
+export type properties_constraint =
 	/** unique or primary key constraint */
-	properties_pkey = 'properties_pkey',
-}
+	'properties_pkey';
 
 /** input type for incrementing numeric columns in table "properties" */
 export type properties_inc_input = {
@@ -3199,24 +3177,23 @@ export type properties_pk_columns_input = {
 };
 
 /** select columns of table "properties" */
-export enum properties_select_column {
+export type properties_select_column =
 	/** column name */
-	area = 'area',
+	| 'area'
 	/** column name */
-	avenue = 'avenue',
+	| 'avenue'
 	/** column name */
-	block = 'block',
+	| 'block'
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	coordinates = 'coordinates',
+	| 'coordinates'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	number = 'number',
+	| 'number'
 	/** column name */
-	street = 'street',
-}
+	| 'street';
 
 /** input type for updating data in table "properties" */
 export type properties_set_input = {
@@ -3283,24 +3260,23 @@ export type properties_sum_order_by = {
 };
 
 /** update columns of table "properties" */
-export enum properties_update_column {
+export type properties_update_column =
 	/** column name */
-	area = 'area',
+	| 'area'
 	/** column name */
-	avenue = 'avenue',
+	| 'avenue'
 	/** column name */
-	block = 'block',
+	| 'block'
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	coordinates = 'coordinates',
+	| 'coordinates'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	number = 'number',
+	| 'number'
 	/** column name */
-	street = 'street',
-}
+	| 'street';
 
 /** aggregate var_pop on columns */
 export type properties_var_pop_fields = {
@@ -3411,7 +3387,7 @@ export type query_root = {
 	users_by_pk?: Maybe<users>;
 };
 
-export type query_rootclientsArgs = {
+export type query_root_clientsArgs = {
 	distinct_on?: InputMaybe<Array<clients_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3419,7 +3395,7 @@ export type query_rootclientsArgs = {
 	where?: InputMaybe<clients_bool_exp>;
 };
 
-export type query_rootclients_aggregateArgs = {
+export type query_root_clients_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<clients_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3427,11 +3403,11 @@ export type query_rootclients_aggregateArgs = {
 	where?: InputMaybe<clients_bool_exp>;
 };
 
-export type query_rootclients_by_pkArgs = {
+export type query_root_clients_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootexpensesArgs = {
+export type query_root_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3439,7 +3415,7 @@ export type query_rootexpensesArgs = {
 	where?: InputMaybe<expenses_bool_exp>;
 };
 
-export type query_rootexpenses_aggregateArgs = {
+export type query_root_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3447,11 +3423,11 @@ export type query_rootexpenses_aggregateArgs = {
 	where?: InputMaybe<expenses_bool_exp>;
 };
 
-export type query_rootexpenses_by_pkArgs = {
+export type query_root_expenses_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootexpenses_typesArgs = {
+export type query_root_expenses_typesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3459,7 +3435,7 @@ export type query_rootexpenses_typesArgs = {
 	where?: InputMaybe<expenses_types_bool_exp>;
 };
 
-export type query_rootexpenses_types_aggregateArgs = {
+export type query_root_expenses_types_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3467,11 +3443,11 @@ export type query_rootexpenses_types_aggregateArgs = {
 	where?: InputMaybe<expenses_types_bool_exp>;
 };
 
-export type query_rootexpenses_types_by_pkArgs = {
+export type query_root_expenses_types_by_pkArgs = {
 	value: Scalars['String'];
 };
 
-export type query_rootleasesArgs = {
+export type query_root_leasesArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3479,7 +3455,7 @@ export type query_rootleasesArgs = {
 	where?: InputMaybe<leases_bool_exp>;
 };
 
-export type query_rootleases_aggregateArgs = {
+export type query_root_leases_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3487,11 +3463,11 @@ export type query_rootleases_aggregateArgs = {
 	where?: InputMaybe<leases_bool_exp>;
 };
 
-export type query_rootleases_by_pkArgs = {
+export type query_root_leases_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootlistingsArgs = {
+export type query_root_listingsArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3499,7 +3475,7 @@ export type query_rootlistingsArgs = {
 	where?: InputMaybe<listings_bool_exp>;
 };
 
-export type query_rootlistings_aggregateArgs = {
+export type query_root_listings_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3507,11 +3483,11 @@ export type query_rootlistings_aggregateArgs = {
 	where?: InputMaybe<listings_bool_exp>;
 };
 
-export type query_rootlistings_by_pkArgs = {
+export type query_root_listings_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootmaintenance_ordersArgs = {
+export type query_root_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3519,7 +3495,7 @@ export type query_rootmaintenance_ordersArgs = {
 	where?: InputMaybe<maintenance_orders_bool_exp>;
 };
 
-export type query_rootmaintenance_orders_aggregateArgs = {
+export type query_root_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3527,11 +3503,11 @@ export type query_rootmaintenance_orders_aggregateArgs = {
 	where?: InputMaybe<maintenance_orders_bool_exp>;
 };
 
-export type query_rootmaintenance_orders_by_pkArgs = {
+export type query_root_maintenance_orders_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootpropertiesArgs = {
+export type query_root_propertiesArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3539,7 +3515,7 @@ export type query_rootpropertiesArgs = {
 	where?: InputMaybe<properties_bool_exp>;
 };
 
-export type query_rootproperties_aggregateArgs = {
+export type query_root_properties_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3547,11 +3523,11 @@ export type query_rootproperties_aggregateArgs = {
 	where?: InputMaybe<properties_bool_exp>;
 };
 
-export type query_rootproperties_by_pkArgs = {
+export type query_root_properties_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_roottenantsArgs = {
+export type query_root_tenantsArgs = {
 	distinct_on?: InputMaybe<Array<tenants_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3559,7 +3535,7 @@ export type query_roottenantsArgs = {
 	where?: InputMaybe<tenants_bool_exp>;
 };
 
-export type query_roottenants_aggregateArgs = {
+export type query_root_tenants_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<tenants_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3567,11 +3543,11 @@ export type query_roottenants_aggregateArgs = {
 	where?: InputMaybe<tenants_bool_exp>;
 };
 
-export type query_roottenants_by_pkArgs = {
+export type query_root_tenants_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_roottransactionsArgs = {
+export type query_root_transactionsArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3579,7 +3555,7 @@ export type query_roottransactionsArgs = {
 	where?: InputMaybe<transactions_bool_exp>;
 };
 
-export type query_roottransactions_aggregateArgs = {
+export type query_root_transactions_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3587,11 +3563,11 @@ export type query_roottransactions_aggregateArgs = {
 	where?: InputMaybe<transactions_bool_exp>;
 };
 
-export type query_roottransactions_by_pkArgs = {
+export type query_root_transactions_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootunitsArgs = {
+export type query_root_unitsArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3599,7 +3575,7 @@ export type query_rootunitsArgs = {
 	where?: InputMaybe<units_bool_exp>;
 };
 
-export type query_rootunits_aggregateArgs = {
+export type query_root_units_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3607,11 +3583,11 @@ export type query_rootunits_aggregateArgs = {
 	where?: InputMaybe<units_bool_exp>;
 };
 
-export type query_rootunits_by_pkArgs = {
+export type query_root_units_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type query_rootusersArgs = {
+export type query_root_usersArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3619,7 +3595,7 @@ export type query_rootusersArgs = {
 	where?: InputMaybe<users_bool_exp>;
 };
 
-export type query_rootusers_aggregateArgs = {
+export type query_root_users_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3627,7 +3603,7 @@ export type query_rootusers_aggregateArgs = {
 	where?: InputMaybe<users_bool_exp>;
 };
 
-export type query_rootusers_by_pkArgs = {
+export type query_root_users_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
@@ -3701,7 +3677,7 @@ export type subscription_root = {
 	users_by_pk?: Maybe<users>;
 };
 
-export type subscription_rootclientsArgs = {
+export type subscription_root_clientsArgs = {
 	distinct_on?: InputMaybe<Array<clients_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3709,7 +3685,7 @@ export type subscription_rootclientsArgs = {
 	where?: InputMaybe<clients_bool_exp>;
 };
 
-export type subscription_rootclients_aggregateArgs = {
+export type subscription_root_clients_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<clients_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3717,11 +3693,11 @@ export type subscription_rootclients_aggregateArgs = {
 	where?: InputMaybe<clients_bool_exp>;
 };
 
-export type subscription_rootclients_by_pkArgs = {
+export type subscription_root_clients_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootexpensesArgs = {
+export type subscription_root_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3729,7 +3705,7 @@ export type subscription_rootexpensesArgs = {
 	where?: InputMaybe<expenses_bool_exp>;
 };
 
-export type subscription_rootexpenses_aggregateArgs = {
+export type subscription_root_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3737,11 +3713,11 @@ export type subscription_rootexpenses_aggregateArgs = {
 	where?: InputMaybe<expenses_bool_exp>;
 };
 
-export type subscription_rootexpenses_by_pkArgs = {
+export type subscription_root_expenses_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootexpenses_typesArgs = {
+export type subscription_root_expenses_typesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3749,7 +3725,7 @@ export type subscription_rootexpenses_typesArgs = {
 	where?: InputMaybe<expenses_types_bool_exp>;
 };
 
-export type subscription_rootexpenses_types_aggregateArgs = {
+export type subscription_root_expenses_types_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_types_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3757,11 +3733,11 @@ export type subscription_rootexpenses_types_aggregateArgs = {
 	where?: InputMaybe<expenses_types_bool_exp>;
 };
 
-export type subscription_rootexpenses_types_by_pkArgs = {
+export type subscription_root_expenses_types_by_pkArgs = {
 	value: Scalars['String'];
 };
 
-export type subscription_rootleasesArgs = {
+export type subscription_root_leasesArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3769,7 +3745,7 @@ export type subscription_rootleasesArgs = {
 	where?: InputMaybe<leases_bool_exp>;
 };
 
-export type subscription_rootleases_aggregateArgs = {
+export type subscription_root_leases_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3777,11 +3753,11 @@ export type subscription_rootleases_aggregateArgs = {
 	where?: InputMaybe<leases_bool_exp>;
 };
 
-export type subscription_rootleases_by_pkArgs = {
+export type subscription_root_leases_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootlistingsArgs = {
+export type subscription_root_listingsArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3789,7 +3765,7 @@ export type subscription_rootlistingsArgs = {
 	where?: InputMaybe<listings_bool_exp>;
 };
 
-export type subscription_rootlistings_aggregateArgs = {
+export type subscription_root_listings_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3797,11 +3773,11 @@ export type subscription_rootlistings_aggregateArgs = {
 	where?: InputMaybe<listings_bool_exp>;
 };
 
-export type subscription_rootlistings_by_pkArgs = {
+export type subscription_root_listings_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootmaintenance_ordersArgs = {
+export type subscription_root_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3809,7 +3785,7 @@ export type subscription_rootmaintenance_ordersArgs = {
 	where?: InputMaybe<maintenance_orders_bool_exp>;
 };
 
-export type subscription_rootmaintenance_orders_aggregateArgs = {
+export type subscription_root_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3817,11 +3793,11 @@ export type subscription_rootmaintenance_orders_aggregateArgs = {
 	where?: InputMaybe<maintenance_orders_bool_exp>;
 };
 
-export type subscription_rootmaintenance_orders_by_pkArgs = {
+export type subscription_root_maintenance_orders_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootpropertiesArgs = {
+export type subscription_root_propertiesArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3829,7 +3805,7 @@ export type subscription_rootpropertiesArgs = {
 	where?: InputMaybe<properties_bool_exp>;
 };
 
-export type subscription_rootproperties_aggregateArgs = {
+export type subscription_root_properties_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<properties_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3837,11 +3813,11 @@ export type subscription_rootproperties_aggregateArgs = {
 	where?: InputMaybe<properties_bool_exp>;
 };
 
-export type subscription_rootproperties_by_pkArgs = {
+export type subscription_root_properties_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_roottenantsArgs = {
+export type subscription_root_tenantsArgs = {
 	distinct_on?: InputMaybe<Array<tenants_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3849,7 +3825,7 @@ export type subscription_roottenantsArgs = {
 	where?: InputMaybe<tenants_bool_exp>;
 };
 
-export type subscription_roottenants_aggregateArgs = {
+export type subscription_root_tenants_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<tenants_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3857,11 +3833,11 @@ export type subscription_roottenants_aggregateArgs = {
 	where?: InputMaybe<tenants_bool_exp>;
 };
 
-export type subscription_roottenants_by_pkArgs = {
+export type subscription_root_tenants_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_roottransactionsArgs = {
+export type subscription_root_transactionsArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3869,7 +3845,7 @@ export type subscription_roottransactionsArgs = {
 	where?: InputMaybe<transactions_bool_exp>;
 };
 
-export type subscription_roottransactions_aggregateArgs = {
+export type subscription_root_transactions_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<transactions_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3877,11 +3853,11 @@ export type subscription_roottransactions_aggregateArgs = {
 	where?: InputMaybe<transactions_bool_exp>;
 };
 
-export type subscription_roottransactions_by_pkArgs = {
+export type subscription_root_transactions_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootunitsArgs = {
+export type subscription_root_unitsArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3889,7 +3865,7 @@ export type subscription_rootunitsArgs = {
 	where?: InputMaybe<units_bool_exp>;
 };
 
-export type subscription_rootunits_aggregateArgs = {
+export type subscription_root_units_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<units_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3897,11 +3873,11 @@ export type subscription_rootunits_aggregateArgs = {
 	where?: InputMaybe<units_bool_exp>;
 };
 
-export type subscription_rootunits_by_pkArgs = {
+export type subscription_root_units_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
-export type subscription_rootusersArgs = {
+export type subscription_root_usersArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3909,7 +3885,7 @@ export type subscription_rootusersArgs = {
 	where?: InputMaybe<users_bool_exp>;
 };
 
-export type subscription_rootusers_aggregateArgs = {
+export type subscription_root_users_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<users_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3917,7 +3893,7 @@ export type subscription_rootusers_aggregateArgs = {
 	where?: InputMaybe<users_bool_exp>;
 };
 
-export type subscription_rootusers_by_pkArgs = {
+export type subscription_root_users_by_pkArgs = {
 	id: Scalars['Int'];
 };
 
@@ -3946,7 +3922,7 @@ export type tenants = {
 };
 
 /** columns and relationships of "tenants" */
-export type tenantsleasesArgs = {
+export type tenants_leasesArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3955,7 +3931,7 @@ export type tenantsleasesArgs = {
 };
 
 /** columns and relationships of "tenants" */
-export type tenantsleases_aggregateArgs = {
+export type tenants_leases_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3964,7 +3940,7 @@ export type tenantsleases_aggregateArgs = {
 };
 
 /** columns and relationships of "tenants" */
-export type tenantsmaintenance_ordersArgs = {
+export type tenants_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -3973,7 +3949,7 @@ export type tenantsmaintenance_ordersArgs = {
 };
 
 /** columns and relationships of "tenants" */
-export type tenantsmaintenance_orders_aggregateArgs = {
+export type tenants_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4005,7 +3981,7 @@ export type tenants_aggregate_fields = {
 };
 
 /** aggregate fields of "tenants" */
-export type tenants_aggregate_fieldscountArgs = {
+export type tenants_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<tenants_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -4037,10 +4013,9 @@ export type tenants_bool_exp = {
 };
 
 /** unique or primary key constraints on table "tenants" */
-export enum tenants_constraint {
+export type tenants_constraint =
 	/** unique or primary key constraint */
-	tenants_pkey = 'tenants_pkey',
-}
+	'tenants_pkey';
 
 /** input type for incrementing numeric columns in table "tenants" */
 export type tenants_inc_input = {
@@ -4137,26 +4112,25 @@ export type tenants_pk_columns_input = {
 };
 
 /** select columns of table "tenants" */
-export enum tenants_select_column {
+export type tenants_select_column =
 	/** column name */
-	civilid = 'civilid',
+	| 'civilid'
 	/** column name */
-	dob = 'dob',
+	| 'dob'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	first_name = 'first_name',
+	| 'first_name'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	last_name = 'last_name',
+	| 'last_name'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	second_name = 'second_name',
+	| 'second_name'
 	/** column name */
-	third_name = 'third_name',
-}
+	| 'third_name';
 
 /** input type for updating data in table "tenants" */
 export type tenants_set_input = {
@@ -4200,26 +4174,25 @@ export type tenants_sum_fields = {
 };
 
 /** update columns of table "tenants" */
-export enum tenants_update_column {
+export type tenants_update_column =
 	/** column name */
-	civilid = 'civilid',
+	| 'civilid'
 	/** column name */
-	dob = 'dob',
+	| 'dob'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	first_name = 'first_name',
+	| 'first_name'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	last_name = 'last_name',
+	| 'last_name'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	second_name = 'second_name',
+	| 'second_name'
 	/** column name */
-	third_name = 'third_name',
-}
+	| 'third_name';
 
 /** aggregate var_pop on columns */
 export type tenants_var_pop_fields = {
@@ -4294,7 +4267,7 @@ export type transactions_aggregate_fields = {
 };
 
 /** aggregate fields of "transactions" */
-export type transactions_aggregate_fieldscountArgs = {
+export type transactions_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<transactions_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -4353,10 +4326,9 @@ export type transactions_bool_exp = {
 };
 
 /** unique or primary key constraints on table "transactions" */
-export enum transactions_constraint {
+export type transactions_constraint =
 	/** unique or primary key constraint */
-	transactions_pkey = 'transactions_pkey',
-}
+	'transactions_pkey';
 
 /** input type for incrementing numeric columns in table "transactions" */
 export type transactions_inc_input = {
@@ -4459,24 +4431,23 @@ export type transactions_pk_columns_input = {
 };
 
 /** select columns of table "transactions" */
-export enum transactions_select_column {
+export type transactions_select_column =
 	/** column name */
-	amount = 'amount',
+	| 'amount'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	due_date = 'due_date',
+	| 'due_date'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_paid = 'is_paid',
+	| 'is_paid'
 	/** column name */
-	lease_id = 'lease_id',
+	| 'lease_id'
 	/** column name */
-	memo = 'memo',
+	| 'memo'
 	/** column name */
-	receipt_url = 'receipt_url',
-}
+	| 'receipt_url';
 
 /** input type for updating data in table "transactions" */
 export type transactions_set_input = {
@@ -4551,24 +4522,23 @@ export type transactions_sum_order_by = {
 };
 
 /** update columns of table "transactions" */
-export enum transactions_update_column {
+export type transactions_update_column =
 	/** column name */
-	amount = 'amount',
+	| 'amount'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	due_date = 'due_date',
+	| 'due_date'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	is_paid = 'is_paid',
+	| 'is_paid'
 	/** column name */
-	lease_id = 'lease_id',
+	| 'lease_id'
 	/** column name */
-	memo = 'memo',
+	| 'memo'
 	/** column name */
-	receipt_url = 'receipt_url',
-}
+	| 'receipt_url';
 
 /** aggregate var_pop on columns */
 export type transactions_var_pop_fields = {
@@ -4651,7 +4621,7 @@ export type units = {
 };
 
 /** columns and relationships of "units" */
-export type unitsexpensesArgs = {
+export type units_expensesArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4660,7 +4630,7 @@ export type unitsexpensesArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitsexpenses_aggregateArgs = {
+export type units_expenses_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<expenses_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4669,7 +4639,7 @@ export type unitsexpenses_aggregateArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitsleasesArgs = {
+export type units_leasesArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4678,7 +4648,7 @@ export type unitsleasesArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitsleases_aggregateArgs = {
+export type units_leases_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<leases_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4687,7 +4657,7 @@ export type unitsleases_aggregateArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitslistingsArgs = {
+export type units_listingsArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4696,7 +4666,7 @@ export type unitslistingsArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitslistings_aggregateArgs = {
+export type units_listings_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<listings_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4705,7 +4675,7 @@ export type unitslistings_aggregateArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitsmaintenance_ordersArgs = {
+export type units_maintenance_ordersArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4714,7 +4684,7 @@ export type unitsmaintenance_ordersArgs = {
 };
 
 /** columns and relationships of "units" */
-export type unitsmaintenance_orders_aggregateArgs = {
+export type units_maintenance_orders_aggregateArgs = {
 	distinct_on?: InputMaybe<Array<maintenance_orders_select_column>>;
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
@@ -4746,7 +4716,7 @@ export type units_aggregate_fields = {
 };
 
 /** aggregate fields of "units" */
-export type units_aggregate_fieldscountArgs = {
+export type units_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<units_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -4818,10 +4788,9 @@ export type units_bool_exp = {
 };
 
 /** unique or primary key constraints on table "units" */
-export enum units_constraint {
+export type units_constraint =
 	/** unique or primary key constraint */
-	units_pkey = 'units_pkey',
-}
+	'units_pkey';
 
 /** input type for incrementing numeric columns in table "units" */
 export type units_inc_input = {
@@ -4959,28 +4928,27 @@ export type units_pk_columns_input = {
 };
 
 /** select columns of table "units" */
-export enum units_select_column {
+export type units_select_column =
 	/** column name */
-	bath = 'bath',
+	| 'bath'
 	/** column name */
-	bed = 'bed',
+	| 'bed'
 	/** column name */
-	floor = 'floor',
+	| 'floor'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	rent_market = 'rent_market',
+	| 'rent_market'
 	/** column name */
-	size = 'size',
+	| 'size'
 	/** column name */
-	type = 'type',
+	| 'type'
 	/** column name */
-	unit_number = 'unit_number',
+	| 'unit_number'
 	/** column name */
-	usage = 'usage',
-}
+	| 'usage';
 
 /** input type for updating data in table "units" */
 export type units_set_input = {
@@ -5081,28 +5049,27 @@ export type units_sum_order_by = {
 };
 
 /** update columns of table "units" */
-export enum units_update_column {
+export type units_update_column =
 	/** column name */
-	bath = 'bath',
+	| 'bath'
 	/** column name */
-	bed = 'bed',
+	| 'bed'
 	/** column name */
-	floor = 'floor',
+	| 'floor'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	property_id = 'property_id',
+	| 'property_id'
 	/** column name */
-	rent_market = 'rent_market',
+	| 'rent_market'
 	/** column name */
-	size = 'size',
+	| 'size'
 	/** column name */
-	type = 'type',
+	| 'type'
 	/** column name */
-	unit_number = 'unit_number',
+	| 'unit_number'
 	/** column name */
-	usage = 'usage',
-}
+	| 'usage';
 
 /** aggregate var_pop on columns */
 export type units_var_pop_fields = {
@@ -5207,7 +5174,7 @@ export type users_aggregate_fields = {
 };
 
 /** aggregate fields of "users" */
-export type users_aggregate_fieldscountArgs = {
+export type users_aggregate_fields_countArgs = {
 	columns?: InputMaybe<Array<users_select_column>>;
 	distinct?: InputMaybe<Scalars['Boolean']>;
 };
@@ -5266,12 +5233,11 @@ export type users_bool_exp = {
 };
 
 /** unique or primary key constraints on table "users" */
-export enum users_constraint {
+export type users_constraint =
 	/** unique or primary key constraint */
-	users_pkey = 'users_pkey',
+	| 'users_pkey'
 	/** unique or primary key constraint */
-	users_tenant_id_key = 'users_tenant_id_key',
-}
+	| 'users_tenant_id_key';
 
 /** input type for incrementing numeric columns in table "users" */
 export type users_inc_input = {
@@ -5381,22 +5347,21 @@ export type users_pk_columns_input = {
 };
 
 /** select columns of table "users" */
-export enum users_select_column {
+export type users_select_column =
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	last_seen = 'last_seen',
+	| 'last_seen'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	tenant_id = 'tenant_id',
-}
+	| 'tenant_id';
 
 /** input type for updating data in table "users" */
 export type users_set_input = {
@@ -5470,22 +5435,21 @@ export type users_sum_order_by = {
 };
 
 /** update columns of table "users" */
-export enum users_update_column {
+export type users_update_column =
 	/** column name */
-	client_id = 'client_id',
+	| 'client_id'
 	/** column name */
-	created_at = 'created_at',
+	| 'created_at'
 	/** column name */
-	email = 'email',
+	| 'email'
 	/** column name */
-	id = 'id',
+	| 'id'
 	/** column name */
-	last_seen = 'last_seen',
+	| 'last_seen'
 	/** column name */
-	phone = 'phone',
+	| 'phone'
 	/** column name */
-	tenant_id = 'tenant_id',
-}
+	| 'tenant_id';
 
 /** aggregate var_pop on columns */
 export type users_var_pop_fields = {
@@ -5532,7 +5496,7 @@ export type users_variance_order_by = {
 	tenant_id?: InputMaybe<order_by>;
 };
 
-export type detailsFragment = {
+export type details = {
 	__typename?: 'clients';
 	id: number;
 	first_name?: string | null | undefined;
@@ -5543,11 +5507,13 @@ export type detailsFragment = {
 	is_active?: boolean | null | undefined;
 };
 
-export type ClientsInsertMutationVariables = Exact<{
+export type detailsVariables = Exact<{ [key: string]: never }>;
+
+export type ClientsInsertVariables = Exact<{
 	object?: InputMaybe<clients_insert_input>;
 }>;
 
-export type ClientsInsertMutation = {
+export type ClientsInsert = {
 	__typename?: 'mutation_root';
 	insert_clients_one?:
 		| {
@@ -5564,12 +5530,12 @@ export type ClientsInsertMutation = {
 		| undefined;
 };
 
-export type ClientsUpdateMutationVariables = Exact<{
+export type ClientsUpdateVariables = Exact<{
 	id: Scalars['Int'];
 	_set?: InputMaybe<clients_set_input>;
 }>;
 
-export type ClientsUpdateMutation = {
+export type ClientsUpdate = {
 	__typename?: 'mutation_root';
 	update_clients_by_pk?:
 		| {
@@ -5586,11 +5552,11 @@ export type ClientsUpdateMutation = {
 		| undefined;
 };
 
-export type DeleteClientsMutationVariables = Exact<{
+export type DeleteClientsVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeleteClientsMutation = {
+export type DeleteClients = {
 	__typename?: 'mutation_root';
 	delete_clients_by_pk?:
 		| { __typename?: 'clients'; id: number }
@@ -5598,11 +5564,11 @@ export type DeleteClientsMutation = {
 		| undefined;
 };
 
-export type ClientsByIdQueryVariables = Exact<{
+export type ClientsByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type ClientsByIdQuery = {
+export type ClientsById = {
 	__typename?: 'query_root';
 	clients_by_pk?:
 		| {
@@ -5619,13 +5585,13 @@ export type ClientsByIdQuery = {
 		| undefined;
 };
 
-export type ClientsListQueryVariables = Exact<{
+export type ClientsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<clients_order_by> | clients_order_by>;
 }>;
 
-export type ClientsListQuery = {
+export type ClientsList = {
 	__typename?: 'query_root';
 	clients: Array<{
 		__typename?: 'clients';
@@ -5639,37 +5605,39 @@ export type ClientsListQuery = {
 	}>;
 };
 
-export type leasesDetailsFragment = {
+export type leasesDetails = {
 	__typename?: 'leases';
 	id: number;
 	deposit?: number | null | undefined;
-	end_date?: any | null | undefined;
+	end_date?: string | null | undefined;
 	is_expired?: boolean | null | undefined;
 	is_signed?: boolean | null | undefined;
 	license?: string | null | undefined;
 	monthly_rent?: number | null | undefined;
-	start_date?: any | null | undefined;
+	start_date?: string | null | undefined;
 	tenant_id?: number | null | undefined;
 	unit_id?: number | null | undefined;
 };
 
-export type LeasesInsertMutationVariables = Exact<{
+export type leasesDetailsVariables = Exact<{ [key: string]: never }>;
+
+export type LeasesInsertVariables = Exact<{
 	object?: InputMaybe<leases_insert_input>;
 }>;
 
-export type LeasesInsertMutation = {
+export type LeasesInsert = {
 	__typename?: 'mutation_root';
 	insert_leases_one?:
 		| {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 		  }
@@ -5677,24 +5645,24 @@ export type LeasesInsertMutation = {
 		| undefined;
 };
 
-export type LeasesUpdateMutationVariables = Exact<{
+export type LeasesUpdateVariables = Exact<{
 	id: Scalars['Int'];
 	_set?: InputMaybe<leases_set_input>;
 }>;
 
-export type LeasesUpdateMutation = {
+export type LeasesUpdate = {
 	__typename?: 'mutation_root';
 	update_leases_by_pk?:
 		| {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 		  }
@@ -5702,11 +5670,11 @@ export type LeasesUpdateMutation = {
 		| undefined;
 };
 
-export type DeleteLeasesMutationVariables = Exact<{
+export type DeleteLeasesVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeleteLeasesMutation = {
+export type DeleteLeases = {
 	__typename?: 'mutation_root';
 	delete_leases_by_pk?:
 		| { __typename?: 'leases'; id: number }
@@ -5714,23 +5682,23 @@ export type DeleteLeasesMutation = {
 		| undefined;
 };
 
-export type LeasesByIdQueryVariables = Exact<{
+export type LeasesByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type LeasesByIdQuery = {
+export type LeasesById = {
 	__typename?: 'query_root';
 	leases_by_pk?:
 		| {
 				__typename?: 'leases';
 				id: number;
 				deposit?: number | null | undefined;
-				end_date?: any | null | undefined;
+				end_date?: string | null | undefined;
 				is_expired?: boolean | null | undefined;
 				is_signed?: boolean | null | undefined;
 				license?: string | null | undefined;
 				monthly_rent?: number | null | undefined;
-				start_date?: any | null | undefined;
+				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
 				unit?:
@@ -5756,30 +5724,30 @@ export type LeasesByIdQuery = {
 		| undefined;
 };
 
-export type LeasesListQueryVariables = Exact<{
+export type LeasesListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<leases_order_by> | leases_order_by>;
 }>;
 
-export type LeasesListQuery = {
+export type LeasesList = {
 	__typename?: 'query_root';
 	leases: Array<{
 		__typename?: 'leases';
 		id: number;
 		deposit?: number | null | undefined;
-		end_date?: any | null | undefined;
+		end_date?: string | null | undefined;
 		is_expired?: boolean | null | undefined;
 		is_signed?: boolean | null | undefined;
 		license?: string | null | undefined;
 		monthly_rent?: number | null | undefined;
-		start_date?: any | null | undefined;
+		start_date?: string | null | undefined;
 		tenant_id?: number | null | undefined;
 		unit_id?: number | null | undefined;
 	}>;
 };
 
-export type propertiesDetailsFragment = {
+export type propertiesDetails = {
 	__typename?: 'properties';
 	id: number;
 	client_id?: number | null | undefined;
@@ -5791,11 +5759,13 @@ export type propertiesDetailsFragment = {
 	coordinates?: any | null | undefined;
 };
 
-export type PropertiesInsertMutationVariables = Exact<{
+export type propertiesDetailsVariables = Exact<{ [key: string]: never }>;
+
+export type PropertiesInsertVariables = Exact<{
 	object?: InputMaybe<properties_insert_input>;
 }>;
 
-export type PropertiesInsertMutation = {
+export type PropertiesInsert = {
 	__typename?: 'mutation_root';
 	insert_properties_one?:
 		| {
@@ -5813,12 +5783,12 @@ export type PropertiesInsertMutation = {
 		| undefined;
 };
 
-export type PropertiesUpdateMutationVariables = Exact<{
+export type PropertiesUpdateVariables = Exact<{
 	id: Scalars['Int'];
 	_set?: InputMaybe<properties_set_input>;
 }>;
 
-export type PropertiesUpdateMutation = {
+export type PropertiesUpdate = {
 	__typename?: 'mutation_root';
 	update_properties_by_pk?:
 		| {
@@ -5836,11 +5806,11 @@ export type PropertiesUpdateMutation = {
 		| undefined;
 };
 
-export type DeletePropertiesMutationVariables = Exact<{
+export type DeletePropertiesVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeletePropertiesMutation = {
+export type DeleteProperties = {
 	__typename?: 'mutation_root';
 	delete_properties_by_pk?:
 		| { __typename?: 'properties'; id: number }
@@ -5848,11 +5818,11 @@ export type DeletePropertiesMutation = {
 		| undefined;
 };
 
-export type PropertiesByIdQueryVariables = Exact<{
+export type PropertiesByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type PropertiesByIdQuery = {
+export type PropertiesById = {
 	__typename?: 'query_root';
 	properties_by_pk?:
 		| {
@@ -5870,13 +5840,13 @@ export type PropertiesByIdQuery = {
 		| undefined;
 };
 
-export type PropertiesListQueryVariables = Exact<{
+export type PropertiesListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<properties_order_by> | properties_order_by>;
 }>;
 
-export type PropertiesListQuery = {
+export type PropertiesList = {
 	__typename?: 'query_root';
 	properties: Array<{
 		__typename?: 'properties';
@@ -5891,24 +5861,26 @@ export type PropertiesListQuery = {
 	}>;
 };
 
-export type tenantsDetailsFragment = {
+export type tenantsDetails = {
 	__typename?: 'tenants';
 	id: number;
 	first_name?: string | null | undefined;
 	last_name?: string | null | undefined;
 	email?: string | null | undefined;
 	phone?: string | null | undefined;
-	dob?: any | null | undefined;
+	dob?: string | null | undefined;
 	civilid?: any | null | undefined;
 	second_name?: string | null | undefined;
 	third_name?: string | null | undefined;
 };
 
-export type TenantsInsertMutationVariables = Exact<{
+export type tenantsDetailsVariables = Exact<{ [key: string]: never }>;
+
+export type TenantsInsertVariables = Exact<{
 	object?: InputMaybe<tenants_insert_input>;
 }>;
 
-export type TenantsInsertMutation = {
+export type TenantsInsert = {
 	__typename?: 'mutation_root';
 	insert_tenants_one?:
 		| {
@@ -5918,7 +5890,7 @@ export type TenantsInsertMutation = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
@@ -5927,12 +5899,12 @@ export type TenantsInsertMutation = {
 		| undefined;
 };
 
-export type TenantsUpdateMutationVariables = Exact<{
+export type TenantsUpdateVariables = Exact<{
 	id: Scalars['Int'];
 	_set?: InputMaybe<tenants_set_input>;
 }>;
 
-export type TenantsUpdateMutation = {
+export type TenantsUpdate = {
 	__typename?: 'mutation_root';
 	update_tenants_by_pk?:
 		| {
@@ -5942,7 +5914,7 @@ export type TenantsUpdateMutation = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
@@ -5951,11 +5923,11 @@ export type TenantsUpdateMutation = {
 		| undefined;
 };
 
-export type DeleteTenantsMutationVariables = Exact<{
+export type DeleteTenantsVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeleteTenantsMutation = {
+export type DeleteTenants = {
 	__typename?: 'mutation_root';
 	delete_tenants_by_pk?:
 		| { __typename?: 'tenants'; id: number }
@@ -5963,7 +5935,7 @@ export type DeleteTenantsMutation = {
 		| undefined;
 };
 
-export type unitsDetailsFragment = {
+export type unitsDetails = {
 	__typename?: 'units';
 	id: number;
 	is_vacant?: boolean | null | undefined;
@@ -5978,11 +5950,13 @@ export type unitsDetailsFragment = {
 	property_id?: number | null | undefined;
 };
 
-export type UnitsInsertMutationVariables = Exact<{
+export type unitsDetailsVariables = Exact<{ [key: string]: never }>;
+
+export type UnitsInsertVariables = Exact<{
 	object?: InputMaybe<units_insert_input>;
 }>;
 
-export type UnitsInsertMutation = {
+export type UnitsInsert = {
 	__typename?: 'mutation_root';
 	insert_units_one?:
 		| {
@@ -6003,12 +5977,12 @@ export type UnitsInsertMutation = {
 		| undefined;
 };
 
-export type UnitsUpdateMutationVariables = Exact<{
+export type UnitsUpdateVariables = Exact<{
 	id: Scalars['Int'];
 	_set?: InputMaybe<units_set_input>;
 }>;
 
-export type UnitsUpdateMutation = {
+export type UnitsUpdate = {
 	__typename?: 'mutation_root';
 	update_units_by_pk?:
 		| {
@@ -6029,20 +6003,20 @@ export type UnitsUpdateMutation = {
 		| undefined;
 };
 
-export type DeleteUnitsMutationVariables = Exact<{
+export type DeleteUnitsVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type DeleteUnitsMutation = {
+export type DeleteUnits = {
 	__typename?: 'mutation_root';
 	delete_units_by_pk?: { __typename?: 'units'; id: number } | null | undefined;
 };
 
-export type UnitsByIdQueryVariables = Exact<{
+export type UnitsByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type UnitsByIdQuery = {
+export type UnitsById = {
 	__typename?: 'query_root';
 	units_by_pk?:
 		| {
@@ -6063,13 +6037,13 @@ export type UnitsByIdQuery = {
 		| undefined;
 };
 
-export type UnitsListQueryVariables = Exact<{
+export type UnitsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<units_order_by> | units_order_by>;
 }>;
 
-export type UnitsListQuery = {
+export type UnitsList = {
 	__typename?: 'query_root';
 	units: Array<{
 		__typename?: 'units';
@@ -6087,11 +6061,11 @@ export type UnitsListQuery = {
 	}>;
 };
 
-export type TrxByIdQueryVariables = Exact<{
+export type TrxByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type TrxByIdQuery = {
+export type TrxById = {
 	__typename?: 'query_root';
 	transactions_by_pk?:
 		| {
@@ -6103,11 +6077,11 @@ export type TrxByIdQuery = {
 		| undefined;
 };
 
-export type Trx2ByIdQueryVariables = Exact<{
+export type Trx2ByIdVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type Trx2ByIdQuery = {
+export type Trx2ById = {
 	__typename?: 'query_root';
 	transactions_by_pk?:
 		| {
@@ -6121,13 +6095,13 @@ export type Trx2ByIdQuery = {
 		| undefined;
 };
 
-export type TenantsByIdLocalQueryVariables = Exact<{
+export type TenantsByIdLocalVariables = Exact<{
 	id: Scalars['Int'];
 	with_crumbs: Scalars['Boolean'];
 	with_past_leases: Scalars['Boolean'];
 }>;
 
-export type TenantsByIdLocalQuery = {
+export type TenantsByIdLocal = {
 	__typename?: 'query_root';
 	tenants_by_pk?:
 		| {
@@ -6137,15 +6111,15 @@ export type TenantsByIdLocalQuery = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 				pastLeases: Array<{
 					__typename?: 'leases';
 					id: number;
-					start_date?: any | null | undefined;
-					end_date?: any | null | undefined;
+					start_date?: string | null | undefined;
+					end_date?: string | null | undefined;
 					is_expired?: boolean | null | undefined;
 					is_signed?: boolean | null | undefined;
 					monthly_rent?: number | null | undefined;
@@ -6179,11 +6153,11 @@ export type TenantsByIdLocalQuery = {
 		| undefined;
 };
 
-export type TenantBreadcrumbsQueryVariables = Exact<{
+export type TenantBreadcrumbsVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type TenantBreadcrumbsQuery = {
+export type TenantBreadcrumbs = {
 	__typename?: 'query_root';
 	tenants_by_pk?:
 		| {
@@ -6216,11 +6190,11 @@ export type TenantBreadcrumbsQuery = {
 		| undefined;
 };
 
-export type TenantPastLeasesQueryVariables = Exact<{
+export type TenantPastLeasesVariables = Exact<{
 	id: Scalars['Int'];
 }>;
 
-export type TenantPastLeasesQuery = {
+export type TenantPastLeases = {
 	__typename?: 'query_root';
 	tenants_by_pk?:
 		| {
@@ -6229,8 +6203,8 @@ export type TenantPastLeasesQuery = {
 				pastLeases: Array<{
 					__typename?: 'leases';
 					id: number;
-					start_date?: any | null | undefined;
-					end_date?: any | null | undefined;
+					start_date?: string | null | undefined;
+					end_date?: string | null | undefined;
 					is_expired?: boolean | null | undefined;
 					is_signed?: boolean | null | undefined;
 					monthly_rent?: number | null | undefined;
@@ -6242,20 +6216,22 @@ export type TenantPastLeasesQuery = {
 		| undefined;
 };
 
-export type tenantDetailsFragment = {
+export type tenantDetails = {
 	__typename?: 'tenants';
 	id: number;
 	first_name?: string | null | undefined;
 	last_name?: string | null | undefined;
 	email?: string | null | undefined;
 	phone?: string | null | undefined;
-	dob?: any | null | undefined;
+	dob?: string | null | undefined;
 	civilid?: any | null | undefined;
 	second_name?: string | null | undefined;
 	third_name?: string | null | undefined;
 };
 
-export type crumbsFragment = {
+export type tenantDetailsVariables = Exact<{ [key: string]: never }>;
+
+export type crumbs = {
 	__typename?: 'tenants';
 	id: number;
 	leases: Array<{
@@ -6282,11 +6258,13 @@ export type crumbsFragment = {
 	}>;
 };
 
-export type pastLeasesFragment = {
+export type crumbsVariables = Exact<{ [key: string]: never }>;
+
+export type pastLeases = {
 	__typename?: 'leases';
 	id: number;
-	start_date?: any | null | undefined;
-	end_date?: any | null | undefined;
+	start_date?: string | null | undefined;
+	end_date?: string | null | undefined;
 	is_expired?: boolean | null | undefined;
 	is_signed?: boolean | null | undefined;
 	monthly_rent?: number | null | undefined;
@@ -6294,13 +6272,15 @@ export type pastLeasesFragment = {
 	deposit?: number | null | undefined;
 };
 
-export type TenantsListQueryVariables = Exact<{
+export type pastLeasesVariables = Exact<{ [key: string]: never }>;
+
+export type TenantsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<tenants_order_by> | tenants_order_by>;
 }>;
 
-export type TenantsListQuery = {
+export type TenantsList = {
 	__typename?: 'query_root';
 	tenants: Array<{
 		__typename?: 'tenants';
@@ -6309,7 +6289,7 @@ export type TenantsListQuery = {
 		last_name?: string | null | undefined;
 		email?: string | null | undefined;
 		phone?: string | null | undefined;
-		dob?: any | null | undefined;
+		dob?: string | null | undefined;
 		civilid?: any | null | undefined;
 		second_name?: string | null | undefined;
 		third_name?: string | null | undefined;
@@ -6323,121 +6303,103 @@ export type TenantsListQuery = {
 	};
 };
 
-export type ClientsInsertMutationStore = OperationStore<
-	ClientsInsertMutation,
-	ClientsInsertMutationVariables
+export type ClientsInsertStore = OperationStore<
+	ClientsInsert,
+	ClientsInsertVariables
 >;
-export type ClientsUpdateMutationStore = OperationStore<
-	ClientsUpdateMutation,
-	ClientsUpdateMutationVariables
+export type ClientsUpdateStore = OperationStore<
+	ClientsUpdate,
+	ClientsUpdateVariables
 >;
-export type DeleteClientsMutationStore = OperationStore<
-	DeleteClientsMutation,
-	DeleteClientsMutationVariables
+export type DeleteClientsStore = OperationStore<
+	DeleteClients,
+	DeleteClientsVariables
 >;
-export type ClientsByIdQueryStore = OperationStore<
-	ClientsByIdQuery,
-	ClientsByIdQueryVariables
+export type ClientsByIdStore = OperationStore<
+	ClientsById,
+	ClientsByIdVariables
 >;
-export type ClientsListQueryStore = OperationStore<
-	ClientsListQuery,
-	ClientsListQueryVariables
+export type ClientsListStore = OperationStore<
+	ClientsList,
+	ClientsListVariables
 >;
-export type LeasesInsertMutationStore = OperationStore<
-	LeasesInsertMutation,
-	LeasesInsertMutationVariables
+export type LeasesInsertStore = OperationStore<
+	LeasesInsert,
+	LeasesInsertVariables
 >;
-export type LeasesUpdateMutationStore = OperationStore<
-	LeasesUpdateMutation,
-	LeasesUpdateMutationVariables
+export type LeasesUpdateStore = OperationStore<
+	LeasesUpdate,
+	LeasesUpdateVariables
 >;
-export type DeleteLeasesMutationStore = OperationStore<
-	DeleteLeasesMutation,
-	DeleteLeasesMutationVariables
+export type DeleteLeasesStore = OperationStore<
+	DeleteLeases,
+	DeleteLeasesVariables
 >;
-export type LeasesByIdQueryStore = OperationStore<
-	LeasesByIdQuery,
-	LeasesByIdQueryVariables
+export type LeasesByIdStore = OperationStore<LeasesById, LeasesByIdVariables>;
+export type LeasesListStore = OperationStore<LeasesList, LeasesListVariables>;
+export type PropertiesInsertStore = OperationStore<
+	PropertiesInsert,
+	PropertiesInsertVariables
 >;
-export type LeasesListQueryStore = OperationStore<
-	LeasesListQuery,
-	LeasesListQueryVariables
+export type PropertiesUpdateStore = OperationStore<
+	PropertiesUpdate,
+	PropertiesUpdateVariables
 >;
-export type PropertiesInsertMutationStore = OperationStore<
-	PropertiesInsertMutation,
-	PropertiesInsertMutationVariables
+export type DeletePropertiesStore = OperationStore<
+	DeleteProperties,
+	DeletePropertiesVariables
 >;
-export type PropertiesUpdateMutationStore = OperationStore<
-	PropertiesUpdateMutation,
-	PropertiesUpdateMutationVariables
+export type PropertiesByIdStore = OperationStore<
+	PropertiesById,
+	PropertiesByIdVariables
 >;
-export type DeletePropertiesMutationStore = OperationStore<
-	DeletePropertiesMutation,
-	DeletePropertiesMutationVariables
+export type PropertiesListStore = OperationStore<
+	PropertiesList,
+	PropertiesListVariables
 >;
-export type PropertiesByIdQueryStore = OperationStore<
-	PropertiesByIdQuery,
-	PropertiesByIdQueryVariables
+export type TenantsInsertStore = OperationStore<
+	TenantsInsert,
+	TenantsInsertVariables
 >;
-export type PropertiesListQueryStore = OperationStore<
-	PropertiesListQuery,
-	PropertiesListQueryVariables
+export type TenantsUpdateStore = OperationStore<
+	TenantsUpdate,
+	TenantsUpdateVariables
 >;
-export type TenantsInsertMutationStore = OperationStore<
-	TenantsInsertMutation,
-	TenantsInsertMutationVariables
+export type DeleteTenantsStore = OperationStore<
+	DeleteTenants,
+	DeleteTenantsVariables
 >;
-export type TenantsUpdateMutationStore = OperationStore<
-	TenantsUpdateMutation,
-	TenantsUpdateMutationVariables
+export type UnitsInsertStore = OperationStore<
+	UnitsInsert,
+	UnitsInsertVariables
 >;
-export type DeleteTenantsMutationStore = OperationStore<
-	DeleteTenantsMutation,
-	DeleteTenantsMutationVariables
+export type UnitsUpdateStore = OperationStore<
+	UnitsUpdate,
+	UnitsUpdateVariables
 >;
-export type UnitsInsertMutationStore = OperationStore<
-	UnitsInsertMutation,
-	UnitsInsertMutationVariables
+export type DeleteUnitsStore = OperationStore<
+	DeleteUnits,
+	DeleteUnitsVariables
 >;
-export type UnitsUpdateMutationStore = OperationStore<
-	UnitsUpdateMutation,
-	UnitsUpdateMutationVariables
+export type UnitsByIdStore = OperationStore<UnitsById, UnitsByIdVariables>;
+export type UnitsListStore = OperationStore<UnitsList, UnitsListVariables>;
+export type TrxByIdStore = OperationStore<TrxById, TrxByIdVariables>;
+export type Trx2ByIdStore = OperationStore<Trx2ById, Trx2ByIdVariables>;
+export type TenantsByIdLocalStore = OperationStore<
+	TenantsByIdLocal,
+	TenantsByIdLocalVariables
 >;
-export type DeleteUnitsMutationStore = OperationStore<
-	DeleteUnitsMutation,
-	DeleteUnitsMutationVariables
+export type TenantBreadcrumbsStore = OperationStore<
+	TenantBreadcrumbs,
+	TenantBreadcrumbsVariables
 >;
-export type UnitsByIdQueryStore = OperationStore<
-	UnitsByIdQuery,
-	UnitsByIdQueryVariables
+export type TenantPastLeasesStore = OperationStore<
+	TenantPastLeases,
+	TenantPastLeasesVariables
 >;
-export type UnitsListQueryStore = OperationStore<
-	UnitsListQuery,
-	UnitsListQueryVariables
->;
-export type TrxByIdQueryStore = OperationStore<
-	TrxByIdQuery,
-	TrxByIdQueryVariables
->;
-export type Trx2ByIdQueryStore = OperationStore<
-	Trx2ByIdQuery,
-	Trx2ByIdQueryVariables
->;
-export type TenantsByIdLocalQueryStore = OperationStore<
-	TenantsByIdLocalQuery,
-	TenantsByIdLocalQueryVariables
->;
-export type TenantBreadcrumbsQueryStore = OperationStore<
-	TenantBreadcrumbsQuery,
-	TenantBreadcrumbsQueryVariables
->;
-export type TenantPastLeasesQueryStore = OperationStore<
-	TenantPastLeasesQuery,
-	TenantPastLeasesQueryVariables
->;
-export type TenantsListQueryStore = OperationStore<
-	TenantsListQuery,
-	TenantsListQueryVariables
+export type TenantsListStore = OperationStore<
+	TenantsList,
+	TenantsListVariables
 >;
 export type WithTypename<T extends { __typename?: any }> = {
 	[K in Exclude<keyof T, '__typename'>]?: T[K];
@@ -11763,7 +11725,7 @@ export type GraphCacheConfig = {
 	resolvers?: GraphCacheResolvers;
 	storage?: GraphCacheStorageAdapter;
 };
-export const detailsFragmentDoc = {
+export const details = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11787,8 +11749,8 @@ export const detailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<detailsFragment, unknown>;
-export const leasesDetailsFragmentDoc = {
+} as unknown as DocumentNode<details, detailsVariables>;
+export const leasesDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11815,8 +11777,8 @@ export const leasesDetailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<leasesDetailsFragment, unknown>;
-export const propertiesDetailsFragmentDoc = {
+} as unknown as DocumentNode<leasesDetails, leasesDetailsVariables>;
+export const propertiesDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11841,8 +11803,8 @@ export const propertiesDetailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<propertiesDetailsFragment, unknown>;
-export const tenantsDetailsFragmentDoc = {
+} as unknown as DocumentNode<propertiesDetails, propertiesDetailsVariables>;
+export const tenantsDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11868,8 +11830,8 @@ export const tenantsDetailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<tenantsDetailsFragment, unknown>;
-export const unitsDetailsFragmentDoc = {
+} as unknown as DocumentNode<tenantsDetails, tenantsDetailsVariables>;
+export const unitsDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11897,8 +11859,8 @@ export const unitsDetailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<unitsDetailsFragment, unknown>;
-export const tenantDetailsFragmentDoc = {
+} as unknown as DocumentNode<unitsDetails, unitsDetailsVariables>;
+export const tenantDetails = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -11924,8 +11886,8 @@ export const tenantDetailsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<tenantDetailsFragment, unknown>;
-export const crumbsFragmentDoc = {
+} as unknown as DocumentNode<tenantDetails, tenantDetailsVariables>;
+export const crumbs = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -12010,8 +11972,8 @@ export const crumbsFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<crumbsFragment, unknown>;
-export const pastLeasesFragmentDoc = {
+} as unknown as DocumentNode<crumbs, crumbsVariables>;
+export const pastLeases = {
 	kind: 'Document',
 	definitions: [
 		{
@@ -12036,7 +11998,7 @@ export const pastLeasesFragmentDoc = {
 			},
 		},
 	],
-} as unknown as DocumentNode<pastLeasesFragment, unknown>;
+} as unknown as DocumentNode<pastLeases, pastLeasesVariables>;
 export const ClientsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12087,12 +12049,9 @@ export const ClientsInsertDocument = {
 				],
 			},
 		},
-		...detailsFragmentDoc.definitions,
+		...details.definitions,
 	],
-} as unknown as DocumentNode<
-	ClientsInsertMutation,
-	ClientsInsertMutationVariables
->;
+} as unknown as DocumentNode<ClientsInsert, ClientsInsertVariables>;
 export const ClientsUpdateDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12164,12 +12123,9 @@ export const ClientsUpdateDocument = {
 				],
 			},
 		},
-		...detailsFragmentDoc.definitions,
+		...details.definitions,
 	],
-} as unknown as DocumentNode<
-	ClientsUpdateMutation,
-	ClientsUpdateMutationVariables
->;
+} as unknown as DocumentNode<ClientsUpdate, ClientsUpdateVariables>;
 export const DeleteClientsDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12214,10 +12170,7 @@ export const DeleteClientsDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<
-	DeleteClientsMutation,
-	DeleteClientsMutationVariables
->;
+} as unknown as DocumentNode<DeleteClients, DeleteClientsVariables>;
 export const ClientsByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12264,9 +12217,9 @@ export const ClientsByIdDocument = {
 				],
 			},
 		},
-		...detailsFragmentDoc.definitions,
+		...details.definitions,
 	],
-} as unknown as DocumentNode<ClientsByIdQuery, ClientsByIdQueryVariables>;
+} as unknown as DocumentNode<ClientsById, ClientsByIdVariables>;
 export const ClientsListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12355,9 +12308,9 @@ export const ClientsListDocument = {
 				],
 			},
 		},
-		...detailsFragmentDoc.definitions,
+		...details.definitions,
 	],
-} as unknown as DocumentNode<ClientsListQuery, ClientsListQueryVariables>;
+} as unknown as DocumentNode<ClientsList, ClientsListVariables>;
 export const LeasesInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12408,12 +12361,9 @@ export const LeasesInsertDocument = {
 				],
 			},
 		},
-		...leasesDetailsFragmentDoc.definitions,
+		...leasesDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	LeasesInsertMutation,
-	LeasesInsertMutationVariables
->;
+} as unknown as DocumentNode<LeasesInsert, LeasesInsertVariables>;
 export const LeasesUpdateDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12485,12 +12435,9 @@ export const LeasesUpdateDocument = {
 				],
 			},
 		},
-		...leasesDetailsFragmentDoc.definitions,
+		...leasesDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	LeasesUpdateMutation,
-	LeasesUpdateMutationVariables
->;
+} as unknown as DocumentNode<LeasesUpdate, LeasesUpdateVariables>;
 export const DeleteLeasesDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12535,10 +12482,7 @@ export const DeleteLeasesDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<
-	DeleteLeasesMutation,
-	DeleteLeasesMutationVariables
->;
+} as unknown as DocumentNode<DeleteLeases, DeleteLeasesVariables>;
 export const LeasesByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12621,9 +12565,9 @@ export const LeasesByIdDocument = {
 				],
 			},
 		},
-		...leasesDetailsFragmentDoc.definitions,
+		...leasesDetails.definitions,
 	],
-} as unknown as DocumentNode<LeasesByIdQuery, LeasesByIdQueryVariables>;
+} as unknown as DocumentNode<LeasesById, LeasesByIdVariables>;
 export const LeasesListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12712,9 +12656,9 @@ export const LeasesListDocument = {
 				],
 			},
 		},
-		...leasesDetailsFragmentDoc.definitions,
+		...leasesDetails.definitions,
 	],
-} as unknown as DocumentNode<LeasesListQuery, LeasesListQueryVariables>;
+} as unknown as DocumentNode<LeasesList, LeasesListVariables>;
 export const PropertiesInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12765,12 +12709,9 @@ export const PropertiesInsertDocument = {
 				],
 			},
 		},
-		...propertiesDetailsFragmentDoc.definitions,
+		...propertiesDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	PropertiesInsertMutation,
-	PropertiesInsertMutationVariables
->;
+} as unknown as DocumentNode<PropertiesInsert, PropertiesInsertVariables>;
 export const PropertiesUpdateDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12842,12 +12783,9 @@ export const PropertiesUpdateDocument = {
 				],
 			},
 		},
-		...propertiesDetailsFragmentDoc.definitions,
+		...propertiesDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	PropertiesUpdateMutation,
-	PropertiesUpdateMutationVariables
->;
+} as unknown as DocumentNode<PropertiesUpdate, PropertiesUpdateVariables>;
 export const DeletePropertiesDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12892,10 +12830,7 @@ export const DeletePropertiesDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<
-	DeletePropertiesMutation,
-	DeletePropertiesMutationVariables
->;
+} as unknown as DocumentNode<DeleteProperties, DeletePropertiesVariables>;
 export const PropertiesByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -12942,9 +12877,9 @@ export const PropertiesByIdDocument = {
 				],
 			},
 		},
-		...propertiesDetailsFragmentDoc.definitions,
+		...propertiesDetails.definitions,
 	],
-} as unknown as DocumentNode<PropertiesByIdQuery, PropertiesByIdQueryVariables>;
+} as unknown as DocumentNode<PropertiesById, PropertiesByIdVariables>;
 export const PropertiesListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13033,9 +12968,9 @@ export const PropertiesListDocument = {
 				],
 			},
 		},
-		...propertiesDetailsFragmentDoc.definitions,
+		...propertiesDetails.definitions,
 	],
-} as unknown as DocumentNode<PropertiesListQuery, PropertiesListQueryVariables>;
+} as unknown as DocumentNode<PropertiesList, PropertiesListVariables>;
 export const TenantsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13086,12 +13021,9 @@ export const TenantsInsertDocument = {
 				],
 			},
 		},
-		...tenantsDetailsFragmentDoc.definitions,
+		...tenantsDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	TenantsInsertMutation,
-	TenantsInsertMutationVariables
->;
+} as unknown as DocumentNode<TenantsInsert, TenantsInsertVariables>;
 export const TenantsUpdateDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13163,12 +13095,9 @@ export const TenantsUpdateDocument = {
 				],
 			},
 		},
-		...tenantsDetailsFragmentDoc.definitions,
+		...tenantsDetails.definitions,
 	],
-} as unknown as DocumentNode<
-	TenantsUpdateMutation,
-	TenantsUpdateMutationVariables
->;
+} as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
 export const DeleteTenantsDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13213,10 +13142,7 @@ export const DeleteTenantsDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<
-	DeleteTenantsMutation,
-	DeleteTenantsMutationVariables
->;
+} as unknown as DocumentNode<DeleteTenants, DeleteTenantsVariables>;
 export const UnitsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13267,9 +13193,9 @@ export const UnitsInsertDocument = {
 				],
 			},
 		},
-		...unitsDetailsFragmentDoc.definitions,
+		...unitsDetails.definitions,
 	],
-} as unknown as DocumentNode<UnitsInsertMutation, UnitsInsertMutationVariables>;
+} as unknown as DocumentNode<UnitsInsert, UnitsInsertVariables>;
 export const UnitsUpdateDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13341,9 +13267,9 @@ export const UnitsUpdateDocument = {
 				],
 			},
 		},
-		...unitsDetailsFragmentDoc.definitions,
+		...unitsDetails.definitions,
 	],
-} as unknown as DocumentNode<UnitsUpdateMutation, UnitsUpdateMutationVariables>;
+} as unknown as DocumentNode<UnitsUpdate, UnitsUpdateVariables>;
 export const DeleteUnitsDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13388,7 +13314,7 @@ export const DeleteUnitsDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<DeleteUnitsMutation, DeleteUnitsMutationVariables>;
+} as unknown as DocumentNode<DeleteUnits, DeleteUnitsVariables>;
 export const UnitsByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13435,9 +13361,9 @@ export const UnitsByIdDocument = {
 				],
 			},
 		},
-		...unitsDetailsFragmentDoc.definitions,
+		...unitsDetails.definitions,
 	],
-} as unknown as DocumentNode<UnitsByIdQuery, UnitsByIdQueryVariables>;
+} as unknown as DocumentNode<UnitsById, UnitsByIdVariables>;
 export const UnitsListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13526,9 +13452,9 @@ export const UnitsListDocument = {
 				],
 			},
 		},
-		...unitsDetailsFragmentDoc.definitions,
+		...unitsDetails.definitions,
 	],
-} as unknown as DocumentNode<UnitsListQuery, UnitsListQueryVariables>;
+} as unknown as DocumentNode<UnitsList, UnitsListVariables>;
 export const TrxByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13574,7 +13500,7 @@ export const TrxByIdDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<TrxByIdQuery, TrxByIdQueryVariables>;
+} as unknown as DocumentNode<TrxById, TrxByIdVariables>;
 export const Trx2ByIdDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13622,7 +13548,7 @@ export const Trx2ByIdDocument = {
 			},
 		},
 	],
-} as unknown as DocumentNode<Trx2ByIdQuery, Trx2ByIdQueryVariables>;
+} as unknown as DocumentNode<Trx2ById, Trx2ByIdVariables>;
 export const TenantsByIdLocalDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13747,14 +13673,11 @@ export const TenantsByIdLocalDocument = {
 				],
 			},
 		},
-		...tenantDetailsFragmentDoc.definitions,
-		...crumbsFragmentDoc.definitions,
-		...pastLeasesFragmentDoc.definitions,
+		...tenantDetails.definitions,
+		...crumbs.definitions,
+		...pastLeases.definitions,
 	],
-} as unknown as DocumentNode<
-	TenantsByIdLocalQuery,
-	TenantsByIdLocalQueryVariables
->;
+} as unknown as DocumentNode<TenantsByIdLocal, TenantsByIdLocalVariables>;
 export const TenantBreadcrumbsDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13801,12 +13724,9 @@ export const TenantBreadcrumbsDocument = {
 				],
 			},
 		},
-		...crumbsFragmentDoc.definitions,
+		...crumbs.definitions,
 	],
-} as unknown as DocumentNode<
-	TenantBreadcrumbsQuery,
-	TenantBreadcrumbsQueryVariables
->;
+} as unknown as DocumentNode<TenantBreadcrumbs, TenantBreadcrumbsVariables>;
 export const TenantPastLeasesDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13880,12 +13800,9 @@ export const TenantPastLeasesDocument = {
 				],
 			},
 		},
-		...pastLeasesFragmentDoc.definitions,
+		...pastLeases.definitions,
 	],
-} as unknown as DocumentNode<
-	TenantPastLeasesQuery,
-	TenantPastLeasesQueryVariables
->;
+} as unknown as DocumentNode<TenantPastLeases, TenantPastLeasesVariables>;
 export const TenantsListDocument = {
 	kind: 'Document',
 	definitions: [
@@ -13994,6 +13911,6 @@ export const TenantsListDocument = {
 				],
 			},
 		},
-		...tenantDetailsFragmentDoc.definitions,
+		...tenantDetails.definitions,
 	],
-} as unknown as DocumentNode<TenantsListQuery, TenantsListQueryVariables>;
+} as unknown as DocumentNode<TenantsList, TenantsListVariables>;

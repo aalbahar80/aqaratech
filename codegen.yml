@@ -59,12 +59,12 @@ config:
   namingConvention: keep
 
   scalars:
-    UnsignedInt: number
-    URL: string
-    JSON: any # string | number | boolean | null | Array<Scalars['JSON']> | Scalars['JSONObject']
-    JSONObject: Record<string, any>
-    Date: string
-    DateTime: string
+    date: string
+    # UnsignedInt: number
+    # URL: string
+    # JSON: any # string | number | boolean | null | Array<Scalars['JSON']> | Scalars['JSONObject']
+    # JSONObject: Record<string, any>
+    # DateTime: string
 
 hooks:
   afterAllFileWrite:

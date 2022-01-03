@@ -1,6 +1,8 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
 import type * as Types from '../../generated/graphql';
 
+import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type ClientsInsertVariables = Types.Exact<{
 	object?: Types.InputMaybe<Types.clients_insert_input>;
@@ -420,3 +422,23 @@ export const ClientsListDocument = {
 		},
 	],
 } as unknown as DocumentNode<ClientsList, ClientsListVariables>;
+export type ClientsInsertStore = OperationStore<
+	ClientsInsert,
+	ClientsInsertVariables
+>;
+export type ClientsUpdateStore = OperationStore<
+	ClientsUpdate,
+	ClientsUpdateVariables
+>;
+export type DeleteClientsStore = OperationStore<
+	DeleteClients,
+	DeleteClientsVariables
+>;
+export type ClientsByIdStore = OperationStore<
+	ClientsById,
+	ClientsByIdVariables
+>;
+export type ClientsListStore = OperationStore<
+	ClientsList,
+	ClientsListVariables
+>;

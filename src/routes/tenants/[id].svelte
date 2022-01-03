@@ -1,6 +1,9 @@
 <script context="module" lang="ts">
 	export const prerender = true;
-	import { TenantsByIdLocalDocument } from './_[id].gql';
+	import {
+		TenantsByIdLocalDocument,
+		TenantsByIdLocalStore,
+	} from '$generated/graphql';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params, stuff, fetch }) => {
@@ -24,28 +27,23 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { OperationStore, operationStore, query } from '@urql/svelte';
+	import { query } from '@urql/svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
-	// import type { TenantsByIdLocalDocument } from './_[id].gql';
 	import {
 		faUserCircle,
 		faEnvelope,
 		faPhone,
 		faIdCard,
 		faBirthdayCake,
-		faPen,
 	} from '@fortawesome/free-solid-svg-icons';
 
-	import { formatDateDiff, omit } from '$lib/utils';
 	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
 	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { ArrowRight16, ArrowLeft16 } from 'carbon-icons-svelte';
-	import type { TenantsByIdLocalQuery } from '$generated/graphql';
 
-	export let tenant;
+	export let tenant: TenantsByIdLocalStore;
 
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
@@ -85,16 +83,16 @@
 		>
 			<Fa class="" icon={faUserCircle} />
 			<p class="text-3xl">
-				{`${result.first_name} ${result.last_name}`}
+				{`${result?.first_name} ${result?.last_name}`}
 			</p>
 			<Fa icon={faEnvelope} />
-			<p>{result.email}</p>
+			<p>{result?.email}</p>
 			<Fa icon={faPhone} />
-			<p>{result.phone}</p>
+			<p>{result?.phone}</p>
 			<Fa icon={faBirthdayCake} />
-			<p>{result.dob}</p>
+			<p>{result?.dob}</p>
 			<Fa icon={faIdCard} />
-			<p>{result.civilid}</p>
+			<p>{result?.civilid}</p>
 			<p>Registered</p>
 			<p>
 				{formatDistanceToNow(new Date('2021-01-01'), { addSuffix: true })}

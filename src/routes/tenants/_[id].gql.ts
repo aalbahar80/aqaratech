@@ -1,6 +1,8 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
 import type * as Types from '../../generated/graphql';
 
+import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type TenantsByIdLocalVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
@@ -18,7 +20,7 @@ export type TenantsByIdLocal = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
@@ -47,8 +49,8 @@ export type TenantsByIdLocal = {
 				pastLeases: Array<{
 					__typename?: 'leases';
 					id: number;
-					start_date?: any | null | undefined;
-					end_date?: any | null | undefined;
+					start_date?: string | null | undefined;
+					end_date?: string | null | undefined;
 					is_expired?: boolean | null | undefined;
 					is_signed?: boolean | null | undefined;
 					monthly_rent?: number | null | undefined;
@@ -110,8 +112,8 @@ export type TenantPastLeases = {
 				pastLeases: Array<{
 					__typename?: 'leases';
 					id: number;
-					start_date?: any | null | undefined;
-					end_date?: any | null | undefined;
+					start_date?: string | null | undefined;
+					end_date?: string | null | undefined;
 					is_expired?: boolean | null | undefined;
 					is_signed?: boolean | null | undefined;
 					monthly_rent?: number | null | undefined;
@@ -140,7 +142,7 @@ export type TenantsList = {
 		last_name?: string | null | undefined;
 		email?: string | null | undefined;
 		phone?: string | null | undefined;
-		dob?: any | null | undefined;
+		dob?: string | null | undefined;
 		civilid?: any | null | undefined;
 		second_name?: string | null | undefined;
 		third_name?: string | null | undefined;
@@ -706,3 +708,19 @@ export const TenantsListDocument = {
 		},
 	],
 } as unknown as DocumentNode<TenantsList, TenantsListVariables>;
+export type TenantsByIdLocalStore = OperationStore<
+	TenantsByIdLocal,
+	TenantsByIdLocalVariables
+>;
+export type TenantBreadcrumbsStore = OperationStore<
+	TenantBreadcrumbs,
+	TenantBreadcrumbsVariables
+>;
+export type TenantPastLeasesStore = OperationStore<
+	TenantPastLeases,
+	TenantPastLeasesVariables
+>;
+export type TenantsListStore = OperationStore<
+	TenantsList,
+	TenantsListVariables
+>;

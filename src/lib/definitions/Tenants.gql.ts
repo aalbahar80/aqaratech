@@ -1,6 +1,8 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
 import type * as Types from '../../generated/graphql';
 
+import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type TenantsInsertVariables = Types.Exact<{
 	object?: Types.InputMaybe<Types.tenants_insert_input>;
@@ -16,7 +18,7 @@ export type TenantsInsert = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
@@ -40,7 +42,7 @@ export type TenantsUpdate = {
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
-				dob?: any | null | undefined;
+				dob?: string | null | undefined;
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
@@ -241,3 +243,15 @@ export const DeleteTenantsDocument = {
 		},
 	],
 } as unknown as DocumentNode<DeleteTenants, DeleteTenantsVariables>;
+export type TenantsInsertStore = OperationStore<
+	TenantsInsert,
+	TenantsInsertVariables
+>;
+export type TenantsUpdateStore = OperationStore<
+	TenantsUpdate,
+	TenantsUpdateVariables
+>;
+export type DeleteTenantsStore = OperationStore<
+	DeleteTenants,
+	DeleteTenantsVariables
+>;

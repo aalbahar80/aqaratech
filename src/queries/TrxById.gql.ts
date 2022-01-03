@@ -1,6 +1,8 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
 import type * as Types from '../generated/graphql';
 
+import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type TrxByIdVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
@@ -130,3 +132,5 @@ export const Trx2ByIdDocument = {
 		},
 	],
 } as unknown as DocumentNode<Trx2ById, Trx2ByIdVariables>;
+export type TrxByIdStore = OperationStore<TrxById, TrxByIdVariables>;
+export type Trx2ByIdStore = OperationStore<Trx2ById, Trx2ByIdVariables>;
