@@ -60,18 +60,14 @@
 		<TenantBreadcrumbs />
 		<div class="flex flex-col items-end">
 			<Link
-				href={`/${$page.url.pathname.split('/')[1]}/${
-					parseInt($page.params.id) - 1
-				}`}
+				href={`/${$page.url.pathname.split('/')[1]}/${+$page.params.id - 1}`}
 				sveltekit:prefetch
 			>
 				<span class="pr-2">Previous</span>
 				<ArrowLeft16 />
 			</Link>
 			<Link
-				href={`/${$page.url.pathname.split('/')[1]}/${
-					parseInt($page.params.id) + 1
-				}`}
+				href={`/${$page.url.pathname.split('/')[1]}/${+$page.params.id + 1}`}
 				sveltekit:prefetch
 			>
 				<span class="pr-2">Next</span>

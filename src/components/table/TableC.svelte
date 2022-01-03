@@ -37,7 +37,7 @@
 			key: 'overflow',
 			empty: true,
 		},
-		99, // insert after the last field
+		$_fieldList.length, // insert after the last field
 	);
 
 	const pageSizes = [10, 25, 100];
@@ -69,7 +69,6 @@
 		on:click:header={(h) => {
 			const field = h.detail.header.key;
 			const order = h.detail.sortDirection;
-			console.log({ field }, { order });
 			sortingInfo = {
 				[field]: order === 'ascending' ? 'asc' : 'desc',
 			};
