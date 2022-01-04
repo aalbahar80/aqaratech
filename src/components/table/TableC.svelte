@@ -63,59 +63,64 @@
 {JSON.stringify($pageQuery)}
 {#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
+{:else if $pageQuery.error}
+	<p>Error state here</p>
 {/if}
-<div class:hidden={$pageQuery.fetching}>
-	<DataTable
-		on:click:header={(h) => {
-			const field = h.detail.header.key;
-			const order = h.detail.sortDirection;
-			sortingInfo = {
-				[field]: order === 'ascending' ? 'asc' : 'desc',
-			};
-		}}
-		zebra
-		sortable
-		title={capitalize(graphqlName)}
-		description="Your organization's active load balancers."
-		{headers}
-		rows={$pageQuery.data?.[graphqlName]}
-	>
-		<Toolbar>
-			<ToolbarContent>
-				<ToolbarSearch />
-				<ToolbarMenu>
-					<ToolbarMenuItem primaryFocus>Restart all</ToolbarMenuItem>
-					<ToolbarMenuItem
-						href="https://cloud.ibm.com/docs/loadbalancer-service"
-					>
-						API documentation
-					</ToolbarMenuItem>
-					<ToolbarMenuItem danger>Delete</ToolbarMenuItem>
-				</ToolbarMenu>
-				<Button href={`${$page.url.pathname}/add`}>New</Button>
-			</ToolbarContent>
-		</Toolbar>
 
-		<span slot="cell" let:row let:cell>
-			{#if cell.key === 'overflow'}
-				<OverflowMenu flipped>
-					<OverflowMenuItem
-						href={`${$page.url.pathname}/${row.id}`}
-						text="Details"
-					/>
-					<OverflowMenuItem
-						href={`${$page.url.pathname}/${row.id}/edit`}
-						text="Edit"
-					/>
-					<OverflowMenuItem danger text="Delete" />
-				</OverflowMenu>
-			{:else}{cell.value}{/if}
-		</span>
-	</DataTable>
-</div>
-<Pagination
-	totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
-	{pageSizes}
-	bind:pageSize
-	bind:page={pageIndex}
-/>
+{#if !pageQuery.error}
+	<div class:hidden={$pageQuery.fetching && !$pageQuery.error}>
+		<DataTable
+			on:click:header={(h) => {
+				const field = h.detail.header.key;
+				const order = h.detail.sortDirection;
+				sortingInfo = {
+					[field]: order === 'ascending' ? 'asc' : 'desc',
+				};
+			}}
+			zebra
+			sortable
+			title={capitalize(graphqlName)}
+			description="Your organization's active load balancers."
+			{headers}
+			rows={$pageQuery.data?.[graphqlName]}
+		>
+			<Toolbar>
+				<ToolbarContent>
+					<ToolbarSearch />
+					<ToolbarMenu>
+						<ToolbarMenuItem primaryFocus>Restart all</ToolbarMenuItem>
+						<ToolbarMenuItem
+							href="https://cloud.ibm.com/docs/loadbalancer-service"
+						>
+							API documentation
+						</ToolbarMenuItem>
+						<ToolbarMenuItem danger>Delete</ToolbarMenuItem>
+					</ToolbarMenu>
+					<Button href={`${$page.url.pathname}/add`}>New</Button>
+				</ToolbarContent>
+			</Toolbar>
+
+			<span slot="cell" let:row let:cell>
+				{#if cell.key === 'overflow'}
+					<OverflowMenu flipped>
+						<OverflowMenuItem
+							href={`${$page.url.pathname}/${row.id}`}
+							text="Details"
+						/>
+						<OverflowMenuItem
+							href={`${$page.url.pathname}/${row.id}/edit`}
+							text="Edit"
+						/>
+						<OverflowMenuItem danger text="Delete" />
+					</OverflowMenu>
+				{:else}{cell.value}{/if}
+			</span>
+		</DataTable>
+	</div>
+	<Pagination
+		totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
+		{pageSizes}
+		bind:pageSize
+		bind:page={pageIndex}
+	/>
+{/if}
