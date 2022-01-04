@@ -60,7 +60,6 @@
 	query(pageQuery);
 </script>
 
-{JSON.stringify($pageQuery)}
 {#if $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else if $pageQuery.error}
@@ -82,7 +81,7 @@
 			title={capitalize(graphqlName)}
 			description="Your organization's active load balancers."
 			{headers}
-			rows={$pageQuery.data?.[graphqlName]}
+			rows={$pageQuery.data?.[graphqlName] ?? []}
 		>
 			<Toolbar>
 				<ToolbarContent>
