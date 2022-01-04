@@ -10,7 +10,7 @@ query TenantsByIdLocal(
 			...pastLeases
 		}
 	}
-	transactions {
+	transactions(where: {lease: {tenant_id: {_eq: $id}}}, order_by: {created_at: desc}, limit: 5) {
 	  id
 	  amount
 	  created_at

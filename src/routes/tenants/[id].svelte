@@ -101,7 +101,6 @@
 		</div>
 
 		<div class="grid flex-grow grid-cols-3 p-8 card bg-base-200 rounded-box">
-			Recent Transactions
 			<RecentTrx trx={$tenant.data?.transactions} />
 		</div>
 		<LeaseAccordion />

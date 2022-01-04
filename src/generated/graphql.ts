@@ -8401,6 +8401,62 @@ export const TenantsByIdLocalDocument = {
 					{
 						kind: 'Field',
 						name: { kind: 'Name', value: 'transactions' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'lease' },
+											value: {
+												kind: 'ObjectValue',
+												fields: [
+													{
+														kind: 'ObjectField',
+														name: { kind: 'Name', value: 'tenant_id' },
+														value: {
+															kind: 'ObjectValue',
+															fields: [
+																{
+																	kind: 'ObjectField',
+																	name: { kind: 'Name', value: '_eq' },
+																	value: {
+																		kind: 'Variable',
+																		name: { kind: 'Name', value: 'id' },
+																	},
+																},
+															],
+														},
+													},
+												],
+											},
+										},
+									],
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'created_at' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: { kind: 'IntValue', value: '5' },
+							},
+						],
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
