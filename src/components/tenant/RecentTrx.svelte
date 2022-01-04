@@ -1,8 +1,19 @@
 <script lang="ts">
-	import { DataTable, Tag, Link } from 'carbon-components-svelte';
+	import {
+		DataTable,
+		Tag,
+		Link,
+		ToastNotification,
+		NotificationIcon,
+	} from 'carbon-components-svelte';
 	import type { TenantsByIdLocal } from '$generated/graphql';
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { Launch16, CheckmarkFilled24 } from 'carbon-icons-svelte';
+	import {
+		Launch16,
+		CheckmarkFilled24,
+		CloseFilled24,
+	} from 'carbon-icons-svelte';
+	import { format, parseISO } from 'date-fns';
 	export let trx: TenantsByIdLocal['transactions'] | undefined;
 	// extract object keys from trx
 	let headers: DataTableHeader[];
@@ -14,23 +25,32 @@
 			sort: false,
 		}));
 	}
+
+	const fdate = (date: string) => {
+		const d = parseISO(date);
+		return format(d, 'MMM yy');
+	};
 </script>
 
 {#if trx}
 	<DataTable {headers} rows={trx}>
 		<svelte:fragment slot="cell" let:row let:cell>
-			{#if row['is_paid']}
-				{#if cell.key === 'is_paid'}
-					<CheckmarkFilled24 />
-				{:else if cell.key === 'receipt_url'}
-					<Link
-						icon={Launch16}
-						href="https://en.wikipedia.org/wiki/Round-robin_DNS"
-						target="_blank">Receipt</Link
-					>
+			{#if cell.key === 'is_paid'}
+				{#if cell.value}
+					<!-- <CheckmarkFilled24 class="min-w-screen" /> -->
+					<h3>sdkfjskdfl</h3>
+					/>
 				{:else}
-					{cell.value}
+					<CloseFilled24 id="abcid" />
 				{/if}
+			{:else if cell.key === 'receipt_url'}
+				{#if row['is_paid']}
+					<Link icon={Launch16} href={cell.value} target="_blank">Receipt</Link>
+				{/if}
+			{:else if cell.key === 'created_at'}
+				{fdate(cell.value)}
+			{:else if cell.key === 'due_date'}
+				{fdate(cell.value)}
 			{:else}
 				{cell.value}
 			{/if}
@@ -39,3 +59,14 @@
 {:else}
 	TODO: Empty State
 {/if}
+
+<style>
+	h3 {
+		/* font: 'heading-01'; */
+		font: var(--cds-heading-01);
+		color: var(--cds-inverse-support-01);
+	}
+	:global(#abcid) {
+		color: var(--cds-inverse-support-01);
+	}
+</style>
