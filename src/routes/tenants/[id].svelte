@@ -16,7 +16,7 @@
 					tenant: await stuff.query(TenantsByIdLocalDocument, {
 						id,
 						with_crumbs: true,
-						with_past_leases: false,
+						with_past_leases: true,
 					}),
 					id,
 				},
@@ -42,6 +42,7 @@
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { ArrowRight16, ArrowLeft16 } from 'carbon-icons-svelte';
+	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 
 	export let tenant: TenantsByIdLocalStore;
 
@@ -100,7 +101,8 @@
 		</div>
 
 		<div class="grid flex-grow grid-cols-3 p-8 card bg-base-200 rounded-box">
-			Transactions
+			Recent Transactions
+			<RecentTrx trx={$tenant.data?.transactions} />
 		</div>
 		<LeaseAccordion />
 	{/if}

@@ -10,6 +10,16 @@ query TenantsByIdLocal(
 			...pastLeases
 		}
 	}
+	transactions {
+	  id
+	  amount
+	  created_at
+	  due_date
+	  is_paid
+	  receipt_url
+	  memo
+	  lease_id
+	}
 }
 
 query TenantBreadcrumbs($id: Int!) {

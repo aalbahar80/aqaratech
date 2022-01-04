@@ -29,6 +29,9 @@ const config = {
 			},
 			plugins: [process.env.NODE_ENV === "production" && optimizeCss()]
 		},
+		prerender: {
+			concurrency: 2,
+		}
 	},
 };
 

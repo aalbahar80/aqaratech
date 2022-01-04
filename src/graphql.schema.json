@@ -8942,6 +8942,18 @@
 				"description": "columns and relationships of \"leases\"",
 				"fields": [
 					{
+						"name": "created_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "deposit",
 						"description": null,
 						"args": [],
@@ -9278,6 +9290,18 @@
 						"type": {
 							"kind": "SCALAR",
 							"name": "Int",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
 							"ofType": null
 						},
 						"isDeprecated": false,
@@ -9907,6 +9931,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
+							"name": "timestamptz_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "deposit",
 						"description": null,
 						"type": {
@@ -10061,6 +10097,18 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
+							"name": "timestamptz_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -10161,6 +10209,18 @@
 				"description": "input type for inserting data into table \"leases\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": null,
@@ -10304,6 +10364,18 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -10315,6 +10387,18 @@
 				"name": "leases_max_fields",
 				"description": "aggregate max on columns",
 				"fields": [
+					{
+						"name": "created_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": null,
@@ -10410,6 +10494,18 @@
 						},
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"inputFields": null,
@@ -10423,6 +10519,18 @@
 				"description": "order by max() on columns of table \"leases\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": null,
@@ -10509,6 +10617,18 @@
 					},
 					{
 						"name": "unit_id",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -10530,6 +10650,18 @@
 				"description": "aggregate min on columns",
 				"fields": [
 					{
+						"name": "created_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "deposit",
 						"description": null,
 						"args": [],
@@ -10624,6 +10756,18 @@
 						},
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"inputFields": null,
@@ -10637,6 +10781,18 @@
 				"description": "order by min() on columns of table \"leases\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": null,
@@ -10723,6 +10879,18 @@
 					},
 					{
 						"name": "unit_id",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -10898,6 +11066,18 @@
 				"fields": null,
 				"inputFields": [
 					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "deposit",
 						"description": null,
 						"type": {
@@ -11052,6 +11232,18 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -11093,6 +11285,12 @@
 				"inputFields": null,
 				"interfaces": null,
 				"enumValues": [
+					{
+						"name": "created_at",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": "column name",
@@ -11146,6 +11344,12 @@
 						"description": "column name",
 						"isDeprecated": false,
 						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
 					}
 				],
 				"possibleTypes": null
@@ -11156,6 +11360,18 @@
 				"description": "input type for updating data in table \"leases\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "created_at",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "deposit",
 						"description": null,
@@ -11258,6 +11474,18 @@
 						"type": {
 							"kind": "SCALAR",
 							"name": "Int",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "timestamptz",
 							"ofType": null
 						},
 						"defaultValue": null,
@@ -11846,6 +12074,12 @@
 				"interfaces": null,
 				"enumValues": [
 					{
+						"name": "created_at",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "deposit",
 						"description": "column name",
 						"isDeprecated": false,
@@ -11895,6 +12129,12 @@
 					},
 					{
 						"name": "unit_id",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "updated_at",
 						"description": "column name",
 						"isDeprecated": false,
 						"deprecationReason": null
@@ -38551,6 +38791,18 @@
 				"description": "columns and relationships of \"users\"",
 				"fields": [
 					{
+						"name": "auth0_id",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client",
 						"description": "An object relationship",
 						"args": [],
@@ -39238,6 +39490,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
+							"name": "String_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client",
 						"description": null,
 						"type": {
@@ -39427,6 +39691,18 @@
 				"fields": null,
 				"inputFields": [
 					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client",
 						"description": null,
 						"type": {
@@ -39545,6 +39821,18 @@
 				"description": "aggregate max on columns",
 				"fields": [
 					{
+						"name": "auth0_id",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client_id",
 						"description": null,
 						"args": [],
@@ -39641,6 +39929,18 @@
 				"fields": null,
 				"inputFields": [
 					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client_id",
 						"description": null,
 						"type": {
@@ -39734,6 +40034,18 @@
 				"name": "users_min_fields",
 				"description": "aggregate min on columns",
 				"fields": [
+					{
+						"name": "auth0_id",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "client_id",
 						"description": null,
@@ -39830,6 +40142,18 @@
 				"description": "order by min() on columns of table \"users\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "client_id",
 						"description": null,
@@ -40079,6 +40403,18 @@
 				"fields": null,
 				"inputFields": [
 					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client",
 						"description": null,
 						"type": {
@@ -40227,6 +40563,12 @@
 				"interfaces": null,
 				"enumValues": [
 					{
+						"name": "auth0_id",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "client_id",
 						"description": "column name",
 						"isDeprecated": false,
@@ -40277,6 +40619,18 @@
 				"description": "input type for updating data in table \"users\"",
 				"fields": null,
 				"inputFields": [
+					{
+						"name": "auth0_id",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "client_id",
 						"description": null,
@@ -40750,6 +41104,12 @@
 				"inputFields": null,
 				"interfaces": null,
 				"enumValues": [
+					{
+						"name": "auth0_id",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
 					{
 						"name": "client_id",
 						"description": "column name",

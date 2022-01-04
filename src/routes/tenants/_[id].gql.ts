@@ -60,6 +60,17 @@ export type TenantsByIdLocal = {
 		  }
 		| null
 		| undefined;
+	transactions: Array<{
+		__typename?: 'transactions';
+		id: number;
+		amount?: number | null | undefined;
+		created_at?: any | null | undefined;
+		due_date?: string | null | undefined;
+		is_paid?: boolean | null | undefined;
+		receipt_url?: string | null | undefined;
+		memo?: string | null | undefined;
+		lease_id?: number | null | undefined;
+	}>;
 };
 
 export type TenantBreadcrumbsVariables = Types.Exact<{
@@ -370,6 +381,23 @@ export const TenantsByIdLocalDocument = {
 										],
 									},
 								},
+							],
+						},
+					},
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'transactions' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_paid' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'receipt_url' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'memo' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'lease_id' } },
 							],
 						},
 					},
