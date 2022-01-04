@@ -8,12 +8,13 @@
 	import type { GraphCacheConfig } from '$generated/graphql';
 
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch, stuff, session, url }) => {
+	export const load: Load = async ({ fetch, stuff, session }) => {
 		// check session. If user not logged in, redirect to login page
 		const unprotected = ['/login', '/logout', '/callback', '/landing'];
-		const shouldRedirect =
-			isEmpty(session.user) && !unprotected.includes(url.pathname);
-		console.log({ shouldRedirect, session, browser, url: url.toJSON() });
+		const shouldRedirect = false;
+		// const shouldRedirect =
+		// 	isEmpty(session.user) && !unprotected.includes(url.pathname);
+		// console.log({ shouldRedirect, session, browser, url: url.toJSON() });
 		if (shouldRedirect) {
 			return { redirect: '/landing', status: 302 };
 		}
