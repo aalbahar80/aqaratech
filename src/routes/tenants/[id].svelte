@@ -43,6 +43,8 @@
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { ArrowRight16, ArrowLeft16 } from 'carbon-icons-svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
+	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
+	import ActionPanel from '$components/ActionPanel.svelte';
 
 	export let tenant: TenantsByIdLocalStore;
 
@@ -51,7 +53,7 @@
 </script>
 
 <div
-	class="grid grid-cols-1 lg:grid-cols-2 gap-4 space-y-4 max-w-screen-2xl items-baseline"
+	class="grid grid-cols-1 lg:grid-cols-1 gap-4 space-y-4 max-w-screen-2xl items-baseline"
 >
 	{#if $tenant.fetching}
 		<p>Loading...</p>
@@ -59,22 +61,8 @@
 		<p>Error: {$tenant.error.message}</p>
 	{:else}
 		<TenantBreadcrumbs />
-		<div class="flex flex-col items-end">
-			<Link
-				href={`/${$page.url.pathname.split('/')[1]}/${+$page.params.id - 1}`}
-				sveltekit:prefetch
-			>
-				<span class="pr-2">Previous</span>
-				<ArrowLeft16 />
-			</Link>
-			<Link
-				href={`/${$page.url.pathname.split('/')[1]}/${+$page.params.id + 1}`}
-				sveltekit:prefetch
-			>
-				<span class="pr-2">Next</span>
-				<ArrowRight16 />
-			</Link>
-		</div>
+		<NextPrev id={$page.params.id} path={$page.url.pathname.split('/')[1]} />
+		<ActionPanel />
 		<div
 			class="grid items-center flex-grow grid-cols-2 p-8 card bg-base-200 rounded-box gap-y-8"
 		>
@@ -100,9 +88,7 @@
 			</p>
 		</div>
 
-		<div class="grid flex-grow grid-cols-3 p-8 card bg-base-200 rounded-box">
-			<RecentTrx trx={$tenant.data?.transactions} />
-		</div>
+		<RecentTrx trx={$tenant.data?.transactions} />
 		<LeaseAccordion />
 	{/if}
 </div>

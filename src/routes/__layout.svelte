@@ -104,11 +104,13 @@
 	import type { Client } from '@urql/svelte';
 	import { Content } from 'carbon-components-svelte';
 	import isEmpty from 'just-is-empty';
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 	export let client: Client;
 	setClient(client);
 </script>
 
 <Header />
 <Content>
+	<SvelteToast />
 	<slot />
 </Content>
