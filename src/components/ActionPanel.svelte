@@ -5,25 +5,18 @@
 
 	import { Button, Modal, ToastNotification } from 'carbon-components-svelte';
 	import { TrashCan16, Edit16 } from 'carbon-icons-svelte';
-	import { toast } from '@zerodevx/svelte-toast';
-	import Toast from './Toast.svelte';
 	import { addToast } from '$lib/stores/toast';
 
 	let open = false;
 </script>
 
-<!-- <button on:click={() => toast.push('Hello world!')}>EMIT TOAST</button> -->
-
-<button on:click={() => addToast()}>EMIT TOAST</button>
-
 <button
 	on:click={() =>
-		toast.push({
-			dismissable: false,
-			// initial: 0,
-			// next: 0,
-			component: { src: Toast },
-			theme: { '--toastBackground': 'clear', '--toastWidth': '100%' },
+		addToast({
+			timeout: 200000,
+			kind: 'warning',
+			title: 'a notification',
+			subtitle: 'subtitle here',
 		})}>EMIT TOAST</button
 >
 
@@ -52,18 +45,11 @@
 		on:close
 		on:submit={() => {
 			console.log('🚀 ~ file: ActionPanel.svelte ~ line 36 ~ open', open);
-			addToast();
+			// addToast(ToastNotification);
+			// addToast(SuccessToast);
 			// open = false;
-			// goto(`/${$page.url.pathname.split('/')[1]}`);
 		}}
 	>
 		<p>This is a permanent action and cannot be undone.</p>
 	</Modal>
 </div>
-
-<!-- <ToastNotification
-	timeout={5}
-	title="Error"
-	subtitle="An internal server error occurred."
-	caption={new Date().toLocaleString()}
-/> -->

@@ -1,28 +1,34 @@
-import { writable } from 'svelte/store'
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import type { ToastNotificationProps } from 'carbon-components-svelte/types/Notification/ToastNotification.svelte';
 
-export const toasts = writable([])
-
-export const dismissToast = (id) => {
-  toasts.update((all) => all.filter((t) => t.id !== id))
+interface ToastItem {
+	id: number;
+	component: ToastNotificationProps;
 }
 
-export const addToast = (toast) => {
-  // Create a unique ID so we can easily find/remove it
-  // if it is dismissible/has a timeout.
-  const id = Math.floor(Math.random() * 10000)
+export const toasts: Writable<ToastItem[]> = writable([]);
 
-  // Setup some sensible defaults for a toast.
-  const defaults = {
-    id,
-    type: 'info',
-    dismissible: true,
-    timeout: 3000,
-  }
+export const dismissToast = (id: number) => {
+	toasts.update((all) => all.filter((t) => t.id !== id));
+};
+export const addToast = (toast: ToastNotificationProps) => {
+	// Create a unique ID so we can easily find/remove it
+	// if it is dismissible/has a timeout.
+	const id = Math.floor(Math.random() * 10000);
 
-  // Push the toast to the top of the list of toasts
-  const t = { ...defaults, ...toast }
-  toasts.update((all) => [t, ...all])
+	// Setup some sensible defaults for a toast.
+	const defaults = {
+		id,
+		component: toast,
+		// dismissible: true,
+		// timeout: 2000,
+	};
 
-  // If toast is dismissible, dismiss it after "timeout" amount of time.
-  if (t.timeout) setTimeout(() => dismissToast(id), t.timeout)
-}
+	// Push the toast to the top of the list of toasts
+	// const t = { ...defaults, ...toast };
+	toasts.update((all) => [defaults, ...all]);
+
+	// If toast is dismissible, dismiss it after "timeout" amount of time.
+	// if (t.timeout) setTimeout(() => dismissToast(id), t.timeout);
+};

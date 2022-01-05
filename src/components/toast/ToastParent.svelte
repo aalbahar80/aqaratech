@@ -1,27 +1,28 @@
 <script lang="ts">
-	import Toast from '$components/Toast.svelte';
+	import { ToastNotification } from 'carbon-components-svelte';
 
-	import { dismissToast, toasts } from '$lib/stores/toast';
+	import { toasts } from '$lib/stores/toast';
 </script>
 
 {#if $toasts}
-	<section>
-		{#each $toasts as toast (toast.id)}
-			<Toast
-				type={toast.type}
-				dismissible={toast.dismissible}
-				on:dismiss={() => dismissToast(toast.id)}>{toast.message}</Toast
-			>
+	<ul class="fixed right-10 z-50 flex flex-col items-end ">
+		{#each $toasts as { id, component }}
+			<li>
+				<ToastNotification
+					{...component}
+					class="justify-self-center justify-items-end "
+				/>
+			</li>
 		{/each}
-	</section>
+	</ul>
 {/if}
 
-<style lang="postcss">
+<!-- <style lang="postcss">
 	section {
 		position: fixed;
-		/* top: 0; */
-		/* left: 0; */
-		/* right: 5; */
+		top: 0;
+		left: 0;
+		right: 0;
 		width: 100%;
 		display: flex;
 		margin-top: 1rem;
@@ -29,4 +30,4 @@
 		flex-direction: column;
 		z-index: 1000;
 	}
-</style>
+</style> -->

@@ -397,6 +397,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .invisible {
   visibility: hidden;
 }
+.fixed {
+  position: fixed;
+}
+.right-10 {
+  right: 2.5rem;
+}
+.z-50 {
+  z-index: 50;
+}
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -446,9 +455,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex-grow {
   flex-grow: 1;
 }
-.grid-flow-row {
-  grid-auto-flow: row;
-}
 .grid-flow-col {
   grid-auto-flow: column;
 }
@@ -479,11 +485,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-evenly {
   justify-content: space-evenly;
 }
-.gap-2 {
-  gap: 0.5rem;
+.justify-items-end {
+  justify-items: end;
 }
 .gap-4 {
   gap: 1rem;
+}
+.gap-2 {
+  gap: 0.5rem;
 }
 .gap-y-8 {
   row-gap: 2rem;
@@ -542,10 +551,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 @media (min-width: 1024px) {
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
   .lg\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));

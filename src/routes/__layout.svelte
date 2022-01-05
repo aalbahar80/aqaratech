@@ -9,6 +9,10 @@
 
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, stuff, session }) => {
+		console.log(
+			'🚀 ~ file: __layout.svelte ~ line 13 ~ constload:Load= ~ session',
+			session,
+		);
 		if (isEmpty(session.user)) {
 			return { redirect: '/landing', status: 302 };
 		}
