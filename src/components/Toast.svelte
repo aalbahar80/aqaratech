@@ -3,6 +3,7 @@
 </script>
 
 <ToastNotification
+	timeout={20 * 1000}
 	title="Error"
 	subtitle="An internal server error occurred."
 	caption={new Date().toLocaleString()}

@@ -22,7 +22,7 @@
 	// reassign query variables to retrigger query
 	$: leases.variables = { id };
 
-	const expiryText = (start) => {
+	const expiryText = (start: string) => {
 		return formatDistance(parseISO(start), new Date(), {
 			addSuffix: true,
 		});

@@ -105,12 +105,14 @@
 	import { Content } from 'carbon-components-svelte';
 	import isEmpty from 'just-is-empty';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import ToastParent from '$components/toast/ToastParent.svelte';
 	export let client: Client;
 	setClient(client);
 </script>
 
 <Header />
 <Content>
+	<ToastParent />
 	<SvelteToast />
 	<slot />
 </Content>

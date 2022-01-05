@@ -7,11 +7,14 @@
 	import { TrashCan16, Edit16 } from 'carbon-icons-svelte';
 	import { toast } from '@zerodevx/svelte-toast';
 	import Toast from './Toast.svelte';
+	import { addToast } from '$lib/stores/toast';
 
 	let open = false;
 </script>
 
 <!-- <button on:click={() => toast.push('Hello world!')}>EMIT TOAST</button> -->
+
+<button on:click={() => addToast()}>EMIT TOAST</button>
 
 <button
 	on:click={() =>
@@ -49,6 +52,7 @@
 		on:close
 		on:submit={() => {
 			console.log('🚀 ~ file: ActionPanel.svelte ~ line 36 ~ open', open);
+			addToast();
 			// open = false;
 			// goto(`/${$page.url.pathname.split('/')[1]}`);
 		}}
