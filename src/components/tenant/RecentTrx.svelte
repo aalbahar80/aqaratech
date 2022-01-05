@@ -37,11 +37,9 @@
 		<svelte:fragment slot="cell" let:row let:cell>
 			{#if cell.key === 'is_paid'}
 				{#if cell.value}
-					<!-- <CheckmarkFilled24 class="min-w-screen" /> -->
-					<h3>sdkfjskdfl</h3>
-					/>
+					<CheckmarkFilled24 style="fill: var(--cds-support-02)" />
 				{:else}
-					<CloseFilled24 id="abcid" />
+					<CloseFilled24 style="fill: var(--cds-support-01)" />
 				{/if}
 			{:else if cell.key === 'receipt_url'}
 				{#if row['is_paid']}
@@ -59,14 +57,3 @@
 {:else}
 	TODO: Empty State
 {/if}
-
-<style>
-	h3 {
-		/* font: 'heading-01'; */
-		font: var(--cds-heading-01);
-		color: var(--cds-inverse-support-01);
-	}
-	:global(#abcid) {
-		color: var(--cds-inverse-support-01);
-	}
-</style>
