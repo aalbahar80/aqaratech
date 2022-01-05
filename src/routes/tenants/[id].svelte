@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import isEmpty from 'just-is-empty';
 	export const prerender = true;
 	import {
 		TenantsByIdLocalDocument,
@@ -46,7 +47,10 @@
 	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import ActionPanel from '$components/ActionPanel.svelte';
 
+	import { DeleteTenantDocument } from '$generated/graphql';
+
 	export let tenant: TenantsByIdLocalStore;
+	$: id = $page.params.id;
 
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
@@ -61,8 +65,8 @@
 		<p>Error: {$tenant.error.message}</p>
 	{:else}
 		<TenantBreadcrumbs />
-		<NextPrev id={$page.params.id} path={$page.url.pathname.split('/')[1]} />
-		<ActionPanel />
+		<NextPrev {id} path={$page.url.pathname.split('/')[1]} />
+		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument} />
 		<div
 			class="grid items-center flex-grow grid-cols-2 p-8 card bg-base-200 rounded-box gap-y-8"
 		>
@@ -88,7 +92,9 @@
 			</p>
 		</div>
 
-		<RecentTrx trx={$tenant.data?.transactions} />
+		{#if !isEmpty($tenant.data?.transactions)}
+			<RecentTrx trx={$tenant.data?.transactions} />
+		{/if}
 		<LeaseAccordion />
 	{/if}
 </div>

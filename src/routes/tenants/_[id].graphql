@@ -10,15 +10,19 @@ query TenantsByIdLocal(
 			...pastLeases
 		}
 	}
-	transactions(where: {lease: {tenant_id: {_eq: $id}}}, order_by: {created_at: desc}, limit: 5) {
-	  id
-	  amount
-	  created_at
-	  due_date
-	  is_paid
-	  receipt_url
-	  memo
-	  lease_id
+	transactions(
+		where: { lease: { tenant_id: { _eq: $id } } }
+		order_by: { created_at: desc }
+		limit: 5
+	) {
+		id
+		amount
+		created_at
+		due_date
+		is_paid
+		receipt_url
+		memo
+		lease_id
 	}
 }
 
@@ -86,5 +90,11 @@ query TenantsList(
 		aggregate {
 			count
 		}
+	}
+}
+
+mutation DeleteTenant($id: Int!) {
+	delete_tenants_by_pk(id: $id) {
+		id
 	}
 }

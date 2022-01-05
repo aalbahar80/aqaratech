@@ -1,13 +1,49 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import { page } from '$app/stores';
-
 	import { Button, Modal, ToastNotification } from 'carbon-components-svelte';
 	import { TrashCan16, Edit16 } from 'carbon-icons-svelte';
 	import { addToast } from '$lib/stores/toast';
+	import { mutation, operationStore } from '@urql/svelte';
+	import type { DocumentNode } from 'graphql';
+
+	export let deleteDocumentNode: DocumentNode;
+	export let id: string;
+
+	const deleteStore = operationStore(deleteDocumentNode);
+	const deleteMutation = mutation(deleteStore);
 
 	let open = false;
+	let loading = false;
+
+	const handleDelete = async () => {
+		loading = true;
+		await deleteMutation({ id: +id }).then((result) => {
+			if (result.error) {
+				console.error('Unable to delete', result.error);
+				addToast({
+					duration: 10000,
+					props: {
+						kind: 'error',
+						title: 'Unable to delete',
+						subtitle: result.error.message,
+					},
+				});
+				loading = false;
+			} else if (result.data) {
+				console.log('Delete successful', result.data);
+				addToast({
+					duration: 10000,
+					props: {
+						kind: 'success',
+						title: 'Delete successful',
+					},
+				});
+				loading = false;
+				open = false;
+			}
+		});
+	};
 </script>
 
 <button
@@ -46,12 +82,7 @@
 		on:click:button--secondary={() => (open = false)}
 		on:open
 		on:close
-		on:submit={() => {
-			console.log('🚀 ~ file: ActionPanel.svelte ~ line 36 ~ open', open);
-			// addToast(ToastNotification);
-			// addToast(SuccessToast);
-			// open = false;
-		}}
+		on:submit={handleDelete}
 	>
 		<p>This is a permanent action and cannot be undone.</p>
 	</Modal>
