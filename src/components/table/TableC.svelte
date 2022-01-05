@@ -99,7 +99,7 @@
 				</ToolbarContent>
 			</Toolbar>
 
-			<span slot="cell" let:row let:cell>
+			<svelte:fragment slot="cell" let:row let:cell>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
 						<OverflowMenuItem
@@ -113,7 +113,7 @@
 						<OverflowMenuItem danger text="Delete" />
 					</OverflowMenu>
 				{:else}{cell.value}{/if}
-			</span>
+			</svelte:fragment>
 		</DataTable>
 	</div>
 	<Pagination
