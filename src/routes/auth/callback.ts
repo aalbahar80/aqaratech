@@ -1,6 +1,16 @@
 //  Endpoint for redirection from GitHub after authorization...
 import type { RequestHandler } from '@sveltejs/kit';
 
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
+interface TokenResponse {
+	access_token: string;
+	token_type: string;
+	expires_in: number;
+	scope?: string | undefined;
+	id_token?: string | undefined;
+	refresh_token?: string | undefined;
+}
+
 const tokenURL = 'https://dev-eehvhdp2.eu.auth0.com/oauth/token';
 
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -24,9 +34,7 @@ async function getTokens(code: string) {
 			}),
 		});
 
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		const data = await res.json();
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		const data: TokenResponse = await res.json() as TokenResponse;
 		return data;
 	} catch (e) {
 		console.error(e);
@@ -37,12 +45,12 @@ async function getTokens(code: string) {
 export const get: RequestHandler = async (req) => {
 	try {
 		const code = req.url.searchParams.get('code');
+		if (!code) throw new Error('Unable to get code from URL');
 
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const tokens = await getTokens(code);
 
 		req.locals.user = tokens.id_token;
-		req.locals.hasura = tokens.access_token; 
+		req.locals.hasura = tokens.access_token;
 
 		return {
 			status: 302,
@@ -51,6 +59,7 @@ export const get: RequestHandler = async (req) => {
 			},
 		};
 	} catch (e) {
+		// TODO: create error page
 		console.error(e);
 		throw e;
 	}
