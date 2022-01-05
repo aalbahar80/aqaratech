@@ -17,7 +17,6 @@ export const get: RequestHandler = (req) => {
 	});
 
 	const logoutUrl = `${BASE_URL}?${query.toString()}`;
-	console.log('🚀 ~ file: logout.ts ~ line 15 ~ logoutUrl', logoutUrl);
 
 	return {
 		status: 302,
