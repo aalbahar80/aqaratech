@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { ToastNotification } from 'carbon-components-svelte';
-
+	import { flip } from 'svelte/animate';
 	import { toasts } from '$lib/stores/toast';
+	import { fly, slide, fade } from 'svelte/transition';
 </script>
 
 {#if $toasts}
 	<ul class="fixed right-10 z-50 flex flex-col items-end ">
-		{#each $toasts as { id, component }}
-			<li>
+		{#each $toasts as { id, props } (id)}
+			<li transition:fade animate:flip={{ duration: 500 }}>
 				<ToastNotification
-					{...component}
+					{...props}
 					class="justify-self-center justify-items-end "
 				/>
 			</li>

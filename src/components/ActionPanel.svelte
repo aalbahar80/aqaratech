@@ -13,10 +13,13 @@
 <button
 	on:click={() =>
 		addToast({
-			timeout: 200000,
-			kind: 'warning',
-			title: 'a notification',
-			subtitle: 'subtitle here',
+			duration: 10000,
+			props: {
+				kind: 'warning',
+				title: 'a notification',
+				subtitle: 'subtitle here',
+				caption: new Date().toISOString(),
+			},
 		})}>EMIT TOAST</button
 >
 
