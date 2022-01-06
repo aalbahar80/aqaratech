@@ -1,17 +1,42 @@
 <script context="module" lang="ts">
-	import isEmpty from 'just-is-empty';
-	export const prerender = true;
+	import { page } from '$app/stores';
+	import ActionPanel from '$components/ActionPanel.svelte';
+	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
+	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
+	import LeaseAccordion from '$components/LeaseAccordion.svelte';
+	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 	import {
+		DeleteTenantDocument,
 		TenantsByIdLocalDocument,
 		TenantsByIdLocalStore,
 	} from '$generated/graphql';
+	import {
+		faBirthdayCake,
+		faEnvelope,
+		faIdCard,
+		faPhone,
+		faUserCircle,
+	} from '@fortawesome/free-solid-svg-icons';
 	import type { Load } from '@sveltejs/kit';
+	import { query } from '@urql/svelte';
+	import { formatDistanceToNow, formatRelative } from 'date-fns';
+	import isEmpty from 'just-is-empty';
+	import Fa from 'svelte-fa/src/fa.svelte';
 
-	export const load: Load = async ({ params, stuff, fetch }) => {
+	export const prerender = true;
+
+	export const load: Load = async ({ params, stuff }) => {
 		const id = params.id;
-		if (id === 'add') {
-			return;
-		} else {
+		// debugger;
+		if (id === 'add') return;
+
+		const tenant = await stuff.query(TenantsByIdLocalDocument, {
+			id,
+			with_crumbs: true,
+			with_past_leases: true,
+		});
+
+		if (tenant.data?.tenants_by_pk) {
 			return {
 				props: {
 					tenant: await stuff.query(TenantsByIdLocalDocument, {
@@ -23,32 +48,12 @@
 				},
 			};
 		}
+
+		return { status: 404 };
 	};
 </script>
 
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { query } from '@urql/svelte';
-	import Fa from 'svelte-fa/src/fa.svelte';
-	import {
-		faUserCircle,
-		faEnvelope,
-		faPhone,
-		faIdCard,
-		faBirthdayCake,
-	} from '@fortawesome/free-solid-svg-icons';
-
-	import { formatDistanceToNow, formatRelative, parse } from 'date-fns';
-	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
-	import LeaseAccordion from '$components/LeaseAccordion.svelte';
-	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
-	import { ArrowRight16, ArrowLeft16 } from 'carbon-icons-svelte';
-	import RecentTrx from '$components/tenant/RecentTrx.svelte';
-	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
-	import ActionPanel from '$components/ActionPanel.svelte';
-
-	import { DeleteTenantDocument } from '$generated/graphql';
-
 	export let tenant: TenantsByIdLocalStore;
 	$: id = $page.params.id;
 
@@ -63,7 +68,7 @@
 		<p>Loading...</p>
 	{:else if $tenant.error}
 		<p>Error: {$tenant.error.message}</p>
-	{:else}
+	{:else if $tenant.data?.tenants_by_pk}
 		<TenantBreadcrumbs />
 		<NextPrev {id} path={$page.url.pathname.split('/')[1]} />
 		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument} />

@@ -403,6 +403,27 @@ Ensure the default browser behavior of the `hidden` attribute.
 .right-10 {
   right: 2.5rem;
 }
+.right-2 {
+  right: 0.5rem;
+}
+.top-2 {
+  top: 0.5rem;
+}
+.top-6 {
+  top: 1.5rem;
+}
+.top-8 {
+  top: 2rem;
+}
+.top-10 {
+  top: 2.5rem;
+}
+.right-0 {
+  right: 0px;
+}
+.top-12 {
+  top: 3rem;
+}
 .z-50 {
   z-index: 50;
 }

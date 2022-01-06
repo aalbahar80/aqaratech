@@ -6,7 +6,7 @@
 </script>
 
 {#if $toasts}
-	<ul class="fixed right-10 z-50 flex flex-col items-end ">
+	<ul class="fixed right-0 top-12 z-50 flex flex-col items-end ">
 		{#each $toasts as { id, props } (id)}
 			<li transition:fade animate:flip={{ duration: 500 }}>
 				<ToastNotification

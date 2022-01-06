@@ -41,23 +41,11 @@
 				});
 				loading = false;
 				open = false;
+				goto(`/${$page.url.pathname.split('/')[1]}`);
 			}
 		});
 	};
 </script>
-
-<button
-	on:click={() =>
-		addToast({
-			duration: 10000,
-			props: {
-				kind: 'warning',
-				title: 'a notification',
-				subtitle: 'subtitle here',
-				caption: new Date().toISOString(),
-			},
-		})}>EMIT TOAST</button
->
 
 <div class="grid grid-flow-col grid-rows-1 justify-end gap-4">
 	<Button
