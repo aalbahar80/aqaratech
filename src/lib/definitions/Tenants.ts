@@ -1,6 +1,5 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import type { entity } from './types';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
@@ -38,7 +37,6 @@ const update = gql`
 	${tenantsDetailsFragment}
 `;
 
-
 const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
@@ -68,12 +66,11 @@ const fieldList: Field[] = [
 ];
 
 const docs = {
-	insert: insert,
-	update: update,
-	del: deleteQuery,
+	insert,
+	update,
 };
 
-export default <entity>{
+export default {
 	title,
 	graphqlName,
 	graphqlNamePk,

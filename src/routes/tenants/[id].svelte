@@ -29,6 +29,7 @@
 		const { id } = params;
 		if (id === 'add') return;
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		const tenant: TenantIdScreenStore = await stuff.query(
 			TenantIdScreenDocument,
 			{
@@ -66,7 +67,10 @@
 	{:else if $tenant.error}
 		<p>Error: {$tenant.error.message}</p>
 	{:else if $tenant.data?.tenants_by_pk}
-		<TenantBreadcrumbs />
+		<TenantBreadcrumbs
+			loading={$tenant.fetching}
+			tenant={$tenant.data.tenants_by_pk}
+		/>
 		<NextPrev {id} path={$page.url.pathname.split('/')[1]} />
 		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument} />
 		<div

@@ -1,26 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import BreadCrumbs from '$components/BreadCrumbs.svelte';
-	import { TenantBreadcrumbsDocument } from '$routes/tenants/_[id].gql';
-	import { operationStore, query } from '@urql/svelte';
+	import type { TenantIdScreen } from '$routes/tenants/_[id].gql';
 
-	$: id = parseInt($page.params.id);
-	$: console.log(id);
-
-	const crumbs = operationStore(TenantBreadcrumbsDocument, { id });
-	query(crumbs);
-
-	// reassign query variables to retrigger query
-	$: crumbs.variables = { id };
+	export let loading: boolean;
+	export let tenant: TenantIdScreen['tenants_by_pk'];
 
 	$: crumbData = {
-		clientId:
-			$crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.property?.client?.id,
-		propertyId: $crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.property?.id,
-		unitId: $crumbs?.data?.tenants_by_pk?.leases[0]?.unit?.id,
-		leaseId: $crumbs?.data?.tenants_by_pk?.leases[0]?.id,
-		tenantId: $crumbs?.data?.tenants_by_pk?.id,
+		clientId: tenant?.leases[0]?.unit?.property?.client?.id,
+		propertyId: tenant?.leases[0]?.unit?.property?.id,
+		unitId: tenant?.leases[0]?.unit?.id,
+		leaseId: tenant?.leases[0]?.id,
+		tenantId: tenant?.id,
 	};
 </script>
 
-<BreadCrumbs {...crumbData} loading={$crumbs.fetching || $crumbs.stale} />
+<BreadCrumbs {...crumbData} {loading} />
