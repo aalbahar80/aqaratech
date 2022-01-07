@@ -27,6 +27,7 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
+		console.log('🚀 ~ file: __layout.svelte ~ line 31 ~ session', session);
 		if (isEmpty(session.user)) {
 			return { redirect: '/landing', status: 302 };
 		}

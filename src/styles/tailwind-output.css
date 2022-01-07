@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.9 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.11 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -400,24 +400,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .fixed {
   position: fixed;
 }
-.right-10 {
-  right: 2.5rem;
-}
-.right-2 {
-  right: 0.5rem;
-}
-.top-2 {
-  top: 0.5rem;
-}
-.top-6 {
-  top: 1.5rem;
-}
-.top-8 {
-  top: 2rem;
-}
-.top-10 {
-  top: 2.5rem;
-}
 .right-0 {
   right: 0px;
 }
@@ -457,12 +439,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .hidden {
   display: none;
-}
-.h-4 {
-  height: 1rem;
-}
-.w-4 {
-  width: 1rem;
 }
 .max-w-md {
   max-width: 28rem;
@@ -525,9 +501,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .justify-self-center {
   justify-self: center;
-}
-.stroke-current {
-  stroke: currentColor;
 }
 .p-4 {
   padding: 1rem;
