@@ -1,25 +1,4 @@
 <script lang="ts">
-	import {
-		Form,
-		FormGroup,
-		Checkbox,
-		RadioButtonGroup,
-		RadioButton,
-		Select,
-		SelectItem,
-		Button,
-		TextInput,
-		ButtonSet,
-		InlineLoading,
-		Grid,
-		Row,
-		Column,
-	} from 'carbon-components-svelte';
-	import flatten from 'just-flatten-it';
-	import isEmpty from 'just-is-empty';
-	import reduce from 'just-reduce-object';
-	import { onDestroy, onMount } from 'svelte';
-
 	import type { Field } from '$components/form/Field';
 	import { failureToast, successToast } from '$components/toasts';
 	import { v } from '$lib/Validations';
@@ -29,15 +8,22 @@
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
+	import {
+		Button,
+		Form,
+		FormGroup,
+		InlineLoading,
+		TextInput,
+	} from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import type { DocumentNode } from 'graphql';
-	import pluck from 'just-pluck-it';
-	import zip from 'just-zip-it';
+	import isEmpty from 'just-is-empty';
+	import reduce from 'just-reduce-object';
 
 	export let entity: string;
 	export let fieldList: Field[];
-	export let insertDoc: DocumentNode = undefined;
-	export let updateDoc: DocumentNode = undefined;
+	export let insertDoc: DocumentNode;
+	export let updateDoc: DocumentNode;
 
 	export let existing = undefined;
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
@@ -48,6 +34,8 @@
 	// update mutation
 	const updateStore = operationStore(updateDoc);
 	const updateMutation = mutation(updateStore);
+
+	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
 
 	const handleForm = async (values) => {
 		state = 'active';
@@ -87,17 +75,7 @@
 		);
 	};
 
-	const {
-		form,
-		isValid,
-		isSubmitting,
-		reset,
-		validate,
-		data,
-		errors,
-		isDirty,
-		handleSubmit,
-	} = createForm({
+	const { reset, data, errors, handleSubmit } = createForm({
 		initialValues: initial(),
 		extend: [validator, reporter],
 		validateSchema: v[entity] || v.fallback,
@@ -109,7 +87,6 @@
 		finished: 'Success',
 		error: 'An error occurred',
 	};
-	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
 </script>
 
 <div class="max-w-md">
