@@ -10,6 +10,7 @@ export class Field {
 	hideable?: boolean;
 	sortable?: boolean;
 	width?: number;
+	pattern?: string;
 	validation?;
 	constructor(field: Field) {
 		this.fieldName = field.fieldName;

@@ -100,7 +100,7 @@
 
 <div class="max-w-md">
 	<Form on:submit={handleSubmit}>
-		{#each fieldList as { title, fieldName, inputType, editable }}
+		{#each fieldList as { title, fieldName, inputType, editable, pattern }}
 			{#if editable}
 				<ValidationMessage for={fieldName} let:messages={message}>
 					<FormGroup>
@@ -112,6 +112,7 @@
 							bind:value={$data[fieldName]}
 							invalid={!isEmpty($errors[fieldName])}
 							invalidText={$errors[fieldName]?.[0]}
+							pattern={fieldName === 'civilid' ? '[0-9]*' : undefined}
 						/>
 					</FormGroup>
 				</ValidationMessage>
