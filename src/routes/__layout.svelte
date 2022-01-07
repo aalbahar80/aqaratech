@@ -1,50 +1,75 @@
 <script lang="ts" context="module">
-	import { get, readable } from 'svelte/store';
-	import { createClient, operationStore } from '@urql/svelte';
-	import { browser, dev } from '$app/env';
-	import { cacheExchange } from '@urql/exchange-graphcache';
-	import { dedupExchange, ssrExchange, fetchExchange } from '@urql/svelte';
-	import rawSchema from '../FROMSCRIPTschema.json';
+	import Header from '$components/Header.svelte';
+	import ToastParent from '$components/toast/ToastParent.svelte';
 	import type { GraphCacheConfig } from '$generated/graphql';
-
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ fetch, stuff, session }) => {
+	import { cacheExchange } from '@urql/exchange-graphcache';
+	import type {
+		Client,
+		OperationContext,
+		TypedDocumentNode,
+	} from '@urql/svelte';
+	import {
+		createClient,
+		dedupExchange,
+		fetchExchange,
+		operationStore,
+		setClient,
+	} from '@urql/svelte';
+	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { Content } from 'carbon-components-svelte';
+	import 'carbon-components-svelte/css/all.css';
+	import type { DocumentNode } from 'graphql';
+	import isEmpty from 'just-is-empty';
+	import type { CLoad } from 'src/global';
+	import { get } from 'svelte/store';
+	import rawSchema from '../FROMSCRIPTschema.json';
+	import '../styles/tailwind.css';
+
+	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
 		if (isEmpty(session.user)) {
 			return { redirect: '/landing', status: 302 };
 		}
 
-		const cache = cacheExchange<GraphCacheConfig>({
+		const cacheConfig = cacheExchange<GraphCacheConfig>({
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			schema: rawSchema,
 			resolvers: {
 				query_root: {
-					clients_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'clients', id: args.id };
-					},
-					properties_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'properties', id: args.id };
-					},
-					units_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'units', id: args.id };
-					},
-					leases_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'leases', id: args.id };
-					},
-					tenants_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'tenants', id: args.id };
-					},
-					transactions_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'transactions', id: args.id };
-					},
-					expenses_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'expenses', id: args.id };
-					},
-					listings_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'listings', id: args.id };
-					},
-					maintenance_orders_by_pk: (parent, args, cache, info) => {
-						return { __typename: 'maintenance_orders', id: args.id };
-					},
+					clients_by_pk: (parent, args) => ({
+						__typename: 'clients',
+						id: args.id,
+					}),
+					properties_by_pk: (parent, args) => ({
+						__typename: 'properties',
+						id: args.id,
+					}),
+					units_by_pk: (parent, args) => ({ __typename: 'units', id: args.id }),
+					leases_by_pk: (parent, args) => ({
+						__typename: 'leases',
+						id: args.id,
+					}),
+					tenants_by_pk: (parent, args) => ({
+						__typename: 'tenants',
+						id: args.id,
+					}),
+					transactions_by_pk: (parent, args) => ({
+						__typename: 'transactions',
+						id: args.id,
+					}),
+					expenses_by_pk: (parent, args) => ({
+						__typename: 'expenses',
+						id: args.id,
+					}),
+					listings_by_pk: (parent, args) => ({
+						__typename: 'listings',
+						id: args.id,
+					}),
+					maintenance_orders_by_pk: (parent, args) => ({
+						__typename: 'maintenance_orders',
+						id: args.id,
+					}),
 				},
 			},
 			keys: {
@@ -53,7 +78,7 @@
 			},
 		});
 
-		const client = await createClient({
+		const client = createClient({
 			// Pass in the fetch from sveltekit to have access to serialized requests during hydration
 			fetch,
 			// dev: browser && dev
@@ -70,8 +95,8 @@
 			exchanges: [
 				// devtoolsExchange,
 				dedupExchange,
-				cache,
-				//ssr,
+				cacheConfig,
+				// ssr,
 				fetchExchange,
 			],
 		});
@@ -80,8 +105,15 @@
 			stuff: {
 				...stuff,
 				client,
-				query: async (query, variables, context) => {
-					const store = operationStore(query, variables, context);
+				query: async (
+					query: string | DocumentNode | TypedDocumentNode,
+					variables:
+						| { [key: string]: string | number | boolean | null }
+						| null
+						| undefined,
+					context: Partial<OperationContext & { pause: boolean }> | undefined,
+				) => {
+					const store = operationStore<any, any>(query, variables, context);
 					const result = await client
 						.query(store.query, store.variables, store.context)
 						.toPromise();
@@ -96,16 +128,6 @@
 </script>
 
 <script lang="ts">
-	import '../styles/tailwind.css';
-	import 'carbon-components-svelte/css/all.css';
-
-	import Header from '$components/Header.svelte';
-	import { setClient } from '@urql/svelte';
-	import type { Client } from '@urql/svelte';
-	import { Content } from 'carbon-components-svelte';
-	import isEmpty from 'just-is-empty';
-	import { SvelteToast } from '@zerodevx/svelte-toast';
-	import ToastParent from '$components/toast/ToastParent.svelte';
 	export let client: Client;
 	setClient(client);
 </script>

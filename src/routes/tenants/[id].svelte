@@ -98,5 +98,7 @@
 			loading={$tenant.fetching}
 			leases={$tenant.data.tenants_by_pk.pastLeases}
 		/>
+	{:else}
+		<p>No tenant found</p>
 	{/if}
 </div>

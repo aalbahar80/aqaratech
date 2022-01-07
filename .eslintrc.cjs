@@ -41,7 +41,7 @@ module.exports = {
 				'import/no-mutable-exports': 'off',
 				'import/no-unresolved': 'off',
 				// 'import/no-extraneous-dependencies': 'off',
-				"@typescript-eslint/no-unsafe-member-access": "off",
+				// "@typescript-eslint/no-unsafe-member-access": "off",
 				"@typescript-eslint/no-unsafe-assignment": "off",
 			},
 		},

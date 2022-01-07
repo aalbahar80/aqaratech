@@ -16,3 +16,16 @@ export type Crumb = {
 	href: string;
 	id?: string;
 };
+
+interface Locals {
+	hasura: string;
+	user: string;
+}
+
+interface Session {
+	hasura: string;
+	user: string;
+}
+interface CLoad {
+	session: Session;
+}

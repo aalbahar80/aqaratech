@@ -1,7 +1,8 @@
 import type { Handle, GetSession } from '@sveltejs/kit';
 import cookie from 'cookie';
+import type { Locals, CLoad, Session } from './global';
 
-export const handle: Handle = async ({ request, resolve }) => {
+export const handle: Handle<Locals> = async ({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
 
 	request.locals.user = cookies.user;
@@ -11,12 +12,12 @@ export const handle: Handle = async ({ request, resolve }) => {
 
 	// TODO: samesite=strict? - in prod only?
 	response.headers['set-cookie'] = [
-		cookie.serialize('user', (request.locals.user as string) || '', {
+		cookie.serialize('user', request.locals.user || '', {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
 		}),
-		cookie.serialize('hasura', (request.locals.hasura as string) || '', {
+		cookie.serialize('hasura', request.locals.hasura || '', {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
@@ -26,7 +27,7 @@ export const handle: Handle = async ({ request, resolve }) => {
 	return response;
 };
 
-export const getSession: GetSession = (request) => ({
-	user: request.locals.user as string,
-	hasura: request.locals.hasura as string,
+export const getSession: GetSession<Locals, unknown, Session > = (request) => ({
+	user: request.locals.user,
+	hasura: request.locals.hasura,
 });
