@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BreadCrumbs from '$components/BreadCrumbs.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import type { TenantIdScreen } from '$routes/tenants/_[id].gql';
 
 	export let loading: boolean;

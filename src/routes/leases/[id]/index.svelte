@@ -14,7 +14,7 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
-	import BreadCrumbs from '$components/BreadCrumbs.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import { LeasesByIdDocument } from '$generated/graphql';
 	import { operationStore, query } from '@urql/svelte';
 
