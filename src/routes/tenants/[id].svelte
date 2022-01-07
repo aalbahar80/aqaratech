@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
@@ -7,8 +6,8 @@
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 	import {
 		DeleteTenantDocument,
-		TenantsByIdLocalDocument,
-		TenantsByIdLocalStore,
+		TenantIdScreenDocument,
+		TenantIdScreenStore,
 	} from '$generated/graphql';
 	import {
 		faBirthdayCake,
@@ -22,39 +21,37 @@
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import isEmpty from 'just-is-empty';
 	import Fa from 'svelte-fa/src/fa.svelte';
+	import { page } from '$app/stores';
 
 	export const prerender = true;
 
 	export const load: Load = async ({ params, stuff }) => {
-		const id = params.id;
-		// debugger;
+		const { id } = params;
 		if (id === 'add') return;
 
-		const tenant = await stuff.query(TenantsByIdLocalDocument, {
-			id,
-			with_crumbs: true,
-			with_past_leases: true,
-		});
+		const tenant: TenantIdScreenStore = await stuff.query(
+			TenantIdScreenDocument,
+			{
+				id,
+			},
+		);
 
 		if (tenant.data?.tenants_by_pk) {
+			// eslint-disable-next-line consistent-return
 			return {
 				props: {
-					tenant: await stuff.query(TenantsByIdLocalDocument, {
-						id,
-						with_crumbs: true,
-						with_past_leases: true,
-					}),
-					id,
+					tenant,
 				},
 			};
 		}
 
+		// eslint-disable-next-line consistent-return
 		return { status: 404 };
 	};
 </script>
 
 <script lang="ts">
-	export let tenant: TenantsByIdLocalStore;
+	export let tenant: TenantIdScreenStore;
 	$: id = $page.params.id;
 
 	query(tenant);
@@ -77,7 +74,7 @@
 		>
 			<Fa class="" icon={faUserCircle} />
 			<p class="text-3xl">
-				{`${result?.first_name} ${result?.last_name}`}
+				{`${result?.first_name ?? ''} ${result?.last_name ?? ''}`}
 			</p>
 			<Fa icon={faEnvelope} />
 			<p>{result?.email}</p>
@@ -100,6 +97,9 @@
 		{#if !isEmpty($tenant.data?.transactions)}
 			<RecentTrx trx={$tenant.data?.transactions} />
 		{/if}
-		<LeaseAccordion />
+		<LeaseAccordion
+			loading={$tenant.fetching}
+			leases={$tenant.data.tenants_by_pk.pastLeases}
+		/>
 	{/if}
 </div>
