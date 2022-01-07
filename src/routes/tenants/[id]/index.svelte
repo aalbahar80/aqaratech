@@ -5,11 +5,6 @@
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 	import {
-		DeleteTenantDocument,
-		TenantIdScreenDocument,
-		TenantIdScreenStore,
-	} from '$generated/graphql';
-	import {
 		faBirthdayCake,
 		faEnvelope,
 		faIdCard,
@@ -22,6 +17,11 @@
 	import isEmpty from 'just-is-empty';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { page } from '$app/stores';
+	import {
+		TenantIdScreenDocument,
+		TenantIdScreenStore,
+		DeleteTenantDocument,
+	} from './_[id].gql';
 
 	export const prerender = true;
 

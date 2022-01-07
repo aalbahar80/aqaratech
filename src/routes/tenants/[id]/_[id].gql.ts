@@ -1,6 +1,6 @@
 // THIS FILE IS GENERATED, DO NOT EDIT!
 /* eslint-disable */
-import type * as Types from '../../generated/graphql';
+import type * as Types from '../../../generated/graphql';
 
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';

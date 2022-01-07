@@ -85,3 +85,15 @@ mutation DeleteTenant($id: Int!) {
 		id
 	}
 }
+
+# mutation TenantsInsert($object: tenants_insert_input = {}) {
+# 	insert_tenants_one(object: $object) {
+# 		...tenantDetails
+# 	}
+# }
+
+# mutation TenantsUpdate($id: Int!, $_set: tenants_set_input) {
+# 	update_tenants_by_pk(pk_columns: { id: $id }, _set: $_set) {
+# 		...tenantDetails
+# 	}
+# }
