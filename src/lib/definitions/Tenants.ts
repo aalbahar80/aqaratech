@@ -17,6 +17,16 @@ const fieldList: Field[] = [
 		inputType: 'text',
 	}),
 	new Field({
+		fieldName: 'second_name',
+		title: 'Second Name',
+		inputType: 'text',
+	}),
+	new Field({
+		fieldName: 'third_name',
+		title: 'Third Name',
+		inputType: 'text',
+	}),
+	new Field({
 		fieldName: 'last_name',
 		title: 'Last Name',
 		inputType: 'text',
@@ -31,20 +41,31 @@ const fieldList: Field[] = [
 		title: 'Phone',
 		inputType: 'tel',
 	}),
+	new Field({
+		fieldName: 'dob',
+		title: 'Date of Birth',
+		inputType: 'date',
+	}),
+	new Field({
+		fieldName: 'civilid',
+		title: 'Civil ID',
+		inputType: 'text',
+	}),
 ];
 
 const validation = z.object({
 	first_name: z.string().min(1, { message: 'Required' }),
+	second_name: z.string().min(1, { message: 'Required' }),
 	last_name: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
-	phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
+	phone: z.string().min(8).and(z.string().max(8)),
+	civilid: z.string().min(12).and(z.string().max(12)).or(z.literal('')),
 });
 
 export default {
 	title,
 	graphqlName,
 	graphqlNamePk,
-	// docs,
 	fieldList,
-	validation
+	validation,
 };
