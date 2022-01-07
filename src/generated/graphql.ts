@@ -5902,68 +5902,6 @@ export type PropertiesList = {
 	}>;
 };
 
-export type TenantsDetails = {
-	__typename?: 'tenants';
-	id: number;
-	first_name?: string | null | undefined;
-	last_name?: string | null | undefined;
-	email?: string | null | undefined;
-	phone?: string | null | undefined;
-	dob?: string | null | undefined;
-	civilid?: any | null | undefined;
-	second_name?: string | null | undefined;
-	third_name?: string | null | undefined;
-};
-
-export type TenantsDetailsVariables = Exact<{ [key: string]: never }>;
-
-export type TenantsInsertVariables = Exact<{
-	object?: InputMaybe<Tenants_Insert_Input>;
-}>;
-
-export type TenantsInsert = {
-	__typename?: 'mutation_root';
-	insert_tenants_one?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
-				second_name?: string | null | undefined;
-				third_name?: string | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
-export type TenantsUpdateVariables = Exact<{
-	id: Scalars['Int'];
-	_set?: InputMaybe<Tenants_Set_Input>;
-}>;
-
-export type TenantsUpdate = {
-	__typename?: 'mutation_root';
-	update_tenants_by_pk?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				first_name?: string | null | undefined;
-				last_name?: string | null | undefined;
-				email?: string | null | undefined;
-				phone?: string | null | undefined;
-				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
-				second_name?: string | null | undefined;
-				third_name?: string | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
 export type UnitsDetails = {
 	__typename?: 'units';
 	id: number;
@@ -6088,40 +6026,6 @@ export type UnitsList = {
 		floor?: string | null | undefined;
 		property_id?: number | null | undefined;
 	}>;
-};
-
-export type TrxByIdVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TrxById = {
-	__typename?: 'query_root';
-	transactions_by_pk?:
-		| {
-				__typename?: 'transactions';
-				id: number;
-				amount?: number | null | undefined;
-		  }
-		| null
-		| undefined;
-};
-
-export type Trx2ByIdVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type Trx2ById = {
-	__typename?: 'query_root';
-	transactions_by_pk?:
-		| {
-				__typename?: 'transactions';
-				id: number;
-				is_paid?: boolean | null | undefined;
-				memo?: string | null | undefined;
-				created_at?: any | null | undefined;
-		  }
-		| null
-		| undefined;
 };
 
 export type TenantIdScreenVariables = Exact<{
@@ -6310,6 +6214,76 @@ export type DeleteTenant = {
 		| undefined;
 };
 
+export type TenantsInsertVariables = Exact<{
+	object?: InputMaybe<Tenants_Insert_Input>;
+}>;
+
+export type TenantsInsert = {
+	__typename?: 'mutation_root';
+	insert_tenants_one?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				first_name?: string | null | undefined;
+				last_name?: string | null | undefined;
+				email?: string | null | undefined;
+				phone?: string | null | undefined;
+				dob?: string | null | undefined;
+				civilid?: any | null | undefined;
+				second_name?: string | null | undefined;
+				third_name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type TenantsUpdateVariables = Exact<{
+	id: Scalars['Int'];
+	_set?: InputMaybe<Tenants_Set_Input>;
+}>;
+
+export type TenantsUpdate = {
+	__typename?: 'mutation_root';
+	update_tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				first_name?: string | null | undefined;
+				last_name?: string | null | undefined;
+				email?: string | null | undefined;
+				phone?: string | null | undefined;
+				dob?: string | null | undefined;
+				civilid?: any | null | undefined;
+				second_name?: string | null | undefined;
+				third_name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type TenantEditScreenVariables = Exact<{
+	id: Scalars['Int'];
+}>;
+
+export type TenantEditScreen = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				first_name?: string | null | undefined;
+				last_name?: string | null | undefined;
+				email?: string | null | undefined;
+				phone?: string | null | undefined;
+				dob?: string | null | undefined;
+				civilid?: any | null | undefined;
+				second_name?: string | null | undefined;
+				third_name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
 export type ClientsInsertStore = OperationStore<
 	ClientsInsert,
 	ClientsInsertVariables
@@ -6364,14 +6338,6 @@ export type PropertiesListStore = OperationStore<
 	PropertiesList,
 	PropertiesListVariables
 >;
-export type TenantsInsertStore = OperationStore<
-	TenantsInsert,
-	TenantsInsertVariables
->;
-export type TenantsUpdateStore = OperationStore<
-	TenantsUpdate,
-	TenantsUpdateVariables
->;
 export type UnitsInsertStore = OperationStore<
 	UnitsInsert,
 	UnitsInsertVariables
@@ -6386,8 +6352,6 @@ export type DeleteUnitsStore = OperationStore<
 >;
 export type UnitsByIdStore = OperationStore<UnitsById, UnitsByIdVariables>;
 export type UnitsListStore = OperationStore<UnitsList, UnitsListVariables>;
-export type TrxByIdStore = OperationStore<TrxById, TrxByIdVariables>;
-export type Trx2ByIdStore = OperationStore<Trx2ById, Trx2ByIdVariables>;
 export type TenantIdScreenStore = OperationStore<
 	TenantIdScreen,
 	TenantIdScreenVariables
@@ -6399,6 +6363,18 @@ export type TenantsListStore = OperationStore<
 export type DeleteTenantStore = OperationStore<
 	DeleteTenant,
 	DeleteTenantVariables
+>;
+export type TenantsInsertStore = OperationStore<
+	TenantsInsert,
+	TenantsInsertVariables
+>;
+export type TenantsUpdateStore = OperationStore<
+	TenantsUpdate,
+	TenantsUpdateVariables
+>;
+export type TenantEditScreenStore = OperationStore<
+	TenantEditScreen,
+	TenantEditScreenVariables
 >;
 export const Details = {
 	kind: 'Document',
@@ -6479,33 +6455,6 @@ export const PropertiesDetails = {
 		},
 	],
 } as unknown as DocumentNode<PropertiesDetails, PropertiesDetailsVariables>;
-export const TenantsDetails = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'FragmentDefinition',
-			name: { kind: 'Name', value: 'tenantsDetails' },
-			typeCondition: {
-				kind: 'NamedType',
-				name: { kind: 'Name', value: 'tenants' },
-			},
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<TenantsDetails, TenantsDetailsVariables>;
 export const UnitsDetails = {
 	kind: 'Document',
 	definitions: [
@@ -7766,133 +7715,6 @@ export const PropertiesListDocument = {
 		...PropertiesDetails.definitions,
 	],
 } as unknown as DocumentNode<PropertiesList, PropertiesListVariables>;
-export const TenantsInsertDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'TenantsInsert' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'object' },
-					},
-					type: {
-						kind: 'NamedType',
-						name: { kind: 'Name', value: 'tenants_insert_input' },
-					},
-					defaultValue: { kind: 'ObjectValue', fields: [] },
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'insert_tenants_one' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'object' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'object' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantsDetails' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...TenantsDetails.definitions,
-	],
-} as unknown as DocumentNode<TenantsInsert, TenantsInsertVariables>;
-export const TenantsUpdateDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'TenantsUpdate' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: '_set' } },
-					type: {
-						kind: 'NamedType',
-						name: { kind: 'Name', value: 'tenants_set_input' },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'update_tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'pk_columns' },
-								value: {
-									kind: 'ObjectValue',
-									fields: [
-										{
-											kind: 'ObjectField',
-											name: { kind: 'Name', value: 'id' },
-											value: {
-												kind: 'Variable',
-												name: { kind: 'Name', value: 'id' },
-											},
-										},
-									],
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: '_set' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: '_set' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantsDetails' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...TenantsDetails.definitions,
-	],
-} as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
 export const UnitsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -8205,100 +8027,6 @@ export const UnitsListDocument = {
 		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsList, UnitsListVariables>;
-export const TrxByIdDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TrxById' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'transactions_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
-							],
-						},
-					},
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<TrxById, TrxByIdVariables>;
-export const Trx2ByIdDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'Trx2ById' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'transactions_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'is_paid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'memo' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
-							],
-						},
-					},
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<Trx2ById, Trx2ByIdVariables>;
 export const TenantIdScreenDocument = {
 	kind: 'Document',
 	definitions: [
@@ -8519,6 +8247,182 @@ export const DeleteTenantDocument = {
 		},
 	],
 } as unknown as DocumentNode<DeleteTenant, DeleteTenantVariables>;
+export const TenantsInsertDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'mutation',
+			name: { kind: 'Name', value: 'TenantsInsert' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'object' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'tenants_insert_input' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'insert_tenants_one' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'object' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'object' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+	],
+} as unknown as DocumentNode<TenantsInsert, TenantsInsertVariables>;
+export const TenantsUpdateDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'mutation',
+			name: { kind: 'Name', value: 'TenantsUpdate' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: '_set' } },
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'tenants_set_input' },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'update_tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'pk_columns' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'id' },
+											value: {
+												kind: 'Variable',
+												name: { kind: 'Name', value: 'id' },
+											},
+										},
+									],
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: '_set' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: '_set' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+	],
+} as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
+export const TenantEditScreenDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantEditScreen' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+	],
+} as unknown as DocumentNode<TenantEditScreen, TenantEditScreenVariables>;
 export type WithTypename<T extends { __typename?: any }> = {
 	[K in Exclude<keyof T, '__typename'>]?: T[K];
 } & { __typename: NonNullable<T['__typename']> };

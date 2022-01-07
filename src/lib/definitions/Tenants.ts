@@ -1,41 +1,9 @@
-import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
+import { z } from 'zod';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
 const graphqlNamePk = 'tenants_by_pk';
-
-const tenantsDetailsFragment = gql`
-	fragment tenantsDetails on tenants {
-		id
-		first_name
-		last_name
-		email
-		phone
-		dob
-		civilid
-		second_name
-		third_name
-	}
-`;
-
-const insert = gql`
-	mutation TenantsInsert($object: tenants_insert_input = {}) {
-		insert_tenants_one(object: $object) {
-			...tenantsDetails
-		}
-	}
-	${tenantsDetailsFragment}
-`;
-
-const update = gql`
-	mutation TenantsUpdate($id: Int!, $_set: tenants_set_input) {
-		update_tenants_by_pk(pk_columns: { id: $id }, _set: $_set) {
-			...tenantsDetails
-		}
-	}
-	${tenantsDetailsFragment}
-`;
 
 const fieldList: Field[] = [
 	new Field({
@@ -65,15 +33,18 @@ const fieldList: Field[] = [
 	}),
 ];
 
-const docs = {
-	insert,
-	update,
-};
+const validation = z.object({
+	first_name: z.string().min(1, { message: 'Required' }),
+	last_name: z.string().min(1, { message: 'Required' }),
+	email: z.string().email(),
+	phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
+});
 
 export default {
 	title,
 	graphqlName,
 	graphqlNamePk,
-	docs,
+	// docs,
 	fieldList,
+	validation
 };

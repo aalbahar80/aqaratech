@@ -19,4 +19,4 @@
 {JSON.stringify($page.params)}
 {JSON.stringify($trx2)}
 
-<a href={`/transactions/${$trx2.data?.transactions_by_pk.id}`}>go deep</a>
+<a href={`/transactions`}>go deep</a>

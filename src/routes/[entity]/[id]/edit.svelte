@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import FormC from '$components/form/FormC.svelte';
 	import ref from '$lib/definitions/ref';
 	import { operationStore, query } from '@urql/svelte';
+	import { page } from '$app/stores';
 
-	const entity = $page.params.entity;
+	const { entity } = $page.params;
 
 	const { docs, fieldList, graphqlNamePk } = ref[entity];
 

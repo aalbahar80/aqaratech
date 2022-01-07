@@ -8,7 +8,7 @@
 	import { formatDistance, parseISO } from 'date-fns';
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { Launch24 } from 'carbon-icons-svelte';
-	import type { TenantIdScreen } from '$routes/tenants/_[id].gql';
+	import type { TenantIdScreen } from '$routes/tenants/[id]/_[id].gql';
 
 	type Leases = NonNullable<TenantIdScreen['tenants_by_pk']>['pastLeases'];
 	export let leases: Leases;
