@@ -37,17 +37,12 @@
 			},
 		);
 
-		if (tenant.data?.tenants_by_pk) {
-			// eslint-disable-next-line consistent-return
-			return {
-				props: {
-					tenant,
-				},
-			};
-		}
-
 		// eslint-disable-next-line consistent-return
-		return { status: 404 };
+		return {
+			props: {
+				tenant,
+			},
+		};
 	};
 </script>
 
@@ -62,9 +57,7 @@
 <div
 	class="grid grid-cols-1 lg:grid-cols-1 gap-4 space-y-4 max-w-screen-2xl items-baseline"
 >
-	{#if $tenant.fetching}
-		<p>Loading...</p>
-	{:else if $tenant.error}
+	{#if $tenant.error}
 		<p>Error: {$tenant.error.message}</p>
 	{:else if $tenant.data?.tenants_by_pk}
 		<TenantBreadcrumbs
