@@ -20,7 +20,6 @@
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { operationStore, query } from '@urql/svelte';
 	import type { DocumentNode } from 'graphql';
-	import ModalDelete from '$components/modal/ModalDelete.svelte';
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
 
