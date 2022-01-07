@@ -1299,22 +1299,17 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@felte/common@0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@felte/common/-/common-0.5.4.tgz#c1372ad202ff40ec84ecf66c3bd3b2e5f98c1d67"
-  integrity sha512-t+ARNPFo7iXUQaDZHVmAhLy8u5O5Fj6M/p4z9AjBFu27g2nuZ6oJn4JPxF6yjBAfcAWp3Xkq2oAELN5m/gVB3A==
-
 "@felte/common@0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@felte/common/-/common-0.6.0.tgz#64cb3438be91b2d553641bc7ec523284806186f5"
   integrity sha512-dLh+heGTGKQzIeUbLcJMEvDks3YTy99FFdUHg8/fxeIFSprUM/b4olK+tIMBrTE30AV2BFYeQHxB8hFpzUafAQ==
 
-"@felte/core@0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@felte/core/-/core-0.2.7.tgz#1bca81ebf26537226f4e12de646ce80310c630ef"
-  integrity sha512-NLpALlG9776MFITSx4qdTdeclVtXNqyjgtu2lcy0eQtuCwy5NhYOOVcRA0Uo+oCsMbm5otRVvhtC66IHsiG0xg==
+"@felte/core@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@felte/core/-/core-0.3.0.tgz#d95fb20b4bb5d3ffd66149528f85cd937e627794"
+  integrity sha512-v3rOg8wdchnQoMYJCPLelaJmgyG3doibYFqKmoOj7iQlnI738fczEEjDToJfa9UUbYBRDdgfYHXrEtEK7kYIGg==
   dependencies:
-    "@felte/common" "0.5.4"
+    "@felte/common" "0.6.0"
 
 "@felte/reporter-svelte@^0.3.19":
   version "0.3.20"
@@ -7375,12 +7370,12 @@ fbjs@^3.0.0:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.30"
 
-felte@^0.8.7:
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/felte/-/felte-0.8.7.tgz#f9921bc1367f7eb3983063046c546a37149e3783"
-  integrity sha512-1D+wa/Dr0EB2v6vOxeD5eTHnyokr8R+Snk3SRkDmxW95kYJRpU++zEvS4QmJUGr0ZDWRyji8l4FOcY6SyiIbfg==
+felte@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/felte/-/felte-0.9.0.tgz#10ab750c799a5ddc53ffd67abb266e7aedecc04f"
+  integrity sha512-B7ML7Xopy9D/PI2Z28wFQZ+wcUtB6mqMbKVBneHPWsphCZPFY0dE2asPd9n0lhgx0bvSO4n8Aq0VNlqt2mGFfw==
   dependencies:
-    "@felte/core" "0.2.7"
+    "@felte/core" "0.3.0"
 
 figgy-pudding@^3.5.1:
   version "3.5.2"
