@@ -10,7 +10,7 @@
 	export let fieldList: Field[];
 
 	export let listDoc: DocumentNode;
-	export let deleteDoc: DocumentNode;
+	export let deleteDoc: DocumentNode | undefined = undefined;
 
 	// export const fieldListStore = writable(Field.addLinkField(fieldList));
 	export const fieldListStore = writable(fieldList);
