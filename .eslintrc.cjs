@@ -43,6 +43,7 @@ module.exports = {
 				// 'import/no-extraneous-dependencies': 'off',
 				// "@typescript-eslint/no-unsafe-member-access": "off",
 				"@typescript-eslint/no-unsafe-assignment": "off",
+				"no-undef": "off",
 			},
 		},
 		// {

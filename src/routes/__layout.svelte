@@ -21,7 +21,6 @@
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
-	import type { CLoad } from 'src/global';
 	import { get } from 'svelte/store';
 	import rawSchema from '../FROMSCRIPTschema.json';
 	import '../styles/tailwind.css';

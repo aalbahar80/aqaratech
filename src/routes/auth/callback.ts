@@ -1,5 +1,6 @@
 //  Endpoint for redirection from GitHub after authorization...
 import type { RequestHandler } from '@sveltejs/kit';
+import { dev } from '$app/env';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 interface TokenResponse {
@@ -14,10 +15,9 @@ interface TokenResponse {
 const tokenURL = 'https://dev-eehvhdp2.eu.auth0.com/oauth/token';
 
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 const secret = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
 
-async function getTokens(code: string) {
+async function getTokens(code: string, redirectUri: string) {
 	try {
 		const res = await fetch(tokenURL, {
 			method: 'POST',
@@ -34,7 +34,7 @@ async function getTokens(code: string) {
 			}),
 		});
 
-		const data: TokenResponse = await res.json() as TokenResponse;
+		const data: TokenResponse = (await res.json()) as TokenResponse;
 		return data;
 	} catch (e) {
 		console.error(e);
@@ -42,14 +42,17 @@ async function getTokens(code: string) {
 	}
 }
 
-export const get: RequestHandler = async (req) => {
+export const get: RequestHandler<Locals> = async (req) => {
 	try {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		const tokens = await getTokens(code);
+		const redirectUri = dev
+			? `${req.url.origin}/auth/callback`
+			: `${req.url.origin}/auth/callback`;
+		const tokens = await getTokens(code, redirectUri);
 
-		req.locals.user = tokens.id_token;
+		req.locals.user = tokens.id_token || '';
 		req.locals.hasura = tokens.access_token;
 
 		return {
