@@ -5964,18 +5964,6 @@ export type TenantsUpdate = {
 		| undefined;
 };
 
-export type DeleteTenantsVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type DeleteTenants = {
-	__typename?: 'mutation_root';
-	delete_tenants_by_pk?:
-		| { __typename?: 'tenants'; id: number }
-		| null
-		| undefined;
-};
-
 export type UnitsDetails = {
 	__typename?: 'units';
 	id: number;
@@ -6136,13 +6124,11 @@ export type Trx2ById = {
 		| undefined;
 };
 
-export type TenantsByIdLocalVariables = Exact<{
+export type TenantIdScreenVariables = Exact<{
 	id: Scalars['Int'];
-	with_crumbs: Scalars['Boolean'];
-	with_past_leases: Scalars['Boolean'];
 }>;
 
-export type TenantsByIdLocal = {
+export type TenantIdScreen = {
 	__typename?: 'query_root';
 	tenants_by_pk?:
 		| {
@@ -6156,17 +6142,6 @@ export type TenantsByIdLocal = {
 				civilid?: any | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
-				pastLeases: Array<{
-					__typename?: 'leases';
-					id: number;
-					start_date?: string | null | undefined;
-					end_date?: string | null | undefined;
-					is_expired?: boolean | null | undefined;
-					is_signed?: boolean | null | undefined;
-					monthly_rent?: number | null | undefined;
-					unit_id?: number | null | undefined;
-					deposit?: number | null | undefined;
-				}>;
 				leases: Array<{
 					__typename?: 'leases';
 					id: number;
@@ -6188,6 +6163,17 @@ export type TenantsByIdLocal = {
 						  }
 						| null
 						| undefined;
+				}>;
+				pastLeases: Array<{
+					__typename?: 'leases';
+					id: number;
+					start_date?: string | null | undefined;
+					end_date?: string | null | undefined;
+					is_expired?: boolean | null | undefined;
+					is_signed?: boolean | null | undefined;
+					monthly_rent?: number | null | undefined;
+					unit_id?: number | null | undefined;
+					deposit?: number | null | undefined;
 				}>;
 		  }
 		| null
@@ -6203,69 +6189,6 @@ export type TenantsByIdLocal = {
 		memo?: string | null | undefined;
 		lease_id?: number | null | undefined;
 	}>;
-};
-
-export type TenantBreadcrumbsVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TenantBreadcrumbs = {
-	__typename?: 'query_root';
-	tenants_by_pk?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				leases: Array<{
-					__typename?: 'leases';
-					id: number;
-					unit?:
-						| {
-								__typename?: 'units';
-								id: number;
-								property?:
-									| {
-											__typename?: 'properties';
-											id: number;
-											client?:
-												| { __typename?: 'clients'; id: number }
-												| null
-												| undefined;
-									  }
-									| null
-									| undefined;
-						  }
-						| null
-						| undefined;
-				}>;
-		  }
-		| null
-		| undefined;
-};
-
-export type TenantPastLeasesVariables = Exact<{
-	id: Scalars['Int'];
-}>;
-
-export type TenantPastLeases = {
-	__typename?: 'query_root';
-	tenants_by_pk?:
-		| {
-				__typename?: 'tenants';
-				id: number;
-				pastLeases: Array<{
-					__typename?: 'leases';
-					id: number;
-					start_date?: string | null | undefined;
-					end_date?: string | null | undefined;
-					is_expired?: boolean | null | undefined;
-					is_signed?: boolean | null | undefined;
-					monthly_rent?: number | null | undefined;
-					unit_id?: number | null | undefined;
-					deposit?: number | null | undefined;
-				}>;
-		  }
-		| null
-		| undefined;
 };
 
 export type TenantDetails = {
@@ -6313,18 +6236,38 @@ export type Crumbs = {
 export type CrumbsVariables = Exact<{ [key: string]: never }>;
 
 export type PastLeases = {
-	__typename?: 'leases';
-	id: number;
-	start_date?: string | null | undefined;
-	end_date?: string | null | undefined;
-	is_expired?: boolean | null | undefined;
-	is_signed?: boolean | null | undefined;
-	monthly_rent?: number | null | undefined;
-	unit_id?: number | null | undefined;
-	deposit?: number | null | undefined;
+	__typename?: 'tenants';
+	pastLeases: Array<{
+		__typename?: 'leases';
+		id: number;
+		start_date?: string | null | undefined;
+		end_date?: string | null | undefined;
+		is_expired?: boolean | null | undefined;
+		is_signed?: boolean | null | undefined;
+		monthly_rent?: number | null | undefined;
+		unit_id?: number | null | undefined;
+		deposit?: number | null | undefined;
+	}>;
 };
 
 export type PastLeasesVariables = Exact<{ [key: string]: never }>;
+
+export type RecentTransactions = {
+	__typename?: 'query_root';
+	transactions: Array<{
+		__typename?: 'transactions';
+		id: number;
+		amount?: number | null | undefined;
+		created_at?: any | null | undefined;
+		due_date?: string | null | undefined;
+		is_paid?: boolean | null | undefined;
+		receipt_url?: string | null | undefined;
+		memo?: string | null | undefined;
+		lease_id?: number | null | undefined;
+	}>;
+};
+
+export type RecentTransactionsVariables = Exact<{ [key: string]: never }>;
 
 export type TenantsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
@@ -6429,10 +6372,6 @@ export type TenantsUpdateStore = OperationStore<
 	TenantsUpdate,
 	TenantsUpdateVariables
 >;
-export type DeleteTenantsStore = OperationStore<
-	DeleteTenants,
-	DeleteTenantsVariables
->;
 export type UnitsInsertStore = OperationStore<
 	UnitsInsert,
 	UnitsInsertVariables
@@ -6449,17 +6388,9 @@ export type UnitsByIdStore = OperationStore<UnitsById, UnitsByIdVariables>;
 export type UnitsListStore = OperationStore<UnitsList, UnitsListVariables>;
 export type TrxByIdStore = OperationStore<TrxById, TrxByIdVariables>;
 export type Trx2ByIdStore = OperationStore<Trx2ById, Trx2ByIdVariables>;
-export type TenantsByIdLocalStore = OperationStore<
-	TenantsByIdLocal,
-	TenantsByIdLocalVariables
->;
-export type TenantBreadcrumbsStore = OperationStore<
-	TenantBreadcrumbs,
-	TenantBreadcrumbsVariables
->;
-export type TenantPastLeasesStore = OperationStore<
-	TenantPastLeases,
-	TenantPastLeasesVariables
+export type TenantIdScreenStore = OperationStore<
+	TenantIdScreen,
+	TenantIdScreenVariables
 >;
 export type TenantsListStore = OperationStore<
 	TenantsList,
@@ -6725,24 +6656,144 @@ export const PastLeases = {
 			name: { kind: 'Name', value: 'pastLeases' },
 			typeCondition: {
 				kind: 'NamedType',
-				name: { kind: 'Name', value: 'leases' },
+				name: { kind: 'Name', value: 'tenants' },
 			},
 			selectionSet: {
 				kind: 'SelectionSet',
 				selections: [
-					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'monthly_rent' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'pastLeases' },
+						name: { kind: 'Name', value: 'leases' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'end_date' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'monthly_rent' },
+								},
+								{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
+							],
+						},
+					},
 				],
 			},
 		},
 	],
 } as unknown as DocumentNode<PastLeases, PastLeasesVariables>;
+export const RecentTransactions = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'recentTransactions' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'transactions' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'lease' },
+											value: {
+												kind: 'ObjectValue',
+												fields: [
+													{
+														kind: 'ObjectField',
+														name: { kind: 'Name', value: 'tenant_id' },
+														value: {
+															kind: 'ObjectValue',
+															fields: [
+																{
+																	kind: 'ObjectField',
+																	name: { kind: 'Name', value: '_eq' },
+																	value: {
+																		kind: 'Variable',
+																		name: { kind: 'Name', value: 'id' },
+																	},
+																},
+															],
+														},
+													},
+												],
+											},
+										},
+									],
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'created_at' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: { kind: 'IntValue', value: '5' },
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_paid' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'receipt_url' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'memo' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'lease_id' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<RecentTransactions, RecentTransactionsVariables>;
 export const ClientsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -7842,51 +7893,6 @@ export const TenantsUpdateDocument = {
 		...TenantsDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
-export const DeleteTenantsDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'DeleteTenants' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'delete_tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-							],
-						},
-					},
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<DeleteTenants, DeleteTenantsVariables>;
 export const UnitsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -8293,13 +8299,13 @@ export const Trx2ByIdDocument = {
 		},
 	],
 } as unknown as DocumentNode<Trx2ById, Trx2ByIdVariables>;
-export const TenantsByIdLocalDocument = {
+export const TenantIdScreenDocument = {
 	kind: 'Document',
 	definitions: [
 		{
 			kind: 'OperationDefinition',
 			operation: 'query',
-			name: { kind: 'Name', value: 'TenantsByIdLocal' },
+			name: { kind: 'Name', value: 'TenantIdScreen' },
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
@@ -8307,34 +8313,6 @@ export const TenantsByIdLocalDocument = {
 					type: {
 						kind: 'NonNullType',
 						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'with_crumbs' },
-					},
-					type: {
-						kind: 'NonNullType',
-						type: {
-							kind: 'NamedType',
-							name: { kind: 'Name', value: 'Boolean' },
-						},
-					},
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'with_past_leases' },
-					},
-					type: {
-						kind: 'NonNullType',
-						type: {
-							kind: 'NamedType',
-							name: { kind: 'Name', value: 'Boolean' },
-						},
 					},
 				},
 			],
@@ -8364,128 +8342,17 @@ export const TenantsByIdLocalDocument = {
 								{
 									kind: 'FragmentSpread',
 									name: { kind: 'Name', value: 'crumbs' },
-									directives: [
-										{
-											kind: 'Directive',
-											name: { kind: 'Name', value: 'include' },
-											arguments: [
-												{
-													kind: 'Argument',
-													name: { kind: 'Name', value: 'if' },
-													value: {
-														kind: 'Variable',
-														name: { kind: 'Name', value: 'with_crumbs' },
-													},
-												},
-											],
-										},
-									],
 								},
 								{
-									kind: 'Field',
-									alias: { kind: 'Name', value: 'pastLeases' },
-									name: { kind: 'Name', value: 'leases' },
-									directives: [
-										{
-											kind: 'Directive',
-											name: { kind: 'Name', value: 'include' },
-											arguments: [
-												{
-													kind: 'Argument',
-													name: { kind: 'Name', value: 'if' },
-													value: {
-														kind: 'Variable',
-														name: { kind: 'Name', value: 'with_past_leases' },
-													},
-												},
-											],
-										},
-									],
-									selectionSet: {
-										kind: 'SelectionSet',
-										selections: [
-											{
-												kind: 'FragmentSpread',
-												name: { kind: 'Name', value: 'pastLeases' },
-											},
-										],
-									},
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'pastLeases' },
 								},
 							],
 						},
 					},
 					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'transactions' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'where' },
-								value: {
-									kind: 'ObjectValue',
-									fields: [
-										{
-											kind: 'ObjectField',
-											name: { kind: 'Name', value: 'lease' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'tenant_id' },
-														value: {
-															kind: 'ObjectValue',
-															fields: [
-																{
-																	kind: 'ObjectField',
-																	name: { kind: 'Name', value: '_eq' },
-																	value: {
-																		kind: 'Variable',
-																		name: { kind: 'Name', value: 'id' },
-																	},
-																},
-															],
-														},
-													},
-												],
-											},
-										},
-									],
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'order_by' },
-								value: {
-									kind: 'ObjectValue',
-									fields: [
-										{
-											kind: 'ObjectField',
-											name: { kind: 'Name', value: 'created_at' },
-											value: { kind: 'EnumValue', value: 'desc' },
-										},
-									],
-								},
-							},
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'limit' },
-								value: { kind: 'IntValue', value: '5' },
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'is_paid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'receipt_url' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'memo' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'lease_id' } },
-							],
-						},
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'recentTransactions' },
 					},
 				],
 			},
@@ -8493,133 +8360,9 @@ export const TenantsByIdLocalDocument = {
 		...TenantDetails.definitions,
 		...Crumbs.definitions,
 		...PastLeases.definitions,
+		...RecentTransactions.definitions,
 	],
-} as unknown as DocumentNode<TenantsByIdLocal, TenantsByIdLocalVariables>;
-export const TenantBreadcrumbsDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantBreadcrumbs' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'crumbs' },
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...Crumbs.definitions,
-	],
-} as unknown as DocumentNode<TenantBreadcrumbs, TenantBreadcrumbsVariables>;
-export const TenantPastLeasesDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantPastLeases' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{
-									kind: 'Field',
-									alias: { kind: 'Name', value: 'pastLeases' },
-									name: { kind: 'Name', value: 'leases' },
-									arguments: [
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'order_by' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'end_date' },
-														value: { kind: 'EnumValue', value: 'desc' },
-													},
-												],
-											},
-										},
-									],
-									selectionSet: {
-										kind: 'SelectionSet',
-										selections: [
-											{
-												kind: 'FragmentSpread',
-												name: { kind: 'Name', value: 'pastLeases' },
-											},
-										],
-									},
-								},
-							],
-						},
-					},
-				],
-			},
-		},
-		...PastLeases.definitions,
-	],
-} as unknown as DocumentNode<TenantPastLeases, TenantPastLeasesVariables>;
+} as unknown as DocumentNode<TenantIdScreen, TenantIdScreenVariables>;
 export const TenantsListDocument = {
 	kind: 'Document',
 	definitions: [

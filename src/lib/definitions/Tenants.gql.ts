@@ -51,18 +51,6 @@ export type TenantsUpdate = {
 		| undefined;
 };
 
-export type DeleteTenantsVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
-}>;
-
-export type DeleteTenants = {
-	__typename?: 'mutation_root';
-	delete_tenants_by_pk?:
-		| { __typename?: 'tenants'; id: number }
-		| null
-		| undefined;
-};
-
 export const TenantsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -198,51 +186,6 @@ export const TenantsUpdateDocument = {
 		},
 	],
 } as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
-export const DeleteTenantsDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'mutation',
-			name: { kind: 'Name', value: 'DeleteTenants' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'delete_tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-							],
-						},
-					},
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<DeleteTenants, DeleteTenantsVariables>;
 export type TenantsInsertStore = OperationStore<
 	TenantsInsert,
 	TenantsInsertVariables
@@ -250,8 +193,4 @@ export type TenantsInsertStore = OperationStore<
 export type TenantsUpdateStore = OperationStore<
 	TenantsUpdate,
 	TenantsUpdateVariables
->;
-export type DeleteTenantsStore = OperationStore<
-	DeleteTenants,
-	DeleteTenantsVariables
 >;

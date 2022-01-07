@@ -1,7 +1,6 @@
 import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
 import type { entity } from './types';
-import { TenantsByIdLocalDocument } from '$generated/graphql';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
@@ -39,13 +38,6 @@ const update = gql`
 	${tenantsDetailsFragment}
 `;
 
-const deleteQuery = gql`
-	mutation DeleteTenants($id: Int!) {
-		delete_tenants_by_pk(id: $id) {
-			id
-		}
-	}
-`;
 
 const fieldList: Field[] = [
 	new Field({
@@ -79,7 +71,6 @@ const docs = {
 	insert: insert,
 	update: update,
 	del: deleteQuery,
-	byId: TenantsByIdLocalDocument,
 };
 
 export default <entity>{
