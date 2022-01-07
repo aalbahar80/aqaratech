@@ -17,6 +17,7 @@
 
 	let isSideNavOpen = false;
 	let theme: CarbonTheme = 'g90';
+	let y: number | null | undefined;
 
 	const navLinkList = [
 		{ text: 'Clients', href: '/clients' },
@@ -27,20 +28,22 @@
 	];
 </script>
 
-<Header company="RE" platformName="Admin" bind:isSideNavOpen>
-	<div slot="skip-to-content">
+<svelte:window bind:outerWidth={y} />
+
+<Header
+	company="RE"
+	platformName="Admin"
+	persistentHamburgerMenu
+	bind:isSideNavOpen
+>
+	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
-	</div>
+	</svelte:fragment>
 
 	<HeaderNav>
-		<HeaderNavItem href="/" text="Link 1" />
-		<HeaderNavItem href="/" text="Link 2" />
-		<HeaderNavItem href="/" text="Link 3" />
-		<HeaderNavMenu text="Menu">
-			<HeaderNavItem href="/" text="Link 1" />
-			<HeaderNavItem href="/" text="Link 2" />
-			<HeaderNavItem href="/" text="Link 3" />
-		</HeaderNavMenu>
+		{#each navLinkList as { href, text }}
+			<HeaderNavItem {text} {href} />
+		{/each}
 		<Theme
 			bind:theme
 			persist
@@ -53,22 +56,16 @@
 				hideLabel: true,
 			}}
 		/>
-		<HeaderNavItem href="/" text="Link 4" />
 	</HeaderNav>
-</Header>
 
-<SideNav bind:isOpen={isSideNavOpen}>
-	<SideNavItems>
-		<SideNavLink text="Home" href="/" />
-		<SideNavDivider />
-		{#each navLinkList as { href, text }}
-			<SideNavLink {text} {href} />
-		{/each}
-		<SideNavDivider />
-		<SideNavMenu text="Dashboards">
-			<SideNavMenuItem href="/" text="Link 1" />
-			<SideNavMenuItem href="/" text="Link 2" />
-			<SideNavMenuItem href="/login" text="Login Page" />
-		</SideNavMenu>
-	</SideNavItems>
-</SideNav>
+	<SideNav bind:isOpen={isSideNavOpen}>
+		<SideNavItems>
+			<SideNavLink text="Home" href="/" />
+			<SideNavDivider />
+			{#each navLinkList as { href, text }}
+				<SideNavLink {text} {href} />
+			{/each}
+			<SideNavDivider />
+		</SideNavItems>
+	</SideNav>
+</Header>
