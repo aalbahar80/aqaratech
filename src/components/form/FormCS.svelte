@@ -5,8 +5,8 @@
 		svelteReporter as reporter,
 		ValidationMessage,
 	} from '@felte/reporter-svelte';
-	import { validator } from '@felte/validator-zod';
 	import type { ValidatorConfig } from '@felte/validator-zod';
+	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
 	import {
 		Button,
@@ -19,19 +19,21 @@
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
-	import type { ZodObject } from 'zod';
-	import type { z } from 'zod';
-
-	type T = $$Generic;
+	import { z } from 'zod';
 
 	export let entity: string;
 	export let fieldList: Field[];
 	export let insertDoc: DocumentNode | undefined = undefined;
-	export let validation: ZodObject<any> | undefined = undefined;
 
 	export let updateDoc: DocumentNode | undefined = undefined;
-	export let existing: T | undefined = undefined;
+	export let existing: { [x: string]: string; id: any };
 
+	const validation = z.object({
+		first_name: z.string().min(1, { message: 'Required' }),
+		last_name: z.string().min(1, { message: 'Required' }),
+		email: z.string().email(),
+		phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
+	});
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// insert mutation
@@ -43,7 +45,7 @@
 
 	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
 
-	const handleForm = async (values: T) => {
+	const handleForm = async (values) => {
 		state = 'active';
 		try {
 			if (existing) {
@@ -66,14 +68,15 @@
 		}
 	};
 
-	const initial = (): Partial<T> => {
+	const initial = () => {
 		// get editable fields
 		const fields = fieldList.filter((f) => f.editable).map((f) => f.fieldName);
 
 		// assign them to existing data, otherwise blank
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return reduce(
 			fields,
-			(acc, key, value) => {
+			(acc: { [x: string]: string }, key: any, value: string) => {
 				acc[value] = existing?.[value] || '';
 				return acc;
 			},
