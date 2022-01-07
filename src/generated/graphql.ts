@@ -6284,6 +6284,27 @@ export type TenantEditScreen = {
 		| undefined;
 };
 
+export type TenantBasics = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				first_name?: string | null | undefined;
+				last_name?: string | null | undefined;
+				email?: string | null | undefined;
+				phone?: string | null | undefined;
+				dob?: string | null | undefined;
+				civilid?: any | null | undefined;
+				second_name?: string | null | undefined;
+				third_name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type TenantBasicsVariables = Exact<{ [key: string]: never }>;
+
 export type ClientsInsertStore = OperationStore<
 	ClientsInsert,
 	ClientsInsertVariables
@@ -6484,33 +6505,6 @@ export const UnitsDetails = {
 		},
 	],
 } as unknown as DocumentNode<UnitsDetails, UnitsDetailsVariables>;
-export const TenantDetails = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'FragmentDefinition',
-			name: { kind: 'Name', value: 'tenantDetails' },
-			typeCondition: {
-				kind: 'NamedType',
-				name: { kind: 'Name', value: 'tenants' },
-			},
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
-				],
-			},
-		},
-	],
-} as unknown as DocumentNode<TenantDetails, TenantDetailsVariables>;
 export const Crumbs = {
 	kind: 'Document',
 	definitions: [
@@ -6743,6 +6737,75 @@ export const RecentTransactions = {
 		},
 	],
 } as unknown as DocumentNode<RecentTransactions, RecentTransactionsVariables>;
+export const TenantDetails = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'tenantDetails' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'tenants' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<TenantDetails, TenantDetailsVariables>;
+export const TenantBasics = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'tenantBasics' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+	],
+} as unknown as DocumentNode<TenantBasics, TenantBasicsVariables>;
 export const ClientsInsertDocument = {
 	kind: 'Document',
 	definitions: [
@@ -8395,32 +8458,13 @@ export const TenantEditScreenDocument = {
 				kind: 'SelectionSet',
 				selections: [
 					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{
-									kind: 'FragmentSpread',
-									name: { kind: 'Name', value: 'tenantDetails' },
-								},
-							],
-						},
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'tenantBasics' },
 					},
 				],
 			},
 		},
-		...TenantDetails.definitions,
+		...TenantBasics.definitions,
 	],
 } as unknown as DocumentNode<TenantEditScreen, TenantEditScreenVariables>;
 export type WithTypename<T extends { __typename?: any }> = {

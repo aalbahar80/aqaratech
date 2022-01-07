@@ -99,6 +99,10 @@ mutation TenantsUpdate($id: Int!, $_set: tenants_set_input) {
 }
 
 query TenantEditScreen($id: Int!) {
+	...tenantBasics
+}
+
+fragment tenantBasics on query_root {
 	tenants_by_pk(id: $id) {
 		...tenantDetails
 	}

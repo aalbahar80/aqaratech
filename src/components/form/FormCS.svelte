@@ -19,21 +19,18 @@
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
-	import { z } from 'zod';
+	import type { z, ZodObject } from 'zod';
 
 	export let entity: string;
 	export let fieldList: Field[];
 	export let insertDoc: DocumentNode | undefined = undefined;
 
 	export let updateDoc: DocumentNode | undefined = undefined;
-	export let existing: { [x: string]: string; id: any };
+	export let existing: T | undefined = undefined;
+	export let validation: ZodObject<any>;
 
-	const validation = z.object({
-		first_name: z.string().min(1, { message: 'Required' }),
-		last_name: z.string().min(1, { message: 'Required' }),
-		email: z.string().email(),
-		phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
-	});
+	type T = $$Generic;
+
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// insert mutation
@@ -45,7 +42,7 @@
 
 	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
 
-	const handleForm = async (values) => {
+	const handleForm = async (values: T) => {
 		state = 'active';
 		try {
 			if (existing) {
@@ -68,7 +65,7 @@
 		}
 	};
 
-	const initial = () => {
+	const initial = (): Partial<T> => {
 		// get editable fields
 		const fields = fieldList.filter((f) => f.editable).map((f) => f.fieldName);
 
