@@ -43,7 +43,7 @@ async function getTokens(code: string, redirectUri: string) {
 }
 
 export const get: RequestHandler<Locals> = async (req) => {
-	debugger;
+	// debugger;
 	try {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
