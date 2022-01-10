@@ -35,7 +35,7 @@
 	];
 </script>
 
-<svelte:window bind:outerWidth={y} />
+<svelte:window bind:innerWidth={y} />
 
 <Header
 	company="RE"
