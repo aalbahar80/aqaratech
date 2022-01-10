@@ -12,10 +12,17 @@
 		SideNavDivider,
 		SkipToContent,
 		Theme,
+		HeaderUtilities,
+		HeaderAction,
+		HeaderPanelLink,
+		HeaderPanelLinks,
+		HeaderGlobalAction,
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
+	import { SettingsAdjust20, UserAvatarFilledAlt20 } from 'carbon-icons-svelte';
 
 	let isSideNavOpen = false;
+	let isAccountOpen = false;
 	let theme: CarbonTheme = 'g90';
 	let y: number | null | undefined;
 
@@ -57,6 +64,20 @@
 			}}
 		/>
 	</HeaderNav>
+
+	<HeaderUtilities>
+		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
+		<HeaderAction
+			icon={UserAvatarFilledAlt20}
+			closeIcon={UserAvatarFilledAlt20}
+			bind:isOpen={isAccountOpen}
+		>
+			<HeaderPanelLinks>
+				<HeaderPanelLink>Change password</HeaderPanelLink>
+				<HeaderPanelLink>Log out</HeaderPanelLink>
+			</HeaderPanelLinks>
+		</HeaderAction>
+	</HeaderUtilities>
 
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
