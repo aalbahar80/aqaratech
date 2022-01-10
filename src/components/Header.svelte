@@ -51,6 +51,9 @@
 		{#each navLinkList as { href, text }}
 			<HeaderNavItem {text} {href} />
 		{/each}
+	</HeaderNav>
+
+	<HeaderUtilities>
 		<Theme
 			bind:theme
 			persist
@@ -59,13 +62,10 @@
 			select={{
 				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
 				labelText: 'Select a theme',
-				// inline: true,
+				inline: true,
 				hideLabel: true,
 			}}
 		/>
-	</HeaderNav>
-
-	<HeaderUtilities>
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
 		<HeaderAction
 			icon={UserAvatarFilledAlt20}
