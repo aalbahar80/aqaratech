@@ -6,11 +6,9 @@ module.exports = {
 	plugins: [
 		// require('@tailwindcss/typography'),
 		// require('@tailwindcss/forms'),
-		// require('daisyui')
 	],
-	// daisyui: {
-	// 	themes: ['dracula', 'emerald'],
-	// 	// themes: false
-	// 	styled: false
-	// }
+
+	corePlugins: {
+		preflight: false,
+	}
 };
