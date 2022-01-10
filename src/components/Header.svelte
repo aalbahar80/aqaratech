@@ -79,7 +79,10 @@
 		</HeaderAction>
 	</HeaderUtilities>
 
-	<SideNav bind:isOpen={isSideNavOpen}>
+	<SideNav
+		bind:isOpen={isSideNavOpen}
+		class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}
+	>
 		<SideNavItems>
 			<SideNavLink text="Home" href="/" />
 			<SideNavDivider />
