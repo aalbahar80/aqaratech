@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { addToast } from '$lib/stores/toast';
 	import { mutation, operationStore } from '@urql/svelte';
-	import { Button, Modal, Loading } from 'carbon-components-svelte';
+	import { Button, Modal } from 'carbon-components-svelte';
 	import { Edit16, TrashCan16 } from 'carbon-icons-svelte';
 	import type { DocumentNode } from 'graphql';
 	import { goto } from '$app/navigation';
@@ -42,7 +42,9 @@
 				});
 				loading = false;
 				open = false;
-				goto(`/${$page.url.pathname.split('/')[1]}`);
+				goto(`/${$page.url.pathname.split('/')[1]}`).catch((e) => {
+					console.error(e);
+				});
 			}
 		});
 	};
@@ -59,7 +61,9 @@
 		kind="danger-tertiary"
 		iconDescription="Delete"
 		icon={TrashCan16}
-		on:click={() => (open = true)}
+		on:click={() => {
+			open = true;
+		}}
 	/>
 
 	<Modal
@@ -68,11 +72,11 @@
 		modalHeading="Are you sure?"
 		primaryButtonText="Delete"
 		secondaryButtonText="Cancel"
-		on:click:button--secondary={() => (open = false)}
+		on:click:button--secondary={() => {
+			open = false;
+		}}
 		on:open
 		on:close
 		on:submit={handleDelete}
-	>
-		<p>This is a permanent action and cannot be undone.</p>
-	</Modal>
+	/>
 </div>
