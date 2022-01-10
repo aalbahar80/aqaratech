@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { Button, Modal, ToastNotification } from 'carbon-components-svelte';
-	import { TrashCan16, Edit16 } from 'carbon-icons-svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { mutation, operationStore } from '@urql/svelte';
+	import { Button, Modal, Loading } from 'carbon-components-svelte';
+	import { Edit16, TrashCan16 } from 'carbon-icons-svelte';
 	import type { DocumentNode } from 'graphql';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let deleteDocumentNode: DocumentNode;
 	export let id: string;
@@ -30,6 +30,7 @@
 					},
 				});
 				loading = false;
+				open = false;
 			} else if (result.data) {
 				console.log('Delete successful', result.data);
 				addToast({
