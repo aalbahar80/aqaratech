@@ -25,9 +25,14 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
-		// if (isEmpty(session.user)) {
-		// 	return { redirect: '/landing', status: 302 };
-		// }
+		if (isEmpty(session.user)) {
+			// return { redirect: '/auth/login', status: 302 };
+			return {
+				status: 302,
+				redirect: '/auth/login',
+				// headers: { location: '/auth/login' },
+			};
+		}
 
 		const cacheConfig = cacheExchange<GraphCacheConfig>({
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
