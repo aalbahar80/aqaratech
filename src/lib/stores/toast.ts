@@ -21,7 +21,7 @@ export const addToast = (toast: Omit<ToastItem, 'id'>) => {
 	// Setup some sensible defaults for a toast.
 	const defaults = {
 		dismissible: true,
-		duration: 6000,
+		duration: 10 * 1000,
 	};
 
 	const newToast: ToastItem = { id, ...defaults, ...toast };

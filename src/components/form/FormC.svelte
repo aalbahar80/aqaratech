@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Field } from '$components/form/Field';
-	import { failureToast, successToast } from '$components/toasts';
+	// import { failureToast, successToast } from '$components/toasts';
 	import { v } from '$lib/Validations';
 	import {
 		svelteReporter as reporter,
@@ -45,17 +45,17 @@
 					id: existing.id,
 					_set: values,
 				});
-				successToast('Success');
+				// successToast('Success');
 				state = 'finished';
 			} else {
 				await insertMutation({ object: values });
-				successToast('Success');
+				// successToast('Success');
 				state = 'finished';
 				// reset();
 			}
 		} catch (e) {
 			console.log(e);
-			failureToast(e.message);
+			// failureToast(e.message);
 			state = 'error';
 		}
 	};
