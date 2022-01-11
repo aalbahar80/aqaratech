@@ -84,7 +84,8 @@
 		})),
 		{
 			key: 'overflow',
-			empty: true,
+			empty: false,
+			value: '',
 		},
 		0,
 	);
