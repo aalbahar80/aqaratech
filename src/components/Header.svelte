@@ -41,8 +41,7 @@
 	company="RE"
 	platformName="Admin"
 	persistentHamburgerMenu
-	bind:isSideNavOpen
->
+	bind:isSideNavOpen>
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -64,25 +63,25 @@
 				labelText: 'Select a theme',
 				inline: true,
 				hideLabel: true,
-			}}
-		/>
+			}} />
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
 		<HeaderAction
 			icon={UserAvatarFilledAlt20}
 			closeIcon={UserAvatarFilledAlt20}
-			bind:isOpen={isAccountOpen}
-		>
+			bind:isOpen={isAccountOpen}>
 			<HeaderPanelLinks>
 				<HeaderPanelLink>Change password</HeaderPanelLink>
-				<HeaderPanelLink>Log out</HeaderPanelLink>
+				<HeaderPanelLink href="/auth/login" rel="external"
+					>Log in</HeaderPanelLink>
+				<HeaderPanelLink href="/auth/logout" rel="external"
+					>Log out</HeaderPanelLink>
 			</HeaderPanelLinks>
 		</HeaderAction>
 	</HeaderUtilities>
 
 	<SideNav
 		bind:isOpen={isSideNavOpen}
-		class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}
-	>
+		class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}>
 		<SideNavItems>
 			<SideNavLink text="Home" href="/" />
 			<SideNavDivider />
