@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Field } from '$components/form/Field';
-	import { failureToast, successToast } from '$components/toasts';
+	import { addToast } from '$lib/stores/toast';
 	import {
 		svelteReporter as reporter,
 		ValidationMessage,
@@ -16,7 +16,7 @@
 		TextInput,
 	} from 'carbon-components-svelte';
 	import { createForm } from 'felte';
-	import type { DocumentNode } from 'graphql';
+	import { DocumentNode, Kind } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
 	import type { z, ZodObject } from 'zod';
@@ -50,18 +50,38 @@
 					id: existing.id,
 					_set: values,
 				});
-				successToast('Success');
+				addToast({
+					props: {
+						title: 'Success',
+						kind: 'success',
+						subtitle: '[entity] updated',
+					},
+				});
+
 				state = 'finished';
 			} else {
 				await insertMutation({ object: values });
-				successToast('Success');
 				state = 'finished';
 				// reset();
+
+				addToast({
+					props: {
+						title: 'Success',
+						kind: 'success',
+						subtitle: 'New [entity] created',
+					},
+				});
 			}
 		} catch (e) {
 			console.error(e);
-			failureToast(e.message);
 			state = 'error';
+			addToast({
+				props: {
+					title: 'Error',
+					kind: 'error',
+					subtitle: 'An error occured',
+				},
+			});
 		}
 	};
 
