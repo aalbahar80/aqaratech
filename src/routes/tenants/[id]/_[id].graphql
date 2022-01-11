@@ -74,7 +74,7 @@ query TenantsList(
 	tenants(order_by: $order_by, limit: $limit, offset: $offset, where: $where) {
 		...tenantDetails
 	}
-	agg: tenants_aggregate {
+	agg: tenants_aggregate(where: $where) {
 		aggregate {
 			count
 		}

@@ -8264,6 +8264,16 @@ export const TenantsListDocument = {
 						kind: 'Field',
 						alias: { kind: 'Name', value: 'agg' },
 						name: { kind: 'Name', value: 'tenants_aggregate' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [

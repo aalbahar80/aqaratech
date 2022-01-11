@@ -4,8 +4,6 @@
 		Toolbar,
 		ToolbarContent,
 		ToolbarSearch,
-		ToolbarMenu,
-		ToolbarMenuItem,
 		Button,
 		Pagination,
 		DataTableSkeleton,
@@ -39,6 +37,7 @@
 	const pageSizes = [10, 25, 100];
 	let pageSize = 10;
 	let pageIndex = 1;
+	$: totalItems = $pageQuery.data?.agg?.aggregate?.count ?? 111;
 
 	type SortInfo = {
 		[key: string]: Order_By;
@@ -85,14 +84,14 @@
 	query(pageQuery);
 </script>
 
-{#if $pageQuery.fetching}
+{#if !$pageQuery.data}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else if $pageQuery.error}
 	<p>Error state here</p>
 {/if}
 
-{#if !pageQuery.error}
-	<div class:hidden={$pageQuery.fetching && !$pageQuery.error}>
+{#if pageQuery.data}
+	<div>
 		<DataTable
 			on:click:header={(h) => {
 				const field = h.detail.header.key;
@@ -123,10 +122,5 @@
 			</svelte:fragment>
 		</DataTable>
 	</div>
-	<Pagination
-		totalItems={$pageQuery.data?.agg?.aggregate?.count ?? 111}
-		{pageSizes}
-		bind:pageSize
-		bind:page={pageIndex}
-	/>
+	<Pagination bind:totalItems {pageSizes} bind:pageSize bind:page={pageIndex} />
 {/if}
