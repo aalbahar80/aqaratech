@@ -3,11 +3,8 @@
 		Header,
 		HeaderNav,
 		HeaderNavItem,
-		HeaderNavMenu,
 		SideNav,
 		SideNavItems,
-		SideNavMenu,
-		SideNavMenuItem,
 		SideNavLink,
 		SideNavDivider,
 		SkipToContent,
@@ -20,6 +17,7 @@
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 	import { SettingsAdjust20, UserAvatarFilledAlt20 } from 'carbon-icons-svelte';
+	import { page } from '$app/stores';
 
 	let isSideNavOpen = false;
 	let isAccountOpen = false;
@@ -33,6 +31,7 @@
 		{ text: 'Leases', href: '/leases' },
 		{ text: 'Tenants', href: '/tenants' },
 	];
+	$: isActive = (href: string) => $page.url.pathname === href;
 </script>
 
 <svelte:window bind:innerWidth={y} />
@@ -48,23 +47,25 @@
 
 	<HeaderNav>
 		{#each navLinkList as { href, text }}
-			<HeaderNavItem {text} {href} />
+			<HeaderNavItem {text} {href} isSelected={isActive(href)} />
 		{/each}
 	</HeaderNav>
 
 	<HeaderUtilities>
-		<Theme
-			bind:theme
-			persist
-			persistKey="__carbon-theme"
-			render="select"
-			select={{
-				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
-				labelText: 'Select a theme',
-				inline: true,
-				hideLabel: true,
-			}} />
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
+		<HeaderAction>
+			<Theme
+				bind:theme
+				persist
+				persistKey="__carbon-theme"
+				render="select"
+				select={{
+					themes: ['white', 'g10', 'g80', 'g90', 'g100'],
+					labelText: 'Select a theme',
+					inline: true,
+					hideLabel: true,
+				}} />
+		</HeaderAction>
 		<HeaderAction
 			icon={UserAvatarFilledAlt20}
 			closeIcon={UserAvatarFilledAlt20}
@@ -86,7 +87,7 @@
 			<SideNavLink text="Home" href="/" />
 			<SideNavDivider />
 			{#each navLinkList as { href, text }}
-				<SideNavLink {text} {href} />
+				<SideNavLink {text} {href} isSelected={isActive(href)} />
 			{/each}
 			<SideNavDivider />
 		</SideNavItems>

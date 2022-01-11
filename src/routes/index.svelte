@@ -9,12 +9,10 @@
 <div class="hero bg-base-200">
 	<div class="text-center hero-content">
 		<div class="max-w-md">
-			<h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+			<h1 class="mb-5 text-5xl font-bold">Lorem Ipsum</h1>
 			<p class="mb-5">
-				<a href="/auth/login" rel="external">Login</a>
-				<a href="/auth/logout" rel="external">Logout</a>
-				wvoluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi.
-				In deleniti eaque aut repudiandae et a id nisi.
+				wvoluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+				quasi. In deleniti eaque aut repudiandae et a id nisi.
 			</p>
 		</div>
 	</div>
