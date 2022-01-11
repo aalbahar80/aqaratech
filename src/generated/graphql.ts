@@ -6177,6 +6177,7 @@ export type TenantsListVariables = Exact<{
 	limit?: InputMaybe<Scalars['Int']>;
 	offset?: InputMaybe<Scalars['Int']>;
 	order_by?: InputMaybe<Array<Tenants_Order_By> | Tenants_Order_By>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 }>;
 
 export type TenantsList = {
@@ -8196,6 +8197,18 @@ export const TenantsListDocument = {
 					},
 					defaultValue: { kind: 'ObjectValue', fields: [] },
 				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'tenants_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
 			],
 			selectionSet: {
 				kind: 'SelectionSet',
@@ -8226,6 +8239,14 @@ export const TenantsListDocument = {
 								value: {
 									kind: 'Variable',
 									name: { kind: 'Name', value: 'offset' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
 								},
 							},
 						],

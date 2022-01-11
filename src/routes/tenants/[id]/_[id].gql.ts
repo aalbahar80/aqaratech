@@ -77,6 +77,7 @@ export type TenantsListVariables = Types.Exact<{
 	order_by?: Types.InputMaybe<
 		Array<Types.Tenants_Order_By> | Types.Tenants_Order_By
 	>;
+	where?: Types.InputMaybe<Types.Tenants_Bool_Exp>;
 }>;
 
 export type TenantsList = {
@@ -477,6 +478,18 @@ export const TenantsListDocument = {
 					},
 					defaultValue: { kind: 'ObjectValue', fields: [] },
 				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'tenants_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
 			],
 			selectionSet: {
 				kind: 'SelectionSet',
@@ -507,6 +520,14 @@ export const TenantsListDocument = {
 								value: {
 									kind: 'Variable',
 									name: { kind: 'Name', value: 'offset' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
 								},
 							},
 						],

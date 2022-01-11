@@ -7,8 +7,6 @@
 		ToolbarMenu,
 		ToolbarMenuItem,
 		Button,
-		OverflowMenu,
-		OverflowMenuItem,
 		Pagination,
 		DataTableSkeleton,
 	} from 'carbon-components-svelte';
@@ -75,39 +73,21 @@
 			zebra
 			sortable
 			title={capitalize(graphqlName)}
-			description="Your organization's active load balancers."
 			{headers}
 			rows={$pageQuery.data?.[graphqlName] ?? []}
 		>
 			<Toolbar>
 				<ToolbarContent>
-					<ToolbarSearch />
-					<ToolbarMenu>
-						<ToolbarMenuItem primaryFocus>Restart all</ToolbarMenuItem>
-						<ToolbarMenuItem
-							href="https://cloud.ibm.com/docs/loadbalancer-service"
-						>
-							API documentation
-						</ToolbarMenuItem>
-						<ToolbarMenuItem danger>Delete</ToolbarMenuItem>
-					</ToolbarMenu>
+					<ToolbarSearch bind:value={searchTerm} />
 					<Button href={`${$page.url.pathname}/add`}>New</Button>
 				</ToolbarContent>
 			</Toolbar>
 
 			<svelte:fragment slot="cell" let:row let:cell>
 				{#if cell.key === 'overflow'}
-					<OverflowMenu flipped>
-						<OverflowMenuItem
-							href={`${$page.url.pathname}/${row.id}`}
-							text="Details"
-						/>
-						<OverflowMenuItem
-							href={`${$page.url.pathname}/${row.id}/edit`}
-							text="Edit"
-						/>
-						<OverflowMenuItem danger text="Delete" />
-					</OverflowMenu>
+					<Button href={`${$page.url.pathname}/${row.id}`} kind="ghost">
+						View</Button
+					>
 				{:else}{cell.value}{/if}
 			</svelte:fragment>
 		</DataTable>
