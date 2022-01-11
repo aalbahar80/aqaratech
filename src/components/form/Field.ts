@@ -3,15 +3,25 @@ import * as zod from 'zod';
 
 export class Field {
 	fieldName: string;
+
 	title?: string;
+
 	inputType?: string;
+
 	editable?: boolean;
+
 	visibile?: boolean;
+
 	hideable?: boolean;
+	
 	sortable?: boolean;
+
 	width?: number;
+
 	pattern?: string;
+
 	validation?;
+
 	constructor(field: Field) {
 		this.fieldName = field.fieldName;
 		this.title = field.title || field.fieldName;
