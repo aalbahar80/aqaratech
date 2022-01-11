@@ -22,6 +22,8 @@
 	export let graphqlName: string;
 	export let fieldList: Field[];
 
+	let searchTerm = '';
+
 	const headers: DataTableHeader[] = insert(
 		fieldList.map((v) => ({
 			key: v.fieldName,
@@ -31,7 +33,7 @@
 			key: 'overflow',
 			empty: true,
 		},
-		fieldList.length,
+		0,
 	);
 
 	const pageSizes = [10, 25, 100];
@@ -42,11 +44,40 @@
 		[key: string]: Order_By;
 	};
 
+	$: filter = fieldList
+		// disregard number fields if search term isn't a number
+		.filter((f) =>
+			parseInt(searchTerm, 10)
+				? f.searchable
+				: f.searchable && f.searchType === 'text',
+		)
+		.map((f) => {
+			// number scalars use _eq operator
+			if (f.searchType === 'number') {
+				return {
+					[f.fieldName]: { _eq: parseInt(searchTerm, 10) },
+				};
+			}
+			// text scalars use %_ilike% operator
+			if (f.searchType === 'text') {
+				return {
+					[f.fieldName]: { _ilike: `%${searchTerm}%` },
+				};
+			}
+
+			console.warn(
+				'Unknown search type. Search type should be handled.',
+				f.searchType,
+			);
+			return {};
+		});
+	$: console.log(filter);
 	let sortingInfo: SortInfo = { id: 'asc' };
 	$: queryVars = {
 		limit: pageSize,
 		offset: (pageIndex - 1) * pageSize,
 		order_by: sortingInfo,
+		where: { _or: filter },
 	};
 
 	const pageQuery = operationStore(listDoc, queryVars);

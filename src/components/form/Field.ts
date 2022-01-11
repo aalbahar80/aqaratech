@@ -1,4 +1,3 @@
-// import * as yup from 'yup';
 import * as zod from 'zod';
 
 export class Field {
@@ -13,8 +12,12 @@ export class Field {
 	visibile?: boolean;
 
 	hideable?: boolean;
-	
+
 	sortable?: boolean;
+
+	searchable?: boolean;
+
+	searchType?: string;
 
 	width?: number;
 
@@ -30,6 +33,9 @@ export class Field {
 		this.visibile = field.visibile === undefined || field.visibile === true;
 		this.hideable = field.hideable === undefined || field.hideable === true;
 		this.sortable = field.sortable === undefined || field.sortable === true;
+		this.searchable =
+			field.searchable === undefined || field.searchable === true;
+		this.searchType = field.searchType || 'text';
 		this.width = field.width;
 		this.validation = field.validation;
 	}

@@ -108,30 +108,3 @@ fragment tenantBasics on query_root {
 		...tenantDetails
 	}
 }
-
-# query tenantTextSearch($term: String = "%رب%") {
-# 	tenants(
-# 		where: {
-# 			_or: [
-# 				{ first_name: { _ilike: $term } }
-# 				{ last_name: { _ilike: $term } }
-# 				{ second_name: { _ilike: $term } }
-# 				{ third_name: { _ilike: $term } }
-# 				{ email: { _ilike: $term } }
-# 				{ phone: { _ilike: $term } }
-# 			]
-# 		}
-# 	) {
-# 		id
-# 		first_name
-# 		last_name
-# 	}
-# }
-
-# query tenantTextSearch($where: tenants_bool_exp) {
-# 	tenants(where: $where) {
-# 		id
-# 		first_name
-# 		last_name
-# 	}
-# }

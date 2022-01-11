@@ -10,6 +10,7 @@ const fieldList: Field[] = [
 		fieldName: 'id',
 		title: 'ID',
 		editable: false,
+		searchType: 'number',
 	}),
 	new Field({
 		fieldName: 'first_name',
@@ -45,11 +46,14 @@ const fieldList: Field[] = [
 		fieldName: 'dob',
 		title: 'Date of Birth',
 		inputType: 'date',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'civilid',
 		title: 'Civil ID',
 		inputType: 'text',
+		// TODO: change after removing bigint type
+		searchType: 'number',
 	}),
 ];
 
