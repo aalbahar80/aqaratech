@@ -16,7 +16,6 @@
 		operationStore,
 		setClient,
 	} from '@urql/svelte';
-	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { Content } from 'carbon-components-svelte';
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
@@ -26,9 +25,9 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
-		if (isEmpty(session.user)) {
-			return { redirect: '/landing', status: 302 };
-		}
+		// if (isEmpty(session.user)) {
+		// 	return { redirect: '/landing', status: 302 };
+		// }
 
 		const cacheConfig = cacheExchange<GraphCacheConfig>({
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -134,6 +133,5 @@
 <Header />
 <Content>
 	<ToastParent />
-	<SvelteToast />
 	<slot />
 </Content>
