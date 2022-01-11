@@ -43,5 +43,4 @@ export const v = {
 	leases,
 	clients,
 	properties,
-	tenants,
 };

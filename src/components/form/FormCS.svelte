@@ -19,6 +19,7 @@
 	import { DocumentNode, Kind } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
+	import map from 'just-map-values';
 	import type { z, ZodObject } from 'zod';
 
 	export let entity: string;
@@ -44,11 +45,13 @@
 
 	const handleForm = async (values: T) => {
 		state = 'active';
+		// submit empty strings as null
+		const newValues = map(values, (v) => (v === '' ? null : v));
 		try {
 			if (existing) {
 				await updateMutation({
 					id: existing.id,
-					_set: values,
+					_set: newValues,
 				});
 				addToast({
 					props: {
@@ -60,7 +63,7 @@
 
 				state = 'finished';
 			} else {
-				await insertMutation({ object: values });
+				await insertMutation({ object: newValues });
 				state = 'finished';
 				// reset();
 

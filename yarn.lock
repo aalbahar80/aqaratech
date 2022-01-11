@@ -10000,6 +10000,11 @@ just-map-keys@^2.1.1:
   resolved "https://registry.yarnpkg.com/just-map-keys/-/just-map-keys-2.1.1.tgz#475c7e4da5902ee91832070bdab47b90e06001f6"
   integrity sha512-HkfBQo5x9EpLaSDlgkGerRnkLGTPk1wa6Vp5cU4IQLGeOxTZvdFLEIJLLZpQPAq8bCiAxTbT0tf8VavwOv+enQ==
 
+just-map-values@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/just-map-values/-/just-map-values-3.0.2.tgz#3617881b6bd2ee4215061f8270d973193937e161"
+  integrity sha512-bPrvJIZ/0QbrsnrY1f8JxfPZ7joimSecUeYjoxVctBTYxjRKjtVU1QMgAJCK5RTo5bNGonVY7FxrwQ+gQrIyww==
+
 just-pluck-it@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/just-pluck-it/-/just-pluck-it-2.1.0.tgz#04d5bc885b2a06ce277967d76a81e2077d318dc5"
