@@ -8,19 +8,14 @@
 	import type { ValidatorConfig } from '@felte/validator-zod';
 	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
-	import {
-		Button,
-		Form,
-		FormGroup,
-		InlineLoading,
-		TextInput,
-	} from 'carbon-components-svelte';
+	import { Button, Form, FormGroup, TextInput } from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import { DocumentNode, Kind } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
 	import map from 'just-map-values';
 	import type { z, ZodObject } from 'zod';
+	import { goto } from '$app/navigation';
 
 	export let entity: string;
 	export let fieldList: Field[];
@@ -32,6 +27,7 @@
 
 	type T = $$Generic;
 
+	let loading = false;
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// insert mutation
@@ -41,10 +37,10 @@
 	const updateStore = operationStore(updateDoc);
 	const updateMutation = mutation(updateStore);
 
-	let state = 'dormant'; // "dormant" | "active" | "finished" | "inactive"
+	// function to get id value from existing object
 
 	const handleForm = async (values: T) => {
-		state = 'active';
+		loading = true;
 		// submit empty strings as null
 		const newValues = map(values, (v) => (v === '' ? null : v));
 		try {
@@ -60,13 +56,12 @@
 						subtitle: '[entity] updated',
 					},
 				});
-
-				state = 'finished';
+				await goto(`/${entity}/${existing.id}`);
+				loading = false;
 			} else {
-				await insertMutation({ object: newValues });
-				state = 'finished';
-				// reset();
-
+				const res = await insertMutation({ object: newValues });
+				const firstKey = Object.keys(res?.data)[0];
+				const { id } = res.data[firstKey];
 				addToast({
 					props: {
 						title: 'Success',
@@ -74,10 +69,11 @@
 						subtitle: 'New [entity] created',
 					},
 				});
+				await goto(`/${entity}/${id}`);
+				loading = false;
 			}
 		} catch (e) {
 			console.error(e);
-			state = 'error';
 			addToast({
 				props: {
 					title: 'Error',
@@ -85,6 +81,7 @@
 					subtitle: 'An error occured',
 				},
 			});
+			loading = false;
 		}
 	};
 
@@ -144,15 +141,9 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-2 items-center">
 			<Button kind="ghost" on:click={reset}>Reset</Button>
-			{#if state !== 'dormant'}
-				<span>
-					<InlineLoading status={state} description={descriptionMap[state]} />
-				</span>
-			{:else}
-				<Button disabled={!noErrorMsg} type="submit"
-					>{`${existing ? 'Edit' : 'Create new'} ${entity}`}
-				</Button>
-			{/if}
+			<Button disabled={!noErrorMsg} type="submit" skeleton={loading}>
+				{`${existing ? 'Edit' : 'Create new'} ${entity}`}
+			</Button>
 		</div>
 	</Form>
 </div>
