@@ -16,7 +16,7 @@
 		operationStore,
 		setClient,
 	} from '@urql/svelte';
-	import { Content } from 'carbon-components-svelte';
+	import { Column, Content, Grid, Row } from 'carbon-components-svelte';
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
@@ -137,6 +137,12 @@
 
 <Header />
 <Content>
-	<ToastParent />
-	<slot />
+	<Grid>
+		<Row>
+			<Column>
+				<ToastParent />
+				<slot />
+			</Column>
+		</Row>
+	</Grid>
 </Content>
