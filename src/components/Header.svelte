@@ -14,6 +14,7 @@
 		HeaderPanelLink,
 		HeaderPanelLinks,
 		HeaderGlobalAction,
+		SideNavMenuItem,
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 	import { SettingsAdjust20, UserAvatarFilledAlt20 } from 'carbon-icons-svelte';
@@ -32,6 +33,9 @@
 		{ text: 'Tenants', href: '/tenants' },
 	];
 	$: isActive = (href: string) => $page.url.pathname === href;
+	const navBreakpoint = 1056;
+	// if y is a number and less than navBreakpoint, then it's mobile
+	$: isMobileMenu = y !== undefined && y !== null && y < navBreakpoint;
 </script>
 
 <svelte:window bind:innerWidth={y} />
@@ -39,17 +43,22 @@
 <Header
 	company="RE"
 	platformName="Admin"
-	persistentHamburgerMenu
+	href="/"
+	persistentHamburgerMenu={isMobileMenu}
+	expansionBreakpoint={navBreakpoint}
+	expandedByDefault={false}
 	bind:isSideNavOpen>
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
 
-	<HeaderNav>
-		{#each navLinkList as { href, text }}
-			<HeaderNavItem {text} {href} isSelected={isActive(href)} />
-		{/each}
-	</HeaderNav>
+	{#if !isMobileMenu}
+		<HeaderNav>
+			{#each navLinkList as { href, text }}
+				<HeaderNavItem {text} {href} isSelected={isActive(href)} />
+			{/each}
+		</HeaderNav>
+	{/if}
 
 	<HeaderUtilities>
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
@@ -80,16 +89,19 @@
 		</HeaderAction>
 	</HeaderUtilities>
 
-	<SideNav
-		bind:isOpen={isSideNavOpen}
-		class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}>
-		<SideNavItems>
-			<SideNavLink text="Home" href="/" />
-			<SideNavDivider />
-			{#each navLinkList as { href, text }}
-				<SideNavLink {text} {href} isSelected={isActive(href)} />
-			{/each}
-			<SideNavDivider />
-		</SideNavItems>
-	</SideNav>
+	{#if isMobileMenu}
+		<SideNav
+			bind:isOpen={isSideNavOpen}
+			class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}>
+			<SideNavItems>
+				<SideNavLink text="Home" href="/" />
+				<SideNavDivider />
+				{#each navLinkList as { href, text }}
+					<SideNavLink {text} {href} isSelected={isActive(href)} />
+					<!-- <SideNavMenuItem {text} {href} isSelected={isActive(href)} /> -->
+				{/each}
+				<SideNavDivider />
+			</SideNavItems>
+		</SideNav>
+	{/if}
 </Header>
