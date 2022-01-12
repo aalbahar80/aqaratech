@@ -97,8 +97,13 @@
 				<SideNavLink text="Home" href="/" />
 				<SideNavDivider />
 				{#each navLinkList as { href, text }}
-					<SideNavLink {text} {href} isSelected={isActive(href)} />
-					<!-- <SideNavMenuItem {text} {href} isSelected={isActive(href)} /> -->
+					<SideNavLink
+						{text}
+						{href}
+						isSelected={isActive(href)}
+						on:click={() => {
+							isSideNavOpen = false;
+						}} />
 				{/each}
 				<SideNavDivider />
 			</SideNavItems>
