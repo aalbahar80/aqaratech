@@ -10,12 +10,14 @@
 	import { mutation, operationStore } from '@urql/svelte';
 	import { Button, Form, FormGroup, TextInput } from 'carbon-components-svelte';
 	import { createForm } from 'felte';
-	import { DocumentNode, Kind } from 'graphql';
+	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
 	import map from 'just-map-values';
 	import type { z, ZodObject } from 'zod';
 	import { goto } from '$app/navigation';
+
+	type T = $$Generic<{ id: number }>;
 
 	export let entity: string;
 	export let fieldList: Field[];
@@ -24,8 +26,6 @@
 	export let updateDoc: DocumentNode | undefined = undefined;
 	export let existing: T | undefined = undefined;
 	export let validation: ZodObject<any>;
-
-	type T = $$Generic;
 
 	let loading = false;
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
