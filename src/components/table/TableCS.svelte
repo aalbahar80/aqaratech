@@ -15,6 +15,7 @@
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -23,9 +24,9 @@
 	// PAGINATION
 	const pageSizes = [10, 25, 100];
 	let pageSize = 10;
-	let pageIndex = 1;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
+	$: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
 
 	// SEARCH
 	let searchTerm = '';
@@ -122,11 +123,24 @@
 
 		<svelte:fragment slot="cell" let:row let:cell>
 			{#if cell.key === 'overflow'}
-				<Button href={`${$page.url.pathname}/${row.id}`} kind="ghost">
+				<Button
+					href={`${$page.url.pathname}/${row.id}`}
+					kind="ghost"
+					sveltekit:prefetch
+				>
 					View</Button
 				>
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 	</DataTable>
-	<Pagination {totalItems} {pageSizes} bind:pageSize bind:page={pageIndex} />
+	<Pagination
+		{totalItems}
+		{pageSizes}
+		bind:pageSize
+		bind:page={pageIndex}
+		on:click:button--next={() =>
+			goto(`${$page.url.pathname}?page=${pageIndex}`)}
+		on:click:button--previous={() =>
+			goto(`${$page.url.pathname}?page=${pageIndex}`)}
+	/>
 {/if}
