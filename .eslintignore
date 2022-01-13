@@ -12,11 +12,6 @@ node_modules
 /workers-site
 static/global.css
 
-# Storybook files #
-###################
-storybook-static
-storybook-static/*
-
 # Jest files #
 #############################
 coverage

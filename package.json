@@ -15,9 +15,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte,.graphql",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "generate": "graphql-codegen --config codegen.yml",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@auth0/auth0-spa-js": "^1.19.3",
@@ -37,12 +35,6 @@
     "@graphql-codegen/urql-svelte-operations-store": "^1.1.8",
     "@graphql-eslint/eslint-plugin": "^3.2.0",
     "@graphql-typed-document-node/core": "^3.1.1",
-    "@storybook/addon-actions": "^6.4.0",
-    "@storybook/addon-essentials": "^6.4.0",
-    "@storybook/addon-links": "^6.4.0",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addon-svelte-csf": "^1.1.0",
-    "@storybook/svelte": "^6.4.0",
     "@sveltejs/adapter-auto": "^1.0.0-next.7",
     "@sveltejs/kit": "^1.0.0-next.227",
     "@tailwindcss/forms": "^0.4.0",
@@ -72,7 +64,6 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jest": "^25.3.0",
-    "eslint-plugin-storybook": "^0.5.0",
     "eslint-plugin-svelte3": "^3.2.1",
     "jest": "^27.4.5",
     "just-capitalize": "^3.0.1",
@@ -84,8 +75,6 @@
     "just-pluck-it": "^2.1.0",
     "just-reduce-object": "^2.0.1",
     "just-zip-it": "^3.0.1",
-    "msw": "^0.36.1",
-    "msw-storybook-addon": "^1.4.1",
     "npm-check": "^5.9.2",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.0.2",
@@ -115,8 +104,5 @@
     "graphql": "^16.0.1",
     "urql": "^2.0.5",
     "zod": "^3.11.6"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
