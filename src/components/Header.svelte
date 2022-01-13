@@ -99,7 +99,14 @@
 			class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}
 		>
 			<SideNavItems>
-				<SideNavLink text="Home" href="/" />
+				<SideNavLink
+					text="Home"
+					href="/"
+					isSelected={isActive('/')}
+					on:click={() => {
+						isSideNavOpen = false;
+					}}
+				/>
 				<SideNavDivider />
 				{#each navLinkList as { href, text }}
 					<SideNavLink
