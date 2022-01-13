@@ -16,6 +16,7 @@
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/env';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -26,7 +27,8 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	$: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	let pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	$: console.log('🚀 ~ file: TableCS.svelte ~ line 30 ~ pageIndex', pageIndex);
 
 	// SEARCH
 	let searchTerm = '';
@@ -91,6 +93,13 @@
 		},
 		0,
 	);
+
+	$: {
+		if (browser)
+			goto(`${$page.url.pathname}?page=${pageIndex}`, {
+				keepfocus: true,
+			}).catch((e) => console.error(e));
+	}
 </script>
 
 {#if !$pageQuery.data}
@@ -133,14 +142,5 @@
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 	</DataTable>
-	<Pagination
-		{totalItems}
-		{pageSizes}
-		bind:pageSize
-		bind:page={pageIndex}
-		on:click:button--next={() =>
-			goto(`${$page.url.pathname}?page=${pageIndex}`)}
-		on:click:button--previous={() =>
-			goto(`${$page.url.pathname}?page=${pageIndex}`)}
-	/>
+	<Pagination {totalItems} {pageSizes} bind:pageSize bind:page={pageIndex} />
 {/if}
