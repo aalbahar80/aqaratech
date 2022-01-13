@@ -14,6 +14,7 @@
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { beforeNavigate, goto } from '$app/navigation';
 	import { browser } from '$app/env';
@@ -28,16 +29,7 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	$: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
-
-	// removing the following line will cause a loading state on the first press of next/prev
-	const nav = () => {
-		if (browser) {
-			goto(`${$page.url.pathname}?page=${pageIndex}`, {
-				replaceState: false,
-			}).catch((e) => console.error(e));
-		}
-	};
+	let pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
 
 	beforeNavigate(({ from, to, cancel }) => {
 		if (from.href === to?.href) cancel();
@@ -76,6 +68,7 @@
 						return {};
 					}),
 		  };
+
 	// SORT
 	type SortInfo = {
 		[key: string]: Order_By;
@@ -106,6 +99,32 @@
 		},
 		0,
 	);
+
+	const replaceStateWithQuery = (values: Record<string, string>) => {
+		const url = new URL(window.location.toString());
+		for (let [k, v] of Object.entries(values)) {
+			if (!!v) {
+				url.searchParams.set(encodeURIComponent(k), encodeURIComponent(v));
+			} else {
+				url.searchParams.delete(k);
+			}
+		}
+		history.replaceState({}, '', url);
+	};
+
+	onMount(() => {
+		// adds ?foo=bar&john=doe query params to the URL
+		replaceStateWithQuery({
+			search: searchTerm,
+			page: pageIndex?.toString(),
+		});
+		console.log('mounted');
+	});
+
+	$: if (browser)
+		goto(`${$page.url.pathname}?page=${pageIndex}&search=${searchTerm}`, {
+			keepfocus: true,
+		}).catch((e) => console.error(e));
 </script>
 
 {#if !$pageQuery.data}
@@ -148,14 +167,5 @@
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 	</DataTable>
-	<Pagination
-		{totalItems}
-		{pageSizes}
-		bind:pageSize
-		page={pageIndex}
-		on:update={(e) => {
-			pageIndex = e.detail.page;
-			nav();
-		}}
-	/>
+	<Pagination {totalItems} {pageSizes} bind:pageSize bind:page={pageIndex} />
 {/if}
