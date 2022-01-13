@@ -118,13 +118,29 @@
 			search: searchTerm,
 			page: pageIndex?.toString(),
 		});
-		console.log('mounted');
 	});
 
+	// make url (cosmetically) change when pageIndex or searchTerm changes
 	$: if (browser)
-		goto(`${$page.url.pathname}?page=${pageIndex}&search=${searchTerm}`, {
-			keepfocus: true,
-		}).catch((e) => console.error(e));
+		replaceStateWithQuery({
+			search: searchTerm,
+			page: pageIndex?.toString(),
+		});
+
+	// $: if (browser) {
+	// 	goto(`${$page.url.pathname}?page=${pageIndex}&search=${searchTerm}`, {
+	// 		keepfocus: true,
+	// 	}).catch((e) => console.error(e));
+	// 	console.log(
+	// 		'🚀 ~ file: TableCS.svelte ~ line 128 ~ searchTerm',
+	// 		searchTerm,
+	// 	);
+	// 	console.log('🚀 ~ file: TableCS.svelte ~ line 128 ~ pageIndex', pageIndex);
+	// 	console.log(
+	// 		'🚀 ~ file: TableCS.svelte ~ line 128 ~ $page.url.pathname',
+	// 		$page.url.pathname,
+	// 	);
+	// }
 </script>
 
 {#if !$pageQuery.data}
