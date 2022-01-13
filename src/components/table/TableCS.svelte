@@ -100,7 +100,10 @@
 		0,
 	);
 
-	const replaceStateWithQuery = (values: Record<string, string>) => {
+	const replaceStateWithQuery = (
+		values: Record<string, string>,
+		method: 'push' | 'replace',
+	) => {
 		const url = new URL(window.location.toString());
 		for (let [k, v] of Object.entries(values)) {
 			if (!!v) {
@@ -109,23 +112,44 @@
 				url.searchParams.delete(k);
 			}
 		}
-		history.replaceState({}, '', url);
+		if (method === 'push') {
+			history.pushState({}, '', url);
+		} else {
+			history.replaceState({}, '', url);
+		}
 	};
 
 	onMount(() => {
 		// adds ?foo=bar&john=doe query params to the URL
-		replaceStateWithQuery({
-			search: searchTerm,
-			page: pageIndex?.toString(),
-		});
+		replaceStateWithQuery(
+			{
+				search: searchTerm,
+				page: pageIndex?.toString(),
+			},
+			'replace',
+		);
 	});
+
+	// beforeNavigate(() => {
+	// 	// adds ?foo=bar&john=doe query params to the URL
+	// 	replaceStateWithQuery(
+	// 		{
+	// 			search: searchTerm,
+	// 			page: pageIndex?.toString(),
+	// 		},
+	// 		'push',
+	// 	);
+	// });
 
 	// make url (cosmetically) change when pageIndex or searchTerm changes
 	$: if (browser)
-		replaceStateWithQuery({
-			search: searchTerm,
-			page: pageIndex?.toString(),
-		});
+		replaceStateWithQuery(
+			{
+				search: searchTerm,
+				page: pageIndex?.toString(),
+			},
+			'push',
+		);
 
 	// $: if (browser) {
 	// 	goto(`${$page.url.pathname}?page=${pageIndex}&search=${searchTerm}`, {
