@@ -62,20 +62,19 @@
 
 	<HeaderUtilities>
 		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
-		<HeaderAction>
-			<Theme
-				bind:theme
-				persist
-				persistKey="__carbon-theme"
-				render="select"
-				select={{
-					themes: ['white', 'g10', 'g80', 'g90', 'g100'],
-					labelText: 'Select a theme',
-					inline: true,
-					hideLabel: true,
-				}}
-			/>
-		</HeaderAction>
+		<HeaderAction />
+		<Theme
+			bind:theme
+			persist
+			persistKey="__carbon-theme"
+			render="select"
+			select={{
+				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
+				labelText: 'Select a theme',
+				inline: true,
+				hideLabel: true,
+			}}
+		/>
 		<HeaderAction
 			icon={UserAvatarFilledAlt20}
 			closeIcon={UserAvatarFilledAlt20}
