@@ -47,7 +47,8 @@
 	persistentHamburgerMenu={isMobileMenu}
 	expansionBreakpoint={navBreakpoint}
 	expandedByDefault={false}
-	bind:isSideNavOpen>
+	bind:isSideNavOpen
+>
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>
@@ -73,18 +74,22 @@
 					labelText: 'Select a theme',
 					inline: true,
 					hideLabel: true,
-				}} />
+				}}
+			/>
 		</HeaderAction>
 		<HeaderAction
 			icon={UserAvatarFilledAlt20}
 			closeIcon={UserAvatarFilledAlt20}
-			bind:isOpen={isAccountOpen}>
+			bind:isOpen={isAccountOpen}
+		>
 			<HeaderPanelLinks>
 				<HeaderPanelLink>Change password</HeaderPanelLink>
 				<HeaderPanelLink href="/auth/login" rel="external"
-					>Log in</HeaderPanelLink>
+					>Log in</HeaderPanelLink
+				>
 				<HeaderPanelLink href="/auth/logout" rel="external"
-					>Log out</HeaderPanelLink>
+					>Log out</HeaderPanelLink
+				>
 			</HeaderPanelLinks>
 		</HeaderAction>
 	</HeaderUtilities>
@@ -92,7 +97,8 @@
 	{#if isMobileMenu}
 		<SideNav
 			bind:isOpen={isSideNavOpen}
-			class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}>
+			class={isSideNavOpen && (y ?? 0) < 500 ? 'min-w-full' : null}
+		>
 			<SideNavItems>
 				<SideNavLink text="Home" href="/" />
 				<SideNavDivider />
@@ -103,7 +109,8 @@
 						isSelected={isActive(href)}
 						on:click={() => {
 							isSideNavOpen = false;
-						}} />
+						}}
+					/>
 				{/each}
 				<SideNavDivider />
 			</SideNavItems>
