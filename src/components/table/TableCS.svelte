@@ -14,29 +14,29 @@
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { beforeNavigate, goto } from '$app/navigation';
-	import { browser } from '$app/env';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
 	export let fieldList: Field[];
-	console.log('a table');
 
 	// PAGINATION
 	const pageSizes = [10, 25, 100];
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	let pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	let pageIndex: number;
+	pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	$: console.log('🚀 ~ file: TableCS.svelte ~ line 33 ~ pageIndex', $page);
 
-	beforeNavigate(({ from, to, cancel }) => {
-		if (from.href === to?.href) cancel();
-	});
+	// beforeNavigate(({ from, to, cancel }) => {
+	// 	if (from.href === to?.href) cancel();
+	// });
 
 	// SEARCH
-	let searchTerm = $page.url.searchParams.get('search') ?? '';
+	let searchInput = $page.url.searchParams.get('search') || '';
+	const searchTerm = $page.url.searchParams.get('search');
 	$: filter = !searchTerm
 		? {}
 		: {
@@ -99,72 +99,6 @@
 		},
 		0,
 	);
-
-	const replaceStateWithQuery = (
-		values: Record<string, string>,
-		method: 'push' | 'replace',
-	) => {
-		const url = new URL(window.location.toString());
-		for (let [k, v] of Object.entries(values)) {
-			if (!!v) {
-				url.searchParams.set(encodeURIComponent(k), encodeURIComponent(v));
-			} else {
-				url.searchParams.delete(k);
-			}
-		}
-		if (method === 'push') {
-			history.pushState({}, '', url);
-		} else {
-			history.replaceState({}, '', url);
-		}
-	};
-
-	onMount(() => {
-		// adds ?foo=bar&john=doe query params to the URL
-		replaceStateWithQuery(
-			{
-				search: searchTerm,
-				page: pageIndex?.toString(),
-			},
-			'replace',
-		);
-	});
-
-	// beforeNavigate(() => {
-	// 	// adds ?foo=bar&john=doe query params to the URL
-	// 	replaceStateWithQuery(
-	// 		{
-	// 			search: searchTerm,
-	// 			page: pageIndex?.toString(),
-	// 		},
-	// 		'push',
-	// 	);
-	// });
-
-	// make url (cosmetically) change when pageIndex or searchTerm changes
-	$: if (browser)
-		replaceStateWithQuery(
-			{
-				search: searchTerm,
-				page: pageIndex?.toString(),
-			},
-			'push',
-		);
-
-	// $: if (browser) {
-	// 	goto(`${$page.url.pathname}?page=${pageIndex}&search=${searchTerm}`, {
-	// 		keepfocus: true,
-	// 	}).catch((e) => console.error(e));
-	// 	console.log(
-	// 		'🚀 ~ file: TableCS.svelte ~ line 128 ~ searchTerm',
-	// 		searchTerm,
-	// 	);
-	// 	console.log('🚀 ~ file: TableCS.svelte ~ line 128 ~ pageIndex', pageIndex);
-	// 	console.log(
-	// 		'🚀 ~ file: TableCS.svelte ~ line 128 ~ $page.url.pathname',
-	// 		$page.url.pathname,
-	// 	);
-	// }
 </script>
 
 {#if !$pageQuery.data}
@@ -190,7 +124,25 @@
 	>
 		<Toolbar>
 			<ToolbarContent>
-				<ToolbarSearch bind:value={searchTerm} />
+				<ToolbarSearch
+					bind:value={searchInput}
+					on:change={() => {
+						const bparams = $page.url.searchParams;
+						bparams.set('search', encodeURIComponent(searchInput));
+						goto(`${$page.url.pathname}?${bparams.toString()}`, {
+							keepfocus: true,
+							replaceState: true,
+						});
+					}}
+					on:input={() => {
+						const bparams = $page.url.searchParams;
+						bparams.set('search', encodeURIComponent(searchInput));
+						goto(`${$page.url.pathname}?${bparams.toString()}`, {
+							keepfocus: true,
+							replaceState: true,
+						});
+					}}
+				/>
 				<Button href={`${$page.url.pathname}/add`}>New</Button>
 			</ToolbarContent>
 		</Toolbar>
@@ -207,5 +159,24 @@
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 	</DataTable>
-	<Pagination {totalItems} {pageSizes} bind:pageSize bind:page={pageIndex} />
+	<Pagination
+		{totalItems}
+		{pageSizes}
+		bind:pageSize
+		page={pageIndex}
+		on:update={(e) => {
+			const aparams = $page.url.searchParams;
+			aparams.set('page', encodeURIComponent(e.detail.page.toString()));
+			const url = `${$page.url.pathname}?${aparams.toString()}`;
+			console.log(
+				'🚀 ~ file: TableCS.svelte ~ line 161 ~ on:update={ ~ url',
+				url,
+			);
+			goto(url, {
+				noscroll: true,
+			}).catch((err) => {
+				console.error(err);
+			});
+		}}
+	/>
 {/if}
