@@ -53,7 +53,7 @@
     "carbon-components-svelte": "^0.51.3",
     "carbon-icons-svelte": "^10.44.3",
     "carbon-preprocess-svelte": "^0.6.0",
-    "concurrently": "^6.4.0",
+    "concurrently": "^7.0.0",
     "cookie": "^0.4.1",
     "cross-env": "^7.0.3",
     "date-fns": "^2.27.0",
