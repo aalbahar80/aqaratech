@@ -14,6 +14,7 @@
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
+	import { get } from 'svelte/store';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
@@ -27,7 +28,23 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	let pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	// $: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	// $: pUrl = $page.url.searchParams.get('page')
+	$: pUrl = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	// let pButton = 1;
+	$: pageIndex = pUrl;
+	$: {
+		// console.log('🚀 ~ file: TableCS.svelte ~ line 36 ~ pageIndex', pageIndex);
+		console.log('🚀 ~ file: TableCS.svelte ~ line 38 ~ pUrl', pUrl);
+		// console.log('🚀 ~ file: TableCS.svelte ~ line 38 ~ pButton', pButton);
+		// pageIndex = pButton;
+		// if (pButton !== pUrl) {
+		// pageIndex = pUrl;
+		// pageIndex = pButton;
+		// }
+	}
+	// $: pageIndex = parseInt(get(page).url.searchParams.get('page') ?? '1', 10);
+	// let pageIndex = 1;
 
 	// SEARCH
 	let searchTerm = $page.url.searchParams.get('search') ?? '';
@@ -93,14 +110,24 @@
 		0,
 	);
 
-	$: {
-		if (browser)
-			goto(`${$page.url.pathname}?search=${searchTerm}&page=${pageIndex}`, {
-				keepfocus: true,
-			}).catch((e) => console.error(e));
-	}
+	// $: {
+	// Avoid subscribing to page store. Subbing causes this block to run 2x
+	// const baseUrl = $page.url.pathname;
+	// 	const baseUrl = get(page).url.pathname;
+	// 	console.log('🚀 ~ file: TableCS.svelte ~ line 99 ~ baseUrl', baseUrl);
+	// 	const searchParams = new URLSearchParams();
+	// 	// if (searchTerm) searchParams.set('search', searchTerm);
+	// 	searchParams.set('page', pageIndex.toString());
+	// 	console.log('🚀 ~ file: TableCS.svelte ~ line 105 ~ pageIndex', pageIndex);
+	// 	const url = `${baseUrl}?${searchParams.toString()}`;
+	// 	if (browser)
+	// 		goto(url, {
+	// 			keepfocus: true,
+	// 		}).catch((e) => console.error(e));
+	// }
 </script>
 
+{@debug pageIndex}
 {#if !$pageQuery.data}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else if $pageQuery.error}
@@ -141,5 +168,12 @@
 			{:else}{cell.value}{/if}
 		</svelte:fragment>
 	</DataTable>
-	<Pagination {totalItems} {pageSizes} bind:pageSize bind:page={pageIndex} />
+	<Pagination
+		{totalItems}
+		{pageSizes}
+		bind:pageSize
+		bind:page={pageIndex}
+		on:click:button--next={goto(`${$page.url.pathname}?page=${pageIndex}`)}
+		on:click:button--previous={goto(`${$page.url.pathname}?page=${pageIndex}`)}
+	/>
 {/if}
