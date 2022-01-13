@@ -14,7 +14,6 @@
 		HeaderPanelLink,
 		HeaderPanelLinks,
 		HeaderGlobalAction,
-		SideNavMenuItem,
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
 	import { SettingsAdjust20, UserAvatarFilledAlt20 } from 'carbon-icons-svelte';
