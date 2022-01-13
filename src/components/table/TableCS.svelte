@@ -16,6 +16,7 @@
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
 	import { beforeNavigate, goto } from '$app/navigation';
+	import { browser } from '$app/env';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -26,10 +27,13 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	$: pUrl = parseInt($page.url.searchParams.get('page') ?? '1', 10);
-	$: pageIndex = pUrl;
+	$: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+
+	// removing the following line will cause a loading state on the first press of next/prev
+	$: if (browser) goto(`${$page.url.pathname}?page=${pageIndex}`);
 
 	beforeNavigate(({ from, to, cancel }) => {
+		console.log(from.href, to.href);
 		if (from.href === to?.href) cancel();
 	});
 
