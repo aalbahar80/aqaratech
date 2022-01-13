@@ -15,7 +15,7 @@
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
-	import { beforeNavigate, goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -27,7 +27,7 @@
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
 	// let pageIndex: number;
-	$: pageIndex = $page.url.searchParams.get('page');
+	$: pageIndex = $page.url.searchParams.get('page') || 1;
 	$: console.log('🚀 ~ file: TableCS.svelte ~ line 33 ~ pageIndex', $page);
 
 	// beforeNavigate(({ from, to, cancel }) => {
