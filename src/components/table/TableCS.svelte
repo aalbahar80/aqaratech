@@ -4,10 +4,10 @@
 		Toolbar,
 		ToolbarContent,
 		ToolbarSearch,
-		Button,
 		Pagination,
 		DataTableSkeleton,
 	} from 'carbon-components-svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import type { Order_By } from '$generated/graphql';
 	import type { Field } from '$components/form/Field';
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
@@ -28,10 +28,9 @@
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
 	let pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
-	$: console.log('🚀 ~ file: TableCS.svelte ~ line 30 ~ pageIndex', pageIndex);
 
 	// SEARCH
-	let searchTerm = '';
+	let searchTerm = $page.url.searchParams.get('search') ?? '';
 	$: filter = !searchTerm
 		? {}
 		: {
@@ -96,7 +95,7 @@
 
 	$: {
 		if (browser)
-			goto(`${$page.url.pathname}?page=${pageIndex}`, {
+			goto(`${$page.url.pathname}?search=${searchTerm}&page=${pageIndex}`, {
 				keepfocus: true,
 			}).catch((e) => console.error(e));
 	}
