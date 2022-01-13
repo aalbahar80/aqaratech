@@ -15,7 +15,7 @@
 	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
-	import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 	import { browser } from '$app/env';
 
 	export let listDoc: TypedDocumentNode;
@@ -30,9 +30,6 @@
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
 	$: pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
 
-	const abc = (pageIndex) => {
-		console.log('abc');
-	};
 	// removing the following line will cause a loading state on the first press of next/prev
 	const nav = () => {
 		if (browser) {
@@ -40,19 +37,9 @@
 				replaceState: false,
 			}).catch((e) => console.error(e));
 		}
-		console.log('🚀 ~ file: TableCS.svelte ~ line 41 ~ pageIndex', pageIndex);
-		// debugger;
 	};
 
-	// $: nav(pageIndex);
-
 	beforeNavigate(({ from, to, cancel }) => {
-		console.log(
-			'🚀 ~ file: TableCS.svelte ~ line 62 ~ beforeNavigate ~ pageIndex',
-			pageIndex,
-		);
-		// debugger;
-		console.log(from.href, to?.href);
 		if (from.href === to?.href) cancel();
 	});
 
@@ -169,9 +156,6 @@
 		on:update={(e) => {
 			pageIndex = e.detail.page;
 			nav();
-			console.log(e.detail.page);
-			console.log(pageIndex);
-			// goto(`${$page.url.pathname}?page=${e.detail.page}`);
 		}}
 	/>
 {/if}
