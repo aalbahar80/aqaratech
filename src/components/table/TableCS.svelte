@@ -26,8 +26,8 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	let pageIndex: number;
-	pageIndex = parseInt($page.url.searchParams.get('page') ?? '1', 10);
+	// let pageIndex: number;
+	$: pageIndex = $page.url.searchParams.get('page');
 	$: console.log('🚀 ~ file: TableCS.svelte ~ line 33 ~ pageIndex', $page);
 
 	// beforeNavigate(({ from, to, cancel }) => {
@@ -36,7 +36,7 @@
 
 	// SEARCH
 	let searchInput = $page.url.searchParams.get('search') || '';
-	const searchTerm = $page.url.searchParams.get('search');
+	$: searchTerm = searchInput;
 	$: filter = !searchTerm
 		? {}
 		: {
