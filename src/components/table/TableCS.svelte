@@ -97,11 +97,36 @@
 		});
 	};
 	$: handleSearchChange(searchInput);
+
 	// SORT
+	const handleSortChange = (
+		newSortKey: string,
+		newSortDir: 'ascending' | 'descending' | 'none' | undefined,
+	) => {
+		const params = new URLSearchParams($page.url.searchParams.toString());
+		const dir2 = order === 'ascending' ? 'asc' : 'desc';
+		params.set('sortKey', encodeURIComponent(newSortKey));
+		params.set('sortDir', encodeURIComponent(newSortDir));
+
+		params.set('page', encodeURIComponent(1));
+
+		const url = `${$page.url.pathname}?${params.toString()}`;
+		goto(url, {
+			noscroll: true,
+			keepfocus: true,
+			replaceState: true,
+		}).catch((err) => {
+			console.error(err);
+		});
+	};
+
 	type SortInfo = {
 		[key: string]: Order_By;
 	};
-	let sortingInfo: SortInfo = { id: 'asc' };
+
+	$: sortKey = $page.url.searchParams.get('sortKey');
+	$: sortDir = $page.url.searchParams.get('sortDir') as Order_By;
+	$: sortingInfo = sortKey && sortDir ? { [sortKey]: sortDir } : { id: 'asc' };
 
 	// QUERY
 	$: queryVars = {
@@ -120,6 +145,7 @@
 		fieldList.map((v) => ({
 			key: v.fieldName,
 			value: v.title,
+			sort: () => {},
 		})),
 		{
 			key: 'overflow',
@@ -140,10 +166,8 @@
 	<DataTable
 		on:click:header={(h) => {
 			const field = h.detail.header.key;
-			const order = h.detail.sortDirection;
-			sortingInfo = {
-				[field]: order === 'ascending' ? 'asc' : 'desc',
-			};
+			const dir = h.detail.sortDirection;
+			handleSortChange(field, dir);
 		}}
 		zebra
 		sortable
