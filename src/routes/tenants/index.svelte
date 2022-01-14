@@ -10,4 +10,8 @@
 	const { fieldList, graphqlName } = tenants;
 </script>
 
+<svelte:head>
+	<title>Tenants</title>
+</svelte:head>
+
 <TableCS listDoc={TenantsListDocument} {graphqlName} {fieldList} />
