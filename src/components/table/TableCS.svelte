@@ -31,7 +31,13 @@
 
 	const handlePageChange = (pageNumber: number) => {
 		const params = new URLSearchParams($page.url.searchParams.toString());
-		params.set('page', encodeURIComponent(pageNumber));
+
+		if (pageNumber === 1) {
+			params.delete('page');
+		} else {
+			params.set('page', encodeURIComponent(pageNumber));
+		}
+
 		const url = `${$page.url.pathname}?${params.toString()}`;
 		goto(url, {
 			noscroll: true,
@@ -82,7 +88,12 @@
 		if (!browser) return;
 
 		const params = new URLSearchParams($page.url.searchParams.toString());
-		params.set('search', encodeURIComponent(newSearchInput));
+
+		if (newSearchInput) {
+			params.set('search', encodeURIComponent(newSearchInput));
+		} else {
+			params.delete('search');
+		}
 
 		if (forceFirstPage) params.set('page', encodeURIComponent(1));
 		forceFirstPage = false;
@@ -118,12 +129,11 @@
 
 		const params = new URLSearchParams($page.url.searchParams.toString());
 
-		// if (dir) params.set('sortDir', encodeURIComponent(dir));
-		// else params.delete('sortDir');
 		if (dir) {
 			params.set('sortDir', encodeURIComponent(dir));
 			params.set('sortKey', encodeURIComponent(newSortKey));
 		} else {
+			// declutter URL if default sort is selected
 			params.delete('sortDir');
 			params.delete('sortKey');
 		}
@@ -138,10 +148,6 @@
 		}).catch((err) => {
 			console.error(err);
 		});
-	};
-
-	type SortInfo = {
-		[key: string]: Order_By;
 	};
 
 	$: sortKey = $page.url.searchParams.get('sortKey');
@@ -165,7 +171,8 @@
 		fieldList.map((v) => ({
 			key: v.fieldName,
 			value: v.title,
-			sort: () => {},
+			sort: () => 0,
+			// columnMenu: true,
 		})),
 		{
 			key: 'overflow',
