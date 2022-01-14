@@ -80,6 +80,7 @@
 					}),
 		  };
 
+	// flag to force first page when user is searching
 	let forceFirstPage = false;
 	const handleSearchChange = (newSearchInput: string) => {
 		if (!browser) return;
@@ -95,6 +96,7 @@
 		// TODO - add support so that when user arrive here after hitting back button,
 		// the page number is *not* reset to 1
 		if (forceFirstPage) params.set('page', encodeURIComponent(1));
+		forceFirstPage = false;
 		const url = `${$page.url.pathname}?${params.toString()}`;
 		goto(url, {
 			noscroll: true,
@@ -138,6 +140,7 @@
 		},
 		0,
 	);
+	$: console.log(forceFirstPage);
 </script>
 
 {#if !$pageQuery.data}
@@ -175,9 +178,9 @@
 						// go to first page when user searches
 						// if (pageIndex !== 1) handlePageChange(1);
 						// debugger;
-						pageIndex = 1;
+						// pageIndex = 1;
 						forceFirstPage = true;
-						handlePageChange(1);
+						// handlePageChange(1);
 						console.log(
 							'🚀 ~ file: TableCS.svelte ~ line 161 ~ pageIndex',
 							pageIndex,
@@ -190,6 +193,9 @@
 					on:change={(e) => {
 						// handlePageChange(1);
 						console.log('🚀 ~ file: TableCS.svelte ~ line 179 ~ e', e);
+					}}
+					on:clear={(e) => {
+						forceFirstPage = true;
 					}}
 				/>
 				<Button href={`${$page.url.pathname}/add`}>New</Button>
