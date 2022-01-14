@@ -33,10 +33,6 @@
 		const params = new URLSearchParams($page.url.searchParams.toString());
 		params.set('page', encodeURIComponent(pageNumber));
 		const url = `${$page.url.pathname}?${params.toString()}`;
-		console.log(
-			'🚀 ~ file: TableCS.svelte ~ line 36 ~ handlePageChange ~ url',
-			url,
-		);
 		goto(url, {
 			noscroll: true,
 			keepfocus: true,
@@ -80,23 +76,17 @@
 					}),
 		  };
 
-	// flag to force first page when user is searching
+	// flag to reset page number while user is actively searching
 	let forceFirstPage = false;
 	const handleSearchChange = (newSearchInput: string) => {
 		if (!browser) return;
 
-		console.log(
-			'🚀 ~ file: TableCS.svelte ~ line 84 ~ handleSearchChange ~ newSearchInput',
-			newSearchInput,
-		);
-		// return;
 		const params = new URLSearchParams($page.url.searchParams.toString());
 		params.set('search', encodeURIComponent(newSearchInput));
-		// reset page to 1 when user searches
-		// TODO - add support so that when user arrive here after hitting back button,
-		// the page number is *not* reset to 1
+
 		if (forceFirstPage) params.set('page', encodeURIComponent(1));
 		forceFirstPage = false;
+
 		const url = `${$page.url.pathname}?${params.toString()}`;
 		goto(url, {
 			noscroll: true,
@@ -121,8 +111,6 @@
 		where: filter,
 	};
 
-	$: console.log('🚀 ~ file: TableCS.svelte ~ line 87 ~ queryVars', queryVars);
-
 	const pageQuery = operationStore(listDoc, queryVars);
 	$: $pageQuery.variables = queryVars;
 	query(pageQuery);
@@ -140,7 +128,6 @@
 		},
 		0,
 	);
-	$: console.log(forceFirstPage);
 </script>
 
 {#if !$pageQuery.data}
@@ -168,33 +155,10 @@
 			<ToolbarContent>
 				<ToolbarSearch
 					bind:value={searchInput}
-					on:input={(e) => {
-						console.log('🚀 ~ file: TableCS.svelte ~ line 167 ~ e', e);
-						console.log(
-							'🚀 ~ file: TableCS.svelte ~ line 173 ~ searchInput',
-							searchInput,
-						);
-
-						// go to first page when user searches
-						// if (pageIndex !== 1) handlePageChange(1);
-						// debugger;
-						// pageIndex = 1;
+					on:input={() => {
 						forceFirstPage = true;
-						// handlePageChange(1);
-						console.log(
-							'🚀 ~ file: TableCS.svelte ~ line 161 ~ pageIndex',
-							pageIndex,
-						);
-						console.log(
-							'🚀 ~ file: TableCS.svelte ~ line 184 ~ searchInput',
-							searchInput,
-						);
 					}}
-					on:change={(e) => {
-						// handlePageChange(1);
-						console.log('🚀 ~ file: TableCS.svelte ~ line 179 ~ e', e);
-					}}
-					on:clear={(e) => {
+					on:clear={() => {
 						forceFirstPage = true;
 					}}
 				/>
