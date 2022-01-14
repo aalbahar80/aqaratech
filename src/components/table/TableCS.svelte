@@ -16,7 +16,6 @@
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -31,6 +30,22 @@
 	$: pageIndex = $page.url.searchParams.get('page');
 	$: console.log('🚀 ~ file: TableCS.svelte ~ line 33 ~ pageIndex', pageIndex);
 
+	const handlePageChange = (pageNumber: number) => {
+		const params = new URLSearchParams($page.url.searchParams.toString());
+		params.set('page', encodeURIComponent(pageNumber));
+		const url = `${$page.url.pathname}?${params.toString()}`;
+		// const url = `${$page.url.pathname}?&page=${pageNumber}`;
+		console.log(
+			'🚀 ~ file: TableCS.svelte ~ line 161 ~ on:update={ ~ url',
+			url,
+		);
+		goto(url, {
+			noscroll: true,
+			keepfocus: true,
+		}).catch((err) => {
+			console.error(err);
+		});
+	};
 	// SEARCH
 	let searchInput = $page.url.searchParams.get('search') || '';
 	$: searchTerm = searchInput;
@@ -65,16 +80,6 @@
 						return {};
 					}),
 		  };
-	// onMount(() => {
-	// 	console.log(
-	// 		"🚀 ~ file: TableCS.svelte ~ line 71 ~ onMount ~ $page.url.searchParams.get('page')",
-	// 		$page.url.searchParams.get('page'),
-	// 	);
-	// 	pageIndex = parseInt(
-	// 		$page.url.searchParams.get('page') ?? pageIndex.toString(),
-	// 		10,
-	// 	);
-	// });
 
 	// SORT
 	type SortInfo = {
@@ -175,30 +180,10 @@
 		bind:pageSize
 		page={pageIndex}
 		on:click:button--next={(e) => {
-			const url = `${$page.url.pathname}?&page=${e.detail.page}`;
-			console.log(
-				'🚀 ~ file: TableCS.svelte ~ line 161 ~ on:update={ ~ url',
-				url,
-			);
-			goto(url, {
-				noscroll: true,
-				keepfocus: true,
-			}).catch((err) => {
-				console.error(err);
-			});
+			handlePageChange(e.detail.page);
 		}}
 		on:click:button--previous={(e) => {
-			const url = `${$page.url.pathname}?&page=${e.detail.page}`;
-			console.log(
-				'🚀 ~ file: TableCS.svelte ~ line 161 ~ on:update={ ~ url',
-				url,
-			);
-			goto(url, {
-				noscroll: true,
-				keepfocus: true,
-			}).catch((err) => {
-				console.error(err);
-			});
+			handlePageChange(e.detail.page);
 		}}
 	/>
 {/if}
