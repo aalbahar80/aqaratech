@@ -103,10 +103,30 @@
 		newSortKey: string,
 		newSortDir: 'ascending' | 'descending' | 'none' | undefined,
 	) => {
+		let dir;
+		switch (newSortDir) {
+			case 'ascending':
+				dir = 'asc';
+				break;
+			case 'descending':
+				dir = 'desc';
+				break;
+			default:
+				dir = null;
+				break;
+		}
+
 		const params = new URLSearchParams($page.url.searchParams.toString());
-		const dir2 = order === 'ascending' ? 'asc' : 'desc';
-		params.set('sortKey', encodeURIComponent(newSortKey));
-		params.set('sortDir', encodeURIComponent(newSortDir));
+
+		// if (dir) params.set('sortDir', encodeURIComponent(dir));
+		// else params.delete('sortDir');
+		if (dir) {
+			params.set('sortDir', encodeURIComponent(dir));
+			params.set('sortKey', encodeURIComponent(newSortKey));
+		} else {
+			params.delete('sortDir');
+			params.delete('sortKey');
+		}
 
 		params.set('page', encodeURIComponent(1));
 
@@ -151,6 +171,7 @@
 			key: 'overflow',
 			empty: false,
 			value: '',
+			sort: false,
 		},
 		0,
 	);
