@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 const title = 'Tenants';
 const graphqlName = 'tenants';
-const graphqlNamePk = 'tenants_by_pk';
 
 const fieldList: Field[] = [
 	new Field({
@@ -92,7 +91,6 @@ const validation = z.object({
 export default {
 	title,
 	graphqlName,
-	graphqlNamePk,
 	fieldList,
 	validation,
 };
