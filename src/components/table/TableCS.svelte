@@ -34,11 +34,6 @@
 		const params = new URLSearchParams($page.url.searchParams.toString());
 		params.set('page', encodeURIComponent(pageNumber));
 		const url = `${$page.url.pathname}?${params.toString()}`;
-		// const url = `${$page.url.pathname}?&page=${pageNumber}`;
-		console.log(
-			'🚀 ~ file: TableCS.svelte ~ line 161 ~ on:update={ ~ url',
-			url,
-		);
 		goto(url, {
 			noscroll: true,
 			keepfocus: true,
