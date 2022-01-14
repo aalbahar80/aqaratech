@@ -27,9 +27,7 @@
 	let pageSize = 10;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
-	let pageIndex = 1;
-	$: pageIndex = $page.url.searchParams.get('page');
-	$: console.log('🚀 ~ file: TableCS.svelte ~ line 33 ~ pageIndex', pageIndex);
+	$: pageIndex = parseInt($page.url.searchParams.get('page') || '1', 10);
 
 	const handlePageChange = (pageNumber: number) => {
 		const params = new URLSearchParams($page.url.searchParams.toString());
@@ -86,7 +84,7 @@
 		// reset page to 1 when user searches
 		// TODO - add support so that when user arrive here after hitting back button,
 		// the page number is *not* reset to 1
-		params.set('page', encodeURIComponent(1));
+		// params.set('page', encodeURIComponent(1));
 		const url = `${$page.url.pathname}?${params.toString()}`;
 		goto(url, {
 			noscroll: true,
