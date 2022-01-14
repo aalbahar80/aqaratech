@@ -21,10 +21,10 @@ generates:
             - '// THIS FILE IS GENERATED, DO NOT EDIT!'
             - '/* eslint-disable */'
       - typescript
-      - typescript-operations
-      - urql-svelte-operations-store
-      - typed-document-node
       - typescript-urql-graphcache
+      # - typescript-operations
+      # - urql-svelte-operations-store
+      # - typed-document-node
     config:
       useTypeImports: true
   src/:
