@@ -235,6 +235,7 @@
 		{pageSizes}
 		bind:pageSize
 		page={pageIndex}
+		pageInputDisabled
 		on:click:button--next={(e) => {
 			handlePageChange(e.detail.page);
 		}}
