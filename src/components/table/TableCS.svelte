@@ -16,6 +16,7 @@
 	import capitalize from 'just-capitalize';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/env';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -41,6 +42,7 @@
 			console.error(err);
 		});
 	};
+
 	// SEARCH
 	let searchInput = $page.url.searchParams.get('search') || '';
 	$: searchTerm = searchInput;
@@ -76,6 +78,25 @@
 					}),
 		  };
 
+	const handleSearchChange = (newSearchInput: string) => {
+		if (!browser) return;
+
+		const params = new URLSearchParams($page.url.searchParams.toString());
+		params.set('search', encodeURIComponent(newSearchInput));
+		// reset page to 1 when user searches
+		// TODO - add support so that when user arrive here after hitting back button,
+		// the page number is *not* reset to 1
+		params.set('page', encodeURIComponent(1));
+		const url = `${$page.url.pathname}?${params.toString()}`;
+		goto(url, {
+			noscroll: true,
+			keepfocus: true,
+			replaceState: true,
+		}).catch((err) => {
+			console.error(err);
+		});
+	};
+	$: handleSearchChange(searchInput);
 	// SORT
 	type SortInfo = {
 		[key: string]: Order_By;
@@ -134,25 +155,7 @@
 	>
 		<Toolbar>
 			<ToolbarContent>
-				<ToolbarSearch
-					bind:value={searchInput}
-					on:change={() => {
-						const bparams = $page.url.searchParams;
-						bparams.set('search', encodeURIComponent(searchInput));
-						goto(`${$page.url.pathname}?${bparams.toString()}`, {
-							keepfocus: true,
-							replaceState: true,
-						});
-					}}
-					on:input={() => {
-						const bparams = $page.url.searchParams;
-						bparams.set('search', encodeURIComponent(searchInput));
-						goto(`${$page.url.pathname}?${bparams.toString()}`, {
-							keepfocus: true,
-							replaceState: true,
-						});
-					}}
-				/>
+				<ToolbarSearch bind:value={searchInput} />
 				<Button href={`${$page.url.pathname}/add`}>New</Button>
 			</ToolbarContent>
 		</Toolbar>
