@@ -6028,6 +6028,53 @@ export type UnitsList = {
 	}>;
 };
 
+export type LeasesScreenVariables = Exact<{
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Leases_Order_By> | Leases_Order_By>;
+	where?: InputMaybe<Leases_Bool_Exp>;
+}>;
+
+export type LeasesScreen = {
+	__typename?: 'query_root';
+	leases: Array<{
+		__typename?: 'leases';
+		id: number;
+		deposit?: number | null | undefined;
+		end_date?: string | null | undefined;
+		is_expired?: boolean | null | undefined;
+		is_signed?: boolean | null | undefined;
+		license?: string | null | undefined;
+		monthly_rent?: number | null | undefined;
+		start_date?: string | null | undefined;
+		tenant_id?: number | null | undefined;
+		unit_id?: number | null | undefined;
+	}>;
+	agg: {
+		__typename?: 'leases_aggregate';
+		aggregate?:
+			| { __typename?: 'leases_aggregate_fields'; count: number }
+			| null
+			| undefined;
+	};
+};
+
+export type LeaseDetails = {
+	__typename?: 'leases';
+	id: number;
+	deposit?: number | null | undefined;
+	end_date?: string | null | undefined;
+	is_expired?: boolean | null | undefined;
+	is_signed?: boolean | null | undefined;
+	license?: string | null | undefined;
+	monthly_rent?: number | null | undefined;
+	start_date?: string | null | undefined;
+	tenant_id?: number | null | undefined;
+	unit_id?: number | null | undefined;
+};
+
+export type LeaseDetailsVariables = Exact<{ [key: string]: never }>;
+
 export type TenantIdScreenVariables = Exact<{
 	id: Scalars['Int'];
 }>;
@@ -6374,6 +6421,10 @@ export type DeleteUnitsStore = OperationStore<
 >;
 export type UnitsByIdStore = OperationStore<UnitsById, UnitsByIdVariables>;
 export type UnitsListStore = OperationStore<UnitsList, UnitsListVariables>;
+export type LeasesScreenStore = OperationStore<
+	LeasesScreen,
+	LeasesScreenVariables
+>;
 export type TenantIdScreenStore = OperationStore<
 	TenantIdScreen,
 	TenantIdScreenVariables
@@ -6506,6 +6557,34 @@ export const UnitsDetails = {
 		},
 	],
 } as unknown as DocumentNode<UnitsDetails, UnitsDetailsVariables>;
+export const LeaseDetails = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'leaseDetails' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'leases' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'license' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'monthly_rent' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'tenant_id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<LeaseDetails, LeaseDetailsVariables>;
 export const Crumbs = {
 	kind: 'Document',
 	definitions: [
@@ -8091,6 +8170,147 @@ export const UnitsListDocument = {
 		...UnitsDetails.definitions,
 	],
 } as unknown as DocumentNode<UnitsList, UnitsListVariables>;
+export const LeasesScreenDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'LeasesScreen' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'offset' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'leases_order_by' },
+							},
+						},
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'leases_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'leases' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'offset' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'offset' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'leaseDetails' },
+								},
+							],
+						},
+					},
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'agg' },
+						name: { kind: 'Name', value: 'leases_aggregate' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'aggregate' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'count' } },
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...LeaseDetails.definitions,
+	],
+} as unknown as DocumentNode<LeasesScreen, LeasesScreenVariables>;
 export const TenantIdScreenDocument = {
 	kind: 'Document',
 	definitions: [
