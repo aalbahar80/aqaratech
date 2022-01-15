@@ -1,3 +1,6 @@
 {
-    "css.validate": false
+	"css.validate": false,
+	"files.exclude": {
+		"**/*.gql.ts": true
+	}
 }
