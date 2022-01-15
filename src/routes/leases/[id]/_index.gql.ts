@@ -28,6 +28,28 @@ export type LeaseDetailPage = {
 		| undefined;
 };
 
+export type LeaseById = {
+	__typename?: 'query_root';
+	leases_by_pk?:
+		| {
+				__typename?: 'leases';
+				id: number;
+				deposit?: number | null | undefined;
+				end_date?: string | null | undefined;
+				is_expired?: boolean | null | undefined;
+				is_signed?: boolean | null | undefined;
+				license?: string | null | undefined;
+				monthly_rent?: number | null | undefined;
+				start_date?: string | null | undefined;
+				tenant_id?: number | null | undefined;
+				unit_id?: number | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type LeaseByIdVariables = Types.Exact<{ [key: string]: never }>;
+
 export type LeaseDetails = {
 	__typename?: 'leases';
 	id: number;
@@ -84,23 +106,16 @@ export const LeaseDetails = {
 		},
 	],
 } as unknown as DocumentNode<LeaseDetails, LeaseDetailsVariables>;
-export const LeaseDetailPageDocument = {
+export const LeaseById = {
 	kind: 'Document',
 	definitions: [
 		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'LeaseDetailPage' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'leaseById' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
 			selectionSet: {
 				kind: 'SelectionSet',
 				selections: [
@@ -131,6 +146,36 @@ export const LeaseDetailPageDocument = {
 			},
 		},
 		...LeaseDetails.definitions,
+	],
+} as unknown as DocumentNode<LeaseById, LeaseByIdVariables>;
+export const LeaseDetailPageDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'LeaseDetailPage' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'leaseById' },
+					},
+				],
+			},
+		},
+		...LeaseById.definitions,
 	],
 } as unknown as DocumentNode<LeaseDetailPage, LeaseDetailPageVariables>;
 export const DeleteLeaseDocument = {

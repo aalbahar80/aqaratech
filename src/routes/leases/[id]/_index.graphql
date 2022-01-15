@@ -1,4 +1,8 @@
 query LeaseDetailPage($id: Int!) {
+	...leaseById
+}
+
+fragment leaseById on query_root {
 	leases_by_pk(id: $id) {
 		...leaseDetails
 	}

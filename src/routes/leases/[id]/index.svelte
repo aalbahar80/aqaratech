@@ -50,18 +50,20 @@
 
 <ActionPanel {id} deleteDocumentNode={DeleteLeaseDocument} />
 
-<div class="grid grid-flow-col grid-rows-1 justify-end gap-4">
+<div class="grid grid-flow-col grid-rows-1 justify-end gap-4 mt-4">
 	<Button kind="tertiary" iconDescription="Renew" icon={Renew16} />
 	<Button
 		kind="tertiary"
-		iconDescription="Generate PDF"
+		iconDescription="Generate new PDF"
 		icon={DocumentExport16}
 		on:click={getPDF}
+		skeleton={loading}
 	/>
 </div>
+
 <div class="max-w-4xl mx-auto px-6">
 	<div class="grid grid-cols-2 gap-2 mt-8 max-w-md justify-self-center">
-		{#each Object.entries($lease.data?.leases_by_pk) as [key, value]}
+		{#each Object.entries($lease.data?.leases_by_pk || {}) as [key, value]}
 			<p>{key}</p>
 			<p>{value}</p>
 		{/each}
