@@ -13,11 +13,7 @@ export const get: RequestHandler = (request) => {
 	const sessionId = v4();
 
 	// TODO: set domain in .env + auth0
-	const redirectUri = dev
-		? `${request.url.origin}/auth/callback/`
-		: `${request.url.origin}/auth/callback/`;
-
-	const redirectUri2 = () => {
+	const getRedirectUri = () => {
 		console.log(
 			'🚀 ~ file: login.ts ~ line 22 ~ redirectUri2 ~ import.meta.env.VERCEL',
 			import.meta.env.VERCEL,
@@ -31,6 +27,7 @@ export const get: RequestHandler = (request) => {
 		}
 		return `${request.url.origin}/auth/callback/`;
 	};
+	const redirectUri = getRedirectUri();
 
 	const query = new URLSearchParams({
 		response_type: 'code',
