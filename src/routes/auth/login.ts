@@ -15,7 +15,22 @@ export const get: RequestHandler = (request) => {
 	// TODO: set domain in .env + auth0
 	const redirectUri = dev
 		? `${request.url.origin}/auth/callback/`
-		: `${request.url.origin}/auth/callback/`
+		: `${request.url.origin}/auth/callback/`;
+
+	const redirectUri2 = () => {
+		console.log(
+			'🚀 ~ file: login.ts ~ line 22 ~ redirectUri2 ~ import.meta.env.VERCEL',
+			import.meta.env.VERCEL,
+		);
+		console.log(
+			'🚀 ~ file: login.ts ~ line 24 ~ redirectUri2 ~ import.meta.env.VERCEL_URL',
+			import.meta.env.VERCEL_URL,
+		);
+		if (import.meta.env.VERCEL) {
+			return `${import.meta.env.VERCEL_URL}/auth/callback/`;
+		}
+		return `${request.url.origin}/auth/callback/`;
+	};
 
 	const query = new URLSearchParams({
 		response_type: 'code',
@@ -29,7 +44,7 @@ export const get: RequestHandler = (request) => {
 	return {
 		status: 302,
 		headers: {
-			location: url
+			location: url,
 		},
 	};
 };
