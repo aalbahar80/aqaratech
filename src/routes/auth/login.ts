@@ -16,20 +16,21 @@ export const get: RequestHandler = (request) => {
 	const getRedirectUri = () => {
 		console.log(
 			'🚀 ~ file: login.ts ~ line 22 ~ redirectUri2 ~ import.meta.env.VERCEL',
-			import.meta.env.VERCEL,
+			process.env.VERCEL,
 		);
 		console.log(
 			'🚀 ~ file: login.ts ~ line 24 ~ redirectUri2 ~ import.meta.env.VERCEL_URL',
-			import.meta.env.VERCEL_URL,
+			process.env.VERCEL_URL,
 		);
-		if (import.meta.env.VERCEL) {
-			return `${import.meta.env.VERCEL_URL}/auth/callback/`;
+		if (process.env.VERCEL && process.env.VERCEL_URL) {
+			return `${process.env.VERCEL_URL}/auth/callback/`;
 		}
 		return `${request.url.origin}/auth/callback/`;
 	};
 	const redirectUri = dev
 		? `${request.url.origin}/auth/callback/`
-		: `https://svelte-14dec21.vercel.app/auth/callback/`;
+		: // : `https://svelte-14dec21.vercel.app/auth/callback/`;
+		  getRedirectUri();
 
 	const query = new URLSearchParams({
 		response_type: 'code',
