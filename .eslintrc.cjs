@@ -45,6 +45,7 @@ module.exports = {
 				"no-undef": "off",
 				"no-undef-init": "off",
 				"@typescript-eslint/restrict-template-expressions": "off",
+				"@typescript-eslint/no-unsafe-argument": "off",
 			},
 		},
 		// {
