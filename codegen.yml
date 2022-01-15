@@ -1,14 +1,9 @@
+overwrite: true
 schema:
   - https://hasura-xf70.onrender.com/v1/graphql:
       headers:
         x-hasura-admin-secret: myadminsecret
         # x-hasura-role: somerole
-
-documents:
-  - './src/**/*.graphql'
-  - './src/**/*.ts'
-  - './src/**/*.svelte'
-  - '/src/**/*.svelte'
 
 generates:
   ./src/graphql.schema.json:
@@ -22,12 +17,10 @@ generates:
             - '/* eslint-disable */'
       - typescript
       - typescript-urql-graphcache
-      # - typescript-operations
-      # - urql-svelte-operations-store
-      # - typed-document-node
     config:
       useTypeImports: true
   src/:
+    documents: './src/**/*.graphql'
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/graphql.ts
@@ -42,9 +35,9 @@ generates:
       - urql-svelte-operations-store
     config:
       # addOperationExport: true
-      flattenGeneratedTypes: true
+      # flattenGeneratedTypes: true
 
-config:  
+config:
   # use "import type" instead of "import"
   useTypeImports: true
   # turn enums into types
@@ -57,7 +50,6 @@ config:
 
   # onlyOperationTypes: true
   preResolveTypes: true
-
 
   scalars:
     date: string
