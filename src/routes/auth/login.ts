@@ -12,25 +12,7 @@ const audience = 'https://dev-eehvhdp2.eu.auth0.com/api/v2/';
 export const get: RequestHandler = (request) => {
 	const sessionId = v4();
 
-	// TODO: set domain in .env + auth0
-	const getRedirectUri = () => {
-		console.log(
-			'🚀 ~ file: login.ts ~ line 22 ~ redirectUri2 ~ import.meta.env.VERCEL',
-			process.env.VERCEL,
-		);
-		console.log(
-			'🚀 ~ file: login.ts ~ line 24 ~ redirectUri2 ~ import.meta.env.VERCEL_URL',
-			process.env.VERCEL_URL,
-		);
-		if (process.env.VERCEL && process.env.VERCEL_URL) {
-			return `${process.env.VERCEL_URL}/auth/callback/`;
-		}
-		return `${request.url.origin}/auth/callback/`;
-	};
-	const redirectUri = dev
-		? `${request.url.origin}/auth/callback/`
-		: // : `https://svelte-14dec21.vercel.app/auth/callback/`;
-		  getRedirectUri();
+	const redirectUri = `${request.url.origin}/auth/callback/`;
 
 	const query = new URLSearchParams({
 		response_type: 'code',

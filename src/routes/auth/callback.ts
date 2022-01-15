@@ -48,9 +48,7 @@ export const get: RequestHandler<Locals> = async (req) => {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		const redirectUri = dev
-			? `${req.url.origin}/auth/callback/`
-			: `${req.url.origin}/auth/callback/`;
+		const redirectUri = `${req.url.origin}/auth/callback/`;
 		const tokens = await getTokens(code, redirectUri);
 
 		req.locals.user = tokens.id_token || '';
