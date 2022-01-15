@@ -27,7 +27,6 @@
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
-		if (id === 'add') return;
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		const tenant: TenantIdScreenStore = await stuff.query(

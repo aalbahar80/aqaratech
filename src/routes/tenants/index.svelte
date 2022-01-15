@@ -4,10 +4,8 @@
 
 <script lang="ts">
 	import TableCS from '$components/table/TableCS.svelte';
-	import { tenants } from '$lib/definitions/ref';
+	import { fieldList, graphqlName } from '$lib/definitions/Tenants';
 	import { TenantsListDocument } from './[id]/_[id].gql';
-
-	const { fieldList, graphqlName } = tenants;
 </script>
 
 <svelte:head>

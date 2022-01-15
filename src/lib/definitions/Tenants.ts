@@ -2,9 +2,9 @@ import { Field } from '$components/form/Field';
 import { z } from 'zod';
 
 const title = 'Tenants';
-const graphqlName = 'tenants';
+export const graphqlName = 'tenants';
 
-const fieldList: Field[] = [
+export const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
@@ -56,7 +56,7 @@ const fieldList: Field[] = [
 	}),
 ];
 
-const validation = z.object({
+export const validation = z.object({
 	first_name: z.string().min(1, { message: 'Required' }),
 	second_name: z.string().min(1, { message: 'Required' }),
 	last_name: z.string().min(1, { message: 'Required' }),
@@ -87,10 +87,3 @@ const validation = z.object({
 			),
 	),
 });
-
-export default {
-	title,
-	graphqlName,
-	fieldList,
-	validation,
-};

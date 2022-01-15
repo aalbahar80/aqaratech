@@ -71,6 +71,84 @@ export type TenantIdScreen = {
 	}>;
 };
 
+export type TenantDetails = {
+	__typename?: 'tenants';
+	id: number;
+	first_name?: string | null | undefined;
+	last_name?: string | null | undefined;
+	email?: string | null | undefined;
+	phone?: string | null | undefined;
+	dob?: string | null | undefined;
+	civilid?: any | null | undefined;
+	second_name?: string | null | undefined;
+	third_name?: string | null | undefined;
+};
+
+export type TenantDetailsVariables = Types.Exact<{ [key: string]: never }>;
+
+export type Crumbs = {
+	__typename?: 'tenants';
+	id: number;
+	leases: Array<{
+		__typename?: 'leases';
+		id: number;
+		unit?:
+			| {
+					__typename?: 'units';
+					id: number;
+					property?:
+						| {
+								__typename?: 'properties';
+								id: number;
+								client?:
+									| { __typename?: 'clients'; id: number }
+									| null
+									| undefined;
+						  }
+						| null
+						| undefined;
+			  }
+			| null
+			| undefined;
+	}>;
+};
+
+export type CrumbsVariables = Types.Exact<{ [key: string]: never }>;
+
+export type PastLeases = {
+	__typename?: 'tenants';
+	pastLeases: Array<{
+		__typename?: 'leases';
+		id: number;
+		start_date?: string | null | undefined;
+		end_date?: string | null | undefined;
+		is_expired?: boolean | null | undefined;
+		is_signed?: boolean | null | undefined;
+		monthly_rent?: number | null | undefined;
+		unit_id?: number | null | undefined;
+		deposit?: number | null | undefined;
+	}>;
+};
+
+export type PastLeasesVariables = Types.Exact<{ [key: string]: never }>;
+
+export type RecentTransactions = {
+	__typename?: 'query_root';
+	transactions: Array<{
+		__typename?: 'transactions';
+		id: number;
+		amount?: number | null | undefined;
+		created_at?: any | null | undefined;
+		due_date?: string | null | undefined;
+		is_paid?: boolean | null | undefined;
+		receipt_url?: string | null | undefined;
+		memo?: string | null | undefined;
+		lease_id?: number | null | undefined;
+	}>;
+};
+
+export type RecentTransactionsVariables = Types.Exact<{ [key: string]: never }>;
+
 export type TenantsListVariables = Types.Exact<{
 	limit?: Types.InputMaybe<Types.Scalars['Int']>;
 	offset?: Types.InputMaybe<Types.Scalars['Int']>;
@@ -185,82 +263,79 @@ export type TenantEditScreen = {
 		| undefined;
 };
 
-export const TenantIdScreenDocument = {
+export type TenantBasics = {
+	__typename?: 'query_root';
+	tenants_by_pk?:
+		| {
+				__typename?: 'tenants';
+				id: number;
+				first_name?: string | null | undefined;
+				last_name?: string | null | undefined;
+				email?: string | null | undefined;
+				phone?: string | null | undefined;
+				dob?: string | null | undefined;
+				civilid?: any | null | undefined;
+				second_name?: string | null | undefined;
+				third_name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type TenantBasicsVariables = Types.Exact<{ [key: string]: never }>;
+
+export const Crumbs = {
 	kind: 'Document',
 	definitions: [
 		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'TenantIdScreen' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
-					type: {
-						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-					},
-				},
-			],
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'crumbs' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'tenants' },
+			},
 			selectionSet: {
 				kind: 'SelectionSet',
 				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 					{
 						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
+						name: { kind: 'Name', value: 'leases' },
 						arguments: [
 							{
 								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
+								name: { kind: 'Name', value: 'order_by' },
 								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'end_date' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
 								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: { kind: 'IntValue', value: '1' },
 							},
 						],
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
 								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
 								{
 									kind: 'Field',
-									name: { kind: 'Name', value: 'leases' },
-									arguments: [
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'order_by' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'end_date' },
-														value: { kind: 'EnumValue', value: 'desc' },
-													},
-												],
-											},
-										},
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'limit' },
-											value: { kind: 'IntValue', value: '1' },
-										},
-									],
+									name: { kind: 'Name', value: 'unit' },
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
 											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 											{
 												kind: 'Field',
-												name: { kind: 'Name', value: 'unit' },
+												name: { kind: 'Name', value: 'property' },
 												selectionSet: {
 													kind: 'SelectionSet',
 													selections: [
@@ -270,26 +345,13 @@ export const TenantIdScreenDocument = {
 														},
 														{
 															kind: 'Field',
-															name: { kind: 'Name', value: 'property' },
+															name: { kind: 'Name', value: 'client' },
 															selectionSet: {
 																kind: 'SelectionSet',
 																selections: [
 																	{
 																		kind: 'Field',
 																		name: { kind: 'Name', value: 'id' },
-																	},
-																	{
-																		kind: 'Field',
-																		name: { kind: 'Name', value: 'client' },
-																		selectionSet: {
-																			kind: 'SelectionSet',
-																			selections: [
-																				{
-																					kind: 'Field',
-																					name: { kind: 'Name', value: 'id' },
-																				},
-																			],
-																		},
 																	},
 																],
 															},
@@ -300,64 +362,82 @@ export const TenantIdScreenDocument = {
 										],
 									},
 								},
-								{
-									kind: 'Field',
-									alias: { kind: 'Name', value: 'pastLeases' },
-									name: { kind: 'Name', value: 'leases' },
-									arguments: [
-										{
-											kind: 'Argument',
-											name: { kind: 'Name', value: 'order_by' },
-											value: {
-												kind: 'ObjectValue',
-												fields: [
-													{
-														kind: 'ObjectField',
-														name: { kind: 'Name', value: 'end_date' },
-														value: { kind: 'EnumValue', value: 'desc' },
-													},
-												],
-											},
-										},
-									],
-									selectionSet: {
-										kind: 'SelectionSet',
-										selections: [
-											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'start_date' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'end_date' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'is_expired' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'is_signed' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'monthly_rent' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'unit_id' },
-											},
-											{
-												kind: 'Field',
-												name: { kind: 'Name', value: 'deposit' },
-											},
-										],
-									},
-								},
 							],
 						},
 					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<Crumbs, CrumbsVariables>;
+export const PastLeases = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'pastLeases' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'tenants' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'pastLeases' },
+						name: { kind: 'Name', value: 'leases' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'end_date' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'monthly_rent' },
+								},
+								{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<PastLeases, PastLeasesVariables>;
+export const RecentTransactions = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'recentTransactions' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
 					{
 						kind: 'Field',
 						name: { kind: 'Name', value: 'transactions' },
@@ -434,6 +514,139 @@ export const TenantIdScreenDocument = {
 				],
 			},
 		},
+	],
+} as unknown as DocumentNode<RecentTransactions, RecentTransactionsVariables>;
+export const TenantDetails = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'tenantDetails' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'tenants' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<TenantDetails, TenantDetailsVariables>;
+export const TenantBasics = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'tenantBasics' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+	],
+} as unknown as DocumentNode<TenantBasics, TenantBasicsVariables>;
+export const TenantIdScreenDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'TenantIdScreen' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+					type: {
+						kind: 'NonNullType',
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+					},
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'tenants_by_pk' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'id' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'id' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'crumbs' },
+								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'pastLeases' },
+								},
+							],
+						},
+					},
+					{
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'recentTransactions' },
+					},
+				],
+			},
+		},
+		...TenantDetails.definitions,
+		...Crumbs.definitions,
+		...PastLeases.definitions,
+		...RecentTransactions.definitions,
 	],
 } as unknown as DocumentNode<TenantIdScreen, TenantIdScreenVariables>;
 export const TenantsListDocument = {
@@ -534,15 +747,10 @@ export const TenantsListDocument = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
 							],
 						},
 					},
@@ -579,6 +787,7 @@ export const TenantsListDocument = {
 				],
 			},
 		},
+		...TenantDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsList, TenantsListVariables>;
 export const DeleteTenantDocument = {
@@ -666,21 +875,17 @@ export const TenantsInsertDocument = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
 							],
 						},
 					},
 				],
 			},
 		},
+		...TenantDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsInsert, TenantsInsertVariables>;
 export const TenantsUpdateDocument = {
@@ -744,21 +949,17 @@ export const TenantsUpdateDocument = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'tenantDetails' },
+								},
 							],
 						},
 					},
 				],
 			},
 		},
+		...TenantDetails.definitions,
 	],
 } as unknown as DocumentNode<TenantsUpdate, TenantsUpdateVariables>;
 export const TenantEditScreenDocument = {
@@ -782,36 +983,13 @@ export const TenantEditScreenDocument = {
 				kind: 'SelectionSet',
 				selections: [
 					{
-						kind: 'Field',
-						name: { kind: 'Name', value: 'tenants_by_pk' },
-						arguments: [
-							{
-								kind: 'Argument',
-								name: { kind: 'Name', value: 'id' },
-								value: {
-									kind: 'Variable',
-									name: { kind: 'Name', value: 'id' },
-								},
-							},
-						],
-						selectionSet: {
-							kind: 'SelectionSet',
-							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'dob' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'civilid' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'second_name' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'third_name' } },
-							],
-						},
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'tenantBasics' },
 					},
 				],
 			},
 		},
+		...TenantBasics.definitions,
 	],
 } as unknown as DocumentNode<TenantEditScreen, TenantEditScreenVariables>;
 export type TenantIdScreenStore = OperationStore<
