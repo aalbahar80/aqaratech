@@ -1,13 +1,15 @@
-<script lang="ts">
-	import IndexGeneric from '$components/IndexGeneric.svelte';
-	import { clients } from '$lib/definitions/ref';
-
-	const { docs, fieldList, graphqlName } = clients;
+<script lang="ts" context="module">
+	export const prerender = true;
 </script>
 
-<IndexGeneric
-	{graphqlName}
-	{fieldList}
-	listDoc={docs.list}
-	deleteDoc={docs.del}
-/>
+<script lang="ts">
+	import TableCS from '$components/table/TableCS.svelte';
+	import { fieldList } from '$lib/definitions/Clients';
+	import { ClientListPageDocument } from './_index.gql';
+</script>
+
+<svelte:head>
+	<title>Clients</title>
+</svelte:head>
+
+<TableCS listDoc={ClientListPageDocument} graphqlName="clients" {fieldList} />

@@ -1,72 +1,9 @@
-import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import type { entity } from './types';
+import { z } from 'zod';
 
-const title = 'Clients';
-const graphqlName = 'clients';
-const graphqlNamePk = 'clients_by_pk';
+export const graphqlName = 'clients';
 
-const clientDetailsFragment = gql`
-	fragment details on clients {
-		id
-		first_name
-		last_name
-		email
-		phone
-		civilid
-		is_active
-	}
-`;
-
-const insert = gql`
-	mutation ClientsInsert($object: clients_insert_input = {}) {
-		insert_clients_one(object: $object) {
-			...details
-		}
-	}
-	${clientDetailsFragment}
-`;
-
-const update = gql`
-	mutation ClientsUpdate($id: Int!, $_set: clients_set_input) {
-		update_clients_by_pk(pk_columns: { id: $id }, _set: $_set) {
-			...details
-		}
-	}
-	${clientDetailsFragment}
-`;
-
-const deleteQuery = gql`
-	mutation DeleteClients($id: Int!) {
-		delete_clients_by_pk(id: $id) {
-			id
-		}
-	}
-`;
-
-const byId = gql`
-	query ClientsById($id: Int!) {
-		clients_by_pk(id: $id) {
-			...details
-		}
-	}
-	${clientDetailsFragment}
-`;
-
-const list = gql`
-	query ClientsList(
-		$limit: Int
-		$offset: Int
-		$order_by: [clients_order_by!] = {}
-	) {
-		clients(order_by: $order_by, limit: $limit, offset: $offset) {
-			...details
-		}
-	}
-	${clientDetailsFragment}
-`;
-
-const fieldList: Field[] = [
+export const fieldList: Field[] = [
 	new Field({ fieldName: 'id', title: 'ID', editable: false }),
 	new Field({
 		fieldName: 'first_name',
@@ -86,18 +23,9 @@ const fieldList: Field[] = [
 	}),
 ];
 
-const docs = {
-	insert: insert,
-	update: update,
-	del: deleteQuery,
-	list: list,
-	byId: byId,
-};
-
-export default <entity>{
-	title,
-	graphqlName,
-	graphqlNamePk,
-	docs,
-	fieldList,
-};
+export const validation = z.object({
+	first_name: z.string().min(1, { message: 'Required' }),
+	last_name: z.string().min(1, { message: 'Required' }),
+	email: z.string().email(),
+	phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
+});

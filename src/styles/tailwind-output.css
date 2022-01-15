@@ -54,9 +54,6 @@
 .z-50 {
     z-index: 50
 }
-.col-span-2 {
-    grid-column: span 2 / span 2
-}
 .col-start-1 {
     grid-column-start: 1
 }
@@ -67,11 +64,11 @@
 .mb-5 {
     margin-bottom: 1.25rem
 }
-.mt-8 {
-    margin-top: 2rem
-}
 .mt-4 {
     margin-top: 1rem
+}
+.mt-8 {
+    margin-top: 2rem
 }
 .inline {
     display: inline
@@ -156,9 +153,6 @@
 }
 .pr-2 {
     padding-right: 0.5rem
-}
-.pl-2 {
-    padding-left: 0.5rem
 }
 .text-center {
     text-align: center

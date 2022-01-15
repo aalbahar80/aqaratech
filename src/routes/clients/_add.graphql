@@ -1,0 +1,5 @@
+mutation AddClient($object: clients_insert_input = {}) {
+	insert_clients_one(object: $object) {
+		...clientDetails
+	}
+}

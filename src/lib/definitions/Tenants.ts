@@ -1,7 +1,6 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
 
-const title = 'Tenants';
 export const graphqlName = 'tenants';
 
 export const fieldList: Field[] = [
