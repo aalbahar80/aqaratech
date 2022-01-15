@@ -5,7 +5,7 @@ import type * as Types from '../../generated/graphql';
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import { LeaseDetails } from './[id]/_index.gql';
-export type LeasesScreenVariables = Types.Exact<{
+export type LeaseListPageVariables = Types.Exact<{
 	limit?: Types.InputMaybe<Types.Scalars['Int']>;
 	offset?: Types.InputMaybe<Types.Scalars['Int']>;
 	order_by?: Types.InputMaybe<
@@ -14,7 +14,7 @@ export type LeasesScreenVariables = Types.Exact<{
 	where?: Types.InputMaybe<Types.Leases_Bool_Exp>;
 }>;
 
-export type LeasesScreen = {
+export type LeaseListPage = {
 	__typename?: 'query_root';
 	leases: Array<{
 		__typename?: 'leases';
@@ -38,13 +38,13 @@ export type LeasesScreen = {
 	};
 };
 
-export const LeasesScreenDocument = {
+export const LeaseListPageDocument = {
 	kind: 'Document',
 	definitions: [
 		{
 			kind: 'OperationDefinition',
 			operation: 'query',
-			name: { kind: 'Name', value: 'LeasesScreen' },
+			name: { kind: 'Name', value: 'LeaseListPage' },
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
@@ -178,8 +178,8 @@ export const LeasesScreenDocument = {
 		},
 		...LeaseDetails.definitions,
 	],
-} as unknown as DocumentNode<LeasesScreen, LeasesScreenVariables>;
-export type LeasesScreenStore = OperationStore<
-	LeasesScreen,
-	LeasesScreenVariables
+} as unknown as DocumentNode<LeaseListPage, LeaseListPageVariables>;
+export type LeaseListPageStore = OperationStore<
+	LeaseListPage,
+	LeaseListPageVariables
 >;

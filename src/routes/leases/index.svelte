@@ -5,11 +5,11 @@
 <script lang="ts">
 	import TableCS from '$components/table/TableCS.svelte';
 	import { fieldList } from '$lib/definitions/Leases';
-	import { LeasesScreenDocument } from './_index.gql';
+	import { LeaseListPage } from './_index.gql';
 </script>
 
 <svelte:head>
 	<title>Leases</title>
 </svelte:head>
 
-<TableCS listDoc={LeasesScreenDocument} graphqlName="leases" {fieldList} />
+<TableCS listDoc={LeaseListPage} graphqlName="leases" {fieldList} />

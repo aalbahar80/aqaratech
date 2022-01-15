@@ -1,4 +1,4 @@
-query LeasesScreen(
+query LeaseListPage(
 	$limit: Int
 	$offset: Int
 	$order_by: [leases_order_by!] = {}
