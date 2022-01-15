@@ -1,6 +1,6 @@
 //  Endpoint for redirection from GitHub after authorization...
 import type { RequestHandler } from '@sveltejs/kit';
-import { dev } from '$app/env';
+import { getRedirectUri } from '$lib/config/auth_config';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 interface TokenResponse {
@@ -48,7 +48,8 @@ export const get: RequestHandler<Locals> = async (req) => {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		const redirectUri = `${req.url.origin}/auth/callback/`;
+		const redirectUri = getRedirectUri(req.url.origin);
+
 		const tokens = await getTokens(code, redirectUri);
 
 		req.locals.user = tokens.id_token || '';

@@ -1,7 +1,7 @@
 //  Login endpoint
+import { getRedirectUri } from '$lib/config/auth_config';
 import type { RequestHandler } from '@sveltejs/kit';
 import { v4 } from 'uuid';
-import { dev } from '$app/env';
 
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const auth0Url = 'https://dev-eehvhdp2.eu.auth0.com/authorize';
@@ -12,7 +12,7 @@ const audience = 'https://dev-eehvhdp2.eu.auth0.com/api/v2/';
 export const get: RequestHandler = (request) => {
 	const sessionId = v4();
 
-	const redirectUri = `${request.url.origin}/auth/callback/`;
+	const redirectUri = getRedirectUri(request.url.origin);
 
 	const query = new URLSearchParams({
 		response_type: 'code',
