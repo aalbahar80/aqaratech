@@ -24,7 +24,7 @@
 
 	// PAGINATION
 	const pageSizes = [10, 25, 100];
-	let pageSize = 10;
+	let pageSize = 25;
 	let totalItems = 0;
 	$: totalItems = $pageQuery.data?.agg?.aggregate?.count;
 	$: pageIndex = Number($page.url.searchParams.get('page')) || 1;
