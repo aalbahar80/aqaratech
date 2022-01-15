@@ -15,7 +15,7 @@ export const get: RequestHandler = (request) => {
 	// TODO: set domain in .env + auth0
 	const redirectUri = dev
 		? `${request.url.origin}/auth/callback/`
-		: `${import.meta.VITE_VERCEL_URL}/auth/callback/`;
+		: `${request.url.origin}/auth/callback/`
 
 	const query = new URLSearchParams({
 		response_type: 'code',

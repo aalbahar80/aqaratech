@@ -16,14 +16,14 @@ export const handle: Handle<Locals> = async ({ request, resolve }) => {
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
 			// sameSite: 'strict',
-			// secure: process.env.NODE_ENV === 'production',
+			secure: process.env.NODE_ENV === 'production',
 		}),
 		cookie.serialize('hasura', request.locals.hasura || '', {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
 			// sameSite: 'strict',
-			// secure: process.env.NODE_ENV === 'production',
+			secure: process.env.NODE_ENV === 'production',
 		}),
 	];
 
