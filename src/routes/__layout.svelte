@@ -78,6 +78,8 @@
 			keys: {
 				tenants_aggregate: () => null,
 				tenants_aggregate_fields: () => null,
+				leases_aggregate: () => null,
+				leases_aggregate_fields: () => null,
 			},
 		});
 
