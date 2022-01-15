@@ -1,0 +1,5 @@
+mutation AddUnit($object: units_insert_input = {}) {
+	insert_units_one(object: $object) {
+		...unitDetails
+	}
+}

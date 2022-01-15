@@ -1,12 +1,15 @@
-<script lang="ts">
-	import IndexGeneric from '$components/IndexGeneric.svelte';
-	import { units } from '$lib/definitions/ref';
-	const { docs, fieldList, graphqlName } = units;
+<script lang="ts" context="module">
+	export const prerender = true;
 </script>
 
-<IndexGeneric
-	{graphqlName}
-	{fieldList}
-	listDoc={docs.list}
-	deleteDoc={docs.del}
-/>
+<script lang="ts">
+	import TableCS from '$components/table/TableCS.svelte';
+	import { fieldList } from '$lib/definitions/Units';
+	import { UnitListPageDocument } from './_index.gql';
+</script>
+
+<svelte:head>
+	<title>Units</title>
+</svelte:head>
+
+<TableCS listDoc={UnitListPageDocument} graphqlName="units" {fieldList} />

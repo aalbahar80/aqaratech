@@ -80,6 +80,12 @@
 				tenants_aggregate_fields: () => null,
 				leases_aggregate: () => null,
 				leases_aggregate_fields: () => null,
+				units_aggregate: () => null,
+				units_aggregate_fields: () => null,
+				properties_aggregate: () => null,
+				properties_aggregate_fields: () => null,
+				clients_aggregate: () => null,
+				clients_aggregate_fields: () => null,
 			},
 		});
 
