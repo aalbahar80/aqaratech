@@ -13,16 +13,3 @@ query LeasesScreen(
 		}
 	}
 }
-
-fragment leaseDetails on leases {
-	id
-	deposit
-	end_date
-	is_expired
-	is_signed
-	license
-	monthly_rent
-	start_date
-	tenant_id
-	unit_id
-}

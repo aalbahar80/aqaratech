@@ -2,8 +2,8 @@ import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { parseISO } from 'date-fns';
 
-const title = 'Leases';
-const graphqlName = 'leases';
+// const title = 'Leases';
+export const graphqlName = 'leases';
 
 export const fieldList = [
 	new Field({
@@ -61,7 +61,7 @@ export const fieldList = [
 	}),
 ];
 
-const validation = z
+export const validation = z
 	.object({
 		// validate that start_date is an iso string
 		start_date: z.string().refine((val) => Date.parse(val), {
@@ -83,9 +83,3 @@ const validation = z
 		path: ['end_date'],
 		message: 'End date must be after end date',
 	});
-
-export default {
-	title,
-	graphqlName,
-	validation,
-};

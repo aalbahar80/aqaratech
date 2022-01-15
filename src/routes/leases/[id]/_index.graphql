@@ -1,0 +1,24 @@
+query LeaseDetailPage($id: Int!) {
+	leases_by_pk(id: $id) {
+		...leaseDetails
+	}
+}
+
+fragment leaseDetails on leases {
+	id
+	deposit
+	end_date
+	is_expired
+	is_signed
+	license
+	monthly_rent
+	start_date
+	tenant_id
+	unit_id
+}
+
+mutation DeleteLease($id: Int!) {
+	delete_leases_by_pk(id: $id) {
+		id
+	}
+}

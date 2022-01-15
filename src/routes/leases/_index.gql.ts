@@ -4,6 +4,7 @@ import type * as Types from '../../generated/graphql';
 
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { LeaseDetails } from './[id]/_index.gql';
 export type LeasesScreenVariables = Types.Exact<{
 	limit?: Types.InputMaybe<Types.Scalars['Int']>;
 	offset?: Types.InputMaybe<Types.Scalars['Int']>;
@@ -135,19 +136,10 @@ export const LeasesScreenDocument = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'deposit' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'end_date' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'is_expired' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'is_signed' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'license' } },
 								{
-									kind: 'Field',
-									name: { kind: 'Name', value: 'monthly_rent' },
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'leaseDetails' },
 								},
-								{ kind: 'Field', name: { kind: 'Name', value: 'start_date' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'tenant_id' } },
-								{ kind: 'Field', name: { kind: 'Name', value: 'unit_id' } },
 							],
 						},
 					},
@@ -184,6 +176,7 @@ export const LeasesScreenDocument = {
 				],
 			},
 		},
+		...LeaseDetails.definitions,
 	],
 } as unknown as DocumentNode<LeasesScreen, LeasesScreenVariables>;
 export type LeasesScreenStore = OperationStore<

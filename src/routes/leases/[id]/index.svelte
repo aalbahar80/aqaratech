@@ -1,38 +1,41 @@
 <script context="module" lang="ts">
+	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import type { Load } from '@sveltejs/kit';
-	export const load: Load = async ({ params }) => {
-		const id = params.id;
+	import { query } from '@urql/svelte';
+	import ActionPanel from '$components/ActionPanel.svelte';
+	import { Button } from 'carbon-components-svelte';
+	import { DocumentExport16, Renew16 } from 'carbon-icons-svelte';
+	import {
+		DeleteLeaseDocument,
+		LeaseDetailPageDocument,
+		LeaseDetailPageStore,
+	} from './_index.gql';
+	import { page } from '$app/stores';
 
-		if (id === 'add') {
-			// Go to add page instead
-			return;
-		} else {
-			return {};
-		}
+	export const prerender = true;
+
+	export const load: Load = async ({ params, stuff }) => {
+		const { id } = params;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		const lease: LeaseDetailPageStore = await stuff.query(
+			LeaseDetailPageDocument,
+			{
+				id,
+			},
+		);
+		return {
+			props: {
+				lease,
+			},
+		};
 	};
 </script>
 
 <script lang="ts">
-	import { page } from '$app/stores';
-	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
-	import { LeasesByIdDocument } from '$generated/graphql';
-	import { operationStore, query } from '@urql/svelte';
-
-	import { formatDistanceToNow, formatRelative } from 'date-fns';
-	import { renderReportAndGetRenderId } from '$lib/services/carbone';
-
-	const lease = operationStore(LeasesByIdDocument, {
-		id: parseInt($page.params.id),
-	});
+	export let lease: LeaseDetailPageStore;
+	$: id = $page.params.id;
 	query(lease);
 	$: result = $lease?.data?.leases_by_pk;
-	$: crumbData = {
-		clientId: $lease?.data?.leases_by_pk?.unit?.property?.client?.id,
-		propertyId: $lease?.data?.leases_by_pk?.unit?.property?.id,
-		unitId: $lease?.data?.leases_by_pk?.unit_id,
-		leaseId: $lease?.data?.leases_by_pk?.id,
-		tenantId: $lease?.data?.leases_by_pk?.tenant_id,
-	};
 
 	let loading = false;
 	// async function that opens a new window with the report
@@ -45,12 +48,22 @@
 	}
 </script>
 
-<BreadCrumbs {...crumbData} />
-{JSON.stringify($lease)}
-<button class="btn btn-secondary" class:loading on:click={getPDF}
-	>Generate PDF</button
->
+<ActionPanel {id} deleteDocumentNode={DeleteLeaseDocument} />
 
-<a href="{$page.url.pathname}/edit" class="btn btn-secondary" class:loading
-	>Edit</a
->
+<div class="grid grid-flow-col grid-rows-1 justify-end gap-4">
+	<Button kind="tertiary" iconDescription="Renew" icon={Renew16} />
+	<Button
+		kind="tertiary"
+		iconDescription="Generate PDF"
+		icon={DocumentExport16}
+		on:click={getPDF}
+	/>
+</div>
+<div class="max-w-4xl mx-auto px-6">
+	<div class="grid grid-cols-2 gap-2 mt-8 max-w-md justify-self-center">
+		{#each Object.entries($lease.data?.leases_by_pk) as [key, value]}
+			<p>{key}</p>
+			<p>{value}</p>
+		{/each}
+	</div>
+</div>
