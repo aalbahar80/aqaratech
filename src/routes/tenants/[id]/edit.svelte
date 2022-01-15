@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import FormCS from '$components/form/FormCS.svelte';
-	import tenants from '$lib/definitions/Tenants';
+	import { fieldList, graphqlName, validation } from '$lib/definitions/Tenants';
 	import type { Load } from '@sveltejs/kit';
 	import {
 		TenantEditScreen,
@@ -27,8 +27,6 @@
 </script>
 
 <script lang="ts">
-	const { fieldList, graphqlName, validation } = tenants;
-
 	export let tenant: TenantEditScreenStore;
 	const existing: TenantEditScreen['tenants_by_pk'] =
 		$tenant.data?.tenants_by_pk;

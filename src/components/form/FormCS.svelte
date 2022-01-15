@@ -25,7 +25,7 @@
 
 	export let updateDoc: DocumentNode | undefined = undefined;
 	export let existing: T | undefined = undefined;
-	export let validation: ZodObject<any>;
+	export let validation: any;
 
 	let loading = false;
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
