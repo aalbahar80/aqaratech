@@ -1,12 +1,19 @@
-<script lang="ts">
-	import IndexGeneric from '$components/IndexGeneric.svelte';
-	import { properties } from '$lib/definitions/ref';
-	const { docs, fieldList, graphqlName } = properties;
+<script lang="ts" context="module">
+	export const prerender = true;
 </script>
 
-<IndexGeneric
-	{graphqlName}
+<script lang="ts">
+	import TableCS from '$components/table/TableCS.svelte';
+	import { fieldList } from '$lib/definitions/Properties';
+	import { PropertyListPageDocument } from './_index.gql';
+</script>
+
+<svelte:head>
+	<title>Properties</title>
+</svelte:head>
+
+<TableCS
+	listDoc={PropertyListPageDocument}
+	graphqlName="properties"
 	{fieldList}
-	listDoc={docs.list}
-	deleteDoc={docs.del}
 />

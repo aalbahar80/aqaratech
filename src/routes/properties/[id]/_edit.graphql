@@ -1,0 +1,9 @@
+query PropertyEditPage($id: Int!) {
+	...propertyById
+}
+
+mutation UpdateProperty($id: Int!, $_set: properties_set_input) {
+	update_properties_by_pk(pk_columns: { id: $id }, _set: $_set) {
+		...propertyDetails
+	}
+}

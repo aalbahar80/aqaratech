@@ -1,0 +1,5 @@
+mutation AddProperty($object: properties_insert_input = {}) {
+	insert_properties_one(object: $object) {
+		...propertyDetails
+	}
+}

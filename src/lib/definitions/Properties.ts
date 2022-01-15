@@ -1,113 +1,46 @@
-import { gql } from '@urql/svelte';
 import { Field } from '$components/form/Field';
-import type { entity } from './types';
+import { z } from 'zod';
 
-const title = 'Properties';
-const graphqlName = 'properties';
-const graphqlNamePk = 'properties_by_pk';
+export const graphqlName = 'properties';
 
-const propertiesDetailsFragment = gql`
-	fragment propertiesDetails on properties {
-		id
-		client_id
-		area
-		block
-		street
-		avenue
-		number
-		coordinates
-	}
-`;
-
-const insert = gql`
-	mutation PropertiesInsert($object: properties_insert_input = {}) {
-		insert_properties_one(object: $object) {
-			...propertiesDetails
-		}
-	}
-	${propertiesDetailsFragment}
-`;
-
-const update = gql`
-	mutation PropertiesUpdate($id: Int!, $_set: properties_set_input) {
-		update_properties_by_pk(pk_columns: { id: $id }, _set: $_set) {
-			...propertiesDetails
-		}
-	}
-	${propertiesDetailsFragment}
-`;
-
-const deleteQuery = gql`
-	mutation DeleteProperties($id: Int!) {
-		delete_properties_by_pk(id: $id) {
-			id
-		}
-	}
-`;
-
-const byId = gql`
-	query PropertiesById($id: Int!) {
-		properties_by_pk(id: $id) {
-			...propertiesDetails
-		}
-	}
-	${propertiesDetailsFragment}
-`;
-
-const list = gql`
-	query PropertiesList(
-		$limit: Int
-		$offset: Int
-		$order_by: [properties_order_by!] = {}
-	) {
-		properties(order_by: $order_by, limit: $limit, offset: $offset) {
-			...propertiesDetails
-		}
-	}
-	${propertiesDetailsFragment}
-`;
-
-const fieldList: Field[] = [
+export const fieldList: Field[] = [
 	new Field({
 		fieldName: 'id',
 		title: 'ID',
 		editable: false,
+		searchType: 'number',
 	}),
 	new Field({
 		fieldName: 'area',
 		title: 'Area',
+		searchType: 'text',
 	}),
 	new Field({
 		fieldName: 'block',
 		title: 'Block',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'street',
 		title: 'St',
+		searchType: 'text',
 	}),
 	new Field({
 		fieldName: 'avenue',
 		title: 'Ave',
 		visibile: false,
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'number',
 		title: 'Number',
+		searchable: false,
 	}),
 ];
 
-const docs = {
-	insert: insert,
-	update: update,
-	del: deleteQuery,
-	list: list,
-	byId: byId,
-};
-
-export default <entity>{
-	title,
-	graphqlName,
-	graphqlNamePk,
-	docs,
-	fieldList,
-};
+export const validation = z.object({
+	area: z.string().min(1, { message: 'Required' }),
+	block: z.string().min(1, { message: 'Required' }),
+	street: z.string().min(1, { message: 'Required' }),
+	number: z.string().min(1, { message: 'Required' }),
+});
