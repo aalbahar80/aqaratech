@@ -27,7 +27,9 @@ export const get: RequestHandler = (request) => {
 		}
 		return `${request.url.origin}/auth/callback/`;
 	};
-	const redirectUri = getRedirectUri();
+	const redirectUri = dev
+		? `${request.url.origin}/auth/callback/`
+		: `https://svelte-14dec21.vercel.app/auth/callback/`;
 
 	const query = new URLSearchParams({
 		response_type: 'code',
