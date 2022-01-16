@@ -5,7 +5,6 @@
 		svelteReporter as reporter,
 		ValidationMessage,
 	} from '@felte/reporter-svelte';
-	import type { ValidatorConfig } from '@felte/validator-zod';
 	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
 	import { Button, Form, FormGroup, TextInput } from 'carbon-components-svelte';
@@ -14,10 +13,10 @@
 	import isEmpty from 'just-is-empty';
 	import reduce from 'just-reduce-object';
 	import map from 'just-map-values';
-	import type { z, ZodObject } from 'zod';
+	import { z } from 'zod';
 	import { goto } from '$app/navigation';
 
-	type T = $$Generic<{ id: number }>;
+	type T = $$Generic<{ id: number; [key: string]: any }>;
 
 	export let entity: string;
 	export let fieldList: Field[];
@@ -101,21 +100,12 @@
 		);
 	};
 
-	const { reset, data, errors, handleSubmit } = createForm<
-		z.infer<typeof validation>,
-		ValidatorConfig
-	>({
+	const { reset, data, errors, handleSubmit } = createForm({
 		initialValues: initial(),
 		extend: [validator, reporter],
-		validateSchema: validation,
+		validateSchema: validation ?? z.object({}),
 		onSubmit: handleForm,
 	});
-
-	const descriptionMap = {
-		active: 'Submitting...',
-		finished: 'Success',
-		error: 'An error occurred',
-	};
 </script>
 
 <div class="max-w-md">

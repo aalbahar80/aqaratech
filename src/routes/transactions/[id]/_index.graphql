@@ -1,0 +1,26 @@
+fragment transactionDetails on transactions {
+	id
+    amount
+    created_at
+    due_date
+    is_paid
+    lease_id
+    memo
+    receipt_url
+}
+
+query TransactionDetailPage($id: Int!) {
+	...transactionById
+}
+
+fragment transactionById on query_root {
+	transactions_by_pk(id: $id) {
+		...transactionDetails
+	}
+}
+
+mutation DeleteTransaction($id: Int!) {
+	delete_transactions_by_pk(id: $id) {
+		id
+	}
+}

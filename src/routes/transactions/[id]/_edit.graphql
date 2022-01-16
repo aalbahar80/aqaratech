@@ -1,0 +1,10 @@
+query TransactionEditPage($id: Int!) {
+	...transactionById
+}
+
+mutation UpdateTransaction($id: Int!, $_set: transactions_set_input) {
+	update_transactions_by_pk(pk_columns: { id: $id }, _set: $_set) {
+		...transactionDetails
+	}
+}
+

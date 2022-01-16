@@ -25,8 +25,9 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
-		console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
+		// console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
 		// if (isEmpty(session.user)) {
+		// eslint-disable-next-line no-constant-condition
 		if (false) {
 			// return { redirect: '/auth/login', status: 302 };
 			return {
@@ -88,6 +89,8 @@
 				properties_aggregate_fields: () => null,
 				clients_aggregate: () => null,
 				clients_aggregate_fields: () => null,
+				transactions_aggregate: () => null,
+				transactions_aggregate_fields: () => null,
 			},
 		});
 
