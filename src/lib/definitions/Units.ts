@@ -1,5 +1,4 @@
 import { Field } from '$components/form/Field';
-import { z } from 'zod';
 
 export const graphqlName = 'units';
 
@@ -62,4 +61,4 @@ export const fieldList = [
 	}),
 ];
 
-export const validation = z.object({});
+export const validation = false;
