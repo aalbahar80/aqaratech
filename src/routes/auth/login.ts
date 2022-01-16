@@ -22,7 +22,7 @@ export const get: RequestHandler = (request) => {
 		state: sessionId,
 		audience,
 	});
-	const url = `${auth0Url}?${query.toString()}`;
+	const url = `${auth0Url}?${decodeURIComponent(query.toString())}`;
 	return {
 		status: 302,
 		headers: {
