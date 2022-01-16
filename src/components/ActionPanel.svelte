@@ -1,53 +1,12 @@
 <script lang="ts">
-	import { addToast } from '$lib/stores/toast';
-	import { mutation, operationStore } from '@urql/svelte';
-	import { Button, Modal } from 'carbon-components-svelte';
-	import { Edit16, TrashCan16 } from 'carbon-icons-svelte';
 	import type { DocumentNode } from 'graphql';
-	import { goto } from '$app/navigation';
+	import { Button } from 'carbon-components-svelte';
+	import { DocumentExport16, Edit16, Renew16 } from 'carbon-icons-svelte';
+	import DeleteModal from './toast/DeleteModal.svelte';
 	import { page } from '$app/stores';
 
 	export let deleteDocumentNode: DocumentNode;
 	export let id: string;
-
-	const deleteStore = operationStore(deleteDocumentNode);
-	const deleteMutation = mutation(deleteStore);
-
-	let open = false;
-	let loading = false;
-
-	const handleDelete = async () => {
-		loading = true;
-		await deleteMutation({ id: +id }).then((result) => {
-			if (result.error) {
-				console.error('Unable to delete', result.error);
-				addToast({
-					duration: 10000,
-					props: {
-						kind: 'error',
-						title: 'Unable to delete',
-						subtitle: result.error.message,
-					},
-				});
-				loading = false;
-				open = false;
-			} else if (result.data) {
-				console.log('Delete successful', result.data);
-				addToast({
-					duration: 10000,
-					props: {
-						kind: 'success',
-						title: 'Delete successful',
-					},
-				});
-				loading = false;
-				open = false;
-				goto(`/${$page.url.pathname.split('/')[1]}`).catch((e) => {
-					console.error(e);
-				});
-			}
-		});
-	};
 </script>
 
 <div class="grid grid-flow-col grid-rows-1 justify-end gap-4">
@@ -57,26 +16,12 @@
 		iconDescription="Edit"
 		icon={Edit16}
 	/>
-	<Button
-		kind="danger-tertiary"
-		iconDescription="Delete"
-		icon={TrashCan16}
-		on:click={() => {
-			open = true;
-		}}
-	/>
 
-	<Modal
-		danger
-		bind:open
-		modalHeading="Are you sure?"
-		primaryButtonText="Delete"
-		secondaryButtonText="Cancel"
-		on:click:button--secondary={() => {
-			open = false;
-		}}
-		on:open
-		on:close
-		on:submit={handleDelete}
-	/>
+	<DeleteModal {id} {deleteDocumentNode} />
 </div>
+
+{#if $$slots.row2}
+	<div class="grid grid-flow-col grid-rows-1 justify-end gap-4 mt-4">
+		<slot name="row2" />
+	</div>
+{/if}

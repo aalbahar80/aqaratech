@@ -2,7 +2,7 @@
 	import { ToastNotification } from 'carbon-components-svelte';
 	import { flip } from 'svelte/animate';
 	import { toasts } from '$lib/stores/toast';
-	import { fly, slide, fade } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 </script>
 
 {#if $toasts}
@@ -17,18 +17,3 @@
 		{/each}
 	</ul>
 {/if}
-
-<!-- <style lang="postcss">
-	section {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		width: 100%;
-		display: flex;
-		margin-top: 1rem;
-		justify-content: center;
-		flex-direction: column;
-		z-index: 1000;
-	}
-</style> -->
