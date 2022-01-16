@@ -12,7 +12,7 @@ export const getRedirectUri = (origin: string) => {
 	if (process.env.VERCEL) {
 		base = 'https://svelte-14dec21.vercel.app';
 	}
-	const redirectUri = encodeURI(`${base}${prefix}`);
+	const redirectUri = decodeURI(`${base}${prefix}`);
 	console.log(
 		'🚀 ~ file: auth_config.ts ~ line 18 ~ getRedirectUri ~ result',
 		redirectUri,
