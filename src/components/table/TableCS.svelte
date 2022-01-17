@@ -227,7 +227,11 @@
 				>
 					View</Button
 				>
-			{:else}{cell.value}{/if}
+			{:else}
+				<slot name="isPaid" {cell}>
+					{cell.value}
+				</slot>
+			{/if}
 		</svelte:fragment>
 	</DataTable>
 	<Pagination

@@ -61,14 +61,14 @@
     margin-left: auto;
     margin-right: auto
 }
+.mt-4 {
+    margin-top: 1rem
+}
 .mb-5 {
     margin-bottom: 1.25rem
 }
 .mt-8 {
     margin-top: 2rem
-}
-.mt-4 {
-    margin-top: 1rem
 }
 .inline {
     display: inline

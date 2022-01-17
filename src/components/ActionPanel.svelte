@@ -17,7 +17,9 @@
 		icon={Edit16}
 	/>
 
-	<DeleteModal {id} {deleteDocumentNode} />
+	<slot name="delete">
+		<DeleteModal {id} {deleteDocumentNode} />
+	</slot>
 </div>
 
 {#if $$slots.row2}

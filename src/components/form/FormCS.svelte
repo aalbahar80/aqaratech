@@ -103,7 +103,7 @@
 	const { reset, data, errors, handleSubmit } = createForm({
 		initialValues: initial(),
 		extend: [validator, reporter],
-		validateSchema: validation ?? z.object({}),
+		validateSchema: validation || z.object({}),
 		onSubmit: handleForm,
 	});
 </script>

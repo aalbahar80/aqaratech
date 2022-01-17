@@ -12,7 +12,7 @@ export const fieldList = [
 	new Field({
 		fieldName: 'amount',
 		title: 'Amount',
-		editable: true,
+		editable: false,
 		searchType: 'number',
 	}),
 	new Field({
@@ -30,8 +30,9 @@ export const fieldList = [
 	new Field({
 		fieldName: 'is_paid',
 		title: 'Paid?',
-		searchable: false,
 		inputType: 'checkbox',
+		searchable: false,
+		editable: false,
 	}),
 	new Field({
 		fieldName: 'lease_id',
@@ -49,6 +50,7 @@ export const fieldList = [
 		title: 'Receipt',
 		// TODO change
 		inputType: 'text',
+		editable: false,
 	}),
 ];
 

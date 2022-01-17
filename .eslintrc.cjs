@@ -39,6 +39,7 @@ module.exports = {
 				'import/no-duplicates': 'off',
 				'import/no-mutable-exports': 'off',
 				'import/no-unresolved': 'off',
+				'import/order': 'off',
 				// 'import/no-extraneous-dependencies': 'off',
 				"@typescript-eslint/no-unsafe-member-access": "off",
 				"@typescript-eslint/no-unsafe-assignment": "off",

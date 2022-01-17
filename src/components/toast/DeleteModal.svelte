@@ -1,14 +1,16 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { addToast } from '$lib/stores/toast';
 	import { mutation, operationStore } from '@urql/svelte';
 	import { Button, Modal } from 'carbon-components-svelte';
+	import type { ButtonProps } from 'carbon-components-svelte/types/Button/Button.svelte';
 	import { TrashCan16 } from 'carbon-icons-svelte';
 	import type { DocumentNode } from 'graphql';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let deleteDocumentNode: DocumentNode;
 	export let id: string;
+	export let buttonProps: ButtonProps | undefined = undefined;
 
 	const deleteStore = operationStore(deleteDocumentNode);
 	const deleteMutation = mutation(deleteStore);
@@ -53,6 +55,7 @@
 	on:click={() => {
 		open = true;
 	}}
+	{...buttonProps}
 />
 
 <Modal
