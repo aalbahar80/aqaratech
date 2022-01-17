@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const graphqlName = 'clients';
 
 export const fieldList: Field[] = [
-	new Field({ fieldName: 'id', title: 'ID', editable: false }),
+	new Field({ fieldName: 'id', title: 'ID', editable: false, searchType: 'number' }),
 	new Field({
 		fieldName: 'first_name',
 		title: 'First Name',
