@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import DeleteModal from '$components/toast/DeleteModal.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
@@ -9,6 +10,7 @@
 		Bullhorn16,
 		CertificateCheck16,
 		NonCertified16,
+		ShoppingCart16,
 	} from 'carbon-icons-svelte';
 	import {
 		DeleteTransactionDocument,
@@ -39,11 +41,17 @@
 	export let transaction: TransactionDetailPageStore;
 	$: id = $page.params.id;
 	query(transaction);
-	$: result = $transaction?.data?.transactions_by_pk;
+
+	let crumbs: CrumbData;
+	$: crumbs = {
+		transaction: $transaction.data?.transactions_by_pk?.id,
+		lease: $transaction.data?.transactions_by_pk?.lease_id,
+	};
 
 	const paid = $transaction.data?.transactions_by_pk?.is_paid ?? false;
 </script>
 
+<BreadCrumbs {crumbs} />
 <ActionPanel {id} deleteDocumentNode={DeleteTransactionDocument}>
 	<svelte:fragment slot="delete">
 		<DeleteModal
@@ -64,6 +72,13 @@
 			iconDescription="Send Reminder"
 			icon={Bullhorn16}
 			disabled={paid}
+		/>
+		<Button
+			kind="tertiary"
+			iconDescription="Pay"
+			icon={ShoppingCart16}
+			href={`/api/pay?amount=${$transaction.data?.transactions_by_pk?.amount}`}
+			rel="external"
 		/>
 	</svelte:fragment>
 </ActionPanel>
