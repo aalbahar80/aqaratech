@@ -2,9 +2,9 @@
 import { createClient, gql } from '@urql/core';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { TrxPublicInfo, TrxPublicInfoVariables } from './[id].json.gql';
+import type { TrxPublicInfo, TrxPublicInfoVariables } from './[id].gql';
 
-export const get: RequestHandler = async ({ params }) => {
+export const get: RequestHandler<Locals> = async ({ params }) => {
 	const { id } = params;
 
 	// check if the transaction exists
@@ -28,6 +28,13 @@ export const get: RequestHandler = async ({ params }) => {
 	const trx = result.data?.transactions[0];
 	console.log(trx);
 
+	if (!trx) {
+		return {
+			status: 404,
+			body: 'Transaction not found',
+		};
+	}
+
 	const { is_paid: isPaid, receipt_url: receiptUrl } = trx ?? {};
 
 	let url: string;
@@ -36,11 +43,16 @@ export const get: RequestHandler = async ({ params }) => {
 		// redirect to existing receipt url
 		url = receiptUrl;
 	} else if (isPaid && !receiptUrl) {
-		// display message that the transaction is paid
-		url = 'generic-ispaid';
-	} else {
+		return {
+			status: 200,
+			body: 'This transaction has been paid.',
+		};
+	} else if (!isPaid) {
 		// redirect to new payment url
-		url = await getMFUrl(1);
+		url = await getMFUrl(id);
+	} else {
+		console.error('unhandled case');
+		throw new Error('unhandled case');
 	}
 
 	return {

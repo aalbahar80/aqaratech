@@ -22,7 +22,7 @@ generates:
   src/:
     documents:
       - './src/**/*.graphql'
-      - './src/**/*.json.ts'
+      - './src/**/*.ts'
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/graphql.ts
