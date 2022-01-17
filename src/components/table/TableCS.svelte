@@ -184,7 +184,7 @@
 	);
 </script>
 
-{#if !$pageQuery.data}
+{#if !$pageQuery.data && $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
 {:else if $pageQuery.error}
 	<p>Error state here</p>
