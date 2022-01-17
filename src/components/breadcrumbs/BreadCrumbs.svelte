@@ -38,6 +38,12 @@
 			href: `/tenants/${crumbs?.tenant || ''}`,
 			id: crumbs?.tenant,
 		},
+		{
+			name: 'transactions',
+			title: 'Transaction',
+			href: `/transactions/${crumbs?.transaction || ''}`,
+			id: crumbs?.transaction,
+		},
 	];
 </script>
 
