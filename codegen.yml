@@ -20,7 +20,9 @@ generates:
     config:
       useTypeImports: true
   src/:
-    documents: './src/**/*.graphql'
+    documents:
+      - './src/**/*.graphql'
+      - './src/**/*.json.ts'
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/graphql.ts
