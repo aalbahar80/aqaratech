@@ -5,51 +5,48 @@
 	import { page } from '$app/stores';
 
 	// TODO: remove defaults
-	export let loading: boolean;
-	export let clientId: number | undefined;
-	export let propertyId: number | undefined;
-	export let unitId: number | undefined;
-	export let leaseId: number | undefined;
-	export let tenantId: number | undefined;
+	export let crumbs: CrumbData;
 
-	$: crumbs = [
+	$: crumbsData = [
 		{
 			name: 'clients',
 			title: 'Client',
-			href: `/clients/${clientId || ''}`,
-			id: clientId,
+			href: `/clients/${crumbs?.client || ''}`,
+			id: crumbs?.client,
 		},
 		{
 			name: 'properties',
 			title: 'Property',
-			href: `/properties/${propertyId || ''}`,
-			id: propertyId,
+			href: `/properties/${crumbs?.property || ''}`,
+			id: crumbs?.property,
 		},
 		{
 			name: 'units',
 			title: 'Unit',
-			href: `/units/${unitId || ''}`,
-			id: unitId,
+			href: `/units/${crumbs?.unit || ''}`,
+			id: crumbs?.unit,
 		},
 		{
 			name: 'leases',
 			title: 'Lease',
-			href: `/leases/${leaseId || ''}`,
-			id: leaseId,
+			href: `/leases/${crumbs?.lease || ''}`,
+			id: crumbs?.lease,
 		},
 		{
 			name: 'tenants',
 			title: 'Tenant',
-			href: `/tenants/${tenantId || ''}`,
-			id: tenantId,
+			href: `/tenants/${crumbs?.tenant || ''}`,
+			id: crumbs?.tenant,
 		},
 	];
 </script>
 
-<Breadcrumb skeleton={loading}>
-	{#each crumbs as { title, href, name }}
-		<BreadcrumbItem isCurrentPage={$page.url.pathname.startsWith(`/${name}`)}>
-			<Link sveltekit:prefetch {href}>{title}</Link>
-		</BreadcrumbItem>
+<Breadcrumb noTrailingSlash>
+	{#each crumbsData as { title, href, name, id }}
+		{#if id}
+			<BreadcrumbItem isCurrentPage={$page.url.pathname.startsWith(`/${name}`)}>
+				<Link sveltekit:prefetch {href}>{title}</Link>
+			</BreadcrumbItem>
+		{/if}
 	{/each}
 </Breadcrumb>

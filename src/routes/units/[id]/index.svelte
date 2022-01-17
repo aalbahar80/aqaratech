@@ -8,6 +8,7 @@
 		UnitDetailPageStore,
 	} from './_index.gql';
 	import { page } from '$app/stores';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 
 	export const prerender = true;
 
@@ -32,9 +33,15 @@
 	export let unit: UnitDetailPageStore;
 	$: id = $page.params.id;
 	query(unit);
-	$: result = $unit?.data?.units_by_pk;
+
+	let crumbs: CrumbData;
+	$: crumbs = {
+		unit: $unit.data?.units_by_pk?.id,
+		property: $unit.data?.units_by_pk?.property_id,
+	};
 </script>
 
+<BreadCrumbs {crumbs} />
 <ActionPanel {id} deleteDocumentNode={DeleteUnitDocument} />
 
 <div class="max-w-4xl mx-auto px-6">

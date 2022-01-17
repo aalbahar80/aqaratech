@@ -79,9 +79,6 @@
 .grid {
     display: grid
 }
-.hidden {
-    display: none
-}
 .min-w-full {
     min-width: 100%
 }

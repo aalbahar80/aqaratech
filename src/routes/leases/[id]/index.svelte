@@ -1,8 +1,11 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
+	import ActionPanel from '$components/ActionPanel.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
+	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
-	import ActionPanel from '$components/ActionPanel.svelte';
 	import { Button } from 'carbon-components-svelte';
 	import { DocumentExport16, Renew16 } from 'carbon-icons-svelte';
 	import {
@@ -10,7 +13,6 @@
 		LeaseDetailPageDocument,
 		LeaseDetailPageStore,
 	} from './_index.gql';
-	import { page } from '$app/stores';
 
 	export const prerender = true;
 
@@ -35,7 +37,13 @@
 	export let lease: LeaseDetailPageStore;
 	$: id = $page.params.id;
 	query(lease);
-	$: result = $lease?.data?.leases_by_pk;
+
+	let crumbs: CrumbData;
+	$: crumbs = {
+		unit: $lease.data?.leases_by_pk?.tenant_id,
+		lease: $lease.data?.leases_by_pk?.id,
+		tenant: $lease.data?.leases_by_pk?.tenant_id,
+	};
 
 	let loading = false;
 	// async function that opens a new window with the report
@@ -48,6 +56,7 @@
 	}
 </script>
 
+<BreadCrumbs {crumbs} />
 <ActionPanel {id} deleteDocumentNode={DeleteLeaseDocument}>
 	<svelte:fragment slot="row2">
 		<Button kind="tertiary" iconDescription="Renew" icon={Renew16} />

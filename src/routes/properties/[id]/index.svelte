@@ -8,6 +8,7 @@
 		PropertyDetailPageStore,
 	} from './_index.gql';
 	import { page } from '$app/stores';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 
 	export const prerender = true;
 
@@ -32,9 +33,15 @@
 	export let property: PropertyDetailPageStore;
 	$: id = $page.params.id;
 	query(property);
-	$: result = $property?.data?.properties_by_pk;
+
+	let crumbs: CrumbData;
+	$: crumbs = {
+		property: $property.data?.properties_by_pk?.id,
+		client: $property.data?.properties_by_pk?.client_id,
+	};
 </script>
 
+<BreadCrumbs {crumbs} />
 <ActionPanel {id} deleteDocumentNode={DeletePropertyDocument} />
 
 <div class="max-w-4xl mx-auto px-6">

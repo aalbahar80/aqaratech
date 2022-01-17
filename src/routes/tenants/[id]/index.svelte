@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
-	import TenantBreadcrumbs from '$components/breadcrumbs/TenantBreadcrumbs.svelte';
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 	import {
@@ -22,6 +21,7 @@
 		TenantIdScreenStore,
 		DeleteTenantDocument,
 	} from './_[id].gql';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 
 	export const prerender = true;
 
@@ -51,6 +51,12 @@
 
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
+
+	let crumbs: CrumbData;
+	$: crumbs = {
+		tenant: $tenant.data?.tenants_by_pk?.id,
+		lease: $tenant.data?.tenants_by_pk?.leases[0]?.id,
+	};
 </script>
 
 <div
@@ -59,10 +65,7 @@
 	{#if $tenant.error}
 		<p>Error: {$tenant.error.message}</p>
 	{:else if $tenant.data?.tenants_by_pk}
-		<TenantBreadcrumbs
-			loading={$tenant.fetching}
-			tenant={$tenant.data.tenants_by_pk}
-		/>
+		<BreadCrumbs {crumbs} />
 		<NextPrev {id} path={$page.url.pathname.split('/')[1]} />
 		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument} />
 		<div
