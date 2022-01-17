@@ -25,7 +25,9 @@ module.exports = {
 			{
 				devDependencies: true,
 			},
+
 		],
+		'import/order': 'off'
 	},
 	plugins: ['svelte3', '@typescript-eslint', 'import'],
 	ignorePatterns: ['*.cjs', 'svelte.config.js'],

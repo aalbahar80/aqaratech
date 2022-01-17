@@ -1,8 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { createClient, gql } from '@urql/core';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { TrxPublicInfo, TrxPublicInfoVariables } from './[id].gql';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createClient, gql } from '@urql/core';
+import { TrxPublicInfoDocument } from './[id].gql';
 
 export const get: RequestHandler<Locals> = async ({ params }) => {
 	const { id } = params;
@@ -12,6 +12,7 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 		url: 'https://hasura-xf70.onrender.com/v1/graphql',
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const trxQuery = gql`
 		query TrxPublicInfo($_eq: Int) {
 			transactions(where: { id: { _eq: $_eq } }) {
@@ -23,7 +24,7 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 	`;
 
 	const result = await client
-		.query<TrxPublicInfo, TrxPublicInfoVariables>(trxQuery, { _eq: +id })
+		.query(TrxPublicInfoDocument, { _eq: +id })
 		.toPromise();
 	const trx = result.data?.transactions[0];
 	console.log(trx);
@@ -37,28 +38,46 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 
 	const { is_paid: isPaid, receipt_url: receiptUrl } = trx ?? {};
 
-	let url: string;
-
 	if (isPaid && receiptUrl) {
-		// redirect to existing receipt url
-		url = receiptUrl;
-	} else if (isPaid && !receiptUrl) {
+		return {
+			status: 302,
+			headers: {
+				location: receiptUrl,
+			},
+		};
+	}
+	if (isPaid && !receiptUrl) {
+		console.warn(
+			`Transaction is paid but no receipt url is available.
+			This should mean that the payment was manually marked as paid.`,
+		);
 		return {
 			status: 200,
 			body: 'This transaction has been paid.',
 		};
-	} else if (!isPaid) {
-		// redirect to new payment url
-		url = await getMFUrl(id);
-	} else {
-		console.error('unhandled case');
-		throw new Error('unhandled case');
 	}
-
+	if (!isPaid) {
+		const newUrl = await getMFUrl(id);
+		if (newUrl) {
+			return {
+				status: 302,
+				headers: {
+					location: newUrl,
+				},
+			};
+		}
+		console.error('Unable to generate payment url', { newUrl });
+		return {
+			status: 500,
+			body: 'Failed to get payment url',
+		};
+	}
+	console.error(
+		'🚀 ~ file: [id].ts ~ line 69 ~ constget:RequestHandler<Locals>= ~ trx',
+		trx,
+	);
 	return {
-		status: 302,
-		headers: {
-			location: url,
-		},
+		status: 500,
+		body: 'Unknown error',
 	};
 };
