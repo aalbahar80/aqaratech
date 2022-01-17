@@ -2,7 +2,7 @@ import { dev } from '$app/env';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createClient, gql } from '@urql/core';
 import flush from 'just-flush';
-import { PaymentRelatedInfoDocument } from './myfatoorah.gql';
+import { MarkPaidDocument, PaymentRelatedInfoDocument } from './myfatoorah.gql';
 
 interface MFResponse {
 	Data: {
@@ -10,19 +10,41 @@ interface MFResponse {
 	};
 }
 
+interface MyFatoorahPaymentStatusResponse {
+	Data: {
+		InvoiceId: number;
+		CustomerReference: string;
+		InvoiceStatus: string;
+	};
+}
+
+const mfBaseUrl = import.meta.env.VITE_MYFATOORAH_BASE_URL;
+const mfToken = import.meta.env.VITE_MYFATOORAH_TOKEN;
+
+// TODO setup proper auth later as per:
+// https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
+const client = createClient({
+	url: 'https://hasura-xf70.onrender.com/v1/graphql',
+	fetchOptions: {
+		headers: {
+			'x-hasura-admin-secret': 'myadminsecret',
+		},
+	},
+});
+
 export const getMFUrl = async (id: string) => {
 	// get necessary info for payment
 
 	// TODO setup proper auth later as per:
 	// https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
-	const client = createClient({
-		url: 'https://hasura-xf70.onrender.com/v1/graphql',
-		fetchOptions: {
-			headers: {
-				'x-hasura-admin-secret': 'myadminsecret',
-			},
-		},
-	});
+	// const client = createClient({
+	// 	url: 'https://hasura-xf70.onrender.com/v1/graphql',
+	// 	fetchOptions: {
+	// 		headers: {
+	// 			'x-hasura-admin-secret': 'myadminsecret',
+	// 		},
+	// 	},
+	// });
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const paymentQuery = gql`
@@ -80,10 +102,8 @@ export const getMFUrl = async (id: string) => {
 		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone?.slice(-8),
 		// CustomerEmail: 'dev.tester.2@mailthink.net',
 		// TODO delete my phone number
+		CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
 	};
-
-	const mfBaseUrl = import.meta.env.VITE_MYFATOORAH_BASE_URL;
-	const mfToken = import.meta.env.VITE_MYFATOORAH_TOKEN;
 
 	try {
 		const res = await fetch(`${mfBaseUrl}/v2/ExecutePayment`, {
@@ -106,4 +126,67 @@ export const getMFUrl = async (id: string) => {
 		console.error(err);
 		throw err;
 	}
+};
+
+export const getPaymentStatus = async (
+	paymentId: string,
+): Promise<{ trxId: string; isPaid: boolean }> => {
+	// get payment status from myfatoorah
+	const res = await fetch(`${mfBaseUrl}/v2/GetPaymentStatus`, {
+		headers: {
+			Authorization: `Bearer ${mfToken}`,
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			PaymentId: paymentId,
+			KeyType: 'PaymentId',
+		}),
+	});
+
+	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
+
+	const isPaid = data.Data.InvoiceStatus === 'Paid';
+	const trxId = data.Data.CustomerReference;
+
+	return {
+		trxId,
+		isPaid,
+	};
+};
+
+export const markAsPaid = async (trxId: string) => {
+	// TODO how to get correct invoice URL?
+	const invoiceUrl =
+		'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const mutation = gql`
+		mutation MarkPaid($id: Int!, $is_paid: Boolean, $receipt_url: String) {
+			update_transactions_by_pk(
+				pk_columns: { id: $id }
+				_set: { is_paid: $is_paid, receipt_url: $receipt_url }
+			) {
+				id
+				is_paid
+				lease_id
+				memo
+				receipt_url
+				amount
+			}
+		}
+	`;
+
+	const result = await client
+		.mutation(MarkPaidDocument, {
+			id: +trxId,
+			receipt_url: invoiceUrl,
+		})
+		.toPromise();
+
+	if (result.error) {
+		console.error(result.error);
+	}
+
+	return result.data?.update_transactions_by_pk?.receipt_url;
 };
