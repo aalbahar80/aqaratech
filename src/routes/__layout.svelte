@@ -25,10 +25,10 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
-		// console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
-		// if (isEmpty(session.user)) {
-		// eslint-disable-next-line no-constant-condition
-		if (false) {
+		console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
+		if (isEmpty(session.user)) {
+			// eslint-disable-next-line no-constant-condition
+			// if (false) {
 			// return { redirect: '/auth/login', status: 302 };
 			return {
 				status: 302,
