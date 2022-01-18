@@ -26,8 +26,12 @@
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
 		console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
-		if (isEmpty(session.user)) {
-			// eslint-disable-next-line no-constant-condition
+		const shouldRedirect = isEmpty(session.user);
+		console.log(
+			'🚀 ~ file: __layout.svelte ~ line 31 ~ shouldRedirect',
+			shouldRedirect,
+		);
+		if (shouldRedirect) {
 			// if (false) {
 			// return { redirect: '/auth/login', status: 302 };
 			return {
