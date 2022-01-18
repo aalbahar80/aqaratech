@@ -9,9 +9,9 @@ export const getRedirectUri = (origin: string) => {
 	const prefix = '/auth/callback/';
 	let base = origin;
 
-	if (process.env.VERCEL) {
-		base = 'https://svelte-14dec21.vercel.app';
-	}
+	// if (process.env.VERCEL) {
+	// 	base = 'https://svelte-14dec21.vercel.app';
+	// }
 	const redirectUri = `${base}${prefix}`;
 	console.log(
 		'🚀 ~ file: auth_config.ts ~ line 18 ~ getRedirectUri ~ result',
