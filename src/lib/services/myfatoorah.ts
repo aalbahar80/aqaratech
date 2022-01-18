@@ -32,6 +32,9 @@ const client = createClient({
 	},
 });
 
+/**
+ * Fetches a payment URL from myfatoorah. This is used to redirect the user for payment.
+ */
 export const getMFUrl = async (id: string) => {
 	// get necessary info for payment
 
@@ -128,6 +131,9 @@ export const getMFUrl = async (id: string) => {
 	}
 };
 
+/**
+ * Fetches detailed payment status from myfatoorah.
+ */
 export const getPaymentStatus = async (
 	paymentId: string,
 ): Promise<{ trxId: string; isPaid: boolean }> => {
@@ -155,6 +161,9 @@ export const getPaymentStatus = async (
 	};
 };
 
+/**
+ * Mark transaction as paid. Fires off a mutation to Hasura to update transaction.
+ */
 export const markAsPaid = async (trxId: string) => {
 	// TODO how to get correct invoice URL?
 	const invoiceUrl =
