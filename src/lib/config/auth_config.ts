@@ -10,7 +10,8 @@ export const getRedirectUri = (url: URL) => {
 	let base = url.origin;
 
 	if (process.env.VERCEL) {
-		base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
+		base = 'http//svelte-14dec21.vercel.app';
+		// base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
 	}
 	const redirectUri = `${base}${prefix}`;
 	console.log(
