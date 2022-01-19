@@ -36,7 +36,7 @@
 			// return { redirect: '/auth/login', status: 302 };
 			return {
 				status: 302,
-				redirect: '/auth/login',
+				redirect: '/landing',
 				// headers: { location: '/auth/login' },
 			};
 		}
