@@ -35,6 +35,7 @@ async function getTokens(code: string, redirectUri: string) {
 		});
 
 		const data: TokenResponse = (await res.json()) as TokenResponse;
+		console.log('🚀 ~ file: callback.ts ~ line 38 ~ getTokens ~ data', data);
 		return data;
 	} catch (e) {
 		console.error(e);
