@@ -10,10 +10,16 @@ export const getRedirectUri = (url: URL) => {
 	let base = url.origin;
 
 	if (process.env.VERCEL) {
-		base = 'http://svelte-14dec21.vercel.app';
+		base = 'https://svelte-14dec21.vercel.app';
 		// base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
 	}
+
 	const redirectUri = `${base}${prefix}`;
+	// const redirectUri = 'https://localhost:3000/auth/callback';
+	console.log(
+		'🚀 ~ file: auth_config.ts ~ line 17 ~ getRedirectUri ~ base',
+		base,
+	);
 	console.log(
 		'🚀 ~ file: auth_config.ts ~ line 18 ~ getRedirectUri ~ result',
 		redirectUri,
