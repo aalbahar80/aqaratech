@@ -4,14 +4,14 @@ const config = {
 	// clientId: 'OhiONzkpz4sLZTpEguyjEuFVKPqY9kZ9',
 };
 
-export const getRedirectUri = (origin: string) => {
+export const getRedirectUri = (url: URL) => {
 	// const redirectUri = `${request.url.origin}/auth/callback/`;
 	const prefix = '/auth/callback/';
-	let base = origin;
+	let base = url.origin;
 
-	// if (process.env.VERCEL) {
-	// 	base = 'https://svelte-14dec21.vercel.app';
-	// }
+	if (process.env.VERCEL) {
+		base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
+	}
 	const redirectUri = `${base}${prefix}`;
 	console.log(
 		'🚀 ~ file: auth_config.ts ~ line 18 ~ getRedirectUri ~ result',

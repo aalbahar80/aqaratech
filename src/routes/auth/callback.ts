@@ -48,7 +48,7 @@ export const get: RequestHandler<Locals> = async (req) => {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		const redirectUri = getRedirectUri(req.url.origin);
+		const redirectUri = getRedirectUri(req.url);
 
 		const tokens = await getTokens(code, redirectUri);
 

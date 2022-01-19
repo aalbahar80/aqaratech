@@ -12,7 +12,7 @@ const audience = 'https://dev-eehvhdp2.eu.auth0.com/api/v2/';
 export const get: RequestHandler = (request) => {
 	const sessionId = v4();
 
-	const redirectUri = getRedirectUri(request.url.origin);
+	const redirectUri = getRedirectUri(request.url);
 
 	const query = new URLSearchParams({
 		response_type: 'code',
