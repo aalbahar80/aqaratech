@@ -23,6 +23,8 @@ export const get: RequestHandler = (request) => {
 		audience,
 	});
 	const url = `${auth0Url}?${decodeURIComponent(query.toString())}`;
+	console.log('redirecting to:');
+	console.log('🚀 ~ file: login.ts ~ line 26 ~ url', url);
 	return {
 		status: 302,
 		headers: {

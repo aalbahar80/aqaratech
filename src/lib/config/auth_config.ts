@@ -6,7 +6,7 @@ const config = {
 
 export const getRedirectUri = (url: URL) => {
 	// const redirectUri = `${request.url.origin}/auth/callback/`;
-	const prefix = '/auth/callback/';
+	const prefix = '/auth/callback';
 	let base = url.origin;
 
 	if (process.env.VERCEL) {
