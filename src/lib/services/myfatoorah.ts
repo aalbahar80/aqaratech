@@ -1,6 +1,5 @@
 import { dev } from '$app/env';
 import { logger } from '$lib/config/logger';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createClient, gql } from '@urql/core';
 import flush from 'just-flush';
 import { MarkPaidDocument, PaymentRelatedInfoDocument } from './myfatoorah.gql';
@@ -36,7 +35,7 @@ const client = createClient({
 /**
  * Fetches a payment URL from myfatoorah. This is used to redirect the user for payment.
  */
-export const getMFUrl = async (id: string) => {
+export const getMFUrl = async (id: string): Promise<string> => {
 	// get necessary info for payment
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -76,7 +75,10 @@ export const getMFUrl = async (id: string) => {
 	const trx = result.data?.transactions_by_pk;
 	const tenant = trx?.lease?.tenant;
 	if (!trx || !tenant || !trx.amount) {
-		return null;
+		logger.warn('📜 myfatoorah.ts 79 trx:', trx);
+		logger.warn('📜 myfatoorah.ts 80 tenant:', tenant);
+		logger.warn('📜 myfatoorah.ts 81 trx?.amount:', trx?.amount);
+		throw new Error('Transaction or Tenant not found');
 	}
 	const name = [
 		tenant.first_name,
