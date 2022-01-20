@@ -12,6 +12,14 @@ fragment unitDetails on units {
 	property_id
 }
 
+fragment breadcrumbsUnit on units {
+	id
+	property {
+		id
+		client_id
+	}
+}
+
 query UnitDetailPage($id: Int!) {
 	...unitById
 }
@@ -19,6 +27,7 @@ query UnitDetailPage($id: Int!) {
 fragment unitById on query_root {
 	units_by_pk(id: $id) {
 		...unitDetails
+		...breadcrumbsUnit
 	}
 }
 

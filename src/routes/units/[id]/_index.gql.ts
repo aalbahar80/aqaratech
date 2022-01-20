@@ -21,6 +21,21 @@ export type UnitDetails = {
 
 export type UnitDetailsVariables = Types.Exact<{ [key: string]: never }>;
 
+export type BreadcrumbsUnit = {
+	__typename?: 'units';
+	id: number;
+	property?:
+		| {
+				__typename?: 'properties';
+				id: number;
+				client_id?: number | null | undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type BreadcrumbsUnitVariables = Types.Exact<{ [key: string]: never }>;
+
 export type UnitDetailPageVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
 }>;
@@ -41,6 +56,14 @@ export type UnitDetailPage = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
+				property?:
+					| {
+							__typename?: 'properties';
+							id: number;
+							client_id?: number | null | undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -62,6 +85,14 @@ export type UnitById = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
+				property?:
+					| {
+							__typename?: 'properties';
+							id: number;
+							client_id?: number | null | undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -107,6 +138,36 @@ export const UnitDetails = {
 		},
 	],
 } as unknown as DocumentNode<UnitDetails, UnitDetailsVariables>;
+export const BreadcrumbsUnit = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'breadcrumbsUnit' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'units' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'property' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'client_id' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<BreadcrumbsUnit, BreadcrumbsUnitVariables>;
 export const UnitById = {
 	kind: 'Document',
 	definitions: [
@@ -140,6 +201,10 @@ export const UnitById = {
 									kind: 'FragmentSpread',
 									name: { kind: 'Name', value: 'unitDetails' },
 								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'breadcrumbsUnit' },
+								},
 							],
 						},
 					},
@@ -147,6 +212,7 @@ export const UnitById = {
 			},
 		},
 		...UnitDetails.definitions,
+		...BreadcrumbsUnit.definitions,
 	],
 } as unknown as DocumentNode<UnitById, UnitByIdVariables>;
 export const UnitDetailPageDocument = {

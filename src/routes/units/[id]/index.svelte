@@ -38,6 +38,7 @@
 	$: crumbs = {
 		unit: $unit.data?.units_by_pk?.id,
 		property: $unit.data?.units_by_pk?.property_id,
+		client: $unit.data?.units_by_pk?.property?.client_id,
 	};
 </script>
 

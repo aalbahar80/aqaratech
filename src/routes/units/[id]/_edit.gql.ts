@@ -25,6 +25,14 @@ export type UnitEditPage = {
 				bath?: any | null | undefined;
 				floor?: string | null | undefined;
 				property_id?: number | null | undefined;
+				property?:
+					| {
+							__typename?: 'properties';
+							id: number;
+							client_id?: number | null | undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
