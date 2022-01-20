@@ -24,6 +24,21 @@ export type LeaseEditPage = {
 				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
+				unit?:
+					| {
+							__typename?: 'units';
+							id: number;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client_id?: number | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;

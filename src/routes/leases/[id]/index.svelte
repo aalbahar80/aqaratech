@@ -43,6 +43,8 @@
 		unit: $lease.data?.leases_by_pk?.tenant_id,
 		lease: $lease.data?.leases_by_pk?.id,
 		tenant: $lease.data?.leases_by_pk?.tenant_id,
+		property: $lease.data?.leases_by_pk?.unit?.property?.id,
+		client: $lease.data?.leases_by_pk?.unit?.property?.client_id,
 	};
 
 	let loading = false;

@@ -5,6 +5,7 @@ query LeaseDetailPage($id: Int!) {
 fragment leaseById on query_root {
 	leases_by_pk(id: $id) {
 		...leaseDetails
+		...breadcrumbsLease
 	}
 }
 
@@ -19,6 +20,18 @@ fragment leaseDetails on leases {
 	start_date
 	tenant_id
 	unit_id
+}
+
+fragment breadcrumbsLease on leases {
+	id
+	tenant_id
+	unit {
+		id
+		property {
+			id
+			client_id
+		}
+	}
 }
 
 mutation DeleteLease($id: Int!) {

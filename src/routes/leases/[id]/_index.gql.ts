@@ -23,6 +23,21 @@ export type LeaseDetailPage = {
 				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
+				unit?:
+					| {
+							__typename?: 'units';
+							id: number;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client_id?: number | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -43,6 +58,21 @@ export type LeaseById = {
 				start_date?: string | null | undefined;
 				tenant_id?: number | null | undefined;
 				unit_id?: number | null | undefined;
+				unit?:
+					| {
+							__typename?: 'units';
+							id: number;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client_id?: number | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -65,6 +95,29 @@ export type LeaseDetails = {
 };
 
 export type LeaseDetailsVariables = Types.Exact<{ [key: string]: never }>;
+
+export type BreadcrumbsLease = {
+	__typename?: 'leases';
+	id: number;
+	tenant_id?: number | null | undefined;
+	unit?:
+		| {
+				__typename?: 'units';
+				id: number;
+				property?:
+					| {
+							__typename?: 'properties';
+							id: number;
+							client_id?: number | null | undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type BreadcrumbsLeaseVariables = Types.Exact<{ [key: string]: never }>;
 
 export type DeleteLeaseVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
@@ -106,6 +159,50 @@ export const LeaseDetails = {
 		},
 	],
 } as unknown as DocumentNode<LeaseDetails, LeaseDetailsVariables>;
+export const BreadcrumbsLease = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'breadcrumbsLease' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'leases' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'tenant_id' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'unit' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'property' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'client_id' },
+											},
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<BreadcrumbsLease, BreadcrumbsLeaseVariables>;
 export const LeaseById = {
 	kind: 'Document',
 	definitions: [
@@ -139,6 +236,10 @@ export const LeaseById = {
 									kind: 'FragmentSpread',
 									name: { kind: 'Name', value: 'leaseDetails' },
 								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'breadcrumbsLease' },
+								},
 							],
 						},
 					},
@@ -146,6 +247,7 @@ export const LeaseById = {
 			},
 		},
 		...LeaseDetails.definitions,
+		...BreadcrumbsLease.definitions,
 	],
 } as unknown as DocumentNode<LeaseById, LeaseByIdVariables>;
 export const LeaseDetailPageDocument = {
