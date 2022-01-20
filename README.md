@@ -37,20 +37,29 @@ npm run build
 
 > You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
 
-
 ## Linting
 
 Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
 
 ```bash
-yarn run check 
+yarn run check
 ```
 
 ```bash
 yarn eslint . --ext .ts,.svelte,.graphql
 ```
+
 > graphql eslint linter not fully wired up. See eslint config file.
 
 ```bash
 yarn run jest
+```
+
+## Run in external terminal
+
+```bash
+docker ps
+docker exec -it 2298007f379d bash
+cd workspaces/svelte_14dec21/
+yarn dev
 ```
