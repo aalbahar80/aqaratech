@@ -56,6 +56,9 @@
 	$: crumbs = {
 		tenant: $tenant.data?.tenants_by_pk?.id,
 		lease: $tenant.data?.tenants_by_pk?.leases[0]?.id,
+		unit: $tenant.data?.tenants_by_pk?.leases[0]?.unit?.id,
+		property: $tenant.data?.tenants_by_pk?.leases[0]?.unit?.property?.id,
+		client: $tenant.data?.tenants_by_pk?.leases[0]?.unit?.property?.client?.id,
 	};
 </script>
 
