@@ -1,3 +1,5 @@
+import { logger } from '$lib/config/logger';
+
 const config = {
 	domain: 'dev-eehvhdp2.eu.auth0.com',
 	clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
@@ -13,17 +15,10 @@ export const getRedirectUri = (url: URL) => {
 		base = 'https://svelte-14dec21.vercel.app';
 		// base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
 	}
+	logger.info('📜 auth_config.ts 18 base:', base);
 
 	const redirectUri = `${base}${prefix}`;
-	// const redirectUri = 'https://localhost:3000/auth/callback';
-	console.log(
-		'🚀 ~ file: auth_config.ts ~ line 17 ~ getRedirectUri ~ base',
-		base,
-	);
-	console.log(
-		'🚀 ~ file: auth_config.ts ~ line 18 ~ getRedirectUri ~ result',
-		redirectUri,
-	);
+	logger.info('📜 auth_config.ts 21 redirectUri:', redirectUri);
 
 	return redirectUri;
 };

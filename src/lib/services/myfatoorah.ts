@@ -1,4 +1,5 @@
 import { dev } from '$app/env';
+import { logger } from '$lib/config/logger';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createClient, gql } from '@urql/core';
 import flush from 'just-flush';
@@ -38,17 +39,6 @@ const client = createClient({
 export const getMFUrl = async (id: string) => {
 	// get necessary info for payment
 
-	// TODO setup proper auth later as per:
-	// https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
-	// const client = createClient({
-	// 	url: 'https://hasura-xf70.onrender.com/v1/graphql',
-	// 	fetchOptions: {
-	// 		headers: {
-	// 			'x-hasura-admin-secret': 'myadminsecret',
-	// 		},
-	// 	},
-	// });
-
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const paymentQuery = gql`
 		query PaymentRelatedInfo($id: Int!) {
@@ -81,7 +71,7 @@ export const getMFUrl = async (id: string) => {
 	const result = await client
 		.query(PaymentRelatedInfoDocument, { id: +id })
 		.toPromise();
-	console.log('🚀 ~ file: myfatoorah.ts ~ line 58 ~ getMFUrl ~ result', result);
+	logger.info('📜 myfatoorah.ts 84 result', result);
 
 	const trx = result.data?.transactions_by_pk;
 	const tenant = trx?.lease?.tenant;
@@ -121,12 +111,12 @@ export const getMFUrl = async (id: string) => {
 				...flush(trxData),
 			}),
 		});
-		console.log('🚀 ~ file: myfatoorah.ts ~ line 96 ~ getMFUrl ~ res', res);
+		logger.info('📜 myfatoorah.ts 125 res', res);
 		const data = (await res.json()) as MFResponse;
-		console.log('🚀 ~ file: myfatoorah.ts ~ line 98 ~ getMFUrl ~ data', data);
+		logger.info('📜 myfatoorah.ts 127 data', data);
 		return data.Data.PaymentURL;
 	} catch (err) {
-		console.error(err);
+		logger.error(err);
 		throw err;
 	}
 };

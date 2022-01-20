@@ -2,6 +2,7 @@
 	import Header from '$components/Header.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import type { GraphCacheConfig } from '$generated/graphql';
+	import { logger } from '$lib/config/logger';
 	import type { Load } from '@sveltejs/kit';
 	import { cacheExchange } from '@urql/exchange-graphcache';
 	import type {
@@ -25,15 +26,11 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
-		console.log('🚀 ~ file: __layout.svelte ~ line 30 ~ session', session);
+		logger.debug('📜 __layout.svelte 30 session', session);
+		logger.trace('📜 __layout.svelte 30 session', session);
 		const shouldRedirect = isEmpty(session.user);
-		console.log(
-			'🚀 ~ file: __layout.svelte ~ line 31 ~ shouldRedirect',
-			shouldRedirect,
-		);
+		logger.info('📜 __layout.svelte 31 shouldRedirect', shouldRedirect);
 		if (shouldRedirect) {
-			// if (false) {
-			// return { redirect: '/auth/login', status: 302 };
 			return {
 				status: 302,
 				redirect: '/landing',
