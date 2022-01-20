@@ -15,7 +15,7 @@ export const get: RequestHandler<Locals> = async (request) => {
 		console.info('📜 sms.ts 9 paymentUrl:', paymentUrl);
 
 		const params = new URLSearchParams();
-		// params.set('phone', `+965${phone}`);
+		params.set('phone', `+965${phone}`);
 		params.set('paymentUrl', paymentUrl);
 
 		const url = `${base}?${params.toString()}`;
