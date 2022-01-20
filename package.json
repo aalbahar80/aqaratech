@@ -76,9 +76,6 @@
     "just-reduce-object": "^2.0.1",
     "just-zip-it": "^3.0.1",
     "npm-check": "^5.9.2",
-    "pino": "^7.6.3",
-    "pino-logflare": "^0.3.12",
-    "pino-pretty": "^7.3.0",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.0.2",
     "prettier": "^2.4.1",
@@ -106,6 +103,9 @@
     "felte": "0.9.0",
     "graphql": "^16.0.1",
     "just-flush": "^2.0.1",
+    "pino": "^7.6.3",
+    "pino-logflare": "^0.3.12",
+    "pino-pretty": "^7.4.0",
     "urql": "^2.0.5",
     "zod": "^3.11.6"
   }
