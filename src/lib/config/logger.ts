@@ -21,13 +21,13 @@ export const logger = pino(
 		// 	env: process.env.VERCEL_ENV,
 		// 	revision: process.env.VERCEL_GITHUB_COMMIT_SHA,
 		// },
-		transport: {
-			target: 'pino-pretty',
-			options: {
-				ignore: 'pid,hostname',
-				translateTime: true,
-			},
-		},
+		// transport: {
+		// 	target: 'pino-pretty',
+		// 	options: {
+		// 		ignore: 'pid,hostname',
+		// 		translateTime: true,
+		// 	},
+		// },
 	},
 	// stream,
 );
