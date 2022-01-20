@@ -55,6 +55,11 @@
 	$: crumbs = {
 		transaction: $transaction.data?.transactions_by_pk?.id,
 		lease: $transaction.data?.transactions_by_pk?.lease_id,
+		tenant: $transaction.data?.transactions_by_pk?.lease?.tenant_id,
+		unit: $transaction.data?.transactions_by_pk?.lease?.unit?.id,
+		property: $transaction.data?.transactions_by_pk?.lease?.unit?.property?.id,
+		client:
+			$transaction.data?.transactions_by_pk?.lease?.unit?.property?.client_id,
 	};
 
 	$: paid = $transaction.data?.transactions_by_pk?.is_paid ?? false;
