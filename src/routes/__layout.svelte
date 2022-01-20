@@ -26,6 +26,7 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
+		logger.info('this is the load function');
 		logger.debug('📜 __layout.svelte 30 session', session);
 		logger.trace('📜 __layout.svelte 30 session', session);
 		const shouldRedirect = isEmpty(session.user);
