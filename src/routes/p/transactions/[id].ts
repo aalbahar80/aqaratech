@@ -1,6 +1,7 @@
+import { dev } from '$app/env';
+import { logger } from '$lib/config/logger';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createClient, gql } from '@urql/core';
 import { TrxPublicInfoDocument } from './[id].gql';
 
@@ -39,43 +40,45 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 	const { is_paid: isPaid, receipt_url: receiptUrl } = trx ?? {};
 
 	if (isPaid && receiptUrl) {
+		const dummyUrl = `https://dummyimage.com/600x400/000/fff&text=${trx.id}`;
+		const url = dev ? dummyUrl : receiptUrl;
+		logger.info(`Redirecting to receipt url: ${url}`);
 		return {
 			status: 302,
 			headers: {
-				location: receiptUrl,
+				location: url,
 			},
 		};
 	}
 	if (isPaid && !receiptUrl) {
-		console.warn(
+		logger.warn(
 			`Transaction is paid but no receipt url is available.
 			This should mean that the payment was manually marked as paid.`,
 		);
+		// TODO create better generic transaction page
 		return {
 			status: 200,
 			body: 'This transaction has been paid.',
 		};
 	}
 	if (!isPaid) {
-		const newUrl = await getMFUrl(id);
-		if (newUrl) {
+		try {
+			const url = await getMFUrl(id);
 			return {
 				status: 302,
 				headers: {
-					location: newUrl,
+					location: url,
 				},
 			};
+		} catch (err) {
+			logger.error('Unable to generate payment url', err, { err });
+			return {
+				status: 500,
+				body: 'Failed to get payment url',
+			};
 		}
-		console.error('Unable to generate payment url', { newUrl });
-		return {
-			status: 500,
-			body: 'Failed to get payment url',
-		};
 	}
-	console.error(
-		'🚀 ~ file: [id].ts ~ line 69 ~ constget:RequestHandler<Locals>= ~ trx',
-		trx,
-	);
+	logger.warn('Unhandled case', { trx });
 	return {
 		status: 500,
 		body: 'Unknown error',
