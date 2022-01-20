@@ -1,12 +1,12 @@
 fragment transactionDetails on transactions {
 	id
-    amount
-    created_at
-    due_date
-    is_paid
-    lease_id
-    memo
-    receipt_url
+	amount
+	created_at
+	due_date
+	is_paid
+	lease_id
+	memo
+	receipt_url
 }
 
 query TransactionDetailPage($id: Int!) {
