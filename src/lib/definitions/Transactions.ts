@@ -32,7 +32,6 @@ export const fieldList = [
 		title: 'Paid?',
 		inputType: 'checkbox',
 		searchable: false,
-		editable: false,
 	}),
 	new Field({
 		fieldName: 'lease_id',

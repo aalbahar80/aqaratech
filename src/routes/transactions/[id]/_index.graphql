@@ -9,6 +9,35 @@ fragment transactionDetails on transactions {
 	receipt_url
 }
 
+fragment breadcrumbs on transactions {
+	id
+	lease {
+		id
+		tenant_id
+		unit {
+			id
+			property {
+				id
+				client_id
+			}
+		}
+	}
+}
+
+fragment trxContactInfo on transactions {
+	id
+	lease {
+		tenant {
+			phone
+			email
+			user {
+				phone
+				email
+			}
+		}
+	}
+}
+
 query TransactionDetailPage($id: Int!) {
 	...transactionById
 }
@@ -16,6 +45,8 @@ query TransactionDetailPage($id: Int!) {
 fragment transactionById on query_root {
 	transactions_by_pk(id: $id) {
 		...transactionDetails
+		...breadcrumbs
+		...trxContactInfo
 	}
 }
 

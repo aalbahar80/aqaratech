@@ -7,7 +7,15 @@
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { mutation, operationStore } from '@urql/svelte';
-	import { Button, Form, FormGroup, TextInput } from 'carbon-components-svelte';
+	import {
+		Button,
+		Checkbox,
+		DatePicker,
+		DatePickerInput,
+		Form,
+		FormGroup,
+		TextInput,
+	} from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
@@ -15,6 +23,7 @@
 	import map from 'just-map-values';
 	import { z } from 'zod';
 	import { goto } from '$app/navigation';
+	import { logger } from '$lib/config/logger';
 
 	type T = $$Generic<{ id: number; [key: string]: any }>;
 
@@ -100,7 +109,7 @@
 		);
 	};
 
-	const { reset, data, errors, handleSubmit } = createForm({
+	const { reset, data, errors, handleSubmit, setField } = createForm({
 		initialValues: initial(),
 		extend: [validator, reporter],
 		validateSchema: validation || z.object({}),
@@ -114,16 +123,25 @@
 			{#if editable}
 				<ValidationMessage for={fieldName} let:messages={message}>
 					<FormGroup>
-						<TextInput
-							id={fieldName}
-							type={inputType}
-							labelText={title}
-							placeholder={title}
-							bind:value={$data[fieldName]}
-							invalid={!isEmpty($errors[fieldName])}
-							invalidText={$errors[fieldName]?.[0]}
-							pattern={fieldName === 'civilid' ? '[0-9]*' : undefined}
-						/>
+						{#if inputType === 'checkbox'}
+							<Checkbox
+								labelText={title}
+								bind:checked={$data[fieldName]}
+								id={fieldName}
+								name={fieldName}
+							/>
+						{:else}
+							<TextInput
+								id={fieldName}
+								type={inputType}
+								labelText={title}
+								placeholder={title}
+								bind:value={$data[fieldName]}
+								invalid={!isEmpty($errors[fieldName])}
+								invalidText={$errors[fieldName]?.[0]}
+								pattern={fieldName === 'civilid' ? '[0-9]*' : undefined}
+							/>
+						{/if}
 					</FormGroup>
 				</ValidationMessage>
 			{/if}
@@ -134,6 +152,9 @@
 			<Button disabled={!noErrorMsg} type="submit" skeleton={loading}>
 				{`${existing ? 'Edit' : 'Create new'} ${entity}`}
 			</Button>
+			<!-- TODO remove in production (including reset button) -->
+			<Button kind="ghost" on:click={() => console.log($data)}>Debug</Button>
+			<Button kind="ghost" on:click={() => console.log($errors)}>Errors</Button>
 		</div>
 	</Form>
 </div>

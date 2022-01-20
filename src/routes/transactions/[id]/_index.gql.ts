@@ -18,6 +18,65 @@ export type TransactionDetails = {
 
 export type TransactionDetailsVariables = Types.Exact<{ [key: string]: never }>;
 
+export type Breadcrumbs = {
+	__typename?: 'transactions';
+	id: number;
+	lease?:
+		| {
+				__typename?: 'leases';
+				id: number;
+				tenant_id?: number | null | undefined;
+				unit?:
+					| {
+							__typename?: 'units';
+							id: number;
+							property?:
+								| {
+										__typename?: 'properties';
+										id: number;
+										client_id?: number | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type BreadcrumbsVariables = Types.Exact<{ [key: string]: never }>;
+
+export type TrxContactInfo = {
+	__typename?: 'transactions';
+	id: number;
+	lease?:
+		| {
+				__typename?: 'leases';
+				tenant?:
+					| {
+							__typename?: 'tenants';
+							phone?: string | null | undefined;
+							email?: string | null | undefined;
+							user?:
+								| {
+										__typename?: 'users';
+										phone?: string | null | undefined;
+										email?: string | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type TrxContactInfoVariables = Types.Exact<{ [key: string]: never }>;
+
 export type TransactionDetailPageVariables = Types.Exact<{
 	id: Types.Scalars['Int'];
 }>;
@@ -35,6 +94,45 @@ export type TransactionDetailPage = {
 				lease_id?: number | null | undefined;
 				memo?: string | null | undefined;
 				receipt_url?: string | null | undefined;
+				lease?:
+					| {
+							__typename?: 'leases';
+							id: number;
+							tenant_id?: number | null | undefined;
+							unit?:
+								| {
+										__typename?: 'units';
+										id: number;
+										property?:
+											| {
+													__typename?: 'properties';
+													id: number;
+													client_id?: number | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+							tenant?:
+								| {
+										__typename?: 'tenants';
+										phone?: string | null | undefined;
+										email?: string | null | undefined;
+										user?:
+											| {
+													__typename?: 'users';
+													phone?: string | null | undefined;
+													email?: string | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -53,6 +151,45 @@ export type TransactionById = {
 				lease_id?: number | null | undefined;
 				memo?: string | null | undefined;
 				receipt_url?: string | null | undefined;
+				lease?:
+					| {
+							__typename?: 'leases';
+							id: number;
+							tenant_id?: number | null | undefined;
+							unit?:
+								| {
+										__typename?: 'units';
+										id: number;
+										property?:
+											| {
+													__typename?: 'properties';
+													id: number;
+													client_id?: number | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+							tenant?:
+								| {
+										__typename?: 'tenants';
+										phone?: string | null | undefined;
+										email?: string | null | undefined;
+										user?:
+											| {
+													__typename?: 'users';
+													phone?: string | null | undefined;
+													email?: string | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
@@ -98,6 +235,119 @@ export const TransactionDetails = {
 		},
 	],
 } as unknown as DocumentNode<TransactionDetails, TransactionDetailsVariables>;
+export const Breadcrumbs = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'breadcrumbs' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'transactions' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'lease' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'tenant_id' } },
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'unit' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'property' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'id' },
+														},
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'client_id' },
+														},
+													],
+												},
+											},
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<Breadcrumbs, BreadcrumbsVariables>;
+export const TrxContactInfo = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'trxContactInfo' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'transactions' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'lease' },
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{
+									kind: 'Field',
+									name: { kind: 'Name', value: 'tenant' },
+									selectionSet: {
+										kind: 'SelectionSet',
+										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
+											{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
+											{
+												kind: 'Field',
+												name: { kind: 'Name', value: 'user' },
+												selectionSet: {
+													kind: 'SelectionSet',
+													selections: [
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'phone' },
+														},
+														{
+															kind: 'Field',
+															name: { kind: 'Name', value: 'email' },
+														},
+													],
+												},
+											},
+										],
+									},
+								},
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<TrxContactInfo, TrxContactInfoVariables>;
 export const TransactionById = {
 	kind: 'Document',
 	definitions: [
@@ -131,6 +381,14 @@ export const TransactionById = {
 									kind: 'FragmentSpread',
 									name: { kind: 'Name', value: 'transactionDetails' },
 								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'breadcrumbs' },
+								},
+								{
+									kind: 'FragmentSpread',
+									name: { kind: 'Name', value: 'trxContactInfo' },
+								},
 							],
 						},
 					},
@@ -138,6 +396,8 @@ export const TransactionById = {
 			},
 		},
 		...TransactionDetails.definitions,
+		...Breadcrumbs.definitions,
+		...TrxContactInfo.definitions,
 	],
 } as unknown as DocumentNode<TransactionById, TransactionByIdVariables>;
 export const TransactionDetailPageDocument = {

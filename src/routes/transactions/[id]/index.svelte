@@ -2,16 +2,25 @@
 	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
+	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import DeleteModal from '$components/toast/DeleteModal.svelte';
+	import { logger } from '$lib/config/logger';
+	import { addToast } from '$lib/stores/toast';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
-	import { Button } from 'carbon-components-svelte';
+	import { Button, CopyButton } from 'carbon-components-svelte';
 	import {
 		Bullhorn16,
 		CertificateCheck16,
+		CopyLink16,
+		MailAll16,
+		MailAll24,
+		MailAll32,
 		NonCertified16,
 		ShoppingCart16,
 	} from 'carbon-icons-svelte';
+	import { flip } from 'svelte/animate';
+	import { fade, slide } from 'svelte/transition';
 	import {
 		DeleteTransactionDocument,
 		TransactionDetailPageDocument,
@@ -48,7 +57,33 @@
 		lease: $transaction.data?.transactions_by_pk?.lease_id,
 	};
 
-	const paid = $transaction.data?.transactions_by_pk?.is_paid ?? false;
+	$: paid = $transaction.data?.transactions_by_pk?.is_paid ?? false;
+	$: noun = paid ? 'receipt' : 'payment';
+	$: trxId = $transaction.data?.transactions_by_pk?.id;
+	$: url = `${$page.url.origin}/p/transactions/${transaction.data?.transactions_by_pk?.id}`;
+	const phone = import.meta.env.VITE_MOBILE;
+	const copy = () => navigator.clipboard.writeText(url);
+	const sendSms = async () => {
+		const res = await fetch(`/api/sms?id=${trxId}&phone=${phone}`);
+		const data = await res.json();
+		if (res.ok) {
+			addToast({
+				props: {
+					title: `SMS request sent`,
+					subtitle: `Phone: ${phone}`,
+					type: 'success',
+				},
+			});
+		} else {
+			addToast({
+				props: {
+					title: `Unable to send SMS`,
+					subtitle: `Phone: ${phone}`,
+					type: 'error',
+				},
+			});
+		}
+	};
 </script>
 
 <BreadCrumbs {crumbs} />
@@ -63,31 +98,26 @@
 	<svelte:fragment slot="row2">
 		<Button
 			kind="tertiary"
-			iconDescription={paid ? 'Mark as unpaid' : 'Mark as paid'}
-			icon={paid ? CertificateCheck16 : NonCertified16}
-			disabled
+			iconDescription={`Copy ${noun} link`}
+			icon={CopyLink16}
+			on:click={copy}
 		/>
 		<Button
 			kind="tertiary"
-			iconDescription="Send Reminder"
-			icon={Bullhorn16}
-			disabled={paid}
-		/>
-		<Button
-			kind="tertiary"
-			iconDescription="Pay"
-			icon={ShoppingCart16}
-			href={`/api/pay?amount=${$transaction.data?.transactions_by_pk?.amount}`}
-			rel="external"
+			iconDescription={`Send ${noun} link`}
+			icon={MailAll32}
+			on:click={sendSms}
 		/>
 	</svelte:fragment>
 </ActionPanel>
 
 <div class="max-w-4xl mx-auto px-6">
 	<div class="grid grid-cols-2 gap-2 mt-8 max-w-md justify-self-center">
-		{#each Object.entries($transaction.data?.transactions_by_pk || {}) as [key, value]}
-			<p>{key}</p>
-			<p>{value}</p>
+		{#each Object.entries($transaction.data?.transactions_by_pk || {}) as [key, value] (key)}
+			<div transition:slide animate:flip>
+				<p>{key}</p>
+				<p>{value}</p>
+			</div>
 		{/each}
 	</div>
 </div>

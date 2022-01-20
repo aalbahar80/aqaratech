@@ -9,7 +9,7 @@
 	export let id: string;
 </script>
 
-<div class="grid grid-flow-col grid-rows-1 justify-end gap-4">
+<div class="grid grid-flow-col grid-rows-1 justify-end gap-4 mt-20">
 	<Button
 		href={`${$page.url.pathname}/edit`}
 		kind="tertiary"
