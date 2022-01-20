@@ -63,3 +63,13 @@ docker exec -it 2298007f379d bash
 cd workspaces/svelte_14dec21/
 yarn dev
 ```
+
+## Upgrading packages
+
+```bash
+yarn upgrade-interactive --latest
+
+# for packages that use @next tag
+yarn upgrade @sveltejs/kit@next
+yarn upgrade @sveltejs/adapter-auto@next
+```
