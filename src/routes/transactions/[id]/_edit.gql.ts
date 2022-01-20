@@ -45,6 +45,7 @@ export type TransactionEditPage = {
 							tenant?:
 								| {
 										__typename?: 'tenants';
+										id: number;
 										phone?: string | null | undefined;
 										email?: string | null | undefined;
 										user?:

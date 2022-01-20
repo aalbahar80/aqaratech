@@ -28,6 +28,7 @@ fragment trxContactInfo on transactions {
 	id
 	lease {
 		tenant {
+			id
 			phone
 			email
 			user {

@@ -57,6 +57,7 @@ export type TrxContactInfo = {
 				tenant?:
 					| {
 							__typename?: 'tenants';
+							id: number;
 							phone?: string | null | undefined;
 							email?: string | null | undefined;
 							user?:
@@ -117,6 +118,7 @@ export type TransactionDetailPage = {
 							tenant?:
 								| {
 										__typename?: 'tenants';
+										id: number;
 										phone?: string | null | undefined;
 										email?: string | null | undefined;
 										user?:
@@ -174,6 +176,7 @@ export type TransactionById = {
 							tenant?:
 								| {
 										__typename?: 'tenants';
+										id: number;
 										phone?: string | null | undefined;
 										email?: string | null | undefined;
 										user?:
@@ -318,6 +321,7 @@ export const TrxContactInfo = {
 									selectionSet: {
 										kind: 'SelectionSet',
 										selections: [
+											{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 											{ kind: 'Field', name: { kind: 'Name', value: 'phone' } },
 											{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
 											{
