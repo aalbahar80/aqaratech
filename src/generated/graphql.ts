@@ -30,6 +30,7 @@ export type Scalars = {
 	numeric: any;
 	point: any;
 	timestamptz: any;
+	uuid: any;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -108,6 +109,7 @@ export type Bigint_Comparison_Exp = {
 export type Clients = {
 	__typename?: 'clients';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	/** fetch data from the table: "expenses" */
 	expenses: Array<Expenses>;
@@ -128,10 +130,12 @@ export type Clients = {
 	properties_aggregate: Properties_Aggregate;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 	/** An array relationship */
 	users: Array<Users>;
 	/** An aggregate relationship */
 	users_aggregate: Users_Aggregate;
+	uuid: Scalars['uuid'];
 };
 
 /** columns and relationships of "clients" */
@@ -248,6 +252,7 @@ export type Clients_Bool_Exp = {
 	_not?: InputMaybe<Clients_Bool_Exp>;
 	_or?: InputMaybe<Array<Clients_Bool_Exp>>;
 	civilid?: InputMaybe<Bigint_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	email?: InputMaybe<String_Comparison_Exp>;
 	expenses?: InputMaybe<Expenses_Bool_Exp>;
 	first_name?: InputMaybe<String_Comparison_Exp>;
@@ -259,13 +264,17 @@ export type Clients_Bool_Exp = {
 	properties?: InputMaybe<Properties_Bool_Exp>;
 	second_name?: InputMaybe<String_Comparison_Exp>;
 	third_name?: InputMaybe<String_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	users?: InputMaybe<Users_Bool_Exp>;
+	uuid?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "clients" */
 export type Clients_Constraint =
 	/** unique or primary key constraint */
-	'clients_pkey';
+	| 'clients_pkey'
+	/** unique or primary key constraint */
+	| 'clients_uuid_key';
 
 /** input type for incrementing numeric columns in table "clients" */
 export type Clients_Inc_Input = {
@@ -276,6 +285,7 @@ export type Clients_Inc_Input = {
 /** input type for inserting data into table "clients" */
 export type Clients_Insert_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	email?: InputMaybe<Scalars['String']>;
 	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	first_name?: InputMaybe<Scalars['String']>;
@@ -287,13 +297,16 @@ export type Clients_Insert_Input = {
 	properties?: InputMaybe<Properties_Arr_Rel_Insert_Input>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 	users?: InputMaybe<Users_Arr_Rel_Insert_Input>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
 export type Clients_Max_Fields = {
 	__typename?: 'clients_max_fields';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
@@ -301,12 +314,15 @@ export type Clients_Max_Fields = {
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** aggregate min on columns */
 export type Clients_Min_Fields = {
 	__typename?: 'clients_min_fields';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
@@ -314,6 +330,8 @@ export type Clients_Min_Fields = {
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** response of any mutation on the table "clients" */
@@ -342,6 +360,7 @@ export type Clients_On_Conflict = {
 /** Ordering options when selecting data from "clients". */
 export type Clients_Order_By = {
 	civilid?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	email?: InputMaybe<Order_By>;
 	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
 	first_name?: InputMaybe<Order_By>;
@@ -353,7 +372,9 @@ export type Clients_Order_By = {
 	properties_aggregate?: InputMaybe<Properties_Aggregate_Order_By>;
 	second_name?: InputMaybe<Order_By>;
 	third_name?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 	users_aggregate?: InputMaybe<Users_Aggregate_Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: clients */
@@ -365,6 +386,8 @@ export type Clients_Pk_Columns_Input = {
 export type Clients_Select_Column =
 	/** column name */
 	| 'civilid'
+	/** column name */
+	| 'created_at'
 	/** column name */
 	| 'email'
 	/** column name */
@@ -380,11 +403,16 @@ export type Clients_Select_Column =
 	/** column name */
 	| 'second_name'
 	/** column name */
-	| 'third_name';
+	| 'third_name'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** input type for updating data in table "clients" */
 export type Clients_Set_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	email?: InputMaybe<Scalars['String']>;
 	first_name?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -393,6 +421,8 @@ export type Clients_Set_Input = {
 	phone?: InputMaybe<Scalars['String']>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
@@ -428,6 +458,8 @@ export type Clients_Update_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'email'
 	/** column name */
 	| 'first_name'
@@ -442,7 +474,11 @@ export type Clients_Update_Column =
 	/** column name */
 	| 'second_name'
 	/** column name */
-	| 'third_name';
+	| 'third_name'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** aggregate var_pop on columns */
 export type Clients_Var_Pop_Fields = {
@@ -486,6 +522,7 @@ export type Expenses = {
 	/** An object relationship */
 	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	date_post?: Maybe<Scalars['date']>;
 	/** An object relationship */
 	expenses_type?: Maybe<Expenses_Types>;
@@ -500,6 +537,8 @@ export type Expenses = {
 	/** An object relationship */
 	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid: Scalars['uuid'];
 };
 
 /** aggregated selection of "expenses" */
@@ -583,6 +622,7 @@ export type Expenses_Bool_Exp = {
 	category?: InputMaybe<Expenses_Types_Enum_Comparison_Exp>;
 	client?: InputMaybe<Clients_Bool_Exp>;
 	client_id?: InputMaybe<Int_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	date_post?: InputMaybe<Date_Comparison_Exp>;
 	expenses_type?: InputMaybe<Expenses_Types_Bool_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
@@ -593,12 +633,16 @@ export type Expenses_Bool_Exp = {
 	property_id?: InputMaybe<Int_Comparison_Exp>;
 	unit?: InputMaybe<Units_Bool_Exp>;
 	unit_id?: InputMaybe<Int_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	uuid?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "expenses" */
 export type Expenses_Constraint =
 	/** unique or primary key constraint */
-	'expenses_pkey';
+	| 'expenses_pkey'
+	/** unique or primary key constraint */
+	| 'expenses_uuid_key';
 
 /** input type for incrementing numeric columns in table "expenses" */
 export type Expenses_Inc_Input = {
@@ -616,6 +660,7 @@ export type Expenses_Insert_Input = {
 	category?: InputMaybe<Expenses_Types_Enum>;
 	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	date_post?: InputMaybe<Scalars['date']>;
 	expenses_type?: InputMaybe<Expenses_Types_Obj_Rel_Insert_Input>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -626,6 +671,8 @@ export type Expenses_Insert_Input = {
 	property_id?: InputMaybe<Scalars['Int']>;
 	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -633,24 +680,30 @@ export type Expenses_Max_Fields = {
 	__typename?: 'expenses_max_fields';
 	amount?: Maybe<Scalars['Int']>;
 	client_id?: Maybe<Scalars['Int']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	date_post?: Maybe<Scalars['date']>;
 	id?: Maybe<Scalars['Int']>;
 	maintenance_order_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	property_id?: Maybe<Scalars['Int']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "expenses" */
 export type Expenses_Max_Order_By = {
 	amount?: InputMaybe<Order_By>;
 	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	date_post?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	maintenance_order_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	property_id?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -658,24 +711,30 @@ export type Expenses_Min_Fields = {
 	__typename?: 'expenses_min_fields';
 	amount?: Maybe<Scalars['Int']>;
 	client_id?: Maybe<Scalars['Int']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	date_post?: Maybe<Scalars['date']>;
 	id?: Maybe<Scalars['Int']>;
 	maintenance_order_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	property_id?: Maybe<Scalars['Int']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "expenses" */
 export type Expenses_Min_Order_By = {
 	amount?: InputMaybe<Order_By>;
 	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	date_post?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	maintenance_order_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	property_id?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "expenses" */
@@ -700,6 +759,7 @@ export type Expenses_Order_By = {
 	category?: InputMaybe<Order_By>;
 	client?: InputMaybe<Clients_Order_By>;
 	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	date_post?: InputMaybe<Order_By>;
 	expenses_type?: InputMaybe<Expenses_Types_Order_By>;
 	id?: InputMaybe<Order_By>;
@@ -710,6 +770,8 @@ export type Expenses_Order_By = {
 	property_id?: InputMaybe<Order_By>;
 	unit?: InputMaybe<Units_Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: expenses */
@@ -726,6 +788,8 @@ export type Expenses_Select_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'date_post'
 	/** column name */
 	| 'id'
@@ -736,19 +800,26 @@ export type Expenses_Select_Column =
 	/** column name */
 	| 'property_id'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** input type for updating data in table "expenses" */
 export type Expenses_Set_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	category?: InputMaybe<Expenses_Types_Enum>;
 	client_id?: InputMaybe<Scalars['Int']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	date_post?: InputMaybe<Scalars['date']>;
 	id?: InputMaybe<Scalars['Int']>;
 	maintenance_order_id?: InputMaybe<Scalars['Int']>;
 	memo?: InputMaybe<Scalars['String']>;
 	property_id?: InputMaybe<Scalars['Int']>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
@@ -1008,6 +1079,8 @@ export type Expenses_Update_Column =
 	/** column name */
 	| 'client_id'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'date_post'
 	/** column name */
 	| 'id'
@@ -1018,7 +1091,11 @@ export type Expenses_Update_Column =
 	/** column name */
 	| 'property_id'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** aggregate var_pop on columns */
 export type Expenses_Var_Pop_Fields = {
@@ -1558,6 +1635,7 @@ export type Leases_Variance_Order_By = {
 export type Listings = {
 	__typename?: 'listings';
 	available_on?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	description?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	is_active?: Maybe<Scalars['Boolean']>;
@@ -1566,6 +1644,7 @@ export type Listings = {
 	/** An object relationship */
 	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregated selection of "listings" */
@@ -1638,6 +1717,7 @@ export type Listings_Bool_Exp = {
 	_not?: InputMaybe<Listings_Bool_Exp>;
 	_or?: InputMaybe<Array<Listings_Bool_Exp>>;
 	available_on?: InputMaybe<Date_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	description?: InputMaybe<String_Comparison_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
 	is_active?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1645,6 +1725,7 @@ export type Listings_Bool_Exp = {
 	title?: InputMaybe<String_Comparison_Exp>;
 	unit?: InputMaybe<Units_Bool_Exp>;
 	unit_id?: InputMaybe<Int_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "listings" */
@@ -1661,6 +1742,7 @@ export type Listings_Inc_Input = {
 /** input type for inserting data into table "listings" */
 export type Listings_Insert_Input = {
 	available_on?: InputMaybe<Scalars['date']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	description?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	is_active?: InputMaybe<Scalars['Boolean']>;
@@ -1668,48 +1750,57 @@ export type Listings_Insert_Input = {
 	title?: InputMaybe<Scalars['String']>;
 	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
 export type Listings_Max_Fields = {
 	__typename?: 'listings_max_fields';
 	available_on?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	description?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	lease_length?: Maybe<Scalars['String']>;
 	title?: Maybe<Scalars['String']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by max() on columns of table "listings" */
 export type Listings_Max_Order_By = {
 	available_on?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	description?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	lease_length?: InputMaybe<Order_By>;
 	title?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Listings_Min_Fields = {
 	__typename?: 'listings_min_fields';
 	available_on?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	description?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	lease_length?: Maybe<Scalars['String']>;
 	title?: Maybe<Scalars['String']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by min() on columns of table "listings" */
 export type Listings_Min_Order_By = {
 	available_on?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	description?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	lease_length?: InputMaybe<Order_By>;
 	title?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "listings" */
@@ -1731,6 +1822,7 @@ export type Listings_On_Conflict = {
 /** Ordering options when selecting data from "listings". */
 export type Listings_Order_By = {
 	available_on?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	description?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	is_active?: InputMaybe<Order_By>;
@@ -1738,6 +1830,7 @@ export type Listings_Order_By = {
 	title?: InputMaybe<Order_By>;
 	unit?: InputMaybe<Units_Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: listings */
@@ -1750,6 +1843,8 @@ export type Listings_Select_Column =
 	/** column name */
 	| 'available_on'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'description'
 	/** column name */
 	| 'id'
@@ -1760,17 +1855,21 @@ export type Listings_Select_Column =
 	/** column name */
 	| 'title'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at';
 
 /** input type for updating data in table "listings" */
 export type Listings_Set_Input = {
 	available_on?: InputMaybe<Scalars['date']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	description?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	is_active?: InputMaybe<Scalars['Boolean']>;
 	lease_length?: InputMaybe<Scalars['String']>;
 	title?: InputMaybe<Scalars['String']>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -1830,6 +1929,8 @@ export type Listings_Update_Column =
 	/** column name */
 	| 'available_on'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'description'
 	/** column name */
 	| 'id'
@@ -1840,7 +1941,9 @@ export type Listings_Update_Column =
 	/** column name */
 	| 'title'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at';
 
 /** aggregate var_pop on columns */
 export type Listings_Var_Pop_Fields = {
@@ -1906,6 +2009,7 @@ export type Maintenance_Orders = {
 	/** An object relationship */
 	unit?: Maybe<Units>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** columns and relationships of "maintenance_orders" */
@@ -2016,6 +2120,7 @@ export type Maintenance_Orders_Bool_Exp = {
 	title?: InputMaybe<String_Comparison_Exp>;
 	unit?: InputMaybe<Units_Bool_Exp>;
 	unit_id?: InputMaybe<Int_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "maintenance_orders" */
@@ -2049,6 +2154,7 @@ export type Maintenance_Orders_Insert_Input = {
 	title?: InputMaybe<Scalars['String']>;
 	unit?: InputMaybe<Units_Obj_Rel_Insert_Input>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -2064,6 +2170,7 @@ export type Maintenance_Orders_Max_Fields = {
 	tenant_id?: Maybe<Scalars['Int']>;
 	title?: Maybe<Scalars['String']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by max() on columns of table "maintenance_orders" */
@@ -2078,6 +2185,7 @@ export type Maintenance_Orders_Max_Order_By = {
 	tenant_id?: InputMaybe<Order_By>;
 	title?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -2093,6 +2201,7 @@ export type Maintenance_Orders_Min_Fields = {
 	tenant_id?: Maybe<Scalars['Int']>;
 	title?: Maybe<Scalars['String']>;
 	unit_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by min() on columns of table "maintenance_orders" */
@@ -2107,6 +2216,7 @@ export type Maintenance_Orders_Min_Order_By = {
 	tenant_id?: InputMaybe<Order_By>;
 	title?: InputMaybe<Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "maintenance_orders" */
@@ -2149,6 +2259,7 @@ export type Maintenance_Orders_Order_By = {
 	title?: InputMaybe<Order_By>;
 	unit?: InputMaybe<Units_Order_By>;
 	unit_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: maintenance_orders */
@@ -2177,7 +2288,9 @@ export type Maintenance_Orders_Select_Column =
 	/** column name */
 	| 'title'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at';
 
 /** input type for updating data in table "maintenance_orders" */
 export type Maintenance_Orders_Set_Input = {
@@ -2191,6 +2304,7 @@ export type Maintenance_Orders_Set_Input = {
 	tenant_id?: InputMaybe<Scalars['Int']>;
 	title?: InputMaybe<Scalars['String']>;
 	unit_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -2290,7 +2404,9 @@ export type Maintenance_Orders_Update_Column =
 	/** column name */
 	| 'title'
 	/** column name */
-	| 'unit_id';
+	| 'unit_id'
+	/** column name */
+	| 'updated_at';
 
 /** aggregate var_pop on columns */
 export type Maintenance_Orders_Var_Pop_Fields = {
@@ -2931,6 +3047,7 @@ export type Properties = {
 	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
 	coordinates?: Maybe<Scalars['point']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	/** fetch data from the table: "expenses" */
 	expenses: Array<Expenses>;
 	/** An aggregate relationship */
@@ -2946,6 +3063,7 @@ export type Properties = {
 	units: Array<Units>;
 	/** An aggregate relationship */
 	units_aggregate: Units_Aggregate;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** columns and relationships of "properties" */
@@ -3077,12 +3195,14 @@ export type Properties_Bool_Exp = {
 	client?: InputMaybe<Clients_Bool_Exp>;
 	client_id?: InputMaybe<Int_Comparison_Exp>;
 	coordinates?: InputMaybe<Point_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	expenses?: InputMaybe<Expenses_Bool_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
 	maintenance_orders?: InputMaybe<Maintenance_Orders_Bool_Exp>;
 	number?: InputMaybe<String_Comparison_Exp>;
 	street?: InputMaybe<String_Comparison_Exp>;
 	units?: InputMaybe<Units_Bool_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "properties" */
@@ -3104,12 +3224,14 @@ export type Properties_Insert_Input = {
 	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	coordinates?: InputMaybe<Scalars['point']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	id?: InputMaybe<Scalars['Int']>;
 	maintenance_orders?: InputMaybe<Maintenance_Orders_Arr_Rel_Insert_Input>;
 	number?: InputMaybe<Scalars['String']>;
 	street?: InputMaybe<Scalars['String']>;
 	units?: InputMaybe<Units_Arr_Rel_Insert_Input>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -3119,9 +3241,11 @@ export type Properties_Max_Fields = {
 	avenue?: Maybe<Scalars['String']>;
 	block?: Maybe<Scalars['String']>;
 	client_id?: Maybe<Scalars['Int']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	id?: Maybe<Scalars['Int']>;
 	number?: Maybe<Scalars['String']>;
 	street?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by max() on columns of table "properties" */
@@ -3130,9 +3254,11 @@ export type Properties_Max_Order_By = {
 	avenue?: InputMaybe<Order_By>;
 	block?: InputMaybe<Order_By>;
 	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	number?: InputMaybe<Order_By>;
 	street?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -3142,9 +3268,11 @@ export type Properties_Min_Fields = {
 	avenue?: Maybe<Scalars['String']>;
 	block?: Maybe<Scalars['String']>;
 	client_id?: Maybe<Scalars['Int']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	id?: Maybe<Scalars['Int']>;
 	number?: Maybe<Scalars['String']>;
 	street?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by min() on columns of table "properties" */
@@ -3153,9 +3281,11 @@ export type Properties_Min_Order_By = {
 	avenue?: InputMaybe<Order_By>;
 	block?: InputMaybe<Order_By>;
 	client_id?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	number?: InputMaybe<Order_By>;
 	street?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "properties" */
@@ -3189,12 +3319,14 @@ export type Properties_Order_By = {
 	client?: InputMaybe<Clients_Order_By>;
 	client_id?: InputMaybe<Order_By>;
 	coordinates?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
 	id?: InputMaybe<Order_By>;
 	maintenance_orders_aggregate?: InputMaybe<Maintenance_Orders_Aggregate_Order_By>;
 	number?: InputMaybe<Order_By>;
 	street?: InputMaybe<Order_By>;
 	units_aggregate?: InputMaybe<Units_Aggregate_Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: properties */
@@ -3215,11 +3347,15 @@ export type Properties_Select_Column =
 	/** column name */
 	| 'coordinates'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'id'
 	/** column name */
 	| 'number'
 	/** column name */
-	| 'street';
+	| 'street'
+	/** column name */
+	| 'updated_at';
 
 /** input type for updating data in table "properties" */
 export type Properties_Set_Input = {
@@ -3228,9 +3364,11 @@ export type Properties_Set_Input = {
 	block?: InputMaybe<Scalars['String']>;
 	client_id?: InputMaybe<Scalars['Int']>;
 	coordinates?: InputMaybe<Scalars['point']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	id?: InputMaybe<Scalars['Int']>;
 	number?: InputMaybe<Scalars['String']>;
 	street?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -3298,11 +3436,15 @@ export type Properties_Update_Column =
 	/** column name */
 	| 'coordinates'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'id'
 	/** column name */
 	| 'number'
 	/** column name */
-	| 'street';
+	| 'street'
+	/** column name */
+	| 'updated_at';
 
 /** aggregate var_pop on columns */
 export type Properties_Var_Pop_Fields = {
@@ -3927,6 +4069,7 @@ export type Subscription_RootUsers_By_PkArgs = {
 export type Tenants = {
 	__typename?: 'tenants';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
@@ -3943,6 +4086,7 @@ export type Tenants = {
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 	/** An object relationship */
 	user?: Maybe<Users>;
 };
@@ -4025,6 +4169,7 @@ export type Tenants_Bool_Exp = {
 	_not?: InputMaybe<Tenants_Bool_Exp>;
 	_or?: InputMaybe<Array<Tenants_Bool_Exp>>;
 	civilid?: InputMaybe<Bigint_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	dob?: InputMaybe<Date_Comparison_Exp>;
 	email?: InputMaybe<String_Comparison_Exp>;
 	first_name?: InputMaybe<String_Comparison_Exp>;
@@ -4035,6 +4180,7 @@ export type Tenants_Bool_Exp = {
 	phone?: InputMaybe<String_Comparison_Exp>;
 	second_name?: InputMaybe<String_Comparison_Exp>;
 	third_name?: InputMaybe<String_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	user?: InputMaybe<Users_Bool_Exp>;
 };
 
@@ -4052,6 +4198,7 @@ export type Tenants_Inc_Input = {
 /** input type for inserting data into table "tenants" */
 export type Tenants_Insert_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
 	first_name?: InputMaybe<Scalars['String']>;
@@ -4062,6 +4209,7 @@ export type Tenants_Insert_Input = {
 	phone?: InputMaybe<Scalars['String']>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 	user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
 };
 
@@ -4069,6 +4217,7 @@ export type Tenants_Insert_Input = {
 export type Tenants_Max_Fields = {
 	__typename?: 'tenants_max_fields';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
@@ -4077,12 +4226,14 @@ export type Tenants_Max_Fields = {
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate min on columns */
 export type Tenants_Min_Fields = {
 	__typename?: 'tenants_min_fields';
 	civilid?: Maybe<Scalars['bigint']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
@@ -4091,6 +4242,7 @@ export type Tenants_Min_Fields = {
 	phone?: Maybe<Scalars['String']>;
 	second_name?: Maybe<Scalars['String']>;
 	third_name?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 /** response of any mutation on the table "tenants" */
@@ -4119,6 +4271,7 @@ export type Tenants_On_Conflict = {
 /** Ordering options when selecting data from "tenants". */
 export type Tenants_Order_By = {
 	civilid?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	dob?: InputMaybe<Order_By>;
 	email?: InputMaybe<Order_By>;
 	first_name?: InputMaybe<Order_By>;
@@ -4129,6 +4282,7 @@ export type Tenants_Order_By = {
 	phone?: InputMaybe<Order_By>;
 	second_name?: InputMaybe<Order_By>;
 	third_name?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 	user?: InputMaybe<Users_Order_By>;
 };
 
@@ -4141,6 +4295,8 @@ export type Tenants_Pk_Columns_Input = {
 export type Tenants_Select_Column =
 	/** column name */
 	| 'civilid'
+	/** column name */
+	| 'created_at'
 	/** column name */
 	| 'dob'
 	/** column name */
@@ -4156,11 +4312,14 @@ export type Tenants_Select_Column =
 	/** column name */
 	| 'second_name'
 	/** column name */
-	| 'third_name';
+	| 'third_name'
+	/** column name */
+	| 'updated_at';
 
 /** input type for updating data in table "tenants" */
 export type Tenants_Set_Input = {
 	civilid?: InputMaybe<Scalars['bigint']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
 	first_name?: InputMaybe<Scalars['String']>;
@@ -4169,6 +4328,7 @@ export type Tenants_Set_Input = {
 	phone?: InputMaybe<Scalars['String']>;
 	second_name?: InputMaybe<Scalars['String']>;
 	third_name?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -4204,6 +4364,8 @@ export type Tenants_Update_Column =
 	/** column name */
 	| 'civilid'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'dob'
 	/** column name */
 	| 'email'
@@ -4218,7 +4380,9 @@ export type Tenants_Update_Column =
 	/** column name */
 	| 'second_name'
 	/** column name */
-	| 'third_name';
+	| 'third_name'
+	/** column name */
+	| 'updated_at';
 
 /** aggregate var_pop on columns */
 export type Tenants_Var_Pop_Fields = {
@@ -4265,8 +4429,11 @@ export type Transactions = {
 	/** An object relationship */
 	lease?: Maybe<Leases>;
 	lease_id?: Maybe<Scalars['Int']>;
+	manually_marked_paid?: Maybe<Scalars['Boolean']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid: Scalars['uuid'];
 };
 
 /** aggregated selection of "transactions" */
@@ -4347,14 +4514,19 @@ export type Transactions_Bool_Exp = {
 	is_paid?: InputMaybe<Boolean_Comparison_Exp>;
 	lease?: InputMaybe<Leases_Bool_Exp>;
 	lease_id?: InputMaybe<Int_Comparison_Exp>;
+	manually_marked_paid?: InputMaybe<Boolean_Comparison_Exp>;
 	memo?: InputMaybe<String_Comparison_Exp>;
 	receipt_url?: InputMaybe<String_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	uuid?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "transactions" */
 export type Transactions_Constraint =
 	/** unique or primary key constraint */
-	'transactions_pkey';
+	| 'transactions_pkey'
+	/** unique or primary key constraint */
+	| 'transactions_uuid_key';
 
 /** input type for incrementing numeric columns in table "transactions" */
 export type Transactions_Inc_Input = {
@@ -4372,8 +4544,11 @@ export type Transactions_Insert_Input = {
 	is_paid?: InputMaybe<Scalars['Boolean']>;
 	lease?: InputMaybe<Leases_Obj_Rel_Insert_Input>;
 	lease_id?: InputMaybe<Scalars['Int']>;
+	manually_marked_paid?: InputMaybe<Scalars['Boolean']>;
 	memo?: InputMaybe<Scalars['String']>;
 	receipt_url?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -4386,6 +4561,8 @@ export type Transactions_Max_Fields = {
 	lease_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "transactions" */
@@ -4397,6 +4574,8 @@ export type Transactions_Max_Order_By = {
 	lease_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4409,6 +4588,8 @@ export type Transactions_Min_Fields = {
 	lease_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "transactions" */
@@ -4420,6 +4601,8 @@ export type Transactions_Min_Order_By = {
 	lease_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "transactions" */
@@ -4447,8 +4630,11 @@ export type Transactions_Order_By = {
 	is_paid?: InputMaybe<Order_By>;
 	lease?: InputMaybe<Leases_Order_By>;
 	lease_id?: InputMaybe<Order_By>;
+	manually_marked_paid?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: transactions */
@@ -4471,9 +4657,15 @@ export type Transactions_Select_Column =
 	/** column name */
 	| 'lease_id'
 	/** column name */
+	| 'manually_marked_paid'
+	/** column name */
 	| 'memo'
 	/** column name */
-	| 'receipt_url';
+	| 'receipt_url'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** input type for updating data in table "transactions" */
 export type Transactions_Set_Input = {
@@ -4483,8 +4675,11 @@ export type Transactions_Set_Input = {
 	id?: InputMaybe<Scalars['Int']>;
 	is_paid?: InputMaybe<Scalars['Boolean']>;
 	lease_id?: InputMaybe<Scalars['Int']>;
+	manually_marked_paid?: InputMaybe<Scalars['Boolean']>;
 	memo?: InputMaybe<Scalars['String']>;
 	receipt_url?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
@@ -4562,9 +4757,15 @@ export type Transactions_Update_Column =
 	/** column name */
 	| 'lease_id'
 	/** column name */
+	| 'manually_marked_paid'
+	/** column name */
 	| 'memo'
 	/** column name */
-	| 'receipt_url';
+	| 'receipt_url'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** aggregate var_pop on columns */
 export type Transactions_Var_Pop_Fields = {
@@ -4616,6 +4817,7 @@ export type Units = {
 	__typename?: 'units';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	/** fetch data from the table: "expenses" */
 	expenses: Array<Expenses>;
 	/** An aggregate relationship */
@@ -4643,6 +4845,7 @@ export type Units = {
 	size?: Maybe<Scalars['Int']>;
 	type?: Maybe<Scalars['String']>;
 	unit_number?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 	usage?: Maybe<Scalars['String']>;
 };
 
@@ -4797,6 +5000,7 @@ export type Units_Bool_Exp = {
 	_or?: InputMaybe<Array<Units_Bool_Exp>>;
 	bath?: InputMaybe<Numeric_Comparison_Exp>;
 	bed?: InputMaybe<Numeric_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	expenses?: InputMaybe<Expenses_Bool_Exp>;
 	floor?: InputMaybe<String_Comparison_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
@@ -4810,6 +5014,7 @@ export type Units_Bool_Exp = {
 	size?: InputMaybe<Int_Comparison_Exp>;
 	type?: InputMaybe<String_Comparison_Exp>;
 	unit_number?: InputMaybe<String_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	usage?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -4832,6 +5037,7 @@ export type Units_Inc_Input = {
 export type Units_Insert_Input = {
 	bath?: InputMaybe<Scalars['numeric']>;
 	bed?: InputMaybe<Scalars['numeric']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	expenses?: InputMaybe<Expenses_Arr_Rel_Insert_Input>;
 	floor?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
@@ -4844,6 +5050,7 @@ export type Units_Insert_Input = {
 	size?: InputMaybe<Scalars['Int']>;
 	type?: InputMaybe<Scalars['String']>;
 	unit_number?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 	usage?: InputMaybe<Scalars['String']>;
 };
 
@@ -4852,6 +5059,7 @@ export type Units_Max_Fields = {
 	__typename?: 'units_max_fields';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	floor?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	property_id?: Maybe<Scalars['Int']>;
@@ -4859,6 +5067,7 @@ export type Units_Max_Fields = {
 	size?: Maybe<Scalars['Int']>;
 	type?: Maybe<Scalars['String']>;
 	unit_number?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 	usage?: Maybe<Scalars['String']>;
 };
 
@@ -4866,6 +5075,7 @@ export type Units_Max_Fields = {
 export type Units_Max_Order_By = {
 	bath?: InputMaybe<Order_By>;
 	bed?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	floor?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	property_id?: InputMaybe<Order_By>;
@@ -4873,6 +5083,7 @@ export type Units_Max_Order_By = {
 	size?: InputMaybe<Order_By>;
 	type?: InputMaybe<Order_By>;
 	unit_number?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 	usage?: InputMaybe<Order_By>;
 };
 
@@ -4881,6 +5092,7 @@ export type Units_Min_Fields = {
 	__typename?: 'units_min_fields';
 	bath?: Maybe<Scalars['numeric']>;
 	bed?: Maybe<Scalars['numeric']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	floor?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	property_id?: Maybe<Scalars['Int']>;
@@ -4888,6 +5100,7 @@ export type Units_Min_Fields = {
 	size?: Maybe<Scalars['Int']>;
 	type?: Maybe<Scalars['String']>;
 	unit_number?: Maybe<Scalars['String']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
 	usage?: Maybe<Scalars['String']>;
 };
 
@@ -4895,6 +5108,7 @@ export type Units_Min_Fields = {
 export type Units_Min_Order_By = {
 	bath?: InputMaybe<Order_By>;
 	bed?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	floor?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	property_id?: InputMaybe<Order_By>;
@@ -4902,6 +5116,7 @@ export type Units_Min_Order_By = {
 	size?: InputMaybe<Order_By>;
 	type?: InputMaybe<Order_By>;
 	unit_number?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 	usage?: InputMaybe<Order_By>;
 };
 
@@ -4932,6 +5147,7 @@ export type Units_On_Conflict = {
 export type Units_Order_By = {
 	bath?: InputMaybe<Order_By>;
 	bed?: InputMaybe<Order_By>;
+	created_at?: InputMaybe<Order_By>;
 	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
 	floor?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
@@ -4945,6 +5161,7 @@ export type Units_Order_By = {
 	size?: InputMaybe<Order_By>;
 	type?: InputMaybe<Order_By>;
 	unit_number?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
 	usage?: InputMaybe<Order_By>;
 };
 
@@ -4960,6 +5177,8 @@ export type Units_Select_Column =
 	/** column name */
 	| 'bed'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'floor'
 	/** column name */
 	| 'id'
@@ -4974,12 +5193,15 @@ export type Units_Select_Column =
 	/** column name */
 	| 'unit_number'
 	/** column name */
+	| 'updated_at'
+	/** column name */
 	| 'usage';
 
 /** input type for updating data in table "units" */
 export type Units_Set_Input = {
 	bath?: InputMaybe<Scalars['numeric']>;
 	bed?: InputMaybe<Scalars['numeric']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	floor?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	property_id?: InputMaybe<Scalars['Int']>;
@@ -4987,6 +5209,7 @@ export type Units_Set_Input = {
 	size?: InputMaybe<Scalars['Int']>;
 	type?: InputMaybe<Scalars['String']>;
 	unit_number?: InputMaybe<Scalars['String']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
 	usage?: InputMaybe<Scalars['String']>;
 };
 
@@ -5081,6 +5304,8 @@ export type Units_Update_Column =
 	/** column name */
 	| 'bed'
 	/** column name */
+	| 'created_at'
+	/** column name */
 	| 'floor'
 	/** column name */
 	| 'id'
@@ -5094,6 +5319,8 @@ export type Units_Update_Column =
 	| 'type'
 	/** column name */
 	| 'unit_number'
+	/** column name */
+	| 'updated_at'
 	/** column name */
 	| 'usage';
 
@@ -5167,7 +5394,7 @@ export type Users = {
 	/** An object relationship */
 	client?: Maybe<Clients>;
 	client_id?: Maybe<Scalars['Int']>;
-	created_at?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	last_seen?: Maybe<Scalars['timestamptz']>;
@@ -5175,6 +5402,8 @@ export type Users = {
 	/** An object relationship */
 	tenant?: Maybe<Tenants>;
 	tenant_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid: Scalars['uuid'];
 };
 
 /** aggregated selection of "users" */
@@ -5251,13 +5480,15 @@ export type Users_Bool_Exp = {
 	auth0_id?: InputMaybe<String_Comparison_Exp>;
 	client?: InputMaybe<Clients_Bool_Exp>;
 	client_id?: InputMaybe<Int_Comparison_Exp>;
-	created_at?: InputMaybe<Date_Comparison_Exp>;
+	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	email?: InputMaybe<String_Comparison_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
 	last_seen?: InputMaybe<Timestamptz_Comparison_Exp>;
 	phone?: InputMaybe<String_Comparison_Exp>;
 	tenant?: InputMaybe<Tenants_Bool_Exp>;
 	tenant_id?: InputMaybe<Int_Comparison_Exp>;
+	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+	uuid?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -5265,7 +5496,9 @@ export type Users_Constraint =
 	/** unique or primary key constraint */
 	| 'users_pkey'
 	/** unique or primary key constraint */
-	| 'users_tenant_id_key';
+	| 'users_tenant_id_key'
+	/** unique or primary key constraint */
+	| 'users_uuid_key';
 
 /** input type for incrementing numeric columns in table "users" */
 export type Users_Inc_Input = {
@@ -5279,13 +5512,15 @@ export type Users_Insert_Input = {
 	auth0_id?: InputMaybe<Scalars['String']>;
 	client?: InputMaybe<Clients_Obj_Rel_Insert_Input>;
 	client_id?: InputMaybe<Scalars['Int']>;
-	created_at?: InputMaybe<Scalars['date']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	email?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	last_seen?: InputMaybe<Scalars['timestamptz']>;
 	phone?: InputMaybe<Scalars['String']>;
 	tenant?: InputMaybe<Tenants_Obj_Rel_Insert_Input>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -5293,12 +5528,14 @@ export type Users_Max_Fields = {
 	__typename?: 'users_max_fields';
 	auth0_id?: Maybe<Scalars['String']>;
 	client_id?: Maybe<Scalars['Int']>;
-	created_at?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	last_seen?: Maybe<Scalars['timestamptz']>;
 	phone?: Maybe<Scalars['String']>;
 	tenant_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "users" */
@@ -5311,6 +5548,8 @@ export type Users_Max_Order_By = {
 	last_seen?: InputMaybe<Order_By>;
 	phone?: InputMaybe<Order_By>;
 	tenant_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -5318,12 +5557,14 @@ export type Users_Min_Fields = {
 	__typename?: 'users_min_fields';
 	auth0_id?: Maybe<Scalars['String']>;
 	client_id?: Maybe<Scalars['Int']>;
-	created_at?: Maybe<Scalars['date']>;
+	created_at?: Maybe<Scalars['timestamptz']>;
 	email?: Maybe<Scalars['String']>;
 	id?: Maybe<Scalars['Int']>;
 	last_seen?: Maybe<Scalars['timestamptz']>;
 	phone?: Maybe<Scalars['String']>;
 	tenant_id?: Maybe<Scalars['Int']>;
+	updated_at?: Maybe<Scalars['timestamptz']>;
+	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "users" */
@@ -5336,6 +5577,8 @@ export type Users_Min_Order_By = {
 	last_seen?: InputMaybe<Order_By>;
 	phone?: InputMaybe<Order_By>;
 	tenant_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "users" */
@@ -5373,6 +5616,8 @@ export type Users_Order_By = {
 	phone?: InputMaybe<Order_By>;
 	tenant?: InputMaybe<Tenants_Order_By>;
 	tenant_id?: InputMaybe<Order_By>;
+	updated_at?: InputMaybe<Order_By>;
+	uuid?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -5397,18 +5642,24 @@ export type Users_Select_Column =
 	/** column name */
 	| 'phone'
 	/** column name */
-	| 'tenant_id';
+	| 'tenant_id'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** input type for updating data in table "users" */
 export type Users_Set_Input = {
 	auth0_id?: InputMaybe<Scalars['String']>;
 	client_id?: InputMaybe<Scalars['Int']>;
-	created_at?: InputMaybe<Scalars['date']>;
+	created_at?: InputMaybe<Scalars['timestamptz']>;
 	email?: InputMaybe<Scalars['String']>;
 	id?: InputMaybe<Scalars['Int']>;
 	last_seen?: InputMaybe<Scalars['timestamptz']>;
 	phone?: InputMaybe<Scalars['String']>;
 	tenant_id?: InputMaybe<Scalars['Int']>;
+	updated_at?: InputMaybe<Scalars['timestamptz']>;
+	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
@@ -5488,7 +5739,11 @@ export type Users_Update_Column =
 	/** column name */
 	| 'phone'
 	/** column name */
-	| 'tenant_id';
+	| 'tenant_id'
+	/** column name */
+	| 'updated_at'
+	/** column name */
+	| 'uuid';
 
 /** aggregate var_pop on columns */
 export type Users_Var_Pop_Fields = {
@@ -5533,6 +5788,19 @@ export type Users_Variance_Order_By = {
 	client_id?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	tenant_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+	_eq?: InputMaybe<Scalars['uuid']>;
+	_gt?: InputMaybe<Scalars['uuid']>;
+	_gte?: InputMaybe<Scalars['uuid']>;
+	_in?: InputMaybe<Array<Scalars['uuid']>>;
+	_is_null?: InputMaybe<Scalars['Boolean']>;
+	_lt?: InputMaybe<Scalars['uuid']>;
+	_lte?: InputMaybe<Scalars['uuid']>;
+	_neq?: InputMaybe<Scalars['uuid']>;
+	_nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
 export type WithTypename<T extends { __typename?: any }> = {
@@ -6100,6 +6368,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		email?: GraphCacheResolver<
 			WithTypename<Clients>,
 			Record<string, never>,
@@ -6170,6 +6443,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['String'] | string
 		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		users?: GraphCacheResolver<
 			WithTypename<Clients>,
 			ClientsUsersArgs,
@@ -6179,6 +6457,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Clients>,
 			ClientsUsers_AggregateArgs,
 			WithTypename<Users_Aggregate> | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	clients_aggregate?: {
@@ -6268,6 +6551,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		email?: GraphCacheResolver<
 			WithTypename<Clients_Max_Fields>,
 			Record<string, never>,
@@ -6302,6 +6590,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Clients_Max_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Clients_Max_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	clients_min_fields?: {
@@ -6310,6 +6608,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		email?: GraphCacheResolver<
 			WithTypename<Clients_Min_Fields>,
 			Record<string, never>,
@@ -6344,6 +6647,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Clients_Min_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Clients_Min_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	clients_mutation_response?: {
@@ -6463,6 +6776,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		date_post?: GraphCacheResolver<
 			WithTypename<Expenses>,
 			Record<string, never>,
@@ -6512,6 +6830,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Expenses>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Expenses>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	expenses_aggregate?: {
@@ -6626,6 +6954,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		date_post?: GraphCacheResolver<
 			WithTypename<Expenses_Max_Fields>,
 			Record<string, never>,
@@ -6655,6 +6988,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Expenses_Max_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Expenses_Max_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	expenses_min_fields?: {
@@ -6668,6 +7011,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		date_post?: GraphCacheResolver<
 			WithTypename<Expenses_Min_Fields>,
 			Record<string, never>,
@@ -6697,6 +7045,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Expenses_Min_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Expenses_Min_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	expenses_mutation_response?: {
@@ -7511,6 +7869,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['date'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		description?: GraphCacheResolver<
 			WithTypename<Listings>,
 			Record<string, never>,
@@ -7545,6 +7908,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Listings>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Listings>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	listings_aggregate?: {
@@ -7634,6 +8002,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['date'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		description?: GraphCacheResolver<
 			WithTypename<Listings_Max_Fields>,
 			Record<string, never>,
@@ -7658,6 +8031,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Listings_Max_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Listings_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	listings_min_fields?: {
@@ -7666,6 +8044,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['date'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		description?: GraphCacheResolver<
 			WithTypename<Listings_Min_Fields>,
 			Record<string, never>,
@@ -7690,6 +8073,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Listings_Min_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Listings_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	listings_mutation_response?: {
@@ -7869,6 +8257,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 	};
 	maintenance_orders_aggregate?: {
 		aggregate?: GraphCacheResolver<
@@ -8017,6 +8410,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 	};
 	maintenance_orders_min_fields?: {
 		client_id?: GraphCacheResolver<
@@ -8068,6 +8466,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Maintenance_Orders_Min_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Maintenance_Orders_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	maintenance_orders_mutation_response?: {
@@ -8302,6 +8705,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['point'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		expenses?: GraphCacheResolver<
 			WithTypename<Properties>,
 			PropertiesExpensesArgs,
@@ -8346,6 +8754,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Properties>,
 			PropertiesUnits_AggregateArgs,
 			WithTypename<Units_Aggregate> | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Properties>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	properties_aggregate?: {
@@ -8450,6 +8863,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		id?: GraphCacheResolver<
 			WithTypename<Properties_Max_Fields>,
 			Record<string, never>,
@@ -8464,6 +8882,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Properties_Max_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Properties_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	properties_min_fields?: {
@@ -8487,6 +8910,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		id?: GraphCacheResolver<
 			WithTypename<Properties_Min_Fields>,
 			Record<string, never>,
@@ -8501,6 +8929,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Properties_Min_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Properties_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	properties_mutation_response?: {
@@ -8605,6 +9038,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		dob?: GraphCacheResolver<
 			WithTypename<Tenants>,
 			Record<string, never>,
@@ -8664,6 +9102,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Tenants>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 		user?: GraphCacheResolver<
 			WithTypename<Tenants>,
@@ -8758,6 +9201,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		dob?: GraphCacheResolver<
 			WithTypename<Tenants_Max_Fields>,
 			Record<string, never>,
@@ -8797,6 +9245,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Tenants_Max_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Tenants_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	tenants_min_fields?: {
@@ -8805,6 +9258,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['bigint'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		dob?: GraphCacheResolver<
 			WithTypename<Tenants_Min_Fields>,
 			Record<string, never>,
@@ -8844,6 +9302,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Tenants_Min_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Tenants_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 	};
 	tenants_mutation_response?: {
@@ -8978,6 +9441,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
+		manually_marked_paid?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['Boolean'] | string
+		>;
 		memo?: GraphCacheResolver<
 			WithTypename<Transactions>,
 			Record<string, never>,
@@ -8987,6 +9455,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Transactions>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	transactions_aggregate?: {
@@ -9111,6 +9589,16 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['String'] | string
 		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
+		>;
 	};
 	transactions_min_fields?: {
 		amount?: GraphCacheResolver<
@@ -9147,6 +9635,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Transactions_Min_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	transactions_mutation_response?: {
@@ -9291,6 +9789,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['numeric'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		expenses?: GraphCacheResolver<
 			WithTypename<Units>,
 			UnitsExpensesArgs,
@@ -9375,6 +9878,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Units>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Units>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 		usage?: GraphCacheResolver<
 			WithTypename<Units>,
@@ -9494,6 +10002,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['numeric'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		floor?: GraphCacheResolver<
 			WithTypename<Units_Max_Fields>,
 			Record<string, never>,
@@ -9528,6 +10041,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Units_Max_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Units_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 		usage?: GraphCacheResolver<
 			WithTypename<Units_Max_Fields>,
@@ -9546,6 +10064,11 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['numeric'] | string
 		>;
+		created_at?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
 		floor?: GraphCacheResolver<
 			WithTypename<Units_Min_Fields>,
 			Record<string, never>,
@@ -9580,6 +10103,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Units_Min_Fields>,
 			Record<string, never>,
 			Scalars['String'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Units_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
 		>;
 		usage?: GraphCacheResolver<
 			WithTypename<Units_Min_Fields>,
@@ -9842,7 +10370,7 @@ export type GraphCacheResolvers = {
 		created_at?: GraphCacheResolver<
 			WithTypename<Users>,
 			Record<string, never>,
-			Scalars['date'] | string
+			Scalars['timestamptz'] | string
 		>;
 		email?: GraphCacheResolver<
 			WithTypename<Users>,
@@ -9873,6 +10401,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Users>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Users>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	users_aggregate?: {
@@ -9975,7 +10513,7 @@ export type GraphCacheResolvers = {
 		created_at?: GraphCacheResolver<
 			WithTypename<Users_Max_Fields>,
 			Record<string, never>,
-			Scalars['date'] | string
+			Scalars['timestamptz'] | string
 		>;
 		email?: GraphCacheResolver<
 			WithTypename<Users_Max_Fields>,
@@ -10001,6 +10539,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Users_Max_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Users_Max_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	users_min_fields?: {
@@ -10017,7 +10565,7 @@ export type GraphCacheResolvers = {
 		created_at?: GraphCacheResolver<
 			WithTypename<Users_Min_Fields>,
 			Record<string, never>,
-			Scalars['date'] | string
+			Scalars['timestamptz'] | string
 		>;
 		email?: GraphCacheResolver<
 			WithTypename<Users_Min_Fields>,
@@ -10043,6 +10591,16 @@ export type GraphCacheResolvers = {
 			WithTypename<Users_Min_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
+		>;
+		updated_at?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['timestamptz'] | string
+		>;
+		uuid?: GraphCacheResolver<
+			WithTypename<Users_Min_Fields>,
+			Record<string, never>,
+			Scalars['uuid'] | string
 		>;
 	};
 	users_mutation_response?: {
