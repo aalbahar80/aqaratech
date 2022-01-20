@@ -22,6 +22,45 @@ export type TransactionEditPage = {
 				lease_id?: number | null | undefined;
 				memo?: string | null | undefined;
 				receipt_url?: string | null | undefined;
+				lease?:
+					| {
+							__typename?: 'leases';
+							id: number;
+							tenant_id?: number | null | undefined;
+							unit?:
+								| {
+										__typename?: 'units';
+										id: number;
+										property?:
+											| {
+													__typename?: 'properties';
+													id: number;
+													client_id?: number | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+							tenant?:
+								| {
+										__typename?: 'tenants';
+										phone?: string | null | undefined;
+										email?: string | null | undefined;
+										user?:
+											| {
+													__typename?: 'users';
+													phone?: string | null | undefined;
+													email?: string | null | undefined;
+											  }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 		  }
 		| null
 		| undefined;
