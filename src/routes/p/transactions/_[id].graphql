@@ -1,6 +1,6 @@
-query TrxPublicInfo($uuid: uuid!) {
-	transactions_by_pk(uuid: $uuid) {
-		uuid
+query TrxPublicInfo($id: uuid!) {
+	transactions_by_pk(id: $id) {
+		id
 		is_paid
 		receipt_url
 	}

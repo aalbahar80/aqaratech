@@ -14,9 +14,7 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 		url: 'https://hasura-xf70.onrender.com/v1/graphql',
 	});
 
-	const result = await client
-		.query(TrxPublicInfoDocument, { uuid: id })
-		.toPromise();
+	const result = await client.query(TrxPublicInfoDocument, { id }).toPromise();
 	const trx = result.data?.transactions_by_pk;
 	logger.debug(f('[id].ts', 23, { trx }));
 
@@ -31,7 +29,7 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 
 	if (isPaid && receiptUrl) {
 		// TODO replace with mf url
-		const dummyUrl = `https://dummyimage.com/600x400/000/fff&text=${trx.uuid}`;
+		const dummyUrl = `https://dummyimage.com/600x400/000/fff&text=${trx.id}`;
 		const url = dev ? dummyUrl : receiptUrl;
 		logger.debug(f('[id].ts', 36, { url }));
 

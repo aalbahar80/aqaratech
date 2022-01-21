@@ -1,6 +1,5 @@
 fragment transactionDetails on transactions {
 	id
-	uuid
 	amount
 	created_at
 	due_date
@@ -40,7 +39,7 @@ fragment trxContactInfo on transactions {
 	}
 }
 
-query TransactionDetailPage($id: Int!) {
+query TransactionDetailPage($id: uuid!) {
 	...transactionById
 }
 
@@ -52,7 +51,7 @@ fragment transactionById on query_root {
 	}
 }
 
-mutation DeleteTransaction($id: Int!) {
+mutation DeleteTransaction($id: uuid!) {
 	delete_transactions_by_pk(id: $id) {
 		id
 	}

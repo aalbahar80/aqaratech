@@ -6,7 +6,7 @@ import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import { TransactionById, TransactionDetails } from './_index.gql';
 export type TransactionEditPageVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 }>;
 
 export type TransactionEditPage = {
@@ -14,8 +14,7 @@ export type TransactionEditPage = {
 	transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
-				uuid: string;
+				id: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -69,7 +68,7 @@ export type TransactionEditPage = {
 };
 
 export type UpdateTransactionVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 	_set?: Types.InputMaybe<Types.Transactions_Set_Input>;
 }>;
 
@@ -78,8 +77,7 @@ export type UpdateTransaction = {
 	update_transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
-				uuid: string;
+				id: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -105,7 +103,7 @@ export const TransactionEditPageDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 			],
@@ -135,7 +133,7 @@ export const UpdateTransactionDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 				{

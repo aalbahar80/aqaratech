@@ -25,7 +25,7 @@
 	import { goto } from '$app/navigation';
 	import { logger } from '$lib/config/logger';
 
-	type T = $$Generic<{ id: number; [key: string]: any }>;
+	type T = $$Generic<{ id: number | string; [key: string]: any }>;
 
 	export let entity: string;
 	export let fieldList: Field[];

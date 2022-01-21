@@ -7,7 +7,6 @@ export const fieldList = [
 		fieldName: 'id',
 		title: 'ID',
 		editable: false,
-		searchType: 'number',
 	}),
 	new Field({
 		fieldName: 'amount',

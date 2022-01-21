@@ -60,7 +60,7 @@ export type TenantIdScreen = {
 		| undefined;
 	transactions: Array<{
 		__typename?: 'transactions';
-		id: number;
+		id: string;
 		amount?: number | null | undefined;
 		created_at?: any | null | undefined;
 		due_date?: string | null | undefined;
@@ -136,7 +136,7 @@ export type RecentTransactions = {
 	__typename?: 'query_root';
 	transactions: Array<{
 		__typename?: 'transactions';
-		id: number;
+		id: string;
 		amount?: number | null | undefined;
 		created_at?: any | null | undefined;
 		due_date?: string | null | undefined;

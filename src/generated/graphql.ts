@@ -2689,7 +2689,7 @@ export type Mutation_RootDelete_TransactionsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Transactions_By_PkArgs = {
-	uuid: Scalars['uuid'];
+	id: Scalars['uuid'];
 };
 
 /** mutation root */
@@ -3732,7 +3732,7 @@ export type Query_RootTransactions_AggregateArgs = {
 };
 
 export type Query_RootTransactions_By_PkArgs = {
-	uuid: Scalars['uuid'];
+	id: Scalars['uuid'];
 };
 
 export type Query_RootUnitsArgs = {
@@ -4022,7 +4022,7 @@ export type Subscription_RootTransactions_AggregateArgs = {
 };
 
 export type Subscription_RootTransactions_By_PkArgs = {
-	uuid: Scalars['uuid'];
+	id: Scalars['uuid'];
 };
 
 export type Subscription_RootUnitsArgs = {
@@ -4424,7 +4424,8 @@ export type Transactions = {
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	due_date?: Maybe<Scalars['date']>;
-	id: Scalars['Int'];
+	id: Scalars['uuid'];
+	idOld: Scalars['Int'];
 	is_paid?: Maybe<Scalars['Boolean']>;
 	/** An object relationship */
 	lease?: Maybe<Leases>;
@@ -4433,7 +4434,6 @@ export type Transactions = {
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
 	updated_at?: Maybe<Scalars['timestamptz']>;
-	uuid: Scalars['uuid'];
 };
 
 /** aggregated selection of "transactions" */
@@ -4491,14 +4491,14 @@ export type Transactions_Arr_Rel_Insert_Input = {
 export type Transactions_Avg_Fields = {
 	__typename?: 'transactions_avg_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "transactions" */
 export type Transactions_Avg_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4510,7 +4510,8 @@ export type Transactions_Bool_Exp = {
 	amount?: InputMaybe<Int_Comparison_Exp>;
 	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	due_date?: InputMaybe<Date_Comparison_Exp>;
-	id?: InputMaybe<Int_Comparison_Exp>;
+	id?: InputMaybe<Uuid_Comparison_Exp>;
+	idOld?: InputMaybe<Int_Comparison_Exp>;
 	is_paid?: InputMaybe<Boolean_Comparison_Exp>;
 	lease?: InputMaybe<Leases_Bool_Exp>;
 	lease_id?: InputMaybe<Int_Comparison_Exp>;
@@ -4518,7 +4519,6 @@ export type Transactions_Bool_Exp = {
 	memo?: InputMaybe<String_Comparison_Exp>;
 	receipt_url?: InputMaybe<String_Comparison_Exp>;
 	updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-	uuid?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "transactions" */
@@ -4531,7 +4531,7 @@ export type Transactions_Constraint =
 /** input type for incrementing numeric columns in table "transactions" */
 export type Transactions_Inc_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
-	id?: InputMaybe<Scalars['Int']>;
+	idOld?: InputMaybe<Scalars['Int']>;
 	lease_id?: InputMaybe<Scalars['Int']>;
 };
 
@@ -4540,7 +4540,8 @@ export type Transactions_Insert_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	due_date?: InputMaybe<Scalars['date']>;
-	id?: InputMaybe<Scalars['Int']>;
+	id?: InputMaybe<Scalars['uuid']>;
+	idOld?: InputMaybe<Scalars['Int']>;
 	is_paid?: InputMaybe<Scalars['Boolean']>;
 	lease?: InputMaybe<Leases_Obj_Rel_Insert_Input>;
 	lease_id?: InputMaybe<Scalars['Int']>;
@@ -4548,7 +4549,6 @@ export type Transactions_Insert_Input = {
 	memo?: InputMaybe<Scalars['String']>;
 	receipt_url?: InputMaybe<Scalars['String']>;
 	updated_at?: InputMaybe<Scalars['timestamptz']>;
-	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate max on columns */
@@ -4557,12 +4557,12 @@ export type Transactions_Max_Fields = {
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	due_date?: Maybe<Scalars['date']>;
-	id?: Maybe<Scalars['Int']>;
+	id?: Maybe<Scalars['uuid']>;
+	idOld?: Maybe<Scalars['Int']>;
 	lease_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
 	updated_at?: Maybe<Scalars['timestamptz']>;
-	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by max() on columns of table "transactions" */
@@ -4571,11 +4571,11 @@ export type Transactions_Max_Order_By = {
 	created_at?: InputMaybe<Order_By>;
 	due_date?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
 	updated_at?: InputMaybe<Order_By>;
-	uuid?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4584,12 +4584,12 @@ export type Transactions_Min_Fields = {
 	amount?: Maybe<Scalars['Int']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	due_date?: Maybe<Scalars['date']>;
-	id?: Maybe<Scalars['Int']>;
+	id?: Maybe<Scalars['uuid']>;
+	idOld?: Maybe<Scalars['Int']>;
 	lease_id?: Maybe<Scalars['Int']>;
 	memo?: Maybe<Scalars['String']>;
 	receipt_url?: Maybe<Scalars['String']>;
 	updated_at?: Maybe<Scalars['timestamptz']>;
-	uuid?: Maybe<Scalars['uuid']>;
 };
 
 /** order by min() on columns of table "transactions" */
@@ -4598,11 +4598,11 @@ export type Transactions_Min_Order_By = {
 	created_at?: InputMaybe<Order_By>;
 	due_date?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
 	updated_at?: InputMaybe<Order_By>;
-	uuid?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "transactions" */
@@ -4627,6 +4627,7 @@ export type Transactions_Order_By = {
 	created_at?: InputMaybe<Order_By>;
 	due_date?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	is_paid?: InputMaybe<Order_By>;
 	lease?: InputMaybe<Leases_Order_By>;
 	lease_id?: InputMaybe<Order_By>;
@@ -4634,12 +4635,11 @@ export type Transactions_Order_By = {
 	memo?: InputMaybe<Order_By>;
 	receipt_url?: InputMaybe<Order_By>;
 	updated_at?: InputMaybe<Order_By>;
-	uuid?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: transactions */
 export type Transactions_Pk_Columns_Input = {
-	uuid: Scalars['uuid'];
+	id: Scalars['uuid'];
 };
 
 /** select columns of table "transactions" */
@@ -4653,6 +4653,8 @@ export type Transactions_Select_Column =
 	/** column name */
 	| 'id'
 	/** column name */
+	| 'idOld'
+	/** column name */
 	| 'is_paid'
 	/** column name */
 	| 'lease_id'
@@ -4663,37 +4665,35 @@ export type Transactions_Select_Column =
 	/** column name */
 	| 'receipt_url'
 	/** column name */
-	| 'updated_at'
-	/** column name */
-	| 'uuid';
+	| 'updated_at';
 
 /** input type for updating data in table "transactions" */
 export type Transactions_Set_Input = {
 	amount?: InputMaybe<Scalars['Int']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	due_date?: InputMaybe<Scalars['date']>;
-	id?: InputMaybe<Scalars['Int']>;
+	id?: InputMaybe<Scalars['uuid']>;
+	idOld?: InputMaybe<Scalars['Int']>;
 	is_paid?: InputMaybe<Scalars['Boolean']>;
 	lease_id?: InputMaybe<Scalars['Int']>;
 	manually_marked_paid?: InputMaybe<Scalars['Boolean']>;
 	memo?: InputMaybe<Scalars['String']>;
 	receipt_url?: InputMaybe<Scalars['String']>;
 	updated_at?: InputMaybe<Scalars['timestamptz']>;
-	uuid?: InputMaybe<Scalars['uuid']>;
 };
 
 /** aggregate stddev on columns */
 export type Transactions_Stddev_Fields = {
 	__typename?: 'transactions_stddev_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "transactions" */
 export type Transactions_Stddev_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4701,14 +4701,14 @@ export type Transactions_Stddev_Order_By = {
 export type Transactions_Stddev_Pop_Fields = {
 	__typename?: 'transactions_stddev_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "transactions" */
 export type Transactions_Stddev_Pop_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4716,14 +4716,14 @@ export type Transactions_Stddev_Pop_Order_By = {
 export type Transactions_Stddev_Samp_Fields = {
 	__typename?: 'transactions_stddev_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "transactions" */
 export type Transactions_Stddev_Samp_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4731,14 +4731,14 @@ export type Transactions_Stddev_Samp_Order_By = {
 export type Transactions_Sum_Fields = {
 	__typename?: 'transactions_sum_fields';
 	amount?: Maybe<Scalars['Int']>;
-	id?: Maybe<Scalars['Int']>;
+	idOld?: Maybe<Scalars['Int']>;
 	lease_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "transactions" */
 export type Transactions_Sum_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4753,6 +4753,8 @@ export type Transactions_Update_Column =
 	/** column name */
 	| 'id'
 	/** column name */
+	| 'idOld'
+	/** column name */
 	| 'is_paid'
 	/** column name */
 	| 'lease_id'
@@ -4763,22 +4765,20 @@ export type Transactions_Update_Column =
 	/** column name */
 	| 'receipt_url'
 	/** column name */
-	| 'updated_at'
-	/** column name */
-	| 'uuid';
+	| 'updated_at';
 
 /** aggregate var_pop on columns */
 export type Transactions_Var_Pop_Fields = {
 	__typename?: 'transactions_var_pop_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "transactions" */
 export type Transactions_Var_Pop_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4786,14 +4786,14 @@ export type Transactions_Var_Pop_Order_By = {
 export type Transactions_Var_Samp_Fields = {
 	__typename?: 'transactions_var_samp_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "transactions" */
 export type Transactions_Var_Samp_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -4801,14 +4801,14 @@ export type Transactions_Var_Samp_Order_By = {
 export type Transactions_Variance_Fields = {
 	__typename?: 'transactions_variance_fields';
 	amount?: Maybe<Scalars['Float']>;
-	id?: Maybe<Scalars['Float']>;
+	idOld?: Maybe<Scalars['Float']>;
 	lease_id?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "transactions" */
 export type Transactions_Variance_Order_By = {
 	amount?: InputMaybe<Order_By>;
-	id?: InputMaybe<Order_By>;
+	idOld?: InputMaybe<Order_By>;
 	lease_id?: InputMaybe<Order_By>;
 };
 
@@ -9424,6 +9424,11 @@ export type GraphCacheResolvers = {
 		id?: GraphCacheResolver<
 			WithTypename<Transactions>,
 			Record<string, never>,
+			Scalars['uuid'] | string
+		>;
+		idOld?: GraphCacheResolver<
+			WithTypename<Transactions>,
+			Record<string, never>,
 			Scalars['Int'] | string
 		>;
 		is_paid?: GraphCacheResolver<
@@ -9460,11 +9465,6 @@ export type GraphCacheResolvers = {
 			WithTypename<Transactions>,
 			Record<string, never>,
 			Scalars['timestamptz'] | string
-		>;
-		uuid?: GraphCacheResolver<
-			WithTypename<Transactions>,
-			Record<string, never>,
-			Scalars['uuid'] | string
 		>;
 	};
 	transactions_aggregate?: {
@@ -9542,7 +9542,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Avg_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9572,6 +9572,11 @@ export type GraphCacheResolvers = {
 		id?: GraphCacheResolver<
 			WithTypename<Transactions_Max_Fields>,
 			Record<string, never>,
+			Scalars['uuid'] | string
+		>;
+		idOld?: GraphCacheResolver<
+			WithTypename<Transactions_Max_Fields>,
+			Record<string, never>,
 			Scalars['Int'] | string
 		>;
 		lease_id?: GraphCacheResolver<
@@ -9593,11 +9598,6 @@ export type GraphCacheResolvers = {
 			WithTypename<Transactions_Max_Fields>,
 			Record<string, never>,
 			Scalars['timestamptz'] | string
-		>;
-		uuid?: GraphCacheResolver<
-			WithTypename<Transactions_Max_Fields>,
-			Record<string, never>,
-			Scalars['uuid'] | string
 		>;
 	};
 	transactions_min_fields?: {
@@ -9619,6 +9619,11 @@ export type GraphCacheResolvers = {
 		id?: GraphCacheResolver<
 			WithTypename<Transactions_Min_Fields>,
 			Record<string, never>,
+			Scalars['uuid'] | string
+		>;
+		idOld?: GraphCacheResolver<
+			WithTypename<Transactions_Min_Fields>,
+			Record<string, never>,
 			Scalars['Int'] | string
 		>;
 		lease_id?: GraphCacheResolver<
@@ -9641,11 +9646,6 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['timestamptz'] | string
 		>;
-		uuid?: GraphCacheResolver<
-			WithTypename<Transactions_Min_Fields>,
-			Record<string, never>,
-			Scalars['uuid'] | string
-		>;
 	};
 	transactions_mutation_response?: {
 		affected_rows?: GraphCacheResolver<
@@ -9665,7 +9665,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Stddev_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9682,7 +9682,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Stddev_Pop_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9699,7 +9699,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Stddev_Samp_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9716,7 +9716,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Int'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Sum_Fields>,
 			Record<string, never>,
 			Scalars['Int'] | string
@@ -9733,7 +9733,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Var_Pop_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9750,7 +9750,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Var_Samp_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string
@@ -9767,7 +9767,7 @@ export type GraphCacheResolvers = {
 			Record<string, never>,
 			Scalars['Float'] | string
 		>;
-		id?: GraphCacheResolver<
+		idOld?: GraphCacheResolver<
 			WithTypename<Transactions_Variance_Fields>,
 			Record<string, never>,
 			Scalars['Float'] | string

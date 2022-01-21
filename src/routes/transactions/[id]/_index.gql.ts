@@ -6,8 +6,7 @@ import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type TransactionDetails = {
 	__typename?: 'transactions';
-	id: number;
-	uuid: string;
+	id: string;
 	amount?: number | null | undefined;
 	created_at?: any | null | undefined;
 	due_date?: string | null | undefined;
@@ -21,7 +20,7 @@ export type TransactionDetailsVariables = Types.Exact<{ [key: string]: never }>;
 
 export type Breadcrumbs = {
 	__typename?: 'transactions';
-	id: number;
+	id: string;
 	lease?:
 		| {
 				__typename?: 'leases';
@@ -51,7 +50,7 @@ export type BreadcrumbsVariables = Types.Exact<{ [key: string]: never }>;
 
 export type TrxContactInfo = {
 	__typename?: 'transactions';
-	id: number;
+	id: string;
 	lease?:
 		| {
 				__typename?: 'leases';
@@ -80,7 +79,7 @@ export type TrxContactInfo = {
 export type TrxContactInfoVariables = Types.Exact<{ [key: string]: never }>;
 
 export type TransactionDetailPageVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 }>;
 
 export type TransactionDetailPage = {
@@ -88,8 +87,7 @@ export type TransactionDetailPage = {
 	transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
-				uuid: string;
+				id: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -147,8 +145,7 @@ export type TransactionById = {
 	transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
-				uuid: string;
+				id: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -204,13 +201,13 @@ export type TransactionById = {
 export type TransactionByIdVariables = Types.Exact<{ [key: string]: never }>;
 
 export type DeleteTransactionVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 }>;
 
 export type DeleteTransaction = {
 	__typename?: 'mutation_root';
 	delete_transactions_by_pk?:
-		| { __typename?: 'transactions'; id: number }
+		| { __typename?: 'transactions'; id: string }
 		| null
 		| undefined;
 };
@@ -229,7 +226,6 @@ export const TransactionDetails = {
 				kind: 'SelectionSet',
 				selections: [
 					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
-					{ kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
@@ -421,7 +417,7 @@ export const TransactionDetailPageDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 			],
@@ -454,7 +450,7 @@ export const DeleteTransactionDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 			],

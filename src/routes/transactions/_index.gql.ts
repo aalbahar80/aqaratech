@@ -18,8 +18,7 @@ export type TransactionListPage = {
 	__typename?: 'query_root';
 	transactions: Array<{
 		__typename?: 'transactions';
-		id: number;
-		uuid: string;
+		id: string;
 		amount?: number | null | undefined;
 		created_at?: any | null | undefined;
 		due_date?: string | null | undefined;

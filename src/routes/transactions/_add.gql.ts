@@ -14,8 +14,7 @@ export type AddTransaction = {
 	insert_transactions_one?:
 		| {
 				__typename?: 'transactions';
-				id: number;
-				uuid: string;
+				id: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;

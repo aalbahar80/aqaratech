@@ -19906,7 +19906,7 @@
 						"description": "delete single row from the table: \"transactions\"",
 						"args": [
 							{
-								"name": "uuid",
+								"name": "id",
 								"description": null,
 								"type": {
 									"kind": "NON_NULL",
@@ -27785,7 +27785,7 @@
 						"description": "fetch data from the table: \"transactions\" using primary key columns",
 						"args": [
 							{
-								"name": "uuid",
+								"name": "id",
 								"description": null,
 								"type": {
 									"kind": "NON_NULL",
@@ -30249,7 +30249,7 @@
 						"description": "fetch data from the table: \"transactions\" using primary key columns",
 						"args": [
 							{
-								"name": "uuid",
+								"name": "id",
 								"description": null,
 								"type": {
 									"kind": "NON_NULL",
@@ -33378,6 +33378,22 @@
 							"name": null,
 							"ofType": {
 								"kind": "SCALAR",
+								"name": "uuid",
+								"ofType": null
+							}
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "NON_NULL",
+							"name": null,
+							"ofType": {
+								"kind": "SCALAR",
 								"name": "Int",
 								"ofType": null
 							}
@@ -33465,22 +33481,6 @@
 							"kind": "SCALAR",
 							"name": "timestamptz",
 							"ofType": null
-						},
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"args": [],
-						"type": {
-							"kind": "NON_NULL",
-							"name": null,
-							"ofType": {
-								"kind": "SCALAR",
-								"name": "uuid",
-								"ofType": null
-							}
 						},
 						"isDeprecated": false,
 						"deprecationReason": null
@@ -33926,7 +33926,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -33974,7 +33974,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -34101,6 +34101,18 @@
 						"description": null,
 						"type": {
 							"kind": "INPUT_OBJECT",
+							"name": "uuid_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
 							"name": "Int_comparison_exp",
 							"ofType": null
 						},
@@ -34191,18 +34203,6 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"type": {
-							"kind": "INPUT_OBJECT",
-							"name": "uuid_comparison_exp",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -34251,7 +34251,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "SCALAR",
@@ -34323,6 +34323,18 @@
 					},
 					{
 						"name": "id",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
+							"name": "uuid",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "SCALAR",
@@ -34416,18 +34428,6 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"type": {
-							"kind": "SCALAR",
-							"name": "uuid",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -34481,6 +34481,18 @@
 						"args": [],
 						"type": {
 							"kind": "SCALAR",
+							"name": "uuid",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
 							"name": "Int",
 							"ofType": null
 						},
@@ -34530,18 +34542,6 @@
 						"type": {
 							"kind": "SCALAR",
 							"name": "timestamptz",
-							"ofType": null
-						},
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"args": [],
-						"type": {
-							"kind": "SCALAR",
-							"name": "uuid",
 							"ofType": null
 						},
 						"isDeprecated": false,
@@ -34608,6 +34608,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "idOld",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "lease_id",
 						"description": null,
 						"type": {
@@ -34645,18 +34657,6 @@
 					},
 					{
 						"name": "updated_at",
-						"description": null,
-						"type": {
-							"kind": "ENUM",
-							"name": "order_by",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -34719,6 +34719,18 @@
 						"args": [],
 						"type": {
 							"kind": "SCALAR",
+							"name": "uuid",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
+						"description": null,
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
 							"name": "Int",
 							"ofType": null
 						},
@@ -34768,18 +34780,6 @@
 						"type": {
 							"kind": "SCALAR",
 							"name": "timestamptz",
-							"ofType": null
-						},
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"args": [],
-						"type": {
-							"kind": "SCALAR",
-							"name": "uuid",
 							"ofType": null
 						},
 						"isDeprecated": false,
@@ -34846,6 +34846,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "idOld",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "lease_id",
 						"description": null,
 						"type": {
@@ -34883,18 +34895,6 @@
 					},
 					{
 						"name": "updated_at",
-						"description": null,
-						"type": {
-							"kind": "ENUM",
-							"name": "order_by",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35079,6 +35079,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "idOld",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "is_paid",
 						"description": null,
 						"type": {
@@ -35161,18 +35173,6 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"type": {
-							"kind": "ENUM",
-							"name": "order_by",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -35186,7 +35186,7 @@
 				"fields": null,
 				"inputFields": [
 					{
-						"name": "uuid",
+						"name": "id",
 						"description": null,
 						"type": {
 							"kind": "NON_NULL",
@@ -35239,6 +35239,12 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "idOld",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "is_paid",
 						"description": "column name",
 						"isDeprecated": false,
@@ -35270,12 +35276,6 @@
 					},
 					{
 						"name": "updated_at",
-						"description": "column name",
-						"isDeprecated": false,
-						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
 						"description": "column name",
 						"isDeprecated": false,
 						"deprecationReason": null
@@ -35330,6 +35330,18 @@
 						"description": null,
 						"type": {
 							"kind": "SCALAR",
+							"name": "uuid",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "idOld",
+						"description": null,
+						"type": {
+							"kind": "SCALAR",
 							"name": "Int",
 							"ofType": null
 						},
@@ -35408,18 +35420,6 @@
 						"defaultValue": null,
 						"isDeprecated": false,
 						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": null,
-						"type": {
-							"kind": "SCALAR",
-							"name": "uuid",
-							"ofType": null
-						},
-						"defaultValue": null,
-						"isDeprecated": false,
-						"deprecationReason": null
 					}
 				],
 				"interfaces": null,
@@ -35444,7 +35444,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -35492,7 +35492,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35538,7 +35538,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -35586,7 +35586,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35632,7 +35632,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -35680,7 +35680,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35726,7 +35726,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -35774,7 +35774,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35835,6 +35835,12 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "idOld",
+						"description": "column name",
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "is_paid",
 						"description": "column name",
 						"isDeprecated": false,
@@ -35869,12 +35875,6 @@
 						"description": "column name",
 						"isDeprecated": false,
 						"deprecationReason": null
-					},
-					{
-						"name": "uuid",
-						"description": "column name",
-						"isDeprecated": false,
-						"deprecationReason": null
 					}
 				],
 				"possibleTypes": null
@@ -35897,7 +35897,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -35945,7 +35945,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -35991,7 +35991,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -36039,7 +36039,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -36085,7 +36085,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"args": [],
 						"type": {
@@ -36133,7 +36133,7 @@
 						"deprecationReason": null
 					},
 					{
-						"name": "id",
+						"name": "idOld",
 						"description": null,
 						"type": {
 							"kind": "ENUM",

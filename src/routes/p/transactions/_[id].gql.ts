@@ -5,7 +5,7 @@ import type * as Types from '../../../generated/graphql';
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type TrxPublicInfoVariables = Types.Exact<{
-	uuid: Types.Scalars['uuid'];
+	id: Types.Scalars['uuid'];
 }>;
 
 export type TrxPublicInfo = {
@@ -13,7 +13,7 @@ export type TrxPublicInfo = {
 	transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				uuid: string;
+				id: string;
 				is_paid?: boolean | null | undefined;
 				receipt_url?: string | null | undefined;
 		  }
@@ -31,7 +31,7 @@ export const TrxPublicInfoDocument = {
 			variableDefinitions: [
 				{
 					kind: 'VariableDefinition',
-					variable: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
+					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
 						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -47,17 +47,17 @@ export const TrxPublicInfoDocument = {
 						arguments: [
 							{
 								kind: 'Argument',
-								name: { kind: 'Name', value: 'uuid' },
+								name: { kind: 'Name', value: 'id' },
 								value: {
 									kind: 'Variable',
-									name: { kind: 'Name', value: 'uuid' },
+									name: { kind: 'Name', value: 'id' },
 								},
 							},
 						],
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'is_paid' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'receipt_url' } },
 							],
