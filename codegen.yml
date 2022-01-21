@@ -9,6 +9,11 @@ generates:
   ./src/graphql.schema.json:
     plugins:
       - introspection
+  ./src/urql-graphql.schema.json:
+    plugins:
+      - urql-introspection
+    config:
+      useTypeImports: false
   ./src/generated/graphql.ts:
     plugins:
       - add:

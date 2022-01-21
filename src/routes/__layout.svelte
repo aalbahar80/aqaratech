@@ -22,7 +22,7 @@
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import { get } from 'svelte/store';
-	import rawSchema from '../FROMSCRIPTschema.json';
+	import rawSchema from '../urql-graphql.schema.json';
 	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
