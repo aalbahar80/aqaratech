@@ -2689,7 +2689,7 @@ export type Mutation_RootDelete_TransactionsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Transactions_By_PkArgs = {
-	id: Scalars['Int'];
+	uuid: Scalars['uuid'];
 };
 
 /** mutation root */
@@ -3732,7 +3732,7 @@ export type Query_RootTransactions_AggregateArgs = {
 };
 
 export type Query_RootTransactions_By_PkArgs = {
-	id: Scalars['Int'];
+	uuid: Scalars['uuid'];
 };
 
 export type Query_RootUnitsArgs = {
@@ -4022,7 +4022,7 @@ export type Subscription_RootTransactions_AggregateArgs = {
 };
 
 export type Subscription_RootTransactions_By_PkArgs = {
-	id: Scalars['Int'];
+	uuid: Scalars['uuid'];
 };
 
 export type Subscription_RootUnitsArgs = {
@@ -4639,7 +4639,7 @@ export type Transactions_Order_By = {
 
 /** primary key columns input for table: transactions */
 export type Transactions_Pk_Columns_Input = {
-	id: Scalars['Int'];
+	uuid: Scalars['uuid'];
 };
 
 /** select columns of table "transactions" */

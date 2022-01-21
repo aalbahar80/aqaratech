@@ -27,7 +27,7 @@ const cacheConfig = cacheExchange<GraphCacheConfig>({
 			}),
 			transactions_by_pk: (parent, args) => ({
 				__typename: 'transactions',
-				id: args.id,
+				uuid: args.uuid,
 			}),
 			expenses_by_pk: (parent, args) => ({
 				__typename: 'expenses',

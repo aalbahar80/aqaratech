@@ -6,9 +6,9 @@ schema:
         # x-hasura-role: somerole
 
 generates:
-  # ./src/graphql.schema.json:
-  #   plugins:
-  #     - introspection
+  ./src/graphql.schema.json:
+    plugins:
+      - introspection
   ./src/urql-graphql.schema.json:
     plugins:
       - urql-introspection

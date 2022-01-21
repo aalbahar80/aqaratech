@@ -2,7 +2,7 @@ import { dev } from '$app/env';
 import { logger } from '$lib/config/logger';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-import { createClient, gql } from '@urql/core';
+import { createClient } from '@urql/core';
 import { TrxPublicInfoDocument } from './[id].gql';
 
 export const get: RequestHandler<Locals> = async ({ params }) => {
@@ -13,22 +13,13 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 		url: 'https://hasura-xf70.onrender.com/v1/graphql',
 	});
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const trxQuery = gql`
-		query TrxPublicInfo($_eq: Int) {
-			transactions(where: { id: { _eq: $_eq } }) {
-				id
-				is_paid
-				receipt_url
-			}
-		}
-	`;
-
 	const result = await client
-		.query(TrxPublicInfoDocument, { _eq: +id })
+		.query(TrxPublicInfoDocument, {
+			_eq: id,
+		})
 		.toPromise();
 	const trx = result.data?.transactions[0];
-	console.log(trx);
+	logger.info('📜 [id].ts 32 trx:', trx);
 
 	if (!trx) {
 		return {

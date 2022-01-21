@@ -5497,7 +5497,7 @@
 						},
 						"args": [
 							{
-								"name": "id",
+								"name": "uuid",
 								"type": {
 									"kind": "NON_NULL",
 									"ofType": {
@@ -9310,7 +9310,7 @@
 						},
 						"args": [
 							{
-								"name": "id",
+								"name": "uuid",
 								"type": {
 									"kind": "NON_NULL",
 									"ofType": {
@@ -10923,7 +10923,7 @@
 						},
 						"args": [
 							{
-								"name": "id",
+								"name": "uuid",
 								"type": {
 									"kind": "NON_NULL",
 									"ofType": {
