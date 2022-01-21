@@ -2,7 +2,6 @@
 	import Header from '$components/Header.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import type { GraphCacheConfig } from '$generated/graphql';
-	import { f } from '$lib/config/colorLog';
 	import { logger } from '$lib/config/logger';
 	import type { Load } from '@sveltejs/kit';
 	import { cacheExchange } from '@urql/exchange-graphcache';
@@ -28,7 +27,6 @@
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
-		logger.info(f('__layout.svelte', 31, { session }));
 		const shouldRedirect = isEmpty(session.user);
 		if (shouldRedirect) {
 			return {

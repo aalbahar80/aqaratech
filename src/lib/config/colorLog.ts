@@ -1,19 +1,12 @@
-import { browser } from '$app/env';
+import colorize from '@pinojs/json-colorizer';
 import { logger } from './logger';
-// import colorize from '@pinojs/json-colorizer';
 
 /**
  * Custom log helper for use in development.
- * Enhances log with color.
+ * Enhances log with color. Can't be used in browser (.svelte) files.
  */
-export const f = async (file: string, line: number, object: any) => {
+export const f = (file: string, line: number, object: any) => {
 	const loc = `${file} ~ ${line}`;
 	logger.debug({ loc }, 'trying to colorize');
-	if (browser) {
-		return loc;
-	} else {
-		let colorize;
-		colorize = await import('@pinojs/json-colorizer');
-		return colorize.default({ loc, object }, { pretty: true });
-	}
+	return colorize({ loc, object }, { pretty: true });
 };
