@@ -1,3 +1,4 @@
+import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 
 const config = {
@@ -15,10 +16,10 @@ export const getRedirectUri = (url: URL) => {
 		base = 'https://svelte-14dec21.vercel.app';
 		// base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
 	}
-	logger.info('📜 auth_config.ts 18 base:', base);
+	logger.info(f('auth_config.ts', 25, { base }));
 
 	const redirectUri = `${base}${prefix}`;
-	logger.info('📜 auth_config.ts 21 redirectUri:', redirectUri);
+	logger.info(f('auth_config.ts', 22, { redirectUri }));
 
 	return redirectUri;
 };

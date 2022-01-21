@@ -22,12 +22,15 @@ export const logger = pino(
 		// 	env: process.env.VERCEL_ENV,
 		// 	revision: process.env.VERCEL_GITHUB_COMMIT_SHA,
 		// },
+		// prettyPrint: true,
 		transport: dev
 			? {
 					target: 'pino-pretty',
 					options: {
 						ignore: 'pid,hostname',
-						translateTime: true,
+						// translateTime: true,
+						translateTime: 'HH:MM:ss.l',
+						// singleLine: true,
 					},
 			  }
 			: undefined,

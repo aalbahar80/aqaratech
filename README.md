@@ -61,6 +61,9 @@ yarn run jest
 docker ps
 docker exec -it 2298007f379d bash
 cd workspaces/svelte_14dec21/
+
+node --inspect node_modules/.bin/svelte-kit dev
+# or
 yarn dev
 ```
 
