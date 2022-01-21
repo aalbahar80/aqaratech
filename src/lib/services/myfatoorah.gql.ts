@@ -5,7 +5,7 @@ import type * as Types from '../../generated/graphql';
 import type { OperationStore } from '@urql/svelte';
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type PaymentRelatedInfoVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 }>;
 
 export type PaymentRelatedInfo = {
@@ -13,7 +13,7 @@ export type PaymentRelatedInfo = {
 	transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
+				id: string;
 				amount?: number | null | undefined;
 				receipt_url?: string | null | undefined;
 				memo?: string | null | undefined;
@@ -52,7 +52,7 @@ export type PaymentRelatedInfo = {
 };
 
 export type MarkPaidVariables = Types.Exact<{
-	id: Types.Scalars['Int'];
+	id: Types.Scalars['uuid'];
 	is_paid?: Types.InputMaybe<Types.Scalars['Boolean']>;
 	receipt_url?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
@@ -62,7 +62,7 @@ export type MarkPaid = {
 	update_transactions_by_pk?:
 		| {
 				__typename?: 'transactions';
-				id: number;
+				id: string;
 				is_paid?: boolean | null | undefined;
 				lease_id?: number | null | undefined;
 				memo?: string | null | undefined;
@@ -86,7 +86,7 @@ export const PaymentRelatedInfoDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 			],
@@ -196,7 +196,7 @@ export const MarkPaidDocument = {
 					variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
 					type: {
 						kind: 'NonNullType',
-						type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+						type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
 					},
 				},
 				{

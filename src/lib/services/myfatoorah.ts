@@ -40,7 +40,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const paymentQuery = gql`
-		query PaymentRelatedInfo($id: Int!) {
+		query PaymentRelatedInfo($id: uuid!) {
 			transactions_by_pk(id: $id) {
 				id
 				amount
@@ -68,7 +68,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 	`;
 
 	const result = await client
-		.query(PaymentRelatedInfoDocument, { id: +id })
+		.query(PaymentRelatedInfoDocument, { id })
 		.toPromise();
 	logger.info('📜 myfatoorah.ts 84 result', result);
 
@@ -163,7 +163,7 @@ export const markAsPaid = async (trxId: string) => {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const mutation = gql`
-		mutation MarkPaid($id: Int!, $is_paid: Boolean, $receipt_url: String) {
+		mutation MarkPaid($id: uuid!, $is_paid: Boolean, $receipt_url: String) {
 			update_transactions_by_pk(
 				pk_columns: { id: $id }
 				_set: { is_paid: $is_paid, receipt_url: $receipt_url }
@@ -180,7 +180,7 @@ export const markAsPaid = async (trxId: string) => {
 
 	const result = await client
 		.mutation(MarkPaidDocument, {
-			id: +trxId,
+			id: trxId,
 			receipt_url: invoiceUrl,
 		})
 		.toPromise();
