@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable import/prefer-default-export */
+import { f } from '$lib/config/colorLog';
+import { logger } from '$lib/config/logger';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const post: RequestHandler = async (request) => {
@@ -12,7 +12,7 @@ export const post: RequestHandler = async (request) => {
 		method: request.method,
 		body: request.rawBody,
 	});
-
+	logger.debug(f('graphql.ts', 13, { res }));
 	const data = await res.json();
 	return {
 		status: res.status,
