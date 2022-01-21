@@ -55,6 +55,7 @@ config:
 
   scalars:
     date: string
+    uuid: string
     # UnsignedInt: number
     # URL: string
     # JSON: any # string | number | boolean | null | Array<Scalars['JSON']> | Scalars['JSONObject']

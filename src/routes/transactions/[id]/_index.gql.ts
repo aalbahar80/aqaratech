@@ -7,6 +7,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 export type TransactionDetails = {
 	__typename?: 'transactions';
 	id: number;
+	uuid: string;
 	amount?: number | null | undefined;
 	created_at?: any | null | undefined;
 	due_date?: string | null | undefined;
@@ -88,6 +89,7 @@ export type TransactionDetailPage = {
 		| {
 				__typename?: 'transactions';
 				id: number;
+				uuid: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -146,6 +148,7 @@ export type TransactionById = {
 		| {
 				__typename?: 'transactions';
 				id: number;
+				uuid: string;
 				amount?: number | null | undefined;
 				created_at?: any | null | undefined;
 				due_date?: string | null | undefined;
@@ -226,6 +229,7 @@ export const TransactionDetails = {
 				kind: 'SelectionSet',
 				selections: [
 					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'amount' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'due_date' } },

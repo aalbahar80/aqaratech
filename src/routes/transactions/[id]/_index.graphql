@@ -1,5 +1,6 @@
 fragment transactionDetails on transactions {
 	id
+	uuid
 	amount
 	created_at
 	due_date

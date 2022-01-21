@@ -30,7 +30,7 @@ export type Scalars = {
 	numeric: any;
 	point: any;
 	timestamptz: any;
-	uuid: any;
+	uuid: string;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
