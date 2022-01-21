@@ -1,25 +1,24 @@
 import { dev } from '$app/env';
+import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
 import { createClient } from '@urql/core';
-import { TrxPublicInfoDocument } from './[id].gql';
+import { TrxPublicInfoDocument } from './_[id].gql';
 
 export const get: RequestHandler<Locals> = async ({ params }) => {
 	const { id } = params;
 
-	// check if the transaction exists
+	// check if transaction exists
 	const client = createClient({
 		url: 'https://hasura-xf70.onrender.com/v1/graphql',
 	});
 
 	const result = await client
-		.query(TrxPublicInfoDocument, {
-			_eq: id,
-		})
+		.query(TrxPublicInfoDocument, { uuid: id })
 		.toPromise();
-	const trx = result.data?.transactions[0];
-	logger.info('📜 [id].ts 32 trx:', trx);
+	const trx = result.data?.transactions_by_pk;
+	logger.debug(f('[id].ts', 23, { trx }));
 
 	if (!trx) {
 		return {
@@ -31,9 +30,11 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 	const { is_paid: isPaid, receipt_url: receiptUrl } = trx ?? {};
 
 	if (isPaid && receiptUrl) {
-		const dummyUrl = `https://dummyimage.com/600x400/000/fff&text=${trx.id}`;
+		// TODO replace with mf url
+		const dummyUrl = `https://dummyimage.com/600x400/000/fff&text=${trx.uuid}`;
 		const url = dev ? dummyUrl : receiptUrl;
-		logger.info(`Redirecting to receipt url: ${url}`);
+		logger.debug(f('[id].ts', 36, { url }));
+
 		return {
 			status: 302,
 			headers: {
@@ -46,12 +47,14 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 			`Transaction is paid but no receipt url is available.
 			This should mean that the payment was manually marked as paid.`,
 		);
+
 		// TODO create better generic transaction page
 		return {
 			status: 200,
 			body: 'This transaction has been paid.',
 		};
 	}
+
 	if (!isPaid) {
 		try {
 			const url = await getMFUrl(id);
@@ -69,6 +72,7 @@ export const get: RequestHandler<Locals> = async ({ params }) => {
 			};
 		}
 	}
+
 	logger.warn('Unhandled case', { trx });
 	return {
 		status: 500,
