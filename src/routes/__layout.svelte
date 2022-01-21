@@ -19,7 +19,7 @@
 	} from '@urql/svelte';
 	import { Column, Content, Grid, Row } from 'carbon-components-svelte';
 	import 'carbon-components-svelte/css/all.css';
-	import type { DocumentNode } from 'graphql';
+	import type { DocumentNode, IntrospectionQuery } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import { get } from 'svelte/store';
 	import rawSchema from '../urql-graphql.schema.json';
@@ -37,9 +37,7 @@
 		}
 
 		const cacheConfig = cacheExchange<GraphCacheConfig>({
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			schema: rawSchema,
+			schema: rawSchema as unknown as IntrospectionQuery,
 			resolvers: {
 				query_root: {
 					clients_by_pk: (parent, args) => ({
@@ -97,16 +95,7 @@
 			// Pass in the fetch from sveltekit to have access to serialized requests during hydration
 			fetch,
 			// dev: browser && dev
-			// url: 'https://hasura-xf70.onrender.com/v1/graphql',
-			// TODO: change this url in prod
-			// url: 'http://localhost:3000/api/graphql',
 			url: '/api/graphql',
-			// fetchOptions: {
-			// 	headers: {
-			// 		'x-hasura-admin-secret': 'myadminsecret',
-			// 	},
-			// 	// credentials: 'include',
-			// },
 			exchanges: [
 				// devtoolsExchange,
 				dedupExchange,
