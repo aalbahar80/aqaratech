@@ -59,16 +59,17 @@ const cacheConfig = cacheExchange<GraphCacheConfig>({
 	},
 });
 
-export const client = createClient({
-	// Pass in the fetch from sveltekit to have access to serialized requests during hydration
-	fetch,
-	// dev: browser && dev
-	url: '/api/graphql',
-	exchanges: [
-		// devtoolsExchange,
-		dedupExchange,
-		cacheConfig,
-		// ssr,
-		fetchExchange,
-	],
-});
+export const urqlClient = (fetch: any) =>
+	createClient({
+		// Pass in the fetch from sveltekit to have access to serialized requests during hydration
+		fetch,
+		// dev: browser && dev
+		url: '/api/graphql',
+		exchanges: [
+			// devtoolsExchange,
+			dedupExchange,
+			cacheConfig,
+			// ssr,
+			fetchExchange,
+		],
+	});

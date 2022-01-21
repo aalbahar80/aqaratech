@@ -13,7 +13,7 @@
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
-	import { client } from '$lib/config/urql_client';
+	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
 	import '../styles/tailwind.css';
 
@@ -27,6 +27,8 @@
 				// headers: { location: '/auth/login' },
 			};
 		}
+
+		const client = urqlClient(fetch);
 
 		return {
 			stuff: {
