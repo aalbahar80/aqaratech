@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1642814118223" clover="3.2.0">
+  <project timestamp="1642814118223" name="All files">
+    <metrics statements="34" coveredstatements="9" conditionals="15" coveredconditionals="0" methods="7" coveredmethods="1" elements="56" coveredelements="10" complexity="0" loc="34" ncloc="34" packages="1" files="1" classes="1"/>
+    <file name="utils.ts" path="/workspaces/svelte_14dec21/src/lib/utils.ts">
+      <metrics statements="34" coveredstatements="9" conditionals="15" coveredconditionals="0" methods="7" coveredmethods="1"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="0" type="stmt"/>
+      <line num="5" count="0" type="stmt"/>
+      <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="7" count="0" type="stmt"/>
+      <line num="11" count="1" type="cond" truecount="0" falsecount="1"/>
+      <line num="12" count="0" type="stmt"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="21" count="0" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="27" count="2" type="stmt"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="44" count="0" type="stmt"/>
+      <line num="45" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="46" count="0" type="stmt"/>
+      <line num="53" count="0" type="cond" truecount="0" falsecount="3"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="61" count="0" type="cond" truecount="0" falsecount="3"/>
+      <line num="62" count="0" type="stmt"/>
+      <line num="70" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="86" count="1" type="stmt"/>
+      <line num="90" count="0" type="stmt"/>
+      <line num="91" count="0" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="97" count="0" type="stmt"/>
+      <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="100" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>
