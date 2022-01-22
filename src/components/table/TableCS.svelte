@@ -17,6 +17,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
+	import { constructFilter } from '$lib/utils/search-utils';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;
@@ -50,37 +51,7 @@
 	// SEARCH
 	let searchInput = $page.url.searchParams.get('search') || '';
 	$: searchTerm = searchInput;
-	$: filter = !searchTerm
-		? {}
-		: {
-				_or: fieldList
-					// disregard number fields if search term isn't a number
-					.filter((f) =>
-						parseInt(searchTerm, 10)
-							? f.searchable
-							: f.searchable && f.searchType === 'text',
-					)
-					.map((f) => {
-						// number scalars use _eq operator
-						if (f.searchType === 'number') {
-							return {
-								[f.fieldName]: { _eq: parseInt(searchTerm, 10) },
-							};
-						}
-						// text scalars use %_ilike% operator
-						if (f.searchType === 'text') {
-							return {
-								[f.fieldName]: { _ilike: `%${searchTerm}%` },
-							};
-						}
-
-						console.warn(
-							'Unknown search type. Search type should be handled.',
-							f.searchType,
-						);
-						return {};
-					}),
-		  };
+	$: filter = constructFilter(searchTerm, fieldList);
 
 	// flag to reset page number while user is actively searching
 	let forceFirstPage = false;
