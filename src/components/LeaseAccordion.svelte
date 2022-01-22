@@ -4,7 +4,7 @@
 		AccordionItem,
 		ProgressBar,
 	} from 'carbon-components-svelte';
-	import { getProgress } from '$lib/utils';
+	import { getProgress } from '$lib/utils/date-utils';
 	import { formatDistance, parseISO } from 'date-fns';
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { Launch24 } from 'carbon-icons-svelte';
