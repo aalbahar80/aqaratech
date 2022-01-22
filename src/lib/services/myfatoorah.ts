@@ -1,7 +1,10 @@
 import { dev } from '$app/env';
+import { page } from '$app/stores';
+import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 import { createClient, gql } from '@urql/core';
 import flush from 'just-flush';
+import { get } from 'svelte/store';
 import { MarkPaidDocument, PaymentRelatedInfoDocument } from './myfatoorah.gql';
 
 interface MFResponse {
@@ -33,12 +36,12 @@ const client = createClient({
 });
 
 /**
- * Fetches a payment URL from myfatoorah. This is used to redirect the user for payment.
+ * Fetches a payment URL from myfatoorah for a given transaction.
+ * This is used to redirect the user for payment.
  */
 export const getMFUrl = async (id: string): Promise<string> => {
 	// get necessary info for payment
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const paymentQuery = gql`
 		query PaymentRelatedInfo($id: uuid!) {
 			transactions_by_pk(id: $id) {
@@ -70,7 +73,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 	const result = await client
 		.query(PaymentRelatedInfoDocument, { id })
 		.toPromise();
-	logger.info('📜 myfatoorah.ts 84 result', result);
+	logger.debug(f('myfatoorah.ts', 75, { result }));
 
 	const trx = result.data?.transactions_by_pk;
 	const tenant = trx?.lease?.tenant;
@@ -78,8 +81,11 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		logger.warn('📜 myfatoorah.ts 79 trx:', trx);
 		logger.warn('📜 myfatoorah.ts 80 tenant:', tenant);
 		logger.warn('📜 myfatoorah.ts 81 trx?.amount:', trx?.amount);
-		throw new Error('Transaction or Tenant not found');
+		const err = new Error('Transaction or Tenant not found');
+		logger.error(err);
+		throw err;
 	}
+
 	const name = [
 		tenant.first_name,
 		tenant.second_name,
@@ -89,15 +95,19 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		.filter(Boolean)
 		.join(' ');
 
+	const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback}`;
+	logger.debug(f('myfatoorah.ts', 100, { callbackUrl }));
+
 	const trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
 		CustomerName: name,
-		CustomerEmail: tenant.email,
-		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone?.slice(-8),
 		// CustomerEmail: 'dev.tester.2@mailthink.net',
+		CustomerEmail: tenant.email,
 		// TODO delete my phone number
-		CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
+		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone?.slice(-8),
+		// CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
+		CallBackUrl: callbackUrl,
 	};
 
 	try {
@@ -109,13 +119,14 @@ export const getMFUrl = async (id: string): Promise<string> => {
 			method: 'POST',
 			body: JSON.stringify({
 				PaymentMethodId: 1, // KNET
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				...flush(trxData),
 			}),
 		});
-		logger.info('📜 myfatoorah.ts 125 res', res);
+		logger.debug(f('myfatoorah.ts', 127, { res }));
+
 		const data = (await res.json()) as MFResponse;
-		logger.info('📜 myfatoorah.ts 127 data', data);
+		logger.debug(f('myfatoorah.ts', 130, { data }));
+
 		return data.Data.PaymentURL;
 	} catch (err) {
 		logger.error(err);
