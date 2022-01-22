@@ -19,7 +19,7 @@ export type TenantIdScreen = {
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
 				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
+				civilid?: string | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 				leases: Array<{
@@ -79,7 +79,7 @@ export type TenantDetails = {
 	email?: string | null | undefined;
 	phone?: string | null | undefined;
 	dob?: string | null | undefined;
-	civilid?: any | null | undefined;
+	civilid?: string | null | undefined;
 	second_name?: string | null | undefined;
 	third_name?: string | null | undefined;
 };
@@ -168,7 +168,7 @@ export type TenantsList = {
 		email?: string | null | undefined;
 		phone?: string | null | undefined;
 		dob?: string | null | undefined;
-		civilid?: any | null | undefined;
+		civilid?: string | null | undefined;
 		second_name?: string | null | undefined;
 		third_name?: string | null | undefined;
 	}>;
@@ -208,7 +208,7 @@ export type TenantsInsert = {
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
 				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
+				civilid?: string | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 		  }
@@ -232,7 +232,7 @@ export type TenantsUpdate = {
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
 				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
+				civilid?: string | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 		  }
@@ -255,7 +255,7 @@ export type TenantEditScreen = {
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
 				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
+				civilid?: string | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 		  }
@@ -274,7 +274,7 @@ export type TenantBasics = {
 				email?: string | null | undefined;
 				phone?: string | null | undefined;
 				dob?: string | null | undefined;
-				civilid?: any | null | undefined;
+				civilid?: string | null | undefined;
 				second_name?: string | null | undefined;
 				third_name?: string | null | undefined;
 		  }

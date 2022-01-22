@@ -46,6 +46,9 @@
 </script>
 
 <script lang="ts">
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import { DocumentAdd32 } from 'carbon-icons-svelte';
+
 	export let tenant: TenantIdScreenStore;
 	$: id = $page.params.id;
 
@@ -70,7 +73,15 @@
 	{:else if $tenant.data?.tenants_by_pk}
 		<BreadCrumbs {crumbs} />
 		<NextPrev {id} path={$page.url.pathname.split('/')[1]} />
-		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument} />
+		<ActionPanel {id} deleteDocumentNode={DeleteTenantDocument}>
+			<svelte:fragment slot="row2">
+				<Button
+					kind="tertiary"
+					iconDescription={'Create new lease'}
+					icon={DocumentAdd32}
+				/>
+			</svelte:fragment>
+		</ActionPanel>
 		<div
 			class="grid items-center flex-grow grid-cols-2 p-8 card bg-base-200 rounded-box gap-y-8"
 		>

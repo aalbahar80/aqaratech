@@ -1,12 +1,51 @@
 <script lang="ts">
 	import FormCS from '$components/form/FormCS.svelte';
 	import { fieldList, validation, graphqlName } from '$lib/definitions/Leases';
-	import { AddLeaseDocument } from './_add.gql';
+	import { constructFilter } from '$lib/utils/search-utils';
+	import { operationStore, query } from '@urql/svelte';
+	import { ComboBox } from 'carbon-components-svelte';
+	import { AddLeaseDocument, TenantComboBoxDocument } from './_add.gql';
+	import { fieldList as tenantFieldList } from '$lib/definitions/Tenants';
+
+	let tenantSearchTerm: string;
+	$: tenantQueryVars = {
+		tenant_limit: 10,
+		tenant_where: constructFilter(tenantSearchTerm, tenantFieldList),
+	};
+	const tenants = operationStore(TenantComboBoxDocument, tenantQueryVars);
+	query(tenants);
+	$: $tenants.variables = tenantQueryVars;
+	$: tenantItems =
+		$tenants.data?.tenants.map((tenant) => ({
+			id: tenant.id.toString(),
+			text: `${tenant.first_name} ${tenant.last_name}`,
+		})) || [];
 </script>
 
-<FormCS
-	{fieldList}
-	insertDoc={AddLeaseDocument}
-	entity={graphqlName}
-	{validation}
-/>
+<div class="max-w-md grid grid-cols-1 gap-8">
+	<ComboBox
+		bind:value={tenantSearchTerm}
+		titleText="Tenant"
+		placeholder="Select tenant"
+		size="xl"
+		items={tenantItems}
+	/>
+
+	<ComboBox
+		titleText="Unit"
+		placeholder="Select unit"
+		size="xl"
+		items={[
+			{ id: '0', text: 'Slack' },
+			{ id: '1', text: 'Email' },
+			{ id: '2', text: 'Fax' },
+		]}
+	/>
+
+	<FormCS
+		{fieldList}
+		insertDoc={AddLeaseDocument}
+		entity={graphqlName}
+		{validation}
+	/>
+</div>

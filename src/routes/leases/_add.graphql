@@ -3,3 +3,31 @@ mutation AddLease($object: leases_insert_input = {}) {
 		...leaseDetails
 	}
 }
+
+query AddLeasePage(
+	$tenant_limit: Int
+	$tenant_order_by: [tenants_order_by!] = [{ created_at: desc }]
+	$tenant_where: tenants_bool_exp = {}
+) {
+	...tenantLeaseFilter
+}
+
+query TenantComboBox(
+	$tenant_limit: Int
+	$tenant_order_by: [tenants_order_by!] = [{ created_at: desc }]
+	$tenant_where: tenants_bool_exp = {}
+) {
+	...tenantLeaseFilter
+}
+
+fragment tenantLeaseFilter on query_root {
+	tenants(
+		limit: $tenant_limit
+		order_by: $tenant_order_by
+		where: $tenant_where
+	) {
+		id
+		first_name
+		last_name
+	}
+}
