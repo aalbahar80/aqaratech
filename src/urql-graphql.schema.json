@@ -11756,14 +11756,6 @@
 				"name": "tenants_avg_fields",
 				"fields": [
 					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "id",
 						"type": {
 							"kind": "SCALAR",
@@ -12005,14 +11997,6 @@
 				"name": "tenants_stddev_fields",
 				"fields": [
 					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "id",
 						"type": {
 							"kind": "SCALAR",
@@ -12027,14 +12011,6 @@
 				"kind": "OBJECT",
 				"name": "tenants_stddev_pop_fields",
 				"fields": [
-					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
 					{
 						"name": "id",
 						"type": {
@@ -12051,14 +12027,6 @@
 				"name": "tenants_stddev_samp_fields",
 				"fields": [
 					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "id",
 						"type": {
 							"kind": "SCALAR",
@@ -12073,14 +12041,6 @@
 				"kind": "OBJECT",
 				"name": "tenants_sum_fields",
 				"fields": [
-					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
 					{
 						"name": "id",
 						"type": {
@@ -12097,14 +12057,6 @@
 				"name": "tenants_var_pop_fields",
 				"fields": [
 					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "id",
 						"type": {
 							"kind": "SCALAR",
@@ -12120,14 +12072,6 @@
 				"name": "tenants_var_samp_fields",
 				"fields": [
 					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
-					{
 						"name": "id",
 						"type": {
 							"kind": "SCALAR",
@@ -12142,14 +12086,6 @@
 				"kind": "OBJECT",
 				"name": "tenants_variance_fields",
 				"fields": [
-					{
-						"name": "civilid",
-						"type": {
-							"kind": "SCALAR",
-							"name": "Any"
-						},
-						"args": []
-					},
 					{
 						"name": "id",
 						"type": {

@@ -9,6 +9,7 @@ export const fieldList: Field[] = [
 		title: 'ID',
 		editable: false,
 		searchType: 'number',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'first_name',
@@ -51,7 +52,6 @@ export const fieldList: Field[] = [
 		title: 'Civil ID',
 		inputType: 'text',
 		// TODO: change after removing bigint type
-		searchType: 'number',
 	}),
 ];
 

@@ -4068,7 +4068,7 @@ export type Subscription_RootUsers_By_PkArgs = {
 /** columns and relationships of "tenants" */
 export type Tenants = {
 	__typename?: 'tenants';
-	civilid?: Maybe<Scalars['bigint']>;
+	civilid?: Maybe<Scalars['String']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
@@ -4159,7 +4159,6 @@ export type Tenants_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Tenants_Avg_Fields = {
 	__typename?: 'tenants_avg_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
@@ -4168,7 +4167,7 @@ export type Tenants_Bool_Exp = {
 	_and?: InputMaybe<Array<Tenants_Bool_Exp>>;
 	_not?: InputMaybe<Tenants_Bool_Exp>;
 	_or?: InputMaybe<Array<Tenants_Bool_Exp>>;
-	civilid?: InputMaybe<Bigint_Comparison_Exp>;
+	civilid?: InputMaybe<String_Comparison_Exp>;
 	created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 	dob?: InputMaybe<Date_Comparison_Exp>;
 	email?: InputMaybe<String_Comparison_Exp>;
@@ -4191,13 +4190,12 @@ export type Tenants_Constraint =
 
 /** input type for incrementing numeric columns in table "tenants" */
 export type Tenants_Inc_Input = {
-	civilid?: InputMaybe<Scalars['bigint']>;
 	id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "tenants" */
 export type Tenants_Insert_Input = {
-	civilid?: InputMaybe<Scalars['bigint']>;
+	civilid?: InputMaybe<Scalars['String']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
@@ -4216,7 +4214,7 @@ export type Tenants_Insert_Input = {
 /** aggregate max on columns */
 export type Tenants_Max_Fields = {
 	__typename?: 'tenants_max_fields';
-	civilid?: Maybe<Scalars['bigint']>;
+	civilid?: Maybe<Scalars['String']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
@@ -4232,7 +4230,7 @@ export type Tenants_Max_Fields = {
 /** aggregate min on columns */
 export type Tenants_Min_Fields = {
 	__typename?: 'tenants_min_fields';
-	civilid?: Maybe<Scalars['bigint']>;
+	civilid?: Maybe<Scalars['String']>;
 	created_at?: Maybe<Scalars['timestamptz']>;
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
@@ -4318,7 +4316,7 @@ export type Tenants_Select_Column =
 
 /** input type for updating data in table "tenants" */
 export type Tenants_Set_Input = {
-	civilid?: InputMaybe<Scalars['bigint']>;
+	civilid?: InputMaybe<Scalars['String']>;
 	created_at?: InputMaybe<Scalars['timestamptz']>;
 	dob?: InputMaybe<Scalars['date']>;
 	email?: InputMaybe<Scalars['String']>;
@@ -4334,28 +4332,24 @@ export type Tenants_Set_Input = {
 /** aggregate stddev on columns */
 export type Tenants_Stddev_Fields = {
 	__typename?: 'tenants_stddev_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Tenants_Stddev_Pop_Fields = {
 	__typename?: 'tenants_stddev_pop_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Tenants_Stddev_Samp_Fields = {
 	__typename?: 'tenants_stddev_samp_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Tenants_Sum_Fields = {
 	__typename?: 'tenants_sum_fields';
-	civilid?: Maybe<Scalars['bigint']>;
 	id?: Maybe<Scalars['Int']>;
 };
 
@@ -4387,21 +4381,18 @@ export type Tenants_Update_Column =
 /** aggregate var_pop on columns */
 export type Tenants_Var_Pop_Fields = {
 	__typename?: 'tenants_var_pop_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Tenants_Var_Samp_Fields = {
 	__typename?: 'tenants_var_samp_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Tenants_Variance_Fields = {
 	__typename?: 'tenants_variance_fields';
-	civilid?: Maybe<Scalars['Float']>;
 	id?: Maybe<Scalars['Float']>;
 };
 
@@ -9036,7 +9027,7 @@ export type GraphCacheResolvers = {
 		civilid?: GraphCacheResolver<
 			WithTypename<Tenants>,
 			Record<string, never>,
-			Scalars['bigint'] | string
+			Scalars['String'] | string
 		>;
 		created_at?: GraphCacheResolver<
 			WithTypename<Tenants>,
@@ -9184,11 +9175,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_avg_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Avg_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Avg_Fields>,
 			Record<string, never>,
@@ -9199,7 +9185,7 @@ export type GraphCacheResolvers = {
 		civilid?: GraphCacheResolver<
 			WithTypename<Tenants_Max_Fields>,
 			Record<string, never>,
-			Scalars['bigint'] | string
+			Scalars['String'] | string
 		>;
 		created_at?: GraphCacheResolver<
 			WithTypename<Tenants_Max_Fields>,
@@ -9256,7 +9242,7 @@ export type GraphCacheResolvers = {
 		civilid?: GraphCacheResolver<
 			WithTypename<Tenants_Min_Fields>,
 			Record<string, never>,
-			Scalars['bigint'] | string
+			Scalars['String'] | string
 		>;
 		created_at?: GraphCacheResolver<
 			WithTypename<Tenants_Min_Fields>,
@@ -9322,11 +9308,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_stddev_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Stddev_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Stddev_Fields>,
 			Record<string, never>,
@@ -9334,11 +9315,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_stddev_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Stddev_Pop_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Stddev_Pop_Fields>,
 			Record<string, never>,
@@ -9346,11 +9322,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_stddev_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Stddev_Samp_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Stddev_Samp_Fields>,
 			Record<string, never>,
@@ -9358,11 +9329,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_sum_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Sum_Fields>,
-			Record<string, never>,
-			Scalars['bigint'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Sum_Fields>,
 			Record<string, never>,
@@ -9370,11 +9336,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_var_pop_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Var_Pop_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Var_Pop_Fields>,
 			Record<string, never>,
@@ -9382,11 +9343,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_var_samp_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Var_Samp_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Var_Samp_Fields>,
 			Record<string, never>,
@@ -9394,11 +9350,6 @@ export type GraphCacheResolvers = {
 		>;
 	};
 	tenants_variance_fields?: {
-		civilid?: GraphCacheResolver<
-			WithTypename<Tenants_Variance_Fields>,
-			Record<string, never>,
-			Scalars['Float'] | string
-		>;
 		id?: GraphCacheResolver<
 			WithTypename<Tenants_Variance_Fields>,
 			Record<string, never>,
