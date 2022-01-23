@@ -4,8 +4,8 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler = (req) => {
 	//  Sets the user equal to null (local sign out)
-	req.locals.user = null;
-	req.locals.hasura = null;
+	req.locals.user = '';
+	req.locals.hasura = '';
 
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = 'https://dev-eehvhdp2.eu.auth0.com/v2/logout';
