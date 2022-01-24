@@ -1,4 +1,4 @@
-Cypress.Cookies.debug(true);
+// Cypress.Cookies.debug(true);
 
 describe('A successful login', () => {
 	beforeEach(() => {
@@ -16,75 +16,40 @@ describe('A successful login', () => {
 	});
 
 	it('redirects to home page', () => {
-		cy.getCookies();
 		cy.location('pathname').should('eq', '/');
 	});
 
-	describe('persists the user cookie', () => {
+	describe('persists the user and hasura cookies', () => {
 		afterEach(() => {
 			cy.reload();
 		});
 
 		it('upon redirection', () => {
-			cy.getCookies();
-			cy.getCookie('user')
-				.should('have.property', 'value')
-				// .its('value')
-				.should('not.be.undefined')
-				.should('not.be.null')
-				.should('not.eq', '');
+			['user', 'hasura'].forEach((cookie) => {
+				cy.getCookie(cookie)
+					.should('exist')
+					.should('have.property', 'value')
+					.should('not.be.undefined')
+					.should('not.be.null')
+					.should('not.eq', '');
+			});
 		});
 
-		it('after reloading', () => {
-			cy.getCookies();
-			cy.getCookie('user')
-				.should('have.property', 'value')
-				// .its('value')
-				.should('not.be.undefined')
-				.should('not.be.null')
-				.should('not.eq', '');
+		it('through reloading', () => {
+			['user', 'hasura'].forEach((cookie) => {
+				cy.getCookie(cookie)
+					.should('exist')
+					.should('have.property', 'value')
+					.should('not.be.undefined')
+					.should('not.be.null')
+					.should('not.eq', '');
+			});
 		});
 	});
 
 	it('goes to the tenants page', () => {
-		cy.getCookies();
 		cy.get('button.bx--header__action:nth-child(2)').click();
 		cy.contains('Tenants').click();
 		cy.location('pathname').should('eq', '/tenants');
 	});
-	// it('successfully sets the hasura cookie', () => {
-	// 	cy.getCookies();
-	// 	cy.getCookie('hasura')
-	// 		.should('have.property', 'value')
-	// 		.its('value')
-	// 		.should('not.be.undefined')
-	// 		.should('not.be.null')
-	// 		.should('not.eq', '');
-	// });
-
-	// check that user cookie persists after refresh
-	it('successfully persists the user cookie after refresh', () => {
-		cy.getCookies();
-		cy.reload();
-		cy.getCookies();
-		cy.getCookie('user')
-			.should('have.property', 'value')
-			// .its('value')
-			.should('not.be.undefined')
-			.should('not.be.null')
-			.should('not.eq', '');
-	});
-
-	// // check that hasura cookie persists after refresh
-	// it('successfully persists the hasura cookie after refresh', () => {
-	// 	cy.getCookies();
-	// 	cy.reload();
-	// 	cy.getCookies();
-	// 	cy.getCookie('hasura')
-	// 		.should('have.property', 'value')
-	// 		.its('value')
-	// 		.should('not.be.undefined')
-	// 		.should('not.be.null')
-	// 		.should('not.eq', '');
-	// });
 });
