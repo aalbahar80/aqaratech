@@ -20,7 +20,13 @@
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
 		const shouldRedirect = isEmpty(session.user);
-		if (shouldRedirect) {
+		// const shouldRedirect =
+		// 	session.user === undefined ||
+		// 	session.user === null ||
+		// 	session.user === '';
+		logger.debug({ shouldRedirect }, '__layout.svelte ~ 23');
+		// eslint-disable-next-line no-constant-condition
+		if (false) {
 			return {
 				status: 302,
 				redirect: '/landing',

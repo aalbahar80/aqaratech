@@ -44,7 +44,7 @@
 	company="RE"
 	platformName="Admin"
 	href="/"
-	persistentHamburgerMenu={isMobileMenu}
+	persistentHamburgerMenu={isMobileMenu || true}
 	expansionBreakpoint={navBreakpoint}
 	expandedByDefault={false}
 	bind:isSideNavOpen

@@ -8,19 +8,27 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	logger.debug(f('hooks.ts', 11, { cookies }));
 
+	logger.debug({ event }, 'hooks.ts ~ 12');
 	event.locals.user = cookies.user || '';
 	event.locals.hasura = cookies.hasura || '';
 
 	const response = await resolve(event);
 
+	logger.debug(response.headers, 'hooks.ts ~ 16');
 	// TODO: samesite=strict? - in prod only?
 	response.headers.append(
 		'Set-Cookie',
 		cookie.serialize('user', event.locals.user, {
+			// httpOnly: false,
 			httpOnly: true,
 			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
+			// maxAge: 60 * 60 * 24 * 7,
+			// sameSite: 'lax',
 			// sameSite: 'strict',
+			sameSite: 'none',
+			secure: true,
+			// secure: false,
+			// secure: false,
 			// secure: process.env.NODE_ENV === 'production',
 		}),
 	);
@@ -28,9 +36,18 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	response.headers.append(
 		'Set-Cookie',
 		cookie.serialize('hasura', event.locals.hasura, {
+			// httpOnly: false,
 			httpOnly: true,
 			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
+			sameSite: 'none',
+			// sameSite: 'none',
+			secure: true,
+			// maxAge: 60 * 60 * 24 * 7,
+			// sameSite: 'none',
+			// secure: false,
+			// sameSite: 'lax',
+			// sameSite: 'none',
+			// secure: false,
 			// sameSite: 'strict',
 			// secure: process.env.NODE_ENV === 'production',
 		}),

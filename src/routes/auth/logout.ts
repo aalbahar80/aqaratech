@@ -2,7 +2,7 @@
 
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler = (req) => {
+export const get: RequestHandler<Locals> = (req) => {
 	//  Sets the user equal to null (local sign out)
 	req.locals.user = '';
 	req.locals.hasura = '';
