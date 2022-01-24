@@ -28,10 +28,11 @@ describe('A successful login', () => {
 			['user', 'hasura'].forEach((cookie) => {
 				cy.getCookie(cookie)
 					.should('exist')
-					.should('have.property', 'value')
-					.should('not.be.undefined')
-					.should('not.be.null')
-					.should('not.eq', '');
+					.its('value')
+					.should('exist')
+					.and('not.be.undefined')
+					.and('not.be.null')
+					.and('not.eq', '');
 			});
 		});
 
@@ -39,10 +40,10 @@ describe('A successful login', () => {
 			['user', 'hasura'].forEach((cookie) => {
 				cy.getCookie(cookie)
 					.should('exist')
-					.should('have.property', 'value')
-					.should('not.be.undefined')
-					.should('not.be.null')
-					.should('not.eq', '');
+					.and('have.property', 'value')
+					.and('not.be.undefined')
+					.and('not.be.null')
+					.and('not.eq', '');
 			});
 		});
 	});
