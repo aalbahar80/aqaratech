@@ -6012,10 +6012,10 @@ just-flatten-it@^5.0.1:
   resolved "https://registry.yarnpkg.com/just-flatten-it/-/just-flatten-it-5.0.1.tgz#4c782f6ae0252aa1413a972b4e6c77bebe039d94"
   integrity sha512-tbh2Gu/gDuankZcdSVXaIcZ+PwTyrPBbNQfpga/l0IrNa4qE/koejib3lciAD44LNtxzor8iq5EPnh/wuDIL2w==
 
-just-flush@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/just-flush/-/just-flush-2.0.1.tgz#75c3185e70c8696fc86362105516b7c991973a98"
-  integrity sha512-jeuiGdhg1sv6ExMfzy9xJm3heSlexarIisojHigthLBJP3VpwciDc3B0o9BEaXYwk+W2rldYIep9A1+467uLww==
+just-flush@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/just-flush/-/just-flush-2.1.0.tgz#bceda18ac4551a8d89dd79145e7ae21bcb018d37"
+  integrity sha512-vczPBFnKgWO6j8BqJqaDHbw+3QW3f9a9lg5ZxHFo0JZBpg3Q7lESHPzfyLRNNhZM6+WMROPCHxG//HPVUOReXw==
 
 just-insert@^3.0.1:
   version "3.0.1"
