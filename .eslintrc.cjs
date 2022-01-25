@@ -83,10 +83,10 @@ module.exports = {
 		// 	},
 		// },
 	],
-	// env: {
-	// 	browser: true,
-	// 	es2017: true,
-	// 	node: true,
-	// },
+	env: {
+		browser: true,
+		es2017: true,
+		node: true,
+	},
 	reportUnusedDisableDirectives: true,
 };
