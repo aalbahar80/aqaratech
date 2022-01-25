@@ -71,7 +71,6 @@ export type ClientComboBox = {
 	__typename?: 'query_root';
 	results: Array<{
 		__typename?: 'clients';
-		id: number;
 		first_name?: string | null | undefined;
 		last_name?: string | null | undefined;
 	}>;
@@ -81,13 +80,48 @@ export type ClientLeaseFilter = {
 	__typename?: 'query_root';
 	results: Array<{
 		__typename?: 'clients';
-		id: number;
 		first_name?: string | null | undefined;
 		last_name?: string | null | undefined;
 	}>;
 };
 
 export type ClientLeaseFilterVariables = Types.Exact<{ [key: string]: never }>;
+
+export type PropertyComboBoxVariables = Types.Exact<{
+	limit?: Types.InputMaybe<Types.Scalars['Int']>;
+	order_by?: Types.InputMaybe<
+		Array<Types.Properties_Order_By> | Types.Properties_Order_By
+	>;
+	where?: Types.InputMaybe<Types.Properties_Bool_Exp>;
+}>;
+
+export type PropertyComboBox = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'properties';
+		id: number;
+		area?: string | null | undefined;
+		block?: string | null | undefined;
+		street?: string | null | undefined;
+		number?: string | null | undefined;
+	}>;
+};
+
+export type PropertyLeaseFilter = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'properties';
+		id: number;
+		area?: string | null | undefined;
+		block?: string | null | undefined;
+		street?: string | null | undefined;
+		number?: string | null | undefined;
+	}>;
+};
+
+export type PropertyLeaseFilterVariables = Types.Exact<{
+	[key: string]: never;
+}>;
 
 export const TenantLeaseFilter = {
 	kind: 'Document',
@@ -192,7 +226,6 @@ export const ClientLeaseFilter = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
-								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
 							],
@@ -203,6 +236,65 @@ export const ClientLeaseFilter = {
 		},
 	],
 } as unknown as DocumentNode<ClientLeaseFilter, ClientLeaseFilterVariables>;
+export const PropertyLeaseFilter = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'propertyLeaseFilter' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'results' },
+						name: { kind: 'Name', value: 'properties' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'area' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'block' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'street' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'number' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<PropertyLeaseFilter, PropertyLeaseFilterVariables>;
 export const AddLeaseDocument = {
 	kind: 'Document',
 	definitions: [
@@ -404,6 +496,80 @@ export const ClientComboBoxDocument = {
 		...ClientLeaseFilter.definitions,
 	],
 } as unknown as DocumentNode<ClientComboBox, ClientComboBoxVariables>;
+export const PropertyComboBoxDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'PropertyComboBox' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'properties_order_by' },
+							},
+						},
+					},
+					defaultValue: {
+						kind: 'ListValue',
+						values: [
+							{
+								kind: 'ObjectValue',
+								fields: [
+									{
+										kind: 'ObjectField',
+										name: { kind: 'Name', value: 'created_at' },
+										value: { kind: 'EnumValue', value: 'desc' },
+									},
+								],
+							},
+						],
+					},
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'properties_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'propertyLeaseFilter' },
+					},
+				],
+			},
+		},
+		...PropertyLeaseFilter.definitions,
+	],
+} as unknown as DocumentNode<PropertyComboBox, PropertyComboBoxVariables>;
 export type AddLeaseStore = OperationStore<AddLease, AddLeaseVariables>;
 export type TenantComboBoxStore = OperationStore<
 	TenantComboBox,
@@ -412,4 +578,8 @@ export type TenantComboBoxStore = OperationStore<
 export type ClientComboBoxStore = OperationStore<
 	ClientComboBox,
 	ClientComboBoxVariables
+>;
+export type PropertyComboBoxStore = OperationStore<
+	PropertyComboBox,
+	PropertyComboBoxVariables
 >;

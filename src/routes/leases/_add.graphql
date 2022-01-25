@@ -36,8 +36,25 @@ query ClientComboBox(
 }
 fragment clientLeaseFilter on query_root {
 	results: clients(limit: $limit, order_by: $order_by, where: $where) {
-		id
+		# id
 		first_name
 		last_name
+	}
+}
+
+query PropertyComboBox(
+	$limit: Int
+	$order_by: [properties_order_by!] = [{ created_at: desc }]
+	$where: properties_bool_exp = {}
+) {
+	...propertyLeaseFilter
+}
+fragment propertyLeaseFilter on query_root {
+	results: properties(limit: $limit, order_by: $order_by, where: $where) {
+		id
+		area
+		block
+		street
+		number
 	}
 }

@@ -1,25 +1,40 @@
 <script lang="ts">
 	import { constructFilter } from '$lib/utils/search-utils';
-	import {
-		OperationStore,
-		operationStore,
-		query,
-		TypedDocumentNode,
-	} from '@urql/svelte';
+	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
 	import { ComboBox } from 'carbon-components-svelte';
 	import type { Field } from '$components/form/Field';
+	import type { ComboBoxItem } from 'carbon-components-svelte/types/ComboBox/ComboBox.svelte';
 
-	// type Hit = {
-	// 	id: string | number;
-	// 	[key: string]: any;
-	// };
+	type Hit = {
+		id: string | number;
+		[key: string]: any;
+	};
 	type T = $$Generic;
-	// type E = $$Generic;
+	// type Y = $$Generic<
+	// 	{ results: T[] },
+	// 	{ limit: number; order_by?: any; where?: any }
+	// >;
 	export let queryDocument: TypedDocumentNode<T>;
-	type X = OperationStore<T>['data'];
-	type Y = ReturnType<typeof result>;
 	type A = typeof $result['data'];
 	type B = NonNullable<A>['results'][0];
+	export let fieldList: Field[];
+	export let limit = 4;
+	let searchTerm: string;
+
+	$: queryVars = {
+		limit,
+		where: constructFilter(searchTerm, fieldList),
+	};
+	const result = operationStore(queryDocument, queryVars);
+	// export let display: (hit: B) => string;
+	export let display: (hit: B) => ComboBoxItem;
+	query(result);
+	$: $result.variables = queryVars;
+	$: items = $result.data?.results?.map(display) || [];
+
+	// type E = $$Generic;
+	// type X = OperationStore<T>['data'];
+	// type Y = ReturnType<typeof result>;
 	// type Z = ReturnType<typeof result>['data'];
 
 	// type HitCallback = (hit: Hit) => string;
@@ -28,31 +43,13 @@
 	// 	{ results: Hit[] },
 	// 	{ limit: number; order_by?: any; where?: any }
 	// >;
+	// export let queryDocument: TypedDocumentNode<
+	// 	{ results: Hit[] },
+	// 	{ limit: number; order_by?: any; where?: any }
+	// >;
 	// export let queryDocument: TypedDocumentNode;
-	export let fieldList: Field[];
-	export let limit = 4;
 	// export const hit = (id: number | string) => ({ id });
 	// export const display = (hit: OperationStore<T>['data']): string => 2;
-
-	let searchTerm: string;
-	$: queryVars = {
-		limit,
-		where: constructFilter(searchTerm, fieldList),
-	};
-	const result = operationStore(queryDocument, queryVars);
-	// export const display = (hit): string => 2;
-	export let display: (hit: B) => string;
-	query(result);
-	$: $result.variables = queryVars;
-	$: items = $result.data?.results.map(display) || [];
-	// $: items =
-	// 	$result.data?.results.map((hit) => ({
-	// 		id: hit.id.toString(),
-	// 		// text: `${hit.first_name} ${hit.last_name}`,
-	// 		text: display(hit),
-	// 	})) || [];
-	// type Z = $$Generic<ReturnType<typeof OperationStore<T>['data']>;
-	export let z: A;
 </script>
 
 <ComboBox
