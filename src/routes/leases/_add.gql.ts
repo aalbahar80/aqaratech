@@ -125,6 +125,34 @@ export type PropertyLeaseFilterVariables = Types.Exact<{
 	[key: string]: never;
 }>;
 
+export type UnitComboBoxVariables = Types.Exact<{
+	limit?: Types.InputMaybe<Types.Scalars['Int']>;
+	order_by?: Types.InputMaybe<
+		Array<Types.Units_Order_By> | Types.Units_Order_By
+	>;
+	where?: Types.InputMaybe<Types.Units_Bool_Exp>;
+}>;
+
+export type UnitComboBox = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'units';
+		id: number;
+		unit_number?: string | null | undefined;
+	}>;
+};
+
+export type UnitLeaseFilter = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'units';
+		id: number;
+		unit_number?: string | null | undefined;
+	}>;
+};
+
+export type UnitLeaseFilterVariables = Types.Exact<{ [key: string]: never }>;
+
 export const TenantLeaseFilter = {
 	kind: 'Document',
 	definitions: [
@@ -298,6 +326,62 @@ export const PropertyLeaseFilter = {
 		},
 	],
 } as unknown as DocumentNode<PropertyLeaseFilter, PropertyLeaseFilterVariables>;
+export const UnitLeaseFilter = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'unitLeaseFilter' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'results' },
+						name: { kind: 'Name', value: 'units' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'unit_number' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<UnitLeaseFilter, UnitLeaseFilterVariables>;
 export const AddLeaseDocument = {
 	kind: 'Document',
 	definitions: [
@@ -573,6 +657,80 @@ export const PropertyComboBoxDocument = {
 		...PropertyLeaseFilter.definitions,
 	],
 } as unknown as DocumentNode<PropertyComboBox, PropertyComboBoxVariables>;
+export const UnitComboBoxDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'UnitComboBox' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'units_order_by' },
+							},
+						},
+					},
+					defaultValue: {
+						kind: 'ListValue',
+						values: [
+							{
+								kind: 'ObjectValue',
+								fields: [
+									{
+										kind: 'ObjectField',
+										name: { kind: 'Name', value: 'created_at' },
+										value: { kind: 'EnumValue', value: 'desc' },
+									},
+								],
+							},
+						],
+					},
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'units_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'unitLeaseFilter' },
+					},
+				],
+			},
+		},
+		...UnitLeaseFilter.definitions,
+	],
+} as unknown as DocumentNode<UnitComboBox, UnitComboBoxVariables>;
 export type AddLeaseStore = OperationStore<AddLease, AddLeaseVariables>;
 export type TenantComboBoxStore = OperationStore<
 	TenantComboBox,
@@ -585,4 +743,8 @@ export type ClientComboBoxStore = OperationStore<
 export type PropertyComboBoxStore = OperationStore<
 	PropertyComboBox,
 	PropertyComboBoxVariables
+>;
+export type UnitComboBoxStore = OperationStore<
+	UnitComboBox,
+	UnitComboBoxVariables
 >;

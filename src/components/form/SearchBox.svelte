@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { constructFilter } from '$lib/utils/search-utils';
 	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
-	import { ComboBox } from 'carbon-components-svelte';
+	import ComboBox from 'carbon-components-svelte/src/ComboBox/ComboBox.svelte';
 	import type { Field } from '$components/form/Field';
-	import type { ComboBoxItem } from 'carbon-components-svelte/types/ComboBox/ComboBox.svelte';
+	import type {
+		ComboBoxItem,
+		ComboBoxProps,
+	} from 'carbon-components-svelte/types/ComboBox/ComboBox.svelte';
 
-	type T = $$Generic;
+	type T = $$Generic<{ results: any[] }>;
 	// TODO add a generic constraint to query document, make sure it has key results with value []
 	// combine the below with the above
 	// export let queryDocument: TypedDocumentNode<
@@ -20,6 +23,8 @@
 	export let queryDocument: TypedDocumentNode<T>;
 	export let fieldList: Field[];
 	export let limit = 4;
+	export let comboBoxProps: ComboBoxProps;
+
 	let searchTerm: string;
 
 	$: queryVars = {
@@ -33,10 +38,4 @@
 	$: items = $result.data?.results?.map(display) || [];
 </script>
 
-<ComboBox
-	bind:value={searchTerm}
-	titleText="Tenant"
-	placeholder="Type to search by name, civil id, phone, etc"
-	size="xl"
-	{items}
-/>
+<ComboBox bind:value={searchTerm} size="xl" {items} {...comboBoxProps} />

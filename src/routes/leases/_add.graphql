@@ -58,3 +58,17 @@ fragment propertyLeaseFilter on query_root {
 		number
 	}
 }
+
+query UnitComboBox(
+	$limit: Int
+	$order_by: [units_order_by!] = [{ created_at: desc }]
+	$where: units_bool_exp = {}
+) {
+	...unitLeaseFilter
+}
+fragment unitLeaseFilter on query_root {
+	results: units(limit: $limit, order_by: $order_by, where: $where) {
+		id
+		unit_number
+	}
+}

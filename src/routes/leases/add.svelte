@@ -5,12 +5,17 @@
 	import { fieldList as clientFieldList } from '$lib/definitions/Clients';
 	import { fieldList as tenantFieldList } from '$lib/definitions/Tenants';
 	import { fieldList as propertyFieldList } from '$lib/definitions/Properties';
+	import { fieldList as unitFieldList } from '$lib/definitions/Units';
 	import {
 		AddLeaseDocument,
 		ClientComboBoxDocument,
 		PropertyComboBoxDocument,
 		TenantComboBoxDocument,
+		UnitComboBoxDocument,
 	} from './_add.gql';
+
+	const placeholder = (fields: string[]): string =>
+		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
 </script>
 
 <div class="max-w-md grid grid-cols-1 gap-8">
@@ -21,6 +26,10 @@
 			id: hit.id,
 			text: `${hit.first_name} ${hit.last_name}`,
 		})}
+		comboBoxProps={{
+			titleText: 'Tenant',
+			placeholder: 'Type to search by name, civil id, phone, etc',
+		}}
 	/>
 
 	<SearchBox
@@ -31,6 +40,10 @@
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			text: `${hit.first_name} ${hit.last_name}`,
 		})}
+		comboBoxProps={{
+			titleText: 'Client',
+			placeholder: placeholder(['name', 'civil id', 'phone', 'email', 'etc']),
+		}}
 	/>
 
 	<SearchBox
@@ -40,6 +53,23 @@
 			id: hit.id,
 			text: `${hit.area} ${hit.block}`,
 		})}
+		comboBoxProps={{
+			titleText: 'Propety',
+			placeholder: placeholder(['address']),
+		}}
+	/>
+
+	<SearchBox
+		queryDocument={UnitComboBoxDocument}
+		fieldList={unitFieldList}
+		display={(hit) => ({
+			id: hit.id,
+			text: hit.unit_number || hit.id.toString(),
+		})}
+		comboBoxProps={{
+			titleText: 'Unit',
+			placeholder: placeholder(['unit number']),
+		}}
 	/>
 
 	<FormCS
