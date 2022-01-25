@@ -151,13 +151,7 @@
 								invalidText={$errors[fieldName]?.[0]}
 								size="xl"
 								pattern={fieldName === 'civilid' ? '[0-9]*' : undefined}
-							>
-								<svelte:fragment slot="labelText">
-									<span style="font-size: 130%">
-										{title}
-									</span>
-								</svelte:fragment>
-							</TextInput>
+							/>
 						{/if}
 					</FormGroup>
 				</ValidationMessage>
