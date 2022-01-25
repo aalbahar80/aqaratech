@@ -21,3 +21,10 @@ coverage/*
 #############################
 src/generated
 /src/generated
+
+*.gql.ts
+
+# Cypress examples #
+#############################
+cypress/integration/1-getting-started
+cypress/integration/2-advanced-examples
