@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
@@ -12,23 +14,19 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import { DocumentAdd32 } from 'carbon-icons-svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import isEmpty from 'just-is-empty';
 	import Fa from 'svelte-fa/src/fa.svelte';
-	import { page } from '$app/stores';
-	import {
-		TenantIdScreenDocument,
-		TenantIdScreenStore,
-		DeleteTenantDocument,
-	} from './_[id].gql';
-	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
+	import type { TenantIdScreenStore } from './_[id].gql';
+	import { DeleteTenantDocument, TenantIdScreenDocument } from './_[id].gql';
 
 	export const prerender = true;
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
 
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		const tenant: TenantIdScreenStore = await stuff.query(
 			TenantIdScreenDocument,
 			{
@@ -36,7 +34,6 @@
 			},
 		);
 
-		// eslint-disable-next-line consistent-return
 		return {
 			props: {
 				tenant,
@@ -46,9 +43,6 @@
 </script>
 
 <script lang="ts">
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import { DocumentAdd32 } from 'carbon-icons-svelte';
-
 	export let tenant: TenantIdScreenStore;
 	$: id = $page.params.id;
 
