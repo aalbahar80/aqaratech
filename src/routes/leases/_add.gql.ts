@@ -29,35 +29,17 @@ export type AddLease = {
 		| undefined;
 };
 
-export type AddLeasePageVariables = Types.Exact<{
-	tenant_limit?: Types.InputMaybe<Types.Scalars['Int']>;
-	tenant_order_by?: Types.InputMaybe<
-		Array<Types.Tenants_Order_By> | Types.Tenants_Order_By
-	>;
-	tenant_where?: Types.InputMaybe<Types.Tenants_Bool_Exp>;
-}>;
-
-export type AddLeasePage = {
-	__typename?: 'query_root';
-	tenants: Array<{
-		__typename?: 'tenants';
-		id: number;
-		first_name?: string | null | undefined;
-		last_name?: string | null | undefined;
-	}>;
-};
-
 export type TenantComboBoxVariables = Types.Exact<{
-	tenant_limit?: Types.InputMaybe<Types.Scalars['Int']>;
-	tenant_order_by?: Types.InputMaybe<
+	limit?: Types.InputMaybe<Types.Scalars['Int']>;
+	order_by?: Types.InputMaybe<
 		Array<Types.Tenants_Order_By> | Types.Tenants_Order_By
 	>;
-	tenant_where?: Types.InputMaybe<Types.Tenants_Bool_Exp>;
+	where?: Types.InputMaybe<Types.Tenants_Bool_Exp>;
 }>;
 
 export type TenantComboBox = {
 	__typename?: 'query_root';
-	tenants: Array<{
+	results: Array<{
 		__typename?: 'tenants';
 		id: number;
 		first_name?: string | null | undefined;
@@ -67,7 +49,7 @@ export type TenantComboBox = {
 
 export type TenantLeaseFilter = {
 	__typename?: 'query_root';
-	tenants: Array<{
+	results: Array<{
 		__typename?: 'tenants';
 		id: number;
 		first_name?: string | null | undefined;
@@ -76,6 +58,36 @@ export type TenantLeaseFilter = {
 };
 
 export type TenantLeaseFilterVariables = Types.Exact<{ [key: string]: never }>;
+
+export type ClientComboBoxVariables = Types.Exact<{
+	limit?: Types.InputMaybe<Types.Scalars['Int']>;
+	order_by?: Types.InputMaybe<
+		Array<Types.Clients_Order_By> | Types.Clients_Order_By
+	>;
+	where?: Types.InputMaybe<Types.Clients_Bool_Exp>;
+}>;
+
+export type ClientComboBox = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'clients';
+		id: number;
+		first_name?: string | null | undefined;
+		last_name?: string | null | undefined;
+	}>;
+};
+
+export type ClientLeaseFilter = {
+	__typename?: 'query_root';
+	results: Array<{
+		__typename?: 'clients';
+		id: number;
+		first_name?: string | null | undefined;
+		last_name?: string | null | undefined;
+	}>;
+};
+
+export type ClientLeaseFilterVariables = Types.Exact<{ [key: string]: never }>;
 
 export const TenantLeaseFilter = {
 	kind: 'Document',
@@ -92,6 +104,7 @@ export const TenantLeaseFilter = {
 				selections: [
 					{
 						kind: 'Field',
+						alias: { kind: 'Name', value: 'results' },
 						name: { kind: 'Name', value: 'tenants' },
 						arguments: [
 							{
@@ -99,7 +112,7 @@ export const TenantLeaseFilter = {
 								name: { kind: 'Name', value: 'limit' },
 								value: {
 									kind: 'Variable',
-									name: { kind: 'Name', value: 'tenant_limit' },
+									name: { kind: 'Name', value: 'limit' },
 								},
 							},
 							{
@@ -107,7 +120,7 @@ export const TenantLeaseFilter = {
 								name: { kind: 'Name', value: 'order_by' },
 								value: {
 									kind: 'Variable',
-									name: { kind: 'Name', value: 'tenant_order_by' },
+									name: { kind: 'Name', value: 'order_by' },
 								},
 							},
 							{
@@ -115,7 +128,7 @@ export const TenantLeaseFilter = {
 								name: { kind: 'Name', value: 'where' },
 								value: {
 									kind: 'Variable',
-									name: { kind: 'Name', value: 'tenant_where' },
+									name: { kind: 'Name', value: 'where' },
 								},
 							},
 						],
@@ -133,6 +146,63 @@ export const TenantLeaseFilter = {
 		},
 	],
 } as unknown as DocumentNode<TenantLeaseFilter, TenantLeaseFilterVariables>;
+export const ClientLeaseFilter = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'FragmentDefinition',
+			name: { kind: 'Name', value: 'clientLeaseFilter' },
+			typeCondition: {
+				kind: 'NamedType',
+				name: { kind: 'Name', value: 'query_root' },
+			},
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'Field',
+						alias: { kind: 'Name', value: 'results' },
+						name: { kind: 'Name', value: 'clients' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'limit' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'order_by' },
+								},
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'where' },
+								value: {
+									kind: 'Variable',
+									name: { kind: 'Name', value: 'where' },
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
+								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
+							],
+						},
+					},
+				],
+			},
+		},
+	],
+} as unknown as DocumentNode<ClientLeaseFilter, ClientLeaseFilterVariables>;
 export const AddLeaseDocument = {
 	kind: 'Document',
 	definitions: [
@@ -186,80 +256,6 @@ export const AddLeaseDocument = {
 		...LeaseDetails.definitions,
 	],
 } as unknown as DocumentNode<AddLease, AddLeaseVariables>;
-export const AddLeasePageDocument = {
-	kind: 'Document',
-	definitions: [
-		{
-			kind: 'OperationDefinition',
-			operation: 'query',
-			name: { kind: 'Name', value: 'AddLeasePage' },
-			variableDefinitions: [
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_limit' },
-					},
-					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_order_by' },
-					},
-					type: {
-						kind: 'ListType',
-						type: {
-							kind: 'NonNullType',
-							type: {
-								kind: 'NamedType',
-								name: { kind: 'Name', value: 'tenants_order_by' },
-							},
-						},
-					},
-					defaultValue: {
-						kind: 'ListValue',
-						values: [
-							{
-								kind: 'ObjectValue',
-								fields: [
-									{
-										kind: 'ObjectField',
-										name: { kind: 'Name', value: 'created_at' },
-										value: { kind: 'EnumValue', value: 'desc' },
-									},
-								],
-							},
-						],
-					},
-				},
-				{
-					kind: 'VariableDefinition',
-					variable: {
-						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_where' },
-					},
-					type: {
-						kind: 'NamedType',
-						name: { kind: 'Name', value: 'tenants_bool_exp' },
-					},
-					defaultValue: { kind: 'ObjectValue', fields: [] },
-				},
-			],
-			selectionSet: {
-				kind: 'SelectionSet',
-				selections: [
-					{
-						kind: 'FragmentSpread',
-						name: { kind: 'Name', value: 'tenantLeaseFilter' },
-					},
-				],
-			},
-		},
-		...TenantLeaseFilter.definitions,
-	],
-} as unknown as DocumentNode<AddLeasePage, AddLeasePageVariables>;
 export const TenantComboBoxDocument = {
 	kind: 'Document',
 	definitions: [
@@ -272,7 +268,7 @@ export const TenantComboBoxDocument = {
 					kind: 'VariableDefinition',
 					variable: {
 						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_limit' },
+						name: { kind: 'Name', value: 'limit' },
 					},
 					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
 				},
@@ -280,7 +276,7 @@ export const TenantComboBoxDocument = {
 					kind: 'VariableDefinition',
 					variable: {
 						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_order_by' },
+						name: { kind: 'Name', value: 'order_by' },
 					},
 					type: {
 						kind: 'ListType',
@@ -312,7 +308,7 @@ export const TenantComboBoxDocument = {
 					kind: 'VariableDefinition',
 					variable: {
 						kind: 'Variable',
-						name: { kind: 'Name', value: 'tenant_where' },
+						name: { kind: 'Name', value: 'where' },
 					},
 					type: {
 						kind: 'NamedType',
@@ -334,12 +330,86 @@ export const TenantComboBoxDocument = {
 		...TenantLeaseFilter.definitions,
 	],
 } as unknown as DocumentNode<TenantComboBox, TenantComboBoxVariables>;
+export const ClientComboBoxDocument = {
+	kind: 'Document',
+	definitions: [
+		{
+			kind: 'OperationDefinition',
+			operation: 'query',
+			name: { kind: 'Name', value: 'ClientComboBox' },
+			variableDefinitions: [
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'limit' },
+					},
+					type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'order_by' },
+					},
+					type: {
+						kind: 'ListType',
+						type: {
+							kind: 'NonNullType',
+							type: {
+								kind: 'NamedType',
+								name: { kind: 'Name', value: 'clients_order_by' },
+							},
+						},
+					},
+					defaultValue: {
+						kind: 'ListValue',
+						values: [
+							{
+								kind: 'ObjectValue',
+								fields: [
+									{
+										kind: 'ObjectField',
+										name: { kind: 'Name', value: 'created_at' },
+										value: { kind: 'EnumValue', value: 'desc' },
+									},
+								],
+							},
+						],
+					},
+				},
+				{
+					kind: 'VariableDefinition',
+					variable: {
+						kind: 'Variable',
+						name: { kind: 'Name', value: 'where' },
+					},
+					type: {
+						kind: 'NamedType',
+						name: { kind: 'Name', value: 'clients_bool_exp' },
+					},
+					defaultValue: { kind: 'ObjectValue', fields: [] },
+				},
+			],
+			selectionSet: {
+				kind: 'SelectionSet',
+				selections: [
+					{
+						kind: 'FragmentSpread',
+						name: { kind: 'Name', value: 'clientLeaseFilter' },
+					},
+				],
+			},
+		},
+		...ClientLeaseFilter.definitions,
+	],
+} as unknown as DocumentNode<ClientComboBox, ClientComboBoxVariables>;
 export type AddLeaseStore = OperationStore<AddLease, AddLeaseVariables>;
-export type AddLeasePageStore = OperationStore<
-	AddLeasePage,
-	AddLeasePageVariables
->;
 export type TenantComboBoxStore = OperationStore<
 	TenantComboBox,
 	TenantComboBoxVariables
+>;
+export type ClientComboBoxStore = OperationStore<
+	ClientComboBox,
+	ClientComboBoxVariables
 >;
