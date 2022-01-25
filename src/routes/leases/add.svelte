@@ -15,6 +15,7 @@
 	<SearchBox
 		queryDocument={TenantComboBoxDocument}
 		fieldList={tenantFieldList}
+		display={(hit) => `${hit.results[0].first_name} ${hit} ${hit?.last_name}`}
 	/>
 
 	<SearchBox
