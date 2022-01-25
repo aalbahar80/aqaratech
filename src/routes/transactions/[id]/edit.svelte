@@ -7,10 +7,10 @@
 	} from '$lib/definitions/Transactions';
 	import type { Load } from '@sveltejs/kit';
 	import {
-		TransactionEditPage,
 		TransactionEditPageDocument,
-		TransactionEditPageStore,
 		UpdateTransactionDocument,
+		type TransactionEditPage,
+		type TransactionEditPageStore,
 	} from './_edit.gql';
 
 	export const load: Load = async ({ params, stuff }) => {

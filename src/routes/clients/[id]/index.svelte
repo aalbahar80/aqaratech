@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
 	import {
-		DeleteClientDocument,
 		ClientDetailPageDocument,
-		ClientDetailPageStore,
+		DeleteClientDocument,
+		type ClientDetailPageStore,
 	} from './_index.gql';
-	import { page } from '$app/stores';
 
 	export const prerender = true;
 

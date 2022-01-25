@@ -7,10 +7,10 @@
 	} from '$lib/definitions/Properties';
 	import type { Load } from '@sveltejs/kit';
 	import {
-		PropertyEditPage,
 		PropertyEditPageDocument,
-		PropertyEditPageStore,
 		UpdatePropertyDocument,
+		type PropertyEditPage,
+		type PropertyEditPageStore,
 	} from './_edit.gql';
 
 	export const load: Load = async ({ params, stuff }) => {

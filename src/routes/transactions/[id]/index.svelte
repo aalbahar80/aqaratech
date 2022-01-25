@@ -24,7 +24,7 @@
 	import {
 		DeleteTransactionDocument,
 		TransactionDetailPageDocument,
-		TransactionDetailPageStore,
+		type TransactionDetailPageStore,
 	} from './_index.gql';
 
 	export const prerender = true;

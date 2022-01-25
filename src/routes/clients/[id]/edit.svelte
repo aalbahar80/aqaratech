@@ -3,10 +3,10 @@
 	import { fieldList, graphqlName, validation } from '$lib/definitions/Clients';
 	import type { Load } from '@sveltejs/kit';
 	import {
-		ClientEditPage,
 		ClientEditPageDocument,
-		ClientEditPageStore,
 		UpdateClientDocument,
+		type ClientEditPage,
+		type ClientEditPageStore,
 	} from './_edit.gql';
 
 	export const load: Load = async ({ params, stuff }) => {

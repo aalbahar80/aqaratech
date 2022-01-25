@@ -3,10 +3,10 @@
 	import { fieldList, graphqlName, validation } from '$lib/definitions/Tenants';
 	import type { Load } from '@sveltejs/kit';
 	import {
-		TenantEditScreen,
 		TenantEditScreenDocument,
-		TenantEditScreenStore,
 		TenantsUpdateDocument,
+		type TenantEditScreen,
+		type TenantEditScreenStore,
 	} from './_[id].gql';
 
 	export const load: Load = async ({ params, stuff }) => {

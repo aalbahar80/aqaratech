@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
-	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
@@ -11,7 +10,7 @@
 	import {
 		DeleteLeaseDocument,
 		LeaseDetailPageDocument,
-		LeaseDetailPageStore,
+		type LeaseDetailPageStore,
 	} from './_index.gql';
 
 	export const prerender = true;

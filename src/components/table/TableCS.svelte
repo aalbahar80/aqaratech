@@ -1,23 +1,23 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import type { Field } from '$components/form/Field';
+	import type { Order_By } from '$generated/graphql';
+	import { constructFilter } from '$lib/utils/search-utils';
+	import { operationStore, query, type TypedDocumentNode } from '@urql/svelte';
 	import {
 		DataTable,
+		DataTableSkeleton,
+		Pagination,
 		Toolbar,
 		ToolbarContent,
 		ToolbarSearch,
-		Pagination,
-		DataTableSkeleton,
 	} from 'carbon-components-svelte';
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import type { Order_By } from '$generated/graphql';
-	import type { Field } from '$components/form/Field';
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
-	import insert from 'just-insert';
 	import capitalize from 'just-capitalize';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/env';
-	import { constructFilter } from '$lib/utils/search-utils';
+	import insert from 'just-insert';
 
 	export let listDoc: TypedDocumentNode;
 	export let graphqlName: string;

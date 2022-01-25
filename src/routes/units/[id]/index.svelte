@@ -1,14 +1,14 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
+	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { query } from '@urql/svelte';
 	import {
 		DeleteUnitDocument,
 		UnitDetailPageDocument,
-		UnitDetailPageStore,
+		type UnitDetailPageStore,
 	} from './_index.gql';
-	import { page } from '$app/stores';
-	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 
 	export const prerender = true;
 
