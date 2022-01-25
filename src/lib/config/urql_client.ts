@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { GraphCacheConfig } from '$generated/graphql';
 import { cacheExchange } from '@urql/exchange-graphcache';
 import { createClient, dedupExchange, fetchExchange } from '@urql/svelte';

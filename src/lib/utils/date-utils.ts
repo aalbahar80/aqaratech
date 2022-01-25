@@ -1,11 +1,11 @@
 import { differenceInCalendarDays } from 'date-fns';
 
 export const getProgress = (start: Date, end: Date, ref: Date): number => {
-    const total = differenceInCalendarDays(end, start);
-    const left = differenceInCalendarDays(end, ref);
-    const result = left < 1 ? 100 : 100 - (left / total) * 100;
-    return Math.round(result);
-}
+	const total = differenceInCalendarDays(end, start);
+	const left = differenceInCalendarDays(end, ref);
+	const result = left < 1 ? 100 : 100 - (left / total) * 100;
+	return Math.round(result);
+};
 
 // a function that calculates the number of days between two dates
 export function daysLeft(end: Date, from: Date = new Date()): number {
@@ -17,9 +17,8 @@ export function daysLeft(end: Date, from: Date = new Date()): number {
 export function daysLeftFromISO(end: string, from?: string): number {
 	if (!from) {
 		return daysLeft(new Date(end));
-	} else {
-		return daysLeft(new Date(end), new Date(from));
 	}
+	return daysLeft(new Date(end), new Date(from));
 }
 
 // define a function that take an ISO date and formats to MMM DD, YYYY
