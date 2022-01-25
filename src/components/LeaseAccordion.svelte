@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { getProgress } from '$lib/utils/date-utils';
+	import type { TenantIdScreen } from '$routes/tenants/[id]/_[id].gql';
 	import {
 		Accordion,
 		AccordionItem,
 		ProgressBar,
 	} from 'carbon-components-svelte';
-	import { getProgress } from '$lib/utils/date-utils';
-	import { formatDistance, parseISO } from 'date-fns';
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { Launch24 } from 'carbon-icons-svelte';
-	import type { TenantIdScreen } from '$routes/tenants/[id]/_[id].gql';
+	import { formatDistance, parseISO } from 'date-fns';
 
 	type Leases = NonNullable<TenantIdScreen['tenants_by_pk']>['pastLeases'];
 	export let leases: Leases;
@@ -25,7 +25,7 @@
 
 <Accordion skeleton={loading}>
 	{#each leases as { id, start_date, end_date, monthly_rent, deposit }, i}
-		<AccordionItem size="xl" open={i === 0}>
+		<AccordionItem open={i === 0}>
 			<div slot="title">
 				<h5>{`Lease #${id}`}</h5>
 				<ProgressBar

@@ -76,7 +76,7 @@
 				props: {
 					title: `SMS request sent`,
 					subtitle: `Phone: ${phone}`,
-					type: 'success',
+					kind: 'success',
 				},
 			});
 		} else {
@@ -84,7 +84,7 @@
 				props: {
 					title: `Unable to send SMS`,
 					subtitle: `Phone: ${phone}`,
-					type: 'error',
+					kind: 'error',
 				},
 			});
 		}

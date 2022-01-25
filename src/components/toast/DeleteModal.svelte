@@ -10,7 +10,7 @@
 
 	export let deleteDocumentNode: DocumentNode;
 	export let id: string;
-	export let buttonProps: ButtonProps | undefined = undefined;
+	export let buttonProps: Pick<ButtonProps, 'disabled'> | undefined = undefined;
 
 	const deleteStore = operationStore(deleteDocumentNode);
 	const deleteMutation = mutation(deleteStore);

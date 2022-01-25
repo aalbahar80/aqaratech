@@ -5,7 +5,7 @@ import type { ToastNotificationProps } from 'carbon-components-svelte/types/Noti
 interface ToastItem {
 	id: number;
 	duration?: number;
-	props: ToastNotificationProps;
+	props: Pick<ToastNotificationProps, 'title' | 'kind' | 'subtitle'>;
 }
 
 export const toasts: Writable<ToastItem[]> = writable([]);
