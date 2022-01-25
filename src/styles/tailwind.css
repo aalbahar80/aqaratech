@@ -1,7 +1,15 @@
+:root {
+	/* --cds-label-01-font-size: 1.5rem !important; */
+	--cds-label-01-font-size: 120% !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.bx--label {
-	font-size: 130%;
-}
+/* .bx--label {
+	font-size: 170%;
+} */
+/* .bx--list-box__menu {
+	max-height: 5rem;
+} */

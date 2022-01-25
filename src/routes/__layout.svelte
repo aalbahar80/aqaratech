@@ -10,12 +10,12 @@
 	} from '@urql/svelte';
 	import { operationStore, setClient } from '@urql/svelte';
 	import { Column, Content, Grid, Row } from 'carbon-components-svelte';
+	import '../styles/tailwind.css';
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
-	import '../styles/tailwind.css';
 
 	export const load: Load<CLoad> = ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
