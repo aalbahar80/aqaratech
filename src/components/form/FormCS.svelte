@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { Field } from '$components/form/Field';
 	import { addToast } from '$lib/stores/toast';
 	import {
@@ -6,12 +7,15 @@
 		ValidationMessage,
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
-	import { mutation, operationStore } from '@urql/svelte';
+	import {
+		ExecuteMutation,
+		mutation,
+		OperationStore,
+		operationStore,
+	} from '@urql/svelte';
 	import {
 		Button,
 		Checkbox,
-		DatePicker,
-		DatePickerInput,
 		Form,
 		FormGroup,
 		TextInput,
@@ -19,11 +23,9 @@
 	import { createForm } from 'felte';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
-	import reduce from 'just-reduce-object';
 	import map from 'just-map-values';
+	import reduce from 'just-reduce-object';
 	import { z } from 'zod';
-	import { goto } from '$app/navigation';
-	import { logger } from '$lib/config/logger';
 
 	type T = $$Generic<{ id: number | string; [key: string]: any }>;
 
@@ -39,11 +41,19 @@
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// insert mutation
-	const insertStore = operationStore(insertDoc);
-	const insertMutation = mutation(insertStore);
+	let insertStore: OperationStore;
+	let insertMutation: ExecuteMutation;
+	if (insertDoc) {
+		insertStore = operationStore(insertDoc);
+		insertMutation = mutation(insertStore);
+	}
 	// update mutation
-	const updateStore = operationStore(updateDoc);
-	const updateMutation = mutation(updateStore);
+	let updateStore: OperationStore;
+	let updateMutation: ExecuteMutation;
+	if (updateDoc) {
+		updateStore = operationStore(updateDoc);
+		updateMutation = mutation(updateStore);
+	}
 
 	// function to get id value from existing object
 
