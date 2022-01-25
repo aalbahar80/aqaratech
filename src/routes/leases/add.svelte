@@ -28,6 +28,7 @@
 		fieldList={clientFieldList}
 		display={(hit) => ({
 			id: hit.id,
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			text: `${hit.first_name} ${hit.last_name}`,
 		})}
 	/>

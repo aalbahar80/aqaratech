@@ -71,6 +71,7 @@ export type ClientComboBox = {
 	__typename?: 'query_root';
 	results: Array<{
 		__typename?: 'clients';
+		id: number;
 		first_name?: string | null | undefined;
 		last_name?: string | null | undefined;
 	}>;
@@ -80,6 +81,7 @@ export type ClientLeaseFilter = {
 	__typename?: 'query_root';
 	results: Array<{
 		__typename?: 'clients';
+		id: number;
 		first_name?: string | null | undefined;
 		last_name?: string | null | undefined;
 	}>;
@@ -226,6 +228,7 @@ export const ClientLeaseFilter = {
 						selectionSet: {
 							kind: 'SelectionSet',
 							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
 							],

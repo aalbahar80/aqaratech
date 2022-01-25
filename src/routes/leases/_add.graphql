@@ -36,7 +36,7 @@ query ClientComboBox(
 }
 fragment clientLeaseFilter on query_root {
 	results: clients(limit: $limit, order_by: $order_by, where: $where) {
-		# id
+		id
 		first_name
 		last_name
 	}
