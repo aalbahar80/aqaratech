@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { constructFilter } from '$lib/utils/search-utils';
-	import { operationStore, query, TypedDocumentNode } from '@urql/svelte';
-	import ComboBox from 'carbon-components-svelte/src/ComboBox/ComboBox.svelte';
 	import type { Field } from '$components/form/Field';
+	import { constructFilter } from '$lib/utils/search-utils';
+	import { operationStore, query, type TypedDocumentNode } from '@urql/svelte';
+	import ComboBox from 'carbon-components-svelte/src/ComboBox/ComboBox.svelte';
 	import type {
 		ComboBoxItem,
 		ComboBoxProps,
@@ -21,8 +21,12 @@
 
 	export let queryDocument: TypedDocumentNode<Q, QueryVars>;
 	export let fieldList: Field[];
-	export let limit = 4;
-	export let comboBoxProps: ComboBoxProps;
+	export let limit = 10;
+	export let comboBoxProps: Pick<
+		ComboBoxProps,
+		'titleText' | 'placeholder' | 'disabled'
+	>;
+	export let selectedId: string | undefined = undefined;
 
 	let searchTerm: string;
 
@@ -32,10 +36,16 @@
 		where: constructFilter(searchTerm, fieldList),
 	};
 	const result = operationStore(queryDocument, queryVars);
-	export let display: (hit: C) => ComboBoxItem;
+	export let display: (hit: C) => ComboBoxItem & { id: string };
 	query(result);
 	$: $result.variables = queryVars;
 	$: items = $result.data?.results?.map(display) || [];
 </script>
 
-<ComboBox bind:value={searchTerm} size="xl" {items} {...comboBoxProps} />
+<ComboBox
+	bind:value={searchTerm}
+	bind:selectedId
+	size="xl"
+	{items}
+	{...comboBoxProps}
+/>
