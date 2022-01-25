@@ -26,7 +26,7 @@
 	<ComboBox
 		bind:value={tenantSearchTerm}
 		titleText="Tenant"
-		placeholder="Select tenant"
+		placeholder="Type to search by name, civil id, phone, etc"
 		size="xl"
 		items={tenantItems}
 	/>
