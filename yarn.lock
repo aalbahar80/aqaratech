@@ -2699,17 +2699,17 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components-svelte@^0.53.0:
-  version "0.53.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-svelte/-/carbon-components-svelte-0.53.0.tgz#8f1586f0b7e0054b88f7fd3e07be32680b5f4b73"
-  integrity sha512-LHcVu0udTiou7TuM/F4KzLUCMdjVmTvLB9Vzu8UdmeUaU5tSAgIRyBb7k7/TR2ayaXcQp/pytva4HF4O1Ckbdg==
+carbon-components-svelte@^0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/carbon-components-svelte/-/carbon-components-svelte-0.55.0.tgz#c595b6717840adfcebec7d85ddf286245bd7ed23"
+  integrity sha512-amZfY6BGUN5aAnx6sY/VdnNWVP9CJZKgfbNhMKD9nsQogWd2hpJ2Mba/V+LCH3g0ok+qzTPBFdvUuDrLFi05nw==
   dependencies:
     flatpickr "4.6.9"
 
-carbon-icons-svelte@^10.44.3:
-  version "10.44.3"
-  resolved "https://registry.yarnpkg.com/carbon-icons-svelte/-/carbon-icons-svelte-10.44.3.tgz#cc437d5d10512777a8d476c742ff2885fc5dfcf0"
-  integrity sha512-vLBy3T5Dnv68vjTJEtwL7DKHX4VqXHeJ6DwPtiO9zTwoMOU3eLx/exzR6KTISuUMqfEPmrOy4dOwZc5sPWuxLA==
+carbon-icons-svelte@^10.44.4:
+  version "10.44.4"
+  resolved "https://registry.yarnpkg.com/carbon-icons-svelte/-/carbon-icons-svelte-10.44.4.tgz#0f0ea205e4d4c148c994e3b53104b81605d58ec6"
+  integrity sha512-KsqXj0tYFF4S9b4mDSyt3Ovo0TA6QQ6nW0XRoY7D7EahM6hGluz0CdMw3wp/lbAUItTlTfYk+aPpiCKvpbTIyA==
 
 carbon-preprocess-svelte@^0.6.0:
   version "0.6.0"
