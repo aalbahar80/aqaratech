@@ -19,8 +19,11 @@
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import isEmpty from 'just-is-empty';
 	import Fa from 'svelte-fa/src/fa.svelte';
-	import type { TenantIdScreenStore } from './_[id].gql';
-	import { DeleteTenantDocument, TenantIdScreenDocument } from './_[id].gql';
+	import {
+		DeleteTenantDocument,
+		TenantIdScreenDocument,
+		type TenantIdScreenStore,
+	} from './_[id].gql';
 
 	export const prerender = true;
 
