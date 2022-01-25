@@ -33,9 +33,6 @@
 		size="xl"
 		items={tenantItems}
 		ref={tenantInput}
-		on:scroll={(e) => {
-			document?.activeElement?.blur();
-		}}
 	/>
 
 	<ComboBox
