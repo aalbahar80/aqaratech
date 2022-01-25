@@ -6,10 +6,11 @@
 	import { ComboBox } from 'carbon-components-svelte';
 	import { AddLeaseDocument, TenantComboBoxDocument } from './_add.gql';
 	import { fieldList as tenantFieldList } from '$lib/definitions/Tenants';
+	import { addToast } from '$lib/stores/toast';
 
 	let tenantSearchTerm: string;
 	$: tenantQueryVars = {
-		tenant_limit: 10,
+		tenant_limit: 5,
 		tenant_where: constructFilter(tenantSearchTerm, tenantFieldList),
 	};
 	const tenants = operationStore(TenantComboBoxDocument, tenantQueryVars);
@@ -20,6 +21,8 @@
 			id: tenant.id.toString(),
 			text: `${tenant.first_name} ${tenant.last_name}`,
 		})) || [];
+
+	let tenantInput: HTMLInputElement;
 </script>
 
 <div class="max-w-md grid grid-cols-1 gap-8">
@@ -29,6 +32,10 @@
 		placeholder="Type to search by name, civil id, phone, etc"
 		size="xl"
 		items={tenantItems}
+		ref={tenantInput}
+		on:scroll={(e) => {
+			document?.activeElement?.blur();
+		}}
 	/>
 
 	<ComboBox
