@@ -83,5 +83,6 @@ module.exports = {
         'import/order': 'off',
         'no-console': 'off',
         'import/no-extraneous-dependencies': 'off',
+        'import/extensions': [0, { 'ts': 'never' }],
     },
 };
