@@ -8,25 +8,25 @@
 		ComboBoxProps,
 	} from 'carbon-components-svelte/types/ComboBox/ComboBox.svelte';
 
-	type T = $$Generic<{ results: any[] }>;
-	// TODO add a generic constraint to query document, make sure it has key results with value []
-	// combine the below with the above
-	// export let queryDocument: TypedDocumentNode<
-	//   { results: [] },
-	//   { limit: number; order_by?: any; where?: any }
-	// >;
+	type Q = $$Generic<{ results: any[] }>;
 	type A = typeof $result['data'];
 	type B = NonNullable<A>['results'];
 	type Flatten<G> = G extends Array<infer U> ? U : G;
 	type C = Flatten<B>;
+	type QueryVars = {
+		limit: number;
+		order_by?: any;
+		where?: any;
+	};
 
-	export let queryDocument: TypedDocumentNode<T>;
+	export let queryDocument: TypedDocumentNode<Q, QueryVars>;
 	export let fieldList: Field[];
 	export let limit = 4;
 	export let comboBoxProps: ComboBoxProps;
 
 	let searchTerm: string;
 
+	let queryVars: QueryVars;
 	$: queryVars = {
 		limit,
 		where: constructFilter(searchTerm, fieldList),

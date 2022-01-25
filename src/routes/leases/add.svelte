@@ -13,6 +13,7 @@
 		TenantComboBoxDocument,
 		UnitComboBoxDocument,
 	} from './_add.gql';
+	import { TenantsListDocument } from '$routes/tenants/[id]/_[id].gql';
 
 	const placeholder = (fields: string[]): string =>
 		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
