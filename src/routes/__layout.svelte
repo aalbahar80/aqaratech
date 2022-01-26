@@ -21,10 +21,11 @@
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 
-	export const prerender = false;
+	// export const prerender = false;
 
 	export const load: Load = async ({ fetch, stuff, session }) => {
-		if (browser && !session.user) {
+		logger.debug(!session.user, '__layout.svelte ~ 27');
+		if (!session.user) {
 			return {
 				status: 302,
 				redirect: '/auth/login',
