@@ -1,6 +1,4 @@
 <script lang="ts">
-	// import Toy from '@leveluptuts/svelte-toy/src/lib/Toy.svelte';
-	// import Toy from '@leveluptuts/svelte-toy';
 	import FormCS from '$components/form/FormCS.svelte';
 	import SearchBox from '$components/form/SearchBox.svelte';
 	import { fieldList, graphqlName, validation } from '$lib/definitions/Leases';
@@ -19,11 +17,25 @@
 	const placeholder = (fields: string[]): string =>
 		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
 
-	let client: string;
-	let property: string;
-</script>
+	// SELECTION ID'S
+	let client: string | undefined = undefined;
+	let property: string | undefined = undefined;
+	let unit: string | undefined = undefined;
 
-<!-- <Toy register={[{ client }]} /> -->
+	// FIELD DISABLING LOGIC
+	let isPropertyClicked: boolean = false;
+	let isUnitClicked: boolean = false;
+	$: isPropertyDisabled = !client;
+	$: isUnitDisabled = !property;
+
+	$: if (!client) {
+		property = undefined;
+		unit = undefined;
+	}
+	$: if (!property) {
+		unit = undefined;
+	}
+</script>
 
 <div class="max-w-md grid grid-cols-1 gap-8">
 	<SearchBox
@@ -53,34 +65,43 @@
 		bind:selectedId={client}
 	/>
 
-	<SearchBox
-		queryDocument={PropertyComboBoxDocument}
-		fieldList={propertyFieldList}
-		display={(hit) => ({
-			id: hit.id.toString(),
-			text: `${hit.area} ${hit.block}`,
-		})}
-		comboBoxProps={{
-			titleText: 'Propety',
-			placeholder: placeholder(['address']),
-			disabled: !client,
-		}}
-		bind:selectedId={property}
-	/>
+	<div on:click={() => (isPropertyClicked = true)}>
+		<SearchBox
+			queryDocument={PropertyComboBoxDocument}
+			fieldList={propertyFieldList}
+			display={(hit) => ({
+				id: hit.id.toString(),
+				text: `${hit.area} ${hit.block}`,
+			})}
+			comboBoxProps={{
+				titleText: 'Property',
+				placeholder: placeholder(['address']),
+				disabled: isPropertyDisabled,
+				warn: isPropertyDisabled && isPropertyClicked,
+				warnText: 'Please select a client first',
+			}}
+			bind:selectedId={property}
+		/>
+	</div>
 
-	<SearchBox
-		queryDocument={UnitComboBoxDocument}
-		fieldList={unitFieldList}
-		display={(hit) => ({
-			id: hit.id.toString(),
-			text: hit.unit_number || hit.id.toString(),
-		})}
-		comboBoxProps={{
-			titleText: 'Unit',
-			placeholder: placeholder(['unit number']),
-			disabled: !property,
-		}}
-	/>
+	<div on:click={() => (isUnitClicked = true)}>
+		<SearchBox
+			queryDocument={UnitComboBoxDocument}
+			fieldList={unitFieldList}
+			display={(hit) => ({
+				id: hit.id.toString(),
+				text: hit.unit_number || hit.id.toString(),
+			})}
+			comboBoxProps={{
+				titleText: 'Unit',
+				placeholder: placeholder(['unit number']),
+				disabled: isUnitDisabled,
+				warn: isUnitDisabled && isUnitClicked,
+				warnText: 'Please select a property first',
+			}}
+			bind:selectedId={unit}
+		/>
+	</div>
 
 	<FormCS
 		{fieldList}

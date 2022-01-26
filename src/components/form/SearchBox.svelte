@@ -24,7 +24,7 @@
 	export let limit = 10;
 	export let comboBoxProps: Pick<
 		ComboBoxProps,
-		'titleText' | 'placeholder' | 'disabled'
+		'titleText' | 'placeholder' | 'disabled' | 'warn' | 'warnText'
 	>;
 	export let selectedId: string | undefined = undefined;
 
