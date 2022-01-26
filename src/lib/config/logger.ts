@@ -17,7 +17,7 @@ export const logger = pino(
 		// 		send: send,
 		// 	},
 		// },
-		level: 'debug',
+		level: import.meta.env.VITE_PINO_LOG_LEVEL,
 		// base: {
 		// 	env: process.env.VERCEL_ENV,
 		// 	revision: process.env.VERCEL_GITHUB_COMMIT_SHA,
