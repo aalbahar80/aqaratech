@@ -30,9 +30,8 @@
 			await new Promise((resolve) => setTimeout(resolve, 20));
 			return {
 				status: 302,
-
-				// redirect: '/landing',
-				redirect: '/auth/login',
+				redirect: '/landing',
+				// redirect: '/auth/login',
 				// headers: { location: '/auth/login' },
 			};
 		}
