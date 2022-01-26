@@ -12,15 +12,20 @@ export const getRedirectUri = (url: URL) => {
 	const prefix = '/auth/callback';
 	let base = url.origin;
 
-	if (process.env.VERCEL && process.env.VERCEL_URL) {
+	if (process.env.VERCEL) {
 		// base = 'https://svelte-14dec21.vercel.app';
-		base = process.env.VERCEL_URL;
-		// base = `${url.protocol}${'//svelte-14dec21.vercel.app'}`;
+		if (typeof import.meta.env.VITE_TARGET_URL === 'string') {
+			base = import.meta.env.VITE_TARGET_URL;
+		} else {
+			const err = new Error('VITE_TARGET_URL is not defined');
+			logger.error(err);
+			throw err;
+		}
 	}
-	logger.info(f('auth_config.ts', 25, { base }));
+	logger.debug(f('auth_config.ts', 25, { base }));
 
 	const redirectUri = `${base}${prefix}`;
-	logger.info(f('auth_config.ts', 22, { redirectUri }));
+	logger.debug(f('auth_config.ts', 22, { redirectUri }));
 
 	return redirectUri;
 };
