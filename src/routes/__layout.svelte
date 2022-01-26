@@ -16,7 +16,7 @@
 	import isEmpty from 'just-is-empty';
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
-	import { goto } from '$app/navigation';
+	import { invalidate } from '$app/navigation';
 	import { browser } from '$app/env';
 
 	export const load: Load<CLoad> = async ({ fetch, stuff, session }) => {
@@ -25,10 +25,13 @@
 		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
 		// eslint-disable-next-line no-constant-condition
 		if (shouldRedirect) {
+			browser && invalidate('/');
 			// set timeout of 10 seconds before redirecting
 			await new Promise((resolve) => setTimeout(resolve, 20));
 			return {
 				status: 302,
+
+				// redirect: '/landing',
 				redirect: '/auth/login',
 				// headers: { location: '/auth/login' },
 			};
