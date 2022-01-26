@@ -17,17 +17,12 @@
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
 	import { browser } from '$app/env';
-
-	export const prerender = false;
+	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	export const load: Load = async ({ fetch, stuff, session }) => {
-		logger.debug({ session }, '__layout.svelte ~ 29');
-		const res = await fetch('/auth/user.json');
-		const { user } = await res.json();
-		logger.debug({ user }, '__layout.svelte ~ 27');
-		const shouldRedirect = isEmpty(user);
-		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
-		if (browser && !user) {
+		if (browser && !session.user) {
 			return {
 				status: 302,
 				redirect: '/auth/login',
@@ -36,7 +31,6 @@
 				// headers: { location: '/auth/login' },
 			};
 		}
-
 		const client = urqlClient(fetch);
 
 		return {
@@ -68,6 +62,13 @@
 <script lang="ts">
 	export let client: Client;
 	setClient(client);
+
+	// onMount(async () => {
+	// 	if (!$session.user) {
+	// 		console.log('no user');
+	// 		await goto('/auth/login');
+	// 	}
+	// });
 </script>
 
 <Header />
