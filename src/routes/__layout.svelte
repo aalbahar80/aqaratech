@@ -17,7 +17,13 @@
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
 
-	export const load: Load<CLoad> = async ({ fetch, stuff, session }) => {
+	export const load: Load<CLoad> = async ({
+		fetch,
+		stuff,
+		session,
+		params,
+		url,
+	}) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
 		const shouldRedirect = isEmpty(session.user);
 		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
