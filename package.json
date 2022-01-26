@@ -37,7 +37,7 @@
     "@leveluptuts/svelte-toy": "^0.0.18",
     "@pinojs/json-colorizer": "^3.0.0",
     "@sveltejs/adapter-auto": "^1.0.0-next.15",
-    "@sveltejs/kit": "^1.0.0-next.240",
+    "@sveltejs/kit": "^1.0.0-next.243",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.0",
     "@testing-library/jest-dom": "^5.16.1",
