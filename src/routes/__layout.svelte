@@ -16,15 +16,16 @@
 	import isEmpty from 'just-is-empty';
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
+	import { browser } from '$app/env';
 
-	export const load: Load<CLoad> = async ({ fetch, stuff, session }) => {
+	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
 		const res = await fetch('/auth/user.json');
 		const { user } = await res.json();
 		logger.debug({ user }, '__layout.svelte ~ 27');
 		const shouldRedirect = isEmpty(user);
 		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
-		if (!user) {
+		if (browser && !user) {
 			return {
 				status: 302,
 				// redirect: '/landing',
