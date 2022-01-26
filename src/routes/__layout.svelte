@@ -24,12 +24,13 @@
 		// 	session.user === undefined ||
 		// 	session.user === null ||
 		// 	session.user === '';
-		logger.debug({ shouldRedirect }, '__layout.svelte ~ 23');
+		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
 		// eslint-disable-next-line no-constant-condition
-		if (false) {
+		if (shouldRedirect) {
 			return {
 				status: 302,
-				redirect: '/landing',
+				// redirect: '/landing',
+				redirect: '/auth/login',
 				// headers: { location: '/auth/login' },
 			};
 		}
