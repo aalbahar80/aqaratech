@@ -17,23 +17,19 @@
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
 
-	export const load: Load<CLoad> = async ({
-		fetch,
-		stuff,
-		session,
-		params,
-		url,
-	}) => {
+	export const load: Load<CLoad> = async ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
-		const shouldRedirect = isEmpty(session.user);
+		const res = await fetch('/auth/user.json');
+		const { user } = await res.json();
+		logger.debug({ user }, '__layout.svelte ~ 27');
+		const shouldRedirect = isEmpty(user);
 		logger.warn({ shouldRedirect }, '__layout.svelte ~ 23');
-		// eslint-disable-next-line no-constant-condition
-		if (shouldRedirect) {
+		if (!user) {
 			return {
 				status: 302,
 				// redirect: '/landing',
 				redirect: '/auth/login',
-				maxage: 0,
+				// maxage: 0,
 				// headers: { location: '/auth/login' },
 			};
 		}
