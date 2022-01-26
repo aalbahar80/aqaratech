@@ -54,6 +54,7 @@ module.exports = {
 				// // https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
 				'import/no-mutable-exports': 'off',
 				'no-undef': 'off',
+				'import/first': 'off',
 			},
 			parserOptions: {
 				project: ['./tsconfig.json'],
