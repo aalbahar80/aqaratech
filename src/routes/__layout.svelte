@@ -33,6 +33,7 @@
 				status: 302,
 				// redirect: '/landing',
 				redirect: '/auth/login',
+				maxage: 0,
 				// headers: { location: '/auth/login' },
 			};
 		}
