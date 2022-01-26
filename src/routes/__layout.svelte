@@ -21,6 +21,8 @@
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 
+	export const prerender = false;
+
 	export const load: Load = async ({ fetch, stuff, session }) => {
 		if (browser && !session.user) {
 			return {
