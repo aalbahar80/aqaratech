@@ -15,41 +15,25 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	const response = await resolve(event);
 
 	logger.debug(response.headers, 'hooks.ts ~ 16');
-	// TODO: samesite=strict? - in prod only?
 	response.headers.append(
 		'Set-Cookie',
 		cookie.serialize('user', event.locals.user, {
-			// httpOnly: false,
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
-			// sameSite: 'lax',
-			// sameSite: 'strict',
-			sameSite: 'none',
+			sameSite: 'none', // TODO research
 			secure: true,
-			// secure: false,
-			// secure: false,
-			// secure: process.env.NODE_ENV === 'production',
 		}),
 	);
 
 	response.headers.append(
 		'Set-Cookie',
 		cookie.serialize('hasura', event.locals.hasura, {
-			// httpOnly: false,
 			httpOnly: true,
 			path: '/',
-			sameSite: 'none',
-			// sameSite: 'none',
-			secure: true,
 			maxAge: 60 * 60 * 24 * 7,
-			// sameSite: 'none',
-			// secure: false,
-			// sameSite: 'lax',
-			// sameSite: 'none',
-			// secure: false,
-			// sameSite: 'strict',
-			// secure: process.env.NODE_ENV === 'production',
+			sameSite: 'none', // TODO research
+			secure: true,
 		}),
 	);
 
