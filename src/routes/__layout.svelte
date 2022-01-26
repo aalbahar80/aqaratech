@@ -18,6 +18,8 @@
 	import { get } from 'svelte/store';
 	import { browser } from '$app/env';
 
+	export const prerender = false;
+
 	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.debug({ session }, '__layout.svelte ~ 29');
 		const res = await fetch('/auth/user.json');
@@ -28,8 +30,8 @@
 		if (browser && !user) {
 			return {
 				status: 302,
-				// redirect: '/landing',
 				redirect: '/auth/login',
+				// redirect: '/landing',
 				// maxage: 0,
 				// headers: { location: '/auth/login' },
 			};
