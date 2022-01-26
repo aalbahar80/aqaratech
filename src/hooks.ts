@@ -12,7 +12,7 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	event.locals.user = cookies.user || '';
 	event.locals.hasura = cookies.hasura || '';
 
-	const response = await resolve(event);
+	const response = await resolve(event, { ssr: false });
 
 	logger.debug(response.headers, 'hooks.ts ~ 16');
 	response.headers.append(
