@@ -40,7 +40,7 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	if (import.meta.env.VITE_VERCEL_ENV !== 'production') {
 		response.headers.set('X-Robots-Tag', 'noindex');
 	}
-	// response.headers.set('cache-control', 'no-cache');
+	response.headers.set('cache-control', 'no-cache');
 
 	return response;
 };
