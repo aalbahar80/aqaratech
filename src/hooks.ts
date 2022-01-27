@@ -17,12 +17,16 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	const response = await resolve(event);
 
 	if (!event.locals.user && !publicPages.includes(event.url.pathname)) {
-		return {
+		// return {
+		// 	status: 302,
+		// 	headers: {
+		// 		location: '/',
+		// 	},
+		// };
+		return new Response('someStringBody', {
 			status: 302,
-			headers: {
-				location: '/',
-			},
-		};
+			headers: { location: '/' },
+		});
 	}
 
 	logger.debug(response.headers, 'hooks.ts ~ 16');
