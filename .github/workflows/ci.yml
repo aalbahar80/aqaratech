@@ -3,10 +3,20 @@ name: ci
 on: [push, deployment, deployment_status]
 
 jobs:
-  show-event:
+  e2e:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Dump Github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+
+      - name: Run Cypress 🌲
+        uses: cypress-io/github-action@v2
+        env:
+          # CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          CYPRESS_BASE_URL: 'https://dev.admin.letand.be'
