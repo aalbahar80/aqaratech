@@ -3,6 +3,8 @@ import { logger } from '$lib/config/logger';
 import type { Handle, GetSession } from '@sveltejs/kit';
 import cookie from 'cookie';
 
+const publicPages = ['/', '/auth/login', '/auth/callback', '/auth/logout'];
+
 export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	logger.debug(f('hooks.ts', 8, event.request.headers));
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
@@ -12,7 +14,16 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	event.locals.user = cookies.user || '';
 	event.locals.hasura = cookies.hasura || '';
 
-	const response = await resolve(event, { ssr: false });
+	const response = await resolve(event);
+
+	if (!event.locals.user && !publicPages.includes(event.url.pathname)) {
+		return {
+			status: 302,
+			headers: {
+				location: '/',
+			},
+		};
+	}
 
 	logger.debug(response.headers, 'hooks.ts ~ 16');
 	response.headers.append(
@@ -40,7 +51,7 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	if (import.meta.env.VITE_VERCEL_ENV !== 'production') {
 		response.headers.set('X-Robots-Tag', 'noindex');
 	}
-	response.headers.set('cache-control', 's-maxage=0');
+	// response.headers.set('cache-control', 's-maxage=0');
 
 	return response;
 };
