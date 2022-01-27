@@ -17,6 +17,10 @@ jobs:
 
       - name: Run Cypress 🌲
         uses: cypress-io/github-action@v2
+        with:
+          spec: |
+            cypress/integration/login.spec.ts
+            cypress/integration/sample.spec.ts
         env:
           # CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
           CYPRESS_BASE_URL: 'https://dev.admin.letand.be'
