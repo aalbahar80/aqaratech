@@ -48,6 +48,9 @@ yarn run check
 ```
 
 ```bash
+yarn run check
+yarn run check:watch
+
 yarn eslint . --ext .ts,.svelte,.graphql
 ```
 
@@ -77,4 +80,11 @@ yarn upgrade-interactive --latest
 # for packages that use @next tag
 yarn upgrade @sveltejs/kit@next
 yarn upgrade @sveltejs/adapter-auto@next
+```
+
+```bash
+# run cypress headless
+
+# watch mode
+
 ```
