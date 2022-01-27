@@ -18,10 +18,11 @@
 	import { get } from 'svelte/store';
 	import { browser } from '$app/env';
 	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
+	// import { session } from '$app/stores';
 	import { afterNavigate, goto, invalidate } from '$app/navigation';
 
 	// export const prerender = false;
+	export const router = false;
 
 	// const publicPages = ['/', '/auth'];
 	const publicPages = ['/', '/auth/login', '/auth/callback', '/auth/logout'];
