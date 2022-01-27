@@ -35,7 +35,7 @@
 		if (!session.user) {
 			return {
 				status: 302,
-				redirect: '/',
+				redirect: '/auth/login',
 				// redirect: '/landing',
 				// maxage: 0,
 				// headers: { location: '/auth/login' },
