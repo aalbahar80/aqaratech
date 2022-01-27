@@ -22,7 +22,7 @@
 	import { afterNavigate, goto, invalidate } from '$app/navigation';
 
 	// export const prerender = false;
-	export const router = false;
+	// export const router = false;
 
 	// const publicPages = ['/', '/auth'];
 	const publicPages = ['/', '/auth/login', '/auth/callback', '/auth/logout'];

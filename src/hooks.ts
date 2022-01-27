@@ -16,18 +16,18 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 
-	if (!event.locals.user && !publicPages.includes(event.url.pathname)) {
-		// return {
-		// 	status: 302,
-		// 	headers: {
-		// 		location: '/',
-		// 	},
-		// };
-		return new Response('someStringBody', {
-			status: 302,
-			headers: { location: '/' },
-		});
-	}
+	// if (!event.locals.user && !publicPages.includes(event.url.pathname)) {
+	// 	// return {
+	// 	// 	status: 302,
+	// 	// 	headers: {
+	// 	// 		location: '/',
+	// 	// 	},
+	// 	// };
+	// 	return new Response('someStringBody', {
+	// 		status: 302,
+	// 		headers: { location: '/' },
+	// 	});
+	// }
 
 	logger.debug(response.headers, 'hooks.ts ~ 16');
 	response.headers.append(
@@ -60,7 +60,7 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	return response;
 };
 
-export const getSession: GetSession<Locals> = ({ locals }) => ({
+export const getSession: GetSession = ({ locals }) => ({
 	user: locals.user,
 	hasura: locals.hasura,
 });
