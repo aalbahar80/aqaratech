@@ -13,29 +13,23 @@
 	import '../styles/tailwind.css';
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
-	import isEmpty from 'just-is-empty';
 	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
-	import { browser } from '$app/env';
-	import { onMount } from 'svelte';
-	// import { session } from '$app/stores';
-	import { afterNavigate, goto, invalidate } from '$app/navigation';
 
-	// export const prerender = false;
-	// export const router = false;
-
-	// const publicPages = ['/', '/auth'];
-	const publicPages = ['/', '/auth/login', '/auth/callback', '/auth/logout'];
-	export const load: Load = async ({ fetch, stuff, session, url }) => {
-		const path = url.pathname;
-		if (publicPages.includes(path)) {
-			return {};
-		}
+	const publicPages = [
+		'/',
+		'/auth/login',
+		'/auth/callback',
+		'/auth/logout',
+		'/landing',
+	];
+	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.debug(!session.user, '__layout.svelte ~ 27');
 		if (!session.user) {
 			return {
 				status: 302,
-				redirect: '/auth/login',
+				// redirect: '/auth/login',
+				redirect: '/',
 				// redirect: '/landing',
 				// maxage: 0,
 				// headers: { location: '/auth/login' },
@@ -73,13 +67,6 @@
 <script lang="ts">
 	export let client: Client;
 	setClient(client);
-
-	// onMount(async () => {
-	// window.location.reload();
-	// });
-	afterNavigate(async () => {
-		// window.location.reload();
-	});
 </script>
 
 <Header />
