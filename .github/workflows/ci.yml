@@ -1,3 +1,4 @@
+# https://glebbahmutov.com/blog/develop-preview-test/#preview-deploys
 name: ci
 
 on: [deployment_status]
