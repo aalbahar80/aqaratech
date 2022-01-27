@@ -1,38 +1,32 @@
-Cypress.Cookies.debug(true);
-const logoutUrl =
-	'https://dev-eehvhdp2.eu.auth0.com/v2/logout?client_id=z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct&returnTo=http://localhost:3000';
-
-describe('A successful login', () => {
-	before(() => {
-		cy.viewport('macbook-16');
-		cy.request('/auth/logout');
-		cy.getCookies();
-		cy.visit('/landing');
-		cy.contains('Login').click();
-		cy.get('#username').type('dev.tester.3@mailthink.net');
-		cy.get('#password').type('HVuc1C8Ls9CN');
-		cy.contains('Continue').click();
-		cy.getCookies();
-	});
+describe('The login process', () => {
 	beforeEach(() => {
 		cy.viewport('macbook-16');
 		Cypress.Cookies.preserveOnce('user', 'hasura');
 	});
 
-	it('redirects to home page', () => {
-		cy.getCookies();
-		cy.location('pathname').should('eq', '/');
-		cy.getCookies();
+	it('starts with a logged out state', () => {
+		cy.request('/auth/logout');
+		['user', 'hasura'].forEach((cookie) => {
+			cy.getCookie(cookie).should('exist').its('value').should('be.empty');
+		});
 	});
 
-	it('has the user and hasura cookies', () => {
-		cy.getCookies();
+	it('enables logging in from /landing', () => {
+		cy.visit('/landing');
+		cy.contains('Login').click();
+		cy.get('#username').type('dev.tester.3@mailthink.net');
+		cy.get('#password').type('HVuc1C8Ls9CN');
+		cy.contains('Continue').click();
+	});
+
+	it('redirects to home page', () => {
+		cy.location('pathname').should('eq', '/');
 	});
 
 	describe('persists the user and hasura cookies', () => {
-		// afterEach(() => {
-		// 	cy.reload();
-		// });
+		afterEach(() => {
+			cy.reload();
+		});
 
 		it('upon redirection', () => {
 			['user', 'hasura'].forEach((cookie) => {
