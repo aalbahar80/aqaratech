@@ -5,3 +5,4 @@ node_modules
 /package
 .env
 src/styles/tailwind-output.css
+cypress/videos
