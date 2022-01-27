@@ -55,6 +55,7 @@ module.exports = {
 				'import/no-mutable-exports': 'off',
 				'no-undef': 'off',
 				'import/first': 'off',
+				'import/no-unresolved': 'off',
 			},
 			parserOptions: {
 				project: ['./tsconfig.json'],
