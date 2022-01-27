@@ -15,3 +15,4 @@ jobs:
         uses: mikefrancis/vercel-cypress@v1
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          repo: svelte_14dec21
