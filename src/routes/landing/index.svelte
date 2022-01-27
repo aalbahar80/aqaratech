@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export const router = false;
+	// export const router = false;
 </script>
 
 <a href="/auth/login" rel="external">Login</a>
