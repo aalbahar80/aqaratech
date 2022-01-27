@@ -23,6 +23,7 @@
 		'/auth/logout',
 		'/landing',
 	];
+
 	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.debug(!session.user, '__layout.svelte ~ 27');
 		if (!session.user) {
