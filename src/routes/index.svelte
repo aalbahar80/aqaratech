@@ -1,3 +1,7 @@
+<script lang="ts" context="module">
+	export const router = false;
+</script>
+
 <svelte:head>
 	<title>RE Co Admin</title>
 </svelte:head>
