@@ -83,8 +83,22 @@ yarn upgrade @sveltejs/adapter-auto@next
 ```
 
 ```bash
+# run cypress headed
+yarn run cypress run --headed -s "cypress/integration/*.spec.ts"
+
 # run cypress headless
+yarn run cypress run -s "cypress/integration/*.spec.ts"
 
 # watch mode
 
 ```
+## In dev
+- svelte-check watch mode
+- eslint watch mode
+- cypress watch mode
+
+## Before committing
+
+- Run Cypress / jest?
+- Run lint
+- Run formatter
