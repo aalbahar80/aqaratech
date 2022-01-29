@@ -84,5 +84,6 @@ module.exports = {
         'no-console': 'off',
         'import/no-extraneous-dependencies': 'off',
         'import/extensions': [0, { 'ts': 'never' }],
+        'radix': 'off',
     },
 };
