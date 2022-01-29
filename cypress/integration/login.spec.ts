@@ -1,6 +1,5 @@
 describe('The login process', () => {
 	beforeEach(() => {
-		cy.viewport('macbook-16');
 		Cypress.Cookies.preserveOnce('user', 'hasura');
 	});
 
@@ -54,7 +53,7 @@ describe('The login process', () => {
 	});
 
 	it('goes to the tenants page', () => {
-		cy.get('button.bx--header__action:nth-child(2)').click();
+		cy.get('#svelte > div.max-h-screen > header > button').click();
 		cy.contains('Tenants').click();
 		cy.location('pathname').should('eq', '/tenants');
 	});
