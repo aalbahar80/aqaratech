@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	import type { ErrorLoad } from '@sveltejs/kit';
 
 	export const load: ErrorLoad = ({ error, status }) => {
@@ -22,9 +22,9 @@
 <p>{JSON.stringify(error, null, 2)}</p>
 <p>
 	Go back to the <a href="/"> home page </a>.
-</p>
+</p> -->
 
-<style global>
+<!-- <style global>
 	.FourOhFour-module--four-oh-four--aLt5V {
 		-webkit-text-fill-color: #0000;
 		animation: FourOhFour-module--gradient--dIxR7 2s ease infinite;
@@ -39,4 +39,4 @@
 		line-height: 1.19;
 		margin: 2.5rem 0 10rem;
 	}
-</style>
+</style> -->
