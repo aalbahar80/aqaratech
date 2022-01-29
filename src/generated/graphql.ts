@@ -3529,6 +3529,14 @@ export type Query_Root = {
 	properties_aggregate: Properties_Aggregate;
 	/** fetch data from the table: "properties" using primary key columns */
 	properties_by_pk?: Maybe<Properties>;
+	/** execute function "search_clients" which returns "clients" */
+	search_clients: Array<Clients>;
+	/** execute function "search_clients" and query aggregates on result of table type "clients" */
+	search_clients_aggregate: Clients_Aggregate;
+	/** execute function "search_tenants" which returns "tenants" */
+	search_tenants: Array<Tenants>;
+	/** execute function "search_tenants" and query aggregates on result of table type "tenants" */
+	search_tenants_aggregate: Tenants_Aggregate;
 	/** fetch data from the table: "tenants" */
 	tenants: Array<Tenants>;
 	/** fetch aggregated fields from the table: "tenants" */
@@ -3695,6 +3703,42 @@ export type Query_RootProperties_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
+export type Query_RootSearch_ClientsArgs = {
+	args: Search_Clients_Args;
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
+};
+
+export type Query_RootSearch_Clients_AggregateArgs = {
+	args: Search_Clients_Args;
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
+};
+
+export type Query_RootSearch_TenantsArgs = {
+	args: Search_Tenants_Args;
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
+};
+
+export type Query_RootSearch_Tenants_AggregateArgs = {
+	args: Search_Tenants_Args;
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
+};
+
 export type Query_RootTenantsArgs = {
 	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
 	limit?: InputMaybe<Scalars['Int']>;
@@ -3775,6 +3819,16 @@ export type Query_RootUsers_By_PkArgs = {
 	id: Scalars['Int'];
 };
 
+export type Search_Clients_Args = {
+	result_limit?: InputMaybe<Scalars['Int']>;
+	search?: InputMaybe<Scalars['String']>;
+};
+
+export type Search_Tenants_Args = {
+	result_limit?: InputMaybe<Scalars['Int']>;
+	search?: InputMaybe<Scalars['String']>;
+};
+
 export type Subscription_Root = {
 	__typename?: 'subscription_root';
 	/** fetch data from the table: "clients" */
@@ -3819,6 +3873,14 @@ export type Subscription_Root = {
 	properties_aggregate: Properties_Aggregate;
 	/** fetch data from the table: "properties" using primary key columns */
 	properties_by_pk?: Maybe<Properties>;
+	/** execute function "search_clients" which returns "clients" */
+	search_clients: Array<Clients>;
+	/** execute function "search_clients" and query aggregates on result of table type "clients" */
+	search_clients_aggregate: Clients_Aggregate;
+	/** execute function "search_tenants" which returns "tenants" */
+	search_tenants: Array<Tenants>;
+	/** execute function "search_tenants" and query aggregates on result of table type "tenants" */
+	search_tenants_aggregate: Tenants_Aggregate;
 	/** fetch data from the table: "tenants" */
 	tenants: Array<Tenants>;
 	/** fetch aggregated fields from the table: "tenants" */
@@ -3983,6 +4045,42 @@ export type Subscription_RootProperties_AggregateArgs = {
 
 export type Subscription_RootProperties_By_PkArgs = {
 	id: Scalars['Int'];
+};
+
+export type Subscription_RootSearch_ClientsArgs = {
+	args: Search_Clients_Args;
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
+};
+
+export type Subscription_RootSearch_Clients_AggregateArgs = {
+	args: Search_Clients_Args;
+	distinct_on?: InputMaybe<Array<Clients_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Clients_Order_By>>;
+	where?: InputMaybe<Clients_Bool_Exp>;
+};
+
+export type Subscription_RootSearch_TenantsArgs = {
+	args: Search_Tenants_Args;
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
+};
+
+export type Subscription_RootSearch_Tenants_AggregateArgs = {
+	args: Search_Tenants_Args;
+	distinct_on?: InputMaybe<Array<Tenants_Select_Column>>;
+	limit?: InputMaybe<Scalars['Int']>;
+	offset?: InputMaybe<Scalars['Int']>;
+	order_by?: InputMaybe<Array<Tenants_Order_By>>;
+	where?: InputMaybe<Tenants_Bool_Exp>;
 };
 
 export type Subscription_RootTenantsArgs = {
@@ -6291,6 +6389,26 @@ export type GraphCacheResolvers = {
 			WithTypename<Query_Root>,
 			Query_RootProperties_By_PkArgs,
 			WithTypename<Properties> | string
+		>;
+		search_clients?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootSearch_ClientsArgs,
+			Array<WithTypename<Clients> | string>
+		>;
+		search_clients_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootSearch_Clients_AggregateArgs,
+			WithTypename<Clients_Aggregate> | string
+		>;
+		search_tenants?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootSearch_TenantsArgs,
+			Array<WithTypename<Tenants> | string>
+		>;
+		search_tenants_aggregate?: GraphCacheResolver<
+			WithTypename<Query_Root>,
+			Query_RootSearch_Tenants_AggregateArgs,
+			WithTypename<Tenants_Aggregate> | string
 		>;
 		tenants?: GraphCacheResolver<
 			WithTypename<Query_Root>,
@@ -11353,6 +11471,22 @@ export type GraphCacheUpdaters = {
 		properties_by_pk?: GraphCacheUpdateResolver<
 			{ properties_by_pk: Maybe<WithTypename<Properties>> },
 			Subscription_RootProperties_By_PkArgs
+		>;
+		search_clients?: GraphCacheUpdateResolver<
+			{ search_clients: Array<WithTypename<Clients>> },
+			Subscription_RootSearch_ClientsArgs
+		>;
+		search_clients_aggregate?: GraphCacheUpdateResolver<
+			{ search_clients_aggregate: WithTypename<Clients_Aggregate> },
+			Subscription_RootSearch_Clients_AggregateArgs
+		>;
+		search_tenants?: GraphCacheUpdateResolver<
+			{ search_tenants: Array<WithTypename<Tenants>> },
+			Subscription_RootSearch_TenantsArgs
+		>;
+		search_tenants_aggregate?: GraphCacheUpdateResolver<
+			{ search_tenants_aggregate: WithTypename<Tenants_Aggregate> },
+			Subscription_RootSearch_Tenants_AggregateArgs
 		>;
 		tenants?: GraphCacheUpdateResolver<
 			{ tenants: Array<WithTypename<Tenants>> },

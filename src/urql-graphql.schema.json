@@ -9030,6 +9030,298 @@
 						]
 					},
 					{
+						"name": "search_clients",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "LIST",
+								"ofType": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "OBJECT",
+										"name": "clients",
+										"ofType": null
+									}
+								}
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_clients_aggregate",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "OBJECT",
+								"name": "clients_aggregate",
+								"ofType": null
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_tenants",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "LIST",
+								"ofType": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "OBJECT",
+										"name": "tenants",
+										"ofType": null
+									}
+								}
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_tenants_aggregate",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "OBJECT",
+								"name": "tenants_aggregate",
+								"ofType": null
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
 						"name": "tenants",
 						"type": {
 							"kind": "NON_NULL",
@@ -10638,6 +10930,298 @@
 										"kind": "SCALAR",
 										"name": "Any"
 									}
+								}
+							}
+						]
+					},
+					{
+						"name": "search_clients",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "LIST",
+								"ofType": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "OBJECT",
+										"name": "clients",
+										"ofType": null
+									}
+								}
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_clients_aggregate",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "OBJECT",
+								"name": "clients_aggregate",
+								"ofType": null
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_tenants",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "LIST",
+								"ofType": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "OBJECT",
+										"name": "tenants",
+										"ofType": null
+									}
+								}
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							}
+						]
+					},
+					{
+						"name": "search_tenants_aggregate",
+						"type": {
+							"kind": "NON_NULL",
+							"ofType": {
+								"kind": "OBJECT",
+								"name": "tenants_aggregate",
+								"ofType": null
+							}
+						},
+						"args": [
+							{
+								"name": "args",
+								"type": {
+									"kind": "NON_NULL",
+									"ofType": {
+										"kind": "SCALAR",
+										"name": "Any"
+									}
+								}
+							},
+							{
+								"name": "distinct_on",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "limit",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "offset",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
+								}
+							},
+							{
+								"name": "order_by",
+								"type": {
+									"kind": "LIST",
+									"ofType": {
+										"kind": "NON_NULL",
+										"ofType": {
+											"kind": "SCALAR",
+											"name": "Any"
+										}
+									}
+								}
+							},
+							{
+								"name": "where",
+								"type": {
+									"kind": "SCALAR",
+									"name": "Any"
 								}
 							}
 						]
