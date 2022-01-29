@@ -39,6 +39,7 @@
 		unit: $unit.data?.units_by_pk?.id,
 		property: $unit.data?.units_by_pk?.property_id,
 		client: $unit.data?.units_by_pk?.property?.client_id,
+		lease: $unit.data?.units_by_pk?.leases[0]?.id,
 	};
 </script>
 

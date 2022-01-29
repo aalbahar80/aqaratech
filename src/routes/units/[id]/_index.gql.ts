@@ -32,6 +32,7 @@ export type BreadcrumbsUnit = {
 		  }
 		| null
 		| undefined;
+	leases: Array<{ __typename?: 'leases'; id: number }>;
 };
 
 export type BreadcrumbsUnitVariables = Types.Exact<{ [key: string]: never }>;
@@ -64,6 +65,7 @@ export type UnitDetailPage = {
 					  }
 					| null
 					| undefined;
+				leases: Array<{ __typename?: 'leases'; id: number }>;
 		  }
 		| null
 		| undefined;
@@ -93,6 +95,7 @@ export type UnitById = {
 					  }
 					| null
 					| undefined;
+				leases: Array<{ __typename?: 'leases'; id: number }>;
 		  }
 		| null
 		| undefined;
@@ -160,6 +163,37 @@ export const BreadcrumbsUnit = {
 							selections: [
 								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 								{ kind: 'Field', name: { kind: 'Name', value: 'client_id' } },
+							],
+						},
+					},
+					{
+						kind: 'Field',
+						name: { kind: 'Name', value: 'leases' },
+						arguments: [
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'limit' },
+								value: { kind: 'IntValue', value: '1' },
+							},
+							{
+								kind: 'Argument',
+								name: { kind: 'Name', value: 'order_by' },
+								value: {
+									kind: 'ObjectValue',
+									fields: [
+										{
+											kind: 'ObjectField',
+											name: { kind: 'Name', value: 'created_at' },
+											value: { kind: 'EnumValue', value: 'desc' },
+										},
+									],
+								},
+							},
+						],
+						selectionSet: {
+							kind: 'SelectionSet',
+							selections: [
+								{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
 							],
 						},
 					},

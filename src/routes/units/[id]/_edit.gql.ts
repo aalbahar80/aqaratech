@@ -33,6 +33,7 @@ export type UnitEditPage = {
 					  }
 					| null
 					| undefined;
+				leases: Array<{ __typename?: 'leases'; id: number }>;
 		  }
 		| null
 		| undefined;

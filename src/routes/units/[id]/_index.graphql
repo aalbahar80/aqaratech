@@ -18,6 +18,9 @@ fragment breadcrumbsUnit on units {
 		id
 		client_id
 	}
+	leases(limit: 1, order_by: { created_at: desc }) {
+		id
+	}
 }
 
 query UnitDetailPage($id: Int!) {
