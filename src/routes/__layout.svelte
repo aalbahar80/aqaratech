@@ -2,6 +2,7 @@
 	import Header from '$components/Header.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import { logger } from '$lib/config/logger';
+	import { urqlClient } from '$lib/config/urql_client';
 	import type { Load } from '@sveltejs/kit';
 	import type {
 		Client,
@@ -9,11 +10,9 @@
 		TypedDocumentNode,
 	} from '@urql/svelte';
 	import { operationStore, setClient } from '@urql/svelte';
-	import { Column, Content, Grid, Row } from 'carbon-components-svelte';
 	import '../styles/tailwind.css';
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
-	import { urqlClient } from '$lib/config/urql_client';
 	import { get } from 'svelte/store';
 
 	const publicPages = [
@@ -70,14 +69,10 @@
 	setClient(client);
 </script>
 
-<Header />
-<Content>
-	<Grid>
-		<Row>
-			<Column>
-				<ToastParent />
-				<slot />
-			</Column>
-		</Row>
-	</Grid>
-</Content>
+<div class="max-h-screen">
+	<Header />
+	<div class="mt-8 mx-4 lg:mx-8">
+		<ToastParent />
+		<slot />
+	</div>
+</div>
