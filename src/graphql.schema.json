@@ -1875,6 +1875,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "full_name",
+						"description": "A computed field, executes function \"client_full_name\"",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "id",
 						"description": null,
 						"args": [],
@@ -2947,6 +2959,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "full_name",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
+							"name": "String_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "id",
 						"description": null,
 						"type": {
@@ -3839,6 +3863,18 @@
 					},
 					{
 						"name": "first_name",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "full_name",
 						"description": null,
 						"type": {
 							"kind": "ENUM",
@@ -31765,6 +31801,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "full_name",
+						"description": "A computed field, executes function \"tenant_full_name\"",
+						"args": [],
+						"type": {
+							"kind": "SCALAR",
+							"name": "String",
+							"ofType": null
+						},
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "id",
 						"description": null,
 						"args": [],
@@ -32615,6 +32663,18 @@
 						"deprecationReason": null
 					},
 					{
+						"name": "full_name",
+						"description": null,
+						"type": {
+							"kind": "INPUT_OBJECT",
+							"name": "String_comparison_exp",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
 						"name": "id",
 						"description": null,
 						"type": {
@@ -33441,6 +33501,18 @@
 					},
 					{
 						"name": "first_name",
+						"description": null,
+						"type": {
+							"kind": "ENUM",
+							"name": "order_by",
+							"ofType": null
+						},
+						"defaultValue": null,
+						"isDeprecated": false,
+						"deprecationReason": null
+					},
+					{
+						"name": "full_name",
 						"description": null,
 						"type": {
 							"kind": "ENUM",

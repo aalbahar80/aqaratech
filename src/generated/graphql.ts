@@ -116,6 +116,8 @@ export type Clients = {
 	/** An aggregate relationship */
 	expenses_aggregate: Expenses_Aggregate;
 	first_name?: Maybe<Scalars['String']>;
+	/** A computed field, executes function "client_full_name" */
+	full_name?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	is_active?: Maybe<Scalars['Boolean']>;
 	last_name?: Maybe<Scalars['String']>;
@@ -256,6 +258,7 @@ export type Clients_Bool_Exp = {
 	email?: InputMaybe<String_Comparison_Exp>;
 	expenses?: InputMaybe<Expenses_Bool_Exp>;
 	first_name?: InputMaybe<String_Comparison_Exp>;
+	full_name?: InputMaybe<String_Comparison_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
 	is_active?: InputMaybe<Boolean_Comparison_Exp>;
 	last_name?: InputMaybe<String_Comparison_Exp>;
@@ -364,6 +367,7 @@ export type Clients_Order_By = {
 	email?: InputMaybe<Order_By>;
 	expenses_aggregate?: InputMaybe<Expenses_Aggregate_Order_By>;
 	first_name?: InputMaybe<Order_By>;
+	full_name?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	is_active?: InputMaybe<Order_By>;
 	last_name?: InputMaybe<Order_By>;
@@ -4171,6 +4175,8 @@ export type Tenants = {
 	dob?: Maybe<Scalars['date']>;
 	email?: Maybe<Scalars['String']>;
 	first_name?: Maybe<Scalars['String']>;
+	/** A computed field, executes function "tenant_full_name" */
+	full_name?: Maybe<Scalars['String']>;
 	id: Scalars['Int'];
 	last_name?: Maybe<Scalars['String']>;
 	/** An array relationship */
@@ -4270,6 +4276,7 @@ export type Tenants_Bool_Exp = {
 	dob?: InputMaybe<Date_Comparison_Exp>;
 	email?: InputMaybe<String_Comparison_Exp>;
 	first_name?: InputMaybe<String_Comparison_Exp>;
+	full_name?: InputMaybe<String_Comparison_Exp>;
 	id?: InputMaybe<Int_Comparison_Exp>;
 	last_name?: InputMaybe<String_Comparison_Exp>;
 	leases?: InputMaybe<Leases_Bool_Exp>;
@@ -4371,6 +4378,7 @@ export type Tenants_Order_By = {
 	dob?: InputMaybe<Order_By>;
 	email?: InputMaybe<Order_By>;
 	first_name?: InputMaybe<Order_By>;
+	full_name?: InputMaybe<Order_By>;
 	id?: InputMaybe<Order_By>;
 	last_name?: InputMaybe<Order_By>;
 	leases_aggregate?: InputMaybe<Leases_Aggregate_Order_By>;
@@ -6498,6 +6506,11 @@ export type GraphCacheResolvers = {
 			WithTypename<Expenses_Aggregate> | string
 		>;
 		first_name?: GraphCacheResolver<
+			WithTypename<Clients>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		full_name?: GraphCacheResolver<
 			WithTypename<Clients>,
 			Record<string, never>,
 			Scalars['String'] | string
@@ -9163,6 +9176,11 @@ export type GraphCacheResolvers = {
 			Scalars['String'] | string
 		>;
 		first_name?: GraphCacheResolver<
+			WithTypename<Tenants>,
+			Record<string, never>,
+			Scalars['String'] | string
+		>;
+		full_name?: GraphCacheResolver<
 			WithTypename<Tenants>,
 			Record<string, never>,
 			Scalars['String'] | string

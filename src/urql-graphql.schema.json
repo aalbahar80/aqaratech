@@ -173,6 +173,14 @@
 						"args": []
 					},
 					{
+						"name": "full_name",
+						"type": {
+							"kind": "SCALAR",
+							"name": "Any"
+						},
+						"args": []
+					},
+					{
 						"name": "id",
 						"type": {
 							"kind": "NON_NULL",
@@ -11851,6 +11859,14 @@
 					},
 					{
 						"name": "first_name",
+						"type": {
+							"kind": "SCALAR",
+							"name": "Any"
+						},
+						"args": []
+					},
+					{
+						"name": "full_name",
 						"type": {
 							"kind": "SCALAR",
 							"name": "Any"

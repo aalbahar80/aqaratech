@@ -12,24 +12,29 @@ export const fieldList: Field[] = [
 		searchable: false,
 	}),
 	new Field({
+		fieldName: 'full_name',
+		title: 'Full Name',
+		editable: false,
+	}),
+	new Field({
 		fieldName: 'first_name',
 		title: 'First Name',
-		inputType: 'text',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'second_name',
 		title: 'Second Name',
-		inputType: 'text',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'third_name',
 		title: 'Third Name',
-		inputType: 'text',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'last_name',
 		title: 'Last Name',
-		inputType: 'text',
+		searchable: false,
 	}),
 	new Field({
 		fieldName: 'email',
@@ -50,7 +55,6 @@ export const fieldList: Field[] = [
 	new Field({
 		fieldName: 'civilid',
 		title: 'Civil ID',
-		inputType: 'text',
 		// TODO: change after removing bigint type
 	}),
 ];
