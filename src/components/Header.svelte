@@ -1,27 +1,26 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import {
 		Header,
+		HeaderGlobalAction,
 		HeaderNav,
 		HeaderNavItem,
+		HeaderUtilities,
 		SideNav,
+		SideNavDivider,
 		SideNavItems,
 		SideNavLink,
-		SideNavDivider,
 		SkipToContent,
 		Theme,
-		HeaderUtilities,
-		HeaderAction,
-		HeaderPanelLink,
-		HeaderPanelLinks,
-		HeaderGlobalAction,
 	} from 'carbon-components-svelte';
 	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
-	import { SettingsAdjust20, UserAvatarFilledAlt20 } from 'carbon-icons-svelte';
-	import { page } from '$app/stores';
+	import { BrightnessContrast32 } from 'carbon-icons-svelte';
+
+	const themes: CarbonTheme[] = ['white', 'g10', 'g80', 'g90', 'g100'];
+	let themeIndex = 4;
+	$: theme = themes[themeIndex];
 
 	let isSideNavOpen = false;
-	let isAccountOpen = false;
-	let theme: CarbonTheme = 'g90';
 	let y: number | null | undefined;
 
 	const navLinkList = [
@@ -44,7 +43,7 @@
 	company="RE"
 	platformName="Admin"
 	href="/"
-	persistentHamburgerMenu={isMobileMenu || true}
+	persistentHamburgerMenu={isMobileMenu}
 	expansionBreakpoint={navBreakpoint}
 	expandedByDefault={false}
 	bind:isSideNavOpen
@@ -53,6 +52,7 @@
 		<SkipToContent />
 	</svelte:fragment>
 
+	<Theme bind:theme persist persistKey="__carbon-theme" />
 	{#if !isMobileMenu}
 		<HeaderNav>
 			{#each navLinkList as { href, text }}
@@ -62,35 +62,17 @@
 	{/if}
 
 	<HeaderUtilities>
-		<HeaderGlobalAction aria-label="Settings" icon={SettingsAdjust20} />
-		<HeaderAction />
-		<Theme
-			bind:theme
-			persist
-			persistKey="__carbon-theme"
-			render="select"
-			select={{
-				themes: ['white', 'g10', 'g80', 'g90', 'g100'],
-				labelText: 'Select a theme',
-				inline: true,
-				hideLabel: true,
-			}}
-		/>
-		<HeaderAction
-			icon={UserAvatarFilledAlt20}
-			closeIcon={UserAvatarFilledAlt20}
-			bind:isOpen={isAccountOpen}
-		>
-			<HeaderPanelLinks>
-				<HeaderPanelLink>Change password</HeaderPanelLink>
-				<HeaderPanelLink href="/auth/login" rel="external"
-					>Log in</HeaderPanelLink
-				>
-				<HeaderPanelLink href="/auth/logout" rel="external"
-					>Log out</HeaderPanelLink
-				>
-			</HeaderPanelLinks>
-		</HeaderAction>
+		<HeaderNav>
+			<HeaderGlobalAction
+				aria-label="Settings"
+				icon={BrightnessContrast32}
+				on:click={() => {
+					themeIndex = (themeIndex + 1) % themes.length;
+					console.log(themeIndex);
+				}}
+			/>
+			<HeaderNavItem text="Sign Out" href="/auth/logout" rel="external" />
+		</HeaderNav>
 	</HeaderUtilities>
 
 	{#if isMobileMenu}
