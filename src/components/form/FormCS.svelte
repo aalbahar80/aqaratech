@@ -172,7 +172,12 @@
 
 		<div class="grid grid-cols-1 md:grid-cols-2 items-center">
 			<Button kind="ghost" on:click={reset}>Reset</Button>
-			<Button disabled={!noErrorMsg} type="submit" skeleton={loading}>
+			<Button
+				disabled={!noErrorMsg}
+				class="min-w-full"
+				type="submit"
+				skeleton={loading}
+			>
 				{`${existing ? 'Edit' : 'Create new'} ${entity}`}
 			</Button>
 			<!-- TODO remove in production (including reset button) -->
