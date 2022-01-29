@@ -27,7 +27,7 @@ const config = {
 					$lib: path.resolve('./src/lib'),
 				},
 			},
-			plugins: [process.env.NODE_ENV === "production" && optimizeCss()],
+			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()],
 		},
 		// prerender: {
 		// 	concurrency: 2,
