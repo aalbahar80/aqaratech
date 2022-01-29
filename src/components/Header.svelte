@@ -2,9 +2,11 @@
 	import { page } from '$app/stores';
 	import {
 		Header,
+		HeaderAction,
 		HeaderGlobalAction,
 		HeaderNav,
 		HeaderNavItem,
+		HeaderNavMenu,
 		HeaderUtilities,
 		SideNav,
 		SideNavDivider,
@@ -62,17 +64,23 @@
 	{/if}
 
 	<HeaderUtilities>
-		<HeaderNav>
-			<HeaderGlobalAction
-				aria-label="Settings"
-				icon={BrightnessContrast32}
-				on:click={() => {
-					themeIndex = (themeIndex + 1) % themes.length;
-					console.log(themeIndex);
-				}}
-			/>
-			<HeaderNavItem text="Sign Out" href="/auth/logout" rel="external" />
-		</HeaderNav>
+		<HeaderNav />
+		<HeaderGlobalAction
+			aria-label="Settings"
+			icon={BrightnessContrast32}
+			on:click={() => {
+				themeIndex = (themeIndex + 1) % themes.length;
+			}}
+		/>
+		<a
+			role="menuitem"
+			tabindex="0"
+			href="/auth/logout"
+			rel="external"
+			class:bx--header__menu-item={true}
+		>
+			<span class:bx--text-truncate--end={true}>Sign Out</span>
+		</a>
 	</HeaderUtilities>
 
 	{#if isMobileMenu}
