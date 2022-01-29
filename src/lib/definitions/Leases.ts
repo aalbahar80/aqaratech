@@ -56,7 +56,15 @@ export const fieldList = [
 	new Field({
 		fieldName: 'unit_id',
 		title: 'Unit ID',
-		editable: false,
+		editable: true,
+		disabled: true,
+		searchType: 'number',
+	}),
+	new Field({
+		fieldName: 'tenant_id',
+		title: 'Tenant ID',
+		editable: true,
+		disabled: true,
 		searchType: 'number',
 	}),
 ];
@@ -74,6 +82,8 @@ export const validation = z
 		monthly_rent: z.number().nonnegative(),
 		deposit: z.number().nonnegative().optional(),
 		license: z.string().optional(),
+		unit_id: z.string().min(1, { message: 'Required' }),
+		tenant_id: z.string().min(1, { message: 'Required' }),
 	})
 	.refine((val) => parseISO(val.start_date) < parseISO(val.end_date), {
 		path: ['start_date'],

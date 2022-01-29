@@ -23,6 +23,8 @@ export class Field {
 
 	pattern?: string;
 
+	disabled?: boolean;
+
 	validation?;
 
 	constructor(field: Field) {
@@ -33,6 +35,7 @@ export class Field {
 		this.visibile = field.visibile === undefined || field.visibile === true;
 		this.hideable = field.hideable === undefined || field.hideable === true;
 		this.sortable = field.sortable === undefined || field.sortable === true;
+		this.disabled = field.disabled || field.disabled === false;
 		this.searchable =
 			field.searchable === undefined || field.searchable === true;
 		this.searchType = field.searchType || 'text';

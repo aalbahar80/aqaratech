@@ -29,6 +29,9 @@
 
 	type T = $$Generic<{ id: number | string; [key: string]: any }>;
 
+	export let customFields = {};
+	export let formData = undefined;
+	$: formData = $data;
 	export let entity: string;
 	export let fieldList: Field[];
 	export let insertDoc: DocumentNode | undefined = undefined;
@@ -125,11 +128,19 @@
 		validateSchema: validation || z.object({}),
 		onSubmit: handleForm,
 	});
+
+	$: $data.unit_id = customFields.unit_id;
+	$: $data.tenant_id = customFields.tenant_id;
+
+	// onMount(async () => {
+	// 	await tick();
+	// 	reset();
+	// });
 </script>
 
 <div class="max-w-md">
 	<Form on:submit={handleSubmit}>
-		{#each fieldList as { title, fieldName, inputType, editable, pattern }}
+		{#each fieldList as { title, fieldName, inputType, editable, pattern, disabled }}
 			{#if editable}
 				<ValidationMessage for={fieldName} let:messages={message}>
 					<FormGroup>
@@ -151,6 +162,7 @@
 								invalidText={$errors[fieldName]?.[0]}
 								size="xl"
 								pattern={fieldName === 'civilid' ? '[0-9]*' : undefined}
+								{disabled}
 							/>
 						{/if}
 					</FormGroup>
@@ -165,6 +177,9 @@
 			</Button>
 			<!-- TODO remove in production (including reset button) -->
 			<Button kind="ghost" on:click={() => console.log($data)}>Debug</Button>
+			<Button kind="ghost" on:click={() => console.log(customFields)}
+				>somefn</Button
+			>
 			<Button kind="ghost" on:click={() => console.log($errors)}>Errors</Button>
 		</div>
 	</Form>

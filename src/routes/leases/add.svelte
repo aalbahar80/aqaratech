@@ -18,6 +18,7 @@
 		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
 
 	// SELECTION ID'S
+	let tenant: string | undefined = '';
 	let client: string | undefined = undefined;
 	let property: string | undefined = undefined;
 	let unit: string | undefined = undefined;
@@ -35,6 +36,12 @@
 	$: if (!property) {
 		unit = undefined;
 	}
+	$: customFields = {
+		unit_id: unit,
+		tenant_id: tenant,
+	};
+	// FORM VALIDATION
+	let formData: any;
 </script>
 
 <div class="max-w-md grid grid-cols-1 gap-8">
@@ -43,12 +50,13 @@
 		fieldList={tenantFieldList}
 		display={(hit) => ({
 			id: hit.id.toString(),
-			text: `${hit.first_name} ${hit.last_name}`,
+			text: [hit.first_name, hit.last_name].join(' '),
 		})}
 		comboBoxProps={{
 			titleText: 'Tenant',
 			placeholder: 'Type to search by name, civil id, phone, etc',
 		}}
+		bind:selectedId={tenant}
 	/>
 
 	<SearchBox
@@ -56,7 +64,7 @@
 		fieldList={clientFieldList}
 		display={(hit) => ({
 			id: hit.id.toString(),
-			text: `${hit.first_name} ${hit.last_name}`,
+			text: [hit.first_name, hit.last_name].join(' '),
 		})}
 		comboBoxProps={{
 			titleText: 'Client',
@@ -65,13 +73,17 @@
 		bind:selectedId={client}
 	/>
 
-	<div on:click={() => (isPropertyClicked = true)}>
+	<div
+		on:click={() => {
+			isPropertyClicked = true;
+		}}
+	>
 		<SearchBox
 			queryDocument={PropertyComboBoxDocument}
 			fieldList={propertyFieldList}
 			display={(hit) => ({
 				id: hit.id.toString(),
-				text: `${hit.area} ${hit.block}`,
+				text: [hit.area, hit.block].join(' '),
 			})}
 			comboBoxProps={{
 				titleText: 'Property',
@@ -81,10 +93,15 @@
 				warnText: 'Please select a client first',
 			}}
 			bind:selectedId={property}
+			constraint={{ client_id: { _eq: parseInt(client || '') } }}
 		/>
 	</div>
 
-	<div on:click={() => (isUnitClicked = true)}>
+	<div
+		on:click={() => {
+			isUnitClicked = true;
+		}}
+	>
 		<SearchBox
 			queryDocument={UnitComboBoxDocument}
 			fieldList={unitFieldList}
@@ -100,6 +117,7 @@
 				warnText: 'Please select a property first',
 			}}
 			bind:selectedId={unit}
+			constraint={{ property_id: { _eq: parseInt(property || '') } }}
 		/>
 	</div>
 
@@ -108,5 +126,7 @@
 		insertDoc={AddLeaseDocument}
 		entity={graphqlName}
 		{validation}
+		bind:customFields
+		bind:formData
 	/>
 </div>
