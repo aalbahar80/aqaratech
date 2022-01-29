@@ -39,7 +39,7 @@
 
 	let crumbs: CrumbData;
 	$: crumbs = {
-		unit: $lease.data?.leases_by_pk?.tenant_id,
+		unit: $lease.data?.leases_by_pk?.unit_id,
 		lease: $lease.data?.leases_by_pk?.id,
 		tenant: $lease.data?.leases_by_pk?.tenant_id,
 		property: $lease.data?.leases_by_pk?.unit?.property?.id,
