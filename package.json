@@ -83,6 +83,7 @@
     "npm-check": "^5.9.2",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.0.2",
+    "posthog-js": "^1.17.6",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.6.0",
     "svelte": "^3.46.2",

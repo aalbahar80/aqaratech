@@ -15,9 +15,14 @@
 	import type { DocumentNode } from 'graphql';
 	import { get } from 'svelte/store';
 	import LogRocket from 'logrocket';
+	import posthog from 'posthog-js';
+	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
 
+	logger.warn('layout module script tag', '__layout.svelte ~ 20');
 	LogRocket.init('n4p0hb/svelte14dec');
 
+	// posthog.capture('my event', { property: 'value' });
 	const publicPages = [
 		'/',
 		'/auth/login',
@@ -27,6 +32,7 @@
 	];
 
 	export const load: Load = async ({ fetch, stuff, session }) => {
+		logger.warn('load function initial', '__layout.svelte ~ 36');
 		logger.debug(!session.user, '__layout.svelte ~ 27');
 		if (!session.user) {
 			return {
@@ -35,8 +41,10 @@
 				// maxage: 0,
 			};
 		}
-		logger.warn(session.userId, '__layout.svelte ~ 38');
+		logger.warn('load function after user check', '__layout.svelte ~ 45');
+		logger.debug(session.userId, '__layout.svelte ~ 38');
 		LogRocket.identify(session.userId);
+		// posthog.identify(session.userId);
 
 		const client = urqlClient(fetch);
 
@@ -69,6 +77,14 @@
 <script lang="ts">
 	export let client: Client;
 	setClient(client);
+	logger.warn('layout normal script tag', '__layout.svelte ~ 78');
+	onMount(() => {
+		logger.warn('layout on mount', '__layout.svelte ~ 82');
+		posthog.init('phc_9yCZuf3iVjCaKEH8TDb4sLaN2tg3hnyoIpqRIjGjNiz', {
+			api_host: 'https://app.posthog.com',
+		});
+		posthog.identify($session.userId);
+	});
 </script>
 
 <div class="max-h-screen">
