@@ -2,11 +2,9 @@
 	import { page } from '$app/stores';
 	import {
 		Header,
-		HeaderAction,
 		HeaderGlobalAction,
 		HeaderNav,
 		HeaderNavItem,
-		HeaderNavMenu,
 		HeaderUtilities,
 		SideNav,
 		SideNavDivider,
