@@ -9,16 +9,19 @@ export const fieldList: Field[] = [
 		title: 'ID',
 		editable: false,
 		searchType: 'number',
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'area',
 		title: 'Area',
 		searchType: 'text',
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'block',
 		title: 'Block',
 		searchable: false,
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'street',
@@ -35,6 +38,7 @@ export const fieldList: Field[] = [
 		fieldName: 'number',
 		title: 'Number',
 		searchable: false,
+		visibileInTable: true,
 	}),
 ];
 

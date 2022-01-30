@@ -11,6 +11,8 @@ export class Field {
 
 	visibile?: boolean;
 
+	visibileInTable?: boolean;
+
 	hideable?: boolean;
 
 	sortable?: boolean;
@@ -33,6 +35,8 @@ export class Field {
 		this.inputType = field.inputType || 'text';
 		this.editable = field.editable === undefined || field.editable === true;
 		this.visibile = field.visibile === undefined || field.visibile === true;
+		this.visibileInTable =
+			field.visibileInTable || this.visibileInTable === false;
 		this.hideable = field.hideable === undefined || field.hideable === true;
 		this.sortable = field.sortable === undefined || field.sortable === true;
 		this.disabled = field.disabled || field.disabled === false;

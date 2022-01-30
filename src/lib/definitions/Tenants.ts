@@ -10,11 +10,13 @@ export const fieldList: Field[] = [
 		editable: false,
 		searchType: 'number',
 		searchable: false,
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'full_name',
-		title: 'Full Name',
+		title: 'Name',
 		editable: false,
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'first_name',
@@ -40,11 +42,13 @@ export const fieldList: Field[] = [
 		fieldName: 'email',
 		title: 'Email',
 		inputType: 'email',
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'phone',
 		title: 'Phone',
 		inputType: 'tel',
+		visibileInTable: true,
 	}),
 	new Field({
 		fieldName: 'dob',

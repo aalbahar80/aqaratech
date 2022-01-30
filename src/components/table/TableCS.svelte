@@ -139,12 +139,14 @@
 
 	// TABLE
 	const headers: DataTableHeader[] = insert(
-		fieldList.map((v) => ({
-			key: v.fieldName,
-			value: v.title,
-			sort: () => 0,
-			// columnMenu: true,
-		})),
+		fieldList
+			.filter((v) => v.visibileInTable)
+			.map((v) => ({
+				key: v.fieldName,
+				value: v.title,
+				sort: () => 0,
+				// columnMenu: true,
+			})),
 		{
 			key: 'overflow',
 			empty: false,
