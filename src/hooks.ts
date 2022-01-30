@@ -3,7 +3,13 @@ import { logger } from '$lib/config/logger';
 import type { Handle, GetSession } from '@sveltejs/kit';
 import cookie from 'cookie';
 
-const publicPages = ['/', '/auth/login', '/auth/callback', '/auth/logout'];
+const publicPages = [
+	'/',
+	'/auth/login',
+	'/auth/callback',
+	'/auth/logout',
+	'/landing',
+];
 
 export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	logger.debug(f('hooks.ts', 8, event.request.headers));
@@ -13,6 +19,18 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 	logger.debug({ event }, 'hooks.ts ~ 12');
 	event.locals.user = cookies.user || '';
 	event.locals.hasura = cookies.hasura || '';
+	event.locals.userId = cookies.userId || '';
+
+	// decode the user jwt to get the userId
+	if (event.locals.user) {
+		const encodedJwt = event.locals.user.split('.')[1];
+		const decodedJwt = JSON.parse(
+			Buffer.from(encodedJwt, 'base64').toString('ascii'),
+		);
+		event.locals.userId = decodedJwt.sub;
+	} else {
+		event.locals.userId = '';
+	}
 
 	const response = await resolve(event);
 
@@ -52,6 +70,16 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 		}),
 	);
 
+	response.headers.append(
+		'Set-Cookie',
+		cookie.serialize('userId', event.locals.userId, {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
 	if (import.meta.env.VITE_VERCEL_ENV !== 'production') {
 		response.headers.set('X-Robots-Tag', 'noindex');
 	}
@@ -63,4 +91,5 @@ export const handle: Handle<Locals> = async ({ event, resolve }) => {
 export const getSession: GetSession = ({ locals }) => ({
 	user: locals.user,
 	hasura: locals.hasura,
+	userId: locals.userId,
 });

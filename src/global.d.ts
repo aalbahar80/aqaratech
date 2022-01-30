@@ -20,11 +20,13 @@
 interface Locals {
 	hasura: string;
 	user: string;
+	userId: string;
 }
 
 interface Session {
 	hasura: string;
 	user: string;
+	userId: string;
 }
 interface CLoad {
 	session: Session;

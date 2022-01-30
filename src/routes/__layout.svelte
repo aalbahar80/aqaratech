@@ -14,6 +14,9 @@
 	import 'carbon-components-svelte/css/all.css';
 	import type { DocumentNode } from 'graphql';
 	import { get } from 'svelte/store';
+	import LogRocket from 'logrocket';
+
+	LogRocket.init('n4p0hb/svelte14dec');
 
 	const publicPages = [
 		'/',
@@ -29,12 +32,11 @@
 			return {
 				status: 302,
 				redirect: '/auth/login',
-				// redirect: '/',
-				// redirect: '/landing',
 				// maxage: 0,
-				// headers: { location: '/auth/login' },
 			};
 		}
+		logger.warn(session.userId, '__layout.svelte ~ 38');
+		LogRocket.identify(session.userId);
 
 		const client = urqlClient(fetch);
 
