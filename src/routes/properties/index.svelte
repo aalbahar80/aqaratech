@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	// TODO remove prerender
 	export const prerender = true;
 </script>
 

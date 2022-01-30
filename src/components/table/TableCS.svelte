@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { Field } from '$components/form/Field';
+	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import type { Order_By } from '$generated/graphql';
 	import { constructFilter } from '$lib/utils/search-utils';
 	import { operationStore, query, type TypedDocumentNode } from '@urql/svelte';
@@ -156,6 +157,10 @@
 		0,
 	);
 </script>
+
+{#if $pageQuery.fetching}
+	<PreloadingIndicator />
+{/if}
 
 {#if !$pageQuery.data && $pageQuery.fetching}
 	<DataTableSkeleton {headers} rows={pageSize} />
