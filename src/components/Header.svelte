@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import {
 		Header,
 		HeaderGlobalAction,
@@ -70,15 +70,27 @@
 				themeIndex = (themeIndex + 1) % themes.length;
 			}}
 		/>
-		<a
-			role="menuitem"
-			tabindex="0"
-			href="/auth/logout"
-			rel="external"
-			class:bx--header__menu-item={true}
-		>
-			<span class:bx--text-truncate--end={true}>Sign Out</span>
-		</a>
+		{#if !$session.userId}
+			<a
+				role="menuitem"
+				tabindex="0"
+				href="/auth/login"
+				rel="external"
+				class:bx--header__menu-item={true}
+			>
+				<span class:bx--text-truncate--end={true}>Sign In</span>
+			</a>
+		{:else}
+			<a
+				role="menuitem"
+				tabindex="0"
+				href="/auth/logout"
+				rel="external"
+				class:bx--header__menu-item={true}
+			>
+				<span class:bx--text-truncate--end={true}>Sign Out</span>
+			</a>
+		{/if}
 	</HeaderUtilities>
 
 	{#if isMobileMenu}
