@@ -1,5 +1,6 @@
 fragment clientDetails on clients {
 	id
+	full_name
 	first_name
 	last_name
 	email

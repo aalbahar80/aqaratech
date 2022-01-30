@@ -14,6 +14,7 @@ export type TenantIdScreen = {
 		| {
 				__typename?: 'tenants';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -74,6 +75,7 @@ export type TenantIdScreen = {
 export type TenantDetails = {
 	__typename?: 'tenants';
 	id: number;
+	full_name?: string | null | undefined;
 	first_name?: string | null | undefined;
 	last_name?: string | null | undefined;
 	email?: string | null | undefined;
@@ -163,6 +165,7 @@ export type TenantsList = {
 	tenants: Array<{
 		__typename?: 'tenants';
 		id: number;
+		full_name?: string | null | undefined;
 		first_name?: string | null | undefined;
 		last_name?: string | null | undefined;
 		email?: string | null | undefined;
@@ -203,6 +206,7 @@ export type TenantsInsert = {
 		| {
 				__typename?: 'tenants';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -227,6 +231,7 @@ export type TenantsUpdate = {
 		| {
 				__typename?: 'tenants';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -250,6 +255,7 @@ export type TenantEditScreen = {
 		| {
 				__typename?: 'tenants';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -269,6 +275,7 @@ export type TenantBasics = {
 		| {
 				__typename?: 'tenants';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -530,6 +537,7 @@ export const TenantDetails = {
 				kind: 'SelectionSet',
 				selections: [
 					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'full_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },

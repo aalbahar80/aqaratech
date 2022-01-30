@@ -9,6 +9,7 @@ query TenantIdScreen($id: Int!) {
 
 fragment tenantDetails on tenants {
 	id
+	full_name
 	first_name
 	last_name
 	email

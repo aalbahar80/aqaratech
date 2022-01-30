@@ -7,6 +7,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 export type ClientDetails = {
 	__typename?: 'clients';
 	id: number;
+	full_name?: string | null | undefined;
 	first_name?: string | null | undefined;
 	last_name?: string | null | undefined;
 	email?: string | null | undefined;
@@ -27,6 +28,7 @@ export type ClientDetailPage = {
 		| {
 				__typename?: 'clients';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -44,6 +46,7 @@ export type ClientById = {
 		| {
 				__typename?: 'clients';
 				id: number;
+				full_name?: string | null | undefined;
 				first_name?: string | null | undefined;
 				last_name?: string | null | undefined;
 				email?: string | null | undefined;
@@ -83,6 +86,7 @@ export const ClientDetails = {
 				kind: 'SelectionSet',
 				selections: [
 					{ kind: 'Field', name: { kind: 'Name', value: 'id' } },
+					{ kind: 'Field', name: { kind: 'Name', value: 'full_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'first_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'last_name' } },
 					{ kind: 'Field', name: { kind: 'Name', value: 'email' } },
