@@ -17,7 +17,8 @@
 	import LogRocket from 'logrocket';
 	import posthog from 'posthog-js';
 	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
+	import { navigating, session } from '$app/stores';
+	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 
 	logger.warn('layout module script tag', '__layout.svelte ~ 20');
 
@@ -81,6 +82,10 @@
 		}
 	});
 </script>
+
+{#if $navigating}
+	<PreloadingIndicator />
+{/if}
 
 <div class="max-h-screen">
 	<Header />
