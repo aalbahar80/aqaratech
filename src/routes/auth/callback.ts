@@ -40,7 +40,6 @@ async function getTokens(code: string, redirectUri: string) {
 
 		const data: TokenResponse = (await res.json()) as TokenResponse;
 		logger.debug({ data }, 'callback.ts ~ 42');
-		console.log('🚀 ~ file: callback.ts ~ line 38 ~ getTokens ~ data', data);
 		return data;
 	} catch (e) {
 		console.error(e);
