@@ -16,7 +16,7 @@ export const fieldList = [
 	new Field({
 		fieldName: 'tenant_id',
 		title: 'Tenant ID',
-		editable: true,
+		editable: false,
 		disabled: true,
 		searchType: 'number',
 	}),
@@ -75,27 +75,28 @@ export const fieldList = [
 	}),
 ];
 
-export const validation = z
-	.object({
-		// validate that start_date is an iso string
-		start_date: z.string().refine((val) => Date.parse(val), {
-			message: 'Start date must be an ISO string',
-		}),
+export const validation = z.object({
+	// validate that start_date is an iso string
+	start_date: z.string().refine((val) => Date.parse(val), {
+		message: 'Start date must be an ISO string',
+	}),
 
-		end_date: z.string().refine((val) => Date.parse(val), {
-			message: 'End date must be an ISO string',
-		}),
-		monthly_rent: z.number().nonnegative(),
-		deposit: z.number().nonnegative().optional(),
-		license: z.string().optional(),
-		unit_id: z.string().min(1, { message: 'Required' }),
-		tenant_id: z.string().min(1, { message: 'Required' }),
-	})
-	.refine((val) => parseISO(val.start_date) < parseISO(val.end_date), {
-		path: ['start_date'],
-		message: 'Start date must be before end date',
-	})
-	.refine((val) => parseISO(val.start_date) < parseISO(val.end_date), {
-		path: ['end_date'],
-		message: 'End date must be after end date',
-	});
+	end_date: z.string().refine((val) => Date.parse(val), {
+		message: 'End date must be an ISO string',
+	}),
+	monthly_rent: z.number().nonnegative(),
+	deposit: z.number().nonnegative().optional(),
+	license: z.string().optional(),
+	unit_id: z.string().min(1, { message: 'Required' }),
+	tenant_id: z.string().min(1, { message: 'Required' }),
+	client_id: z.string().min(1, { message: 'Required' }),
+	property_id: z.string().min(1, { message: 'Required' }),
+	email: z.string().email({ message: 'Must be a valid email' }),
+});
+
+// export const validation = z.object({
+// unit_id: z.string().min(1, { message: 'Required' }),
+// tenant_id: z.string().min(1, { message: 'Required' }),
+// client_id: z.string().min(1, { message: 'Required' }),
+// property_id: z.string().min(1, { message: 'Required' }),
+// });
