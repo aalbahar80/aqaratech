@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-	// export const prerender = true;
-</script>
-
 <script lang="ts">
 	import Checked from '$components/indicators/Checked.svelte';
 	import Unchecked from '$components/indicators/Unchecked.svelte';

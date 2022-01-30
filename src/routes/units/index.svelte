@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-	// export const prerender = true;
-</script>
-
 <script lang="ts">
 	import TableCS from '$components/table/TableCS.svelte';
 	import { fieldList } from '$lib/definitions/Units';

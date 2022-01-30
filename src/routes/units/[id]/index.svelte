@@ -10,8 +10,6 @@
 		type UnitDetailPageStore,
 	} from './_index.gql';
 
-	export const prerender = true;
-
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call

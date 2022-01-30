@@ -25,8 +25,6 @@
 		type TenantIdScreenStore,
 	} from './_[id].gql';
 
-	export const prerender = true;
-
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
 
