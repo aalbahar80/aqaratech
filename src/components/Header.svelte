@@ -123,3 +123,11 @@
 		</SideNav>
 	{/if}
 </Header>
+
+<style>
+	:global(a.bx--side-nav__link > .bx--side-nav__link-text, .bx--side-nav
+			a.bx--header__menu-item
+			.bx--text-truncate-end) {
+		@apply text-2xl py-2;
+	}
+</style>
