@@ -20,16 +20,6 @@
 	import { session } from '$app/stores';
 
 	logger.warn('layout module script tag', '__layout.svelte ~ 20');
-	LogRocket.init('n4p0hb/svelte14dec');
-
-	// posthog.capture('my event', { property: 'value' });
-	const publicPages = [
-		'/',
-		'/auth/login',
-		'/auth/callback',
-		'/auth/logout',
-		'/landing',
-	];
 
 	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.warn('load function initial', '__layout.svelte ~ 36');
@@ -43,8 +33,6 @@
 		}
 		logger.warn('load function after user check', '__layout.svelte ~ 45');
 		logger.debug(session.userId, '__layout.svelte ~ 38');
-		LogRocket.identify(session.userId);
-		// posthog.identify(session.userId);
 
 		const client = urqlClient(fetch);
 
@@ -80,10 +68,17 @@
 	logger.warn('layout normal script tag', '__layout.svelte ~ 78');
 	onMount(() => {
 		logger.warn('layout on mount', '__layout.svelte ~ 82');
-		posthog.init('phc_9yCZuf3iVjCaKEH8TDb4sLaN2tg3hnyoIpqRIjGjNiz', {
-			api_host: 'https://app.posthog.com',
-		});
-		posthog.identify($session.userId);
+		if (!window.location.href.includes('localhost')) {
+			// TODO choose one of posthog or logrocket
+			posthog.init('phc_9yCZuf3iVjCaKEH8TDb4sLaN2tg3hnyoIpqRIjGjNiz', {
+				api_host: 'https://app.posthog.com',
+			});
+			posthog.identify($session.userId);
+			// posthog.capture('my event', { property: 'value' });
+
+			LogRocket.init('n4p0hb/svelte14dec');
+			LogRocket.identify(session.userId);
+		}
 	});
 </script>
 
