@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FormCS from '$components/form/FormCS.svelte';
+	import Form30 from '$components/form/Form30.svelte';
 	import SearchBox from '$components/form/SearchBox.svelte';
 	import { fieldList, graphqlName, validation } from '$lib/definitions/Leases';
 	import { fieldList as clientFieldList } from '$lib/definitions/Clients';
@@ -41,8 +41,12 @@
 		tenant_id: tenant,
 	};
 	// FORM VALIDATION
-	let formData: any;
+	let formData: any = {};
+	let formErrors: any = {};
+	let form;
 </script>
+
+<buton on:click={() => form?.mySetField('tenant_id', '111')}>set</buton>
 
 <div class="max-w-md grid grid-cols-1 gap-8">
 	<SearchBox
@@ -55,6 +59,8 @@
 		comboBoxProps={{
 			titleText: 'Tenant',
 			placeholder: 'Type to search by name, civil id, phone, etc',
+			invalid: formErrors.tenant_id,
+			invalidText: formErrors.tenant_id,
 		}}
 		bind:selectedId={tenant}
 	/>
@@ -116,17 +122,18 @@
 				warn: isUnitDisabled && isUnitClicked,
 				warnText: 'Please select a property first',
 			}}
-			bind:selectedId={unit}
+			bind:selectedId={formData.unit}
 			constraint={{ property_id: { _eq: parseInt(property || '') } }}
 		/>
 	</div>
 
-	<FormCS
+	<Form30
 		{fieldList}
 		insertDoc={AddLeaseDocument}
 		entity={graphqlName}
 		{validation}
-		bind:customFields
 		bind:formData
+		bind:formErrors
+		bind:this={form}
 	/>
 </div>

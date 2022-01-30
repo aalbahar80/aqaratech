@@ -14,6 +14,13 @@ export const fieldList = [
 		visibileInTable: true,
 	}),
 	new Field({
+		fieldName: 'tenant_id',
+		title: 'Tenant ID',
+		editable: true,
+		disabled: true,
+		searchType: 'number',
+	}),
+	new Field({
 		fieldName: 'start_date',
 		title: 'Start',
 		inputType: 'date',
@@ -62,13 +69,6 @@ export const fieldList = [
 	new Field({
 		fieldName: 'unit_id',
 		title: 'Unit ID',
-		editable: true,
-		disabled: true,
-		searchType: 'number',
-	}),
-	new Field({
-		fieldName: 'tenant_id',
-		title: 'Tenant ID',
 		editable: true,
 		disabled: true,
 		searchType: 'number',
