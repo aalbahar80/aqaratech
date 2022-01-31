@@ -5,31 +5,33 @@
 	import { svelteReporter } from '@felte/reporter-svelte';
 	import type { ValidatorConfig } from '@felte/validator-zod';
 	import { validator } from '@felte/validator-zod';
-	import { mutation, operationStore } from '@urql/svelte';
+	import {
+		mutation,
+		operationStore,
+		type TypedDocumentNode,
+	} from '@urql/svelte';
 	import { Button } from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import map from 'just-map-values';
 	import { onMount } from 'svelte';
-	import type { z } from 'zod';
+	import type { Writable } from 'svelte/store';
+	import type { z, ZodType } from 'zod';
 	import type { Field } from './Field';
 
-	export let schema;
-	export let initialValues;
-	export let mutationDoc;
-	export let validation;
-	export let url = (id: string): string => `/api/v1/form/${id}`;
+	export let mutationDoc: TypedDocumentNode;
+	export let subtitle: string;
 	export let fieldList: Field[];
-	export let subtitle;
-	export let onMountReset = (touched: any): void => {};
-	export let moreData;
+	export let url: (id: string) => string;
 
-	$: $data = {
-		...$data,
-		...$moreData,
-	};
-	$: console.log($moreData);
-	$: console.log($data);
-	// eslint-disable-next-line @typescript-eslint/unbound-method
+	type Schema = $$Generic<ZodType<any, any, any>>;
+	type PartialSchema = Partial<z.infer<Schema>>;
+	export let schema: Schema;
+	// export let initialValues: Partial<typeof $data>;
+	export let initialValues: PartialSchema;
+	export let onMountReset: (touched2: typeof $touched) => void;
+	export let moreData: Writable<Partial<typeof $data>>;
+	export let validation: (values: PartialSchema) => typeof $errors;
+
 	const {
 		form,
 		validate,
@@ -44,14 +46,9 @@
 		extend: [validator, svelteReporter],
 		validateSchema: schema,
 		validate: validation,
-
-		// transform: (values) => values.map((v) => (v === '' ? null : v)),
-		// transform: (values) => map(values, (v) => (v === '' ? null : v)),
-		// touchTriggerEvents: { blur: false, change: false, input: false },
 		onSubmit: async (allValues) => {
 			const nullifiedValues = map(allValues, (v) => (v === '' ? null : v));
 			const { client_id, property_id, ...values } = allValues;
-			// TODO dynamic
 			const res = await mutation(operationStore(mutationDoc))({
 				// TODO dynamic
 				object: values,
@@ -60,17 +57,21 @@
 				props: {
 					title: 'Success',
 					kind: 'success',
-					// TODO dynamic
 					subtitle: `${subtitle} updated`,
 				},
 			});
 			// TODO reconsider await
 			// TODO dynamic
 			const id = await res.data?.result?.id;
-			await goto(`/${'leases'}/${id?.toString()}`);
+			await goto(url(id));
 			// ...
 		},
 	});
+
+	$: $data = {
+		...$data,
+		...$moreData,
+	};
 
 	setInitialValues(initialValues);
 	onMount(() => {
@@ -86,7 +87,6 @@
 	<form use:form>
 		<div class="div grid grid-cols-1 gap-y-4">
 			<slot data={$data} errors={$errors} {setTouched} {setField} />
-			<!-- <slot {data} {errors} {setTouched} /> -->
 			<FormFields {fieldList} />
 
 			<button type="submit">submit</button>

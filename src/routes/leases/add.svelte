@@ -6,7 +6,8 @@
 	import { fieldList as propertyFieldList } from '$lib/definitions/Properties';
 	import { fieldList as tenantFieldList } from '$lib/definitions/Tenants';
 	import { fieldList as unitFieldList } from '$lib/definitions/Units';
-	import { onMount } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import type { z } from 'zod';
 	import {
 		AddLeaseDocument,
 		ClientComboBoxDocument,
@@ -14,43 +15,17 @@
 		TenantComboBoxDocument,
 		UnitComboBoxDocument,
 	} from './_add.gql';
-	import { writable } from 'svelte/store';
-	export let moreData = writable({});
+
+	type PartialSchema = Partial<z.infer<typeof schema>>;
+	let moreData: Writable<PartialSchema> = writable({});
 
 	const placeholder = (fields: string[]): string =>
 		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
 
-	onMount(() => {
-		// $touched.tenant_id = false;
-		// $touched.client_id = false;
-		// $touched.property_id = false;
-		// $touched.unit_id = false;
-		// wait for 1 second
-		// setTimeout(() => {
-		// 	reset();
-		// }, 1);
-	});
-	let cData;
-</script>
-
-<FormNew
-	bind:cData
-	{schema}
-	{fieldList}
-	url={(id) => `/leases`}
-	subtitle="Lease"
-	mutationDoc={AddLeaseDocument}
-	initialValues={{
-		deposit: 2,
-		start_date: '2022-01-31',
-		end_date: '2023-01-30',
-	}}
-	validation={(values) => {
-		// TODO dynamic
-		// const newErrors: Partial<{
-		// 	[Property in keyof typeof values]: string[];
-		// }> = {};
-		const newErrors = {};
+	const validation = (values: PartialSchema) => {
+		const newErrors: Partial<{
+			[Property in keyof typeof values]: string[];
+		}> = {};
 		if (values.start_date && values.end_date) {
 			if (values.start_date > values.end_date) {
 				newErrors.start_date = ['Start date must be before end date'];
@@ -64,7 +39,21 @@
 			newErrors.unit_id = ['Select a property first'];
 		}
 		return newErrors;
+	};
+</script>
+
+<FormNew
+	{schema}
+	{fieldList}
+	url={(id) => `/leases/${id}`}
+	subtitle="Lease"
+	mutationDoc={AddLeaseDocument}
+	initialValues={{
+		deposit: 2,
+		start_date: '2022-01-31',
+		end_date: '2023-01-30',
 	}}
+	{validation}
 	onMountReset={(touched) => {
 		touched.tenant_id = false;
 		touched.client_id = false;
