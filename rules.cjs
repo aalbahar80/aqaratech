@@ -86,5 +86,6 @@ module.exports = {
         'import/extensions': [0, { 'ts': 'never' }],
         'radix': 'off',
         'no-self-compare': 'off',
+        'typescript-eslint/naming-convention': { 'ignoreDestructuring': true },
     },
 };
