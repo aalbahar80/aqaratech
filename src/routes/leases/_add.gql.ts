@@ -11,7 +11,7 @@ export type AddLeaseVariables = Types.Exact<{
 
 export type AddLease = {
 	__typename?: 'mutation_root';
-	insert_leases_one?:
+	result?:
 		| {
 				__typename?: 'leases';
 				id: number;
@@ -408,6 +408,7 @@ export const AddLeaseDocument = {
 				selections: [
 					{
 						kind: 'Field',
+						alias: { kind: 'Name', value: 'result' },
 						name: { kind: 'Name', value: 'insert_leases_one' },
 						arguments: [
 							{

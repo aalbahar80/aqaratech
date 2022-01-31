@@ -69,7 +69,7 @@ export const fieldList = [
 	new Field({
 		fieldName: 'unit_id',
 		title: 'Unit ID',
-		editable: true,
+		editable: false,
 		disabled: true,
 		searchType: 'number',
 	}),
@@ -91,7 +91,6 @@ export const validation = z.object({
 	tenant_id: z.string().min(1, { message: 'Required' }),
 	client_id: z.string().min(1, { message: 'Required' }),
 	property_id: z.string().min(1, { message: 'Required' }),
-	email: z.string().email({ message: 'Must be a valid email' }),
 });
 
 // export const validation = z.object({

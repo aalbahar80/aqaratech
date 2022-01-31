@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { ValidationMessage } from '@felte/reporter-svelte';
-	import type { Field } from './Field';
 	import { Checkbox, TextInput } from 'carbon-components-svelte';
+	import type { Field } from './Field';
 
 	export let fieldList: Field[];
 </script>
 
-<TextInput name="email" />
-<slot />
 {#each fieldList as { title, fieldName, inputType, editable, pattern, disabled }}
 	{#if editable && fieldName !== 'tenant_did'}
 		<ValidationMessage for={fieldName} let:messages={message}>

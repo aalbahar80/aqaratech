@@ -26,6 +26,10 @@
 	import { addToast } from '$lib/stores/toast';
 	import { goto } from '$app/navigation';
 
+	export let schema;
+	export let mutationDoc;
+	export let validation;
+	export let url;
 	const schema = validation;
 
 	const placeholder = (fields: string[]): string =>

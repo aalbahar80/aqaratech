@@ -1,5 +1,5 @@
 mutation AddLease($object: leases_insert_input = {}) {
-	insert_leases_one(object: $object) {
+	result: insert_leases_one(object: $object) {
 		...leaseDetails
 	}
 }
