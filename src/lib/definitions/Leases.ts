@@ -75,7 +75,7 @@ export const fieldList = [
 	}),
 ];
 
-export const validation = z.object({
+export const schema = z.object({
 	// validate that start_date is an iso string
 	start_date: z.string().refine((val) => Date.parse(val), {
 		message: 'Start date must be an ISO string',
