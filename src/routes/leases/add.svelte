@@ -14,7 +14,8 @@
 		TenantComboBoxDocument,
 		UnitComboBoxDocument,
 	} from './_add.gql';
-	import { leaseStore } from '$lib/stores/formStores';
+	import { writable } from 'svelte/store';
+	export let moreData = writable({});
 
 	const placeholder = (fields: string[]): string =>
 		`Type to search by ${fields.map((field) => `${field}`).join(', ')}`;
@@ -70,11 +71,13 @@
 		touched.property_id = false;
 		touched.unit_id = false;
 	}}
+	{moreData}
 	let:data
 	let:errors
 	let:setTouched
 >
-	<button on:click={() => console.log($leaseStore)}>see data</button>
+	<button on:click={() => console.log(data)}>see data</button>
+	<button on:click={() => console.log($moreData)}>more data</button>
 	<div class="max-w-md grid grid-cols-1 gap-8">
 		<div class="div grid grid-cols-1 gap-y-4">
 			<SearchBox
@@ -90,7 +93,7 @@
 					invalid: !!(errors.tenant_id?.length ?? 0 > 0),
 					invalidText: errors.tenant_id?.[0],
 				}}
-				selectedId={data.tenant_id}
+				bind:selectedId={$moreData.tenant_id}
 			/>
 
 			<SearchBox
@@ -112,7 +115,7 @@
 					invalid: !!(errors.client_id?.length ?? 0 > 0),
 					invalidText: errors.client_id?.[0],
 				}}
-				selectedId={data.client_id}
+				bind:selectedId={$moreData.client_id}
 			/>
 
 			<div
@@ -134,7 +137,7 @@
 						invalidText: errors.property_id?.[0],
 						disabled: !data.client_id,
 					}}
-					selectedId={data.property_id}
+					bind:selectedId={$moreData.property_id}
 					constraint={{ client_id: { _eq: parseInt(data.client_id || '') } }}
 				/>
 			</div>
@@ -158,7 +161,7 @@
 						invalidText: errors.unit_id?.[0],
 						disabled: !data.property_id,
 					}}
-					selectedId={data.unit_id}
+					bind:selectedId={$moreData.unit_id}
 					constraint={{
 						property_id: { _eq: parseInt(data.property_id || '') },
 					}}

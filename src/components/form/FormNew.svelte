@@ -12,8 +12,6 @@
 	import { onMount } from 'svelte';
 	import type { z } from 'zod';
 	import type { Field } from './Field';
-	import { leaseStore } from '$lib/stores/formStores';
-	import { writable, derived } from 'svelte/store';
 
 	export let schema;
 	export let initialValues;
@@ -23,10 +21,13 @@
 	export let fieldList: Field[];
 	export let subtitle;
 	export let onMountReset = (touched: any): void => {};
-	export let cData;
-	$: cData = $data;
+	export let moreData;
 
-	$: $leaseStore = $data;
+	$: $data = {
+		...$data,
+		...$moreData,
+	};
+	$: console.log($moreData);
 	$: console.log($data);
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const {
