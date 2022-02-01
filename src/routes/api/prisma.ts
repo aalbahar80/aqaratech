@@ -1,39 +1,5 @@
 import { prisma } from '$lib/config/prisma';
-import type { RequestHandler } from '@sveltejs/kit';
-import { Prisma } from '@prisma/client';
-
-// export const getAllTenants = async () => {
-// 	const allTenants = await prisma.tenants.findMany({
-// 		take: 2,
-// 		select: {
-// 			id: true,
-// 			first_name: true,
-// 			civilid: true,
-// 		},
-// 	});
-// 	return allTenants;
-// };
-
-// export const get: RequestHandler<Locals> = async (event) => {
-// 	const someTenants = await prisma.tenants.findMany({
-// 		take: 4,
-// 		select: {
-// 			id: true,
-// 			first_name: true,
-// 			phone: true,
-// 		},
-// 	});
-// 	if (someTenants) {
-// 		console.log(someTenants);
-// 		return {
-// 			status: 200,
-// 			body: someTenants,
-// 		};
-// 	}
-// 	return {
-// 		status: 404,
-// 	};
-// };
+import type { RequestEvent } from '@sveltejs/kit';
 
 /*
 	This module is used by the /todos.json and /todos/[uid].json
@@ -45,7 +11,8 @@ import { Prisma } from '@prisma/client';
 	(The data on the todo app will expire periodically; no
 	guarantees are made. Don't use it to organise your life.)
 */
-export async function api(request, resource: string, data?) {
+export async function api(event: RequestEvent, resource: string, data?) {
+	const { request } = event;
 	let body = {};
 	let status = 500;
 	switch (request.method.toUpperCase()) {
