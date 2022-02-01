@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<!-- <script lang="ts" context="module">
 	import { supabase } from '$lib/config/supabase';
 	import type { definitions } from '$lib/types/supabase';
 	import type { Load } from '@sveltejs/kit';
@@ -46,4 +46,4 @@
 		{id}
 		{start_date}
 	</p>
-{/each} -->
+{/each} --> -->

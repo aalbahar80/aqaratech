@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<!-- <script lang="ts" context="module">
 	import { supabase } from '$lib/config/supabase';
 	import type { definitions } from '$lib/types/supabase';
 	import type { Load } from '@sveltejs/kit';
@@ -27,17 +27,17 @@
 	export let tenants: definitions['tenants'];
 	// export let tenants: typeof load;
 	// export let tenants;
-</script>
+</script> -->
 
 <!-- <pre>{JSON.stringify(tenants?.tenants[2].phone)}</pre>
 <button on:click={() => console.log(tenants)}>Log data</button> -->
 
 <!-- <pre>{JSON.stringify(tenants[2].first_name)}</pre> -->
-<button on:click={() => console.log(tenants)}>Log data</button>
+<!-- <button on:click={() => console.log(tenants)}>Log data</button>
 
 {#each tenants as { first_name, phone }}
 	<p>
 		{first_name}
 		{phone}
 	</p>
-{/each}
+{/each} -->
