@@ -109,3 +109,40 @@ yarn run cypress run -s "cypress/integration/*.spec.ts"
 # supabase type generation
 npx openapi-typescript https://datxutuqogarvvqnhxel.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzY3NTg0OSwiZXhwIjoxOTU5MjUxODQ5fQ.2Q3C3dQwhonuTMB_k2P5-E2pT60PBBd9mauiE7ibcLE --output src/lib/types/supabase.ts
 ```
+
+Prisma note:
+```zsh
+# to run prisma.ts file
+# this does it on the fly without saving it to .js first (I think)
+# useful for testing queries etc
+# might need to install ts-node first?
+# https://github.com/prisma/prisma/issues/5030#issuecomment-932823661
+# https://github.com/prisma/prisma/discussions/9027#discussioncomment-1585810
+# https://github.com/prisma/prisma/pull/4920#issuecomment-960373111
+# https://github.com/noahsalvi/helvetikon/blob/a6b448f4067c7c467f31635518923a7b828e9529/src/lib/prisma.ts
+# https://github.com/prisma/prisma/issues/6491#issuecomment-847141591
+# full sveltekit + prisma setup https://github.com/mikenikles/sveltekit-prisma
+node --loader ts-node/esm src/lib/config/prisma.ts
+```
+
+```ts
+// src/lib/config/prisma.ts
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+
+const prisma = new PrismaClient();
+
+async function main() {
+	const allTenants = await prisma.tenants.findMany();
+	console.log('sdf');
+	console.log(allTenants);
+}
+
+main()
+	.catch((e) => {
+		throw e;
+	})
+	.finally(async () => {
+		await prisma.$disconnect();
+	});
+```
