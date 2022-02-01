@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import FormCS from '$components/form/FormCS.svelte';
-	import { fieldList, graphqlName, validation } from '$lib/definitions/Leases';
+	import { fieldList, graphqlName, schema } from '$lib/definitions/Leases';
 	import type { Load } from '@sveltejs/kit';
 	import {
 		LeaseEditPageDocument,
@@ -37,7 +37,7 @@
 		updateDoc={UpdateLeaseDocument}
 		entity={graphqlName}
 		{existing}
-		{validation}
+		validation={schema}
 	/>
 {:else}
 	TODO: Error state
