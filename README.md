@@ -146,3 +146,6 @@ main()
 		await prisma.$disconnect();
 	});
 ```
+
+Initial prisma implementation taken from:
+https://github.com/mikenikles/sveltekit-prisma

@@ -29,6 +29,9 @@ const config = {
 			},
 			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()],
 		},
+		methodOverride: {
+			allowed: ['PATCH', 'DELETE']
+		}
 		// prerender: {
 		// 	concurrency: 2,
 		// }

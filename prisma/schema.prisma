@@ -127,6 +127,7 @@ model tenants {
   dob                DateTime?            @db.Date
   phone              String?
   email              String?
+  is_ok              Boolean?
   leases             leases[]
   maintenance_orders maintenance_orders[]
 }

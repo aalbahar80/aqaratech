@@ -1,6 +1,6 @@
 import { prisma } from '$lib/config/prisma';
+import type { Prisma } from '@prisma/client';
 import type { RequestEvent } from '@sveltejs/kit';
-
 /*
 	This module is used by the /todos.json and /todos/[uid].json
 	endpoints to make calls to api.svelte.dev, which stores todos
@@ -11,31 +11,43 @@ import type { RequestEvent } from '@sveltejs/kit';
 	(The data on the todo app will expire periodically; no
 	guarantees are made. Don't use it to organise your life.)
 */
-export async function api(event: RequestEvent, resource: string, data?) {
-	const { request } = event;
+
+export async function api(
+	event: RequestEvent,
+	// resource: string,
+	data?: Prisma.tenantsCreateInput,
+) {
+	console.log(data);
+	const { request, params } = event;
 	let body = {};
 	let status = 500;
 	switch (request.method.toUpperCase()) {
 		case 'DELETE':
 			await prisma.tenants.delete({
 				where: {
-					id: resource.split('/').pop(),
+					// id: resource.split('/').pop(),
+					id: params.id,
 				},
 			});
 			status = 200;
 			break;
 		case 'GET':
-			body = await prisma.tenants.findMany();
+			body = await prisma.tenants.findMany({
+				take: 10,
+				orderBy: { created_at: 'desc' },
+			});
 			status = 200;
 			break;
 		case 'PATCH':
 			body = await prisma.tenants.update({
 				data: {
 					first_name: data?.first_name,
+					is_ok: data?.is_ok,
 					phone: data?.phone,
 				},
 				where: {
-					id: resource.split('/').pop(),
+					// id: resource.split('/').pop(),
+					id: params.id,
 				},
 			});
 			status = 200;
@@ -43,7 +55,7 @@ export async function api(event: RequestEvent, resource: string, data?) {
 		case 'POST':
 			body = await prisma.tenants.create({
 				data: {
-					email: data?.email,
+					first_name: data?.first_name,
 					last_name: data?.last_name,
 				},
 			});
@@ -55,17 +67,17 @@ export async function api(event: RequestEvent, resource: string, data?) {
 	// behaviour is to show the URL corresponding to the form's "action"
 	// attribute. in those cases, we want to redirect them back to the
 	// /todos page, rather than showing the response
-	// if (
-	// 	request.method !== 'GET' &&
-	// 	request.headers.accept !== 'application/json'
-	// ) {
-	// 	return {
-	// 		status: 303,
-	// 		headers: {
-	// 			location: '/todos',
-	// 		},
-	// 	};
-	// }
+	if (
+		request.method !== 'GET' &&
+		request.headers.get('accept') !== 'application/json'
+	) {
+		return {
+			status: 303,
+			headers: {
+				location: '/prismatenants',
+			},
+		};
+	}
 
 	return {
 		status,

@@ -2,18 +2,15 @@ import { api } from '$routes/api/prisma';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // PATCH /todos/:uid.json
-export const patch: RequestHandler = async ({ request, locals, params }) => {
-	return api(request, `prismatenants/${locals.userId}/${params.uid}`, {
-		text: request.body?.get('text'),
-		done: request.body?.has('done') ? !!request.body?.get('done') : undefined,
+export const patch: RequestHandler<Locals, FormData> = async (event) => {
+	const data = await event.request.formData();
+	return api(event, {
+		first_name: data.get('first_name')?.toString() || undefined,
+		is_ok: data.has('is_ok') ? !!data.get('is_ok') : undefined,
 	});
 };
 
 // DELETE /todos/:uid.json
-export const del: RequestHandler<Locals> = async ({
-	request,
-	locals,
-	params,
-}) => {
-	return api(request, `todos/${locals.userId}/${params.uid}`);
+export const del: RequestHandler = async (event) => {
+	return api(event);
 };
