@@ -102,3 +102,10 @@ yarn run cypress run -s "cypress/integration/*.spec.ts"
 - Run Cypress / jest?
 - Run lint
 - Run formatter
+
+
+
+```zsh
+# supabase type generation
+npx openapi-typescript https://datxutuqogarvvqnhxel.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzY3NTg0OSwiZXhwIjoxOTU5MjUxODQ5fQ.2Q3C3dQwhonuTMB_k2P5-E2pT60PBBd9mauiE7ibcLE --output src/lib/types/supabase.ts
+```

@@ -17,4 +17,6 @@ interface ImportMetaEnv {
 	readonly VITE_DOMAIN: string;
 	readonly VITE_TWILIO_ACCOUNT_SID: string;
 	readonly VITE_TWILIO_AUTH_TOKEN: string;
+	readonly VITE_SVELTE_APP_SUPABASE_URL: string;
+	readonly VITE_SVELTE_APP_SUPABASE_ANON_KEY: string;
 }
