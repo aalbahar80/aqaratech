@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
-	import type { get, GetAT } from './index.json';
+	import type { Body } from './index.json';
 	export const load: Load = async ({ fetch }) => {
 		const res = await fetch('/prismatenants/all');
 		if (res.ok) {
-			const tenants: GetAT = await res.json();
+			const tenants = (await res.json()) as Body;
 			return {
 				props: tenants,
 			};
@@ -19,5 +19,5 @@
 </script>
 
 <script lang="ts">
-	export let tenants;
+	export let tenants: Body;
 </script>
