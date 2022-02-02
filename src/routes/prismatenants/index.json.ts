@@ -1,8 +1,8 @@
 import { api } from '$routes/api/prisma';
-import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from '@sveltejs/kit';
 
 // GET /todos.json
-export const get: RequestHandler<Locals> = async (event) => {
+export const get: RequestHandler = async (event) => {
 	const response = await api(event);
 
 	// if (response.status === 404) {
@@ -15,7 +15,7 @@ export const get: RequestHandler<Locals> = async (event) => {
 };
 
 // POST /todos.json
-export const post: RequestHandler<Locals, FormData> = async (event) => {
+export const post: RequestHandler = async (event) => {
 	const data = await event.request.formData();
 	const response = await api(event, {
 		// because index.svelte posts a FormData object,

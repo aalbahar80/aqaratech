@@ -6,7 +6,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { createClient } from '@urql/core';
 import { TrxPublicInfoDocument } from './_[id].gql';
 
-export const get: RequestHandler<Locals> = async ({ params }) => {
+export const get: RequestHandler = async ({ params }) => {
 	const { id } = params;
 
 	// check if transaction exists

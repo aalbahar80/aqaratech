@@ -2,7 +2,7 @@ import { logger } from '$lib/config/logger';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // TODO protect this route
-export const get: RequestHandler<Locals> = async (request) => {
+export const get: RequestHandler = async (request) => {
 	const id = request.url.searchParams.get('id');
 	const phone = request.url.searchParams.get('phone');
 	console.info('📜 sms.ts 6 phone:', phone);

@@ -2,7 +2,7 @@ import { api } from '$routes/api/prisma';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // PATCH /todos/:uid.json
-export const patch: RequestHandler<Locals, FormData> = async (event) => {
+export const patch: RequestHandler = async (event) => {
 	const data = await event.request.formData();
 	return api(event, {
 		first_name: data.get('first_name')?.toString() || undefined,

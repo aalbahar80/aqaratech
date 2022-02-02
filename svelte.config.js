@@ -15,8 +15,6 @@ const config = {
 	],
 
 	kit: {
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
 		adapter: adapter(),
 		vite: {
 			resolve: {
@@ -32,9 +30,6 @@ const config = {
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE']
 		}
-		// prerender: {
-		// 	concurrency: 2,
-		// }
 	},
 };
 

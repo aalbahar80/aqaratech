@@ -2,7 +2,7 @@ import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const post: RequestHandler<Locals> = async (event) => {
+export const post: RequestHandler = async (event) => {
 	// TODO use env vars for url. dev/stage/prod
 	const res = await fetch('https://hasura-xf70.onrender.com/v1/graphql', {
 		headers: {

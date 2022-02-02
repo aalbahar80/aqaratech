@@ -47,7 +47,7 @@ async function getTokens(code: string, redirectUri: string) {
 	}
 }
 
-export const get: RequestHandler<Locals> = async (req) => {
+export const get: RequestHandler = async (req) => {
 	// debugger;
 	try {
 		const code = req.url.searchParams.get('code');

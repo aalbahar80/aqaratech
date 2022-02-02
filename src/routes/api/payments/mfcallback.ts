@@ -1,7 +1,7 @@
 import { getPaymentStatus, markAsPaid } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler<Locals> = async (req) => {
+export const get: RequestHandler = async (req) => {
 	const paymentId = req.url.searchParams.get('PaymentId');
 	if (!paymentId) {
 		const error = new Error('Unable to get PaymentId from URL');

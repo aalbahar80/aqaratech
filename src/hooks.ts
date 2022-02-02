@@ -11,7 +11,7 @@ const publicPages = [
 	'/landing',
 ];
 
-export const handle: Handle<Locals> = async ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve }) => {
 	logger.debug(f('hooks.ts', 8, event.request.headers));
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	logger.debug(f('hooks.ts', 11, { cookies }));

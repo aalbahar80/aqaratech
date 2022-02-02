@@ -8,7 +8,7 @@ const _get = () => {
 	});
 };
 
-export const get: RequestHandler<Locals> = async () => {
+export const get: RequestHandler = async () => {
 	const body = await _get();
 	return {
 		body,
