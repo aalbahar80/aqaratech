@@ -41,6 +41,7 @@
 <div class="todos">
 	<h1>Todos</h1>
 
+	<a href="/prismatenants/all" rel="external">go pts</a>
 	<form
 		class="new"
 		action="/prismatenants.json"

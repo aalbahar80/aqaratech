@@ -1,5 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { prisma } from '$lib/config/prisma';
+import prisma from '$lib/config/prisma';
 
 const _get = () => {
 	return prisma.tenants.findMany({

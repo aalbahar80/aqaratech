@@ -30,6 +30,7 @@
 		{ text: 'Leases', href: '/leases' },
 		{ text: 'Tenants', href: '/tenants' },
 		{ text: 'Transactions', href: '/transactions' },
+		{ text: 'prismatenants', href: '/prismatenants/all' },
 	];
 	$: isActive = (href: string) => $page.url.pathname === href;
 	const navBreakpoint = 1056;

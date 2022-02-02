@@ -1,4 +1,4 @@
-import { prisma } from '$lib/config/prisma';
+import prisma from '$lib/config/prisma';
 import type { Prisma } from '@prisma/client';
 import type { RequestEvent } from '@sveltejs/kit';
 /*
@@ -21,6 +21,7 @@ export async function api(
 	const { request, params } = event;
 	let body = {};
 	let status = 500;
+	// eslint-disable-next-line default-case
 	switch (request.method.toUpperCase()) {
 		case 'DELETE':
 			await prisma.tenants.delete({
@@ -35,6 +36,11 @@ export async function api(
 			body = await prisma.tenants.findMany({
 				take: 10,
 				orderBy: { created_at: 'desc' },
+				select: {
+					id: true,
+					first_name: true,
+					dob: true,
+				},
 			});
 			status = 200;
 			break;
