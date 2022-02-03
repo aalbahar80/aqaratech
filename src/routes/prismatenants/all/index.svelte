@@ -28,4 +28,4 @@
 <a href="/">go home</a>
 <a href="/prismatenants">go pts</a>
 <h1>some header</h1>
-<pre>{JSON.stringify(tenants[9].email)}</pre>
+<pre>{JSON.stringify(tenants)}</pre>

@@ -3,7 +3,7 @@ import prisma from '$lib/config/prisma';
 import { logger } from '$lib/config/logger';
 
 const _get = () => {
-	return prisma.tenants.findMany({
+	return prisma.tenant.findMany({
 		take: 10,
 		select: { id: true, email: true },
 	});
