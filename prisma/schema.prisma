@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider             = "mysql"
-  url                  = env("DATABASE_URL")
+  url                  = "mysql://7li4oqiucqlh:pscale_pw_p50zwRBG_AonA9l2Gjkvll0V-V9kKu7VQM1f82QkGTs@9fvowjf1xwxu.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
   referentialIntegrity = "prisma"
 }
 
@@ -68,7 +68,7 @@ model Listing {
   updatedAt    DateTime  @updatedAt
   isActive     Boolean?
   available_on DateTime?
-  lease_length String?
+  leaseLength  String?
   title        String?
   description  String?
   unit         Unit?     @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -113,15 +113,15 @@ model Tenant {
   id                String             @id @default(uuid())
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
-  first_name        String?
-  second_name       String?
-  third_name        String?
-  last_name         String?
+  firstName         String?
+  secondName        String?
+  thirdName         String?
+  lastName          String?
   civilid           String?
   dob               DateTime?
   phone             String?
   email             String?
-  is_ok             Boolean?
+  isOk              Boolean?
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
 }
@@ -149,7 +149,7 @@ model Unit {
   size              Float?
   bed               Float?
   bath              Float?
-  rent_market       Float?
+  marketRent        Float?
   type              String?
   usage             String?
   property          Property?          @relation(fields: [propertyId], references: [id])
