@@ -49,7 +49,6 @@
 	$: id = $page.params.id;
 	query(transaction);
 
-	let crumbs: CrumbData;
 	$: crumbs = {
 		transaction: $transaction.data?.transactions_by_pk?.id,
 		lease: $transaction.data?.transactions_by_pk?.lease_id,

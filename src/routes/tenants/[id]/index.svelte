@@ -50,7 +50,6 @@
 	query(tenant);
 	$: result = $tenant?.data?.tenants_by_pk;
 
-	let crumbs: CrumbData;
 	$: crumbs = {
 		tenant: $tenant.data?.tenants_by_pk?.id,
 		lease: $tenant.data?.tenants_by_pk?.leases[0]?.id,

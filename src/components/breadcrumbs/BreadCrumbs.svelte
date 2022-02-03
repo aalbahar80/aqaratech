@@ -4,6 +4,15 @@
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { page } from '$app/stores';
 
+	interface CrumbData {
+		client?: number | null;
+		property?: number | null;
+		unit?: number | null;
+		lease?: number | null;
+		tenant?: number | null;
+		transaction?: string | null;
+	}
+
 	// TODO: remove defaults
 	export let crumbs: CrumbData;
 

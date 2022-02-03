@@ -32,7 +32,6 @@
 	$: id = $page.params.id;
 	query(property);
 
-	let crumbs: CrumbData;
 	$: crumbs = {
 		property: $property.data?.properties_by_pk?.id,
 		client: $property.data?.properties_by_pk?.client_id,

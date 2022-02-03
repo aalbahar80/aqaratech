@@ -34,7 +34,6 @@
 	$: id = $page.params.id;
 	query(lease);
 
-	let crumbs: CrumbData;
 	$: crumbs = {
 		unit: $lease.data?.leases_by_pk?.unit_id,
 		lease: $lease.data?.leases_by_pk?.id,

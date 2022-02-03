@@ -32,7 +32,6 @@
 	$: id = $page.params.id;
 	query(unit);
 
-	let crumbs: CrumbData;
 	$: crumbs = {
 		unit: $unit.data?.units_by_pk?.id,
 		property: $unit.data?.units_by_pk?.property_id,
