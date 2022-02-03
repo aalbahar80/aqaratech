@@ -1,5 +1,5 @@
-
 [![ci](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml/badge.svg)](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml)
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
@@ -92,7 +92,9 @@ yarn run cypress run -s "cypress/integration/*.spec.ts"
 # watch mode
 
 ```
+
 ## In dev
+
 - svelte-check watch mode
 - eslint watch mode
 - cypress watch mode
@@ -103,14 +105,13 @@ yarn run cypress run -s "cypress/integration/*.spec.ts"
 - Run lint
 - Run formatter
 
-
-
 ```zsh
 # supabase type generation
 npx openapi-typescript https://datxutuqogarvvqnhxel.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzY3NTg0OSwiZXhwIjoxOTU5MjUxODQ5fQ.2Q3C3dQwhonuTMB_k2P5-E2pT60PBBd9mauiE7ibcLE --output src/lib/types/supabase.ts
 ```
 
 Prisma note:
+
 ```zsh
 # to run prisma.ts file
 # this does it on the fly without saving it to .js first (I think)
@@ -149,3 +150,51 @@ main()
 
 Initial prisma implementation taken from:
 https://github.com/mikenikles/sveltekit-prisma
+
+Prisma + Planetscale workflow
+
+Create empty db using pscale
+
+```bash
+pscale db create prisma-planetscale --region eu-west
+# At this point prisma folder only has a single file prisma.schema
+
+# Create the tables on the new planetscale db
+npx prisma db push
+
+# make changes to prisma.schema, then run again
+npx prisma db push
+
+# seed db with seed.ts
+
+# To connect to db from terminal
+pscale shell prisma-planetscale
+## Some example mysql commands
+
+# lists all tables
+show tables;
+
+#shows the sql statement required to recreate table, doesn't include table data
+show create table Tenant;
+
+# shows the rows of a table
+select * from Tenant;
+
+### WORKFLOW ###
+# create new development db branch
+# it inherits schema only not data
+
+# connect to it
+pscale connect prisma-planetscale remove-is-ok-tenant
+## this will return a connection string u can use in schema.prisma (or .env)
+
+# seed it with a script if u want, or visually in Prisma Studio
+
+# modify the schema.prisma with your changes, then push to the branch
+npx prisma db push
+
+# check the diff
+pscale branch diff prisma-planetscale remove-is-ok-tenant
+
+# create a deploy request on app.planetscale.com. Planetscale will check if changes are deployable. It will also visually show the diff. If all is well, confirm the deployment to go ahead. Delete the branch. At this point, the main branch has it's original data intact AND it now has the schema changes applied.
+```
