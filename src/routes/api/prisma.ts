@@ -15,7 +15,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 export async function api(
 	event: RequestEvent,
 	// resource: string,
-	data?: Prisma.tenantsCreateInput,
+	data?: Prisma.TenantCreateInput,
 ) {
 	console.log(data);
 	const { request, params } = event;
@@ -24,7 +24,7 @@ export async function api(
 	// eslint-disable-next-line default-case
 	switch (request.method.toUpperCase()) {
 		case 'DELETE':
-			await prisma.tenants.delete({
+			await prisma.tenant.delete({
 				where: {
 					// id: resource.split('/').pop(),
 					id: params.id,
@@ -33,22 +33,21 @@ export async function api(
 			status = 200;
 			break;
 		case 'GET':
-			body = await prisma.tenants.findMany({
+			body = await prisma.tenant.findMany({
 				take: 10,
-				orderBy: { created_at: 'desc' },
+				orderBy: { createdAt: 'desc' },
 				select: {
 					id: true,
-					first_name: true,
+					firstName: true,
 					dob: true,
 				},
 			});
 			status = 200;
 			break;
 		case 'PATCH':
-			body = await prisma.tenants.update({
+			body = await prisma.tenant.update({
 				data: {
-					first_name: data?.first_name,
-					is_ok: data?.is_ok,
+					firstName: data?.firstName,
 					phone: data?.phone,
 				},
 				where: {
@@ -59,10 +58,10 @@ export async function api(
 			status = 200;
 			break;
 		case 'POST':
-			body = await prisma.tenants.create({
+			body = await prisma.tenant.create({
 				data: {
-					first_name: data?.first_name,
-					last_name: data?.last_name,
+					firstName: data?.firstName,
+					lastName: data?.lastName,
 				},
 			});
 			status = 201;

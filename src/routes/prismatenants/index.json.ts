@@ -22,7 +22,7 @@ export const post: RequestHandler = async (event) => {
 		// request.body is _also_ a (readonly) FormData
 		// object, which allows us to get form data
 		// with the `body.get(key)` method
-		first_name: data.get('first_name')?.toString() || null,
+		firstName: data.get('first_name')?.toString() || null,
 	});
 
 	return response;
