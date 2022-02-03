@@ -1,166 +1,160 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["dataproxy", "referentialIntegrity"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
-model clients {
-  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  is_active          Boolean?             @default(true)
-  first_name         String?
-  second_name        String?
-  third_name         String?
-  last_name          String?
-  civilid            String?
-  phone              String?
-  email              String?
-  expenses           expenses[]
-  maintenance_orders maintenance_orders[]
-  properties         properties[]
+model Client {
+  id                String             @id @default(uuid())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  isActive          Boolean?           @default(true)
+  firstName         String?
+  secondName        String?
+  thirdName         String?
+  lastName          String?
+  civilid           String?
+  phone             String?
+  email             String?
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  properties        Property[]
 }
 
-model expenses {
-  id                   String              @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  unit_id              String?             @db.Uuid
-  property_id          String?             @db.Uuid
-  client_id            String?             @db.Uuid
-  maintenance_order_id String?             @db.Uuid
-  created_at           DateTime?           @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime?           @default(now()) @db.Timestamptz(6)
-  amount               Int?
-  date_post            DateTime?           @db.Date
-  category             String?
-  memo                 String?
-  expenses_types       expenses_types?     @relation(fields: [category], references: [value], onDelete: NoAction, onUpdate: NoAction)
-  clients              clients?            @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  maintenance_orders   maintenance_orders? @relation(fields: [maintenance_order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  properties           properties?         @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  units                units?              @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Expense {
+  id                 String            @id @default(uuid())
+  unitId             String?
+  propertyId         String?
+  clientId           String?
+  maintenanceOrderId String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  amount             Int?
+  postDate           DateTime?         @db.Date
+  category           String?
+  memo               String?
+  client             Client?           @relation(fields: [clientId], references: [id])
+  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id])
+  property           Property?         @relation(fields: [propertyId], references: [id])
+  unit               Unit?             @relation(fields: [unitId], references: [id])
 }
 
-model expenses_types {
-  value       String     @id
-  description String?
-  expenses    expenses[]
-}
-
-model leases {
-  id           String         @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  tenant_id    String?        @db.Uuid
-  unit_id      String?        @db.Uuid
-  created_at   DateTime?      @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime?      @default(now()) @db.Timestamptz(6)
-  start_date   DateTime?      @db.Date
-  end_date     DateTime?      @db.Date
-  monthly_rent Int?
+model Lease {
+  id           String        @id @default(uuid())
+  tenantId     String?
+  unitId       String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  startDate    DateTime?     @db.Date
+  endDate      DateTime?     @db.Date
+  monthlyRent  Int?
   deposit      Int?
-  is_signed    Boolean?
+  isSigned     Boolean?
   license      String?
-  tenants      tenants?       @relation(fields: [tenant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  units        units?         @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  transactions transactions[]
+  tenant       Tenant?       @relation(fields: [tenantId], references: [id])
+  unit         Unit?         @relation(fields: [unitId], references: [id])
+  transactions Transaction[]
 }
 
-model listings {
-  id           String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  unit_id      String?   @db.Uuid
-  created_at   DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
-  is_active    Boolean?
+model Listing {
+  id           String    @id @default(uuid())
+  unitId       String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  isActive     Boolean?
   available_on DateTime? @db.Date
   lease_length String?
   title        String?
   description  String?
-  units        units?    @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  unit         Unit?     @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model maintenance_orders {
-  id           String      @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  tenant_id    String?     @db.Uuid
-  unit_id      String?     @db.Uuid
-  property_id  String?     @db.Uuid
-  client_id    String?     @db.Uuid
-  created_at   DateTime?   @default(now()) @db.Timestamptz(6)
-  updated_at   DateTime?   @default(now()) @db.Timestamptz(6)
-  completed_at DateTime?   @db.Timestamptz(6)
-  title        String?
-  description  String?
-  status       String?
-  clients      clients?    @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  properties   properties? @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  tenants      tenants?    @relation(fields: [tenant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  units        units?      @relation(fields: [unit_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  expenses     expenses[]
+model MaintenanceOrder {
+  id          String    @id @default(uuid())
+  tenantId    String?
+  unitId      String?
+  propertyId  String?
+  clientId    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+  title       String?
+  description String?
+  status      String?
+  client      Client?   @relation(fields: [clientId], references: [id])
+  property    Property? @relation(fields: [propertyId], references: [id])
+  tenant      Tenant?   @relation(fields: [tenantId], references: [id])
+  unit        Unit?     @relation(fields: [unitId], references: [id])
+  expenses    Expense[]
 }
 
-model properties {
-  id                 String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  client_id          String?               @db.Uuid
-  created_at         DateTime?             @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?             @default(now()) @db.Timestamptz(6)
-  area               String?
-  block              String?
-  avenue             String?
-  street             String?
-  number             String?
-  coordinates        Unsupported("point")?
-  clients            clients?              @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  expenses           expenses[]
-  maintenance_orders maintenance_orders[]
-  units              units[]
+model Property {
+  id                String             @id @default(uuid())
+  clientId          String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  area              String?
+  block             String?
+  avenue            String?
+  street            String?
+  number            String?
+  client            Client?            @relation(fields: [clientId], references: [id])
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  units             Unit[]
 }
 
-model tenants {
-  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  first_name         String?
-  second_name        String?
-  third_name         String?
-  last_name          String?
-  civilid            String?
-  dob                DateTime?            @db.Date
-  phone              String?
-  email              String?
-  is_ok              Boolean?
-  leases             leases[]
-  maintenance_orders maintenance_orders[]
+model Tenant {
+  id                String             @id @default(uuid())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  first_name        String?
+  second_name       String?
+  third_name        String?
+  last_name         String?
+  civilid           String?
+  dob               DateTime?          @db.Date
+  phone             String?
+  email             String?
+  is_ok             Boolean?
+  leases            Lease[]
+  maintenanceOrders MaintenanceOrder[]
 }
 
-model transactions {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
-  due_date    DateTime? @db.Date
-  is_paid     Boolean?  @default(false)
-  amount      Int?
-  memo        String?
-  receipt_url String?
-  lease_id    String?   @db.Uuid
-  leases      leases?   @relation(fields: [lease_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Transaction {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  dueDate    DateTime? @db.Date
+  isPaid     Boolean?  @default(false)
+  amount     Int?
+  memo       String?
+  receiptUrl String?
+  leaseId    String?
+  lease      Lease?    @relation(fields: [leaseId], references: [id])
 }
 
-model units {
-  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  property_id        String?              @db.Uuid
-  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  unit_number        String?
-  floor              String?
-  size               Int?
-  bed                Decimal?             @db.Decimal
-  bath               Decimal?             @db.Decimal
-  rent_market        Int?
-  type               String?
-  usage              String?
-  properties         properties?          @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  expenses           expenses[]
-  leases             leases[]
-  listings           listings[]
-  maintenance_orders maintenance_orders[]
+model Unit {
+  id                String             @id @default(uuid())
+  propertyId        String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  unitNumber        String?
+  floor             String?
+  size              Int?
+  bed               Decimal?           @db.Decimal
+  bath              Decimal?           @db.Decimal
+  rent_market       Int?
+  type              String?
+  usage             String?
+  property          Property?          @relation(fields: [propertyId], references: [id])
+  expenses          Expense[]
+  leases            Lease[]
+  listings          Listing[]
+  maintenanceOrders MaintenanceOrder[]
 }
