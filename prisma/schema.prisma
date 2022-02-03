@@ -34,8 +34,8 @@ model Expense {
   maintenanceOrderId String?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
-  amount             Int?
-  postDate           DateTime?         @db.Date
+  amount             Float?
+  postDate           DateTime?
   category           String?
   memo               String?
   client             Client?           @relation(fields: [clientId], references: [id])
@@ -50,10 +50,10 @@ model Lease {
   unitId       String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  startDate    DateTime?     @db.Date
-  endDate      DateTime?     @db.Date
-  monthlyRent  Int?
-  deposit      Int?
+  startDate    DateTime?
+  endDate      DateTime?
+  monthlyRent  Float?
+  deposit      Float?
   isSigned     Boolean?
   license      String?
   tenant       Tenant?       @relation(fields: [tenantId], references: [id])
@@ -67,7 +67,7 @@ model Listing {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   isActive     Boolean?
-  available_on DateTime? @db.Date
+  available_on DateTime?
   lease_length String?
   title        String?
   description  String?
@@ -118,7 +118,7 @@ model Tenant {
   third_name        String?
   last_name         String?
   civilid           String?
-  dob               DateTime?          @db.Date
+  dob               DateTime?
   phone             String?
   email             String?
   is_ok             Boolean?
@@ -130,9 +130,9 @@ model Transaction {
   id         String    @id @default(uuid())
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  dueDate    DateTime? @db.Date
+  dueDate    DateTime?
   isPaid     Boolean?  @default(false)
-  amount     Int?
+  amount     Float?
   memo       String?
   receiptUrl String?
   leaseId    String?
@@ -146,10 +146,10 @@ model Unit {
   updatedAt         DateTime           @updatedAt
   unitNumber        String?
   floor             String?
-  size              Int?
-  bed               Decimal?           @db.Decimal
-  bath              Decimal?           @db.Decimal
-  rent_market       Int?
+  size              Float?
+  bed               Float?
+  bath              Float?
+  rent_market       Float?
   type              String?
   usage             String?
   property          Property?          @relation(fields: [propertyId], references: [id])
