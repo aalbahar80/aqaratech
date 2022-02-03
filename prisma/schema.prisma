@@ -59,6 +59,8 @@ model Lease {
   tenant       Tenant?       @relation(fields: [tenantId], references: [id])
   unit         Unit?         @relation(fields: [unitId], references: [id])
   transactions Transaction[]
+
+  @@index([tenantId])
 }
 
 model Listing {
