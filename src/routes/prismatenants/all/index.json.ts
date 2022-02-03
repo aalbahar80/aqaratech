@@ -1,5 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/config/prisma';
+import { logger } from '$lib/config/logger';
 
 const _get = () => {
 	return prisma.tenants.findMany({
@@ -10,6 +11,7 @@ const _get = () => {
 
 export const get: RequestHandler = async () => {
 	const body = await _get();
+	logger.warn({ body }, 'prismatenants/all.json.ts ~ 13');
 	return {
 		body,
 	};

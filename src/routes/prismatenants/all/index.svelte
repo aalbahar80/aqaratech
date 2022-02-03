@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { logger } from '$lib/config/logger';
 	import type { Load } from '@sveltejs/kit';
 	import type { Body } from './index.json';
 
@@ -6,6 +7,7 @@
 		const res = await fetch('/prismatenants/all.json');
 		if (res.ok) {
 			const tenants = (await res.json()) as Body;
+			logger.warn({ tenants }, 'index.svelte ~ 9');
 			return {
 				props: { tenants },
 			};
@@ -26,4 +28,4 @@
 <a href="/">go home</a>
 <a href="/prismatenants">go pts</a>
 <h1>some header</h1>
-<pre>{JSON.stringify(tenants)}</pre>
+<pre>{JSON.stringify(tenants[9].email)}</pre>
