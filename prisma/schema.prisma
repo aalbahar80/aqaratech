@@ -5,7 +5,8 @@ generator client {
 
 datasource db {
   provider             = "mysql"
-  url                  = "mysql://44rf4b84b9ju:pscale_pw_AZaLMmRlIZ5dDY4qJyR64_Z8ru-j_f-yJ7FWCpMPDEw@9eqjzzwj3kra.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
+  url                  = "mysql://arfh7oejz4ae:pscale_pw_r8EqnC9tkz9qlUboQOn3Av9ER-2deIFJOeaC_5AH_3c@9fvowjf1xwxu.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
+  // url                  = "mysql://44rf4b84b9ju:pscale_pw_AZaLMmRlIZ5dDY4qJyR64_Z8ru-j_f-yJ7FWCpMPDEw@9eqjzzwj3kra.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
   // url                  = "mysql://127.0.0.1:3306/prisma-planetscale"
   referentialIntegrity = "prisma"
 }
