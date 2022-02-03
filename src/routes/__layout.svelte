@@ -19,13 +19,15 @@
 	import { onMount } from 'svelte';
 	import { navigating, session } from '$app/stores';
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
+	// import PrismaClient from '$lib/config/prisma';
 
 	logger.warn('layout module script tag', '__layout.svelte ~ 20');
 
 	export const load: Load = async ({ fetch, stuff, session }) => {
 		logger.warn('load function initial', '__layout.svelte ~ 36');
 		logger.debug(!session.user, '__layout.svelte ~ 27');
-		if (!session.user) {
+		// if (!session.user) {
+		if (false) {
 			return {
 				status: 302,
 				redirect: '/auth/login',
@@ -35,11 +37,14 @@
 		logger.warn('load function after user check', '__layout.svelte ~ 45');
 		logger.debug(session.userId, '__layout.svelte ~ 38');
 
+		// if (!browser) const prismaClient = new PrismaClient();
+
 		const client = urqlClient(fetch);
 
 		return {
 			stuff: {
 				...stuff,
+				// prismaClient,
 				client,
 				query: async (
 					query: string | DocumentNode | TypedDocumentNode,
@@ -78,7 +83,7 @@
 			// posthog.capture('my event', { property: 'value' });
 
 			LogRocket.init('n4p0hb/svelte14dec');
-			LogRocket.identify(session.userId);
+			LogRocket.identify($session.userId);
 		}
 	});
 </script>
