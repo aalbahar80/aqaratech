@@ -80,7 +80,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 			secure: true,
 		}),
 	);
-	if (import.meta.env.VITE_VERCEL_ENV !== 'production') {
+
+	// TODO remove this in production
+	// eslint-disable-next-line no-constant-condition
+	if (import.meta.env.VITE_VERCEL_ENV !== 'production' || true) {
 		response.headers.set('X-Robots-Tag', 'noindex');
 	}
 	// response.headers.set('cache-control', 's-maxage=0');
