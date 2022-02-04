@@ -5,9 +5,9 @@ generator client {
 
 datasource db {
   provider             = "mysql"
-  url                  = "mysql://arfh7oejz4ae:pscale_pw_r8EqnC9tkz9qlUboQOn3Av9ER-2deIFJOeaC_5AH_3c@9fvowjf1xwxu.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
+  // url                  = "mysql://arfh7oejz4ae:pscale_pw_r8EqnC9tkz9qlUboQOn3Av9ER-2deIFJOeaC_5AH_3c@9fvowjf1xwxu.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
   // url                  = "mysql://44rf4b84b9ju:pscale_pw_AZaLMmRlIZ5dDY4qJyR64_Z8ru-j_f-yJ7FWCpMPDEw@9eqjzzwj3kra.eu-west-2.psdb.cloud/prisma-planetscale?sslaccept=strict"
-  // url                  = "mysql://127.0.0.1:3306/prisma-planetscale"
+  url                  = "mysql://127.0.0.1:3306/prisma-planetscale"
   referentialIntegrity = "prisma"
 }
 
@@ -39,7 +39,7 @@ model Expense {
   amount             Float?
   postDate           DateTime?
   category           String?
-  memo               String?
+  memo               String?           @db.Text
   client             Client?           @relation(fields: [clientId], references: [id])
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id])
   property           Property?         @relation(fields: [propertyId], references: [id])
@@ -74,7 +74,7 @@ model Listing {
   available_on DateTime?
   leaseLength  String?
   title        String?
-  description  String?
+  description  String?   @db.Text
   unit         Unit?     @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -88,7 +88,7 @@ model MaintenanceOrder {
   updatedAt   DateTime  @updatedAt
   completedAt DateTime?
   title       String?
-  description String?
+  description String?   @db.Text
   status      String?
   client      Client?   @relation(fields: [clientId], references: [id])
   property    Property? @relation(fields: [propertyId], references: [id])
@@ -136,7 +136,7 @@ model Transaction {
   dueDate    DateTime?
   isPaid     Boolean?  @default(false)
   amount     Float?
-  memo       String?
+  memo       String?   @db.Text
   receiptUrl String?
   leaseId    String?
   lease      Lease?    @relation(fields: [leaseId], references: [id])
