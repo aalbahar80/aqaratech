@@ -1684,10 +1684,10 @@
   dependencies:
     esbuild "^0.13.15"
 
-"@sveltejs/kit@^1.0.0-next.259":
-  version "1.0.0-next.259"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.259.tgz#44cf90b9946819cda50265af3ae08d7fc270e6cf"
-  integrity sha512-+Tss6cQXmpi4Jno/ZP0zJ3INBLMED+WeW4UI81tmexheC76Y2p+cbInneKO/REx/8QFo1iroYrWAUkZPsOg8Ew==
+"@sveltejs/kit@^1.0.0-next.260":
+  version "1.0.0-next.260"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.260.tgz#3e3c26f59c439744db54a48742ee07ac071114db"
+  integrity sha512-0EEkGD0BpZdgRm9UoOnldS8iDFFhT2ixN3oQ/9DblGKNo7cz/FEQmKoYYIOOVYI3XyurwccWORPEpTTA4l9Oew==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
     sade "^1.7.4"
@@ -3002,10 +3002,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components-svelte@^0.56.1:
-  version "0.56.1"
-  resolved "https://registry.yarnpkg.com/carbon-components-svelte/-/carbon-components-svelte-0.56.1.tgz#317398d2ddce8dffe2eb899e491f2c4743148df3"
-  integrity sha512-yayQIsfssiuTiDP8qL/2CENt2wZAuEH9q3z7XfnutLoduqRcoEuCz0LlN6WrhuL/KtH0CiJ42NnZn0lE68MExQ==
+carbon-components-svelte@^0.57.1:
+  version "0.57.1"
+  resolved "https://registry.yarnpkg.com/carbon-components-svelte/-/carbon-components-svelte-0.57.1.tgz#21e69ce5e1f68d0d3e18caa9b016547f59c17b91"
+  integrity sha512-R1KWCMlkpfykKsaaMqBAjI3gCUpjtYKaq5ZmXlwOIR/9Tr/NeNMEDisUewfexUlm6VxlKLN0Nkf0EFCqBg+myg==
   dependencies:
     flatpickr "4.6.9"
 
@@ -9176,10 +9176,10 @@ svelte-calendar@^3.1.6:
     dayjs "^1.10.6"
     just-throttle "^2.3.1"
 
-svelte-check@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.4.1.tgz#e1e8d813bf7906a5ee84dfe437da6f128a218434"
-  integrity sha512-xhf3ShP5rnRwBokrgTBJ/0cO9QIc1DAVu1NWNRTfCDsDBNjGmkS3HgitgUadRuoMKj1+irZR/yHJ+Uqobnkbrw==
+svelte-check@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.4.2.tgz#2a9b575a1e501a4b453ae197028b1085eb05ee58"
+  integrity sha512-QUS3YXEfJf9RdNOPdztzxUxB2XCSNG+0AtkRuZwe/OvOXMv9WKqrmGOny0PW1DtflyWiGIVgYoUIqS/zlBMJFQ==
   dependencies:
     chokidar "^3.4.1"
     fast-glob "^3.2.7"
@@ -9244,10 +9244,10 @@ svelte-preprocess@^4.10.2:
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
 
-svelte@^3.46.3:
-  version "3.46.3"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.46.3.tgz#31202b0c795f276726d95b648b6dd413116257ac"
-  integrity sha512-mTOXvv74CVQqJHqoIZDprVfRKVVmYNadXP0VKnOEA54223kLGCr1nMrifS4Zx29qMt/xRB38Eq1D7dDH/fM8fQ==
+svelte@^3.46.4:
+  version "3.46.4"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.46.4.tgz#0c46bc4a3e20a2617a1b7dc43a722f9d6c084a38"
+  integrity sha512-qKJzw6DpA33CIa+C/rGp4AUdSfii0DOTCzj/2YpSKKayw5WGSS624Et9L1nU1k2OVRS9vaENQXp2CVZNU+xvIg==
 
 swap-case@^2.0.2:
   version "2.0.2"
