@@ -1,6 +1,9 @@
 {
   "name": "svelte-gql",
   "version": "0.0.1",
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
   "scripts": {
     "dev:only": "svelte-kit dev --host",
     "build:only": "svelte-kit build",

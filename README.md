@@ -197,8 +197,8 @@ npx prisma db push
 
 # make changes to prisma.schema, then run again
 npx prisma db push
-
-# seed db with seed.ts
+# npx prisma generate?
+npx prisma db seed
 
 # To connect to db from terminal
 pscale shell prisma-planetscale
@@ -224,7 +224,9 @@ pscale connect prisma-planetscale remove-is-ok-tenant
 # seed it with a script if u want, or visually in Prisma Studio
 
 # modify the schema.prisma with your changes, then push to the branch
-npx prisma db push
+npx prisma generate # refresh the local prisma client
+npx prisma db push # push schema changes to branch
+npx prisma db seed # runs the seed script against the branch
 
 # check the diff
 pscale branch diff prisma-planetscale remove-is-ok-tenant
