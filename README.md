@@ -110,7 +110,40 @@ yarn run cypress run -s "cypress/integration/*.spec.ts"
 npx openapi-typescript https://datxutuqogarvvqnhxel.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzY3NTg0OSwiZXhwIjoxOTU5MjUxODQ5fQ.2Q3C3dQwhonuTMB_k2P5-E2pT60PBBd9mauiE7ibcLE --output src/lib/types/supabase.ts
 ```
 
-Prisma note:
+To run standalone ts file:
+
+## Example 1:
+
+1. Use .cts extension
+
+```zsh
+tsc prisma/seed.cts
+node prima/seed.cjs
+```
+
+OR
+
+## Example 2:
+
+a normal .ts file
+
+- has to have an import/export for some reason
+
+```ts
+// primsa/b.ts
+import * as faker from '@faker-js/faker';
+console.log(faker.faker.animal.bear());
+```
+
+this file can be run with
+
+```zsh
+node --loader ts-node/esm prisma/b.ts
+```
+
+note: that the faker import had to be a bit weird.
+
+## Example 3 (prisma):
 
 ```zsh
 # to run prisma.ts file
