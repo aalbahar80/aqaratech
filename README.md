@@ -130,7 +130,7 @@ a normal .ts file
 - has to have an import/export for some reason
 
 ```ts
-// primsa/b.ts
+// primsa/seed.ts
 import * as faker from '@faker-js/faker';
 console.log(faker.faker.animal.bear());
 ```
@@ -138,7 +138,7 @@ console.log(faker.faker.animal.bear());
 this file can be run with
 
 ```zsh
-node --loader ts-node/esm prisma/b.ts
+node --loader ts-node/esm prisma/seed.ts
 ```
 
 note: that the faker import had to be a bit weird.
