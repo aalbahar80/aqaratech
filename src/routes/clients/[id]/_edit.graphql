@@ -1,9 +1,0 @@
-query ClientEditPage($id: Int!) {
-	...clientById
-}
-
-mutation UpdateClient($id: Int!, $_set: clients_set_input) {
-	update_clients_by_pk(pk_columns: { id: $id }, _set: $_set) {
-		...clientDetails
-	}
-}

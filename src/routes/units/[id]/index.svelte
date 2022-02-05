@@ -3,7 +3,6 @@
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import { query } from '@urql/svelte';
 	import {
 		DeleteUnitDocument,
 		UnitDetailPageDocument,

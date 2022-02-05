@@ -3,8 +3,6 @@ import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-import { createClient } from '@urql/core';
-import { TrxPublicInfoDocument } from './_[id].gql';
 
 export const get: RequestHandler = async ({ params }) => {
 	const { id } = params;

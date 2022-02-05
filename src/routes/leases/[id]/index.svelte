@@ -4,14 +4,8 @@
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import type { Load } from '@sveltejs/kit';
-	import { query } from '@urql/svelte';
 	import { Button } from 'carbon-components-svelte';
 	import { DocumentExport16, Renew16 } from 'carbon-icons-svelte';
-	import {
-		DeleteLeaseDocument,
-		LeaseDetailPageDocument,
-		type LeaseDetailPageStore,
-	} from './_index.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

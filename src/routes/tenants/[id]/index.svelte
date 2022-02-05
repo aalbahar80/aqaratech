@@ -18,12 +18,6 @@
 	import { DocumentAdd32 } from 'carbon-icons-svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import isEmpty from 'just-is-empty';
-	import Fa from 'svelte-fa/src/fa.svelte';
-	import {
-		DeleteTenantDocument,
-		TenantIdScreenDocument,
-		type TenantIdScreenStore,
-	} from './_[id].gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

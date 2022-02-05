@@ -6,7 +6,6 @@
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import type { Order_By } from '$generated/graphql';
 	import { constructFilter } from '$lib/utils/search-utils';
-	import { operationStore, query, type TypedDocumentNode } from '@urql/svelte';
 	import {
 		DataTable,
 		DataTableSkeleton,

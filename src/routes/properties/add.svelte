@@ -5,7 +5,6 @@
 		validation,
 		graphqlName,
 	} from '$lib/definitions/Properties';
-	import { AddPropertyDocument } from './_add.gql';
 </script>
 
 <FormCS

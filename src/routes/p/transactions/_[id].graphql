@@ -1,7 +1,0 @@
-query TrxPublicInfo($id: uuid!) {
-	transactions_by_pk(id: $id) {
-		id
-		is_paid
-		receipt_url
-	}
-}

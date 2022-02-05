@@ -8,12 +8,6 @@
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import {
-		mutation,
-		operationStore,
-		type ExecuteMutation,
-		type OperationStore,
-	} from '@urql/svelte';
-	import {
 		Button,
 		Checkbox,
 		Form,

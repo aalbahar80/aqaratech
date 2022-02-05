@@ -5,11 +5,6 @@
 	import { svelteReporter } from '@felte/reporter-svelte';
 	import type { ValidatorConfig } from '@felte/validator-zod';
 	import { validator } from '@felte/validator-zod';
-	import {
-		mutation,
-		operationStore,
-		type TypedDocumentNode,
-	} from '@urql/svelte';
 	import { Button } from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import map from 'just-map-values';

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Field } from '$components/form/Field';
 	import { constructFilter } from '$lib/utils/search-utils';
-	import { operationStore, query, type TypedDocumentNode } from '@urql/svelte';
 	import ComboBox from 'carbon-components-svelte/src/ComboBox/ComboBox.svelte';
 	import type {
 		ComboBoxItem,

@@ -2,10 +2,8 @@ import { dev } from '$app/env';
 import { page } from '$app/stores';
 import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
-import { createClient, gql } from '@urql/core';
 import flush from 'just-flush';
 import { get } from 'svelte/store';
-import { MarkPaidDocument, PaymentRelatedInfoDocument } from './myfatoorah.gql';
 
 interface MFResponse {
 	Data: {

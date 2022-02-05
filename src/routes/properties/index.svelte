@@ -1,7 +1,6 @@
 <script lang="ts">
 	import TableCS from '$components/table/TableCS.svelte';
 	import { fieldList } from '$lib/definitions/Properties';
-	import { PropertyListPageDocument } from './_index.gql';
 </script>
 
 <svelte:head>

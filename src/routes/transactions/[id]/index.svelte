@@ -7,7 +7,6 @@
 	import { logger } from '$lib/config/logger';
 	import { addToast } from '$lib/stores/toast';
 	import type { Load } from '@sveltejs/kit';
-	import { query } from '@urql/svelte';
 	import { Button, CopyButton } from 'carbon-components-svelte';
 	import {
 		Bullhorn16,
@@ -21,11 +20,6 @@
 	} from 'carbon-icons-svelte';
 	import { flip } from 'svelte/animate';
 	import { fade, slide } from 'svelte/transition';
-	import {
-		DeleteTransactionDocument,
-		TransactionDetailPageDocument,
-		type TransactionDetailPageStore,
-	} from './_index.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

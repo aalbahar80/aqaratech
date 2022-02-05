@@ -1,9 +1,0 @@
-query TransactionEditPage($id: uuid!) {
-	...transactionById
-}
-
-mutation UpdateTransaction($id: uuid!, $_set: transactions_set_input) {
-	update_transactions_by_pk(pk_columns: { id: $id }, _set: $_set) {
-		...transactionDetails
-	}
-}

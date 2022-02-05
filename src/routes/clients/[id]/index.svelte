@@ -2,12 +2,6 @@
 	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import { query } from '@urql/svelte';
-	import {
-		ClientDetailPageDocument,
-		DeleteClientDocument,
-		type ClientDetailPageStore,
-	} from './_index.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
