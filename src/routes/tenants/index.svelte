@@ -1,22 +1,17 @@
 <script context="module" lang="ts">
+	import { invalidate } from '$app/navigation';
 	import TablePrisma from '$components/table/TablePrisma.svelte';
-	import { parseParams } from '$lib/utils/table-utils';
 	import type { Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
+	import { onMount } from 'svelte';
 
-	export const load: Load = async ({ fetch, url }) => {
-		const {
-			queryString,
-			options: { pageSize },
-		} = parseParams(url);
-		const res = await fetch(`/tenants.json${queryString}`);
-		const { rows, totalItems } = await res.json();
+	export const load: Load = async ({ props, url, params }) => {
+		console.log(url);
+		console.log(params);
+		console.log('running load');
+		// if (url.search) '';
 		return {
-			props: {
-				rows,
-				totalItems,
-				pageSize,
-			},
+			props,
 		};
 	};
 </script>
@@ -25,6 +20,9 @@
 	export let rows: Tenant[];
 	export let totalItems: number;
 	export let pageSize: number;
+	// onMount(async () => {
+	// 	await invalidate('/tenants');
+	// });
 </script>
 
 <TablePrisma {rows} {totalItems} {pageSize} />

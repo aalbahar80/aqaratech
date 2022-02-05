@@ -3,10 +3,19 @@ import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
 
-export const get: RequestHandler = async ({ url }) => {
+export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
+	url,
+	request,
+	params,
+}) => {
 	const {
 		options: { pageSize, search, skip, sortDir, sortKey },
 	} = parseParams(url);
+	console.log(params);
+	console.log(url.search);
+	console.log(request.url);
+	console.log(pageSize);
+	console.log(skip);
 
 	const tenants = await prisma.tenant.findMany({
 		take: pageSize,
@@ -55,6 +64,7 @@ export const get: RequestHandler = async ({ url }) => {
 		body: {
 			rows: tenants,
 			totalItems: total.id,
+			pageSize,
 		},
 	};
 };
