@@ -8,13 +8,6 @@
 	import { fieldList as unitFieldList } from '$lib/definitions/Units';
 	import { writable, type Writable } from 'svelte/store';
 	import type { z } from 'zod';
-	import {
-		AddLeaseDocument,
-		ClientComboBoxDocument,
-		PropertyComboBoxDocument,
-		TenantComboBoxDocument,
-		UnitComboBoxDocument,
-	} from './_add.gql';
 
 	type PartialSchema = Partial<z.infer<typeof schema>>;
 	let moreData: Writable<PartialSchema> = writable({});

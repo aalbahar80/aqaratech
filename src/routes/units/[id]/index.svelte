@@ -3,11 +3,6 @@
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import {
-		DeleteUnitDocument,
-		UnitDetailPageDocument,
-		type UnitDetailPageStore,
-	} from './_index.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

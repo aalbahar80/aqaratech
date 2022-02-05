@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Checked from '$components/indicators/Checked.svelte';
 	import Unchecked from '$components/indicators/Unchecked.svelte';
-	import type { TenantIdScreen } from '$routes/tenants/[id]/_[id].gql';
 	import { DataTable, Link } from 'carbon-components-svelte';
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import { Launch16 } from 'carbon-icons-svelte';

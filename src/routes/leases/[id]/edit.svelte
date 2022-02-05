@@ -2,12 +2,6 @@
 	import FormCS from '$components/form/FormCS.svelte';
 	import { fieldList, graphqlName, schema } from '$lib/definitions/Leases';
 	import type { Load } from '@sveltejs/kit';
-	import {
-		LeaseEditPageDocument,
-		UpdateLeaseDocument,
-		type LeaseEditPage,
-		type LeaseEditPageStore,
-	} from './_edit.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

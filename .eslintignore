@@ -17,13 +17,6 @@ static/global.css
 coverage
 coverage/*
 
-# graphql codegen files #
-#############################
-src/generated
-/src/generated
-
-*.gql.ts
-
 # Cypress examples #
 #############################
 cypress/integration/1-getting-started

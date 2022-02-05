@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getProgress } from '$lib/utils/date-utils';
-	import type { TenantIdScreen } from '$routes/tenants/[id]/_[id].gql';
 	import {
 		Accordion,
 		AccordionItem,

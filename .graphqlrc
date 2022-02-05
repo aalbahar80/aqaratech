@@ -1,8 +1,0 @@
-schema: './src/graphql.schema.json'
-documents: './src/**/*.{graphql,js,ts,jsx,tsx,svelte}'
-extensions:
-  endpoints:
-    default:
-      url: https://hasura-xf70.onrender.com/v1/graphql
-      headers:
-        x-hasura-admin-secret: myadminsecret

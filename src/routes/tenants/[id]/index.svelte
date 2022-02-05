@@ -5,15 +5,7 @@
 	import NextPrev from '$components/breadcrumbs/NextPrev.svelte';
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
-	import {
-		faBirthdayCake,
-		faEnvelope,
-		faIdCard,
-		faPhone,
-		faUserCircle,
-	} from '@fortawesome/free-solid-svg-icons';
 	import type { Load } from '@sveltejs/kit';
-	import { query } from '@urql/svelte';
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import { DocumentAdd32 } from 'carbon-icons-svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';

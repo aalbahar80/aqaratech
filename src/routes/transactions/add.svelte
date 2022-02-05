@@ -5,7 +5,6 @@
 		validation,
 		graphqlName,
 	} from '$lib/definitions/Transactions';
-	import { AddTransactionDocument } from './_add.gql';
 </script>
 
 <FormCS

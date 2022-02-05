@@ -6,12 +6,6 @@
 		validation,
 	} from '$lib/definitions/Transactions';
 	import type { Load } from '@sveltejs/kit';
-	import {
-		TransactionEditPageDocument,
-		UpdateTransactionDocument,
-		type TransactionEditPage,
-		type TransactionEditPageStore,
-	} from './_edit.gql';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;

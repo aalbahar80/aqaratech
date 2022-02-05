@@ -4,7 +4,6 @@
 
 	import TableCS from '$components/table/TableCS.svelte';
 	import { fieldList } from '$lib/definitions/Transactions';
-	import { TransactionListPageDocument } from './_index.gql';
 </script>
 
 <svelte:head>
