@@ -17,7 +17,7 @@
 	export let pageSize: number;
 
 	// PAGINATION
-	const pageIndex = Number($page.url.searchParams.get('page')) || 1;
+	$: pageIndex = Number($page.url.searchParams.get('page')) || 1;
 
 	const handlePageChange = (pageNumber: number) => {
 		const params = new URLSearchParams($page.url.searchParams.toString());
@@ -29,6 +29,7 @@
 		}
 
 		const url = `${$page.url.pathname}?${params.toString()}`;
+		console.log('manual page change', url);
 		goto(url, {
 			noscroll: true,
 			keepfocus: true,
@@ -43,8 +44,6 @@
 	// flag to reset page number while user is actively searching
 	let forceFirstPage = false;
 	const handleSearchChange = (newSearchInput: string) => {
-		if (!browser) return;
-
 		const params = new URLSearchParams($page.url.searchParams.toString());
 
 		if (newSearchInput) {
@@ -53,10 +52,11 @@
 			params.delete('search');
 		}
 
-		if (forceFirstPage) params.set('page', encodeURIComponent(1));
+		if (forceFirstPage) params.set('page', 1);
 		forceFirstPage = false;
 
 		const url = `${$page.url.pathname}?${params.toString()}`;
+		console.log('triggering url change', url);
 		goto(url, {
 			noscroll: true,
 			keepfocus: true,
@@ -65,7 +65,6 @@
 			console.error(err);
 		});
 	};
-	$: handleSearchChange(searchInput);
 
 	// SORT
 	const handleSortChange = (
@@ -140,11 +139,13 @@
 		<ToolbarContent>
 			<ToolbarSearch
 				bind:value={searchInput}
-				on:input={() => {
+				on:keyup={() => {
 					forceFirstPage = true;
+					handleSearchChange(searchInput);
 				}}
 				on:clear={() => {
 					forceFirstPage = true;
+					handleSearchChange(searchInput);
 				}}
 			/>
 			<Button href={`${$page.url.pathname}/add`}>New</Button>
