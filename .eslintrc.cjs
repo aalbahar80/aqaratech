@@ -57,6 +57,8 @@ module.exports = {
 				'import/first': 'off',
 				'import/no-unresolved': 'off',
 				'no-undef-init': 'off',
+				'@typescript-eslint/no-unsafe-argument': 'off',
+				'@typescript-eslint/restrict-template-expressions': 'warn',
 			},
 			parserOptions: {
 				project: ['./tsconfig.json'],
