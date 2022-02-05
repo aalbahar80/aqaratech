@@ -1,14 +1,11 @@
-import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
 import prisma from '$lib/config/prisma';
+import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
+import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
 
 export const get: RequestHandler = async ({ url }) => {
-	const pageSize = Number(url.searchParams.get('pageSize')) || 2;
-	const pageIndex = Number(url.searchParams.get('page')) || 1;
-	const search = url.searchParams.get('search') || '';
-	const skip = (Number(pageIndex) - 1) * pageSize;
-	const sortDir = url.searchParams.get('sortDir') || 'desc';
-	const sortKey = url.searchParams.get('sortKey') || 'createdAt';
+	const { pageIndex, pageSize, search, skip, sortDir, sortKey } =
+		parseParams(url);
 
 	const tenants = await prisma.tenant.findMany({
 		take: pageSize,
