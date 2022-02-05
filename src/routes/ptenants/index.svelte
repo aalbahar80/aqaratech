@@ -1,12 +1,27 @@
 <script context="module" lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import type { Order_By } from '$generated/graphql';
+	import type { Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
+	import { Toolbar, ToolbarContent } from 'carbon-components-svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import ToolbarSearch from 'carbon-components-svelte/src/Search/Search.svelte';
+	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
+	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
+	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
+	import keys from 'lodash-es/keys';
+	import startCase from 'lodash-es/startCase.js';
 
 	export const load: Load = async ({ fetch, url }) => {
 		const pageSize = url.searchParams.get('pageSize') || '10';
 		const pageIndex = url.searchParams.get('page') || '1';
 		const search = url.searchParams.get('search') || '';
+		const sortDir = url.searchParams.get('sortDir') || 'desc';
+		const sortKey = url.searchParams.get('sortKey') || 'createdAt';
 		const res = await fetch(
-			`/ptenants.json?page=${pageIndex}&pageSize=${pageSize}&search=${search}`,
+			`/ptenants.json?page=${pageIndex}&pageSize=${pageSize}&search=${search}&sortDir=${sortDir}&sortKey=${sortKey}`,
 		);
 		const { tenants, total } = await res.json();
 		return {
@@ -20,23 +35,6 @@
 </script>
 
 <script lang="ts">
-	import { browser } from '$app/env';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import type { Order_By } from '$generated/graphql';
-	import {
-		DataTable,
-		Pagination,
-		Toolbar,
-		ToolbarContent,
-		ToolbarSearch,
-	} from 'carbon-components-svelte';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-	import startCase from 'lodash-es/startCase';
-	import keys from 'lodash-es/keys';
-	import type { Tenant } from '@prisma/client';
-
 	export let tenants: Tenant[];
 	export let total: number;
 	export let pageSize: number;
@@ -144,8 +142,17 @@
 	}));
 </script>
 
-<pre>{JSON.stringify(tenants)}</pre>
-<DataTable zebra sortable {headers} rows={tenants || []}>
+<DataTable
+	zebra
+	sortable
+	{headers}
+	rows={tenants || []}
+	on:click:header={(h) => {
+		const field = h.detail.header.key;
+		const dir = h.detail.sortDirection;
+		handleSortChange(field, dir);
+	}}
+>
 	<Toolbar>
 		<ToolbarContent>
 			<ToolbarSearch
