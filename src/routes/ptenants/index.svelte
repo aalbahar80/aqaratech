@@ -11,7 +11,7 @@
 	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
-	import keys from 'lodash-es/keys';
+	import keys from 'lodash-es/keys.js';
 	import startCase from 'lodash-es/startCase.js';
 
 	export const load: Load = async ({ fetch, url }) => {
