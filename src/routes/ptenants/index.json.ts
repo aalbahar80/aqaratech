@@ -51,6 +51,9 @@ export const get: RequestHandler = async ({ url }) => {
 		},
 	});
 	return {
+		headers: {
+			'cache-control': 's-maxage=3, stale-while-revalidate=59',
+		},
 		body: {
 			tenants,
 			total: total.id,
