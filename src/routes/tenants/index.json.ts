@@ -4,8 +4,9 @@ import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
 
 export const get: RequestHandler = async ({ url }) => {
-	const { pageIndex, pageSize, search, skip, sortDir, sortKey } =
-		parseParams(url);
+	const {
+		options: { pageSize, search, skip, sortDir, sortKey },
+	} = parseParams(url);
 
 	const tenants = await prisma.tenant.findMany({
 		take: pageSize,
@@ -52,8 +53,8 @@ export const get: RequestHandler = async ({ url }) => {
 			'cache-control': 's-maxage=3, stale-while-revalidate=59',
 		},
 		body: {
-			tenants,
-			total: total.id,
+			rows: tenants,
+			totalItems: total.id,
 		},
 	};
 };
