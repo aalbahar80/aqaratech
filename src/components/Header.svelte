@@ -1,22 +1,7 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
-	import {
-		Header,
-		HeaderGlobalAction,
-		HeaderNav,
-		HeaderNavItem,
-		HeaderUtilities,
-		SideNav,
-		SideNavDivider,
-		SideNavItems,
-		SideNavLink,
-		SkipToContent,
-		Theme,
-	} from 'carbon-components-svelte';
-	import type { CarbonTheme } from 'carbon-components-svelte/types/Theme/Theme.svelte';
-	import { BrightnessContrast32 } from 'carbon-icons-svelte';
 
-	const themes: CarbonTheme[] = ['white', 'g10', 'g80', 'g90', 'g100'];
+	const themes = ['white', 'g10', 'g80', 'g90', 'g100'];
 	let themeIndex = 4;
 	$: theme = themes[themeIndex];
 

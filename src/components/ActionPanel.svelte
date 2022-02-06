@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { DocumentNode } from 'graphql';
-	import { Button } from 'carbon-components-svelte';
-	import { DocumentExport16, Edit16, Renew16 } from 'carbon-icons-svelte';
 	import DeleteModal from './toast/DeleteModal.svelte';
 	import { page } from '$app/stores';
 
@@ -9,7 +7,7 @@
 	export let id: string;
 </script>
 
-<div class="grid grid-flow-col grid-rows-1 justify-end gap-4 mt-20">
+<div class="mt-20 grid grid-flow-col grid-rows-1 justify-end gap-4">
 	<Button
 		href={`${$page.url.pathname}/edit`}
 		kind="tertiary"
@@ -23,7 +21,7 @@
 </div>
 
 {#if $$slots.row2}
-	<div class="grid grid-flow-col grid-rows-1 justify-end gap-4 mt-4">
+	<div class="mt-4 grid grid-flow-col grid-rows-1 justify-end gap-4">
 		<slot name="row2" />
 	</div>
 {/if}

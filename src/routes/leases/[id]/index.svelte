@@ -2,10 +2,7 @@
 	import { page } from '$app/stores';
 	import ActionPanel from '$components/ActionPanel.svelte';
 	import BreadCrumbs from '$components/breadcrumbs/BreadCrumbs.svelte';
-	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import type { Load } from '@sveltejs/kit';
-	import { Button } from 'carbon-components-svelte';
-	import { DocumentExport16, Renew16 } from 'carbon-icons-svelte';
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
@@ -61,8 +58,8 @@
 	</svelte:fragment>
 </ActionPanel>
 
-<div class="max-w-4xl mx-auto px-6">
-	<div class="grid grid-cols-2 gap-2 mt-8 max-w-md justify-self-center">
+<div class="mx-auto max-w-4xl px-6">
+	<div class="mt-8 grid max-w-md grid-cols-2 gap-2 justify-self-center">
 		{#each Object.entries($lease.data?.leases_by_pk || {}) as [key, value]}
 			<p>{key}</p>
 			<p>{value}</p>

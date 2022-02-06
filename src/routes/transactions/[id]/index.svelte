@@ -7,17 +7,6 @@
 	import { logger } from '$lib/config/logger';
 	import { addToast } from '$lib/stores/toast';
 	import type { Load } from '@sveltejs/kit';
-	import { Button, CopyButton } from 'carbon-components-svelte';
-	import {
-		Bullhorn16,
-		CertificateCheck16,
-		CopyLink16,
-		MailAll16,
-		MailAll24,
-		MailAll32,
-		NonCertified16,
-		ShoppingCart16,
-	} from 'carbon-icons-svelte';
 	import { flip } from 'svelte/animate';
 	import { fade, slide } from 'svelte/transition';
 
@@ -107,8 +96,8 @@
 	</svelte:fragment>
 </ActionPanel>
 
-<div class="max-w-4xl mx-auto px-6">
-	<div class="grid grid-cols-2 gap-2 mt-8 max-w-md justify-self-center">
+<div class="mx-auto max-w-4xl px-6">
+	<div class="mt-8 grid max-w-md grid-cols-2 gap-2 justify-self-center">
 		{#each Object.entries($transaction.data?.transactions_by_pk || {}) as [key, value] (key)}
 			<div transition:slide animate:flip>
 				<p>{key}</p>

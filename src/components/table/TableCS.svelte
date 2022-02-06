@@ -4,18 +4,7 @@
 	import { page } from '$app/stores';
 	import type { Field } from '$components/form/Field';
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
-	import type { Order_By } from '$generated/graphql';
 	import { constructFilter } from '$lib/utils/search-utils';
-	import {
-		DataTable,
-		DataTableSkeleton,
-		Pagination,
-		Toolbar,
-		ToolbarContent,
-		ToolbarSearch,
-	} from 'carbon-components-svelte';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import capitalize from 'just-capitalize';
 	import insert from 'just-insert';
 

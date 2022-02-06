@@ -2,9 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { addToast } from '$lib/stores/toast';
-	import { Button, Modal } from 'carbon-components-svelte';
-	import type { ButtonProps } from 'carbon-components-svelte/types/Button/Button.svelte';
-	import { TrashCan16 } from 'carbon-icons-svelte';
 	import type { DocumentNode } from 'graphql';
 
 	export let deleteDocumentNode: DocumentNode;

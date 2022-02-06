@@ -1,12 +1,5 @@
 <script lang="ts">
 	import { getProgress } from '$lib/utils/date-utils';
-	import {
-		Accordion,
-		AccordionItem,
-		ProgressBar,
-	} from 'carbon-components-svelte';
-	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
-	import { Launch24 } from 'carbon-icons-svelte';
 	import { formatDistance, parseISO } from 'date-fns';
 
 	type Leases = NonNullable<TenantIdScreen['tenants_by_pk']>['pastLeases'];
@@ -34,7 +27,7 @@
 					helperText="Expiry: {expiryText(end_date)}"
 				/>
 			</div>
-			<div class="grid grid-cols-1 grid-flow-col items-center">
+			<div class="grid grid-flow-col grid-cols-1 items-center">
 				<Link
 					size="lg"
 					icon={Launch24}

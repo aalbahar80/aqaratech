@@ -1,7 +1,4 @@
 <script lang="ts">
-	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
-	import { ArrowLeft16, ArrowRight16 } from 'carbon-icons-svelte';
-
 	export let path: string;
 	export let id: string;
 </script>

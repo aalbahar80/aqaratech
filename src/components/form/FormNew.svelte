@@ -5,7 +5,6 @@
 	import { svelteReporter } from '@felte/reporter-svelte';
 	import type { ValidatorConfig } from '@felte/validator-zod';
 	import { validator } from '@felte/validator-zod';
-	import { Button } from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import map from 'just-map-values';
 	import { onMount } from 'svelte';
@@ -78,7 +77,7 @@
 	});
 </script>
 
-<div class="max-w-md grid grid-cols-1 gap-8">
+<div class="grid max-w-md grid-cols-1 gap-8">
 	<form use:form>
 		<div class="div grid grid-cols-1 gap-y-4">
 			<slot data={$data} errors={$errors} {setTouched} {setField} />

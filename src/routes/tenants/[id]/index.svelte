@@ -6,8 +6,6 @@
 	import LeaseAccordion from '$components/LeaseAccordion.svelte';
 	import RecentTrx from '$components/tenant/RecentTrx.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import { DocumentAdd32 } from 'carbon-icons-svelte';
 	import { formatDistanceToNow, formatRelative } from 'date-fns';
 	import isEmpty from 'just-is-empty';
 
@@ -46,7 +44,7 @@
 </script>
 
 <div
-	class="grid grid-cols-1 lg:grid-cols-1 gap-4 space-y-4 max-w-screen-2xl items-baseline"
+	class="grid max-w-screen-2xl grid-cols-1 items-baseline gap-4 space-y-4 lg:grid-cols-1"
 >
 	{#if $tenant.error}
 		<p>Error: {$tenant.error.message}</p>

@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { Breadcrumb } from 'carbon-components-svelte';
-	import BreadcrumbItem from 'carbon-components-svelte/src/Breadcrumb/BreadcrumbItem.svelte';
-	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import { page } from '$app/stores';
 
 	interface CrumbData {

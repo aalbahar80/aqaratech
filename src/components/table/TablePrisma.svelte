@@ -2,12 +2,6 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { Toolbar, ToolbarContent } from 'carbon-components-svelte';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
-	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
-	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
-	import ToolbarSearch from 'carbon-components-svelte/src/Search/Search.svelte';
-	import type { DataTableHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 	import keys from 'lodash-es/keys.js';
 	import startCase from 'lodash-es/startCase.js';
 	import concat from 'lodash-es/concat.js';

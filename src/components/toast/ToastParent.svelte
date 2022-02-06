@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ToastNotification } from 'carbon-components-svelte';
 	import { flip } from 'svelte/animate';
 	import { toasts } from '$lib/stores/toast';
 	import { fade } from 'svelte/transition';
@@ -11,7 +10,7 @@
 			<li transition:fade animate:flip={{ duration: 500 }}>
 				<ToastNotification
 					{...props}
-					class="justify-self-center justify-items-end "
+					class="justify-items-end justify-self-center "
 				/>
 			</li>
 		{/each}

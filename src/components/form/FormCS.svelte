@@ -7,13 +7,6 @@
 		ValidationMessage,
 	} from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
-	import {
-		Button,
-		Checkbox,
-		Form,
-		FormGroup,
-		TextInput,
-	} from 'carbon-components-svelte';
 	import { createForm } from 'felte';
 	import type { DocumentNode } from 'graphql';
 	import isEmpty from 'just-is-empty';
@@ -164,7 +157,7 @@
 			{/if}
 		{/each}
 
-		<div class="grid grid-cols-1 md:grid-cols-2 items-center">
+		<div class="grid grid-cols-1 items-center md:grid-cols-2">
 			<Button kind="ghost" on:click={reset}>Reset</Button>
 			<Button
 				disabled={!noErrorMsg}

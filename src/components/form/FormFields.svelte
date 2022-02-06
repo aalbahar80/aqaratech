@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ValidationMessage } from '@felte/reporter-svelte';
-	import { Checkbox, TextInput } from 'carbon-components-svelte';
 	import type { Field } from './Field';
 
 	export let fieldList: Field[];
