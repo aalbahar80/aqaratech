@@ -679,6 +679,11 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009.tgz#e5c345cdedb7be83d11c1e0c5ab61d866b411256"
   integrity sha512-qM+uJbkelB21bnK44gYE049YTHIjHysOuj0mj5U2gDGyNLfmiazlggzFPCgEjgme4U5YB2tYs6Z5Hq08Kl8pjA==
 
+"@rgossiaux/svelte-headlessui@^1.0.0-beta.8":
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@rgossiaux/svelte-headlessui/-/svelte-headlessui-1.0.0-beta.8.tgz#781d15e375bdd4259b2a1fedcae367b53d5c673f"
+  integrity sha512-3z7sD4g92PXqY6uiF/m61uEIoc4l1tK9uQZFqIJmmUUtYos3QhloMLLhokxZ3R3do1lRmp+eISj1LlB7TAuneg==
+
 "@rollup/pluginutils@^4.1.2":
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.1.2.tgz#ed5821c15e5e05e32816f5fb9ec607cdf5a75751"
@@ -705,6 +710,16 @@
   integrity sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@steeze-ui/heroicons@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@steeze-ui/heroicons/-/heroicons-1.0.2.tgz#b441fe90bffbdbde71604ff6503acea421b2804d"
+  integrity sha512-okMEIq0IbzU2isceFqRd9FmNJrTP+cLamW3qUsS9akXdzZPstBiYl8dJk/XAK8u1i0QJVUxDgV3qI8voWBVIVA==
+
+"@steeze-ui/svelte-icon@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@steeze-ui/svelte-icon/-/svelte-icon-1.2.2.tgz#ecc57a91e0d6056bb95a614f8b21295d6be2ae32"
+  integrity sha512-DvXCK+BrFXpPoLTjrx1lmTagxIK3udSj3O/PVWV9yj0Fhvk0AbQMs7VgoiNWjPb8VCRzKX9xxNp1Ky6Hm1FKoA==
 
 "@sveltejs/adapter-auto@^1.0.0-next.18":
   version "1.0.0-next.18"
@@ -4905,10 +4920,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-svelte@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.6.0.tgz#0e845b560b55cd1d951d6c50431b4949f8591746"
-  integrity sha512-NPSRf6Y5rufRlBleok/pqg4+1FyGsL0zYhkYP6hnueeL1J/uCm3OfOZPsLX4zqD9VAdcXfyEL2PYqGv8ZoOSfA==
+prettier-plugin-tailwindcss@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.5.tgz#1709b4cea44873cbfefe9862f9f0827a51fe8cc3"
+  integrity sha512-e+jTxwiHL4I3Ot8OjV1LAiiaAx0Zgy71xTL7xNmJtNmhpja7GKzFSAoulqBDS1D57B7lbZDCvDEKIWIQSBUmBQ==
 
 prettier@^2.4.1:
   version "2.5.1"
