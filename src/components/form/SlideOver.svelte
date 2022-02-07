@@ -17,6 +17,7 @@
 	export let formData: Record<string, unknown>;
 	export let formType: FormType = 'update';
 	export let action: string;
+	export let patch: (updated: { id: string; [key: string]: unknown }) => void;
 
 	const close = () => {
 		isOpen = false;
@@ -36,9 +37,10 @@
 
 	const updateAction: Enhance = {
 		result: async (res, form) => {
-			// TODO use the pending state just like todos example
-			const created = await res.json();
-			console.log(created);
+			// TODO optimistic update just like todos example
+			const updated = await res.json();
+			console.log(updated);
+			patch(updated);
 
 			form.reset();
 			close();

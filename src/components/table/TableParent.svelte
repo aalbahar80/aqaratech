@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
 	import SlideOver from '$components/form/SlideOver.svelte';
 	import { endpointBase, endpointPatch } from '$lib/config/constants';
+	import TableTW from './TableTW.svelte';
 </script>
 
 <script lang="ts">
-	import TableTW from './TableTW.svelte';
-
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
+
 	type FormType = 'create' | 'update';
 
 	let formData: { [key: string]: unknown };
@@ -21,7 +21,7 @@
 			tenant,
 			formAction,
 			type,
-		}: { tenant: any; formAction: string; type: string },
+		}: { tenant: any; formAction: string; type: FormType },
 	) {
 		function handleClick() {
 			isOpen = true;
@@ -37,17 +37,15 @@
 		};
 	}
 
-	async function patch(res: Response) {
-		const row = await res.json();
-
+	function patch(updated: { id: string; [key: string]: unknown }) {
 		rows = rows.map((t) => {
-			if (t.id === row.id) return row;
+			if (t.id === updated.id) return updated;
 			return t;
 		});
 	}
 </script>
 
-<SlideOver bind:isOpen {formData} {action} {formType} />
+<SlideOver bind:isOpen {formData} {action} {formType} {patch} />
 
 <button
 	use:initSlide={{
@@ -61,8 +59,7 @@
 </button>
 
 <TableTW {rows} let:prop>
-	<a
-		href="#"
+	<button
 		class="text-indigo-600 hover:text-indigo-900"
 		use:initSlide={{
 			tenant: prop,
@@ -71,21 +68,9 @@
 		}}
 	>
 		Edit
-	</a>
+	</button>
 </TableTW>
 
-<!-- {#each rows as tenant (tenant.id)}
-	<div class="grid grid-flow-col">
-		<button
-			use:initSlide={{
-				tenant,
-				formAction: endpointPatch('tenants', tenant.id),
-				type: 'update',
-			}}
-			class="row__edit-button">edit</button
-		>
-	</div>
-{/each} -->
 <style lang="postcss">
 	.row__edit-button {
 		@apply ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
