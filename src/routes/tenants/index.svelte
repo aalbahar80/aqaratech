@@ -1,9 +1,7 @@
 <script context="module" lang="ts">
-	import { invalidate } from '$app/navigation';
 	import TablePrisma from '$components/table/TablePrisma.svelte';
-	import type { Tenant } from '@prisma/client';
+	import type { Tenant, Prisma } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
-	import { onMount } from 'svelte';
 
 	export const load: Load = async ({ props, url, params }) => {
 		console.log(url);
@@ -17,15 +15,46 @@
 </script>
 
 <script lang="ts">
-	import SlideOverForm from '$components/form/SlideOverForm.svelte';
+	import SlideOver from '$components/form/SlideOver.svelte';
 
 	export let rows: Tenant[];
 	export let totalItems: number;
 	export let pageSize: number;
-	// onMount(async () => {
-	// 	await invalidate('/tenants');
-	// });
+
+	let isOpen = false;
+	const newTenant: Prisma.TenantCreateInput = {
+		civilid: '',
+		firstName: '',
+		lastName: '',
+		email: 'dkf',
+		phone: '',
+		dob: undefined,
+	};
+	let existingTenant: Tenant;
+
+	const close = () => {
+		isOpen = false;
+		existingTenant = newTenant;
+	};
 </script>
 
 <!-- <TablePrisma {rows} {totalItems} {pageSize} /> -->
-<SlideOverForm />
+<SlideOver
+	bind:isOpen
+	someData={existingTenant ?? newTenant}
+	on:close={close}
+/>
+
+{#each rows as tenant (tenant.id)}
+	<div class="grid grid-flow-col">
+		<button
+			class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			on:click={() => {
+				existingTenant = tenant;
+				isOpen = true;
+			}}
+		>
+			edit
+		</button>
+	</div>
+{/each}

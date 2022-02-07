@@ -68,3 +68,22 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 		},
 	};
 };
+
+export const post: RequestHandler = async (event) => {
+	const data = await event.request.formData();
+	const response = await prisma.tenant.create({
+		data: {
+			firstName: data.get('firstName')?.toString() || null,
+			lastName: data.get('lastName')?.toString() || null,
+			email: data.get('email')?.toString() || null,
+			phone: data.get('phone')?.toString() || null,
+			civilid: data.get('civilid')?.toString() || null,
+		},
+	});
+
+	console.log(response);
+
+	return {
+		body: response,
+	};
+};
