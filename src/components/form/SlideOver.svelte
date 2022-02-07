@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$lib/form';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -8,13 +9,27 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import startCase from 'lodash-es/startCase.js';
 	import TWInput from './TWInput.svelte';
 
 	export let isOpen: boolean = false;
 	export let formData: Record<string, unknown>;
+	export let formType: 'create' | 'update' | 'delete' = 'update';
+	export let action: string;
 
 	const close = () => {
 		isOpen = false;
+	};
+
+	type a = enhance;
+	const createAction: typeof enhance = {
+		result: async (res, form) => {
+			const created = await res.json();
+			console.log(created);
+
+			form.reset();
+			close();
+		},
 	};
 </script>
 
@@ -35,7 +50,10 @@
 				>
 					<div class="h-full w-screen max-w-md ">
 						<form
-							action="/tenants"
+							use:enhance={{
+								...createAction,
+							}}
+							{action}
 							method="post"
 							class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
 						>
@@ -43,7 +61,7 @@
 								<div class="bg-indigo-700 py-6 px-4 sm:px-6">
 									<div class="flex items-center justify-between">
 										<DialogTitle class="text-lg font-medium text-white"
-											>New Tenant</DialogTitle
+											>{startCase(formType)} Tenant</DialogTitle
 										>
 										<div class="ml-3 flex h-7 items-center">
 											<button

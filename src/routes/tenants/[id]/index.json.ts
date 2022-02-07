@@ -5,8 +5,8 @@ export const patch: RequestHandler = async (event) => {
 	const data = await event.request.formData();
 	const response = await prisma.tenant.update({
 		where: {
-			// id: event.params.id,
-			id: '25e28e6a-20bd-4ac4-ac61-dd52385e5c4e',
+			id: event.params.id,
+			// id: '25e28e6a-20bd-4ac4-ac61-dd52385e5c4e',
 		},
 		data: {
 			firstName: data.get('firstName')?.toString() || null,

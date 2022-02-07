@@ -14,19 +14,31 @@
 
 	let isOpen = false;
 	let formData: Tenant;
+	let action: string;
+	let formType: string;
+
 	const newTenant: Prisma.TenantCreateInput = {
-		civilid: '',
 		firstName: '',
 		lastName: '',
-		email: 'dkf',
 		phone: '',
-		dob: undefined,
+		email: '',
+		// dob: '',
+		civilid: '',
 	};
 
-	function initSlide(node: HTMLElement, tenant: any) {
+	function initSlide(
+		node: HTMLElement,
+		{
+			tenant,
+			formAction,
+			type,
+		}: { tenant: Tenant; formAction: string; type: string },
+	) {
 		function handleClick() {
 			isOpen = true;
 			formData = tenant;
+			action = formAction;
+			formType = type;
 		}
 		node.addEventListener('click', handleClick);
 		return {
@@ -35,15 +47,40 @@
 			},
 		};
 	}
+
+	async function patch(res: Response) {
+		const row = await res.json();
+
+		rows = rows.map((t) => {
+			if (t.id === row.id) return row;
+			return t;
+		});
+	}
 </script>
 
-<SlideOver bind:isOpen {formData} />
+<SlideOver bind:isOpen {formData} {action} {formType} />
 
-<button use:initSlide={newTenant} class="row__edit-button"> New Inner </button>
+<button
+	use:initSlide={{
+		tenant: newTenant,
+		formAction: '/tenants',
+		type: 'create',
+	}}
+	class="row__edit-button"
+>
+	New Inner
+</button>
 
 {#each rows as tenant (tenant.id)}
 	<div class="grid grid-flow-col">
-		<button use:initSlide={tenant} class="row__edit-button">edit</button>
+		<button
+			use:initSlide={{
+				tenant,
+				formAction: `/tenants/${tenant.id}.json?_method=PATCH`,
+				type: 'update',
+			}}
+			class="row__edit-button">edit</button
+		>
 	</div>
 {/each}
 
