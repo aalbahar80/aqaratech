@@ -1,4 +1,5 @@
 import prisma from '$lib/config/prisma';
+import { select } from '$lib/definitions/Tenants';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
@@ -32,15 +33,7 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 				{ civilid: { contains: search } },
 			],
 		},
-		select: {
-			id: true,
-			firstName: true,
-			lastName: true,
-			email: true,
-			phone: true,
-			updatedAt: true,
-			createdAt: true,
-		},
+		select,
 	});
 	// TODO optimize this
 	const total = await prisma.tenant.count({
@@ -81,6 +74,7 @@ export const post: RequestHandler = async (event) => {
 			phone: data.get('phone')?.toString() || null,
 			civilid: data.get('civilid')?.toString() || null,
 		},
+		select,
 	});
 
 	console.log(response);

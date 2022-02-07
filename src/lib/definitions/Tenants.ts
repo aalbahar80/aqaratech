@@ -1,5 +1,16 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
+import type { Prisma } from '@prisma/client';
+
+export const select: Prisma.TenantSelect = {
+	id: true,
+	firstName: true,
+	lastName: true,
+	email: true,
+	phone: true,
+	updatedAt: true,
+	createdAt: true,
+};
 
 export const graphqlName = 'tenants';
 

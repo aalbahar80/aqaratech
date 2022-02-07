@@ -1,5 +1,6 @@
-import type { RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/config/prisma';
+import { select } from '$lib/definitions/Tenants';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
 	const data = await event.request.formData();
@@ -15,6 +16,7 @@ export const patch: RequestHandler = async (event) => {
 			phone: data.get('phone')?.toString() || null,
 			civilid: data.get('civilid')?.toString() || null,
 		},
+		select,
 	});
 
 	console.log(response);
