@@ -47,10 +47,6 @@
 	<PreloadingIndicator />
 {/if}
 
-<div class="max-h-screen">
-	<NavBar />
-	<div class="mx-4 mt-8 lg:mx-8">
-		<ToastParent />
-		<slot />
-	</div>
-</div>
+<NavBar />
+<ToastParent />
+<slot />
