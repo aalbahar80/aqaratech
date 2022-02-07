@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import SlideOver from '$components/form/SlideOver.svelte';
+	import { endpointBase, endpointPatch } from '$lib/config/constants';
 
 	export let rows: Tenant[];
 
@@ -63,7 +64,7 @@
 <button
 	use:initSlide={{
 		tenant: newTenant,
-		formAction: '/tenants',
+		formAction: endpointBase('tenants'),
 		type: 'create',
 	}}
 	class="row__edit-button"
@@ -76,7 +77,7 @@
 		<button
 			use:initSlide={{
 				tenant,
-				formAction: `/tenants/${tenant.id}.json?_method=PATCH`,
+				formAction: endpointPatch('tenants', tenant.id),
 				type: 'update',
 			}}
 			class="row__edit-button">edit</button
