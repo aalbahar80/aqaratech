@@ -7,7 +7,7 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: [
-		preprocess(),
+		preprocess({ postcss: true }),
 	],
 
 	kit: {
@@ -21,7 +21,6 @@ const config = {
 					$lib: path.resolve('./src/lib'),
 				},
 			},
-			// plugins: [process.env.NODE_ENV === "production" && optimizeCss()],
 		},
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE']
