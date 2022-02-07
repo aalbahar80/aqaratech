@@ -38,6 +38,8 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 			lastName: true,
 			email: true,
 			phone: true,
+			updatedAt: true,
+			createdAt: true,
 		},
 	});
 	// TODO optimize this

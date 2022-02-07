@@ -1,4 +1,6 @@
 <script lang="ts">
+	import startCase from 'lodash-es/startCase.js';
+
 	export let rows: { id: string; [key: string]: unknown }[];
 </script>
 
@@ -11,55 +13,28 @@
 				<table class="min-w-full divide-y divide-gray-200">
 					<thead class="bg-gray-50">
 						<tr>
-							<th
-								scope="col"
-								class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-							>
-								Name
-							</th>
-							<th
-								scope="col"
-								class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-							>
-								Title
-							</th>
-							<th
-								scope="col"
-								class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-							>
-								Email
-							</th>
-							<th
-								scope="col"
-								class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-							>
-								Role
-							</th>
+							{#each Object.entries(rows[0]) as [field] (field)}
+								<th scope="col" class="table__header"> {startCase(field)} </th>
+							{/each}
 							<th scope="col" class="relative px-6 py-3">
 								<span class="sr-only">Edit</span>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						{#each rows as person, personIdx (person.id)}
+						{#each rows as row, personIdx (row.id)}
 							<tr class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-								<td
+								{#each Object.values(row) as value ({})}
+									<td class="table__cell">{value}</td>
+								{/each}
+								<!-- <td
 									class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900"
-									>{person.firstName}</td
-								>
-								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
-									>{person.lastName}</td
-								>
-								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
-									>{person.email}</td
-								>
-								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
-									>{person.phone}</td
-								>
+									>{row.firstName}</td
+								> -->
 								<td
 									class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 								>
-									<slot prop={person} />
+									<slot {row} />
 								</td>
 							</tr>
 						{/each}
@@ -69,3 +44,12 @@
 		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+	.table__header {
+		@apply px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500;
+	}
+	.table__cell {
+		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-500;
+	}
+</style>

@@ -7,6 +7,7 @@
 <script lang="ts">
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
+	export let endpointName: string;
 
 	let formData: { [key: string]: unknown };
 	let isOpen = false;
@@ -16,14 +17,14 @@
 	function initSlide(
 		node: HTMLElement,
 		{
-			tenant,
+			newFormData,
 			formAction,
 			type,
-		}: { tenant: any; formAction: string; type: FormType },
+		}: { newFormData: any; formAction: string; type: FormType },
 	) {
 		function handleClick() {
 			isOpen = true;
-			formData = tenant;
+			formData = newFormData;
 			action = formAction;
 			formType = type;
 		}
@@ -47,8 +48,8 @@
 
 <button
 	use:initSlide={{
-		tenant: defaultFormData,
-		formAction: endpointBase('tenants'),
+		newFormData: defaultFormData,
+		formAction: endpointBase(endpointName),
 		type: 'create',
 	}}
 	class="row__edit-button"
@@ -56,12 +57,12 @@
 	New Inner
 </button>
 
-<TableTW {rows} let:prop>
+<TableTW {rows} let:row>
 	<button
 		class="text-indigo-600 hover:text-indigo-900"
 		use:initSlide={{
-			tenant: prop,
-			formAction: endpointPatch('tenants', prop.id),
+			newFormData: row,
+			formAction: endpointPatch(endpointName, row.id),
 			type: 'update',
 		}}
 	>

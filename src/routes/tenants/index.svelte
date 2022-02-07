@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
-	import { endpointBase, endpointPatch } from '$lib/config/constants';
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
 
@@ -22,4 +21,4 @@
 	};
 </script>
 
-<TableParent {rows} defaultFormData={newTenant} />
+<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants'} />
