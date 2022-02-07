@@ -27,11 +27,12 @@
 	];
 
 	const profileNavigation = [
-		{ name: 'Team', href: '#', current: false },
-		{ name: 'Settings', href: '#', current: false },
-		{ name: 'Sign Out', href: '/auth/logout', current: false },
+		{ name: 'Team', href: '#' },
+		{ name: 'Settings', href: '#' },
+		{ name: 'sample/abc', href: '/sample/abc' },
+		{ name: 'Sign Out', href: '/auth/logout' },
 	];
-	function buildClass(...classes) {
+	function buildClass(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
 	}
 </script>
@@ -78,7 +79,7 @@
 										: 'text-gray-300 hover:bg-gray-700 hover:text-white',
 									'rounded-md px-3 py-2 text-sm font-medium',
 								)}
-								aria-current={item.current ? 'page' : undefined}
+								aria-current={isActive(item.href) ? 'page' : undefined}
 							>
 								{item.name}
 							</a>
@@ -122,39 +123,19 @@
 						<MenuItems
 							class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 						>
-							<MenuItem let:active>
-								<a
-									href="#"
-									class={buildClass(
-										active ? 'bg-gray-100' : '',
-										'block px-4 py-2 text-sm text-gray-700',
-									)}
-								>
-									Your Profile
-								</a>
-							</MenuItem>
-							<MenuItem let:active>
-								<a
-									href="#"
-									class={buildClass(
-										active ? 'bg-gray-100' : '',
-										'block px-4 py-2 text-sm text-gray-700',
-									)}
-								>
-									Settings
-								</a>
-							</MenuItem>
-							<MenuItem let:active>
-								<a
-									href="#"
-									class={buildClass(
-										active ? 'bg-gray-100' : '',
-										'block px-4 py-2 text-sm text-gray-700',
-									)}
-								>
-									Sign out
-								</a>
-							</MenuItem>
+							{#each profileNavigation as navItem (navItem.name)}
+								<MenuItem let:active>
+									<a
+										href="#"
+										class={buildClass(
+											isActive(navItem.href) ? 'bg-gray-100' : '',
+											'block px-4 py-2 text-sm text-gray-700',
+										)}
+									>
+										{navItem.name}
+									</a>
+								</MenuItem>
+							{/each}
 						</MenuItems>
 					</Transition>
 				</Menu>
@@ -164,7 +145,7 @@
 
 	<DisclosurePanel class="sm:hidden">
 		<div class="space-y-1 px-2 pt-2 pb-3">
-			{#each navigation as item}
+			{#each navigation as item (item.name)}
 				<DisclosureButton
 					key={item.name}
 					as="a"
@@ -175,7 +156,7 @@
 							: 'text-gray-300 hover:bg-gray-700 hover:text-white',
 						'block rounded-md px-3 py-2 text-base font-medium',
 					)}
-					aria-current={item.current ? 'page' : undefined}
+					aria-current={isActive(item.href) ? 'page' : undefined}
 				>
 					{item.name}
 				</DisclosureButton>
