@@ -3,15 +3,12 @@
 	import TableParent from '$components/table/TableParent.svelte';
 	import { endpointBase, endpointPatch } from '$lib/config/constants';
 	import type { Prisma, Tenant } from '@prisma/client';
-	import type { Load } from '@sveltejs/kit';
-
-	export const load: Load = ({ props }) => ({
-		props,
-	});
 </script>
 
 <script lang="ts">
-	export let rows: Tenant[];
+	import TableTW from './TableTW.svelte';
+
+	export let rows: { id: string; [key: string]: unknown }[];
 
 	let isOpen = false;
 	let formData: Tenant;
@@ -58,6 +55,8 @@
 		});
 	}
 </script>
+
+<TableTW {rows} />
 
 <SlideOver bind:isOpen {formData} {action} {formType} />
 
