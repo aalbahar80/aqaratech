@@ -17,6 +17,8 @@
 </script>
 
 <script lang="ts">
+	import SlideOverForm from '$components/form/SlideOverForm.svelte';
+
 	export let rows: Tenant[];
 	export let totalItems: number;
 	export let pageSize: number;
@@ -25,4 +27,5 @@
 	// });
 </script>
 
-<TablePrisma {rows} {totalItems} {pageSize} />
+<!-- <TablePrisma {rows} {totalItems} {pageSize} /> -->
+<SlideOverForm />
