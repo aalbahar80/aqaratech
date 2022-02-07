@@ -36,6 +36,20 @@
 		isOpen = false;
 		existingTenant = newTenant;
 	};
+
+	function initSlide(node: HTMLElement, tenantData: any) {
+		function handleClick() {
+			isOpen = true;
+			existingTenant = tenantData;
+		}
+		node.addEventListener('click', handleClick);
+		return {
+			destroy() {
+				console.log('destroy in action');
+				node.removeEventListener('click', handleClick);
+			},
+		};
+	}
 </script>
 
 <!-- <TablePrisma {rows} {totalItems} {pageSize} /> -->
@@ -48,13 +62,9 @@
 {#each rows as tenant (tenant.id)}
 	<div class="grid grid-flow-col">
 		<button
+			use:initSlide={tenant}
 			class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			on:click={() => {
-				existingTenant = tenant;
-				isOpen = true;
-			}}
+			>edit</button
 		>
-			edit
-		</button>
 	</div>
 {/each}
