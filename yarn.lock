@@ -727,10 +727,10 @@
   resolved "https://registry.yarnpkg.com/@steeze-ui/heroicons/-/heroicons-1.0.2.tgz#b441fe90bffbdbde71604ff6503acea421b2804d"
   integrity sha512-okMEIq0IbzU2isceFqRd9FmNJrTP+cLamW3qUsS9akXdzZPstBiYl8dJk/XAK8u1i0QJVUxDgV3qI8voWBVIVA==
 
-"@steeze-ui/svelte-icon@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@steeze-ui/svelte-icon/-/svelte-icon-1.2.2.tgz#ecc57a91e0d6056bb95a614f8b21295d6be2ae32"
-  integrity sha512-DvXCK+BrFXpPoLTjrx1lmTagxIK3udSj3O/PVWV9yj0Fhvk0AbQMs7VgoiNWjPb8VCRzKX9xxNp1Ky6Hm1FKoA==
+"@steeze-ui/svelte-icon@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@steeze-ui/svelte-icon/-/svelte-icon-1.3.0.tgz#245a73353df659bedea4d5b4c0f1b3deabb20a92"
+  integrity sha512-0gAU05q67IeR0HV0kNaH4JVyivaAFyAqq9oAK4+N2al2CXyZFH0zNfONvdTLEJPDGZo+KaR7ErHvNrEpkbu87g==
 
 "@sveltejs/adapter-auto@^1.0.0-next.18":
   version "1.0.0-next.18"
@@ -5614,10 +5614,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-svelte-check@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.4.2.tgz#2a9b575a1e501a4b453ae197028b1085eb05ee58"
-  integrity sha512-QUS3YXEfJf9RdNOPdztzxUxB2XCSNG+0AtkRuZwe/OvOXMv9WKqrmGOny0PW1DtflyWiGIVgYoUIqS/zlBMJFQ==
+svelte-check@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.4.3.tgz#8eb13b8e839c36a90eb4407c50cc4439a5fdd8c6"
+  integrity sha512-0zJMMgqYHoP7QEG3tfc5DekpHAOqoy4QOL8scWMSdHIpVVDVC0MuYK57nFyj3XVTW8Zfm85FlgnAdQYsVmST2Q==
   dependencies:
     chokidar "^3.4.1"
     fast-glob "^3.2.7"
@@ -5838,10 +5838,10 @@ ts-jest@^27.1.3:
     semver "7.x"
     yargs-parser "20.x"
 
-ts-node@^10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.4.0.tgz#680f88945885f4e6cf450e7f0d6223dd404895f7"
-  integrity sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==
+ts-node@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.5.0.tgz#618bef5854c1fbbedf5e31465cbb224a1d524ef9"
+  integrity sha512-6kEJKwVxAJ35W4akuiysfKwKmjkbYxwQMTBaAxo9KKAx/Yd26mPUyhGz3ji+EsJoAgrLqVsYHNuuYwQe22lbtw==
   dependencies:
     "@cspotcode/source-map-support" "0.7.0"
     "@tsconfig/node10" "^1.0.7"
@@ -5854,6 +5854,7 @@ ts-node@^10.4.0:
     create-require "^1.1.0"
     diff "^4.0.1"
     make-error "^1.1.1"
+    v8-compile-cache-lib "^3.0.0"
     yn "3.1.1"
 
 tsconfig-paths-webpack-plugin@^3.5.2:
@@ -5986,6 +5987,11 @@ uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+v8-compile-cache-lib@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.0.tgz#0582bcb1c74f3a2ee46487ceecf372e46bce53e8"
+  integrity sha512-mpSYqfsFvASnSn5qMiwrr4VKfumbPyONLCOPmsR3A6pTY/r0+tSaVbgPWSAIuzbk3lCTa+FForeTiO+wBQGkjA==
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"
