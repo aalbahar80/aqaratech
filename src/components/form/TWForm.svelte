@@ -12,7 +12,7 @@
 	const open = () => {
 		isOpen = true;
 	};
-	export let someData: Record<string, any>;
+	export let formData: Record<string, any>;
 </script>
 
 <form
@@ -41,7 +41,7 @@
 		<div class="flex flex-1 flex-col justify-between">
 			<div class="divide-y divide-gray-200 px-4 sm:px-6">
 				<div class="space-y-6 pt-6 pb-5">
-					{#each Object.entries(someData) as [name, value]}
+					{#each Object.entries(formData) as [name, value]}
 						<!-- content here -->
 						<TWInput {name} {value} />
 					{/each}
