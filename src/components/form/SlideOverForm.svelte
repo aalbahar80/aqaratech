@@ -1,4 +1,6 @@
 <script lang="ts">
+	import TWInput from './TWInput.svelte';
+
 	import {
 		Transition,
 		TransitionChild,
@@ -23,7 +25,7 @@
 	class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 	on:click={() => (isOpen = !isOpen)}
 >
-	toggle dialog
+	New
 </button>
 
 <Transition show={isOpen} as="div">
@@ -36,7 +38,7 @@
 		<div class="absolute inset-0 overflow-hidden">
 			<DialogOverlay class="absolute inset-0" />
 
-			<div class="fixed inset-y-0 right-0 flex max-w-full pl-16">
+			<div class="fixed inset-y-0 right-0 flex  pl-16">
 				<TransitionChild
 					as="div"
 					enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -46,7 +48,7 @@
 					leaveFrom="translate-x-0"
 					leaveTo="translate-x-full"
 				>
-					<div class="w-screen max-w-md">
+					<div class="h-full w-screen max-w-md ">
 						<form
 							class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
 						>
@@ -77,25 +79,13 @@
 								<div class="flex flex-1 flex-col justify-between">
 									<div class="divide-y divide-gray-200 px-4 sm:px-6">
 										<div class="space-y-6 pt-6 pb-5">
+											<TWInput />
+											<TWInput />
+											<TWInput />
+											<TWInput />
 											<div>
 												<label
-													htmlFor="project-name"
-													class="block text-sm font-medium text-gray-900"
-												>
-													Project name
-												</label>
-												<div class="mt-1">
-													<input
-														type="text"
-														name="project-name"
-														id="project-name"
-														class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-													/>
-												</div>
-											</div>
-											<div>
-												<label
-													htmlFor="description"
+													for="description"
 													class="block text-sm font-medium text-gray-900"
 												>
 													Description
@@ -107,7 +97,6 @@
 														rows={4}
 														class="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 													/>
-													<!-- defaultValue={''} -->
 												</div>
 											</div>
 											<fieldset>
@@ -124,11 +113,10 @@
 																type="radio"
 																class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
 															/>
-															<!-- defaultChecked -->
 														</div>
 														<div class="pl-7 text-sm">
 															<label
-																htmlFor="privacy-public"
+																for="privacy-public"
 																class="font-medium text-gray-900"
 															>
 																Public access
@@ -154,7 +142,7 @@
 															</div>
 															<div class="pl-7 text-sm">
 																<label
-																	htmlFor="privacy-private-to-project"
+																	for="privacy-private-to-project"
 																	class="font-medium text-gray-900"
 																>
 																	Private to project members
@@ -182,7 +170,7 @@
 															</div>
 															<div class="pl-7 text-sm">
 																<label
-																	htmlFor="privacy-private"
+																	for="privacy-private"
 																	class="font-medium text-gray-900"
 																>
 																	Private to you
