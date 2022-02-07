@@ -45,27 +45,21 @@
 							<tr class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
 								<td
 									class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900"
-									>{person.name}</td
+									>{person.firstName}</td
 								>
 								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
-									>{person.title}</td
+									>{person.lastName}</td
 								>
 								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
 									>{person.email}</td
 								>
 								<td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
-									>{person.role}</td
+									>{person.phone}</td
 								>
 								<td
 									class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 								>
-									<a
-										use:initSlide
-										href="#"
-										class="text-indigo-600 hover:text-indigo-900"
-									>
-										Edit
-									</a>
+									<slot prop={person} />
 								</td>
 							</tr>
 						{/each}

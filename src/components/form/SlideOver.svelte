@@ -12,9 +12,10 @@
 	import startCase from 'lodash-es/startCase.js';
 	import TWInput from './TWInput.svelte';
 
+	type FormType = 'create' | 'update';
 	export let isOpen: boolean = false;
 	export let formData: Record<string, unknown>;
-	export let formType: 'create' | 'update' | 'delete' = 'update';
+	export let formType: FormType = 'update';
 	export let action: string;
 
 	const close = () => {
@@ -90,7 +91,7 @@
 								<div class="flex flex-1 flex-col justify-between">
 									<div class="divide-y divide-gray-200 px-4 sm:px-6">
 										<div class="space-y-6 pt-6 pb-5">
-											{#each Object.entries(formData) as [name, value]}
+											{#each Object.entries(formData) as [name, value] (name)}
 												<TWInput {name} {value} />
 											{/each}
 										</div>
