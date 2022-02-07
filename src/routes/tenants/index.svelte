@@ -23,10 +23,6 @@
 		dob: undefined,
 	};
 
-	const close = () => {
-		isOpen = false;
-	};
-
 	function initSlide(node: HTMLElement, tenant: any) {
 		function handleClick() {
 			isOpen = true;
@@ -35,14 +31,13 @@
 		node.addEventListener('click', handleClick);
 		return {
 			destroy() {
-				console.log('destroy in action');
 				node.removeEventListener('click', handleClick);
 			},
 		};
 	}
 </script>
 
-<SlideOver bind:isOpen {formData} on:close={close} />
+<SlideOver bind:isOpen {formData} />
 
 <button
 	use:initSlide={newTenant}
