@@ -21,9 +21,21 @@
 		isOpen = false;
 	};
 
-	type a = enhance;
-	const createAction: typeof enhance = {
+	type Enhance = Parameters<typeof enhance>['1'];
+	const createAction: Enhance = {
 		result: async (res, form) => {
+			// TODO optimistic update just like todos example
+			const created = await res.json();
+			console.log(created);
+
+			form.reset();
+			close();
+		},
+	};
+
+	const updateAction: Enhance = {
+		result: async (res, form) => {
+			// TODO use the pending state just like todos example
 			const created = await res.json();
 			console.log(created);
 
@@ -51,7 +63,7 @@
 					<div class="h-full w-screen max-w-md ">
 						<form
 							use:enhance={{
-								...createAction,
+								...(formType === 'create' ? createAction : updateAction),
 							}}
 							{action}
 							method="post"
