@@ -8,8 +8,6 @@
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
 
-	type FormType = 'create' | 'update';
-
 	let formData: { [key: string]: unknown };
 	let isOpen = false;
 	let action: string;

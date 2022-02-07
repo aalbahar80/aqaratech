@@ -12,7 +12,6 @@
 	import startCase from 'lodash-es/startCase.js';
 	import TWInput from './TWInput.svelte';
 
-	type FormType = 'create' | 'update';
 	export let isOpen: boolean = false;
 	export let formData: Record<string, unknown>;
 	export let formType: FormType = 'update';

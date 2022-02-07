@@ -17,3 +17,5 @@ declare namespace App {
 
 	interface Stuff {}
 }
+
+type FormType = 'create' | 'update';
