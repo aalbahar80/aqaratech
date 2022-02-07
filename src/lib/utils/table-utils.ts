@@ -4,7 +4,7 @@ export const parseParams = (url: URL) => {
 	const search = url.searchParams.get('search') || '';
 	const skip = (pageIndex - 1) * pageSize;
 	const sortDir = url.searchParams.get('sortDir') || 'desc';
-	const sortKey = url.searchParams.get('sortKey') || 'createdAt';
+	const sortKey = url.searchParams.get('sortKey') || 'updatedAt';
 
 	return {
 		options: { pageSize, pageIndex, search, skip, sortDir, sortKey },
