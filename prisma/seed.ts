@@ -34,7 +34,7 @@ const fakeTenant = (): Prisma.TenantCreateInput => ({
 	phone: faker.phone.phoneNumber('1#######'),
 	leases: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 1 }) },
+			{ length: faker.datatype.number({ min: 0, max: 4 }) },
 			fakeLease,
 		),
 	},
@@ -54,7 +54,7 @@ const fakeUnit = (): Prisma.UnitCreateInput => ({
 	],
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 4 }) },
+			{ length: faker.datatype.number({ min: 0, max: 4 }) },
 			fakeExpense,
 		),
 	},
@@ -69,13 +69,13 @@ const fakeProperty = (): Prisma.PropertyCreateInput => ({
 	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	units: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 8 }) },
+			{ length: faker.datatype.number({ min: 0, max: 8 }) },
 			fakeUnit,
 		),
 	},
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 4 }) },
+			{ length: faker.datatype.number({ min: 0, max: 4 }) },
 			fakeExpense,
 		),
 	},
@@ -94,13 +94,13 @@ const fakeClient = (): Prisma.ClientCreateInput => ({
 	phone: faker.phone.phoneNumber('1#######'),
 	properties: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 4 }) },
+			{ length: faker.datatype.number({ min: 0, max: 4 }) },
 			fakeProperty,
 		),
 	},
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 4 }) },
+			{ length: faker.datatype.number({ min: 0, max: 4 }) },
 			fakeExpense,
 		),
 	},
