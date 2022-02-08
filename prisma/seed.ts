@@ -6,7 +6,14 @@ import pkg, { type Prisma } from '@prisma/client';
 import * as util from 'util';
 const { PrismaClient } = pkg;
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+	log: [{ level: 'query', emit: 'event' }, 'info'],
+	errorFormat: 'pretty',
+});
+prisma.$on('query', (e) => {
+	console.log(e);
+});
+
 const faker = fakerAll.faker;
 faker.locale = 'ar';
 
@@ -27,7 +34,7 @@ const fakeTenant = (): Prisma.TenantCreateInput => ({
 	phone: faker.phone.phoneNumber('1#######'),
 	leases: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 4 }) },
+			{ length: faker.datatype.number({ min: 1, max: 1 }) },
 			fakeLease,
 		),
 	},
@@ -145,39 +152,50 @@ const fakeMaintenanceOrder = (): Prisma.MaintenanceOrderCreateInput => ({
 	},
 });
 
+type Data<T extends (...args: any) => any> = Parameters<T>[0]['data'];
+
+async function creator<T extends ({ data }: { data: any }) => any>({
+	name,
+	count,
+	dataFaker,
+	prismaCall,
+}: {
+	name: string;
+	count: number;
+	prismaCall: T;
+	dataFaker: Data<T>;
+}): Promise<void> {
+	const fakeData = Array.from({ length: count }, dataFaker);
+	for (const [i, v] of fakeData.entries()) {
+		await prismaCall({
+			data: v,
+		});
+		console.log(i + 1, `Created a ${name}`);
+	}
+	console.info(`Done creating ${fakeData.length} ${name}`);
+}
+
 async function main() {
-	const fakeClients = Array.from({ length: 10 }, fakeClient);
-	// console.log(util.inspect(fakeClients, { depth: null }));
-	for (const client of fakeClients) {
-		await prisma.client.create({
-			data: client,
-		});
-		console.log('Created 1 client');
-	}
-	console.info('Clients created!');
+	await creator({
+		name: 'client',
+		count: 1,
+		prismaCall: prisma.client.create,
+		dataFaker: fakeClient,
+	});
 
-	const fakeTenants = Array.from({ length: 10 }, fakeTenant);
-	// console.log(util.inspect(fakeTenants, { depth: null }));
-	for (const tenant of fakeTenants) {
-		await prisma.tenant.create({
-			data: tenant,
-		});
-		console.log('Created 1 tenant');
-	}
-	console.info('Done creating Tenants!');
+	await creator({
+		name: 'tenant',
+		count: 1,
+		prismaCall: prisma.tenant.create,
+		dataFaker: fakeTenant,
+	});
 
-	const fakeMaintenanceOrders = Array.from(
-		{ length: 10 },
-		fakeMaintenanceOrder,
-	);
-	// console.log(util.inspect(fakeMaintenanceOrders, { depth: null }));
-	for (const maintenanceOrder of fakeMaintenanceOrders) {
-		await prisma.maintenanceOrder.create({
-			data: maintenanceOrder,
-		});
-		console.log('Created 1 maintenance order');
-	}
-	console.info('Maintenance orders created!');
+	await creator({
+		name: 'maintenance order',
+		count: 1,
+		prismaCall: prisma.maintenanceOrder.create,
+		dataFaker: fakeMaintenanceOrder,
+	});
 }
 
 main()
