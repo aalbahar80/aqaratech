@@ -154,7 +154,7 @@ const fakeMaintenanceOrder = (): Prisma.MaintenanceOrderCreateInput => ({
 
 type Data<T extends (...args: any) => any> = Parameters<T>[0]['data'];
 
-async function creator<T extends ({ data }: { data: any }) => any>({
+async function creator<T extends (...args: any) => any>({
 	name,
 	count,
 	dataFaker,
@@ -176,24 +176,25 @@ async function creator<T extends ({ data }: { data: any }) => any>({
 }
 
 async function main() {
-	await creator({
+	await creator<typeof prisma.client.create>({
 		name: 'client',
 		count: 1,
 		prismaCall: prisma.client.create,
 		dataFaker: fakeClient,
 	});
 
-	await creator({
+	await creator<typeof prisma.tenant.create>({
 		name: 'tenant',
 		count: 1,
 		prismaCall: prisma.tenant.create,
 		dataFaker: fakeTenant,
 	});
 
-	await creator({
+	await creator<typeof prisma.maintenanceOrder.create>({
 		name: 'maintenance order',
 		count: 1,
 		prismaCall: prisma.maintenanceOrder.create,
+		//@ts-ignore
 		dataFaker: fakeMaintenanceOrder,
 	});
 }
