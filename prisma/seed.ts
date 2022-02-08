@@ -47,7 +47,7 @@ const fakeUnit = (): Prisma.UnitCreateInput => ({
 	],
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 10 }) },
+			{ length: faker.datatype.number({ min: 1, max: 4 }) },
 			fakeExpense,
 		),
 	},
@@ -68,7 +68,7 @@ const fakeProperty = (): Prisma.PropertyCreateInput => ({
 	},
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 10 }) },
+			{ length: faker.datatype.number({ min: 1, max: 4 }) },
 			fakeExpense,
 		),
 	},
@@ -93,7 +93,7 @@ const fakeClient = (): Prisma.ClientCreateInput => ({
 	},
 	expenses: {
 		create: Array.from(
-			{ length: faker.datatype.number({ min: 1, max: 10 }) },
+			{ length: faker.datatype.number({ min: 1, max: 4 }) },
 			fakeExpense,
 		),
 	},
@@ -145,35 +145,46 @@ const fakeMaintenanceOrder = (): Prisma.MaintenanceOrderCreateInput => ({
 	},
 });
 
-// for (let i = 0; i < 10; i++) {
-// 	console.log(util.inspect(fakeClient(), { depth: null }));
-// 	console.log(util.inspect(fakeTenant(), { depth: null }));
-// 	console.log(util.inspect(fakeMaintenanceOrder(), { depth: null }));
-// }
-
 async function main() {
-	for (let i = 0; i < 3; i++) {
+	const fakeClients = Array.from({ length: 10 }, fakeClient);
+	// console.log(util.inspect(fakeClients, { depth: null }));
+	for (const client of fakeClients) {
 		await prisma.client.create({
-			data: fakeClient(),
+			data: client,
 		});
+		console.log('Created 1 client');
 	}
+	console.info('Clients created!');
 
-	for (let i = 0; i < 3; i++) {
+	const fakeTenants = Array.from({ length: 10 }, fakeTenant);
+	// console.log(util.inspect(fakeTenants, { depth: null }));
+	for (const tenant of fakeTenants) {
 		await prisma.tenant.create({
-			data: fakeTenant(),
+			data: tenant,
 		});
+		console.log('Created 1 tenant');
 	}
+	console.info('Done creating Tenants!');
 
-	for (let i = 0; i < 3; i++) {
+	const fakeMaintenanceOrders = Array.from(
+		{ length: 10 },
+		fakeMaintenanceOrder,
+	);
+	// console.log(util.inspect(fakeMaintenanceOrders, { depth: null }));
+	for (const maintenanceOrder of fakeMaintenanceOrders) {
 		await prisma.maintenanceOrder.create({
-			data: fakeMaintenanceOrder(),
+			data: maintenanceOrder,
 		});
+		console.log('Created 1 maintenance order');
 	}
+	console.info('Maintenance orders created!');
 }
 
 main()
 	.catch((e) => {
-		throw e;
+		console.error(e);
+		process.exit(1);
+		// throw e;
 	})
 	.finally(async () => {
 		await prisma.$disconnect();
