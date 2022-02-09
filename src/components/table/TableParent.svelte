@@ -1,14 +1,37 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import SlideOver from '$components/form/SlideOver.svelte';
 	import { endpointBase, endpointPatch } from '$lib/config/constants';
 	import startCase from 'lodash-es/startCase.js';
-	import join from 'lodash-es/join.js';
 	import TableTW from './TableTW.svelte';
-	import { scale, fade, slide } from 'svelte/transition';
+	import { scale, type TransitionConfig } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-</script>
 
-<script lang="ts">
+	const flash = (
+		node: HTMLElement,
+		{ duration }: { duration: number },
+	): TransitionConfig => {
+		node.classList.add(
+			'bg-green-200',
+			'animate-pulse',
+			'bg-clip-border',
+			'rounded-lg',
+		);
+
+		return {
+			duration,
+			tick: (t: number) => {
+				if (t === 1) {
+					node.classList.remove(
+						'bg-green-200',
+						'animate-pulse',
+						'bg-clip-border',
+						'rounded-lg',
+					);
+				}
+			},
+		};
+	};
+
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
 	export let endpointName: string;
@@ -87,7 +110,7 @@
 			>
 				<slot name="rowsP">
 					{#each Object.entries(row) as [key, value] (key + value)}
-						<td in:fade|local={{ duration: 2000 }} class="table__cell">
+						<td in:flash|local={{ duration: 1000 }} class="table__cell">
 							{value}
 						</td>
 					{/each}
