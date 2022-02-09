@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import {
 		Disclosure,
 		DisclosureButton,
@@ -9,9 +10,8 @@
 		MenuItems,
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Bell, Menu as MenuIcon, X } from '@steeze-ui/heroicons';
-	import { page } from '$app/stores';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	$: isActive = (href: string) => $page.url.pathname === href;
 
