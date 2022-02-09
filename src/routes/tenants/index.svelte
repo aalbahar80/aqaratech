@@ -21,11 +21,17 @@
 		// dob: '',
 		civilid: '',
 	};
+
+	$: console.log(rows[0].updatedAt);
 </script>
 
 <svelte:head>
 	<title>Tenants</title>
 </svelte:head>
+
+<pre>{rows[0].updatedAt}</pre>
+<pre>{rows[0].updatedAt.toString()}</pre>
+<p>{typeof rows[0].updatedAt}</p>
 
 <TableParent {rows} defaultFormData={newTenant} endpointName={'tenants'}>
 	<!-- <svelte:fragment slot="headerRowP">
