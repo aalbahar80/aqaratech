@@ -16,7 +16,7 @@
 			{value}
 			id={name}
 			class="form__input"
-			disabled={name === 'id'}
+			disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
 		/>
 	</div>
 </div>
@@ -24,6 +24,6 @@
 <style lang="postcss">
 	.form__input {
 		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
-		@apply disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
 </style>
