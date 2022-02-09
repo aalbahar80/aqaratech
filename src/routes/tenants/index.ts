@@ -1,3 +1,4 @@
+import { logger } from '$lib/config/logger';
 import prisma from '$lib/config/prisma';
 import { select } from '$lib/definitions/Tenants';
 import { parseParams } from '$lib/utils/table-utils';
@@ -10,13 +11,14 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 	params,
 }) => {
 	const {
-		options: { pageSize, search, skip, sortDir, sortKey },
+		options: { pageSize, search, skip, sortDir, sortKey, pageIndex },
 	} = parseParams(url);
 	console.log(params);
 	console.log(url.search);
 	console.log(request.url);
 	console.log(pageSize);
 	console.log(skip);
+	console.log(url);
 
 	const tenants = await prisma.tenant.findMany({
 		take: pageSize,
@@ -57,7 +59,7 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 	// This is a hack to avoid the date to be reformatted during hydration
 	// which causes fluttering
 	const rows = JSON.parse(JSON.stringify(tenants));
-
+	logger.debug({ pageIndex }, 'index.ts ~ 60');
 	return {
 		headers: {
 			'cache-control': 's-maxage=3, stale-while-revalidate=59',
@@ -66,6 +68,7 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 			rows,
 			totalItems: total.id,
 			pageSize,
+			pageIndex,
 		},
 	};
 };

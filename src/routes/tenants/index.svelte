@@ -1,18 +1,22 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
+	import { logger } from '$lib/config/logger';
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
-	import join from 'lodash-es/join.js';
-	import startCase from 'lodash-es/startCase.js';
 
-	export const load: Load = ({ props }) => ({
-		props,
-	});
+	export const load: Load = ({ props, url }) => {
+		console.log(url);
+		return {
+			props,
+		};
+	};
 </script>
 
 <script lang="ts">
 	export let rows: Tenant[];
-
+	export let totalItems: number;
+	export let pageIndex: number;
+	logger.debug({ pageIndex }, 'index.svelte ~ 18');
 	const newTenant: Prisma.TenantCreateInput = {
 		firstName: '',
 		lastName: '',
@@ -21,15 +25,19 @@
 		// dob: '',
 		civilid: '',
 	};
-
-	$: console.log(rows[0].updatedAt);
 </script>
 
 <svelte:head>
 	<title>Tenants</title>
 </svelte:head>
 
-<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants'}>
+<TableParent
+	{rows}
+	defaultFormData={newTenant}
+	endpointName={'tenants'}
+	{totalItems}
+	{pageIndex}
+>
 	<!-- <svelte:fragment slot="headerRowP">
 		{@const fullName = 'Full Name'}
 		<th scope="col" class="table__header">
