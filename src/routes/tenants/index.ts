@@ -35,6 +35,7 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 		},
 		select,
 	});
+
 	// TODO optimize this
 	const total = await prisma.tenant.count({
 		where: {
@@ -52,12 +53,17 @@ export const get: RequestHandler<{ totalItems: number; rows: any[] }> = async ({
 			id: true,
 		},
 	});
+
+	// This is a hack to avoid the date to be reformatted during hydration
+	// which causes fluttering
+	const rows = JSON.parse(JSON.stringify(tenants));
+
 	return {
 		headers: {
 			'cache-control': 's-maxage=3, stale-while-revalidate=59',
 		},
 		body: {
-			rows: tenants,
+			rows,
 			totalItems: total.id,
 			pageSize,
 		},
