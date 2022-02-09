@@ -19,32 +19,31 @@
 	export let patch: (updated: { id: string; [key: string]: unknown }) => void;
 	export let create: (created: any) => void;
 
+	let loading = false;
 	const close = () => {
 		isOpen = false;
 	};
 
 	type Enhance = Parameters<typeof enhance>['1'];
-	const createAction: Enhance = {
-		result: async (res, form) => {
-			// TODO optimistic update just like todos example
-			const created = await res.json();
-			create(created);
-			console.log(created);
 
-			form.reset();
-			close();
+	const handleSubmit: Enhance = {
+		pending: () => {
+			loading = true;
 		},
-	};
-
-	const updateAction: Enhance = {
 		result: async (res, form) => {
 			// TODO optimistic update just like todos example
-			const updated = await res.json();
-			console.log(updated);
-			patch(updated);
+			const submitted = await res.json();
+			console.log(submitted);
+			if (formType === 'create') {
+				create(submitted);
+			} else if (formType === 'update') {
+				patch(submitted);
+			}
 
+			loading = false;
 			form.reset();
 			close();
+			console.log('end here');
 		},
 	};
 </script>
@@ -67,7 +66,7 @@
 					<div class="h-full w-screen max-w-md ">
 						<form
 							use:enhance={{
-								...(formType === 'create' ? createAction : updateAction),
+								...handleSubmit,
 							}}
 							{action}
 							method="post"
@@ -113,6 +112,28 @@
 									type="submit"
 									class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 								>
+									{#if loading}
+										<svg
+											class="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+										>
+											<circle
+												class="opacity-25"
+												cx="12"
+												cy="12"
+												r="10"
+												stroke="currentColor"
+												stroke-width="4"
+											/>
+											<path
+												class="opacity-75"
+												fill="currentColor"
+												d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+											/>
+										</svg>
+									{/if}
 									Save
 								</button>
 							</div>
