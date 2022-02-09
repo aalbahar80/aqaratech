@@ -12,11 +12,8 @@ const publicPages = [
 ];
 
 export const handle: Handle = async ({ event, resolve }) => {
-	logger.debug(f('hooks.ts', 8, event.request.headers));
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	logger.debug(f('hooks.ts', 11, { cookies }));
 
-	logger.debug({ event }, 'hooks.ts ~ 12');
 	event.locals.user = cookies.user || '';
 	event.locals.hasura = cookies.hasura || '';
 	event.locals.userId = cookies.userId || '';
@@ -47,7 +44,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// 	});
 	// }
 
-	logger.debug(response.headers, 'hooks.ts ~ 16');
 	response.headers.append(
 		'Set-Cookie',
 		cookie.serialize('user', event.locals.user, {
