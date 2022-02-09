@@ -4,6 +4,8 @@
 	import startCase from 'lodash-es/startCase.js';
 	import join from 'lodash-es/join.js';
 	import TableTW from './TableTW.svelte';
+	import { scale, fade, slide } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
 </script>
 
 <script lang="ts">
@@ -32,6 +34,9 @@
 		}
 		node.addEventListener('click', handleClick);
 		return {
+			update(freshData) {
+				newFormData = freshData.newFormData;
+			},
 			destroy() {
 				node.removeEventListener('click', handleClick);
 			},
@@ -44,9 +49,13 @@
 			return t;
 		});
 	}
+
+	function create(created: any) {
+		rows = [created, ...rows];
+	}
 </script>
 
-<SlideOver bind:isOpen {formData} {action} {formType} {patch} />
+<SlideOver bind:isOpen {formData} {action} {formType} {patch} {create} />
 
 <button
 	use:initSlide={{
@@ -59,7 +68,7 @@
 	New Inner
 </button>
 
-<TableTW {rows}>
+<TableTW>
 	<svelte:fragment slot="headerRowC">
 		<slot name="headerRowP">
 			{#each Object.entries(rows[0]) as [headerCell] (headerCell)}
@@ -71,10 +80,16 @@
 	</svelte:fragment>
 	<svelte:fragment slot="rowsC">
 		{#each rows as row, personIdx (row.id)}
-			<tr class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+			<tr
+				transition:scale|local={{ start: 0.7 }}
+				animate:flip={{ duration: 200 }}
+				class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+			>
 				<slot name="rowsP">
-					{#each Object.values(row) as value ({})}
-						<td class="table__cell">{value}</td>
+					{#each Object.entries(row) as [key, value] (key + value)}
+						<td in:fade|local={{ duration: 2000 }} class="table__cell">
+							{value}
+						</td>
 					{/each}
 				</slot>
 				<td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">

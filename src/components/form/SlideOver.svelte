@@ -17,6 +17,7 @@
 	export let formType: FormType = 'update';
 	export let action: string;
 	export let patch: (updated: { id: string; [key: string]: unknown }) => void;
+	export let create: (created: any) => void;
 
 	const close = () => {
 		isOpen = false;
@@ -27,6 +28,7 @@
 		result: async (res, form) => {
 			// TODO optimistic update just like todos example
 			const created = await res.json();
+			create(created);
 			console.log(created);
 
 			form.reset();
