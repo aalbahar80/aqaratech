@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { enhance } from '$components/form/form';
 	import SlideOver from '$components/form/SlideOver.svelte';
-	import { endpointBase, endpointPatch } from '$lib/config/constants';
+	import {
+		endpointBase,
+		endpointDelete,
+		endpointPatch,
+	} from '$lib/config/constants';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
 	import { scale } from 'svelte/transition';
@@ -54,7 +59,31 @@
 	}
 </script>
 
-<SlideOver bind:isOpen {formData} {action} {formType} {patch} {create} />
+<SlideOver bind:isOpen {formData} {action} {formType} {patch} {create}>
+	<svelte:fragment slot="deleteButton" let:id>
+		{#if formType === 'update'}
+			<form
+				action={endpointDelete(endpointName, id)}
+				method="post"
+				use:enhance={{
+					result: () => {
+						isOpen = false;
+						rows = rows.filter((r) => r.id !== id);
+						// invalidate(endpointBase(endpointName)).then(() => {
+						// 	console.log('invalidated');
+						// });
+					},
+				}}
+			>
+				<button
+					class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+				>
+					Delete {id}
+				</button>
+			</form>
+		{/if}
+	</svelte:fragment>
+</SlideOver>
 
 <div
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
