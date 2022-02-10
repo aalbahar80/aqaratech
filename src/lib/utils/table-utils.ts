@@ -1,14 +1,14 @@
 export const parseParams = (url: URL) => {
 	const pageSize = Number(url.searchParams.get('pageSize')) || 11;
-	const pageIndex = Number(url.searchParams.get('page')) || 1;
-	const search = url.searchParams.get('search') || '';
+	const pageIndex = Number(url.searchParams.get('p')) || 1;
+	const search = url.searchParams.get('q') || '';
 	const skip = (pageIndex - 1) * pageSize;
 	const sortDir = url.searchParams.get('sortDir') || 'desc';
 	const sortKey = url.searchParams.get('sortKey') || 'updatedAt';
 
 	return {
 		options: { pageSize, pageIndex, search, skip, sortDir, sortKey },
-		queryString: `?page=${pageIndex}&pageSize=${pageSize}&search=${search}&sortDir=${sortDir}&sortKey=${sortKey}`,
+		queryString: `?p=${pageIndex}&pageSize=${pageSize}&q=${search}&sortDir=${sortDir}&sortKey=${sortKey}`,
 	};
 };
 
@@ -50,39 +50,25 @@ export const handleParams = ({
 	params.set('pageSize', pageSize.toString());
 	return params;
 };
+interface TableOptions {
+	p?: string;
+	pageSize?: string;
+	q?: string;
+	sortKey?: string;
+	sortDir?: string;
+}
 
-export const getTableUrl = (
-	url: URL,
-	{
-		pageIndex,
-		search,
-		sortKey,
-		sortDir,
-		pageSize,
-	}: {
-		pageIndex?: number;
-		search?: string;
-		sortKey?: string;
-		sortDir?: string;
-		pageSize?: number;
-	},
-): string => {
+export const getTableUrl = (url: URL, options: TableOptions): string => {
 	const params = new URLSearchParams();
-	if (pageIndex) {
-		params.set('page', pageIndex.toString());
-	}
-	if (search) {
-		params.set('search', search);
-	}
-	if (sortKey) {
-		params.set('sortKey', sortKey);
-	}
-	if (sortDir) {
-		params.set('sortDir', sortDir);
-	}
-	if (pageSize) {
-		params.set('pageSize', pageSize.toString());
-	}
+	Object.entries(options).forEach((option) => {
+		if (option[1] && typeof option[1] === 'string') {
+			params.set(option[0], option[1]);
+		}
+	});
+	// loop through params and remove default values
+	// params.forEach((value, key) => {
+	// 	removeDefault(params, key, value);
+	// });
 
 	return `${url.pathname}?${params.toString()}`;
 };
