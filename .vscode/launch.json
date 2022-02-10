@@ -6,11 +6,30 @@
 	"configurations": [
 		{
 			"type": "pwa-node",
-            // "type": "node",
+			// "type": "node",
 			"request": "launch",
 			"name": "lihau test",
-			"skipFiles": ["<node_internals>/**"],
-			"args": ["--inspect", "node_modules/.bin/svelte-kit", "dev"]
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"args": [
+				"--inspect",
+				"node_modules/.bin/svelte-kit",
+				"dev"
+			]
+		},
+		// run a ts file using node --loader ts-node
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "ts-node",
+			"args": [
+				"--loader",
+				"ts-node/esm",
+				"${file}"
+			],
+			"cwd": "${workspaceFolder}",
+			// "console": "integratedTerminal",
 		}
 	]
 }

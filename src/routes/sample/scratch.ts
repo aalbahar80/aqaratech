@@ -1,21 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export {};
+//@ts-nocheck
+import { handleParams } from '../../lib/utils/table-utils.ts';
 
-type Rstr<T> = (str: string) => T;
+const a = handleParams({
+	pageIndex: 1,
+	search: 'sdf',
+	sortKey: 'updatedAt',
+	sortDir: 'desc',
+	pageSize: 11,
+});
 
-const rstr: Rstr<any> = (str: string) => 1;
-
-// type A<B> = ReturnType<typeof rstr<B extends <infer C> ? C : never>>;
-type A<B> = B extends Rstr<infer C> ? C : B;
-
-const a: A<number> = (str: string) => 1;
-
-type ReturnsAny = (str: string) => string;
-const returnsAny: ReturnsAny = (str: string) => 'some string';
-
-type D = A<ReturnsAny>;
-
-function firstElement<Type>(arr: Type[]): Type | undefined {
-	return arr[0];
-}
-const s = firstElement(['a', 'b', 'c']);
+console.log(a);
