@@ -25,3 +25,18 @@ export const patch: RequestHandler = async (event) => {
 		body: response,
 	};
 };
+
+export const del: RequestHandler = async (event) => {
+	// return api(event, `todos/${event.locals.userid}/${event.params.uid}`);
+	const tenant = await prisma.tenant.delete({
+		where: {
+			id: event.params.id,
+		},
+	});
+	return {
+		body: {
+			message: 'Deleted',
+			tenant,
+		},
+	};
+};
