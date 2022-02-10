@@ -5,6 +5,7 @@
 		endpointBase,
 		endpointDelete,
 		endpointPatch,
+		editPageHref,
 	} from '$lib/config/constants';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
@@ -12,6 +13,7 @@
 	import { flash } from '$components/table/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
+	import { invalidate } from '$app/navigation';
 
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
@@ -21,6 +23,7 @@
 	let isOpen = false;
 	let action: string;
 	let formType: FormType = 'update';
+	export let formSchema: any;
 
 	function initSlide(
 		node: HTMLElement,
@@ -35,11 +38,13 @@
 			formData = newFormData;
 			action = formAction;
 			formType = type;
+			console.log(newFormData);
 		}
 		node.addEventListener('click', handleClick);
 		return {
 			update(freshData: any) {
 				newFormData = freshData.newFormData;
+				console.log(newFormData);
 			},
 			destroy() {
 				node.removeEventListener('click', handleClick);
@@ -59,7 +64,15 @@
 	}
 </script>
 
-<SlideOver bind:isOpen {formData} {action} {formType} {patch} {create}>
+<SlideOver
+	bind:isOpen
+	{formData}
+	{action}
+	{formType}
+	{patch}
+	{create}
+	{formSchema}
+>
 	<svelte:fragment slot="deleteButton" let:id>
 		{#if formType === 'update'}
 			<form
@@ -126,16 +139,12 @@
 					<td
 						class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 					>
-						<button
+						<a
+							href={editPageHref(endpointName, row.id)}
 							class="text-indigo-600 hover:text-indigo-900"
-							use:initSlide={{
-								newFormData: row,
-								formAction: endpointPatch(endpointName, row.id),
-								type: 'update',
-							}}
 						>
 							Edit
-						</button>
+						</a>
 					</td>
 				</tr>
 			{/each}

@@ -9,10 +9,10 @@ export const select = Prisma.validator<Prisma.TenantSelect>()({
 	email: true,
 	phone: true,
 	dob: true,
+	civilid: true,
 });
 
-// ### Prisma Example
-export const tenantBasicData = Prisma.validator<Prisma.TenantArgs>()({
+export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 	select: {
 		id: true,
 		firstName: true,
@@ -20,12 +20,10 @@ export const tenantBasicData = Prisma.validator<Prisma.TenantArgs>()({
 		email: true,
 		phone: true,
 		dob: true,
-		updatedAt: true,
-		createdAt: true,
+		civilid: true,
 	},
 });
-type TenantBasicData = Prisma.TenantGetPayload<typeof tenantBasicData>;
-// ### End Prisma Example
+export type TenantData = Prisma.TenantGetPayload<typeof tenantData>;
 
 export const graphqlName = 'tenants';
 
@@ -85,38 +83,21 @@ export const fieldList: Field[] = [
 	new Field({
 		fieldName: 'civilid',
 		title: 'Civil ID',
-		// TODO: change after removing bigint type
 	}),
 ];
 
-export const validation = z.object({
+export const formSchema = z.object({
 	firstName: z.string().min(1, { message: 'Required' }),
-	secondName: z.string().min(1, { message: 'Required' }),
+	// secondName: z.string().min(1, { message: 'Required' }),
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
-	// civilid: z.string().min(12).and(z.string().max(12)).or(z.literal('')),
-	// civilid: z
-	// 	.string()
-	// 	.refine((val) => val.length === 12, {
-	// 		message: 'Civil ID must be 12 characters',
-	// 	}),
-	civilid: z.preprocess(
-		(val) => (val as string).toString(),
-		// check if civil id is 12 characters or blank
-		z
-			.string()
-			.refine((val) => val.length === 12 || val.length === 0, {
-				message: 'Civil ID must be 12 characters or blank',
-			})
-			.and(
-				// check if civil id contains only numbers, if any
-				z.string().refine(
-					(val) =>
-						// check if val contains only numbers
-						val.length === 0 || val.match(/^[0-9]+$/) !== null,
-					{ message: 'Civil ID must contain only numbers' },
-				),
-			),
-	),
+	civilid: z
+		.string()
+		.min(12)
+		.and(z.string().max(12))
+		.or(z.literal(''))
+		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+			message: 'Civil ID must contain only numbers',
+		}),
 });

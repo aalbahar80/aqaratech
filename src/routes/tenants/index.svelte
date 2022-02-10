@@ -2,6 +2,7 @@
 	import TableParent from '$components/table/TableParent.svelte';
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
+	import { formSchema } from '$lib/definitions/Tenants';
 
 	export const load: Load = async ({ fetch, url }) => {
 		const newUrl = `${url.pathname}.json${url.search}`;
@@ -17,7 +18,7 @@
 	export let rows: Tenant[];
 	const newTenant: Prisma.TenantCreateInput = {
 		firstName: undefined,
-		lastName: undefined,
+		lastName: '',
 		phone: undefined,
 		email: undefined,
 		dob: undefined,
@@ -29,23 +30,9 @@
 	<title>Tenants</title>
 </svelte:head>
 
-<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants'}>
-	<!-- <svelte:fragment slot="headerRowP">
-		{@const fullName = 'Full Name'}
-		<th scope="col" class="table__header">
-			{startCase(fullName)}
-		</th>
-		{#each Object.entries(rows[0]) as [headerCell] (headerCell)}
-			<th scope="col" class="table__header">
-				{startCase(headerCell)}
-			</th>
-		{/each}
-	</svelte:fragment>
-	<svelte:fragment slot="row" let:fullRow>
-		{@const fullName = join([fullRow.firstName, fullRow.lastName], ' ')}
-		<td class="table__cell--name">{fullName}</td>
-		{#each Object.entries(fullRow) as [field, value] (field)}
-			<td class="table__cell">{value}</td>
-		{/each}
-	</svelte:fragment> -->
-</TableParent>
+<TableParent
+	{rows}
+	defaultFormData={newTenant}
+	endpointName={'tenants'}
+	{formSchema}
+/>

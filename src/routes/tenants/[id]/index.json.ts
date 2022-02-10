@@ -1,28 +1,35 @@
 import prisma from '$lib/config/prisma';
-import { select } from '$lib/definitions/Tenants';
+import { formSchema, tenantData } from '$lib/definitions/Tenants';
+import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
-	const data = await event.request.formData();
-	const dob = data.get('dob')?.toString();
-	const response = await prisma.tenant.update({
-		where: {
-			id: event.params.id,
-		},
-		data: {
-			firstName: data.get('firstName')?.toString() || null,
-			lastName: data.get('lastName')?.toString() || null,
-			email: data.get('email')?.toString() || null,
-			phone: data.get('phone')?.toString() || null,
-			civilid: data.get('civilid')?.toString() || null,
-			dob: dob ? new Date(dob) : null,
-		},
-		select,
-	});
+	type Updated = Prisma.TenantUpdateArgs['data'];
+	const data: Updated = await event.request.json();
 
-	return {
-		body: response,
-	};
+	try {
+		formSchema.parse(data);
+		if (data.dob) {
+			data.dob = new Date(data.dob);
+		}
+		const tenant = await prisma.tenant.update({
+			where: { id: event.params.id },
+			data,
+			select: tenantData.select,
+		});
+		return {
+			status: 200,
+			body: tenant,
+		};
+	} catch (error: any) {
+		console.error(error);
+		return {
+			status: 400,
+			body: {
+				error: error.message,
+			},
+		};
+	}
 };
 
 export const del: RequestHandler = async (event) => {
@@ -37,5 +44,17 @@ export const del: RequestHandler = async (event) => {
 			message: 'Deleted',
 			tenant,
 		},
+	};
+};
+
+export const get: RequestHandler = async (event) => {
+	const tenant = await prisma.tenant.findUnique({
+		where: {
+			id: event.params.id,
+		},
+		select: tenantData.select,
+	});
+	return {
+		body: tenant,
 	};
 };

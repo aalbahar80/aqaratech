@@ -8,3 +8,6 @@ export const endpointPatch = (entity: string, id: string) =>
 
 export const endpointDelete = (entity: string, id: string) =>
 	`/${entity}/${id}.json?_method=DELETE`;
+
+export const editPageHref = (entity: string, id: string) =>
+	`/${entity}/${id}/edit`;

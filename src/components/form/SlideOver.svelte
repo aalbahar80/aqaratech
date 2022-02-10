@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { enhance } from '$components/form/form';
-	import { validation } from '$lib/definitions/Tenants';
+	import { ValidationMessage } from '@felte/reporter-svelte';
+	import { validator } from '@felte/validator-zod';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -10,57 +10,30 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { createForm } from 'felte';
 	import startCase from 'lodash-es/startCase.js';
 	import TWInput from './TWInput.svelte';
 
 	export let isOpen: boolean = false;
 	export let formData: Record<string, unknown>;
-	export let formType: FormType = 'update';
-	export let action: string;
-	export let patch: (updated: { id: string; [key: string]: unknown }) => void;
-	export let create: (created: any) => void;
+	export let formSchema;
 
 	let loading = false;
 	const close = () => {
 		isOpen = false;
 	};
 
-	type Enhance = Parameters<typeof enhance>['1'];
-
-	const handleSubmit: Enhance = {
-		pending: () => {
-			loading = true;
+	const { form, data, errors } = createForm({
+		extend: validator,
+		validateSchema: formSchema,
+		onSubmit: () => {
+			console.log('submitted felte');
 		},
-		result: async (res, form) => {
-			// TODO optimistic update just like todos example
-			const submitted = await res.json();
-			console.log(submitted);
-			if (formType === 'create') {
-				create(submitted);
-			} else if (formType === 'update') {
-				patch(submitted);
-			}
+	});
 
-			loading = false;
-			form.reset();
-			close();
-			console.log('end here');
-		},
-		error: (res, err, form) => {
-			loading = false;
-			console.error(err);
-		},
-	};
-
-	const validate = () => {
-		const formData = new FormData(
-			document.querySelector('form') as HTMLFormElement,
-		);
-		const data = Object.fromEntries(formData.entries());
-		console.log(data);
-		const validationResult = validation.safeParse(data);
-		console.log(validationResult);
-	};
+	$: noErrorMsg = Object.values($errors).every((e) => e === null);
+	$: console.log($data);
+	$: console.log($errors);
 </script>
 
 <Transition show={isOpen} as="div">
@@ -80,11 +53,7 @@
 				>
 					<div class="h-full w-screen max-w-md ">
 						<form
-							use:enhance={{
-								...handleSubmit,
-							}}
-							{action}
-							method="post"
+							use:form
 							class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
 						>
 							<div class="h-0 flex-1 overflow-y-auto">
@@ -110,6 +79,10 @@
 										<div class="space-y-6 pt-6 pb-5">
 											{#each Object.entries(formData) as [name, value] (name)}
 												<TWInput {name} {value} />
+												<ValidationMessage for={name} let:messages={message}>
+													<span>{message}</span>
+													<span slot="placeholder">{message || ''}</span>
+												</ValidationMessage>
 											{/each}
 										</div>
 									</div>
@@ -133,6 +106,7 @@
 								</button>
 								<button
 									type="submit"
+									disabled={!noErrorMsg}
 									class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 								>
 									{#if loading}
