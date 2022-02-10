@@ -6,7 +6,7 @@
 </script>
 
 <div>
-	<label for="project-name" class="block text-sm font-medium text-gray-900">
+	<label for={name} class="block text-sm font-medium text-gray-900">
 		{startCase(name)}
 	</label>
 	<div class="mt-1">
