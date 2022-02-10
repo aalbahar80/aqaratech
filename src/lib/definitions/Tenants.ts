@@ -1,16 +1,31 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
-import type { Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
-export const select: Prisma.TenantSelect = {
+export const select = Prisma.validator<Prisma.TenantSelect>()({
 	id: true,
 	firstName: true,
 	lastName: true,
 	email: true,
 	phone: true,
-	updatedAt: true,
-	createdAt: true,
-};
+	dob: true,
+});
+
+// ### Prisma Example
+export const tenantBasicData = Prisma.validator<Prisma.TenantArgs>()({
+	select: {
+		id: true,
+		firstName: true,
+		lastName: true,
+		email: true,
+		phone: true,
+		dob: true,
+		updatedAt: true,
+		createdAt: true,
+	},
+});
+type TenantBasicData = Prisma.TenantGetPayload<typeof tenantBasicData>;
+// ### End Prisma Example
 
 export const graphqlName = 'tenants';
 
