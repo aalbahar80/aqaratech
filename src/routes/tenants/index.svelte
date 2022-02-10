@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
-	import { logger } from '$lib/config/logger';
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
 
@@ -10,7 +9,6 @@
 		const data = await res.json();
 		return {
 			props: data,
-			maxage: 60,
 		};
 	};
 </script>
@@ -18,12 +16,12 @@
 <script lang="ts">
 	export let rows: Tenant[];
 	const newTenant: Prisma.TenantCreateInput = {
-		firstName: '',
-		lastName: '',
-		phone: '',
-		email: '',
-		// dob: '',
-		civilid: '',
+		firstName: undefined,
+		lastName: undefined,
+		phone: undefined,
+		email: undefined,
+		dob: undefined,
+		civilid: undefined,
 	};
 </script>
 
