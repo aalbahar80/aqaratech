@@ -9,12 +9,12 @@
 	export let end: number = 12;
 
 	const handlePageChange = (newPageIndex: number) => {
-		const url = getTableUrl($page.url, { pageIndex: newPageIndex });
+		const url = getTableUrl($page.url, { p: newPageIndex.toString() });
 		goto(url);
 	};
 
 	const getCurrentPage = () => {
-		return Number($page.url.searchParams.get('page')) || 1;
+		return Number($page.url.searchParams.get('p')) || 1;
 	};
 
 	const nextPage = () => {
