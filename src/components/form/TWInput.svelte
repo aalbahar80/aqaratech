@@ -3,6 +3,19 @@
 
 	export let name: string = '';
 	export let value: string = '';
+
+	let type: string = 'text';
+
+	switch (name) {
+		case 'dob':
+			type = 'date';
+			// convert value from iso 8601 to format yyyy-mm-dd
+			value = value?.substring(0, 10);
+			break;
+		default:
+			type = 'text';
+			break;
+	}
 </script>
 
 <div>
@@ -11,7 +24,7 @@
 	</label>
 	<div class="mt-1">
 		<input
-			type="text"
+			{type}
 			{name}
 			{value}
 			id={name}
