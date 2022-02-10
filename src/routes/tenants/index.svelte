@@ -31,7 +31,7 @@
 	<title>Tenants</title>
 </svelte:head>
 
-<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants.json'}>
+<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants'}>
 	<!-- <svelte:fragment slot="headerRowP">
 		{@const fullName = 'Full Name'}
 		<th scope="col" class="table__header">
