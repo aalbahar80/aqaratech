@@ -3,35 +3,10 @@
 	import { endpointBase, endpointPatch } from '$lib/config/constants';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
-	import { scale, type TransitionConfig } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
+	import { flash } from '$components/table/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
-
-	const flash = (
-		node: HTMLElement,
-		{ duration }: { duration: number },
-	): TransitionConfig => {
-		node.classList.add(
-			'bg-green-200',
-			'animate-pulse',
-			'bg-clip-border',
-			'rounded-lg',
-		);
-
-		return {
-			duration,
-			tick: (t: number) => {
-				if (t === 1) {
-					node.classList.remove(
-						'bg-green-200',
-						'animate-pulse',
-						'bg-clip-border',
-						'rounded-lg',
-					);
-				}
-			},
-		};
-	};
 
 	export let rows: { id: string; [key: string]: unknown }[];
 	export let defaultFormData: { [key: string]: unknown };
