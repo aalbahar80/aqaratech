@@ -34,8 +34,6 @@
 	};
 
 	export let rows: { id: string; [key: string]: unknown }[];
-	export let pageIndex: number;
-	export let totalItems: number;
 	export let defaultFormData: { [key: string]: unknown };
 	export let endpointName: string;
 
@@ -60,7 +58,7 @@
 		}
 		node.addEventListener('click', handleClick);
 		return {
-			update(freshData) {
+			update(freshData: any) {
 				newFormData = freshData.newFormData;
 			},
 			destroy() {
@@ -139,7 +137,7 @@
 			{/each}
 		</svelte:fragment>
 	</TableTW>
-	<Pagination {totalItems} {pageIndex} />
+	<Pagination />
 </div>
 
 <style lang="postcss">

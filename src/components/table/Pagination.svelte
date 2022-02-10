@@ -3,37 +3,26 @@
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { getTableUrl } from '$lib/utils/table-utils';
 
-	export let totalItems: number;
-	export let pageIndex: number;
 	export let start: number = 1;
 	export let end: number = 12;
 
-	const handlePageChange = (pageNumber: number) => {
-		const params = new URLSearchParams($page.url.searchParams.toString());
+	const handlePageChange = (newPageIndex: number) => {
+		const url = getTableUrl($page.url, { pageIndex: newPageIndex });
+		goto(url);
+	};
 
-		if (pageNumber === 1) {
-			params.delete('page');
-		} else {
-			params.set('page', encodeURIComponent(pageNumber));
-		}
-
-		const url = `${$page.url.pathname}?${params.toString()}`;
-		console.log('manual page change', url);
-		goto(url, {
-			noscroll: true,
-			keepfocus: true,
-		}).catch((err) => {
-			console.error(err);
-		});
+	const getCurrentPage = () => {
+		return Number($page.url.searchParams.get('page')) || 1;
 	};
 
 	const nextPage = () => {
-		if (pageIndex < totalItems) {
-			handlePageChange(pageIndex + 1);
-		}
+		handlePageChange(getCurrentPage() + 1);
 	};
-	$: console.log('passed in page index is ', pageIndex);
+	const previousPage = () => {
+		handlePageChange(getCurrentPage() - 1);
+	};
 </script>
 
 <div
@@ -59,7 +48,7 @@
 				Showing <span class="font-medium">{start}</span> to
 				<span class="font-medium">{end}</span>
 				of{' '}
-				<span class="font-medium">{totalItems}</span> results
+				<span class="font-medium">{111}</span> results
 			</p>
 		</div>
 		<div>
@@ -67,13 +56,13 @@
 				class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
 				aria-label="Pagination"
 			>
-				<a
-					href="#"
+				<button
 					class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
+					on:click={previousPage}
 				>
 					<span class="sr-only">Previous</span>
 					<Icon src={ChevronLeft} class="h-5 w-5" aria-hidden="true" />
-				</a>
+				</button>
 				<!-- {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */} -->
 				<a
 					href="#"
@@ -119,7 +108,7 @@
 				</a>
 				<button
 					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
-					on:click={() => handlePageChange(2)}
+					on:click={nextPage}
 				>
 					<span class="sr-only">Next</span>
 					<Icon src={ChevronRight} class="h-5 w-5" aria-hidden="true" />

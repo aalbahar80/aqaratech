@@ -4,19 +4,19 @@
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = ({ props, url }) => {
-		console.log(url);
+	export const load: Load = async ({ fetch, url }) => {
+		const newUrl = `${url.pathname}.json${url.search}`;
+		const res = await fetch(newUrl);
+		const data = await res.json();
 		return {
-			props,
+			props: data,
+			maxage: 60,
 		};
 	};
 </script>
 
 <script lang="ts">
 	export let rows: Tenant[];
-	export let totalItems: number;
-	export let pageIndex: number;
-	logger.debug({ pageIndex }, 'index.svelte ~ 18');
 	const newTenant: Prisma.TenantCreateInput = {
 		firstName: '',
 		lastName: '',
@@ -31,13 +31,7 @@
 	<title>Tenants</title>
 </svelte:head>
 
-<TableParent
-	{rows}
-	defaultFormData={newTenant}
-	endpointName={'tenants'}
-	{totalItems}
-	{pageIndex}
->
+<TableParent {rows} defaultFormData={newTenant} endpointName={'tenants.json'}>
 	<!-- <svelte:fragment slot="headerRowP">
 		{@const fullName = 'Full Name'}
 		<th scope="col" class="table__header">
@@ -57,15 +51,3 @@
 		{/each}
 	</svelte:fragment> -->
 </TableParent>
-
-<style lang="postcss">
-	.table__header {
-		@apply px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500;
-	}
-	.table__cell {
-		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-500;
-	}
-	.table__cell--name {
-		@apply whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900;
-	}
-</style>
