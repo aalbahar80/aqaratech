@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { enhance } from '$lib/form';
+	import { enhance } from '$components/form/form';
+	import { validation } from '$lib/definitions/Tenants';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -45,6 +46,12 @@
 			close();
 			console.log('end here');
 		},
+		error: (res, err, form) => {
+			loading = false;
+			console.error(err);
+		},
+	};
+
 	const validate = () => {
 		const formData = new FormData(
 			document.querySelector('form') as HTMLFormElement,
@@ -109,6 +116,7 @@
 								</div>
 							</div>
 							<div class="flex flex-shrink-0 justify-end px-4 py-4">
+								<slot name="deleteButton" id={formData.id} />
 								<button
 									type="button"
 									class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
