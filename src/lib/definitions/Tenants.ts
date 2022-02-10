@@ -75,9 +75,9 @@ export const fieldList: Field[] = [
 ];
 
 export const validation = z.object({
-	first_name: z.string().min(1, { message: 'Required' }),
-	second_name: z.string().min(1, { message: 'Required' }),
-	last_name: z.string().min(1, { message: 'Required' }),
+	firstName: z.string().min(1, { message: 'Required' }),
+	secondName: z.string().min(1, { message: 'Required' }),
+	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
 	// civilid: z.string().min(12).and(z.string().max(12)).or(z.literal('')),
