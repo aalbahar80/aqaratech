@@ -1,4 +1,4 @@
-import client from './client';
+// import client from './client';
 import property from './property';
 import unit from './unit';
 import tenant from './tenant';
@@ -11,7 +11,7 @@ export type EntityDefinitions = {
 };
 
 export default {
-	client,
+	// client,
 	property,
 	unit,
 	lease,
