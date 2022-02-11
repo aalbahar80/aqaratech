@@ -11,6 +11,11 @@
 
 	export const load: Load = async ({ params, stuff }) => {
 		const { id } = params;
+		if (id === 'add') {
+			return {
+				fallthrough: true,
+			};
+		}
 
 		const tenant: TenantIdScreenStore = await stuff.query(
 			TenantIdScreenDocument,
