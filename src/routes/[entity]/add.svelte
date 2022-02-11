@@ -10,9 +10,7 @@
 </script>
 
 <FormTWF
-	formData={entityDefs?.defaultForm
-		? entityDefs.defaultForm
-		: { firstName: '' }}
+	formData={entityDefs?.defaultForm}
 	formSchema={entityDefs?.formSchema}
 	transformer={entityDefs?.transformer}
 />
