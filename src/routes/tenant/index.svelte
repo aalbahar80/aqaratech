@@ -2,7 +2,7 @@
 	import TableParent from '$components/table/TableParent.svelte';
 	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
-	import { formSchema } from '$lib/definitions/Tenants';
+	import { formSchema } from '$lib/definitions/tenant';
 
 	export const load: Load = async ({ fetch, url }) => {
 		const newUrl = `${url.pathname}.json${url.search}`;
@@ -33,6 +33,6 @@
 <TableParent
 	{rows}
 	defaultFormData={newTenant}
-	endpointName={'tenants'}
+	endpointName={'tenant'}
 	{formSchema}
 />

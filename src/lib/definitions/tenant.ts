@@ -89,3 +89,5 @@ export const fieldList: Field[] = [
 		title: 'Civil ID',
 	}),
 ];
+
+export default { tenantData, formSchema };

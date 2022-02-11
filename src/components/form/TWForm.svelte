@@ -16,7 +16,7 @@
 </script>
 
 <form
-	action="/tenants"
+	action="/tenant"
 	method="post"
 	class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
 >

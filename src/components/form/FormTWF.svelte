@@ -10,21 +10,30 @@
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
 
+	const getSubmitUrl = () => {
+		const { entity, id } = $page.params;
+		let url;
+		if (id) {
+			url = `/${entity}/${id}.json?_method=PATCH`;
+		} else {
+			url = `/${entity}.json`;
+		}
+		return url;
+	};
+
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	const { form, errors, isSubmitting } = createForm({
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
-			const { id, ...rest } = values;
+			const { id: _id, ...rest } = values;
+			const url = getSubmitUrl();
 			try {
-				const res = await fetch(
-					`/tenants/${$page.params.id}.json?_method=PATCH`,
-					{
-						method: 'POST',
-						body: JSON.stringify(rest),
-					},
-				);
+				const res = await fetch(url, {
+					method: 'POST',
+					body: JSON.stringify(rest),
+				});
 				// TODO add success message
 				console.info(await res.json());
 			} catch (e) {
@@ -37,6 +46,7 @@
 		Array.isArray(value) ? value[0] : value;
 </script>
 
+{getSubmitUrl()}
 <div class="mx-auto mt-8 h-full max-w-xl">
 	<form
 		use:form

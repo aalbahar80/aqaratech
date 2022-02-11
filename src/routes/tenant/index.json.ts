@@ -1,5 +1,5 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, tenantData as entityData } from '$lib/definitions/Tenants';
+import { formSchema, tenantData as entityData } from '$lib/definitions/tenant';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
@@ -38,9 +38,8 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 };
 
 export const post: RequestHandler = async (event) => {
-	const formData = await event.request.formData();
-	type NewTenant = Omit<Prisma.TenantCreateArgs['data'], 'id'>;
-	const data: NewTenant = Object.fromEntries(formData.entries());
+	type Created = Omit<Prisma.TenantCreateArgs['data'], 'id'>;
+	const data: Created = await event.request.json();
 
 	try {
 		formSchema.parse(data);

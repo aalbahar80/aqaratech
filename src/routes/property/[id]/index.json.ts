@@ -1,18 +1,19 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, tenantData as entityData } from '$lib/definitions/Tenants';
+import {
+	formSchema,
+	propertyData as entityData,
+} from '$lib/definitions/property';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
-	type Updated = Prisma.TenantUpdateArgs['data'];
+	type Updated = Prisma.PropertyUpdateArgs['data'];
 	const data: Updated = await event.request.json();
+	console.log({ data }, 'index.json.ts ~ 12');
 
 	try {
 		formSchema.parse(data);
-		if (data.dob) {
-			data.dob = new Date(data.dob);
-		}
-		const updated = await prisma.tenant.update({
+		const updated = await prisma.property.update({
 			where: { id: event.params.id },
 			data,
 			select: entityData.select,
@@ -33,8 +34,7 @@ export const patch: RequestHandler = async (event) => {
 };
 
 export const del: RequestHandler = async (event) => {
-	// return api(event, `todos/${event.locals.userid}/${event.params.uid}`);
-	const deleted = await prisma.tenant.delete({
+	const deleted = await prisma.property.delete({
 		where: {
 			id: event.params.id,
 		},
@@ -48,7 +48,7 @@ export const del: RequestHandler = async (event) => {
 };
 
 export const get: RequestHandler = async (event) => {
-	const data = await prisma.tenant.findUnique({
+	const data = await prisma.property.findUnique({
 		where: {
 			id: event.params.id,
 		},

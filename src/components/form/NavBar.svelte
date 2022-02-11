@@ -17,13 +17,11 @@
 
 	const navigation = [
 		{ name: 'Clients', href: '/clients' },
-		{ name: 'Properties', href: '/properties' },
+		{ name: 'Properties', href: '/property' },
 		{ name: 'Units', href: '/units' },
 		{ name: 'Leases', href: '/leases' },
-		{ name: 'Tenants', href: '/tenants' },
+		{ name: 'Tenants', href: '/tenant' },
 		{ name: 'Transactions', href: '/transactions' },
-		{ name: 'prismatenants', href: '/prismatenants/all' },
-		{ name: 'ptenants', href: '/ptenants' },
 	];
 
 	const profileNavigation = [
