@@ -1,5 +1,5 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, tenantData } from '$lib/definitions/Tenants';
+import { formSchema, tenantData as entityData } from '$lib/definitions/Tenants';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
@@ -9,7 +9,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		options: { search, skip, sortDir, sortKey },
 	} = parseParams(url);
 
-	const tenants = await prisma.tenant.findMany({
+	const data = await prisma.tenant.findMany({
 		take: 10,
 		skip,
 		orderBy: { [sortKey]: sortDir as Prisma.SortOrder },
@@ -24,12 +24,12 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 				{ civilid: { contains: search } },
 			],
 		},
-		select: tenantData.select,
+		select: entityData.select,
 	});
 
 	// This is a hack to avoid the date to be reformatted during hydration
 	// which causes fluttering
-	const rows = JSON.parse(JSON.stringify(tenants));
+	const rows = JSON.parse(JSON.stringify(data));
 	return {
 		body: {
 			rows,
@@ -47,13 +47,13 @@ export const post: RequestHandler = async (event) => {
 		if (data.dob) {
 			data.dob = new Date(data.dob);
 		}
-		const tenant = await prisma.tenant.create({
+		const created = await prisma.tenant.create({
 			data,
-			select: tenantData.select,
+			select: entityData.select,
 		});
 		return {
 			status: 200,
-			body: tenant,
+			body: created,
 		};
 	} catch (error: any) {
 		console.error(error);

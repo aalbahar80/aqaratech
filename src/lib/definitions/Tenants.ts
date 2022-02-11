@@ -2,16 +2,7 @@ import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
-export const select = Prisma.validator<Prisma.TenantSelect>()({
-	id: true,
-	firstName: true,
-	lastName: true,
-	email: true,
-	phone: true,
-	dob: true,
-	civilid: true,
-});
-
+export type TenantData = Prisma.TenantGetPayload<typeof tenantData>;
 export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 	select: {
 		id: true,
@@ -23,9 +14,22 @@ export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 		civilid: true,
 	},
 });
-export type TenantData = Prisma.TenantGetPayload<typeof tenantData>;
 
-export const graphqlName = 'tenants';
+export const formSchema = z.object({
+	firstName: z.string().min(1, { message: 'Required' }),
+	// secondName: z.string().min(1, { message: 'Required' }),
+	lastName: z.string().min(1, { message: 'Required' }),
+	email: z.string().email(),
+	phone: z.string().min(8).and(z.string().max(8)),
+	civilid: z
+		.string()
+		.min(12)
+		.and(z.string().max(12))
+		.or(z.literal(''))
+		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+			message: 'Civil ID must contain only numbers',
+		}),
+});
 
 export const fieldList: Field[] = [
 	new Field({
@@ -85,19 +89,3 @@ export const fieldList: Field[] = [
 		title: 'Civil ID',
 	}),
 ];
-
-export const formSchema = z.object({
-	firstName: z.string().min(1, { message: 'Required' }),
-	// secondName: z.string().min(1, { message: 'Required' }),
-	lastName: z.string().min(1, { message: 'Required' }),
-	email: z.string().email(),
-	phone: z.string().min(8).and(z.string().max(8)),
-	civilid: z
-		.string()
-		.min(12)
-		.and(z.string().max(12))
-		.or(z.literal(''))
-		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
-			message: 'Civil ID must contain only numbers',
-		}),
-});
