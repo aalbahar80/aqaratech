@@ -4,16 +4,17 @@
 	import { validator } from '@felte/validator-zod';
 	import { createForm } from 'felte';
 	import isEmpty from 'just-is-empty';
+	import { z } from 'zod';
 	import TWInput from './TWInput.svelte';
 
 	export let formData: Record<string, any>;
-	export let formSchema: any;
+	export let formSchema: any = undefined;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	const { form, errors, isSubmitting } = createForm({
 		extend: [validator, svelteReporter],
-		validateSchema: formSchema,
+		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
 			const { id, ...rest } = values;
 			try {
