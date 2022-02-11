@@ -2,8 +2,8 @@ import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
-export type TenantData = Prisma.TenantGetPayload<typeof tenantData>;
-export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
+export type TenantData = Prisma.TenantGetPayload<typeof entityData>;
+export const entityData = Prisma.validator<Prisma.TenantArgs>()({
 	select: {
 		id: true,
 		firstName: true,
@@ -99,4 +99,4 @@ export const fieldList: Field[] = [
 	}),
 ];
 
-export default { tenantData, formSchema, defaultForm };
+export default { entityData, formSchema, defaultForm };

@@ -1,6 +1,8 @@
 import { Field } from '$components/form/Field';
 
-export const graphqlName = 'units';
+const entityData = {};
+const defaultForm = {};
+const formSchema = {};
 
 export const fieldList = [
 	new Field({
@@ -68,3 +70,5 @@ export const fieldList = [
 ];
 
 export const validation = false;
+
+export default { entityData, formSchema, defaultForm };

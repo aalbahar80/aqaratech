@@ -1,5 +1,5 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, tenantData as entityData } from '$lib/definitions/tenant';
+import { formSchema, entityData } from '$lib/definitions/tenant';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';

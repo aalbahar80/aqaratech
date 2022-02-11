@@ -1,9 +1,25 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { parseISO } from 'date-fns';
+import { Prisma } from '@prisma/client';
 
-// const title = 'Leases';
-export const graphqlName = 'leases';
+export type LeaseData = Prisma.LeaseGetPayload<typeof entityData>;
+export const entityData = Prisma.validator<Prisma.LeaseArgs>()({
+	select: {
+		id: true,
+		startDate: true,
+		endDate: true,
+		deposit: true,
+		monthlyRent: true,
+	},
+});
+
+export const defaultForm: Prisma.LeaseCreateInput = {
+	startDate: new Date(),
+	endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+	deposit: 0,
+	monthlyRent: 0,
+};
 
 export const fieldList = [
 	new Field({
@@ -75,22 +91,22 @@ export const fieldList = [
 	}),
 ];
 
-export const schema = z.object({
+export const formSchema = z.object({
 	// validate that start_date is an iso string
-	start_date: z.string().refine((val) => Date.parse(val), {
+	startDate: z.string().refine((val) => Date.parse(val), {
 		message: 'Start date must be an ISO string',
 	}),
 
-	end_date: z.string().refine((val) => Date.parse(val), {
+	endDate: z.string().refine((val) => Date.parse(val), {
 		message: 'End date must be an ISO string',
 	}),
-	monthly_rent: z.number().nonnegative(),
+	monthlyRent: z.number().nonnegative(),
 	deposit: z.number().nonnegative().optional(),
-	license: z.string().optional(),
-	unit_id: z.string().min(1, { message: 'Required' }),
-	tenant_id: z.string().min(1, { message: 'Required' }),
-	client_id: z.string().min(1, { message: 'Required' }),
-	property_id: z.string().min(1, { message: 'Required' }),
+	// license: z.string().optional(),
+	// unitId: z.string().min(1, { message: 'Required' }),
+	// tenantId: z.string().min(1, { message: 'Required' }),
+	// clientId: z.string().min(1, { message: 'Required' }),
+	// propertyId: z.string().min(1, { message: 'Required' }),
 });
 
 // export const validation = z.object({
@@ -99,3 +115,5 @@ export const schema = z.object({
 // client_id: z.string().min(1, { message: 'Required' }),
 // property_id: z.string().min(1, { message: 'Required' }),
 // });
+
+export default { entityData, formSchema, defaultForm };

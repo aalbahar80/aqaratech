@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
-export type PropertyData = Prisma.PropertyGetPayload<typeof propertyData>;
-export const propertyData = Prisma.validator<Prisma.PropertyArgs>()({
+export type PropertyData = Prisma.PropertyGetPayload<typeof entityData>;
+export const entityData = Prisma.validator<Prisma.PropertyArgs>()({
 	select: {
 		id: true,
 		area: true,
@@ -27,4 +27,4 @@ export const formSchema = z.object({
 	number: z.string().min(1, { message: 'Required' }),
 });
 
-export default { propertyData, formSchema, defaultForm };
+export default { entityData, formSchema, defaultForm };

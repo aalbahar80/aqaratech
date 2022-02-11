@@ -16,12 +16,12 @@
 	$: isActive = (href: string) => $page.url.pathname === href;
 
 	const navigation = [
-		{ name: 'Clients', href: '/clients' },
+		{ name: 'Clients', href: '/client' },
 		{ name: 'Properties', href: '/property' },
-		{ name: 'Units', href: '/units' },
-		{ name: 'Leases', href: '/leases' },
+		{ name: 'Units', href: '/unit' },
+		{ name: 'Leases', href: '/lease' },
 		{ name: 'Tenants', href: '/tenant' },
-		{ name: 'Transactions', href: '/transactions' },
+		{ name: 'Transactions', href: '/transaction' },
 	];
 
 	const profileNavigation = [

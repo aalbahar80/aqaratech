@@ -1,8 +1,5 @@
 import prisma from '$lib/config/prisma';
-import {
-	formSchema,
-	propertyData as entityData,
-} from '$lib/definitions/property';
+import { formSchema, entityData } from '$lib/definitions/property';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
