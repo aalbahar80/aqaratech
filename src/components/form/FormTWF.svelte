@@ -6,6 +6,7 @@
 	import isEmpty from 'just-is-empty';
 	import { z } from 'zod';
 	import TWInput from './TWInput.svelte';
+	import startCase from 'lodash-es/startCase.js';
 
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
@@ -21,6 +22,11 @@
 		}
 		return url;
 	};
+
+	const getTitle = () =>
+		startCase(
+			`${$page.url.pathname.split('/').slice(-1)[0]} ${$page.params.entity}`,
+		);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -57,11 +63,11 @@
 		class="flex h-full flex-col divide-y divide-gray-200 bg-white "
 	>
 		<div class="h-0 flex-1 overflow-y-auto">
-			<h1 class="text-lg font-medium ">
-				{'Edit'} Tenant
-			</h1>
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
+					<h1 class="text-2xl font-medium">
+						{getTitle()}
+					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#each Object.entries(formData) as [name, value] (name)}
 							<TWInput
