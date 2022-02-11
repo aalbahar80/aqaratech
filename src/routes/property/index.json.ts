@@ -1,5 +1,6 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, entityData } from '$lib/definitions/property';
+import { formSchema } from '$lib/definitions/property';
+import { propertyData } from '$lib/definitions/select';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
@@ -21,7 +22,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 				{ number: { contains: search } },
 			],
 		},
-		select: entityData.select,
+		select: propertyData.select,
 	});
 
 	// This is a hack to avoid the date to be reformatted during hydration
@@ -42,7 +43,7 @@ export const post: RequestHandler = async (event) => {
 		formSchema.parse(data);
 		const created = await prisma.property.create({
 			data,
-			select: entityData.select,
+			select: propertyData.select,
 		});
 		return {
 			status: 200,

@@ -1,5 +1,6 @@
 import prisma from '$lib/config/prisma';
-import { formSchema, entityData } from '$lib/definitions/lease';
+import { formSchema } from '$lib/definitions/lease';
+import { leaseData } from '$lib/definitions/select';
 import { parseParams } from '$lib/utils/table-utils';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
@@ -13,7 +14,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		take: 10,
 		skip,
 		orderBy: { [sortKey]: sortDir as Prisma.SortOrder },
-		select: entityData.select,
+		select: leaseData.select,
 	});
 
 	console.log({ data }, 'index.json.ts ~ 19');
@@ -35,7 +36,7 @@ export const post: RequestHandler = async (event) => {
 		formSchema.parse(data);
 		const created = await prisma.lease.create({
 			data,
-			select: entityData.select,
+			select: leaseData.select,
 		});
 		return {
 			status: 200,

@@ -1,5 +1,5 @@
 import prisma from '$lib/config/prisma';
-import { entityData } from '$lib/definitions/unit';
+import { unitData } from '$lib/definitions/select';
 import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
@@ -12,7 +12,7 @@ export const patch: RequestHandler = async (event) => {
 		const updated = await prisma.unit.update({
 			where: { id: event.params.id },
 			data,
-			select: entityData.select,
+			select: unitData.select,
 		});
 		return {
 			status: 200,
@@ -48,7 +48,7 @@ export const get: RequestHandler = async (event) => {
 		where: {
 			id: event.params.id,
 		},
-		select: entityData.select,
+		select: unitData.select,
 	});
 	return {
 		body: data,
