@@ -15,13 +15,13 @@ export const entityData = Prisma.validator<Prisma.TenantArgs>()({
 	},
 });
 
-export const defaultForm: Prisma.TenantCreateInput = {
-	firstName: undefined,
-	lastName: '',
-	phone: undefined,
-	email: undefined,
-	dob: undefined,
-	civilid: undefined,
+export const defaultForm: Omit<TenantData, 'id'> = {
+	firstName: null,
+	lastName: null,
+	phone: null,
+	email: null,
+	dob: null,
+	civilid: null,
 };
 
 export const formSchema = z.object({

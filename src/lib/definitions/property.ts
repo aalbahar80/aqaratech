@@ -12,12 +12,11 @@ export const entityData = Prisma.validator<Prisma.PropertyArgs>()({
 	},
 });
 
-export const defaultForm: Prisma.PropertyCreateInput = {
+export const defaultForm: Omit<PropertyData, 'id'> = {
 	area: '',
 	block: '',
 	street: '',
 	number: '',
-	avenue: '',
 };
 
 export const formSchema = z.object({
