@@ -1,7 +1,7 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { parseISO } from 'date-fns';
-import { Prisma, type Lease } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 export type LeaseData = Prisma.LeaseGetPayload<typeof entityData>;
 type LeaseDataWithStrings = Omit<LeaseData, 'startDate' | 'endDate'> & {
