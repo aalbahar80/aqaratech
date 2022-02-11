@@ -56,6 +56,10 @@
 		Array.isArray(value) ? value[0] : value;
 </script>
 
+<svelte:head>
+	<title>{getTitle()}</title>
+</svelte:head>
+
 {getSubmitUrl()}
 <div class="mx-auto mt-8 h-full max-w-xl">
 	<form
