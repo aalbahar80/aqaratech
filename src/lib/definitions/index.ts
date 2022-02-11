@@ -1,5 +1,8 @@
-import tenant from './tenant';
+import client from './client';
 import property from './property';
+import unit from './unit';
+import tenant from './tenant';
+import lease from './lease';
 
 export type EntityDefinitions = {
 	formSchema: any;
@@ -7,6 +10,9 @@ export type EntityDefinitions = {
 };
 
 export default {
-	tenant,
+	client,
 	property,
+	unit,
+	lease,
+	tenant,
 };
