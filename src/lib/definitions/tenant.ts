@@ -26,7 +26,6 @@ export const defaultForm: Omit<TenantData, 'id'> = {
 
 export const formSchema = z.object({
 	firstName: z.string().min(1, { message: 'Required' }),
-	// secondName: z.string().min(1, { message: 'Required' }),
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
