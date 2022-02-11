@@ -12,9 +12,14 @@
 
 	switch (name) {
 		case 'dob':
+		case 'endDate':
+		case 'startDate':
 			type = 'date';
-			// convert value from iso 8601 to format yyyy-mm-dd
 			value = value?.substring(0, 10);
+			break;
+		case 'monthlyRent':
+		case 'deposit':
+			type = 'number';
 			break;
 		default:
 			type = 'text';
@@ -62,5 +67,17 @@
 	}
 	.form__input--invalid {
 		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+	/* Remove arrow steppers */
+	/* Firefox */
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 </style>
