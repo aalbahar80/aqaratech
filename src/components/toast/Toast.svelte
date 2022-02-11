@@ -6,11 +6,12 @@
 	export let close: (() => void) | undefined = undefined;
 </script>
 
-<div class="w-60 rounded-md bg-green-50 p-4">
+<div class="w-60 rounded-md bg-green-100 p-4">
 	<div class="flex">
 		<div class="flex-shrink-0">
 			<Icon
 				src={CheckCircle}
+				theme="solid"
 				class="h-5 w-5 text-green-400"
 				aria-hidden="true"
 			/>
