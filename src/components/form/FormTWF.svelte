@@ -9,6 +9,7 @@
 
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
+	export let transformer: any = undefined;
 
 	const getSubmitUrl = () => {
 		const { entity, id } = $page.params;
@@ -27,7 +28,10 @@
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
-			const { id: _id, ...rest } = values;
+			let { id: _id, ...rest } = values;
+			if (transformer) {
+				rest = transformer(rest);
+			}
 			const url = getSubmitUrl();
 			try {
 				const res = await fetch(url, {

@@ -7,6 +7,7 @@ import lease from './lease';
 export type EntityDefinitions = {
 	formSchema: any;
 	defaultForm: any;
+	transformer?: any;
 };
 
 export default {

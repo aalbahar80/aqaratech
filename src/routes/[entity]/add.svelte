@@ -9,4 +9,8 @@
 		defs?.[$page.params.entity as keyof typeof defs];
 </script>
 
-<FormTWF formData={entityDefs.defaultForm} formSchema={entityDefs.formSchema} />
+<FormTWF
+	formData={entityDefs.defaultForm}
+	formSchema={entityDefs.formSchema}
+	transformer={entityDefs.transformer}
+/>
