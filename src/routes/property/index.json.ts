@@ -18,13 +18,10 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		orderBy: { [sortKey]: sortDir as Prisma.SortOrder },
 		where: {
 			OR: [
-				{ firstName: { contains: search } },
-				{ secondName: { contains: search } },
-				{ thirdName: { contains: search } },
-				{ lastName: { contains: search } },
-				{ email: { contains: search } },
-				{ phone: { contains: search } },
-				{ civilid: { contains: search } },
+				{ area: { contains: search } },
+				{ block: { contains: search } },
+				{ street: { contains: search } },
+				{ number: { contains: search } },
 			],
 		},
 		select: entityData.select,

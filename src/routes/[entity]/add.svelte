@@ -1,10 +1,12 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
 	import FormTWF from '$components/form/FormTWF.svelte';
-	import defs from '$lib/definitions/index';
+	import defs, { type EntityDefinitions } from '$lib/definitions/index';
 </script>
 
-<FormTWF
-	formData={defs?.[$page.params.entity].defaultForm}
-	formSchema={defs?.[$page.params.entity].formSchema}
-/>
+<script lang="ts">
+	const entityDefs: EntityDefinitions =
+		defs?.[$page.params.entity as keyof typeof defs];
+</script>
+
+<FormTWF formData={entityDefs.defaultForm} formSchema={entityDefs.formSchema} />

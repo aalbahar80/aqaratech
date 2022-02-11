@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
-	import type { Prisma, Tenant } from '@prisma/client';
 	import type { Load } from '@sveltejs/kit';
-	import { formSchema, defaultForm } from '$lib/definitions/tenant';
+	import defs, { type EntityDefinitions } from '$lib/definitions/index';
+	import { page } from '$app/stores';
 
 	export const load: Load = async ({ fetch, url }) => {
 		const newUrl = `${url.pathname}.json${url.search}`;
@@ -15,16 +15,13 @@
 </script>
 
 <script lang="ts">
-	export let rows: Tenant[];
+	export let rows: any[];
+	const entityDefs: EntityDefinitions =
+		defs?.[$page.params.entity as keyof typeof defs];
 </script>
 
 <svelte:head>
-	<title>Tenants</title>
+	<title>{$page.params.entity}</title>
 </svelte:head>
 
-<TableParent
-	{rows}
-	defaultFormData={defaultForm}
-	endpointName={'tenant'}
-	{formSchema}
-/>
+<TableParent {rows} />

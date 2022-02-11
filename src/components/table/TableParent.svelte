@@ -1,116 +1,19 @@
 <script lang="ts">
-	import { enhance } from '$components/form/form';
-	import SlideOver from '$components/form/SlideOver.svelte';
-	import {
-		endpointBase,
-		endpointDelete,
-		endpointPatch,
-		editPageHref,
-	} from '$lib/config/constants';
+	import { page } from '$app/stores';
+	import { flash } from '$components/table/transition';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
 	import { scale } from 'svelte/transition';
-	import { flash } from '$components/table/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
-	import { invalidate } from '$app/navigation';
 
 	export let rows: { id: string; [key: string]: unknown }[];
-	export let defaultFormData: { [key: string]: unknown };
-	export let endpointName: string;
-
-	let formData: { [key: string]: unknown };
-	let isOpen = false;
-	let action: string;
-	let formType: FormType = 'update';
-	export let formSchema: any;
-
-	function initSlide(
-		node: HTMLElement,
-		{
-			newFormData,
-			formAction,
-			type,
-		}: { newFormData: any; formAction: string; type: FormType },
-	) {
-		function handleClick() {
-			isOpen = true;
-			formData = newFormData;
-			action = formAction;
-			formType = type;
-			console.log(newFormData);
-		}
-		node.addEventListener('click', handleClick);
-		return {
-			update(freshData: any) {
-				newFormData = freshData.newFormData;
-				console.log(newFormData);
-			},
-			destroy() {
-				node.removeEventListener('click', handleClick);
-			},
-		};
-	}
-
-	function patch(updated: { id: string; [key: string]: unknown }) {
-		rows = rows.map((t) => {
-			if (t.id === updated.id) return updated;
-			return t;
-		});
-	}
-
-	function create(created: any) {
-		rows = [created, ...rows];
-	}
 </script>
-
-<SlideOver
-	bind:isOpen
-	{formData}
-	{action}
-	{formType}
-	{patch}
-	{create}
-	{formSchema}
->
-	<svelte:fragment slot="deleteButton" let:id>
-		{#if formType === 'update'}
-			<form
-				action={endpointDelete(endpointName, id)}
-				method="post"
-				use:enhance={{
-					result: () => {
-						isOpen = false;
-						rows = rows.filter((r) => r.id !== id);
-						// invalidate(endpointBase(endpointName)).then(() => {
-						// 	console.log('invalidated');
-						// });
-					},
-				}}
-			>
-				<button
-					class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>
-					Delete {id}
-				</button>
-			</form>
-		{/if}
-	</svelte:fragment>
-</SlideOver>
 
 <div
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
-	<button
-		use:initSlide={{
-			newFormData: defaultFormData,
-			formAction: endpointBase(endpointName),
-			type: 'create',
-		}}
-		class="row__edit-button"
-	>
-		New
-	</button>
+	<button class="row__edit-button"> New </button>
 
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
@@ -140,7 +43,7 @@
 						class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 					>
 						<a
-							href={editPageHref(endpointName, row.id)}
+							href={`${$page.url.pathname}/${row.id}`}
 							class="text-indigo-600 hover:text-indigo-900"
 						>
 							Edit

@@ -15,6 +15,15 @@ export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 	},
 });
 
+export const defaultForm: Prisma.TenantCreateInput = {
+	firstName: undefined,
+	lastName: '',
+	phone: undefined,
+	email: undefined,
+	dob: undefined,
+	civilid: undefined,
+};
+
 export const formSchema = z.object({
 	firstName: z.string().min(1, { message: 'Required' }),
 	// secondName: z.string().min(1, { message: 'Required' }),
@@ -90,4 +99,4 @@ export const fieldList: Field[] = [
 	}),
 ];
 
-export default { tenantData, formSchema };
+export default { tenantData, formSchema, defaultForm };

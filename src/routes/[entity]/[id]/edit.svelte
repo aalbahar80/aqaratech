@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
 	import FormTWF from '$components/form/FormTWF.svelte';
-	import defs from '$lib/definitions/index';
+	import defs, { type EntityDefinitions } from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
 	export const load: Load = async ({ fetch, params }) => {
 		const { entity, id } = params;
@@ -15,6 +15,8 @@
 
 <script lang="ts">
 	export let formData: any;
+	const entityDefs: EntityDefinitions =
+		defs?.[$page.params.entity as keyof typeof defs];
 </script>
 
-<FormTWF {formData} formSchema={defs?.[$page.params.entity].formSchema} />
+<FormTWF {formData} formSchema={entityDefs.formSchema} />
