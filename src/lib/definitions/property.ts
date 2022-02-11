@@ -1,16 +1,5 @@
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
-
-export type PropertyData = Prisma.PropertyGetPayload<typeof entityData>;
-export const entityData = Prisma.validator<Prisma.PropertyArgs>()({
-	select: {
-		id: true,
-		area: true,
-		block: true,
-		street: true,
-		number: true,
-	},
-});
+import type { PropertyData } from './select';
 
 export const defaultForm: Omit<PropertyData, 'id'> = {
 	area: '',

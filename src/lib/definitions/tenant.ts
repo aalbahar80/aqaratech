@@ -1,19 +1,6 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
-
-export type TenantData = Prisma.TenantGetPayload<typeof entityData>;
-export const entityData = Prisma.validator<Prisma.TenantArgs>()({
-	select: {
-		id: true,
-		firstName: true,
-		lastName: true,
-		email: true,
-		phone: true,
-		dob: true,
-		civilid: true,
-	},
-});
+import type { TenantData } from './select';
 
 export const defaultForm: Omit<TenantData, 'id'> = {
 	firstName: null,

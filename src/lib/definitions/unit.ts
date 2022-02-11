@@ -1,19 +1,5 @@
 import { Field } from '$components/form/Field';
-import { Prisma } from '@prisma/client';
-
-export type UnitData = Prisma.UnitGetPayload<typeof entityData>;
-
-export const entityData = Prisma.validator<Prisma.UnitArgs>()({
-	select: {
-		id: true,
-		size: true,
-		type: true,
-		unitNumber: true,
-		bed: true,
-		bath: true,
-		floor: true,
-	},
-});
+import type { UnitData } from './select';
 
 export const defaultForm: Omit<UnitData, 'id'> = {
 	size: null,

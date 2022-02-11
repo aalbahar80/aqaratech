@@ -1,17 +1,5 @@
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
-
-export type ClientData = Prisma.ClientGetPayload<typeof entityData>;
-export const entityData = Prisma.validator<Prisma.ClientArgs>()({
-	select: {
-		id: true,
-		firstName: true,
-		lastName: true,
-		email: true,
-		phone: true,
-		civilid: true,
-	},
-});
+import type { ClientData } from './select';
 
 export const defaultForm: Omit<ClientData, 'id'> = {
 	firstName: null,
@@ -27,4 +15,4 @@ export const formSchema = z.object({
 	phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
 });
 
-// export default { formSchema, defaultForm };
+export default { formSchema, defaultForm };

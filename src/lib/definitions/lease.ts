@@ -1,22 +1,7 @@
 import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import { parseISO } from 'date-fns';
-import { Prisma } from '@prisma/client';
-
-export type LeaseData = Prisma.LeaseGetPayload<typeof entityData>;
-type LeaseDataWithStrings = Omit<LeaseData, 'startDate' | 'endDate'> & {
-	startDate: string | null;
-	endDate: string | null;
-};
-export const entityData = Prisma.validator<Prisma.LeaseArgs>()({
-	select: {
-		id: true,
-		startDate: true,
-		endDate: true,
-		deposit: true,
-		monthlyRent: true,
-	},
-});
+import type { LeaseData } from './select';
 
 // Manually overriding date fields since prisma client wrongly
 // types them as dates
