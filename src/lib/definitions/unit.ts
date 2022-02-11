@@ -1,8 +1,28 @@
 import { Field } from '$components/form/Field';
+import { Prisma } from '@prisma/client';
 
-const entityData = {};
-const defaultForm = {};
-const formSchema = {};
+export type UnitData = Prisma.UnitGetPayload<typeof entityData>;
+
+export const entityData = Prisma.validator<Prisma.UnitArgs>()({
+	select: {
+		id: true,
+		size: true,
+		type: true,
+		unitNumber: true,
+		bed: true,
+		bath: true,
+		floor: true,
+	},
+});
+
+export const defaultForm: Omit<UnitData, 'id'> = {
+	size: null,
+	type: null,
+	unitNumber: null,
+	bed: null,
+	bath: null,
+	floor: null,
+};
 
 export const fieldList = [
 	new Field({
@@ -71,4 +91,4 @@ export const fieldList = [
 
 export const validation = false;
 
-export default { formSchema, defaultForm };
+export default { defaultForm };

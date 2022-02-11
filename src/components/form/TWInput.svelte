@@ -19,6 +19,9 @@
 			break;
 		case 'monthlyRent':
 		case 'deposit':
+		case 'size':
+		case 'bed':
+		case 'bath':
 			type = 'number';
 			break;
 		default:
