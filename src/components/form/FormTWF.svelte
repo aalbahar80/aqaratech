@@ -7,6 +7,8 @@
 	import { z } from 'zod';
 	import TWInput from './TWInput.svelte';
 	import startCase from 'lodash-es/startCase.js';
+	import { goto } from '$app/navigation';
+	import { addToast } from '$lib/stores/toast';
 
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
@@ -23,6 +25,10 @@
 		return url;
 	};
 
+	const getFormType = () => {
+		return $page.url.pathname.split('/').slice(-1)[0];
+	};
+
 	const getTitle = () =>
 		startCase(
 			`${$page.url.pathname.split('/').slice(-1)[0]} ${$page.params.entity}`,
@@ -30,7 +36,7 @@
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
-	const { form, errors, isSubmitting } = createForm({
+	const { form, errors, isSubmitting, reset } = createForm({
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
@@ -44,7 +50,15 @@
 					method: 'POST',
 					body: JSON.stringify(rest),
 				});
-				// TODO add success message
+				const data = await res.json();
+				addToast({
+					props: {
+						kind: 'success',
+						title: 'Success',
+					},
+				});
+				// goto(`/${$page.params.entity}/${data.id}`);
+				reset();
 				console.info(await res.json());
 			} catch (e) {
 				console.error(e);

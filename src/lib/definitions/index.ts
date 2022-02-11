@@ -5,8 +5,8 @@ import tenant from './tenant';
 import lease from './lease';
 
 export type EntityDefinitions = {
-	formSchema: any;
 	defaultForm: any;
+	formSchema?: any;
 	transformer?: any;
 };
 

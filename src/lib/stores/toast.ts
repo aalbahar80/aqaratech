@@ -1,11 +1,10 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
-import type { ToastNotificationProps } from 'carbon-components-svelte/types/Notification/ToastNotification.svelte';
 
 interface ToastItem {
 	id: number;
 	duration?: number;
-	props: Pick<ToastNotificationProps, 'title' | 'kind' | 'subtitle'>;
+	props: { title: string; subtitle?: string; kind: 'success' | 'error' };
 }
 
 export const toasts: Writable<ToastItem[]> = writable([]);
