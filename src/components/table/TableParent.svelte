@@ -13,7 +13,7 @@
 <div
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
-	<button class="row__edit-button"> New </button>
+	<a href={`${$page.url.pathname}/add`} class="row__edit-button"> New </a>
 
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
