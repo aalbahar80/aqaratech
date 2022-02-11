@@ -98,4 +98,4 @@ export const fieldList: Field[] = [
 	}),
 ];
 
-export default { entityData, formSchema, defaultForm };
+export default { formSchema, defaultForm };

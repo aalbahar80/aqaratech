@@ -145,4 +145,4 @@ export const formSchema = z
 // property_id: z.string().min(1, { message: 'Required' }),
 // });
 
-export default { entityData, formSchema, defaultForm, transformer };
+export default { formSchema, defaultForm, transformer };

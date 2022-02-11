@@ -10,4 +10,4 @@ export const formSchema = z.object({
 	phone: z.string().min(8).and(z.string().max(8)).or(z.literal('')),
 });
 
-export default { entityData, formSchema, defaultForm };
+export default { formSchema, defaultForm };

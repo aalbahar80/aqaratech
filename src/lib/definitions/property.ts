@@ -26,4 +26,4 @@ export const formSchema = z.object({
 	number: z.string().min(1, { message: 'Required' }),
 });
 
-export default { entityData, formSchema, defaultForm };
+export default { formSchema, defaultForm };

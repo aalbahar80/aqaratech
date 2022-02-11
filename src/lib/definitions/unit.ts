@@ -71,4 +71,4 @@ export const fieldList = [
 
 export const validation = false;
 
-export default { entityData, formSchema, defaultForm };
+export default { formSchema, defaultForm };
