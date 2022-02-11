@@ -43,7 +43,7 @@
 						class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 					>
 						<a
-							href={`${$page.url.pathname}/${row.id}`}
+							href={`${$page.url.pathname}/${row.id}/edit`}
 							class="text-indigo-600 hover:text-indigo-900"
 						>
 							Edit
