@@ -8,6 +8,9 @@
 	import TableTW from './TableTW.svelte';
 
 	export let rows: { id: string; [key: string]: unknown }[];
+
+	$: pageNumber = $page.url.searchParams.get('p') || 1;
+	$: console.log(pageNumber);
 </script>
 
 <div
@@ -24,30 +27,41 @@
 			{/each}
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
-			{#each rows as row, personIdx (row.id)}
-				<tr
-					out:fly|local={{ duration: 3000, x: -300 }}
-					in:fly|local={{ duration: 3000, x: 300 }}
-					animate:flip={{ duration: 200 }}
-					class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+			{#key rows[0].id}
+				<tbody
+					in:fly={{ duration: 2000, x: 1000, delay: 100 }}
+					out:fly|local={{ duration: 2000, x: -1000, delay: 0 }}
+					on:introstart={(i) => {
+						i.currentTarget.classList.add('ring-8', 'ring-green-200');
+					}}
+					on:outrostart={(i) => {
+						i.currentTarget.classList.add('absolute', 'ring-8', 'ring-red-500');
+					}}
 				>
-					{#each Object.entries(row) as [key, value] (key + value)}
-						<td in:flash|local={{ duration: 1000 }} class="table__cell">
-							{value}
-						</td>
-					{/each}
-					<td
-						class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
-					>
-						<a
-							href={`${$page.url.pathname}/${row.id}/edit`}
-							class="text-indigo-600 hover:text-indigo-900"
+					{#each rows as row, personIdx (row.id)}
+						<tr
+							animate:flip={{ duration: 200 }}
+							class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 						>
-							Edit
-						</a>
-					</td>
-				</tr>
-			{/each}
+							{#each Object.entries(row) as [key, value] (key + value)}
+								<td in:flash|local={{ duration: 1000 }} class="table__cell">
+									{value}
+								</td>
+							{/each}
+							<td
+								class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
+							>
+								<a
+									href={`${$page.url.pathname}/${row.id}/edit`}
+									class="text-indigo-600 hover:text-indigo-900"
+								>
+									Edit
+								</a>
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			{/key}
 		</svelte:fragment>
 	</TableTW>
 	<Pagination />

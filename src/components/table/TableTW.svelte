@@ -13,9 +13,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
-						<slot name="rowsC" />
-					</tbody>
+					<slot name="rowsC" />
 				</table>
 			</div>
 		</div>
