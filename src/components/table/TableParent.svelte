@@ -2,6 +2,7 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
+	import { isEqual, isMatch } from 'lodash-es';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
@@ -52,9 +53,33 @@
 		label: startCase(key),
 		visible: true,
 	}));
+	type Head = {
+		key: string;
+		label: string;
+		visible: boolean;
+	};
+	const setHeadVisibility = (newHeads: Head[], oldHeads: Head[]): Head[] => {
+		if (oldHeads.length === 0) {
+			console.log('oldHeads is empty');
+			return newHeads;
+		}
+		// check if the head keys are identical
+		const isIdentical = isEqual(
+			oldHeads.map((head) => head.key),
+			newHeads.map((head) => head.key),
+		);
+		if (isIdentical) {
+			console.log('header keys are identical');
+			return oldHeads;
+		}
+		console.log('header keys are different');
+		return newHeads;
+	};
+	let heads: Head[] = [];
+	$: heads = setHeadVisibility(headers, heads);
 
 	const toggle = (key: string, visibile: boolean) => {
-		headers = headers.map((header) => {
+		heads = heads.map((header) => {
 			if (header.key === key) {
 				header.visible = visibile;
 			}
@@ -63,7 +88,7 @@
 	};
 </script>
 
-{#each headers as header}
+{#each heads as header}
 	<label>
 		<input
 			id={header.key}
@@ -82,7 +107,7 @@
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
-			{#each headers as header (header.key)}
+			{#each heads as header (header.key)}
 				{#if header.visible}
 					{#if header.key === 'edit'}
 						<th scope="col" class="relative px-6 py-3">
@@ -105,7 +130,7 @@
 							class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 						>
 							{#each Object.entries(row) as [key, value] (key + value)}
-								{#if key !== 'edit' && headers.find((header) => header.key === key)?.visible}
+								{#if key !== 'edit' && heads.find((header) => header.key === key)?.visible}
 									<td in:flash|local={{ duration: 1000 }} class="table__cell">
 										{value}
 									</td>
