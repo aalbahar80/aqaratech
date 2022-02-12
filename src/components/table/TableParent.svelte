@@ -47,7 +47,7 @@
 	let headers = [...dbColumns, editColumn];
 
 	// create a new array with the edit column
-	let newRows = rows.map((row) => ({
+	$: newRows = rows.map((row) => ({
 		edit: `${row.id}/edit`,
 		...row,
 	}));
