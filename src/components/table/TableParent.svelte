@@ -49,7 +49,7 @@
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
 			{#key rows[0].id}
-				<tbody in:fly={{ duration: 500, y: 250 * modifier, easing: expoOut }}>
+				<tbody in:fly={{ duration: 700, y: 100 * modifier, easing: expoOut }}>
 					{#each rows as row, personIdx (row.id)}
 						<tr
 							animate:flip={{ duration: 200 }}
