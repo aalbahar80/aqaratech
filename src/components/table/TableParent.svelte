@@ -3,7 +3,7 @@
 	import { flash } from '$components/table/transition';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
-	import { scale } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
 
@@ -17,28 +17,25 @@
 
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
-			<slot name="headerRowP">
-				{#each Object.entries(rows[0]) as [headerCell] (headerCell)}
-					<th scope="col" class="table__header">
-						{startCase(headerCell)}
-					</th>
-				{/each}
-			</slot>
+			{#each Object.entries(rows[0]) as [headerCell] (headerCell)}
+				<th scope="col" class="table__header">
+					{startCase(headerCell)}
+				</th>
+			{/each}
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
 			{#each rows as row, personIdx (row.id)}
 				<tr
-					transition:scale|local={{ start: 0.7 }}
+					out:fly|local={{ duration: 3000, x: -300 }}
+					in:fly|local={{ duration: 3000, x: 300 }}
 					animate:flip={{ duration: 200 }}
 					class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 				>
-					<slot name="rowsP">
-						{#each Object.entries(row) as [key, value] (key + value)}
-							<td in:flash|local={{ duration: 1000 }} class="table__cell">
-								{value}
-							</td>
-						{/each}
-					</slot>
+					{#each Object.entries(row) as [key, value] (key + value)}
+						<td in:flash|local={{ duration: 1000 }} class="table__cell">
+							{value}
+						</td>
+					{/each}
 					<td
 						class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 					>
