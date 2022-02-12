@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
 	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
+	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
-	import { beforeNavigate } from '$app/navigation';
 
 	let modifier: number = 1;
 
@@ -49,10 +50,13 @@
 		<svelte:fragment slot="rowsC">
 			{#key rows[0].id}
 				<tbody
-					in:fly={{ duration: 100, y: 1000 * modifier }}
-					out:fly|local={{ duration: 100, y: -1000 * modifier }}
+					in:fly={{ duration: 2000, y: 250 * modifier, easing: expoOut }}
+					out:fly|local={{
+						duration: 2000,
+						y: -250 * modifier,
+					}}
 					on:outrostart={(i) => {
-						i.currentTarget.classList.add('absolute');
+						i.currentTarget.classList.add('absolute', '-z-10');
 					}}
 				>
 					{#each rows as row, personIdx (row.id)}
