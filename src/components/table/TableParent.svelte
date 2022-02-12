@@ -49,13 +49,10 @@
 		<svelte:fragment slot="rowsC">
 			{#key rows[0].id}
 				<tbody
-					in:fly={{ duration: 2000, x: 1000 * modifier, delay: 0 }}
-					out:fly|local={{ duration: 2000, x: -1000 * modifier, delay: 0 }}
-					on:introstart={(i) => {
-						i.currentTarget.classList.add('ring-8', 'ring-green-200');
-					}}
+					in:fly={{ duration: 100, y: 1000 * modifier }}
+					out:fly|local={{ duration: 100, y: -1000 * modifier }}
 					on:outrostart={(i) => {
-						i.currentTarget.classList.add('absolute', 'ring-8', 'ring-red-500');
+						i.currentTarget.classList.add('absolute');
 					}}
 				>
 					{#each rows as row, personIdx (row.id)}
