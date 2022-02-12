@@ -31,33 +31,48 @@
 		}
 	};
 
-	export let rows: { id: string; [key: string]: unknown }[];
-	// prefix with $:
-	let dbColumns = Object.keys(rows[0]).map((key) => ({
-		key,
-		label: startCase(key),
-		visible: key === 'createdAt',
-	}));
 	const editColumn = {
 		key: 'edit',
 		label: 'edit',
 		visible: true,
 	};
-
-	let headers = [...dbColumns, editColumn];
+	export let rows: { id: string; [key: string]: unknown }[];
 
 	// create a new array with the edit column
+	// let newRows = [];
+	$: console.log({ rows });
 	$: newRows = rows.map((row) => ({
 		edit: `${row.id}/edit`,
 		...row,
 	}));
 
-	$: console.log({ headers }, 'TableParent.svelte ~ 68');
+	// prefix with $:
+	$: headers = Object.keys(rows[0]).map((key) => ({
+		key,
+		label: startCase(key),
+		visible: true,
+	}));
+
+	const toggle = (key: string, visibile: boolean) => {
+		headers = headers.map((header) => {
+			if (header.key === key) {
+				header.visible = visibile;
+			}
+			return header;
+		});
+	};
 </script>
 
 {#each headers as header}
 	<label>
-		<input type="checkbox" bind:checked={header.visible} />
+		<input
+			id={header.key}
+			type="checkbox"
+			checked={header.visible}
+			on:change={(e) => {
+				toggle(e.currentTarget.id, e.currentTarget.checked);
+			}}
+		/>
 		{header.label}
 	</label>
 {/each}
@@ -65,7 +80,6 @@
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
-
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
 			{#each headers as header (header.key)}
@@ -83,7 +97,7 @@
 			{/each}
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
-			{#key rows[0].id}
+			{#key newRows[0].id}
 				<tbody in:fly={{ duration: 700, y: 100 * modifier, easing: expoOut }}>
 					{#each newRows as row, personIdx (row.id)}
 						<tr
@@ -91,7 +105,7 @@
 							class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 						>
 							{#each Object.entries(row) as [key, value] (key + value)}
-								{#if headers.find((header) => header.key === key)?.visible}
+								{#if key !== 'edit' && headers.find((header) => header.key === key)?.visible}
 									<td in:flash|local={{ duration: 1000 }} class="table__cell">
 										{value}
 									</td>
