@@ -25,12 +25,9 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		select: propertyData.select,
 	});
 
-	// This is a hack to avoid the date to be reformatted during hydration
-	// which causes fluttering
-	const rows = JSON.parse(JSON.stringify(data));
 	return {
 		body: {
-			rows,
+			rows: data,
 		},
 	};
 };

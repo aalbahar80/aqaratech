@@ -17,13 +17,9 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		select: leaseData.select,
 	});
 
-	console.log({ data }, 'index.json.ts ~ 19');
-	// This is a hack to avoid the date to be reformatted during hydration
-	// which causes fluttering
-	const rows = JSON.parse(JSON.stringify(data));
 	return {
 		body: {
-			rows,
+			rows: data,
 		},
 	};
 };
