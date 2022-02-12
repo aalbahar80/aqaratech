@@ -8,7 +8,7 @@
 	import TableTW from './TableTW.svelte';
 	import { beforeNavigate } from '$app/navigation';
 
-	let modifier: number;
+	let modifier: number = 1;
 
 	beforeNavigate(({ from, to }) => {
 		const oldPage = Number(from.searchParams.get('p'));
