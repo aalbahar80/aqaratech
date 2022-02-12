@@ -6,11 +6,31 @@
 	import { fly } from 'svelte/transition';
 	import Pagination from './Pagination.svelte';
 	import TableTW from './TableTW.svelte';
+	import { beforeNavigate } from '$app/navigation';
+
+	let modifier: number;
+
+	beforeNavigate(({ from, to }) => {
+		const oldPage = Number(from.searchParams.get('p'));
+		const newPage = Number(to?.searchParams.get('p'));
+		const result = setModifier(oldPage, newPage);
+		modifier = result;
+	});
 
 	export let rows: { id: string; [key: string]: unknown }[];
 
-	$: pageNumber = $page.url.searchParams.get('p') || 1;
-	$: console.log(pageNumber);
+	const setModifier = (from: number, to: number) => {
+		if (from < to) {
+			console.log('next');
+			return 1;
+		} else if (from > to) {
+			console.log('prev');
+			return -1;
+		} else {
+			console.log('same');
+			return 1;
+		}
+	};
 </script>
 
 <div
@@ -29,8 +49,8 @@
 		<svelte:fragment slot="rowsC">
 			{#key rows[0].id}
 				<tbody
-					in:fly={{ duration: 2000, x: 1000, delay: 100 }}
-					out:fly|local={{ duration: 2000, x: -1000, delay: 0 }}
+					in:fly={{ duration: 2000, x: 1000 * modifier, delay: 0 }}
+					out:fly|local={{ duration: 2000, x: -1000 * modifier, delay: 0 }}
 					on:introstart={(i) => {
 						i.currentTarget.classList.add('ring-8', 'ring-green-200');
 					}}
