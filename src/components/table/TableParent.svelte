@@ -50,9 +50,9 @@
 		<svelte:fragment slot="rowsC">
 			{#key rows[0].id}
 				<tbody
-					in:fly={{ duration: 2000, y: 250 * modifier, easing: expoOut }}
+					in:fly={{ duration: 500, y: 250 * modifier, easing: expoOut }}
 					out:fly|local={{
-						duration: 2000,
+						duration: 500,
 						y: -250 * modifier,
 					}}
 					on:outrostart={(i) => {
