@@ -9,6 +9,8 @@ export const clientData = Prisma.validator<Prisma.ClientArgs>()({
 		email: true,
 		phone: true,
 		civilid: true,
+		createdAt: true,
+		updatedAt: true,
 	},
 });
 
@@ -20,6 +22,8 @@ export const propertyData = Prisma.validator<Prisma.PropertyArgs>()({
 		block: true,
 		street: true,
 		number: true,
+		createdAt: true,
+		updatedAt: true,
 	},
 });
 
@@ -33,6 +37,8 @@ export const unitData = Prisma.validator<Prisma.UnitArgs>()({
 		bed: true,
 		bath: true,
 		floor: true,
+		createdAt: true,
+		updatedAt: true,
 	},
 });
 
@@ -44,6 +50,8 @@ export const leaseData = Prisma.validator<Prisma.LeaseArgs>()({
 		endDate: true,
 		deposit: true,
 		monthlyRent: true,
+		createdAt: true,
+		updatedAt: true,
 	},
 });
 
@@ -57,5 +65,7 @@ export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 		phone: true,
 		dob: true,
 		civilid: true,
+		createdAt: true,
+		updatedAt: true,
 	},
 });
