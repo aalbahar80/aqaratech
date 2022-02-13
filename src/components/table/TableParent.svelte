@@ -77,7 +77,7 @@
 	};
 	let heads: Head[] = [];
 	$: heads = setHeadVisibility(headers, heads);
-
+	$: console.log({ heads }, 'TableParent.svelte ~ 80');
 	const toggle = (key: string, visibile: boolean) => {
 		heads = heads.map((header) => {
 			if (header.key === key) {
@@ -109,17 +109,14 @@
 		<svelte:fragment slot="headerRowC">
 			{#each heads as header (header.key)}
 				{#if header.visible}
-					{#if header.key === 'edit'}
-						<th scope="col" class="relative px-6 py-3">
-							<span class="sr-only">Edit</span>
-						</th>
-					{:else}
-						<th scope="col" class="table__header">
-							{header.label}
-						</th>
-					{/if}
+					<th scope="col" class="table__header">
+						{header.label}
+					</th>
 				{/if}
 			{/each}
+			<th scope="col" class="relative px-6 py-3">
+				<span class="sr-only">Edit</span>
+			</th>
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
 			{#key newRows[0].id}
