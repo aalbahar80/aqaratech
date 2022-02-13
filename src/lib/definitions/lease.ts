@@ -10,7 +10,7 @@ export const defaultForm: Omit<LeaseData, 'id' | 'createdAt' | 'updatedAt'> = {
 	monthlyRent: 0,
 };
 
-const transformer = (data: any) => ({
+const transformer = (data: LeaseData): LeaseData => ({
 	...data,
 	startDate: data.startDate ? new Date(data.startDate) : null,
 	endDate: data.endDate ? new Date(data.endDate) : null,
@@ -20,10 +20,15 @@ export const formSchema = z.object({
 	id: z.undefined(),
 	createdAt: z.undefined(),
 	updatedAt: z.undefined(),
-	startDate: z.date(),
-	endDate: z.date(),
 	monthlyRent: z.number().nonnegative(),
 	deposit: z.number().nonnegative().optional(),
+	// z.preprocess allows the use of both Date objects and strings
+	startDate: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
+	endDate: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
 });
 
 function refiner(leaseSchema: typeof formSchema) {
