@@ -12,7 +12,6 @@ function isSameTable(a: Head[], b: Head[]) {
 		a.map((head) => head.key),
 		b.map((head) => head.key),
 	);
-	console.log({ isIdentical }, 'columns.ts ~ 15');
 	return isIdentical;
 }
 
@@ -30,8 +29,10 @@ function createColumns() {
 	return {
 		subscribe,
 		reset: () => set([]),
-		newTable: (rows: any[]) => {
+		newData: (rows: any[]) => {
 			const heads = deriveHeads(rows);
+			// if user has not changed the table
+			// don't reset column visibility
 			if (!isSameTable(heads, get(columns))) {
 				set(heads);
 			}

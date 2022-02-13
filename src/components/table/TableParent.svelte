@@ -39,7 +39,7 @@
 	}));
 
 	// columns store should know whenever data changes
-	$: columns.newTable(newRows);
+	$: columns.newData(newRows);
 </script>
 
 {#each $columns as header}
