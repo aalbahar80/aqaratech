@@ -8,7 +8,7 @@
 	import isEmpty from 'just-is-empty';
 	import startCase from 'lodash-es/startCase.js';
 	import { z } from 'zod';
-	import TWInput from './TWInput.svelte';
+	import Input from './Input.svelte';
 
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
@@ -83,7 +83,7 @@
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#each Object.entries(formData) as [name, value] (name)}
-							<TWInput
+							<Input
 								{name}
 								{value}
 								invalid={!isEmpty($errors[name])}
