@@ -13,7 +13,7 @@ export const defaultForm: WithDateAsString<WithoutId<LeaseData>> = {
 	monthlyRent: 0,
 };
 
-type WithoutId<T> = Omit<T, 'id'>;
+type WithoutId<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
 type WithDateAsString<T> = Omit<T, 'startDate' | 'endDate'> & {
 	startDate: string | null;
 	endDate: string | null;

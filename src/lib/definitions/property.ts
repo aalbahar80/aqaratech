@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import type { PropertyData } from './select';
 
-export const defaultForm: Omit<PropertyData, 'id'> = {
-	area: '',
-	block: '',
-	street: '',
-	number: '',
-};
+export const defaultForm: Omit<PropertyData, 'id' | 'createdAt' | 'updatedAt'> =
+	{
+		area: '',
+		block: '',
+		street: '',
+		number: '',
+	};
 
 export const formSchema = z.object({
 	area: z.string().min(1, { message: 'Required' }),

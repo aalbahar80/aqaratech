@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { TenantData } from './select';
 
-export const defaultForm: Omit<TenantData, 'id'> = {
+export const defaultForm: Omit<TenantData, 'id' | 'createdAt' | 'updatedAt'> = {
 	firstName: null,
 	lastName: null,
 	phone: null,
