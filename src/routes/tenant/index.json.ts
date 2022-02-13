@@ -36,14 +36,10 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 };
 
 export const post: RequestHandler = async (event) => {
-	type Created = Omit<Prisma.TenantCreateArgs['data'], 'id'>;
-	const data: Created = await event.request.json();
+	const data = await event.request.json();
 
 	try {
 		formSchema.parse(data);
-		if (data.dob) {
-			data.dob = new Date(data.dob);
-		}
 		const created = await prisma.tenant.create({
 			data,
 			select: tenantData.select,

@@ -1,18 +1,13 @@
 import prisma from '$lib/config/prisma';
 import { tenantData } from '$lib/definitions/select';
 import { formSchema } from '$lib/definitions/tenant';
-import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
-	type Updated = Prisma.TenantUpdateArgs['data'];
-	const data: Updated = await event.request.json();
+	const data = await event.request.json();
 
 	try {
 		formSchema.parse(data);
-		if (data.dob) {
-			data.dob = new Date(data.dob);
-		}
 		const updated = await prisma.tenant.update({
 			where: { id: event.params.id },
 			data,
