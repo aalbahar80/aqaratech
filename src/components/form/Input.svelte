@@ -16,9 +16,12 @@
 		case 'startDate':
 			type = 'date';
 			if (value instanceof Date) {
+				// 'Create' form gets a Date object
 				// eslint-disable-next-line prefer-destructuring
 				value = value.toISOString().split('T')[0];
 			}
+			// 'Edit' form gets an ISO string
+			value = value?.substring(0, 10);
 
 			break;
 		case 'monthlyRent':
