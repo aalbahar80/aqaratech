@@ -34,7 +34,7 @@
 			addToast({
 				props: {
 					kind: 'success',
-					title: 'Success',
+					title: 'Delete successful',
 				},
 			});
 			loading = false;
@@ -42,15 +42,15 @@
 			await goto(`/${$page.params.entity}`);
 		} catch (e) {
 			// TODO more specific error message
-			// TODO only expose id to user
 			loading = false;
 			addToast({
 				duration: 60000,
 				props: {
 					kind: 'error',
-					title: 'An error occured',
+					title: 'Unable to delete',
 				},
 			});
+			// TODO only expose id to user
 			console.error(e);
 		}
 	};
