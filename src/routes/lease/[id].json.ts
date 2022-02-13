@@ -1,13 +1,10 @@
 import prisma from '$lib/config/prisma';
 import { formSchema } from '$lib/definitions/lease';
 import { leaseData } from '$lib/definitions/select';
-import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
-	type Updated = Prisma.LeaseUpdateArgs['data'];
-	const data: Updated = await event.request.json();
-	console.log({ data }, 'index.json.ts ~ 12');
+	const data = await event.request.json();
 
 	try {
 		formSchema.parse(data);
