@@ -21,11 +21,11 @@
 	const setModifier = (from: number, to: number) => {
 		if (from < to) {
 			return 1;
-		} else if (from > to) {
-			return -1;
-		} else {
-			return 1;
 		}
+		if (from > to) {
+			return -1;
+		}
+		return 1;
 	};
 
 	const editColumn = {
