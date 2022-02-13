@@ -19,7 +19,9 @@
 			};
 		}
 
-		return {};
+		return {
+			fallthrough: true,
+		};
 	};
 </script>
 
