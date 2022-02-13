@@ -10,6 +10,9 @@ export const defaultForm: Omit<PropertyData, 'id' | 'createdAt' | 'updatedAt'> =
 	};
 
 export const formSchema = z.object({
+	id: z.undefined(),
+	createdAt: z.undefined(),
+	updatedAt: z.undefined(),
 	area: z.string().min(1, { message: 'Required' }),
 	block: z.string().min(1, { message: 'Required' }),
 	street: z.string().min(1, { message: 'Required' }),

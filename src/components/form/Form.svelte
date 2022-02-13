@@ -34,7 +34,9 @@
 
 	const { form, errors, isSubmitting } = createForm({
 		extend: [validator, svelteReporter],
-		validateSchema: formSchema || z.object({}),
+		validateSchema:
+			formSchema.omit({ id: true, createdAt: true, updatedAt: true }) ||
+			z.object({}),
 		onSubmit: async (values) => {
 			let { id: _id, createdAt, updatedAt, ...rest } = values;
 			if (transformer) {
@@ -69,7 +71,6 @@
 	<title>{getTitle()}</title>
 </svelte:head>
 
-{getSubmitUrl()}
 <div class="mx-auto mt-8 h-full max-w-xl">
 	<form
 		use:form

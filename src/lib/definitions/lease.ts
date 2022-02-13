@@ -27,6 +27,9 @@ export const transformer = (data: WithDateAsString<LeaseData>): LeaseData => {
 
 export const formSchema = z
 	.object({
+		id: z.undefined(),
+		createdAt: z.undefined(),
+		updatedAt: z.undefined(),
 		// validate that start_date is an iso string
 		startDate: z.string().refine((val) => Date.parse(val), {
 			message: 'Start date must be an ISO string',

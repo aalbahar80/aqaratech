@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import type { UnitData } from './select';
 
 export const defaultForm: Omit<UnitData, 'id' | 'createdAt' | 'updatedAt'> = {
@@ -9,6 +10,10 @@ export const defaultForm: Omit<UnitData, 'id' | 'createdAt' | 'updatedAt'> = {
 	floor: null,
 };
 
-export const validation = false;
+export const formSchema = z.object({
+	id: z.undefined(),
+	createdAt: z.undefined(),
+	updatedAt: z.undefined(),
+});
 
-export default { defaultForm };
+export default { formSchema, defaultForm };

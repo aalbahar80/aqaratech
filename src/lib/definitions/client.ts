@@ -9,6 +9,9 @@ export const defaultForm: Omit<ClientData, 'id' | 'createdAt' | 'updatedAt'> = {
 	civilid: null,
 };
 export const formSchema = z.object({
+	id: z.undefined(),
+	createdAt: z.undefined(),
+	updatedAt: z.undefined(),
 	firstName: z.string().min(1, { message: 'Required' }),
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
