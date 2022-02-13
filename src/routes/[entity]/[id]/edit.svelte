@@ -3,6 +3,7 @@
 	import FormTWF from '$components/form/FormTWF.svelte';
 	import defs, { type EntityDefinitions } from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
+
 	export const load: Load = async ({ fetch, params }) => {
 		const { entity, id } = params;
 		const res = await fetch(`/${entity}/${id}.json`);
