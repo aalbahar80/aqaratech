@@ -10,7 +10,7 @@
 
 	const handlePageChange = (newPageIndex: number) => {
 		const url = getTableUrl($page.url, { p: newPageIndex.toString() });
-		goto(url);
+		goto(url, { noscroll: true });
 	};
 
 	const getCurrentPage = () => {
