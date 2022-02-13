@@ -8,21 +8,16 @@
 	export let start: number = 1;
 	export let end: number = 12;
 
-	const handlePageChange = (newPageIndex: number) => {
-		const url = getTableUrl($page.url, { p: newPageIndex.toString() });
-		goto(url, { noscroll: true });
+	const newPageHref = (newPageIndex: number) => {
+		return getTableUrl($page.url, { p: newPageIndex.toString() });
 	};
 
-	const getCurrentPage = () => {
-		return Number($page.url.searchParams.get('p')) || 1;
-	};
-
-	const nextPage = () => {
-		handlePageChange(getCurrentPage() + 1);
-	};
-	const previousPage = () => {
-		handlePageChange(getCurrentPage() - 1);
-	};
+	$: nextPageHref = newPageHref(
+		(Number($page.url.searchParams.get('p')) || 1) + 1,
+	);
+	$: prevPageHref = newPageHref(
+		(Number($page.url.searchParams.get('p')) || 1) - 1,
+	);
 </script>
 
 <div
@@ -56,13 +51,15 @@
 				class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
 				aria-label="Pagination"
 			>
-				<button
+				<a
 					class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
-					on:click={previousPage}
+					href={prevPageHref}
+					sveltekit:noscroll
+					rel="prev"
 				>
 					<span class="sr-only">Previous</span>
 					<Icon src={ChevronLeft} class="h-5 w-5" aria-hidden="true" />
-				</button>
+				</a>
 				<!-- {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */} -->
 				<a
 					href="#"
@@ -106,13 +103,15 @@
 				>
 					10
 				</a>
-				<button
+				<a
 					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
-					on:click={nextPage}
+					href={nextPageHref}
+					sveltekit:noscroll
+					rel="next"
 				>
 					<span class="sr-only">Next</span>
 					<Icon src={ChevronRight} class="h-5 w-5" aria-hidden="true" />
-				</button>
+				</a>
 			</nav>
 		</div>
 	</div>
