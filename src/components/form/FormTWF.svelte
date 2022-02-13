@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { addToast } from '$lib/stores/toast';
 	import { svelteReporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { createForm } from 'felte';
 	import isEmpty from 'just-is-empty';
+	import startCase from 'lodash-es/startCase.js';
 	import { z } from 'zod';
 	import TWInput from './TWInput.svelte';
-	import startCase from 'lodash-es/startCase.js';
-	import { goto } from '$app/navigation';
-	import { addToast } from '$lib/stores/toast';
 
 	export let formData: Record<string, any>;
 	export let formSchema: any = undefined;
@@ -25,10 +25,6 @@
 		return url;
 	};
 
-	const getFormType = () => {
-		return $page.url.pathname.split('/').slice(-1)[0];
-	};
-
 	const getTitle = () =>
 		startCase(
 			`${$page.url.pathname.split('/').slice(-1)[0]} ${$page.params.entity}`,
@@ -36,7 +32,7 @@
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
-	const { form, errors, isSubmitting, reset } = createForm({
+	const { form, errors, isSubmitting } = createForm({
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
@@ -58,8 +54,7 @@
 						title: 'Success',
 					},
 				});
-				// goto(`/${$page.params.entity}/${data.id}`);
-				// reset();
+				await goto(`/${$page.params.entity}/${data.id}`);
 			} catch (e) {
 				console.error(e);
 			}
