@@ -11,13 +11,6 @@
 
 	let modifier: number = 1;
 
-	beforeNavigate(({ from, to }) => {
-		const oldPage = Number(from.searchParams.get('p'));
-		const newPage = Number(to?.searchParams.get('p'));
-		const result = setModifier(oldPage, newPage);
-		modifier = result;
-	});
-
 	const setModifier = (from: number, to: number) => {
 		if (from < to) {
 			return 1;
@@ -27,6 +20,13 @@
 		}
 		return 1;
 	};
+
+	beforeNavigate(({ from, to }) => {
+		const oldPage = Number(from.searchParams.get('p'));
+		const newPage = Number(to?.searchParams.get('p'));
+		const result = setModifier(oldPage, newPage);
+		modifier = result;
+	});
 
 	const editColumn = {
 		key: 'edit',
