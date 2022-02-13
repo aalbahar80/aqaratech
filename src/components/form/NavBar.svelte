@@ -124,9 +124,9 @@
 							class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 						>
 							{#each profileNavigation as navItem (navItem.name)}
-								<MenuItem let:active>
+								<MenuItem>
 									<a
-										href="#"
+										href={navItem.href}
 										class={buildClass(
 											isActive(navItem.href) ? 'bg-gray-100' : '',
 											'block px-4 py-2 text-sm text-gray-700',
