@@ -12,9 +12,25 @@
 </script>
 
 <script lang="ts">
+	import DeleteModalTw from '$components/toast/DeleteModalTW.svelte';
+
 	export let data: any;
+
+	let isOpen = false;
 </script>
 
 <pre>
   {JSON.stringify(data)}
 </pre>
+
+<button
+	type="button"
+	class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
+	on:click={() => {
+		isOpen = true;
+	}}
+>
+	Delete account
+</button>
+
+<DeleteModalTw bind:isOpen />
