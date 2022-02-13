@@ -1,12 +1,9 @@
 import prisma from '$lib/config/prisma';
 import { unitData } from '$lib/definitions/select';
-import type { Prisma } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const patch: RequestHandler = async (event) => {
-	type Updated = Prisma.UnitUpdateArgs['data'];
-	const data: Updated = await event.request.json();
-	console.log({ data }, 'index.json.ts ~ 12');
+	const data = await event.request.json();
 
 	try {
 		const updated = await prisma.unit.update({

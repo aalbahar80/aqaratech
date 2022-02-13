@@ -6,7 +6,7 @@ import type { RequestHandler } from '@sveltejs/kit/types/endpoint';
 
 export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 	const {
-		options: { search, skip, sortDir, sortKey },
+		options: { skip, sortDir, sortKey },
 	} = parseParams(url);
 
 	const data = await prisma.unit.findMany({
@@ -24,8 +24,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 };
 
 export const post: RequestHandler = async (event) => {
-	type Created = Omit<Prisma.UnitCreateArgs['data'], 'id'>;
-	const data: Created = await event.request.json();
+	const data = await event.request.json();
 
 	try {
 		const created = await prisma.unit.create({
