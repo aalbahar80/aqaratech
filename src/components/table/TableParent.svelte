@@ -2,8 +2,7 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
-	import { isEqual, isMatch } from 'lodash-es';
-	import startCase from 'lodash-es/startCase.js';
+	import { columns } from '$lib/stores/columns';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
@@ -21,13 +20,10 @@
 
 	const setModifier = (from: number, to: number) => {
 		if (from < to) {
-			console.log('next');
 			return 1;
 		} else if (from > to) {
-			console.log('prev');
 			return -1;
 		} else {
-			console.log('same');
 			return 1;
 		}
 	};
@@ -40,74 +36,41 @@
 	export let rows: { id: string; [key: string]: unknown }[];
 
 	// create a new array with the edit column
-	// let newRows = [];
-	$: console.log({ rows });
 	$: newRows = rows.map((row) => ({
 		edit: `${row.id}/edit`,
 		...row,
 	}));
 
-	// prefix with $:
-	$: headers = Object.keys(rows[0]).map((key) => ({
-		key,
-		label: startCase(key),
-		visible: true,
-	}));
-	type Head = {
-		key: string;
-		label: string;
-		visible: boolean;
-	};
-	const setHeadVisibility = (newHeads: Head[], oldHeads: Head[]): Head[] => {
-		if (oldHeads.length === 0) {
-			console.log('oldHeads is empty');
-			return newHeads;
-		}
-		// check if the head keys are identical
-		const isIdentical = isEqual(
-			oldHeads.map((head) => head.key),
-			newHeads.map((head) => head.key),
-		);
-		if (isIdentical) {
-			console.log('header keys are identical');
-			return oldHeads;
-		}
-		console.log('header keys are different');
-		return newHeads;
-	};
-	let heads: Head[] = [];
-	$: heads = setHeadVisibility(headers, heads);
-	$: console.log({ heads }, 'TableParent.svelte ~ 80');
-	const toggle = (key: string, visibile: boolean) => {
-		heads = heads.map((header) => {
-			if (header.key === key) {
-				header.visible = visibile;
-			}
-			return header;
-		});
-	};
+	$: columns.newTable(rows);
 </script>
 
-{#each heads as header}
+{#each $columns as header}
 	<label>
 		<input
 			id={header.key}
 			type="checkbox"
 			checked={header.visible}
 			on:change={(e) => {
-				toggle(e.currentTarget.id, e.currentTarget.checked);
+				columns.toggle(e.currentTarget.id, e.currentTarget.checked);
 			}}
 		/>
 		{header.label}
 	</label>
 {/each}
+
+{#each $columns as col}
+	<p>
+		{JSON.stringify(col)}
+	</p>
+{/each}
+
 <div
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
 	<TableTW>
 		<svelte:fragment slot="headerRowC">
-			{#each heads as header (header.key)}
+			{#each $columns as header (header.key)}
 				{#if header.visible}
 					<th scope="col" class="table__header">
 						{header.label}
@@ -127,7 +90,7 @@
 							class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 						>
 							{#each Object.entries(row) as [key, value] (key + value)}
-								{#if key !== 'edit' && heads.find((header) => header.key === key)?.visible}
+								{#if key !== 'edit' && $columns.find((header) => header.key === key)?.visible}
 									<td in:flash|local={{ duration: 1000 }} class="table__cell">
 										{value}
 									</td>
