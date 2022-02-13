@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { getTableUrl } from '$lib/utils/table-utils';
+	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let start: number = 1;
 	export let end: number = 12;
 
-	const newPageHref = (newPageIndex: number) => {
-		return getTableUrl($page.url, { p: newPageIndex.toString() });
-	};
+	const newPageHref = (newPageIndex: number) =>
+		getTableUrl($page.url, { p: newPageIndex.toString() });
 
 	$: nextPageHref = newPageHref(
 		(Number($page.url.searchParams.get('p')) || 1) + 1,
