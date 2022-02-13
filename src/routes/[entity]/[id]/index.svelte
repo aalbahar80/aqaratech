@@ -12,7 +12,7 @@
 </script>
 
 <script lang="ts">
-	import DeleteModalTw from '$components/toast/DeleteModalTW.svelte';
+	import ModalDelete from '$components/toast/ModalDelete.svelte';
 
 	export let data: any;
 
@@ -33,4 +33,4 @@
 	Delete account
 </button>
 
-<DeleteModalTw bind:isOpen />
+<ModalDelete bind:isOpen />
