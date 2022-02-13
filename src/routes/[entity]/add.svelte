@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
-	import FormTWF from '$components/form/FormTWF.svelte';
+	import Form from '$components/form/Form.svelte';
 	import defs, { type EntityDefinitions } from '$lib/definitions/index';
 </script>
 
@@ -9,7 +9,7 @@
 		defs?.[$page.params.entity as keyof typeof defs];
 </script>
 
-<FormTWF
+<Form
 	formData={entityDefs?.defaultForm}
 	formSchema={entityDefs?.formSchema}
 	transformer={entityDefs?.transformer}
