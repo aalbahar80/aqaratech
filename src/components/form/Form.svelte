@@ -13,6 +13,7 @@
 	export let formData: Record<string, any>;
 	export let formSchema: AnyZodObject;
 	export let transformer: any = undefined;
+	export let refiner: any = undefined;
 
 	const getSubmitUrl = () => {
 		const { entity, id } = $page.params;
@@ -35,11 +36,19 @@
 	const { form, errors, isSubmitting } = createForm({
 		transform: transformer,
 		extend: [validator, svelteReporter],
-		validateSchema: formSchema.omit({
-			id: true,
-			createdAt: true,
-			updatedAt: true,
-		}),
+		validateSchema: refiner
+			? refiner(
+					formSchema.omit({
+						id: true,
+						createdAt: true,
+						updatedAt: true,
+					}),
+			  )
+			: formSchema.omit({
+					id: true,
+					createdAt: true,
+					updatedAt: true,
+			  }),
 		onSubmit: async (values) => {
 			const { id: _id, createdAt, updatedAt, ...rest } = values;
 			const url = getSubmitUrl();

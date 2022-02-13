@@ -24,4 +24,5 @@
 	{formData}
 	formSchema={entityDefs.formSchema}
 	transformer={entityDefs.transformer}
+	refiner={entityDefs.refiner}
 />

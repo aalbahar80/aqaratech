@@ -8,6 +8,7 @@ export type EntityDefinitions = {
 	defaultForm: any;
 	formSchema?: any;
 	transformer?: any;
+	refiner?: any;
 };
 
 export default {

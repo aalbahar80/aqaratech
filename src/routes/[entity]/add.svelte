@@ -13,4 +13,5 @@
 	formData={entityDefs?.defaultForm}
 	formSchema={entityDefs?.formSchema}
 	transformer={entityDefs?.transformer}
+	refiner={entityDefs?.refiner}
 />
