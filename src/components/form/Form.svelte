@@ -36,7 +36,7 @@
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema || z.object({}),
 		onSubmit: async (values) => {
-			let { id: _id, ...rest } = values;
+			let { id: _id, createdAt, updatedAt, ...rest } = values;
 			if (transformer) {
 				rest = transformer(rest);
 			}
