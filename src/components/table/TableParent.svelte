@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
 	import { columns } from '$lib/stores/columns';
+	import startCase from 'lodash-es/startCase';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
@@ -28,20 +29,17 @@
 		modifier = result;
 	});
 
-	const editColumn = {
-		key: 'edit',
-		label: 'edit',
-		visible: true,
-	};
 	export let rows: { id: string; [key: string]: unknown }[];
 
-	// create a new array with the edit column
+	// add view & edit to each row
 	$: newRows = rows.map((row) => ({
-		edit: `${row.id}/edit`,
 		...row,
+		view: `./${row.id}`,
+		edit: `./${row.id}/edit`,
 	}));
 
-	$: columns.newTable(rows);
+	// columns store should know whenever data changes
+	$: columns.newTable(newRows);
 </script>
 
 {#each $columns as header}
@@ -72,14 +70,17 @@
 		<svelte:fragment slot="headerRowC">
 			{#each $columns as header (header.key)}
 				{#if header.visible}
-					<th scope="col" class="table__header">
-						{header.label}
-					</th>
+					{#if header.key === 'edit' || header.key === 'view'}
+						<th scope="col" class="relative px-6 py-3">
+							<span class="sr-only">Edit</span>
+						</th>
+					{:else}
+						<th scope="col" class="table__header">
+							{header.label}
+						</th>
+					{/if}
 				{/if}
 			{/each}
-			<th scope="col" class="relative px-6 py-3">
-				<span class="sr-only">Edit</span>
-			</th>
 		</svelte:fragment>
 		<svelte:fragment slot="rowsC">
 			{#key newRows[0].id}
@@ -90,22 +91,25 @@
 							class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 						>
 							{#each Object.entries(row) as [key, value] (key + value)}
-								{#if key !== 'edit' && $columns.find((header) => header.key === key)?.visible}
-									<td in:flash|local={{ duration: 1000 }} class="table__cell">
-										{value}
-									</td>
+								{#if $columns.find((header) => header.key === key)?.visible}
+									{#if key === 'edit' || key === 'view'}
+										<td
+											class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
+										>
+											<a
+												href={`${$page.url.pathname}/${value}`}
+												class="text-indigo-600 hover:text-indigo-900"
+											>
+												{startCase(key)}
+											</a>
+										</td>
+									{:else}
+										<td in:flash|local={{ duration: 1000 }} class="table__cell">
+											{value}
+										</td>
+									{/if}
 								{/if}
 							{/each}
-							<td
-								class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
-							>
-								<a
-									href={`${$page.url.pathname}/${row.id}/edit`}
-									class="text-indigo-600 hover:text-indigo-900"
-								>
-									Edit
-								</a>
-							</td>
 						</tr>
 					{/each}
 				</tbody>
