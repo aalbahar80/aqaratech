@@ -56,12 +56,6 @@
 	</label>
 {/each}
 
-{#each $columns as col}
-	<p>
-		{JSON.stringify(col)}
-	</p>
-{/each}
-
 <div
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
