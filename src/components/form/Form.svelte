@@ -7,11 +7,11 @@
 	import { createForm } from 'felte';
 	import isEmpty from 'just-is-empty';
 	import startCase from 'lodash-es/startCase.js';
-	import { z } from 'zod';
+	import type { AnyZodObject } from 'zod';
 	import Input from './Input.svelte';
 
 	export let formData: Record<string, any>;
-	export let formSchema: any = undefined;
+	export let formSchema: AnyZodObject;
 	export let transformer: any = undefined;
 
 	const getSubmitUrl = () => {
@@ -34,9 +34,11 @@
 
 	const { form, errors, isSubmitting } = createForm({
 		extend: [validator, svelteReporter],
-		validateSchema:
-			formSchema.omit({ id: true, createdAt: true, updatedAt: true }) ||
-			z.object({}),
+		validateSchema: formSchema.omit({
+			id: true,
+			createdAt: true,
+			updatedAt: true,
+		}),
 		onSubmit: async (values) => {
 			let { id: _id, createdAt, updatedAt, ...rest } = values;
 			if (transformer) {
