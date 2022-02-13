@@ -25,7 +25,6 @@
     "@faker-js/faker": "^6.0.0-alpha.5",
     "@felte/reporter-svelte": "^0.3.19",
     "@felte/validator-zod": "^0.3.6",
-    "@leveluptuts/svelte-toy": "^0.0.18",
     "@pinojs/json-colorizer": "^3.0.0",
     "@prisma/client": "^3.9.2",
     "@rgossiaux/svelte-headlessui": "^1.0.0-beta.9",
