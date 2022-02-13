@@ -1,4 +1,9 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
+	import { page } from '$app/stores';
+	import { addToast } from '$lib/stores/toast';
+
 	import {
 		Dialog,
 		DialogOverlay,
@@ -11,8 +16,43 @@
 
 	export let isOpen: boolean;
 
+	let loading = false;
+
 	const close = () => {
 		isOpen = false;
+	};
+
+	const handleDelete = async () => {
+		const url = `${$page.url.pathname}.json`;
+		loading = true;
+		try {
+			const res = await fetch(url, {
+				method: 'DELETE',
+			});
+			const data = await res.json();
+			console.info(data);
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Success',
+				},
+			});
+			loading = false;
+			close();
+			await goto(`/${$page.params.entity}`);
+		} catch (e) {
+			// TODO more specific error message
+			// TODO only expose id to user
+			loading = false;
+			addToast({
+				duration: 60000,
+				props: {
+					kind: 'error',
+					title: 'An error occured',
+				},
+			});
+			console.error(e);
+		}
 	};
 
 	let cancelButton: HTMLButtonElement;
@@ -42,7 +82,6 @@
 				/>
 			</TransitionChild>
 
-			<!-- {/* This element is to trick the browser into centering the modal contents. */} -->
 			<TransitionChild
 				as="div"
 				enter="ease-out duration-300"
@@ -52,6 +91,7 @@
 				leaveFrom="opacity-100 translate-y-0 sm:scale-100"
 				leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 			>
+				<!-- {/* This element is to trick the browser into centering the modal contents. */} -->
 				<span
 					class="hidden sm:inline-block sm:h-screen sm:align-middle"
 					aria-hidden="true"
@@ -93,9 +133,30 @@
 						<button
 							type="button"
 							class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={close}
+							on:click={handleDelete}
 						>
-							Deactivate
+							<svg
+								class:hidden={!loading}
+								class="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"
+								/>
+								<path
+									class="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+								/>
+							</svg>
+							Delete
 						</button>
 						<button
 							type="button"
