@@ -1,4 +1,3 @@
-import { Field } from '$components/form/Field';
 import { z } from 'zod';
 import type { TenantData } from './select';
 
@@ -25,64 +24,5 @@ export const formSchema = z.object({
 			message: 'Civil ID must contain only numbers',
 		}),
 });
-
-export const fieldList: Field[] = [
-	new Field({
-		fieldName: 'id',
-		title: 'ID',
-		editable: false,
-		searchType: 'number',
-		searchable: false,
-		visibileInTable: true,
-	}),
-	new Field({
-		fieldName: 'full_name',
-		title: 'Name',
-		editable: false,
-		visibileInTable: true,
-	}),
-	new Field({
-		fieldName: 'first_name',
-		title: 'First Name',
-		searchable: false,
-	}),
-	new Field({
-		fieldName: 'second_name',
-		title: 'Second Name',
-		searchable: false,
-	}),
-	new Field({
-		fieldName: 'third_name',
-		title: 'Third Name',
-		searchable: false,
-	}),
-	new Field({
-		fieldName: 'last_name',
-		title: 'Last Name',
-		searchable: false,
-	}),
-	new Field({
-		fieldName: 'email',
-		title: 'Email',
-		inputType: 'email',
-		visibileInTable: true,
-	}),
-	new Field({
-		fieldName: 'phone',
-		title: 'Phone',
-		inputType: 'tel',
-		visibileInTable: true,
-	}),
-	new Field({
-		fieldName: 'dob',
-		title: 'Date of Birth',
-		inputType: 'date',
-		searchable: false,
-	}),
-	new Field({
-		fieldName: 'civilid',
-		title: 'Civil ID',
-	}),
-];
 
 export default { formSchema, defaultForm };
