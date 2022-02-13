@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import type { Field } from '$components/form/Field';
 	import { constructFilter } from '$lib/utils/search-utils';
 
@@ -60,4 +60,4 @@
 	size="xl"
 	{items}
 	{...comboBoxProps}
-/>
+/> -->

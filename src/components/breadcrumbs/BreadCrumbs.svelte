@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { page } from '$app/stores';
 
 	interface CrumbData {
@@ -61,4 +61,4 @@
 			</BreadcrumbItem>
 		{/if}
 	{/each}
-</Breadcrumb>
+</Breadcrumb> -->
