@@ -4,7 +4,7 @@
 	import startCase from 'lodash-es/startCase.js';
 
 	export let name: string = '';
-	export let value: string = '';
+	export let value: string | Date = '';
 	export let invalid = false;
 	export let invalidText: string = '';
 
@@ -15,7 +15,11 @@
 		case 'endDate':
 		case 'startDate':
 			type = 'date';
-			value = value?.substring(0, 10);
+			if (value instanceof Date) {
+				// eslint-disable-next-line prefer-destructuring
+				value = value.toISOString().split('T')[0];
+			}
+
 			break;
 		case 'monthlyRent':
 		case 'deposit':
