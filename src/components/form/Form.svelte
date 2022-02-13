@@ -33,6 +33,7 @@
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	const { form, errors, isSubmitting } = createForm({
+		transform: transformer,
 		extend: [validator, svelteReporter],
 		validateSchema: formSchema.omit({
 			id: true,
@@ -40,25 +41,22 @@
 			updatedAt: true,
 		}),
 		onSubmit: async (values) => {
-			let { id: _id, createdAt, updatedAt, ...rest } = values;
-			if (transformer) {
-				rest = transformer(rest);
-			}
+			const { id: _id, createdAt, updatedAt, ...rest } = values;
 			const url = getSubmitUrl();
 			try {
 				const res = await fetch(url, {
 					method: 'POST',
 					body: JSON.stringify(rest),
 				});
-				const data = await res.json();
-				console.info(data);
+				const body = await res.json();
+				console.info(body);
 				addToast({
 					props: {
 						kind: 'success',
 						title: 'Success',
 					},
 				});
-				await goto(`/${$page.params.entity}/${data.id}`);
+				await goto(`/${$page.params.entity}/${body.id}`);
 			} catch (e) {
 				console.error(e);
 			}

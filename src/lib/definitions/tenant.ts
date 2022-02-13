@@ -28,4 +28,9 @@ export const formSchema = z.object({
 		}),
 });
 
-export default { formSchema, defaultForm };
+const transformer = (data: any) => ({
+	...data,
+	dob: data.dob ? new Date(data.dob) : null,
+});
+
+export default { formSchema, defaultForm, transformer };
