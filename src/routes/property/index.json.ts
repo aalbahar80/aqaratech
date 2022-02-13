@@ -33,8 +33,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 };
 
 export const post: RequestHandler = async (event) => {
-	type Created = Omit<Prisma.PropertyCreateArgs['data'], 'id'>;
-	const data: Created = await event.request.json();
+	const data = await event.request.json();
 
 	try {
 		formSchema.parse(data);
