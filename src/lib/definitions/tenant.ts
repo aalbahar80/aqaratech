@@ -28,7 +28,7 @@ export const formSchema = z.object({
 		}),
 });
 
-const transformer = (data: any) => ({
+const transformer = (data: TenantData): TenantData => ({
 	...data,
 	dob: data.dob ? new Date(data.dob) : null,
 });
