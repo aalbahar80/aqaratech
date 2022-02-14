@@ -3,4 +3,5 @@
 	"files.exclude": {
 		"**/node_modules/": true
 	},
+	"html.autoCreateQuotes": false,
 }
