@@ -30,7 +30,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		select: tenantData.select,
 	});
 
-	logger.debug({ data }, 'index.json.ts ~ 31');
+	logger.debug(data[0], 'index.json.ts ~ 31');
 	return {
 		body: {
 			rows: data,

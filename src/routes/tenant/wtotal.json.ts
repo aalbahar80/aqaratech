@@ -32,7 +32,7 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 	});
 	const [data, total] = await prisma.$transaction([dataQuery, totalQuery]);
 
-	logger.debug({ data }, 'index.json.ts ~ 31');
+	logger.debug(data[0], 'index.json.ts ~ 31');
 	logger.debug({ total }, 'index.json.ts ~ 33');
 	return {
 		body: {
