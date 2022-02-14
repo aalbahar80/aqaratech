@@ -89,6 +89,6 @@ module.exports = {
         // 'typescript-eslint/naming-convention': { 'ignoreDestructuring': true },
         '@typescript-eslint/naming-convention': 'off',
         'no-underscore-dangle': 'off',
-        'prettier/prettier': 'warn',
+        // 'prettier/prettier': 'off',
     },
 };
