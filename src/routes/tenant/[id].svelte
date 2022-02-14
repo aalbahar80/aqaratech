@@ -6,15 +6,15 @@
 		MenuItems,
 		Popover,
 		PopoverButton,
-		PopoverGroup,
-		PopoverOverlay,
 		PopoverPanel,
 		Transition,
-		TransitionChild,
 	} from '@rgossiaux/svelte-headlessui';
 	// Search is solid icon
 	import { Search, Bell, Menu as MenuI, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import TrxColumn from '$components/TrxColumn.svelte';
+	import LeaseCard from '$components/LeaseCard.svelte';
+	import Descripiton from '$components/Descripiton.svelte';
 
 	const user = {
 		name: 'Chelsea Hagon',
@@ -44,7 +44,7 @@
 </script>
 
 <div class="min-h-screen bg-gray-100">
-	<Popover
+	<!-- <Popover
 		as="header"
 		class={classes(
 			open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
@@ -81,6 +81,7 @@
 								>
 									<Icon
 										src={Search}
+										theme="solid"
 										class="h-5 w-5 text-gray-400"
 										aria-hidden="true"
 									/>
@@ -99,7 +100,7 @@
 				<div
 					class="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden"
 				>
-					<!-- {/* Mobile menu button */} -->
+					{/* Mobile menu button */}
 					<PopoverButton
 						class="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
 					>
@@ -122,7 +123,7 @@
 						<Icon src={Bell} class="h-6 w-6" aria-hidden="true" />
 					</a>
 
-					<!-- {/* Profile dropdown */} -->
+					{/* Profile dropdown */}
 					<Menu as="div" class="relative ml-5 flex-shrink-0">
 						<div>
 							<MenuButton
@@ -133,7 +134,7 @@
 							</MenuButton>
 						</div>
 						<Transition
-							as={Fragment}
+							as="div"
 							enter="transition ease-out duration-100"
 							enterFrom="transform opacity-0 scale-95"
 							enterTo="transform opacity-100 scale-100"
@@ -145,7 +146,7 @@
 								class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 							>
 								{#each userNavigation as item}
-									<!-- content here -->
+									content here
 									<MenuItem let:active key={item.name}>
 										<a
 											href={item.href}
@@ -202,7 +203,7 @@
 						class="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 					>
 						<span class="sr-only">View notifications</span>
-						<BellIcon class="h-6 w-6" aria-hidden="true" />
+						<Icon src={Bell} class="h-6 w-6" aria-hidden="true" />
 					</button>
 				</div>
 				<div class="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
@@ -218,7 +219,7 @@
 				</div>
 			</div>
 		</PopoverPanel>
-	</Popover>
+	</Popover> -->
 
 	<div class="py-6">
 		<div
@@ -226,12 +227,17 @@
 		>
 			<div class="hidden lg:col-span-3 lg:block xl:col-span-2">
 				<nav aria-label="Sidebar" class="sticky top-6 divide-y divide-gray-300">
-					<!-- {/* Your content */} -->
+					<Descripiton />
 				</nav>
 			</div>
-			<!-- <main class="lg:col-span-9 xl:col-span-6">{/* Your content */}</main> -->
+			<main class="lg:col-span-9 xl:col-span-6">
+				<TrxColumn />
+				<!-- <Descripiton /> -->
+			</main>
 			<aside class="hidden xl:col-span-4 xl:block">
-				<!-- <div class="sticky top-6 space-y-4">{/* Your content */}</div> -->
+				<div class="sticky top-6 space-y-4">
+					<LeaseCard />
+				</div>
 			</aside>
 		</div>
 	</div>
