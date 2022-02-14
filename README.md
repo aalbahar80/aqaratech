@@ -184,26 +184,19 @@ main()
 Initial prisma implementation taken from:
 https://github.com/mikenikles/sveltekit-prisma
 
-Prisma + Planetscale workflow
+# Prisma + Planetscale workflow
 
 Create empty db using pscale
 
 ```bash
-pscale db create prisma-planetscale --region eu-west
-# At this point prisma folder only has a single file prisma.schema
+# To connect to db from terminal.
+pscale connect <db-name>
+```
 
-# Create the tables on the new planetscale db
-npx prisma db push
-
-# make changes to prisma.schema, then run again
-npx prisma db push
-# npx prisma generate?
-npx prisma db seed
-
-# To connect to db from terminal
+```bash
+# for shell access
 pscale shell prisma-planetscale
 ## Some example mysql commands
-
 # lists all tables
 show tables;
 
@@ -212,24 +205,28 @@ show create table Tenant;
 
 # shows the rows of a table
 select * from Tenant;
+```
 
+```bash
 ### WORKFLOW ###
 # create new development db branch
+pscale branch create <db-name> <new-branch-name>
 # it inherits schema only not data
-
-# connect to it
-pscale connect prisma-planetscale remove-is-ok-tenant
-## this will return a connection string u can use in schema.prisma (or .env)
-
-# seed it with a script if u want, or visually in Prisma Studio
-
-# modify the schema.prisma with your changes, then push to the branch
-npx prisma generate # refresh the local prisma client
+# modify the schema.prisma with your changes
+pscale connect <db-name> <branch-name>
 npx prisma db push # push schema changes to branch
+# check the diff
+pscale branch diff <db-name> <branch-name>
+pscale branch diff <db-name> <branch-name> --web
+
+# optionally seed and test new branch
 npx prisma db seed # runs the seed script against the branch
 
-# check the diff
-pscale branch diff prisma-planetscale remove-is-ok-tenant
-
+# create a deploy request. Confirm it. Then delete branch.
+# seed it with a script if u want, or visually in Prisma Studio
 # create a deploy request on app.planetscale.com. Planetscale will check if changes are deployable. It will also visually show the diff. If all is well, confirm the deployment to go ahead. Delete the branch. At this point, the main branch has it's original data intact AND it now has the schema changes applied.
+```
+
+```bash
+npx prisma generate # refresh the local prisma client
 ```
