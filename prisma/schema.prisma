@@ -44,6 +44,11 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id])
   property           Property?         @relation(fields: [propertyId], references: [id])
   unit               Unit?             @relation(fields: [unitId], references: [id])
+
+  @@index([unitId])
+  @@index([propertyId])
+  @@index([clientId])
+  @@index([maintenanceOrderId])
 }
 
 model Lease {
@@ -63,6 +68,7 @@ model Lease {
   transactions Transaction[]
 
   @@index([tenantId])
+  @@index([unitId])
 }
 
 model Listing {
@@ -76,6 +82,8 @@ model Listing {
   title        String?
   description  String?   @db.Text
   unit         Unit?     @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([unitId])
 }
 
 model MaintenanceOrder {
@@ -95,6 +103,11 @@ model MaintenanceOrder {
   tenant      Tenant?   @relation(fields: [tenantId], references: [id])
   unit        Unit?     @relation(fields: [unitId], references: [id])
   expenses    Expense[]
+
+  @@index([tenantId])
+  @@index([unitId])
+  @@index([propertyId])
+  @@index([clientId])
 }
 
 model Property {
@@ -111,6 +124,8 @@ model Property {
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
+
+  @@index([clientId])
 }
 
 model Tenant {
@@ -140,6 +155,8 @@ model Transaction {
   receiptUrl String?
   leaseId    String?
   lease      Lease?    @relation(fields: [leaseId], references: [id])
+
+  @@index([leaseId])
 }
 
 model Unit {
@@ -160,4 +177,6 @@ model Unit {
   leases            Lease[]
   listings          Listing[]
   maintenanceOrders MaintenanceOrder[]
+
+  @@index([propertyId])
 }
