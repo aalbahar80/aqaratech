@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import TableTw from '$components/table/TableTW.svelte';
+	import Table from '$components/table/Table.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { omit } from 'lodash-es';
 
@@ -24,7 +24,7 @@
 
 <pre>{JSON.stringify(trx2)}</pre>
 <div class="mx-auto max-w-lg">
-	<TableTw rows={trx2} />
+	<Table rows={trx2} />
 </div>
 <!-- <div class="min-h-screen bg-gray-100">
 	<div class="py-6">

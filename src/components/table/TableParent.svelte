@@ -2,7 +2,7 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Pagination from './Pagination.svelte';
-	import TableTW from './TableTW.svelte';
+	import Table from './Table.svelte';
 
 	let modifier: number = 1;
 
@@ -37,7 +37,7 @@
 	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
 >
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
-	<TableTW rows={newRows} {modifier} />
+	<Table rows={newRows} {modifier} />
 	<Pagination />
 </div>
 
