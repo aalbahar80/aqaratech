@@ -24,37 +24,37 @@
 // ########
 // https://github.com/prisma/prisma/discussions/9027#discussioncomment-1585810
 
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
+// /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+// /* eslint-disable no-var */
+// /* eslint-disable vars-on-top */
 
-import pkg, { PrismaClient } from '@prisma/client';
-import { dev } from '$app/env';
+// import pkg, { PrismaClient } from '@prisma/client';
+// import { dev } from '$app/env';
 
-declare global {
-	var _prisma: PrismaClient;
-}
+// declare global {
+// 	var _prisma: PrismaClient;
+// }
 
-let prisma;
-if (dev) {
-	if (!global._prisma) {
-		global._prisma = new PrismaClient();
-	}
-	prisma = global._prisma;
-} else {
-	const { PrismaClient: PrismaClientProd } = pkg;
-	prisma = new PrismaClientProd();
-}
+// let prisma;
+// if (dev) {
+// 	if (!global._prisma) {
+// 		global._prisma = new PrismaClient();
+// 	}
+// 	prisma = global._prisma;
+// } else {
+// 	const { PrismaClient: PrismaClientProd } = pkg;
+// 	prisma = new PrismaClientProd();
+// }
 
-export default prisma as PrismaClient; // type assertion for shim
+// export default prisma as PrismaClient; // type assertion for shim
 
 // #########################
 // https://docs.planetscale.com/tutorials/prisma-quickstart
 
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-// const prisma = global.prisma || new PrismaClient();
+const prisma = global.prisma || new PrismaClient();
 
-// if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
-// export default prisma as PrismaClient;
+export default prisma as PrismaClient;
