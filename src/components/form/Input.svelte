@@ -14,6 +14,7 @@
 		case 'dob':
 		case 'endDate':
 		case 'startDate':
+		case 'dueDate':
 			type = 'date';
 			if (value instanceof Date) {
 				// 'Create' form gets a Date object

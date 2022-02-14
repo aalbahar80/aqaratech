@@ -3,6 +3,7 @@ import property from './property';
 import unit from './unit';
 import tenant from './tenant';
 import lease from './lease';
+import transaction from './transaction';
 
 export type EntityDefinitions = {
 	defaultForm: any;
@@ -17,4 +18,5 @@ export default {
 	unit,
 	lease,
 	tenant,
+	transaction,
 };

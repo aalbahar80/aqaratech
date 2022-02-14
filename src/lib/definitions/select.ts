@@ -81,6 +81,7 @@ export const transactionData = Prisma.validator<Prisma.TransactionArgs>()({
 		receiptUrl: true,
 		memo: true,
 		leaseId: true,
+		dueDate: true,
 		createdAt: true,
 		updatedAt: true,
 	},

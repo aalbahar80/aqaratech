@@ -10,6 +10,7 @@ export const defaultForm: Omit<
 	receiptUrl: null,
 	memo: null,
 	leaseId: null,
+	dueDate: new Date(),
 };
 
 export const formSchema = z.object({
