@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // import type { PrismaClient } from '@prisma/client';
 // import Prisma from '@prisma/client';
 
@@ -53,8 +54,19 @@
 
 import { PrismaClient } from '@prisma/client';
 
-const prisma = global.prisma || new PrismaClient();
+const prisma =
+	// @ts-ignore
+	global.prisma ||
+	new PrismaClient({
+		// log: [{ level: 'query', emit: 'event' }, 'info'],
+		// errorFormat: 'pretty',
+	});
 
+// @ts-ignore
 if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
+// @ts-ignore
+// prisma.$on('query', (e) => {
+// 	console.log(e);
+// });
 export default prisma as PrismaClient;
