@@ -69,3 +69,19 @@ export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 		updatedAt: true,
 	},
 });
+
+export type TransactionData = Prisma.TransactionGetPayload<
+	typeof transactionData
+>;
+export const transactionData = Prisma.validator<Prisma.TransactionArgs>()({
+	select: {
+		id: true,
+		isPaid: true,
+		amount: true,
+		receiptUrl: true,
+		memo: true,
+		leaseId: true,
+		createdAt: true,
+		updatedAt: true,
+	},
+});
