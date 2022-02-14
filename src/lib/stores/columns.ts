@@ -1,7 +1,7 @@
 import { isEqual, startCase } from 'lodash-es';
 import { get, writable, type Writable } from 'svelte/store';
 
-type Head = {
+export type Head = {
 	key: string;
 	label: string;
 	visible: boolean;
