@@ -11,6 +11,7 @@ export const defaultForm: Omit<TenantData, 'id' | 'createdAt' | 'updatedAt'> = {
 };
 
 export const formSchema = z.object({
+	// TODO replace z.undefined with z.never?
 	id: z.undefined(),
 	createdAt: z.undefined(),
 	updatedAt: z.undefined(),
