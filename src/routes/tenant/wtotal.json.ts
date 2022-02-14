@@ -12,7 +12,8 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 	} = parseParams(url);
 
 	logger.debug('starthere', 'index.json.ts ~ 14');
-	const data = await prisma.tenant.findMany({
+	const totalQuery = prisma.tenant.count();
+	const dataQuery = prisma.tenant.findMany({
 		take: 10,
 		skip,
 		orderBy: { [sortKey]: sortDir as Prisma.SortOrder },
@@ -29,10 +30,13 @@ export const get: RequestHandler<{ rows: any[] }> = async ({ url }) => {
 		},
 		select: tenantData.select,
 	});
+	const [data, total] = await prisma.$transaction([dataQuery, totalQuery]);
 
 	logger.debug({ data }, 'index.json.ts ~ 31');
+	logger.debug({ total }, 'index.json.ts ~ 33');
 	return {
 		body: {
+			total,
 			rows: data,
 		},
 	};
