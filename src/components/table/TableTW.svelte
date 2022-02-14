@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
 	import { columns } from '$lib/stores/columns';
-	import startCase from 'lodash-es/startCase';
+	import startCase from 'lodash-es/startCase'; // use .js for treeshaking?
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
