@@ -8,4 +8,6 @@
 	"editor.fontLigatures": true,
 	"editor.fontFamily": "iosevka",
 	"editor.fontSize": 16,
+	"diffEditor.codeLens": true,
+	"partialDiff.enableTelemetry": false,
 }
