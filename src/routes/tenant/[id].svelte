@@ -3,6 +3,9 @@
 	import { Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Load } from '@sveltejs/kit';
+	import format from 'date-fns/format';
+	import parseISO from 'date-fns/parseISO';
+	import type { Jsonify } from 'type-fest';
 
 	export const load: Load = async ({ fetch }) => {
 		const res = await fetch('/transaction.json');
@@ -10,74 +13,24 @@
 
 		return {
 			props: {
-				trx: data.rows,
+				transactions: data.rows,
 			},
 		};
 	};
 </script>
 
 <script lang="ts">
-	export let trx: TransactionData[];
-
-	const transactions = [
-		{
-			id: 1,
-			name: 'Payment to Molly Sanders',
-			href: '#',
-			amount: '$20,000',
-			currency: 'USD',
-			status: 'success',
-			date: 'July 11, 2020',
-			datetime: '2020-07-11',
-		},
-	];
-	// create 20 sample transactions
-	for (let i = 0; i < 20; i++) {
-		transactions.push({
-			id: i + 2,
-			name: 'Payment to Molly Sanders',
-			href: '#',
-			amount: '$20,000',
-			currency: 'USD',
-			status: 'success',
-			date: 'July 11, 2020',
-			datetime: '2020-07-11',
-		});
-	}
+	export let transactions: Jsonify<TransactionData[]>;
 
 	const statusStyles = {
-		success: 'bg-green-100 text-green-800',
-		processing: 'bg-yellow-100 text-yellow-800',
-		failed: 'bg-gray-100 text-gray-800',
+		true: 'bg-green-100 text-green-800',
+		false: 'bg-gray-100 text-gray-800',
 	};
 
 	function classes(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
 	}
 </script>
-
-<!-- <div class="min-h-screen bg-gray-100">
-	<div class="py-6">
-		<div
-			class="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8"
-		>
-			<div class="hidden lg:col-span-3 lg:block xl:col-span-2">
-				<nav aria-label="Sidebar" class="sticky top-6 divide-y divide-gray-300">
-					<Descripiton />
-				</nav>
-			</div>
-			<main class="lg:col-span-9 xl:col-span-6">
-				<TrxColumn />
-				<Descripiton />
-			</main>
-			<aside class="hidden xl:col-span-4 xl:block">
-				<div class="sticky top-6 space-y-4">
-					<LeaseCard />
-				</div>
-			</aside>
-		</div>
-	</div>
-</div> -->
 
 <div class="hidden sm:block">
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -118,7 +71,7 @@
 								>
 									<div class="flex">
 										<a
-											href={transaction.href}
+											href={`/transaction/${transaction.id}`}
 											class="group inline-flex space-x-2 truncate text-sm"
 										>
 											<Icon
@@ -130,7 +83,7 @@
 											<p
 												class="truncate text-gray-500 group-hover:text-gray-900"
 											>
-												{transaction.name}
+												{transaction.memo}
 											</p>
 										</a>
 									</div>
@@ -141,24 +94,28 @@
 									<span class="font-medium text-gray-900"
 										>{transaction.amount}
 									</span>
-									{transaction.currency}
+									{'KWD'}
 								</td>
 								<td
 									class="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
 								>
 									<span
 										class={classes(
-											statusStyles[transaction.status],
+											statusStyles[transaction?.isPaid ?? false],
 											'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
 										)}
 									>
-										{transaction.status}
+										{transaction.isPaid}
 									</span>
 								</td>
 								<td
 									class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 								>
-									<time dateTime={transaction.datetime}>{transaction.date}</time
+									<time dateTime={transaction.dueDate}
+										>{format(
+											parseISO(transaction.createdAt),
+											'MMM dd, yy',
+										)}</time
 									>
 								</td>
 							</tr>
@@ -197,3 +154,26 @@
 		</div>
 	</div>
 </div>
+
+<!-- <div class="min-h-screen bg-gray-100">
+	<div class="py-6">
+		<div
+			class="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8"
+		>
+			<div class="hidden lg:col-span-3 lg:block xl:col-span-2">
+				<nav aria-label="Sidebar" class="sticky top-6 divide-y divide-gray-300">
+					<Descripiton />
+				</nav>
+			</div>
+			<main class="lg:col-span-9 xl:col-span-6">
+				<TrxColumn />
+				<Descripiton />
+			</main>
+			<aside class="hidden xl:col-span-4 xl:block">
+				<div class="sticky top-6 space-y-4">
+					<LeaseCard />
+				</div>
+			</aside>
+		</div>
+	</div>
+</div> -->
