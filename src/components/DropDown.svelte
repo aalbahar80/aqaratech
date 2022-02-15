@@ -33,7 +33,7 @@
 			class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 			><div class="py-1">
 				<MenuItem let:active>
-					<button
+					<a
 						class="group flex items-center px-4 py-2 text-sm"
 						class:bg-gray-100={active}
 						class:text-gray-900={active}
@@ -45,7 +45,62 @@
 							aria-hidden="true"
 						/>
 						Edit
+					</a>
+				</MenuItem>
+				<MenuItem let:active as="div">
+					<button
+						class="group flex w-full items-center px-4 py-2 text-sm"
+						class:bg-gray-100={active}
+						class:text-gray-900={active}
+						class:text-gray-700={!active}
+					>
+						<Icon
+							src={PencilAlt}
+							class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+							aria-hidden="true"
+						/>
+						Edit
 					</button>
+				</MenuItem>
+				<!-- The 2 menu items below is how it should be done. This prevents an extra unnecessary tag. -->
+				<MenuItem
+					let:active
+					as="button"
+					class="w-full"
+					on:click={() => {
+						console.log('clicked');
+					}}
+				>
+					<div
+						class="flex w-full items-center px-4 py-2 text-sm"
+						class:bg-gray-100={active}
+						class:text-gray-900={active}
+						class:text-gray-700={!active}
+					>
+						Edit
+					</div>
+				</MenuItem>
+				<MenuItem
+					let:active
+					as="button"
+					class="group w-full"
+					on:click={() => {
+						console.log('clicked');
+					}}
+				>
+					<div
+						class="flex w-full items-center px-4 py-2 text-sm"
+						class:bg-gray-100={active}
+						class:text-gray-900={active}
+						class:text-gray-700={!active}
+					>
+						<Icon
+							src={PencilAlt}
+							class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+							aria-hidden="true"
+						/>
+						Edit
+					</div>
 				</MenuItem>
 			</div>
 		</MenuItems>
