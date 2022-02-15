@@ -83,13 +83,13 @@
 				<MenuItem
 					let:active
 					as="button"
-					class="group w-full"
+					class="w-full"
 					on:click={() => {
 						console.log('clicked');
 					}}
 				>
 					<div
-						class="flex w-full items-center px-4 py-2 text-sm"
+						class="group flex items-center px-4 py-2 text-sm"
 						class:bg-gray-100={active}
 						class:text-gray-900={active}
 						class:text-gray-700={!active}
