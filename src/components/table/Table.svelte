@@ -8,6 +8,7 @@
 	import { fly } from 'svelte/transition';
 
 	export let rows: any[];
+	export let hidden: string[] = [];
 	export let modifier = 1;
 
 	// columns store should know whenever data changes
@@ -38,7 +39,7 @@
 					<thead class="bg-gray-50">
 						<tr>
 							{#each $columns as header (header.key)}
-								{#if header.visible}
+								{#if header.visible && !hidden.includes(header.key)}
 									{#if header.key === 'edit' || header.key === 'view'}
 										<th scope="col" class="relative px-6 py-3">
 											<span class="sr-only">Edit</span>
@@ -62,7 +63,7 @@
 									class={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
 								>
 									{#each Object.entries(row) as [key, value] (key + value)}
-										{#if $columns.find((header) => header.key === key)?.visible}
+										{#if $columns.find((header) => header.key === key)?.visible && !hidden.includes(key)}
 											{#if key === 'edit' || key === 'view'}
 												<td
 													class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
