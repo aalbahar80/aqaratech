@@ -21,15 +21,6 @@
 
 <script lang="ts">
 	export let transactions: Jsonify<TransactionData[]>;
-
-	const statusStyles = {
-		true: 'bg-green-100 text-green-800',
-		false: 'bg-gray-100 text-gray-800',
-	};
-
-	function classes(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
-	}
 </script>
 
 <div class="hidden sm:block">
@@ -100,10 +91,9 @@
 									class="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
 								>
 									<span
-										class={classes(
-											statusStyles[transaction?.isPaid ?? false],
-											'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
-										)}
+										class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+										class:badge__isPaid--true={transaction?.isPaid ?? false}
+										class:badge__isPaid--false={!transaction?.isPaid ?? false}
 									>
 										{transaction.isPaid}
 									</span>
@@ -136,18 +126,18 @@
 						</p>
 					</div>
 					<div class="flex flex-1 justify-between sm:justify-end">
-						<a
+						<button
 							href="#"
 							class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 						>
 							Previous
-						</a>
-						<a
+						</button>
+						<button
 							href="#"
 							class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 						>
 							Next
-						</a>
+						</button>
 					</div>
 				</nav>
 			</div>
@@ -155,25 +145,11 @@
 	</div>
 </div>
 
-<!-- <div class="min-h-screen bg-gray-100">
-	<div class="py-6">
-		<div
-			class="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8"
-		>
-			<div class="hidden lg:col-span-3 lg:block xl:col-span-2">
-				<nav aria-label="Sidebar" class="sticky top-6 divide-y divide-gray-300">
-					<Descripiton />
-				</nav>
-			</div>
-			<main class="lg:col-span-9 xl:col-span-6">
-				<TrxColumn />
-				<Descripiton />
-			</main>
-			<aside class="hidden xl:col-span-4 xl:block">
-				<div class="sticky top-6 space-y-4">
-					<LeaseCard />
-				</div>
-			</aside>
-		</div>
-	</div>
-</div> -->
+<style lang="postcss">
+	.badge__isPaid--true {
+		@apply bg-green-100 text-green-800;
+	}
+	.badge__isPaid--false {
+		@apply bg-gray-100 text-gray-800;
+	}
+</style>
