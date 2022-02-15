@@ -5,4 +5,7 @@
 	},
 	"html.autoCreateQuotes": false,
 	"editor.suggest.showWords": false,
+	"editor.fontLigatures": true,
+	"editor.fontFamily": "iosevka",
+	"editor.fontSize": 16,
 }
