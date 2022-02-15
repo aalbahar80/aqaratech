@@ -10,4 +10,5 @@
 	"editor.fontSize": 16,
 	"diffEditor.codeLens": true,
 	"partialDiff.enableTelemetry": false,
+	"editor.minimap.renderCharacters": false,
 }
