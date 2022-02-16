@@ -119,9 +119,9 @@
 						</td>
 						<td>
 							<span
-								class="badge"
-								class:badge-green={transaction?.isPaid}
-								class:badge-red={!transaction?.isPaid}
+								class={`badge ${
+									transaction.isPaid ? 'badge-green' : 'badge-red'
+								}`}
 							>
 								{transaction.isPaid}
 							</span>
