@@ -21,8 +21,8 @@
 	));
 </script>
 
-<div class="mt-6 flex flex-col  overflow-hidden  shadow sm:rounded-sm">
-	<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+<section>
+	<div class="section-heading">
 		<div
 			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
 		>
@@ -32,24 +32,16 @@
 				</h3>
 			</div>
 			<div class="ml-4 mt-2 flex-shrink-0">
-				<button
-					type="button"
-					class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>
-					Create new transaction
-				</button>
+				<button type="button"> Create new transaction </button>
 			</div>
 		</div>
 	</div>
 
 	<div class="shadow sm:hidden">
-		<ul
-			role="list"
-			class="divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
-		>
+		<ul>
 			{#each data as transaction (transaction.id)}
 				<li>
-					<a href={`transaction/${transaction.id}`}>
+					<a href={`/transaction/${transaction.id}`}>
 						<span class="flex items-center space-x-4">
 							<span class="flex flex-1 space-x-2 truncate">
 								<Icon
@@ -87,95 +79,71 @@
 		</ul>
 	</div>
 
-	<div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow">
-		<div class="hidden sm:block">
-			<table class="min-w-full divide-y divide-gray-200">
-				<thead>
+	<div class="table-container">
+		<table>
+			<thead>
+				<tr>
+					<th> Memo </th>
+					<th> Amount </th>
+					<th> Status </th>
+					<th> Date </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each data as transaction (transaction.id)}
 					<tr>
-						<th
-							class="bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+						<td>
+							<div class="flex">
+								<a
+									href={`/transaction/${transaction.id}`}
+									class="group inline-flex space-x-2 truncate text-sm"
+								>
+									<Icon
+										src={Cash}
+										theme="solid"
+										class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+										aria-hidden="true"
+									/>
+									<p class="truncate text-gray-500 group-hover:text-gray-900">
+										{transaction.memo}
+									</p>
+								</a>
+							</div>
+						</td>
+						<td
+							class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 						>
-							Memo
-						</th>
-						<th
-							class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
+							<span class="font-medium tabular-nums text-gray-900"
+								>{transaction.amount}
+							</span>
+							{'KWD'}
+						</td>
+						<td
+							class="whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
 						>
-							Amount
-						</th>
-						<th
-							class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
+							<span
+								class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+								class:badge__isPaid--true={transaction?.isPaid}
+								class:badge__isPaid--false={!transaction?.isPaid}
+							>
+								{transaction.isPaid}
+							</span>
+						</td>
+						<td
+							class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 						>
-							Status
-						</th>
-						<th
-							class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
-						>
-							Date
-						</th>
-						<th
-							class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
-						>
-							Action
-						</th>
+							<time dateTime={transaction.dueDate}
+								>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
+							>
+						</td>
+						<td class="text-center">
+							<DropDown />
+						</td>
 					</tr>
-				</thead>
-				<tbody class="divide-y divide-gray-200 bg-white">
-					{#each data as transaction (transaction.id)}
-						<tr class="bg-white">
-							<td
-								class="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900"
-							>
-								<div class="flex">
-									<a
-										href={`/transaction/${transaction.id}`}
-										class="group inline-flex space-x-2 truncate text-sm"
-									>
-										<Icon
-											src={Cash}
-											theme="solid"
-											class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-											aria-hidden="true"
-										/>
-										<p class="truncate text-gray-500 group-hover:text-gray-900">
-											{transaction.memo}
-										</p>
-									</a>
-								</div>
-							</td>
-							<td
-								class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
-							>
-								<span class="font-medium tabular-nums text-gray-900"
-									>{transaction.amount}
-								</span>
-								{'KWD'}
-							</td>
-							<td
-								class="whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
-							>
-								<span
-									class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
-									class:badge__isPaid--true={transaction?.isPaid}
-									class:badge__isPaid--false={!transaction?.isPaid}
-								>
-									{transaction.isPaid}
-								</span>
-							</td>
-							<td
-								class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
-							>
-								<time dateTime={transaction.dueDate}
-									>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
-								>
-							</td>
-							<td class="text-center">
-								<DropDown />
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
+				{/each}
+			</tbody>
+		</table>
 	</div>
 
 	<nav aria-label="Pagination">
@@ -187,7 +155,7 @@
 				<span class="font-medium">{transactions.length}</span> results
 			</p>
 		</div>
-		<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
+		<div>
 			<button
 				disabled={pageIndex <= 1}
 				on:click={() => pageIndex > 1 && pageIndex--}
@@ -202,7 +170,7 @@
 			</button>
 		</div>
 	</nav>
-</div>
+</section>
 
 <style lang="postcss">
 	.badge__isPaid--true {
@@ -222,5 +190,45 @@
 	}
 	nav button:hover {
 		@apply text-gray-500 sm:bg-gray-50 sm:text-gray-700;
+	}
+	nav div:last-child {
+		@apply flex flex-1 justify-between sm:justify-end sm:space-x-3;
+	}
+	table {
+		@apply min-w-full divide-y divide-gray-200;
+	}
+	tbody {
+		@apply divide-y divide-gray-200 bg-white;
+	}
+	tbody tr {
+		@apply bg-white;
+	}
+	th {
+		@apply bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500;
+	}
+	th:first-child {
+		@apply text-left;
+	}
+	.table-container {
+		@apply hidden min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:block;
+	}
+	li {
+		@apply divide-y divide-gray-200 overflow-hidden shadow sm:hidden;
+	}
+	li a {
+		@apply block bg-white px-4 py-4 hover:bg-gray-50;
+	}
+	.section-heading {
+		@apply border-b border-gray-200 bg-white px-4 py-5 sm:px-6;
+	}
+
+	.section-heading button {
+		@apply relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+	}
+	section {
+		@apply mt-6 flex flex-col overflow-hidden shadow sm:rounded-sm;
+	}
+	tbody td:first-child {
+		@apply w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900;
 	}
 </style>
