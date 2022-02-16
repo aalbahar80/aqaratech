@@ -127,14 +127,13 @@
 			<div class="flex flex-1 justify-between sm:justify-end">
 				<button
 					href="#"
-					class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+					class="page-nav"
 					on:click={() => pageIndex > 1 && pageIndex--}
 				>
 					Previous
 				</button>
 				<button
-					href="#"
-					class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+					class="page-nav"
 					on:click={() => pageIndex < totalPages && pageIndex++}
 				>
 					Next
@@ -150,5 +149,8 @@
 	}
 	.badge__isPaid--false {
 		@apply bg-gray-100 text-gray-800;
+	}
+	.page-nav {
+		@apply relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50;
 	}
 </style>
