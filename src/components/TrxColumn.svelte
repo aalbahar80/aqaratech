@@ -215,9 +215,12 @@
 		@apply flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
 	}
 	nav button {
-		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500 sm:hover:bg-gray-50 sm:hover:text-gray-700;
+		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700;
 	}
 	nav button:disabled {
 		@apply cursor-not-allowed opacity-50;
+	}
+	nav button:hover {
+		@apply text-gray-500 sm:bg-gray-50 sm:text-gray-700;
 	}
 </style>
