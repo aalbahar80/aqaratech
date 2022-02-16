@@ -57,11 +57,11 @@ model Lease {
   unitId       String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  startDate    DateTime?
-  endDate      DateTime?
-  monthlyRent  Float?
-  deposit      Float?
-  isSigned     Boolean?
+  startDate    DateTime
+  endDate      DateTime
+  monthlyRent  Float
+  deposit      Float         @default(0)
+  isSigned     Boolean       @default(true)
   license      String?
   tenant       Tenant?       @relation(fields: [tenantId], references: [id])
   unit         Unit?         @relation(fields: [unitId], references: [id])
@@ -132,29 +132,29 @@ model Tenant {
   id                String             @id @default(uuid())
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
-  firstName         String?
+  firstName         String
   secondName        String?
   thirdName         String?
-  lastName          String?
+  lastName          String
   civilid           String?
   dob               DateTime?
-  phone             String?
+  phone             String
   email             String?
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
 }
 
 model Transaction {
-  id         String    @id @default(uuid())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  dueDate    DateTime?
-  isPaid     Boolean?  @default(false)
-  amount     Float?
-  memo       String?   @db.Text
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  dueDate    DateTime
+  isPaid     Boolean  @default(false)
+  amount     Float
+  memo       String?  @db.Text
   receiptUrl String?
-  leaseId    String?
-  lease      Lease?    @relation(fields: [leaseId], references: [id])
+  leaseId    String
+  lease      Lease?   @relation(fields: [leaseId], references: [id])
 
   @@index([leaseId])
 }
