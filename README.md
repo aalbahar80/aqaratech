@@ -215,6 +215,8 @@ pscale branch create <db-name> <new-branch-name>
 # modify the schema.prisma with your changes
 pscale connect <db-name> <branch-name>
 npx prisma db push # push schema changes to branch
+# refresh schema
+pscale branch refresh-schema <db-name> <branch-name>
 # check the diff
 pscale branch diff <db-name> <branch-name>
 pscale branch diff <db-name> <branch-name> --web
@@ -223,6 +225,9 @@ pscale branch diff <db-name> <branch-name> --web
 npx prisma db seed # runs the seed script against the branch
 
 # create a deploy request. Confirm it. Then delete branch.
+pscale deploy-request create redb require-ispaid
+pscale deploy-request deploy redb 2
+pscale branch delete redb require-ispaid
 # seed it with a script if u want, or visually in Prisma Studio
 # create a deploy request on app.planetscale.com. Planetscale will check if changes are deployable. It will also visually show the diff. If all is well, confirm the deployment to go ahead. Delete the branch. At this point, the main branch has it's original data intact AND it now has the schema changes applied.
 ```
