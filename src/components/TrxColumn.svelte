@@ -89,18 +89,8 @@
 		aria-label="Pagination"
 	>
 		<div class="flex flex-1 justify-between">
-			<a
-				href="#"
-				class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500"
-			>
-				Previous
-			</a>
-			<a
-				href="#"
-				class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500"
-			>
-				Next
-			</a>
+			<button class="page-nav"> Previous </button>
+			<button class="page-nav"> Next </button>
 		</div>
 	</nav>
 </div>
@@ -207,7 +197,7 @@
 						<span class="font-medium">{transactions.length}</span> results
 					</p>
 				</div>
-				<div class="flex flex-1 justify-between sm:justify-end">
+				<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
 					<button
 						href="#"
 						class="page-nav"
@@ -235,6 +225,6 @@
 		@apply bg-gray-100 text-gray-800;
 	}
 	.page-nav {
-		@apply relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50;
+		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500 sm:hover:bg-gray-50 sm:hover:text-gray-700;
 	}
 </style>
