@@ -25,14 +25,31 @@
 	<div
 		class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg"
 	>
+		<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+			<div
+				class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
+			>
+				<div class="ml-4 mt-2">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">
+						Transactions
+					</h3>
+				</div>
+				<div class="ml-4 mt-2 flex-shrink-0">
+					<button
+						type="button"
+						class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+					>
+						Create new transaction
+					</button>
+				</div>
+			</div>
+		</div>
 		<table class="min-w-full divide-y divide-gray-200">
 			<thead>
 				<tr>
 					<th
 						class="bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-					>
-						Transaction
-					</th>
+					/>
 					<th
 						class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
 					>
