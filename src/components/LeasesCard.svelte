@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TenantBrowse } from '$lib/definitions/select';
-	import { formatDateDiff } from '$lib/utils/date-utils';
+	import { formatDateDiff, getProgress } from '$lib/utils/date-utils';
 	import { Calendar, Home } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Jsonify } from 'type-fest';
@@ -77,6 +77,14 @@
 								</p>
 							</div>
 						</div>
+						{#if !expired}
+							<div class="mt-4 overflow-hidden rounded-full bg-gray-200">
+								<div
+									class="h-1 rounded-full bg-indigo-600"
+									style:width="{getProgress(lease.startDate, lease.endDate)}%"
+								/>
+							</div>
+						{/if}
 					</div>
 				</a>
 			</li>

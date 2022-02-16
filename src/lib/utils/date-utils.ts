@@ -1,10 +1,13 @@
 import { differenceInCalendarDays } from 'date-fns';
 
-export const getProgress = (start: Date, end: Date, ref: Date): number => {
-	const total = differenceInCalendarDays(end, start);
-	const left = differenceInCalendarDays(end, ref);
+export const getProgress = (start: string, end: string, ref?: Date): number => {
+	const startDate = new Date(start);
+	const endDate = new Date(end);
+	const total = differenceInCalendarDays(endDate, startDate);
+	const left = differenceInCalendarDays(endDate, ref ?? new Date());
 	const result = left < 1 ? 100 : 100 - (left / total) * 100;
-	return Math.round(result);
+	const rounded = Math.round(result);
+	return rounded;
 };
 
 // a function that calculates the number of days between two dates
