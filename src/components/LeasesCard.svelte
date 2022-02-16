@@ -1,9 +1,11 @@
 <script lang="ts">
+	import type { TenantBrowse } from '$lib/definitions/select';
 	import { formatDateDiff } from '$lib/utils/date-utils';
 	import { Calendar, Home } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Jsonify } from 'type-fest';
 
-	export let leases: any[];
+	export let leases: Jsonify<TenantBrowse>['leases'];
 </script>
 
 <!-- <pre>{JSON.stringify(leases[0], null, 2)}</pre> -->
@@ -57,7 +59,9 @@
 										class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 										aria-hidden="true"
 									/>
-									{lease.unit?.unitNumber}
+									{`${lease.unit?.unitNumber} ${
+										lease.unit?.property?.area ?? ''
+									}`}
 								</p>
 							</div>
 							<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
