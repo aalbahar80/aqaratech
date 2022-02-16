@@ -96,3 +96,7 @@ export function getPaginatedItems<T>(
 		end: endIndex,
 	};
 }
+
+export const concatIfExists = (strings: (string | null)[]) => {
+	return strings.filter((str) => str).join(' ');
+};
