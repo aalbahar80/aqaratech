@@ -1,3 +1,5 @@
+import drop from 'lodash-es/drop';
+
 export const parseParams = (url: URL) => {
 	const pageSize = Number(url.searchParams.get('pageSize')) || 11;
 	const pageIndex = Number(url.searchParams.get('p')) || 1;
@@ -72,3 +74,25 @@ export const getTableUrl = (url: URL, options: TableOptions): string => {
 
 	return `${url.pathname}?${params.toString()}`;
 };
+
+export function getPaginatedItems<T>(
+	items: T[],
+	page: number,
+	pageSize: number,
+) {
+	const pg = page || 1;
+	const pgSize = pageSize || 100;
+	const offset = (pg - 1) * pgSize;
+	const pagedItems = drop(items, offset).slice(0, pgSize);
+	const startIndex = offset + 1;
+	const endIndex = offset + pagedItems.length;
+	return {
+		pageIndex: pg,
+		pageSize: pgSize,
+		total: items.length,
+		totalPages: Math.ceil(items.length / pgSize),
+		data: pagedItems,
+		start: startIndex,
+		end: endIndex,
+	};
+}

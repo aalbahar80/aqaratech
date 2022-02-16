@@ -1,31 +1,13 @@
 <script lang="ts">
 	import DropDown from '$components/DropDown.svelte';
 	import type { TenantBrowse } from '$lib/definitions/select';
+	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import { Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
-	import drop from 'lodash-es/drop';
 	import type { Jsonify } from 'type-fest';
 
 	export let transactions: Jsonify<TenantBrowse>['leases'][number]['transactions'];
-
-	function getPaginatedItems<T>(items: T[], page: number, pageSize: number) {
-		const pg = page || 1;
-		const pgSize = pageSize || 100;
-		const offset = (pg - 1) * pgSize;
-		const pagedItems = drop(items, offset).slice(0, pgSize);
-		const startIndex = offset + 1;
-		const endIndex = offset + pagedItems.length;
-		return {
-			pageIndex: pg,
-			pageSize: pgSize,
-			total: items.length,
-			totalPages: Math.ceil(items.length / pgSize),
-			data: pagedItems,
-			start: startIndex,
-			end: endIndex,
-		};
-	}
 
 	let pageIndex = 1;
 	let data: typeof transactions;
