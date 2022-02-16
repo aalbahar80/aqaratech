@@ -11,4 +11,5 @@
 	"diffEditor.codeLens": true,
 	"partialDiff.enableTelemetry": false,
 	"editor.minimap.renderCharacters": false,
+	"editor.autoClosingBrackets": "always",
 }
