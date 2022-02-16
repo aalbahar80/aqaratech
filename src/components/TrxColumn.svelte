@@ -178,10 +178,7 @@
 		</div>
 	</div>
 
-	<nav
-		class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
-		aria-label="Pagination"
-	>
+	<nav aria-label="Pagination">
 		<div class="hidden sm:block">
 			<p class="text-sm text-gray-700">
 				Showing <span class="font-medium">{start}</span> to
@@ -192,14 +189,13 @@
 		</div>
 		<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
 			<button
-				href="#"
-				class="page-nav"
+				disabled={pageIndex <= 1}
 				on:click={() => pageIndex > 1 && pageIndex--}
 			>
 				Previous
 			</button>
 			<button
-				class="page-nav"
+				disabled={pageIndex >= totalPages}
 				on:click={() => pageIndex < totalPages && pageIndex++}
 			>
 				Next
@@ -215,7 +211,13 @@
 	.badge__isPaid--false {
 		@apply bg-gray-100 text-gray-800;
 	}
-	.page-nav {
+	nav {
+		@apply flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
+	}
+	nav button {
 		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500 sm:hover:bg-gray-50 sm:hover:text-gray-700;
+	}
+	nav button:disabled {
+		@apply cursor-not-allowed opacity-50;
 	}
 </style>
