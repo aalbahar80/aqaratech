@@ -10,6 +10,8 @@
 	<PreloadingIndicator />
 {/if}
 
-<NavBar />
-<ToastParent />
-<slot />
+<div class="h-full">
+	<NavBar />
+	<ToastParent />
+	<slot />
+</div>
