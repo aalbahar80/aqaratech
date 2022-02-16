@@ -77,6 +77,7 @@ export const tenantBrowse = Prisma.validator<Prisma.TenantArgs>()({
 	select: {
 		id: true,
 		firstName: true,
+		secondName: true,
 		lastName: true,
 		email: true,
 		phone: true,
