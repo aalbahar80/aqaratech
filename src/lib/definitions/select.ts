@@ -52,6 +52,8 @@ export const leaseData = Prisma.validator<Prisma.LeaseArgs>()({
 		monthlyRent: true,
 		createdAt: true,
 		updatedAt: true,
+		unitId: true,
+		unit: true,
 	},
 });
 
