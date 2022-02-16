@@ -87,6 +87,11 @@ export const tenantBrowse = Prisma.validator<Prisma.TenantArgs>()({
 		leases: {
 			include: {
 				transactions: true,
+				unit: {
+					include: {
+						property: true,
+					},
+				},
 			},
 		},
 	},
