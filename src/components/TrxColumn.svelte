@@ -21,9 +21,7 @@
 	));
 </script>
 
-<div
-	class="mt-6 min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-t-lg"
->
+<div class="mt-6  overflow-hidden  shadow sm:rounded-sm">
 	<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
 		<div
 			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
