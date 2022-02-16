@@ -21,10 +21,37 @@
 	));
 </script>
 
+<div class="mx-auto max-w-6xl">
+	<div class="mt-6 flex flex-col">
+		<div
+			class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-t-lg"
+		>
+			<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+				<div
+					class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
+				>
+					<div class="ml-4 mt-2">
+						<h3 class="text-lg font-medium leading-6 text-gray-900">
+							Transactions
+						</h3>
+					</div>
+					<div class="ml-4 mt-2 flex-shrink-0">
+						<button
+							type="button"
+							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+						>
+							Create new transaction
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="shadow sm:hidden">
 	<ul
 		role="list"
-		class="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
+		class="divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
 	>
 		{#each data as transaction (transaction.id)}
 			<li>
@@ -84,30 +111,11 @@
 </div>
 
 <div class="hidden sm:block">
-	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 ">
-		<div class="mt-6 flex flex-col">
+	<div class="mx-auto max-w-6xl">
+		<div class="flex flex-col">
 			<div
-				class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg"
+				class="min-w-full overflow-hidden overflow-x-auto align-middle shadow"
 			>
-				<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-					<div
-						class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
-					>
-						<div class="ml-4 mt-2">
-							<h3 class="text-lg font-medium leading-6 text-gray-900">
-								Transactions
-							</h3>
-						</div>
-						<div class="ml-4 mt-2 flex-shrink-0">
-							<button
-								type="button"
-								class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-							>
-								Create new transaction
-							</button>
-						</div>
-					</div>
-				</div>
 				<table class="min-w-full divide-y divide-gray-200">
 					<thead>
 						<tr>
