@@ -9,15 +9,18 @@
 	import type { Jsonify } from 'type-fest';
 
 	export const load: Load = async ({ fetch }) => {
-		const res = await fetch('/transaction.json');
-		const leases = await fetch('/lease.json')
-			.then((res) => res.json())
-			.then((data) => data.rows);
-		const data = await res.json();
+		const [transactions, leases] = await Promise.all([
+			fetch('/transaction.json')
+				.then((res) => res.json())
+				.then((data) => data.rows),
+			fetch('/lease.json')
+				.then((res) => res.json())
+				.then((data) => data.rows),
+		]);
 
 		return {
 			props: {
-				transactions: data.rows,
+				transactions,
 				leases,
 			},
 		};
