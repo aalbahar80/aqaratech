@@ -4,12 +4,42 @@
 	import { Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
+	import drop from 'lodash-es/drop';
 	import type { Jsonify } from 'type-fest';
 
 	export let transactions: Jsonify<TenantBrowse>['leases'][number]['transactions'];
+
+	function getPaginatedItems<T>(items: T[], page: number, pageSize: number) {
+		const pg = page || 1;
+		const pgSize = pageSize || 100;
+		const offset = (pg - 1) * pgSize;
+		const pagedItems = drop(items, offset).slice(0, pgSize);
+		const startIndex = offset + 1;
+		const endIndex = offset + pagedItems.length;
+		return {
+			pageIndex: pg,
+			pageSize: pgSize,
+			total: items.length,
+			totalPages: Math.ceil(items.length / pgSize),
+			data: pagedItems,
+			start: startIndex,
+			end: endIndex,
+		};
+	}
+
+	let pageIndex = 1;
+	let data: typeof transactions;
+	let totalPages: number;
+	let start: number;
+	let end: number;
+	$: ({ data, totalPages, start, end } = getPaginatedItems(
+		transactions,
+		pageIndex,
+		10,
+	));
 </script>
 
-<div class="mt-2 flex flex-col">
+<div class="mt-6 flex flex-col">
 	<div
 		class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg"
 	>
@@ -44,7 +74,7 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each transactions as transaction (transaction.id)}
+				{#each data as transaction (transaction.id)}
 					<tr class="bg-white">
 						<td
 							class="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900"
@@ -106,22 +136,24 @@
 		>
 			<div class="hidden sm:block">
 				<p class="text-sm text-gray-700">
-					Showing <span class="font-medium">1</span> to
-					<span class="font-medium">10</span>
+					Showing <span class="font-medium">{start}</span> to
+					<span class="font-medium">{end}</span>
 					of{' '}
-					<span class="font-medium">20</span> results
+					<span class="font-medium">{transactions.length}</span> results
 				</p>
 			</div>
 			<div class="flex flex-1 justify-between sm:justify-end">
 				<button
 					href="#"
 					class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+					on:click={() => pageIndex > 1 && pageIndex--}
 				>
 					Previous
 				</button>
 				<button
 					href="#"
 					class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+					on:click={() => pageIndex < totalPages && pageIndex++}
 				>
 					Next
 				</button>
