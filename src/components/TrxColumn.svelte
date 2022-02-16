@@ -111,28 +111,22 @@
 								</a>
 							</div>
 						</td>
-						<td
-							class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
-						>
+						<td>
 							<span class="font-medium tabular-nums text-gray-900"
 								>{transaction.amount}
 							</span>
 							{'KWD'}
 						</td>
-						<td
-							class="whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
-						>
+						<td>
 							<span
-								class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
-								class:badge__isPaid--true={transaction?.isPaid}
-								class:badge__isPaid--false={!transaction?.isPaid}
+								class="badge"
+								class:badge-green={transaction?.isPaid}
+								class:badge-red={!transaction?.isPaid}
 							>
 								{transaction.isPaid}
 							</span>
 						</td>
-						<td
-							class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
-						>
+						<td>
 							<time dateTime={transaction.dueDate}
 								>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
 							>
@@ -173,11 +167,14 @@
 </section>
 
 <style lang="postcss">
-	.badge__isPaid--true {
+	.badge {
+		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize;
+	}
+	.badge-green {
 		@apply bg-green-100 text-green-800;
 	}
-	.badge__isPaid--false {
-		@apply bg-gray-100 text-gray-800;
+	.badge-red {
+		@apply bg-red-100 text-red-800;
 	}
 	nav {
 		@apply flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
@@ -228,7 +225,10 @@
 	section {
 		@apply mt-6 flex flex-col overflow-hidden shadow sm:rounded-sm;
 	}
+	tbody td:not(:last-child) {
+		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-900;
+	}
 	tbody td:first-child {
-		@apply w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900;
+		@apply w-full max-w-0 text-gray-900;
 	}
 </style>
