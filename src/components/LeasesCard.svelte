@@ -10,7 +10,7 @@
 
 <!-- <pre>{JSON.stringify(leases[0], null, 2)}</pre> -->
 
-<div class="mt-4 overflow-hidden bg-white shadow sm:rounded-md">
+<div class="mt-6 overflow-hidden bg-white shadow sm:rounded-md">
 	<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
 		<div
 			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
