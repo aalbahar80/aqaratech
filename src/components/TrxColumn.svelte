@@ -83,16 +83,6 @@
 			</li>
 		{/each}
 	</ul>
-
-	<nav
-		class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3"
-		aria-label="Pagination"
-	>
-		<div class="flex flex-1 justify-between">
-			<button class="page-nav"> Previous </button>
-			<button class="page-nav"> Next </button>
-		</div>
-	</nav>
 </div>
 
 <div class="hidden sm:block">
@@ -184,38 +174,38 @@
 					{/each}
 				</tbody>
 			</table>
-			<!-- {/* Pagination */} -->
-			<nav
-				class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
-				aria-label="Pagination"
-			>
-				<div class="hidden sm:block">
-					<p class="text-sm text-gray-700">
-						Showing <span class="font-medium">{start}</span> to
-						<span class="font-medium">{end}</span>
-						of{' '}
-						<span class="font-medium">{transactions.length}</span> results
-					</p>
-				</div>
-				<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
-					<button
-						href="#"
-						class="page-nav"
-						on:click={() => pageIndex > 1 && pageIndex--}
-					>
-						Previous
-					</button>
-					<button
-						class="page-nav"
-						on:click={() => pageIndex < totalPages && pageIndex++}
-					>
-						Next
-					</button>
-				</div>
-			</nav>
 		</div>
 	</div>
 </div>
+
+<nav
+	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+	aria-label="Pagination"
+>
+	<div class="hidden sm:block">
+		<p class="text-sm text-gray-700">
+			Showing <span class="font-medium">{start}</span> to
+			<span class="font-medium">{end}</span>
+			of{' '}
+			<span class="font-medium">{transactions.length}</span> results
+		</p>
+	</div>
+	<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
+		<button
+			href="#"
+			class="page-nav"
+			on:click={() => pageIndex > 1 && pageIndex--}
+		>
+			Previous
+		</button>
+		<button
+			class="page-nav"
+			on:click={() => pageIndex < totalPages && pageIndex++}
+		>
+			Next
+		</button>
+	</div>
+</nav>
 
 <style lang="postcss">
 	.badge__isPaid--true {
