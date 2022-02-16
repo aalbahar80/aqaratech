@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import DropDown from '$components/DropDown.svelte';
 	import type { TransactionData } from '$lib/definitions/select';
 	import { Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -52,6 +53,11 @@
 							>
 								Date
 							</th>
+							<th
+								class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
+							>
+								Action
+							</th>
 						</tr>
 					</thead>
 					<tbody class="divide-y divide-gray-200 bg-white">
@@ -82,7 +88,7 @@
 								<td
 									class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 								>
-									<span class="font-medium text-gray-900"
+									<span class="font-medium tabular-nums text-gray-900"
 										>{transaction.amount}
 									</span>
 									{'KWD'}
@@ -107,6 +113,9 @@
 											'MMM dd, yy',
 										)}</time
 									>
+								</td>
+								<td>
+									<DropDown />
 								</td>
 							</tr>
 						{/each}
