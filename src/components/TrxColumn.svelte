@@ -49,7 +49,7 @@
 		>
 			{#each data as transaction (transaction.id)}
 				<li>
-					<a href="#" class="block bg-white px-4 py-4 hover:bg-gray-50">
+					<a href={`transaction/${transaction.id}`}>
 						<span class="flex items-center space-x-4">
 							<span class="flex flex-1 space-x-2 truncate">
 								<Icon
