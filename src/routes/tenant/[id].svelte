@@ -24,7 +24,7 @@
 	export let transactions: Jsonify<TransactionData[]>;
 </script>
 
-<div class="hidden sm:block">
+<div class="sm:block">
 	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="mt-2 flex flex-col">
 			<div
@@ -44,7 +44,7 @@
 								Amount
 							</th>
 							<th
-								class="hidden bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:block"
+								class="bg-gray-50 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:block"
 							>
 								Status
 							</th>
@@ -54,7 +54,7 @@
 								Date
 							</th>
 							<th
-								class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500"
+								class="bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500 "
 							>
 								Action
 							</th>
@@ -94,7 +94,7 @@
 									{'KWD'}
 								</td>
 								<td
-									class="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
+									class="whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block"
 								>
 									<span
 										class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
@@ -114,7 +114,7 @@
 										)}</time
 									>
 								</td>
-								<td>
+								<td class="text-center">
 									<DropDown />
 								</td>
 							</tr>
