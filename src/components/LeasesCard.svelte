@@ -43,7 +43,7 @@
 							</p>
 							<div class="ml-2 flex flex-shrink-0">
 								<p
-									class={`${expiredClass} inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5`}
+									class={`${expiredClass} inline-flex rounded-full px-2 text-xs font-semibold leading-5`}
 								>
 									{expired ? 'Expired' : 'Active'}
 								</p>
