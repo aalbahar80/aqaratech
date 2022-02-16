@@ -21,7 +21,7 @@
 	));
 </script>
 
-<div class="mt-6  overflow-hidden  shadow sm:rounded-sm">
+<div class="mt-6 flex flex-col  overflow-hidden  shadow sm:rounded-sm">
 	<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
 		<div
 			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
@@ -41,53 +41,54 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="shadow sm:hidden">
-	<ul
-		role="list"
-		class="divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
-	>
-		{#each data as transaction (transaction.id)}
-			<li>
-				<a href="#" class="block bg-white px-4 py-4 hover:bg-gray-50">
-					<span class="flex items-center space-x-4">
-						<span class="flex flex-1 space-x-2 truncate">
+	<div class="shadow sm:hidden">
+		<ul
+			role="list"
+			class="divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
+		>
+			{#each data as transaction (transaction.id)}
+				<li>
+					<a href="#" class="block bg-white px-4 py-4 hover:bg-gray-50">
+						<span class="flex items-center space-x-4">
+							<span class="flex flex-1 space-x-2 truncate">
+								<Icon
+									src={Cash}
+									theme="solid"
+									class="h-5 w-5 flex-shrink-0 text-gray-400"
+									aria-hidden="true"
+								/>
+								<span class="flex flex-col truncate text-sm text-gray-500">
+									<span class="truncate">{transaction.memo}</span>
+									<span>
+										<span class="font-medium text-gray-900"
+											>{transaction.amount}</span
+										>{' '}
+										{'KWD'}
+									</span>
+									<time dateTime={transaction.dueDate}
+										>{format(
+											new Date(transaction.createdAt),
+											'MMM dd, yy',
+										)}</time
+									>
+								</span>
+							</span>
 							<Icon
-								src={Cash}
+								src={ChevronRight}
 								theme="solid"
 								class="h-5 w-5 flex-shrink-0 text-gray-400"
 								aria-hidden="true"
 							/>
-							<span class="flex flex-col truncate text-sm text-gray-500">
-								<span class="truncate">{transaction.memo}</span>
-								<span>
-									<span class="font-medium text-gray-900"
-										>{transaction.amount}</span
-									>{' '}
-									{'KWD'}
-								</span>
-								<time dateTime={transaction.dueDate}
-									>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
-								>
-							</span>
 						</span>
-						<Icon
-							src={ChevronRight}
-							theme="solid"
-							class="h-5 w-5 flex-shrink-0 text-gray-400"
-							aria-hidden="true"
-						/>
-					</span>
-				</a>
-			</li>
-		{/each}
-	</ul>
-</div>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
 
-<div class="hidden sm:block">
-	<div class="flex flex-col">
-		<div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow">
+	<div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow">
+		<div class="hidden sm:block">
 			<table class="min-w-full divide-y divide-gray-200">
 				<thead>
 					<tr>
@@ -176,36 +177,36 @@
 			</table>
 		</div>
 	</div>
-</div>
 
-<nav
-	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
-	aria-label="Pagination"
->
-	<div class="hidden sm:block">
-		<p class="text-sm text-gray-700">
-			Showing <span class="font-medium">{start}</span> to
-			<span class="font-medium">{end}</span>
-			of{' '}
-			<span class="font-medium">{transactions.length}</span> results
-		</p>
-	</div>
-	<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
-		<button
-			href="#"
-			class="page-nav"
-			on:click={() => pageIndex > 1 && pageIndex--}
-		>
-			Previous
-		</button>
-		<button
-			class="page-nav"
-			on:click={() => pageIndex < totalPages && pageIndex++}
-		>
-			Next
-		</button>
-	</div>
-</nav>
+	<nav
+		class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+		aria-label="Pagination"
+	>
+		<div class="hidden sm:block">
+			<p class="text-sm text-gray-700">
+				Showing <span class="font-medium">{start}</span> to
+				<span class="font-medium">{end}</span>
+				of{' '}
+				<span class="font-medium">{transactions.length}</span> results
+			</p>
+		</div>
+		<div class="flex flex-1 justify-between sm:justify-end sm:space-x-3">
+			<button
+				href="#"
+				class="page-nav"
+				on:click={() => pageIndex > 1 && pageIndex--}
+			>
+				Previous
+			</button>
+			<button
+				class="page-nav"
+				on:click={() => pageIndex < totalPages && pageIndex++}
+			>
+				Next
+			</button>
+		</div>
+	</nav>
+</div>
 
 <style lang="postcss">
 	.badge__isPaid--true {
