@@ -1,41 +1,21 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import DropDown from '$components/DropDown.svelte';
-	import type { TransactionData } from '$lib/definitions/select';
+	import LeasesCard from '$components/LeasesCard.svelte';
+	import type { TenantBrowse } from '$lib/definitions/select';
 	import { Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Load } from '@sveltejs/kit';
 	import format from 'date-fns/format';
 	import parseISO from 'date-fns/parseISO';
+	import flatten from 'lodash-es/flatten';
+	import map from 'lodash-es/map.js';
 	import type { Jsonify } from 'type-fest';
 
-	export const load: Load = async ({ fetch }) => {
-		const [transactions, leases] = await Promise.all([
-			fetch('/transaction.json')
-				.then((res) => res.json())
-				.then((data) => data.rows),
-			fetch('/lease.json')
-				.then((res) => res.json())
-				.then((data) => data.rows),
-		]);
-
-		return {
-			props: {
-				transactions,
-				leases,
-			},
-		};
-	};
+	export let data: Jsonify<TenantBrowse>;
 </script>
 
-<script lang="ts">
-	import LeasesCard from '$components/LeasesCard.svelte';
-
-	export let transactions: Jsonify<TransactionData[]>;
-	export let leases;
-</script>
-
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-	<LeasesCard {leases} />
+	<LeasesCard leases={data.leases} />
 	<div class="mt-2 flex flex-col">
 		<div
 			class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg"
@@ -71,7 +51,7 @@
 					</tr>
 				</thead>
 				<tbody class="divide-y divide-gray-200 bg-white">
-					{#each transactions as transaction (transaction.id)}
+					{#each flatten(map(data.leases, 'transactions')) as transaction (transaction.id)}
 						<tr class="bg-white">
 							<td
 								class="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900"
@@ -106,8 +86,8 @@
 							>
 								<span
 									class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
-									class:badge__isPaid--true={transaction?.isPaid ?? false}
-									class:badge__isPaid--false={!transaction?.isPaid ?? false}
+									class:badge__isPaid--true={transaction?.isPaid}
+									class:badge__isPaid--false={!transaction?.isPaid}
 								>
 									{transaction.isPaid}
 								</span>
@@ -116,7 +96,7 @@
 								class="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 							>
 								<time dateTime={transaction.dueDate}
-									>{format(parseISO(transaction.createdAt), 'MMM dd, yy')}</time
+									>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
 								>
 							</td>
 							<td class="text-center">

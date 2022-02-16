@@ -1,7 +1,8 @@
 import prisma from '$lib/config/prisma';
-import { tenantData } from '$lib/definitions/select';
+import { tenantBrowse, tenantData } from '$lib/definitions/select';
 import { formSchema } from '$lib/definitions/tenant';
 import type { RequestHandler } from '@sveltejs/kit';
+import type { ShadowRequestHandler } from '@sveltejs/kit/types/endpoint';
 
 export const patch: RequestHandler = async (event) => {
 	const data = await event.request.json();
@@ -42,14 +43,14 @@ export const del: RequestHandler = async (event) => {
 	};
 };
 
-export const get: RequestHandler = async (event) => {
+export const get: ShadowRequestHandler = async (event) => {
 	const data = await prisma.tenant.findUnique({
 		where: {
 			id: event.params.id,
 		},
-		select: tenantData.select,
+		select: tenantBrowse.select,
 	});
 	return {
-		body: data,
+		body: { data },
 	};
 };

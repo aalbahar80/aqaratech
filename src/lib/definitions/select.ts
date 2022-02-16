@@ -72,6 +72,26 @@ export const tenantData = Prisma.validator<Prisma.TenantArgs>()({
 	},
 });
 
+export type TenantBrowse = Prisma.TenantGetPayload<typeof tenantBrowse>;
+export const tenantBrowse = Prisma.validator<Prisma.TenantArgs>()({
+	select: {
+		id: true,
+		firstName: true,
+		lastName: true,
+		email: true,
+		phone: true,
+		dob: true,
+		civilid: true,
+		createdAt: true,
+		updatedAt: true,
+		leases: {
+			include: {
+				transactions: true,
+			},
+		},
+	},
+});
+
 export type TransactionData = Prisma.TransactionGetPayload<
 	typeof transactionData
 >;
