@@ -64,7 +64,9 @@
 									}`}
 								</p>
 							</div>
-							<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+								<div
+									class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0"
+								>
 								<Icon
 									src={Calendar}
 									class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
@@ -81,7 +83,10 @@
 							<div class="mt-4 overflow-hidden rounded-full bg-gray-200">
 								<div
 									class="h-1 rounded-full bg-indigo-600"
-									style:width="{getProgress(lease.startDate, lease.endDate)}%"
+										style:width={`${getProgress(
+											lease.startDate,
+											lease.endDate,
+										)}%`}
 								/>
 							</div>
 						{/if}
