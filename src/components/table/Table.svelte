@@ -15,19 +15,21 @@
 	$: columns.newData(rows);
 </script>
 
-{#each $columns as header}
-	<label>
-		<input
-			id={header.key}
-			type="checkbox"
-			checked={header.visible}
-			on:change={(e) => {
-				columns.toggle(e.currentTarget.id, e.currentTarget.checked);
-			}}
-		/>
-		{header.label}
-	</label>
-{/each}
+<div class="flex space-x-4">
+	{#each $columns as header}
+		<label>
+			<input
+				id={header.key}
+				type="checkbox"
+				checked={header.visible}
+				on:change={(e) => {
+					columns.toggle(e.currentTarget.id, e.currentTarget.checked);
+				}}
+			/>
+			{header.label}
+		</label>
+	{/each}
+</div>
 
 <div class="flex flex-col">
 	<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
