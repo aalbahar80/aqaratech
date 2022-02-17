@@ -20,5 +20,6 @@
 		"comments": false,
 		"strings": false
 	},
-	"editor.suggest.preview": true
+	"editor.suggest.preview": true,
+	"svelte.plugin.svelte.useNewTransformation": true
 }
