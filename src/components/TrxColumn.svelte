@@ -2,7 +2,7 @@
 	import DropDown from '$components/DropDown.svelte';
 	import type { TenantBrowse } from '$lib/definitions/select';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
-	import { Cash, ChevronRight } from '@steeze-ui/heroicons';
+	import { Cash, ChevronRight, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
 	import type { Jsonify } from 'type-fest';
@@ -22,148 +22,183 @@
 </script>
 
 <section>
-	<div class="section-heading">
-		<div
-			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
-		>
-			<div class="ml-4 mt-2">
-				<h3 class="text-lg font-medium leading-6 text-gray-900">
-					Transactions
-				</h3>
-			</div>
-			<div class="ml-4 mt-2 flex-shrink-0">
-				<button type="button"> Create new transaction </button>
+	{#if transactions.length}
+		<!-- Section heading -->
+		<div class="section-heading">
+			<div
+				class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
+			>
+				<div class="ml-4 mt-2">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">
+						Transactions
+					</h3>
+				</div>
+				<div class="ml-4 mt-2 flex-shrink-0">
+					<button type="button"> Create new transaction </button>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="shadow sm:hidden">
-		<ul>
-			{#each data as transaction (transaction.id)}
-				<li>
-					<a href={`/transaction/${transaction.id}`}>
-						<span class="flex items-center space-x-4">
-							<span class="flex flex-1 space-x-2 truncate">
+		<!-- List for small screens -->
+		<div class="shadow sm:hidden">
+			<ul>
+				{#each data as transaction (transaction.id)}
+					<li>
+						<a href={`/transaction/${transaction.id}`}>
+							<span class="flex items-center space-x-4">
+								<span class="flex flex-1 space-x-2 truncate">
+									<Icon
+										src={Cash}
+										theme="solid"
+										class="h-5 w-5 flex-shrink-0 text-gray-400"
+										aria-hidden="true"
+									/>
+									<span class="flex flex-col truncate text-sm text-gray-500">
+										<span class="truncate">{transaction.memo}</span>
+										<span>
+											<span class="font-medium text-gray-900"
+												>{transaction.amount}</span
+											>{' '}
+											{'KWD'}
+										</span>
+										<time dateTime={transaction.dueDate}
+											>{format(
+												new Date(transaction.createdAt),
+												'MMM dd, yy',
+											)}</time
+										>
+									</span>
+								</span>
 								<Icon
-									src={Cash}
+									src={ChevronRight}
 									theme="solid"
 									class="h-5 w-5 flex-shrink-0 text-gray-400"
 									aria-hidden="true"
 								/>
-								<span class="flex flex-col truncate text-sm text-gray-500">
-									<span class="truncate">{transaction.memo}</span>
-									<span>
-										<span class="font-medium text-gray-900"
-											>{transaction.amount}</span
-										>{' '}
-										{'KWD'}
-									</span>
-									<time dateTime={transaction.dueDate}
-										>{format(
-											new Date(transaction.createdAt),
-											'MMM dd, yy',
-										)}</time
-									>
-								</span>
 							</span>
-							<Icon
-								src={ChevronRight}
-								theme="solid"
-								class="h-5 w-5 flex-shrink-0 text-gray-400"
-								aria-hidden="true"
-							/>
-						</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
-
-	<div class="table-container">
-		<table>
-			<thead>
-				<tr>
-					<th> Memo </th>
-					<th> Amount </th>
-					<th> Status </th>
-					<th> Date </th>
-					<th> Action </th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each data as transaction (transaction.id)}
-					<tr>
-						<td>
-							<div class="flex">
-								<a
-									href={`/transaction/${transaction.id}`}
-									class="group inline-flex space-x-2 truncate text-sm"
-								>
-									<Icon
-										src={Cash}
-										theme="solid"
-										class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-										aria-hidden="true"
-									/>
-									<p class="truncate text-gray-500 group-hover:text-gray-900">
-										{transaction.memo}
-									</p>
-								</a>
-							</div>
-						</td>
-						<td>
-							<span class="font-medium tabular-nums text-gray-900"
-								>{transaction.amount}
-							</span>
-							{'KWD'}
-						</td>
-						<td>
-							<span
-								class={`badge ${
-									transaction.isPaid ? 'badge-green' : 'badge-red'
-								}`}
-							>
-								{transaction.isPaid}
-							</span>
-						</td>
-						<td>
-							<time dateTime={transaction.dueDate}
-								>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
-							>
-						</td>
-						<td class="text-center">
-							<DropDown />
-						</td>
-					</tr>
+						</a>
+					</li>
 				{/each}
-			</tbody>
-		</table>
-	</div>
+			</ul>
+		</div>
 
-	<nav aria-label="Pagination">
-		<div class="hidden sm:block">
-			<p class="text-sm text-gray-700">
-				Showing <span class="font-medium">{start}</span> to
-				<span class="font-medium">{end}</span>
-				of{' '}
-				<span class="font-medium">{transactions.length}</span> results
-			</p>
+		<!-- List for non-small screens -->
+		<div class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th> Memo </th>
+						<th> Amount </th>
+						<th> Status </th>
+						<th> Date </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each data as transaction (transaction.id)}
+						<tr>
+							<td>
+								<div class="flex">
+									<a
+										href={`/transaction/${transaction.id}`}
+										class="group inline-flex space-x-2 truncate text-sm"
+									>
+										<Icon
+											src={Cash}
+											theme="solid"
+											class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+											aria-hidden="true"
+										/>
+										<p class="truncate text-gray-500 group-hover:text-gray-900">
+											{transaction.memo}
+										</p>
+									</a>
+								</div>
+							</td>
+							<td>
+								<span class="font-medium tabular-nums text-gray-900"
+									>{transaction.amount}
+								</span>
+								{'KWD'}
+							</td>
+							<td>
+								<span
+									class={`badge ${
+										transaction.isPaid ? 'badge-green' : 'badge-red'
+									}`}
+								>
+									{transaction.isPaid}
+								</span>
+							</td>
+							<td>
+								<time dateTime={transaction.dueDate}
+									>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
+								>
+							</td>
+							<td class="text-center">
+								<DropDown />
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
 		</div>
-		<div>
-			<button
-				disabled={pageIndex <= 1}
-				on:click={() => pageIndex > 1 && pageIndex--}
-			>
-				Previous
-			</button>
-			<button
-				disabled={pageIndex >= totalPages}
-				on:click={() => pageIndex < totalPages && pageIndex++}
-			>
-				Next
-			</button>
+
+		<nav aria-label="Pagination">
+			<div class="hidden sm:block">
+				<p class="text-sm text-gray-700">
+					Showing <span class="font-medium">{start}</span> to
+					<span class="font-medium">{end}</span>
+					of{' '}
+					<span class="font-medium">{transactions.length}</span> results
+				</p>
+			</div>
+			<div>
+				<button
+					disabled={pageIndex <= 1}
+					on:click={() => pageIndex > 1 && pageIndex--}
+				>
+					Previous
+				</button>
+				<button
+					disabled={pageIndex >= totalPages}
+					on:click={() => pageIndex < totalPages && pageIndex++}
+				>
+					Next
+				</button>
+			</div>
+		</nav>
+	{:else}
+		<div class="overflow-hidden bg-white shadow sm:rounded-md">
+			<div class="text-center py-8 sm:py-16">
+				<svg
+					class="mx-auto h-12 w-12 text-gray-400"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						vector-effect="non-scaling-stroke"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width={2}
+						d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+					/>
+				</svg>
+				<h3 class="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
+				<div class="mt-6">
+					<button
+						type="button"
+						class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+					>
+						<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+						New Transaction
+					</button>
+				</div>
+			</div>
 		</div>
-	</nav>
+	{/if}
 </section>
 
 <style lang="postcss">
