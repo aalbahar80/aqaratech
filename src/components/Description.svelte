@@ -24,8 +24,8 @@
 
 <div class="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 	<dl class="grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-		{#each Object.keys(profile.fields) as field}
-			<div key={field} class="sm:col-span-1">
+		{#each Object.keys(profile.fields) as field (field)}
+			<div class="sm:col-span-1">
 				<dt class="text-sm font-medium text-gray-500">{field}</dt>
 				<dd class="mt-1 text-sm text-gray-900">{profile.fields[field]}</dd>
 			</div>
