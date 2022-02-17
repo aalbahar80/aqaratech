@@ -11,7 +11,7 @@
 </script>
 
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
-<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+<div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<TenantDetail tenant={data} />
 	<LeasesCard leases={data.leases} />
 	<TrxColumn transactions={flatten(map(data.leases, 'transactions'))} />
