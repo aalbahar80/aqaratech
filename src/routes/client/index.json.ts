@@ -1,4 +1,4 @@
-import prisma from '$lib/config/prisma';
+import prisma from '$lib/server/prismaClient';
 import { formSchema } from '$lib/definitions/client';
 import { clientData } from '$lib/definitions/select';
 import { parseParams } from '$lib/utils/table-utils';

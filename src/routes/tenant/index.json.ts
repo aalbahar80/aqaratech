@@ -1,5 +1,5 @@
 import { logger } from '$lib/config/logger';
-import prisma from '$lib/config/prisma';
+import prisma from '$lib/server/prismaClient';
 import { tenantData } from '$lib/definitions/select';
 import { formSchema } from '$lib/definitions/tenant';
 import { parseParams } from '$lib/utils/table-utils';

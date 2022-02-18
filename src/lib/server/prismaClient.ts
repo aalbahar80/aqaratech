@@ -52,21 +52,30 @@
 // #########################
 // https://docs.planetscale.com/tutorials/prisma-quickstart
 
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
 
-const prisma =
-	// @ts-ignore
-	global.prisma ||
-	new PrismaClient({
-		// log: [{ level: 'query', emit: 'event' }, 'info'],
-		// errorFormat: 'pretty',
-	});
+// const prisma =
+// 	// @ts-ignore
+// 	global.prisma ||
+// 	new PrismaClient({
+// 		// log: [{ level: 'query', emit: 'event' }, 'info'],
+// 		// errorFormat: 'pretty',
+// 	});
 
-// @ts-ignore
-if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+// // @ts-ignore
+// if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 
-// @ts-ignore
-// prisma.$on('query', (e) => {
-// 	console.log(e);
-// });
-export default prisma as PrismaClient;
+// // @ts-ignore
+// // prisma.$on('query', (e) => {
+// // 	console.log(e);
+// // });
+// export default prisma as PrismaClient;
+
+// #########################
+// For TRPC https://github.com/icflorescu/trpc-sveltekit
+import pkg from '@prisma/client';
+
+const { PrismaClient } = pkg;
+
+const prismaClient = new PrismaClient();
+export default prismaClient;

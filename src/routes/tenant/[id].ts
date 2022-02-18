@@ -1,4 +1,4 @@
-import prisma from '$lib/config/prisma';
+import prisma from '$lib/server/prismaClient';
 import { tenantBrowse, tenantData } from '$lib/definitions/select';
 import { formSchema } from '$lib/definitions/tenant';
 import type { RequestHandler } from '@sveltejs/kit';
