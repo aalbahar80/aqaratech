@@ -25,6 +25,12 @@
 	const { form, errors, isSubmitting } = createForm({
 		extend: [reporter, validator({ schema: saveInput })],
 		onError: (err) => {
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Error',
+				},
+			});
 			if (err instanceof TRPCClientError) {
 				const serverErrors = getEditorErrors(err);
 				return serverErrors;
@@ -33,8 +39,9 @@
 			return err;
 		},
 		onSubmit: async (values) => {
+			console.log({ values }, 'FormTrpc.svelte ~ 42');
 			const tenant = await trpc.mutation('tenants:save', values);
-			console.log({ tenant }, 'FormTrpc.svelte ~ 29');
+			console.log({ tenant }, 'FormTrpc.svelte ~ 44');
 			addToast({
 				props: {
 					kind: 'success',
