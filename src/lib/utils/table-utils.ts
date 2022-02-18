@@ -1,5 +1,8 @@
 import drop from 'lodash-es/drop';
 
+export default function assertNever(value: never, message?: string): never {
+	throw new Error(message || `Unexpected value: ${value}`);
+}
 export const parseParams = (url: URL) => {
 	const pageSize = Number(url.searchParams.get('pageSize')) || 11;
 	const pageIndex = Number(url.searchParams.get('p')) || 1;

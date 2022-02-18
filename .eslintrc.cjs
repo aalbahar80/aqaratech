@@ -28,7 +28,7 @@ module.exports = {
 				},
 			},
 			rules: {
-				'import/no-unresolved': [2, { ignore: ['^\\$app'] }],
+				'import/no-unresolved': [2, { ignore: ['^\\$app', '^\\@sveltejs'] }],
 			}
 		},
 
