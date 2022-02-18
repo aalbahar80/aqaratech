@@ -13,10 +13,10 @@
 	import Input from './Input.svelte';
 
 	// THIS WORKS
-	// import { saveInput } from '$lib/definitions/tenant';
+	import { saveInput } from '$lib/definitions/tenant';
 
 	// THIS DOESN'T WORK
-	import { saveInput } from '$lib/server/trpc/tenants';
+	// import { saveInput } from '$lib/server/trpc/tenants';
 
 	type Tenant = InferMutationInput<'tenants:save'>;
 	export let formData: Tenant;
