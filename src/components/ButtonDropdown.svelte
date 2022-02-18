@@ -1,17 +1,17 @@
 <script lang="ts">
 	import {
-		Transition,
 		Menu,
 		MenuButton,
 		MenuItem,
 		MenuItems,
+		Transition,
 	} from '@rgossiaux/svelte-headlessui';
-	import { ChevronDown } from '@steeze-ui/heroicons';
+	import { ChevronDown, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	const items = [
-		{ name: 'Update', href: '#' },
-		{ name: 'Remove', href: '#' },
+		{ label: 'Update', href: '#', icon: Pencil },
+		{ label: 'Remove', href: '#', icon: Trash },
 	];
 </script>
 
@@ -44,17 +44,31 @@
 			leaveTo="transform opacity-0 scale-95"
 		>
 			<MenuItems
-				class="absolute right-0 bottom-10 mt-2 -mr-1 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-			>
-				<div class="py-1">
-					{#each items as item (item.name)}
-						<MenuItem let:active as="button" class="w-full text-left">
+				class="absolute right-0 bottom-10 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+				><div class="py-1">
+					{#each items as item}
+						<MenuItem
+							let:active
+							as="button"
+							class="w-full"
+							on:click={(e) => {
+								console.log(e);
+								console.log(`clicked ${item.label}`);
+							}}
+						>
 							<div
-								class={`${
-									active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
-								},'text-sm', block px-4 py-2`}
+								class="group flex items-center px-4 py-2 text-sm"
+								class:bg-gray-100={active}
+								class:text-gray-900={active}
+								class:text-gray-700={!active}
 							>
-								{item.name}
+								<Icon
+									src={item.icon}
+									class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+									aria-hidden="true"
+									theme="solid"
+								/>
+								{item.label}
 							</div>
 						</MenuItem>
 					{/each}
