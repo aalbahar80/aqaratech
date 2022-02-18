@@ -21,6 +21,9 @@ const config = {
 					$lib: path.resolve('./src/lib'),
 				},
 			},
+			ssr: {
+				noExternal: process.env.NODE_ENV === 'production' ? ['superjson'] : []
+			}
 		},
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE']
