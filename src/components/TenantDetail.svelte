@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { TenantBrowse } from '$lib/definitions/select';
+	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Jsonify } from 'type-fest';
 	import ButtonDropdown from './ButtonDropdown.svelte';
 
-	export let tenant: Jsonify<TenantBrowse>;
+	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
+	export let tenant: Tenant;
 </script>
 
 <section class="rounded-md bg-white shadow">

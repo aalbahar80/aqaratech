@@ -1,10 +1,8 @@
 import { differenceInCalendarDays } from 'date-fns';
 
-export const getProgress = (start: string, end: string, ref?: Date): number => {
-	const startDate = new Date(start);
-	const endDate = new Date(end);
-	const total = differenceInCalendarDays(endDate, startDate);
-	const left = differenceInCalendarDays(endDate, ref ?? new Date());
+export const getProgress = (start: Date, end: Date, ref?: Date): number => {
+	const total = differenceInCalendarDays(end, start);
+	const left = differenceInCalendarDays(end, ref ?? new Date());
 	const result = left < 1 ? 100 : 100 - (left / total) * 100;
 	const rounded = Math.round(result);
 	return rounded;
@@ -42,8 +40,8 @@ interface DateDiff {
 
 // define a function that takes an ISO date
 // returns the days remaining in days, or months, or years
-export function formatDateDiff(date: string): DateDiff {
-	const days = Math.abs(daysLeftFromISO(date));
+export function formatDateDiff(date: Date): DateDiff {
+	const days = Math.abs(daysLeft(date));
 	if (days < 7) {
 		return {
 			pretext: 'in',

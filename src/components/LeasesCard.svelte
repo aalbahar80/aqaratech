@@ -1,14 +1,12 @@
 <script lang="ts">
-	import type { TenantBrowse } from '$lib/definitions/select';
+	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { formatDateDiff, getProgress } from '$lib/utils/date-utils';
 	import { Calendar, Home, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Jsonify } from 'type-fest';
 
-	export let leases: Jsonify<TenantBrowse>['leases'];
+	type Leases = NonNullable<InferQueryOutput<'tenants:read'>>['leases'];
+	export let leases: Leases;
 </script>
-
-<!-- <pre>{JSON.stringify(leases[0], null, 2)}</pre> -->
 
 <section class="overflow-hidden rounded-md bg-white shadow">
 	{#if leases.length}
@@ -75,7 +73,7 @@
 										aria-hidden="true"
 									/>
 									<p>
-										Expiry: <time dateTime={lease.endDate}
+										Expiry: <time dateTime={lease.endDate.toISOString()}
 											>{formatDateDiff(lease.endDate).fullText}</time
 										>
 									</p>

@@ -1,13 +1,15 @@
 <script lang="ts">
 	import DropDown from '$components/DropDown.svelte';
-	import type { TenantBrowse } from '$lib/definitions/select';
+	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import { Cash, ChevronRight, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
-	import type { Jsonify } from 'type-fest';
 
-	export let transactions: Jsonify<TenantBrowse>['leases'][number]['transactions'];
+	type Transactions = NonNullable<
+		InferQueryOutput<'tenants:read'>
+	>['leases'][number]['transactions'];
+	export let transactions: Transactions;
 
 	let pageIndex = 1;
 	let data: typeof transactions;
@@ -61,11 +63,8 @@
 											>{' '}
 											{'KWD'}
 										</span>
-										<time dateTime={transaction.dueDate}
-											>{format(
-												new Date(transaction.createdAt),
-												'MMM dd, yy',
-											)}</time
+										<time dateTime={transaction.dueDate.toISOString()}
+											>{format(transaction.createdAt, 'MMM dd, yy')}</time
 										>
 									</span>
 								</span>
@@ -131,8 +130,8 @@
 								</span>
 							</td>
 							<td>
-								<time dateTime={transaction.dueDate}
-									>{format(new Date(transaction.createdAt), 'MMM dd, yy')}</time
+								<time dateTime={transaction.dueDate.toISOString()}
+									>{format(transaction.createdAt, 'MMM dd, yy')}</time
 								>
 							</td>
 							<td class="text-center">

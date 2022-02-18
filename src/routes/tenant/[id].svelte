@@ -1,18 +1,26 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import LeasesCard from '$components/LeasesCard.svelte';
 	import TenantDetail from '$components/TenantDetail.svelte';
 	import TrxColumn from '$components/TrxColumn.svelte';
-	import type { TenantBrowse } from '$lib/definitions/select';
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import type { Load } from '@sveltejs/kit';
 	import flatten from 'lodash-es/flatten';
 	import map from 'lodash-es/map.js';
-	import type { Jsonify } from 'type-fest';
 
-	export let data: Jsonify<TenantBrowse>;
+	export const load: Load = async ({ params }) => {
+		const tenant = await trpc.query('tenants:read', params.id);
+		if (tenant) return { props: { tenant } };
+		return { error: 'Tenant not found', status: 404 };
+	};
 </script>
 
-<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
+<script lang="ts">
+	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
+	export let tenant: Tenant;
+</script>
+
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<TenantDetail tenant={data} />
-	<LeasesCard leases={data.leases} />
-	<TrxColumn transactions={flatten(map(data.leases, 'transactions'))} />
+	<TenantDetail {tenant} />
+	<LeasesCard leases={tenant.leases} />
+	<TrxColumn transactions={flatten(map(tenant.leases, 'transactions'))} />
 </div>
