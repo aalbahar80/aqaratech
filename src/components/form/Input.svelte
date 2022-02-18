@@ -1,4 +1,5 @@
 <script lang="ts">
+	import assertNever from '$lib/utils/table-utils';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import startCase from 'lodash-es/startCase.js';
@@ -20,9 +21,11 @@
 				// 'Create' form gets a Date object
 				// eslint-disable-next-line prefer-destructuring
 				value = value.toISOString().split('T')[0];
+				break;
 			}
 			// 'Edit' form gets an ISO string
-			value = value?.substring(0, 10);
+			// value = value?.substring(0, 10);
+			assertNever(value, "This case shouldn't happen");
 
 			break;
 		case 'monthlyRent':
