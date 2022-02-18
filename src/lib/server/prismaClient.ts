@@ -73,9 +73,33 @@
 
 // #########################
 // For TRPC https://github.com/icflorescu/trpc-sveltekit
+// import pkg from '@prisma/client';
+
+// const { PrismaClient } = pkg;
+
+// const prismaClient = new PrismaClient();
+// export default prismaClient;
+
+// #########################
+// Combining planetscale + trpc suggestions
+
 import pkg from '@prisma/client';
 
 const { PrismaClient } = pkg;
 
-const prismaClient = new PrismaClient();
-export default prismaClient;
+const prismaClient =
+	// @ts-ignore
+	global.prismaClient ||
+	new PrismaClient({
+		// log: [{ level: 'query', emit: 'event' }, 'info'],
+		// errorFormat: 'pretty',
+	});
+
+// @ts-ignore
+if (process.env.NODE_ENV === 'development') global.prismaClient = prismaClient;
+
+// @ts-ignore
+// prisma.$on('query', (e) => {
+// 	console.log(e);
+// });
+export default prismaClient as PrismaClient;
