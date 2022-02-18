@@ -8,8 +8,11 @@
 	import map from 'lodash-es/map.js';
 
 	export const load: Load = async ({ params }) => {
+		if (params.id === 'add') return { fallthrough: true };
+
 		const tenant = await trpc.query('tenants:read', params.id);
 		if (tenant) return { props: { tenant } };
+
 		return { error: 'Tenant not found', status: 404 };
 	};
 </script>
