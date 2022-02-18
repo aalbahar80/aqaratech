@@ -11,14 +11,14 @@ export const saveInput = z.object({
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
-	// civilid: z
-	// 	.string()
-	// 	.min(12)
-	// 	.and(z.string().max(12))
-	// 	.or(z.literal(''))
-	// 	.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
-	// 		message: 'Civil ID must contain only numbers',
-	// 	}),
+	civilid: z
+		.string()
+		.min(12)
+		.and(z.string().max(12))
+		.or(z.literal(''))
+		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+			message: 'Civil ID must contain only numbers',
+		}),
 });
 
 export default trpc
