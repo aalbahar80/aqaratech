@@ -410,31 +410,31 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-6.0.0-alpha.6.tgz#1724c4f67b62d2a14e76781675179c2f02dafbae"
   integrity sha512-+jatKq8wYwOgCpVQ0wE4t9BglS16qJH/Nu4WjPU+ABTywivTY8BCsD1XIZhw9iXDq3t1InyiXmz+R70TcUMbrg==
 
-"@felte/common@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@felte/common/-/common-0.6.0.tgz#64cb3438be91b2d553641bc7ec523284806186f5"
-  integrity sha512-dLh+heGTGKQzIeUbLcJMEvDks3YTy99FFdUHg8/fxeIFSprUM/b4olK+tIMBrTE30AV2BFYeQHxB8hFpzUafAQ==
+"@felte/common@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@felte/common/-/common-1.0.0.tgz#8d14fba872997fdba54a03c1b0b0eb8624579abf"
+  integrity sha512-KfoDwcLVGTSbRHT0B4DovpMIFoeU+HxmjWwg4HYFTLNyDFNvYAgp9/KOkyNwPzMI+K2EX6Ermam6MhCGhu+bvQ==
 
-"@felte/core@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@felte/core/-/core-0.3.0.tgz#d95fb20b4bb5d3ffd66149528f85cd937e627794"
-  integrity sha512-v3rOg8wdchnQoMYJCPLelaJmgyG3doibYFqKmoOj7iQlnI738fczEEjDToJfa9UUbYBRDdgfYHXrEtEK7kYIGg==
+"@felte/core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@felte/core/-/core-1.0.0.tgz#2c79e817d71ddebb219dac0e06ab5cdecf06661a"
+  integrity sha512-aKMxh7xpomNAhV0XGr0B7z2OzIwn9F8QD83YAuHOrM5Fnhes0Dow/gomAHLLWDI2VqzfFPohK0YTFgAuYFiBkg==
   dependencies:
-    "@felte/common" "0.6.0"
+    "@felte/common" "1.0.0"
 
-"@felte/reporter-svelte@^0.3.19":
-  version "0.3.20"
-  resolved "https://registry.yarnpkg.com/@felte/reporter-svelte/-/reporter-svelte-0.3.20.tgz#222e40ac97ea02794478252bd3493c4c16187cd0"
-  integrity sha512-2XxDLVBDXrKVNT/YUQ68m0xT5/wtw46ING2WhmhZX2GM3ldGwGaDVxv5B18W/pJ08JUzs3OAjgiqU44HScIX6A==
+"@felte/reporter-svelte@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@felte/reporter-svelte/-/reporter-svelte-1.0.0.tgz#23ae6c0000fdbd1c484612793637b7cd15018260"
+  integrity sha512-O2s1pfgBCWAtMrd+vCzLih2oXTQBh3YQuQIRoiHMDNuuhjAE1E8+ozD+CKhjW8SGgTU8TfWJQ56ASbneBpK5HA==
   dependencies:
-    "@felte/common" "0.6.0"
+    "@felte/common" "1.0.0"
 
-"@felte/validator-zod@^0.3.6":
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-0.3.8.tgz#4d941e33eb988c87b8ed04b5ceed0fe8cb85c331"
-  integrity sha512-jfRIrgCCheuo6yPjZ3nzSAZjoFveAr4L9NPiFcizt66FNa8P7Y5oqmbHOjHlpe4d6Z2JCTtmJxcTcwgMBGa64A==
+"@felte/validator-zod@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-1.0.1.tgz#d24ce817a5c86fcfe8332502e2d9dee6be0e404e"
+  integrity sha512-FAEdz53qTXetDsLMswb3jf3q06tYZ/Cjo5X3WArMNe19GYJpM+MNspNSqxZRx/oFzOyRnalHkoWrYZMImM97rg==
   dependencies:
-    "@felte/common" "0.6.0"
+    "@felte/common" "1.0.0"
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
@@ -3005,12 +3005,12 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-felte@^0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/felte/-/felte-0.9.1.tgz#17fab2e056204d96249d64a2c6739b090fae872b"
-  integrity sha512-Oe5iA0t6CsP9Hqg8nBhvoVsBD4TilPFh8JlnK3h0yED+1CDGxC34iVw9V1ewuWnQf3t6P+YINqawfKvU0ePCKg==
+felte@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/felte/-/felte-1.0.0.tgz#f6d35d836ab5cf4f782baa1228b58da7461bb2b1"
+  integrity sha512-h5gRrSDC+nH2I+n+vvyYdrVlHJcOMvXRjDGaTupl7oKjy0EgCTGMT36ATkq0UZmjdTYGfH9pjwurSwiz3HwgXw==
   dependencies:
-    "@felte/core" "0.3.0"
+    "@felte/core" "1.0.0"
 
 fflate@^0.4.1:
   version "0.4.8"
