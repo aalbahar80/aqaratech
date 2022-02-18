@@ -24,7 +24,6 @@
 
 	const { form, errors, isSubmitting } = createForm({
 		extend: [reporter, validator({ schema: saveInput })],
-		initialValues: formData,
 		onError: (err) => {
 			if (err instanceof TRPCClientError) {
 				const serverErrors = getEditorErrors(err);

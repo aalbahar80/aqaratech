@@ -7,6 +7,7 @@
 		id: '',
 		firstName: 'Kylian',
 		lastName: 'Mbappe',
+		dob: new Date(),
 		email: '',
 		civilid: '',
 		phone: '12345678',

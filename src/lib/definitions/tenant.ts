@@ -9,6 +9,9 @@ export const saveInput = z.object({
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
+	dob: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
 	civilid: z
 		.string()
 		.min(12)
