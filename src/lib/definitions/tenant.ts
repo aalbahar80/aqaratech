@@ -10,23 +10,22 @@ export const defaultForm: Omit<TenantData, 'id' | 'createdAt' | 'updatedAt'> = {
 	civilid: null,
 };
 
-export const formSchema = z.object({
+export const saveInput = z.object({
 	// TODO replace z.undefined with z.never?
-	id: z.undefined(),
-	createdAt: z.undefined(),
-	updatedAt: z.undefined(),
+	// TODO what happens if i pass in manual createdAt and updatedAt?
+	id: z.string().optional(),
 	firstName: z.string().min(1, { message: 'Required' }),
 	lastName: z.string().min(1, { message: 'Required' }),
 	email: z.string().email(),
 	phone: z.string().min(8).and(z.string().max(8)),
-	civilid: z
-		.string()
-		.min(12)
-		.and(z.string().max(12))
-		.or(z.literal(''))
-		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
-			message: 'Civil ID must contain only numbers',
-		}),
+	// civilid: z
+	// 	.string()
+	// 	.min(12)
+	// 	.and(z.string().max(12))
+	// 	.or(z.literal(''))
+	// 	.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+	// 		message: 'Civil ID must contain only numbers',
+	// 	}),
 });
 
 const transformer = (data: TenantData): TenantData => ({
@@ -34,4 +33,4 @@ const transformer = (data: TenantData): TenantData => ({
 	dob: data.dob ? new Date(data.dob) : null,
 });
 
-export default { formSchema, defaultForm, transformer };
+export default { defaultForm, transformer };
