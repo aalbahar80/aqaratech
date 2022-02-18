@@ -2,8 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { addToast } from '$lib/stores/toast';
-	import { svelteReporter } from '@felte/reporter-svelte';
-	import { validator } from '@felte/validator-zod';
 	import { createForm } from 'felte';
 	import isEmpty from 'just-is-empty';
 	import startCase from 'lodash-es/startCase.js';
@@ -35,7 +33,6 @@
 
 	const { form, errors, isSubmitting } = createForm({
 		transform: transformer,
-		extend: [validator, svelteReporter],
 		validateSchema: refiner
 			? refiner(
 					formSchema.omit({
