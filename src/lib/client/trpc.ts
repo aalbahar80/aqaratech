@@ -11,10 +11,11 @@ if (browser) {
 } else if (dev) {
 	url = 'http://localhost:3000/trpc';
 } else if (process.env.VERCEL && process.env.VERCEL_URL) {
-	url = `${process.env.VERCEL_URL}/trpc`;
+	url = `https://${process.env.VERCEL_URL}/trpc`;
 } else {
-	url = 'https://svelte-14dec21.vercel.app/trpc';
-	throw new Error('Unable to determine url');
+	const message = 'Could not determine trpc url';
+	console.log({ message }, 'trpc.ts ~ 17');
+	throw new Error(message);
 }
 
 const client = trpc.createTRPCClient<Router>({
