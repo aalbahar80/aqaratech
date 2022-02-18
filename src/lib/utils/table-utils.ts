@@ -1,4 +1,4 @@
-import drop from 'lodash-es/drop';
+import drop from 'lodash-es/drop.js';
 
 export default function assertNever(value: never, message?: string): never {
 	throw new Error(message || `Unexpected value: ${value}`);

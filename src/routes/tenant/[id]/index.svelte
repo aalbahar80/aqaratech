@@ -4,7 +4,7 @@
 	import TrxColumn from '$components/TrxColumn.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import type { Load } from '@sveltejs/kit';
-	import flatten from 'lodash-es/flatten';
+	import flatten from 'lodash-es/flatten.js';
 	import map from 'lodash-es/map.js';
 
 	export const load: Load = async ({ params }) => {
