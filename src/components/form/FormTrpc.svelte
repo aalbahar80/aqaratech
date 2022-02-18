@@ -3,7 +3,6 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import type { InferMutationInput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
-	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator, type ValidatorConfig } from '@felte/validator-zod';
@@ -12,6 +11,12 @@
 	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
 	import Input from './Input.svelte';
+
+	// THIS WORKS
+	// import { saveInput } from '$lib/definitions/tenant';
+
+	// THIS DOESN'T WORK
+	import { saveInput } from '$lib/server/trpc/tenants';
 
 	type Tenant = InferMutationInput<'tenants:save'>;
 	export let formData: Tenant;
