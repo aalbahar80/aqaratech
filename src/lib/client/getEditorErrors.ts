@@ -7,7 +7,7 @@ export default function (error: TRPCClientError<Router>) {
 		alert('Unknown error');
 		return;
 	}
-	const errors = {};
+	const errors: any = {};
 	(JSON.parse(error.message) as { path: string[]; message: string }[]).forEach(
 		(err) => {
 			errors[err.path[0]] = [err.message];

@@ -14,7 +14,6 @@ if (browser) {
 	url = `https://${process.env.VERCEL_URL}/trpc`;
 } else {
 	const message = 'Could not determine trpc url';
-	console.log({ message }, 'trpc.ts ~ 17');
 	throw new Error(message);
 }
 

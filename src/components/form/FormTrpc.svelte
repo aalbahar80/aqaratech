@@ -3,20 +3,14 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import type { InferMutationInput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
 	import { reporter } from '@felte/reporter-svelte';
-	import { validator, type ValidatorConfig } from '@felte/validator-zod';
+	import { validator } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import startCase from 'lodash-es/startCase.js';
-	import type { z } from 'zod';
 	import Input from './Input.svelte';
-
-	// THIS WORKS
-	import { saveInput } from '$lib/definitions/tenant';
-
-	// THIS DOESN'T WORK
-	// import { saveInput } from '$lib/server/trpc/tenants';
 
 	type Tenant = InferMutationInput<'tenants:save'>;
 	export let formData: Tenant;
@@ -28,21 +22,16 @@
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
-	const { form, errors, isSubmitting } = createForm<
-		z.infer<typeof saveInput>,
-		ValidatorConfig
-	>({
+	const { form, errors, isSubmitting } = createForm({
 		extend: [reporter, validator({ schema: saveInput })],
 		initialValues: formData,
 		onError: (err) => {
-			console.log({ err }, 'FormTrpc.svelte ~ 34');
 			if (err instanceof TRPCClientError) {
-				console.log({ err }, 'the og error');
-				console.log(err.data.code);
 				const serverErrors = getEditorErrors(err);
-				console.log({ serverErrors }, 'the server error');
 				return serverErrors;
 			}
+			// const newErrors = mapValues(formData, (_) => null);
+			return err;
 		},
 		onSubmit: async (values) => {
 			const tenant = await trpc.mutation('tenants:save', values);
@@ -79,7 +68,7 @@
 								{name}
 								{value}
 								invalid={!!getValue($errors, name)}
-								invalidText={getValue($errors, name)}
+								invalidText={getValue($errors, 'email')?.[0]}
 							/>
 						{/each}
 					</div>
