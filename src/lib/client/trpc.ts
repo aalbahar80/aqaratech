@@ -1,11 +1,24 @@
-import { browser } from '$app/env';
+import { browser, dev } from '$app/env';
 import type { Router } from '$lib/server/trpc';
-import superjson from 'superjson';
 import * as trpc from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
+import superjson from 'superjson';
+
+let url: string;
+
+if (browser) {
+	url = '/trpc';
+} else if (dev) {
+	url = 'http://localhost:3000/trpc';
+} else if (process.env.VERCEL && process.env.VERCEL_URL) {
+	url = `${process.env.VERCEL_URL}/trpc`;
+} else {
+	url = 'https://svelte-14dec21.vercel.app/trpc';
+	throw new Error('Unable to determine url');
+}
 
 const client = trpc.createTRPCClient<Router>({
-	url: browser ? '/trpc' : 'http://localhost:3000/trpc',
+	url,
 	transformer: superjson,
 });
 
