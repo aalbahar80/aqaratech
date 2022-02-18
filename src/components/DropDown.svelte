@@ -45,5 +45,5 @@
 		</MenuButton>
 	</div>
 
-	<DropdownMenu {items} />
+	<DropdownMenu {items} class="bottom-10" />
 </Menu>

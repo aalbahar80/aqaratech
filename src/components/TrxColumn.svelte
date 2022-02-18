@@ -242,7 +242,7 @@
 		@apply text-left;
 	}
 	.table-container {
-		@apply hidden min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:block;
+		@apply hidden min-w-full align-middle shadow sm:block;
 	}
 	li {
 		@apply divide-y divide-gray-200 overflow-hidden shadow sm:hidden;
@@ -258,7 +258,7 @@
 		@apply relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
 	}
 	section {
-		@apply flex flex-col overflow-hidden rounded-md shadow;
+		@apply flex flex-col rounded-md shadow;
 	}
 	tbody td:not(:last-child) {
 		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-900;

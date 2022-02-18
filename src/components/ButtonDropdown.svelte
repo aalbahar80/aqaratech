@@ -10,7 +10,7 @@
 	];
 </script>
 
-<span class="relative z-0 inline-flex rounded-md shadow-sm">
+<span class="relative inline-flex rounded-md shadow-sm">
 	<button
 		type="button"
 		class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -29,6 +29,6 @@
 				theme="solid"
 			/>
 		</MenuButton>
-		<DropdownMenu {items} />
+		<DropdownMenu {items} class="bottom-10" />
 	</Menu>
 </span>
