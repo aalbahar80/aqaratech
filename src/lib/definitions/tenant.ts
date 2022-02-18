@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { TenantData } from './select';
 
 export const saveInput = z.object({
 	// TODO replace z.undefined with z.never?
@@ -21,11 +20,3 @@ export const saveInput = z.object({
 			message: 'Civil ID must contain only numbers',
 		}),
 });
-
-const transformer = (data: TenantData): TenantData => ({
-	...data,
-	dob: data.dob ? new Date(data.dob) : null,
-});
-export const defaultForm = {};
-export const formSchema = {};
-export default { defaultForm, transformer };

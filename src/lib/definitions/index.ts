@@ -1,7 +1,6 @@
 import client from './client';
 import property from './property';
 import unit from './unit';
-import tenant from './tenant';
 import lease from './lease';
 import transaction from './transaction';
 
@@ -17,6 +16,5 @@ export default {
 	property,
 	unit,
 	lease,
-	tenant,
 	transaction,
 };
