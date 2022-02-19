@@ -1,8 +1,7 @@
-import prismaClient from '$lib/server/prismaClient';
-// import { falsyToNull, trim } from '$lib/zodTransformers';
-import { z } from 'zod';
-import * as trpc from '@trpc/server';
 import { saveInput } from '$lib/definitions/tenant';
+import prismaClient from '$lib/server/prismaClient';
+import * as trpc from '@trpc/server';
+import { z } from 'zod';
 
 export default trpc
 	.router()
@@ -37,14 +36,24 @@ export default trpc
 				},
 			}),
 	})
+	.query('list', {
+		resolve: () =>
+			prismaClient.tenant.findMany({
+				take: 10,
+			}),
+	})
 	.mutation('save', {
+		// input: saveInput,
 		input: saveInput,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.tenant.update({
 						data,
 						where: { id },
-						select: { id: true },
+						// select: { id: true },
 				  })
-				: prismaClient.tenant.create({ data, select: { id: true } }),
+				: prismaClient.tenant.create({
+						data,
+						// select: { id: true },
+				  }),
 	});

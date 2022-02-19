@@ -5,7 +5,19 @@ import { sequence } from '@sveltejs/kit/hooks';
 import cookie from 'cookie';
 import { createTRPCHandle } from 'trpc-sveltekit';
 
-export const handle1: Handle = createTRPCHandle({ router, createContext });
+// remove trailing slash for /trpc requests
+const removeTrailingSlash: Handle = async ({ event, resolve }) => {
+	if (
+		event.url.pathname.endsWith('/') &&
+		event.url.pathname.startsWith('/trpc')
+	) {
+		event.url.pathname = event.url.pathname.slice(0, -1);
+	}
+	const response = await resolve(event);
+	return response;
+};
+
+export const trpcHandler: Handle = createTRPCHandle({ router, createContext });
 export const handle2: Handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 
@@ -81,7 +93,11 @@ export const handle2: Handle = async ({ event, resolve }) => {
 
 	return response;
 };
-export const handle: Handle = sequence(handle1, handle2);
+export const handle: Handle = sequence(
+	removeTrailingSlash,
+	trpcHandler,
+	// handle2,
+);
 
 export const getSession: GetSession = ({ locals }) => ({
 	user: locals.user,

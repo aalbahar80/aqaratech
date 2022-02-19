@@ -1,13 +1,13 @@
-import { falsyToNull } from '$lib/zodTransformers';
+import { falsyToNull, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 
 export const saveInput = z.object({
 	// TODO replace z.undefined with z.never?
 	// TODO what happens if i pass in manual createdAt and updatedAt?
 	id: z.string().nullable(),
-	firstName: z.string().min(1, { message: 'Required' }),
-	lastName: z.string().min(1, { message: 'Required' }),
-	email: z.string().email().nullable().transform(falsyToNull),
+	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
+	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
+	email: z.string().email().optional().transform(falsyToNull),
 	phone: z.string().min(8).and(z.string().max(8)),
 	dob: z.preprocess((arg) => {
 		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);

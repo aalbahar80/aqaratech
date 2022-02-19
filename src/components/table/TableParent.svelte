@@ -28,8 +28,8 @@
 	// add view & edit to each row
 	$: newRows = rows.map((row) => ({
 		...row,
-		view: `./${row.id}`,
-		edit: `./${row.id}/edit`,
+		view: `${row.id}`,
+		edit: `${row.id}/edit`,
 	}));
 </script>
 
