@@ -8,7 +8,7 @@
 		firstName: 'Kylian',
 		lastName: 'Mbappe',
 		dob: new Date(),
-		email: 'a@a.com',
+		email: '',
 		civilid: '',
 		phone: '12345678',
 	});
