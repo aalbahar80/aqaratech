@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { singular, type Entity } from '$lib/definitions';
@@ -16,14 +17,14 @@
 		const data = await trpc.query(`${entity}:basic`, id);
 		if (data)
 			return {
-				props: { data, entity },
+				props: { data },
 			};
 		return { error: 'id not found', status: 404 };
 	};
 </script>
 
 <script lang="ts">
-	export let entity: Entity;
+	export let entity: Entity = $page.params.entity as Entity;
 	export let data: InferQueryOutput<`${typeof entity}:basic`>;
 </script>
 
