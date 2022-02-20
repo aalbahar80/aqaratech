@@ -17,7 +17,19 @@ const removeTrailingSlash: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
+const noIndex: Handle = async ({ event, resolve }) => {
+	// TODO remove this in production
+	const response = await resolve(event);
+	// eslint-disable-next-line no-constant-condition
+	if (import.meta.env.VITE_VERCEL_ENV !== 'production' || true) {
+		response.headers.set('X-Robots-Tag', 'noindex');
+	}
+	// response.headers.set('cache-control', 's-maxage=0');
+	return response;
+};
+
 export const trpcHandler: Handle = createTRPCHandle({ router, createContext });
+
 export const handle2: Handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 
@@ -37,19 +49,6 @@ export const handle2: Handle = async ({ event, resolve }) => {
 	}
 
 	const response = await resolve(event);
-
-	// if (!event.locals.user && !publicPages.includes(event.url.pathname)) {
-	// 	// return {
-	// 	// 	status: 302,
-	// 	// 	headers: {
-	// 	// 		location: '/',
-	// 	// 	},
-	// 	// };
-	// 	return new Response('someStringBody', {
-	// 		status: 302,
-	// 		headers: { location: '/' },
-	// 	});
-	// }
 
 	response.headers.append(
 		'Set-Cookie',
@@ -84,18 +83,12 @@ export const handle2: Handle = async ({ event, resolve }) => {
 		}),
 	);
 
-	// TODO remove this in production
-	// eslint-disable-next-line no-constant-condition
-	if (import.meta.env.VITE_VERCEL_ENV !== 'production' || true) {
-		response.headers.set('X-Robots-Tag', 'noindex');
-	}
-	// response.headers.set('cache-control', 's-maxage=0');
-
 	return response;
 };
 export const handle: Handle = sequence(
 	removeTrailingSlash,
 	trpcHandler,
+	noIndex,
 	// handle2,
 );
 
