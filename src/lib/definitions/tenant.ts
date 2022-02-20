@@ -8,7 +8,7 @@ export const saveInput = z.object({
 	id: z.string().nullable(),
 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
-	email: z.string().email().optional().transform(falsyToNull),
+	email: z.string().email().or(z.literal('')).transform(falsyToNull),
 	phone: z.string().min(8).and(z.string().max(8)),
 	dob: z.preprocess((arg) => {
 		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
