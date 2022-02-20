@@ -27,7 +27,7 @@
 				"src/lib/*"
 			],
 			"$components/*": [
-				"./src/components/*"
+				"src/lib/components/*"
 			],
 			"$generated/*": [
 				"./src/generated/*"
