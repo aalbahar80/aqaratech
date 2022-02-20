@@ -13,7 +13,7 @@
     "build": "yarn run tailwind:build && yarn run build:only",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte",
