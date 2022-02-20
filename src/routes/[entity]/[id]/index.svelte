@@ -80,4 +80,9 @@
 	Delete account
 </button>
 
-<ModalDelete bind:isOpen on:delete={handleDelete} on:close={handleClose} />
+<ModalDelete
+	{isOpen}
+	{loading}
+	on:delete={handleDelete}
+	on:close={handleClose}
+/>

@@ -11,8 +11,8 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let isOpen: boolean;
+	export let loading: boolean;
 
-	let loading = false;
 	let cancelButton: HTMLButtonElement;
 	const dispatch = createEventDispatcher();
 </script>
