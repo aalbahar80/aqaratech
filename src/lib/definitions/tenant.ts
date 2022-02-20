@@ -9,7 +9,13 @@ export const saveInput = z.object({
 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
 	email: z.string().email().or(z.literal('')).transform(falsyToNull),
-	phone: z.string().min(8).and(z.string().max(8)),
+	phone: z
+		.string()
+		.min(8)
+		.and(z.string().max(8))
+		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+			message: 'Phone must contain only numbers',
+		}),
 	dob: z.preprocess((arg) => {
 		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 	}, z.date().nullable()),
