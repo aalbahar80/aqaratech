@@ -1,6 +1,10 @@
 <script context="module" lang="ts">
 	import FormGeneric from '$components/form/FormGeneric.svelte';
-	import defs, { isEntity, type Entity } from '$lib/definitions/index';
+	import {
+		entityDefinitions,
+		isEntity,
+		type Entity,
+	} from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = ({ params }) => {
@@ -21,4 +25,4 @@
 	export let entity: Entity;
 </script>
 
-<FormGeneric formData={defs[entity].defaultForm()} />
+<FormGeneric formData={entityDefinitions[entity].defaultForm()} />

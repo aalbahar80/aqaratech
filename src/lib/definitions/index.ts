@@ -17,9 +17,7 @@ type EntityDefinitions = {
 	[K in Entity]: EntityDefinition<K>;
 };
 
-const entityDefinitions: EntityDefinitions = {
+export const entityDefinitions: EntityDefinitions = {
 	leases: lease,
 	tenants: tenant,
 };
-
-export default entityDefinitions;
