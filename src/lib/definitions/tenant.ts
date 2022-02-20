@@ -31,12 +31,12 @@ export const schema = z.object({
 type Tenant = InferMutationInput<'tenants:save'>;
 const defaultForm = (): Tenant => ({
 	id: '',
-	firstName: 'Kylian',
-	lastName: 'Mbapdsfpe',
+	firstName: '',
+	lastName: '',
 	dob: new Date(),
 	email: '',
 	civilid: '',
-	phone: '12345678',
+	phone: '',
 });
 
 export default { schema, defaultForm };
