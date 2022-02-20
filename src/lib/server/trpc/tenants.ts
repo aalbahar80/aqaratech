@@ -1,5 +1,6 @@
 import { saveInput } from '$lib/definitions/tenant';
 import prismaClient from '$lib/server/prismaClient';
+import { getSkip } from '$lib/utils/table-utils';
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
@@ -37,9 +38,23 @@ export default trpc
 			}),
 	})
 	.query('list', {
-		resolve: () =>
+		input: z.string().optional().default('1'),
+		resolve: ({ input }) =>
 			prismaClient.tenant.findMany({
 				take: 10,
+				skip: getSkip(input, 10),
+				orderBy: {
+					updatedAt: 'desc',
+				},
+				select: {
+					id: true,
+					firstName: true,
+					lastName: true,
+					email: true,
+					phone: true,
+					updatedAt: true,
+					createdAt: true,
+				},
 			}),
 	})
 	.mutation('save', {
