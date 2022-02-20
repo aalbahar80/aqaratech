@@ -13,11 +13,13 @@ export function isEntity(entity: string | Entity): entity is Entity {
 	return entities.includes(entity as Entity);
 }
 
-type EntityDefinition = {
-	defaultForm: () => InferMutationInput<'tenants:save' | 'leases:save'>;
+type EntityDefinition<T extends Entity> = {
+	defaultForm: () => InferMutationInput<`${T}:save`>;
 };
 
-type EntityDefinitions = Record<Entity, EntityDefinition>;
+type EntityDefinitions = {
+	[K in Entity]: EntityDefinition<K>;
+};
 
 const entityDefinitions: EntityDefinitions = {
 	// clients: client,
