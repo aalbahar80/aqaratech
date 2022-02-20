@@ -5,18 +5,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 import cookie from 'cookie';
 import { createTRPCHandle } from 'trpc-sveltekit';
 
-// remove trailing slash for /trpc requests
-const removeTrailingSlash: Handle = async ({ event, resolve }) => {
-	if (
-		event.url.pathname.endsWith('/') &&
-		event.url.pathname.startsWith('/trpc')
-	) {
-		event.url.pathname = event.url.pathname.slice(0, -1);
-	}
-	const response = await resolve(event);
-	return response;
-};
-
 const noIndex: Handle = async ({ event, resolve }) => {
 	// TODO remove this in production
 	const response = await resolve(event);
@@ -86,7 +74,6 @@ export const handle2: Handle = async ({ event, resolve }) => {
 	return response;
 };
 export const handle: Handle = sequence(
-	removeTrailingSlash,
 	trpcHandler,
 	noIndex,
 	// handle2,
