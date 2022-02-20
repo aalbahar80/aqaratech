@@ -50,6 +50,8 @@
 			// await goto(`/${$page.params.entity}/${body.id}`);
 		},
 	});
+
+	const getTitle = (entity: string) => singular[entity as Entity];
 </script>
 
 <div class="mx-auto mt-8 h-full max-w-xl">
@@ -60,9 +62,9 @@
 		<div class="h-0 flex-1 overflow-y-auto">
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
-					<!-- <h1 class="text-2xl font-medium">
-						{`New ${singular[$page.params.entity]}`}
-					</h1> -->
+					<h1 class="text-2xl font-medium">
+						{getTitle($page.params.entity)}
+					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
