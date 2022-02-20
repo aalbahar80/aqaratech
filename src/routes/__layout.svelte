@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { navigating } from '$app/stores';
-	import NavBar from '$components/form/NavBar.svelte';
+	import NavBar from '$components/NavBar.svelte';
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import '../styles/tailwind.css';
