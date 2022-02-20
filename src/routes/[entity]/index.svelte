@@ -4,6 +4,7 @@
 	import trpc from '$lib/client/trpc';
 	import { isEntity } from '$lib/definitions';
 	import type { Load } from '@sveltejs/kit';
+	import startCase from 'lodash-es/startCase.js';
 
 	export const load: Load = async ({ url, params }) => {
 		const { entity } = params;
@@ -26,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<title>{$page.params.entity}</title>
+	<title>{startCase($page.params.entity)}</title>
 </svelte:head>
 
 <TableParent {rows} />
