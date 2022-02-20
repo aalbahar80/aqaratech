@@ -92,4 +92,16 @@ export default trpc
 						data,
 						// select: { id: true },
 				  }),
+	})
+	.mutation('delete', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.tenant.delete({
+				where: {
+					id,
+				},
+				select: {
+					id: true,
+				},
+			}),
 	});
