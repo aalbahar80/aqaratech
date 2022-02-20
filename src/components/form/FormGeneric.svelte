@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import type { InferMutationInput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
@@ -12,7 +11,7 @@
 	import startCase from 'lodash-es/startCase.js';
 	import Input from './Input.svelte';
 
-	export let formData;
+	export let formData: any;
 
 	const getTitle = () =>
 		startCase(

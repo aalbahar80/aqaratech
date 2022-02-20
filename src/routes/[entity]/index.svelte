@@ -2,14 +2,8 @@
 	import { page } from '$app/stores';
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc from '$lib/client/trpc';
+	import { isEntity } from '$lib/definitions';
 	import type { Load } from '@sveltejs/kit';
-
-	const entities = ['tenants', 'leases'] as const;
-	type Entity = typeof entities[number];
-
-	function isEntity(entity: string | Entity): entity is Entity {
-		return entities.includes(entity as Entity);
-	}
 
 	export const load: Load = async ({ url, params }) => {
 		const { entity } = params;

@@ -1,12 +1,24 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
 	import FormGeneric from '$components/form/FormGeneric.svelte';
-	import defs, { type EntityDefinitions } from '$lib/definitions/index';
+	import defs, { isEntity, type Entity } from '$lib/definitions/index';
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = ({ params }) => {
+		const { entity } = params;
+		if (isEntity(entity)) {
+			return {
+				props: { entity },
+			};
+		}
+		return {
+			status: 404,
+			error: 'Unknown entity',
+		};
+	};
 </script>
 
 <script lang="ts">
-	const entityDefs: EntityDefinitions =
-		defs?.[$page.params.entity as keyof typeof defs];
+	export let entity: Entity;
 </script>
 
-<FormGeneric formData={entityDefs.defaultForm()} />
+<FormGeneric formData={defs[entity].defaultForm()} />

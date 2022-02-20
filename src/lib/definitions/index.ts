@@ -1,19 +1,31 @@
+import type { InferMutationInput } from '$lib/client/trpc';
 import client from './client';
-import property from './property';
-import unit from './unit';
 import lease from './lease';
+import property from './property';
 import tenant from './tenant';
 import transaction from './transaction';
+import unit from './unit';
 
-export type EntityDefinitions = {
-	defaultForm: any;
+const entities = ['tenants', 'leases'] as const;
+export type Entity = typeof entities[number];
+
+export function isEntity(entity: string | Entity): entity is Entity {
+	return entities.includes(entity as Entity);
+}
+
+type EntityDefinition = {
+	defaultForm: () => InferMutationInput<'tenants:save' | 'leases:save'>;
 };
 
-export default {
-	clients: client,
-	properties: property,
-	units: unit,
+type EntityDefinitions = Record<Entity, EntityDefinition>;
+
+const entityDefinitions: EntityDefinitions = {
+	// clients: client,
+	// properties: property,
+	// units: unit,
 	leases: lease,
 	tenants: tenant,
-	transactions: transaction,
+	// transactions: transaction,
 };
+
+export default entityDefinitions;
