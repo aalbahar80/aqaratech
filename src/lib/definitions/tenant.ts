@@ -1,3 +1,4 @@
+import type { InferMutationInput } from '$lib/client/trpc';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 
@@ -22,3 +23,16 @@ export const saveInput = z.object({
 		})
 		.nullable(),
 });
+
+type Tenant = InferMutationInput<'tenants:save'>;
+const defaultForm = (): Tenant => ({
+	id: '',
+	firstName: 'Kylian',
+	lastName: 'Mbapdsfpe',
+	dob: new Date(),
+	email: '',
+	civilid: '',
+	phone: '12345678',
+});
+
+export default { defaultForm };
