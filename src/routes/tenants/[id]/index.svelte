@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-	import LeasesCard from '$components/LeasesCard.svelte';
-	import TenantDetail from '$components/TenantDetail.svelte';
-	import TrxColumn from '$components/TrxColumn.svelte';
+	import LeasesCard from '$components/tenant/LeasesCard.svelte';
+	import TenantDetail from '$components/tenant/TenantDetail.svelte';
+	import TrxColumn from '$components/tenant/TrxColumn.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import type { Load } from '@sveltejs/kit';
 	import flatten from 'lodash-es/flatten.js';

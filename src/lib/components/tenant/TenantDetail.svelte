@@ -1,9 +1,9 @@
 <script lang="ts">
+	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import ButtonDropdown from './ButtonDropdown.svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
