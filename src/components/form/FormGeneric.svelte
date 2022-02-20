@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc from '$lib/client/trpc';
+	import trpc, { type InferMutationInput } from '$lib/client/trpc';
+	import type { Entity } from '$lib/definitions';
 	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
 	import { reporter } from '@felte/reporter-svelte';
@@ -11,7 +12,8 @@
 	import startCase from 'lodash-es/startCase.js';
 	import Input from './Input.svelte';
 
-	export let formData: any;
+	type T = $$Generic<Entity>;
+	export let data: InferMutationInput<`${T}:save`>;
 
 	const getTitle = () =>
 		startCase(
@@ -33,7 +35,7 @@
 				const serverErrors = getEditorErrors(err);
 				return serverErrors;
 			}
-			// const newErrors = mapValues(formData, (_) => null);
+			// const newErrors = mapValues(data, (_) => null);
 			return err;
 		},
 		onSubmit: async (values) => {
@@ -67,7 +69,7 @@
 						{getTitle()}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#each Object.entries(formData) as [name, value] (name)}
+						{#each Object.entries(data) as [name, value] (name)}
 							<Input
 								{name}
 								{value}
@@ -80,7 +82,7 @@
 			</div>
 		</div>
 		<div class="flex flex-shrink-0 justify-end px-4 py-4">
-			<slot name="deleteButton" id={formData.id} />
+			<slot name="deleteButton" id={data.id} />
 			<button
 				type="button"
 				class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

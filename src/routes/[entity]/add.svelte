@@ -25,4 +25,4 @@
 	export let entity: Entity;
 </script>
 
-<FormGeneric formData={entityDefinitions[entity].defaultForm()} />
+<FormGeneric data={entityDefinitions[entity].defaultForm()} />

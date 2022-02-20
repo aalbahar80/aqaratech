@@ -37,6 +37,28 @@ export default trpc
 				},
 			}),
 	})
+	.query('basic', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.tenant.findUnique({
+				where: {
+					id,
+				},
+				select: {
+					id: true,
+					firstName: true,
+					secondName: true,
+					thirdName: true,
+					lastName: true,
+					email: true,
+					phone: true,
+					dob: true,
+					civilid: true,
+					createdAt: true,
+					updatedAt: true,
+				},
+			}),
+	})
 	.query('list', {
 		input: z.string().nullable(),
 		resolve: ({ input }) =>

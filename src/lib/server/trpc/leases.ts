@@ -15,6 +15,25 @@ export default trpc
 				},
 			}),
 	})
+	.query('basic', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.lease.findUnique({
+				where: {
+					id,
+				},
+				select: {
+					id: true,
+					monthlyRent: true,
+					deposit: true,
+					startDate: true,
+					endDate: true,
+					createdAt: true,
+					updatedAt: true,
+					unitId: true,
+				},
+			}),
+	})
 	.query('list', {
 		input: z.string().nullable(),
 		resolve: ({ input }) =>
