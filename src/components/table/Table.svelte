@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { flash } from '$components/table/transition';
 	import { columns } from '$lib/stores/columns';
-	import startCase from 'lodash-es/startCase'; // use .js for treeshaking?
+	import startCase from 'lodash-es/startCase.js';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
