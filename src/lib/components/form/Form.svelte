@@ -5,25 +5,19 @@
 		type InferMutationInput,
 		type InferQueryOutput,
 	} from '$lib/client/trpc';
-	import type { Entity } from '$lib/definitions';
+	import { singular, type Entity } from '$lib/definitions';
 	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
 	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
-	import startCase from 'lodash-es/startCase.js';
 	import Input from './Input.svelte';
 
 	type T = $$Generic<Entity>;
 	export let data:
 		| InferMutationInput<`${T}:save`>
 		| InferQueryOutput<`${T}:basic`>;
-
-	const getTitle = () =>
-		startCase(
-			`${$page.url.pathname.split('/').slice(-1)[0]} ${$page.params.entity}`,
-		);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -58,10 +52,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{getTitle()}</title>
-</svelte:head>
-
 <div class="mx-auto mt-8 h-full max-w-xl">
 	<form
 		use:form
@@ -70,9 +60,9 @@
 		<div class="h-0 flex-1 overflow-y-auto">
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
-					<h1 class="text-2xl font-medium">
-						{getTitle()}
-					</h1>
+					<!-- <h1 class="text-2xl font-medium">
+						{`New ${singular[$page.params.entity]}`}
+					</h1> -->
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}

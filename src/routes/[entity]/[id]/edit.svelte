@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import type { Entity } from '$lib/definitions';
+	import { singular, type Entity } from '$lib/definitions';
 	import { isEntity } from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
 
@@ -16,15 +16,19 @@
 		const data = await trpc.query(`${entity}:basic`, id);
 		if (data)
 			return {
-				props: { data },
+				props: { data, entity },
 			};
 		return { error: 'id not found', status: 404 };
 	};
 </script>
 
 <script lang="ts">
-	type T = $$Generic<Entity>;
-	export let data: InferQueryOutput<`${T}:basic`>;
+	export let entity: Entity;
+	export let data: InferQueryOutput<`${typeof entity}:basic`>;
 </script>
+
+<svelte:head>
+	<title>{`Edit ${singular[entity]}`}</title>
+</svelte:head>
 
 <Form {data} />

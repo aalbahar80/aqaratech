@@ -21,3 +21,8 @@ export const entityDefinitions: EntityDefinitions = {
 	leases: lease,
 	tenants: tenant,
 };
+
+export const singular: { [K in Entity]: string } = {
+	leases: 'lease',
+	tenants: 'tenant',
+};

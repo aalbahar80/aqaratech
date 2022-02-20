@@ -3,6 +3,7 @@
 	import {
 		entityDefinitions,
 		isEntity,
+		singular,
 		type Entity,
 	} from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
@@ -24,5 +25,9 @@
 <script lang="ts">
 	export let entity: Entity;
 </script>
+
+<svelte:head>
+	<title>{`New ${singular[entity]}`}</title>
+</svelte:head>
 
 <Form data={entityDefinitions[entity].defaultForm()} />
