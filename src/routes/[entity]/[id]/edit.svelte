@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import FormGeneric from '$components/form/FormGeneric.svelte';
+	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import type { Entity } from '$lib/definitions';
 	import { isEntity } from '$lib/definitions/index';
@@ -27,4 +27,4 @@
 	export let data: InferQueryOutput<`${T}:basic`>;
 </script>
 
-<FormGeneric {data} />
+<Form {data} />

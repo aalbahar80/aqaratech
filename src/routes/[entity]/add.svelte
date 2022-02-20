@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import FormGeneric from '$components/form/FormGeneric.svelte';
+	import Form from '$components/form/Form.svelte';
 	import {
 		entityDefinitions,
 		isEntity,
@@ -25,4 +25,4 @@
 	export let entity: Entity;
 </script>
 
-<FormGeneric data={entityDefinitions[entity].defaultForm()} />
+<Form data={entityDefinitions[entity].defaultForm()} />
