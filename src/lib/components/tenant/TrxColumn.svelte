@@ -36,7 +36,7 @@
 					</h3>
 				</div>
 				<div class="ml-4 mt-2 flex-shrink-0">
-					<a href="/transaction/add"> Create new transaction </a>
+					<a href="/transactions/add"> Create new transaction </a>
 				</div>
 			</div>
 		</div>
