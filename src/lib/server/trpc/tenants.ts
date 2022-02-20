@@ -38,7 +38,7 @@ export default trpc
 			}),
 	})
 	.query('list', {
-		input: z.string().optional().default('1'),
+		input: z.string().nullable(),
 		resolve: ({ input }) =>
 			prismaClient.tenant.findMany({
 				take: 10,
