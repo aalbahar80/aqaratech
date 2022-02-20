@@ -2,11 +2,19 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import { PaperClip } from '@steeze-ui/heroicons';
+	import { PaperClip, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import FModalDelete from '../toast/FModalDelete.svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
+
+	const defaultOption = {
+		label: 'Edit',
+		href: `/tenants/${tenant.id}/edit`,
+	};
+	const options = [{ label: 'Delete', icon: Trash }];
+	const handleDelete = () => {};
 </script>
 
 <section class="rounded-md bg-white shadow">
@@ -14,7 +22,10 @@
 		<h3 class="text-lg font-medium leading-6 text-gray-900">
 			Tenant Information
 		</h3>
-		<ButtonDropdown />
+		<FModalDelete id={tenant.id} let:handleOpen>
+			<button on:click={handleOpen}>sob</button>
+			<ButtonDropdown {defaultOption} {options} />
+		</FModalDelete>
 	</div>
 	<div class="border-t border-gray-200">
 		<dl>
