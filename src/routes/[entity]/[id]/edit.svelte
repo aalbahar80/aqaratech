@@ -1,29 +1,28 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
-	import Form from '$components/form/Form.svelte';
-	import defs, { type EntityDefinitions } from '$lib/definitions/index';
+	import FormGeneric from '$components/form/FormGeneric.svelte';
+	import trpc from '$lib/client/trpc';
+	import { isEntity } from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = async ({ fetch, params }) => {
+	export const load: Load = async ({ params }) => {
 		const { entity, id } = params;
-		const res = await fetch(`/${entity}/${id}.json`);
-		const formData = await res.json();
-		return {
-			props: { formData },
-		};
+		if (!isEntity(entity)) {
+			return {
+				status: 404,
+				error: 'Unknown entity',
+			};
+		}
+		const data = await trpc.query(`${entity}:read`, id);
+		if (data)
+			return {
+				props: { data },
+			};
+		return { error: 'id not found', status: 404 };
 	};
 </script>
 
 <script lang="ts">
-	export let formData: any;
-	const entityDefs: EntityDefinitions =
-		defs?.[$page.params.entity as keyof typeof defs];
+	export let data;
 </script>
 
-<!-- TODO should use conditional access <.?> -->
-<Form
-	{formData}
-	formSchema={entityDefs.formSchema}
-	transformer={entityDefs.transformer}
-	refiner={entityDefs.refiner}
-/>
+<FormGeneric formData={data} />
