@@ -29,6 +29,6 @@
 				theme="solid"
 			/>
 		</MenuButton>
-		<DropdownMenu {items} class="bottom-10" />
+		<DropdownMenu {items} class={$$props.class} />
 	</Menu>
 </span>

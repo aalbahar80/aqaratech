@@ -10,13 +10,11 @@
 </script>
 
 <section class="rounded-md bg-white shadow">
-	<div class="px-4 py-5 sm:px-6">
+	<div class="flex justify-between px-4 py-5 sm:px-6">
 		<h3 class="text-lg font-medium leading-6 text-gray-900">
 			Tenant Information
 		</h3>
-		<p class="mt-1 max-w-2xl text-sm text-gray-500">
-			Personal details and application.
-		</p>
+		<ButtonDropdown />
 	</div>
 	<div class="border-t border-gray-200">
 		<dl>
@@ -65,9 +63,8 @@
 								/>
 								<span class="ml-2 w-0 flex-1 truncate">civil_id.pdf</span>
 							</div>
-							<div class="ml-4 flex-shrink-0">
-								<ButtonDropdown />
-							</div>
+
+							<ButtonDropdown class="bottom-10" />
 						</li>
 						<li
 							class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
@@ -80,7 +77,8 @@
 								/>
 								<span class="ml-2 w-0 flex-1 truncate">passport.pdf</span>
 							</div>
-							<ButtonDropdown />
+
+							<ButtonDropdown class="bottom-10" />
 						</li>
 					</ul>
 				</dd>
