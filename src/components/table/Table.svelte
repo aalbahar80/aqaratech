@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
 	import { columns } from '$lib/stores/columns';
 	import startCase from 'lodash-es/startCase.js';
@@ -70,7 +71,7 @@
 													class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 												>
 													<a
-														href={`${value}`}
+														href={`${$page.url.pathname}/${value}`}
 														class="text-indigo-600 hover:text-indigo-900"
 													>
 														{startCase(key)}
