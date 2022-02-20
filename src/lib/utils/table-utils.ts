@@ -1,6 +1,6 @@
 import drop from 'lodash-es/drop.js';
 
-export default function assertNever(value: never, message?: string): never {
+export default function assertNever(value: any, message?: string): never {
 	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	throw new Error(message || `Unexpected value: ${value}`);
 }
