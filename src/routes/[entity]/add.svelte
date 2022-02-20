@@ -18,8 +18,7 @@
 </script>
 
 <script lang="ts">
-	// export let entity: Entity;
-	const entity = 'leases';
+	export let entity: Entity;
 </script>
 
 <FormGeneric formData={defs[entity].defaultForm()} />
