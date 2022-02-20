@@ -76,6 +76,13 @@
 														{startCase(key)}
 													</a>
 												</td>
+											{:else if value instanceof Date}
+												<td
+													in:flash|local={{ duration: 1000 }}
+													class="table__cell"
+												>
+													{value.toISOString().slice(0, 10)}
+												</td>
 											{:else}
 												<td
 													in:flash|local={{ duration: 1000 }}
