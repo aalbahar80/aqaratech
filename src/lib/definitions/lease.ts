@@ -22,22 +22,22 @@ const defaultForm = (): Lease => ({
 	monthlyRent: 0,
 });
 
-const transformer = (data) => ({
-	...data,
-	startDate: data.startDate ? new Date(data.startDate) : null,
-	endDate: data.endDate ? new Date(data.endDate) : null,
-});
+// const transformer = (data) => ({
+// 	...data,
+// 	startDate: data.startDate ? new Date(data.startDate) : null,
+// 	endDate: data.endDate ? new Date(data.endDate) : null,
+// });
 
-function refiner(leaseSchema) {
-	return leaseSchema
-		.refine((val) => val.startDate < val.endDate, {
-			path: ['startDate'],
-			message: 'Start date must be before end date',
-		})
-		.refine((val) => val.startDate < val.endDate, {
-			path: ['endDate'],
-			message: 'End date must be after start date',
-		});
-}
+// function refiner(leaseSchema) {
+// 	return leaseSchema
+// 		.refine((val) => val.startDate < val.endDate, {
+// 			path: ['startDate'],
+// 			message: 'Start date must be before end date',
+// 		})
+// 		.refine((val) => val.startDate < val.endDate, {
+// 			path: ['endDate'],
+// 			message: 'End date must be after start date',
+// 		});
+// }
 
 export default { defaultForm };

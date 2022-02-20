@@ -1,6 +1,7 @@
 import drop from 'lodash-es/drop.js';
 
 export default function assertNever(value: never, message?: string): never {
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	throw new Error(message || `Unexpected value: ${value}`);
 }
 export const parseParams = (url: URL) => {
@@ -20,16 +21,16 @@ export const parseParams = (url: URL) => {
 /**
  * Removes a search param if default.
  */
-const removeDefault = (
-	params: URLSearchParams,
-	key: string,
-	defaultValue: string,
-) => {
-	if (params.get(key) === defaultValue) {
-		params.delete(key);
-	}
-	return params;
-};
+// const removeDefault = (
+// 	params: URLSearchParams,
+// 	key: string,
+// 	defaultValue: string,
+// ) => {
+// 	if (params.get(key) === defaultValue) {
+// 		params.delete(key);
+// 	}
+// 	return params;
+// };
 
 /**
  * Construct a URL's searchParams.
