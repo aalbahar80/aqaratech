@@ -80,7 +80,7 @@
 									{name}
 									{value}
 									invalid={!!getValue($errors, name)}
-									invalidText={getValue($errors, 'email')?.[0]}
+									invalidText={getValue($errors, name)?.[0]}
 								/>
 							{/each}
 						{/if}
