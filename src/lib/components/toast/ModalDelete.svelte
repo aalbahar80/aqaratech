@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
-	import { page } from '$app/stores';
-	import { addToast } from '$lib/stores/toast';
-
 	import {
 		Dialog,
 		DialogOverlay,
@@ -13,49 +8,13 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Exclamation } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { createEventDispatcher } from 'svelte';
 
 	export let isOpen: boolean;
 
 	let loading = false;
-
-	const close = () => {
-		isOpen = false;
-	};
-
-	const handleDelete = async () => {
-		const url = `${$page.url.pathname}.json`;
-		loading = true;
-		try {
-			const res = await fetch(url, {
-				method: 'DELETE',
-			});
-			const data = await res.json();
-			console.info(data);
-			addToast({
-				props: {
-					kind: 'success',
-					title: 'Delete successful',
-				},
-			});
-			loading = false;
-			close();
-			await goto(`/${$page.params.entity}`);
-		} catch (e) {
-			// TODO more specific error message
-			loading = false;
-			addToast({
-				duration: 60000,
-				props: {
-					kind: 'error',
-					title: 'Unable to delete',
-				},
-			});
-			// TODO only expose id to user
-			console.error(e);
-		}
-	};
-
 	let cancelButton: HTMLButtonElement;
+	const dispatch = createEventDispatcher();
 </script>
 
 <Transition show={isOpen} as="div">
@@ -63,7 +22,7 @@
 		as="div"
 		class="fixed inset-0 z-10 overflow-y-auto"
 		initialFocus={cancelButton}
-		on:close={close}
+		on:close
 	>
 		<div
 			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
@@ -133,7 +92,7 @@
 						<button
 							type="button"
 							class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={handleDelete}
+							on:click={() => dispatch('delete')}
 						>
 							<svg
 								class:hidden={!loading}
@@ -161,7 +120,7 @@
 						<button
 							type="button"
 							class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={close}
+							on:click={() => dispatch('close')}
 							bind:this={cancelButton}
 						>
 							Cancel
