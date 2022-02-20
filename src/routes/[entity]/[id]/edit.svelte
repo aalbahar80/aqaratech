@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import FormGeneric from '$components/form/FormGeneric.svelte';
-	import trpc from '$lib/client/trpc';
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import type { Entity } from '$lib/definitions';
 	import { isEntity } from '$lib/definitions/index';
 	import type { Load } from '@sveltejs/kit';
 
@@ -12,7 +13,7 @@
 				error: 'Unknown entity',
 			};
 		}
-		const data = await trpc.query(`${entity}:read`, id);
+		const data = await trpc.query(`${entity}:basic`, id);
 		if (data)
 			return {
 				props: { data },
@@ -22,7 +23,8 @@
 </script>
 
 <script lang="ts">
-	export let data;
+	type T = $$Generic<Entity>;
+	export let data: InferQueryOutput<`${T}:basic`>;
 </script>
 
-<FormGeneric formData={data} />
+<FormGeneric {data} />

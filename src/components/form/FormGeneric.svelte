@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, { type InferMutationInput } from '$lib/client/trpc';
+	import trpc, {
+		type InferMutationInput,
+		type InferQueryOutput,
+	} from '$lib/client/trpc';
 	import type { Entity } from '$lib/definitions';
 	import { saveInput } from '$lib/definitions/tenant';
 	import { addToast } from '$lib/stores/toast';
@@ -13,7 +16,9 @@
 	import Input from './Input.svelte';
 
 	type T = $$Generic<Entity>;
-	export let data: InferMutationInput<`${T}:save`>;
+	export let data:
+		| InferMutationInput<`${T}:save`>
+		| InferQueryOutput<`${T}:basic`>;
 
 	const getTitle = () =>
 		startCase(
@@ -69,20 +74,21 @@
 						{getTitle()}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#each Object.entries(data) as [name, value] (name)}
-							<Input
-								{name}
-								{value}
-								invalid={!!getValue($errors, name)}
-								invalidText={getValue($errors, 'email')?.[0]}
-							/>
-						{/each}
+						{#if data}
+							{#each Object.entries(data) as [name, value] (name)}
+								<Input
+									{name}
+									{value}
+									invalid={!!getValue($errors, name)}
+									invalidText={getValue($errors, 'email')?.[0]}
+								/>
+							{/each}
+						{/if}
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="flex flex-shrink-0 justify-end px-4 py-4">
-			<slot name="deleteButton" id={data.id} />
 			<button
 				type="button"
 				class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
