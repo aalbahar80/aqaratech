@@ -1,4 +1,5 @@
 import type { InferMutationInput } from '$lib/client/trpc';
+import type { z } from 'zod';
 import lease from './lease';
 import tenant from './tenant';
 
@@ -11,6 +12,7 @@ export function isEntity(entity: string | Entity): entity is Entity {
 
 type EntityDefinition<T extends Entity> = {
 	defaultForm: () => InferMutationInput<`${T}:save`>;
+	schema: z.AnyZodObject;
 };
 
 type EntityDefinitions = {
@@ -18,8 +20,8 @@ type EntityDefinitions = {
 };
 
 export const entityDefinitions: EntityDefinitions = {
-	leases: lease,
 	tenants: tenant,
+	leases: lease,
 };
 
 export const singular: { [K in Entity]: string } = {

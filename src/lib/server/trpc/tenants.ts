@@ -1,4 +1,4 @@
-import { saveInput } from '$lib/definitions/tenant';
+import { schema } from '$lib/definitions/tenant';
 import prismaClient from '$lib/server/prismaClient';
 import { getSkip } from '$lib/utils/table-utils';
 import * as trpc from '@trpc/server';
@@ -80,8 +80,7 @@ export default trpc
 			}),
 	})
 	.mutation('save', {
-		// input: saveInput,
-		input: saveInput,
+		input: schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.tenant.update({

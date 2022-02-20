@@ -30,4 +30,8 @@
 	<title>{`New ${singular[entity]}`}</title>
 </svelte:head>
 
-<Form data={entityDefinitions[entity].defaultForm()} />
+<Form
+	{entity}
+	data={entityDefinitions[entity].defaultForm()}
+	schema={entityDefinitions[entity].schema}
+/>

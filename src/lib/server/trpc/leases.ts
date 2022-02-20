@@ -1,4 +1,4 @@
-import { saveInput } from '$lib/definitions/lease';
+import { schema } from '$lib/definitions/lease';
 import prismaClient from '$lib/server/prismaClient';
 import { getSkip } from '$lib/utils/table-utils';
 import * as trpc from '@trpc/server';
@@ -46,7 +46,7 @@ export default trpc
 			}),
 	})
 	.mutation('save', {
-		input: saveInput,
+		input: schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.lease.update({

@@ -2,9 +2,7 @@ import type { InferMutationInput } from '$lib/client/trpc';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 
-export const saveInput = z.object({
-	// TODO replace z.undefined with z.never?
-	// TODO what happens if i pass in manual createdAt and updatedAt?
+export const schema = z.object({
 	id: z.string().nullable(),
 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
@@ -41,4 +39,4 @@ const defaultForm = (): Tenant => ({
 	phone: '12345678',
 });
 
-export default { defaultForm };
+export default { schema, defaultForm };

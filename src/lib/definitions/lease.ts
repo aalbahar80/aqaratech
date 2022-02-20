@@ -1,8 +1,8 @@
 import type { InferMutationInput } from '$lib/client/trpc';
 import { z } from 'zod';
 
-export const saveInput = z.object({
-	id: z.undefined(),
+export const schema = z.object({
+	id: z.string().nullable(),
 	monthlyRent: z.number().nonnegative(),
 	deposit: z.number().nonnegative().optional(),
 	// z.preprocess allows the use of both Date objects and strings
@@ -16,6 +16,7 @@ export const saveInput = z.object({
 
 type Lease = InferMutationInput<'leases:save'>;
 const defaultForm = (): Lease => ({
+	id: '',
 	startDate: new Date(),
 	endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 	deposit: 0,
@@ -40,4 +41,4 @@ const defaultForm = (): Lease => ({
 // 		});
 // }
 
-export default { defaultForm };
+export default { schema, defaultForm };

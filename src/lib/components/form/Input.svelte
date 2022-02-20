@@ -5,7 +5,7 @@
 	import startCase from 'lodash-es/startCase.js';
 
 	export let name: string = '';
-	export let value: string | Date = '';
+	export let value: string | Date | null | number = '';
 	export let invalid = false;
 	export let invalidText: string = '';
 

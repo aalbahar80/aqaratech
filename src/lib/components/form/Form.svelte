@@ -1,28 +1,28 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc, {
 		type InferMutationInput,
 		type InferQueryOutput,
 	} from '$lib/client/trpc';
-	import { singular, type Entity } from '$lib/definitions';
-	import { saveInput } from '$lib/definitions/tenant';
+	import type { Entity } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
-	import { reporter } from '@felte/reporter-svelte';
 	import { validator } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
+	import type { z } from 'zod';
 	import Input from './Input.svelte';
 
-	type T = $$Generic<Entity>;
+	export let entity: Entity;
+	export let schema: z.AnyZodObject;
 	export let data:
-		| InferMutationInput<`${T}:save`>
-		| InferQueryOutput<`${T}:basic`>;
+		| InferMutationInput<`${typeof entity}:save`>
+		| InferQueryOutput<`${typeof entity}:basic`>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	const { form, errors, isSubmitting } = createForm({
-		extend: [reporter, validator({ schema: saveInput })],
+		extend: [validator({ schema })],
 		onError: (err) => {
 			addToast({
 				props: {
@@ -39,19 +39,17 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const tenant = await trpc.mutation('tenants:save', values);
-			console.log({ tenant }, 'FormTrpc.svelte ~ 44');
+			const submitted = await trpc.mutation(`${entity}:save`, values);
+			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
 			addToast({
 				props: {
 					kind: 'success',
 					title: 'Success',
 				},
 			});
-			// await goto(`/${$page.params.entity}/${body.id}`);
+			await goto(`/${entity}/${submitted.id}`);
 		},
 	});
-
-	const getTitle = (entity: string) => singular[entity as Entity];
 </script>
 
 <div class="mx-auto mt-8 h-full max-w-xl">
@@ -63,7 +61,7 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="text-2xl font-medium">
-						{getTitle($page.params.entity)}
+						{entity}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
