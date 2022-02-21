@@ -1,3 +1,4 @@
+import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/lease';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
@@ -34,18 +35,7 @@ export default trpc
 			}),
 	})
 	.query('list', {
-		input: z.object({
-			pageIndex: z
-				.string()
-				.or(z.number())
-				.nullish()
-				.transform((val) => Number(val) || 1),
-			size: z
-				.string()
-				.or(z.number())
-				.nullish()
-				.transform((val) => Number(val) || 22),
-		}),
+		input: paginationSchema,
 		resolve: async ({ input }) => ({
 			data: await prismaClient.lease.findMany({
 				take: input.size,
