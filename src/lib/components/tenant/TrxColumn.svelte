@@ -46,7 +46,7 @@
 			<ul>
 				{#each data as transaction (transaction.id)}
 					<li>
-						<a href={`/transaction/${transaction.id}`}>
+						<a href={`/transactions/${transaction.id}`}>
 							<span class="flex items-center space-x-4">
 								<span class="flex flex-1 space-x-2 truncate">
 									<Icon
@@ -99,7 +99,7 @@
 							<td>
 								<div class="flex">
 									<a
-										href={`/transaction/${transaction.id}`}
+										href={`/transactions/${transaction.id}`}
 										class="group inline-flex space-x-2 truncate text-sm"
 									>
 										<Icon
@@ -188,7 +188,7 @@
 				<h3 class="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
 				<div class="mt-6">
 					<a
-						href="/transaction/add"
+						href="/transactions/add"
 						class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 					>
 						<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />

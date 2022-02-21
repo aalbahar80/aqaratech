@@ -20,7 +20,7 @@
 				</div>
 				<div class="ml-4 mt-2 flex-shrink-0">
 					<a
-						href="/lease/add"
+						href="/leases/add"
 						class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 					>
 						Create new lease
@@ -37,7 +37,7 @@
 					? 'text-red-800 bg-red-100'
 					: 'text-green-800 bg-green-100'}
 				<li>
-					<a href={`/lease/${lease.id}`} class="block hover:bg-gray-50">
+					<a href={`/leases/${lease.id}`} class="block hover:bg-gray-50">
 						<div class="px-4 py-4 sm:px-6">
 							<div class="flex items-center justify-between">
 								<p class="truncate text-sm font-medium text-indigo-600">
