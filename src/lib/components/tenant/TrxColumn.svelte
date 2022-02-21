@@ -42,7 +42,7 @@
 		</div>
 
 		<!-- List for small screens -->
-		<div class="shadow sm:hidden">
+		<div class="sm:hidden">
 			<ul>
 				{#each data as transaction (transaction.id)}
 					<li>
@@ -244,7 +244,7 @@
 		@apply hidden min-w-full align-middle shadow sm:block;
 	}
 	ul {
-		@apply divide-y divide-gray-200 overflow-hidden shadow sm:hidden;
+		@apply divide-y divide-gray-200 overflow-hidden sm:hidden;
 	}
 	li a {
 		@apply block bg-white px-4 py-4 hover:bg-gray-50;
