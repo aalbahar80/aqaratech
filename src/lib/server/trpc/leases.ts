@@ -46,7 +46,8 @@ export default trpc
 			}),
 			pagination: {
 				size: input.size,
-				start: input.size * (input.pageIndex - 1),
+				start: input.size * (input.pageIndex - 1) + 1,
+				pageIndex: input.pageIndex,
 			},
 		}),
 	})

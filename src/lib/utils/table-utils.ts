@@ -15,6 +15,7 @@ interface TableOptions {
 export interface PaginationInfo {
 	size: number;
 	start: number;
+	pageIndex: number;
 }
 
 export const getTableUrl = (url: URL, options: TableOptions): string => {

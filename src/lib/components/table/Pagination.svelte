@@ -6,13 +6,13 @@
 	export let currentSize: number;
 	export let pagination: PaginationInfo;
 
-	$: currentPage = Number($page.url.searchParams.get('p')) || 1;
-
 	const newPageHref = (newPageIndex: number) =>
 		getTableUrl($page.url, { p: newPageIndex.toString() });
 
-	$: nextPageHref = newPageHref(currentPage + 1);
-	$: prevPageHref = newPageHref(currentPage > 1 ? currentPage - 1 : 1);
+	$: hasNextPage = pagination.start + pagination.size < total;
+	$: hasPrevPage = pagination.pageIndex > 1;
+	$: nextPageHref = newPageHref(pagination.pageIndex + 1);
+	$: prevPageHref = newPageHref(pagination.pageIndex - 1);
 </script>
 
 <nav
@@ -22,7 +22,7 @@
 	<div class="hidden sm:block">
 		<p class="text-sm text-gray-700">
 			Showing <span class="font-medium">{pagination.start}</span> to
-			<span class="font-medium">{pagination.start + currentSize}</span>
+			<span class="font-medium">{pagination.start + currentSize - 1}</span>
 			of{' '}
 			<span class="font-medium">{total}</span> results
 		</p>
@@ -30,8 +30,8 @@
 	<div class="flex flex-1 justify-between sm:justify-end">
 		<a
 			class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			class:disabled-anchor={currentPage < 2}
-			href={prevPageHref}
+			class:disabled-anchor={!hasPrevPage}
+			href={hasPrevPage ? prevPageHref : null}
 			sveltekit:noscroll
 			rel="prev"
 		>
@@ -39,7 +39,8 @@
 		</a>
 		<a
 			class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			href={nextPageHref}
+			class:disabled-anchor={!hasNextPage}
+			href={hasNextPage ? nextPageHref : null}
 			rel="next"
 			sveltekit:noscroll
 		>

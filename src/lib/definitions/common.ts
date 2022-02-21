@@ -10,5 +10,5 @@ export const paginationSchema = z.object({
 		.string()
 		.or(z.number())
 		.nullish()
-		.transform((val) => Number(val) || 22),
+		.transform((val) => Number(val) || 10),
 });
