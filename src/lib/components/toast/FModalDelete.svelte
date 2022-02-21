@@ -13,10 +13,6 @@
 		isOpen = false;
 	};
 
-	const handleOpen = () => {
-		isOpen = true;
-	};
-
 	const handleDelete = async () => {
 		loading = true;
 		try {
