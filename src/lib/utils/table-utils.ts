@@ -49,6 +49,5 @@ export const concatIfExists = (strings: (string | null)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
 
-export const getSkip = (page: number | string | null, pageSize: number) => {
-	return (Number(page) ?? 1 - 1) * pageSize;
-};
+export const getSkip = (page: number | string | null, pageSize: number) =>
+	page ? (Number(page) - 1) * pageSize : 0;
