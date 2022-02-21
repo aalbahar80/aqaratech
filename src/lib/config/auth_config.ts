@@ -1,4 +1,3 @@
-import { f } from '$lib/config/colorLog';
 import { logger } from '$lib/config/logger';
 
 const config = {
@@ -22,10 +21,10 @@ export const getRedirectUri = (url: URL) => {
 			throw err;
 		}
 	}
-	logger.debug(f('auth_config.ts', 25, { base }));
+	console.log({ base }, 'auth_config.ts ~ 26');
 
 	const redirectUri = `${base}${prefix}`;
-	logger.debug(f('auth_config.ts', 22, { redirectUri }));
+	console.log({ redirectUri }, 'auth_config.ts ~ 30');
 
 	return redirectUri;
 };
