@@ -1,6 +1,5 @@
 import { schema } from '$lib/definitions/tenant';
 import prismaClient from '$lib/server/prismaClient';
-import { getSkip } from '$lib/utils/table-utils';
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
@@ -60,11 +59,22 @@ export default trpc
 			}),
 	})
 	.query('list', {
-		input: z.string().nullable(),
-		resolve: ({ input }) =>
-			prismaClient.tenant.findMany({
-				take: 10,
-				skip: getSkip(input, 10),
+		input: z.object({
+			pageIndex: z
+				.string()
+				.or(z.number())
+				.nullish()
+				.transform((val) => Number(val) || 1),
+			size: z
+				.string()
+				.or(z.number())
+				.nullish()
+				.transform((val) => Number(val) || 22),
+		}),
+		resolve: async ({ input }) => ({
+			data: await prismaClient.tenant.findMany({
+				take: input.size,
+				skip: input.size * (input.pageIndex - 1),
 				orderBy: {
 					updatedAt: 'desc',
 				},
@@ -78,6 +88,11 @@ export default trpc
 					createdAt: true,
 				},
 			}),
+			pagination: {
+				size: input.size,
+				start: input.size * (input.pageIndex - 1),
+			},
+		}),
 	})
 	.query('count', {
 		resolve: () => prismaClient.tenant.count({}),

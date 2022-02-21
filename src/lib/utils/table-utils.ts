@@ -12,6 +12,10 @@ interface TableOptions {
 	sortKey?: string;
 	sortDir?: string;
 }
+export interface PaginationInfo {
+	size: number;
+	start: number;
+}
 
 export const getTableUrl = (url: URL, options: TableOptions): string => {
 	const params = new URLSearchParams();
@@ -48,6 +52,3 @@ export function getPaginatedItems<T>(
 export const concatIfExists = (strings: (string | null)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
-
-export const getSkip = (page: number | string | null, pageSize: number) =>
-	page ? (Number(page) - 1) * pageSize : 0;

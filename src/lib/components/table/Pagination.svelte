@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { getTableUrl } from '$lib/utils/table-utils';
+	import { getTableUrl, type PaginationInfo } from '$lib/utils/table-utils';
+
+	export let total: number;
+	export let currentSize: number;
+	export let pagination: PaginationInfo;
 
 	$: currentPage = Number($page.url.searchParams.get('p')) || 1;
 
@@ -17,10 +21,10 @@
 >
 	<div class="hidden sm:block">
 		<p class="text-sm text-gray-700">
-			Showing <span class="font-medium">1</span> to
-			<span class="font-medium">10</span>
+			Showing <span class="font-medium">{pagination.start}</span> to
+			<span class="font-medium">{pagination.start + currentSize}</span>
 			of{' '}
-			<span class="font-medium">20</span> results
+			<span class="font-medium">{total}</span> results
 		</p>
 	</div>
 	<div class="flex flex-1 justify-between sm:justify-end">

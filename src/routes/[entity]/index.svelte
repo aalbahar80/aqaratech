@@ -10,12 +10,12 @@
 		const { entity } = params;
 		if (isEntity(entity)) {
 			const pageIndex = url.searchParams.get('p');
-			const [total, rows] = await Promise.all([
+			const [total, { data: rows, pagination }] = await Promise.all([
 				trpc.query(`${entity}:count`),
-				trpc.query(`${entity}:list`, pageIndex),
+				trpc.query(`${entity}:list`, { pageIndex }),
 			]);
 			return {
-				props: { total, rows },
+				props: { total, pagination, rows },
 			};
 		}
 		return {
@@ -28,10 +28,11 @@
 <script lang="ts">
 	export let rows: any[];
 	export let total: number;
+	export let pagination: any;
 </script>
 
 <svelte:head>
 	<title>{startCase($page.params.entity)}</title>
 </svelte:head>
 
-<TableParent {rows} />
+<TableParent {rows} {total} {pagination} />

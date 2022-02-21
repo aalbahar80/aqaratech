@@ -23,6 +23,8 @@
 		modifier = result;
 	});
 
+	export let total: number;
+	export let pagination: any;
 	export let rows: { id: string; [key: string]: unknown }[];
 
 	// add view & edit to each row
@@ -36,7 +38,7 @@
 <div class="mx-auto mt-8 flex max-w-screen-2xl flex-col px-2 sm:px-6 lg:px-8">
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
 	<Table rows={newRows} {modifier} />
-	<Pagination />
+	<Pagination {total} currentSize={rows.length} {pagination} />
 </div>
 
 <style lang="postcss">
