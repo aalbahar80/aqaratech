@@ -42,44 +42,42 @@
 		</div>
 
 		<!-- List for small screens -->
-		<div class="sm:hidden">
-			<ul>
-				{#each data as transaction (transaction.id)}
-					<li>
-						<a href={`/transactions/${transaction.id}`}>
-							<span class="flex items-center space-x-4">
-								<span class="flex flex-1 space-x-2 truncate">
-									<Icon
-										src={Cash}
-										theme="solid"
-										class="h-5 w-5 flex-shrink-0 text-gray-400"
-										aria-hidden="true"
-									/>
-									<span class="flex flex-col truncate text-sm text-gray-500">
-										<span class="truncate">{transaction.memo}</span>
-										<span>
-											<span class="font-medium text-gray-900"
-												>{transaction.amount}</span
-											>{' '}
-											{'KWD'}
-										</span>
-										<time dateTime={transaction.dueDate.toISOString()}
-											>{format(transaction.createdAt, 'MMM dd, yy')}</time
-										>
-									</span>
-								</span>
+		<ul>
+			{#each data as transaction (transaction.id)}
+				<li>
+					<a href={`/transactions/${transaction.id}`}>
+						<span class="flex items-center space-x-4">
+							<span class="flex flex-1 space-x-2 truncate">
 								<Icon
-									src={ChevronRight}
+									src={Cash}
 									theme="solid"
 									class="h-5 w-5 flex-shrink-0 text-gray-400"
 									aria-hidden="true"
 								/>
+								<span class="flex flex-col truncate text-sm text-gray-500">
+									<span class="truncate">{transaction.memo}</span>
+									<span>
+										<span class="font-medium text-gray-900"
+											>{transaction.amount}</span
+										>{' '}
+										{'KWD'}
+									</span>
+									<time dateTime={transaction.dueDate.toISOString()}
+										>{format(transaction.createdAt, 'MMM dd, yy')}</time
+									>
+								</span>
 							</span>
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</div>
+							<Icon
+								src={ChevronRight}
+								theme="solid"
+								class="h-5 w-5 flex-shrink-0 text-gray-400"
+								aria-hidden="true"
+							/>
+						</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
 
 		<!-- List for non-small screens -->
 		<div class="table-container">
@@ -211,7 +209,7 @@
 		@apply bg-red-100 text-red-800;
 	}
 	nav {
-		@apply flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
+		@apply flex items-center justify-between rounded-b-md border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
 	}
 	nav button {
 		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700;
@@ -250,7 +248,7 @@
 		@apply block bg-white px-4 py-4 hover:bg-gray-50;
 	}
 	.section-heading {
-		@apply border-b border-gray-200 bg-white px-4 py-5 sm:px-6;
+		@apply rounded-t-md border-b border-gray-200 bg-white px-4 py-5 sm:px-6;
 	}
 
 	.section-heading a {
