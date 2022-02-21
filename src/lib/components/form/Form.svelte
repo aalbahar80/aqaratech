@@ -7,14 +7,14 @@
 	} from '$lib/client/trpc';
 	import type { Entity } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
-	import { validator } from '@felte/validator-zod';
+	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import type { z } from 'zod';
 	import Input from './Input.svelte';
 
 	export let entity: Entity;
-	export let schema: z.AnyZodObject;
+	export let schema: z.AnyZodObject | z.ZodEffects<any>;
 	export let data:
 		| InferMutationInput<`${typeof entity}:save`>
 		| InferQueryOutput<`${typeof entity}:basic`>;
@@ -22,7 +22,7 @@
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	const { form, errors, isSubmitting } = createForm({
-		extend: [validator({ schema })],
+		validate: validateSchema(schema as z.AnyZodObject),
 		onError: (err) => {
 			addToast({
 				props: {

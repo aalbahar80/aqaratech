@@ -12,7 +12,7 @@ export function isEntity(entity: string | Entity): entity is Entity {
 
 type EntityDefinition<T extends Entity> = {
 	defaultForm: () => InferMutationInput<`${T}:save`>;
-	schema: z.AnyZodObject;
+	schema: z.AnyZodObject | z.ZodEffects<any>;
 };
 
 type EntityDefinitions = {
