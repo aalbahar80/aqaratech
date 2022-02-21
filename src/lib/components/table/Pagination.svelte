@@ -7,14 +7,8 @@
 	const newPageHref = (newPageIndex: number) =>
 		getTableUrl($page.url, { p: newPageIndex.toString() });
 
-	$: nextPageHref = newPageHref(
-		(Number($page.url.searchParams.get('p')) || 1) + 1,
-	);
-	$: prevPageHref = newPageHref(
-		(Number($page.url.searchParams.get('p')) || 1) > 1
-			? (Number($page.url.searchParams.get('p')) || 1) - 1
-			: 1,
-	);
+	$: nextPageHref = newPageHref(currentPage + 1);
+	$: prevPageHref = newPageHref(currentPage > 1 ? currentPage - 1 : 1);
 </script>
 
 <nav
