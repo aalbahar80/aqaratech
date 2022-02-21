@@ -61,8 +61,8 @@ export default trpc
 	})
 	.query('list', {
 		input: z.string().nullable(),
-		resolve: ({ input }) => {
-			return Promise.all([
+		resolve: ({ input }) =>
+			Promise.all([
 				prismaClient.tenant.count(),
 				prismaClient.tenant.findMany({
 					take: 10,
@@ -80,9 +80,7 @@ export default trpc
 						createdAt: true,
 					},
 				}),
-				,
-			]);
-		},
+			]),
 	})
 	.mutation('save', {
 		input: schema,
