@@ -6,13 +6,15 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { IconSource } from '@steeze-ui/svelte-icon/types';
+	import FModalDelete from './toast/FModalDelete.svelte';
 
-	type MenuOption = {
-		icon: IconSource;
+	type Option = {
 		label: string;
-		onClick?: () => void;
+		href?: string;
+		icon: IconSource;
+		onClick?: any;
 	};
-	export let items: MenuOption[];
+	export let options: Option[];
 </script>
 
 <Transition
@@ -28,14 +30,13 @@
 	<MenuItems
 		class={`${$$props.class} absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
 		><div class="py-1">
-			{#each items as item (item.label)}
+			{#each options as option (option.label)}
 				<MenuItem
 					let:active
 					as="button"
 					class="w-full"
-					on:click={(e) => {
-						console.log(e);
-						console.log(`clicked ${item.label}`);
+					on:click={() => {
+						option.onClick();
 					}}
 				>
 					<div
@@ -45,12 +46,12 @@
 						class:text-gray-700={!active}
 					>
 						<Icon
-							src={item.icon}
+							src={option.icon}
 							class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
 							aria-hidden="true"
 							theme="solid"
 						/>
-						{item.label}
+						{option.label}
 					</div>
 				</MenuItem>
 			{/each}

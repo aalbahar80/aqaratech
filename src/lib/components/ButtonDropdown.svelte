@@ -9,14 +9,12 @@
 		label: string;
 		href?: string;
 		icon: IconSource;
+		onClick?: any;
 	};
 	export let defaultOption: Omit<Option, 'icon'> = {
 		label: 'Menu',
 	};
-	export let options: Option[] = [
-		{ label: 'Update', href: '#', icon: Pencil },
-		{ label: 'Remove', href: '#', icon: Trash },
-	];
+	export let options: Option[];
 </script>
 
 <span class="relative inline-flex rounded-md shadow-sm">
@@ -47,6 +45,6 @@
 				theme="solid"
 			/>
 		</MenuButton>
-		<DropdownMenu items={options} class={$$props.class} />
+		<DropdownMenu {options} class={$$props.class} />
 	</Menu>
 </span>
