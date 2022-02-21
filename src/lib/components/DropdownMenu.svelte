@@ -6,7 +6,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { IconSource } from '@steeze-ui/svelte-icon/types';
-	import FModalDelete from './toast/FModalDelete.svelte';
 
 	type Option = {
 		label: string;

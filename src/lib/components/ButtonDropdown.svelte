@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Menu, MenuButton } from '@rgossiaux/svelte-headlessui';
-	import { ChevronDown, Pencil, Trash } from '@steeze-ui/heroicons';
+	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { IconSource } from '@steeze-ui/svelte-icon/types';
 	import DropdownMenu from './DropdownMenu.svelte';

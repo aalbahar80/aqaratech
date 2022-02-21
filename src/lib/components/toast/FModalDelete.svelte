@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import ModalDelete from '$components/toast/ModalDelete.svelte';
 	import trpc from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
