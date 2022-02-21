@@ -26,7 +26,6 @@
 			// 'Edit' form gets an ISO string
 			// value = value?.substring(0, 10);
 			assertNever(value, "This case shouldn't happen");
-			break;
 
 		case 'monthlyRent':
 		case 'deposit':
