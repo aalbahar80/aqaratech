@@ -5,7 +5,6 @@
 	import { PaperClip, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import FModalDelete from '../toast/FModalDelete.svelte';
-	import { createEventDispatcher } from 'svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
@@ -14,10 +13,6 @@
 		label: 'Edit',
 		href: `/tenants/${tenant.id}/edit`,
 	};
-	const dispatch = createEventDispatcher();
-	const options = [
-		{ label: 'Delete', icon: Trash, onClick: dispatch('delete') },
-	];
 </script>
 
 <section class="rounded-md bg-white shadow">
@@ -25,14 +20,14 @@
 		<h3 class="text-lg font-medium leading-6 text-gray-900">
 			Tenant Information
 		</h3>
-		<ButtonDropdown {defaultOption} {options} />
-		<FModalDelete id={tenant.id} let:handleOpen>
-			<ButtonDropdown
-				{defaultOption}
-				options={[{ label: 'del', icon: Trash, onClick: handleOpen }]}
-			/>
-		</FModalDelete>
-		<FModalDelete id={tenant.id} />
+		<div class="order-last">
+			<FModalDelete id={tenant.id} let:handleOpen>
+				<ButtonDropdown
+					{defaultOption}
+					options={[{ label: 'Delete', icon: Trash, onClick: handleOpen }]}
+				/>
+			</FModalDelete>
+		</div>
 	</div>
 	<div class="border-t border-gray-200">
 		<dl>

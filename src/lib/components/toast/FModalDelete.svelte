@@ -31,7 +31,9 @@
 			});
 			loading = false;
 			handleClose();
-			await goto(`/${$page.params.entity}`);
+			// wait for one second
+			// await new Promise((resolve) => setTimeout(resolve, 1000));
+			await goto('/tenants');
 		} catch (e) {
 			// TODO more specific error message
 			loading = false;
@@ -42,10 +44,12 @@
 					title: 'Unable to delete',
 				},
 			});
-			console.error(e);
+			// console.error(e);
 		}
 	};
 </script>
+
+<!-- <slot {handleOpen} /> -->
 
 <slot {handleOpen}>
 	<button
