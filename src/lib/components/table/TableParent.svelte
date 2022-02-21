@@ -25,10 +25,10 @@
 
 	export let total: number;
 	export let pagination: any;
-	export let rows: { id: string; [key: string]: unknown }[];
+	export let data: { id: string; [key: string]: unknown }[];
 
 	// add view & edit to each row
-	$: newRows = rows.map((row) => ({
+	$: rows = data.map((row) => ({
 		...row,
 		view: `${row.id}`,
 		edit: `${row.id}/edit`,
@@ -37,8 +37,8 @@
 
 <div class="mx-auto mt-8 flex max-w-screen-2xl flex-col px-2 sm:px-6 lg:px-8">
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
-	<Table rows={newRows} {modifier} />
-	<Pagination {total} currentSize={rows.length} {pagination} />
+	<Table {rows} {modifier} />
+	<Pagination {total} currentSize={data.length} {pagination} />
 </div>
 
 <style lang="postcss">

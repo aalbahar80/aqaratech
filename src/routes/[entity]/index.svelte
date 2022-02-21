@@ -42,4 +42,4 @@
 	<title>{startCase($page.params.entity)}</title>
 </svelte:head>
 
-<TableParent rows={data} {total} {pagination} />
+<TableParent {data} {total} {pagination} />
