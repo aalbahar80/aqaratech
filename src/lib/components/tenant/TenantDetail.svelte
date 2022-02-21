@@ -4,10 +4,12 @@
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import FModalDelete from '../toast/FModalDelete.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
+
+	const dispatch = createEventDispatcher();
 
 	const defaultOption = {
 		label: 'Edit',
@@ -21,12 +23,16 @@
 			Tenant Information
 		</h3>
 		<div class="order-last">
-			<FModalDelete id={tenant.id} let:handleOpen>
-				<ButtonDropdown
-					{defaultOption}
-					options={[{ label: 'Delete', icon: Trash, onClick: handleOpen }]}
-				/>
-			</FModalDelete>
+			<ButtonDropdown
+				{defaultOption}
+				options={[
+					{
+						label: 'Delete',
+						icon: Trash,
+						onClick: () => dispatch('openDeleteModal'),
+					},
+				]}
+			/>
 		</div>
 	</div>
 	<div class="border-t border-gray-200">

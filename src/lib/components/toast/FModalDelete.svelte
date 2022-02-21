@@ -6,8 +6,8 @@
 	import { addToast } from '$lib/stores/toast';
 
 	export let id: string;
+	export let isOpen = false;
 
-	let isOpen = false;
 	let loading = false;
 
 	const handleClose = () => {
@@ -31,8 +31,6 @@
 			});
 			loading = false;
 			handleClose();
-			// wait for one second
-			// await new Promise((resolve) => setTimeout(resolve, 1000));
 			await goto('/tenants');
 		} catch (e) {
 			// TODO more specific error message
@@ -44,12 +42,10 @@
 					title: 'Unable to delete',
 				},
 			});
-			// console.error(e);
+			console.error(e);
 		}
 	};
 </script>
-
-<!-- <slot {handleOpen} /> -->
 
 <slot {handleOpen}>
 	<button
