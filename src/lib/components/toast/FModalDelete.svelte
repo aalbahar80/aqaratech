@@ -22,15 +22,15 @@
 		try {
 			console.info('attempting to delete');
 			await trpc.mutation(`tenants:delete`, id);
+			loading = false;
+			handleClose();
+			await goto('/tenants');
 			addToast({
 				props: {
 					kind: 'success',
 					title: 'Delete successful',
 				},
 			});
-			loading = false;
-			handleClose();
-			await goto('/tenants');
 		} catch (e) {
 			// TODO more specific error message
 			loading = false;
@@ -46,7 +46,7 @@
 	};
 </script>
 
-<slot {handleOpen}>
+<!-- <slot {handleOpen}>
 	<button
 		type="button"
 		class="inline-flex items-center justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
@@ -54,7 +54,7 @@
 	>
 		Delete account
 	</button>
-</slot>
+</slot> -->
 
 <ModalDelete
 	{isOpen}
