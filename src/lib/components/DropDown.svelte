@@ -10,7 +10,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import DropdownMenu from './DropdownMenu.svelte';
 
-	const items = [
+	const options = [
 		{
 			icon: PencilAlt,
 			label: 'Edit',
@@ -45,5 +45,5 @@
 		</MenuButton>
 	</div>
 
-	<DropdownMenu {items} class="bottom-10" />
+	<DropdownMenu {options} class="bottom-10" />
 </Menu>
