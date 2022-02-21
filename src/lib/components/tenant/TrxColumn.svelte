@@ -243,7 +243,7 @@
 	.table-container {
 		@apply hidden min-w-full align-middle shadow sm:block;
 	}
-	li {
+	ul {
 		@apply divide-y divide-gray-200 overflow-hidden shadow sm:hidden;
 	}
 	li a {
