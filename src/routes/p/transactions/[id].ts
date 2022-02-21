@@ -1,3 +1,4 @@
+export default {};
 // import { dev } from '$app/env';
 // import { f } from '$lib/config/colorLog';
 // import { logger } from '$lib/config/logger';

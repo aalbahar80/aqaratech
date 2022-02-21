@@ -1,3 +1,4 @@
+export default {};
 // import { getPaymentStatus, markAsPaid } from '$lib/services/myfatoorah';
 // import type { RequestHandler } from '@sveltejs/kit';
 

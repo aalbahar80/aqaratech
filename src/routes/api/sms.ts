@@ -1,3 +1,4 @@
+export default {};
 // import { logger } from '$lib/config/logger';
 // import type { RequestHandler } from '@sveltejs/kit';
 

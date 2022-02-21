@@ -1,3 +1,4 @@
+export default {};
 // import { dev } from '$app/env';
 // import { page } from '$app/stores';
 // import { f } from '$lib/config/colorLog';
