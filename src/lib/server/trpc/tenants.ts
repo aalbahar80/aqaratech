@@ -62,25 +62,25 @@ export default trpc
 	.query('list', {
 		input: z.string().nullable(),
 		resolve: ({ input }) =>
-			Promise.all([
-				prismaClient.tenant.count(),
-				prismaClient.tenant.findMany({
-					take: 10,
-					skip: getSkip(input, 10),
-					orderBy: {
-						updatedAt: 'desc',
-					},
-					select: {
-						id: true,
-						firstName: true,
-						lastName: true,
-						email: true,
-						phone: true,
-						updatedAt: true,
-						createdAt: true,
-					},
-				}),
-			]),
+			prismaClient.tenant.findMany({
+				take: 10,
+				skip: getSkip(input, 10),
+				orderBy: {
+					updatedAt: 'desc',
+				},
+				select: {
+					id: true,
+					firstName: true,
+					lastName: true,
+					email: true,
+					phone: true,
+					updatedAt: true,
+					createdAt: true,
+				},
+			}),
+	})
+	.query('count', {
+		resolve: () => prismaClient.tenant.count({}),
 	})
 	.mutation('save', {
 		input: schema,

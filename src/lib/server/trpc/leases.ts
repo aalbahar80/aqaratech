@@ -45,6 +45,9 @@ export default trpc
 				},
 			}),
 	})
+	.query('count', {
+		resolve: () => prismaClient.lease.count({}),
+	})
 	.mutation('save', {
 		input: schema,
 		resolve: ({ input: { id, ...data } }) =>

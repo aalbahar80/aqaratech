@@ -10,9 +10,12 @@
 		const { entity } = params;
 		if (isEntity(entity)) {
 			const pageIndex = url.searchParams.get('p');
-			const rows = await trpc.query(`${entity}:list`, pageIndex);
+			const [total, rows] = await Promise.all([
+				trpc.query(`${entity}:count`),
+				trpc.query(`${entity}:list`, pageIndex),
+			]);
 			return {
-				props: { rows },
+				props: { total, rows },
 			};
 		}
 		return {
@@ -24,6 +27,7 @@
 
 <script lang="ts">
 	export let rows: any[];
+	export let total: number;
 </script>
 
 <svelte:head>
