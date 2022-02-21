@@ -23,5 +23,6 @@
 	"editor.suggest.preview": true,
 	"svelte.plugin.svelte.useNewTransformation": true,
 	// "svelte.plugin.svelte.enable": false,
-	// "eslint.enable": false
+	// "eslint.enable": false,
+	"html.autoClosingTags": false
 }
