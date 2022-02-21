@@ -33,9 +33,7 @@
 	}));
 </script>
 
-<div
-	class="mx-auto mt-8 flex max-w-screen-2xl flex-col gap-y-8 px-2 sm:px-6 lg:px-8"
->
+<div class="mx-auto mt-8 flex max-w-screen-2xl flex-col px-2 sm:px-6 lg:px-8">
 	<a href={`${$page.url.pathname}/add`} class="table__add-button"> New </a>
 	<Table rows={newRows} {modifier} />
 	<Pagination />

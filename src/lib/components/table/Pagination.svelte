@@ -12,7 +12,7 @@
 </script>
 
 <nav
-	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+	class="flex items-center justify-between rounded-lg rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow sm:px-6"
 	aria-label="Pagination"
 >
 	<div class="hidden sm:block">
