@@ -11,7 +11,7 @@
 		label: string;
 		href?: string;
 		icon: IconSource;
-		onClick?: any;
+		onClick?: () => void;
 	};
 	export let options: Option[];
 </script>
@@ -35,7 +35,9 @@
 					as="button"
 					class="w-full"
 					on:click={() => {
-						option.onClick();
+						if (option.onClick) {
+							option.onClick();
+						}
 					}}
 				>
 					<div

@@ -2,7 +2,7 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import { PaperClip, Trash } from '@steeze-ui/heroicons';
+	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
 
@@ -11,10 +11,10 @@
 
 	const dispatch = createEventDispatcher();
 
-	const defaultOption = {
-		label: 'Edit',
-		href: `/tenants/${tenant.id}/edit`,
-	};
+	const options = [
+		{ label: 'Update', href: '#', icon: Pencil },
+		{ label: 'Remove', href: '#', icon: Trash },
+	];
 </script>
 
 <section class="rounded-md bg-white shadow">
@@ -24,7 +24,10 @@
 		</h3>
 		<div class="order-last">
 			<ButtonDropdown
-				{defaultOption}
+				defaultOption={{
+					label: 'Edit',
+					href: `/tenants/${tenant.id}/edit`,
+				}}
 				options={[
 					{
 						label: 'Delete',
@@ -83,7 +86,11 @@
 								<span class="ml-2 w-0 flex-1 truncate">civil_id.pdf</span>
 							</div>
 
-							<ButtonDropdown class="bottom-10" />
+							<ButtonDropdown
+								class="bottom-10"
+								defaultOption={{ label: 'View' }}
+								{options}
+							/>
 						</li>
 						<li
 							class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
@@ -97,7 +104,11 @@
 								<span class="ml-2 w-0 flex-1 truncate">passport.pdf</span>
 							</div>
 
-							<ButtonDropdown class="bottom-10" />
+							<ButtonDropdown
+								class="bottom-10"
+								defaultOption={{ label: 'View' }}
+								{options}
+							/>
 						</li>
 					</ul>
 				</dd>
