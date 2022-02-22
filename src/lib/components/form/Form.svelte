@@ -7,11 +7,13 @@
 	} from '$lib/client/trpc';
 	import { singular, type Entity } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
+	import { concatIfExists } from '$lib/utils/table-utils';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
+	import Select from '../Select.svelte';
 	import Input from './Input.svelte';
 
 	export let entity: Entity;
@@ -19,6 +21,17 @@
 	export let data:
 		| InferMutationInput<`${typeof entity}:save`>
 		| InferQueryOutput<`${typeof entity}:basic`>;
+
+	let loading = false;
+	$: console.log($data2.tenantId);
+	let query = '';
+	const getTenantOptions = () =>
+		trpc.query('tenants:search', query).then((tenants) =>
+			tenants.map((tenant) => ({
+				value: tenant.id,
+				label: concatIfExists([tenant.firstName, tenant.lastName]),
+			})),
+		);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -72,12 +85,23 @@
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
-								<Input
-									{name}
-									{value}
-									invalid={!!getValue($errors, name)}
-									invalidText={getValue($errors, name)?.[0]}
-								/>
+								{#if name === 'tenantId'}
+									<Select
+										{name}
+										{value}
+										label="mytenant"
+										error={getValue($errors, name)?.[0]}
+										getOptions={getTenantOptions}
+									/>
+									{$data2.tenantId}
+								{:else}
+									<Input
+										{name}
+										{value}
+										invalid={!!getValue($errors, name)}
+										invalidText={getValue($errors, name)?.[0]}
+									/>
+								{/if}
 							{/each}
 						{/if}
 					</div>
