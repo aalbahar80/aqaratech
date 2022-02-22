@@ -3,10 +3,9 @@ import { z } from 'zod';
 
 export const schema = z
 	.object({
-		id: z.string().nullable(),
+		id: z.string().optional(),
 		monthlyRent: z.number().nonnegative(),
-		deposit: z.number().nonnegative().optional(),
-		// z.preprocess allows the use of both Date objects and strings
+		deposit: z.number().nonnegative(),
 		startDate: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
@@ -25,7 +24,6 @@ export const schema = z
 
 type Lease = InferMutationInput<'leases:save'>;
 const defaultForm = (): Lease => ({
-	id: '',
 	startDate: new Date(),
 	endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 	deposit: 0,
