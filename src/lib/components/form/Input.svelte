@@ -23,9 +23,7 @@
 				value = value.toISOString().split('T')[0];
 				break;
 			}
-			// 'Edit' form gets an ISO string
-			// value = value?.substring(0, 10);
-			assertNever(value, "This case shouldn't happen");
+			break;
 		case 'createdAt':
 		case 'updatedAt':
 			type = 'datetime-local';
