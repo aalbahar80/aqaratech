@@ -43,6 +43,12 @@ export default trpc
 				orderBy: {
 					updatedAt: 'desc',
 				},
+				select: {
+					id: true,
+					startDate: true,
+					endDate: true,
+					monthlyRent: true,
+				},
 			}),
 			pagination: {
 				size: input.size,
