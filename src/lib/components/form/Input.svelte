@@ -53,7 +53,7 @@
 	<label for={name} class="block text-sm font-medium text-gray-700">
 		{startCase(name)}
 	</label>
-	<div class="relative mt-1 rounded-md shadow-sm">
+	<div class="relative mt-1 rounded-md">
 		<input
 			{type}
 			{name}
