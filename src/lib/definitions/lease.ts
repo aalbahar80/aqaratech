@@ -12,6 +12,7 @@ export const schema = z
 		endDate: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
+		tenantId: z.string().min(1),
 	})
 	.refine((val) => val.startDate < val.endDate, {
 		path: ['startDate'],
@@ -28,6 +29,7 @@ const defaultForm = (): Lease => ({
 	endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 	deposit: 0,
 	monthlyRent: 0,
+	tenantId: '',
 });
 
 export default { schema, defaultForm };
