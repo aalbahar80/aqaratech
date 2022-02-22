@@ -58,10 +58,10 @@
 	});
 </script>
 
-<div class="mx-auto mt-8 h-full max-w-xl overflow-hidden rounded-md shadow">
+<div class="mx-auto h-full max-w-xl py-8">
 	<form
 		use:form
-		class="flex h-full flex-col divide-y divide-gray-200 bg-white "
+		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 	>
 		<div class="h-0 flex-1 overflow-y-auto">
 			<div class="flex flex-col justify-between">
