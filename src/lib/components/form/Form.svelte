@@ -58,7 +58,7 @@
 	});
 </script>
 
-<div class="mx-auto mt-8 h-full max-w-xl">
+<div class="mx-auto mt-8 h-full max-w-xl overflow-hidden rounded-md shadow">
 	<form
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 bg-white "
