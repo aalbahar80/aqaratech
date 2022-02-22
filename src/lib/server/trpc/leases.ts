@@ -30,6 +30,14 @@ export default trpc
 					endDate: true,
 					createdAt: true,
 					updatedAt: true,
+					tenantId: true,
+					tenant: {
+						select: {
+							id: true,
+							firstName: true,
+							lastName: true,
+						},
+					},
 					unitId: true,
 				},
 			}),
