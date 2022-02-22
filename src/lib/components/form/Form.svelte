@@ -21,7 +21,12 @@
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
-	const { form, errors, isSubmitting } = createForm({
+	const {
+		form,
+		errors,
+		isSubmitting,
+		data: data2,
+	} = createForm({
 		validate: validateSchema(schema as z.AnyZodObject),
 		onError: (err) => {
 			addToast({
@@ -82,7 +87,7 @@
 			<button
 				type="button"
 				class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				on:click={() => console.log($errors)}
+				on:click={() => console.log($data2, $errors)}
 			>
 				Cancel
 			</button>
