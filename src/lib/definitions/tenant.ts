@@ -3,7 +3,7 @@ import { falsyToNull, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: z.string().nullable(),
+	id: z.string().optional(),
 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
 	email: z.string().email().or(z.literal('')).transform(falsyToNull),
@@ -14,9 +14,12 @@ export const schema = z.object({
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Phone must contain only numbers',
 		}),
-	dob: z.preprocess((arg) => {
-		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-	}, z.date().nullable()),
+	dob: z
+		.preprocess((arg) => {
+			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+		}, z.date())
+		.or(z.literal(''))
+		.transform(falsyToNull),
 	civilid: z
 		.string()
 		.min(12)
@@ -25,15 +28,14 @@ export const schema = z.object({
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Civil ID must contain only numbers',
 		})
-		.nullable(),
+		.transform(falsyToNull),
 });
 
 type Tenant = InferMutationInput<'tenants:save'>;
 const defaultForm = (): Tenant => ({
-	id: '',
 	firstName: '',
 	lastName: '',
-	dob: new Date(),
+	dob: '',
 	email: '',
 	civilid: '',
 	phone: '',
