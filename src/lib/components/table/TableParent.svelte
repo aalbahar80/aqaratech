@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import type { PaginationInfo } from '$lib/utils/table-utils';
 	import Pagination from './Pagination.svelte';
 	import Table from './Table.svelte';
 
@@ -24,7 +25,7 @@
 	});
 
 	export let total: number;
-	export let pagination: any;
+	export let pagination: PaginationInfo;
 	export let data: { id: string; [key: string]: unknown }[];
 
 	// add view & edit to each row
