@@ -25,7 +25,8 @@ export const getTableUrl = (url: URL, options: TableOptions): string => {
 			params.set(option[0], option[1]);
 		}
 	});
-	return `${url.pathname}?${params.toString()}`;
+	const newUrl = `${url.pathname}?${params.toString()}`;
+	return newUrl;
 };
 
 export function getPaginatedItems<T>(

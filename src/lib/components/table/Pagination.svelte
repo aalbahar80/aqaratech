@@ -6,13 +6,13 @@
 	export let currentSize: number;
 	export let pagination: PaginationInfo;
 
-	const newPageHref = (newPageIndex: number) =>
-		getTableUrl($page.url, { p: newPageIndex.toString() });
+	const newPageHref = (url: URL, newPageIndex: number) =>
+		getTableUrl(url, { p: newPageIndex.toString() });
 
 	$: hasNextPage = pagination.start + pagination.size < total;
 	$: hasPrevPage = pagination.pageIndex > 1;
-	$: nextPageHref = newPageHref(pagination.pageIndex + 1);
-	$: prevPageHref = newPageHref(pagination.pageIndex - 1);
+	$: nextPageHref = newPageHref($page.url, pagination.pageIndex + 1);
+	$: prevPageHref = newPageHref($page.url, pagination.pageIndex - 1);
 </script>
 
 <nav
