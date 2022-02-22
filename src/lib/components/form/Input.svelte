@@ -26,6 +26,17 @@
 			// 'Edit' form gets an ISO string
 			// value = value?.substring(0, 10);
 			assertNever(value, "This case shouldn't happen");
+		case 'createdAt':
+		case 'updatedAt':
+			type = 'datetime-local';
+			if (value instanceof Date) {
+				console.log({ value }, 'Input.svelte ~ 34');
+				value = value.toISOString();
+				// remove timezone
+				value = value.substring(0, value.length - 1);
+				break;
+			}
+			assertNever(value, "This case shouldn't happen");
 
 		case 'monthlyRent':
 		case 'deposit':
