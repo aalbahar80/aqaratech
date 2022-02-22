@@ -5,11 +5,12 @@
 		type InferMutationInput,
 		type InferQueryOutput,
 	} from '$lib/client/trpc';
-	import type { Entity } from '$lib/definitions';
+	import { singular, type Entity } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
+	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
 	import Input from './Input.svelte';
 
@@ -65,8 +66,8 @@
 		<div class="h-0 flex-1 overflow-y-auto">
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
-					<h1 class="text-2xl font-medium">
-						{entity}
+					<h1 class="py-4 text-lg font-medium text-gray-700">
+						{data?.id ? 'Edit ' : 'New '}{startCase(singular[entity])}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
