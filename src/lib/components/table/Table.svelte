@@ -8,7 +8,7 @@
 	import { fly } from 'svelte/transition';
 
 	export let rows: any[];
-	export let hidden: string[] = [];
+	export let hidden: string[] = ['id'];
 	export let modifier = 1;
 
 	// columns store should know whenever data changes
