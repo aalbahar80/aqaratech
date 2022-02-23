@@ -9,27 +9,20 @@
 	type E = 'tenants' | 'units';
 	export let entity: E;
 
-	// type EntityLabel<T> = T extends 'tenants'
-	// 	? 'Tenant'
-	// 	: T extends 'units'
-	// 	? 'Unit'
-	// 	: T extends 'properties'
-	// 	? 'Property'
-	// 	: never;
-	type FilteredKeys<T, Criteria> = {
-		[K in keyof T]: T[K] extends Criteria ? K : never;
-	}[keyof T];
-	const asdd: FilteredKeys<E, 'units'>;
-
 	type EntityLabel<T extends E> = (
 		item: InferQueryOutput<`${T}:search`>[number],
 	) => string;
 	// const a: EntityLabel<'tenants'>;
 
+	type EntityLabelPlus<T extends E> = (
+		item: InferQueryOutput<`${T}:search`>[number],
+	) => {
+		label: string;
+		value: string;
+	};
+
 	type EntityLabels = {
-		// [key in E]: EntityLabel<key>;
 		[key in E]: EntityLabel<key>;
-		// [key in E]: EntityLabel<key>;
 	};
 	// type EntityLabels = {
 	// units: (item: InferQueryOutput<`units:search`>[number]) => string;
@@ -41,7 +34,7 @@
 		units: (item) => item.id,
 	};
 
-	const createLabel = (item: InferQueryOutput<`${E}:search`>[number]) => ({
+	const createLabel: EntityLabelPlus<'tenants'> = (item) => ({
 		value: item.id,
 		// label: entity === 'tenants' ? labels.tenants(item) : item.id,
 		label: labels[entity](item),
@@ -54,7 +47,7 @@
 	let name = 'tempName';
 	let optionLabel = 'temmpdefault';
 	// add debounce
-	const getOptions = (entity: E, query: string) =>
+	const getOptions = (query: string) =>
 		trpc.query(`${entity}:search`, query).then((items) =>
 			items.map((item) => ({
 				value: item.id,
