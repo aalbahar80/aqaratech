@@ -13,7 +13,7 @@
 	import isPlainObject from 'lodash-es/isPlainObject.js';
 	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
-	import ComboBoxRel from './ComboBoxRel.svelte';
+	import ComboBox from './ComboBox.svelte';
 	import Input from './Input.svelte';
 
 	export let entity: Entity;
@@ -94,7 +94,7 @@
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
 									<!-- Add asterisk like trpc-sveltekit example -->
-									<ComboBoxRel
+									<ComboBox
 										{value}
 										optionLabel={data[singular[relationalFields[name]]]}
 										entity={relationalFields[name]}
