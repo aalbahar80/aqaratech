@@ -5,6 +5,24 @@ import { z } from 'zod';
 
 export default trpc
 	.router()
+	.query('basic', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.unit.findUnique({
+				where: {
+					id,
+				},
+				// select: {
+				// 	id: true,
+				// 	unitNumber: true,
+				// 	size: true,
+				// 	bed: true,
+				// 	bath: true,
+				// 	createdAt: true,
+				// 	updatedAt: true,
+				// },
+			}),
+	})
 	.query('search', {
 		input: z.string().optional(),
 		resolve: ({ input }) =>
