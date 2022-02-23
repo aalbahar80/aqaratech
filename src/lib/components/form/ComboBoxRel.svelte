@@ -22,38 +22,26 @@
 		return '';
 	};
 
-	const loadOptions = (query?: string) =>
-		trpc.query(`${entity}:search`, query).then((items) =>
+	const loadOptions = (tEntity: typeof entity, query?: string) =>
+		trpc.query(`${tEntity}:search`, query).then((items) =>
 			items.map((item) => ({
 				id: item.id,
-				label: getLabel(item),
+				// label: getLabel(item),
+				label: entityDefinitions[tEntity].label!(item),
 			})),
 		);
 
+	// default dropdown options
 	let items: Option[];
+
 	onMount(async () => {
 		// this creates the field in Felte's data store
 		dispatch('select', {
 			id: value,
 			label: getLabel(optionLabel),
 		});
-		items = await loadOptions();
+		items = await loadOptions(entity);
 	});
-
-	// const items = [
-	// 	{
-	// 		id: '1',
-	// 		label: 'Item 1',
-	// 	},
-	// 	{
-	// 		id: '2',
-	// 		label: 'Item 2',
-	// 	},
-	// 	{
-	// 		id: '3',
-	// 		label: 'Item 3',
-	// 	},
-	// ];
 </script>
 
 <div class="">
