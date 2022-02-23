@@ -4,6 +4,8 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from 'svelte-select';
 
+	type Option = { id: string; label: string };
+
 	const dispatch = createEventDispatcher();
 	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	export let invalidText: string = '';
@@ -27,21 +29,41 @@
 				label: getLabel(item),
 			})),
 		);
-	onMount(() => {
+
+	let items: Option[];
+	onMount(async () => {
 		// this creates the field in Felte's data store
 		dispatch('select', {
 			id: value,
 			label: getLabel(optionLabel),
 		});
+		items = await loadOptions();
 	});
+
+	// const items = [
+	// 	{
+	// 		id: '1',
+	// 		label: 'Item 1',
+	// 	},
+	// 	{
+	// 		id: '2',
+	// 		label: 'Item 2',
+	// 	},
+	// 	{
+	// 		id: '3',
+	// 		label: 'Item 3',
+	// 	},
+	// ];
 </script>
 
-<div>
+<div class="">
 	<Select
 		{loadOptions}
+		{items}
 		optionIdentifier="id"
-		placeholder="Select a value"
+		placeholder="Type to search..."
 		value={value ? { id: value, label: getLabel(optionLabel) } : null}
+		hasError={Boolean(invalidText)}
 		on:select
 		on:clear
 	/>
