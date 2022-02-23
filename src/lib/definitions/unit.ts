@@ -1,19 +1,16 @@
+import type { InferMutationInput } from '$lib/client/trpc';
 import { z } from 'zod';
-import type { UnitData } from './select';
+import type { EntityDefinition } from '.';
 
-export const defaultForm: Omit<UnitData, 'id' | 'createdAt' | 'updatedAt'> = {
-	size: null,
-	type: null,
-	unitNumber: null,
-	bed: null,
-	bath: null,
-	floor: null,
-};
-
-export const formSchema = z.object({
-	id: z.undefined(),
-	createdAt: z.undefined(),
-	updatedAt: z.undefined(),
+export const schema = z.object({
+	id: z.string().optional(),
 });
 
-export default { formSchema, defaultForm };
+type Unit = InferMutationInput<'units:save'>;
+const defaultForm = (): Unit => ({});
+
+const label: typeof definition['label'] = (item) => item.unitNumber || item.id;
+
+const definition: EntityDefinition<'units'> = { schema, defaultForm, label };
+
+export default definition;
