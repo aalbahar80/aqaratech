@@ -91,7 +91,7 @@
 										invalid={!!getValue($errors, name)}
 										invalidText={getValue($errors, name)?.[0]}
 									/>
-								{:else if !isPlainObject(value)}
+								{:else if !isPlainObject(value) && value !== 'unit' && value !== 'tenant'}
 									<Input
 										{name}
 										{value}
