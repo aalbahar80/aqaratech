@@ -24,6 +24,7 @@
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 	$: console.log(data);
+	$: console.log($data2);
 
 	const relationalFields: {
 		[key: string]: Extract<Entity, 'tenants' | 'units'>;
@@ -68,7 +69,6 @@
 			await goto(`/${entity}/${submitted.id}`);
 		},
 	});
-	$: console.log($data2);
 
 	const initialValue = $data2.tenantId;
 
@@ -94,21 +94,15 @@
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
-									<!-- {value} -->
 									<ComboBoxRel
-										bind:value={$data2.name}
+										{value}
 										entity={relationalFields[name]}
 										optionLabel={data[singular[relationalFields[name]]]}
 										{name}
 										invalid={!!getValue($errors, name)}
 										invalidText={getValue($errors, name)?.[0]}
-										on:selection={(e) => {
-											console.log('new selection', e.detail);
-											setData(name, e.detail);
-											// setFields(name, e.detail);
-										}}
 									/>
-								{:else if !isPlainObject(value) && value !== 'unit' && value !== 'tenant'}
+								{:else if !isPlainObject(value) && name !== 'unit' && name !== 'tenant'}
 									<Input
 										{name}
 										{value}

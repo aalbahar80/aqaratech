@@ -1,48 +1,42 @@
 <script lang="ts">
 	import trpc from '$lib/client/trpc';
-	import Select from '$lib/components/Select.svelte';
 	import { entityDefinitions, type Entity } from '$lib/definitions';
-	import ComboBox from './ComboBox.svelte';
+	import Select from 'svelte-select';
 
 	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	export let name: string;
 
 	// look into value
-	export let value: string | null;
+	let value: string | null = 'abc123';
 	export let optionLabel: null | { [key: string]: string };
-	console.log(optionLabel);
 	export let invalid: boolean;
 	export let invalidText: string | undefined;
-	// add debounce
+
 	const getLabel = (item: any) => {
-		const label = entityDefinitions[entity].label;
+		// console.log({ item }, 'ComboBoxRel.svelte ~ 16');
+		const { label } = entityDefinitions[entity];
+		// console.log({ label }, 'ComboBoxRel.svelte ~ 17');
 		if (label && item) return label(item);
 		return '';
 	};
 
-	const getOptions = (query?: string) =>
+	const loadOptions = (query?: string) =>
 		trpc.query(`${entity}:search`, query).then((items) =>
 			items.map((item) => ({
-				value: item.id,
+				id: item.id,
 				label: getLabel(item),
 			})),
 		);
+	console.log(optionLabel);
+	console.log({ id: value, label: getLabel(optionLabel) });
 </script>
 
-<!-- <Select
-	{name}
-	{value}
-	optionLabel={getLabel(optionLabel)}
-	error={invalidText}
-	{getOptions}
-/> -->
-
-<!-- {value} -->
-<ComboBox
-	bind:value
-	{name}
-	optionLabel={getLabel(optionLabel)}
-	error={invalidText}
-	{getOptions}
-	on:selection
-/>
+<div>
+	<Select
+		{loadOptions}
+		optionIdentifier="id"
+		value={{ id: value, label: getLabel(optionLabel) }}
+		getSelectionLabel={getLabel}
+		placeholder="Select a value"
+	/>
+</div>
