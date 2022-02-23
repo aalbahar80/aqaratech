@@ -7,7 +7,7 @@
 		ListboxOption,
 		ListboxOptions,
 	} from '@rgossiaux/svelte-headlessui';
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	type Option = { value: string; label: string };
@@ -34,11 +34,13 @@
 	function classes(...classesList: string[]) {
 		return classesList.filter(Boolean).join(' ');
 	}
+	const dispatch = createEventDispatcher();
 </script>
 
+{value}
 <!-- use bind:value? -->
-<!-- <Listbox as="div" {value} onChange={setSelectedPerson}> -->
-<Listbox as="div" {value}>
+<Listbox as="div" bind:value on:change={(e) => dispatch('selection', e.detail)}>
+	<!-- <Listbox as="div" {value}> -->
 	<ListboxLabel class="block text-sm font-medium text-gray-700"
 		>{name}</ListboxLabel
 	>
@@ -66,6 +68,7 @@
 
 		<ListboxOptions
 			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+			{name}
 		>
 			{#each options as { value, label } (value)}
 				<ListboxOption

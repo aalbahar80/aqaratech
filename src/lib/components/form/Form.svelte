@@ -37,6 +37,9 @@
 		errors,
 		isSubmitting,
 		data: data2,
+		setData,
+		setFields,
+		touched,
 	} = createForm({
 		validate: validateSchema(schema as z.AnyZodObject),
 		onError: (err) => {
@@ -66,6 +69,14 @@
 		},
 	});
 	$: console.log($data2);
+
+	const initialValue = $data2.tenantId;
+
+	$: {
+		if (initialValue !== $data2.tenantId) {
+			$touched.tenantId = true;
+		}
+	}
 </script>
 
 <div class="mx-auto h-full max-w-xl py-8">
@@ -83,13 +94,19 @@
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
+									<!-- {value} -->
 									<ComboBoxRel
-										{value}
+										bind:value={$data2.name}
 										entity={relationalFields[name]}
 										optionLabel={data[singular[relationalFields[name]]]}
 										{name}
 										invalid={!!getValue($errors, name)}
 										invalidText={getValue($errors, name)?.[0]}
+										on:selection={(e) => {
+											console.log('new selection', e.detail);
+											setData(name, e.detail);
+											// setFields(name, e.detail);
+										}}
 									/>
 								{:else if !isPlainObject(value) && value !== 'unit' && value !== 'tenant'}
 									<Input

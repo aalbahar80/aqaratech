@@ -37,10 +37,12 @@
 	{getOptions}
 /> -->
 
+<!-- {value} -->
 <ComboBox
+	bind:value
 	{name}
-	{value}
 	optionLabel={getLabel(optionLabel)}
 	error={invalidText}
 	{getOptions}
+	on:selection
 />
