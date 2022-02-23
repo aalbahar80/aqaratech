@@ -6,8 +6,8 @@
 
 	// export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	// type E = typeof entity;
-	type E = 'tenants' | 'units';
-	// type E = $$Generic<'tenants' | 'units'>;
+	// type E = 'tenants' | 'units';
+	type E = $$Generic<'tenants' | 'units'>;
 	export let entity: E;
 
 	type EntityLabel<T extends E> = (
@@ -47,8 +47,8 @@
 	type Item<T extends E> = InferQueryOutput<`${T}:search`>[number];
 
 	const createLabel = (
-		item: Item<'tenants'>,
-		entity: 'tenants',
+		item: Item<E>,
+		entity: E,
 	): { value: string; label: string } => ({
 		value: item.id,
 		// label: entity === 'tenants' ? labels.tenants(item) : item.id,
@@ -56,21 +56,21 @@
 	});
 
 	export let value = '';
-	export let invalid: boolean;
+	// export let invalid: boolean;
 	export let invalidText: string | undefined;
 
 	let name = 'tempName';
 	let optionLabel = 'temmpdefault';
 	// add debounce
-	const getOptions = (query: string, entity: 'tenants') =>
-		trpc.query(`${entity}:search`, query).then((items) =>
+	const getOptions = (entity2: 'tenants', query: string) =>
+		trpc.query(`${entity2}:search`, 'a').then((items) =>
 			items.map((item) => ({
 				value: item.id,
 				// label: entity === 'tenants' ? labels.tenants(item) : item.id,
-				label: labels[entity](item),
+				label: labels[entity2](item),
 			})),
 		);
-	const a = labels.tenants({ id: 'df', firstName: 'a', lastName: 'b' });
+	// const a = labels.tenants({ id: 'df', firstName: 'a', lastName: 'b' });
 </script>
 
 <Select {name} {value} label={optionLabel} error={invalidText} {getOptions} />
