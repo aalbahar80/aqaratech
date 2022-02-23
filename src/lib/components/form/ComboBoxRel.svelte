@@ -39,7 +39,7 @@
 			id: value,
 			label: getLabel(optionLabel),
 		});
-		items = await loadOptions(entity);
+		items = await loadOptions();
 	});
 </script>
 
