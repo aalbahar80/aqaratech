@@ -29,8 +29,6 @@
 	<select {value} {name} id={name} aria-invalid={error ? 'true' : undefined}>
 		{#if value}
 			<option {value}>{optionLabel}</option>
-		{:else}
-			<option value="">Select...</option>
 		{/if}
 		{#each options as { value, label } (value)}
 			<option {value}>{label}</option>
