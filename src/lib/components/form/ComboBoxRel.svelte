@@ -7,34 +7,49 @@
 	// export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	// type E = typeof entity;
 	type E = 'tenants' | 'units';
+	// type E = $$Generic<'tenants' | 'units'>;
 	export let entity: E;
 
 	type EntityLabel<T extends E> = (
 		item: InferQueryOutput<`${T}:search`>[number],
 	) => string;
+
 	// const a: EntityLabel<'tenants'>;
+
+	// type EntityLabelPlus<T extends E> = (
+	// 	item: InferQueryOutput<`${T}:search`>[number],
+	// ) => {
+	// 	label: string;
+	// 	value: string;
+	// };
 
 	type EntityLabelPlus<T extends E> = (
 		item: InferQueryOutput<`${T}:search`>[number],
-	) => {
-		label: string;
-		value: string;
-	};
+	) => string;
 
-	type EntityLabels = {
-		[key in E]: EntityLabel<key>;
-	};
+	// const a: EntityLabelPlus<'tenants'>;
+	// type EntityLabels<T extends E> = {
+	//   [key in T]: EntityLabelPlus<key>;
+	//   };
 	// type EntityLabels = {
-	// units: (item: InferQueryOutput<`units:search`>[number]) => string;
-	// tenants: (item: InferQueryOutput<`tenants:search`>[number]) => string;
+	// 	units: (item: InferQueryOutput<`units:search`>[number]) => string;
+	// 	tenants: (item: InferQueryOutput<`tenants:search`>[number]) => string;
 	// };
 
+	type EntityLabels = {
+		[key in E]: EntityLabelPlus<key>;
+		// units: EntityLabel<'units' extends E ? 'units' : unknown>;
+	};
 	const labels: EntityLabels = {
 		tenants: (item) => concatIfExists([item.firstName, item.lastName]),
 		units: (item) => item.id,
 	};
+	type Item<T extends E> = InferQueryOutput<`${T}:search`>[number];
 
-	const createLabel: EntityLabelPlus<'tenants'> = (item) => ({
+	const createLabel = (
+		item: Item<'tenants'>,
+		entity: 'tenants',
+	): { value: string; label: string } => ({
 		value: item.id,
 		// label: entity === 'tenants' ? labels.tenants(item) : item.id,
 		label: labels[entity](item),
@@ -47,7 +62,7 @@
 	let name = 'tempName';
 	let optionLabel = 'temmpdefault';
 	// add debounce
-	const getOptions = (query: string) =>
+	const getOptions = (query: string, entity: 'tenants') =>
 		trpc.query(`${entity}:search`, query).then((items) =>
 			items.map((item) => ({
 				value: item.id,
