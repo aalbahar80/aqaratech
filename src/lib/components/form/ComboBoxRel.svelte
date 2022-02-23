@@ -6,13 +6,35 @@
 
 	// export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	// type E = typeof entity;
-	type E = 'tenants' | 'units' | 'properties';
+	type E = 'tenants' | 'units';
 	export let entity: E;
 
+	// type EntityLabel<T> = T extends 'tenants'
+	// 	? 'Tenant'
+	// 	: T extends 'units'
+	// 	? 'Unit'
+	// 	: T extends 'properties'
+	// 	? 'Property'
+	// 	: never;
+	type FilteredKeys<T, Criteria> = {
+		[K in keyof T]: T[K] extends Criteria ? K : never;
+	}[keyof T];
+	const asdd: FilteredKeys<E, 'units'>;
+
+	type EntityLabel<T extends E> = (
+		item: InferQueryOutput<`${T}:search`>[number],
+	) => string;
+	// const a: EntityLabel<'tenants'>;
+
 	type EntityLabels = {
-		units: (item: InferQueryOutput<`units:search`>[number]) => string;
-		tenants: (item: InferQueryOutput<`tenants:search`>[number]) => string;
+		// [key in E]: EntityLabel<key>;
+		[key in E]: EntityLabel<key>;
+		// [key in E]: EntityLabel<key>;
 	};
+	// type EntityLabels = {
+	// units: (item: InferQueryOutput<`units:search`>[number]) => string;
+	// tenants: (item: InferQueryOutput<`tenants:search`>[number]) => string;
+	// };
 
 	const labels: EntityLabels = {
 		tenants: (item) => concatIfExists([item.firstName, item.lastName]),
