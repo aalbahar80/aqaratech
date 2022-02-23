@@ -39,7 +39,6 @@
 		isSubmitting,
 		data: data2,
 		setData,
-		setFields,
 		touched,
 	} = createForm({
 		validate: validateSchema(schema as z.AnyZodObject),
@@ -96,11 +95,15 @@
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
 									<ComboBoxRel
 										{value}
-										entity={relationalFields[name]}
 										optionLabel={data[singular[relationalFields[name]]]}
-										{name}
-										invalid={!!getValue($errors, name)}
+										entity={relationalFields[name]}
 										invalidText={getValue($errors, name)?.[0]}
+										on:select={(e) => {
+											setData(name, e.detail.id);
+										}}
+										on:clear={() => {
+											setData(name, '');
+										}}
 									/>
 								{:else if !isPlainObject(value) && name !== 'unit' && name !== 'tenant'}
 									<Input

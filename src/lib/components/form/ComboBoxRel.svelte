@@ -1,21 +1,21 @@
 <script lang="ts">
 	import trpc from '$lib/client/trpc';
 	import { entityDefinitions, type Entity } from '$lib/definitions';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from 'svelte-select';
 
+	const dispatch = createEventDispatcher();
 	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
-	export let name: string;
+	export let invalidText: string = '';
 
-	// look into value
-	let value: string | null = 'abc123';
+	// default selected objec	t
 	export let optionLabel: null | { [key: string]: string };
-	export let invalid: boolean;
-	export let invalidText: string | undefined;
+
+	// id of the default selected option
+	export let value: string | null;
 
 	const getLabel = (item: any) => {
-		// console.log({ item }, 'ComboBoxRel.svelte ~ 16');
 		const { label } = entityDefinitions[entity];
-		// console.log({ label }, 'ComboBoxRel.svelte ~ 17');
 		if (label && item) return label(item);
 		return '';
 	};
@@ -27,16 +27,23 @@
 				label: getLabel(item),
 			})),
 		);
-	console.log(optionLabel);
-	console.log({ id: value, label: getLabel(optionLabel) });
+	onMount(() => {
+		// this creates the field in Felte's data store
+		dispatch('select', {
+			id: value,
+			label: getLabel(optionLabel),
+		});
+	});
 </script>
 
 <div>
 	<Select
 		{loadOptions}
 		optionIdentifier="id"
-		value={{ id: value, label: getLabel(optionLabel) }}
-		getSelectionLabel={getLabel}
 		placeholder="Select a value"
+		value={value ? { id: value, label: getLabel(optionLabel) } : null}
+		on:select
+		on:clear
 	/>
+	{invalidText ?? ''}
 </div>
