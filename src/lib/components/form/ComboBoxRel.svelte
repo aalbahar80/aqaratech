@@ -22,12 +22,11 @@
 		return '';
 	};
 
-	const loadOptions = (tEntity: typeof entity, query?: string) =>
-		trpc.query(`${tEntity}:search`, query).then((items) =>
+	const loadOptions = (query?: string) =>
+		trpc.query(`${entity}:search`, query).then((items) =>
 			items.map((item) => ({
 				id: item.id,
-				// label: getLabel(item),
-				label: entityDefinitions[tEntity].label!(item),
+				label: getLabel(item),
 			})),
 		);
 
