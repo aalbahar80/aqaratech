@@ -4,18 +4,18 @@
 	type Option = { value: string; label: string };
 
 	// TODO add required asterisk
-	export let label: string;
+	export let optionLabel: string;
 	export let name: string;
-	export let getOptions: () => Promise<Option[]>;
+	export let getOptions: (query?: string) => Promise<Option[]>;
 	export let value = '';
 	export let error: string | void;
 
 	let options: Option[] = [];
 	let loading = false;
 
-	const load = async () => {
+	const load = async (query = '') => {
 		loading = true;
-		options = await getOptions();
+		options = await getOptions(query);
 		loading = false;
 	};
 
@@ -23,18 +23,12 @@
 	$: console.log(value, 'value inner select');
 </script>
 
+<input type="text" on:input={(e) => load(e.currentTarget.value)} />
 <label aria-busy={loading}>
 	{name}
-	<!-- bind:value -->
-	<select
-		{value}
-		{name}
-		id={name}
-		on:focus={load}
-		aria-invalid={error ? 'true' : undefined}
-	>
+	<select {value} {name} id={name} aria-invalid={error ? 'true' : undefined}>
 		{#if value}
-			<option {value}>{label}</option>
+			<option {value}>{optionLabel}</option>
 		{:else}
 			<option value="">Select...</option>
 		{/if}

@@ -15,9 +15,11 @@ export type EntityDefinition<T extends Entity> = {
 	defaultForm: () => InferMutationInput<`${T}:save`>;
 	schema: z.AnyZodObject | z.ZodEffects<any>;
 	label?: (
-		item: InferQueryOutput<`${T extends 'tenants' | 'units'
-			? T
-			: never}:search`>[number],
+		item:
+			| InferQueryOutput<`${T extends 'tenants' | 'units'
+					? T
+					: never}:search`>[number]
+			| null,
 	) => string;
 };
 type EntityDefinitions = {

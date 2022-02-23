@@ -9,7 +9,8 @@ export const schema = z.object({
 type Unit = InferMutationInput<'units:save'>;
 const defaultForm = (): Unit => ({});
 
-const label: typeof definition['label'] = (item) => item.unitNumber || item.id;
+const label: typeof definition['label'] = (item) =>
+	item?.unitNumber || item?.id || '';
 
 const definition: EntityDefinition<'units'> = { schema, defaultForm, label };
 

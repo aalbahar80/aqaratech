@@ -39,6 +39,12 @@ export default trpc
 						},
 					},
 					unitId: true,
+					unit: {
+						select: {
+							id: true,
+							unitNumber: true,
+						},
+					},
 				},
 			}),
 	})

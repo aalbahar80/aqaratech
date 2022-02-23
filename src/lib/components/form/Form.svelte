@@ -7,13 +7,13 @@
 	} from '$lib/client/trpc';
 	import { singular, type Entity } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
-	import { concatIfExists } from '$lib/utils/table-utils';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
+	import isPlainObject from 'lodash-es/isPlainObject.js';
 	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
-	import Select from '../Select.svelte';
+	import ComboBoxRel from './ComboBoxRel.svelte';
 	import Input from './Input.svelte';
 
 	export let entity: Entity;
@@ -22,18 +22,15 @@
 		| InferMutationInput<`${typeof entity}:save`>
 		| InferQueryOutput<`${typeof entity}:basic`>;
 
-	let loading = false;
-	$: console.log($data2.tenantId);
-	let query = '';
-	const getTenantOptions = () =>
-		trpc.query('tenants:search', query).then((tenants) =>
-			tenants.map((tenant) => ({
-				value: tenant.id,
-				label: concatIfExists([tenant.firstName, tenant.lastName]),
-			})),
-		);
-
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
+	$: console.log(data);
+
+	const relationalFields: {
+		[key: string]: Extract<Entity, 'tenants' | 'units'>;
+	} = {
+		tenantId: 'tenants',
+		unitId: 'units',
+	};
 
 	const {
 		form,
@@ -53,7 +50,6 @@
 				const serverErrors = getEditorErrors(err);
 				return serverErrors;
 			}
-			// const newErrors = mapValues(data, (_) => null);
 			return err;
 		},
 		onSubmit: async (values) => {
@@ -69,6 +65,7 @@
 			await goto(`/${entity}/${submitted.id}`);
 		},
 	});
+	$: console.log($data2);
 </script>
 
 <div class="mx-auto h-full max-w-xl py-8">
@@ -85,16 +82,16 @@
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
-								{#if name === 'tenantId'}
-									<Select
-										{name}
+								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
+									<ComboBoxRel
 										{value}
-										label="mytenant"
-										error={getValue($errors, name)?.[0]}
-										getOptions={getTenantOptions}
+										entity={relationalFields[name]}
+										optionLabel={data[singular[relationalFields[name]]]}
+										{name}
+										invalid={!!getValue($errors, name)}
+										invalidText={getValue($errors, name)?.[0]}
 									/>
-									{$data2.tenantId}
-								{:else}
+								{:else if !isPlainObject(value)}
 									<Input
 										{name}
 										{value}

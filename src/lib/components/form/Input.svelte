@@ -28,7 +28,6 @@
 		case 'updatedAt':
 			type = 'datetime-local';
 			if (value instanceof Date) {
-				console.log({ value }, 'Input.svelte ~ 34');
 				value = value.toISOString();
 				// remove timezone
 				value = value.substring(0, value.length - 1);
