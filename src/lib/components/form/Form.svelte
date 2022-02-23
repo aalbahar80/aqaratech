@@ -39,7 +39,6 @@
 		isSubmitting,
 		data: data2,
 		setData,
-		touched,
 	} = createForm({
 		validate: validateSchema(schema as z.AnyZodObject),
 		onError: (err) => {
@@ -71,11 +70,11 @@
 
 	const initialValue = $data2.tenantId;
 
-	$: {
-		if (initialValue !== $data2.tenantId) {
-			$touched.tenantId = true;
-		}
-	}
+	// $: {
+	// 	if (initialValue !== $data2.tenantId) {
+	// 		$touched.tenantId = true;
+	// 	}
+	// }
 </script>
 
 <div class="mx-auto h-full max-w-xl py-8">
