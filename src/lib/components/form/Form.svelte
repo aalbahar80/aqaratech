@@ -93,6 +93,7 @@
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
+									<!-- Add asterisk like trpc-sveltekit example -->
 									<ComboBoxRel
 										{value}
 										optionLabel={data[singular[relationalFields[name]]]}
