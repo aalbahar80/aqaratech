@@ -7,7 +7,7 @@
 	export let name: string;
 
 	// look into value
-	export let value: string | null = '';
+	export let value: string | null;
 	export let optionLabel: null | { [key: string]: string };
 	console.log(optionLabel);
 	export let invalid: boolean;
