@@ -1,3 +1,4 @@
+import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/unit';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
@@ -5,6 +6,15 @@ import { z } from 'zod';
 
 export default trpc
 	.router()
+	.query('read', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.unit.findUnique({
+				where: {
+					id,
+				},
+			}),
+	})
 	.query('basic', {
 		input: z.string(),
 		resolve: ({ input: id }) =>
@@ -12,16 +22,24 @@ export default trpc
 				where: {
 					id,
 				},
-				// select: {
-				// 	id: true,
-				// 	unitNumber: true,
-				// 	size: true,
-				// 	bed: true,
-				// 	bath: true,
-				// 	createdAt: true,
-				// 	updatedAt: true,
-				// },
 			}),
+	})
+	.query('list', {
+		input: paginationSchema,
+		resolve: async ({ input }) => ({
+			data: await prismaClient.unit.findMany({
+				take: input.size,
+				skip: input.size * (input.pageIndex - 1),
+				orderBy: {
+					updatedAt: 'desc',
+				},
+			}),
+			pagination: {
+				size: input.size,
+				start: input.size * (input.pageIndex - 1) + 1,
+				pageIndex: input.pageIndex,
+			},
+		}),
 	})
 	.query('search', {
 		input: z.string().optional(),
@@ -45,6 +63,9 @@ export default trpc
 					: undefined,
 			}),
 	})
+	.query('count', {
+		resolve: () => prismaClient.unit.count({}),
+	})
 	.mutation('save', {
 		input: schema,
 		resolve: ({ input: { id, ...data } }) =>
@@ -58,4 +79,16 @@ export default trpc
 						data,
 						// select: { id: true },
 				  }),
+	})
+	.mutation('delete', {
+		input: z.string(),
+		resolve: ({ input: id }) =>
+			prismaClient.unit.delete({
+				where: {
+					id,
+				},
+				select: {
+					id: true,
+				},
+			}),
 	});
