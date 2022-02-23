@@ -24,5 +24,10 @@
 	"svelte.plugin.svelte.useNewTransformation": true,
 	// "svelte.plugin.svelte.enable": false,
 	// "eslint.enable": false,
-	"html.autoClosingTags": false
+	"html.autoClosingTags": false,
+	"explorer.experimental.fileNesting.enabled": true,
+	"explorer.experimental.fileNesting.patterns": {
+		"*.ts": "$(capture).test.ts",
+		"package.json": "yarn.lock"
+	}
 }
