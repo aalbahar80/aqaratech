@@ -18,8 +18,7 @@ export type EntityDefinition<T extends Entity> = {
 		item:
 			| InferQueryOutput<`${T extends 'tenants' | 'units'
 					? T
-					: never}:search`>[number]
-			| null,
+					: never}:search`>[number],
 	) => string;
 };
 type EntityDefinitions = {

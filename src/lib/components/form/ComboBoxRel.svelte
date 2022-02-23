@@ -15,8 +15,8 @@
 	// add debounce
 	const getLabel = (item: any) => {
 		const label = entityDefinitions[entity].label;
-		if (label) return label(item);
-		return item.id;
+		if (label && item) return label(item);
+		return '';
 	};
 
 	const getOptions = (query?: string) =>
