@@ -13,6 +13,7 @@ export const schema = z
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
 		tenantId: z.string().min(1),
+		unitId: z.string().min(1),
 	})
 	.refine((val) => val.startDate < val.endDate, {
 		path: ['startDate'],
@@ -30,6 +31,7 @@ const defaultForm = (): Lease => ({
 	deposit: 0,
 	monthlyRent: 0,
 	tenantId: '',
+	unitId: '',
 });
 
 export default { schema, defaultForm };
