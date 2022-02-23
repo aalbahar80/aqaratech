@@ -2,6 +2,7 @@
 	import trpc from '$lib/client/trpc';
 	import Select from '$lib/components/Select.svelte';
 	import { entityDefinitions, type Entity } from '$lib/definitions';
+	import ComboBox from './ComboBox.svelte';
 
 	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	export let name: string;
@@ -28,7 +29,15 @@
 		);
 </script>
 
-<Select
+<!-- <Select
+	{name}
+	{value}
+	optionLabel={getLabel(optionLabel)}
+	error={invalidText}
+	{getOptions}
+/> -->
+
+<ComboBox
 	{name}
 	{value}
 	optionLabel={getLabel(optionLabel)}

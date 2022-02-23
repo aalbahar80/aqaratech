@@ -73,7 +73,7 @@
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 	>
-		<div class="h-0 flex-1 overflow-y-auto">
+		<div class="h-0 flex-1">
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
