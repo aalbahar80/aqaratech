@@ -36,6 +36,7 @@
 			assertNever(value, "This case shouldn't happen");
 
 		case 'monthlyRent':
+		case 'marketRent':
 		case 'deposit':
 		case 'size':
 		case 'bed':

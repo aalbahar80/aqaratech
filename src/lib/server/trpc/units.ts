@@ -73,11 +73,9 @@ export default trpc
 				? prismaClient.unit.update({
 						data,
 						where: { id },
-						// select: { id: true },
 				  })
 				: prismaClient.unit.create({
 						data,
-						// select: { id: true },
 				  }),
 	})
 	.mutation('delete', {
