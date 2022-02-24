@@ -8,7 +8,10 @@
 	type Option = { id: string; label: string };
 
 	const dispatch = createEventDispatcher();
-	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
+	export let entity: Extract<
+		Entity,
+		'tenants' | 'units' | 'properties' | 'clients'
+	>;
 	export let invalidText: string = '';
 
 	// default selected object

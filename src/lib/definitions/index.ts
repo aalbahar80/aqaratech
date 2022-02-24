@@ -4,8 +4,15 @@ import lease from './lease';
 import property from './property';
 import tenant from './tenant';
 import unit from './unit';
+import client from './client';
 
-const entities = ['tenants', 'leases', 'units', 'properties'] as const;
+const entities = [
+	'tenants',
+	'leases',
+	'units',
+	'properties',
+	'clients',
+] as const;
 export type Entity = typeof entities[number];
 
 export function isEntity(entity: string | Entity): entity is Entity {
@@ -17,7 +24,11 @@ export type EntityDefinition<T extends Entity> = {
 	schema: z.AnyZodObject | z.ZodEffects<any>;
 	label?: (
 		item:
-			| InferQueryOutput<`${T extends 'tenants' | 'units' | 'properties'
+			| InferQueryOutput<`${T extends
+					| 'tenants'
+					| 'units'
+					| 'properties'
+					| 'clients'
 					? T
 					: never}:search`>[number],
 	) => string;
@@ -31,6 +42,7 @@ export const entityDefinitions: EntityDefinitions = {
 	leases: lease,
 	units: unit,
 	properties: property,
+	clients: client,
 };
 
 export const singular: { [K in Entity]: string } = {
@@ -38,4 +50,5 @@ export const singular: { [K in Entity]: string } = {
 	tenants: 'tenant',
 	units: 'unit',
 	properties: 'property',
+	clients: 'client',
 };
