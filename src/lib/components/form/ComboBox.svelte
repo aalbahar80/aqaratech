@@ -1,6 +1,7 @@
 <script lang="ts">
 	import trpc from '$lib/client/trpc';
-	import { entityDefinitions, type Entity } from '$lib/definitions';
+	import { entityDefinitions, singular, type Entity } from '$lib/definitions';
+	import startCase from 'lodash-es/startCase.js';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from 'svelte-select';
 
@@ -10,7 +11,7 @@
 	export let entity: Extract<Entity, 'tenants' | 'units' | 'properties'>;
 	export let invalidText: string = '';
 
-	// default selected objec	t
+	// default selected object
 	export let optionLabel: null | { [key: string]: string };
 
 	// id of the default selected option
@@ -44,7 +45,14 @@
 </script>
 
 <div class="">
+	<label
+		for={`${entity}Selector`}
+		class="block text-sm font-medium text-gray-700"
+	>
+		{startCase(singular[entity])}</label
+	>
 	<Select
+		id={`${entity}Selector`}
 		{loadOptions}
 		{items}
 		optionIdentifier="id"
