@@ -10,7 +10,6 @@
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
-	import isPlainObject from 'lodash-es/isPlainObject.js';
 	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
 	import ComboBox from './ComboBox.svelte';
@@ -102,7 +101,7 @@
 											setData(name, '');
 										}}
 									/>
-								{:else if !isPlainObject(value) && name !== 'unit' && name !== 'tenant'}
+								{:else if !['tenant', 'unit', 'property', 'client'].includes(name)}
 									<Input
 										{name}
 										{value}

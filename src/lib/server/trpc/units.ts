@@ -22,6 +22,9 @@ export default trpc
 				where: {
 					id,
 				},
+				include: {
+					property: true,
+				},
 			}),
 	})
 	.query('list', {

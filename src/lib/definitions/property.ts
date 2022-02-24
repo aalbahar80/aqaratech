@@ -30,6 +30,7 @@ export const schema = z.object({
 		.min(1, { message: 'Required' })
 		.transform(trim)
 		.transform(falsyToNull),
+	clientId: z.string().uuid(),
 });
 
 type Property = InferMutationInput<'properties:save'>;
@@ -39,6 +40,7 @@ const defaultForm = (): Property => ({
 	avenue: '',
 	street: '',
 	number: '',
+	clientId: '',
 });
 
 const label: typeof definition['label'] = (item) =>
