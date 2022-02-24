@@ -1,8 +1,9 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import { isEntity, singular, type Entity } from '$lib/definitions';
+	import { isEntity, type Entity } from '$lib/definitions';
 	import type { Load } from '@sveltejs/kit';
+	import startCase from 'lodash-es/startCase.js';
 
 	export const load: Load = async ({ url, params }) => {
 		const { entity } = params;
@@ -13,7 +14,7 @@
 				trpc.query(`${entity}:list`, { pageIndex }),
 			]);
 			return {
-				props: { total, pagination, data },
+				props: { entity, total, pagination, data },
 			};
 		}
 		return {
@@ -31,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>{`${singular[entity]}`}</title>
+	<title>{startCase(entity)}</title>
 </svelte:head>
 
 <TableParent {data} {total} {pagination} />
