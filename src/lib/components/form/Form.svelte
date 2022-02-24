@@ -27,10 +27,15 @@
 	$: console.log($data2);
 
 	const relationalFields: {
-		[key: string]: Extract<Entity, 'tenants' | 'units'>;
+		[key: string]: Extract<
+			Entity,
+			'tenants' | 'units' | 'properties' | 'clients'
+		>;
 	} = {
 		tenantId: 'tenants',
 		unitId: 'units',
+		propertyId: 'properties',
+		clientId: 'clients',
 	};
 
 	const {
