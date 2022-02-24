@@ -13,6 +13,7 @@ export const schema = z.object({
 		.string()
 		.min(8)
 		.and(z.string().max(8))
+		.transform(trim)
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Phone must contain only numbers',
 		}),
@@ -30,6 +31,7 @@ export const schema = z.object({
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Civil ID must contain only numbers',
 		})
+		.transform(trim)
 		.transform(falsyToNull),
 });
 
