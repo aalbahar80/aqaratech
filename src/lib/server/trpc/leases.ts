@@ -81,11 +81,9 @@ export default trpc
 				? prismaClient.lease.update({
 						data,
 						where: { id },
-						// select: { id: true },
 				  })
 				: prismaClient.lease.create({
 						data,
-						// select: { id: true },
 				  }),
 	})
 	.mutation('delete', {
