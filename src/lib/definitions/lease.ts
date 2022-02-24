@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const schema = z
 	.object({
-		id: z.string().optional(),
+		id: z.string().uuid().optional(),
 		monthlyRent: z.number().nonnegative(),
 		deposit: z.number().nonnegative(),
 		startDate: z.preprocess((arg) => {
@@ -12,8 +12,8 @@ export const schema = z
 		endDate: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
-		tenantId: z.string().min(1),
-		unitId: z.string().min(1),
+		tenantId: z.string().uuid(),
+		unitId: z.string().uuid(),
 	})
 	.refine((val) => val.startDate < val.endDate, {
 		path: ['startDate'],

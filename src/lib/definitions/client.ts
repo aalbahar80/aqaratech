@@ -5,7 +5,7 @@ import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
 export const schema = z.object({
-	id: z.string().optional(),
+	id: z.string().uuid().optional(),
 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
 	email: z.string().email().or(z.literal('')).transform(falsyToNull),

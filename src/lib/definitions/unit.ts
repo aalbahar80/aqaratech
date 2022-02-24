@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
 export const schema = z.object({
-	id: z.string().optional(),
+	id: z.string().uuid().optional(),
 	unitNumber: z
 		.string()
 		.min(1)

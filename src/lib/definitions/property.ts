@@ -5,7 +5,7 @@ import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
 export const schema = z.object({
-	id: z.string().optional(),
+	id: z.string().uuid().optional(),
 	area: z
 		.string()
 		.min(1, { message: 'Required' })
@@ -42,7 +42,7 @@ const defaultForm = (): Property => ({
 });
 
 const label: typeof definition['label'] = (item) =>
-	concatIfExists([item.block, item.block]);
+	concatIfExists([item.area, item.block]);
 
 const definition: EntityDefinition<'properties'> = {
 	schema,
