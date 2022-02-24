@@ -77,9 +77,15 @@
 		isOpen = true;
 	}}
 >
-	Delete account
+	Delete
 </button>
 
+<a
+	class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-3 py-2 text-sm font-medium leading-4 text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+	href={`/${$page.params.entity}/${$page.params.id}/edit`}
+>
+	Edit
+</a>
 <ModalDelete
 	{isOpen}
 	{loading}
