@@ -45,10 +45,15 @@
 
 		// always prepare a list of suggested options
 		// if a value is predefined, push it to the top of the list
-		let predefinedItem: Option[] = [];
-		if (value) predefinedItem = await loadOptions(value);
-		const defaultItems: Option[] = await loadOptions();
-		items = [...predefinedItem, ...defaultItems];
+		if (value) {
+			const [predefinedItem, defaultItems] = await Promise.all([
+				loadOptions(value),
+				loadOptions(),
+			]);
+			items = [...predefinedItem, ...defaultItems];
+		} else {
+			items = await loadOptions();
+		}
 	});
 </script>
 
