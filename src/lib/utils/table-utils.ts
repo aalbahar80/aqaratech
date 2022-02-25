@@ -51,6 +51,6 @@ export function getPaginatedItems<T>(
 	};
 }
 
-export const concatIfExists = (strings: (string | null)[]) => {
+export const concatIfExists = (strings: (string | null | undefined)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
