@@ -32,8 +32,9 @@
 			class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 			class:disabled-anchor={!hasPrevPage}
 			href={hasPrevPage ? prevPageHref : null}
-			sveltekit:noscroll
 			rel="prev"
+			sveltekit:noscroll
+			sveltekit:prefetch
 		>
 			Previous
 		</a>
@@ -43,6 +44,7 @@
 			href={hasNextPage ? nextPageHref : null}
 			rel="next"
 			sveltekit:noscroll
+			sveltekit:prefetch
 		>
 			Next
 		</a>
