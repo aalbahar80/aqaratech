@@ -41,9 +41,8 @@
 		// this creates the field in Felte's data store
 		dispatch('select', {
 			id: value,
-			label: getLabel(optionLabel),
 		});
-		items = await loadOptions();
+		items = await loadOptions(value ?? '');
 	});
 </script>
 
