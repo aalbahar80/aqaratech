@@ -4,7 +4,7 @@
 
 	export let kind: 'success' | 'error';
 	export let title = 'Success';
-	export let close: (() => void) | undefined = undefined;
+	export let close: () => void;
 </script>
 
 <div
@@ -38,13 +38,14 @@
 		<div class="ml-auto pl-3">
 			<div class="-mx-1.5 -my-1.5">
 				<button
+					on:click={close}
 					type="button"
 					class="toast__button"
 					class:toast__button--error={kind === 'error'}
 					class:toast__button--success={kind === 'success'}
 				>
 					<span class="sr-only">Dismiss</span>
-					<div on:click={close}>
+					<div>
 						<Icon src={X} class="h-5 w-5" aria-hidden="true" />
 					</div>
 				</button>
