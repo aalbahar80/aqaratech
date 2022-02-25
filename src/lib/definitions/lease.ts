@@ -1,5 +1,7 @@
 import type { InferMutationInput } from '$lib/client/trpc';
+import { concatIfExists } from '$lib/utils/table-utils';
 import { z } from 'zod';
+import type { EntityDefinition } from '.';
 
 export const schema = z
 	.object({
@@ -34,4 +36,15 @@ const defaultForm = (): Lease => ({
 	unitId: '',
 });
 
-export default { schema, defaultForm };
+const label: typeof definition['label'] = (item) =>
+	`${item.startDate.toLocaleDateString()} - ${item.endDate.toLocaleDateString()}  ${concatIfExists(
+		[item.tenant?.firstName, item.tenant?.lastName],
+	)}`;
+
+const definition: EntityDefinition<'leases'> = {
+	schema,
+	defaultForm,
+	label,
+};
+
+export default definition;

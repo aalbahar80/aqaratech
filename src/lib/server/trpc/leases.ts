@@ -71,6 +71,47 @@ export default trpc
 			},
 		}),
 	})
+	.query('search', {
+		input: z.string().optional(),
+		resolve: ({ input }) =>
+			prismaClient.lease.findMany({
+				take: 5,
+				orderBy: {
+					updatedAt: 'desc',
+				},
+				select: {
+					id: true,
+					startDate: true,
+					endDate: true,
+					tenant: {
+						select: {
+							firstName: true,
+							lastName: true,
+						},
+					},
+					unit: {
+						select: {
+							unitNumber: true,
+							property: {
+								select: {
+									area: true,
+								},
+							},
+						},
+					},
+				},
+				where: input
+					? {
+							OR: [
+								{ id: { contains: input } },
+								{ license: { contains: input } },
+								{ tenant: { firstName: { contains: input } } },
+								{ tenant: { lastName: { contains: input } } },
+							],
+					  }
+					: undefined,
+			}),
+	})
 	.query('count', {
 		resolve: () => prismaClient.lease.count({}),
 	})

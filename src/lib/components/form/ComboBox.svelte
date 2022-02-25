@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher();
 	export let entity: Extract<
 		Entity,
-		'tenants' | 'units' | 'properties' | 'clients'
+		'tenants' | 'units' | 'properties' | 'clients' | 'leases'
 	>;
 	export let invalidText: string = '';
 

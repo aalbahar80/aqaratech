@@ -1,43 +1,32 @@
-export default {};
-// import type { InferMutationInput } from '$lib/client/trpc';
-// import { falsyToNull, trim } from '$lib/zodTransformers';
-// import { z } from 'zod';
+import type { InferMutationInput } from '$lib/client/trpc';
+import { falsyToNull, trim } from '$lib/zodTransformers';
+import { z } from 'zod';
+import type { EntityDefinition } from '.';
 
-// export const schema = z.object({
-// 	id: z.string().nullable(),
-// 	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
-// 	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
-// 	email: z.string().email().or(z.literal('')).transform(falsyToNull),
-// 	phone: z
-// 		.string()
-// 		.min(8)
-// 		.and(z.string().max(8))
-// 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
-// 			message: 'Phone must contain only numbers',
-// 		}),
-// 	dob: z.preprocess((arg) => {
-// 		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-// 	}, z.date().nullable()),
-// 	civilid: z
-// 		.string()
-// 		.min(12)
-// 		.and(z.string().max(12))
-// 		.or(z.literal(''))
-// 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
-// 			message: 'Civil ID must contain only numbers',
-// 		})
-// 		.nullable(),
-// });
+export const schema = z.object({
+	id: z.string().uuid().optional(),
+	dueDate: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
+	isPaid: z.boolean(),
+	amount: z.number().gt(0),
+	memo: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	leaseId: z.string().uuid(),
+});
 
-// type Transaction = InferMutationInput<'transactions:save'>;
-// const defaultForm = (): Transaction => ({
-// 	id: '',
-// 	isPaid: null,
-// 	amount: null,
-// 	receiptUrl: null,
-// 	memo: null,
-// 	leaseId: null,
-// 	dueDate: new Date(),
-// });
+type Transaction = InferMutationInput<'transactions:save'>;
+const defaultForm = (): Transaction => ({
+	dueDate: new Date(),
+	isPaid: false,
+	amount: 0,
+	memo: '',
+	leaseId: '',
+});
 
-// export default { schema, defaultForm };
+const definition: EntityDefinition<'transactions'> = {
+	schema,
+	defaultForm,
+    label: undefined,
+};
+
+export default definition;

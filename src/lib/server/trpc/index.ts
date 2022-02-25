@@ -5,6 +5,7 @@ import clients from './clients';
 import leases from './leases';
 import properties from './properties';
 import tenants from './tenants';
+import transactions from './transactions';
 import units from './units';
 
 export const createContext = () => ({});
@@ -16,6 +17,7 @@ export const router = trpc
 	.merge('leases:', leases)
 	.merge('units:', units)
 	.merge('properties:', properties)
-	.merge('clients:', clients);
+	.merge('clients:', clients)
+	.merge('transactions:', transactions);
 
 export type Router = typeof router;
