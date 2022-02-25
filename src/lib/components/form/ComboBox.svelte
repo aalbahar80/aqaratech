@@ -42,7 +42,13 @@
 		dispatch('select', {
 			id: value,
 		});
-		items = await loadOptions(value ?? '');
+
+		// always prepare a list of suggested options
+		// if a value is predefined, push it to the top of the list
+		let predefinedItem: Option[] = [];
+		if (value) predefinedItem = await loadOptions(value);
+		const defaultItems: Option[] = await loadOptions();
+		items = [...predefinedItem, ...defaultItems];
 	});
 </script>
 
