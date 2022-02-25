@@ -38,10 +38,14 @@
 		case 'monthlyRent':
 		case 'marketRent':
 		case 'deposit':
+		case 'amount':
 		case 'size':
 		case 'bed':
 		case 'bath':
 			type = 'number';
+			break;
+		case 'isPaid':
+			type = 'checkbox';
 			break;
 		default:
 			type = 'text';
@@ -50,31 +54,48 @@
 </script>
 
 <div>
-	<label for={name} class="block text-sm font-medium text-gray-700">
-		{startCase(name)}
-	</label>
-	<div class="relative mt-1 rounded-md">
-		<input
-			{type}
-			{name}
-			{value}
-			id={name}
-			class="form__input"
-			disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
-			class:form__input--invalid={invalid}
-		/>
-		<div
-			class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-		>
-			{#if invalid && type !== 'date'}
-				<Icon
-					src={ExclamationCircle}
-					class="h-5 w-5 text-red-500"
-					aria-hidden="true"
-				/>
-			{/if}
+	{#if type === 'checkbox'}
+		<div class="inline-flex space-x-4">
+			<input
+				class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0"
+				{type}
+				{name}
+				{value}
+				id={name}
+				disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
+				class:form__input--invalid={invalid}
+			/>
+			<label for={name} class="block text-sm font-medium text-gray-700">
+				{startCase(name)}
+			</label>
 		</div>
-	</div>
+	{:else}
+		<label for={name} class="block text-sm font-medium text-gray-700">
+			{startCase(name)}
+		</label>
+		<div class="relative mt-1 rounded-md">
+			<input
+				{type}
+				{name}
+				{value}
+				id={name}
+				class="form__input"
+				disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
+				class:form__input--invalid={invalid}
+			/>
+			<div
+				class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+			>
+				{#if invalid && type !== 'date'}
+					<Icon
+						src={ExclamationCircle}
+						class="h-5 w-5 text-red-500"
+						aria-hidden="true"
+					/>
+				{/if}
+			</div>
+		</div>
+	{/if}
 	{#if invalid}
 		<p class="mt-2 text-sm text-red-600" id={`${name}-error`}>
 			{invalidText}
