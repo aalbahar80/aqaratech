@@ -3,6 +3,7 @@ import * as trpc from '@trpc/server';
 import superjson from 'superjson';
 import clients from './clients';
 import leases from './leases';
+import maintenanceOrders from './maintenanceOrders';
 import properties from './properties';
 import tenants from './tenants';
 import transactions from './transactions';
@@ -18,6 +19,7 @@ export const router = trpc
 	.merge('units:', units)
 	.merge('properties:', properties)
 	.merge('clients:', clients)
-	.merge('transactions:', transactions);
+	.merge('transactions:', transactions)
+	.merge('maintenanceOrders:', maintenanceOrders);
 
 export type Router = typeof router;

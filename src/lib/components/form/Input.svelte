@@ -3,6 +3,7 @@
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import startCase from 'lodash-es/startCase.js';
+	import Select from 'svelte-select';
 
 	export let name: string = '';
 	export let value: string | Date | null | number = '';
@@ -47,11 +48,25 @@
 		case 'isPaid':
 			type = 'checkbox';
 			break;
+		case 'status':
+			type = 'select';
+			break;
 		default:
 			type = 'text';
 			break;
 	}
 </script>
+
+{#if type === 'select'}
+	<div>
+		<Select
+			id={name}
+			{name}
+			items={['Pending', 'Completed', 'Cancelled']}
+			hasError={Boolean(invalidText)}
+		/>
+	</div>
+{/if}
 
 <div>
 	{#if type === 'checkbox'}

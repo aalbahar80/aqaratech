@@ -2,6 +2,7 @@ import type { InferMutationInput, InferQueryOutput } from '$lib/client/trpc';
 import type { z } from 'zod';
 import client from './client';
 import lease from './lease';
+import maintenanceOrder from './maintenanceOrder';
 import property from './property';
 import tenant from './tenant';
 import transaction from './transaction';
@@ -14,6 +15,7 @@ const entities = [
 	'properties',
 	'clients',
 	'transactions',
+	'maintenanceOrders',
 ] as const;
 export type Entity = typeof entities[number];
 
@@ -39,6 +41,7 @@ export const entityDefinitions: EntityDefinitions = {
 	properties: property,
 	clients: client,
 	transactions: transaction,
+	maintenanceOrders: maintenanceOrder,
 };
 
 export const singular: { [K in Entity]: string } = {
@@ -48,4 +51,5 @@ export const singular: { [K in Entity]: string } = {
 	properties: 'property',
 	clients: 'client',
 	transactions: 'transaction',
+	maintenanceOrders: 'maintenanceOrder',
 };

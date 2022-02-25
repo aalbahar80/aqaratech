@@ -22,6 +22,7 @@
 		{ name: 'Leases', href: '/leases' },
 		{ name: 'Tenants', href: '/tenants' },
 		{ name: 'Transactions', href: '/transactions' },
+		{ name: 'Maintenance', href: '/maintenanceOrders' },
 	];
 
 	const profileNavigation = [

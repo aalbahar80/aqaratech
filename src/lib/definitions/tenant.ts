@@ -21,6 +21,7 @@ export const schema = z.object({
 		.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date())
+		// use nullish or optional?
 		.or(z.literal(''))
 		.transform(falsyToNull),
 	civilid: z
