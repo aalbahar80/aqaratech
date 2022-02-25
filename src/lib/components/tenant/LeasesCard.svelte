@@ -6,6 +6,7 @@
 
 	type Leases = NonNullable<InferQueryOutput<'tenants:read'>>['leases'];
 	export let leases: Leases;
+	export let tenantId: string;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -20,7 +21,7 @@
 				</div>
 				<div class="ml-4 mt-2 flex-shrink-0">
 					<a
-						href="/leases/add"
+						href={`/leases/add?&tenantId=${tenantId}`}
 						class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 					>
 						Create new lease
@@ -96,6 +97,7 @@
 			{/each}
 		</ul>
 	{:else}
+		<!-- Empty State -->
 		<div class="text-center py-8 sm:py-16">
 			<svg
 				class="mx-auto h-12 w-12 text-gray-400"
@@ -118,7 +120,7 @@
 			</p>
 			<div class="mt-6">
 				<a
-					href="/leases/add"
+					href={`/leases/add?&tenantId=${tenantId}`}
 					class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 				>
 					<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
