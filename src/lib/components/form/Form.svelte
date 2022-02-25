@@ -28,10 +28,11 @@
 	const relationalFields: {
 		[key: string]: Extract<
 			Entity,
-			'tenants' | 'units' | 'properties' | 'clients'
+			'tenants' | 'units' | 'properties' | 'clients' | 'leases'
 		>;
 	} = {
 		tenantId: 'tenants',
+		leaseId: 'leases',
 		unitId: 'units',
 		propertyId: 'properties',
 		clientId: 'clients',
@@ -101,7 +102,7 @@
 											setData(name, '');
 										}}
 									/>
-								{:else if !['tenant', 'unit', 'property', 'client'].includes(name)}
+								{:else if !['tenant', 'unit', 'property', 'client', 'lease'].includes(name)}
 									<Input
 										{name}
 										{value}
