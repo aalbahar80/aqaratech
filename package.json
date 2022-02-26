@@ -1,11 +1,11 @@
 {
-  "name": "svelte-REAdmin",
+  "name": "re-admin-panel",
   "version": "0.0.1",
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "scripts": {
-    "dev:only": "svelte-kit dev --host",
+    "dev:only": "svelte-kit dev",
     "build:only": "svelte-kit build",
     "tailwind:watch": "cross-env TAILWIND_MODE=watch cross-env NODE_ENV=development postcss src/styles/tailwind.css -o src/styles/tailwind-output.css -w",
     "tailwind:build": "cross-env TAILWIND_MODE=build cross-env NODE_ENV=production postcss src/styles/tailwind.css -o src/styles/tailwind-output.css",
