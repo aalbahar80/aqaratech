@@ -33,6 +33,12 @@ export default trpc
 				orderBy: {
 					updatedAt: 'desc',
 				},
+				select: {
+					id: true,
+					title: true,
+					status: true,
+					completedAt: true,
+				},
 			}),
 			pagination: {
 				size: input.size,
