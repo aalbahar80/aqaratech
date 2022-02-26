@@ -11,18 +11,27 @@
 	import { Exclamation } from '@steeze-ui/heroicons';
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+
+	onDestroy(() => {
+		console.warn('destroyed modal4');
+		// isOpen = false;
+	});
+	onMount(() => {
+		console.log(' mounted modal4');
+	});
 
 	export let isOpen: boolean;
 
-	// const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
 	const handleClose = () => {
 		isOpen = false;
-		// dispatch('closedModal');
+		dispatch('closedModal');
 	};
 </script>
 
-<Transition show={isOpen}>
+<Transition show={isOpen} appear>
 	<Dialog on:close={handleClose} class="fixed inset-0 z-10 overflow-y-auto">
 		<div
 			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
@@ -31,7 +40,7 @@
 				enter="ease-out duration-300"
 				enterFrom="opacity-0"
 				enterTo="opacity-100"
-				leave="ease-in duration-200"
+				leave="ease-in duration-1000"
 				leaveFrom="opacity-100"
 				leaveTo="opacity-0"
 			>
@@ -43,7 +52,7 @@
 				enter="ease-out duration-300"
 				enterFrom="opacity-0 scale-95"
 				enterTo="opacity-100 scale-100"
-				leave="ease-in duration-200"
+				leave="ease-in duration-1000"
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
@@ -89,8 +98,13 @@
 						<button
 							type="button"
 							class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={() => goto('/leases')}
+							on:click={async () => {
+								isOpen = false;
+								dispatch('closedModal');
+								await goto('/tenants');
+							}}
 						>
+							<!-- on:click={handleClose} -->
 							Delete
 						</button>
 						<button
