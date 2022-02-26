@@ -35,6 +35,7 @@
 				break;
 			}
 			assertNever(value, "This case shouldn't happen");
+			break;
 
 		case 'monthlyRent':
 		case 'marketRent':
