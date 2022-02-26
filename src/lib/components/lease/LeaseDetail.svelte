@@ -7,7 +7,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	onDestroy(() => {
-		console.log('lease detail destroyed');
+		console.warn('destroyed lease detail');
 	});
 	onMount(() => {
 		console.log(' mounted lease detail');
@@ -23,18 +23,24 @@
 
 <pre>{JSON.stringify(lease, null, 2)}</pre>
 
-{#if isOpen}
-	<!-- <Modal4 /> -->
-	<!-- <Modal4 {isOpen} /> -->
-	<!-- <Modal4 bind:isOpen /> -->
-	<!-- <Modal4 on:close on:afterLeave /> -->
-	<Modal4
+<Modal4 bind:isOpen />
+<!-- on:closedModal={() => {
+		console.log('received close event');
+		isOpen = false;
+	}} -->
+
+<!-- {#if isOpen} -->
+<!-- <Modal4 /> -->
+<!-- <Modal4 {isOpen} /> -->
+<!-- <Modal4 bind:isOpen /> -->
+<!-- <Modal4 on:close on:afterLeave /> -->
+<!-- <Modal4
 		on:closedModal={() => {
 			console.log('received close event');
 			isOpen = false;
 		}}
-	/>
-{/if}
+	/> -->
+<!-- {/if} -->
 <p>some text</p>
 <p>some text below</p>
 <!-- <div class="static">

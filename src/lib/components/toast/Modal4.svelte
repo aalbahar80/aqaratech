@@ -12,13 +12,13 @@
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
 
-	let isOpen: boolean = true;
+	export let isOpen: boolean;
 
-	const dispatch = createEventDispatcher();
+	// const dispatch = createEventDispatcher();
 
 	const handleClose = () => {
 		isOpen = false;
-		dispatch('closedModal');
+		// dispatch('closedModal');
 	};
 </script>
 
