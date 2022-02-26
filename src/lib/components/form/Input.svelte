@@ -73,11 +73,10 @@
 		<div class="inline-flex space-x-4">
 			<input
 				class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0"
-				{type}
+				type="checkbox"
+				checked={!!value}
 				{name}
-				{value}
 				id={name}
-				disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
 				class:form__input--invalid={invalid}
 			/>
 			<label for={name} class="block text-sm font-medium text-gray-700">
