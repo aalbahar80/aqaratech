@@ -39,7 +39,6 @@
 	leaveTo="transform scale-95 opacity-0"
 >
 	<Dialog
-		open={isOpen}
 		on:close={() => (isOpen = false)}
 		class="fixed inset-0 z-10 overflow-y-auto"
 	>
