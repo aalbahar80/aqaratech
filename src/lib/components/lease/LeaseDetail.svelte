@@ -18,24 +18,23 @@
 	export let id = '';
 
 	let isOpen = false;
+	$: console.log(isOpen);
 </script>
 
 <pre>{JSON.stringify(lease, null, 2)}</pre>
 
-<!-- {#if isOpen} -->
-<!-- {#key isOpen} -->
-<!-- Applying a svelte transition here interferes with the unmounting. Causes duplicates. Especially upon navigation by pressing delete. -->
-<!-- <div transition:fly|local> -->
-<!-- <div transition:fly> -->
-<Modal4 />
-<!-- <Modal3 /> -->
-<!-- <Modal3 bind:isOpen /> -->
-<!-- <p class="text-sm text-gray-500">
-			Are you sure you want to deactivate your account? All of your data will be
-			permanently removed. This action cannot be undone.
-		</p> -->
-<!-- {/key} -->
-<!-- {/if} -->
+{#if isOpen}
+	<!-- <Modal4 /> -->
+	<!-- <Modal4 {isOpen} /> -->
+	<!-- <Modal4 bind:isOpen /> -->
+	<!-- <Modal4 on:close on:afterLeave /> -->
+	<Modal4
+		on:closedModal={() => {
+			console.log('received close event');
+			isOpen = false;
+		}}
+	/>
+{/if}
 <p>some text</p>
 <p>some text below</p>
 <!-- <div class="static">
@@ -46,7 +45,7 @@
 <!-- <svelte:component this={ModalDelete} {isOpen} loading /> -->
 <!-- <svelte:component this={IModalDelete} bind:isOpen {id} {entity} intro /> -->
 
-<!-- <button
+<button
 	on:click={() => {
 		isOpen = true;
 	}}>Open</button
@@ -57,4 +56,4 @@
 		isOpen = false;
 		console.log('isOpen', isOpen);
 	}}>Hide it</button
-> -->
+>

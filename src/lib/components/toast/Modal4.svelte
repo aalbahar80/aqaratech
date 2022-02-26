@@ -7,33 +7,23 @@
 		Transition,
 		TransitionChild,
 	} from '@rgossiaux/svelte-headlessui';
-	import { fade } from 'svelte/transition';
-
-	import { onDestroy, onMount, beforeUpdate, afterUpdate, tick } from 'svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Exclamation } from '@steeze-ui/heroicons';
 	import { goto } from '$app/navigation';
-
-	onDestroy(() => {
-		console.warn('destroyed modal333');
-	});
-	onMount(() => {
-		console.log('mounted modal333');
-	});
-	beforeUpdate(() => {
-		console.log('before update modal333');
-	});
-	afterUpdate(() => {});
-	console.log('after update modal333');
+	import { createEventDispatcher } from 'svelte';
 
 	let isOpen: boolean = true;
+
+	const dispatch = createEventDispatcher();
+
+	const handleClose = () => {
+		isOpen = false;
+		dispatch('closedModal');
+	};
 </script>
 
 <Transition show={isOpen}>
-	<Dialog
-		on:close={() => (isOpen = false)}
-		class="fixed inset-0 z-10 overflow-y-auto"
-	>
+	<Dialog on:close={handleClose} class="fixed inset-0 z-10 overflow-y-auto">
 		<div
 			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
 		>
@@ -49,7 +39,6 @@
 					class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
 				/>
 			</TransitionChild>
-			<!-- {/* This element is to trick the browser into centering the modal contents. */} -->
 			<TransitionChild
 				enter="ease-out duration-300"
 				enterFrom="opacity-0 scale-95"
@@ -58,6 +47,7 @@
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
+				<!-- {/* This element is to trick the browser into centering the modal contents. */} -->
 				<span
 					class="hidden sm:inline-block sm:h-screen sm:align-middle"
 					aria-hidden="true"
@@ -106,7 +96,7 @@
 						<button
 							type="button"
 							class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={() => (isOpen = false)}
+							on:click={handleClose}
 						>
 							<!-- bind:this={cancelButton} -->
 							Cancel
