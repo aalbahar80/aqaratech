@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import LeaseDetail from '$lib/components/lease/LeaseDetail.svelte';
 	import type { Load } from '@sveltejs/kit';
 
@@ -16,6 +17,10 @@
 <script lang="ts">
 	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
 	export let lease: Lease;
+
+	let isOpen = false;
 </script>
 
-<LeaseDetail {lease} />
+<ModalDelete bind:isOpen id={lease.id} entity="leases" />
+
+<LeaseDetail {lease} bind:isOpen />
