@@ -13,6 +13,23 @@ export default trpc
 				where: {
 					id,
 				},
+				include: {
+					unit: {
+						select: {
+							id: true,
+							property: {
+								select: {
+									id: true,
+									client: {
+										select: {
+											id: true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
 			}),
 	})
 	.query('basic', {
