@@ -4,51 +4,22 @@
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { createEventDispatcher } from 'svelte';
-	import Modal4 from '$components/toast/Modal4.svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
-
-	// const dispatch = createEventDispatcher();
-	let isOpen = false;
+	export let isOpen: boolean;
 
 	const options = [
 		{ label: 'Update', href: '#', icon: Pencil },
 		{ label: 'Remove', href: '#', icon: Trash },
 	];
+
+	const openModal = () => {
+		isOpen = true;
+	};
 </script>
 
-<button
-	on:click={() => {
-		isOpen = true;
-	}}>Open</button
->
-
-<button
-	on:click={() => {
-		isOpen = false;
-		console.log('isOpen', isOpen);
-	}}>Hide it</button
->
-<!-- Modal4 behaves weirdly as soon as it is placed in a div -->
-<div>
-	{#if isOpen}
-		<!-- content here -->
-		<Modal4
-			isOpen
-			on:closedModal={() => {
-				console.log('received close event');
-				isOpen = false;
-			}}
-		/>
-	{/if}
-	<!--  -->
-</div>
-<!-- <div style:position="fixed"> -->
-<!-- <div style="position:static"> -->
-
-<!-- <section class="rounded-md bg-white shadow">
+<section class="rounded-md bg-white shadow">
 	<div class="flex justify-between px-4 py-5 sm:px-6">
 		<h3 class="text-lg font-medium leading-6 text-gray-900">
 			Tenant Information
@@ -57,16 +28,13 @@
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
-					// href: `/tenants/${tenant.id}/edit`,
-					// onClick: () => (isOpen = true),
+					href: `/tenants/${tenant.id}/edit`,
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
-						// onClick: () => {
-						// 	isOpen = true;
-						// },
+						onClick: openModal,
 					},
 				]}
 			/>
@@ -149,7 +117,8 @@
 			</div>
 		</dl>
 	</div>
-</section> -->
+</section>
+
 <style lang="postcss">
 	.row {
 		@apply px-4 py-5 last:rounded-b-md odd:bg-gray-50 even:bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6;
