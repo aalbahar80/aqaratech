@@ -1,13 +1,19 @@
 import * as utils from './date-utils';
 // @ponicode
-describe('utils.formatDate', () => {
-	test('0', () => {
-		let result: any = utils.formatDate('01-13-2020');
-		expect(result).toBe('Jan 13, 2020');
+describe('utils.getProgress', () => {
+	test('it assumes completion on end date', () => {
+		const result: any = utils.getProgress(
+			new Date('2020-01-01'),
+			new Date('2020-01-31'),
+			new Date('2020-01-31'),
+		);
+		expect(result).toBe(100);
 	});
-
-	test('1', () => {
-		let result: any = utils.formatDate('32-01-2020');
-		expect(result).toBe('Invalid Date');
+	test('assumes a reference date of today', () => {
+		const result: any = utils.getProgress(
+			new Date('2020-01-01'),
+			new Date('2020-01-31'),
+		);
+		expect(result).toBe(100);
 	});
 });

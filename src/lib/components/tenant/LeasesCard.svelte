@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { formatDateDiff, getProgress } from '$lib/utils/date-utils';
+	import { getProgress } from '$lib/utils/date-utils';
 	import { Calendar, Home, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import formatDistance from 'date-fns/formatDistance';
 
 	type Leases = NonNullable<InferQueryOutput<'tenants:read'>>['leases'];
 	export let leases: Leases;
@@ -75,7 +76,9 @@
 									/>
 									<p>
 										Expiry: <time dateTime={lease.endDate.toISOString()}
-											>{formatDateDiff(lease.endDate).fullText}</time
+											>{formatDistance(lease.endDate, new Date(), {
+												addSuffix: true,
+											})}</time
 										>
 									</p>
 								</div>
