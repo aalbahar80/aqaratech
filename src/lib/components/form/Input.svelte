@@ -52,6 +52,9 @@
 		case 'status':
 			type = 'select';
 			break;
+		case 'email':
+			type = 'email';
+			break;
 		default:
 			type = 'text';
 			break;
