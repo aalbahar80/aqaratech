@@ -2,8 +2,14 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import { Calendar, Refresh, Trash } from '@steeze-ui/heroicons';
+	import {
+		Calendar,
+		Refresh,
+		Trash,
+		DocumentDownload,
+	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
 	import format from 'date-fns/format';
@@ -39,9 +45,16 @@
 		['License', lease.license],
 	];
 
+	const files: [string, string][] = [['Lease', 'TODO implement']];
+
 	let isOpen = false;
 	const openModal = () => {
 		isOpen = true;
+	};
+
+	const generateLease = async () => {
+		const url = await renderReportAndGetRenderId(lease);
+		window.open(url);
 	};
 </script>
 
@@ -112,6 +125,12 @@
 				}}
 				options={[
 					{
+						label: 'Generate PDF',
+						icon: DocumentDownload,
+						onClick: generateLease,
+						type: 'button',
+					},
+					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
@@ -123,4 +142,4 @@
 	</div>
 </div>
 
-<DetailsPane {details} />
+<DetailsPane {details} {files} />

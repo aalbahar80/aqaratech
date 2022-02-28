@@ -20,12 +20,19 @@ export default trpc
 							id: true,
 							firstName: true,
 							lastName: true,
+							secondName: true,
+							thirdName: true,
+							civilid: true,
+							phone: true,
+							dob: true,
+							email: true,
 						},
 					},
 					unit: {
 						select: {
 							id: true,
 							unitNumber: true,
+							type: true,
 							property: {
 								select: {
 									id: true,
