@@ -1,10 +1,10 @@
 <script lang="ts">
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { Trash } from '@steeze-ui/heroicons';
-	import DetailsPane from '../DetailsPane.svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;

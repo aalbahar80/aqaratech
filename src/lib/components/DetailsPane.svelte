@@ -6,7 +6,7 @@
 
 	// type Data = NonNullable<InferQueryOutput<`${'tenants' | 'leases'}:read`>>;
 	export let details: [string, string | null][];
-	export let files: [string, string][];
+	export let files: [string, string][] | undefined = undefined;
 
 	const options: Option[] = [
 		{ label: 'Update', href: '#', icon: Pencil, type: 'link' },
@@ -22,32 +22,36 @@
 				<dd class="definition">{value}</dd>
 			</div>
 		{/each}
-		<div class="row">
-			<dt class="label">Files</dt>
-			<dd class="definition">
-				<ul class="divide-y divide-gray-200 rounded-md border border-gray-200">
-					{#each files as [key, value]}
-						<li
-							class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
-						>
-							<div class="flex w-0 flex-1 items-center">
-								<Icon
-									src={PaperClip}
-									class="h-5 w-5 flex-shrink-0 text-gray-400"
-									aria-hidden="true"
+		{#if files}
+			<div class="row">
+				<dt class="label">Files</dt>
+				<dd class="definition">
+					<ul
+						class="divide-y divide-gray-200 rounded-md border border-gray-200"
+					>
+						{#each files as [key, value]}
+							<li
+								class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
+							>
+								<div class="flex w-0 flex-1 items-center">
+									<Icon
+										src={PaperClip}
+										class="h-5 w-5 flex-shrink-0 text-gray-400"
+										aria-hidden="true"
+									/>
+									<span class="ml-2 w-0 flex-1 truncate">{key}</span>
+								</div>
+								<ButtonDropdown
+									class="bottom-10"
+									defaultOption={{ label: 'View', href: '#', type: 'link' }}
+									{options}
 								/>
-								<span class="ml-2 w-0 flex-1 truncate">{key}</span>
-							</div>
-							<ButtonDropdown
-								class="bottom-10"
-								defaultOption={{ label: 'View', href: '#', type: 'link' }}
-								{options}
-							/>
-						</li>
-					{/each}
-				</ul>
-			</dd>
-		</div>
+							</li>
+						{/each}
+					</ul>
+				</dd>
+			</div>
+		{/if}
 	</dl>
 </div>
 

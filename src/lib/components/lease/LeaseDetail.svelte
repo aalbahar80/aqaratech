@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import {
 		Calendar,
@@ -9,11 +10,18 @@
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
+	import format from 'date-fns/format';
 	import BreadCrumb from '../breadcrumbs/BreadCrumb.svelte';
 	import ButtonDropdown from '../ButtonDropdown.svelte';
 
 	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
 	export let lease: Lease;
+
+	const details = [
+		['Start Date', format(lease.startDate, 'MMM dd, yy')],
+		['End Date', format(lease.endDate, 'MMM dd, yy')],
+		['Monthly Rent', lease.monthlyRent],
+	];
 
 	let isOpen = false;
 	const openModal = () => {
@@ -110,3 +118,5 @@
 		</span>
 	</div>
 </div>
+
+<DetailsPane {details} />
