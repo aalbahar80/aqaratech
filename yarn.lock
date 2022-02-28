@@ -4306,56 +4306,6 @@ jsprim@^2.0.2:
     array-includes "^3.1.3"
     object.assign "^4.1.2"
 
-just-capitalize@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/just-capitalize/-/just-capitalize-3.0.1.tgz#f8a78c2cca7bff5a3d71ac11c680f5d1cddc94a4"
-  integrity sha512-GPvagN7Y2IdNFdFh8wRtE0AoxjA+0zAOF+XS8i2Di+aNdTZ0SAb5bARqjklOxVgIUTBfTv6MqqrRmdGjnLbkQA==
-
-just-flatten-it@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/just-flatten-it/-/just-flatten-it-5.0.1.tgz#4c782f6ae0252aa1413a972b4e6c77bebe039d94"
-  integrity sha512-tbh2Gu/gDuankZcdSVXaIcZ+PwTyrPBbNQfpga/l0IrNa4qE/koejib3lciAD44LNtxzor8iq5EPnh/wuDIL2w==
-
-just-flush@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/just-flush/-/just-flush-2.1.0.tgz#bceda18ac4551a8d89dd79145e7ae21bcb018d37"
-  integrity sha512-vczPBFnKgWO6j8BqJqaDHbw+3QW3f9a9lg5ZxHFo0JZBpg3Q7lESHPzfyLRNNhZM6+WMROPCHxG//HPVUOReXw==
-
-just-insert@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/just-insert/-/just-insert-3.0.1.tgz#8534a09551de42b9916f5ff8092838273f8b9c99"
-  integrity sha512-p9f1efHbmdL4ddsrZuf+w0L5yHgPnpfLYLzD+rXX65+ZDJ5aGveUOqIfA1BcWuLbhACD461w2qlj/PMe6u6eFQ==
-
-just-is-empty@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/just-is-empty/-/just-is-empty-3.1.1.tgz#61b0fac4c1c052a5c6bf459d101b56f612222927"
-  integrity sha512-K5qqMF6PTkM/L4t/CqCyh3DZYGqlBa+wzH5PR9EkheZUjGnTG4zP414CG2OEeWDTrDVvfyLINQaEeul65JIH2w==
-
-just-map-keys@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/just-map-keys/-/just-map-keys-2.1.1.tgz#475c7e4da5902ee91832070bdab47b90e06001f6"
-  integrity sha512-HkfBQo5x9EpLaSDlgkGerRnkLGTPk1wa6Vp5cU4IQLGeOxTZvdFLEIJLLZpQPAq8bCiAxTbT0tf8VavwOv+enQ==
-
-just-map-values@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/just-map-values/-/just-map-values-3.0.2.tgz#3617881b6bd2ee4215061f8270d973193937e161"
-  integrity sha512-bPrvJIZ/0QbrsnrY1f8JxfPZ7joimSecUeYjoxVctBTYxjRKjtVU1QMgAJCK5RTo5bNGonVY7FxrwQ+gQrIyww==
-
-just-pluck-it@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/just-pluck-it/-/just-pluck-it-2.1.0.tgz#04d5bc885b2a06ce277967d76a81e2077d318dc5"
-  integrity sha512-/BS/Jr1ZnO8jDunrfARrSCfxBnsrNMOGUz28e9RgasqIir+9HLDLzfFzwHCl+Ity++O433tMF5oQRwslC9F4HA==
-
-just-reduce-object@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/just-reduce-object/-/just-reduce-object-2.0.1.tgz#467b1d366cc4c04a4a2ce4a25d90e56119957945"
-  integrity sha512-NAZxo+13ve79h3j9B29haA9YLSedHuODI5hYP9yX3pwmkSGiIkUhaQaa20S6gJ3wI0911R2jQdsSZIiLOpAf/A==
-
-just-zip-it@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/just-zip-it/-/just-zip-it-3.0.2.tgz#9fc9abdd77222e37b260ebcd11fe8a2f13aaba87"
-  integrity sha512-JhnDos0Qv+wDBImi94AG9SKXQqvdWPI95NNRuSMwA56qjyBEmo8hgW4BxeiwU3RSnjH7pQ6D36MzvFVWeLrtsg==
-
 kleur@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
