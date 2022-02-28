@@ -239,6 +239,60 @@
 </section>
 
 <style lang="postcss">
+	section {
+		@apply flex flex-col rounded-md shadow;
+	}
+	.section-heading {
+		@apply rounded-t-md border-b border-gray-200 bg-white px-4 py-5 sm:px-6;
+	}
+	.section-heading a {
+		@apply relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+	}
+	nav {
+		@apply flex items-center justify-between rounded-b-md border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
+	}
+	nav div:last-child {
+		@apply flex flex-1 justify-between sm:justify-end sm:space-x-3;
+	}
+	nav button {
+		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700;
+	}
+	nav button:hover {
+		@apply text-gray-500 sm:bg-gray-50 sm:text-gray-700;
+	}
+	nav button:disabled {
+		@apply cursor-not-allowed opacity-50;
+	}
+	.table-container {
+		@apply hidden min-w-full align-middle shadow sm:block;
+	}
+	table {
+		@apply min-w-full divide-y divide-gray-200;
+	}
+	tbody {
+		@apply divide-y divide-gray-200 bg-white;
+	}
+	th {
+		@apply bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500;
+	}
+	th:first-child {
+		@apply text-left;
+	}
+	tbody tr {
+		@apply bg-white;
+	}
+	tbody td:not(:last-child) {
+		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-900;
+	}
+	tbody td:first-child {
+		@apply w-full max-w-0 text-gray-900;
+	}
+	ul {
+		@apply divide-y divide-gray-200 overflow-hidden sm:hidden;
+	}
+	li a {
+		@apply block bg-white px-4 py-4 hover:bg-gray-50;
+	}
 	.badge {
 		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize;
 	}
@@ -247,60 +301,5 @@
 	}
 	.badge-red {
 		@apply bg-red-100 text-red-800;
-	}
-	nav {
-		@apply flex items-center justify-between rounded-b-md border-t border-gray-200 bg-white px-4 py-3 sm:px-6;
-	}
-	nav button {
-		@apply relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700;
-	}
-	nav button:disabled {
-		@apply cursor-not-allowed opacity-50;
-	}
-	nav button:hover {
-		@apply text-gray-500 sm:bg-gray-50 sm:text-gray-700;
-	}
-	nav div:last-child {
-		@apply flex flex-1 justify-between sm:justify-end sm:space-x-3;
-	}
-	table {
-		@apply min-w-full divide-y divide-gray-200;
-	}
-	tbody {
-		@apply divide-y divide-gray-200 bg-white;
-	}
-	tbody tr {
-		@apply bg-white;
-	}
-	th {
-		@apply bg-gray-50 px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500;
-	}
-	th:first-child {
-		@apply text-left;
-	}
-	.table-container {
-		@apply hidden min-w-full align-middle shadow sm:block;
-	}
-	ul {
-		@apply divide-y divide-gray-200 overflow-hidden sm:hidden;
-	}
-	li a {
-		@apply block bg-white px-4 py-4 hover:bg-gray-50;
-	}
-	.section-heading {
-		@apply rounded-t-md border-b border-gray-200 bg-white px-4 py-5 sm:px-6;
-	}
-
-	.section-heading a {
-		@apply relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
-	}
-	section {
-		@apply flex flex-col rounded-md shadow;
-	}
-	tbody td:not(:last-child) {
-		@apply whitespace-nowrap px-6 py-4 text-sm text-gray-900;
-	}
-	tbody td:first-child {
-		@apply w-full max-w-0 text-gray-900;
 	}
 </style>
