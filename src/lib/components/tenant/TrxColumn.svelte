@@ -59,6 +59,13 @@
 			});
 		}
 	};
+
+	$: balance = transactions.reduce((total, transaction) => {
+		if (!transaction.isPaid) {
+			total = total - transaction.amount;
+		}
+		return total;
+	}, 0);
 </script>
 
 <section>
@@ -71,6 +78,7 @@
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
 						Transactions
+						{balance}
 					</h3>
 				</div>
 				{#if leaseId}
