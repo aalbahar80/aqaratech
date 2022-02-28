@@ -71,19 +71,6 @@
 		>
 			<div class="mt-2 flex items-center text-sm text-gray-500">
 				<Icon
-					src={CurrencyDollar}
-					theme="solid"
-					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-					aria-hidden="true"
-				/>
-				{lease.monthlyRent.toLocaleString('en-KW', {
-					style: 'currency',
-					currency: 'KWD',
-					maximumFractionDigits: 0,
-				})}
-			</div>
-			<div class="mt-2 flex items-center text-sm text-gray-500">
-				<Icon
 					src={Calendar}
 					theme="solid"
 					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
