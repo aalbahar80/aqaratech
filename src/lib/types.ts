@@ -3,6 +3,7 @@ import type { IconSource } from '@steeze-ui/svelte-icon/types';
 interface OptionBasics {
 	label: string;
 	icon?: IconSource;
+	disabled?: boolean;
 }
 
 interface OptionLink extends OptionBasics {

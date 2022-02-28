@@ -24,7 +24,7 @@
 		class={`${$$props.class} absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
 		><div class="py-1">
 			{#each options as option (option.label)}
-				{#if option.type === 'link'}
+				{#if option.type === 'link' && !option.disabled}
 					<MenuItem let:active as="a" href={option.href}>
 						<div
 							class="group flex items-center px-4 py-2 text-sm"
@@ -48,10 +48,16 @@
 						let:active
 						as="button"
 						class="w-full"
-						on:click={option.onClick}
+						on:click={() => {
+							if (option.type === 'button') option.onClick();
+						}}
+						disabled={option.disabled}
+						let:disabled
 					>
 						<div
-							class="group flex items-center px-4 py-2 text-sm"
+							class={`group flex items-center px-4 py-2 text-sm ${
+								disabled ? 'disabledLink' : ''
+							}`}
 							class:bg-gray-100={active}
 							class:text-gray-900={active}
 							class:text-gray-700={!active}
@@ -59,7 +65,9 @@
 							{#if option.icon}
 								<Icon
 									src={option.icon}
-									class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+									class={`mr-3 h-5 w-5 text-gray-400 ${
+										disabled ? '' : 'group-hover:text-gray-500'
+									}`}
 									aria-hidden="true"
 									theme="solid"
 								/>
@@ -72,3 +80,9 @@
 		</div>
 	</MenuItems>
 </Transition>
+
+<style lang="postcss">
+	.disabledLink {
+		@apply cursor-not-allowed opacity-50;
+	}
+</style>

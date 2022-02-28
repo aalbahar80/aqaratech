@@ -205,7 +205,10 @@
 											type: 'button',
 											icon: Speakerphone,
 											label: 'Send reminder',
-											onClick: () => {},
+											disabled: transaction.isPaid,
+											onClick: () => {
+												console.log('TODO implement');
+											},
 										},
 										transaction.isPaid
 											? {
