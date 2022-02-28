@@ -78,8 +78,15 @@
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
 						Transactions
-						{balance}
 					</h3>
+				</div>
+				<div>
+					<dt class="truncate text-sm font-medium text-gray-500">
+						Outstanding balance
+					</dt>
+					<dd class="mt-1 text-3xl font-semibold text-gray-900">
+						{balance}
+					</dd>
 				</div>
 				{#if leaseId}
 					<div class="ml-4 mt-2 flex-shrink-0">
