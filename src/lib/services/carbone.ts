@@ -1,12 +1,14 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/table-utils';
 import { Tafgeet } from '$lib/utils/currency';
+import { entityDefinitions } from '$lib/definitions';
 
 type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
 export const renderReportAndGetRenderId = async (
 	lease: Lease,
 ): Promise<string> => {
 	try {
+		console.log({ lease }, 'carbone.ts ~ 11');
 		const body = {
 			convertTo: 'pdf', // Convert the template to another file format
 			data: {
@@ -22,12 +24,14 @@ export const renderReportAndGetRenderId = async (
 				nationality: 'TODO nationality',
 				unittype: lease.unit?.type,
 				unit_number: lease.unit?.unitNumber,
-				property_address: 'TODO address',
+				property_address: lease.unit?.property
+					? entityDefinitions.properties.label(lease.unit?.property)
+					: '',
 				rent_amount: lease.monthlyRent.toLocaleString('en-KW', {
 					minimumFractionDigits: 3,
 				}),
 				rent_amount_words: inWords(lease.monthlyRent),
-				contract_start: lease.startDate,
+				contract_start: lease.startDate.toISOString().slice(0, 10),
 			},
 		};
 		console.info(body.data, 'carbone.ts ~ 30');

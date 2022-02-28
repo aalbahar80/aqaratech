@@ -36,6 +36,11 @@ export default trpc
 							property: {
 								select: {
 									id: true,
+									area: true,
+									block: true,
+									street: true,
+									number: true,
+									avenue: true,
 									client: {
 										select: {
 											id: true,

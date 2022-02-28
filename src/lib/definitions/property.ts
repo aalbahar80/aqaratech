@@ -44,7 +44,7 @@ const defaultForm = (): Property => ({
 });
 
 const label: typeof definition['label'] = (item) =>
-	concatIfExists([item.area, item.block]);
+	concatIfExists([item.area, 'ق', item.block, 'شارع', item.street, 'مبنى', '2']);
 
 const definition: EntityDefinition<'properties'> = {
 	schema,

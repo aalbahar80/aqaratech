@@ -78,6 +78,9 @@ export default trpc
 					id: true,
 					area: true,
 					block: true,
+					street: true,
+					number: true,
+					avenue: true,
 				},
 				where: input
 					? {
