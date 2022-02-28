@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { areas } from '$lib/config/constants';
 	import assertNever from '$lib/utils/table-utils';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import startCase from 'lodash-es/startCase.js';
-	import Select from 'svelte-select';
-	import { areas } from '$lib/config/constants';
 	import Fuse from 'fuse.js';
+	import startCase from 'lodash-es/startCase.js';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import Select from 'svelte-select';
 
 	export let name: string = '';
 	export let value: string | Date | null | number = '';
@@ -19,10 +20,16 @@
 		keys: ['0', '1'],
 	};
 
-	const items = areas.map((area) => `${area[0]} | ${area[1]}`);
+	const items = areas.map((area) => ({
+		value: area[1],
+		label: `${area[0]} | ${area[1]}`,
+	}));
 	const fuse = new Fuse(areas, options);
-	const loadOptions = async (q: string): Promise<string[]> =>
-		fuse.search(q).map((result) => `${result.item[0]} | ${result.item[1]}`);
+	const loadOptions = async (q: string) =>
+		fuse.search(q).map((result) => ({
+			value: result.item[1],
+			label: `${result.item[0]} | ${result.item[1]}`,
+		}));
 
 	switch (name) {
 		case 'dob':
@@ -31,7 +38,6 @@
 		case 'dueDate':
 			type = 'date';
 			if (value instanceof Date) {
-				// 'Create' form gets a Date object
 				// eslint-disable-next-line prefer-destructuring
 				value = value.toISOString().split('T')[0];
 				break;
@@ -66,33 +72,42 @@
 		case 'email':
 			type = 'email';
 			break;
-		case 'area':
-			type = 'datalist';
-			break;
 		default:
 			type = 'text';
 			break;
 	}
+	const dispatch = createEventDispatcher();
+	onMount(() => {
+		// this creates the field in Felte's data store
+		dispatch('select', {
+			value,
+		});
+	});
 </script>
 
 <div>
 	<label for={name} class="text-sm font-medium text-gray-700">
 		{startCase(name)}
 	</label>
-	{#if type === 'datalist'}
+	{#if name === 'area'}
 		<Select
-			{loadOptions}
 			id={name}
-			{name}
 			{items}
+			value={value ? { value, label: value } : null}
 			hasError={Boolean(invalidText)}
+			{loadOptions}
+			placeholder="Type to search in English or Arabic..."
+			on:select
+			on:clear
 		/>
 	{:else if type === 'select'}
 		<Select
 			id={name}
-			{name}
-			items={['Pending', 'Completed', 'Cancelled']}
+			items={['pending', 'completed', 'cancelled']}
+			value={value ? { value, label: value } : null}
 			hasError={Boolean(invalidText)}
+			on:select
+			on:clear
 		/>
 	{:else if type === 'checkbox'}
 		<span>

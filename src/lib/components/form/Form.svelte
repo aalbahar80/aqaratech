@@ -108,6 +108,12 @@
 										{value}
 										invalid={!!getValue($errors, name)}
 										invalidText={getValue($errors, name)?.[0]}
+										on:select={(e) => {
+											setData(name, e.detail.value);
+										}}
+										on:clear={() => {
+											setData(name, '');
+										}}
 									/>
 								{/if}
 							{/each}
