@@ -2,12 +2,8 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import {
-		Calendar,
-		CurrencyDollar,
-		Refresh,
-		Trash,
-	} from '@steeze-ui/heroicons';
+	import { concatIfExists } from '$lib/utils/table-utils';
+	import { Calendar, Refresh, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
 	import format from 'date-fns/format';
@@ -18,6 +14,10 @@
 	export let lease: Lease;
 
 	const details: [string, string | null][] = [
+		[
+			'Tenant',
+			concatIfExists([lease.tenant?.firstName, lease.tenant?.lastName]),
+		],
 		['Start Date', format(lease.startDate, 'MMM dd, yy')],
 		['End Date', format(lease.endDate, 'MMM dd, yy')],
 		[
@@ -28,6 +28,15 @@
 				maximumFractionDigits: 0,
 			}),
 		],
+		[
+			'Deposit',
+			lease.deposit.toLocaleString('en-KW', {
+				style: 'currency',
+				currency: 'KWD',
+				maximumFractionDigits: 0,
+			}),
+		],
+		['License', lease.license],
 	];
 
 	let isOpen = false;
@@ -44,6 +53,7 @@
 				['clients', lease.unit?.property?.client?.id],
 				['properties', lease.unit?.property?.id],
 				['units', lease.unit?.id],
+				['tenants', lease.tenant?.id],
 			]}
 		/>
 		<div class="mt-2 flex items-center space-x-8">
