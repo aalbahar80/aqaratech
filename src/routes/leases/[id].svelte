@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import LeaseDetail from '$lib/components/lease/LeaseDetail.svelte';
+	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -20,4 +21,5 @@
 
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<LeaseDetail {lease} />
+	<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
 </div>

@@ -2,7 +2,7 @@
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
-	import { Cash, ChevronRight, Plus } from '@steeze-ui/heroicons';
+	import { Cash, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
 
@@ -10,6 +10,7 @@
 		InferQueryOutput<'tenants:read'>
 	>['leases'][number]['transactions'];
 	export let transactions: Transactions;
+	export let leaseId: string | undefined = undefined;
 
 	let pageIndex = 1;
 	let data: typeof transactions;
@@ -19,7 +20,7 @@
 	$: ({ data, totalPages, start, end } = getPaginatedItems(
 		transactions,
 		pageIndex,
-		10,
+		12,
 	));
 </script>
 
@@ -35,9 +36,13 @@
 						Transactions
 					</h3>
 				</div>
-				<div class="ml-4 mt-2 flex-shrink-0">
-					<a href="/transactions/add"> Create new transaction </a>
-				</div>
+				{#if leaseId}
+					<div class="ml-4 mt-2 flex-shrink-0">
+						<a href={`/transactions/add?leaseId=${leaseId}`}>
+							Create new transaction
+						</a>
+					</div>
+				{/if}
 			</div>
 		</div>
 
@@ -167,7 +172,7 @@
 		</nav>
 	{:else}
 		<div class="overflow-hidden bg-white shadow sm:rounded-md">
-			<div class="text-center py-8 sm:py-16">
+			<div class="text-center py-16 sm:py-28">
 				<svg
 					class="mx-auto h-12 w-12 text-gray-400"
 					fill="none"
@@ -184,15 +189,6 @@
 					/>
 				</svg>
 				<h3 class="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
-				<div class="mt-6">
-					<a
-						href="/transactions/add"
-						class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-					>
-						<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-						New Transaction
-					</a>
-				</div>
 			</div>
 		</div>
 	{/if}
