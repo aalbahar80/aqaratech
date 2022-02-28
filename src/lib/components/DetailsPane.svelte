@@ -43,7 +43,7 @@
 								</div>
 								<ButtonDropdown
 									class="bottom-10"
-									defaultOption={{ label: 'View', href: '#', type: 'link' }}
+									defaultOption={{ label: 'View', href: value, type: 'link' }}
 									{options}
 								/>
 							</li>

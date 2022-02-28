@@ -17,7 +17,7 @@
 	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
 	export let lease: Lease;
 
-	const details = [
+	const details: [string, string | null][] = [
 		['Start Date', format(lease.startDate, 'MMM dd, yy')],
 		['End Date', format(lease.endDate, 'MMM dd, yy')],
 		[
