@@ -1,33 +1,11 @@
 <script lang="ts">
+	import type { Option } from '$lib/types';
 	import { Menu, MenuButton } from '@rgossiaux/svelte-headlessui';
-	import {
-		Check,
-		ClipboardCopy,
-		DotsVertical,
-		PencilAlt,
-		Speakerphone,
-	} from '@steeze-ui/heroicons';
+	import { DotsVertical } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import DropdownMenu from './DropdownMenu.svelte';
 
-	const options = [
-		{
-			icon: PencilAlt,
-			label: 'Edit',
-		},
-		{
-			icon: ClipboardCopy,
-			label: 'Copy URL',
-		},
-		{
-			icon: Speakerphone,
-			label: 'Send reminder',
-		},
-		{
-			icon: Check,
-			label: 'Mark as paid',
-		},
-	];
+	export let options: Option[];
 </script>
 
 <Menu as="div" class="relative inline-block text-left align-middle">

@@ -1,8 +1,16 @@
 <script lang="ts">
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import { addToast } from '$lib/stores/toast';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
-	import { Cash, ChevronRight } from '@steeze-ui/heroicons';
+	import {
+		Cash,
+		Check,
+		ChevronRight,
+		ClipboardCopy,
+		PencilAlt,
+		Speakerphone,
+	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
 
@@ -138,7 +146,43 @@
 								>
 							</td>
 							<td class="text-center">
-								<DropDown />
+								<DropDown
+									options={[
+										{
+											type: 'link',
+											icon: PencilAlt,
+											label: 'Edit',
+											href: `/transactions/${transaction.id}/edit`,
+										},
+										{
+											type: 'button',
+											icon: ClipboardCopy,
+											label: 'Copy URL',
+											onClick: () => {
+												navigator.clipboard.writeText('TODO implement');
+												addToast({
+													duration: 3000,
+													props: {
+														title: 'Copied to clipboard!',
+														kind: 'success',
+													},
+												});
+											},
+										},
+										{
+											type: 'button',
+											icon: Speakerphone,
+											label: 'Send reminder',
+											onClick: () => {},
+										},
+										{
+											type: 'button',
+											icon: Check,
+											label: 'Mark as paid',
+											onClick: () => {},
+										},
+									]}
+								/>
 							</td>
 						</tr>
 					{/each}

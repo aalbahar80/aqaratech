@@ -96,19 +96,17 @@
 				defaultOption={{
 					label: 'Edit',
 					href: `/leases/${lease.id}/edit`,
+					type: 'link',
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
+						type: 'button',
 					},
 				]}
 			/>
 		</span>
-
-		<!-- {/* Dropdown */} -->
 	</div>
 </div>
-
-<pre>{JSON.stringify(lease, null, 2)}</pre>

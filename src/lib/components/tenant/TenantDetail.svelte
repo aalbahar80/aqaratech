@@ -2,6 +2,7 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import type { Option } from '$lib/types';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -11,9 +12,9 @@
 
 	let isOpen = false;
 
-	const options = [
-		{ label: 'Update', href: '#', icon: Pencil },
-		{ label: 'Remove', href: '#', icon: Trash },
+	const options: Option[] = [
+		{ label: 'Update', href: '#', icon: Pencil, type: 'link' },
+		{ label: 'Remove', href: '#', icon: Trash, type: 'link' },
 	];
 
 	const openModal = () => {
@@ -32,12 +33,14 @@
 				defaultOption={{
 					label: 'Edit',
 					href: `/tenants/${tenant.id}/edit`,
+					type: 'link',
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
+						type: 'button',
 					},
 				]}
 			/>
@@ -93,7 +96,7 @@
 
 							<ButtonDropdown
 								class="bottom-10"
-								defaultOption={{ label: 'View' }}
+								defaultOption={{ label: 'View', href: '#', type: 'link' }}
 								{options}
 							/>
 						</li>
@@ -111,7 +114,11 @@
 
 							<ButtonDropdown
 								class="bottom-10"
-								defaultOption={{ label: 'View' }}
+								defaultOption={{
+									label: 'View',
+									onClick: () => {},
+									type: 'button',
+								}}
 								{options}
 							/>
 						</li>

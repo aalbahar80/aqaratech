@@ -14,6 +14,7 @@ export default trpc
 					id,
 				},
 				include: {
+					transactions: true,
 					tenant: {
 						select: {
 							id: true,
