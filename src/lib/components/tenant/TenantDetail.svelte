@@ -21,8 +21,8 @@
 	};
 </script>
 
-<ModalDelete bind:isOpen id={tenant.id} entity="tenants" />
 <section class="rounded-md bg-white shadow">
+	<ModalDelete bind:isOpen id={tenant.id} entity="tenants" />
 	<div class="flex justify-between px-4 py-5 sm:px-6">
 		<h3 class="text-lg font-medium leading-6 text-gray-900">
 			Tenant Information
