@@ -1,13 +1,15 @@
 <script lang="ts">
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
 	export let tenant: Tenant;
-	export let isOpen: boolean;
+
+	let isOpen = false;
 
 	const options = [
 		{ label: 'Update', href: '#', icon: Pencil },
@@ -19,6 +21,7 @@
 	};
 </script>
 
+<ModalDelete bind:isOpen id={tenant.id} entity="tenants" />
 <section class="rounded-md bg-white shadow">
 	<div class="flex justify-between px-4 py-5 sm:px-6">
 		<h3 class="text-lg font-medium leading-6 text-gray-900">

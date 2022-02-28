@@ -14,20 +14,22 @@
 	const handleConfirm = async () => {
 		isLoading = true;
 		try {
+			// await new Promise((resolve) => setTimeout(resolve, 200));
 			await trpc.mutation(`${entity}:delete`, id);
+			isLoading = false;
+			isOpen = false;
+			await goto(`/${entity}`);
+
+			// add toast after awaiting goto() to avoid weird modal behavior
 			addToast({
 				props: {
 					kind: 'success',
 					title: 'Delete successful',
 				},
 			});
-			isLoading = false;
-			isOpen = false;
-			// (Optional) wait for exit animation to finish
-			// await new Promise((resolve) => setTimeout(resolve, 200));
-			await goto(`/${entity}`);
 		} catch (error) {
 			isLoading = false;
+			isOpen = false;
 			addToast({
 				props: {
 					kind: 'error',

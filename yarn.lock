@@ -770,10 +770,10 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.10.0-50.73e60b76d394f8d37d8ebd1f8918c79029f0db86.tgz#2964113729a78b8b21e186b5592affd1fde73c16"
   integrity sha512-LjRssaWu9w2SrXitofnutRIyURI7l0veQYIALz7uY4shygM9nMcK3omXcObRm7TAcw3Z+9ytfK1B+ySOsOesxQ==
 
-"@rgossiaux/svelte-headlessui@^1.0.0-beta.9":
-  version "1.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@rgossiaux/svelte-headlessui/-/svelte-headlessui-1.0.0-beta.9.tgz#c3c19fb67244c0868b2f1459c3be5ce272bdc2ec"
-  integrity sha512-w6FP70vXzl7gxlYP3EJN6u2vQd30Vr/qmCkSJbp8ZkuCAbTEt3b3YPJFrcOS3Pkz4+XU4z+bMFUALTgXId6XsQ==
+"@rgossiaux/svelte-headlessui@^1.0.0-beta.10":
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@rgossiaux/svelte-headlessui/-/svelte-headlessui-1.0.0-beta.10.tgz#1d6ebac2305d460e9e678a027644b35b7eb50922"
+  integrity sha512-0pSkKreSpVaE8WPBzF+IqHPvrsh8D2aJw3sh3VdermoQb/G3iChTz4sjWv3DOM0L+iijSUTZc733vDW2JZssdg==
 
 "@rollup/pluginutils@^4.1.2":
   version "4.1.2"
