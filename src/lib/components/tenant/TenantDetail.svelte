@@ -2,9 +2,8 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import type { Option } from '$lib/types';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import { Pencil, Trash } from '@steeze-ui/heroicons';
+	import { Trash } from '@steeze-ui/heroicons';
 	import DetailsPane from '../DetailsPane.svelte';
 
 	type Tenant = NonNullable<InferQueryOutput<'tenants:read'>>;
@@ -12,7 +11,7 @@
 
 	let isOpen = false;
 
-	const details: [string, string][] = [
+	const details: [string, string | null][] = [
 		[
 			'Full Name',
 			concatIfExists([tenant.firstName, tenant.secondName, tenant.lastName]),
@@ -25,10 +24,6 @@
 	const files: [string, string][] = [
 		['Civil Id', ''],
 		['Passport', ''],
-	];
-	const options: Option[] = [
-		{ label: 'Update', href: '#', icon: Pencil, type: 'link' },
-		{ label: 'Remove', href: '#', icon: Trash, type: 'link' },
 	];
 
 	const openModal = () => {
