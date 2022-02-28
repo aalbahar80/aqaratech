@@ -4,6 +4,8 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import startCase from 'lodash-es/startCase.js';
 	import Select from 'svelte-select';
+	import { areas } from '$lib/config/constants';
+	import Fuse from 'fuse.js';
 
 	export let name: string = '';
 	export let value: string | Date | null | number = '';
@@ -11,6 +13,16 @@
 	export let invalidText: string = '';
 
 	let type: string = 'text';
+
+	const options = {
+		includeScore: true,
+		keys: ['0', '1'],
+	};
+
+	const items = areas.map((area) => `${area[0]} | ${area[1]}`);
+	const fuse = new Fuse(areas, options);
+	const loadOptions = async (q: string): Promise<string[]> =>
+		fuse.search(q).map((result) => `${result.item[0]} | ${result.item[1]}`);
 
 	switch (name) {
 		case 'dob':
@@ -35,7 +47,6 @@
 				break;
 			}
 			assertNever(value, "This case shouldn't happen");
-			break;
 
 		case 'monthlyRent':
 		case 'marketRent':
@@ -55,42 +66,46 @@
 		case 'email':
 			type = 'email';
 			break;
+		case 'area':
+			type = 'datalist';
+			break;
 		default:
 			type = 'text';
 			break;
 	}
 </script>
 
-{#if type === 'select'}
-	<div>
+<div>
+	<label for={name} class="text-sm font-medium text-gray-700">
+		{startCase(name)}
+	</label>
+	{#if type === 'datalist'}
+		<Select
+			{loadOptions}
+			id={name}
+			{name}
+			{items}
+			hasError={Boolean(invalidText)}
+		/>
+	{:else if type === 'select'}
 		<Select
 			id={name}
 			{name}
 			items={['Pending', 'Completed', 'Cancelled']}
 			hasError={Boolean(invalidText)}
 		/>
-	</div>
-{/if}
-
-<div>
-	{#if type === 'checkbox'}
-		<div class="inline-flex space-x-4">
+	{:else if type === 'checkbox'}
+		<span>
 			<input
-				class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0"
+				class="rounded border-gray-300 ml-4 h-5 w-5 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0"
 				type="checkbox"
 				checked={!!value}
 				{name}
 				id={name}
 				class:form__input--invalid={invalid}
 			/>
-			<label for={name} class="block text-sm font-medium text-gray-700">
-				{startCase(name)}
-			</label>
-		</div>
+		</span>
 	{:else}
-		<label for={name} class="block text-sm font-medium text-gray-700">
-			{startCase(name)}
-		</label>
 		<div class="relative mt-1 rounded-md">
 			<input
 				{type}
