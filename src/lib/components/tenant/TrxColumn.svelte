@@ -84,9 +84,11 @@
 					<dt class="truncate text-sm font-medium text-gray-500">
 						Outstanding balance
 					</dt>
-					<dd class="mt-1 text-3xl font-semibold text-gray-900">
-						{balance}
-					</dd>
+					{#key balance}
+						<dd in:scale class="mt-1 text-3xl font-semibold text-gray-900">
+							{balance}
+						</dd>
+					{/key}
 				</div>
 				{#if leaseId}
 					<div class="ml-4 mt-2 flex-shrink-0">
