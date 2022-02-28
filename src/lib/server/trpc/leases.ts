@@ -14,9 +14,17 @@ export default trpc
 					id,
 				},
 				include: {
+					tenant: {
+						select: {
+							id: true,
+							firstName: true,
+							lastName: true,
+						},
+					},
 					unit: {
 						select: {
 							id: true,
+							unitNumber: true,
 							property: {
 								select: {
 									id: true,
