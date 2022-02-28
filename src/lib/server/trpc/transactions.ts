@@ -59,6 +59,19 @@ export default trpc
 						data,
 				  }),
 	})
+	.mutation('update', {
+		input: z.object({
+			id: z.string().uuid(),
+			isPaid: z.boolean(),
+		}),
+		resolve: ({ input: { id, ...data } }) =>
+			prismaClient.transaction.update({
+				where: { id },
+				data: {
+					isPaid: data.isPaid,
+				},
+			}),
+	})
 	.mutation('delete', {
 		input: z.string(),
 		resolve: ({ input: id }) =>

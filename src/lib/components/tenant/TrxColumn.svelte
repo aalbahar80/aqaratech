@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import trpc from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
@@ -10,9 +11,11 @@
 		ClipboardCopy,
 		PencilAlt,
 		Speakerphone,
+		X,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import format from 'date-fns/format';
+	import { scale } from 'svelte/transition';
 
 	type Transactions = NonNullable<
 		InferQueryOutput<'tenants:read'>
@@ -30,6 +33,32 @@
 		pageIndex,
 		12,
 	));
+
+	const updatePaidStatus = async (id: string, isPaid: boolean) => {
+		try {
+			await trpc.mutation('transactions:update', {
+				id,
+				isPaid,
+			});
+			// update transactions array
+			transactions = transactions.map((transaction) =>
+				transaction.id === id
+					? {
+							...transaction,
+							isPaid,
+					  }
+					: transaction,
+			);
+		} catch (e) {
+			console.error(e);
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Unable to update status',
+				},
+			});
+		}
+	};
 </script>
 
 <section>
@@ -132,13 +161,16 @@
 								{'KWD'}
 							</td>
 							<td>
-								<span
-									class={`badge ${
-										transaction.isPaid ? 'badge-green' : 'badge-red'
-									}`}
-								>
-									{transaction.isPaid}
-								</span>
+								{#key transaction.isPaid}
+									<span
+										in:scale
+										class={`badge ${
+											transaction.isPaid ? 'badge-green' : 'badge-red'
+										}`}
+									>
+										{transaction.isPaid}
+									</span>
+								{/key}
 							</td>
 							<td>
 								<time dateTime={transaction.dueDate.toISOString()}
@@ -175,12 +207,23 @@
 											label: 'Send reminder',
 											onClick: () => {},
 										},
-										{
-											type: 'button',
-											icon: Check,
-											label: 'Mark as paid',
-											onClick: () => {},
-										},
+										transaction.isPaid
+											? {
+													type: 'button',
+													icon: X,
+													label: 'Mark as unpaid',
+													onClick: () => {
+														updatePaidStatus(transaction.id, false);
+													},
+											  }
+											: {
+													type: 'button',
+													icon: Check,
+													label: 'Mark as paid',
+													onClick: () => {
+														updatePaidStatus(transaction.id, true);
+													},
+											  },
 									]}
 								/>
 							</td>
