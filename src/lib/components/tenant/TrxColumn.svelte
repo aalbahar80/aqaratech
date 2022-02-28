@@ -125,9 +125,9 @@
 									</a>
 								</div>
 							</td>
-							<td>
+							<td class="text-right">
 								<span class="font-medium tabular-nums text-gray-900"
-									>{transaction.amount}
+									>{transaction.amount.toLocaleString()}
 								</span>
 								{'KWD'}
 							</td>
