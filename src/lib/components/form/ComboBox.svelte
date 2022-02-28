@@ -50,6 +50,14 @@
 				loadOptions(value),
 				loadOptions(),
 			]);
+
+			// if defaultItems contains the predefined item, remove it
+			if (defaultItems.find((item) => item.id === value)) {
+				defaultItems.splice(
+					defaultItems.findIndex((item) => item.id === value),
+					1,
+				);
+			}
 			items = [...predefinedItem, ...defaultItems];
 		} else {
 			items = await loadOptions();
