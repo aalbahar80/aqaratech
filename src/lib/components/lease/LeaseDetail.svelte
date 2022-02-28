@@ -20,7 +20,14 @@
 	const details = [
 		['Start Date', format(lease.startDate, 'MMM dd, yy')],
 		['End Date', format(lease.endDate, 'MMM dd, yy')],
-		['Monthly Rent', lease.monthlyRent],
+		[
+			'Monthly Rent',
+			lease.monthlyRent.toLocaleString('en-KW', {
+				style: 'currency',
+				currency: 'KWD',
+				maximumFractionDigits: 0,
+			}),
+		],
 	];
 
 	let isOpen = false;
