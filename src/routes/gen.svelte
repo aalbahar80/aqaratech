@@ -83,9 +83,9 @@
 			const fontSize = 16;
 
 			// field label
-			const textWidth = font.widthOfTextAtSize(label, fontSize);
-			page.drawText(label, {
-				x: x - textWidth,
+			const labelWidth = font.widthOfTextAtSize(label, fontSize);
+			page.drawText(label + ':', {
+				x: x - labelWidth,
 				y,
 				size: fontSize,
 				font,
@@ -93,15 +93,16 @@
 
 			// field input
 			const field = form.createTextField(label);
-			const width = 200;
+			const inputWidth = 150;
 			field.setText(value);
 			field.addToPage(page, {
-				x: x - width - 150,
-				y,
+				x: x - inputWidth - labelWidth - 2,
+				// x: x - inputWidth - 150,
+				y: y - 4,
 				font,
 				borderWidth: 0,
-				height: font.heightAtSize(fontSize),
-				width,
+				height: font.heightAtSize(fontSize + 2),
+				width: inputWidth,
 			});
 			field.setAlignment(TextAlignment.Right);
 			// field.updateAppearances(fontTajawal);
