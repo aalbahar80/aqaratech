@@ -44,43 +44,6 @@
 		},
 	};
 
-	// creates a right-aligned form field label and input
-	async function createFormField(
-		label: string,
-		value: string,
-		y: number,
-		font: PDFFont,
-		page: PDFPage,
-		form: PDFForm,
-	) {
-		const x = 500;
-		const fontSize = 16;
-
-		// field label
-		const textWidth = font.widthOfTextAtSize(label, fontSize);
-		page.drawText(label, {
-			x: x - textWidth,
-			y,
-			size: fontSize,
-			font,
-		});
-
-		// field input
-		const fieldForm = form.createTextField(label);
-		const width = 200;
-		fieldForm.setText(value);
-		fieldForm.addToPage(page, {
-			x: x - width - 150,
-			y,
-			font,
-			borderWidth: 0,
-			height: font.heightAtSize(fontSize),
-			width,
-		});
-		fieldForm.setAlignment(TextAlignment.Right);
-		// fieldForm.updateAppearances(fontTajawal);
-	}
-
 	async function createForm() {
 		// Fetch the Ubuntu font
 		const urlUbuntu = 'https://pdf-lib.js.org/assets/ubuntu/Ubuntu-R.ttf';
@@ -104,24 +67,51 @@
 		const page = pdfDoc.addPage([550, 750]);
 		const form = pdfDoc.getForm();
 
-		// date
-		page.drawText('التاريخ', {
-			x: 500 - fontTajawal.widthOfTextAtSize('التاريخ', 16),
+		// creates a right-aligned form field label and input
+		function createFormField({
+			label,
+			value,
+			y,
+			font = fontTajawal,
+		}: {
+			label: string;
+			value: string;
+			y: number;
+			font?: PDFFont;
+		}): void {
+			const x = 500;
+			const fontSize = 16;
+
+			// field label
+			const textWidth = font.widthOfTextAtSize(label, fontSize);
+			page.drawText(label, {
+				x: x - textWidth,
+				y,
+				size: fontSize,
+				font,
+			});
+
+			// field input
+			const field = form.createTextField(label);
+			const width = 200;
+			field.setText(value);
+			field.addToPage(page, {
+				x: x - width - 150,
+				y,
+				font,
+				borderWidth: 0,
+				height: font.heightAtSize(fontSize),
+				width,
+			});
+			field.setAlignment(TextAlignment.Right);
+			// field.updateAppearances(fontTajawal);
+		}
+
+		createFormField({
+			label: 'التاريخ',
+			value: '2020-01-01',
 			y: 700,
-			size: 16,
-			font: fontTajawal,
 		});
-		const dateField = form.createTextField('date');
-		dateField.setText('2020-01-01');
-		dateField.addToPage(page, {
-			x: 500 - fontTajawal.widthOfTextAtSize('التاريخ', 16) - 150,
-			y: 700,
-			font: fontTajawal,
-			borderWidth: 0,
-			height: fontTajawal.heightAtSize(16),
-			width: 100,
-		});
-		dateField.setAlignment(TextAlignment.Right);
 
 		// title
 		page.drawText('عقد ايجار', {
@@ -135,33 +125,11 @@
 			Object.entries(fields),
 		)) {
 			const y = 600 - +index * 25;
-			const x = 500;
-			const fontSize = 16;
-			const font = fontTajawal;
-
-			// field label
-			const textWidth = fontTajawal.widthOfTextAtSize(field.arabic, fontSize);
-			page.drawText(field.arabic, {
-				x: x - textWidth,
+			createFormField({
+				label: field.arabic,
+				value: field.arabic,
 				y,
-				size: fontSize,
-				font,
 			});
-
-			// field input
-			const fieldForm = form.createTextField(key);
-			const width = 200;
-			fieldForm.setText(field.arabic);
-			fieldForm.addToPage(page, {
-				x: x - width - 150,
-				y,
-				font,
-				borderWidth: 0,
-				height: fontTajawal.heightAtSize(fontSize),
-				width,
-			});
-			fieldForm.setAlignment(TextAlignment.Right);
-			// fieldForm.updateAppearances(fontTajawal);
 		}
 
 		// **Key Step:** Update the field appearances with the Tajawal font
