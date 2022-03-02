@@ -12,6 +12,8 @@ export const schema = z.object({
 	amount: z.number().gt(0),
 	memo: z.optional(z.string().transform(trim).transform(falsyToNull)),
 	leaseId: z.string().uuid(),
+	// TODO use z.url()?
+	receiptUrl: z.optional(z.string().transform(trim).transform(falsyToNull)),
 });
 
 type Transaction = InferMutationInput<'transactions:save'>;
@@ -26,7 +28,7 @@ const defaultForm = (): Transaction => ({
 const definition: EntityDefinition<'transactions'> = {
 	schema,
 	defaultForm,
-    label: undefined,
+	label: undefined,
 };
 
 export default definition;

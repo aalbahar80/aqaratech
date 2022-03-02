@@ -1,6 +1,7 @@
 import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
+import { falsyToNull, trim } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
@@ -46,6 +47,29 @@ export default trpc
 	})
 	.query('count', {
 		resolve: () => prismaClient.transaction.count({}),
+	})
+	.query('pay', {
+		input: z.string(),
+		resolve: async ({ input: id }) =>
+			prismaClient.transaction.findUnique({
+				where: { id },
+				include: { lease: { include: { tenant: true } } },
+			}),
+	})
+	.mutation('markPaid', {
+		input: z.object({
+			id: z.string().uuid(),
+			isPaid: z.boolean(),
+			receiptUrl: z.optional(z.string().transform(trim).transform(falsyToNull)),
+		}),
+		resolve: async ({ input }) =>
+			prismaClient.transaction.update({
+				where: { id: input.id },
+				data: {
+					isPaid: input.isPaid,
+					receiptUrl: input.receiptUrl,
+				},
+			}),
 	})
 	.mutation('save', {
 		input: schema,

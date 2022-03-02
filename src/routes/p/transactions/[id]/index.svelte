@@ -2,8 +2,12 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import { getMFUrl } from '$lib/services/myfatoorah';
+	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Load } from '@sveltejs/kit';
 	import format from 'date-fns/format';
+
 	export const load: Load = async ({ params }) => {
 		const { id } = params;
 
@@ -16,21 +20,26 @@
 				body: 'Transaction not found',
 			};
 		}
+
+		let mfUrl = '';
+		if (!trx?.isPaid) {
+			mfUrl = await getMFUrl(trx.id);
+		}
+
 		return {
 			status: 200,
 			props: {
 				trx,
+				mfUrl,
 			},
 		};
 	};
 </script>
 
 <script lang="ts">
-	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-
 	type Transaction = NonNullable<InferQueryOutput<'transactions:read'>>;
 	export let trx: Transaction;
+	export let mfUrl: string;
 
 	const details: [string, string | boolean | null][] = [
 		[
@@ -62,39 +71,34 @@
 		>
 			{trx.isPaid ? 'Paid' : 'Not paid'}
 		</span>
-		<div class="mt-4 flex md:mt-0 md:ml-4">
-			{#if trx.isPaid}
-				<button
-					type="button"
-					class="ml-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-white  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-				>
-					<Icon
-						src={ReceiptTax}
-						class="-ml-1 mr-2 h-5 w-5"
-						aria-hidden="true"
-					/>
-					Invoice
-				</button>
-			{:else}
-				<button
-					type="button"
-					class="ml-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>
-					<Icon
-						src={CreditCard}
-						theme="solid"
-						class="-ml-1 mr-2 h-5 w-5"
-						aria-hidden="true"
-					/>
-					Pay
-				</button>
-			{/if}
-		</div>
 	</div>
 	<DetailsPane {details} />
+	<div class="mt-4 flex self-end md:mt-0 md:mr-4">
+		{#if trx.isPaid}
+			<button
+				type="button"
+				class="mr-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-white  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+			>
+				<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+				Invoice
+			</button>
+		{:else}
+			<a
+				href={mfUrl}
+				class="mr-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			>
+				<Icon
+					src={CreditCard}
+					theme="solid"
+					class="-ml-1 mr-2 h-5 w-5"
+					aria-hidden="true"
+				/>
+				Pay
+			</a>
+		{/if}
+	</div>
+	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
-
-<pre>{JSON.stringify(trx, null, 2)}</pre>
 
 <style lang="postcss">
 	/* your styles go here */
