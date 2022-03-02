@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { entityDefinitions } from '$lib/definitions';
+	import { inWords } from '$lib/services/carbone';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import type { Load } from '@sveltejs/kit';
 	type Item = string | number | null | undefined;
@@ -20,6 +22,17 @@
 		unitType: Item;
 		unitNumber: Item;
 		purpose: Item;
+	};
+
+	const arabicLabels: Record<string, string> = {
+		name: 'الطرف الثاني',
+		civilid: 'رقم البطاقة المدنية',
+		phone: 'رقم الهاتف',
+		tenantAddress: 'عنوان المستأجر',
+		nationality: 'الجنسية',
+		passport: 'رقم الجواز',
+		visa: 'رقم الاقامة',
+		visaExpiration: 'تاريخ انتهاء الاقامة',
 	};
 
 	export const load: Load = async ({ params }) => {
@@ -50,10 +63,12 @@
 			passport: 'P001234567',
 			visa: 'V-334568',
 			visaExpiration: '2023-01-01',
-			rentNumber: lease.monthlyRent,
-			rentWords: 'rentinwords',
+			rentNumber: lease.monthlyRent.toLocaleString('en-KW', {
+				minimumFractionDigits: 3,
+			}),
+			rentWords: inWords(lease.monthlyRent),
 			startDate: lease.startDate.toLocaleDateString(),
-			unitAddress: 'unit.property.etc',
+			unitAddress: entityDefinitions.properties.label(lease.unit?.property!),
 			unitNumber: lease.unit?.unitNumber,
 			unitType: lease.unit?.type,
 			purpose: lease.license,
@@ -105,23 +120,22 @@
 >
 	<p>
 		التاريخ:
-		<span dir="ltr">2020-01-01</span>
+		<span dir="ltr">{fillable.contractDate?.toLocaleString()}</span>
 	</p>
 	<h3 class="py-8 text-center">عقد ايجار</h3>
 	الطرف الأول: شركة الطائف الكبرى العقارية
 	<br />
 	<p>
-		{#each Object.entries(fields) as field}
-			<span>{field[1].arabic}:</span>
-			<span>{field[1].arabic}</span>
-			<br />
+		{#each Object.entries(fillable) as field}
+			{#if arabicLabels[field[0]]}
+				<span>{arabicLabels[field[0]]}:</span>
+				<span>{field[1]}</span>
+				<br />
+			{/if}
 		{/each}
 	</p>
 
-	<br />
-	<br />
-
-	<table>
+	<!-- <table>
 		<thead>
 			<tr>
 				<th>الجنسية</th>
@@ -136,13 +150,22 @@
 				<td>رقم الاقامة وتاريخها</td>
 			</tr>
 		</tbody>
-	</table>
+	</table> -->
 	<p>
 		استأجر الطرف الثاني من الطرف الأول: {fillable.unitType} رقم: {fillable.unitNumber}
 		بالبناية الواقعة بالعنوان التالي: {fillable.unitAddress}
 		لاستعماله: {fillable.purpose}
 	</p>
-	<br />
+
+	<p>
+		الإيجار الشهري وقدرة {fillable.rentNumber}
+		{fillable.rentWords}
+		تدفع مقدما بدايه كل شهر ميلادي.
+	</p>
+	<p>
+		مدة العقد: سنه تبتدا من تاريخ {fillable.startDate} ويجدد تلقائيا عند انتهائه
+		لمدة مماثلة.
+	</p>
 	<br />
 
 	<p>

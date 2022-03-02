@@ -65,6 +65,7 @@
 		// const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
 		const page = pdfDoc.addPage([550, 750]);
+		page.setFont(fontTajawal);
 		const form = pdfDoc.getForm();
 
 		// creates a right-aligned form field label and input
@@ -105,7 +106,7 @@
 				width: inputWidth,
 			});
 			field.setAlignment(TextAlignment.Right);
-			// field.updateAppearances(fontTajawal);
+			field.updateAppearances(fontTajawal);
 		}
 
 		createFormField({
@@ -138,7 +139,7 @@
 		// form.updateFieldAppearances(fontUbuntu);
 
 		const viewerPrefs = pdfDoc.catalog.getOrCreateViewerPreferences();
-		viewerPrefs.setReadingDirection(ReadingDirection.R2L);
+		// viewerPrefs.setReadingDirection(ReadingDirection.R2L);
 		// save the form
 		const pdfBytes = await pdfDoc.save();
 		// download as blob

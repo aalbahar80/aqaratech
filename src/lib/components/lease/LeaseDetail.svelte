@@ -127,8 +127,8 @@
 					{
 						label: 'Generate PDF',
 						icon: DocumentDownload,
-						onClick: generateLease,
-						type: 'button',
+						href: `/leases/${lease.id}/contract`,
+						type: 'link',
 					},
 					{
 						label: 'Delete',
