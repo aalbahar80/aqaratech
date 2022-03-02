@@ -89,8 +89,9 @@
 		التاريخ:
 		<span dir="ltr">{fillable.contractDate?.toLocaleString()}</span>
 	</p>
-	<h3 class="py-8 text-center">عقد ايجار</h3>
-	<p>الطرف الأول: شركة الطائف الكبرى العقارية</p>
+	<h3 class="text-center">عقد ايجار</h3>
+	<p class="m-1">الطرف الأول: شركة الطائف الكبرى العقارية</p>
+	<br />
 	{#each Object.entries(fillable) as field}
 		{#if arabicLabels[field[0]]}
 			<p class="m-1">
