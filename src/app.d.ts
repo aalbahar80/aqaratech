@@ -16,9 +16,7 @@ declare namespace App {
 	}
 
 	interface Stuff {
-		lease: NonNullable<
-			import('$lib/client/trpc').InferQueryOutput<'leases:read'>
-		>;
+		lease: import('$lib/client/trpc').InferQueryOutput<'leases:read'>;
 	}
 }
 

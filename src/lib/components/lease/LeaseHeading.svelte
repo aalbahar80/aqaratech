@@ -7,7 +7,7 @@
 	import BreadCrumb from '../breadcrumbs/BreadCrumb.svelte';
 	import ButtonDropdown from '../ButtonDropdown.svelte';
 
-	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
+	type Lease = InferQueryOutput<'leases:read'>;
 	export let lease: Lease;
 
 	let isOpen = false;

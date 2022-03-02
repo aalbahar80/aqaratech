@@ -7,9 +7,7 @@
 
 		console.log('runnind lease layout load', new Date().getSeconds());
 		const lease = await trpc.query('leases:read', params.id);
-		if (lease) return { stuff: { lease } };
-
-		return { error: 'Lease not found', status: 404 };
+		return { stuff: { lease } };
 	};
 </script>
 
