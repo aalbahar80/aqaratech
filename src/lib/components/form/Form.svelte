@@ -63,13 +63,13 @@
 			console.log(values);
 			const submitted = await trpc.mutation(`${entity}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
+			await goto(`/${entity}/${submitted.id}`);
 			addToast({
 				props: {
 					kind: 'success',
 					title: 'Success',
 				},
 			});
-			await goto(`/${entity}/${submitted.id}`);
 		},
 	});
 </script>
