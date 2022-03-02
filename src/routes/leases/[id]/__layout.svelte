@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import trpc from '$lib/client/trpc';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {

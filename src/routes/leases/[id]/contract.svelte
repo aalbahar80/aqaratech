@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import { entityDefinitions } from '$lib/definitions';
 	import { inWords } from '$lib/utils/currency';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { page } from '$app/stores';
-	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
-	const lease: Lease = $page.stuff.lease;
+	const lease = $page.stuff.lease;
 
 	type Item = string | number | null | undefined;
 	type Fillable = {

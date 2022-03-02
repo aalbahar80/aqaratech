@@ -15,7 +15,11 @@ declare namespace App {
 		userId: string;
 	}
 
-	interface Stuff {}
+	interface Stuff {
+		lease: NonNullable<
+			import('$lib/client/trpc').InferQueryOutput<'leases:read'>
+		>;
+	}
 }
 
 type FormType = 'create' | 'update';

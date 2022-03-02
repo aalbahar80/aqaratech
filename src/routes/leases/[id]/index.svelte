@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeaseHeading from '$lib/components/lease/LeaseHeading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import format from 'date-fns/format';
 
-	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
-	const lease: Lease = $page.stuff.lease;
+	const lease = $page.stuff.lease;
 	const details: [string, string | null][] = [
 		[
 			'Tenant',
