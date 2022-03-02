@@ -1,45 +1,14 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { concatIfExists } from '$lib/utils/table-utils';
 	import { Calendar, DocumentText, Refresh, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
-	import format from 'date-fns/format';
 	import BreadCrumb from '../breadcrumbs/BreadCrumb.svelte';
 	import ButtonDropdown from '../ButtonDropdown.svelte';
 
 	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
 	export let lease: Lease;
-
-	const details: [string, string | null][] = [
-		[
-			'Tenant',
-			concatIfExists([lease.tenant?.firstName, lease.tenant?.lastName]),
-		],
-		['Start Date', format(lease.startDate, 'MMM dd, yy')],
-		['End Date', format(lease.endDate, 'MMM dd, yy')],
-		[
-			'Monthly Rent',
-			lease.monthlyRent.toLocaleString('en-KW', {
-				style: 'currency',
-				currency: 'KWD',
-				maximumFractionDigits: 0,
-			}),
-		],
-		[
-			'Deposit',
-			lease.deposit.toLocaleString('en-KW', {
-				style: 'currency',
-				currency: 'KWD',
-				maximumFractionDigits: 0,
-			}),
-		],
-		['License', lease.license],
-	];
-
-	const files: [string, string][] = [['Lease', 'TODO implement']];
 
 	let isOpen = false;
 	const openModal = () => {
@@ -142,5 +111,3 @@
 		</span>
 	</div>
 </div>
-
-<DetailsPane {details} {files} />
