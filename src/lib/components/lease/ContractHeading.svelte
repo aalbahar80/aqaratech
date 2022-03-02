@@ -1,0 +1,45 @@
+<script lang="ts">
+	import { ChevronLeft } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
+	export let id: string;
+</script>
+
+<div class="mx-auto max-w-3xl p-4 print:hidden sm:p-6 lg:p-8">
+	<div>
+		<nav aria-label="Back">
+			<a
+				href={`/leases/${id}`}
+				class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
+			>
+				<Icon
+					src={ChevronLeft}
+					theme="solid"
+					class="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-400"
+					aria-hidden="true"
+				/>
+				Back
+			</a>
+		</nav>
+	</div>
+	<div class="mt-2 md:flex md:items-center md:justify-between">
+		<div class="min-w-0 flex-1">
+			<h2
+				class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
+			>
+				Lease Contract
+			</h2>
+		</div>
+		<div class="mt-4 flex flex-shrink-0 md:mt-0 md:ml-4">
+			<button
+				type="button"
+				on:click={() => {
+					window.print();
+				}}
+				class="ml-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			>
+				Print
+			</button>
+		</div>
+	</div>
+</div>

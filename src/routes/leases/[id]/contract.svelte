@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import { entityDefinitions } from '$lib/definitions';
 	import { inWords } from '$lib/utils/currency';
 	import { concatIfExists } from '$lib/utils/table-utils';
@@ -78,18 +79,19 @@
 	let fillable: Fillable = getContractData();
 </script>
 
+<ContractHeading id={lease.id} />
 <div
 	contenteditable
 	dir="rtl"
-	class="prose prose-lg mx-auto mt-6 border-4 text-gray-700 print:border-0"
+	class="prose prose-lg mx-auto mt-6 box-content rounded-md border-4 p-8 text-gray-600 print:border-0 print:p-0 print:text-gray-800"
 >
 	<p>
 		التاريخ:
 		<span dir="ltr">{fillable.contractDate?.toLocaleString()}</span>
 	</p>
 	<h3 class="py-8 text-center">عقد ايجار</h3>
-	الطرف الأول: شركة الطائف الكبرى العقارية
-	<br />
+	<p>الطرف الأول: شركة الطائف الكبرى العقارية</p>
+	<!-- &nbsp; -->
 	<p>
 		{#each Object.entries(fillable) as field}
 			{#if arabicLabels[field[0]]}
