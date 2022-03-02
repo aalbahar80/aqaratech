@@ -156,7 +156,7 @@
 						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 					/>
 				</svg>
-				Save
+				{data?.id ? 'Save changes' : 'Create new'}
 			</button>
 		</div>
 	</form>
@@ -164,7 +164,7 @@
 
 <style lang="postcss">
 	.submit-button {
-		@apply ml-4 inline-flex w-1/5 justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+		@apply ml-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
 		@apply disabled:cursor-not-allowed disabled:opacity-50;
 	}
 </style>
