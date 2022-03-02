@@ -5,7 +5,7 @@
 	export let id: string;
 </script>
 
-<div class="mx-auto max-w-3xl p-4 print:hidden sm:p-6 lg:p-8">
+<div class="p-4 print:hidden sm:p-0">
 	<div>
 		<nav aria-label="Back">
 			<a

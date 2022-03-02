@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import LeaseHeading from '$lib/components/lease/LeaseHeading.svelte';
+	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import format from 'date-fns/format';
 
@@ -37,5 +38,6 @@
 	const files: [string, string][] = [['Lease', 'TODO implement']];
 </script>
 
+<LeaseHeading {lease} />
 <DetailsPane {details} {files} />
 <TrxColumn transactions={lease.transactions} leaseId={lease.id} />

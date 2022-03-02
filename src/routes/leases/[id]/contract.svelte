@@ -1,10 +1,13 @@
-<script lang="ts" context="module">
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+<script lang="ts">
+	import type { InferQueryOutput } from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import { entityDefinitions } from '$lib/definitions';
 	import { inWords } from '$lib/utils/currency';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import type { Load } from '@sveltejs/kit';
+	import { page } from '$app/stores';
+	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
+	const lease: Lease = $page.stuff.lease;
+
 	type Item = string | number | null | undefined;
 	type Fillable = {
 		contractDate: Item;
@@ -35,18 +38,6 @@
 		visa: 'رقم الاقامة',
 		visaExpiration: 'تاريخ انتهاء الاقامة',
 	};
-
-	export const load: Load = async ({ params }) => {
-		const lease = await trpc.query('leases:read', params.id);
-		if (lease) return { props: { lease } };
-
-		return { error: 'Lease not found', status: 404 };
-	};
-</script>
-
-<script lang="ts">
-	type Lease = NonNullable<InferQueryOutput<'leases:read'>>;
-	export let lease: Lease;
 
 	const getContractData = (): Fillable => {
 		return {
@@ -102,21 +93,21 @@
 	{/each}
 
 	<!-- <table>
-		<thead>
-			<tr>
-				<th>الجنسية</th>
-				<th>رقم الجواز</th>
-				<th>رقم الاقامة وتاريخها</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>الجنسية</td>
-				<td>رقم الجواز</td>
-				<td>رقم الاقامة وتاريخها</td>
-			</tr>
-		</tbody>
-	</table> -->
+			<thead>
+				<tr>
+					<th>الجنسية</th>
+					<th>رقم الجواز</th>
+					<th>رقم الاقامة وتاريخها</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>الجنسية</td>
+					<td>رقم الجواز</td>
+					<td>رقم الاقامة وتاريخها</td>
+				</tr>
+			</tbody>
+		</table> -->
 	<p>
 		استأجر الطرف الثاني من الطرف الأول: {fillable.unitType} رقم: {fillable.unitNumber}
 		بالبناية الواقعة بالعنوان التالي: {fillable.unitAddress}
