@@ -1,4 +1,4 @@
-import * as utils from './carbone';
+import * as utils from './currency';
 // @ponicode
 describe('utils.inWords', () => {
 	test('it returns amount in words in KWD', () => {

@@ -366,3 +366,8 @@ Tafgeet.prototype.currencies = {
 		decimals: 3,
 	},
 };
+
+export const inWords = (num: number): string => {
+	let stringText: string = new (Tafgeet as any)(num, 'KWD').parse();
+	return stringText;
+};

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { entityDefinitions } from '$lib/definitions';
-	import { inWords } from '$lib/services/carbone';
+	import { inWords } from '$lib/utils/currency';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import type { Load } from '@sveltejs/kit';
 	type Item = string | number | null | undefined;
@@ -76,41 +76,6 @@
 	};
 
 	let fillable: Fillable = getContractData();
-
-	type Field = {
-		arabic: string;
-		english: string;
-	};
-	const fields: Record<string, Field> = {
-		name: {
-			arabic: 'الطرف الثاني',
-			english: 'Name',
-		},
-		civilid: {
-			arabic: 'رقم البطاقة المدنية',
-			english: 'Phone',
-		},
-		address: {
-			arabic: 'العنوان',
-			english: 'Address',
-		},
-		phone: {
-			arabic: 'رقم الهاتف',
-			english: 'Phone',
-		},
-		nationality: {
-			arabic: 'الجنسية',
-			english: 'nationality',
-		},
-		'passport number': {
-			arabic: 'رقم الجواز',
-			english: 'passport number',
-		},
-		visa: {
-			arabic: 'رقم الاقامة وتاريخها',
-			english: 'visa',
-		},
-	};
 </script>
 
 <div

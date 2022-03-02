@@ -2,7 +2,6 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { renderReportAndGetRenderId } from '$lib/services/carbone';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import {
 		Calendar,
@@ -50,11 +49,6 @@
 	let isOpen = false;
 	const openModal = () => {
 		isOpen = true;
-	};
-
-	const generateLease = async () => {
-		const url = await renderReportAndGetRenderId(lease);
-		window.open(url);
 	};
 </script>
 
