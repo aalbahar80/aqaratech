@@ -15,7 +15,7 @@
 </script>
 
 {#if visible}
-	<div class="progress-container">
+	<div class="progress-container print:hidden">
 		<div class="progress" style="inline-size: {p * 100}%" />
 	</div>
 {/if}

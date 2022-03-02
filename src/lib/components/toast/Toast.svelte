@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="w-60 rounded-md p-4"
+	class="w-60 rounded-md p-4 print:hidden"
 	class:bg-green-100={kind === 'success'}
 	class:bg-red-100={kind === 'error'}
 >
