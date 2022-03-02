@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
@@ -206,9 +207,11 @@
 										{
 											type: 'button',
 											icon: ClipboardCopy,
-											label: 'Copy URL',
+											label: 'Copy payment URL',
 											onClick: () => {
-												navigator.clipboard.writeText('TODO implement');
+												navigator.clipboard.writeText(
+													`${$page.url.host}/p/transactions/${transaction.id}`,
+												);
 												addToast({
 													duration: 3000,
 													props: {
