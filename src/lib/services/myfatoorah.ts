@@ -48,7 +48,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		.filter(Boolean)
 		.join(' ');
 
-	const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback`;
+	// const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback`;
 
 	const trxDataRaw = {
 		InvoiceValue: trx.amount,

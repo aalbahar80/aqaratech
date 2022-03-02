@@ -8,7 +8,7 @@
 	import type { Load } from '@sveltejs/kit';
 	import format from 'date-fns/format';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;
 
 		// check if transaction exists
@@ -23,7 +23,9 @@
 
 		let mfUrl = '';
 		if (!trx?.isPaid) {
-			mfUrl = await getMFUrl(trx.id);
+			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
+			const data = await res.json();
+			mfUrl = data.mfUrl;
 		}
 
 		return {
