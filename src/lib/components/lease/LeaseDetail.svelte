@@ -3,12 +3,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { concatIfExists } from '$lib/utils/table-utils';
-	import {
-		Calendar,
-		Refresh,
-		Trash,
-		DocumentDownload,
-	} from '@steeze-ui/heroicons';
+	import { Calendar, DocumentText, Refresh, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
 	import format from 'date-fns/format';
@@ -111,6 +106,20 @@
 		</span>
 
 		<span class="ml-3">
+			<a
+				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+				href={`/leases/${lease.id}/contract`}
+			>
+				<Icon
+					src={DocumentText}
+					class="-ml-1 mr-2 h-5 w-5"
+					aria-hidden="true"
+				/>
+				Contract
+			</a>
+		</span>
+
+		<span class="ml-3">
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
@@ -118,12 +127,6 @@
 					type: 'link',
 				}}
 				options={[
-					{
-						label: 'Generate PDF',
-						icon: DocumentDownload,
-						href: `/leases/${lease.id}/contract`,
-						type: 'link',
-					},
 					{
 						label: 'Delete',
 						icon: Trash,
