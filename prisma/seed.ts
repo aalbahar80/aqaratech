@@ -1,4 +1,3 @@
-//@ts-nocheck
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
 
@@ -134,13 +133,13 @@ const cleanupDatabase = async (): Promise<void> => {
 };
 
 async function main() {
-	const clientCount = 15;
-	const propertyMax = 7;
-	const unitMax = 15;
-	const tenantCount = 500;
+	const clientCount = 8;
+	const propertyMax = 10;
+	const unitMax = 20;
+	const tenantCount = 200;
 	const leaseMax = 5;
-	const moCount = 100;
-	const expenseCount = 100;
+	const moCount = 200;
+	const expenseCount = 200;
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
@@ -149,39 +148,66 @@ async function main() {
 			() => fakeProperty(client.id),
 		),
 	);
+	console.log(properties);
 	const units = properties.flatMap((property) =>
 		Array.from(
 			{ length: faker.datatype.number({ min: 0, max: unitMax }) },
 			() => fakeUnit(property.id),
 		),
 	);
+	console.log(units);
 	const tenants = Array.from({ length: tenantCount }, fakeTenant);
 
-	const leases = tenants.flatMap((tenant) =>
-		Array.from(
-			{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
-			() =>
-				fakeLease(tenant.id, units[faker.datatype.number(units.length - 1)].id),
-		),
-	);
+	const leases = units.length
+		? tenants.flatMap((tenant) =>
+				Array.from(
+					{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
+					() =>
+						fakeLease(
+							tenant.id,
+							units[faker.datatype.number(units.length - 1)].id,
+						),
+				),
+		  )
+		: [];
+	console.log(leases);
 
-	const transactions = leases.flatMap((lease) =>
-		Array.from({ length: 12 }, () => fakeTransaction(lease.id)),
-	);
+	const transactions = leases.length
+		? leases.flatMap((lease) =>
+				Array.from({ length: 12 }, () => fakeTransaction(lease.id)),
+		  )
+		: [];
 
 	const maintenanceOrders = Array.from({ length: moCount }, () => {
 		const mo = fakeMaintenanceOrder();
 		// add either a client or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
-			mo['clientId'] = clients[faker.datatype.number(clients.length - 1)].id;
+			return {
+				...mo,
+				clientId:
+					clients.length > 0
+						? clients[faker.datatype.number(clients.length - 1)].id
+						: null,
+			};
 		}
 		if (random === 1) {
-			mo['propertyId'] =
-				properties[faker.datatype.number(properties.length - 1)].id;
+			return {
+				...mo,
+				propertyId:
+					properties.length > 0
+						? properties[faker.datatype.number(properties.length - 1)].id
+						: null,
+			};
 		}
 		if (random === 2) {
-			mo['unitId'] = units[faker.datatype.number(units.length - 1)].id;
+			return {
+				...mo,
+				unitId:
+					units.length > 0
+						? units[faker.datatype.number(units.length - 1)].id
+						: null,
+			};
 		}
 		return mo;
 	});
@@ -191,15 +217,31 @@ async function main() {
 		// assign to either a client or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
-			expense['clientId'] =
-				clients[faker.datatype.number(clients.length - 1)].id;
+			return {
+				...expense,
+				clientId:
+					clients.length > 0
+						? clients[faker.datatype.number(clients.length - 1)].id
+						: null,
+			};
 		}
 		if (random === 1) {
-			expense['propertyId'] =
-				properties[faker.datatype.number(properties.length - 1)].id;
+			return {
+				...expense,
+				propertyId:
+					properties.length > 0
+						? properties[faker.datatype.number(properties.length - 1)].id
+						: null,
+			};
 		}
 		if (random === 2) {
-			expense['unitId'] = units[faker.datatype.number(units.length - 1)].id;
+			return {
+				...expense,
+				unitId:
+					units.length > 0
+						? units[faker.datatype.number(units.length - 1)].id
+						: null,
+			};
 		}
 		return expense;
 	});
@@ -222,7 +264,7 @@ async function main() {
 
 	try {
 		// TODO add a NODE_ENV check to only run this in development
-		// await cleanupDatabase();
+		await cleanupDatabase();
 		await prisma.client.createMany({
 			data: clients,
 		});
@@ -239,14 +281,18 @@ async function main() {
 			data: tenants,
 		});
 		console.log('tenants created');
-		await prisma.lease.createMany({
-			data: leases,
-		});
-		console.log('leases created');
-		await prisma.transaction.createMany({
-			data: transactions,
-		});
-		console.log('transactions created');
+		if (leases && leases.length) {
+			await prisma.lease.createMany({
+				data: leases,
+			});
+			console.log('leases created');
+		}
+		if (transactions && transactions.length) {
+			await prisma.transaction.createMany({
+				data: transactions,
+			});
+			console.log('transactions created');
+		}
 		await prisma.maintenanceOrder.createMany({
 			data: maintenanceOrders,
 		});
