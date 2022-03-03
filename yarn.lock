@@ -837,10 +837,10 @@
   dependencies:
     esbuild "^0.14.21"
 
-"@sveltejs/kit@^1.0.0-next.288":
-  version "1.0.0-next.288"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.288.tgz#017f2f2e9ca2ceb806ad29477bf4d9b632bedddb"
-  integrity sha512-6ky4CUFNGKoU1QV+fY2LOIB7atHdUCIMRx3pX21B2g9yZzQzkot0zHBrMMBSKF0/4Wx19PLEWrlGxlhakYmi8Q==
+"@sveltejs/kit@^1.0.0-next.290":
+  version "1.0.0-next.290"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.290.tgz#2ce67dd075e74749276c3d64885773da40949eb8"
+  integrity sha512-3Q0uX/auFYsoj3o7+vQtZ+ZsuRLAmVsra5hvkvml18EjfX1wGRNdLlPcl6VE95eAvViWe/65vGaNNC+02h1crA==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
     sade "^1.7.4"
@@ -5756,10 +5756,10 @@ tree-kill@^1.2.2:
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
-trpc-sveltekit@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/trpc-sveltekit/-/trpc-sveltekit-1.1.7.tgz#9e478519ae8aebe69852d4cba2927a6fe6cb8e6f"
-  integrity sha512-f8Idnb3FH2C66Ceq8g6iq+d5XggZuHAGnI1zsku7Z23Q2pN1dd3fZUoBNGBr5bHXrcK2YYlHfVwoHON4IrNm0g==
+trpc-sveltekit@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/trpc-sveltekit/-/trpc-sveltekit-1.1.9.tgz#b86ebf1d43bb7d8c9843221c0e9bb4a7c145f159"
+  integrity sha512-EG1iw8OfT2tMF+2R5RQuFn8FMh528T96h+67xCLC7/PPiS4TQ3or+iBzK6KOEwvPX/h+u50CYnyn89altEnhnA==
 
 ts-jest@^27.1.3:
   version "27.1.3"
@@ -6193,7 +6193,7 @@ yn@3.1.1:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zod@^3.13.2:
-  version "3.13.2"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.13.2.tgz#08850b7d17bea78cd61eb4a525604dc3e51c7327"
-  integrity sha512-xN+PKyFQEs4t/j4V6pAwYwglR2aXNcGc6T825dpVfVdlSZg58Bb3i90YAl5V6ItZIxO5HzceJ6bmvmmlPcclVw==
+zod@^3.13.4:
+  version "3.13.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.13.4.tgz#5d6fe03ef4824a637d7ef50b5441cf6ab3acede0"
+  integrity sha512-LZRucWt4j/ru5azOkJxCfpR87IyFDn8h2UODdqvXzZLb3K7bb9chUrUIGTy3BPsr8XnbQYfQ5Md5Hu2OYIo1mg==
