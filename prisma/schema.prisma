@@ -23,6 +23,7 @@ model Client {
   civilid           String?
   phone             String?
   email             String?
+  dob               DateTime?
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   properties        Property[]
@@ -57,8 +58,8 @@ model Lease {
   unitId       String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  startDate    DateTime
-  endDate      DateTime
+  start        DateTime
+  end          DateTime
   monthlyRent  Float
   deposit      Float         @default(0)
   isSigned     Boolean       @default(true)
@@ -72,16 +73,16 @@ model Lease {
 }
 
 model Listing {
-  id           String    @id @default(uuid())
-  unitId       String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  isActive     Boolean?
-  available_on DateTime?
-  leaseLength  String?
-  title        String?
-  description  String?   @db.Text
-  unit         Unit      @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          String    @id @default(uuid())
+  unitId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  isActive    Boolean?
+  availableOn DateTime?
+  leaseLength String?
+  title       String?
+  description String?   @db.Text
+  unit        Unit      @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([unitId])
 }
@@ -140,6 +141,10 @@ model Tenant {
   dob               DateTime?
   phone             String
   email             String?
+  passportNum       String?
+  nationality       String?
+  residencyNum      String?
+  residencyEnd      DateTime?
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
 }
@@ -164,7 +169,7 @@ model Unit {
   propertyId        String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
-  unitNumber        String?
+  unitNumber        String
   floor             String?
   size              Float?
   bed               Float?

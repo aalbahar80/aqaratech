@@ -1,10 +1,13 @@
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
+// OR npx prisma db seed
 
 import * as fakerAll from '@faker-js/faker';
-import * as util from 'util';
+// import * as util from 'util';
 // import prisma from '../src/lib/server/prismaClient';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import pkg, { type Prisma } from '@prisma/client';
+
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient({
@@ -15,7 +18,7 @@ prisma.$on('query', (e) => {
 	console.log(e);
 });
 
-const faker = fakerAll.faker;
+const { faker } = fakerAll;
 faker.locale = 'ar';
 
 const createdAt = () => faker.date.past(4);
@@ -34,6 +37,14 @@ const fakeTenant = () => ({
 	email: faker.internet.email(),
 	dob: faker.date.past(),
 	phone: faker.phone.phoneNumber('1#######'),
+	passportNum: faker.datatype
+		.number({ min: 100000000, max: 999999999 })
+		.toString(),
+	nationality: faker.address.countryCode(),
+	residencyNum: faker.datatype
+		.number({ min: 100000000, max: 999999999 })
+		.toString(),
+	residencyExp: faker.date.future(2),
 });
 
 const fakeUnit = (propertyId: string) => ({
@@ -45,10 +56,8 @@ const fakeUnit = (propertyId: string) => ({
 	bed: faker.datatype.number({ min: 1, max: 10 }),
 	bath: faker.datatype.number({ min: 1, max: 10 }),
 	marketRent: +faker.finance.amount(100, 3000, 0),
-	unitNumber: faker.address.secondaryAddress(),
-	type: ['apartment', 'store', 'basement', 'storage'][
-		Math.floor(Math.random() * 4)
-	],
+	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
+	type: faker.random.arrayElement(['شقة', 'محل', 'سرداب', 'مخزن']),
 	propertyId,
 });
 
@@ -58,7 +67,10 @@ const fakeProperty = (clientId: string) => ({
 	updatedAt: updatedAt(),
 	area: faker.address.cityName(),
 	block: faker.datatype.number({ min: 1, max: 13 }).toString(),
-	street: faker.address.streetName(),
+	street: `شارع ${faker.random.arrayElement([
+		faker.name.lastName(),
+		faker.datatype.number({ min: 1, max: 500 }).toString(),
+	])}`,
 	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	clientId,
 });
@@ -75,6 +87,7 @@ const fakeClient = () => ({
 		.toString(),
 	email: faker.internet.email(),
 	phone: faker.phone.phoneNumber('1#######'),
+	dob: faker.date.past(),
 });
 
 const fakeTransaction = (leaseId: string) => ({
@@ -89,18 +102,20 @@ const fakeTransaction = (leaseId: string) => ({
 	leaseId,
 });
 
-const fakeLease = (tenantId: string, unitId: string) => ({
-	id: faker.datatype.uuid(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	startDate: faker.date.past(4),
-	endDate: faker.date.future(1),
-	deposit: +faker.finance.amount(100, 3000, 0),
-	monthlyRent: +faker.finance.amount(100, 3000, 0),
-	license: faker.company.bs(),
-	tenantId,
-	unitId,
-});
+const fakeLease = (tenantId: string, unitId: string) => {
+	return {
+		id: faker.datatype.uuid(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		start: faker.date.past(4),
+		end: faker.date.future(1),
+		deposit: +faker.finance.amount(100, 3000, 0),
+		monthlyRent: +faker.finance.amount(100, 3000, 0),
+		license: faker.company.bs(),
+		tenantId,
+		unitId,
+	};
+};
 
 const fakeExpense = () => ({
 	id: faker.datatype.uuid(),
@@ -281,13 +296,13 @@ async function main() {
 			data: tenants,
 		});
 		console.log('tenants created');
-		if (leases && leases.length) {
+		if (leases.length) {
 			await prisma.lease.createMany({
 				data: leases,
 			});
 			console.log('leases created');
 		}
-		if (transactions && transactions.length) {
+		if (transactions.length) {
 			await prisma.transaction.createMany({
 				data: transactions,
 			});
@@ -312,6 +327,4 @@ main()
 		process.exit(1);
 		// throw e;
 	})
-	.finally(async () => {
-		await prisma.$disconnect();
-	});
+	.finally(() => prisma.$disconnect());
