@@ -17,7 +17,6 @@ const config = {
 			resolve: {
 				alias: {
 					$components: path.resolve('./src/lib/components'),
-					$routes: path.resolve('./src/routes'),
 					$lib: path.resolve('./src/lib'),
 				},
 			},
