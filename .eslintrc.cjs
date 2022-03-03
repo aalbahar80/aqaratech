@@ -41,12 +41,12 @@ module.exports = {
 				'airbnb-typescript/base',
 				'eslint:recommended',
 				'plugin:import/recommended',
-				'plugin:eslint-comments/recommended',
-				'plugin:@typescript-eslint/recommended',
-				'plugin:@typescript-eslint/recommended-requiring-type-checking',
-				// 'plugin:import/typescript',
-				// 'plugin:jest/recommended',
-				// 'plugin:jest/style',
+				'plugin:eslint-comments/recommended', // lag
+				'plugin:@typescript-eslint/recommended', // lag
+				'plugin:@typescript-eslint/recommended-requiring-type-checking', // lag
+				// // 'plugin:import/typescript',
+				// // 'plugin:jest/recommended',
+				// // 'plugin:jest/style',
 				'prettier', // needs to be last
 				'./rules.cjs',
 			],
