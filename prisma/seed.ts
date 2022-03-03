@@ -44,7 +44,7 @@ const fakeTenant = () => ({
 	residencyNum: faker.datatype
 		.number({ min: 100000000, max: 999999999 })
 		.toString(),
-	residencyExp: faker.date.future(2),
+	residencyEnd: faker.date.future(2),
 });
 
 const fakeUnit = (propertyId: string) => ({
@@ -103,12 +103,15 @@ const fakeTransaction = (leaseId: string) => ({
 });
 
 const fakeLease = (tenantId: string, unitId: string) => {
+	const start = faker.date.past(4);
+	let end = new Date(start);
+	end = new Date(end.setFullYear(end.getFullYear() + 1));
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
-		start: faker.date.past(4),
-		end: faker.date.future(1),
+		start,
+		end,
 		deposit: +faker.finance.amount(100, 3000, 0),
 		monthlyRent: +faker.finance.amount(100, 3000, 0),
 		license: faker.company.bs(),
@@ -148,13 +151,13 @@ const cleanupDatabase = async (): Promise<void> => {
 };
 
 async function main() {
-	const clientCount = 8;
+	const clientCount = 15;
 	const propertyMax = 10;
 	const unitMax = 20;
-	const tenantCount = 200;
-	const leaseMax = 5;
-	const moCount = 200;
-	const expenseCount = 200;
+	const tenantCount = 300;
+	const leaseMax = 3;
+	const moCount = 500;
+	const expenseCount = 500;
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
@@ -279,7 +282,8 @@ async function main() {
 
 	try {
 		// TODO add a NODE_ENV check to only run this in development
-		await cleanupDatabase();
+		// await cleanupDatabase();
+
 		await prisma.client.createMany({
 			data: clients,
 		});
