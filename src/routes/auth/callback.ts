@@ -1,7 +1,6 @@
 //  Endpoint for redirection from GitHub after authorization...
 import type { RequestHandler } from '@sveltejs/kit';
 import { getRedirectUri } from '$lib/config/auth_config';
-import { logger } from '$lib/config/logger';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 interface TokenResponse {
@@ -27,7 +26,7 @@ async function getTokens(code: string, redirectUri: string) {
 			code,
 			redirect_uri: redirectUri,
 		});
-		logger.debug({ body }, 'callback.ts ~ 29');
+		console.log({ body }, 'callback.ts ~ 29');
 
 		const res = await fetch(tokenURL, {
 			method: 'POST',
@@ -39,7 +38,7 @@ async function getTokens(code: string, redirectUri: string) {
 		});
 
 		const data: TokenResponse = (await res.json()) as TokenResponse;
-		logger.debug({ data }, 'callback.ts ~ 42');
+		console.log({ data }, 'callback.ts ~ 42');
 		return data;
 	} catch (e) {
 		console.error(e);

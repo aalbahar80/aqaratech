@@ -1,6 +1,5 @@
 //  Login endpoint
 import { getRedirectUri } from '$lib/config/auth_config';
-import { logger } from '$lib/config/logger';
 import type { RequestHandler } from '@sveltejs/kit';
 import { v4 } from 'uuid';
 
@@ -24,7 +23,7 @@ export const get: RequestHandler = (request) => {
 		audience,
 	});
 	const url = `${auth0Url}?${decodeURIComponent(query.toString())}`;
-	logger.debug('📜 login.ts 26 url:', url);
+	console.log('📜 login.ts 26 url:', url);
 	return {
 		status: 302,
 		headers: {
