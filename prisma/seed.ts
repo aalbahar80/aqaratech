@@ -1,13 +1,15 @@
+//@ts-nocheck
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
 
 import * as fakerAll from '@faker-js/faker';
-import pkg, { type Prisma } from '@prisma/client';
 import * as util from 'util';
+// import prisma from '../src/lib/server/prismaClient';
+import pkg, { type Prisma } from '@prisma/client';
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient({
-	log: [{ level: 'query', emit: 'event' }, 'info'],
+	log: [{ level: 'query', emit: 'event' }, 'info', 'warn', 'error'],
 	errorFormat: 'pretty',
 });
 prisma.$on('query', (e) => {
@@ -20,7 +22,8 @@ faker.locale = 'ar';
 const createdAt = () => faker.date.past(4);
 const updatedAt = () => faker.date.past(4);
 
-const fakeTenant = (): Prisma.TenantCreateInput => ({
+const fakeTenant = () => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	firstName: faker.name.firstName(),
@@ -32,15 +35,10 @@ const fakeTenant = (): Prisma.TenantCreateInput => ({
 	email: faker.internet.email(),
 	dob: faker.date.past(),
 	phone: faker.phone.phoneNumber('1#######'),
-	leases: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeLease,
-		),
-	},
 });
 
-const fakeUnit = (): Prisma.UnitCreateInput => ({
+const fakeUnit = (propertyId: string) => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	floor: faker.datatype.number({ min: 1, max: 10 }).toString(),
@@ -52,36 +50,22 @@ const fakeUnit = (): Prisma.UnitCreateInput => ({
 	type: ['apartment', 'store', 'basement', 'storage'][
 		Math.floor(Math.random() * 4)
 	],
-	expenses: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeExpense,
-		),
-	},
+	propertyId,
 });
 
-const fakeProperty = (): Prisma.PropertyCreateInput => ({
+const fakeProperty = (clientId: string) => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	area: faker.address.cityName(),
 	block: faker.datatype.number({ min: 1, max: 13 }).toString(),
 	street: faker.address.streetName(),
 	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	units: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 8 }) },
-			fakeUnit,
-		),
-	},
-	expenses: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeExpense,
-		),
-	},
+	clientId,
 });
 
-const fakeClient = (): Prisma.ClientCreateInput => ({
+const fakeClient = () => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	firstName: faker.name.firstName(),
@@ -92,21 +76,10 @@ const fakeClient = (): Prisma.ClientCreateInput => ({
 		.toString(),
 	email: faker.internet.email(),
 	phone: faker.phone.phoneNumber('1#######'),
-	properties: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeProperty,
-		),
-	},
-	expenses: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeExpense,
-		),
-	},
 });
 
-const fakeTransaction = (): Prisma.TransactionCreateInput => ({
+const fakeTransaction = (leaseId: string) => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
@@ -114,9 +87,14 @@ const fakeTransaction = (): Prisma.TransactionCreateInput => ({
 	dueDate: faker.date.future(1),
 	isPaid: faker.datatype.boolean(),
 	receiptUrl: faker.image.lorempicsum.imageUrl(),
+	leaseId,
 });
 
-const fakeLease = (): Prisma.LeaseCreateInput => ({
+const fakeLease = (
+	tenantId: string,
+	unitId: string,
+): Prisma.LeaseCreateInput => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	startDate: faker.date.past(4),
@@ -124,12 +102,12 @@ const fakeLease = (): Prisma.LeaseCreateInput => ({
 	deposit: +faker.finance.amount(100, 3000, 0),
 	monthlyRent: +faker.finance.amount(100, 3000, 0),
 	license: faker.company.bs(),
-	transactions: {
-		create: Array.from({ length: 12 }, fakeTransaction),
-	},
+	tenantId,
+	unitId,
 });
 
-const fakeExpense = (): Prisma.ExpenseCreateInput => ({
+const fakeExpense = () => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
@@ -138,65 +116,118 @@ const fakeExpense = (): Prisma.ExpenseCreateInput => ({
 	postDate: faker.date.past(4),
 });
 
-const fakeMaintenanceOrder = (): Prisma.MaintenanceOrderCreateInput => ({
+const fakeMaintenanceOrder = () => ({
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	completedAt: faker.date.future(1),
 	title: faker.lorem.words(4),
 	description: faker.lorem.sentences(),
-	expenses: {
-		create: Array.from(
-			{ length: faker.datatype.number({ min: 0, max: 4 }) },
-			fakeExpense,
-		),
-	},
 });
 
-type Data<T extends (...args: any) => any> = Parameters<T>[0]['data'];
-
-async function creator<T extends (...args: any) => any>({
-	name,
-	count,
-	dataFaker,
-	prismaCall,
-}: {
-	name: string;
-	count: number;
-	prismaCall: T;
-	dataFaker: Data<T>;
-}): Promise<void> {
-	const fakeData = Array.from({ length: count }, dataFaker);
-	for (const [i, v] of fakeData.entries()) {
-		await prismaCall({
-			data: v,
-		});
-		console.log(i + 1, `Created a ${name}`);
-	}
-	console.info(`Done creating ${fakeData.length} ${name}`);
-}
-
 async function main() {
-	await creator<typeof prisma.client.create>({
-		name: 'client',
-		count: 1,
-		prismaCall: prisma.client.create,
-		dataFaker: fakeClient,
+	const clients = Array.from({ length: 2 }, fakeClient);
+	const properties = clients.flatMap((client) =>
+		Array.from({ length: faker.datatype.number({ min: 0, max: 7 }) }, () =>
+			fakeProperty(client.id),
+		),
+	);
+	const units = properties.flatMap((property) =>
+		Array.from({ length: faker.datatype.number({ min: 0, max: 15 }) }, () =>
+			fakeUnit(property.id),
+		),
+	);
+	const tenants = Array.from({ length: 1000 }, fakeTenant);
+
+	const leases = tenants.flatMap((tenant) =>
+		Array.from({ length: faker.datatype.number({ min: 0, max: 5 }) }, () =>
+			fakeLease(tenant.id, units[faker.datatype.number(units.length - 1)].id),
+		),
+	);
+
+	const transactions = leases.flatMap((lease) =>
+		Array.from({ length: 12 }, () => fakeTransaction(lease.id)),
+	);
+
+	const maintenanceOrders = Array.from({ length: 100 }, () => {
+		const mo = fakeMaintenanceOrder();
+		// add either a client or a property or a unit
+		const random = faker.datatype.number({ min: 0, max: 2 });
+		if (random === 0) {
+			mo.clientId = clients[faker.datatype.number(clients.length - 1)].id;
+		}
+		if (random === 1) {
+			mo.propertyId =
+				properties[faker.datatype.number(properties.length - 1)].id;
+		}
+		if (random === 2) {
+			mo.unitId = units[faker.datatype.number(units.length - 1)].id;
+		}
+		return mo;
 	});
 
-	await creator<typeof prisma.tenant.create>({
-		name: 'tenant',
-		count: 1,
-		prismaCall: prisma.tenant.create,
-		dataFaker: fakeTenant,
+	const expenses = Array.from({ length: 100 }, () => {
+		const mo = fakeExpense();
+		// assign to either a client or a property or a unit
+		const random = faker.datatype.number({ min: 0, max: 2 });
+		if (random === 0) {
+			mo.clientId = clients[faker.datatype.number(clients.length - 1)].id;
+		}
+		if (random === 1) {
+			mo.propertyId =
+				properties[faker.datatype.number(properties.length - 1)].id;
+		}
+		if (random === 2) {
+			mo.unitId = units[faker.datatype.number(units.length - 1)].id;
+		}
+		return mo;
 	});
 
-	await creator<typeof prisma.maintenanceOrder.create>({
-		name: 'maintenance order',
-		count: 1,
-		prismaCall: prisma.maintenanceOrder.create,
-		//@ts-ignore
-		dataFaker: fakeMaintenanceOrder,
-	});
+	// console.log(
+	// 	util.inspect(
+	// 		{
+	// 			clients,
+	// 			properties,
+	// 			units,
+	// 			tenants,
+	// 			leases,
+	// 			transactions,
+	// 			maintenanceOrders,
+	// 			expenses,
+	// 		},
+	// 		{ showHidden: false, depth: null, colors: true },
+	// 	),
+	// );
+
+	// make the calls to the database
+	try {
+		await prisma.client.createMany({
+			data: clients,
+		});
+		await prisma.property.createMany({
+			data: properties,
+		});
+		await prisma.unit.createMany({
+			data: units,
+		});
+		await prisma.tenant.createMany({
+			data: tenants,
+		});
+		await prisma.lease.createMany({
+			data: leases,
+		});
+		await prisma.transaction.createMany({
+			data: transactions,
+		});
+		await prisma.maintenanceOrder.createMany({
+			data: maintenanceOrders,
+		});
+		await prisma.expense.createMany({
+			data: expenses,
+		});
+	} catch (e) {
+		console.error(e);
+	}
 }
 
 main()
