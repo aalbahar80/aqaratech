@@ -90,10 +90,7 @@ const fakeTransaction = (leaseId: string) => ({
 	leaseId,
 });
 
-const fakeLease = (
-	tenantId: string,
-	unitId: string,
-): Prisma.LeaseCreateInput => ({
+const fakeLease = (tenantId: string, unitId: string) => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
@@ -125,23 +122,46 @@ const fakeMaintenanceOrder = () => ({
 	description: faker.lorem.sentences(),
 });
 
+const cleanupDatabase = async (): Promise<void> => {
+	await prisma.maintenanceOrder.deleteMany({});
+	await prisma.expense.deleteMany({});
+	await prisma.transaction.deleteMany({});
+	await prisma.lease.deleteMany({});
+	await prisma.tenant.deleteMany({});
+	await prisma.unit.deleteMany({});
+	await prisma.property.deleteMany({});
+	await prisma.client.deleteMany({});
+};
+
 async function main() {
-	const clients = Array.from({ length: 2 }, fakeClient);
+	const clientCount = 15;
+	const propertyMax = 7;
+	const unitMax = 15;
+	const tenantCount = 500;
+	const leaseMax = 5;
+	const moCount = 100;
+	const expenseCount = 100;
+
+	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
-		Array.from({ length: faker.datatype.number({ min: 0, max: 7 }) }, () =>
-			fakeProperty(client.id),
+		Array.from(
+			{ length: faker.datatype.number({ min: 0, max: propertyMax }) },
+			() => fakeProperty(client.id),
 		),
 	);
 	const units = properties.flatMap((property) =>
-		Array.from({ length: faker.datatype.number({ min: 0, max: 15 }) }, () =>
-			fakeUnit(property.id),
+		Array.from(
+			{ length: faker.datatype.number({ min: 0, max: unitMax }) },
+			() => fakeUnit(property.id),
 		),
 	);
-	const tenants = Array.from({ length: 1000 }, fakeTenant);
+	const tenants = Array.from({ length: tenantCount }, fakeTenant);
 
 	const leases = tenants.flatMap((tenant) =>
-		Array.from({ length: faker.datatype.number({ min: 0, max: 5 }) }, () =>
-			fakeLease(tenant.id, units[faker.datatype.number(units.length - 1)].id),
+		Array.from(
+			{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
+			() =>
+				fakeLease(tenant.id, units[faker.datatype.number(units.length - 1)].id),
 		),
 	);
 
@@ -149,38 +169,39 @@ async function main() {
 		Array.from({ length: 12 }, () => fakeTransaction(lease.id)),
 	);
 
-	const maintenanceOrders = Array.from({ length: 100 }, () => {
+	const maintenanceOrders = Array.from({ length: moCount }, () => {
 		const mo = fakeMaintenanceOrder();
 		// add either a client or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
-			mo.clientId = clients[faker.datatype.number(clients.length - 1)].id;
+			mo['clientId'] = clients[faker.datatype.number(clients.length - 1)].id;
 		}
 		if (random === 1) {
-			mo.propertyId =
+			mo['propertyId'] =
 				properties[faker.datatype.number(properties.length - 1)].id;
 		}
 		if (random === 2) {
-			mo.unitId = units[faker.datatype.number(units.length - 1)].id;
+			mo['unitId'] = units[faker.datatype.number(units.length - 1)].id;
 		}
 		return mo;
 	});
 
-	const expenses = Array.from({ length: 100 }, () => {
-		const mo = fakeExpense();
+	const expenses = Array.from({ length: expenseCount }, () => {
+		const expense = fakeExpense();
 		// assign to either a client or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
-			mo.clientId = clients[faker.datatype.number(clients.length - 1)].id;
+			expense['clientId'] =
+				clients[faker.datatype.number(clients.length - 1)].id;
 		}
 		if (random === 1) {
-			mo.propertyId =
+			expense['propertyId'] =
 				properties[faker.datatype.number(properties.length - 1)].id;
 		}
 		if (random === 2) {
-			mo.unitId = units[faker.datatype.number(units.length - 1)].id;
+			expense['unitId'] = units[faker.datatype.number(units.length - 1)].id;
 		}
-		return mo;
+		return expense;
 	});
 
 	// console.log(
@@ -199,32 +220,41 @@ async function main() {
 	// 	),
 	// );
 
-	// make the calls to the database
 	try {
+		// TODO add a NODE_ENV check to only run this in development
+		// await cleanupDatabase();
 		await prisma.client.createMany({
 			data: clients,
 		});
+		console.log('clients created');
 		await prisma.property.createMany({
 			data: properties,
 		});
+		console.log('properties created');
 		await prisma.unit.createMany({
 			data: units,
 		});
+		console.log('units created');
 		await prisma.tenant.createMany({
 			data: tenants,
 		});
+		console.log('tenants created');
 		await prisma.lease.createMany({
 			data: leases,
 		});
+		console.log('leases created');
 		await prisma.transaction.createMany({
 			data: transactions,
 		});
+		console.log('transactions created');
 		await prisma.maintenanceOrder.createMany({
 			data: maintenanceOrders,
 		});
+		console.log('maintenance orders created');
 		await prisma.expense.createMany({
 			data: expenses,
 		});
+		console.log('expenses created');
 	} catch (e) {
 		console.error(e);
 	}
