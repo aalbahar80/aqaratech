@@ -1,5 +1,3 @@
-import { logger } from '$lib/config/logger';
-
 const config = {
 	domain: 'dev-eehvhdp2.eu.auth0.com',
 	clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
@@ -17,7 +15,7 @@ export const getRedirectUri = (url: URL) => {
 			base = import.meta.env.VITE_TARGET_URL;
 		} else {
 			const err = new Error('VITE_TARGET_URL is not defined');
-			logger.error(err);
+			console.error(err);
 			throw err;
 		}
 	}
