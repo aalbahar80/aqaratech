@@ -33,7 +33,7 @@
 			>
 				Lease
 			</h2>
-			{#if lease.endDate > new Date()}
+			{#if lease.end > new Date()}
 				<span
 					class="inline-flex h-8 items-center rounded-md bg-indigo-100 px-2.5 py-0.5 text-sm font-medium text-indigo-800"
 				>
@@ -57,7 +57,7 @@
 					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 					aria-hidden="true"
 				/>
-				Expiry: {formatDistance(lease.endDate, new Date(), {
+				Expiry: {formatDistance(lease.end, new Date(), {
 					addSuffix: true,
 				})}
 			</div>

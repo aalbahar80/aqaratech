@@ -33,7 +33,7 @@
 
 		<ul class="divide-y divide-gray-200">
 			{#each leases as lease, idx (lease.id)}
-				<!-- {@const expired = daysLeftFromISO(lease.endDate) < 0} -->
+				<!-- {@const expired = daysLeftFromISO(lease.end) < 0} -->
 				{@const expired = idx % 2 === 0}
 				{@const expiredClass = expired
 					? 'text-red-800 bg-red-100'
@@ -75,8 +75,8 @@
 										aria-hidden="true"
 									/>
 									<p>
-										Expiry: <time dateTime={lease.endDate.toISOString()}
-											>{formatDistance(lease.endDate, new Date(), {
+										Expiry: <time dateTime={lease.end.toISOString()}
+											>{formatDistance(lease.end, new Date(), {
 												addSuffix: true,
 											})}</time
 										>
@@ -87,10 +87,7 @@
 								<div class="mt-4 overflow-hidden rounded-full bg-gray-200">
 									<div
 										class="h-1 rounded-full bg-indigo-600"
-										style:width={`${getProgress(
-											lease.startDate,
-											lease.endDate,
-										)}%`}
+										style:width={`${getProgress(lease.start, lease.end)}%`}
 									/>
 								</div>
 							{/if}

@@ -27,6 +27,13 @@ export const schema = z.object({
 		})
 		.transform(trim)
 		.transform(falsyToNull),
+	dob: z
+		.preprocess((arg) => {
+			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+		}, z.date())
+		// use nullish or optional?
+		.or(z.literal(''))
+		.transform(falsyToNull),
 });
 
 type Client = InferMutationInput<'clients:save'>;
@@ -36,6 +43,7 @@ const defaultForm = (): Client => ({
 	phone: '',
 	email: '',
 	civilid: '',
+	dob: '',
 });
 
 const label: typeof definition['label'] = (item) =>

@@ -62,7 +62,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 	};
 	// remove null and undefined values from trxData
 	const trxData = Object.fromEntries(
-		Object.entries(trxDataRaw).filter(([key, value]) => value !== null),
+		Object.entries(trxDataRaw).filter(([, value]) => value !== null),
 	);
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
 	try {

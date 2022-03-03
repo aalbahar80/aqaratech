@@ -33,9 +33,10 @@
 
 	switch (name) {
 		case 'dob':
-		case 'endDate':
-		case 'startDate':
+		case 'end':
+		case 'start':
 		case 'dueDate':
+		case 'residencyEnd':
 			type = 'date';
 			if (value instanceof Date) {
 				// eslint-disable-next-line prefer-destructuring

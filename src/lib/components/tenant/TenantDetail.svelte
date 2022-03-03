@@ -19,6 +19,10 @@
 		['Phone', tenant.phone],
 		['Email', tenant.email],
 		['Civil id', tenant.civilid],
+		['Passport #', tenant.passportNum],
+		['Residency #', tenant.residencyNum],
+		['Residency Expiration', tenant.residencyEnd?.toLocaleDateString() ?? ''],
+		['Nationality', tenant.nationality],
 	];
 
 	const files: [string, string][] = [

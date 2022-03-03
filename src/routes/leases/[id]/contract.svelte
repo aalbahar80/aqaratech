@@ -7,25 +7,25 @@
 
 	const lease = $page.stuff.lease;
 
-	type Item = string | number | null | undefined;
-	type Fillable = {
-		contractDate: Item;
-		name: Item;
-		civilid: Item;
-		phone: Item;
-		tenantAddress: Item;
-		nationality: Item;
-		passport: Item;
-		visa: Item;
-		visaExpiration: Item;
-		rentNumber: Item;
-		rentWords: Item;
-		startDate: Item;
-		unitAddress: Item;
-		unitType: Item;
-		unitNumber: Item;
-		purpose: Item;
-	};
+	// type Item = string | number | null | undefined;
+	// type Fillable = {
+	// 	contractDate: Item;
+	// 	name: Item;
+	// 	civilid: Item;
+	// 	phone: Item;
+	// 	tenantAddress: Item;
+	// 	nationality: Item;
+	// 	passport: Item;
+	// 	visa: Item;
+	// 	visaExpiration: Item;
+	// 	rentNumber: Item;
+	// 	rentWords: Item;
+	// 	start: Item;
+	// 	unitAddress: Item;
+	// 	unitType: Item;
+	// 	unitNumber: Item;
+	// 	purpose: Item;
+	// };
 
 	const arabicLabels: Record<string, string> = {
 		name: 'الطرف الثاني',
@@ -38,7 +38,7 @@
 		visaExpiration: 'تاريخ انتهاء الاقامة',
 	};
 
-	const getContractData = (): Fillable => ({
+	const getContractData = () => ({
 		contractDate: new Date().toLocaleDateString(),
 		name: concatIfExists([
 			lease.tenant.firstName,
@@ -49,22 +49,22 @@
 		civilid: lease.tenant.civilid,
 		phone: lease.tenant.phone,
 		tenantAddress: '',
-		nationality: 'الجنسية',
-		passport: 'P001234567',
-		visa: 'V-334568',
-		visaExpiration: '2023-01-01',
+		nationality: lease.tenant.nationality,
+		passport: lease.tenant.passportNum,
+		residency: lease.tenant.residencyNum,
+		residencyEnd: lease.tenant.residencyEnd,
 		rentNumber: lease.monthlyRent.toLocaleString('en-KW', {
 			minimumFractionDigits: 3,
 		}),
 		rentWords: inWords(lease.monthlyRent),
-		startDate: lease.startDate.toLocaleDateString(),
+		start: lease.start.toLocaleDateString(),
 		unitAddress: entityDefinitions.properties.label(lease.unit.property),
 		unitNumber: lease.unit.unitNumber,
 		unitType: lease.unit.type,
 		purpose: lease.license,
 	});
 
-	let fillable: Fillable = getContractData();
+	let fillable = getContractData();
 </script>
 
 <ContractHeading id={lease.id} />
@@ -117,8 +117,8 @@
 		تدفع مقدما بدايه كل شهر ميلادي.
 	</p>
 	<p>
-		مدة العقد: سنه تبتدا من تاريخ {fillable.startDate} ويجدد تلقائيا عند انتهائه
-		لمدة مماثلة.
+		مدة العقد: سنه تبتدا من تاريخ {fillable.start} ويجدد تلقائيا عند انتهائه لمدة
+		مماثلة.
 	</p>
 	<br />
 

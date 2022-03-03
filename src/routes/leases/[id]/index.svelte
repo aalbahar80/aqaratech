@@ -12,8 +12,8 @@
 			'Tenant',
 			concatIfExists([lease.tenant?.firstName, lease.tenant?.lastName]),
 		],
-		['Start Date', format(lease.startDate, 'MMM dd, yy')],
-		['End Date', format(lease.endDate, 'MMM dd, yy')],
+		['Start Date', format(lease.start, 'MMM dd, yy')],
+		['End Date', format(lease.end, 'MMM dd, yy')],
 		[
 			'Monthly Rent',
 			lease.monthlyRent.toLocaleString('en-KW', {

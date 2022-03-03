@@ -27,6 +27,10 @@ export default trpc
 							phone: true,
 							dob: true,
 							email: true,
+							passportNum: true,
+							nationality: true,
+							residencyEnd: true,
+							residencyNum: true,
 						},
 					},
 					unit: {
@@ -54,7 +58,7 @@ export default trpc
 				},
 			});
 			if (lease) return lease;
-			throw new TRPCError({code: 'NOT_FOUND', message: 'Lease not found'});
+			throw new TRPCError({ code: 'NOT_FOUND', message: 'Lease not found' });
 		},
 	})
 	.query('basic', {
@@ -68,8 +72,8 @@ export default trpc
 					id: true,
 					monthlyRent: true,
 					deposit: true,
-					startDate: true,
-					endDate: true,
+					start: true,
+					end: true,
 					createdAt: true,
 					updatedAt: true,
 					tenantId: true,
@@ -101,8 +105,8 @@ export default trpc
 				},
 				select: {
 					id: true,
-					startDate: true,
-					endDate: true,
+					start: true,
+					end: true,
 					monthlyRent: true,
 				},
 			}),
@@ -123,8 +127,8 @@ export default trpc
 				},
 				select: {
 					id: true,
-					startDate: true,
-					endDate: true,
+					start: true,
+					end: true,
 					tenant: {
 						select: {
 							firstName: true,
