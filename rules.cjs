@@ -90,5 +90,6 @@ module.exports = {
         '@typescript-eslint/naming-convention': 'off',
         'no-underscore-dangle': 'off',
         'prettier/prettier': 'off',
+        "@typescript-eslint/no-unnecessary-condition": 2
     },
 };

@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { getMFUrl } from '$lib/services/myfatoorah';
 
-export const get: RequestHandler = async ({ request, url }) => {
+export const get: RequestHandler = async ({ url }) => {
 	const id = url.searchParams.get('id');
 	if (id) {
 		const mfUrl = await getMFUrl(id);

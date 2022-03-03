@@ -9,7 +9,6 @@ export const schema = z.object({
 		.string()
 		.min(1)
 		.transform(trim)
-		.transform(falsyToNull)
 		.refine((val) => val && val.length > 0),
 	bed: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
 	bath: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),

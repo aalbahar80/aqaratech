@@ -51,7 +51,8 @@ yarn run check
 yarn run check
 yarn run check:watch
 
-yarn eslint . --ext .ts,.svelte,.graphql
+yarn run eslint -c ./.eslintrc.cjs --ext .ts .
+yarn run eslint --ext .svelte .
 ```
 
 > graphql eslint linter not fully wired up. See eslint config file.

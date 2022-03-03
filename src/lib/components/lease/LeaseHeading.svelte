@@ -21,10 +21,10 @@
 	<div class="min-w-0 flex-1">
 		<BreadCrumb
 			crumbs={[
-				['clients', lease.unit?.property?.client?.id],
-				['properties', lease.unit?.property?.id],
-				['units', lease.unit?.id],
-				['tenants', lease.tenant?.id],
+				['clients', lease.unit.property.client.id],
+				['properties', lease.unit.property.id],
+				['units', lease.unit.id],
+				['tenants', lease.tenant.id],
 			]}
 		/>
 		<div class="mt-2 flex items-center space-x-8">
@@ -33,7 +33,7 @@
 			>
 				Lease
 			</h2>
-			{#if lease.endDate > new Date()}
+			{#if lease.end > new Date()}
 				<span
 					class="inline-flex h-8 items-center rounded-md bg-indigo-100 px-2.5 py-0.5 text-sm font-medium text-indigo-800"
 				>
@@ -57,7 +57,7 @@
 					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 					aria-hidden="true"
 				/>
-				Expiry: {formatDistance(lease.endDate, new Date(), {
+				Expiry: {formatDistance(lease.end, new Date(), {
 					addSuffix: true,
 				})}
 			</div>
@@ -67,7 +67,7 @@
 		<span class="sm:ml-3">
 			<a
 				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				href={`/leases/add?unitId=${lease.unit?.id}&tenantId=${lease.tenant?.id}&monthlyRent=${lease.monthlyRent}`}
+				href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
 			>
 				<Icon
 					src={Refresh}

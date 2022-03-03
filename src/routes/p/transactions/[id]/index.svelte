@@ -2,7 +2,6 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
-	import { getMFUrl } from '$lib/services/myfatoorah';
 	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Load } from '@sveltejs/kit';

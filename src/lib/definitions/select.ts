@@ -46,8 +46,8 @@ export type LeaseData = Prisma.LeaseGetPayload<typeof leaseData>;
 export const leaseData = Prisma.validator<Prisma.LeaseArgs>()({
 	select: {
 		id: true,
-		startDate: true,
-		endDate: true,
+		start: true,
+		end: true,
 		deposit: true,
 		monthlyRent: true,
 		createdAt: true,

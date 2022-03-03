@@ -17,7 +17,7 @@ module.exports = {
 				'./rules.cjs',
 			],
 			parserOptions: {
-				project: './tsconfig.json',
+				project: ['./tsconfig.json', './tsconfig.eslint.json'],
 			},
 			settings: {
 				'import/resolver': {

@@ -34,6 +34,16 @@ export const schema = z.object({
 		})
 		.transform(trim)
 		.transform(falsyToNull),
+	passportNum: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	residencyNum: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	nationality: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	residencyEnd: z
+		.preprocess((arg) => {
+			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+		}, z.date())
+		// use nullish or optional?
+		.or(z.literal(''))
+		.transform(falsyToNull),
 });
 
 type Tenant = InferMutationInput<'tenants:save'>;
@@ -44,6 +54,10 @@ const defaultForm = (): Tenant => ({
 	email: '',
 	civilid: '',
 	phone: '',
+	nationality: '',
+	passportNum: '',
+	residencyNum: '',
+	residencyEnd: '',
 });
 
 const label: typeof definition['label'] = (item) =>
