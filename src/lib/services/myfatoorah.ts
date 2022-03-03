@@ -1,7 +1,5 @@
 import { dev } from '$app/env';
-import { page } from '$app/stores';
 import trpc from '$lib/client/trpc';
-import { get } from 'svelte/store';
 
 interface MFResponse {
 	Data: {
@@ -32,13 +30,13 @@ export const getMFUrl = async (id: string): Promise<string> => {
 
 	console.log('fetching mf url');
 	const trx = await trpc.query('transactions:pay', id);
-	const tenant = trx?.lease?.tenant;
-	if (!trx || !tenant || !trx.amount) {
+	if (!trx) {
 		const err = new Error('Transaction or Tenant not found');
 		console.error(err);
 		throw err;
 	}
 
+	const { tenant } = trx.lease;
 	const name = [
 		tenant.firstName,
 		tenant.secondName,
@@ -57,16 +55,14 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		// CustomerEmail: 'dev.tester.2@mailthink.net',
 		CustomerEmail: tenant.email,
 		// TODO delete my phone number
-		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone?.slice(-8),
+		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone.slice(-8),
 		CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
 		// CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
 		// CallBackUrl: callbackUrl,
 	};
 	// remove null and undefined values from trxData
 	const trxData = Object.fromEntries(
-		Object.entries(trxDataRaw).filter(
-			([key, value]) => value !== null && value !== undefined,
-		),
+		Object.entries(trxDataRaw).filter(([key, value]) => value !== null),
 	);
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
 	try {

@@ -53,8 +53,8 @@ model Expense {
 
 model Lease {
   id           String        @id @default(uuid())
-  tenantId     String?
-  unitId       String?
+  tenantId     String
+  unitId       String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   startDate    DateTime
@@ -63,8 +63,8 @@ model Lease {
   deposit      Float         @default(0)
   isSigned     Boolean       @default(true)
   license      String?
-  tenant       Tenant?       @relation(fields: [tenantId], references: [id])
-  unit         Unit?         @relation(fields: [unitId], references: [id])
+  tenant       Tenant        @relation(fields: [tenantId], references: [id])
+  unit         Unit          @relation(fields: [unitId], references: [id])
   transactions Transaction[]
 
   @@index([tenantId])
@@ -73,7 +73,7 @@ model Lease {
 
 model Listing {
   id           String    @id @default(uuid())
-  unitId       String?
+  unitId       String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   isActive     Boolean?
@@ -81,7 +81,7 @@ model Listing {
   leaseLength  String?
   title        String?
   description  String?   @db.Text
-  unit         Unit?     @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  unit         Unit      @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([unitId])
 }
@@ -112,7 +112,7 @@ model MaintenanceOrder {
 
 model Property {
   id                String             @id @default(uuid())
-  clientId          String?
+  clientId          String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   area              String?
@@ -120,7 +120,7 @@ model Property {
   avenue            String?
   street            String?
   number            String?
-  client            Client?            @relation(fields: [clientId], references: [id])
+  client            Client             @relation(fields: [clientId], references: [id])
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
@@ -154,14 +154,14 @@ model Transaction {
   memo       String?  @db.Text
   receiptUrl String?
   leaseId    String
-  lease      Lease?   @relation(fields: [leaseId], references: [id])
+  lease      Lease    @relation(fields: [leaseId], references: [id])
 
   @@index([leaseId])
 }
 
 model Unit {
   id                String             @id @default(uuid())
-  propertyId        String?
+  propertyId        String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   unitNumber        String?
@@ -172,7 +172,7 @@ model Unit {
   marketRent        Float?
   type              String?
   usage             String?
-  property          Property?          @relation(fields: [propertyId], references: [id])
+  property          Property           @relation(fields: [propertyId], references: [id])
   expenses          Expense[]
   leases            Lease[]
   listings          Listing[]

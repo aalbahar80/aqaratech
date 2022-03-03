@@ -38,7 +38,7 @@ const defaultForm = (): Lease => ({
 
 const label: typeof definition['label'] = (item) =>
 	`${item.startDate.toLocaleDateString()} - ${item.endDate.toLocaleDateString()}  ${concatIfExists(
-		[item.tenant?.firstName, item.tenant?.lastName],
+		[item.tenant.firstName, item.tenant.lastName],
 	)}`;
 
 const definition: EntityDefinition<'leases'> = {

@@ -4,6 +4,7 @@
 	import { inWords } from '$lib/utils/currency';
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { page } from '$app/stores';
+
 	const lease = $page.stuff.lease;
 
 	type Item = string | number | null | undefined;
@@ -37,33 +38,31 @@
 		visaExpiration: 'تاريخ انتهاء الاقامة',
 	};
 
-	const getContractData = (): Fillable => {
-		return {
-			contractDate: new Date().toLocaleDateString(),
-			name: concatIfExists([
-				lease.tenant?.firstName,
-				lease.tenant?.secondName,
-				lease.tenant?.thirdName,
-				lease.tenant?.lastName,
-			]),
-			civilid: lease.tenant?.civilid,
-			phone: lease.tenant?.phone,
-			tenantAddress: '',
-			nationality: 'الجنسية',
-			passport: 'P001234567',
-			visa: 'V-334568',
-			visaExpiration: '2023-01-01',
-			rentNumber: lease.monthlyRent.toLocaleString('en-KW', {
-				minimumFractionDigits: 3,
-			}),
-			rentWords: inWords(lease.monthlyRent),
-			startDate: lease.startDate.toLocaleDateString(),
-			unitAddress: entityDefinitions.properties.label(lease.unit?.property!),
-			unitNumber: lease.unit?.unitNumber,
-			unitType: lease.unit?.type,
-			purpose: lease.license,
-		};
-	};
+	const getContractData = (): Fillable => ({
+		contractDate: new Date().toLocaleDateString(),
+		name: concatIfExists([
+			lease.tenant.firstName,
+			lease.tenant.secondName,
+			lease.tenant.thirdName,
+			lease.tenant.lastName,
+		]),
+		civilid: lease.tenant.civilid,
+		phone: lease.tenant.phone,
+		tenantAddress: '',
+		nationality: 'الجنسية',
+		passport: 'P001234567',
+		visa: 'V-334568',
+		visaExpiration: '2023-01-01',
+		rentNumber: lease.monthlyRent.toLocaleString('en-KW', {
+			minimumFractionDigits: 3,
+		}),
+		rentWords: inWords(lease.monthlyRent),
+		startDate: lease.startDate.toLocaleDateString(),
+		unitAddress: entityDefinitions.properties.label(lease.unit.property),
+		unitNumber: lease.unit.unitNumber,
+		unitType: lease.unit.type,
+		purpose: lease.license,
+	});
 
 	let fillable: Fillable = getContractData();
 </script>
