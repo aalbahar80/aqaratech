@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "strict": true,
+    },
+    "include": [
+        "svelte.config.js",
+        "prisma/seed.ts"
+    ]
+}
