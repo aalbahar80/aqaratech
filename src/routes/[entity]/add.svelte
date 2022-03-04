@@ -6,7 +6,7 @@
 		singular,
 		type Entity,
 	} from '$lib/definitions/index';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './add';
 
 	export const load: Load = ({ params, url }) => {
 		const { entity } = params;
