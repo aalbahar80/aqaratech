@@ -48,21 +48,19 @@ export const getMFUrl = async (id: string): Promise<string> => {
 
 	// const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback`;
 
-	const trxDataRaw = {
+	const trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
 		CustomerName: name,
 		CustomerEmail: 'dev.tester.2@mailthink.net',
+		// CustomerEmail: tenant.email,
 		// TODO delete my phone number
 		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone.slice(-8),
 		CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
 		// CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
 		// CallBackUrl: callbackUrl,
 	};
-	// remove null and undefined values from trxData
-	const trxData = Object.fromEntries(
-		Object.entries(trxDataRaw).filter(([, value]) => value !== null),
-	);
+
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
 	try {
 		const res = await fetch(`${mfBaseUrl}/v2/ExecutePayment`, {
@@ -78,7 +76,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		});
 
 		const data = (await res.json()) as MFResponse;
-		console.log({ data }, 'myfatoorah.ts ~ 85');
+		console.log(data, 'myfatoorah.ts ~ 85');
 		return data.Data.PaymentURL;
 	} catch (err) {
 		console.error(err);
