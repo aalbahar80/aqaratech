@@ -47,12 +47,14 @@ Before creating a production version of your app, install an [adapter](https://k
 yarn run check
 ```
 
-```bash
+```zsh
 yarn run check
 yarn run check:watch
 
 yarn run eslint -c ./.eslintrc.cjs --ext .ts .
 yarn run eslint --ext .svelte .
+# combine outputs:
+{ yarn run eslint -c ./.eslintrc.cjs --ext .ts . & yarn run eslint --ext .svelte .; }
 ```
 
 > graphql eslint linter not fully wired up. See eslint config file.
