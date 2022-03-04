@@ -5,27 +5,7 @@
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import { page } from '$app/stores';
 
-	const lease = $page.stuff.lease;
-
-	// type Item = string | number | null | undefined;
-	// type Fillable = {
-	// 	contractDate: Item;
-	// 	name: Item;
-	// 	civilid: Item;
-	// 	phone: Item;
-	// 	tenantAddress: Item;
-	// 	nationality: Item;
-	// 	passport: Item;
-	// 	visa: Item;
-	// 	visaExpiration: Item;
-	// 	rentNumber: Item;
-	// 	rentWords: Item;
-	// 	start: Item;
-	// 	unitAddress: Item;
-	// 	unitType: Item;
-	// 	unitNumber: Item;
-	// 	purpose: Item;
-	// };
+	const { lease } = $page.stuff;
 
 	const arabicLabels: Record<string, string> = {
 		name: 'الطرف الثاني',
@@ -38,7 +18,7 @@
 		visaExpiration: 'تاريخ انتهاء الاقامة',
 	};
 
-	const getContractData = () => ({
+	const fillable = {
 		contractDate: new Date().toLocaleDateString(),
 		name: concatIfExists([
 			lease.tenant.firstName,
@@ -62,9 +42,7 @@
 		unitNumber: lease.unit.unitNumber,
 		unitType: lease.unit.type,
 		purpose: lease.license,
-	});
-
-	let fillable = getContractData();
+	};
 </script>
 
 <ContractHeading id={lease.id} />
@@ -75,7 +53,7 @@
 >
 	<p>
 		التاريخ:
-		<span dir="ltr">{fillable.contractDate?.toLocaleString()}</span>
+		<span dir="ltr">{fillable.contractDate}</span>
 	</p>
 	<h3 class="text-center">عقد ايجار</h3>
 	<p class="m-1">الطرف الأول: شركة الطائف الكبرى العقارية</p>
