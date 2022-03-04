@@ -4,31 +4,22 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Load } from '@sveltejs/kit';
 	import format from 'date-fns/format';
+	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;
 
-		// check if transaction exists
 		const trx = await trpc.query('transactions:read', id);
 
-		if (!trx) {
-			return {
-				status: 404,
-				body: 'Transaction not found',
-			};
-		}
-
 		let mfUrl = '';
-		if (!trx?.isPaid) {
+		if (!trx.isPaid) {
 			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
 			const data = await res.json();
 			mfUrl = data.mfUrl;
 		}
 
 		return {
-			status: 200,
 			props: {
 				trx,
 				mfUrl,
