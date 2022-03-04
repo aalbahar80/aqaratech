@@ -10,7 +10,7 @@ export default trpc
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
-			const lease = await prismaClient.lease.findUnique({
+			const data = await prismaClient.lease.findUnique({
 				where: {
 					id,
 				},
@@ -57,7 +57,7 @@ export default trpc
 					},
 				},
 			});
-			if (lease) return lease;
+			if (data) return data;
 			throw new TRPCError({ code: 'NOT_FOUND', message: 'Lease not found' });
 		},
 	})
