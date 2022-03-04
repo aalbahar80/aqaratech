@@ -30,8 +30,8 @@
 				Lease Contract
 			</h2>
 			<p class="max-w-md text-sm text-gray-500">
-				This contract has been automatically generated. If necessary, you can
-				edit it before printing.
+				This contract has been automatically generated. You may edit the text
+				before printing.
 			</p>
 		</div>
 		<div class="mt-4 flex flex-shrink-0 md:mt-0 md:ml-4">
