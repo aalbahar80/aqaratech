@@ -67,7 +67,7 @@ export default trpc
 		input: z.object({
 			id: z.string().uuid(),
 			isPaid: z.boolean(),
-			receiptUrl: z.optional(z.string().transform(trim).transform(falsyToNull)),
+			receiptUrl: z.string().transform(trim).transform(falsyToNull).nullish(),
 		}),
 		resolve: async ({ input }) =>
 			prismaClient.transaction.update({

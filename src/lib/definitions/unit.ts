@@ -13,9 +13,9 @@ export const schema = z.object({
 	bed: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
 	bath: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
 	size: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
-	floor: z.optional(z.string().transform(trim).transform(falsyToNull)),
-	usage: z.optional(z.string().transform(trim).transform(falsyToNull)),
-	type: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	floor: z.string().transform(trim).transform(falsyToNull).nullish(),
+	usage: z.string().transform(trim).transform(falsyToNull).nullish(),
+	type: z.string().transform(trim).transform(falsyToNull).nullish(),
 	marketRent: z
 		.number()
 		.nonnegative()

@@ -10,10 +10,10 @@ export const schema = z.object({
 	}, z.date()),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
-	memo: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	memo: z.string().transform(trim).transform(falsyToNull).nullish(),
 	leaseId: z.string().uuid(),
 	// TODO use z.url()?
-	receiptUrl: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	receiptUrl: z.string().transform(trim).transform(falsyToNull).nullish(),
 });
 
 type Transaction = InferMutationInput<'transactions:save'>;

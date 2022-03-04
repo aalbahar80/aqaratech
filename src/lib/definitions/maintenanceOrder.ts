@@ -6,7 +6,7 @@ import type { EntityDefinition } from '.';
 export const schema = z.object({
 	id: z.string().uuid().optional(),
 	title: z.string().transform(trim).transform(falsyToNull),
-	description: z.optional(z.string().transform(trim).transform(falsyToNull)),
+	description: z.string().transform(trim).transform(falsyToNull).nullish(),
 	status: z.enum(['pending', 'completed', 'cancelled']).nullish(),
 	completedAt: z
 		.preprocess((arg) => {
