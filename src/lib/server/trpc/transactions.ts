@@ -3,18 +3,25 @@ import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export default trpc
 	.router()
 	.query('read', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.transaction.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.transaction.findUnique({
 				where: {
 					id,
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({
+				code: 'NOT_FOUND',
+				message: 'Transaction not found',
+			});
+		},
 	})
 	.query('basic', {
 		input: z.string(),
