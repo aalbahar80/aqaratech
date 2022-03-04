@@ -19,12 +19,20 @@
 	type Transaction = NonNullable<InferQueryOutput<'transactions:read'>>;
 	export let trx: Transaction;
 	export let mfUrl: string;
+	let isLoading = false;
 
 	const handlePayment = async () => {
-		const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
-		const data = await res.json();
-		mfUrl = data.mfUrl;
-		await goto(mfUrl);
+		isLoading = true;
+		try {
+			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
+			const data = await res.json();
+			mfUrl = data.mfUrl;
+			isLoading = false;
+			goto(mfUrl).catch(console.error);
+		} catch (err) {
+			console.error(err);
+			isLoading = false;
+		}
 	};
 
 	const details: [string, string | boolean | null][] = [
