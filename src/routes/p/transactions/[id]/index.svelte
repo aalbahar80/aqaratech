@@ -65,11 +65,11 @@
 		</span>
 	</div>
 	<DetailsPane {details} />
-	<div class="mt-4 flex self-end md:mt-0 md:mr-4">
+	<div class="mt-4 flex self-end md:mt-0">
 		{#if trx.isPaid}
 			<button
 				type="button"
-				class="mr-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-white  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 			>
 				<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
 				Invoice
@@ -77,7 +77,7 @@
 		{:else}
 			<a
 				href={mfUrl}
-				class="mr-3 inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 			>
 				<Icon
 					src={CreditCard}
