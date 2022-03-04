@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { goto } from '$app/navigation';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -7,24 +8,10 @@
 	import format from 'date-fns/format';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params, fetch }) => {
+	export const load: Load = async ({ params }) => {
 		const { id } = params;
-
 		const trx = await trpc.query('transactions:read', id);
-
-		let mfUrl = '';
-		if (!trx.isPaid) {
-			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
-			const data = await res.json();
-			mfUrl = data.mfUrl;
-		}
-
-		return {
-			props: {
-				trx,
-				mfUrl,
-			},
-		};
+		return { props: { trx } };
 	};
 </script>
 
@@ -32,6 +19,13 @@
 	type Transaction = NonNullable<InferQueryOutput<'transactions:read'>>;
 	export let trx: Transaction;
 	export let mfUrl: string;
+
+	const handlePayment = async () => {
+		const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
+		const data = await res.json();
+		mfUrl = data.mfUrl;
+		await goto(mfUrl);
+	};
 
 	const details: [string, string | boolean | null][] = [
 		[
@@ -75,8 +69,8 @@
 				Invoice
 			</button>
 		{:else}
-			<a
-				href={mfUrl}
+			<button
+				on:click={handlePayment}
 				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 			>
 				<Icon
@@ -86,7 +80,7 @@
 					aria-hidden="true"
 				/>
 				Pay
-			</a>
+			</button>
 		{/if}
 	</div>
 	<pre>{JSON.stringify(trx, null, 2)}</pre>
