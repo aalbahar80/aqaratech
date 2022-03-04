@@ -52,8 +52,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
 		CustomerName: name,
-		// CustomerEmail: 'dev.tester.2@mailthink.net',
-		CustomerEmail: tenant.email,
+		CustomerEmail: 'dev.tester.2@mailthink.net',
 		// TODO delete my phone number
 		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone.slice(-8),
 		CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
