@@ -8,6 +8,7 @@
 	import { addToast } from '$lib/stores/toast';
 	import { CurrencyDollar, Speakerphone, Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
+	import format from 'date-fns/format';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
@@ -17,8 +18,26 @@
 </script>
 
 <script lang="ts">
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
+
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
+
+	let details: [string, string | null][];
+	$: details = [
+		['Due Date', format(trx.dueDate, 'MMM dd, yy')],
+		[
+			'Amount',
+			trx.amount.toLocaleString('en-KW', {
+				style: 'currency',
+				currency: 'KWD',
+				maximumFractionDigits: 0,
+			}),
+		],
+		['receipt', trx.receiptUrl],
+		['Created on', format(trx.createdAt, 'MMM dd, yy')],
+		['Last updated', trx.updatedAt.toLocaleString()],
+	];
 
 	let isOpen = false;
 	const openModal = () => {
@@ -29,11 +48,11 @@
 	const toggleIsPaid = async () => {
 		loading = true;
 		try {
-			await trpc.mutation('transactions:update', {
+			const updated = await trpc.mutation('transactions:update', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
 			});
-			trx.isPaid = !trx.isPaid;
+			trx = { ...trx, ...updated };
 		} catch (e) {
 			console.error(e);
 			addToast({
@@ -65,7 +84,7 @@
 					Transaction
 				</h2>
 				<span
-					class="not-paid inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
+					class="inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
 					class:paid={trx.isPaid}
 					class:not-paid={!trx.isPaid}
 				>
@@ -99,6 +118,7 @@
 			/>
 		</div>
 	</div>
+	<DetailsPane {details} />
 	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
 
