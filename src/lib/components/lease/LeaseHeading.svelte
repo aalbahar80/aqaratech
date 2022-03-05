@@ -1,11 +1,12 @@
 <script lang="ts">
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import Button from '$components/Button.svelte';
+	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { Calendar, DocumentText, Refresh, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
-	import BreadCrumb from '../breadcrumbs/BreadCrumb.svelte';
-	import ButtonDropdown from '../ButtonDropdown.svelte';
 
 	type Lease = InferQueryOutput<'leases:read'>;
 	export let lease: Lease;
@@ -63,51 +64,35 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-5 flex lg:mt-0 lg:ml-4">
-		<span class="sm:ml-3">
-			<a
-				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
-			>
-				<Icon
-					src={Refresh}
-					class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-					aria-hidden="true"
-				/>
-				Renew
-			</a>
-		</span>
+	<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
+		<Button
+			icon={Refresh}
+			text="Renew"
+			as="a"
+			href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
+		/>
 
-		<span class="ml-3">
-			<a
-				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				href={`/leases/${lease.id}/contract`}
-			>
-				<Icon
-					src={DocumentText}
-					class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-					aria-hidden="true"
-				/>
-				Contract
-			</a>
-		</span>
+		<Button
+			icon={DocumentText}
+			text="Contract"
+			as="a"
+			href={`/leases/${lease.id}/contract`}
+		/>
 
-		<span class="ml-3">
-			<ButtonDropdown
-				defaultOption={{
-					label: 'Edit',
-					href: `/leases/${lease.id}/edit`,
-					type: 'link',
-				}}
-				options={[
-					{
-						label: 'Delete',
-						icon: Trash,
-						onClick: openModal,
-						type: 'button',
-					},
-				]}
-			/>
-		</span>
+		<ButtonDropdown
+			defaultOption={{
+				label: 'Edit',
+				href: `/leases/${lease.id}/edit`,
+				type: 'link',
+			}}
+			options={[
+				{
+					label: 'Delete',
+					icon: Trash,
+					onClick: openModal,
+					type: 'button',
+				},
+			]}
+		/>
 	</div>
 </div>
