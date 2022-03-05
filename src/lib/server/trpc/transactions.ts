@@ -70,13 +70,13 @@ export default trpc
 				include: { lease: { include: { tenant: true } } },
 			}),
 	})
-	.mutation('markPaid', {
+	.mutation('updatePaid', {
 		input: z.object({
 			id: z.string().uuid(),
 			isPaid: z.boolean(),
 			receiptUrl: z.string().transform(trim).transform(falsyToNull).nullish(),
 		}),
-		resolve: async ({ input }) =>
+		resolve: ({ input }) =>
 			prismaClient.transaction.update({
 				where: { id: input.id },
 				data: {
@@ -96,19 +96,6 @@ export default trpc
 				: prismaClient.transaction.create({
 						data,
 				  }),
-	})
-	.mutation('update', {
-		input: z.object({
-			id: z.string().uuid(),
-			isPaid: z.boolean(),
-		}),
-		resolve: ({ input: { id, ...data } }) =>
-			prismaClient.transaction.update({
-				where: { id },
-				data: {
-					isPaid: data.isPaid,
-				},
-			}),
 	})
 	.mutation('delete', {
 		input: z.string(),

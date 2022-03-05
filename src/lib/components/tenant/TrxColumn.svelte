@@ -35,9 +35,9 @@
 		12,
 	));
 
-	const updatePaidStatus = async (id: string, isPaid: boolean) => {
+	const togglePaid = async (id: string, isPaid: boolean) => {
 		try {
-			await trpc.mutation('transactions:update', {
+			const updated = await trpc.mutation('transactions:updatePaid', {
 				id,
 				isPaid,
 			});
@@ -46,7 +46,7 @@
 				transaction.id === id
 					? {
 							...transaction,
-							isPaid,
+							...updated,
 					  }
 					: transaction,
 			);
@@ -249,7 +249,7 @@
 													icon: X,
 													label: 'Mark as unpaid',
 													onClick: async () => {
-														await updatePaidStatus(transaction.id, false);
+														await togglePaid(transaction.id, false);
 													},
 											  }
 											: {
@@ -257,7 +257,7 @@
 													icon: Check,
 													label: 'Mark as paid',
 													onClick: async () => {
-														await updatePaidStatus(transaction.id, true);
+														await togglePaid(transaction.id, true);
 													},
 											  },
 									]}

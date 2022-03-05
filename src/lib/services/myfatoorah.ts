@@ -123,7 +123,7 @@ export const markAsPaid = async (trxId: string) => {
 		'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
 
 	try {
-		const result = await trpc.mutation('transactions:markPaid', {
+		const result = await trpc.mutation('transactions:updatePaid', {
 			id: trxId,
 			receiptUrl: invoiceUrl,
 			isPaid: true,

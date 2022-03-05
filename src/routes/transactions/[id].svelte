@@ -48,7 +48,7 @@
 	const toggleIsPaid = async () => {
 		loading = true;
 		try {
-			const updated = await trpc.mutation('transactions:update', {
+			const updated = await trpc.mutation('transactions:updatePaid', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
 			});
