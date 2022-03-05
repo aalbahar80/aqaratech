@@ -10,9 +10,9 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 
 export const dateFormat = (date: Date): string => format(date, 'MMM dd, yy');
 
-export const kwdFormat = (amount: number): string =>
-	amount.toLocaleString('en-KW', {
+export const kwdFormat = (amount: number | null): string =>
+	amount?.toLocaleString('en-KW', {
 		style: 'currency',
 		currency: 'KWD',
 		maximumFractionDigits: 0,
-	});
+	}) ?? '-';
