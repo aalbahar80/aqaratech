@@ -81,6 +81,7 @@
 			<Button
 				class="h-12 w-32"
 				on:click={handlePayment}
+				{loading}
 				disabled={loading}
 				icon={CreditCard}
 				text="Pay"
