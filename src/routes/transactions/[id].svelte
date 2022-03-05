@@ -1,5 +1,11 @@
 <script lang="ts" context="module">
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import ButtonDropdown from '$components/ButtonDropdown.svelte';
+	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import Button from '$lib/components/Button.svelte';
+	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import { Check, Speakerphone, Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -10,12 +16,6 @@
 </script>
 
 <script lang="ts">
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { Trash } from '@steeze-ui/heroicons';
-	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import ButtonDropdown from '$components/ButtonDropdown.svelte';
-
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
 
@@ -51,33 +51,13 @@
 			</div>
 		</div>
 		<div class="mt-5 flex lg:mt-0 lg:ml-4">
-			<!-- <span class="sm:ml-3">
-        <a
-          class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
-        >
-          <Icon
-            src={Refresh}
-            class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-            aria-hidden="true"
-          />
-          Renew
-        </a>
-      </span>
-   -->
-			<!-- <span class="ml-3">
-        <a
-          class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          href={`/leases/${lease.id}/contract`}
-        >
-          <Icon
-            src={DocumentText}
-            class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-            aria-hidden="true"
-          />
-          Contract
-        </a>
-      </span> -->
+			<span class="sm:ml-3">
+				<Button icon={Speakerphone} text="Send Reminder" solid />
+			</span>
+
+			<span class="ml-3">
+				<Button icon={Check} text="Mark as paid" solid />
+			</span>
 
 			<span class="ml-3">
 				<ButtonDropdown
