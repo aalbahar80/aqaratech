@@ -63,10 +63,32 @@
 
 	$: balance = transactions.reduce((total, transaction) => {
 		if (!transaction.isPaid) {
-			total = total - transaction.amount;
+			total -= transaction.amount;
 		}
 		return total;
 	}, 0);
+
+	const copyUrl = (id: string) => {
+		navigator.clipboard
+			.writeText(`${$page.url.host}/p/transactions/${id}`)
+			.catch((e) => {
+				console.error(e);
+				addToast({
+					duration: 3000,
+					props: {
+						kind: 'error',
+						title: 'Unable to copy link',
+					},
+				});
+			});
+		addToast({
+			duration: 3000,
+			props: {
+				kind: 'success',
+				title: 'Copied link to clipboard!',
+			},
+		});
+	};
 </script>
 
 <section>
@@ -209,16 +231,7 @@
 											icon: ClipboardCopy,
 											label: 'Copy payment URL',
 											onClick: () => {
-												navigator.clipboard.writeText(
-													`${$page.url.host}/p/transactions/${transaction.id}`,
-												);
-												addToast({
-													duration: 3000,
-													props: {
-														title: 'Copied to clipboard!',
-														kind: 'success',
-													},
-												});
+												copyUrl(transaction.id);
 											},
 										},
 										{
@@ -235,16 +248,16 @@
 													type: 'button',
 													icon: X,
 													label: 'Mark as unpaid',
-													onClick: () => {
-														updatePaidStatus(transaction.id, false);
+													onClick: async () => {
+														await updatePaidStatus(transaction.id, false);
 													},
 											  }
 											: {
 													type: 'button',
 													icon: Check,
 													label: 'Mark as paid',
-													onClick: () => {
-														updatePaidStatus(transaction.id, true);
+													onClick: async () => {
+														await updatePaidStatus(transaction.id, true);
 													},
 											  },
 									]}
