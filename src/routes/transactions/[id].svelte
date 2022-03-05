@@ -50,32 +50,24 @@
 				</span>
 			</div>
 		</div>
-		<div class="mt-5 flex lg:mt-0 lg:ml-4">
-			<span class="sm:ml-3">
-				<Button icon={Speakerphone} text="Send Reminder" solid />
-			</span>
-
-			<span class="ml-3">
-				<Button icon={Check} text="Mark as paid" solid />
-			</span>
-
-			<span class="ml-3">
-				<ButtonDropdown
-					defaultOption={{
-						label: 'Edit',
-						href: `/transactions/${trx.id}/edit`,
-						type: 'link',
-					}}
-					options={[
-						{
-							label: 'Delete',
-							icon: Trash,
-							onClick: openModal,
-							type: 'button',
-						},
-					]}
-				/>
-			</span>
+		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
+			<Button icon={Speakerphone} text="Send Reminder" solid />
+			<Button icon={Check} text="Mark as paid" solid />
+			<ButtonDropdown
+				defaultOption={{
+					label: 'Edit',
+					href: `/transactions/${trx.id}/edit`,
+					type: 'link',
+				}}
+				options={[
+					{
+						label: 'Delete',
+						icon: Trash,
+						onClick: openModal,
+						type: 'button',
+					},
+				]}
+			/>
 		</div>
 	</div>
 </div>
