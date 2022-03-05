@@ -60,7 +60,7 @@
 			</h2>
 		</div>
 		<span
-			class="not-paid inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
+			class="inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
 			class:paid={trx.isPaid}
 			class:not-paid={!trx.isPaid}
 		>
