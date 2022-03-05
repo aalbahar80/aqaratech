@@ -5,7 +5,8 @@
 	import trpc from '$lib/client/trpc';
 	import Button from '$lib/components/Button.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { Check, Speakerphone, Trash } from '@steeze-ui/heroicons';
+	import { addToast } from '$lib/stores/toast';
+	import { CurrencyDollar, Speakerphone, Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -22,6 +23,28 @@
 	let isOpen = false;
 	const openModal = () => {
 		isOpen = true;
+	};
+
+	let loading = false;
+	const toggleIsPaid = async () => {
+		loading = true;
+		try {
+			await trpc.mutation('transactions:update', {
+				id: trx.id,
+				isPaid: !trx.isPaid,
+			});
+			trx.isPaid = !trx.isPaid;
+		} catch (e) {
+			console.error(e);
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Unable to update status',
+				},
+			});
+		} finally {
+			loading = false;
+		}
 	};
 </script>
 
@@ -52,7 +75,13 @@
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
 			<Button icon={Speakerphone} text="Send Reminder" solid />
-			<Button icon={Check} text="Mark as paid" solid />
+			<Button
+				icon={CurrencyDollar}
+				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
+				solid
+				on:click={toggleIsPaid}
+				{loading}
+			/>
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
@@ -70,6 +99,7 @@
 			/>
 		</div>
 	</div>
+	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
 
 <style lang="postcss">
