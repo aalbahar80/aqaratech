@@ -1,5 +1,4 @@
 import type { InferMutationInput } from '$lib/client/trpc';
-import { concatIfExists } from '$lib/utils/table-utils';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
