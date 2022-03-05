@@ -7,6 +7,7 @@
 	export let disabled: boolean = false;
 	export let text: string = '';
 	export let icon: IconSource | undefined = undefined;
+	export let solid: boolean = false;
 </script>
 
 <button type="submit" {disabled} class={$$props.class} on:click>
@@ -14,8 +15,8 @@
 	{#if icon}
 		<Icon
 			src={icon}
-			theme="solid"
-			class="-ml-1 mr-2 h-5 w-5"
+			theme={solid ? 'solid' : 'default'}
+			class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
 			aria-hidden="true"
 		/>
 	{/if}
