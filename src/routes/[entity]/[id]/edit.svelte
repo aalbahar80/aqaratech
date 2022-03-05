@@ -14,10 +14,11 @@
 			};
 		}
 		const data = await trpc.query(`${entity}:basic`, id);
-		if (data)
+		if (data) {
 			return {
 				props: { data, entity },
 			};
+		}
 		return { error: 'id not found', status: 404 };
 	};
 </script>

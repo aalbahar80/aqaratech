@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { areas } from '$lib/config/constants';
-	import assertNever from '$lib/utils/table-utils';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fuse from 'fuse.js';
@@ -10,7 +9,7 @@
 
 	export let name: string = '';
 	export let value: string | Date | null | number = '';
-	export let invalid = false;
+	export let invalid: boolean = false;
 	export let invalidText: string = '';
 
 	let type: string = 'text';
@@ -25,7 +24,7 @@
 		label: `${area[0]} | ${area[1]}`,
 	}));
 	const fuse = new Fuse(areas, options);
-	const loadOptions = async (q: string) =>
+	const loadOptions = (q: string) =>
 		fuse.search(q).map((result) => ({
 			value: result.item[1],
 			label: `${result.item[0]} | ${result.item[1]}`,
@@ -53,7 +52,8 @@
 				value = value.substring(0, value.length - 1);
 				break;
 			}
-			assertNever(value, "This case shouldn't happen");
+			console.warn(value, "This case shouldn't happen");
+			break;
 
 		case 'monthlyRent':
 		case 'marketRent':
