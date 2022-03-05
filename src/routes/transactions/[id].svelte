@@ -34,7 +34,7 @@
 				maximumFractionDigits: 0,
 			}),
 		],
-		['receipt', trx.receiptUrl],
+		['Receipt', trx.receiptUrl],
 		['Created on', format(trx.createdAt, 'MMM dd, yy')],
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];
@@ -53,6 +53,12 @@
 				isPaid: !trx.isPaid,
 			});
 			trx = { ...trx, ...updated };
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Success',
+				},
+			});
 		} catch (e) {
 			console.error(e);
 			addToast({
@@ -119,7 +125,6 @@
 		</div>
 	</div>
 	<DetailsPane {details} />
-	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
 
 <style lang="postcss">
