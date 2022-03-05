@@ -92,7 +92,7 @@ const prismaClient =
 	// @ts-ignore
 	global.prismaClient ||
 	new PrismaClient({
-		log: [{ level: 'query', emit: 'event' }, 'info'],
+		log: [{ level: 'query', emit: 'event' }, 'info', 'warn', 'error'],
 		errorFormat: 'pretty',
 	});
 
@@ -100,7 +100,7 @@ const prismaClient =
 if (process.env.NODE_ENV === 'development') global.prismaClient = prismaClient;
 
 // @ts-ignore
-// prismaClient.$on('query', (e) => {
-// 	console.log(e);
-// });
+prismaClient.$on('query', (e) => {
+	console.log(e);
+});
 export default prismaClient as PrismaClientType;
