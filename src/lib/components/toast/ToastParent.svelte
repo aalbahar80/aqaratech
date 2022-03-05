@@ -6,10 +6,10 @@
 </script>
 
 {#if $toasts}
-	<ul class="top-18 fixed right-4 z-50 flex flex-col items-end gap-y-4">
+	<ul class="fixed bottom-10 right-4 z-50 flex flex-col items-end gap-y-4">
 		{#each $toasts as { id, props } (id)}
 			<li
-				in:fly={{ duration: 300, y: -200 }}
+				in:fly={{ duration: 300, y: 200 }}
 				out:fly={{ duration: 100, x: 100 }}
 				animate:flip={{ duration: 200 }}
 			>
