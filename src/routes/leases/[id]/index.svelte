@@ -6,12 +6,9 @@
 	import { concatIfExists } from '$lib/utils/table-utils';
 	import format from 'date-fns/format';
 
-	const lease = $page.stuff.lease;
+	const { lease } = $page.stuff;
 	const details: [string, string | null][] = [
-		[
-			'Tenant',
-			concatIfExists([lease.tenant?.firstName, lease.tenant?.lastName]),
-		],
+		['Tenant', concatIfExists([lease.tenant.firstName, lease.tenant.lastName])],
 		['Start Date', format(lease.start, 'MMM dd, yy')],
 		['End Date', format(lease.end, 'MMM dd, yy')],
 		[
