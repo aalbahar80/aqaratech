@@ -15,7 +15,7 @@
 {#if as === 'button' || disabled}
 	<button type="submit" {disabled} class={$$props.class} on:click>
 		<Spinner {loading} />
-		{#if icon}
+		{#if icon && !loading}
 			<Icon
 				src={icon}
 				theme={solid ? 'solid' : 'default'}
