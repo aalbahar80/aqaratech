@@ -92,7 +92,6 @@
 </div>
 
 <style lang="postcss">
-	/* your styles go here */
 	.paid {
 		@apply bg-green-100 text-green-800;
 	}
