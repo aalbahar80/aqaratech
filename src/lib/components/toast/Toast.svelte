@@ -12,7 +12,7 @@
 	class:bg-green-100={kind === 'success'}
 	class:bg-red-100={kind === 'error'}
 >
-	<div class="flex">
+	<div class="flex items-center">
 		<div class="flex-shrink-0">
 			<div
 				class="toast__icon-container"
@@ -28,7 +28,7 @@
 		</div>
 		<div class="ml-3">
 			<p
-				class="text-sm font-medium"
+				class="text-lg font-medium"
 				class:text-red-800={kind === 'error'}
 				class:text-green-800={kind === 'success'}
 			>
@@ -68,9 +68,9 @@
 		@apply inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2;
 	}
 	.toast__button--error {
-		@apply bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50;
+		@apply bg-red-100 p-1.5 text-red-500 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50;
 	}
 	.toast__button--success {
-		@apply bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50;
+		@apply bg-green-100 p-1.5 text-green-500 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50;
 	}
 </style>
