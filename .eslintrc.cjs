@@ -47,18 +47,21 @@ module.exports = {
 				// // 'plugin:import/typescript',
 				// // 'plugin:jest/recommended',
 				// // 'plugin:jest/style',
-				'prettier', // needs to be last
 				'./rules.cjs',
 			],
 			rules: {
 				// // https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
-				'import/no-mutable-exports': 'off',
 				'no-undef': 'off',
 				'import/first': 'off',
+				'import/no-duplicates': 'off',
+				'import/no-mutable-exports': 'off',
 				'import/no-unresolved': 'off',
+				'import/prefer-default-export': 'off',
 				'no-undef-init': 'off',
 				'@typescript-eslint/no-unsafe-argument': 'off',
 				'@typescript-eslint/restrict-template-expressions': 'off',
+				'@typescript-eslint/indent': ["error", "tab"],
+				'no-tabs': 'off',
 			},
 			parserOptions: {
 				project: ['./tsconfig.json'],
