@@ -15,6 +15,13 @@ export default trpc
 				where: {
 					id,
 				},
+				include: {
+					lease: {
+						include: {
+							tenant: true,
+						},
+					},
+				},
 			});
 			if (data) return data;
 			throw new TRPCError({
