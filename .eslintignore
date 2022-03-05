@@ -25,3 +25,5 @@ cypress/
 
 # prisma/seed.ts
 src/lib/utils/currency.ts
+
+readme.md
