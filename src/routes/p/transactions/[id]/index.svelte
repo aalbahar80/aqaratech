@@ -36,7 +36,7 @@
 		}
 	};
 
-	const details: [string, string | boolean | null][] = [
+	const details: [string, string | null][] = [
 		[
 			'Amount',
 			trx.amount.toLocaleString('en-KW', {
@@ -51,7 +51,7 @@
 </script>
 
 <div class="mx-auto flex max-w-2xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<div class="md:flex md:items-center md:justify-between">
+	<div class="flex items-center md:justify-between">
 		<div class="min-w-0 flex-1">
 			<h2
 				class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
@@ -60,7 +60,7 @@
 			</h2>
 		</div>
 		<span
-			class="not-paid inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-sm font-medium"
+			class="not-paid inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
 			class:paid={trx.isPaid}
 			class:not-paid={!trx.isPaid}
 		>
