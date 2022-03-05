@@ -28,7 +28,7 @@
 		</div>
 		<div class="ml-3">
 			<p
-				class="text-lg font-medium"
+				class="text-sm font-medium lg:text-lg"
 				class:text-red-800={kind === 'error'}
 				class:text-green-800={kind === 'success'}
 			>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { getProgress } from '$lib/utils/date-utils';
+	import { getProgress } from '$lib/utils/common';
 	import { Calendar, Home, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import formatDistance from 'date-fns/formatDistance';

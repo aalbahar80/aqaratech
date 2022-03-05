@@ -1,4 +1,4 @@
-import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
+import { format, differenceInCalendarDays } from 'date-fns';
 
 export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const total = differenceInCalendarDays(end, start);
@@ -7,3 +7,12 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const rounded = Math.round(result);
 	return rounded;
 };
+
+export const dateFormat = (date: Date): string => format(date, 'MMM dd, yy');
+
+export const kwdFormat = (amount: number): string =>
+	amount.toLocaleString('en-KW', {
+		style: 'currency',
+		currency: 'KWD',
+		maximumFractionDigits: 0,
+	});

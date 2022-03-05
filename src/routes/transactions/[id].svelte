@@ -4,11 +4,12 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import Button from '$lib/components/Button.svelte';
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { addToast } from '$lib/stores/toast';
+	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { CurrencyDollar, Speakerphone, Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
-	import format from 'date-fns/format';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
@@ -18,24 +19,15 @@
 </script>
 
 <script lang="ts">
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
-
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
 
 	let details: [string, string | null][];
 	$: details = [
-		['Due Date', format(trx.dueDate, 'MMM dd, yy')],
-		[
-			'Amount',
-			trx.amount.toLocaleString('en-KW', {
-				style: 'currency',
-				currency: 'KWD',
-				maximumFractionDigits: 0,
-			}),
-		],
+		['Due Date', dateFormat(trx.dueDate)],
+		['Amount', kwdFormat(trx.amount)],
 		['Receipt', trx.receiptUrl],
-		['Created on', format(trx.createdAt, 'MMM dd, yy')],
+		['Created on', dateFormat(trx.createdAt)],
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];
 

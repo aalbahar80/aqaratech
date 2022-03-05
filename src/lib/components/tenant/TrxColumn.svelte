@@ -4,6 +4,7 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
+	import { dateFormat } from '$lib/utils/common';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
 		Cash,
@@ -15,7 +16,6 @@
 		X,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import format from 'date-fns/format';
 	import { scale } from 'svelte/transition';
 
 	type Transactions = NonNullable<
@@ -145,7 +145,7 @@
 										{'KWD'}
 									</span>
 									<time dateTime={transaction.dueDate.toISOString()}
-										>{format(transaction.createdAt, 'MMM dd, yy')}</time
+										>{dateFormat(transaction.createdAt)}</time
 									>
 								</span>
 							</span>
@@ -214,7 +214,7 @@
 							</td>
 							<td>
 								<time dateTime={transaction.dueDate.toISOString()}
-									>{format(transaction.createdAt, 'MMM dd, yy')}</time
+									>{dateFormat(transaction.createdAt)}</time
 								>
 							</td>
 							<td class="text-center">

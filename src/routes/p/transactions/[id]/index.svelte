@@ -4,9 +4,9 @@
 	import trpc from '$lib/client/trpc';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import format from 'date-fns/format';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
@@ -37,16 +37,9 @@
 	};
 
 	const details: [string, string | null][] = [
-		[
-			'Amount',
-			trx.amount.toLocaleString('en-KW', {
-				style: 'currency',
-				currency: 'KWD',
-				maximumFractionDigits: 0,
-			}),
-		],
+		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo],
-		['Due on', format(trx.dueDate, 'MMM dd, yy')],
+		['Due on', dateFormat(trx.dueDate)],
 	];
 </script>
 

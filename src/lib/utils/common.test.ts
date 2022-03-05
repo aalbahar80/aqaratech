@@ -1,4 +1,4 @@
-import * as utils from './date-utils';
+import * as utils from './common';
 // @ponicode
 describe('utils.getProgress', () => {
 	test('it assumes completion on end date', () => {
