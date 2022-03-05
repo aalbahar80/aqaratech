@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -19,19 +20,19 @@
 	type Transaction = NonNullable<InferQueryOutput<'transactions:read'>>;
 	export let trx: Transaction;
 	export let mfUrl: string;
-	let isLoading = false;
+	let loading = false;
 
 	const handlePayment = async () => {
-		isLoading = true;
+		loading = true;
 		try {
 			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
 			const data = await res.json();
 			mfUrl = data.mfUrl;
-			isLoading = false;
 			goto(mfUrl).catch(console.error);
 		} catch (err) {
 			console.error(err);
-			isLoading = false;
+		} finally {
+			loading = false;
 		}
 	};
 
@@ -77,18 +78,13 @@
 				Invoice
 			</button>
 		{:else}
-			<button
+			<Button
+				class="h-12 w-32"
 				on:click={handlePayment}
-				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			>
-				<Icon
-					src={CreditCard}
-					theme="solid"
-					class="-ml-1 mr-2 h-5 w-5"
-					aria-hidden="true"
-				/>
-				Pay
-			</button>
+				disabled={loading}
+				icon={CreditCard}
+				text="Pay"
+			/>
 		{/if}
 	</div>
 	<pre>{JSON.stringify(trx, null, 2)}</pre>
