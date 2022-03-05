@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
-			<Button icon={Speakerphone} text="Send Reminder" solid />
+			<Button icon={Speakerphone} text="Send Reminder" solid disabled />
 			<Button
 				icon={CurrencyDollar}
 				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
