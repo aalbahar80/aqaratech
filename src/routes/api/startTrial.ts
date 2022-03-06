@@ -4,19 +4,13 @@ import { Connection, WorkflowClient } from '@temporalio/client';
 import { SubscriptionWorkflow } from '../../../temporal/lib/workflows.js';
 
 export const get: RequestHandler = async () => {
-	// if (!true) {
-	// 	return {
-	// 		status: 200,
-	// 		body: {
-	// 			abc: 'def',
-	// 		},
-	// 	};
-	// }
+	console.log('getting');
+	const connection = new Connection({
+        // address: 'http://localhost:8080',
+    });
+	const client = new WorkflowClient(connection.service);
 
-	// const connection = new Connection({});
-	// const client = new WorkflowClient(connection.service);
-
-    const client = new WorkflowClient();
+	// const client = new WorkflowClient({});
 
 	const customer = {
 		id: 'abcdef',
@@ -28,7 +22,7 @@ export const get: RequestHandler = async () => {
 		billingPeriodCharge: 399,
 	};
 	// console.log('getting');
-	const handle = await client.start(SubscriptionWorkflow, {
+	const handle = await client.execute(SubscriptionWorkflow, {
 		workflowId: 'business-meaningful-id',
 		taskQueue: 'hello-world', // must match the taskQueue polled by Worker above
 		args: [customer],
@@ -37,6 +31,9 @@ export const get: RequestHandler = async () => {
 	//
 	return {
 		status: 200,
-		body: { workflowId: handle.workflowId},
+        body: {
+            abc: 'def',
+        }
+		// body: { workflowId: handle.workflowId},
 	};
 };

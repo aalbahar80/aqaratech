@@ -11,10 +11,14 @@ async function run() {
 		`./workflows${path.extname(import.meta.url)}`,
 		import.meta.url,
 	).pathname;
+    console.log('workflows path below --------------------')
+    console.log(workflowsPath);
+
 	const worker = await Worker.create({
 		workflowsPath, // passed to Webpack for bundling
 		activities, // directly imported in Node.js
 		taskQueue: 'hello-world',
 	});
+
 	await worker.run();
 }
