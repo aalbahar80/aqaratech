@@ -72,7 +72,8 @@ module.exports = {
 				extraFileExtensions: ['.svelte'],
 			},
 			settings: {
-				'svelte3/typescript': true,
+				'svelte3/typescript': () => require('typescript'),
+				// 'svelte3/typescript': true,
 			}
 		},
 		{
