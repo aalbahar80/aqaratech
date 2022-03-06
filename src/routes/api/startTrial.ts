@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { Connection, WorkflowClient } from '@temporalio/client';
-// import { SubscriptionWorkflow } from '../../../temporal/src/workflows';
-import { SubscriptionWorkflow } from '../../../temporal/lib/workflows.js';
+import { SubscriptionWorkflow } from '../../../temporal/src/workflows';
+// import { SubscriptionWorkflow } from '../../../temporal/lib/workflows.js';
 
 export const get: RequestHandler = async () => {
 	console.log('getting');
