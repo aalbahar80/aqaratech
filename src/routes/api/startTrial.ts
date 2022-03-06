@@ -7,6 +7,7 @@ export const get: RequestHandler = async () => {
 	console.log('getting');
 	const connection = new Connection({
         // address: 'http://localhost:8080',
+		address: 'caddy.letand.be'
     });
 	const client = new WorkflowClient(connection.service);
 
@@ -22,7 +23,7 @@ export const get: RequestHandler = async () => {
 		billingPeriodCharge: 399,
 	};
 	// console.log('getting');
-	const handle = await client.execute(SubscriptionWorkflow, {
+	const handle = await client.start(SubscriptionWorkflow, {
 		workflowId: 'business-meaningful-id',
 		taskQueue: 'hello-world', // must match the taskQueue polled by Worker above
 		args: [customer],
