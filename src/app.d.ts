@@ -7,7 +7,7 @@ declare namespace App {
 		userId: string;
 	}
 
-	interface Platform {}
+	// interface Platform {}
 
 	interface Session {
 		hasura: string;
