@@ -38,8 +38,6 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         'dot-notation': 'off',
         'class-methods-use-this': 'off',
-        'react/require-default-props': [0],
-        'react/function-component-definition': 'off',
         '@typescript-eslint/naming-convention': [
             'error',
             {
@@ -90,6 +88,6 @@ module.exports = {
         '@typescript-eslint/naming-convention': 'off',
         'no-underscore-dangle': 'off',
         'prettier/prettier': 'off',
-        "@typescript-eslint/no-unnecessary-condition": 2
+        // "@typescript-eslint/no-unnecessary-condition": 2
     },
 };
