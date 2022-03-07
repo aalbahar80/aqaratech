@@ -24,6 +24,19 @@ const connection = new Connection({
 const client = new WorkflowClient(connection.service);
 ```
 
+Temporal worker:
+```bash
+git clone this repo
+install node 16.4.0 using nvm
+install yarn
+# in repo directory:
+# checkout temporal branch (optional)
+# find way to not need yarn run build
+yarn install
+yarn run build:temporal # in watch mode?
+yarn run start:worker
+```
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
