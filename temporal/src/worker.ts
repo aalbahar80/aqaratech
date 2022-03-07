@@ -1,4 +1,4 @@
-import { Worker } from '@temporalio/worker';
+import { Worker, Core } from '@temporalio/worker';
 import * as activities from './activities.js';
 import { URL } from 'url';
 import path from 'path';
@@ -6,6 +6,11 @@ import path from 'path';
 run().catch((err) => console.log(err));
 
 async function run() {
+	await Core.install({
+		serverOptions: {
+		address: 'temporal.letand.be',
+		},
+	});
 	// Support running both complied code and ts-node/esm loader
 	const workflowsPath = new URL(
 		`./workflows${path.extname(import.meta.url)}`,

@@ -6,6 +6,23 @@
 - `docker-compose up`
 2. yarn run dev:temporal
 3. yarn run start:workflow
+Both temporal workers and clients need to connect to a Temporal server.
+https://docs.temporal.io/docs/typescript/nextjs-tutorial#deploying-your-temporal--nextjs-app
+- Workers can connect like so:
+```ts
+await Core.install({
+	serverOptions: {
+	address: 'temporal.letand.be',
+	},
+});
+```
+- Clients can connect like so:
+```ts
+const connection = new Connection({
+	address: 'temporal.letand.be',
+});
+const client = new WorkflowClient(connection.service);
+```
 
 # create-svelte
 

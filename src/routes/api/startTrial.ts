@@ -6,12 +6,9 @@ import { SubscriptionWorkflow } from '../../../temporal/src/workflows';
 export const get: RequestHandler = async () => {
 	console.log('getting');
 	const connection = new Connection({
-        // address: 'http://localhost:8080',
-		address: 'caddy.letand.be'
+		address: 'temporal.letand.be',
     });
 	const client = new WorkflowClient(connection.service);
-
-	// const client = new WorkflowClient({});
 
 	const customer = {
 		id: 'abcdef',
