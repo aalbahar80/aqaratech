@@ -32,6 +32,8 @@ install yarn
 # in repo directory:
 # checkout temporal branch (optional)
 # find way to not need yarn run build
+# set env_var
+export DATABASE_URL=VALUE
 yarn install
 yarn run build:temporal # in watch mode?
 yarn run start:worker
