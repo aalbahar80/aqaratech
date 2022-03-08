@@ -2,7 +2,7 @@
 	"css.validate": false,
 	"files.exclude": {
 		// this interfering with imports?
-		// "**/node_modules/": true
+		"**/node_modules/": true
 	},
 	"html.autoCreateQuotes": false,
 	"editor.suggest.showWords": false,

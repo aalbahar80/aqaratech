@@ -6,5 +6,6 @@
         "svelte.config.js",
         "prisma/seed.ts",
         "jest-setup.ts",
+        "vitest.config.ts"
     ],
 }
