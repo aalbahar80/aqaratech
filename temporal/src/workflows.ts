@@ -35,10 +35,14 @@ export async function leaseWF(leaseId: string) {
 	if (!lease) throw new Error('Lease not found');
 
 	let isCancelled = false;
-	setHandler(cancelLease, () => void (isCancelled = true));
+	setHandler(cancelLease, () => {
+		isCancelled = true;
+	});
 
 	let isNotify = true;
-	setHandler(setIsNotify, (newIsNotify) => void (isNotify = newIsNotify));
+	setHandler(setIsNotify, (newIsNotify) => {
+		isNotify = newIsNotify;
+	});
 
 	// get the date of the 1st day of the next month
 	const start = new Date(lease.start);
@@ -56,7 +60,10 @@ export async function leaseWF(leaseId: string) {
 			break;
 		} else {
 			const dueDate = addMonths(nextMonth, bp);
-			await acts.generateTransaction(lease, dueDate.toISOString());
+			const trx = await acts.generateTransaction(lease, dueDate.toISOString());
+			if (isNotify) {
+				await acts.notify(trx.id);
+			}
 		}
 	}
 }
