@@ -106,7 +106,9 @@ yarn run eslint -c ./temporal/.eslintrc.cjs --ignore-path ./temporal/.eslintigno
 > graphql eslint linter not fully wired up. See eslint config file.
 
 ```bash
-yarn run jest
+yarn run vitest run
+yarn run vitest watch
+yarn run jest # old
 ```
 
 ## Run in external terminal

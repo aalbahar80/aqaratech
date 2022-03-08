@@ -82,7 +82,8 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "tslib": "^2.3.1",
     "typescript": "^4.6.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "vitest": "^0.6.0"
   },
   "type": "module",
   "dependencies": {
