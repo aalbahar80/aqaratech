@@ -98,6 +98,9 @@ yarn run eslint -c ./.eslintrc.cjs --ext .svelte .
 
 # combine outputs:
 { yarn run eslint -c ./.eslintrc.cjs --ext .ts . & yarn run eslint -c ./.eslintrc.cjs --ext .svelte .; }
+
+# temporal
+yarn run eslint -c ./temporal/.eslintrc.cjs --ignore-path ./temporal/.eslintignore --ext .ts ./temporal
 ```
 
 > graphql eslint linter not fully wired up. See eslint config file.
