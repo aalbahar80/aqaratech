@@ -43,6 +43,7 @@
 		case 'dueDate':
 		case 'residencyEnd':
 		case 'firstPayment':
+		case 'completedAt':
 			type = 'date';
 			if (value instanceof Date) {
 				// eslint-disable-next-line prefer-destructuring
@@ -151,7 +152,7 @@
 						: name === 'shouldNotify'
 						? 'Enable to send payment reminders automatically.'
 						: name === 'isPaid'
-						? 'Whether this transaction is paid or not.'
+						? 'Whether this transaction has already been paid or not.'
 						: ''}
 				</SwitchDescription>
 			</span>
