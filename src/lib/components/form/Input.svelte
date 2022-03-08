@@ -110,7 +110,9 @@
 	{:else if type === 'select'}
 		<Select
 			id={name}
-			items={['pending', 'completed', 'cancelled']}
+			items={name === 'status'
+				? ['pending', 'completed', 'cancelled']
+				: ['sms', 'email']}
 			value={value ? { value, label: value } : null}
 			hasError={Boolean(invalidText)}
 			on:select
