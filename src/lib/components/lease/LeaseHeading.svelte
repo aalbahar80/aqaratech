@@ -87,6 +87,14 @@
 			}}
 			options={[
 				{
+					label: 'Activate',
+					icon: Refresh,
+					onClick: () => {
+						fetch('/api/startLease?leaseId=' + lease.id);
+					},
+					type: 'button',
+				},
+				{
 					label: 'Delete',
 					icon: Trash,
 					onClick: openModal,
