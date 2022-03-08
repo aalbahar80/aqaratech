@@ -90,7 +90,7 @@
 					label: 'Activate',
 					icon: Refresh,
 					onClick: () => {
-						fetch('/api/startLease?leaseId=' + lease.id);
+						fetch(`/leases/${lease.id}/activate`);
 					},
 					type: 'button',
 				},
