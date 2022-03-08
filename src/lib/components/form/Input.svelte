@@ -1,5 +1,11 @@
 <script lang="ts">
 	import { areas } from '$lib/config/constants';
+	import {
+		Switch,
+		SwitchDescription,
+		SwitchGroup,
+		SwitchLabel,
+	} from '@rgossiaux/svelte-headlessui';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fuse from 'fuse.js';
@@ -8,7 +14,7 @@
 	import Select from 'svelte-select';
 
 	export let name: string = '';
-	export let value: string | Date | null | number = '';
+	export let value: string | Date | null | number | boolean = '';
 	export let invalid: boolean = false;
 	export let invalidText: string = '';
 
@@ -85,17 +91,22 @@
 	}
 	const dispatch = createEventDispatcher();
 	onMount(() => {
-		// this creates the field in Felte's data store
+		// this creates the field in Felte's data store (non-native input elements)
 		dispatch('select', {
 			value,
 		});
 	});
+	function classes(...classes: string[]) {
+		return classes.filter(Boolean).join(' ');
+	}
 </script>
 
 <div>
-	<label for={name} class="text-sm font-medium text-gray-700">
-		{startCase(name)}
-	</label>
+	{#if type !== 'checkbox'}
+		<label for={name} class="text-sm font-medium text-gray-700">
+			{startCase(name)}
+		</label>
+	{/if}
 	{#if name === 'area'}
 		<Select
 			id={name}
@@ -119,16 +130,54 @@
 			on:clear
 		/>
 	{:else if type === 'checkbox'}
-		<span>
-			<input
-				class="rounded border-gray-300 ml-4 h-5 w-5 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0"
-				type="checkbox"
+		<SwitchGroup class="flex items-center justify-between">
+			<span class="flex flex-grow flex-col">
+				<SwitchLabel
+					as="span"
+					class="text-sm font-medium text-gray-700"
+					passive
+				>
+					{name === 'active'
+						? 'Active'
+						: name === 'shouldNotify'
+						? 'Auto payment reminders'
+						: name === 'isPaid'
+						? 'Paid?'
+						: ''}
+				</SwitchLabel>
+				<SwitchDescription as="span" class="text-sm text-gray-500">
+					{name === 'active'
+						? 'Active leases generate transactions automatically. You can activate later.'
+						: name === 'shouldNotify'
+						? 'Enable to send payment reminders automatically.'
+						: name === 'isPaid'
+						? 'Whether this transaction is paid or not.'
+						: ''}
+				</SwitchDescription>
+			</span>
+			<Switch
 				checked={!!value}
-				{name}
-				id={name}
-				class:form__input--invalid={invalid}
-			/>
-		</span>
+				let:checked
+				on:change={(e) => {
+					value = e.detail;
+					dispatch('select', {
+						value: e.detail,
+					});
+				}}
+				class={classes(
+					value ? 'bg-indigo-600' : 'bg-gray-200',
+					'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+				)}
+			>
+				<span
+					aria-hidden="true"
+					class={classes(
+						checked ? 'translate-x-5' : 'translate-x-0',
+						'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+					)}
+				/>
+			</Switch>
+		</SwitchGroup>
 	{:else}
 		<div class="relative mt-1 rounded-md">
 			<input
