@@ -15,4 +15,5 @@ export const kwdFormat = (amount: number | null): string =>
 		style: 'currency',
 		currency: 'KWD',
 		maximumFractionDigits: 0,
+		minimumFractionDigits: 0,
 	}) ?? '-';
