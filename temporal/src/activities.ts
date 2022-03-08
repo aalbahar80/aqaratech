@@ -12,8 +12,9 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 				dueDate,
 				memo,
 			},
+			include: { lease: true },
 		});
-		console.log(`Generated trx for ${memo}: `, trx);
+		console.log(`Generated trx for ${memo}: `, trx.id);
 		return trx;
 	},
 	async getLease(id: string) {
@@ -21,7 +22,7 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		const lease = await prismaClient.lease.findUnique({
 			where: { id },
 		});
-		console.log(`Got lease ${id}: `, lease);
+		console.log(`Got lease ${id}: `);
 		return lease;
 	},
 	async notify(transactionId: string): Promise<void> {
@@ -32,9 +33,10 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		console.log(`Getting trx ${id}...`);
 		const trx = await prismaClient.transaction.findUnique({
 			where: { id },
+			include: { lease: true },
 		});
 		if (!trx) throw new Error('Trx not found');
-		console.log(`Got trx ${id}: `, trx);
+		// console.log(`Got trx ${id}: `, trx);
 		return trx;
 	},
 });

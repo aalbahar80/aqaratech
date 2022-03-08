@@ -36,6 +36,7 @@
 		case 'start':
 		case 'dueDate':
 		case 'residencyEnd':
+		case 'firstPayment':
 			type = 'date';
 			if (value instanceof Date) {
 				// eslint-disable-next-line prefer-destructuring
@@ -62,12 +63,17 @@
 		case 'size':
 		case 'bed':
 		case 'bath':
+		case 'cycleCount':
+		case 'billingDay':
 			type = 'number';
 			break;
 		case 'isPaid':
+		case 'active':
+		case 'shouldNotify':
 			type = 'checkbox';
 			break;
 		case 'status':
+		case 'contactMethod':
 			type = 'select';
 			break;
 		case 'email':

@@ -35,12 +35,7 @@ export async function leaseWF(leaseId: string) {
 	// TODO replace throw with temporalio error or retries
 	if (!lease) throw new Error('Lease not found');
 
-	let isCancelled = false;
-	setHandler(cancelLease, () => {
-		isCancelled = true;
-	});
-
-	let isNotify = true;
+	let { active } = lease;
 
 	// get the date of the 1st day of the next month
 	const start = new Date(lease.start);
@@ -49,27 +44,34 @@ export async function leaseWF(leaseId: string) {
 
 	// sleepUntil(nextMonth);
 
-	for (let bp = 0; bp < 2; bp++) {
+	for (let bp = 0; bp < lease.cycleCount; bp++) {
 		setHandler(getBillingPeriod, () => bp);
 
 		// TODO change to 1 month
-		if (await condition(() => isCancelled, 5000)) {
+		if (await condition(() => !active, 5000)) {
 			// cancelled
+			console.log('Lease no longer active. Stopping workflow.');
 			break;
 		} else {
 			const dueDate = addMonths(nextMonth, bp);
 			const trx = await acts.generateTransaction(lease, dueDate.toISOString());
 			let isPaid = trx.isPaid;
+			let shouldNotify = trx.lease.shouldNotify;
 			let reminderCount = 0;
 
-			while (isNotify && !isPaid && reminderCount < 3) {
+			while (shouldNotify && !isPaid && reminderCount < 3) {
 				console.log('Reminder Count: ', reminderCount);
 				await acts.notify(trx.id);
 				reminderCount++;
 				await sleep(1000);
-				// TODO add notifications to lease model
-				// ({ isPaid, notify } = await acts.getTrx(trx.id));
-				({ isPaid } = await acts.getTrx(trx.id));
+				({
+					isPaid,
+					lease: { active, shouldNotify },
+				} = await acts.getTrx(trx.id));
+				// trx = await acts.getTrx(trx.id);
+				// isPaid = trx.isPaid;
+				// shouldNotify = trx.lease.shouldNotify;
+				// active = trx.lease.active;
 			}
 		}
 	}

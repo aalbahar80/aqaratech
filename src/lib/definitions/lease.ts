@@ -1,4 +1,5 @@
 import type { InferMutationInput } from '$lib/client/trpc';
+import { falsyToNull } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
@@ -15,6 +16,19 @@ export const schema = z
 		}, z.date()),
 		tenantId: z.string().uuid(),
 		unitId: z.string().uuid(),
+		contactMethod: z.enum(['sms', 'email']).nullish(),
+		shouldNotify: z.boolean(),
+		active: z.boolean(),
+		cycleCount: z.number().nonnegative(),
+		billingDay: z.number().min(1).max(31),
+		firstPayment: z
+			.preprocess((arg) => {
+				if (typeof arg === 'string' || arg instanceof Date)
+					return new Date(arg);
+			}, z.date())
+			.or(z.literal(''))
+			.nullish()
+			.transform(falsyToNull),
 	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
@@ -33,6 +47,17 @@ const defaultForm = (): Lease => ({
 	monthlyRent: 0,
 	tenantId: '',
 	unitId: '',
+	contactMethod: 'sms',
+	shouldNotify: true,
+	active: true,
+	cycleCount: 12,
+	billingDay: 1,
+	// TODO fix timezone
+	firstPayment: new Date(
+		new Date().getFullYear(),
+		new Date().getMonth() + 1,
+		2,
+	),
 });
 
 const label: typeof definition['label'] = (item) =>

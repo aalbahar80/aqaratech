@@ -53,20 +53,25 @@ model Expense {
 }
 
 model Lease {
-  id           String        @id @default(uuid())
-  tenantId     String
-  unitId       String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  start        DateTime
-  end          DateTime
-  monthlyRent  Float
-  deposit      Float         @default(0)
-  isSigned     Boolean       @default(true)
-  license      String?
-  tenant       Tenant        @relation(fields: [tenantId], references: [id])
-  unit         Unit          @relation(fields: [unitId], references: [id])
-  transactions Transaction[]
+  id            String        @id @default(uuid())
+  tenantId      String
+  unitId        String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  start         DateTime
+  end           DateTime
+  monthlyRent   Float
+  deposit       Float         @default(0)
+  active        Boolean       @default(false)
+  firstPayment  DateTime?
+  cycleCount    Int           @default(12)
+  billingDay    Int           @default(1)
+  shouldNotify  Boolean       @default(true)
+  contactMethod String?
+  license       String?
+  tenant        Tenant        @relation(fields: [tenantId], references: [id])
+  unit          Unit          @relation(fields: [unitId], references: [id])
+  transactions  Transaction[]
 
   @@index([tenantId])
   @@index([unitId])
@@ -150,16 +155,18 @@ model Tenant {
 }
 
 model Transaction {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  dueDate    DateTime
-  isPaid     Boolean  @default(false)
-  amount     Float
-  memo       String?  @db.Text
-  receiptUrl String?
-  leaseId    String
-  lease      Lease    @relation(fields: [leaseId], references: [id])
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  dueDate     DateTime?
+  isPaid      Boolean   @default(false)
+  amount      Float
+  memo        String?   @db.Text
+  receiptUrl  String?
+  mfPaymentId String?
+  mfInvoiceId String?
+  leaseId     String
+  lease       Lease     @relation(fields: [leaseId], references: [id])
 
   @@index([leaseId])
 }
