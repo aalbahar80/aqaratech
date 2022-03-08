@@ -33,11 +33,13 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		// const name = await db.get('name'); // simulate read from db
 		const client = await prismaClient.client.findFirst({});
 		const name = client?.firstName;
+    console.log(name)
 		return `${msg}: ${name}`;
 	},
 	async greet_es(mensaje: string): Promise<string> {
 		const client = await prismaClient.client.findFirst({});
 		const name = client?.firstName;
+    console.log(name)
 		return `${mensaje}: ${name}`;
 	},
 });
