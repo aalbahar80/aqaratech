@@ -12,7 +12,7 @@ export const get: RequestHandler = async () => {
 
 	const customer = {
 		id: 'abcdef',
-		email: 'masvidal@ufc.com',
+		email: 'lebron@nba.com',
 		maxBillingPeriods: 6,
 		trialPeriod: 3000,
 		billingPeriod: 3000,

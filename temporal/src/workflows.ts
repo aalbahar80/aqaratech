@@ -8,10 +8,16 @@ import {
 import type * as activities from './activities';
 import type { Customer } from './types';
 
-const acts = proxyActivities<typeof activities>({
-	startToCloseTimeout: '1 minute',
-});
-
+const acts = proxyActivities<ReturnType<typeof activities['createActivities']>>(
+	{
+		startToCloseTimeout: '1 minute',
+	},
+);
+export async function dependencyWF(): Promise<string> {
+	const english = await acts.greet('Hello');
+	const spanish = await acts.greet_es('Hola');
+	return `${english}\n${spanish}`;
+}
 // add type
 export const cancelSubscription = defineSignal('cancelSignal');
 export const hike = defineSignal<number[]>('hike');
