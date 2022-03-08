@@ -10,8 +10,9 @@
 		const { entity, id } = params;
 		if (!isEntity(entity)) {
 			return {
-				status: 404,
-				error: 'Unknown entity',
+				// status: 404,
+				// error: 'Unknown entity',
+				fallthrough: true,
 			};
 		}
 		const data = await trpc.query(`${entity}:read`, id);

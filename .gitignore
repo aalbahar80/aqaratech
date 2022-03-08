@@ -7,3 +7,6 @@ node_modules
 src/styles/tailwind-output.css
 cypress/videos
 stats.html
+
+temporal/lib/
+temporal/tsconfig.tsbuildinfo

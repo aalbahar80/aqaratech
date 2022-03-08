@@ -87,6 +87,14 @@
 			}}
 			options={[
 				{
+					label: 'Activate',
+					icon: Refresh,
+					onClick: () => {
+						fetch(`/leases/${lease.id}/activate`);
+					},
+					type: 'button',
+				},
+				{
 					label: 'Delete',
 					icon: Trash,
 					onClick: openModal,

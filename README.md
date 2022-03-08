@@ -1,5 +1,44 @@
 [![ci](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml/badge.svg)](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml)
 
+# Temporal
+1. run the server 
+- clone temporal's docker-compose repo
+- `docker-compose up`
+2. yarn run dev:temporal
+3. yarn run start:workflow
+Both temporal workers and clients need to connect to a Temporal server.
+https://docs.temporal.io/docs/typescript/nextjs-tutorial#deploying-your-temporal--nextjs-app
+- Workers can connect like so:
+```ts
+await Core.install({
+	serverOptions: {
+	address: 'temporal.letand.be',
+	},
+});
+```
+- Clients can connect like so:
+```ts
+const connection = new Connection({
+	address: 'temporal.letand.be',
+});
+const client = new WorkflowClient(connection.service);
+```
+
+Temporal worker:
+```bash
+git clone this repo
+install node 16.4.0 using nvm
+install yarn
+# in repo directory:
+# checkout temporal branch (optional)
+# find way to not need yarn run build
+# set env_var
+export DATABASE_URL=VALUE
+yarn install
+yarn run build:temporal # in watch mode?
+yarn run start:worker
+```
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
@@ -59,6 +98,9 @@ yarn run eslint -c ./.eslintrc.cjs --ext .svelte .
 
 # combine outputs:
 { yarn run eslint -c ./.eslintrc.cjs --ext .ts . & yarn run eslint -c ./.eslintrc.cjs --ext .svelte .; }
+
+# temporal
+yarn run eslint -c ./temporal/.eslintrc.cjs --ignore-path ./temporal/.eslintignore --ext .ts ./temporal
 ```
 
 > graphql eslint linter not fully wired up. See eslint config file.
