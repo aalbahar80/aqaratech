@@ -22,7 +22,7 @@ const config = {
 			},
 			ssr: {
 				noExternal: process.env.NODE_ENV === 'production' ? ['superjson'] : [],
-				external: ['@temporalio', 'temporalio']
+				external: ['@temporalio']
 			},
 			// plugins: [visualizer((opts) => {
 			// 	return { filename: path.join(opts.dir, "stats.html") };
