@@ -26,6 +26,7 @@ const acts = proxyActivities<ReturnType<typeof activities['createActivities']>>(
 
 export const cancelLease = defineSignal('cancelLeaseSignal');
 export const setIsNotify = defineSignal<boolean[]>('setIsNotify');
+export const setIsPaid = defineSignal<boolean[]>('setIsPaid');
 export const getBillingPeriod = defineQuery<number>('getBillingPeriod');
 
 export async function leaseWF(leaseId: string) {
@@ -40,9 +41,6 @@ export async function leaseWF(leaseId: string) {
 	});
 
 	let isNotify = true;
-	setHandler(setIsNotify, (newIsNotify) => {
-		isNotify = newIsNotify;
-	});
 
 	// get the date of the 1st day of the next month
 	const start = new Date(lease.start);
@@ -51,7 +49,7 @@ export async function leaseWF(leaseId: string) {
 
 	// sleepUntil(nextMonth);
 
-	for (let bp = 0; bp < 12; bp++) {
+	for (let bp = 0; bp < 2; bp++) {
 		setHandler(getBillingPeriod, () => bp);
 
 		// TODO change to 1 month
@@ -61,8 +59,17 @@ export async function leaseWF(leaseId: string) {
 		} else {
 			const dueDate = addMonths(nextMonth, bp);
 			const trx = await acts.generateTransaction(lease, dueDate.toISOString());
-			if (isNotify) {
+			let isPaid = trx.isPaid;
+			let reminderCount = 0;
+
+			while (isNotify && !isPaid && reminderCount < 3) {
+				console.log('Reminder Count: ', reminderCount);
 				await acts.notify(trx.id);
+				reminderCount++;
+				await sleep(1000);
+				// TODO add notifications to lease model
+				// ({ isPaid, notify } = await acts.getTrx(trx.id));
+				({ isPaid } = await acts.getTrx(trx.id));
 			}
 		}
 	}

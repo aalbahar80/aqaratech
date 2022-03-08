@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 export const createActivities = (prismaClient: PrismaClientType) => ({
 	async generateTransaction(lease: Lease, dueDate: string) {
 		const memo = 'Rent for: ' + format(parseISO(dueDate), 'MMMM yyyy');
-		console.log(`Generating trx for ${memo}: `, lease, dueDate);
+		console.log(`Generating trx for ${memo}: `, lease.id, dueDate);
 		const trx = await prismaClient.transaction.create({
 			data: {
 				amount: lease.monthlyRent,
@@ -16,18 +16,25 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		console.log(`Generated trx for ${memo}: `, trx);
 		return trx;
 	},
-	async getLease(leaseId: string): Promise<Lease | null> {
-		console.log(`Getting lease ${leaseId}...`);
-		const lease = await prismaClient.lease.findFirst({
-			where: {
-				id: leaseId,
-			},
+	async getLease(id: string) {
+		console.log(`Getting lease ${id}...`);
+		const lease = await prismaClient.lease.findUnique({
+			where: { id },
 		});
-		console.log(`Got lease ${leaseId}: `, lease);
+		console.log(`Got lease ${id}: `, lease);
 		return lease;
 	},
 	async notify(transactionId: string): Promise<void> {
 		console.log(`Notifying ${transactionId}...`);
 		console.log(`Notified ${transactionId}: `);
+	},
+	async getTrx(id: string) {
+		console.log(`Getting trx ${id}...`);
+		const trx = await prismaClient.transaction.findUnique({
+			where: { id },
+		});
+		if (!trx) throw new Error('Trx not found');
+		console.log(`Got trx ${id}: `, trx);
+		return trx;
 	},
 });
