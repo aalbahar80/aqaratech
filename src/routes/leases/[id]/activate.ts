@@ -1,6 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { Connection, WorkflowClient } from '@temporalio/client';
-import { leaseWF } from '../../../../temporal/lib/workflows.js';
+// import { leaseWF } from '../../../../temporal/lib/workflows.js';
+import { leaseWF } from '../../../../temporal/src/workflows';
 
 export const get: RequestHandler = async ({ params }) => {
 	const { id } = params;
