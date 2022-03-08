@@ -10,3 +10,5 @@ stats.html
 
 temporal/lib/
 temporal/tsconfig.tsbuildinfo
+
+coverage/
