@@ -1,11 +1,10 @@
 import { Worker, Core } from '@temporalio/worker';
-// import * as activities from './activities.js';
 // TODO remove .js extension?
 import { createActivities } from './activities.js';
 import { URL } from 'url';
 import path from 'path';
-// import prismaClient from '../../src/lib/server/prismaClient';
-import pkg, { type Prisma } from '@prisma/client';
+import pkg from '@prisma/client';
+
 const { PrismaClient } = pkg;
 const prismaClient = new PrismaClient({});
 
