@@ -1,6 +1,0 @@
-{
-  "baseUrl": "http://localhost:3000",
-  "chromeWebSecurity": false,
-  "pluginsFile": "cypress/plugins/index.ts",
-  "projectId": "aq27c7"
-}
