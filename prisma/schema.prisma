@@ -155,18 +155,18 @@ model Tenant {
 }
 
 model Transaction {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  dueDate     DateTime?
-  isPaid      Boolean   @default(false)
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  dueDate     DateTime
+  isPaid      Boolean  @default(false)
   amount      Float
-  memo        String?   @db.Text
+  memo        String?  @db.Text
   receiptUrl  String?
   mfPaymentId String?
   mfInvoiceId String?
   leaseId     String
-  lease       Lease     @relation(fields: [leaseId], references: [id])
+  lease       Lease    @relation(fields: [leaseId], references: [id])
 
   @@index([leaseId])
 }
