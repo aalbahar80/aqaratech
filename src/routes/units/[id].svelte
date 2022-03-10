@@ -7,8 +7,16 @@
 	import LeasesCard from '$lib/components/tenant/LeasesCard.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import {
+		faBath,
+		faBed,
+		faElevator,
+		faMaximize,
+		type IconDefinition,
+	} from '@fortawesome/free-solid-svg-icons';
 	import { Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
+	import Fa from 'svelte-fa';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
@@ -28,6 +36,35 @@
 		['Market Rent', kwdFormat(unit.marketRent)],
 		['Created on', dateFormat(unit.createdAt)],
 		['Last updated', unit.updatedAt.toLocaleString()],
+	];
+
+	type IconTooltip = {
+		label: string | number | null | undefined;
+		icon: IconDefinition;
+		tooltip: string;
+	};
+	const icons: IconTooltip[] = [
+		{
+			label: unit.bed,
+			icon: faBed,
+			tooltip: 'Bedrooms',
+		},
+		{
+			label: unit.bath,
+			icon: faBath,
+			tooltip: 'Bathrooms',
+		},
+		{
+			// format unit.size to comma separated number
+			label: `${unit.size?.toLocaleString()} m²`,
+			icon: faMaximize,
+			tooltip: 'Size',
+		},
+		{
+			label: unit.floor,
+			icon: faElevator,
+			tooltip: 'Elevator',
+		},
 	];
 
 	let isOpen = false;
@@ -53,12 +90,24 @@
 					Unit
 				</h2>
 			</div>
+			<div
+				class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6"
+			>
+				{#each icons as { label, icon, tooltip } (tooltip)}
+					{#if label}
+						<div class="mt-2 flex items-center text-sm text-gray-500">
+							<Fa {icon} class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" />
+							{label}
+						</div>
+					{/if}
+				{/each}
+			</div>
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
-					href: `/transactions/${unit.id}/edit`,
+					href: `/units/${unit.id}/edit`,
 				}}
 				options={[
 					{

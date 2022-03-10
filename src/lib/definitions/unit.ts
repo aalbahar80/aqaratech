@@ -10,10 +10,10 @@ export const schema = z.object({
 		.min(1)
 		.transform(trim)
 		.refine((val) => val && val.length > 0),
-	bed: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
-	bath: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
-	size: z.number().nonnegative().nullish().transform(falsyToNullExceptZero),
-	floor: z.string().transform(trim).transform(falsyToNull).nullish(),
+	bed: z.number().min(1).nullish().transform(falsyToNull),
+	bath: z.number().min(1).nullish().transform(falsyToNull),
+	size: z.number().min(1).nullish().transform(falsyToNull),
+	floor: z.number().nullish().transform(falsyToNullExceptZero),
 	usage: z.string().transform(trim).transform(falsyToNull).nullish(),
 	type: z.string().transform(trim).transform(falsyToNull).nullish(),
 	marketRent: z
@@ -31,7 +31,7 @@ const defaultForm = (): Unit => ({
 	bath: null,
 	size: null,
 	marketRent: null,
-	floor: '',
+	floor: null,
 	usage: '',
 	type: '',
 	propertyId: '',

@@ -70,6 +70,7 @@
 		case 'size':
 		case 'bed':
 		case 'bath':
+		case 'floor':
 		case 'cycleCount':
 		case 'billingDay':
 			type = 'number';
