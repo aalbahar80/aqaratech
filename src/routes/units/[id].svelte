@@ -3,12 +3,11 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
-	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeasesCard from '$lib/components/tenant/LeasesCard.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { Speakerphone, Trash } from '@steeze-ui/heroicons';
+	import { Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -53,24 +52,9 @@
 				>
 					Unit
 				</h2>
-				<!-- <span
-					class="inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
-					class:paid={unit.isOccupied}
-					class:not-paid={!unit.isOccupied}
-				>
-					{trx.isPaid ? 'Paid' : 'Not paid'}
-				</span> -->
 			</div>
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
-			<Button icon={Speakerphone} text="Send Reminder" solid disabled />
-			<!-- <Button
-				icon={CurrencyDollar}
-				text={unit.isOccuppied ? 'Mark as Unpaid' : 'Mark as Paid'}
-				solid
-				on:click={toggleIsPaid}
-				{loading}
-			/> -->
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
@@ -90,12 +74,3 @@
 	<LeasesCard leases={unit.leases} unitId={unit.id} />
 	<pre>{JSON.stringify(unit, null, 2)}</pre>
 </div>
-
-<style lang="postcss">
-	.paid {
-		@apply bg-green-100 text-green-800;
-	}
-	.not-paid {
-		@apply bg-pink-100 text-pink-800;
-	}
-</style>
