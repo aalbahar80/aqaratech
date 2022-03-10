@@ -63,6 +63,40 @@
 			loading = false;
 		}
 	};
+
+	const send = async () => {
+		try {
+			const res = await fetch('/api/sms', {
+				method: 'POST',
+				body: JSON.stringify({
+					// phone: trx.lease.tenant.phone,
+					// phone: '+96599123456',
+					phone: '+15005550009', // invalid
+					message: `Your transaction of ${kwdFormat(
+						trx.amount,
+					)} KWD has been received.`,
+				}),
+			});
+			const data = await res.json();
+			if (!res.ok) throw new Error(data.message || 'Unable to send SMS');
+
+			console.log({ data }, '[id].svelte ~ 82');
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Success',
+				},
+			});
+		} catch (e) {
+			console.error(e);
+			addToast({
+				props: {
+					kind: 'error',
+					title: e instanceof Error ? e.message : 'Unable to send SMS',
+				},
+			});
+		}
+	};
 </script>
 
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -91,7 +125,7 @@
 			</div>
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
-			<Button icon={Speakerphone} text="Send Reminder" solid disabled />
+			<Button icon={Speakerphone} text="Send Reminder" solid on:click={send} />
 			<Button
 				icon={CurrencyDollar}
 				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
