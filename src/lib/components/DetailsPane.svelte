@@ -9,8 +9,8 @@
 	export let files: [string, string][] | undefined = undefined;
 
 	const options: Option[] = [
-		{ label: 'Update', href: '#', icon: Pencil, type: 'link' },
-		{ label: 'Remove', href: '#', icon: Trash, type: 'link' },
+		{ label: 'Update', href: '#', icon: Pencil },
+		{ label: 'Remove', href: '#', icon: Trash },
 	];
 </script>
 
@@ -43,7 +43,7 @@
 								</div>
 								<ButtonDropdown
 									class="bottom-10"
-									defaultOption={{ label: 'View', href: value, type: 'link' }}
+									defaultOption={{ label: 'View', href: value }}
 									{options}
 								/>
 							</li>

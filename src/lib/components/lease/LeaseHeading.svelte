@@ -83,7 +83,6 @@
 			defaultOption={{
 				label: 'Edit',
 				href: `/leases/${lease.id}/edit`,
-				type: 'link',
 			}}
 			options={[
 				{
@@ -92,13 +91,11 @@
 					onClick: () => {
 						fetch(`/leases/${lease.id}/activate`);
 					},
-					type: 'button',
 				},
 				{
 					label: 'Delete',
 					icon: Trash,
 					onClick: openModal,
-					type: 'button',
 				},
 			]}
 		/>

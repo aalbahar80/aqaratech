@@ -46,14 +46,12 @@
 				defaultOption={{
 					label: 'Edit',
 					href: `/tenants/${tenant.id}/edit`,
-					type: 'link',
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
-						type: 'button',
 					},
 				]}
 			/>

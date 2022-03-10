@@ -221,13 +221,11 @@
 								<DropDown
 									options={[
 										{
-											type: 'link',
 											icon: PencilAlt,
 											label: 'Edit',
 											href: `/transactions/${transaction.id}/edit`,
 										},
 										{
-											type: 'button',
 											icon: ClipboardCopy,
 											label: 'Copy payment URL',
 											onClick: () => {
@@ -235,7 +233,6 @@
 											},
 										},
 										{
-											type: 'button',
 											icon: Speakerphone,
 											label: 'Send reminder',
 											disabled: transaction.isPaid,
@@ -245,7 +242,6 @@
 										},
 										transaction.isPaid
 											? {
-													type: 'button',
 													icon: X,
 													label: 'Mark as unpaid',
 													onClick: async () => {
@@ -253,7 +249,6 @@
 													},
 											  }
 											: {
-													type: 'button',
 													icon: Check,
 													label: 'Mark as paid',
 													onClick: async () => {

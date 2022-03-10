@@ -24,7 +24,7 @@
 		class={`${$$props.class} absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
 		><div class="py-1">
 			{#each options as option (option.label)}
-				{#if option.type === 'link' && !option.disabled}
+				{#if option.href && !option.disabled}
 					<MenuItem let:active as="a" href={option.href}>
 						<div
 							class="group flex items-center px-4 py-2 text-sm"
@@ -43,13 +43,13 @@
 							{option.label}
 						</div>
 					</MenuItem>
-				{:else}
+				{:else if option.onClick || option.disabled}
 					<MenuItem
 						let:active
 						as="button"
 						class="w-full"
 						on:click={() => {
-							if (option.type === 'button') option.onClick();
+							if (option.onClick) option.onClick();
 						}}
 						disabled={option.disabled}
 						let:disabled

@@ -1,19 +1,7 @@
 import type { IconSource } from '@steeze-ui/svelte-icon/types';
 
-interface OptionBasics {
+export type Option = {
 	label: string;
 	icon?: IconSource;
 	disabled?: boolean;
-}
-
-interface OptionLink extends OptionBasics {
-	type: 'link';
-	href: string;
-}
-
-interface OptionButton extends OptionBasics {
-	type: 'button';
-	onClick: () => void;
-}
-
-export type Option = OptionLink | OptionButton;
+} & ({ href: string; onClick?: never } | { href?: never; onClick: () => void });

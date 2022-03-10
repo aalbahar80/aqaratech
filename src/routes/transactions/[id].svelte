@@ -103,14 +103,12 @@
 				defaultOption={{
 					label: 'Edit',
 					href: `/transactions/${trx.id}/edit`,
-					type: 'link',
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
-						type: 'button',
 					},
 				]}
 			/>
