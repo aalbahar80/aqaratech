@@ -41,9 +41,6 @@
 		<ul class="divide-y divide-gray-200">
 			{#each leases as lease, idx (lease.id)}
 				{@const expired = lease.end < new Date()}
-				{@const expiredClass = expired
-					? 'text-red-800 bg-red-100'
-					: 'text-green-800 bg-green-100'}
 				<li>
 					<a href={`/leases/${lease.id}`} class="block hover:bg-gray-50">
 						<div class="px-4 py-4 sm:px-6">
@@ -53,7 +50,9 @@
 								</p>
 								<div class="ml-2 flex flex-shrink-0">
 									<p
-										class={`${expiredClass} inline-flex rounded-full px-2 text-xs font-semibold leading-5`}
+										class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
+										class:badge-green={!expired}
+										class:badge-red={expired}
 									>
 										{expired ? 'Expired' : 'Active'}
 									</p>
@@ -149,3 +148,12 @@
 		</div>
 	{/if}
 </section>
+
+<style lang="postcss">
+	.badge-green {
+		@apply bg-green-100 text-green-800;
+	}
+	.badge-red {
+		@apply bg-red-100 text-red-800;
+	}
+</style>
