@@ -4,8 +4,8 @@ import Hello from '../routes/index.svelte';
 
 afterEach(() => cleanup());
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function renderHello(overrideProps = {}) {
+// async function renderHello(overrideProps = {}) {
+async function renderHello() {
 	const svl = render(Hello, {
 		// props: {
 		// 	data: [[1, 2, 3]],
