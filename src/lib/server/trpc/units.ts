@@ -16,6 +16,11 @@ export default trpc
 				},
 				include: {
 					property: true,
+					leases: {
+						include: {
+							tenant: true,
+						},
+					},
 				},
 			});
 			if (data) return data;

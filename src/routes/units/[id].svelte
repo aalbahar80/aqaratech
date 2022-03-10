@@ -5,6 +5,7 @@
 	import trpc from '$lib/client/trpc';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import LeasesCard from '$lib/components/tenant/LeasesCard.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Speakerphone, Trash } from '@steeze-ui/heroicons';
@@ -74,20 +75,19 @@
 				defaultOption={{
 					label: 'Edit',
 					href: `/transactions/${unit.id}/edit`,
-					type: 'link',
 				}}
 				options={[
 					{
 						label: 'Delete',
 						icon: Trash,
 						onClick: openModal,
-						type: 'button',
 					},
 				]}
 			/>
 		</div>
 	</div>
 	<DetailsPane {details} />
+	<LeasesCard leases={unit.leases} unitId={unit.id} />
 	<pre>{JSON.stringify(unit, null, 2)}</pre>
 </div>
 

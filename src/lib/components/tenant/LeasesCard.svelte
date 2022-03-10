@@ -1,13 +1,20 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { getProgress } from '$lib/utils/common';
-	import { Calendar, Home, Plus } from '@steeze-ui/heroicons';
+	import { concatIfExists } from '$lib/utils/table-utils';
+	import { Calendar, Home, Plus, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import formatDistance from 'date-fns/formatDistance';
 
-	type Leases = NonNullable<InferQueryOutput<'tenants:read'>>['leases'];
+	type E = 'tenants' | 'units';
+	type Leases = NonNullable<InferQueryOutput<`${E}:read`>>['leases'];
 	export let leases: Leases;
-	export let tenantId: string;
+	export let tenantId: string = '';
+	export let unitId: string = '';
+
+	$: addLeaseHref = tenantId
+		? `/leases/add?tenantId=${tenantId}`
+		: `/leases/add?unitId=${unitId}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -22,7 +29,7 @@
 				</div>
 				<div class="ml-4 mt-2 flex-shrink-0">
 					<a
-						href={`/leases/add?&tenantId=${tenantId}`}
+						href={addLeaseHref}
 						class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 					>
 						Create new lease
@@ -33,8 +40,7 @@
 
 		<ul class="divide-y divide-gray-200">
 			{#each leases as lease, idx (lease.id)}
-				<!-- {@const expired = daysLeftFromISO(lease.end) < 0} -->
-				{@const expired = idx % 2 === 0}
+				{@const expired = lease.end < new Date()}
 				{@const expiredClass = expired
 					? 'text-red-800 bg-red-100'
 					: 'text-green-800 bg-green-100'}
@@ -56,14 +62,27 @@
 							<div class="mt-2 sm:flex sm:justify-between">
 								<div class="sm:flex">
 									<p class="flex items-center text-sm text-gray-500">
-										<Icon
-											src={Home}
-											class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-											aria-hidden="true"
-										/>
-										{`${lease.unit.unitNumber} ${
-											lease.unit.property.area ?? ''
-										}`}
+										{#if 'unit' in lease}
+											<Icon
+												src={Home}
+												class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+												aria-hidden="true"
+											/>
+											{`${lease.unit.unitNumber} ${
+												lease.unit.property.area ?? ''
+											}`}
+										{:else}
+											<Icon
+												src={User}
+												theme="solid"
+												class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+												aria-hidden="true"
+											/>
+											{concatIfExists([
+												lease.tenant.firstName,
+												lease.tenant.lastName,
+											])}
+										{/if}
 									</p>
 								</div>
 								<div
@@ -120,7 +139,7 @@
 			</p>
 			<div class="mt-6">
 				<a
-					href={`/leases/add?&tenantId=${tenantId}`}
+					href={addLeaseHref}
 					class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 				>
 					<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
