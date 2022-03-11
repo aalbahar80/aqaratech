@@ -2,10 +2,9 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { Entity } from '$lib/definitions';
-	import { DocumentText, Refresh, Trash } from '@steeze-ui/heroicons';
+	import { Trash } from '@steeze-ui/heroicons';
 	import Fa from 'svelte-fa';
 	import BreadCrumb from './breadcrumbs/BreadCrumb.svelte';
-	import Button from './Button.svelte';
 
 	export let title: string;
 	export let id: string;
@@ -77,23 +76,11 @@
 	{/if}
 
 	<!-- Actions -->
-	<div
-		class="col-span-full col-start-1 flex flex-col justify-between space-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0"
-	>
-		<Button
-			icon={Refresh}
-			text="Renew"
-			as="a"
-			href={`/leases/add?unitid=${'a'}&tenantid=${'a'}&monthlyrent=${'a'}`}
-			class="w-full sm:w-auto"
-		/>
-
-		<Button
-			icon={DocumentText}
-			text="Contract"
-			as="a"
-			href={`/leases/${'a'}/contract`}
-			class="w-full sm:w-auto"
-		/>
-	</div>
+	{#if $$slots.actions}
+		<div
+			class="col-span-full col-start-1 flex flex-col justify-between space-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0"
+		>
+			<slot name="actions" />
+		</div>
+	{/if}
 </div>
