@@ -82,31 +82,31 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-6.0.0-beta.0.tgz#8d772b0c37ebc450e3a95114be549e8fd245f16f"
   integrity sha512-7QdsX5ZqUEz87twuoKEJe7NHn6OHQsVYQpJcK0disnR0XuVb9FEgQUcsViard9OTNN/fG/nZT63V35vieOwZ4Q==
 
-"@felte/common@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@felte/common/-/common-1.0.1.tgz#0210652dac1d781e0b231882ec650d2ecbe88e18"
-  integrity sha512-P905IdJzdiawo+YsnM5Cg2ziou5VHBDCCiVHXqGFBrEmq/RyxSdOfuRbOBKAz3l5eigQl8QGK26b3rVLz7mxRQ==
-
-"@felte/core@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@felte/core/-/core-1.0.1.tgz#82e80685eccf200c3f579cebc9f10d5c97307ef9"
-  integrity sha512-wrdiiQIfw4fDTVN9THowqSQcckkwrW8EN92mIKqqa+wbcYz7cSBAi3GtgNWJcZuEV631ij2nnygQnxV/8hhdnA==
-  dependencies:
-    "@felte/common" "1.0.1"
-
-"@felte/reporter-svelte@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@felte/reporter-svelte/-/reporter-svelte-1.0.1.tgz#924614893fbcb47d6eec7695b75fa24f4a10deb1"
-  integrity sha512-qJm1Qg5WNHR9h/8y3EChCQwChAkRnrMoDi4aD/3AT9mzI6uCt09Bm/WaX9rfzpEW46X+ECf2uzvPxuWOnYi3yA==
-  dependencies:
-    "@felte/common" "1.0.1"
-
-"@felte/validator-zod@^1.0.2":
+"@felte/common@1.0.2":
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-1.0.2.tgz#9be914d26dcb271d94ae9eb720347eb0ed020453"
-  integrity sha512-WAWPGYWuRU2eTOtQ0QwYxSMgtvExaBZ8t6LovuB/5n6L/T2p0bSnZIxlqWNRbMghLhtJQr6G+qmeaFm5w4pn0Q==
+  resolved "https://registry.yarnpkg.com/@felte/common/-/common-1.0.2.tgz#23af5b9efff6efe8465da11909982c2932daa05e"
+  integrity sha512-eWOFBitxN+WmwOfm6/I3DJgs9N1SlpCz7Lja2dAlla0ZJSCzdNRPo4Njcim/Ut4yNPf4fyvvv3os7rJKce2AzQ==
+
+"@felte/core@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@felte/core/-/core-1.1.1.tgz#4631b8210d75cf89b1bf48cbe5d8ce7b24714a77"
+  integrity sha512-naEI6doFQHjZmupBNzUosyke7s6qYKLUk9SyGoNCNI/xFKETZUmTEM+mxF7S06LGUNQzCclY8W3OPeuTFDfbUg==
   dependencies:
-    "@felte/common" "1.0.1"
+    "@felte/common" "1.0.2"
+
+"@felte/reporter-svelte@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@felte/reporter-svelte/-/reporter-svelte-1.0.2.tgz#2aa3172e7168a96dd287abd8358d723d2be3db37"
+  integrity sha512-+K/PZeqUMJKeA2SSPnO2DNK9DCz+ihGxe7hbBmZOINxiP4JsZ+tzekxdROvhTb2siL5Ommm6CuM8NDb5lQisLA==
+  dependencies:
+    "@felte/common" "1.0.2"
+
+"@felte/validator-zod@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-1.0.3.tgz#11e51ddfc04b45a0bf59e816a55c7de4e77e7b76"
+  integrity sha512-AHDjZI2u3jQLYMvJvsnm89xUO3gGtWKWdpW7bXb1dBAs2hw8ren9Zn3TTZDhXq6qT9ffgdD3d1QS0YgZJY6McA==
+  dependencies:
+    "@felte/common" "1.0.2"
 
 "@fortawesome/fontawesome-common-types@^0.3.0":
   version "0.3.0"
@@ -347,10 +347,10 @@
   dependencies:
     esbuild "^0.14.21"
 
-"@sveltejs/kit@^1.0.0-next.294":
-  version "1.0.0-next.294"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.294.tgz#a96c4b2ca70ce53f82296d7d5b926d0002755da7"
-  integrity sha512-whTYeri/oaV672KErlhCAvAawlsnd8iu/MQmjdu85TApDYolLe8FDTg6GQ55+0IJbx1N7dOer/HopWzKudPgFA==
+"@sveltejs/kit@^1.0.0-next.295":
+  version "1.0.0-next.295"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.295.tgz#2874cf4f6eb172124b050242d8a30099b3c3aa70"
+  integrity sha512-4pO/swXByhU+7bhNikTjh1d4QxAMP9TZ74p7sdPuyJf5cg7Zrfk1nBtaMt0R+8+5j1xfC/XWRcxa3WnhT9bQMA==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
     sade "^1.7.4"
@@ -2026,6 +2026,13 @@ eslint-config-airbnb-typescript@^16.1.0:
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
 
+eslint-config-airbnb-typescript@^16.1.1:
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-typescript/-/eslint-config-airbnb-typescript-16.1.1.tgz#cfa6b0d7a0a2950465b697ce9682707869f04d22"
+  integrity sha512-E02SYIDMAEx6PB6Mi/twWNYwgK9yYd19vQzGASBUejWtdCSAuEcC3cSH8A6VZJjPITxaPRqbd00BKihSInFvbA==
+  dependencies:
+    eslint-config-airbnb-base "^15.0.0"
+
 eslint-config-airbnb@^19.0.2:
   version "19.0.4"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-19.0.4.tgz#84d4c3490ad70a0ffa571138ebcdea6ab085fdc3"
@@ -2353,12 +2360,12 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-felte@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/felte/-/felte-1.0.1.tgz#5692713e085cfa89a60317f2335117278c3a5806"
-  integrity sha512-fGz9KUBbBzv+QTgocHx2lGiRCNQXoXnBOfPvkVi4JWnofQCbKAYKQ80ytqAvqv+NphAZp6Zb/+luToIfqJ+Q2w==
+felte@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/felte/-/felte-1.1.1.tgz#9f196fc8f9de2047c6445717bd169a33e89ad5cb"
+  integrity sha512-thx1plV5eiOpTJkQx8KDiCKuMSLVl/PHJk4pOMuv5RHh3oHoXpEfXhclZXQD/Jqm1XMSOKp6r8CY8AA5+AEhwA==
   dependencies:
-    "@felte/core" "1.0.1"
+    "@felte/core" "1.1.1"
 
 fflate@^0.4.1:
   version "0.4.8"
