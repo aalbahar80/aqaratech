@@ -2,18 +2,25 @@ import { schema } from '$lib/definitions/client';
 import { paginationSchema } from '$lib/definitions/common';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export default trpc
 	.router()
 	.query('read', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.client.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.client.findUnique({
 				where: {
 					id,
 				},
-			}),
+				include: {
+					properties: true,
+				}
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND', message: 'Client not found' });
+		},
 	})
 	.query('basic', {
 		input: z.string(),
