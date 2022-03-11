@@ -43,7 +43,7 @@ const defaultForm = (): Property => ({
 	clientId: '',
 });
 
-const label: typeof definition['label'] = (item) =>
+export const label: typeof definition['label'] = (item) =>
 	concatIfExists([item.area, 'قطعة', item.block, item.street, 'مبنى', '2']);
 
 const definition: EntityDefinition<'properties'> = {

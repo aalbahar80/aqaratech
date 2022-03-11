@@ -6,6 +6,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import UnitsList from '$lib/components/UnitsList.svelte';
+	import { label } from '$lib/definitions/property';
 	import { dateFormat } from '$lib/utils/common';
 	import { Trash } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
@@ -23,8 +24,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Area', property.area],
-		['Full Address', property.street],
+		['Address', label(property)],
 		['Created on', dateFormat(property.createdAt)],
 		['Last updated', property.updatedAt.toLocaleString()],
 	];
@@ -36,7 +36,7 @@
 </script>
 
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<div class="lg:flex lg:items-center lg:justify-between">
+	<div class="flex items-center justify-between">
 		<ModalDelete bind:isOpen id={property.id} entity="properties" />
 		<div class="min-w-0 flex-1">
 			<BreadCrumb crumbs={[['clients', property.clientId]]} />
