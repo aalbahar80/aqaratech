@@ -86,16 +86,6 @@
 			/>
 		</svelte:fragment>
 	</Heading>
-	<div class="mt-0 flex flex-row flex-wrap space-x-6">
-		{#each icons as { label, icon, tooltip } (tooltip)}
-			{#if label}
-				<div class="mt-2 flex items-center text-sm text-gray-500">
-					<Fa {icon} class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" />
-					{label}
-				</div>
-			{/if}
-		{/each}
-	</div>
 	<DetailsPane {details} />
 	<LeasesCard leases={unit.leases} unitId={unit.id} />
 </div>
