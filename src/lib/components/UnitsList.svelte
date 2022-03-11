@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { getProgress } from '$lib/utils/common';
-	import { Calendar, Home, Plus } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import formatDistance from 'date-fns/formatDistance';
 	import {
 		faBath,
 		faBed,
 		faElevator,
 		faMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
+	import { Calendar, Plus } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import formatDistance from 'date-fns/formatDistance';
 	import Fa from 'svelte-fa';
 
 	type Units = NonNullable<InferQueryOutput<'properties:read'>>['units'];
@@ -57,15 +57,14 @@
 						tooltip: 'Bathrooms',
 					},
 					{
-						// format unit.size to comma separated number
-						label: `${unit.size?.toLocaleString()} m²`,
-						icon: faMaximize,
-						tooltip: 'Size',
-					},
-					{
 						label: unit.floor,
 						icon: faElevator,
 						tooltip: 'Elevator',
+					},
+					{
+						label: `${unit.size?.toLocaleString()} m²`,
+						icon: faMaximize,
+						tooltip: 'Size',
 					},
 				]}
 				<li>
@@ -86,15 +85,18 @@
 								</div>
 							</div>
 							<div class="mt-2 sm:flex sm:justify-between">
-								<div class="sm:flex">
-									<p class="flex items-center text-sm text-gray-500">
-										<Icon
-											src={Home}
-											class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-											aria-hidden="true"
-										/>
-										{`${unit.bed}`}
-									</p>
+								<div class="sm:flex sm:space-x-4">
+									{#each icons as { label, icon, tooltip } (tooltip)}
+										{#if label}
+											<p class="flex items-center text-sm text-gray-500">
+												<Fa
+													{icon}
+													class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+												/>
+												{label}
+											</p>
+										{/if}
+									{/each}
 								</div>
 								{#if unit.leases.length}
 									<div

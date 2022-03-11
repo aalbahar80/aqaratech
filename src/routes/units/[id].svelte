@@ -55,7 +55,6 @@
 			tooltip: 'Bathrooms',
 		},
 		{
-			// format unit.size to comma separated number
 			label: `${unit.size?.toLocaleString()} m²`,
 			icon: faMaximize,
 			tooltip: 'Size',
