@@ -66,6 +66,7 @@ module.exports = {
 				'no-mixed-spaces-and-tabs': 'off',
 				'function-paren-newline': 'off',
 				'object-curly-newline': 'off',
+				'operator-linebreak': 'off',
 			},
 			parserOptions: {
 				project: ['./tsconfig.json'],
