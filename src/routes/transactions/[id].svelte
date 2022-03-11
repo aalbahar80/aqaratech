@@ -36,9 +36,10 @@
 		isOpen = true;
 	};
 
-	let loading = false;
+	let loadingSend = false;
+	let loadingPaid = false;
 	const toggleIsPaid = async () => {
-		loading = true;
+		loadingPaid = true;
 		try {
 			const updated = await trpc.mutation('transactions:updatePaid', {
 				id: trx.id,
@@ -60,11 +61,12 @@
 				},
 			});
 		} finally {
-			loading = false;
+			loadingPaid = false;
 		}
 	};
 
 	const send = async () => {
+		loadingSend = true;
 		try {
 			const res = await fetch('/api/sms', {
 				method: 'POST',
@@ -95,6 +97,8 @@
 					title: e instanceof Error ? e.message : 'Unable to send SMS',
 				},
 			});
+		} finally {
+			loadingSend = false;
 		}
 	};
 </script>
@@ -125,13 +129,20 @@
 			</div>
 		</div>
 		<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
-			<Button icon={Speakerphone} text="Send Reminder" solid on:click={send} />
+			<Button
+				icon={Speakerphone}
+				text="Send Reminder"
+				solid
+				on:click={send}
+				disabled={trx.isPaid}
+				loading={loadingSend}
+			/>
 			<Button
 				icon={CurrencyDollar}
 				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
 				solid
 				on:click={toggleIsPaid}
-				{loading}
+				loading={loadingPaid}
 			/>
 			<ButtonDropdown
 				defaultOption={{
