@@ -37,7 +37,6 @@
 				},
 			});
 			console.error(error);
-			throw error;
 		}
 	};
 </script>
