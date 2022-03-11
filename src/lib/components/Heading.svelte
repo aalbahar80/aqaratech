@@ -74,6 +74,18 @@
 		</div>
 	{/if}
 
+	<!-- Badge -->
+	<!-- TODO don't hardcode, color?, margin -->
+	{#if $$slots.badge}
+		<div
+			class="order-last col-span-full inline-flex items-center rounded-md px-2.5 py-0.5 text-lg font-medium sm:order-none sm:col-span-1 sm:w-1/2"
+			class:paid={true}
+			class:not-paid={false}
+		>
+			<slot name="badge" />
+		</div>
+	{/if}
+
 	<!-- Actions -->
 	{#if $$slots.actions}
 		<div
@@ -83,3 +95,12 @@
 		</div>
 	{/if}
 </div>
+
+<style lang="postcss">
+	.paid {
+		@apply bg-green-100 text-green-800;
+	}
+	.not-paid {
+		@apply bg-pink-100 text-pink-800;
+	}
+</style>
