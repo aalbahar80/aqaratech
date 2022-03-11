@@ -19,8 +19,6 @@
 </script>
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
-	<!-- <ModalDelete bind:isOpen {id} {entity} /> -->
-
 	<!-- Breadcrumbs -->
 	{#if true}
 		<div class="col-span-full">
@@ -37,6 +35,7 @@
 
 	<!-- Title -->
 	<div class="flex items-center">
+		<ModalDelete bind:isOpen {id} {entity} />
 		<h2
 			class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
 		>
@@ -79,22 +78,22 @@
 
 	<!-- Actions -->
 	<div
-		class="col-span-full col-start-1 flex justify-between bg-teal-200 sm:col-start-auto sm:justify-end"
+		class="col-span-full col-start-1 flex flex-col justify-between space-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0"
 	>
-		<div class="inline-flex w-32">
-			<Button
-				icon={Refresh}
-				text="renew"
-				as="a"
-				href={`/leases/add?unitid=${'a'}&tenantid=${'a'}&monthlyrent=${'a'}`}
-			/>
-		</div>
+		<Button
+			icon={Refresh}
+			text="Renew"
+			as="a"
+			href={`/leases/add?unitid=${'a'}&tenantid=${'a'}&monthlyrent=${'a'}`}
+			class="w-full sm:w-auto"
+		/>
 
 		<Button
 			icon={DocumentText}
 			text="Contract"
 			as="a"
 			href={`/leases/${'a'}/contract`}
+			class="w-full sm:w-auto"
 		/>
 	</div>
 </div>
