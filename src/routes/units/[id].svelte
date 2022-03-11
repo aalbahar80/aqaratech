@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import Button from '$components/Button.svelte';
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -11,11 +11,8 @@
 		faBed,
 		faElevator,
 		faMaximize,
-		type IconDefinition,
 	} from '@fortawesome/free-solid-svg-icons';
-	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
-	import Fa from 'svelte-fa';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
@@ -37,12 +34,7 @@
 		['Last updated', unit.updatedAt.toLocaleString()],
 	];
 
-	type IconTooltip = {
-		label: string | number | null | undefined;
-		icon: IconDefinition;
-		tooltip: string;
-	};
-	const icons: IconTooltip[] = [
+	const icons = [
 		{
 			label: unit.bed,
 			icon: faBed,
@@ -66,26 +58,17 @@
 	];
 </script>
 
-<div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Unit" id={unit.id} entity="units" {icons}>
-		<svelte:fragment slot="actions">
-			<Button
-				icon={Refresh}
-				text="Renew"
-				as="a"
-				href={`/leases/add?unitid=${'a'}&tenantid=${'a'}&monthlyrent=${'a'}`}
-				class="w-full sm:w-auto"
-			/>
+<Heading title="Unit" id={unit.id} entity="units" {icons}>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb
+			crumbs={[
+				['clients', unit.property.clientId],
+				['properties', unit.property.id],
+			]}
+		/>
+	</svelte:fragment>
+</Heading>
 
-			<Button
-				icon={DocumentText}
-				text="Contract"
-				as="a"
-				href={`/leases/${'a'}/contract`}
-				class="w-full sm:w-auto"
-			/>
-		</svelte:fragment>
-	</Heading>
-	<DetailsPane {details} />
-	<LeasesCard leases={unit.leases} unitId={unit.id} />
-</div>
+<DetailsPane {details} />
+
+<LeasesCard leases={unit.leases} unitId={unit.id} />

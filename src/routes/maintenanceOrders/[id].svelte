@@ -33,16 +33,14 @@
 	];
 </script>
 
-<div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading
-		title="Maintenance Order"
-		id={maintenanceOrder.id}
-		entity="maintenanceOrders"
-	/>
-	<DetailsPane {details} />
-	<!-- <PropertyList
+<Heading
+	title="Maintenance Order"
+	id={maintenanceOrder.id}
+	entity="maintenanceOrders"
+/>
+<DetailsPane {details} />
+<!-- <PropertyList
 		properties={maintenanceOrder.properties}
 		maintenanceOrderId={maintenanceOrder.id}
 	/> -->
-	<pre>{JSON.stringify(maintenanceOrder, null, 2)}</pre>
-</div>
+<pre>{JSON.stringify(maintenanceOrder, null, 2)}</pre>

@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -27,8 +28,11 @@
 	];
 </script>
 
-<div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Property" id={property.id} entity="properties" />
-	<DetailsPane {details} />
-	<UnitsList units={property.units} propertyId={property.id} />
-</div>
+<Heading title="Property" id={property.id} entity="properties">
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb crumbs={[['clients', property.clientId]]} />
+	</svelte:fragment>
+</Heading>
+
+<DetailsPane {details} />
+<UnitsList units={property.units} propertyId={property.id} />

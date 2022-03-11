@@ -2,14 +2,20 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { Entity } from '$lib/definitions';
+	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { Trash } from '@steeze-ui/heroicons';
 	import Fa from 'svelte-fa';
-	import BreadCrumb from './breadcrumbs/BreadCrumb.svelte';
+
+	type IconTooltip = {
+		label: string | number | null | undefined;
+		icon: IconDefinition;
+		tooltip: string;
+	};
 
 	export let title: string;
 	export let id: string;
 	export let entity: Entity;
-	export let icons: any;
+	export let icons: IconTooltip[] | undefined = undefined;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -19,16 +25,9 @@
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
 	<!-- Breadcrumbs -->
-	{#if true}
+	{#if $$slots.breadcrumbs}
 		<div class="col-span-full">
-			<BreadCrumb
-				crumbs={[
-					['clients', 'TODO'],
-					['properties', 'TODO'],
-					['units', 'TODO'],
-					['tenants', 'TODO'],
-				]}
-			/>
+			<slot name="breadcrumbs" />
 		</div>
 	{/if}
 
