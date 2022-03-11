@@ -66,5 +66,4 @@
 	</div>
 	<DetailsPane {details} />
 	<UnitsList units={property.units} propertyId={property.id} />
-	<pre>{JSON.stringify(property, null, 2)}</pre>
 </div>

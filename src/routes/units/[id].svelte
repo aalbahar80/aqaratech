@@ -120,5 +120,4 @@
 	</div>
 	<DetailsPane {details} />
 	<LeasesCard leases={unit.leases} unitId={unit.id} />
-	<pre>{JSON.stringify(unit, null, 2)}</pre>
 </div>
