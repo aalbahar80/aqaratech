@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { getProgress } from '$lib/utils/common';
 	import {
 		faBath,
 		faBed,
@@ -108,7 +107,7 @@
 											aria-hidden="true"
 										/>
 										<p>
-											{vacant ? 'Vacant since: ' : 'Will be vacant in: '}
+											Vacancy:
 											<time dateTime={unit.leases[0].end.toISOString()}
 												>{formatDistance(unit.leases[0].end, new Date(), {
 													addSuffix: true,
@@ -118,17 +117,6 @@
 									</div>
 								{/if}
 							</div>
-							{#if !vacant}
-								<div class="mt-4 overflow-hidden rounded-full bg-gray-200">
-									<div
-										class="h-1 rounded-full bg-indigo-600"
-										style:width={`${getProgress(
-											unit.leases[0].start,
-											unit.leases[0].end,
-										)}%`}
-									/>
-								</div>
-							{/if}
 						</div>
 					</a>
 				</li>

@@ -19,7 +19,7 @@ export default trpc
 						include: {
 							leases: {
 								orderBy: {
-									end: 'asc',
+									end: 'desc',
 								},
 								take: 2,
 							},
