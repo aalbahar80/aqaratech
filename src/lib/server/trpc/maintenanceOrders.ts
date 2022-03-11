@@ -2,18 +2,25 @@ import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/maintenanceOrder';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export default trpc
 	.router()
 	.query('read', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.maintenanceOrder.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.maintenanceOrder.findUnique({
 				where: {
 					id,
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({
+				code: 'NOT_FOUND',
+				message: 'Maintenance Order not found',
+			});
+		},
 	})
 	.query('basic', {
 		input: z.string(),
