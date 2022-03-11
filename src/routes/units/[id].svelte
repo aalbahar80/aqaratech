@@ -58,17 +58,19 @@
 	];
 </script>
 
-<Heading title="Unit" id={unit.id} entity="units" {icons}>
-	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb
-			crumbs={[
-				['clients', unit.property.clientId],
-				['properties', unit.property.id],
-			]}
-		/>
-	</svelte:fragment>
-</Heading>
+<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+	<Heading title="Unit" id={unit.id} entity="units" {icons}>
+		<svelte:fragment slot="breadcrumbs">
+			<BreadCrumb
+				crumbs={[
+					['clients', unit.property.clientId],
+					['properties', unit.property.id],
+				]}
+			/>
+		</svelte:fragment>
+	</Heading>
 
-<DetailsPane {details} />
+	<DetailsPane {details} />
 
-<LeasesCard leases={unit.leases} unitId={unit.id} />
+	<LeasesCard leases={unit.leases} unitId={unit.id} />
+</div>

@@ -33,35 +33,37 @@
 	];
 </script>
 
-<Heading title="Lease" id={lease.id} entity="leases" {icons}>
-	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb
-			crumbs={[
-				['clients', lease.unit.property.client.id],
-				['properties', lease.unit.property.id],
-				['units', lease.unit.id],
-				['tenants', lease.tenant.id],
-			]}
-		/>
-	</svelte:fragment>
+<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+	<Heading title="Lease" id={lease.id} entity="leases" {icons}>
+		<svelte:fragment slot="breadcrumbs">
+			<BreadCrumb
+				crumbs={[
+					['clients', lease.unit.property.client.id],
+					['properties', lease.unit.property.id],
+					['units', lease.unit.id],
+					['tenants', lease.tenant.id],
+				]}
+			/>
+		</svelte:fragment>
 
-	<svelte:fragment slot="actions">
-		<Button
-			icon={Refresh}
-			text="Renew"
-			as="a"
-			href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
-			class="w-full sm:w-auto"
-		/>
+		<svelte:fragment slot="actions">
+			<Button
+				icon={Refresh}
+				text="Renew"
+				as="a"
+				href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
+				class="w-full sm:w-auto"
+			/>
 
-		<Button
-			icon={DocumentText}
-			text="Contract"
-			as="a"
-			href={`/leases/${lease.id}/contract`}
-			class="w-full sm:w-auto"
-		/>
-	</svelte:fragment>
-</Heading>
-<DetailsPane {details} {files} />
-<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
+			<Button
+				icon={DocumentText}
+				text="Contract"
+				as="a"
+				href={`/leases/${lease.id}/contract`}
+				class="w-full sm:w-auto"
+			/>
+		</svelte:fragment>
+	</Heading>
+	<DetailsPane {details} {files} />
+	<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
+</div>
