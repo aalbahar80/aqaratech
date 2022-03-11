@@ -2,11 +2,15 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { Entity } from '$lib/definitions';
-	import { Trash } from '@steeze-ui/heroicons';
+	import { DocumentText, Refresh, Trash } from '@steeze-ui/heroicons';
+	import Fa from 'svelte-fa';
+	import BreadCrumb from './breadcrumbs/BreadCrumb.svelte';
+	import Button from './Button.svelte';
 
 	export let title: string;
 	export let id: string;
 	export let entity: Entity;
+	export let icons: any;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -14,18 +18,34 @@
 	};
 </script>
 
-<div class="flex items-center justify-between">
-	<ModalDelete bind:isOpen {id} {entity} />
-	<div class="min-w-0 flex-1">
-		<div class="mt-2 flex items-center space-x-8">
-			<h2
-				class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
-			>
-				{title}
-			</h2>
+<div class="grid grid-cols-2 items-center justify-between gap-y-4">
+	<!-- <ModalDelete bind:isOpen {id} {entity} /> -->
+
+	<!-- Breadcrumbs -->
+	{#if true}
+		<div class="col-span-full">
+			<BreadCrumb
+				crumbs={[
+					['clients', 'TODO'],
+					['properties', 'TODO'],
+					['units', 'TODO'],
+					['tenants', 'TODO'],
+				]}
+			/>
 		</div>
+	{/if}
+
+	<!-- Title -->
+	<div class="flex items-center">
+		<h2
+			class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
+		>
+			{title}
+		</h2>
 	</div>
-	<div class="mt-5 flex space-x-3 lg:mt-0 lg:ml-4">
+
+	<!-- Edit/Delete button -->
+	<div class="flex justify-end">
 		<ButtonDropdown
 			defaultOption={{
 				label: 'Edit',
@@ -38,6 +58,43 @@
 					onClick: openModal,
 				},
 			]}
+		/>
+	</div>
+
+	<!-- Icons -->
+	{#if icons}
+		<div
+			class="col-span-full mt-0 flex flex-row flex-wrap space-x-6 sm:col-span-1"
+		>
+			{#each icons as { label, icon, tooltip } (tooltip)}
+				{#if label}
+					<div class="mt-2 flex items-center text-sm text-gray-500">
+						<Fa {icon} class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" />
+						{label}
+					</div>
+				{/if}
+			{/each}
+		</div>
+	{/if}
+
+	<!-- Actions -->
+	<div
+		class="col-span-full col-start-1 flex justify-between bg-teal-200 sm:col-start-auto sm:justify-end"
+	>
+		<div class="inline-flex w-32">
+			<Button
+				icon={Refresh}
+				text="renew"
+				as="a"
+				href={`/leases/add?unitid=${'a'}&tenantid=${'a'}&monthlyrent=${'a'}`}
+			/>
+		</div>
+
+		<Button
+			icon={DocumentText}
+			text="Contract"
+			as="a"
+			href={`/leases/${'a'}/contract`}
 		/>
 	</div>
 </div>
