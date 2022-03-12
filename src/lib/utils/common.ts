@@ -24,7 +24,7 @@ export const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] =>
 export const objectEntries = <Obj>(obj: Obj): [keyof Obj, Obj[keyof Obj]][] =>
 	Object.entries(obj) as [keyof Obj, Obj[keyof Obj]][];
 
-const concatIfExists = (strings: (string | null | undefined)[]) => {
+export const concatIfExists = (strings: (string | null | undefined)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
 

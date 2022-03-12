@@ -51,10 +51,6 @@ export function getPaginatedItems<T>(
 	};
 }
 
-export const concatIfExists = (strings: (string | null | undefined)[]) => {
-	return strings.filter((str) => str).join(' ');
-};
-
 export function downloadBlob(blob: Blob, name = 'file.txt') {
 	// Convert your blob into a Blob URL (a special url that points to an object in the browser's memory)
 	const blobUrl = URL.createObjectURL(blob);

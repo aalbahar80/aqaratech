@@ -1,5 +1,5 @@
 import type { InferMutationInput } from '$lib/client/trpc';
-import { concatIfExists } from '$lib/utils/table-utils';
+import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
@@ -43,8 +43,17 @@ const defaultForm = (): Property => ({
 	clientId: '',
 });
 
-export const label: typeof definition['label'] = (item) =>
-	concatIfExists([item.area, 'قطعة', item.block, item.street, 'مبنى', '2']);
+export const getAddress = <
+	T extends {
+		area: string | null;
+		block: string | null;
+		street: string | null;
+	},
+>(
+	item: T,
+) => concatIfExists([item.area, 'قطعة', item.block, item.street, 'مبنى', '2']);
+
+const label: typeof definition['label'] = (item) => getAddress(item);
 
 const definition: EntityDefinition<'properties'> = {
 	schema,

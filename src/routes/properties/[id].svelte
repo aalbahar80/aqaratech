@@ -5,7 +5,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/UnitsList.svelte';
-	import { label } from '$lib/definitions/property';
+	import { getAddress } from '$lib/definitions/property';
 	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from '@sveltejs/kit';
 
@@ -22,7 +22,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Address', label(property)],
+		['Address', getAddress(property)],
 		['Created on', dateFormat(property.createdAt)],
 		['Last updated', property.updatedAt.toLocaleString()],
 	];
