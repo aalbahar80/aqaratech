@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Button from '$components/Button.svelte';
+	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -30,6 +31,27 @@
 			tooltip: 'Bedrooms',
 		},
 	];
+
+	// TODO: should be reactive?
+	const getBadge = () => {
+		if (lease.end < new Date()) {
+			return {
+				label: 'Expired',
+				color: 'red',
+			};
+		}
+		if (lease.start > new Date()) {
+			return {
+				label: 'Pending',
+				color: 'indigo',
+			};
+		}
+		return {
+			label: 'Active',
+			color: 'green',
+		};
+	};
+	const badge = getBadge();
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -63,6 +85,7 @@
 			/>
 		</svelte:fragment>
 	</Heading>
+	<Badge label={badge.label} badgeColor={badge.color} />
 	<DetailsPane {details} {files} />
 	<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
 </div>

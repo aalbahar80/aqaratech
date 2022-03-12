@@ -2,6 +2,7 @@
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -125,21 +126,10 @@
 				loading={loadingPaid}
 			/>
 		</svelte:fragment>
-
-		<!-- TODO reconsider if fragment is overkill -->
-		<svelte:fragment slot="badge">
-			{trx.isPaid ? 'Paid' : 'Not paid'}
-		</svelte:fragment>
 	</Heading>
-
+	<Badge
+		label={trx.isPaid ? 'Paid' : 'Not paid'}
+		badgeColor={trx.isPaid ? 'green' : 'red'}
+	/>
 	<DetailsPane {details} />
 </div>
-
-<style lang="postcss">
-	.paid {
-		@apply bg-green-100 text-green-800;
-	}
-	.not-paid {
-		@apply bg-pink-100 text-pink-800;
-	}
-</style>
