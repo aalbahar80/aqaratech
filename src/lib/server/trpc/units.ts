@@ -57,7 +57,10 @@ export default trpc
 		}),
 	})
 	.query('search', {
-		input: z.string().optional(),
+		input: z.object({
+			query: z.string().optional(),
+			propertyId: z.string().nullish(),
+		}),
 		resolve: ({ input }) =>
 			prismaClient.unit.findMany({
 				take: 5,
@@ -68,15 +71,32 @@ export default trpc
 					id: true,
 					unitNumber: true,
 				},
-				where: input
-					? {
-							OR: [
-								{ id: { contains: input } },
-								{ unitNumber: { contains: input } },
-							],
-					  }
-					: undefined,
+				where:
+					input.query || input.propertyId
+						? {
+								AND: [
+									{
+										propertyId: input.propertyId ?? {},
+									},
+									{
+										OR: [
+											{ id: { contains: input.query } },
+											{ unitNumber: { contains: input.query } },
+										],
+									},
+								],
+						  }
+						: undefined,
 			}),
+		// 	where: input
+		// 		? {
+		// 				OR: [
+		// 					{ id: { contains: input.query } },
+		// 					{ unitNumber: { contains: input.query } },
+		// 				],
+		// 		  }
+		// 		: undefined,
+		// }),
 	})
 	.query('count', {
 		resolve: () => prismaClient.unit.count({}),
