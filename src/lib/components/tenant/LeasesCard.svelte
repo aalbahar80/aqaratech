@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { getProgress } from '$lib/utils/common';
-	import { concatIfExists } from '$lib/utils/table-utils';
+	import { getName, getProgress } from '$lib/utils/common';
 	import { Calendar, Home, Plus, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import formatDistance from 'date-fns/formatDistance';
@@ -77,10 +76,7 @@
 												class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 												aria-hidden="true"
 											/>
-											{concatIfExists([
-												lease.tenant.firstName,
-												lease.tenant.lastName,
-											])}
+											{getName(lease.tenant)}
 										{/if}
 									</p>
 								</div>

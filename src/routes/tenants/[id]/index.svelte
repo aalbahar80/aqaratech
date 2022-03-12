@@ -4,7 +4,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { concatIfExists } from '$lib/utils/table-utils';
+	import { getName } from '$lib/utils/common';
 	import type { Load } from '@sveltejs/kit';
 	import flatten from 'lodash-es/flatten.js';
 	import map from 'lodash-es/map.js';
@@ -24,10 +24,7 @@
 	export let tenant: Tenant;
 
 	const details: [string, string | null][] = [
-		[
-			'Full Name',
-			concatIfExists([tenant.firstName, tenant.secondName, tenant.lastName]),
-		],
+		['Full Name', getName(tenant, false)],
 		['Phone', tenant.phone],
 		['Email', tenant.email],
 		['Civil id', tenant.civilid],

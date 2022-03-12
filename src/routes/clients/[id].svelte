@@ -4,8 +4,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/PropertyList.svelte';
-	import { dateFormat } from '$lib/utils/common';
-	import { concatIfExists } from '$lib/utils/table-utils';
+	import { dateFormat, getName } from '$lib/utils/common';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -21,7 +20,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Name', concatIfExists([client.firstName, client.lastName])],
+		['Name', getName(client)],
 		['Phone', client.phone],
 		['Email', client.email],
 		['Created on', dateFormat(client.createdAt)],

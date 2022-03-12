@@ -2,8 +2,8 @@
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import { entityDefinitions } from '$lib/definitions';
 	import { inWords } from '$lib/utils/currency';
-	import { concatIfExists } from '$lib/utils/table-utils';
 	import { page } from '$app/stores';
+	import { getName } from '$lib/utils/common';
 
 	const { lease } = $page.stuff;
 
@@ -20,12 +20,7 @@
 
 	const fillable = {
 		contractDate: new Date().toLocaleDateString(),
-		name: concatIfExists([
-			lease.tenant.firstName,
-			lease.tenant.secondName,
-			lease.tenant.thirdName,
-			lease.tenant.lastName,
-		]),
+		name: getName(lease.tenant, false),
 		civilid: lease.tenant.civilid,
 		phone: lease.tenant.phone,
 		tenantAddress: '',

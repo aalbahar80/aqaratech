@@ -5,15 +5,14 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { concatIfExists } from '$lib/utils/table-utils';
+	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import formatDistance from 'date-fns/formatDistance';
 
 	const { lease } = $page.stuff;
 	const details: [string, string | null][] = [
-		['Tenant', concatIfExists([lease.tenant.firstName, lease.tenant.lastName])],
+		['Tenant', getName(lease.tenant)],
 		['Start Date', dateFormat(lease.start)],
 		['End Date', dateFormat(lease.end)],
 		['Monthly Rent', kwdFormat(lease.monthlyRent)],
