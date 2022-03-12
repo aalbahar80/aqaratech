@@ -1,11 +1,33 @@
+<script lang="ts">
+	import ComboBox from '../form/ComboBox.svelte';
+	import Radio from './Radio.svelte';
+	import Select from 'svelte-select';
+	import trpc from '$lib/client/trpc';
+
+	let propertyId: string = '';
+	let unitList: { id: string; label: string }[] = [];
+	$: console.log({ propertyId }, 'LeaseForm.svelte ~ 9');
+	$: getUnitList(propertyId);
+	$: console.log({ unitList }, 'LeaseForm.svelte ~ 9');
+	const getUnitList = async (propertyIdFilter: string) => {
+		unitList = await trpc
+			.query('units:search', { propertyId: propertyIdFilter })
+			.then((units) =>
+				units.map((unit) => ({
+					id: unit.id,
+					label: unit.unitNumber,
+				})),
+			);
+	};
+</script>
+
 <div>
 	<div class="md:grid md:grid-cols-3 md:gap-6">
 		<div class="md:col-span-1">
 			<div class="px-4 sm:px-0">
-				<h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+				<h3 class="text-lg font-medium leading-6 text-gray-900">Unit</h3>
 				<p class="mt-1 text-sm text-gray-600">
-					This information will be displayed publicly so be careful what you
-					share.
+					Choose an existing tenant or create a new one.
 				</p>
 			</div>
 		</div>
@@ -13,10 +35,29 @@
 			<form action="#" method="POST">
 				<div class="shadow sm:overflow-hidden sm:rounded-md">
 					<div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+						<!-- <Radio /> -->
+						<ComboBox
+							entity="properties"
+							on:select={(e) => {
+								propertyId = e.detail.id;
+							}}
+							on:clear={() => {
+								propertyId = '';
+							}}
+						/>
+
+						{#if propertyId}
+							<div class="py-2">
+								<Select items={unitList} optionIdentifier="id" />
+							</div>
+						{/if}
+
+						<!-- <ComboBox entity="units" filter={{ propertyId }} /> -->
+
 						<div class="grid grid-cols-3 gap-6">
 							<div class="col-span-3 sm:col-span-2">
 								<label
-									htmlFor="company-website"
+									for="company-website"
 									class="block text-sm font-medium text-gray-700"
 								>
 									Website
@@ -40,7 +81,7 @@
 
 						<div>
 							<label
-								htmlFor="about"
+								for="about"
 								class="block text-sm font-medium text-gray-700"
 							>
 								About
@@ -111,7 +152,7 @@
 									</svg>
 									<div class="flex text-sm text-gray-600">
 										<label
-											htmlFor="file-upload"
+											for="file-upload"
 											class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
 										>
 											<span>Upload a file</span>
@@ -168,7 +209,7 @@
 						<div class="grid grid-cols-6 gap-6">
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									htmlFor="first-name"
+									for="first-name"
 									class="block text-sm font-medium text-gray-700"
 								>
 									First name
@@ -184,7 +225,7 @@
 
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									htmlFor="last-name"
+									for="last-name"
 									class="block text-sm font-medium text-gray-700"
 								>
 									Last name
@@ -200,7 +241,7 @@
 
 							<div class="col-span-6 sm:col-span-4">
 								<label
-									htmlFor="email-address"
+									for="email-address"
 									class="block text-sm font-medium text-gray-700"
 								>
 									Email address
@@ -216,7 +257,7 @@
 
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									htmlFor="country"
+									for="country"
 									class="block text-sm font-medium text-gray-700"
 								>
 									Country
@@ -235,7 +276,7 @@
 
 							<div class="col-span-6">
 								<label
-									htmlFor="street-address"
+									for="street-address"
 									class="block text-sm font-medium text-gray-700"
 								>
 									Street address
@@ -251,7 +292,7 @@
 
 							<div class="col-span-6 sm:col-span-6 lg:col-span-2">
 								<label
-									htmlFor="city"
+									for="city"
 									class="block text-sm font-medium text-gray-700"
 								>
 									City
@@ -267,7 +308,7 @@
 
 							<div class="col-span-6 sm:col-span-3 lg:col-span-2">
 								<label
-									htmlFor="region"
+									for="region"
 									class="block text-sm font-medium text-gray-700"
 								>
 									State / Province
@@ -283,7 +324,7 @@
 
 							<div class="col-span-6 sm:col-span-3 lg:col-span-2">
 								<label
-									htmlFor="postal-code"
+									for="postal-code"
 									class="block text-sm font-medium text-gray-700"
 								>
 									ZIP / Postal code
@@ -349,7 +390,7 @@
 										/>
 									</div>
 									<div class="ml-3 text-sm">
-										<label htmlFor="comments" class="font-medium text-gray-700">
+										<label for="comments" class="font-medium text-gray-700">
 											Comments
 										</label>
 										<p class="text-gray-500">
@@ -367,10 +408,7 @@
 										/>
 									</div>
 									<div class="ml-3 text-sm">
-										<label
-											htmlFor="candidates"
-											class="font-medium text-gray-700"
-										>
+										<label for="candidates" class="font-medium text-gray-700">
 											Candidates
 										</label>
 										<p class="text-gray-500">
@@ -388,7 +426,7 @@
 										/>
 									</div>
 									<div class="ml-3 text-sm">
-										<label htmlFor="offers" class="font-medium text-gray-700">
+										<label for="offers" class="font-medium text-gray-700">
 											Offers
 										</label>
 										<p class="text-gray-500">
@@ -416,7 +454,7 @@
 										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
 									/>
 									<label
-										htmlFor="push-everything"
+										for="push-everything"
 										class="ml-3 block text-sm font-medium text-gray-700"
 									>
 										Everything
@@ -430,7 +468,7 @@
 										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
 									/>
 									<label
-										htmlFor="push-email"
+										for="push-email"
 										class="ml-3 block text-sm font-medium text-gray-700"
 									>
 										Same as email
@@ -444,7 +482,7 @@
 										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
 									/>
 									<label
-										htmlFor="push-nothing"
+										for="push-nothing"
 										class="ml-3 block text-sm font-medium text-gray-700"
 									>
 										No push notifications
