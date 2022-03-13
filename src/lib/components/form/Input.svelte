@@ -219,15 +219,15 @@
 	.form__input--invalid {
 		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
 	}
+
 	/* Remove arrow steppers */
 	/* Firefox */
-
-	input[type='number'] {
+	input[type='number']:not([id='cycleCount']) {
 		-moz-appearance: textfield;
 	}
 	/* Chrome, Safari, Edge, Opera */
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
+	input:not([id='cycleCount'])::-webkit-outer-spin-button,
+	input:not([id='cycleCount'])::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}

@@ -19,7 +19,7 @@
 	export let predefined: Record<string, string>;
 
 	const defaultForm = entityDefinitions[entity].defaultForm();
-	const data = {
+	const lease = {
 		...defaultForm,
 		...predefined,
 	};
@@ -39,7 +39,7 @@
 			New Lease
 		</h2>
 	</div>
-	<LeaseForm />
+	<LeaseForm {lease} />
 </div>
 
 <!-- <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
