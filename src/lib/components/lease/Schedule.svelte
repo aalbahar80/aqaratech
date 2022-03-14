@@ -111,7 +111,9 @@
 										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
 										class:invalid={!trx.postDate}
 										on:change={(e) => {
-											schedule[idx].postDate = e.currentTarget.valueAsDate;
+											if (e.currentTarget.valueAsDate) {
+												schedule[idx].postDate = e.currentTarget.valueAsDate;
+											}
 										}}
 									/>
 								</span>
