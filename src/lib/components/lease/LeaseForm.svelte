@@ -16,7 +16,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
 	import type { z } from 'zod';
@@ -38,6 +38,19 @@
 				})),
 			);
 	};
+
+	const getDate = (date: any) => {
+		console.log(typeof date, 'line 89');
+		console.log(date);
+		let result;
+		if (date instanceof Date) {
+			result = date.toISOString().split('T')[0];
+		} else {
+			result = date;
+		}
+		console.log(result, 'line 95');
+		return result;
+	};
 	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	$: getUnitList(propertyId);
 
@@ -54,6 +67,28 @@
 		unsetField,
 		setData,
 	} = createForm({
+		transform: (values) => {
+			if (values?.schedule) {
+				const newS = values.schedule.map((s) => ({
+					...s,
+					postDate: getDate(s.postDate),
+				}));
+				console.log('returning', {
+					...values,
+					schedule: newS,
+				});
+				return {
+					...values,
+					end: getDate(values.end),
+					schedule: newS,
+				};
+			}
+			console.log('got values', values);
+			return {
+				...values,
+				end: getDate(values.end),
+			};
+		},
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
 		onError: (err) => {
@@ -86,18 +121,6 @@
 
 	$: console.log($data2, 'LeaseForm.svelte ~ 105');
 	// $: trxList = $data2.schedule ?? lease.schedule;
-	const getDate = (date: any) => {
-		console.log(typeof date, 'line 89');
-		console.log(date);
-		let result;
-		if (date instanceof Date) {
-			result = date.toISOString().split('T')[0];
-		} else {
-			result = date;
-		}
-		console.log(result, 'line 95');
-		return result;
-	};
 	onMount(async () => {
 		// await tick();
 		setFields('schedule', lease.schedule);
@@ -253,12 +276,7 @@
 
 							<div class="col-span-6 sm:col-span-3">
 								<!-- <Input name="end" value={lease.end} /> -->
-								<input
-									type="date"
-									name="end"
-									id="end"
-									value={getDate(lease.end)}
-								/>
+								<!-- <input type="date" name="end" id="end" value={lease.end} /> -->
 							</div>
 
 							<div class="col-span-6 sm:col-span-6">
@@ -284,6 +302,7 @@
 											Number(e.currentTarget.value),
 											new Date(getValue($data2, 'start')),
 										);
+										unsetField('schedule');
 										setFields('schedule', newSchedule);
 									}}
 								/>
@@ -342,13 +361,13 @@
 								>
 									First Payment
 								</label>
-								<input
+								<!-- <input
 									id="firstPayment"
 									name="firstPayment"
 									value={lease.firstPayment}
 									type="date"
 									class:invalid={!!getValue($errors, 'firstPayment')}
-								/>
+								/> -->
 							</div>
 
 							<div class="col-span-6 sm:col-span-3">
@@ -400,21 +419,23 @@
 													$errors,
 													`schedule.${idx}.amount`,
 												)}
+												data-felte-keep-on-remove
 											/>
 										</div>
 										<span class="w-1/3 flex-1 sm:flex-initial">
 											<!-- value={trx.postDate.toISOString().split('T')[0]} -->
 											<!-- value={trx.postDate} -->
-											<input
+											<!-- value={getDate(trx.postDate)} -->
+											<!-- <input
 												type="date"
 												id={`schedule.${idx}.postDate`}
 												name={`schedule.${idx}.postDate`}
-												value={getDate(trx.postDate)}
+												value={trx.postDate}
 												class:invalid={!!getValue(
 													$errors,
 													`schedule.${idx}.postDate`,
 												)}
-											/>
+											/> -->
 										</span>
 										<button
 											class="w-1/12"
