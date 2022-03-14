@@ -53,7 +53,7 @@
 								value={scheduleStart.toISOString().split('T')[0]}
 								type="date"
 								on:change={(e) => {
-									scheduleStart = new Date(e.target?.value);
+									scheduleStart = e.currentTarget.valueAsDate ?? scheduleStart;
 									schedule = generateSchedule({ scheduleStart, amount, count });
 								}}
 							/>
