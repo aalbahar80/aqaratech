@@ -409,38 +409,39 @@
 
 							{#each trxList as trx, idx (idx)}
 								<div
-									class="col-span-full flex min-w-max place-content-between items-center space-x-4"
+									class="col-span-full flex place-content-between items-center"
 								>
 									<div class="w-1/12">
 										{idx + 1}
 									</div>
-									<div class="flex w-full rounded-md shadow-sm">
+									<div class="flex w-1/3 rounded-md shadow-sm">
 										<span
-											class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm"
+											class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
 										>
-											KWD
+											KD
 										</span>
 										<input
 											name={`transactions.${idx}.amount`}
 											value={trx.amount}
 											type="number"
-											class="schedule block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+											class="schedule block min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 											class:invalid={!!getValue(
 												$errors,
 												`transactions.${idx}.amount`,
 											)}
 										/>
 									</div>
-									<input
-										class="w-1/4"
-										type="date"
-										name={`transactions.${idx}.postDate`}
-										value={trx.dueDate.toISOString().split('T')[0]}
-										class:invalid={!!getValue(
-											$errors,
-											`transactions.${idx}.postDate`,
-										)}
-									/>
+									<span class="w-1/3">
+										<input
+											type="date"
+											name={`transactions.${idx}.postDate`}
+											value={trx.dueDate.toISOString().split('T')[0]}
+											class:invalid={!!getValue(
+												$errors,
+												`transactions.${idx}.postDate`,
+											)}
+										/>
+									</span>
 									<button
 										class="w-1/12"
 										on:click|preventDefault={() => {
