@@ -75,7 +75,12 @@
 								on:change={handleCountChange}
 							/>
 						</div>
-						<!-- {#if schedule} -->
+						<!-- Divider -->
+						<div aria-hidden="true" class="col-span-full">
+							<div class="py-5 ">
+								<div class="border-t  border-gray-200" />
+							</div>
+						</div>
 						{#each schedule as trx, idx (trx.nanoid)}
 							<div
 								class="col-span-full flex place-content-between items-center space-x-2"
