@@ -35,18 +35,6 @@
 			);
 	};
 
-	const getDate = (date: any) => {
-		console.log(typeof date, 'line 89');
-		console.log(date);
-		let result;
-		if (date instanceof Date) {
-			result = date.toISOString().split('T')[0];
-		} else {
-			result = date;
-		}
-		console.log(result, 'line 95');
-		return result;
-	};
 	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	$: getUnitList(propertyId);
 
@@ -92,7 +80,6 @@
 	});
 
 	const lease = defaultForm();
-	$: console.log($data2, 'LeaseForm.svelte ~ 105');
 </script>
 
 <form use:form>
@@ -287,8 +274,8 @@
 		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 
-	<pre>{JSON.stringify($data2, null, 2)}</pre>
-	<pre>{JSON.stringify(lease, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
+	<!-- <pre>{JSON.stringify(lease, null, 2)}</pre> -->
 	<!-- Divider -->
 	<div class="hidden sm:block" aria-hidden="true">
 		<div class="py-5">
@@ -298,11 +285,10 @@
 
 	<!-- Payment Schedule section -->
 </form>
-
 <Schedule amount={$data2.monthlyRent} />
 
 <style lang="postcss">
-	input:not(.schedule) {
+	input {
 		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}

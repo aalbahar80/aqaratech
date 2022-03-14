@@ -13,12 +13,6 @@ export function generateSchedule({
 	amount: number;
 	scheduleStart: Date;
 }) {
-	console.log('generating new schedule');
-	console.log({
-		count,
-		amount,
-		scheduleStart,
-	});
 	const newSchedule = [];
 	// get the date of the 1st day of the next month
 	// const leaseStart = new Date(lease.scheduleStart);
@@ -27,7 +21,6 @@ export function generateSchedule({
 		scheduleStart.getMonth() + 1,
 		2,
 	);
-	console.log('nextMonth: ', nextMonth);
 
 	for (let bp = 0; bp < Math.min(count, 24); bp++) {
 		// TODO change to 1 month
@@ -41,7 +34,6 @@ export function generateSchedule({
 			memo,
 		});
 	}
-	console.log({ newSchedule }, 'LeaseForm.svelte ~ 114');
 	return newSchedule;
 }
 
