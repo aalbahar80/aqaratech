@@ -83,6 +83,13 @@
 	});
 
 	$: console.log($data2, 'LeaseForm.svelte ~ 105');
+	const getEnd = () => {
+		// console.log(typeof lease.end, 'sdf');
+		if (lease.end instanceof Date) {
+			return lease.end.toISOString().split('T')[0];
+		}
+		return lease.end;
+	};
 </script>
 
 <form use:form>
@@ -232,7 +239,8 @@
 							</div>
 
 							<div class="col-span-6 sm:col-span-3">
-								<Input name="end" value={lease.end} />
+								<!-- <Input name="end" value={lease.end} /> -->
+								<input type="date" name="end" id="end" value={getEnd()} />
 							</div>
 
 							<div class="col-span-6 sm:col-span-6">
