@@ -22,6 +22,7 @@
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
 
+	const lease = defaultForm();
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
@@ -48,7 +49,9 @@
 		isSubmitting,
 		data: data2,
 		setFields,
+		setData,
 	} = createForm({
+		initialValues: lease,
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
 		onError: (err) => {
@@ -78,8 +81,6 @@
 			});
 		},
 	});
-
-	const lease = defaultForm();
 </script>
 
 <form use:form>
@@ -110,6 +111,7 @@
 									on:clear={() => {
 										propertyId = '';
 									}}
+									invalidText={getValue($errors, 'unitId')?.[0]}
 								/>
 							</div>
 							{#if propertyId}
@@ -121,8 +123,18 @@
 										>
 											Unit</label
 										>
-										<Select id="unit" items={unitList} optionIdentifier="id" />
-										<!-- {invalidText ?? ''} -->
+										<Select
+											id="unit"
+											items={unitList}
+											optionIdentifier="id"
+											on:select={(e) => {
+												setData('unitId', e.detail.id);
+											}}
+											on:clear={() => {
+												setData('unitId', '');
+											}}
+											hasError={!!getValue($errors, 'unitId')}
+										/>
 									</div>
 								{/key}
 							{/if}
@@ -140,6 +152,57 @@
 		</div>
 	</div>
 
+	<!-- Tenant -->
+	<div>
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<div class="px-4 sm:px-0">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
+					<p class="mt-1 text-sm text-gray-600">
+						Tenants needs to be created before they can be added to a lease.
+					</p>
+					<span class="mt-4 sm:mt-0">
+						<a
+							href="/tenants/add"
+							class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+						>
+							Create new tenant<span aria-hidden="true"> &rarr;</span>
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="mt-5 md:col-span-2 md:mt-0">
+				<div class="rounded-md bg-white shadow">
+					<div class="space-y-6 px-4 py-5 sm:p-6">
+						<!-- <Radio /> -->
+						<div
+							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
+						>
+							<div class="w-full">
+								<ComboBox
+									entity="tenants"
+									on:select={(e) => {
+										setData('tenantId', e.detail.id);
+									}}
+									on:clear={() => {
+										setData('tenantId', '');
+									}}
+									invalidText={getValue($errors, 'tenantId')?.[0]}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t border-gray-200" />
+		</div>
+	</div>
 	<!-- Lease Basic Info -->
 	<div class="mt-10 sm:mt-0">
 		<div class="md:grid md:grid-cols-3 md:gap-6">
@@ -229,7 +292,7 @@
 							</div>
 
 							<div class="col-span-6 sm:col-span-3">
-								<!-- <Input name="end" value={lease.end} /> -->
+								<Input name="end" value={lease.end} />
 								<!-- <input type="date" name="end" id="end" value={lease.end} /> -->
 							</div>
 
@@ -273,18 +336,18 @@
 		/>
 		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
-
-	<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
-	<!-- <pre>{JSON.stringify(lease, null, 2)}</pre> -->
-	<!-- Divider -->
-	<div class="hidden sm:block" aria-hidden="true">
-		<div class="py-5">
-			<div class="border-t  border-gray-200" />
-		</div>
-	</div>
-
-	<!-- Payment Schedule section -->
 </form>
+
+<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
+<!-- <pre>{JSON.stringify(lease, null, 2)}</pre> -->
+<!-- Divider -->
+<div class="hidden sm:block" aria-hidden="true">
+	<div class="py-5">
+		<div class="border-t  border-gray-200" />
+	</div>
+</div>
+
+<!-- Payment Schedule section -->
 <Schedule amount={$data2.monthlyRent} />
 
 <style lang="postcss">
