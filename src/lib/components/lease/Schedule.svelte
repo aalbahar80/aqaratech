@@ -2,7 +2,7 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { generateSchedule } from '$lib/definitions/lease';
-	import { z } from 'zod';
+	import { z, type ZodIssue } from 'zod';
 
 	export let amount: number;
 
@@ -41,14 +41,20 @@
 		if (!validation.success) {
 			errors = validation.error.flatten().fieldErrors;
 			issues = validation.error.issues;
+			console.log(validation);
 			console.log(validation.error.flatten());
+			errors = validation.error.flatten((i: ZodIssue) => ({
+				message: i.message,
+				path: i.path,
+				code: i.code,
+			}));
 		}
 	};
 </script>
 
-<pre>{JSON.stringify(issues, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(issues, null, 2)}</pre> -->
 <pre>{JSON.stringify(errors, null, 2)}</pre>
-<pre>{JSON.stringify(schedule, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(schedule, null, 2)}</pre> -->
 <div class="mt-10 sm:mt-0">
 	<div class="md:grid md:grid-cols-3 md:gap-6">
 		<div class="md:col-span-1">
