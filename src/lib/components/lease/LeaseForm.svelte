@@ -93,9 +93,9 @@
 		memo: string;
 	};
 	let trxList: Trx[] = [];
-	$: console.log({ $data2 }, 'LeaseForm.svelte ~ 83');
 	function generateSchedule(count: number, amount: number, start: Date) {
-		const newTrxList = [];
+		console.log('generating new schedule');
+		const newSchedule = [];
 		// get the date of the 1st day of the next month
 		// const leaseStart = new Date(lease.start);
 		const nextMonth = new Date(start.getFullYear(), start.getMonth() + 1, 2);
@@ -105,17 +105,18 @@
 			// TODO change to 1 month
 			const dueDate = addMonths(nextMonth, bp);
 			const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
-			newTrxList.push({
+			newSchedule.push({
 				amount,
 				dueDate,
 				memo,
 			});
 		}
-		return newTrxList;
+		console.log({ newSchedule }, 'LeaseForm.svelte ~ 114');
+		return newSchedule;
 	}
-	$: console.log($data2.cycleCount, 'LeaseForm.svelte ~ 103');
-	$: console.log($data2.monthlyRent, 'LeaseForm.svelte ~ 104');
-	$: console.log($data2.firstPayment, 'LeaseForm.svelte ~ 105');
+	// $: console.log($data2.cycleCount, 'LeaseForm.svelte ~ 103');
+	// $: console.log($data2.monthlyRent, 'LeaseForm.svelte ~ 104');
+	// $: console.log($data2.firstPayment, 'LeaseForm.svelte ~ 105');
 	onMount(() => {
 		trxList = generateSchedule(
 			lease.cycleCount,
@@ -126,6 +127,7 @@
 </script>
 
 <form use:form>
+	<!-- Property/Unit section -->
 	<div>
 		<div class="md:grid md:grid-cols-3 md:gap-6">
 			<div class="md:col-span-1">
@@ -182,6 +184,7 @@
 		</div>
 	</div>
 
+	<!-- Lease Basic Info -->
 	<div class="mt-10 sm:mt-0">
 		<div class="md:grid md:grid-cols-3 md:gap-6">
 			<div class="md:col-span-1">
@@ -292,34 +295,19 @@
 									class:invalid={!!getValue($errors, 'monthlyRent')}
 									on:change={(e) => {
 										console.log('changed monthlyRent');
+										console.log(
+											'new amountis: ',
+											Number(e.currentTarget.value),
+										);
 										trxList = generateSchedule(
-											getValue($data2, 'cycleCount'),
-											+e.currentTarget.value,
-											// new Date(getValue($data2, 'firstPayment')),
-											// TODO dont hardcode
+											// getValue($data2, 'cycleCount'),
+											12,
+											Number(e.currentTarget.value),
 											new Date(),
 										);
 									}}
 								/>
 							</div>
-
-							<!-- <div class="col-span-6 sm:col-span-3">
-								<Input
-									name="firstPayment"
-									value={lease.firstPayment}
-									invalid={!!getValue($errors, 'firstPayment')}
-									invalidText={getValue($errors, 'firstPayment')?.[0]}
-								/>
-							</div> -->
-
-							<!-- <div class="col-span-6 sm:col-span-3">
-								<Input
-									name="cycleCount"
-									value={lease.cycleCount}
-									invalid={!!getValue($errors, 'cycleCount')}
-									invalidText={getValue($errors, 'cycleCount')?.[0]}
-								/>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -349,6 +337,8 @@
 		</div>
 	</div>
 
+	<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
+	<!-- Payment Schedule section -->
 	<div class="mt-10 sm:mt-0">
 		<div class="md:grid md:grid-cols-3 md:gap-6">
 			<div class="md:col-span-1">
@@ -403,11 +393,12 @@
 											// TODO dont hardcode this
 											new Date(),
 										);
+										// trxList = generateSchedule(3, 30, new Date());
 									}}
 								/>
 							</div>
 
-							{#each trxList as trx, idx (idx)}
+							{#each trxList as trx, idx (trx.dueDate)}
 								<div
 									class="col-span-full flex place-content-between items-center space-x-2"
 								>
@@ -421,6 +412,7 @@
 											KWD
 										</span>
 										<input
+											id={`transactions.${idx}.amount`}
 											name={`transactions.${idx}.amount`}
 											value={trx.amount}
 											type="number"
@@ -434,6 +426,7 @@
 									<span class="w-1/3 flex-1 sm:flex-initial">
 										<input
 											type="date"
+											id={`transactions.${idx}.postDate`}
 											name={`transactions.${idx}.postDate`}
 											value={trx.dueDate.toISOString().split('T')[0]}
 											class:invalid={!!getValue(
@@ -467,7 +460,8 @@
 
 <!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
 
-<!-- <pre>{JSON.stringify(trxList, null, 2)}</pre> -->
+<pre>{JSON.stringify(trxList, null, 2)}</pre>
+
 <style lang="postcss">
 	input:not(.schedule) {
 		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
