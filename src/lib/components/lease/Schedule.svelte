@@ -44,9 +44,7 @@
 			console.log(validation);
 			console.log(validation.error.flatten());
 			errors = validation.error.flatten((i: ZodIssue) => ({
-				message: i.message,
-				path: i.path,
-				code: i.code,
+				[i.path[1]]: i.message,
 			}));
 		}
 	};
