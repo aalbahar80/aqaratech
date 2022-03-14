@@ -3,6 +3,7 @@ import { falsyToNull } from '$lib/zodTransformers';
 import { addMonths, format } from 'date-fns';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
+import { nanoid } from 'nanoid';
 
 export function generateSchedule(count: number, amount: number, start: Date) {
 	console.log('generating new schedule');
@@ -17,6 +18,7 @@ export function generateSchedule(count: number, amount: number, start: Date) {
 		const dueDate = addMonths(nextMonth, bp);
 		const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
 		newSchedule.push({
+			id: nanoid(),
 			amount,
 			// postDate: dueDate.toISOString().split('T')[0],
 			postDate: dueDate,
@@ -56,6 +58,7 @@ export const schema = z
 			.transform(falsyToNull),
 		schedule: z.array(
 			z.object({
+				id: z.string(),
 				amount: z.number().min(1),
 				postDate: z.preprocess((arg) => {
 					if (typeof arg === 'string' || arg instanceof Date)
@@ -77,6 +80,7 @@ type Lease = InferMutationInput<'leases:save'>;
 const defaultForm = (): Lease => ({
 	start: new Date(),
 	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+	// end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
 	deposit: 0,
 	monthlyRent: 0,
 	tenantId: '',
@@ -84,7 +88,7 @@ const defaultForm = (): Lease => ({
 	contactMethod: 'sms',
 	shouldNotify: true,
 	active: true,
-	cycleCount: 12,
+	cycleCount: 8,
 	billingDay: 1,
 	// TODO fix timezone
 	firstPayment: new Date(
@@ -92,7 +96,7 @@ const defaultForm = (): Lease => ({
 		new Date().getMonth() + 1,
 		2,
 	),
-	schedule: generateSchedule(12, 0, new Date()),
+	schedule: generateSchedule(2, 0, new Date()),
 });
 
 const label: typeof definition['label'] = (item) =>
