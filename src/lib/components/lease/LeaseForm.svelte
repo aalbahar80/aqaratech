@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, { type InferMutationInput } from '$lib/client/trpc';
-	import { schema, generateSchedule } from '$lib/definitions/lease';
+	import trpc from '$lib/client/trpc';
+	import Schedule from '$lib/components/lease/Schedule.svelte';
+	import { defaultForm, schema } from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema } from '@felte/validator-zod';
@@ -12,19 +13,14 @@
 		SwitchGroup,
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
-	import { Trash } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
-	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
-
-	export let lease: InferMutationInput<'leases:save'>;
 
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
@@ -64,31 +60,7 @@
 		isSubmitting,
 		data: data2,
 		setFields,
-		unsetField,
-		setData,
 	} = createForm({
-		transform: (values) => {
-			if (values?.schedule) {
-				const newS = values.schedule.map((s) => ({
-					...s,
-					postDate: getDate(s.postDate),
-				}));
-				console.log('returning', {
-					...values,
-					schedule: newS,
-				});
-				return {
-					...values,
-					end: getDate(values.end),
-					schedule: newS,
-				};
-			}
-			console.log('got values', values);
-			return {
-				...values,
-				end: getDate(values.end),
-			};
-		},
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
 		onError: (err) => {
@@ -119,13 +91,8 @@
 		},
 	});
 
+	const lease = defaultForm();
 	$: console.log($data2, 'LeaseForm.svelte ~ 105');
-	// $: trxList = $data2.schedule ?? lease.schedule;
-	onMount(async () => {
-		// await tick();
-		setFields('schedule', lease.schedule);
-	});
-	$: schedule = $data2.schedule;
 </script>
 
 <form use:form>
@@ -296,15 +263,6 @@
 									value={lease.monthlyRent}
 									type="number"
 									class:invalid={!!getValue($errors, 'monthlyRent')}
-									on:change={(e) => {
-										const newSchedule = generateSchedule(
-											getValue($data2, 'cycleCount') ?? 2,
-											Number(e.currentTarget.value),
-											new Date(getValue($data2, 'start')),
-										);
-										unsetField('schedule');
-										setFields('schedule', newSchedule);
-									}}
 								/>
 							</div>
 						</div>
@@ -323,13 +281,14 @@
 		</button>
 
 		<Button
-			text={lease.id ? 'Save changes' : 'Create new'}
 			loading={$isSubmitting}
+			text={lease.id ? 'Save changes' : 'Create new'}
 		/>
 		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 
 	<pre>{JSON.stringify($data2, null, 2)}</pre>
+	<pre>{JSON.stringify(lease, null, 2)}</pre>
 	<!-- Divider -->
 	<div class="hidden sm:block" aria-hidden="true">
 		<div class="py-5">
@@ -338,129 +297,9 @@
 	</div>
 
 	<!-- Payment Schedule section -->
-	<div class="mt-10 sm:mt-0">
-		<div class="md:grid md:grid-cols-3 md:gap-6">
-			<div class="md:col-span-1">
-				<div class="px-4 sm:px-0">
-					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						Payment Schedule
-					</h3>
-					<p class="mt-1 text-sm text-gray-600">
-						Use a permanent address where you can receive mail.
-					</p>
-				</div>
-			</div>
-			<div class="mt-5 md:col-span-2 md:mt-0">
-				<div class="overflow-hidden shadow sm:rounded-md">
-					<div class="bg-white px-4 py-5 sm:p-6">
-						<div class="grid grid-cols-6 gap-6">
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="firstPayment"
-									class="text-sm font-medium text-gray-700"
-								>
-									First Payment
-								</label>
-								<!-- <input
-									id="firstPayment"
-									name="firstPayment"
-									value={lease.firstPayment}
-									type="date"
-									class:invalid={!!getValue($errors, 'firstPayment')}
-								/> -->
-							</div>
-
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="cycleCount"
-									class="text-sm font-medium text-gray-700"
-								>
-									Count
-								</label>
-								<!-- <input
-									id="cycleCount"
-									name="cycleCount"
-									value={lease.cycleCount}
-									type="number"
-									class:invalid={!!getValue($errors, 'cycleCount')}
-									on:change={(e) => {
-										const newSchedule = generateSchedule(
-											+e.currentTarget.value,
-											getValue($data2, 'monthlyRent'),
-											new Date(getValue($data2, 'start')),
-										);
-										setFields('schedule', newSchedule);
-									}}
-								/> -->
-							</div>
-
-							{#if schedule}
-								acaskdjf
-								{#each schedule as trx, idx (trx.key)}
-									<div
-										class="col-span-full flex place-content-between items-center space-x-2"
-									>
-										<div class="hidden w-1/12 sm:block">
-											{idx + 1}
-										</div>
-										<div class="flex w-1/3 shadow-sm">
-											<span
-												class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
-											>
-												KWD
-											</span>
-											<input
-												id={`schedule.${idx}.amount`}
-												name={`schedule.${idx}.amount`}
-												value={trx.amount}
-												type="number"
-												class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-												class:invalid={!!getValue(
-													$errors,
-													`schedule.${idx}.amount`,
-												)}
-												data-felte-keep-on-remove
-											/>
-										</div>
-										<span class="w-1/3 flex-1 sm:flex-initial">
-											<!-- value={trx.postDate.toISOString().split('T')[0]} -->
-											<!-- value={trx.postDate} -->
-											<!-- value={getDate(trx.postDate)} -->
-											<!-- <input
-												type="date"
-												id={`schedule.${idx}.postDate`}
-												name={`schedule.${idx}.postDate`}
-												value={trx.postDate}
-												class:invalid={!!getValue(
-													$errors,
-													`schedule.${idx}.postDate`,
-												)}
-											/> -->
-										</span>
-										<button
-											class="w-1/12"
-											on:click|preventDefault={() => {
-												unsetField(`schedule.${idx}`);
-												// trxList = trxList.filter((_, i) => i !== idx);
-												// setFields('cycleCount', trxList.length, true);
-											}}
-										>
-											<Icon
-												src={Trash}
-												class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
-												aria-hidden="true"
-											/>
-										</button>
-									</div>
-								{/each}
-							{/if}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </form>
+
+<Schedule amount={$data2.monthlyRent} />
 
 <style lang="postcss">
 	input:not(.schedule) {
