@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { generateSchedule } from '$lib/definitions/lease';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { generateSchedule } from '$lib/definitions/lease';
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 
 	export let amount: number;
 
@@ -75,14 +77,18 @@
 								on:change={handleCountChange}
 							/>
 						</div>
+
 						<!-- Divider -->
 						<div aria-hidden="true" class="col-span-full">
 							<div class="py-5 ">
 								<div class="border-t  border-gray-200" />
 							</div>
 						</div>
+
 						{#each schedule as trx, idx (trx.nanoid)}
 							<div
+								animate:flip={{ duration: 200 }}
+								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
