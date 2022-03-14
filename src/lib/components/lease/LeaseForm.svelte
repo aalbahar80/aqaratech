@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, {
-		type InferMutationInput,
-		type InferQueryOutput,
-	} from '$lib/client/trpc';
+	import trpc, { type InferMutationInput } from '$lib/client/trpc';
+	// import { schema, generateSchedule } from '$lib/definitions/lease';
 	import { schema } from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import reporter from '@felte/reporter-tippy';
@@ -18,9 +16,7 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { TRPCClientError } from '@trpc/client';
-	import { addMonths, format } from 'date-fns';
 	import { createForm, getValue } from 'felte';
-	import { nanoid } from 'nanoid';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
 	import type { z } from 'zod';
@@ -28,9 +24,7 @@
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
 
-	export let lease:
-		| InferMutationInput<'leases:save'>
-		| InferQueryOutput<'leases:basic'>;
+	export let lease: InferMutationInput<'leases:save'>;
 
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
@@ -88,39 +82,6 @@
 		},
 	});
 
-	type Trx = {
-		id: string;
-		amount: number;
-		postDate: string;
-		memo: string;
-	};
-	function generateSchedule(count: number, amount: number, start: Date) {
-		console.log('generating new schedule');
-		const newSchedule = [];
-		// get the date of the 1st day of the next month
-		// const leaseStart = new Date(lease.start);
-		const nextMonth = new Date(start.getFullYear(), start.getMonth() + 1, 2);
-		console.log('nextMonth: ', nextMonth);
-
-		for (let bp = 0; bp < Math.min(count, 24); bp++) {
-			// TODO change to 1 month
-			const dueDate = addMonths(nextMonth, bp);
-			const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
-			newSchedule.push({
-				id: nanoid(),
-				amount,
-				postDate: dueDate.toISOString().split('T')[0],
-				memo,
-			});
-		}
-		console.log({ newSchedule }, 'LeaseForm.svelte ~ 114');
-		return newSchedule;
-	}
-	let trxList: Trx[] = generateSchedule(
-		lease.cycleCount,
-		lease.monthlyRent,
-		lease.start,
-	);
 	$: console.log($data2, 'LeaseForm.svelte ~ 105');
 </script>
 
