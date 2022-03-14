@@ -7,27 +7,26 @@
 	} from '$lib/client/trpc';
 	import { schema } from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
-	import { validateSchema } from '@felte/validator-zod';
-	import { TRPCClientError } from '@trpc/client';
-	import { addMonths, format } from 'date-fns';
-	import { createForm, getValue } from 'felte';
-	import Select from 'svelte-select';
-	import { scale } from 'svelte/transition';
-	import type { z } from 'zod';
-	import Button from '../Button.svelte';
-	import ComboBox from '../form/ComboBox.svelte';
-	import Input from '../form/Input.svelte';
 	import reporter from '@felte/reporter-tippy';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Trash } from '@steeze-ui/heroicons';
-	import { onMount } from 'svelte';
+	import { validateSchema } from '@felte/validator-zod';
 	import {
 		Switch,
 		SwitchDescription,
 		SwitchGroup,
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
+	import { Trash } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { TRPCClientError } from '@trpc/client';
+	import { addMonths, format } from 'date-fns';
+	import { createForm, getValue } from 'felte';
 	import { nanoid } from 'nanoid';
+	import Select from 'svelte-select';
+	import { scale } from 'svelte/transition';
+	import type { z } from 'zod';
+	import Button from '../Button.svelte';
+	import ComboBox from '../form/ComboBox.svelte';
+	import Input from '../form/Input.svelte';
 
 	export let lease:
 		| InferMutationInput<'leases:save'>
@@ -57,7 +56,6 @@
 		isSubmitting,
 		data: data2,
 		setFields,
-		setData,
 	} = createForm({
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
@@ -92,7 +90,7 @@
 	type Trx = {
 		id: string;
 		amount: number;
-		dueDate: Date;
+		postDate: string;
 		memo: string;
 	};
 	function generateSchedule(count: number, amount: number, start: Date) {
@@ -110,7 +108,7 @@
 			newSchedule.push({
 				id: nanoid(),
 				amount,
-				dueDate,
+				postDate: dueDate.toISOString().split('T')[0],
 				memo,
 			});
 		}
@@ -301,9 +299,15 @@
 											Number(e.currentTarget.value),
 											new Date(getValue($data2, 'start')),
 										);
-										console.log('between');
+										// const newnewsched = newSchedule.map((item) => ({
+										// 	...item,
+										// 	postDate: item.postDate.toISOString().split('T')[0],
+										// }));
+										// console.log('newnewschhed', newnewsched);
 										// setData('schedule', newSchedule);
+										// setFields('schedule', newnewsched);
 										setFields('schedule', newSchedule);
+										// setFields('end', '2020-01-01');
 									}}
 								/>
 							</div>
@@ -393,61 +397,59 @@
 								/>
 							</div>
 
-							{#key trxList[0].id}
-								<!-- {#key trxList} -->
-								{#each trxList as trx, idx (trx.id)}
-									<div
-										class="col-span-full flex place-content-between items-center space-x-2"
-									>
-										<div class="hidden w-1/12 sm:block">
-											{idx + 1}
-										</div>
-										<div class="flex w-1/3 shadow-sm">
-											<span
-												class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
-											>
-												KWD
-											</span>
-											<input
-												id={`schedule.${idx}.amount`}
-												name={`schedule.${idx}.amount`}
-												value={trx.amount}
-												type="number"
-												class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-												class:invalid={!!getValue(
-													$errors,
-													`schedule.${idx}.amount`,
-												)}
-											/>
-										</div>
-										<span class="w-1/3 flex-1 sm:flex-initial">
-											<input
-												type="date"
-												id={`schedule.${idx}.postDate`}
-												name={`schedule.${idx}.postDate`}
-												value={trx.dueDate.toISOString().split('T')[0]}
-												class:invalid={!!getValue(
-													$errors,
-													`schedule.${idx}.postDate`,
-												)}
-											/>
-										</span>
-										<button
-											class="w-1/12"
-											on:click|preventDefault={() => {
-												// trxList = trxList.filter((_, i) => i !== idx);
-												// setFields('cycleCount', trxList.length, true);
-											}}
-										>
-											<Icon
-												src={Trash}
-												class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
-												aria-hidden="true"
-											/>
-										</button>
+							{#each trxList as trx, idx (trx.id)}
+								<div
+									class="col-span-full flex place-content-between items-center space-x-2"
+								>
+									<div class="hidden w-1/12 sm:block">
+										{idx + 1}
 									</div>
-								{/each}
-							{/key}
+									<div class="flex w-1/3 shadow-sm">
+										<span
+											class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
+										>
+											KWD
+										</span>
+										<input
+											id={`schedule.${idx}.amount`}
+											name={`schedule.${idx}.amount`}
+											value={trx.amount}
+											type="number"
+											class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
+											class:invalid={!!getValue(
+												$errors,
+												`schedule.${idx}.amount`,
+											)}
+										/>
+									</div>
+									<span class="w-1/3 flex-1 sm:flex-initial">
+										<!-- value={trx.dueDate.toISOString().split('T')[0]} -->
+										<input
+											type="date"
+											id={`schedule.${idx}.postDate`}
+											name={`schedule.${idx}.postDate`}
+											value={trx.postDate}
+											class:invalid={!!getValue(
+												$errors,
+												`schedule.${idx}.postDate`,
+											)}
+										/>
+									</span>
+									<button
+										class="w-1/12"
+										on:click|preventDefault={() => {
+											// trxList = trxList.filter((_, i) => i !== idx);
+											// setFields('cycleCount', trxList.length, true);
+										}}
+									>
+										<Icon
+											src={Trash}
+											class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
+											aria-hidden="true"
+										/>
+									</button>
+								</div>
+							{/each}
 						</div>
 					</div>
 				</div>
