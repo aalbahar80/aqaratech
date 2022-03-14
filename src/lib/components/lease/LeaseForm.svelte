@@ -51,7 +51,11 @@
 		setFields,
 		setData,
 	} = createForm({
-		initialValues: lease,
+		initialValues: {
+			// avoid any dates here for seamless <input type="date">
+			active: lease.active,
+			shouldNotify: lease.shouldNotify,
+		},
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
 		onError: (err) => {
@@ -174,7 +178,6 @@
 			<div class="mt-5 md:col-span-2 md:mt-0">
 				<div class="rounded-md bg-white shadow">
 					<div class="space-y-6 px-4 py-5 sm:p-6">
-						<!-- <Radio /> -->
 						<div
 							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
 						>
