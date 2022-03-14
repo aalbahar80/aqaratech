@@ -312,12 +312,12 @@
 
 	/* Remove arrow steppers */
 	/* Firefox */
-	input[type='number']:not([id='cycleCount']) {
+	input[type='number'] {
 		-moz-appearance: textfield;
 	}
 	/* Chrome, Safari, Edge, Opera */
-	input:not([id='cycleCount'])::-webkit-outer-spin-button,
-	input:not([id='cycleCount'])::-webkit-inner-spin-button {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}

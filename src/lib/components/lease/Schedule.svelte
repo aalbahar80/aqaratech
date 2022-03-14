@@ -47,7 +47,6 @@
 							>
 								First Payment
 							</label>
-							{scheduleStart}
 							<input
 								id="scheduleStart"
 								name="scheduleStart"
@@ -61,7 +60,7 @@
 						</div>
 
 						<div class="col-span-6 sm:col-span-3">
-							<label for="cycleCount" class="text-sm font-medium text-gray-700">
+							<label for="count" class="text-sm font-medium text-gray-700">
 								Count
 							</label>
 							<input
@@ -124,3 +123,25 @@
 		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+	input:not(.schedule) {
+		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+	}
+	input.invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+
+	/* Remove arrow steppers */
+	/* Firefox */
+	input[type='number']:not([id='count']) {
+		-moz-appearance: textfield;
+	}
+	/* Chrome, Safari, Edge, Opera */
+	input:not([id='count'])::-webkit-outer-spin-button,
+	input:not([id='count'])::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+</style>
