@@ -27,6 +27,7 @@
 		SwitchGroup,
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
+	import { nanoid } from 'nanoid';
 
 	export let lease:
 		| InferMutationInput<'leases:save'>
@@ -56,6 +57,7 @@
 		isSubmitting,
 		data: data2,
 		setFields,
+		setData,
 	} = createForm({
 		extend: reporter(),
 		validate: validateSchema(schema as unknown as z.AnyZodObject),
@@ -88,11 +90,11 @@
 	});
 
 	type Trx = {
+		id: string;
 		amount: number;
 		dueDate: Date;
 		memo: string;
 	};
-	let trxList: Trx[] = [];
 	function generateSchedule(count: number, amount: number, start: Date) {
 		console.log('generating new schedule');
 		const newSchedule = [];
@@ -106,6 +108,7 @@
 			const dueDate = addMonths(nextMonth, bp);
 			const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
 			newSchedule.push({
+				id: nanoid(),
 				amount,
 				dueDate,
 				memo,
@@ -114,16 +117,15 @@
 		console.log({ newSchedule }, 'LeaseForm.svelte ~ 114');
 		return newSchedule;
 	}
+	let trxList: Trx[] = generateSchedule(
+		lease.cycleCount,
+		lease.monthlyRent,
+		lease.start,
+	);
 	// $: console.log($data2.cycleCount, 'LeaseForm.svelte ~ 103');
 	// $: console.log($data2.monthlyRent, 'LeaseForm.svelte ~ 104');
 	// $: console.log($data2.firstPayment, 'LeaseForm.svelte ~ 105');
-	onMount(() => {
-		trxList = generateSchedule(
-			lease.cycleCount,
-			lease.monthlyRent,
-			lease.start,
-		);
-	});
+	$: console.log($data2, 'LeaseForm.svelte ~ 105');
 </script>
 
 <form use:form>
@@ -294,17 +296,14 @@
 									type="number"
 									class:invalid={!!getValue($errors, 'monthlyRent')}
 									on:change={(e) => {
-										console.log('changed monthlyRent');
-										console.log(
-											'new amountis: ',
+										const newSchedule = generateSchedule(
+											getValue($data2, 'cycleCount'),
 											Number(e.currentTarget.value),
+											new Date(getValue($data2, 'start')),
 										);
-										trxList = generateSchedule(
-											// getValue($data2, 'cycleCount'),
-											12,
-											Number(e.currentTarget.value),
-											new Date(),
-										);
+										console.log('between');
+										// setData('schedule', newSchedule);
+										setFields('schedule', newSchedule);
 									}}
 								/>
 							</div>
@@ -330,6 +329,7 @@
 		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 
+	<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
 	<!-- Divider -->
 	<div class="hidden sm:block" aria-hidden="true">
 		<div class="py-5">
@@ -337,7 +337,6 @@
 		</div>
 	</div>
 
-	<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
 	<!-- Payment Schedule section -->
 	<div class="mt-10 sm:mt-0">
 		<div class="md:grid md:grid-cols-3 md:gap-6">
@@ -385,71 +384,70 @@
 									type="number"
 									class:invalid={!!getValue($errors, 'cycleCount')}
 									on:change={(e) => {
-										console.log('changed cycle count');
 										trxList = generateSchedule(
 											+e.currentTarget.value,
 											getValue($data2, 'monthlyRent'),
-											// new Date(getValue($data2, 'firstPayment')),
-											// TODO dont hardcode this
-											new Date(),
+											new Date(getValue($data2, 'start')),
 										);
-										// trxList = generateSchedule(3, 30, new Date());
 									}}
 								/>
 							</div>
 
-							{#each trxList as trx, idx (trx.dueDate)}
-								<div
-									class="col-span-full flex place-content-between items-center space-x-2"
-								>
-									<div class="hidden w-1/12 sm:block">
-										{idx + 1}
-									</div>
-									<div class="flex w-1/3 shadow-sm">
-										<span
-											class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
-										>
-											KWD
-										</span>
-										<input
-											id={`transactions.${idx}.amount`}
-											name={`transactions.${idx}.amount`}
-											value={trx.amount}
-											type="number"
-											class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-											class:invalid={!!getValue(
-												$errors,
-												`transactions.${idx}.amount`,
-											)}
-										/>
-									</div>
-									<span class="w-1/3 flex-1 sm:flex-initial">
-										<input
-											type="date"
-											id={`transactions.${idx}.postDate`}
-											name={`transactions.${idx}.postDate`}
-											value={trx.dueDate.toISOString().split('T')[0]}
-											class:invalid={!!getValue(
-												$errors,
-												`transactions.${idx}.postDate`,
-											)}
-										/>
-									</span>
-									<button
-										class="w-1/12"
-										on:click|preventDefault={() => {
-											trxList = trxList.filter((_, i) => i !== idx);
-											setFields('cycleCount', trxList.length, true);
-										}}
+							{#key trxList[0].id}
+								<!-- {#key trxList} -->
+								{#each trxList as trx, idx (trx.id)}
+									<div
+										class="col-span-full flex place-content-between items-center space-x-2"
 									>
-										<Icon
-											src={Trash}
-											class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
-											aria-hidden="true"
-										/>
-									</button>
-								</div>
-							{/each}
+										<div class="hidden w-1/12 sm:block">
+											{idx + 1}
+										</div>
+										<div class="flex w-1/3 shadow-sm">
+											<span
+												class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
+											>
+												KWD
+											</span>
+											<input
+												id={`schedule.${idx}.amount`}
+												name={`schedule.${idx}.amount`}
+												value={trx.amount}
+												type="number"
+												class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
+												class:invalid={!!getValue(
+													$errors,
+													`schedule.${idx}.amount`,
+												)}
+											/>
+										</div>
+										<span class="w-1/3 flex-1 sm:flex-initial">
+											<input
+												type="date"
+												id={`schedule.${idx}.postDate`}
+												name={`schedule.${idx}.postDate`}
+												value={trx.dueDate.toISOString().split('T')[0]}
+												class:invalid={!!getValue(
+													$errors,
+													`schedule.${idx}.postDate`,
+												)}
+											/>
+										</span>
+										<button
+											class="w-1/12"
+											on:click|preventDefault={() => {
+												// trxList = trxList.filter((_, i) => i !== idx);
+												// setFields('cycleCount', trxList.length, true);
+											}}
+										>
+											<Icon
+												src={Trash}
+												class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
+												aria-hidden="true"
+											/>
+										</button>
+									</div>
+								{/each}
+							{/key}
 						</div>
 					</div>
 				</div>
@@ -457,8 +455,6 @@
 		</div>
 	</div>
 </form>
-
-<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
 
 <pre>{JSON.stringify(trxList, null, 2)}</pre>
 
