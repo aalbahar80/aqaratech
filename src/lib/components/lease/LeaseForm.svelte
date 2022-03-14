@@ -414,17 +414,17 @@
 									<div class="w-1/12">
 										{idx + 1}
 									</div>
-									<div class="flex w-1/3 rounded-md shadow-sm">
+									<div class="flex w-1/3 shadow-sm">
 										<span
 											class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
 										>
-											KD
+											KWD
 										</span>
 										<input
 											name={`transactions.${idx}.amount`}
 											value={trx.amount}
 											type="number"
-											class="schedule block min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+											class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
 											class:invalid={!!getValue(
 												$errors,
 												`transactions.${idx}.amount`,
