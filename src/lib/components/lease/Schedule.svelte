@@ -2,12 +2,15 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { generateSchedule } from '$lib/definitions/lease';
+	import { z } from 'zod';
 
 	export let amount: number;
 
 	let count = 12;
 	let scheduleStart = new Date();
 	let schedule = generateSchedule({ scheduleStart, amount, count });
+	let errors: any;
+	let issues: any;
 
 	const handleCountChange = () => {
 		schedule = generateSchedule({ scheduleStart, amount, count });
@@ -22,8 +25,30 @@
 		schedule = schedule.filter((n) => n.nanoid !== nanoid);
 		count = schedule.length;
 	};
+
+	const schema = z.array(
+		z.object({
+			nanoid: z.string(),
+			amount: z.number().min(1),
+			postDate: z.preprocess((arg) => {
+				if (typeof arg === 'string' || arg instanceof Date)
+					return new Date(arg);
+			}, z.date()),
+		}),
+	);
+	const validate = () => {
+		const validation = schema.safeParse(schedule);
+		if (!validation.success) {
+			errors = validation.error.flatten().fieldErrors;
+			issues = validation.error.issues;
+			console.log(validation.error.flatten());
+		}
+	};
 </script>
 
+<pre>{JSON.stringify(issues, null, 2)}</pre>
+<pre>{JSON.stringify(errors, null, 2)}</pre>
+<pre>{JSON.stringify(schedule, null, 2)}</pre>
 <div class="mt-10 sm:mt-0">
 	<div class="md:grid md:grid-cols-3 md:gap-6">
 		<div class="md:col-span-1">
@@ -54,11 +79,14 @@
 								type="date"
 								on:change={(e) => {
 									scheduleStart = e.currentTarget.valueAsDate ?? scheduleStart;
-									schedule = generateSchedule({ scheduleStart, amount, count });
+									schedule = generateSchedule({
+										scheduleStart,
+										amount,
+										count,
+									});
 								}}
 							/>
 						</div>
-
 						<div class="col-span-6 sm:col-span-3">
 							<label for="count" class="text-sm font-medium text-gray-700">
 								Count
@@ -71,7 +99,6 @@
 								on:change={handleCountChange}
 							/>
 						</div>
-
 						<!-- {#if schedule} -->
 						{#each schedule as trx, idx (trx.nanoid)}
 							<div
@@ -89,7 +116,7 @@
 									<input
 										id={`${trx.nanoid}-amount`}
 										name={`${trx.nanoid}-amount`}
-										value={trx.amount}
+										bind:value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
 									/>
@@ -99,7 +126,10 @@
 										type="date"
 										id={`${trx.nanoid}-postDate`}
 										name={`${trx.nanoid}-postDate`}
-										value={trx.postDate.toISOString().split('T')[0]}
+										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
+										on:change={(e) => {
+											schedule[idx].postDate = e.currentTarget.valueAsDate;
+										}}
 									/>
 								</span>
 								<button
@@ -123,6 +153,7 @@
 		</div>
 	</div>
 </div>
+<button on:click={validate}> Validate </button>
 
 <style lang="postcss">
 	input:not(.schedule) {
