@@ -44,10 +44,11 @@
 				})),
 			);
 	};
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	$: getUnitList(propertyId);
 
-	function classes(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
+	function classes(...classList: string[]) {
+		return classList.filter(Boolean).join(' ');
 	}
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 	const {
@@ -120,9 +121,6 @@
 		lease.monthlyRent,
 		lease.start,
 	);
-	// $: console.log($data2.cycleCount, 'LeaseForm.svelte ~ 103');
-	// $: console.log($data2.monthlyRent, 'LeaseForm.svelte ~ 104');
-	// $: console.log($data2.firstPayment, 'LeaseForm.svelte ~ 105');
 	$: console.log($data2, 'LeaseForm.svelte ~ 105');
 </script>
 
@@ -299,15 +297,7 @@
 											Number(e.currentTarget.value),
 											new Date(getValue($data2, 'start')),
 										);
-										// const newnewsched = newSchedule.map((item) => ({
-										// 	...item,
-										// 	postDate: item.postDate.toISOString().split('T')[0],
-										// }));
-										// console.log('newnewschhed', newnewsched);
-										// setData('schedule', newSchedule);
-										// setFields('schedule', newnewsched);
 										setFields('schedule', newSchedule);
-										// setFields('end', '2020-01-01');
 									}}
 								/>
 							</div>
