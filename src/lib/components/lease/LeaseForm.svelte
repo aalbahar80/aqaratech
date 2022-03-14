@@ -117,10 +117,10 @@
 	$: console.log($data2.monthlyRent, 'LeaseForm.svelte ~ 104');
 	$: console.log($data2.firstPayment, 'LeaseForm.svelte ~ 105');
 	onMount(() => {
-		generateSchedule(
+		trxList = generateSchedule(
 			lease.cycleCount,
 			lease.monthlyRent,
-			new Date(lease.start),
+			lease.start,
 		);
 	});
 </script>
@@ -291,7 +291,7 @@
 									type="number"
 									class:invalid={!!getValue($errors, 'monthlyRent')}
 									on:change={(e) => {
-										console.log('changed cycle count');
+										console.log('changed monthlyRent');
 										trxList = generateSchedule(
 											getValue($data2, 'cycleCount'),
 											+e.currentTarget.value,
