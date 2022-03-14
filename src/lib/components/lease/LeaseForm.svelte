@@ -409,7 +409,7 @@
 
 							{#each trxList as trx, idx (idx)}
 								<div
-									class="col-span-full flex place-content-between items-center"
+									class="col-span-full flex place-content-between items-center space-x-2"
 								>
 									<div class="hidden w-1/12 sm:block">
 										{idx + 1}
@@ -431,7 +431,7 @@
 											)}
 										/>
 									</div>
-									<span class="w-1/2">
+									<span class="w-1/3 flex-1 sm:flex-initial">
 										<input
 											type="date"
 											name={`transactions.${idx}.postDate`}
