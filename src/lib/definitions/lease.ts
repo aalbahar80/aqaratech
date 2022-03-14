@@ -19,8 +19,9 @@ export const schema = z
 		contactMethod: z.enum(['sms', 'email']).nullish(),
 		shouldNotify: z.boolean(),
 		active: z.boolean(),
-		cycleCount: z.number().nonnegative(),
+		cycleCount: z.number().min(0).max(24),
 		billingDay: z.number().min(1).max(31),
+		// TODO set between start and end
 		firstPayment: z
 			.preprocess((arg) => {
 				if (typeof arg === 'string' || arg instanceof Date)
@@ -29,6 +30,7 @@ export const schema = z
 			.or(z.literal(''))
 			.nullish()
 			.transform(falsyToNull),
+		transactions: z.array(z.object({ amount: z.number().min(1) })),
 	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
@@ -58,6 +60,7 @@ const defaultForm = (): Lease => ({
 		new Date().getMonth() + 1,
 		2,
 	),
+	transactions: [],
 });
 
 const label: typeof definition['label'] = (item) =>

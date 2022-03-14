@@ -411,7 +411,7 @@
 								<div
 									class="col-span-full flex place-content-between items-center"
 								>
-									<div class="w-1/12">
+									<div class="hidden w-1/12 sm:block">
 										{idx + 1}
 									</div>
 									<div class="flex w-1/3 shadow-sm">
@@ -431,7 +431,7 @@
 											)}
 										/>
 									</div>
-									<span class="w-1/3">
+									<span class="w-1/2">
 										<input
 											type="date"
 											name={`transactions.${idx}.postDate`}
