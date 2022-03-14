@@ -2,15 +2,12 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { generateSchedule } from '$lib/definitions/lease';
-	import { z, type ZodIssue } from 'zod';
 
 	export let amount: number;
 
 	let count = 12;
 	let scheduleStart = new Date();
 	let schedule = generateSchedule({ scheduleStart, amount, count });
-	let errors: any;
-	let issues: any;
 
 	const handleCountChange = () => {
 		schedule = generateSchedule({ scheduleStart, amount, count });
@@ -25,33 +22,8 @@
 		schedule = schedule.filter((n) => n.nanoid !== nanoid);
 		count = schedule.length;
 	};
-
-	const schema = z.array(
-		z.object({
-			nanoid: z.string(),
-			amount: z.number().min(1),
-			postDate: z.preprocess((arg) => {
-				if (typeof arg === 'string' || arg instanceof Date)
-					return new Date(arg);
-			}, z.date()),
-		}),
-	);
-	const validate = () => {
-		const validation = schema.safeParse(schedule);
-		if (!validation.success) {
-			errors = validation.error.flatten().fieldErrors;
-			issues = validation.error.issues;
-			console.log(validation);
-			console.log(validation.error.flatten());
-			errors = validation.error.flatten((i: ZodIssue) => ({
-				[i.path[1]]: i.message,
-			}));
-		}
-	};
 </script>
 
-<!-- <pre>{JSON.stringify(issues, null, 2)}</pre> -->
-<pre>{JSON.stringify(errors, null, 2)}</pre>
 <!-- <pre>{JSON.stringify(schedule, null, 2)}</pre> -->
 <div class="mt-10 sm:mt-0">
 	<div class="md:grid md:grid-cols-3 md:gap-6">
@@ -123,6 +95,7 @@
 										bind:value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
+										class:invalid={trx.amount < 1}
 									/>
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
@@ -131,6 +104,7 @@
 										id={`${trx.nanoid}-postDate`}
 										name={`${trx.nanoid}-postDate`}
 										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
+										class:invalid={!trx.postDate}
 										on:change={(e) => {
 											schedule[idx].postDate = e.currentTarget.valueAsDate;
 										}}
@@ -157,7 +131,6 @@
 		</div>
 	</div>
 </div>
-<button on:click={validate}> Validate </button>
 
 <style lang="postcss">
 	input:not(.schedule) {
