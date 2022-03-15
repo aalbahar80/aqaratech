@@ -17,6 +17,7 @@
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { scale } from 'svelte/transition';
+	import Chip from '../Chip.svelte';
 
 	type Transactions = NonNullable<
 		InferQueryOutput<'tenants:read'>
@@ -89,6 +90,24 @@
 			},
 		});
 	};
+	const getChip = (trx: Transactions[number]) => {
+		if (trx.isPaid) {
+			return {
+				label: 'Paid',
+				color: 'green',
+			};
+		}
+		if (trx.dueDate < new Date()) {
+			return {
+				label: 'Past due',
+				color: 'red',
+			};
+		}
+		return {
+			label: 'Not yet due',
+			color: 'gray',
+		};
+	};
 </script>
 
 <section>
@@ -145,7 +164,7 @@
 										{'KWD'}
 									</span>
 									<time dateTime={transaction.dueDate.toISOString()}
-										>{dateFormat(transaction.createdAt)}</time
+										>{dateFormat(transaction.dueDate)}</time
 									>
 								</span>
 							</span>
@@ -175,6 +194,7 @@
 				</thead>
 				<tbody>
 					{#each data as transaction (transaction.id)}
+						{@const chip = getChip(transaction)}
 						<tr>
 							<td>
 								<div class="flex">
@@ -202,19 +222,14 @@
 							</td>
 							<td>
 								{#key transaction.isPaid}
-									<span
-										in:scale
-										class={`badge ${
-											transaction.isPaid ? 'badge-green' : 'badge-red'
-										}`}
-									>
-										{transaction.isPaid}
-									</span>
+									<div in:scale>
+										<Chip {...chip} />
+									</div>
 								{/key}
 							</td>
 							<td>
 								<time dateTime={transaction.dueDate.toISOString()}
-									>{dateFormat(transaction.createdAt)}</time
+									>{dateFormat(transaction.dueDate)}</time
 								>
 							</td>
 							<td class="text-center">
@@ -366,14 +381,5 @@
 	}
 	li a {
 		@apply block bg-white px-4 py-4 hover:bg-gray-50;
-	}
-	.badge {
-		@apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize;
-	}
-	.badge-green {
-		@apply bg-green-100 text-green-800;
-	}
-	.badge-red {
-		@apply bg-red-100 text-red-800;
 	}
 </style>
