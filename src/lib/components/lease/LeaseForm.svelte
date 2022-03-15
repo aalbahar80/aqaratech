@@ -55,6 +55,7 @@
 		data: data2,
 		setFields,
 		setData,
+		validate,
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
@@ -67,36 +68,30 @@
 		validate: [
 			validateSchema(schema as unknown as z.AnyZodObject),
 			(values) => {
+				console.log('starting manual validation');
+				console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
 				// this is to overcome zod's refine not working here
-				const newErrors: { [key: string]: string } = {};
+				const newErrors: any = {};
 				if (values.start > values.end) {
 					newErrors.start = 'Start date must be before end date';
 					newErrors.end = 'End date must be after start date';
 				}
-				const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] =>
-					Object.keys(obj) as (keyof Obj)[];
-
-				const amountFields = objectKeys(values).filter((key) =>
-					key.endsWith('amount'),
-				);
-
-				amountFields.forEach((field) => {
-					if (values?.[field] < 1) {
-						newErrors[field] = 'Amount must be greater than 0';
+				if (!schedule) {
+					return newErrors;
+				}
+				const scheduleErrors: { [key: string]: string } = {};
+				schedule.forEach((t) => {
+					if (t.amount < 1) {
+						scheduleErrors[`${t.nanoid}--amount`] = 'Amount must be positive';
+					}
+					if (t.postDate > new Date(values.end)) {
+						scheduleErrors[`${t.nanoid}--postDate`] =
+							'Post date must be before end date	';
 					}
 				});
+				newErrors.schedule = scheduleErrors;
 
-				const postDateFields = objectKeys(values).filter((key) =>
-					key.endsWith('postDate'),
-				);
-				postDateFields.forEach((field) => {
-					if (values[field] > values.end) {
-						newErrors[field] = 'Post date must be before end date';
-					} else if (values[field] < values.start) {
-						newErrors[field] = 'Post date must be after start date';
-					}
-				});
-
+				console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
 				return newErrors;
 			},
 		],
@@ -140,6 +135,9 @@
 			});
 		},
 	});
+	$: console.log($data2);
+	$: console.log($errors);
+	$: console.log(schedule);
 </script>
 
 <form use:form>
@@ -400,8 +398,8 @@
 		<Button
 			loading={$isSubmitting}
 			text={lease.id ? 'Save changes' : 'Create new'}
-			disabled={!noErrorMsg || $isSubmitting}
 		/>
+		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 
 	<!-- Divider -->
@@ -410,10 +408,10 @@
 			<div class="border-t  border-gray-200" />
 		</div>
 	</div>
-
-	<!-- Payment Schedule section -->
-	<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
 </form>
+
+<!-- Payment Schedule section -->
+<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
 
 <style lang="postcss">
 	input {

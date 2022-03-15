@@ -108,7 +108,7 @@
 										bind:value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-										class:invalid={errors?.[`${trx.nanoid}-amount`]}
+										class:invalid={errors?.schedule?.[`${trx.nanoid}--amount`]}
 									/>
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
@@ -117,7 +117,9 @@
 										id={`${trx.nanoid}-postDate`}
 										name={`${trx.nanoid}-postDate`}
 										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
-										class:invalid={errors?.[`${trx.nanoid}-postDate`]}
+										class:invalid={errors?.schedule?.[
+											`${trx.nanoid}--postDate`
+										]}
 										on:change={(e) => {
 											if (e.currentTarget.valueAsDate) {
 												schedule[idx].postDate = e.currentTarget.valueAsDate;
