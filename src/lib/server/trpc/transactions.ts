@@ -97,6 +97,13 @@ export default trpc
 						data,
 				  }),
 	})
+	.mutation('saveMany', {
+		input: z.array(schema),
+		resolve: ({ input }) =>
+			prismaClient.transaction.createMany({
+				data: input,
+			}),
+	})
 	.mutation('delete', {
 		input: z.string(),
 		resolve: ({ input: id }) =>

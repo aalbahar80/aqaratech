@@ -10,7 +10,7 @@
 
 	let count = 12;
 	let scheduleStart = new Date();
-	let schedule = generateSchedule({ scheduleStart, amount, count });
+	export let schedule = generateSchedule({ scheduleStart, amount, count });
 
 	const handleCountChange = () => {
 		schedule = generateSchedule({ scheduleStart, amount, count });

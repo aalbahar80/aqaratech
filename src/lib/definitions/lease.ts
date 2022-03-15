@@ -40,7 +40,7 @@ export function generateSchedule({
 export const schema = z
 	.object({
 		id: z.string().uuid().optional(),
-		monthlyRent: z.number().nonnegative(),
+		monthlyRent: z.number().min(1),
 		start: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),

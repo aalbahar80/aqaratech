@@ -3,7 +3,11 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
-	import { defaultForm, schema } from '$lib/definitions/lease';
+	import {
+		defaultForm,
+		schema,
+		type generateSchedule,
+	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
@@ -23,6 +27,7 @@
 	import Input from '../form/Input.svelte';
 
 	const lease = defaultForm();
+	let schedule: ReturnType<typeof generateSchedule>;
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
@@ -87,9 +92,22 @@
 		},
 		onSubmit: async (values) => {
 			console.log('submitting');
-			console.log(values);
+			console.log({ values }, 'LeaseForm.svelte ~ 95');
+			console.log({ schedule }, 'LeaseForm.svelte ~ 96');
 			const submitted = await trpc.mutation('leases:save', values);
-			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
+			// add leaseId: submitted.id to each element in the schedule
+			const newTransactions = schedule.map((e) => ({
+				leaseId: submitted.id,
+				dueDate: e.postDate,
+				isPaid: false,
+				...e,
+			}));
+			const submittedTrxs = await trpc.mutation(
+				'transactions:saveMany',
+				newTransactions,
+			);
+			console.log({ submitted }, 'LeaseForm.svelte ~ 108');
+			console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
 			await goto(`/leases/${submitted.id}`);
 			addToast({
 				props: {
@@ -374,6 +392,7 @@
 
 <!-- Payment Schedule section -->
 <Schedule
+	bind:schedule
 	amount={$data2.monthlyRent}
 	shouldValidate={$touched.monthlyRent || false}
 />
