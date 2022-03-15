@@ -55,7 +55,6 @@
 		data: data2,
 		setFields,
 		setData,
-		touched,
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
@@ -74,6 +73,30 @@
 					newErrors.start = 'Start date must be before end date';
 					newErrors.end = 'End date must be after start date';
 				}
+				const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] =>
+					Object.keys(obj) as (keyof Obj)[];
+
+				const amountFields = objectKeys(values).filter((key) =>
+					key.endsWith('amount'),
+				);
+
+				amountFields.forEach((field) => {
+					if (values?.[field] < 1) {
+						newErrors[field] = 'Amount must be greater than 0';
+					}
+				});
+
+				const postDateFields = objectKeys(values).filter((key) =>
+					key.endsWith('postDate'),
+				);
+				postDateFields.forEach((field) => {
+					if (values[field] > values.end) {
+						newErrors[field] = 'Post date must be before end date';
+					} else if (values[field] < values.start) {
+						newErrors[field] = 'Post date must be after start date';
+					}
+				});
+
 				return newErrors;
 			},
 		],
@@ -380,21 +403,17 @@
 			disabled={!noErrorMsg || $isSubmitting}
 		/>
 	</div>
-</form>
 
-<!-- Divider -->
-<div class="hidden sm:block" aria-hidden="true">
-	<div class="py-5">
-		<div class="border-t  border-gray-200" />
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t  border-gray-200" />
+		</div>
 	</div>
-</div>
 
-<!-- Payment Schedule section -->
-<Schedule
-	bind:schedule
-	amount={$data2.monthlyRent}
-	shouldValidate={$touched.monthlyRent || false}
-/>
+	<!-- Payment Schedule section -->
+	<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
+</form>
 
 <style lang="postcss">
 	input {
