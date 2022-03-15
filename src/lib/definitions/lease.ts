@@ -41,7 +41,6 @@ export const schema = z
 	.object({
 		id: z.string().uuid().optional(),
 		monthlyRent: z.number().nonnegative(),
-		deposit: z.number().nonnegative(),
 		start: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
@@ -50,7 +49,6 @@ export const schema = z
 		}, z.date()),
 		tenantId: z.string().uuid(),
 		unitId: z.string().uuid(),
-		contactMethod: z.enum(['sms', 'email']).nullish(),
 		shouldNotify: z.boolean(),
 		active: z.boolean(),
 	})
@@ -67,11 +65,9 @@ type Lease = InferMutationInput<'leases:save'>;
 export const defaultForm = (): Lease => ({
 	start: new Date(),
 	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-	deposit: 0,
 	monthlyRent: 0,
 	tenantId: '',
 	unitId: '',
-	contactMethod: 'sms',
 	shouldNotify: true,
 	active: true,
 });
