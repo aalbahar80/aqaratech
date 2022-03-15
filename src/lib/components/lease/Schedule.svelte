@@ -27,7 +27,6 @@
 	};
 </script>
 
-<!-- <pre>{JSON.stringify(schedule, null, 2)}</pre> -->
 <div class="mt-10 sm:mt-0">
 	<div class="md:grid md:grid-cols-3 md:gap-6">
 		<div class="md:col-span-1">
@@ -141,7 +140,6 @@
 								</button>
 							</div>
 						{/each}
-						<!-- {/if} -->
 					</div>
 				</div>
 			</div>
