@@ -92,6 +92,57 @@
 </script>
 
 <form use:form>
+	<!-- Tenant -->
+	<div>
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<div class="px-4 sm:px-0">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
+					<p class="mt-1 text-sm text-gray-600">
+						Tenants needs to be created before they can be added to a lease.
+					</p>
+					<span class="mt-4 sm:mt-0">
+						<a
+							href="/tenants/add"
+							class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+						>
+							Create new tenant<span aria-hidden="true"> &rarr;</span>
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="mt-5 md:col-span-2 md:mt-0">
+				<div class="rounded-md bg-white shadow">
+					<div class="space-y-6 px-4 py-5 sm:p-6">
+						<div
+							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
+						>
+							<div class="w-full">
+								<ComboBox
+									entity="tenants"
+									on:select={(e) => {
+										setData('tenantId', e.detail.id);
+									}}
+									on:clear={() => {
+										setData('tenantId', '');
+									}}
+									invalidText={getValue($errors, 'tenantId')?.[0]}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t border-gray-200" />
+		</div>
+	</div>
+
 	<!-- Property/Unit section -->
 	<div>
 		<div class="md:grid md:grid-cols-3 md:gap-6">
@@ -160,56 +211,6 @@
 		</div>
 	</div>
 
-	<!-- Tenant -->
-	<div>
-		<div class="md:grid md:grid-cols-3 md:gap-6">
-			<div class="md:col-span-1">
-				<div class="px-4 sm:px-0">
-					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
-					<p class="mt-1 text-sm text-gray-600">
-						Tenants needs to be created before they can be added to a lease.
-					</p>
-					<span class="mt-4 sm:mt-0">
-						<a
-							href="/tenants/add"
-							class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-						>
-							Create new tenant<span aria-hidden="true"> &rarr;</span>
-						</a>
-					</span>
-				</div>
-			</div>
-			<div class="mt-5 md:col-span-2 md:mt-0">
-				<div class="rounded-md bg-white shadow">
-					<div class="space-y-6 px-4 py-5 sm:p-6">
-						<div
-							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
-						>
-							<div class="w-full">
-								<ComboBox
-									entity="tenants"
-									on:select={(e) => {
-										setData('tenantId', e.detail.id);
-									}}
-									on:clear={() => {
-										setData('tenantId', '');
-									}}
-									invalidText={getValue($errors, 'tenantId')?.[0]}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Divider -->
-	<div class="hidden sm:block" aria-hidden="true">
-		<div class="py-5">
-			<div class="border-t border-gray-200" />
-		</div>
-	</div>
 	<!-- Lease Basic Info -->
 	<div class="mt-10 sm:mt-0">
 		<div class="md:grid md:grid-cols-3 md:gap-6">
