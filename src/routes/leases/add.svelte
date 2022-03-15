@@ -1,17 +1,7 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import { singular } from '$lib/definitions/index';
-	import type { Load } from './add';
 
-	export const load: Load = ({ url }) => {
-		const predefined = Object.fromEntries(url.searchParams.entries());
-		return {
-			props: { predefined },
-		};
-	};
-</script>
-
-<script lang="ts">
 	const entity = 'leases';
 </script>
 
