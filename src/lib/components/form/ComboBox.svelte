@@ -18,14 +18,13 @@
 	export let optionLabel: null | { [key: string]: string } = null;
 
 	// id of the default selected option
-	export let value: string | null = null;
+	export let value: string | null = '';
 
 	export let loadDefaults: boolean = true;
 	export let filter: any = undefined;
 	$: console.log(filter);
 
 	const getLabel = (item: any) => {
-		console.log('getLabel', item);
 		const { label } = entityDefinitions[entity];
 		if (label && item) return label(item);
 		return '';
@@ -90,5 +89,9 @@
 		on:select
 		on:clear
 	/>
-	{invalidText ?? ''}
+	{#if invalidText}
+		<p class="mt-2 text-sm text-red-600">
+			{invalidText}
+		</p>
+	{/if}
 </div>
