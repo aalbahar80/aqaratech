@@ -47,7 +47,6 @@
 	function classes(...classList: string[]) {
 		return classList.filter(Boolean).join(' ');
 	}
-	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 	const {
 		form,
 		errors,
@@ -55,7 +54,6 @@
 		data: data2,
 		setFields,
 		setData,
-		validate,
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
@@ -135,9 +133,18 @@
 			});
 		},
 	});
-	$: console.log($data2);
-	$: console.log($errors);
-	$: console.log(schedule);
+	// recursively check if every value in the object is null
+	// const checkForNull = (obj: any) =>
+	// 	Object.values(obj).every((e) => {
+	// 		if (e === null) {
+	// 			return true;
+	// 		}
+	// 		if (typeof e === 'object') {
+	// 			return Object.values(e).every((ee) => ee === null);
+	// 		}
+	// 		return false;
+	// 	});
+	// $: noErrorMsg = checkForNull($errors);
 </script>
 
 <form use:form>
@@ -398,8 +405,8 @@
 		<Button
 			loading={$isSubmitting}
 			text={lease.id ? 'Save changes' : 'Create new'}
+			disabled={$isSubmitting}
 		/>
-		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 
 	<!-- Divider -->
