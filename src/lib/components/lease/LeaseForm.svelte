@@ -6,7 +6,7 @@
 	import { defaultForm, schema } from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import reporter from '@felte/reporter-tippy';
-	import { validator, type ValidatorConfig } from '@felte/validator-zod';
+	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
 		Switch,
 		SwitchDescription,
@@ -54,13 +54,23 @@
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
+			// initializing non-native html inputs (Switch)
 			active: lease.active,
 			shouldNotify: lease.shouldNotify,
 		},
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
-		extend: [
-			validator({ schema: schema as unknown as z.AnyZodObject }),
-			reporter(),
+		extend: reporter(),
+		validate: [
+			validateSchema(schema as unknown as z.AnyZodObject),
+			(values) => {
+				// this is to overcome zod's refine not working here
+				const newErrors: { [key: string]: string } = {};
+				if (values.start > values.end) {
+					newErrors.start = 'Start date must be before end date';
+					newErrors.end = 'End date must be after start date';
+				}
+				return newErrors;
+			},
 		],
 		onError: (err) => {
 			addToast({
@@ -295,19 +305,28 @@
 									</Switch>
 								</SwitchGroup>
 							</div>
+
+							<!-- Start Date -->
 							<div class="col-span-6 sm:col-span-3">
-								<Input name="start" value={lease.start} />
+								<Input
+									name="start"
+									value={lease.start}
+									invalid={!!getValue($errors, 'start')}
+									invalidText={getValue($errors, 'start')?.[0]}
+								/>
 							</div>
 
+							<!-- End Date -->
 							<div class="col-span-6 sm:col-span-3">
-								<Input name="end" value={lease.end} />
-								<!-- <input type="date" name="end" id="end" value={lease.end} /> -->
+								<Input
+									name="end"
+									value={lease.end}
+									invalid={!!getValue($errors, 'end')}
+									invalidText={getValue($errors, 'end')?.[0]}
+								/>
 							</div>
 
-							<div class="col-span-6 sm:col-span-6">
-								<Input name="deposit" value={lease.deposit} />
-							</div>
-
+							<!-- Rent amount -->
 							<div class="col-span-6 sm:col-span-3">
 								<label
 									for="monthlyRent"
@@ -341,13 +360,11 @@
 		<Button
 			loading={$isSubmitting}
 			text={lease.id ? 'Save changes' : 'Create new'}
+			disabled={!noErrorMsg || $isSubmitting}
 		/>
-		<!-- disabled={!noErrorMsg || $isSubmitting} -->
 	</div>
 </form>
 
-<!-- <pre>{JSON.stringify($data2, null, 2)}</pre> -->
-<!-- <pre>{JSON.stringify(lease, null, 2)}</pre> -->
 <!-- Divider -->
 <div class="hidden sm:block" aria-hidden="true">
 	<div class="py-5">
