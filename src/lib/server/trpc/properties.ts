@@ -83,8 +83,11 @@ export default trpc
 		}),
 	})
 	.query('search', {
-		input: z.string().optional(),
-		resolve: ({ input }) =>
+		input: z.object({
+			query: z.string().optional(),
+			clientId: z.string().optional(),
+		}),
+		resolve: ({ input: { query } }) =>
 			prismaClient.property.findMany({
 				take: 5,
 				orderBy: {
@@ -98,15 +101,15 @@ export default trpc
 					number: true,
 					avenue: true,
 				},
-				where: input
+				where: query
 					? {
 							OR: [
-								{ id: { contains: input } },
-								{ area: { contains: input } },
-								{ block: { contains: input } },
-								{ street: { contains: input } },
-								{ avenue: { contains: input } },
-								{ number: { contains: input } },
+								{ id: { contains: query } },
+								{ area: { contains: query } },
+								{ block: { contains: query } },
+								{ street: { contains: query } },
+								{ avenue: { contains: query } },
+								{ number: { contains: query } },
 							],
 					  }
 					: undefined,

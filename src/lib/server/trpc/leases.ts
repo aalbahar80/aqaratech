@@ -63,8 +63,8 @@ export default trpc
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.lease.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.lease.findUnique({
 				where: {
 					id,
 				},
@@ -98,7 +98,10 @@ export default trpc
 						},
 					},
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND', message: 'Lease not found' });
+		},
 	})
 	.query('list', {
 		input: paginationSchema,

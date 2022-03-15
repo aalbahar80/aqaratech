@@ -1,468 +1,443 @@
-<div>
-	<div class="md:grid md:grid-cols-3 md:gap-6">
-		<div class="md:col-span-1">
-			<div class="px-4 sm:px-0">
-				<h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
-				<p class="mt-1 text-sm text-gray-600">
-					This information will be displayed publicly so be careful what you
-					share.
-				</p>
-			</div>
-		</div>
-		<div class="mt-5 md:col-span-2 md:mt-0">
-			<form action="#" method="POST">
-				<div class="shadow sm:overflow-hidden sm:rounded-md">
-					<div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-						<div class="grid grid-cols-3 gap-6">
-							<div class="col-span-3 sm:col-span-2">
-								<label
-									htmlFor="company-website"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Website
-								</label>
-								<div class="mt-1 flex rounded-md shadow-sm">
-									<span
-										class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500"
-									>
-										http://
-									</span>
-									<input
-										type="text"
-										name="company-website"
-										id="company-website"
-										class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-										placeholder="www.example.com"
-									/>
-								</div>
-							</div>
-						</div>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import getEditorErrors from '$lib/client/getEditorErrors';
+	import trpc from '$lib/client/trpc';
+	import Schedule from '$lib/components/lease/Schedule.svelte';
+	import {
+		defaultForm,
+		schema,
+		type generateSchedule,
+	} from '$lib/definitions/lease';
+	import { addToast } from '$lib/stores/toast';
+	import reporter from '@felte/reporter-tippy';
+	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
+	import {
+		Switch,
+		SwitchDescription,
+		SwitchGroup,
+		SwitchLabel,
+	} from '@rgossiaux/svelte-headlessui';
+	import { TRPCClientError } from '@trpc/client';
+	import { createForm, getValue } from 'felte';
+	import Select from 'svelte-select';
+	import { scale } from 'svelte/transition';
+	import type { z } from 'zod';
+	import Button from '../Button.svelte';
+	import ComboBox from '../form/ComboBox.svelte';
+	import Input from '../form/Input.svelte';
 
-						<div>
-							<label
-								htmlFor="about"
-								class="block text-sm font-medium text-gray-700"
-							>
-								About
-							</label>
-							<div class="mt-1">
-								<textarea
-									id="about"
-									name="about"
-									rows={3}
-									class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-									placeholder="you@example.com"
-									defaultValue={''}
+	const lease = defaultForm();
+	let schedule: ReturnType<typeof generateSchedule>;
+	let propertyId: string = '';
+	let unitList: { id: string; label: string }[] = [];
+	const getUnitList = async (propertyIdFilter: string) => {
+		unitList = await trpc
+			.query('units:search', { propertyId: propertyIdFilter })
+			.then((units) =>
+				units.map((unit) => ({
+					id: unit.id,
+					label: unit.unitNumber,
+				})),
+			);
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
+	$: getUnitList(propertyId);
+
+	function classes(...classList: string[]) {
+		return classList.filter(Boolean).join(' ');
+	}
+	const {
+		form,
+		errors,
+		isSubmitting,
+		data: data2,
+		setFields,
+		setData,
+	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
+		initialValues: {
+			// avoid any dates here for seamless <input type="date">
+			// initializing non-native html inputs (Switch)
+			active: lease.active,
+			shouldNotify: lease.shouldNotify,
+		},
+		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
+		extend: reporter(),
+		validate: [
+			validateSchema(schema as unknown as z.AnyZodObject),
+			(values) => {
+				console.log('starting manual validation');
+				console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
+				// this is to overcome zod's refine not working here
+				const newErrors: any = {};
+				if (values.start > values.end) {
+					newErrors.start = 'Start date must be before end date';
+					newErrors.end = 'End date must be after start date';
+				}
+				if (!schedule) {
+					return newErrors;
+				}
+				const scheduleErrors: { [key: string]: string } = {};
+				schedule.forEach((t) => {
+					if (t.amount < 1) {
+						scheduleErrors[`${t.nanoid}--amount`] = 'Amount must be positive';
+					}
+					if (t.postDate > new Date(values.end)) {
+						scheduleErrors[`${t.nanoid}--postDate`] =
+							'Post date must be before end date	';
+					}
+				});
+				newErrors.schedule = scheduleErrors;
+
+				console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
+				return newErrors;
+			},
+		],
+		onError: (err) => {
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Error',
+				},
+			});
+			if (err instanceof TRPCClientError) {
+				const serverErrors = getEditorErrors(err);
+				return serverErrors;
+			}
+			return err;
+		},
+		onSubmit: async (values) => {
+			console.log('submitting');
+			console.log({ values }, 'LeaseForm.svelte ~ 95');
+			console.log({ schedule }, 'LeaseForm.svelte ~ 96');
+			const submitted = await trpc.mutation('leases:save', values);
+			// add leaseId: submitted.id to each element in the schedule
+			const newTransactions = schedule.map((e) => ({
+				leaseId: submitted.id,
+				dueDate: e.postDate,
+				isPaid: false,
+				...e,
+			}));
+			const submittedTrxs = await trpc.mutation(
+				'transactions:saveMany',
+				newTransactions,
+			);
+			console.log({ submitted }, 'LeaseForm.svelte ~ 108');
+			console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
+			await goto(`/leases/${submitted.id}`);
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Success',
+				},
+			});
+		},
+	});
+	// recursively check if every value in the object is null
+	// const checkForNull = (obj: any) =>
+	// 	Object.values(obj).every((e) => {
+	// 		if (e === null) {
+	// 			return true;
+	// 		}
+	// 		if (typeof e === 'object') {
+	// 			return Object.values(e).every((ee) => ee === null);
+	// 		}
+	// 		return false;
+	// 	});
+	// $: noErrorMsg = checkForNull($errors);
+</script>
+
+<form use:form>
+	<!-- Tenant -->
+	<div>
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<div class="px-4 sm:px-0">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
+					<p class="mt-1 text-sm text-gray-600">
+						Tenants needs to be created before they can be added to a lease.
+					</p>
+					<span class="mt-4 sm:mt-0">
+						<a
+							href="/tenants/add"
+							class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+						>
+							Create new tenant<span aria-hidden="true"> &rarr;</span>
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="mt-5 md:col-span-2 md:mt-0">
+				<div class="rounded-md bg-white shadow">
+					<div class="space-y-6 px-4 py-5 sm:p-6">
+						<div
+							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
+						>
+							<div class="w-full">
+								<ComboBox
+									entity="tenants"
+									on:select={(e) => {
+										setData('tenantId', e.detail.id);
+									}}
+									on:clear={() => {
+										setData('tenantId', '');
+									}}
+									invalidText={getValue($errors, 'tenantId')?.[0]}
 								/>
 							</div>
-							<p class="mt-2 text-sm text-gray-500">
-								Brief description for your profile. URLs are hyperlinked.
-							</p>
 						</div>
-
-						<div>
-							<label class="block text-sm font-medium text-gray-700"
-								>Photo</label
-							>
-							<div class="mt-1 flex items-center">
-								<span
-									class="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100"
-								>
-									<svg
-										class="h-full w-full text-gray-300"
-										fill="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
-										/>
-									</svg>
-								</span>
-								<button
-									type="button"
-									class="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-								>
-									Change
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<label class="block text-sm font-medium text-gray-700"
-								>Cover photo</label
-							>
-							<div
-								class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6"
-							>
-								<div class="space-y-1 text-center">
-									<svg
-										class="mx-auto h-12 w-12 text-gray-400"
-										stroke="currentColor"
-										fill="none"
-										viewBox="0 0 48 48"
-										aria-hidden="true"
-									>
-										<path
-											d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-											strokeWidth={2}
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										/>
-									</svg>
-									<div class="flex text-sm text-gray-600">
-										<label
-											htmlFor="file-upload"
-											class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
-										>
-											<span>Upload a file</span>
-											<input
-												id="file-upload"
-												name="file-upload"
-												type="file"
-												class="sr-only"
-											/>
-										</label>
-										<p class="pl-1">or drag and drop</p>
-									</div>
-									<p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-						<button
-							type="submit"
-							class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-						>
-							Save
-						</button>
 					</div>
 				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="hidden sm:block" aria-hidden="true">
-	<div class="py-5">
-		<div class="border-t border-gray-200" />
-	</div>
-</div>
-
-<div class="mt-10 sm:mt-0">
-	<div class="md:grid md:grid-cols-3 md:gap-6">
-		<div class="md:col-span-1">
-			<div class="px-4 sm:px-0">
-				<h3 class="text-lg font-medium leading-6 text-gray-900">
-					Personal Information
-				</h3>
-				<p class="mt-1 text-sm text-gray-600">
-					Use a permanent address where you can receive mail.
-				</p>
 			</div>
 		</div>
-		<div class="mt-5 md:col-span-2 md:mt-0">
-			<form action="#" method="POST">
+	</div>
+
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t border-gray-200" />
+		</div>
+	</div>
+
+	<!-- Property/Unit section -->
+	<div>
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<div class="px-4 sm:px-0">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">Location</h3>
+					<p class="mt-1 text-sm text-gray-600">
+						Choose the property and unit.
+					</p>
+				</div>
+			</div>
+			<div class="mt-5 md:col-span-2 md:mt-0">
+				<div class="rounded-md bg-white shadow">
+					<div class="space-y-6 px-4 py-5 sm:p-6">
+						<div
+							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
+						>
+							<div class="sm:w-3/4">
+								<ComboBox
+									entity="properties"
+									on:select={(e) => {
+										propertyId = e.detail.id;
+									}}
+									on:clear={() => {
+										propertyId = '';
+									}}
+									invalidText={getValue($errors, 'unitId')?.[0]}
+								/>
+							</div>
+							{#if propertyId}
+								{#key propertyId}
+									<div class="sm:w-1/4" in:scale>
+										<label
+											for="unit"
+											class="block text-sm font-medium text-gray-700"
+										>
+											Unit</label
+										>
+										<Select
+											id="unit"
+											items={unitList}
+											optionIdentifier="id"
+											on:select={(e) => {
+												setData('unitId', e.detail.id);
+											}}
+											on:clear={() => {
+												setData('unitId', '');
+											}}
+											hasError={!!getValue($errors, 'unitId')}
+										/>
+									</div>
+								{/key}
+							{/if}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t border-gray-200" />
+		</div>
+	</div>
+
+	<!-- Lease Basic Info -->
+	<div class="mt-10 sm:mt-0">
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<div class="px-4 sm:px-0">
+					<h3 class="text-lg font-medium leading-6 text-gray-900">
+						Lease Information
+					</h3>
+					<p class="mt-1 text-sm text-gray-600">
+						Use a permanent address where you can receive mail.
+					</p>
+				</div>
+			</div>
+			<div class="mt-5 md:col-span-2 md:mt-0">
 				<div class="overflow-hidden shadow sm:rounded-md">
 					<div class="bg-white px-4 py-5 sm:p-6">
 						<div class="grid grid-cols-6 gap-6">
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									htmlFor="first-name"
-									class="block text-sm font-medium text-gray-700"
-								>
-									First name
-								</label>
-								<input
-									type="text"
-									name="first-name"
-									id="first-name"
-									autoComplete="given-name"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-								/>
-							</div>
-
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									htmlFor="last-name"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Last name
-								</label>
-								<input
-									type="text"
-									name="last-name"
-									id="last-name"
-									autoComplete="family-name"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-								/>
-							</div>
-
-							<div class="col-span-6 sm:col-span-4">
-								<label
-									htmlFor="email-address"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Email address
-								</label>
-								<input
-									type="text"
-									name="email-address"
-									id="email-address"
-									autoComplete="email"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-								/>
-							</div>
-
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									htmlFor="country"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Country
-								</label>
-								<select
-									id="country"
-									name="country"
-									autoComplete="country-name"
-									class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-								>
-									<option>United States</option>
-									<option>Canada</option>
-									<option>Mexico</option>
-								</select>
+							<div class="col-span-6">
+								<SwitchGroup class="flex items-center justify-between">
+									<span class="flex flex-grow flex-col">
+										<SwitchLabel
+											as="span"
+											class="text-sm font-medium text-gray-700"
+										>
+											Signed
+										</SwitchLabel>
+										<SwitchDescription as="span" class="text-sm text-gray-500">
+											Whether this lease is signed or not.
+										</SwitchDescription>
+									</span>
+									<Switch
+										checked={!!getValue($data2, 'active')}
+										let:checked
+										on:change={(e) => {
+											setFields('active', e.detail, true);
+										}}
+										class={classes(
+											$data2.active ? 'bg-indigo-600' : 'bg-gray-200',
+											'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+										)}
+									>
+										<span
+											aria-hidden="true"
+											class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+											class:translate-x-5={checked}
+											class:translate-x-0={!checked}
+										/>
+									</Switch>
+								</SwitchGroup>
 							</div>
 
 							<div class="col-span-6">
-								<label
-									htmlFor="street-address"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Street address
-								</label>
-								<input
-									type="text"
-									name="street-address"
-									id="street-address"
-									autoComplete="street-address"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								<SwitchGroup class="flex items-center justify-between">
+									<span class="flex flex-grow flex-col">
+										<SwitchLabel
+											as="span"
+											class="text-sm font-medium text-gray-700"
+										>
+											Auto payment reminders
+										</SwitchLabel>
+										<SwitchDescription as="span" class="text-sm text-gray-500">
+											Enable automatic reminders for the tenant to pay rent.
+										</SwitchDescription>
+									</span>
+									<Switch
+										checked={$data2.shouldNotify}
+										let:checked
+										on:change={(e) => {
+											setFields('shouldNotify', e.detail, true);
+										}}
+										class={classes(
+											$data2.shouldNotify ? 'bg-indigo-600' : 'bg-gray-200',
+											'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+										)}
+									>
+										<span
+											aria-hidden="true"
+											class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+											class:translate-x-5={checked}
+											class:translate-x-0={!checked}
+										/>
+									</Switch>
+								</SwitchGroup>
+							</div>
+
+							<!-- Start Date -->
+							<div class="col-span-6 sm:col-span-3">
+								<Input
+									name="start"
+									value={lease.start}
+									invalid={!!getValue($errors, 'start')}
+									invalidText={getValue($errors, 'start')?.[0]}
 								/>
 							</div>
 
-							<div class="col-span-6 sm:col-span-6 lg:col-span-2">
-								<label
-									htmlFor="city"
-									class="block text-sm font-medium text-gray-700"
-								>
-									City
-								</label>
-								<input
-									type="text"
-									name="city"
-									id="city"
-									autoComplete="address-level2"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+							<!-- End Date -->
+							<div class="col-span-6 sm:col-span-3">
+								<Input
+									name="end"
+									value={lease.end}
+									invalid={!!getValue($errors, 'end')}
+									invalidText={getValue($errors, 'end')?.[0]}
 								/>
 							</div>
 
-							<div class="col-span-6 sm:col-span-3 lg:col-span-2">
+							<!-- Rent amount -->
+							<div class="col-span-6 sm:col-span-3">
 								<label
-									htmlFor="region"
-									class="block text-sm font-medium text-gray-700"
+									for="monthlyRent"
+									class="text-sm font-medium text-gray-700"
 								>
-									State / Province
+									Rent
 								</label>
 								<input
-									type="text"
-									name="region"
-									id="region"
-									autoComplete="address-level1"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-								/>
-							</div>
-
-							<div class="col-span-6 sm:col-span-3 lg:col-span-2">
-								<label
-									htmlFor="postal-code"
-									class="block text-sm font-medium text-gray-700"
-								>
-									ZIP / Postal code
-								</label>
-								<input
-									type="text"
-									name="postal-code"
-									id="postal-code"
-									autoComplete="postal-code"
-									class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									id="monthlyRent"
+									name="monthlyRent"
+									value={lease.monthlyRent}
+									type="number"
+									class:invalid={!!getValue($errors, 'monthlyRent')}
 								/>
 							</div>
 						</div>
 					</div>
-					<div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-						<button
-							type="submit"
-							class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-						>
-							Save
-						</button>
-					</div>
 				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="hidden sm:block" aria-hidden="true">
-	<div class="py-5">
-		<div class="border-t border-gray-200" />
-	</div>
-</div>
-
-<div class="mt-10 sm:mt-0">
-	<div class="md:grid md:grid-cols-3 md:gap-6">
-		<div class="md:col-span-1">
-			<div class="px-4 sm:px-0">
-				<h3 class="text-lg font-medium leading-6 text-gray-900">
-					Notifications
-				</h3>
-				<p class="mt-1 text-sm text-gray-600">
-					Decide which communications you'd like to receive and how.
-				</p>
 			</div>
 		</div>
-		<div class="mt-5 md:col-span-2 md:mt-0">
-			<form action="#" method="POST">
-				<div class="overflow-hidden shadow sm:rounded-md">
-					<div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-						<fieldset>
-							<legend class="text-base font-medium text-gray-900"
-								>By Email</legend
-							>
-							<div class="mt-4 space-y-4">
-								<div class="flex items-start">
-									<div class="flex h-5 items-center">
-										<input
-											id="comments"
-											name="comments"
-											type="checkbox"
-											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-										/>
-									</div>
-									<div class="ml-3 text-sm">
-										<label htmlFor="comments" class="font-medium text-gray-700">
-											Comments
-										</label>
-										<p class="text-gray-500">
-											Get notified when someones posts a comment on a posting.
-										</p>
-									</div>
-								</div>
-								<div class="flex items-start">
-									<div class="flex h-5 items-center">
-										<input
-											id="candidates"
-											name="candidates"
-											type="checkbox"
-											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-										/>
-									</div>
-									<div class="ml-3 text-sm">
-										<label
-											htmlFor="candidates"
-											class="font-medium text-gray-700"
-										>
-											Candidates
-										</label>
-										<p class="text-gray-500">
-											Get notified when a candidate applies for a job.
-										</p>
-									</div>
-								</div>
-								<div class="flex items-start">
-									<div class="flex h-5 items-center">
-										<input
-											id="offers"
-											name="offers"
-											type="checkbox"
-											class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-										/>
-									</div>
-									<div class="ml-3 text-sm">
-										<label htmlFor="offers" class="font-medium text-gray-700">
-											Offers
-										</label>
-										<p class="text-gray-500">
-											Get notified when a candidate accepts or rejects an offer.
-										</p>
-									</div>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div>
-								<legend class="text-base font-medium text-gray-900"
-									>Push Notifications</legend
-								>
-								<p class="text-sm text-gray-500">
-									These are delivered via SMS to your mobile phone.
-								</p>
-							</div>
-							<div class="mt-4 space-y-4">
-								<div class="flex items-center">
-									<input
-										id="push-everything"
-										name="push-notifications"
-										type="radio"
-										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-									/>
-									<label
-										htmlFor="push-everything"
-										class="ml-3 block text-sm font-medium text-gray-700"
-									>
-										Everything
-									</label>
-								</div>
-								<div class="flex items-center">
-									<input
-										id="push-email"
-										name="push-notifications"
-										type="radio"
-										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-									/>
-									<label
-										htmlFor="push-email"
-										class="ml-3 block text-sm font-medium text-gray-700"
-									>
-										Same as email
-									</label>
-								</div>
-								<div class="flex items-center">
-									<input
-										id="push-nothing"
-										name="push-notifications"
-										type="radio"
-										class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-									/>
-									<label
-										htmlFor="push-nothing"
-										class="ml-3 block text-sm font-medium text-gray-700"
-									>
-										No push notifications
-									</label>
-								</div>
-							</div>
-						</fieldset>
-					</div>
-					<div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-						<button
-							type="submit"
-							class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-						>
-							Save
-						</button>
-					</div>
-				</div>
-			</form>
+	</div>
+	<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
+		<button
+			type="button"
+			class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			on:click={() => console.log($data2, $errors)}
+		>
+			Cancel
+		</button>
+
+		<Button
+			loading={$isSubmitting}
+			text={lease.id ? 'Save changes' : 'Create new'}
+			disabled={$isSubmitting}
+		/>
+	</div>
+
+	<!-- Divider -->
+	<div class="hidden sm:block" aria-hidden="true">
+		<div class="py-5">
+			<div class="border-t  border-gray-200" />
 		</div>
 	</div>
-</div>
+</form>
+
+<!-- Payment Schedule section -->
+<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
+
+<style lang="postcss">
+	input {
+		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+	}
+	input.invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+
+	/* Remove arrow steppers */
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+</style>

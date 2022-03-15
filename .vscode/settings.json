@@ -29,5 +29,8 @@
 	"explorer.experimental.fileNesting.patterns": {
 		"*.ts": "$(capture).test.ts",
 		"package.json": "yarn.lock"
-	}
+	},
+	"editor.codeLens": false,
+	"editor.foldingImportsByDefault": true,
+	"vim.foldfix": true
 }

@@ -94,8 +94,11 @@ export default trpc
 		}),
 	})
 	.query('search', {
-		input: z.string().optional(),
-		resolve: ({ input }) =>
+		input: z.object({
+			query: z.string().optional(),
+			clientId: z.string().optional(),
+		}),
+		resolve: ({ input: { query } }) =>
 			prismaClient.tenant.findMany({
 				take: 5,
 				orderBy: {
@@ -106,17 +109,17 @@ export default trpc
 					firstName: true,
 					lastName: true,
 				},
-				where: input
+				where: query
 					? {
 							OR: [
-								{ id: { contains: input } },
-								{ firstName: { contains: input } },
-								{ secondName: { contains: input } },
-								{ thirdName: { contains: input } },
-								{ lastName: { contains: input } },
-								{ email: { contains: input } },
-								{ phone: { contains: input } },
-								{ civilid: { contains: input } },
+								{ id: { contains: query } },
+								{ firstName: { contains: query } },
+								{ secondName: { contains: query } },
+								{ thirdName: { contains: query } },
+								{ lastName: { contains: query } },
+								{ email: { contains: query } },
+								{ phone: { contains: query } },
+								{ civilid: { contains: query } },
 							],
 					  }
 					: undefined,

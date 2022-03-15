@@ -4,6 +4,7 @@
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import '../styles/tailwind.css';
+	import 'tippy.js/dist/tippy.css';
 </script>
 
 {#if $navigating}

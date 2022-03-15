@@ -1,13 +1,46 @@
 import type { InferMutationInput } from '$lib/client/trpc';
-import { falsyToNull } from '$lib/zodTransformers';
+import { addMonths, format } from 'date-fns';
+import { nanoid } from 'nanoid';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
+
+export function generateSchedule({
+	count,
+	amount,
+	scheduleStart,
+}: {
+	count: number;
+	amount: number;
+	scheduleStart: Date;
+}) {
+	const newSchedule = [];
+	// get the date of the 1st day of the next month
+	// const leaseStart = new Date(lease.scheduleStart);
+	const nextMonth = new Date(
+		scheduleStart.getFullYear(),
+		scheduleStart.getMonth() + 1,
+		2,
+	);
+
+	for (let bp = 0; bp < Math.min(count, 24); bp++) {
+		// TODO change to 1 month
+		const dueDate = addMonths(nextMonth, bp);
+		const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
+		newSchedule.push({
+			nanoid: nanoid(),
+			amount,
+			// postDate: dueDate.toISOString().split('T')[0],
+			postDate: dueDate,
+			memo,
+		});
+	}
+	return newSchedule;
+}
 
 export const schema = z
 	.object({
 		id: z.string().uuid().optional(),
-		monthlyRent: z.number().nonnegative(),
-		deposit: z.number().nonnegative(),
+		monthlyRent: z.number().min(1),
 		start: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
@@ -16,19 +49,8 @@ export const schema = z
 		}, z.date()),
 		tenantId: z.string().uuid(),
 		unitId: z.string().uuid(),
-		contactMethod: z.enum(['sms', 'email']).nullish(),
 		shouldNotify: z.boolean(),
 		active: z.boolean(),
-		cycleCount: z.number().nonnegative(),
-		billingDay: z.number().min(1).max(31),
-		firstPayment: z
-			.preprocess((arg) => {
-				if (typeof arg === 'string' || arg instanceof Date)
-					return new Date(arg);
-			}, z.date())
-			.or(z.literal(''))
-			.nullish()
-			.transform(falsyToNull),
 	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
@@ -40,24 +62,14 @@ export const schema = z
 	});
 
 type Lease = InferMutationInput<'leases:save'>;
-const defaultForm = (): Lease => ({
+export const defaultForm = (): Lease => ({
 	start: new Date(),
 	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-	deposit: 0,
 	monthlyRent: 0,
 	tenantId: '',
 	unitId: '',
-	contactMethod: 'sms',
 	shouldNotify: true,
 	active: true,
-	cycleCount: 12,
-	billingDay: 1,
-	// TODO fix timezone
-	firstPayment: new Date(
-		new Date().getFullYear(),
-		new Date().getMonth() + 1,
-		2,
-	),
 });
 
 const label: typeof definition['label'] = (item) =>

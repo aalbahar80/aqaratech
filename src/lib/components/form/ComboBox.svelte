@@ -15,10 +15,14 @@
 	export let invalidText: string = '';
 
 	// default selected object
-	export let optionLabel: null | { [key: string]: string };
+	export let optionLabel: null | { [key: string]: string } = null;
 
 	// id of the default selected option
-	export let value: string | null;
+	export let value: string | null = '';
+
+	export let loadDefaults: boolean = true;
+	export let filter: any = undefined;
+	$: console.log(filter);
 
 	const getLabel = (item: any) => {
 		const { label } = entityDefinitions[entity];
@@ -27,7 +31,7 @@
 	};
 
 	const loadOptions = (query?: string) =>
-		trpc.query(`${entity}:search`, query).then((items) =>
+		trpc.query(`${entity}:search`, { query, ...filter }).then((items) =>
 			items.map((item) => ({
 				id: item.id,
 				label: getLabel(item),
@@ -43,24 +47,26 @@
 			id: value,
 		});
 
-		// always prepare a list of suggested options
-		// if a value is predefined, push it to the top of the list
-		if (value) {
-			const [predefinedItem, defaultItems] = await Promise.all([
-				loadOptions(value),
-				loadOptions(),
-			]);
+		if (loadDefaults) {
+			// always prepare a list of suggested options
+			// if a value is predefined, push it to the top of the list
+			if (value) {
+				const [predefinedItem, defaultItems] = await Promise.all([
+					loadOptions(value),
+					loadOptions(),
+				]);
 
-			// if defaultItems contains the predefined item, remove it
-			if (defaultItems.find((item) => item.id === value)) {
-				defaultItems.splice(
-					defaultItems.findIndex((item) => item.id === value),
-					1,
-				);
+				// if defaultItems contains the predefined item, remove it
+				if (defaultItems.find((item) => item.id === value)) {
+					defaultItems.splice(
+						defaultItems.findIndex((item) => item.id === value),
+						1,
+					);
+				}
+				items = [...predefinedItem, ...defaultItems];
+			} else {
+				items = await loadOptions();
 			}
-			items = [...predefinedItem, ...defaultItems];
-		} else {
-			items = await loadOptions();
 		}
 	});
 </script>
@@ -83,5 +89,9 @@
 		on:select
 		on:clear
 	/>
-	{invalidText ?? ''}
+	{#if invalidText}
+		<p class="mt-2 text-sm text-red-600">
+			{invalidText}
+		</p>
+	{/if}
 </div>
