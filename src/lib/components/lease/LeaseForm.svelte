@@ -6,8 +6,7 @@
 	import { defaultForm, schema } from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import reporter from '@felte/reporter-tippy';
-	import type { ValidatorConfig } from '@felte/validator-zod';
-	import { validateSchema } from '@felte/validator-zod';
+	import { validator, type ValidatorConfig } from '@felte/validator-zod';
 	import {
 		Switch,
 		SwitchDescription,
@@ -59,8 +58,10 @@
 			shouldNotify: lease.shouldNotify,
 		},
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
-		extend: reporter(),
-		validate: validateSchema(schema as unknown as z.AnyZodObject),
+		extend: [
+			validator({ schema: schema as unknown as z.AnyZodObject }),
+			reporter(),
+		],
 		onError: (err) => {
 			addToast({
 				props: {
