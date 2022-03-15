@@ -44,7 +44,7 @@ export const entityDefinitions: EntityDefinitions = {
 	maintenanceOrders: maintenanceOrder,
 };
 
-export const singular: { [K in Entity]: string } = {
+export const singular = {
 	leases: 'lease',
 	tenants: 'tenant',
 	units: 'unit',
@@ -52,4 +52,4 @@ export const singular: { [K in Entity]: string } = {
 	clients: 'client',
 	transactions: 'transaction',
 	maintenanceOrders: 'maintenanceOrder',
-};
+} as const;
