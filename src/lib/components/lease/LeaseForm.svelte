@@ -50,6 +50,7 @@
 		data: data2,
 		setFields,
 		setData,
+		touched,
 	} = createForm({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
@@ -351,7 +352,10 @@
 </div>
 
 <!-- Payment Schedule section -->
-<Schedule amount={$data2.monthlyRent} />
+<Schedule
+	amount={$data2.monthlyRent}
+	shouldValidate={$touched.monthlyRent || false}
+/>
 
 <style lang="postcss">
 	input {

@@ -6,6 +6,7 @@
 	import { fade } from 'svelte/transition';
 
 	export let amount: number;
+	export let shouldValidate: boolean;
 
 	let count = 12;
 	let scheduleStart = new Date();
@@ -35,7 +36,8 @@
 					Payment Schedule
 				</h3>
 				<p class="mt-1 text-sm text-gray-600">
-					Use a permanent address where you can receive mail.
+					Transactions may be edited or deleted as long as they have not been
+					paid. New transactions may also be added at a later time.
 				</p>
 			</div>
 		</div>
@@ -106,7 +108,7 @@
 										bind:value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-										class:invalid={trx.amount < 1}
+										class:invalid={trx.amount < 1 && shouldValidate}
 									/>
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
@@ -115,7 +117,7 @@
 										id={`${trx.nanoid}-postDate`}
 										name={`${trx.nanoid}-postDate`}
 										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
-										class:invalid={!trx.postDate}
+										class:invalid={!trx.postDate && shouldValidate}
 										on:change={(e) => {
 											if (e.currentTarget.valueAsDate) {
 												schedule[idx].postDate = e.currentTarget.valueAsDate;
