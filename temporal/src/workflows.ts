@@ -104,7 +104,8 @@ export async function trxNotificationWF(trxId: string) {
 		} catch (e) {
 			console.error('Error refreshing trx: ', e);
 		}
-		console.log('Sleeping for 5 seconds');
+		console.log('Sleeping for 3 seconds');
 		await sleep('3s');
 	}
+	console.log('Done.');
 }

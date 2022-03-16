@@ -1,6 +1,9 @@
 [![ci](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml/badge.svg)](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml)
 
 # Temporal
+## TODO:
+- avoid having to build sveltekit
+-- this fixes trpc URL too
 
 1. run the server
 
