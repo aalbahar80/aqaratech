@@ -50,18 +50,36 @@ export const getName = <
 	]);
 };
 
-const forceDate = (date: Date | string | null): Date => {
+const forceDate = (date: Date | string): Date => {
 	if (date instanceof Date) return date;
-	if (typeof date === 'string') return new Date(date);
+	if (typeof date === 'string') {
+		try {
+			return new Date(date);
+		} catch (e) {
+			throw new Error('Can not parse date');
+		}
+	}
 	console.warn('forceDate: date is not a Date or string');
 	return new Date();
 };
 
 const inputDateFormat = 'yyyy-MM-dd';
 export const dateToInput = (date: Date): string => {
-	return format(date, inputDateFormat);
+	try {
+		return format(date, inputDateFormat);
+	} catch (e) {
+		throw new Error(
+			`Can not format date to ${inputDateFormat}.`,
+		);
+	}
 };
 
-export const forceDateToInput = (date: Date | string | null): string => {
-	return dateToInput(forceDate(date));
+export const forceDateToInput = (date: Date | string): string => {
+	try {
+		return dateToInput(forceDate(date));
+	} catch (e) {
+		// TODO how to check error type?
+		console.warn(e);
+		return '';
+	}
 };
