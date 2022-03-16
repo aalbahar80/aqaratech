@@ -63,7 +63,7 @@
 			shouldNotify: lease.shouldNotify,
 		},
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
-		// extend: reporter(),
+		extend: reporter(),
 		validate: [
 			validateSchema(schema as unknown as z.AnyZodObject),
 			(values) => {
