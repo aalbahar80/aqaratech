@@ -4,8 +4,6 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
-	import { flip } from 'svelte/animate';
-	import { fade } from 'svelte/transition';
 
 	export let errors: any;
 	export let schedule: ReturnType<typeof generateSchedule>;
@@ -53,9 +51,11 @@
 						</div>
 
 						{#each schedule as trx, idx (idx)}
+							<!-- TODO add back animate after issue fix -->
+							<!-- https://github.com/pablo-abc/felte/issues/114 -->
+							<!-- animate:flip={{ duration: 200 }} -->
+							<!-- transition:fade|local={{ duration: 100 }} -->
 							<div
-								animate:flip={{ duration: 200 }}
-								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
