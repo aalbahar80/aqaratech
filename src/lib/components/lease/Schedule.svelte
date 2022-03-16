@@ -4,10 +4,12 @@
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 
 	export let errors: any;
 	export let roschedule: InferMutationInput<'leases:save'>['schedule'];
-	$: console.log({ roschedule }, 'Schedule.svelte ~ 11');
+	$: console.table(roschedule);
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -38,7 +40,6 @@
 								value={roschedule.length}
 								type="number"
 								on:change={(e) => {
-									// handleCountChange(e.currentTarget.valueAsNumber);
 									dispatch('countChange', e.currentTarget.valueAsNumber);
 								}}
 							/>
@@ -51,12 +52,10 @@
 							</div>
 						</div>
 
-						<!-- {#each roschedule as trx, idx (trx.key)} -->
-						<!-- {#each roschedule as trx, idx (trx.nanoid)} -->
-						{#each roschedule as trx, idx}
-							<!-- animate:flip={{ duration: 200 }}
-						transition:fade|local={{ duration: 100 }} -->
+						{#each roschedule as trx, idx (idx)}
 							<div
+								animate:flip={{ duration: 200 }}
+								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
