@@ -55,6 +55,14 @@ tail -f nohup.out # in same directory
 ```
 
 ```bash
+# updating code workflow
+git pull
+yarn run build:temporal
+# this should be enough, if start:worker.watch uses nodemon to restart and pick up the changes
+# TODO figure out why DATABASE_URL env var not persisting
+```
+
+```bash
 # to view all running processes
 ps -df
 # to quit
