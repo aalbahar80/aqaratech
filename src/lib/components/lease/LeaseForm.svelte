@@ -61,7 +61,6 @@
 			// initializing non-native html inputs (Switch)
 			active: lease.active,
 			shouldNotify: lease.shouldNotify,
-			schedule: lease.schedule,
 		},
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
 		// extend: reporter(),

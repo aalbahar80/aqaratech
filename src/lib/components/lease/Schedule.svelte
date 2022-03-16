@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { InferMutationInput } from '$lib/client/trpc';
 	import { generateSchedule } from '$lib/definitions/lease';
+	import { forceDateToInput } from '$lib/utils/common';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
@@ -120,20 +121,15 @@
 										class:invalid={errors?.schedule?.[idx]?.amount}
 									/>
 								</div>
-								<!-- <span class="w-1/3 flex-1 sm:flex-initial">
+								<span class="w-1/3 flex-1 sm:flex-initial">
 									<input
-										type="date"
 										id="schedule.{idx}.postDate"
 										name="schedule.{idx}.postDate"
-										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
+										value={forceDateToInput(trx.postDate)}
+										type="date"
 										class:invalid={errors?.schedule?.[idx]?.postDate}
-										on:change={(e) => {
-											// if (e.currentTarget.valueAsDate) {
-											// 	schedule[idx].postDate = e.currentTarget.valueAsDate;
-											// }
-										}}
 									/>
-								</span> -->
+								</span>
 								<button
 									class="w-1/12"
 									on:click|preventDefault={() => {

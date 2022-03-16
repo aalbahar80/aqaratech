@@ -49,3 +49,19 @@ export const getName = <
 		person.lastName,
 	]);
 };
+
+const forceDate = (date: Date | string | null): Date => {
+	if (date instanceof Date) return date;
+	if (typeof date === 'string') return new Date(date);
+	console.warn('forceDate: date is not a Date or string');
+	return new Date();
+};
+
+const inputDateFormat = 'yyyy-MM-dd';
+export const dateToInput = (date: Date): string => {
+	return format(date, inputDateFormat);
+};
+
+export const forceDateToInput = (date: Date | string | null): string => {
+	return dateToInput(forceDate(date));
+};
