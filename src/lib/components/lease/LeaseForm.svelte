@@ -5,10 +5,11 @@
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import {
 		defaultForm,
-		schema,
-		type generateSchedule,
+		generateSchedule,
+		leaseFormSchema,
 	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
+	import { forceDate, forceDateToInput } from '$lib/utils/common';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
@@ -21,13 +22,12 @@
 	import { createForm, getValue } from 'felte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
-	import type { z } from 'zod';
+	import type { AnyZodObject, z, ZodObject } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
 
 	const lease = defaultForm();
-	let schedule: ReturnType<typeof generateSchedule>;
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
@@ -54,45 +54,38 @@
 		data: data2,
 		setFields,
 		setData,
-	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
-		initialValues: {
-			// avoid any dates here for seamless <input type="date">
-			// initializing non-native html inputs (Switch)
-			active: lease.active,
-			shouldNotify: lease.shouldNotify,
-		},
-		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
-		extend: reporter(),
-		validate: [
-			validateSchema(schema as unknown as z.AnyZodObject),
-			(values) => {
-				console.log('starting manual validation');
-				console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
-				// this is to overcome zod's refine not working here
-				const newErrors: any = {};
-				if (values.start > values.end) {
-					newErrors.start = 'Start date must be before end date';
-					newErrors.end = 'End date must be after start date';
-				}
-				if (!schedule) {
-					return newErrors;
-				}
-				const scheduleErrors: { [key: string]: string } = {};
-				schedule.forEach((t) => {
-					if (t.amount < 1) {
-						scheduleErrors[`${t.nanoid}--amount`] = 'Amount must be positive';
+		unsetField,
+	} = createForm<z.infer<typeof leaseFormSchema>, ValidatorConfig>({
+		transform: (values: unknown) => {
+			// make sure each element in schedule array is an object whose postDate is a date
+			const original = values as z.infer<typeof leaseFormSchema>;
+			const newValues = {} as any;
+			if (Array.isArray(original.schedule)) {
+				newValues['schedule'] = original?.schedule.map((item) => {
+					if (item?.postDate) {
+						return {
+							...item,
+							postDate: forceDateToInput(item.postDate),
+						};
 					}
-					if (t.postDate > new Date(values.end)) {
-						scheduleErrors[`${t.nanoid}--postDate`] =
-							'Post date must be before end date	';
-					}
+					return item;
 				});
-				newErrors.schedule = scheduleErrors;
-
-				console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
-				return newErrors;
-			},
-		],
+			}
+			if (original.start) {
+				newValues['start'] = forceDateToInput(original.start);
+			}
+			if (original.end) {
+				newValues['end'] = forceDateToInput(original.end);
+			}
+			return {
+				...original,
+				...newValues,
+			};
+		},
+		initialValues: lease,
+		schema: leaseFormSchema as unknown as AnyZodObject, // only to make linter happy
+		extend: reporter(),
+		validate: validateSchema(leaseFormSchema as unknown as AnyZodObject),
 		onError: (err) => {
 			addToast({
 				props: {
@@ -107,24 +100,19 @@
 			return err;
 		},
 		onSubmit: async (values) => {
-			console.log('submitting');
 			console.log({ values }, 'LeaseForm.svelte ~ 95');
-			console.log({ schedule }, 'LeaseForm.svelte ~ 96');
-			const submitted = await trpc.mutation('leases:save', values);
-			// add leaseId: submitted.id to each element in the schedule
-			const newTransactions = schedule.map((e) => ({
-				leaseId: submitted.id,
+			const { schedule, ...leaseValues } = values;
+			const newLease = await trpc.mutation('leases:save', leaseValues);
+			const trxValues = schedule.map((e) => ({
+				leaseId: newLease.id,
 				dueDate: e.postDate,
 				isPaid: false,
 				...e,
 			}));
-			const submittedTrxs = await trpc.mutation(
-				'transactions:saveMany',
-				newTransactions,
-			);
-			console.log({ submitted }, 'LeaseForm.svelte ~ 108');
-			console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
-			await goto(`/leases/${submitted.id}`);
+			const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
+			console.log({ newLease }, 'LeaseForm.svelte ~ 108');
+			console.log({ newTrxs }, 'LeaseForm.svelte ~ 109');
+			await goto(`/leases/${newLease.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -133,18 +121,26 @@
 			});
 		},
 	});
-	// recursively check if every value in the object is null
-	// const checkForNull = (obj: any) =>
-	// 	Object.values(obj).every((e) => {
-	// 		if (e === null) {
-	// 			return true;
-	// 		}
-	// 		if (typeof e === 'object') {
-	// 			return Object.values(e).every((ee) => ee === null);
-	// 		}
-	// 		return false;
-	// 	});
-	// $: noErrorMsg = checkForNull($errors);
+
+	let count = $data2.schedule.length; // TODO reconsider
+	// let count = 2;
+	const handleCountChange = (newCount: number) => {
+		const newSchedule = generateSchedule({
+			scheduleStart: forceDate($data2.start),
+			amount: $data2.monthlyRent,
+			count: newCount,
+		});
+		setData('schedule', newSchedule);
+	};
+	const handleAmountChange = (newAmount: number) => {
+		const newSchedule = generateSchedule({
+			scheduleStart: forceDate($data2.start),
+			amount: newAmount,
+			count,
+		});
+		setData('schedule', newSchedule);
+	};
+	$: console.log({ $data2 }, 'LeaseForm.svelte ~ 158');
 </script>
 
 <form use:form>
@@ -155,7 +151,7 @@
 				<div class="px-4 sm:px-0">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
 					<p class="mt-1 text-sm text-gray-600">
-						Tenants needs to be created before they can be added to a lease.
+						Tenants must be created before they can be added to a lease.
 					</p>
 					<span class="mt-4 sm:mt-0">
 						<a
@@ -275,7 +271,7 @@
 						Lease Information
 					</h3>
 					<p class="mt-1 text-sm text-gray-600">
-						Use a permanent address where you can receive mail.
+						You can edit this information later.
 					</p>
 				</div>
 			</div>
@@ -290,10 +286,14 @@
 											as="span"
 											class="text-sm font-medium text-gray-700"
 										>
-											Signed
+											Active
 										</SwitchLabel>
-										<SwitchDescription as="span" class="text-sm text-gray-500">
-											Whether this lease is signed or not.
+										<SwitchDescription
+											as="span"
+											class="w-3/4 text-sm text-gray-500"
+										>
+											Would you like to activate this lease now? Payment
+											reminders will only be sent if a lease is active.
 										</SwitchDescription>
 									</span>
 									<Switch
@@ -327,7 +327,7 @@
 											Auto payment reminders
 										</SwitchLabel>
 										<SwitchDescription as="span" class="text-sm text-gray-500">
-											Enable automatic reminders for the tenant to pay rent.
+											Send sms reminders to tenants.
 										</SwitchDescription>
 									</span>
 									<Switch
@@ -385,6 +385,9 @@
 									value={lease.monthlyRent}
 									type="number"
 									class:invalid={!!getValue($errors, 'monthlyRent')}
+									on:change={(e) => {
+										handleAmountChange(e.currentTarget.valueAsNumber);
+									}}
 								/>
 							</div>
 						</div>
@@ -415,10 +418,19 @@
 			<div class="border-t  border-gray-200" />
 		</div>
 	</div>
-</form>
 
-<!-- Payment Schedule section -->
-<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
+	<!-- Payment Schedule section -->
+	<Schedule
+		schedule={$data2.schedule}
+		errors={$errors}
+		on:delete={(e) => {
+			unsetField(`schedule.${e.detail}`);
+		}}
+		on:countChange={(e) => {
+			handleCountChange(e.detail);
+		}}
+	/>
+</form>
 
 <style lang="postcss">
 	input {

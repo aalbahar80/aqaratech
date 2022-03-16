@@ -1,30 +1,15 @@
 <script lang="ts">
-	import { generateSchedule } from '$lib/definitions/lease';
+	import type { generateSchedule } from '$lib/definitions/lease';
+	import { forceDateToInput } from '$lib/utils/common';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { flip } from 'svelte/animate';
-	import { fade } from 'svelte/transition';
+	import { createEventDispatcher } from 'svelte';
 
-	export let amount: number;
 	export let errors: any;
+	export let schedule: ReturnType<typeof generateSchedule>;
+	$: console.table(schedule);
 
-	let count = 12;
-	let scheduleStart = new Date();
-	export let schedule = generateSchedule({ scheduleStart, amount, count });
-
-	const handleCountChange = () => {
-		schedule = generateSchedule({ scheduleStart, amount, count });
-	};
-
-	const handleAmountChange = (newAmount: number) => {
-		schedule = generateSchedule({ scheduleStart, amount: newAmount, count });
-	};
-	$: handleAmountChange(amount);
-
-	const remove = (nanoid: string) => {
-		schedule = schedule.filter((n) => n.nanoid !== nanoid);
-		count = schedule.length;
-	};
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="mt-10 sm:mt-0">
@@ -45,37 +30,16 @@
 				<div class="bg-white px-4 py-5 sm:p-6">
 					<div class="grid grid-cols-6 gap-6">
 						<div class="col-span-6 sm:col-span-3">
-							<label
-								for="scheduleStart"
-								class="text-sm font-medium text-gray-700"
-							>
-								First Payment
-							</label>
-							<input
-								id="scheduleStart"
-								name="scheduleStart"
-								value={scheduleStart.toISOString().split('T')[0]}
-								type="date"
-								on:change={(e) => {
-									scheduleStart = e.currentTarget.valueAsDate ?? scheduleStart;
-									schedule = generateSchedule({
-										scheduleStart,
-										amount,
-										count,
-									});
-								}}
-							/>
-						</div>
-						<div class="col-span-6 sm:col-span-3">
 							<label for="count" class="text-sm font-medium text-gray-700">
 								Count
 							</label>
 							<input
 								id="count"
-								name="count"
-								bind:value={count}
+								value={schedule.length}
 								type="number"
-								on:change={handleCountChange}
+								on:change={(e) => {
+									dispatch('countChange', e.currentTarget.valueAsNumber);
+								}}
 							/>
 						</div>
 
@@ -86,10 +50,12 @@
 							</div>
 						</div>
 
-						{#each schedule as trx, idx (trx.nanoid)}
+						{#each schedule as trx, idx (idx)}
+							<!-- TODO add back animate after issue fix -->
+							<!-- https://github.com/pablo-abc/felte/issues/114 -->
+							<!-- animate:flip={{ duration: 200 }} -->
+							<!-- transition:fade|local={{ duration: 100 }} -->
 							<div
-								animate:flip={{ duration: 200 }}
-								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
@@ -102,34 +68,27 @@
 										KWD
 									</span>
 									<input
-										id={`${trx.nanoid}-amount`}
-										name={`${trx.nanoid}-amount`}
-										bind:value={trx.amount}
+										id="schedule.{idx}.amount"
+										name="schedule.{idx}.amount"
+										value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-										class:invalid={errors?.schedule?.[`${trx.nanoid}--amount`]}
+										class:invalid={errors?.schedule?.[idx]?.amount}
 									/>
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
 									<input
+										id="schedule.{idx}.postDate"
+										name="schedule.{idx}.postDate"
+										value={forceDateToInput(trx.postDate)}
 										type="date"
-										id={`${trx.nanoid}-postDate`}
-										name={`${trx.nanoid}-postDate`}
-										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
-										class:invalid={errors?.schedule?.[
-											`${trx.nanoid}--postDate`
-										]}
-										on:change={(e) => {
-											if (e.currentTarget.valueAsDate) {
-												schedule[idx].postDate = e.currentTarget.valueAsDate;
-											}
-										}}
+										class:invalid={errors?.schedule?.[idx]?.postDate}
 									/>
 								</span>
 								<button
 									class="w-1/12"
 									on:click|preventDefault={() => {
-										remove(trx.nanoid);
+										dispatch('delete', idx);
 									}}
 								>
 									<Icon
