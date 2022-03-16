@@ -151,7 +151,7 @@
 				<div class="px-4 sm:px-0">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">Tenant</h3>
 					<p class="mt-1 text-sm text-gray-600">
-						Tenants needs to be created before they can be added to a lease.
+						Tenants must be created before they can be added to a lease.
 					</p>
 					<span class="mt-4 sm:mt-0">
 						<a
@@ -271,7 +271,7 @@
 						Lease Information
 					</h3>
 					<p class="mt-1 text-sm text-gray-600">
-						Use a permanent address where you can receive mail.
+						You can edit this information later.
 					</p>
 				</div>
 			</div>
@@ -286,10 +286,14 @@
 											as="span"
 											class="text-sm font-medium text-gray-700"
 										>
-											Signed
+											Active
 										</SwitchLabel>
-										<SwitchDescription as="span" class="text-sm text-gray-500">
-											Whether this lease is signed or not.
+										<SwitchDescription
+											as="span"
+											class="w-3/4 text-sm text-gray-500"
+										>
+											Would you like to activate this lease now? Payment
+											reminders will only be sent if a lease is active.
 										</SwitchDescription>
 									</span>
 									<Switch
@@ -323,7 +327,7 @@
 											Auto payment reminders
 										</SwitchLabel>
 										<SwitchDescription as="span" class="text-sm text-gray-500">
-											Enable automatic reminders for the tenant to pay rent.
+											Send sms reminders to tenants.
 										</SwitchDescription>
 									</span>
 									<Switch
@@ -427,9 +431,6 @@
 		}}
 	/>
 </form>
-
-<pre>{JSON.stringify({ data2: $data2 }, null, 2)}</pre>
-<pre>{JSON.stringify($errors, null, 2)}</pre>
 
 <style lang="postcss">
 	input {
