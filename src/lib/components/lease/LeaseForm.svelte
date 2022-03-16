@@ -63,9 +63,10 @@
 			if (Array.isArray(original.schedule)) {
 				newValues['schedule'] = original?.schedule.map((item) => {
 					if (item?.postDate) {
-						item['postDate'] = new Date(item.postDate)
-							.toISOString()
-							.split('T')[0];
+						return {
+							...item,
+							postDate: forceDateToInput(item.postDate),
+						};
 					}
 					return item;
 				});
@@ -74,7 +75,7 @@
 				newValues['start'] = forceDateToInput(original.start);
 			}
 			if (original.end) {
-				newValues.end = forceDateToInput(original.end);
+				newValues['end'] = forceDateToInput(original.end);
 			}
 			return {
 				...original,
