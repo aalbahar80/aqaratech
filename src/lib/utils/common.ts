@@ -50,7 +50,7 @@ export const getName = <
 	]);
 };
 
-const forceDate = (date: Date | string): Date => {
+export const forceDate = (date: Date | string): Date => {
 	if (date instanceof Date) return date;
 	if (typeof date === 'string') {
 		try {

@@ -5,10 +5,11 @@
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import {
 		defaultForm,
+		generateSchedule,
 		schema,
-		type generateSchedule,
 	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
+	import { forceDate } from '$lib/utils/common';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
@@ -136,8 +137,23 @@
 		},
 	});
 	// setData('schedule', lease.schedule);
+
+	let count = 3;
+	const handleCountChange = (newCount: number) => {
+		schedule = generateSchedule({
+			scheduleStart: forceDate($data2.start),
+			amount: $data2.monthlyRent,
+			count: newCount,
+		});
+	};
+	const handleAmountChange = (newAmount: number) => {
+		schedule = generateSchedule({
+			scheduleStart: forceDate($data2.start),
+			amount: newAmount,
+			count,
+		});
+	};
 	$: setData('schedule', schedule);
-	$: console.log({ schedule }, 'LeaseForm.svelte ~ 122');
 	// recursively check if every value in the object is null
 	// const checkForNull = (obj: any) =>
 	// 	Object.values(obj).every((e) => {
@@ -390,6 +406,9 @@
 									value={lease.monthlyRent}
 									type="number"
 									class:invalid={!!getValue($errors, 'monthlyRent')}
+									on:change={(e) => {
+										handleAmountChange(e.currentTarget.valueAsNumber);
+									}}
 								/>
 							</div>
 						</div>
@@ -423,20 +442,18 @@
 
 	<!-- Payment Schedule section -->
 	<Schedule
-		bind:schedule
 		roschedule={$data2.schedule}
 		errors={$errors}
-		amount={$data2.monthlyRent}
 		on:delete={(e) => {
 			unsetField(`schedule.${e.detail}`);
+		}}
+		on:countChange={(e) => {
+			handleCountChange(e.detail);
 		}}
 	/>
 </form>
 
-<!-- <pre>{JSON.stringify(freshInterests, null, 2)}</pre> -->
-<pre>{JSON.stringify({ schedule }, null, 2)}</pre>
-<!-- <pre>{JSON.stringify(lease.schedule, null, 2)}</pre> -->
-<pre>{JSON.stringify($data2, null, 2)}</pre>
+<pre>{JSON.stringify({ data2: $data2 }, null, 2)}</pre>
 <pre>{JSON.stringify($errors, null, 2)}</pre>
 
 <style lang="postcss">

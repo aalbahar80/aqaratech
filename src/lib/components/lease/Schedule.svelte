@@ -1,31 +1,13 @@
 <script lang="ts">
 	import type { InferMutationInput } from '$lib/client/trpc';
-	import { generateSchedule } from '$lib/definitions/lease';
 	import { forceDateToInput } from '$lib/utils/common';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
-	import { flip } from 'svelte/animate';
-	import { fade } from 'svelte/transition';
 
-	export let amount: number;
 	export let errors: any;
 
-	export let schedule: InferMutationInput<'leases:save'>['schedule'];
 	export let roschedule: InferMutationInput<'leases:save'>['schedule'];
-
-	let scheduleStart = new Date();
-	let count = schedule?.length ?? 0;
-
-	const handleCountChange = (newCount: number) => {
-		count = newCount;
-		schedule = generateSchedule({ scheduleStart, amount, count: newCount });
-	};
-
-	const handleAmountChange = (newAmount: number) => {
-		schedule = generateSchedule({ scheduleStart, amount: newAmount, count });
-	};
-	$: handleAmountChange(amount);
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -48,38 +30,16 @@
 				<div class="bg-white px-4 py-5 sm:p-6">
 					<div class="grid grid-cols-6 gap-6">
 						<div class="col-span-6 sm:col-span-3">
-							<label
-								for="scheduleStart"
-								class="text-sm font-medium text-gray-700"
-							>
-								First Payment
-							</label>
-							<input
-								id="scheduleStart"
-								name="scheduleStart"
-								value={scheduleStart.toISOString().split('T')[0]}
-								type="date"
-								on:change={(e) => {
-									scheduleStart = e.currentTarget.valueAsDate ?? scheduleStart;
-									schedule = generateSchedule({
-										scheduleStart,
-										amount,
-										count,
-									});
-								}}
-							/>
-						</div>
-						<div class="col-span-6 sm:col-span-3">
 							<label for="count" class="text-sm font-medium text-gray-700">
 								Count
 							</label>
 							<input
 								id="count"
-								name="count"
-								value={count}
+								value={roschedule.length}
 								type="number"
 								on:change={(e) => {
-									handleCountChange(e.currentTarget.valueAsNumber);
+									// handleCountChange(e.currentTarget.valueAsNumber);
+									dispatch('countChange', e.currentTarget.valueAsNumber);
 								}}
 							/>
 						</div>
@@ -91,8 +51,8 @@
 							</div>
 						</div>
 
+						<!-- {#each roschedule as trx, idx (trx.nanoid)} -->
 						{#each roschedule as trx, idx}
-							<!-- {#each schedule as trx, idx} -->
 							<!-- animate:flip={{ duration: 200 }}
 						transition:fade|local={{ duration: 100 }} -->
 							<div
