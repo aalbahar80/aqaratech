@@ -9,7 +9,7 @@
 		schema,
 	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
-	import { forceDate } from '$lib/utils/common';
+	import { forceDate, forceDateToInput } from '$lib/utils/common';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
@@ -28,7 +28,6 @@
 	import Input from '../form/Input.svelte';
 
 	const lease = defaultForm();
-	let schedule = lease.schedule;
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
@@ -70,22 +69,26 @@
 			});
 			return {
 				...values,
+				start: forceDateToInput(values.start),
+				end: forceDateToInput(values.end),
 				schedule,
 			};
 		},
-		initialValues: {
-			// avoid any dates here for seamless <input type="date">
-			// initializing non-native html inputs (Switch)
-			active: lease.active,
-			shouldNotify: lease.shouldNotify,
-		},
+		initialValues: lease,
+		// initialValues: {
+		// 	// avoid any dates here for seamless <input type="date">
+		// 	// initializing non-native html inputs (Switch)
+		// 	active: lease.active,
+		// 	shouldNotify: lease.shouldNotify,
+		// 	schedule: lease.schedule,
+		// },
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
 		extend: reporter(),
 		validate: [
 			validateSchema(schema as unknown as z.AnyZodObject),
 			(values) => {
 				console.log('starting manual validation');
-				console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
+				// console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
 				// this is to overcome zod's refine not working here
 				const newErrors: any = {};
 				if (values.start > values.end) {
@@ -112,21 +115,21 @@
 		onSubmit: async (values) => {
 			console.log('submitting');
 			console.log({ values }, 'LeaseForm.svelte ~ 95');
-			console.log({ schedule }, 'LeaseForm.svelte ~ 96');
+			// console.log({ schedule }, 'LeaseForm.svelte ~ 96');
 			const submitted = await trpc.mutation('leases:save', values);
 			// add leaseId: submitted.id to each element in the schedule
-			const newTransactions = schedule.map((e) => ({
-				leaseId: submitted.id,
-				dueDate: e.postDate,
-				isPaid: false,
-				...e,
-			}));
-			const submittedTrxs = await trpc.mutation(
-				'transactions:saveMany',
-				newTransactions,
-			);
+			// const newTransactions = schedule.map((e) => ({
+			// 	leaseId: submitted.id,
+			// 	dueDate: e.postDate,
+			// 	isPaid: false,
+			// 	...e,
+			// }));
+			// const submittedTrxs = await trpc.mutation(
+			// 	'transactions:saveMany',
+			// 	newTransactions,
+			// );
 			console.log({ submitted }, 'LeaseForm.svelte ~ 108');
-			console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
+			// console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
 			await goto(`/leases/${submitted.id}`);
 			addToast({
 				props: {
@@ -140,20 +143,24 @@
 
 	let count = 3;
 	const handleCountChange = (newCount: number) => {
-		schedule = generateSchedule({
+		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
 			amount: $data2.monthlyRent,
 			count: newCount,
 		});
+		setData('schedule', newSchedule);
 	};
 	const handleAmountChange = (newAmount: number) => {
-		schedule = generateSchedule({
+		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
 			amount: newAmount,
 			count,
 		});
+		setData('schedule', newSchedule);
 	};
-	$: setData('schedule', schedule);
+	// let schedule;
+	// let schedule = lease.schedule;
+	// $: setData('schedule', schedule);
 	// recursively check if every value in the object is null
 	// const checkForNull = (obj: any) =>
 	// 	Object.values(obj).every((e) => {
