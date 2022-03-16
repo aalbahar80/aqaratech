@@ -76,3 +76,26 @@ export async function leaseWF(leaseId: string) {
 		}
 	}
 }
+
+export async function trxNotificationWF(trxId: string) {
+	const originalTrx = await acts.getTrx(trxId);
+
+	// TODO change to postDate
+	await sleepUntil(originalTrx.dueDate);
+
+	for (let count = 0; count < 4; count++) {
+		try {
+			const trx = await acts.getTrx(trxId);
+			if (trx.isPaid) {
+				console.log('Transaction paid. Stopping workflow.');
+				return;
+			}
+			if (trx.lease.shouldNotify && trx.lease.active) {
+				await acts.notify(trxId);
+			}
+		} catch (e) {
+			console.error('Error refreshing trx: ', e);
+		}
+		await sleep('5s');
+	}
+}

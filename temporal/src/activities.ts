@@ -33,7 +33,11 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		console.log(`Getting trx ${id}...`);
 		const trx = await prismaClient.transaction.findUnique({
 			where: { id },
-			include: { lease: true },
+			include: {
+				lease: {
+					include: { tenant: true },
+				},
+			},
 		});
 		if (!trx) throw new Error('Trx not found');
 		// console.log(`Got trx ${id}: `, trx);

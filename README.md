@@ -1,22 +1,29 @@
 [![ci](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml/badge.svg)](https://github.com/ambiguous48/svelte_14dec21/actions/workflows/ci.yml)
 
 # Temporal
-1. run the server 
+
+1. run the server
+
 - clone temporal's docker-compose repo
 - `docker-compose up`
+
 2. yarn run dev:temporal
 3. yarn run start:workflow
-Both temporal workers and clients need to connect to a Temporal server.
-https://docs.temporal.io/docs/typescript/nextjs-tutorial#deploying-your-temporal--nextjs-app
+   Both temporal workers and clients need to connect to a Temporal server.
+   https://docs.temporal.io/docs/typescript/nextjs-tutorial#deploying-your-temporal--nextjs-app
+
 - Workers can connect like so:
+
 ```ts
 await Core.install({
 	serverOptions: {
-	address: 'temporal.letand.be',
+		address: 'temporal.letand.be',
 	},
 });
 ```
+
 - Clients can connect like so:
+
 ```ts
 const connection = new Connection({
 	address: 'temporal.letand.be',
@@ -25,6 +32,7 @@ const client = new WorkflowClient(connection.service);
 ```
 
 Temporal worker:
+
 ```bash
 git clone this repo
 install node 16.4.0 using nvm
@@ -36,7 +44,19 @@ install yarn
 export DATABASE_URL=VALUE
 yarn install
 yarn run build:temporal # in watch mode?
-yarn run start:worker
+yarn run start:worker.watch
+
+# to run in background
+nohup yarn run start:worker.watch &
+# to view output
+tail -f nohup.out # in same directory
+```
+
+```bash
+# to view all running processes
+ps -df
+# to quit
+kill 124961
 ```
 
 # create-svelte
