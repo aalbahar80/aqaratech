@@ -9,7 +9,7 @@ export const get: RequestHandler = async ({ params }) => {
 		const error = new Error('Unable to get trx id from URL');
 		throw error;
 	}
-	console.log('starting Lease Workflow for lease: ', id);
+	console.log('attempting to start trx notify workflow', id);
 
 	const connection = new Connection({
 		address: 'temporal.letand.be',
