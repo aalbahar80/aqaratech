@@ -35,7 +35,9 @@ Temporal worker:
 
 ```bash
 git clone this repo
-install node 16.4.0 using nvm
+# install node 16.4.0 using nvm
+nvm install 16.4.0
+nvm use 16.4.0
 install yarn
 # in repo directory:
 # checkout temporal branch (optional)

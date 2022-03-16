@@ -92,6 +92,11 @@ export async function trxNotificationWF(trxId: string) {
 			}
 			if (trx.lease.shouldNotify && trx.lease.active) {
 				await acts.notify(trxId);
+			} else {
+				console.log(
+					'Either lease is not active or shouldNotify is false. Skipping notification.',
+					trx,
+				);
 			}
 		} catch (e) {
 			console.error('Error refreshing trx: ', e);
