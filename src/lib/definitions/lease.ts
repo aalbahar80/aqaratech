@@ -1,4 +1,3 @@
-import type { InferMutationInput } from '$lib/client/trpc';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
@@ -38,32 +37,47 @@ export function generateSchedule({
 	return newSchedule;
 }
 
-export const schema = z
-	.object({
-		id: z.string().uuid().optional(),
-		monthlyRent: z.number().min(1),
-		start: z.preprocess((arg) => {
+export const schema = z.object({
+	id: z.string().uuid().optional(),
+	monthlyRent: z.number().min(1),
+	start: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
+	end: z.preprocess((arg) => {
+		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+	}, z.date()),
+	tenantId: z.string().uuid(),
+	unitId: z.string().uuid(),
+	shouldNotify: z.boolean(),
+	active: z.boolean(),
+});
+
+export const refinedSchema = schema
+	.refine((val) => val.start < val.end, {
+		path: ['start'],
+		message: 'Start date must be before end date',
+	})
+	.refine((val) => val.start < val.end, {
+		path: ['end'],
+		message: 'End date must be after start date',
+	});
+
+const scheduleSchema = z.array(
+	// should schedule be array or object?
+	// TODO import schema from ./transaction
+	z.object({
+		amount: z.number().min(1),
+		postDate: z.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
 		}, z.date()),
-		end: z.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-		}, z.date()),
-		tenantId: z.string().uuid(),
-		unitId: z.string().uuid(),
-		shouldNotify: z.boolean(),
-		active: z.boolean(),
-		// should schedule be array or object?
-		schedule: z.array(
-			z.object({
-				amount: z.number().min(1),
-				postDate: z.preprocess((arg) => {
-					if (typeof arg === 'string' || arg instanceof Date)
-						return new Date(arg);
-				}, z.date()),
-				nanoid: z.string(),
-				memo: z.string(),
-			}),
-		),
+		nanoid: z.string(),
+		memo: z.string(),
+	}),
+);
+
+export const leaseFormSchema = schema
+	.extend({
+		schedule: scheduleSchema,
 	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
@@ -74,10 +88,9 @@ export const schema = z
 		message: 'End date must be after start date',
 	});
 
-type Lease = InferMutationInput<'leases:save'>;
-export const defaultForm = (): Lease => ({
+export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
 	start: new Date(),
-	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+	end: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
 	monthlyRent: 0,
 	tenantId: '',
 	unitId: '',

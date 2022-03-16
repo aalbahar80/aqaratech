@@ -6,7 +6,7 @@
 	import {
 		defaultForm,
 		generateSchedule,
-		schema,
+		leaseFormSchema,
 	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDate, forceDateToInput } from '$lib/utils/common';
@@ -22,7 +22,7 @@
 	import { createForm, getValue } from 'felte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
-	import type { z } from 'zod';
+	import type { AnyZodObject, z, ZodObject } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
@@ -55,10 +55,10 @@
 		setFields,
 		setData,
 		unsetField,
-	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
+	} = createForm<z.infer<typeof leaseFormSchema>, ValidatorConfig>({
 		transform: (values: unknown) => {
 			// make sure each element in schedule array is an object whose postDate is a date
-			const original = values as z.infer<typeof schema>;
+			const original = values as z.infer<typeof leaseFormSchema>;
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
 				newValues['schedule'] = original?.schedule.map((item) => {
@@ -83,23 +83,9 @@
 			};
 		},
 		initialValues: lease,
-		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
+		schema: leaseFormSchema as unknown as AnyZodObject, // only to make linter happy
 		extend: reporter(),
-		validate: [
-			validateSchema(schema as unknown as z.AnyZodObject),
-			// (values) => {
-			// 	console.log('starting manual validation');
-			// 	// console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
-			// 	// this is to overcome zod's refine not working here
-			// 	const newErrors: any = {};
-			// 	if (values.start > values.end) {
-			// 		newErrors.start = 'Start date must be before end date';
-			// 		newErrors.end = 'End date must be after start date';
-			// 	}
-			// 	console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
-			// 	return newErrors;
-			// },
-		],
+		validate: validateSchema(leaseFormSchema as unknown as AnyZodObject),
 		onError: (err) => {
 			addToast({
 				props: {
@@ -114,24 +100,19 @@
 			return err;
 		},
 		onSubmit: async (values) => {
-			console.log('submitting');
 			console.log({ values }, 'LeaseForm.svelte ~ 95');
-			// console.log({ schedule }, 'LeaseForm.svelte ~ 96');
-			const submitted = await trpc.mutation('leases:save', values);
-			// add leaseId: submitted.id to each element in the schedule
-			// const newTransactions = schedule.map((e) => ({
-			// 	leaseId: submitted.id,
-			// 	dueDate: e.postDate,
-			// 	isPaid: false,
-			// 	...e,
-			// }));
-			// const submittedTrxs = await trpc.mutation(
-			// 	'transactions:saveMany',
-			// 	newTransactions,
-			// );
-			console.log({ submitted }, 'LeaseForm.svelte ~ 108');
-			// console.log({ submittedTrxs }, 'LeaseForm.svelte ~ 109');
-			await goto(`/leases/${submitted.id}`);
+			const { schedule, ...leaseValues } = values;
+			const newLease = await trpc.mutation('leases:save', leaseValues);
+			const trxValues = schedule.map((e) => ({
+				leaseId: newLease.id,
+				dueDate: e.postDate,
+				isPaid: false,
+				...e,
+			}));
+			const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
+			console.log({ newLease }, 'LeaseForm.svelte ~ 108');
+			console.log({ newTrxs }, 'LeaseForm.svelte ~ 109');
+			await goto(`/leases/${newLease.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -140,9 +121,8 @@
 			});
 		},
 	});
-	// setData('schedule', lease.schedule);
 
-	let count = 3;
+	let count = 3; // TODO reconsider
 	const handleCountChange = (newCount: number) => {
 		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
