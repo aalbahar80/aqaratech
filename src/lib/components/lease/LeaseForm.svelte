@@ -27,7 +27,7 @@
 	import Input from '../form/Input.svelte';
 
 	const lease = defaultForm();
-	let schedule: ReturnType<typeof generateSchedule>;
+	let schedule = lease.schedule;
 	let propertyId: string = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
@@ -54,15 +54,17 @@
 		data: data2,
 		setFields,
 		setData,
+		unsetField,
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
 			// initializing non-native html inputs (Switch)
 			active: lease.active,
 			shouldNotify: lease.shouldNotify,
+			schedule: lease.schedule,
 		},
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
-		extend: reporter(),
+		// extend: reporter(),
 		validate: [
 			validateSchema(schema as unknown as z.AnyZodObject),
 			(values) => {
@@ -74,21 +76,6 @@
 					newErrors.start = 'Start date must be before end date';
 					newErrors.end = 'End date must be after start date';
 				}
-				if (!schedule) {
-					return newErrors;
-				}
-				const scheduleErrors: { [key: string]: string } = {};
-				schedule.forEach((t) => {
-					if (t.amount < 1) {
-						scheduleErrors[`${t.nanoid}--amount`] = 'Amount must be positive';
-					}
-					if (t.postDate > new Date(values.end)) {
-						scheduleErrors[`${t.nanoid}--postDate`] =
-							'Post date must be before end date	';
-					}
-				});
-				newErrors.schedule = scheduleErrors;
-
 				console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
 				return newErrors;
 			},
@@ -133,6 +120,9 @@
 			});
 		},
 	});
+	// setData('schedule', lease.schedule);
+	$: setData('schedule', schedule);
+	$: console.log({ schedule }, 'LeaseForm.svelte ~ 122');
 	// recursively check if every value in the object is null
 	// const checkForNull = (obj: any) =>
 	// 	Object.values(obj).every((e) => {
@@ -415,10 +405,24 @@
 			<div class="border-t  border-gray-200" />
 		</div>
 	</div>
+
+	<!-- Payment Schedule section -->
+	<Schedule
+		bind:schedule
+		roschedule={$data2.schedule}
+		errors={$errors}
+		amount={$data2.monthlyRent}
+		on:delete={(e) => {
+			unsetField(`schedule.${e.detail}`);
+		}}
+	/>
 </form>
 
-<!-- Payment Schedule section -->
-<Schedule bind:schedule errors={$errors} amount={$data2.monthlyRent} />
+<!-- <pre>{JSON.stringify(freshInterests, null, 2)}</pre> -->
+<pre>{JSON.stringify({ schedule }, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(lease.schedule, null, 2)}</pre> -->
+<pre>{JSON.stringify($data2, null, 2)}</pre>
+<pre>{JSON.stringify($errors, null, 2)}</pre>
 
 <style lang="postcss">
 	input {

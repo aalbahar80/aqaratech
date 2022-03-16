@@ -1,19 +1,24 @@
 <script lang="ts">
+	import type { InferMutationInput } from '$lib/client/trpc';
 	import { generateSchedule } from '$lib/definitions/lease';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { createEventDispatcher } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
 	export let amount: number;
 	export let errors: any;
 
-	let count = 12;
-	let scheduleStart = new Date();
-	export let schedule = generateSchedule({ scheduleStart, amount, count });
+	export let schedule: InferMutationInput<'leases:save'>['schedule'];
+	export let roschedule: InferMutationInput<'leases:save'>['schedule'];
 
-	const handleCountChange = () => {
-		schedule = generateSchedule({ scheduleStart, amount, count });
+	let scheduleStart = new Date();
+	let count = schedule?.length ?? 0;
+
+	const handleCountChange = (newCount: number) => {
+		count = newCount;
+		schedule = generateSchedule({ scheduleStart, amount, count: newCount });
 	};
 
 	const handleAmountChange = (newAmount: number) => {
@@ -22,9 +27,11 @@
 	$: handleAmountChange(amount);
 
 	const remove = (nanoid: string) => {
-		schedule = schedule.filter((n) => n.nanoid !== nanoid);
-		count = schedule.length;
+		// schedule = schedule.filter((n) => n.nanoid !== nanoid);
+		// count = schedule.length;
 	};
+	$: console.log({ schedule }, 'Schedule.svelte ~ 31');
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="mt-10 sm:mt-0">
@@ -73,9 +80,11 @@
 							<input
 								id="count"
 								name="count"
-								bind:value={count}
+								value={count}
 								type="number"
-								on:change={handleCountChange}
+								on:change={(e) => {
+									handleCountChange(e.currentTarget.valueAsNumber);
+								}}
 							/>
 						</div>
 
@@ -86,10 +95,11 @@
 							</div>
 						</div>
 
-						{#each schedule as trx, idx (trx.nanoid)}
+						{#each roschedule as trx, idx}
+							<!-- {#each schedule as trx, idx} -->
+							<!-- animate:flip={{ duration: 200 }}
+						transition:fade|local={{ duration: 100 }} -->
 							<div
-								animate:flip={{ duration: 200 }}
-								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
@@ -102,34 +112,32 @@
 										KWD
 									</span>
 									<input
-										id={`${trx.nanoid}-amount`}
-										name={`${trx.nanoid}-amount`}
-										bind:value={trx.amount}
+										id="schedule.{idx}.amount"
+										name="schedule.{idx}.amount"
+										value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-										class:invalid={errors?.schedule?.[`${trx.nanoid}--amount`]}
+										class:invalid={errors?.schedule?.[idx]?.amount}
 									/>
 								</div>
-								<span class="w-1/3 flex-1 sm:flex-initial">
+								<!-- <span class="w-1/3 flex-1 sm:flex-initial">
 									<input
 										type="date"
-										id={`${trx.nanoid}-postDate`}
-										name={`${trx.nanoid}-postDate`}
+										id="schedule.{idx}.postDate"
+										name="schedule.{idx}.postDate"
 										value={trx.postDate?.toISOString().split('T')[0] ?? ''}
-										class:invalid={errors?.schedule?.[
-											`${trx.nanoid}--postDate`
-										]}
+										class:invalid={errors?.schedule?.[idx]?.postDate}
 										on:change={(e) => {
-											if (e.currentTarget.valueAsDate) {
-												schedule[idx].postDate = e.currentTarget.valueAsDate;
-											}
+											// if (e.currentTarget.valueAsDate) {
+											// 	schedule[idx].postDate = e.currentTarget.valueAsDate;
+											// }
 										}}
 									/>
-								</span>
+								</span> -->
 								<button
 									class="w-1/12"
 									on:click|preventDefault={() => {
-										remove(trx.nanoid);
+										dispatch('delete', idx);
 									}}
 								>
 									<Icon

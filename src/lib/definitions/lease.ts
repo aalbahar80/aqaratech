@@ -13,6 +13,7 @@ export function generateSchedule({
 	amount: number;
 	scheduleStart: Date;
 }) {
+	console.log('generating new schedule')
 	const newSchedule = [];
 	// get the date of the 1st day of the next month
 	// const leaseStart = new Date(lease.scheduleStart);
@@ -51,6 +52,18 @@ export const schema = z
 		unitId: z.string().uuid(),
 		shouldNotify: z.boolean(),
 		active: z.boolean(),
+		// should schedule be array or object?
+		schedule: z.array(
+			z.object({
+				amount: z.number().min(1),
+				postDate: z.preprocess((arg) => {
+					if (typeof arg === 'string' || arg instanceof Date)
+						return new Date(arg);
+				}, z.date()),
+				nanoid: z.string(),
+				memo: z.string(),
+			}),
+		),
 	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
@@ -70,6 +83,11 @@ export const defaultForm = (): Lease => ({
 	unitId: '',
 	shouldNotify: true,
 	active: true,
+	schedule: generateSchedule({
+		count: 2,
+		amount: 0,
+		scheduleStart: new Date(),
+	}),
 });
 
 const label: typeof definition['label'] = (item) =>
