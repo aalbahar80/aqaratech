@@ -27,11 +27,6 @@
 	};
 	$: handleAmountChange(amount);
 
-	const remove = (nanoid: string) => {
-		// schedule = schedule.filter((n) => n.nanoid !== nanoid);
-		// count = schedule.length;
-	};
-	$: console.log({ schedule }, 'Schedule.svelte ~ 31');
 	const dispatch = createEventDispatcher();
 </script>
 

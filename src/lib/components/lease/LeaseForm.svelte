@@ -56,6 +56,22 @@
 		setData,
 		unsetField,
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
+		transform: (values) => {
+			// make sure each element in schedule array is an object whose postDate is a date
+			if (!Array.isArray(values.schedule)) {
+				return values;
+			}
+			const schedule = values?.schedule.map((item) => {
+				if (item?.postDate) {
+					item.postDate = new Date(item.postDate).toISOString().split('T')[0];
+				}
+				return item;
+			});
+			return {
+				...values,
+				schedule,
+			};
+		},
 		initialValues: {
 			// avoid any dates here for seamless <input type="date">
 			// initializing non-native html inputs (Switch)
