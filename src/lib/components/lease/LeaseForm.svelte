@@ -122,7 +122,8 @@
 		},
 	});
 
-	let count = 3; // TODO reconsider
+	let count = $data2.schedule.length; // TODO reconsider
+	// let count = 2;
 	const handleCountChange = (newCount: number) => {
 		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
@@ -416,7 +417,7 @@
 
 	<!-- Payment Schedule section -->
 	<Schedule
-		roschedule={$data2.schedule}
+		schedule={$data2.schedule}
 		errors={$errors}
 		on:delete={(e) => {
 			unsetField(`schedule.${e.detail}`);

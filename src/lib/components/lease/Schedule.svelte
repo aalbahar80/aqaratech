@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InferMutationInput } from '$lib/client/trpc';
+	import type { generateSchedule } from '$lib/definitions/lease';
 	import { forceDateToInput } from '$lib/utils/common';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -8,8 +8,8 @@
 	import { fade } from 'svelte/transition';
 
 	export let errors: any;
-	export let roschedule: InferMutationInput<'leases:save'>['schedule'];
-	$: console.table(roschedule);
+	export let schedule: ReturnType<typeof generateSchedule>;
+	$: console.table(schedule);
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -37,7 +37,7 @@
 							</label>
 							<input
 								id="count"
-								value={roschedule.length}
+								value={schedule.length}
 								type="number"
 								on:change={(e) => {
 									dispatch('countChange', e.currentTarget.valueAsNumber);
@@ -52,7 +52,7 @@
 							</div>
 						</div>
 
-						{#each roschedule as trx, idx (idx)}
+						{#each schedule as trx, idx (idx)}
 							<div
 								animate:flip={{ duration: 200 }}
 								transition:fade|local={{ duration: 100 }}
