@@ -89,5 +89,6 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'prettier/prettier': 'off',
         // "@typescript-eslint/no-unnecessary-condition": 2
+        'array-callback-return': 'off',
     },
 };

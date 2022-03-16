@@ -86,6 +86,17 @@ export const leaseFormSchema = schema
 	.refine((val) => val.start < val.end, {
 		path: ['end'],
 		message: 'End date must be after start date',
+	})
+	.superRefine((val, ctx) => {
+		val.schedule.map((item, idx) => {
+			if (item.postDate > val.end) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_date,
+					path: ['schedule', idx, 'postDate'],
+					message: 'Post date must be before end date',
+				});
+			}
+		});
 	});
 
 export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
@@ -97,7 +108,7 @@ export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
 	shouldNotify: true,
 	active: true,
 	schedule: generateSchedule({
-		count: 2,
+		count: 12,
 		amount: 0,
 		scheduleStart: new Date(),
 	}),
