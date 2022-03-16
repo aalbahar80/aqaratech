@@ -58,46 +58,43 @@
 	} = createForm<z.infer<typeof schema>, ValidatorConfig>({
 		transform: (values) => {
 			// make sure each element in schedule array is an object whose postDate is a date
-			if (!Array.isArray(values.schedule)) {
-				return values;
+			const newValues = {};
+			if (Array.isArray(values.schedule)) {
+				newValues.schedule = values?.schedule.map((item) => {
+					if (item?.postDate) {
+						item.postDate = new Date(item.postDate).toISOString().split('T')[0];
+					}
+					return item;
+				});
 			}
-			const schedule = values?.schedule.map((item) => {
-				if (item?.postDate) {
-					item.postDate = new Date(item.postDate).toISOString().split('T')[0];
-				}
-				return item;
-			});
+			if (values.start) {
+				newValues.start = forceDateToInput(values.start);
+			}
+			if (values.end) {
+				newValues.end = forceDateToInput(values.end);
+			}
 			return {
 				...values,
-				start: forceDateToInput(values.start),
-				end: forceDateToInput(values.end),
-				schedule,
+				...newValues,
 			};
 		},
 		initialValues: lease,
-		// initialValues: {
-		// 	// avoid any dates here for seamless <input type="date">
-		// 	// initializing non-native html inputs (Switch)
-		// 	active: lease.active,
-		// 	shouldNotify: lease.shouldNotify,
-		// 	schedule: lease.schedule,
-		// },
 		schema: schema as unknown as z.AnyZodObject, // only to make linter happy
 		extend: reporter(),
 		validate: [
 			validateSchema(schema as unknown as z.AnyZodObject),
-			(values) => {
-				console.log('starting manual validation');
-				// console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
-				// this is to overcome zod's refine not working here
-				const newErrors: any = {};
-				if (values.start > values.end) {
-					newErrors.start = 'Start date must be before end date';
-					newErrors.end = 'End date must be after start date';
-				}
-				console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
-				return newErrors;
-			},
+			// (values) => {
+			// 	console.log('starting manual validation');
+			// 	// console.log({ values, schedule }, 'LeaseForm.svelte ~ 71');
+			// 	// this is to overcome zod's refine not working here
+			// 	const newErrors: any = {};
+			// 	if (values.start > values.end) {
+			// 		newErrors.start = 'Start date must be before end date';
+			// 		newErrors.end = 'End date must be after start date';
+			// 	}
+			// 	console.log({ newErrors }, 'LeaseForm.svelte ~ 101');
+			// 	return newErrors;
+			// },
 		],
 		onError: (err) => {
 			addToast({
@@ -158,21 +155,7 @@
 		});
 		setData('schedule', newSchedule);
 	};
-	// let schedule;
-	// let schedule = lease.schedule;
-	// $: setData('schedule', schedule);
-	// recursively check if every value in the object is null
-	// const checkForNull = (obj: any) =>
-	// 	Object.values(obj).every((e) => {
-	// 		if (e === null) {
-	// 			return true;
-	// 		}
-	// 		if (typeof e === 'object') {
-	// 			return Object.values(e).every((ee) => ee === null);
-	// 		}
-	// 		return false;
-	// 	});
-	// $: noErrorMsg = checkForNull($errors);
+	$: console.log({ $data2 }, 'LeaseForm.svelte ~ 158');
 </script>
 
 <form use:form>
