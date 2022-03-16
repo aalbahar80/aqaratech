@@ -6,8 +6,8 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let errors: any;
-
 	export let roschedule: InferMutationInput<'leases:save'>['schedule'];
+	$: console.log({ roschedule }, 'Schedule.svelte ~ 11');
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -51,6 +51,7 @@
 							</div>
 						</div>
 
+						<!-- {#each roschedule as trx, idx (trx.key)} -->
 						<!-- {#each roschedule as trx, idx (trx.nanoid)} -->
 						{#each roschedule as trx, idx}
 							<!-- animate:flip={{ duration: 200 }}

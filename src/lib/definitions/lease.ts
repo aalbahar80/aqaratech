@@ -13,7 +13,7 @@ export function generateSchedule({
 	amount: number;
 	scheduleStart: Date;
 }) {
-	console.log('generating new schedule')
+	console.warn('generating new schedule');
 	const newSchedule = [];
 	// get the date of the 1st day of the next month
 	// const leaseStart = new Date(lease.scheduleStart);

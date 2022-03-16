@@ -22,7 +22,6 @@
 
 	export let loadDefaults: boolean = true;
 	export let filter: any = undefined;
-	$: console.log(filter);
 
 	const getLabel = (item: any) => {
 		const { label } = entityDefinitions[entity];
