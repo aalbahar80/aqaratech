@@ -13,10 +13,9 @@
 	"editor.minimap.renderCharacters": false,
 	"editor.autoClosingBrackets": "always",
 	"editor.fontSize": 16,
-	"editor.suggest.snippetsPreventQuickSuggestions": false,
-	"editor.suggestOnTriggerCharacters": false, // forces tailwind to take a chill pill
+	"editor.suggest.snippetsPreventQuickSuggestions": false, // forces tailwind to take a chill pill
 	"editor.quickSuggestions": {
-		"other": false, // forces tailwind to take a chill pill
+		// "other": false, // forces tailwind to take a chill pill
 		"comments": false,
 		"strings": false
 	},
@@ -32,5 +31,13 @@
 	},
 	"editor.codeLens": false,
 	"editor.foldingImportsByDefault": true,
-	"vim.foldfix": true
+	"vim.foldfix": true,
+	"tailwindCSS.files.exclude": [
+		"**/.git/**",
+		"**/node_modules/**",
+		"**/.hg/**",
+		"**/*.ts",
+		"**/*.json",
+		"package.json"
+	]
 }

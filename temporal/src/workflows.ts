@@ -9,7 +9,7 @@ import {
 import { addMonths, differenceInMilliseconds } from 'date-fns';
 import type * as activities from './activities';
 
-async function sleepUntil(futureDate: string | Date, fromDate = new Date()) {
+async function _sleepUntil(futureDate: string | Date, fromDate = new Date()) {
 	const timeUntilDate = differenceInMilliseconds(
 		new Date(futureDate),
 		fromDate,
@@ -44,7 +44,7 @@ export async function leaseWF(leaseId: string) {
 
 	// sleepUntil(nextMonth);
 
-	for (let bp = 0; bp < lease.cycleCount; bp++) {
+	for (let bp = 0; bp < 12; bp++) {
 		setHandler(getBillingPeriod, () => bp);
 
 		// TODO change to 1 month

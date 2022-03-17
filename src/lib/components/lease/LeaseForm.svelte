@@ -22,7 +22,7 @@
 	import { createForm, getValue } from 'felte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
-	import type { AnyZodObject, z, ZodObject } from 'zod';
+	import type { AnyZodObject, z } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';

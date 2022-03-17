@@ -42,7 +42,6 @@
 		case 'start':
 		case 'dueDate':
 		case 'residencyEnd':
-		case 'firstPayment':
 		case 'completedAt':
 			type = 'date';
 			if (value instanceof Date) {
@@ -71,8 +70,6 @@
 		case 'bed':
 		case 'bath':
 		case 'floor':
-		case 'cycleCount':
-		case 'billingDay':
 			type = 'number';
 			break;
 		case 'isPaid':
@@ -81,7 +78,6 @@
 			type = 'checkbox';
 			break;
 		case 'status':
-		case 'contactMethod':
 			type = 'select';
 			break;
 		case 'email':
