@@ -26,6 +26,7 @@
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
+	import { v4 as uuidv4 } from 'uuid';
 
 	const lease = defaultForm();
 	let propertyId: string = '';
@@ -100,25 +101,46 @@
 			return err;
 		},
 		onSubmit: async (values) => {
-			console.log({ values }, 'LeaseForm.svelte ~ 95');
-			const { schedule, ...leaseValues } = values;
-			const newLease = await trpc.mutation('leases:save', leaseValues);
-			const trxValues = schedule.map((e) => ({
-				leaseId: newLease.id,
-				dueDate: e.postDate,
-				isPaid: false,
-				...e,
-			}));
-			const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
-			console.log({ newLease }, 'LeaseForm.svelte ~ 108');
-			console.log({ newTrxs }, 'LeaseForm.svelte ~ 109');
-			await goto(`/leases/${newLease.id}`);
-			addToast({
-				props: {
-					kind: 'success',
-					title: 'Success',
-				},
-			});
+			try {
+				console.log({ values }, 'LeaseForm.svelte ~ 95');
+				const { schedule, ...leaseValues } = values;
+				const newLease = await trpc.mutation('leases:save', leaseValues);
+				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
+				const trxValues = schedule.map((e) => ({
+					id: uuidv4(),
+					leaseId: newLease.id,
+					dueDate: e.postDate,
+					isPaid: false,
+					...e,
+				}));
+				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
+				console.log(`created ${newTrxs} transactions`);
+
+				await Promise.all(
+					trxValues.map(async (trx) => {
+						const res = await fetch(`/transactions/${trx.id}/start-notify-wf`);
+						if (!res.ok) {
+							throw new Error('Error starting workflow');
+						}
+						return res.json();
+					}),
+				);
+				await goto(`/leases/${newLease.id}`);
+				addToast({
+					props: {
+						kind: 'success',
+						title: 'Success',
+					},
+				});
+			} catch (e) {
+				console.error(e);
+				addToast({
+					props: {
+						kind: 'error',
+						title: 'An error occured.',
+					},
+				});
+			}
 		},
 	});
 

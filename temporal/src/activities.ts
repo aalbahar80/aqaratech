@@ -43,4 +43,15 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		// console.log(`Got trx ${id}: `, trx);
 		return trx;
 	},
+	async setReminderAt(trxId: string, reminderAt: string) {
+		console.log(`Setting reminder at ${reminderAt} for ${trxId}...`);
+		const trx = await prismaClient.transaction.update({
+			where: { id: trxId },
+			data: {
+				reminderAt,
+			},
+		});
+		console.log(`Set reminder at ${reminderAt} for ${trxId}: `, trx);
+		return trx;
+	},
 });

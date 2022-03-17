@@ -104,6 +104,23 @@ export default trpc
 				data: input,
 			}),
 	})
+	.mutation('startWF', {
+		input: z.array(z.string()),
+		resolve: async ({ input }) => {
+			await Promise.all(
+				input.map(async (id) => {
+					const res = await fetch(`/transactions/${id}/start-notify-wf`);
+					if (!res.ok) {
+						throw new TRPCError({
+							code: 'BAD_REQUEST',
+							message: 'Error starting workflow',
+						});
+					}
+					return res.json();
+				}),
+			);
+		},
+	})
 	.mutation('delete', {
 		input: z.string(),
 		resolve: ({ input: id }) =>

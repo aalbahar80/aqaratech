@@ -27,6 +27,7 @@
 		['Due Date', dateFormat(trx.dueDate)],
 		['Amount', kwdFormat(trx.amount)],
 		['Receipt', trx.receiptUrl],
+		['Next Reminder', trx.reminderAt?.toLocaleDateString() ?? ''],
 		['Created on', dateFormat(trx.createdAt)],
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];

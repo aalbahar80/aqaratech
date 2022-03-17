@@ -6,8 +6,14 @@ import {
 	setHandler,
 	sleep,
 } from '@temporalio/workflow';
-import { addMonths, differenceInMilliseconds } from 'date-fns';
+import {
+	addMonths,
+	differenceInMilliseconds,
+	differenceInCalendarMonths,
+} from 'date-fns';
 import type * as activities from './activities';
+import ms, { StringValue } from 'ms';
+import { msToTs } from '@temporalio/common';
 
 async function _sleepUntil(futureDate: string | Date, fromDate = new Date()) {
 	const timeUntilDate = differenceInMilliseconds(
@@ -81,6 +87,7 @@ export async function trxNotificationWF(trxId: string) {
 	const originalTrx = await acts.getTrx(trxId);
 	console.log(originalTrx);
 
+	await acts.setReminderAt(trxId, new Date(originalTrx.dueDate).toISOString());
 	console.log('sleeping until: ', originalTrx.dueDate);
 	// TODO change to postDate
 	// await sleepUntil(originalTrx.dueDate);
@@ -101,11 +108,16 @@ export async function trxNotificationWF(trxId: string) {
 					trx,
 				);
 			}
+			// update the reminder date
+			const nextReminder = new Date(new Date().getTime() + ms('3s'));
+			await acts.setReminderAt(trx.id, nextReminder.toISOString());
+
+			const wait = '3s';
+			console.log(`Sleeping for ${wait}`);
+			await sleep(wait);
 		} catch (e) {
 			console.error('Error refreshing trx: ', e);
 		}
-		console.log('Sleeping for 3 seconds');
-		await sleep('3s');
 	}
 	console.log('Done.');
 }

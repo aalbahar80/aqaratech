@@ -101,7 +101,7 @@ export const leaseFormSchema = schema
 
 export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
 	start: new Date(),
-	end: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 	monthlyRent: 0,
 	tenantId: '',
 	unitId: '',
