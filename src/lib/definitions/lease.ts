@@ -95,6 +95,12 @@ export const leaseFormSchema = schema
 					path: ['schedule', idx, 'postDate'],
 					message: 'Post date must be before end date',
 				});
+			} else if (item.postDate < val.start) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_date,
+					path: ['schedule', idx, 'postDate'],
+					message: 'Post date must be after start date',
+				});
 			}
 		});
 	});
