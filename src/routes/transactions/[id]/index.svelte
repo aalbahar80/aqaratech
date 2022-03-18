@@ -24,6 +24,8 @@
 </script>
 
 <script lang="ts">
+	import Timeline from '$lib/components/Timeline.svelte';
+
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
 	export let nextReminder: string;
@@ -140,4 +142,5 @@
 		badgeColor={trx.isPaid ? 'green' : 'red'}
 	/>
 	<DetailsPane {details} />
+	<Timeline />
 </div>
