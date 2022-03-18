@@ -109,7 +109,7 @@
 												item.status === 'SENT'}
 											class:bg-sky-500={item.status === 'SCHEDULED'}
 										>
-											{#if item.status === 'SCHEDULED' || item.status === 'SENT'}
+											{#if item.status === 'SCHEDULED'}
 												<span
 													class="h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"
 												/>
