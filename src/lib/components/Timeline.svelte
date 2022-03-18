@@ -1,56 +1,33 @@
 <script lang="ts">
-	import { Check, ThumbUp, User } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import { formatRelative } from 'date-fns';
+	import { enGB } from 'date-fns/locale';
+	import lowerCase from 'lodash-es/lowerCase.js';
 
-	function classNames(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
-	}
-	const eventTypes = {
-		applied: { icon: User, bgColorClass: 'bg-gray-400' },
-		advanced: { icon: ThumbUp, bgColorClass: 'bg-blue-500' },
-		completed: { icon: Check, bgColorClass: 'bg-green-500' },
-		scheduled: { icon: Check, bgColorClass: 'bg-green-500' },
-	};
-	const timeline = [
+	type Timeline = {
+		date: Date;
+		status: 'SCHEDULED' | 'SENT' | 'DELIVERED' | 'FAILED';
+	}[];
+
+	export let timeline: Timeline = [
 		{
-			id: 1,
-			type: eventTypes.applied,
-			content: 'Applied to',
-			target: 'Front End Developer',
-			date: 'Sep 20',
-			datetime: '2020-09-20',
+			status: 'SCHEDULED',
+			date: new Date('2022-12-30'),
 		},
 		{
-			id: 2,
-			type: eventTypes.advanced,
-			content: 'Advanced to phone screening by',
-			target: 'Bethany Blake',
-			date: 'Sep 22',
-			datetime: '2020-09-22',
+			status: 'SENT',
+			date: new Date('2022-03-19'),
 		},
 		{
-			id: 3,
-			type: eventTypes.completed,
-			content: 'Completed phone screening with',
-			target: 'Martha Gardner',
-			date: 'Sep 28',
-			datetime: '2020-09-28',
+			status: 'DELIVERED',
+			date: new Date('2022-03-17'),
 		},
 		{
-			id: 4,
-			type: eventTypes.advanced,
-			content: 'Advanced to interview by',
-			target: 'Bethany Blake',
-			date: 'Sep 30',
-			datetime: '2020-09-30',
+			status: 'DELIVERED',
+			date: new Date(),
 		},
 		{
-			id: 5,
-			type: eventTypes.completed,
-			content: 'Completed interview with',
-			target: 'Katherine Snyder',
-			date: 'Oct 4',
-			datetime: '2020-10-04',
+			status: 'FAILED',
+			date: new Date('2022-03-13T14:00:00.000Z'),
 		},
 	];
 </script>
@@ -64,7 +41,7 @@
 		<!-- Activity Feed -->
 		<div class="mt-6 flow-root">
 			<ul class="-mb-8">
-				{#each timeline as item, itemIdx (item.id)}
+				{#each timeline as item, itemIdx}
 					<li>
 						<div class="relative pb-8">
 							{#if itemIdx !== timeline.length - 1}
@@ -76,34 +53,35 @@
 							<div class="relative flex space-x-3">
 								<div>
 									<span
-										class={classNames(
-											item.type.bgColorClass,
-											'flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white',
-										)}
+										class="flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white"
+										class:bg-red-400={item.status === 'FAILED'}
+										class:bg-green-400={item.status === 'DELIVERED' ||
+											item.status === 'SENT'}
+										class:bg-sky-500={item.status === 'SCHEDULED'}
 									>
-										<Icon
-											src={item.type.icon}
-											theme="solid"
-											class="h-5 w-5 text-white"
-											aria-hidden="true"
-										/>
+										{#if item.status === 'SCHEDULED' || item.status === 'SENT'}
+											<span
+												class="h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"
+											/>
+										{/if}
 									</span>
 								</div>
 								<div
 									class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5"
 								>
 									<div>
-										<p class="text-sm text-gray-500">
-											{item.content}{' '}
-											<a href="#" class="font-medium text-gray-900">
-												{item.target}
-											</a>
+										<p class="text-sm capitalize text-gray-500">
+											{lowerCase(item.status)}
 										</p>
 									</div>
 									<div
 										class="whitespace-nowrap text-right text-sm text-gray-500"
 									>
-										<time dateTime={item.datetime}>{item.date}</time>
+										<time class="capitalize" dateTime={item.date.toISOString()}>
+											{formatRelative(item.date, new Date(), {
+												locale: enGB,
+											})}
+										</time>
 									</div>
 								</div>
 							</div>
