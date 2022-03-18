@@ -66,6 +66,13 @@ export default trpc
 				orderBy: {
 					updatedAt: 'desc',
 				},
+				select: {
+					id: true,
+					isPaid: true,
+					amount: true,
+					dueDate: true,
+					memo: true,
+				},
 			}),
 			pagination: {
 				size: input.size,

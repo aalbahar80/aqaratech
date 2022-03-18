@@ -13,11 +13,11 @@
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
-		const trx = await trpc.query('transactions:read', params.id);
-		const nextReminder = await trpc.query(
-			'transactions:nextReminder',
-			params.id,
-		);
+
+		const [trx, nextReminder] = await Promise.all([
+			trpc.query('transactions:read', params.id),
+			trpc.query('transactions:nextReminder', params.id),
+		]);
 
 		return { props: { trx, nextReminder } };
 	};

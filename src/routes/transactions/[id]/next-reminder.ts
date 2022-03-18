@@ -17,11 +17,22 @@ export const get: RequestHandler = async ({ params }) => {
 	const client = new WorkflowClient(connection.service);
 	const handle = client.getHandle(id);
 
-	const reminder = await handle.query(getNextReminder);
-	console.log(`The next reminder is at: ${reminder}`);
+	try {
+		const reminder = await handle.query(getNextReminder);
+		console.log(`The next reminder is at: ${reminder}`);
+		return {
+			status: 200,
+			body: { reminder },
+		};
+	} catch (err) {
+		console.error('Error getting next reminder', err);
 
-	return {
-		status: 200,
-		body: { reminder },
-	};
+		return {
+			status: 500,
+			body: {
+				error:
+					err instanceof Error ? err.message : 'Unable to get next reminder',
+			},
+		};
+	}
 };
