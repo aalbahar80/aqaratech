@@ -144,8 +144,6 @@
 		},
 	});
 
-	let count = $data2.schedule.length; // TODO reconsider
-	// let count = 2;
 	const handleCountChange = (newCount: number) => {
 		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
@@ -158,7 +156,7 @@
 		const newSchedule = generateSchedule({
 			scheduleStart: forceDate($data2.start),
 			amount: newAmount,
-			count,
+			count: $data2.schedule.length, // TODO reconsider
 		});
 		setData('schedule', newSchedule);
 	};
