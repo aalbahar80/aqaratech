@@ -22,7 +22,7 @@
 	import { createForm, getValue } from 'felte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
-	import type { AnyZodObject, z } from 'zod';
+	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
@@ -84,9 +84,9 @@
 			};
 		},
 		initialValues: lease,
-		schema: leaseFormSchema as unknown as AnyZodObject, // only to make linter happy
+		schema: leaseFormSchema, // only to make linter happy
 		extend: reporter(),
-		validate: validateSchema(leaseFormSchema as unknown as AnyZodObject),
+		validate: validateSchema(leaseFormSchema),
 		onError: (err) => {
 			addToast({
 				props: {

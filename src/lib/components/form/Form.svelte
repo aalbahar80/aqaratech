@@ -5,19 +5,22 @@
 		type InferMutationInput,
 		type InferQueryOutput,
 	} from '$lib/client/trpc';
-	import { singular, type Entity } from '$lib/definitions';
+	import {
+		singular,
+		type Entity,
+		type EntityDefinition,
+	} from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import startCase from 'lodash-es/startCase.js';
-	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from './ComboBox.svelte';
 	import Input from './Input.svelte';
 
 	export let entity: Entity;
-	export let schema: z.AnyZodObject | z.ZodEffects<any>;
+	export let schema: EntityDefinition<typeof entity>['schema'];
 	export let data:
 		| InferMutationInput<`${typeof entity}:save`>
 		| InferQueryOutput<`${typeof entity}:basic`>;
@@ -46,7 +49,7 @@
 		data: data2,
 		setData,
 	} = createForm({
-		validate: validateSchema(schema as z.AnyZodObject),
+		validate: validateSchema(schema),
 		onError: (err) => {
 			addToast({
 				props: {

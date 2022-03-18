@@ -25,7 +25,7 @@ export function isEntity(entity: string | Entity): entity is Entity {
 
 export type EntityDefinition<T extends Entity> = {
 	defaultForm: () => InferMutationInput<`${T}:save`>;
-	schema: z.AnyZodObject | z.ZodEffects<any>;
+	schema: z.AnyZodObject;
 	label: T extends 'tenants' | 'leases' | 'units' | 'properties' | 'clients'
 		? (item: InferQueryOutput<`${T}:search`>[number]) => string
 		: undefined;
