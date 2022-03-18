@@ -48,6 +48,14 @@ export default trpc
 				orderBy: {
 					updatedAt: 'desc',
 				},
+				select: {
+					id: true,
+					unitNumber: true,
+					type: true,
+					marketRent: true,
+					bed: true,
+					bath: true,
+				},
 			}),
 			pagination: {
 				size: input.size,
