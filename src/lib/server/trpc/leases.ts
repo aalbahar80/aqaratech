@@ -15,7 +15,11 @@ export default trpc
 					id,
 				},
 				include: {
-					transactions: true,
+					transactions: {
+						orderBy: {
+							dueDate: 'asc',
+						}
+					},
 					tenant: {
 						select: {
 							id: true,
