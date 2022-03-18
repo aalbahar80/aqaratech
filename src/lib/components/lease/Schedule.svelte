@@ -9,7 +9,10 @@
 	export let schedule: ReturnType<typeof generateSchedule>;
 	$: console.table(schedule);
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		countChange: number;
+		delete: number;
+	}>();
 </script>
 
 <div class="mt-10 sm:mt-0">
