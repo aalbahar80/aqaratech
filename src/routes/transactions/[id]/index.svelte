@@ -70,7 +70,6 @@
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<pre>{JSON.stringify(nextReminder, null, 2)}</pre>
 	<Heading title="Transaction" id={trx.id} entity="transactions">
 		<svelte:fragment slot="breadcrumbs">
 			<BreadCrumb
