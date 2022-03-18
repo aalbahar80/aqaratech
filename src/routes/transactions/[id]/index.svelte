@@ -95,6 +95,8 @@
 		label={trx.isPaid ? 'Paid' : 'Not paid'}
 		badgeColor={trx.isPaid ? 'green' : 'red'}
 	/>
-	<DetailsPane {details} />
-	<Timeline {trx} />
+	<div class="grid gap-y-6">
+		<DetailsPane {details} />
+		<Timeline {trx} />
+	</div>
 </div>

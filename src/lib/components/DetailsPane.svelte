@@ -14,8 +14,8 @@
 	];
 </script>
 
-<div class="border-t border-gray-200">
-	<dl>
+<div>
+	<dl class="rounded-lg shadow">
 		{#each details as [key, value]}
 			<div class="row">
 				<dt class="label">{key}</dt>
