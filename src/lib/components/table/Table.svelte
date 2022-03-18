@@ -15,7 +15,7 @@
 	$: columns.newData(rows);
 </script>
 
-<div class="flex space-x-4">
+<!-- <div class="flex space-x-4">
 	{#each $columns as header}
 		<label>
 			<input
@@ -29,7 +29,7 @@
 			{header.label}
 		</label>
 	{/each}
-</div>
+</div> -->
 
 <div class="flex flex-col">
 	<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
