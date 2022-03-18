@@ -28,7 +28,7 @@
 
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
-	export let nextReminder: string;
+	export let nextReminder: string | null;
 
 	let details: [string, string | null][];
 	$: details = [
@@ -97,6 +97,6 @@
 	/>
 	<div class="grid gap-y-6">
 		<DetailsPane {details} />
-		<Timeline {trx} />
+		<Timeline {trx} {nextReminder} />
 	</div>
 </div>

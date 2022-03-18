@@ -91,13 +91,12 @@ export default trpc
 			// const res = await fetch(`/transactions/${input}/next-reminder`);
 			const res = await fetch(`${url}/transactions/${input}/next-reminder`);
 			if (!res.ok) {
-				throw new TRPCError({
-					code: 'BAD_REQUEST',
-					message: 'Unable to get next reminder',
-				});
+				console.error('Unable to get next reminder');
+				return null;
 			}
-			const data = await res.json();
-			return data;
+			type Data = { reminder: string };
+			const data = (await res.json()) as Data;
+			return data.reminder;
 		},
 	})
 	.mutation('updatePaid', {

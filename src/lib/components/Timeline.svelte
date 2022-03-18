@@ -8,17 +8,15 @@
 	import lowerCase from 'lodash-es/lowerCase.js';
 	import Button from './Button.svelte';
 
-	type Timeline = {
+	type TimelineEvent = {
 		date: Date;
 		status: 'SCHEDULED' | 'SENT' | 'DELIVERED' | 'FAILED';
-	}[];
+	};
 
 	export let trx: InferQueryOutput<'transactions:read'>;
-	export let timeline: Timeline = [
-		{
-			status: 'SCHEDULED',
-			date: new Date('2022-12-30'),
-		},
+	export let nextReminder: string | null;
+	console.log({ nextReminder }, 'Timeline.svelte ~ 18');
+	let timeline: TimelineEvent[] = [
 		{
 			status: 'SENT',
 			date: new Date('2022-03-19'),
@@ -36,6 +34,13 @@
 			date: new Date('2022-03-13T14:00:00.000Z'),
 		},
 	];
+	if (nextReminder) {
+		const next: TimelineEvent = {
+			status: 'SCHEDULED',
+			date: new Date(nextReminder),
+		};
+		timeline = [next, ...timeline];
+	}
 
 	let loadingSend = false;
 	const send = async () => {
