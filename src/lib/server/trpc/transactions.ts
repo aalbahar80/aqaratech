@@ -1,3 +1,4 @@
+import { browser, dev } from '$app/env';
 import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
@@ -5,6 +6,20 @@ import { falsyToNull, trim } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+
+let url: string;
+
+// TODO: DRY this up (lib/client/trpc.ts)
+if (browser) {
+	url = '';
+} else if (dev) {
+	url = 'http://localhost:3000';
+} else if (process.env.VERCEL && process.env.VERCEL_URL) {
+	url = `https://${process.env.VERCEL_URL}`;
+} else {
+	const message = 'Could not determine url. transactions.ts ~ 19';
+	throw new Error(message);
+}
 
 export default trpc
 	.router()
@@ -70,6 +85,21 @@ export default trpc
 				include: { lease: { include: { tenant: true } } },
 			}),
 	})
+	.query('nextReminder', {
+		input: z.string(),
+		resolve: async ({ input }) => {
+			// const res = await fetch(`/transactions/${input}/next-reminder`);
+			const res = await fetch(`${url}/transactions/${input}/next-reminder`);
+			if (!res.ok) {
+				throw new TRPCError({
+					code: 'BAD_REQUEST',
+					message: 'Unable to get next reminder',
+				});
+			}
+			const data = await res.json();
+			return data;
+		},
+	})
 	.mutation('updatePaid', {
 		input: z.object({
 			id: z.string().uuid(),
@@ -109,7 +139,8 @@ export default trpc
 		resolve: async ({ input }) => {
 			await Promise.all(
 				input.map(async (id) => {
-					const res = await fetch(`/transactions/${id}/start-notify-wf`);
+					// const res = await fetch(`/transactions/${id}/start-notify-wf`);
+					const res = await fetch(`${url}/transactions/${id}/start-notify-wf`);
 					if (!res.ok) {
 						throw new TRPCError({
 							code: 'BAD_REQUEST',

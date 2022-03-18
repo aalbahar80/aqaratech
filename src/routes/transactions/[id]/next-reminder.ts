@@ -1,15 +1,15 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { Connection, WorkflowClient } from '@temporalio/client';
-// import { getBillingPeriod } from '../../../../temporal/lib/workflows.js';
-import { getBillingPeriod } from '../../../../temporal/src/workflows';
+// import { getNextReminder } from '../../../../temporal/lib/workflows.js';
+import { getNextReminder } from '../../../../temporal/src/workflows';
 
 export const get: RequestHandler = async ({ params }) => {
 	const { id } = params;
 	if (!id) {
-		const error = new Error('Unable to get leaseId from URL');
+		const error = new Error('Unable to get trxId from URL');
 		throw error;
 	}
-	console.log('getting current billing period for lease: ', id);
+	console.log('getting next reminder for transaction: ', id);
 
 	const connection = new Connection({
 		address: 'temporal.letand.be',
@@ -17,13 +17,11 @@ export const get: RequestHandler = async ({ params }) => {
 	const client = new WorkflowClient(connection.service);
 	const handle = client.getHandle(id);
 
-	const currentBp = await handle.query(getBillingPeriod);
-	console.log(`The current billing period is ${currentBp}`);
+	const reminder = await handle.query(getNextReminder);
+	console.log(`The next reminder is at: ${reminder}`);
 
 	return {
 		status: 200,
-		body: {
-			currentBp,
-		},
+		body: { reminder },
 	};
 };

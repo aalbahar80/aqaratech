@@ -1,21 +1,13 @@
 import {
-	condition,
 	defineQuery,
-	defineSignal,
 	proxyActivities,
 	setHandler,
 	sleep,
 } from '@temporalio/workflow';
-import {
-	addMonths,
-	differenceInMilliseconds,
-	differenceInCalendarMonths,
-} from 'date-fns';
+import { addDays, differenceInMilliseconds } from 'date-fns';
 import type * as activities from './activities';
-import ms, { StringValue } from 'ms';
-import { msToTs } from '@temporalio/common';
 
-async function _sleepUntil(futureDate: string | Date, fromDate = new Date()) {
+async function sleepUntil(futureDate: string | Date, fromDate = new Date()) {
 	const timeUntilDate = differenceInMilliseconds(
 		new Date(futureDate),
 		fromDate,
@@ -30,75 +22,21 @@ const acts = proxyActivities<ReturnType<typeof activities['createActivities']>>(
 	},
 );
 
-export const cancelLease = defineSignal('cancelLeaseSignal');
-export const setIsNotify = defineSignal<boolean[]>('setIsNotify');
-export const setIsPaid = defineSignal<boolean[]>('setIsPaid');
-export const getBillingPeriod = defineQuery<number>('getBillingPeriod');
-
-export async function leaseWF(leaseId: string) {
-	const lease = await acts.getLease(leaseId);
-
-	// TODO replace throw with temporalio error or retries
-	if (!lease) throw new Error('Lease not found');
-
-	let { active } = lease;
-
-	// get the date of the 1st day of the next month
-	const start = new Date(lease.start);
-	const nextMonth = new Date(start.getFullYear(), start.getMonth() + 1, 1);
-	console.log('nextMonth: ', nextMonth);
-
-	// sleepUntil(nextMonth);
-
-	for (let bp = 0; bp < 12; bp++) {
-		setHandler(getBillingPeriod, () => bp);
-
-		// TODO change to 1 month
-		if (await condition(() => !active, 5000)) {
-			// cancelled
-			console.log('Lease no longer active. Stopping workflow.');
-			break;
-		} else {
-			const dueDate = addMonths(nextMonth, bp);
-			const trx = await acts.generateTransaction(lease, dueDate.toISOString());
-			let isPaid = trx.isPaid;
-			let shouldNotify = trx.lease.shouldNotify;
-			let reminderCount = 0;
-
-			while (shouldNotify && !isPaid && reminderCount < 3) {
-				console.log('Reminder Count: ', reminderCount);
-				await acts.notify(trx.id);
-				reminderCount++;
-				await sleep(1000);
-				({
-					isPaid,
-					lease: { active, shouldNotify },
-				} = await acts.getTrx(trx.id));
-				// trx = await acts.getTrx(trx.id);
-				// isPaid = trx.isPaid;
-				// shouldNotify = trx.lease.shouldNotify;
-				// active = trx.lease.active;
-			}
-		}
-	}
-}
+export const getNextReminder = defineQuery<string>('getNextReminder');
 
 export async function trxNotificationWF(trxId: string) {
 	const originalTrx = await acts.getTrx(trxId);
-	console.log(originalTrx);
 
-	await acts.setReminderAt(trxId, new Date(originalTrx.dueDate).toISOString());
-	console.log('sleeping until: ', originalTrx.dueDate);
-	// TODO change to postDate
-	// await sleepUntil(originalTrx.dueDate);
-	await sleep('2s');
+	let nextReminder = new Date(originalTrx.dueDate);
+	setHandler(getNextReminder, () => nextReminder.toISOString());
+	await prepareNextReminder(trxId, nextReminder);
 
 	for (let count = 0; count < 4; count++) {
 		try {
 			const trx = await acts.getTrx(trxId);
 			if (trx.isPaid) {
 				console.log('Transaction paid. Stopping workflow.');
-				return;
+				return trx;
 			}
 			if (trx.lease.shouldNotify && trx.lease.active) {
 				await acts.notify(trxId);
@@ -108,16 +46,17 @@ export async function trxNotificationWF(trxId: string) {
 					trx,
 				);
 			}
-			// update the reminder date
-			const nextReminder = new Date(new Date().getTime() + ms('3s'));
-			await acts.setReminderAt(trx.id, nextReminder.toISOString());
-
-			const wait = '3s';
-			console.log(`Sleeping for ${wait}`);
-			await sleep(wait);
+			nextReminder = addDays(nextReminder, 2);
+			await prepareNextReminder(trxId, nextReminder);
 		} catch (e) {
 			console.error('Error refreshing trx: ', e);
 		}
 	}
 	console.log('Done.');
+}
+
+async function prepareNextReminder(id: string, nextReminder: Date) {
+	await acts.setReminderAt(id, nextReminder.toISOString());
+	console.log(`Sleeping until ${nextReminder}`);
+	await sleepUntil(nextReminder);
 }

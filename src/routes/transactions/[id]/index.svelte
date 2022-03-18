@@ -14,13 +14,19 @@
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
 		const trx = await trpc.query('transactions:read', params.id);
-		return { props: { trx } };
+		const nextReminder = await trpc.query(
+			'transactions:nextReminder',
+			params.id,
+		);
+
+		return { props: { trx, nextReminder } };
 	};
 </script>
 
 <script lang="ts">
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
+	export let nextReminder: string;
 
 	let details: [string, string | null][];
 	$: details = [
@@ -100,6 +106,7 @@
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+	<pre>{JSON.stringify(nextReminder, null, 2)}</pre>
 	<Heading title="Transaction" id={trx.id} entity="transactions">
 		<svelte:fragment slot="breadcrumbs">
 			<BreadCrumb
