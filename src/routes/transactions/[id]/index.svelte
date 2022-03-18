@@ -8,7 +8,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { CurrencyDollar, Speakerphone } from '@steeze-ui/heroicons';
+	import { CurrencyDollar } from '@steeze-ui/heroicons';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
@@ -40,7 +40,6 @@
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];
 
-	let loadingSend = false;
 	let loadingPaid = false;
 	const toggleIsPaid = async () => {
 		loadingPaid = true;
@@ -68,43 +67,6 @@
 			loadingPaid = false;
 		}
 	};
-
-	const send = async () => {
-		loadingSend = true;
-		try {
-			const res = await fetch('/api/sms', {
-				method: 'POST',
-				body: JSON.stringify({
-					// phone: trx.lease.tenant.phone,
-					phone: '+96599123456',
-					// phone: '+15005550009', // invalid
-					message: `Your transaction of ${kwdFormat(
-						trx.amount,
-					)} KWD has been received.`,
-				}),
-			});
-			const data = await res.json();
-			if (!res.ok) throw new Error(data.message || 'Unable to send SMS');
-
-			console.log({ data }, '[id].svelte ~ 82');
-			addToast({
-				props: {
-					kind: 'success',
-					title: 'Success',
-				},
-			});
-		} catch (e) {
-			console.error(e);
-			addToast({
-				props: {
-					kind: 'error',
-					title: e instanceof Error ? e.message : 'Unable to send SMS',
-				},
-			});
-		} finally {
-			loadingSend = false;
-		}
-	};
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -121,14 +83,6 @@
 
 		<svelte:fragment slot="actions">
 			<Button
-				icon={Speakerphone}
-				text="Send Reminder"
-				solid
-				on:click={send}
-				disabled={trx.isPaid}
-				loading={loadingSend}
-			/>
-			<Button
 				icon={CurrencyDollar}
 				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
 				solid
@@ -142,5 +96,5 @@
 		badgeColor={trx.isPaid ? 'green' : 'red'}
 	/>
 	<DetailsPane {details} />
-	<Timeline />
+	<Timeline {trx} />
 </div>

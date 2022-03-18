@@ -1,13 +1,19 @@
 <script lang="ts">
+	import type { InferQueryOutput } from '$lib/client/trpc';
+	import { addToast } from '$lib/stores/toast';
+	import { kwdFormat } from '$lib/utils/common';
+	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
 	import { enGB } from 'date-fns/locale';
 	import lowerCase from 'lodash-es/lowerCase.js';
+	import Button from './Button.svelte';
 
 	type Timeline = {
 		date: Date;
 		status: 'SCHEDULED' | 'SENT' | 'DELIVERED' | 'FAILED';
 	}[];
 
+	export let trx: InferQueryOutput<'transactions:read'>;
 	export let timeline: Timeline = [
 		{
 			status: 'SCHEDULED',
@@ -30,12 +36,50 @@
 			date: new Date('2022-03-13T14:00:00.000Z'),
 		},
 	];
+
+	let loadingSend = false;
+	const send = async () => {
+		loadingSend = true;
+		try {
+			const res = await fetch('/api/sms', {
+				method: 'POST',
+				body: JSON.stringify({
+					// phone: trx.lease.tenant.phone,
+					phone: '+96599123456',
+					// phone: '+15005550009', // invalid
+					message: `Your transaction of ${kwdFormat(
+						trx.amount,
+					)} KWD has been received.`,
+				}),
+			});
+			const data = await res.json();
+			if (!res.ok) throw new Error(data.message || 'Unable to send SMS');
+
+			console.log({ data }, '[id].svelte ~ 82');
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Success',
+				},
+			});
+		} catch (e) {
+			console.error(e);
+			addToast({
+				props: {
+					kind: 'error',
+					title: e instanceof Error ? e.message : 'Unable to send SMS',
+				},
+			});
+		} finally {
+			loadingSend = false;
+		}
+	};
 </script>
 
 <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
 	<div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
 		<h2 id="timeline-title" class="text-lg font-medium text-gray-900">
-			Timeline
+			Notification Timeline
 		</h2>
 
 		<!-- Activity Feed -->
@@ -91,12 +135,14 @@
 			</ul>
 		</div>
 		<div class="justify-stretch mt-6 flex flex-col">
-			<button
-				type="button"
-				class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-			>
-				Send Reminder now
-			</button>
+			<Button
+				icon={Speakerphone}
+				text="Send reminder now"
+				solid
+				on:click={send}
+				disabled={trx.isPaid}
+				loading={loadingSend}
+			/>
 		</div>
 	</div>
 </section>
