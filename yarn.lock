@@ -108,31 +108,31 @@
   dependencies:
     "@felte/common" "1.0.2"
 
-"@felte/validator-zod@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-1.0.3.tgz#11e51ddfc04b45a0bf59e816a55c7de4e77e7b76"
-  integrity sha512-AHDjZI2u3jQLYMvJvsnm89xUO3gGtWKWdpW7bXb1dBAs2hw8ren9Zn3TTZDhXq6qT9ffgdD3d1QS0YgZJY6McA==
+"@felte/validator-zod@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@felte/validator-zod/-/validator-zod-1.0.4.tgz#44857c7f82fdf61abb54446274e0bd8897b83ae9"
+  integrity sha512-3r6d9BmNPA2J2b/ZEa/G7a/FzX3+Jgb0FDmHQ+4GjB9ePD4/lUT4piqiROUgepGT899QHPtf/wwn7g13kpzhBA==
   dependencies:
     "@felte/common" "1.0.2"
 
-"@fortawesome/fontawesome-common-types@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.3.0.tgz#949995a05c0d8801be7e0a594f775f1dbaa0d893"
-  integrity sha512-CA3MAZBTxVsF6SkfkHXDerkhcQs0QPofy43eFdbWJJkZiq3SfiaH1msOkac59rQaqto5EqWnASboY1dBuKen5w==
+"@fortawesome/fontawesome-common-types@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.0.tgz#5a9468da0e5c2a3ccc161882ef5ffafbd3d4882f"
+  integrity sha512-lFIJ5opxOKG9q88xOsuJJAdRZ+2WRldsZwUR/7MJoOMUMhF/LkHUjwWACIEPTa5Wo6uTDHvGRIX+XutdN7zYxA==
 
-"@fortawesome/free-regular-svg-icons@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.0.0.tgz#f3cb91dac643472fe8138024b93fbfbdf05675cc"
-  integrity sha512-lYK6oyQL8HwZUAVWGqF7TGuwQBVfphNBVTdvPSD3h4gmQfGazm/xcwg3kmtcRycu3y6QspOC7hPXSoJbVqSYCw==
+"@fortawesome/free-regular-svg-icons@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.1.0.tgz#5e6fb07e170a76ff8d081fb352022f933ecbb5f9"
+  integrity sha512-MLSBZ3AprHZXVG6zVg9Jd/mGZrlX/1jxqQsHhvZuhdRdL9bZQyXHe5RmP0n4IOth/fdnoj3fs+EnbW/O+0K4dw==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.3.0"
+    "@fortawesome/fontawesome-common-types" "6.1.0"
 
-"@fortawesome/free-solid-svg-icons@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.0.0.tgz#bed4a501b631c6cfa35c09830f7cb63ffca1589d"
-  integrity sha512-o4FZ1XbndcgeWNb8Wh0y+Hgf73CjmyOQowUSaqQCtgIIdS+XliSBSOwCl330wER+I6CGYE96hT27bHBPmzX2Gg==
+"@fortawesome/free-solid-svg-icons@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.1.0.tgz#1bdc3ce6ddd2336348ba324ac4a72161725b0d95"
+  integrity sha512-OOr0jRHl5d41RzBS3sZh5Z3HmdPjMr43PxxKlYeLtQxFSixPf4sJFVM12/rTepB2m0rVShI0vtjHQmzOTlBaXg==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.3.0"
+    "@fortawesome/fontawesome-common-types" "6.1.0"
 
 "@grpc/grpc-js@^1.5.7":
   version "1.5.8"
@@ -548,17 +548,17 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@trpc/client@^9.20.1":
-  version "9.20.1"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.20.1.tgz#a9a5e5e4ebceacb18f31950838942a02a37b9138"
-  integrity sha512-nsRToriDb6ny5UpgNGB/ux2NXGmSs4/cWh9QREXi8S3jbDogFjs++J+xRzq5Q5RHtchcyOile5wxtIy3iHVhtQ==
+"@trpc/client@^9.20.2":
+  version "9.20.2"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.20.2.tgz#d91e0029d4f361ee698ecbc408b0a2c803610217"
+  integrity sha512-gp3l/tvoLneZYX8VMmq/KgPB+ygIQLVuhfg2CMsYSo5RJ5oJUc19j9mIoyXGymw7JlaMfGRv/vSm8R0kgnYegg==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@^9.20.1":
-  version "9.20.1"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.20.1.tgz#e222283e64a2f2ded6aceba762a219976079f8ab"
-  integrity sha512-UsuDslmzWrhkv1JZ12/fK4Z/5lSaPj5UJg23j1EE1gkH5aSkQgY5CHzvNv+jkiAR6rR4K2HDOMpVF4Tz50YE9Q==
+"@trpc/server@^9.20.2":
+  version "9.20.2"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.20.2.tgz#1109c731c5dd9a82cc9fe312c86574a2605249b3"
+  integrity sha512-iPCwfJ1My/GPJA6g0tqcNKhBIHp+SkS9E9fVO5ilaS5KtMLvYAaKDuSubAJzikWO0AeQEg4PtgnkcHBoiyvSrw==
   dependencies:
     tslib "^2.1.0"
 
@@ -890,10 +890,10 @@
     "@typescript-eslint/types" "5.15.0"
     eslint-visitor-keys "^3.0.0"
 
-"@vitest/ui@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@vitest/ui/-/ui-0.6.1.tgz#1b5743ec18e78acf7d9e3c28923383dab0587f06"
-  integrity sha512-eBquWSP0C1InsHY34PktjL9cKCKO28q4HNhJEwa8rrPaXGYL3/abQuqJRqNH+ApUAUQd/q2RDAfzBdNoKWvAKg==
+"@vitest/ui@^0.7.4":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@vitest/ui/-/ui-0.7.4.tgz#0ec369a7189d5b81b8867398cbb7d60b348e3e58"
+  integrity sha512-FfUU1um8o+Cic44fTWxbGXv6sPMSiZxTysPxbR+2/K8t9+d0DzWsSa3lUjTRgiJQ1tiQpRP2sT4kkM/UO8XdzQ==
   dependencies:
     sirv "^2.0.2"
 
@@ -1245,10 +1245,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autoprefixer@^10.4.3:
-  version "10.4.3"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.3.tgz#d4b9358be607c30d1900c1412d0d668f98bb5a6a"
-  integrity sha512-3EIK6tHl2SyJWCoPsQzL3NEqKOdjCWbPzoOInjVAQYo/y/OCEFG9KwB5162dehG5GadiGfgxu7nrWCpExCfRFQ==
+autoprefixer@^10.4.4:
+  version "10.4.4"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.4.tgz#3e85a245b32da876a893d3ac2ea19f01e7ea5a1e"
+  integrity sha512-Tm8JxsB286VweiZ5F0anmbyGiNI3v3wGv3mz9W+cxEDYB/6jbnj6GM9H9mK3wIL8ftgl+C07Lcwb8PG5PCCPzA==
   dependencies:
     browserslist "^4.20.2"
     caniuse-lite "^1.0.30001317"
@@ -2141,10 +2141,10 @@ eslint-config-airbnb-typescript@^16.1.0:
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
 
-eslint-config-airbnb-typescript@^16.1.1:
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-typescript/-/eslint-config-airbnb-typescript-16.1.1.tgz#cfa6b0d7a0a2950465b697ce9682707869f04d22"
-  integrity sha512-E02SYIDMAEx6PB6Mi/twWNYwgK9yYd19vQzGASBUejWtdCSAuEcC3cSH8A6VZJjPITxaPRqbd00BKihSInFvbA==
+eslint-config-airbnb-typescript@^16.1.3:
+  version "16.1.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-typescript/-/eslint-config-airbnb-typescript-16.1.3.tgz#ad2cfc66a3c29ba8a589938788fb838a8ece1469"
+  integrity sha512-Pxv+dnXuzyXsjKefl1THWMN7eJ7pALU05L7UyW/WmJ2FKlwsKpBE4Z8KSv5Fz+4R6Kvu7kLFYqkXdkg4wsZUow==
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
 
@@ -3930,10 +3930,10 @@ postcss-value-parser@^4.2.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.4.11:
-  version "8.4.11"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.11.tgz#a06229f23820b4ddd46500a3e38dbca1598a8e8d"
-  integrity sha512-D+jFLnT0ilGfy4CVBGbC+XE68HkVpT8+CUkDrcSpgxmo4RKco2uaZ4kIoyVGEm+m8KN/+Vwgs8MtpNbQ3/ma9w==
+postcss@^8.4.12:
+  version "8.4.12"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.12.tgz#1e7de78733b28970fa4743f7da6f3763648b1905"
+  integrity sha512-lg6eITwYe9v6Hr5CncVbK70SoioNQIq81nsaG86ev5hAidQvmOeETBqs7jm43K2F5/Ley3ytDtriImV6TpNiSg==
   dependencies:
     nanoid "^3.3.1"
     picocolors "^1.0.0"
@@ -3984,10 +3984,10 @@ prettier-plugin-tailwindcss@^0.1.8:
   resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.8.tgz#ba0f606ed91959ede670303d905b99106e9e6293"
   integrity sha512-hwarSBCswAXa+kqYtaAkFr3Vop9o04WOyZs0qo3NyvW8L7f1rif61wRyq0+ArmVThOuRBcJF5hjGXYk86cwemg==
 
-prettier@^2.4.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
-  integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
+prettier@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.0.tgz#12f8f504c4d8ddb76475f441337542fa799207d4"
+  integrity sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==
 
 pretty-format@^26.6.2:
   version "26.6.2"
@@ -5065,10 +5065,10 @@ vite@^2.8.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.6.1.tgz#d2cbe55c7c48b5a34c3561bb16d8646c3824d5aa"
-  integrity sha512-rgHgTO3xHCrbgmqYdUz4ViO0g2ekHeOfV60J6+1c6Ypzk1EqCE2sN8IpF4TDGs6BOvWIsVd/ob5c6U4Ozzu92g==
+vitest@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.7.4.tgz#5a1c77506a53be83028f033bb0d855ad7a7c60f1"
+  integrity sha512-6kyJ/YZJFVj/zEVVHFyvLvAZlbg05yAyJrk7oP+FOCFanGRYK7bBEz4qsIpNHxX+dlf5vRkbBDjpdXzGL7udeA==
   dependencies:
     "@types/chai" "^4.3.0"
     "@types/chai-subset" "^1.3.3"
