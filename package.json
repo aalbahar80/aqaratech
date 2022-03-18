@@ -99,6 +99,6 @@
     "svelte-select": "^4.4.7",
     "temporalio": "^0.19.1",
     "trpc-sveltekit": "^1.1.9",
-    "zod": "^3.13.4"
+    "zod": "^3.14.1"
   }
 }
