@@ -62,7 +62,7 @@
 			const original = values as z.infer<typeof leaseFormSchema>;
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
-				newValues['schedule'] = original?.schedule.map((item) => {
+				newValues.schedule = original?.schedule.map((item) => {
 					if (item?.postDate) {
 						return {
 							...item,
@@ -73,10 +73,10 @@
 				});
 			}
 			if (original.start) {
-				newValues['start'] = forceDateToInput(original.start);
+				newValues.start = forceDateToInput(original.start);
 			}
 			if (original.end) {
-				newValues['end'] = forceDateToInput(original.end);
+				newValues.end = forceDateToInput(original.end);
 			}
 			return {
 				...original,
