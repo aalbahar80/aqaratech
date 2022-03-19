@@ -2,12 +2,45 @@
 	<title>RE Co Admin</title>
 </svelte:head>
 
-<div
-	class="grid grid-cols-1 grid-rows-2 h-full w-full place-items-center mt-12 gap-10"
+<!-- <div
+	class="mt-12 grid h-full w-full grid-cols-1 grid-rows-3 place-items-center gap-10"
 >
-	<h1 class="text-7xl foot-bold">Lorem Ipsum</h1>
+	<h1 class="foot-bold text-7xl">Lorem Ipsum</h1>
 	<p class="text-2xl">
 		voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem.
 		voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem.
 	</p>
+
+	width="800"
+			height="600"
+</div> -->
+
+<!-- <div class="grid grid-cols-2 items-center justify-between gap-y-4"> -->
+<div
+	class="grid auto-rows-fr grid-cols-1 items-center justify-between gap-4 lg:auto-cols-fr lg:grid-cols-2"
+>
+	<iframe
+		title="chart1"
+		class="h-[36rem] w-full"
+		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		frameborder="0"
+		allowtransparency
+	/>
+	<iframe
+		title="chart1"
+		class="h-[36rem] w-full"
+		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		frameborder="0"
+		allowtransparency
+	/>
+	<div class="h-[36rem] bg-green-300" />
+	<iframe
+		title="chart1"
+		class="h-[36rem] w-full"
+		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		frameborder="0"
+		allowtransparency
+	/>
+
+	<div class="h-[36rem] bg-red-300" />
 </div>
