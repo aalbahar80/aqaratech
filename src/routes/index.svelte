@@ -23,14 +23,14 @@
 	<iframe
 		title="chart1"
 		class="h-[36rem] w-full"
-		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		src="http://metabase.letand.be/public/question/36b7faf8-8943-4204-a1f9-1c70f869ffd8"
 		frameborder="0"
 		allowtransparency
 	/>
 	<iframe
 		title="chart1"
 		class="h-full w-full"
-		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		src="http://metabase.letand.be/public/question/36b7faf8-8943-4204-a1f9-1c70f869ffd8"
 		frameborder="0"
 		allowtransparency
 	/>
@@ -38,7 +38,7 @@
 	<iframe
 		title="chart1"
 		class="h-[36rem] w-full"
-		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
+		src="http://metabase.letand.be/public/question/36b7faf8-8943-4204-a1f9-1c70f869ffd8"
 		frameborder="0"
 		allowtransparency
 	/>
