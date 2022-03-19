@@ -16,9 +16,10 @@
 </div> -->
 
 <!-- <div class="grid grid-cols-2 items-center justify-between gap-y-4"> -->
-<div
+<!-- <div
 	class="grid auto-rows-fr grid-cols-1 items-center justify-between gap-4 lg:auto-cols-fr lg:grid-cols-2"
->
+> -->
+<div class="grid auto-rows-fr grid-cols-1 gap-4">
 	<iframe
 		title="chart1"
 		class="h-[36rem] w-full"
@@ -28,7 +29,7 @@
 	/>
 	<iframe
 		title="chart1"
-		class="h-[36rem] w-full"
+		class="h-full w-full"
 		src="http://localhost:3002/public/question/5b3ae644-14b5-44c0-86f5-1bc6cb48b82c"
 		frameborder="0"
 		allowtransparency
