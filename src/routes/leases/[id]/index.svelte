@@ -42,12 +42,12 @@
 		}
 		if (lease.start > new Date()) {
 			return {
-				label: 'Pending',
+				label: 'Upcoming',
 				color: 'indigo',
 			};
 		}
 		return {
-			label: 'Active',
+			label: 'Current',
 			color: 'green',
 		};
 	};
