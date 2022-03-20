@@ -54,10 +54,10 @@
 
 	<!-- <div class="h-[36rem] bg-red-300" /> -->
 </div>
-<iframe
+<!-- <iframe
 	src="https://metabase.letand.be/public/dashboard/4d6a4980-b35e-4ea9-9f83-1e06235b9d43"
 	title="dashboard"
 	frameborder="0"
 	class="h-[36rem] w-full"
 	allowtransparency
-/>
+/> -->
