@@ -26,10 +26,8 @@
 	];
 
 	const profileNavigation = [
-		{ name: 'Team', href: '#' },
-		{ name: 'Settings', href: '#' },
-		{ name: 'sample/abc', href: '/sample/abc' },
-		{ name: 'Sign Out', href: '/auth/logout' },
+		{ name: 'Settings', href: '' },
+		{ name: 'Sign Out', href: '' },
 	];
 	function buildClass(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
