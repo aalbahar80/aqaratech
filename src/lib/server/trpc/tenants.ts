@@ -122,7 +122,7 @@ export default trpc
 								{ civilid: { contains: query } },
 							],
 					  }
-					: undefined,
+					: {},
 			}),
 	})
 	.query('count', {

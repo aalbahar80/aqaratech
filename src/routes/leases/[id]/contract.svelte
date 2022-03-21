@@ -1,9 +1,9 @@
 <script lang="ts">
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
-	import { entityDefinitions } from '$lib/definitions';
 	import { inWords } from '$lib/utils/currency';
 	import { page } from '$app/stores';
 	import { getName } from '$lib/utils/common';
+	import { getAddress } from '$lib/definitions/property';
 
 	const { lease } = $page.stuff;
 
@@ -33,7 +33,7 @@
 		}),
 		rentWords: inWords(lease.monthlyRent),
 		start: lease.start.toLocaleDateString(),
-		unitAddress: entityDefinitions.properties.label(lease.unit.property),
+		unitAddress: getAddress(lease.unit.property),
 		unitNumber: lease.unit.unitNumber,
 		unitType: lease.unit.type,
 		purpose: lease.license,

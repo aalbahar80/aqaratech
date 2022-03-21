@@ -6,15 +6,15 @@ import type { EntityDefinition } from '.';
 export const schema = z.object({
 	id: z.string().uuid().optional(),
 	title: z.string().transform(trim).transform(falsyToNull),
-	description: z.string().transform(trim).transform(falsyToNull).nullish(),
-	status: z.enum(['pending', 'completed', 'cancelled']).nullish(),
+	description: z.string().transform(trim).transform(falsyToNull).nullable(),
+	status: z.enum(['pending', 'completed', 'cancelled']).nullable(),
 	completedAt: z.union([
 		z.preprocess(strToDate, z.date()).transform(falsyToNull),
 		z.literal('').transform(() => null),
 	]),
-	unitId: z.string().uuid().nullish(),
-	propertyId: z.string().uuid().nullish(),
-	clientId: z.string().uuid().nullish(),
+	unitId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
+	propertyId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
+	clientId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
 });
 
 type MaintenanceOrder = InferMutationInput<'maintenanceOrders:save'>;

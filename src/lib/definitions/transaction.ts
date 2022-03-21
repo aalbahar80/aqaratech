@@ -8,10 +8,8 @@ export const schema = z.object({
 	dueDate: z.preprocess(strToDate, z.date()),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
-	memo: z.string().transform(trim).transform(falsyToNull).nullish(),
+	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 	leaseId: z.string().uuid(),
-	// TODO use z.url()?
-	receiptUrl: z.string().transform(trim).transform(falsyToNull).nullish(),
 });
 
 type Transaction = InferMutationInput<'transactions:save'>;

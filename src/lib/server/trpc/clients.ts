@@ -38,6 +38,7 @@ export default trpc
 					phone: true,
 					email: true,
 					civilid: true,
+					dob: true,
 				},
 			}),
 	})
@@ -93,7 +94,7 @@ export default trpc
 								{ civilid: { contains: query } },
 							],
 					  }
-					: undefined,
+					: {},
 			}),
 	})
 	.query('count', {

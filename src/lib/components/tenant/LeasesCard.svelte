@@ -8,8 +8,8 @@
 	type E = 'tenants' | 'units';
 	type Leases = NonNullable<InferQueryOutput<`${E}:read`>>['leases'];
 	export let leases: Leases;
-	export let tenantId: string = '';
-	export let unitId: string = '';
+	export let tenantId = '';
+	export let unitId = '';
 
 	$: addLeaseHref = tenantId
 		? `/leases/add?tenantId=${tenantId}`

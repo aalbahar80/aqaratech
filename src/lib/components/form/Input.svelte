@@ -13,12 +13,12 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from 'svelte-select';
 
-	export let name: string = '';
+	export let name = '';
 	export let value: string | Date | null | number | boolean = '';
-	export let invalid: boolean = false;
-	export let invalidText: string = '';
+	export let invalid = false;
+	export let invalidText: string | undefined = '';
 
-	let type: string = 'text';
+	let type = 'text';
 
 	const options = {
 		includeScore: true,

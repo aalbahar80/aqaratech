@@ -1,5 +1,5 @@
 import { browser, dev } from '$app/env';
-import { paginationSchema } from '$lib/definitions/common';
+import { idSchema, paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
@@ -110,7 +110,7 @@ export default trpc
 		input: z.object({
 			id: z.string().uuid(),
 			isPaid: z.boolean(),
-			receiptUrl: z.string().transform(trim).transform(falsyToNull).nullish(),
+			receiptUrl: z.string().transform(trim).transform(falsyToNull).nullable(),
 		}),
 		resolve: ({ input }) =>
 			prismaClient.transaction.update({
@@ -134,7 +134,7 @@ export default trpc
 				  }),
 	})
 	.mutation('saveMany', {
-		input: z.array(schema),
+		input: z.array(schema.extend(idSchema)),
 		resolve: ({ input }) =>
 			prismaClient.transaction.createMany({
 				data: input,

@@ -9,7 +9,7 @@
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { CurrencyDollar } from '@steeze-ui/heroicons';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
@@ -49,6 +49,7 @@
 			const updated = await trpc.mutation('transactions:updatePaid', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
+				receiptUrl: null,
 			});
 			trx = { ...trx, ...updated };
 			addToast({

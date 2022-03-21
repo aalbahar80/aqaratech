@@ -17,3 +17,8 @@ export function strToDate(v: unknown) {
 	if (typeof v === 'string' || v instanceof Date) return new Date(v);
 	return;
 }
+
+// TODO Doesn't infer correctly
+export function undefinedToNull<T>(v: T) {
+	return v === undefined ? null : v;
+}

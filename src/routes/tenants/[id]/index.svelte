@@ -5,9 +5,9 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getName } from '$lib/utils/common';
-	import type { Load } from '@sveltejs/kit';
 	import flatten from 'lodash-es/flatten.js';
 	import map from 'lodash-es/map.js';
+	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

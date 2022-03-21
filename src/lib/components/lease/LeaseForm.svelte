@@ -29,7 +29,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 
 	const lease = defaultForm();
-	let propertyId: string = '';
+	let propertyId = '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
 		unitList = await trpc

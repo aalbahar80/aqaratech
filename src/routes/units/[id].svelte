@@ -12,7 +12,7 @@
 		faElevator,
 		faMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

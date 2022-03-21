@@ -12,7 +12,7 @@
 		Entity,
 		'tenants' | 'units' | 'properties' | 'clients' | 'leases'
 	>;
-	export let invalidText: string = '';
+	export let invalidText: string | undefined = '';
 
 	// default selected object
 	export let optionLabel: null | { [key: string]: string } = null;
@@ -20,7 +20,7 @@
 	// id of the default selected option
 	export let value: string | null = '';
 
-	export let loadDefaults: boolean = true;
+	export let loadDefaults = true;
 	export let filter: any = undefined;
 
 	const getLabel = (item: any) => {

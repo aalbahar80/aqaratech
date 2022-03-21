@@ -97,7 +97,7 @@
 										{/if}
 									{/each}
 								</div>
-								{#if unit.leases.length}
+								{#if unit.leases[0]}
 									<div
 										class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0"
 									>

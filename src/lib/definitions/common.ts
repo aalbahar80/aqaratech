@@ -12,3 +12,7 @@ export const paginationSchema = z.object({
 		.nullish()
 		.transform((val) => Number(val) || 20),
 });
+
+export const idSchema = {
+	id: z.string().uuid(),
+};

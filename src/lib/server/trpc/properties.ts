@@ -112,7 +112,7 @@ export default trpc
 								{ number: { contains: query } },
 							],
 					  }
-					: undefined,
+					: {},
 			}),
 	})
 	.query('count', {

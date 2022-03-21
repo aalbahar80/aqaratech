@@ -18,7 +18,7 @@ export default trpc
 					transactions: {
 						orderBy: {
 							dueDate: 'asc',
-						}
+						},
 					},
 					tenant: {
 						select: {
@@ -164,7 +164,7 @@ export default trpc
 								{ tenant: { lastName: { contains: input } } },
 							],
 					  }
-					: undefined,
+					: {},
 			}),
 	})
 	.query('count', {

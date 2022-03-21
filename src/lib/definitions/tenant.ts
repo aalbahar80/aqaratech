@@ -31,9 +31,9 @@ export const schema = z.object({
 		})
 		.transform(trim)
 		.transform(falsyToNull),
-	passportNum: z.string().transform(trim).transform(falsyToNull).nullish(),
-	residencyNum: z.string().transform(trim).transform(falsyToNull).nullish(),
-	nationality: z.string().transform(trim).transform(falsyToNull).nullish(),
+	passportNum: z.string().transform(trim).transform(falsyToNull).nullable(),
+	residencyNum: z.string().transform(trim).transform(falsyToNull).nullable(),
+	nationality: z.string().transform(trim).transform(falsyToNull).nullable(),
 	residencyEnd: z.union([
 		z.preprocess(strToDate, z.date()).transform(falsyToNull),
 		z.literal('').transform(() => null),
