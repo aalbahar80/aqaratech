@@ -48,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "@vitest/ui": "^0.7.4",
+    "algoliasearch": "^4.13.0",
     "autoprefixer": "^10.4.4",
     "c8": "^7.11.0",
     "concurrently": "^7.0.0",
