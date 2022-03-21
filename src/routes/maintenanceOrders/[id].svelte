@@ -4,7 +4,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { dateFormat } from '$lib/utils/common';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

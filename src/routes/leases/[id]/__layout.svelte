@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import trpc from '$lib/client/trpc';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './__layout';
+	// import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/PropertyList.svelte';
 	import { dateFormat, getName } from '$lib/utils/common';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

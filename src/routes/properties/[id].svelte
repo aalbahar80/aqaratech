@@ -7,7 +7,7 @@
 	import UnitsList from '$lib/components/UnitsList.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { dateFormat } from '$lib/utils/common';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };

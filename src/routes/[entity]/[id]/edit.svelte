@@ -3,7 +3,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { singular, type Entity } from '$lib/definitions';
 	import { isEntity, entityDefinitions } from '$lib/definitions/index';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './edit';
 
 	export const load: Load = async ({ params }) => {
 		const { entity, id } = params;

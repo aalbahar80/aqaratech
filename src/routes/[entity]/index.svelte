@@ -2,8 +2,8 @@
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { isEntity, type Entity } from '$lib/definitions';
-	import type { Load } from '@sveltejs/kit';
 	import startCase from 'lodash-es/startCase.js';
+	import type { Load } from './index';
 
 	export const load: Load = async ({ url, params }) => {
 		const { entity } = params;

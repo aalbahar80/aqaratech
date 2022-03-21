@@ -1,5 +1,4 @@
 <script lang="ts">
-	import NavBar2 from '$lib/components/NavBar2.svelte';
 	import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 	import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
