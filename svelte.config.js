@@ -1,7 +1,6 @@
 import preprocess from 'svelte-preprocess';
 import path from 'path';
 import adapter from '@sveltejs/adapter-auto';
-// import { visualizer } from "rollup-plugin-visualizer";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -24,9 +23,6 @@ const config = {
 				noExternal: process.env.NODE_ENV === 'production' ? ['superjson'] : [],
 				external: ['@temporalio']
 			},
-			// plugins: [visualizer((opts) => {
-			// 	return { filename: path.join(opts.dir, "stats.html") };
-			// }),],
 		},
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE']
