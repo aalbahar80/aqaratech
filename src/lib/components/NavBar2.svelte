@@ -19,7 +19,7 @@
 	];
 </script>
 
-<Popover as="header" class="relative">
+<Popover as="header" class="relative" let:close>
 	<div class="bg-gray-900 py-6">
 		<nav
 			class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6"
@@ -75,6 +75,7 @@
 		</nav>
 	</div>
 
+	<!-- TODO Transition Here -->
 	<!-- Hamburger Menu -->
 	<PopoverPanel
 		focus
@@ -100,11 +101,11 @@
 					</PopoverButton>
 				</div>
 			</div>
-			<!-- navbar 2 -->
 			<div class="pt-5 pb-6">
 				<div class="space-y-1 px-2">
 					{#each navigation as item (item.name)}
 						<a
+							on:click={() => close(null)}
 							sveltekit:prefetch
 							href={item.href}
 							class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
