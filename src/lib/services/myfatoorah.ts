@@ -71,6 +71,8 @@ export const getMFUrl = async (id: string): Promise<string> => {
 			method: 'POST',
 			body: JSON.stringify({
 				PaymentMethodId: 1, // KNET
+				// PaymentMethodId: 20, // VISA
+				// PaymentMethodId: 9, // VISA2
 				...trxData,
 			}),
 		});
