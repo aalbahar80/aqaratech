@@ -1,3 +1,4 @@
+import { strToDate } from '$lib/zodTransformers';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
@@ -40,12 +41,8 @@ export function generateSchedule({
 export const schema = z.object({
 	id: z.string().uuid().optional(),
 	monthlyRent: z.number().min(1),
-	start: z.preprocess((arg) => {
-		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-	}, z.date()),
-	end: z.preprocess((arg) => {
-		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-	}, z.date()),
+	start: z.preprocess(strToDate, z.date()),
+	end: z.preprocess(strToDate, z.date()),
 	tenantId: z.string().uuid(),
 	unitId: z.string().uuid(),
 	shouldNotify: z.boolean(),
@@ -67,9 +64,7 @@ const scheduleSchema = z.array(
 	// TODO import schema from ./transaction
 	z.object({
 		amount: z.number().min(1),
-		postDate: z.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-		}, z.date()),
+		postDate: z.preprocess(strToDate, z.date()),
 		nanoid: z.string(),
 		memo: z.string(),
 	}),

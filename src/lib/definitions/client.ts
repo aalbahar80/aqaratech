@@ -1,6 +1,6 @@
 import type { InferMutationInput } from '$lib/client/trpc';
 import { getName } from '$lib/utils/common';
-import { falsyToNull, trim } from '$lib/zodTransformers';
+import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
@@ -28,9 +28,7 @@ export const schema = z.object({
 		.transform(trim)
 		.transform(falsyToNull),
 	dob: z
-		.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-		}, z.date())
+		.preprocess(strToDate, z.date())
 		.or(z.literal(''))
 		.nullish()
 		.transform(falsyToNull),

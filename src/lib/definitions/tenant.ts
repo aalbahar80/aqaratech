@@ -20,6 +20,7 @@ export const schema = z.object({
 	dob: z
 		.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+			return;
 		}, z.date())
 		.or(z.literal(''))
 		.nullish()
@@ -40,6 +41,7 @@ export const schema = z.object({
 	residencyEnd: z
 		.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+			return;
 		}, z.date())
 		.or(z.literal(''))
 		.nullish()

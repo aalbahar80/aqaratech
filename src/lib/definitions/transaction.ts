@@ -1,13 +1,11 @@
 import type { InferMutationInput } from '$lib/client/trpc';
-import { falsyToNull, trim } from '$lib/zodTransformers';
+import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
 export const schema = z.object({
 	id: z.string().uuid().optional(),
-	dueDate: z.preprocess((arg) => {
-		if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-	}, z.date()),
+	dueDate: z.preprocess(strToDate, z.date()),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullish(),

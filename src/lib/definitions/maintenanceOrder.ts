@@ -11,6 +11,7 @@ export const schema = z.object({
 	completedAt: z
 		.preprocess((arg) => {
 			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
+			return;
 		}, z.date())
 		.or(z.literal(''))
 		.nullish()
