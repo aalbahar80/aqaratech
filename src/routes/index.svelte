@@ -1,12 +1,10 @@
 <script lang="ts">
 	import NavBar2 from '$lib/components/NavBar2.svelte';
-	import {
-		faDribbble,
-		faFacebook,
-		faGithub,
-		faInstagram,
-		faTwitter,
-	} from '@fortawesome/free-brands-svg-icons';
+	import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
+	import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
+	import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
+	import { faDribbble } from '@fortawesome/free-brands-svg-icons/faDribbble';
+	import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
 	import {
 		ChevronRight,
 		CloudUpload,
