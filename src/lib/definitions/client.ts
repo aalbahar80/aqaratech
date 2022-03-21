@@ -27,11 +27,10 @@ export const schema = z.object({
 		})
 		.transform(trim)
 		.transform(falsyToNull),
-	dob: z
-		.preprocess(strToDate, z.date())
-		.or(z.literal(''))
-		.nullish()
-		.transform(falsyToNull),
+	dob: z.union([
+		z.preprocess(strToDate, z.date()).transform(falsyToNull),
+		z.literal('').transform(() => null),
+	]),
 });
 
 type Client = InferMutationInput<'clients:save'>;

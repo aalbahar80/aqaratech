@@ -1,6 +1,6 @@
 import type { InferMutationInput } from '$lib/client/trpc';
 import { getName } from '$lib/utils/common';
-import { falsyToNull, trim } from '$lib/zodTransformers';
+import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
@@ -17,14 +17,10 @@ export const schema = z.object({
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Phone must contain only numbers',
 		}),
-	dob: z
-		.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-			return;
-		}, z.date())
-		.or(z.literal(''))
-		.nullish()
-		.transform(falsyToNull),
+	dob: z.union([
+		z.preprocess(strToDate, z.date()).transform(falsyToNull),
+		z.literal('').transform(() => null),
+	]),
 	civilid: z
 		.string()
 		.min(12)
@@ -38,14 +34,10 @@ export const schema = z.object({
 	passportNum: z.string().transform(trim).transform(falsyToNull).nullish(),
 	residencyNum: z.string().transform(trim).transform(falsyToNull).nullish(),
 	nationality: z.string().transform(trim).transform(falsyToNull).nullish(),
-	residencyEnd: z
-		.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-			return;
-		}, z.date())
-		.or(z.literal(''))
-		.nullish()
-		.transform(falsyToNull),
+	residencyEnd: z.union([
+		z.preprocess(strToDate, z.date()).transform(falsyToNull),
+		z.literal('').transform(() => null),
+	]),
 });
 
 type Tenant = InferMutationInput<'tenants:save'>;

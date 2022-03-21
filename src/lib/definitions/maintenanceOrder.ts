@@ -1,5 +1,5 @@
 import type { InferMutationInput } from '$lib/client/trpc';
-import { falsyToNull, trim } from '$lib/zodTransformers';
+import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import { z } from 'zod';
 import type { EntityDefinition } from '.';
 
@@ -8,14 +8,10 @@ export const schema = z.object({
 	title: z.string().transform(trim).transform(falsyToNull),
 	description: z.string().transform(trim).transform(falsyToNull).nullish(),
 	status: z.enum(['pending', 'completed', 'cancelled']).nullish(),
-	completedAt: z
-		.preprocess((arg) => {
-			if (typeof arg === 'string' || arg instanceof Date) return new Date(arg);
-			return;
-		}, z.date())
-		.or(z.literal(''))
-		.nullish()
-		.transform(falsyToNull),
+	completedAt: z.union([
+		z.preprocess(strToDate, z.date()).transform(falsyToNull),
+		z.literal('').transform(() => null),
+	]),
 	unitId: z.string().uuid().nullish(),
 	propertyId: z.string().uuid().nullish(),
 	clientId: z.string().uuid().nullish(),
@@ -26,7 +22,7 @@ const defaultForm = (): MaintenanceOrder => ({
 	completedAt: '',
 	title: '',
 	description: '',
-    status: null,
+	status: null,
 	unitId: '',
 	propertyId: '',
 	clientId: '',
