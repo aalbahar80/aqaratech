@@ -17,7 +17,9 @@ static/global.css
 coverage
 coverage/*
 
-# prisma/seed.ts
 src/lib/utils/currency.ts
 
-readme.md
+# Markdown files #
+*.md
+
+/temporal/lib

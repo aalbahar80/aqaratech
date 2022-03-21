@@ -7,6 +7,7 @@ module.exports = {
   },
   // plugins: ['@typescript-eslint', 'deprecation'],
   plugins: ['@typescript-eslint'],
+	ignorePatterns: ['*.cjs'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',

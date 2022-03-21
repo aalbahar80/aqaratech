@@ -134,6 +134,12 @@ yarn run eslint -c ./.eslintrc.cjs --ext .svelte .
 
 # temporal
 yarn run eslint -c ./temporal/.eslintrc.cjs --ignore-path ./temporal/.eslintignore --ext .ts ./temporal
+
+#21 March
+yarn run eslint .
+# Notes: add temporal/lib to .eslintignore in root. For some reason not picked up if placed in .eslintignore in /temporal
+# Unanswered q's:
+## Removing ignorePatterns: ['*.cjs'] from temporal/.eslintrc.cjs causes an error in vscode, but not when running eslint in command line?
 ```
 
 > graphql eslint linter not fully wired up. See eslint config file.
