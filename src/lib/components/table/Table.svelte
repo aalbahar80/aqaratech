@@ -71,6 +71,7 @@
 													class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium"
 												>
 													<a
+														sveltekit:prefetch
 														href={`${$page.url.pathname}/${value}`}
 														class="text-indigo-600 hover:text-indigo-900"
 													>
