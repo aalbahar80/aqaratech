@@ -47,7 +47,7 @@
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
-    "@vitest/ui": "^0.7.4",
+    "@vitest/ui": "^0.7.6",
     "algoliasearch": "^4.13.0",
     "autoprefixer": "^10.4.4",
     "c8": "^7.11.0",
@@ -67,13 +67,13 @@
     "jsdom": "^19.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash-es": "^4.17.21",
-    "logrocket": "^2.2.0",
+    "logrocket": "^2.2.1",
     "ms": "3.0.0-canary.1",
     "nanoid": "^3.3.1",
     "nodemon": "^2.0.15",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.0.2",
-    "posthog-js": "^1.17.9",
+    "posthog-js": "^1.18.0",
     "prettier": "^2.6.0",
     "prettier-plugin-tailwindcss": "^0.1.8",
     "prisma": "^3.11.0",
@@ -90,7 +90,7 @@
     "twilio": "^3.75.1",
     "typescript": "^4.6.2",
     "uuid": "^8.3.2",
-    "vitest": "^0.7.4"
+    "vitest": "^0.7.6"
   },
   "type": "module",
   "dependencies": {
