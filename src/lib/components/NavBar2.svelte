@@ -4,7 +4,6 @@
 		Popover,
 		PopoverButton,
 		PopoverPanel,
-		Transition,
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
