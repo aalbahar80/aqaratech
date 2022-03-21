@@ -16,7 +16,9 @@
 
 		const [trx, nextReminder] = await Promise.all([
 			trpc.query('transactions:read', params.id),
-			trpc.query('transactions:nextReminder', params.id),
+			// needs optimization, load in onMount?
+			// trpc.query('transactions:nextReminder', params.id),
+			new Date().toISOString(),
 		]);
 
 		return { props: { trx, nextReminder } };
