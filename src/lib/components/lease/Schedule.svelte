@@ -7,7 +7,6 @@
 
 	export let errors: any;
 	export let schedule: ReturnType<typeof generateSchedule>;
-	$: console.table(schedule);
 
 	const dispatch = createEventDispatcher<{
 		countChange: number;

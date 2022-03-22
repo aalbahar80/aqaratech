@@ -72,9 +72,10 @@
 				icon={Refresh}
 				text="Renew"
 				as="a"
-				href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}`}
+				href={`/leases/add?leaseId=${lease.id}&renew=true`}
 				class="w-full sm:w-auto"
 			/>
+			<!-- href={`/leases/add?unitId=${lease.unit.id}&tenantId=${lease.tenant.id}&monthlyRent=${lease.monthlyRent}&propertyId=${lease.unit.property.id}`} -->
 
 			<Button
 				icon={DocumentText}

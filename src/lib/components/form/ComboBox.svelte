@@ -15,7 +15,7 @@
 	export let invalidText: string | undefined = '';
 
 	// default selected object
-	export let optionLabel: null | { [key: string]: string } = null;
+	export let optionLabel: null | { [key: string]: any } | undefined = null;
 
 	// id of the default selected option
 	export let value: string | null = '';

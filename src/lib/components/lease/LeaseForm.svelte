@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc from '$lib/client/trpc';
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import {
 		defaultForm,
@@ -27,9 +27,18 @@
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
 	import { v4 as uuidv4 } from 'uuid';
+	import { onMount } from 'svelte';
 
-	const lease = defaultForm();
-	let propertyId = '';
+	export let oldLease: InferQueryOutput<'leases:read'> | undefined;
+
+	let resetUnit = false;
+	const lease = {
+		...defaultForm(),
+		monthlyRent: oldLease?.monthlyRent ?? 0,
+		unitId: oldLease?.unitId ?? null,
+	};
+
+	let propertyId = oldLease?.unit.property.id || '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
 		unitList = await trpc
@@ -161,6 +170,13 @@
 		setData('schedule', newSchedule);
 	};
 	$: console.log({ $data2 }, 'LeaseForm.svelte ~ 158');
+	$: console.log($data2.unitId, 'LeaseForm.svelte ~ 158');
+
+	onMount(() => {
+		if (lease.monthlyRent) {
+			handleAmountChange(lease.monthlyRent);
+		}
+	});
 </script>
 
 <form use:form>
@@ -192,6 +208,8 @@
 							<div class="w-full">
 								<ComboBox
 									entity="tenants"
+									value={oldLease?.tenantId ?? null}
+									optionLabel={oldLease?.tenant ?? null}
 									on:select={(e) => {
 										setData('tenantId', e.detail.id);
 									}}
@@ -235,11 +253,18 @@
 							<div class="sm:w-3/4">
 								<ComboBox
 									entity="properties"
+									value={oldLease?.unit.property.id ?? null}
+									optionLabel={oldLease?.unit.property}
 									on:select={(e) => {
+										if (e.detail.id !== propertyId) {
+											resetUnit = true;
+										}
 										propertyId = e.detail.id;
+										setData('unitId', '');
 									}}
 									on:clear={() => {
 										propertyId = '';
+										setData('unitId', '');
 									}}
 									invalidText={getValue($errors, 'unitId')?.[0]}
 								/>
@@ -257,6 +282,12 @@
 											id="unit"
 											items={unitList}
 											optionIdentifier="id"
+											value={oldLease && !resetUnit
+												? {
+														id: oldLease.unitId,
+														label: oldLease.unit.unitNumber,
+												  }
+												: undefined}
 											on:select={(e) => {
 												setData('unitId', e.detail.id);
 											}}
@@ -399,6 +430,7 @@
 								>
 									Rent
 								</label>
+								<pre>{JSON.stringify(lease.monthlyRent, null, 2)}</pre>
 								<input
 									id="monthlyRent"
 									name="monthlyRent"
