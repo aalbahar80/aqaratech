@@ -3,10 +3,13 @@
 // OR npx prisma db seed
 
 import * as fakerAll from '@faker-js/faker';
-// import * as util from 'util';
-// import prisma from '../src/lib/server/prismaClient';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import pkg, { type Prisma } from '@prisma/client';
+import * as util from 'util';
+import pkg from '@prisma/client';
+import {
+	areas,
+	coordinates,
+	expenseCategories,
+} from '../src/lib/config/constants';
 
 const { PrismaClient } = pkg;
 
@@ -51,29 +54,42 @@ const fakeUnit = (propertyId: string) => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	floor: faker.datatype.number({ min: 1, max: 10 }).toString(),
+	floor: faker.datatype.number({ min: 1, max: 10 }),
 	size: faker.datatype.number({ min: 1, max: 2000 }),
 	bed: faker.datatype.number({ min: 1, max: 10 }),
 	bath: faker.datatype.number({ min: 1, max: 10 }),
 	marketRent: +faker.finance.amount(100, 3000, 0),
 	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	type: faker.random.arrayElement(['شقة', 'محل', 'سرداب', 'مخزن']),
+	type: faker.random.arrayElement([
+		'شقة',
+		'محل',
+		'سرداب',
+		'مخزن',
+		'شاليه',
+		'بيت',
+	]),
 	propertyId,
 });
 
-const fakeProperty = (clientId: string) => ({
-	id: faker.datatype.uuid(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	area: faker.address.cityName(),
-	block: faker.datatype.number({ min: 1, max: 13 }).toString(),
-	street: `شارع ${faker.random.arrayElement([
-		faker.name.lastName(),
-		faker.datatype.number({ min: 1, max: 500 }).toString(),
-	])}`,
-	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	clientId,
-});
+const fakeProperty = (clientId: string) => {
+	const long = faker.random.arrayElement(coordinates)[0];
+	const lat = faker.random.arrayElement(coordinates)[1];
+	return {
+		id: faker.datatype.uuid(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		area: faker.random.arrayElement(areas)[1],
+		block: faker.datatype.number({ min: 1, max: 13 }).toString(),
+		street: `شارع ${faker.random.arrayElement([
+			faker.name.lastName(),
+			faker.datatype.number({ min: 1, max: 500 }).toString(),
+		])}`,
+		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
+		long,
+		lat,
+		clientId,
+	};
+};
 
 const fakeClient = () => ({
 	id: faker.datatype.uuid(),
@@ -90,20 +106,28 @@ const fakeClient = () => ({
 	dob: faker.date.past(),
 });
 
-const fakeTransaction = (leaseId: string) => ({
+const fakeTransaction = (leaseId: string, amount: number) => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	amount: +faker.finance.amount(100, 3000, 0),
-	memo: faker.finance.transactionType(),
+	amount,
+	memo: 'RENT',
+	postDate: faker.date.past(4),
 	dueDate: faker.date.future(1),
 	isPaid: faker.datatype.boolean(),
 	receiptUrl: faker.image.lorempicsum.imageUrl(),
 	leaseId,
 });
 
-const fakeLease = (tenantId: string, unitId: string) => {
-	const start = faker.date.past(4);
+const fakeLease = (
+	tenantId: string,
+	unitId: string,
+	tenantStart: Date,
+	count: number, // nth lease for tenant
+) => {
+	// const start = faker.date.between('2018-01-01', '2022-05-31');
+	let start = new Date(tenantStart);
+	start = new Date(start.setFullYear(start.getFullYear() + count));
 	let end = new Date(start);
 	end = new Date(end.setFullYear(end.getFullYear() + 1));
 	return {
@@ -115,6 +139,7 @@ const fakeLease = (tenantId: string, unitId: string) => {
 		deposit: +faker.finance.amount(100, 3000, 0),
 		monthlyRent: +faker.finance.amount(100, 3000, 0),
 		license: faker.company.bs(),
+		active: true,
 		tenantId,
 		unitId,
 	};
@@ -125,7 +150,7 @@ const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
-	category: faker.finance.transactionType(),
+	category: faker.random.arrayElement(expenseCategories),
 	memo: faker.lorem.sentences(),
 	postDate: faker.date.past(4),
 });
@@ -150,14 +175,24 @@ const cleanupDatabase = async (): Promise<void> => {
 	await prisma.client.deleteMany({});
 };
 
-async function main() {
-	const clientCount = 15;
-	const propertyMax = 10;
-	const unitMax = 20;
-	const tenantCount = 300;
-	const leaseMax = 3;
-	const moCount = 500;
-	const expenseCount = 500;
+async function main(sample = true, clean = false) {
+	let clientCount = 15;
+	let propertyMax = 10;
+	let unitMax = 20;
+	let tenantCount = 300;
+	let leaseMax = 4;
+	let moCount = 500;
+	let expenseCount = 5000;
+
+	if (sample) {
+		clientCount = 3;
+		propertyMax = 2;
+		unitMax = 3;
+		tenantCount = 5;
+		leaseMax = 2;
+		moCount = 2;
+		expenseCount = 2;
+	}
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
@@ -180,11 +215,18 @@ async function main() {
 		? tenants.flatMap((tenant) =>
 				Array.from(
 					{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
-					() =>
-						fakeLease(
+					(_, n) => {
+						const leaseN = fakeLease(
 							tenant.id,
 							units[faker.datatype.number(units.length - 1)].id,
-						),
+							faker.date.between('2018-01-01', '2022-05-31'),
+							n,
+						);
+						// discard lease if it starts after today
+						if (leaseN.start < new Date()) {
+							return leaseN;
+						}
+					},
 				),
 		  )
 		: [];
@@ -192,7 +234,9 @@ async function main() {
 
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
-				Array.from({ length: 12 }, () => fakeTransaction(lease.id)),
+				Array.from({ length: 12 }, () =>
+					fakeTransaction(lease.id, lease.monthlyRent),
+				),
 		  )
 		: [];
 
@@ -264,25 +308,30 @@ async function main() {
 		return expense;
 	});
 
-	// console.log(
-	// 	util.inspect(
-	// 		{
-	// 			clients,
-	// 			properties,
-	// 			units,
-	// 			tenants,
-	// 			leases,
-	// 			transactions,
-	// 			maintenanceOrders,
-	// 			expenses,
-	// 		},
-	// 		{ showHidden: false, depth: null, colors: true },
-	// 	),
-	// );
+	if (sample) {
+		console.log(
+			util.inspect(
+				{
+					clients,
+					properties,
+					units,
+					tenants,
+					leases,
+					transactions,
+					maintenanceOrders,
+					expenses,
+				},
+				{ showHidden: false, depth: null, colors: true },
+			),
+		);
+		return;
+	}
 
 	try {
 		// TODO add a NODE_ENV check to only run this in development
-		// await cleanupDatabase();
+		if (clean) {
+			await cleanupDatabase();
+		}
 
 		await prisma.client.createMany({
 			data: clients,
@@ -325,10 +374,9 @@ async function main() {
 	}
 }
 
-main()
+main(true, false)
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);
-		// throw e;
 	})
 	.finally(() => prisma.$disconnect());
