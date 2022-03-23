@@ -99,6 +99,9 @@
 										optionLabel={data[singular[relationalFields[name]]]}
 										entity={relationalFields[name]}
 										invalidText={getValue($errors, name)?.[0]}
+										on:init={(e) => {
+											setData({ [name]: e.detail.id });
+										}}
 										on:select={(e) => {
 											setData(name, e.detail.id);
 										}}

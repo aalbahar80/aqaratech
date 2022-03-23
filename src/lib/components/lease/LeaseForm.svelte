@@ -169,8 +169,6 @@
 		});
 		setData('schedule', newSchedule);
 	};
-	$: console.log({ $data2 }, 'LeaseForm.svelte ~ 158');
-	$: console.log($data2.unitId, 'LeaseForm.svelte ~ 158');
 
 	onMount(() => {
 		if (lease.monthlyRent) {
@@ -210,6 +208,9 @@
 									entity="tenants"
 									value={oldLease?.tenantId ?? null}
 									optionLabel={oldLease?.tenant ?? null}
+									on:init={(e) => {
+										setData('tenantId', e.detail.id);
+									}}
 									on:select={(e) => {
 										setData('tenantId', e.detail.id);
 									}}

@@ -7,7 +7,9 @@
 
 	type Option = { id: string; label: string };
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		init: { id: string | null };
+	}>();
 	export let entity: Extract<
 		Entity,
 		'tenants' | 'units' | 'properties' | 'clients' | 'leases'
@@ -41,11 +43,11 @@
 	let items: Option[];
 
 	onMount(async () => {
-		// this creates the field in Felte's data store
-		dispatch('select', {
+		// to creates the field in Felte's data store
+		// TODO use felte.initialValues
+		dispatch('init', {
 			id: value,
 		});
-
 		if (loadDefaults) {
 			// always prepare a list of suggested options
 			// if a value is predefined, push it to the top of the list
