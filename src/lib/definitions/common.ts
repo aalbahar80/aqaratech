@@ -13,6 +13,7 @@ export const paginationSchema = z.object({
 		.transform((val) => Number(val) || 20),
 });
 
-export const idSchema = {
-	id: z.string().uuid(),
-};
+export const withId = <T extends z.ZodRawShape>(schema: z.ZodObject<T>) =>
+	schema.extend({
+		id: z.string().uuid(),
+	});
