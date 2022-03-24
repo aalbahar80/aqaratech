@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let src: string;
-	export let titled: boolean = true;
-	export let bordered: boolean = true;
-	export let dark: boolean = false;
+	export let titled = true;
+	export let bordered = false;
+	export let dark = false;
 
 	const buildUrl = (url: string) => {
 		if (bordered || titled || dark) {
