@@ -199,7 +199,7 @@ export const areas: [string, string][] = [
 	['kabd Agricultural', 'كبد الزراعية'],
 ];
 
-export const coordinates = [
+export const coordinates: [number, number][] = [
 	[29.14, 48.12],
 	[29.12, 48.13],
 	[29.09, 48.06],

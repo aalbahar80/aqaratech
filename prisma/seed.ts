@@ -1,3 +1,4 @@
+//@ts-nocheck
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
 // OR npx prisma db seed
@@ -9,7 +10,8 @@ import {
 	areas,
 	coordinates,
 	expenseCategories,
-} from '../src/lib/config/constants';
+} from '../src/lib/config/constants.ts';
+import { addMonths } from 'date-fns';
 
 const { PrismaClient } = pkg;
 
@@ -54,7 +56,7 @@ const fakeUnit = (propertyId: string) => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	floor: faker.datatype.number({ min: 1, max: 10 }),
+	floor: faker.datatype.number({ min: -2, max: 10 }),
 	size: faker.datatype.number({ min: 1, max: 2000 }),
 	bed: faker.datatype.number({ min: 1, max: 10 }),
 	bath: faker.datatype.number({ min: 1, max: 10 }),
@@ -72,8 +74,8 @@ const fakeUnit = (propertyId: string) => ({
 });
 
 const fakeProperty = (clientId: string) => {
-	const long = faker.random.arrayElement(coordinates)[0];
-	const lat = faker.random.arrayElement(coordinates)[1];
+	const lat = faker.random.arrayElement(coordinates)[0];
+	const long = faker.random.arrayElement(coordinates)[1];
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
@@ -106,18 +108,30 @@ const fakeClient = () => ({
 	dob: faker.date.past(),
 });
 
-const fakeTransaction = (leaseId: string, amount: number) => ({
-	id: faker.datatype.uuid(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	amount,
-	memo: 'RENT',
-	postDate: faker.date.past(4),
-	dueDate: faker.date.future(1),
-	isPaid: faker.datatype.boolean(),
-	receiptUrl: faker.image.lorempicsum.imageUrl(),
-	leaseId,
-});
+const fakeTransaction = (
+	leaseId: string,
+	amount: number,
+	leaseStart: Date,
+	count: number,
+) => {
+	const nextMonth = new Date(
+		leaseStart.getFullYear(),
+		leaseStart.getMonth() + 1,
+		2,
+	);
+	return {
+		id: faker.datatype.uuid(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		amount,
+		memo: 'RENT',
+		postDate: addMonths(nextMonth, count),
+		dueDate: faker.date.future(1),
+		isPaid: Math.random() > 0.15,
+		receiptUrl: faker.image.lorempicsum.imageUrl(),
+		leaseId,
+	};
+};
 
 const fakeLease = (
 	tenantId: string,
@@ -186,12 +200,12 @@ async function main(sample = true, clean = false) {
 
 	if (sample) {
 		clientCount = 3;
-		propertyMax = 2;
+		propertyMax = 3;
 		unitMax = 3;
 		tenantCount = 5;
-		leaseMax = 2;
-		moCount = 2;
-		expenseCount = 2;
+		leaseMax = 4;
+		moCount = 4;
+		expenseCount = 4;
 	}
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
@@ -222,8 +236,8 @@ async function main(sample = true, clean = false) {
 							faker.date.between('2018-01-01', '2022-05-31'),
 							n,
 						);
-						// discard lease if it starts after today
-						if (leaseN.start < new Date()) {
+						// discard lease if it starts after today. Unless it's the first
+						if (n !== 0 || leaseN.start < new Date()) {
 							return leaseN;
 						}
 					},
@@ -234,8 +248,8 @@ async function main(sample = true, clean = false) {
 
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
-				Array.from({ length: 12 }, () =>
-					fakeTransaction(lease.id, lease.monthlyRent),
+				Array.from({ length: 12 }, (_, n) =>
+					fakeTransaction(lease.id, lease.monthlyRent, lease.start, n),
 				),
 		  )
 		: [];
