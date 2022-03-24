@@ -17,9 +17,9 @@ export default trpc
 				include: {
 					property: true,
 					leases: {
-						include: {
-							tenant: true,
-						},
+						// include: {
+						// 	tenant: true,
+						// },
 					},
 				},
 			});
