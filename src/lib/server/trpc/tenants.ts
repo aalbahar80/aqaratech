@@ -29,6 +29,7 @@ export default trpc
 					createdAt: true,
 					updatedAt: true,
 					leases: {
+						orderBy: { start: 'desc' },
 						include: {
 							transactions: true,
 							unit: {
