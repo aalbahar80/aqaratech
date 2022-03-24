@@ -71,6 +71,5 @@
 	</Heading>
 
 	<DetailsPane {details} />
-	<pre>{JSON.stringify(unit, null, 2)}</pre>
-	<!-- <LeasesCard leases={unit.leases} unitId={unit.id} /> -->
+	<LeasesCard leases={unit.leases} unitId={unit.id} />
 </div>
