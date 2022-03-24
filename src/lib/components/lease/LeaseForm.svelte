@@ -121,6 +121,7 @@
 					dueDate: e.postDate,
 					isPaid: false,
 					...e,
+					postDate: e.postDate,
 				}));
 				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
 				console.log(`created ${newTrxs} transactions`);

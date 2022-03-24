@@ -41,6 +41,7 @@
 		case 'end':
 		case 'start':
 		case 'dueDate':
+		case 'postDate':
 		case 'residencyEnd':
 		case 'completedAt':
 			type = 'date';
