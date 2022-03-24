@@ -11,7 +11,7 @@ import {
 	coordinates,
 	expenseCategories,
 } from '../src/lib/config/constants.ts';
-import { addMonths } from 'date-fns';
+import { addMonths, addDays, subDays } from 'date-fns';
 
 const { PrismaClient } = pkg;
 
@@ -117,7 +117,7 @@ const fakeTransaction = (
 	const nextMonth = new Date(
 		leaseStart.getFullYear(),
 		leaseStart.getMonth() + 1,
-		2,
+		1,
 	);
 	return {
 		id: faker.datatype.uuid(),
@@ -133,17 +133,8 @@ const fakeTransaction = (
 	};
 };
 
-const fakeLease = (
-	tenantId: string,
-	unitId: string,
-	tenantStart: Date,
-	count: number, // nth lease for tenant
-) => {
-	// const start = faker.date.between('2018-01-01', '2022-05-31');
-	let start = new Date(tenantStart);
-	start = new Date(start.setFullYear(start.getFullYear() + count));
-	let end = new Date(start);
-	end = new Date(end.setFullYear(end.getFullYear() + 1));
+const fakeLease = (tenantId: string, unitId: string, start: Date) => {
+	const end = subDays(addMonths(start, 12), 1);
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: start,
@@ -189,12 +180,13 @@ const cleanupDatabase = async (): Promise<void> => {
 	await prisma.client.deleteMany({});
 };
 
-async function main(sample = true, clean = false) {
-	let clientCount = 15;
-	let propertyMax = 10;
-	let unitMax = 20;
-	let tenantCount = 300;
-	let leaseMax = 4;
+async function main({
+	sample = true,
+	clean = false,
+}: { sample?: boolean; clean?: boolean } = {}) {
+	let clientCount = 1;
+	let propertyMax = 15;
+	let unitMax = 15;
 	let moCount = 500;
 	let expenseCount = 5000;
 
@@ -202,8 +194,6 @@ async function main(sample = true, clean = false) {
 		clientCount = 3;
 		propertyMax = 3;
 		unitMax = 3;
-		tenantCount = 5;
-		leaseMax = 4;
 		moCount = 4;
 		expenseCount = 4;
 	}
@@ -215,39 +205,42 @@ async function main(sample = true, clean = false) {
 			() => fakeProperty(client.id),
 		),
 	);
-	console.log(properties);
 	const units = properties.flatMap((property) =>
 		Array.from(
 			{ length: faker.datatype.number({ min: 0, max: unitMax }) },
 			() => fakeUnit(property.id),
 		),
 	);
-	console.log(units);
-	const tenants = Array.from({ length: tenantCount }, fakeTenant);
+	const tenants: ReturnType<typeof fakeTenant>[] = [];
+	const leases: ReturnType<typeof fakeLease>[] = [];
+	units.forEach((unit) => {
+		let date = new Date('2018-01-01');
+		let tenantN;
+		while (date < new Date()) {
+			if (!tenantN) {
+				// for 1st iteration
+				tenantN = fakeTenant();
+			}
+			const leaseN = fakeLease(tenantN.id, unit.id, date);
+			leases.push(leaseN);
 
-	const leases = units.length
-		? tenants
-				.flatMap((tenant) => {
-					return Array.from(
-					{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
-					(_, n) => {
-						const leaseN = fakeLease(
-							tenant.id,
-							units[faker.datatype.number(units.length - 1)].id,
-							faker.date.between('2018-01-01', '2022-05-31'),
-							n,
-						);
-						// discard lease if it starts after today. Unless it's the first
-							if (n === 0 || leaseN.start < new Date()) {
-							return leaseN;
-						}
-							return null;
-					},
-					);
-				})
-				// delete nulls from the array
-				.filter(Boolean)
-		: [];
+			const renewal = Math.random() > 0.3;
+			if (leaseN.end > new Date()) {
+				// future reached, move to next unit
+				break;
+			} else if (renewal) {
+				date = addDays(leaseN.end, 1);
+				continue;
+			} else {
+				// lease ended, move to next tenant
+				const tenantSearch = faker.datatype.number({ min: 1, max: 30 * 6 });
+				date = addDays(leaseN.end, tenantSearch);
+				tenantN = fakeTenant();
+				tenants.push(tenantN);
+				continue;
+			}
+		}
+	});
 
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
@@ -394,9 +387,11 @@ async function main(sample = true, clean = false) {
 	}
 }
 
-main(true, false)
-	.catch((e) => {
-		console.error(e);
-		process.exit(1);
-	})
-	.finally(() => prisma.$disconnect());
+for (let i = 0; i < 15; i++) {
+	main({ sample: true, clean: false })
+		.catch((e) => {
+			console.error(e);
+			process.exit(1);
+		})
+		.finally(() => prisma.$disconnect());
+}
