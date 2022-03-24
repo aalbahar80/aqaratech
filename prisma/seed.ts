@@ -74,8 +74,8 @@ const fakeUnit = (propertyId: string) => ({
 });
 
 const fakeProperty = (clientId: string) => {
-	const lat = faker.random.arrayElement(coordinates)[0];
-	const long = faker.random.arrayElement(coordinates)[1];
+	const random = Math.floor(Math.random() * coordinates.length);
+	const propCoordinates = coordinates[random];
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
@@ -87,8 +87,8 @@ const fakeProperty = (clientId: string) => {
 			faker.datatype.number({ min: 1, max: 500 }).toString(),
 		])}`,
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
-		long,
-		lat,
+		lat: propCoordinates[0],
+		long: propCoordinates[1],
 		clientId,
 	};
 };
