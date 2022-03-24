@@ -121,12 +121,12 @@ const fakeTransaction = (
 	);
 	return {
 		id: faker.datatype.uuid(),
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
+		createdAt: leaseStart,
+		updatedAt: leaseStart,
 		amount,
 		memo: 'RENT',
 		postDate: addMonths(nextMonth, count),
-		dueDate: faker.date.future(1),
+		dueDate: addMonths(nextMonth, count),
 		isPaid: Math.random() > 0.15,
 		receiptUrl: faker.image.lorempicsum.imageUrl(),
 		leaseId,
@@ -146,8 +146,8 @@ const fakeLease = (
 	end = new Date(end.setFullYear(end.getFullYear() + 1));
 	return {
 		id: faker.datatype.uuid(),
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
+		createdAt: start,
+		updatedAt: start,
 		start,
 		end,
 		deposit: +faker.finance.amount(100, 3000, 0),
@@ -174,7 +174,7 @@ const fakeMaintenanceOrder = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	completedAt: faker.date.future(1),
-	title: faker.lorem.words(4),
+	title: faker.company.bs(),
 	description: faker.lorem.sentences(),
 });
 
@@ -226,8 +226,9 @@ async function main(sample = true, clean = false) {
 	const tenants = Array.from({ length: tenantCount }, fakeTenant);
 
 	const leases = units.length
-		? tenants.flatMap((tenant) =>
-				Array.from(
+		? tenants
+				.flatMap((tenant) => {
+					return Array.from(
 					{ length: faker.datatype.number({ min: 0, max: leaseMax }) },
 					(_, n) => {
 						const leaseN = fakeLease(
@@ -237,14 +238,16 @@ async function main(sample = true, clean = false) {
 							n,
 						);
 						// discard lease if it starts after today. Unless it's the first
-						if (n !== 0 || leaseN.start < new Date()) {
+							if (n === 0 || leaseN.start < new Date()) {
 							return leaseN;
 						}
+							return null;
 					},
-				),
-		  )
+					);
+				})
+				// delete nulls from the array
+				.filter(Boolean)
 		: [];
-	console.log(leases);
 
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
@@ -342,6 +345,9 @@ async function main(sample = true, clean = false) {
 	}
 
 	try {
+		console.log(
+			`perparing to insert \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`,
+		);
 		// TODO add a NODE_ENV check to only run this in development
 		if (clean) {
 			await cleanupDatabase();
