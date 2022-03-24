@@ -1,4 +1,4 @@
-//@ts-nocheck
+// @ts-nocheck
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
 // OR npx prisma db seed
@@ -80,15 +80,15 @@ const fakeProperty = (clientId: string) => {
 		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
-		area: faker.random.arrayElement(areas)[1],
+		area: areas[Math.floor(Math.random() * areas.length)]?.[1] ?? null,
 		block: faker.datatype.number({ min: 1, max: 13 }).toString(),
 		street: `شارع ${faker.random.arrayElement([
 			faker.name.lastName(),
 			faker.datatype.number({ min: 1, max: 500 }).toString(),
 		])}`,
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
-		lat: propCoordinates[0],
-		long: propCoordinates[1],
+		lat: propCoordinates?.[0] ?? 0,
+		long: propCoordinates?.[1] ?? 0,
 		clientId,
 	};
 };
@@ -178,17 +178,19 @@ const cleanupDatabase = async (): Promise<void> => {
 	await prisma.unit.deleteMany({});
 	await prisma.property.deleteMany({});
 	await prisma.client.deleteMany({});
+	await prisma.listing.deleteMany({});
 };
 
 async function main({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
-	let clientCount = 1;
+	let clientCount = 15;
 	let propertyMax = 15;
 	let unitMax = 15;
-	let moCount = 500;
+	let moCount = 2500;
 	let expenseCount = 5000;
+	const min = 0;
 
 	if (sample) {
 		clientCount = 3;
@@ -201,26 +203,22 @@ async function main({
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
 		Array.from(
-			{ length: faker.datatype.number({ min: 0, max: propertyMax }) },
+			{ length: faker.datatype.number({ min, max: propertyMax }) },
 			() => fakeProperty(client.id),
 		),
 	);
 	const units = properties.flatMap((property) =>
-		Array.from(
-			{ length: faker.datatype.number({ min: 0, max: unitMax }) },
-			() => fakeUnit(property.id),
+		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
+			fakeUnit(property.id),
 		),
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit) => {
 		let date = new Date('2018-01-01');
-		let tenantN;
+		let tenantN = fakeTenant();
+		tenants.push(tenantN);
 		while (date < new Date()) {
-			if (!tenantN) {
-				// for 1st iteration
-				tenantN = fakeTenant();
-			}
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
 			leases.push(leaseN);
 
@@ -242,6 +240,13 @@ async function main({
 		}
 	});
 
+	// test that all tenantIds in leases are in tenants
+	leases.forEach((lease) => {
+		if (!tenants.find((tenant) => tenant.id === lease.tenantId)) {
+			throw new Error(`Tenant ${lease.tenantId} not found in tenants`);
+		}
+	});
+
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
 				Array.from({ length: 12 }, (_, n) =>
@@ -259,7 +264,7 @@ async function main({
 				...mo,
 				clientId:
 					clients.length > 0
-						? clients[faker.datatype.number(clients.length - 1)].id
+						? clients[faker.datatype.number(clients.length - 1)]?.id ?? null
 						: null,
 			};
 		}
@@ -268,7 +273,8 @@ async function main({
 				...mo,
 				propertyId:
 					properties.length > 0
-						? properties[faker.datatype.number(properties.length - 1)].id
+						? properties[faker.datatype.number(properties.length - 1)]?.id ??
+						  null
 						: null,
 			};
 		}
@@ -277,7 +283,7 @@ async function main({
 				...mo,
 				unitId:
 					units.length > 0
-						? units[faker.datatype.number(units.length - 1)].id
+						? units[faker.datatype.number(units.length - 1)]?.id ?? null
 						: null,
 			};
 		}
@@ -293,7 +299,7 @@ async function main({
 				...expense,
 				clientId:
 					clients.length > 0
-						? clients[faker.datatype.number(clients.length - 1)].id
+						? clients[faker.datatype.number(clients.length - 1)]?.id ?? null
 						: null,
 			};
 		}
@@ -302,7 +308,8 @@ async function main({
 				...expense,
 				propertyId:
 					properties.length > 0
-						? properties[faker.datatype.number(properties.length - 1)].id
+						? properties[faker.datatype.number(properties.length - 1)]?.id ??
+						  null
 						: null,
 			};
 		}
@@ -311,7 +318,7 @@ async function main({
 				...expense,
 				unitId:
 					units.length > 0
-						? units[faker.datatype.number(units.length - 1)].id
+						? units[faker.datatype.number(units.length - 1)]?.id ?? null
 						: null,
 			};
 		}
@@ -368,16 +375,41 @@ async function main({
 			});
 			console.log('leases created');
 		}
+		// define a function to split the maintenance orders into n chunks
+		const split = <T>(array: T[], n: number): T[][] => {
+			const chunked = [];
+			let i;
+			let j;
+			for (i = 0, j = array.length; i < j; i += n) {
+				chunked.push(array.slice(i, i + n));
+			}
+			return chunked;
+		};
+
 		if (transactions.length) {
-			await prisma.transaction.createMany({
-				data: transactions,
-			});
-			console.log('transactions created');
+			// split the maintenance orders into chunks of 10
+			const transactionsChunks = split(transactions, 1000);
+			// create the chunks
+			transactionsChunks.forEach(async (chunk) => {
+				await prisma.transaction.createMany({
+					data: chunk,
+				});
+			}),
+				console.log('transactions created');
 		}
-		await prisma.maintenanceOrder.createMany({
-			data: maintenanceOrders,
-		});
-		console.log('maintenance orders created');
+
+		if (maintenanceOrders.length) {
+			// split the maintenance orders into chunks of 10
+			const maintenanceOrdersChunks = split(maintenanceOrders, 1000);
+			// create the chunks
+			maintenanceOrdersChunks.forEach(async (chunk) => {
+				await prisma.maintenanceOrder.createMany({
+					data: chunk,
+				});
+			}),
+				console.log('maintenance orders created');
+		}
+
 		await prisma.expense.createMany({
 			data: expenses,
 		});
@@ -387,11 +419,9 @@ async function main({
 	}
 }
 
-for (let i = 0; i < 15; i++) {
-	main({ sample: true, clean: false })
-		.catch((e) => {
-			console.error(e);
-			process.exit(1);
-		})
-		.finally(() => prisma.$disconnect());
-}
+main({ sample: true, clean: false })
+	.catch((e) => {
+		console.error(e);
+		process.exit(1);
+	})
+	.finally(() => prisma.$disconnect());
