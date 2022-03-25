@@ -29,3 +29,10 @@
 		iframeResizer({ log: true }, iframe);
 	}}
 />
+
+<style>
+	/* fix iOS safari scroll */
+	iframe {
+		-webkit-overflow-scrolling: touch;
+	}
+</style>
