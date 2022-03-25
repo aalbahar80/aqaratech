@@ -17,15 +17,13 @@
 	<script src="https://metabase.letand.be/app/iframeResizer.js"></script>
 </svelte:head>
 
-<div class="bg-white">
-	<iframe
-		title="dashboard2"
-		src={iframeUrl}
-		frameborder="0"
-		allowtransparency
-		class="w-full"
-		on:load={() => {
-			iFrameResize({}, this);
-		}}
-	/>
-</div>
+<iframe
+	title="dashboard2"
+	src={iframeUrl}
+	frameborder="0"
+	allowtransparency
+	class="w-px min-w-full"
+	on:load={() => {
+		iFrameResize({}, this);
+	}}
+/>
