@@ -1,4 +1,3 @@
-// @ts-nocheck
 // To run this file:
 // node --loader ts-node/esm prisma/seed.ts
 // OR npx prisma db seed
@@ -10,7 +9,7 @@ import {
 	areas,
 	coordinates,
 	expenseCategories,
-} from '../src/lib/config/constants.ts';
+} from '../src/lib/config/constants.js';
 import { addMonths, addDays, subDays } from 'date-fns';
 
 const { PrismaClient } = pkg;
