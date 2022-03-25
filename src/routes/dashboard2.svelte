@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
 	import type { Load } from '@sveltejs/kit';
+	import { iframeResizer } from 'iframe-resizer';
+
 	export const load: Load = async ({ fetch }) => {
 		const res = await fetch('/api/metabase');
 		const { iframeUrl } = await res.json();
@@ -11,19 +13,19 @@
 
 <script lang="ts">
 	export let iframeUrl: string;
+
+	let iframe: HTMLIFrameElement;
 </script>
 
-<svelte:head>
-	<script src="https://metabase.letand.be/app/iframeResizer.js"></script>
-</svelte:head>
-
 <iframe
-	title="dashboard2"
+	bind:this={iframe}
+	title="myIframe"
 	src={iframeUrl}
 	frameborder="0"
 	allowtransparency
 	class="w-px min-w-full"
 	on:load={() => {
-		iFrameResize({}, this);
+		// try using e.target?
+		iframeResizer({ log: true }, iframe);
 	}}
 />
