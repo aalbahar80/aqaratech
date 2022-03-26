@@ -1,4 +1,5 @@
 import type { InferMutationInput } from '$lib/client/trpc';
+import { concatIfExists } from '$lib/utils/common';
 import {
 	falsyToNull,
 	falsyToNullExceptZero,
@@ -54,7 +55,16 @@ const defaultForm = (): Unit => ({
 	propertyId: '',
 });
 
-const label: typeof definition['label'] = (item) => item.unitNumber || item.id;
+export const getLabel = <
+	T extends {
+		type: string | null;
+		unitNumber: string | null;
+	},
+>(
+	item: T,
+) => concatIfExists([item.type, item.unitNumber]);
+
+const label: typeof definition['label'] = (item) => getLabel(item);
 
 const definition: EntityDefinition<'units'> = { schema, defaultForm, label };
 
