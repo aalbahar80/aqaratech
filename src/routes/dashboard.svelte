@@ -34,4 +34,10 @@
 	<Chart
 		src="http://metabase.letand.be/public/question/16a8fe1b-7ef5-4fda-ac80-431845f6795b"
 	/>
+	<Chart
+		src="http://metabase.letand.be/public/dashboard/52b720b7-d85a-4391-b8f9-0be5d364f63c"
+	/>
+	<Chart
+		src="http://metabase.letand.be/public/dashboard/4d6a4980-b35e-4ea9-9f83-1e06235b9d43"
+	/>
 </div>
