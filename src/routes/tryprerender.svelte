@@ -1,9 +1,9 @@
 <script context="module">
+	import Chart from 'chart.js/auto/auto.esm';
 	export const prerender = true;
 </script>
 
 <script lang="ts">
-	import Chart from 'chart.js/auto';
 	import { onMount } from 'svelte';
 
 	let ctx: HTMLCanvasElement;
