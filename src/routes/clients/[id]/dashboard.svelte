@@ -1,7 +1,10 @@
 <script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
+	import Select from 'svelte-select';
+	// import Select from 'svelte-select/src/Select.svelte';
 	import type { Load } from './dashboard';
 
 	export const load: Load = async ({ params }) => {
@@ -11,9 +14,6 @@
 </script>
 
 <script lang="ts">
-	// import Select from 'svelte-select/src/Select.svelte';
-	import Select from 'svelte-select';
-
 	export let client: InferQueryOutput<'clients:dashboard'>;
 
 	type Option = { value: string; label: string };
@@ -54,7 +54,6 @@
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
-	$: console.log({ unitOptions }, 'd3.svelte ~ 56');
 	$: console.log(selectedProperty);
 	$: console.log(selectedUnit);
 </script>
@@ -104,6 +103,9 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Chart -->
+	<DashCard title="Rent Income" subtitle="The total amount of rent due." />
 </div>
 
 <style lang="postcss">
