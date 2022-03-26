@@ -41,9 +41,7 @@
 
 		<ul class="divide-y divide-gray-200">
 			{#each units as unit (unit.id)}
-				{@const vacant =
-					!unit.leases.length ||
-					unit.leases.some((lease) => lease.end < new Date())}
+				{@const occupied = unit.leases.some((lease) => lease.end > new Date())}
 				{@const icons = [
 					{
 						label: unit.bed,
@@ -76,10 +74,10 @@
 								<div class="ml-2 flex flex-shrink-0">
 									<p
 										class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
-										class:badge-green={!vacant}
-										class:badge-yellow={vacant}
+										class:badge-green={!occupied}
+										class:badge-yellow={occupied}
 									>
-										{vacant ? 'Vacant' : 'Occupied'}
+										{occupied ? 'Occupied' : 'Vacant'}
 									</p>
 								</div>
 							</div>
