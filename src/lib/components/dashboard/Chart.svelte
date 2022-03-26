@@ -1,17 +1,25 @@
 <script lang="ts">
-	import Chart from 'chart.js/auto/auto.esm';
+	import Chart, {
+		type ChartData,
+		type ChartOptions,
+	} from 'chart.js/auto/auto.esm';
 
-	function action(node, config) {
+	type ChartStuff = {
+		data: ChartData<'bar'>;
+		options: ChartOptions<'bar'>;
+	};
+
+	function action(node: HTMLCanvasElement, config: ChartStuff) {
 		const chart = new Chart(node, {
 			type: 'bar',
 			...config,
 		});
 
 		return {
-			update(config) {
+			update(newConfig: ChartStuff) {
 				chart.data = {
 					...chart.data,
-					...config.data,
+					...newConfig.data,
 				};
 				chart.update();
 			},
