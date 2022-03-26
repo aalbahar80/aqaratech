@@ -28,7 +28,7 @@
 			},
 		};
 	}
-	let getConfig = () => ({
+	let getConfig = (): ChartStuff => ({
 		data: {
 			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 			datasets: [
@@ -56,6 +56,11 @@
 			],
 		},
 		options: {
+			interaction: {
+				mode: 'nearest',
+				axis: 'x',
+				intersect: false,
+			},
 			scales: {
 				y: {
 					beginAtZero: true,
