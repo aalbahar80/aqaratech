@@ -1,17 +1,20 @@
 import prismaClient from '$lib/server/prismaClient';
 import { groupIncome } from '$lib/utils/group';
+import { strToDate } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
+export const filterSchema = z.object({
+	clientId: z.string().uuid(),
+	start: z.preprocess(strToDate, z.date()),
+	end: z.preprocess(strToDate, z.date()),
+	propertyId: z.string().uuid().nullish(),
+	unitId: z.string().uuid().nullish(),
+});
+
 export default trpc.router().query('income', {
-	input: z.object({
-		clientId: z.string().uuid(),
-		start: z.date(),
-		end: z.date(),
-		propertyId: z.string().uuid().optional(),
-		unitId: z.string().uuid().optional(),
-	}),
+	input: filterSchema,
 	resolve: async ({ input: { end, start, propertyId, clientId } }) => {
 		const data = await prismaClient.transaction.findMany({
 			where: {

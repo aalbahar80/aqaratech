@@ -4,33 +4,39 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
+	import type { filterSchema } from '$lib/server/trpc/charts';
+	import { tick } from 'svelte';
 	import Select from 'svelte-select';
+	import type { z } from 'zod';
 	// import Select from 'svelte-select/src/Select.svelte';
 	import type { Load } from './dashboard';
 
+	type Filter = z.infer<typeof filterSchema>;
+
 	export const load: Load = async ({ params }) => {
-		const defaultFilters = {
+		const defaultFilter: Filter = {
 			// TODO use UTC, fns
 			start: new Date(2020, 0, 1),
 			end: new Date(2021, 3, 1),
 			propertyId: undefined,
 			unitId: undefined,
+			clientId: params.id,
 		};
 
 		const [client, data] = await Promise.all([
 			trpc.query('clients:dashboard', params.id), // TODO use read?
 			trpc.query('charts:income', {
-				clientId: params.id,
-				...defaultFilters,
+				...defaultFilter,
 			}),
 		]);
-		return { props: { client, data } };
+		return { props: { client, data, filter: defaultFilter } };
 	};
 </script>
 
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
 	export let data: InferQueryOutput<'charts:income'>;
+	export let filter: Filter;
 
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
@@ -68,8 +74,11 @@
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
-	$: console.log(selectedProperty);
-	$: console.log(selectedUnit);
+
+	const handleFilter = async (newFilter: Filter) => {
+		console.log({ newFilter }, 'dashboard.svelte ~ 82');
+		data = await trpc.query('charts:income', newFilter);
+	};
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -86,8 +95,28 @@
 					isSearchable={false}
 				/>
 			</div>
-			<input type="date" name="start" class="date-input" />
-			<input type="date" name="end" class="date-input" />
+			<input
+				type="date"
+				name="start"
+				class="date-input"
+				on:change={(e) => {
+					handleFilter({
+						...filter,
+						start: e.currentTarget.valueAsDate,
+					});
+				}}
+			/>
+			<input
+				type="date"
+				name="end"
+				class="date-input"
+				on:change={(e) => {
+					handleFilter({
+						...filter,
+						end: e.currentTarget.valueAsDate,
+					});
+				}}
+			/>
 		</div>
 
 		<!-- Property/Unit Filters -->
@@ -102,6 +131,13 @@
 						selectedProperty = null;
 						selectedUnit = null;
 					}}
+					on:select={(e) => {
+						handleFilter({
+							...filter,
+							propertyId: e.detail.value,
+							unitId: null,
+						});
+					}}
 					showIndicator
 				/>
 			</div>
@@ -114,6 +150,12 @@
 					bind:value={selectedUnit}
 					isDisabled={!selectedProperty}
 					showIndicator
+					on:select={(e) => {
+						handleFilter({
+							...filter,
+							unitId: e.detail.value.value,
+						});
+					}}
 				/>
 			</div>
 		</div>
@@ -124,6 +166,7 @@
 		<Chart {data} />
 	</DashCard>
 </div>
+<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <style lang="postcss">
 	.date-input {
