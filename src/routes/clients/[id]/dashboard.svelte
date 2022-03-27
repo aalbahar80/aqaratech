@@ -69,6 +69,7 @@
 					value={rangeOptions[0]}
 					isClearable={false}
 					showIndicator
+					isSearchable={false}
 				/>
 			</div>
 			<input type="date" name="start" class="date-input" />

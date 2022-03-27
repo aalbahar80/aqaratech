@@ -33,25 +33,18 @@
 			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 			datasets: [
 				{
-					label: '# of Votes',
-					data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)),
-					backgroundColor: [
-						'#003f5c',
-						'#444e86',
-						'#955196',
-						'#dd5182',
-						'#ff6e54',
-						'#ffa600',
-					],
-					borderColor: [
-						'#003f5c',
-						'#444e86',
-						'#955196',
-						'#dd5182',
-						'#ff6e54',
-						'#ffa600',
-					],
-					borderWidth: 1,
+					label: 'Paid',
+					data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 5)),
+					backgroundColor: ['hsl(199, 100%, 18%)'],
+					borderColor: ['hsl(199, 100%, 28%)'],
+					borderWidth: 5,
+				},
+				{
+					label: 'Unpaid',
+					data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 5)),
+					backgroundColor: ['hsl(348, 83%, 64%)'],
+					borderColor: ['hsl(348, 83%, 84%)'],
+					borderWidth: 5,
 				},
 			],
 		},
@@ -64,6 +57,9 @@
 			scales: {
 				y: {
 					beginAtZero: true,
+				},
+				x: {
+					stacked: true,
 				},
 			},
 		},
