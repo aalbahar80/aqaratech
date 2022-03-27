@@ -13,8 +13,9 @@ if (browser) {
 } else if (process.env.VERCEL && process.env.VERCEL_URL) {
 	url = `https://${process.env.VERCEL_URL}/trpc`;
 } else {
-	const message = 'Could not determine trpc url';
-	throw new Error(message);
+	const message = 'Could not determine trpc url, assuming localhost';
+	console.warn(message);
+	url = 'http://localhost:3000/trpc';
 }
 
 const client = trpc.createTRPCClient<Router>({

@@ -11,6 +11,6 @@
 		<p>{subtitle}</p>
 	</div>
 	<div>
-		<Chart />
+		<!-- <Chart /> -->
 	</div>
 </div>

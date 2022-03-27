@@ -17,6 +17,9 @@ export function generateSchedule({
 	const newSchedule = [];
 	// get the date of the 1st day of the next month
 	// const leaseStart = new Date(lease.scheduleStart);
+
+	// Check out date-fns eachMonthOfInterval
+	// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
 	const nextMonth = new Date(
 		scheduleStart.getFullYear(),
 		scheduleStart.getMonth() + 1,

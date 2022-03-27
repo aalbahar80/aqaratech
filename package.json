@@ -53,6 +53,7 @@
     "autoprefixer": "^10.4.4",
     "c8": "^7.11.0",
     "chart.js": "^3.7.1",
+    "chartjs-adapter-date-fns": "^2.0.0",
     "concurrently": "^7.0.0",
     "cookie": "^0.4.2",
     "cross-env": "^7.0.3",

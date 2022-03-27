@@ -17,8 +17,10 @@ if (browser) {
 } else if (process.env.VERCEL && process.env.VERCEL_URL) {
 	url = `https://${process.env.VERCEL_URL}`;
 } else {
-	const message = 'Could not determine url. transactions.ts ~ 19';
-	throw new Error(message);
+	const message =
+		'Could not determine url. transactions.ts ~ 19, assuming localhost';
+	console.warn(message);
+	url = 'http://localhost:3000';
 }
 
 export default trpc

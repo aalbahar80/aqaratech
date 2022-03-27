@@ -1,6 +1,8 @@
 <script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import Chart from '$lib/components/dashboard/Chart.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import SampleChart from '$lib/components/dashboard/SampleChart.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import Select from 'svelte-select';
@@ -8,19 +10,30 @@
 	import type { Load } from './dashboard';
 
 	export const load: Load = async ({ params }) => {
+		const defaultFilters = {
+			// TODO use UTC, fns
+			start: new Date(2020, 0, 1),
+			end: new Date(2020, 3, 1),
+			propertyId: undefined,
+			unitId: undefined,
+		};
+
 		const client = await trpc.query('clients:dashboard', params.id);
-		return { props: { client } };
+		const data = await trpc.query('charts:income', {
+			clientId: params.id,
+			...defaultFilters,
+		});
+		return { props: { client, data } };
 	};
 </script>
 
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
+	export let data: InferQueryOutput<'charts:income'>;
 
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
 	const rangeOptions: Option[] = [
-		{ value: 'CURRENTMONTH', label: 'Current Month' },
-		{ value: 'LASTMONTH', label: 'Last Month' },
 		{ value: 'LAST3MONTHS', label: 'Last 3 Months' },
 		{ value: 'LAST6MONTHS', label: 'Last 6 Months' },
 		{ value: 'LAST12MONTHS', label: 'Last 12 Months' },
@@ -66,7 +79,7 @@
 			<div class="w-1/2">
 				<Select
 					items={rangeOptions}
-					value={rangeOptions[0]}
+					value={rangeOptions[1]}
 					isClearable={false}
 					showIndicator
 					isSearchable={false}
@@ -107,6 +120,8 @@
 
 	<!-- Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due." />
+	<SampleChart />
+	<Chart {data} />
 </div>
 
 <style lang="postcss">
