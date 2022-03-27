@@ -21,10 +21,10 @@
 							xAxisKey: 'date',
 						},
 						backgroundColor: ['hsl(199, 100%, 18%)'],
-						borderColor: ['hsl(199, 100%, 48%)'],
-						borderWidth: 0,
+						borderRadius: 10,
 					},
 					{
+						borderRadius: 10,
 						label: 'Unpaid',
 						data: data.filter((i) => !i.isPaid),
 						parsing: {
@@ -32,8 +32,6 @@
 							xAxisKey: 'date',
 						},
 						backgroundColor: ['hsl(348, 83%, 64%)'],
-						borderColor: ['hsl(348, 83%, 84%)'],
-						borderWidth: 0,
 					},
 				],
 			},
