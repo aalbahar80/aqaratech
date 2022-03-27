@@ -2,6 +2,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/dashboard/Chart.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import type { filterSchema } from '$lib/server/trpc/charts';
@@ -163,7 +164,7 @@
 
 	<!-- Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
-		<Chart {data} />
+		<canvas width="400" height="400" use:incomeChart={data} />
 	</DashCard>
 </div>
 <pre>{JSON.stringify(data, null, 2)}</pre>
