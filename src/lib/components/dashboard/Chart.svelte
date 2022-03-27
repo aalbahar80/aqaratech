@@ -14,7 +14,7 @@
 			data: {
 				datasets: [
 					{
-						label: 'Paid rent',
+						label: 'Paid',
 						data: data.filter((i) => i.isPaid),
 						parsing: {
 							yAxisKey: 'amount',
@@ -25,7 +25,7 @@
 						borderWidth: 0,
 					},
 					{
-						label: 'Unpaid rent',
+						label: 'Unpaid',
 						data: data.filter((i) => !i.isPaid),
 						parsing: {
 							yAxisKey: 'amount',
@@ -56,15 +56,28 @@
 						stacked: true,
 						grid: {
 							display: false,
+							// drawBorder: false,
 						},
 					},
 					y: {
 						stacked: true,
 						ticks: {
-							callback: (value) =>
-								Intl.NumberFormat('en-GB', {
-									notation: 'compact',
-								}).format(Number(value)),
+							callback: (value, index, values) =>
+								// hide the first tick
+								index == values.length - 1
+									? undefined
+									: // format the value
+									  Intl.NumberFormat('en-GB', {
+											notation: 'compact',
+									  }).format(Number(value)),
+							// maxTicksLimit: 6,
+							autoSkip: true,
+							autoSkipPadding: 50,
+						},
+						// grace: '20%',
+						grid: {
+							drawTicks: false,
+							drawBorder: false,
 						},
 					},
 				},
