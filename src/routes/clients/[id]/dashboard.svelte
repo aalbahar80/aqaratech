@@ -1,12 +1,10 @@
 <script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import Chart from '$lib/components/dashboard/Chart.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import type { filterSchema } from '$lib/server/trpc/charts';
-	import { tick } from 'svelte';
 	import Select from 'svelte-select';
 	import type { z } from 'zod';
 	// import Select from 'svelte-select/src/Select.svelte';

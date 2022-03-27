@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Chart from './Chart.svelte';
-
 	export let title: string;
 	export let subtitle = '';
 </script>
