@@ -31,7 +31,6 @@ export const groupIncome = (data: IncomeData[]): IncomeData[] => {
 
 	data.forEach((item) => {
 		const month = closestTo(item.date, months);
-		console.log({ month }, 'group.ts ~ 34');
 		if (month) {
 			// search for the bucket with the same date and same isPaid
 			const index = buckets.findIndex(
@@ -46,6 +45,5 @@ export const groupIncome = (data: IncomeData[]): IncomeData[] => {
 			console.warn('No appropriate month found');
 		}
 	});
-	console.log(buckets);
 	return buckets;
 };
