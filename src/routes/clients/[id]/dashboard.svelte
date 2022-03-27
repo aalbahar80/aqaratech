@@ -119,9 +119,9 @@
 	</div>
 
 	<!-- Chart -->
-	<DashCard title="Rent Income" subtitle="The total amount of rent due." />
-	<SampleChart />
-	<Chart {data} />
+	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
+		<Chart {data} />
+	</DashCard>
 </div>
 
 <style lang="postcss">

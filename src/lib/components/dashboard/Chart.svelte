@@ -6,6 +6,9 @@
 	export let data: InferQueryOutput<'charts:income'>;
 
 	function action(node: HTMLCanvasElement) {
+		Chart.defaults.font.family =
+			'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+		Chart.defaults.font.size = 20;
 		const chart = new Chart(node, {
 			type: 'bar',
 			data: {
@@ -58,11 +61,4 @@
 	}
 </script>
 
-<canvas width="400" height="400" use:action />
-
-<!-- <button
-	on:click={() => {
-		config = getConfig();
-	}}>update chart</button
-> -->
-<pre>{JSON.stringify(data, null, 2)}</pre>
+<canvas width="400" height="200" use:action />

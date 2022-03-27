@@ -11,6 +11,6 @@
 		<p>{subtitle}</p>
 	</div>
 	<div>
-		<!-- <Chart /> -->
+		<slot />
 	</div>
 </div>
