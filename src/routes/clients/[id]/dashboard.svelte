@@ -2,7 +2,6 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/dashboard/Chart.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import SampleChart from '$lib/components/dashboard/SampleChart.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import Select from 'svelte-select';
@@ -13,16 +12,18 @@
 		const defaultFilters = {
 			// TODO use UTC, fns
 			start: new Date(2020, 0, 1),
-			end: new Date(2020, 3, 1),
+			end: new Date(2021, 3, 1),
 			propertyId: undefined,
 			unitId: undefined,
 		};
 
-		const client = await trpc.query('clients:dashboard', params.id);
-		const data = await trpc.query('charts:income', {
-			clientId: params.id,
-			...defaultFilters,
-		});
+		const [client, data] = await Promise.all([
+			trpc.query('clients:dashboard', params.id), // TODO use read?
+			trpc.query('charts:income', {
+				clientId: params.id,
+				...defaultFilters,
+			}),
+		]);
 		return { props: { client, data } };
 	};
 </script>
