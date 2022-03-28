@@ -37,7 +37,7 @@ export const getName = <
 	},
 >(
 	person: T,
-	short: boolean = true,
+	short = true,
 ): string => {
 	if (short) {
 		return concatIfExists([person.firstName, person.lastName]);
@@ -68,9 +68,7 @@ export const dateToInput = (date: Date): string => {
 	try {
 		return format(date, inputDateFormat);
 	} catch (e) {
-		throw new Error(
-			`Can not format date to ${inputDateFormat}.`,
-		);
+		throw new Error(`Can not format date to ${inputDateFormat}.`);
 	}
 };
 

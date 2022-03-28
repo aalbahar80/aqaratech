@@ -15,24 +15,26 @@ export const filterSchema = z.object({
 
 export default trpc.router().query('income', {
 	input: filterSchema,
-	resolve: async ({ input: { end, start, propertyId, clientId } }) => {
+	resolve: async ({ input: { end, start, propertyId, clientId, unitId } }) => {
 		const data = await prismaClient.transaction.findMany({
 			where: {
 				postDate: {
 					gte: start,
 					lte: end,
 				},
-				lease: {
-					unit: propertyId
-						? {
-								propertyId,
-						  }
-						: {
-								property: {
-									clientId,
-								},
-						  },
-				},
+				lease: unitId
+					? { unitId }
+					: {
+							unit: propertyId
+								? {
+										propertyId,
+								  }
+								: {
+										property: {
+											clientId,
+										},
+								  },
+					  },
 			},
 			select: {
 				postDate: true,

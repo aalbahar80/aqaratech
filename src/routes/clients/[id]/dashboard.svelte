@@ -1,10 +1,12 @@
 <script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
+	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import type { filterSchema } from '$lib/server/trpc/charts';
+	import { forceDateToInput } from '$lib/utils/common';
+	import { subMonths } from 'date-fns';
 	import Select from 'svelte-select';
 	import type { z } from 'zod';
 	// import Select from 'svelte-select/src/Select.svelte';
@@ -15,8 +17,8 @@
 	export const load: Load = async ({ params }) => {
 		const defaultFilter: Filter = {
 			// TODO use UTC, fns
-			start: new Date(2020, 0, 1),
-			end: new Date(2021, 3, 1),
+			start: subMonths(new Date(Date.now()), 6),
+			end: new Date(Date.now()),
 			propertyId: undefined,
 			unitId: undefined,
 			clientId: params.id,
@@ -39,13 +41,14 @@
 
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
-	const rangeOptions: Option[] = [
-		{ value: 'LAST3MONTHS', label: 'Last 3 Months' },
-		{ value: 'LAST6MONTHS', label: 'Last 6 Months' },
-		{ value: 'LAST12MONTHS', label: 'Last 12 Months' },
-		{ value: 'CUSTOM', label: 'Custom' },
-	];
 
+	const rangeOptions = [3, 6, 12].map((months) => ({
+		label: `Last ${months} months`,
+		value: {
+			start: subMonths(new Date(Date.now()), months),
+			end: new Date(Date.now()),
+		},
+	}));
 	const propertyOptions = client.properties.map((property) => ({
 		value: property.id,
 		label: getAddress(property),
@@ -73,7 +76,9 @@
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
-
+	$: startInput = forceDateToInput(filter.start);
+	$: endInput = forceDateToInput(filter.end);
+	$: handleFilter(filter);
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 82');
 		data = await trpc.query('charts:income', newFilter);
@@ -92,28 +97,44 @@
 					isClearable={false}
 					showIndicator
 					isSearchable={false}
+					on:select={(e) => {
+						filter = {
+							...filter,
+							start: e.detail.value.start,
+							end: e.detail.value.end,
+						};
+					}}
 				/>
 			</div>
 			<input
 				type="date"
 				name="start"
 				class="date-input"
+				value={startInput}
 				on:change={(e) => {
-					handleFilter({
-						...filter,
-						start: e.currentTarget.valueAsDate,
-					});
+					console.log('startDateChanged');
+					const newDate = e.currentTarget.valueAsDate;
+					if (newDate) {
+						filter = {
+							...filter,
+							start: newDate,
+						};
+					}
 				}}
 			/>
 			<input
 				type="date"
 				name="end"
 				class="date-input"
+				value={endInput}
 				on:change={(e) => {
-					handleFilter({
-						...filter,
-						end: e.currentTarget.valueAsDate,
-					});
+					const newDate = e.currentTarget.valueAsDate;
+					if (newDate) {
+						filter = {
+							...filter,
+							end: newDate,
+						};
+					}
 				}}
 			/>
 		</div>
@@ -131,11 +152,11 @@
 						selectedUnit = null;
 					}}
 					on:select={(e) => {
-						handleFilter({
+						filter = {
 							...filter,
 							propertyId: e.detail.value,
 							unitId: null,
-						});
+						};
 					}}
 					showIndicator
 				/>
@@ -150,10 +171,10 @@
 					isDisabled={!selectedProperty}
 					showIndicator
 					on:select={(e) => {
-						handleFilter({
+						filter = {
 							...filter,
-							unitId: e.detail.value.value,
-						});
+							unitId: e.detail.value,
+						};
 					}}
 				/>
 			</div>
@@ -163,6 +184,7 @@
 	<!-- Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
 		<canvas width="400" height="400" use:incomeChart={data} />
+		<!-- TODO empty state -->
 	</DashCard>
 </div>
 <pre>{JSON.stringify(data, null, 2)}</pre>
