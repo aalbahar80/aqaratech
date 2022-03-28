@@ -42,13 +42,15 @@
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
 
-	const rangeOptions = [3, 6, 12].map((months) => ({
+	const predefinedRanges = [3, 6, 12].map((months) => ({
 		label: `Last ${months} months`,
 		value: {
 			start: subMonths(new Date(Date.now()), months),
 			end: new Date(Date.now()),
 		},
 	}));
+	const rangeOptions = [...predefinedRanges, { value: null, label: 'Custom' }];
+
 	const propertyOptions = client.properties.map((property) => ({
 		value: property.id,
 		label: getAddress(property),
@@ -73,6 +75,7 @@
 		return [];
 	};
 
+	let selectedRange = rangeOptions[0];
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
@@ -93,16 +96,18 @@
 			<div class="w-1/2">
 				<Select
 					items={rangeOptions}
-					value={rangeOptions[1]}
+					bind:value={selectedRange}
 					isClearable={false}
 					showIndicator
 					isSearchable={false}
 					on:select={(e) => {
-						filter = {
-							...filter,
-							start: e.detail.value.start,
-							end: e.detail.value.end,
-						};
+						if (e.detail.value) {
+							filter = {
+								...filter,
+								start: e.detail.value.start,
+								end: e.detail.value.end,
+							};
+						}
 					}}
 				/>
 			</div>
@@ -112,9 +117,9 @@
 				class="date-input"
 				value={startInput}
 				on:change={(e) => {
-					console.log('startDateChanged');
 					const newDate = e.currentTarget.valueAsDate;
 					if (newDate) {
+						selectedRange = rangeOptions[rangeOptions.length - 1];
 						filter = {
 							...filter,
 							start: newDate,
@@ -130,6 +135,7 @@
 				on:change={(e) => {
 					const newDate = e.currentTarget.valueAsDate;
 					if (newDate) {
+						selectedRange = rangeOptions[rangeOptions.length - 1];
 						filter = {
 							...filter,
 							end: newDate,
@@ -198,7 +204,6 @@
 		<!-- TODO empty state -->
 	</DashCard>
 </div>
-<pre>{JSON.stringify(data, null, 2)}</pre>
 
 <style lang="postcss">
 	.date-input {
