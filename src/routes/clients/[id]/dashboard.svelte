@@ -150,6 +150,11 @@
 					on:clear={() => {
 						selectedProperty = null;
 						selectedUnit = null;
+						filter = {
+							...filter,
+							propertyId: null,
+							unitId: null,
+						};
 					}}
 					on:select={(e) => {
 						filter = {
@@ -174,6 +179,12 @@
 						filter = {
 							...filter,
 							unitId: e.detail.value,
+						};
+					}}
+					on:clear={() => {
+						filter = {
+							...filter,
+							unitId: null,
 						};
 					}}
 				/>
