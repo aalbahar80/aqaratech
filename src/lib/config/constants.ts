@@ -322,3 +322,29 @@ export const expenseCategories = [
 	'WATER',
 	'PLUMBING',
 ];
+
+export const categoryGroups = [
+	'MANAGEMENT_FEES',
+	'HVAC',
+	'UTILITIES',
+	'INSURANCE',
+	'ELEVATORS',
+	'AMENITIES',
+	'CARETAKER',
+	'UPKEEP',
+	'OTHER',
+];
+
+export const getCategoryGroup = (category: string | null | undefined) => {
+	const utilities = ['ELECTRICITY', 'WATER', 'INTERNET', 'SATELLITE'];
+	const upkeep = ['LANDSCAPING', 'PLUMBING'];
+	if (!category) {
+		return 'OTHER';
+	} else if (utilities.includes(category)) {
+		return 'UTILITIES';
+	} else if (upkeep.includes(category)) {
+		return 'UPKEEP';
+	} else {
+		return 'OTHER';
+	}
+};

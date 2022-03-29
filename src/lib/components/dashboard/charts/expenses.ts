@@ -1,4 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import { categoryGroups } from '$lib/config/constants';
 import Chart, { type ChartData } from 'chart.js/auto/auto.esm'; // TODO treeshake
 import 'chartjs-adapter-date-fns';
 
@@ -12,36 +13,25 @@ const colors = [
 	'#ff7c43',
 	'#ffa600',
 ];
+
 export function expensesChart(
 	node: HTMLCanvasElement,
 	data: InferQueryOutput<'charts:expenses'>,
 ) {
-	const datasets: ChartData<'bar', typeof data>['datasets'] = [
-		'MANAGEMENT_FEES',
-		'HVAC',
-		'ELEVATORS',
-		'INSURANCE',
-		'INTERNET',
-		'SATELLITE',
-		'LANDSCAPING',
-		'AMENITIES',
-		'CARETAKER',
-		'ELECTRICITY',
-		'WATER',
-		'PLUMBING',
-	].map((cat, n) => ({
-		label:
-			cat[0]?.toUpperCase() + cat.slice(1).toLowerCase().replace(/_/g, ' '),
-		data: data.filter(
-			(item) => item.category?.toUpperCase() === cat.toUpperCase(),
-		),
-		parsing: {
-			yAxisKey: 'amount',
-			xAxisKey: 'date',
-		},
-		backgroundColor: colors[n],
-		borderRadius: 10,
-	}));
+	const datasets: ChartData<'bar', typeof data>['datasets'] =
+		categoryGroups.map((cat, n) => ({
+			label: cat,
+			// cat[0]?.toUpperCase() + cat.slice(1).toLowerCase().replace(/_/g, ' '),
+			data: data.filter(
+				(item) => item.category?.toUpperCase() === cat.toUpperCase(),
+			),
+			parsing: {
+				yAxisKey: 'amount',
+				xAxisKey: 'date',
+			},
+			backgroundColor: colors[n],
+			borderRadius: 10,
+		}));
 
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';

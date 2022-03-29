@@ -1,3 +1,4 @@
+import { categoryGroups, getCategoryGroup } from '$lib/config/constants';
 import { eachMonthOfInterval, closestTo, isSameDay } from 'date-fns';
 
 type IncomeData = {
@@ -107,18 +108,14 @@ export const groupByMonthAndCat = <
 		end: lastMonth,
 	});
 
-	const categories = data
-		.map((item) => item.category)
-		.filter((value, index, self) => self.indexOf(value) === index);
-
 	const buckets: Grouped<T>[] = [];
 	months.forEach((date) => {
-		categories.forEach((category) => {
-			if (category) {
+		categoryGroups.forEach((categoryGroup) => {
+			if (categoryGroup) {
 				buckets.push({
 					data: [],
 					date,
-					category,
+					category: categoryGroup,
 					amount: 0,
 				});
 			}
@@ -132,7 +129,8 @@ export const groupByMonthAndCat = <
 			const index = buckets.findIndex(
 				// console.log(item.date, bucket.date)
 				(bucket) =>
-					isSameDay(bucket.date, month) && bucket.category === item.category,
+					isSameDay(bucket.date, month) &&
+					bucket.category?.toUpperCase() === getCategoryGroup(item.category?.toUpperCase()),
 			);
 			if (index !== -1) {
 				// buckets[index]!.data.push(item);
