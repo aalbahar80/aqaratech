@@ -21,36 +21,37 @@ export default trpc
 	.router()
 	.query('income', {
 		input: filterSchema,
-		resolve: async ({
-			input: { end, start, propertyId, clientId, unitId },
-		}) => {
-			const data = await prismaClient.transaction.findMany({
+		resolve: async ({ input: { end, start, clientId } }) => {
+			const data = await prismaClient.client.findUnique({
 				where: {
-					postDate: {
-						gte: start,
-						lte: end,
-					},
-					lease: unitId
-						? { unitId }
-						: {
-								unit: propertyId
-									? {
-											propertyId,
-									  }
-									: {
-											property: {
-												clientId,
+					id: clientId,
+				},
+				include: {
+					properties: {
+						include: {
+							units: {
+								include: {
+									leases: {
+										include: {
+											transactions: {
+												where: {
+													postDate: {
+														gte: start,
+														lte: end,
+													},
+												},
+												select: {
+													postDate: true,
+													amount: true,
+													isPaid: true,
+												},
 											},
-									  },
-						  },
-				},
-				select: {
-					postDate: true,
-					amount: true,
-					isPaid: true,
-				},
-				orderBy: {
-					postDate: 'asc',
+										},
+									},
+								},
+							},
+						},
+					},
 				},
 			});
 			if (!data) {
@@ -59,9 +60,7 @@ export default trpc
 					message: 'Unable to get data',
 				});
 			}
-			return groupIncome(
-				data.map((item) => ({ ...item, date: item.postDate })),
-			);
+			return data;
 		},
 	})
 	.query('income:byProperty', {

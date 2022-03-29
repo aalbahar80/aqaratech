@@ -1,39 +1,99 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import { palette } from '$lib/config/constants';
+import { getAddress } from '$lib/definitions/property';
+import { getMonths } from '$lib/utils/group';
 import Chart from 'chart.js/auto/auto.esm'; // TODO treeshake
 import 'chartjs-adapter-date-fns';
+import { closestTo, isSameDay } from 'date-fns';
+import { sortBy } from 'lodash-es';
 
-export function incomeChart(
-	node: HTMLCanvasElement,
-	data: InferQueryOutput<'charts:income'>,
-) {
+type Data = InferQueryOutput<'charts:income'>;
+const normalize = (data: Data) =>
+	data.properties.flatMap((property) =>
+		property.units.flatMap((unit) =>
+			unit.leases.flatMap((lease) =>
+				lease.transactions.flatMap((transaction) => {
+					const { amount, isPaid, postDate } = transaction;
+					const address = getAddress(property);
+					const { propertyId } = unit;
+					return { amount, isPaid, postDate, address, propertyId };
+				}),
+			),
+		),
+	);
+
+const sort = (data: Data) => sortBy(normalize(data), 'postDate');
+
+type Bucket = {
+	total: number;
+	date: Date;
+	address: string;
+	propertyId: string;
+	isPaid: boolean;
+};
+const group = (data: Data): Bucket[] => {
+	const sorted = sort(data);
+	const months = getMonths(sorted, 'postDate');
+
+	const buckets: Bucket[] = [];
+
+	sorted.forEach((trx) => {
+		const month = closestTo(trx.postDate, months);
+		if (month) {
+			// search for the bucket with the same date  propertyId
+			const index = buckets.findIndex(
+				(bucket) =>
+					isSameDay(bucket.date, month) && bucket.isPaid === trx.isPaid,
+			);
+			if (index !== -1) {
+				buckets[index]!.total += trx.amount;
+			} else {
+				buckets.push({
+					total: trx.amount,
+					date: month,
+					address: trx.address,
+					propertyId: trx.propertyId,
+					isPaid: trx.isPaid,
+				});
+			}
+		}
+	});
+	return buckets;
+};
+
+const getDatasets = (data: Data) => {
+	const grouped = group(data);
+	const statuses = grouped
+		.map((item) => item.isPaid)
+		.filter((value, index, self) => self.indexOf(value) === index);
+
+	const datasets = statuses.map((status, n) => {
+		const size = Math.max(3, Math.min(statuses.length, 8));
+		const backgroundColor = palette[size]?.[n];
+		return {
+			// label: getAddress(property),
+			label: status ? 'Paid' : 'Unpaid',
+			data: grouped.filter((item) => item.isPaid === status),
+			parsing: {
+				yAxisKey: 'total',
+				xAxisKey: 'date',
+			},
+			backgroundColor,
+			borderRadius: 10,
+		};
+	});
+	return datasets;
+};
+
+export function incomeChart(node: HTMLCanvasElement, data: Data) {
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 	Chart.defaults.font.size = 16;
+
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {
-			datasets: [
-				{
-					label: 'Paid',
-					data: data.filter((i) => i.isPaid),
-					parsing: {
-						yAxisKey: 'amount',
-						xAxisKey: 'date',
-					},
-					backgroundColor: ['hsl(199, 100%, 18%)'],
-					borderRadius: 10,
-				},
-				{
-					borderRadius: 10,
-					label: 'Unpaid',
-					data: data.filter((i) => !i.isPaid),
-					parsing: {
-						yAxisKey: 'amount',
-						xAxisKey: 'date',
-					},
-					backgroundColor: ['hsl(348, 83%, 64%)'],
-				},
-			],
+			datasets: getDatasets(data),
 		},
 		options: {
 			interaction: {
@@ -87,32 +147,14 @@ export function incomeChart(
 						pointStyle: 'rectRounded',
 					},
 				},
-				tooltip: {
-					xAlign: 'center',
-					yAlign: 'bottom',
-					usePointStyle: true,
-					// backgroundColor: '#fff',
-					// titleColor: '#000',
-					// bodyColor: '#000',
-					// borderColor: '#000',
-					// borderWidth: 1,
-					// titleSpacing: 30,
-					// bodyFont: {
-					// 	size: 16,
-					// 	lineHeight: 1.5
-					// }
-				},
 			},
 		},
 	});
 
 	return {
-		update(newData: InferQueryOutput<'charts:income'>) {
-			if (chart.data.datasets[0] && chart.data.datasets[1]) {
-				chart.data.datasets[0].data = newData.filter((i) => i.isPaid);
-				chart.data.datasets[1].data = newData.filter((i) => !i.isPaid);
-				chart.update();
-			}
+		update(newData: Data) {
+			chart.data.datasets = getDatasets(newData);
+			chart.update();
 		},
 		destory() {
 			chart.destroy();
