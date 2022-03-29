@@ -8,6 +8,8 @@ import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
 
 type Data = InferQueryOutput<'charts:income'>;
+type GroupBy = 'ratio' | 'property';
+
 const normalize = (data: Data) =>
 	data.properties.flatMap((property) =>
 		property.units.flatMap((unit) =>
@@ -31,7 +33,7 @@ type Bucket = {
 	propertyId: string;
 	isPaid: boolean;
 };
-const group = (data: Data): Bucket[] => {
+const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 	const sorted = sort(data);
 	const months = getMonths(sorted, 'postDate');
 
@@ -41,10 +43,13 @@ const group = (data: Data): Bucket[] => {
 		const month = closestTo(trx.postDate, months);
 		if (month) {
 			// search for the bucket with the same date  propertyId
-			const index = buckets.findIndex(
-				(bucket) =>
-					isSameDay(bucket.date, month) && bucket.isPaid === trx.isPaid,
-			);
+			const index = buckets.findIndex((bucket) => {
+				const condition =
+					groupBy === 'property'
+						? bucket.propertyId === trx.propertyId
+						: bucket.isPaid === trx.isPaid;
+				return isSameDay(bucket.date, month) && condition;
+			});
 			if (index !== -1) {
 				buckets[index]!.total += trx.amount;
 			} else {
@@ -61,19 +66,34 @@ const group = (data: Data): Bucket[] => {
 	return buckets;
 };
 
-const getDatasets = (data: Data) => {
-	const grouped = group(data);
-	const statuses = grouped
-		.map((item) => item.isPaid)
+const getLabel = <T>(group: T, groupBy: GroupBy): string => {
+	if (groupBy === 'ratio' || typeof group === 'boolean') {
+		return group ? 'Paid' : 'Unpaid';
+	} else if (typeof group === 'string') {
+		return group;
+	} else {
+		return '';
+	}
+};
+
+const getDatasets = (data: Data, groupBy: GroupBy) => {
+	const aggregated = aggregate(data, groupBy);
+	const groups = aggregated
+		.map((item) => (groupBy === 'property' ? item.address : item.isPaid))
 		.filter((value, index, self) => self.indexOf(value) === index);
 
-	const datasets = statuses.map((status, n) => {
-		const size = Math.max(3, Math.min(statuses.length, 8));
+	const datasets = groups.map((group, n) => {
+		const size = Math.max(3, Math.min(groups.length, 8));
 		const backgroundColor = palette[size]?.[n];
 		return {
-			// label: getAddress(property),
-			label: status ? 'Paid' : 'Unpaid',
-			data: grouped.filter((item) => item.isPaid === status),
+			label: getLabel(group, groupBy),
+			// data: aggregated.filter((item) =>
+			// 	groupBy === 'property' ? item.address : item.isPaid === group,
+			// ),
+			data:
+				groupBy === 'property'
+					? aggregated.filter((item) => item.address === group)
+					: aggregated.filter((item) => item.isPaid === group),
 			parsing: {
 				yAxisKey: 'total',
 				xAxisKey: 'date',
@@ -85,7 +105,10 @@ const getDatasets = (data: Data) => {
 	return datasets;
 };
 
-export function incomeChart(node: HTMLCanvasElement, data: Data) {
+export function incomeChart(
+	node: HTMLCanvasElement,
+	[data, groupBy]: [Data, GroupBy],
+) {
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 	Chart.defaults.font.size = 16;
@@ -93,7 +116,7 @@ export function incomeChart(node: HTMLCanvasElement, data: Data) {
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {
-			datasets: getDatasets(data),
+			datasets: getDatasets(data, groupBy),
 		},
 		options: {
 			interaction: {
@@ -124,8 +147,7 @@ export function incomeChart(node: HTMLCanvasElement, data: Data) {
 							// hide the first tick
 							index == values.length - 1
 								? undefined
-								: // format the value
-								  Intl.NumberFormat('en-GB', {
+								: Intl.NumberFormat('en-GB', {
 										notation: 'compact',
 								  }).format(Number(value)),
 						// maxTicksLimit: 6,
@@ -152,8 +174,8 @@ export function incomeChart(node: HTMLCanvasElement, data: Data) {
 	});
 
 	return {
-		update(newData: Data) {
-			chart.data.datasets = getDatasets(newData);
+		update([newData, newGroupBy]: [Data, GroupBy]) {
+			chart.data.datasets = getDatasets(newData, newGroupBy);
 			chart.update();
 		},
 		destory() {

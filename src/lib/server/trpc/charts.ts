@@ -1,9 +1,5 @@
 import prismaClient from '$lib/server/prismaClient';
-import {
-	groupByMonthAndCat,
-	groupIncome,
-	groupOccupancy,
-} from '$lib/utils/group';
+import { groupByMonthAndCat, groupOccupancy } from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';

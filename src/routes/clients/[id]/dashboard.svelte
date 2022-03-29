@@ -230,19 +230,7 @@
 		</div>
 	</div>
 
-	<!-- Income Chart -->
-	<DashCard
-		title="Rent Income By Property"
-		subtitle="The total amount of rent due."
-		empty={income.length < 1}
-	>
-		<canvas
-			width="400"
-			height="400"
-			use:incomeByPropertyChart={incomeByProperty}
-		/>
-	</DashCard>
-	<!-- Income Chart -->
+	<!-- Income by Ratio Chart -->
 	<DashCard
 		title="Rent Income"
 		subtitle="The total amount of rent due."
@@ -266,7 +254,23 @@
 				}}
 			/>
 		</div>
-		<canvas width="400" height="400" use:incomeChart={income} />
+		<canvas width="400" height="400" use:incomeChart={[income, 'property']} />
+	</DashCard>
+
+	<!-- Income by Property Chart -->
+	<DashCard
+		title="Rent Income By Property"
+		subtitle="The total amount of rent due by property."
+		empty={(incomeByProperty?.properties[0]?.units[0]?.leases[0]
+			?.transactions ?? 0) > 0 ||
+			!!selectedProperty ||
+			!!selectedUnit}
+	>
+		<canvas
+			width="400"
+			height="400"
+			use:incomeByPropertyChart={incomeByProperty}
+		/>
 	</DashCard>
 
 	<!-- Expenses Chart -->
