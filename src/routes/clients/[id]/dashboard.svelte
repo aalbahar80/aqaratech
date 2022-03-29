@@ -206,15 +206,17 @@
 	</div>
 
 	<!-- Income Chart -->
-	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
+	<DashCard
+		title="Rent Income"
+		subtitle="The total amount of rent due."
+		empty={data.length < 1}
+	>
 		<canvas width="400" height="400" use:incomeChart={data} />
-		<!-- TODO empty state -->
 	</DashCard>
 
 	<!-- Expenses Chart -->
-	<DashCard title="Expenses" subtitle="">
+	<DashCard title="Expenses" subtitle="" empty={expenses.length < 1}>
 		<canvas width="400" height="400" use:expensesChart={expenses} />
-		<!-- TODO empty state -->
 	</DashCard>
 </div>
 
