@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getAddress } from '$lib/definitions/property';
@@ -24,19 +25,23 @@
 			clientId: params.id,
 		};
 
-		const [client, data] = await Promise.all([
+		const [client, data, expenses] = await Promise.all([
 			trpc.query('clients:dashboard', params.id), // TODO use read?
 			trpc.query('charts:income', {
 				...defaultFilter,
 			}),
+			trpc.query('charts:expenses', {
+				...defaultFilter,
+			}),
 		]);
-		return { props: { client, data, filter: defaultFilter } };
+		return { props: { client, data, filter: defaultFilter, expenses } };
 	};
 </script>
 
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
 	export let data: InferQueryOutput<'charts:income'>;
+	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let filter: Filter;
 
 	type Option = { value: string; label: string };
@@ -75,7 +80,7 @@
 		return [];
 	};
 
-	let selectedRange = rangeOptions[0];
+	let selectedRange = rangeOptions[1];
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
@@ -84,7 +89,10 @@
 	$: handleFilter(filter);
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 82');
-		data = await trpc.query('charts:income', newFilter);
+		// [data, expenses] = await Promise.all([
+		// 	trpc.query('charts:income', newFilter),
+		// 	trpc.query('charts:expenses', newFilter),
+		// ]);
 	};
 </script>
 
@@ -201,6 +209,7 @@
 	<!-- Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
 		<canvas width="400" height="400" use:incomeChart={data} />
+		<canvas width="400" height="400" use:expensesChart={expenses} />
 		<!-- TODO empty state -->
 	</DashCard>
 </div>
