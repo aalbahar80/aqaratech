@@ -2,6 +2,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
+	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
@@ -25,7 +26,7 @@
 			clientId: params.id,
 		};
 
-		const [client, income, expenses] = await Promise.all([
+		const [client, income, expenses, occupancy] = await Promise.all([
 			trpc.query('clients:dashboard', params.id), // TODO use read?
 			trpc.query('charts:income', {
 				...defaultFilter,
@@ -33,8 +34,13 @@
 			trpc.query('charts:expenses', {
 				...defaultFilter,
 			}),
+			trpc.query('charts:occupancy', {
+				...defaultFilter,
+			}),
 		]);
-		return { props: { client, income, filter: defaultFilter, expenses } };
+		return {
+			props: { client, income, filter: defaultFilter, expenses, occupancy },
+		};
 	};
 </script>
 
@@ -42,6 +48,7 @@
 	export let client: InferQueryOutput<'clients:dashboard'>;
 	export let income: InferQueryOutput<'charts:income'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
+	export let occupancy: InferQueryOutput<'charts:occupancy'>;
 	export let filter: Filter;
 
 	type Option = { value: string; label: string };
@@ -87,9 +94,10 @@
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
-		[income, expenses] = await Promise.all([
+		[income, expenses, occupancy] = await Promise.all([
 			trpc.query('charts:income', newFilter),
 			trpc.query('charts:expenses', newFilter),
+			trpc.query('charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};
@@ -217,6 +225,11 @@
 	<!-- Expenses Chart -->
 	<DashCard title="Expenses" subtitle="" empty={expenses.length < 1}>
 		<canvas width="400" height="400" use:expensesChart={expenses} />
+	</DashCard>
+
+	<!-- Occupancy Chart -->
+	<DashCard title="Occupancy" subtitle="" empty={occupancy.length < 1}>
+		<canvas width="400" height="400" use:occupancyChart={occupancy} />
 	</DashCard>
 </div>
 

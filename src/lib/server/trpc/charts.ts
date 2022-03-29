@@ -1,5 +1,9 @@
 import prismaClient from '$lib/server/prismaClient';
-import { groupByMonthAndCat, groupIncome } from '$lib/utils/group';
+import {
+	groupByMonthAndCat,
+	groupIncome,
+	groupOccupancy,
+} from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
@@ -125,5 +129,38 @@ export default trpc
 				.sort((a, b) => a.postDate.getTime() - b.postDate.getTime());
 			const expensesByMonth = groupByMonthAndCat(sortedExpenses);
 			return expensesByMonth;
+		},
+	})
+	.query('occupancy', {
+		input: filterSchema,
+		resolve: async ({
+			input: { end, start, clientId, propertyId, unitId },
+		}) => {
+			const data = await prismaClient.client.findUnique({
+				where: {
+					id: clientId,
+				},
+				include: {
+					properties: {
+						where: propertyId ? { id: propertyId } : {},
+						include: {
+							units: {
+								where: unitId ? { id: unitId } : {},
+								include: {
+									leases: true,
+								},
+							},
+						},
+					},
+				},
+			});
+			if (!data) {
+				throw new TRPCError({
+					code: 'NOT_FOUND',
+					message: 'Unable to get data',
+				});
+			}
+			const occupancyData = groupOccupancy(data, start, end);
+			return occupancyData;
 		},
 	});
