@@ -116,6 +116,7 @@
 		]);
 		filter = newFilter;
 	};
+	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -240,21 +241,27 @@
 			<SimpleSelect
 				title="Group By"
 				options={[
-					{ label: 'Ratio' },
-					{ label: 'Property', disabled: !!selectedProperty },
+					{ label: 'Ratio', value: 'ratio' },
+					{
+						label: 'Property',
+						value: 'property',
+						disabled: !!selectedProperty,
+					},
 				]}
 				on:change={async (e) => {
 					const newValue = e.target?.value;
 					if (!newValue) {
 						return;
 					}
-					income = await trpc.query('charts:income', {
-						...filter,
-					});
+					incomeGroupBy = newValue;
 				}}
 			/>
 		</div>
-		<canvas width="400" height="400" use:incomeChart={[income, 'property']} />
+		<canvas
+			width="400"
+			height="400"
+			use:incomeChart={[income, incomeGroupBy]}
+		/>
 	</DashCard>
 
 	<!-- Income by Property Chart -->
