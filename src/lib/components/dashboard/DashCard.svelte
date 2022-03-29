@@ -20,6 +20,7 @@
 			</div>
 		</div>
 	{:else}
+		<slot name="groupBy" />
 		<slot />
 	{/if}
 </div>

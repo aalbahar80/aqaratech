@@ -4,6 +4,7 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import SimpleSelect from '$lib/components/Select.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
 	import type { filterSchema } from '$lib/server/trpc/charts';
@@ -104,7 +105,9 @@
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<h1>Dashboard</h1>
+	<div class="prose">
+		<h1>Dashboard</h1>
+	</div>
 	<div class="flex max-w-screen-lg justify-between gap-x-2">
 		<!-- Date Filters -->
 		<div class="flex w-3/5 gap-x-1 pr-3">
@@ -219,16 +222,43 @@
 		subtitle="The total amount of rent due."
 		empty={income.length < 1}
 	>
+		<div slot="groupBy">
+			<SimpleSelect
+				title="Group By"
+				options={[
+					{ label: 'Ratio' },
+					{ label: 'Property', disabled: !!selectedProperty },
+				]}
+				on:change={async (e) => {
+					const newValue = e.target?.value;
+					if (!newValue) {
+						return;
+					}
+					// income = await trpc.query('charts:income', {
+					// 	...filter,
+					// 	groupBy: newValue,
+					// });
+				}}
+			/>
+		</div>
 		<canvas width="400" height="400" use:incomeChart={income} />
 	</DashCard>
 
 	<!-- Expenses Chart -->
-	<DashCard title="Expenses" subtitle="" empty={expenses.length < 1}>
+	<DashCard
+		title="Expenses"
+		subtitle="The total amount of expenses."
+		empty={expenses.length < 1}
+	>
 		<canvas width="400" height="400" use:expensesChart={expenses} />
 	</DashCard>
 
 	<!-- Occupancy Chart -->
-	<DashCard title="Occupancy" subtitle="" empty={occupancy.length < 1}>
+	<DashCard
+		title="Occupancy"
+		subtitle="The percentage of units that are empty."
+		empty={occupancy.length < 1}
+	>
 		<canvas width="400" height="400" use:occupancyChart={occupancy} />
 	</DashCard>
 </div>
