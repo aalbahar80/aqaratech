@@ -1,9 +1,5 @@
 import prismaClient from '$lib/server/prismaClient';
-import {
-	groupByMonth,
-	groupByMonthAndCat,
-	groupIncome,
-} from '$lib/utils/group';
+import { groupByMonthAndCat, groupIncome } from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
@@ -62,45 +58,40 @@ export default trpc
 	})
 	.query('expenses', {
 		input: filterSchema,
-		resolve: async ({ input: { end, start, clientId } }) => {
-			const dateFilter = {
-				postDate: {
-					gte: start,
-					lte: end,
+		resolve: async ({
+			input: { end, start, clientId, propertyId, unitId },
+		}) => {
+			const dated = {
+				where: {
+					postDate: {
+						gte: start,
+						lte: end,
+					},
 				},
 			};
 			const ordered = {
 				orderBy: {
-					postDate: 'asc',
+					postDate: 'asc' as const,
 				},
+			};
+			const getExpenses = {
+				...dated,
+				...ordered,
 			};
 			const data = await prismaClient.client.findUnique({
 				where: {
 					id: clientId,
 				},
-				select: {
-					expenses: {
-						where: dateFilter,
-						orderBy: {
-							postDate: 'asc',
-						},
-					},
+				include: {
+					expenses: propertyId || unitId ? false : getExpenses,
 					properties: {
+						where: propertyId ? { id: propertyId } : {},
 						include: {
-							expenses: {
-								where: dateFilter,
-								orderBy: {
-									postDate: 'asc',
-								},
-							},
+							expenses: unitId ? false : getExpenses,
 							units: {
+								where: unitId ? { id: unitId } : {},
 								include: {
-									expenses: {
-										where: dateFilter,
-										orderBy: {
-											postDate: 'asc',
-										},
-									},
+									expenses: getExpenses,
 								},
 							},
 						},
@@ -115,9 +106,9 @@ export default trpc
 			}
 
 			// group all expenses in one array
-			const clientExpenses = data.expenses;
+			const clientExpenses = data.expenses || [];
 			const propertyExpenses = data.properties.flatMap(
-				(property) => property.expenses,
+				(property) => property.expenses || [],
 			);
 			const unitExpenses = data.properties.flatMap((property) =>
 				property.units.flatMap((unit) => unit.expenses),
@@ -132,7 +123,6 @@ export default trpc
 			const sortedExpenses = allExpenses
 				.slice()
 				.sort((a, b) => a.postDate.getTime() - b.postDate.getTime());
-			console.log({ sortedExpenses }, 'playground.ts ~ 79');
 			const expensesByMonth = groupByMonthAndCat(sortedExpenses);
 			return expensesByMonth;
 		},
