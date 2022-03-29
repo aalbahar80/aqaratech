@@ -25,7 +25,7 @@
 			clientId: params.id,
 		};
 
-		const [client, data, expenses] = await Promise.all([
+		const [client, income, expenses] = await Promise.all([
 			trpc.query('clients:dashboard', params.id), // TODO use read?
 			trpc.query('charts:income', {
 				...defaultFilter,
@@ -34,13 +34,13 @@
 				...defaultFilter,
 			}),
 		]);
-		return { props: { client, data, filter: defaultFilter, expenses } };
+		return { props: { client, income, filter: defaultFilter, expenses } };
 	};
 </script>
 
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
-	export let data: InferQueryOutput<'charts:income'>;
+	export let income: InferQueryOutput<'charts:income'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let filter: Filter;
 
@@ -87,7 +87,7 @@
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
-		[data, expenses] = await Promise.all([
+		[income, expenses] = await Promise.all([
 			trpc.query('charts:income', newFilter),
 			trpc.query('charts:expenses', newFilter),
 		]);
@@ -209,9 +209,9 @@
 	<DashCard
 		title="Rent Income"
 		subtitle="The total amount of rent due."
-		empty={data.length < 1}
+		empty={income.length < 1}
 	>
-		<canvas width="400" height="400" use:incomeChart={data} />
+		<canvas width="400" height="400" use:incomeChart={income} />
 	</DashCard>
 
 	<!-- Expenses Chart -->
