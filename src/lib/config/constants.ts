@@ -370,3 +370,29 @@ export const getCategoryGroup = (category: string | null | undefined) => {
 		return category;
 	}
 };
+
+export const palette: { [key: string]: string[] } = {
+	3: ['#003f5c', '#bc5090', '#ffa600'],
+	4: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
+	5: ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600'],
+	6: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
+	7: [
+		'#003f5c',
+		'#374c80',
+		'#7a5195',
+		'#bc5090',
+		'#ef5675',
+		'#ff764a',
+		'#ffa600',
+	],
+	8: [
+		'#003f5c',
+		'#2f4b7c',
+		'#665191',
+		'#a05195',
+		'#d45087',
+		'#f95d6a',
+		'#ff7c43',
+		'#ffa600',
+	],
+};

@@ -108,10 +108,11 @@
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
-		[income, expenses, occupancy] = await Promise.all([
+		[income, expenses, occupancy, incomeByProperty] = await Promise.all([
 			trpc.query('charts:income', newFilter),
 			trpc.query('charts:expenses', newFilter),
 			trpc.query('charts:occupancy', newFilter),
+			trpc.query('charts:income:byProperty', newFilter),
 		]);
 		filter = newFilter;
 	};
@@ -261,7 +262,6 @@
 					}
 					income = await trpc.query('charts:income', {
 						...filter,
-						groupBy: newValue,
 					});
 				}}
 			/>

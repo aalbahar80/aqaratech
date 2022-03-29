@@ -2,7 +2,6 @@ import prismaClient from '$lib/server/prismaClient';
 import {
 	groupByMonthAndCat,
 	groupIncome,
-	groupIncomeByProperty,
 	groupOccupancy,
 } from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
@@ -67,46 +66,37 @@ export default trpc
 	})
 	.query('income:byProperty', {
 		input: filterSchema,
-		resolve: async ({
-			input: { end, start, propertyId, clientId, unitId },
-		}) => {
-			const data = await prismaClient.transaction.findMany({
+		resolve: async ({ input: { end, start, clientId } }) => {
+			const data = await prismaClient.client.findUnique({
 				where: {
-					postDate: {
-						gte: start,
-						lte: end,
-					},
-					lease: unitId
-						? { unitId }
-						: {
-								unit: propertyId
-									? {
-											propertyId,
-									  }
-									: {
-											property: {
-												clientId,
-											},
-									  },
-						  },
+					id: clientId,
 				},
-				select: {
-					postDate: true,
-					amount: true,
-					isPaid: true,
-					leaseId: true,
-					lease: {
+				include: {
+					properties: {
 						include: {
-							unit: {
+							units: {
 								include: {
-									property: true,
+									leases: {
+										include: {
+											transactions: {
+												where: {
+													postDate: {
+														gte: start,
+														lte: end,
+													},
+												},
+												select: {
+													postDate: true,
+													amount: true,
+													isPaid: true,
+												},
+											},
+										},
+									},
 								},
 							},
 						},
 					},
-				},
-				orderBy: {
-					postDate: 'asc',
 				},
 			});
 			if (!data) {
@@ -115,10 +105,7 @@ export default trpc
 					message: 'Unable to get data',
 				});
 			}
-			// return data;
-			return groupIncomeByProperty(
-				data.map((item) => ({ ...item, date: item.postDate })),
-			);
+			return data;
 		},
 	})
 	.query('expenses', {

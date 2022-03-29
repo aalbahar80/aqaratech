@@ -213,3 +213,16 @@ export const groupOccupancy = (data: any, start: Date, end: Date) => {
 
 	return buckets;
 };
+
+export const getMonths = <T>(data: T[], key: keyof T) => {
+	const firstMonth = data[0]?.[key];
+	const lastMonth = data[data.length - 1]?.[key];
+	if (!firstMonth || !lastMonth) return [];
+
+	const months = eachMonthOfInterval({
+		start: firstMonth,
+		end: lastMonth,
+	});
+
+	return months;
+};

@@ -1,18 +1,89 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import { palette } from '$lib/config/constants';
 import { getAddress } from '$lib/definitions/property';
+import { getMonths } from '$lib/utils/group';
 import Chart from 'chart.js/auto/auto.esm'; // TODO treeshake
 import 'chartjs-adapter-date-fns';
+import { closestTo, eachMonthOfInterval, isSameDay } from 'date-fns';
+import { sortBy } from 'lodash-es';
 
-const colors = [
-	'#003f5c',
-	'#2f4b7c',
-	// '#665191',
-	'#a05195',
-	'#d45087',
-	'#f95d6a',
-	'#ff7c43',
-	'#ffa600',
-];
+const normalize = (data: InferQueryOutput<'charts:income:byProperty'>) =>
+	data.properties.flatMap((property) =>
+		property.units.flatMap((unit) =>
+			unit.leases.flatMap((lease) =>
+				lease.transactions.flatMap((transaction) => {
+					const { amount, isPaid, postDate } = transaction;
+					const address = getAddress(property);
+					const { propertyId } = unit;
+					return { amount, isPaid, postDate, address, propertyId };
+				}),
+			),
+		),
+	);
+
+const sort = (data: InferQueryOutput<'charts:income:byProperty'>) =>
+	sortBy(normalize(data), 'postDate');
+
+type Bucket = {
+	total: number;
+	date: Date;
+	address: string;
+	propertyId: string;
+};
+const group = (
+	data: InferQueryOutput<'charts:income:byProperty'>,
+): Bucket[] => {
+	const sorted = sort(data);
+	const months = getMonths(sorted, 'postDate');
+
+	const buckets: Bucket[] = [];
+
+	sorted.forEach((trx) => {
+		const month = closestTo(trx.postDate, months);
+		if (month) {
+			// search for the bucket with the same date  propertyId
+			const index = buckets.findIndex(
+				(bucket) =>
+					isSameDay(bucket.date, month) && bucket.propertyId === trx.propertyId,
+			);
+			if (index !== -1) {
+				buckets[index]!.total += trx.amount;
+			} else {
+				buckets.push({
+					total: trx.amount,
+					date: month,
+					address: trx.address,
+					propertyId: trx.propertyId,
+				});
+			}
+		}
+	});
+	return buckets;
+};
+
+const getDatasets = (data: InferQueryOutput<'charts:income:byProperty'>) => {
+	const grouped = group(data);
+	const properties = grouped
+		.map((item) => item.address)
+		.filter((value, index, self) => self.indexOf(value) === index);
+
+	const datasets = properties.map((property, n) => {
+		const size = Math.max(3, Math.min(properties.length, 8));
+		const backgroundColor = palette[size]?.[n];
+		return {
+			// label: getAddress(property),
+			label: property,
+			data: grouped.filter((item) => item.address === property),
+			parsing: {
+				yAxisKey: 'total',
+				xAxisKey: 'date',
+			},
+			backgroundColor,
+			borderRadius: 10,
+		};
+	});
+	return datasets;
+};
 
 export function incomeByPropertyChart(
 	node: HTMLCanvasElement,
@@ -22,28 +93,10 @@ export function incomeByPropertyChart(
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 	Chart.defaults.font.size = 16;
 
-	console.log({ data }, 'incomeByProperty.ts ~ 24');
-	const properties = data
-		// .map((item) => item.lease.unit.property.id)
-		.map((item) => item.propertyId)
-		.filter((value, index, self) => self.indexOf(value) === index);
-
-	const datasets = properties.map((property, n) => ({
-		// label: getAddress(property),
-		label: property,
-		data: data.filter((item) => item.propertyId === property),
-		parsing: {
-			yAxisKey: 'amount',
-			xAxisKey: 'date',
-		},
-		backgroundColor: colors[n],
-		borderRadius: 10,
-	}));
-
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {
-			datasets,
+			datasets: getDatasets(data),
 		},
 		options: {
 			interaction: {
@@ -97,32 +150,14 @@ export function incomeByPropertyChart(
 						pointStyle: 'rectRounded',
 					},
 				},
-				tooltip: {
-					xAlign: 'center',
-					yAlign: 'bottom',
-					usePointStyle: true,
-					// backgroundColor: '#fff',
-					// titleColor: '#000',
-					// bodyColor: '#000',
-					// borderColor: '#000',
-					// borderWidth: 1,
-					// titleSpacing: 30,
-					// bodyFont: {
-					// 	size: 16,
-					// 	lineHeight: 1.5
-					// }
-				},
 			},
 		},
 	});
 
 	return {
-		update(newData: InferQueryOutput<'charts:income'>) {
-			if (chart.data.datasets[0] && chart.data.datasets[1]) {
-				chart.data.datasets[0].data = newData.filter((i) => i.isPaid);
-				chart.data.datasets[1].data = newData.filter((i) => !i.isPaid);
-				chart.update();
-			}
+		update(newData: InferQueryOutput<'charts:income:byProperty'>) {
+			chart.data.datasets = getDatasets(newData);
+			chart.update();
 		},
 		destory() {
 			chart.destroy();
