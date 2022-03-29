@@ -2,6 +2,7 @@ import prismaClient from '$lib/server/prismaClient';
 import {
 	groupByMonthAndCat,
 	groupIncome,
+	groupIncomeByProperty,
 	groupOccupancy,
 } from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
@@ -53,11 +54,71 @@ export default trpc
 					postDate: 'asc',
 				},
 			});
-			if (data)
-				return groupIncome(
-					data.map((item) => ({ ...item, date: item.postDate })),
-				);
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Unable to get data' });
+			if (!data) {
+				throw new TRPCError({
+					code: 'NOT_FOUND',
+					message: 'Unable to get data',
+				});
+			}
+			return groupIncome(
+				data.map((item) => ({ ...item, date: item.postDate })),
+			);
+		},
+	})
+	.query('income:byProperty', {
+		input: filterSchema,
+		resolve: async ({
+			input: { end, start, propertyId, clientId, unitId },
+		}) => {
+			const data = await prismaClient.transaction.findMany({
+				where: {
+					postDate: {
+						gte: start,
+						lte: end,
+					},
+					lease: unitId
+						? { unitId }
+						: {
+								unit: propertyId
+									? {
+											propertyId,
+									  }
+									: {
+											property: {
+												clientId,
+											},
+									  },
+						  },
+				},
+				select: {
+					postDate: true,
+					amount: true,
+					isPaid: true,
+					leaseId: true,
+					lease: {
+						include: {
+							unit: {
+								include: {
+									property: true,
+								},
+							},
+						},
+					},
+				},
+				orderBy: {
+					postDate: 'asc',
+				},
+			});
+			if (!data) {
+				throw new TRPCError({
+					code: 'NOT_FOUND',
+					message: 'Unable to get data',
+				});
+			}
+			// return data;
+			return groupIncomeByProperty(
+				data.map((item) => ({ ...item, date: item.postDate })),
+			);
 		},
 	})
 	.query('expenses', {

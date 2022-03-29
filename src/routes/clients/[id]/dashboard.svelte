@@ -2,6 +2,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
+	import { incomeByPropertyChart } from '$lib/components/dashboard/charts/incomeByProperty';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import SimpleSelect from '$lib/components/Select.svelte';
@@ -27,20 +28,31 @@
 			clientId: params.id,
 		};
 
-		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc.query('clients:dashboard', params.id), // TODO use read?
-			trpc.query('charts:income', {
-				...defaultFilter,
-			}),
-			trpc.query('charts:expenses', {
-				...defaultFilter,
-			}),
-			trpc.query('charts:occupancy', {
-				...defaultFilter,
-			}),
-		]);
+		const [client, income, incomeByProperty, expenses, occupancy] =
+			await Promise.all([
+				trpc.query('clients:dashboard', params.id), // TODO use read?
+				trpc.query('charts:income', {
+					...defaultFilter,
+				}),
+				trpc.query('charts:income:byProperty', {
+					...defaultFilter,
+				}),
+				trpc.query('charts:expenses', {
+					...defaultFilter,
+				}),
+				trpc.query('charts:occupancy', {
+					...defaultFilter,
+				}),
+			]);
 		return {
-			props: { client, income, filter: defaultFilter, expenses, occupancy },
+			props: {
+				client,
+				income,
+				incomeByProperty,
+				filter: defaultFilter,
+				expenses,
+				occupancy,
+			},
 		};
 	};
 </script>
@@ -48,6 +60,7 @@
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
 	export let income: InferQueryOutput<'charts:income'>;
+	export let incomeByProperty: InferQueryOutput<'charts:income:byProperty'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let occupancy: InferQueryOutput<'charts:occupancy'>;
 	export let filter: Filter;
@@ -218,6 +231,18 @@
 
 	<!-- Income Chart -->
 	<DashCard
+		title="Rent Income By Property"
+		subtitle="The total amount of rent due."
+		empty={income.length < 1}
+	>
+		<canvas
+			width="400"
+			height="400"
+			use:incomeByPropertyChart={incomeByProperty}
+		/>
+	</DashCard>
+	<!-- Income Chart -->
+	<DashCard
 		title="Rent Income"
 		subtitle="The total amount of rent due."
 		empty={income.length < 1}
@@ -234,10 +259,10 @@
 					if (!newValue) {
 						return;
 					}
-					// income = await trpc.query('charts:income', {
-					// 	...filter,
-					// 	groupBy: newValue,
-					// });
+					income = await trpc.query('charts:income', {
+						...filter,
+						groupBy: newValue,
+					});
 				}}
 			/>
 		</div>
