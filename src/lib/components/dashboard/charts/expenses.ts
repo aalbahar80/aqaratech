@@ -1,12 +1,16 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { categoryGroups } from '$lib/config/constants';
+import {
+	categoryGroups,
+	categoryLabels,
+	getCategoryByLabel,
+} from '$lib/config/constants';
 import Chart, { type ChartData } from 'chart.js/auto/auto.esm'; // TODO treeshake
 import 'chartjs-adapter-date-fns';
 
 const colors = [
 	'#003f5c',
 	'#2f4b7c',
-	'#665191',
+	// '#665191',
 	'#a05195',
 	'#d45087',
 	'#f95d6a',
@@ -20,8 +24,7 @@ export function expensesChart(
 ) {
 	const datasets: ChartData<'bar', typeof data>['datasets'] =
 		categoryGroups.map((cat, n) => ({
-			label: cat,
-			// cat[0]?.toUpperCase() + cat.slice(1).toLowerCase().replace(/_/g, ' '),
+			label: categoryLabels[cat],
 			data: data.filter(
 				(item) => item.category?.toUpperCase() === cat.toUpperCase(),
 			),
@@ -100,10 +103,16 @@ export function expensesChart(
 	return {
 		update(newData: InferQueryOutput<'charts:expenses'>) {
 			chart.data.datasets.forEach((dataset) => {
-				dataset.data = newData.filter(
-					(item) =>
-						item.category?.toUpperCase() === dataset.label?.toUpperCase(),
-				);
+				dataset.data = newData.filter((item) => {
+					const newCategory = categoryLabels[item.category];
+					if (newCategory) {
+						return (
+							getCategoryByLabel(newCategory).toUpperCase() ===
+							dataset.label?.toUpperCase()
+						);
+					}
+					return;
+				});
 			});
 			chart.update();
 		},

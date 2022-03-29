@@ -53,45 +53,8 @@ export const groupIncome = (data: IncomeData[]): IncomeData[] => {
 type Grouped<T> = {
 	data: T[];
 	date: Date;
-	category?: string;
-	amount?: number;
-};
-export const groupByMonth = <T extends { postDate: Date }>(
-	data: T[],
-): Grouped<T>[] => {
-	const firstMonth = data[0]?.postDate;
-	const lastMonth = data[data.length - 1]?.postDate;
-	if (!firstMonth || !lastMonth) return [];
-
-	const months = eachMonthOfInterval({
-		start: firstMonth,
-		end: lastMonth,
-	});
-
-	const buckets: Grouped<T>[] = [];
-	months.forEach((date) => {
-		buckets.push({
-			data: [],
-			date,
-		});
-	});
-
-	data.forEach((item) => {
-		const month = closestTo(item.postDate, months);
-		if (month) {
-			// search for the bucket with the same date and same isPaid
-			const index = buckets.findIndex(
-				// console.log(item.date, bucket.date)
-				(bucket) => isSameDay(bucket.date, month),
-			);
-			if (index !== -1) {
-				buckets[index]!.data.push(item);
-			}
-		} else {
-			console.warn('No appropriate month found');
-		}
-	});
-	return buckets;
+	category: string;
+	amount: number;
 };
 
 export const groupByMonthAndCat = <
@@ -130,7 +93,8 @@ export const groupByMonthAndCat = <
 				// console.log(item.date, bucket.date)
 				(bucket) =>
 					isSameDay(bucket.date, month) &&
-					bucket.category?.toUpperCase() === getCategoryGroup(item.category?.toUpperCase()),
+					bucket.category?.toUpperCase() ===
+						getCategoryGroup(item.category?.toUpperCase()),
 			);
 			if (index !== -1) {
 				// buckets[index]!.data.push(item);

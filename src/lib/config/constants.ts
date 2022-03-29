@@ -325,26 +325,48 @@ export const expenseCategories = [
 
 export const categoryGroups = [
 	'MANAGEMENT_FEES',
-	'HVAC',
-	'UTILITIES',
-	'INSURANCE',
-	'ELEVATORS',
-	'AMENITIES',
 	'CARETAKER',
-	'UPKEEP',
+	'INSURANCE',
+	'UTILITIES',
+	'AMENITIES',
+	'HVAC',
 	'OTHER',
 ];
 
+export const categoryLabels: { [key: string]: string } = {
+	MANAGEMENT_FEES: 'Management Fees',
+	HVAC: 'HVAC',
+	ELEVATORS: 'Elevators',
+	INSURANCE: 'Insurance',
+	INTERNET: 'Internet',
+	SATELLITE: 'Satellite',
+	LANDSCAPING: 'Landscaping',
+	AMENITIES: 'Amenities',
+	CARETAKER: 'Caretaker',
+	ELECTRICITY: 'Electricity',
+	WATER: 'Water',
+	PLUMBING: 'Plumbing',
+	UTILITIES: 'Utilities',
+	OTHER: 'Other',
+};
+
+export const getCategoryByLabel = (label: string): string => {
+	return (
+		Object.keys(categoryLabels).find((key) => categoryLabels[key] === label) ??
+		''
+	);
+};
+
 export const getCategoryGroup = (category: string | null | undefined) => {
 	const utilities = ['ELECTRICITY', 'WATER', 'INTERNET', 'SATELLITE'];
-	const upkeep = ['LANDSCAPING', 'PLUMBING'];
+	const amenities = ['AMENITIES', 'ELEVATOR', 'LANDSCAPING'];
 	if (!category) {
 		return 'OTHER';
 	} else if (utilities.includes(category)) {
 		return 'UTILITIES';
-	} else if (upkeep.includes(category)) {
-		return 'UPKEEP';
+	} else if (amenities.includes(category)) {
+		return 'AMENITIES';
 	} else {
-		return 'OTHER';
+		return category;
 	}
 };

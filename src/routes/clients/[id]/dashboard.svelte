@@ -87,11 +87,6 @@
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
-		const filterChanged =
-			newFilter.start !== filter.start ||
-			newFilter.end !== filter.end ||
-			newFilter.propertyId !== filter.propertyId ||
-			newFilter.unitId !== filter.unitId;
 		[data, expenses] = await Promise.all([
 			trpc.query('charts:income', newFilter),
 			trpc.query('charts:expenses', newFilter),
