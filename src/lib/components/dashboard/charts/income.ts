@@ -87,6 +87,21 @@ export function incomeChart(
 						pointStyle: 'rectRounded',
 					},
 				},
+				tooltip: {
+					xAlign: 'center',
+					yAlign: 'bottom',
+					usePointStyle: true,
+					// backgroundColor: '#fff',
+					// titleColor: '#000',
+					// bodyColor: '#000',
+					// borderColor: '#000',
+					// borderWidth: 1,
+					// titleSpacing: 30,
+					// bodyFont: {
+					// 	size: 16,
+					// 	lineHeight: 1.5
+					// }
+				},
 			},
 		},
 	});
