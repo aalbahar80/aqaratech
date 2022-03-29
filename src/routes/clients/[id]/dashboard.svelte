@@ -86,13 +86,17 @@
 	$: unitOptions = getUnitOptions(selectedProperty);
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
-	$: handleFilter(filter);
 	const handleFilter = async (newFilter: Filter) => {
-		console.log({ newFilter }, 'dashboard.svelte ~ 82');
-		// [data, expenses] = await Promise.all([
-		// 	trpc.query('charts:income', newFilter),
-		// 	trpc.query('charts:expenses', newFilter),
-		// ]);
+		const filterChanged =
+			newFilter.start !== filter.start ||
+			newFilter.end !== filter.end ||
+			newFilter.propertyId !== filter.propertyId ||
+			newFilter.unitId !== filter.unitId;
+		[data, expenses] = await Promise.all([
+			trpc.query('charts:income', newFilter),
+			trpc.query('charts:expenses', newFilter),
+		]);
+		filter = newFilter;
 	};
 </script>
 
@@ -110,11 +114,11 @@
 					isSearchable={false}
 					on:select={(e) => {
 						if (e.detail.value) {
-							filter = {
+							handleFilter({
 								...filter,
 								start: e.detail.value.start,
 								end: e.detail.value.end,
-							};
+							});
 						}
 					}}
 				/>
@@ -128,10 +132,10 @@
 					const newDate = e.currentTarget.valueAsDate;
 					if (newDate) {
 						selectedRange = rangeOptions[rangeOptions.length - 1];
-						filter = {
+						handleFilter({
 							...filter,
 							start: newDate,
-						};
+						});
 					}
 				}}
 			/>
@@ -144,10 +148,10 @@
 					const newDate = e.currentTarget.valueAsDate;
 					if (newDate) {
 						selectedRange = rangeOptions[rangeOptions.length - 1];
-						filter = {
+						handleFilter({
 							...filter,
 							end: newDate,
-						};
+						});
 					}
 				}}
 			/>
@@ -164,18 +168,18 @@
 					on:clear={() => {
 						selectedProperty = null;
 						selectedUnit = null;
-						filter = {
+						handleFilter({
 							...filter,
 							propertyId: null,
 							unitId: null,
-						};
+						});
 					}}
 					on:select={(e) => {
-						filter = {
+						handleFilter({
 							...filter,
 							propertyId: e.detail.value,
 							unitId: null,
-						};
+						});
 					}}
 					showIndicator
 				/>
@@ -190,25 +194,30 @@
 					isDisabled={!selectedProperty}
 					showIndicator
 					on:select={(e) => {
-						filter = {
+						handleFilter({
 							...filter,
 							unitId: e.detail.value,
-						};
+						});
 					}}
 					on:clear={() => {
-						filter = {
+						handleFilter({
 							...filter,
 							unitId: null,
-						};
+						});
 					}}
 				/>
 			</div>
 		</div>
 	</div>
 
-	<!-- Chart -->
+	<!-- Income Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
 		<canvas width="400" height="400" use:incomeChart={data} />
+		<!-- TODO empty state -->
+	</DashCard>
+
+	<!-- Expenses Chart -->
+	<DashCard title="Expenses" subtitle="">
 		<canvas width="400" height="400" use:expensesChart={expenses} />
 		<!-- TODO empty state -->
 	</DashCard>
