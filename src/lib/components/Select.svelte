@@ -9,6 +9,8 @@
 	};
 	export let title: string;
 	export let options: Option[];
+	export let current: string;
+	export let disabled = true;
 
 	const dispatch = createEventDispatcher<{
 		select: { value: string };
@@ -22,9 +24,18 @@
 	id="group-by"
 	name="group-by"
 	class="mt-1 block w-1/5 rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+	class:disabled
+	{disabled}
+	bind:value={current}
 	on:change={(e) => dispatch('select', { value: e.currentTarget.value })}
 >
 	{#each options as { label, value, selected, disabled }}
 		<option {selected} {value} {disabled}>{label}</option>
 	{/each}
 </select>
+
+<style lang="postcss">
+	.disabled {
+		@apply cursor-not-allowed opacity-50;
+	}
+</style>

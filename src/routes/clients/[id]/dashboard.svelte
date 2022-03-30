@@ -13,7 +13,6 @@
 	import { subMonths } from 'date-fns';
 	import Select from 'svelte-select';
 	import type { z } from 'zod';
-	// import Select from 'svelte-select/src/Select.svelte';
 	import type { Load } from './dashboard';
 
 	type Filter = z.infer<typeof filterSchema>;
@@ -188,12 +187,13 @@
 							unitId: null,
 						});
 					}}
-					on:select={(e) => {
-						handleFilter({
+					on:select={async (e) => {
+						await handleFilter({
 							...filter,
 							propertyId: e.detail.value,
 							unitId: null,
 						});
+						incomeGroupBy = 'ratio';
 					}}
 					showIndicator
 				/>
@@ -229,6 +229,8 @@
 		<div slot="groupBy">
 			<SimpleSelect
 				title="Group By"
+				current={incomeGroupBy}
+				disabled={!!selectedProperty || !!selectedUnit}
 				options={[
 					{ label: 'Ratio', value: 'ratio' },
 					{
@@ -244,7 +246,9 @@
 				}}
 			/>
 		</div>
-		<Chart chart={incomeChart} data={[income, incomeGroupBy]} />
+		<Chart>
+			<canvas use:incomeChart={{ data: income, groupBy: incomeGroupBy }} />
+		</Chart>
 	</DashCard>
 
 	<!-- Expenses Chart -->
@@ -253,7 +257,9 @@
 		subtitle="The total amount of expenses."
 		empty={expenses.length < 1}
 	>
-		<Chart chart={expensesChart} data={expenses} />
+		<Chart chart={expensesChart} data={expenses}>
+			<canvas use:expensesChart={expenses} />
+		</Chart>
 	</DashCard>
 
 	<!-- Occupancy Chart -->
@@ -262,7 +268,9 @@
 		subtitle="The percentage of units that are empty."
 		empty={occupancy.length < 1}
 	>
-		<Chart chart={occupancyChart} data={occupancy} />
+		<Chart>
+			<canvas use:occupancyChart={occupancy} />
+		</Chart>
 	</DashCard>
 </div>
 

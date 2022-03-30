@@ -8,6 +8,10 @@ import { sortBy } from 'lodash-es';
 
 type Data = InferQueryOutput<'charts:income'>;
 type GroupBy = 'ratio' | 'property';
+type ChartConfig = {
+	data: Data;
+	groupBy: GroupBy;
+};
 
 const normalize = (data: Data) =>
 	data.properties.flatMap((property) =>
@@ -100,14 +104,11 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 	return datasets;
 };
 
-export function incomeChart(
-	node: HTMLCanvasElement,
-	[data, groupBy]: [Data, GroupBy],
-) {
+export function incomeChart(node: HTMLCanvasElement, config: ChartConfig) {
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {
-			datasets: getDatasets(data, groupBy),
+			datasets: getDatasets(config.data, config.groupBy),
 		},
 		options: {
 			interaction: {
@@ -165,8 +166,11 @@ export function incomeChart(
 	});
 
 	return {
-		update([newData, newGroupBy]: [Data, GroupBy]) {
-			chart.data.datasets = getDatasets(newData, newGroupBy);
+		update(newChartConfig: ChartConfig) {
+			chart.data.datasets = getDatasets(
+				newChartConfig.data,
+				newChartConfig.groupBy,
+			);
 			chart.update();
 		},
 		destory() {
