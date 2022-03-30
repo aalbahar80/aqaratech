@@ -36,8 +36,6 @@
 <script lang="ts">
 	export let chart;
 	export let data;
-
-	$: console.log({ data }, 'Chart.svelte ~ 40');
 </script>
 
 <canvas width="400" height="400" use:chart={data} />

@@ -244,12 +244,9 @@
 						disabled: !!selectedProperty,
 					},
 				]}
-				on:change={(e) => {
-					if (
-						e.target instanceof HTMLSelectElement &&
-						(e.target.value === 'ratio' || e.target.value === 'property')
-					) {
-						incomeGroupBy = e.target.value;
+				on:select={(e) => {
+					if (e.detail.value === 'ratio' || e.detail.value === 'property') {
+						incomeGroupBy = e.detail.value;
 					}
 				}}
 			/>
