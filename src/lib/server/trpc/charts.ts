@@ -59,50 +59,6 @@ export default trpc
 			return data;
 		},
 	})
-	.query('income:byProperty', {
-		input: filterSchema,
-		resolve: async ({ input: { end, start, clientId } }) => {
-			const data = await prismaClient.client.findUnique({
-				where: {
-					id: clientId,
-				},
-				include: {
-					properties: {
-						include: {
-							units: {
-								include: {
-									leases: {
-										include: {
-											transactions: {
-												where: {
-													postDate: {
-														gte: start,
-														lte: end,
-													},
-												},
-												select: {
-													postDate: true,
-													amount: true,
-													isPaid: true,
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			});
-			if (!data) {
-				throw new TRPCError({
-					code: 'NOT_FOUND',
-					message: 'Unable to get data',
-				});
-			}
-			return data;
-		},
-	})
 	.query('expenses', {
 		input: filterSchema,
 		resolve: async ({
