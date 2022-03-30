@@ -15,6 +15,21 @@
 		LineController,
 	} from 'chart.js/dist/chart.esm';
 
+	// Adds padding to legend
+	const legendMargin = {
+		id: 'legendMargin',
+		beforeInit(chart, legend, options) {
+			console.log(chart.legend.fit);
+			const fitValue = chart.legend.fit;
+
+			chart.legend.fit = function fit() {
+				fitValue.bind(chart.legend)();
+				// padding applied to bottom of legend
+				return (this.height += 50);
+			};
+		},
+	};
+
 	Chart.register(
 		Legend,
 		Tooltip,
@@ -27,6 +42,7 @@
 		BarController,
 		LineElement,
 		LineController,
+		legendMargin,
 	);
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family =
