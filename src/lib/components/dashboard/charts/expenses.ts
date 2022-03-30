@@ -43,21 +43,9 @@ export function expensesChart(
 			datasets,
 		},
 		options: {
-			interaction: {
-				mode: 'nearest',
-				axis: 'x',
-				intersect: false,
-			},
 			scales: {
 				x: {
 					type: 'time',
-					time: {
-						unit: 'month',
-						tooltipFormat: 'MMM yy',
-						displayFormats: {
-							month: 'MMM',
-						},
-					},
 					stacked: true,
 					grid: {
 						display: false,
@@ -83,15 +71,6 @@ export function expensesChart(
 					grid: {
 						drawTicks: false,
 						drawBorder: false,
-					},
-				},
-			},
-			plugins: {
-				legend: {
-					align: 'start',
-					labels: {
-						usePointStyle: true,
-						pointStyle: 'rectRounded',
 					},
 				},
 			},

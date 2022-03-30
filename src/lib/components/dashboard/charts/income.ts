@@ -111,21 +111,9 @@ export function incomeChart(node: HTMLCanvasElement, config: ChartConfig) {
 			datasets: getDatasets(config.data, config.groupBy),
 		},
 		options: {
-			interaction: {
-				mode: 'nearest',
-				axis: 'x',
-				intersect: false,
-			},
 			scales: {
 				x: {
 					type: 'time',
-					time: {
-						unit: 'month',
-						tooltipFormat: 'MMM yy',
-						displayFormats: {
-							month: 'MMM',
-						},
-					},
 					stacked: true,
 					grid: {
 						display: false,
@@ -150,15 +138,6 @@ export function incomeChart(node: HTMLCanvasElement, config: ChartConfig) {
 					grid: {
 						drawTicks: false,
 						drawBorder: false,
-					},
-				},
-			},
-			plugins: {
-				legend: {
-					align: 'start',
-					labels: {
-						usePointStyle: true,
-						pointStyle: 'rectRounded',
 					},
 				},
 			},
