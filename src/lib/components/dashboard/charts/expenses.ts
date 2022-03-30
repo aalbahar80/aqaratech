@@ -4,9 +4,10 @@ import {
 	categoryLabels,
 	getCategoryByLabel,
 } from '$lib/config/constants';
-import { Chart } from 'chart.js';
 import type { ChartData } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import * as pkg from 'chart.js';
+
+const { Chart } = pkg;
 
 const colors = [
 	'#003f5c',
@@ -36,10 +37,6 @@ export function expensesChart(
 			backgroundColor: colors[n],
 			borderRadius: 10,
 		}));
-
-	Chart.defaults.font.family =
-		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-	Chart.defaults.font.size = 16;
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {

@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import Chart from '$lib/components/Chart.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
@@ -257,11 +258,7 @@
 				}}
 			/>
 		</div>
-		<canvas
-			width="400"
-			height="400"
-			use:incomeChart={[income, incomeGroupBy]}
-		/>
+		<Chart chart={incomeChart} data={[income, incomeGroupBy]} />
 	</DashCard>
 
 	<!-- Income by Property Chart -->
@@ -273,11 +270,7 @@
 			!!selectedProperty ||
 			!!selectedUnit}
 	>
-		<canvas
-			width="400"
-			height="400"
-			use:incomeByPropertyChart={incomeByProperty}
-		/>
+		<Chart chart={incomeByPropertyChart} data={incomeByProperty} />
 	</DashCard>
 
 	<!-- Expenses Chart -->
@@ -286,7 +279,7 @@
 		subtitle="The total amount of expenses."
 		empty={expenses.length < 1}
 	>
-		<canvas width="400" height="400" use:expensesChart={expenses} />
+		<Chart chart={expensesChart} data={expenses} />
 	</DashCard>
 
 	<!-- Occupancy Chart -->
@@ -295,7 +288,7 @@
 		subtitle="The percentage of units that are empty."
 		empty={occupancy.length < 1}
 	>
-		<canvas width="400" height="400" use:occupancyChart={occupancy} />
+		<Chart chart={occupancyChart} data={occupancy} />
 	</DashCard>
 </div>
 

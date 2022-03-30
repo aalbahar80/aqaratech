@@ -2,10 +2,11 @@ import type { InferQueryOutput } from '$lib/client/trpc';
 import { palette } from '$lib/config/constants';
 import { getAddress } from '$lib/definitions/property';
 import { getMonths } from '$lib/utils/group';
-import { Chart } from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import { closestTo, eachMonthOfInterval, isSameDay } from 'date-fns';
+import * as pkg from 'chart.js';
+import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
+
+const { Chart } = pkg;
 
 const normalize = (data: InferQueryOutput<'charts:income:byProperty'>) =>
 	data.properties.flatMap((property) =>
@@ -89,10 +90,6 @@ export function incomeByPropertyChart(
 	node: HTMLCanvasElement,
 	data: InferQueryOutput<'charts:income:byProperty'>,
 ) {
-	Chart.defaults.font.family =
-		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-	Chart.defaults.font.size = 16;
-
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {

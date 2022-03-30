@@ -1,6 +1,9 @@
 <script context="module" lang="ts">
+	import MyChart from '$lib/components/Chart.svelte';
 	import type { ChartData, ChartOptions } from 'chart.js';
-	import { Chart } from 'chart.js';
+	import * as pkg from 'chart.js';
+
+	const { Chart } = pkg;
 
 	export const prerender = true;
 </script>
@@ -11,7 +14,7 @@
 		options: ChartOptions<'bar'>;
 	};
 
-	function action(node: HTMLCanvasElement, config: ChartStuff) {
+	function chart(node: HTMLCanvasElement, config: ChartStuff) {
 		const chart = new Chart(node, {
 			type: 'bar',
 			...config,
@@ -71,12 +74,10 @@
 		},
 	});
 	let config = getConfig();
-	$: console.log(config);
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<canvas width="400" height="400" use:action={config} />
-
+	<MyChart {chart} data={config} />
 	<button
 		on:click={() => {
 			config = getConfig();

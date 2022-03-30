@@ -33,6 +33,7 @@
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<Heading title="Client" id={client.id} entity="clients">
 		<svelte:fragment slot="actions">
+			<!-- TODO prefetch -->
 			<Button
 				icon={PresentationChartBar}
 				text="Dashboard"

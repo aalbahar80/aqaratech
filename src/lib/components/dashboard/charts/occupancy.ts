@@ -1,14 +1,12 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { Chart } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import * as pkg from 'chart.js';
+
+const { Chart } = pkg;
 
 export function occupancyChart(
 	node: HTMLCanvasElement,
 	data: InferQueryOutput<'charts:occupancy'>,
 ) {
-	Chart.defaults.font.family =
-		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-	Chart.defaults.font.size = 16;
 	const chart = new Chart(node, {
 		type: 'line',
 		data: {
