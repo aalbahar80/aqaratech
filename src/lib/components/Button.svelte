@@ -10,6 +10,7 @@
 	export let solid: boolean = false;
 	export let as: 'button' | 'a' = 'button';
 	export let href: string = '';
+	export let prefetch: true | undefined = undefined;
 </script>
 
 {#if as === 'button' || disabled}
@@ -27,7 +28,7 @@
 	</button>
 {:else}
 	<!-- disabled <a> is rendered as button for convenience -->
-	<a {href} class={$$props.class}>
+	<a {href} class={$$props.class} sveltekit:prefetch={prefetch}>
 		{#if icon}
 			<Icon
 				src={icon}

@@ -40,6 +40,7 @@
 				as="a"
 				href={`/clients/${client.id}/dashboard`}
 				class="w-full sm:w-auto"
+				prefetch
 			/>
 		</svelte:fragment>
 	</Heading>
