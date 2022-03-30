@@ -55,19 +55,15 @@ export function expensesChart(
 				y: {
 					stacked: true,
 					ticks: {
-						callback: (value, index, values) =>
-							// hide the first tick
-							index == values.length - 1
-								? undefined
-								: // format the value
-								  Intl.NumberFormat('en-GB', {
-										notation: 'compact',
-								  }).format(Number(value)),
 						// maxTicksLimit: 6,
-						autoSkip: true,
 						autoSkipPadding: 50,
+						format: Intl.NumberFormat('en-GB', {
+							style: 'currency',
+							currency: 'KWD',
+							notation: 'compact',
+						}).resolvedOptions(),
 					},
-					// grace: '20%',
+					grace: '20%',
 					grid: {
 						drawTicks: false,
 						drawBorder: false,

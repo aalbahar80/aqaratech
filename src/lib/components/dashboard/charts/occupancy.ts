@@ -52,7 +52,7 @@ export function occupancyChart(
 							style: 'percent',
 						}).resolvedOptions(),
 						// labelOffset: 10,
-						align: 'start',
+						autoSkipPadding: 50,
 					},
 					beginAtZero: true,
 					max: 1,
