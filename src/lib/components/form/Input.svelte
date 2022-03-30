@@ -30,7 +30,7 @@
 		label: `${area[0]} | ${area[1]}`,
 	}));
 	const fuse = new Fuse(areas, options);
-	const loadOptions = (q: string) =>
+	const loadOptions = async (q: string) =>
 		fuse.search(q).map((result) => ({
 			value: result.item[1],
 			label: `${result.item[0]} | ${result.item[1]}`,
