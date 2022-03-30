@@ -4,7 +4,8 @@ import {
 	categoryLabels,
 	getCategoryByLabel,
 } from '$lib/config/constants';
-import Chart, { type ChartData } from 'chart.js/auto/auto.esm'; // TODO treeshake
+import { Chart } from 'chart.js';
+import type { ChartData } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 
 const colors = [

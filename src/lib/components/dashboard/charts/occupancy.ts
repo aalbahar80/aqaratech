@@ -1,5 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import Chart from 'chart.js/auto/auto.esm'; // TODO treeshake
+import { Chart } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 
 export function occupancyChart(

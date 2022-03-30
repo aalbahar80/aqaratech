@@ -1,8 +1,6 @@
 <script lang="ts">
-	import Chart, {
-		type ChartData,
-		type ChartOptions,
-	} from 'chart.js/auto/auto.esm';
+	import { Chart } from 'chart.js';
+	import type { ChartData, ChartOptions } from 'chart.js';
 
 	type ChartStuff = {
 		data: ChartData<'bar'>;

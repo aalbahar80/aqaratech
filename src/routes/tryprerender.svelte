@@ -1,8 +1,6 @@
 <script context="module" lang="ts">
-	import Chart, {
-		type ChartData,
-		type ChartOptions,
-	} from 'chart.js/auto/auto.esm';
+	import type { ChartData, ChartOptions } from 'chart.js';
+	import { Chart } from 'chart.js';
 
 	export const prerender = true;
 </script>
