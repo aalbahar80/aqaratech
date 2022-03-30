@@ -28,27 +28,22 @@
 			clientId: params.id,
 		};
 
-		const [client, income, incomeByProperty, expenses, occupancy] =
-			await Promise.all([
-				trpc.query('clients:dashboard', params.id), // TODO use read?
-				trpc.query('charts:income', {
-					...defaultFilter,
-				}),
-				trpc.query('charts:income:byProperty', {
-					...defaultFilter,
-				}),
-				trpc.query('charts:expenses', {
-					...defaultFilter,
-				}),
-				trpc.query('charts:occupancy', {
-					...defaultFilter,
-				}),
-			]);
+		const [client, income, expenses, occupancy] = await Promise.all([
+			trpc.query('clients:dashboard', params.id), // TODO use read?
+			trpc.query('charts:income', {
+				...defaultFilter,
+			}),
+			trpc.query('charts:expenses', {
+				...defaultFilter,
+			}),
+			trpc.query('charts:occupancy', {
+				...defaultFilter,
+			}),
+		]);
 		return {
 			props: {
 				client,
 				income,
-				incomeByProperty,
 				filter: defaultFilter,
 				expenses,
 				occupancy,
@@ -60,7 +55,6 @@
 <script lang="ts">
 	export let client: InferQueryOutput<'clients:dashboard'>;
 	export let income: InferQueryOutput<'charts:income'>;
-	export let incomeByProperty: InferQueryOutput<'charts:income:byProperty'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let occupancy: InferQueryOutput<'charts:occupancy'>;
 	export let filter: Filter;
@@ -108,11 +102,10 @@
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
-		[income, expenses, occupancy, incomeByProperty] = await Promise.all([
+		[income, expenses, occupancy] = await Promise.all([
 			trpc.query('charts:income', newFilter),
 			trpc.query('charts:expenses', newFilter),
 			trpc.query('charts:occupancy', newFilter),
-			trpc.query('charts:income:byProperty', newFilter),
 		]);
 		filter = newFilter;
 	};

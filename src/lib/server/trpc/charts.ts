@@ -17,15 +17,19 @@ export default trpc
 	.router()
 	.query('income', {
 		input: filterSchema,
-		resolve: async ({ input: { end, start, clientId } }) => {
+		resolve: async ({
+			input: { end, start, clientId, propertyId, unitId },
+		}) => {
 			const data = await prismaClient.client.findUnique({
 				where: {
 					id: clientId,
 				},
 				include: {
 					properties: {
+						where: propertyId ? { id: propertyId } : {},
 						include: {
 							units: {
+								where: unitId ? { id: unitId } : {},
 								include: {
 									leases: {
 										include: {
