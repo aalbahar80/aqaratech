@@ -21,3 +21,9 @@ declare namespace App {
 }
 
 type FormType = 'create' | 'update';
+
+declare module 'chart.js/dist/chart.esm' {
+	import { Chart } from 'chart.js/types/index.esm';
+	export * from 'chart.js/types/index.esm';
+	export default Chart;
+}
