@@ -2,11 +2,9 @@ import type { InferQueryOutput } from '$lib/client/trpc';
 import { palette } from '$lib/config/constants';
 import { getAddress } from '$lib/definitions/property';
 import { getMonths } from '$lib/utils/group';
-import * as pkg from 'chart.js';
+import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
 import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
-
-const { Chart } = pkg;
 
 type Data = InferQueryOutput<'charts:income'>;
 type GroupBy = 'ratio' | 'property';
