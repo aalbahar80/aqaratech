@@ -21,7 +21,7 @@ const config = {
 				},
 			},
 			ssr: {
-				noExternal: process.env.NODE_ENV === 'production' ? ['superjson'] : [],
+				noExternal: process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
 				external: ['@temporalio']
 			},
 			plugins: [
