@@ -2,27 +2,31 @@
 	import 'chartjs-adapter-date-fns';
 	import {
 		Chart,
+		Legend,
+		Tooltip,
+		Filler,
 		LinearScale,
-		BarController,
-		BarElement,
 		CategoryScale,
 		TimeScale,
-		LineController,
 		PointElement,
+		BarElement,
+		BarController,
 		LineElement,
-		Tooltip,
+		LineController,
 	} from 'chart.js/dist/chart.esm';
 
 	Chart.register(
+		Legend,
+		Tooltip,
+		Filler,
 		LinearScale,
-		BarController,
-		BarElement,
 		CategoryScale,
 		TimeScale,
-		LineController,
 		PointElement,
+		BarElement,
+		BarController,
 		LineElement,
-		Tooltip,
+		LineController,
 	);
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family =
@@ -32,6 +36,8 @@
 <script lang="ts">
 	export let chart;
 	export let data;
+
+	$: console.log({ data }, 'Chart.svelte ~ 40');
 </script>
 
 <canvas width="400" height="400" use:chart={data} />
