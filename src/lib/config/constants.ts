@@ -372,6 +372,7 @@ export const getCategoryGroup = (category: string | null | undefined) => {
 };
 
 export const palette: { [key: string]: string[] } = {
+	2: ['#003f5c', '#ffa600'],
 	3: ['#003f5c', '#bc5090', '#ffa600'],
 	4: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
 	5: ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600'],
@@ -395,4 +396,10 @@ export const palette: { [key: string]: string[] } = {
 		'#ff7c43',
 		'#ffa600',
 	],
+};
+
+export const getColor = (index: number, total: number) => {
+	const size = Math.max(2, Math.min(total, 8));
+	const backgroundColor = palette[size]?.[index];
+	return backgroundColor;
 };

@@ -1,5 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { palette } from '$lib/config/constants';
+import { getColor } from '$lib/config/constants';
 import { getAddress } from '$lib/definitions/property';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
@@ -82,13 +82,9 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 		.filter((value, index, self) => self.indexOf(value) === index);
 
 	const datasets = groups.map((group, n) => {
-		const size = Math.max(3, Math.min(groups.length, 8));
-		const backgroundColor = palette[size]?.[n];
+		const backgroundColor = getColor(n, groups.length);
 		return {
 			label: getLabel(group, groupBy),
-			// data: aggregated.filter((item) =>
-			// 	groupBy === 'property' ? item.address : item.isPaid === group,
-			// ),
 			data:
 				groupBy === 'property'
 					? aggregated.filter((item) => item.address === group)
