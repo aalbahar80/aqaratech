@@ -3,7 +3,6 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
-	import { incomeByPropertyChart } from '$lib/components/dashboard/charts/incomeByProperty';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import SimpleSelect from '$lib/components/Select.svelte';
@@ -232,12 +231,8 @@
 		</div>
 	</div>
 
-	<!-- Income by Ratio Chart -->
-	<DashCard
-		title="Rent Income"
-		subtitle="The total amount of rent due."
-		empty={income.length < 1}
-	>
+	<!-- Income Chart -->
+	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
 		<div slot="groupBy">
 			<SimpleSelect
 				title="Group By"
@@ -249,28 +244,17 @@
 						disabled: !!selectedProperty,
 					},
 				]}
-				on:change={async (e) => {
-					const newValue = e.target?.value;
-					if (!newValue) {
-						return;
+				on:change={(e) => {
+					if (
+						e.target instanceof HTMLSelectElement &&
+						(e.target.value === 'ratio' || e.target.value === 'property')
+					) {
+						incomeGroupBy = e.target.value;
 					}
-					incomeGroupBy = newValue;
 				}}
 			/>
 		</div>
 		<Chart chart={incomeChart} data={[income, incomeGroupBy]} />
-	</DashCard>
-
-	<!-- Income by Property Chart -->
-	<DashCard
-		title="Rent Income By Property"
-		subtitle="The total amount of rent due by property."
-		empty={(incomeByProperty?.properties[0]?.units[0]?.leases[0]
-			?.transactions ?? 0) > 0 ||
-			!!selectedProperty ||
-			!!selectedUnit}
-	>
-		<Chart chart={incomeByPropertyChart} data={incomeByProperty} />
 	</DashCard>
 
 	<!-- Expenses Chart -->
