@@ -1,8 +1,6 @@
 <script lang="ts" context="module">
 	import 'chartjs-adapter-date-fns';
-	// import * as ChartjsPkg from 'chart.js';
-	import * as ChartjsPkg from 'chart.js/dist/chart.esm';
-	const {
+	import {
 		Chart,
 		LinearScale,
 		BarController,
@@ -13,7 +11,7 @@
 		PointElement,
 		LineElement,
 		Tooltip,
-	} = ChartjsPkg;
+	} from 'chart.js/dist/chart.esm';
 
 	Chart.register(
 		LinearScale,
