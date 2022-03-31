@@ -5,6 +5,7 @@ import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
 import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
+import { currencyTooltip } from './utils/currency';
 
 type Data = InferQueryOutput<'charts:income'>;
 type GroupBy = 'ratio' | 'property';
@@ -126,8 +127,6 @@ export function incomeChart(node: HTMLCanvasElement, config: ChartConfig) {
 						// maxTicksLimit: 6,
 						autoSkipPadding: 50,
 						format: Intl.NumberFormat('en-GB', {
-							style: 'currency',
-							currency: 'KWD',
 							notation: 'compact',
 						}).resolvedOptions(),
 					},
@@ -135,6 +134,13 @@ export function incomeChart(node: HTMLCanvasElement, config: ChartConfig) {
 					grid: {
 						drawTicks: false,
 						drawBorder: false,
+					},
+				},
+			},
+			plugins: {
+				tooltip: {
+					callbacks: {
+						label: currencyTooltip,
 					},
 				},
 			},

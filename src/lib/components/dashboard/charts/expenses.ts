@@ -6,6 +6,7 @@ import {
 } from '$lib/config/constants';
 import type { ChartData } from 'chart.js';
 import * as pkg from 'chart.js';
+import { currencyTooltip } from './utils/currency';
 
 const { Chart } = pkg;
 
@@ -58,8 +59,6 @@ export function expensesChart(
 						// maxTicksLimit: 6,
 						autoSkipPadding: 50,
 						format: Intl.NumberFormat('en-GB', {
-							style: 'currency',
-							currency: 'KWD',
 							notation: 'compact',
 						}).resolvedOptions(),
 					},
@@ -67,6 +66,13 @@ export function expensesChart(
 					grid: {
 						drawTicks: false,
 						drawBorder: false,
+					},
+				},
+			},
+			plugins: {
+				tooltip: {
+					callbacks: {
+						label: currencyTooltip,
 					},
 				},
 			},
