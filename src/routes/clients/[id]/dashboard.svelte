@@ -120,12 +120,9 @@
 		<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 			<!-- Range -->
 			<div class="md:w-1/2">
-				<Select
-					items={rangeOptions}
-					bind:value={selectedRange}
-					isClearable={false}
-					showIndicator
-					isSearchable={false}
+				<SimpleSelect
+					bind:current={selectedRange}
+					options={rangeOptions}
 					on:select={(e) => {
 						if (e.detail.value) {
 							handleFilter({
