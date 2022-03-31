@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	type T = $$Generic;
 	type Option = {
 		label: string;
-		value: string;
+		value: T;
 		disabled?: boolean;
 		selected?: boolean;
 	};
 	export let title = '';
 	export let options: Option[];
-	export let current: string;
+	export let current: T;
 	export let disabled = false;
 
 	const dispatch = createEventDispatcher<{

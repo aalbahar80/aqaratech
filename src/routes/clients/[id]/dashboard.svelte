@@ -61,14 +61,16 @@
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
 
-	const predefinedRanges = [3, 6, 12].map((months) => ({
-		label: `Last ${months} months`,
-		value: {
-			start: subMonths(new Date(Date.now()), months),
-			end: new Date(Date.now()),
-		},
-	}));
-	const rangeOptions = [...predefinedRanges, { value: null, label: 'Custom' }];
+	const getRange = (months: number) => ({
+		start: subMonths(new Date(Date.now()), months),
+		end: new Date(Date.now()),
+	});
+	const rangeOptions = [
+		{ value: 3, label: 'Last 3 months' },
+		{ value: 6, label: 'Last 6 months', selected: true }, // rethink selected vs bind
+		{ value: 12, label: 'Last 12 months' },
+		{ value: 0, label: 'Custom' },
+	];
 
 	const propertyOptions = client.properties.map((property) => ({
 		value: property.id,
@@ -94,7 +96,7 @@
 		return [];
 	};
 
-	let selectedRange = rangeOptions[1];
+	let selectedRange = 6;
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
@@ -120,15 +122,15 @@
 		<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 			<!-- Range -->
 			<div class="md:w-1/2">
+				<!-- rethink bind -->
 				<SimpleSelect
 					bind:current={selectedRange}
 					options={rangeOptions}
 					on:select={(e) => {
-						if (e.detail.value) {
+						if (+e.detail.value) {
 							handleFilter({
 								...filter,
-								start: e.detail.value.start,
-								end: e.detail.value.end,
+								...getRange(+e.detail.value),
 							});
 						}
 					}}
@@ -145,7 +147,7 @@
 					on:change={(e) => {
 						const newDate = e.currentTarget.valueAsDate;
 						if (newDate) {
-							selectedRange = rangeOptions[rangeOptions.length - 1];
+							selectedRange = 0;
 							handleFilter({
 								...filter,
 								start: newDate,
@@ -163,7 +165,7 @@
 					on:change={(e) => {
 						const newDate = e.currentTarget.valueAsDate;
 						if (newDate) {
-							selectedRange = rangeOptions[rangeOptions.length - 1];
+							selectedRange = 0;
 							handleFilter({
 								...filter,
 								end: newDate,
