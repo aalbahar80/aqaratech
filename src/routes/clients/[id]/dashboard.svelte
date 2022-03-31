@@ -115,9 +115,9 @@
 	<div class="prose">
 		<h1>Dashboard</h1>
 	</div>
-	<div class="flex max-w-screen-lg flex-col justify-between gap-2 md:flex-row">
+	<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
 		<!-- Date Filters -->
-		<div class="flex flex-col gap-1 pr-3 md:w-3/5 md:flex-row">
+		<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 			<!-- Range -->
 			<div class="md:w-1/2">
 				<Select
@@ -176,7 +176,7 @@
 		</div>
 
 		<!-- Property/Unit Filters -->
-		<div class="flex flex-col gap-1 md:w-1/2 md:flex-row">
+		<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
 			<!-- Property -->
 			<div class="md:w-2/3">
 				<Select
