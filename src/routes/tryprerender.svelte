@@ -1,31 +1,49 @@
 <script context="module" lang="ts">
 	import MyChart from '$lib/components/Chart.svelte';
-	import type { ChartData, ChartOptions } from 'chart.js';
-	import * as pkg from 'chart.js';
-
-	const { Chart } = pkg;
+	import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
 
 	export const prerender = true;
 </script>
 
 <script lang="ts">
-	type ChartStuff = {
-		data: ChartData<'bar'>;
-		options: ChartOptions<'bar'>;
-	};
-
-	function chart(node: HTMLCanvasElement, config: ChartStuff) {
+	function sampleChart(node: HTMLCanvasElement, config: number[]) {
 		const chart = new Chart(node, {
 			type: 'bar',
-			...config,
+			data: {
+				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+				datasets: [
+					{
+						label: '# of Votes',
+						data: Array.from({ length: 6 }, () =>
+							Math.floor(Math.random() * 10),
+						),
+						backgroundColor: [
+							'#003f5c',
+							'#444e86',
+							'#955196',
+							'#dd5182',
+							'#ff6e54',
+							'#ffa600',
+						],
+						borderColor: [
+							'#003f5c',
+							'#444e86',
+							'#955196',
+							'#dd5182',
+							'#ff6e54',
+							'#ffa600',
+						],
+						borderWidth: 1,
+					},
+				],
+			},
 		});
 
 		return {
-			update(newConfig: ChartStuff) {
-				chart.data = {
-					...chart.data,
-					...newConfig.data,
-				};
+			update(newConfig: number[]) {
+				if (chart.data.datasets[0]?.data) {
+					chart.data.datasets[0].data = newConfig;
+				}
 				chart.update();
 			},
 			destroy() {
@@ -33,51 +51,17 @@
 			},
 		};
 	}
-	let getConfig = (): ChartStuff => ({
-		data: {
-			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-			datasets: [
-				{
-					label: '# of Votes',
-					data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)),
-					backgroundColor: [
-						'#003f5c',
-						'#444e86',
-						'#955196',
-						'#dd5182',
-						'#ff6e54',
-						'#ffa600',
-					],
-					borderColor: [
-						'#003f5c',
-						'#444e86',
-						'#955196',
-						'#dd5182',
-						'#ff6e54',
-						'#ffa600',
-					],
-					borderWidth: 1,
-				},
-			],
-		},
-		options: {
-			interaction: {
-				mode: 'nearest',
-				axis: 'x',
-				intersect: false,
-			},
-			scales: {
-				y: {
-					beginAtZero: true,
-				},
-			},
-		},
-	});
+
+	let getConfig = () =>
+		Array.from({ length: 6 }, () => Math.floor(Math.random() * 10));
+
 	let config = getConfig();
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<MyChart {chart} data={config} />
+	<MyChart>
+		<canvas use:sampleChart={config} />
+	</MyChart>
 	<button
 		on:click={() => {
 			config = getConfig();
