@@ -115,10 +115,11 @@
 	<div class="prose">
 		<h1>Dashboard</h1>
 	</div>
-	<div class="flex max-w-screen-lg justify-between gap-x-2">
+	<div class="flex max-w-screen-lg flex-col justify-between gap-2 md:flex-row">
 		<!-- Date Filters -->
-		<div class="flex w-3/5 gap-x-1 pr-3">
-			<div class="w-1/2">
+		<div class="flex flex-col gap-1 pr-3 md:w-3/5 md:flex-row">
+			<!-- Range -->
+			<div class="md:w-1/2">
 				<Select
 					items={rangeOptions}
 					bind:value={selectedRange}
@@ -136,6 +137,8 @@
 					}}
 				/>
 			</div>
+
+			<!-- Start -->
 			<input
 				type="date"
 				name="start"
@@ -152,6 +155,8 @@
 					}
 				}}
 			/>
+
+			<!-- End -->
 			<input
 				type="date"
 				name="end"
@@ -171,9 +176,9 @@
 		</div>
 
 		<!-- Property/Unit Filters -->
-		<div class="flex w-1/2 gap-x-1">
+		<div class="flex flex-col gap-1 md:w-1/2 md:flex-row">
 			<!-- Property -->
-			<div class="w-2/3">
+			<div class="md:w-2/3">
 				<Select
 					placeholder="All Properties"
 					items={propertyOptions}
@@ -200,7 +205,7 @@
 			</div>
 
 			<!-- Unit -->
-			<div class="w-1/3">
+			<div class="md:w-1/3">
 				<Select
 					placeholder="All Units"
 					items={unitOptions}
@@ -276,7 +281,7 @@
 
 <style lang="postcss">
 	.date-input {
-		@apply block w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm md:w-1/3;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
 </style>
