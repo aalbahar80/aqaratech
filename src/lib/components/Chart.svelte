@@ -89,18 +89,12 @@
 	};
 
 	Tooltip.positioners.top = function (elements: readonly ActiveElement[]) {
-		const pos = Tooltip.positioners.average(elements);
-		// Happens when nothing is found
-		if (pos === false) {
-			return false;
-		}
-		const chart = this.chart;
 		const maxY = elements.reduce((acc, cur) => {
 			return Math.min(acc, cur.element.y);
-		}, chart.chartArea.bottom);
+		}, 99999);
 
 		return {
-			x: pos.x,
+			x: elements[0]?.element.x ?? 500, // change this for non-verical bar charts
 			y: maxY - 10,
 			xAlign: 'center',
 			yAlign: 'bottom',
