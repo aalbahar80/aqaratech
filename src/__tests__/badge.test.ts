@@ -1,26 +1,38 @@
+import Badge from '$lib/components/Badge.svelte';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen } from '@testing-library/svelte';
-import Badge from '../lib/components/Badge.svelte';
+import { cleanup, render } from '@testing-library/svelte';
+import { beforeEach, expect, test } from 'vitest';
 
-afterEach(() => cleanup());
+const props = {
+	label: 'MyLabel',
+	badgeColor: 'red',
+};
 
-describe('Badge.svelte', () => {
-	// TODO: @testing-library/svelte claims to add this automatically but it doesn't work without explicit afterEach
-	afterEach(() => cleanup());
+beforeEach(cleanup);
 
-	it('mounts', () => {
-		const { container } = render(Badge, {
-			label: 'MyLabel',
-			badgeColor: 'red',
-		});
-		expect(container).toBeTruthy();
-		expect(container.innerHTML).toContain('MyLabel');
-		expect(container.innerHTML).toMatchSnapshot();
+test('can render', () => {
+	render(Badge, {
+		props,
 	});
+});
 
-	it('has the correct color', async () => {
-		render(Badge, { label: 'MyLabel', badgeColor: 'red' });
-		const div = screen.getByText('MyLabel');
-		expect(div).toHaveClass('red');
-	});
+test('displays the label', () => {
+	const { getByText } = render(Badge, { props });
+	expect(getByText('MyLabel')).toBeDefined();
+});
+
+test('has the correct color', () => {
+	const { getByText } = render(Badge, { props });
+	expect(getByText('MyLabel')).toHaveClass('text-lg', 'red');
+
+	// the following doesn't work if they're not declared inline
+	// use playwright instead
+	// expect(getByText('MyLabel')).toHaveStyle({
+	// fontSize: '1.125rem',
+	// backgroundColor: 'red',
+	// });
+
+	// meanwhile not sure how to get this to work at all.
+	// Might be worth considering that this isn't really a useful test.
+	// expect(getByText('MyLabel')).toHaveClass('text-pink-800');
 });
