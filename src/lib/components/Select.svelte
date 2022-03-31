@@ -12,7 +12,6 @@
 	export let current: T;
 	export let disabled = false;
 
-	$: console.log({ current }, 'Select.svelte ~ 16');
 	const dispatch = createEventDispatcher<{
 		select: { value: string };
 	}>();

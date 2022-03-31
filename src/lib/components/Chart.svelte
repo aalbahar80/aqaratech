@@ -25,7 +25,7 @@
 			chart.legend.fit = function fit() {
 				fitValue.bind(chart.legend)();
 				// padding applied to bottom of legend
-				return (this.height += 150);
+				return (this.height += 100);
 			};
 		},
 	};
@@ -44,6 +44,8 @@
 		LineController,
 		legendMargin,
 	);
+	// Chart.defaults.aspectRatio = 2;
+	Chart.defaults.maintainAspectRatio = false; // important for responsiveness
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
@@ -104,9 +106,11 @@
 			yAlign: 'bottom',
 		};
 	};
+
+	const height = 600;
+	const width = 400;
 </script>
 
-<!-- <div width="400" height="400"> -->
 <div>
-	<slot />
+	<slot {height} {width} />
 </div>

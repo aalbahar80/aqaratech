@@ -253,8 +253,12 @@
 				}}
 			/>
 		</div>
-		<Chart>
-			<canvas use:incomeChart={{ data: income, groupBy: incomeGroupBy }} />
+		<Chart let:height let:width>
+			<canvas
+				{height}
+				{width}
+				use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
+			/>
 		</Chart>
 	</DashCard>
 
@@ -264,8 +268,8 @@
 		subtitle="The total amount of expenses."
 		empty={expenses.length < 1}
 	>
-		<Chart>
-			<canvas use:expensesChart={expenses} />
+		<Chart let:height let:width>
+			<canvas {height} {width} use:expensesChart={expenses} />
 		</Chart>
 	</DashCard>
 
@@ -275,8 +279,8 @@
 		subtitle="The percentage of units that are empty."
 		empty={occupancy.length < 1}
 	>
-		<Chart>
-			<canvas use:occupancyChart={occupancy} />
+		<Chart let:height let:width>
+			<canvas {height} {width} use:occupancyChart={occupancy} />
 		</Chart>
 	</DashCard>
 </div>
