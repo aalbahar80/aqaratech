@@ -138,41 +138,43 @@
 				/>
 			</div>
 
-			<!-- Start -->
-			<input
-				type="date"
-				name="start"
-				class="date-input"
-				value={startInput}
-				on:change={(e) => {
-					const newDate = e.currentTarget.valueAsDate;
-					if (newDate) {
-						selectedRange = rangeOptions[rangeOptions.length - 1];
-						handleFilter({
-							...filter,
-							start: newDate,
-						});
-					}
-				}}
-			/>
+			<div class="md:1/2 flex gap-1">
+				<!-- Start -->
+				<input
+					type="date"
+					name="start"
+					class="date-input"
+					value={startInput}
+					on:change={(e) => {
+						const newDate = e.currentTarget.valueAsDate;
+						if (newDate) {
+							selectedRange = rangeOptions[rangeOptions.length - 1];
+							handleFilter({
+								...filter,
+								start: newDate,
+							});
+						}
+					}}
+				/>
 
-			<!-- End -->
-			<input
-				type="date"
-				name="end"
-				class="date-input"
-				value={endInput}
-				on:change={(e) => {
-					const newDate = e.currentTarget.valueAsDate;
-					if (newDate) {
-						selectedRange = rangeOptions[rangeOptions.length - 1];
-						handleFilter({
-							...filter,
-							end: newDate,
-						});
-					}
-				}}
-			/>
+				<!-- End -->
+				<input
+					type="date"
+					name="end"
+					class="date-input"
+					value={endInput}
+					on:change={(e) => {
+						const newDate = e.currentTarget.valueAsDate;
+						if (newDate) {
+							selectedRange = rangeOptions[rangeOptions.length - 1];
+							handleFilter({
+								...filter,
+								end: newDate,
+							});
+						}
+					}}
+				/>
+			</div>
 		</div>
 
 		<!-- Property/Unit Filters -->
@@ -281,7 +283,7 @@
 
 <style lang="postcss">
 	.date-input {
-		@apply block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm md:w-1/3;
+		@apply block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
 </style>
