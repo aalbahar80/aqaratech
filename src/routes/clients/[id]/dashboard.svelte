@@ -257,7 +257,7 @@
 		subtitle="The total amount of expenses."
 		empty={expenses.length < 1}
 	>
-		<Chart chart={expensesChart} data={expenses}>
+		<Chart>
 			<canvas use:expensesChart={expenses} />
 		</Chart>
 	</DashCard>

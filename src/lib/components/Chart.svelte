@@ -13,19 +13,19 @@
 		BarController,
 		LineElement,
 		LineController,
+		type ActiveElement,
 	} from 'chart.js/dist/chart.esm';
 
 	// Adds padding to legend
 	const legendMargin = {
 		id: 'legendMargin',
-		beforeInit(chart, legend, options) {
-			console.log(chart.legend.fit);
+		beforeInit(chart: any) {
 			const fitValue = chart.legend.fit;
 
 			chart.legend.fit = function fit() {
 				fitValue.bind(chart.legend)();
 				// padding applied to bottom of legend
-				return (this.height += 50);
+				return (this.height += 150);
 			};
 		},
 	};
@@ -49,7 +49,6 @@
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 	Chart.defaults.interaction = {
 		mode: 'nearest',
-		// mode: 'index',
 		axis: 'x',
 		intersect: false,
 	};
@@ -67,8 +66,6 @@
 	};
 	Chart.defaults.plugins.tooltip = {
 		...Chart.defaults.plugins.tooltip,
-		xAlign: 'center',
-		yAlign: 'bottom',
 
 		// Spacing
 		boxHeight: 20,
@@ -87,6 +84,27 @@
 		boxWidth: 40,
 		footerColor: '#f3f4f6',
 		// multiKeyBackground: 'hsl(195, 100%, 50%)',
+
+		position: 'top',
+	};
+
+	Tooltip.positioners.top = function (elements: readonly ActiveElement[]) {
+		const pos = Tooltip.positioners.average(elements);
+		// Happens when nothing is found
+		if (pos === false) {
+			return false;
+		}
+		const chart = this.chart;
+		const maxY = elements.reduce((acc, cur) => {
+			return Math.min(acc, cur.element.y);
+		}, chart.chartArea.bottom);
+
+		return {
+			x: pos.x,
+			y: maxY - 10,
+			xAlign: 'center',
+			yAlign: 'bottom',
+		};
 	};
 </script>
 
