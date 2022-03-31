@@ -54,6 +54,13 @@
 	function classNames(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
 	}
+	let query = '';
+	const filteredPeople =
+		query === ''
+			? people
+			: people.filter((person) => {
+					return person.name.toLowerCase().includes(query.toLowerCase());
+			  });
 </script>
 
 <Listbox value={selectedPerson} on:change={(e) => (selectedPerson = e.detail)}>
@@ -87,45 +94,47 @@
 			</span>
 		</ListboxButton>
 
-		<ListboxOptions
-			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-		>
-			{#each people as person (person.id)}
-				<ListboxOption
-					value={person}
-					disabled={person.unavailable}
-					let:active
-					let:selected
-					let:disabled
-					class={({ active }) =>
-						classNames(
-							active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-							'relative cursor-default select-none py-2 pl-3 pr-9',
-						)}
-				>
-					<!-- <span class="block truncate" class:font-semibold={selected} -->
-					<span
-						class={classNames(
-							selected ? 'font-semibold' : 'font-normal',
-							'block truncate',
-						)}>{person.name}</span
+		{#if filteredPeople.length > 0}
+			<ListboxOptions
+				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+			>
+				{#each people as person (person.id)}
+					<ListboxOption
+						value={person}
+						disabled={person.unavailable}
+						let:active
+						let:selected
+						let:disabled
+						class={({ active }) =>
+							classNames(
+								active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+								'relative cursor-default select-none py-2 pl-3 pr-9',
+							)}
 					>
-					{#if selected}
+						<!-- <span class="block truncate" class:font-semibold={selected} -->
 						<span
-							class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
-							class:text-white={active}
-							class:text-indigo-600={!active}
+							class={classNames(
+								selected ? 'font-semibold' : 'font-normal',
+								'block truncate',
+							)}>{person.name}</span
 						>
-							<Icon
-								src={Check}
-								theme="solid"
-								class="h-5 w-5"
-								aria-hidden="true"
-							/>
-						</span>
-					{/if}
-				</ListboxOption>
-			{/each}
-		</ListboxOptions>
+						{#if selected}
+							<span
+								class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+								class:text-white={active}
+								class:text-indigo-600={!active}
+							>
+								<Icon
+									src={Check}
+									theme="solid"
+									class="h-5 w-5"
+									aria-hidden="true"
+								/>
+							</span>
+						{/if}
+					</ListboxOption>
+				{/each}
+			</ListboxOptions>
+		{/if}
 	</div>
 </Listbox>
