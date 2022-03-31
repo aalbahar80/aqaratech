@@ -6,22 +6,22 @@
 		label: string;
 		value: T;
 		disabled?: boolean;
-		selected?: boolean;
 	};
 	export let title = '';
 	export let options: Option[];
 	export let current: T;
 	export let disabled = false;
 
+	$: console.log({ current }, 'Select.svelte ~ 16');
 	const dispatch = createEventDispatcher<{
 		select: { value: string };
 	}>();
 </script>
 
 {#if title}
-<label for="group-by" class="block text-sm font-medium text-gray-700">
-	{title}
-</label>
+	<label for="group-by" class="block text-sm font-medium text-gray-700">
+		{title}
+	</label>
 {/if}
 <select
 	id="group-by"
@@ -32,8 +32,8 @@
 	bind:value={current}
 	on:change={(e) => dispatch('select', { value: e.currentTarget.value })}
 >
-	{#each options as { label, value, selected, disabled }}
-		<option {selected} {value} {disabled}>{label}</option>
+	{#each options as { label, value, disabled }}
+		<option {value} selected={value === current} {disabled}>{label}</option>
 	{/each}
 </select>
 

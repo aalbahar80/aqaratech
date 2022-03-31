@@ -15,16 +15,21 @@
 	import type { z } from 'zod';
 	import type { Load } from './dashboard';
 
+	const defaultRange = 6;
+	const getRange = (months: number) => ({
+		// TODO use UTC, fns
+		start: subMonths(new Date(Date.now()), months),
+		end: new Date(Date.now()),
+	});
+
 	type Filter = z.infer<typeof filterSchema>;
 
 	export const load: Load = async ({ params }) => {
 		const defaultFilter: Filter = {
-			// TODO use UTC, fns
-			start: subMonths(new Date(Date.now()), 6),
-			end: new Date(Date.now()),
 			propertyId: undefined,
 			unitId: undefined,
 			clientId: params.id,
+			...getRange(defaultRange),
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
@@ -61,13 +66,9 @@
 	type Option = { value: string; label: string };
 	type SelectedOption = Option | null | undefined;
 
-	const getRange = (months: number) => ({
-		start: subMonths(new Date(Date.now()), months),
-		end: new Date(Date.now()),
-	});
 	const rangeOptions = [
 		{ value: 3, label: 'Last 3 months' },
-		{ value: 6, label: 'Last 6 months', selected: true }, // rethink selected vs bind
+		{ value: 6, label: 'Last 6 months' }, // rethink selected vs bind
 		{ value: 12, label: 'Last 12 months' },
 		{ value: 0, label: 'Custom' },
 	];
@@ -96,7 +97,7 @@
 		return [];
 	};
 
-	let selectedRange = 6;
+	let selectedRange = defaultRange;
 	let selectedProperty: SelectedOption;
 	let selectedUnit: SelectedOption;
 	$: unitOptions = getUnitOptions(selectedProperty);
