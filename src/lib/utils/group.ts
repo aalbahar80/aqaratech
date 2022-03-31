@@ -1,4 +1,5 @@
-import { categoryGroups, getCategoryGroup } from '$lib/config/constants';
+// import { categoryGroups, getCategoryGroup } from '$lib/config/constants';
+import { categoryGroups, getCategoryGroup } from '../config/constants';
 import { closestTo, eachMonthOfInterval, isSameDay } from 'date-fns';
 
 type Grouped<T> = {
