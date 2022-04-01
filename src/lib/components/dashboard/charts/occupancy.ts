@@ -1,7 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import * as pkg from 'chart.js';
-
-const { Chart } = pkg;
+import { Chart } from 'chart.js/dist/chart.esm';
 
 export function occupancyChart(
 	node: HTMLCanvasElement,

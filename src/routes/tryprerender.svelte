@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import MyChart from '$lib/components/Chart.svelte';
-	import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
+	import { Chart } from 'chart.js/dist/chart.esm';
 
 	export const prerender = true;
 </script>

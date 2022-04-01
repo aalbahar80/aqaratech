@@ -2,7 +2,7 @@ import type { InferQueryOutput } from '$lib/client/trpc';
 import { getColor } from '$lib/config/constants';
 import { getAddress } from '$lib/definitions/property';
 import { getMonths } from '$lib/utils/group';
-import { Chart } from 'chart.js/dist/chart.esm'; // TODO: copy to other charts
+import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
 import { currencyTooltip } from './utils/currency';

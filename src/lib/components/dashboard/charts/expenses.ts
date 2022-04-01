@@ -5,10 +5,8 @@ import {
 	getCategoryByLabel,
 } from '$lib/config/constants';
 import type { ChartData } from 'chart.js';
-import * as pkg from 'chart.js';
+import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
-
-const { Chart } = pkg;
 
 const colors = [
 	'#003f5c',
