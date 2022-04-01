@@ -118,6 +118,7 @@
 		filter = newFilter;
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
+	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
 </script>
 
 <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
@@ -200,6 +201,7 @@
 						});
 						if (e.detail.value) {
 							incomeGroupBy = 'ratio';
+							expensesGroupBy = 'ratio';
 						}
 					}}
 				/>
@@ -224,11 +226,16 @@
 
 	<!-- Income Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
-		<div slot="groupBy">
+		<div slot="groupBy" class="flex w-64 pb-4">
+			<span
+				class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+			>
+				Group By
+			</span>
 			<Select
-				title="Group By"
 				current={incomeGroupBy}
 				disabled={!!selectedProperty || !!selectedUnit}
+				class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
 				options={[
 					{ label: 'Ratio', value: 'ratio' },
 					{
@@ -259,6 +266,31 @@
 		subtitle="The total amount of expenses."
 		empty={expenses.length < 1}
 	>
+		<div slot="groupBy" class="flex w-64 pb-4">
+			<span
+				class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+			>
+				Group By
+			</span>
+			<Select
+				current={expensesGroupBy}
+				disabled={!!selectedProperty || !!selectedUnit}
+				class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
+				options={[
+					{ label: 'Ratio', value: 'ratio' },
+					{
+						label: 'Property',
+						value: 'property',
+						disabled: !!selectedProperty,
+					},
+				]}
+				on:select={(e) => {
+					if (e.detail.value === 'ratio' || e.detail.value === 'property') {
+						incomeGroupBy = e.detail.value;
+					}
+				}}
+			/>
+		</div>
 		<Chart let:height let:width>
 			<canvas {height} {width} use:expensesChart={expenses} />
 		</Chart>
