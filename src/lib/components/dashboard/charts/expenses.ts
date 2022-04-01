@@ -1,45 +1,98 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import {
 	categoryGroups,
-	categoryLabels,
-	getCategoryByLabel,
+	getCategoryGroup,
+	getColor,
 } from '$lib/config/constants';
-import type { ChartData } from 'chart.js';
+import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
+import { closestTo, isSameDay } from 'date-fns';
+import { sortBy } from 'lodash-es';
 import { currencyTooltip } from './utils/currency';
 
-const colors = [
-	'#003f5c',
-	'#2f4b7c',
-	// '#665191',
-	'#a05195',
-	'#d45087',
-	'#f95d6a',
-	'#ff7c43',
-	'#ffa600',
-];
+type Data = InferQueryOutput<'charts:expenses'>;
+type GroupBy = 'ratio' | 'property';
+type ChartConfig = {
+	data: Data;
+	groupBy: GroupBy;
+};
+type Dataset = {
+	total: number;
+	date: Date;
+	category: string;
+	propertyId: string;
+	// address: string;
+}[];
 
-export function expensesChart(
-	node: HTMLCanvasElement,
-	data: InferQueryOutput<'charts:expenses'>,
-) {
-	const datasets: ChartData<'bar', typeof data>['datasets'] =
-		categoryGroups.map((cat, n) => ({
-			label: categoryLabels[cat],
-			data: data.filter(
-				(item) => item.category?.toUpperCase() === cat.toUpperCase(),
-			),
+const sort = (data: Data) => sortBy(data, 'postDate');
+
+const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
+	const sorted = sort(data);
+	const months = getMonths(sorted, 'postDate');
+
+	const buckets: Dataset = [];
+	sorted.forEach((trx) => {
+		const month = closestTo(trx.postDate, months);
+		if (month) {
+			// search for the bucket with the same date  propertyId
+			const index = buckets.findIndex((bucket) => {
+				const condition =
+					groupBy === 'property'
+						? bucket.propertyId === trx.propertyId
+						: bucket.category === trx.category;
+				return isSameDay(bucket.date, month) && condition;
+			});
+			if (index !== -1) {
+				buckets[index]!.total += trx.amount;
+			} else {
+				buckets.push({
+					total: trx.amount,
+					date: month,
+					category: getCategoryGroup(trx.category),
+					propertyId: trx.propertyId ?? 'Other', // TODO: group client/prop/unit
+					// address: trx
+				});
+			}
+		}
+	});
+	return buckets;
+};
+
+const getDatasets = (data: Data, groupBy: GroupBy) => {
+	const aggregated = aggregate(data, groupBy);
+	const properties = aggregated.map((bucket) => bucket.propertyId);
+	const uniqueProperties = [...new Set(properties)];
+
+	// const applicableGroupBy = groupBy === 'property' ? 'propertyId' : 'category';
+	// const groups = aggregated
+	// 	.map((item) => item[applicableGroupBy])
+	// 	.filter((group) => group !== 'Other'); // ?
+	const groups = groupBy === 'property' ? uniqueProperties : categoryGroups;
+
+	const datasets = groups.map((group, n) => {
+		const backgroundColor = getColor(n, groups.length);
+		return {
+			label: group,
+			data:
+				groupBy === 'property'
+					? aggregated.filter((item) => item.propertyId === group)
+					: aggregated.filter((item) => item.category === group),
 			parsing: {
-				yAxisKey: 'amount',
+				yAxisKey: 'total',
 				xAxisKey: 'date',
 			},
-			backgroundColor: colors[n],
+			backgroundColor,
 			borderRadius: 10,
-		}));
+		};
+	});
+	return datasets;
+};
+
+export function expensesChart(node: HTMLCanvasElement, config: ChartConfig) {
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: {
-			datasets,
+			datasets: getDatasets(config.data, config.groupBy),
 		},
 		options: {
 			scales: {
@@ -78,19 +131,11 @@ export function expensesChart(
 	});
 
 	return {
-		update(newData: InferQueryOutput<'charts:expenses'>) {
-			chart.data.datasets.forEach((dataset) => {
-				dataset.data = newData.filter((item) => {
-					const newCategory = categoryLabels[item.category];
-					if (newCategory) {
-						return (
-							getCategoryByLabel(newCategory).toUpperCase() ===
-							dataset.label?.toUpperCase()
-						);
-					}
-					return;
-				});
-			});
+		update(newChartConfig: ChartConfig) {
+			chart.data.datasets = getDatasets(
+				newChartConfig.data,
+				newChartConfig.groupBy,
+			);
 			chart.update();
 		},
 		destory() {

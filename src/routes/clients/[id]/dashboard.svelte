@@ -286,13 +286,17 @@
 				]}
 				on:select={(e) => {
 					if (e.detail.value === 'ratio' || e.detail.value === 'property') {
-						incomeGroupBy = e.detail.value;
+						expensesGroupBy = e.detail.value;
 					}
 				}}
 			/>
 		</div>
 		<Chart let:height let:width>
-			<canvas {height} {width} use:expensesChart={expenses} />
+			<canvas
+				{height}
+				{width}
+				use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
+			/>
 		</Chart>
 	</DashCard>
 

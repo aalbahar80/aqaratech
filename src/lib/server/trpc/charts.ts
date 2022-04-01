@@ -1,5 +1,5 @@
 import prismaClient from '$lib/server/prismaClient';
-import { groupByMonthAndCat, groupOccupancy } from '$lib/utils/group';
+import { groupOccupancy } from '$lib/utils/group';
 import { strToDate } from '$lib/zodTransformers';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
@@ -130,8 +130,7 @@ export default trpc
 			const sortedExpenses = allExpenses
 				.slice()
 				.sort((a, b) => a.postDate.getTime() - b.postDate.getTime());
-			const expensesByMonth = groupByMonthAndCat(sortedExpenses);
-			return expensesByMonth;
+			return sortedExpenses;
 		},
 	})
 	.query('occupancy', {
