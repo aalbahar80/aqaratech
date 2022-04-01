@@ -48,6 +48,7 @@ export const getAddress = <
 		area: string | null;
 		block: string | null;
 		street: string | null;
+		number: string | null;
 	},
 >(
 	item: T,
@@ -60,10 +61,10 @@ export const getAddress = <
 			item.block,
 			item.street,
 			'مبنى',
-			'2',
+			item.number,
 		]);
 	}
-	return concatIfExists([item.area, 'ق', item.block, 'م', '2']);
+	return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
 };
 
 const label: typeof definition['label'] = (item) => getAddress(item);

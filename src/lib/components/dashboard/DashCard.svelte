@@ -4,7 +4,7 @@
 	export let empty = false;
 </script>
 
-<div class="flex flex-col gap-y-8 rounded-lg bg-white p-6 shadow">
+<div class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl">
 	<div class="prose prose-base">
 		<h3>{title}</h3>
 		<p>{subtitle}</p>
@@ -20,6 +20,11 @@
 			</div>
 		</div>
 	{:else}
+		<div class="sm:block" aria-hidden="true">
+			<div class="py-1">
+				<div class="border-t border-gray-200" />
+			</div>
+		</div>
 		<slot name="groupBy" />
 		<slot />
 	{/if}

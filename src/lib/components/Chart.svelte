@@ -66,6 +66,8 @@
 			month: 'MMM yy',
 		},
 	};
+	Chart.defaults.plugins.legend.labels.textAlign = 'center';
+	Chart.defaults.plugins.legend.labels.padding = 14;
 	Chart.defaults.plugins.tooltip = {
 		...Chart.defaults.plugins.tooltip,
 
