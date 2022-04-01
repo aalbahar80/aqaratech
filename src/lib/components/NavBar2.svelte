@@ -4,6 +4,7 @@
 		Popover,
 		PopoverButton,
 		PopoverPanel,
+		Transition,
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -74,60 +75,66 @@
 		</nav>
 	</div>
 
-	<!-- TODO Transition Here -->
-	<!-- Hamburger Menu -->
-	<PopoverPanel
-		focus
-		class="absolute inset-x-0 top-0 z-20 origin-top transform p-2 transition md:hidden"
+	<Transition
+		enter="duration-150 ease-out"
+		enterFrom="opacity-0 scale-95"
+		enterTo="opacity-100 scale-100"
+		leave="duration-100 ease-in"
+		leaveFrom="opacity-100 scale-100"
+		leaveTo="opacity-0 scale-95"
 	>
-		<div
-			class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5"
+		<PopoverPanel
+			class="absolute inset-x-0 top-0 z-20 origin-top transform p-2 transition md:hidden"
 		>
-			<div class="flex items-center justify-between px-5 pt-4">
-				<div>
-					<img
-						class="h-8 w-auto"
-						src="https://tailwindui.com/img/logos/workflow-mark-teal-500-cyan-600.svg"
-						alt=""
-					/>
-				</div>
-				<div class="-mr-2">
-					<PopoverButton
-						class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600"
-					>
-						<span class="sr-only">Close menu</span>
-						<Icon class="h-6 w-6" aria-hidden="true" src={X} />
-					</PopoverButton>
-				</div>
-			</div>
-			<div class="pt-5 pb-6">
-				<div class="space-y-1 px-2">
-					{#each navigation as item (item.name)}
-						<a
-							on:click={() => close(null)}
-							sveltekit:prefetch
-							href={item.href}
-							class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+			<div
+				class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5"
+			>
+				<div class="flex items-center justify-between px-5 pt-4">
+					<div>
+						<img
+							class="h-8 w-auto"
+							src="https://tailwindui.com/img/logos/workflow-mark-teal-500-cyan-600.svg"
+							alt=""
+						/>
+					</div>
+					<div class="-mr-2">
+						<PopoverButton
+							class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600"
 						>
-							{item.name}
+							<span class="sr-only">Close menu</span>
+							<Icon class="h-6 w-6" aria-hidden="true" src={X} />
+						</PopoverButton>
+					</div>
+				</div>
+				<div class="pt-5 pb-6">
+					<div class="space-y-1 px-2">
+						{#each navigation as item (item.name)}
+							<a
+								on:click={() => close(null)}
+								sveltekit:prefetch
+								href={item.href}
+								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+							>
+								{item.name}
+							</a>
+						{/each}
+					</div>
+					<div class="mt-6 px-5">
+						<a
+							href="/"
+							class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
+						>
+							Start free trial
 						</a>
-					{/each}
-				</div>
-				<div class="mt-6 px-5">
-					<a
-						href="/"
-						class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
-					>
-						Start free trial
-					</a>
-				</div>
-				<div class="mt-6 px-5">
-					<p class="text-center text-base font-medium text-gray-500">
-						Existing customer?{' '}
-						<a href="/" class="text-gray-900 hover:underline"> Login </a>
-					</p>
+					</div>
+					<div class="mt-6 px-5">
+						<p class="text-center text-base font-medium text-gray-500">
+							Existing customer?{' '}
+							<a href="/" class="text-gray-900 hover:underline"> Login </a>
+						</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</PopoverPanel>
+		</PopoverPanel>
+	</Transition>
 </Popover>
