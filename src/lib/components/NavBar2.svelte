@@ -76,15 +76,15 @@
 	</div>
 
 	<Transition
-		enter="duration-150 ease-out"
+		enter="duration-150 ease-out absolute top-0 w-full z-20"
 		enterFrom="opacity-0 scale-95"
 		enterTo="opacity-100 scale-100"
-		leave="duration-100 ease-in"
+		leave="duration-100 ease-in absolute top-0 w-full z-20"
 		leaveFrom="opacity-100 scale-100"
 		leaveTo="opacity-0 scale-95"
 	>
 		<PopoverPanel
-			class="absolute inset-x-0 top-0 z-20 origin-top transform p-2 transition md:hidden"
+			class="absolute top-0 z-20 w-full transform p-2 transition md:hidden"
 		>
 			<div
 				class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5"
