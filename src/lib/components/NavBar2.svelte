@@ -78,7 +78,7 @@
 	<!-- Hamburger Menu -->
 	<PopoverPanel
 		focus
-		class="absolute inset-x-0 top-0 origin-top transform p-2 transition md:hidden"
+		class="absolute inset-x-0 top-0 z-20 origin-top transform p-2 transition md:hidden"
 	>
 		<div
 			class="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5"
