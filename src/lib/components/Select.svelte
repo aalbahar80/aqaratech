@@ -13,7 +13,7 @@
 	export let disabled = false;
 
 	const dispatch = createEventDispatcher<{
-		select: { value: string };
+		select: { value: T };
 	}>();
 </script>
 
@@ -29,7 +29,7 @@
 	class:disabled
 	{disabled}
 	bind:value={current}
-	on:change={(e) => dispatch('select', { value: e.currentTarget.value })}
+	on:change={() => dispatch('select', { value: current })}
 >
 	{#each options as { label, value, disabled }}
 		<option {value} selected={value === current} {disabled}>{label}</option>
@@ -38,6 +38,6 @@
 
 <style lang="postcss">
 	.disabled {
-		@apply cursor-not-allowed opacity-50;
+		@apply cursor-not-allowed border-slate-200 bg-zinc-200 text-slate-500 shadow-none;
 	}
 </style>
