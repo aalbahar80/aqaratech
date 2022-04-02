@@ -38,7 +38,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 			const index = buckets.findIndex((bucket) => {
 				const condition =
 					groupBy === 'property'
-						? bucket.propertyId === trx.propertyId
+						? bucket.propertyId === (trx.propertyId ?? 'Common')
 						: bucket.category === trx.category;
 				return isSameDay(bucket.date, month) && condition;
 			});
@@ -49,7 +49,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 					total: trx.amount,
 					date: month,
 					category: getCategoryGroup(trx.category),
-					propertyId: trx.propertyId ?? 'Other', // TODO: group client/prop/unit
+					propertyId: trx.propertyId ?? 'Common', // TODO: group client/prop/unit
 					// address: trx
 				});
 			}
@@ -63,10 +63,6 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const properties = aggregated.map((bucket) => bucket.propertyId);
 	const uniqueProperties = [...new Set(properties)];
 
-	// const applicableGroupBy = groupBy === 'property' ? 'propertyId' : 'category';
-	// const groups = aggregated
-	// 	.map((item) => item[applicableGroupBy])
-	// 	.filter((group) => group !== 'Other'); // ?
 	const groups = groupBy === 'property' ? uniqueProperties : categoryGroups;
 
 	const datasets = groups.map((group, n) => {
