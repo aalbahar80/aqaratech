@@ -79,7 +79,11 @@
 <div class="bg-gray-50">
 	<!-- Mobile filter dialog -->
 	<TransitionRoot show={isOpen}>
-		<Dialog as="div" class="fixed inset-0 z-40 flex sm:hidden" on:close={close}>
+		<Dialog
+			as="div"
+			class="fixed inset-0 z-40 flex flex-row-reverse sm:hidden"
+			on:close={close}
+		>
 			<TransitionChild
 				enter="transition-opacity ease-linear duration-300"
 				enterFrom="opacity-0"
@@ -100,7 +104,7 @@
 				leaveTo="translate-x-full"
 			>
 				<div
-					class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl"
+					class="relative ml-auto flex h-full w-52 max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl"
 				>
 					<div class="flex items-center justify-between px-4">
 						<h2 class="text-lg font-medium text-gray-900">Filters</h2>
@@ -258,7 +262,6 @@
 										>
 											1
 										</span>
-										<!-- ) : null} -->
 									{/if}
 
 									<Icon
