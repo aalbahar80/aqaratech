@@ -2,13 +2,18 @@
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ url }) => {
-		const predefined = Object.fromEntries(url.searchParams.entries());
+		let predefined = Object.fromEntries(url.searchParams.entries());
+		console.log({ predefined }, 'leases.svelte ~ 6');
 
 		if (predefined.renew && predefined.leaseId) {
 			const oldLease = await trpc.query('leases:read', predefined.leaseId);
 			return { props: { oldLease } };
+			// return { props: { predefined: { ...predefined, ...oldLease } } };
 		}
-		return {};
+		// TODO handle predefined unitId
+		return {
+			props: { oldLease: predefined },
+		};
 	};
 </script>
 
@@ -18,13 +23,13 @@
 	import trpc from '$lib/client/trpc';
 
 	export let oldLease: any;
+	// export let predefined: any;
 	const entity = 'leases';
 </script>
 
 <svelte:head>
 	<title>{`New ${singular[entity]}`}</title>
 </svelte:head>
-<!-- <pre>{JSON.stringify(oldLease, null, 2)}</pre> -->
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<div class="min-w-0 flex-1">
 		<h2

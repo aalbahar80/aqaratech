@@ -29,7 +29,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import { onMount } from 'svelte';
 
-	export let oldLease: InferQueryOutput<'leases:read'> | undefined;
+	export let oldLease: Partial<InferQueryOutput<'leases:read'>> | undefined;
 
 	let resetUnit = false;
 	const lease = {
@@ -38,7 +38,7 @@
 		unitId: oldLease?.unitId ?? null,
 	};
 
-	let propertyId = oldLease?.unit.property.id || '';
+	let propertyId = oldLease?.unit?.property.id || '';
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
 		unitList = await trpc
@@ -255,8 +255,8 @@
 							<div class="sm:w-3/4">
 								<ComboBox
 									entity="properties"
-									value={oldLease?.unit.property.id ?? null}
-									optionLabel={oldLease?.unit.property}
+									value={oldLease?.unit?.property.id ?? null}
+									optionLabel={oldLease?.unit?.property}
 									on:select={(e) => {
 										if (e.detail.id !== propertyId) {
 											resetUnit = true;
@@ -287,7 +287,7 @@
 											value={oldLease && !resetUnit
 												? {
 														id: oldLease.unitId,
-														label: oldLease.unit.unitNumber,
+														label: oldLease.unit?.unitNumber,
 												  }
 												: undefined}
 											on:select={(e) => {
