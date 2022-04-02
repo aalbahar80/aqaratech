@@ -322,3 +322,67 @@ export const expenseCategories = [
 	'WATER',
 	'PLUMBING',
 ];
+
+type ExpenseCategory = [id: string, label: string, group: string, groupLabel: string];
+export const categoryGroups: ExpenseCategory[] = [
+	['MANAGEMENT_FEES', 'Management Fees', 'MANAGEMENT_FEES', 'Management Fees'],
+	['CARETAKER', 'Caretaker', 'CARETAKER', 'Caretaker'],
+	['HVAC', 'HVAC', 'HVAC', 'HVAC'],
+	['INSURANCE', 'Insurance', 'INSURANCE', 'Insurance'],
+	['PLUMBING', 'Plumbing', 'PLUMBING', 'Plumbing'],
+	['ELEVATORS', 'Elevators', 'AMENITIES', 'Amenities'],
+	['LANDSCAPING', 'Landscaping', 'AMENITIES', 'Amenities'],
+	['AMENITIES', 'Amenities', 'AMENITIES', 'Amenities'],
+	['ELECTRICITY', 'Electricity', 'UTILITIES', 'Utilities'],
+	['WATER', 'Water', 'UTILITIES', 'Utilities'],
+	['INTERNET', 'Internet', 'UTILITIES', 'Utilities'],
+	['SATELLITE', 'Satellite', 'UTILITIES', 'Utilities'],
+	['OTHER', 'Other', 'OTHER', 'Other'],
+];
+
+export const getCategoryGroup = (category: string | null | undefined) => {
+	const utilities = ['ELECTRICITY', 'WATER', 'INTERNET', 'SATELLITE'];
+	const amenities = ['AMENITIES', 'ELEVATOR', 'LANDSCAPING'];
+	if (!category) {
+		return 'OTHER';
+	} else if (utilities.includes(category)) {
+		return 'UTILITIES';
+	} else if (amenities.includes(category)) {
+		return 'AMENITIES';
+	} else {
+		return category;
+	}
+};
+
+export const palette: { [key: string]: string[] } = {
+	2: ['#003f5c', '#ffa600'],
+	3: ['#003f5c', '#bc5090', '#ffa600'],
+	4: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
+	5: ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600'],
+	6: ['#003f5c', '#444e86', '#955196', '#dd5182', '#ff6e54', '#ffa600'],
+	7: [
+		'#003f5c',
+		'#374c80',
+		'#7a5195',
+		'#bc5090',
+		'#ef5675',
+		'#ff764a',
+		'#ffa600',
+	],
+	8: [
+		'#003f5c',
+		'#2f4b7c',
+		'#665191',
+		'#a05195',
+		'#d45087',
+		'#f95d6a',
+		'#ff7c43',
+		'#ffa600',
+	],
+};
+
+export const getColor = (index: number, total: number) => {
+	const size = Math.max(2, Math.min(total, 8));
+	const backgroundColor = palette[size]?.[index];
+	return backgroundColor;
+};

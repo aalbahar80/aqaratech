@@ -7,8 +7,8 @@
 
 {#key label}
 	<div
-		class:green={badgeColor === 'green'}
 		class="rounded-md px-2.5 py-0.5 text-center text-lg font-medium"
+		class:green={badgeColor === 'green'}
 		class:red={badgeColor === 'red'}
 		class:indigo={badgeColor === 'indigo'}
 		in:scale
@@ -17,7 +17,7 @@
 	</div>
 {/key}
 
-<style lang="postcss">
+<style>
 	.green {
 		@apply bg-green-100 text-green-800;
 	}

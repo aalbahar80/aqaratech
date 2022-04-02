@@ -1,6 +1,7 @@
 import type { inferAsyncReturnType } from '@trpc/server';
 import * as trpc from '@trpc/server';
 import superjson from 'superjson';
+import charts from './charts';
 import clients from './clients';
 import leases from './leases';
 import maintenanceOrders from './maintenanceOrders';
@@ -20,6 +21,7 @@ export const router = trpc
 	.merge('properties:', properties)
 	.merge('clients:', clients)
 	.merge('transactions:', transactions)
-	.merge('maintenanceOrders:', maintenanceOrders);
+	.merge('maintenanceOrders:', maintenanceOrders)
+	.merge('charts:', charts);
 
 export type Router = typeof router;
