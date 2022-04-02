@@ -26,6 +26,7 @@ export default trpc
 				},
 				include: {
 					properties: {
+						take: 5, // TODO remove in prod
 						where: propertyId ? { id: propertyId } : {},
 						include: {
 							units: {
@@ -92,6 +93,7 @@ export default trpc
 				include: {
 					expenses: propertyId || unitId ? false : getExpenses,
 					properties: {
+						take: 5, // TODO remove in prod
 						where: propertyId ? { id: propertyId } : {},
 						include: {
 							expenses: unitId ? false : getExpenses,
@@ -144,7 +146,10 @@ export default trpc
 						})) || [],
 				),
 			);
-			type P = typeof propertyExpenses[0] | typeof clientExpenses[0] | typeof unitExpenses[0];
+			type P =
+				| typeof propertyExpenses[0]
+				| typeof clientExpenses[0]
+				| typeof unitExpenses[0];
 			const allExpenses: P[] = [
 				...propertyExpenses,
 				...unitExpenses,
