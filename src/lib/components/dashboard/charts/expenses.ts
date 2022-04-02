@@ -1,5 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import { categoryGroups, getColor } from '$lib/config/constants';
+import { getAddress } from '$lib/definitions/property';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';
@@ -16,8 +17,7 @@ type Dataset = {
 	total: number;
 	date: Date;
 	category: string;
-	propertyId: string;
-	// address: string;
+	address: string;
 }[];
 
 const sort = (data: Data) => sortBy(data, 'postDate');
@@ -32,14 +32,16 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 		const trxCategoryIndex = categoryGroups.findIndex(
 			(g) => g[0] === trx.category,
 		);
-		const catGroup = categoryGroups[trxCategoryIndex]?.[3] ?? 'Other';
+		const expenseGroup = categoryGroups[trxCategoryIndex]?.[3] ?? 'Other';
+		const address = trx.relatedProperty
+			? getAddress(trx.relatedProperty)
+			: 'Common';
 		if (month) {
-			// search for the bucket with the same date  propertyId
 			const index = buckets.findIndex((bucket) => {
 				const condition =
 					groupBy === 'property'
-						? bucket.propertyId === (trx.propertyId ?? 'Common')
-						: bucket.category === catGroup;
+						? bucket.address === address
+						: bucket.category === expenseGroup;
 				return isSameDay(bucket.date, month) && condition;
 			});
 			if (index !== -1) {
@@ -48,9 +50,8 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 				buckets.push({
 					total: trx.amount,
 					date: month,
-					category: catGroup,
-					propertyId: trx.propertyId ?? 'Common', // TODO: group client/prop/unit
-					// address: trx
+					category: expenseGroup,
+					address,
 				});
 			}
 		}
@@ -60,20 +61,20 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 
 const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const aggregated = aggregate(data, groupBy);
-	const properties = aggregated.map((bucket) => bucket.propertyId);
+
+	const properties = aggregated.map((bucket) => bucket.address); // use id here?
 	const uniqueProperties = [...new Set(properties)];
 	const categories = categoryGroups.map((g) => g[3]);
 	const uniqueCategories = [...new Set(categories)];
 
 	const groups = groupBy === 'property' ? uniqueProperties : uniqueCategories;
-
 	const datasets = groups.map((group, n) => {
 		const backgroundColor = getColor(n, groups.length);
 		return {
 			label: group,
 			data:
 				groupBy === 'property'
-					? aggregated.filter((item) => item.propertyId === group)
+					? aggregated.filter((item) => item.address === group)
 					: aggregated.filter((item) => item.category === group),
 			parsing: {
 				yAxisKey: 'total',

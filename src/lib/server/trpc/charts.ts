@@ -113,17 +113,42 @@ export default trpc
 			}
 
 			// group all expenses in one array
-			const clientExpenses = data.expenses || [];
+			const clientExpenses =
+				data.expenses.map((e) => ({
+					...e,
+					relatedProperty: null,
+				})) || [];
 			const propertyExpenses = data.properties.flatMap(
-				(property) => property.expenses || [],
+				(property) =>
+					property.expenses.map((e) => ({
+						...e,
+						relatedProperty: {
+							area: property.area,
+							block: property.block,
+							street: property.street,
+							number: property.number,
+						},
+					})) || [],
 			);
 			const unitExpenses = data.properties.flatMap((property) =>
-				property.units.flatMap((unit) => unit.expenses),
+				property.units.flatMap(
+					(unit) =>
+						unit.expenses.map((e) => ({
+							...e,
+							relatedProperty: {
+								area: property.area,
+								block: property.block,
+								street: property.street,
+								number: property.number,
+							},
+						})) || [],
+				),
 			);
-			const allExpenses = [
-				...clientExpenses,
+			type P = typeof propertyExpenses[0] | typeof clientExpenses[0] | typeof unitExpenses[0];
+			const allExpenses: P[] = [
 				...propertyExpenses,
 				...unitExpenses,
+				...clientExpenses,
 			];
 			// create a new sorted array by postDate ascending
 			// Can replace with lodash.soryBy
