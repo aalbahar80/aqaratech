@@ -117,6 +117,12 @@ export default trpc
 					start: true,
 					end: true,
 					monthlyRent: true,
+					tenant: true,
+					unit: {
+						include: {
+							property: true,
+						},
+					},
 				},
 			}),
 			pagination: {

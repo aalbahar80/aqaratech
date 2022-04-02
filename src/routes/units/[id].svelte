@@ -4,7 +4,7 @@
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import LeasesCard from '$lib/components/tenant/LeasesCard.svelte';
+	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import {
 		faBath,
@@ -70,5 +70,9 @@
 	</Heading>
 
 	<DetailsPane {details} />
-	<LeasesCard leases={unit.leases} unitId={unit.id} />
+	<LeaseList
+		leases={unit.leases}
+		newHref={`/new/leases?unitId=${unit.id}`}
+		showIndex
+	/>
 </div>

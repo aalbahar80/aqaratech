@@ -1,9 +1,9 @@
 <script lang="ts" context="module">
-	import LeasesCard from '$components/tenant/LeasesCard.svelte';
 	import TrxColumn from '$components/tenant/TrxColumn.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { getName } from '$lib/utils/common';
 	import flatten from 'lodash-es/flatten.js';
 	import map from 'lodash-es/map.js';
@@ -41,6 +41,10 @@
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<Heading title="Tenant" id={tenant.id} entity="tenants" />
 	<DetailsPane {details} {files} />
-	<LeasesCard leases={tenant.leases} tenantId={tenant.id} />
+	<LeaseList
+		leases={tenant.leases}
+		newHref={`/new/leases?tenantId=${tenant.id}`}
+		showIndex
+	/>
 	<TrxColumn transactions={flatten(map(tenant.leases, 'transactions'))} />
 </div>
