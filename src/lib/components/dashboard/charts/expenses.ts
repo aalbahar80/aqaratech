@@ -64,6 +64,8 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 
 	const properties = aggregated.map((bucket) => bucket.address); // use id here?
 	const uniqueProperties = [...new Set(properties)];
+	uniqueProperties.sort((a, b) => a.localeCompare(b)); // alphabetical
+
 	const categories = categoryGroups.map((g) => g[3]);
 	const uniqueCategories = [...new Set(categories)];
 

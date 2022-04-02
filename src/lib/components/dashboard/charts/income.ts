@@ -67,6 +67,11 @@ const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 			}
 		}
 	});
+	if (groupBy === 'ratio') {
+		buckets.sort((a, b) => +b.isPaid - +a.isPaid); // true first
+	} else if (groupBy === 'property') {
+		buckets.sort((a, b) => a.address.localeCompare(b.address)); // alphabetical
+	}
 	return buckets;
 };
 
