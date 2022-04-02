@@ -432,7 +432,6 @@
 								>
 									Rent
 								</label>
-								<pre>{JSON.stringify(lease.monthlyRent, null, 2)}</pre>
 								<input
 									id="monthlyRent"
 									name="monthlyRent"
