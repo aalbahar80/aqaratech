@@ -1,9 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import {
-	categoryGroups,
-	getCategoryGroup,
-	getColor,
-} from '$lib/config/constants';
+import { categoryGroups, getColor } from '$lib/config/constants';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';
@@ -33,13 +29,17 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 	const buckets: Dataset = [];
 	sorted.forEach((trx) => {
 		const month = closestTo(trx.postDate, months);
+		const trxCategoryIndex = categoryGroups.findIndex(
+			(g) => g[0] === trx.category,
+		);
+		const catGroup = categoryGroups[trxCategoryIndex]?.[3] ?? 'Other';
 		if (month) {
 			// search for the bucket with the same date  propertyId
 			const index = buckets.findIndex((bucket) => {
 				const condition =
 					groupBy === 'property'
 						? bucket.propertyId === (trx.propertyId ?? 'Common')
-						: bucket.category === trx.category;
+						: bucket.category === catGroup;
 				return isSameDay(bucket.date, month) && condition;
 			});
 			if (index !== -1) {
@@ -48,7 +48,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 				buckets.push({
 					total: trx.amount,
 					date: month,
-					category: getCategoryGroup(trx.category),
+					category: catGroup,
 					propertyId: trx.propertyId ?? 'Common', // TODO: group client/prop/unit
 					// address: trx
 				});
@@ -62,8 +62,10 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const aggregated = aggregate(data, groupBy);
 	const properties = aggregated.map((bucket) => bucket.propertyId);
 	const uniqueProperties = [...new Set(properties)];
+	const categories = categoryGroups.map((g) => g[3]);
+	const uniqueCategories = [...new Set(categories)];
 
-	const groups = groupBy === 'property' ? uniqueProperties : categoryGroups;
+	const groups = groupBy === 'property' ? uniqueProperties : uniqueCategories;
 
 	const datasets = groups.map((group, n) => {
 		const backgroundColor = getColor(n, groups.length);

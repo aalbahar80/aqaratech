@@ -323,39 +323,22 @@ export const expenseCategories = [
 	'PLUMBING',
 ];
 
-export const categoryGroups = [
-	'MANAGEMENT_FEES',
-	'CARETAKER',
-	'INSURANCE',
-	'UTILITIES',
-	'AMENITIES',
-	'HVAC',
-	'OTHER',
+type ExpenseCategory = [id: string, label: string, group: string, groupLabel: string];
+export const categoryGroups: ExpenseCategory[] = [
+	['MANAGEMENT_FEES', 'Management Fees', 'MANAGEMENT_FEES', 'Management Fees'],
+	['CARETAKER', 'Caretaker', 'CARETAKER', 'Caretaker'],
+	['HVAC', 'HVAC', 'HVAC', 'HVAC'],
+	['INSURANCE', 'Insurance', 'INSURANCE', 'Insurance'],
+	['PLUMBING', 'Plumbing', 'PLUMBING', 'Plumbing'],
+	['ELEVATORS', 'Elevators', 'AMENITIES', 'Amenities'],
+	['LANDSCAPING', 'Landscaping', 'AMENITIES', 'Amenities'],
+	['AMENITIES', 'Amenities', 'AMENITIES', 'Amenities'],
+	['ELECTRICITY', 'Electricity', 'UTILITIES', 'Utilities'],
+	['WATER', 'Water', 'UTILITIES', 'Utilities'],
+	['INTERNET', 'Internet', 'UTILITIES', 'Utilities'],
+	['SATELLITE', 'Satellite', 'UTILITIES', 'Utilities'],
+	['OTHER', 'Other', 'OTHER', 'Other'],
 ];
-
-export const categoryLabels: { [key: string]: string } = {
-	MANAGEMENT_FEES: 'Management Fees',
-	HVAC: 'HVAC',
-	ELEVATORS: 'Elevators',
-	INSURANCE: 'Insurance',
-	INTERNET: 'Internet',
-	SATELLITE: 'Satellite',
-	LANDSCAPING: 'Landscaping',
-	AMENITIES: 'Amenities',
-	CARETAKER: 'Caretaker',
-	ELECTRICITY: 'Electricity',
-	WATER: 'Water',
-	PLUMBING: 'Plumbing',
-	UTILITIES: 'Utilities',
-	OTHER: 'Other',
-};
-
-export const getCategoryByLabel = (label: string): string => {
-	return (
-		Object.keys(categoryLabels).find((key) => categoryLabels[key] === label) ??
-		''
-	);
-};
 
 export const getCategoryGroup = (category: string | null | undefined) => {
 	const utilities = ['ELECTRICITY', 'WATER', 'INTERNET', 'SATELLITE'];
