@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import Filter from '$lib/components/Filter.svelte';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ url }) => {
@@ -21,5 +22,6 @@
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+	<Filter />
 	<LeaseList {leases} />
 </div>
