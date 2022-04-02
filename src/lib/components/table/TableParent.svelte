@@ -38,7 +38,7 @@
 
 <div class="mx-auto mt-8 flex max-w-screen-2xl flex-col px-2 sm:px-6 lg:px-8">
 	<a
-		href={`${$page.url.pathname}/add`}
+		href={`/new${$page.url.pathname}`}
 		class="table__add-button"
 		sveltekit:prefetch
 	>

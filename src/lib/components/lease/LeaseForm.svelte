@@ -190,7 +190,7 @@
 					</p>
 					<span class="mt-4 sm:mt-0">
 						<a
-							href="/tenants/add"
+							href="/new/tenants"
 							class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
 						>
 							Create new tenant<span aria-hidden="true"> &rarr;</span>

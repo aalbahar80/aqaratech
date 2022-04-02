@@ -12,8 +12,8 @@
 	export let unitId = '';
 
 	$: addLeaseHref = tenantId
-		? `/leases/add?tenantId=${tenantId}`
-		: `/leases/add?unitId=${unitId}`;
+		? `/new/leases?tenantId=${tenantId}`
+		: `/new/leases?unitId=${unitId}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">

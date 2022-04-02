@@ -12,8 +12,6 @@
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
-		if (params.id === 'add') return { fallthrough: true };
-
 		const [trx, nextReminder] = await Promise.all([
 			trpc.query('transactions:read', params.id),
 			// needs optimization, load in onMount?

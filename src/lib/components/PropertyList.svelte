@@ -7,7 +7,7 @@
 	export let properties: Properties;
 	export let clientId: string;
 
-	$: addPropertyHref = `/clients/add?clientId=${clientId}`;
+	$: addPropertyHref = `/new/properties?clientId=${clientId}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">

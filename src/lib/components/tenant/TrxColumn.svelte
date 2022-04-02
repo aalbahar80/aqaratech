@@ -134,7 +134,7 @@
 				</div>
 				{#if leaseId}
 					<div class="ml-4 mt-2 flex-shrink-0">
-						<a href={`/transactions/add?leaseId=${leaseId}`}>
+						<a href={`/new/transactions?leaseId=${leaseId}`}>
 							Create new transaction
 						</a>
 					</div>

@@ -7,7 +7,6 @@
 	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
-		if (params.id === 'add') return { fallthrough: true };
 		const maintenanceOrder = await trpc.query(
 			'maintenanceOrders:read',
 			params.id,

@@ -6,7 +6,7 @@
 		singular,
 		type Entity,
 	} from '$lib/definitions/index';
-	import type { Load } from './add';
+	import type { Load } from './[entity]';
 
 	export const load: Load = ({ params, url }) => {
 		const { entity } = params;
@@ -32,8 +32,6 @@
 		...defaultForm,
 		...predefined,
 	};
-	console.log({ data }, 'add.svelte ~ 34');
-	console.log({ predefined }, 'add.svelte ~ 38');
 </script>
 
 <svelte:head>

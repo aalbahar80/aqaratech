@@ -4,9 +4,7 @@
 	// import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ params }) => {
-		if (params.id === 'add') return { fallthrough: true };
-
-		console.log('runnind lease layout load', new Date().getSeconds());
+		console.log('running lease layout load', new Date().getSeconds());
 		const lease = await trpc.query('leases:read', params.id);
 		return { stuff: { lease } };
 	};

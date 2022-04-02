@@ -10,8 +10,6 @@
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
-		if (params.id === 'add') return { fallthrough: true };
-
 		const tenant = await trpc.query('tenants:read', params.id);
 		if (tenant) return { props: { tenant } };
 

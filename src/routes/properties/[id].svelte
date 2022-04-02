@@ -10,7 +10,6 @@
 	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
-		if (params.id === 'add') return { fallthrough: true };
 		const property = await trpc.query('properties:read', params.id);
 		return { props: { property } };
 	};

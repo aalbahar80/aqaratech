@@ -15,7 +15,7 @@
 	export let units: Units;
 	export let propertyId: string;
 
-	$: addUnitHref = `/units/add?propertyId=${propertyId}`;
+	$: addUnitHref = `/new/units?propertyId=${propertyId}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
