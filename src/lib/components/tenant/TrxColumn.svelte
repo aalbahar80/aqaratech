@@ -16,7 +16,7 @@
 		X,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { scale } from 'svelte/transition';
+	import { draw, scale } from 'svelte/transition';
 	import Chip from '../Chip.svelte';
 
 	type Transactions = NonNullable<
@@ -315,6 +315,7 @@
 					aria-hidden="true"
 				>
 					<path
+						in:draw
 						vector-effect="non-scaling-stroke"
 						stroke-linecap="round"
 						stroke-linejoin="round"
