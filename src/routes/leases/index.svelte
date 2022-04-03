@@ -29,7 +29,12 @@
 <script lang="ts">
 	export let leases: InferQueryOutput<`leases:list`>[`data`];
 
-	const sortOptions = [{ name: 'Created' }, { name: 'Expiration' }];
+	const sortOptions = [
+		{ name: 'Created', value: 'createdAt' as const },
+		{ name: 'Expiration', value: 'end' as const },
+	];
+	let currentSort = sortOptions[0]!.value;
+	$: console.log(currentSort, 'Filter.svelte ~ 39');
 	let filters = [
 		{
 			id: 'status',
@@ -45,7 +50,10 @@
 		value: string;
 		checked: boolean;
 	}
-	const handleFilter = async (newFilters: StatusFilters[] | undefined) => {
+	const handleFilter = async (
+		newFilters: StatusFilters[] | undefined,
+		newSort: typeof sortOptions[number]['value'],
+	) => {
 		leases = await trpc
 			.query(`leases:list`, {
 				pageIndex: 1,
@@ -54,13 +62,14 @@
 					expired: newFilters?.find((o) => o.value === 'expired')?.checked,
 					upcoming: newFilters?.find((o) => o.value === 'upcoming')?.checked,
 				},
+				sortBy: { key: newSort, order: 'desc' },
 			})
 			.then((res) => res.data);
 	};
-	$: handleFilter(filters[0]?.options);
+	$: handleFilter(filters[0]?.options, currentSort);
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Filter bind:filters {sortOptions} />
+	<Filter bind:filters bind:currentSort {sortOptions} />
 	<LeaseList {leases} />
 </div>

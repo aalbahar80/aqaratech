@@ -31,10 +31,12 @@
 	}
 	interface SortOption {
 		name: string;
+		value: string;
 	}
 
 	export let sortOptions: SortOption[];
 	export let filters: Filter[];
+	export let currentSort: SortOption['value'];
 
 	function classNames(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
@@ -190,17 +192,23 @@
 							class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
 						>
 							<div class="py-1">
-								{#each sortOptions as option (option)}
+								{#each sortOptions as option (option.name)}
 									<MenuItem let:active>
-										<a
-											href={option.href}
+										<label
 											class={classNames(
 												active ? 'bg-gray-100' : '',
 												'block px-4 py-2 text-sm font-medium text-gray-900',
 											)}
 										>
+											<input
+												type="radio"
+												name="sort"
+												bind:group={currentSort}
+												value={option.value}
+												class="hidden"
+											/>
 											{option.name}
-										</a>
+										</label>
 									</MenuItem>
 								{/each}
 							</div>
