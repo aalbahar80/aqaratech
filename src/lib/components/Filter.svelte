@@ -240,7 +240,8 @@
 										<span
 											class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700"
 										>
-											1
+											{filters[sectionIdx]?.options.filter((o) => o.checked)
+												.length}
 										</span>
 									{/if}
 
