@@ -188,8 +188,10 @@ export default trpc
 		},
 	})
 	.query('search', {
-		input: z.string().optional(),
-		resolve: ({ input }) =>
+		input: z.object({
+			query: z.string().optional(),
+		}),
+		resolve: ({ input: { query } }) =>
 			prismaClient.lease.findMany({
 				take: 5,
 				orderBy: {
@@ -216,13 +218,13 @@ export default trpc
 						},
 					},
 				},
-				where: input
+				where: query
 					? {
 							OR: [
-								{ id: { contains: input } },
-								{ license: { contains: input } },
-								{ tenant: { firstName: { contains: input } } },
-								{ tenant: { lastName: { contains: input } } },
+								{ id: { contains: query } },
+								{ license: { contains: query } },
+								{ tenant: { firstName: { contains: query } } },
+								{ tenant: { lastName: { contains: query } } },
 							],
 					  }
 					: {},
