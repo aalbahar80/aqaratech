@@ -152,39 +152,53 @@ export default trpc
 				},
 			};
 
-			return {
-				data: await prismaClient.lease.findMany({
-					take: input.size,
-					skip: input.size * (input.pageIndex - 1),
-					orderBy: {
-						[input.sortBy.key]: input.sortBy.order,
-					},
-					where: {
-						OR: [
-							input.status?.upcoming ? filters.upcoming : {},
-							input.status?.current ? filters.current : {},
-							input.status?.expired ? filters.expired : {},
-						],
-					},
-					select: {
-						id: true,
-						start: true,
-						end: true,
-						monthlyRent: true,
-						tenant: true,
-						unit: {
-							include: {
-								property: true,
-							},
+			const dataQuery = prismaClient.lease.findMany({
+				take: input.size,
+				skip: input.size * (input.pageIndex - 1),
+				orderBy: {
+					[input.sortBy.key]: input.sortBy.order,
+				},
+				where: {
+					OR: [
+						input.status?.upcoming ? filters.upcoming : {},
+						input.status?.current ? filters.current : {},
+						input.status?.expired ? filters.expired : {},
+					],
+				},
+				select: {
+					id: true,
+					start: true,
+					end: true,
+					monthlyRent: true,
+					tenant: true,
+					unit: {
+						include: {
+							property: true,
 						},
 					},
-				}),
-				pagination: {
-					size: input.size,
-					start: input.size * (input.pageIndex - 1) + 1,
-					pageIndex: input.pageIndex,
 				},
+			});
+
+			const totalQuery = prismaClient.lease.count({
+				where: {
+					OR: [
+						input.status?.upcoming ? filters.upcoming : {},
+						input.status?.current ? filters.current : {},
+						input.status?.expired ? filters.expired : {},
+					],
+				},
+			});
+			const [data, total] = await Promise.all([dataQuery, totalQuery]);
+			const start = input.size * (input.pageIndex - 1) + 1;
+			const pagination = {
+				size: input.size,
+				start,
+				pageIndex: input.pageIndex,
+				hasNextPage: start + input.size < total,
+				hasPreviousPage: input.pageIndex > 1,
+				total,
 			};
+			return { data, pagination };
 		},
 	})
 	.query('search', {
