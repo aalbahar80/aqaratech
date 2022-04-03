@@ -6,6 +6,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
+	import { getBadge } from '$lib/definitions/lease';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
@@ -32,26 +33,7 @@
 		},
 	];
 
-	// TODO: should be reactive?
-	const getBadge = () => {
-		if (lease.end < new Date()) {
-			return {
-				label: 'Expired',
-				color: 'red',
-			};
-		}
-		if (lease.start > new Date()) {
-			return {
-				label: 'Upcoming',
-				color: 'indigo',
-			};
-		}
-		return {
-			label: 'Current',
-			color: 'green',
-		};
-	};
-	const badge = getBadge();
+	const badge = getBadge(lease);
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">

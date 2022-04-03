@@ -118,6 +118,25 @@ export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
 	}),
 });
 
+export const getBadge = (dates: { start: Date; end: Date }) => {
+	if (dates.end < new Date()) {
+		return {
+			label: 'Expired',
+			color: 'red',
+		};
+	}
+	if (dates.start > new Date()) {
+		return {
+			label: 'Upcoming',
+			color: 'indigo',
+		};
+	}
+	return {
+		label: 'Current',
+		color: 'green',
+	};
+};
+
 const label: typeof definition['label'] = (item) =>
 	`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`;
 

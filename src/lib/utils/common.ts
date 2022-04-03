@@ -4,7 +4,7 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const total = differenceInCalendarDays(end, start);
 	const left = differenceInCalendarDays(end, ref ?? new Date());
 	const result = left < 1 ? 100 : 100 - (left / total) * 100;
-	const rounded = Math.round(result);
+	const rounded = Math.max(0, Math.round(result));
 	return rounded;
 };
 

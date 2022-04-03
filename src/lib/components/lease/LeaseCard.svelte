@@ -1,10 +1,11 @@
 <script lang="ts">
-	import type { InferQueryOutput } from '$lib/client/trpc';
+	import { getBadge } from '$lib/definitions/lease';
 	import { getAddress } from '$lib/definitions/property';
 	import { getName, getProgress } from '$lib/utils/common';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
+	import Badge from '../Badge.svelte';
 
 	interface Lease {
 		id: string;
@@ -30,19 +31,16 @@
 	export let index: number | undefined = undefined;
 
 	const expired = lease.end < new Date();
+
+	const badge = getBadge(lease);
+	const progress = getProgress(lease.start, lease.end);
 </script>
 
 <a href={`/leases/${lease.id}`} class="block hover:bg-gray-50">
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-row-reverse items-center justify-between">
 			<div class="ml-2 flex flex-shrink-0">
-				<p
-					class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
-					class:badge-green={!expired}
-					class:badge-red={expired}
-				>
-					{expired ? 'Expired' : 'Active'}
-				</p>
+				<Badge label={badge.label} badgeColor={badge.color} />
 			</div>
 			{#if index}
 				<p class="truncate text-sm font-medium text-indigo-600">
@@ -93,21 +91,15 @@
 			</div>
 		</div>
 		{#if !expired}
-			<div class="mt-4 overflow-hidden rounded-full bg-gray-200">
+			<div
+				class="mt-4 animate-pulse overflow-hidden rounded-full bg-gray-200"
+				class:animate-pulse={progress === 0}
+			>
 				<div
 					class="h-1 rounded-full bg-indigo-600"
-					style:width={`${getProgress(lease.start, lease.end)}%`}
+					style:width={`${progress}%`}
 				/>
 			</div>
 		{/if}
 	</div>
 </a>
-
-<style lang="postcss">
-	.badge-green {
-		@apply bg-green-100 text-green-800;
-	}
-	.badge-red {
-		@apply bg-red-100 text-red-800;
-	}
-</style>

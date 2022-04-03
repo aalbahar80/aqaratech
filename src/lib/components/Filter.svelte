@@ -1,68 +1,40 @@
 <script lang="ts">
-	import { ChevronDown, X } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import {
+		Dialog,
+		DialogOverlay,
+		Disclosure,
 		DisclosureButton,
 		DisclosurePanel,
-		Disclosure,
+		Menu,
+		MenuButton,
+		MenuItem,
+		MenuItems,
 		Popover,
 		PopoverButton,
 		PopoverGroup,
-		TransitionRoot,
-		TransitionChild,
-		DialogOverlay,
-		Dialog,
-		MenuButton,
-		Menu,
-		Transition,
-		MenuItems,
-		MenuItem,
 		PopoverPanel,
+		Transition,
+		TransitionChild,
+		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
+	import { ChevronDown, X } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const sortOptions = [
-		{ name: 'Most Popular', href: '#' },
-		{ name: 'Best Rating', href: '#' },
-		{ name: 'Newest', href: '#' },
-	];
-	const filters = [
-		{
-			id: 'category',
-			name: 'Category',
-			options: [
-				{ value: 'tees', label: 'Tees' },
-				{ value: 'crewnecks', label: 'Crewnecks' },
-				{ value: 'hats', label: 'Hats' },
-			],
-		},
-		{
-			id: 'brand',
-			name: 'Brand',
-			options: [
-				{ value: 'clothing-company', label: 'Clothing Company' },
-				{ value: 'fashion-inc', label: 'Fashion Inc.' },
-				{ value: 'shoes-n-more', label: "Shoes 'n More" },
-			],
-		},
-		{
-			id: 'color',
-			name: 'Color',
-			options: [
-				{ value: 'white', label: 'White' },
-				{ value: 'black', label: 'Black' },
-				{ value: 'grey', label: 'Grey' },
-			],
-		},
-		{
-			id: 'sizes',
-			name: 'Sizes',
-			options: [
-				{ value: 's', label: 'S' },
-				{ value: 'm', label: 'M' },
-				{ value: 'l', label: 'L' },
-			],
-		},
-	];
+	interface Filter {
+		id: string;
+		name: string;
+		options: {
+			value: string;
+			label: string;
+			checked: boolean;
+		}[];
+	}
+	interface SortOption {
+		name: string;
+	}
+
+	export let sortOptions: SortOption[];
+	export let filters: Filter[];
 
 	function classNames(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
@@ -152,7 +124,7 @@
 												<input
 													id={`filter-mobile-${section.id}-${optionIdx}`}
 													name={`${section.id}[]`}
-													value={option.value}
+													bind:checked={option.checked}
 													type="checkbox"
 													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 												/>
@@ -175,14 +147,14 @@
 	</TransitionRoot>
 
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-		<div class="py-24">
+		<!-- <div class="py-24">
 			<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
 				New Arrivals
 			</h1>
 			<p class="mx-auto mt-4 max-w-3xl text-base text-gray-500">
 				Thoughtfully designed objects for the workspace, home, and travel.
 			</p>
-		</div>
+		</div> -->
 
 		<section
 			aria-labelledby="filter-heading"
@@ -290,7 +262,7 @@
 												<input
 													id={`filter-${section.id}-${optionIdx}`}
 													name={`${section.id}[]`}
-													value={option.value}
+													bind:checked={option.checked}
 													type="checkbox"
 													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 												/>
