@@ -1,29 +1,55 @@
 <script context="module" lang="ts">
+	import trpc from '$lib/client/trpc';
+	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
+	import { singular } from '$lib/definitions/index';
+	import type { Predefined } from '$lib/definitions/lease';
+	import { getAddress } from '$lib/definitions/property';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ url }) => {
-		let predefined = Object.fromEntries(url.searchParams.entries());
-		console.log({ predefined }, 'leases.svelte ~ 6');
+		let options = Object.fromEntries(url.searchParams.entries());
+		let predefined: Predefined | undefined;
 
-		if (predefined.renew && predefined.leaseId) {
-			const oldLease = await trpc.query('leases:read', predefined.leaseId);
-			return { props: { oldLease } };
-			// return { props: { predefined: { ...predefined, ...oldLease } } };
+		if (options.leaseId) {
+			// renewing
+			const lease = await trpc.query('leases:read', options.leaseId);
+			predefined = {
+				initiator: 'lease',
+				tenantId: lease.tenantId,
+				firstName: lease.tenant.firstName,
+				lastName: lease.tenant.lastName,
+				unitId: lease.unitId,
+				unitNumber: lease.unit.unitNumber,
+				propertyId: lease.unit.property.id,
+				address: getAddress(lease.unit.property),
+				monthlyRent: lease.monthlyRent,
+			};
+		} else if (options.tenantId) {
+			const tenant = await trpc.query('tenants:read', options.tenantId);
+			predefined = {
+				initiator: 'tenant',
+				tenantId: tenant.id,
+				firstName: tenant.firstName,
+				lastName: tenant.lastName,
+			};
+		} else if (options.unitId) {
+			const unit = await trpc.query('units:read', options.unitId);
+			predefined = {
+				initiator: 'unit',
+				unitId: unit.id,
+				unitNumber: unit.unitNumber,
+				propertyId: unit.propertyId,
+				address: getAddress(unit.property),
+			};
 		}
-		// TODO handle predefined unitId
 		return {
-			props: { oldLease: predefined },
+			props: { predefined },
 		};
 	};
 </script>
 
 <script lang="ts">
-	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
-	import { singular } from '$lib/definitions/index';
-	import trpc from '$lib/client/trpc';
-
-	export let oldLease: any;
-	// export let predefined: any;
+	export let predefined: Predefined;
 	const entity = 'leases';
 </script>
 
@@ -38,5 +64,5 @@
 			New Lease
 		</h2>
 	</div>
-	<LeaseForm {oldLease} />
+	<LeaseForm {predefined} />
 </div>

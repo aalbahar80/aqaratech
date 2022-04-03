@@ -2,14 +2,15 @@ import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/tenant';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export default trpc
 	.router()
 	.query('read', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.tenant.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.tenant.findUnique({
 				where: {
 					id,
 				},
@@ -40,7 +41,10 @@ export default trpc
 						},
 					},
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND', message: 'Tenant not found' });
+		},
 	})
 	.query('basic', {
 		input: z.string(),

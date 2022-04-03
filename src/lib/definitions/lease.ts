@@ -137,6 +137,34 @@ export const getBadge = (dates: { start: Date; end: Date }) => {
 	};
 };
 
+interface PredefinedTenant {
+	initiator: 'tenant';
+	tenantId: string;
+	firstName: string;
+	lastName: string;
+}
+interface PredefinedUnit {
+	initiator: 'unit';
+	unitId: string;
+	unitNumber: string;
+	propertyId: string;
+	address: string;
+}
+
+interface PredefinedLease {
+	initiator: 'lease';
+	tenantId: string;
+	firstName: string;
+	lastName: string;
+	unitId: string;
+	unitNumber: string;
+	propertyId: string;
+	address: string;
+	monthlyRent: number;
+}
+// helper type for new lease form
+export type Predefined = PredefinedTenant | PredefinedUnit | PredefinedLease;
+
 const label: typeof definition['label'] = (item) =>
 	`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`;
 

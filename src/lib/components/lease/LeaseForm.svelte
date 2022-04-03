@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import trpc from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import {
 		defaultForm,
 		generateSchedule,
 		leaseFormSchema,
+		type Predefined,
 	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDate, forceDateToInput } from '$lib/utils/common';
@@ -20,25 +21,25 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
+	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
+	import { v4 as uuidv4 } from 'uuid';
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
-	import { v4 as uuidv4 } from 'uuid';
-	import { onMount } from 'svelte';
 
-	export let oldLease: Partial<InferQueryOutput<'leases:read'>> | undefined;
+	export let predefined: Predefined;
 
-	let resetUnit = false;
 	const lease = {
+		propertyId: '',
 		...defaultForm(),
-		monthlyRent: oldLease?.monthlyRent ?? 0,
-		unitId: oldLease?.unitId ?? null,
+		...predefined,
 	};
 
-	let propertyId = oldLease?.unit?.property.id || '';
+	let propertyId = lease.propertyId;
+
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
 		unitList = await trpc
@@ -51,7 +52,6 @@
 			);
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	$: getUnitList(propertyId);
 
 	function classes(...classList: string[]) {
@@ -205,10 +205,10 @@
 							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
 						>
 							<div class="w-full">
+								<!-- optionLabel={oldLease?.tenant ?? null} -->
 								<ComboBox
 									entity="tenants"
-									value={oldLease?.tenantId ?? null}
-									optionLabel={oldLease?.tenant ?? null}
+									value={lease.tenantId}
 									on:init={(e) => {
 										setData('tenantId', e.detail.id);
 									}}
@@ -255,12 +255,8 @@
 							<div class="sm:w-3/4">
 								<ComboBox
 									entity="properties"
-									value={oldLease?.unit?.property.id ?? null}
-									optionLabel={oldLease?.unit?.property}
+									value={lease.propertyId}
 									on:select={(e) => {
-										if (e.detail.id !== propertyId) {
-											resetUnit = true;
-										}
 										propertyId = e.detail.id;
 										setData('unitId', '');
 									}}
@@ -284,12 +280,7 @@
 											id="unit"
 											items={unitList}
 											optionIdentifier="id"
-											value={oldLease && !resetUnit
-												? {
-														id: oldLease.unitId,
-														label: oldLease.unit?.unitNumber,
-												  }
-												: undefined}
+											value={lease.unitId}
 											on:select={(e) => {
 												setData('unitId', e.detail.id);
 											}}
