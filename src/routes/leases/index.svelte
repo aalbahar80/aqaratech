@@ -10,8 +10,8 @@
 
 	export const load: Load = async () => {
 		const options = {
-			pageIndex: 2,
-			size: 2,
+			pageIndex: 1,
+			size: 15,
 			sortBy: { key: 'createdAt', order: 'desc' } as const,
 			status: {
 				current: true,
