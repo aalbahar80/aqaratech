@@ -2,6 +2,8 @@
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 
 	interface Lease {
 		id: string;
@@ -51,7 +53,7 @@
 
 		<ul class="divide-y divide-gray-200">
 			{#each leases as lease, index (lease.id)}
-				<li>
+				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 					<LeaseCard {lease} index={showIndex ? index + 1 : undefined} />
 				</li>
 			{/each}
