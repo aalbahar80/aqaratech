@@ -28,7 +28,7 @@
 	<PreloadingIndicator />
 {/if}
 
-<div class="h-full">
+<div>
 	<!-- <NavBar /> -->
 	<NavBar2 />
 	<ToastParent />
