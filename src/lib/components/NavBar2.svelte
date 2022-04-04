@@ -130,7 +130,7 @@
 					<div class="mt-6 px-5">
 						<p class="text-center text-base font-medium text-gray-500">
 							Existing customer?{' '}
-							<a href="/" class="text-gray-900 hover:underline"> Login </a>
+							<a href="/login" class="text-gray-900 hover:underline"> Login </a>
 						</p>
 					</div>
 				</div>
