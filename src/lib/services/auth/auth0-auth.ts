@@ -1,6 +1,6 @@
-import { Providers, SvelteKitAuth } from 'sk-auth';
+import { SvelteKitAuth } from 'sk-auth';
 import type { OAuth2ProviderConfig } from 'sk-auth/dist/providers/oauth2';
-import { GitHubOAuth2Provider, OAuth2Provider } from 'sk-auth/providers';
+import { OAuth2Provider } from 'sk-auth/providers';
 
 interface Auth0Profile {
 	id: number;
@@ -45,15 +45,6 @@ const defaultConfig: Auth0OAuth2ProviderConfig = {
 	},
 };
 
-const config: Auth0OAuth2ProviderConfig = {
-	clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
-	clientSecret: import.meta.env.VITE_AUTH0_CLIENT_SECRET,
-	authorizationUrl: 'https://dev-eehvhdp2.eu.auth0.com/authorize',
-	accessTokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
-	profileUrl: 'https://dev-eehvhdp2.eu.auth0.com/userinfo',
-	scope: 'openid name picture profile email https://hasura.io/jwt/claims',
-};
-
 // TODO see vhscom starter
 const developmentOptions = {
 	host: 'localhost:3000',
@@ -63,41 +54,14 @@ const developmentOptions = {
 
 export const auth0Auth = new SvelteKitAuth({
 	providers: [
-		new Auth0OAuth2Provider(config),
-		new GitHubOAuth2Provider({
-			// TODO dotenv as per vhscom starter
-			clientId: import.meta.env.VITE_GITHUB_OAUTH_CLIENT_ID,
-			clientSecret: import.meta.env.VITE_GITHUB_OAUTH_CLIENT_SECRET,
-			profile(profile) {
-				return {
-					...profile,
-					provider: 'github',
-				};
-			},
+		new Auth0OAuth2Provider({
+			clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+			clientSecret: import.meta.env.VITE_AUTH0_CLIENT_SECRET,
+			authorizationUrl: 'https://dev-eehvhdp2.eu.auth0.com/authorize',
+			accessTokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
+			profileUrl: 'https://dev-eehvhdp2.eu.auth0.com/userinfo',
+			scope: 'openid name picture profile email https://hasura.io/jwt/claims',
 		}),
-
-		new (class extends Providers.GitHubOAuth2Provider {
-			// Bespoke class illustrating how to customize a provider
-			// To use, navigate user agent to /api/auth/signin/custom
-			constructor() {
-				super({
-					clientId: import.meta.env.VITE_GITHUB_OAUTH_CLIENT_ID,
-					clientSecret: import.meta.env.VITE_GITHUB_OAUTH_CLIENT_SECRET,
-					profile(profile) {
-						return {
-							...profile,
-							provider: 'custom',
-						};
-					},
-				});
-			}
-
-			// For example, monkey patch a method of the abstract base class
-			// to nullify AuthConfig options affecting redirect URIs
-			override getCallbackUri(): string {
-				return import.meta.env.VITE_CUSTOM_OAUTH_REDIRECT_URI;
-			}
-		})(),
 	],
 
 	callbacks: {
