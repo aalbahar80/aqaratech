@@ -171,7 +171,6 @@
 
 <div class="bg-white">
 	<div class="overflow-hidden">
-		<!-- <NavBar2 /> -->
 		<main>
 			<div
 				class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14"

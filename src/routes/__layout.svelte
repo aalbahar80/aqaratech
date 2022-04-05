@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { navigating } from '$app/stores';
-	import NavBar2 from '$lib/components/NavBar2.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import '../styles/tailwind.css';
@@ -29,8 +29,7 @@
 {/if}
 
 <div>
-	<!-- <NavBar /> -->
-	<NavBar2 />
+	<Navbar />
 	<ToastParent />
 	<slot />
 </div>
