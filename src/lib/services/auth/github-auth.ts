@@ -1,12 +1,15 @@
+import { dev } from '$app/env';
 import { Providers, SvelteKitAuth } from 'sk-auth';
 import { GitHubOAuth2Provider } from 'sk-auth/providers';
 
 // TODO see vhscom starter
-const developmentOptions = {
-	host: 'localhost:3000',
-	protocol: 'http',
-	basePath: '/api/auth',
-};
+const developmentOptions = dev
+	? {
+			host: 'localhost:3000',
+			protocol: 'http',
+			basePath: '/api/auth',
+	  }
+	: {};
 
 export const githubAuth = new SvelteKitAuth({
 	providers: [

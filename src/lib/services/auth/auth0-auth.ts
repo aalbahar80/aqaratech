@@ -1,12 +1,15 @@
+import { dev } from '$app/env';
 import { SvelteKitAuth } from 'sk-auth';
 import { Auth0OAuth2Provider } from './auth0-provider';
 
 // TODO see vhscom starter
-const developmentOptions = {
-	host: 'localhost:3000',
-	protocol: 'http',
-	basePath: '/api/auth',
-};
+const developmentOptions = dev
+	? {
+			host: 'localhost:3000',
+			protocol: 'http',
+			basePath: '/api/auth',
+	  }
+	: {};
 
 export const auth0Auth = new SvelteKitAuth({
 	providers: [
