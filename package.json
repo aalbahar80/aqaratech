@@ -23,6 +23,7 @@
     "start:worker.watch": "nodemon --watch './temporal/lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' temporal/src/worker.ts"
   },
   "devDependencies": {
+    "@cerbos/sdk": "^0.4.6",
     "@faker-js/faker": "^6.1.1",
     "@felte/reporter-svelte": "^1.0.3",
     "@felte/reporter-tippy": "^1.0.5",
