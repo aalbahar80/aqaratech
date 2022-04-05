@@ -1,8 +1,7 @@
-// import { createContext, responseMeta, router } from '$lib/server/trpc/index';
 import { createContext, router } from '$lib/server/trpc/index';
+import { appAuth } from '$lib/services/auth';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-import cookie from 'cookie';
 import { createTRPCHandle } from 'trpc-sveltekit';
 
 const noIndex: Handle = async ({ event, resolve }) => {
@@ -16,71 +15,31 @@ const noIndex: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const trpcHandler: Handle = createTRPCHandle({ router, createContext });
+const trpcHandler: Handle = createTRPCHandle({ router, createContext });
 
-export const handle2: Handle = async ({ event, resolve }) => {
-	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+const authHandler: Handle = async ({ event, resolve }) => {
+	/**
+	 * Set `event.locals.error` true if endpoint responds with
+	 * an http status code of 4xx or 5xx, or false otherwise.
+	 */
+	event.locals.error = false;
+	let response = await resolve(event);
 
-	event.locals.user = cookies.user || '';
-	event.locals.hasura = cookies.hasura || '';
-	event.locals.userId = cookies.userId || '';
-
-	// decode the user jwt to get the userId
-	if (event.locals.user) {
-		const encodedJwt = event.locals.user.split('.')[1];
-		const decodedJwt = JSON.parse(
-			Buffer.from(encodedJwt, 'base64').toString('ascii'),
-		);
-		event.locals.userId = decodedJwt.sub;
-	} else {
-		event.locals.userId = '';
+	if (response.status > 399 && response.status < 600) {
+		event.locals.error = true;
+		response = await resolve(event);
 	}
-
-	const response = await resolve(event);
-
-	response.headers.append(
-		'Set-Cookie',
-		cookie.serialize('user', event.locals.user, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
-
-	response.headers.append(
-		'Set-Cookie',
-		cookie.serialize('hasura', event.locals.hasura, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
-
-	response.headers.append(
-		'Set-Cookie',
-		cookie.serialize('userId', event.locals.userId, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
 
 	return response;
 };
-export const handle: Handle = sequence(
-	trpcHandler,
-	noIndex,
-	// handle2,
-);
 
-export const getSession: GetSession = ({ locals }) => ({
-	user: locals.user,
-	hasura: locals.hasura,
-	userId: locals.userId,
-});
+export const handle: Handle = sequence(authHandler, trpcHandler, noIndex);
+
+export const getSession: GetSession = async (event) => {
+	const { user } = await appAuth.getSession(event);
+
+	return {
+		user,
+		error: event.locals.error,
+	};
+};

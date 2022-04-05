@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import { Menu, X } from '@steeze-ui/heroicons';
 	import {
 		Popover,
@@ -65,18 +66,33 @@
 				</div>
 			</div>
 			<div class="hidden md:flex md:items-center md:space-x-6">
-				<a
-					href="/login"
-					class="text-base font-medium text-white hover:text-gray-300"
-				>
-					Log in
-				</a>
-				<a
-					href="/"
-					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
-				>
-					Start free trial
-				</a>
+				{#if $session.user}
+					<a
+						href="/account/profile"
+						class="text-base font-medium text-white hover:text-gray-300"
+					>
+						Profile
+					</a>
+					<a
+						href="/account/signout"
+						class="text-base font-medium text-white hover:text-gray-300"
+					>
+						Sign out
+					</a>
+				{:else}
+					<a
+						href="/login"
+						class="text-base font-medium text-white hover:text-gray-300"
+					>
+						Log in
+					</a>
+					<a
+						href="/"
+						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
+					>
+						Start free trial
+					</a>
+				{/if}
 			</div>
 		</nav>
 	</div>

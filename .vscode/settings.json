@@ -38,5 +38,6 @@
 		"**/*.ts",
 		"**/*.json",
 		"package.json"
-	]
+	],
+	"editor.formatOnType": true
 }

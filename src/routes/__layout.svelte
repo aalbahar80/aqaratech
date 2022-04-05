@@ -1,3 +1,12 @@
+<script lang="ts" context="module">
+	import type { Load } from './__layout';
+	import { protectRoute } from '$lib/utils/auth';
+
+	export const load: Load = async ({ session, url: { pathname } }) => {
+		return protectRoute(session, pathname);
+	};
+</script>
+
 <script lang="ts">
 	import { navigating } from '$app/stores';
 	import Navbar from '$lib/components/Navbar.svelte';
