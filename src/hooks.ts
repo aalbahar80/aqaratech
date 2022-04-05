@@ -33,7 +33,8 @@ const authHandler: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle: Handle = sequence(authHandler, trpcHandler, noIndex);
+// trpc before auth
+export const handle: Handle = sequence(trpcHandler, authHandler, noIndex);
 
 export const getSession: GetSession = async (event) => {
 	const { user } = await appAuth.getSession(event);

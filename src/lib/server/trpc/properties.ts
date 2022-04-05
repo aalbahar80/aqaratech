@@ -4,6 +4,7 @@ import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { cerbos } from '../cerbos';
 
 export default trpc
 	.router()
@@ -27,8 +28,39 @@ export default trpc
 					},
 				},
 			});
-			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Property not found' });
+			if (!data) {
+				throw new TRPCError({
+					code: 'NOT_FOUND',
+					message: 'Property not found',
+				});
+			}
+			// check authz
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[data.id]: {
+							attr: data,
+						},
+					},
+				},
+				principal: {
+					id: 'TODO',
+					roles: ['TODO'],
+					attr: {
+						department: 'TODO',
+					},
+				},
+			});
+			if (allowed.isAuthorized(data.id, 'read')) {
+				return data;
+			} else {
+				throw new TRPCError({
+					// code: 'UNAUTHORIZED',
+					code: 'FORBIDDEN',
+				});
+			}
 		},
 	})
 	.query('basic', {
