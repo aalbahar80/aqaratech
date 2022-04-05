@@ -1,15 +1,6 @@
 import type { OAuth2ProviderConfig } from 'sk-auth/dist/providers/oauth2';
 import { OAuth2Provider } from 'sk-auth/providers';
 
-const defaultConfig: Auth0OAuth2ProviderConfig = {
-	id: 'auth0',
-	scope: 'openid',
-	headers: {
-		Accept: 'application/json',
-		// 'Content-Type': 'application/json',
-	},
-};
-
 interface Auth0Profile {
 	id: number;
 	login: string;
@@ -17,6 +8,7 @@ interface Auth0Profile {
 	url: string;
 	name: string;
 }
+
 interface Auth0Tokens {
 	access_token: string;
 	token_type: string;
@@ -25,10 +17,20 @@ interface Auth0Tokens {
 	id_token?: string | undefined;
 	refresh_token?: string | undefined;
 }
+
 type Auth0OAuth2ProviderConfig = OAuth2ProviderConfig<
 	Auth0Profile,
 	Auth0Tokens
 >;
+
+const defaultConfig: Auth0OAuth2ProviderConfig = {
+	id: 'auth0',
+	scope: 'openid',
+	headers: {
+		Accept: 'application/json',
+		// 'Content-Type': 'application/json',
+	},
+};
 
 export class Auth0OAuth2Provider extends OAuth2Provider<
 	Auth0Profile,
