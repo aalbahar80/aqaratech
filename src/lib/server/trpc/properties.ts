@@ -2,15 +2,16 @@ import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/property';
 import prismaClient from '$lib/server/prismaClient';
 import * as trpc from '@trpc/server';
-import { TRPCError } from '@trpc/server';
+import { TRPCError, type inferAsyncReturnType } from '@trpc/server';
 import { z } from 'zod';
 import { cerbos } from '../cerbos';
+import type { createContext } from '.';
 
 export default trpc
-	.router()
+	.router<inferAsyncReturnType<typeof createContext>>()
 	.query('read', {
 		input: z.string(),
-		resolve: async ({ input: id }) => {
+		resolve: async ({ ctx, input: id }) => {
 			const data = await prismaClient.property.findUnique({
 				where: {
 					id,
@@ -38,7 +39,7 @@ export default trpc
 			const allowed = await cerbos.check({
 				actions: ['read'],
 				resource: {
-					kind: 'property',
+					kind: 'contact',
 					instances: {
 						[data.id]: {
 							attr: data,
@@ -47,12 +48,13 @@ export default trpc
 				},
 				principal: {
 					id: 'TODO',
-					roles: ['TODO'],
+					roles: ['admin'],
 					attr: {
 						department: 'TODO',
 					},
 				},
 			});
+			console.warn(ctx.user);
 			if (allowed.isAuthorized(data.id, 'read')) {
 				return data;
 			} else {
