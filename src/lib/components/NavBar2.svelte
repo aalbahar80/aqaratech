@@ -66,7 +66,7 @@
 			</div>
 			<div class="hidden md:flex md:items-center md:space-x-6">
 				<a
-					href="/"
+					href="/login"
 					class="text-base font-medium text-white hover:text-gray-300"
 				>
 					Log in
