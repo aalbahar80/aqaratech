@@ -3,7 +3,7 @@ import { schema } from '$lib/definitions/property';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '.';
+import { createRouter } from './router';
 import { cerbos } from '../cerbos';
 
 export default createRouter()

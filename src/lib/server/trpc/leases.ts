@@ -1,12 +1,11 @@
 import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/lease';
 import prismaClient from '$lib/server/prismaClient';
-import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from './router';
 
-export default trpc
-	.router()
+const leases = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -268,3 +267,5 @@ export default trpc
 				},
 			}),
 	});
+
+export default leases;

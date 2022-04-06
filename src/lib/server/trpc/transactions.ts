@@ -3,9 +3,9 @@ import { paginationSchema, withId } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
-import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from './router';
 
 let url: string;
 
@@ -23,8 +23,7 @@ if (browser) {
 	url = 'http://localhost:3000';
 }
 
-export default trpc
-	.router()
+const transactions = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -172,3 +171,5 @@ export default trpc
 				},
 			}),
 	});
+
+export default transactions;
