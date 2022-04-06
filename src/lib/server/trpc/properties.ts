@@ -1,14 +1,12 @@
 import { paginationSchema } from '$lib/definitions/common';
 import { schema } from '$lib/definitions/property';
 import prismaClient from '$lib/server/prismaClient';
-import * as trpc from '@trpc/server';
-import { TRPCError, type inferAsyncReturnType } from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from '.';
 import { cerbos } from '../cerbos';
-import type { createContext } from '.';
 
-export default trpc
-	.router<inferAsyncReturnType<typeof createContext>>()
+export default createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {

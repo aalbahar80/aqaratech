@@ -1,7 +1,5 @@
-import type { AnyRouter, inferAsyncReturnType } from '@trpc/server';
 import * as trpc from '@trpc/server';
 import superjson from 'superjson';
-import type { CreateContextFn } from 'trpc-sveltekit/dist/types';
 import charts from './charts';
 import clients from './clients';
 import leases from './leases';
@@ -11,15 +9,18 @@ import tenants from './tenants';
 import transactions from './transactions';
 import units from './units';
 
-export const createContext = (req) => {
-	// export const createContext = (req) => {
+export const createContext = (req: Request) => {
 	console.log(req);
 	const user = 'this is user';
 	return { user };
 };
+export type Context = trpc.inferAsyncReturnType<typeof createContext>;
 
-export const router = trpc
-	.router<inferAsyncReturnType<typeof createContext>>()
+export const createRouter = () => {
+	return trpc.router<Context>();
+};
+
+export const router = createRouter()
 	.transformer(superjson)
 	.merge('tenants:', tenants)
 	.merge('leases:', leases)
