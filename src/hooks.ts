@@ -1,4 +1,5 @@
-import { createContext, router } from '$lib/server/trpc/index';
+import { router } from '$lib/server/trpc/index';
+import { createContext } from '$lib/server/trpc/router';
 import { appAuth } from '$lib/services/auth';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
