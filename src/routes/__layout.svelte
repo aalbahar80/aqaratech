@@ -2,9 +2,9 @@
 	import type { Load } from './__layout';
 	import { protectRoute } from '$lib/utils/auth';
 
-	export const load: Load = async ({ session, url: { pathname } }) => {
-		return protectRoute(session, pathname);
-	};
+	// export const load: Load = async ({ session, url: { pathname } }) => {
+	// 	return protectRoute(session, pathname);
+	// };
 </script>
 
 <script lang="ts">
