@@ -9,8 +9,8 @@
 	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from './[id]';
 
-	export const load: Load = async ({ params }) => {
-		const property = await trpc.query('properties:read', params.id);
+	export const load: Load = async ({ params, fetch }) => {
+		const property = await trpc(fetch).query('properties:read', params.id);
 		return { props: { property } };
 	};
 </script>

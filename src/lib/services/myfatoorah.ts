@@ -29,7 +29,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 	// get necessary info for payment
 
 	console.log('fetching mf url');
-	const trx = await trpc.query('transactions:pay', id);
+	const trx = await trpc().query('transactions:pay', id);
 	if (!trx) {
 		const err = new Error('Transaction or Tenant not found');
 		console.error(err);
@@ -125,7 +125,7 @@ export const markAsPaid = async (trxId: string) => {
 		'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
 
 	try {
-		const result = await trpc.mutation('transactions:updatePaid', {
+		const result = await trpc().mutation('transactions:updatePaid', {
 			id: trxId,
 			receiptUrl: invoiceUrl,
 			isPaid: true,

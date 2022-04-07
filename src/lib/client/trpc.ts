@@ -18,10 +18,13 @@ if (browser) {
 	url = 'http://localhost:3000/trpc';
 }
 
-const client = trpc.createTRPCClient<Router>({
-	url,
-	transformer: superjson,
-});
+
+const client = (loadFetch?: typeof fetch) =>
+	trpc.createTRPCClient<Router>({
+		url: loadFetch ? '/trpc' : url,
+		transformer: superjson,
+		...(loadFetch && { fetch: loadFetch }),
+	});
 
 type Query = keyof Router['_def']['queries'];
 type Mutation = keyof Router['_def']['mutations'];

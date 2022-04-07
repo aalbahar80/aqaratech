@@ -9,9 +9,9 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;
-		const trx = await trpc.query('transactions:read', id);
+		const trx = await trpc(fetch).query('transactions:read', id);
 		return { props: { trx } };
 	};
 </script>

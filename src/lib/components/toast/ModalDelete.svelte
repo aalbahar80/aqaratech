@@ -15,7 +15,7 @@
 		isLoading = true;
 		try {
 			// await new Promise((resolve) => setTimeout(resolve, 200));
-			await trpc.mutation(`${entity}:delete`, id);
+			await trpc().mutation(`${entity}:delete`, id);
 			isLoading = false;
 			isOpen = false;
 			await goto(`/${entity}`);

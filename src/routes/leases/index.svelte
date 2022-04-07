@@ -8,7 +8,7 @@
 	import { isEqual } from 'lodash-es';
 	import type { Load } from './index';
 
-	export const load: Load = async () => {
+	export const load: Load = async ({ fetch }) => {
 		const options = {
 			pageIndex: 1,
 			size: 15,
@@ -19,7 +19,10 @@
 				expired: true,
 			},
 		};
-		const { data, pagination } = await trpc.query('leases:list', options);
+		const { data, pagination } = await trpc(fetch).query(
+			'leases:list',
+			options,
+		);
 		return {
 			props: { pagination, leases: data, options },
 		};
@@ -55,7 +58,7 @@
 			return; // no change
 		}
 		currentOptions = newOptions;
-		({ data: leases, pagination } = await trpc.query(
+		({ data: leases, pagination } = await trpc().query(
 			`leases:list`,
 			newOptions,
 		));

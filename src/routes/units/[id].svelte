@@ -14,8 +14,8 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import type { Load } from './[id]';
 
-	export const load: Load = async ({ params }) => {
-		const unit = await trpc.query('units:read', params.id);
+	export const load: Load = async ({ params, fetch }) => {
+		const unit = await trpc(fetch).query('units:read', params.id);
 		return { props: { unit } };
 	};
 </script>

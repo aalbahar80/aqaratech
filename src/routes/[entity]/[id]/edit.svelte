@@ -5,7 +5,7 @@
 	import { isEntity, entityDefinitions } from '$lib/definitions/index';
 	import type { Load } from './edit';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const { entity, id } = params;
 		if (!isEntity(entity)) {
 			return {
@@ -13,7 +13,7 @@
 				error: 'Unknown entity',
 			};
 		}
-		const data = await trpc.query(`${entity}:basic`, id);
+		const data = await trpc(fetch).query(`${entity}:basic`, id);
 		if (data) {
 			return {
 				props: { data, entity },

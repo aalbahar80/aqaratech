@@ -4,7 +4,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './router';
-import { cerbos } from '../cerbos';
+// import { cerbos } from '../cerbos';
 
 export default createRouter()
 	.query('read', {
@@ -34,26 +34,27 @@ export default createRouter()
 				});
 			}
 			// check authz
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'contact',
-					instances: {
-						[data.id]: {
-							attr: data,
-						},
-					},
-				},
-				principal: {
-					id: 'TODO',
-					roles: ['admin'],
-					attr: {
-						department: 'TODO',
-					},
-				},
-			});
+			// const allowed = await cerbos.check({
+			// 	actions: ['read'],
+			// 	resource: {
+			// 		kind: 'contact',
+			// 		instances: {
+			// 			[data.id]: {
+			// 				attr: data,
+			// 			},
+			// 		},
+			// 	},
+			// 	principal: {
+			// 		id: 'TODO',
+			// 		roles: ['admin'],
+			// 		attr: {
+			// 			department: 'TODO',
+			// 		},
+			// 	},
+			// });
 			console.warn(ctx.user);
-			if (allowed.isAuthorized(data.id, 'read')) {
+			// if (allowed.isAuthorized(data.id, 'read')) {
+			if (true) {
 				return data;
 			} else {
 				throw new TRPCError({
