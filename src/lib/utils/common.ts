@@ -50,16 +50,16 @@ export const getName = <
 	]);
 };
 
-export const forceDate = (date: Date | string): Date => {
+export const forceDate = (date: Date | string | number): Date => {
 	if (date instanceof Date) return date;
-	if (typeof date === 'string') {
+	if (typeof date === 'string' || typeof date === 'number') {
 		try {
 			return new Date(date);
 		} catch (e) {
 			throw new Error('Can not parse date');
 		}
 	}
-	console.warn('forceDate: date is not a Date or string');
+	console.warn('forceDate: date is not a Date or string or number');
 	return new Date();
 };
 
@@ -72,7 +72,7 @@ export const dateToInput = (date: Date): string => {
 	}
 };
 
-export const forceDateToInput = (date: Date | string): string => {
+export const forceDateToInput = (date: Date | string | number): string => {
 	try {
 		return dateToInput(forceDate(date));
 	} catch (e) {

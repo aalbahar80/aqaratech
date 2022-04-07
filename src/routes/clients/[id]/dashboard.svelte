@@ -16,9 +16,11 @@
 
 	const defaultRange = 6;
 	const getRange = (months: number) => ({
-		// TODO use UTC, fns
-		start: subMonths(new Date(Date.now()).setHours(23, 59, 59, 1), months),
-		end: new Date(new Date(Date.now()).setHours(23, 59, 59, 1)),
+		start: subMonths(
+			new Date(Date.now()).setHours(0, 0, 0, 0),
+			months,
+		).getTime(),
+		end: new Date(Date.now()).setHours(0, 0, 0, 0),
 	});
 
 	type Filter = z.infer<typeof filterSchema>;
@@ -110,11 +112,11 @@
 	$: endInput = forceDateToInput(filter.end);
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
-		// [income, expenses, occupancy] = await Promise.all([
-		// 	trpc().query('charts:income', newFilter),
-		// 	trpc().query('charts:expenses', newFilter),
-		// 	trpc().query('charts:occupancy', newFilter),
-		// ]);
+		[income, expenses, occupancy] = await Promise.all([
+			trpc().query('charts:income', newFilter),
+			trpc().query('charts:expenses', newFilter),
+			trpc().query('charts:occupancy', newFilter),
+		]);
 		filter = newFilter;
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
@@ -153,7 +155,7 @@
 					class="date-input"
 					value={startInput}
 					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsDate;
+						const newDate = e.currentTarget.valueAsNumber;
 						if (newDate) {
 							selectedRange = 0;
 							handleFilter({
@@ -171,7 +173,7 @@
 					class="date-input"
 					value={endInput}
 					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsDate;
+						const newDate = e.currentTarget.valueAsNumber;
 						if (newDate) {
 							selectedRange = 0;
 							handleFilter({

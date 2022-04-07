@@ -7,8 +7,10 @@ import { createRouter } from './router';
 
 export const filterSchema = z.object({
 	clientId: z.string().uuid(),
-	start: z.preprocess(strToDate, z.date()),
-	end: z.preprocess(strToDate, z.date()),
+	// start: z.preprocess(strToDate, z.date()),
+	// end: z.preprocess(strToDate, z.date()),
+	start: z.number(),
+	end: z.number(),
 	propertyId: z.string().uuid().nullish(),
 	unitId: z.string().uuid().nullish(),
 });
@@ -36,8 +38,8 @@ const charts = createRouter()
 											transactions: {
 												where: {
 													postDate: {
-														gte: start,
-														lte: end,
+														gte: new Date(start),
+														lte: new Date(end),
 													},
 												},
 												select: {
@@ -71,8 +73,8 @@ const charts = createRouter()
 			const dated = {
 				where: {
 					postDate: {
-						gte: start,
-						lte: end,
+						gte: new Date(start),
+						lte: new Date(end),
 					},
 				},
 			};
@@ -196,7 +198,11 @@ const charts = createRouter()
 					message: 'Unable to get data',
 				});
 			}
-			const occupancyData = groupOccupancy(data, start, end);
+			const occupancyData = groupOccupancy(
+				data,
+				new Date(start),
+				new Date(end),
+			);
 			return occupancyData;
 		},
 	});
