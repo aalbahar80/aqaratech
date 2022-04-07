@@ -8,7 +8,7 @@
 	import Select from '$lib/components/Select.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
-	import type { filterSchema } from '$lib/server/trpc/charts';
+	import type { filterSchema } from '$lib/server/trpc/routers/charts';
 	import { forceDateToInput } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
 	import type { z } from 'zod';

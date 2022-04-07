@@ -8,7 +8,7 @@
 	import Select from '$lib/components/Select.svelte';
 	import { getAddress } from '$lib/definitions/property';
 	import { getLabel } from '$lib/definitions/unit';
-	import type { filterSchema } from '$lib/server/trpc/charts';
+	import type { filterSchema } from '$lib/server/trpc/routers/charts';
 	import { forceDateToInput } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
 	import type { z } from 'zod';
@@ -16,9 +16,11 @@
 
 	const defaultRange = 6;
 	const getRange = (months: number) => ({
-		// TODO use UTC, fns
-		start: subMonths(new Date(Date.now()).setHours(23, 59, 59, 1), months),
-		end: new Date(new Date(Date.now()).setHours(23, 59, 59, 1)),
+		start: subMonths(
+			new Date(Date.now()).setHours(0, 0, 0, 0),
+			months,
+		).getTime(),
+		end: new Date(Date.now()).setHours(0, 0, 0, 0),
 	});
 
 	type Filter = z.infer<typeof filterSchema>;
@@ -153,7 +155,7 @@
 					class="date-input"
 					value={startInput}
 					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsDate;
+						const newDate = e.currentTarget.valueAsNumber;
 						if (newDate) {
 							selectedRange = 0;
 							handleFilter({
@@ -171,7 +173,7 @@
 					class="date-input"
 					value={endInput}
 					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsDate;
+						const newDate = e.currentTarget.valueAsNumber;
 						if (newDate) {
 							selectedRange = 0;
 							handleFilter({
