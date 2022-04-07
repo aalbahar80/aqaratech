@@ -3,9 +3,9 @@ import { schema } from '$lib/definitions/maintenanceOrder';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
-const maintenanceOrders = createRouter()
+export const maintenanceOrders = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -80,5 +80,3 @@ const maintenanceOrders = createRouter()
 				},
 			}),
 	});
-
-export default maintenanceOrders;

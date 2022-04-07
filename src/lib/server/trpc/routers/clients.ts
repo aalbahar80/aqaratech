@@ -3,9 +3,9 @@ import { paginationSchema } from '$lib/definitions/common';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
-const clients = createRouter()
+export const clients = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -134,5 +134,3 @@ const clients = createRouter()
 				},
 			}),
 	});
-
-export default clients;

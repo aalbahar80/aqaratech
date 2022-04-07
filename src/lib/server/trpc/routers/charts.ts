@@ -1,21 +1,18 @@
 import prismaClient from '$lib/server/prismaClient';
 import { groupOccupancy } from '$lib/utils/group';
-import { strToDate } from '$lib/zodTransformers';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
 export const filterSchema = z.object({
 	clientId: z.string().uuid(),
-	// start: z.preprocess(strToDate, z.date()),
-	// end: z.preprocess(strToDate, z.date()),
 	start: z.number(),
 	end: z.number(),
 	propertyId: z.string().uuid().nullish(),
 	unitId: z.string().uuid().nullish(),
 });
 
-const charts = createRouter()
+export const charts = createRouter()
 	.query('income', {
 		input: filterSchema,
 		resolve: async ({
@@ -206,5 +203,3 @@ const charts = createRouter()
 			return occupancyData;
 		},
 	});
-
-export default charts;

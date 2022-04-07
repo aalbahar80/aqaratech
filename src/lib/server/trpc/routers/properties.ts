@@ -3,10 +3,10 @@ import { schema } from '$lib/definitions/property';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 // import { cerbos } from '../cerbos';
 
-export default createRouter()
+export const properties = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {

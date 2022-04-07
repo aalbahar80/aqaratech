@@ -5,7 +5,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
 let url: string;
 
@@ -23,7 +23,7 @@ if (browser) {
 	url = 'http://localhost:3000';
 }
 
-const transactions = createRouter()
+export const transactions = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -171,5 +171,3 @@ const transactions = createRouter()
 				},
 			}),
 	});
-
-export default transactions;

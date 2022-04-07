@@ -3,9 +3,9 @@ import { schema } from '$lib/definitions/lease';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
-const leases = createRouter()
+export const leases = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -267,5 +267,3 @@ const leases = createRouter()
 				},
 			}),
 	});
-
-export default leases;

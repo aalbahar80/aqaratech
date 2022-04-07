@@ -1,6 +1,9 @@
-import { router } from '$lib/server/trpc/index';
-import { createContext, responseMeta } from '$lib/server/trpc/router';
-import { createTRPCHandle } from '$lib/server/trpc/utils/handler';
+import {
+	createContext,
+	responseMeta,
+	createTRPCHandle,
+	router,
+} from '$lib/server/trpc';
 import { appAuth } from '$lib/services/auth';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';

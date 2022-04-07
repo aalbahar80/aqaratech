@@ -18,7 +18,6 @@ if (browser) {
 	url = 'http://localhost:3000/trpc';
 }
 
-
 const client = (loadFetch?: typeof fetch) =>
 	trpc.createTRPCClient<Router>({
 		url: loadFetch ? '/trpc' : url,

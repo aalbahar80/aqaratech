@@ -3,9 +3,9 @@ import { schema } from '$lib/definitions/unit';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './router';
+import { createRouter } from '$lib/server/trpc';
 
-const units = createRouter()
+export const units = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
@@ -131,5 +131,3 @@ const units = createRouter()
 				},
 			}),
 	});
-
-export default units;
