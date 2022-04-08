@@ -12,10 +12,11 @@
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
+		const trpcClient = trpc(fetch);
 		const [trx, nextReminder] = await Promise.all([
-			trpc(fetch).query('transactions:read', params.id),
+			trpcClient.query('transactions:read', params.id),
 			// needs optimization, load in onMount?
-			trpc(fetch).query('transactions:nextReminder', params.id),
+			trpcClient.query('transactions:nextReminder', params.id),
 			new Date().toISOString(),
 		]);
 

@@ -33,15 +33,16 @@
 			...getRange(defaultRange),
 		};
 
+		const trpcClient = trpc(fetch);
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc(fetch).query('clients:dashboard', params.id), // TODO use read?
-			trpc(fetch).query('charts:income', {
+			trpcClient.query('clients:dashboard', params.id), // TODO use read?
+			trpcClient.query('charts:income', {
 				...defaultFilter,
 			}),
-			trpc(fetch).query('charts:expenses', {
+			trpcClient.query('charts:expenses', {
 				...defaultFilter,
 			}),
-			trpc(fetch).query('charts:occupancy', {
+			trpcClient.query('charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);
@@ -110,12 +111,13 @@
 	$: unitOptions = getUnitOptions(selectedProperty);
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
+	const trpcClient = trpc();
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		[income, expenses, occupancy] = await Promise.all([
-			trpc().query('charts:income', newFilter),
-			trpc().query('charts:expenses', newFilter),
-			trpc().query('charts:occupancy', newFilter),
+			trpcClient.query('charts:income', newFilter),
+			trpcClient.query('charts:expenses', newFilter),
+			trpcClient.query('charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};

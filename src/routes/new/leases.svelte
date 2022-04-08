@@ -10,9 +10,10 @@
 		let options = Object.fromEntries(url.searchParams.entries());
 		let predefined: Predefined | undefined;
 
+		const trpcClient = trpc(fetch);
 		if (options.leaseId) {
 			// renewing
-			const lease = await trpc(fetch).query('leases:read', options.leaseId);
+			const lease = await trpcClient.query('leases:read', options.leaseId);
 			predefined = {
 				initiator: 'lease',
 				tenantId: lease.tenantId,
@@ -25,7 +26,7 @@
 				monthlyRent: lease.monthlyRent,
 			};
 		} else if (options.tenantId) {
-			const tenant = await trpc(fetch).query('tenants:read', options.tenantId);
+			const tenant = await trpcClient.query('tenants:read', options.tenantId);
 			predefined = {
 				initiator: 'tenant',
 				tenantId: tenant.id,
@@ -33,7 +34,7 @@
 				lastName: tenant.lastName,
 			};
 		} else if (options.unitId) {
-			const unit = await trpc(fetch).query('units:read', options.unitId);
+			const unit = await trpcClient.query('units:read', options.unitId);
 			predefined = {
 				initiator: 'unit',
 				unitId: unit.id,

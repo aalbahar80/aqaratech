@@ -9,9 +9,10 @@
 		const { entity } = params;
 		if (isEntity(entity)) {
 			const pageIndex = url.searchParams.get('p');
+			const trpcClient = trpc(fetch);
 			const [total, { data, pagination }] = await Promise.all([
-				trpc(fetch).query(`${entity}:count`),
-				trpc(fetch).query(`${entity}:list`, { pageIndex }),
+				trpcClient.query(`${entity}:count`),
+				trpcClient.query(`${entity}:list`, { pageIndex }),
 			]);
 			return {
 				props: { entity, total, pagination, data },
