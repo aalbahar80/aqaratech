@@ -1,4 +1,4 @@
-import pkg from '@cerbos/sdk';
+import * as pkg from '@cerbos/sdk';
 const { Cerbos } = pkg;
 
 export const cerbos = new Cerbos({
