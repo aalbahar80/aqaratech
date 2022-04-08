@@ -53,19 +53,24 @@ interface GitHubAuthErrorProfile {
 	readonly provider: 'github';
 }
 
+interface Auth0Profile {
+	sub: string;
+	name: string;
+	picture: string;
+	email: string;
+	updated_at: string;
+}
 declare namespace App {
 	interface Locals {
-		/**
-		 * True for responses with 4xx and 5xx status codes.
-		 */
-		error: boolean;
+		accessToken: string;
+		idToken: string;
+		user: Auth0Profile | undefined;
 	}
 
 	// interface Platform {}
 
 	interface Session {
-		user: Readonly<GitHubUserProfile> & Partial<GitHubAuthErrorProfile>;
-		error: boolean;
+		user: Readonly<Auth0Profile> | undefined;
 	}
 
 	interface Stuff {

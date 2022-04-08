@@ -74,14 +74,14 @@
 						Profile
 					</a>
 					<a
-						href="/account/signout"
+						href="/account/logout"
 						class="text-base font-medium text-white hover:text-gray-300"
 					>
 						Sign out
 					</a>
 				{:else}
 					<a
-						href="/login"
+						href="/api/auth/login"
 						class="text-base font-medium text-white hover:text-gray-300"
 					>
 						Log in
@@ -152,7 +152,9 @@
 					<div class="mt-6 px-5">
 						<p class="text-center text-base font-medium text-gray-500">
 							Existing customer?{' '}
-							<a href="/login" class="text-gray-900 hover:underline"> Login </a>
+							<a href="/api/auth/login" class="text-gray-900 hover:underline">
+								Login
+							</a>
 						</p>
 					</div>
 				</div>

@@ -33,11 +33,18 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
+			if (!ctx.user) {
+				// TODO use a layer (middleware?) to always to this check
+				throw new TRPCError({
+					code: 'UNAUTHORIZED',
+					message: 'You must be logged in to view this property',
+				});
+			}
 			// check authz
 			const allowed = await cerbos.check({
 				actions: ['read'],
 				resource: {
-					kind: 'contact',
+					kind: 'property',
 					instances: {
 						[data.id]: {
 							attr: data,
@@ -45,17 +52,14 @@ export const properties = createRouter()
 					},
 				},
 				principal: {
-					id: 'TODO',
+					id: ctx.user.sub,
 					roles: ['admin'],
 					attr: {
 						department: 'TODO',
 					},
 				},
 			});
-			console.warn(ctx.user);
-			console.log(allowed.isAuthorized(data.id, 'read'));
-			// if (allowed.isAuthorized(data.id, 'read')) {
-			if (true) {
+			if (allowed.isAuthorized(data.id, 'read')) {
 				return data;
 			} else {
 				throw new TRPCError({
