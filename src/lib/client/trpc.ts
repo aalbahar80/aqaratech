@@ -25,6 +25,18 @@ const client = (loadFetch?: typeof fetch) =>
 		...(loadFetch && { fetch: loadFetch }),
 	});
 
+// let client: TRPCClient<Router>;
+// export default (loadFetch?: typeof fetch) => {
+// 	if (loadFetch) {
+// 		client = trpc.createTRPCClient<Router>({
+// 			url: '/trpc',
+// 			transformer: superjson,
+// 			fetch: loadFetch,
+// 		});
+// 	}
+// 	return client;
+// };
+
 type Query = keyof Router['_def']['queries'];
 type Mutation = keyof Router['_def']['mutations'];
 
