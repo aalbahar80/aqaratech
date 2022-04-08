@@ -27,11 +27,12 @@ const trpcHandler: Handle = createTRPCHandle({
 
 const authHandler: Handle = async ({ event, resolve }) => {
 	event.locals.error = false;
-	let response = await resolve(event);
+	// const { user } = await appAuth.getSession(event);
+	// event.locals.user = user;
+	const response = await resolve(event);
 
 	if (response.status > 399 && response.status < 600) {
 		event.locals.error = true;
-		response = await resolve(event);
 	}
 
 	return response;
