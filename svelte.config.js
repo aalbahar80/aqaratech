@@ -23,6 +23,9 @@ const config = {
 					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
 				external: ['@temporalio', '@cerbos/sdk'],
 			},
+			optimizeDeps: {
+				exclude: ['@cerbos/sdk'],
+			},
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
 			// 		? [
