@@ -14,19 +14,18 @@ const developmentOptions = dev
 export const auth0Auth = new SvelteKitAuth({
 	providers: [
 		new Auth0OAuth2Provider({
+			auth0Domain: 'dev-eehvhdp2.eu.auth0.com',
 			clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
 			clientSecret: import.meta.env.VITE_AUTH0_CLIENT_SECRET,
-			authorizationUrl: 'https://dev-eehvhdp2.eu.auth0.com/authorize',
-			accessTokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
-			profileUrl: 'https://dev-eehvhdp2.eu.auth0.com/userinfo',
-			scope: 'openid name picture profile email https://hasura.io/jwt/claims',
+			// scope: 'openid name picture profile email letand.be/api',
+			scope: ['openid', 'profile', 'email'],
 		}),
 	],
 
-	callbacks: {
-		redirect: (uri) => uri, // Extend or introspect redirect callbacks
-		// ...and access to other available AuthCallbacks as well
-	},
+	// callbacks: {
+	// 	redirect: (uri) => uri, // Extend or introspect redirect callbacks
+	// 	// ...and access to other available AuthCallbacks as well
+	// },
 	...developmentOptions,
-	jwtSecret: import.meta.env.OAUTH_JWT_SECRET_KEY,
+	// jwtSecret: import.meta.env.OAUTH_JWT_SECRET_KEY,
 });
