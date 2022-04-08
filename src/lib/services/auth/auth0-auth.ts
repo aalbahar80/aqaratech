@@ -17,15 +17,20 @@ export const auth0Auth = new SvelteKitAuth({
 			auth0Domain: 'dev-eehvhdp2.eu.auth0.com',
 			clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
 			clientSecret: import.meta.env.VITE_AUTH0_CLIENT_SECRET,
-			// scope: 'openid name picture profile email letand.be/api',
 			scope: ['openid', 'profile', 'email'],
+			authorizationParams: {
+				audience: 'letand.be/api',
+			},
+			// params: {
+			// 	audience: 'letand.be/api',
+			// },
 		}),
 	],
-
-	// callbacks: {
-	// 	redirect: (uri) => uri, // Extend or introspect redirect callbacks
-	// 	// ...and access to other available AuthCallbacks as well
-	// },
 	...developmentOptions,
-	// jwtSecret: import.meta.env.OAUTH_JWT_SECRET_KEY,
+
+	callbacks: {
+		redirect: (uri) => uri, // Extend or introspect redirect callbacks
+		// ...and access to other available AuthCallbacks as well
+	},
+	// jwtSecret: import.meta.env.VITE_AUTH0_CLIENT_SECRET,
 });
