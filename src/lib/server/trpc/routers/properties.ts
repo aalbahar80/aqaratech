@@ -4,7 +4,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from '$lib/server/trpc';
-// import { cerbos } from '../cerbos';
+import { cerbos } from '$lib/server/cerbos';
 
 export const properties = createRouter()
 	.query('read', {
