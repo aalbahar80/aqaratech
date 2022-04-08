@@ -34,27 +34,26 @@ export const properties = createRouter()
 				});
 			}
 			// check authz
-			// const allowed = await cerbos.check({
-			// 	actions: ['read'],
-			// 	resource: {
-			// 		kind: 'contact',
-			// 		instances: {
-			// 			[data.id]: {
-			// 				attr: data,
-			// 			},
-			// 		},
-			// 	},
-			// 	principal: {
-			// 		id: 'TODO',
-			// 		roles: ['admin'],
-			// 		attr: {
-			// 			department: 'TODO',
-			// 		},
-			// 	},
-			// });
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'contact',
+					instances: {
+						[data.id]: {
+							attr: data,
+						},
+					},
+				},
+				principal: {
+					id: 'TODO',
+					roles: ['admin'],
+					attr: {
+						department: 'TODO',
+					},
+				},
+			});
 			console.warn(ctx.user);
-			// if (allowed.isAuthorized(data.id, 'read')) {
-			if (true) {
+			if (allowed.isAuthorized(data.id, 'read')) {
 				return data;
 			} else {
 				throw new TRPCError({
