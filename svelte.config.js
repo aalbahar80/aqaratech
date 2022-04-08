@@ -21,7 +21,7 @@ const config = {
 			ssr: {
 				noExternal:
 					process.env.NODE_ENV === 'production'
-						? ['superjson']
+						? ['superjson', '@cerbos/sdk']
 						: undefined,
 				external: ['@temporalio'],
 			},
