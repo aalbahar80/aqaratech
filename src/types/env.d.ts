@@ -20,8 +20,6 @@ interface ImportMetaEnv {
 	readonly VITE_TWILIO_FROM_NUMBER: string;
 	readonly VITE_SVELTE_APP_SUPABASE_URL: string;
 	readonly VITE_SVELTE_APP_SUPABASE_ANON_KEY: string;
-	readonly VITE_GITHUB_OAUTH_CLIENT_ID: string;
-	readonly VITE_GITHUB_OAUTH_CLIENT_SECRET: string;
 	readonly VITE_CUSTOM_OAUTH_REDIRECT_URI: string;
 	readonly OAUTH_JWT_SECRET_KEY: string;
 }

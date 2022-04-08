@@ -17,10 +17,10 @@
 			<h3
 				class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100"
 			>
-				GitHub Profile Data
+				Auth0 Profile Data
 			</h3>
 			<p class="mt-1 max-w-2xl text-sm text-gray-400">
-				Data stored on your GitHub profile.
+				Data stored on your Auth0 profile.
 			</p>
 		</div>
 		<div class="border-t border-gray-200 dark:border-gray-500">
