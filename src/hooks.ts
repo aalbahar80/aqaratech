@@ -61,4 +61,6 @@ export const handle: Handle = sequence(authHandler, trpcHandler, noIndex);
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
+	idToken: locals.idToken,
+	accessToken: locals.accessToken,
 });

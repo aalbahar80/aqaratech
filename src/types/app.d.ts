@@ -18,6 +18,8 @@ declare namespace App {
 
 	interface Session {
 		user: Readonly<Auth0Profile> | undefined;
+		accessToken: string; // TODO remove in prod
+		idToken: string | undefined; // TODO remove in prod
 	}
 
 	interface Stuff {

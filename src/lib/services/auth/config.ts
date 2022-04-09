@@ -1,20 +1,17 @@
+import { browser } from '$app/env';
+import { decodeJwt, type JWTPayload } from 'jose';
+
 const domain = 'dev-eehvhdp2.eu.auth0.com';
 const callbackPath = '/api/auth/callback';
 
-interface Auth0AccessToken {
-	iss: string;
-	sub: string;
-	aud: string[];
-	exp: number;
-	iat: number;
-	azp: string;
-	scope: string;
-	// 'https://letand.be/roles': string[];
+interface Auth0Roles {
 	roles: string[];
 }
 
+type Auth0AccessToken = JWTPayload & Auth0Roles;
+
 let redirectUri = '';
-if (process.env.VERCEL) {
+if (!browser && process.env.VERCEL) {
 	redirectUri = `${import.meta.env.VITE_TARGET_URL}${callbackPath}`;
 } else {
 	redirectUri = `http://localhost:3000${callbackPath}`;
@@ -54,23 +51,10 @@ export const parseUser = (
 };
 
 export const parseAccessToken = (accessToken: string): Auth0AccessToken => {
-	const encodedJwt = accessToken.split('.')[1];
-	if (!encodedJwt) {
-		console.warn('Invalid token');
-		throw new Error('Invalid token');
-	}
-	const decodedJwt = JSON.parse(
-		Buffer.from(encodedJwt, 'base64').toString('ascii'),
-	);
-	// unpack decodedJwt into Auth0AccessToken object
+	const decoded = decodeJwt(accessToken);
+
 	return {
-		iss: decodedJwt.iss,
-		sub: decodedJwt.sub,
-		aud: decodedJwt.aud,
-		exp: decodedJwt.exp,
-		iat: decodedJwt.iat,
-		azp: decodedJwt.azp,
-		scope: decodedJwt.scope,
-		roles: decodedJwt['https://letand.be/roles'],
+		...decoded,
+		roles: decoded['https://letand.be/roles'] as string[],
 	};
 };
