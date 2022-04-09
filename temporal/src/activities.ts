@@ -10,6 +10,7 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 				amount: lease.monthlyRent,
 				leaseId: lease.id,
 				dueDate,
+				postDate: dueDate,
 				memo,
 			},
 			include: { lease: true },

@@ -14,7 +14,7 @@
 	import Select from 'svelte-select';
 
 	export let name = '';
-	export let value: string | Date | null | number | boolean = '';
+	export let value: string | Date | null | number | boolean | undefined = '';
 	export let invalid = false;
 	export let invalidText: string | undefined = '';
 

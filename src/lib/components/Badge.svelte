@@ -17,7 +17,7 @@
 	</div>
 {/key}
 
-<style>
+<style lang="postcss">
 	.green {
 		@apply bg-green-100 text-green-800;
 	}

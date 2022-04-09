@@ -1,15 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, {
-		type InferMutationInput,
-		type InferQueryOutput,
-	} from '$lib/client/trpc';
-	import {
-		singular,
-		type Entity,
-		type EntityDefinition,
-	} from '$lib/definitions';
+	import trpc from '$lib/client/trpc';
+	import type { Entity, EntityDefinition } from '$lib/definitions';
 	import { addToast } from '$lib/stores/toast';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -21,25 +14,35 @@
 
 	export let entity: Entity;
 	export let schema: EntityDefinition<typeof entity>['schema'];
-	export let data:
-		| InferMutationInput<`${typeof entity}:save`>
-		| InferQueryOutput<`${typeof entity}:basic`>;
+	// export let data:
+	// 	| InferMutationInput<`${typeof entity}:save`>
+	// 	| InferQueryOutput<`${typeof entity}:basic`>;
+	export let data: Record<string, any> | null;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 	$: console.log(data);
 	$: console.log($data2);
 
 	const relationalFields: {
-		[key: string]: Extract<
-			Entity,
-			'tenants' | 'units' | 'properties' | 'clients' | 'leases'
-		>;
+		[key: string]: any;
 	} = {
 		tenantId: 'tenants',
 		leaseId: 'leases',
 		unitId: 'units',
 		propertyId: 'properties',
 		clientId: 'clients',
+	};
+
+	const singular: {
+		[key: string]: any;
+	} = {
+		leases: 'lease',
+		tenants: 'tenant',
+		units: 'unit',
+		properties: 'property',
+		clients: 'client',
+		transactions: 'transaction',
+		maintenanceOrders: 'maintenanceOrder',
 	};
 
 	const {
@@ -50,7 +53,7 @@
 		setData,
 	} = createForm({
 		validate: validateSchema(schema),
-		onError: (err) => {
+		onError: (err: any) => {
 			addToast({
 				props: {
 					kind: 'error',
@@ -94,6 +97,7 @@
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
 									<!-- Add asterisk like trpc-sveltekit example -->
+									<!-- @ts-ignore -->
 									<ComboBox
 										{value}
 										optionLabel={data[singular[relationalFields[name]]]}

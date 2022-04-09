@@ -76,6 +76,7 @@ export const units = createRouter()
 				select: {
 					id: true,
 					unitNumber: true,
+					type: true,
 				},
 				where:
 					input.query || input.propertyId
@@ -85,24 +86,17 @@ export const units = createRouter()
 										propertyId: input.propertyId ?? {},
 									},
 									{
-										OR: [
-											{ id: { contains: input.query } },
-											{ unitNumber: { contains: input.query } },
-										],
+										OR: input.query
+											? [
+													{ id: { contains: input.query } },
+													{ unitNumber: { contains: input.query } },
+											  ]
+											: {},
 									},
 								],
 						  }
-						: undefined,
+						: {},
 			}),
-		// 	where: input
-		// 		? {
-		// 				OR: [
-		// 					{ id: { contains: input.query } },
-		// 					{ unitNumber: { contains: input.query } },
-		// 				],
-		// 		  }
-		// 		: undefined,
-		// }),
 	})
 	.query('count', {
 		resolve: () => prismaClient.unit.count({}),

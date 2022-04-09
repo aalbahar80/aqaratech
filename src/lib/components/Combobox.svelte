@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { Check, Selector } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import {
@@ -78,9 +78,9 @@
 	$: {
 		if (doc) console.log(doc?.activeElement);
 	}
-</script>
+</script> -->
 
-<Listbox
+<!-- <Listbox
 	value={selectedPerson}
 	on:change={(e) => {
 		open = false;
@@ -145,7 +145,7 @@
 				class="myc absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				static
 			>
-				<!-- unmount -->
+				unmount
 				{#each filteredPeople as person (person.id)}
 					{@const selected = person.id === selectedPerson?.id}
 					<ListboxOption
@@ -188,11 +188,11 @@
 			</ListboxOptions>
 		{/if}
 	</div>
-</Listbox>
-<pre class="-ml-60">{JSON.stringify(selectedPerson, null, 2)}</pre>
-<pre class="-ml-60">{JSON.stringify(open, null, 2)}</pre>
+</Listbox> -->
+<!-- <pre class="-ml-60">{JSON.stringify(selectedPerson, null, 2)}</pre> -->
+<!-- <pre class="-ml-60">{JSON.stringify(open, null, 2)}</pre> -->
 <!-- <pre class="-ml-60">{JSON.stringify(filteredPeople, null, 2)}</pre> -->
-<label for="myBrowser">Choose a browser from this list:</label>
+<!-- <label for="myBrowser">Choose a browser from this list:</label>
 <input list="browsers" id="myBrowser" name="myBrowser" />
 <datalist id="browsers">
 	<option value="Chrome" /><option value="Firefox" /><option
@@ -200,4 +200,4 @@
 	/><option value="Opera" /><option value="Safari" /><option
 		value="Microsoft Edge"
 	/></datalist
->
+> -->

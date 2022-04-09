@@ -24,7 +24,7 @@ const sort = (data: Data) => sortBy(data, 'postDate');
 
 const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 	const sorted = sort(data);
-	const months = getMonths(sorted, 'postDate');
+	const months = getMonths(sorted);
 
 	const buckets: Dataset = [];
 	sorted.forEach((trx) => {

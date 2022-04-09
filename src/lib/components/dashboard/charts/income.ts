@@ -39,7 +39,7 @@ type Bucket = {
 };
 const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 	const sorted = sort(data);
-	const months = getMonths(sorted, 'postDate');
+	const months = getMonths(sorted);
 
 	const buckets: Bucket[] = [];
 

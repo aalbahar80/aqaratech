@@ -1,6 +1,19 @@
+import type { Client, Lease, Property, Unit } from '@prisma/client';
 import { eachMonthOfInterval } from 'date-fns';
 
-export const groupOccupancy = (data: any, start: Date, end: Date) => {
+type OccupancyRawData = Client & {
+	properties: (Property & {
+		units: (Unit & {
+			leases: Lease[];
+		})[];
+	})[];
+};
+
+export const groupOccupancy = (
+	data: OccupancyRawData,
+	start: Date,
+	end: Date,
+) => {
 	const months = eachMonthOfInterval({
 		start,
 		end,
@@ -49,9 +62,13 @@ export const groupOccupancy = (data: any, start: Date, end: Date) => {
 	return buckets;
 };
 
-export const getMonths = <T>(data: T[], key: keyof T) => {
-	const firstMonth = data[0]?.[key];
-	const lastMonth = data[data.length - 1]?.[key];
+interface DataPoint {
+	postDate: Date;
+}
+
+export const getMonths = (data: DataPoint[]) => {
+	const firstMonth = data[0]?.postDate;
+	const lastMonth = data[data.length - 1]?.postDate;
 	if (!firstMonth || !lastMonth) return [];
 
 	const months = eachMonthOfInterval({

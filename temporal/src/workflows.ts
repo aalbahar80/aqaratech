@@ -53,6 +53,7 @@ export async function trxNotificationWF(trxId: string) {
 		}
 	}
 	console.log('Done.');
+	return;
 }
 
 async function prepareNextReminder(id: string, nextReminder: Date) {

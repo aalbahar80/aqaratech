@@ -7,10 +7,13 @@ export default function (error: TRPCClientError<Router>) {
 		alert('Unknown error');
 		return;
 	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const errors: any = {};
 	(JSON.parse(error.message) as { path: string[]; message: string }[]).forEach(
 		(err) => {
-			errors[err.path[0]] = [err.message];
+			if (err.path[0]) {
+				errors[err.path[0]] = [err.message];
+			}
 		},
 	);
 	return errors;
