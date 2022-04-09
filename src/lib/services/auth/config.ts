@@ -8,7 +8,13 @@ interface Auth0Roles {
 	roles: string[];
 }
 
-type Auth0AccessToken = JWTPayload & Auth0Roles;
+interface Auth0UserMeta {
+	userMetadata: {
+		idInternal?: string;
+	};
+}
+
+type Auth0AccessToken = JWTPayload & Auth0Roles & Auth0UserMeta;
 
 let redirectUri = '';
 if (!browser && process.env.VERCEL) {
@@ -56,5 +62,6 @@ export const parseAccessToken = (accessToken: string): Auth0AccessToken => {
 	return {
 		...decoded,
 		roles: decoded['https://letand.be/roles'] as string[],
+		userMetadata: decoded['https://letand.be/userMetadata'] as Auth0UserMeta['userMetadata'],
 	};
 };
