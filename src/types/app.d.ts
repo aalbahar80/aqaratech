@@ -10,7 +10,7 @@ interface Auth0Profile {
 declare namespace App {
 	interface Locals {
 		accessToken: string;
-		idToken: string;
+		idToken: string | undefined;
 		user: Auth0Profile | undefined;
 	}
 

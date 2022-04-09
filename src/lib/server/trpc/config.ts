@@ -1,4 +1,5 @@
 import type { createTRPCHandle } from '$lib/server/trpc';
+import { parseAccessToken } from '$lib/services/auth/config';
 import type { RequestEvent } from '@sveltejs/kit/types/private';
 import { router as trpcRouter, type inferAsyncReturnType } from '@trpc/server';
 
@@ -8,7 +9,7 @@ type ResponseMetaFn = NonNullable<TRPCHandler[0]['responseMeta']>;
 export const createContext = async (event: RequestEvent) => {
 	return {
 		user: event.locals.user,
-		accessToken: event.locals.accessToken,
+		accessToken: parseAccessToken(event.locals.accessToken),
 	};
 };
 
