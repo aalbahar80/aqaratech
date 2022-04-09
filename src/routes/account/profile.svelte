@@ -8,7 +8,7 @@
 
 	// TODO remove in prod
 	$: idToken = decodeJwt($session.idToken ?? '');
-	$: accessToken = parseAccessToken($session.accessToken);
+	$: accessToken = parseAccessToken($session.accessToken ?? '');
 
 	const styleRowFromIndex = (idx: number) => {
 		return idx % 2 === 0

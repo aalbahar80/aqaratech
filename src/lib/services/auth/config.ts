@@ -62,6 +62,8 @@ export const parseAccessToken = (accessToken: string): Auth0AccessToken => {
 	return {
 		...decoded,
 		roles: decoded['https://letand.be/roles'] as string[],
-		userMetadata: decoded['https://letand.be/userMetadata'] as Auth0UserMeta['userMetadata'],
+		userMetadata: decoded[
+			'https://letand.be/userMetadata'
+		] as Auth0UserMeta['userMetadata'],
 	};
 };

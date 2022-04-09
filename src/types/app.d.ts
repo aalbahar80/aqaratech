@@ -9,7 +9,7 @@ interface Auth0Profile {
 }
 declare namespace App {
 	interface Locals {
-		accessToken: string;
+		accessToken: string | undefined;
 		idToken: string | undefined;
 		user: Auth0Profile | undefined;
 	}
@@ -18,7 +18,7 @@ declare namespace App {
 
 	interface Session {
 		user: Readonly<Auth0Profile> | undefined;
-		accessToken: string; // TODO remove in prod
+		accessToken: string | undefined; // TODO remove in prod
 		idToken: string | undefined; // TODO remove in prod
 	}
 
