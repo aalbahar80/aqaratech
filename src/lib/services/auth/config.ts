@@ -15,7 +15,7 @@ interface Auth0AccessToken {
 
 let redirectUri = '';
 if (process.env.VERCEL) {
-	redirectUri = `https://${import.meta.env.VITE_TARGET_URL}${callbackPath}`;
+	redirectUri = `${import.meta.env.VITE_TARGET_URL}${callbackPath}`;
 } else {
 	redirectUri = `http://localhost:3000${callbackPath}`;
 }
