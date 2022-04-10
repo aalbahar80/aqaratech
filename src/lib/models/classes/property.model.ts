@@ -1,7 +1,22 @@
 import type { IProperty } from '$models/interfaces/property.interface';
 import type { IDeserializable } from '$models/interfaces/deserializable.interface';
+import { concatIfExists } from '$lib/utils/common';
 
 export class PropertyModel implements IDeserializable<IProperty>, IProperty {
+	static singular = 'property';
+	static plural = 'properties';
+
+	// factory that returns a new instance of this class for new form default values
+	static defaultForm = (): PropertyModel =>
+		new PropertyModel().deserialize({
+			area: '',
+			block: '',
+			avenue: '',
+			street: '',
+			number: '',
+			clientId: '',
+		});
+
 	public id?: string;
 	public area?: string | null;
 	public clientId?: string;
@@ -15,6 +30,9 @@ export class PropertyModel implements IDeserializable<IProperty>, IProperty {
 	public lat?: number | null;
 
 	public getLabel = () => this.area?.length;
+	public getAddress = () => {
+		return concatIfExists([this.area, 'ق', this.block, 'م', this.number]);
+	};
 
 	deserialize(input: IProperty): this {
 		Object.assign(this, input);
@@ -27,5 +45,5 @@ const one = new PropertyModel().deserialize({
 	area: 'abc',
 });
 
-one.area
+one.area;
 one.clientId;
