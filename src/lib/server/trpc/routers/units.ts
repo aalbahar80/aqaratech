@@ -1,5 +1,5 @@
 import { paginationSchema } from '$lib/definitions/common';
-import { schema } from '$lib/definitions/unit';
+import { UnitModel } from '$models/interfaces/unit.interface';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
@@ -104,8 +104,20 @@ export const units = createRouter()
 	.query('count', {
 		resolve: () => prismaClient.unit.count({}),
 	})
+	.mutation('create', {
+		input: UnitModel.schema,
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.unit.update({
+						data,
+						where: { id },
+				  })
+				: prismaClient.unit.create({
+						data,
+				  }),
+	})
 	.mutation('save', {
-		input: schema,
+		input: UnitModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.unit.update({

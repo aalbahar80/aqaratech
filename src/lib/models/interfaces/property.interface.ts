@@ -1,6 +1,7 @@
+import type { InferQueryOutput } from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, trim } from '$lib/zodTransformers';
-import type { IEntity2, Searchable } from '$models/interfaces/entity.interface';
+import type { IEntity, Searchable } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -33,8 +34,10 @@ const schema = z.object({
 });
 
 interface IProperty<T extends 'properties'>
-	extends IEntity2<T, typeof schema>,
-		Searchable<T> {}
+	extends IEntity<T, typeof schema>,
+		Searchable<T> {
+	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
+}
 
 export const PropertyModel: IProperty<'properties'> = {
 	singular: 'property',

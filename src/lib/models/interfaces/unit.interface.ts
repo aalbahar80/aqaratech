@@ -1,8 +1,7 @@
-import type { InferMutationInput } from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, falsyToNullExceptZero, trim } from '$lib/zodTransformers';
+import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
-import type { EntityDefinition } from '.';
 
 export const schema = z.object({
 	id: z.string().uuid().optional(),
@@ -37,30 +36,21 @@ export const schema = z.object({
 	propertyId: z.string().uuid(),
 });
 
-type Unit = InferMutationInput<'units:save'>;
-const defaultForm = (): Unit => ({
-	unitNumber: '',
-	bed: null,
-	bath: null,
-	size: null,
-	marketRent: null,
-	floor: null,
-	usage: '',
-	type: '',
-	propertyId: '',
-});
-
-export const getLabel = <
-	T extends {
-		type: string | null;
-		unitNumber: string | null;
-	},
->(
-	item: T,
-) => concatIfExists([item.type, item.unitNumber]);
-
-const label: typeof definition['label'] = (item) => getLabel(item);
-
-const definition: EntityDefinition<'units'> = { schema, defaultForm, label };
-
-export default definition;
+export const UnitModel: IEntity<'units', typeof schema> = {
+	singular: 'unit',
+	plural: 'units',
+	schema,
+	defaultForm: () => ({
+		unitNumber: '',
+		bed: null,
+		bath: null,
+		size: null,
+		marketRent: null,
+		floor: null,
+		usage: '',
+		type: '',
+		propertyId: '',
+	}),
+	getLabel: (item) =>
+		concatIfExists([item.type, item.unitNumber]),
+};
