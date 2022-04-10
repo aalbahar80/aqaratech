@@ -40,6 +40,9 @@ export const createRouter = () => {
 				issuer: 'https://dev-eehvhdp2.eu.auth0.com/',
 				algorithms: ['RS256'],
 			});
+			if (!payload.sub) {
+				throw new TRPCError({ code: 'UNAUTHORIZED' });
+			}
 			const accessToken = {
 				...payload,
 				roles: payload['https://letand.be/roles'] as string[],
@@ -47,7 +50,6 @@ export const createRouter = () => {
 					'https://letand.be/userMetadata'
 				] as Auth0UserMeta['userMetadata'],
 			};
-			console.log({ accessToken }, 'config.ts ~ 50');
 			return next({
 				ctx: {
 					...ctx,

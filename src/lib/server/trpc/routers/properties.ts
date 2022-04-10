@@ -7,6 +7,49 @@ import { createRouter } from '$lib/server/trpc';
 import { cerbos } from '$lib/server/cerbos';
 
 export const properties = createRouter()
+	.middleware(async ({ next, rawInput, ctx }) => {
+		const idSchema = z
+			.string()
+			.uuid()
+			.or(z.object({ id: z.string().uuid() }));
+		// TODO move to end of router chain?
+		const result = idSchema.safeParse(rawInput);
+		if (!result.success) {
+			// TODO :create should be an exception, use new trpc feature: route metadata?
+			throw new TRPCError({
+				code: 'PRECONDITION_FAILED',
+				message: 'No property id passed',
+			});
+		}
+		let id = '';
+		if (typeof result.data === 'string') {
+			id = result.data;
+		} else {
+			id = result.data.id;
+		}
+
+		const allowed = await cerbos.check({
+			actions: ['read'],
+			resource: {
+				kind: 'property',
+				instances: {
+					[id]: {},
+				},
+			},
+			principal: {
+				id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+				roles: ctx.accessToken.roles,
+			},
+		});
+		if (allowed.isAuthorized(id, 'read')) {
+			// TODO return allowed.isAuthorized(id, 'read')?
+			return next({ ctx });
+		} else {
+			throw new TRPCError({
+				code: 'FORBIDDEN',
+			});
+		}
+	})
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {
@@ -33,40 +76,7 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			if (!ctx.user) {
-				// TODO use a layer (middleware?) to always to this check
-				throw new TRPCError({
-					code: 'UNAUTHORIZED',
-					message: 'You must be logged in to view this property',
-				});
-			}
-			// check authz
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[data.id]: {
-							attr: data,
-						},
-					},
-				},
-				principal: {
-					id: ctx.user.sub,
-					roles: ['admin'],
-					attr: {
-						department: 'TODO',
-					},
-				},
-			});
-			if (allowed.isAuthorized(data.id, 'read')) {
-				return data;
-			} else {
-				throw new TRPCError({
-					// code: 'UNAUTHORIZED',
-					code: 'FORBIDDEN',
-				});
-			}
+			return data;
 		},
 	})
 	.query('basic', {
