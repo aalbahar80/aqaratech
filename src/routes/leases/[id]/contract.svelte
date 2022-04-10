@@ -3,7 +3,7 @@
 	import { inWords } from '$lib/utils/currency';
 	import { page } from '$app/stores';
 	import { getName } from '$lib/utils/common';
-	import { getAddress } from '$lib/definitions/property';
+	import { getAddress } from '$lib/utils/common';
 
 	const { lease } = $page.stuff;
 

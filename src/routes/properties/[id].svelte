@@ -5,8 +5,8 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/UnitsList.svelte';
-	import { getAddress } from '$lib/definitions/property';
-	import { dateFormat } from '$lib/utils/common';
+	import { PropertyModel } from '$lib/models/interfaces/property.interface';
+	import { dateFormat, getAddress } from '$lib/utils/common';
 	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -28,7 +28,7 @@
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Property" id={property.id} entity="properties">
+	<Heading title="Property" id={property.id} entity={PropertyModel.plural}>
 		<svelte:fragment slot="breadcrumbs">
 			<BreadCrumb crumbs={[['clients', property.clientId]]} />
 		</svelte:fragment>

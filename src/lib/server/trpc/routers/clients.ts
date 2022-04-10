@@ -23,8 +23,8 @@ export const clients = createRouter()
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.client.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.client.findUnique({
 				where: {
 					id,
 				},
@@ -39,7 +39,10 @@ export const clients = createRouter()
 					civilid: true,
 					dob: true,
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND'});
+		},
 	})
 	.query('list', {
 		input: paginationSchema,
@@ -98,6 +101,18 @@ export const clients = createRouter()
 	})
 	.query('count', {
 		resolve: () => prismaClient.client.count({}),
+	})
+	.mutation('create', {
+		input: schema,
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.client.update({
+						data,
+						where: { id },
+				  })
+				: prismaClient.client.create({
+						data,
+				  }),
 	})
 	.mutation('save', {
 		input: schema,

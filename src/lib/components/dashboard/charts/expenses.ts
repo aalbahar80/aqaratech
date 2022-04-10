@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import { categoryGroups, getColor } from '$lib/config/constants';
-import { getAddress } from '$lib/definitions/property';
+import { getAddress } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';

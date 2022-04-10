@@ -6,7 +6,7 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import { getAddress } from '$lib/definitions/property';
+	import { getAddress } from '$lib/utils/common';
 	import { getLabel } from '$lib/definitions/unit';
 	import type { filterSchema } from '$lib/server/trpc/routers/charts';
 	import { forceDateToInput } from '$lib/utils/common';

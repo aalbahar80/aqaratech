@@ -48,15 +48,18 @@ export const transactions = createRouter()
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.transaction.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.transaction.findUnique({
 				where: {
 					id,
 				},
 				include: {
 					lease: true,
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND' });
+		},
 	})
 	.query('list', {
 		input: paginationSchema,

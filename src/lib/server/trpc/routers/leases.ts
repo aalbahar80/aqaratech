@@ -99,7 +99,7 @@ export const leases = createRouter()
 				},
 			});
 			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Lease not found' });
+			throw new TRPCError({ code: 'NOT_FOUND'});
 		},
 	})
 	.query('list', {
@@ -245,6 +245,18 @@ export const leases = createRouter()
 	})
 	.query('count', {
 		resolve: () => prismaClient.lease.count({}),
+	})
+	.mutation('create', {
+		input: schema,
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.lease.update({
+						data,
+						where: { id },
+				  })
+				: prismaClient.lease.create({
+						data,
+				  }),
 	})
 	.mutation('save', {
 		input: schema,

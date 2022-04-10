@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getBadge } from '$lib/definitions/lease';
-	import { getAddress } from '$lib/definitions/property';
+	import { getAddress } from '$lib/utils/common';
 	import { getName, getProgress } from '$lib/utils/common';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

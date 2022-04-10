@@ -1,5 +1,5 @@
 import { paginationSchema } from '$lib/definitions/common';
-import { schema } from '$lib/definitions/property';
+import { PropertyModel } from '$models/interfaces/property.interface';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
@@ -214,8 +214,44 @@ export const properties = createRouter()
 	.query('count', {
 		resolve: () => prismaClient.property.count({}),
 	})
+	.mutation('create', {
+		input: PropertyModel.schema,
+		resolve: async ({ ctx, input: { id, ...data } }) => {
+			const resourceId = id ?? v4();
+			const allowed = await cerbos.check({
+				actions: ['save'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[resourceId]: {
+							attr: {
+								...data,
+							},
+						},
+					},
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			if (!allowed.isAuthorized(resourceId, 'save')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
+
+			const result = id
+				? await prismaClient.property.update({
+						data,
+						where: { id },
+				  })
+				: await prismaClient.property.create({
+						data,
+				  });
+			return result;
+		},
+	})
 	.mutation('save', {
-		input: schema,
+		input: PropertyModel.schema,
 		resolve: async ({ ctx, input: { id, ...data } }) => {
 			const resourceId = id ?? v4();
 			const allowed = await cerbos.check({

@@ -23,12 +23,15 @@ export const maintenanceOrders = createRouter()
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.maintenanceOrder.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.maintenanceOrder.findUnique({
 				where: {
 					id,
 				},
-			}),
+			});
+			if (data) return data;
+			throw new TRPCError({ code: 'NOT_FOUND' });
+		},
 	})
 	.query('list', {
 		input: paginationSchema,

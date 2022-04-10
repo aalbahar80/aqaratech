@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
-	import type { Entity, EntityDefinition } from '$lib/definitions';
+	import type { Model } from '$lib/models/interfaces/entity.interface';
 	import { addToast } from '$lib/stores/toast';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -12,16 +12,10 @@
 	import ComboBox from './ComboBox.svelte';
 	import Input from './Input.svelte';
 
-	export let entity: Entity;
-	export let schema: EntityDefinition<typeof entity>['schema'];
-	// export let data:
-	// 	| InferMutationInput<`${typeof entity}:save`>
-	// 	| InferQueryOutput<`${typeof entity}:basic`>;
+	export let model: Model;
 	export let data: Record<string, any> | null;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
-	$: console.log(data);
-	$: console.log($data2);
 
 	const relationalFields: {
 		[key: string]: any;
@@ -52,7 +46,7 @@
 		data: data2,
 		setData,
 	} = createForm({
-		validate: validateSchema(schema),
+		validate: validateSchema(model.schema),
 		onError: (err: any) => {
 			addToast({
 				props: {
@@ -70,9 +64,9 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc().mutation(`${entity}:save`, values);
+			const submitted = await trpc().mutation(`${model.plural}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
-			await goto(`/${entity}/${submitted.id}`);
+			await goto(`/${model.plural}/${submitted.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -92,14 +86,13 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{data?.id ? 'Edit ' : 'New '}{startCase(singular[entity])}
+						{data?.id ? 'Edit ' : 'New '}{startCase(model.plural)}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#if data}
 							{#each Object.entries(data) as [name, value] (name)}
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
 									<!-- Add asterisk like trpc-sveltekit example -->
-									<!-- @ts-ignore -->
 									<ComboBox
 										{value}
 										optionLabel={data[singular[relationalFields[name]]]}

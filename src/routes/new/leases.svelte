@@ -3,7 +3,7 @@
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import { singular } from '$lib/definitions/index';
 	import type { Predefined } from '$lib/definitions/lease';
-	import { getAddress } from '$lib/definitions/property';
+	import { getAddress } from '$lib/utils/common';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ url, fetch }) => {

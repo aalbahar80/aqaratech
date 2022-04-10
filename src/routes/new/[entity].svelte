@@ -1,33 +1,31 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
-	import {
-		entityDefinitions,
-		isEntity,
-		singular,
-		type Entity,
-	} from '$lib/definitions/index';
+	import type { Entity, Model } from '$lib/models/interfaces/entity.interface';
+	import { PropertyModel } from '$lib/models/interfaces/property.interface';
 	import type { Load } from './[entity]';
 
-	export const load: Load = ({ params, url }) => {
-		const { entity } = params;
-		if (isEntity(entity)) {
-			const predefined = Object.fromEntries(url.searchParams.entries());
-			return {
-				props: { entity, predefined },
-			};
-		}
+	type Params = Parameters<Load>['0']['params'];
+	export const load: Load = ({ url }) => {
+		const predefined = Object.fromEntries(url.searchParams.entries());
 		return {
-			status: 404,
-			error: 'Unknown entity',
+			props: { predefined },
 		};
 	};
 </script>
 
 <script lang="ts">
-	export let entity: Entity;
 	export let predefined: Record<string, string>;
 
-	const defaultForm = entityDefinitions[entity].defaultForm();
+	const getModel = (entity: Entity): Model => {
+		if (entity === 'properties') {
+			return PropertyModel;
+		}
+		throw new Error(`Unknown entity: ${entity}`);
+	};
+
+	const model = getModel($page.params.entity as Params['entity'] as Entity);
+	const defaultForm = model.defaultForm();
 	const data = {
 		...defaultForm,
 		...predefined,
@@ -35,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<title>{`New ${singular[entity]}`}</title>
+	<title>{`New ${model.singular}`}</title>
 </svelte:head>
 
-<Form {entity} {data} schema={entityDefinitions[entity].schema} />
+<Form {model} {data} />

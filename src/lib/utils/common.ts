@@ -81,3 +81,27 @@ export const forceDateToInput = (date: Date | string | number): string => {
 		return '';
 	}
 };
+
+export const getAddress = <
+	T extends {
+		area: string | null;
+		block: string | null;
+		street: string | null;
+		number: string | null;
+	},
+>(
+	item: T,
+	full = false,
+) => {
+	if (full) {
+		return concatIfExists([
+			item.area,
+			'قطعة',
+			item.block,
+			item.street,
+			'مبنى',
+			item.number,
+		]);
+	}
+	return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
+};

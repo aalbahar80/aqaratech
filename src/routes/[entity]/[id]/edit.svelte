@@ -1,35 +1,36 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import { singular, type Entity } from '$lib/definitions';
-	import { isEntity, entityDefinitions } from '$lib/definitions/index';
+	import { PropertyModel } from '$lib/models/interfaces/property.interface';
+	import type { Entity, Model } from '$models/interfaces/entity.interface';
 	import type { Load } from './edit';
 
+	type Params = Parameters<Load>['0']['params'];
 	export const load: Load = async ({ params, fetch }) => {
-		const { entity, id } = params;
-		if (!isEntity(entity)) {
-			return {
-				status: 404,
-				error: 'Unknown entity',
-			};
-		}
+		const id = params.id;
+		const entity = params.entity as Entity;
 		const data = await trpc(fetch).query(`${entity}:basic`, id);
-		if (data) {
-			return {
-				props: { data, entity },
-			};
-		}
-		return { error: 'id not found', status: 404 };
+		return {
+			props: { data, entity },
+		};
 	};
 </script>
 
 <script lang="ts">
-	export let entity: Entity;
-	export let data: InferQueryOutput<`${typeof entity}:basic`>;
+	export let data: InferQueryOutput<`${typeof model.plural}:basic`>;
+
+	const getModel = (entity: Entity): Model => {
+		if (entity === 'properties') {
+			return PropertyModel;
+		}
+		throw new Error(`Unknown entity: ${entity}`);
+	};
+	const model = getModel($page.params.entity as Params['entity'] as Entity);
 </script>
 
 <svelte:head>
-	<title>{`Edit ${singular[entity]}`}</title>
+	<title>{`Edit ${model.singular}`}</title>
 </svelte:head>
 
-<Form {data} {entity} schema={entityDefinitions[entity].schema} />
+<Form {data} {model} />
