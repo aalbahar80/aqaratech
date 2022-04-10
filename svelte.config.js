@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import path from 'path';
+import { resolve } from 'path';
 import adapter from '@sveltejs/adapter-auto';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -14,8 +14,9 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					$components: path.resolve('./src/lib/components'),
-					$lib: path.resolve('./src/lib'),
+					$components: resolve('./src/lib/components'),
+					$lib: resolve('./src/lib'),
+					$models: resolve('.', './src/lib/models'),
 				},
 			},
 			ssr: {

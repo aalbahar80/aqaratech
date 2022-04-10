@@ -11,15 +11,11 @@
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
 		"paths": {
-			"$lib": [
-				"src/lib"
-			],
-			"$lib/*": [
-				"src/lib/*"
-			],
-			"$components/*": [
-				"./src/lib/components/*"
-			],
-		},
-	},
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"],
+			"$components/*": ["./src/lib/components/*"],
+			"$models": ["src/lib/models/index.ts"],
+			"$models/*": ["src/lib/models/*"],
+		}
+	}
 }
