@@ -5,51 +5,10 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from '$lib/server/trpc';
 import { cerbos } from '$lib/server/cerbos';
+import * as R from 'remeda';
+import { v4 } from 'uuid';
 
 export const properties = createRouter()
-	.middleware(async ({ next, rawInput, ctx }) => {
-		const idSchema = z
-			.string()
-			.uuid()
-			.or(z.object({ id: z.string().uuid() }));
-		// TODO move to end of router chain?
-		const result = idSchema.safeParse(rawInput);
-		if (!result.success) {
-			// TODO :create should be an exception, use new trpc feature: route metadata?
-			throw new TRPCError({
-				code: 'PRECONDITION_FAILED',
-				message: 'No property id passed',
-			});
-		}
-		let id = '';
-		if (typeof result.data === 'string') {
-			id = result.data;
-		} else {
-			id = result.data.id;
-		}
-
-		const allowed = await cerbos.check({
-			actions: ['read'],
-			resource: {
-				kind: 'property',
-				instances: {
-					[id]: {},
-				},
-			},
-			principal: {
-				id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-				roles: ctx.accessToken.roles,
-			},
-		});
-		if (allowed.isAuthorized(id, 'read')) {
-			// TODO return allowed.isAuthorized(id, 'read')?
-			return next({ ctx });
-		} else {
-			throw new TRPCError({
-				code: 'FORBIDDEN',
-			});
-		}
-	})
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {
@@ -76,13 +35,31 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[data.id]: {
+							attr: data,
+						},
+					},
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			if (!allowed.isAuthorized(id, 'read')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
 			return data;
 		},
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.property.findUnique({
+		resolve: async ({ ctx, input: id }) => {
+			const data = await prismaClient.property.findUnique({
 				where: {
 					id,
 				},
@@ -104,12 +81,39 @@ export const properties = createRouter()
 						},
 					},
 				},
-			}),
+			});
+
+			if (!data) {
+				throw new TRPCError({
+					code: 'NOT_FOUND',
+					message: 'Property not found',
+				});
+			}
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[data.id]: {
+							attr: data,
+						},
+					},
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			if (!allowed.isAuthorized(id, 'read')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
+			return data;
+		},
 	})
 	.query('list', {
 		input: paginationSchema,
-		resolve: async ({ input }) => ({
-			data: await prismaClient.property.findMany({
+		resolve: async ({ ctx, input }) => {
+			const data = await prismaClient.property.findMany({
 				take: input.size,
 				skip: input.size * (input.pageIndex - 1),
 				orderBy: {
@@ -121,22 +125,45 @@ export const properties = createRouter()
 					block: true,
 					street: true,
 					number: true,
+					clientId: true,
 				},
-			}),
-			pagination: {
+			});
+			const pagination = {
 				size: input.size,
 				start: input.size * (input.pageIndex - 1) + 1,
 				pageIndex: input.pageIndex,
-			},
-		}),
+			};
+
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: R.mapToObj(data, (property) => [
+						property.id,
+						{ attr: property },
+					]),
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			const allowedIds = R.filter(data, (property) =>
+				allowed.isAuthorized(property.id, 'read'),
+			);
+			return {
+				data: allowedIds,
+				pagination,
+			};
+		},
 	})
 	.query('search', {
 		input: z.object({
 			query: z.string().optional(),
 			clientId: z.string().optional(),
 		}),
-		resolve: ({ input: { query } }) =>
-			prismaClient.property.findMany({
+		resolve: async ({ ctx, input: { query } }) => {
+			const data = await prismaClient.property.findMany({
 				take: 5,
 				orderBy: {
 					updatedAt: 'desc',
@@ -148,6 +175,7 @@ export const properties = createRouter()
 					street: true,
 					number: true,
 					avenue: true,
+					clientId: true,
 				},
 				where: query
 					? {
@@ -161,32 +189,102 @@ export const properties = createRouter()
 							],
 					  }
 					: {},
-			}),
+			});
+
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: R.mapToObj(data, (property) => [
+						property.id,
+						{ attr: property },
+					]),
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			const allowedIds = R.filter(data, (property) =>
+				allowed.isAuthorized(property.id, 'read'),
+			);
+			return allowedIds;
+		},
 	})
 	.query('count', {
 		resolve: () => prismaClient.property.count({}),
 	})
 	.mutation('save', {
 		input: schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.property.update({
+		resolve: async ({ ctx, input: { id, ...data } }) => {
+			const resourceId = id ?? v4();
+			const allowed = await cerbos.check({
+				actions: ['save'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[resourceId]: {
+							attr: {
+								...data,
+							},
+						},
+					},
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			if (!allowed.isAuthorized(resourceId, 'save')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
+
+			const result = id
+				? await prismaClient.property.update({
 						data,
 						where: { id },
 				  })
-				: prismaClient.property.create({
+				: await prismaClient.property.create({
 						data,
-				  }),
+				  });
+			return result;
+		},
 	})
 	.mutation('delete', {
 		input: z.string(),
-		resolve: ({ input: id }) =>
-			prismaClient.property.delete({
+		resolve: async ({ ctx, input: id }) => {
+			const property = await prismaClient.property.findUnique({
+				where: { id },
+				select: {
+					clientId: true,
+				},
+			});
+			if (!property) {
+				throw new TRPCError({ code: 'NOT_FOUND' });
+			}
+			const allowed = await cerbos.check({
+				actions: ['delete'],
+				resource: {
+					kind: 'property',
+					instances: {
+						[id]: {
+							attr: property,
+						},
+					},
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			if (!allowed.isAuthorized(id, 'delete')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
+			const deleted = await prismaClient.property.delete({
 				where: {
 					id,
 				},
-				select: {
-					id: true,
-				},
-			}),
+			});
+			return deleted;
+		},
 	});
