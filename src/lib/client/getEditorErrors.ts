@@ -3,10 +3,10 @@ import type { TRPCClientError } from '@trpc/client';
 
 export default function (error: TRPCClientError<Router>) {
 	console.log({ error }, 'getEditorErrors.ts ~ 5');
-	if (error.data?.code !== 'BAD_REQUEST') {
-		alert('Unknown error');
-		return;
-	}
+	// if (error.data?.code !== 'BAD_REQUEST') {
+	// 	alert('Unknown error');
+	// 	return;
+	// }
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const errors: any = {};
 	(JSON.parse(error.message) as { path: string[]; message: string }[]).forEach(
