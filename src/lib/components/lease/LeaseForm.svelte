@@ -3,14 +3,13 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
-	import {
-		defaultForm,
-		generateSchedule,
-		leaseFormSchema,
-		type Predefined,
-	} from '$lib/definitions/lease';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDate, forceDateToInput } from '$lib/utils/common';
+	import {
+		generateSchedule,
+		LeaseModel,
+		type Predefined,
+	} from '$models/interfaces/lease.interface';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
@@ -34,7 +33,7 @@
 
 	const lease = {
 		propertyId: '',
-		...defaultForm(),
+		...LeaseModel.defaultForm(),
 		...predefined,
 	};
 
@@ -65,10 +64,10 @@
 		setFields,
 		setData,
 		unsetField,
-	} = createForm<z.infer<typeof leaseFormSchema>, ValidatorConfig>({
+	} = createForm<z.infer<typeof LeaseModel.leaseFormSchema>, ValidatorConfig>({
 		transform: (values: unknown) => {
 			// make sure each element in schedule array is an object whose postDate is a date
-			const original = values as z.infer<typeof leaseFormSchema>;
+			const original = values as z.infer<typeof LeaseModel.leaseFormSchema>;
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
 				newValues.schedule = original?.schedule.map((item) => {
@@ -93,9 +92,9 @@
 			};
 		},
 		initialValues: lease,
-		schema: leaseFormSchema, // only to make linter happy
+		schema: LeaseModel.leaseFormSchema, // only to make linter happy
 		extend: reporter(),
-		validate: validateSchema(leaseFormSchema),
+		validate: validateSchema(LeaseModel.leaseFormSchema),
 		onError: (err) => {
 			addToast({
 				props: {

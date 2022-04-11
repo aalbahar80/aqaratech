@@ -1,5 +1,6 @@
 import type { InferMutationInput, InferQueryOutput } from '$lib/client/trpc';
 import type { z } from 'zod';
+import type { LeaseModel } from './lease.interface';
 import type { PropertyModel } from './property.interface';
 import type { UnitModel } from './unit.interface';
 
@@ -17,7 +18,6 @@ export interface Searchable<T extends SearchableEntity> {
 	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
 }
 
-export type Model = typeof PropertyModel | typeof UnitModel;
+export type Model = typeof PropertyModel | typeof UnitModel | typeof LeaseModel;
 // | typeof ClientModel
-// | typeof LeaseModel
 // | typeof TenantModel

@@ -1,5 +1,5 @@
 import { paginationSchema } from '$lib/definitions/common';
-import { schema } from '$lib/definitions/lease';
+import { LeaseModel } from '$models/interfaces/lease.interface';
 import prismaClient from '$lib/server/prismaClient';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
@@ -99,7 +99,7 @@ export const leases = createRouter()
 				},
 			});
 			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND'});
+			throw new TRPCError({ code: 'NOT_FOUND' });
 		},
 	})
 	.query('list', {
@@ -247,7 +247,7 @@ export const leases = createRouter()
 		resolve: () => prismaClient.lease.count({}),
 	})
 	.mutation('create', {
-		input: schema,
+		input: LeaseModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.lease.update({
@@ -259,7 +259,7 @@ export const leases = createRouter()
 				  }),
 	})
 	.mutation('save', {
-		input: schema,
+		input: LeaseModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.lease.update({

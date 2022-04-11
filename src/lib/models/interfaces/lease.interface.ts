@@ -1,47 +1,10 @@
 import { strToDate } from '$lib/zodTransformers';
+import type { IEntity } from '$models/interfaces/entity.interface';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
-import type { EntityDefinition } from '.';
 
-export function generateSchedule({
-	count,
-	amount,
-	scheduleStart,
-}: {
-	count: number;
-	amount: number;
-	scheduleStart: Date;
-}) {
-	console.warn('generating new schedule');
-	const newSchedule = [];
-	// get the date of the 1st day of the next month
-	// const leaseStart = new Date(lease.scheduleStart);
-
-	// Check out date-fns eachMonthOfInterval
-	// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
-	const nextMonth = new Date(
-		scheduleStart.getFullYear(),
-		scheduleStart.getMonth() + 1,
-		2,
-	);
-
-	for (let bp = 0; bp < Math.min(count, 24); bp++) {
-		// TODO change to 1 month
-		const dueDate = addMonths(nextMonth, bp);
-		const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
-		newSchedule.push({
-			nanoid: nanoid(),
-			amount,
-			// postDate: dueDate.toISOString().split('T')[0],
-			postDate: dueDate,
-			memo,
-		});
-	}
-	return newSchedule;
-}
-
-export const schema = z.object({
+const schema = z.object({
 	id: z.string().uuid().optional(),
 	monthlyRent: z.number().min(1),
 	start: z.preprocess(strToDate, z.date()),
@@ -51,16 +14,6 @@ export const schema = z.object({
 	shouldNotify: z.boolean(),
 	active: z.boolean(),
 });
-
-export const refinedSchema = schema
-	.refine((val) => val.start < val.end, {
-		path: ['start'],
-		message: 'Start date must be before end date',
-	})
-	.refine((val) => val.start < val.end, {
-		path: ['end'],
-		message: 'End date must be after start date',
-	});
 
 const scheduleSchema = z.array(
 	// should schedule be array or object?
@@ -103,20 +56,71 @@ export const leaseFormSchema = schema
 		});
 	});
 
-export const defaultForm = (): z.infer<typeof leaseFormSchema> => ({
-	start: new Date(),
-	end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-	monthlyRent: 0,
-	tenantId: '',
-	unitId: '',
-	shouldNotify: true,
-	active: true,
-	schedule: generateSchedule({
-		count: 12,
-		amount: 0,
-		scheduleStart: new Date(),
+export function generateSchedule({
+	count,
+	amount,
+	scheduleStart,
+}: {
+	count: number;
+	amount: number;
+	scheduleStart: Date;
+}) {
+	console.warn('generating new schedule');
+	const newSchedule = [];
+	// get the date of the 1st day of the next month
+	// const leaseStart = new Date(lease.scheduleStart);
+
+	// Check out date-fns eachMonthOfInterval
+	// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
+	const nextMonth = new Date(
+		scheduleStart.getFullYear(),
+		scheduleStart.getMonth() + 1,
+		2,
+	);
+
+	for (let bp = 0; bp < Math.min(count, 24); bp++) {
+		// TODO change to 1 month
+		const dueDate = addMonths(nextMonth, bp);
+		const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
+		newSchedule.push({
+			nanoid: nanoid(),
+			amount,
+			// postDate: dueDate.toISOString().split('T')[0],
+			postDate: dueDate,
+			memo,
+		});
+	}
+	return newSchedule;
+}
+
+interface ILease<T extends 'leases'>
+	extends Omit<IEntity<T, typeof schema>, 'defaultForm'> {
+	leaseFormSchema: typeof leaseFormSchema;
+	defaultForm: () => z.infer<typeof leaseFormSchema>;
+}
+
+export const LeaseModel: ILease<'leases'> = {
+	singular: 'lease',
+	plural: 'leases',
+	schema,
+	leaseFormSchema,
+	defaultForm: () => ({
+		start: new Date(),
+		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+		monthlyRent: 0,
+		tenantId: '',
+		unitId: '',
+		shouldNotify: true,
+		active: true,
+		schedule: generateSchedule({
+			count: 12,
+			amount: 0,
+			scheduleStart: new Date(),
+		}),
 	}),
-});
+	getLabel: (item) =>
+		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
+};
 
 export const getBadge = (dates: { start: Date; end: Date }) => {
 	if (dates.end < new Date()) {
@@ -164,14 +168,3 @@ interface PredefinedLease {
 }
 // helper type for new lease form
 export type Predefined = PredefinedTenant | PredefinedUnit | PredefinedLease;
-
-const label: typeof definition['label'] = (item) =>
-	`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`;
-
-const definition: EntityDefinition<'leases'> = {
-	schema,
-	defaultForm,
-	label,
-};
-
-export default definition;
