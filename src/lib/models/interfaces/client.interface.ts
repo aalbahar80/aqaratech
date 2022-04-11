@@ -1,8 +1,8 @@
-import type { InferMutationInput } from '$lib/client/trpc';
+import type { InferQueryOutput } from '$lib/client/trpc';
 import { getName } from '$lib/utils/common';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
+import type { IEntity, Searchable } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
-import type { EntityDefinition } from '.';
 
 export const schema = z.object({
 	id: z.string().uuid().optional(),
@@ -17,10 +17,6 @@ export const schema = z.object({
 		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
 			message: 'Phone must contain only numbers',
 		}),
-	dob: z.union([
-		z.preprocess(strToDate, z.date()).transform(falsyToNull),
-		z.literal('').transform(() => null),
-	]),
 	civilid: z
 		.string()
 		.min(12)
@@ -31,31 +27,29 @@ export const schema = z.object({
 		})
 		.transform(trim)
 		.transform(falsyToNull),
-	passportNum: z.string().transform(trim).transform(falsyToNull).nullable(),
-	residencyNum: z.string().transform(trim).transform(falsyToNull).nullable(),
-	nationality: z.string().transform(trim).transform(falsyToNull).nullable(),
-	residencyEnd: z.union([
+	dob: z.union([
 		z.preprocess(strToDate, z.date()).transform(falsyToNull),
 		z.literal('').transform(() => null),
 	]),
 });
 
-type Tenant = InferMutationInput<'tenants:save'>;
-const defaultForm = (): Tenant => ({
-	firstName: '',
-	lastName: '',
-	dob: '',
-	email: '',
-	civilid: '',
-	phone: '',
-	nationality: '',
-	passportNum: '',
-	residencyNum: '',
-	residencyEnd: '',
-});
+interface IClient<T extends 'clients'>
+	extends IEntity<T, typeof schema>,
+		Searchable<T> {
+	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
+}
 
-const label: typeof definition['label'] = (item) => getName(item);
-
-const definition: EntityDefinition<'tenants'> = { schema, defaultForm, label };
-
-export default definition;
+export const ClientModel: IClient<'clients'> = {
+	singular: 'property',
+	plural: 'clients',
+	schema,
+	defaultForm: () => ({
+		firstName: '',
+		lastName: '',
+		phone: '',
+		email: '',
+		civilid: '',
+		dob: '',
+	}),
+	getLabel: (item) => getName(item),
+};

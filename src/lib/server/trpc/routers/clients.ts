@@ -1,9 +1,9 @@
-import { schema } from '$lib/definitions/client';
-import { paginationSchema } from '$lib/definitions/common';
 import prismaClient from '$lib/server/prismaClient';
+import { createRouter } from '$lib/server/trpc';
+import { paginationSchema } from '$models/common';
+import { ClientModel } from '$models/interfaces/client.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '$lib/server/trpc';
 
 export const clients = createRouter()
 	.query('read', {
@@ -41,7 +41,7 @@ export const clients = createRouter()
 				},
 			});
 			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND'});
+			throw new TRPCError({ code: 'NOT_FOUND' });
 		},
 	})
 	.query('list', {
@@ -103,7 +103,7 @@ export const clients = createRouter()
 		resolve: () => prismaClient.client.count({}),
 	})
 	.mutation('create', {
-		input: schema,
+		input: ClientModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.client.update({
@@ -115,7 +115,7 @@ export const clients = createRouter()
 				  }),
 	})
 	.mutation('save', {
-		input: schema,
+		input: ClientModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.client.update({

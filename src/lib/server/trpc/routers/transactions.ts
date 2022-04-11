@@ -1,11 +1,11 @@
 import { browser, dev } from '$app/env';
 import { paginationSchema, withId } from '$lib/definitions/common';
-import { schema } from '$lib/definitions/transaction';
 import prismaClient from '$lib/server/prismaClient';
+import { createRouter } from '$lib/server/trpc';
 import { falsyToNull, trim } from '$lib/zodTransformers';
+import { TransactionModel } from '$models/interfaces/transaction.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '$lib/server/trpc';
 
 let url: string;
 
@@ -125,8 +125,20 @@ export const transactions = createRouter()
 				},
 			}),
 	})
+	.mutation('create', {
+		input: TransactionModel.schema,
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.transaction.update({
+						data,
+						where: { id },
+				  })
+				: prismaClient.transaction.create({
+						data,
+				  }),
+	})
 	.mutation('save', {
-		input: schema,
+		input: TransactionModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.transaction.update({

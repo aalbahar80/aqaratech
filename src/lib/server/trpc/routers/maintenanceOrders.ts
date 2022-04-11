@@ -1,9 +1,9 @@
-import { paginationSchema } from '$lib/definitions/common';
-import { schema } from '$lib/definitions/maintenanceOrder';
 import prismaClient from '$lib/server/prismaClient';
+import { createRouter } from '$lib/server/trpc';
+import { paginationSchema } from '$models/common';
+import { MaintenanceOrderModel } from '$models/interfaces/maintenanceOrder.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '$lib/server/trpc';
 
 export const maintenanceOrders = createRouter()
 	.query('read', {
@@ -59,8 +59,20 @@ export const maintenanceOrders = createRouter()
 	.query('count', {
 		resolve: () => prismaClient.maintenanceOrder.count({}),
 	})
+	.mutation('create', {
+		input: MaintenanceOrderModel.schema,
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.maintenanceOrder.update({
+						data,
+						where: { id },
+				  })
+				: prismaClient.maintenanceOrder.create({
+						data,
+				  }),
+	})
 	.mutation('save', {
-		input: schema,
+		input: MaintenanceOrderModel.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.maintenanceOrder.update({

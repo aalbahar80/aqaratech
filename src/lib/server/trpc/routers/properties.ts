@@ -1,12 +1,12 @@
-import { paginationSchema } from '$lib/definitions/common';
-import { PropertyModel } from '$models/interfaces/property.interface';
-import prismaClient from '$lib/server/prismaClient';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
-import { createRouter } from '$lib/server/trpc';
 import { cerbos } from '$lib/server/cerbos';
+import prismaClient from '$lib/server/prismaClient';
+import { createRouter } from '$lib/server/trpc';
+import { paginationSchema } from '$models/common';
+import { PropertyModel } from '$models/interfaces/property.interface';
+import { TRPCError } from '@trpc/server';
 import * as R from 'remeda';
 import { v4 } from 'uuid';
+import { z } from 'zod';
 
 export const properties = createRouter()
 	.query('read', {
