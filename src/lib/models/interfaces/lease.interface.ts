@@ -93,17 +93,10 @@ export function generateSchedule({
 	return newSchedule;
 }
 
-interface ILease<T extends 'leases'>
-	extends Omit<IEntity<T, typeof schema>, 'defaultForm'> {
-	leaseFormSchema: typeof leaseFormSchema;
-	defaultForm: () => z.infer<typeof leaseFormSchema>;
-}
-
-export const LeaseModel: ILease<'leases'> = {
+const LeaseModelBase: IEntity<'leases'> = {
+	name: 'leases',
 	singular: 'lease',
 	plural: 'leases',
-	schema,
-	leaseFormSchema,
 	defaultForm: () => ({
 		start: new Date(),
 		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
@@ -118,7 +111,18 @@ export const LeaseModel: ILease<'leases'> = {
 			scheduleStart: new Date(),
 		}),
 	}),
-	getLabel: (item) =>
+};
+
+interface ILabel {
+	start: Date;
+	end: Date;
+}
+
+export const LeaseModel = {
+	...LeaseModelBase,
+	schema,
+	leaseFormSchema,
+	getLabel: (item: ILabel) =>
 		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
 };
 

@@ -35,6 +35,7 @@ export const createRouter = () => {
 			const JWKS = jose.createRemoteJWKSet(
 				new URL('https://dev-eehvhdp2.eu.auth0.com/.well-known/jwks.json'),
 			);
+			const start = Date.now();
 			const { payload } = await jose.jwtVerify(ctx.rawAccessToken, JWKS, {
 				audience: 'letand.be/api',
 				issuer: 'https://dev-eehvhdp2.eu.auth0.com/',
@@ -50,6 +51,7 @@ export const createRouter = () => {
 					'https://letand.be/userMetadata'
 				] as Auth0UserMeta['userMetadata'],
 			};
+			console.log('grab new JWKS took', Date.now() - start, 'ms');
 			return next({
 				ctx: {
 					...ctx,

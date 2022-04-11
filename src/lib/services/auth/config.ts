@@ -41,7 +41,7 @@ export const parseUser = (
 ): Auth0Profile | undefined => {
 	const encodedJwt = idToken?.split('.')[1];
 	if (!encodedJwt) {
-		console.warn('Invalid token');
+		console.warn('Invalid token', 'auth.config.ts 44');
 		return undefined;
 	}
 	const decodedJwt = JSON.parse(

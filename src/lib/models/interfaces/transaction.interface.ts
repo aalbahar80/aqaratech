@@ -12,10 +12,10 @@ const schema = z.object({
 	leaseId: z.string().uuid(),
 });
 
-export const TransactionModel: IEntity<'transactions', typeof schema> = {
+const TransactionModelBase: IEntity<'transactions'> = {
+	name: 'transactions',
 	singular: 'transaction',
 	plural: 'transactions',
-	schema,
 	defaultForm: () => ({
 		dueDate: new Date(),
 		postDate: new Date(),
@@ -24,5 +24,9 @@ export const TransactionModel: IEntity<'transactions', typeof schema> = {
 		memo: '',
 		leaseId: '',
 	}),
-	getLabel: (item) => item.id,
+};
+
+export const TransactionModel = {
+	...TransactionModelBase,
+	schema,
 };

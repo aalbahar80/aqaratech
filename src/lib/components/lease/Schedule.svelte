@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { generateSchedule } from '$lib/definitions/lease';
 	import { forceDateToInput } from '$lib/utils/common';
+	import type { generateSchedule } from '$models/interfaces/lease.interface';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';

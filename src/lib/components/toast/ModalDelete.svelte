@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import trpc from '$lib/client/trpc';
-	import type { Entity } from '$lib/definitions';
+	import type { Entity } from '$models/interfaces/entity.interface';
 	import Modal from './Modal.svelte';
 	import { addToast } from '$lib/stores/toast';
 

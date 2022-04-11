@@ -2,8 +2,8 @@
 	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import { PropertyModel } from '$lib/models/interfaces/property.interface';
-	import type { Entity, Model } from '$models/interfaces/entity.interface';
+	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import type { Entity } from '$models/interfaces/entity.interface';
 	import type { Load } from './edit';
 
 	type Params = Parameters<Load>['0']['params'];
@@ -18,14 +18,8 @@
 </script>
 
 <script lang="ts">
-	export let data: InferQueryOutput<`${typeof model.plural}:basic`>;
+	export let data: InferQueryOutput<`${typeof model.name}:basic`>;
 
-	const getModel = (entity: Entity): Model => {
-		if (entity === 'properties') {
-			return PropertyModel;
-		}
-		throw new Error(`Unknown entity: ${entity}`);
-	};
 	const model = getModel($page.params.entity as Params['entity'] as Entity);
 </script>
 

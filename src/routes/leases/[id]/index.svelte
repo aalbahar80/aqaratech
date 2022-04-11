@@ -6,8 +6,8 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
-	import { getBadge } from '$lib/definitions/lease';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
+	import { getBadge } from '$models/interfaces/lease.interface';
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import formatDistance from 'date-fns/formatDistance';

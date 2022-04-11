@@ -1,7 +1,6 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { getName } from '$lib/utils/common';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
-import type { IEntity, Searchable } from '$models/interfaces/entity.interface';
+import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
 
 export const schema = z.object({
@@ -40,16 +39,10 @@ export const schema = z.object({
 	]),
 });
 
-interface ITenant<T extends 'tenants'>
-	extends IEntity<T, typeof schema>,
-		Searchable<T> {
-	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
-}
-
-export const TenantModel: ITenant<'tenants'> = {
-	singular: 'property',
+const TenantModelBase: IEntity<'tenants'> = {
+	name: 'tenants',
+	singular: 'tenant',
 	plural: 'tenants',
-	schema,
 	defaultForm: () => ({
 		firstName: '',
 		lastName: '',
@@ -62,5 +55,15 @@ export const TenantModel: ITenant<'tenants'> = {
 		residencyNum: '',
 		residencyEnd: '',
 	}),
-	getLabel: (item) => getName(item),
+};
+
+interface ILabel {
+	firstName: string | null;
+	lastName: string | null;
+}
+
+export const TenantModel = {
+	...TenantModelBase,
+	schema,
+	getLabel: (item: ILabel) => getName(item),
 };

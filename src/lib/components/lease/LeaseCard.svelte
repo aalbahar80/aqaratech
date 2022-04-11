@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { getBadge } from '$lib/definitions/lease';
-	import { getAddress } from '$lib/utils/common';
-	import { getName, getProgress } from '$lib/utils/common';
+	import Badge from '$components/Badge.svelte';
+	import { getAddress, getName, getProgress } from '$lib/utils/common';
+	import { getBadge } from '$models/interfaces/lease.interface';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
-	import Badge from '../Badge.svelte';
 
 	interface Lease {
 		id: string;

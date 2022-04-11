@@ -1,11 +1,11 @@
 <script lang="ts">
 	import trpc from '$lib/client/trpc';
-	import { entityDefinitions, singular, type Entity } from '$lib/definitions';
-	import startCase from 'lodash-es/startCase.js';
+	import type { Entity, Model } from '$models/interfaces/entity.interface';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Select from 'svelte-select';
 
 	type Option = { id: string; label: string };
+	export let model: Model;
 
 	const dispatch = createEventDispatcher<{
 		init: { id: string | null };
@@ -79,7 +79,7 @@
 		for={`${entity}Selector`}
 		class="block text-sm font-medium text-gray-700"
 	>
-		{startCase(singular[entity])}</label
+		{model.singular}</label
 	>
 	<Select
 		id={`${entity}Selector`}

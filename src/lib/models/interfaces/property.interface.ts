@@ -1,7 +1,6 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, trim } from '$lib/zodTransformers';
-import type { IEntity, Searchable } from '$models/interfaces/entity.interface';
+import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -33,16 +32,10 @@ const schema = z.object({
 	clientId: z.string().uuid(),
 });
 
-interface IProperty<T extends 'properties'>
-	extends IEntity<T, typeof schema>,
-		Searchable<T> {
-	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
-}
-
-export const PropertyModel: IProperty<'properties'> = {
+const PropertyModelBase: IEntity<'properties'> = {
+	name: 'properties',
 	singular: 'property',
 	plural: 'properties',
-	schema,
 	defaultForm: () => ({
 		area: '',
 		block: '',
@@ -51,7 +44,20 @@ export const PropertyModel: IProperty<'properties'> = {
 		number: '',
 		clientId: '',
 	}),
-	getLabel: (item, full = false) => {
+};
+
+interface ILabel {
+	area: string | null;
+	block: string | null;
+	street: string | null;
+	number: string | null;
+	unitNumber: string;
+}
+
+export const PropertyModel = {
+	...PropertyModelBase,
+	schema,
+	getLabel: (item: ILabel, full = false) => {
 		if (full) {
 			return concatIfExists([
 				item.area,

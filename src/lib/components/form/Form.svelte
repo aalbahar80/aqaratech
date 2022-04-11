@@ -64,9 +64,9 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc().mutation(`${model.plural}:save`, values);
+			const submitted = await trpc().mutation(`${model.name}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
-			await goto(`/${model.plural}/${submitted.id}`);
+			await goto(`/${model.name}/${submitted.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -94,6 +94,7 @@
 								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
 									<!-- Add asterisk like trpc-sveltekit example -->
 									<ComboBox
+										{model}
 										{value}
 										optionLabel={data[singular[relationalFields[name]]]}
 										entity={relationalFields[name]}

@@ -3,7 +3,7 @@ import { falsyToNull, falsyToNullExceptZero, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
 
-export const schema = z.object({
+const schema = z.object({
 	id: z.string().uuid().optional(),
 	unitNumber: z
 		.string()
@@ -36,10 +36,15 @@ export const schema = z.object({
 	propertyId: z.string().uuid(),
 });
 
-export const UnitModel: IEntity<'units', typeof schema> = {
+interface ILabel {
+	type: string | null;
+	unitNumber: string;
+}
+
+const UnitModelBasic: IEntity<'units'> = {
+	name: 'units',
 	singular: 'unit',
 	plural: 'units',
-	schema,
 	defaultForm: () => ({
 		unitNumber: '',
 		bed: null,
@@ -51,6 +56,10 @@ export const UnitModel: IEntity<'units', typeof schema> = {
 		type: '',
 		propertyId: '',
 	}),
-	getLabel: (item) =>
-		concatIfExists([item.type, item.unitNumber]),
+};
+
+export const UnitModel = {
+	...UnitModelBasic,
+	schema,
+	getLabel: (item: ILabel) => concatIfExists([item.type, item.unitNumber]),
 };

@@ -1,26 +1,20 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import { isEntity, type Entity } from '$lib/definitions';
+	import type { Entity } from '$models/interfaces/entity.interface';
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ url, params, fetch }) => {
-		const { entity } = params;
-		if (isEntity(entity)) {
-			const pageIndex = url.searchParams.get('p');
-			const trpcClient = trpc(fetch);
-			const [total, { data, pagination }] = await Promise.all([
-				trpcClient.query(`${entity}:count`),
-				trpcClient.query(`${entity}:list`, { pageIndex }),
-			]);
-			return {
-				props: { entity, total, pagination, data },
-			};
-		}
+		const entity = params.entity as Entity;
+		const pageIndex = url.searchParams.get('p');
+		const trpcClient = trpc(fetch);
+		const [total, { data, pagination }] = await Promise.all([
+			trpcClient.query(`${entity}:count`),
+			trpcClient.query(`${entity}:list`, { pageIndex }),
+		]);
 		return {
-			status: 404,
-			error: 'Unknown entity',
+			props: { entity, total, pagination, data },
 		};
 	};
 </script>

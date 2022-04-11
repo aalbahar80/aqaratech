@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import type { Entity } from '$lib/definitions';
+	import type { Entity } from '$models/interfaces/entity.interface';
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { Trash } from '@steeze-ui/heroicons';
 	import Fa from 'svelte-fa';

@@ -1,5 +1,5 @@
 import { browser, dev } from '$app/env';
-import { paginationSchema, withId } from '$lib/definitions/common';
+import { paginationSchema, withId } from '$models/common';
 import prismaClient from '$lib/server/prismaClient';
 import { createRouter } from '$lib/server/trpc';
 import { falsyToNull, trim } from '$lib/zodTransformers';
@@ -150,7 +150,7 @@ export const transactions = createRouter()
 				  }),
 	})
 	.mutation('saveMany', {
-		input: z.array(withId(schema)),
+		input: z.array(withId(TransactionModel.schema)),
 		resolve: ({ input }) =>
 			prismaClient.transaction.createMany({
 				data: input,

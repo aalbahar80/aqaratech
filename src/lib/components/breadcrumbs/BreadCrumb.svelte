@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { singular, type Entity } from '$lib/definitions';
+	import type { Entity } from '$lib/models/interfaces/entity.interface';
 	import startCase from 'lodash-es/startCase.js';
 
 	// create tuple type
@@ -29,7 +29,7 @@
 						class:ml-4={idx !== 0}
 					>
 						<!-- aria-current={page.current ? 'page' : undefined} -->
-						{startCase(singular[crumb[0]])}
+						{startCase(crumb[0])}
 					</a>
 				</div>
 			</li>

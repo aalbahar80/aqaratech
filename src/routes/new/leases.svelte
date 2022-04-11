@@ -1,9 +1,8 @@
 <script context="module" lang="ts">
 	import trpc from '$lib/client/trpc';
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
-	import { singular } from '$lib/definitions/index';
-	import type { Predefined } from '$lib/definitions/lease';
 	import { getAddress } from '$lib/utils/common';
+	import type { Predefined } from '$models/interfaces/lease.interface';
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ url, fetch }) => {
@@ -51,11 +50,10 @@
 
 <script lang="ts">
 	export let predefined: Predefined;
-	const entity = 'leases';
 </script>
 
 <svelte:head>
-	<title>{`New ${singular[entity]}`}</title>
+	<title>{`New Lease`}</title>
 </svelte:head>
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<div class="min-w-0 flex-1">

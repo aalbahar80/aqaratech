@@ -1,5 +1,4 @@
-import type { InferMutationInput, InferQueryOutput } from '$lib/client/trpc';
-import type { z } from 'zod';
+import type { InferMutationInput } from '$lib/client/trpc';
 import type { ClientModel } from './client.interface';
 import type { LeaseModel } from './lease.interface';
 import type { MaintenanceOrderModel } from './maintenanceOrder.interface';
@@ -16,18 +15,12 @@ export type Entity =
 	| 'units'
 	| 'transactions'
 	| 'maintenanceOrders';
-type SearchableEntity = 'properties' | 'clients' | 'leases' | 'tenants';
-export interface IEntity<T extends Entity, K extends z.AnyZodObject> {
+export interface IEntity<T extends Entity> {
+	name: T;
 	singular: string;
-	plural: T;
-	schema: K;
+	plural: string;
 	defaultForm: () => InferMutationInput<`${T}:create`>;
-	getLabel: (item: InferQueryOutput<`${T}:basic`>) => string;
 	// dropdowns: [''];
-}
-
-export interface Searchable<T extends SearchableEntity> {
-	getLabel: (item: InferQueryOutput<`${T}:search`>[number]) => string;
 }
 
 export type Model =

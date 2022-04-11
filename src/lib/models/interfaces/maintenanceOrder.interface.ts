@@ -26,13 +26,10 @@ const schema = z.object({
 		.transform(falsyToNull),
 });
 
-export const MaintenanceOrderModel: IEntity<
-	'maintenanceOrders',
-	typeof schema
-> = {
+const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
+	name: 'maintenanceOrders',
 	singular: 'maintenanceOrder',
 	plural: 'maintenanceOrders',
-	schema,
 	defaultForm: () => ({
 		completedAt: '',
 		title: '',
@@ -42,5 +39,9 @@ export const MaintenanceOrderModel: IEntity<
 		propertyId: '',
 		clientId: '',
 	}),
-	getLabel: (item) => item.id,
+};
+
+export const MaintenanceOrderModel = {
+	...MaintenanceOrderModelBase,
+	schema,
 };
