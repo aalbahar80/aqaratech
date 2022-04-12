@@ -12,7 +12,7 @@
 		const entity = params.entity as Entity;
 		const data = await trpc(fetch).query(`${entity}:basic`, id);
 		return {
-			props: { data, entity },
+			props: { data },
 		};
 	};
 </script>
