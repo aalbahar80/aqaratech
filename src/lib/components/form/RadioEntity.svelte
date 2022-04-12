@@ -1,28 +1,41 @@
 <script lang="ts">
 	import { classes } from '$lib/utils';
-	import { CheckCircle } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import {
+		RadioGroup,
 		RadioGroupDescription,
 		RadioGroupLabel,
 		RadioGroupOption,
-		RadioGroup,
 	} from '@rgossiaux/svelte-headlessui';
+	import { CheckCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	interface RadioOption {
-		value: string;
+		value: string | null | undefined;
 		title: string;
-		description?: string;
+		description?: string | undefined;
 		footer?: string;
-		disabled?: boolean;
 	}
 	export let options: RadioOption[];
 
-	let value = options[0];
-	console.log({ value }, 'RadioEntity.svelte ~ 22');
+	let selected: RadioOption;
+
+	const optionClass = (
+		checked: boolean,
+		active: boolean,
+		disabled: boolean,
+	): string => {
+		return classes(
+			checked ? 'border-transparent' : 'border-gray-300',
+			active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+			disabled
+				? 'cursor-not-allowed opacity-25'
+				: 'cursor-pointer focus:outline-none',
+			'relative flex rounded-lg border bg-white p-4 shadow-sm',
+		);
+	};
 </script>
 
-<RadioGroup {value} on:change={(e) => (value = e.detail)}>
+<RadioGroup value={selected} on:change={(e) => (selected = e.detail)}>
 	<RadioGroupLabel class="text-base font-medium text-gray-900"
 		>Select a mailing list</RadioGroupLabel
 	>
@@ -30,13 +43,10 @@
 	<div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
 		{#each options as option (option.title)}
 			<RadioGroupOption
-				value={option.value}
-				class={({ checked, active }) =>
-					classes(
-						checked ? 'border-transparent' : 'border-gray-300',
-						active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
-						'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
-					)}
+				value={option}
+				disabled={!option.value}
+				class={({ checked, active, disabled }) =>
+					optionClass(checked, active, disabled)}
 				let:checked
 				let:active
 			>
@@ -48,18 +58,22 @@
 						>
 							{option.title}
 						</RadioGroupLabel>
-						<RadioGroupDescription
-							as="span"
-							class="mt-1 flex items-center text-sm text-gray-500"
-						>
-							{option.description}
-						</RadioGroupDescription>
-						<RadioGroupDescription
-							as="span"
-							class="mt-6 text-sm font-medium text-gray-900"
-						>
-							{option.footer}
-						</RadioGroupDescription>
+						{#if option.description}
+							<RadioGroupDescription
+								as="span"
+								class="mt-1 flex items-center text-sm text-gray-500"
+							>
+								{option.description}
+							</RadioGroupDescription>
+						{/if}
+						{#if option.footer}
+							<RadioGroupDescription
+								as="span"
+								class="mt-6 text-sm font-medium text-gray-900"
+							>
+								{option.footer}
+							</RadioGroupDescription>
+						{/if}
 					</div>
 				</div>
 				<Icon
