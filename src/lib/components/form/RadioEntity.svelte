@@ -57,9 +57,9 @@
 </script>
 
 <RadioGroup value={selected} on:change={(e) => handleChange(e.detail)}>
-	<RadioGroupLabel class="text-base font-medium text-gray-900"
-		>Select a mailing list</RadioGroupLabel
-	>
+	<!-- <RadioGroupLabel class="text-base font-medium text-gray-900"
+		>Select a mailing list
+	</RadioGroupLabel> -->
 
 	<div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
 		{#each options as option (option.title)}

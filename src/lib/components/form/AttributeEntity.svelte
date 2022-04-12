@@ -35,14 +35,12 @@
 			fieldName: 'unitId',
 		},
 	];
-	$: console.log({ radioOptions }, 'AttributeEntity.svelte ~ 18');
 
 	// clear when options change
 	let radio: RadioEntity | undefined;
 	$: {
 		if (radio && radioOptions) radio.clear();
 	}
-	let SelectedRadioOption: SelectedOption;
 	// # End radio config #
 </script>
 
