@@ -17,6 +17,7 @@ interface Auth0UserMeta {
 }
 
 export const createContext = async (event: RequestEvent) => {
+	console.log(event.locals.accessToken, 'config.ts ~ 20');
 	return {
 		user: event.locals.user,
 		rawAccessToken: event.locals.accessToken,
@@ -27,10 +28,10 @@ export type Context = inferAsyncReturnType<typeof createContext>;
 
 export const createRouter = () => {
 	return trpcRouter<Context>().middleware(async ({ ctx, next }) => {
-		if (!ctx.rawAccessToken) {
-			throw new TRPCError({ code: 'UNAUTHORIZED' });
-		}
 		try {
+			if (!ctx.rawAccessToken) {
+				throw new TRPCError({ code: 'UNAUTHORIZED' });
+			}
 			// TODO use .env
 			const JWKS = jose.createRemoteJWKSet(
 				new URL('https://dev-eehvhdp2.eu.auth0.com/.well-known/jwks.json'),
@@ -60,8 +61,12 @@ export const createRouter = () => {
 			});
 		} catch (err) {
 			// TODO remove in prod
-			console.log({ err }, 'config.ts ~ 42');
-			throw new TRPCError({ code: 'UNAUTHORIZED' });
+			if (err instanceof TRPCError) {
+				console.log(err, 'config.ts ~ 64');
+			}
+			console.log('No access token, implement redirect to login');
+			// throw new TRPCError({ code: 'UNAUTHORIZED' });
+			return next({ ctx });
 		}
 	});
 };
