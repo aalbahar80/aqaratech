@@ -81,9 +81,12 @@ const getOptions = async (parentId: string) => {
 	return options;
 };
 
+const relationalFields = ['clientId'];
+
 export const PropertyModel = {
 	...PropertyModelBase,
 	schema,
 	getLabel,
 	getOptions,
+	relationalFields,
 };

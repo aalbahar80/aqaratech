@@ -41,10 +41,7 @@ const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
 	}),
 };
 
-const relationalFields = ['unitId', 'propertyId', 'clientId'];
-
 export const MaintenanceOrderModel = {
 	...MaintenanceOrderModelBase,
 	schema,
-	relationalFields,
 };

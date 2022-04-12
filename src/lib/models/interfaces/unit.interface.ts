@@ -74,9 +74,12 @@ const getOptions = async (parentId: string) => {
 	return options;
 };
 
+const relationalFields = ['propertyId'];
+
 export const UnitModel = {
 	...UnitModelBasic,
 	schema,
 	getLabel,
 	getOptions,
+	relationalFields,
 };

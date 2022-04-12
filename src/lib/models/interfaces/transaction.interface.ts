@@ -26,7 +26,10 @@ const TransactionModelBase: IEntity<'transactions'> = {
 	}),
 };
 
+const relationalFields = ['leaseId'];
+
 export const TransactionModel = {
 	...TransactionModelBase,
 	schema,
+	relationalFields,
 };
