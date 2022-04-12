@@ -8,8 +8,10 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { CheckCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { createEventDispatcher } from 'svelte';
 
 	interface RadioOption {
+		fieldName: string;
 		value: string | null | undefined;
 		title: string;
 		label?: string | undefined;
@@ -36,11 +38,25 @@
 	};
 
 	export const clear = () => {
-		selected = undefined;
+		handleChange(undefined);
+	};
+
+	const dispatch = createEventDispatcher<{
+		select: Omit<RadioOption, 'title'>[];
+	}>();
+	const handleChange = (updated: SelectedRadioOption) => {
+		selected = updated;
+		const result = options.map((option) => ({
+			label: option.label,
+			value: updated?.value === option.value ? option.value : null,
+			fieldName: option.fieldName,
+		}));
+		console.log({ result }, 'RadioEntity.svelte ~ 52');
+		dispatch('select', result);
 	};
 </script>
 
-<RadioGroup value={selected} on:change={(e) => (selected = e.detail)}>
+<RadioGroup value={selected} on:change={(e) => handleChange(e.detail)}>
 	<RadioGroupLabel class="text-base font-medium text-gray-900"
 		>Select a mailing list</RadioGroupLabel
 	>

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import RadioEntity from './RadioEntity.svelte';
 	import SelectEntity from './SelectEntity.svelte';
 
-	type Field = 'clientId' | 'propertyId' | 'unitId';
 	interface Option {
 		value: string | null;
 		label: string;
@@ -18,9 +16,24 @@
 
 	// # Begin radio config #
 	$: radioOptions = [
-		{ value: client?.value, title: 'Client', label: client?.label },
-		{ value: property?.value, title: 'Property', label: property?.label },
-		{ value: unit?.value, title: 'Unit', label: unit?.label },
+		{
+			value: client?.value,
+			title: 'Client',
+			label: client?.label,
+			fieldName: 'clientId',
+		},
+		{
+			value: property?.value,
+			title: 'Property',
+			label: property?.label,
+			fieldName: 'propertyId',
+		},
+		{
+			value: unit?.value,
+			title: 'Unit',
+			label: unit?.label,
+			fieldName: 'unitId',
+		},
 	];
 	$: console.log({ radioOptions }, 'AttributeEntity.svelte ~ 18');
 
@@ -31,10 +44,6 @@
 	}
 	let SelectedRadioOption: SelectedOption;
 	// # End radio config #
-
-	const dispatch = createEventDispatcher<{
-		select: [Field, string][];
-	}>();
 </script>
 
 <SelectEntity
@@ -57,18 +66,4 @@
 	placeholder="Choose a unit"
 />
 
-<RadioEntity options={radioOptions} bind:this={radio} />
-
-<!-- <button on:click|preventDefault={() => dispatch('select', [])}> -->
-<!-- <button
-	on:click|preventDefault={() => {
-		console.log('ds');
-		dispatch('select', [
-			['clientId', clientId],
-			['propertyId', propertyId],
-			['unitId', unitId],
-		]);
-	}}
->
-	<span>Clear</span>
-</button> -->
+<RadioEntity options={radioOptions} bind:this={radio} on:select />
