@@ -8,6 +8,9 @@
 
 	type Field = 'clientId' | 'propertyId' | 'unitId';
 
+	// Ensure parent is aware of generic type emitted from RadioEntity
+	type $$Events = RadioEntity<Field>['$$events_def'];
+
 	// # Begin select config #
 	let client: SelectedOption;
 	let property: SelectedOption;
@@ -69,4 +72,4 @@
 	placeholder="Choose a unit"
 />
 
-<RadioEntity options={radioOptions} bind:this={radio} on:select />
+<RadioEntity bind:this={radio} options={radioOptions} on:select />

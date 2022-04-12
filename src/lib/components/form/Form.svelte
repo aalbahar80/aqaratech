@@ -11,33 +11,15 @@
 	import Button from '../Button.svelte';
 	import ComboBox from './ComboBox.svelte';
 	import Input from './Input.svelte';
+	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
+	import type { z } from 'zod';
+	import RadioEntity from './RadioEntity.svelte';
+	import AttributeEntity from './AttributeEntity.svelte';
 
 	export let model: Model;
-	export let data: Record<string, any> | null;
+	export let data: Record<string, any>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
-
-	const relationalFields: {
-		[key: string]: any;
-	} = {
-		tenantId: 'tenants',
-		leaseId: 'leases',
-		unitId: 'units',
-		propertyId: 'properties',
-		clientId: 'clients',
-	};
-
-	const singular: {
-		[key: string]: any;
-	} = {
-		leases: 'lease',
-		tenants: 'tenant',
-		units: 'unit',
-		properties: 'property',
-		clients: 'client',
-		transactions: 'transaction',
-		maintenanceOrders: 'maintenanceOrder',
-	};
 
 	const {
 		form,
@@ -45,7 +27,9 @@
 		isSubmitting,
 		data: data2,
 		setData,
-	} = createForm({
+	} = createForm<z.infer<typeof model.schema>>({
+		initialValues: data,
+		schema: model.schema,
 		validate: validateSchema(model.schema),
 		onError: (err: any) => {
 			addToast({
@@ -75,8 +59,10 @@
 			});
 		},
 	});
+	let attributeEntity: AttributeEntity;
 </script>
 
+<pre>{JSON.stringify($data2, null, 2)}</pre>
 <div class="mx-auto h-full max-w-xl py-8">
 	<form
 		use:form
@@ -86,44 +72,24 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{data?.id ? 'Edit ' : 'New '}{startCase(model.plural)}
+						{data?.id ? 'Edit ' : 'New '}{startCase(model.singular)}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#if data}
-							{#each Object.entries(data) as [name, value] (name)}
-								{#if relationalFields[name] && (typeof value === 'string' || value === null)}
-									<!-- Add asterisk like trpc-sveltekit example -->
-									<ComboBox
-										{model}
-										{value}
-										optionLabel={data[singular[relationalFields[name]]]}
-										entity={relationalFields[name]}
-										invalidText={getValue($errors, name)?.[0]}
-										on:init={(e) => {
-											setData({ [name]: e.detail.id });
-										}}
-										on:select={(e) => {
-											setData(name, e.detail.id);
-										}}
-										on:clear={() => {
-											setData(name, '');
-										}}
-									/>
-								{:else if !['tenant', 'unit', 'property', 'client', 'lease'].includes(name)}
-									<Input
-										{name}
-										{value}
-										invalid={!!getValue($errors, name)}
-										invalidText={getValue($errors, name)?.[0]}
-										on:select={(e) => {
-											setData(name, e.detail.value);
-										}}
-										on:clear={() => {
-											setData(name, '');
-										}}
-									/>
-								{/if}
+						{#if 'relationalFields' in model}
+							{#each model.relationalFields as field}
+								<pre>{JSON.stringify(field, null, 2)}</pre>
+								<SelectEntity {field} current={data?.[field]} />
 							{/each}
+						{/if}
+						{#if model.name === 'maintenanceOrders'}
+							<AttributeEntity
+								bind:this={attributeEntity}
+								on:select={(e) => {
+									e.detail.forEach((item) => {
+										setData(item.fieldName, item.value);
+									});
+								}}
+							/>
 						{/if}
 					</div>
 				</div>

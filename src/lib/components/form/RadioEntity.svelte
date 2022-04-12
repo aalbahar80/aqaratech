@@ -23,6 +23,26 @@
 
 	let selected: SelectedRadioOption;
 
+	const dispatch = createEventDispatcher<{
+		select: RadioOption[];
+	}>();
+
+	/** Clear radio then dispatch `change` event. */
+	export const clear = () => {
+		handleChange(undefined);
+	};
+
+	const handleChange = (updated: SelectedRadioOption) => {
+		selected = updated;
+		const result = options.map((option) => ({
+			label: option.label,
+			value: updated?.value === option.value ? option.value : null,
+			fieldName: option.fieldName,
+		}));
+		console.log({ result }, 'RadioEntity.svelte ~ 52');
+		dispatch('select', result);
+	};
+
 	const optionClass = (
 		checked: boolean,
 		active: boolean,
@@ -36,25 +56,6 @@
 				: 'cursor-pointer focus:outline-none',
 			'relative flex rounded-lg border bg-white p-4 shadow-sm',
 		);
-	};
-
-	/** Clear radio then dispatch `change` event. */
-	export const clear = () => {
-		handleChange(undefined);
-	};
-
-	const dispatch = createEventDispatcher<{
-		select: RadioOption[];
-	}>();
-	const handleChange = (updated: SelectedRadioOption) => {
-		selected = updated;
-		const result = options.map((option) => ({
-			label: option.label,
-			value: updated?.value === option.value ? option.value : null,
-			fieldName: option.fieldName,
-		}));
-		console.log({ result }, 'RadioEntity.svelte ~ 52');
-		dispatch('select', result);
 	};
 </script>
 
