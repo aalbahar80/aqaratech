@@ -11,12 +11,11 @@
 	import { CurrencyDollar } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const trpcClient = trpc(fetch);
+	export const load: Load = async ({ params }) => {
 		const [trx, nextReminder] = await Promise.all([
-			trpcClient.query('transactions:read', params.id),
+			trpc.query('transactions:read', params.id),
 			// needs optimization, load in onMount?
-			trpcClient.query('transactions:nextReminder', params.id),
+			trpc.query('transactions:nextReminder', params.id),
 			new Date().toISOString(),
 		]);
 
@@ -45,7 +44,7 @@
 	const toggleIsPaid = async () => {
 		loadingPaid = true;
 		try {
-			const updated = await trpc().mutation('transactions:updatePaid', {
+			const updated = await trpc.mutation('transactions:updatePaid', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
 				receiptUrl: null,

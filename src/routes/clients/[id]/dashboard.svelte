@@ -25,7 +25,7 @@
 
 	type Filter = z.infer<typeof filterSchema>;
 
-	export const load: Load = async ({ params, fetch }) => {
+	export const load: Load = async ({ params }) => {
 		const defaultFilter: Filter = {
 			propertyId: null,
 			unitId: null,
@@ -33,16 +33,15 @@
 			...getRange(defaultRange),
 		};
 
-		const trpcClient = trpc(fetch);
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpcClient.query('clients:dashboard', params.id), // TODO use read?
-			trpcClient.query('charts:income', {
+			trpc.query('clients:dashboard', params.id), // TODO use read?
+			trpc.query('charts:income', {
 				...defaultFilter,
 			}),
-			trpcClient.query('charts:expenses', {
+			trpc.query('charts:expenses', {
 				...defaultFilter,
 			}),
-			trpcClient.query('charts:occupancy', {
+			trpc.query('charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);
@@ -111,13 +110,12 @@
 	$: unitOptions = getUnitOptions(selectedProperty);
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
-	const trpcClient = trpc();
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		[income, expenses, occupancy] = await Promise.all([
-			trpcClient.query('charts:income', newFilter),
-			trpcClient.query('charts:expenses', newFilter),
-			trpcClient.query('charts:occupancy', newFilter),
+			trpc.query('charts:income', newFilter),
+			trpc.query('charts:expenses', newFilter),
+			trpc.query('charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};

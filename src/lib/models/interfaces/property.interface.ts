@@ -74,7 +74,7 @@ const getOptions = async (parentId: string) => {
 	if (!uuid.success) {
 		return [];
 	}
-	const result = await trpc().query('properties:search:parent', parentId);
+	const result = await trpc.query('properties:search:parent', parentId);
 	const options = result.map((item) => ({
 		value: item.id,
 		label: getLabel(item),

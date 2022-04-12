@@ -32,7 +32,7 @@
 			...getRange(defaultRange),
 		};
 
-		const trpcClient = trpc(fetch);
+		const trpcClient = trpc;
 		const [client, income, expenses, occupancy] = await Promise.all([
 			trpcClient.query('clients:dashboard', params.id), // TODO use read?
 			trpcClient.query('charts:income', {
@@ -113,9 +113,9 @@
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		[income, expenses, occupancy] = await Promise.all([
-			trpc().query('charts:income', newFilter),
-			trpc().query('charts:expenses', newFilter),
-			trpc().query('charts:occupancy', newFilter),
+			trpc.query('charts:income', newFilter),
+			trpc.query('charts:expenses', newFilter),
+			trpc.query('charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};

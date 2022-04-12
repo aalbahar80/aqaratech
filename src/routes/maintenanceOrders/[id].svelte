@@ -6,8 +6,8 @@
 	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from './[id]';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const maintenanceOrder = await trpc(fetch).query(
+	export const load: Load = async ({ params }) => {
+		const maintenanceOrder = await trpc.query(
 			'maintenanceOrders:read',
 			params.id,
 		);

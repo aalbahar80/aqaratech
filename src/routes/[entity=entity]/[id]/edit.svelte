@@ -7,10 +7,10 @@
 	import type { Load } from './edit';
 
 	type Params = Parameters<Load>['0']['params'];
-	export const load: Load = async ({ params, fetch }) => {
+	export const load: Load = async ({ params }) => {
 		const id = params.id;
 		const entity = params.entity as Entity;
-		const data = await trpc(fetch).query(`${entity}:basic`, id);
+		const data = await trpc.query(`${entity}:basic`, id);
 		return {
 			props: { data },
 		};

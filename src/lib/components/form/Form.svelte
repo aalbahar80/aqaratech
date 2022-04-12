@@ -48,7 +48,7 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc().mutation(`${model.name}:save`, values);
+			const submitted = await trpc.mutation(`${model.name}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
 			await goto(`/${model.name}/${submitted.id}`);
 			addToast({

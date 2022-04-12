@@ -5,13 +5,12 @@
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ url, params, fetch }) => {
+	export const load: Load = async ({ url, params }) => {
 		const entity = params.entity as Entity;
 		const pageIndex = url.searchParams.get('p');
-		const trpcClient = trpc(fetch);
 		const [total, { data, pagination }] = await Promise.all([
-			trpcClient.query(`${entity}:count`),
-			trpcClient.query(`${entity}:list`, { pageIndex }),
+			trpc.query(`${entity}:count`),
+			trpc.query(`${entity}:list`, { pageIndex }),
 		]);
 		return {
 			props: { entity, total, pagination, data },

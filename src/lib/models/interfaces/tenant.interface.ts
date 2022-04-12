@@ -65,7 +65,7 @@ interface ILabel {
 const getLabel = (item: ILabel) => getName(item);
 
 const getOptions = async (query: string) => {
-	const result = await trpc().query('tenants:list', {
+	const result = await trpc.query('tenants:list', {
 		size: 50,
 	});
 	const options = result.data.map((item) => ({

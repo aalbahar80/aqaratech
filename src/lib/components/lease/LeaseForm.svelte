@@ -41,7 +41,7 @@
 
 	let unitList: { id: string; label: string }[] = [];
 	const getUnitList = async (propertyIdFilter: string) => {
-		unitList = await trpc()
+		unitList = await trpc
 			.query('units:search', { propertyId: propertyIdFilter })
 			.then((units) =>
 				units.map((unit) => ({
@@ -112,7 +112,7 @@
 			try {
 				console.log({ values }, 'LeaseForm.svelte ~ 95');
 				const { schedule, ...leaseValues } = values;
-				const newLease = await trpc().mutation('leases:save', leaseValues);
+				const newLease = await trpc.mutation('leases:save', leaseValues);
 				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
@@ -122,10 +122,7 @@
 					...e,
 					postDate: e.postDate,
 				}));
-				const newTrxs = await trpc().mutation(
-					'transactions:saveMany',
-					trxValues,
-				);
+				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
 				console.log(`created ${newTrxs} transactions`);
 
 				await Promise.all(

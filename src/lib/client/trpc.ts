@@ -1,41 +1,12 @@
-import { browser, dev } from '$app/env';
 import type { Router } from '$lib/server/trpc';
 import * as trpc from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
-let url: string;
-
-if (browser) {
-	url = '/trpc';
-} else if (dev) {
-	url = 'http://localhost:3000/trpc';
-} else if (process.env.VERCEL && process.env.VERCEL_URL) {
-	url = `https://${process.env.VERCEL_URL}/trpc`;
-} else {
-	const message = 'Could not determine trpc url, assuming localhost';
-	console.warn(message);
-	url = 'http://localhost:3000/trpc';
-}
-
-const client = (loadFetch?: typeof fetch) =>
-	trpc.createTRPCClient<Router>({
-		url: loadFetch ? '/trpc' : url,
-		transformer: superjson,
-		...(loadFetch && { fetch: loadFetch }),
-	});
-
-// let client: TRPCClient<Router>;
-// export default (loadFetch?: typeof fetch) => {
-// 	if (loadFetch) {
-// 		client = trpc.createTRPCClient<Router>({
-// 			url: '/trpc',
-// 			transformer: superjson,
-// 			fetch: loadFetch,
-// 		});
-// 	}
-// 	return client;
-// };
+const client = trpc.createTRPCClient<Router>({
+	url: '/trpc',
+	transformer: superjson,
+});
 
 type Query = keyof Router['_def']['queries'];
 type Mutation = keyof Router['_def']['mutations'];

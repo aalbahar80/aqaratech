@@ -38,7 +38,7 @@
 
 	const togglePaid = async (id: string, isPaid: boolean) => {
 		try {
-			const updated = await trpc().mutation('transactions:updatePaid', {
+			const updated = await trpc.mutation('transactions:updatePaid', {
 				id,
 				isPaid,
 				receiptUrl: null,

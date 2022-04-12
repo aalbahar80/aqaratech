@@ -32,14 +32,12 @@
 	};
 
 	const loadOptions = (query?: string) =>
-		trpc()
-			.query(`${entity}:search`, { query, ...filter })
-			.then((items) =>
-				items.map((item) => ({
-					id: item.id,
-					label: getLabel(item),
-				})),
-			);
+		trpc.query(`${entity}:search`, { query, ...filter }).then((items) =>
+			items.map((item) => ({
+				id: item.id,
+				label: getLabel(item),
+			})),
+		);
 
 	// default dropdown options
 	let items: Option[];
