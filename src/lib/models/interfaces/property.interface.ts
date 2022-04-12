@@ -45,6 +45,7 @@ const PropertyModelBase: IEntity<'properties'> = {
 		number: '',
 		clientId: '',
 	}),
+	relationalFields: ['clientId'],
 };
 
 interface ILabel {
@@ -81,12 +82,9 @@ const getOptions = async (parentId: string) => {
 	return options;
 };
 
-const relationalFields = ['clientId'];
-
 export const PropertyModel = {
 	...PropertyModelBase,
 	schema,
 	getLabel,
 	getOptions,
-	relationalFields,
 };

@@ -24,12 +24,10 @@ const TransactionModelBase: IEntity<'transactions'> = {
 		memo: '',
 		leaseId: '',
 	}),
+	relationalFields: ['leaseId'],
 };
-
-const relationalFields = ['leaseId'];
 
 export const TransactionModel = {
 	...TransactionModelBase,
 	schema,
-	relationalFields,
 };

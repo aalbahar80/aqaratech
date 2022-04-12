@@ -1,12 +1,15 @@
 <script lang="ts">
 	import type {
-		SelectedOption,
 		Option,
+		SelectedOption,
 	} from '$lib/models/interfaces/common/option.interface';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import {
+		getModel,
+		type RelationalField,
+	} from '$lib/models/interfaces/utils/get-model';
 
 	export let parent: SelectedOption = undefined;
-	export let field: 'clientId' | 'propertyId' | 'unitId';
+	export let field: RelationalField;
 	export let current: SelectedOption = undefined;
 	export let disabled = false;
 	export let placeholder = '';

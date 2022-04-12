@@ -10,13 +10,12 @@ import {
 	type Model,
 } from '$models/interfaces';
 
-const relationalNames = [
-	'clientId',
-	'propertyId',
-	'unitId',
-	'leaseId',
-	'tenantId',
-] as const;
+export type RelationalField =
+	| 'clientId'
+	| 'propertyId'
+	| 'unitId'
+	| 'leaseId'
+	| 'tenantId';
 
 export function getModel(entity: 'clients' | 'clientId'): typeof ClientModel;
 export function getModel(
@@ -31,7 +30,7 @@ export function getModel(entity: 'tenants' | 'tenantId'): typeof TenantModel;
 export function getModel(entity: 'transactions'): typeof TransactionModel;
 
 export function getModel(
-	entity: typeof relationalNames[number],
+	entity: RelationalField,
 ):
 	| typeof ClientModel
 	| typeof LeaseModel
@@ -40,9 +39,7 @@ export function getModel(
 	| typeof TenantModel;
 export function getModel(entity: Entity): Model;
 
-export function getModel(
-	entity: Entity | typeof relationalNames[number],
-): Model {
+export function getModel(entity: Entity | RelationalField): Model {
 	if (entity === 'clients' || entity === 'clientId') {
 		return ClientModel;
 	}

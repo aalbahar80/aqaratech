@@ -52,6 +52,7 @@ const UnitModelBasic: IEntity<'units'> = {
 		type: '',
 		propertyId: '',
 	}),
+	relationalFields: ['propertyId'],
 };
 
 interface ILabel {
@@ -74,12 +75,9 @@ const getOptions = async (parentId: string) => {
 	return options;
 };
 
-const relationalFields = ['propertyId'];
-
 export const UnitModel = {
 	...UnitModelBasic,
 	schema,
 	getLabel,
 	getOptions,
-	relationalFields,
 };

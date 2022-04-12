@@ -6,6 +6,7 @@ import type { PropertyModel } from './property.interface';
 import type { TenantModel } from './tenant.interface';
 import type { TransactionModel } from './transaction.interface';
 import type { UnitModel } from './unit.interface';
+import type { RelationalField } from './utils/get-model';
 
 export type Entity =
 	| 'properties'
@@ -20,6 +21,7 @@ export interface IEntity<T extends Entity> {
 	singular: string;
 	plural: string;
 	defaultForm: () => InferMutationInput<`${T}:create`>;
+	relationalFields?: RelationalField[];
 	// dropdowns: [''];
 }
 
