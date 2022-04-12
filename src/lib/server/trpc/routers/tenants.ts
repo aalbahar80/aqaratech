@@ -103,18 +103,12 @@ export const tenants = createRouter()
 	.query('search', {
 		input: z.object({
 			query: z.string().optional(),
-			clientId: z.string().optional(),
 		}),
 		resolve: ({ input: { query } }) =>
 			prismaClient.tenant.findMany({
-				take: 5,
+				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
-				},
-				select: {
-					id: true,
-					firstName: true,
-					lastName: true,
 				},
 				where: query
 					? {

@@ -160,66 +160,37 @@ export const properties = createRouter()
 	.query('search', {
 		input: z.object({
 			query: z.string().optional(),
-			clientId: z.string().optional(),
+			clientId: z.string().uuid().optional(),
 		}),
-		resolve: async ({ ctx, input: { query } }) => {
-			const data = await prismaClient.property.findMany({
-				take: 5,
-				orderBy: {
-					updatedAt: 'desc',
-				},
-				select: {
-					id: true,
-					area: true,
-					block: true,
-					street: true,
-					number: true,
-					avenue: true,
-					clientId: true,
-				},
-				where: query
-					? {
-							OR: [
-								{ id: { contains: query } },
-								{ area: { contains: query } },
-								{ block: { contains: query } },
-								{ street: { contains: query } },
-								{ avenue: { contains: query } },
-								{ number: { contains: query } },
-							],
-					  }
-					: {},
-			});
+		resolve: async ({ ctx, input: { query, clientId } }) => {
+			let filter = {};
+			if (clientId) {
+				filter = { clientId };
+			} else if (query) {
+				filter = {
+					OR: [
+						{ id: { contains: query } },
+						{ area: { contains: query } },
+						{ block: { contains: query } },
+						{ street: { contains: query } },
+						{ avenue: { contains: query } },
+						{ number: { contains: query } },
+					],
+				};
+			}
 
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: R.mapToObj(data, (property) => [
-						property.id,
-						{ attr: property },
-					]),
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			const allowedIds = R.filter(data, (property) =>
-				allowed.isAuthorized(property.id, 'read'),
-			);
-			return allowedIds;
-		},
-	})
-	.query('search:parent', {
-		input: z.string().uuid(),
-		resolve: async ({ ctx, input: clientId }) => {
+			console.log({ filter }, 'properties.ts ~ 182');
 			const data = await prismaClient.property.findMany({
+				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
 				},
-				where: clientId ? { clientId } : {},
+				where: {},
 			});
+			console.log({ data }, 'properties.ts ~ 190');
+			const principalId =
+				ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!;
+			console.log({ principalId }, 'properties.ts ~ 193');
 			const allowed = await cerbos.check({
 				actions: ['read'],
 				resource: {
@@ -230,13 +201,14 @@ export const properties = createRouter()
 					]),
 				},
 				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					id: principalId,
 					roles: ctx.accessToken.roles,
 				},
 			});
 			const allowedIds = R.filter(data, (property) =>
 				allowed.isAuthorized(property.id, 'read'),
 			);
+			console.log({ allowedIds }, 'properties.ts ~ 208');
 			return allowedIds;
 		},
 	})

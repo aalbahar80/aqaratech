@@ -33,6 +33,16 @@ const schema = z.object({
 	clientId: z.string().uuid(),
 });
 
+const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
+	console.log({ parentId }, 'property.interface.ts ~ 37');
+	const result = await trpc.query('properties:search', { clientId: parentId });
+	const options = result.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 const PropertyModelBase: IEntity<'properties'> = {
 	name: 'properties',
 	singular: 'property',
@@ -67,19 +77,6 @@ const getLabel = (item: ILabel, full = false) => {
 		]);
 	}
 	return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
-};
-
-const getOptions = async (parentId: string) => {
-	const uuid = z.string().uuid().safeParse(parentId);
-	if (!uuid.success) {
-		return [];
-	}
-	const result = await trpc.query('properties:search:parent', parentId);
-	const options = result.map((item) => ({
-		value: item.id,
-		label: getLabel(item),
-	}));
-	return options;
 };
 
 export const PropertyModel = {

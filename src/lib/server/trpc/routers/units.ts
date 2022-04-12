@@ -72,11 +72,22 @@ export const units = createRouter()
 	.query('search', {
 		input: z.object({
 			query: z.string().optional(),
-			propertyId: z.string().nullish(),
+			propertyId: z.string().uuid().optional(),
 		}),
-		resolve: ({ input }) =>
-			prismaClient.unit.findMany({
-				take: 5,
+		resolve: async ({ input: { query, propertyId } }) => {
+			let filter = {};
+			if (propertyId) {
+				filter = { propertyId };
+			} else if (query) {
+				filter = {
+					OR: [
+						{ unitNumber: { contains: query } },
+						{ type: { contains: query } },
+					],
+				};
+			}
+			const data = await prismaClient.unit.findMany({
+				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
 				},
@@ -85,34 +96,7 @@ export const units = createRouter()
 					unitNumber: true,
 					type: true,
 				},
-				where:
-					input.query || input.propertyId
-						? {
-								AND: [
-									{
-										propertyId: input.propertyId ?? {},
-									},
-									{
-										OR: input.query
-											? [
-													{ id: { contains: input.query } },
-													{ unitNumber: { contains: input.query } },
-											  ]
-											: {},
-									},
-								],
-						  }
-						: {},
-			}),
-	})
-	.query('search:parent', {
-		input: z.string().uuid(),
-		resolve: async ({ input: propertyId }) => {
-			const data = await prismaClient.unit.findMany({
-				orderBy: {
-					updatedAt: 'desc',
-				},
-				where: { propertyId },
+				where: filter,
 			});
 			return data;
 		},

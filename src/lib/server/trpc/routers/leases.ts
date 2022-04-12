@@ -206,7 +206,7 @@ export const leases = createRouter()
 		}),
 		resolve: ({ input: { query } }) =>
 			prismaClient.lease.findMany({
-				take: 5,
+				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
 				},

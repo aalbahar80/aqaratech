@@ -20,7 +20,12 @@
 
 	const getOptions = async (parent: Option | undefined) => {
 		current = undefined;
-		options = await model.getOptions(parent?.value ?? '');
+		if (model.name !== 'clients' && model.name !== 'leases') {
+			options = await model.getOptions({
+				parentId: parent?.value ?? undefined,
+			});
+			options = await model.getOptions({});
+		}
 	};
 
 	$: getOptions(parent);

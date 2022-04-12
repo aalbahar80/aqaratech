@@ -33,6 +33,17 @@ export const schema = z.object({
 	]),
 });
 
+const getOptions = async () => {
+	const result = await trpc.query('clients:list', {
+		size: 50,
+	});
+	const options = result.data.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 const ClientModelBase: IEntity<'clients'> = {
 	name: 'clients',
 	singular: 'client',
@@ -53,17 +64,6 @@ interface ILabel {
 }
 
 const getLabel = (item: ILabel) => getName(item);
-
-const getOptions = async () => {
-	const result = await trpc.query('clients:list', {
-		size: 50,
-	});
-	const options = result.data.map((item) => ({
-		value: item.id,
-		label: getLabel(item),
-	}));
-	return options;
-};
 
 export const ClientModel = {
 	...ClientModelBase,

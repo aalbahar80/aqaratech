@@ -40,6 +40,17 @@ export const schema = z.object({
 	]),
 });
 
+const getLabel = (item: ILabel) => getName(item);
+
+const getOptions = async ({ query }: { query?: string | undefined }) => {
+	const result = await trpc.query('tenants:search', { query });
+	const options = result.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 const TenantModelBase: IEntity<'tenants'> = {
 	name: 'tenants',
 	singular: 'tenant',
@@ -62,18 +73,7 @@ interface ILabel {
 	firstName: string | null;
 	lastName: string | null;
 }
-const getLabel = (item: ILabel) => getName(item);
 
-const getOptions = async (query: string) => {
-	const result = await trpc.query('tenants:list', {
-		size: 50,
-	});
-	const options = result.data.map((item) => ({
-		value: item.id,
-		label: getLabel(item),
-	}));
-	return options;
-};
 export const TenantModel = {
 	...TenantModelBase,
 	schema,

@@ -74,7 +74,7 @@ export const clients = createRouter()
 		}),
 		resolve: ({ input: { query } }) =>
 			prismaClient.client.findMany({
-				take: 5,
+				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
 				},

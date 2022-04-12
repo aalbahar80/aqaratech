@@ -37,6 +37,15 @@ const schema = z.object({
 	propertyId: z.string().uuid(),
 });
 
+const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
+	const result = await trpc.query('units:search', { propertyId: parentId });
+	const options = result.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 const UnitModelBasic: IEntity<'units'> = {
 	name: 'units',
 	singular: 'unit',
@@ -61,19 +70,6 @@ interface ILabel {
 }
 
 const getLabel = (item: ILabel) => concatIfExists([item.type, item.unitNumber]);
-
-const getOptions = async (parentId: string) => {
-	const uuid = z.string().uuid().safeParse(parentId);
-	if (!uuid.success) {
-		return [];
-	}
-	const result = await trpc.query('units:search:parent', parentId);
-	const options = result.map((item) => ({
-		value: item.id,
-		label: getLabel(item),
-	}));
-	return options;
-};
 
 export const UnitModel = {
 	...UnitModelBasic,

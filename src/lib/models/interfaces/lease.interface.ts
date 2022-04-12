@@ -1,3 +1,4 @@
+import trpc from '$lib/client/trpc';
 import { strToDate } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
 import { addMonths, format } from 'date-fns';
@@ -93,6 +94,15 @@ export function generateSchedule({
 	return newSchedule;
 }
 
+const getOptions = async () => {
+	const result = await trpc.query('leases:search', {});
+	const options = result.map((item) => ({
+		value: item.id,
+		label: item.id,
+	}));
+	return options;
+};
+
 const LeaseModelBase: IEntity<'leases'> = {
 	name: 'leases',
 	singular: 'lease',
@@ -124,6 +134,7 @@ export const LeaseModel = {
 	leaseFormSchema,
 	getLabel: (item: ILabel) =>
 		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
+	getOptions,
 };
 
 export const getBadge = (dates: { start: Date; end: Date }) => {
