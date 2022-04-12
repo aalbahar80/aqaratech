@@ -42,8 +42,8 @@ export const units = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema,
-		resolve: async ({ input }) => ({
-			data: await prismaClient.unit.findMany({
+		resolve: async ({ input }) => {
+			const data = await prismaClient.unit.findMany({
 				take: input.size,
 				skip: input.size * (input.pageIndex - 1),
 				orderBy: {
@@ -57,13 +57,17 @@ export const units = createRouter()
 					bed: true,
 					bath: true,
 				},
-			}),
-			pagination: {
+			});
+			const pagination = {
 				size: input.size,
 				start: input.size * (input.pageIndex - 1) + 1,
 				pageIndex: input.pageIndex,
-			},
-		}),
+			};
+			return {
+				data,
+				pagination,
+			};
+		},
 	})
 	.query('search', {
 		input: z.object({
@@ -100,6 +104,18 @@ export const units = createRouter()
 						  }
 						: {},
 			}),
+	})
+	.query('search:parent', {
+		input: z.string().uuid(),
+		resolve: async ({ input: propertyId }) => {
+			const data = await prismaClient.unit.findMany({
+				orderBy: {
+					updatedAt: 'desc',
+				},
+				where: { propertyId },
+			});
+			return data;
+		},
 	})
 	.query('count', {
 		resolve: () => prismaClient.unit.count({}),

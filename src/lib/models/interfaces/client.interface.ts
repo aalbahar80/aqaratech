@@ -1,3 +1,4 @@
+import trpc from '$lib/client/trpc';
 import { getName } from '$lib/utils/common';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
@@ -51,8 +52,22 @@ interface ILabel {
 	lastName: string | null;
 }
 
+const getLabel = (item: ILabel) => getName(item);
+
+const getOptions = async () => {
+	const result = await trpc().query('clients:list', {
+		size: 50,
+	});
+	const options = result.data.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 export const ClientModel = {
 	...ClientModelBase,
 	schema,
-	getLabel: (item: ILabel) => getName(item),
+	getLabel,
+	getOptions,
 };

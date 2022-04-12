@@ -10,21 +10,35 @@ import {
 	type Model,
 } from '$models/interfaces';
 
+const relationalNames = [
+	'clientId',
+	'propertyId',
+	'unitId',
+	// 'tenantId',
+] as const;
+
 export function getModel(entity: 'clients' | 'clientId'): typeof ClientModel;
 export function getModel(
 	entity: 'properties' | 'propertyId',
 ): typeof PropertyModel;
 export function getModel(entity: 'units' | 'unitId'): typeof UnitModel;
-export function getModel(entity: 'tenants' | 'tenantId'): typeof TenantModel;
 export function getModel(entity: 'leases'): typeof LeaseModel;
 export function getModel(
 	entity: 'maintenanceOrders',
 ): typeof MaintenanceOrderModel;
+// export function getModel(entity: 'tenants' | 'tenantId'): typeof TenantModel;
+export function getModel(entity: 'tenants'): typeof TenantModel;
 export function getModel(entity: 'transactions'): typeof TransactionModel;
 
+export function getModel(
+	entity: typeof relationalNames[number],
+): typeof ClientModel | typeof PropertyModel | typeof UnitModel;
+// | typeof TenantModel;
 export function getModel(entity: Entity): Model;
 
-export function getModel(entity: string) {
+export function getModel(
+	entity: Entity | typeof relationalNames[number],
+): Model {
 	if (entity === 'clients' || entity === 'clientId') {
 		return ClientModel;
 	}
@@ -37,7 +51,8 @@ export function getModel(entity: string) {
 	if (entity === 'units' || entity === 'unitId') {
 		return UnitModel;
 	}
-	if (entity === 'tenants' || entity === 'tenantId') {
+	// if (entity === 'tenants' || entity === 'tenantId') {
+	if (entity === 'tenants') {
 		return TenantModel;
 	}
 	if (entity === 'maintenanceOrders') {

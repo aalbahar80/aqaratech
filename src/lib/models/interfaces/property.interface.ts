@@ -1,3 +1,4 @@
+import trpc from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
@@ -51,23 +52,38 @@ interface ILabel {
 	block: string | null;
 	street: string | null;
 	number: string | null;
-	unitNumber: string;
 }
+
+const getLabel = (item: ILabel, full = false) => {
+	if (full) {
+		return concatIfExists([
+			item.area,
+			'قطعة',
+			item.block,
+			item.street,
+			'مبنى',
+			item.number,
+		]);
+	}
+	return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
+};
+
+const getOptions = async (parentId: string) => {
+	const uuid = z.string().uuid().safeParse(parentId);
+	if (!uuid.success) {
+		return [];
+	}
+	const result = await trpc().query('properties:search:parent', parentId);
+	const options = result.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
 
 export const PropertyModel = {
 	...PropertyModelBase,
 	schema,
-	getLabel: (item: ILabel, full = false) => {
-		if (full) {
-			return concatIfExists([
-				item.area,
-				'قطعة',
-				item.block,
-				item.street,
-				'مبنى',
-				item.number,
-			]);
-		}
-		return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
-	},
+	getLabel,
+	getOptions,
 };

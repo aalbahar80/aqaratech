@@ -211,6 +211,35 @@ export const properties = createRouter()
 			return allowedIds;
 		},
 	})
+	.query('search:parent', {
+		input: z.string().uuid(),
+		resolve: async ({ ctx, input: clientId }) => {
+			const data = await prismaClient.property.findMany({
+				orderBy: {
+					updatedAt: 'desc',
+				},
+				where: clientId ? { clientId } : {},
+			});
+			const allowed = await cerbos.check({
+				actions: ['read'],
+				resource: {
+					kind: 'property',
+					instances: R.mapToObj(data, (property) => [
+						property.id,
+						{ attr: property },
+					]),
+				},
+				principal: {
+					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
+					roles: ctx.accessToken.roles,
+				},
+			});
+			const allowedIds = R.filter(data, (property) =>
+				allowed.isAuthorized(property.id, 'read'),
+			);
+			return allowedIds;
+		},
+	})
 	.query('count', {
 		resolve: () => prismaClient.property.count({}),
 	})

@@ -1,3 +1,4 @@
+import trpc from '$lib/client/trpc';
 import { concatIfExists } from '$lib/utils/common';
 import { falsyToNull, falsyToNullExceptZero, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
@@ -36,11 +37,6 @@ const schema = z.object({
 	propertyId: z.string().uuid(),
 });
 
-interface ILabel {
-	type: string | null;
-	unitNumber: string;
-}
-
 const UnitModelBasic: IEntity<'units'> = {
 	name: 'units',
 	singular: 'unit',
@@ -58,8 +54,29 @@ const UnitModelBasic: IEntity<'units'> = {
 	}),
 };
 
+interface ILabel {
+	type: string | null;
+	unitNumber: string;
+}
+
+const getLabel = (item: ILabel) => concatIfExists([item.type, item.unitNumber]);
+
+const getOptions = async (parentId: string) => {
+	const uuid = z.string().uuid().safeParse(parentId);
+	if (!uuid.success) {
+		return [];
+	}
+	const result = await trpc().query('units:search:parent', parentId);
+	const options = result.map((item) => ({
+		value: item.id,
+		label: getLabel(item),
+	}));
+	return options;
+};
+
 export const UnitModel = {
 	...UnitModelBasic,
 	schema,
-	getLabel: (item: ILabel) => concatIfExists([item.type, item.unitNumber]),
+	getLabel,
+	getOptions,
 };
