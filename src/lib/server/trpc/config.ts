@@ -17,7 +17,6 @@ interface Auth0UserMeta {
 }
 
 export const createContext = async (event: RequestEvent) => {
-	console.log(event.locals.accessToken, 'config.ts ~ 20');
 	return {
 		user: event.locals.user,
 		rawAccessToken: event.locals.accessToken,

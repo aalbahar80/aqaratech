@@ -12,7 +12,6 @@ export const getSession: GetSession = async ({ locals }) => ({
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	console.log({ cookies }, 'hooks.ts ~ 31');
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
 	event.locals.user = parseUser(cookies.idToken);

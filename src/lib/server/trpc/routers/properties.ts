@@ -179,18 +179,15 @@ export const properties = createRouter()
 				};
 			}
 
-			console.log({ filter }, 'properties.ts ~ 182');
 			const data = await prismaClient.property.findMany({
 				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
 				},
-				where: {},
+				where: filter,
 			});
-			console.log({ data }, 'properties.ts ~ 190');
 			const principalId =
 				ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!;
-			console.log({ principalId }, 'properties.ts ~ 193');
 			const allowed = await cerbos.check({
 				actions: ['read'],
 				resource: {
@@ -208,7 +205,6 @@ export const properties = createRouter()
 			const allowedIds = R.filter(data, (property) =>
 				allowed.isAuthorized(property.id, 'read'),
 			);
-			console.log({ allowedIds }, 'properties.ts ~ 208');
 			return allowedIds;
 		},
 	})
