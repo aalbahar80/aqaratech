@@ -61,12 +61,8 @@ export const createRouter = () => {
 			});
 		} catch (err) {
 			// TODO remove in prod
-			if (err instanceof TRPCError) {
-				console.log(err, 'config.ts ~ 64');
-			}
-			console.log('No access token, implement redirect to login');
-			// throw new TRPCError({ code: 'UNAUTHORIZED' });
-			return next({ ctx });
+			console.log(err, 'config.ts ~ 64');
+			throw new TRPCError({ code: 'UNAUTHORIZED' });
 		}
 	});
 };
