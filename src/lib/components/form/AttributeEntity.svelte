@@ -5,48 +5,51 @@
 
 	type Field = 'clientId' | 'propertyId' | 'unitId';
 	type Value = string | null;
-
-	let clientId: Value = '';
-	let propertyId: Value = '';
-	let unitId: Value = '';
+	interface Option {
+		value: string | null;
+		label: string;
+	}
+	type SelectedOption = Option | undefined;
+	let client: SelectedOption;
+	let property: SelectedOption;
+	let unit: SelectedOption;
 
 	$: radioOptions = [
-		{ value: clientId, title: 'Client' },
-		{ value: propertyId, title: 'Property' },
-		{ value: unitId, title: 'Unit' },
+		{ value: client?.value, title: 'Client', description: client?.label },
+		{ value: property?.value, title: 'Property', description: property?.label },
+		{ value: unit?.value, title: 'Unit', description: unit?.label },
 	];
 	$: console.log({ radioOptions }, 'AttributeEntity.svelte ~ 18');
 
 	const dispatch = createEventDispatcher<{
-		select: [Field, Value][];
+		select: [Field, string][];
 	}>();
-	console.log({ clientId }, 'AttributeEntity.svelte ~ 22');
 </script>
 
 <SelectEntity
 	field="clientId"
-	bind:current={clientId}
+	bind:current={client}
 	placeholder="Choose a client"
 />
 <SelectEntity
 	field="propertyId"
-	parentId={clientId}
-	bind:current={propertyId}
-	disabled={!clientId}
+	parent={client}
+	bind:current={property}
+	disabled={!client?.value}
 	placeholder="Choose a property"
 />
 <SelectEntity
 	field="unitId"
-	bind:current={unitId}
-	parentId={propertyId}
-	disabled={!propertyId || !clientId}
+	bind:current={unit}
+	parent={property}
+	disabled={!property?.value || !client?.value}
 	placeholder="Choose a unit"
 />
 
 <RadioEntity options={radioOptions} />
 
 <!-- <button on:click|preventDefault={() => dispatch('select', [])}> -->
-<button
+<!-- <button
 	on:click|preventDefault={() => {
 		console.log('ds');
 		dispatch('select', [
@@ -57,4 +60,4 @@
 	}}
 >
 	<span>Clear</span>
-</button>
+</button> -->

@@ -5,11 +5,11 @@
 		value: string | null;
 		label: string;
 	}
-	type Value = string | null;
+	type SelectedOption = Option | undefined;
 
-	export let parentId: Value = '';
+	export let parent: Option | undefined = undefined;
 	export let field: 'clientId' | 'propertyId' | 'unitId';
-	export let current: Value;
+	export let current: SelectedOption = undefined;
 	export let disabled = false;
 	export let placeholder = '';
 
@@ -17,15 +17,12 @@
 
 	let options: Option[] = [];
 
-	$: console.log({ current }, 'SelectEntity.svelte ~ 21');
-	const getOptions = async (parent: Value) => {
-		options = [{ value: '', label: placeholder }];
-		current = '';
-		const newOptions = await model.getOptions(parent ?? '');
-		options = [{ value: '', label: placeholder }, ...newOptions];
+	const getOptions = async (parent: Option | undefined) => {
+		current = undefined;
+		options = await model.getOptions(parent?.value ?? '');
 	};
 
-	$: getOptions(parentId);
+	$: getOptions(parent);
 </script>
 
 <!-- 
@@ -40,8 +37,13 @@
 	{disabled}
 	bind:value={current}
 >
-	{#each options as { label, value }}
-		<option {value} selected={value === current}>{label}</option>
+	{#if !current?.value}
+		<option selected value={undefined}>{placeholder}</option>
+	{/if}
+	{#each options as option (option.value)}
+		<option value={option} selected={option.value === current?.value}
+			>{option.label}</option
+		>
 	{/each}
 </select>
 
