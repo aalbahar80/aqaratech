@@ -1,12 +1,12 @@
 <script lang="ts">
+	import type {
+		SelectedOption,
+		Option,
+	} from '$lib/models/interfaces/common/option.interface';
 	import RadioEntity from './RadioEntity.svelte';
 	import SelectEntity from './SelectEntity.svelte';
 
-	interface Option {
-		value: string | null;
-		label: string;
-	}
-	type SelectedOption = Option | undefined;
+	type Field = 'clientId' | 'propertyId' | 'unitId';
 
 	// # Begin select config #
 	let client: SelectedOption;
@@ -15,6 +15,11 @@
 	// # End select config #
 
 	// # Begin radio config #
+	interface RadioOption extends Option {
+		fieldName: Field;
+		title: string;
+	}
+	let radioOptions: RadioOption[];
 	$: radioOptions = [
 		{
 			value: client?.value,
@@ -37,7 +42,7 @@
 	];
 
 	// clear when options change
-	let radio: RadioEntity | undefined;
+	let radio: RadioEntity<Field>;
 	$: {
 		if (radio && radioOptions) radio.clear();
 	}

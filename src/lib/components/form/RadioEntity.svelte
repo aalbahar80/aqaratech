@@ -10,10 +10,11 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
 
+	type T = $$Generic;
 	interface RadioOption {
-		fieldName: string;
+		fieldName: T;
 		value: string | null | undefined;
-		title: string;
+		title?: string;
 		label?: string | undefined;
 		footer?: string;
 	}
@@ -37,12 +38,13 @@
 		);
 	};
 
+	/** Clear radio then dispatch `change` event. */
 	export const clear = () => {
 		handleChange(undefined);
 	};
 
 	const dispatch = createEventDispatcher<{
-		select: Omit<RadioOption, 'title'>[];
+		select: RadioOption[];
 	}>();
 	const handleChange = (updated: SelectedRadioOption) => {
 		selected = updated;

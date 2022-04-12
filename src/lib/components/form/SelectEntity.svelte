@@ -1,13 +1,11 @@
 <script lang="ts">
+	import type {
+		SelectedOption,
+		Option,
+	} from '$lib/models/interfaces/common/option.interface';
 	import { getModel } from '$lib/models/interfaces/utils/get-model';
 
-	interface Option {
-		value: string | null;
-		label: string;
-	}
-	type SelectedOption = Option | undefined;
-
-	export let parent: Option | undefined = undefined;
+	export let parent: SelectedOption = undefined;
 	export let field: 'clientId' | 'propertyId' | 'unitId';
 	export let current: SelectedOption = undefined;
 	export let disabled = false;
