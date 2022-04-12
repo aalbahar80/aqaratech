@@ -12,12 +12,13 @@
 	interface RadioOption {
 		value: string | null | undefined;
 		title: string;
-		description?: string | undefined;
+		label?: string | undefined;
 		footer?: string;
 	}
+	type SelectedRadioOption = RadioOption | undefined;
 	export let options: RadioOption[];
 
-	let selected: RadioOption;
+	let selected: SelectedRadioOption;
 
 	const optionClass = (
 		checked: boolean,
@@ -32,6 +33,10 @@
 				: 'cursor-pointer focus:outline-none',
 			'relative flex rounded-lg border bg-white p-4 shadow-sm',
 		);
+	};
+
+	export const clear = () => {
+		selected = undefined;
 	};
 </script>
 
@@ -58,12 +63,12 @@
 						>
 							{option.title}
 						</RadioGroupLabel>
-						{#if option.description}
+						{#if option.label}
 							<RadioGroupDescription
 								as="span"
 								class="mt-1 flex items-center text-sm text-gray-500"
 							>
-								{option.description}
+								{option.label}
 							</RadioGroupDescription>
 						{/if}
 						{#if option.footer}

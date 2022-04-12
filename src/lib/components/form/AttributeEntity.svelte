@@ -4,22 +4,33 @@
 	import SelectEntity from './SelectEntity.svelte';
 
 	type Field = 'clientId' | 'propertyId' | 'unitId';
-	type Value = string | null;
 	interface Option {
 		value: string | null;
 		label: string;
 	}
 	type SelectedOption = Option | undefined;
+
+	// # Begin select config #
 	let client: SelectedOption;
 	let property: SelectedOption;
 	let unit: SelectedOption;
+	// # End select config #
 
+	// # Begin radio config #
 	$: radioOptions = [
-		{ value: client?.value, title: 'Client', description: client?.label },
-		{ value: property?.value, title: 'Property', description: property?.label },
-		{ value: unit?.value, title: 'Unit', description: unit?.label },
+		{ value: client?.value, title: 'Client', label: client?.label },
+		{ value: property?.value, title: 'Property', label: property?.label },
+		{ value: unit?.value, title: 'Unit', label: unit?.label },
 	];
 	$: console.log({ radioOptions }, 'AttributeEntity.svelte ~ 18');
+
+	// clear when options change
+	let radio: RadioEntity | undefined;
+	$: {
+		if (radio && radioOptions) radio.clear();
+	}
+	let SelectedRadioOption: SelectedOption;
+	// # End radio config #
 
 	const dispatch = createEventDispatcher<{
 		select: [Field, string][];
@@ -46,7 +57,7 @@
 	placeholder="Choose a unit"
 />
 
-<RadioEntity options={radioOptions} />
+<RadioEntity options={radioOptions} bind:this={radio} />
 
 <!-- <button on:click|preventDefault={() => dispatch('select', [])}> -->
 <!-- <button
