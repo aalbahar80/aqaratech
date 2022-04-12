@@ -44,4 +44,5 @@ const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
 export const MaintenanceOrderModel = {
 	...MaintenanceOrderModelBase,
 	schema,
+	basicFields: ['title', 'description', 'status', 'completedAt'],
 };

@@ -59,7 +59,6 @@
 			});
 		},
 	});
-	let attributeEntity: AttributeEntity;
 </script>
 
 <pre>{JSON.stringify($data2, null, 2)}</pre>
@@ -75,15 +74,33 @@
 						{data?.id ? 'Edit ' : 'New '}{startCase(model.singular)}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
+						{#each model.basicFields as field}
+							<Input
+								name={field}
+								value={data2[field]}
+								invalid={!!getValue($errors, field)}
+								invalidText={getValue($errors, field)?.[0]}
+								on:select={(e) => {
+									setData(field, e.detail.value);
+								}}
+								on:clear={() => {
+									setData(field, '');
+								}}
+							/>
+						{/each}
 						{#if 'relationalFields' in model}
 							{#each model.relationalFields as field}
-								<pre>{JSON.stringify(field, null, 2)}</pre>
-								<SelectEntity {field} current={data?.[field]} />
+								<SelectEntity
+									{field}
+									current={data?.[field]}
+									on:select={(e) => {
+										setData(field, e.detail);
+									}}
+								/>
 							{/each}
 						{/if}
 						{#if model.name === 'maintenanceOrders'}
 							<AttributeEntity
-								bind:this={attributeEntity}
 								on:select={(e) => {
 									e.detail.forEach((item) => {
 										setData(item.fieldName, item.value);

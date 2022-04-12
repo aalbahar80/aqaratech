@@ -30,4 +30,5 @@ const TransactionModelBase: IEntity<'transactions'> = {
 export const TransactionModel = {
 	...TransactionModelBase,
 	schema,
+	basicFields: ['amount', 'dueDate', 'postDate', 'isPaid', 'memo'],
 };

@@ -79,4 +79,16 @@ export const TenantModel = {
 	schema,
 	getLabel,
 	getOptions,
+	basicFields: [
+		'firstName',
+		'lastName',
+		'email',
+		'phone',
+		'dob',
+		'civilid',
+		'passportNum',
+		'nationality',
+		'residencyNum',
+		'residencyEnd',
+	],
 };

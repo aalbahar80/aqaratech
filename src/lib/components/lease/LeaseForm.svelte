@@ -28,6 +28,7 @@
 	import Button from '../Button.svelte';
 	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
+	import SelectEntity from '../form/SelectEntity.svelte';
 
 	export let predefined: Predefined;
 
@@ -252,6 +253,13 @@
 							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
 						>
 							<div class="sm:w-3/4">
+								<!-- <SelectEntity
+									field="unitId"
+									bind:current={unit}
+									parent={property}
+									disabled={!property?.value || !client?.value}
+									placeholder="Choose a unit"
+								/> -->
 								<ComboBox
 									entity="properties"
 									value={lease.propertyId}

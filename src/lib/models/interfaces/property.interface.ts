@@ -34,7 +34,6 @@ const schema = z.object({
 });
 
 const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
-	console.log({ parentId }, 'property.interface.ts ~ 37');
 	const result = await trpc.query('properties:search', { clientId: parentId });
 	const options = result.map((item) => ({
 		value: item.id,
@@ -84,4 +83,5 @@ export const PropertyModel = {
 	schema,
 	getLabel,
 	getOptions,
+	basicFields: ['area', 'block', 'street', 'avenue', 'number'],
 };

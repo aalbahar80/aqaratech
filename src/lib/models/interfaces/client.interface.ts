@@ -70,4 +70,5 @@ export const ClientModel = {
 	schema,
 	getLabel,
 	getOptions,
+	basicFields: ['firstName', 'lastName', 'phone', 'email', 'civilid', 'dob'],
 };

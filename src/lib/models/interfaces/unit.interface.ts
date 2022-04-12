@@ -76,4 +76,14 @@ export const UnitModel = {
 	schema,
 	getLabel,
 	getOptions,
+	basicFields: [
+		'type',
+		'unitNumber',
+		'bed',
+		'bath',
+		'size',
+		'marketRent',
+		'floor',
+		'usage',
+	],
 };

@@ -7,9 +7,12 @@
 		getModel,
 		type RelationalField,
 	} from '$lib/models/interfaces/utils/get-model';
+	import { createEventDispatcher } from 'svelte';
 
 	export let parent: SelectedOption = undefined;
 	export let field: RelationalField;
+	/**	 Only provide a name if you want Felte to handle this input. */
+	export let name: RelationalField | undefined = undefined;
 	export let current: SelectedOption = undefined;
 	export let disabled = false;
 	export let placeholder = '';
@@ -29,6 +32,10 @@
 	};
 
 	$: getOptions(parent);
+
+	const dispatch = createEventDispatcher<{
+		select: Option['value'];
+	}>();
 </script>
 
 <!-- 
@@ -37,11 +44,15 @@
  -->
 <select
 	id={field}
+	{name}
 	class={`${$$props.class} mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
 	placeholder="abc"
 	class:disabled
 	{disabled}
 	bind:value={current}
+	on:change={() => {
+		dispatch('select', current?.value);
+	}}
 >
 	{#if !current?.value}
 		<option selected value={undefined}>{placeholder}</option>
