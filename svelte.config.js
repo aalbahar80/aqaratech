@@ -9,6 +9,10 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [preprocess({ postcss: true })],
 
+	// experimental: {
+	// 	prebundleSvelteLibraries: true,
+	// },
+
 	kit: {
 		adapter: adapter(),
 		vite: {
@@ -17,6 +21,7 @@ const config = {
 					$components: resolve('./src/lib/components'),
 					$lib: resolve('./src/lib'),
 					$models: resolve('.', './src/lib/models'),
+					$utils: resolve('.', './src/lib/utils'),
 				},
 			},
 			ssr: {
