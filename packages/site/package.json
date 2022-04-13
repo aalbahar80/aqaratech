@@ -66,7 +66,6 @@
     "jose": "^4.6.0",
     "jsdom": "^19.0.0",
     "jsonwebtoken": "^8.5.1",
-    "just-pascal-case": "^3.0.1",
     "lodash-es": "^4.17.21",
     "logrocket": "^2.2.1",
     "ms": "3.0.0-canary.1",
