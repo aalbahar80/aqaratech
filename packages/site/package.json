@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@cerbos/sdk": "^0.4.7",
-    "@faker-js/faker": "^6.1.2",
     "@felte/reporter-svelte": "^1.0.3",
     "@felte/reporter-tippy": "^1.0.5",
     "@felte/validator-zod": "^1.0.5",

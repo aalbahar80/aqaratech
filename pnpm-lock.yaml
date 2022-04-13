@@ -5,7 +5,6 @@ importers:
   packages/site:
     specifiers:
       '@cerbos/sdk': ^0.4.7
-      '@faker-js/faker': ^6.1.2
       '@felte/reporter-svelte': ^1.0.3
       '@felte/reporter-tippy': ^1.0.5
       '@felte/validator-zod': ^1.0.5
@@ -76,7 +75,6 @@ importers:
       zod: ^3.14.4
     devDependencies:
       '@cerbos/sdk': 0.4.7
-      '@faker-js/faker': 6.1.2
       '@felte/reporter-svelte': 1.0.3_svelte@3.47.0
       '@felte/reporter-tippy': 1.0.5_tippy.js@6.3.7
       '@felte/validator-zod': 1.0.5_zod@3.14.4
@@ -296,11 +294,6 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@faker-js/faker/6.1.2:
-    resolution: {integrity: sha512-QSvmexHCxeRUk1/yKmoEDaWB5Hohjvtim5g2JJwy8S/l0L4b3y/GxSpE6vN4SBoVGGahEQW21uqyRr7EofI35A==}
-    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
   /@felte/common/1.0.3:
