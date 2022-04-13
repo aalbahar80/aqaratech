@@ -5,7 +5,7 @@
     "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "scripts": {
-    "dev": "svelte-kit dev --host",
+    "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -78,6 +78,7 @@
     "remeda": "^0.0.32",
     "rollup-plugin-visualizer": "^5.6.0",
     "superjson": "^1.8.1",
+    "svelecte": "^3.7.3",
     "svelte": "^3.47.0",
     "svelte-check": "^2.6.0",
     "svelte-fa": "^2.4.0",

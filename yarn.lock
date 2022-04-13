@@ -4111,6 +4111,13 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+svelecte@^3.7.3:
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/svelecte/-/svelecte-3.7.3.tgz#c70b798b481329d93a36ca6018b943bd4642c22d"
+  integrity sha512-dH9KK3KkzKvOe9t3KUfcXb9I7xg+2USG6Ial13fxS7UboJj5Ic2imMZOuUWq76KtDiiB6UYYVB3qJf0ngqEzTQ==
+  dependencies:
+    svelte-tiny-virtual-list "^2.0.0"
+
 svelte-check@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.6.0.tgz#ddb590236a9f78a0a7ffa80d9de6460432003b57"
@@ -4163,6 +4170,11 @@ svelte-select@^4.4.7:
   version "4.4.7"
   resolved "https://registry.yarnpkg.com/svelte-select/-/svelte-select-4.4.7.tgz#fc85414af070487d68e438f7249c653178860af3"
   integrity sha512-fIf9Z8rPI6F8naHZ9wjXT0Pv5gLyhdHAFkHFJnCfVVfELE8e82uOoF0xEVQP6Kir+b4Q5yOvNAzZ61WbSU6A0A==
+
+svelte-tiny-virtual-list@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/svelte-tiny-virtual-list/-/svelte-tiny-virtual-list-2.0.3.tgz#e28c203bfe5f74608697fbeb541dc0868c160edf"
+  integrity sha512-f2V8xlB+5bnsQ2w02MqQvD/vTUrVr1QLacbDU8DNVNby/YMKX8b8IOft//eJId9Wv3ATaiIpnFpRD5ojt9MYtw==
 
 svelte@^3.47.0:
   version "3.47.0"
