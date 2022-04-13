@@ -135,6 +135,15 @@ export const LeaseModel = {
 	getLabel: (item: ILabel) =>
 		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
 	getOptions,
+	basicFields: [
+		'id',
+		'monthlyRent',
+		'start',
+		'end',
+		'shouldNotify',
+		'active',
+	] as const,
+	relationalFields: ['tenantId', 'unitId'] as const,
 };
 
 export const getBadge = (dates: { start: Date; end: Date }) => {

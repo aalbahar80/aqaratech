@@ -4,7 +4,7 @@
 	import trpc from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import type { GenericFormModel } from '$models/interfaces/entity.interface';
+	import type { Model } from '$models/interfaces/entity.interface';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
@@ -14,7 +14,7 @@
 	import AttributeEntity from './AttributeEntity.svelte';
 	import Input from './Input.svelte';
 
-	export let model: GenericFormModel;
+	export let model: Model;
 	export let data: z.infer<typeof model.schema>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
