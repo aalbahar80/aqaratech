@@ -3,7 +3,9 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
+	import type { SelectedOption } from '$lib/models/interfaces/common/option.interface';
 	import { addToast } from '$lib/stores/toast';
+	import { classes } from '$lib/utils';
 	import { forceDate, forceDateToInput } from '$lib/utils/common';
 	import {
 		generateSchedule,
@@ -21,12 +23,10 @@
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import { onMount } from 'svelte';
-	import Select from 'svelte-select';
 	import { scale } from 'svelte/transition';
 	import { v4 as uuidv4 } from 'uuid';
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
-	import ComboBox from '../form/ComboBox.svelte';
 	import Input from '../form/Input.svelte';
 	import SelectEntity from '../form/SelectEntity.svelte';
 
@@ -38,25 +38,9 @@
 		...predefined,
 	};
 
-	let propertyId = lease.propertyId;
+	// TODO handle predefined property
+	let property: SelectedOption | undefined = undefined;
 
-	let unitList: { id: string; label: string }[] = [];
-	const getUnitList = async (propertyIdFilter: string) => {
-		unitList = await trpc
-			.query('units:search', { propertyId: propertyIdFilter })
-			.then((units) =>
-				units.map((unit) => ({
-					id: unit.id,
-					label: unit.unitNumber,
-				})),
-			);
-	};
-
-	$: getUnitList(propertyId);
-
-	function classes(...classList: string[]) {
-		return classList.filter(Boolean).join(' ');
-	}
 	const {
 		form,
 		errors,
@@ -206,19 +190,12 @@
 						>
 							<div class="w-full">
 								<!-- optionLabel={oldLease?.tenant ?? null} -->
-								<ComboBox
-									entity="tenants"
-									value={lease.tenantId}
-									on:init={(e) => {
-										setData('tenantId', e.detail.id);
-									}}
+								<SelectEntity
+									field="tenantId"
+									placeholder="Choose a tenant"
 									on:select={(e) => {
-										setData('tenantId', e.detail.id);
+										setData('tenantId', e.detail);
 									}}
-									on:clear={() => {
-										setData('tenantId', '');
-									}}
-									invalidText={getValue($errors, 'tenantId')?.[0]}
 								/>
 							</div>
 						</div>
@@ -253,52 +230,29 @@
 							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
 						>
 							<div class="sm:w-3/4">
-								<!-- <SelectEntity
-									field="unitId"
-									bind:current={unit}
-									parent={property}
-									disabled={!property?.value || !client?.value}
-									placeholder="Choose a unit"
-								/> -->
-								<ComboBox
-									entity="properties"
-									value={lease.propertyId}
-									on:select={(e) => {
-										propertyId = e.detail.id;
-										setData('unitId', '');
-									}}
-									on:clear={() => {
-										propertyId = '';
-										setData('unitId', '');
-									}}
-									invalidText={getValue($errors, 'unitId')?.[0]}
+								<SelectEntity
+									field="propertyId"
+									bind:current={property}
+									placeholder="Choose a property"
 								/>
 							</div>
-							{#if propertyId}
-								{#key propertyId}
-									<div class="sm:w-1/4" in:scale>
-										<label
-											for="unit"
-											class="block text-sm font-medium text-gray-700"
-										>
-											Unit</label
-										>
-										<Select
-											id="unit"
-											items={unitList}
-											optionIdentifier="id"
-											value={lease.unitId}
-											on:select={(e) => {
-												setData('unitId', e.detail.id);
-											}}
-											on:clear={() => {
-												setData('unitId', '');
-											}}
-											hasError={!!getValue($errors, 'unitId')}
-										/>
-									</div>
-								{/key}
-							{/if}
+							<div class="sm:w-1/4" in:scale>
+								<label
+									for="unit"
+									class="block text-sm font-medium text-gray-700"
+								>
+									Unit</label
+								>
+								<SelectEntity
+									field="unitId"
+									parent={property}
+									disabled={!property?.value}
+									placeholder="Choose a unit"
+									on:select={(e) => {
+										setData('unitId', e.detail);
+									}}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
