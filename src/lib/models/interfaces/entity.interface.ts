@@ -1,4 +1,4 @@
-import type { InferMutationInput, InferQueryOutput } from '$lib/client/trpc';
+import type { InferMutationInput } from '$lib/client/trpc';
 import type { ClientModel } from './client.interface';
 import type { LeaseModel } from './lease.interface';
 import type { MaintenanceOrderModel } from './maintenanceOrder.interface';
@@ -6,7 +6,6 @@ import type { PropertyModel } from './property.interface';
 import type { TenantModel } from './tenant.interface';
 import type { TransactionModel } from './transaction.interface';
 import type { UnitModel } from './unit.interface';
-import type { RelationalField } from './utils/get-model';
 
 export type Entity =
 	| 'properties'

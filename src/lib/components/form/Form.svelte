@@ -2,23 +2,17 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
+	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
+	import type { GenericFormModel } from '$models/interfaces/entity.interface';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import startCase from 'lodash-es/startCase.js';
-	import Button from '../Button.svelte';
-	import ComboBox from './ComboBox.svelte';
-	import Input from './Input.svelte';
-	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import type { z } from 'zod';
-	import RadioEntity from './RadioEntity.svelte';
+	import Button from '../Button.svelte';
 	import AttributeEntity from './AttributeEntity.svelte';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
-	import type {
-		Entity,
-		GenericFormModel,
-	} from '$models/interfaces/entity.interface';
+	import Input from './Input.svelte';
 
 	export let model: GenericFormModel;
 	export let data: z.infer<typeof model.schema>;
@@ -69,6 +63,7 @@
 	<title>{`Edit ${model.singular}`}</title>
 </svelte:head>
 
+<pre>{JSON.stringify($data2, null, 2)}</pre>
 <div class="mx-auto h-full max-w-xl py-8">
 	<form
 		use:form
@@ -97,9 +92,9 @@
 						{/each}
 						{#if 'relationalFields' in model}
 							{#each model.relationalFields as field}
+								<pre>{JSON.stringify(field, null, 2)}</pre>
 								<SelectEntity
 									{field}
-									current={data[field]}
 									on:select={(e) => {
 										setData(field, e.detail);
 									}}

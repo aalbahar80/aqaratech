@@ -35,7 +35,7 @@ export const schema = z.object({
 
 const getOptions = async () => {
 	const result = await trpc.query('clients:list', {
-		size: 50,
+		size: 20,
 	});
 	const options = result.data.map((item) => ({
 		value: item.id,

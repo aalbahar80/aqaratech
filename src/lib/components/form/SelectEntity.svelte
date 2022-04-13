@@ -27,7 +27,8 @@
 			options = await model.getOptions({
 				parentId: parent?.value ?? undefined,
 			});
-			options = await model.getOptions({});
+		} else {
+			options = await model.getOptions();
 		}
 	};
 
