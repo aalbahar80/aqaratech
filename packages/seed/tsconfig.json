@@ -1,6 +1,6 @@
 {
-    "extends": "../tsconfig.json",
-    "include": [
-        "./**/*.ts",
-    ]
+	"extends": "@tsconfig/esm/tsconfig.json",
+	"compilerOptions": {
+		"moduleResolution": "Node"
+	}
 }
