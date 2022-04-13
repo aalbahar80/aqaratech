@@ -54,7 +54,6 @@ const PropertyModelBase: IEntity<'properties'> = {
 		number: '',
 		clientId: '',
 	}),
-	relationalFields: ['clientId'],
 };
 
 interface ILabel {
@@ -84,4 +83,5 @@ export const PropertyModel = {
 	getLabel,
 	getOptions,
 	basicFields: ['area', 'block', 'street', 'avenue', 'number'] as const,
+	relationalFields: ['clientId'] as const,
 };

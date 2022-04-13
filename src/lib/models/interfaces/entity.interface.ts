@@ -21,7 +21,6 @@ export interface IEntity<T extends Entity> {
 	singular: string;
 	plural: string;
 	defaultForm: () => InferMutationInput<`${T}:create`>;
-	relationalFields?: RelationalField[];
 	// dropdowns: [''];
 }
 

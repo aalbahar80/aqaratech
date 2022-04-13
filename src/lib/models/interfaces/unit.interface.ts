@@ -61,7 +61,6 @@ const UnitModelBasic: IEntity<'units'> = {
 		type: '',
 		propertyId: '',
 	}),
-	relationalFields: ['propertyId'],
 };
 
 interface ILabel {
@@ -86,4 +85,5 @@ export const UnitModel = {
 		'floor',
 		'usage',
 	] as const,
+	relationalFields: ['propertyId'] as const,
 };
