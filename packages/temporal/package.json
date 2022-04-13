@@ -1,0 +1,11 @@
+{
+    "name": "@self/temporal",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "tsc --build --watch temporal/tsconfig.json",
+        "build": "tsc --build temporal/tsconfig.json",
+        "worker": "node --loader ts-node/esm temporal/src/worker.ts",
+        "worker:watch": "nodemon --watch './temporal/lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' temporal/src/worker.ts"
+    },
+    "type": "module"
+}
