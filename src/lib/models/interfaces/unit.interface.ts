@@ -85,5 +85,5 @@ export const UnitModel = {
 		'marketRent',
 		'floor',
 		'usage',
-	],
+	] as const,
 };

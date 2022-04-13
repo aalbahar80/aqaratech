@@ -90,5 +90,5 @@ export const TenantModel = {
 		'nationality',
 		'residencyNum',
 		'residencyEnd',
-	],
+	] as const,
 };

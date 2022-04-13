@@ -1,4 +1,4 @@
-import type { InferMutationInput } from '$lib/client/trpc';
+import type { InferMutationInput, InferQueryOutput } from '$lib/client/trpc';
 import type { ClientModel } from './client.interface';
 import type { LeaseModel } from './lease.interface';
 import type { MaintenanceOrderModel } from './maintenanceOrder.interface';
@@ -33,3 +33,5 @@ export type Model =
 	| typeof TenantModel
 	| typeof TransactionModel
 	| typeof MaintenanceOrderModel;
+
+export type GenericFormModel = Exclude<Model, typeof LeaseModel>;

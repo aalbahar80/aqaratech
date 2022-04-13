@@ -83,5 +83,5 @@ export const PropertyModel = {
 	schema,
 	getLabel,
 	getOptions,
-	basicFields: ['area', 'block', 'street', 'avenue', 'number'],
+	basicFields: ['area', 'block', 'street', 'avenue', 'number'] as const,
 };

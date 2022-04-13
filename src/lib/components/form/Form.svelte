@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
-	import type { Model } from '$lib/models/interfaces/entity.interface';
 	import { addToast } from '$lib/stores/toast';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -15,9 +14,14 @@
 	import type { z } from 'zod';
 	import RadioEntity from './RadioEntity.svelte';
 	import AttributeEntity from './AttributeEntity.svelte';
+	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import type {
+		Entity,
+		GenericFormModel,
+	} from '$models/interfaces/entity.interface';
 
-	export let model: Model;
-	export let data: Record<string, any>;
+	export let model: GenericFormModel;
+	export let data: z.infer<typeof model.schema>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -61,7 +65,10 @@
 	});
 </script>
 
-<pre>{JSON.stringify($data2, null, 2)}</pre>
+<svelte:head>
+	<title>{`Edit ${model.singular}`}</title>
+</svelte:head>
+
 <div class="mx-auto h-full max-w-xl py-8">
 	<form
 		use:form
@@ -92,7 +99,7 @@
 							{#each model.relationalFields as field}
 								<SelectEntity
 									{field}
-									current={data?.[field]}
+									current={data[field]}
 									on:select={(e) => {
 										setData(field, e.detail);
 									}}

@@ -9,6 +9,7 @@ import {
 	type Entity,
 	type Model,
 } from '$models/interfaces';
+import type { GenericFormModel } from '../entity.interface';
 
 export type RelationalField =
 	| 'clientId'
@@ -29,6 +30,7 @@ export function getModel(
 export function getModel(entity: 'tenants' | 'tenantId'): typeof TenantModel;
 export function getModel(entity: 'transactions'): typeof TransactionModel;
 
+export function getModel(entity: Exclude<Entity, 'leases'>): GenericFormModel;
 export function getModel(
 	entity: RelationalField,
 ):
