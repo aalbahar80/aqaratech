@@ -16,7 +16,7 @@
 	import Input from './Input.svelte';
 
 	export let model: Model;
-	export let data: z.infer<typeof model.schema>;
+	export let data: Partial<z.infer<typeof model.schema>>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 

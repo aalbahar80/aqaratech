@@ -10,7 +10,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fuse from 'fuse.js';
 	import startCase from 'lodash-es/startCase.js';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import Select from 'svelte-select';
 
 	export let name = '';
