@@ -2,28 +2,32 @@
 // node --loader ts-node/esm prisma/seed.ts
 // OR npx prisma db seed
 
-import * as fakerAll from '@faker-js/faker';
-import * as util from 'util';
-import pkg from '@prisma/client';
+import * as fakerAll from "@faker-js/faker";
+import * as util from "util";
 import {
 	areas,
 	coordinates,
 	expenseCategories,
-} from '../src/lib/config/constants.js';
-import { addMonths, addDays, subDays } from 'date-fns';
+} from "../site/src/lib/config/constants.js";
+import { addMonths, addDays, subDays } from "date-fns";
 
+// TODO avoid ts-ignore below by fixing tsconfig.json
+// @ts-ignore
+import pkg from "@prisma/client";
+import type { PrismaClient as PrismaClientType } from "@prisma/client";
 const { PrismaClient } = pkg;
-
 const prisma = new PrismaClient({
-	log: [{ level: 'query', emit: 'event' }, 'info', 'warn', 'error'],
-	errorFormat: 'pretty',
-});
-prisma.$on('query', (e) => {
+	log: [{ level: "query", emit: "event" }, "info", "warn", "error"],
+	errorFormat: "pretty",
+}) as PrismaClientType;
+
+// @ts-ignore
+prisma.$on("query", (e) => {
 	console.log(e);
 });
 
 const { faker } = fakerAll;
-faker.locale = 'ar';
+faker.locale = "ar";
 
 const createdAt = () => faker.date.past(4);
 const updatedAt = () => faker.date.past(4);
@@ -40,7 +44,7 @@ const fakeTenant = () => ({
 		.toString(),
 	email: faker.internet.email(),
 	dob: faker.date.past(),
-	phone: faker.phone.phoneNumber('1#######'),
+	phone: faker.phone.phoneNumber("1#######"),
 	passportNum: faker.datatype
 		.number({ min: 100000000, max: 999999999 })
 		.toString(),
@@ -62,12 +66,12 @@ const fakeUnit = (propertyId: string) => ({
 	marketRent: +faker.finance.amount(100, 3000, 0),
 	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	type: faker.random.arrayElement([
-		'شقة',
-		'محل',
-		'سرداب',
-		'مخزن',
-		'شاليه',
-		'بيت',
+		"شقة",
+		"محل",
+		"سرداب",
+		"مخزن",
+		"شاليه",
+		"بيت",
 	]),
 	propertyId,
 });
@@ -103,7 +107,7 @@ const fakeClient = () => ({
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
 	email: faker.internet.email(),
-	phone: faker.phone.phoneNumber('1#######'),
+	phone: faker.phone.phoneNumber("1#######"),
 	dob: faker.date.past(),
 });
 
@@ -111,19 +115,19 @@ const fakeTransaction = (
 	leaseId: string,
 	amount: number,
 	leaseStart: Date,
-	count: number,
+	count: number
 ) => {
 	const nextMonth = new Date(
 		leaseStart.getFullYear(),
 		leaseStart.getMonth() + 1,
-		1,
+		1
 	);
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: leaseStart,
 		updatedAt: leaseStart,
 		amount,
-		memo: 'RENT',
+		memo: "RENT",
 		postDate: addMonths(nextMonth, count),
 		dueDate: addMonths(nextMonth, count),
 		isPaid: Math.random() > 0.15,
@@ -203,18 +207,18 @@ async function main({
 	const properties = clients.flatMap((client) =>
 		Array.from(
 			{ length: faker.datatype.number({ min, max: propertyMax }) },
-			() => fakeProperty(client.id),
-		),
+			() => fakeProperty(client.id)
+		)
 	);
 	const units = properties.flatMap((property) =>
 		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-			fakeUnit(property.id),
-		),
+			fakeUnit(property.id)
+		)
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit) => {
-		let date = new Date('2018-01-01');
+		let date = new Date("2018-01-01");
 		let tenantN = fakeTenant();
 		tenants.push(tenantN);
 		while (date < new Date()) {
@@ -249,8 +253,8 @@ async function main({
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
 				Array.from({ length: 12 }, (_, n) =>
-					fakeTransaction(lease.id, lease.monthlyRent, lease.start, n),
-				),
+					fakeTransaction(lease.id, lease.monthlyRent, lease.start, n)
+				)
 		  )
 		: [];
 
@@ -337,15 +341,16 @@ async function main({
 					maintenanceOrders,
 					expenses,
 				},
-				{ showHidden: false, depth: null, colors: true },
-			),
+				{ showHidden: false, depth: null, colors: true }
+			)
 		);
+		console.log("Sample printed, nothing done to database.");
 		return;
 	}
 
 	try {
 		console.log(
-			`perparing to insert \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`,
+			`perparing to insert \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
 		);
 		// TODO add a NODE_ENV check to only run this in development
 		if (clean) {
@@ -355,24 +360,24 @@ async function main({
 		await prisma.client.createMany({
 			data: clients,
 		});
-		console.log('clients created');
+		console.log("clients created");
 		await prisma.property.createMany({
 			data: properties,
 		});
-		console.log('properties created');
+		console.log("properties created");
 		await prisma.unit.createMany({
 			data: units,
 		});
-		console.log('units created');
+		console.log("units created");
 		await prisma.tenant.createMany({
 			data: tenants,
 		});
-		console.log('tenants created');
+		console.log("tenants created");
 		if (leases.length) {
 			await prisma.lease.createMany({
 				data: leases,
 			});
-			console.log('leases created');
+			console.log("leases created");
 		}
 		// define a function to split the maintenance orders into n chunks
 		const split = <T>(array: T[], n: number): T[][] => {
@@ -394,7 +399,7 @@ async function main({
 					data: chunk,
 				});
 			}),
-				console.log('transactions created');
+				console.log("transactions created");
 		}
 
 		if (maintenanceOrders.length) {
@@ -406,13 +411,13 @@ async function main({
 					data: chunk,
 				});
 			}),
-				console.log('maintenance orders created');
+				console.log("maintenance orders created");
 		}
 
 		await prisma.expense.createMany({
 			data: expenses,
 		});
-		console.log('expenses created');
+		console.log("expenses created");
 	} catch (e) {
 		console.error(e);
 	}
