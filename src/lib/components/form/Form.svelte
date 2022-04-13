@@ -4,6 +4,7 @@
 	import trpc from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
+	import { forceDateToInput, objectKeys } from '$lib/utils/common';
 	import type { Model } from '$models/interfaces/entity.interface';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -26,6 +27,24 @@
 		data: data2,
 		setData,
 	} = createForm<z.infer<typeof model.schema>>({
+		transform: (values) => {
+			const original = values as z.infer<typeof model.schema>;
+			const dateFields = [
+				'dob',
+				'end',
+				'start',
+				'dueDate',
+				'postDate',
+				'residencyEnd',
+				'completedAt',
+			];
+			objectKeys(original).forEach((key) => {
+				if (dateFields.includes(key) && original[key]) {
+					original[key] = forceDateToInput(original[key]!);
+				}
+			});
+			return original;
+		},
 		initialValues: data,
 		schema: model.schema,
 		validate: validateSchema(model.schema),

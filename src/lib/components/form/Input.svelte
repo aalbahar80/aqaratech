@@ -89,12 +89,12 @@
 			break;
 	}
 	const dispatch = createEventDispatcher();
-	onMount(() => {
-		// this creates the field in Felte's data store (non-native input elements)
-		dispatch('select', {
-			value,
-		});
-	});
+	// onMount(() => {
+	// 	// this creates the field in Felte's data store (non-native input elements)
+	// 	dispatch('select', {
+	// 		value,
+	// 	});
+	// });
 	function classes(...classes: string[]) {
 		return classes.filter(Boolean).join(' ');
 	}
