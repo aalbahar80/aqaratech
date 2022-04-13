@@ -47,7 +47,9 @@ const getOptions = async () => {
 const ClientModelBase: IEntity<'clients'> = {
 	name: 'clients',
 	singular: 'client',
+	singularCap: 'Client',
 	plural: 'clients',
+	pluralCap: 'Clients',
 	defaultForm: () => ({
 		firstName: '',
 		lastName: '',

@@ -18,7 +18,9 @@ export type Entity =
 export interface IEntity<T extends Entity> {
 	name: T;
 	singular: string;
+	singularCap: string;
 	plural: string;
+	pluralCap: string;
 	defaultForm: () => InferMutationInput<`${T}:create`>;
 	// dropdowns: [''];
 }

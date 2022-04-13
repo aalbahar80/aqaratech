@@ -7,32 +7,38 @@
 		getModel,
 		type RelationalField,
 	} from '$lib/models/interfaces/utils/get-model';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
-	export let parent: SelectedOption = undefined;
+	export let initialParent: string | undefined = undefined;
 	export let field: RelationalField;
-	/**	 Only provide a name if you want Felte to handle this input. */
-	export let name: RelationalField | undefined = undefined;
-	export let current: SelectedOption = undefined;
+	export let selected: SelectedOption = undefined;
 	export let disabled = false;
-	export let placeholder = '';
+	export let title: string | undefined = undefined;
+	export let hideLabel = false;
+
+	export const clear = () => {
+		selected = undefined;
+		dispatch('select', selected);
+	};
 
 	const model = getModel(field);
 
-	let options: Option[] = [];
+	let options: Option[] = selected ? [selected] : [];
 
-	const getOptions = async (parent: Option | undefined) => {
-		current = undefined;
+	export const getOptions = async (parentId: string | undefined | null) => {
 		if (model.name !== 'clients' && model.name !== 'leases') {
 			options = await model.getOptions({
-				parentId: parent?.value ?? undefined,
+				parentId: parentId ?? undefined,
 			});
 		} else {
-			options = await model.getOptions();
+			options = [...(await model.getOptions())];
 		}
+		selected = options.find((option) => option.value === selected?.value);
 	};
 
-	$: getOptions(parent);
+	onMount(async () => {
+		await getOptions(initialParent);
+	});
 
 	const dispatch = createEventDispatcher<{
 		select: Option['value'];
@@ -43,25 +49,23 @@
 	@component 
 	Prefetch all possible options and render a native html `<select>`
  -->
+{#if !hideLabel}
+	<label for={field} class="block text-sm font-medium text-gray-700">
+		{title ?? model.singularCap}
+	</label>
+{/if}
 <select
 	id={field}
-	{name}
-	class={`${$$props.class} mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
-	placeholder="abc"
+	class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
 	class:disabled
 	{disabled}
-	bind:value={current}
+	bind:value={selected}
 	on:change={() => {
-		dispatch('select', current?.value);
+		dispatch('select', selected?.value);
 	}}
 >
-	{#if !current?.value}
-		<option selected value={undefined}>{placeholder}</option>
-	{/if}
 	{#each options as option (option.value)}
-		<option value={option} selected={option.value === current?.value}
-			>{option.label}</option
-		>
+		<option value={option}>{option.label}</option>
 	{/each}
 </select>
 

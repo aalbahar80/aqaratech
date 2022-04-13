@@ -49,7 +49,9 @@ const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
 const UnitModelBasic: IEntity<'units'> = {
 	name: 'units',
 	singular: 'unit',
+	singularCap: 'Unit',
 	plural: 'units',
+	pluralCap: 'Units',
 	defaultForm: () => ({
 		unitNumber: '',
 		bed: null,
@@ -85,5 +87,5 @@ export const UnitModel = {
 		'floor',
 		'usage',
 	] as const,
-	relationalFields: ['propertyId'] as const,
+	// relationalFields: ['clientId', 'propertyId'] as const,
 };

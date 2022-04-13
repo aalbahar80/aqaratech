@@ -106,7 +106,9 @@ const getOptions = async () => {
 const LeaseModelBase: IEntity<'leases'> = {
 	name: 'leases',
 	singular: 'lease',
+	singularCap: 'Lease',
 	plural: 'leases',
+	pluralCap: 'Leases',
 	defaultForm: () => ({
 		start: new Date(),
 		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),

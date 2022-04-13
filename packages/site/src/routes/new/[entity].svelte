@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-	<title>{`New ${model.singular}`}</title>
+	<title>{`New ${model.singularCap}`}</title>
 </svelte:head>
 
 <Form {model} {data} />

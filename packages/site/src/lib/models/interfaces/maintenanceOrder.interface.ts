@@ -29,7 +29,9 @@ const schema = z.object({
 const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
 	name: 'maintenanceOrders',
 	singular: 'maintenanceOrder',
+	singularCap: 'Maintenance Order',
 	plural: 'maintenanceOrders',
+	pluralCap: 'Maintenance Orders',
 	defaultForm: () => ({
 		completedAt: '',
 		title: '',

@@ -54,7 +54,9 @@ const getOptions = async ({ query }: { query?: string | undefined }) => {
 const TenantModelBase: IEntity<'tenants'> = {
 	name: 'tenants',
 	singular: 'tenant',
+	singularCap: 'Tenant',
 	plural: 'tenants',
+	pluralCap: 'Tenants',
 	defaultForm: () => ({
 		firstName: '',
 		lastName: '',

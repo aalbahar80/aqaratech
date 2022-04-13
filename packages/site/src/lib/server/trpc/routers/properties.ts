@@ -63,23 +63,8 @@ export const properties = createRouter()
 				where: {
 					id,
 				},
-				select: {
-					id: true,
-					createdAt: true,
-					updatedAt: true,
-					avenue: true,
-					street: true,
-					block: true,
-					number: true,
-					area: true,
-					clientId: true,
-					client: {
-						select: {
-							id: true,
-							firstName: true,
-							lastName: true,
-						},
-					},
+				include: {
+					client: true,
 				},
 			});
 

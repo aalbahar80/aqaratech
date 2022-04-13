@@ -9,7 +9,6 @@
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
-	import startCase from 'lodash-es/startCase.js';
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import AttributeEntity from './AttributeEntity.svelte';
@@ -79,7 +78,7 @@
 </script>
 
 <svelte:head>
-	<title>{`Edit ${model.singular}`}</title>
+	<title>{`Edit ${model.singularCap}`}</title>
 </svelte:head>
 
 <pre>{JSON.stringify($data2, null, 2)}</pre>
@@ -92,9 +91,10 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{data?.id ? 'Edit ' : 'New '}{startCase(model.singular)}
+						{data?.id ? 'Edit ' : 'New '}{model.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
+						<slot {setData} />
 						{#each model.basicFields as field}
 							<Input
 								name={field}
@@ -111,7 +111,6 @@
 						{/each}
 						{#if 'relationalFields' in model}
 							{#each model.relationalFields as field}
-								<pre>{JSON.stringify(field, null, 2)}</pre>
 								<SelectEntity
 									{field}
 									on:select={(e) => {

@@ -15,7 +15,9 @@ const schema = z.object({
 const TransactionModelBase: IEntity<'transactions'> = {
 	name: 'transactions',
 	singular: 'transaction',
+	singularCap: 'Transaction',
 	plural: 'transactions',
+	pluralCap: 'Transactions',
 	defaultForm: () => ({
 		dueDate: new Date(),
 		postDate: new Date(),

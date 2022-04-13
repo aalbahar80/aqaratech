@@ -45,7 +45,9 @@ const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
 const PropertyModelBase: IEntity<'properties'> = {
 	name: 'properties',
 	singular: 'property',
+	singularCap: 'Property',
 	plural: 'properties',
+	pluralCap: 'Properties',
 	defaultForm: () => ({
 		area: '',
 		block: '',
