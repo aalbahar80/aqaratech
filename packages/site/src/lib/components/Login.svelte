@@ -1,8 +1,3 @@
-<script lang="ts">
-	import { LockClosed } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-</script>
-
 <!-- This uses uses <html style:bg-gray-50"> -->
 <div
 	class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
@@ -73,22 +68,6 @@
 			</div>
 
 			<div>
-				<!-- Plain Button -->
-				<button
-					type="submit"
-					class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>
-					<span class="absolute inset-y-0 left-0 flex items-center pl-3">
-						<Icon
-							src={LockClosed}
-							theme="solid"
-							class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-							aria-hidden="true"
-						/>
-					</span>
-					Sign in
-				</button>
-
 				<!-- Auth0 Auth Button -->
 				<a
 					href="/api/auth/login"

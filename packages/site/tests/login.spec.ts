@@ -4,8 +4,15 @@ test.beforeEach(async ({ page }) => {
 	// TODO see more succint way of writing this:
 	// https://playwright.dev/docs/test-auth#sign-in-with-beforeeach
 	// Runs before each test and signs in each page.
-	await page.goto('http://localhost:3000/');
-	await page.locator('text=Log in').click();
+
+	// Home Page
+	// await page.goto('http://localhost:3000/');
+	// await page.locator('text=Log in').click();
+
+	// Directly to login page
+	await page.goto('http://localhost:3000/login');
+	await page.locator('a:has-text("Sign in")').click();
+
 	// await expect(page).toHaveURL(
 	// 	'https://dev-eehvhdp2.eu.auth0.com/u/login?state=hKFo2SBxdmtTUXJVV0M1YThlbHVhb1llRUFROG9VdEdIcWFsT6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHJwSzUtc200ZDZOdTNOUWtENElsSGRoVTZHQ1BaTDdio2NpZNkgejZvcXlPdVBMYW82WGhKZUNqZTl0WjhaYmlKYTV6Y3Q',
 	// );
