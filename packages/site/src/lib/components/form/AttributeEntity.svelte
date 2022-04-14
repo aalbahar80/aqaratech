@@ -44,6 +44,8 @@
 		},
 	];
 
+	let propertySelect: SelectEntity;
+	let unitSelect: SelectEntity;
 	// clear when options change
 	let radio: RadioEntity<Field>;
 	$: {
@@ -54,22 +56,29 @@
 
 <SelectEntity
 	field="clientId"
-	bind:current={client}
-	placeholder="Choose a client"
+	bind:selected={client}
+	on:select={(e) => {
+		propertySelect.clear();
+		propertySelect.getOptions(e.detail);
+	}}
 />
 <SelectEntity
+	bind:this={propertySelect}
 	field="propertyId"
-	parent={client}
-	bind:current={property}
+	initialParent={client?.value ?? undefined}
+	bind:selected={property}
 	disabled={!client?.value}
-	placeholder="Choose a property"
+	on:select={(e) => {
+		unitSelect.clear();
+		unitSelect.getOptions(e.detail);
+	}}
 />
 <SelectEntity
+	bind:this={unitSelect}
 	field="unitId"
-	bind:current={unit}
-	parent={property}
+	bind:selected={unit}
+	initialParent={property?.value ?? undefined}
 	disabled={!property?.value || !client?.value}
-	placeholder="Choose a unit"
 />
 
 <RadioEntity bind:this={radio} options={radioOptions} on:select />

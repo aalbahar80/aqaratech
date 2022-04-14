@@ -160,6 +160,7 @@
 			handleAmountChange(lease.monthlyRent);
 		}
 	});
+	let unitSelect: SelectEntity;
 </script>
 
 <form use:form>
@@ -192,7 +193,6 @@
 								<!-- optionLabel={oldLease?.tenant ?? null} -->
 								<SelectEntity
 									field="tenantId"
-									placeholder="Choose a tenant"
 									on:select={(e) => {
 										setData('tenantId', e.detail);
 									}}
@@ -232,22 +232,19 @@
 							<div class="sm:w-3/4">
 								<SelectEntity
 									field="propertyId"
-									bind:current={property}
-									placeholder="Choose a property"
+									bind:selected={property}
+									on:select={(e) => {
+										unitSelect.clear();
+										unitSelect.getOptions(e.detail);
+									}}
 								/>
 							</div>
 							<div class="sm:w-1/4" in:scale>
-								<label
-									for="unit"
-									class="block text-sm font-medium text-gray-700"
-								>
-									Unit</label
-								>
 								<SelectEntity
+									bind:this={unitSelect}
 									field="unitId"
-									parent={property}
+									initialParent={property?.value ?? undefined}
 									disabled={!property?.value}
-									placeholder="Choose a unit"
 									on:select={(e) => {
 										setData('unitId', e.detail);
 									}}

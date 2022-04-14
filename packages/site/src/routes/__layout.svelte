@@ -14,8 +14,7 @@
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
 		// @ts-ignore
 		trpc.runtime.fetch = fetch;
-		// return protectRoute(session, pathname);
-		return {};
+		return protectRoute(session, pathname);
 	};
 </script>
 
