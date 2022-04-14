@@ -5,37 +5,10 @@ import { PropertyModel } from '$models/interfaces/property.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-interface AccessTokenP {
-	roles: string[];
-	userMetadata: {
-		idInternal?: string;
-	};
-}
-
-interface IPropertyAuthz {
-	clientId: string;
-}
-
-const isAuthorized = (token: AccessTokenP, p: IPropertyAuthz): boolean => {
-	if (token.roles.includes('admin')) {
-		return true;
-	} else if (token.roles.includes('property-owner')) {
-		return p.clientId === token.userMetadata?.idInternal;
-	}
-	return false;
-};
-
-const authzMany = <T extends IPropertyAuthz>(
-	token: AccessTokenP,
-	p: T[],
-): T[] => {
-	return p.filter((property) => isAuthorized(token, property));
-};
-
 export const properties = createRouter()
 	.query('read', {
 		input: z.string(),
-		resolve: async ({ ctx, input: id }) => {
+		resolve: async ({ input: id }) => {
 			const data = await prismaClient.property.findUnique({
 				where: {
 					id,
@@ -59,16 +32,12 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			const allowed = isAuthorized(ctx.accessToken, data);
-			if (!allowed) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
-			}
 			return data;
 		},
 	})
 	.query('basic', {
 		input: z.string(),
-		resolve: async ({ ctx, input: id }) => {
+		resolve: async ({ input: id }) => {
 			const data = await prismaClient.property.findUnique({
 				where: {
 					id,
@@ -84,16 +53,12 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			const allowed = isAuthorized(ctx.accessToken, data);
-			if (!allowed) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
-			}
 			return data;
 		},
 	})
 	.query('list', {
 		input: paginationSchema,
-		resolve: async ({ ctx, input }) => {
+		resolve: async ({ input }) => {
 			const data = await prismaClient.property.findMany({
 				take: input.size,
 				skip: input.size * (input.pageIndex - 1),
@@ -116,7 +81,7 @@ export const properties = createRouter()
 			};
 
 			return {
-				data: authzMany(ctx.accessToken, data),
+				data,
 				pagination,
 			};
 		},
@@ -126,7 +91,7 @@ export const properties = createRouter()
 			query: z.string().optional(),
 			clientId: z.string().uuid().optional(),
 		}),
-		resolve: async ({ ctx, input: { query, clientId } }) => {
+		resolve: async ({ input: { query, clientId } }) => {
 			let filter = {};
 			if (clientId) {
 				filter = { clientId };
@@ -150,7 +115,7 @@ export const properties = createRouter()
 				},
 				where: filter,
 			});
-			return authzMany(ctx.accessToken, data);
+			return data;
 		},
 	})
 	.query('count', {
