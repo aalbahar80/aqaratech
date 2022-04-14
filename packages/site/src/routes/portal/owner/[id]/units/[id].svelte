@@ -5,7 +5,7 @@
 	import type { Load } from './[id]';
 
 	export const load: Load = async ({ params }) => {
-		const unit = await trpc.query('units:read', params.id);
+		const unit = await trpc.query('owner:units:read', params.id);
 		return { props: { unit } };
 	};
 </script>

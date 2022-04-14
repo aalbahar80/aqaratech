@@ -10,9 +10,22 @@ import * as jose from 'jose';
 type TRPCHandler = Parameters<typeof createTRPCHandle>;
 type ResponseMetaFn = NonNullable<TRPCHandler[0]['responseMeta']>;
 
+interface Admin {
+	isAdmin: true;
+	isOwner: false;
+	id: undefined;
+}
+interface Owner {
+	isAdmin: false;
+	isOwner: true;
+	id: string;
+}
+
+type Authz = Admin | Owner;
+
 interface Auth0UserMeta {
 	userMetadata: {
-		idInternal?: string;
+		idInternal: string;
 	};
 }
 
@@ -72,12 +85,38 @@ export const createRouter = () => {
 			if (!payload.sub) {
 				throw new TRPCError({ code: 'UNAUTHORIZED' });
 			}
-			const accessToken = {
-				...payload,
-				roles: payload['https://letand.be/roles'] as string[],
+			const metadata = {
 				userMetadata: payload[
 					'https://letand.be/userMetadata'
 				] as Auth0UserMeta['userMetadata'],
+			};
+			const roles = payload['https://letand.be/roles'] as string[];
+			if (!roles || !roles.length) {
+				throw new TRPCError({ code: 'UNAUTHORIZED' });
+			}
+			let authz: Authz;
+			const isOwner = roles.includes('property-owner');
+			const isAdmin = roles.includes('admin');
+			if (isOwner) {
+				authz = {
+					isOwner,
+					isAdmin: false,
+					id: metadata.userMetadata.idInternal,
+				};
+			} else if (isAdmin) {
+				authz = {
+					isAdmin,
+					isOwner: false,
+					id: undefined,
+				};
+			} else {
+				throw new TRPCError({ code: 'UNAUTHORIZED' });
+			}
+			const accessToken = {
+				...payload,
+				roles,
+				...metadata,
+				...authz,
 			};
 			console.log('grab new JWKS took', Date.now() - start, 'ms');
 			return next({
