@@ -34,7 +34,7 @@
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc.query('clients:dashboard', params.id), // TODO use read?
+			trpc.query('charts:client', { clientId: params.id }), // TODO use read?
 			trpc.query('charts:income', {
 				...defaultFilter,
 			}),
@@ -58,7 +58,7 @@
 </script>
 
 <script lang="ts">
-	export let client: InferQueryOutput<'clients:dashboard'>;
+	export let client: InferQueryOutput<'charts:client'>;
 	export let income: InferQueryOutput<'charts:income'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let occupancy: InferQueryOutput<'charts:occupancy'>;

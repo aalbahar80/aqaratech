@@ -1,4 +1,4 @@
-<!-- <script context="module" lang="ts">
+<script context="module" lang="ts">
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
@@ -6,9 +6,10 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import { getAddress } from '$lib/utils/common';
 	import type { filterSchema } from '$lib/server/trpc/routers/charts';
-	import { forceDateToInput } from '$lib/utils/common';
+	import { forceDateToInput, getAddress } from '$lib/utils/common';
+	// TODO research: How optimized is this? is zod also imported by relation since its used in the UnitModel.
+	import { UnitModel } from '$models/interfaces/unit.interface';
 	import { subMonths } from 'date-fns';
 	import type { z } from 'zod';
 	import type { Load } from './index';
@@ -24,7 +25,7 @@
 
 	type Filter = z.infer<typeof filterSchema>;
 
-	export const load: Load = async ({ params, fetch }) => {
+	export const load: Load = async ({ params }) => {
 		const defaultFilter: Filter = {
 			propertyId: null,
 			unitId: null,
@@ -32,16 +33,15 @@
 			...getRange(defaultRange),
 		};
 
-		const trpcClient = trpc;
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpcClient.query('clients:dashboard', params.id), // TODO use read?
-			trpcClient.query('charts:income', {
+			trpc.query('charts:client', { clientId: params.id }), // TODO use read?
+			trpc.query('charts:income', {
 				...defaultFilter,
 			}),
-			trpcClient.query('charts:expenses', {
+			trpc.query('charts:expenses', {
 				...defaultFilter,
 			}),
-			trpcClient.query('charts:occupancy', {
+			trpc.query('charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);
@@ -55,10 +55,10 @@
 			},
 		};
 	};
-</script> -->
+</script>
 
-<!-- <script lang="ts">
-	export let client: InferQueryOutput<'clients:dashboard'>;
+<script lang="ts">
+	export let client: InferQueryOutput<'charts:client'>;
 	export let income: InferQueryOutput<'charts:income'>;
 	export let expenses: InferQueryOutput<'charts:expenses'>;
 	export let occupancy: InferQueryOutput<'charts:occupancy'>;
@@ -97,7 +97,7 @@
 		const newUnits = newProperty
 			? newProperty.units.map((unit) => ({
 					value: unit.id,
-					label: getLabel(unit),
+					label: UnitModel.getLabel(unit),
 			  }))
 			: [defaultUnit];
 
@@ -121,18 +121,18 @@
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
 	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
-</script> -->
+</script>
 
-<!-- <div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+<div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<div class="prose">
 		<h1>Dashboard</h1>
 	</div>
 	<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
-		Date Filters
+		<!-- Date Filters -->
 		<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
-			Range
+			<!-- Range -->
 			<div class="md:w-1/2">
-				rethink bind
+				<!-- rethink bind -->
 				<Select
 					bind:current={selectedRange}
 					options={rangeOptions}
@@ -148,7 +148,7 @@
 			</div>
 
 			<div class="md:1/2 flex gap-1">
-				Start
+				<!-- Start -->
 				<input
 					type="date"
 					name="start"
@@ -166,7 +166,7 @@
 					}}
 				/>
 
-				End
+				<!-- End -->
 				<input
 					type="date"
 					name="end"
@@ -186,9 +186,9 @@
 			</div>
 		</div>
 
-		Property/Unit Filters
+		<!-- Property/Unit Filters -->
 		<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
-			Property
+			<!-- Property -->
 			<div class="md:w-2/3">
 				<Select
 					bind:current={selectedProperty}
@@ -209,7 +209,7 @@
 				/>
 			</div>
 
-			Unit
+			<!-- Unit -->
 			<div class="md:w-1/3">
 				<Select
 					bind:current={selectedUnit}
@@ -226,7 +226,7 @@
 		</div>
 	</div>
 
-	Income Chart
+	<!-- Income Chart -->
 	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
 		<div slot="groupBy" class="flex w-64 pb-4">
 			<span
@@ -262,7 +262,7 @@
 		</Chart>
 	</DashCard>
 
-	Expenses Chart
+	<!-- Expenses Chart -->
 	<DashCard
 		title="Expenses"
 		subtitle="The total amount of expenses."
@@ -302,7 +302,7 @@
 		</Chart>
 	</DashCard>
 
-	Occupancy Chart
+	<!-- Occupancy Chart -->
 	<DashCard
 		title="Occupancy"
 		subtitle="The percentage of units that are empty."
@@ -312,11 +312,11 @@
 			<canvas {height} {width} use:occupancyChart={occupancy} />
 		</Chart>
 	</DashCard>
-</div> -->
+</div>
 
-<!-- <style lang="postcss">
+<style lang="postcss">
 	.date-input {
 		@apply block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
-</style> -->
+</style>

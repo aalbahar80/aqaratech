@@ -126,17 +126,6 @@ export const clients = createRouter()
 						data,
 				  }),
 	})
-	.query('dashboard', {
-		input: z.string(),
-		resolve: async ({ input: id }) => {
-			const data = await prismaClient.client.findUnique({
-				where: { id },
-				include: { properties: { include: { client: true, units: true } } },
-			});
-			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Client not found' });
-		},
-	})
 	.mutation('delete', {
 		input: z.string(),
 		resolve: ({ input: id }) =>

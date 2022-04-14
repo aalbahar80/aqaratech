@@ -1,11 +1,11 @@
 import type { createTRPCHandle } from '$lib/server/trpc';
 import type { RequestEvent } from '@sveltejs/kit/types/private';
-import * as jose from 'jose';
 import {
 	router as trpcRouter,
 	TRPCError,
 	type inferAsyncReturnType,
 } from '@trpc/server';
+import * as jose from 'jose';
 
 type TRPCHandler = Parameters<typeof createTRPCHandle>;
 type ResponseMetaFn = NonNullable<TRPCHandler[0]['responseMeta']>;
@@ -108,3 +108,12 @@ export const responseMeta: ResponseMetaFn = ({ type, errors, paths }) => {
 		return {};
 	}
 };
+
+type Ctx = Parameters<
+	Parameters<ReturnType<typeof createRouter>['middleware']>['0']
+>['0']['ctx'];
+export const isOwner = (ctx: Ctx): boolean =>
+	ctx.accessToken.roles.includes('property-owner');
+
+export const isAdmin = (ctx: Ctx): boolean =>
+	ctx.accessToken.roles.includes('admin');
