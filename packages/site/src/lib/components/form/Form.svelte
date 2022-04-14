@@ -81,7 +81,6 @@
 	<title>{`Edit ${model.singularCap}`}</title>
 </svelte:head>
 
-<pre>{JSON.stringify($data2, null, 2)}</pre>
 <div class="mx-auto h-full max-w-xl py-8">
 	<form
 		use:form
@@ -148,4 +147,5 @@
 			/>
 		</div>
 	</form>
+	<div class="prose py-6"><pre>{JSON.stringify($data2, null, 2)}</pre></div>
 </div>

@@ -1,12 +1,36 @@
-import { cerbos } from '$lib/server/cerbos';
 import prismaClient from '$lib/server/prismaClient';
 import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { PropertyModel } from '$models/interfaces/property.interface';
 import { TRPCError } from '@trpc/server';
-import * as R from 'remeda';
-import { v4 } from 'uuid';
 import { z } from 'zod';
+
+interface AccessTokenP {
+	roles: string[];
+	userMetadata: {
+		idInternal?: string;
+	};
+}
+
+interface IPropertyAuthz {
+	clientId: string;
+}
+
+const isAuthorized = (token: AccessTokenP, p: IPropertyAuthz): boolean => {
+	if (token.roles.includes('admin')) {
+		return true;
+	} else if (token.roles.includes('property-owner')) {
+		return p.clientId === token.userMetadata?.idInternal;
+	}
+	return false;
+};
+
+const authzMany = <T extends IPropertyAuthz>(
+	token: AccessTokenP,
+	p: T[],
+): T[] => {
+	return p.filter((property) => isAuthorized(token, property));
+};
 
 export const properties = createRouter()
 	.query('read', {
@@ -35,22 +59,8 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[data.id]: {
-							attr: data,
-						},
-					},
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			if (!allowed.isAuthorized(id, 'read')) {
+			const allowed = isAuthorized(ctx.accessToken, data);
+			if (!allowed) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
 			return data;
@@ -74,22 +84,8 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[data.id]: {
-							attr: data,
-						},
-					},
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			if (!allowed.isAuthorized(id, 'read')) {
+			const allowed = isAuthorized(ctx.accessToken, data);
+			if (!allowed) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
 			return data;
@@ -119,25 +115,8 @@ export const properties = createRouter()
 				pageIndex: input.pageIndex,
 			};
 
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: R.mapToObj(data, (property) => [
-						property.id,
-						{ attr: property },
-					]),
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			const allowedIds = R.filter(data, (property) =>
-				allowed.isAuthorized(property.id, 'read'),
-			);
 			return {
-				data: allowedIds,
+				data: authzMany(ctx.accessToken, data),
 				pagination,
 			};
 		},
@@ -171,26 +150,7 @@ export const properties = createRouter()
 				},
 				where: filter,
 			});
-			const principalId =
-				ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!;
-			const allowed = await cerbos.check({
-				actions: ['read'],
-				resource: {
-					kind: 'property',
-					instances: R.mapToObj(data, (property) => [
-						property.id,
-						{ attr: property },
-					]),
-				},
-				principal: {
-					id: principalId,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			const allowedIds = R.filter(data, (property) =>
-				allowed.isAuthorized(property.id, 'read'),
-			);
-			return allowedIds;
+			return authzMany(ctx.accessToken, data);
 		},
 	})
 	.query('count', {
@@ -199,28 +159,9 @@ export const properties = createRouter()
 	.mutation('create', {
 		input: PropertyModel.schema,
 		resolve: async ({ ctx, input: { id, ...data } }) => {
-			const resourceId = id ?? v4();
-			const allowed = await cerbos.check({
-				actions: ['save'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[resourceId]: {
-							attr: {
-								...data,
-							},
-						},
-					},
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			if (!allowed.isAuthorized(resourceId, 'save')) {
+			if (!ctx.accessToken.roles.includes('admin')) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
-
 			const result = id
 				? await prismaClient.property.update({
 						data,
@@ -235,28 +176,9 @@ export const properties = createRouter()
 	.mutation('save', {
 		input: PropertyModel.schema,
 		resolve: async ({ ctx, input: { id, ...data } }) => {
-			const resourceId = id ?? v4();
-			const allowed = await cerbos.check({
-				actions: ['save'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[resourceId]: {
-							attr: {
-								...data,
-							},
-						},
-					},
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			if (!allowed.isAuthorized(resourceId, 'save')) {
+			if (!ctx.accessToken.roles.includes('admin')) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
-
 			const result = id
 				? await prismaClient.property.update({
 						data,
@@ -271,6 +193,9 @@ export const properties = createRouter()
 	.mutation('delete', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {
+			if (!ctx.accessToken.roles.includes('admin')) {
+				throw new TRPCError({ code: 'FORBIDDEN' });
+			}
 			const property = await prismaClient.property.findUnique({
 				where: { id },
 				select: {
@@ -279,24 +204,6 @@ export const properties = createRouter()
 			});
 			if (!property) {
 				throw new TRPCError({ code: 'NOT_FOUND' });
-			}
-			const allowed = await cerbos.check({
-				actions: ['delete'],
-				resource: {
-					kind: 'property',
-					instances: {
-						[id]: {
-							attr: property,
-						},
-					},
-				},
-				principal: {
-					id: ctx.accessToken?.userMetadata?.idInternal ?? ctx.accessToken.sub!,
-					roles: ctx.accessToken.roles,
-				},
-			});
-			if (!allowed.isAuthorized(id, 'delete')) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
 			const deleted = await prismaClient.property.delete({
 				where: {
