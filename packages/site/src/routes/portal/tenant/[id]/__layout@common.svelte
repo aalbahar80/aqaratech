@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import Navbar from '$lib/components/Navbar.svelte';
 	import trpc from '$lib/client/trpc';
 	import type { Load } from '@sveltejs/kit';
 
@@ -10,5 +9,4 @@
 	};
 </script>
 
-<Navbar hideClients />
 <slot />

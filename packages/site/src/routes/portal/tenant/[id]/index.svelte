@@ -1,0 +1,34 @@
+<script lang="ts" context="module">
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import Select from '$lib/components/Select.svelte';
+	import TrxList from '$lib/components/trx/TrxList.svelte';
+	import { format } from 'date-fns';
+	import type { Load } from './index';
+
+	export const load: Load = async ({ params }) => {
+		const { id } = params;
+		const leases = await trpc.query('tenant:leases:list', id);
+		return { props: { leases } };
+	};
+</script>
+
+<script lang="ts">
+	export let leases: InferQueryOutput<'tenant:leases:list'>;
+
+	const options = leases.map((lease, idx) => ({
+		value: lease.id,
+		label: `Lease #${leases.length - idx}: ${format(
+			lease.start,
+			'MMM dd, yyyy',
+		)} - ${format(lease.end, 'MMM dd, yyyy')}`,
+	}));
+
+	let selected = options[0]?.value;
+	$: trxs = leases.find((lease) => lease.id === selected)?.transactions ?? [];
+</script>
+
+<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+	<TrxList {trxs}>
+		<Select disabled={leases.length < 2} {options} bind:current={selected} />
+	</TrxList>
+</div>

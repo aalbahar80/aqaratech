@@ -45,6 +45,9 @@
 	button,
 	a {
 		@apply inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm;
+		min-width: var(--min-width);
+		min-height: var(--min-height);
+		/* border-bottom-right-radius: var(--border-radius-b, 0.375rem); */
 	}
 	button:disabled {
 		@apply cursor-not-allowed opacity-50;

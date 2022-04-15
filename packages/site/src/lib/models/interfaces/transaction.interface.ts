@@ -34,3 +34,22 @@ export const TransactionModel = {
 	basicFields: ['amount', 'dueDate', 'postDate', 'isPaid', 'memo'] as const,
 	relationalFields: ['leaseId'] as const,
 };
+
+export const getBadge = (trx: { isPaid: boolean; dueDate: Date }) => {
+	if (trx.isPaid) {
+		return {
+			label: 'Paid',
+			color: 'green',
+		};
+	}
+	if (trx.dueDate < new Date()) {
+		return {
+			label: 'Past due',
+			color: 'red',
+		};
+	}
+	return {
+		label: 'Not yet due',
+		color: 'indigo',
+	};
+};

@@ -29,7 +29,7 @@ export const getMFUrl = async (id: string): Promise<string> => {
 	// get necessary info for payment
 
 	console.log('fetching mf url');
-	const trx = await trpc.query('transactions:pay', id);
+	const trx = await trpc.query('tenant:transactions:pay', id);
 	if (!trx) {
 		const err = new Error('Transaction or Tenant not found');
 		console.error(err);

@@ -3,6 +3,7 @@
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import { getBadge } from '$lib/models/interfaces/transaction.interface';
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat } from '$lib/utils/common';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
@@ -91,24 +92,6 @@
 			},
 		});
 	};
-	const getChip = (trx: Transactions[number]) => {
-		if (trx.isPaid) {
-			return {
-				label: 'Paid',
-				color: 'green',
-			};
-		}
-		if (trx.dueDate < new Date()) {
-			return {
-				label: 'Past due',
-				color: 'red',
-			};
-		}
-		return {
-			label: 'Not yet due',
-			color: 'gray',
-		};
-	};
 </script>
 
 <section>
@@ -195,7 +178,7 @@
 				</thead>
 				<tbody>
 					{#each data as transaction (transaction.id)}
-						{@const chip = getChip(transaction)}
+						{@const chip = getBadge(transaction)}
 						<tr>
 							<td>
 								<div class="flex">

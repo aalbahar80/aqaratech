@@ -88,14 +88,6 @@ export const transactions = createRouter()
 	.query('count', {
 		resolve: () => prismaClient.transaction.count({}),
 	})
-	.query('pay', {
-		input: z.string(),
-		resolve: async ({ input: id }) =>
-			prismaClient.transaction.findUnique({
-				where: { id },
-				include: { lease: { include: { tenant: true } } },
-			}),
-	})
 	.query('nextReminder', {
 		input: z.string(),
 		resolve: async ({ input }) => {
