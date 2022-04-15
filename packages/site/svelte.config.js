@@ -22,6 +22,7 @@ const config = {
 					$lib: resolve('./src/lib'),
 					$models: resolve('.', './src/lib/models'),
 					$utils: resolve('.', './src/lib/utils'),
+					$routers: resolve('.', './src/lib/server/trpc/routers'),
 				},
 			},
 			ssr: {

@@ -3,10 +3,10 @@ import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import type { OwnerRouterBase } from '../../router';
+import type { BaseRouter } from './router';
 
-const ownerRouter = createRouter() as OwnerRouterBase;
-export const units = ownerRouter
+const router = createRouter() as BaseRouter;
+export const units = router
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {

@@ -3,11 +3,11 @@ import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import type { OwnerRouterBase } from '../../router';
+import type { BaseRouter } from './router';
 
-const ownerRouter = createRouter() as OwnerRouterBase;
+const router = createRouter() as BaseRouter;
 
-export const properties = ownerRouter
+export const properties = router
 	// TODO check propertyId belongs to the user
 	.query('read', {
 		input: z.string(),

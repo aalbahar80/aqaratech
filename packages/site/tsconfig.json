@@ -17,7 +17,9 @@
 			"$models": ["src/lib/models/index.ts"],
 			"$models/*": ["src/lib/models/*"],
 			"$utils": ["src/lib/utils/index.ts"],
-			"$utils/*": ["src/lib/utils/*"]
+			"$utils/*": ["src/lib/utils/*"],
+			"$routers": ["src/lib/server/trpc/routers/index.ts"],
+			"$routers/*": ["src/lib/server/trpc/routers/*"]
 		}
 	}
 }
