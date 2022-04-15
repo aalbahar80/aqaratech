@@ -3,16 +3,25 @@ import { validateAccessToken } from '$lib/server/utils';
 interface Admin {
 	isAdmin: true;
 	isOwner: false;
+	isTenant: false;
 	id: undefined;
 }
 
 interface Owner {
 	isAdmin: false;
 	isOwner: true;
+	isTenant: false;
 	id: string;
 }
 
-type Authz = Admin | Owner;
+interface Tenant {
+	isAdmin: false;
+	isOwner: false;
+	isTenant: true;
+	id: string;
+}
+
+type Authz = Admin | Owner | Tenant;
 
 interface Auth0UserMeta {
 	userMetadata: {
@@ -36,16 +45,26 @@ export const getAuthz = async (
 	// let authz: Authz;
 	const isOwner = roles.includes('property-owner');
 	const isAdmin = roles.includes('admin');
-	if (isOwner) {
+	const isTenant = roles.includes('tenant');
+	if (isTenant) {
 		return {
-			isOwner,
 			isAdmin: false,
+			isOwner: false,
+			isTenant: true,
+			id: metadata.userMetadata.idInternal,
+		};
+	} else if (isOwner) {
+		return {
+			isAdmin: false,
+			isOwner: true,
+			isTenant: false,
 			id: metadata.userMetadata.idInternal,
 		};
 	} else if (isAdmin) {
 		return {
-			isAdmin,
+			isAdmin: true,
 			isOwner: false,
+			isTenant: false,
 			id: undefined,
 		};
 	} else {
