@@ -1,7 +1,7 @@
-import type { Router } from '$lib/server/trpc';
+import type { AppRouter } from '$lib/server/trpc';
 import type { TRPCClientError } from '@trpc/client';
 
-export default function (error: TRPCClientError<Router>) {
+export default function (error: TRPCClientError<AppRouter>) {
 	console.log({ error }, 'getEditorErrors.ts ~ 5');
 	// if (error.data?.code !== 'BAD_REQUEST') {
 	// 	alert('Unknown error');

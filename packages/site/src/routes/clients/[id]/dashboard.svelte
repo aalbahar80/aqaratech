@@ -6,7 +6,7 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import type { filterSchema } from '$lib/server/trpc/routers/charts';
+	import type { filterSchema } from '$lib/server/trpc/routers/admin/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	// TODO research: How optimized is this? is zod also imported by relation since its used in the UnitModel.
 	import { UnitModel } from '$models/interfaces/unit.interface';
