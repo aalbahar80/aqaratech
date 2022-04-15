@@ -1,8 +1,8 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter, isAdmin, isOwner } from '$lib/server/trpc';
 import { groupOccupancy } from '$lib/utils/group';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from '.';
 
 export const filterSchema = z.object({
 	clientId: z.string().uuid(),
@@ -13,25 +13,6 @@ export const filterSchema = z.object({
 });
 
 export const charts = createRouter()
-	.middleware(({ ctx, next, rawInput }) => {
-		// Only allow admin or owner
-		if (isAdmin(ctx)) {
-			return next();
-		}
-
-		const schema = z.object({ clientId: z.string().uuid() });
-		const input = schema.safeParse(rawInput);
-		if (!input.success) {
-			throw new TRPCError({ code: 'BAD_REQUEST' });
-		}
-		if (
-			isOwner(ctx) &&
-			ctx.accessToken.userMetadata?.idInternal === input.data.clientId
-		) {
-			return next();
-		}
-		throw new TRPCError({ code: 'FORBIDDEN' });
-	})
 	.query('client', {
 		input: z.object({
 			clientId: z.string().uuid(),

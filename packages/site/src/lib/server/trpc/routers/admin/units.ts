@@ -1,9 +1,9 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { UnitModel } from '$models/interfaces/unit.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from '.';
 
 export const units = createRouter()
 	.query('read', {

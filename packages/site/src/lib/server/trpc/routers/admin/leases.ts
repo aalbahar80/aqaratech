@@ -1,9 +1,9 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { LeaseModel } from '$models/interfaces/lease.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from '.';
 
 export const leases = createRouter()
 	.query('read', {

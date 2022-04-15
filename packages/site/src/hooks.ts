@@ -1,4 +1,4 @@
-import { createContext, responseMeta, router } from '$lib/server/trpc';
+import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { parseUser } from '$lib/services/auth/config';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
@@ -31,7 +31,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		};
 
 		const httpResponse = await resolveHTTPResponse({
-			router,
+			router: appRouter,
 			req,
 			path: event.url.pathname.substring(url.length + 1),
 			createContext: async () => createContext?.(event),

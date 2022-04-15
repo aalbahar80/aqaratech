@@ -1,9 +1,9 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
 import { paginationSchema } from '$models/common';
 import { PropertyModel } from '$models/interfaces/property.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { createRouter } from '.';
 
 export const properties = createRouter()
 	.query('read', {
@@ -123,10 +123,7 @@ export const properties = createRouter()
 	})
 	.mutation('create', {
 		input: PropertyModel.schema,
-		resolve: async ({ ctx, input: { id, ...data } }) => {
-			if (!ctx.accessToken.roles.includes('admin')) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
-			}
+		resolve: async ({ input: { id, ...data } }) => {
 			const result = id
 				? await prismaClient.property.update({
 						data,
@@ -140,10 +137,7 @@ export const properties = createRouter()
 	})
 	.mutation('save', {
 		input: PropertyModel.schema,
-		resolve: async ({ ctx, input: { id, ...data } }) => {
-			if (!ctx.accessToken.roles.includes('admin')) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
-			}
+		resolve: async ({ input: { id, ...data } }) => {
 			const result = id
 				? await prismaClient.property.update({
 						data,
@@ -157,10 +151,7 @@ export const properties = createRouter()
 	})
 	.mutation('delete', {
 		input: z.string(),
-		resolve: async ({ ctx, input: id }) => {
-			if (!ctx.accessToken.roles.includes('admin')) {
-				throw new TRPCError({ code: 'FORBIDDEN' });
-			}
+		resolve: async ({ input: id }) => {
 			const property = await prismaClient.property.findUnique({
 				where: { id },
 				select: {
