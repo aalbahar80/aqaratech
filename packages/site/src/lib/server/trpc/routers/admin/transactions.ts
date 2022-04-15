@@ -5,7 +5,7 @@ import { paginationSchema, withId } from '$models/common';
 import { TransactionModel } from '$models/interfaces/transaction.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '.';
+import { createRouter } from './createRouter';
 
 let url: string;
 

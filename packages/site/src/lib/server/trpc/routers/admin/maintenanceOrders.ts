@@ -3,7 +3,7 @@ import { paginationSchema } from '$models/common';
 import { MaintenanceOrderModel } from '$models/interfaces/maintenanceOrder.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '.';
+import { createRouter } from './createRouter';
 
 export const maintenanceOrders = createRouter()
 	.query('read', {

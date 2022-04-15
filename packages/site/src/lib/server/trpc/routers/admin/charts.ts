@@ -2,7 +2,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { groupOccupancy } from '$lib/utils/group';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '.';
+import { createRouter } from './createRouter';
 
 export const filterSchema = z.object({
 	clientId: z.string().uuid(),

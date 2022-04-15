@@ -1,17 +1,7 @@
-import { router, TRPCError } from '@trpc/server';
-import { charts, properties, units } from '.';
-import type { Context } from '../../config';
-
-export const createRouter = () =>
-	router<Context>().middleware(({ ctx, next }) => {
-		if (ctx.authz?.isOwner) {
-			return next({
-				ctx: { authz: ctx.authz },
-			});
-		} else {
-			throw new TRPCError({ code: 'FORBIDDEN', message: 'Forbidden' });
-		}
-	});
+import { charts } from './charts';
+import { createRouter } from './createRouter';
+import { properties } from './properties';
+import { units } from './units';
 
 export const ownerRouter = createRouter()
 	.merge('properties:', properties)

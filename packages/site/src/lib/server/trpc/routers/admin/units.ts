@@ -3,7 +3,7 @@ import { paginationSchema } from '$models/common';
 import { UnitModel } from '$models/interfaces/unit.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '.';
+import { createRouter } from './createRouter';
 
 export const units = createRouter()
 	.query('read', {
