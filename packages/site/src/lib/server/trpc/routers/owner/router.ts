@@ -1,28 +1,19 @@
-import { createRouter } from '$lib/server/trpc';
-import { TRPCError } from '@trpc/server';
+import { router as trpcRouter, TRPCError } from '@trpc/server';
 import { charts, properties, units } from '.';
+import type { Context } from '../../config';
 
-const baseRouter = createRouter().middleware(({ ctx, next }) => {
-	if (ctx.accessToken.isOwner) {
-		const accessToken = {
-			...ctx.accessToken,
-			isAdmin: false,
-			isOwner: true,
-			id: ctx.accessToken.userMetadata.idInternal,
-		};
-		return next({
-			ctx: {
-				...ctx,
-				accessToken,
-			},
-		});
-	}
-	throw new TRPCError({ code: 'FORBIDDEN', message: 'Forbidden' });
-});
+export const createRouter = () =>
+	trpcRouter<Context>().middleware(({ ctx, next }) => {
+		if (ctx.authz?.isOwner) {
+			return next({
+				ctx: { authz: ctx.authz },
+			});
+		} else {
+			throw new TRPCError({ code: 'FORBIDDEN', message: 'Forbidden' });
+		}
+	});
 
-export const router = baseRouter
+export const router = createRouter()
 	.merge('properties:', properties)
 	.merge('units:', units)
 	.merge('charts:', charts);
-
-export type BaseRouter = typeof baseRouter;

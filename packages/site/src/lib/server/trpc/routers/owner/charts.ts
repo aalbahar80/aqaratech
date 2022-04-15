@@ -1,9 +1,8 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
+import { createRouter } from '.';
 import { groupOccupancy } from '$lib/utils/group';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import type { BaseRouter } from './router';
 
 export const filterSchema = z.object({
 	clientId: z.string().uuid(),
@@ -13,16 +12,14 @@ export const filterSchema = z.object({
 	unitId: z.string().uuid().nullish(),
 });
 
-const router = createRouter() as BaseRouter;
-
-export const charts = router
+export const charts = createRouter()
 	.middleware(({ ctx, next, rawInput }) => {
 		const schema = z.object({ clientId: z.string().uuid() });
 		const input = schema.safeParse(rawInput);
 		if (!input.success) {
 			throw new TRPCError({ code: 'BAD_REQUEST' });
 		}
-		if (ctx.accessToken.userMetadata?.idInternal === input.data.clientId) {
+		if (ctx.authz.id === input.data.clientId) {
 			return next();
 		}
 		throw new TRPCError({ code: 'FORBIDDEN' });

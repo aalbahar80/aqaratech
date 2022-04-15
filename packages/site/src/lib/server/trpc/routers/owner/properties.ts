@@ -1,13 +1,10 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
+import { createRouter } from '.';
 import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import type { BaseRouter } from './router';
 
-const router = createRouter() as BaseRouter;
-
-export const properties = router
+export const properties = createRouter()
 	// TODO check propertyId belongs to the user
 	.query('read', {
 		input: z.string(),

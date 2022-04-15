@@ -1,12 +1,10 @@
 import prismaClient from '$lib/server/prismaClient';
-import { createRouter } from '$lib/server/trpc';
+import { createRouter } from '.';
 import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import type { BaseRouter } from './router';
 
-const router = createRouter() as BaseRouter;
-export const units = router
+export const units = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {
@@ -26,7 +24,7 @@ export const units = router
 			if (!data) {
 				throw new TRPCError({ code: 'NOT_FOUND' });
 			}
-			if (data.property.clientId !== ctx.accessToken.id) {
+			if (data.property.clientId !== ctx.authz.id) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
 			return data;
@@ -40,7 +38,7 @@ export const units = router
 		resolve: async ({ ctx, input: { query, pageIndex, size, propertyId } }) => {
 			const sameClient = {
 				property: {
-					clientId: ctx.accessToken.id,
+					clientId: ctx.authz.id,
 				},
 			};
 			const propertyFilter = propertyId ? { propertyId } : {};
