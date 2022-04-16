@@ -106,14 +106,14 @@ export const transactions = createRouter()
 		input: z.object({
 			id: z.string().uuid(),
 			isPaid: z.boolean(),
-			receiptUrl: z.string().transform(trim).transform(falsyToNull).nullable(),
+			mfPaymentId: z.string().optional().transform(trim).transform(falsyToNull),
 		}),
 		resolve: ({ input }) =>
 			prismaClient.transaction.update({
 				where: { id: input.id },
 				data: {
 					isPaid: input.isPaid,
-					receiptUrl: input.receiptUrl,
+					mfPaymentId: input.mfPaymentId || null,
 				},
 			}),
 	})

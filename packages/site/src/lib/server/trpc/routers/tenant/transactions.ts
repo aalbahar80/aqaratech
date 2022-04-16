@@ -34,9 +34,14 @@ export const transactions = createRouter()
 	})
 	.query('pay', {
 		input: z.string(),
-		resolve: async ({ input: id }) =>
-			prismaClient.transaction.findUnique({
+		resolve: async ({ input: id }) => {
+			const data = await prismaClient.transaction.findUnique({
 				where: { id },
 				include: { lease: { include: { tenant: true } } },
-			}),
+			});
+			if (!data) {
+				throw new TRPCError({ code: 'NOT_FOUND' });
+			}
+			return data;
+		},
 	});

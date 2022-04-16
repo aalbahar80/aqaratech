@@ -25,16 +25,17 @@ const mfToken = import.meta.env.VITE_MYFATOORAH_TOKEN;
  * Fetches a payment URL from myfatoorah for a given transaction.
  * This is used to redirect the user for payment.
  */
-export const getMFUrl = async (id: string): Promise<string> => {
+export const getMFUrl = async ({
+	trxId,
+	callbackUrl,
+}: {
+	trxId: string;
+	callbackUrl: string;
+}): Promise<string> => {
 	// get necessary info for payment
 
 	console.log('fetching mf url');
-	const trx = await trpc.query('tenant:transactions:pay', id);
-	if (!trx) {
-		const err = new Error('Transaction or Tenant not found');
-		console.error(err);
-		throw err;
-	}
+	const trx = await trpc.query('tenant:transactions:pay', trxId);
 
 	const { tenant } = trx.lease;
 	const name = [
@@ -48,20 +49,27 @@ export const getMFUrl = async (id: string): Promise<string> => {
 
 	// const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback`;
 
-	const trxData = {
+	let trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
 		CustomerName: name,
-		CustomerEmail: 'dev.tester.2@mailthink.net',
-		// CustomerEmail: tenant.email,
-		// TODO delete my phone number
-		CustomerMobile: dev ? import.meta.env.VITE_MOBILE : tenant.phone.slice(-8),
-		CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
-		// CallBackUrl: 'https://43fc3279ac34a4457087c512ee54f248.m.pipedream.net',
-		// CallBackUrl: callbackUrl,
+		CustomerEmail: tenant.email,
+		CustomerMobile: tenant.phone,
+		CallBackUrl: callbackUrl,
 	};
 
+	if (dev) {
+		trxData = {
+			InvoiceValue: trx.amount,
+			CustomerReference: trx.id,
+			CustomerName: name,
+			CustomerEmail: 'dev.tester.4@mailthink.net',
+			CustomerMobile: import.meta.env.VITE_MOBILE,
+			CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
+		};
+	}
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
+
 	try {
 		const res = await fetch(`${mfBaseUrl}/v2/ExecutePayment`, {
 			headers: {
@@ -117,18 +125,27 @@ export const getPaymentStatus = async (
 };
 
 /**
- * Mark transaction as paid. Fires off a mutation to Hasura to update transaction.
+ * Mark transaction as paid. Fires off a mutation to update transaction.
  */
-export const markAsPaid = async (trxId: string) => {
+export const markAsPaid = async ({
+	trxId,
+	mfPaymentId,
+}: {
+	trxId: string;
+	mfPaymentId: string;
+}) => {
 	// TODO how to get correct invoice URL?
-	const invoiceUrl =
-		'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
+	// const invoiceUrl =
+	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
+	// const mfInvoiceUrl =
+	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
 
 	try {
+		// TODO auth here (machine to machine)?
 		const result = await trpc.mutation('transactions:updatePaid', {
 			id: trxId,
-			receiptUrl: invoiceUrl,
 			isPaid: true,
+			mfPaymentId,
 		});
 		return result.receiptUrl;
 	} catch (err) {

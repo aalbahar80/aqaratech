@@ -42,7 +42,6 @@
 			const updated = await trpc.mutation('transactions:updatePaid', {
 				id,
 				isPaid,
-				receiptUrl: null,
 			});
 			// update transactions array
 			transactions = transactions.map((transaction) =>

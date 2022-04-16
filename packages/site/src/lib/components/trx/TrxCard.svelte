@@ -15,6 +15,7 @@
 		dueDate: Date;
 		isPaid: boolean;
 		memo: string | null;
+		mfPaymentId: string | null;
 	}
 
 	export let trx: Transaction;
@@ -68,8 +69,9 @@
 				</div>
 				{#if trx.isPaid}
 					<span class="mt-4 sm:mt-0">
+						<!-- TODO add receipt url -->
 						<a
-							href="/new/tenants"
+							href="/"
 							class="font-medium text-indigo-600 hover:text-indigo-500"
 						>
 							Receipt <span aria-hidden="true"> &rarr;</span>

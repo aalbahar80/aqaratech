@@ -1,7 +1,10 @@
 import isNumber from 'lodash-es/isNumber.js';
 
-export function trim(v: string) {
-	return v.trim();
+export function trim<T>(v: T) {
+	if (typeof v === 'string') {
+		return v.trim();
+	}
+	return v;
 }
 
 export function falsyToNull<T>(v: T) {

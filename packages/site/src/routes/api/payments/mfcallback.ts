@@ -12,7 +12,7 @@ export const get: RequestHandler = async (req) => {
 
 	const { trxId, isPaid } = await getPaymentStatus(paymentId);
 	if (isPaid) {
-		await markAsPaid(trxId);
+		await markAsPaid({ trxId, mfPaymentId: paymentId });
 	}
 
 	return {

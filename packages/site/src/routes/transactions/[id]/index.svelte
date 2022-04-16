@@ -47,7 +47,6 @@
 			const updated = await trpc.mutation('transactions:updatePaid', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
-				receiptUrl: null,
 			});
 			trx = { ...trx, ...updated };
 			addToast({
