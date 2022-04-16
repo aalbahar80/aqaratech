@@ -8,6 +8,7 @@ dotenv.config();
 export const developmentEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.DEVELOPMENT,
 	name: 'development',
+	callbackDomain: process.env.CALLBACK_DOMAIN,
 	authConfig: {
 		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
 		AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
@@ -21,6 +22,8 @@ export const developmentEnvironment: EnvironmentConfig = {
 	myfatoorahConfig: {
 		MYFATOORAH_BASE_URL: process.env.MYFATOORAH_BASE_URL,
 		MYFATOORAH_TOKEN: process.env.MYFATOORAH_TOKEN,
+		MYFATOORAH_EMAIL: process.env.MYFATOORAH_EMAIL,
+		MYFATOORAH_PHONE: process.env.MYFATOORAH_PHONE,
 	},
 	twilioConfig: {
 		TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,

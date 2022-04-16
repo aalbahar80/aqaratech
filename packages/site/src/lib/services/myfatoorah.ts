@@ -1,6 +1,7 @@
-import { dev } from '$app/env';
+import { environment } from '$environment';
 import trpc from '$lib/client/trpc';
 
+const { myfatoorahConfig, callbackDomain } = environment;
 interface MFResponse {
 	Data: {
 		PaymentURL: string;
@@ -15,9 +16,6 @@ interface MyFatoorahPaymentStatusResponse {
 	};
 }
 
-const mfBaseUrl = import.meta.env.VITE_MYFATOORAH_BASE_URL;
-const mfToken = import.meta.env.VITE_MYFATOORAH_TOKEN;
-
 // TODO setup proper auth later as per:
 // https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
 
@@ -27,10 +25,8 @@ const mfToken = import.meta.env.VITE_MYFATOORAH_TOKEN;
  */
 export const getMFUrl = async ({
 	trxId,
-	callbackUrl,
 }: {
 	trxId: string;
-	callbackUrl: string;
 }): Promise<string> => {
 	// get necessary info for payment
 
@@ -47,8 +43,7 @@ export const getMFUrl = async ({
 		.filter(Boolean)
 		.join(' ');
 
-	// const callbackUrl = `${get(page).url.origin}/api/payments/mfcallback`;
-
+	const callbackUrl = `${callbackDomain}/api/payments/mfcallback`;
 	let trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
@@ -58,32 +53,33 @@ export const getMFUrl = async ({
 		CallBackUrl: callbackUrl,
 	};
 
-	if (dev) {
+	if (process.env.VERCEL_ENV !== 'production') {
+		console.debug('using email/phone from env variables');
 		trxData = {
-			InvoiceValue: trx.amount,
-			CustomerReference: trx.id,
-			CustomerName: name,
-			CustomerEmail: 'dev.tester.4@mailthink.net',
-			CustomerMobile: import.meta.env.VITE_MOBILE,
-			CallBackUrl: 'https://eojx7rde2hgw22a.m.pipedream.net',
+			...trxData,
+			CustomerEmail: myfatoorahConfig.MYFATOORAH_EMAIL,
+			CustomerMobile: myfatoorahConfig.MYFATOORAH_PHONE,
 		};
 	}
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
 
 	try {
-		const res = await fetch(`${mfBaseUrl}/v2/ExecutePayment`, {
-			headers: {
-				Authorization: `Bearer ${mfToken}`,
-				'Content-Type': 'application/json',
+		const res = await fetch(
+			`${myfatoorahConfig.MYFATOORAH_BASE_URL}/v2/ExecutePayment`,
+			{
+				headers: {
+					Authorization: `Bearer ${myfatoorahConfig.MYFATOORAH_TOKEN}`,
+					'Content-Type': 'application/json',
+				},
+				method: 'POST',
+				body: JSON.stringify({
+					PaymentMethodId: 1, // KNET
+					// PaymentMethodId: 20, // VISA
+					// PaymentMethodId: 9, // VISA2
+					...trxData,
+				}),
 			},
-			method: 'POST',
-			body: JSON.stringify({
-				PaymentMethodId: 1, // KNET
-				// PaymentMethodId: 20, // VISA
-				// PaymentMethodId: 9, // VISA2
-				...trxData,
-			}),
-		});
+		);
 
 		const data = (await res.json()) as MFResponse;
 		console.log(data, 'myfatoorah.ts ~ 85');
@@ -101,17 +97,20 @@ export const getPaymentStatus = async (
 	paymentId: string,
 ): Promise<{ trxId: string; isPaid: boolean }> => {
 	// get payment status from myfatoorah
-	const res = await fetch(`${mfBaseUrl}/v2/GetPaymentStatus`, {
-		headers: {
-			Authorization: `Bearer ${mfToken}`,
-			'Content-Type': 'application/json',
+	const res = await fetch(
+		`${myfatoorahConfig.MYFATOORAH_BASE_URL}/v2/GetPaymentStatus`,
+		{
+			headers: {
+				Authorization: `Bearer ${myfatoorahConfig.MYFATOORAH_TOKEN}`,
+				'Content-Type': 'application/json',
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				PaymentId: paymentId,
+				KeyType: 'PaymentId',
+			}),
 		},
-		method: 'POST',
-		body: JSON.stringify({
-			PaymentId: paymentId,
-			KeyType: 'PaymentId',
-		}),
-	});
+	);
 
 	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
 

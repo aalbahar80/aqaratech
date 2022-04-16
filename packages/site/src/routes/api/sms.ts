@@ -1,5 +1,8 @@
+import { environment } from '$environment';
 import type { RequestHandler } from '@sveltejs/kit';
 import Twilio from 'twilio';
+
+const { twilioConfig, callbackDomain } = environment;
 
 // TODO protect this route with _
 export const post: RequestHandler = async ({ request }) => {
@@ -16,20 +19,20 @@ export const post: RequestHandler = async ({ request }) => {
 	if (typeof message === 'string') {
 		smsBody = message;
 	} else if (typeof trxId === 'string') {
-		const paymentUrl = `${import.meta.env.VITE_DOMAIN}/p/transactions/${trxId}`;
+		const paymentUrl = `${callbackDomain}/p/transactions/${trxId}`;
 		smsBody = paymentUrl;
 	}
 	console.log(`Attempting to send SMS: ${phone} ${smsBody}`);
 
-	const twilioId = import.meta.env.VITE_TWILIO_ACCOUNT_SID;
-	const token = import.meta.env.VITE_TWILIO_AUTH_TOKEN;
-	const from = import.meta.env.VITE_TWILIO_FROM_NUMBER;
-	const twilioClient = Twilio(twilioId, token);
+	const twilioClient = Twilio(
+		twilioConfig.TWILIO_ACCOUNT_SID,
+		twilioConfig.TWILIO_AUTH_TOKEN,
+	);
 
 	try {
 		const sms = await twilioClient.messages.create({
 			to: phone,
-			from,
+			from: twilioConfig.TWILIO_FROM_NUMBER,
 			body: smsBody,
 		});
 		console.log(sms);

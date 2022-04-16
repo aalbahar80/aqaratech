@@ -20,6 +20,10 @@ declare global {
 			 */
 			readonly AUTH0_DOMAIN: string;
 			readonly AUTH0_REDIRECT_URI: string;
+
+			/**
+			 * Auth0 claims namespace as configured in Auth0 (login) action
+			 */
 			readonly AUTH0_API_NAMESPACE: string;
 			readonly AUTH0_API_AUDIENCE: string;
 
@@ -32,6 +36,21 @@ declare global {
 			readonly TWILIO_ACCOUNT_SID: string;
 			readonly TWILIO_AUTH_TOKEN: string;
 			readonly TWILIO_FROM_NUMBER: string;
+
+			/**
+			 * Domain used for callbacks (Twilio, myFatoorah)
+			 */
+			readonly CALLBACK_DOMAIN: string;
+
+			/**
+			 * Phone number used for myfatoorah invoices when not in production
+			 */
+			readonly MYFATOORAH_PHONE: string;
+
+			/**
+			 * Email used for myfatoorah invoices when not in production
+			 */
+			readonly MYFATOORAH_EMAIL: string;
 		}
 	}
 }
