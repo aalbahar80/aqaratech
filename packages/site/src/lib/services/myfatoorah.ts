@@ -35,7 +35,7 @@ export const getMFUrl = async ({
 	// get necessary info for payment
 
 	console.log('fetching mf url');
-	const trx = await trpc.query('tenant:transactions:pay', trxId);
+	const trx = await trpc.query('public:transactions:pay', trxId);
 
 	const { tenant } = trx.lease;
 	const name = [
