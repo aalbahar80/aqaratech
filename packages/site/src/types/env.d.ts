@@ -1,25 +1,41 @@
-/// <reference types="vite/client" />
+/// <reference types="node" />
 
-interface ImportMeta {
-	readonly env: ImportMetaEnv;
+declare global {
+	namespace NodeJS {
+		interface ProcessEnv {
+			/**
+			 * Auth0 client identifier provided by Auth0
+			 * @example '0oajq1q4qj7qj7qj7qj7qj7qj7qj7qj7q'
+			 * @see https://auth0.com/docs/quickstart/backend/nodejs/01-authorization#configuration
+			 */
+			readonly AUTH0_CLIENT_ID: string;
+
+			/**
+			 * Auth0 client secret provided by Auth0
+			 */
+			readonly AUTH0_CLIENT_SECRET: string;
+
+			/**
+			 * Auth0 domain as configured in Auth0
+			 */
+			readonly AUTH0_DOMAIN: string;
+			readonly AUTH0_REDIRECT_URI: string;
+			readonly AUTH0_API_NAMESPACE: string;
+			readonly AUTH0_API_AUDIENCE: string;
+
+			/**
+			 * MyFatoorah API key
+			 */
+			readonly MYFATOORAH_TOKEN: string;
+			readonly MYFATOORAH_BASE_URL: string;
+
+			readonly TWILIO_ACCOUNT_SID: string;
+			readonly TWILIO_AUTH_TOKEN: string;
+			readonly TWILIO_FROM_NUMBER: string;
+		}
+	}
 }
 
-interface ImportMetaEnv {
-	readonly VITE_AUTH0_CLIENT_ID: string;
-	readonly VITE_AUTH0_REDIRECT_URI: string;
-	readonly VITE_AUTH0_CLIENT_SECRET: string;
-	readonly VITE_MYFATOORAH_BASE_URL: string;
-	readonly VITE_MYFATOORAH_TOKEN: string;
-	readonly VITE_PINO_API_KEY: string;
-	readonly VITE_PINO_SOURCE_TOKEN: string;
-	readonly VITE_PINO_LOG_LEVEL: string;
-	readonly VITE_MOBILE: string;
-	readonly VITE_DOMAIN: string;
-	readonly VITE_TWILIO_ACCOUNT_SID: string;
-	readonly VITE_TWILIO_AUTH_TOKEN: string;
-	readonly VITE_TWILIO_FROM_NUMBER: string;
-	readonly VITE_SVELTE_APP_SUPABASE_URL: string;
-	readonly VITE_SVELTE_APP_SUPABASE_ANON_KEY: string;
-	readonly VITE_CUSTOM_OAUTH_REDIRECT_URI: string;
-	readonly OAUTH_JWT_SECRET_KEY: string;
-}
+// If this file has no import/export statements (i.e. is a script)
+// convert it into a module by adding an empty export statement.
+export {};

@@ -1,10 +1,17 @@
+import { environment } from '$environment';
 import { createLocalJWKSet, jwtVerify } from 'jose';
 
-export const validateAccessToken = async (token: string) => {
-	// TODO use .env
+const { authConfig } = environment;
+
+export const validateAccessToken = async (
+	token: string,
+	tokenType: 'idToken' | 'accessToken' = 'accessToken',
+) => {
 	// const JWKS = jose.createRemoteJWKSet(
-	// 	new URL('https://dev-eehvhdp2.eu.auth0.com/.well-known/jwks.json'),
+	// 	new URL(`${authConfig.AUTH0_DOMAIN}/.well-known/jwks.json`),
 	// );
+
+	// TODO use .env
 	const JWKS = createLocalJWKSet({
 		keys: [
 			{
@@ -33,10 +40,15 @@ export const validateAccessToken = async (token: string) => {
 			},
 		],
 	});
+	console.log({ token }, 'validate.ts ~ 43');
+	console.log({ tokenType }, 'validate.ts ~ 44');
+	const audience =
+		tokenType === 'accessToken'
+			? authConfig.AUTH0_API_AUDIENCE
+			: authConfig.AUTH0_CLIENT_ID;
 	const { payload } = await jwtVerify(token, JWKS, {
-		// TODO: use .env. TODO: be more explicit about aud?
-		audience: ['letand.be/api', 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct'],
-		issuer: 'https://dev-eehvhdp2.eu.auth0.com/',
+		audience,
+		issuer: `${authConfig.AUTH0_DOMAIN}/`,
 		algorithms: ['RS256'],
 	});
 	return payload;

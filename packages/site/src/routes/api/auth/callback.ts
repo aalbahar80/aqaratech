@@ -1,6 +1,8 @@
+import { environment } from '$environment';
+import { getAuthz, validateAccessToken } from '$lib/server/utils';
 import type { RequestHandler } from '@sveltejs/kit';
-import { config, parseUser } from '$lib/services/auth/config';
-import { getAuthz } from '$lib/server/utils';
+
+const { authConfig } = environment;
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 export interface TokenResponse {
@@ -12,17 +14,18 @@ export interface TokenResponse {
 	refresh_token?: string | undefined;
 }
 
-async function getTokens(code: string, redirectUri: string) {
+async function getTokens(code: string) {
 	try {
 		const body = JSON.stringify({
 			grant_type: 'authorization_code',
-			client_id: config.clientId,
-			client_secret: config.clientSecret,
+			client_id: authConfig.AUTH0_CLIENT_ID,
+			client_secret: authConfig.AUTH0_CLIENT_SECRET,
 			code,
-			redirect_uri: redirectUri,
+			redirect_uri: authConfig.AUTH0_REDIRECT_URI,
 		});
+		console.log({ body }, 'callback.ts ~ 26');
 
-		const res = await fetch(config.accessTokenUrl, {
+		const res = await fetch(`${authConfig.AUTH0_DOMAIN}/oauth/token`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -43,16 +46,16 @@ export const get: RequestHandler = async (req) => {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		const redirectUri = config.redirectUri;
+		console.log({ code }, 'callback.ts ~ 50');
+		const tokens = await getTokens(code);
 
-		const tokens = await getTokens(code, redirectUri);
-
+		console.log({ tokens }, 'callback.ts ~ 52');
 		req.locals.accessToken = tokens.access_token;
 		req.locals.idToken = tokens.id_token;
-		req.locals.user = parseUser(tokens.id_token);
+		// req.locals.user = await validateAccessToken(tokens.id_token, 'idToken');
 
 		let location = '/';
-		const authz = await getAuthz(req.locals.idToken);
+		const authz = await getAuthz(req.locals.idToken, 'idToken');
 		if (authz?.isTenant) {
 			location = `/portal/tenant/${authz.id}`;
 		} else if (authz?.isOwner) {

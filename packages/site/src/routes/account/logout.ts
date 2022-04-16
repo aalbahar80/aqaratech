@@ -1,4 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
+import { environment } from '$environment';
+
+const { authConfig } = environment;
 
 export const get: RequestHandler = (req) => {
 	//  Sets the user equal to null (local sign out)
@@ -7,7 +10,7 @@ export const get: RequestHandler = (req) => {
 	req.locals.idToken = '';
 
 	// redirect to auth0 logout (global sign out)
-	const BASE_URL = 'https://dev-eehvhdp2.eu.auth0.com/v2/logout';
+	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 	const redirectUrl = `${req.url.origin}`;
 	const query = new URLSearchParams({

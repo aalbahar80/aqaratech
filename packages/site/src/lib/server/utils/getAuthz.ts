@@ -1,5 +1,7 @@
+import { environment } from '$environment';
 import { validateAccessToken } from '$lib/server/utils';
 
+const { authConfig } = environment;
 interface Admin {
 	isAdmin: true;
 	isOwner: false;
@@ -31,18 +33,24 @@ interface Auth0UserMeta {
 
 export const getAuthz = async (
 	token: string | undefined,
+	tokenType: 'idToken' | 'accessToken' = 'accessToken',
 ): Promise<Authz | null> => {
 	if (!token) {
 		return null;
 	}
-	const payload = await validateAccessToken(token);
-	const roles = payload['https://letand.be/roles'] as string[];
+	console.log({ token }, 'getAuthz.ts ~ 41');
+	const payload = await validateAccessToken(token, tokenType);
+	console.log({ payload }, 'getAuthz.ts ~ 43');
+	const roles = payload[
+		`https://${authConfig.AUTH0_API_NAMESPACE}/roles`
+	] as string[];
+	console.log({ roles }, 'getAuthz.ts ~ 47');
 	const metadata = {
 		userMetadata: payload[
-			'https://letand.be/userMetadata'
+			`https://${authConfig.AUTH0_API_NAMESPACE}/userMetadata`
 		] as Auth0UserMeta['userMetadata'],
 	};
-	// let authz: Authz;
+	// let authz;
 	const isOwner = roles.includes('property-owner');
 	const isAdmin = roles.includes('admin');
 	const isTenant = roles.includes('tenant');

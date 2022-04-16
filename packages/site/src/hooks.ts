@@ -1,5 +1,5 @@
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
-import { parseUser } from '$lib/services/auth/config';
+import { validateAccessToken } from '$lib/server/utils';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
@@ -12,9 +12,11 @@ export const getSession: GetSession = async ({ locals }) => ({
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+	// TODO validate tokens here
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
-	event.locals.user = parseUser(cookies.idToken);
+	// event.locals.user = parseUser(cookies.idToken);
+	// event.locals.user = await validateAccessToken(cookies.idToken, 'idToken');
 	let response;
 
 	const url = '/trpc';

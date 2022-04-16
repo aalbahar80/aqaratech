@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import { parseAccessToken } from '$lib/services/auth/config';
 	import { decodeJwt } from 'jose';
 
 	$: user = $session.user as Record<string, any>;
@@ -8,7 +7,7 @@
 
 	// TODO remove in prod
 	$: idToken = decodeJwt($session.idToken ?? '');
-	$: accessToken = parseAccessToken($session.accessToken ?? '');
+	$: accessToken = decodeJwt($session.accessToken ?? '');
 
 	const styleRowFromIndex = (idx: number) => {
 		return idx % 2 === 0
