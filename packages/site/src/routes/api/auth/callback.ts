@@ -1,5 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { config, parseUser } from '$lib/services/auth/config';
+import { getAuthz } from '$lib/server/utils';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 export interface TokenResponse {
@@ -50,10 +51,18 @@ export const get: RequestHandler = async (req) => {
 		req.locals.idToken = tokens.id_token;
 		req.locals.user = parseUser(tokens.id_token);
 
+		let location = '/';
+		const authz = await getAuthz(req.locals.idToken);
+		if (authz?.isTenant) {
+			location = `/portal/tenant/${authz.id}`;
+		} else if (authz?.isOwner) {
+			location = `/portal/owner/${authz.id}`;
+		}
+
 		return {
 			status: 302,
 			headers: {
-				location: '/',
+				location,
 			},
 		};
 	} catch (e) {

@@ -34,7 +34,8 @@ export const validateAccessToken = async (token: string) => {
 		],
 	});
 	const { payload } = await jwtVerify(token, JWKS, {
-		audience: 'letand.be/api',
+		// TODO: use .env. TODO: be more explicit about aud?
+		audience: ['letand.be/api', 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct'],
 		issuer: 'https://dev-eehvhdp2.eu.auth0.com/',
 		algorithms: ['RS256'],
 	});
