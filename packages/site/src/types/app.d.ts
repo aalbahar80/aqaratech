@@ -1,4 +1,5 @@
 /// <reference types="@sveltejs/kit" />
+/// <reference types="vite/client" />
 
 interface Auth0Profile {
 	sub: string;
@@ -6,6 +7,16 @@ interface Auth0Profile {
 	picture: string;
 	email: string;
 	updated_at: string;
+}
+interface ImportMetaEnv {
+	// See https://vercel.com/docs/concepts/projects/environment-variables
+	// for information about these environment variables
+	readonly VITE_VERCEL_ENV: 'production' | 'preview' | 'development';
+	readonly VITE_VERCEL_URL: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
 }
 declare namespace App {
 	interface Locals {
