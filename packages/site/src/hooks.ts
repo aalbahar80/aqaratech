@@ -1,13 +1,14 @@
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
-import { validateAccessToken } from '$lib/server/utils';
+import { getAuthz } from '$lib/server/utils';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
-	idToken: locals.idToken,
-	accessToken: locals.accessToken,
+	idToken: locals.idToken, // TODO remove
+	accessToken: locals.accessToken, // TODO remove
+	authz: locals.authz,
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -15,8 +16,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// TODO validate tokens here
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
-	// event.locals.user = parseUser(cookies.idToken);
-	// event.locals.user = await validateAccessToken(cookies.idToken, 'idToken');
+
+	const authz = await getAuthz(cookies.idToken || '', 'idToken');
+	event.locals.authz = authz;
+
 	let response;
 
 	const url = '/trpc';

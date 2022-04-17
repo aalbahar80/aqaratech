@@ -1,29 +1,8 @@
 import { environment } from '$environment';
+import type { Authz } from '$lib/models/types/auth.type';
 import { validateAccessToken } from '$lib/server/utils';
 
 const { authConfig } = environment;
-interface Admin {
-	isAdmin: true;
-	isOwner: false;
-	isTenant: false;
-	id: undefined;
-}
-
-interface Owner {
-	isAdmin: false;
-	isOwner: true;
-	isTenant: false;
-	id: string;
-}
-
-interface Tenant {
-	isAdmin: false;
-	isOwner: false;
-	isTenant: true;
-	id: string;
-}
-
-type Authz = Admin | Owner | Tenant;
 
 interface Auth0UserMeta {
 	userMetadata: {

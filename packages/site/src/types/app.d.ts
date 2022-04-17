@@ -30,7 +30,7 @@ declare namespace App {
 
 	interface Session {
 		user: Readonly<Auth0Profile> | undefined;
-		authz: Authz | null;
+		authz: import('$models/types/auth.type').Authz | null;
 		accessToken: string | undefined; // TODO remove in prod
 		idToken: string | undefined; // TODO remove in prod
 	}
