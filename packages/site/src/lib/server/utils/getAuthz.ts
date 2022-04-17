@@ -14,6 +14,9 @@ export const getAuthz = async (
 	token: string,
 	tokenType: 'idToken' | 'accessToken' = 'accessToken',
 ): Promise<Authz | null> => {
+	if (!token) {
+		return null;
+	}
 	try {
 		const payload = await validateAccessToken(token, tokenType);
 		console.log({ payload }, 'getAuthz.ts ~ 43');
