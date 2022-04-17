@@ -6,14 +6,13 @@ import cookie from 'cookie';
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
-	idToken: locals.idToken, // TODO remove
-	accessToken: locals.accessToken, // TODO remove
 	authz: locals.authz,
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
+	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	// TODO validate tokens here
+
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
 
