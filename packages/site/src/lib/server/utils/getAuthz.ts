@@ -19,11 +19,9 @@ export const getAuthz = async (
 	}
 	try {
 		const payload = await validateAccessToken(token, tokenType);
-		console.log({ payload }, 'getAuthz.ts ~ 43');
 		const roles = payload[
 			`https://${authConfig.AUTH0_API_NAMESPACE}/roles`
 		] as string[];
-		console.log({ roles }, 'getAuthz.ts ~ 47');
 		const metadata = {
 			userMetadata: payload[
 				`https://${authConfig.AUTH0_API_NAMESPACE}/userMetadata`

@@ -40,8 +40,6 @@ export const validateAccessToken = async (
 			},
 		],
 	});
-	console.log({ token }, 'validate.ts ~ 43');
-	console.log({ tokenType }, 'validate.ts ~ 44');
 	const audience =
 		tokenType === 'accessToken'
 			? authConfig.AUTH0_API_AUDIENCE
