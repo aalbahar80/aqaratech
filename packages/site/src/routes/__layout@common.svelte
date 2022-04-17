@@ -2,5 +2,5 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
-<Navbar hideClients />
+<Navbar />
 <slot />
