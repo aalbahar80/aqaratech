@@ -19,6 +19,7 @@ export const get: RequestHandler = (req) => {
 	});
 
 	const logoutUrl = `${BASE_URL}?${query.toString()}`;
+	console.log({ logoutUrl }, 'logout.ts ~ 22');
 
 	return {
 		status: 302,

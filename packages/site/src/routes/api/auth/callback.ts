@@ -61,6 +61,7 @@ export const get: RequestHandler = async (req) => {
 		} else if (authz?.isOwner) {
 			location = `/portal/owner/${authz.id}`;
 		}
+		console.log({ location }, 'callback.ts ~ 64');
 
 		return {
 			status: 302,
