@@ -16,7 +16,6 @@ export const get: RequestHandler = () => {
 	const url = `${authConfig.AUTH0_DOMAIN}/authorize?${decodeURIComponent(
 		query.toString(),
 	)}`;
-	console.log({ url }, 'login.ts ~ 19');
 	return {
 		status: 302,
 		headers: {
