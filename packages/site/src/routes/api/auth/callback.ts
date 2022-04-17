@@ -51,7 +51,7 @@ export const get: RequestHandler = async (req) => {
 
 		console.log({ tokens }, 'callback.ts ~ 52');
 		req.locals.accessToken = tokens.access_token;
-		req.locals.idToken = tokens.id_token;
+		req.locals.idToken = tokens.id_token || '';
 		// req.locals.user = await validateAccessToken(tokens.id_token, 'idToken');
 
 		let location = '/';

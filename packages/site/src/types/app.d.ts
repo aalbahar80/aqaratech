@@ -20,15 +20,17 @@ interface ImportMeta {
 }
 declare namespace App {
 	interface Locals {
-		accessToken: string | undefined;
-		idToken: string | undefined;
+		accessToken: string;
+		idToken: string;
 		user: Auth0Profile | undefined;
+		authz: Authz | null;
 	}
 
 	// interface Platform {}
 
 	interface Session {
 		user: Readonly<Auth0Profile> | undefined;
+		authz: Authz | null;
 		accessToken: string | undefined; // TODO remove in prod
 		idToken: string | undefined; // TODO remove in prod
 	}
