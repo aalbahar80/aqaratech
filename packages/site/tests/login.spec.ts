@@ -10,8 +10,10 @@ test.beforeEach(async ({ page }) => {
 	// await page.locator('text=Log in').click();
 
 	// Directly to login page
-	await page.goto('http://localhost:3000/login');
-	await page.locator('a:has-text("Sign in")').click();
+	await page.goto('http://localhost:3000');
+
+	// TODO only use one login button to avoid last()
+	await page.locator('a:has-text("Log in")').last().click();
 
 	// await expect(page).toHaveURL(
 	// 	'https://dev-eehvhdp2.eu.auth0.com/u/login?state=hKFo2SBxdmtTUXJVV0M1YThlbHVhb1llRUFROG9VdEdIcWFsT6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHJwSzUtc200ZDZOdTNOUWtENElsSGRoVTZHQ1BaTDdio2NpZNkgejZvcXlPdVBMYW82WGhKZUNqZTl0WjhaYmlKYTV6Y3Q',
