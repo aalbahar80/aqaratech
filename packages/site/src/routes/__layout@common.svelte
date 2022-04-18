@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import { session } from '$app/stores';
 	import Navbar from '$lib/components/Navbar.svelte';
 
 	const navigation = [
@@ -12,5 +13,5 @@
 	];
 </script>
 
-<Navbar {navigation} />
+<Navbar navigation={$session.authz?.isAdmin ? navigation : []} />
 <slot />

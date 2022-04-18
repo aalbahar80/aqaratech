@@ -33,14 +33,24 @@
 							alt=""
 						/>
 					</a>
-					<div class="-mr-2 flex items-center md:hidden">
-						<PopoverButton
-							class="focus-ring-inset inline-flex items-center justify-center rounded-md bg-gray-900 p-2 text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+
+					{#if $session.authz}
+						<div class="-mr-2 flex items-center md:hidden">
+							<PopoverButton
+								class="focus-ring-inset inline-flex items-center justify-center rounded-md bg-gray-900 p-2 text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+							>
+								<span class="sr-only">Open main menu</span>
+								<Icon src={Menu} class="h-6 w-6" aria-hidden="true" />
+							</PopoverButton>
+						</div>
+					{:else}
+						<a
+							href="/api/auth/login"
+							class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 md:hidden"
 						>
-							<span class="sr-only">Open main menu</span>
-							<Icon src={Menu} class="h-6 w-6" aria-hidden="true" />
-						</PopoverButton>
-					</div>
+							Log in
+						</a>
+					{/if}
 				</div>
 
 				<!-- navbar 1 -->
