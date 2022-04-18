@@ -9,21 +9,11 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let hideClients = false;
-	const clientNav = [{ name: 'Clients', href: '/clients' }];
-
-	let navigation = [
-		{ name: 'Properties', href: '/properties' },
-		{ name: 'Units', href: '/units' },
-		{ name: 'Leases', href: '/leases' },
-		{ name: 'Tenants', href: '/tenants' },
-		// { name: 'Transactions', href: '/transactions' },
-		{ name: 'Maintenance', href: '/maintenanceOrders' },
-	];
-
-	if (!hideClients) {
-		navigation = [...clientNav, ...navigation];
+	interface Navigation {
+		name: string;
+		href: string;
 	}
+	export let navigation: Navigation[] = [];
 </script>
 
 <Popover as="header" class="relative" let:close>
