@@ -5,6 +5,7 @@
 	import trpc from '$lib/client/trpc';
 	import { getBadge } from '$lib/models/interfaces/transaction.interface';
 	import { addToast } from '$lib/stores/toast';
+	import { classes } from '$lib/utils';
 	import { dateFormat } from '$lib/utils/common';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
@@ -130,7 +131,15 @@
 		<ul>
 			{#each data as transaction (transaction.id)}
 				<li>
-					<a href={`/transactions/${transaction.id}`}>
+					<!-- class="block bg-white px-4 py-4" -->
+					<svelte:element
+						this={hideActions ? 'div' : 'a'}
+						class={classes(
+							hideActions ? '' : 'hover:bg-gray-50',
+							'block bg-white px-4 py-4',
+						)}
+						href={`/transactions/${transaction.id}`}
+					>
 						<span class="flex items-center space-x-4">
 							<span class="flex flex-1 space-x-2 truncate">
 								<Icon
@@ -152,14 +161,18 @@
 									>
 								</span>
 							</span>
-							<Icon
-								src={ChevronRight}
-								theme="solid"
-								class="h-5 w-5 flex-shrink-0 text-gray-400"
-								aria-hidden="true"
-							/>
+							{#if !hideActions}
+								<Icon
+									src={ChevronRight}
+									theme="solid"
+									class="h-5 w-5 flex-shrink-0 text-gray-400"
+									aria-hidden="true"
+								/>
+							{:else}
+								<Chip {...getBadge(transaction)} />
+							{/if}
 						</span>
-					</a>
+					</svelte:element>
 				</li>
 			{/each}
 		</ul>
@@ -184,9 +197,11 @@
 						<tr>
 							<td>
 								<div class="flex">
-									<a
+									<svelte:element
+										this={hideActions ? 'div' : 'a'}
 										href={`/transactions/${transaction.id}`}
-										class="group inline-flex space-x-2 truncate text-sm"
+										class="inline-flex space-x-2 truncate text-sm"
+										class:group={!hideActions}
 									>
 										<Icon
 											src={Cash}
@@ -197,7 +212,7 @@
 										<p class="truncate text-gray-500 group-hover:text-gray-900">
 											{transaction.memo}
 										</p>
-									</a>
+									</svelte:element>
 								</div>
 							</td>
 							<td class="text-right">
@@ -370,8 +385,5 @@
 	}
 	ul {
 		@apply divide-y divide-gray-200 overflow-hidden sm:hidden;
-	}
-	li a {
-		@apply block bg-white px-4 py-4 hover:bg-gray-50;
 	}
 </style>
