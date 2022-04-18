@@ -1,35 +1,24 @@
 import { test, expect } from '@playwright/test';
 
+const email = 'dev.tester.2@mailthink.net';
+const password = 'HVuc1C8Ls9CN';
+
 test.beforeEach(async ({ page }) => {
-	// TODO see more succint way of writing this:
-	// https://playwright.dev/docs/test-auth#sign-in-with-beforeeach
-	// Runs before each test and signs in each page.
-
-	// Home Page
-	// await page.goto('http://localhost:3000/');
-	// await page.locator('text=Log in').click();
-
-	// Directly to login page
 	await page.goto('http://localhost:3000');
 
 	// TODO only use one login button to avoid last()
 	await page.locator('a:has-text("Log in")').last().click();
 
-	// await expect(page).toHaveURL(
-	// 	'https://dev-eehvhdp2.eu.auth0.com/u/login?state=hKFo2SBxdmtTUXJVV0M1YThlbHVhb1llRUFROG9VdEdIcWFsT6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHJwSzUtc200ZDZOdTNOUWtENElsSGRoVTZHQ1BaTDdio2NpZNkgejZvcXlPdVBMYW82WGhKZUNqZTl0WjhaYmlKYTV6Y3Q',
-	// );
-	await page.locator('input[name="username"]').click();
-	await page.locator('input[name="username"]').click();
-	await page
-		.locator('input[name="username"]')
-		.fill('dev.tester.3@mailthink.net');
-	await page.locator('input[name="password"]').click();
-	await page.locator('input[name="password"]').fill('HVuc1C8Ls9CN');
+	// await expect(page).toHaveURL()
+
+	await page.fill('input[name="username"]', email);
+	await page.fill('input[name="password"]', password);
+
 	await page.locator('button[name="action"]').click();
 });
 
-test('Redirected to home page after loggin in', async ({ page }) => {
-	await expect(page).toHaveURL('http://localhost:3000/');
+test('Redirected to owner portal after logging in', async ({ page }) => {
+	await expect(page).toHaveURL(/^http:\/\/localhost:3000\/portal\/owner\/.*$/);
 });
 
 test('accessToken exists', async ({ context }) => {
