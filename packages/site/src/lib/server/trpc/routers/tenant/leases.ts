@@ -10,16 +10,20 @@ export const leases = createRouter().query('list', {
 			throw new TRPCError({ code: 'FORBIDDEN' });
 		}
 		const data = await prismaClient.lease.findMany({
-			where: { tenantId: id },
+			where: {
+				AND: [{ tenantId: id }, { start: { lte: new Date() } }],
+			},
 			orderBy: {
 				start: 'desc',
 			},
 			include: {
 				transactions: {
+					where: { dueDate: { lte: new Date() } },
 					orderBy: {
 						postDate: 'desc',
 					},
 					select: {
+						// TODO only return necessary data
 						id: true,
 						amount: true,
 						isPaid: true,
@@ -32,6 +36,7 @@ export const leases = createRouter().query('list', {
 				},
 			},
 		});
+		console.log({ data }, 'leases.ts ~ 36');
 		return data;
 	},
 });

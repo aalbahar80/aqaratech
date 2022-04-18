@@ -1,3 +1,4 @@
+import { dev } from '$app/env';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
@@ -53,3 +54,11 @@ export const getBadge = (trx: { isPaid: boolean; dueDate: Date }) => {
 		color: 'indigo',
 	};
 };
+
+// export const getMFReceiptUrl = (mfPaymentId: string) => {
+// 	if (dev) {
+// 		return `https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=${mfPaymentId}`;
+// 	} else {
+// 		return `https://portal.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=${mfPaymentId}`;
+// 	}
+// };

@@ -2,7 +2,10 @@
 	import { goto } from '$app/navigation';
 	import Badge from '$components/Badge.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import { getBadge } from '$models/interfaces/transaction.interface';
+	import {
+		getBadge,
+		// getMFReceiptUrl,
+	} from '$models/interfaces/transaction.interface';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { format } from 'date-fns';
@@ -68,15 +71,26 @@
 					</p>
 				</div>
 				{#if trx.isPaid}
-					<span class="mt-4 sm:mt-0">
-						<!-- TODO add receipt url -->
-						<a
-							href="/"
-							class="font-medium text-indigo-600 hover:text-indigo-500"
+					<!-- {#if trx.mfPaymentId}
+						<span class="mt-4 sm:mt-0">
+							<a
+								href={getMFReceiptUrl(trx.mfPaymentId)}
+								class="font-medium text-indigo-600 hover:text-indigo-500"
+							>
+								Receipt <span aria-hidden="true"> &rarr;</span>
+							</a>
+						</span>
+					{:else}
+						Paid on <time dateTime={trx.dueDate.toISOString()}
+							>{format(trx.dueDate, 'MMM dd, yy')}</time
 						>
-							Receipt <span aria-hidden="true"> &rarr;</span>
-						</a>
-					</span>
+					{/if} -->
+					<div>
+						Paid on
+						<time dateTime={trx.dueDate.toISOString()}
+							>{format(trx.dueDate, 'MMM dd, yy')}</time
+						>
+					</div>
 				{:else}
 					<div>
 						<Button

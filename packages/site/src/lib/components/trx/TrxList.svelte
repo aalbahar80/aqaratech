@@ -10,23 +10,23 @@
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
-	{#if trxs.length}
-		<!-- Section Heading -->
-		<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-			<div
-				class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
-			>
-				<div class="ml-4 mt-2">
-					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						Transactions
-					</h3>
-				</div>
-				<div class="ml-4 mt-2 flex-shrink-0">
-					<slot />
-				</div>
+	<!-- Section Heading -->
+	<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+		<div
+			class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
+		>
+			<div class="ml-4 mt-2">
+				<h3 class="text-lg font-medium leading-6 text-gray-900">
+					Transactions
+				</h3>
+			</div>
+			<div class="ml-4 mt-2 flex-shrink-0">
+				<slot />
 			</div>
 		</div>
+	</div>
 
+	{#if trxs.length}
 		<ul class="divide-y divide-gray-200">
 			{#each trxs as trx (trx.id)}
 				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
