@@ -7,11 +7,6 @@ export const validateAccessToken = async (
 	token: string,
 	tokenType: 'idToken' | 'accessToken' = 'accessToken',
 ) => {
-	// const JWKS = jose.createRemoteJWKSet(
-	// 	new URL(`${authConfig.AUTH0_DOMAIN}/.well-known/jwks.json`),
-	// );
-
-	// TODO use .env
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
 	const audience =
 		tokenType === 'accessToken'
