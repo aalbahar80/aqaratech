@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const stagingEnvironment: EnvironmentConfig = {
-	type: EnvironmentType.STAGING,
-	name: 'staging',
+export const productionEnvironment: EnvironmentConfig = {
+	type: EnvironmentType.PRODUCTION,
+	name: 'production',
 	callbackDomain: process.env.CALLBACK_DOMAIN,
 	authConfig: {
 		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,

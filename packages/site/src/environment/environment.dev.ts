@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * This is currently only active locally based on `dev`.
+ */
 export const developmentEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.DEVELOPMENT,
 	name: 'development',

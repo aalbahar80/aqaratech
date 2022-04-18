@@ -4,7 +4,6 @@ import type { TwilioConfigType } from '$models/types/twilio.type';
 
 export enum EnvironmentType {
 	'DEVELOPMENT',
-	'STAGING',
 	'PRODUCTION',
 }
 
