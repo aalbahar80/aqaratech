@@ -82,15 +82,9 @@
 				{:else}
 					<a
 						href="/api/auth/login"
-						class="text-base font-medium text-white hover:text-gray-300"
-					>
-						Log in
-					</a>
-					<a
-						href="/"
 						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 					>
-						Start free trial
+						Log in
 					</a>
 				{/if}
 			</div>
@@ -140,23 +134,26 @@
 								{item.name}
 							</a>
 						{/each}
+						{#if $session.authz}
+							<a
+								on:click={() => close(null)}
+								href="/account/logout"
+								class="block rounded-md bg-gray-50 px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100"
+							>
+								Logout
+							</a>
+						{/if}
 					</div>
-					<div class="mt-6 px-5">
-						<a
-							href="/"
-							class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
-						>
-							Start free trial
-						</a>
-					</div>
-					<div class="mt-6 px-5">
-						<p class="text-center text-base font-medium text-gray-500">
-							Existing customer?{' '}
-							<a href="/api/auth/login" class="text-gray-900 hover:underline">
+					{#if !$session.authz}
+						<div class="mt-6 px-5">
+							<a
+								href="/api/auth/login"
+								class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
+							>
 								Login
 							</a>
-						</p>
-					</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 		</PopoverPanel>
