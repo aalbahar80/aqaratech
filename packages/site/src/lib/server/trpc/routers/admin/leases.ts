@@ -16,7 +16,7 @@ export const leases = createRouter()
 				include: {
 					transactions: {
 						orderBy: {
-							dueDate: 'asc',
+							dueDate: 'desc',
 						},
 					},
 					tenant: {
