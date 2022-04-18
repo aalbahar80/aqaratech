@@ -1,3 +1,5 @@
+import type { JSONWebKeySet } from 'jose';
+
 type AuthConfigKeys =
 	| 'AUTH0_CLIENT_ID'
 	| 'AUTH0_CLIENT_SECRET'
@@ -8,6 +10,8 @@ type AuthConfigKeys =
 
 export type AuthConfigType = {
 	[key in AuthConfigKeys]: string;
+} & {
+	JWKS: JSONWebKeySet;
 };
 
 interface Admin {
