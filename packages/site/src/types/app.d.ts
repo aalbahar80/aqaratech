@@ -35,6 +35,7 @@ declare namespace App {
 
 	interface Stuff {
 		lease: import('$lib/client/trpc').InferQueryOutput<'leases:read'>;
+		hrefBase: string | undefined;
 	}
 }
 

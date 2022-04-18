@@ -10,7 +10,10 @@
 		const entity = params.entity as OwnerEntity;
 		const pageIndex = url.searchParams.get('p');
 		const [{ data, pagination }] = await Promise.all([
-			trpc.query(`owner:${entity}:list`, { pageIndex, clientId: params.id }),
+			trpc.query(`owner:${entity}:list`, {
+				pageIndex,
+				clientId: params.ownerId,
+			}),
 		]);
 		return {
 			props: { entity, pagination, data },

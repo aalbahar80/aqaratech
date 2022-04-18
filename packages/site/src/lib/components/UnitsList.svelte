@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import {
 		faBath,
@@ -14,6 +15,7 @@
 	type Units = NonNullable<InferQueryOutput<'properties:read'>>['units'];
 	export let units: Units;
 	export let propertyId: string;
+	export let hideActions = false;
 
 	$: addUnitHref = `/new/units?propertyId=${propertyId}`;
 </script>
@@ -28,14 +30,16 @@
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">Units</h3>
 				</div>
-				<div class="ml-4 mt-2 flex-shrink-0">
-					<a
-						href={addUnitHref}
-						class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-					>
-						Create new unit
-					</a>
-				</div>
+				{#if !hideActions}
+					<div class="ml-4 mt-2 flex-shrink-0">
+						<a
+							href={addUnitHref}
+							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+						>
+							Create new unit
+						</a>
+					</div>
+				{/if}
 			</div>
 		</div>
 
@@ -67,7 +71,10 @@
 					},
 				]}
 				<li>
-					<a href={`/units/${unit.id}`} class="block hover:bg-gray-50">
+					<a
+						href={`${$page.stuff.hrefBase ?? ''}/units/${unit.id}`}
+						class="block hover:bg-gray-50"
+					>
 						<div class="px-4 py-4 sm:px-6">
 							<div class="flex items-center justify-between">
 								<p class="truncate text-sm font-medium text-indigo-600">
@@ -141,18 +148,24 @@
 				/>
 			</svg>
 			<h3 class="mt-2 text-sm font-medium text-gray-900">No units</h3>
-			<p class="mt-1 text-sm text-gray-500">
-				Get started by creating a new unit.
-			</p>
-			<div class="mt-6">
-				<a
-					href={addUnitHref}
-					class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-				>
-					<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-					New Unit
-				</a>
-			</div>
+
+			{#if hideActions}
+				<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>
+				<div class="mt-6" />
+			{:else}
+				<p class="mt-1 text-sm text-gray-500">
+					Get started by creating a new unit.
+				</p>
+				<div class="mt-6">
+					<a
+						href={addUnitHref}
+						class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+					>
+						<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+						New Unit
+					</a>
+				</div>
+			{/if}
 		</div>
 	{/if}
 </section>

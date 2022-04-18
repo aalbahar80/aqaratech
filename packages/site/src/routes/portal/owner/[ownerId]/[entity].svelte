@@ -5,7 +5,7 @@
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './[entity]';
 
-	export const load: Load = async ({ url, params }) => {
+	export const load: Load = async ({ url }) => {
 		// const entity = params.entity as Entity;
 		const entity = 'units';
 		const pageIndex = url.searchParams.get('p');

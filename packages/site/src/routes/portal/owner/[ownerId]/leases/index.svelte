@@ -10,7 +10,7 @@
 
 	export const load: Load = async ({ params }) => {
 		const options = {
-			clientId: params.id,
+			clientId: params.ownerId,
 			pageIndex: 1,
 			size: 15,
 			sortBy: { key: 'createdAt', order: 'desc' } as const,

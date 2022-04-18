@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page } from '$app/stores';
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -62,7 +62,7 @@
 					<LeaseCard
 						{lease}
 						index={showIndex ? index + 1 : undefined}
-						hrefBase={hideActions ? `/portal/owner/${$session.authz?.id}` : ''}
+						hrefBase={$page.stuff.hrefBase ?? ''}
 					/>
 				</li>
 			{/each}

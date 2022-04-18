@@ -29,5 +29,5 @@
 	<Heading title="Property" id={property.id} entity="properties" hideActions />
 
 	<DetailsPane {details} />
-	<UnitsList units={property.units} propertyId={property.id} />
+	<UnitsList units={property.units} propertyId={property.id} hideActions />
 </div>

@@ -29,12 +29,12 @@
 		const defaultFilter: Filter = {
 			propertyId: null,
 			unitId: null,
-			clientId: params.id,
+			clientId: params.ownerId,
 			...getRange(defaultRange),
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc.query('owner:charts:client', { clientId: params.id }), // TODO use read?
+			trpc.query('owner:charts:client', { clientId: params.ownerId }), // TODO use read?
 			trpc.query('owner:charts:income', {
 				...defaultFilter,
 			}),

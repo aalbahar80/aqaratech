@@ -1,10 +1,13 @@
 <script lang="ts">
 	import type { Entity } from '$lib/models/interfaces/entity.interface';
 	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import { page } from '$app/stores';
 
 	// create tuple type
 	type Crumb = [Entity, string | undefined];
 	export let crumbs: Crumb[];
+	const base = $page.stuff.hrefBase ?? '';
+	console.log({ base }, 'BreadCrumb.svelte ~ 10');
 </script>
 
 <nav class="flex" aria-label="Breadcrumb">
@@ -24,7 +27,7 @@
 						</svg>
 					{/if}
 					<a
-						href={`/${crumb[0]}/${crumb[1]}`}
+						href={`${base}/${crumb[0]}/${crumb[1]}`}
 						class="text-sm font-medium text-gray-500 hover:text-gray-700"
 						class:ml-4={idx !== 0}
 					>

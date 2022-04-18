@@ -15,4 +15,4 @@
 	export let unit: Unit;
 </script>
 
-<UnitPage {unit} />
+<UnitPage {unit} hideActions />
