@@ -135,10 +135,19 @@
 							</a>
 						{/each}
 						{#if $session.authz}
+							<div class="relative py-2">
+								<div
+									class="absolute inset-0 inset-x-2 flex items-center"
+									aria-hidden="true"
+								>
+									<div class="w-full border-t border-gray-300" />
+								</div>
+								<div class="relative flex justify-start" />
+							</div>
 							<a
 								on:click={() => close(null)}
 								href="/account/logout"
-								class="block rounded-md bg-gray-50 px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100"
+								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
 							>
 								Logout
 							</a>
