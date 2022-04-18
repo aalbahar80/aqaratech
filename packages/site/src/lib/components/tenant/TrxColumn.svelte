@@ -25,6 +25,7 @@
 	>['leases'][number]['transactions'];
 	export let transactions: Transactions;
 	export let leaseId: string | undefined = undefined;
+	export let hideActions = false;
 
 	let pageIndex = 1;
 	let data: typeof transactions;
@@ -115,7 +116,7 @@
 						</dd>
 					{/key}
 				</div>
-				{#if leaseId}
+				{#if leaseId && !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
 						<a href={`/new/transactions?leaseId=${leaseId}`}>
 							Create new transaction
@@ -172,7 +173,9 @@
 						<th> Amount </th>
 						<th> Status </th>
 						<th> Date </th>
-						<th> Action </th>
+						{#if !hideActions}
+							<th> Actions </th>
+						{/if}
 					</tr>
 				</thead>
 				<tbody>
@@ -215,47 +218,52 @@
 									>{dateFormat(transaction.dueDate)}</time
 								>
 							</td>
-							<td class="text-center">
-								<DropDown
-									options={[
-										{
-											icon: PencilAlt,
-											label: 'Edit',
-											href: `/transactions/${transaction.id}/edit`,
-										},
-										{
-											icon: ClipboardCopy,
-											label: 'Copy payment URL',
-											onClick: () => {
-												copyUrl(transaction.id);
+							{#if hideActions}
+								<!-- To get around :last-child css selector -->
+								<td />
+							{:else}
+								<td class="text-center">
+									<DropDown
+										options={[
+											{
+												icon: PencilAlt,
+												label: 'Edit',
+												href: `/transactions/${transaction.id}/edit`,
 											},
-										},
-										{
-											icon: Speakerphone,
-											label: 'Send reminder',
-											disabled: transaction.isPaid,
-											onClick: () => {
-												console.log('TODO implement');
+											{
+												icon: ClipboardCopy,
+												label: 'Copy payment URL',
+												onClick: () => {
+													copyUrl(transaction.id);
+												},
 											},
-										},
-										transaction.isPaid
-											? {
-													icon: X,
-													label: 'Mark as unpaid',
-													onClick: async () => {
-														await togglePaid(transaction.id, false);
-													},
-											  }
-											: {
-													icon: Check,
-													label: 'Mark as paid',
-													onClick: async () => {
-														await togglePaid(transaction.id, true);
-													},
-											  },
-									]}
-								/>
-							</td>
+											{
+												icon: Speakerphone,
+												label: 'Send reminder',
+												disabled: transaction.isPaid,
+												onClick: () => {
+													console.log('TODO implement');
+												},
+											},
+											transaction.isPaid
+												? {
+														icon: X,
+														label: 'Mark as unpaid',
+														onClick: async () => {
+															await togglePaid(transaction.id, false);
+														},
+												  }
+												: {
+														icon: Check,
+														label: 'Mark as paid',
+														onClick: async () => {
+															await togglePaid(transaction.id, true);
+														},
+												  },
+										]}
+									/>
+								</td>
+							{/if}
 						</tr>
 					{/each}
 				</tbody>

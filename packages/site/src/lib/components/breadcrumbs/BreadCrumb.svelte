@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Entity } from '$lib/models/interfaces/entity.interface';
-	import startCase from 'lodash-es/startCase.js';
+	import { getModel } from '$lib/models/interfaces/utils/get-model';
 
 	// create tuple type
 	type Crumb = [Entity, string | undefined];
@@ -29,7 +29,7 @@
 						class:ml-4={idx !== 0}
 					>
 						<!-- aria-current={page.current ? 'page' : undefined} -->
-						{startCase(crumb[0])}
+						{getModel(crumb[0]).singularCap}
 					</a>
 				</div>
 			</li>

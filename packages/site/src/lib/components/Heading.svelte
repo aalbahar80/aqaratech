@@ -59,6 +59,9 @@
 				]}
 			/>
 		</div>
+	{:else}
+		<!-- hack to keep flex children position consistent -->
+		<div />
 	{/if}
 
 	<!-- Icons -->

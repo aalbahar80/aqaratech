@@ -6,7 +6,7 @@
 	const navigation = [
 		{ name: 'Properties', href: base + '/properties' },
 		{ name: 'Units', href: base + '/units' },
-		// { name: 'Leases', href: base + '/leases' },
+		{ name: 'Leases', href: base + '/leases' },
 		// { name: 'Tenants', href: base + '/tenants' },
 		// { name: 'Maintenance', href: base + '/maintenanceOrders' },
 	];

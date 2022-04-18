@@ -31,10 +31,13 @@ export const units = createRouter()
 		},
 	})
 	.query('list', {
-		input: paginationSchema.extend({
-			propertyId: z.string().uuid().optional(),
-			query: z.string().optional(),
-		}),
+		input: paginationSchema
+			.extend({
+				clientId: z.string().uuid().optional(),
+				propertyId: z.string().uuid().optional(),
+				query: z.string().optional(),
+			})
+			.passthrough(),
 		resolve: async ({ ctx, input: { query, pageIndex, size, propertyId } }) => {
 			const sameClient = {
 				property: {
