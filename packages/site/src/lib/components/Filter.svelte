@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { classes } from '$lib/utils';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -38,9 +39,6 @@
 	export let filters: Filter[];
 	export let currentSort: SortOption['value'];
 
-	function classNames(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
-	}
 	let isOpen = false;
 	const close = () => {
 		isOpen = false;
@@ -110,7 +108,7 @@
 											<Icon
 												src={ChevronDown}
 												theme="solid"
-												class={classNames(
+												class={classes(
 													open ? '-rotate-180' : 'rotate-0',
 													'h-5 w-5 transform',
 												)}
@@ -195,7 +193,7 @@
 								{#each sortOptions as option (option.name)}
 									<MenuItem let:active>
 										<label
-											class={classNames(
+											class={classes(
 												active ? 'bg-gray-100' : '',
 												'block px-4 py-2 text-sm font-medium text-gray-900',
 											)}

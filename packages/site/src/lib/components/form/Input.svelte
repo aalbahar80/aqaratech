@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { areas } from '$lib/config/constants';
+	import { classes } from '$lib/utils';
 	import {
 		Switch,
 		SwitchDescription,
@@ -95,9 +96,6 @@
 	// 		value,
 	// 	});
 	// });
-	function classes(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
-	}
 </script>
 
 <div>

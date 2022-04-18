@@ -51,10 +51,6 @@
 		{ id: 37, name: 'Jack Dorsey', unavailable: false },
 	];
 
-	function classNames(...classes: string[]) {
-		return classes.filter(Boolean).join(' ');
-	}
-
 	let selectedPerson = people[2];
 	let query = '';
 	$: filteredPeople =
