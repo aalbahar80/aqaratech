@@ -16,6 +16,7 @@
 	export let id: string;
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
+	export let hideActions = false;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -33,7 +34,6 @@
 
 	<!-- Title -->
 	<div class="flex items-center">
-		<ModalDelete bind:isOpen {id} {entity} />
 		<h2
 			class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
 		>
@@ -41,22 +41,25 @@
 		</h2>
 	</div>
 
-	<!-- Edit/Delete button -->
-	<div class="flex justify-end">
-		<ButtonDropdown
-			defaultOption={{
-				label: 'Edit',
-				href: `/${entity}/${id}/edit`,
-			}}
-			options={[
-				{
-					label: 'Delete',
-					icon: Trash,
-					onClick: openModal,
-				},
-			]}
-		/>
-	</div>
+	{#if !hideActions}
+		<!-- Edit/Delete button -->
+		<div class="flex justify-end">
+			<ModalDelete bind:isOpen {id} {entity} />
+			<ButtonDropdown
+				defaultOption={{
+					label: 'Edit',
+					href: `/${entity}/${id}/edit`,
+				}}
+				options={[
+					{
+						label: 'Delete',
+						icon: Trash,
+						onClick: openModal,
+					},
+				]}
+			/>
+		</div>
+	{/if}
 
 	<!-- Icons -->
 	{#if icons}
