@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { dev } from '$app/env';
 	import { session } from '$app/stores';
-	import { Menu, X } from '@steeze-ui/heroicons';
 	import {
 		Popover,
 		PopoverButton,
 		PopoverPanel,
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
+	import { Menu, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	interface Navigation {
@@ -57,12 +58,14 @@
 			</div>
 			<div class="hidden md:flex md:items-center md:space-x-6">
 				{#if $session.authz}
-					<a
-						href="/account/profile"
-						class="text-base font-medium text-white hover:text-gray-300"
-					>
-						Profile
-					</a>
+					{#if dev}
+						<a
+							href="/account/profile"
+							class="text-base font-medium text-white hover:text-gray-300"
+						>
+							Profile
+						</a>
+					{/if}
 					<a
 						href="/account/logout"
 						class="text-base font-medium text-white hover:text-gray-300"
