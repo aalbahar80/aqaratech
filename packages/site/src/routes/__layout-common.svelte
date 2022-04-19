@@ -62,7 +62,9 @@
 {/if}
 
 <div>
-	<Alert />
+	{#if import.meta.env.VITE_VERCEL_ENV !== 'production'}
+		<Alert />
+	{/if}
 	<ToastParent />
 	<slot />
 </div>
