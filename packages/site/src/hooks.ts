@@ -1,3 +1,4 @@
+import { dev } from '$app/env';
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
@@ -9,6 +10,8 @@ import cookie from 'cookie';
 Sentry.init({
 	dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 	tracesSampleRate: 1.0,
+	environment: process.env.VERCEL_ENV ?? 'localServer',
+	debug: dev,
 });
 
 export const getSession: GetSession = async ({ locals }) => ({

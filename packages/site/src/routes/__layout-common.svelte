@@ -36,11 +36,14 @@
 
 <script lang="ts">
 	import { session } from '$app/stores';
+	import { dev } from '$app/env';
 	onMount(() => {
 		Sentry.init({
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 			integrations: [new BrowserTracing()],
 			tracesSampleRate: 1.0,
+			debug: dev,
+			environment: import.meta.env.VITE_VERCEL_ENV ?? 'localBrowser',
 		});
 		configureScope((scope: Scope) => {
 			scope.setTag('role', $session.authz?.role || '');
