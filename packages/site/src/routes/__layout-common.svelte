@@ -1,10 +1,12 @@
 <script lang="ts" context="module">
 	// This is a base layout for other layouts to extend.
 
-	import { navigating } from '$app/stores';
+	import { dev } from '$app/env';
+	import { navigating, session } from '$app/stores';
 	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
+	import Alert from '$lib/components/navbar/Alert.svelte';
 	import { protectRoute } from '$lib/utils/auth';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
@@ -35,8 +37,6 @@
 </script>
 
 <script lang="ts">
-	import { session } from '$app/stores';
-	import { dev } from '$app/env';
 	onMount(() => {
 		Sentry.init({
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
@@ -62,6 +62,7 @@
 {/if}
 
 <div>
+	<Alert />
 	<ToastParent />
 	<slot />
 </div>
