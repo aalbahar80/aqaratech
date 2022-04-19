@@ -1,6 +1,8 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
+		"moduleResolution": "Node",
+		"module": "ES2020",
 		"strict": true,
 		"allowUnreachableCode": false,
 		"noImplicitAny": true,
@@ -10,6 +12,7 @@
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
+		"esModuleInterop": true,
 		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
