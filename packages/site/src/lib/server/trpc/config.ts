@@ -17,13 +17,15 @@ export const createContext = async (event: RequestEvent) => {
 export type Context = inferAsyncReturnType<typeof createContext>;
 
 export const responseMeta: ResponseMetaFn = ({ type, errors, paths }) => {
-	const charts = paths?.every((path) => path.startsWith('charts'));
+	const charts = paths?.every(
+		(path) => path.startsWith('charts') || path.startsWith('owner:charts'),
+	);
 	if (type === 'query' && errors.length === 0 && charts) {
 		// TODO review caching, charts and others
-		const duration = 60 * 10;
+		const duration = 60 * 60 * 24 * 7;
 		return {
 			headers: {
-				'cache-control': `max-age=10, stale-while-revalidate=${duration}, private`,
+				'cache-control': `max-age=60, stale-while-revalidate=${duration}, private`,
 			},
 		};
 	} else {
