@@ -62,6 +62,9 @@ export const units = createRouter()
 				orderBy: {
 					updatedAt: 'desc',
 				},
+				include: {
+					leases: true,
+				},
 			});
 			const pagination = {
 				size: size,

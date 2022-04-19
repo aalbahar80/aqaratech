@@ -4,7 +4,7 @@
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import UnitsList from '$lib/components/UnitsList.svelte';
+	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { dateFormat, getAddress } from '$lib/utils/common';
 	import type { Load } from './[id]';
 
@@ -38,5 +38,5 @@
 	</Heading>
 
 	<DetailsPane {details} />
-	<UnitsList units={property.units} propertyId={property.id} />
+	<UnitsList units={property.units} />
 </div>

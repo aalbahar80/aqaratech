@@ -4,7 +4,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import PropertyList from '$lib/components/PropertyList.svelte';
+	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { dateFormat, getName } from '$lib/utils/common';
 	import { PresentationChartBar } from '@steeze-ui/heroicons';
 	import type { Load } from './index';

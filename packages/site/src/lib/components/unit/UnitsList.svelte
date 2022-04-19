@@ -1,24 +1,31 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { getLabel } from '$lib/models/interfaces/unit.interface';
+	import UnitCard from '$components/unit/UnitCard.svelte';
 	import {
 		faBath,
 		faBed,
 		faElevator,
 		faMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
-	import { Calendar, Plus } from '@steeze-ui/heroicons';
+	import { Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import formatDistance from 'date-fns/formatDistance';
-	import Fa from 'svelte-fa';
 
-	type Units = NonNullable<InferQueryOutput<'properties:read'>>['units'];
-	export let units: Units;
-	export let propertyId: string;
-	export let hideActions = false;
+	interface Unit {
+		id: string;
+		type: string | null;
+		unitNumber: string;
+		propertyId: string;
+		bed: number | null;
+		bath: number | null;
+		floor: number | null;
+		size: number | null;
+		leases: {
+			end: Date;
+		}[];
+	}
+	export let units: Unit[];
+	export let readOnly = false;
 
-	$: addUnitHref = `/new/units?propertyId=${propertyId}`;
+	$: addUnitHref = `/new/units?propertyId=${units[0]?.propertyId}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -31,7 +38,7 @@
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">Units</h3>
 				</div>
-				{#if !hideActions}
+				{#if !readOnly}
 					<div class="ml-4 mt-2 flex-shrink-0">
 						<a
 							href={addUnitHref}
@@ -72,61 +79,7 @@
 					},
 				]}
 				<li>
-					<a
-						href={`${$page.stuff.hrefBase ?? ''}/units/${unit.id}`}
-						class="block hover:bg-gray-50"
-					>
-						<div class="px-4 py-4 sm:px-6">
-							<div class="flex items-center justify-between">
-								<p class="truncate text-sm font-medium text-indigo-600">
-									{getLabel(unit)}
-								</p>
-								<div class="ml-2 flex flex-shrink-0">
-									<p
-										class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
-										class:badge-green={!occupied}
-										class:badge-yellow={occupied}
-									>
-										{occupied ? 'Occupied' : 'Vacant'}
-									</p>
-								</div>
-							</div>
-							<div class="mt-2 sm:flex sm:justify-between">
-								<div class="sm:flex sm:space-x-4">
-									{#each icons as { label, icon, tooltip } (tooltip)}
-										{#if label}
-											<p class="flex items-center text-sm text-gray-500">
-												<Fa
-													{icon}
-													class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-												/>
-												{label}
-											</p>
-										{/if}
-									{/each}
-								</div>
-								{#if unit.leases[0]}
-									<div
-										class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0"
-									>
-										<Icon
-											src={Calendar}
-											class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-											aria-hidden="true"
-										/>
-										<p>
-											Vacancy:
-											<time dateTime={unit.leases[0].end.toISOString()}
-												>{formatDistance(unit.leases[0].end, new Date(), {
-													addSuffix: true,
-												})}</time
-											>
-										</p>
-									</div>
-								{/if}
-							</div>
-						</div>
-					</a>
+					<UnitCard {unit} {icons} {occupied} />
 				</li>
 			{/each}
 		</ul>
@@ -150,7 +103,7 @@
 			</svg>
 			<h3 class="mt-2 text-sm font-medium text-gray-900">No units</h3>
 
-			{#if hideActions}
+			{#if readOnly}
 				<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>
 				<div class="mt-6" />
 			{:else}
@@ -170,12 +123,3 @@
 		</div>
 	{/if}
 </section>
-
-<style lang="postcss">
-	.badge-green {
-		@apply bg-green-100 text-green-800;
-	}
-	.badge-yellow {
-		@apply bg-yellow-100 text-yellow-800;
-	}
-</style>

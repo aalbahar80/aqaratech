@@ -1,3 +1,4 @@
+import { dev } from '$app/env';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 import { EnvironmentType } from '$models/interfaces/environment.interface';
 import dotenv from 'dotenv';
@@ -5,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const getRedirectUri = (): string => {
-	if (process.env.AUTH0_REDIRECT_URI) {
+	if (process.env.AUTH0_REDIRECT_URI && !dev) {
 		return process.env.AUTH0_REDIRECT_URI;
 	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}/api/auth/callback`;

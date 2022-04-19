@@ -17,8 +17,6 @@
 	import type { Load } from './__layout-common';
 
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
-		console.log({ session }, '__layout-common.svelte ~ 17');
-
 		// @ts-ignore
 		trpc.runtime.fetch = fetch;
 		return protectRoute(session, pathname);

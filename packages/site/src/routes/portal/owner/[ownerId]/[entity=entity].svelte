@@ -2,11 +2,12 @@
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
+	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import type { Entity } from '$models/interfaces/entity.interface';
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './[entity=entity]';
 
-	type OwnerEntity = Extract<Entity, 'leases' | 'properties'>;
+	type OwnerEntity = Extract<Entity, 'properties' | 'units' | 'leases'>;
 	export const load: Load = async ({ url, params }) => {
 		const entity = params.entity as OwnerEntity;
 		const pageIndex = url.searchParams.get('p');
@@ -23,8 +24,8 @@
 </script>
 
 <script lang="ts">
-	// type T = $$Generic<OwnerEntity>;
 	type T = $$Generic<OwnerEntity>;
+	// type T = $$Generic<'units'>;
 	export let entity: T;
 	export let data: InferQueryOutput<`owner:${T}:list`>['data'];
 	export let pagination: InferQueryOutput<`owner:${T}:list`>['pagination'];
@@ -34,9 +35,14 @@
 	<title>{startCase(entity)}</title>
 </svelte:head>
 
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
 {#if entity === 'properties'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 		<PropertyList properties={data} readOnly />
+	</div>
+{:else if entity === 'units'}
+	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
+		<UnitsList units={data} readOnly />
 	</div>
 {:else}
 	<TableParent {data} total={data.length} {pagination} />
