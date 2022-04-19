@@ -10,8 +10,7 @@
 	import { protectRoute } from '$lib/utils/auth';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
-	import { configureScope } from '@sentry/browser';
-	import { BrowserTracing } from '@sentry/tracing';
+	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import '../styles/tailwind.css';
@@ -19,16 +18,6 @@
 
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
 		console.log({ session }, '__layout-common.svelte ~ 17');
-		if (session.authz) {
-			configureScope((scope: Scope) => {
-				scope.setTag('role', session.authz?.role || '');
-				scope.setUser({
-					id: session.authz?.id || '',
-					email: session.user?.email || '',
-					username: session.user?.name || '',
-				});
-			});
-		}
 
 		// @ts-ignore
 		trpc.runtime.fetch = fetch;
@@ -45,7 +34,7 @@
 			debug: dev,
 			environment: import.meta.env.VITE_VERCEL_ENV ?? 'localBrowser',
 		});
-		configureScope((scope: Scope) => {
+		Sentry.configureScope((scope: Scope) => {
 			scope.setTag('role', $session.authz?.role || '');
 			scope.setUser({
 				id: $session.authz?.id || '',
