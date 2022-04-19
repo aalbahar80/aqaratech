@@ -67,6 +67,11 @@ declare global {
 			 * The Environment that the app is deployed an running on. The value can be either `production`, `preview`, or `development`.
 			 */
 			readonly VERCEL_ENV: 'production' | 'preview' | 'development';
+
+			/**
+			 * The git branch of the commit the deployment was triggered by. Example: `improve-about-page`.
+			 */
+			readonly VERCEL_GIT_COMMIT_REF: string;
 		}
 	}
 }

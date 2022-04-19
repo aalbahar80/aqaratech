@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const getRedirectUri = (): string => {
-	if (process.env.VERCEL) {
+	if (process.env.AUTH0_REDIRECT_URI) {
+		return process.env.AUTH0_REDIRECT_URI;
+	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}/api/auth/callback`;
 	} else {
 		return 'http://localhost:3000/api/auth/callback';
