@@ -1,11 +1,15 @@
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
-import { init } from '$lib/services/sentry';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/node';
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
+
+Sentry.init({
+	dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
+	tracesSampleRate: 1.0,
+});
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
@@ -86,7 +90,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const handleError: HandleError = async ({ error, event }) => {
 	const user = event.locals.user;
-	init();
 	Sentry.captureException(error, {
 		user: {
 			email: user?.email || '',
