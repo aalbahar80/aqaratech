@@ -3,7 +3,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler = async (req) => {
 	try {
-		const paymentId = req.url.searchParams.get('PaymentId');
+		const paymentId = req.url.searchParams.get('paymentId');
 
 		if (!paymentId) {
 			const error = new Error('Unable to get PaymentId from URL');
