@@ -35,7 +35,7 @@
 		Sentry.configureScope((scope: Scope) => {
 			scope.setTag('role', $session.authz?.role || '');
 			scope.setUser({
-				id: $session.authz?.id || '',
+				id: $session.authz?.sub || '',
 				email: $session.user?.email || '',
 				username: $session.user?.name || '',
 			});

@@ -96,6 +96,7 @@ export const handleError: HandleError = async ({ error, event }) => {
 	const user = event.locals.user;
 	Sentry.captureException(error, {
 		user: {
+			id: user?.sub || '',
 			email: user?.email || '',
 			username: user?.name || '',
 		},
