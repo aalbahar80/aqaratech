@@ -6,6 +6,10 @@ const schema = z.object({
 	id: z.string().uuid().optional(),
 	dueAt: z.preprocess(strToDate, z.date()),
 	postAt: z.preprocess(strToDate, z.date()),
+	paidAt: z.union([
+		z.preprocess(strToDate, z.date()).transform(falsyToNull),
+		z.literal('').transform(() => null),
+	]),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
@@ -25,13 +29,21 @@ const TransactionModelBase: IEntity<'transactions'> = {
 		amount: 0,
 		memo: '',
 		leaseId: '',
+		paidAt: '',
 	}),
 };
 
 export const TransactionModel = {
 	...TransactionModelBase,
 	schema,
-	basicFields: ['amount', 'dueAt', 'postAt', 'isPaid', 'memo'] as const,
+	basicFields: [
+		'amount',
+		'dueAt',
+		'postAt',
+		'isPaid',
+		'paidAt',
+		'memo',
+	] as const,
 	relationalFields: ['leaseId'] as const,
 };
 

@@ -72,15 +72,15 @@
 					</p>
 				</div>
 				{#if trx.isPaid}
-					Paid
-					{#if trx.paidAt}
-						<div>
+					<div>
+						Paid
+						{#if trx.paidAt}
 							on
 							<time dateTime={trx.paidAt.toISOString()}
 								>{format(trx.paidAt, 'MMM dd, yy')}</time
 							>
-						</div>
-					{/if}
+						{/if}
+					</div>
 				{:else}
 					<div>
 						<Button
