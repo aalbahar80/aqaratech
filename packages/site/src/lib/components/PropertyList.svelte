@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
+	import { getLabel } from '$lib/models/interfaces/property.interface';
 	import { LocationMarker, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -40,7 +41,7 @@
 						<div class="px-4 py-4 sm:px-6">
 							<div class="flex items-center justify-between">
 								<p class="truncate text-sm font-medium text-indigo-600">
-									# {idx}
+									# {idx + 1}
 								</p>
 							</div>
 							<div class="mt-2 sm:flex sm:justify-between">
@@ -52,7 +53,7 @@
 											class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 											aria-hidden="true"
 										/>
-										{property.area}
+										{getLabel(property)}
 									</p>
 								</div>
 							</div>

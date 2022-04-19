@@ -70,7 +70,8 @@ interface ILabel {
 	unitNumber: string;
 }
 
-const getLabel = (item: ILabel) => concatIfExists([item.type, item.unitNumber]);
+export const getLabel = (item: ILabel) =>
+	concatIfExists([item.type, item.unitNumber]);
 
 export const UnitModel = {
 	...UnitModelBasic,

@@ -65,7 +65,7 @@ interface ILabel {
 	number: string | null;
 }
 
-const getLabel = (item: ILabel, full = false) => {
+export const getLabel = (item: ILabel, full = false) => {
 	if (full) {
 		return concatIfExists([
 			item.area,
