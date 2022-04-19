@@ -41,8 +41,8 @@
 		case 'dob':
 		case 'end':
 		case 'start':
-		case 'dueDate':
-		case 'postDate':
+		case 'dueAt':
+		case 'postAt':
 		case 'residencyEnd':
 		case 'completedAt':
 			type = 'date';

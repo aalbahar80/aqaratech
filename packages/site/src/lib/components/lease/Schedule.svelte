@@ -80,11 +80,11 @@
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
 									<input
-										id="schedule.{idx}.postDate"
-										name="schedule.{idx}.postDate"
-										value={forceDateToInput(trx.postDate)}
+										id="schedule.{idx}.postAt"
+										name="schedule.{idx}.postAt"
+										value={forceDateToInput(trx.postAt)}
 										type="date"
-										class:invalid={errors?.schedule?.[idx]?.postDate}
+										class:invalid={errors?.schedule?.[idx]?.postAt}
 									/>
 								</span>
 								<button

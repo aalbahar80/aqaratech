@@ -32,9 +32,8 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Due Date', dateFormat(trx.dueDate)],
+		['Due Date', dateFormat(trx.dueAt)],
 		['Amount', kwdFormat(trx.amount)],
-		['Receipt', trx.receiptUrl],
 		['Next Reminder', trx.reminderAt?.toLocaleDateString() ?? ''],
 		['Created on', dateFormat(trx.createdAt)],
 		['Last updated', trx.updatedAt.toLocaleString()],

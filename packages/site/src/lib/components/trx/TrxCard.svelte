@@ -14,8 +14,8 @@
 	interface Transaction {
 		id: string;
 		amount: number;
-		postDate: Date;
-		dueDate: Date;
+		postAt: Date;
+		dueAt: Date;
 		isPaid: boolean;
 		memo: string | null;
 		mfPaymentId: string | null;
@@ -62,8 +62,8 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						<time dateTime={trx.postDate.toISOString()}
-							>{format(trx.postDate, 'MMM dd, yy')}</time
+						<time dateTime={trx.postAt.toISOString()}
+							>{format(trx.postAt, 'MMM dd, yy')}</time
 						>
 					</p>
 					<p class="text flex items-center">
@@ -81,14 +81,14 @@
 							</a>
 						</span>
 					{:else}
-						Paid on <time dateTime={trx.dueDate.toISOString()}
-							>{format(trx.dueDate, 'MMM dd, yy')}</time
+						Paid on <time dateTime={trx.dueAt.toISOString()}
+							>{format(trx.dueAt, 'MMM dd, yy')}</time
 						>
 					{/if} -->
 					<div>
 						Paid on
-						<time dateTime={trx.dueDate.toISOString()}
-							>{format(trx.dueDate, 'MMM dd, yy')}</time
+						<time dateTime={trx.dueAt.toISOString()}
+							>{format(trx.dueAt, 'MMM dd, yy')}</time
 						>
 					</div>
 				{:else}
@@ -98,7 +98,7 @@
 							--min-height="4rem"
 							text="Pay"
 							icon={Cash}
-							disabled={trx.postDate > new Date()}
+							disabled={trx.postAt > new Date()}
 							{loading}
 							on:click={handlePayment}
 						/>

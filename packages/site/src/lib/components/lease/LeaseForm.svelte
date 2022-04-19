@@ -51,15 +51,15 @@
 		unsetField,
 	} = createForm<z.infer<typeof LeaseModel.leaseFormSchema>, ValidatorConfig>({
 		transform: (values: unknown) => {
-			// make sure each element in schedule array is an object whose postDate is a date
+			// make sure each element in schedule array is an object whose postAt is a date
 			const original = values as z.infer<typeof LeaseModel.leaseFormSchema>;
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
 				newValues.schedule = original?.schedule.map((item) => {
-					if (item?.postDate) {
+					if (item?.postAt) {
 						return {
 							...item,
-							postDate: forceDateToInput(item.postDate),
+							postAt: forceDateToInput(item.postAt),
 						};
 					}
 					return item;
@@ -102,10 +102,10 @@
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
 					leaseId: newLease.id,
-					dueDate: e.postDate,
+					dueAt: e.postAt,
 					isPaid: false,
 					...e,
-					postDate: e.postDate,
+					postAt: e.postAt,
 				}));
 				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
 				console.log(`created ${newTrxs} transactions`);

@@ -20,7 +20,7 @@ type Dataset = {
 	address: string;
 }[];
 
-const sort = (data: Data) => sortBy(data, 'postDate');
+const sort = (data: Data) => sortBy(data, 'postAt');
 
 const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 	const sorted = sort(data);
@@ -28,7 +28,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 
 	const buckets: Dataset = [];
 	sorted.forEach((trx) => {
-		const month = closestTo(trx.postDate, months);
+		const month = closestTo(trx.postAt, months);
 		const trxCategoryIndex = categoryGroups.findIndex(
 			(g) => g[0] === trx.category,
 		);

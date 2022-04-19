@@ -32,8 +32,8 @@
 				'dob',
 				'end',
 				'start',
-				'dueDate',
-				'postDate',
+				'dueAt',
+				'postAt',
 				'residencyEnd',
 				'completedAt',
 			];

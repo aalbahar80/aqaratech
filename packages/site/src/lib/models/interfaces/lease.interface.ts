@@ -21,7 +21,7 @@ const scheduleSchema = z.array(
 	// TODO import schema from ./transaction
 	z.object({
 		amount: z.number().min(1),
-		postDate: z.preprocess(strToDate, z.date()),
+		postAt: z.preprocess(strToDate, z.date()),
 		nanoid: z.string(),
 		memo: z.string(),
 	}),
@@ -41,16 +41,16 @@ export const leaseFormSchema = schema
 	})
 	.superRefine((val, ctx) => {
 		val.schedule.map((item, idx) => {
-			if (item.postDate > val.end) {
+			if (item.postAt > val.end) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.invalid_date,
-					path: ['schedule', idx, 'postDate'],
+					path: ['schedule', idx, 'postAt'],
 					message: 'Post date must be before end date',
 				});
-			} else if (item.postDate < val.start) {
+			} else if (item.postAt < val.start) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.invalid_date,
-					path: ['schedule', idx, 'postDate'],
+					path: ['schedule', idx, 'postAt'],
 					message: 'Post date must be after start date',
 				});
 			}
@@ -81,13 +81,13 @@ export function generateSchedule({
 
 	for (let bp = 0; bp < Math.min(count, 24); bp++) {
 		// TODO change to 1 month
-		const dueDate = addMonths(nextMonth, bp);
-		const memo = `Rent for: ${format(dueDate, 'MMMM yyyy')}`;
+		const dueAt = addMonths(nextMonth, bp);
+		const memo = `Rent for: ${format(dueAt, 'MMMM yyyy')}`;
 		newSchedule.push({
 			nanoid: nanoid(),
 			amount,
-			// postDate: dueDate.toISOString().split('T')[0],
-			postDate: dueDate,
+			// postAt: dueAt.toISOString().split('T')[0],
+			postAt: dueAt,
 			memo,
 		});
 	}

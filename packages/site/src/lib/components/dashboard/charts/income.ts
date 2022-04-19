@@ -19,16 +19,16 @@ const normalize = (data: Data) =>
 		property.units.flatMap((unit) =>
 			unit.leases.flatMap((lease) =>
 				lease.transactions.flatMap((transaction) => {
-					const { amount, isPaid, postDate } = transaction;
+					const { amount, isPaid, postAt } = transaction;
 					const address = getAddress(property);
 					const { propertyId } = unit;
-					return { amount, isPaid, postDate, address, propertyId };
+					return { amount, isPaid, postAt, address, propertyId };
 				}),
 			),
 		),
 	);
 
-const sort = (data: Data) => sortBy(normalize(data), 'postDate');
+const sort = (data: Data) => sortBy(normalize(data), 'postAt');
 
 type Bucket = {
 	total: number;
@@ -44,7 +44,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 	const buckets: Bucket[] = [];
 
 	sorted.forEach((trx) => {
-		const month = closestTo(trx.postDate, months);
+		const month = closestTo(trx.postAt, months);
 		if (month) {
 			// search for the bucket with the same date  propertyId
 			const index = buckets.findIndex((bucket) => {

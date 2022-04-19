@@ -63,12 +63,12 @@ export const groupOccupancy = (
 };
 
 interface DataPoint {
-	postDate: Date;
+	postAt: Date;
 }
 
 export const getMonths = (data: DataPoint[]) => {
-	const firstMonth = data[0]?.postDate;
-	const lastMonth = data[data.length - 1]?.postDate;
+	const firstMonth = data[0]?.postAt;
+	const lastMonth = data[data.length - 1]?.postAt;
 	if (!firstMonth || !lastMonth) return [];
 
 	const months = eachMonthOfInterval({

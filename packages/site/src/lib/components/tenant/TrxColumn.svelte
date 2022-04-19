@@ -156,8 +156,8 @@
 										>{' '}
 										{'KWD'}
 									</span>
-									<time dateTime={transaction.dueDate.toISOString()}
-										>{dateFormat(transaction.dueDate)}</time
+									<time dateTime={transaction.dueAt.toISOString()}
+										>{dateFormat(transaction.dueAt)}</time
 									>
 								</span>
 							</span>
@@ -229,8 +229,8 @@
 								{/key}
 							</td>
 							<td>
-								<time dateTime={transaction.dueDate.toISOString()}
-									>{dateFormat(transaction.dueDate)}</time
+								<time dateTime={transaction.dueAt.toISOString()}
+									>{dateFormat(transaction.dueAt)}</time
 								>
 							</td>
 							{#if hideActions}

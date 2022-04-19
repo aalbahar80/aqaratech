@@ -146,7 +146,7 @@ export const markAsPaid = async ({
 			isPaid: true,
 			mfPaymentId,
 		});
-		return result.receiptUrl;
+		return result;
 	} catch (err) {
 		console.error(err);
 		throw err;

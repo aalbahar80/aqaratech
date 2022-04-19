@@ -18,9 +18,9 @@ export const leases = createRouter().query('list', {
 			},
 			include: {
 				transactions: {
-					where: { dueDate: { lte: new Date() } },
+					where: { dueAt: { lte: new Date() } },
 					orderBy: {
-						postDate: 'desc',
+						postAt: 'desc',
 					},
 					select: {
 						// TODO only return necessary data
@@ -28,9 +28,8 @@ export const leases = createRouter().query('list', {
 						amount: true,
 						isPaid: true,
 						memo: true,
-						receiptUrl: true,
-						dueDate: true,
-						postDate: true,
+						dueAt: true,
+						postAt: true,
 						mfPaymentId: true,
 					},
 				},

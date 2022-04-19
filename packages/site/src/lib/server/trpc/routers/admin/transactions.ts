@@ -74,7 +74,7 @@ export const transactions = createRouter()
 					id: true,
 					isPaid: true,
 					amount: true,
-					dueDate: true,
+					dueAt: true,
 					memo: true,
 				},
 			}),

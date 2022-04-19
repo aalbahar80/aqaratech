@@ -5,8 +5,8 @@ import { z } from 'zod';
 
 const schema = z.object({
 	id: z.string().uuid().optional(),
-	dueDate: z.preprocess(strToDate, z.date()),
-	postDate: z.preprocess(strToDate, z.date()),
+	dueAt: z.preprocess(strToDate, z.date()),
+	postAt: z.preprocess(strToDate, z.date()),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
@@ -20,8 +20,8 @@ const TransactionModelBase: IEntity<'transactions'> = {
 	plural: 'transactions',
 	pluralCap: 'Transactions',
 	defaultForm: () => ({
-		dueDate: new Date(),
-		postDate: new Date(),
+		dueAt: new Date(),
+		postAt: new Date(),
 		isPaid: false,
 		amount: 0,
 		memo: '',
@@ -32,18 +32,18 @@ const TransactionModelBase: IEntity<'transactions'> = {
 export const TransactionModel = {
 	...TransactionModelBase,
 	schema,
-	basicFields: ['amount', 'dueDate', 'postDate', 'isPaid', 'memo'] as const,
+	basicFields: ['amount', 'dueAt', 'postAt', 'isPaid', 'memo'] as const,
 	relationalFields: ['leaseId'] as const,
 };
 
-export const getBadge = (trx: { isPaid: boolean; dueDate: Date }) => {
+export const getBadge = (trx: { isPaid: boolean; dueAt: Date }) => {
 	if (trx.isPaid) {
 		return {
 			label: 'Paid',
 			color: 'green',
 		};
 	}
-	if (trx.dueDate < new Date()) {
+	if (trx.dueAt < new Date()) {
 		return {
 			label: 'Past due',
 			color: 'red',

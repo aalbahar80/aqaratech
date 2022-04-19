@@ -47,13 +47,13 @@ export const charts = createRouter()
 										include: {
 											transactions: {
 												where: {
-													postDate: {
+													postAt: {
 														gte: new Date(start),
 														lte: new Date(end),
 													},
 												},
 												select: {
-													postDate: true,
+													postAt: true,
 													amount: true,
 													isPaid: true,
 												},
@@ -82,7 +82,7 @@ export const charts = createRouter()
 		}) => {
 			const dated = {
 				where: {
-					postDate: {
+					postAt: {
 						gte: new Date(start),
 						lte: new Date(end),
 					},
@@ -90,7 +90,7 @@ export const charts = createRouter()
 			};
 			const ordered = {
 				orderBy: {
-					postDate: 'asc' as const,
+					postAt: 'asc' as const,
 				},
 			};
 			const getExpenses = {
@@ -175,7 +175,7 @@ export const charts = createRouter()
 			// Can replace with lodash.soryBy
 			const sortedExpenses = allExpenses
 				.slice()
-				.sort((a, b) => a.postDate.getTime() - b.postDate.getTime());
+				.sort((a, b) => a.postAt.getTime() - b.postAt.getTime());
 			return sortedExpenses;
 		},
 	})

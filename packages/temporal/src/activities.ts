@@ -1,16 +1,16 @@
-import type { Lease, PrismaClient as PrismaClientType } from '@prisma/client';
-import { format, parseISO } from 'date-fns';
+import type { Lease, PrismaClient as PrismaClientType } from "@prisma/client";
+import { format, parseISO } from "date-fns";
 
 export const createActivities = (prismaClient: PrismaClientType) => ({
-	async generateTransaction(lease: Lease, dueDate: string) {
-		const memo = 'Rent for: ' + format(parseISO(dueDate), 'MMMM yyyy');
-		console.log(`Generating trx for ${memo}: `, lease.id, dueDate);
+	async generateTransaction(lease: Lease, dueAt: string) {
+		const memo = "Rent for: " + format(parseISO(dueAt), "MMMM yyyy");
+		console.log(`Generating trx for ${memo}: `, lease.id, dueAt);
 		const trx = await prismaClient.transaction.create({
 			data: {
 				amount: lease.monthlyRent,
 				leaseId: lease.id,
-				dueDate,
-				postDate: dueDate,
+				dueAt,
+				postAt: dueAt,
 				memo,
 			},
 			include: { lease: true },
@@ -40,7 +40,7 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 				},
 			},
 		});
-		if (!trx) throw new Error('Trx not found');
+		if (!trx) throw new Error("Trx not found");
 		// console.log(`Got trx ${id}: `, trx);
 		return trx;
 	},
