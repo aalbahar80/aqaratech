@@ -1,4 +1,3 @@
-import { dev } from '$app/env';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers';
 import type { IEntity } from '$models/interfaces/entity.interface';
 import { z } from 'zod';
@@ -36,23 +35,32 @@ export const TransactionModel = {
 	relationalFields: ['leaseId'] as const,
 };
 
-export const getBadge = (trx: { isPaid: boolean; dueAt: Date }) => {
+export const getBadge = (trx: {
+	isPaid: boolean;
+	dueAt: Date | null;
+	postAt: Date;
+}) => {
 	if (trx.isPaid) {
 		return {
 			label: 'Paid',
 			color: 'green',
 		};
-	}
-	if (trx.dueAt < new Date()) {
+	} else if (trx.dueAt && trx.dueAt < new Date()) {
 		return {
 			label: 'Past due',
 			color: 'red',
 		};
+	} else if (trx.postAt < new Date()) {
+		return {
+			label: 'Due',
+			color: 'yellow',
+		};
+	} else {
+		return {
+			label: 'Not yet due',
+			color: 'indigo',
+		};
 	}
-	return {
-		label: 'Not yet due',
-		color: 'indigo',
-	};
 };
 
 // export const getMFReceiptUrl = (mfPaymentId: string) => {

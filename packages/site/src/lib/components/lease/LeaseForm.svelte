@@ -102,6 +102,7 @@
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
 					leaseId: newLease.id,
+					// TODO fix this
 					dueAt: e.postAt,
 					isPaid: false,
 					...e,

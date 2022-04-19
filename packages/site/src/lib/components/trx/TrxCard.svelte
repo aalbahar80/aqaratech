@@ -15,7 +15,8 @@
 		id: string;
 		amount: number;
 		postAt: Date;
-		dueAt: Date;
+		dueAt: Date | null;
+		paidAt: Date | null;
 		isPaid: boolean;
 		memo: string | null;
 		mfPaymentId: string | null;
@@ -71,26 +72,15 @@
 					</p>
 				</div>
 				{#if trx.isPaid}
-					<!-- {#if trx.mfPaymentId}
-						<span class="mt-4 sm:mt-0">
-							<a
-								href={getMFReceiptUrl(trx.mfPaymentId)}
-								class="font-medium text-indigo-600 hover:text-indigo-500"
+					Paid
+					{#if trx.paidAt}
+						<div>
+							on
+							<time dateTime={trx.paidAt.toISOString()}
+								>{format(trx.paidAt, 'MMM dd, yy')}</time
 							>
-								Receipt <span aria-hidden="true"> &rarr;</span>
-							</a>
-						</span>
-					{:else}
-						Paid on <time dateTime={trx.dueAt.toISOString()}
-							>{format(trx.dueAt, 'MMM dd, yy')}</time
-						>
-					{/if} -->
-					<div>
-						Paid on
-						<time dateTime={trx.dueAt.toISOString()}
-							>{format(trx.dueAt, 'MMM dd, yy')}</time
-						>
-					</div>
+						</div>
+					{/if}
 				{:else}
 					<div>
 						<Button

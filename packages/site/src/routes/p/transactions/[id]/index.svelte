@@ -39,7 +39,7 @@
 	const details: [string, string | null][] = [
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo],
-		['Due on', dateFormat(trx.dueAt)],
+		['Due on', dateFormat(trx.dueAt ?? trx.postAt)],
 	];
 </script>
 

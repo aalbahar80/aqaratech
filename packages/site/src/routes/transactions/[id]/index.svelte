@@ -32,7 +32,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Due Date', dateFormat(trx.dueAt)],
+		['Posted At', dateFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
 		['Next Reminder', trx.reminderAt?.toLocaleDateString() ?? ''],
 		['Created on', dateFormat(trx.createdAt)],
