@@ -10,7 +10,7 @@
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import '../styles/tailwind.css';
-	import type { Load } from './__layout';
+	import type { Load } from './__layout-common';
 
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
 		console.log({ pathname }, '__layout-common.svelte ~ 8');
