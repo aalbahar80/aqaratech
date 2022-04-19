@@ -56,6 +56,7 @@
 	});
 </script>
 
+<!--  -->
 {#if $navigating}
 	<PreloadingIndicator />
 {/if}
