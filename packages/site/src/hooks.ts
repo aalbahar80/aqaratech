@@ -3,6 +3,7 @@ import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
 import * as Sentry from '@sentry/node';
+import '@sentry/tracing'; // has to be after @sentry/node
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
