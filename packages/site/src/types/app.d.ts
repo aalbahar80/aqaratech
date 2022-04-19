@@ -12,6 +12,11 @@ interface ImportMetaEnv {
 	// for information about these environment variables
 	readonly VITE_VERCEL_ENV: 'production' | 'preview' | 'development';
 	readonly VITE_VERCEL_URL: string;
+
+	/**
+	 * The git branch of the commit the deployment was triggered by. Example: `improve-about-page`.
+	 */
+	readonly VITE_VERCEL_GIT_COMMIT_REF: string;
 }
 
 interface ImportMeta {

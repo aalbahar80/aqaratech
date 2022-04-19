@@ -28,7 +28,7 @@
 			integrations: [new BrowserTracing()],
 			tracesSampleRate: 1.0,
 			// debug: dev,
-			environment: import.meta.env.VITE_VERCEL_ENV ?? 'localBrowser',
+			environment: import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
 		});
 		Sentry.configureScope((scope: Scope) => {
 			scope.setTag('role', $session.authz?.role || '');
