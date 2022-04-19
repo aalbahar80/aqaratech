@@ -7,6 +7,7 @@ dotenv.config();
 
 /**
  * This is currently only active locally based on `dev`.
+ * Which means svelte-kit preview will not work properly.
  */
 export const developmentEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.DEVELOPMENT,

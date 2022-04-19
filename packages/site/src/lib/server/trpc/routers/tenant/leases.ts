@@ -36,7 +36,6 @@ export const leases = createRouter().query('list', {
 				},
 			},
 		});
-		console.log({ data }, 'leases.ts ~ 36');
 		return data;
 	},
 });
