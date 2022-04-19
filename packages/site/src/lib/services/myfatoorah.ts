@@ -106,7 +106,7 @@ export const getPaymentStatus = async (
 			},
 			method: 'POST',
 			body: JSON.stringify({
-				PaymentId: paymentId,
+				Key: paymentId,
 				KeyType: 'PaymentId',
 			}),
 		},
