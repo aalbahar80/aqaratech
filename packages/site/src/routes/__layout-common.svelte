@@ -2,8 +2,7 @@
 	// This is a base layout for other layouts to extend.
 
 	import { dev } from '$app/env';
-	import { navigating, session } from '$app/stores';
-	import PreloadingIndicator from '$components/PreloadingIndicator.svelte';
+	import { session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
 	import Alert from '$lib/components/navbar/Alert.svelte';
@@ -43,10 +42,9 @@
 	});
 </script>
 
-<!--  -->
-{#if $navigating}
+<!-- {#if $navigating}
 	<PreloadingIndicator />
-{/if}
+{/if} -->
 
 <div>
 	{#if import.meta.env.VITE_VERCEL_ENV !== 'production'}
