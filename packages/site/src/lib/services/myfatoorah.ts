@@ -53,7 +53,7 @@ export const getMFUrl = async ({
 		CallBackUrl: callbackUrl,
 	};
 
-	if (import.meta.env.VITE_VERCEL_ENV !== 'production') {
+	if (process.env.VERCEL_ENV !== 'production') {
 		console.debug('using email/phone from env variables');
 		trxData = {
 			...trxData,
