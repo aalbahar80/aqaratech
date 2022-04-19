@@ -1,9 +1,16 @@
-import { dev } from '$app/env';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 import { EnvironmentType } from '$models/interfaces/environment.interface';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+const getRedirectUri = (): string => {
+	if (process.env.VERCEL) {
+		return `https://${process.env.VERCEL_URL}/api/auth/callback`;
+	} else {
+		return 'http://localhost:3000/api/auth/callback';
+	}
+};
 
 /**
  * This is currently only active locally based on `dev`.
@@ -19,9 +26,7 @@ export const developmentEnvironment: EnvironmentConfig = {
 		AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 		AUTH0_API_NAMESPACE: process.env.AUTH0_API_NAMESPACE,
 		AUTH0_API_AUDIENCE: process.env.AUTH0_API_AUDIENCE,
-		AUTH0_REDIRECT_URI: dev
-			? 'http://localhost:3000/api/auth/callback'
-			: process.env.AUTH0_REDIRECT_URI,
+		AUTH0_REDIRECT_URI: getRedirectUri(),
 		JWKS: {
 			keys: [
 				{
