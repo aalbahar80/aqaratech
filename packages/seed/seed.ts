@@ -123,7 +123,7 @@ const fakeTransaction = (
 		1
 	);
 	const postAt = addMonths(nextMonth, count);
-	const isPaid = Math.random() > 0.15;
+	const isPaid = postAt < new Date() ? Math.random() > 0.15 : false;
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: leaseStart,
@@ -228,24 +228,24 @@ async function main({
 		let date = new Date("2018-01-01");
 		let tenantN = fakeTenant();
 		tenants.push(tenantN);
-		while (date < new Date()) {
+		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
 			leases.push(leaseN);
 
 			const renewal = Math.random() > 0.3;
 			if (leaseN.end > new Date()) {
 				// future reached, move to next unit
-				break;
+				break tenantLoop;
 			} else if (renewal) {
 				date = addDays(leaseN.end, 1);
-				continue;
+				continue tenantLoop;
 			} else {
 				// lease ended, move to next tenant
 				const tenantSearch = faker.datatype.number({ min: 1, max: 30 * 6 });
 				date = addDays(leaseN.end, tenantSearch);
 				tenantN = fakeTenant();
 				tenants.push(tenantN);
-				continue;
+				continue tenantLoop;
 			}
 		}
 	});
@@ -325,6 +325,16 @@ async function main({
 	// 	}
 	// });
 
+	// count the number of tenants with a lease
+	const tenantsWithLease = tenants.filter((tenant) =>
+		leases.find((lease) => lease.tenantId === tenant.id)
+	).length;
+	const homelessTenantCount = tenants.filter(
+		(tenant) => !leases.find((lease) => lease.tenantId === tenant.id)
+	).length;
+
+	console.log(`${tenantsWithLease} tenants with a lease`);
+	console.log(`${homelessTenantCount} homeless tenants`);
 	if (sample) {
 		console.log(
 			util.inspect(
@@ -417,12 +427,18 @@ async function main({
 			data: expenses,
 		});
 		console.log("expenses created");
+
+		console.log(`${tenantsWithLease} tenants with a lease`);
+		console.log(`${homelessTenantCount} homeless tenants`);
+		console.log(
+			`Done inserting \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
+		);
 	} catch (e) {
 		console.error(e);
 	}
 }
 
-main({ sample: false, clean: true })
+main({ sample: true, clean: false })
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);

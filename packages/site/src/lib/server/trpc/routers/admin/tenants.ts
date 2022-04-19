@@ -31,7 +31,7 @@ export const tenants = createRouter()
 					leases: {
 						orderBy: { start: 'desc' },
 						include: {
-							transactions: true,
+							transactions: { orderBy: { postAt: 'desc' } },
 							unit: {
 								include: {
 									property: true,
