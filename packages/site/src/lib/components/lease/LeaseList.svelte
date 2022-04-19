@@ -61,7 +61,7 @@
 				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 					<LeaseCard
 						{lease}
-						index={showIndex ? index + 1 : undefined}
+						index={showIndex ? leases.length - index : undefined}
 						hrefBase={$page.stuff.hrefBase ?? ''}
 					/>
 				</li>
