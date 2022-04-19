@@ -9,7 +9,7 @@ import {
 	coordinates,
 	expenseCategories,
 } from "../site/src/lib/config/constants.js";
-import { addMonths, addDays, subDays } from "date-fns";
+import { addMonths, addDays, subDays, addMinutes } from "date-fns";
 
 // TODO avoid ts-ignore below by fixing tsconfig.json
 // @ts-ignore
@@ -122,16 +122,23 @@ const fakeTransaction = (
 		leaseStart.getMonth() + 1,
 		1
 	);
+	const postAt = addMonths(nextMonth, count);
+	const isPaid = Math.random() > 0.15;
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: leaseStart,
 		updatedAt: leaseStart,
 		amount,
 		memo: "RENT",
-		postDate: addMonths(nextMonth, count),
-		dueDate: addMonths(nextMonth, count),
-		isPaid: Math.random() > 0.15,
-		receiptUrl: faker.image.lorempicsum.imageUrl(),
+		postAt,
+		dueAt: addDays(postAt, 14),
+		isPaid,
+		paidAt: isPaid
+			? addMinutes(
+					postAt,
+					faker.datatype.number({ min: 60, max: 60 * 24 * 28 })
+			  )
+			: null,
 		leaseId,
 	};
 };
@@ -160,7 +167,7 @@ const fakeExpense = () => ({
 	amount: +faker.finance.amount(100, 3000, 0),
 	category: faker.random.arrayElement(expenseCategories),
 	memo: faker.lorem.sentences(),
-	postDate: faker.date.past(4),
+	postAt: faker.date.past(4),
 });
 
 const fakeMaintenanceOrder = () => ({
@@ -189,10 +196,10 @@ async function main({
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
 	let clientCount = 15;
-	let propertyMax = 15;
-	let unitMax = 15;
-	let moCount = 2500;
-	let expenseCount = 5000;
+	let propertyMax = 6;
+	let unitMax = 10;
+	let moCount = 1000;
+	let expenseCount = 1000;
 	const min = 0;
 
 	if (sample) {
@@ -293,40 +300,30 @@ async function main({
 		return mo;
 	});
 
-	const expenses = Array.from({ length: expenseCount }, () => {
-		const expense = fakeExpense();
-		// assign to either a client or a property or a unit
-		const random = faker.datatype.number({ min: 0, max: 2 });
-		if (random === 0) {
-			return {
-				...expense,
-				clientId:
-					clients.length > 0
-						? clients[faker.datatype.number(clients.length - 1)]?.id ?? null
-						: null,
-			};
+	type Expense = ReturnType<typeof fakeExpense> & {
+		clientId?: string;
+		propertyId?: string;
+		unitId?: string;
+	};
+	const expenses: Expense[] = [];
+	clients.forEach((client) => {
+		for (let i = 0; i < expenseCount; i++) {
+			const expense = fakeExpense();
+			expenses.push({ ...expense, clientId: client.id });
 		}
-		if (random === 1) {
-			return {
-				...expense,
-				propertyId:
-					properties.length > 0
-						? properties[faker.datatype.number(properties.length - 1)]?.id ??
-						  null
-						: null,
-			};
-		}
-		if (random === 2) {
-			return {
-				...expense,
-				unitId:
-					units.length > 0
-						? units[faker.datatype.number(units.length - 1)]?.id ?? null
-						: null,
-			};
-		}
-		return expense;
 	});
+	properties.forEach((property) => {
+		for (let i = 0; i < expenseCount; i++) {
+			const expense = fakeExpense();
+			expenses.push({ ...expense, propertyId: property.id });
+		}
+	});
+	// units.forEach((unit) => {
+	// 	for (let i = 0; i < expenseCount; i++) {
+	// 		const expense = fakeExpense();
+	// 		expenses.push({ ...expense, unitId: unit.id });
+	// 	}
+	// });
 
 	if (sample) {
 		console.log(
@@ -346,6 +343,8 @@ async function main({
 		);
 		console.log("Sample printed, nothing done to database.");
 		return;
+	} else {
+		console.log("Done generating fake data.");
 	}
 
 	try {
@@ -423,7 +422,7 @@ async function main({
 	}
 }
 
-main({ sample: true, clean: false })
+main({ sample: false, clean: true })
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);

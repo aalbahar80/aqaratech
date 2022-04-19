@@ -1,6 +1,16 @@
 {
 	"extends": "@tsconfig/esm/tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "Node"
-	}
+		"moduleResolution": "Node",
+		"strict": true,
+		"allowUnreachableCode": false,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitThis": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true
+	},
+	"include": ["./seed.ts"]
 }

@@ -36,7 +36,7 @@ model Expense {
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   amount             Float
-  postDate           DateTime
+  postAt             DateTime
   category           String?
   memo               String?           @db.Text
   client             Client?           @relation(fields: [clientId], references: [id])
@@ -155,14 +155,13 @@ model Transaction {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  dueDate     DateTime
-  postDate    DateTime
+  dueAt       DateTime?
+  postAt      DateTime
+  paidAt      DateTime?
   isPaid      Boolean   @default(false)
   amount      Float
   memo        String?   @db.Text
-  receiptUrl  String?
   mfPaymentId String?
-  mfInvoiceId String?
   leaseId     String
   reminderAt  DateTime?
   lease       Lease     @relation(fields: [leaseId], references: [id])
