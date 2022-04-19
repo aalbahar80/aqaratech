@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let label: string;
-	export let color: 'green' | 'red' | 'indigo' | 'gray' | string = 'indigo';
+	export let color: 'green' | 'red' | 'indigo' | 'gray' | 'yellow' | string =
+		'indigo';
 </script>
 
 <span
@@ -9,6 +10,7 @@
 	class:red={color === 'red'}
 	class:indigo={color === 'indigo'}
 	class:gray={color === 'gray'}
+	class:yellow={color === 'yellow'}
 >
 	{label}
 </span>
@@ -28,5 +30,8 @@
 	}
 	.gray {
 		@apply bg-gray-100 text-gray-800;
+	}
+	.yellow {
+		@apply bg-yellow-100 text-yellow-800;
 	}
 </style>

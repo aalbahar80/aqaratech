@@ -11,6 +11,7 @@
 		class:green={badgeColor === 'green'}
 		class:red={badgeColor === 'red'}
 		class:indigo={badgeColor === 'indigo'}
+		class:yellow={badgeColor === 'yellow'}
 		in:scale
 	>
 		{label}
@@ -26,5 +27,8 @@
 	}
 	.indigo {
 		@apply bg-indigo-100 text-indigo-800;
+	}
+	.yellow {
+		@apply bg-yellow-100 text-yellow-800;
 	}
 </style>
