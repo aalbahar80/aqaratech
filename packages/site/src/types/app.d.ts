@@ -2,11 +2,10 @@
 /// <reference types="vite/client" />
 
 interface Auth0Profile {
-	sub: string;
+	sub: string | undefined;
 	name: string;
-	picture: string;
 	email: string;
-	updated_at: string;
+	updatedAt: string;
 }
 interface ImportMetaEnv {
 	// See https://vercel.com/docs/concepts/projects/environment-variables
@@ -23,7 +22,7 @@ declare namespace App {
 		accessToken: string;
 		idToken: string;
 		user: Auth0Profile | undefined;
-		authz: Authz | null;
+		authz: import('$models/types/auth.type').Authz | null;
 	}
 
 	// interface Platform {}

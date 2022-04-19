@@ -3,6 +3,7 @@ import { getAuthz } from '$lib/server/utils';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
+import { getUser } from '$lib/server/utils/getAuthz';
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
@@ -16,8 +17,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
 
-	const authz = await getAuthz(cookies.idToken || '', 'idToken');
+	const authz = await getAuthz(cookies.idToken, 'idToken');
+	const user = await getUser(cookies.idToken);
 	event.locals.authz = authz;
+	event.locals.user = user;
 
 	let response;
 
