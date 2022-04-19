@@ -36,7 +36,11 @@
 	const progress = getProgress(lease.start, lease.end);
 </script>
 
-<a href={`${hrefBase}/leases/${lease.id}`} class="block hover:bg-gray-50">
+<a
+	href={`${hrefBase}/leases/${lease.id}`}
+	class="block hover:bg-gray-50"
+	sveltekit:prefetch
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-row-reverse items-center justify-between">
 			<div class="ml-2 flex flex-shrink-0">

@@ -30,6 +30,7 @@
 						href={`${base}/${crumb[0]}/${crumb[1]}`}
 						class="text-sm font-medium text-gray-500 hover:text-gray-700"
 						class:ml-4={idx !== 0}
+						sveltekit:prefetch
 					>
 						<!-- aria-current={page.current ? 'page' : undefined} -->
 						{getModel(crumb[0]).singularCap}

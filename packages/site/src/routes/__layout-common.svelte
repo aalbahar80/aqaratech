@@ -1,7 +1,6 @@
 <script lang="ts" context="module">
 	// This is a base layout for other layouts to extend.
 
-	import { dev } from '$app/env';
 	import { session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
@@ -28,7 +27,7 @@
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 			integrations: [new BrowserTracing()],
 			tracesSampleRate: 1.0,
-			debug: dev,
+			// debug: dev,
 			environment: import.meta.env.VITE_VERCEL_ENV ?? 'localBrowser',
 		});
 		Sentry.configureScope((scope: Scope) => {

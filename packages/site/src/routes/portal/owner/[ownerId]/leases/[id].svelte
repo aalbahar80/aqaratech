@@ -47,7 +47,6 @@
 				crumbs={[
 					['properties', lease.unit.property.id],
 					['units', lease.unit.id],
-					['tenants', lease.tenant.id],
 				]}
 			/>
 		</svelte:fragment>
