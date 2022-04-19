@@ -1,9 +1,11 @@
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
-import type { GetSession, Handle } from '@sveltejs/kit';
+import { getUser } from '$lib/server/utils/getAuthz';
+import { init } from '$lib/services/sentry';
+import * as Sentry from '@sentry/browser';
+import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import cookie from 'cookie';
-import { getUser } from '$lib/server/utils/getAuthz';
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
@@ -80,4 +82,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
 	return response;
+};
+
+export const handleError: HandleError = async ({ error, event }) => {
+	const user = event.locals.user;
+	init();
+	Sentry.captureException(error, {
+		user: {
+			email: user?.email || '',
+			username: user?.name || '',
+		},
+	});
 };
