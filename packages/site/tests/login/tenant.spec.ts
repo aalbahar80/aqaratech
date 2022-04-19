@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const email = 'dev.tester.4@mailthink.net';
+const email = 'tenant.dev@mailthink.net';
 const password = 'test12';
 
 test.beforeEach(async ({ page }) => {

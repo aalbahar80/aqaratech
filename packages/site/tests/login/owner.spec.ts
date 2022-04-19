@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const email = 'dev.tester.2@mailthink.net';
-const password = 'HVuc1C8Ls9CN';
+const email = 'client.dev@mailthink.net';
+const password = 'test12';
 
 test.beforeEach(async ({ page }) => {
 	await page.goto('http://localhost:3000');
