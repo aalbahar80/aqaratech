@@ -18,7 +18,7 @@
 			}),
 		]);
 		return {
-			props: { entity, pagination, data },
+			props: { model: { name: entity, pagination, data } },
 		};
 	};
 </script>
@@ -31,22 +31,24 @@
 	}
 	type Model = E<'leases'> | E<'properties'> | E<'units'>;
 	export let model: Model;
-
-	const { name, data, pagination } = model;
 </script>
 
 <svelte:head>
 	<title>{startCase(model.name)}</title>
 </svelte:head>
 
-{#if name === 'properties'}
+{#if model.name === 'properties'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-		<PropertyList properties={data} readOnly />
+		<PropertyList properties={model.data} readOnly />
 	</div>
-{:else if name === 'units'}
+{:else if model.name === 'units'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-		<UnitsList units={data} readOnly />
+		<UnitsList units={model.data} readOnly />
 	</div>
 {:else}
-	<TableParent {data} total={data.length} {pagination} />
+	<TableParent
+		data={model.data}
+		total={model.data.length}
+		pagination={model.pagination}
+	/>
 {/if}
