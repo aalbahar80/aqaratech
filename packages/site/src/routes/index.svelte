@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LandingPlaceholder from '$lib/components/LandingPlaceholder.svelte';
+	import LandingBanner from '$lib/components/LandingBanner.svelte';
 </script>
 
-<LandingPlaceholder />
+<LandingBanner />

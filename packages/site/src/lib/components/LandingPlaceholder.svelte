@@ -181,7 +181,7 @@
 							class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:flex lg:items-center lg:px-0 lg:text-left"
 						>
 							<div class="lg:py-24">
-								<!-- <a
+								<a
 									href="/"
 									class="inline-flex items-center rounded-full bg-black p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base"
 								>
@@ -196,7 +196,7 @@
 										class="ml-2 h-5 w-5 text-gray-500"
 										aria-hidden="true"
 									/>
-								</a> -->
+								</a>
 								<h1
 									class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl"
 								>
@@ -215,7 +215,7 @@
 									occaecat fugiat.
 								</p>
 								<div class="mt-10 sm:mt-12">
-									<form class="sm:mx-auto sm:max-w-xl lg:mx-0">
+									<form action="#" class="sm:mx-auto sm:max-w-xl lg:mx-0">
 										<div class="sm:flex">
 											<div class="min-w-0 flex-1">
 												<label for="email" class="sr-only">
@@ -261,7 +261,7 @@
 			</div>
 
 			<!-- {/* Feature section with screenshot */} -->
-			<!-- <div class="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
+			<div class="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
 				<div
 					class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
 				>
@@ -290,10 +290,10 @@
 						/>
 					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- {/* Feature section with grid */} -->
-			<!-- <div class="relative bg-white py-16 sm:py-24 lg:py-32">
+			<div class="relative bg-white py-16 sm:py-24 lg:py-32">
 				<div
 					class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
 				>
@@ -344,10 +344,10 @@
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- {/* Testimonial section */} -->
-			<!-- <div
+			<div
 				class="bg-gradient-to-r from-teal-500 to-cyan-600 pb-16 lg:relative lg:z-10 lg:pb-0"
 			>
 				<div
@@ -404,10 +404,10 @@
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- {/* Blog section */} -->
-			<!-- <div class="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
+			<div class="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
 				<div class="relative">
 					<div
 						class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
@@ -484,10 +484,10 @@
 						{/each}
 					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- {/* CTA Section */} -->
-			<!-- <div class="relative bg-gray-900">
+			<div class="relative bg-gray-900">
 				<div
 					class="relative h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2"
 				>
@@ -538,9 +538,9 @@
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 		</main>
-		<!-- <footer class="bg-gray-50" aria-labelledby="footer-heading">
+		<footer class="bg-gray-50" aria-labelledby="footer-heading">
 			<h2 id="footer-heading" class="sr-only">Footer</h2>
 			<div
 				class="mx-auto max-w-md px-4 pt-12 sm:max-w-7xl sm:px-6 lg:px-8 lg:pt-16"
@@ -563,7 +563,7 @@
 									<item.icon class="h-6 w-6" aria-hidden="true" />
 
 									<Fa icon={item.icon} class="h-6 w-6" />
-									<Icon src={item.icon} class="h-6 w-6" aria-hidden="true" />
+									<!-- <Icon src={item.icon} class="h-6 w-6" aria-hidden="true" /> -->
 								</a>
 							{/each}
 						</div>
@@ -657,6 +657,6 @@
 					</p>
 				</div>
 			</div>
-		</footer> -->
+		</footer>
 	</div>
 </div>
