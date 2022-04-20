@@ -24,23 +24,26 @@
 </script>
 
 <script lang="ts">
-	type T = $$Generic<OwnerEntity>;
-	// type T = $$Generic<'units'>;
-	export let entity: T;
-	export let data: InferQueryOutput<`owner:${T}:list`>['data'];
-	export let pagination: InferQueryOutput<`owner:${T}:list`>['pagination'];
+	interface E<K extends OwnerEntity> {
+		name: K;
+		data: InferQueryOutput<`owner:${K}:list`>['data'];
+		pagination: InferQueryOutput<`owner:${K}:list`>['pagination'];
+	}
+	type Model = E<'leases'> | E<'properties'> | E<'units'>;
+	export let model: Model;
+
+	const { name, data, pagination } = model;
 </script>
 
 <svelte:head>
-	<title>{startCase(entity)}</title>
+	<title>{startCase(model.name)}</title>
 </svelte:head>
 
-<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->
-{#if entity === 'properties'}
+{#if name === 'properties'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 		<PropertyList properties={data} readOnly />
 	</div>
-{:else if entity === 'units'}
+{:else if name === 'units'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 		<UnitsList units={data} readOnly />
 	</div>
