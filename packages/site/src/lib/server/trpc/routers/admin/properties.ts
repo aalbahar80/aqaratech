@@ -57,41 +57,11 @@ export const properties = createRouter()
 		},
 	})
 	.query('list', {
-		input: paginationSchema,
-		resolve: async ({ input }) => {
-			const data = await prismaClient.property.findMany({
-				take: input.size,
-				skip: input.size * (input.pageIndex - 1),
-				orderBy: {
-					updatedAt: 'desc',
-				},
-				select: {
-					id: true,
-					area: true,
-					block: true,
-					street: true,
-					number: true,
-					clientId: true,
-				},
-			});
-			const pagination = {
-				size: input.size,
-				start: input.size * (input.pageIndex - 1) + 1,
-				pageIndex: input.pageIndex,
-			};
-
-			return {
-				data,
-				pagination,
-			};
-		},
-	})
-	.query('search', {
-		input: z.object({
-			query: z.string().optional(),
+		input: paginationSchema.extend({
 			clientId: z.string().uuid().optional(),
+			query: z.string().optional(),
 		}),
-		resolve: async ({ input: { query, clientId } }) => {
+		resolve: async ({ input: { query, clientId, pageIndex, size } }) => {
 			let filter = {};
 			if (clientId) {
 				filter = { clientId };
@@ -107,15 +77,24 @@ export const properties = createRouter()
 					],
 				};
 			}
-
 			const data = await prismaClient.property.findMany({
-				take: 20,
+				where: filter,
+				take: size,
+				skip: size * (pageIndex - 1),
 				orderBy: {
 					updatedAt: 'desc',
 				},
-				where: filter,
 			});
-			return data;
+			const pagination = {
+				size: size,
+				start: size * (pageIndex - 1) + 1,
+				pageIndex: pageIndex,
+			};
+
+			return {
+				data,
+				pagination,
+			};
 		},
 	})
 	.query('count', {

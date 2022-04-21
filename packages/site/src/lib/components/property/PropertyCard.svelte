@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { getLabel } from '$lib/models/interfaces/property.interface';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -16,7 +15,7 @@
 </script>
 
 <a
-	href={`${$page.stuff.hrefBase ?? ''}/properties/${property.id}`}
+	href={`/properties/${property.id}`}
 	class="block hover:bg-gray-50"
 	sveltekit:prefetch
 >

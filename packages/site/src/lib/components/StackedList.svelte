@@ -1,13 +1,14 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import { getModel } from '$lib/models/interfaces/utils/get-model';
 	import type { Entity } from '$models/interfaces';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let hideActions = false;
 	export let entity: Entity;
 	export let count: number;
 
+	const hideActions = $session.authz?.role !== 'admin';
 	const model = getModel(entity);
 	const newHref = `/new/${model.plural}`;
 </script>

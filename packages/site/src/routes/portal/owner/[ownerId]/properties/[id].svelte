@@ -25,9 +25,7 @@
 	<title>{getAddress(property)}</title>
 </svelte:head>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Property" id={property.id} entity="properties" hideActions />
+<Heading title="Property" id={property.id} entity="properties" hideActions />
 
-	<DetailsPane {details} />
-	<UnitsList units={property.units} readOnly />
-</div>
+<DetailsPane {details} />
+<UnitsList units={property.units} readOnly />

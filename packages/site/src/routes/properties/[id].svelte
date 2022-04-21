@@ -30,13 +30,11 @@
 	<title>{getAddress(property)}</title>
 </svelte:head>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Property" id={property.id} entity="properties">
-		<svelte:fragment slot="breadcrumbs">
-			<BreadCrumb crumbs={[['clients', property.clientId]]} />
-		</svelte:fragment>
-	</Heading>
+<Heading title="Property" id={property.id} entity="properties">
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb crumbs={[['clients', property.clientId]]} />
+	</svelte:fragment>
+</Heading>
 
-	<DetailsPane {details} />
-	<UnitsList units={property.units} />
-</div>
+<DetailsPane {details} />
+<UnitsList units={property.units} />

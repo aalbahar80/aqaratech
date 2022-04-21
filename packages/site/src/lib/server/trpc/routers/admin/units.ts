@@ -45,64 +45,45 @@ export const units = createRouter()
 		},
 	})
 	.query('list', {
-		input: paginationSchema,
-		resolve: async ({ input }) => {
+		input: paginationSchema.extend({
+			clientId: z.string().uuid().optional(),
+			propertyId: z.string().uuid().optional(),
+			query: z.string().optional(),
+		}),
+		resolve: async ({ input: { query, pageIndex, size, propertyId } }) => {
+			const propertyFilter = propertyId ? { propertyId } : {};
+			const queryFilter = query
+				? {
+						OR: [
+							{ unitNumber: { contains: query } },
+							{ type: { contains: query } },
+						],
+				  }
+				: {};
 			const data = await prismaClient.unit.findMany({
-				take: input.size,
-				skip: input.size * (input.pageIndex - 1),
+				where: {
+					AND: [propertyFilter, queryFilter],
+				},
+				take: size,
+				skip: size * (pageIndex - 1),
 				orderBy: {
 					updatedAt: 'desc',
 				},
-				select: {
-					id: true,
-					unitNumber: true,
-					type: true,
-					marketRent: true,
-					bed: true,
-					bath: true,
+				include: {
+					leases: {
+						orderBy: { start: 'desc' },
+					},
 				},
 			});
 			const pagination = {
-				size: input.size,
-				start: input.size * (input.pageIndex - 1) + 1,
-				pageIndex: input.pageIndex,
+				size: size,
+				start: size * (pageIndex - 1) + 1,
+				pageIndex: pageIndex,
 			};
 			return {
 				data,
 				pagination,
 			};
-		},
-	})
-	.query('search', {
-		input: z.object({
-			query: z.string().optional(),
-			propertyId: z.string().uuid().optional(),
-		}),
-		resolve: async ({ input: { query, propertyId } }) => {
-			let filter = {};
-			if (propertyId) {
-				filter = { propertyId };
-			} else if (query) {
-				filter = {
-					OR: [
-						{ unitNumber: { contains: query } },
-						{ type: { contains: query } },
-					],
-				};
-			}
-			const data = await prismaClient.unit.findMany({
-				take: 20,
-				orderBy: {
-					updatedAt: 'desc',
-				},
-				select: {
-					id: true,
-					unitNumber: true,
-					type: true,
-				},
-				where: filter,
-			});
-			return data;
 		},
 	})
 	.query('count', {

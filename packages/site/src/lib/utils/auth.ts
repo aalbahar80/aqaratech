@@ -18,7 +18,9 @@ export const protectRoute = (session: App.Session, pathname: string) => {
 		redirectUrl = `/portal/tenant/${session.authz.id}`;
 	} else if (!publicUrl && session.authz?.isOwner) {
 		// Lost owner
-		shouldRedirect = !pathname.startsWith('/portal/owner/');
+		// TODO: redirect
+		// shouldRedirect = !pathname.startsWith('/portal/owner/');
+		shouldRedirect = false;
 		redirectUrl = `/portal/owner/${session.authz.id}`;
 	} else if (session.authz?.isAdmin) {
 		// TODO either allow admin to access other routers or redirect them
