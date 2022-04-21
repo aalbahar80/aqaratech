@@ -6,6 +6,9 @@
 	import RadioEntity from './RadioEntity.svelte';
 	import SelectEntity from './SelectEntity.svelte';
 
+	export let invalid = false;
+	export let invalidText: string | undefined = undefined;
+
 	type Field = 'clientId' | 'propertyId' | 'unitId';
 
 	// Ensure parent is aware of generic type emitted from RadioEntity
@@ -81,4 +84,10 @@
 	disabled={!property?.value || !client?.value}
 />
 
-<RadioEntity bind:this={radio} options={radioOptions} on:select />
+<RadioEntity
+	bind:this={radio}
+	options={radioOptions}
+	on:select
+	{invalid}
+	{invalidText}
+/>

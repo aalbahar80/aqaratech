@@ -20,6 +20,8 @@
 	}
 	type SelectedRadioOption = RadioOption | undefined;
 	export let options: RadioOption[];
+	export let invalid = false;
+	export let invalidText: string | undefined;
 
 	let selected: SelectedRadioOption;
 
@@ -68,7 +70,10 @@
 		>Select a mailing list
 	</RadioGroupLabel> -->
 
-	<div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+	<div
+		class="mt-4 grid grid-cols-1 gap-y-6 rounded-md p-1 sm:grid-cols-3 sm:gap-x-4"
+		class:invalid
+	>
 		{#each options as option (option.title)}
 			<RadioGroupOption
 				value={option}
@@ -122,5 +127,16 @@
 				/>
 			</RadioGroupOption>
 		{/each}
+		{#if invalid}
+			<p class="col-span-full mt-2 text-sm text-red-600">
+				{invalidText ?? ''}
+			</p>
+		{/if}
 	</div>
 </RadioGroup>
+
+<style lang="postcss">
+	.invalid {
+		@apply border border-pink-500;
+	}
+</style>

@@ -123,13 +123,27 @@
 							/>
 						{/each}
 						{#if model.name === 'maintenanceOrders'}
-							<AttributeEntity
-								on:select={(e) => {
-									e.detail.forEach((item) => {
-										setData(item.fieldName, item.value);
-									});
-								}}
-							/>
+							<div class="relative pt-10">
+								<div
+									class="absolute inset-0 inset-x-2 flex items-center"
+									aria-hidden="true"
+								>
+									<div class="w-full border-t-2 border-gray-300" />
+								</div>
+								<div class="relative flex justify-start" />
+							</div>
+							<div class="flex flex-col gap-6">
+								<AttributeEntity
+									invalid={!!getValue($errors, 'clientId')}
+									invalidText={getValue($errors, 'clientId')?.[0]}
+									on:select={(e) => {
+										e.detail.forEach((item) => {
+											console.log({ item }, 'Form.svelte ~ 131');
+											setData(item.fieldName, item.value ?? null);
+										});
+									}}
+								/>
+							</div>
 						{/if}
 					</div>
 				</div>
@@ -153,5 +167,6 @@
 	</form>
 	{#if dev}
 		<div class="prose py-6"><pre>{JSON.stringify($data2, null, 2)}</pre></div>
+		<div class="prose py-6"><pre>{JSON.stringify($errors, null, 2)}</pre></div>
 	{/if}
 </div>

@@ -11,19 +11,34 @@ const schema = z.object({
 		z.preprocess(strToDate, z.date()).transform(falsyToNull),
 		z.literal('').transform(() => null),
 	]),
-	unitId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
-	propertyId: z
-		.string()
-		.uuid()
-		.or(z.literal(''))
-		.nullable()
-		.transform(falsyToNull),
-	clientId: z
-		.string()
-		.uuid()
-		.or(z.literal(''))
-		.nullable()
-		.transform(falsyToNull),
+	// unitId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
+	propertyId: z.string().uuid().nullable(),
+	clientId: z.string().uuid().nullable(),
+	unitId: z.string().uuid().nullable(),
+});
+
+const withAttribution = schema.superRefine((val, ctx) => {
+	if (
+		+Boolean(val.unitId) + +Boolean(val.propertyId) + +Boolean(val.clientId) !==
+		1
+		// Boolean(val.clientId)
+	) {
+		ctx.addIssue({
+			code: z.ZodIssueCode.custom,
+			path: ['clientId'],
+			message: 'At least one of unit, property, or client must be selected.',
+		});
+		ctx.addIssue({
+			code: z.ZodIssueCode.custom,
+			path: ['propertyId'],
+			message: 'At least one of unit, property, or client must be selected.',
+		});
+		ctx.addIssue({
+			code: z.ZodIssueCode.custom,
+			path: ['unitId'],
+			message: 'At least one of unit, property, or client must be selected.',
+		});
+	}
 });
 
 const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
@@ -37,14 +52,14 @@ const MaintenanceOrderModelBase: IEntity<'maintenanceOrders'> = {
 		title: '',
 		description: '',
 		status: null,
-		unitId: '',
-		propertyId: '',
-		clientId: '',
+		unitId: null,
+		propertyId: null,
+		clientId: null,
 	}),
 };
 
 export const MaintenanceOrderModel = {
 	...MaintenanceOrderModelBase,
-	schema,
+	schema: withAttribution,
 	basicFields: ['title', 'description', 'status', 'completedAt'] as const,
 };
