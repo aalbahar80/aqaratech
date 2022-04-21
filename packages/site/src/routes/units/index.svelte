@@ -3,7 +3,7 @@
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import type { Props } from '$models/types/Props.type';
 
-	export const load = async ({ session }: { session: App.Session }) => {
+	export const load = async ({ session }: LoadInput) => {
 		const { data: units, pagination } = session.authz?.isAdmin
 			? await trpc.query('units:list', {})
 			: await trpc.query('owner:units:list', {

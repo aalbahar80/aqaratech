@@ -50,25 +50,18 @@
 	];
 </script>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Unit" id={unit.id} entity="units" {icons} {hideActions}>
-		<svelte:fragment slot="breadcrumbs">
-			<BreadCrumb
-				crumbs={hideActions
-					? [['properties', unit.property.id]]
-					: [
-							['clients', unit.property.clientId],
-							['properties', unit.property.id],
-					  ]}
-			/>
-		</svelte:fragment>
-	</Heading>
+<Heading title="Unit" id={unit.id} entity="units" {icons}>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb
+			crumbs={hideActions
+				? [['properties', unit.property.id]]
+				: [
+						['clients', unit.property.clientId],
+						['properties', unit.property.id],
+				  ]}
+		/>
+	</svelte:fragment>
+</Heading>
 
-	<DetailsPane {details} />
-	<LeaseList
-		{hideActions}
-		leases={unit.leases}
-		newHref={`/new/leases?unitId=${unit.id}`}
-		showIndex
-	/>
-</div>
+<DetailsPane {details} />
+<LeaseList leases={unit.leases} showIndex />

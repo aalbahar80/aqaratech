@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { Entity } from '$models/interfaces/entity.interface';
@@ -16,7 +17,6 @@
 	export let id: string;
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
-	export let hideActions = false;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -41,7 +41,7 @@
 		</h2>
 	</div>
 
-	{#if !hideActions}
+	{#if $session.authz?.isAdmin}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} />
