@@ -1,11 +1,20 @@
-<script lang="ts">
+<script lang="ts" context="module">
+	import trpc from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
+	import type { Props } from '$lib/models/types/Props.type';
+	import { getAddress, getName } from '$lib/utils/common';
 	import { inWords } from '$lib/utils/currency';
-	import { page } from '$app/stores';
-	import { getName } from '$lib/utils/common';
-	import { getAddress } from '$lib/utils/common';
+	import type { LoadInput } from '@sveltejs/kit';
 
-	const { lease } = $page.stuff;
+	export const load = async ({ params }: LoadInput<{ id: string }>) => {
+		const lease = await trpc.query('leases:read', params.id);
+		return { props: { lease } };
+	};
+</script>
+
+<script lang="ts">
+	type Lease = Props<typeof load>['lease'];
+	export let lease: Lease;
 
 	const arabicLabels: Record<string, string> = {
 		name: 'الطرف الثاني',

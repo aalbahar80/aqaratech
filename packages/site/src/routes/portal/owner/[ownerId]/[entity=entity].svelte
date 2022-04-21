@@ -37,13 +37,13 @@
 	<title>{startCase(model.name)}</title>
 </svelte:head>
 
-{#if model.name === 'properties'}
+<!-- {#if model.name === 'properties'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 		<PropertyList properties={model.data} readOnly />
 	</div>
 {:else if model.name === 'units'}
 	<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-		<UnitsList units={model.data} readOnly />
+		<UnitsList units={model.data} hideActions />
 	</div>
 {:else}
 	<TableParent
@@ -51,4 +51,4 @@
 		total={model.data.length}
 		pagination={model.pagination}
 	/>
-{/if}
+{/if} -->

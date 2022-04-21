@@ -1,14 +1,13 @@
 <script lang="ts" context="module">
-	import trpc, {
-		type InferQueryInput,
-		type InferQueryOutput,
-	} from '$lib/client/trpc';
+	import { session } from '$app/stores';
+	import trpc from '$lib/client/trpc';
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
+	import type { Props } from '$lib/models/types/Props.type';
+	import type { LoadInput } from '@sveltejs/kit';
 	import { isEqual } from 'lodash-es';
-	import type { Load } from './index';
 
-	export const load: Load = async () => {
+	export const load = async ({ session }: LoadInput) => {
 		const options = {
 			pageIndex: 1,
 			size: 15,
@@ -19,7 +18,12 @@
 				expired: true,
 			},
 		};
-		const { data, pagination } = await trpc.query('leases:list', options);
+		const { data, pagination } = session.authz?.isAdmin
+			? await trpc.query('leases:list', options)
+			: await trpc.query('owner:leases:list', {
+					...options,
+					clientId: session.authz?.id,
+			  });
 		return {
 			props: { pagination, leases: data, options },
 		};
@@ -27,9 +31,13 @@
 </script>
 
 <script lang="ts">
-	export let leases: InferQueryOutput<`leases:list`>[`data`];
-	export let pagination: InferQueryOutput<`leases:list`>[`pagination`];
-	export let options: InferQueryInput<`leases:list`>;
+	type Leases = Props<typeof load>['leases'];
+	type Pagination = Props<typeof load>['pagination'];
+	type Options = Props<typeof load>['options'];
+	export let leases: Leases;
+	export let pagination: Pagination;
+	export let options: Options;
+
 	let currentOptions = options;
 
 	const sortOptions = [
@@ -55,10 +63,12 @@
 			return; // no change
 		}
 		currentOptions = newOptions;
-		({ data: leases, pagination } = await trpc.query(
-			`leases:list`,
-			newOptions,
-		));
+		({ data: leases, pagination } = $session.authz?.isAdmin
+			? await trpc.query('leases:list', newOptions)
+			: await trpc.query('owner:leases:list', {
+					...newOptions,
+					clientId: $session.authz?.id,
+			  }));
 	};
 
 	// changes to options will trigger a new query
@@ -74,54 +84,51 @@
 	$: handleFilter(options);
 </script>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Filter bind:filters bind:currentSort {sortOptions} />
-	<div class="">
-		<LeaseList {leases} --border-radius-b="0" />
+<Filter bind:filters bind:currentSort {sortOptions} />
+<div class="">
+	<LeaseList {leases} --border-radius-b="0" />
 
-		<nav
-			class="flex items-center justify-between rounded-lg rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow sm:px-6"
-			aria-label="Pagination"
-		>
-			<div class="hidden sm:block">
-				<p class="text-sm text-gray-700">
-					Showing <span class="font-medium">{pagination.start}</span> to
-					<span class="font-medium">{pagination.start + leases.length - 1}</span
-					>
-					of{' '}
-					<span class="font-medium">{pagination.total}</span> results
-				</p>
-			</div>
-			<div class="flex flex-1 justify-between sm:justify-end">
-				<button
-					class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					disabled={!pagination.hasPreviousPage}
-					on:click={() => {
-						options = {
-							...options,
-							pageIndex: Math.max(pagination.pageIndex - 1, 1),
-						};
-					}}
-					rel="prev"
-				>
-					Previous
-				</button>
-				<button
-					class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-					disabled={!pagination.hasNextPage}
-					rel="next"
-					on:click={() => {
-						options = {
-							...options,
-							pageIndex: pagination.pageIndex + 1,
-						};
-					}}
-				>
-					Next
-				</button>
-			</div>
-		</nav>
-	</div>
+	<nav
+		class="flex items-center justify-between rounded-lg rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow sm:px-6"
+		aria-label="Pagination"
+	>
+		<div class="hidden sm:block">
+			<p class="text-sm text-gray-700">
+				Showing <span class="font-medium">{pagination.start}</span> to
+				<span class="font-medium">{pagination.start + leases.length - 1}</span>
+				of{' '}
+				<span class="font-medium">{pagination.total}</span> results
+			</p>
+		</div>
+		<div class="flex flex-1 justify-between sm:justify-end">
+			<button
+				class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				disabled={!pagination.hasPreviousPage}
+				on:click={() => {
+					options = {
+						...options,
+						pageIndex: Math.max(pagination.pageIndex - 1, 1),
+					};
+				}}
+				rel="prev"
+			>
+				Previous
+			</button>
+			<button
+				class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				disabled={!pagination.hasNextPage}
+				rel="next"
+				on:click={() => {
+					options = {
+						...options,
+						pageIndex: pagination.pageIndex + 1,
+					};
+				}}
+			>
+				Next
+			</button>
+		</div>
+	</nav>
 </div>
 
 <style lang="postcss">
