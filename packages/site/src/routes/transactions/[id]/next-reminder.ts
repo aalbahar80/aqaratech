@@ -1,6 +1,6 @@
+import { temporalClient } from '$lib/server/temporalClient';
 import { getNextReminder } from '@self/temporal';
 import type { RequestHandler } from '@sveltejs/kit';
-import { Connection, WorkflowClient } from '@temporalio/client';
 
 export const get: RequestHandler = async ({ params }) => {
 	const { id } = params;
@@ -10,12 +10,7 @@ export const get: RequestHandler = async ({ params }) => {
 	}
 	console.log('getting next reminder for transaction: ', id);
 
-	const connection = new Connection({
-		// address: dev ? 'localhost' : 'temporal.letand.be',
-		address: 'temporal.letand.be',
-	});
-	const client = new WorkflowClient(connection.service);
-	const handle = client.getHandle(id);
+	const handle = temporalClient.getHandle(id);
 
 	try {
 		const reminder = await handle.query(getNextReminder);
