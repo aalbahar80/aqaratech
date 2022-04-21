@@ -11,13 +11,19 @@
 	import { CurrencyDollar } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
-		const [trx, nextReminder] = await Promise.all([
+	export const load: Load = async ({ params, fetch }) => {
+		const [trx, fetchReminder] = await Promise.all([
 			trpc.query('transactions:read', params.id),
 			// needs optimization, load in onMount?
-			trpc.query('transactions:nextReminder', params.id),
-			new Date().toISOString(),
+			fetch(`/transactions/${params.id}/next-reminder`),
 		]);
+		let nextReminder: string | null = null;
+
+		if (!fetchReminder.ok) {
+			nextReminder = null;
+		} else {
+			nextReminder = (await fetchReminder.json()).reminder;
+		}
 
 		return { props: { trx, nextReminder } };
 	};
@@ -32,10 +38,10 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Posted At', dateFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
-		['Next Reminder', trx.reminderAt?.toLocaleDateString() ?? ''],
-		['Created on', dateFormat(trx.createdAt)],
+		['Posted', dateFormat(trx.postAt)],
+		['Due', trx.dueAt ? dateFormat(trx.dueAt) : '-'],
+		['Created', dateFormat(trx.createdAt)],
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];
 

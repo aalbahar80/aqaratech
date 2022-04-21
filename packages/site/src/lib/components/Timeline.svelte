@@ -7,6 +7,9 @@
 	import { enGB } from 'date-fns/locale';
 	import lowerCase from 'lodash-es/lowerCase.js';
 	import Button from './Button.svelte';
+	import Fa from 'svelte-fa';
+	import { faBellSlash } from '@fortawesome/free-solid-svg-icons/faBellSlash';
+	import { dev } from '$app/env';
 
 	type TimelineEvent = {
 		date: Date;
@@ -16,24 +19,7 @@
 	export let trx: InferQueryOutput<'transactions:read'>;
 	export let nextReminder: string | null;
 	console.log({ nextReminder }, 'Timeline.svelte ~ 18');
-	let timeline: TimelineEvent[] = [
-		{
-			status: 'SENT',
-			date: new Date('2022-03-19'),
-		},
-		{
-			status: 'DELIVERED',
-			date: new Date('2022-03-17'),
-		},
-		{
-			status: 'DELIVERED',
-			date: new Date(),
-		},
-		{
-			status: 'FAILED',
-			date: new Date('2022-03-13T14:00:00.000Z'),
-		},
-	];
+	let timeline: TimelineEvent[] = [];
 	if (nextReminder) {
 		const next: TimelineEvent = {
 			status: 'SCHEDULED',
@@ -49,18 +35,19 @@
 			const res = await fetch('/api/sms', {
 				method: 'POST',
 				body: JSON.stringify({
-					// phone: trx.lease.tenant.phone,
-					phone: '+96599123456',
+					phone:
+						import.meta.env.VITE_VERCEL_ENV !== 'production'
+							? '+15005550006'
+							: trx.lease.tenant.phone,
 					// phone: '+15005550009', // invalid
-					message: `Your transaction of ${kwdFormat(
-						trx.amount,
-					)} KWD has been received.`,
+					message: `Use the link below to pay your rent.\n${
+						import.meta.env.BASE_URL
+					}/p/transactions/${trx.id}`,
 				}),
 			});
 			const data = await res.json();
 			if (!res.ok) throw new Error(data.message || 'Unable to send SMS');
 
-			console.log({ data }, '[id].svelte ~ 82');
 			addToast({
 				props: {
 					kind: 'success',
@@ -85,7 +72,7 @@
 	<div class="rounded-lg bg-white px-4 py-5 shadow sm:px-6">
 		{#if timeline.length}
 			<h2 id="timeline-title" class="text-lg font-medium text-gray-900">
-				Notification Timeline
+				Scheduled Notifications
 			</h2>
 
 			<!-- Activity Feed -->
@@ -145,21 +132,11 @@
 			</div>
 		{:else}
 			<div class="text-center">
-				<svg
-					class="mx-auto h-12 w-12 text-gray-400"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						vector-effect="non-scaling-stroke"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width={2}
-						d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-					/>
-				</svg>
+				<Fa
+					icon={faBellSlash}
+					class="mx-auto h-12 w-12 my-4 text-gray-400"
+					size="2x"
+				/>
 				<h3 class="mt-2 text-sm font-medium text-gray-900">No notifications</h3>
 				<p class="mt-1 text-sm text-gray-500">
 					There are no scheduled reminders for this transaction.
