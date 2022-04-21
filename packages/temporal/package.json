@@ -4,8 +4,8 @@
     "scripts": {
         "build": "tsc --build ./tsconfig.json",
         "build:watch": "tsc --build --watch ./tsconfig.json",
-        "worker": "node --loader ts-node/esm ./src/worker.ts",
-        "worker:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts"
+        "start": "node --loader ts-node/esm ./src/worker.ts",
+        "start:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts"
     },
     "type": "module",
     "devDependencies": {
