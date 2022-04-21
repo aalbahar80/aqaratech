@@ -1,18 +1,34 @@
-<script lang="ts">
-	import { page } from '$app/stores';
+<script lang="ts" context="module">
 	import Button from '$components/Button.svelte';
+	import trpc from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
+	import type { Props } from '$lib/models/types/Props.type';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { getBadge } from '$models/interfaces/lease.interface';
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
+	import type { LoadInput } from '@sveltejs/kit';
 	import formatDistance from 'date-fns/formatDistance';
 
-	const { lease } = $page.stuff;
+	export const load = async ({
+		params,
+		session,
+	}: LoadInput<{ id: string }>) => {
+		const lease = session.authz?.isAdmin
+			? await trpc.query('leases:read', params.id)
+			: await trpc.query('owner:leases:read', params.id);
+		return { props: { lease } };
+	};
+</script>
+
+<script lang="ts">
+	type Lease = Props<typeof load>['lease'];
+	export let lease: Lease;
+
 	const details: [string, string | null][] = [
 		['Tenant', getName(lease.tenant)],
 		['Start Date', dateFormat(lease.start)],
@@ -36,38 +52,36 @@
 	const badge = getBadge(lease);
 </script>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Lease" id={lease.id} entity="leases" {icons}>
-		<svelte:fragment slot="breadcrumbs">
-			<BreadCrumb
-				crumbs={[
-					['clients', lease.unit.property.client.id],
-					['properties', lease.unit.property.id],
-					['units', lease.unit.id],
-					['tenants', lease.tenant.id],
-				]}
-			/>
-		</svelte:fragment>
+<Heading title="Lease" id={lease.id} entity="leases" {icons}>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb
+			crumbs={[
+				// ['clients', lease.unit.property.clientId],
+				['properties', lease.unit.property.id],
+				['units', lease.unit.id],
+				['tenants', lease.tenant.id],
+			]}
+		/>
+	</svelte:fragment>
 
-		<svelte:fragment slot="actions">
-			<Button
-				icon={Refresh}
-				text="Renew"
-				as="a"
-				href={`/new/leases?leaseId=${lease.id}&renew=true`}
-				class="w-full sm:w-auto"
-			/>
+	<svelte:fragment slot="actions">
+		<Button
+			icon={Refresh}
+			text="Renew"
+			as="a"
+			href={`/new/leases?leaseId=${lease.id}&renew=true`}
+			class="w-full sm:w-auto"
+		/>
 
-			<Button
-				icon={DocumentText}
-				text="Contract"
-				as="a"
-				href={`/leases/${lease.id}/contract`}
-				class="w-full sm:w-auto"
-			/>
-		</svelte:fragment>
-	</Heading>
-	<Badge label={badge.label} badgeColor={badge.color} />
-	<DetailsPane {details} {files} />
-	<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
-</div>
+		<Button
+			icon={DocumentText}
+			text="Contract"
+			as="a"
+			href={`/leases/${lease.id}/contract`}
+			class="w-full sm:w-auto"
+		/>
+	</svelte:fragment>
+</Heading>
+<Badge label={badge.label} badgeColor={badge.color} />
+<DetailsPane {details} {files} />
+<TrxColumn transactions={lease.transactions} leaseId={lease.id} />

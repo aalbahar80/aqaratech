@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
@@ -26,8 +26,8 @@
 	>['leases'][number]['transactions'];
 	export let transactions: Transactions;
 	export let leaseId: string | undefined = undefined;
-	export let hideActions = false;
 
+	const hideActions = !$session.authz?.isAdmin;
 	let pageIndex = 1;
 	let data: typeof transactions;
 	let totalPages: number;
