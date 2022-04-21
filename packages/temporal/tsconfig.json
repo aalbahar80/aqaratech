@@ -1,15 +1,16 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "version": "4.4.2",
-  "compilerOptions": {
-    "module": "esnext",
-    // "target": "esnext",
-    "moduleResolution": "node",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "rootDir": "./src",
-    "outDir": "./lib"
-  },
-  "include": ["src/**/*.ts"]
+	"extends": "@tsconfig/node16/tsconfig.json",
+	"version": "4.4.2",
+	"compilerOptions": {
+		"module": "esnext",
+		// "target": "esnext",
+		"moduleResolution": "node",
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"rootDir": "./src",
+		"outDir": "./lib",
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["src/**/*.ts"]
 }
