@@ -16,6 +16,12 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		vite: {
+			define:
+				process.env.NODE_ENV === 'production'
+					? {
+							__SENTRY_DEBUG__: false,
+					  }
+					: undefined,
 			resolve: {
 				alias: {
 					$components: resolve('./src/lib/components'),
@@ -31,9 +37,6 @@ const config = {
 				noExternal:
 					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
 				external: ['@temporalio'],
-			},
-			optimizeDeps: {
-				exclude: ['@cerbos/sdk'],
 			},
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
