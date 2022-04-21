@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
@@ -147,5 +148,7 @@
 			/>
 		</div>
 	</form>
-	<div class="prose py-6"><pre>{JSON.stringify($data2, null, 2)}</pre></div>
+	{#if dev}
+		<div class="prose py-6"><pre>{JSON.stringify($data2, null, 2)}</pre></div>
+	{/if}
 </div>

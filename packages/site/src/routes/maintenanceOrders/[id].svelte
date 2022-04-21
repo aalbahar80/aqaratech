@@ -43,5 +43,4 @@
 		properties={maintenanceOrder.properties}
 		maintenanceOrderId={maintenanceOrder.id}
 	/> -->
-	<pre>{JSON.stringify(maintenanceOrder, null, 2)}</pre>
 </div>
