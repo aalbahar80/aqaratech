@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { areas } from '$lib/config/constants';
+	import SelectArea from '$components/form/inputs/SelectArea.svelte';
 	import { classes } from '$lib/utils';
 	import {
 		Switch,
@@ -9,7 +9,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import Fuse from 'fuse.js';
 	import startCase from 'lodash-es/startCase.js';
 	import { createEventDispatcher } from 'svelte';
 	import Select from 'svelte-select';
@@ -20,23 +19,6 @@
 	export let invalidText: string | undefined = '';
 
 	let type = 'text';
-
-	const options = {
-		includeScore: true,
-		keys: ['0', '1'],
-	};
-
-	const items = areas.map((area) => ({
-		value: area[1],
-		label: `${area[0]} | ${area[1]}`,
-	}));
-	const fuse = new Fuse(areas, options);
-	const loadOptions = async (q: string) =>
-		fuse.search(q).map((result) => ({
-			value: result.item[1],
-			label: `${result.item[0]} | ${result.item[1]}`,
-		}));
-
 	switch (name) {
 		case 'dob':
 		case 'end':
@@ -106,16 +88,7 @@
 		</label>
 	{/if}
 	{#if name === 'area'}
-		<Select
-			id={name}
-			{items}
-			value={value ? { value, label: value } : null}
-			hasError={Boolean(invalidText)}
-			{loadOptions}
-			placeholder="Type to search in English or Arabic..."
-			on:select
-			on:clear
-		/>
+		<SelectArea id={name} {value} {invalidText} on:select on:clear />
 	{:else if type === 'select'}
 		<Select
 			id={name}
