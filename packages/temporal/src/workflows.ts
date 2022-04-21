@@ -26,14 +26,15 @@ async function sleepUntil({
 const acts = proxyActivities<ReturnType<typeof activities["createActivities"]>>(
 	{
 		// TODO increase timeout
-		// startToCloseTimeout: "1 minute",
-		scheduleToCloseTimeout: "1000000",
+		startToCloseTimeout: "1 minute",
+		// scheduleToCloseTimeout: "1000000",
 	}
 );
 
 export const getNextReminder = defineQuery<string>("getNextReminder");
 
 export async function trxNotificationWF(trxId: string, timeMultiplier = 1) {
+	const notifications = [];
 	const originalTrx = await acts.getTrx(trxId);
 
 	let nextReminder = new Date(originalTrx.postAt);
@@ -45,10 +46,11 @@ export async function trxNotificationWF(trxId: string, timeMultiplier = 1) {
 			const trx = await acts.getTrx(trxId);
 			if (trx.isPaid) {
 				console.log("Transaction paid. Stopping workflow.");
-				return trx;
+				return notifications;
 			}
 			if (trx.lease.shouldNotify && trx.lease.active) {
-				await acts.notify(trxId);
+				const notification = await acts.notify(trxId);
+				notifications.push(notification);
 			} else {
 				console.log(
 					"Either lease is not active or shouldNotify is false. Skipping notification.",
@@ -62,7 +64,8 @@ export async function trxNotificationWF(trxId: string, timeMultiplier = 1) {
 		}
 	}
 	console.log("Done.");
-	return "The answer is 42";
+	console.log({ notifications }, "workflows.ts ~ 67");
+	return notifications;
 }
 
 async function prepareNextReminder({

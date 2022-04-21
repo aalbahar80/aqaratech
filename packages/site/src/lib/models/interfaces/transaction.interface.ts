@@ -11,7 +11,7 @@ const schema = z.object({
 			z.preprocess(strToDate, z.date()).transform(falsyToNull),
 			z.literal('').transform(() => null),
 		])
-		.nullish(),
+		.nullable(),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),

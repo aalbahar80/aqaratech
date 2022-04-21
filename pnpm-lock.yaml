@@ -191,8 +191,10 @@ importers:
       '@temporalio/workflow': ^0.21.0
       '@tsconfig/node16': ^1.0.2
       '@types/node': ^17.0.23
+      '@types/sinon': ^10.0.11
       axios: ^0.26.1
       date-fns: ^2.27.0
+      ms: 3.0.0-canary.1
       nodemon: ^2.0.15
       prisma: ^3.12.0
       sinon: ^13.0.2
@@ -211,8 +213,10 @@ importers:
       '@temporalio/workflow': 0.21.0
       '@tsconfig/node16': 1.0.2
       '@types/node': 17.0.25
+      '@types/sinon': 10.0.11
       axios: 0.26.1
       date-fns: 2.28.0
+      ms: 3.0.0-canary.1
       nodemon: 2.0.15
       prisma: 3.12.0
       sinon: 13.0.2
@@ -1899,6 +1903,16 @@ packages:
     resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
     dependencies:
       '@types/node': 17.0.24
+    dev: true
+
+  /@types/sinon/10.0.11:
+    resolution: {integrity: sha512-dmZsHlBsKUtBpHriNjlK0ndlvEh8dcb9uV9Afsbt89QIyydpC7NcR+nWlAhASfy3GHnxTl4FX/aKE7XZUt/B4g==}
+    dependencies:
+      '@types/sinonjs__fake-timers': 8.1.2
+    dev: true
+
+  /@types/sinonjs__fake-timers/8.1.2:
+    resolution: {integrity: sha512-9GcLXF0/v3t80caGs5p2rRfkB+a8VBGLJZVih6CNFkx8IZ994wiKKLSRs9nuFwk1HevWs/1mnUmkApGrSGsShA==}
     dev: true
 
   /@types/stack-utils/2.0.1:

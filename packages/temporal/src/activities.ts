@@ -27,7 +27,7 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		console.log(`Got lease ${id}: `);
 		return lease;
 	},
-	async notify(transactionId: string): Promise<void> {
+	async notify(transactionId: string) {
 		console.log(`Notifying ${transactionId}...`);
 		const twilioClient = Twilio(
 			"ACbffc494534d2b9823213e4538d71c98d",
@@ -40,6 +40,7 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 		});
 		console.log({ sms }, "activities.ts ~ 40");
 		console.log(`Notified ${transactionId}: `);
+		return sms;
 	},
 	async getTrx(id: string) {
 		console.log(`Getting trx ${id}...`);

@@ -17,10 +17,12 @@ import {
 	beforeAll,
 	beforeEach,
 	describe,
+	expect,
 	it,
 } from "vitest";
 import { createActivities } from "../lib/activities";
 import { trxNotificationWF } from "../lib/workflows";
+import ms from "ms";
 
 const { PrismaClient } = pkg;
 const prismaClient = new PrismaClient({});
@@ -50,21 +52,20 @@ describe("example workflow", function () {
 			worker.shutdown();
 			await runPromise;
 		};
-	}, 1000000);
+	}, ms("20s"));
 
 	beforeEach(() => {
 		const client = new WorkflowClient();
 
-		// const testId = uuid();
 		const testId = "05432ea6-3ae6-4915-a8e3-81440a4f78f3";
 		execute = () =>
 			client.execute(trxNotificationWF, {
-				args: [testId, 0.000000001],
+				args: [testId, 0.00000000001],
 				taskQueue: "hello-world",
-				workflowExecutionTimeout: 1000000,
+				workflowExecutionTimeout: ms("20s"),
 				workflowId: `test-${v4()}`,
 			});
-	}, 1000000);
+	}, ms("20s"));
 
 	afterAll(async () => {
 		await shutdown();
@@ -74,38 +75,13 @@ describe("example workflow", function () {
 		sinon.restore();
 	});
 
-	it("returns correct result", async () => {
-		const result = await execute();
-		console.log({ result }, "wf2.test.ts ~ 78");
-		assert.equal(result, "The answer is 42");
-	}, 1000000);
-
-	// it("retries one failure", async () => {
-	// 	// Make the first request fail, but subsequent requests succeed
-	// 	let numCalls = 0;
-	// 	sinon.stub(axios, "get").callsFake(() => {
-	// 		if (numCalls++ === 0) {
-	// 			return Promise.reject(new Error("first error"));
-	// 		}
-	// 		return Promise.resolve({ data: { args: { answer: "88" } } });
-	// 	});
-
-	// 	const result = await execute();
-	// 	assert.equal(result, "The answer is 88");
-	// });
-
-	// it("bubbles up activity errors", async () => {
-	// 	sinon
-	// 		.stub(axios, "get")
-	// 		.callsFake(() => Promise.reject(new Error("example error")));
-
-	// 	await assert.rejects(
-	// 		execute,
-	// 		(err: unknown) =>
-	// 			err instanceof WorkflowFailedError &&
-	// 			err.cause instanceof ActivityFailure &&
-	// 			err.cause.cause instanceof ApplicationFailure &&
-	// 			err.cause.cause.message === "example error"
-	// 	);
-	// });
+	it(
+		"sends at least one sms",
+		async () => {
+			const result = await execute();
+			const successful = result.filter((r) => r.errorMessage === null);
+			expect(successful.length).toBeGreaterThanOrEqual(1);
+		},
+		ms("20s")
+	);
 });
