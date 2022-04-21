@@ -5,9 +5,11 @@
 https://www.youtube.com/watch?v=2oNsjyaCIrI
 https://github.com/TomDoesTech/caddy-nodejs-docker-tutorial
 
+```
 git config --global credential.helper store
 git clone https://github.com/ambiguous48/temporal-docker-test.git
 chmod +x deploy.sh
+```
 
 # To run
 
@@ -21,6 +23,27 @@ docker-compose logs -f -t
 ```
 
 # 2. Deploy Worker
+
+```bash
+cd /var/
+git config --global credential.helper store
+git clone aqtech
+cd aqtech
+
+# install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+# Restart terminal to use nvm (or use displayed hint command)
+nvm install 16.4.0
+# nvm use 16.4.0
+
+# install pnpm
+npm install -g pnpm@next-7
+
+# git pull
+pnpm i
+
+pnpm run build:cloud
+```
 
 2. yarn run dev:temporal
 3. yarn run start:workflow
@@ -49,16 +72,13 @@ const client = new WorkflowClient(connection.service);
 Temporal worker:
 
 ```bash
-git clone this repo
-# install node 16.4.0 using nvm
-nvm install 16.4.0
-nvm use 16.4.0
-install yarn
 # in repo directory:
 # checkout temporal branch (optional)
 # find way to not need yarn run build
 # set env_var
 export DATABASE_URL=VALUE
+
+export DATABASE_URL='mysql://alavwhwsetxe:pscale_pw_WoU9XU0gR_C45USoI8JWiJhg6_8CrbH3or9KIuUWjqI@t1cp4lkeutv3.eu-central-2.psdb.cloud/aqaratechdb?sslaccept=strict'
 yarn install
 yarn run build:temporal # in watch mode?
 yarn run start:worker.watch
@@ -70,9 +90,6 @@ tail -f nohup.out # in same directory
 ```
 
 ```bash
-# updating code workflow
-git pull
-yarn run build:temporal
 # this should be enough, if start:worker.watch uses nodemon to restart and pick up the changes
 # TODO figure out why DATABASE_URL env var not persisting
 ```
