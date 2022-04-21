@@ -7,10 +7,12 @@ const schema = z.object({
 	title: z.string().transform(trim).transform(falsyToNull),
 	description: z.string().transform(trim).transform(falsyToNull).nullable(),
 	status: z.enum(['pending', 'completed', 'closed']).nullable(),
-	completedAt: z.union([
-		z.preprocess(strToDate, z.date()).transform(falsyToNull),
-		z.literal('').transform(() => null),
-	]),
+	completedAt: z
+		.union([
+			z.preprocess(strToDate, z.date()).transform(falsyToNull),
+			z.literal('').transform(() => null),
+		])
+		.nullish(),
 	// unitId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
 	propertyId: z.string().uuid().nullable(),
 	clientId: z.string().uuid().nullable(),

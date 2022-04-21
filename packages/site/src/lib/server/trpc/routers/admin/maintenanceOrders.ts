@@ -13,6 +13,11 @@ export const maintenanceOrders = createRouter()
 				where: {
 					id,
 				},
+				include: {
+					client: true,
+					property: true,
+					unit: true,
+				},
 			});
 			if (data) return data;
 			throw new TRPCError({

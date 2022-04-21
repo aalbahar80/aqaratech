@@ -5,6 +5,11 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from './[id]';
+	import {
+		ClientModel,
+		PropertyModel,
+		UnitModel,
+	} from '$lib/models/interfaces';
 
 	export const load: Load = async ({ params }) => {
 		const maintenanceOrder = await trpc.query(
@@ -21,12 +26,26 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		// [
-		// 	'Name',
-		// 	concatIfExists([maintenanceOrder.firstName, maintenanceOrder.lastName]),
-		// ],
-		// ['Phone', maintenanceOrder.phone],
-		// ['Email', maintenanceOrder.email],
+		['Title', maintenanceOrder.title],
+		['Status', maintenanceOrder.status ?? '-'],
+		['Description', maintenanceOrder.description ?? '-'],
+		[
+			'Client',
+			maintenanceOrder.client
+				? ClientModel.getLabel(maintenanceOrder.client)
+				: '-',
+		],
+		[
+			'Property',
+			maintenanceOrder.property
+				? PropertyModel.getLabel(maintenanceOrder.property)
+				: '-',
+		],
+		[
+			'Unit',
+			maintenanceOrder.unit ? UnitModel.getLabel(maintenanceOrder.unit) : '-',
+		],
+		['Completed At', maintenanceOrder.completedAt?.toLocaleString() ?? '-'],
 		['Created on', dateFormat(maintenanceOrder.createdAt)],
 		['Last updated', maintenanceOrder.updatedAt.toLocaleString()],
 	];
@@ -39,8 +58,4 @@
 		entity="maintenanceOrders"
 	/>
 	<DetailsPane {details} />
-	<!-- <PropertyList
-		properties={maintenanceOrder.properties}
-		maintenanceOrderId={maintenanceOrder.id}
-	/> -->
 </div>
