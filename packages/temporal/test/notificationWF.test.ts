@@ -1,13 +1,7 @@
 import pkg from "@prisma/client";
-import {
-	ActivityFailure,
-	ApplicationFailure,
-	WorkflowClient,
-	WorkflowFailedError,
-} from "@temporalio/client";
+import { WorkflowClient } from "@temporalio/client";
 import { DefaultLogger, Runtime, Worker } from "@temporalio/worker";
-import assert from "assert";
-import axios from "axios";
+import ms from "ms";
 import path from "path";
 import sinon from "sinon";
 import { v4 } from "uuid";
@@ -22,7 +16,6 @@ import {
 } from "vitest";
 import { createActivities } from "../lib/activities";
 import { trxNotificationWF } from "../lib/workflows";
-import ms from "ms";
 
 const { PrismaClient } = pkg;
 const prismaClient = new PrismaClient({});
