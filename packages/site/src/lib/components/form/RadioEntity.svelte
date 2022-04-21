@@ -43,11 +43,15 @@
 		dispatch('select', result);
 	};
 
-	const optionClass = (
-		checked: boolean,
-		active: boolean,
-		disabled: boolean,
-	): string => {
+	const optionClass = ({
+		checked,
+		active,
+		disabled,
+	}: {
+		checked: boolean;
+		active: boolean;
+		disabled: boolean;
+	}): string => {
 		return classes(
 			checked ? 'border-transparent' : 'border-gray-300',
 			active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
@@ -69,8 +73,7 @@
 			<RadioGroupOption
 				value={option}
 				disabled={!option.value}
-				class={({ checked, active, disabled }) =>
-					optionClass(checked, active, disabled)}
+				class={optionClass}
 				let:checked
 				let:active
 			>
