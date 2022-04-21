@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
 	// This is a base layout for other layouts to extend.
-
 	import { session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
@@ -29,6 +28,8 @@
 			tracesSampleRate: 1.0,
 			// debug: dev,
 			environment: import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
+			release:
+				import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
 		});
 		Sentry.configureScope((scope: Scope) => {
 			scope.setTag('role', $session.authz?.role || '');
