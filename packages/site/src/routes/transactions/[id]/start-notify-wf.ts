@@ -1,3 +1,4 @@
+import { dev } from '$app/env';
 import { trxNotificationWF } from '@self/temporal';
 import type { RequestHandler } from '@sveltejs/kit';
 import { Connection, WorkflowClient } from '@temporalio/client';
@@ -11,7 +12,7 @@ export const get: RequestHandler = async ({ params }) => {
 	console.log('attempting to start trx notify workflow', id);
 
 	const connection = new Connection({
-		// address: 'temporal.letand.be',
+		address: dev ? 'localhost' : 'temporal.letand.be',
 	});
 	const client = new WorkflowClient(connection.service);
 
