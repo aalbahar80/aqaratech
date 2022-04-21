@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SelectArea from '$components/form/inputs/SelectArea.svelte';
+	import Select from '$components/Select.svelte';
 	import { classes } from '$lib/utils';
 	import {
 		Switch,
@@ -11,7 +12,6 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import startCase from 'lodash-es/startCase.js';
 	import { createEventDispatcher } from 'svelte';
-	import Select from 'svelte-select';
 
 	export let name = '';
 	export let value: string | Date | null | number | boolean | undefined = '';
@@ -62,9 +62,6 @@
 		case 'shouldNotify':
 			type = 'checkbox';
 			break;
-		case 'status':
-			type = 'select';
-			break;
 		case 'email':
 			type = 'email';
 			break;
@@ -73,12 +70,23 @@
 			break;
 	}
 	const dispatch = createEventDispatcher();
-	// onMount(() => {
-	// 	// this creates the field in Felte's data store (non-native input elements)
-	// 	dispatch('select', {
-	// 		value,
-	// 	});
-	// });
+	const unitTypeOptions = [
+		{ label: '', value: null },
+		{ label: 'شقة', value: 'شقة' },
+		{ label: 'بيت', value: 'بيت' },
+		{ label: 'فيلا', value: 'فيلا' },
+		{ label: 'سرداب', value: 'سرداب' },
+		{ label: 'محل', value: 'محل' },
+		{ label: 'مخزن', value: 'مخزن' },
+		{ label: 'شاليه', value: 'شاليه' },
+	];
+
+	const statusOptions = [
+		{ label: '', value: null },
+		{ label: 'Pending', value: 'pending' },
+		{ label: 'Completed', value: 'completed' },
+		{ label: 'Closed', value: 'closed' },
+	];
 </script>
 
 <div>
@@ -89,17 +97,10 @@
 	{/if}
 	{#if name === 'area'}
 		<SelectArea id={name} {value} {invalidText} on:select on:clear />
-	{:else if type === 'select'}
-		<Select
-			id={name}
-			items={name === 'status'
-				? ['pending', 'completed', 'cancelled']
-				: ['sms', 'email']}
-			value={value ? { value, label: value } : null}
-			hasError={Boolean(invalidText)}
-			on:select
-			on:clear
-		/>
+	{:else if name === 'type'}
+		<Select current={value} options={unitTypeOptions} on:select />
+	{:else if name === 'status'}
+		<Select current={value} options={statusOptions} on:select />
 	{:else if type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

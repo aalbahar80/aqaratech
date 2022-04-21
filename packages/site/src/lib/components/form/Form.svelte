@@ -94,11 +94,24 @@
 						{data?.id ? 'Edit ' : 'New '}{model.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						<slot {setData} />
+						<slot {setData} errors={$errors} {getValue} />
+						{#if 'relationalFields' in model}
+							{#each model.relationalFields as field}
+								<SelectEntity
+									{field}
+									initialValue={$data2[field]}
+									invalid={!!getValue($errors, field)}
+									invalidText={getValue($errors, field)?.[0]}
+									on:select={(e) => {
+										setData(field, e.detail);
+									}}
+								/>
+							{/each}
+						{/if}
 						{#each model.basicFields as field}
 							<Input
 								name={field}
-								value={data2[field]}
+								value={$data2[field]}
 								invalid={!!getValue($errors, field)}
 								invalidText={getValue($errors, field)?.[0]}
 								on:select={(e) => {
@@ -109,16 +122,6 @@
 								}}
 							/>
 						{/each}
-						{#if 'relationalFields' in model}
-							{#each model.relationalFields as field}
-								<SelectEntity
-									{field}
-									on:select={(e) => {
-										setData(field, e.detail);
-									}}
-								/>
-							{/each}
-						{/if}
 						{#if model.name === 'maintenanceOrders'}
 							<AttributeEntity
 								on:select={(e) => {

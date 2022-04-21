@@ -1,0 +1,18 @@
+<script context="module" lang="ts">
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import FormUnit from '$lib/components/form/FormUnit.svelte';
+	import type { Load } from './edit';
+
+	export const load: Load = async ({ params }) => {
+		const unit = await trpc.query('units:read', params.id);
+		return {
+			props: { unit },
+		};
+	};
+</script>
+
+<script lang="ts">
+	export let unit: InferQueryOutput<'units:read'>;
+</script>
+
+<FormUnit {unit} property={unit.property} />

@@ -6,7 +6,7 @@ const schema = z.object({
 	id: z.string().uuid().optional(),
 	title: z.string().transform(trim).transform(falsyToNull),
 	description: z.string().transform(trim).transform(falsyToNull).nullable(),
-	status: z.enum(['pending', 'completed', 'cancelled']).nullable(),
+	status: z.enum(['pending', 'completed', 'closed']).nullable(),
 	completedAt: z.union([
 		z.preprocess(strToDate, z.date()).transform(falsyToNull),
 		z.literal('').transform(() => null),

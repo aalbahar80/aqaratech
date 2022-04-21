@@ -14,7 +14,11 @@ export const units = createRouter()
 					id,
 				},
 				include: {
-					property: true,
+					property: {
+						include: {
+							client: true,
+						},
+					},
 					leases: {
 						orderBy: { start: 'desc' },
 						include: { tenant: true },

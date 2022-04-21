@@ -2,18 +2,24 @@
 	import Form from '$components/form/Form.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
-	import { PropertyModel } from '$lib/models/interfaces';
+	import { PropertyModel, UnitModel } from '$lib/models/interfaces';
 	import type { SelectedOption } from '$lib/models/interfaces/common/option.interface';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
 
-	export let property: InferQueryOutput<'properties:basic'> | undefined;
+	export let property: InferQueryOutput<'properties:basic'> | undefined =
+		undefined;
+	export let unit: InferQueryOutput<'units:read'> | undefined = undefined;
 
-	const model = getModel('units');
+	const model = UnitModel;
 	const defaultForm = model.defaultForm();
-	const data = {
-		...defaultForm,
-		propertyId: property?.id ?? null,
-	};
+	const data = unit
+		? {
+				...unit,
+				propertyId: property?.id ?? null,
+		  }
+		: {
+				...defaultForm,
+				propertyId: property?.id ?? null,
+		  };
 	console.log(data);
 
 	let selectedClient: SelectedOption = property?.client
@@ -34,13 +40,14 @@
 </script>
 
 <svelte:head>
-	<title>{`New ${model.singularCap}`}</title>
+	<title>{unit ? 'Edit' : 'New'} Unit</title>
 </svelte:head>
 
-<Form {model} {data} let:setData>
+<Form {model} {data} let:setData let:errors let:getValue>
 	<SelectEntity
 		field="clientId"
 		selected={selectedClient}
+		invalid={!!getValue(errors, 'propertyId')}
 		on:select={(e) => {
 			propertySelect.clear();
 			propertySelect.getOptions(e.detail);
@@ -51,6 +58,8 @@
 		selected={selectedProperty}
 		field="propertyId"
 		initialParent={selectedClient?.value ?? undefined}
+		invalid={!!getValue(errors, 'propertyId')}
+		invalidText={getValue(errors, 'propertyId')?.[0]}
 		on:select={(e) => {
 			setData('propertyId', e.detail);
 		}}

@@ -16,6 +16,16 @@ const schema = z.object({
 	active: z.boolean(),
 });
 
+const withDates = schema
+	.refine((val) => val.start < val.end, {
+		path: ['start'],
+		message: 'Start date must be before end date',
+	})
+	.refine((val) => val.start < val.end, {
+		path: ['end'],
+		message: 'End date must be after start date',
+	});
+
 const scheduleSchema = z.array(
 	// should schedule be array or object?
 	// TODO import schema from ./transaction
@@ -132,7 +142,7 @@ interface ILabel {
 
 export const LeaseModel = {
 	...LeaseModelBase,
-	schema,
+	schema: withDates,
 	leaseFormSchema,
 	getLabel: (item: ILabel) =>
 		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
