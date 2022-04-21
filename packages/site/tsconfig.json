@@ -23,7 +23,8 @@
 			"$utils/*": ["src/lib/utils/*"],
 			"$routers": ["src/lib/server/trpc/routers/index.ts"],
 			"$routers/*": ["src/lib/server/trpc/routers/*"],
-			"$environment": ["src/environment/index.ts"]
+			"$environment": ["src/environment/index.ts"],
+			"$user": ["src/user/index.ts"]
 		}
 	}
 }

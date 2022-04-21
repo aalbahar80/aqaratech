@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { dev } from '$app/env';
-	import { page, session } from '$app/stores';
+	import { session } from '$app/stores';
 	import NavPopover from '$components/navbar/NavPopover.svelte';
+	import type { UserConfig } from '$lib/models/interfaces/user.interface';
 
-	interface Navigation {
-		name: string;
-		href: string;
-	}
-	export let navigation: Navigation[] = [];
+	export let navigation: UserConfig['navLinks'] = [];
 
 	const dashboards = {
 		admin: '/clients',
@@ -38,19 +35,16 @@
 					/>
 				</a>
 
-				<!-- {#if $session.authz && homepage} -->
-				{#if $page.url.pathname !== '/'}
-					<div class="-mr-2 flex items-center md:hidden">
+				{#if $session.authz}
+					<div class="-mr-2 flex items-center gap-6 md:hidden">
+						<a
+							href={dashboard}
+							class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 md:hidden"
+						>
+							Dashboard
+						</a>
 						<NavPopover {navigation} />
 					</div>
-				{:else if $session.authz}
-					<!-- TODO change href -->
-					<a
-						href={dashboard}
-						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 md:hidden"
-					>
-						Dashboard
-					</a>
 				{:else}
 					<a
 						href="/api/auth/login"

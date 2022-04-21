@@ -24,6 +24,7 @@ const config = {
 					$utils: resolve('.', './src/lib/utils'),
 					$routers: resolve('.', './src/lib/server/trpc/routers'),
 					$environment: resolve('.', './src/environment'),
+					$user: resolve('.', './src/user'),
 				},
 			},
 			ssr: {
