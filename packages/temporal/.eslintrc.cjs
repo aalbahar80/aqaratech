@@ -6,7 +6,7 @@ module.exports = {
 	},
 	// plugins: ['@typescript-eslint', 'deprecation'],
 	plugins: ["@typescript-eslint"],
-	ignorePatterns: ["lib", ".eslintrc.cjs", "index.ts"],
+	ignorePatterns: ["lib", ".eslintrc.cjs", "index.ts", "test"],
 	extends: [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",

@@ -1,5 +1,6 @@
 import type { Lease, PrismaClient as PrismaClientType } from "@prisma/client";
 import { format, parseISO } from "date-fns";
+import Twilio from "twilio";
 
 export const createActivities = (prismaClient: PrismaClientType) => ({
 	async generateTransaction(lease: Lease, dueAt: string) {
@@ -28,6 +29,16 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 	},
 	async notify(transactionId: string): Promise<void> {
 		console.log(`Notifying ${transactionId}...`);
+		const twilioClient = Twilio(
+			"ACbffc494534d2b9823213e4538d71c98d",
+			"a94743f7f5baf621a2f2535f05c03970"
+		);
+		const sms = await twilioClient.messages.create({
+			body: "Your rent is due!",
+			from: "+15005550006",
+			to: "+15005550006",
+		});
+		console.log({ sms }, "activities.ts ~ 40");
 		console.log(`Notified ${transactionId}: `);
 	},
 	async getTrx(id: string) {
@@ -46,13 +57,14 @@ export const createActivities = (prismaClient: PrismaClientType) => ({
 	},
 	async setReminderAt(trxId: string, reminderAt: string) {
 		console.log(`Setting reminder at ${reminderAt} for ${trxId}...`);
-		const trx = await prismaClient.transaction.update({
-			where: { id: trxId },
-			data: {
-				reminderAt,
-			},
-		});
-		console.log(`Set reminder at ${reminderAt} for ${trxId}: `, trx);
-		return trx;
+		// const trx = await prismaClient.transaction.update({
+		// 	where: { id: trxId },
+		// 	data: {
+		// 		reminderAt,
+		// 	},
+		// });
+		// console.log(`Set reminder at ${reminderAt} for ${trxId}: `, trx);
+		// return trx;
+		return "40";
 	},
 });
