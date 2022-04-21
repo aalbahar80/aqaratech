@@ -38,8 +38,8 @@ const schema = z.object({
 });
 
 const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
-	const result = await trpc.query('units:search', { propertyId: parentId });
-	const options = result.map((item) => ({
+	const result = await trpc.query('units:list', { propertyId: parentId });
+	const options = result.data.map((item) => ({
 		value: item.id,
 		label: getLabel(item),
 	}));
