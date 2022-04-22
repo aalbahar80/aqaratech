@@ -35,10 +35,10 @@ const config = {
 			},
 			ssr: {
 				noExternal:
-					process.env.NODE_ENV === 'production'
-						? ['superjson', '@self/temporal']
-						: undefined,
+					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
+				external: ['@self/temporal'],
 			},
+
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
 			// 		? [
