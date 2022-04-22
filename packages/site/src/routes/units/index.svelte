@@ -2,6 +2,7 @@
 	import trpc from '$lib/client/trpc';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import type { Props } from '$models/types/Props.type';
+	import type { LoadInput } from '@sveltejs/kit';
 
 	export const load = async ({ session }: LoadInput) => {
 		const { data: units, pagination } = session.authz?.isAdmin
