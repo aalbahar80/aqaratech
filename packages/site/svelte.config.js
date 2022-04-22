@@ -35,7 +35,9 @@ const config = {
 			},
 			ssr: {
 				noExternal:
-					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
+					process.env.NODE_ENV === 'production'
+						? ['superjson', '@self/temporal']
+						: undefined,
 			},
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
