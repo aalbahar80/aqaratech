@@ -7,7 +7,7 @@ import { closestTo, isSameDay } from 'date-fns';
 import { sortBy } from 'lodash-es';
 import { currencyTooltip } from './utils/currency';
 
-type Data = InferQueryOutput<'charts:income'>;
+type Data = InferQueryOutput<'owner:charts:income'>;
 type GroupBy = 'ratio' | 'property';
 type ChartConfig = {
 	data: Data;

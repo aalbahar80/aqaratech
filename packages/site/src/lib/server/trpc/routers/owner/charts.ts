@@ -19,7 +19,7 @@ export const charts = createRouter()
 		if (!input.success) {
 			throw new TRPCError({ code: 'BAD_REQUEST' });
 		}
-		if (ctx.authz.id === input.data.clientId) {
+		if (ctx.authz.id === input.data.clientId || ctx.authz.isAdmin) {
 			return next();
 		}
 		throw new TRPCError({ code: 'FORBIDDEN' });

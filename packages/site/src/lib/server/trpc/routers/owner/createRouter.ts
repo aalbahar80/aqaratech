@@ -3,7 +3,7 @@ import type { Context } from '../../config';
 
 export const createRouter = () =>
 	router<Context>().middleware(({ ctx, next }) => {
-		if (ctx.authz?.isOwner) {
+		if (ctx.authz?.isOwner || ctx.authz?.isAdmin) {
 			return next({
 				ctx: { authz: ctx.authz },
 			});
