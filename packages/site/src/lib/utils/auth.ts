@@ -1,32 +1,32 @@
 export const protectRoute = (session: App.Session, pathname: string) => {
-	// TODO create nonprotected 404 page
 	const profileUrl = '/account/profile';
 	const publicUrl = ['/', profileUrl].includes(pathname);
+
+	const contractUrl = /\/leases\/[a-f0-9-]+\/contract/;
+	const newLeaseUrl = /^\/new\/leases/;
+	const adminUrls = [contractUrl, newLeaseUrl];
 
 	let shouldRedirect = true;
 	let redirectUrl = '/';
 
 	if (publicUrl) {
 		shouldRedirect = false;
-	} else if (!publicUrl && !session.authz) {
+	} else if (!session.authz) {
 		// Unauthenticated user
 		shouldRedirect = true;
 		redirectUrl = '/api/auth/login';
-	} else if (!publicUrl && session.authz?.isTenant) {
+	} else if (session.authz?.isTenant) {
 		// Lost tenant
 		shouldRedirect = !pathname.startsWith('/portal/tenant/');
 		redirectUrl = `/portal/tenant/${session.authz.id}`;
-	} else if (!publicUrl && session.authz?.isOwner) {
-		// Lost owner
-		// TODO: redirect
-		// shouldRedirect = !pathname.startsWith('/portal/owner/');
-		shouldRedirect = false;
-		redirectUrl = `/portal/owner/${session.authz.id}`;
+	} else if (session.authz?.isOwner) {
+		// TODO is needed if backend already checks for authz?
+		shouldRedirect = adminUrls.some((url) => pathname.match(url));
 	} else if (session.authz?.isAdmin) {
-		// TODO either allow admin to access other routers or redirect them
 		shouldRedirect = false;
 	}
 
+	console.log({ shouldRedirect }, 'auth.ts ~ 28');
 	if (shouldRedirect) {
 		return {
 			redirect: redirectUrl,

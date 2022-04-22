@@ -23,6 +23,7 @@
 				status,
 				title: getTitle(status),
 				message: error?.message,
+				stack: error?.stack,
 			},
 		};
 	};
@@ -32,6 +33,7 @@
 	export let status: number;
 	export let title: string;
 	export let message: string;
+	export let stack: string;
 </script>
 
 <div
@@ -73,3 +75,9 @@
 		</main>
 	</div>
 </div>
+
+{#if stack}
+	<div class="prose min-h-full min-w-full">
+		<pre class="whitespace-pre-wrap">{JSON.stringify(stack, null, 2)}</pre>
+	</div>
+{/if}
