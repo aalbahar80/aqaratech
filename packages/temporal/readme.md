@@ -1,5 +1,14 @@
 # Temporal
 
+# Test
+
+```bash
+pnpm test
+
+# Single test
+pnpm exec vitest run test/notificationWF.test.ts
+```
+
 # 1. Deploy the server
 
 https://www.youtube.com/watch?v=2oNsjyaCIrI

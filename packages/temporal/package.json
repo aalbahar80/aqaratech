@@ -6,7 +6,8 @@
         "build:watch": "tsc --build --watch ./tsconfig.json",
         "build:cloud": "prisma generate --schema=../site/prisma/schema.prisma && pnpm run build",
         "start": "node --loader ts-node/esm ./src/worker.ts",
-        "start:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts"
+        "start:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts",
+        "test": "vitest run"
     },
     "type": "module",
     "devDependencies": {
