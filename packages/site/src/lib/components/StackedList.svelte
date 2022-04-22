@@ -10,7 +10,8 @@
 
 	const hideActions = $session.authz?.role !== 'admin';
 	const model = getModel(entity);
-	const newHref = `/new/${model.plural}`;
+
+	export let newHref = `/new/${model.plural}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -32,7 +33,7 @@
 							href={newHref}
 							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 						>
-							Create new lease
+							Create new {model.singular}
 						</a>
 					</div>
 				{/if}
@@ -55,7 +56,7 @@
 				<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>
 			{:else}
 				<p class="mt-1 text-sm text-gray-500">
-					Get started by creating a new lease.
+					Get started by creating a new {model.singular}.
 				</p>
 				<div class="mt-6">
 					<a

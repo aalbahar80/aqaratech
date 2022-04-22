@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { getCreateHref } from '$components/lease/utils';
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { flip } from 'svelte/animate';
@@ -26,9 +28,11 @@
 	}
 	export let leases: Lease[];
 	export let showIndex = false;
+
+	const newHref = getCreateHref($page.url.pathname);
 </script>
 
-<StackedList entity="leases" count={leases.length}>
+<StackedList entity="leases" count={leases.length} {newHref}>
 	{#each leases as lease, index (lease.id)}
 		<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 			<LeaseCard

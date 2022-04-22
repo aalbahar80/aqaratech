@@ -41,10 +41,6 @@
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<Heading title="Tenant" id={tenant.id} entity="tenants" />
 	<DetailsPane {details} {files} />
-	<LeaseList
-		leases={tenant.leases}
-		newHref={`/new/leases?tenantId=${tenant.id}`}
-		showIndex
-	/>
+	<LeaseList leases={tenant.leases} showIndex />
 	<TrxColumn transactions={flatten(map(tenant.leases, 'transactions'))} />
 </div>
