@@ -1,10 +1,11 @@
 <script lang="ts" context="module">
 	// This is a base layout for other layouts to extend.
-	import { session } from '$app/stores';
+	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
+	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import type { NavbarItem } from '$lib/models/interfaces/user.interface';
 	import { protectRoute } from '$lib/utils/auth';
 	import { getUserConfig } from '$user';
@@ -55,9 +56,9 @@
 	});
 </script>
 
-<!-- {#if $navigating}
+{#if $navigating && !$page.error}
 	<PreloadingIndicator />
-{/if} -->
+{/if}
 
 <div>
 	{#if import.meta.env.VITE_VERCEL_ENV !== 'production'}
