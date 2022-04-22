@@ -1,11 +1,9 @@
 <script context="module" lang="ts">
+	import { dev } from '$app/env';
 	import type { Load } from '@sveltejs/kit';
 	import '../styles/tailwind.css';
 
 	export const load: Load = ({ error, status }) => {
-		console.log({ status }, '__error.svelte ~ 6');
-		console.log({ error }, '__error.svelte ~ 6');
-
 		const getTitle = (code: number | null) => {
 			if (code === 404) {
 				return 'Page not found';
@@ -76,7 +74,7 @@
 	</div>
 </div>
 
-{#if stack}
+{#if dev}
 	<div class="prose min-h-full min-w-full">
 		<pre class="whitespace-pre-wrap">{JSON.stringify(stack, null, 2)}</pre>
 	</div>
