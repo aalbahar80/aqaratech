@@ -6,13 +6,13 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import type { filterSchema } from '$lib/server/trpc/routers/admin/charts';
+	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	// TODO research: How optimized is this? is zod also imported by relation since its used in the UnitModel.
 	import { UnitModel } from '$models/interfaces/unit.interface';
 	import { subMonths } from 'date-fns';
 	import type { z } from 'zod';
-	import type { Load } from './dashboard';
+	import type { Load } from './index';
 
 	const defaultRange = 6;
 	const getRange = (months: number) => ({
@@ -34,14 +34,14 @@
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc.query('charts:client', { clientId: params.id }), // TODO use read?
-			trpc.query('charts:income', {
+			trpc.query('owner:charts:client', { clientId: params.id }), // TODO use read?
+			trpc.query('owner:charts:income', {
 				...defaultFilter,
 			}),
-			trpc.query('charts:expenses', {
+			trpc.query('owner:charts:expenses', {
 				...defaultFilter,
 			}),
-			trpc.query('charts:occupancy', {
+			trpc.query('owner:charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);
@@ -58,10 +58,10 @@
 </script>
 
 <script lang="ts">
-	export let client: InferQueryOutput<'charts:client'>;
-	export let income: InferQueryOutput<'charts:income'>;
-	export let expenses: InferQueryOutput<'charts:expenses'>;
-	export let occupancy: InferQueryOutput<'charts:occupancy'>;
+	export let client: InferQueryOutput<'owner:charts:client'>;
+	export let income: InferQueryOutput<'owner:charts:income'>;
+	export let expenses: InferQueryOutput<'owner:charts:expenses'>;
+	export let occupancy: InferQueryOutput<'owner:charts:occupancy'>;
 	export let filter: Filter;
 
 	interface Option {
@@ -113,9 +113,9 @@
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		[income, expenses, occupancy] = await Promise.all([
-			trpc.query('charts:income', newFilter),
-			trpc.query('charts:expenses', newFilter),
-			trpc.query('charts:occupancy', newFilter),
+			trpc.query('owner:charts:income', newFilter),
+			trpc.query('owner:charts:expenses', newFilter),
+			trpc.query('owner:charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};

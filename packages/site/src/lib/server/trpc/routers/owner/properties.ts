@@ -7,8 +7,14 @@ import { createRouter } from './createRouter';
 export const properties = createRouter()
 	// TODO check propertyId belongs to the user
 	.query('read', {
-		input: z.string(),
-		resolve: async ({ input: id }) => {
+		input: z.string().uuid(),
+		resolve: async ({ ctx, input: id }) => {
+			if (ctx.authz.id !== id) {
+				throw new TRPCError({
+					code: 'FORBIDDEN',
+				});
+			}
+
 			const data = await prismaClient.property.findUnique({
 				where: {
 					id,

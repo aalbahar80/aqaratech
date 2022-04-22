@@ -26,7 +26,6 @@ export const protectRoute = (session: App.Session, pathname: string) => {
 		shouldRedirect = false;
 	}
 
-	console.log({ shouldRedirect }, 'auth.ts ~ 28');
 	if (shouldRedirect) {
 		return {
 			redirect: redirectUrl,

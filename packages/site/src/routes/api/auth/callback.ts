@@ -59,7 +59,7 @@ export const get: RequestHandler = async (req) => {
 		if (authz?.isTenant) {
 			location = `/portal/tenant/${authz.id}`;
 		} else if (authz?.isOwner) {
-			location = `/portal/owner/${authz.id}`;
+			location = `/clients/${authz.id}/dashboard`;
 		}
 
 		return {

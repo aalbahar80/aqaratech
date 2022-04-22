@@ -8,7 +8,7 @@
 
 	const dashboards = {
 		admin: '/clients',
-		owner: `/portal/owner/${$session.authz?.id}`,
+		owner: `/clients/${$session.authz?.id}/dashboard`,
 		tenant: `/portal/tenant/${$session.authz?.id}`,
 	};
 

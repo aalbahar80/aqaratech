@@ -7,7 +7,7 @@ import { createRouter } from './createRouter';
 
 export const properties = createRouter()
 	.query('read', {
-		input: z.string(),
+		input: z.string().uuid(),
 		resolve: async ({ input: id }) => {
 			const data = await prismaClient.property.findUnique({
 				where: {
