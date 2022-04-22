@@ -12,8 +12,7 @@ const schema = z.object({
 			z.preprocess(strToDate, z.date()).transform(falsyToNull),
 			z.literal('').transform(() => null),
 		])
-		.nullish(),
-	// unitId: z.string().uuid().or(z.literal('')).nullable().transform(falsyToNull),
+		.nullable(),
 	propertyId: z.string().uuid().nullable(),
 	clientId: z.string().uuid().nullable(),
 	unitId: z.string().uuid().nullable(),
