@@ -1,10 +1,17 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import type { Entity } from '$lib/models/interfaces/entity.interface';
 	import { getModel } from '$lib/models/interfaces/utils/get-model';
 
-	// create tuple type
 	type Crumb = [Entity, string | undefined];
 	export let crumbs: Crumb[];
+
+	$: {
+		// remove clients crumb if not admin
+		if (!$session.authz?.isAdmin) {
+			crumbs = crumbs.filter(([entity]) => entity !== 'clients');
+		}
+	}
 </script>
 
 <nav class="flex" aria-label="Breadcrumb">
