@@ -28,7 +28,6 @@
 	}
 	export let lease: Lease;
 	export let index: number | undefined = undefined;
-	export let hrefBase = '';
 
 	const expired = lease.end < new Date();
 
@@ -37,7 +36,7 @@
 </script>
 
 <a
-	href={`${hrefBase}/leases/${lease.id}`}
+	href={`/leases/${lease.id}`}
 	class="block hover:bg-gray-50"
 	sveltekit:prefetch
 >

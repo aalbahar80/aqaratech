@@ -3,8 +3,11 @@
 	import { session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import trpc from '$lib/client/trpc';
+	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
+	import type { NavbarItem } from '$lib/models/interfaces/user.interface';
 	import { protectRoute } from '$lib/utils/auth';
+	import { getUserConfig } from '$user';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
@@ -16,11 +19,21 @@
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
 		// @ts-ignore
 		trpc.runtime.fetch = fetch;
-		return protectRoute(session, pathname);
+		// return protectRoute(session, pathname);
+
+		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
+		const navigation = userConfig.navLinks;
+		return {
+			...protectRoute(session, pathname),
+			props: {
+				navigation,
+			},
+		};
 	};
 </script>
 
 <script lang="ts">
+	export let navigation: NavbarItem[];
 	onMount(() => {
 		Sentry.init({
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
@@ -51,5 +64,6 @@
 		<Alert />
 	{/if}
 	<ToastParent />
+	<Navbar {navigation} />
 	<slot />
 </div>

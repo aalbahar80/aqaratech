@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { flip } from 'svelte/animate';
@@ -35,7 +34,6 @@
 			<LeaseCard
 				{lease}
 				index={showIndex ? leases.length - index : undefined}
-				hrefBase={$page.stuff.hrefBase ?? ''}
 			/>
 		</li>
 	{/each}
