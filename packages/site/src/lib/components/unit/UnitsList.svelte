@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import UnitCard from '$components/unit/UnitCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { faBath } from '@fortawesome/free-solid-svg-icons/faBath';
@@ -21,10 +22,12 @@
 	}
 	export let units: Unit[];
 
-	$: addUnitHref = `/new/units?propertyId=${units[0]?.propertyId}`;
+	const createHref = $page.url.pathname.startsWith('/properties')
+		? `/new/units?propertyId=${$page.url.pathname.split('/').pop()}`
+		: '/new/units';
 </script>
 
-<StackedList entity="units" count={units.length}>
+<StackedList entity="units" count={units.length} {createHref}>
 	{#each units as unit (unit.id)}
 		<!-- Check out dan-fns isWithinInterval()
 		https://date-fns.org/v2.28.0/docs/isWithinInterval -->
