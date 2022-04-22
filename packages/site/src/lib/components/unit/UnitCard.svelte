@@ -3,7 +3,7 @@
 	import { getLabel } from '$lib/models/interfaces/unit.interface';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import formatDistance from 'date-fns/formatDistance';
+	import { formatDistance } from 'date-fns';
 	import Fa from 'svelte-fa';
 
 	interface Unit {

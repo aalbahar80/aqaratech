@@ -1,12 +1,10 @@
 <script lang="ts">
 	import UnitCard from '$components/unit/UnitCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import {
-		faBath,
-		faBed,
-		faElevator,
-		faMaximize,
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faBath } from '@fortawesome/free-solid-svg-icons/faBath';
+	import { faBed } from '@fortawesome/free-solid-svg-icons/faBed';
+	import { faElevator } from '@fortawesome/free-solid-svg-icons/faElevator';
+	import { faMaximize } from '@fortawesome/free-solid-svg-icons/faMaximize';
 
 	interface Unit {
 		id: string;
