@@ -39,11 +39,14 @@ export const units = createRouter()
 			})
 			.passthrough(),
 		resolve: async ({ ctx, input: { query, pageIndex, size, propertyId } }) => {
-			const sameClient = {
-				property: {
-					clientId: ctx.authz.id,
-				},
-			};
+			const sameClient = ctx.authz.isAdmin
+				? {}
+				: {
+						property: {
+							clientId: ctx.authz.id,
+						},
+				  };
+
 			const propertyFilter = propertyId ? { propertyId } : {};
 			const queryFilter = query
 				? {

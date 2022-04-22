@@ -5,16 +5,9 @@ import { z } from 'zod';
 import { createRouter } from './createRouter';
 
 export const properties = createRouter()
-	// TODO check propertyId belongs to the user
 	.query('read', {
 		input: z.string().uuid(),
 		resolve: async ({ ctx, input: id }) => {
-			if (ctx.authz.id !== id) {
-				throw new TRPCError({
-					code: 'FORBIDDEN',
-				});
-			}
-
 			const data = await prismaClient.property.findUnique({
 				where: {
 					id,
@@ -36,6 +29,11 @@ export const properties = createRouter()
 				throw new TRPCError({
 					code: 'NOT_FOUND',
 					message: 'Property not found',
+				});
+			}
+			if (ctx.authz.isOwner && ctx.authz.id !== data.clientId) {
+				throw new TRPCError({
+					code: 'FORBIDDEN',
 				});
 			}
 			return data;
