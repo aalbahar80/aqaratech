@@ -21,6 +21,7 @@ const { PrismaClient } = pkg;
 const prismaClient = new PrismaClient({});
 
 describe("example workflow", function () {
+	// TODO: How to make sure that worker & server are running?
 	let shutdown: () => Promise<void>;
 	let execute: () => ReturnType<typeof trxNotificationWF>;
 
@@ -69,11 +70,27 @@ describe("example workflow", function () {
 	});
 
 	it(
-		"sends at least one sms",
+		"Generates at least one notification",
 		async () => {
 			const result = await execute();
-			const successful = result.filter((r) => r.errorMessage === null);
+			const successful = result.filter(
+				(r) => r.errorMessage === null && r.status === "queued"
+			);
 			expect(successful.length).toBeGreaterThanOrEqual(1);
+		},
+		ms("20s")
+	);
+
+	it(
+		"Generates notifications without errors",
+		async () => {
+			const result = await execute();
+			result.map((r) =>
+				expect(r).toMatchObject({
+					status: "queued",
+					errorMessage: null,
+				})
+			);
 		},
 		ms("20s")
 	);
