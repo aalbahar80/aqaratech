@@ -106,6 +106,7 @@
 					// TODO fix this
 					dueAt: e.postAt,
 					isPaid: false,
+					paidAt: null,
 					...e,
 					postAt: e.postAt,
 				}));
