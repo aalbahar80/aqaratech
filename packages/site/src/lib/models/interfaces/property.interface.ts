@@ -24,7 +24,7 @@ const schema = z.object({
 		.min(1, { message: 'Required' })
 		.transform(trim)
 		.transform(falsyToNull),
-	avenue: z.string().nullish().transform(trim).transform(falsyToNull),
+	avenue: z.string().nullable().transform(trim).transform(falsyToNull),
 	number: z
 		.string()
 		.min(1, { message: 'Required' })

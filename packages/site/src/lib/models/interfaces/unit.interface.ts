@@ -54,8 +54,8 @@ const UnitModelBasic: IEntity<'units'> = {
 		size: null,
 		marketRent: null,
 		floor: null,
-		usage: '',
-		type: '',
+		usage: null,
+		type: null,
 		propertyId: '',
 	}),
 };
