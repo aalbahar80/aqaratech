@@ -113,15 +113,12 @@
 				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
 				console.log(`created ${newTrxs.count} transactions`);
 
-				await Promise.all(
-					trxValues.map(async (trx) => {
-						const res = await fetch(`/transactions/${trx.id}/start-notify-wf`);
-						if (!res.ok) {
-							throw new Error('Error starting workflow');
-						}
-						return res.json();
-					}),
+				const trpcres = await trpc.mutation(
+					'transactions:startWF',
+					trxValues.map((e) => e.id),
 				);
+				console.log({ trpcres }, 'LeaseForm.svelte ~ 128');
+
 				await goto(`/leases/${newLease.id}`);
 				addToast({
 					props: {

@@ -1,4 +1,3 @@
-import { browser, dev } from '$app/env';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { paginationSchema, withId } from '$models/common';
@@ -10,11 +9,7 @@ import { createRouter } from './createRouter';
 let url: string;
 
 // TODO: DRY this up (lib/client/trpc.ts)
-if (browser) {
-	url = '';
-} else if (dev) {
-	url = 'http://localhost:3000';
-} else if (process.env.VERCEL && process.env.VERCEL_URL) {
+if (process.env.VERCEL_URL) {
 	url = `https://${process.env.VERCEL_URL}`;
 } else {
 	const message =
@@ -153,12 +148,11 @@ export const transactions = createRouter()
 		resolve: async ({ input }) => {
 			await Promise.all(
 				input.map(async (id) => {
-					// const res = await fetch(`/transactions/${id}/start-notify-wf`);
 					const res = await fetch(`${url}/transactions/${id}/start-notify-wf`);
 					if (!res.ok) {
 						throw new TRPCError({
 							code: 'BAD_REQUEST',
-							message: 'Error starting workflow',
+							message: 'Error starting workflow from TRPC',
 						});
 					}
 					return res.json();
