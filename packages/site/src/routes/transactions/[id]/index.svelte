@@ -11,20 +11,14 @@
 	import { CurrencyDollar } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const [trx, fetchReminder] = await Promise.all([
+	export const load: Load = async ({ params }) => {
+		const [trx, nextReminder] = await Promise.all([
 			trpc.query('transactions:read', params.id),
 			// needs optimization, load in onMount?
-			fetch(`/transactions/${params.id}/next-reminder`),
+			trpc.query('transactions:nextReminder', params.id),
 		]);
-		let nextReminder: string | null = null;
 
-		if (!fetchReminder.ok) {
-			nextReminder = null;
-		} else {
-			nextReminder = (await fetchReminder.json()).reminder;
-		}
-
+		console.log({ nextReminder }, 'index.svelte ~ 22');
 		return { props: { trx, nextReminder } };
 	};
 </script>

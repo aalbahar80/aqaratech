@@ -95,6 +95,7 @@ export const transactions = createRouter()
 			}
 			type Data = { reminder: string };
 			const data = (await res.json()) as Data;
+			console.log({ data }, 'transactions.ts ~ 98');
 			return data.reminder;
 		},
 	})
