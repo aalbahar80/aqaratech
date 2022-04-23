@@ -25,3 +25,7 @@ export function strToDate(v: unknown) {
 export function undefinedToNull<T>(v: T) {
 	return v === undefined ? null : v;
 }
+
+export function digitsOnly(v: string) {
+	return v.match(/^[0-9]+$/) !== null;
+}

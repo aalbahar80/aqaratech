@@ -4,15 +4,16 @@ import { z } from 'zod';
 
 const schema = z.object({
 	id: z.string().uuid().optional(),
-	title: z.string().transform(trim).transform(falsyToNull),
-	description: z.string().transform(trim).transform(falsyToNull).nullable(),
+	title: z
+		.string()
+		.min(3, { message: 'Required' })
+		.transform(trim)
+		.transform(falsyToNull),
+	description: z.string().nullable().transform(trim).transform(falsyToNull),
 	status: z.enum(['pending', 'completed', 'closed']).nullable(),
 	completedAt: z
-		.union([
-			z.preprocess(strToDate, z.date()).transform(falsyToNull),
-			z.literal('').transform(() => null),
-		])
-		.nullable(),
+		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
+		.transform(falsyToNull),
 	propertyId: z.string().uuid().nullable(),
 	clientId: z.string().uuid().nullable(),
 	unitId: z.string().uuid().nullable(),

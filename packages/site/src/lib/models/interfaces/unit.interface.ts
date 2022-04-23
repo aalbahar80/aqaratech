@@ -8,27 +8,22 @@ const schema = z.object({
 	id: z.string().uuid().optional(),
 	unitNumber: z
 		.string()
-		.min(1)
-		.transform(trim)
-		.refine((val) => val && val.length > 0),
+		.refine((val) => val.trim().length > 0, { message: 'Required' })
+		.transform(trim),
 	bed: z
-		.number()
-		.min(1)
-		.nullish()
-		.transform((val) => (val === undefined ? null : val)),
+		.union([z.literal(''), z.null(), z.undefined(), z.number().nonnegative()])
+		.transform(falsyToNullExceptZero),
 	bath: z
-		.number()
-		.min(1)
-		.nullish()
-		.transform((val) => (val === undefined ? null : val)),
+		.union([z.literal(''), z.null(), z.undefined(), z.number().nonnegative()])
+		.transform(falsyToNullExceptZero),
 	size: z
-		.number()
-		.min(1)
-		.nullish()
-		.transform((val) => (val === undefined ? null : val)),
-	floor: z.number().nullish().transform(falsyToNullExceptZero),
-	usage: z.string().transform(trim).transform(falsyToNull).nullable(),
-	type: z.string().transform(trim).transform(falsyToNull).nullable(),
+		.union([z.literal(''), z.null(), z.undefined(), z.number().nonnegative()])
+		.transform(falsyToNullExceptZero),
+	floor: z
+		.union([z.literal(''), z.null(), z.undefined(), z.number()])
+		.transform(falsyToNullExceptZero),
+	usage: z.string().nullable().transform(trim).transform(falsyToNull),
+	type: z.string().nullable().transform(trim).transform(falsyToNull),
 	marketRent: z
 		.number()
 		.nonnegative()

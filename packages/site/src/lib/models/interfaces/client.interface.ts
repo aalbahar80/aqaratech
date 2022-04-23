@@ -6,8 +6,8 @@ import { z } from 'zod';
 
 export const schema = z.object({
 	id: z.string().uuid().optional(),
-	firstName: z.string().min(2, { message: 'Required' }).transform(trim),
-	lastName: z.string().min(2, { message: 'Required' }).transform(trim),
+	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
+	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
 	email: z
 		.union([z.null(), z.literal(''), z.string().email()])
 		.transform(falsyToNull),

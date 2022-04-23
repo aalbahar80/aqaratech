@@ -14,7 +14,7 @@ const schema = z.object({
 	block: z
 		.string()
 		.min(1, { message: 'Required' })
-		.refine((val) => val.length === 0 || val.match(/^[0-9]+$/) !== null, {
+		.refine((val) => val.match(/^[0-9]+$/) !== null, {
 			message: 'Block must contain only numbers',
 		})
 		.transform(trim)
@@ -24,7 +24,7 @@ const schema = z.object({
 		.min(1, { message: 'Required' })
 		.transform(trim)
 		.transform(falsyToNull),
-	avenue: z.string().transform(trim).transform(falsyToNull).nullable(),
+	avenue: z.string().nullish().transform(trim).transform(falsyToNull),
 	number: z
 		.string()
 		.min(1, { message: 'Required' })
