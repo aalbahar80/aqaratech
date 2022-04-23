@@ -118,3 +118,7 @@ kill 124961
 ```zsh
 ## Removing ignorePatterns: ['*.cjs'] from temporal/.eslintrc.cjs causes an error in vscode, but not when running eslint in command line?
 ```
+
+# Troubleshooting
+
+- Are app and temporal using same DB branch?

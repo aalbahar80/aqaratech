@@ -9,7 +9,7 @@ import { createRouter } from './createRouter';
 let url: string;
 
 // TODO: DRY this up (lib/client/trpc.ts)
-if (process.env.VERCEL_URL) {
+if (process.env.VERCEL) {
 	// url = `https://${process.env.VERCEL_URL}`;
 	url = `https://dev.letand.be`;
 } else {
@@ -147,6 +147,7 @@ export const transactions = createRouter()
 	.mutation('startWF', {
 		input: z.array(z.string()),
 		resolve: async ({ input }) => {
+			console.log({ url }, 'transactions.ts ~ 152');
 			await Promise.all(
 				input.map(async (id) => {
 					const res = await fetch(`${url}/transactions/${id}/start-notify-wf`);
