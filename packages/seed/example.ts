@@ -24,12 +24,12 @@
 
 // console.log(a, b, c);
 import { addMonths, addDays, subDays } from "date-fns";
-import ms from "ms";
+// import ms from "ms";
 
 const a = 1;
 console.log(a);
 const b = addDays(new Date(), 4);
 console.log(b);
-console.log(ms("1 h"));
+// console.log(ms("1 h"));
 
 export default a;

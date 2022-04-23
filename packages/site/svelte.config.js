@@ -15,9 +15,7 @@ const config = {
 	// },
 
 	kit: {
-		adapter: adapter({
-			external: ['@self/temporal'],
-		}),
+		adapter: adapter(),
 		vite: {
 			define:
 				process.env.NODE_ENV === 'production'
@@ -39,7 +37,16 @@ const config = {
 			ssr: {
 				noExternal:
 					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
+				external:
+					process.env.NODE_ENV === 'production'
+						? ['@self/temporal']
+						: undefined,
 			},
+
+			// optimizeDeps: {
+			// 	exclude: ['@self/temporal'],
+			// },
+			// process.env.NODE_ENV !== 'production' ? ['@self/temporal'] : undefined,
 
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
