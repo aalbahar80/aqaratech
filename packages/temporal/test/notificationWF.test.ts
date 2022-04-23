@@ -1,5 +1,5 @@
 import pkg from "@prisma/client";
-import { WorkflowClient } from "@temporalio/client";
+import { Connection, WorkflowClient } from "@temporalio/client";
 import { DefaultLogger, Runtime, Worker } from "@temporalio/worker";
 import ms from "ms";
 import path from "path";
@@ -49,7 +49,10 @@ describe("example workflow", function () {
 	}, ms("20s"));
 
 	beforeEach(() => {
-		const client = new WorkflowClient();
+		const connection = new Connection({
+			address: "temporal.letand.be",
+		});
+		const client = new WorkflowClient(connection.service);
 
 		const testId = "05432ea6-3ae6-4915-a8e3-81440a4f78f3";
 		execute = () =>
