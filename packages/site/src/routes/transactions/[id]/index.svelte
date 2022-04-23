@@ -74,33 +74,31 @@
 	};
 </script>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title="Transaction" id={trx.id} entity="transactions">
-		<svelte:fragment slot="breadcrumbs">
-			<BreadCrumb
-				crumbs={[
-					['tenants', trx.lease.tenantId],
-					['leases', trx.leaseId],
-				]}
-			/>
-		</svelte:fragment>
+<Heading title="Transaction" id={trx.id} entity="transactions">
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb
+			crumbs={[
+				['tenants', trx.lease.tenantId],
+				['leases', trx.leaseId],
+			]}
+		/>
+	</svelte:fragment>
 
-		<svelte:fragment slot="actions">
-			<Button
-				icon={CurrencyDollar}
-				text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
-				solid
-				on:click={toggleIsPaid}
-				loading={loadingPaid}
-			/>
-		</svelte:fragment>
-	</Heading>
-	<Badge
-		label={trx.isPaid ? 'Paid' : 'Not paid'}
-		badgeColor={trx.isPaid ? 'green' : 'red'}
-	/>
-	<div class="grid gap-y-6">
-		<DetailsPane {details} />
-		<Timeline {trx} {nextReminder} />
-	</div>
+	<svelte:fragment slot="actions">
+		<Button
+			icon={CurrencyDollar}
+			text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
+			solid
+			on:click={toggleIsPaid}
+			loading={loadingPaid}
+		/>
+	</svelte:fragment>
+</Heading>
+<Badge
+	label={trx.isPaid ? 'Paid' : 'Not paid'}
+	badgeColor={trx.isPaid ? 'green' : 'red'}
+/>
+<div class="grid gap-y-6">
+	<DetailsPane {details} />
+	<Timeline {trx} {nextReminder} />
 </div>
