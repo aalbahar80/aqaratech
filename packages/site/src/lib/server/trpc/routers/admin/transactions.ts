@@ -10,7 +10,8 @@ let url: string;
 
 // TODO: DRY this up (lib/client/trpc.ts)
 if (process.env.VERCEL_URL) {
-	url = `https://${process.env.VERCEL_URL}`;
+	// url = `https://${process.env.VERCEL_URL}`;
+	url = `https://dev.letand.be`;
 } else {
 	const message =
 		'Could not determine url. transactions.ts ~ 19, assuming localhost';
