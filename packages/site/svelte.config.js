@@ -43,6 +43,7 @@ const config = {
 								'@self/temporal',
 								'date-fns',
 								'@fortawesome/free-solid-svg-icons',
+								'@temporalio/workflow',
 						  ]
 						: undefined,
 				// external:
