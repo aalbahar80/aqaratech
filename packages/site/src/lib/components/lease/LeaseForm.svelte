@@ -196,6 +196,7 @@
 								<!-- optionLabel={oldLease?.tenant ?? null} -->
 								<SelectEntity
 									field="tenantId"
+									initialValue={lease.tenantId}
 									on:select={(e) => {
 										setData('tenantId', e.detail);
 									}}
@@ -235,6 +236,7 @@
 							<div class="sm:w-3/4">
 								<SelectEntity
 									field="propertyId"
+									initialValue={lease.propertyId}
 									bind:selected={property}
 									on:select={(e) => {
 										unitSelect.clear();
@@ -247,6 +249,7 @@
 									bind:this={unitSelect}
 									field="unitId"
 									initialParent={property?.value ?? undefined}
+									initialValue={lease.unitId}
 									disabled={!property?.value}
 									on:select={(e) => {
 										setData('unitId', e.detail);

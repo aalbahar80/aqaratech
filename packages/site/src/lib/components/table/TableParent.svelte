@@ -36,17 +36,15 @@
 	}));
 </script>
 
-<div class="mx-auto mt-8 flex max-w-screen-2xl flex-col px-2 sm:px-6 lg:px-8">
-	<a
-		href={`/new${$page.url.pathname}`}
-		class="table__add-button"
-		sveltekit:prefetch
-	>
-		New
-	</a>
-	<Table {rows} {modifier} />
-	<Pagination {total} currentSize={data.length} {pagination} />
-</div>
+<a
+	href={`/new${$page.url.pathname}`}
+	class="table__add-button"
+	sveltekit:prefetch
+>
+	New
+</a>
+<Table {rows} {modifier} />
+<Pagination {total} currentSize={data.length} {pagination} />
 
 <style lang="postcss">
 	.table__add-button {
