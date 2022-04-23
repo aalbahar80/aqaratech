@@ -111,7 +111,7 @@
 					postAt: e.postAt,
 				}));
 				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
-				console.log(`created ${newTrxs} transactions`);
+				console.log(`created ${newTrxs.count} transactions`);
 
 				await Promise.all(
 					trxValues.map(async (trx) => {

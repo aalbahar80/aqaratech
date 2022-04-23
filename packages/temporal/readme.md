@@ -51,7 +51,9 @@ npm install -g pnpm@next-7
 # git pull
 pnpm i
 
+# set dburl env var
 pnpm run build:cloud
+pnpm run start
 ```
 
 2. yarn run dev:temporal
