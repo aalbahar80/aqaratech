@@ -1,7 +1,7 @@
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
-// import adapter from '@sveltejs/adapter-auto';
-import adapter from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -36,11 +36,19 @@ const config = {
 			},
 			ssr: {
 				noExternal:
-					process.env.NODE_ENV === 'production' ? ['superjson'] : undefined,
-				external:
 					process.env.NODE_ENV === 'production'
-						? ['@self/temporal']
+						? [
+								'superjson',
+								'ms',
+								'@self/temporal',
+								'date-fns',
+								'@fortawesome/free-solid-svg-icons',
+						  ]
 						: undefined,
+				// external:
+				// 	process.env.NODE_ENV === 'production'
+				// 		? ['@self/temporal']
+				// 		: undefined,
 			},
 
 			// optimizeDeps: {
