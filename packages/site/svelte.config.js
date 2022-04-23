@@ -1,6 +1,7 @@
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
-import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -14,7 +15,9 @@ const config = {
 	// },
 
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			external: ['@self/temporal'],
+		}),
 		vite: {
 			define:
 				process.env.NODE_ENV === 'production'
