@@ -41,6 +41,7 @@
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
     "@temporalio/client": "^0.21.0",
+    "@temporalio/workflow": "^0.21.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/svelte": "^3.1.1",
     "@trpc/client": "^9.22.0",

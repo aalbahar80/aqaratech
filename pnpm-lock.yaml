@@ -55,6 +55,7 @@ importers:
       '@tailwindcss/forms': ^0.5.0
       '@tailwindcss/typography': ^0.5.2
       '@temporalio/client': ^0.21.0
+      '@temporalio/workflow': ^0.21.0
       '@testing-library/jest-dom': ^5.16.4
       '@testing-library/svelte': ^3.1.1
       '@trpc/client': ^9.22.0
@@ -131,6 +132,7 @@ importers:
       '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.24
       '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
       '@temporalio/client': 0.21.0
+      '@temporalio/workflow': 0.21.0
       '@testing-library/jest-dom': 5.16.4
       '@testing-library/svelte': 3.1.1_svelte@3.47.0
       '@trpc/client': 9.22.0_@trpc+server@9.22.0
