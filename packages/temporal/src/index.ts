@@ -1,1 +1,1 @@
-export { trxNotificationWF } from "./workflows";
+export { trxNotificationWF, getNextReminder } from "./workflows";
