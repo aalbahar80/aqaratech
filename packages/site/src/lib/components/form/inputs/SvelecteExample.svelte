@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import Svelecte from 'svelecte';
 	import { createEventDispatcher } from 'svelte';
 
@@ -25,12 +25,6 @@
 	/** Initial value. Can also be bound to. */
 	export let value = 'expired';
 
-	// const options = [
-	// 	{ value: 'current', text: 'Current' },
-	// 	{ value: 'expired', text: 'Expired' },
-	// 	{ value: 'upcoming', text: 'Upcoming' },
-	// ];
-
 	const debug = true;
 
 	function formNone(node: HTMLElement) {
@@ -40,9 +34,9 @@
 			input.removeAttribute('type');
 		}
 	}
-</script>
+</script> -->
 
-{#if label}
+<!-- {#if label}
 	<label for={id} class="block text-sm font-medium text-gray-700">
 		{label}
 	</label>
@@ -67,4 +61,4 @@
 		<pre>{JSON.stringify(selection, null, 2)}</pre>
 		<pre>{JSON.stringify(value, null, 2)}</pre>
 	</div>
-{/if}
+{/if} -->

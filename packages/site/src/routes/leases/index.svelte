@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import { session } from '$app/stores';
-	import trpc from '$lib/client/trpc';
+	import trpc, { type InferQueryInput } from '$lib/client/trpc';
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
@@ -8,7 +8,8 @@
 	import { isEqual } from 'lodash-es';
 
 	export const load = async ({ session }: LoadInput) => {
-		const options = {
+		type Options = Partial<InferQueryInput<'owner:leases:list'>>;
+		const options: Options = {
 			pageIndex: 1,
 			size: 15,
 			sortBy: { key: 'createdAt', order: 'desc' } as const,
@@ -18,12 +19,14 @@
 				expired: true,
 			},
 		};
-		const { data, pagination } = session.authz?.isAdmin
-			? await trpc.query('leases:list', options)
-			: await trpc.query('owner:leases:list', {
+
+		const { data, pagination } = session.authz?.isOwner
+			? await trpc.query('owner:leases:list', {
 					...options,
-					clientId: session.authz?.id,
-			  });
+					clientId: session.authz.id,
+			  })
+			: await trpc.query('leases:list', options);
+
 		return {
 			props: { pagination, leases: data, options },
 		};
@@ -63,12 +66,12 @@
 			return; // no change
 		}
 		currentOptions = newOptions;
-		({ data: leases, pagination } = $session.authz?.isAdmin
-			? await trpc.query('leases:list', newOptions)
-			: await trpc.query('owner:leases:list', {
+		({ data: leases, pagination } = $session.authz?.isOwner
+			? await trpc.query('owner:leases:list', {
 					...newOptions,
-					clientId: $session.authz?.id,
-			  }));
+					clientId: $session.authz.id,
+			  })
+			: await trpc.query('leases:list', newOptions));
 	};
 
 	// changes to options will trigger a new query

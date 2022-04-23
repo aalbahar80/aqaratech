@@ -1,15 +1,13 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
-	import { kwdFormat } from '$lib/utils/common';
+	import { faBellSlash } from '@fortawesome/free-solid-svg-icons/faBellSlash';
 	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
 	import { enGB } from 'date-fns/locale';
 	import lowerCase from 'lodash-es/lowerCase.js';
-	import Button from './Button.svelte';
 	import Fa from 'svelte-fa';
-	import { faBellSlash } from '@fortawesome/free-solid-svg-icons/faBellSlash';
-	import { dev } from '$app/env';
+	import Button from './Button.svelte';
 
 	type TimelineEvent = {
 		date: Date;

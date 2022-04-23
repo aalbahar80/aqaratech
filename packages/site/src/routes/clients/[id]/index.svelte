@@ -45,5 +45,5 @@
 		</svelte:fragment>
 	</Heading>
 	<DetailsPane {details} />
-	<PropertyList properties={client.properties} clientId={client.id} />
+	<PropertyList properties={client.properties} />
 </div>

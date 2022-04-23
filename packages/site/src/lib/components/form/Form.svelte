@@ -82,7 +82,7 @@
 	<title>{`Edit ${model.singularCap}`}</title>
 </svelte:head>
 
-<div class="mx-auto h-full max-w-xl py-8">
+<div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"

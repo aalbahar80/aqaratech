@@ -5,11 +5,11 @@
 	import type { LoadInput } from '@sveltejs/kit';
 
 	export const load = async ({ session }: LoadInput) => {
-		const { data: properties, pagination } = session.authz?.isAdmin
-			? await trpc.query('properties:list', {})
-			: await trpc.query('owner:properties:list', {
+		const { data: properties } = session.authz?.isOwner
+			? await trpc.query('owner:properties:list', {
 					clientId: session.authz?.id,
-			  });
+			  })
+			: await trpc.query('properties:list', {});
 
 		return {
 			props: { properties },
