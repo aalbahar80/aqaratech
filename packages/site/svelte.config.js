@@ -40,7 +40,7 @@ const config = {
 						? [
 								'superjson',
 								'ms',
-								'@self/temporal',
+								// '@self/temporal',
 								'date-fns',
 								'@fortawesome/free-solid-svg-icons',
 								'@temporalio/workflow',
