@@ -1,4 +1,4 @@
-import * as fakerAll from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import {
 	areas,
@@ -6,7 +6,6 @@ import {
 	expenseCategories,
 } from "../site/src/lib/config/constants.js";
 
-const { faker } = fakerAll;
 faker.locale = "ar";
 
 export const fakeClient = () => ({

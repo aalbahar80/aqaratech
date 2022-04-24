@@ -2,7 +2,7 @@
 // node --loader ts-node/esm prisma/seed.ts
 // OR npx prisma db seed
 
-import * as fakerAll from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import type { PrismaClient as PrismaClientType } from "@prisma/client";
 // TODO avoid ts-ignore below by fixing tsconfig.json
 // @ts-ignore
@@ -20,7 +20,6 @@ import {
 	fakeUnit,
 } from "./generators.js";
 
-const { faker } = fakerAll;
 faker.locale = "ar";
 
 const { PrismaClient } = pkg;
