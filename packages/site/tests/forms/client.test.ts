@@ -1,16 +1,15 @@
 import { expect, test } from '@playwright/test';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
-// import { installFetch } from '@sveltejs/kit/install-fetch';
+import { installFetch } from '@sveltejs/kit/install-fetch';
 import type { AppRouter } from '../../src/lib/server/trpc';
 import * as trpc from '@trpc/client';
 import superjson from 'superjson';
+import cookie from 'cookie';
 
-// installFetch();
+installFetch();
 
 test.use({ storageState: './tests/config/adminStorageState.json' });
-const ids = [];
-
 test.describe(`New client form`, async () => {
 	test.beforeEach(async ({ page }) => {
 		const client = fakeClient();
@@ -42,22 +41,24 @@ test.describe(`New client form`, async () => {
 	});
 });
 
-test.describe('Edit client form', async () => {
+test.describe.only('Edit client form', async () => {
 	let id: string;
-	test.beforeEach(async ({ page, request }) => {
-		// const client = trpc.createTRPCClient<AppRouter>({
-		// 	url: 'http://localhost:3000/trpc',
-		// 	transformer: superjson,
-		// });
-		const res = await request.fetch(
-			'http://localhost:3000/trpc/clients:save?batch=1',
-			{
-				data: '{"0":{"json":{"firstName":"شفيع","lastName":"النفير","phone":"18477637","email":"Justyn.Kautzer@hotmail.com","civilid":"306310274032","dob":"2021-11-23"}}}',
-				method: 'POST',
+	// test.beforeAll(async ({ context }) => {
+	// });
+	test.beforeEach(async ({ page, context }) => {
+		const cookiesArray = await context.cookies();
+		const cookies = cookiesArray.find((c) => c.name === 'accessToken');
+		const accessToken = cookie.serialize('accessToken', cookies.value);
+		const idToken = cookiesArray.find((c) => c.name === 'idToken');
+		const idTokenCookie = cookie.serialize('idToken', idToken.value);
+		const trpcClient = trpc.createTRPCClient({
+			url: 'http://localhost:3000/trpc',
+			transformer: superjson,
+			headers: {
+				cookie: accessToken + '; ' + idTokenCookie,
 			},
-		);
-		const data = await res.json();
-		id = data[0].result.data.json.id;
+		});
+		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
 		await page.goto(`http://localhost:3000/clients/${id}/edit`);
 	});
 
@@ -81,7 +82,8 @@ test.describe('Edit client form', async () => {
 
 	test('redirects to client detail page', async ({ page }) => {
 		await page.click('button[type="submit"]');
+		await page.waitForLoadState('networkidle');
 
-		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}/edit`);
+		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}`);
 	});
 });
