@@ -142,6 +142,8 @@ Make sure a connection is suplied to both worker and client. Worker uses `Native
 
 - Is worker running?
 - Is server running?
+- Which connection is client using
+- Which connection is worker using?
 - Are app and temporal using same DB branch?
 - Was worker build with the --schema flag? (and rebuilt if there were any changes)
 - Did you run npx prisma generate --schema=blah/blah before pnpm run build?

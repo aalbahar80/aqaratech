@@ -1,6 +1,11 @@
 import pkg from "@prisma/client";
 import { Connection, WorkflowClient } from "@temporalio/client";
-import { DefaultLogger, Runtime, Worker } from "@temporalio/worker";
+import {
+	DefaultLogger,
+	NativeConnection,
+	Runtime,
+	Worker,
+} from "@temporalio/worker";
 import ms from "ms";
 import path from "path";
 import sinon from "sinon";
@@ -35,7 +40,12 @@ describe("example workflow", function () {
 			import.meta.url
 		).pathname;
 
+		const connection = await NativeConnection.create({
+			address: "temporal.letand.be",
+		});
+
 		const worker = await Worker.create({
+			connection,
 			taskQueue: "hello-world",
 			workflowsPath,
 			activities: createActivities(prismaClient),
