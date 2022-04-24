@@ -12,5 +12,5 @@
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true
 	},
-	"include": ["./seed.ts"]
+	"include": ["./seed.ts", "./generators.ts"]
 }
