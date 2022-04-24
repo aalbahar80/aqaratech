@@ -68,7 +68,9 @@ test.describe.only('Edit client form', async () => {
 	test.beforeEach(async ({ page }) => {
 		// To be used for subsequent tests
 		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
-		await page.goto(`http://localhost:3000/clients/${id}/edit`);
+		await page.goto(`http://localhost:3000/clients/${id}/edit`, {
+			waitUntil: 'networkidle',
+		});
 	});
 
 	test('returns a 200 response', async ({ page }) => {
@@ -92,7 +94,6 @@ test.describe.only('Edit client form', async () => {
 	test('redirects to client detail page', async ({ page }) => {
 		await page.click('button[type="submit"]');
 		await page.waitForLoadState('networkidle');
-
 		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}`);
 	});
 });
