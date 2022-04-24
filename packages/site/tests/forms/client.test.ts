@@ -43,9 +43,9 @@ test.describe(`New client form`, async () => {
 
 test.describe.only('Edit client form', async () => {
 	let id: string;
-	// test.beforeAll(async ({ context }) => {
-	// });
-	test.beforeEach(async ({ page, context }) => {
+
+	test.beforeAll(async ({ browser }) => {
+		const context = await browser.newContext();
 		const cookiesArray = await context.cookies();
 		const cookies = cookiesArray.find((c) => c.name === 'accessToken');
 		const accessToken = cookie.serialize('accessToken', cookies.value);
@@ -59,6 +59,9 @@ test.describe.only('Edit client form', async () => {
 			},
 		});
 		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
+	});
+
+	test.beforeEach(async ({ page, context }) => {
 		await page.goto(`http://localhost:3000/clients/${id}/edit`);
 	});
 
