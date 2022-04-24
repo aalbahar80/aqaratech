@@ -20,8 +20,6 @@ import {
 	fakeUnit,
 } from "./generators.js";
 
-faker.locale = "ar";
-
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient({
 	log: [{ level: "query", emit: "event" }, "info", "warn", "error"],

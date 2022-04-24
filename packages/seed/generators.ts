@@ -6,7 +6,14 @@ import {
 	expenseCategories,
 } from "../site/src/lib/config/constants.js";
 
-faker.locale = "ar";
+faker.setLocale("ar");
+
+export const fakeEmail = () => {
+	faker.setLocale("en");
+	const email = faker.internet.email();
+	faker.setLocale("ar");
+	return email;
+};
 
 export const fakeClient = () => ({
 	id: faker.datatype.uuid(),
@@ -18,7 +25,7 @@ export const fakeClient = () => ({
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
-	email: faker.internet.email(),
+	email: fakeEmail(),
 	phone: faker.phone.phoneNumber("1#######"),
 	dob: faker.date.past(),
 });
