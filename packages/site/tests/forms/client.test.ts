@@ -12,11 +12,12 @@ test('Admin can create a new client', async ({ page }) => {
 	await page.fill('input[name="lastName"]', 'Test Client');
 	await page.fill('input[name="email"]', 'a@example.com');
 	await page.fill('input[name="phone"]', '12345678');
-	// await page.pause();
 	await page.fill('input[name="civilid"]', '123456789012');
 	await page.fill('input[name="dob"]', '1990-05-28');
 
-	await page.click('button[text="Create new"]');
+	await page.click('text="Create new"');
 
-	await expect(page).toHaveURL('^http://localhost:3000/clients/[0-9]+$');
+	await expect(page).toHaveURL(
+		/^http:\/\/localhost:3000\/clients\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}){1}\/?$/,
+	);
 });
