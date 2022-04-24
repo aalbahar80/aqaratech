@@ -17,8 +17,10 @@ test.beforeEach(async ({ page }) => {
 	await page.locator('button[name="action"]').click();
 });
 
-test('Redirected to owner portal after logging in', async ({ page }) => {
-	await expect(page).toHaveURL(/^http:\/\/localhost:3000\/portal\/owner\/.*$/);
+test('Redirected to owner dashboard after logging in', async ({ page }) => {
+	await expect(page).toHaveURL(
+		/^http:\/\/localhost:3000\/clients\/.+\/dashboard$/,
+	);
 });
 
 test('accessToken exists', async ({ context }) => {
