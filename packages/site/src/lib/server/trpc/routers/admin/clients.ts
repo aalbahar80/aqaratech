@@ -104,15 +104,16 @@ export const clients = createRouter()
 	})
 	.mutation('create', {
 		input: ClientModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.client.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.client.create({
-						data,
-				  }),
+		resolve: ({ input }) => {
+			console.log({ input }, 'clients.ts ~ 108');
+			const { id, ...data } = input;
+			return prismaClient.client.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: ClientModel.schema,
