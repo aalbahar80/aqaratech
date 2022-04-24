@@ -1,6 +1,9 @@
 {
     "name": "@self/seed",
     "version": "0.0.1",
+    "scripts": {
+        "seed": "ts-node-esm ./seed.ts"
+    },
     "devDependencies": {
         "@faker-js/faker": "^6.1.2",
         "@prisma/client": "^3.12.0",

@@ -52,8 +52,13 @@ npm install -g pnpm@next-7
 pnpm i
 
 # set dburl env var
-pnpm run build:cloud
+pnpm run build
 pnpm run start
+# OR USE PM2
+pm2 start start.sh --name myTemporalWorker
+pm2 ls # list
+pm2 monit # monitor
+
 ```
 
 2. yarn run dev:temporal
@@ -101,6 +106,8 @@ yarn run start:worker.watch
 nohup yarn run start:worker.watch &
 # to view output
 tail -f nohup.out # in same directory
+
+
 ```
 
 ```bash
