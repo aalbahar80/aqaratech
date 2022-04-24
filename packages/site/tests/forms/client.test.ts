@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
 import { installFetch } from '@sveltejs/kit/install-fetch';
-import type { AppRouter } from '../../src/lib/server/trpc';
+import type { AppRouter } from '$lib/server/trpc/router';
 import * as trpc from '@trpc/client';
 import superjson from 'superjson';
 import cookie from 'cookie';
@@ -51,7 +51,7 @@ test.describe.only('Edit client form', async () => {
 		const accessToken = cookie.serialize('accessToken', cookies.value);
 		const idToken = cookiesArray.find((c) => c.name === 'idToken');
 		const idTokenCookie = cookie.serialize('idToken', idToken.value);
-		const trpcClient = trpc.createTRPCClient({
+		const trpcClient = trpc.createTRPCClient<AppRouter>({
 			url: 'http://localhost:3000/trpc',
 			transformer: superjson,
 			headers: {
@@ -61,7 +61,7 @@ test.describe.only('Edit client form', async () => {
 		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
 	});
 
-	test.beforeEach(async ({ page, context }) => {
+	test.beforeEach(async ({ page }) => {
 		await page.goto(`http://localhost:3000/clients/${id}/edit`);
 	});
 

@@ -38,5 +38,11 @@
 		"**/*.json",
 		"package.json"
 	],
-	"editor.formatOnType": true
+	"editor.formatOnType": true,
+	"js/ts.implicitProjectConfig.strictNullChecks": true,
+	"path-intellisense.ignoreTsConfigBaseUrl": true,
+	"typescript.inlayHints.parameterTypes.enabled": true,
+	"typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+	"typescript.inlayHints.variableTypes.enabled": true,
+	"typescript.preferences.importModuleSpecifier": "non-relative"
 }
