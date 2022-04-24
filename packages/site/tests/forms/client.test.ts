@@ -3,6 +3,7 @@ import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
 import { installFetch } from '@sveltejs/kit/install-fetch';
 import type { AppRouter } from '$lib/server/trpc/router';
+import type { TrpcClient } from '$lib/client/trpc';
 import * as trpc from '@trpc/client';
 import superjson from 'superjson';
 import cookie from 'cookie';
@@ -29,7 +30,7 @@ test.describe(`New client form`, async () => {
 		]);
 
 		const response = await request.response();
-		expect(response.status()).toBe(200);
+		expect(response?.status()).toBe(200);
 	});
 
 	test('redirects to client detail page', async ({ page }) => {
@@ -43,25 +44,30 @@ test.describe(`New client form`, async () => {
 
 test.describe.only('Edit client form', async () => {
 	let id: string;
+	let trpcClient: TrpcClient;
 
 	test.beforeAll(async ({ browser }) => {
 		const context = await browser.newContext();
-		const cookiesArray = await context.cookies();
-		const cookies = cookiesArray.find((c) => c.name === 'accessToken');
-		const accessToken = cookie.serialize('accessToken', cookies.value);
-		const idToken = cookiesArray.find((c) => c.name === 'idToken');
-		const idTokenCookie = cookie.serialize('idToken', idToken.value);
-		const trpcClient = trpc.createTRPCClient<AppRouter>({
+		const allCookies = await context.cookies();
+		const cookies = allCookies.filter(
+			(c) => c.name === 'accessToken' || c.name === 'idToken',
+		);
+		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
+		const cookieString = cookieStrings.join('; ');
+
+		// TRPC
+		trpcClient = trpc.createTRPCClient<AppRouter>({
 			url: 'http://localhost:3000/trpc',
 			transformer: superjson,
 			headers: {
-				cookie: accessToken + '; ' + idTokenCookie,
+				cookie: cookieString,
 			},
 		});
-		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
 	});
 
 	test.beforeEach(async ({ page }) => {
+		// To be used for subsequent tests
+		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
 		await page.goto(`http://localhost:3000/clients/${id}/edit`);
 	});
 
@@ -80,7 +86,7 @@ test.describe.only('Edit client form', async () => {
 		]);
 
 		const response = await request.response();
-		expect(response.status()).toBe(200);
+		expect(response?.status()).toBe(200);
 	});
 
 	test('redirects to client detail page', async ({ page }) => {

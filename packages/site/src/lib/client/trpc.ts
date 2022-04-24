@@ -24,3 +24,4 @@ export type InferMutationInput<RouteKey extends Mutation> = inferProcedureInput<
 >;
 
 export default client;
+export type TrpcClient = typeof client;
