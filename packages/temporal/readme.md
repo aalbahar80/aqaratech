@@ -119,6 +119,29 @@ kill 124961
 ## Removing ignorePatterns: ['*.cjs'] from temporal/.eslintrc.cjs causes an error in vscode, but not when running eslint in command line?
 ```
 
+# Security (TLS)
+
+Material:
+
+https://docs.temporal.io/docs/typescript/security/#local-mtls-sample-tutorial
+
+https://github.com/temporalio/samples-server/tree/main/tls/tls-simple
+
+https://github.com/temporalio/samples-typescript/tree/main/hello-world-mtls
+
+1. Clone https://github.com/temporalio/samples-server/tree/main/tls/tls-simple
+
+- don't forget to run `docker exec -it tls-simple_temporal-admin-tools_1 tctl n re --retention 1 default`
+
+Use the generated certificates (client.pem, client.key, ca.cert)
+Use the other env vars (address=localhost, namespace=default, serverNameOverride=tls-sample)
+
+Make sure a connection is suplied to both worker and client. Worker uses `NativeConnection`
+
 # Troubleshooting
 
+- Is worker running?
+- Is server running?
 - Are app and temporal using same DB branch?
+- Was worker build with the --schema flag? (and rebuilt if there were any changes)
+- Did you run npx prisma generate --schema=blah/blah before pnpm run build?
