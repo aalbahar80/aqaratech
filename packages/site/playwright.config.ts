@@ -5,6 +5,7 @@ const config: PlaywrightTestConfig = {
 	// 	port: 3000,
 	// 	command: 'pnpm run build && pnpm run preview',
 	// },
+	globalSetup: './tests/config/global-setup.ts',
 	use: {
 		headless: false,
 	},
