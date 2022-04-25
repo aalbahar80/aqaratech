@@ -14,7 +14,9 @@ test.use({ storageState: './tests/config/adminStorageState.json' });
 test.describe(`New client form`, async () => {
 	test.beforeEach(async ({ page }) => {
 		const client = fakeClient();
-		await page.goto('http://localhost:3000/new/clients');
+		await page.goto('http://localhost:3000/new/clients', {
+			waitUntil: 'networkidle',
+		});
 		await page.fill('input[name="firstName"]', client.firstName);
 		await page.fill('input[name="lastName"]', client.lastName);
 		await page.fill('input[name="email"]', client.email);
@@ -42,7 +44,7 @@ test.describe(`New client form`, async () => {
 	});
 });
 
-test.describe.only('Edit client form', async () => {
+test.describe('Edit client form', async () => {
 	let id: string;
 	let trpcClient: TrpcClient;
 

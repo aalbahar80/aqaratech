@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
 	// globalSetup: './tests/config/global-setup.ts',
 	use: {
 		// headless: false,
-		// trace: 'retain-on-failure',
+		trace: 'retain-on-failure',
 	},
 };
 
