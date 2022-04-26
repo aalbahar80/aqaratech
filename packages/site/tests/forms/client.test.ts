@@ -95,7 +95,7 @@ test.describe('Edit client form', async () => {
 
 	test('redirects to client detail page', async ({ page, clientForm }) => {
 		await clientForm.submit();
-		await page.waitForLoadState('networkidle');
+		await page.waitForNavigation();
 		await expect(page).toHaveURL(`/clients/${clientForm.data.id}`);
 	});
 
