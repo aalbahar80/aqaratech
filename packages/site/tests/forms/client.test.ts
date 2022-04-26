@@ -59,6 +59,20 @@ test.describe(`New client form`, async () => {
 		);
 		await expect(page).toHaveURL(re);
 	});
+
+	test.only('some details are correct', async ({ clientForm, page }) => {
+		await clientForm.submit();
+		await page.waitForNavigation();
+
+		const el = page.locator(`text=${clientForm.data.firstName}`);
+		const re = new RegExp(
+			`${clientForm.data.firstName} ${clientForm.data.lastName}`,
+		);
+		expect(await el.textContent()).toMatch(re);
+
+		const el2 = page.locator(`"${clientForm.data.email}"`);
+		expect(await el2.innerText()).toBe(clientForm.data.email);
+	});
 });
 
 test.describe('Edit client form', async () => {
