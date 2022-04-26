@@ -1,5 +1,6 @@
+import type { TrpcClient } from '$lib/client/trpc';
 import type { AppRouter } from '$lib/server/trpc/router';
-import { expect, test } from '@playwright/test';
+import { expect, test as base } from '@playwright/test';
 import { installFetch } from '@sveltejs/kit/install-fetch';
 import * as trpc from '@trpc/client';
 import cookie from 'cookie';
@@ -8,6 +9,27 @@ import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
 
 installFetch();
+
+const test = base.extend<{ trpcClient: TrpcClient }>({
+	trpcClient: async ({ context }, use) => {
+		const allCookies = await context.cookies();
+		const cookies = allCookies.filter(
+			(c) => c.name === 'accessToken' || c.name === 'idToken',
+		);
+		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
+		const cookieString = cookieStrings.join('; ');
+
+		// TRPC
+		const trpcClient = trpc.createTRPCClient<AppRouter>({
+			url: 'http://localhost:3000/trpc',
+			transformer: superjson,
+			headers: {
+				cookie: cookieString,
+			},
+		});
+		await use(trpcClient);
+	},
+});
 
 test.use({ storageState: './tests/config/adminStorageState.json' });
 test.describe(`New client form`, async () => {
@@ -44,22 +66,7 @@ test.describe(`New client form`, async () => {
 });
 
 const editTest = test.extend<{ id: string }>({
-	id: async ({ context }, use) => {
-		const allCookies = await context.cookies();
-		const cookies = allCookies.filter(
-			(c) => c.name === 'accessToken' || c.name === 'idToken',
-		);
-		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
-		const cookieString = cookieStrings.join('; ');
-
-		// TRPC
-		const trpcClient = trpc.createTRPCClient<AppRouter>({
-			url: 'http://localhost:3000/trpc',
-			transformer: superjson,
-			headers: {
-				cookie: cookieString,
-			},
-		});
+	id: async ({ trpcClient }, use) => {
 		// create a client
 		const { id } = await trpcClient.mutation('clients:create', fakeClient());
 		await use(id);
@@ -68,7 +75,7 @@ const editTest = test.extend<{ id: string }>({
 	},
 });
 
-editTest.describe.only('Edit client form', async () => {
+editTest.describe('Edit client form', async () => {
 	editTest.beforeEach(async ({ page, id }) => {
 		await page.goto(`http://localhost:3000/clients/${id}/edit`, {
 			waitUntil: 'networkidle',
@@ -93,7 +100,7 @@ editTest.describe.only('Edit client form', async () => {
 		expect(response?.status()).toBe(200);
 	});
 
-	editTest.only('redirects to client detail page', async ({ page, id }) => {
+	editTest('redirects to client detail page', async ({ page, id }) => {
 		await page.click('button[type="submit"]');
 		await page.waitForLoadState('networkidle');
 		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}`);
