@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { v4 as uuid } from 'uuid';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
 import { expect, test as base } from '../config/trpc-test.js';
@@ -30,7 +31,9 @@ base.use({ storageState: './tests/config/adminStorageState.json' });
 
 const test = base.extend<{ clientForm: ClientForm }>({
 	clientForm: async ({ page, trpcClient }, use) => {
-		const clientForm = new ClientForm(page);
+		// override faker's id beacuse this sometimes returns the same data twice
+		const data = { ...fakeClient(), id: uuid() };
+		const clientForm = new ClientForm(page, data);
 		await trpcClient.mutation('clients:create', clientForm.data);
 		await use(clientForm);
 		await trpcClient.mutation('clients:delete', clientForm.data.id);
@@ -75,26 +78,14 @@ test.describe(`New client form`, async () => {
 	});
 });
 
-test.describe.only('Edit client form', async () => {
+test.describe('Edit client form', async () => {
 	test.beforeEach(async ({ page, clientForm }) => {
-		await page.addInitScript({
-			content: `
-			window.started = new Promise((fulfil, reject) => {
-				setTimeout(() => {
-					reject(new Error('Did not receive sveltekit:start event'));
-				}, 5000);
-				addEventListener('sveltekit:start', () => {
-					fulfil();
-				});
-			});
-		`,
-		});
-
 		await page.goto(`/clients/${clientForm.data.id}/edit`);
+		// @ts-ignore
 		await page.evaluate(() => window.started);
 	});
 
-	test.only('returns a 200 response', async ({ clientForm }) => {
+	test('returns a 200 response', async ({ clientForm }) => {
 		clientForm.alter();
 		await clientForm.fill();
 		const request = await clientForm.getRequest();

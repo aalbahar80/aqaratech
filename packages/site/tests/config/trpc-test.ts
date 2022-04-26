@@ -27,6 +27,21 @@ export const test = base.extend<{ trpcClient: TrpcClient }>({
 		});
 		await use(trpcClient);
 	},
+	page: async ({ page }, use) => {
+		await page.addInitScript({
+			content: `
+			window.started = new Promise((fulfil, reject) => {
+				setTimeout(() => {
+					reject(new Error('Did not receive sveltekit:start event'));
+				}, 5000);
+				addEventListener('sveltekit:start', () => {
+					fulfil();
+				});
+			});
+		`,
+		});
+		await use(page);
+	},
 });
 
 export { expect } from '@playwright/test';
