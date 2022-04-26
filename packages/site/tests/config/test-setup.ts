@@ -15,6 +15,7 @@ export const test = base.extend<{
 	trpcClient: TrpcClient;
 	clientForm: ClientForm;
 	propertyForm: PropertyForm;
+	forms: Array<ClientForm | PropertyForm>;
 }>({
 	trpcClient: async ({ context, baseURL }, use) => {
 		const allCookies = await context.cookies();
@@ -69,6 +70,9 @@ export const test = base.extend<{
 		await use(propertyForm);
 		await trpcClient.mutation('properties:delete', propertyForm.data.id);
 		await trpcClient.mutation('clients:delete', client.id);
+	},
+	forms: async ({ clientForm, propertyForm }, use) => {
+		await use([clientForm, propertyForm]);
 	},
 });
 

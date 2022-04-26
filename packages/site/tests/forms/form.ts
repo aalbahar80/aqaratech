@@ -19,7 +19,37 @@ export class Form {
 	}
 }
 
+export class ClientForm extends Form {
+	static createUrl = '/new/clients';
+	static urlName2 = 'clients';
+	createUrl = '/new/clients';
+	urlName = 'clients';
+	constructor(page: Page, public data = fakeClient()) {
+		super(page);
+	}
+
+	public async fill() {
+		await this.page.fill('input[name="firstName"]', this.data.firstName);
+		await this.page.fill('input[name="lastName"]', this.data.lastName);
+		await this.page.fill('input[name="email"]', this.data.email);
+		await this.page.fill('input[name="phone"]', this.data.phone);
+		await this.page.fill('input[name="civilid"]', this.data.civilid);
+		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
+	}
+
+	public alter() {
+		this.data = {
+			...fakeClient(),
+			id: this.data.id,
+		};
+	}
+}
+
 export class PropertyForm extends Form {
+	static createUrl = '/new/properties';
+	static urlName2 = 'properties';
+	createUrl = '/new/properties';
+	urlName = 'properties';
 	constructor(
 		page: Page,
 		public data = fakeProperty(),
@@ -42,28 +72,6 @@ export class PropertyForm extends Form {
 	public alter() {
 		this.data = {
 			...fakeProperty(),
-			id: this.data.id,
-		};
-	}
-}
-
-export class ClientForm extends Form {
-	constructor(page: Page, public data = fakeClient()) {
-		super(page);
-	}
-
-	public async fill() {
-		await this.page.fill('input[name="firstName"]', this.data.firstName);
-		await this.page.fill('input[name="lastName"]', this.data.lastName);
-		await this.page.fill('input[name="email"]', this.data.email);
-		await this.page.fill('input[name="phone"]', this.data.phone);
-		await this.page.fill('input[name="civilid"]', this.data.civilid);
-		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
-	}
-
-	public alter() {
-		this.data = {
-			...fakeClient(),
 			id: this.data.id,
 		};
 	}
