@@ -1,12 +1,11 @@
+import type { AppRouter } from '$lib/server/trpc/router';
 import { expect, test } from '@playwright/test';
+import { installFetch } from '@sveltejs/kit/install-fetch';
+import * as trpc from '@trpc/client';
+import cookie from 'cookie';
+import superjson from 'superjson';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
-import { installFetch } from '@sveltejs/kit/install-fetch';
-import type { AppRouter } from '$lib/server/trpc/router';
-import type { TrpcClient } from '$lib/client/trpc';
-import * as trpc from '@trpc/client';
-import superjson from 'superjson';
-import cookie from 'cookie';
 
 installFetch();
 
@@ -44,12 +43,8 @@ test.describe(`New client form`, async () => {
 	});
 });
 
-test.describe('Edit client form', async () => {
-	let id: string;
-	let trpcClient: TrpcClient;
-
-	test.beforeAll(async ({ browser }) => {
-		const context = await browser.newContext();
+const editTest = test.extend<{ id: string }>({
+	id: async ({ context }, use) => {
 		const allCookies = await context.cookies();
 		const cookies = allCookies.filter(
 			(c) => c.name === 'accessToken' || c.name === 'idToken',
@@ -58,24 +53,29 @@ test.describe('Edit client form', async () => {
 		const cookieString = cookieStrings.join('; ');
 
 		// TRPC
-		trpcClient = trpc.createTRPCClient<AppRouter>({
+		const trpcClient = trpc.createTRPCClient<AppRouter>({
 			url: 'http://localhost:3000/trpc',
 			transformer: superjson,
 			headers: {
 				cookie: cookieString,
 			},
 		});
-	});
+		// create a client
+		const { id } = await trpcClient.mutation('clients:create', fakeClient());
+		await use(id);
+		// Cleanup
+		await trpcClient.mutation('clients:delete', id);
+	},
+});
 
-	test.beforeEach(async ({ page }) => {
-		// To be used for subsequent tests
-		({ id } = await trpcClient.mutation('clients:create', fakeClient()));
+editTest.describe.only('Edit client form', async () => {
+	editTest.beforeEach(async ({ page, id }) => {
 		await page.goto(`http://localhost:3000/clients/${id}/edit`, {
 			waitUntil: 'networkidle',
 		});
 	});
 
-	test('returns a 200 response', async ({ page }) => {
+	editTest('returns a 200 response', async ({ page }) => {
 		const client = fakeClient();
 		await page.fill('input[name="firstName"]', client.firstName);
 		await page.fill('input[name="lastName"]', client.lastName);
@@ -93,7 +93,7 @@ test.describe('Edit client form', async () => {
 		expect(response?.status()).toBe(200);
 	});
 
-	test('redirects to client detail page', async ({ page }) => {
+	editTest.only('redirects to client detail page', async ({ page, id }) => {
 		await page.click('button[type="submit"]');
 		await page.waitForLoadState('networkidle');
 		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}`);
