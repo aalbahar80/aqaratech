@@ -30,9 +30,10 @@ test.describe(`New client form`, async () => {
 	test('redirects to client detail page', async ({ page }) => {
 		await page.click('button[type="submit"]');
 
-		await expect(page).toHaveURL(
-			/^http:\/\/localhost:3000\/clients\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}){1}\/?$/,
+		const re = new RegExp(
+			`/clients/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
 		);
+		await expect(page).toHaveURL(re);
 	});
 });
 
@@ -51,6 +52,7 @@ editTest.describe('Edit client form', async () => {
 		await page.goto(`/clients/${id}/edit`, {
 			waitUntil: 'networkidle',
 		});
+		// try context.on('sveltekit:start', ...)
 	});
 
 	editTest('returns a 200 response', async ({ page }) => {
@@ -62,8 +64,9 @@ editTest.describe('Edit client form', async () => {
 		await page.fill('input[name="civilid"]', client.civilid);
 		await page.fill('input[name="dob"]', dateToInput(client.dob));
 
+		const re = new RegExp('/trpc');
 		const [request] = await Promise.all([
-			page.waitForRequest(/^http:\/\/localhost:3000\/trpc/),
+			page.waitForRequest(re),
 			await page.click('button[type="submit"]'),
 		]);
 

@@ -6,6 +6,7 @@ const config: PlaywrightTestConfig = {
 	// 	command: 'pnpm run build && pnpm run preview',
 	// },
 	// globalSetup: './tests/config/global-setup.ts',
+	timeout: 10000,
 	use: {
 		// headless: false,
 		trace: 'retain-on-failure',
