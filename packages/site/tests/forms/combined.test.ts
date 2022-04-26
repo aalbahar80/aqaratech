@@ -3,12 +3,20 @@ import { expect, test } from '../config/test-setup.js';
 
 test.use({ storageState: './tests/config/adminStorageState.json' });
 
-test.describe('New form', async () => {
-	const forms = [ClientForm, PropertyForm];
-	forms.forEach(async (formType, idx) => {
-		test(`${formType.urlName2} returns 200`, async ({ page, forms }) => {
-			const form = forms[idx];
-			await page.goto(form.createUrl);
+const formEntities = [ClientForm, PropertyForm];
+const types = ['new', 'edit'] as const;
+const forms = formEntities.flatMap((form, idx) =>
+	types.map((type) => ({ form, type, idx })),
+);
+
+test.describe('Form', async () => {
+	forms.forEach(async (formType) => {
+		test(`${formType.type} ${formType.form.urlName2} returns 200`, async ({
+			page,
+			forms,
+		}) => {
+			const form = forms[formType.idx];
+			await page.goto(form.getUrl(formType.type));
 			// @ts-ignore
 			await page.evaluate(() => window.started); // waits for hydration
 			await form.fill();
@@ -18,12 +26,12 @@ test.describe('New form', async () => {
 			expect(response?.status()).toBe(200);
 		});
 
-		test(`${formType.urlName2} redirects to detail page`, async ({
+		test(`${formType.type} ${formType.form.urlName2} redirects to detail page`, async ({
 			page,
 			forms,
 		}) => {
-			const form = forms[idx];
-			await page.goto(form.createUrl);
+			const form = forms[formType.idx];
+			await page.goto(form.getUrl(formType.type));
 			// @ts-ignore
 			await page.evaluate(() => window.started); // waits for hydration
 			await form.fill();
@@ -35,12 +43,12 @@ test.describe('New form', async () => {
 			await expect(page).toHaveURL(re);
 		});
 
-		test(`${formType.urlName2} some details are correct`, async ({
+		test(`${formType.type} ${formType.form.urlName2} some details are correct`, async ({
 			page,
 			forms,
 		}) => {
-			const form = forms[idx];
-			await page.goto(form.createUrl);
+			const form = forms[formType.idx];
+			await page.goto(form.getUrl(formType.type));
 			// @ts-ignore
 			await page.evaluate(() => window.started); // waits for hydration
 			await form.fill();

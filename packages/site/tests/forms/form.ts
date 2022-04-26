@@ -3,7 +3,12 @@ import { fakeClient, fakeProperty } from '../../../seed/generators.js';
 import { dateToInput, getName } from '../../src/lib/utils/common.js';
 
 export class Form {
-	constructor(public page: Page) {}
+	constructor(
+		public page: Page,
+		public createUrl: string,
+		public id: string,
+		public urlName: string,
+	) {}
 
 	submit() {
 		return this.page.click('button[type="submit"]');
@@ -17,15 +22,25 @@ export class Form {
 		]);
 		return request;
 	}
+
+	getUrl(type: 'new' | 'edit') {
+		if (type === 'new') {
+			return this.createUrl;
+		} else if (type === 'edit') {
+			return `/${this.urlName}/${this.id}/edit`;
+		} else {
+			throw new Error('invalid type');
+		}
+	}
 }
 
 export class ClientForm extends Form {
-	static createUrl = '/new/clients';
+	static createUrl2 = '/new/clients';
 	static urlName2 = 'clients';
-	createUrl = '/new/clients';
-	urlName = 'clients';
+	override createUrl = '/new/clients';
+	override urlName = 'clients';
 	constructor(page: Page, public data = fakeClient()) {
-		super(page);
+		super(page, ClientForm.createUrl2, data.id, ClientForm.urlName2);
 	}
 
 	public async fill() {
@@ -50,16 +65,16 @@ export class ClientForm extends Form {
 }
 
 export class PropertyForm extends Form {
-	static createUrl = '/new/properties';
+	static createUrl2 = '/new/properties';
 	static urlName2 = 'properties';
-	createUrl = '/new/properties';
-	urlName = 'properties';
+	override createUrl = '/new/properties';
+	override urlName = 'properties';
 	constructor(
 		page: Page,
 		public data = fakeProperty(),
 		public client = fakeClient(),
 	) {
-		super(page);
+		super(page, PropertyForm.createUrl2, data.id, PropertyForm.urlName2);
 	}
 
 	public async fill() {
