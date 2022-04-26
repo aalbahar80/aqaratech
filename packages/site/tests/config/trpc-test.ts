@@ -9,17 +9,17 @@ import superjson from 'superjson';
 installFetch();
 
 export const test = base.extend<{ trpcClient: TrpcClient }>({
-	trpcClient: async ({ context }, use) => {
+	trpcClient: async ({ context, baseURL }, use) => {
 		const allCookies = await context.cookies();
 		const cookies = allCookies.filter(
 			(c) => c.name === 'accessToken' || c.name === 'idToken',
 		);
+
 		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
 		const cookieString = cookieStrings.join('; ');
 
-		// TRPC
 		const trpcClient = trpc.createTRPCClient<AppRouter>({
-			url: 'http://localhost:3000/trpc',
+			url: baseURL + '/trpc',
 			transformer: superjson,
 			headers: {
 				cookie: cookieString,
