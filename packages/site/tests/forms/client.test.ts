@@ -5,8 +5,18 @@ import { expect, test as base } from '../config/trpc-test.js';
 
 class Form {
 	constructor(public page: Page) {}
+
 	submit() {
 		return this.page.click('button[type="submit"]');
+	}
+
+	async getRequest() {
+		const re = new RegExp('/trpc');
+		const [request] = await Promise.all([
+			this.page.waitForRequest(re),
+			await this.submit(),
+		]);
+		return request;
 	}
 }
 
@@ -51,12 +61,8 @@ test.describe(`New client form`, async () => {
 		await clientForm.fill();
 	});
 
-	test('returns a status of 200', async ({ page, clientForm }) => {
-		const [request] = await Promise.all([
-			page.waitForRequest(/^http:\/\/localhost:3000\/trpc/),
-			await clientForm.submit(),
-		]);
-
+	test('returns a status of 200', async ({ clientForm }) => {
+		const request = await clientForm.getRequest();
 		const response = await request.response();
 		expect(response?.status()).toBe(200);
 	});
@@ -79,16 +85,10 @@ test.describe('Edit client form', async () => {
 		// try context.on('sveltekit:start', ...)
 	});
 
-	test('returns a 200 response', async ({ page, clientForm }) => {
+	test('returns a 200 response', async ({ clientForm }) => {
 		clientForm.alter();
 		await clientForm.fill();
-
-		const re = new RegExp('/trpc');
-		const [request] = await Promise.all([
-			page.waitForRequest(re),
-			await clientForm.submit(),
-		]);
-
+		const request = await clientForm.getRequest();
 		const response = await request.response();
 		expect(response?.status()).toBe(200);
 	});
