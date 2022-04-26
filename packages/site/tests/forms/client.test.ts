@@ -1,41 +1,12 @@
-import type { TrpcClient } from '$lib/client/trpc';
-import type { AppRouter } from '$lib/server/trpc/router';
-import { expect, test as base } from '@playwright/test';
-import { installFetch } from '@sveltejs/kit/install-fetch';
-import * as trpc from '@trpc/client';
-import cookie from 'cookie';
-import superjson from 'superjson';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
-
-installFetch();
-
-const test = base.extend<{ trpcClient: TrpcClient }>({
-	trpcClient: async ({ context }, use) => {
-		const allCookies = await context.cookies();
-		const cookies = allCookies.filter(
-			(c) => c.name === 'accessToken' || c.name === 'idToken',
-		);
-		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
-		const cookieString = cookieStrings.join('; ');
-
-		// TRPC
-		const trpcClient = trpc.createTRPCClient<AppRouter>({
-			url: 'http://localhost:3000/trpc',
-			transformer: superjson,
-			headers: {
-				cookie: cookieString,
-			},
-		});
-		await use(trpcClient);
-	},
-});
+import { expect, test } from '../config/trpc-test.js';
 
 test.use({ storageState: './tests/config/adminStorageState.json' });
 test.describe(`New client form`, async () => {
 	test.beforeEach(async ({ page }) => {
 		const client = fakeClient();
-		await page.goto('http://localhost:3000/new/clients', {
+		await page.goto('/new/clients', {
 			waitUntil: 'networkidle',
 		});
 		await page.fill('input[name="firstName"]', client.firstName);
@@ -77,7 +48,7 @@ const editTest = test.extend<{ id: string }>({
 
 editTest.describe('Edit client form', async () => {
 	editTest.beforeEach(async ({ page, id }) => {
-		await page.goto(`http://localhost:3000/clients/${id}/edit`, {
+		await page.goto(`/clients/${id}/edit`, {
 			waitUntil: 'networkidle',
 		});
 	});
@@ -103,6 +74,6 @@ editTest.describe('Edit client form', async () => {
 	editTest('redirects to client detail page', async ({ page, id }) => {
 		await page.click('button[type="submit"]');
 		await page.waitForLoadState('networkidle');
-		await expect(page).toHaveURL(`http://localhost:3000/clients/${id}`);
+		await expect(page).toHaveURL(`/clients/${id}`);
 	});
 });

@@ -9,6 +9,7 @@ const config: PlaywrightTestConfig = {
 	use: {
 		// headless: false,
 		trace: 'retain-on-failure',
+		baseURL: 'http://localhost:3000',
 	},
 };
 
