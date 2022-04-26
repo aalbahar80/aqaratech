@@ -60,7 +60,7 @@ test.describe(`New client form`, async () => {
 		await expect(page).toHaveURL(re);
 	});
 
-	test.only('some details are correct', async ({ clientForm, page }) => {
+	test('some details are correct', async ({ clientForm, page }) => {
 		await clientForm.submit();
 		await page.waitForNavigation();
 
@@ -75,15 +75,26 @@ test.describe(`New client form`, async () => {
 	});
 });
 
-test.describe('Edit client form', async () => {
+test.describe.only('Edit client form', async () => {
 	test.beforeEach(async ({ page, clientForm }) => {
-		await page.goto(`/clients/${clientForm.data.id}/edit`, {
-			waitUntil: 'networkidle',
+		await page.addInitScript({
+			content: `
+			window.started = new Promise((fulfil, reject) => {
+				setTimeout(() => {
+					reject(new Error('Did not receive sveltekit:start event'));
+				}, 5000);
+				addEventListener('sveltekit:start', () => {
+					fulfil();
+				});
+			});
+		`,
 		});
-		// try context.on('sveltekit:start', ...)
+
+		await page.goto(`/clients/${clientForm.data.id}/edit`);
+		await page.evaluate(() => window.started);
 	});
 
-	test('returns a 200 response', async ({ clientForm }) => {
+	test.only('returns a 200 response', async ({ clientForm }) => {
 		clientForm.alter();
 		await clientForm.fill();
 		const request = await clientForm.getRequest();
@@ -95,5 +106,19 @@ test.describe('Edit client form', async () => {
 		await clientForm.submit();
 		await page.waitForLoadState('networkidle');
 		await expect(page).toHaveURL(`/clients/${clientForm.data.id}`);
+	});
+
+	test('some details are correct', async ({ clientForm, page }) => {
+		await clientForm.submit();
+		await page.waitForNavigation();
+
+		const el = page.locator(`text=${clientForm.data.firstName}`);
+		const re = new RegExp(
+			`${clientForm.data.firstName} ${clientForm.data.lastName}`,
+		);
+		expect(await el.textContent()).toMatch(re);
+
+		const el2 = page.locator(`"${clientForm.data.email}"`);
+		expect(await el2.innerText()).toBe(clientForm.data.email);
 	});
 });
