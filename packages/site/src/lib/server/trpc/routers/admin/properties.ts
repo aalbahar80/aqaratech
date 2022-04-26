@@ -102,16 +102,14 @@ export const properties = createRouter()
 	})
 	.mutation('create', {
 		input: PropertyModel.schema,
-		resolve: async ({ input: { id, ...data } }) => {
-			const result = id
-				? await prismaClient.property.update({
-						data,
-						where: { id },
-				  })
-				: await prismaClient.property.create({
-						data,
-				  });
-			return result;
+		resolve: async ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.property.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
 		},
 	})
 	.mutation('save', {

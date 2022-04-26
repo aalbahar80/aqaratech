@@ -77,23 +77,24 @@ export const fakeUnit = (propertyId: string) => ({
 	propertyId,
 });
 
-export const fakeProperty = (clientId: string) => {
+export const fakeProperty = (clientId?: string) => {
 	const random = Math.floor(Math.random() * coordinates.length);
 	const propCoordinates = coordinates[random];
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
-		area: areas[Math.floor(Math.random() * areas.length)]?.[1] ?? null,
+		area: areas[Math.floor(Math.random() * areas.length)]![1],
 		block: faker.datatype.number({ min: 1, max: 13 }).toString(),
 		street: `شارع ${faker.random.arrayElement([
 			faker.name.lastName(),
 			faker.datatype.number({ min: 1, max: 500 }).toString(),
 		])}`,
+		avenue: null,
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 		lat: propCoordinates?.[0] ?? 0,
 		long: propCoordinates?.[1] ?? 0,
-		clientId,
+		clientId: clientId ?? faker.datatype.uuid(),
 	};
 };
 
