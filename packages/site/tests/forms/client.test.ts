@@ -2,23 +2,7 @@ import type { Page } from '@playwright/test';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
 import { expect, test as base } from '../config/trpc-test.js';
-
-class Form {
-	constructor(public page: Page) {}
-
-	submit() {
-		return this.page.click('button[type="submit"]');
-	}
-
-	async getRequest() {
-		const re = new RegExp('/trpc');
-		const [request] = await Promise.all([
-			this.page.waitForRequest(re),
-			await this.submit(),
-		]);
-		return request;
-	}
-}
+import { Form } from './form.js';
 
 class ClientForm extends Form {
 	constructor(page: Page, public data = fakeClient()) {
