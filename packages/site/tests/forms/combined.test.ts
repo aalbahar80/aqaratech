@@ -3,29 +3,10 @@ import { expect, test } from '../config/test-setup.js';
 
 test.use({ storageState: './tests/config/adminStorageState.json' });
 
-// test('new forms return 200', async ({ page, clientForm, propertyForm }) => {
-// 	const forms = [clientForm, propertyForm];
-// 	forms.forEach(async (form) => {
-// 		test(`${form.urlName} form`, async () => {
-// 			await page.goto(form.createUrl);
-// 			// @ts-ignore
-// 			await page.evaluate(() => window.started); // waits for hydration
-// 			await propertyForm.fill();
-
-// 			const request = await form.getRequest();
-// 			const response = await request.response();
-// 			expect(response?.status()).toBe(200);
-// 		});
-// 	});
-// });
-
-test.describe('new forms', async () => {
+test.describe('New form', async () => {
 	const forms = [ClientForm, PropertyForm];
 	forms.forEach(async (formType, idx) => {
-		test(`New ${formType.urlName2} form returns 200`, async ({
-			page,
-			forms,
-		}) => {
+		test(`${formType.urlName2} returns 200`, async ({ page, forms }) => {
 			const form = forms[idx];
 			await page.goto(form.createUrl);
 			// @ts-ignore
@@ -36,25 +17,42 @@ test.describe('new forms', async () => {
 			const response = await request.response();
 			expect(response?.status()).toBe(200);
 		});
+
+		test(`${formType.urlName2} redirects to detail page`, async ({
+			page,
+			forms,
+		}) => {
+			const form = forms[idx];
+			await page.goto(form.createUrl);
+			// @ts-ignore
+			await page.evaluate(() => window.started); // waits for hydration
+			await form.fill();
+
+			await form.submit();
+			const re = new RegExp(
+				`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+			);
+			await expect(page).toHaveURL(re);
+		});
+
+		test(`${formType.urlName2} some details are correct`, async ({
+			page,
+			forms,
+		}) => {
+			const form = forms[idx];
+			await page.goto(form.createUrl);
+			// @ts-ignore
+			await page.evaluate(() => window.started); // waits for hydration
+			await form.fill();
+
+			await form.submit();
+			await page.waitForNavigation();
+
+			form.basic().forEach(async (b) => {
+				const el = page.locator(`text=${b}`).first();
+				const re = new RegExp(`${b}`);
+				expect(await el.textContent()).toMatch(re);
+			});
+		});
 	});
 });
-
-// test('forms redirect to detail page', async ({
-// 	page,
-// 	clientForm,
-// 	propertyForm,
-// }) => {
-// 	const forms = [clientForm, propertyForm];
-// 	forms.forEach(async (form) => {
-// 		await page.goto(form.createUrl);
-// 		// @ts-ignore
-// 		await page.evaluate(() => window.started); // waits for hydration
-// 		await propertyForm.fill();
-// 		await propertyForm.submit();
-
-// 		const re = new RegExp(
-// 			`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-// 		);
-// 		await expect(page).toHaveURL(re);
-// 	});
-// });

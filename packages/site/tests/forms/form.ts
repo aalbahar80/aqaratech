@@ -43,6 +43,10 @@ export class ClientForm extends Form {
 			id: this.data.id,
 		};
 	}
+
+	public basic() {
+		return [this.data.firstName, this.data.email];
+	}
 }
 
 export class PropertyForm extends Form {
@@ -74,5 +78,9 @@ export class PropertyForm extends Form {
 			...fakeProperty(),
 			id: this.data.id,
 		};
+	}
+
+	public basic() {
+		return [this.data.area];
 	}
 }
