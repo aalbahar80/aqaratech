@@ -28,6 +28,8 @@ export const test = base.extend<{ trpcClient: TrpcClient }>({
 		await use(trpcClient);
 	},
 	page: async ({ page }, use) => {
+		// Ensures that sveltekit is done hydrating the page
+		// Ensures non-flaky tests
 		await page.addInitScript({
 			content: `
 			window.started = new Promise((fulfil, reject) => {

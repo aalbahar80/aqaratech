@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import { v4 as uuid } from 'uuid';
 import { fakeClient } from '../../../seed/generators.js';
 import { dateToInput } from '../../src/lib/utils/common.js';
-import { expect, test as base } from '../config/trpc-test.js';
+import { expect, test as base } from '../config/test-setup.js';
 import { Form } from './form.js';
 
 class ClientForm extends Form {
@@ -42,9 +42,9 @@ const test = base.extend<{ clientForm: ClientForm }>({
 
 test.describe(`New client form`, async () => {
 	test.beforeEach(async ({ page, clientForm }) => {
-		await page.goto('/new/clients', {
-			waitUntil: 'networkidle',
-		});
+		await page.goto('/new/clients');
+		// @ts-ignore
+		await page.evaluate(() => window.started); // waits for hydration
 		await clientForm.fill();
 	});
 
@@ -82,7 +82,7 @@ test.describe('Edit client form', async () => {
 	test.beforeEach(async ({ page, clientForm }) => {
 		await page.goto(`/clients/${clientForm.data.id}/edit`);
 		// @ts-ignore
-		await page.evaluate(() => window.started);
+		await page.evaluate(() => window.started); // waits for hydration
 	});
 
 	test('returns a 200 response', async ({ clientForm }) => {
