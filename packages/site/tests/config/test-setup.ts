@@ -5,10 +5,17 @@ import { installFetch } from '@sveltejs/kit/install-fetch';
 import * as trpc from '@trpc/client';
 import cookie from 'cookie';
 import superjson from 'superjson';
+import { v4 as uuid } from 'uuid';
+import { fakeClient, fakeProperty } from '../../../seed/generators.js';
+import { PropertyForm, ClientForm } from '../forms/form.js';
 
 installFetch();
 
-export const test = base.extend<{ trpcClient: TrpcClient }>({
+export const test = base.extend<{
+	trpcClient: TrpcClient;
+	clientForm: ClientForm;
+	propertyForm: PropertyForm;
+}>({
 	trpcClient: async ({ context, baseURL }, use) => {
 		const allCookies = await context.cookies();
 		const cookies = allCookies.filter(
@@ -43,6 +50,25 @@ export const test = base.extend<{ trpcClient: TrpcClient }>({
 		`,
 		});
 		await use(page);
+	},
+	clientForm: async ({ page, trpcClient }, use) => {
+		// override faker's id beacuse this sometimes returns the same data twice
+		const data = { ...fakeClient(), id: uuid() };
+		const clientForm = new ClientForm(page, data);
+		await trpcClient.mutation('clients:create', clientForm.data);
+		await use(clientForm);
+		await trpcClient.mutation('clients:delete', clientForm.data.id);
+	},
+	propertyForm: async ({ page, trpcClient }, use) => {
+		// override faker's id beacuse this sometimes returns the same data twice
+		const client = { ...fakeClient(), id: uuid() };
+		const data = { ...fakeProperty(client.id), id: uuid() };
+		const propertyForm = new PropertyForm(page, data, client);
+		await trpcClient.mutation('clients:create', client);
+		await trpcClient.mutation('properties:create', data);
+		await use(propertyForm);
+		await trpcClient.mutation('properties:delete', propertyForm.data.id);
+		await trpcClient.mutation('clients:delete', client.id);
 	},
 });
 
