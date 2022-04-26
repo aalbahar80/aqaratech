@@ -23,6 +23,13 @@ class ClientForm extends Form {
 		await this.page.fill('input[name="civilid"]', this.data.civilid);
 		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
+
+	public alter() {
+		this.data = {
+			...fakeClient(),
+			id: this.data.id,
+		};
+	}
 }
 
 base.use({ storageState: './tests/config/adminStorageState.json' });
@@ -73,6 +80,7 @@ test.describe('Edit client form', async () => {
 	});
 
 	test('returns a 200 response', async ({ page, clientForm }) => {
+		clientForm.alter();
 		await clientForm.fill();
 
 		const re = new RegExp('/trpc');
