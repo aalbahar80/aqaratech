@@ -9,8 +9,11 @@ class Form {
 		return this.page.click('button[type="submit"]');
 	}
 }
+
 class ClientForm extends Form {
-	data = fakeClient();
+	constructor(page: Page, public data = fakeClient()) {
+		super(page);
+	}
 
 	public async fill() {
 		await this.page.fill('input[name="firstName"]', this.data.firstName);
@@ -24,17 +27,12 @@ class ClientForm extends Form {
 
 base.use({ storageState: './tests/config/adminStorageState.json' });
 
-const test = base.extend<{ id: string; clientForm: ClientForm }>({
-	id: async ({ trpcClient }, use) => {
-		// create a client
-		const { id } = await trpcClient.mutation('clients:create', fakeClient());
-		await use(id);
-		// Cleanup
-		await trpcClient.mutation('clients:delete', id);
-	},
-	clientForm: async ({ page }, use) => {
+const test = base.extend<{ clientForm: ClientForm }>({
+	clientForm: async ({ page, trpcClient }, use) => {
 		const clientForm = new ClientForm(page);
+		await trpcClient.mutation('clients:create', clientForm.data);
 		await use(clientForm);
+		await trpcClient.mutation('clients:delete', clientForm.data.id);
 	},
 });
 
@@ -67,8 +65,8 @@ test.describe(`New client form`, async () => {
 });
 
 test.describe('Edit client form', async () => {
-	test.beforeEach(async ({ page, id }) => {
-		await page.goto(`/clients/${id}/edit`, {
+	test.beforeEach(async ({ page, clientForm }) => {
+		await page.goto(`/clients/${clientForm.data.id}/edit`, {
 			waitUntil: 'networkidle',
 		});
 		// try context.on('sveltekit:start', ...)
@@ -87,9 +85,9 @@ test.describe('Edit client form', async () => {
 		expect(response?.status()).toBe(200);
 	});
 
-	test('redirects to client detail page', async ({ page, id, clientForm }) => {
+	test('redirects to client detail page', async ({ page, clientForm }) => {
 		await clientForm.submit();
 		await page.waitForLoadState('networkidle');
-		await expect(page).toHaveURL(`/clients/${id}`);
+		await expect(page).toHaveURL(`/clients/${clientForm.data.id}`);
 	});
 });
