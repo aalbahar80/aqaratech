@@ -79,7 +79,7 @@ export class PropertyForm extends Form {
 
 	public async fill() {
 		await this.page.fill('[id="area"]', this.data.area);
-		await this.page.locator(`.item >> text=${this.data.area}`).click();
+		await this.page.locator(`.item >> text=${this.data.area}`).first().click();
 		await this.page.keyboard.press('Enter');
 		await this.page.fill('input[name="block"]', this.data.block);
 		await this.page.fill('input[name="street"]', this.data.street);
