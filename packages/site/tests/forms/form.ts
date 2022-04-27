@@ -1,6 +1,14 @@
 import type { Page } from '@playwright/test';
-import { fakeClient, fakeProperty } from '../../../seed/generators.js';
-import { dateToInput, getName } from '../../src/lib/utils/common.js';
+import {
+	fakeClient,
+	fakeProperty,
+	fakeUnit,
+} from '../../../seed/generators.js';
+import {
+	dateToInput,
+	getAddress,
+	getName,
+} from '../../src/lib/utils/common.js';
 
 export class Form {
 	constructor(
@@ -35,12 +43,10 @@ export class Form {
 }
 
 export class ClientForm extends Form {
-	static createUrl2 = '/new/clients';
-	static urlName2 = 'clients';
-	override createUrl = '/new/clients';
-	override urlName = 'clients';
+	static createUrl = '/new/clients';
+	static urlName = 'clients';
 	constructor(page: Page, public data = fakeClient()) {
-		super(page, ClientForm.createUrl2, data.id, ClientForm.urlName2);
+		super(page, ClientForm.createUrl, data.id, ClientForm.urlName);
 	}
 
 	public async fill() {
@@ -65,16 +71,14 @@ export class ClientForm extends Form {
 }
 
 export class PropertyForm extends Form {
-	static createUrl2 = '/new/properties';
-	static urlName2 = 'properties';
-	override createUrl = '/new/properties';
-	override urlName = 'properties';
+	static createUrl = '/new/properties';
+	static urlName = 'properties';
 	constructor(
 		page: Page,
 		public data = fakeProperty(),
 		public client = fakeClient(),
 	) {
-		super(page, PropertyForm.createUrl2, data.id, PropertyForm.urlName2);
+		super(page, PropertyForm.createUrl, data.id, PropertyForm.urlName);
 	}
 
 	public async fill() {
@@ -100,5 +104,43 @@ export class PropertyForm extends Form {
 	 */
 	public basic() {
 		return [this.data.area];
+	}
+}
+
+export class UnitForm extends Form {
+	static createUrl = '/new/units';
+	static urlName = 'units';
+	constructor(
+		page: Page,
+		public data = fakeUnit(),
+		public property = fakeProperty(),
+		public client = fakeClient(),
+	) {
+		super(page, UnitForm.createUrl, data.id, UnitForm.urlName);
+	}
+
+	public async fill() {
+		await this.page.fill('input[name="unitNumber"]', this.data.unitNumber);
+		await this.page.fill('input[name="bed"]', this.data.bed.toString());
+		await this.page.fill('input[name="bath"]', this.data.bath.toString());
+		await this.page.fill('input[name="floor"]', this.data.floor.toString());
+		await this.page.selectOption('#clientId', { label: getName(this.client) });
+		await this.page.selectOption('#propertyId', {
+			label: getAddress(this.property),
+		});
+	}
+
+	public alter() {
+		this.data = {
+			...fakeUnit(),
+			id: this.data.id,
+		};
+	}
+
+	/**
+	 * Basic fields to check existence of after form submittal
+	 */
+	public basic() {
+		return [this.data.unitNumber];
 	}
 }

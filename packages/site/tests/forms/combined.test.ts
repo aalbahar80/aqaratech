@@ -1,9 +1,9 @@
-import { ClientForm, PropertyForm } from './form.js';
+import { ClientForm, PropertyForm, UnitForm } from './form.js';
 import { expect, test } from '../config/test-setup.js';
 
 test.use({ storageState: './config/adminStorageState.json' });
 
-const formEntities = [ClientForm, PropertyForm];
+const formEntities = [ClientForm, PropertyForm, UnitForm];
 const types = ['new', 'edit'] as const;
 const forms = formEntities.flatMap((form, idx) =>
 	types.map((type) => ({ form, type, idx })),
@@ -11,7 +11,7 @@ const forms = formEntities.flatMap((form, idx) =>
 
 test.describe('Form', async () => {
 	forms.forEach(async (formType) => {
-		test(`${formType.type} ${formType.form.urlName2} returns 200`, async ({
+		test(`${formType.type} ${formType.form.urlName} returns 200`, async ({
 			page,
 			forms,
 		}) => {
@@ -26,7 +26,7 @@ test.describe('Form', async () => {
 			expect(response?.status()).toBe(200);
 		});
 
-		test(`${formType.type} ${formType.form.urlName2} redirects to detail page`, async ({
+		test(`${formType.type} ${formType.form.urlName} redirects to detail page`, async ({
 			page,
 			forms,
 		}) => {
@@ -43,7 +43,7 @@ test.describe('Form', async () => {
 			await expect(page).toHaveURL(re);
 		});
 
-		test(`${formType.type} ${formType.form.urlName2} some details are correct`, async ({
+		test(`${formType.type} ${formType.form.urlName} some details are correct`, async ({
 			page,
 			forms,
 		}) => {

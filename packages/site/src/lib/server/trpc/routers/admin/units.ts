@@ -91,15 +91,15 @@ export const units = createRouter()
 	})
 	.mutation('create', {
 		input: UnitModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.unit.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.unit.create({
-						data,
-				  }),
+		resolve: async ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.unit.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: UnitModel.schema,

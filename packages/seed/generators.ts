@@ -56,7 +56,7 @@ export const fakeTenant = () => ({
 const createdAt = () => faker.date.past(4);
 const updatedAt = () => faker.date.past(4);
 
-export const fakeUnit = (propertyId: string) => ({
+export const fakeUnit = (propertyId?: string) => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
@@ -74,7 +74,8 @@ export const fakeUnit = (propertyId: string) => ({
 		"شاليه",
 		"بيت",
 	]),
-	propertyId,
+	usage: null,
+	propertyId: propertyId ?? faker.datatype.uuid(),
 });
 
 export const fakeProperty = (clientId?: string) => {

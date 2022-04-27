@@ -6,14 +6,19 @@ import cookie from 'cookie';
 import fetch from 'cross-fetch';
 import superjson from 'superjson';
 import { v4 as uuid } from 'uuid';
-import { fakeClient, fakeProperty } from '../../../seed/generators.js';
-import { ClientForm, PropertyForm } from '../forms/form.js';
+import {
+	fakeClient,
+	fakeProperty,
+	fakeUnit,
+} from '../../../seed/generators.js';
+import { ClientForm, PropertyForm, UnitForm } from '../forms/form.js';
 
 export const test = base.extend<{
 	trpcClient: TrpcClient;
 	clientForm: ClientForm;
 	propertyForm: PropertyForm;
-	forms: Array<ClientForm | PropertyForm>;
+	unitForm: UnitForm;
+	forms: Array<ClientForm | PropertyForm | UnitForm>;
 }>({
 	trpcClient: async ({ context, baseURL }, use) => {
 		const allCookies = await context.cookies();
@@ -70,8 +75,26 @@ export const test = base.extend<{
 		await trpcClient.mutation('properties:delete', propertyForm.data.id);
 		await trpcClient.mutation('clients:delete', client.id);
 	},
-	forms: async ({ clientForm, propertyForm }, use) => {
-		await use([clientForm, propertyForm]);
+	unitForm: async ({ page, trpcClient }, use) => {
+		// override faker's id beacuse this sometimes returns the same data twice
+		const client = { ...fakeClient(), id: uuid() };
+		const property = { ...fakeProperty(client.id), id: uuid() };
+		const data = { ...fakeUnit(property.id), id: uuid() };
+		const unitForm = new UnitForm(page, data, property, client);
+		await Promise.all([
+			await trpcClient.mutation('clients:create', client),
+			await trpcClient.mutation('properties:create', property),
+			await trpcClient.mutation('units:create', data),
+		]);
+		await use(unitForm);
+		await Promise.all([
+			await trpcClient.mutation('units:delete', unitForm.data.id),
+			await trpcClient.mutation('properties:delete', property.id),
+			await trpcClient.mutation('clients:delete', client.id),
+		]);
+	},
+	forms: async ({ clientForm, propertyForm, unitForm }, use) => {
+		await use([clientForm, propertyForm, unitForm]);
 	},
 });
 
