@@ -64,7 +64,8 @@ describe("example workflow", function () {
 		});
 		const client = new WorkflowClient(connection.service);
 
-		const testId = "05432ea6-3ae6-4915-a8e3-81440a4f78f3";
+		// TODO replace with better isolation
+		const testId = "95a4c541-f0de-48b3-bd85-450234e415ab";
 		execute = () =>
 			client.execute(trxNotificationWF, {
 				args: [testId, 0.00000000001],
