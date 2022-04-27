@@ -3,13 +3,11 @@ import type { AppRouter } from '$lib/server/trpc/router';
 import { test as base } from '@playwright/test';
 import * as trpc from '@trpc/client';
 import cookie from 'cookie';
+import fetch from 'cross-fetch';
 import superjson from 'superjson';
 import { v4 as uuid } from 'uuid';
 import { fakeClient, fakeProperty } from '../../../seed/generators.js';
-import { PropertyForm, ClientForm } from '../forms/form.js';
-// import { fetch } from 'fetch-h2';
-// import fetch from 'node-fetch';
-import fetch from 'cross-fetch';
+import { ClientForm, PropertyForm } from '../forms/form.js';
 
 export const test = base.extend<{
 	trpcClient: TrpcClient;
