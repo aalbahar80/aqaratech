@@ -69,11 +69,15 @@ export const test = base.extend<{
 		const client = { ...fakeClient(), id: uuid() };
 		const data = { ...fakeProperty(client.id), id: uuid() };
 		const propertyForm = new PropertyForm(page, data, client);
-		await trpcClient.mutation('clients:create', client);
-		await trpcClient.mutation('properties:create', data);
+		await Promise.all([
+			await trpcClient.mutation('clients:create', client),
+			await trpcClient.mutation('properties:create', data),
+		]);
 		await use(propertyForm);
-		await trpcClient.mutation('properties:delete', propertyForm.data.id);
-		await trpcClient.mutation('clients:delete', client.id);
+		await Promise.all([
+			await trpcClient.mutation('properties:delete', propertyForm.data.id),
+			await trpcClient.mutation('clients:delete', client.id),
+		]);
 	},
 	unitForm: async ({ page, trpcClient }, use) => {
 		// override faker's id beacuse this sometimes returns the same data twice
