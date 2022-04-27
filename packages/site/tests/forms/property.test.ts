@@ -1,3 +1,5 @@
+import { preselected } from '../utils.js';
+import { getName } from '../../src/lib/utils/common.js';
 import { expect, test } from '../config/test-setup.js';
 
 test.use({ storageState: './config/adminStorageState.json' });
@@ -42,26 +44,21 @@ test.describe('Edit property form', async () => {
 		await page.evaluate(() => window.started); // waits for hydration
 	});
 
-	test('returns a 200 response', async ({ propertyForm }) => {
-		propertyForm.alter();
-		await propertyForm.fill();
-		const request = await propertyForm.getRequest();
-		const response = await request.response();
-		expect(response?.status()).toBe(200);
+	test('client is preselected', async ({ propertyForm, page }) => {
+		const el = page.locator('#clientId');
+		await preselected(page, el, getName(propertyForm.client));
 	});
 
-	test('redirects to property detail page', async ({ page, propertyForm }) => {
-		await propertyForm.submit();
-		await page.waitForNavigation();
-		await expect(page).toHaveURL(`/properties/${propertyForm.data.id}`);
+	test('area is preselected', async ({ propertyForm, page }) => {
+		const el = page.locator('.selection');
+		const selected = await el.evaluate((el: HTMLDivElement) => el.innerText);
+		expect(selected).toMatch(propertyForm.data.area);
 	});
+});
 
-	test('some details are correct', async ({ propertyForm, page }) => {
-		await propertyForm.submit();
-		await page.waitForNavigation();
-
-		const el = page.locator(`text=${propertyForm.data.area}`).first();
-		const re = new RegExp(`${propertyForm.data.area}`);
-		expect(await el.textContent()).toMatch(re);
-	});
+test('preselected clientId from URL', async ({ page, clientForm }) => {
+	await page.goto(`/new/properties?clientId=${clientForm.id}`);
+	// @ts-ignore
+	await page.evaluate(() => window.started); // waits for hydration
+	await preselected(page, page.locator('#clientId'), getName(clientForm.data));
 });
