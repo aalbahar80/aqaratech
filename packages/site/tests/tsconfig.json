@@ -2,7 +2,9 @@
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"rootDirs": ["..", "."],
-		"noUncheckedIndexedAccess": false
+		"noUncheckedIndexedAccess": false,
+		"skipLibCheck": true
 	},
-	"include": ["./**/*.ts"]
+	"include": ["./**/*.ts"],
+	"exclude": ["node_modules"]
 }

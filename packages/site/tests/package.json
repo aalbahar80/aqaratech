@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "tsc --noEmit --project tsconfig.json"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

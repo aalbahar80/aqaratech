@@ -95,6 +95,9 @@ export class PropertyForm extends Form {
 		};
 	}
 
+	/**
+	 * Basic fields to check existence of after form submittal
+	 */
 	public basic() {
 		return [this.data.area];
 	}
