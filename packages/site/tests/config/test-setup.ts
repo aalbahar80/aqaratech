@@ -1,15 +1,12 @@
 import type { TrpcClient } from '$lib/client/trpc';
 import type { AppRouter } from '$lib/server/trpc/router';
 import { test as base } from '@playwright/test';
-import { installFetch } from '@sveltejs/kit/install-fetch';
 import * as trpc from '@trpc/client';
 import cookie from 'cookie';
 import superjson from 'superjson';
 import { v4 as uuid } from 'uuid';
 import { fakeClient, fakeProperty } from '../../../seed/generators.js';
 import { PropertyForm, ClientForm } from '../forms/form.js';
-
-installFetch();
 
 export const test = base.extend<{
 	trpcClient: TrpcClient;
