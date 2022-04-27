@@ -21,7 +21,7 @@ async function globalSetup() {
 
 	await adminPage
 		.context()
-		.storageState({ path: './tests/config/adminStorageState.json' });
+		.storageState({ path: './config/adminStorageState.json' });
 
 	// log in owner
 	// const ownerPage = await browser.newPage();

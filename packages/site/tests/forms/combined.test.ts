@@ -1,7 +1,7 @@
 import { ClientForm, PropertyForm } from './form.js';
 import { expect, test } from '../config/test-setup.js';
 
-test.use({ storageState: './tests/config/adminStorageState.json' });
+test.use({ storageState: './config/adminStorageState.json' });
 
 const formEntities = [ClientForm, PropertyForm];
 const types = ['new', 'edit'] as const;
