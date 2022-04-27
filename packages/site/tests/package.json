@@ -9,7 +9,11 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.21.1",
-    "@sveltejs/kit": "^1.0.0-next.322",
-    "node-fetch": "^3.2.3"
+    "cross-fetch": "^3.1.5",
+    "fetch-h2": "^3.0.2",
+    "i": "^0.3.7",
+    "isomorphic-fetch": "^3.0.0",
+    "node-fetch": "^3.2.3",
+    "npm": "^8.7.0"
   }
 }

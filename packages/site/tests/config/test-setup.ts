@@ -7,6 +7,9 @@ import superjson from 'superjson';
 import { v4 as uuid } from 'uuid';
 import { fakeClient, fakeProperty } from '../../../seed/generators.js';
 import { PropertyForm, ClientForm } from '../forms/form.js';
+// import { fetch } from 'fetch-h2';
+// import fetch from 'node-fetch';
+import fetch from 'cross-fetch';
 
 export const test = base.extend<{
 	trpcClient: TrpcClient;
@@ -24,6 +27,7 @@ export const test = base.extend<{
 		const cookieString = cookieStrings.join('; ');
 
 		const trpcClient = trpc.createTRPCClient<AppRouter>({
+			fetch,
 			url: baseURL + '/trpc',
 			transformer: superjson,
 			headers: {
