@@ -16,7 +16,7 @@ test.describe('Edit property form', async () => {
 
 	test('area is preselected', async ({ propertyForm, page }) => {
 		const el = page.locator('.selection');
-		const selected = await el.evaluate((el: HTMLDivElement) => el.innerText);
+		const selected = await el.innerText();
 		expect(selected).toMatch(propertyForm.data.area);
 	});
 });

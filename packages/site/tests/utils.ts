@@ -7,8 +7,6 @@ export const preselected = async (
 	expected: string,
 ) => {
 	await page.waitForLoadState('networkidle');
-	const selected = await el.evaluate(
-		(el: HTMLSelectElement) => el.selectedOptions[0].textContent,
-	);
+	const selected = await el.innerText();
 	expect(selected).toMatch(expected);
 };
