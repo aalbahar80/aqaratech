@@ -131,15 +131,15 @@ export const tenants = createRouter()
 	})
 	.mutation('create', {
 		input: TenantModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.tenant.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.tenant.create({
-						data,
-				  }),
+		resolve: async ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.tenant.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: TenantModel.schema,

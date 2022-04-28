@@ -1,7 +1,9 @@
 import type { Page } from '@playwright/test';
 import {
 	fakeClient,
+	fakeLease,
 	fakeProperty,
+	fakeTenant,
 	fakeUnit,
 } from '../../../seed/generators.js';
 import {
@@ -125,7 +127,7 @@ export class UnitForm extends Form {
 		await this.page.fill('input[name="bath"]', this.data.bath.toString());
 		await this.page.fill('input[name="floor"]', this.data.floor.toString());
 		await this.page.selectOption('#clientId', { label: getName(this.client) });
-		await this.page.selectOption('#propertyId', {
+		await this.page.selectOption('#unitId', {
 			label: getAddress(this.property),
 		});
 	}
@@ -142,5 +144,84 @@ export class UnitForm extends Form {
 	 */
 	public basic() {
 		return [this.data.unitNumber];
+	}
+}
+
+export class TenantForm extends Form {
+	static createUrl = '/new/tenants';
+	static urlName = 'tenants';
+	constructor(page: Page, public data = fakeTenant()) {
+		super(page, TenantForm.createUrl, data.id, TenantForm.urlName);
+	}
+
+	public async fill() {
+		await this.page.fill('input[name="firstName"]', this.data.firstName);
+		await this.page.fill('input[name="lastName"]', this.data.lastName);
+		await this.page.fill('input[name="email"]', this.data.email);
+		await this.page.fill('input[name="phone"]', this.data.phone);
+		await this.page.fill('input[name="civilid"]', this.data.civilid);
+		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
+	}
+
+	public alter() {
+		this.data = {
+			...fakeTenant(),
+			id: this.data.id,
+		};
+	}
+
+	public basic() {
+		return [this.data.firstName, this.data.email];
+	}
+}
+
+export class LeaseForm extends Form {
+	static createUrl = '/new/leases';
+	static urlName = 'leases';
+	constructor(
+		page: Page,
+		public data = fakeLease(),
+		public unit = fakeUnit(),
+		public property = fakeProperty(),
+		public client = fakeClient(),
+		public tenant = fakeTenant(),
+	) {
+		super(page, LeaseForm.createUrl, data.id, LeaseForm.urlName);
+	}
+
+	public async fill() {
+		// await this.page.fill('input[name="leaseNumber"]', this.data.unitNumber);
+		await this.page.fill(
+			'input[name="monthlyRent"]',
+			this.data.monthlyRent.toString(),
+		);
+		// await this.page.fill('input[name="bath"]', this.data.bath.toString());
+		// await this.page.fill('input[name="floor"]', this.data.floor.toString());
+		await this.page.selectOption('#clientId', { label: getName(this.client) });
+		await this.page.selectOption('#propertyId', {
+			label: getAddress(this.property),
+		});
+		await this.page.selectOption('#unitId', {
+			label: [this.unit.id, this.unit.unitNumber]
+				.filter((str) => str)
+				.join(' '),
+		});
+		await this.page.selectOption('#tenantId', {
+			label: getName(this.tenant),
+		});
+	}
+
+	public alter() {
+		this.data = {
+			...fakeLease(),
+			id: this.data.id,
+		};
+	}
+
+	/**
+	 * Basic fields to check existence of after form submittal
+	 */
+	public basic() {
+		return [this.data.monthlyRent];
 	}
 }

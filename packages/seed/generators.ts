@@ -40,7 +40,7 @@ export const fakeTenant = () => ({
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
-	email: faker.internet.email(),
+	email: fakeEmail(),
 	dob: faker.date.past(),
 	phone: faker.phone.phoneNumber("1#######"),
 	passportNum: faker.datatype
@@ -131,7 +131,12 @@ export const fakeTransaction = (
 	};
 };
 
-export const fakeLease = (tenantId: string, unitId: string, start: Date) => {
+export const fakeLease = (
+	tenantId?: string,
+	unitId?: string,
+	startDate?: Date
+) => {
+	const start = startDate ?? faker.date.past(4);
 	const end = subDays(addMonths(start, 12), 1);
 	return {
 		id: faker.datatype.uuid(),
@@ -143,8 +148,9 @@ export const fakeLease = (tenantId: string, unitId: string, start: Date) => {
 		monthlyRent: +faker.finance.amount(100, 3000, 0),
 		license: faker.company.bs(),
 		active: true,
-		tenantId,
-		unitId,
+		tenantId: tenantId ?? faker.datatype.uuid(),
+		unitId: unitId ?? faker.datatype.uuid(),
+		shouldNotify: true,
 	};
 };
 

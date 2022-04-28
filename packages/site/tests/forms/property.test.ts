@@ -7,8 +7,7 @@ test.use({ storageState: './config/adminStorageState.json' });
 test.describe(`New property form`, async () => {
 	test.beforeEach(async ({ page, propertyForm }) => {
 		await page.goto('/new/properties');
-		// @ts-ignore
-		await page.evaluate(() => window.started); // waits for hydration
+		await page.evaluate(() => window.started);
 		await propertyForm.fill();
 	});
 
@@ -40,8 +39,7 @@ test.describe(`New property form`, async () => {
 test.describe('Edit property form', async () => {
 	test.beforeEach(async ({ page, propertyForm }) => {
 		await page.goto(`/properties/${propertyForm.data.id}/edit`);
-		// @ts-ignore
-		await page.evaluate(() => window.started); // waits for hydration
+		await page.evaluate(() => window.started);
 	});
 
 	test('client is preselected', async ({ propertyForm, page }) => {
@@ -62,15 +60,14 @@ test('New property: preselected clientId from URL', async ({
 }) => {
 	await page.goto(`/new/properties?clientId=${clientForm.id}`);
 	// @ts-ignore
-	await page.evaluate(() => window.started); // waits for hydration
+	await page.evaluate(() => window.started);
 	await preselected(page, page.locator('#clientId'), getName(clientForm.data));
 });
 
 test.describe('new unit', async () => {
 	test.beforeEach(async ({ page, propertyForm }) => {
 		await page.goto(`/new/units?propertyId=${propertyForm.id}`);
-		// @ts-ignore
-		await page.evaluate(() => window.started); // waits for hydration
+		await page.evaluate(() => window.started);
 	});
 
 	test('preselected property from URL', async ({ page, propertyForm }) => {
@@ -92,8 +89,7 @@ test.describe('new unit', async () => {
 
 test('new lease: preselected property from URL', async ({ page, unitForm }) => {
 	await page.goto(`/new/leases?unitId=${unitForm.id}`);
-	// @ts-ignore
-	await page.evaluate(() => window.started); // waits for hydration
+	await page.evaluate(() => window.started);
 	await preselected(
 		page,
 		page.locator('#propertyId'),
@@ -103,8 +99,7 @@ test('new lease: preselected property from URL', async ({ page, unitForm }) => {
 
 test('new lease: preselected unit from URL', async ({ page, unitForm }) => {
 	await page.goto(`/new/leases?unitId=${unitForm.id}`);
-	// @ts-ignore
-	await page.evaluate(() => window.started); // waits for hydration
+	await page.evaluate(() => window.started);
 	await preselected(
 		page,
 		page.locator('#unitId'),
@@ -114,52 +109,47 @@ test('new lease: preselected unit from URL', async ({ page, unitForm }) => {
 	);
 });
 
-test.fixme(
-	'new lease: preselected tenant from URL',
-	async ({ page, unitForm }) => {
-		await page.goto(`/new/leases?unitId=${unitForm.id}`);
-		// @ts-ignore
-		await page.evaluate(() => window.started); // waits for hydration
+test('new lease: preselected tenant from URL', async ({ page, unitForm }) => {
+	await page.goto(`/new/leases?unitId=${unitForm.id}`);
+	await page.evaluate(() => window.started);
+	await preselected(
+		page,
+		page.locator('#unitId'),
+		[unitForm.data.type, unitForm.data.unitNumber]
+			.filter((str) => str)
+			.join(' '),
+	);
+});
+
+test.describe('edit lease', async () => {
+	test.beforeEach(async ({ page, leaseForm }) => {
+		await page.goto(`/leases/${leaseForm.id}/edit`);
+		await page.evaluate(() => window.started);
+	});
+
+	// test('property is preselected', async ({ page, leaseForm }) => {
+	// 	await preselected(
+	// 		page,
+	// 		page.locator('#propertyId'),
+	// 		getAddress(leaseForm.property),
+	// 	);
+	// });
+
+	test('unit is preselected', async ({ page, leaseForm }) => {
 		await preselected(
 			page,
 			page.locator('#unitId'),
-			[unitForm.data.type, unitForm.data.unitNumber]
-				.filter((str) => str)
-				.join(' '),
-		);
-	},
-);
-
-test.fixme('edit lease', async () => {
-	test.beforeEach(async ({ page, unitForm }) => {
-		// await page.goto(`/leases/edit/${unitForm.id}`);
-		// @ts-ignore
-		await page.evaluate(() => window.started); // waits for hydration
-	});
-
-	test('property is preselected', async ({ page, unitForm }) => {
-		await preselected(
-			page,
-			page.locator('#propertyId'),
-			getAddress(unitForm.property),
-		);
-	});
-
-	test('unit is preselected', async ({ page, unitForm }) => {
-		await preselected(
-			page,
-			page.locator('#unitId'),
-			[unitForm.data.type, unitForm.data.unitNumber]
+			[leaseForm.unit.type, leaseForm.unit.unitNumber]
 				.filter((str) => str)
 				.join(' '),
 		);
 	});
 
-	test('tenant is preselected', async ({ page, unitForm }) => {
+	test('tenant is preselected', async ({ page, leaseForm }) => {
 		await preselected(
 			page,
-			page.locator('#propertyId'),
-			getAddress(unitForm.property),
+			page.locator('#tenantId'),
+			getName(leaseForm.tenant),
 		);
 	});
 });

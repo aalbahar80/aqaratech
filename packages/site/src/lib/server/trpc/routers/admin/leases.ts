@@ -248,15 +248,15 @@ export const leases = createRouter()
 	})
 	.mutation('create', {
 		input: LeaseModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.lease.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.lease.create({
-						data,
-				  }),
+		resolve: ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.lease.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: LeaseModel.schema,

@@ -10,15 +10,25 @@ import {
 	fakeClient,
 	fakeProperty,
 	fakeUnit,
+	fakeTenant,
+	fakeLease,
 } from '../../../seed/generators.js';
-import { ClientForm, PropertyForm, UnitForm } from '../forms/form.js';
+import {
+	ClientForm,
+	LeaseForm,
+	PropertyForm,
+	TenantForm,
+	UnitForm,
+} from '../forms/form.js';
 
 export const test = base.extend<{
 	trpcClient: TrpcClient;
 	clientForm: ClientForm;
 	propertyForm: PropertyForm;
 	unitForm: UnitForm;
-	forms: Array<ClientForm | PropertyForm | UnitForm>;
+	tenantForm: TenantForm;
+	leaseForm: LeaseForm;
+	forms: Array<ClientForm | PropertyForm | UnitForm | TenantForm | LeaseForm>;
 }>({
 	trpcClient: async ({ context, baseURL }, use) => {
 		const allCookies = await context.cookies();
@@ -92,13 +102,48 @@ export const test = base.extend<{
 		]);
 		await use(unitForm);
 		await Promise.all([
-			await trpcClient.mutation('units:delete', unitForm.data.id),
+			await trpcClient.mutation('units:delete', data.id),
 			await trpcClient.mutation('properties:delete', property.id),
 			await trpcClient.mutation('clients:delete', client.id),
 		]);
 	},
-	forms: async ({ clientForm, propertyForm, unitForm }, use) => {
-		await use([clientForm, propertyForm, unitForm]);
+	tenantForm: async ({ page, trpcClient }, use) => {
+		// override faker's id beacuse this sometimes returns the same data twice
+		const data = { ...fakeTenant(), id: uuid() };
+		const tenantForm = new TenantForm(page, data);
+		await trpcClient.mutation('tenants:create', tenantForm.data);
+		await use(tenantForm);
+		await trpcClient.mutation('tenants:delete', tenantForm.data.id);
+	},
+	leaseForm: async ({ page, trpcClient }, use) => {
+		// override faker's id beacuse this sometimes returns the same data twice
+		const client = { ...fakeClient(), id: uuid() };
+		const tenant = { ...fakeTenant(), id: uuid() };
+		const property = { ...fakeProperty(client.id), id: uuid() };
+		const unit = { ...fakeUnit(property.id), id: uuid() };
+		const data = { ...fakeLease(tenant.id, unit.id), id: uuid() };
+		const leaseForm = new LeaseForm(page, data, unit, property, client);
+		await Promise.all([
+			await trpcClient.mutation('clients:create', client),
+			await trpcClient.mutation('tenants:create', tenant),
+			await trpcClient.mutation('properties:create', property),
+			await trpcClient.mutation('units:create', unit),
+			await trpcClient.mutation('leases:create', data),
+		]);
+		await use(leaseForm);
+		await Promise.all([
+			await trpcClient.mutation('leases:delete', data.id),
+			await trpcClient.mutation('units:delete', unit.id),
+			await trpcClient.mutation('properties:delete', property.id),
+			await trpcClient.mutation('clients:delete', client.id),
+			await trpcClient.mutation('tenants:delete', tenant.id),
+		]);
+	},
+	forms: async (
+		{ clientForm, propertyForm, unitForm, tenantForm, leaseForm },
+		use,
+	) => {
+		await use([clientForm, propertyForm, unitForm, tenantForm, leaseForm]);
 	},
 });
 

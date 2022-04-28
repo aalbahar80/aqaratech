@@ -4,7 +4,7 @@ const email = 'admin.dev@mailthink.net';
 const password = 'test12';
 
 test.beforeEach(async ({ page }) => {
-	await page.goto('http://localhost:3000');
+	await page.goto('/');
 
 	// TODO only use one login button to avoid last()
 	await page.locator('a:has-text("Log in")').last().click();
@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Redirected to home page after logging in', async ({ page }) => {
-	await expect(page).toHaveURL('http://localhost:3000/');
+	await expect(page).toHaveURL('/');
 });
 
 test('accessToken exists', async ({ context }) => {
