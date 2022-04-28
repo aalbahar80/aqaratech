@@ -21,34 +21,47 @@ import {
 	UnitForm,
 } from '../forms/form.js';
 
-export const test = base.extend<{
-	trpcClient: TrpcClient;
-	clientForm: ClientForm;
-	propertyForm: PropertyForm;
-	unitForm: UnitForm;
-	tenantForm: TenantForm;
-	leaseForm: LeaseForm;
-	forms: Array<ClientForm | PropertyForm | UnitForm | TenantForm | LeaseForm>;
-}>({
-	trpcClient: async ({ context, baseURL }, use) => {
-		const allCookies = await context.cookies();
-		const cookies = allCookies.filter(
-			(c) => c.name === 'accessToken' || c.name === 'idToken',
-		);
-
-		const cookieStrings = cookies.map((c) => cookie.serialize(c.name, c.value));
-		const cookieString = cookieStrings.join('; ');
-
-		const trpcClient = trpc.createTRPCClient<AppRouter>({
-			fetch,
-			url: baseURL + '/trpc',
-			transformer: superjson,
-			headers: {
-				cookie: cookieString,
-			},
-		});
-		await use(trpcClient);
+base.use({ storageState: './config/adminStorageState.json' });
+export const test = base.extend<
+	{
+		clientForm: ClientForm;
+		propertyForm: PropertyForm;
+		unitForm: UnitForm;
+		tenantForm: TenantForm;
+		leaseForm: LeaseForm;
+		forms: Array<ClientForm | PropertyForm | UnitForm | TenantForm | LeaseForm>;
 	},
+	{
+		trpcClient: TrpcClient;
+	}
+>({
+	trpcClient: [
+		async ({ browser }, use) => {
+			const context = browser.contexts()[0];
+			const baseURL = 'http://localhost:3000';
+
+			const allCookies = await context.cookies();
+			const cookies = allCookies.filter(
+				(c) => c.name === 'accessToken' || c.name === 'idToken',
+			);
+
+			const cookieStrings = cookies.map((c) =>
+				cookie.serialize(c.name, c.value),
+			);
+			const cookieString = cookieStrings.join('; ');
+
+			const trpcClient = trpc.createTRPCClient<AppRouter>({
+				fetch,
+				url: baseURL + '/trpc',
+				transformer: superjson,
+				headers: {
+					cookie: cookieString,
+				},
+			});
+			await use(trpcClient);
+		},
+		{ scope: 'worker' },
+	],
 	page: async ({ page }, use) => {
 		// Ensures that sveltekit is done hydrating the page
 		// Ensures non-flaky tests
