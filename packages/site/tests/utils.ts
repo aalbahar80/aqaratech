@@ -7,6 +7,6 @@ export const preselected = async (
 	expected: string,
 ) => {
 	await page.waitForLoadState('networkidle');
-	const selected = await el.innerText();
+	const selected = await el.textContent();
 	expect(selected).toMatch(expected);
 };

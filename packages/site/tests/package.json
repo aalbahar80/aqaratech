@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "tsc --noEmit --project tsconfig.json"
+    "lint": "tsc --noEmit --project tsconfig.json",
+    "test": "playwright test"
   },
   "keywords": [],
   "author": "",
