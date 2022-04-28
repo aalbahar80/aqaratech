@@ -263,22 +263,21 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill() {
+		await this.page.waitForLoadState('networkidle');
+		await this.page.selectOption('#tenantId', { label: getName(this.tenant) });
+		await this.page.selectOption('#propertyId', {
+			label: getAddress(this.property),
+		});
+		await this.page.waitForLoadState('networkidle');
+		await this.page.selectOption('#unitId', {
+			label: [this.unit.type, this.unit.unitNumber]
+				.filter((str) => str)
+				.join(' '),
+		});
 		await this.page.fill(
 			'input[name="monthlyRent"]',
 			this.data.monthlyRent.toString(),
 		);
-		await this.page.selectOption('#clientId', { label: getName(this.client) });
-		await this.page.selectOption('#propertyId', {
-			label: getAddress(this.property),
-		});
-		await this.page.selectOption('#unitId', {
-			label: [this.unit.id, this.unit.unitNumber]
-				.filter((str) => str)
-				.join(' '),
-		});
-		await this.page.selectOption('#tenantId', {
-			label: getName(this.tenant),
-		});
 	}
 
 	public alter() {

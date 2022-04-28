@@ -2,11 +2,7 @@ import { ClientForm, PropertyForm } from './form';
 import { expect, test } from '../config/test-setup.js';
 
 test.use({
-	// defaultForm: ClientForm,
 	defaultForm: async ({}, use) => {
-		// Read locale from some configuration file.
-		// const locale = await fs.promises.readFile('test-locale', 'utf-8');
-		// await use(ClientForm);
 		await use(PropertyForm);
 	},
 });

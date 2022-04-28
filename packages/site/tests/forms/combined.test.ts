@@ -12,7 +12,7 @@ const formEntities = [
 	PropertyForm,
 	UnitForm,
 	TenantForm,
-	// LeaseForm,
+	LeaseForm,
 ];
 
 for (const Form of formEntities) {
