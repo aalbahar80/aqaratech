@@ -1,5 +1,6 @@
+import { describe, expect, test } from 'vitest';
 import * as utils from './common';
-// @ponicode
+
 describe('utils.getProgress', () => {
 	test('it assumes completion on end date', () => {
 		const result: any = utils.getProgress(
