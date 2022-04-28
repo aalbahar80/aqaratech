@@ -44,6 +44,9 @@ export class Form {
 			throw new Error('invalid type');
 		}
 	}
+
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	setupNew() {}
 }
 
 export class ClientForm extends Form {
@@ -76,9 +79,6 @@ export class ClientForm extends Form {
 	async setup(trpcClient: TrpcClient) {
 		await trpcClient.mutation('clients:create', this.data);
 	}
-
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	setupNew() {}
 
 	async clean(trpcClient: TrpcClient) {
 		await trpcClient.mutation('clients:delete', this.id);
@@ -123,7 +123,7 @@ export class PropertyForm extends Form {
 		return [this.data.area];
 	}
 
-	async setupNew(trpcClient: TrpcClient) {
+	override async setupNew(trpcClient: TrpcClient) {
 		await trpcClient.mutation('clients:create', this.client);
 	}
 
@@ -181,7 +181,7 @@ export class UnitForm extends Form {
 		return [this.data.unitNumber];
 	}
 
-	async setupNew(trpcClient: TrpcClient) {
+	override async setupNew(trpcClient: TrpcClient) {
 		await Promise.all([
 			await trpcClient.mutation('clients:create', this.client),
 			await trpcClient.mutation('properties:create', this.property),
@@ -210,10 +210,9 @@ export class UnitForm extends Form {
 }
 
 export class TenantForm extends Form {
-	static createUrl = '/new/tenants';
-	static urlName = 'tenants';
+	static urlName: Entity = 'tenants';
 	constructor(page: Page, public data = fakeTenant()) {
-		super(page, TenantForm.createUrl, data.id, TenantForm.urlName);
+		super(page, TenantForm.urlName, data.id);
 	}
 
 	public async fill() {
@@ -235,30 +234,39 @@ export class TenantForm extends Form {
 	public basic() {
 		return [this.data.firstName, this.data.email];
 	}
+
+	async setup(trpcClient: TrpcClient) {
+		await trpcClient.mutation('tenants:create', this.data);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await trpcClient.mutation('tenants:delete', this.id);
+	}
+
+	static async cleanById(trpcClient: TrpcClient, id: string) {
+		await trpcClient.mutation(`${this.urlName}:delete`, id);
+	}
 }
 
 export class LeaseForm extends Form {
-	static createUrl = '/new/leases';
-	static urlName = 'leases';
-	constructor(
-		page: Page,
-		public data = fakeLease(),
-		public unit = fakeUnit(),
-		public property = fakeProperty(),
-		public client = fakeClient(),
-		public tenant = fakeTenant(),
-	) {
-		super(page, LeaseForm.createUrl, data.id, LeaseForm.urlName);
+	static urlName: Entity = 'leases';
+	client: ReturnType<typeof fakeClient>;
+	property: ReturnType<typeof fakeProperty>;
+	unit: ReturnType<typeof fakeUnit>;
+	tenant: ReturnType<typeof fakeTenant>;
+	constructor(page: Page, public data = fakeLease()) {
+		super(page, LeaseForm.urlName, data.id);
+		this.unit = { ...fakeUnit(), id: data.unitId };
+		this.property = { ...fakeProperty(), id: this.unit.propertyId };
+		this.client = { ...fakeClient(), id: this.property.clientId };
+		this.tenant = { ...fakeTenant(), id: data.tenantId };
 	}
 
 	public async fill() {
-		// await this.page.fill('input[name="leaseNumber"]', this.data.unitNumber);
 		await this.page.fill(
 			'input[name="monthlyRent"]',
 			this.data.monthlyRent.toString(),
 		);
-		// await this.page.fill('input[name="bath"]', this.data.bath.toString());
-		// await this.page.fill('input[name="floor"]', this.data.floor.toString());
 		await this.page.selectOption('#clientId', { label: getName(this.client) });
 		await this.page.selectOption('#propertyId', {
 			label: getAddress(this.property),
@@ -280,10 +288,40 @@ export class LeaseForm extends Form {
 		};
 	}
 
-	/**
-	 * Basic fields to check existence of after form submittal
-	 */
 	public basic() {
 		return [this.data.monthlyRent];
+	}
+
+	override async setupNew(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('clients:create', this.client),
+			await trpcClient.mutation('properties:create', this.property),
+			await trpcClient.mutation('units:create', this.unit),
+			await trpcClient.mutation('tenants:create', this.tenant),
+		]);
+	}
+
+	async setup(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('clients:create', this.client),
+			await trpcClient.mutation('properties:create', this.property),
+			await trpcClient.mutation('units:create', this.unit),
+			await trpcClient.mutation('tenants:create', this.tenant),
+			await trpcClient.mutation('leases:create', this.data),
+		]);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('leases:delete', this.data.id),
+			await trpcClient.mutation('units:delete', this.unit.id),
+			await trpcClient.mutation('properties:delete', this.property.id),
+			await trpcClient.mutation('clients:delete', this.client.id),
+			await trpcClient.mutation('tenants:delete', this.tenant.id),
+		]);
+	}
+
+	static async cleanById(trpcClient: TrpcClient, id: string) {
+		await trpcClient.mutation(`${this.urlName}:delete`, id);
 	}
 }

@@ -1,18 +1,19 @@
 import { expect, test } from '../config/test-setup.js';
-import { ClientForm, PropertyForm, UnitForm } from './form.js';
+import {
+	ClientForm,
+	LeaseForm,
+	PropertyForm,
+	TenantForm,
+	UnitForm,
+} from './form.js';
 
-const formEntities = [ClientForm, PropertyForm, UnitForm];
-
-// const test = base.extend<{form: typeof formEntities[number]}>({
-// 	form: async ({ page }, use) => {
-// 			const form = new Form(page);
-// 			await form.setupNew(trpcClient);
-// 			const url = form.getUrl('new');
-// 			await page.goto(url);
-// 			await page.evaluate(() => window.started);
-// 			await form.fill();
-// 	});
-// });
+const formEntities = [
+	ClientForm,
+	PropertyForm,
+	UnitForm,
+	TenantForm,
+	LeaseForm,
+];
 
 test.describe('Form: new ', async () => {
 	// TODO: consider deleting in an afterEach
@@ -39,7 +40,7 @@ test.describe('Form: new ', async () => {
 			await form.submit();
 			await page.waitForNavigation();
 			const re = new RegExp(
-				`/${Form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+				`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
 			);
 			await expect(page).toHaveURL(re);
 		});
