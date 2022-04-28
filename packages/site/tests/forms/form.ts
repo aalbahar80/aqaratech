@@ -1,3 +1,4 @@
+import type { TrpcClient } from '$lib/client/trpc';
 import type { Page } from '@playwright/test';
 import {
 	fakeClient,
@@ -11,13 +12,15 @@ import {
 	getAddress,
 	getName,
 } from '../../src/lib/utils/common.js';
+import type { Entity } from '../../src/lib/models/interfaces/entity.interface.js';
 
 export class Form {
 	constructor(
 		public page: Page,
 		public createUrl: string,
 		public id: string,
-		public urlName: string,
+		public urlName: Entity,
+		public data: any,
 	) {}
 
 	submit() {
@@ -42,13 +45,21 @@ export class Form {
 			throw new Error('invalid type');
 		}
 	}
+
+	async setup(trpcClient: TrpcClient) {
+		await trpcClient.mutation(`${this.urlName}:create`, this.data);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await trpcClient.mutation(`${this.urlName}:delete`, this.id);
+	}
 }
 
 export class ClientForm extends Form {
 	static createUrl = '/new/clients';
-	static urlName = 'clients';
-	constructor(page: Page, public data = fakeClient()) {
-		super(page, ClientForm.createUrl, data.id, ClientForm.urlName);
+	static urlName: Entity = 'clients';
+	constructor(page: Page, public override data = fakeClient()) {
+		super(page, ClientForm.createUrl, '123', ClientForm.urlName, fakeClient());
 	}
 
 	public async fill() {
@@ -60,6 +71,7 @@ export class ClientForm extends Form {
 		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
 
+	// TODO: move to ancestor class
 	public alter() {
 		this.data = {
 			...fakeClient(),

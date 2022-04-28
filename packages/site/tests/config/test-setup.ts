@@ -21,15 +21,22 @@ import {
 	UnitForm,
 } from '../forms/form.js';
 
+type MyOptions = {
+	defaultForm: typeof ClientForm;
+	formOption: ClientForm;
+};
+export type Newable<T> = { new (...args: any[]): T };
+
 base.use({ storageState: './config/adminStorageState.json' });
 export const test = base.extend<
-	{
+	MyOptions & {
 		clientForm: ClientForm;
 		propertyForm: PropertyForm;
 		unitForm: UnitForm;
 		tenantForm: TenantForm;
 		leaseForm: LeaseForm;
 		forms: Array<ClientForm | PropertyForm | UnitForm | TenantForm | LeaseForm>;
+		single: string;
 	},
 	{
 		trpcClient: TrpcClient;
@@ -81,11 +88,10 @@ export const test = base.extend<
 	},
 	clientForm: async ({ page, trpcClient }, use) => {
 		// override faker's id beacuse this sometimes returns the same data twice
-		const data = { ...fakeClient(), id: uuid() };
-		const clientForm = new ClientForm(page, data);
-		await trpcClient.mutation('clients:create', clientForm.data);
+		const clientForm = new ClientForm(page);
+		await clientForm.setup(trpcClient);
 		await use(clientForm);
-		await trpcClient.mutation('clients:delete', clientForm.data.id);
+		// await clientForm.clean(trpcClient);
 	},
 	propertyForm: async ({ page, trpcClient }, use) => {
 		// override faker's id beacuse this sometimes returns the same data twice
@@ -158,6 +164,23 @@ export const test = base.extend<
 	) => {
 		await use([clientForm, propertyForm, unitForm, tenantForm, leaseForm]);
 	},
+	defaultForm: [() => ClientForm, { option: true }],
+	formOption: async ({ page, trpcClient, defaultForm }, use) => {
+		const form = new defaultForm(page);
+		await form.setup(trpcClient);
+		await use(form);
+		// await form.clean(trpcClient);
+	},
+
+	// formOption: [
+	// 	async ({ page, trpcClient, defaultForm }, use) => {
+	// 		const form = new defaultForm(page);
+	// 		await form.setup(trpcClient);
+	// 		await use(form);
+	// 		await form.clean(trpcClient);
+	// 	},
+	// 	{ option: true },
+	// ],
 });
 
 export { expect } from '@playwright/test';
