@@ -87,76 +87,34 @@ export const test = base.extend<
 		await use(page);
 	},
 	clientForm: async ({ page, trpcClient }, use) => {
-		// override faker's id beacuse this sometimes returns the same data twice
 		const clientForm = new ClientForm(page);
 		await clientForm.setup(trpcClient);
 		await use(clientForm);
 		// await clientForm.clean(trpcClient);
 	},
 	propertyForm: async ({ page, trpcClient }, use) => {
-		// override faker's id beacuse this sometimes returns the same data twice
-		const client = { ...fakeClient(), id: uuid() };
-		const data = { ...fakeProperty(client.id), id: uuid() };
-		const propertyForm = new PropertyForm(page, data, client);
-		await Promise.all([
-			await trpcClient.mutation('clients:create', client),
-			await trpcClient.mutation('properties:create', data),
-		]);
-		await use(propertyForm);
-		await Promise.all([
-			await trpcClient.mutation('properties:delete', propertyForm.data.id),
-			await trpcClient.mutation('clients:delete', client.id),
-		]);
+		const form = new PropertyForm(page);
+		await form.setup(trpcClient);
+		await use(form);
+		await form.clean(trpcClient);
 	},
 	unitForm: async ({ page, trpcClient }, use) => {
-		// override faker's id beacuse this sometimes returns the same data twice
-		const client = { ...fakeClient(), id: uuid() };
-		const property = { ...fakeProperty(client.id), id: uuid() };
-		const data = { ...fakeUnit(property.id), id: uuid() };
-		const unitForm = new UnitForm(page, data, property, client);
-		await Promise.all([
-			await trpcClient.mutation('clients:create', client),
-			await trpcClient.mutation('properties:create', property),
-			await trpcClient.mutation('units:create', data),
-		]);
-		await use(unitForm);
-		await Promise.all([
-			await trpcClient.mutation('units:delete', data.id),
-			await trpcClient.mutation('properties:delete', property.id),
-			await trpcClient.mutation('clients:delete', client.id),
-		]);
+		const form = new UnitForm(page);
+		await form.setup(trpcClient);
+		await use(form);
+		await form.clean(trpcClient);
 	},
 	tenantForm: async ({ page, trpcClient }, use) => {
-		// override faker's id beacuse this sometimes returns the same data twice
-		const data = { ...fakeTenant(), id: uuid() };
-		const tenantForm = new TenantForm(page, data);
-		await trpcClient.mutation('tenants:create', tenantForm.data);
-		await use(tenantForm);
-		await trpcClient.mutation('tenants:delete', tenantForm.data.id);
+		const form = new TenantForm(page);
+		await form.setup(trpcClient);
+		await use(form);
+		await form.clean(trpcClient);
 	},
 	leaseForm: async ({ page, trpcClient }, use) => {
-		// override faker's id beacuse this sometimes returns the same data twice
-		const client = { ...fakeClient(), id: uuid() };
-		const tenant = { ...fakeTenant(), id: uuid() };
-		const property = { ...fakeProperty(client.id), id: uuid() };
-		const unit = { ...fakeUnit(property.id), id: uuid() };
-		const data = { ...fakeLease(tenant.id, unit.id), id: uuid() };
-		const leaseForm = new LeaseForm(page, data, unit, property, client);
-		await Promise.all([
-			await trpcClient.mutation('clients:create', client),
-			await trpcClient.mutation('tenants:create', tenant),
-			await trpcClient.mutation('properties:create', property),
-			await trpcClient.mutation('units:create', unit),
-			await trpcClient.mutation('leases:create', data),
-		]);
-		await use(leaseForm);
-		await Promise.all([
-			await trpcClient.mutation('leases:delete', data.id),
-			await trpcClient.mutation('units:delete', unit.id),
-			await trpcClient.mutation('properties:delete', property.id),
-			await trpcClient.mutation('clients:delete', client.id),
-			await trpcClient.mutation('tenants:delete', tenant.id),
-		]);
+		const form = new LeaseForm(page);
+		await form.setup(trpcClient);
+		await use(form);
+		await form.clean(trpcClient);
 	},
 	forms: async (
 		{ clientForm, propertyForm, unitForm, tenantForm, leaseForm },
