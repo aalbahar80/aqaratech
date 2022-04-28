@@ -18,9 +18,9 @@ const formEntities = [
 for (const Form of formEntities) {
 	test.describe(`Form: new ${Form.urlName}`, async () => {
 		// TODO: consider deleting in an afterEach
-		test.beforeEach(async ({ page, trpcClient }) => {
+		test.beforeEach(async ({ page }) => {
 			const form = new Form(page);
-			await form.setupNew(trpcClient);
+			await form.setupNew();
 			const url = form.getUrl('new');
 			await page.goto(url);
 			await page.evaluate(() => window.started);
@@ -62,9 +62,9 @@ for (const Form of formEntities) {
 for (const Form of formEntities) {
 	test.describe(`Form: edit ${Form.urlName}`, async () => {
 		// TODO: consider deleting in an afterEach
-		test.beforeEach(async ({ page, trpcClient }) => {
+		test.beforeEach(async ({ page }) => {
 			const form = new Form(page);
-			await form.setup(trpcClient);
+			await form.setup();
 			const url = form.getUrl('edit');
 			await page.goto(url);
 			await page.evaluate(() => window.started);

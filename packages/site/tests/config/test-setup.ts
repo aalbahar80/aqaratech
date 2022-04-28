@@ -1,10 +1,4 @@
-import type { TrpcClient } from '$lib/client/trpc';
-import type { AppRouter } from '$lib/server/trpc/router';
 import { test as base } from '@playwright/test';
-import * as trpc from '@trpc/client';
-import cookie from 'cookie';
-import fetch from 'cross-fetch';
-import superjson from 'superjson';
 import {
 	ClientForm,
 	LeaseForm,
@@ -16,46 +10,14 @@ import {
 export type Newable<T> = { new (...args: any[]): T };
 
 base.use({ storageState: './config/adminStorageState.json' });
-export const test = base.extend<
-	{
-		clientForm: ClientForm;
-		propertyForm: PropertyForm;
-		unitForm: UnitForm;
-		tenantForm: TenantForm;
-		leaseForm: LeaseForm;
-		single: string;
-	},
-	{
-		trpcClient: TrpcClient;
-	}
->({
-	trpcClient: [
-		async ({ browser }, use) => {
-			const context = browser.contexts()[0];
-			const baseURL = 'http://localhost:3000';
-
-			const allCookies = await context.cookies();
-			const cookies = allCookies.filter(
-				(c) => c.name === 'accessToken' || c.name === 'idToken',
-			);
-
-			const cookieStrings = cookies.map((c) =>
-				cookie.serialize(c.name, c.value),
-			);
-			const cookieString = cookieStrings.join('; ');
-
-			const trpcClient = trpc.createTRPCClient<AppRouter>({
-				fetch,
-				url: baseURL + '/trpc',
-				transformer: superjson,
-				headers: {
-					cookie: cookieString,
-				},
-			});
-			await use(trpcClient);
-		},
-		{ scope: 'worker' },
-	],
+export const test = base.extend<{
+	clientForm: ClientForm;
+	propertyForm: PropertyForm;
+	unitForm: UnitForm;
+	tenantForm: TenantForm;
+	leaseForm: LeaseForm;
+	single: string;
+}>({
 	page: async ({ page }, use) => {
 		// Ensures that sveltekit is done hydrating the page
 		// Ensures non-flaky tests
@@ -73,35 +35,35 @@ export const test = base.extend<
 		});
 		await use(page);
 	},
-	clientForm: async ({ page, trpcClient }, use) => {
+	clientForm: async ({ page }, use) => {
 		const clientForm = new ClientForm(page);
-		await clientForm.setup(trpcClient);
+		await clientForm.setup();
 		await use(clientForm);
-		await clientForm.clean(trpcClient);
+		await clientForm.clean();
 	},
-	propertyForm: async ({ page, trpcClient }, use) => {
+	propertyForm: async ({ page }, use) => {
 		const form = new PropertyForm(page);
-		await form.setup(trpcClient);
+		await form.setup();
 		await use(form);
-		await form.clean(trpcClient);
+		await form.clean();
 	},
-	unitForm: async ({ page, trpcClient }, use) => {
+	unitForm: async ({ page }, use) => {
 		const form = new UnitForm(page);
-		await form.setup(trpcClient);
+		await form.setup();
 		await use(form);
-		await form.clean(trpcClient);
+		await form.clean();
 	},
-	tenantForm: async ({ page, trpcClient }, use) => {
+	tenantForm: async ({ page }, use) => {
 		const form = new TenantForm(page);
-		await form.setup(trpcClient);
+		await form.setup();
 		await use(form);
-		await form.clean(trpcClient);
+		await form.clean();
 	},
-	leaseForm: async ({ page, trpcClient }, use) => {
+	leaseForm: async ({ page }, use) => {
 		const form = new LeaseForm(page);
-		await form.setup(trpcClient);
+		await form.setup();
 		await use(form);
-		await form.clean(trpcClient);
+		await form.clean();
 	},
 });
 

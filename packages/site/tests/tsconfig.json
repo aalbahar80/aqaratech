@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"rootDirs": ["..", "."],
 		"noUncheckedIndexedAccess": false,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"resolveJsonModule": true
 	},
 	"include": ["./**/*.ts"],
 	"exclude": ["node_modules"]
