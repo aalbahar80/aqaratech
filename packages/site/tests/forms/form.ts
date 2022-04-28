@@ -77,6 +77,9 @@ export class ClientForm extends Form {
 		await trpcClient.mutation('clients:create', this.data);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	setupNew() {}
+
 	async clean(trpcClient: TrpcClient) {
 		await trpcClient.mutation('clients:delete', this.id);
 	}
