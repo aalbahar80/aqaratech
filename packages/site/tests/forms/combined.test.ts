@@ -1,53 +1,51 @@
 import { expect, test } from '../config/test-setup.js';
-import { ClientForm, PropertyForm } from './form.js';
+import { ClientForm, PropertyForm, UnitForm } from './form.js';
 
-const formEntities = [ClientForm, PropertyForm];
+const formEntities = [ClientForm, PropertyForm, UnitForm];
+
+// const test = base.extend<{form: typeof formEntities[number]}>({
+// 	form: async ({ page }, use) => {
+// 			const form = new Form(page);
+// 			await form.setupNew(trpcClient);
+// 			const url = form.getUrl('new');
+// 			await page.goto(url);
+// 			await page.evaluate(() => window.started);
+// 			await form.fill();
+// 	});
+// });
 
 test.describe('Form: new ', async () => {
 	// TODO: consider deleting in an afterEach
 	for (const Form of formEntities) {
-		test(`${Form.urlName} returns 200`, async ({ page, trpcClient }) => {
+		test.beforeEach(async ({ page, trpcClient }) => {
 			const form = new Form(page);
 			await form.setupNew(trpcClient);
 			const url = form.getUrl('new');
 			await page.goto(url);
 			await page.evaluate(() => window.started);
 			await form.fill();
+		});
+
+		test(`${Form.urlName} returns 200`, async ({ page }) => {
+			const form = new Form(page);
 			const request = await form.getRequest();
 			const response = await request.response();
 			expect(response?.status()).toBe(200);
 			await page.waitForNavigation();
 		});
 
-		test(`${Form.urlName} redirects to details page`, async ({
-			page,
-			trpcClient,
-		}) => {
+		test(`${Form.urlName} redirects to details page`, async ({ page }) => {
 			const form = new Form(page);
-			await form.setupNew(trpcClient);
-			const url = form.getUrl('new');
-			await page.goto(url);
-			await page.evaluate(() => window.started);
-			await form.fill();
-
 			await form.submit();
+			await page.waitForNavigation();
 			const re = new RegExp(
-				`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+				`/${Form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
 			);
 			await expect(page).toHaveURL(re);
 		});
 
-		test(`${Form.urlName} basic details are correct`, async ({
-			page,
-			trpcClient,
-		}) => {
+		test(`${Form.urlName} basic details are correct`, async ({ page }) => {
 			const form = new Form(page);
-			await form.setupNew(trpcClient);
-			const url = form.getUrl('new');
-			await page.goto(url);
-			await page.evaluate(() => window.started);
-			await form.fill();
-
 			await form.submit();
 			await page.waitForNavigation();
 

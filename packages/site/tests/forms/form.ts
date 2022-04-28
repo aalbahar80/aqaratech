@@ -147,15 +147,13 @@ export class PropertyForm extends Form {
 }
 
 export class UnitForm extends Form {
-	static createUrl = '/new/units';
-	static urlName = 'units';
-	constructor(
-		page: Page,
-		public data = fakeUnit(),
-		public property = fakeProperty(),
-		public client = fakeClient(),
-	) {
-		super(page, UnitForm.createUrl, data.id, UnitForm.urlName);
+	static urlName: Entity = 'units';
+	client: ReturnType<typeof fakeClient>;
+	property: ReturnType<typeof fakeProperty>;
+	constructor(page: Page, public data = fakeUnit()) {
+		super(page, UnitForm.urlName, data.id);
+		this.property = { ...fakeProperty(), id: data.propertyId };
+		this.client = { ...fakeClient(), id: this.property.clientId };
 	}
 
 	public async fill() {
@@ -164,7 +162,7 @@ export class UnitForm extends Form {
 		await this.page.fill('input[name="bath"]', this.data.bath.toString());
 		await this.page.fill('input[name="floor"]', this.data.floor.toString());
 		await this.page.selectOption('#clientId', { label: getName(this.client) });
-		await this.page.selectOption('#unitId', {
+		await this.page.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
 	}
@@ -181,6 +179,33 @@ export class UnitForm extends Form {
 	 */
 	public basic() {
 		return [this.data.unitNumber];
+	}
+
+	async setupNew(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('clients:create', this.client),
+			await trpcClient.mutation('properties:create', this.property),
+		]);
+	}
+
+	async setup(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('clients:create', this.client),
+			await trpcClient.mutation('properties:create', this.property),
+			await trpcClient.mutation('units:create', this.data),
+		]);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('units:delete', this.data.id),
+			await trpcClient.mutation('properties:delete', this.property.id),
+			await trpcClient.mutation('clients:delete', this.client.id),
+		]);
+	}
+
+	static async cleanById(trpcClient: TrpcClient, id: string) {
+		await trpcClient.mutation(`${this.urlName}:delete`, id);
 	}
 }
 
