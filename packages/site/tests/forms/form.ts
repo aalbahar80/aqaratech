@@ -265,10 +265,12 @@ export class LeaseForm extends Form {
 	public async fill() {
 		await this.page.waitForLoadState('networkidle');
 		await this.page.selectOption('#tenantId', { label: getName(this.tenant) });
-		await this.page.selectOption('#propertyId', {
-			label: getAddress(this.property),
-		});
-		await this.page.waitForLoadState('networkidle');
+		if (!this.page.url().includes('edit')) {
+			await this.page.selectOption('#propertyId', {
+				label: getAddress(this.property),
+			});
+			await this.page.waitForLoadState('networkidle');
+		}
 		await this.page.selectOption('#unitId', {
 			label: [this.unit.type, this.unit.unitNumber]
 				.filter((str) => str)
