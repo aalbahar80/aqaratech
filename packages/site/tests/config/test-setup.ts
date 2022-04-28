@@ -9,7 +9,6 @@ import {
 
 export type Newable<T> = { new (...args: any[]): T };
 
-base.use({ storageState: './config/adminStorageState.json' });
 export const test = base.extend<{
 	clientForm: ClientForm;
 	propertyForm: PropertyForm;

@@ -15,6 +15,7 @@ const formEntities = [
 	LeaseForm,
 ];
 
+test.use({ storageState: './config/adminStorageState.json' });
 for (const Form of formEntities) {
 	test.describe(`Form: new ${Form.urlName}`, async () => {
 		// TODO: consider deleting in an afterEach

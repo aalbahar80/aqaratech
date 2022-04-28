@@ -11,7 +11,6 @@ const tokens = auth.cookies.filter(
 );
 const cookieStrings = tokens.map((c) => cookie.serialize(c.name, c.value));
 const cookieString = cookieStrings.join('; ');
-
 export const trpc = TRPC.createTRPCClient<AppRouter>({
 	fetch,
 	url: baseUrl + '/trpc',

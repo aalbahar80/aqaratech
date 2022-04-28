@@ -2,6 +2,7 @@ import { preselected } from '../utils.js';
 import { getAddress, getName } from '../../src/lib/utils/common.js';
 import { expect, test } from '../config/test-setup.js';
 
+test.use({ storageState: './config/adminStorageState.json' });
 test.describe('Edit property form', async () => {
 	test.beforeEach(async ({ page, propertyForm }) => {
 		await page.goto(`/properties/${propertyForm.data.id}/edit`);
