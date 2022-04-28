@@ -1,5 +1,7 @@
 /// <reference types="node" />
 
+import type { PrismaClient } from '@prisma/client';
+
 declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
@@ -74,6 +76,9 @@ declare global {
 			readonly VERCEL_GIT_COMMIT_REF: string;
 		}
 	}
+
+	// eslint-disable-next-line no-var
+	var prismaClient: PrismaClient;
 }
 
 // If this file has no import/export statements (i.e. is a script)
