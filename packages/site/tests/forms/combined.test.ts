@@ -1,37 +1,33 @@
-import { ClientForm, PropertyForm, UnitForm } from './form.js';
 import { expect, test } from '../config/test-setup.js';
+import { ClientForm, PropertyForm } from './form.js';
 
-const formEntities = [ClientForm, PropertyForm, UnitForm];
-const types = ['new', 'edit'] as const;
-const forms = formEntities.flatMap((form, idx) =>
-	types.map((type) => ({ form, type, idx })),
-);
+const formEntities = [ClientForm, PropertyForm];
 
-test.describe('Form', async () => {
-	forms.forEach(async (formType) => {
-		test(`${formType.type} ${formType.form.urlName} returns 200`, async ({
-			page,
-			forms,
-		}) => {
-			const form = forms[formType.idx];
-			await page.goto(form.getUrl(formType.type));
-			// @ts-ignore
-			await page.evaluate(() => window.started); // waits for hydration
+test.describe('Form: new ', async () => {
+	// TODO: consider deleting in an afterEach
+	for (const Form of formEntities) {
+		test(`${Form.urlName} returns 200`, async ({ page, trpcClient }) => {
+			const form = new Form(page);
+			await form.setupNew(trpcClient);
+			const url = form.getUrl('new');
+			await page.goto(url);
+			await page.evaluate(() => window.started);
 			await form.fill();
-
 			const request = await form.getRequest();
 			const response = await request.response();
 			expect(response?.status()).toBe(200);
+			await page.waitForNavigation();
 		});
 
-		test(`${formType.type} ${formType.form.urlName} redirects to detail page`, async ({
+		test(`${Form.urlName} redirects to details page`, async ({
 			page,
-			forms,
+			trpcClient,
 		}) => {
-			const form = forms[formType.idx];
-			await page.goto(form.getUrl(formType.type));
-			// @ts-ignore
-			await page.evaluate(() => window.started); // waits for hydration
+			const form = new Form(page);
+			await form.setupNew(trpcClient);
+			const url = form.getUrl('new');
+			await page.goto(url);
+			await page.evaluate(() => window.started);
 			await form.fill();
 
 			await form.submit();
@@ -41,24 +37,45 @@ test.describe('Form', async () => {
 			await expect(page).toHaveURL(re);
 		});
 
-		test(`${formType.type} ${formType.form.urlName} some details are correct`, async ({
+		test(`${Form.urlName} basic details are correct`, async ({
 			page,
-			forms,
+			trpcClient,
 		}) => {
-			const form = forms[formType.idx];
-			await page.goto(form.getUrl(formType.type));
-			// @ts-ignore
-			await page.evaluate(() => window.started); // waits for hydration
+			const form = new Form(page);
+			await form.setupNew(trpcClient);
+			const url = form.getUrl('new');
+			await page.goto(url);
+			await page.evaluate(() => window.started);
 			await form.fill();
 
 			await form.submit();
 			await page.waitForNavigation();
 
-			form.basic().forEach(async (b) => {
+			for (const b in form.basic()) {
 				const el = page.locator(`text=${b}`).first();
 				const re = new RegExp(`${b}`);
 				expect(await el.textContent()).toMatch(re);
-			});
+			}
 		});
-	});
+	}
+});
+
+test.describe('Form: edit ', async () => {
+	for (const entity of formEntities) {
+		test.use({
+			defaultForm: async ({}, use) => {
+				await use(entity);
+			},
+		});
+		test(`${entity.urlName}: returns 200`, async ({ page, formOption }) => {
+			const url = formOption.getUrl('edit');
+			await page.goto(url);
+			await page.evaluate(() => window.started);
+			formOption.alter();
+			await formOption.fill();
+			const request = await formOption.getRequest();
+			const response = await request.response();
+			expect(response?.status()).toBe(200);
+		});
+	}
 });

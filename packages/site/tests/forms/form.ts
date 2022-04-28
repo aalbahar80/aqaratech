@@ -80,6 +80,10 @@ export class ClientForm extends Form {
 	async clean(trpcClient: TrpcClient) {
 		await trpcClient.mutation('clients:delete', this.id);
 	}
+
+	static async cleanById(trpcClient: TrpcClient, id: string) {
+		await trpcClient.mutation(`${this.urlName}:delete`, id);
+	}
 }
 
 export class PropertyForm extends Form {
@@ -116,6 +120,10 @@ export class PropertyForm extends Form {
 		return [this.data.area];
 	}
 
+	async setupNew(trpcClient: TrpcClient) {
+		await trpcClient.mutation('clients:create', this.client);
+	}
+
 	async setup(trpcClient: TrpcClient) {
 		await Promise.all([
 			await trpcClient.mutation('clients:create', this.client),
@@ -124,12 +132,14 @@ export class PropertyForm extends Form {
 	}
 
 	async clean(trpcClient: TrpcClient) {
-		await trpcClient.mutation('properties:delete', this.data.id);
-		await trpcClient.mutation('clients:delete', this.client.id);
-		// await Promise.all([
-		// 	await trpcClient.mutation('properties:delete', this.data.id),
-		// 	await trpcClient.mutation('clients:delete', this.client.id),
-		// ]);
+		await Promise.all([
+			await trpcClient.mutation('properties:delete', this.data.id),
+			await trpcClient.mutation('clients:delete', this.client.id),
+		]);
+	}
+
+	static async cleanById(trpcClient: TrpcClient, id: string) {
+		await trpcClient.mutation(`${this.urlName}:delete`, id);
 	}
 }
 
