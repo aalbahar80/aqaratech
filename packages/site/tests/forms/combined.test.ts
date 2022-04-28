@@ -12,12 +12,12 @@ const formEntities = [
 	PropertyForm,
 	UnitForm,
 	TenantForm,
-	LeaseForm,
+	// LeaseForm,
 ];
 
-test.describe('Form: new ', async () => {
-	// TODO: consider deleting in an afterEach
-	for (const Form of formEntities) {
+for (const Form of formEntities) {
+	test.describe(`Form: new ${Form.urlName}`, async () => {
+		// TODO: consider deleting in an afterEach
 		test.beforeEach(async ({ page, trpcClient }) => {
 			const form = new Form(page);
 			await form.setupNew(trpcClient);
@@ -56,8 +56,8 @@ test.describe('Form: new ', async () => {
 				expect(await el.textContent()).toMatch(re);
 			}
 		});
-	}
-});
+	});
+}
 
 test.describe('Form: edit ', async () => {
 	for (const entity of formEntities) {
