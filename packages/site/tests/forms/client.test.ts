@@ -1,7 +1,5 @@
 import { expect, test } from '../config/test-setup.js';
 
-test.use({ storageState: './config/adminStorageState.json' });
-
 test.describe(`New client form`, async () => {
 	test.beforeEach(async ({ page, clientForm }) => {
 		await page.goto('/new/clients');

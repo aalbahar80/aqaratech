@@ -1,8 +1,6 @@
 import { ClientForm, PropertyForm, UnitForm } from './form.js';
 import { expect, test } from '../config/test-setup.js';
 
-test.use({ storageState: './config/adminStorageState.json' });
-
 const formEntities = [ClientForm, PropertyForm, UnitForm];
 const types = ['new', 'edit'] as const;
 const forms = formEntities.flatMap((form, idx) =>
