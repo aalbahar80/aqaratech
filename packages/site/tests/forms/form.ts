@@ -15,13 +15,12 @@ import {
 import type { Entity } from '../../src/lib/models/interfaces/entity.interface.js';
 
 export class Form {
-	constructor(
-		public page: Page,
-		public createUrl: string,
-		public id: string,
-		public urlName: Entity,
-		public data: any,
-	) {}
+	createUrl: string;
+	editUrl: string;
+	constructor(public page: Page, public urlName: Entity, public id: string) {
+		this.editUrl = `${this.urlName}/${this.id}/edit`;
+		this.createUrl = `/new/${this.urlName}`;
+	}
 
 	submit() {
 		return this.page.click('button[type="submit"]');
@@ -40,7 +39,7 @@ export class Form {
 		if (type === 'new') {
 			return this.createUrl;
 		} else if (type === 'edit') {
-			return `/${this.urlName}/${this.id}/edit`;
+			return this.editUrl;
 		} else {
 			throw new Error('invalid type');
 		}
@@ -48,10 +47,9 @@ export class Form {
 }
 
 export class ClientForm extends Form {
-	static createUrl = '/new/clients';
 	static urlName: Entity = 'clients';
-	constructor(page: Page, public override data = fakeClient()) {
-		super(page, ClientForm.createUrl, '123', ClientForm.urlName, fakeClient());
+	constructor(page: Page, public data = fakeClient()) {
+		super(page, ClientForm.urlName, data.id);
 	}
 
 	public async fill() {
@@ -85,20 +83,11 @@ export class ClientForm extends Form {
 }
 
 export class PropertyForm extends Form {
-	static createUrl = '/new/properties';
 	static urlName: Entity = 'properties';
-	constructor(
-		page: Page,
-		public override data = fakeProperty(),
-		public client = fakeClient(),
-	) {
-		super(
-			page,
-			PropertyForm.createUrl,
-			data.id,
-			PropertyForm.urlName,
-			fakeProperty(),
-		);
+	client: ReturnType<typeof fakeClient>;
+	constructor(page: Page, public data = fakeProperty()) {
+		super(page, PropertyForm.urlName, data.id);
+		this.client = { ...fakeClient(), id: data.clientId };
 	}
 
 	public async fill() {
@@ -135,10 +124,12 @@ export class PropertyForm extends Form {
 	}
 
 	async clean(trpcClient: TrpcClient) {
-		await Promise.all([
-			await trpcClient.mutation('properties:delete', this.data.id),
-			await trpcClient.mutation('clients:delete', this.client.id),
-		]);
+		await trpcClient.mutation('properties:delete', this.data.id);
+		await trpcClient.mutation('clients:delete', this.client.id);
+		// await Promise.all([
+		// 	await trpcClient.mutation('properties:delete', this.data.id),
+		// 	await trpcClient.mutation('clients:delete', this.client.id),
+		// ]);
 	}
 }
 

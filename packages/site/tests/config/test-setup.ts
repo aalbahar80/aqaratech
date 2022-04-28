@@ -22,8 +22,8 @@ import {
 } from '../forms/form.js';
 
 type MyOptions = {
-	defaultForm: typeof ClientForm;
-	formOption: ClientForm;
+	defaultForm: typeof ClientForm | typeof PropertyForm;
+	formOption: ClientForm | PropertyForm;
 };
 export type Newable<T> = { new (...args: any[]): T };
 
@@ -164,12 +164,16 @@ export const test = base.extend<
 	) => {
 		await use([clientForm, propertyForm, unitForm, tenantForm, leaseForm]);
 	},
-	defaultForm: [() => ClientForm, { option: true }],
+	// defaultForm: [() => ClientForm, { option: true }],
+	defaultForm: async ({}, use) => {
+		// await use(PropertyForm);
+		await use(ClientForm);
+	},
 	formOption: async ({ page, trpcClient, defaultForm }, use) => {
 		const form = new defaultForm(page);
 		await form.setup(trpcClient);
 		await use(form);
-		// await form.clean(trpcClient);
+		await form.clean(trpcClient);
 	},
 
 	// formOption: [
