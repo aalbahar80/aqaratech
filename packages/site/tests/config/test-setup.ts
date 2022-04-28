@@ -5,14 +5,6 @@ import * as trpc from '@trpc/client';
 import cookie from 'cookie';
 import fetch from 'cross-fetch';
 import superjson from 'superjson';
-import { v4 as uuid } from 'uuid';
-import {
-	fakeClient,
-	fakeProperty,
-	fakeUnit,
-	fakeTenant,
-	fakeLease,
-} from '../../../seed/generators.js';
 import {
 	ClientForm,
 	LeaseForm,
@@ -21,21 +13,16 @@ import {
 	UnitForm,
 } from '../forms/form.js';
 
-type MyOptions = {
-	defaultForm: typeof ClientForm | typeof PropertyForm;
-	formOption: ClientForm | PropertyForm;
-};
 export type Newable<T> = { new (...args: any[]): T };
 
 base.use({ storageState: './config/adminStorageState.json' });
 export const test = base.extend<
-	MyOptions & {
+	{
 		clientForm: ClientForm;
 		propertyForm: PropertyForm;
 		unitForm: UnitForm;
 		tenantForm: TenantForm;
 		leaseForm: LeaseForm;
-		forms: Array<ClientForm | PropertyForm | UnitForm | TenantForm | LeaseForm>;
 		single: string;
 	},
 	{
@@ -90,7 +77,7 @@ export const test = base.extend<
 		const clientForm = new ClientForm(page);
 		await clientForm.setup(trpcClient);
 		await use(clientForm);
-		// await clientForm.clean(trpcClient);
+		await clientForm.clean(trpcClient);
 	},
 	propertyForm: async ({ page, trpcClient }, use) => {
 		const form = new PropertyForm(page);
@@ -116,33 +103,6 @@ export const test = base.extend<
 		await use(form);
 		await form.clean(trpcClient);
 	},
-	forms: async (
-		{ clientForm, propertyForm, unitForm, tenantForm, leaseForm },
-		use,
-	) => {
-		await use([clientForm, propertyForm, unitForm, tenantForm, leaseForm]);
-	},
-	// defaultForm: [() => ClientForm, { option: true }],
-	defaultForm: async ({}, use) => {
-		// await use(PropertyForm);
-		await use(ClientForm);
-	},
-	formOption: async ({ page, trpcClient, defaultForm }, use) => {
-		const form = new defaultForm(page);
-		await form.setup(trpcClient);
-		await use(form);
-		await form.clean(trpcClient);
-	},
-
-	// formOption: [
-	// 	async ({ page, trpcClient, defaultForm }, use) => {
-	// 		const form = new defaultForm(page);
-	// 		await form.setup(trpcClient);
-	// 		await use(form);
-	// 		await form.clean(trpcClient);
-	// 	},
-	// 	{ option: true },
-	// ],
 });
 
 export { expect } from '@playwright/test';
