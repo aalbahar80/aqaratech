@@ -1,4 +1,4 @@
-import { ClientForm } from './form';
+import { ClientForm, PropertyForm } from './form';
 import { expect, test } from '../config/test-setup.js';
 
 test.use({
@@ -6,15 +6,18 @@ test.use({
 	defaultForm: async ({}, use) => {
 		// Read locale from some configuration file.
 		// const locale = await fs.promises.readFile('test-locale', 'utf-8');
-		await use(ClientForm);
+		// await use(ClientForm);
+		await use(PropertyForm);
 	},
 });
+
 test('use formOption', async ({ formOption, page }) => {
 	// const form = new formOption(page);
 	// await form.setup(trpcClient);
 	// await use(form);
 	// await form.clean(trpcClient);
-	await page.goto('/new/clients');
+	// await page.goto('/new/clients');
+	await page.goto(formOption.getUrl('new'));
 	// @ts-ignore
 	await page.evaluate(() => window.started); // waits for hydration
 	await formOption.fill();

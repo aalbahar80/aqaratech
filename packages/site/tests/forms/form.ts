@@ -45,14 +45,6 @@ export class Form {
 			throw new Error('invalid type');
 		}
 	}
-
-	async setup(trpcClient: TrpcClient) {
-		await trpcClient.mutation(`${this.urlName}:create`, this.data);
-	}
-
-	async clean(trpcClient: TrpcClient) {
-		await trpcClient.mutation(`${this.urlName}:delete`, this.id);
-	}
 }
 
 export class ClientForm extends Form {
@@ -82,17 +74,31 @@ export class ClientForm extends Form {
 	public basic() {
 		return [this.data.firstName, this.data.email];
 	}
+
+	async setup(trpcClient: TrpcClient) {
+		await trpcClient.mutation('clients:create', this.data);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await trpcClient.mutation('clients:delete', this.id);
+	}
 }
 
 export class PropertyForm extends Form {
 	static createUrl = '/new/properties';
-	static urlName = 'properties';
+	static urlName: Entity = 'properties';
 	constructor(
 		page: Page,
-		public data = fakeProperty(),
+		public override data = fakeProperty(),
 		public client = fakeClient(),
 	) {
-		super(page, PropertyForm.createUrl, data.id, PropertyForm.urlName);
+		super(
+			page,
+			PropertyForm.createUrl,
+			data.id,
+			PropertyForm.urlName,
+			fakeProperty(),
+		);
 	}
 
 	public async fill() {
@@ -103,6 +109,7 @@ export class PropertyForm extends Form {
 		await this.page.fill('input[name="street"]', this.data.street);
 		await this.page.fill('input[name="avenue"]', this.data.avenue ?? '');
 		await this.page.fill('input[name="number"]', this.data.number);
+		await this.page.waitForLoadState('networkidle');
 		await this.page.selectOption('#clientId', { label: getName(this.client) });
 	}
 
@@ -118,6 +125,20 @@ export class PropertyForm extends Form {
 	 */
 	public basic() {
 		return [this.data.area];
+	}
+
+	async setup(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('clients:create', this.client),
+			await trpcClient.mutation('properties:create', this.data),
+		]);
+	}
+
+	async clean(trpcClient: TrpcClient) {
+		await Promise.all([
+			await trpcClient.mutation('properties:delete', this.data.id),
+			await trpcClient.mutation('clients:delete', this.client.id),
+		]);
 	}
 }
 
