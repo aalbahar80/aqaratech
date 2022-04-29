@@ -32,8 +32,7 @@ const config: PlaywrightTestConfig = {
 	/* Opt out of parallel tests on CI. */
 	// workers: process.env.CI ? 1 : undefined,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	// reporter: 'html',
-	reporter: 'list',
+	reporter: process.env.CI ? 'list' : 'html',
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		// headless: false,
@@ -44,17 +43,23 @@ const config: PlaywrightTestConfig = {
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'retain-on-failure',
-		launchOptions: {
-			args: [
-				'--window-position=3840,500',
-				// '--window-size="3840,5000"',
-				// '--window-size=1500,1500',
-			],
-		},
+		// launchOptions: {
+		// 	args: [
+		// 		'--window-position=3840,500',
+		// 		// '--window-size="3840,5000"',
+		// 		// '--window-size=1500,1500',
+		// 	],
+		// },
 	},
 
 	/* Configure projects for major browsers */
 	projects: [
+		{
+			name: 'webkit',
+			use: {
+				...devices['Desktop Safari'],
+			},
+		},
 		{
 			name: 'chromium',
 			use: {
@@ -62,33 +67,26 @@ const config: PlaywrightTestConfig = {
 			},
 		},
 
-		{
-			name: 'firefox',
-			use: {
-				...devices['Desktop Firefox'],
-			},
-		},
-
-		{
-			name: 'webkit',
-			use: {
-				...devices['Desktop Safari'],
-			},
-		},
+		// {
+		// 	name: 'firefox',
+		// 	use: {
+		// 		...devices['Desktop Firefox'],
+		// 	},
+		// },
 
 		/* Test against mobile viewports. */
-		{
-			name: 'Mobile Chrome',
-			use: {
-				...devices['Pixel 5'],
-			},
-		},
-		{
-			name: 'Mobile Safari',
-			use: {
-				...devices['iPhone 12'],
-			},
-		},
+		// {
+		// 	name: 'Mobile Chrome',
+		// 	use: {
+		// 		...devices['Pixel 5'],
+		// 	},
+		// },
+		// {
+		// 	name: 'Mobile Safari',
+		// 	use: {
+		// 		...devices['iPhone 12'],
+		// 	},
+		// },
 
 		/* Test against branded browsers. */
 		// {
