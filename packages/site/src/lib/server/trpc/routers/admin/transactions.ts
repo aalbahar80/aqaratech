@@ -88,6 +88,13 @@ export const transactions = createRouter()
 		input: z.string(),
 		resolve: async ({ input }) => {
 			// const res = await fetch(`/transactions/${input}/next-reminder`);
+			if (
+				process.env.VERCEL_GIT_COMMIT_REF === 'stage' ||
+				process.env.VERCEL_ENV === 'production'
+			) {
+				// TODO: REMOVE IN PRODUCTION
+				return new Date().toString();
+			}
 			const res = await fetch(`${url}/transactions/${input}/next-reminder`);
 			if (!res.ok) {
 				console.error('Unable to get next reminder');
