@@ -1,8 +1,7 @@
 {
-  "name": "tests",
+  "name": "@self/site-test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "lint": "tsc --noEmit --project tsconfig.json",
     "test": "playwright test"
@@ -12,6 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.21.1",
+    "@self/seed": "workspace:^0.0.1",
+    "@self/site": "workspace:^0.0.1",
     "cross-fetch": "^3.1.5"
   }
 }

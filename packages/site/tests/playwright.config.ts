@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig = {
 		 */
 		timeout: 5000,
 	},
-	// globalSetup: './config/global-setup.ts',
+	globalSetup: './config/global-setup.ts',
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	forbidOnly: !!process.env.CI,
 	/* Retry on CI only */
@@ -61,12 +61,12 @@ const config: PlaywrightTestConfig = {
 			},
 		},
 
-		// {
-		// 	name: 'firefox',
-		// 	use: {
-		// 		...devices['Desktop Firefox'],
-		// 	},
-		// },
+		{
+			name: 'firefox',
+			use: {
+				...devices['Desktop Firefox'],
+			},
+		},
 
 		// {
 		// 	name: 'webkit',
@@ -108,10 +108,10 @@ const config: PlaywrightTestConfig = {
 	// outputDir: 'test-results/',
 
 	/* Run your local dev server before starting the tests */
-	// webServer: {
-	// 	port: 3000,
-	// 	command: 'pnpm run build && pnpm run preview',
-	// },
+	webServer: {
+		port: 3000,
+		command: 'cd ../ && pnpm run build && pnpm run preview',
+	},
 };
 
 export default config;

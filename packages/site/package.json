@@ -1,5 +1,5 @@
 {
-  "name": "re-admin-panel",
+  "name": "@self/site",
   "version": "0.0.1",
   "prisma": {
     "seed": "node --loader ts-node/esm prisma/seed.ts"
