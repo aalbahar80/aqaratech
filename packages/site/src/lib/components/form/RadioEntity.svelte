@@ -82,7 +82,7 @@
 				let:checked
 				let:active
 			>
-				<div class="flex flex-1">
+				<div class="flex flex-1" id={`${option.fieldName}-radio`}>
 					<div class="flex flex-col">
 						<RadioGroupLabel
 							as="span"

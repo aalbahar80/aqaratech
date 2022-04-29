@@ -86,6 +86,7 @@
 	<form
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
+		data-test={!noErrorMsg ? 'error' : 'ok'}
 	>
 		<div class="h-0 flex-1">
 			<div class="flex flex-col justify-between">

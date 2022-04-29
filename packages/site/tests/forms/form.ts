@@ -347,21 +347,14 @@ export class ExpenseForm extends Form {
 
 	public async fill() {
 		await this.page.waitForLoadState('networkidle');
-		// await this.page.fill('input[name="amount"]', this.data.amount.toString());
-		// await this.page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
-		// await this.page.selectOption('#category', { label: this.data.category });
-		// await this.page.selectOption('#memo', { label: this.data.memo });
-		// if (!this.page.url().includes('edit')) {
-		// 	await this.page.selectOption('#propertyId', {
-		// 		label: getAddress(this.property),
-		// 	});
-		// 	await this.page.waitForLoadState('networkidle');
-		// }
-		// await this.page.selectOption('#unitId', {
-		// 	label: [this.unit.type, this.unit.unitNumber]
-		// 		.filter((str) => str)
-		// 		.join(' '),
-		// });
+		await this.page.fill('input[name="amount"]', this.data.amount.toString());
+		await this.page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
+		await this.page.fill('input[name="memo"]', this.data.memo);
+		await this.page.selectOption('#category', { index: 0 });
+		await this.page.selectOption('#clientId', { index: 0 });
+		await this.page.selectOption('#propertyId', { index: 0 });
+		await this.page.selectOption('#unitId', { index: 0 });
+		await this.page.locator('#clientId-radio').click();
 	}
 
 	public alter() {
