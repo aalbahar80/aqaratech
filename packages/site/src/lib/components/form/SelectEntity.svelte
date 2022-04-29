@@ -49,7 +49,7 @@
 	});
 
 	const dispatch = createEventDispatcher<{
-		select: Option['value'];
+		select: Option;
 	}>();
 </script>
 
@@ -71,7 +71,7 @@
 		{disabled}
 		bind:value={selected}
 		on:change={() => {
-			dispatch('select', selected?.value);
+			dispatch('select', selected);
 		}}
 	>
 		{#each options as option (option.value)}

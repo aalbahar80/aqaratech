@@ -30,6 +30,12 @@ export const expenses = createRouter()
 				where: {
 					id,
 				},
+				include: {
+					client: true,
+					property: true,
+					unit: true,
+					maintenanceOrder: true,
+				},
 			});
 			if (data) return data;
 			throw new TRPCError({ code: 'NOT_FOUND' });

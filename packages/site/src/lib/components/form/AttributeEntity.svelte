@@ -5,6 +5,7 @@
 	} from '$lib/models/interfaces/common/option.interface';
 	import RadioEntity from './RadioEntity.svelte';
 	import SelectEntity from './SelectEntity.svelte';
+	import { ClientModel, PropertyModel, UnitModel } from '$models/interfaces';
 
 	export let invalid = false;
 	export let invalidText: string | undefined = undefined;
@@ -14,11 +15,53 @@
 	// Ensure parent is aware of generic type emitted from RadioEntity
 	type $$Events = RadioEntity<Field>['$$events_def'];
 
+	interface Predefined {
+		client?: {
+			id: string;
+			firstName: string;
+			lastName: string;
+		};
+		property?: {
+			id: string;
+			area: string | null;
+			block: string | null;
+			street: string | null;
+			number: string | null;
+		};
+		unit?: {
+			id: string;
+			type: string | null;
+			unitNumber: string;
+		};
+	}
+	export let data: Predefined | undefined = undefined;
+
 	// # Begin select config #
 	let client: SelectedOption;
 	let property: SelectedOption;
 	let unit: SelectedOption;
 	// # End select config #
+
+	if (data) {
+		client = data.client
+			? {
+					value: data.client.id,
+					label: ClientModel.getLabel(data.client),
+			  }
+			: undefined;
+		property = data.property
+			? {
+					value: data.property.id,
+					label: PropertyModel.getLabel(data.property),
+			  }
+			: undefined;
+		unit = data.unit
+			? {
+					value: data.unit.id,
+					label: UnitModel.getLabel(data.unit),
+			  }
+			: undefined;
+	}
 
 	// # Begin radio config #
 	interface RadioOption extends Option {
@@ -59,29 +102,37 @@
 
 <SelectEntity
 	field="clientId"
-	bind:selected={client}
+	selected={client}
 	on:select={(e) => {
+		console.log({ e }, 'AttributeEntity.svelte ~ 108');
+		client = e.detail;
 		propertySelect.clear();
-		propertySelect.getOptions(e.detail);
+		propertySelect.getOptions(client.value);
 	}}
 />
 <SelectEntity
 	bind:this={propertySelect}
 	field="propertyId"
 	initialParent={client?.value ?? undefined}
-	bind:selected={property}
+	selected={property}
 	disabled={!client?.value}
 	on:select={(e) => {
+		console.log({ e }, 'AttributeEntity.svelte ~ 119');
+		property = e.detail;
 		unitSelect.clear();
-		unitSelect.getOptions(e.detail);
+		unitSelect.getOptions(property.value);
 	}}
 />
 <SelectEntity
 	bind:this={unitSelect}
 	field="unitId"
-	bind:selected={unit}
+	selected={unit}
 	initialParent={property?.value ?? undefined}
 	disabled={!property?.value || !client?.value}
+	on:select={(e) => {
+		unit = e.detail;
+		console.log({ e }, 'AttributeEntity.svelte ~ 133');
+	}}
 />
 
 <RadioEntity

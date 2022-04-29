@@ -23,7 +23,9 @@
 	export let invalid = false;
 	export let invalidText: string | undefined;
 
-	let selected: SelectedRadioOption;
+	let selected: SelectedRadioOption = options[2];
+	// selected = options[2];
+	console.log({ selected }, 'RadioEntity.svelte ~ 27');
 
 	const dispatch = createEventDispatcher<{
 		select: RadioOption[];
