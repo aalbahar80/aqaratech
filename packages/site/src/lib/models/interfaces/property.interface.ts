@@ -34,7 +34,10 @@ const schema = z.object({
 });
 
 const getOptions = async ({ parentId }: { parentId?: string | undefined }) => {
-	const result = await trpc.query('properties:list', { clientId: parentId });
+	const result = await trpc.query('properties:list', {
+		clientId: parentId,
+		size: 1000, // TODO replace this after implementing combobox search
+	});
 	const options = result.data.map((item) => ({
 		value: item.id,
 		label: getLabel(item),

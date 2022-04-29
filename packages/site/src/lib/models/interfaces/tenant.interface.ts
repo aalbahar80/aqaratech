@@ -49,7 +49,10 @@ export const schema = z.object({
 const getLabel = (item: ILabel) => getName(item);
 
 const getOptions = async ({ query }: { query?: string | undefined }) => {
-	const result = await trpc.query('tenants:search', { query });
+	const result = await trpc.query('tenants:search', {
+		query,
+		size: 1000, // TODO replace this after implementing combobox search
+	});
 	const options = result.map((item) => ({
 		value: item.id,
 		label: getLabel(item),

@@ -2,6 +2,7 @@ import { getAddress, getName } from '../../src/lib/utils/common.js';
 import { test } from '../config/test-setup.js';
 import { preselected } from '../utils.js';
 
+test.use({ storageState: './config/adminStorageState.json' });
 test('new lease: preselected property from URL', async ({ page, unitForm }) => {
 	await page.goto(`/new/leases?unitId=${unitForm.id}`);
 	await page.evaluate(() => window.started);
