@@ -8,6 +8,10 @@ import {
 
 faker.setLocale("ar");
 
+export const timespan = 4;
+const createdAt = () => faker.date.past(timespan);
+const updatedAt = () => faker.date.past(timespan);
+
 export const fakeEmail = () => {
 	faker.setLocale("en");
 	const email = faker.internet.email();
@@ -52,9 +56,6 @@ export const fakeTenant = () => ({
 		.toString(),
 	residencyEnd: faker.date.future(2),
 });
-
-const createdAt = () => faker.date.past(4);
-const updatedAt = () => faker.date.past(4);
 
 export const fakeUnit = (propertyId?: string) => ({
 	id: faker.datatype.uuid(),
@@ -136,7 +137,7 @@ export const fakeLease = (
 	unitId?: string,
 	startDate?: Date
 ) => {
-	const start = startDate ?? faker.date.past(4);
+	const start = startDate ?? faker.date.past(timespan);
 	const end = subDays(addMonths(start, 12), 1);
 	return {
 		id: faker.datatype.uuid(),
@@ -161,7 +162,7 @@ export const fakeExpense = () => ({
 	amount: +faker.finance.amount(100, 3000, 0),
 	category: faker.random.arrayElement(expenseCategories),
 	memo: faker.lorem.sentences(),
-	postAt: faker.date.past(4),
+	postAt: faker.date.past(timespan),
 });
 
 export const fakeMaintenanceOrder = () => ({

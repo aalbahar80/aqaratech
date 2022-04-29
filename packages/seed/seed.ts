@@ -18,6 +18,7 @@ import {
 	fakeTenant,
 	fakeTransaction,
 	fakeUnit,
+	timespan,
 } from "./generators.js";
 
 const { PrismaClient } = pkg;
@@ -77,7 +78,8 @@ async function main({
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit) => {
-		let date = new Date("2018-01-01");
+		let date = new Date();
+		date.setFullYear(date.getFullYear() - timespan);
 		let tenantN = fakeTenant();
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
