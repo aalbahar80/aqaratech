@@ -1,7 +1,3 @@
-// To run this file:
-// node --loader ts-node/esm prisma/seed.ts
-// OR npx prisma db seed
-
 import { faker } from "@faker-js/faker";
 import type { PrismaClient as PrismaClientType } from "@prisma/client";
 // TODO avoid ts-ignore below by fixing tsconfig.json
@@ -48,11 +44,12 @@ async function main({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
-	let clientCount = 15;
+	let clientCount = 10;
+	let propertyMin = 2;
 	let propertyMax = 6;
-	let unitMax = 10;
-	let moCount = 1000;
-	let expenseCount = 1000;
+	let unitMax = 15;
+	let moCount = 100;
+	let expenseCount = 100;
 	const min = 0;
 
 	if (sample) {
@@ -66,7 +63,7 @@ async function main({
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	const properties = clients.flatMap((client) =>
 		Array.from(
-			{ length: faker.datatype.number({ min, max: propertyMax }) },
+			{ length: faker.datatype.number({ min: propertyMin, max: propertyMax }) },
 			() => fakeProperty(client.id)
 		)
 	);
@@ -172,12 +169,12 @@ async function main({
 			expenses.push({ ...expense, propertyId: property.id });
 		}
 	});
-	// units.forEach((unit) => {
-	// 	for (let i = 0; i < expenseCount; i++) {
-	// 		const expense = fakeExpense();
-	// 		expenses.push({ ...expense, unitId: unit.id });
-	// 	}
-	// });
+	units.forEach((unit) => {
+		for (let i = 0; i < expenseCount; i++) {
+			const expense = fakeExpense();
+			expenses.push({ ...expense, unitId: unit.id });
+		}
+	});
 
 	// count the number of tenants with a lease
 	const tenantsWithLease = tenants.filter((tenant) =>
