@@ -1,0 +1,48 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+env:
+  DOMAIN: "https://dev.letand.be"
+  CALLBACK_DOMAIN: "https://dev.letand.be"
+  DATABASE_URL: "mysql://aki0pn3ea7cw:pscale_pw_gehwA1CETeGqhpnYoV3uR0u1Xk4UdMUMv4Ck8dU5uUA@z3p18h1dgra9.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict"
+  AUTH0_DOMAIN: "https://auth.letand.be"
+  AUTH0_CLIENT_ID: "z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct"
+  AUTH0_CLIENT_SECRET: "uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf"
+  AUTH0_API_AUDIENCE: "letand.be/api"
+  AUTH0_API_NAMESPACE: "letand.be"
+  MYFATOORAH_BASE_URL: "https://apitest.myfatoorah.com"
+  MYFATOORAH_TOKEN: "HKcuHSpmaDG3SDluux5XDOm6aucEO3KKddJcDNZ71CRYgTNRhKRJXV4LezbvXV2mw3gJ3uH5fZr0Hpi-55p1Yo9Bpr7aX3OsGuNGllBdpCUfli2wXfPnlbwtfKVY1UnOUsqeoFUUjD7SbsOZY5Rz_OgL26dd-bLDX4ToB08XuudcxKzNqCKncqP-4maqQlOdGUm1krElqwzReJK5U4OX1PFy7xNAABRIztQ0OHSiuge4l2m-WwvLZ_47BBK2P_uXAY1UI0g5OB3_Pyy9soZ4v9lAPM2Mb1rVBRZ0LbkS0LQquIJjRaOZzPymzsdcGJfpOgg3VrmpbUUma6I0tCSeorlLveuYPW0sYszzrTVuDDYQ_DvMe1jtQZFDHsH_cPP4YGIBJEC0F92gj7yU3T3p47hKAmrqiWC63fKvRsOVNZHrceCa6RlCNLyBR6qszh5YIKWo8yC2EqbNkb4bFstQ4NL7oFUnIC2nqCQ4Awfts5u85ygBaN1uLtxDKxUAgN3ZyteyGaYndjSl2AFBtae4mrPz7Q_dMHp8rY4AA0KLOG9fqpDzdcGEeYlE-dMQtpStvhHwty9Pob5-eTk4xXIBUGHedVI5eSdpyuj_xT3tgasHaJhQi5J9NTDphCiBCTa2YZYiMzXVx78NiuDuP-ytp9Y42nbqF4X3BJ2j1BkmoAql7sTR3P-VPJ8CL9PD2_9SAUtgIw"
+  MYFATOORAH_EMAIL: "dev.tester.4@mailthink.net"
+  TWILIO_ACCOUNT_SID: "ACbffc494534d2b9823213e4538d71c98d"
+  TWILIO_AUTH_TOKEN: "a94743f7f5baf621a2f2535f05c03970"
+  TWILIO_FROM_NUMBER: "+15005550006	"
+  LOCAL: "TRUE"
+
+jobs:
+  test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install dependencies
+        run: pnpm install --filter=@self/site-test... --frozen-lockfile
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      # - name: Build deps
+      #   run: pnpm run --filter=@self/site-test... build
+      - name: Run Playwright tests
+        run: pnpm test --filter=@self/site-test
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
