@@ -46,13 +46,13 @@ type FormType = 'create' | 'update';
 
 declare module 'chart.js/dist/chart.esm' {
 	// https://github.com/ivanhofer/sveltekit-typescript-showcase#2-extend-existing-type-definitions
-	import { Chart } from 'chart.js/types/index.esm';
+	import type { Chart } from 'chart.js/types/index.esm';
 	export * from 'chart.js/types/index.esm';
 	export default Chart;
 }
 
 declare module 'svelte-select' {
-	import { SelectProps } from 'svelte-select/src/index.d';
-	import { SvelteComponentTyped } from 'svelte';
+	import type { SelectProps } from 'svelte-select/src/index.d';
+	import type { SvelteComponentTyped } from 'svelte';
 	export default class SvelteSelect extends SvelteComponentTyped<SelectProps> {}
 }
