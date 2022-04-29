@@ -2,7 +2,7 @@
     "name": "@self/seed",
     "version": "0.0.1",
     "scripts": {
-        "seed": "ts-node-esm ./seed.ts"
+        "seed": "ts-node-esm -T ./seed.ts"
     },
     "devDependencies": {
         "@faker-js/faker": "^6.1.2",

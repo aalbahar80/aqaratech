@@ -185,8 +185,26 @@ async function main({
 		(tenant) => !leases.find((lease) => lease.tenantId === tenant.id)
 	).length;
 
+	const clientsWithProperty = clients.filter((client) =>
+		properties.find((property) => property.clientId === client.id)
+	).length;
+	const propsWithUnit = properties.filter((property) =>
+		units.find((unit) => unit.propertyId === property.id)
+	).length;
+
+	const unitsWithLease = units.filter((unit) =>
+		leases.find((lease) => lease.unitId === unit.id)
+	).length;
+
 	console.log(`${tenantsWithLease} tenants with a lease`);
 	console.log(`${homelessTenantCount} homeless tenants`);
+	console.log(`${clientsWithProperty} clients with a property`);
+	console.log(`${propsWithUnit} properties with a unit`);
+	console.log(`${unitsWithLease} units with a lease`);
+
+	console.log(
+		`Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
+	);
 	if (sample) {
 		console.log(
 			util.inspect(
@@ -210,9 +228,7 @@ async function main({
 	}
 
 	try {
-		console.log(
-			`perparing to insert \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
-		);
+		console.log(`preparing to insert...`);
 		// TODO add a NODE_ENV check to only run this in development
 		if (clean) {
 			await cleanupDatabase();

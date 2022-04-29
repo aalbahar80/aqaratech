@@ -95,10 +95,8 @@ Temporal worker:
 export DATABASE_URL=VALUE
 
 # dev
-export DATABASE_URL='mysql://alavwhwsetxe:pscale_pw_WoU9XU0gR_C45USoI8JWiJhg6_8CrbH3or9KIuUWjqI@t1cp4lkeutv3.eu-central-2.psdb.cloud/aqaratechdb?sslaccept=strict'
-# test
-export DATABASE_URL='mysql://aki0pn3ea7cw:pscale_pw_gehwA1CETeGqhpnYoV3uR0u1Xk4UdMUMv4Ck8dU5uUA@z3p18h1dgra9.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict'
-yarn install
+export DATABASE_URL='mysql://2ceymulr2luy:pscale_pw_m1PwIHI_74P7FtNI1Etoyl9o_3UhV60Ts0ZPsXNJBhI@t1cp4lkeutv3.eu-central-2.psdb.cloud/aqaratechdb?sslaccept=strict'
+
 yarn run build:temporal # in watch mode?
 yarn run start:worker.watch
 
