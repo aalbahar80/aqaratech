@@ -2,7 +2,8 @@
     "name": "@self/seed",
     "version": "0.0.1",
     "scripts": {
-        "seed": "ts-node-esm -T ./seed.ts"
+        "seed": "ts-node-esm -T ./seed.ts",
+        "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma"
     },
     "devDependencies": {
         "@faker-js/faker": "^6.1.2",
