@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // has to be after @sentry/node
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
-import cookie from 'cookie';
+import { parse, serialize } from 'cookie';
 
 if (!dev) {
 	Sentry.init({
@@ -27,7 +27,7 @@ export const getSession: GetSession = async ({ locals }) => ({
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
-	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
+	const cookies = parse(event.request.headers.get('cookie') || '');
 
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
@@ -73,7 +73,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	response.headers.append(
 		'Set-Cookie',
-		cookie.serialize('idToken', event.locals.idToken, {
+		serialize('idToken', event.locals.idToken, {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
@@ -84,7 +84,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	response.headers.append(
 		'Set-Cookie',
-		cookie.serialize('accessToken', event.locals.accessToken, {
+		serialize('accessToken', event.locals.accessToken, {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,

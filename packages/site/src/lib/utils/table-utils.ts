@@ -1,4 +1,4 @@
-import drop from 'lodash-es/drop.js';
+import { drop } from 'remeda';
 
 export default function assertNever(value: any, message?: string): never {
 	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions

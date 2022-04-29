@@ -5,7 +5,7 @@ import {
 	Runtime,
 	Worker,
 } from "@temporalio/worker";
-import path from "path";
+import { extname } from "path";
 import { URL } from "url";
 // TODO remove .js extension?
 import { createActivities } from "./activities.js";
@@ -24,7 +24,7 @@ async function run() {
 
 	// Support running both complied code and ts-node/esm loader
 	const workflowsPath = new URL(
-		`./workflows${path.extname(import.meta.url)}`,
+		`./workflows${extname(import.meta.url)}`,
 		import.meta.url
 	).pathname;
 

@@ -1,4 +1,4 @@
-import isNumber from 'lodash-es/isNumber.js';
+import { isNumber } from 'remeda';
 
 export function trim<T>(v: T) {
 	if (typeof v === 'string') {

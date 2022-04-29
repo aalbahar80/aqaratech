@@ -1,8 +1,8 @@
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 import { EnvironmentType } from '$models/interfaces/environment.interface';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
 const getRedirectUri = (): string => {
 	if (process.env.AUTH0_REDIRECT_URI) {
