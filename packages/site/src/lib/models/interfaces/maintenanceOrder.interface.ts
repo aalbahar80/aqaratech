@@ -10,7 +10,7 @@ const schema = z.object({
 		.transform(trim)
 		.transform(falsyToNull),
 	description: z.string().nullable().transform(trim).transform(falsyToNull),
-	status: z.enum(['pending', 'completed', 'closed']).nullable(),
+	status: z.string().min(1, { message: 'Required' }).nullable(),
 	completedAt: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),

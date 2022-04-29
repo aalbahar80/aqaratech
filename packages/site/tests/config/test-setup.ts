@@ -3,6 +3,7 @@ import {
 	ClientForm,
 	ExpenseForm,
 	LeaseForm,
+	MaintenanceOrderForm,
 	PropertyForm,
 	TenantForm,
 	UnitForm,
@@ -17,6 +18,7 @@ export const test = base.extend<{
 	tenantForm: TenantForm;
 	leaseForm: LeaseForm;
 	expenseForm: ExpenseForm;
+	maintenanceOrderForm: MaintenanceOrderForm;
 	single: string;
 }>({
 	page: async ({ page }, use) => {
@@ -68,6 +70,12 @@ export const test = base.extend<{
 	},
 	expenseForm: async ({ page }, use) => {
 		const form = new ExpenseForm(page);
+		await form.setup();
+		await use(form);
+		await form.clean();
+	},
+	maintenanceOrderForm: async ({ page }, use) => {
+		const form = new MaintenanceOrderForm(page);
 		await form.setup();
 		await use(form);
 		await form.clean();

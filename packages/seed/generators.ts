@@ -172,4 +172,5 @@ export const fakeMaintenanceOrder = () => ({
 	completedAt: faker.date.future(1),
 	title: faker.company.bs(),
 	description: faker.lorem.sentences(),
+	status: faker.random.arrayElement(["pending", "completed", "closed"]),
 });

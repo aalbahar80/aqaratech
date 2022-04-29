@@ -3,6 +3,7 @@ import {
 	fakeClient,
 	fakeExpense,
 	fakeLease,
+	fakeMaintenanceOrder,
 	fakeProperty,
 	fakeTenant,
 	fakeUnit,
@@ -396,6 +397,83 @@ export class ExpenseForm extends Form {
 	async clean() {
 		await Promise.all([
 			await trpc.mutation('expenses:delete', this.data.id),
+			await trpc.mutation('units:delete', this.unit.id),
+			await trpc.mutation('properties:delete', this.property.id),
+			await trpc.mutation('clients:delete', this.client.id),
+		]);
+	}
+
+	static async cleanById(id: string) {
+		await trpc.mutation(`${this.urlName}:delete`, id);
+	}
+}
+
+export class MaintenanceOrderForm extends Form {
+	static urlName: Entity = 'maintenanceOrders';
+	constructor(
+		page: Page,
+		public client = fakeClient(),
+		public property = fakeProperty(client.id),
+		public unit = fakeUnit(property.id),
+		public data = {
+			...fakeMaintenanceOrder(),
+			clientId: null,
+			propertyId: property.id,
+			unitId: null,
+		},
+	) {
+		super(page, MaintenanceOrderForm.urlName, data.id);
+	}
+
+	public async fill() {
+		await this.page.waitForLoadState('networkidle');
+		await this.page.fill(
+			'input[name="completedAt"]',
+			dateToInput(this.data.completedAt),
+		);
+		await this.page.fill('input[name="title"]', this.data.title);
+		await this.page.fill('input[name="description"]', this.data.description);
+		await this.page.selectOption('#status', { index: 0 });
+		await this.page.selectOption('#clientId', { index: 0 });
+		await this.page.selectOption('#propertyId', { index: 0 });
+		await this.page.selectOption('#unitId', { index: 0 });
+		await this.page.locator('#clientId-radio').click();
+	}
+
+	public alter() {
+		this.data = {
+			...fakeMaintenanceOrder(),
+			clientId: null,
+			propertyId: this.property.id,
+			unitId: null,
+			id: this.data.id,
+		};
+	}
+
+	public basic() {
+		return [this.data.title, this.data.status, this.data.description];
+	}
+
+	override async setupNew() {
+		await Promise.all([
+			await trpc.mutation('clients:create', this.client),
+			await trpc.mutation('properties:create', this.property),
+			await trpc.mutation('units:create', this.unit),
+		]);
+	}
+
+	async setup() {
+		await Promise.all([
+			await trpc.mutation('clients:create', this.client),
+			await trpc.mutation('properties:create', this.property),
+			await trpc.mutation('units:create', this.unit),
+		]);
+		await trpc.mutation('maintenanceOrders:create', this.data);
+	}
+
+	async clean() {
+		await Promise.all([
+			await trpc.mutation('maintenanceOrders:delete', this.data.id),
 			await trpc.mutation('units:delete', this.unit.id),
 			await trpc.mutation('properties:delete', this.property.id),
 			await trpc.mutation('clients:delete', this.client.id),

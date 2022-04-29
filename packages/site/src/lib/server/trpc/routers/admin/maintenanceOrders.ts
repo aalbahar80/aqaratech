@@ -72,15 +72,15 @@ export const maintenanceOrders = createRouter()
 	})
 	.mutation('create', {
 		input: MaintenanceOrderModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.maintenanceOrder.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.maintenanceOrder.create({
-						data,
-				  }),
+		resolve: ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.maintenanceOrder.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: MaintenanceOrderModel.schema,

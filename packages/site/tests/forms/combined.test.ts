@@ -3,6 +3,7 @@ import {
 	ClientForm,
 	ExpenseForm,
 	LeaseForm,
+	MaintenanceOrderForm,
 	PropertyForm,
 	TenantForm,
 	UnitForm,
@@ -15,6 +16,7 @@ const formEntities = [
 	TenantForm,
 	LeaseForm,
 	ExpenseForm,
+	MaintenanceOrderForm,
 ];
 
 test.use({ storageState: './config/adminStorageState.json' });
