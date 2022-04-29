@@ -1,10 +1,3 @@
-import { defineConfig } from 'vitest/config';
+import { extractFromSvelteConfig } from 'vitest-svelte-kit';
 
-export default defineConfig({
-	test: {
-		exclude: ['**/tests/**', 'node_modules'],
-		deps: {
-			inline: ['date-fns'],
-		},
-	},
-});
+export default extractFromSvelteConfig();

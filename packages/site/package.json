@@ -18,7 +18,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "postbuild:vercel": "cp ../../node_modules/.pnpm/@prisma+engines@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
-    "test": "playwright test"
+    "test": "vitest run"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "^1.0.5",

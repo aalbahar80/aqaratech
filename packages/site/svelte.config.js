@@ -17,6 +17,13 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		vite: {
+			// delete .svelte-kit folder b4 testing
+			test: {
+				exclude: ['**/tests/**', 'node_modules'],
+				deps: {
+					inline: ['date-fns'],
+				},
+			},
 			define:
 				process.env.NODE_ENV === 'production'
 					? {
