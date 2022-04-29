@@ -7,6 +7,7 @@
         "build:cloud": "prisma generate --schema=../site/prisma/schema.prisma && pnpm run build",
         "start": "node --loader ts-node/esm ./src/worker.ts",
         "start:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts",
+        "postinstall": "prisma generate --schema=../site/prisma/schema.prisma",
         "test": "vitest run"
     },
     "type": "module",
