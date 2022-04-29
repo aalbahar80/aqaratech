@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
+    "build:vercel": "pnpm exec prisma generate && pnpm build --filter=@self/site... && pnpm run postbuild:vercel",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json",
@@ -14,8 +15,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "v-postbuild": "cp node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
-    "v-postbuild-new": "cp ../../node_modules/.pnpm/@prisma+engines@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
+    "postbuild:vercel": "cp ../../node_modules/.pnpm/@prisma+engines@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b/node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
     "test": "playwright test"
   },
