@@ -104,11 +104,11 @@
 	{#if name === 'area'}
 		<SelectArea id={name} {value} {invalidText} on:select on:clear />
 	{:else if name === 'type'}
-		<Select current={value} options={unitTypeOptions} on:select />
+		<Select id={name} current={value} options={unitTypeOptions} on:select />
 	{:else if name === 'status'}
-		<Select current={value} options={statusOptions} on:select />
+		<Select id={name} current={value} options={statusOptions} on:select />
 	{:else if name === 'category'}
-		<Select current={value} options={categoryOptions} on:select />
+		<Select id={name} current={value} options={categoryOptions} on:select />
 	{:else if type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

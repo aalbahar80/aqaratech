@@ -1,6 +1,7 @@
 import { test as base } from '@playwright/test';
 import {
 	ClientForm,
+	ExpenseForm,
 	LeaseForm,
 	PropertyForm,
 	TenantForm,
@@ -15,6 +16,7 @@ export const test = base.extend<{
 	unitForm: UnitForm;
 	tenantForm: TenantForm;
 	leaseForm: LeaseForm;
+	expenseForm: ExpenseForm;
 	single: string;
 }>({
 	page: async ({ page }, use) => {
@@ -60,6 +62,12 @@ export const test = base.extend<{
 	},
 	leaseForm: async ({ page }, use) => {
 		const form = new LeaseForm(page);
+		await form.setup();
+		await use(form);
+		await form.clean();
+	},
+	expenseForm: async ({ page }, use) => {
+		const form = new ExpenseForm(page);
 		await form.setup();
 		await use(form);
 		await form.clean();

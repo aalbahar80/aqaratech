@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import {
 	fakeClient,
+	fakeExpense,
 	fakeLease,
 	fakeProperty,
 	fakeTenant,
@@ -319,6 +320,92 @@ export class LeaseForm extends Form {
 			await trpc.mutation('properties:delete', this.property.id),
 			await trpc.mutation('clients:delete', this.client.id),
 			await trpc.mutation('tenants:delete', this.tenant.id),
+		]);
+	}
+
+	static async cleanById(id: string) {
+		await trpc.mutation(`${this.urlName}:delete`, id);
+	}
+}
+
+export class ExpenseForm extends Form {
+	static urlName: Entity = 'expenses';
+	constructor(
+		page: Page,
+		public client = fakeClient(),
+		public property = fakeProperty(client.id),
+		public unit = fakeUnit(property.id),
+		public data = {
+			...fakeExpense(),
+			clientId: null,
+			propertyId: property.id,
+			unitId: null,
+		},
+	) {
+		super(page, ExpenseForm.urlName, data.id);
+	}
+
+	public async fill() {
+		await this.page.waitForLoadState('networkidle');
+		// await this.page.fill('input[name="amount"]', this.data.amount.toString());
+		// await this.page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
+		// await this.page.selectOption('#category', { label: this.data.category });
+		// await this.page.selectOption('#memo', { label: this.data.memo });
+		// if (!this.page.url().includes('edit')) {
+		// 	await this.page.selectOption('#propertyId', {
+		// 		label: getAddress(this.property),
+		// 	});
+		// 	await this.page.waitForLoadState('networkidle');
+		// }
+		// await this.page.selectOption('#unitId', {
+		// 	label: [this.unit.type, this.unit.unitNumber]
+		// 		.filter((str) => str)
+		// 		.join(' '),
+		// });
+	}
+
+	public alter() {
+		this.data = {
+			...fakeExpense(),
+			clientId: null,
+			propertyId: this.property.id,
+			unitId: null,
+			id: this.data.id,
+		};
+	}
+
+	public basic() {
+		return [
+			this.data.amount,
+			this.data.category,
+			this.data.postAt,
+			this.data.memo,
+		];
+	}
+
+	override async setupNew() {
+		await Promise.all([
+			await trpc.mutation('clients:create', this.client),
+			await trpc.mutation('properties:create', this.property),
+			await trpc.mutation('units:create', this.unit),
+		]);
+	}
+
+	async setup() {
+		await Promise.all([
+			await trpc.mutation('clients:create', this.client),
+			await trpc.mutation('properties:create', this.property),
+			await trpc.mutation('units:create', this.unit),
+		]);
+		await trpc.mutation('expenses:create', this.data);
+	}
+
+	async clean() {
+		await Promise.all([
+			await trpc.mutation('expenses:delete', this.data.id),
+			await trpc.mutation('units:delete', this.unit.id),
+			await trpc.mutation('properties:delete', this.property.id),
+			await trpc.mutation('clients:delete', this.client.id),
 		]);
 	}
 
