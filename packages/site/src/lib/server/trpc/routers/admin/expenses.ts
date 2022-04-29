@@ -69,15 +69,15 @@ export const expenses = createRouter()
 	})
 	.mutation('create', {
 		input: ExpenseModel.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.expense.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.expense.create({
-						data,
-				  }),
+		resolve: ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.expense.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: ExpenseModel.schema,
