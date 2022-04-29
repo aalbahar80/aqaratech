@@ -92,19 +92,15 @@
 
 	let propertySelect: SelectEntity;
 	let unitSelect: SelectEntity;
-	// clear when options change
+
 	let radio: RadioEntity<Field>;
-	$: {
-		if (radio && radioOptions) radio.clear();
-	}
-	// # End radio config #
 </script>
 
 <SelectEntity
 	field="clientId"
 	selected={client}
 	on:select={(e) => {
-		console.log({ e }, 'AttributeEntity.svelte ~ 108');
+		radio.clear();
 		client = e.detail;
 		propertySelect.clear();
 		propertySelect.getOptions(client.value);
@@ -117,7 +113,7 @@
 	selected={property}
 	disabled={!client?.value}
 	on:select={(e) => {
-		console.log({ e }, 'AttributeEntity.svelte ~ 119');
+		radio.clear();
 		property = e.detail;
 		unitSelect.clear();
 		unitSelect.getOptions(property.value);
@@ -130,8 +126,8 @@
 	initialParent={property?.value ?? undefined}
 	disabled={!property?.value || !client?.value}
 	on:select={(e) => {
+		radio.clear();
 		unit = e.detail;
-		console.log({ e }, 'AttributeEntity.svelte ~ 133');
 	}}
 />
 

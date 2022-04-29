@@ -3,7 +3,7 @@
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import type { Entity } from '$models/interfaces/entity.interface';
 	import startCase from 'lodash-es/startCase.js';
-	import type { Load } from './index';
+	import type { Load } from './index@blank';
 
 	export const load: Load = async ({ url, params }) => {
 		const entity = params.entity as Entity;

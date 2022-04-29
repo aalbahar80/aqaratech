@@ -195,7 +195,7 @@
 									field="tenantId"
 									initialValue={lease.tenantId}
 									on:select={(e) => {
-										setData('tenantId', e.detail);
+										setData('tenantId', e.detail.value);
 									}}
 								/>
 							</div>
@@ -237,7 +237,7 @@
 									bind:selected={property}
 									on:select={(e) => {
 										unitSelect.clear();
-										unitSelect.getOptions(e.detail);
+										unitSelect.getOptions(e.detail.value);
 									}}
 								/>
 							</div>
@@ -249,7 +249,7 @@
 									initialValue={lease.unitId}
 									disabled={!property?.value}
 									on:select={(e) => {
-										setData('unitId', e.detail);
+										setData('unitId', e.detail.value);
 									}}
 								/>
 							</div>

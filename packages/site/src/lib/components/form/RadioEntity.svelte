@@ -23,9 +23,8 @@
 	export let invalid = false;
 	export let invalidText: string | undefined;
 
-	let selected: SelectedRadioOption = options[2];
-	// selected = options[2];
-	console.log({ selected }, 'RadioEntity.svelte ~ 27');
+	const initial = options.findIndex((option) => option.value);
+	let selected: SelectedRadioOption = options[initial];
 
 	const dispatch = createEventDispatcher<{
 		select: RadioOption[];
@@ -43,7 +42,6 @@
 			value: updated?.value === option.value ? option.value : null,
 			fieldName: option.fieldName,
 		}));
-		console.log({ result }, 'RadioEntity.svelte ~ 52');
 		dispatch('select', result);
 	};
 

@@ -50,7 +50,7 @@
 		invalid={!!getValue(errors, 'propertyId')}
 		on:select={(e) => {
 			propertySelect.clear();
-			propertySelect.getOptions(e.detail);
+			propertySelect.getOptions(e.detail.value);
 		}}
 	/>
 	<SelectEntity
@@ -61,7 +61,7 @@
 		invalid={!!getValue(errors, 'propertyId')}
 		invalidText={getValue(errors, 'propertyId')?.[0]}
 		on:select={(e) => {
-			setData('propertyId', e.detail);
+			setData('propertyId', e.detail.value);
 		}}
 	/>
 </Form>

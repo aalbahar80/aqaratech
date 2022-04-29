@@ -103,7 +103,7 @@
 									invalid={!!getValue($errors, field)}
 									invalidText={getValue($errors, field)?.[0]}
 									on:select={(e) => {
-										setData(field, e.detail);
+										setData(field, e.detail.value);
 									}}
 								/>
 							{/each}
