@@ -32,6 +32,7 @@ pnpm install --filter=@self/site... --unsafe-perm
 ### Run
 
 ```bash
+## TODO: Environment should have pscale cli/DB_URL
 pnpm install --filter=@self/temporal...
 pnpm run --filter=@self/temporal... build
 pnpm start --filter=@self/temporal
