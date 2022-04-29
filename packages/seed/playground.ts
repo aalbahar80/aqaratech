@@ -1,6 +1,4 @@
 import pkg from "@prisma/client";
-// import { DataFrame } from 'danfojs-node';
-import * as dfd from "danfojs-node";
 
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient({});

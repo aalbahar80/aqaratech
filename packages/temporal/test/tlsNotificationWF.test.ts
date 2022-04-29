@@ -2,11 +2,11 @@ import pkg from "@prisma/client";
 import { Connection, WorkflowClient } from "@temporalio/client";
 import {
 	DefaultLogger,
+	NativeConnection,
 	Runtime,
 	Worker,
-	NativeConnection,
 } from "@temporalio/worker";
-import * as fs from "fs";
+import { readFileSync } from "fs";
 import ms from "ms";
 import path from "path";
 import sinon from "sinon";
@@ -41,9 +41,9 @@ describe("example workflow", function () {
 	const clientKeyPath = new URL("client.key", import.meta.url).pathname;
 	const caCertPath = new URL("ca.cert", import.meta.url).pathname;
 
-	const crt = fs.readFileSync(clientCsrPath);
-	const key = fs.readFileSync(clientKeyPath);
-	const serverRootCACertificate = fs.readFileSync(caCertPath);
+	const crt = readFileSync(clientCsrPath);
+	const key = readFileSync(clientKeyPath);
+	const serverRootCACertificate = readFileSync(caCertPath);
 	// ### END TLS VARS ###
 
 	beforeAll(async function () {

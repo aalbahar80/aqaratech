@@ -1,9 +1,9 @@
 import type { AppRouter } from '$lib/server/trpc';
-import * as trpc from '@trpc/client';
+import { createTRPCClient } from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
-const client = trpc.createTRPCClient<AppRouter>({
+const client = createTRPCClient<AppRouter>({
 	url: '/trpc',
 	transformer: superjson,
 });

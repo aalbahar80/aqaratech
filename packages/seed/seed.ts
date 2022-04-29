@@ -8,7 +8,7 @@ import type { PrismaClient as PrismaClientType } from "@prisma/client";
 // @ts-ignore
 import pkg from "@prisma/client";
 import { addDays } from "date-fns";
-import * as util from "util";
+import { inspect } from "util";
 import {
 	fakeClient,
 	fakeExpense,
@@ -209,7 +209,7 @@ async function main({
 	);
 	if (sample) {
 		console.log(
-			util.inspect(
+			inspect(
 				{
 					clients,
 					properties,

@@ -1,5 +1,5 @@
 import type { AppRouter } from '$lib/server/trpc/router';
-import * as TRPC from '@trpc/client';
+import { createTRPCClient } from '@trpc/client';
 import cookie from 'cookie';
 import fetch from 'cross-fetch';
 import superjson from 'superjson';
@@ -12,7 +12,7 @@ const tokens = auth.cookies.filter(
 );
 const cookieStrings = tokens.map((c) => cookie.serialize(c.name, c.value));
 const cookieString = cookieStrings.join('; ');
-export const trpc = TRPC.createTRPCClient<AppRouter>({
+export const trpc = createTRPCClient<AppRouter>({
 	fetch,
 	url: baseUrl + '/trpc',
 	transformer: superjson,
