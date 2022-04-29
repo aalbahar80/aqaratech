@@ -32,19 +32,21 @@
 	$: rows = data.map((row) => ({
 		...row,
 		view: `${row.id}`,
-		edit: `${row.id}/edit`,
+		// edit: `${row.id}/edit`,
 	}));
 </script>
 
-<a
-	href={`/new${$page.url.pathname}`}
-	class="table__add-button"
-	sveltekit:prefetch
->
-	New
-</a>
-<Table {rows} {modifier} />
-<Pagination {total} currentSize={data.length} {pagination} />
+<div class="mx-auto flex max-w-7xl flex-col p-4 sm:p-6 lg:p-8">
+	<a
+		href={`/new${$page.url.pathname}`}
+		class="table__add-button"
+		sveltekit:prefetch
+	>
+		New
+	</a>
+	<Table {rows} {modifier} />
+	<Pagination {total} currentSize={data.length} {pagination} />
+</div>
 
 <style lang="postcss">
 	.table__add-button {

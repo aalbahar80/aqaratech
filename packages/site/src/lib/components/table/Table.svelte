@@ -8,13 +8,28 @@
 	import { fly } from 'svelte/transition';
 
 	export let rows: any[];
-	export let hidden: string[] = ['id'];
 	export let modifier = 1;
+
+	const alwaysHidden = ['id'];
+	let hidden = alwaysHidden;
 
 	// columns store should know whenever data changes
 	$: columns.newData(rows);
+
+	$: {
+		if (innerWidth < 500) {
+			hidden = [...alwaysHidden, 'email', 'completedAt', 'phone'];
+		} else if (innerWidth < 800) {
+			hidden = [...alwaysHidden, 'email', 'completedAt'];
+		} else {
+			hidden = alwaysHidden;
+		}
+	}
+	let innerWidth = 0;
+	let outerWidth = 0;
 </script>
 
+<svelte:window bind:innerWidth bind:outerWidth />
 <!-- <div class="flex space-x-4">
 	{#each $columns as header}
 		<label>
