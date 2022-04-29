@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import { dev } from '$app/env';
 	// This is a base layout for other layouts to extend.
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
@@ -36,23 +37,26 @@
 <script lang="ts">
 	export let navigation: NavbarItem[];
 	onMount(() => {
-		Sentry.init({
-			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-			integrations: [new BrowserTracing()],
-			tracesSampleRate: 1.0,
-			// debug: dev,
-			environment: import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
-			release:
-				import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
-		});
-		Sentry.configureScope((scope: Scope) => {
-			scope.setTag('role', $session.authz?.role || '');
-			scope.setUser({
-				id: $session.authz?.sub || '',
-				email: $session.user?.email || '',
-				username: $session.user?.name || '',
+		if (!dev) {
+			Sentry.init({
+				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
+				integrations: [new BrowserTracing()],
+				tracesSampleRate: 1.0,
+				// debug: dev,
+				environment:
+					import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
+				release:
+					import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
 			});
-		});
+			Sentry.configureScope((scope: Scope) => {
+				scope.setTag('role', $session.authz?.role || '');
+				scope.setUser({
+					id: $session.authz?.sub || '',
+					email: $session.user?.email || '',
+					username: $session.user?.name || '',
+				});
+			});
+		}
 	});
 </script>
 
