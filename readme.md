@@ -4,7 +4,7 @@
 
 ```bash
 pnpm install --filter=@self/site...
-pnpm build --filter=@self/site...
+pnpm run --filter=@self/site... build
 ## TODO: replace `pnpm run v-postbuild-new`
 ```
 
@@ -13,7 +13,7 @@ pnpm build --filter=@self/site...
 ```bash
 ## TODO: Environment should have pscale cli
 pnpm install --filter=@self/site-test...
-pnpm build --filter=@self/site-test...
+pnpm run --filter=@self/site-test... build
 pnpm test --filter=@self/site-test
 ```
 
@@ -33,7 +33,7 @@ pnpm install --filter=@self/site... --unsafe-perm
 
 ```bash
 pnpm install --filter=@self/temporal...
-pnpm build --filter=@self/temporal...
+pnpm run --filter=@self/temporal... build
 pnpm start --filter=@self/temporal
 ```
 
@@ -41,6 +41,6 @@ pnpm start --filter=@self/temporal
 
 ```bash
 pnpm install --filter=@self/temporal...
-pnpm build --filter=@self/temporal...
+pnpm run --filter=@self/temporal... build
 pnpm test --filter=@self/temporal
 ```
