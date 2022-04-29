@@ -5,6 +5,7 @@ import fetch from 'cross-fetch';
 import superjson from 'superjson';
 import auth from './adminStorageState.json';
 
+// TODO: https://playwright.dev/docs/cli#preserve-authenticated-state
 const baseUrl = 'http://localhost:3000';
 const tokens = auth.cookies.filter(
 	(c) => c.name === 'accessToken' || c.name === 'idToken',
