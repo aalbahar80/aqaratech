@@ -1,5 +1,6 @@
 import { clients } from './clients';
 import { createRouter } from './createRouter';
+import { expenses } from './expenses';
 import { leases } from './leases';
 import { maintenanceOrders } from './maintenanceOrders';
 import { properties } from './properties';
@@ -14,4 +15,5 @@ export const adminRouter = createRouter()
 	.merge('maintenanceOrders:', maintenanceOrders)
 	.merge('transactions:', transactions)
 	.merge('tenants:', tenants)
+	.merge('expenses:', expenses)
 	.merge('properties:', properties);

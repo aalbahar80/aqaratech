@@ -122,7 +122,7 @@
 								}}
 							/>
 						{/each}
-						{#if model.name === 'maintenanceOrders'}
+						{#if model.name === 'maintenanceOrders' || model.name === 'expenses'}
 							<div class="relative pt-10">
 								<div
 									class="absolute inset-0 inset-x-2 flex items-center"

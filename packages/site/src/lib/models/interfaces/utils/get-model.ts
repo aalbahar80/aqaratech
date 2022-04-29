@@ -1,3 +1,4 @@
+import { ExpenseModel } from '$lib/models/interfaces/expense.interface';
 import {
 	ClientModel,
 	LeaseModel,
@@ -27,6 +28,7 @@ export function getModel(entity: 'leases' | 'leaseId'): typeof LeaseModel;
 export function getModel(
 	entity: 'maintenanceOrders',
 ): typeof MaintenanceOrderModel;
+export function getModel(entity: 'expenses'): typeof ExpenseModel;
 export function getModel(entity: 'tenants' | 'tenantId'): typeof TenantModel;
 export function getModel(entity: 'transactions'): typeof TransactionModel;
 
@@ -59,6 +61,9 @@ export function getModel(entity: Entity | RelationalField): Model {
 	}
 	if (entity === 'maintenanceOrders') {
 		return MaintenanceOrderModel;
+	}
+	if (entity === 'expenses') {
+		return ExpenseModel;
 	}
 	if (entity === 'transactions') {
 		return TransactionModel;

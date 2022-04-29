@@ -1,5 +1,6 @@
 import type { InferMutationInput } from '$lib/client/trpc';
 import type { ClientModel } from './client.interface';
+import type { ExpenseModel } from './expense.interface';
 import type { LeaseModel } from './lease.interface';
 import type { MaintenanceOrderModel } from './maintenanceOrder.interface';
 import type { PropertyModel } from './property.interface';
@@ -14,6 +15,7 @@ export type Entity =
 	| 'tenants'
 	| 'units'
 	| 'transactions'
+	| 'expenses'
 	| 'maintenanceOrders';
 export interface IEntity<T extends Entity> {
 	name: T;
@@ -32,6 +34,7 @@ export type Model =
 	| typeof ClientModel
 	| typeof TenantModel
 	| typeof TransactionModel
+	| typeof ExpenseModel
 	| typeof MaintenanceOrderModel;
 
 export type GenericFormModel = Exclude<Model, typeof LeaseModel>;

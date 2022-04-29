@@ -10,5 +10,6 @@ export const adminUser: UserConfig = {
 		{ name: 'Tenants', href: '/tenants' },
 		// { name: 'Transactions', href: '/transactions' },
 		{ name: 'Maintenance', href: '/maintenanceOrders' },
+		{ name: 'Expenses', href: '/expenses' },
 	],
 };

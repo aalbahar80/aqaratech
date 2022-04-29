@@ -323,7 +323,12 @@ export const expenseCategories = [
 	'PLUMBING',
 ];
 
-type ExpenseCategory = [id: string, label: string, group: string, groupLabel: string];
+type ExpenseCategory = [
+	id: string,
+	label: string,
+	group: string,
+	groupLabel: string,
+];
 export const categoryGroups: ExpenseCategory[] = [
 	['MANAGEMENT_FEES', 'Management Fees', 'MANAGEMENT_FEES', 'Management Fees'],
 	['CARETAKER', 'Caretaker', 'CARETAKER', 'Caretaker'],
@@ -386,3 +391,36 @@ export const getColor = (index: number, total: number) => {
 	const backgroundColor = palette[size]?.[index];
 	return backgroundColor;
 };
+export const expenseCats = [
+	{ en: 'Electricity consumption', ar: 'استهلاك كهرباء' },
+	{ en: 'Municipal fees', ar: 'رسوم بلديه' },
+	{ en: 'Insurance', ar: 'تامين علي البنايه' },
+	{ en: 'Elevator Contract', ar: 'عقد مصعد' },
+	{ en: 'HVAC Contract', ar: 'ق .غ مصعد' },
+	{ en: 'Fire Fighting Contract', ar: 'عقد تكييف' },
+	{ en: 'Elevator Maintenance Part', ar: 'ق . غ تكييف' },
+	{ en: 'HVAC Maintenance Part', ar: 'عقد اطفاء' },
+	{ en: 'HVAC Maintenance', ar: 'حارس' },
+	{ en: 'Caretaker Wages', ar: 'اجازات حارس' },
+	{ en: 'Caretaker Vacation leave', ar: 'نهايه خدمه حارس' },
+	{ en: 'Caretaker pension', ar: 'اقامات حارس' },
+	{ en: 'Caretaker Insurance & resident permit', ar: 'صحي' },
+	{ en: 'Plumbing Maintenance', ar: 'كهرباء' },
+	{ en: 'Electrical Maintenance', ar: 'صبغ' },
+	{ en: 'Paint Maintenance', ar: 'تبليط' },
+	{ en: 'Flooring Maintenance', ar: 'مطابخ' },
+	{ en: 'Kitchen Maintenance', ar: 'صيانه مكيف' },
+	{ en: 'Government Violations', ar: 'ازاله مخالفات' },
+	{ en: 'Aluminum Maintenance', ar: 'المنيوم' },
+	{ en: 'Attorneys Fee', ar: 'مصاريف قضايا' },
+	{ en: 'Government Paperwork', ar: 'طوابع' },
+	{ en: 'Waterproofing', ar: 'تصوير' },
+	{ en: 'Gypsum Maintenance', ar: 'تقييم عقار' },
+	{ en: 'Plasterwork Maintenance', ar: 'فتحات تكييف' },
+	{ en: 'Doors Maintenance', ar: 'اكراميات حارس' },
+	{ en: 'Glass Maintenance', ar: 'زجاج معلق' },
+	{ en: 'Satellite & Internet connectivity', ar: 'ستلايت' },
+	{ en: 'Swimming Pool Maintenance', ar: 'مخطط هواتف' },
+	{ en: 'Bank charges', ar: 'مصاريف بنكيه' },
+	{ en: 'Cleaning supplies', ar: 'اعمال بالمعلق' },
+];

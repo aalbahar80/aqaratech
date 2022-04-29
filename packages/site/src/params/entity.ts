@@ -8,6 +8,7 @@ export const match: ParamMatcher = (param) => {
 		'units',
 		'tenants',
 		'maintenanceOrders',
+		'expenses',
 		'transactions',
 	];
 	return entities.includes(param);
