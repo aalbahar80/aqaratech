@@ -1,3 +1,5 @@
 #!/bin/bash
-pnpm run build
-pnpm run start
+git pull
+pnpm install --filter=@self/temporal...
+pnpm build --filter=@self/temporal...
+pnpm start --filter=@self/temporal
