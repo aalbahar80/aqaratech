@@ -4,7 +4,7 @@ export const ownerUser: UserConfig = {
 	type: 'property-owner',
 	navLinks: [
 		{ name: 'Properties', href: '/properties' },
-		{ name: 'Units', href: '/units' },
+		// { name: 'Units', href: '/units' },
 		{ name: 'Leases', href: '/leases' },
 		// { name: 'Tenants', href: base + '/tenants' },
 		// { name: 'Maintenance', href: base + '/maintenanceOrders' },
