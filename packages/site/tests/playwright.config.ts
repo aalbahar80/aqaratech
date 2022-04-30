@@ -1,5 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
+import { config as dotenvConfig } from 'dotenv';
 import {
 	ClientForm,
 	ExpenseForm,
@@ -10,7 +11,6 @@ import {
 	UnitForm,
 	type FormType,
 } from './forms/form.js';
-import { config as dotenvConfig } from 'dotenv';
 
 type Config = PlaywrightTestConfig<{ baseForm: FormType }>;
 
@@ -46,6 +46,8 @@ const extraBrowsers = process.env.DOCKER
 	  ]
 	: [];
 
+const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
+
 const config: Config = {
 	fullyParallel: true,
 	timeout: 30 * 1000,
@@ -66,13 +68,42 @@ const config: Config = {
 
 	projects: [
 		...extraBrowsers,
-		{ name: 'client', use: { baseForm: new ClientForm() } },
-		{ name: 'tenant', use: { baseForm: new TenantForm() } },
-		{ name: 'property', use: { baseForm: new PropertyForm() } },
-		{ name: 'unit', use: { baseForm: new UnitForm() } },
-		{ name: 'lease', use: { baseForm: new LeaseForm() } },
-		{ name: 'expense', use: { baseForm: new ExpenseForm() } },
-		{ name: 'maintenanceOrder', use: { baseForm: new MaintenanceOrderForm() } },
+		{
+			name: 'chromium',
+			use: { ...devices['Desktop Chrome'] },
+			testIgnore: commonTests,
+		},
+		{
+			name: 'client',
+			use: { baseForm: new ClientForm() },
+			testMatch: commonTests,
+		},
+		{
+			name: 'tenant',
+			use: { baseForm: new TenantForm() },
+			testMatch: commonTests,
+		},
+		{
+			name: 'property',
+			use: { baseForm: new PropertyForm() },
+			testMatch: commonTests,
+		},
+		{ name: 'unit', use: { baseForm: new UnitForm() }, testMatch: commonTests },
+		{
+			name: 'lease',
+			use: { baseForm: new LeaseForm() },
+			testMatch: commonTests,
+		},
+		{
+			name: 'expense',
+			use: { baseForm: new ExpenseForm() },
+			testMatch: commonTests,
+		},
+		{
+			name: 'maintenanceOrder',
+			use: { baseForm: new MaintenanceOrderForm() },
+			testMatch: commonTests,
+		},
 	],
 	webServer: {
 		reuseExistingServer: true,

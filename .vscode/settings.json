@@ -44,5 +44,5 @@
 	// "typescript.inlayHints.parameterTypes.enabled": true,
 	// "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
 	// "typescript.inlayHints.variableTypes.enabled": true,
-	"typescript.preferences.importModuleSpecifier": "non-relative"
+	"typescript.preferences.importModuleSpecifier": "relative"
 }
