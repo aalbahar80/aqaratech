@@ -6,6 +6,7 @@ COPY pnpm-lock.yaml ./
 RUN pnpm fetch 
 ENV DATABASE_URL=mysql://3343qb8mt0tn:pscale_pw_MBUYXD9fBxF2356mqzI6tIknIaHYWiro0zvq6FLDSPo@afyacyvnp26i.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict
 ENV DOCKER=true
+ENV REUSE_PRISMA=true
 
 ADD . ./
 RUN pnpm install --filter=@self/site-test... --offline

@@ -10,10 +10,22 @@ pnpm run --filter=@self/site... build
 
 ### Test
 
+#### Local
+
+```bash
+# It's important to reuse the Prisma instance when running tests to avoid connection pooling limits
+# To do that: Set REUSE_PRISMA=TRUE in site/.env
+cd packages/site/tests
+pnpm test
+```
+
+#### Docker
+
 ```bash
 # using the Dockerfile
 cd packages/site/tests
 ./run-docker-test.sh
+# result will be served on port 3001 to avoid conflict with any local playwright instances
 ```
 
 ```bash

@@ -11,7 +11,7 @@ const prismaClient =
 		// errorFormat: 'pretty',
 	});
 
-if (process.env.NODE_ENV === 'development' || process.env.LOCAL)
+if (process.env.NODE_ENV === 'development' || process.env.REUSE_PRISMA)
 	global.prismaClient = prismaClient;
 
 // prismaClient.$on('query', (e: any) => {
