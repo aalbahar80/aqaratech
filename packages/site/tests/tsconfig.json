@@ -5,7 +5,8 @@
 		"rootDirs": ["..", "."],
 		"noUncheckedIndexedAccess": false,
 		"skipLibCheck": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"exactOptionalPropertyTypes": false
 	},
 	"include": ["./**/*.ts"],
 	"exclude": ["node_modules"]

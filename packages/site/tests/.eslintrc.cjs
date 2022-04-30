@@ -32,5 +32,6 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'no-empty-pattern': 'off',
+		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 	},
 };
