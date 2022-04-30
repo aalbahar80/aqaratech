@@ -375,6 +375,20 @@ export class LeaseForm extends Form {
 	static async cleanById(id: string) {
 		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
+
+	override async clean(): Promise<void> {
+		for (const id of this.basket.leases) {
+			await LeaseForm.cleanById(id);
+		}
+		await Promise.all([
+			...this.basket.clients.map((id) => trpc.mutation('clients:delete', id)),
+			...this.basket.properties.map((id) =>
+				trpc.mutation('properties:delete', id),
+			),
+			...this.basket.units.map((id) => trpc.mutation('units:delete', id)),
+			...this.basket.tenants.map((id) => trpc.mutation('tenants:delete', id)),
+		]);
+	}
 }
 
 export class ExpenseForm extends Form {
