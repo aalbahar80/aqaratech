@@ -184,11 +184,13 @@ importers:
       '@self/seed': workspace:^0.0.1
       '@self/site': workspace:^0.0.1
       cross-fetch: ^3.1.5
+      dotenv: ^16.0.0
     devDependencies:
       '@playwright/test': 1.21.1
       '@self/seed': link:../../seed
       '@self/site': link:..
       cross-fetch: 3.1.5
+      dotenv: 16.0.0
 
   packages/temporal:
     specifiers:

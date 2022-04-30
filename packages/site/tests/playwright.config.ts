@@ -10,20 +10,25 @@ import {
 	UnitForm,
 	type FormType,
 } from './forms/form.js';
+import { config as dotenvConfig } from 'dotenv';
 
 type Config = PlaywrightTestConfig<{ baseForm: FormType }>;
+
+dotenvConfig({
+	path: '../.env',
+});
 
 const localConfig: Config = process.env.LOCAL
 	? {
 			use: {
-				headless: false,
-				launchOptions: {
-					args: [
-						'--window-position=3840,500',
-						// '--window-size="3840,5000"',
-						// '--window-size=1500,1500',
-					],
-				},
+				// headless: false,
+				// launchOptions: {
+				// 	args: [
+				// 		'--window-position=3840,500',
+				// 		// '--window-size="3840,5000"',
+				// 		// '--window-size=1500,1500',
+				// 	],
+				// },
 			},
 	  }
 	: {};
@@ -45,7 +50,7 @@ const config: Config = {
 	fullyParallel: true,
 	timeout: 30 * 1000,
 	expect: { timeout: 5000 },
-	globalSetup: './config/global-setup.ts',
+	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
