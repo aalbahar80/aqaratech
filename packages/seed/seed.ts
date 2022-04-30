@@ -204,6 +204,13 @@ async function main({
 	console.log(
 		`Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
 	);
+
+	// consistent id's for testing
+	const cliendId = "c0183a5d-2875-488b-b86f-e1c5628262df";
+	const tenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
+	clients[0]!.id = cliendId;
+	tenants[0]!.id = tenantId;
+
 	if (sample) {
 		console.log(
 			inspect(
