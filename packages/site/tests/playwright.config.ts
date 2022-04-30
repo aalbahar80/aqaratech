@@ -1,18 +1,11 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
-import {
-	ClientForm,
-	ExpenseForm,
-	LeaseForm,
-	MaintenanceOrderForm,
-	PropertyForm,
-	TenantForm,
-	UnitForm,
-	type FormType,
-} from './forms/form.js';
+import type { formClasses } from './forms/form';
 
-type Config = PlaywrightTestConfig<{ baseForm: FormType }>;
+export type FormFixtures = { baseForm: keyof typeof formClasses };
+
+type Config = PlaywrightTestConfig<FormFixtures>;
 
 dotenvConfig({
 	path: '../.env',
@@ -50,7 +43,7 @@ const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
 
 const config: Config = {
 	fullyParallel: true,
-	timeout: 30 * 1000,
+	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 5000 },
 	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
@@ -75,33 +68,33 @@ const config: Config = {
 		},
 		{
 			name: 'client',
-			use: { baseForm: new ClientForm() },
+			use: { baseForm: 'clients' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'tenant',
-			use: { baseForm: new TenantForm() },
+			use: { baseForm: 'tenants' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'property',
-			use: { baseForm: new PropertyForm() },
+			use: { baseForm: 'properties' },
 			testMatch: commonTests,
 		},
-		{ name: 'unit', use: { baseForm: new UnitForm() }, testMatch: commonTests },
+		{ name: 'unit', use: { baseForm: 'units' }, testMatch: commonTests },
 		{
 			name: 'lease',
-			use: { baseForm: new LeaseForm() },
+			use: { baseForm: 'leases' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'expense',
-			use: { baseForm: new ExpenseForm() },
+			use: { baseForm: 'expenses' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'maintenanceOrder',
-			use: { baseForm: new MaintenanceOrderForm() },
+			use: { baseForm: 'maintenanceOrders' },
 			testMatch: commonTests,
 		},
 	],

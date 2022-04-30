@@ -9,7 +9,7 @@ const test = base.extend<{ form: LeaseForm }>({
 		form.page = page;
 		await form.setupEdit();
 		await use(form);
-		// await form.clean();
+		await form.clean();
 	},
 });
 

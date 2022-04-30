@@ -1,8 +1,10 @@
 import { expect, test as base } from '../config/test-setup.js';
-import type { FormType } from './form.js';
+import type { FormFixtures } from '../playwright.config.js';
+import { formClasses, type FormType } from './form.js';
 
-const test = base.extend<{ form: FormType }>({
-	form: async ({ page, baseForm: form }, use) => {
+const test = base.extend<FormFixtures & { form: FormType }>({
+	form: async ({ page, baseForm }, use) => {
+		const form = new formClasses[baseForm]();
 		form.page = page;
 		await form.setupNew();
 		const url = form.getUrl('new');

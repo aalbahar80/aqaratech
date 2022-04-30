@@ -531,3 +531,13 @@ export class MaintenanceOrderForm extends Form {
 		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
 }
+
+export const formClasses = {
+	clients: ClientForm,
+	properties: PropertyForm,
+	units: UnitForm,
+	leases: LeaseForm,
+	tenants: TenantForm,
+	expenses: ExpenseForm,
+	maintenanceOrders: MaintenanceOrderForm,
+} as const;

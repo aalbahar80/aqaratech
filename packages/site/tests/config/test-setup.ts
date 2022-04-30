@@ -1,26 +1,9 @@
 import { test as base } from '@playwright/test';
-import {
-	ClientForm,
-	ExpenseForm,
-	LeaseForm,
-	MaintenanceOrderForm,
-	PropertyForm,
-	TenantForm,
-	UnitForm,
-} from '../forms/form.js';
+import type { FormFixtures } from '../playwright.config.js';
 
 export type Newable<T> = { new (...args: any[]): T };
 
-type Forms =
-	| ClientForm
-	| PropertyForm
-	| UnitForm
-	| TenantForm
-	| LeaseForm
-	| ExpenseForm
-	| MaintenanceOrderForm;
-
-export const test = base.extend<{ baseForm: Forms }>({
+export const test = base.extend<FormFixtures>({
 	page: async ({ page }, use) => {
 		// Ensures that sveltekit is done hydrating the page
 		// Ensures non-flaky tests
@@ -38,7 +21,7 @@ export const test = base.extend<{ baseForm: Forms }>({
 		});
 		await use(page);
 	},
-	baseForm: [new ClientForm(), { option: true }],
+	baseForm: ['clients', { option: true }],
 });
 
 export { expect } from '@playwright/test';
