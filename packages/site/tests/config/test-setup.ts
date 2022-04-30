@@ -30,7 +30,6 @@ export const test = base.extend<{
 	baseForm: Forms;
 	form: Forms;
 	maintenanceOrderForm: MaintenanceOrderForm;
-	single: string;
 }>({
 	page: async ({ page }, use) => {
 		// Ensures that sveltekit is done hydrating the page
@@ -52,7 +51,7 @@ export const test = base.extend<{
 	baseForm: [new ClientForm(), { option: true }],
 	form: async ({ page, baseForm: form }, use) => {
 		form.page = page;
-		await form.setup();
+		await form.setupEdit();
 		const url = form.getUrl('edit');
 		await page.goto(url);
 		await page.evaluate(() => window.started);
@@ -60,49 +59,6 @@ export const test = base.extend<{
 		await form.fill();
 		await use(form);
 		// await form.clean();
-	},
-
-	clientForm: async ({}, use) => {
-		const clientForm = new ClientForm();
-		await clientForm.setup();
-		await use(clientForm);
-		await clientForm.clean();
-	},
-	propertyForm: async ({}, use) => {
-		const form = new PropertyForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
-	},
-	unitForm: async ({}, use) => {
-		const form = new UnitForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
-	},
-	tenantForm: async ({}, use) => {
-		const form = new TenantForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
-	},
-	leaseForm: async ({}, use) => {
-		const form = new LeaseForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
-	},
-	expenseForm: async ({}, use) => {
-		const form = new ExpenseForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
-	},
-	maintenanceOrderForm: async ({}, use) => {
-		const form = new MaintenanceOrderForm();
-		await form.setup();
-		await use(form);
-		await form.clean();
 	},
 });
 

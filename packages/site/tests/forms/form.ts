@@ -16,12 +16,60 @@ import {
 } from '../../src/lib/utils/common.js';
 import { trpc } from '../config/trpc.js';
 
+export type FormType =
+	| ClientForm
+	| PropertyForm
+	| UnitForm
+	| TenantForm
+	| LeaseForm
+	| ExpenseForm
+	| MaintenanceOrderForm;
+
+class Basket {
+	constructor(
+		public clients: string[] = [],
+		public properties: string[] = [],
+		public units: string[] = [],
+		public tenants: string[] = [],
+		public leases: string[] = [],
+		public expenses: string[] = [],
+		public maintenanceOrders: string[] = [],
+	) {}
+
+	async clean() {
+		await Promise.all([
+			...this.clients.map(new ClientForm().deleteById),
+			...this.properties.map(new PropertyForm().deleteById),
+			...this.units.map(new UnitForm().deleteById),
+			...this.tenants.map(new TenantForm().deleteById),
+			...this.leases.map(new LeaseForm().deleteById),
+			...this.expenses.map(new ExpenseForm().deleteById),
+			...this.maintenanceOrders.map(new MaintenanceOrderForm().deleteById),
+		]);
+	}
+}
+
+// interface IForm {
+// 	setupEdit(): Promise<void>;
+// 	setupNew(): Promise<void>;
+// 	clean(): Promise<void>;
+// 	cleanById(id: string): Promise<void>;
+// 	setupById(id: string): Promise<void>;
+// 	fill(): Promise<void>;
+// }
+
+// abstract class AbstractForm {
+// 	constructor(public urlName: Entity) {}
+// }
+
 export class Form {
 	createUrl: string;
 	editUrl: string;
 	public page: Page | undefined;
+	public basket = new Basket();
 
 	constructor(public urlName: Entity, public id: string) {
+		// super(urlName);
 		this.editUrl = `${this.urlName}/${this.id}/edit`;
 		this.createUrl = `/new/${this.urlName}`;
 	}
@@ -49,8 +97,13 @@ export class Form {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	setupNew() {}
+	async clean() {
+		await this.basket.clean();
+	}
+
+	async deleteById(id: string) {
+		await trpc.mutation(`${this.urlName}:delete`, id);
+	}
 }
 
 export class ClientForm extends Form {
@@ -81,16 +134,12 @@ export class ClientForm extends Form {
 		return [this.data.firstName, this.data.email];
 	}
 
-	async setup() {
-		await trpc.mutation('clients:create', this.data);
-	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	async setupNew() {}
 
-	async clean() {
-		await trpc.mutation('clients:delete', this.id);
-	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
+	async setupEdit() {
+		const { id } = await trpc.mutation('clients:create', this.data);
+		this.basket.clients.push(id);
 	}
 }
 
@@ -129,26 +178,24 @@ export class PropertyForm extends Form {
 		return [this.data.area];
 	}
 
-	override async setupNew() {
-		await trpc.mutation('clients:create', this.client);
+	async setupById() {
+		await trpc.mutation(`${this.urlName}:create`, fakeProperty());
 	}
 
-	async setup() {
-		await Promise.all([
+	async setupNew() {
+		const [client] = await Promise.all([
+			trpc.mutation('clients:create', this.client),
+		]);
+		this.basket.clients.push(client.id);
+	}
+
+	async setupEdit() {
+		const [client, property] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.data),
 		]);
-	}
-
-	async clean() {
-		await Promise.all([
-			trpc.mutation('properties:delete', this.data.id),
-			trpc.mutation('clients:delete', this.client.id),
-		]);
-	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
 	}
 }
 
@@ -188,31 +235,24 @@ export class UnitForm extends Form {
 		return [this.data.unitNumber];
 	}
 
-	override async setupNew() {
-		await Promise.all([
+	async setupNew() {
+		const [client, property] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
 	}
 
-	async setup() {
-		await Promise.all([
+	async setupEdit() {
+		const [client, property, unit] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.data),
 		]);
-	}
-
-	async clean() {
-		await Promise.all([
-			trpc.mutation('units:delete', this.data.id),
-			trpc.mutation('properties:delete', this.property.id),
-			trpc.mutation('clients:delete', this.client.id),
-		]);
-	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
 	}
 }
 
@@ -243,13 +283,13 @@ export class TenantForm extends Form {
 		return [this.data.firstName, this.data.email];
 	}
 
-	async setup() {
-		await trpc.mutation('tenants:create', this.data);
+	async setupEdit() {
+		const { id } = await trpc.mutation('tenants:create', this.data);
+		this.basket.tenants.push(id);
 	}
 
-	async clean() {
-		await trpc.mutation('tenants:delete', this.id);
-	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	async setupNew() {}
 
 	static async cleanById(id: string) {
 		await trpc.mutation(`${this.urlName}:delete`, id);
@@ -302,33 +342,32 @@ export class LeaseForm extends Form {
 		return [this.data.monthlyRent];
 	}
 
-	override async setupNew() {
-		await Promise.all([
+	async setupNew() {
+		const [client, property, unit, tenant] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
 			trpc.mutation('tenants:create', this.tenant),
 		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
+		this.basket.tenants.push(tenant.id);
 	}
 
-	async setup() {
-		await Promise.all([
+	async setupEdit() {
+		const [client, property, unit, tenant, lease] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
 			trpc.mutation('tenants:create', this.tenant),
 			trpc.mutation('leases:create', this.data),
 		]);
-	}
-
-	async clean() {
-		await Promise.all([
-			trpc.mutation('leases:delete', this.data.id),
-			trpc.mutation('units:delete', this.unit.id),
-			trpc.mutation('properties:delete', this.property.id),
-			trpc.mutation('clients:delete', this.client.id),
-			trpc.mutation('tenants:delete', this.tenant.id),
-		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
+		this.basket.tenants.push(tenant.id);
+		this.basket.leases.push(lease.id);
 	}
 
 	static async cleanById(id: string) {
@@ -387,30 +426,28 @@ export class ExpenseForm extends Form {
 		];
 	}
 
-	override async setupNew() {
-		await Promise.all([
+	async setupNew() {
+		const [client, property, unit] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
 		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
 	}
 
-	async setup() {
-		await Promise.all([
+	async setupEdit() {
+		const [client, property, unit, expense] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
 			trpc.mutation('expenses:create', this.data),
 		]);
-	}
-
-	async clean() {
-		await Promise.all([
-			trpc.mutation('expenses:delete', this.data.id),
-			trpc.mutation('units:delete', this.unit.id),
-			trpc.mutation('properties:delete', this.property.id),
-			trpc.mutation('clients:delete', this.client.id),
-		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
+		this.basket.expenses.push(expense.id);
 	}
 
 	static async cleanById(id: string) {
@@ -464,30 +501,28 @@ export class MaintenanceOrderForm extends Form {
 		return [this.data.title, this.data.status, this.data.description];
 	}
 
-	override async setupNew() {
-		await Promise.all([
+	async setupNew() {
+		const [client, property, unit] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
 		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
 	}
 
-	async setup() {
-		await Promise.all([
+	async setupEdit() {
+		const [client, property, unit, expense] = await Promise.all([
 			trpc.mutation('clients:create', this.client),
 			trpc.mutation('properties:create', this.property),
 			trpc.mutation('units:create', this.unit),
+			trpc.mutation('maintenanceOrders:create', this.data),
 		]);
-		await trpc.mutation('maintenanceOrders:create', this.data);
-	}
-
-	async clean() {
-		await Promise.all([
-			trpc.mutation('maintenanceOrders:delete', this.data.id),
-			trpc.mutation('units:delete', this.unit.id),
-			trpc.mutation('properties:delete', this.property.id),
-			trpc.mutation('clients:delete', this.client.id),
-		]);
+		this.basket.clients.push(client.id);
+		this.basket.properties.push(property.id);
+		this.basket.units.push(unit.id);
+		this.basket.maintenanceOrders.push(expense.id);
 	}
 
 	static async cleanById(id: string) {

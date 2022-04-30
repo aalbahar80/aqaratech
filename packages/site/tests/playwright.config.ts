@@ -8,17 +8,10 @@ import {
 	PropertyForm,
 	TenantForm,
 	UnitForm,
+	type FormType,
 } from './forms/form.js';
 
-type Forms =
-	| ClientForm
-	| PropertyForm
-	| UnitForm
-	| TenantForm
-	| LeaseForm
-	| ExpenseForm
-	| MaintenanceOrderForm;
-type Config = PlaywrightTestConfig<{ baseForm: Forms }>;
+type Config = PlaywrightTestConfig<{ baseForm: FormType }>;
 
 const localConfig: Config = process.env.LOCAL
 	? {
