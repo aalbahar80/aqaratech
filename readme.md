@@ -11,6 +11,12 @@ pnpm run --filter=@self/site... build
 ### Test
 
 ```bash
+# using the Dockerfile
+cd packages/site/tests
+./run-docker-test.sh
+```
+
+```bash
 ## TODO: Environment should have pscale cli
 pnpm install --filter=@self/site-test...
 pnpm run --filter=@self/site-test... build
