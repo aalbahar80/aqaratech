@@ -11,6 +11,15 @@ import {
 
 export type Newable<T> = { new (...args: any[]): T };
 
+type Forms =
+	| ClientForm
+	| PropertyForm
+	| UnitForm
+	| TenantForm
+	| LeaseForm
+	| ExpenseForm
+	| MaintenanceOrderForm;
+
 export const test = base.extend<{
 	clientForm: ClientForm;
 	propertyForm: PropertyForm;
@@ -18,6 +27,8 @@ export const test = base.extend<{
 	tenantForm: TenantForm;
 	leaseForm: LeaseForm;
 	expenseForm: ExpenseForm;
+	baseForm: Forms;
+	form: Forms;
 	maintenanceOrderForm: MaintenanceOrderForm;
 	single: string;
 }>({
@@ -38,44 +49,57 @@ export const test = base.extend<{
 		});
 		await use(page);
 	},
-	clientForm: async ({ page }, use) => {
-		const clientForm = new ClientForm(page);
+	baseForm: [new ClientForm(), { option: true }],
+	form: async ({ page, baseForm: form }, use) => {
+		form.page = page;
+		await form.setup();
+		const url = form.getUrl('edit');
+		await page.goto(url);
+		await page.evaluate(() => window.started);
+		form.alter();
+		await form.fill();
+		await use(form);
+		// await form.clean();
+	},
+
+	clientForm: async ({}, use) => {
+		const clientForm = new ClientForm();
 		await clientForm.setup();
 		await use(clientForm);
 		await clientForm.clean();
 	},
-	propertyForm: async ({ page }, use) => {
-		const form = new PropertyForm(page);
+	propertyForm: async ({}, use) => {
+		const form = new PropertyForm();
 		await form.setup();
 		await use(form);
 		await form.clean();
 	},
-	unitForm: async ({ page }, use) => {
-		const form = new UnitForm(page);
+	unitForm: async ({}, use) => {
+		const form = new UnitForm();
 		await form.setup();
 		await use(form);
 		await form.clean();
 	},
-	tenantForm: async ({ page }, use) => {
-		const form = new TenantForm(page);
+	tenantForm: async ({}, use) => {
+		const form = new TenantForm();
 		await form.setup();
 		await use(form);
 		await form.clean();
 	},
-	leaseForm: async ({ page }, use) => {
-		const form = new LeaseForm(page);
+	leaseForm: async ({}, use) => {
+		const form = new LeaseForm();
 		await form.setup();
 		await use(form);
 		await form.clean();
 	},
-	expenseForm: async ({ page }, use) => {
-		const form = new ExpenseForm(page);
+	expenseForm: async ({}, use) => {
+		const form = new ExpenseForm();
 		await form.setup();
 		await use(form);
 		await form.clean();
 	},
-	maintenanceOrderForm: async ({ page }, use) => {
-		const form = new MaintenanceOrderForm(page);
+	maintenanceOrderForm: async ({}, use) => {
+		const form = new MaintenanceOrderForm();
 		await form.setup();
 		await use(form);
 		await form.clean();

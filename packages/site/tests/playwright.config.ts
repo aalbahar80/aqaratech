@@ -1,5 +1,23 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
+import {
+	ClientForm,
+	ExpenseForm,
+	LeaseForm,
+	MaintenanceOrderForm,
+	PropertyForm,
+	TenantForm,
+	UnitForm,
+} from './forms/form.js';
+
+type Forms =
+	| ClientForm
+	| PropertyForm
+	| UnitForm
+	| TenantForm
+	| LeaseForm
+	| ExpenseForm
+	| MaintenanceOrderForm;
 
 /**
  * Read environment variables from file.
@@ -10,7 +28,7 @@ import { devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+const config: PlaywrightTestConfig<{ baseForm: Forms }> = {
 	fullyParallel: true,
 	// testDir: './tests',
 	// testMatch: ['client.test.ts', 'admin.spec.ts'],
@@ -50,30 +68,58 @@ const config: PlaywrightTestConfig = {
 		// 		// '--window-size=1500,1500',
 		// 	],
 		// },
+		browserName: 'chromium',
 	},
 
 	/* Configure projects for major browsers */
 	projects: [
 		{
-			name: 'webkit',
-			use: {
-				...devices['Desktop Safari'],
-			},
+			name: 'client',
+			use: { baseForm: new ClientForm() },
 		},
 		{
-			name: 'chromium',
-			use: {
-				...devices['Desktop Chrome'],
-			},
+			name: 'tenant',
+			use: { baseForm: new TenantForm() },
+		},
+		{
+			name: 'property',
+			use: { baseForm: new PropertyForm() },
+		},
+		{
+			name: 'unit',
+			use: { baseForm: new UnitForm() },
+		},
+		{
+			name: 'lease',
+			use: { baseForm: new LeaseForm() },
+		},
+		{
+			name: 'expense',
+			use: { baseForm: new ExpenseForm() },
+		},
+		{
+			name: 'maintenanceOrder',
+			use: { baseForm: new MaintenanceOrderForm() },
 		},
 
+		// {
+		// 	name: 'chromium',
+		// 	use: {
+		// 		...devices['Desktop Chrome'],
+		// 	},
+		// },
+		// {
+		// 	name: 'webkit',
+		// 	use: {
+		// 		...devices['Desktop Safari'],
+		// 	},
+		// },
 		// {
 		// 	name: 'firefox',
 		// 	use: {
 		// 		...devices['Desktop Firefox'],
 		// 	},
 		// },
-
 		/* Test against mobile viewports. */
 		// {
 		// 	name: 'Mobile Chrome',

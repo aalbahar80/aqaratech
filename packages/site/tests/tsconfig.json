@@ -1,6 +1,7 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
+		"target": "ES2021",
 		"rootDirs": ["..", "."],
 		"noUncheckedIndexedAccess": false,
 		"skipLibCheck": true,

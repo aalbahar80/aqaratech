@@ -19,19 +19,21 @@ import { trpc } from '../config/trpc.js';
 export class Form {
 	createUrl: string;
 	editUrl: string;
-	constructor(public page: Page, public urlName: Entity, public id: string) {
+	public page: Page | undefined;
+
+	constructor(public urlName: Entity, public id: string) {
 		this.editUrl = `${this.urlName}/${this.id}/edit`;
 		this.createUrl = `/new/${this.urlName}`;
 	}
 
 	submit() {
-		return this.page.click('button[type="submit"]');
+		return this.page?.click('button[type="submit"]');
 	}
 
 	async getRequest() {
 		const re = new RegExp('/trpc');
 		const [request] = await Promise.all([
-			this.page.waitForRequest(re),
+			this.page?.waitForRequest(re),
 			await this.submit(),
 		]);
 		return request;
@@ -53,17 +55,18 @@ export class Form {
 
 export class ClientForm extends Form {
 	static urlName: Entity = 'clients';
-	constructor(page: Page, public data = fakeClient()) {
-		super(page, ClientForm.urlName, data.id);
+	public override page: Page | undefined;
+	constructor(public data = fakeClient()) {
+		super(ClientForm.urlName, data.id);
 	}
 
 	public async fill() {
-		await this.page.fill('input[name="firstName"]', this.data.firstName);
-		await this.page.fill('input[name="lastName"]', this.data.lastName);
-		await this.page.fill('input[name="email"]', this.data.email);
-		await this.page.fill('input[name="phone"]', this.data.phone);
-		await this.page.fill('input[name="civilid"]', this.data.civilid);
-		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
+		await this.page?.fill('input[name="firstName"]', this.data.firstName);
+		await this.page?.fill('input[name="lastName"]', this.data.lastName);
+		await this.page?.fill('input[name="email"]', this.data.email);
+		await this.page?.fill('input[name="phone"]', this.data.phone);
+		await this.page?.fill('input[name="civilid"]', this.data.civilid);
+		await this.page?.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
 
 	// TODO: move to ancestor class
@@ -93,22 +96,23 @@ export class ClientForm extends Form {
 
 export class PropertyForm extends Form {
 	static urlName: Entity = 'properties';
+	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
-	constructor(page: Page, public data = fakeProperty()) {
-		super(page, PropertyForm.urlName, data.id);
+	constructor(public data = fakeProperty()) {
+		super(PropertyForm.urlName, data.id);
 		this.client = { ...fakeClient(), id: data.clientId };
 	}
 
 	public async fill() {
-		await this.page.fill('[id="area"]', this.data.area);
-		await this.page.locator(`.item >> text=${this.data.area}`).first().click();
-		await this.page.keyboard.press('Enter');
-		await this.page.fill('input[name="block"]', this.data.block);
-		await this.page.fill('input[name="street"]', this.data.street);
-		await this.page.fill('input[name="avenue"]', this.data.avenue ?? '');
-		await this.page.fill('input[name="number"]', this.data.number);
-		await this.page.waitForLoadState('networkidle');
-		await this.page.selectOption('#clientId', { label: getName(this.client) });
+		await this.page?.fill('[id="area"]', this.data.area);
+		await this.page?.locator(`.item >> text=${this.data.area}`).first().click();
+		await this.page?.keyboard.press('Enter');
+		await this.page?.fill('input[name="block"]', this.data.block);
+		await this.page?.fill('input[name="street"]', this.data.street);
+		await this.page?.fill('input[name="avenue"]', this.data.avenue ?? '');
+		await this.page?.fill('input[name="number"]', this.data.number);
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.selectOption('#clientId', { label: getName(this.client) });
 	}
 
 	public alter() {
@@ -131,15 +135,15 @@ export class PropertyForm extends Form {
 
 	async setup() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.data),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.data),
 		]);
 	}
 
 	async clean() {
 		await Promise.all([
-			await trpc.mutation('properties:delete', this.data.id),
-			await trpc.mutation('clients:delete', this.client.id),
+			trpc.mutation('properties:delete', this.data.id),
+			trpc.mutation('clients:delete', this.client.id),
 		]);
 	}
 
@@ -150,21 +154,22 @@ export class PropertyForm extends Form {
 
 export class UnitForm extends Form {
 	static urlName: Entity = 'units';
+	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
-	constructor(page: Page, public data = fakeUnit()) {
-		super(page, UnitForm.urlName, data.id);
+	constructor(public data = fakeUnit()) {
+		super(UnitForm.urlName, data.id);
 		this.property = { ...fakeProperty(), id: data.propertyId };
 		this.client = { ...fakeClient(), id: this.property.clientId };
 	}
 
 	public async fill() {
-		await this.page.fill('input[name="unitNumber"]', this.data.unitNumber);
-		await this.page.fill('input[name="bed"]', this.data.bed.toString());
-		await this.page.fill('input[name="bath"]', this.data.bath.toString());
-		await this.page.fill('input[name="floor"]', this.data.floor.toString());
-		await this.page.selectOption('#clientId', { label: getName(this.client) });
-		await this.page.selectOption('#propertyId', {
+		await this.page?.fill('input[name="unitNumber"]', this.data.unitNumber);
+		await this.page?.fill('input[name="bed"]', this.data.bed.toString());
+		await this.page?.fill('input[name="bath"]', this.data.bath.toString());
+		await this.page?.fill('input[name="floor"]', this.data.floor.toString());
+		await this.page?.selectOption('#clientId', { label: getName(this.client) });
+		await this.page?.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
 	}
@@ -185,24 +190,24 @@ export class UnitForm extends Form {
 
 	override async setupNew() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
 		]);
 	}
 
 	async setup() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.data),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.data),
 		]);
 	}
 
 	async clean() {
 		await Promise.all([
-			await trpc.mutation('units:delete', this.data.id),
-			await trpc.mutation('properties:delete', this.property.id),
-			await trpc.mutation('clients:delete', this.client.id),
+			trpc.mutation('units:delete', this.data.id),
+			trpc.mutation('properties:delete', this.property.id),
+			trpc.mutation('clients:delete', this.client.id),
 		]);
 	}
 
@@ -213,17 +218,18 @@ export class UnitForm extends Form {
 
 export class TenantForm extends Form {
 	static urlName: Entity = 'tenants';
-	constructor(page: Page, public data = fakeTenant()) {
-		super(page, TenantForm.urlName, data.id);
+	public override page: Page | undefined;
+	constructor(public data = fakeTenant()) {
+		super(TenantForm.urlName, data.id);
 	}
 
 	public async fill() {
-		await this.page.fill('input[name="firstName"]', this.data.firstName);
-		await this.page.fill('input[name="lastName"]', this.data.lastName);
-		await this.page.fill('input[name="email"]', this.data.email);
-		await this.page.fill('input[name="phone"]', this.data.phone);
-		await this.page.fill('input[name="civilid"]', this.data.civilid);
-		await this.page.fill('input[name="dob"]', dateToInput(this.data.dob));
+		await this.page?.fill('input[name="firstName"]', this.data.firstName);
+		await this.page?.fill('input[name="lastName"]', this.data.lastName);
+		await this.page?.fill('input[name="email"]', this.data.email);
+		await this.page?.fill('input[name="phone"]', this.data.phone);
+		await this.page?.fill('input[name="civilid"]', this.data.civilid);
+		await this.page?.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
 
 	public alter() {
@@ -252,12 +258,13 @@ export class TenantForm extends Form {
 
 export class LeaseForm extends Form {
 	static urlName: Entity = 'leases';
+	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	unit: ReturnType<typeof fakeUnit>;
 	tenant: ReturnType<typeof fakeTenant>;
-	constructor(page: Page, public data = fakeLease()) {
-		super(page, LeaseForm.urlName, data.id);
+	constructor(public data = fakeLease()) {
+		super(LeaseForm.urlName, data.id);
 		this.unit = { ...fakeUnit(), id: data.unitId };
 		this.property = { ...fakeProperty(), id: this.unit.propertyId };
 		this.client = { ...fakeClient(), id: this.property.clientId };
@@ -265,20 +272,20 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill() {
-		await this.page.waitForLoadState('networkidle');
-		await this.page.selectOption('#tenantId', { label: getName(this.tenant) });
-		if (!this.page.url().includes('edit')) {
-			await this.page.selectOption('#propertyId', {
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.selectOption('#tenantId', { label: getName(this.tenant) });
+		if (!this.page?.url().includes('edit')) {
+			await this.page?.selectOption('#propertyId', {
 				label: getAddress(this.property),
 			});
-			await this.page.waitForLoadState('networkidle');
+			await this.page?.waitForLoadState('networkidle');
 		}
-		await this.page.selectOption('#unitId', {
+		await this.page?.selectOption('#unitId', {
 			label: [this.unit.type, this.unit.unitNumber]
 				.filter((str) => str)
 				.join(' '),
 		});
-		await this.page.fill(
+		await this.page?.fill(
 			'input[name="monthlyRent"]',
 			this.data.monthlyRent.toString(),
 		);
@@ -297,30 +304,30 @@ export class LeaseForm extends Form {
 
 	override async setupNew() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
-			await trpc.mutation('tenants:create', this.tenant),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
+			trpc.mutation('tenants:create', this.tenant),
 		]);
 	}
 
 	async setup() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
-			await trpc.mutation('tenants:create', this.tenant),
-			await trpc.mutation('leases:create', this.data),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
+			trpc.mutation('tenants:create', this.tenant),
+			trpc.mutation('leases:create', this.data),
 		]);
 	}
 
 	async clean() {
 		await Promise.all([
-			await trpc.mutation('leases:delete', this.data.id),
-			await trpc.mutation('units:delete', this.unit.id),
-			await trpc.mutation('properties:delete', this.property.id),
-			await trpc.mutation('clients:delete', this.client.id),
-			await trpc.mutation('tenants:delete', this.tenant.id),
+			trpc.mutation('leases:delete', this.data.id),
+			trpc.mutation('units:delete', this.unit.id),
+			trpc.mutation('properties:delete', this.property.id),
+			trpc.mutation('clients:delete', this.client.id),
+			trpc.mutation('tenants:delete', this.tenant.id),
 		]);
 	}
 
@@ -331,8 +338,8 @@ export class LeaseForm extends Form {
 
 export class ExpenseForm extends Form {
 	static urlName: Entity = 'expenses';
+	public override page: Page | undefined;
 	constructor(
-		page: Page,
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
 		public unit = fakeUnit(property.id),
@@ -343,19 +350,22 @@ export class ExpenseForm extends Form {
 			unitId: null,
 		},
 	) {
-		super(page, ExpenseForm.urlName, data.id);
+		super(ExpenseForm.urlName, data.id);
 	}
 
 	public async fill() {
-		await this.page.waitForLoadState('networkidle');
-		await this.page.fill('input[name="amount"]', this.data.amount.toString());
-		await this.page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
-		await this.page.fill('input[name="memo"]', this.data.memo);
-		await this.page.selectOption('#category', { index: 0 });
-		await this.page.selectOption('#clientId', { index: 0 });
-		await this.page.selectOption('#propertyId', { index: 0 });
-		await this.page.selectOption('#unitId', { index: 0 });
-		await this.page.locator('#clientId-radio').click();
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.fill('input[name="amount"]', this.data.amount.toString());
+		await this.page?.fill(
+			'input[name="postAt"]',
+			dateToInput(this.data.postAt),
+		);
+		await this.page?.fill('input[name="memo"]', this.data.memo);
+		await this.page?.selectOption('#category', { index: 0 });
+		await this.page?.selectOption('#clientId', { index: 0 });
+		await this.page?.selectOption('#propertyId', { index: 0 });
+		await this.page?.selectOption('#unitId', { index: 0 });
+		await this.page?.locator('#clientId-radio').click();
 	}
 
 	public alter() {
@@ -370,36 +380,36 @@ export class ExpenseForm extends Form {
 
 	public basic() {
 		return [
-			this.data.amount,
+			this.data.amount.toFixed(0),
 			this.data.category,
-			this.data.postAt,
+			// this.data.postAt,
 			this.data.memo,
 		];
 	}
 
 	override async setupNew() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
 		]);
 	}
 
 	async setup() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
+			trpc.mutation('expenses:create', this.data),
 		]);
-		await trpc.mutation('expenses:create', this.data);
 	}
 
 	async clean() {
 		await Promise.all([
-			await trpc.mutation('expenses:delete', this.data.id),
-			await trpc.mutation('units:delete', this.unit.id),
-			await trpc.mutation('properties:delete', this.property.id),
-			await trpc.mutation('clients:delete', this.client.id),
+			trpc.mutation('expenses:delete', this.data.id),
+			trpc.mutation('units:delete', this.unit.id),
+			trpc.mutation('properties:delete', this.property.id),
+			trpc.mutation('clients:delete', this.client.id),
 		]);
 	}
 
@@ -410,8 +420,8 @@ export class ExpenseForm extends Form {
 
 export class MaintenanceOrderForm extends Form {
 	static urlName: Entity = 'maintenanceOrders';
+	public override page: Page | undefined;
 	constructor(
-		page: Page,
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
 		public unit = fakeUnit(property.id),
@@ -422,22 +432,22 @@ export class MaintenanceOrderForm extends Form {
 			unitId: null,
 		},
 	) {
-		super(page, MaintenanceOrderForm.urlName, data.id);
+		super(MaintenanceOrderForm.urlName, data.id);
 	}
 
 	public async fill() {
-		await this.page.waitForLoadState('networkidle');
-		await this.page.fill(
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.fill(
 			'input[name="completedAt"]',
 			dateToInput(this.data.completedAt),
 		);
-		await this.page.fill('input[name="title"]', this.data.title);
-		await this.page.fill('input[name="description"]', this.data.description);
-		await this.page.selectOption('#status', { index: 0 });
-		await this.page.selectOption('#clientId', { index: 0 });
-		await this.page.selectOption('#propertyId', { index: 0 });
-		await this.page.selectOption('#unitId', { index: 0 });
-		await this.page.locator('#clientId-radio').click();
+		await this.page?.fill('input[name="title"]', this.data.title);
+		await this.page?.fill('input[name="description"]', this.data.description);
+		await this.page?.selectOption('#status', { index: 0 });
+		await this.page?.selectOption('#clientId', { index: 0 });
+		await this.page?.selectOption('#propertyId', { index: 0 });
+		await this.page?.selectOption('#unitId', { index: 0 });
+		await this.page?.locator('#clientId-radio').click();
 	}
 
 	public alter() {
@@ -456,27 +466,27 @@ export class MaintenanceOrderForm extends Form {
 
 	override async setupNew() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
 		]);
 	}
 
 	async setup() {
 		await Promise.all([
-			await trpc.mutation('clients:create', this.client),
-			await trpc.mutation('properties:create', this.property),
-			await trpc.mutation('units:create', this.unit),
+			trpc.mutation('clients:create', this.client),
+			trpc.mutation('properties:create', this.property),
+			trpc.mutation('units:create', this.unit),
 		]);
 		await trpc.mutation('maintenanceOrders:create', this.data);
 	}
 
 	async clean() {
 		await Promise.all([
-			await trpc.mutation('maintenanceOrders:delete', this.data.id),
-			await trpc.mutation('units:delete', this.unit.id),
-			await trpc.mutation('properties:delete', this.property.id),
-			await trpc.mutation('clients:delete', this.client.id),
+			trpc.mutation('maintenanceOrders:delete', this.data.id),
+			trpc.mutation('units:delete', this.unit.id),
+			trpc.mutation('properties:delete', this.property.id),
+			trpc.mutation('clients:delete', this.client.id),
 		]);
 	}
 
