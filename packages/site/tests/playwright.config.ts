@@ -102,18 +102,18 @@ const config: PlaywrightTestConfig<{ baseForm: Forms }> = {
 			use: { baseForm: new MaintenanceOrderForm() },
 		},
 
-		// {
-		// 	name: 'chromium',
-		// 	use: {
-		// 		...devices['Desktop Chrome'],
-		// 	},
-		// },
-		// {
-		// 	name: 'webkit',
-		// 	use: {
-		// 		...devices['Desktop Safari'],
-		// 	},
-		// },
+		{
+			name: 'chromium',
+			use: {
+				...devices['Desktop Chrome'],
+			},
+		},
+		{
+			name: 'webkit',
+			use: {
+				...devices['Desktop Safari'],
+			},
+		},
 		// {
 		// 	name: 'firefox',
 		// 	use: {
@@ -153,10 +153,10 @@ const config: PlaywrightTestConfig<{ baseForm: Forms }> = {
 	// outputDir: 'test-results/',
 
 	/* Run your local dev server before starting the tests */
-	webServer: {
-		port: 3000,
-		command: 'cd ../ && pnpm run build && pnpm run preview',
-	},
+	// webServer: {
+	// 	port: 3000,
+	// 	command: 'cd ../ && pnpm run build && pnpm run preview',
+	// },
 };
 
 export default config;
