@@ -58,7 +58,7 @@ export const test = base.extend<{
 		form.alter();
 		await form.fill();
 		await use(form);
-		// await form.clean();
+		await form.clean();
 	},
 });
 

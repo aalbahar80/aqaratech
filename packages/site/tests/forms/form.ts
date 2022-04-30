@@ -38,13 +38,15 @@ class Basket {
 
 	async clean() {
 		await Promise.all([
-			...this.clients.map(new ClientForm().deleteById),
-			...this.properties.map(new PropertyForm().deleteById),
-			...this.units.map(new UnitForm().deleteById),
-			...this.tenants.map(new TenantForm().deleteById),
-			...this.leases.map(new LeaseForm().deleteById),
-			...this.expenses.map(new ExpenseForm().deleteById),
-			...this.maintenanceOrders.map(new MaintenanceOrderForm().deleteById),
+			...this.clients.map((id) => trpc.mutation('clients:delete', id)),
+			...this.properties.map((id) => trpc.mutation('properties:delete', id)),
+			...this.units.map((id) => trpc.mutation('units:delete', id)),
+			...this.tenants.map((id) => trpc.mutation('tenants:delete', id)),
+			...this.leases.map((id) => trpc.mutation('leases:delete', id)),
+			...this.expenses.map((id) => trpc.mutation('expenses:delete', id)),
+			...this.maintenanceOrders.map((id) =>
+				trpc.mutation('maintenanceOrders:delete', id),
+			),
 		]);
 	}
 }
