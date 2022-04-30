@@ -1,4 +1,19 @@
-import { expect, test } from '../config/test-setup.js';
+import { expect, test as base } from '../config/test-setup.js';
+import type { FormType } from './form.js';
+
+const test = base.extend<{ form: FormType }>({
+	form: async ({ page, baseForm: form }, use) => {
+		form.page = page;
+		await form.setupEdit();
+		const url = form.getUrl('edit');
+		await page.goto(url);
+		await page.evaluate(() => window.started);
+		form.alter();
+		await form.fill();
+		await use(form);
+		await form.clean();
+	},
+});
 
 test.use({ storageState: './config/adminStorageState.json' });
 
