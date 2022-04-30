@@ -1,5 +1,5 @@
-import { test as base } from '@playwright/test';
 import { getAddress, getName } from '../../src/lib/utils/common.js';
+import { test as base } from '../config/test-setup.js';
 import { preselected } from '../utils.js';
 import { LeaseForm } from './form.js';
 
@@ -36,13 +36,9 @@ test('new lease: preselected unit from URL', async ({ page, form }) => {
 });
 
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
-	await page.goto(`/new/leases?unitId=${form.unit.id}`);
+	await page.goto(`/new/leases?tenantId=${form.tenant.id}`);
 	await page.evaluate(() => window.started);
-	await preselected(
-		page,
-		page.locator('#unitId'),
-		[form.unit.type, form.unit.unitNumber].filter((str) => str).join(' '),
-	);
+	await preselected(page, page.locator('#tenantId'), getName(form.tenant));
 });
 
 test.describe('edit lease', async () => {
