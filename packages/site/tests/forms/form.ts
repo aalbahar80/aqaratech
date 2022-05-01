@@ -65,19 +65,6 @@ class Basket {
 	}
 }
 
-// interface IForm {
-// 	setupEdit(): Promise<void>;
-// 	setupNew(): Promise<void>;
-// 	clean(): Promise<void>;
-// 	cleanById(id: string): Promise<void>;
-// 	setupById(id: string): Promise<void>;
-// 	fill(): Promise<void>;
-// }
-
-// abstract class AbstractForm {
-// 	constructor(public urlName: Entity) {}
-// }
-
 export class Form {
 	createUrl: string;
 	editUrl: string;
@@ -389,20 +376,6 @@ export class LeaseForm extends Form {
 	static async cleanById(id: string) {
 		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
-
-	// override async clean(): Promise<void> {
-	// 	for (const id of this.basket.leases) {
-	// 		await LeaseForm.cleanById(id);
-	// 	}
-	// 	await Promise.all([
-	// 		...this.basket.clients.map((id) => trpc.mutation('clients:delete', id)),
-	// 		...this.basket.properties.map((id) =>
-	// 			trpc.mutation('properties:delete', id),
-	// 		),
-	// 		...this.basket.units.map((id) => trpc.mutation('units:delete', id)),
-	// 		...this.basket.tenants.map((id) => trpc.mutation('tenants:delete', id)),
-	// 	]);
-	// }
 }
 
 export class ExpenseForm extends Form {
@@ -430,7 +403,7 @@ export class ExpenseForm extends Form {
 			dateToInput(this.data.postAt),
 		);
 		await this.page?.fill('input[name="memo"]', this.data.memo);
-		await this.page?.selectOption('#category', { index: 0 });
+		await this.page?.selectOption('#category', { value: this.data.category });
 		await this.page?.selectOption('#clientId', { index: 0 });
 		await this.page?.selectOption('#propertyId', { index: 0 });
 		await this.page?.selectOption('#unitId', { index: 0 });
@@ -528,7 +501,11 @@ export class MaintenanceOrderForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.title, this.data.status, this.data.description];
+		return [
+			this.data.title,
+			// this.data.status,
+			this.data.description,
+		];
 	}
 
 	async setupNew() {

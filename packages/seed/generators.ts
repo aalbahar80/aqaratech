@@ -4,7 +4,7 @@ import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import {
 	areas,
 	coordinates,
-	expenseCategories,
+	expenseCats,
 } from "../site/src/lib/config/constants.js";
 
 faker.setLocale("ar");
@@ -161,7 +161,7 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
-	category: faker.random.arrayElement(expenseCategories),
+	category: faker.random.arrayElement(expenseCats.map((e) => e.en)),
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });
