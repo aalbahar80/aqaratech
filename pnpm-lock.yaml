@@ -181,16 +181,22 @@ importers:
   packages/site/tests:
     specifiers:
       '@playwright/test': ^1.21.1
+      '@prisma/client': ^3.13.0
       '@self/seed': workspace:^0.0.1
       '@self/site': workspace:^0.0.1
       cross-fetch: ^3.1.5
       dotenv: ^16.0.0
+      prisma: ^3.13.0
+      typescript: ^4.6.3
     devDependencies:
       '@playwright/test': 1.21.1
+      '@prisma/client': 3.13.0_prisma@3.13.0
       '@self/seed': link:../../seed
       '@self/site': link:..
       cross-fetch: 3.1.5
       dotenv: 16.0.0
+      prisma: 3.13.0
+      typescript: 4.6.4
 
   packages/temporal:
     specifiers:
