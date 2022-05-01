@@ -85,7 +85,7 @@ export function generateSchedule({
 	// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
 	const nextMonth = new Date(
 		scheduleStart.getFullYear(),
-		scheduleStart.getMonth() + 1,
+		scheduleStart.getMonth(),
 		2,
 	);
 

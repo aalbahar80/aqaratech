@@ -42,8 +42,8 @@ const extraBrowsers = process.env.DOCKER
 const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
 
 const config: Config = {
-	fullyParallel: true,
-	timeout: process.env.CI ? 30000 : 30000,
+	// fullyParallel: true,
+	timeout: process.env.CI ? 30000 : 15000,
 	expect: { timeout: 5000 },
 	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
@@ -54,7 +54,14 @@ const config: Config = {
 	use: {
 		actionTimeout: 0,
 		baseURL: 'http://localhost:3000',
-		trace: 'retain-on-failure',
+		trace: process.env.CI
+			? undefined
+			: {
+					mode: 'retain-on-failure',
+					screenshots: true,
+					snapshots: true,
+					sources: true,
+			  },
 		browserName: 'chromium',
 		...localConfig.use,
 	},
