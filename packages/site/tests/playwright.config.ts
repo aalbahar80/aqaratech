@@ -11,6 +11,11 @@ dotenvConfig({
 	path: '../.env',
 });
 
+console.log('LOCAL config is:', process.env.LOCAL);
+console.log('DOCKER config is:', process.env.LOCAL);
+console.log('REUSE_PRISMA config is:', process.env.REUSE_PRISMA);
+console.log('CI config is:', process.env.CI);
+
 const localConfig: Config = process.env.LOCAL
 	? {
 			use: {
@@ -43,7 +48,7 @@ const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
 
 const config: Config = {
 	fullyParallel: true,
-	timeout: process.env.CI ? 30000 : 15000,
+	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 5000 },
 	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,

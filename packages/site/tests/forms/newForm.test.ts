@@ -12,7 +12,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await page.evaluate(() => window.started);
 		await form.fill();
 		await use(form);
-		await form.clean();
+		// await form.clean();
 	},
 });
 

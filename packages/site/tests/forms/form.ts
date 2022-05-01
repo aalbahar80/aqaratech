@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../config/prismaClient';
 import {
 	fakeClient,
 	fakeExpense,
@@ -17,8 +17,6 @@ import {
 	kwdFormat,
 } from '../../src/lib/utils/common.js';
 import { trpc } from '../config/trpc.js';
-
-const prisma = new PrismaClient();
 
 export type FormType =
 	| ClientForm

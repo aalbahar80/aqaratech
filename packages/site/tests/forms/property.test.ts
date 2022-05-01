@@ -9,7 +9,7 @@ const test = base.extend<{ form: PropertyForm }>({
 		form.page = page;
 		await form.setupEdit();
 		await use(form);
-		await form.clean();
+		// await form.clean();
 	},
 });
 
