@@ -95,11 +95,6 @@ const config: Config = {
 		},
 		{ name: 'unit', use: { baseForm: 'units' }, testMatch: commonTests },
 		{
-			name: 'lease',
-			use: { baseForm: 'leases' },
-			testMatch: commonTests,
-		},
-		{
 			name: 'expense',
 			use: { baseForm: 'expenses' },
 			testMatch: commonTests,
@@ -107,6 +102,11 @@ const config: Config = {
 		{
 			name: 'maintenanceOrder',
 			use: { baseForm: 'maintenanceOrders' },
+			testMatch: commonTests,
+		},
+		{
+			name: 'lease',
+			use: { baseForm: 'leases' },
 			testMatch: commonTests,
 		},
 	],

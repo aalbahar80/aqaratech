@@ -449,7 +449,7 @@ export class ExpenseForm extends Form {
 
 	public basic() {
 		return [
-			this.data.amount.toFixed(0),
+			kwdFormat(this.data.amount),
 			this.data.category,
 			// this.data.postAt,
 			this.data.memo,

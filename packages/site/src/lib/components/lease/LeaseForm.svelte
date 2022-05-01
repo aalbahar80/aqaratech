@@ -50,6 +50,7 @@
 		setFields,
 		setData,
 		unsetField,
+		isValid,
 	} = createForm<z.infer<typeof LeaseModel.leaseFormSchema>, ValidatorConfig>({
 		transform: (values: unknown) => {
 			// make sure each element in schedule array is an object whose postAt is a date
@@ -161,10 +162,9 @@
 		}
 	});
 	let unitSelect: SelectEntity;
-	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 </script>
 
-<form use:form data-test={!noErrorMsg ? 'error' : 'ok'}>
+<form use:form data-test={$isValid ? 'ok' : 'error'}>
 	<!-- Tenant -->
 	<div>
 		<div class="md:grid md:grid-cols-3 md:gap-6">

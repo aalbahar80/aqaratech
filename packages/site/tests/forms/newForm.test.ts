@@ -49,7 +49,6 @@ test.describe(`Form: new`, async () => {
 	test('able to submit after filling', async ({ page, form }) => {
 		const button = page.locator('button[type="submit"]');
 		const el = page.locator('form');
-		expect.soft(await el.getAttribute('data-test')).toBe('ok');
 		expect.soft(await button.isEnabled()).toBe(true);
 		await form.submit();
 		expect(await button.isEnabled()).toBe(false);

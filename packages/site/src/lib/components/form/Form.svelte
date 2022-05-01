@@ -26,6 +26,7 @@
 		isSubmitting,
 		data: data2,
 		setData,
+		isValid,
 	} = createForm<z.infer<typeof model.schema>>({
 		transform: (values) => {
 			const original = values as z.infer<typeof model.schema>;
@@ -86,7 +87,7 @@
 	<form
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
-		data-test={!noErrorMsg ? 'error' : 'ok'}
+		data-test={$isValid ? 'ok' : 'error'}
 	>
 		<div class="h-0 flex-1">
 			<div class="flex flex-col justify-between">
