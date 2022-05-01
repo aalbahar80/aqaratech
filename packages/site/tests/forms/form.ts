@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { PrismaClient } from '@prisma/client';
 import {
 	fakeClient,
 	fakeExpense,
@@ -13,8 +14,11 @@ import {
 	dateToInput,
 	getAddress,
 	getName,
+	kwdFormat,
 } from '../../src/lib/utils/common.js';
 import { trpc } from '../config/trpc.js';
+
+const prisma = new PrismaClient();
 
 export type FormType =
 	| ClientForm
@@ -37,16 +41,28 @@ class Basket {
 	) {}
 
 	async clean() {
-		await Promise.all([
-			...this.clients.map((id) => trpc.mutation('clients:delete', id)),
-			...this.properties.map((id) => trpc.mutation('properties:delete', id)),
-			...this.units.map((id) => trpc.mutation('units:delete', id)),
-			...this.tenants.map((id) => trpc.mutation('tenants:delete', id)),
-			...this.leases.map((id) => trpc.mutation('leases:delete', id)),
-			...this.expenses.map((id) => trpc.mutation('expenses:delete', id)),
-			...this.maintenanceOrders.map((id) =>
-				trpc.mutation('maintenanceOrders:delete', id),
-			),
+		await prisma.$transaction([
+			prisma.$executeRaw`DELETE FROM Expense WHERE id IN (${this.expenses.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM MaintenanceOrder WHERE id IN (${this.maintenanceOrders.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM Lease WHERE id IN (${this.leases.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM Unit WHERE id IN (${this.units.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM Property WHERE id IN (${this.properties.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM Client WHERE "id" IN (${this.clients.join(
+				',',
+			)})`,
+			prisma.$executeRaw`DELETE FROM Tenant WHERE id IN (${this.tenants.join(
+				',',
+			)})`,
 		]);
 	}
 }
@@ -341,7 +357,7 @@ export class LeaseForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.monthlyRent];
+		return [kwdFormat(this.data.monthlyRent)];
 	}
 
 	async setupNew() {
@@ -376,19 +392,19 @@ export class LeaseForm extends Form {
 		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
 
-	override async clean(): Promise<void> {
-		for (const id of this.basket.leases) {
-			await LeaseForm.cleanById(id);
-		}
-		await Promise.all([
-			...this.basket.clients.map((id) => trpc.mutation('clients:delete', id)),
-			...this.basket.properties.map((id) =>
-				trpc.mutation('properties:delete', id),
-			),
-			...this.basket.units.map((id) => trpc.mutation('units:delete', id)),
-			...this.basket.tenants.map((id) => trpc.mutation('tenants:delete', id)),
-		]);
-	}
+	// override async clean(): Promise<void> {
+	// 	for (const id of this.basket.leases) {
+	// 		await LeaseForm.cleanById(id);
+	// 	}
+	// 	await Promise.all([
+	// 		...this.basket.clients.map((id) => trpc.mutation('clients:delete', id)),
+	// 		...this.basket.properties.map((id) =>
+	// 			trpc.mutation('properties:delete', id),
+	// 		),
+	// 		...this.basket.units.map((id) => trpc.mutation('units:delete', id)),
+	// 		...this.basket.tenants.map((id) => trpc.mutation('tenants:delete', id)),
+	// 	]);
+	// }
 }
 
 export class ExpenseForm extends Form {

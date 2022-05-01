@@ -42,7 +42,7 @@ const extraBrowsers = process.env.DOCKER
 const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
 
 const config: Config = {
-	// fullyParallel: true,
+	fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 15000,
 	expect: { timeout: 5000 },
 	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
