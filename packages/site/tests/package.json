@@ -5,8 +5,7 @@
   "scripts": {
     "lint": "tsc --noEmit --project tsconfig.json",
     "test": "playwright test",
-    "prisma:cp": "cp -r ../prisma ./prisma",
-    "prisma:gen": "pnpm run prisma:cp && prisma generate",
+    "prisma:gen": "prisma generate --schema=../prisma/schema.prisma",
     "postinstall": "pnpm run prisma:gen"
   },
   "keywords": [],
