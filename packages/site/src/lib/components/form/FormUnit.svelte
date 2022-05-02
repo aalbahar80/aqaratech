@@ -12,27 +12,18 @@
 		| InferQueryOutput<'units:read'>
 		| ReturnType<typeof Unit.defaultForm>;
 
+	let property: SelectedOption =
+		'property' in data ? new Property(data.property).toOption() : undefined;
+
 	let client: SelectedOption =
 		'property' in data
-			? {
-					value: data.property.clientId,
-					label: Client.getLabel(data.property.client),
-			  }
-			: undefined;
-
-	let property: SelectedOption =
-		'property' in data
-			? {
-					value: data.property.id,
-					label: Property.getLabel(data.property),
-			  }
+			? new Client(data.property.client).toOption()
 			: undefined;
 </script>
 
 <svelte:head>
 	<title>{data?.id ? 'Edit' : 'New'} Unit</title>
 </svelte:head>
-
 <Form model={UnitModel} {data} let:setData let:errors let:getValue>
 	<SelectEntity
 		field="clientId"
