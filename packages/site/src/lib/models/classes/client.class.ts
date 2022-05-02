@@ -1,23 +1,23 @@
 import trpc from '$lib/client/trpc';
-import { getName } from '$lib/utils/common';
+import { concatIfExists, getName } from '$lib/utils/common';
 import type { Client as PClient } from '@prisma/client';
+import type { z } from 'zod';
 import { schema } from '../schemas/client.schema';
 import { Entity } from './entity.class';
 
-export class Client extends Entity<typeof schema> {
+export class Client extends Entity {
 	static urlName = 'clients';
 	static singular = 'client';
 	static singularCap = 'Client';
 	static plural = 'clients';
 	static pluralCap = 'Clients';
-	schema = schema;
-	data?: PClient;
+	static schema = schema;
 
-	constructor() {
+	constructor(public data: Partial<PClient>) {
 		super();
 	}
 
-	public defaultForm = () => ({
+	static defaultForm = (): z.input<typeof schema> => ({
 		firstName: '',
 		lastName: '',
 		phone: null,
@@ -26,7 +26,7 @@ export class Client extends Entity<typeof schema> {
 		dob: null,
 	});
 
-	public basicFields = [
+	static basicFields = [
 		'firstName',
 		'lastName',
 		'phone',
@@ -36,23 +36,25 @@ export class Client extends Entity<typeof schema> {
 	] as const;
 
 	public static getLabel = (item: ILabel) => getName(item);
-	public getLabel = () => (this.data ? getName(this.data) : '');
+	public getLabel = () => {
+		if (this.data.firstName && this.data.lastName) {
+			return concatIfExists([this.data.firstName, this.data.lastName]);
+		} else {
+			console.warn('no firstName or lastName');
+			return '';
+		}
+	};
 
-	getList = async () => {
+	static getList = async () => {
 		const result = await trpc.query('clients:list', {
 			size: 20,
 		});
-		return result.data.map((item) => this.deserialize(item));
+		return result.data.map((data) => new Client(data));
 	};
 
-	deserialize(input: Partial<PClient>): this {
-		Object.assign(this, input);
-		return this;
-	}
-
-	async grab(id: string): Promise<this> {
-		const client = await trpc.query('clients:read', id);
-		return this.deserialize(client);
+	static async grab(id: string) {
+		const data = await trpc.query('clients:read', id);
+		return new Client(data);
 	}
 }
 
