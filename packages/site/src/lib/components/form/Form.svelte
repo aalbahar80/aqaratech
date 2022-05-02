@@ -6,6 +6,11 @@
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
+	import { Client } from '$models/classes/client.class';
+	import { Property } from '$models/classes/property.class';
+	import { Tenant } from '$models/classes/tenant.class';
+	import { Unit } from '$models/classes/unit.class';
+	import type { SelectedOption } from '$models/interfaces/common/option.interface';
 	import type { EntityConstructor } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -78,6 +83,19 @@
 			});
 		},
 	});
+
+	let client: SelectedOption =
+		'client' in data ? new Client(data.client).toOption() : undefined;
+	console.log({ client }, 'Form.svelte ~ 90');
+	let property: SelectedOption =
+		'property' in data ? new Property(data.property).toOption() : undefined;
+
+	let unit: SelectedOption =
+		'unit' in data ? new Unit(data.unit).toOption() : undefined;
+	console.log({ unit }, 'Form.svelte ~ 97');
+
+	let tenant: SelectedOption =
+		'tenant' in data ? new Tenant(data.tenant).toOption() : undefined;
 </script>
 
 <svelte:head>
@@ -97,19 +115,52 @@
 						{data?.id ? 'Edit ' : 'New '}{cstor.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						<slot {setData} errors={$errors} {getValue} />
-						{#if cstor.relationalFields}
+						{#if cstor.relationalFields && cstor.urlName !== 'units'}
 							{#each cstor.relationalFields as field}
-								<SelectEntity
-									{field}
-									invalid={!!getValue($errors, field)}
-									invalidText={getValue($errors, field)?.[0]}
-									on:select={(e) => {
-										setData(field, e.detail.value);
-									}}
-								/>
+								{#if field === 'clientId'}
+									<SelectEntity
+										{field}
+										bind:selected={client}
+										invalid={!!getValue($errors, field)}
+										invalidText={getValue($errors, field)?.[0]}
+										on:select={(e) => {
+											setData(field, e.detail.value);
+										}}
+									/>
+								{:else if field === 'propertyId'}
+									<SelectEntity
+										{field}
+										bind:selected={property}
+										invalid={!!getValue($errors, field)}
+										invalidText={getValue($errors, field)?.[0]}
+										on:select={(e) => {
+											setData(field, e.detail.value);
+										}}
+									/>
+								{:else if field === 'unitId'}
+									<SelectEntity
+										{field}
+										bind:selected={unit}
+										invalid={!!getValue($errors, field)}
+										invalidText={getValue($errors, field)?.[0]}
+										on:select={(e) => {
+											setData(field, e.detail.value);
+										}}
+									/>
+								{:else if field === 'tenantId'}
+									<SelectEntity
+										{field}
+										bind:selected={tenant}
+										invalid={!!getValue($errors, field)}
+										invalidText={getValue($errors, field)?.[0]}
+										on:select={(e) => {
+											setData(field, e.detail.value);
+										}}
+									/>
+								{/if}
 							{/each}
 						{/if}
+						<slot {setData} errors={$errors} {getValue} />
 						{#each cstor.basicFields as field}
 							<Input
 								name={field}
@@ -154,7 +205,6 @@
 			<button
 				type="button"
 				class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				on:click={() => console.log($data2, $errors)}
 			>
 				Cancel
 			</button>

@@ -21,7 +21,6 @@ export class Property extends Entity {
 		avenue: '',
 		street: '',
 		number: '',
-		clientId: '',
 	});
 	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
 	static relationalFields = ['clientId'] as const;

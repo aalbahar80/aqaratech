@@ -94,6 +94,7 @@ export const leases = createRouter()
 						select: {
 							id: true,
 							unitNumber: true,
+							type: true,
 						},
 					},
 				},

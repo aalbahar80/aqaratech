@@ -25,3 +25,16 @@ export const classMap = {
 	maintenanceOrderId: MaintenanceOrder,
 	maintenanceOrders: MaintenanceOrder,
 };
+
+export const relationalClassMap = {
+	clientId: Client,
+	clients: Client,
+	propertyId: Property,
+	properties: Property,
+	unitId: Unit,
+	units: Unit,
+	tenantId: Tenant,
+	tenants: Tenant,
+	leaseId: Lease,
+	leases: Lease,
+};

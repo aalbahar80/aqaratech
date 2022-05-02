@@ -3,7 +3,7 @@
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import type { Entity } from '$models/interfaces/entity.interface';
-	import { classMap } from '../../../lib/models/classes/all.class';
+	import { classMap } from '$models/classes/all.class';
 	import type { Load } from './edit';
 
 	type Params = Parameters<Load>['0']['params'];

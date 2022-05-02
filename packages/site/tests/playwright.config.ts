@@ -32,7 +32,7 @@ const localConfig: Config = process.env.LOCAL
 	  }
 	: {};
 
-const extraBrowsers: Config['projects'] = process.env.DOCKER
+const extraBrowsers: Config['projects'] = process.env.CI
 	? [
 			{ name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
 			// { name: 'webkit', use: { ...devices['Desktop Safari'] } },

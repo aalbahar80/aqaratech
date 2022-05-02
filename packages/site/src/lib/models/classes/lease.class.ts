@@ -32,7 +32,13 @@ export class Lease extends Entity {
 		}),
 	});
 
-	static basicFields = ['unit', 'client'] as const;
+	static basicFields = [
+		'monthlyRent',
+		'start',
+		'end',
+		'shouldNotify',
+		'active',
+	] as const;
 	static relationalFields = ['unitId', 'tenantId'] as const;
 	public static getLabel = (item: { id: string }) => item.id;
 
