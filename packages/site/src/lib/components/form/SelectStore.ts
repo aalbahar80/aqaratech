@@ -4,8 +4,15 @@ import { writable } from 'svelte/store';
 import type { Client } from '../../models/classes/client.class';
 import type { Property } from '../../models/classes/property.class';
 import type { Unit } from '../../models/classes/unit.class';
+import type { Lease } from '../../models/classes/lease.class';
+import type { Tenant } from '../../models/classes/tenant.class';
 
-type EntityConstructor = typeof Client | typeof Property | typeof Unit;
+type EntityConstructor =
+	| typeof Client
+	| typeof Property
+	| typeof Unit
+	| typeof Tenant
+	| typeof Lease;
 export const createMyCustomStore = <T extends EntityConstructor>(
 	cstor: T,
 	initial: Option[],

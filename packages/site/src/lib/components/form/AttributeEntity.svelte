@@ -49,7 +49,7 @@
 	bind:selected={client}
 	{invalid}
 	{invalidText}
-	on:select={(e) => {
+	on:select={() => {
 		property = undefined;
 		unit = undefined;
 		radio.clear();
@@ -63,7 +63,7 @@
 	disabled={!client}
 	{invalid}
 	{invalidText}
-	on:select={(e) => {
+	on:select={() => {
 		unit = undefined;
 		radio.clear();
 	}}
@@ -76,7 +76,7 @@
 	disabled={!client || !property}
 	{invalid}
 	{invalidText}
-	on:select={(e) => {
+	on:select={() => {
 		radio.clear();
 	}}
 />

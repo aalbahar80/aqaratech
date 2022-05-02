@@ -5,7 +5,9 @@
 	} from '$lib/models/interfaces/common/option.interface';
 	import { createEventDispatcher } from 'svelte';
 	import { Client } from '../../models/classes/client.class';
+	import { Lease } from '../../models/classes/lease.class';
 	import { Property } from '../../models/classes/property.class';
+	import { Tenant } from '../../models/classes/tenant.class';
 	import { Unit } from '../../models/classes/unit.class';
 	import type { RelationalField } from '../../models/interfaces/utils/get-model';
 	import { createMyCustomStore } from './SelectStore';
@@ -23,6 +25,8 @@
 		clientId: Client,
 		propertyId: Property,
 		unitId: Unit,
+		tenantId: Tenant,
+		leaseId: Lease,
 	};
 
 	const cstor = entityClasses[field];

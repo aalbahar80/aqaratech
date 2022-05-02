@@ -186,6 +186,7 @@ interface PredefinedTenant {
 interface PredefinedUnit {
 	initiator: 'unit';
 	unitId: string;
+	unitType: string | null;
 	unitNumber: string;
 	propertyId: string;
 	address: string;
@@ -197,6 +198,7 @@ interface PredefinedLease {
 	firstName: string;
 	lastName: string;
 	unitId: string;
+	unitType: string | null;
 	unitNumber: string;
 	propertyId: string;
 	address: string;
