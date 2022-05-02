@@ -148,7 +148,6 @@ export const LeaseModel = {
 		`${item.start.toLocaleDateString()} - ${item.end.toLocaleDateString()}`,
 	getOptions,
 	basicFields: [
-		'id',
 		'monthlyRent',
 		'start',
 		'end',

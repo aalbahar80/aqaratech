@@ -26,7 +26,16 @@ export class Unit extends Entity {
 		type: null,
 		propertyId: '',
 	});
-	static basicFields = ['area', 'block', 'street', 'number'] as const;
+	static basicFields = [
+		'type',
+		'unitNumber',
+		'bed',
+		'bath',
+		'size',
+		'marketRent',
+		'floor',
+		'usage',
+	] as const;
 	static relationalFields = ['clientId', 'propertyId'] as const;
 
 	public static getLabel = (item: ILabel) =>
