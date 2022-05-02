@@ -6,7 +6,7 @@ import { schema } from '../schemas/property.schema';
 import { Entity } from './entity.class';
 
 export class Property extends Entity {
-	static urlName = 'properties';
+	static urlName = 'properties' as const;
 	static singular = 'property';
 	static singularCap = 'Property';
 	static plural = 'properties';
@@ -24,6 +24,8 @@ export class Property extends Entity {
 		clientId: '',
 	});
 	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
+	static relationalFields = ['clientId'] as const;
+
 	public static getLabel = (item: ILabel) => getAddress(item);
 	public getLabel = () => {
 		if (this.data.area && this.data.block && this.data.number) {

@@ -6,7 +6,7 @@
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
-	import type { Model } from '$models/interfaces/entity.interface';
+	import type { EntityConstructor } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
@@ -15,8 +15,9 @@
 	import AttributeEntity from './AttributeEntity.svelte';
 	import Input from './Input.svelte';
 
-	export let model: Model;
-	export let data: Partial<z.infer<typeof model.schema>>;
+	type TA = $$Generic<EntityConstructor>;
+	export let cstor: TA;
+	export let data: z.input<typeof cstor.schema>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -27,9 +28,9 @@
 		data: data2,
 		setData,
 		isValid,
-	} = createForm<z.infer<typeof model.schema>>({
+	} = createForm<z.infer<typeof cstor.schema>>({
 		transform: (values) => {
-			const original = values as z.infer<typeof model.schema>;
+			const original = values as z.infer<typeof cstor.schema>;
 			const dateFields = [
 				'dob',
 				'end',
@@ -47,8 +48,8 @@
 			return original;
 		},
 		initialValues: data,
-		schema: model.schema,
-		validate: validateSchema(model.schema),
+		schema: cstor.schema,
+		validate: validateSchema(cstor.schema),
 		onError: (err: any) => {
 			addToast({
 				props: {
@@ -66,9 +67,9 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc.mutation(`${model.name}:save`, values);
+			const submitted = await trpc.mutation(`${cstor.urlName}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
-			await goto(`/${model.name}/${submitted.id}`);
+			await goto(`/${cstor.urlName}/${submitted.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -80,7 +81,7 @@
 </script>
 
 <svelte:head>
-	<title>{`Edit ${model.singularCap}`}</title>
+	<title>{`Edit ${cstor.singularCap}`}</title>
 </svelte:head>
 
 <div class="mx-auto h-full py-8 sm:w-[500px]">
@@ -93,15 +94,14 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{data?.id ? 'Edit ' : 'New '}{model.singularCap}
+						{data?.id ? 'Edit ' : 'New '}{cstor.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						<slot {setData} errors={$errors} {getValue} />
-						{#if 'relationalFields' in model}
-							{#each model.relationalFields as field}
+						{#if cstor.relationalFields}
+							{#each cstor.relationalFields as field}
 								<SelectEntity
 									{field}
-									initialValue={$data2[field]}
 									invalid={!!getValue($errors, field)}
 									invalidText={getValue($errors, field)?.[0]}
 									on:select={(e) => {
@@ -110,10 +110,10 @@
 								/>
 							{/each}
 						{/if}
-						{#each model.basicFields as field}
+						{#each cstor.basicFields as field}
 							<Input
 								name={field}
-								value={$data2[field]}
+								value={getValue($data2, field)}
 								invalid={!!getValue($errors, field)}
 								invalidText={getValue($errors, field)?.[0]}
 								on:select={(e) => {
@@ -124,7 +124,7 @@
 								}}
 							/>
 						{/each}
-						{#if model.name === 'maintenanceOrders' || model.name === 'expenses'}
+						{#if cstor.urlName === 'maintenanceOrders' || cstor.urlName === 'expenses'}
 							<div class="relative pt-10">
 								<div
 									class="absolute inset-0 inset-x-2 flex items-center"

@@ -6,7 +6,7 @@ import { schema } from '../schemas/tenant.schema';
 import { Entity } from './entity.class';
 
 export class Tenant extends Entity {
-	static urlName = 'tenants';
+	static urlName = 'tenants' as const;
 	static singular = 'tenant';
 	static singularCap = 'Tenant';
 	static plural = 'tenants';
@@ -42,6 +42,7 @@ export class Tenant extends Entity {
 		'residencyNum',
 		'residencyEnd',
 	] as const;
+	static relationalFields = [] as const;
 
 	public static getLabel = (item: ILabel) => getName(item);
 	public getLabel = () => {

@@ -4,7 +4,6 @@ export abstract class Entity {
 	// abstract basicFields: readonly string[];
 	abstract getLabel: () => string;
 	abstract data?: { id?: string };
-
 	toOption = () => {
 		if (!this.data || !this.data.id) {
 			throw new Error('no id');

@@ -4,7 +4,7 @@ import type { z } from 'zod';
 import { schema } from '../schemas/transaction.schema';
 
 export class Transaction {
-	static urlName = 'transactions';
+	static urlName = 'transactions' as const;
 	static singular = 'transaction';
 	static singularCap = 'Transaction';
 	static plural = 'transactions';
@@ -28,6 +28,7 @@ export class Transaction {
 		'paidAt',
 		'memo',
 	] as const;
+	static relationalFields = [] as const;
 	static getList = async () => {
 		const result = await trpc.query('transactions:list', { size: 20 });
 		return result.data.map((data) => new Transaction(data));

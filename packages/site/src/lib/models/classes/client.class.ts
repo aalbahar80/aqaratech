@@ -6,7 +6,7 @@ import { schema } from '../schemas/client.schema';
 import { Entity } from './entity.class';
 
 export class Client extends Entity {
-	static urlName = 'clients';
+	static urlName = 'clients' as const;
 	static singular = 'client';
 	static singularCap = 'Client';
 	static plural = 'clients';
@@ -56,6 +56,7 @@ export class Client extends Entity {
 		const data = await trpc.query('clients:read', id);
 		return new Client(data);
 	}
+	static relationalFields = [] as const;
 }
 
 interface ILabel {

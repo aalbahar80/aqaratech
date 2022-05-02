@@ -1,0 +1,9 @@
+export type { Client } from './client.class';
+export type { Entity } from './entity.class';
+export type { Expense } from './expense.class';
+export type { Lease } from './lease.class';
+export type { MaintenanceOrder } from './maintenanceOrder.class';
+export type { Property } from './property.class';
+export type { Tenant } from './tenant.class';
+export type { Transaction } from './transaction.class';
+export type { Unit } from './unit.class';

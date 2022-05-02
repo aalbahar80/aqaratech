@@ -4,7 +4,7 @@ import type { z } from 'zod';
 import { schema } from '../schemas/expense.schema';
 
 export class Expense {
-	static urlName = 'expenses';
+	static urlName = 'expenses' as const;
 	static singular = 'expense';
 	static singularCap = 'Expense';
 	static plural = 'expenses';
@@ -24,6 +24,7 @@ export class Expense {
 	});
 
 	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
+	static relationalFields = [] as const;
 
 	static getList = async () => {
 		const result = await trpc.query('expenses:list', { size: 20 });

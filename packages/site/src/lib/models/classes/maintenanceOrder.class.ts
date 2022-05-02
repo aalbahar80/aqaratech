@@ -4,7 +4,7 @@ import type { z } from 'zod';
 import { schema } from '../schemas/maintenanceOrder.schema';
 
 export class MaintenanceOrder {
-	static urlName = 'maintenanceOrders';
+	static urlName = 'maintenanceOrders' as const;
 	static singular = 'maintenanceOrder';
 	static singularCap = 'MaintenanceOrder';
 	static plural = 'maintenanceOrders';
@@ -26,6 +26,7 @@ export class MaintenanceOrder {
 		'status',
 		'completedAt',
 	] as const;
+	static relationalFields = [] as const;
 	static getList = async () => {
 		const result = await trpc.query('maintenanceOrders:list', { size: 20 });
 		return result.data.map((data) => new MaintenanceOrder(data));

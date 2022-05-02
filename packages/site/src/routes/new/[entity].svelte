@@ -3,6 +3,7 @@
 	import Form from '$components/form/Form.svelte';
 	import type { Entity } from '$lib/models/interfaces/entity.interface';
 	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import { classMap } from '../../lib/models/classes/all.class';
 	import type { Load } from './[entity]';
 
 	type Params = Parameters<Load>['0']['params'];
@@ -17,8 +18,9 @@
 <script lang="ts">
 	export let predefined: Record<string, string>;
 
-	const model = getModel($page.params.entity as Params['entity'] as Entity);
-	const defaultForm = model.defaultForm();
+	const entity = $page.params.entity as Entity;
+	const cstor = classMap[entity];
+	const defaultForm = cstor.defaultForm();
 	const data = {
 		...defaultForm,
 		...predefined,
@@ -26,7 +28,7 @@
 </script>
 
 <svelte:head>
-	<title>{`New ${model.singularCap}`}</title>
+	<title>{`New ${cstor.singularCap}`}</title>
 </svelte:head>
 
-<Form {model} {data} />
+<Form {cstor} {data} />

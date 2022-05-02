@@ -6,7 +6,7 @@ import { leaseFormSchema, schema } from '../schemas/lease.schema';
 import { Entity } from './entity.class';
 
 export class Lease extends Entity {
-	static urlName = 'leases';
+	static urlName = 'leases' as const;
 	static singular = 'lease';
 	static singularCap = 'Lease';
 	static plural = 'leases';
@@ -33,6 +33,7 @@ export class Lease extends Entity {
 	});
 
 	static basicFields = ['unit', 'client'] as const;
+	static relationalFields = ['unitId', 'tenantId'] as const;
 	public static getLabel = (item: { id: string }) => item.id;
 
 	public getLabel = () => {

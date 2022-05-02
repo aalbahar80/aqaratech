@@ -42,6 +42,9 @@
 	];
 
 	let radio: RadioEntity<Field>;
+
+	// Ensure parent is aware of generic type emitted from RadioEntity
+	type $$Events = RadioEntity<Field>['$$events_def'];
 </script>
 
 <SelectEntity

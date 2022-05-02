@@ -6,7 +6,7 @@ import { schema } from '../schemas/unit.schema';
 import { Entity } from './entity.class';
 
 export class Unit extends Entity {
-	static urlName = 'units';
+	static urlName = 'units' as const;
 	static singular = 'unit';
 	static singularCap = 'Unit';
 	static plural = 'units';
@@ -27,6 +27,8 @@ export class Unit extends Entity {
 		propertyId: '',
 	});
 	static basicFields = ['area', 'block', 'street', 'number'] as const;
+	static relationalFields = ['clientId', 'propertyId'] as const;
+
 	public static getLabel = (item: ILabel) =>
 		concatIfExists([item.type, item.unitNumber]);
 	public getLabel = () => {

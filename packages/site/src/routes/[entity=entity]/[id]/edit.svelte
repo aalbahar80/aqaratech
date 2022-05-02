@@ -2,8 +2,8 @@
 	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
 	import type { Entity } from '$models/interfaces/entity.interface';
+	import { classMap } from '../../../lib/models/classes/all.class';
 	import type { Load } from './edit';
 
 	type Params = Parameters<Load>['0']['params'];
@@ -18,13 +18,13 @@
 </script>
 
 <script lang="ts">
-	export let data: InferQueryOutput<`${typeof model.name}:basic`>;
-
-	const model = getModel($page.params.entity as Params['entity'] as Entity);
+	export let data: InferQueryOutput<`${typeof cstor.urlName}:basic`>;
+	const entity = $page.params.entity as Entity;
+	const cstor = classMap[entity];
 </script>
 
 <svelte:head>
-	<title>{`Edit ${model.singularCap}`}</title>
+	<title>{`Edit ${cstor.singularCap}`}</title>
 </svelte:head>
 
-<Form {data} {model} />
+<Form {data} {cstor} />
