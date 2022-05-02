@@ -97,7 +97,7 @@ export const fakeProperty = (clientId?: string) => {
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 		lat: propCoordinates?.[0] ?? 0,
 		long: propCoordinates?.[1] ?? 0,
-		clientId: randomUUID(),
+		clientId: clientId ?? randomUUID(),
 	};
 };
 

@@ -21,12 +21,12 @@ const { PrismaClient } = pkg;
 const prisma = new PrismaClient({
 	log: [{ level: "query", emit: "event" }, "info", "warn", "error"],
 	errorFormat: "pretty",
-}) as PrismaClientType;
+});
 
 // @ts-ignore
-prisma.$on("query", (e) => {
-	console.log(e);
-});
+// prisma.$on("query", (e) => {
+// 	console.log(e);
+// });
 
 const cleanupDatabase = async (): Promise<void> => {
 	await prisma.maintenanceOrder.deleteMany({});
@@ -52,15 +52,13 @@ async function main({
 	let expenseCount = 100;
 	const min = 0;
 
-	if (sample) {
-		clientCount = 3;
-		propertyMax = 3;
-		unitMax = 3;
-		moCount = 4;
-		expenseCount = 4;
-	}
+	// consistent id's for testing
+	const testClientId = "c0183a5d-2875-488b-b86f-e1c5628262df";
+	const testTenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
+	clients[0]!.id = testClientId;
+
 	const properties = clients.flatMap((client) =>
 		Array.from(
 			{ length: faker.datatype.number({ min: propertyMin, max: propertyMax }) },
@@ -74,10 +72,13 @@ async function main({
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
-	units.forEach((unit) => {
+	units.forEach((unit, idx) => {
 		let date = new Date();
 		date.setFullYear(date.getFullYear() - timespan);
 		let tenantN = fakeTenant();
+		if (idx === 0) {
+			tenantN.id = testTenantId;
+		}
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
@@ -201,15 +202,8 @@ async function main({
 	console.log(`${propsWithUnit} properties with a unit`);
 	console.log(`${unitsWithLease} units with a lease`);
 
-	console.log(
-		`Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
-	);
-
-	// consistent id's for testing
-	const cliendId = "c0183a5d-2875-488b-b86f-e1c5628262df";
-	const tenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
-	clients[0]!.id = cliendId;
-	tenants[0]!.id = tenantId;
+	const summary = `Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
+	console.log(summary);
 
 	if (sample) {
 		console.log(
@@ -228,6 +222,7 @@ async function main({
 			)
 		);
 		console.log("Sample printed, nothing done to database.");
+		console.log(summary);
 		return;
 	} else {
 		console.log("Done generating fake data.");
@@ -237,9 +232,12 @@ async function main({
 		console.log(`preparing to insert...`);
 		// TODO add a NODE_ENV check to only run this in development
 		if (clean) {
+			console.time("cleanup");
 			await cleanupDatabase();
+			console.timeEnd("cleanup");
 		}
 
+		console.time("insert");
 		await prisma.client.createMany({
 			data: clients,
 		});
@@ -301,12 +299,11 @@ async function main({
 			data: expenses,
 		});
 		console.log("expenses created");
+		console.timeEnd("insert");
 
 		console.log(`${tenantsWithLease} tenants with a lease`);
 		console.log(`${homelessTenantCount} homeless tenants`);
-		console.log(
-			`Done inserting \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`
-		);
+		console.log(summary);
 	} catch (e) {
 		console.error(e);
 	}
