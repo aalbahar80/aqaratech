@@ -1,5 +1,4 @@
 import type { Page } from '@playwright/test';
-import prisma from '../config/prismaClient';
 import {
 	fakeClient,
 	fakeExpense,
@@ -38,31 +37,7 @@ class Basket {
 		public maintenanceOrders: string[] = [],
 	) {}
 
-	async clean() {
-		await prisma.$transaction([
-			prisma.$executeRaw`DELETE FROM Expense WHERE id IN (${this.expenses.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM MaintenanceOrder WHERE id IN (${this.maintenanceOrders.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM Lease WHERE id IN (${this.leases.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM Unit WHERE id IN (${this.units.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM Property WHERE id IN (${this.properties.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM Client WHERE "id" IN (${this.clients.join(
-				',',
-			)})`,
-			prisma.$executeRaw`DELETE FROM Tenant WHERE id IN (${this.tenants.join(
-				',',
-			)})`,
-		]);
-	}
+	async clean() {}
 }
 
 export class Form {

@@ -26,7 +26,7 @@
 	export let property: InferQueryOutput<'properties:basic'> | undefined;
 	const data = {
 		...Unit.defaultForm(),
-		...(property && { property: property.id }),
+		...(property && { property }),
 	};
 </script>
 

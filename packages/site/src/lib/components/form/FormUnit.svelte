@@ -12,10 +12,12 @@
 		| ReturnType<typeof Unit.defaultForm>;
 
 	let property: SelectedOption =
-		'property' in data ? new Property(data.property).toOption() : undefined;
+		'property' in data && data.property.id
+			? new Property(data.property).toOption()
+			: undefined;
 
 	let client: SelectedOption =
-		'property' in data
+		'property' in data && data.property.client?.id
 			? new Client(data.property.client).toOption()
 			: undefined;
 </script>

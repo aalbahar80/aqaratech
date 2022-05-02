@@ -85,17 +85,23 @@
 	});
 
 	let client: SelectedOption =
-		'client' in data ? new Client(data.client).toOption() : undefined;
-	console.log({ client }, 'Form.svelte ~ 90');
+		'client' in data && data.client?.id
+			? new Client(data?.client).toOption()
+			: undefined;
 	let property: SelectedOption =
-		'property' in data ? new Property(data.property).toOption() : undefined;
+		'property' in data && data.property?.id
+			? new Property(data.property).toOption()
+			: undefined;
 
 	let unit: SelectedOption =
-		'unit' in data ? new Unit(data.unit).toOption() : undefined;
-	console.log({ unit }, 'Form.svelte ~ 97');
+		'unit' in data && data.unit?.id
+			? new Unit(data.unit).toOption()
+			: undefined;
 
 	let tenant: SelectedOption =
-		'tenant' in data ? new Tenant(data.tenant).toOption() : undefined;
+		'tenant' in data && data.tenant?.id
+			? new Tenant(data.tenant).toOption()
+			: undefined;
 </script>
 
 <svelte:head>
