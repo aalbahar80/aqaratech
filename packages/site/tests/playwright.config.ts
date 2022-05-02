@@ -11,10 +11,11 @@ dotenvConfig({
 	path: '../.env',
 });
 
-console.log('LOCAL config is:', process.env.LOCAL);
-console.log('DOCKER config is:', process.env.LOCAL);
-console.log('REUSE_PRISMA config is:', process.env.REUSE_PRISMA);
-console.log('CI config is:', process.env.CI);
+// console.log('LOCAL config is:', process.env.LOCAL);
+// console.log('DOCKER config is:', process.env.LOCAL);
+// console.log('REUSE_PRISMA config is:', process.env.REUSE_PRISMA);
+// console.log('CI config is:', process.env.CI);
+// console.log('CI config is:', process.env.DATABASE_URL);
 
 const localConfig: Config = process.env.LOCAL
 	? {
@@ -31,11 +32,11 @@ const localConfig: Config = process.env.LOCAL
 	  }
 	: {};
 
-const extraBrowsers = process.env.DOCKER
+const extraBrowsers: Config['projects'] = process.env.DOCKER
 	? [
 			{ name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
-			{ name: 'webkit', use: { ...devices['Desktop Safari'] } },
-			{ name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
+			// { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+			// { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
 			{ name: 'chromium', use: { ...devices['Desktop Chrome'] } },
 			{ name: 'firefox', use: { ...devices['Desktop Firefox'] } },
 			// Note: branded browsers need to explicitly installed

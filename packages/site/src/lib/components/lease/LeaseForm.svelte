@@ -24,7 +24,6 @@
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import { onMount } from 'svelte';
-	import { scale } from 'svelte/transition';
 	import { v4 as uuidv4 } from 'uuid';
 	import type { z } from 'zod';
 	import { Tenant } from '../../models/classes/tenant.class';
