@@ -18,6 +18,7 @@
 				firstName: lease.tenant.firstName,
 				lastName: lease.tenant.lastName,
 				unitId: lease.unitId,
+				unitType: lease.unit.type,
 				unitNumber: lease.unit.unitNumber,
 				propertyId: lease.unit.property.id,
 				address: getAddress(lease.unit.property),
@@ -36,6 +37,7 @@
 			predefined = {
 				initiator: 'unit',
 				unitId: unit.id,
+				unitType: unit.type,
 				unitNumber: unit.unitNumber,
 				propertyId: unit.propertyId,
 				address: getAddress(unit.property),

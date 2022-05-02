@@ -27,6 +27,8 @@
 	import { scale } from 'svelte/transition';
 	import { v4 as uuidv4 } from 'uuid';
 	import type { z } from 'zod';
+	import { Tenant } from '../../models/classes/tenant.class';
+	import { Unit } from '../../models/classes/unit.class';
 	import Button from '../Button.svelte';
 	import Input from '../form/Input.svelte';
 	import SelectEntity from '../form/SelectEntity.svelte';
@@ -39,8 +41,34 @@
 		...predefined,
 	};
 
-	// TODO handle predefined property
-	let property: SelectedOption | undefined = undefined;
+	// ## Initial Values
+	let property: SelectedOption | undefined =
+		lease.initiator === 'tenant'
+			? undefined
+			: { value: lease.propertyId, label: lease.address };
+
+	let unit: SelectedOption | undefined =
+		lease.initiator === 'tenant'
+			? undefined
+			: {
+					value: lease.unitId,
+					label: Unit.getLabel({
+						type: lease.unitType,
+						unitNumber: lease.unitNumber,
+					}),
+			  };
+
+	let tenant: SelectedOption =
+		lease.initiator === 'unit'
+			? undefined
+			: {
+					value: lease.tenantId,
+					label: Tenant.getLabel({
+						firstName: lease.firstName,
+						lastName: lease.lastName,
+					}),
+			  };
+	// ## End Initial Values
 
 	const {
 		form,
@@ -194,7 +222,7 @@
 								<!-- optionLabel={oldLease?.tenant ?? null} -->
 								<SelectEntity
 									field="tenantId"
-									initialValue={lease.tenantId}
+									selected={tenant}
 									on:select={(e) => {
 										setData('tenantId', e.detail.value);
 									}}
@@ -234,21 +262,19 @@
 							<div class="sm:w-3/4">
 								<SelectEntity
 									field="propertyId"
-									initialValue={lease.propertyId}
 									bind:selected={property}
-									on:select={(e) => {
-										unitSelect.clear();
-										unitSelect.getOptions(e.detail.value);
+									on:select={() => {
+										unit = undefined;
+										setData('unitId', null);
 									}}
 								/>
 							</div>
-							<div class="sm:w-1/4" in:scale>
+							<div class="sm:w-1/4">
 								<SelectEntity
-									bind:this={unitSelect}
 									field="unitId"
-									initialParent={property?.value ?? undefined}
-									initialValue={lease.unitId}
-									disabled={!property?.value}
+									bind:selected={unit}
+									parent={property}
+									disabled={!property}
 									on:select={(e) => {
 										setData('unitId', e.detail.value);
 									}}
