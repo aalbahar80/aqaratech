@@ -1,5 +1,5 @@
 export interface Option {
-	value: string | null | undefined;
+	value: string | undefined;
 	label: string | undefined;
 }
 

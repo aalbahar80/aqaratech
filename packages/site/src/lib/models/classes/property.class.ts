@@ -39,9 +39,10 @@ export class Property extends Entity {
 			return '';
 		}
 	};
-	static getList = async () => {
+	static getList = async (clientId?: string) => {
 		const result = await trpc.query('properties:list', {
 			size: 20,
+			clientId,
 		});
 		return result.data.map((data) => new Property(data));
 	};

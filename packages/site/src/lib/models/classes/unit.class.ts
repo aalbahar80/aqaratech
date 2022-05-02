@@ -37,9 +37,10 @@ export class Unit extends Entity {
 			return '';
 		}
 	};
-	static getList = async () => {
+	static getList = async (propertyId?: string) => {
 		const result = await trpc.query('units:list', {
 			size: 20,
+			propertyId,
 		});
 		return result.data.map((data) => new Unit(data));
 	};
