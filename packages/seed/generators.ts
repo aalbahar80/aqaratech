@@ -68,7 +68,7 @@ export const fakeUnit = (propertyId?: string) => ({
 	bath: faker.datatype.number({ min: 1, max: 10 }),
 	marketRent: +faker.finance.amount(100, 3000, 0),
 	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	type: faker.random.arrayElement([
+	type: faker.helpers.arrayElement([
 		"شقة",
 		"محل",
 		"سرداب",
@@ -89,7 +89,7 @@ export const fakeProperty = (clientId?: string) => {
 		updatedAt: updatedAt(),
 		area: areas[Math.floor(Math.random() * areas.length)]![1],
 		block: faker.datatype.number({ min: 1, max: 13 }).toString(),
-		street: `شارع ${faker.random.arrayElement([
+		street: `شارع ${faker.helpers.arrayElement([
 			faker.name.lastName(),
 			faker.datatype.number({ min: 1, max: 500 }).toString(),
 		])}`,
@@ -161,7 +161,7 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
-	category: faker.random.arrayElement(expenseCats.map((e) => e.en)),
+	category: faker.helpers.arrayElement(expenseCats.map((e) => e.en)),
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });
@@ -173,5 +173,5 @@ export const fakeMaintenanceOrder = () => ({
 	completedAt: faker.date.future(1),
 	title: faker.company.bs(),
 	description: faker.lorem.sentences(),
-	status: faker.random.arrayElement(["pending", "completed", "closed"]),
+	status: faker.helpers.arrayElement(["pending", "completed", "closed"]),
 });
