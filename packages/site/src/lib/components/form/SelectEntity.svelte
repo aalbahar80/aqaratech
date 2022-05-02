@@ -1,52 +1,27 @@
 <script lang="ts">
-	import type {
-		Option,
-		SelectedOption,
-	} from '$lib/models/interfaces/common/option.interface';
-	import {
-		getModel,
-		type RelationalField,
-	} from '$lib/models/interfaces/utils/get-model';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import type { Option } from '$lib/models/interfaces/common/option.interface';
+	import { createEventDispatcher } from 'svelte';
+	import { Client } from '../../models/classes/client.class';
+	import { Property } from '../../models/classes/property.class';
+	import { Unit } from '../../models/classes/unit.class';
+	import type { RelationalField } from '../../models/interfaces/utils/get-model';
 
 	export let initialParent: string | undefined = undefined;
 	export let field: RelationalField;
-	export let selected: SelectedOption = undefined;
 	export let disabled = false;
 	export let title: string | undefined = undefined;
 	export let hideLabel = false;
 	export let invalid = false;
 	export let invalidText = '';
+	export let selected: Option | undefined = undefined;
+	export let options: Option[] = [];
 
-	/** The `id` of the initial value. Label will be set once `getOptions` completes in onMount. */
-	export let initialValue: string | undefined = undefined;
-
-	export const clear = () => {
-		selected = undefined;
-		dispatch('select', selected);
+	const entityClasses = {
+		clientId: Client,
+		propertyId: Property,
+		unitId: Unit,
 	};
-
-	const model = getModel(field);
-
-	let options: Option[] = selected ? [selected] : [];
-
-	export const getOptions = async (parentId: string | undefined | null) => {
-		if (model.name !== 'clients' && model.name !== 'leases') {
-			options = await model.getOptions({
-				parentId: parentId ?? undefined,
-			});
-		} else {
-			options = [...(await model.getOptions())];
-		}
-		selected = options.find((option) => option.value === selected?.value);
-	};
-
-	onMount(async () => {
-		await getOptions(initialParent);
-		if (initialValue) {
-			selected = options.find((option) => option.value === initialValue);
-		}
-	});
+	const cstor = entityClasses[field];
 
 	const dispatch = createEventDispatcher<{
 		select: Option;
@@ -60,7 +35,7 @@
 <div>
 	{#if !hideLabel}
 		<label for={field} class="block text-sm font-medium text-gray-700">
-			{title ?? model.singularCap}
+			{title ?? cstor.singularCap}
 		</label>
 	{/if}
 	<select
