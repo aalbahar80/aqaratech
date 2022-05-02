@@ -1,31 +1,38 @@
 <script lang="ts">
-	import type { Option } from '$lib/models/interfaces/common/option.interface';
+	import type {
+		Option,
+		SelectedOption,
+	} from '$lib/models/interfaces/common/option.interface';
 	import { createEventDispatcher } from 'svelte';
 	import { Client } from '../../models/classes/client.class';
 	import { Property } from '../../models/classes/property.class';
 	import { Unit } from '../../models/classes/unit.class';
 	import type { RelationalField } from '../../models/interfaces/utils/get-model';
+	import { createMyCustomStore } from './SelectStore';
 
-	export let initialParent: string | undefined = undefined;
+	export let parent: SelectedOption = undefined;
+	export let selected: SelectedOption = undefined;
 	export let field: RelationalField;
 	export let disabled = false;
 	export let title: string | undefined = undefined;
 	export let hideLabel = false;
 	export let invalid = false;
 	export let invalidText = '';
-	export let selected: Option | undefined = undefined;
-	export let options: Option[] = [];
 
 	const entityClasses = {
 		clientId: Client,
 		propertyId: Property,
 		unitId: Unit,
 	};
+
 	const cstor = entityClasses[field];
 
 	const dispatch = createEventDispatcher<{
 		select: Option;
 	}>();
+
+	let options = createMyCustomStore(cstor, selected ? [selected] : []);
+	$: options.fetchData(parent?.value);
 </script>
 
 <!-- 
@@ -49,7 +56,7 @@
 			dispatch('select', selected);
 		}}
 	>
-		{#each options as option (option.value)}
+		{#each $options as option (option.value)}
 			<option value={option}>{option.label}</option>
 		{/each}
 	</select>

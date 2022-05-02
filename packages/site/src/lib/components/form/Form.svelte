@@ -136,7 +136,6 @@
 							</div>
 							<div class="flex flex-col gap-6">
 								<AttributeEntity
-									data={$data2}
 									invalid={!!getValue($errors, 'clientId')}
 									invalidText={getValue($errors, 'clientId')?.[0]}
 									on:select={(e) => {

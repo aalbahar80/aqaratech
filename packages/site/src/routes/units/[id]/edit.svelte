@@ -15,4 +15,4 @@
 	export let unit: InferQueryOutput<'units:read'>;
 </script>
 
-<FormUnit {unit} property={unit.property} />
+<FormUnit data={unit} />

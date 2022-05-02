@@ -3,12 +3,8 @@
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/common/option.interface';
-	import { Client } from '../../models/classes/client.class';
-	import { Property } from '../../models/classes/property.class';
-	import { Unit } from '../../models/classes/unit.class';
 	import RadioEntity from './RadioEntity.svelte';
-	import S2 from './S2.svelte';
-	import { createMyCustomStore } from './SelectStore';
+	import SelectEntity from './SelectEntity.svelte';
 
 	export let invalid = false;
 	export let invalidText: string = '';
@@ -16,14 +12,6 @@
 	let client: SelectedOption;
 	let property: SelectedOption;
 	let unit: SelectedOption;
-
-	let clientOptions = createMyCustomStore(Client);
-	let propertyOptions = createMyCustomStore(Property);
-	let unitOptions = createMyCustomStore(Unit);
-
-	clientOptions.fetchData();
-	$: propertyOptions.fetchData(client?.value);
-	$: unitOptions.fetchData(property?.value);
 
 	// # Begin radio config #
 	type Field = 'clientId' | 'propertyId' | 'unitId';
@@ -56,10 +44,9 @@
 	let radio: RadioEntity<Field>;
 </script>
 
-<S2
+<SelectEntity
 	field="clientId"
 	bind:selected={client}
-	options={$clientOptions}
 	{invalid}
 	{invalidText}
 	on:select={(e) => {
@@ -69,10 +56,10 @@
 	}}
 />
 
-<S2
+<SelectEntity
 	field="propertyId"
 	bind:selected={property}
-	options={$propertyOptions}
+	parent={client}
 	disabled={!client}
 	{invalid}
 	{invalidText}
@@ -82,10 +69,10 @@
 	}}
 />
 
-<S2
+<SelectEntity
 	field="unitId"
 	bind:selected={unit}
-	options={$unitOptions}
+	parent={property}
 	disabled={!client || !property}
 	{invalid}
 	{invalidText}

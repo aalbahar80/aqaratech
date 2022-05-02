@@ -1,63 +1,53 @@
 <script lang="ts">
 	import Form from '$components/form/Form.svelte';
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
-	import { PropertyModel, UnitModel } from '$lib/models/interfaces';
+	import { UnitModel } from '$lib/models/interfaces';
 	import type { SelectedOption } from '$lib/models/interfaces/common/option.interface';
+	import type { InferQueryOutput } from '../../client/trpc';
+	import { Client } from '../../models/classes/client.class';
+	import { Property } from '../../models/classes/property.class';
+	import type { Unit } from '../../models/classes/unit.class';
 
-	export let property: InferQueryOutput<'properties:basic'> | undefined =
-		undefined;
-	export let unit: InferQueryOutput<'units:read'> | undefined = undefined;
+	export let data:
+		| InferQueryOutput<'units:read'>
+		| ReturnType<typeof Unit.defaultForm>;
 
-	const model = UnitModel;
-	const defaultForm = model.defaultForm();
-	const data = unit
-		? {
-				...unit,
-				propertyId: property?.id ?? null,
-		  }
-		: {
-				...defaultForm,
-				propertyId: property?.id ?? null,
-		  };
-	console.log(data);
+	let client: SelectedOption =
+		'property' in data
+			? {
+					value: data.property.clientId,
+					label: Client.getLabel(data.property.client),
+			  }
+			: undefined;
 
-	let selectedClient: SelectedOption = property?.client
-		? {
-				value: property.client.id,
-				label: `${property.client.firstName} ${property.client.lastName}`,
-		  }
-		: undefined;
-
-	let selectedProperty = property
-		? {
-				value: property.id,
-				label: PropertyModel.getLabel(property),
-		  }
-		: undefined;
-
-	let propertySelect: SelectEntity;
+	let property: SelectedOption =
+		'property' in data
+			? {
+					value: data.property.id,
+					label: Property.getLabel(data.property),
+			  }
+			: undefined;
 </script>
 
 <svelte:head>
-	<title>{unit ? 'Edit' : 'New'} Unit</title>
+	<title>{data?.id ? 'Edit' : 'New'} Unit</title>
 </svelte:head>
 
-<Form {model} {data} let:setData let:errors let:getValue>
+<Form model={UnitModel} {data} let:setData let:errors let:getValue>
 	<SelectEntity
 		field="clientId"
-		selected={selectedClient}
+		bind:selected={client}
 		invalid={!!getValue(errors, 'propertyId')}
-		on:select={(e) => {
-			propertySelect.clear();
-			propertySelect.getOptions(e.detail.value);
+		on:select={() => {
+			property = undefined;
+			setData('propertyId', null);
 		}}
 	/>
+
 	<SelectEntity
-		bind:this={propertySelect}
-		selected={selectedProperty}
 		field="propertyId"
-		initialParent={selectedClient?.value ?? undefined}
+		bind:parent={client}
+		bind:selected={property}
 		invalid={!!getValue(errors, 'propertyId')}
 		invalidText={getValue(errors, 'propertyId')?.[0]}
 		on:select={(e) => {
