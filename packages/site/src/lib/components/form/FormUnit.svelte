@@ -46,8 +46,8 @@
 
 	<SelectEntity
 		field="propertyId"
-		bind:parent={client}
 		bind:selected={property}
+		parent={client}
 		invalid={!!getValue(errors, 'propertyId')}
 		invalidText={getValue(errors, 'propertyId')?.[0]}
 		on:select={(e) => {
