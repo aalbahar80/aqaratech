@@ -1,0 +1,17 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			// "type": "pwa-node",
+			"request": "launch",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["./node_modules/.bin/svelte-kit", "dev"],
+			// "args": ["./node_modules/.bin/svelte-kit", "dev"]
+			"protocol": "inspector",
+			"cwd": "${workspaceFolder}/packages/site",
+			"name": "sveltekit ssr: debug2",
+			"skipFiles": ["<node_internals>/**"]
+		}
+	]
+}
