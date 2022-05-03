@@ -37,7 +37,10 @@
 <script lang="ts">
 	export let navigation: NavbarItem[];
 	onMount(() => {
-		if (!dev) {
+		if (
+			process.env.VERCEL_ENV === 'production' ||
+			process.env.VERCEL_ENV === 'preview'
+		) {
 			Sentry.init({
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
