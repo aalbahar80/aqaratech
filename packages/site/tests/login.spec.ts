@@ -52,7 +52,7 @@ for (const user of users) {
 				path: '/',
 				expires: expect.any(Number),
 				httpOnly: true,
-				secure: true,
+				// secure: true,
 			});
 		});
 
@@ -68,7 +68,7 @@ for (const user of users) {
 				path: '/',
 				expires: expect.any(Number),
 				httpOnly: true,
-				secure: true,
+				// secure: true,
 			});
 		});
 	});

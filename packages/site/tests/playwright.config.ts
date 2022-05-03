@@ -17,15 +17,6 @@ dotenvConfig({
 // console.log('CI config is:', process.env.CI);
 // console.log('CI config is:', process.env.DATABASE_URL);
 
-const stg = {
-	c: {
-		path: './config/adminState.json',
-	},
-	w: {
-		path: './config/adminStateWebkit.json',
-	},
-};
-
 const localConfig: Config = process.env.LOCAL
 	? {
 			use: {
@@ -40,6 +31,21 @@ const localConfig: Config = process.env.LOCAL
 			},
 	  }
 	: {};
+
+const commonConfig: Config['use'] = {
+	actionTimeout: 0,
+	baseURL: 'http://localhost:3000',
+	screenshot: 'only-on-failure',
+	storageState: './config/adminState.json',
+	trace: {
+		mode: 'retain-on-failure',
+		screenshots: true,
+		snapshots: true,
+		sources: true,
+	},
+	browserName: 'chromium',
+	...localConfig.use,
+};
 
 const extraBrowsers: Config['projects'] = process.env.CI
 	? [
@@ -57,7 +63,7 @@ const extraBrowsers: Config['projects'] = process.env.CI
 const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
 
 const config: Config = {
-	fullyParallel: true,
+	// fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 5000 },
 	globalSetup: './config/global-setup.ts',
@@ -66,61 +72,52 @@ const config: Config = {
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : 'html',
-	use: {
-		actionTimeout: 0,
-		baseURL: 'http://localhost:3000',
-		trace: process.env.CI
-			? undefined
-			: {
-					mode: 'retain-on-failure',
-					screenshots: true,
-					snapshots: true,
-					sources: true,
-			  },
-		browserName: 'chromium',
-		...localConfig.use,
-	},
+	use: commonConfig,
+	// repeatEach: 3,
 
 	projects: [
 		...extraBrowsers,
 		{
 			name: 'chromium',
-			use: { ...devices['Desktop Chrome'], storageState: stg.c.path },
+			use: {
+				...devices['Desktop Chrome'],
+				...commonConfig,
+			},
 			testIgnore: commonTests,
 		},
 		{
 			name: 'client',
-			use: { baseForm: 'clients', storageState: stg.c.path },
+			use: { baseForm: 'clients', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'tenant',
-			use: { baseForm: 'tenants', storageState: stg.c.path },
+			use: { baseForm: 'tenants', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'property',
-			use: { baseForm: 'properties', storageState: stg.c.path },
+			use: { baseForm: 'properties', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'unit',
-			use: { baseForm: 'units', storageState: stg.c.path },
+			use: { baseForm: 'units', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'expense',
-			use: { baseForm: 'expenses', storageState: stg.c.path },
+			use: { baseForm: 'expenses', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'maintenanceOrder',
-			use: { baseForm: 'maintenanceOrders', storageState: stg.c.path },
+			use: { baseForm: 'maintenanceOrders', ...commonConfig },
 			testMatch: commonTests,
 		},
 		{
 			name: 'lease',
-			use: { baseForm: 'leases', storageState: stg.c.path },
+			use: { baseForm: 'leases', ...commonConfig },
 			testMatch: commonTests,
 		},
 	],

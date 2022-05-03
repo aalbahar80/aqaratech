@@ -1,4 +1,4 @@
-import { chromium, webkit } from '@playwright/test';
+import { chromium } from '@playwright/test';
 import prisma from './prismaClient';
 
 async function cleanupDatabase() {
@@ -23,7 +23,7 @@ async function globalSetup() {
 
 	const browsers = {
 		c: { browser: chromium, storage: './config/adminState.json' },
-		w: { browser: webkit, storage: './config/adminStateWebkit.json' },
+		// w: { browser: webkit, storage: './config/adminStateWebkit.json' },
 	};
 
 	const browser = await browsers.c.browser.launch();
