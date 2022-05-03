@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { dev } from '$app/env';
 	// This is a base layout for other layouts to extend.
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
@@ -38,8 +37,8 @@
 	export let navigation: NavbarItem[];
 	onMount(() => {
 		if (
-			process.env.VERCEL_ENV === 'production' ||
-			process.env.VERCEL_ENV === 'preview'
+			import.meta.env.VERCEL_ENV === 'production' ||
+			import.meta.env.VERCEL_ENV === 'preview'
 		) {
 			Sentry.init({
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
