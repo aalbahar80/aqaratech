@@ -58,6 +58,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 			path: event.url.pathname.substring(url.length + 1),
 			createContext: async () => createContext?.(event),
 			responseMeta,
+			onError: async (error) => {
+				console.error(error);
+			},
 		});
 
 		const { status, headers, body } = httpResponse as {
@@ -98,6 +101,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleError: HandleError = async ({ error, event }) => {
+	console.error(error, 'hooks.ts ~ 104');
 	const user = event.locals.user;
 	Sentry.captureException(error, {
 		user: {

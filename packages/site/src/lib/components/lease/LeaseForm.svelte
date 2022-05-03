@@ -188,7 +188,6 @@
 			handleAmountChange(lease.monthlyRent);
 		}
 	});
-	let unitSelect: SelectEntity;
 </script>
 
 <form use:form data-test={$isValid ? 'ok' : 'error'}>
