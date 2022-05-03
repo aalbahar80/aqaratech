@@ -13,7 +13,7 @@ const test = base.extend<{ form: LeaseForm }>({
 	},
 });
 
-test.use({ storageState: './config/adminStorageState.json' });
+// test.use({ storageState: './config/adminState.json' });
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);

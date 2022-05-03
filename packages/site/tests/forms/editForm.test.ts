@@ -13,14 +13,10 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		form.alter();
 		await form.fill();
 		await use(form);
-		// await form.clean();
 	},
 });
 
-test.use({ storageState: './config/adminStorageState.json' });
-
 test.describe(`Form: edit`, async () => {
-	// TODO: consider cleaning after use() in fixture
 	test(`returns 200`, async ({ form, page }) => {
 		const request = await form.getRequest();
 		const response = await request?.response();

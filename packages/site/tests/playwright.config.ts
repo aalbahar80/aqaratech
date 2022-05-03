@@ -17,6 +17,15 @@ dotenvConfig({
 // console.log('CI config is:', process.env.CI);
 // console.log('CI config is:', process.env.DATABASE_URL);
 
+const stg = {
+	c: {
+		path: './config/adminState.json',
+	},
+	w: {
+		path: './config/adminStateWebkit.json',
+	},
+};
+
 const localConfig: Config = process.env.LOCAL
 	? {
 			use: {
@@ -51,7 +60,7 @@ const config: Config = {
 	fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 5000 },
-	globalSetup: process.env.LOCAL ? undefined : './config/global-setup.ts',
+	globalSetup: './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
@@ -76,38 +85,42 @@ const config: Config = {
 		...extraBrowsers,
 		{
 			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] },
+			use: { ...devices['Desktop Chrome'], storageState: stg.c.path },
 			testIgnore: commonTests,
 		},
 		{
 			name: 'client',
-			use: { baseForm: 'clients' },
+			use: { baseForm: 'clients', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
 		{
 			name: 'tenant',
-			use: { baseForm: 'tenants' },
+			use: { baseForm: 'tenants', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
 		{
 			name: 'property',
-			use: { baseForm: 'properties' },
+			use: { baseForm: 'properties', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
-		{ name: 'unit', use: { baseForm: 'units' }, testMatch: commonTests },
+		{
+			name: 'unit',
+			use: { baseForm: 'units', storageState: stg.c.path },
+			testMatch: commonTests,
+		},
 		{
 			name: 'expense',
-			use: { baseForm: 'expenses' },
+			use: { baseForm: 'expenses', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
 		{
 			name: 'maintenanceOrder',
-			use: { baseForm: 'maintenanceOrders' },
+			use: { baseForm: 'maintenanceOrders', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
 		{
 			name: 'lease',
-			use: { baseForm: 'leases' },
+			use: { baseForm: 'leases', storageState: stg.c.path },
 			testMatch: commonTests,
 		},
 	],

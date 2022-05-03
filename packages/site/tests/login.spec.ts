@@ -21,6 +21,9 @@ const users = [
 	},
 ];
 
+// Explicitly set storageState to undefined to avoid reused auth state.
+test.use({ storageState: undefined });
+
 for (const user of users) {
 	test.describe(`${user.role} login:`, async () => {
 		test.beforeEach(async ({ page }) => {

@@ -13,7 +13,7 @@ const test = base.extend<{ form: PropertyForm }>({
 	},
 });
 
-test.use({ storageState: './config/adminStorageState.json' });
+// test.use({ storageState: './config/adminState.json' });
 
 test.describe('Edit property form', async () => {
 	test.beforeEach(async ({ page, form }) => {

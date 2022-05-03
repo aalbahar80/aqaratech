@@ -12,11 +12,8 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await page.evaluate(() => window.started);
 		await form.fill();
 		await use(form);
-		// await form.clean();
 	},
 });
-
-test.use({ storageState: './config/adminStorageState.json' });
 
 test.describe(`Form: new`, async () => {
 	test(`returns 200`, async ({ form, page }) => {
