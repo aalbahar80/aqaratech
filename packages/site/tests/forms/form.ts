@@ -49,7 +49,7 @@ export class Form {
 
 	constructor(public urlName: Entity, public id: string) {
 		// super(urlName);
-		this.editUrl = `${this.urlName}/${this.id}/edit`;
+		this.editUrl = `/${this.urlName}/${this.id}/edit`;
 		this.createUrl = `/new/${this.urlName}`;
 	}
 

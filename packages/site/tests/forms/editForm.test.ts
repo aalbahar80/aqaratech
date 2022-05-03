@@ -2,6 +2,7 @@ import { expect, test as base } from '../config/test-setup.js';
 import type { FormFixtures } from '../playwright.config.js';
 import { formClasses, type FormType } from './form.js';
 
+base.use({ storageState: './config/adminState.json' });
 const test = base.extend<FormFixtures & { form: FormType }>({
 	form: async ({ page, baseForm }, use) => {
 		const form = new formClasses[baseForm]();

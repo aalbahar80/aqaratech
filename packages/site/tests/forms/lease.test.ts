@@ -3,6 +3,7 @@ import { test as base } from '../config/test-setup.js';
 import { preselected } from '../utils.js';
 import { LeaseForm } from './form.js';
 
+base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: LeaseForm }>({
 	form: async ({ page }, use) => {
 		const form = new LeaseForm();

@@ -3,6 +3,7 @@ import { expect, test as base } from '../config/test-setup.js';
 import { preselected } from '../utils.js';
 import { PropertyForm } from './form.js';
 
+base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: PropertyForm }>({
 	form: async ({ page }, use) => {
 		const form = new PropertyForm();

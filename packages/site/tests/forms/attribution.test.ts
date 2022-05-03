@@ -3,7 +3,7 @@ import { getAddress, getName } from '../../src/lib/utils/common.js';
 import { expect, test } from '../config/test-setup.js';
 import { preselected } from '../utils.js';
 
-test.use({ storageState: './config/adminStorageState.json' });
+// base.use({ storageState: './config/adminState.json' });
 // test.describe('Edit expense form', async () => {
 // 	test.beforeEach(async ({ page, expenseForm }) => {
 // 		await page.goto(`/${expenseForm.data.id}/edit`);
