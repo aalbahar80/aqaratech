@@ -42,6 +42,7 @@ const commonConfig: Config['use'] = {
 		snapshots: true,
 		sources: true,
 	},
+	video: 'retry-with-video',
 	browserName: 'chromium',
 	...localConfig.use,
 };
@@ -72,16 +73,19 @@ const config: Config = {
 	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : 'html',
 	use: commonConfig,
+	testIgnore: ['attribution.test.ts'],
 	// repeatEach: 3,
 
 	projects: [
-		...extraBrowsers,
+		// ...extraBrowsers,
 		{
 			name: 'chromium',
 			use: {
 				...devices['Desktop Chrome'],
 				...commonConfig,
 			},
+			testMatch: ['lease.test.ts', 'property.test.ts'],
+			// testMatch: ['login.spec.ts'],
 			testIgnore: commonTests,
 		},
 		{

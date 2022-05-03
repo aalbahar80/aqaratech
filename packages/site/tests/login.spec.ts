@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+// TODO: make compatible with global setup (which cleans db before running tests)
 const users = [
 	{
 		role: 'admin',
@@ -7,18 +8,18 @@ const users = [
 		password: 'test12',
 		destination: '/',
 	},
-	{
-		role: 'owner',
-		email: 'client.dev@mailthink.net',
-		password: 'test12',
-		destination: /^http:\/\/localhost:3000\/clients\/.+\/dashboard$/,
-	},
-	{
-		role: 'tenant',
-		email: 'tenant.dev@mailthink.net',
-		password: 'test12',
-		destination: /^http:\/\/localhost:3000\/portal\/tenant\/.*$/,
-	},
+	// {
+	// 	role: 'owner',
+	// 	email: 'client.dev@mailthink.net',
+	// 	password: 'test12',
+	// 	destination: /^http:\/\/localhost:3000\/clients\/.+\/dashboard$/,
+	// },
+	// {
+	// 	role: 'tenant',
+	// 	email: 'tenant.dev@mailthink.net',
+	// 	password: 'test12',
+	// 	destination: /^http:\/\/localhost:3000\/portal\/tenant\/.*$/,
+	// },
 ];
 
 // Explicitly set storageState to undefined to avoid reused auth state.
