@@ -3,7 +3,7 @@ import { createTRPCClient } from '@trpc/client';
 import { serialize } from 'cookie';
 import fetch from 'cross-fetch';
 import superjson from 'superjson';
-import auth from './adminStorageState.json';
+import auth from './adminState.json';
 
 // TODO: https://playwright.dev/docs/cli#preserve-authenticated-state
 const baseUrl = 'http://localhost:3000';
