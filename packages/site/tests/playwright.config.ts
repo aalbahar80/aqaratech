@@ -33,7 +33,6 @@ const localConfig: Config = process.env.LOCAL
 	: {};
 
 const commonConfig: Config['use'] = {
-	actionTimeout: 5000,
 	baseURL: 'http://localhost:3000',
 	screenshot: 'only-on-failure',
 	storageState: './config/adminState.json',
