@@ -29,22 +29,23 @@ const prisma = new PrismaClient({
 // });
 
 const cleanupDatabase = async (): Promise<void> => {
-	await prisma.maintenanceOrder.deleteMany({});
-	await prisma.expense.deleteMany({});
-	await prisma.transaction.deleteMany({});
-	await prisma.lease.deleteMany({});
-	await prisma.tenant.deleteMany({});
-	await prisma.unit.deleteMany({});
-	await prisma.property.deleteMany({});
-	await prisma.client.deleteMany({});
-	await prisma.listing.deleteMany({});
+	await prisma.$transaction([
+		prisma.$executeRaw`DELETE FROM Expense`,
+		prisma.$executeRaw`DELETE FROM MaintenanceOrder`,
+		prisma.$executeRaw`DELETE FROM Lease`,
+		prisma.$executeRaw`DELETE FROM Unit`,
+		prisma.$executeRaw`DELETE FROM Property`,
+		prisma.$executeRaw`DELETE FROM Client`,
+		prisma.$executeRaw`DELETE FROM Tenant`,
+		prisma.$executeRaw`DELETE FROM Listing`,
+	]);
 };
 
 async function main({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
-	let clientCount = 10;
+	let clientCount = 3;
 	let propertyMin = 2;
 	let propertyMax = 6;
 	let unitMax = 15;
@@ -309,7 +310,7 @@ async function main({
 	}
 }
 
-main({ sample: true, clean: false })
+main({ sample: false, clean: true })
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);
