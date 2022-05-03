@@ -49,11 +49,17 @@ export class Unit extends Entity {
 		}
 	};
 	static getList = async (propertyId?: string) => {
-		const result = await trpc.query('units:list', {
-			size: 20,
-			propertyId,
-		});
-		return result.data.map((data) => new Unit(data));
+		try {
+			// catch error when empty string is passed
+			const result = await trpc.query('units:list', {
+				size: 20,
+				propertyId,
+			});
+			return result.data.map((data) => new Unit(data));
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
 	};
 	static async grab(id: string) {
 		const data = await trpc.query('units:read', id);

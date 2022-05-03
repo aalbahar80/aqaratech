@@ -80,10 +80,11 @@ export const units = createRouter()
 				start: size * (pageIndex - 1) + 1,
 				pageIndex: pageIndex,
 			};
-			return {
-				data,
-				pagination,
-			};
+			if (data) {
+				return { data, pagination };
+			} else {
+				throw new TRPCError({ code: 'NOT_FOUND' });
+			}
 		},
 	})
 	.query('count', {
