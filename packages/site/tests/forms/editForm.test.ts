@@ -40,7 +40,7 @@ test.describe(`Form: edit`, async () => {
 		for (const b of form.basic()) {
 			const el = page.locator(`text=${b}`).first();
 			const re = new RegExp(`${b}`);
-			expect(await el.textContent()).toMatch(re);
+			await expect(el).toContainText(re);
 		}
 	});
 });

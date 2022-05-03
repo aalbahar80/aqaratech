@@ -39,7 +39,7 @@ test.describe(`Form: new`, async () => {
 		for (const b of form.basic()) {
 			const el = page.locator(`text=${b}`).first();
 			const re = new RegExp(`${b}`);
-			expect(await el.textContent()).toMatch(re);
+			await expect(el).toContainText(re);
 		}
 	});
 
@@ -49,6 +49,6 @@ test.describe(`Form: new`, async () => {
 		expect.soft(await button.isEnabled()).toBe(true);
 		await form.submit();
 		expect(await button.isEnabled()).toBe(false);
-		expect(await el.getAttribute('data-test')).toBe('ok');
+		await expect(el).toHaveAttribute('data-test', 'ok');
 	});
 });
