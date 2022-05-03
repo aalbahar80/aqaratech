@@ -84,7 +84,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
 			sameSite: 'none', // TODO research
-			secure: true,
+			// secure: true,
 		}),
 	);
 
@@ -95,7 +95,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
 			sameSite: 'none', // TODO research
-			secure: true,
+			// secure: true,
 		}),
 	);
 

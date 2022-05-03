@@ -21,12 +21,7 @@ async function globalSetup() {
 	const adminEmail = 'admin.dev@mailthink.net';
 	const password = 'test12';
 
-	const browsers = {
-		c: { browser: chromium, storage: './config/adminState.json' },
-		// w: { browser: webkit, storage: './config/adminStateWebkit.json' },
-	};
-
-	const browser = await browsers.c.browser.launch();
+	const browser = await chromium.launch();
 	// log in admin
 	const adminPage = await browser.newPage();
 	await adminPage.goto('http://localhost:3000');
@@ -34,7 +29,7 @@ async function globalSetup() {
 	await adminPage.fill('input[name="username"]', adminEmail);
 	await adminPage.fill('input[name="password"]', password);
 	await adminPage.locator('button[name="action"]').click();
-	await adminPage.context().storageState({ path: browsers.c.storage });
+	await adminPage.context().storageState({ path: './config/adminState.json' });
 	await browser.close();
 }
 
