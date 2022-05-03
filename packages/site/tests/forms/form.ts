@@ -15,6 +15,7 @@ import {
 	getName,
 	kwdFormat,
 } from '../../src/lib/utils/common.js';
+import prisma from '../config/prismaClient.js';
 import { trpc } from '../config/trpc.js';
 
 export type FormType =
@@ -116,7 +117,7 @@ export class ClientForm extends Form {
 	async setupNew() {}
 
 	async setupEdit() {
-		const { id } = await trpc.mutation('clients:create', this.data);
+		const { id } = await prisma.client.create({ data: this.data });
 		this.basket.clients.push(id);
 	}
 }
@@ -138,8 +139,6 @@ export class PropertyForm extends Form {
 		await this.page?.fill('input[name="street"]', this.data.street);
 		await this.page?.fill('input[name="avenue"]', this.data.avenue ?? '');
 		await this.page?.fill('input[name="number"]', this.data.number);
-		await this.page?.waitForLoadState('networkidle');
-		await this.page?.selectOption('#clientId', { label: getName(this.client) });
 	}
 
 	public alter() {
@@ -162,15 +161,15 @@ export class PropertyForm extends Form {
 
 	async setupNew() {
 		const [client] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
+			prisma.client.create({ data: this.client }),
 		]);
 		this.basket.clients.push(client.id);
 	}
 
 	async setupEdit() {
 		const [client, property] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.data),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.data }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -215,8 +214,8 @@ export class UnitForm extends Form {
 
 	async setupNew() {
 		const [client, property] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -224,9 +223,9 @@ export class UnitForm extends Form {
 
 	async setupEdit() {
 		const [client, property, unit] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.data),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.data }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -262,7 +261,7 @@ export class TenantForm extends Form {
 	}
 
 	async setupEdit() {
-		const { id } = await trpc.mutation('tenants:create', this.data);
+		const { id } = await prisma.tenant.create({ data: this.data });
 		this.basket.tenants.push(id);
 	}
 
@@ -322,10 +321,10 @@ export class LeaseForm extends Form {
 
 	async setupNew() {
 		const [client, property, unit, tenant] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
-			trpc.mutation('tenants:create', this.tenant),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
+			prisma.tenant.create({ data: this.tenant }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -335,11 +334,11 @@ export class LeaseForm extends Form {
 
 	async setupEdit() {
 		const [client, property, unit, tenant, lease] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
-			trpc.mutation('tenants:create', this.tenant),
-			trpc.mutation('leases:create', this.data),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
+			prisma.tenant.create({ data: this.tenant }),
+			prisma.lease.create({ data: this.data }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -406,9 +405,9 @@ export class ExpenseForm extends Form {
 
 	async setupNew() {
 		const [client, property, unit] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -417,10 +416,10 @@ export class ExpenseForm extends Form {
 
 	async setupEdit() {
 		const [client, property, unit, expense] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
-			trpc.mutation('expenses:create', this.data),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
+			prisma.expense.create({ data: this.data }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -485,9 +484,9 @@ export class MaintenanceOrderForm extends Form {
 
 	async setupNew() {
 		const [client, property, unit] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
@@ -496,10 +495,10 @@ export class MaintenanceOrderForm extends Form {
 
 	async setupEdit() {
 		const [client, property, unit, expense] = await Promise.all([
-			trpc.mutation('clients:create', this.client),
-			trpc.mutation('properties:create', this.property),
-			trpc.mutation('units:create', this.unit),
-			trpc.mutation('maintenanceOrders:create', this.data),
+			prisma.client.create({ data: this.client }),
+			prisma.property.create({ data: this.property }),
+			prisma.unit.create({ data: this.unit }),
+			prisma.maintenanceOrder.create({ data: this.data }),
 		]);
 		this.basket.clients.push(client.id);
 		this.basket.properties.push(property.id);
