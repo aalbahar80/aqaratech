@@ -1,9 +1,11 @@
 <script context="module" lang="ts">
 	import trpc from '$lib/client/trpc';
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
-	import { getAddress } from '$lib/utils/common';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import type { Load } from '@sveltejs/kit';
+	import { Property } from '../../lib/models/classes/property.class';
+	import { Tenant } from '../../lib/models/classes/tenant.class';
+	import { Unit } from '../../lib/models/classes/unit.class';
 
 	export const load: Load = async ({ url }) => {
 		let options = Object.fromEntries(url.searchParams.entries());
@@ -21,8 +23,20 @@
 				unitType: lease.unit.type,
 				unitNumber: lease.unit.unitNumber,
 				propertyId: lease.unit.property.id,
-				address: getAddress(lease.unit.property),
+				address: Property.getLabel(lease.unit.property),
 				monthlyRent: lease.monthlyRent,
+				tenant: {
+					label: Tenant.getLabel(lease.tenant),
+					value: lease.tenantId,
+				},
+				property: {
+					label: Property.getLabel(lease.unit.property),
+					value: lease.unit.property.id,
+				},
+				unit: {
+					label: Unit.getLabel(lease.unit),
+					value: lease.unitId,
+				},
 			};
 		} else if (options.tenantId) {
 			const tenant = await trpc.query('tenants:read', options.tenantId);
@@ -31,6 +45,12 @@
 				tenantId: tenant.id,
 				firstName: tenant.firstName,
 				lastName: tenant.lastName,
+				tenant: {
+					label: Tenant.getLabel(tenant),
+					value: tenant.id,
+				},
+				property: undefined,
+				unit: undefined,
 			};
 		} else if (options.unitId) {
 			const unit = await trpc.query('units:read', options.unitId);
@@ -40,7 +60,16 @@
 				unitType: unit.type,
 				unitNumber: unit.unitNumber,
 				propertyId: unit.propertyId,
-				address: getAddress(unit.property),
+				address: Property.getLabel(unit.property),
+				tenant: undefined,
+				property: {
+					label: Property.getLabel(unit.property),
+					value: unit.property.id,
+				},
+				unit: {
+					label: Unit.getLabel(unit),
+					value: unit.id,
+				},
 			};
 		}
 		return {

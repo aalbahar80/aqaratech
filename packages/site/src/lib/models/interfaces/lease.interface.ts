@@ -4,6 +4,7 @@ import type { IEntity } from '$models/interfaces/entity.interface';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
+import type { SelectedOption } from './common/option.interface';
 
 const schema = z.object({
 	id: z.string().uuid().optional(),
@@ -181,6 +182,9 @@ interface PredefinedTenant {
 	tenantId: string;
 	firstName: string;
 	lastName: string;
+	tenant: SelectedOption;
+	property: SelectedOption;
+	unit: SelectedOption;
 }
 interface PredefinedUnit {
 	initiator: 'unit';
@@ -189,6 +193,9 @@ interface PredefinedUnit {
 	unitNumber: string;
 	propertyId: string;
 	address: string;
+	tenant: SelectedOption;
+	property: SelectedOption;
+	unit: SelectedOption;
 }
 
 interface PredefinedLease {
@@ -202,6 +209,9 @@ interface PredefinedLease {
 	propertyId: string;
 	address: string;
 	monthlyRent: number;
+	tenant: SelectedOption;
+	property: SelectedOption;
+	unit: SelectedOption;
 }
 // helper type for new lease form
 export type Predefined = PredefinedTenant | PredefinedUnit | PredefinedLease;

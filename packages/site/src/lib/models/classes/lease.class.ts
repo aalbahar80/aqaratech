@@ -12,6 +12,8 @@ export class Lease extends Entity {
 	static plural = 'leases';
 	static pluralCap = 'Leases';
 	static schema = schema;
+	static leaseFormSchema = leaseFormSchema;
+	static generateSchedule = generateSchedule;
 
 	constructor(public data: Partial<PLease>) {
 		super();

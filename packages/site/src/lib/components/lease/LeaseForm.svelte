@@ -4,15 +4,10 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import trpc from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
-	import type { SelectedOption } from '$lib/models/interfaces/common/option.interface';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { forceDate, forceDateToInput } from '$lib/utils/common';
-	import {
-		generateSchedule,
-		LeaseModel,
-		type Predefined,
-	} from '$models/interfaces/lease.interface';
+	import type { Predefined } from '$models/interfaces/lease.interface';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
 	import {
@@ -26,8 +21,7 @@
 	import { onMount } from 'svelte';
 	import { v4 as uuidv4 } from 'uuid';
 	import type { z } from 'zod';
-	import { Tenant } from '../../models/classes/tenant.class';
-	import { Unit } from '../../models/classes/unit.class';
+	import { Lease } from '../../models/classes/lease.class';
 	import Button from '../Button.svelte';
 	import Input from '../form/Input.svelte';
 	import SelectEntity from '../form/SelectEntity.svelte';
@@ -35,39 +29,14 @@
 	export let predefined: Predefined;
 
 	const lease = {
-		propertyId: '',
-		...LeaseModel.defaultForm(),
+		...Lease.defaultForm(),
 		...predefined,
 	};
+	console.log({ lease }, 'LeaseForm.svelte ~ 42');
 
-	// ## Initial Values
-	let property: SelectedOption | undefined =
-		lease.initiator === 'tenant'
-			? undefined
-			: { value: lease.propertyId, label: lease.address };
-
-	let unit: SelectedOption | undefined =
-		lease.initiator === 'tenant'
-			? undefined
-			: {
-					value: lease.unitId,
-					label: Unit.getLabel({
-						type: lease.unitType,
-						unitNumber: lease.unitNumber,
-					}),
-			  };
-
-	let tenant: SelectedOption =
-		lease.initiator === 'unit'
-			? undefined
-			: {
-					value: lease.tenantId,
-					label: Tenant.getLabel({
-						firstName: lease.firstName,
-						lastName: lease.lastName,
-					}),
-			  };
-	// ## End Initial Values
+	let property = lease.property;
+	let unit = lease.unit;
+	let tenant = lease.tenant;
 
 	const {
 		form,
@@ -78,10 +47,10 @@
 		setData,
 		unsetField,
 		isValid,
-	} = createForm<z.infer<typeof LeaseModel.leaseFormSchema>, ValidatorConfig>({
+	} = createForm<z.infer<typeof Lease.leaseFormSchema>, ValidatorConfig>({
 		transform: (values: unknown) => {
 			// make sure each element in schedule array is an object whose postAt is a date
-			const original = values as z.infer<typeof LeaseModel.leaseFormSchema>;
+			const original = values as z.infer<typeof Lease.leaseFormSchema>;
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
 				newValues.schedule = original?.schedule.map((item) => {
@@ -106,9 +75,9 @@
 			};
 		},
 		initialValues: lease,
-		schema: LeaseModel.leaseFormSchema, // only to make linter happy
+		schema: Lease.leaseFormSchema, // only to make linter happy
 		extend: reporter(),
-		validate: validateSchema(LeaseModel.leaseFormSchema),
+		validate: validateSchema(Lease.leaseFormSchema),
 		onError: (err) => {
 			addToast({
 				props: {
@@ -167,7 +136,7 @@
 	});
 
 	const handleCountChange = (newCount: number) => {
-		const newSchedule = generateSchedule({
+		const newSchedule = Lease.generateSchedule({
 			scheduleStart: forceDate($data2.start),
 			amount: $data2.monthlyRent,
 			count: newCount,
@@ -175,7 +144,7 @@
 		setData('schedule', newSchedule);
 	};
 	const handleAmountChange = (newAmount: number) => {
-		const newSchedule = generateSchedule({
+		const newSchedule = Lease.generateSchedule({
 			scheduleStart: forceDate($data2.start),
 			amount: newAmount,
 			count: $data2.schedule.length, // TODO reconsider
