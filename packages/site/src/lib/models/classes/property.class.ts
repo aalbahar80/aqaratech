@@ -15,7 +15,7 @@ export class Property extends Entity {
 	constructor(public data: Partial<PProperty>) {
 		super();
 	}
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): Partial<z.input<typeof schema>> => ({
 		area: '',
 		block: '',
 		avenue: '',
@@ -42,7 +42,7 @@ export class Property extends Entity {
 	};
 	static getList = async (clientId?: string) => {
 		const result = await trpc.query('properties:list', {
-			size: 20,
+			size: 40,
 			clientId,
 		});
 		return result.data.map((data) => new Property(data));
