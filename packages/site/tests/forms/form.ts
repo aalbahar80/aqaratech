@@ -132,6 +132,8 @@ export class PropertyForm extends Form {
 	}
 
 	public async fill() {
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.selectOption('#clientId', { label: getName(this.client) });
 		await this.page?.fill('[id="area"]', this.data.area);
 		await this.page?.locator(`.item >> text=${this.data.area}`).first().click();
 		await this.page?.keyboard.press('Enter');
@@ -188,14 +190,16 @@ export class UnitForm extends Form {
 	}
 
 	public async fill() {
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.selectOption('#clientId', { label: getName(this.client) });
+		await this.page?.waitForLoadState('networkidle');
+		await this.page?.selectOption('#propertyId', {
+			label: getAddress(this.property),
+		});
 		await this.page?.fill('input[name="unitNumber"]', this.data.unitNumber);
 		await this.page?.fill('input[name="bed"]', this.data.bed.toString());
 		await this.page?.fill('input[name="bath"]', this.data.bath.toString());
 		await this.page?.fill('input[name="floor"]', this.data.floor.toString());
-		await this.page?.selectOption('#clientId', { label: getName(this.client) });
-		await this.page?.selectOption('#propertyId', {
-			label: getAddress(this.property),
-		});
 	}
 
 	public alter() {
