@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
 	import { getAddress, getName, getProgress } from '$lib/utils/common';
-	import { getBadge } from '$models/interfaces/lease.interface';
+	import { Lease } from '$models/classes/lease.class';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
@@ -31,7 +31,7 @@
 
 	const expired = lease.end < new Date();
 
-	const badge = getBadge(lease);
+	const badge = Lease.getBadge(lease);
 	const progress = getProgress(lease.start, lease.end);
 </script>
 

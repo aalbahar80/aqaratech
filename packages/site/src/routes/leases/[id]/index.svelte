@@ -8,7 +8,7 @@
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
-	import { getBadge } from '$models/interfaces/lease.interface';
+	import { Lease } from '$models/classes/lease.class';
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { LoadInput } from '@sveltejs/kit';
@@ -49,7 +49,7 @@
 		},
 	];
 
-	const badge = getBadge(lease);
+	const badge = Lease.getBadge(lease);
 </script>
 
 <Heading title="Lease" id={lease.id} entity="leases" {icons}>

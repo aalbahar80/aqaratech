@@ -1,6 +1,6 @@
+import { Lease } from '$lib/models/classes/lease.class';
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { LeaseModel } from '$models/interfaces/lease.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -250,7 +250,7 @@ export const leases = createRouter()
 		resolve: () => prismaClient.lease.count({}),
 	})
 	.mutation('create', {
-		input: LeaseModel.schema,
+		input: Lease.schema,
 		resolve: ({ input }) => {
 			const { id, ...data } = input;
 			return prismaClient.lease.create({
@@ -262,7 +262,7 @@ export const leases = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: LeaseModel.schema,
+		input: Lease.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.lease.update({

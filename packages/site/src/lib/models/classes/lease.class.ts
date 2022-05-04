@@ -1,7 +1,8 @@
 import trpc from '$lib/client/trpc';
 import type { Lease as PLease } from '@prisma/client';
+import { addMonths, format } from 'date-fns';
+import { nanoid } from 'nanoid';
 import type { z } from 'zod';
-import { generateSchedule } from '../interfaces/lease.interface';
 import { leaseFormSchema, schema } from '../schemas/lease.schema';
 import { Entity } from './entity.class';
 
@@ -13,7 +14,6 @@ export class Lease extends Entity {
 	static pluralCap = 'Leases';
 	static schema = schema;
 	static leaseFormSchema = leaseFormSchema;
-	static generateSchedule = generateSchedule;
 
 	constructor(public data: Partial<PLease>) {
 		super();
@@ -27,7 +27,7 @@ export class Lease extends Entity {
 		unitId: '',
 		shouldNotify: true,
 		active: true,
-		schedule: generateSchedule({
+		schedule: Lease.generateSchedule({
 			count: 12,
 			amount: 0,
 			scheduleStart: new Date(),
@@ -62,4 +62,59 @@ export class Lease extends Entity {
 		const data = await trpc.query('leases:read', id);
 		return new Lease(data);
 	}
+
+	static generateSchedule({
+		count,
+		amount,
+		scheduleStart,
+	}: {
+		count: number;
+		amount: number;
+		scheduleStart: Date;
+	}) {
+		const newSchedule = [];
+		// get the date of the 1st day of the next month
+		// const leaseStart = new Date(lease.scheduleStart);
+
+		// Check out date-fns eachMonthOfInterval
+		// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
+		const nextMonth = new Date(
+			scheduleStart.getFullYear(),
+			scheduleStart.getMonth(),
+			scheduleStart.getUTCDate() + 1,
+		);
+
+		for (let bp = 0; bp < Math.min(count, 24); bp++) {
+			// TODO change to 1 month
+			const dueAt = addMonths(nextMonth, bp);
+			const memo = `Rent for: ${format(dueAt, 'MMMM yyyy')}`;
+			newSchedule.push({
+				nanoid: nanoid(),
+				amount,
+				// postAt: dueAt.toISOString().split('T')[0],
+				postAt: dueAt,
+				memo,
+			});
+		}
+		return newSchedule;
+	}
+
+	static getBadge = (dates: { start: Date; end: Date }) => {
+		if (dates.end < new Date()) {
+			return {
+				label: 'Expired',
+				color: 'red',
+			};
+		}
+		if (dates.start > new Date()) {
+			return {
+				label: 'Upcoming',
+				color: 'indigo',
+			};
+		}
+		return {
+			label: 'Current',
+			color: 'green',
+		};
+	};
 }
