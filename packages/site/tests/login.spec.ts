@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import {
 	fakeClient,
 	fakeTenant,
@@ -40,7 +40,7 @@ const users = [
 ] as const;
 
 // Explicitly set storageState to undefined to avoid reused auth state.
-test.use({ storageState: undefined });
+// test.use({ storageState: undefined });
 
 for (const user of users) {
 	test.describe(`${user.role} login:`, async () => {

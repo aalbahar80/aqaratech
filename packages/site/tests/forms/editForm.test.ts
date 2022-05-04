@@ -9,7 +9,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		form.page = page;
 		await form.setupEdit();
 		const url = form.getUrl('edit');
-		await page.goto(url);
+		await page.goto(url, { timeout: 5000 });
 		form.alter();
 		await form.fill();
 		await use(form);

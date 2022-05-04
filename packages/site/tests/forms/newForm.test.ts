@@ -9,7 +9,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		form.page = page;
 		await form.setupNew();
 		const url = form.getUrl('new');
-		await page.goto(url);
+		await page.goto(url, { timeout: 5000 });
 		await form.fill();
 		await use(form);
 	},
@@ -34,6 +34,7 @@ test.describe(`Form: new`, async () => {
 		await form.submit();
 		await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 10000 });
 		await expect(page).not.toHaveURL(/new/);
+		// use page.waitForURL
 
 		for (const b of form.basic()) {
 			const el = page.locator(`text=${b}`).first();

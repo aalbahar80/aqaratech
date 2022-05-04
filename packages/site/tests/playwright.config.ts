@@ -16,6 +16,7 @@ dotenvConfig({
 // console.log('REUSE_PRISMA config is:', process.env.REUSE_PRISMA);
 // console.log('CI config is:', process.env.CI);
 // console.log('CI config is:', process.env.DATABASE_URL);
+// console.log('DEV config is:', process.env.DEV);
 
 const localConfig: Config = process.env.LOCAL
 	? {
@@ -84,9 +85,20 @@ const config: Config = {
 				...devices['Desktop Chrome'],
 				...commonConfig,
 			},
-			testMatch: ['lease.test.ts', 'property.test.ts', 'login.spec.ts'],
+			testMatch: ['lease.test.ts', 'property.test.ts'],
 			testIgnore: commonTests,
 		},
+		// TODO: Enable once you figure out how not to pollute the environment
+		// Hint: It has something to do with the storage state
+		// Hint2: It has something to do with testMatch/testIgnore
+		// {
+		// 	name: 'Login',
+		// 	use: {
+		// 		...devices['Desktop Chrome'],
+		// 		...commonConfig,
+		// 	},
+		// 	testMatch: ['login.spec.ts'],
+		// },
 		{
 			name: 'client',
 			use: { baseForm: 'clients', ...commonConfig },
@@ -126,7 +138,9 @@ const config: Config = {
 	webServer: {
 		reuseExistingServer: true,
 		port: 3000,
-		command: 'cd ../ && pnpm run build && pnpm run preview',
+		command: process.env.DEV
+			? 'cd ../ && pnpm run dev'
+			: 'cd ../ && pnpm run build && pnpm run preview',
 	},
 	...localConfig,
 };
