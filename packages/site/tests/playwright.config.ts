@@ -58,6 +58,14 @@ const config: Config = {
 			testMatch: ['forms/lease.test.ts', 'forms/property.test.ts'],
 			testIgnore: commonTests,
 		},
+		// {
+		// 	name: 'Pay',
+		// 	testMatch: ['pay/pay.test.ts'],
+		// 	use: {
+		// 		storageState: undefined,
+		// 	},
+		// 	testIgnore: commonTests,
+		// },
 		// TODO: Enable once you figure out how not to pollute the environment
 		// Hint: It has something to do with the storage state
 		// Hint2: It has something to do with testMatch/testIgnore

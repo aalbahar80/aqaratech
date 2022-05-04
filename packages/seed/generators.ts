@@ -135,6 +135,19 @@ export const fakeTransaction = (
 	};
 };
 
+export const fakeTransactionBasic = () => {
+	return {
+		id: randomUUID(),
+		createdAt: new Date(),
+		updatedAt: new Date(),
+		amount: faker.datatype.number({ min: 200, max: 2000 }),
+		memo: "RENT",
+		postAt: new Date(),
+		dueAt: addDays(new Date(), 14),
+		isPaid: false,
+	};
+};
+
 export const fakeLease = (
 	tenantId?: string,
 	unitId?: string,
