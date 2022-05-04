@@ -17,7 +17,6 @@ import {
 	kwdFormat,
 } from '../../src/lib/utils/common.js';
 import prisma from '../config/prismaClient.js';
-import { trpc } from '../config/trpc.js';
 
 export type FormType =
 	| ClientForm
@@ -79,10 +78,6 @@ export class Form {
 
 	async clean() {
 		await this.basket.clean();
-	}
-
-	async deleteById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
 }
 
@@ -155,10 +150,6 @@ export class PropertyForm extends Form {
 	 */
 	public basic() {
 		return [this.data.area];
-	}
-
-	async setupById() {
-		await trpc.mutation(`${this.urlName}:create`, fakeProperty());
 	}
 
 	async setupNew() {
@@ -269,10 +260,6 @@ export class TenantForm extends Form {
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	async setupNew() {}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
-	}
 }
 
 export class LeaseForm extends Form {
@@ -346,10 +333,6 @@ export class LeaseForm extends Form {
 		this.basket.units.push(unit.id);
 		this.basket.tenants.push(tenant.id);
 		this.basket.leases.push(lease.id);
-	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
 }
 
@@ -426,10 +409,6 @@ export class ExpenseForm extends Form {
 		this.basket.units.push(unit.id);
 		this.basket.expenses.push(expense.id);
 	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
-	}
 }
 
 export class MaintenanceOrderForm extends Form {
@@ -503,10 +482,6 @@ export class MaintenanceOrderForm extends Form {
 		this.basket.properties.push(property.id);
 		this.basket.units.push(unit.id);
 		this.basket.maintenanceOrders.push(expense.id);
-	}
-
-	static async cleanById(id: string) {
-		await trpc.mutation(`${this.urlName}:delete`, id);
 	}
 }
 
