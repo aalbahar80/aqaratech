@@ -94,21 +94,21 @@ const config: Config = {
 			use: { baseForm: 'units' },
 			testMatch: commonTests,
 		},
-		// {
-		// 	name: 'expense',
-		// 	use: { baseForm: 'expenses' },
-		// 	testMatch: commonTests,
-		// },
-		// {
-		// 	name: 'maintenanceOrder',
-		// 	use: { baseForm: 'maintenanceOrders' },
-		// 	testMatch: commonTests,
-		// },
-		// {
-		// 	name: 'lease',
-		// 	use: { baseForm: 'leases' },
-		// 	testMatch: commonTests,
-		// },
+		{
+			name: 'expense',
+			use: { baseForm: 'expenses' },
+			testMatch: commonTests,
+		},
+		{
+			name: 'maintenanceOrder',
+			use: { baseForm: 'maintenanceOrders' },
+			testMatch: commonTests,
+		},
+		{
+			name: 'lease',
+			use: { baseForm: 'leases' },
+			testMatch: commonTests,
+		},
 	],
 	webServer: {
 		reuseExistingServer: true,

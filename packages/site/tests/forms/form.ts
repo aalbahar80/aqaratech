@@ -61,7 +61,7 @@ export class Form {
 		const re = new RegExp('/trpc');
 		const [request] = await Promise.all([
 			this.page?.waitForRequest(re),
-			await this.submit(),
+			this.submit(),
 		]);
 		return request;
 	}

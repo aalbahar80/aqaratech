@@ -14,38 +14,36 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 	},
 });
 
-test.describe(`Form: new`, async () => {
-	test(`returns 200`, async ({ form }) => {
-		const request = await form.getRequest();
-		const response = await request?.response();
-		expect(response?.status()).toBe(200);
-	});
+test(`returns 200`, async ({ form }) => {
+	const request = await form.getRequest();
+	const response = await request?.response();
+	expect(response?.status()).toBe(200);
+});
 
-	// test(`redirects to details page`, async ({ form, page }) => {
-	// 	await form.submit();
-	// 	const re = new RegExp(
-	// 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-	// 	);
-	// 	await expect(page).toHaveURL(re);
-	// });
+// test(`redirects to details page`, async ({ form, page }) => {
+// 	await form.submit();
+// 	const re = new RegExp(
+// 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+// 	);
+// 	await expect(page).toHaveURL(re);
+// });
 
-	test(`basic details are correct`, async ({ form, page }) => {
-		await form.submit();
-		await page.waitForURL(/^((?!new).)*$/);
+test(`basic details are correct`, async ({ form, page }) => {
+	await form.submit();
+	await page.waitForURL(/^((?!new).)*$/);
 
-		for (const b of form.basic()) {
-			const el = page.locator(`text=${b}`).first();
-			const re = new RegExp(`${b}`);
-			await expect(el).toContainText(re);
-		}
-	});
+	for (const b of form.basic()) {
+		const el = page.locator(`text=${b}`).first();
+		const re = new RegExp(`${b}`);
+		await expect(el).toContainText(re);
+	}
+});
 
-	test('able to submit after filling', async ({ page, form }) => {
-		const button = page.locator('button[type="submit"]');
-		const el = page.locator('form'); // move next to usage?
-		await expect.soft(button).toBeEnabled();
-		await form.submit();
-		await expect(button).not.toBeEnabled();
-		await expect(el).toHaveAttribute('data-test', 'ok');
-	});
+test('able to submit after filling', async ({ page, form }) => {
+	const button = page.locator('button[type="submit"]');
+	const el = page.locator('form'); // move next to usage?
+	await expect.soft(button).toBeEnabled();
+	await form.submit();
+	await expect(button).not.toBeEnabled();
+	await expect(el).toHaveAttribute('data-test', 'ok');
 });
