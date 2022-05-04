@@ -55,14 +55,11 @@ const config: Config = {
 
 	projects: [
 		// ...extraBrowsers,
-		// {
-		// 	name: 'chromium',
-		// 	use: {
-		// 		...devices['Desktop Chrome'],
-		// 	},
-		// 	testMatch: ['lease.test.ts', 'property.test.ts'],
-		// 	testIgnore: commonTests,
-		// },
+		{
+			name: 'chromium',
+			testMatch: ['forms/lease.test.ts', 'forms/property.test.ts'],
+			testIgnore: commonTests,
+		},
 		// TODO: Enable once you figure out how not to pollute the environment
 		// Hint: It has something to do with the storage state
 		// Hint2: It has something to do with testMatch/testIgnore
