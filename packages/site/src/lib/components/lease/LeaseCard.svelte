@@ -1,32 +1,14 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
-	import { getAddress, getName, getProgress } from '$lib/utils/common';
+	import { Tenant } from '$lib/models/classes/tenant.class';
+	import type { LeaseCardData } from '$lib/models/interfaces/lease.interface';
+	import { getAddress, getProgress } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
 
-	interface Lease {
-		id: string;
-		tenant?: {
-			id: string;
-			firstName: string;
-			lastName: string;
-		};
-		unit?: {
-			id: string;
-			unitNumber: string;
-			property: {
-				area: string | null;
-				block: string | null;
-				street: string | null;
-				number: string | null;
-			};
-		};
-		start: Date;
-		end: Date;
-	}
-	export let lease: Lease;
+	export let lease: LeaseCardData;
 	export let index: number | undefined = undefined;
 
 	const expired = lease.end < new Date();
@@ -62,7 +44,7 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						{getName(lease.tenant)}
+						{Tenant.getLabel(lease.tenant)}
 					</p>
 				{/if}
 				{#if 'unit' in lease}

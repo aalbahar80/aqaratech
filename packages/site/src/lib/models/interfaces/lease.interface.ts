@@ -41,3 +41,32 @@ interface PredefinedLease {
 }
 // helper type for new lease form
 export type Predefined = PredefinedTenant | PredefinedUnit | PredefinedLease;
+
+interface LeaseWTenant {
+	id: string;
+	tenant: {
+		id: string;
+		firstName: string;
+		lastName: string;
+	};
+	start: Date;
+	end: Date;
+}
+
+interface LeaseWUnit {
+	id: string;
+	unit: {
+		id: string;
+		unitNumber: string;
+		property: {
+			area: string | null;
+			block: string | null;
+			street: string | null;
+			number: string | null;
+		};
+	};
+	start: Date;
+	end: Date;
+}
+
+export type LeaseCardData = LeaseWTenant | LeaseWUnit;
