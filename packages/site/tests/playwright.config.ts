@@ -20,7 +20,7 @@ dotenvConfig({
 const commonTests = ['forms/editForm.test.ts', 'forms/newForm.test.ts'];
 
 const config: Config = {
-	// fullyParallel: true,
+	fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: './config/global-setup.ts',
