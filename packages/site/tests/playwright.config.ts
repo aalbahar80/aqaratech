@@ -84,8 +84,7 @@ const config: Config = {
 				...devices['Desktop Chrome'],
 				...commonConfig,
 			},
-			testMatch: ['lease.test.ts', 'property.test.ts'],
-			// testMatch: ['login.spec.ts'],
+			testMatch: ['lease.test.ts', 'property.test.ts', 'login.spec.ts'],
 			testIgnore: commonTests,
 		},
 		{

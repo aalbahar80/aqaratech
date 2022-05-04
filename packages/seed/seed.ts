@@ -14,6 +14,8 @@ import {
 	fakeTenant,
 	fakeTransaction,
 	fakeUnit,
+	testClientId,
+	testTenantId,
 	timespan,
 } from "./generators.js";
 
@@ -52,10 +54,6 @@ async function main({
 	let moCount = 100;
 	let expenseCount = 100;
 	const min = 0;
-
-	// consistent id's for testing
-	const testClientId = "c0183a5d-2875-488b-b86f-e1c5628262df";
-	const testTenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	clients[0]!.id = testClientId;
