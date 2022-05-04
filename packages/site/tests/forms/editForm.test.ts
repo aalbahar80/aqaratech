@@ -22,13 +22,13 @@ test.describe(`Form: edit`, async () => {
 		expect(response?.status()).toBe(200);
 	});
 
-	// test(`redirects to details page`, async ({ form, page }) => {
-	// 	await form.submit();
-	// 	const re = new RegExp(
-	// 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-	// 	);
-	// 	await expect(page).toHaveURL(re);
-	// });
+	test(`redirects to details page`, async ({ form, page }) => {
+		await form.submit();
+		const re = new RegExp(
+			`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+		);
+		await expect(page).toHaveURL(re);
+	});
 
 	test(`basic details are correct`, async ({ form, page }) => {
 		await form.submit();
