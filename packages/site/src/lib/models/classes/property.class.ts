@@ -26,15 +26,18 @@ export class Property extends Entity {
 	static relationalFields = ['clientId'] as const;
 
 	public static getLabel = (item: ILabel) => getAddress(item);
+	// TODO: DRY this with Entity classes once the following is fixed:
+	// Problem: importing property.class in a test file breaks vscode playwright extenstion
 	public getLabel = () => {
 		if (this.data.area && this.data.block && this.data.number) {
-			return concatIfExists([
-				this.data.area,
-				'ق',
-				this.data.block,
-				'م',
-				this.data.number,
-			]);
+			return getAddress(this.data);
+			// return concatIfExists([
+			// 	this.data.area,
+			// 	'ق',
+			// 	this.data.block,
+			// 	'م',
+			// 	this.data.number,
+			// ]);
 		} else {
 			console.warn('no area or block');
 			return '';

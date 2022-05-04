@@ -1,5 +1,5 @@
 import trpc from '$lib/client/trpc';
-import { concatIfExists } from '$lib/utils/common';
+import { concatIfExists, getUnitLabel } from '$lib/utils/common';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
 import { schema } from '../schemas/unit.schema';
@@ -41,12 +41,15 @@ export class Unit extends Entity {
 	public static getLabel = (item: ILabel) =>
 		concatIfExists([item.type, item.unitNumber]);
 	public getLabel = () => {
-		if (this.data.type && this.data.unitNumber) {
-			return concatIfExists([this.data.type, this.data.unitNumber]);
-		} else {
-			console.warn('no type or unitNumber');
-			return '';
-		}
+		return getUnitLabel(this.data);
+		// if (this.data.type && this.data.unitNumber) {
+		// 	return concatIfExists([this.data.type, this.data.unitNumber]);
+		// } else if (this.data.unitNumber) {
+		// 	return this.data.unitNumber;
+		// } else {
+		// 	console.warn('no type or unitNumber');
+		// 	return '';
+		// }
 	};
 	static getList = async (propertyId?: string) => {
 		try {

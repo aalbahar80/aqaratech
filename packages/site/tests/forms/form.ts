@@ -13,6 +13,7 @@ import {
 	dateToInput,
 	getAddress,
 	getName,
+	getUnitLabel,
 	kwdFormat,
 } from '../../src/lib/utils/common.js';
 import prisma from '../config/prismaClient.js';
@@ -300,9 +301,7 @@ export class LeaseForm extends Form {
 			});
 		}
 		await this.page?.selectOption('#unitId', {
-			label: [this.unit.type, this.unit.unitNumber]
-				.filter((str) => str)
-				.join(' '),
+			label: getUnitLabel(this.unit),
 		});
 		await this.page?.fill(
 			'input[name="monthlyRent"]',

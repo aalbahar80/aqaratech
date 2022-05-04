@@ -1,4 +1,8 @@
-import { getAddress, getName } from '../../src/lib/utils/common.js';
+import {
+	getAddress,
+	getName,
+	getUnitLabel,
+} from '../../src/lib/utils/common.js';
 import { expect, test as base } from '../config/test-setup.js';
 import { LeaseForm } from './form.js';
 
@@ -27,10 +31,7 @@ test('new lease: preselected property from URL', async ({ page, form }) => {
 test('new lease: preselected unit from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
 	const el = page.locator('#unitId');
-	const unit = [form.unit.type, form.unit.unitNumber]
-		.filter((str) => str)
-		.join(' ');
-	await expect(el).toContainText(unit);
+	await expect(el).toContainText(getUnitLabel(form.unit));
 });
 
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
@@ -55,10 +56,7 @@ test.describe('edit lease', async () => {
 
 	test('unit is preselected', async ({ page, form }) => {
 		const el = page.locator('#unitId');
-		const unit = [form.unit.type, form.unit.unitNumber]
-			.filter((str) => str)
-			.join(' ');
-		await expect(el).toContainText(unit);
+		await expect(el).toContainText(getUnitLabel(form.unit));
 	});
 
 	test('tenant is preselected', async ({ page, form }) => {
