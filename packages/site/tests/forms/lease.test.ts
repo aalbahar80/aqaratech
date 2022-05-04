@@ -1,6 +1,5 @@
 import { getAddress, getName } from '../../src/lib/utils/common.js';
-import { test as base } from '../config/test-setup.js';
-import { preselected } from '../utils.js';
+import { expect, test as base } from '../config/test-setup.js';
 import { LeaseForm } from './form.js';
 
 base.use({ storageState: './config/adminState.json' });
@@ -15,30 +14,29 @@ const test = base.extend<{ form: LeaseForm }>({
 
 test('new lease: preselected client from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await preselected(page, page.locator('#clientId'), getName(form.client));
+	const el = page.locator('#clientId');
+	await expect(el).toContainText(getName(form.client));
 });
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await preselected(
-		page,
-		page.locator('#propertyId'),
-		getAddress(form.property),
-	);
+	const el = page.locator('#propertyId');
+	await expect(el).toContainText(getAddress(form.property));
 });
 
 test('new lease: preselected unit from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await preselected(
-		page,
-		page.locator('#unitId'),
-		[form.unit.type, form.unit.unitNumber].filter((str) => str).join(' '),
-	);
+	const el = page.locator('#unitId');
+	const unit = [form.unit.type, form.unit.unitNumber]
+		.filter((str) => str)
+		.join(' ');
+	await expect(el).toContainText(unit);
 });
 
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?tenantId=${form.tenant.id}`);
-	await preselected(page, page.locator('#tenantId'), getName(form.tenant));
+	const el = page.locator('#tenantId');
+	await expect(el).toContainText(getName(form.tenant));
 });
 
 test.describe('edit lease', async () => {
@@ -56,14 +54,15 @@ test.describe('edit lease', async () => {
 	// });
 
 	test('unit is preselected', async ({ page, form }) => {
-		await preselected(
-			page,
-			page.locator('#unitId'),
-			[form.unit.type, form.unit.unitNumber].filter((str) => str).join(' '),
-		);
+		const el = page.locator('#unitId');
+		const unit = [form.unit.type, form.unit.unitNumber]
+			.filter((str) => str)
+			.join(' ');
+		await expect(el).toContainText(unit);
 	});
 
 	test('tenant is preselected', async ({ page, form }) => {
-		await preselected(page, page.locator('#tenantId'), getName(form.tenant));
+		const el = page.locator('#tenantId');
+		await expect(el).toContainText(getName(form.tenant));
 	});
 });
