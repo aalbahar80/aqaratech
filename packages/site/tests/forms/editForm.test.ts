@@ -15,10 +15,20 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 	},
 });
 
-test(`returns 200`, async ({ form }) => {
-	const request = await form.getRequest();
-	const response = await request?.response();
-	expect(response?.status()).toBe(200);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+test(`returns 200`, async ({ form, page }) => {
+	// const requestUrl = new RegExp(`${baseURL}/trpc`);
+	const [request] = await Promise.all([
+		// page.waitForRequest(/^\/trpc.*$/),
+		// page.waitForRequest(
+		// 	(request) =>
+		// 		request.method() === 'POST' && request.url().match(requestUrl),
+		// ),
+		page.waitForRequest((request) => request.method() === 'POST'),
+		page.click('button[type="submit"]'),
+	]);
+	const response = await request.response();
+	expect(response?.ok()).toBe(true);
 });
 
 test(`redirects to details page`, async ({ form, page }) => {
@@ -30,8 +40,10 @@ test(`redirects to details page`, async ({ form, page }) => {
 });
 
 test(`basic details are correct`, async ({ form, page }) => {
-	await form.submit();
-	await page.waitForURL(/.*(?<!edit)$/);
+	await Promise.all([
+		page.click('button[type="submit"]'),
+		page.waitForURL(/.*(?<!edit)$/),
+	]);
 
 	for (const b of form.basic()) {
 		const el = page.locator(`text=${b}`).first();

@@ -14,23 +14,35 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 	},
 });
 
-test(`returns 200`, async ({ form }) => {
-	const request = await form.getRequest();
-	const response = await request?.response();
-	expect(response?.status()).toBe(200);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+test(`returns 200`, async ({ form, page }) => {
+	// const requestUrl = new RegExp(`${baseURL}/trpc`);
+	const [request] = await Promise.all([
+		// page.waitForRequest(/^\/trpc.*$/),
+		// page.waitForRequest(
+		// 	(request) =>
+		// 		request.method() === 'POST' && request.url().match(requestUrl),
+		// ),
+		page.waitForRequest((request) => request.method() === 'POST'),
+		page.click('button[type="submit"]'),
+	]);
+	const response = await request.response();
+	expect(response?.ok()).toBe(true);
 });
 
-// test(`redirects to details page`, async ({ form, page }) => {
-// 	await form.submit();
-// 	const re = new RegExp(
-// 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-// 	);
-// 	await expect(page).toHaveURL(re);
-// });
+test(`redirects to details page`, async ({ form, page }) => {
+	await form.submit();
+	const re = new RegExp(
+		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+	);
+	await expect(page).toHaveURL(re);
+});
 
 test(`basic details are correct`, async ({ form, page }) => {
-	await form.submit();
-	await page.waitForURL(/^((?!new).)*$/);
+	await Promise.all([
+		page.click('button[type="submit"]'),
+		page.waitForURL(/^((?!new).)*$/),
+	]);
 
 	for (const b of form.basic()) {
 		const el = page.locator(`text=${b}`).first();
