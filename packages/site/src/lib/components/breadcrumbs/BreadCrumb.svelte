@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import type { Entity } from '$lib/models/interfaces/entity.interface';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
+	import { classMap } from '$lib/models/classes/all.class';
+	import type { Entity } from '$models/types';
 
 	type Crumb = [Entity, string | undefined];
 	export let crumbs: Crumb[];
@@ -36,7 +36,7 @@
 						class:ml-4={idx !== 0}
 					>
 						<!-- aria-current={page.current ? 'page' : undefined} -->
-						{getModel(crumb[0]).singularCap}
+						{classMap[crumb[0]].singularCap}
 					</a>
 				</div>
 			</li>

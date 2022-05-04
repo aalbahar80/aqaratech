@@ -1,8 +1,8 @@
 import trpc from '$lib/client/trpc';
-import { concatIfExists, getAddress } from '$lib/utils/common';
+import { getAddress } from '$lib/utils/common';
+import { schema } from '$models/schemas/property.schema';
 import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/property.schema';
 import { Entity } from './entity.class';
 
 export class Property extends Entity {

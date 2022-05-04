@@ -1,4 +1,4 @@
-import type { SelectedOption } from './common/option.interface';
+import type { SelectedOption } from './option.interface';
 
 interface PredefinedTenant {
 	initiator: 'tenant';

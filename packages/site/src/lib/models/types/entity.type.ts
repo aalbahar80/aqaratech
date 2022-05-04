@@ -7,7 +7,7 @@ import type {
 	Transaction,
 	Expense,
 	MaintenanceOrder,
-} from '../classes';
+} from '$models/classes';
 
 export type EntityConstructor =
 	| typeof Client
@@ -18,3 +18,22 @@ export type EntityConstructor =
 	| typeof Transaction
 	| typeof Expense
 	| typeof MaintenanceOrder;
+
+export type Entity =
+	| 'properties'
+	| 'clients'
+	| 'leases'
+	| 'tenants'
+	| 'units'
+	| 'transactions'
+	| 'expenses'
+	| 'maintenanceOrders';
+
+export type GenericFormModel = Exclude<EntityConstructor, typeof Lease>;
+
+export type Relation =
+	| 'clientId'
+	| 'propertyId'
+	| 'unitId'
+	| 'leaseId'
+	| 'tenantId';

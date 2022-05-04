@@ -1,7 +1,7 @@
+import { Transaction } from '$lib/models/classes/transaction.class';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers';
 import { paginationSchema, withId } from '$models/common';
-import { TransactionModel } from '$models/interfaces/transaction.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -122,7 +122,7 @@ export const transactions = createRouter()
 			}),
 	})
 	.mutation('create', {
-		input: TransactionModel.schema,
+		input: Transaction.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.transaction.update({
@@ -134,7 +134,7 @@ export const transactions = createRouter()
 				  }),
 	})
 	.mutation('save', {
-		input: TransactionModel.schema,
+		input: Transaction.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.transaction.update({
@@ -146,7 +146,7 @@ export const transactions = createRouter()
 				  }),
 	})
 	.mutation('saveMany', {
-		input: z.array(withId(TransactionModel.schema)),
+		input: z.array(withId(Transaction.schema)),
 		resolve: ({ input }) =>
 			prismaClient.transaction.createMany({
 				data: input,

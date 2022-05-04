@@ -1,9 +1,9 @@
 import trpc from '$lib/client/trpc';
+import { leaseFormSchema, schema } from '$models/schemas/lease.schema';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
-import { leaseFormSchema, schema } from '../schemas/lease.schema';
 import { Entity } from './entity.class';
 
 export class Lease extends Entity {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import { getModel } from '$lib/models/interfaces/utils/get-model';
-	import type { Entity } from '$models/interfaces';
+	import { classMap } from '$lib/models/classes/all.class';
+	import type { Entity } from '$models/types/entity.type';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -9,7 +9,7 @@
 	export let count: number;
 
 	const hideActions = $session.authz?.role !== 'admin';
-	const model = getModel(entity);
+	const model = classMap[entity];
 
 	export let createHref = `/new/${model.plural}`;
 </script>

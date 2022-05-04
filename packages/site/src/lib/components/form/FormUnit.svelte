@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Form from '$components/form/Form.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
-	import type { SelectedOption } from '$lib/models/interfaces/common/option.interface';
+	import type { SelectedOption } from '$lib/models/interfaces/option.interface';
 	import type { InferQueryOutput } from '../../client/trpc';
 	import { Client } from '../../models/classes/client.class';
 	import { Property } from '../../models/classes/property.class';

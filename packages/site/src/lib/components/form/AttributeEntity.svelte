@@ -2,7 +2,7 @@
 	import type {
 		Option,
 		SelectedOption,
-	} from '$lib/models/interfaces/common/option.interface';
+	} from '$lib/models/interfaces/option.interface';
 	import RadioEntity from './RadioEntity.svelte';
 	import SelectEntity from './SelectEntity.svelte';
 

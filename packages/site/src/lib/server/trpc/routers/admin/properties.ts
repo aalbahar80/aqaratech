@@ -1,6 +1,6 @@
+import { Property } from '$lib/models/classes/property.class';
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { PropertyModel } from '$models/interfaces/property.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -101,7 +101,7 @@ export const properties = createRouter()
 		resolve: () => prismaClient.property.count({}),
 	})
 	.mutation('create', {
-		input: PropertyModel.schema,
+		input: Property.schema,
 		resolve: async ({ input }) => {
 			const { id, ...data } = input;
 			return prismaClient.property.create({
@@ -113,7 +113,7 @@ export const properties = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: PropertyModel.schema,
+		input: Property.schema,
 		resolve: async ({ input: { id, ...data } }) => {
 			const result = id
 				? await prismaClient.property.update({

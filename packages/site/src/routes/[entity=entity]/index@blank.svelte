@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import type { Entity } from '$models/interfaces/entity.interface';
+	import type { Entity } from '$lib/models/types';
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './index@blank';
 

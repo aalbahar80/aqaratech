@@ -1,6 +1,6 @@
+import { Tenant } from '$lib/models/classes/tenant.class';
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { TenantModel } from '$models/interfaces/tenant.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -131,7 +131,7 @@ export const tenants = createRouter()
 		resolve: () => prismaClient.tenant.count({}),
 	})
 	.mutation('create', {
-		input: TenantModel.schema,
+		input: Tenant.schema,
 		resolve: async ({ input }) => {
 			const { id, ...data } = input;
 			return prismaClient.tenant.create({
@@ -143,7 +143,7 @@ export const tenants = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: TenantModel.schema,
+		input: Tenant.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.tenant.update({

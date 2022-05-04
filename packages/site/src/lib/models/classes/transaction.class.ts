@@ -1,7 +1,7 @@
 import trpc from '$lib/client/trpc';
+import { schema } from '$models/schemas/transaction.schema';
 import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/transaction.schema';
 
 export class Transaction {
 	static urlName = 'transactions' as const;
@@ -37,4 +37,32 @@ export class Transaction {
 		const data = await trpc.query('transactions:read', id);
 		return new Transaction(data);
 	}
+
+	static getBadge = (trx: {
+		isPaid: boolean;
+		dueAt: Date | null;
+		postAt: Date;
+	}) => {
+		if (trx.isPaid) {
+			return {
+				label: 'Paid',
+				color: 'green',
+			};
+		} else if (trx.dueAt && trx.dueAt < new Date()) {
+			return {
+				label: 'Past due',
+				color: 'red',
+			};
+		} else if (trx.postAt < new Date()) {
+			return {
+				label: 'Due',
+				color: 'yellow',
+			};
+		} else {
+			return {
+				label: 'Not yet due',
+				color: 'indigo',
+			};
+		}
+	};
 }

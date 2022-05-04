@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLabel } from '$lib/models/interfaces/unit.interface';
+	import { Unit } from '$lib/models/classes/unit.class';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
@@ -22,7 +22,7 @@
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">
-				{getLabel(unit)}
+				{Unit.getLabel(unit)}
 			</p>
 			<div class="ml-2 flex flex-shrink-0">
 				<p

@@ -3,13 +3,9 @@
 	import trpc from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { Client, Property, Unit } from '$lib/models/classes';
 	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from './[id]';
-	import {
-		ClientModel,
-		PropertyModel,
-		UnitModel,
-	} from '$lib/models/interfaces';
 
 	export const load: Load = async ({ params }) => {
 		const maintenanceOrder = await trpc.query(
@@ -31,19 +27,17 @@
 		['Description', maintenanceOrder.description ?? '-'],
 		[
 			'Client',
-			maintenanceOrder.client
-				? ClientModel.getLabel(maintenanceOrder.client)
-				: '-',
+			maintenanceOrder.client ? Client.getLabel(maintenanceOrder.client) : '-',
 		],
 		[
 			'Property',
 			maintenanceOrder.property
-				? PropertyModel.getLabel(maintenanceOrder.property)
+				? Property.getLabel(maintenanceOrder.property)
 				: '-',
 		],
 		[
 			'Unit',
-			maintenanceOrder.unit ? UnitModel.getLabel(maintenanceOrder.unit) : '-',
+			maintenanceOrder.unit ? Unit.getLabel(maintenanceOrder.unit) : '-',
 		],
 		['Completed At', maintenanceOrder.completedAt?.toLocaleString() ?? '-'],
 		['Created on', dateFormat(maintenanceOrder.createdAt)],

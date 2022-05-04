@@ -3,7 +3,7 @@
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
-	import { getBadge } from '$lib/models/interfaces/transaction.interface';
+	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { dateFormat } from '$lib/utils/common';
@@ -169,7 +169,7 @@
 									aria-hidden="true"
 								/>
 							{:else}
-								<Chip {...getBadge(transaction)} />
+								<Chip {...Transaction.getBadge(transaction)} />
 							{/if}
 						</span>
 					</svelte:element>
@@ -193,7 +193,7 @@
 				</thead>
 				<tbody>
 					{#each data as transaction (transaction.id)}
-						{@const chip = getBadge(transaction)}
+						{@const chip = Transaction.getBadge(transaction)}
 						<tr>
 							<td>
 								<div class="flex">

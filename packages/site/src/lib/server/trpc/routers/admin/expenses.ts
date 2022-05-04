@@ -1,6 +1,6 @@
+import { Expense } from '$lib/models/classes/expense.class';
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { ExpenseModel } from '$models/interfaces/expense.interface';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -68,7 +68,7 @@ export const expenses = createRouter()
 		resolve: () => prismaClient.expense.count({}),
 	})
 	.mutation('create', {
-		input: ExpenseModel.schema,
+		input: Expense.schema,
 		resolve: ({ input }) => {
 			const { id, ...data } = input;
 			return prismaClient.expense.create({
@@ -80,7 +80,7 @@ export const expenses = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: ExpenseModel.schema,
+		input: Expense.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.expense.update({

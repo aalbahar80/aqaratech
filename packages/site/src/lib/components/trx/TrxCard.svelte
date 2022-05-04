@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Badge from '$components/Badge.svelte';
+	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { kwdFormat } from '$lib/utils/common';
-	import {
-		getBadge,
-		// getMFReceiptUrl,
-	} from '$models/interfaces/transaction.interface';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { format } from 'date-fns';
@@ -24,7 +21,7 @@
 
 	export let trx: Transaction;
 
-	const badge = getBadge(trx);
+	const badge = Transaction.getBadge(trx);
 
 	let loading = false;
 	const handlePayment = async () => {

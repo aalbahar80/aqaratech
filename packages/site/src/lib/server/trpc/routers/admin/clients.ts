@@ -1,6 +1,6 @@
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { ClientModel } from '$models/interfaces/client.interface';
+import { Client } from '$models/classes/client.class';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -103,7 +103,7 @@ export const clients = createRouter()
 		resolve: () => prismaClient.client.count({}),
 	})
 	.mutation('create', {
-		input: ClientModel.schema,
+		input: Client.schema,
 		resolve: ({ input }) => {
 			const { id, ...data } = input;
 			return prismaClient.client.create({
@@ -115,7 +115,7 @@ export const clients = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: ClientModel.schema,
+		input: Client.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
 				? prismaClient.client.update({

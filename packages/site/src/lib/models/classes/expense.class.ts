@@ -1,10 +1,11 @@
 import trpc from '$lib/client/trpc';
+import { schema } from '$models/schemas/expense.schema';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/expense.schema';
 
 export class Expense {
 	static urlName = 'expenses' as const;
+	static entity = 'expenses' as const;
 	static singular = 'expense';
 	static singularCap = 'Expense';
 	static plural = 'expenses';

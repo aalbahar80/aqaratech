@@ -2,11 +2,10 @@
 	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
-	import type { Entity } from '$models/interfaces/entity.interface';
+	import type { Entity } from '$lib/models/types';
 	import { classMap } from '$models/classes/all.class';
 	import type { Load } from './edit';
 
-	type Params = Parameters<Load>['0']['params'];
 	export const load: Load = async ({ params }) => {
 		const id = params.id;
 		const entity = params.entity as Entity;

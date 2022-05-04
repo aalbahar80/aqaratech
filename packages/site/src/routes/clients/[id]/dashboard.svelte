@@ -6,10 +6,9 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
+	import { Unit } from '$lib/models/classes/unit.class';
 	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
-	// TODO research: How optimized is this? is zod also imported by relation since its used in the UnitModel.
-	import { UnitModel } from '$models/interfaces/unit.interface';
 	import { subMonths } from 'date-fns';
 	import type { z } from 'zod';
 	import type { Load } from './index';
@@ -97,7 +96,7 @@
 		const newUnits = newProperty
 			? newProperty.units.map((unit) => ({
 					value: unit.id,
-					label: UnitModel.getLabel(unit),
+					label: Unit.getLabel(unit),
 			  }))
 			: [defaultUnit];
 
