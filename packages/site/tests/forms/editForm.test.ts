@@ -17,16 +17,14 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 });
 
 test.describe(`Form: edit`, async () => {
-	test(`returns 200`, async ({ form, page }) => {
+	test(`returns 200`, async ({ form }) => {
 		const request = await form.getRequest();
 		const response = await request?.response();
 		expect(response?.status()).toBe(200);
-		await page.waitForNavigation();
 	});
 
 	test(`redirects to details page`, async ({ form, page }) => {
 		await form.submit();
-		await page.waitForNavigation();
 		const re = new RegExp(
 			`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
 		);
@@ -35,7 +33,8 @@ test.describe(`Form: edit`, async () => {
 
 	test(`basic details are correct`, async ({ form, page }) => {
 		await form.submit();
-		await page.waitForNavigation();
+		await page.waitForNavigation({ timeout: 10000 });
+		await expect(page).not.toHaveURL(/edit/);
 
 		for (const b of form.basic()) {
 			const el = page.locator(`text=${b}`).first();
