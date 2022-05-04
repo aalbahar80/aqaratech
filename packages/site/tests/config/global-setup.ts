@@ -1,4 +1,4 @@
-import { chromium } from '@playwright/test';
+import { chromium, type FullConfig } from '@playwright/test';
 import prisma from './prismaClient';
 
 async function cleanupDatabase() {
@@ -15,21 +15,21 @@ async function cleanupDatabase() {
 	console.timeEnd('cleanup');
 }
 
-async function globalSetup() {
+async function globalSetup(config: FullConfig) {
 	await cleanupDatabase();
 
 	const adminEmail = 'admin.dev@mailthink.net';
 	const password = 'test12';
 
+	const { baseURL, storageState } = config.projects[0].use;
 	const browser = await chromium.launch();
-	// log in admin
-	const adminPage = await browser.newPage();
-	await adminPage.goto('http://localhost:3000');
-	await adminPage.locator('a:has-text("Log in")').last().click();
-	await adminPage.fill('input[name="username"]', adminEmail);
-	await adminPage.fill('input[name="password"]', password);
-	await adminPage.locator('button[name="action"]').click();
-	await adminPage.context().storageState({ path: './config/adminState.json' });
+	const page = await browser.newPage();
+	await page.goto(baseURL!);
+	await page.locator('text=Log In >> visible=true').click();
+	await page.fill('input[name="username"]', adminEmail);
+	await page.fill('input[name="password"]', password);
+	await page.click('button[name="action"]');
+	await page.context().storageState({ path: storageState as string });
 	await browser.close();
 }
 

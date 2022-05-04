@@ -55,11 +55,16 @@ export class Tenant extends Entity {
 	};
 
 	static getList = async (query?: string) => {
-		const result = await trpc.query('tenants:search', {
-			query,
-			size: 1000, // TODO replace this after implementing combobox search
-		});
-		return result.map((data) => new Tenant(data));
+		try {
+			const result = await trpc.query('tenants:search', {
+				query,
+				size: 1000, // TODO replace this after implementing combobox search
+			});
+			return result.map((data) => new Tenant(data));
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
 	};
 
 	static async grab(id: string) {

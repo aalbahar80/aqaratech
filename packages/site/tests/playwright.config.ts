@@ -17,77 +17,52 @@ dotenvConfig({
 // console.log('CI config is:', process.env.CI);
 // console.log('CI config is:', process.env.DATABASE_URL);
 // console.log('DEV config is:', process.env.DEV);
-
-const localConfig: Config = process.env.LOCAL
-	? {
-			use: {
-				// headless: false,
-				// launchOptions: {
-				// 	args: [
-				// 		'--window-position=3840,500',
-				// 		// '--window-size="3840,5000"',
-				// 		// '--window-size=1500,1500',
-				// 	],
-				// },
-			},
-	  }
-	: {};
-
-const commonConfig: Config['use'] = {
-	baseURL: 'http://localhost:3000',
-	screenshot: 'only-on-failure',
-	storageState: './config/adminState.json',
-	trace: {
-		mode: 'on',
-		screenshots: true,
-		snapshots: true,
-		sources: true,
-	},
-	video: 'retry-with-video',
-	browserName: 'chromium',
-	...localConfig.use,
-};
-
-const extraBrowsers: Config['projects'] = process.env.CI
-	? [
-			{ name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
-			// { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-			// { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
-			{ name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-			{ name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-			// Note: branded browsers need to explicitly installed
-			// { name: 'Microsoft Edge', use: { channel: 'msedge' } },
-			// { name: 'Google Chrome', use: { channel: 'chrome' } },
-	  ]
-	: [];
-
-const commonTests = ['editForm.test.ts', 'newForm.test.ts'];
+const commonTests = ['forms/editForm.test.ts', 'forms/newForm.test.ts'];
 
 const config: Config = {
 	// fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 30000,
-	expect: { timeout: 5000 },
+	expect: { timeout: 10000 },
 	globalSetup: './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : 'html',
-	use: commonConfig,
-	testIgnore: ['attribution.test.ts'],
+	use: {
+		baseURL: 'http://localhost:3000/',
+		screenshot: 'only-on-failure',
+		storageState: 'config/adminState.json',
+		trace: {
+			mode: 'on',
+			screenshots: true,
+			snapshots: true,
+			sources: true,
+		},
+		video: 'retry-with-video',
+		browserName: 'chromium',
+		// launchOptions: {
+		// 	args: [
+		// 		'--window-position=3840,500',
+		// 		// '--window-size="3840,5000"',
+		// 		// '--window-size=1500,1500',
+		// 	],
+		// },
+	},
+	testMatch: commonTests,
+	testIgnore: ['forms/attribution.test.ts', 'login.spec.ts'],
 	// repeatEach: 3,
 
 	projects: [
 		// ...extraBrowsers,
-		{
-			name: 'chromium',
-			use: {
-				...devices['Desktop Chrome'],
-				...commonConfig,
-			},
-			testMatch: ['lease.test.ts', 'property.test.ts'],
-			testIgnore: commonTests,
-		},
+		// {
+		// 	name: 'chromium',
+		// 	use: {
+		// 		...devices['Desktop Chrome'],
+		// 	},
+		// 	testMatch: ['lease.test.ts', 'property.test.ts'],
+		// 	testIgnore: commonTests,
+		// },
 		// TODO: Enable once you figure out how not to pollute the environment
 		// Hint: It has something to do with the storage state
 		// Hint2: It has something to do with testMatch/testIgnore
@@ -95,45 +70,45 @@ const config: Config = {
 		// 	name: 'Login',
 		// 	use: {
 		// 		...devices['Desktop Chrome'],
-		// 		...commonConfig,
+		// 		,
 		// 	},
 		// 	testMatch: ['login.spec.ts'],
 		// },
 		{
 			name: 'client',
-			use: { baseForm: 'clients', ...commonConfig },
+			use: { baseForm: 'clients' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'tenant',
-			use: { baseForm: 'tenants', ...commonConfig },
+			use: { baseForm: 'tenants' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'property',
-			use: { baseForm: 'properties', ...commonConfig },
+			use: { baseForm: 'properties' },
 			testMatch: commonTests,
 		},
 		{
 			name: 'unit',
-			use: { baseForm: 'units', ...commonConfig },
+			use: { baseForm: 'units' },
 			testMatch: commonTests,
 		},
-		{
-			name: 'expense',
-			use: { baseForm: 'expenses', ...commonConfig },
-			testMatch: commonTests,
-		},
-		{
-			name: 'maintenanceOrder',
-			use: { baseForm: 'maintenanceOrders', ...commonConfig },
-			testMatch: commonTests,
-		},
-		{
-			name: 'lease',
-			use: { baseForm: 'leases', ...commonConfig },
-			testMatch: commonTests,
-		},
+		// {
+		// 	name: 'expense',
+		// 	use: { baseForm: 'expenses' },
+		// 	testMatch: commonTests,
+		// },
+		// {
+		// 	name: 'maintenanceOrder',
+		// 	use: { baseForm: 'maintenanceOrders' },
+		// 	testMatch: commonTests,
+		// },
+		// {
+		// 	name: 'lease',
+		// 	use: { baseForm: 'leases' },
+		// 	testMatch: commonTests,
+		// },
 	],
 	webServer: {
 		reuseExistingServer: true,
@@ -142,7 +117,6 @@ const config: Config = {
 			? 'cd ../ && pnpm run dev'
 			: 'cd ../ && pnpm run build && pnpm run preview',
 	},
-	...localConfig,
 };
 
 export default config;

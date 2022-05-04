@@ -2,14 +2,13 @@ import { expect, test as base } from '../config/test-setup.js';
 import type { FormFixtures } from '../playwright.config.js';
 import { formClasses, type FormType } from './form.js';
 
-base.use({ storageState: './config/adminState.json' });
 const test = base.extend<FormFixtures & { form: FormType }>({
 	form: async ({ page, baseForm }, use) => {
 		const form = new formClasses[baseForm]();
 		form.page = page;
 		await form.setupNew();
 		const url = form.getUrl('new');
-		await page.goto(url, { timeout: 5000 });
+		await page.goto(url);
 		await form.fill();
 		await use(form);
 	},
@@ -22,19 +21,17 @@ test.describe(`Form: new`, async () => {
 		expect(response?.status()).toBe(200);
 	});
 
-	test(`redirects to details page`, async ({ form, page }) => {
-		await form.submit();
-		const re = new RegExp(
-			`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-		);
-		await expect(page).toHaveURL(re);
-	});
+	// test(`redirects to details page`, async ({ form, page }) => {
+	// 	await form.submit();
+	// 	const re = new RegExp(
+	// 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+	// 	);
+	// 	await expect(page).toHaveURL(re);
+	// });
 
 	test(`basic details are correct`, async ({ form, page }) => {
 		await form.submit();
-		await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 10000 });
-		await expect(page).not.toHaveURL(/new/);
-		// use page.waitForURL
+		await page.waitForURL(/^((?!new).)*$/);
 
 		for (const b of form.basic()) {
 			const el = page.locator(`text=${b}`).first();
