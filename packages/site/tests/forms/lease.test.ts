@@ -10,19 +10,16 @@ const test = base.extend<{ form: LeaseForm }>({
 		form.page = page;
 		await form.setupEdit();
 		await use(form);
-		// await form.clean();
 	},
 });
 
 test('new lease: preselected client from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await page.evaluate(() => window.started);
 	await preselected(page, page.locator('#clientId'), getName(form.client));
 });
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await page.evaluate(() => window.started);
 	await preselected(
 		page,
 		page.locator('#propertyId'),
@@ -32,7 +29,6 @@ test('new lease: preselected property from URL', async ({ page, form }) => {
 
 test('new lease: preselected unit from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	await page.evaluate(() => window.started);
 	await preselected(
 		page,
 		page.locator('#unitId'),
@@ -42,14 +38,12 @@ test('new lease: preselected unit from URL', async ({ page, form }) => {
 
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?tenantId=${form.tenant.id}`);
-	await page.evaluate(() => window.started);
 	await preselected(page, page.locator('#tenantId'), getName(form.tenant));
 });
 
 test.describe('edit lease', async () => {
 	test.beforeEach(async ({ page, form }) => {
 		await page.goto(`/leases/${form.id}/edit`);
-		await page.evaluate(() => window.started);
 	});
 
 	// TODO: implement this before testing it

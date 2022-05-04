@@ -7,7 +7,6 @@ import { preselected } from '../utils.js';
 // test.describe('Edit expense form', async () => {
 // 	test.beforeEach(async ({ page, expenseForm }) => {
 // 		await page.goto(`/${expenseForm.data.id}/edit`);
-// 		await page.evaluate(() => window.started);
 // 	});
 
 // 	test('category is preselected', async ({ expenseForm, page }) => {
@@ -27,14 +26,12 @@ import { preselected } from '../utils.js';
 // 	clientForm,
 // }) => {
 // 	await page.goto(`/new/properties?clientId=${clientForm.id}`);
-// 	await page.evaluate(() => window.started);
 // 	await preselected(page, page.locator('#clientId'), getName(clientForm.data));
 // });
 
 // test.describe('new unit', async () => {
 // 	test.beforeEach(async ({ page, expenseForm }) => {
 // 		await page.goto(`/new/units?expenseId=${expenseForm.id}`);
-// 		await page.evaluate(() => window.started);
 // 	});
 
 // test('preselected expense from URL', async ({ page, expenseForm }) => {
@@ -56,7 +53,6 @@ import { preselected } from '../utils.js';
 
 // test('able to submit', async ({ page }) => {
 // 	await page.goto(`/new/expenses`);
-// 	await page.evaluate(() => window.started);
 // 	const form = new ExpenseForm(page);
 // 	const button = page.locator('button[type="submit"]');
 // 	const el = page.locator('form');

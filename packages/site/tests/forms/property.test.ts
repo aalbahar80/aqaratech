@@ -10,16 +10,12 @@ const test = base.extend<{ form: PropertyForm }>({
 		form.page = page;
 		await form.setupEdit();
 		await use(form);
-		// await form.clean();
 	},
 });
-
-// test.use({ storageState: './config/adminState.json' });
 
 test.describe('Edit property form', async () => {
 	test.beforeEach(async ({ page, form }) => {
 		await page.goto(`/properties/${form.data.id}/edit`);
-		await page.evaluate(() => window.started);
 	});
 
 	test('client is preselected', async ({ form, page }) => {
@@ -36,14 +32,12 @@ test.describe('Edit property form', async () => {
 
 test('New property: preselected clientId from URL', async ({ page, form }) => {
 	await page.goto(`/new/properties?clientId=${form.client.id}`);
-	await page.evaluate(() => window.started);
 	await preselected(page, page.locator('#clientId'), getName(form.client));
 });
 
 test.describe('new unit', async () => {
 	test.beforeEach(async ({ page, form }) => {
 		await page.goto(`/new/units?propertyId=${form.id}`);
-		await page.evaluate(() => window.started);
 	});
 
 	test('preselected property from URL', async ({ page, form }) => {

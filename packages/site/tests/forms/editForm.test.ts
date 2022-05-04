@@ -10,7 +10,6 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await form.setupEdit();
 		const url = form.getUrl('edit');
 		await page.goto(url);
-		await page.evaluate(() => window.started);
 		form.alter();
 		await form.fill();
 		await use(form);
