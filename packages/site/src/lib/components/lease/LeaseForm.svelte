@@ -231,6 +231,7 @@
 								<SelectEntity
 									field="clientId"
 									bind:selected={client}
+									invalid={!!getValue($errors, 'unitId') && !client}
 									on:select={() => {
 										property = undefined;
 										unit = undefined;
@@ -248,6 +249,7 @@
 									bind:selected={property}
 									parent={client}
 									disabled={!client}
+									invalid={!!getValue($errors, 'unitId') && !property}
 									on:select={() => {
 										unit = undefined;
 										setData('unitId', null);
@@ -260,6 +262,8 @@
 									bind:selected={unit}
 									parent={property}
 									disabled={!property}
+									invalid={!!getValue($errors, 'unitId')}
+									invalidText={getValue($errors, 'unitId')?.[0]}
 									on:select={(e) => {
 										setData('unitId', e.detail.value);
 									}}
