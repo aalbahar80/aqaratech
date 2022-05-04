@@ -53,8 +53,8 @@ export class Form {
 		this.createUrl = `/new/${this.urlName}`;
 	}
 
-	submit() {
-		return this.page?.click('button[type="submit"]');
+	async submit() {
+		await this.page?.click('button[type="submit"]');
 	}
 
 	async getRequest() {
