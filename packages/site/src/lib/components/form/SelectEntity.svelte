@@ -1,15 +1,11 @@
 <script lang="ts">
+	import { relationalClassMap } from '$lib/models/classes/all.class';
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 	import type { Relation } from '$lib/models/types/entity.type';
 	import { createEventDispatcher } from 'svelte';
-	import { Client } from '../../models/classes/client.class';
-	import { Lease } from '../../models/classes/lease.class';
-	import { Property } from '../../models/classes/property.class';
-	import { Tenant } from '../../models/classes/tenant.class';
-	import { Unit } from '../../models/classes/unit.class';
 	import { createMyCustomStore } from './SelectStore';
 
 	export let parent: SelectedOption = undefined;
@@ -21,15 +17,7 @@
 	export let invalid = false;
 	export let invalidText = '';
 
-	const entityClasses = {
-		clientId: Client,
-		propertyId: Property,
-		unitId: Unit,
-		tenantId: Tenant,
-		leaseId: Lease,
-	};
-
-	const cstor = entityClasses[field];
+	const cstor = relationalClassMap[field];
 
 	const dispatch = createEventDispatcher<{
 		select: Option;

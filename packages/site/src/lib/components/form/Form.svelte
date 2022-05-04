@@ -2,15 +2,16 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc from '$lib/client/trpc';
+	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
+	import type { classMap } from '$models/classes/all.class';
 	import { Client } from '$models/classes/client.class';
 	import { Property } from '$models/classes/property.class';
 	import { Tenant } from '$models/classes/tenant.class';
 	import { Unit } from '$models/classes/unit.class';
-	import type { SelectedOption } from '$models/interfaces/common/option.interface';
+	import type { SelectedOption } from '$models/interfaces/option.interface';
 	import type { EntityConstructor } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -20,9 +21,13 @@
 	import AttributeEntity from './AttributeEntity.svelte';
 	import Input from './Input.svelte';
 
-	type TA = $$Generic<EntityConstructor>;
-	export let cstor: TA;
-	export let data: z.input<typeof cstor.schema>;
+	export let cstor: EntityConstructor;
+
+	type DefaultForm = ReturnType<typeof cstor['defaultForm']>;
+	type FormInput = z.input<typeof cstor['schema']>;
+	type BasicOutput = InferQueryOutput<`${typeof cstor['urlName']}:basic`>;
+	type Data = DefaultForm & FormInput & BasicOutput;
+	export let data: Data;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -133,7 +138,7 @@
 											setData(field, e.detail.value);
 										}}
 									/>
-								{:else if field === 'propertyId'}
+									<!-- {:else if field === 'propertyId'}
 									<SelectEntity
 										{field}
 										bind:selected={property}
@@ -142,7 +147,7 @@
 										on:select={(e) => {
 											setData(field, e.detail.value);
 										}}
-									/>
+									/> -->
 								{:else if field === 'unitId'}
 									<SelectEntity
 										{field}
