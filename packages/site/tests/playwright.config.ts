@@ -25,7 +25,7 @@ const config: Config = {
 	expect: { timeout: 10000 },
 	globalSetup: './config/global-setup.ts',
 	forbidOnly: !!process.env.CI,
-	retries: process.env.CI ? 2 : 0,
+	retries: process.env.CI ? 2 : 2,
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : 'html',
