@@ -6,7 +6,6 @@
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
-	import type { classMap } from '$models/classes/all.class';
 	import { Client } from '$models/classes/client.class';
 	import { Property } from '$models/classes/property.class';
 	import { Tenant } from '$models/classes/tenant.class';
@@ -138,7 +137,7 @@
 											setData(field, e.detail.value);
 										}}
 									/>
-									<!-- {:else if field === 'propertyId'}
+								{:else if field === 'propertyId'}
 									<SelectEntity
 										{field}
 										bind:selected={property}
@@ -147,7 +146,7 @@
 										on:select={(e) => {
 											setData(field, e.detail.value);
 										}}
-									/> -->
+									/>
 								{:else if field === 'unitId'}
 									<SelectEntity
 										{field}

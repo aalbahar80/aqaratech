@@ -8,7 +8,7 @@ import {
 	fakeTenant,
 	fakeUnit,
 } from '../../../seed/generators.js';
-import type { Entity } from '../../src/lib/models/interfaces/entity.interface.js';
+import type { Entity } from '../../src/lib/models/types/entity.type.js';
 import {
 	dateToInput,
 	getAddress,
