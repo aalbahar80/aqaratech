@@ -1,5 +1,4 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
 import type { formClasses } from './forms/form';
 
@@ -51,7 +50,6 @@ const config: Config = {
 	},
 	testMatch: commonTests,
 	testIgnore: ['forms/attribution.test.ts', 'login.spec.ts'],
-	// repeatEach: 3,
 
 	projects: [
 		// ...extraBrowsers,
