@@ -32,7 +32,7 @@ test.describe(`Form: new`, async () => {
 
 	test(`basic details are correct`, async ({ form, page }) => {
 		await form.submit();
-		await page.waitForNavigation({ timeout: 10000 });
+		await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 10000 });
 		await expect(page).not.toHaveURL(/new/);
 
 		for (const b of form.basic()) {

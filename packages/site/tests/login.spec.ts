@@ -37,7 +37,10 @@ for (const user of users) {
 		});
 
 		test(`${user.role} redirected to correct url`, async ({ page }) => {
-			await page.waitForNavigation({ timeout: 10000 });
+			await page.waitForNavigation({
+				waitUntil: 'networkidle',
+				timeout: 10000,
+			});
 			await expect(page).toHaveURL(user.destination);
 		});
 
