@@ -132,7 +132,6 @@ export class PropertyForm extends Form {
 	}
 
 	public async fill() {
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.selectOption('#clientId', { label: getName(this.client) });
 		await this.page?.fill('[id="area"]', this.data.area);
 		await this.page?.locator(`.item >> text=${this.data.area}`).first().click();
@@ -190,9 +189,7 @@ export class UnitForm extends Form {
 	}
 
 	public async fill() {
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.selectOption('#clientId', { label: getName(this.client) });
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
@@ -293,13 +290,14 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill() {
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.selectOption('#tenantId', { label: getName(this.tenant) });
 		if (!this.page?.url().includes('edit')) {
+			await this.page?.selectOption('#clientId', {
+				label: getName(this.client),
+			});
 			await this.page?.selectOption('#propertyId', {
 				label: getAddress(this.property),
 			});
-			await this.page?.waitForLoadState('networkidle');
 		}
 		await this.page?.selectOption('#unitId', {
 			label: [this.unit.type, this.unit.unitNumber]
@@ -374,7 +372,6 @@ export class ExpenseForm extends Form {
 	}
 
 	public async fill() {
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.fill('input[name="amount"]', this.data.amount.toString());
 		await this.page?.fill(
 			'input[name="postAt"]',
@@ -454,7 +451,6 @@ export class MaintenanceOrderForm extends Form {
 	}
 
 	public async fill() {
-		await this.page?.waitForLoadState('networkidle');
 		await this.page?.fill(
 			'input[name="completedAt"]',
 			dateToInput(this.data.completedAt),
