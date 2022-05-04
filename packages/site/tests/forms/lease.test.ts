@@ -10,7 +10,6 @@ base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: LeaseForm }>({
 	form: async ({ page }, use) => {
 		const form = new LeaseForm();
-		form.page = page;
 		await form.setupEdit();
 		await use(form);
 	},

@@ -44,26 +44,12 @@ class Basket {
 export class Form {
 	createUrl: string;
 	editUrl: string;
-	public page: Page | undefined;
 	public basket = new Basket();
 
 	constructor(public urlName: Entity, public id: string) {
 		// super(urlName);
 		this.editUrl = `/${this.urlName}/${this.id}/edit`;
 		this.createUrl = `/new/${this.urlName}`;
-	}
-
-	async submit() {
-		await this.page?.click('button[type="submit"]');
-	}
-
-	async getRequest() {
-		const re = new RegExp('/trpc');
-		const [request] = await Promise.all([
-			this.page?.waitForRequest(re),
-			this.submit(),
-		]);
-		return request;
 	}
 
 	getUrl(type: 'new' | 'edit') {
@@ -83,18 +69,17 @@ export class Form {
 
 export class ClientForm extends Form {
 	static urlName: Entity = 'clients';
-	public override page: Page | undefined;
 	constructor(public data = fakeClient()) {
 		super(ClientForm.urlName, data.id);
 	}
 
-	public async fill() {
-		await this.page?.fill('input[name="firstName"]', this.data.firstName);
-		await this.page?.fill('input[name="lastName"]', this.data.lastName);
-		await this.page?.fill('input[name="email"]', this.data.email);
-		await this.page?.fill('input[name="phone"]', this.data.phone);
-		await this.page?.fill('input[name="civilid"]', this.data.civilid);
-		await this.page?.fill('input[name="dob"]', dateToInput(this.data.dob));
+	public async fill(page: Page) {
+		await page.fill('input[name="firstName"]', this.data.firstName);
+		await page.fill('input[name="lastName"]', this.data.lastName);
+		await page.fill('input[name="email"]', this.data.email);
+		await page.fill('input[name="phone"]', this.data.phone);
+		await page.fill('input[name="civilid"]', this.data.civilid);
+		await page.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
 
 	// TODO: move to ancestor class
@@ -120,22 +105,21 @@ export class ClientForm extends Form {
 
 export class PropertyForm extends Form {
 	static urlName: Entity = 'properties';
-	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
 	constructor(public data = fakeProperty()) {
 		super(PropertyForm.urlName, data.id);
 		this.client = { ...fakeClient(), id: data.clientId };
 	}
 
-	public async fill() {
-		await this.page?.selectOption('#clientId', { label: getName(this.client) });
-		await this.page?.fill('[id="area"]', this.data.area);
-		await this.page?.locator(`.item >> text=${this.data.area}`).first().click();
-		await this.page?.keyboard.press('Enter');
-		await this.page?.fill('input[name="block"]', this.data.block);
-		await this.page?.fill('input[name="street"]', this.data.street);
-		await this.page?.fill('input[name="avenue"]', this.data.avenue ?? '');
-		await this.page?.fill('input[name="number"]', this.data.number);
+	public async fill(page: Page) {
+		await page.selectOption('#clientId', { label: getName(this.client) });
+		await page.fill('[id="area"]', this.data.area);
+		await page.locator(`.item >> text=${this.data.area}`).first().click();
+		await page.keyboard.press('Enter');
+		await page.fill('input[name="block"]', this.data.block);
+		await page.fill('input[name="street"]', this.data.street);
+		await page.fill('input[name="avenue"]', this.data.avenue ?? '');
+		await page.fill('input[name="number"]', this.data.number);
 	}
 
 	public alter() {
@@ -171,7 +155,6 @@ export class PropertyForm extends Form {
 
 export class UnitForm extends Form {
 	static urlName: Entity = 'units';
-	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	constructor(public data = fakeUnit()) {
@@ -180,15 +163,15 @@ export class UnitForm extends Form {
 		this.client = { ...fakeClient(), id: this.property.clientId };
 	}
 
-	public async fill() {
-		await this.page?.selectOption('#clientId', { label: getName(this.client) });
-		await this.page?.selectOption('#propertyId', {
+	public async fill(page: Page) {
+		await page.selectOption('#clientId', { label: getName(this.client) });
+		await page.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
-		await this.page?.fill('input[name="unitNumber"]', this.data.unitNumber);
-		await this.page?.fill('input[name="bed"]', this.data.bed.toString());
-		await this.page?.fill('input[name="bath"]', this.data.bath.toString());
-		await this.page?.fill('input[name="floor"]', this.data.floor.toString());
+		await page.fill('input[name="unitNumber"]', this.data.unitNumber);
+		await page.fill('input[name="bed"]', this.data.bed.toString());
+		await page.fill('input[name="bath"]', this.data.bath.toString());
+		await page.fill('input[name="floor"]', this.data.floor.toString());
 	}
 
 	public alter() {
@@ -228,18 +211,17 @@ export class UnitForm extends Form {
 
 export class TenantForm extends Form {
 	static urlName: Entity = 'tenants';
-	public override page: Page | undefined;
 	constructor(public data = fakeTenant()) {
 		super(TenantForm.urlName, data.id);
 	}
 
-	public async fill() {
-		await this.page?.fill('input[name="firstName"]', this.data.firstName);
-		await this.page?.fill('input[name="lastName"]', this.data.lastName);
-		await this.page?.fill('input[name="email"]', this.data.email);
-		await this.page?.fill('input[name="phone"]', this.data.phone);
-		await this.page?.fill('input[name="civilid"]', this.data.civilid);
-		await this.page?.fill('input[name="dob"]', dateToInput(this.data.dob));
+	public async fill(page: Page) {
+		await page.fill('input[name="firstName"]', this.data.firstName);
+		await page.fill('input[name="lastName"]', this.data.lastName);
+		await page.fill('input[name="email"]', this.data.email);
+		await page.fill('input[name="phone"]', this.data.phone);
+		await page.fill('input[name="civilid"]', this.data.civilid);
+		await page.fill('input[name="dob"]', dateToInput(this.data.dob));
 	}
 
 	public alter() {
@@ -264,7 +246,6 @@ export class TenantForm extends Form {
 
 export class LeaseForm extends Form {
 	static urlName: Entity = 'leases';
-	public override page: Page | undefined;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	unit: ReturnType<typeof fakeUnit>;
@@ -277,20 +258,20 @@ export class LeaseForm extends Form {
 		this.tenant = { ...fakeTenant(), id: data.tenantId };
 	}
 
-	public async fill() {
-		await this.page?.selectOption('#tenantId', { label: getName(this.tenant) });
-		if (!this.page?.url().includes('edit')) {
-			await this.page?.selectOption('#clientId', {
+	public async fill(page: Page) {
+		await page.selectOption('#tenantId', { label: getName(this.tenant) });
+		if (!page.url().includes('edit')) {
+			await page.selectOption('#clientId', {
 				label: getName(this.client),
 			});
-			await this.page?.selectOption('#propertyId', {
+			await page.selectOption('#propertyId', {
 				label: getAddress(this.property),
 			});
 		}
-		await this.page?.selectOption('#unitId', {
+		await page.selectOption('#unitId', {
 			label: getUnitLabel(this.unit),
 		});
-		await this.page?.fill(
+		await page.fill(
 			'input[name="monthlyRent"]',
 			this.data.monthlyRent.toString(),
 		);
@@ -338,7 +319,6 @@ export class LeaseForm extends Form {
 
 export class ExpenseForm extends Form {
 	static urlName: Entity = 'expenses';
-	public override page: Page | undefined;
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
@@ -353,18 +333,15 @@ export class ExpenseForm extends Form {
 		super(ExpenseForm.urlName, data.id);
 	}
 
-	public async fill() {
-		await this.page?.fill('input[name="amount"]', this.data.amount.toString());
-		await this.page?.fill(
-			'input[name="postAt"]',
-			dateToInput(this.data.postAt),
-		);
-		await this.page?.fill('input[name="memo"]', this.data.memo);
-		await this.page?.selectOption('#category', { value: this.data.category });
-		await this.page?.selectOption('#clientId', { index: 0 });
-		await this.page?.selectOption('#propertyId', { index: 0 });
-		await this.page?.selectOption('#unitId', { index: 0 });
-		await this.page?.locator('#clientId-radio').click();
+	public async fill(page: Page) {
+		await page.fill('input[name="amount"]', this.data.amount.toString());
+		await page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
+		await page.fill('input[name="memo"]', this.data.memo);
+		await page.selectOption('#category', { value: this.data.category });
+		await page.selectOption('#clientId', { index: 0 });
+		await page.selectOption('#propertyId', { index: 0 });
+		await page.selectOption('#unitId', { index: 0 });
+		await page.locator('#clientId-radio').click();
 	}
 
 	public alter() {
@@ -413,7 +390,6 @@ export class ExpenseForm extends Form {
 
 export class MaintenanceOrderForm extends Form {
 	static urlName: Entity = 'maintenanceOrders';
-	public override page: Page | undefined;
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
@@ -428,18 +404,18 @@ export class MaintenanceOrderForm extends Form {
 		super(MaintenanceOrderForm.urlName, data.id);
 	}
 
-	public async fill() {
-		await this.page?.fill(
+	public async fill(page: Page) {
+		await page.fill(
 			'input[name="completedAt"]',
 			dateToInput(this.data.completedAt),
 		);
-		await this.page?.fill('input[name="title"]', this.data.title);
-		await this.page?.fill('input[name="description"]', this.data.description);
-		await this.page?.selectOption('#status', { index: 0 });
-		await this.page?.selectOption('#clientId', { index: 0 });
-		await this.page?.selectOption('#propertyId', { index: 0 });
-		await this.page?.selectOption('#unitId', { index: 0 });
-		await this.page?.locator('#clientId-radio').click();
+		await page.fill('input[name="title"]', this.data.title);
+		await page.fill('input[name="description"]', this.data.description);
+		await page.selectOption('#status', { index: 0 });
+		await page.selectOption('#clientId', { index: 0 });
+		await page.selectOption('#propertyId', { index: 0 });
+		await page.selectOption('#unitId', { index: 0 });
+		await page.locator('#clientId-radio').click();
 	}
 
 	public alter() {

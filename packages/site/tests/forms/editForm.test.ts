@@ -5,12 +5,11 @@ import { formClasses, type FormType } from './form.js';
 const test = base.extend<FormFixtures & { form: FormType }>({
 	form: async ({ page, baseForm }, use) => {
 		const form = new formClasses[baseForm]();
-		form.page = page;
 		await form.setupEdit();
 		const url = form.getUrl('edit');
 		await page.goto(url);
 		form.alter();
-		await form.fill();
+		await form.fill(page);
 		await use(form);
 	},
 });
@@ -32,7 +31,7 @@ test(`returns 200`, async ({ form, page }) => {
 });
 
 test(`redirects to details page`, async ({ form, page }) => {
-	await form.submit();
+	await page.click('button[type="submit"]');
 	const re = new RegExp(
 		`/${form.urlName}/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
 	);

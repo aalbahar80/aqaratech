@@ -6,7 +6,6 @@ base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: PropertyForm }>({
 	form: async ({ page }, use) => {
 		const form = new PropertyForm();
-		form.page = page;
 		await form.setupEdit();
 		await use(form);
 	},
