@@ -182,6 +182,7 @@ interface PredefinedTenant {
 	firstName: string;
 	lastName: string;
 	tenant: SelectedOption;
+	client: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }
@@ -193,6 +194,7 @@ interface PredefinedUnit {
 	propertyId: string;
 	address: string;
 	tenant: SelectedOption;
+	client: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }
@@ -209,6 +211,7 @@ interface PredefinedLease {
 	address: string;
 	monthlyRent: number;
 	tenant: SelectedOption;
+	client: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }

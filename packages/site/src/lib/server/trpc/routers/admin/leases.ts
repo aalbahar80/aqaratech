@@ -52,6 +52,8 @@ export const leases = createRouter()
 									client: {
 										select: {
 											id: true,
+											firstName: true,
+											lastName: true,
 										},
 									},
 								},

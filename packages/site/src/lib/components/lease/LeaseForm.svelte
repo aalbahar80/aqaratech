@@ -34,6 +34,7 @@
 	};
 	console.log({ lease }, 'LeaseForm.svelte ~ 42');
 
+	let client = lease.client;
 	let property = lease.property;
 	let unit = lease.unit;
 	let tenant = lease.tenant;
@@ -228,8 +229,25 @@
 						>
 							<div class="sm:w-3/4">
 								<SelectEntity
+									field="clientId"
+									bind:selected={client}
+									on:select={() => {
+										property = undefined;
+										unit = undefined;
+										setData('unitId', null);
+									}}
+								/>
+							</div>
+						</div>
+						<div
+							class="flex flex-col space-y-6  sm:flex-row sm:space-x-2 sm:space-y-0"
+						>
+							<div class="sm:w-3/4">
+								<SelectEntity
 									field="propertyId"
 									bind:selected={property}
+									parent={client}
+									disabled={!client}
 									on:select={() => {
 										unit = undefined;
 										setData('unitId', null);

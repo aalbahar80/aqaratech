@@ -3,6 +3,7 @@
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import type { Load } from '@sveltejs/kit';
+	import { Client } from '../../lib/models/classes/client.class';
 	import { Property } from '../../lib/models/classes/property.class';
 	import { Tenant } from '../../lib/models/classes/tenant.class';
 	import { Unit } from '../../lib/models/classes/unit.class';
@@ -29,6 +30,10 @@
 					label: Tenant.getLabel(lease.tenant),
 					value: lease.tenantId,
 				},
+				client: {
+					label: Client.getLabel(lease.unit.property.client),
+					value: lease.unit.property.client.id,
+				},
 				property: {
 					label: Property.getLabel(lease.unit.property),
 					value: lease.unit.property.id,
@@ -49,6 +54,7 @@
 					label: Tenant.getLabel(tenant),
 					value: tenant.id,
 				},
+				client: undefined,
 				property: undefined,
 				unit: undefined,
 			};
@@ -62,6 +68,10 @@
 				propertyId: unit.propertyId,
 				address: Property.getLabel(unit.property),
 				tenant: undefined,
+				client: {
+					label: Client.getLabel(unit.property.client),
+					value: unit.property.client.id,
+				},
 				property: {
 					label: Property.getLabel(unit.property),
 					value: unit.property.id,

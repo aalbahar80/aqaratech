@@ -14,7 +14,11 @@ const test = base.extend<{ form: LeaseForm }>({
 	},
 });
 
-// test.use({ storageState: './config/adminState.json' });
+test('new lease: preselected client from URL', async ({ page, form }) => {
+	await page.goto(`/new/leases?unitId=${form.unit.id}`);
+	await page.evaluate(() => window.started);
+	await preselected(page, page.locator('#clientId'), getName(form.client));
+});
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
