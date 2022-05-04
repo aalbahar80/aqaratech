@@ -4,7 +4,7 @@ import { PropertyForm } from './form.js';
 
 base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: PropertyForm }>({
-	form: async ({ page }, use) => {
+	form: async ({}, use) => {
 		const form = new PropertyForm();
 		await form.setupEdit();
 		await use(form);

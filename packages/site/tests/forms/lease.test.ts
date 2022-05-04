@@ -8,7 +8,7 @@ import { LeaseForm } from './form.js';
 
 base.use({ storageState: './config/adminState.json' });
 const test = base.extend<{ form: LeaseForm }>({
-	form: async ({ page }, use) => {
+	form: async ({}, use) => {
 		const form = new LeaseForm();
 		await form.setupEdit();
 		await use(form);
