@@ -37,7 +37,7 @@ const commonConfig: Config['use'] = {
 	screenshot: 'only-on-failure',
 	storageState: './config/adminState.json',
 	trace: {
-		mode: 'retain-on-failure',
+		mode: 'on',
 		screenshots: true,
 		snapshots: true,
 		sources: true,

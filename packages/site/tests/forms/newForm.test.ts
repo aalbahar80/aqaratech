@@ -10,7 +10,6 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await form.setupNew();
 		const url = form.getUrl('new');
 		await page.goto(url);
-		await page.evaluate(() => window.started);
 		await form.fill();
 		await use(form);
 	},
@@ -47,9 +46,9 @@ test.describe(`Form: new`, async () => {
 	test('able to submit after filling', async ({ page, form }) => {
 		const button = page.locator('button[type="submit"]');
 		const el = page.locator('form');
-		expect.soft(await button.isEnabled()).toBe(true);
+		await expect.soft(button).toBeEnabled();
 		await form.submit();
-		expect(await button.isEnabled()).toBe(false);
+		await expect(button).not.toBeEnabled();
 		await expect(el).toHaveAttribute('data-test', 'ok');
 	});
 });
