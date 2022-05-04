@@ -18,9 +18,7 @@ export const test = base.extend<FormFixtures>({
 		const goto = page.goto;
 		page.goto = async function (url, opts) {
 			const res = await goto.call(page, url, opts);
-			console.time('wait for started');
 			await page.waitForSelector('body.started', { timeout: 5000 });
-			console.timeEnd('wait for started');
 			return res;
 		};
 		await use(page);

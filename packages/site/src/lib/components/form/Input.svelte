@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SelectArea from '$components/form/inputs/SelectArea.svelte';
 	import Select from '$components/Select.svelte';
-	import { expenseCats } from '$lib/config/constants';
+	import { expenseCats, unitTypeOptions } from '$lib/config/constants';
 	import { classes } from '$lib/utils';
 	import {
 		Switch,
@@ -71,16 +71,6 @@
 			break;
 	}
 	const dispatch = createEventDispatcher();
-	const unitTypeOptions = [
-		{ label: '', value: null },
-		{ label: 'شقة', value: 'شقة' },
-		{ label: 'بيت', value: 'بيت' },
-		{ label: 'فيلا', value: 'فيلا' },
-		{ label: 'سرداب', value: 'سرداب' },
-		{ label: 'محل', value: 'محل' },
-		{ label: 'مخزن', value: 'مخزن' },
-		{ label: 'شاليه', value: 'شاليه' },
-	];
 
 	const statusOptions = [
 		{ label: '', value: null },

@@ -5,6 +5,7 @@ import {
 	areas,
 	coordinates,
 	expenseCats,
+	unitTypeOptions,
 } from "../site/src/lib/config/constants.js";
 
 faker.setLocale("ar");
@@ -12,6 +13,10 @@ faker.setLocale("ar");
 export const timespan = 4;
 const createdAt = () => faker.date.past(timespan);
 const updatedAt = () => faker.date.past(timespan);
+
+const unitTypeValues = unitTypeOptions
+	.filter((u) => u.value)
+	.map((u) => u.value);
 
 export const fakeEmail = () => {
 	faker.setLocale("en");
@@ -68,14 +73,7 @@ export const fakeUnit = (propertyId?: string) => ({
 	bath: faker.datatype.number({ min: 1, max: 10 }),
 	marketRent: +faker.finance.amount(100, 3000, 0),
 	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	type: faker.helpers.arrayElement([
-		"شقة",
-		"محل",
-		"سرداب",
-		"مخزن",
-		"شاليه",
-		"بيت",
-	]),
+	type: faker.helpers.arrayElement(unitTypeValues),
 	usage: null,
 	propertyId: propertyId ?? randomUUID(),
 });
