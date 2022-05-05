@@ -32,6 +32,7 @@ export const leases = createRouter().query('list', {
 						postAt: true,
 						paidAt: true,
 						mfPaymentId: true,
+						leaseId: true,
 					},
 				},
 			},

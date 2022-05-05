@@ -1,6 +1,5 @@
-import prismaClient from '$lib/server/prismaClient';
 import { environment } from '$environment';
-import trpc from '$lib/client/trpc';
+import prismaClient from '$lib/server/prismaClient';
 
 const { myfatoorahConfig } = environment;
 interface MFResponse {
@@ -17,7 +16,7 @@ interface MyFatoorahPaymentStatusResponse {
 	};
 }
 
-// TODO setup proper auth later as per:
+// TODO: setup proper auth later as per:
 // https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
 
 /**
@@ -30,9 +29,32 @@ export const getMFUrl = async ({
 	trxId: string;
 }): Promise<string> => {
 	// get necessary info for payment
-
 	console.log('fetching mf url');
-	const trx = await trpc.query('public:transactions:pay', trxId);
+	const trx = await prismaClient.transaction.findUnique({
+		where: { id: trxId },
+		select: {
+			id: true,
+			amount: true,
+			lease: {
+				select: {
+					tenant: {
+						select: {
+							firstName: true,
+							secondName: true,
+							thirdName: true,
+							lastName: true,
+							email: true,
+							phone: true,
+						},
+					},
+				},
+			},
+		},
+	});
+
+	if (!trx) {
+		throw new Error('Transaction not found');
+	}
 
 	const { tenant } = trx.lease;
 	const name = [
@@ -149,6 +171,7 @@ export const markAsPaid = async ({
 			data: {
 				mfPaymentId,
 				isPaid: true,
+				paidAt: new Date(),
 			},
 		});
 		console.log({ result }, 'myfatoorah.ts ~ 159');

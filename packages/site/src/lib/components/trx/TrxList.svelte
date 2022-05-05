@@ -27,7 +27,12 @@
 	</div>
 
 	{#if trxs.length}
-		<ul id="trxList" class="divide-y divide-gray-200">
+		<!-- TODO: check user is returned to same page -->
+		<ul
+			id="trxList"
+			class="divide-y divide-gray-200"
+			data-uuid={trxs[0]?.leaseId}
+		>
 			{#each trxs as trx (trx.id)}
 				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 					<TrxCard {trx} />

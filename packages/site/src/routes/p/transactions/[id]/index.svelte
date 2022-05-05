@@ -2,11 +2,21 @@
 	import { goto } from '$app/navigation';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
+	import Badge from '$lib/components/Badge.svelte';
+	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import Heading from '$lib/components/Heading.svelte';
+	import { Property } from '$lib/models/classes/property.class';
+	import { Unit } from '$lib/models/classes/unit.class';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { CreditCard, ReceiptTax } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Transaction } from '$models/classes/transaction.class';
+	import {
+		faCalendar,
+		faCalendarCheck,
+	} from '@fortawesome/free-solid-svg-icons';
+	import { CreditCard } from '@steeze-ui/heroicons';
+	import { formatDistance } from 'date-fns';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
@@ -17,7 +27,7 @@
 </script>
 
 <script lang="ts">
-	type Transaction = NonNullable<InferQueryOutput<'transactions:read'>>;
+	type Transaction = NonNullable<InferQueryOutput<'public:transactions:read'>>;
 	export let trx: Transaction;
 	export let mfUrl: string;
 	let loading = false;
@@ -37,40 +47,49 @@
 	};
 
 	const details: [string, string | null][] = [
+		['Date', dateFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo],
-		['Due on', dateFormat(trx.dueAt ?? trx.postAt)],
+		['Address', Property.getLabel(trx.lease.unit.property)],
+		['Unit', Unit.getLabel(trx.lease.unit)],
 	];
+
+	const icons =
+		trx.dueAt && !trx.isPaid
+			? [
+					{
+						label: `Due: ${formatDistance(trx.dueAt, new Date(), {
+							addSuffix: true,
+						})}`,
+						icon: faCalendar,
+						tooltip: 'Due',
+					},
+			  ]
+			: trx.paidAt
+			? [
+					{
+						label: `Paid: ${formatDistance(trx.paidAt, new Date(), {
+							addSuffix: true,
+						})}`,
+						icon: faCalendarCheck,
+						tooltip: 'Paid',
+					},
+			  ]
+			: undefined;
+
+	const { label, color: badgeColor } = Transaction.getBadge(trx);
 </script>
 
 <div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<div class="flex items-center md:justify-between">
-		<div class="min-w-0 flex-1">
-			<h2
-				class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
-			>
-				Transaction
-			</h2>
-		</div>
-		<span
-			class="inline-flex h-8 items-center rounded-md px-2.5 py-0.5 text-lg font-medium"
-			class:paid={trx.isPaid}
-			class:not-paid={!trx.isPaid}
-		>
-			{trx.isPaid ? 'Paid' : 'Not paid'}
-		</span>
-	</div>
+	<Heading title={Transaction.singularCap} id={trx.id} entity="leases" {icons}>
+		<svelte:fragment slot="breadcrumbs">
+			<BreadCrumb crumbs={[['leases', trx.leaseId]]} />
+		</svelte:fragment>
+	</Heading>
+	<Badge {label} {badgeColor} />
 	<DetailsPane {details} />
 	<div class="mt-4 flex self-end md:mt-0">
-		{#if trx.isPaid}
-			<button
-				type="button"
-				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			>
-				<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-				Invoice
-			</button>
-		{:else}
+		{#if !trx.isPaid}
 			<Button
 				class="h-12 w-32"
 				on:click={handlePayment}
@@ -79,16 +98,15 @@
 				icon={CreditCard}
 				text="Pay"
 			/>
+		{:else}
+			<!-- <button
+				type="button"
+				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			>
+				<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+				Invoice
+			</button> -->
 		{/if}
 	</div>
 	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
-
-<style lang="postcss">
-	.paid {
-		@apply bg-green-100 text-green-800;
-	}
-	.not-paid {
-		@apply bg-pink-100 text-pink-800;
-	}
-</style>

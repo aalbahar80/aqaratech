@@ -1,6 +1,8 @@
 export const protectRoute = (session: App.Session, pathname: string) => {
 	const profileUrl = '/account/profile';
-	const publicUrl = ['/', profileUrl].includes(pathname);
+	const publicTrxUrl = '/p/transactions/';
+	const publicUrl =
+		['/', profileUrl].includes(pathname) || pathname.startsWith(publicTrxUrl);
 
 	let shouldRedirect = true;
 	let redirectUrl = '/';
