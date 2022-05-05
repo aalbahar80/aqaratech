@@ -108,5 +108,4 @@
 			</button> -->
 		{/if}
 	</div>
-	<pre>{JSON.stringify(trx, null, 2)}</pre>
 </div>
