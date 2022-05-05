@@ -6,7 +6,7 @@ import { createRouter } from './createRouter';
 export const leases = createRouter().query('list', {
 	input: z.string().uuid(),
 	resolve: async ({ ctx, input: id }) => {
-		if (ctx.authz.id !== id) {
+		if (ctx.authz.id !== id && !ctx.authz.isAdmin) {
 			throw new TRPCError({ code: 'FORBIDDEN' });
 		}
 		const data = await prismaClient.lease.findMany({
