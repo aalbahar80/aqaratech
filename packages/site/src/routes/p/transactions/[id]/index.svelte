@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import trpc from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
@@ -9,6 +10,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { Property } from '$lib/models/classes/property.class';
 	import { Unit } from '$lib/models/classes/unit.class';
+	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Transaction } from '$models/classes/transaction.class';
 	import {
@@ -17,6 +19,7 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { CreditCard } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
+	import { onMount } from 'svelte';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
@@ -31,6 +34,31 @@
 	export let trx: Transaction;
 	export let mfUrl: string;
 	let loading = false;
+
+	onMount(() => {
+		const success = $page.url.searchParams.get('success');
+		if (success === 'true') {
+			addToast({
+				duration: 30000,
+				props: {
+					kind: 'success',
+					title: 'Payment successful',
+				},
+			});
+		} else if (success === 'false') {
+			addToast({
+				duration: 30000,
+				props: {
+					kind: 'error',
+					title: 'Payment failed',
+				},
+			});
+		}
+
+		// Ensure toast doesn't persist after page reload
+		const noQuery = $page.url.origin + $page.url.pathname;
+		window.history.pushState({}, '', noQuery);
+	});
 
 	const handlePayment = async () => {
 		loading = true;
