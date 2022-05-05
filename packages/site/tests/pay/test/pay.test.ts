@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import {
 	fakeClient,
 	fakeProperty,
@@ -30,6 +30,7 @@ test('tenant can pay', async ({ page }) => {
 	const leaseId = randomUUID();
 	// const tenantId = randomUUID();
 	const tenantId = testTenantId;
+	const trx = fakeTransactionBasic();
 	// const unit = fakeUnit();
 	// TODO choose another id to avoid clash
 	const { clientId: _c, ...property } = fakeProperty();
@@ -87,8 +88,8 @@ test('tenant can pay', async ({ page }) => {
 					...lease,
 					transactions: {
 						create: {
-							...fakeTransactionBasic(),
-							...fakeTransactionBasic(),
+							...trx,
+							// ...fakeTransactionBasic(),
 						},
 					},
 					unit: {
@@ -109,7 +110,6 @@ test('tenant can pay', async ({ page }) => {
 	await page.fill('input[name="password"]', password);
 	await page.locator('button[name="action"]').click();
 	await page.goto(`/portal/tenant/${testTenantId}`);
-	// await page.pause();
 	await page.click('text=Pay');
 
 	// Click text=Pay
@@ -135,8 +135,18 @@ test('tenant can pay', async ({ page }) => {
 	await page.locator('text=Submit').click();
 	await page.locator('input:has-text("Confirm")').click();
 	// assert.equal(page.url(), 'https://kpaytest.com.kw/kpg/paymentrouter.htm');
-	await page.pause();
 	// await page.goto(
 	// 	'https://dev.letand.be/portal/tenant/3dcef1c0-aae7-4766-968e-ad31b443bcc9',
 	// );
+	// const card = await page.waitForSelector(`${trx.id}`);
+	const trxList = page.locator('ul#trxList');
+	await expect.soft(trxList).toBeVisible();
+
+	const card = page.locator(`id=${trx.id}`);
+	await expect.soft(card).toBeVisible();
+	await expect.soft(card).toHaveClass(/isPaid/);
+
+	await expect.soft(card).not.toContainText(/Pay/i);
+
+	await page.pause();
 });
