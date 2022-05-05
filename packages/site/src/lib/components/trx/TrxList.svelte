@@ -27,7 +27,7 @@
 	</div>
 
 	{#if trxs.length}
-		<ul class="divide-y divide-gray-200">
+		<ul id="trxList" class="divide-y divide-gray-200">
 			{#each trxs as trx (trx.id)}
 				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 					<TrxCard {trx} />

@@ -38,7 +38,12 @@
 	};
 </script>
 
-<div class="block">
+<div
+	class="block"
+	id={trx.id}
+	class:isPaid={trx.isPaid}
+	class:notPaid={!trx.isPaid}
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-col">
 			<Badge label={badge.label} badgeColor={badge.color} />
