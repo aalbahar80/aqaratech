@@ -8,7 +8,7 @@ dotenvConfig({
 const config: PlaywrightTestConfig = {
 	name: 'Pay',
 	fullyParallel: true,
-	timeout: process.env.CI ? 30000 : 30000,
+	timeout: 60 * 1000,
 	expect: { timeout: 10000 },
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
