@@ -72,7 +72,11 @@ test('tenant can pay', async ({ page }) => {
 		},
 	});
 
-	const { tenantId: _, unitId: __, ...lease } = fakeLease(testTenantId);
+	const {
+		tenantId: _,
+		unitId: __,
+		...lease
+	} = fakeLease(testTenantId, randomUUID(), new Date());
 	await prisma.tenant.create({
 		data: {
 			...fakeTenant(),
@@ -105,6 +109,7 @@ test('tenant can pay', async ({ page }) => {
 	await page.fill('input[name="password"]', password);
 	await page.locator('button[name="action"]').click();
 	await page.goto(`/portal/tenant/${testTenantId}`);
+	// await page.pause();
 	await page.click('text=Pay');
 
 	// Click text=Pay
@@ -130,7 +135,8 @@ test('tenant can pay', async ({ page }) => {
 	await page.locator('text=Submit').click();
 	await page.locator('input:has-text("Confirm")').click();
 	// assert.equal(page.url(), 'https://kpaytest.com.kw/kpg/paymentrouter.htm');
-	await page.goto(
-		'https://dev.letand.be/portal/tenant/3dcef1c0-aae7-4766-968e-ad31b443bcc9',
-	);
+	await page.pause();
+	// await page.goto(
+	// 	'https://dev.letand.be/portal/tenant/3dcef1c0-aae7-4766-968e-ad31b443bcc9',
+	// );
 });

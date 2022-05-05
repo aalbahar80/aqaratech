@@ -8,6 +8,7 @@ export const get: RequestHandler = async (req) => {
 		if (!paymentId) {
 			const error = new Error('Unable to get PaymentId from URL');
 			console.error(error);
+			// TODO: Tell user to refresh
 			throw error;
 		}
 

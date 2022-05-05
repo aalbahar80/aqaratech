@@ -1,3 +1,4 @@
+import prismaClient from '$lib/server/prismaClient';
 import { environment } from '$environment';
 import trpc from '$lib/client/trpc';
 
@@ -113,6 +114,7 @@ export const getPaymentStatus = async (
 	);
 
 	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
+	console.log({ data }, 'myfatoorah.ts ~ 116');
 
 	const isPaid = data.Data.InvoiceStatus === 'Paid';
 	const trxId = data.Data.CustomerReference;
@@ -140,13 +142,16 @@ export const markAsPaid = async ({
 	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
 
 	try {
+		console.log(`attempting to mark trx ${trxId} as paid`);
 		// TODO auth here (machine to machine)?
-		const result = await trpc.mutation('transactions:updatePaid', {
-			id: trxId,
-			isPaid: true,
-			mfPaymentId,
+		const result = await prismaClient.transaction.update({
+			where: { id: trxId },
+			data: {
+				mfPaymentId,
+				isPaid: true,
+			},
 		});
-		return result;
+		console.log({ result }, 'myfatoorah.ts ~ 159');
 	} catch (err) {
 		console.error(err);
 		return;
