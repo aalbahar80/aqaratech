@@ -1,7 +1,7 @@
 import { environment } from '$environment';
 import trpc from '$lib/client/trpc';
 
-const { myfatoorahConfig, callbackDomain } = environment;
+const { myfatoorahConfig } = environment;
 interface MFResponse {
 	Data: {
 		PaymentURL: string;
@@ -43,7 +43,7 @@ export const getMFUrl = async ({
 		.filter(Boolean)
 		.join(' ');
 
-	const callbackUrl = `${callbackDomain}/api/payments/mfcallback`;
+	const callbackUrl = `${myfatoorahConfig.MYFATOORAH_CALLBACK_URL}/api/payments/mfcallback`;
 	let trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,

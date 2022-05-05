@@ -63,6 +63,9 @@ export const developmentEnvironment: EnvironmentConfig = {
 		MYFATOORAH_TOKEN: process.env.MYFATOORAH_TOKEN,
 		MYFATOORAH_EMAIL: process.env.MYFATOORAH_EMAIL,
 		MYFATOORAH_PHONE: process.env.MYFATOORAH_PHONE,
+		MYFATOORAH_CALLBACK_URL: process.env.VERCEL
+			? `https://${process.env.VERCEL_URL}`
+			: 'http://127.0.0.1:3000',
 	},
 	twilioConfig: {
 		TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
