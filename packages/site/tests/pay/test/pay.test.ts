@@ -1,99 +1,26 @@
-import { expect, test } from '@playwright/test';
-import { randomUUID } from 'crypto';
+import { expect, test as base } from '@playwright/test';
 import {
-	fakeClient,
-	fakeLease,
-	fakeProperty,
-	fakeTenant,
-	fakeTransactionBasic,
-	fakeUnit,
+	testTenantEmail,
 	testTenantId,
+	testTenantPassword,
 } from '../../../../seed/generators.js';
-import prisma from '../../config/prismaClient.js';
-import { cleanupDatabase } from '../../utils.js';
+import { setupLease, setupTrx } from '../setup.js';
 
-const email = 'tenant.dev@mailthink.net';
-const password = 'test12';
+const test = base.extend<{ trxId: string }>({
+	trxId: async ({}, use) => {
+		const leaseId = await setupLease(testTenantId);
+		const trxId = await setupTrx(leaseId);
+		await use(trxId);
+	},
+});
 
-test('tenant can pay', async ({ page }) => {
-	await cleanupDatabase();
-	const trx = fakeTransactionBasic();
-	const { clientId: _c, ...property } = fakeProperty();
-	const { propertyId: _p, ...unit } = fakeUnit();
-
-	// Setup
-	await prisma.client.create({
-		data: {
-			...fakeClient(),
-			properties: {
-				connectOrCreate: [
-					{
-						where: {
-							id: property.id,
-						},
-						create: {
-							...property,
-							units: {
-								connectOrCreate: [
-									{
-										where: {
-											id: unit.id,
-										},
-										create: {
-											...unit,
-										},
-									},
-								],
-							},
-						},
-					},
-				],
-			},
-		},
-		include: {
-			properties: {
-				include: {
-					units: true,
-				},
-			},
-		},
-	});
-
-	const {
-		tenantId: _,
-		unitId: __,
-		...lease
-	} = fakeLease(testTenantId, randomUUID(), new Date());
-	await prisma.tenant.create({
-		data: {
-			...fakeTenant(),
-			email,
-			id: testTenantId,
-			leases: {
-				create: {
-					...lease,
-					transactions: {
-						create: {
-							...trx,
-							// ...fakeTransactionBasic(),
-						},
-					},
-					unit: {
-						connect: {
-							id: unit.id,
-						},
-					},
-				},
-			},
-		},
-	});
-
+test('tenant can pay', async ({ page, trxId }) => {
 	// Login
 	await page.goto('/');
 	await page.locator('text=Log In >> visible=true').click();
 
-	await page.fill('input[name="username"]', email);
-	await page.fill('input[name="password"]', password);
+	await page.fill('input[name="username"]', testTenantEmail);
+	await page.fill('input[name="password"]', testTenantPassword);
 	await page.locator('button[name="action"]').click();
 
 	// TODO: replace with proper hydration check
@@ -120,7 +47,7 @@ test('tenant can pay', async ({ page }) => {
 	await expect.soft(trxList).toBeVisible();
 
 	// Confirm
-	const card = page.locator(`id=${trx.id}`);
+	const card = page.locator(`id=${trxId}`);
 	await expect.soft(card).toBeVisible();
 	await expect.soft(card).toHaveClass(/isPaid/);
 	await expect.soft(card).not.toContainText(/Pay/i);
