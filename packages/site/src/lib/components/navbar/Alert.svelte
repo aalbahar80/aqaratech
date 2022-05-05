@@ -3,7 +3,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 </script>
 
-<div class="border-l-4 border-yellow-400 bg-yellow-50 p-4">
+<div class="border-l-4 border-yellow-400 bg-yellow-50 p-4 print:hidden">
 	<div class="flex justify-center">
 		<div class="flex-shrink-0">
 			<Icon
