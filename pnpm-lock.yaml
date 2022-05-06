@@ -35,7 +35,7 @@ importers:
       '@fortawesome/free-regular-svg-icons': ^6.1.1
       '@fortawesome/free-solid-svg-icons': ^6.1.1
       '@prisma/client': ^3.13.0
-      '@rgossiaux/svelte-headlessui': ^1.0.0-beta.12
+      '@rgossiaux/svelte-headlessui': ^1.0.0
       '@self/temporal': workspace:^0.0.1
       '@sentry/browser': ^6.19.6
       '@sentry/node': ^6.19.6
@@ -110,7 +110,7 @@ importers:
       '@fortawesome/free-regular-svg-icons': 6.1.1
       '@fortawesome/free-solid-svg-icons': 6.1.1
       '@prisma/client': 3.13.0_prisma@3.13.0
-      '@rgossiaux/svelte-headlessui': 1.0.0-beta.12_svelte@3.48.0
+      '@rgossiaux/svelte-headlessui': 1.0.0_svelte@3.48.0
       '@self/temporal': link:../temporal
       '@sentry/browser': 6.19.7
       '@sentry/node': 6.19.7
@@ -1178,8 +1178,8 @@ packages:
   /@protobufjs/utf8/1.1.0:
     resolution: {integrity: sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=}
 
-  /@rgossiaux/svelte-headlessui/1.0.0-beta.12_svelte@3.48.0:
-    resolution: {integrity: sha512-UgLV9PwlwkJYObYSzxm5kh5HbyEps3oMbihL1BY7CpZ26j0q6O6WaG4d95eiMilhzyHfRYRm/VLyNPJISBFqAA==}
+  /@rgossiaux/svelte-headlessui/1.0.0_svelte@3.48.0:
+    resolution: {integrity: sha512-qZpaxnGPhSoy0CPI7jdhy6+gin0N4iOZZZe5fQTFKoI2lgvDJW2xeSWCaFWT7k3hgpusJj+Qbrx5/IE8uVqbbw==}
     peerDependencies:
       svelte: ^3.44.0
     dependencies:

@@ -29,7 +29,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@prisma/client": "^3.13.0",
-    "@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
+    "@rgossiaux/svelte-headlessui": "^1.0.0",
     "@self/temporal": "workspace:^0.0.1",
     "@sentry/browser": "^6.19.6",
     "@sentry/node": "^6.19.6",
