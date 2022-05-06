@@ -5,7 +5,7 @@ import type { formClasses } from './form.js';
 export type FormFixtures = { baseForm: keyof typeof formClasses };
 type Config = PlaywrightTestConfig<FormFixtures>;
 
-const commonForms = ['newForm.test.ts'];
+const commonForms = ['newForm.test.ts', 'editForm.test.ts'];
 
 const config: Config = {
 	...baseConfig,
