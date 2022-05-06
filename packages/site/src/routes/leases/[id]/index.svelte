@@ -12,7 +12,7 @@
 	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { LoadInput } from '@sveltejs/kit';
-	import formatDistance from 'date-fns/formatDistance';
+	import { formatDistance } from 'date-fns';
 
 	export const load = async ({
 		params,
