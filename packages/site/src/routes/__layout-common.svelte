@@ -17,11 +17,6 @@
 	import type { Load } from './__layout-common';
 
 	export const load: Load = async ({ session, url: { pathname } }) => {
-		// if (!browser) {
-		// @ts-ignore
-		// trpc.runtime.fetch = fetch;
-		// }
-
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
 		return {
