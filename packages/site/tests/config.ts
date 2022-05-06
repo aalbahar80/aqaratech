@@ -6,15 +6,17 @@ dotenvConfig({
 	path: require.resolve('../.env'),
 });
 
+// This is a common configuration for different test directories.
+// This approach was required because playwright's config.projects were problematic when it comes to tests starting with a different initial auth state.
 export const config: PlaywrightTestConfig = {
 	fullyParallel: true,
+	/* Opt out of parallel tests on CI. */
+	workers: process.env.CI ? 1 : undefined,
+	retries: process.env.CI ? 2 : 2,
+	forbidOnly: !!process.env.CI,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: path.resolve(__dirname, 'global-setup.ts'),
-	forbidOnly: !!process.env.CI,
-	retries: process.env.CI ? 2 : 2,
-	/* Opt out of parallel tests on CI. */
-	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : [['list'], ['html']],
 	use: {
 		baseURL: 'http://localhost:3000/',
@@ -34,43 +36,14 @@ export const config: PlaywrightTestConfig = {
 		// 	],
 		// },
 	},
-	// testMatch: commonTests,
-	// testIgnore: ['forms/attribution.test.ts', 'login.spec.ts'],
-
-	// projects: [
-	// 	// ...extraBrowsers,
-	// 	{
-	// 		name: 'chromium',
-	// 		testMatch: ['forms/lease.test.ts', 'forms/property.test.ts'],
-	// 		testIgnore: commonTests,
-	// 	},
-	// 	// {
-	// 	// 	name: 'Pay',
-	// 	// 	testMatch: ['pay/pay.test.ts'],
-	// 	// 	use: {
-	// 	// 		storageState: undefined,
-	// 	// 	},
-	// 	// 	testIgnore: commonTests,
-	// 	// },
-	// 	// TODO: Enable once you figure out how not to pollute the environment
-	// 	// Hint: It has something to do with the storage state
-	// 	// Hint2: It has something to do with testMatch/testIgnore
-	// 	// {
-	// 	// 	name: 'Login',
-	// 	// 	use: {
-	// 	// 		...devices['Desktop Chrome'],
-	// 	// 		,
-	// 	// 	},
-	// 	// 	testMatch: ['login.spec.ts'],
-	// 	// },
-	// ],
 	webServer: {
 		reuseExistingServer: true,
 		port: 3000,
-		// command: 'cd /home/hydraii/projects/aqtech/packages/site && pnpm run dev',
-		command: `cd ${path.resolve(__dirname, '..')} && pnpm run dev`,
-		// command: process.env.DEV
-		// 	? 'cd ../ && pnpm run dev'
-		// 	: 'cd ../ && pnpm run build && pnpm run preview',
+		command: process.env.DEV
+			? `cd ${path.resolve(__dirname, '..')} && pnpm run dev`
+			: `cd ${path.resolve(
+					__dirname,
+					'..',
+			  )} && pnpm run build && pnpm run preview`,
 	},
 };
