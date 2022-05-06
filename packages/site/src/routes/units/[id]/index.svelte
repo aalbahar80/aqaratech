@@ -7,6 +7,7 @@
 	export const load = async ({
 		params,
 		session,
+		fetch,
 	}: LoadInput<{ id: string }>) => {
 		const unit = session.authz?.isAdmin
 			? await trpc(fetch).query('units:read', params.id)
