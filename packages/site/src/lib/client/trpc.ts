@@ -4,13 +4,14 @@ import { createTRPCClient } from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
-const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
-export const trpc = (loadFetch?: typeof fetch) =>
-	createTRPCClient<AppRouter>({
+export const trpc = (loadFetch?: typeof fetch) => {
+	const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
+	return createTRPCClient<AppRouter>({
 		url: loadFetch ? '/trpc' : url,
 		transformer: superjson,
 		...(loadFetch && { fetch: loadFetch }),
 	});
+};
 
 type Query = keyof AppRouter['_def']['queries'];
 type Mutation = keyof AppRouter['_def']['mutations'];

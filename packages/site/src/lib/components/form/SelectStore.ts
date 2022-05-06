@@ -22,7 +22,13 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 	return {
 		subscribe,
 		fetchData: async (parentId?: string) => {
-			const result = await cstor.getList(parentId);
+			let result;
+			try {
+				result = await cstor.getList(parentId);
+			} catch (e) {
+				console.error({ e }, 'SelectStore.ts ~ 29');
+				result = [];
+			}
 			const options = result.map((i) => i.toOption());
 
 			// is initial value in new options?

@@ -5,6 +5,7 @@
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 	import type { Relation } from '$lib/models/types/entity.type';
+	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { createMyCustomStore } from './SelectStore';
 
@@ -24,7 +25,10 @@
 	}>();
 
 	let options = createMyCustomStore(cstor, selected ? [selected] : []);
-	$: options.fetchData(parent?.value);
+	onMount(() => {
+		// fetching needs to be in onMount or in load. Otherwise, cookies won't be passed to trpc and app will crash/error out.
+		$: options.fetchData(parent?.value);
+	});
 </script>
 
 <!-- 
