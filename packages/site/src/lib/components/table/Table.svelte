@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { flash } from '$components/table/transition';
 	import { columns } from '$lib/stores/columns';
-	import startCase from 'lodash-es/startCase.js';
+	import { startCase } from '$lib/utils/common';
 	import { flip } from 'svelte/animate';
 	import { expoOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';

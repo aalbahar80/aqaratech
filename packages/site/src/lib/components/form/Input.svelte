@@ -3,6 +3,7 @@
 	import Select from '$components/Select.svelte';
 	import { expenseCats, unitTypeOptions } from '$lib/config/constants';
 	import { classes } from '$lib/utils';
+	import { startCase } from '$lib/utils/common';
 	import {
 		Switch,
 		SwitchDescription,
@@ -11,7 +12,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import startCase from 'lodash-es/startCase.js';
 	import { createEventDispatcher } from 'svelte';
 
 	export let name = '';
