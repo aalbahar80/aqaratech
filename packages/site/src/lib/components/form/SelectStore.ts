@@ -22,11 +22,11 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 	return {
 		subscribe,
 		fetchData: async (parentId?: string) => {
-			let result;
+			let result: Awaited<ReturnType<T['getList']>>[number][];
 			try {
 				result = await cstor.getList(parentId);
 			} catch (e) {
-				console.error({ e }, 'SelectStore.ts ~ 29');
+				console.warn({ e }, 'SelectStore.ts ~ 29');
 				result = [];
 			}
 			const options = result.map((i) => i.toOption());
