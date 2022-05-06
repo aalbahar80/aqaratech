@@ -6,7 +6,6 @@
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 	import type { Relation } from '$lib/models/types/entity.type';
-	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { createMyCustomStore } from './SelectStore';
 
