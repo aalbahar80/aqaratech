@@ -14,6 +14,7 @@ export const config: PlaywrightTestConfig = {
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	retries: process.env.CI ? 2 : 2,
+	maxFailures: process.env.CI ? 30 : 30,
 	forbidOnly: !!process.env.CI,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
