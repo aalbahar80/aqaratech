@@ -4,8 +4,6 @@
 	import { faBellSlash } from '@fortawesome/free-solid-svg-icons/faBellSlash';
 	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
-	import { enGB } from 'date-fns/locale';
-	import lowerCase from 'lodash-es/lowerCase.js';
 	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
 
@@ -106,7 +104,7 @@
 									>
 										<div>
 											<p class="text-sm capitalize text-gray-500">
-												{lowerCase(item.status)}
+												{item.status.toLocaleLowerCase()}
 											</p>
 										</div>
 										<div
@@ -117,7 +115,7 @@
 												dateTime={item.date.toISOString()}
 											>
 												{formatRelative(item.date, new Date(), {
-													locale: enGB,
+													// locale: enGB,
 												})}
 											</time>
 										</div>
