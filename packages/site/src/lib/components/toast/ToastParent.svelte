@@ -6,7 +6,10 @@
 </script>
 
 {#if $toasts}
-	<ul class="fixed bottom-10 right-4 z-50 flex flex-col items-end gap-y-4">
+	<ul
+		class="fixed bottom-10 right-4 z-50 flex flex-col items-end gap-y-4"
+		id="toasts"
+	>
 		{#each $toasts as { id, props } (id)}
 			<li
 				in:fly={{ duration: 300, y: 200 }}

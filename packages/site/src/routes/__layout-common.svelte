@@ -20,7 +20,6 @@
 	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
 		// @ts-ignore
 		trpc.runtime.fetch = fetch;
-		// return protectRoute(session, pathname);
 
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;

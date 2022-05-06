@@ -49,6 +49,7 @@ export const productionEnvironment: EnvironmentConfig = {
 		MYFATOORAH_TOKEN: process.env.MYFATOORAH_TOKEN,
 		MYFATOORAH_EMAIL: process.env.MYFATOORAH_EMAIL,
 		MYFATOORAH_PHONE: process.env.MYFATOORAH_PHONE,
+		MYFATOORAH_CALLBACK_URL: 'https://aqaratech.com',
 	},
 	twilioConfig: {
 		TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,

@@ -38,7 +38,12 @@
 	};
 </script>
 
-<div class="block">
+<div
+	class="block"
+	id={trx.id}
+	class:isPaid={trx.isPaid}
+	class:notPaid={!trx.isPaid}
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-col">
 			<Badge label={badge.label} badgeColor={badge.color} />
@@ -69,15 +74,14 @@
 					</p>
 				</div>
 				{#if trx.isPaid}
-					<div>
-						Paid
-						{#if trx.paidAt}
-							on
-							<time dateTime={trx.paidAt.toISOString()}
-								>{format(trx.paidAt, 'MMM dd, yy')}</time
-							>
-						{/if}
-					</div>
+					<span class="mt-4 sm:mt-0">
+						<a
+							href={`/p/transactions/${trx.id}`}
+							class="font-medium text-indigo-600 hover:text-indigo-500"
+						>
+							Details <span aria-hidden="true"> &rarr;</span>
+						</a>
+					</span>
 				{:else}
 					<div>
 						<Button

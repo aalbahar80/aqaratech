@@ -1,7 +1,7 @@
 import { environment } from '$environment';
-import trpc from '$lib/client/trpc';
+import prismaClient from '$lib/server/prismaClient';
 
-const { myfatoorahConfig, callbackDomain } = environment;
+const { myfatoorahConfig } = environment;
 interface MFResponse {
 	Data: {
 		PaymentURL: string;
@@ -16,7 +16,7 @@ interface MyFatoorahPaymentStatusResponse {
 	};
 }
 
-// TODO setup proper auth later as per:
+// TODO: setup proper auth later as per:
 // https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
 
 /**
@@ -29,9 +29,32 @@ export const getMFUrl = async ({
 	trxId: string;
 }): Promise<string> => {
 	// get necessary info for payment
-
 	console.log('fetching mf url');
-	const trx = await trpc.query('public:transactions:pay', trxId);
+	const trx = await prismaClient.transaction.findUnique({
+		where: { id: trxId },
+		select: {
+			id: true,
+			amount: true,
+			lease: {
+				select: {
+					tenant: {
+						select: {
+							firstName: true,
+							secondName: true,
+							thirdName: true,
+							lastName: true,
+							email: true,
+							phone: true,
+						},
+					},
+				},
+			},
+		},
+	});
+
+	if (!trx) {
+		throw new Error('Transaction not found');
+	}
 
 	const { tenant } = trx.lease;
 	const name = [
@@ -43,7 +66,7 @@ export const getMFUrl = async ({
 		.filter(Boolean)
 		.join(' ');
 
-	const callbackUrl = `${callbackDomain}/api/payments/mfcallback`;
+	const callbackUrl = `${myfatoorahConfig.MYFATOORAH_CALLBACK_URL}/api/payments/mfcallback`;
 	let trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
@@ -113,6 +136,7 @@ export const getPaymentStatus = async (
 	);
 
 	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
+	console.log({ data }, 'myfatoorah.ts ~ 116');
 
 	const isPaid = data.Data.InvoiceStatus === 'Paid';
 	const trxId = data.Data.CustomerReference;
@@ -140,13 +164,17 @@ export const markAsPaid = async ({
 	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
 
 	try {
+		console.log(`attempting to mark trx ${trxId} as paid`);
 		// TODO auth here (machine to machine)?
-		const result = await trpc.mutation('transactions:updatePaid', {
-			id: trxId,
-			isPaid: true,
-			mfPaymentId,
+		const result = await prismaClient.transaction.update({
+			where: { id: trxId },
+			data: {
+				mfPaymentId,
+				isPaid: true,
+				paidAt: new Date(),
+			},
 		});
-		return result;
+		console.log({ result }, 'myfatoorah.ts ~ 159');
 	} catch (err) {
 		console.error(err);
 		return;

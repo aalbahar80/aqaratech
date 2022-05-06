@@ -112,26 +112,27 @@ export const transactions = createRouter()
 			isPaid: z.boolean(),
 			mfPaymentId: z.string().optional().transform(trim).transform(falsyToNull),
 		}),
-		resolve: ({ input }) =>
+		resolve: ({ input: { id, isPaid, mfPaymentId } }) =>
 			prismaClient.transaction.update({
-				where: { id: input.id },
+				where: { id: id },
 				data: {
-					isPaid: input.isPaid,
-					mfPaymentId: input.mfPaymentId || null,
+					isPaid,
+					paidAt: isPaid ? new Date() : null,
+					mfPaymentId: mfPaymentId || null,
 				},
 			}),
 	})
 	.mutation('create', {
 		input: Transaction.schema,
-		resolve: ({ input: { id, ...data } }) =>
-			id
-				? prismaClient.transaction.update({
-						data,
-						where: { id },
-				  })
-				: prismaClient.transaction.create({
-						data,
-				  }),
+		resolve: ({ input }) => {
+			const { id, ...data } = input;
+			return prismaClient.expense.create({
+				data: {
+					...data,
+					...(id ? { id } : {}),
+				},
+			});
+		},
 	})
 	.mutation('save', {
 		input: Transaction.schema,
