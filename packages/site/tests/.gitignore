@@ -1,4 +1,4 @@
 node_modules/
 test-results/
 playwright-report/
-config/adminState.json
+adminState.json

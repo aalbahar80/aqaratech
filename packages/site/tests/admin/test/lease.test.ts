@@ -1,12 +1,13 @@
+import { expect, test as base } from '@playwright/test';
+import path from 'path';
 import {
 	getAddress,
 	getName,
 	getUnitLabel,
-} from '../../src/lib/utils/common.js';
-import { expect, test as base } from '../config/test-setup.js';
-import { LeaseForm } from './form.js';
+} from '../../../src/lib/utils/common.js';
+import { LeaseForm } from '../form.js';
 
-base.use({ storageState: './config/adminState.json' });
+base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 const test = base.extend<{ form: LeaseForm }>({
 	form: async ({}, use) => {
 		const form = new LeaseForm();

@@ -10,3 +10,15 @@ Take screenshot of detail page > go to edit page > click submit without changing
 use expect(loc).toHaveValue() to check edit form is property populated
 
 ## Payment
+
+# Structure
+
+/admin: Tests start with admin cookies
+/nonauth: Tests start with no admin cookies
+
+Both can be run by cd'ing into them and then npx playwright test
+
+TODO: make it so that:
+
+1. global-setup is exucted once for all test directories. no need to clean up db twice.
+2. combine html reports
