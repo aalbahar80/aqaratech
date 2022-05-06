@@ -15,7 +15,7 @@ const config: PlaywrightTestConfig = {
 	globalSetup: './global-setup.ts',
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
-	reporter: process.env.CI ? 'list' : 'html',
+	reporter: process.env.CI ? 'list' : [['list'], ['html']],
 	use: {
 		baseURL: 'http://localhost:3000/',
 		screenshot: 'only-on-failure',
