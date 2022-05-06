@@ -3,11 +3,9 @@ import {
 	fakeClient,
 	fakeLease,
 	fakeProperty,
-	fakeTenant,
 	fakeTransactionBasic,
 	fakeUnit,
 	testTenantId,
-	testTenantEmail,
 } from '../../../seed/generators.js';
 import prisma from '../config/prismaClient.js';
 
@@ -73,18 +71,6 @@ export const setupLease = async (tenantId: string) => {
 		},
 	});
 	return lease.id;
-};
-
-export const setupTenant = async () => {
-	console.time('creating test tenant');
-	await prisma.tenant.create({
-		data: {
-			...fakeTenant(),
-			email: testTenantEmail,
-			id: testTenantId,
-		},
-	});
-	console.timeEnd('creating test tenant');
 };
 
 export const setupTrx = async (leaseId: string) => {

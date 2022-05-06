@@ -1,6 +1,5 @@
 import type { FullConfig } from '@playwright/test';
-import { setupTenant } from './setup.js';
-import { cleanupDatabase } from '../utils.js';
+import { cleanupDatabase, setupTenant } from '../utils.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function globalSetup(config: FullConfig) {

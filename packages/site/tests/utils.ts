@@ -1,3 +1,11 @@
+import {
+	fakeClient,
+	fakeTenant,
+	testClientEmail,
+	testClientId,
+	testTenantEmail,
+	testTenantId,
+} from '../../seed/generators';
 import prisma from './config/prismaClient';
 
 export async function cleanupDatabase() {
@@ -14,3 +22,27 @@ export async function cleanupDatabase() {
 	]);
 	console.timeEnd('cleanup');
 }
+
+export const setupTenant = async () => {
+	console.time('creating test tenant');
+	await prisma.tenant.create({
+		data: {
+			...fakeTenant(),
+			email: testTenantEmail,
+			id: testTenantId,
+		},
+	});
+	console.timeEnd('creating test tenant');
+};
+
+export const setupClient = async () => {
+	console.time('creating test client');
+	await prisma.client.create({
+		data: {
+			...fakeClient(),
+			email: testClientEmail,
+			id: testClientId,
+		},
+	});
+	console.timeEnd('creating test client');
+};
