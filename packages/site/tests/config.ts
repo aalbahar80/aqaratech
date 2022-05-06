@@ -1,23 +1,18 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
 import path from 'path';
-import type { formClasses } from './admin/form';
-
-export type FormFixtures = { baseForm: keyof typeof formClasses };
-
-type Config = PlaywrightTestConfig<FormFixtures>;
 
 dotenvConfig({
 	path: require.resolve('../.env'),
 });
 
-export const config: Config = {
+export const config: PlaywrightTestConfig = {
 	fullyParallel: true,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: path.resolve(__dirname, 'global-setup.ts'),
 	forbidOnly: !!process.env.CI,
-	retries: process.env.CI ? 2 : 0,
+	retries: process.env.CI ? 2 : 2,
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	reporter: process.env.CI ? 'list' : [['list'], ['html']],
@@ -68,41 +63,6 @@ export const config: Config = {
 	// 	// 	},
 	// 	// 	testMatch: ['login.spec.ts'],
 	// 	// },
-	// 	{
-	// 		name: 'client',
-	// 		use: { baseForm: 'clients' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'tenant',
-	// 		use: { baseForm: 'tenants' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'property',
-	// 		use: { baseForm: 'properties' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'unit',
-	// 		use: { baseForm: 'units' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'expense',
-	// 		use: { baseForm: 'expenses' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'maintenanceOrder',
-	// 		use: { baseForm: 'maintenanceOrders' },
-	// 		testMatch: commonTests,
-	// 	},
-	// 	{
-	// 		name: 'lease',
-	// 		use: { baseForm: 'leases' },
-	// 		testMatch: commonTests,
-	// 	},
 	// ],
 	webServer: {
 		reuseExistingServer: true,

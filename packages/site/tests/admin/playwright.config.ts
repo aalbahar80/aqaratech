@@ -1,13 +1,14 @@
-import path from 'path';
+import type { PlaywrightTestConfig } from '@playwright/test';
 import { config as baseConfig } from '../config.js';
 import type { formClasses } from './form.js';
 
 export type FormFixtures = { baseForm: keyof typeof formClasses };
+type Config = PlaywrightTestConfig<FormFixtures>;
 
 const commonForms = ['newForm.test.ts'];
-const config = {
+
+const config: Config = {
 	...baseConfig,
-	storageState: path.resolve(__dirname, '../adminState.json'),
 	projects: [
 		{
 			name: 'general',
@@ -21,6 +22,31 @@ const config = {
 		{
 			name: 'tenant',
 			use: { baseForm: 'tenants' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'property',
+			use: { baseForm: 'properties' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'unit',
+			use: { baseForm: 'units' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'expense',
+			use: { baseForm: 'expenses' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'maintenanceOrder',
+			use: { baseForm: 'maintenanceOrders' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'lease',
+			use: { baseForm: 'leases' },
 			testMatch: commonForms,
 		},
 	],
