@@ -7,7 +7,7 @@ import {
 	fakeUnit,
 	testTenantId,
 } from '../../../seed/generators.js';
-import prisma from '../config/prismaClient.js';
+import prisma from '../prismaClient.js';
 
 export const setupLease = async (tenantId: string) => {
 	const { clientId: _c, ...property } = fakeProperty();
