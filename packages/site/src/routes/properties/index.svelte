@@ -4,12 +4,12 @@
 	import type { Props } from '$models/types/Props.type';
 	import type { LoadInput } from '@sveltejs/kit';
 
-	export const load = async ({ session }: LoadInput) => {
+	export const load = async ({ session, fetch }: LoadInput) => {
 		const { data: properties } = session.authz?.isOwner
-			? await trpc().query('owner:properties:list', {
+			? await trpc(fetch).query('owner:properties:list', {
 					clientId: session.authz?.id,
 			  })
-			: await trpc().query('properties:list', {});
+			: await trpc(fetch).query('properties:list', {});
 
 		return {
 			props: { properties },

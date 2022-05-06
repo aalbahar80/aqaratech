@@ -9,9 +9,9 @@
 	import { PresentationChartBar } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		if (params.id === 'add') return { fallthrough: true };
-		const client = await trpc().query('clients:read', params.id);
+		const client = await trpc(fetch).query('clients:read', params.id);
 		return { props: { client } };
 	};
 </script>

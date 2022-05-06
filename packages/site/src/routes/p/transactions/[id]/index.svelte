@@ -22,9 +22,9 @@
 	import { onMount } from 'svelte';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;
-		const trx = await trpc().query('public:transactions:read', id);
+		const trx = await trpc(fetch).query('public:transactions:read', id);
 		return { props: { trx } };
 	};
 </script>

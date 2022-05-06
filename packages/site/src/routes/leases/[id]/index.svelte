@@ -17,10 +17,11 @@
 	export const load = async ({
 		params,
 		session,
+		fetch,
 	}: LoadInput<{ id: string }>) => {
 		const lease = session.authz?.isAdmin
-			? await trpc().query('leases:read', params.id)
-			: await trpc().query('owner:leases:read', params.id);
+			? await trpc(fetch).query('leases:read', params.id)
+			: await trpc(fetch).query('owner:leases:read', params.id);
 		return { props: { lease } };
 	};
 </script>

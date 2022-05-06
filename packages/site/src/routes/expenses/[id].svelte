@@ -7,8 +7,8 @@
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import type { Load } from './[id]';
 
-	export const load: Load = async ({ params }) => {
-		const expense = await trpc().query('expenses:read', params.id);
+	export const load: Load = async ({ params, fetch }) => {
+		const expense = await trpc(fetch).query('expenses:read', params.id);
 		return { props: { expense } };
 	};
 </script>

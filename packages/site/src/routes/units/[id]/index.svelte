@@ -9,8 +9,8 @@
 		session,
 	}: LoadInput<{ id: string }>) => {
 		const unit = session.authz?.isAdmin
-			? await trpc().query('units:read', params.id)
-			: await trpc().query('owner:units:read', params.id);
+			? await trpc(fetch).query('units:read', params.id)
+			: await trpc(fetch).query('owner:units:read', params.id);
 		return { props: { unit } };
 	};
 </script>

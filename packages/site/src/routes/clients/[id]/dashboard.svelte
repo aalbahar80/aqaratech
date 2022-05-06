@@ -24,7 +24,7 @@
 
 	type Filter = z.infer<typeof filterSchema>;
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const defaultFilter: Filter = {
 			propertyId: null,
 			unitId: null,
@@ -33,14 +33,14 @@
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc().query('owner:charts:client', { clientId: params.id }), // TODO use read?
-			trpc().query('owner:charts:income', {
+			trpc(fetch).query('owner:charts:client', { clientId: params.id }), // TODO use read?
+			trpc(fetch).query('owner:charts:income', {
 				...defaultFilter,
 			}),
-			trpc().query('owner:charts:expenses', {
+			trpc(fetch).query('owner:charts:expenses', {
 				...defaultFilter,
 			}),
-			trpc().query('owner:charts:occupancy', {
+			trpc(fetch).query('owner:charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);

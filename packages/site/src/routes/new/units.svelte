@@ -4,13 +4,13 @@
 	import { Unit } from '../../lib/models/classes/unit.class';
 	import type { Load } from './[entity]';
 
-	export const load: Load = async ({ url }) => {
+	export const load: Load = async ({ url, fetch }) => {
 		const predefined = Object.fromEntries(url.searchParams.entries());
 		if (
 			'propertyId' in predefined &&
 			typeof predefined['propertyId'] === 'string'
 		) {
-			const property = await trpc().query(
+			const property = await trpc(fetch).query(
 				'properties:basic',
 				predefined.propertyId,
 			);

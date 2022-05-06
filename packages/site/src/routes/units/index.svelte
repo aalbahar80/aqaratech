@@ -4,10 +4,10 @@
 	import type { Props } from '$lib/models/types/Props.type';
 	import type { LoadInput } from '@sveltejs/kit';
 
-	export const load = async ({ session }: LoadInput) => {
+	export const load = async ({ session, fetch }: LoadInput) => {
 		const { data: units } = session.authz?.isAdmin
-			? await trpc().query('units:list', {})
-			: await trpc().query('owner:units:list', {
+			? await trpc(fetch).query('units:list', {})
+			: await trpc(fetch).query('owner:units:list', {
 					clientId: session.authz?.id,
 			  });
 

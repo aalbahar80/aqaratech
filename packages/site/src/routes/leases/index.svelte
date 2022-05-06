@@ -7,7 +7,7 @@
 	import type { LoadInput } from '@sveltejs/kit';
 	import { isEqual } from 'lodash-es';
 
-	export const load = async ({ session }: LoadInput) => {
+	export const load = async ({ session, fetch }: LoadInput) => {
 		type Options = Partial<InferQueryInput<'owner:leases:list'>>;
 		const options: Options = {
 			pageIndex: 1,
@@ -21,11 +21,11 @@
 		};
 
 		const { data, pagination } = session.authz?.isOwner
-			? await trpc().query('owner:leases:list', {
+			? await trpc(fetch).query('owner:leases:list', {
 					...options,
 					clientId: session.authz.id,
 			  })
-			: await trpc().query('leases:list', options);
+			: await trpc(fetch).query('leases:list', options);
 
 		return {
 			props: { pagination, leases: data, options },

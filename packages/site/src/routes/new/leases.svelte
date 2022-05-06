@@ -8,13 +8,13 @@
 	import { Tenant } from '../../lib/models/classes/tenant.class';
 	import { Unit } from '../../lib/models/classes/unit.class';
 
-	export const load: Load = async ({ url }) => {
+	export const load: Load = async ({ url, fetch }) => {
 		let options = Object.fromEntries(url.searchParams.entries());
 		let predefined: Predefined | undefined;
 
 		if (options.leaseId) {
 			// renewing
-			const lease = await trpc().query('leases:read', options.leaseId);
+			const lease = await trpc(fetch).query('leases:read', options.leaseId);
 			predefined = {
 				initiator: 'lease',
 				tenantId: lease.tenantId,
@@ -44,7 +44,7 @@
 				},
 			};
 		} else if (options.tenantId) {
-			const tenant = await trpc().query('tenants:read', options.tenantId);
+			const tenant = await trpc(fetch).query('tenants:read', options.tenantId);
 			predefined = {
 				initiator: 'tenant',
 				tenantId: tenant.id,
@@ -59,7 +59,7 @@
 				unit: undefined,
 			};
 		} else if (options.unitId) {
-			const unit = await trpc().query('units:read', options.unitId);
+			const unit = await trpc(fetch).query('units:read', options.unitId);
 			predefined = {
 				initiator: 'unit',
 				unitId: unit.id,

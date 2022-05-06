@@ -3,8 +3,8 @@
 	import FormUnit from '$lib/components/form/FormUnit.svelte';
 	import type { Load } from './edit';
 
-	export const load: Load = async ({ params }) => {
-		const unit = await trpc().query('units:read', params.id);
+	export const load: Load = async ({ params, fetch }) => {
+		const unit = await trpc(fetch).query('units:read', params.id);
 		return {
 			props: { unit },
 		};

@@ -6,10 +6,10 @@
 	import { classMap } from '$models/classes/all.class';
 	import type { Load } from './edit';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const id = params.id;
 		const entity = params.entity as Entity;
-		const data = await trpc().query(`${entity}:basic`, id);
+		const data = await trpc(fetch).query(`${entity}:basic`, id);
 		return {
 			props: { data },
 		};

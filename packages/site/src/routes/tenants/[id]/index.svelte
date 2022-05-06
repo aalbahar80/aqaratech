@@ -9,8 +9,8 @@
 	import map from 'lodash-es/map.js';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
-		const tenant = await trpc().query('tenants:read', params.id);
+	export const load: Load = async ({ params, fetch }) => {
+		const tenant = await trpc(fetch).query('tenants:read', params.id);
 		if (tenant) return { props: { tenant } };
 
 		return { error: 'Tenant not found', status: 404 };

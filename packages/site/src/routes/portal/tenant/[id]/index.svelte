@@ -5,9 +5,9 @@
 	import { format } from 'date-fns';
 	import type { Load } from './index';
 
-	export const load: Load = async ({ params }) => {
+	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;
-		const leases = await trpc().query('tenant:leases:list', id);
+		const leases = await trpc(fetch).query('tenant:leases:list', id);
 		return { props: { leases } };
 	};
 </script>

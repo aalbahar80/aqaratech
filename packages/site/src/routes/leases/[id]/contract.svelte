@@ -6,8 +6,8 @@
 	import { inWords } from '$lib/utils/currency';
 	import type { LoadInput } from '@sveltejs/kit';
 
-	export const load = async ({ params }: LoadInput<{ id: string }>) => {
-		const lease = await trpc().query('leases:read', params.id);
+	export const load = async ({ params, fetch }: LoadInput<{ id: string }>) => {
+		const lease = await trpc(fetch).query('leases:read', params.id);
 		return { props: { lease } };
 	};
 </script>
