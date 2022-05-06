@@ -1,8 +1,9 @@
-import { getAddress, getName } from '../../src/lib/utils/common.js';
-import { expect, test as base } from '../config/test-setup.js';
-import { PropertyForm } from './form.js';
+import { expect, test as base } from '@playwright/test';
+import path from 'path';
+import { getAddress, getName } from '../../../src/lib/utils/common.js';
+import { PropertyForm } from '../form.js';
 
-base.use({ storageState: './config/adminState.json' });
+base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 const test = base.extend<{ form: PropertyForm }>({
 	form: async ({}, use) => {
 		const form = new PropertyForm();
