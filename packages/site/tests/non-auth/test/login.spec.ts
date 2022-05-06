@@ -1,11 +1,5 @@
 import { expect, test } from '@playwright/test';
-import {
-	fakeClient,
-	fakeTenant,
-	testClientId,
-	testTenantId,
-} from '../../seed/generators.js';
-import prisma from './config/prismaClient.js';
+import { testClientId, testTenantId } from '../../../../seed/generators.js';
 
 const users = [
 	{
@@ -17,10 +11,6 @@ const users = [
 	{
 		role: 'owner',
 		id: testClientId,
-		data: {
-			...fakeClient(),
-			id: testClientId,
-		},
 		email: 'client.dev@mailthink.net',
 		password: 'test12',
 		// destination: /^http:\/\/localhost:3000\/clients\/.+\/dashboard$/,
@@ -29,33 +19,14 @@ const users = [
 	{
 		role: 'tenant',
 		id: testTenantId,
-		data: {
-			...fakeTenant(),
-			id: testTenantId,
-		},
 		email: 'tenant.dev@mailthink.net',
 		password: 'test12',
 		destination: `/portal/tenant/${testTenantId}`,
 	},
 ] as const;
 
-// Explicitly set storageState to undefined to avoid reused auth state.
-// test.use({ storageState: undefined });
-
 for (const user of users) {
 	test.describe(`${user.role} login:`, async () => {
-		test.beforeAll(async () => {
-			// A determined id is used to avoid creating an actual account on auth0.
-			if (user.role === 'tenant') {
-				await prisma.tenant.create({
-					data: user.data,
-				});
-			} else if (user.role === 'owner') {
-				await prisma.client.create({
-					data: user.data,
-				});
-			}
-		});
 		test.beforeEach(async ({ page }) => {
 			await page.goto('/');
 			await page.locator('text=Log In >> visible=true').click();
