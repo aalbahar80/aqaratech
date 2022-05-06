@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/env';
 	import { relationalClassMap } from '$lib/models/classes/all.class';
 	import type {
 		Option,
@@ -25,10 +26,13 @@
 	}>();
 
 	let options = createMyCustomStore(cstor, selected ? [selected] : []);
-	onMount(() => {
-		// fetching needs to be in onMount or in load. Otherwise, cookies won't be passed to trpc and app will crash/error out.
-		$: options.fetchData(parent?.value);
-	});
+
+	$: {
+		if (browser) {
+			// fetching needs to be in onMount or in load. Otherwise, cookies won't be passed to trpc and app will crash/error out.
+			options.fetchData(parent?.value);
+		}
+	}
 </script>
 
 <!-- 
