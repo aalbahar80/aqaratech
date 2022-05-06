@@ -47,7 +47,7 @@ test('indicate payment success', async ({ page, trxId }) => {
 });
 
 test('indicate payment failure', async ({ page, trxId }) => {
-	test.slow(true, 'failed payments are slow on myfatoorah');
+	// test.slow(true, 'failed payments are slow on myfatoorah');
 	await page.goto(`/p/transactions/${trxId}`);
 	await Promise.all([
 		page.waitForNavigation(),

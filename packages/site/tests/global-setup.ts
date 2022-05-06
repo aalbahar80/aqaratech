@@ -1,11 +1,7 @@
 import { chromium, type FullConfig } from '@playwright/test';
 import path from 'path';
-import { cleanupDatabase, setupClient, setupTenant } from './utils';
 
 async function globalSetup(config: FullConfig) {
-	await cleanupDatabase();
-	await Promise.all([await setupClient(), await setupTenant()]);
-
 	const adminEmail = 'admin.dev@mailthink.net';
 	const password = 'test12';
 
