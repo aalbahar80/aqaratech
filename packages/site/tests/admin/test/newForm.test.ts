@@ -1,7 +1,9 @@
-import { expect, test as base } from '../config/test-setup.js';
+import { expect, test as base } from '@playwright/test';
+import path from 'path';
+import { formClasses, type FormType } from '../form.js';
 import type { FormFixtures } from '../playwright.config.js';
-import { formClasses, type FormType } from './form.js';
 
+base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 const test = base.extend<FormFixtures & { form: FormType }>({
 	form: async ({ page, baseForm }, use) => {
 		const form = new formClasses[baseForm]();
@@ -11,6 +13,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await form.fill(page);
 		await use(form);
 	},
+	baseForm: ['clients', { option: true }],
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
