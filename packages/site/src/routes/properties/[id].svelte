@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
@@ -13,8 +13,8 @@
 		session,
 	}: LoadInput<{ id: string }>) => {
 		const property = session.authz?.isAdmin
-			? await trpc.query('properties:read', params.id)
-			: await trpc.query('owner:properties:read', params.id);
+			? await trpc().query('properties:read', params.id)
+			: await trpc().query('owner:properties:read', params.id);
 
 		return { props: { property } };
 	};

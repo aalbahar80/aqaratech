@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import Button from '$components/Button.svelte';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -19,8 +19,8 @@
 		session,
 	}: LoadInput<{ id: string }>) => {
 		const lease = session.authz?.isAdmin
-			? await trpc.query('leases:read', params.id)
-			: await trpc.query('owner:leases:read', params.id);
+			? await trpc().query('leases:read', params.id)
+			: await trpc().query('owner:leases:read', params.id);
 		return { props: { lease } };
 	};
 </script>

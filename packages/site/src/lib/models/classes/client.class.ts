@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { concatIfExists, getName } from '$lib/utils/common';
 import type { Client as PClient } from '@prisma/client';
 import type { z } from 'zod';
@@ -46,14 +46,14 @@ export class Client extends Entity {
 	};
 
 	static getList = async () => {
-		const result = await trpc.query('clients:list', {
+		const result = await trpc().query('clients:list', {
 			size: 100,
 		});
 		return result.data.map((data) => new Client(data));
 	};
 
 	static async grab(id: string) {
-		const data = await trpc.query('clients:read', id);
+		const data = await trpc().query('clients:read', id);
 		return new Client(data);
 	}
 	static relationalFields = [] as const;

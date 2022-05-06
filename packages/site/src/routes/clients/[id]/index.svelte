@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -11,7 +11,7 @@
 
 	export const load: Load = async ({ params }) => {
 		if (params.id === 'add') return { fallthrough: true };
-		const client = await trpc.query('clients:read', params.id);
+		const client = await trpc().query('clients:read', params.id);
 		return { props: { client } };
 	};
 </script>

@@ -2,7 +2,7 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
@@ -76,7 +76,7 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc.mutation(`${cstor.urlName}:save`, values);
+			const submitted = await trpc().mutation(`${cstor.urlName}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
 			await goto(`/${cstor.urlName}/${submitted.id}`);
 			addToast({

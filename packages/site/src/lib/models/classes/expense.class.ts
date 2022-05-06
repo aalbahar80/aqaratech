@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { schema } from '$models/schemas/expense.schema';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
@@ -28,12 +28,12 @@ export class Expense {
 	static relationalFields = [] as const;
 
 	static getList = async () => {
-		const result = await trpc.query('expenses:list', { size: 20 });
+		const result = await trpc().query('expenses:list', { size: 20 });
 		return result.data.map((data) => new Expense(data));
 	};
 
 	static async grab(id: string) {
-		const data = await trpc.query('expenses:read', id);
+		const data = await trpc().query('expenses:read', id);
 		return new Expense(data);
 	}
 }

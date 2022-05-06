@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
 	import { getAddress, getName } from '$lib/utils/common';
@@ -7,7 +7,7 @@
 	import type { LoadInput } from '@sveltejs/kit';
 
 	export const load = async ({ params }: LoadInput<{ id: string }>) => {
-		const lease = await trpc.query('leases:read', params.id);
+		const lease = await trpc().query('leases:read', params.id);
 		return { props: { lease } };
 	};
 </script>

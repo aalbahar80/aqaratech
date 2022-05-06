@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { concatIfExists, getName } from '$lib/utils/common';
 import type { Tenant as PTenant } from '@prisma/client';
 import type { z } from 'zod';
@@ -56,7 +56,7 @@ export class Tenant extends Entity {
 
 	static getList = async (query?: string) => {
 		try {
-			const result = await trpc.query('tenants:search', {
+			const result = await trpc().query('tenants:search', {
 				query,
 				size: 1000, // TODO replace this after implementing combobox search
 			});
@@ -68,7 +68,7 @@ export class Tenant extends Entity {
 	};
 
 	static async grab(id: string) {
-		const data = await trpc.query('tenants:read', id);
+		const data = await trpc().query('tenants:read', id);
 		return new Tenant(data);
 	}
 }

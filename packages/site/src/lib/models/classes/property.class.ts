@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { getAddress } from '$lib/utils/common';
 import { schema } from '$models/schemas/property.schema';
 import type { Property as PProperty } from '@prisma/client';
@@ -44,14 +44,14 @@ export class Property extends Entity {
 		}
 	};
 	static getList = async (clientId?: string) => {
-		const result = await trpc.query('properties:list', {
+		const result = await trpc().query('properties:list', {
 			size: 100,
 			clientId,
 		});
 		return result.data.map((data) => new Property(data));
 	};
 	static async grab(id: string) {
-		const data = await trpc.query('properties:read', id);
+		const data = await trpc().query('properties:read', id);
 		return new Property(data);
 	}
 }

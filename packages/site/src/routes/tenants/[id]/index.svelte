@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import TrxColumn from '$components/tenant/TrxColumn.svelte';
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
@@ -10,7 +10,7 @@
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params }) => {
-		const tenant = await trpc.query('tenants:read', params.id);
+		const tenant = await trpc().query('tenants:read', params.id);
 		if (tenant) return { props: { tenant } };
 
 		return { error: 'Tenant not found', status: 404 };

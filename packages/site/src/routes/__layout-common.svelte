@@ -2,7 +2,6 @@
 	// This is a base layout for other layouts to extend.
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import trpc from '$lib/client/trpc';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -17,9 +16,11 @@
 	import '../styles/tailwind.css';
 	import type { Load } from './__layout-common';
 
-	export const load: Load = async ({ session, url: { pathname }, fetch }) => {
+	export const load: Load = async ({ session, url: { pathname } }) => {
+		// if (!browser) {
 		// @ts-ignore
-		trpc.runtime.fetch = fetch;
+		// trpc.runtime.fetch = fetch;
+		// }
 
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
@@ -61,6 +62,9 @@
 	});
 </script>
 
+<svelte:head>
+	<!-- <meta http-equiv="refresh" content="3" /> -->
+</svelte:head>
 {#if $navigating && !$page.error}
 	<PreloadingIndicator />
 {/if}

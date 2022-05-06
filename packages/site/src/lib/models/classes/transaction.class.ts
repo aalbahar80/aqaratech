@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { schema } from '$models/schemas/transaction.schema';
 import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
@@ -30,11 +30,11 @@ export class Transaction {
 	] as const;
 	static relationalFields = [] as const;
 	static getList = async () => {
-		const result = await trpc.query('transactions:list', { size: 20 });
+		const result = await trpc().query('transactions:list', { size: 20 });
 		return result.data.map((data) => new Transaction(data));
 	};
 	static async grab(id: string) {
-		const data = await trpc.query('transactions:read', id);
+		const data = await trpc().query('transactions:read', id);
 		return new Transaction(data);
 	}
 

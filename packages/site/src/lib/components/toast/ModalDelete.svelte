@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import type { Entity } from '$lib/models/types';
 	import { addToast } from '$lib/stores/toast';
 	import Modal from './Modal.svelte';
@@ -15,7 +15,7 @@
 		isLoading = true;
 		try {
 			// await new Promise((resolve) => setTimeout(resolve, 200));
-			await trpc.mutation(`${entity}:delete`, id);
+			await trpc().mutation(`${entity}:delete`, id);
 			isLoading = false;
 			isOpen = false;
 			await goto(`/${entity}`);

@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import type { Load } from '@sveltejs/kit';
@@ -14,7 +14,7 @@
 
 		if (options.leaseId) {
 			// renewing
-			const lease = await trpc.query('leases:read', options.leaseId);
+			const lease = await trpc().query('leases:read', options.leaseId);
 			predefined = {
 				initiator: 'lease',
 				tenantId: lease.tenantId,
@@ -44,7 +44,7 @@
 				},
 			};
 		} else if (options.tenantId) {
-			const tenant = await trpc.query('tenants:read', options.tenantId);
+			const tenant = await trpc().query('tenants:read', options.tenantId);
 			predefined = {
 				initiator: 'tenant',
 				tenantId: tenant.id,
@@ -59,7 +59,7 @@
 				unit: undefined,
 			};
 		} else if (options.unitId) {
-			const unit = await trpc.query('units:read', options.unitId);
+			const unit = await trpc().query('units:read', options.unitId);
 			predefined = {
 				initiator: 'unit',
 				unitId: unit.id,

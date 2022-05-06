@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -13,9 +13,9 @@
 
 	export const load: Load = async ({ params }) => {
 		const [trx, nextReminder] = await Promise.all([
-			trpc.query('transactions:read', params.id),
+			trpc().query('transactions:read', params.id),
 			// needs optimization, load in onMount?
-			trpc.query('transactions:nextReminder', params.id),
+			trpc().query('transactions:nextReminder', params.id),
 		]);
 
 		console.log({ nextReminder }, 'index.svelte ~ 22');
@@ -43,7 +43,7 @@
 	const toggleIsPaid = async () => {
 		loadingPaid = true;
 		try {
-			const updated = await trpc.mutation('transactions:updatePaid', {
+			const updated = await trpc().mutation('transactions:updatePaid', {
 				id: trx.id,
 				isPaid: !trx.isPaid,
 			});

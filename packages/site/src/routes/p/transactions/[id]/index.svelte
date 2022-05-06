@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -24,7 +24,7 @@
 
 	export const load: Load = async ({ params }) => {
 		const { id } = params;
-		const trx = await trpc.query('public:transactions:read', id);
+		const trx = await trpc().query('public:transactions:read', id);
 		return { props: { trx } };
 	};
 </script>

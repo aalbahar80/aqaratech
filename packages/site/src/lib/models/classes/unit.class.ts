@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { concatIfExists, getUnitLabel } from '$lib/utils/common';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
@@ -54,7 +54,7 @@ export class Unit extends Entity {
 	static getList = async (propertyId?: string) => {
 		try {
 			// catch error when empty string is passed
-			const result = await trpc.query('units:list', {
+			const result = await trpc().query('units:list', {
 				size: 100,
 				propertyId,
 			});
@@ -65,7 +65,7 @@ export class Unit extends Entity {
 		}
 	};
 	static async grab(id: string) {
-		const data = await trpc.query('units:read', id);
+		const data = await trpc().query('units:read', id);
 		return new Unit(data);
 	}
 }

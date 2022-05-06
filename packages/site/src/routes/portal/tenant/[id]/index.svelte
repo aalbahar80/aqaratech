@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Select from '$lib/components/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
 	import { format } from 'date-fns';
@@ -7,7 +7,7 @@
 
 	export const load: Load = async ({ params }) => {
 		const { id } = params;
-		const leases = await trpc.query('tenant:leases:list', id);
+		const leases = await trpc().query('tenant:leases:list', id);
 		return { props: { leases } };
 	};
 </script>

@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
 import { schema } from '../schemas/maintenanceOrder.schema';
@@ -28,11 +28,11 @@ export class MaintenanceOrder {
 	] as const;
 	static relationalFields = [] as const;
 	static getList = async () => {
-		const result = await trpc.query('maintenanceOrders:list', { size: 20 });
+		const result = await trpc().query('maintenanceOrders:list', { size: 20 });
 		return result.data.map((data) => new MaintenanceOrder(data));
 	};
 	static async grab(id: string) {
-		const data = await trpc.query('maintenanceOrders:read', id);
+		const data = await trpc().query('maintenanceOrders:read', id);
 		return new MaintenanceOrder(data);
 	}
 }

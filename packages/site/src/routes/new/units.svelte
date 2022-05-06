@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import FormUnit from '$lib/components/form/FormUnit.svelte';
 	import { Unit } from '../../lib/models/classes/unit.class';
 	import type { Load } from './[entity]';
@@ -10,7 +10,7 @@
 			'propertyId' in predefined &&
 			typeof predefined['propertyId'] === 'string'
 		) {
-			const property = await trpc.query(
+			const property = await trpc().query(
 				'properties:basic',
 				predefined.propertyId,
 			);

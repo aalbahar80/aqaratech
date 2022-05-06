@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
@@ -33,14 +33,14 @@
 		};
 
 		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc.query('owner:charts:client', { clientId: params.id }), // TODO use read?
-			trpc.query('owner:charts:income', {
+			trpc().query('owner:charts:client', { clientId: params.id }), // TODO use read?
+			trpc().query('owner:charts:income', {
 				...defaultFilter,
 			}),
-			trpc.query('owner:charts:expenses', {
+			trpc().query('owner:charts:expenses', {
 				...defaultFilter,
 			}),
-			trpc.query('owner:charts:occupancy', {
+			trpc().query('owner:charts:occupancy', {
 				...defaultFilter,
 			}),
 		]);
@@ -112,9 +112,9 @@
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		[income, expenses, occupancy] = await Promise.all([
-			trpc.query('owner:charts:income', newFilter),
-			trpc.query('owner:charts:expenses', newFilter),
-			trpc.query('owner:charts:occupancy', newFilter),
+			trpc().query('owner:charts:income', newFilter),
+			trpc().query('owner:charts:expenses', newFilter),
+			trpc().query('owner:charts:occupancy', newFilter),
 		]);
 		filter = newFilter;
 	};

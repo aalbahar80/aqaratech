@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import { session } from '$app/stores';
-	import trpc, { type InferQueryInput } from '$lib/client/trpc';
+	import { trpc, type InferQueryInput } from '$lib/client/trpc';
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
@@ -21,11 +21,11 @@
 		};
 
 		const { data, pagination } = session.authz?.isOwner
-			? await trpc.query('owner:leases:list', {
+			? await trpc().query('owner:leases:list', {
 					...options,
 					clientId: session.authz.id,
 			  })
-			: await trpc.query('leases:list', options);
+			: await trpc().query('leases:list', options);
 
 		return {
 			props: { pagination, leases: data, options },
@@ -67,11 +67,11 @@
 		}
 		currentOptions = newOptions;
 		({ data: leases, pagination } = $session.authz?.isOwner
-			? await trpc.query('owner:leases:list', {
+			? await trpc().query('owner:leases:list', {
 					...newOptions,
 					clientId: $session.authz.id,
 			  })
-			: await trpc.query('leases:list', newOptions));
+			: await trpc().query('leases:list', newOptions));
 	};
 
 	// changes to options will trigger a new query

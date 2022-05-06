@@ -2,7 +2,7 @@
 	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
@@ -41,7 +41,7 @@
 
 	const togglePaid = async (id: string, isPaid: boolean) => {
 		try {
-			const updated = await trpc.mutation('transactions:updatePaid', {
+			const updated = await trpc().mutation('transactions:updatePaid', {
 				id,
 				isPaid,
 			});

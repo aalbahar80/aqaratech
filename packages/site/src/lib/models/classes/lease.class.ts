@@ -1,4 +1,4 @@
-import trpc from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc';
 import { leaseFormSchema, schema } from '$models/schemas/lease.schema';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
@@ -54,12 +54,12 @@ export class Lease extends Entity {
 	};
 
 	static getList = async () => {
-		const result = await trpc.query('leases:search', {});
+		const result = await trpc().query('leases:search', {});
 		return result.map((data) => new Lease(data));
 	};
 
 	static async grab(id: string) {
-		const data = await trpc.query('leases:read', id);
+		const data = await trpc().query('leases:read', id);
 		return new Lease(data);
 	}
 

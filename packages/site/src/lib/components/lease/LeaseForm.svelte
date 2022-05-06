@@ -2,7 +2,7 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import trpc from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
@@ -96,7 +96,7 @@
 			try {
 				console.log({ values }, 'LeaseForm.svelte ~ 95');
 				const { schedule, ...leaseValues } = values;
-				const newLease = await trpc.mutation('leases:save', leaseValues);
+				const newLease = await trpc().mutation('leases:save', leaseValues);
 				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
@@ -108,10 +108,13 @@
 					...e,
 					postAt: e.postAt,
 				}));
-				const newTrxs = await trpc.mutation('transactions:saveMany', trxValues);
+				const newTrxs = await trpc().mutation(
+					'transactions:saveMany',
+					trxValues,
+				);
 				console.log(`created ${newTrxs.count} transactions`);
 
-				const trpcres = await trpc.mutation(
+				const trpcres = await trpc().mutation(
 					'transactions:startWF',
 					trxValues.map((e) => e.id),
 				);

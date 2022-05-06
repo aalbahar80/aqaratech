@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import TableParent from '$components/table/TableParent.svelte';
-	import trpc, { type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import type { Entity } from '$lib/models/types';
 	import startCase from 'lodash-es/startCase.js';
 	import type { Load } from './index@blank';
@@ -9,8 +9,8 @@
 		const entity = params.entity as Entity;
 		const pageIndex = url.searchParams.get('p');
 		const [total, { data, pagination }] = await Promise.all([
-			trpc.query(`${entity}:count`),
-			trpc.query(`${entity}:list`, { pageIndex }),
+			trpc().query(`${entity}:count`),
+			trpc().query(`${entity}:list`, { pageIndex }),
 		]);
 		return {
 			props: { entity, total, pagination, data },
