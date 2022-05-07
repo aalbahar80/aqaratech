@@ -9,7 +9,7 @@
 	import type { Props } from '$lib/models/types/Props.type';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
-	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
+	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons/faCalendarXmark';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { LoadInput } from '@sveltejs/kit';
 	import { formatDistance } from 'date-fns';

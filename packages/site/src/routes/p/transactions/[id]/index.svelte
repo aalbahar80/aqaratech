@@ -13,10 +13,8 @@
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Transaction } from '$models/classes/transaction.class';
-	import {
-		faCalendar,
-		faCalendarCheck,
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
+	import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
 	import { CreditCard } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import { onMount } from 'svelte';
