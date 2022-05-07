@@ -22,9 +22,10 @@
 	export let options: RadioOption[];
 	export let invalid = false;
 	export let invalidText: string | undefined;
+	export let initial: string | undefined = undefined;
 
-	const initial = options.findIndex((option) => option.value);
-	let selected: SelectedRadioOption = options[initial];
+	const initialIdx = options.findIndex((option) => option.value === initial);
+	let selected: SelectedRadioOption = options[initialIdx];
 
 	const dispatch = createEventDispatcher<{
 		select: RadioOption[];

@@ -202,6 +202,10 @@
 									client={options.client}
 									property={options.property}
 									unit={options.unit}
+									initial={data?.unit?.id ||
+										data?.property?.id ||
+										data?.client?.id ||
+										undefined}
 									invalid={!!getValue($errors, 'clientId')}
 									invalidText={getValue($errors, 'clientId')?.[0]}
 									on:select={(e) => {

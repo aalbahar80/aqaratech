@@ -12,6 +12,7 @@
 	export let client: SelectedOption = undefined;
 	export let property: SelectedOption = undefined;
 	export let unit: SelectedOption = undefined;
+	export let initial: string | undefined = undefined;
 
 	// # Begin radio config #
 	type Field = 'clientId' | 'propertyId' | 'unitId';
@@ -45,14 +46,16 @@
 
 	// Ensure parent is aware of generic type emitted from RadioEntity
 	type $$Events = RadioEntity<Field>['$$events_def'];
+	$: console.log({ client }, 'AttributeEntity.svelte ~ 48');
 </script>
 
 <SelectEntity
 	field="clientId"
-	bind:selected={client}
+	selected={client}
 	{invalid}
 	{invalidText}
-	on:select={() => {
+	on:select={(e) => {
+		client = e.detail;
 		property = undefined;
 		unit = undefined;
 		radio.clear();
@@ -61,12 +64,12 @@
 
 <SelectEntity
 	field="propertyId"
-	bind:selected={property}
+	selected={property}
 	parent={client}
-	disabled={!client}
 	{invalid}
 	{invalidText}
-	on:select={() => {
+	on:select={(e) => {
+		property = e.detail;
 		unit = undefined;
 		radio.clear();
 	}}
@@ -74,12 +77,12 @@
 
 <SelectEntity
 	field="unitId"
-	bind:selected={unit}
+	selected={unit}
 	parent={property}
-	disabled={!client || !property}
 	{invalid}
 	{invalidText}
-	on:select={() => {
+	on:select={(e) => {
+		unit = e.detail;
 		radio.clear();
 	}}
 />
@@ -87,6 +90,7 @@
 <RadioEntity
 	bind:this={radio}
 	options={radioOptions}
+	{initial}
 	on:select
 	{invalid}
 	{invalidText}
