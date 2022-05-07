@@ -16,15 +16,7 @@ export const expenses = createRouter()
 				include: {
 					client: true,
 					property: true,
-					unit: {
-						include: {
-							property: {
-								include: {
-									client: true,
-								},
-							},
-						},
-					},
+					unit: true,
 				},
 			});
 			if (data) return data;

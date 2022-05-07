@@ -35,8 +35,20 @@ export const maintenanceOrders = createRouter()
 				},
 				include: {
 					client: true,
-					property: true,
-					unit: true,
+					property: {
+						include: {
+							client: true,
+						},
+					},
+					unit: {
+						include: {
+							property: {
+								include: {
+									client: true,
+								},
+							},
+						},
+					},
 					tenant: true,
 				},
 			});
