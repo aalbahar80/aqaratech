@@ -1,6 +1,12 @@
 import { trpc } from '$lib/client/trpc';
+import { Client } from '$lib/models/classes/client.class';
+import { Property } from '$lib/models/classes/property.class';
 import { concatIfExists, getUnitLabel } from '$lib/utils/common';
-import type { Unit as PUnit } from '@prisma/client';
+import type {
+	Client as PClient,
+	Property as PProperty,
+	Unit as PUnit,
+} from '@prisma/client';
 import type { z } from 'zod';
 import { schema } from '../schemas/unit.schema';
 import { Entity } from './entity.class';
@@ -38,8 +44,17 @@ export class Unit extends Entity {
 	] as const;
 	static relationalFields = ['clientId', 'propertyId'] as const;
 
+	static override getRelationOptions = (
+		data: PUnit & { property?: PProperty & { client?: PClient } },
+	) => ({
+		client: new Client(data?.property?.client).toOption(),
+		property: new Property(data?.property).toOption(),
+		unit: undefined,
+	});
+
 	public static getLabel = (item: ILabel) =>
 		concatIfExists([item.type, item.unitNumber]);
+
 	public getLabel = () => {
 		return getUnitLabel(this.data);
 		// if (this.data.type && this.data.unitNumber) {
@@ -51,6 +66,7 @@ export class Unit extends Entity {
 		// 	return '';
 		// }
 	};
+
 	static getList = async (propertyId?: string) => {
 		try {
 			// catch error when empty string is passed
@@ -64,6 +80,7 @@ export class Unit extends Entity {
 			return [];
 		}
 	};
+
 	static async grab(id: string) {
 		const data = await trpc().query('units:read', id);
 		return new Unit(data);

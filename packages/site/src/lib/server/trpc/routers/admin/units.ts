@@ -37,7 +37,11 @@ export const units = createRouter()
 					id,
 				},
 				include: {
-					property: true,
+					property: {
+						include: {
+							client: true,
+						},
+					},
 				},
 			});
 			if (data) return data;

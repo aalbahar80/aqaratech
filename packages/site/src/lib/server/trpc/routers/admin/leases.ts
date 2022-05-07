@@ -97,6 +97,11 @@ export const leases = createRouter()
 							id: true,
 							unitNumber: true,
 							type: true,
+							property: {
+								include: {
+									client: true,
+								},
+							},
 						},
 					},
 				},

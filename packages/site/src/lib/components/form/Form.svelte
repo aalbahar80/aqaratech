@@ -6,11 +6,6 @@
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
-	import { Client } from '$models/classes/client.class';
-	import { Property } from '$models/classes/property.class';
-	import { Tenant } from '$models/classes/tenant.class';
-	import { Unit } from '$models/classes/unit.class';
-	import type { SelectedOption } from '$models/interfaces/option.interface';
 	import type { EntityConstructor } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -89,31 +84,13 @@
 	});
 
 	const options = cstor.getRelationOptions(data);
-
-	let client: SelectedOption =
-		'client' in data && data.client?.id
-			? new Client(data?.client).toOption()
-			: undefined;
-	let property: SelectedOption =
-		'property' in data && data.property?.id
-			? new Property(data.property).toOption()
-			: undefined;
-
-	let unit: SelectedOption =
-		'unit' in data && data.unit?.id
-			? new Unit(data.unit).toOption()
-			: undefined;
-
-	let tenant: SelectedOption =
-		'tenant' in data && data.tenant?.id
-			? new Tenant(data.tenant).toOption()
-			: undefined;
+	let { client, property, unit, tenant } = options;
 </script>
 
 <svelte:head>
 	<title>{`Edit ${cstor.singularCap}`}</title>
 </svelte:head>
-
+<pre>{JSON.stringify(options, null, 2)}</pre>
 <div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
 		use:form
@@ -127,46 +104,56 @@
 						{data?.id ? 'Edit ' : 'New '}{cstor.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#if cstor.relationalFields && cstor.urlName !== 'units'}
+						{#if cstor.relationalFields}
 							{#each cstor.relationalFields as field}
 								{#if field === 'clientId'}
 									<SelectEntity
 										{field}
-										bind:selected={client}
+										selected={client}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
-											setData(field, e.detail.value);
+											client = e.detail;
+											setData('clientId', e.detail.value);
+											property = undefined;
+											setData('propertyId', null);
+											unit = undefined;
+											setData('unitId', null);
 										}}
 									/>
 								{:else if field === 'propertyId'}
 									<SelectEntity
 										{field}
-										bind:selected={property}
+										selected={property}
+										parent={client}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
-											setData(field, e.detail.value);
+											property = e.detail;
+											setData('propertyId', e.detail.value);
+											unit = undefined;
+											setData('unitId', null);
 										}}
 									/>
 								{:else if field === 'unitId'}
 									<SelectEntity
 										{field}
-										bind:selected={unit}
+										selected={unit}
+										parent={property}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
-											setData(field, e.detail.value);
+											setData('unitId', e.detail.value);
 										}}
 									/>
 								{:else if field === 'tenantId'}
 									<SelectEntity
 										{field}
-										bind:selected={tenant}
+										selected={tenant}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
-											setData(field, e.detail.value);
+											setData('tenantId', e.detail.value);
 										}}
 									/>
 								{/if}
@@ -199,9 +186,9 @@
 							</div>
 							<div class="flex flex-col gap-6">
 								<AttributeEntity
-									client={options.client}
-									property={options.property}
-									unit={options.unit}
+									{client}
+									{property}
+									{unit}
 									initial={data?.unit?.id ||
 										data?.property?.id ||
 										data?.client?.id ||

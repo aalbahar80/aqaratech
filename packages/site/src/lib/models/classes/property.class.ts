@@ -1,7 +1,8 @@
 import { trpc } from '$lib/client/trpc';
+import { Client } from '$lib/models/classes/client.class';
 import { getAddress } from '$lib/utils/common';
 import { schema } from '$models/schemas/property.schema';
-import type { Property as PProperty } from '@prisma/client';
+import type { Client as PClient, Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
 import { Entity } from './entity.class';
 
@@ -23,9 +24,17 @@ export class Property extends Entity {
 		number: '',
 	});
 	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
+
 	static relationalFields = ['clientId'] as const;
 
+	static override getRelationOptions = (
+		data: PProperty & { client: PClient },
+	) => ({
+		client: new Client(data.client).toOption(),
+	});
+
 	public static getLabel = (item: ILabel) => getAddress(item);
+
 	// TODO: DRY this with Entity classes once the following is fixed:
 	// Problem: importing property.class in a test file breaks vscode playwright extenstion
 	public getLabel = () => {
@@ -43,6 +52,7 @@ export class Property extends Entity {
 			return '';
 		}
 	};
+
 	static getList = async (clientId?: string) => {
 		const result = await trpc().query('properties:list', {
 			size: 100,
@@ -50,6 +60,7 @@ export class Property extends Entity {
 		});
 		return result.data.map((data) => new Property(data));
 	};
+
 	static async grab(id: string) {
 		const data = await trpc().query('properties:read', id);
 		return new Property(data);
