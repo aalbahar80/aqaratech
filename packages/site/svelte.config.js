@@ -46,10 +46,10 @@ const config = {
 					process.env.NODE_ENV === 'production'
 						? [
 								'superjson',
-								'ms',
+								// 'ms',
 								// '@self/temporal',
-								'date-fns',
-								'@fortawesome/free-solid-svg-icons',
+								// 'date-fns',
+								// '@fortawesome/free-solid-svg-icons',
 								// '@temporalio/workflow',
 						  ]
 						: undefined,
