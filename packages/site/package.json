@@ -26,7 +26,6 @@
     "@felte/reporter-tippy": "^1.1.1",
     "@felte/validator-zod": "^1.0.9",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
-    "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@prisma/client": "^3.13.0",
     "@rgossiaux/svelte-headlessui": "^1.0.0",
