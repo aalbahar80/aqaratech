@@ -8,6 +8,7 @@
 	export let details: [string, string | null][];
 	export let files: [string, string][] | undefined = undefined;
 
+	const hideFiles = true;
 	const options: Option[] = [
 		{ label: 'Update', href: '#', icon: Pencil },
 		{ label: 'Remove', href: '#', icon: Trash },
@@ -22,7 +23,7 @@
 				<dd class="definition">{value}</dd>
 			</div>
 		{/each}
-		{#if files}
+		{#if files && !hideFiles}
 			<div class="row">
 				<dt class="label">Files</dt>
 				<dd class="definition">
