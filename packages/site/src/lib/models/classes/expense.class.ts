@@ -1,4 +1,7 @@
 import { trpc } from '$lib/client/trpc';
+import { Client } from '$lib/models/classes/client.class';
+import { Property } from '$lib/models/classes/property.class';
+import { Unit } from '$lib/models/classes/unit.class';
 import { schema } from '$models/schemas/expense.schema';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
@@ -23,6 +26,24 @@ export class Expense {
 		propertyId: null,
 		unitId: null,
 	});
+
+	static getRelationOptions = (data: any) => {
+		return {
+			client: data?.client
+				? new Client(data.client).toOption()
+				: data?.property?.client
+				? new Client(data.property.client).toOption()
+				: data?.unit?.property?.client
+				? new Client(data.unit.property.client).toOption()
+				: undefined,
+			property: data?.property
+				? new Property(data.property).toOption()
+				: data?.unit?.property
+				? new Property(data.unit.property).toOption()
+				: undefined,
+			unit: data?.unit ? new Unit(data.unit).toOption() : undefined,
+		};
+	};
 
 	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
 	static relationalFields = [] as const;

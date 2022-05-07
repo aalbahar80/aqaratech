@@ -9,9 +9,9 @@
 	export let invalid = false;
 	export let invalidText: string = '';
 
-	let client: SelectedOption;
-	let property: SelectedOption;
-	let unit: SelectedOption;
+	export let client: SelectedOption = undefined;
+	export let property: SelectedOption = undefined;
+	export let unit: SelectedOption = undefined;
 
 	// # Begin radio config #
 	type Field = 'clientId' | 'propertyId' | 'unitId';

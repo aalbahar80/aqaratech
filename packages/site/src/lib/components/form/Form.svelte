@@ -88,6 +88,8 @@
 		},
 	});
 
+	const options = cstor.getRelationOptions(data);
+
 	let client: SelectedOption =
 		'client' in data && data.client?.id
 			? new Client(data?.client).toOption()
@@ -197,6 +199,9 @@
 							</div>
 							<div class="flex flex-col gap-6">
 								<AttributeEntity
+									client={options.client}
+									property={options.property}
+									unit={options.unit}
 									invalid={!!getValue($errors, 'clientId')}
 									invalidText={getValue($errors, 'clientId')?.[0]}
 									on:select={(e) => {
