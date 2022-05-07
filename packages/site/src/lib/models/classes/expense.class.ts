@@ -1,4 +1,4 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
@@ -27,7 +27,7 @@ export class Expense {
 		unitId: null,
 	});
 
-	static getRelationOptions = (data: any) => {
+	static getRelationOptions = (data: InferQueryOutput<`expenses:basic`>) => {
 		return {
 			client: data?.client
 				? new Client(data.client).toOption()
@@ -42,6 +42,8 @@ export class Expense {
 				? new Property(data.unit.property).toOption()
 				: undefined,
 			unit: data?.unit ? new Unit(data.unit).toOption() : undefined,
+			tenant: undefined,
+			lease: undefined,
 		};
 	};
 

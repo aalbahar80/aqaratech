@@ -21,11 +21,15 @@ export abstract class Entity {
 	toOptions = (instances: this[]): Option[] => {
 		return instances.map(this.toOption);
 	};
-	static getRelationOptions = (): RelationOptions => ({
+
+	// Change data type to this.data?
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	static getRelationOptions = (data: any): RelationOptions => ({
 		client: undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,
+		lease: undefined,
 	});
 }
 
@@ -39,4 +43,5 @@ interface RelationOptions {
 	property?: SelectedOption;
 	unit?: SelectedOption;
 	tenant?: SelectedOption;
+	lease?: SelectedOption;
 }

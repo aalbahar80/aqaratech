@@ -1,6 +1,10 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
+import { Lease } from '$lib/models/classes/lease.class';
 import { schema } from '$models/schemas/transaction.schema';
-import type { Transaction as PTransaction } from '@prisma/client';
+import type {
+	Lease as PLease,
+	Transaction as PTransaction,
+} from '@prisma/client';
 import type { z } from 'zod';
 
 export class Transaction {
@@ -10,7 +14,9 @@ export class Transaction {
 	static plural = 'transactions';
 	static pluralCap = 'Transactions';
 	static schema = schema;
+
 	constructor(public data: Partial<PTransaction>) {}
+
 	static defaultForm = (): z.input<typeof schema> => ({
 		dueAt: new Date(),
 		postAt: new Date(),
@@ -20,6 +26,7 @@ export class Transaction {
 		leaseId: '',
 		paidAt: '',
 	});
+
 	static basicFields = [
 		'amount',
 		'dueAt',
@@ -29,10 +36,22 @@ export class Transaction {
 		'memo',
 	] as const;
 	static relationalFields = [] as const;
+
+	static getRelationOptions = (
+		data: InferQueryOutput<`transactions:basic`>,
+	) => ({
+		lease: new Lease(data.lease).toOption(),
+		client: undefined,
+		property: undefined,
+		unit: undefined,
+		tenant: undefined,
+	});
+
 	static getList = async () => {
 		const result = await trpc().query('transactions:list', { size: 20 });
 		return result.data.map((data) => new Transaction(data));
 	};
+
 	static async grab(id: string) {
 		const data = await trpc().query('transactions:read', id);
 		return new Transaction(data);

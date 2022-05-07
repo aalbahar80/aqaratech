@@ -1,16 +1,10 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Tenant } from '$lib/models/classes/tenant.class';
 import { Unit } from '$lib/models/classes/unit.class';
 import { leaseFormSchema, schema } from '$models/schemas/lease.schema';
-import type {
-	Client as PClient,
-	Lease as PLease,
-	Property as PProperty,
-	Tenant as PTenant,
-	Unit as PUnit,
-} from '@prisma/client';
+import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
@@ -60,15 +54,12 @@ export class Lease extends Entity {
 	] as const;
 
 	static override getRelationOptions = (
-		data: PLease & {
-			tenant: PTenant;
-			unit: PUnit & { property: PProperty & { client: PClient } };
-		},
+		data: InferQueryOutput<`leases:basic`>,
 	) => ({
-		client: new Client(data?.unit?.property?.client).toOption(),
-		property: new Property(data?.unit?.property).toOption(),
-		unit: new Unit(data?.unit).toOption(),
-		tenant: new Tenant(data?.tenant).toOption(),
+		client: new Client(data.unit.property.client).toOption(),
+		property: new Property(data.unit.property).toOption(),
+		unit: new Unit(data.unit).toOption(),
+		tenant: new Tenant(data.tenant).toOption(),
 	});
 
 	public static getLabel = (item: { id: string }) => item.id;

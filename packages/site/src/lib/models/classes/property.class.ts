@@ -1,8 +1,8 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { getAddress } from '$lib/utils/common';
 import { schema } from '$models/schemas/property.schema';
-import type { Client as PClient, Property as PProperty } from '@prisma/client';
+import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
 import { Entity } from './entity.class';
 
@@ -28,9 +28,13 @@ export class Property extends Entity {
 	static relationalFields = ['clientId'] as const;
 
 	static override getRelationOptions = (
-		data: PProperty & { client: PClient },
+		data: InferQueryOutput<`properties:basic`>,
 	) => ({
 		client: new Client(data.client).toOption(),
+		property: undefined,
+		unit: undefined,
+		tenant: undefined,
+		lease: undefined,
 	});
 
 	public static getLabel = (item: ILabel) => getAddress(item);

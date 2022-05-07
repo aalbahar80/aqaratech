@@ -57,7 +57,7 @@ export class Client extends Entity {
 		const data = await trpc().query('clients:read', id);
 		return new Client(data);
 	}
-	static relationalFields = [] as const;
+	static relationalFields = null;
 }
 
 interface ILabel {

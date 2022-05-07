@@ -1,12 +1,8 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { concatIfExists, getUnitLabel } from '$lib/utils/common';
-import type {
-	Client as PClient,
-	Property as PProperty,
-	Unit as PUnit,
-} from '@prisma/client';
+import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
 import { schema } from '../schemas/unit.schema';
 import { Entity } from './entity.class';
@@ -45,11 +41,13 @@ export class Unit extends Entity {
 	static relationalFields = ['clientId', 'propertyId'] as const;
 
 	static override getRelationOptions = (
-		data: PUnit & { property?: PProperty & { client?: PClient } },
+		data: InferQueryOutput<`units:basic`>,
 	) => ({
-		client: new Client(data?.property?.client).toOption(),
-		property: new Property(data?.property).toOption(),
+		client: new Client(data.property.client).toOption(),
+		property: new Property(data.property).toOption(),
 		unit: undefined,
+		tenant: undefined,
+		lease: undefined,
 	});
 
 	public static getLabel = (item: ILabel) =>
