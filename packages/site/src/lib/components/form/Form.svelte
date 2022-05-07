@@ -126,6 +126,7 @@
 										{field}
 										selected={property}
 										parent={client}
+										disabled={!client}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
@@ -140,6 +141,7 @@
 										{field}
 										selected={unit}
 										parent={property}
+										disabled={!client || !property}
 										invalid={!!getValue($errors, field)}
 										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {

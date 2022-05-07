@@ -66,6 +66,7 @@
 	field="propertyId"
 	selected={property}
 	parent={client}
+	disabled={!client}
 	{invalid}
 	{invalidText}
 	on:select={(e) => {
@@ -79,6 +80,7 @@
 	field="unitId"
 	selected={unit}
 	parent={property}
+	disabled={!client || !property}
 	{invalid}
 	{invalidText}
 	on:select={(e) => {
