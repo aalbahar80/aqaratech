@@ -7,7 +7,7 @@
     "test:only": "playwright test -c non-auth; playwright test -c admin",
     "test:simul": "playwright test -c non-auth & playwright test -c admin",
     "test:setup": "node ./db-setup.js",
-    "test": "pnpm run test:setup && pnpm run test:only",
+    "test": "pnpm run test:setup && playwright test",
     "test:dev": "cross-env DEV=true pnpm run test:setup && pnpm run test:only",
     "prisma:gen": "prisma generate --schema=../prisma/schema.prisma",
     "postinstall": "pnpm run prisma:gen"
