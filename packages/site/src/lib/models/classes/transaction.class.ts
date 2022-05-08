@@ -1,10 +1,11 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
+import { Entity } from '$lib/models/classes/entity.class';
 import { Lease } from '$lib/models/classes/lease.class';
 import { schema as baseSchema } from '$models/schemas/transaction.schema';
 import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
 
-export class Transaction {
+export class Transaction extends Entity {
 	static urlName = 'transactions' as const;
 	static singular = 'transaction';
 	static singularCap = 'Transaction';
@@ -24,7 +25,18 @@ export class Transaction {
 		public plural = 'transactions',
 		public pluralCap = 'Transactions',
 		public schema = baseSchema,
-	) {}
+	) {
+		super();
+	}
+	
+	public getLabel = () => {
+		if (this.data.id) {
+			return this.data.id;
+		} else {
+			console.warn('no id');
+			return '';
+		}
+	};
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),
@@ -44,10 +56,9 @@ export class Transaction {
 		'paidAt',
 		'memo',
 	] as const;
-	relationalFields = [] as const;
 
 	override getRelationOptions = (data = this.data) => ({
-		lease: new Lease(data.lease).toOption(),
+		lease: 'lease' in data ? new Lease(data.lease).toOption() : undefined,
 		client: undefined,
 		property: undefined,
 		unit: undefined,

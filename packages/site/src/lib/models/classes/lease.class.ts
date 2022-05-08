@@ -70,10 +70,10 @@ export class Lease extends Entity {
 	] as const;
 
 	override getRelationOptions = (data = this.data) => ({
-		client: new Client(data.unit.property.client).toOption(),
-		property: new Property(data.unit.property).toOption(),
-		unit: new Unit(data.unit).toOption(),
-		tenant: new Tenant(data.tenant).toOption(),
+		client: 'unit' in data && 'client' in data.unit.property ? new Client(data.unit.property.client).toOption() : undefined,
+		property: 'unit' in data ? new Property(data.unit.property).toOption() : undefined,
+		unit: 'unit' in data ? new Unit(data.unit).toOption() : undefined,
+		tenant: 'tenant' in data ? new Tenant(data.tenant).toOption() : undefined,
 	});
 
 	public static getLabel = (item: { id: string }) => item.id;

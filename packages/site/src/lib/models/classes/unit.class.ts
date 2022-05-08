@@ -56,8 +56,8 @@ export class Unit extends Entity {
 	override getRelationOptions = (data = this.data) => {
 		console.log({ data }, 'unit.class.ts ~ 46');
 		return {
-			client: new Client(data.property.client).toOption(),
-			property: new Property(data.property).toOption(),
+			client: 'property' in data ? new Client(data.property.client).toOption() : undefined,
+			property: 'property' in data ? new Property(data.property).toOption() : undefined,
 			unit: undefined,
 			tenant: undefined,
 			lease: undefined,

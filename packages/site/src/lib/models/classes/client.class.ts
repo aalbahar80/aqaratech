@@ -11,6 +11,7 @@ export class Client extends Entity {
 	static singularCap = 'Client';
 	static plural = 'clients';
 	static pluralCap = 'Clients';
+	static schema = baseSchema;
 
 	constructor(
 		public data:
