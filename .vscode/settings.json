@@ -51,6 +51,7 @@
 	// "editor.formatOnSave": false,
 	// "eslint.run": "onSave",
 	"svelte.enable-ts-plugin": true,
+	"editor.formatOnSave": true,
 	// "svelte.plugin.svelte.codeActions.enable": false,
 	// "svelte.plugin.svelte.format.enable": false,
 	// "svelte.plugin.typescript.semanticTokens.enable": false,

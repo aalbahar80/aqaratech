@@ -4,6 +4,7 @@ import type { PrismaClient as PrismaClientType } from "@prisma/client";
 // @ts-ignore
 import pkg from "@prisma/client";
 import { addDays } from "date-fns";
+import { config } from "dotenv";
 import { inspect } from "util";
 import {
 	fakeClient,
@@ -19,11 +20,15 @@ import {
 	timespan,
 } from "./generators.js";
 
+config({
+	path: "../site/.env",
+});
+
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient({
-	log: [{ level: "query", emit: "event" }, "info", "warn", "error"],
-	errorFormat: "pretty",
-});
+	// log: [{ level: "query", emit: "event" }, "info", "warn", "error"],
+	// errorFormat: "pretty",
+}) as PrismaClientType;
 
 // @ts-ignore
 // prisma.$on("query", (e) => {
@@ -271,6 +276,7 @@ async function main({
 		};
 
 		if (transactions.length) {
+			console.time("transactions created");
 			// split the maintenance orders into chunks of 10
 			const transactionsChunks = split(transactions, 1000);
 			// create the chunks
@@ -279,10 +285,11 @@ async function main({
 					data: chunk,
 				});
 			}),
-				console.log("transactions created");
+				console.time("transactions created");
 		}
 
 		if (maintenanceOrders.length) {
+			console.time("maintenanceOrders created");
 			// split the maintenance orders into chunks of 10
 			const maintenanceOrdersChunks = split(maintenanceOrders, 1000);
 			// create the chunks
@@ -294,10 +301,11 @@ async function main({
 				console.log("maintenance orders created");
 		}
 
+		console.time("expenses created");
 		await prisma.expense.createMany({
 			data: expenses,
 		});
-		console.log("expenses created");
+		console.timeEnd("expenses created");
 		console.timeEnd("insert");
 
 		console.log(`${tenantsWithLease} tenants with a lease`);
