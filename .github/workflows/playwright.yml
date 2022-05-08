@@ -8,11 +8,10 @@ on:
 
 env:
   DATABASE_URL: "mysql://u4x3ta31vxc4:pscale_pw_y0XAHqm9CjiB3GaJaUYZ92-Ids3-bpkdRtYt_f2FVUA@9x0wz4ri6ydp.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
-  REUSE_PRISMA: True
+  REUSE_PRISMA: 1
 
   DOMAIN: "https://dev.letand.be"
   CALLBACK_DOMAIN: "https://dev.letand.be"
-  REUSE_PRISMA: "TRUE"
   AUTH0_DOMAIN: "https://auth.letand.be"
   AUTH0_CLIENT_ID: "z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct"
   AUTH0_CLIENT_SECRET: "uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf"
