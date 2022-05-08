@@ -7,9 +7,11 @@ on:
     branches: [stage]
 
 env:
+  DATABASE_URL: "mysql://u4x3ta31vxc4:pscale_pw_y0XAHqm9CjiB3GaJaUYZ92-Ids3-bpkdRtYt_f2FVUA@9x0wz4ri6ydp.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
+  REUSE_PRISMA: True
+
   DOMAIN: "https://dev.letand.be"
   CALLBACK_DOMAIN: "https://dev.letand.be"
-  DATABASE_URL: "mysql://u4x3ta31vxc4:pscale_pw_y0XAHqm9CjiB3GaJaUYZ92-Ids3-bpkdRtYt_f2FVUA@9x0wz4ri6ydp.eu-central-1.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
   REUSE_PRISMA: "TRUE"
   AUTH0_DOMAIN: "https://auth.letand.be"
   AUTH0_CLIENT_ID: "z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct"
@@ -22,7 +24,6 @@ env:
   TWILIO_ACCOUNT_SID: "ACbffc494534d2b9823213e4538d71c98d"
   TWILIO_AUTH_TOKEN: "a94743f7f5baf621a2f2535f05c03970"
   TWILIO_FROM_NUMBER: "+15005550006	"
-  LOCAL: "TRUE"
 
 jobs:
   test:
