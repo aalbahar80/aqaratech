@@ -27,7 +27,7 @@ export type EntityInstance =
 	| Expense
 	| MaintenanceOrder;
 
-export type Entity =
+export type EntityTitle =
 	| 'properties'
 	| 'clients'
 	| 'leases'

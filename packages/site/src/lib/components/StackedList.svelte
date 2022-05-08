@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { classMap } from '$lib/models/classes/all.class';
-	import type { Entity } from '$models/types/entity.type';
+	import type { EntityTitle } from '$models/types/entity.type';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let entity: Entity;
+	export let entity: EntityTitle;
 	export let count: number;
 
 	const hideActions = $session.authz?.role !== 'admin';
