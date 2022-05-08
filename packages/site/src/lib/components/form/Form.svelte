@@ -84,7 +84,6 @@
 <svelte:head>
 	<title>{`Edit ${entity.singularCap}`}</title>
 </svelte:head>
-<pre>{JSON.stringify(options, null, 2)}</pre>
 <div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
 		use:form

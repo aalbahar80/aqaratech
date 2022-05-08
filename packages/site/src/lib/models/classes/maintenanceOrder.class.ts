@@ -4,6 +4,7 @@ import { Entity } from '$lib/models/classes/entity.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
+import { parseRelationOptions } from '$lib/utils/getRelationOptions';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/maintenanceOrder.schema';
@@ -44,28 +45,10 @@ export class MaintenanceOrder extends Entity {
 
 	basicFields = ['title', 'description', 'status', 'completedAt'] as const;
 
-	override getRelationOptions = (data = this.data) => {
-		const relations: RelationOptions = {
-			client: undefined,
-			property: undefined,
-			unit: undefined,
-			tenant: undefined,
-			lease: undefined,
-		};
-		if ('unit' in data && data.unit) {
-			this.attribution = data.unit?.id;
-			relations.unit = new Unit(data.unit).toOption();
-			relations.property = new Property(data.unit.property).toOption();
-			relations.client = new Client(data.unit.property.client).toOption();
-		} else if ('property' in data && data.property) {
-			this.attribution = data.property?.id;
-			relations.property = new Property(data.property).toOption();
-			relations.client = new Client(data.property.client).toOption();
-		} else if ('client' in data && data.client) {
-			this.attribution = data.client?.id;
-			relations.client = new Client(data.client).toOption();
-		}
-		return relations;
+	override getRelationOptions = () => {
+		const parsed = parseRelationOptions(this.data);
+		this.attribution = parsed.attribution;
+		return parsed.options;
 	};
 
 	static getList = async () => {
