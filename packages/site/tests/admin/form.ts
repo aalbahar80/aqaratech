@@ -260,14 +260,12 @@ export class LeaseForm extends Form {
 
 	public async fill(page: Page) {
 		await page.selectOption('#tenantId', { label: getName(this.tenant) });
-		if (!page.url().includes('edit')) {
-			await page.selectOption('#clientId', {
-				label: getName(this.client),
-			});
-			await page.selectOption('#propertyId', {
-				label: getAddress(this.property),
-			});
-		}
+		await page.selectOption('#clientId', {
+			label: getName(this.client),
+		});
+		await page.selectOption('#propertyId', {
+			label: getAddress(this.property),
+		});
 		await page.selectOption('#unitId', {
 			label: getUnitLabel(this.unit),
 		});
