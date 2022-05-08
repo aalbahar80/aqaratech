@@ -5,6 +5,6 @@ node_modules
 **/*.env
 **/.env
 # .env.local, .env.stage, etc.
-**/.env.*
+**/.env
 # packages/site/tests/config/*StorageState.json
 .vercel

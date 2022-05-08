@@ -4,8 +4,7 @@ import { config as dotenvConfig } from 'dotenv';
 import path from 'path';
 
 dotenvConfig({
-	path: path.resolve(__dirname, '../.env'),
-	// path: require.resolve('../.env'),
+	path: path.resolve(__dirname, '../../../.env.test'),
 });
 
 // This is a common configuration for different test directories.

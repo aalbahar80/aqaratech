@@ -1,6 +1,6 @@
 //@ts-check
 require('dotenv').config({
-	path: '../.env',
+	path: '../../../.env.test',
 });
 
 const { PrismaClient } = require('@prisma/client');
