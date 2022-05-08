@@ -2,7 +2,7 @@
 	import { session } from '$app/stores';
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import type { Entity } from '$lib/models/types';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { Trash } from '@steeze-ui/heroicons';
 	import Fa from 'svelte-fa';
@@ -15,7 +15,7 @@
 
 	export let title: string;
 	export let id: string;
-	export let entity: Entity;
+	export let entity: EntityTitle;
 	export let icons: IconTooltip[] | undefined = undefined;
 
 	let isOpen = false;

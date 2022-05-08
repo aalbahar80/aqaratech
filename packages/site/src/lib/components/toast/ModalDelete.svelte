@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { trpc } from '$lib/client/trpc';
-	import type { Entity } from '$lib/models/types';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { addToast } from '$lib/stores/toast';
 	import Modal from './Modal.svelte';
 
 	export let id: string;
-	export let entity: Entity;
+	export let entity: EntityTitle;
 	export let isOpen: boolean;
 
 	let isLoading = false;

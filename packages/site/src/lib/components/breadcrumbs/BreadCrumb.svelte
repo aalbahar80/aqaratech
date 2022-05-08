@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { classMap } from '$lib/models/classes/all.class';
-	import type { Entity } from '$models/types';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 
-	type Crumb = [Entity, string | undefined];
+	type Crumb = [EntityTitle, string | undefined];
 	export let crumbs: Crumb[];
 
 	$: {
