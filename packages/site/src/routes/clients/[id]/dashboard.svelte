@@ -122,196 +122,194 @@
 	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
 </script>
 
-<div class="mx-auto flex max-w-screen-lg flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<div class="prose">
-		<h1>Dashboard</h1>
-	</div>
-	<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
-		<!-- Date Filters -->
-		<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
-			<!-- Range -->
-			<div class="md:w-1/2">
-				<!-- rethink bind -->
-				<Select
-					bind:current={selectedRange}
-					options={rangeOptions}
-					on:select={(e) => {
-						if (+e.detail.value) {
-							handleFilter({
-								...filter,
-								...getRange(+e.detail.value),
-							});
-						}
-					}}
-				/>
-			</div>
-
-			<div class="md:1/2 flex gap-1">
-				<!-- Start -->
-				<input
-					type="date"
-					name="start"
-					class="date-input"
-					value={startInput}
-					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsNumber;
-						if (newDate) {
-							selectedRange = 0;
-							handleFilter({
-								...filter,
-								start: newDate,
-							});
-						}
-					}}
-				/>
-
-				<!-- End -->
-				<input
-					type="date"
-					name="end"
-					class="date-input"
-					value={endInput}
-					on:change={(e) => {
-						const newDate = e.currentTarget.valueAsNumber;
-						if (newDate) {
-							selectedRange = 0;
-							handleFilter({
-								...filter,
-								end: newDate,
-							});
-						}
-					}}
-				/>
-			</div>
-		</div>
-
-		<!-- Property/Unit Filters -->
-		<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
-			<!-- Property -->
-			<div class="md:w-2/3">
-				<Select
-					bind:current={selectedProperty}
-					options={propertyOptions}
-					on:select={async (e) => {
-						selectedProperty = e.detail.value;
-						selectedUnit = null;
-						await handleFilter({
-							...filter,
-							propertyId: selectedProperty,
-							unitId: null,
-						});
-						if (e.detail.value) {
-							incomeGroupBy = 'ratio';
-							expensesGroupBy = 'ratio';
-						}
-					}}
-				/>
-			</div>
-
-			<!-- Unit -->
-			<div class="md:w-1/3">
-				<Select
-					bind:current={selectedUnit}
-					options={unitOptions}
-					disabled={!selectedProperty}
-					on:select={async (e) => {
+<div class="prose">
+	<h1>Dashboard</h1>
+</div>
+<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
+	<!-- Date Filters -->
+	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
+		<!-- Range -->
+		<div class="md:w-1/2">
+			<!-- rethink bind -->
+			<Select
+				bind:current={selectedRange}
+				options={rangeOptions}
+				on:select={(e) => {
+					if (+e.detail.value) {
 						handleFilter({
 							...filter,
-							unitId: e.detail.value,
+							...getRange(+e.detail.value),
 						});
-					}}
-				/>
-			</div>
+					}
+				}}
+			/>
+		</div>
+
+		<div class="md:1/2 flex gap-1">
+			<!-- Start -->
+			<input
+				type="date"
+				name="start"
+				class="date-input"
+				value={startInput}
+				on:change={(e) => {
+					const newDate = e.currentTarget.valueAsNumber;
+					if (newDate) {
+						selectedRange = 0;
+						handleFilter({
+							...filter,
+							start: newDate,
+						});
+					}
+				}}
+			/>
+
+			<!-- End -->
+			<input
+				type="date"
+				name="end"
+				class="date-input"
+				value={endInput}
+				on:change={(e) => {
+					const newDate = e.currentTarget.valueAsNumber;
+					if (newDate) {
+						selectedRange = 0;
+						handleFilter({
+							...filter,
+							end: newDate,
+						});
+					}
+				}}
+			/>
 		</div>
 	</div>
 
-	<!-- Income Chart -->
-	<DashCard title="Rent Income" subtitle="The total amount of rent due.">
-		<div slot="groupBy" class="flex w-64 pb-4">
-			<span
-				class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
-			>
-				Group By
-			</span>
+	<!-- Property/Unit Filters -->
+	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
+		<!-- Property -->
+		<div class="md:w-2/3">
 			<Select
-				current={incomeGroupBy}
-				disabled={!!selectedProperty || !!selectedUnit}
-				class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
-				options={[
-					{ label: 'Ratio', value: 'ratio' },
-					{
-						label: 'Property',
-						value: 'property',
-						disabled: !!selectedProperty,
-					},
-				]}
-				on:select={(e) => {
-					if (e.detail.value === 'ratio' || e.detail.value === 'property') {
-						incomeGroupBy = e.detail.value;
+				bind:current={selectedProperty}
+				options={propertyOptions}
+				on:select={async (e) => {
+					selectedProperty = e.detail.value;
+					selectedUnit = null;
+					await handleFilter({
+						...filter,
+						propertyId: selectedProperty,
+						unitId: null,
+					});
+					if (e.detail.value) {
+						incomeGroupBy = 'ratio';
+						expensesGroupBy = 'ratio';
 					}
 				}}
 			/>
 		</div>
-		<Chart let:height let:width>
-			<canvas
-				{height}
-				{width}
-				use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
-			/>
-		</Chart>
-	</DashCard>
 
-	<!-- Expenses Chart -->
-	<DashCard
-		title="Expenses"
-		subtitle="The total amount of expenses."
-		empty={expenses.length < 1}
-	>
-		<div slot="groupBy" class="flex w-64 pb-4">
-			<span
-				class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
-			>
-				Group By
-			</span>
+		<!-- Unit -->
+		<div class="md:w-1/3">
 			<Select
-				current={expensesGroupBy}
-				disabled={!!selectedProperty || !!selectedUnit}
-				class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
-				options={[
-					{ label: 'Ratio', value: 'ratio' },
-					{
-						label: 'Property',
-						value: 'property',
-						disabled: !!selectedProperty,
-					},
-				]}
-				on:select={(e) => {
-					if (e.detail.value === 'ratio' || e.detail.value === 'property') {
-						expensesGroupBy = e.detail.value;
-					}
+				bind:current={selectedUnit}
+				options={unitOptions}
+				disabled={!selectedProperty}
+				on:select={async (e) => {
+					handleFilter({
+						...filter,
+						unitId: e.detail.value,
+					});
 				}}
 			/>
 		</div>
-		<Chart let:height let:width>
-			<canvas
-				{height}
-				{width}
-				use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
-			/>
-		</Chart>
-	</DashCard>
-
-	<!-- Occupancy Chart -->
-	<DashCard
-		title="Occupancy"
-		subtitle="The percentage of units that are empty."
-		empty={occupancy.length < 1}
-	>
-		<Chart let:height let:width>
-			<canvas {height} {width} use:occupancyChart={occupancy} />
-		</Chart>
-	</DashCard>
+	</div>
 </div>
+
+<!-- Income Chart -->
+<DashCard title="Rent Income" subtitle="The total amount of rent due.">
+	<div slot="groupBy" class="flex w-64 pb-4">
+		<span
+			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+		>
+			Group By
+		</span>
+		<Select
+			current={incomeGroupBy}
+			disabled={!!selectedProperty || !!selectedUnit}
+			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
+			options={[
+				{ label: 'Ratio', value: 'ratio' },
+				{
+					label: 'Property',
+					value: 'property',
+					disabled: !!selectedProperty,
+				},
+			]}
+			on:select={(e) => {
+				if (e.detail.value === 'ratio' || e.detail.value === 'property') {
+					incomeGroupBy = e.detail.value;
+				}
+			}}
+		/>
+	</div>
+	<Chart let:height let:width>
+		<canvas
+			{height}
+			{width}
+			use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
+		/>
+	</Chart>
+</DashCard>
+
+<!-- Expenses Chart -->
+<DashCard
+	title="Expenses"
+	subtitle="The total amount of expenses."
+	empty={expenses.length < 1}
+>
+	<div slot="groupBy" class="flex w-64 pb-4">
+		<span
+			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+		>
+			Group By
+		</span>
+		<Select
+			current={expensesGroupBy}
+			disabled={!!selectedProperty || !!selectedUnit}
+			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
+			options={[
+				{ label: 'Ratio', value: 'ratio' },
+				{
+					label: 'Property',
+					value: 'property',
+					disabled: !!selectedProperty,
+				},
+			]}
+			on:select={(e) => {
+				if (e.detail.value === 'ratio' || e.detail.value === 'property') {
+					expensesGroupBy = e.detail.value;
+				}
+			}}
+		/>
+	</div>
+	<Chart let:height let:width>
+		<canvas
+			{height}
+			{width}
+			use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
+		/>
+	</Chart>
+</DashCard>
+
+<!-- Occupancy Chart -->
+<DashCard
+	title="Occupancy"
+	subtitle="The percentage of units that are empty."
+	empty={occupancy.length < 1}
+>
+	<Chart let:height let:width>
+		<canvas {height} {width} use:occupancyChart={occupancy} />
+	</Chart>
+</DashCard>
 
 <style lang="postcss">
 	.date-input {
