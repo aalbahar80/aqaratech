@@ -43,7 +43,7 @@ export class Expense extends Entity {
 		unitId: null,
 	});
 
-	override getRelationOptions = (data = this.data) => {
+	override getRelationOptions = (data: any = this.data) => {
 		return {
 			client: data?.client
 				? new Client(data.client).toOption()

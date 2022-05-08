@@ -43,7 +43,7 @@ export class MaintenanceOrder extends Entity {
 
 	basicFields = ['title', 'description', 'status', 'completedAt'] as const;
 
-	override getRelationOptions = (data = this.data) => {
+	override getRelationOptions = (data: any = this.data) => {
 		return {
 			client: data?.client
 				? new Client(data.client).toOption()
