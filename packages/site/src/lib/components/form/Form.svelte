@@ -185,10 +185,7 @@
 									{client}
 									{property}
 									{unit}
-									initial={entity.data?.unit?.id ||
-										entity.data?.property?.id ||
-										entity.data?.client?.id ||
-										undefined}
+									initial={entity.attribution}
 									invalid={!!getValue($errors, 'clientId')}
 									invalidText={getValue($errors, 'clientId')?.[0]}
 									on:select={(e) => {

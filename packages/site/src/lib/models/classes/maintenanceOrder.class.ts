@@ -3,6 +3,7 @@ import { Client } from '$lib/models/classes/client.class';
 import { Entity } from '$lib/models/classes/entity.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
+import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/maintenanceOrder.schema';
@@ -14,11 +15,11 @@ export class MaintenanceOrder extends Entity {
 	static plural = 'maintenanceOrders';
 	static pluralCap = 'MaintenanceOrders';
 	static schema = baseSchema;
+	public attribution: string | undefined = undefined;
 
 	constructor(
 		public data:
 			| InferQueryOutput<'maintenanceOrders:basic'>
-			| InferQueryOutput<'maintenanceOrders:read'>
 			| InferQueryOutput<'maintenanceOrders:list'>['data'][number]
 			| Partial<PMaintenanceOrder>,
 		public urlName = MaintenanceOrder.urlName,
@@ -43,47 +44,29 @@ export class MaintenanceOrder extends Entity {
 
 	basicFields = ['title', 'description', 'status', 'completedAt'] as const;
 
-	override getRelationOptions = (data: any = this.data) => {
-		return {
-			client: data?.client
-				? new Client(data.client).toOption()
-				: data.property?.client
-				? new Client(data.property.client).toOption()
-				: data.unit?.property?.client
-				? new Client(data.unit.property.client).toOption()
-				: undefined,
-			property: data.property
-				? new Property(data.property).toOption()
-				: data.unit?.property
-				? new Property(data.unit.property).toOption()
-				: undefined,
-			unit: data.unit ? new Unit(data.unit).toOption() : undefined,
+	override getRelationOptions = (data = this.data) => {
+		const relations: RelationOptions = {
+			client: undefined,
+			property: undefined,
+			unit: undefined,
 			tenant: undefined,
 			lease: undefined,
 		};
+		if ('unit' in data && data.unit) {
+			this.attribution = data.unit?.id;
+			relations.unit = new Unit(data.unit).toOption();
+			relations.property = new Property(data.unit.property).toOption();
+			relations.client = new Client(data.unit.property.client).toOption();
+		} else if ('property' in data && data.property) {
+			this.attribution = data.property?.id;
+			relations.property = new Property(data.property).toOption();
+			relations.client = new Client(data.property.client).toOption();
+		} else if ('client' in data && data.client) {
+			this.attribution = data.client?.id;
+			relations.client = new Client(data.client).toOption();
+		}
+		return relations;
 	};
-
-	// override getRelationOptions = (
-	// 	data: InferQueryOutput<`maintenanceOrders:basic`>,
-	// ) => {
-	// 	return {
-	// 		client: data?.client
-	// 			? new Client(data.client).toOption()
-	// 			: data.property?.client
-	// 			? new Client(data.property.client).toOption()
-	// 			: data.unit?.property?.client
-	// 			? new Client(data.unit.property.client).toOption()
-	// 			: undefined,
-	// 		property: data.property
-	// 			? new Property(data.property).toOption()
-	// 			: data.unit?.property
-	// 			? new Property(data.unit.property).toOption()
-	// 			: undefined,
-	// 		unit: data.unit ? new Unit(data.unit).toOption() : undefined,
-	// 		tenant: undefined,
-	// 		lease: undefined,
-	// 	};
-	// };
 
 	static getList = async () => {
 		const result = await trpc().query('maintenanceOrders:list', { size: 20 });

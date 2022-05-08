@@ -1,5 +1,6 @@
 import type {
-	Option, SelectedOption
+	Option,
+	RelationOptions,
 } from '$lib/models/interfaces/option.interface';
 import type { EntityTitle } from '$lib/models/types/entity.type';
 
@@ -39,12 +40,4 @@ export abstract class Entity {
 		tenant: undefined,
 		lease: undefined,
 	});
-}
-
-interface RelationOptions {
-	client?: SelectedOption;
-	property?: SelectedOption;
-	unit?: SelectedOption;
-	tenant?: SelectedOption;
-	lease?: SelectedOption;
 }
