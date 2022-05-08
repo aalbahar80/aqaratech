@@ -19,7 +19,8 @@ export const config: PlaywrightTestConfig = {
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: path.resolve(__dirname, 'global-setup.ts'),
-	reporter: process.env.CI ? 'list' : [['list'], ['html']],
+	reporter:
+		process.env.CI || process.env.DOCKER ? 'list' : [['list'], ['html']],
 	use: {
 		baseURL: 'http://localhost:3000/',
 		screenshot: 'only-on-failure',
