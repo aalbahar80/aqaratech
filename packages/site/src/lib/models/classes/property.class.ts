@@ -41,8 +41,8 @@ export class Property extends Entity {
 
 	override relationalFields = ['clientId'] as const;
 
-	override getRelationOptions = (data = this.data) => ({
-		client: 'client' in data ? new Client(data.client).toOption() : undefined,
+	override getRelationOptions = () => ({
+		client: 'client' in this.data ? new Client(this.data.client).toOption() : undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,

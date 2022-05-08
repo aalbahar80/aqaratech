@@ -48,8 +48,8 @@ export class Transaction extends Entity {
 		'memo',
 	] as const;
 
-	override getRelationOptions = (data = this.data) => ({
-		lease: 'lease' in data ? new Lease(data.lease).toOption() : undefined,
+	override getRelationOptions = () => ({
+		lease: 'lease' in this.data ? new Lease(this.data.lease).toOption() : undefined,
 		client: undefined,
 		property: undefined,
 		unit: undefined,

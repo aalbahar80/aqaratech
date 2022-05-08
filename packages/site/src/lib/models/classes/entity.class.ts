@@ -31,9 +31,7 @@ export abstract class Entity {
 
 	relationalFields: readonly string[] = [];
 
-	// Change data type to this.data?
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	getRelationOptions = (data: any = undefined): RelationOptions => ({
+	getRelationOptions = (): RelationOptions => ({
 		client: undefined,
 		property: undefined,
 		unit: undefined,

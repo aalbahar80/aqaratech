@@ -1,6 +1,7 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
+import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { getUnitLabel } from '$lib/utils/common';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
@@ -53,19 +54,20 @@ export class Unit extends Entity {
 	] as const;
 	override relationalFields = ['clientId', 'propertyId'] as const;
 
-	override getRelationOptions = (data = this.data) => {
-		console.log({ data }, 'unit.class.ts ~ 46');
-		return {
-			client:
-				'property' in data
-					? new Client(data.property.client).toOption()
-					: undefined,
-			property:
-				'property' in data ? new Property(data.property).toOption() : undefined,
+	override getRelationOptions = () => {
+		const data = this.data;
+		const options: RelationOptions = {
+			client: undefined,
+			property: undefined,
 			unit: undefined,
 			tenant: undefined,
 			lease: undefined,
 		};
+		if ('property' in data) {
+			options.property = new Property(data.property).toOption();
+			options.client = new Client(data.property.client).toOption();
+		}
+		return options;
 	};
 
 	public static getLabel = (item: ILabel) => getUnitLabel(item);

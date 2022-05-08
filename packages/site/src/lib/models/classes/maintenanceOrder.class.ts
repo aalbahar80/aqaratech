@@ -1,9 +1,5 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Client } from '$lib/models/classes/client.class';
 import { Entity } from '$lib/models/classes/entity.class';
-import { Property } from '$lib/models/classes/property.class';
-import { Unit } from '$lib/models/classes/unit.class';
-import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';

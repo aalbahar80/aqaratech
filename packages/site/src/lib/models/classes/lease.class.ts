@@ -3,9 +3,10 @@ import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Tenant } from '$lib/models/classes/tenant.class';
 import { Unit } from '$lib/models/classes/unit.class';
+import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import {
 	leaseFormSchema as extendedSchema,
-	schema as baseSchema,
+	schema as baseSchema
 } from '$models/schemas/lease.schema';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
@@ -25,8 +26,6 @@ export class Lease extends Entity {
 	constructor(
 		public data:
 			| InferQueryOutput<'leases:basic'>
-			| InferQueryOutput<'leases:read'>
-			| InferQueryOutput<'leases:list'>['data'][number]
 			| Partial<PLease>,
 		public urlName = Lease.urlName,
 		public singular = 'lease',
@@ -69,12 +68,26 @@ export class Lease extends Entity {
 		'tenantId',
 	] as const;
 
-	override getRelationOptions = (data = this.data) => ({
-		client: 'unit' in data && 'client' in data.unit.property ? new Client(data.unit.property.client).toOption() : undefined,
-		property: 'unit' in data ? new Property(data.unit.property).toOption() : undefined,
-		unit: 'unit' in data ? new Unit(data.unit).toOption() : undefined,
-		tenant: 'tenant' in data ? new Tenant(data.tenant).toOption() : undefined,
-	});
+	override getRelationOptions = () => {
+		const data = this.data;
+		const options: RelationOptions = {
+			client: undefined,
+			property: undefined,
+			unit: undefined,
+			tenant: undefined,
+			lease: undefined,
+		};
+
+		if ('tenant' in data) {
+			options.tenant = new Tenant(data.tenant).toOption();
+		}
+		if ('unit' in data) {
+			options.unit = new Unit(data.unit).toOption();
+			options.property = new Property(data.unit.property).toOption();
+			options.client = new Client(data.unit.property.client).toOption();
+		}
+		return options
+	}
 
 	static getList = async () => {
 		const result = await trpc().query('leases:search', {});
