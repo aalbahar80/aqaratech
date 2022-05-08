@@ -6,7 +6,9 @@ import nonAuthConfig from './non-auth/playwright.config.js';
 const config: PlaywrightTestConfig = {
 	...baseConfig,
 	projects: [
+        //@ts-ignore
         ...adminConfig.projects,
+        //@ts-ignore
         ...nonAuthConfig.projects,
 		{
 			name: 'pay',
