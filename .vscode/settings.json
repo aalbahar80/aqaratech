@@ -48,8 +48,8 @@
 	// "svelte.trace.server": "verbose",
 	"editor.formatOnType": false,
 	// formatOnSave causes issues with cpu load?
-	"editor.formatOnSave": false,
-	"eslint.run": "onSave",
+	// "editor.formatOnSave": false,
+	// "eslint.run": "onSave",
 	"svelte.enable-ts-plugin": true,
 	// "svelte.plugin.svelte.codeActions.enable": false,
 	// "svelte.plugin.svelte.format.enable": false,

@@ -10,11 +10,11 @@
 	export let id: string | undefined = undefined;
 	export let title = '';
 	export let options: Option[];
-	export let current: T | undefined = undefined;
+	export let current: T;
 	export let disabled = false;
 
 	const dispatch = createEventDispatcher<{
-		select: { value: T };
+		select: { value: typeof current };
 	}>();
 </script>
 
