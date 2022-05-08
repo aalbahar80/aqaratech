@@ -3,7 +3,7 @@ import path from 'path';
 import {
 	getAddress,
 	getName,
-	getUnitLabel
+	getUnitLabel,
 } from '../../../src/lib/utils/common.js';
 import { test as base } from '../../config';
 import { LeaseForm } from '../form.js';
@@ -46,14 +46,15 @@ test.describe('edit lease', async () => {
 		await page.goto(`/leases/${form.id}/edit`);
 	});
 
-	// TODO: implement this before testing it
-	// test('property is preselected', async ({ page, form }) => {
-	// 	await preselected(
-	// 		page,
-	// 		page.locator('#propertyId'),
-	// 		getAddress(form.property),
-	// 	);
-	// });
+	test('client is preselected', async ({ page, form }) => {
+		const el = page.locator('#clientId');
+		await expect(el).toContainText(getName(form.client));
+	});
+
+	test('property is preselected', async ({ page, form }) => {
+		const el = page.locator('#propertyId');
+		await expect(el).toContainText(getAddress(form.property));
+	});
 
 	test('unit is preselected', async ({ page, form }) => {
 		const el = page.locator('#unitId');
