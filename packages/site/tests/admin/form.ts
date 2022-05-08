@@ -8,7 +8,7 @@ import {
 	fakeTenant,
 	fakeUnit,
 } from '../../../seed/generators.js';
-import type { Entity } from '../../src/lib/models/types/entity.type.js';
+import type { EntityTitle } from '../../src/lib/models/types/entity.type';
 import {
 	dateToInput,
 	getAddress,
@@ -46,7 +46,7 @@ export class Form {
 	editUrl: string;
 	public basket = new Basket();
 
-	constructor(public urlName: Entity, public id: string) {
+	constructor(public urlName: EntityTitle, public id: string) {
 		// super(urlName);
 		this.editUrl = `/${this.urlName}/${this.id}/edit`;
 		this.createUrl = `/new/${this.urlName}`;
@@ -68,7 +68,7 @@ export class Form {
 }
 
 export class ClientForm extends Form {
-	static urlName: Entity = 'clients';
+	static urlName: EntityTitle = 'clients';
 	constructor(public data = fakeClient()) {
 		super(ClientForm.urlName, data.id);
 	}
@@ -104,7 +104,7 @@ export class ClientForm extends Form {
 }
 
 export class PropertyForm extends Form {
-	static urlName: Entity = 'properties';
+	static urlName: EntityTitle = 'properties';
 	client: ReturnType<typeof fakeClient>;
 	constructor(public data = fakeProperty()) {
 		super(PropertyForm.urlName, data.id);
@@ -154,7 +154,7 @@ export class PropertyForm extends Form {
 }
 
 export class UnitForm extends Form {
-	static urlName: Entity = 'units';
+	static urlName: EntityTitle = 'units';
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	constructor(public data = fakeUnit()) {
@@ -210,7 +210,7 @@ export class UnitForm extends Form {
 }
 
 export class TenantForm extends Form {
-	static urlName: Entity = 'tenants';
+	static urlName: EntityTitle = 'tenants';
 	constructor(public data = fakeTenant()) {
 		super(TenantForm.urlName, data.id);
 	}
@@ -245,7 +245,7 @@ export class TenantForm extends Form {
 }
 
 export class LeaseForm extends Form {
-	static urlName: Entity = 'leases';
+	static urlName: EntityTitle = 'leases';
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	unit: ReturnType<typeof fakeUnit>;
@@ -316,7 +316,7 @@ export class LeaseForm extends Form {
 }
 
 export class ExpenseForm extends Form {
-	static urlName: Entity = 'expenses';
+	static urlName: EntityTitle = 'expenses';
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
@@ -339,7 +339,7 @@ export class ExpenseForm extends Form {
 		await page.selectOption('#clientId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
 		await page.selectOption('#unitId', { index: 0 });
-		await page.locator('#clientId-radio').click();
+		await page.locator('#propertyId-radio').click();
 	}
 
 	public alter() {
@@ -387,7 +387,7 @@ export class ExpenseForm extends Form {
 }
 
 export class MaintenanceOrderForm extends Form {
-	static urlName: Entity = 'maintenanceOrders';
+	static urlName: EntityTitle = 'maintenanceOrders';
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
@@ -413,7 +413,7 @@ export class MaintenanceOrderForm extends Form {
 		await page.selectOption('#clientId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
 		await page.selectOption('#unitId', { index: 0 });
-		await page.locator('#clientId-radio').click();
+		await page.locator('#unitId-radio').click();
 	}
 
 	public alter() {
