@@ -61,7 +61,7 @@ export class Client extends Entity {
 
 	static getList = async () => {
 		const result = await trpc().query('clients:list', {
-			size: 100,
+			size: 1000,
 		});
 		return result.data.map((data) => new Client(data));
 	};

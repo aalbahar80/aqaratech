@@ -80,7 +80,7 @@ export class Unit extends Entity {
 		try {
 			// catch error when empty string is passed
 			const result = await trpc().query('units:list', {
-				size: 100,
+				size: 1000,
 				propertyId,
 			});
 			return result.data.map((data) => new Unit(data));

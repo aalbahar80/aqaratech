@@ -71,7 +71,7 @@ export class Property extends Entity {
 
 	static getList = async (clientId?: string) => {
 		const result = await trpc().query('properties:list', {
-			size: 100,
+			size: 1000,
 			clientId,
 		});
 		return result.data.map((data) => new Property(data));
