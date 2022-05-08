@@ -30,20 +30,18 @@ export class Property extends Entity {
 		super();
 	}
 
-	static defaultForm = (): Partial<z.input<typeof baseSchema>> => ({
+	defaultForm = (): Partial<z.input<typeof baseSchema>> => ({
 		area: '',
 		block: '',
 		avenue: '',
 		street: '',
 		number: '',
 	});
-	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
+	basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
 
-	static relationalFields = ['clientId'] as const;
+	override relationalFields = ['clientId'] as const;
 
-	static override getRelationOptions = (
-		data: InferQueryOutput<`properties:basic`>,
-	) => ({
+	override getRelationOptions = (data = this.data) => ({
 		client: new Client(data.client).toOption(),
 		property: undefined,
 		unit: undefined,

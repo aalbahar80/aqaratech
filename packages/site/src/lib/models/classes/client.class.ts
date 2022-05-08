@@ -29,7 +29,7 @@ export class Client extends Entity {
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
 		lastName: '',
 		phone: null,
@@ -38,7 +38,7 @@ export class Client extends Entity {
 		dob: null,
 	});
 
-	static basicFields = [
+	basicFields = [
 		'firstName',
 		'lastName',
 		'phone',

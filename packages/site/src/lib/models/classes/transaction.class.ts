@@ -26,7 +26,7 @@ export class Transaction {
 		public schema = baseSchema,
 	) {}
 
-	static defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),
 		postAt: new Date(),
 		isPaid: false,
@@ -36,7 +36,7 @@ export class Transaction {
 		paidAt: '',
 	});
 
-	static basicFields = [
+	basicFields = [
 		'amount',
 		'dueAt',
 		'postAt',
@@ -44,11 +44,9 @@ export class Transaction {
 		'paidAt',
 		'memo',
 	] as const;
-	static relationalFields = [] as const;
+	relationalFields = [] as const;
 
-	static getRelationOptions = (
-		data: InferQueryOutput<`transactions:basic`>,
-	) => ({
+	override getRelationOptions = (data = this.data) => ({
 		lease: new Lease(data.lease).toOption(),
 		client: undefined,
 		property: undefined,

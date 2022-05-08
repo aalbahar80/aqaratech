@@ -39,7 +39,7 @@ export class Lease extends Entity {
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof extendedSchema> => ({
+	defaultForm = (): z.input<typeof extendedSchema> => ({
 		start: new Date(),
 		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 		monthlyRent: 0,
@@ -54,7 +54,7 @@ export class Lease extends Entity {
 		}),
 	});
 
-	static basicFields = [
+	basicFields = [
 		'monthlyRent',
 		'start',
 		'end',
@@ -62,16 +62,14 @@ export class Lease extends Entity {
 		'active',
 	] as const;
 
-	static relationalFields = [
+	override relationalFields = [
 		'clientId',
 		'propertyId',
 		'unitId',
 		'tenantId',
 	] as const;
 
-	static override getRelationOptions = (
-		data: InferQueryOutput<`leases:basic`>,
-	) => ({
+	override getRelationOptions = (data = this.data) => ({
 		client: new Client(data.unit.property.client).toOption(),
 		property: new Property(data.unit.property).toOption(),
 		unit: new Unit(data.unit).toOption(),

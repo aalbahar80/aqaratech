@@ -30,7 +30,7 @@ export class Unit extends Entity {
 	) {
 		super();
 	}
-	static defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): z.input<typeof baseSchema> => ({
 		unitNumber: '',
 		bed: null,
 		bath: null,
@@ -41,7 +41,7 @@ export class Unit extends Entity {
 		type: null,
 		propertyId: '',
 	});
-	static basicFields = [
+	basicFields = [
 		'type',
 		'unitNumber',
 		'bed',
@@ -51,11 +51,9 @@ export class Unit extends Entity {
 		'floor',
 		'usage',
 	] as const;
-	static relationalFields = ['clientId', 'propertyId'] as const;
+	override relationalFields = ['clientId', 'propertyId'] as const;
 
-	static override getRelationOptions = (
-		data: InferQueryOutput<`units:basic`>,
-	) => {
+	override getRelationOptions = (data = this.data) => {
 		console.log({ data }, 'unit.class.ts ~ 46');
 		return {
 			client: new Client(data.property.client).toOption(),

@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
-	import type { Entity } from '$lib/models/types';
+	import type { Entity } from '$lib/models/types/entity.type';
 	import { classMap } from '../../lib/models/classes/all.class';
 	import type { Load } from './[entity]';
 
@@ -14,19 +14,15 @@
 </script>
 
 <script lang="ts">
-	export let predefined: Record<string, string>;
+	export let predefined: any;
 
-	const entity = $page.params.entity as Entity;
-	const cstor = classMap[entity];
-	const defaultForm = cstor.defaultForm();
-	const data = {
-		...defaultForm,
-		...predefined,
-	};
+	const entityName = $page.params.entity as Entity;
+	const entity = new classMap[entityName](predefined);
+	entity.data = { ...entity.defaultForm(), ...predefined };
 </script>
 
 <svelte:head>
-	<title>{`New ${cstor.singularCap}`}</title>
+	<title>{`New ${entity.singularCap}`}</title>
 </svelte:head>
 
-<Form {cstor} {data} />
+<Form {entity} />

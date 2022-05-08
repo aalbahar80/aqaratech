@@ -77,7 +77,7 @@
 		},
 	});
 
-	const options = entity.getRelationOptions(data);
+	const options = entity.getRelationOptions();
 	let { client, property, unit, tenant } = options;
 </script>
 

@@ -30,7 +30,7 @@ export class Expense {
 		public schema = baseSchema,
 	) {}
 
-	static defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): z.input<typeof baseSchema> => ({
 		amount: 0,
 		category: '',
 		postAt: new Date(),
@@ -40,7 +40,7 @@ export class Expense {
 		unitId: null,
 	});
 
-	static getRelationOptions = (data: InferQueryOutput<`expenses:basic`>) => {
+	override getRelationOptions = (data = this.data) => {
 		return {
 			client: data?.client
 				? new Client(data.client).toOption()
@@ -60,8 +60,8 @@ export class Expense {
 		};
 	};
 
-	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
-	static relationalFields = [] as const;
+	basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
+	relationalFields = [] as const;
 
 	static getList = async () => {
 		const result = await trpc().query('expenses:list', { size: 20 });

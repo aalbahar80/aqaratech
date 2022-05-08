@@ -29,7 +29,7 @@
 	export let predefined: Predefined;
 
 	const lease = {
-		...Lease.defaultForm(),
+		...new Lease({}).defaultForm(),
 		...predefined,
 	};
 	console.log({ lease }, 'LeaseForm.svelte ~ 42');

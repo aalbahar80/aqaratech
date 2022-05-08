@@ -29,7 +29,7 @@ export class Tenant extends Entity {
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
 		lastName: '',
 		dob: '',
@@ -42,7 +42,7 @@ export class Tenant extends Entity {
 		residencyEnd: '',
 	});
 
-	static basicFields = [
+	basicFields = [
 		'firstName',
 		'lastName',
 		'email',
@@ -54,9 +54,8 @@ export class Tenant extends Entity {
 		'residencyNum',
 		'residencyEnd',
 	] as const;
-	static relationalFields = [] as const;
 
-	public static getLabel = (item: ILabel) => getName(item);
+	static getLabel = (item: ILabel) => getName(item);
 	public getLabel = () => {
 		if (this.data.firstName && this.data.lastName) {
 			return concatIfExists([this.data.firstName, this.data.lastName]);
