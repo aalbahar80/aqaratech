@@ -2,7 +2,7 @@
 	"css.validate": false,
 	"files.exclude": {
 		// this interfering with imports?
-		// "**/node_modules/": true
+		"**/node_modules/": true
 	},
 	"html.autoCreateQuotes": false,
 	"editor.suggest.showWords": false,
@@ -38,11 +38,24 @@
 		"**/*.json",
 		"package.json"
 	],
-	"editor.formatOnType": true,
 	"js/ts.implicitProjectConfig.strictNullChecks": true,
 	"path-intellisense.ignoreTsConfigBaseUrl": true,
 	// "typescript.inlayHints.parameterTypes.enabled": true,
 	// "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
 	// "typescript.inlayHints.variableTypes.enabled": true,
-	"typescript.preferences.importModuleSpecifier": "non-relative"
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	// BELOW DEBUG SLOW PERFORMANCE
+	// "svelte.trace.server": "verbose",
+	"editor.formatOnType": false,
+	// formatOnSave causes issues with cpu load?
+	"editor.formatOnSave": false,
+	"eslint.run": "onSave",
+	"svelte.enable-ts-plugin": true,
+	// "svelte.plugin.svelte.codeActions.enable": false,
+	// "svelte.plugin.svelte.format.enable": false,
+	// "svelte.plugin.typescript.semanticTokens.enable": false,
+	// The setting svelte.plugin.typescript.diagnostics.enable" causes HIGH CPU LOAD,
+	// "svelte.plugin.typescript.diagnostics.enable": false,
+	// "svelte.plugin.typescript.codeActions.enable": false,
+	// "svelte.plugin.svelte.diagnostics.enable": false
 }
