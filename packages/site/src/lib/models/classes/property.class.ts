@@ -13,6 +13,8 @@ export class Property extends Entity {
 	static plural = 'properties';
 	static pluralCap = 'Properties';
 	static schema = baseSchema;
+	static relationalFields = ['clientId'] as const;
+	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
 
 	constructor(
 		public data:
@@ -26,6 +28,8 @@ export class Property extends Entity {
 		public plural = 'properties',
 		public pluralCap = 'Properties',
 		public schema = baseSchema,
+		public override relationalFields = Property.relationalFields,
+		public override basicFields = Property.basicFields,
 	) {
 		super();
 	}
@@ -37,12 +41,12 @@ export class Property extends Entity {
 		street: '',
 		number: '',
 	});
-	basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
-
-	override relationalFields = ['clientId'] as const;
 
 	override getRelationOptions = () => ({
-		client: 'client' in this.data ? new Client(this.data.client).toOption() : undefined,
+		client:
+			'client' in this.data
+				? new Client(this.data.client).toOption()
+				: undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,

@@ -14,6 +14,8 @@ export class Expense extends Entity {
 	static pluralCap = 'Expenses';
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
+	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
+	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
 
 	constructor(
 		public data:
@@ -27,6 +29,7 @@ export class Expense extends Entity {
 		public plural = 'expenses',
 		public pluralCap = 'Expenses',
 		public schema = baseSchema,
+		public override basicFields = Expense.basicFields,
 	) {
 		super();
 	}
@@ -46,8 +49,6 @@ export class Expense extends Entity {
 		this.attribution = parsed.attribution;
 		return parsed.options;
 	};
-
-	basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
 
 	static getList = async () => {
 		const result = await trpc().query('expenses:list', { size: 20 });

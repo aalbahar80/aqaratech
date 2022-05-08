@@ -12,6 +12,15 @@ export class Transaction extends Entity {
 	static plural = 'transactions';
 	static pluralCap = 'Transactions';
 	static schema = baseSchema;
+	static relationalFields = ['tenantId', 'leaseId'] as const;
+	static basicFields = [
+		'amount',
+		'dueAt',
+		'postAt',
+		'isPaid',
+		'paidAt',
+		'memo',
+	] as const;
 
 	constructor(
 		public data:
@@ -25,10 +34,12 @@ export class Transaction extends Entity {
 		public plural = 'transactions',
 		public pluralCap = 'Transactions',
 		public schema = baseSchema,
+		public override relationalFields = Transaction.relationalFields,
+		public override basicFields = Transaction.basicFields,
 	) {
 		super();
 	}
-	
+
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),
 		postAt: new Date(),
@@ -39,17 +50,9 @@ export class Transaction extends Entity {
 		paidAt: '',
 	});
 
-	basicFields = [
-		'amount',
-		'dueAt',
-		'postAt',
-		'isPaid',
-		'paidAt',
-		'memo',
-	] as const;
-
 	override getRelationOptions = () => ({
-		lease: 'lease' in this.data ? new Lease(this.data.lease).toOption() : undefined,
+		lease:
+			'lease' in this.data ? new Lease(this.data.lease).toOption() : undefined,
 		client: undefined,
 		property: undefined,
 		unit: undefined,

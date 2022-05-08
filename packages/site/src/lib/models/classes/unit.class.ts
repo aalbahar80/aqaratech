@@ -15,9 +15,20 @@ export class Unit extends Entity {
 	static plural = 'units';
 	static pluralCap = 'Units';
 	static schema = baseSchema;
+	static relationalFields = ['clientId', 'propertyId'] as const;
+	static basicFields = [
+		'type',
+		'unitNumber',
+		'bed',
+		'bath',
+		'size',
+		'marketRent',
+		'floor',
+		'usage',
+	] as const;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'units:basic'>
 			| InferQueryOutput<'units:read'>
 			| Partial<PUnit>
@@ -28,6 +39,8 @@ export class Unit extends Entity {
 		public plural = 'units',
 		public pluralCap = 'Units',
 		public schema = baseSchema,
+		public override relationalFields = Unit.relationalFields,
+		public override basicFields = Unit.basicFields,
 	) {
 		super();
 	}
@@ -42,17 +55,6 @@ export class Unit extends Entity {
 		type: null,
 		propertyId: '',
 	});
-	basicFields = [
-		'type',
-		'unitNumber',
-		'bed',
-		'bath',
-		'size',
-		'marketRent',
-		'floor',
-		'usage',
-	] as const;
-	override relationalFields = ['clientId', 'propertyId'] as const;
 
 	override getRelationOptions = () => {
 		const data = this.data;
@@ -63,7 +65,7 @@ export class Unit extends Entity {
 			tenant: undefined,
 			lease: undefined,
 		};
-		if ('property' in data) {
+		if (data && 'property' in data) {
 			options.property = new Property(data.property).toOption();
 			options.client = new Client(data.property.client).toOption();
 		}
@@ -73,7 +75,7 @@ export class Unit extends Entity {
 	public static getLabel = (item: ILabel) => getUnitLabel(item);
 
 	override getLabel = () => {
-		return getUnitLabel(this.data);
+		return this.data ? getUnitLabel(this.data) : '';
 	};
 
 	static getList = async (propertyId?: string) => {

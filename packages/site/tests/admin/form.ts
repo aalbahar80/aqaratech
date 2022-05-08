@@ -8,6 +8,13 @@ import {
 	fakeTenant,
 	fakeUnit,
 } from '../../../seed/generators.js';
+import {
+	Expense,
+	Lease,
+	MaintenanceOrder,
+	Property,
+	Unit,
+} from '../../src/lib/models/classes';
 import type { EntityTitle } from '../../src/lib/models/types/entity.type';
 import {
 	dateToInput,
@@ -44,6 +51,7 @@ class Basket {
 export class Form {
 	createUrl: string;
 	editUrl: string;
+	relationalFields: readonly string[] = [];
 	public basket = new Basket();
 
 	constructor(public urlName: EntityTitle, public id: string) {
@@ -72,6 +80,7 @@ export class ClientForm extends Form {
 	constructor(public data = fakeClient()) {
 		super(ClientForm.urlName, data.id);
 	}
+	override relationalFields = Unit.relationalFields;
 
 	public async fill(page: Page) {
 		await page.fill('input[name="firstName"]', this.data.firstName);
@@ -105,6 +114,8 @@ export class ClientForm extends Form {
 
 export class PropertyForm extends Form {
 	static urlName: EntityTitle = 'properties';
+	override relationalFields = Property.relationalFields;
+
 	client: ReturnType<typeof fakeClient>;
 	constructor(public data = fakeProperty()) {
 		super(PropertyForm.urlName, data.id);
@@ -246,6 +257,7 @@ export class TenantForm extends Form {
 
 export class LeaseForm extends Form {
 	static urlName: EntityTitle = 'leases';
+	override relationalFields = Lease.relationalFields;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	unit: ReturnType<typeof fakeUnit>;
@@ -317,6 +329,7 @@ export class LeaseForm extends Form {
 
 export class ExpenseForm extends Form {
 	static urlName: EntityTitle = 'expenses';
+	override relationalFields = Expense.relationalFields;
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),
@@ -388,6 +401,7 @@ export class ExpenseForm extends Form {
 
 export class MaintenanceOrderForm extends Form {
 	static urlName: EntityTitle = 'maintenanceOrders';
+	override relationalFields = MaintenanceOrder.relationalFields;
 	constructor(
 		public client = fakeClient(),
 		public property = fakeProperty(client.id),

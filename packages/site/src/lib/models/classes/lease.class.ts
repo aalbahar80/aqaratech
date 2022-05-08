@@ -6,7 +6,7 @@ import { Unit } from '$lib/models/classes/unit.class';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import {
 	leaseFormSchema as extendedSchema,
-	schema as baseSchema
+	schema as baseSchema,
 } from '$models/schemas/lease.schema';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
@@ -22,11 +22,17 @@ export class Lease extends Entity {
 	static pluralCap = 'Leases';
 	static schema = baseSchema;
 	static leaseFormSchema = extendedSchema;
+	static relationalFields = ['clientId', 'propertyId', 'tenantId'] as const;
+	static basicFields = [
+		'monthlyRent',
+		'start',
+		'end',
+		'shouldNotify',
+		'active',
+	] as const;
 
 	constructor(
-		public data:
-			| InferQueryOutput<'leases:basic'>
-			| Partial<PLease>,
+		public data: InferQueryOutput<'leases:basic'> | Partial<PLease>,
 		public urlName = Lease.urlName,
 		public singular = 'lease',
 		public singularCap = 'Lease',
@@ -34,6 +40,8 @@ export class Lease extends Entity {
 		public pluralCap = 'Leases',
 		public schema = baseSchema,
 		public leaseFormSchema = extendedSchema,
+		public override relationalFields = Lease.relationalFields,
+		public override basicFields = Lease.basicFields,
 	) {
 		super();
 	}
@@ -53,21 +61,6 @@ export class Lease extends Entity {
 		}),
 	});
 
-	basicFields = [
-		'monthlyRent',
-		'start',
-		'end',
-		'shouldNotify',
-		'active',
-	] as const;
-
-	override relationalFields = [
-		'clientId',
-		'propertyId',
-		'unitId',
-		'tenantId',
-	] as const;
-
 	override getRelationOptions = () => {
 		const data = this.data;
 		const options: RelationOptions = {
@@ -86,8 +79,8 @@ export class Lease extends Entity {
 			options.property = new Property(data.unit.property).toOption();
 			options.client = new Client(data.unit.property.client).toOption();
 		}
-		return options
-	}
+		return options;
+	};
 
 	static getList = async () => {
 		const result = await trpc().query('leases:search', {});

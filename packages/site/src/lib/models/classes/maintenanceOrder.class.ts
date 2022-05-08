@@ -13,6 +13,13 @@ export class MaintenanceOrder extends Entity {
 	static pluralCap = 'MaintenanceOrders';
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
+	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
+	static basicFields = [
+		'title',
+		'description',
+		'status',
+		'completedAt',
+	] as const;
 
 	constructor(
 		public data:
@@ -25,6 +32,7 @@ export class MaintenanceOrder extends Entity {
 		public plural = 'maintenanceOrders',
 		public pluralCap = 'MaintenanceOrders',
 		public schema = baseSchema,
+		public override basicFields = MaintenanceOrder.basicFields,
 	) {
 		super();
 	}
@@ -38,8 +46,6 @@ export class MaintenanceOrder extends Entity {
 		propertyId: null,
 		clientId: null,
 	});
-
-	basicFields = ['title', 'description', 'status', 'completedAt'] as const;
 
 	override getRelationOptions = () => {
 		const parsed = parseRelationOptions(this.data);
