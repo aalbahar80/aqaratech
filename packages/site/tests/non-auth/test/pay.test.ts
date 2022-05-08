@@ -17,7 +17,12 @@ const fill = async (page: Page, success = true) => {
 	await page.locator('select').nth(3).selectOption('2025');
 	await page.locator('input[name="cardPin"]').fill('1111');
 	await page.locator('text=Submit').click();
-	await page.locator('input:has-text("Confirm")').click();
+	page.locator('input:has-text("Confirm")').click(),
+
+	// myfatoorah test env can be slow (especially declined transactions)
+	await expect(page).toHaveURL(/^http:\/\/127\.0\.0\.1.*/, {
+		timeout: 90 * 1000,
+	});
 };
 
 const test = base.extend<{ trxId: string }>({
@@ -48,7 +53,6 @@ test('indicate payment success', async ({ page, trxId }) => {
 });
 
 test('indicate payment failure', async ({ page, trxId }) => {
-	// test.slow(true, 'failed payments are slow on myfatoorah');
 	await page.goto(`/p/transactions/${trxId}`);
 	await Promise.all([
 		page.waitForNavigation(),
