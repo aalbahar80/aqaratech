@@ -1,8 +1,8 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { concatIfExists, getName } from '$lib/utils/common';
 import type { Tenant as PTenant } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/tenant.schema';
+import { schema as baseSchema } from '../schemas/tenant.schema';
 import { Entity } from './entity.class';
 
 export class Tenant extends Entity {
@@ -11,13 +11,25 @@ export class Tenant extends Entity {
 	static singularCap = 'Tenant';
 	static plural = 'tenants';
 	static pluralCap = 'Tenants';
-	static schema = schema;
+	static schema = baseSchema;
 
-	constructor(public data: Partial<PTenant>) {
+	constructor(
+		public data:
+			| InferQueryOutput<'tenants:basic'>
+			| InferQueryOutput<'tenants:read'>
+			| Partial<PTenant>
+			| InferQueryOutput<'tenants:list'>['data'][number],
+		public urlName = Tenant.urlName,
+		public singular = 'tenant',
+		public singularCap = 'Tenant',
+		public plural = 'tenants',
+		public pluralCap = 'Tenants',
+		public schema = baseSchema,
+	) {
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
 		lastName: '',
 		dob: '',

@@ -4,7 +4,7 @@ import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/maintenanceOrder.schema';
+import { schema as baseSchema } from '../schemas/maintenanceOrder.schema';
 
 export class MaintenanceOrder {
 	static urlName = 'maintenanceOrders' as const;
@@ -12,10 +12,23 @@ export class MaintenanceOrder {
 	static singularCap = 'MaintenanceOrder';
 	static plural = 'maintenanceOrders';
 	static pluralCap = 'MaintenanceOrders';
-	static schema = schema;
-	constructor(public data: Partial<PMaintenanceOrder>) {}
+	static schema = baseSchema;
 
-	static defaultForm = (): z.input<typeof schema> => ({
+	constructor(
+		public data:
+			| InferQueryOutput<'maintenanceOrders:basic'>
+			| InferQueryOutput<'maintenanceOrders:read'>
+			| InferQueryOutput<'maintenanceOrders:list'>['data'][number]
+			| Partial<PMaintenanceOrder>,
+		public urlName = MaintenanceOrder.urlName,
+		public singular = 'maintenanceOrder',
+		public singularCap = 'MaintenanceOrder',
+		public plural = 'maintenanceOrders',
+		public pluralCap = 'MaintenanceOrders',
+		public schema = baseSchema,
+	) {}
+
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		completedAt: '',
 		title: '',
 		description: '',
@@ -37,6 +50,26 @@ export class MaintenanceOrder {
 	static getRelationOptions = (
 		data: InferQueryOutput<`maintenanceOrders:basic`>,
 	) => {
+		return {
+			client: data?.client
+				? new Client(data.client).toOption()
+				: data.property?.client
+				? new Client(data.property.client).toOption()
+				: data.unit?.property?.client
+				? new Client(data.unit.property.client).toOption()
+				: undefined,
+			property: data.property
+				? new Property(data.property).toOption()
+				: data.unit?.property
+				? new Property(data.unit.property).toOption()
+				: undefined,
+			unit: data.unit ? new Unit(data.unit).toOption() : undefined,
+			tenant: undefined,
+			lease: undefined,
+		};
+	};
+
+	getRelationOptions = (data: InferQueryOutput<`maintenanceOrders:basic`>) => {
 		return {
 			client: data?.client
 				? new Client(data.client).toOption()

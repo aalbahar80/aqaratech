@@ -2,11 +2,11 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
+	import { trpc } from '$lib/client/trpc';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
-	import type { EntityConstructor } from '$models/types/entity.type';
+	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
@@ -15,13 +15,7 @@
 	import AttributeEntity from './AttributeEntity.svelte';
 	import Input from './Input.svelte';
 
-	export let cstor: EntityConstructor;
-
-	type DefaultForm = ReturnType<typeof cstor['defaultForm']>;
-	type FormInput = z.input<typeof cstor['schema']>;
-	type BasicOutput = InferQueryOutput<`${typeof cstor['urlName']}:basic`>;
-	type Data = DefaultForm & FormInput & BasicOutput;
-	export let data: Data;
+	export let entity: EntityInstance;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -32,9 +26,9 @@
 		data: data2,
 		setData,
 		isValid,
-	} = createForm<z.infer<typeof cstor.schema>>({
+	} = createForm<z.infer<typeof entity.schema>>({
 		transform: (values) => {
-			const original = values as z.infer<typeof cstor.schema>;
+			const original = values as z.infer<typeof entity.schema>;
 			const dateFields = [
 				'dob',
 				'end',
@@ -51,9 +45,9 @@
 			});
 			return original;
 		},
-		initialValues: data,
-		schema: cstor.schema,
-		validate: validateSchema(cstor.schema),
+		initialValues: entity.data,
+		schema: entity.schema,
+		validate: validateSchema(entity.schema),
 		onError: (err: any) => {
 			addToast({
 				props: {
@@ -71,9 +65,9 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc().mutation(`${cstor.urlName}:save`, values);
+			const submitted = await trpc().mutation(`${entity.urlName}:save`, values);
 			console.log({ submitted }, 'FormTrpc.svelte ~ 44');
-			await goto(`/${cstor.urlName}/${submitted.id}`);
+			await goto(`/${entity.urlName}/${submitted.id}`);
 			addToast({
 				props: {
 					kind: 'success',
@@ -83,12 +77,12 @@
 		},
 	});
 
-	const options = cstor.getRelationOptions(data);
+	const options = entity.getRelationOptions(data);
 	let { client, property, unit, tenant } = options;
 </script>
 
 <svelte:head>
-	<title>{`Edit ${cstor.singularCap}`}</title>
+	<title>{`Edit ${entity.singularCap}`}</title>
 </svelte:head>
 <pre>{JSON.stringify(options, null, 2)}</pre>
 <div class="mx-auto h-full py-8 sm:w-[500px]">
@@ -101,11 +95,11 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{data?.id ? 'Edit ' : 'New '}{cstor.singularCap}
+						{entity.data?.id ? 'Edit ' : 'New '}{entity.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#if cstor.relationalFields}
-							{#each cstor.relationalFields as field}
+						{#if entity.relationalFields}
+							{#each entity.relationalFields as field}
 								{#if field === 'clientId'}
 									<SelectEntity
 										{field}
@@ -162,7 +156,7 @@
 							{/each}
 						{/if}
 						<slot {setData} errors={$errors} {getValue} />
-						{#each cstor.basicFields as field}
+						{#each entity.basicFields as field}
 							<Input
 								name={field}
 								value={getValue($data2, field)}
@@ -176,7 +170,7 @@
 								}}
 							/>
 						{/each}
-						{#if cstor.urlName === 'maintenanceOrders' || cstor.urlName === 'expenses'}
+						{#if entity.urlName === 'maintenanceOrders' || entity.urlName === 'expenses'}
 							<div class="relative pt-10">
 								<div
 									class="absolute inset-0 inset-x-2 flex items-center"
@@ -191,9 +185,9 @@
 									{client}
 									{property}
 									{unit}
-									initial={data?.unit?.id ||
-										data?.property?.id ||
-										data?.client?.id ||
+									initial={entity.data?.unit?.id ||
+										entity.data?.property?.id ||
+										entity.data?.client?.id ||
 										undefined}
 									invalid={!!getValue($errors, 'clientId')}
 									invalidText={getValue($errors, 'clientId')?.[0]}
@@ -218,7 +212,7 @@
 			</button>
 
 			<Button
-				text={data?.id ? 'Save changes' : 'Create new'}
+				text={entity.data?.id ? 'Save changes' : 'Create new'}
 				disabled={!noErrorMsg || $isSubmitting}
 				loading={$isSubmitting}
 			/>

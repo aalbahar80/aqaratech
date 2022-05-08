@@ -1,10 +1,7 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Lease } from '$lib/models/classes/lease.class';
-import { schema } from '$models/schemas/transaction.schema';
-import type {
-	Lease as PLease,
-	Transaction as PTransaction,
-} from '@prisma/client';
+import { schema as baseSchema } from '$models/schemas/transaction.schema';
+import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
 
 export class Transaction {
@@ -13,11 +10,23 @@ export class Transaction {
 	static singularCap = 'Transaction';
 	static plural = 'transactions';
 	static pluralCap = 'Transactions';
-	static schema = schema;
+	static schema = baseSchema;
 
-	constructor(public data: Partial<PTransaction>) {}
+	constructor(
+		public data:
+			| InferQueryOutput<'transactions:basic'>
+			| InferQueryOutput<'transactions:read'>
+			| InferQueryOutput<'transactions:list'>['data'][number]
+			| Partial<PTransaction>,
+		public urlName = Transaction.urlName,
+		public singular = 'transaction',
+		public singularCap = 'Transaction',
+		public plural = 'transactions',
+		public pluralCap = 'Transactions',
+		public schema = baseSchema,
+	) {}
 
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),
 		postAt: new Date(),
 		isPaid: false,

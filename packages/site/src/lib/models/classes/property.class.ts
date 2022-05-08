@@ -1,7 +1,7 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { getAddress } from '$lib/utils/common';
-import { schema } from '$models/schemas/property.schema';
+import { schema as baseSchema } from '$models/schemas/property.schema';
 import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
 import { Entity } from './entity.class';
@@ -12,11 +12,25 @@ export class Property extends Entity {
 	static singularCap = 'Property';
 	static plural = 'properties';
 	static pluralCap = 'Properties';
-	static schema = schema;
-	constructor(public data: Partial<PProperty>) {
+	static schema = baseSchema;
+
+	constructor(
+		public data:
+			| InferQueryOutput<'properties:basic'>
+			| InferQueryOutput<'properties:read'>
+			| Partial<PProperty>
+			| InferQueryOutput<'properties:list'>['data'][number],
+		public urlName = Property.urlName,
+		public singular = 'property',
+		public singularCap = 'Property',
+		public plural = 'properties',
+		public pluralCap = 'Properties',
+		public schema = baseSchema,
+	) {
 		super();
 	}
-	static defaultForm = (): Partial<z.input<typeof schema>> => ({
+
+	static defaultForm = (): Partial<z.input<typeof baseSchema>> => ({
 		area: '',
 		block: '',
 		avenue: '',

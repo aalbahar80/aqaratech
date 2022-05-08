@@ -3,7 +3,10 @@ import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Tenant } from '$lib/models/classes/tenant.class';
 import { Unit } from '$lib/models/classes/unit.class';
-import { leaseFormSchema, schema } from '$models/schemas/lease.schema';
+import {
+	leaseFormSchema as extendedSchema,
+	schema as baseSchema,
+} from '$models/schemas/lease.schema';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
@@ -16,14 +19,27 @@ export class Lease extends Entity {
 	static singularCap = 'Lease';
 	static plural = 'leases';
 	static pluralCap = 'Leases';
-	static schema = schema;
-	static leaseFormSchema = leaseFormSchema;
+	static schema = baseSchema;
+	static leaseFormSchema = extendedSchema;
 
-	constructor(public data: Partial<PLease>) {
+	constructor(
+		public data:
+			| InferQueryOutput<'leases:basic'>
+			| InferQueryOutput<'leases:read'>
+			| InferQueryOutput<'leases:list'>['data'][number]
+			| Partial<PLease>,
+		public urlName = Lease.urlName,
+		public singular = 'lease',
+		public singularCap = 'Lease',
+		public plural = 'leases',
+		public pluralCap = 'Leases',
+		public schema = baseSchema,
+		public leaseFormSchema = extendedSchema,
+	) {
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof leaseFormSchema> => ({
+	static defaultForm = (): z.input<typeof extendedSchema> => ({
 		start: new Date(),
 		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 		monthlyRent: 0,

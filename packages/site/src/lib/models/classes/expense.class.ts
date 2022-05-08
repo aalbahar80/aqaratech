@@ -2,7 +2,7 @@ import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
-import { schema } from '$models/schemas/expense.schema';
+import { schema as baseSchema } from '$models/schemas/expense.schema';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
 
@@ -13,11 +13,24 @@ export class Expense {
 	static singularCap = 'Expense';
 	static plural = 'expenses';
 	static pluralCap = 'Expenses';
-	static schema = schema;
+	static schema = baseSchema;
 
-	constructor(public data: Partial<PExpense>) {}
+	constructor(
+		public data:
+			| InferQueryOutput<'expenses:basic'>
+			| InferQueryOutput<'expenses:read'>
+			| InferQueryOutput<'expenses:list'>['data'][number]
+			| Partial<PExpense>,
+		public urlName = Expense.urlName,
+		public entity = 'expenses' as const,
+		public singular = 'expense',
+		public singularCap = 'Expense',
+		public plural = 'expenses',
+		public pluralCap = 'Expenses',
+		public schema = baseSchema,
+	) {}
 
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		amount: 0,
 		category: '',
 		postAt: new Date(),

@@ -1,8 +1,8 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { concatIfExists, getName } from '$lib/utils/common';
 import type { Client as PClient } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/client.schema';
+import { schema as baseSchema } from '../schemas/client.schema';
 import { Entity } from './entity.class';
 
 export class Client extends Entity {
@@ -11,13 +11,25 @@ export class Client extends Entity {
 	static singularCap = 'Client';
 	static plural = 'clients';
 	static pluralCap = 'Clients';
-	static schema = schema;
 
-	constructor(public data: Partial<PClient>) {
+	constructor(
+		public data:
+			| InferQueryOutput<'clients:basic'>
+			| InferQueryOutput<'clients:read'>
+			| Partial<PClient>
+			| InferQueryOutput<'clients:list'>['data'][number],
+		public urlName = Client.urlName,
+		public singular = 'client',
+		public singularCap = 'Client',
+		public plural = 'clients',
+		public pluralCap = 'Clients',
+		public schema = baseSchema
+	)
+	{
 		super();
 	}
 
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
 		lastName: '',
 		phone: null,

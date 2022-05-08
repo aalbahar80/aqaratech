@@ -4,7 +4,7 @@ import { Property } from '$lib/models/classes/property.class';
 import { concatIfExists, getUnitLabel } from '$lib/utils/common';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
-import { schema } from '../schemas/unit.schema';
+import { schema as baseSchema } from '../schemas/unit.schema';
 import { Entity } from './entity.class';
 
 export class Unit extends Entity {
@@ -13,11 +13,24 @@ export class Unit extends Entity {
 	static singularCap = 'Unit';
 	static plural = 'units';
 	static pluralCap = 'Units';
-	static schema = schema;
-	constructor(public data: Partial<PUnit>) {
+	static schema = baseSchema;
+
+	constructor(
+		public data:
+			| InferQueryOutput<'units:basic'>
+			| InferQueryOutput<'units:read'>
+			| Partial<PUnit>
+			| InferQueryOutput<'units:list'>['data'][number],
+		public urlName = Unit.urlName,
+		public singular = 'unit',
+		public singularCap = 'Unit',
+		public plural = 'units',
+		public pluralCap = 'Units',
+		public schema = baseSchema,
+	) {
 		super();
 	}
-	static defaultForm = (): z.input<typeof schema> => ({
+	static defaultForm = (): z.input<typeof baseSchema> => ({
 		unitNumber: '',
 		bed: null,
 		bath: null,
@@ -42,13 +55,16 @@ export class Unit extends Entity {
 
 	static override getRelationOptions = (
 		data: InferQueryOutput<`units:basic`>,
-	) => ({
-		client: new Client(data.property.client).toOption(),
-		property: new Property(data.property).toOption(),
-		unit: undefined,
-		tenant: undefined,
-		lease: undefined,
-	});
+	) => {
+		console.log({ data }, 'unit.class.ts ~ 46');
+		return {
+			client: new Client(data.property.client).toOption(),
+			property: new Property(data.property).toOption(),
+			unit: undefined,
+			tenant: undefined,
+			lease: undefined,
+		};
+	};
 
 	public static getLabel = (item: ILabel) =>
 		concatIfExists([item.type, item.unitNumber]);
