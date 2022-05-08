@@ -1,6 +1,7 @@
-import { expect, test as base } from '@playwright/test';
+import { expect } from '@playwright/test';
 import path from 'path';
 import { getAddress, getName } from '../../../src/lib/utils/common.js';
+import { test as base } from '../../config';
 import { PropertyForm } from '../form.js';
 
 base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });

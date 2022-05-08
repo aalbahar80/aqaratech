@@ -1,5 +1,6 @@
-import { expect, test } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { testClientId, testTenantId } from '../../../../seed/generators.js';
+import { test } from '../../config';
 
 const users = [
 	{

@@ -1,5 +1,6 @@
-import { expect, test as base, type Page } from '@playwright/test';
+import { expect, type Page } from '@playwright/test';
 import { testTenantId } from '../../../../seed/generators.js';
+import { test as base } from '../../config';
 import { setupLease, setupTrx } from '../setup.js';
 
 const fill = async (page: Page, success = true) => {

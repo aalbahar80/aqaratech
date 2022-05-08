@@ -1,5 +1,6 @@
-import { expect, test as base } from '@playwright/test';
+import { expect } from '@playwright/test';
 import path from 'path';
+import { test as base } from '../../config';
 import { formClasses, type FormType } from '../form.js';
 import type { FormFixtures } from '../playwright.config.js';
 

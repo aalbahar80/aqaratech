@@ -1,4 +1,5 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
 import path from 'path';
 
@@ -19,7 +20,6 @@ export const config: PlaywrightTestConfig = {
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: path.resolve(__dirname, 'global-setup.ts'),
-	reporter:
 	reporter: process.env.CI ? 'list' : [['list'], ['html']],
 	use: {
 		baseURL: 'http://localhost:3000/',
@@ -50,3 +50,23 @@ export const config: PlaywrightTestConfig = {
 			  )} && pnpm run build && pnpm run preview`,
 	},
 };
+
+export const test = base.extend({
+	page: async ({ page }, use) => {
+		page.addInitScript({
+			content: `
+				addEventListener('sveltekit:start', () => {
+					document.body.classList.add('started');
+				});
+			`,
+		});
+
+		const goto = page.goto;
+		page.goto = async function (url, opts) {
+			const res = await goto.call(page, url, opts);
+			await page.waitForSelector('body.started', { timeout: 5000 });
+			return res;
+		};
+		await use(page);
+	},
+});
