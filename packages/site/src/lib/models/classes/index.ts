@@ -1,5 +1,5 @@
 export { Client } from './client.class';
-export { Entity } from './entity.class';
+// export { Entity } from './entity.class';
 export { Expense } from './expense.class';
 export { Lease } from './lease.class';
 export { MaintenanceOrder } from './maintenanceOrder.class';
