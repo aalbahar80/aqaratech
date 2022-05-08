@@ -1,11 +1,13 @@
-import type { SelectedOption } from '$lib/models/interfaces/option.interface';
+import type {
+	Option, SelectedOption
+} from '$lib/models/interfaces/option.interface';
 import type { EntityTitle } from '$lib/models/types/entity.type';
 
 export abstract class Entity {
 	// abstract schema: T;
 	// abstract default: () => z.input<typeof this.schema>;
-	// abstract basicFields: readonly string[];
 	abstract urlName: EntityTitle;
+	abstract basicFields: readonly string[];
 	abstract data?: { id?: string };
 
 	getLabel = () => {
@@ -18,21 +20,14 @@ export abstract class Entity {
 	};
 
 	toOption = () => {
-		if (!this.data || !this.data.id) {
-			console.warn('no id');
-			return undefined;
-			// throw new Error('no id');
-		}
 		return {
-			value: this.data.id,
+			value: this.data?.id,
 			label: this.getLabel(),
 		};
 	};
 
-	toOptions = (instances: this[]): (Option | undefined)[] => {
-		return instances.map(this.toOption);
-	};
-	
+	toOptions = (instances: this[]): Option[] => instances.map(this.toOption);
+
 	relationalFields: readonly string[] = [];
 
 	// Change data type to this.data?
@@ -44,11 +39,6 @@ export abstract class Entity {
 		tenant: undefined,
 		lease: undefined,
 	});
-}
-
-interface Option {
-	label: string;
-	value: string;
 }
 
 interface RelationOptions {
