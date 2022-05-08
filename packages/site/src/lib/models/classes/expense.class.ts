@@ -1,12 +1,13 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
+import { Entity } from '$lib/models/classes/entity.class';
 import { Property } from '$lib/models/classes/property.class';
 import { Unit } from '$lib/models/classes/unit.class';
 import { schema as baseSchema } from '$models/schemas/expense.schema';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
 
-export class Expense {
+export class Expense extends Entity {
 	static urlName = 'expenses' as const;
 	static entity = 'expenses' as const;
 	static singular = 'expense';
@@ -28,7 +29,9 @@ export class Expense {
 		public plural = 'expenses',
 		public pluralCap = 'Expenses',
 		public schema = baseSchema,
-	) {}
+	) {
+		super();
+	}
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		amount: 0,
@@ -61,7 +64,6 @@ export class Expense {
 	};
 
 	basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
-	relationalFields = [] as const;
 
 	static getList = async () => {
 		const result = await trpc().query('expenses:list', { size: 20 });

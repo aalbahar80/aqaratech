@@ -1,7 +1,7 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 import { Client } from '$lib/models/classes/client.class';
 import { Property } from '$lib/models/classes/property.class';
-import { concatIfExists, getUnitLabel } from '$lib/utils/common';
+import { getUnitLabel } from '$lib/utils/common';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/unit.schema';
@@ -56,27 +56,22 @@ export class Unit extends Entity {
 	override getRelationOptions = (data = this.data) => {
 		console.log({ data }, 'unit.class.ts ~ 46');
 		return {
-			client: 'property' in data ? new Client(data.property.client).toOption() : undefined,
-			property: 'property' in data ? new Property(data.property).toOption() : undefined,
+			client:
+				'property' in data
+					? new Client(data.property.client).toOption()
+					: undefined,
+			property:
+				'property' in data ? new Property(data.property).toOption() : undefined,
 			unit: undefined,
 			tenant: undefined,
 			lease: undefined,
 		};
 	};
 
-	public static getLabel = (item: ILabel) =>
-		concatIfExists([item.type, item.unitNumber]);
+	public static getLabel = (item: ILabel) => getUnitLabel(item);
 
-	public getLabel = () => {
+	override getLabel = () => {
 		return getUnitLabel(this.data);
-		// if (this.data.type && this.data.unitNumber) {
-		// 	return concatIfExists([this.data.type, this.data.unitNumber]);
-		// } else if (this.data.unitNumber) {
-		// 	return this.data.unitNumber;
-		// } else {
-		// 	console.warn('no type or unitNumber');
-		// 	return '';
-		// }
 	};
 
 	static getList = async (propertyId?: string) => {

@@ -50,7 +50,7 @@ export class Client extends Entity {
 
 	public static getLabel = (item: ILabel) => getName(item);
 
-	public getLabel = () => {
+	override getLabel = () => {
 		if (this.data.firstName && this.data.lastName) {
 			return concatIfExists([this.data.firstName, this.data.lastName]);
 		} else {

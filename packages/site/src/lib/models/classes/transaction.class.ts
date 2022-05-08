@@ -29,15 +29,6 @@ export class Transaction extends Entity {
 		super();
 	}
 	
-	public getLabel = () => {
-		if (this.data.id) {
-			return this.data.id;
-		} else {
-			console.warn('no id');
-			return '';
-		}
-	};
-
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),
 		postAt: new Date(),

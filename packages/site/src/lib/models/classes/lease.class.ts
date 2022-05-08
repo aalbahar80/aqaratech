@@ -76,17 +76,6 @@ export class Lease extends Entity {
 		tenant: 'tenant' in data ? new Tenant(data.tenant).toOption() : undefined,
 	});
 
-	public static getLabel = (item: { id: string }) => item.id;
-
-	public getLabel = () => {
-		if (this.data.id) {
-			return this.data.id;
-		} else {
-			console.warn('no id');
-			return '';
-		}
-	};
-
 	static getList = async () => {
 		const result = await trpc().query('leases:search', {});
 		return result.map((data) => new Lease(data));

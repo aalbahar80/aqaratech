@@ -53,7 +53,7 @@ export class Property extends Entity {
 
 	// TODO: DRY this with Entity classes once the following is fixed:
 	// Problem: importing property.class in a test file breaks vscode playwright extenstion
-	public getLabel = () => {
+	override getLabel = () => {
 		if (this.data.area && this.data.block && this.data.number) {
 			return getAddress(this.data);
 			// return concatIfExists([

@@ -4,8 +4,17 @@ export abstract class Entity {
 	// abstract schema: T;
 	// abstract default: () => z.input<typeof this.schema>;
 	// abstract basicFields: readonly string[];
-	abstract getLabel: () => string;
 	abstract data?: { id?: string };
+
+	getLabel = () => {
+		if (this.data?.id) {
+			return this.data.id;
+		} else {
+			console.warn('no id');
+			return '';
+		}
+	};
+
 	toOption = () => {
 		if (!this.data || !this.data.id) {
 			console.warn('no id');
