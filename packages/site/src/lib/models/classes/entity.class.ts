@@ -1,9 +1,11 @@
 import type { SelectedOption } from '$lib/models/interfaces/option.interface';
+import type { EntityTitle } from '$lib/models/types/entity.type';
 
 export abstract class Entity {
 	// abstract schema: T;
 	// abstract default: () => z.input<typeof this.schema>;
 	// abstract basicFields: readonly string[];
+	abstract urlName: EntityTitle;
 	abstract data?: { id?: string };
 
 	getLabel = () => {
@@ -27,7 +29,7 @@ export abstract class Entity {
 		};
 	};
 
-	toOptions = (instances: this[]): Option[] => {
+	toOptions = (instances: this[]): (Option | undefined)[] => {
 		return instances.map(this.toOption);
 	};
 	
