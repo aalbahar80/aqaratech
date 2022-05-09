@@ -1,9 +1,14 @@
-// import { ExpenseForm } from '../admin/form.js';
-// import { getAddress, getName } from '../../src/lib/utils/common.js';
-// import { expect, test } from '../config/test-setup.js';
-// import { preselected } from '../utils.js';
+// import { expect } from '@playwright/test';
+// import path from 'path';
+// import {
+// 	getAddress,
+// 	getName,
+// 	getUnitLabel,
+// } from '../../../src/lib/utils/common.js';
+// import { test as base } from '../../config.js';
+// import { ExpenseForm } from '../form.js';
 
-// base.use({ storageState: './config/adminState.json' });
+// base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 // test.describe('Edit expense form', async () => {
 // 	test.beforeEach(async ({ page, expenseForm }) => {
 // 		await page.goto(`/${expenseForm.data.id}/edit`);
