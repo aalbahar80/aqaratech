@@ -12,7 +12,7 @@
 		: '/new/properties';
 </script>
 
-<StackedList entity="properties" count={properties.length} {createHref}>
+<StackedList entityTitle="properties" count={properties.length} {createHref}>
 	{#each properties as property, idx (property.id)}
 		<li>
 			<PropertyCard {property} {idx} />

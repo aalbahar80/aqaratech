@@ -1,3 +1,7 @@
+import type {
+	EntityConstructor,
+	EntityTitle,
+} from '$lib/models/types/entity.type.js';
 import { Client } from './client.class.js';
 import { Expense } from './expense.class.js';
 import { Lease } from './lease.class.js';
@@ -7,7 +11,7 @@ import { Tenant } from './tenant.class.js';
 import { Transaction } from './transaction.class.js';
 import { Unit } from './unit.class.js';
 
-export const classMap = {
+export const classMap: Record<EntityTitle, EntityConstructor> = {
 	// 	clientId: Client,
 	clients: Client,
 	// 	propertyId: Property,

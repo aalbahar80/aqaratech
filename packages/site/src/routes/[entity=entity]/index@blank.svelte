@@ -6,27 +6,27 @@
 	import type { Load } from './index@blank';
 
 	export const load: Load = async ({ url, params, fetch }) => {
-		const entity = params.entity as EntityTitle;
+		const entityTitle = params.entity as EntityTitle;
 		const pageIndex = url.searchParams.get('p');
 		const [total, { data, pagination }] = await Promise.all([
-			trpc(fetch).query(`${entity}:count`),
-			trpc(fetch).query(`${entity}:list`, { pageIndex }),
+			trpc(fetch).query(`${entityTitle}:count`),
+			trpc(fetch).query(`${entityTitle}:list`, { pageIndex }),
 		]);
 		return {
-			props: { entity, total, pagination, data },
+			props: { total, pagination, data, entityTitle },
 		};
 	};
 </script>
 
 <script lang="ts">
-	export let entity: EntityTitle;
-	export let data: InferQueryOutput<`${typeof entity}:list`>['data'];
-	export let total: InferQueryOutput<`${typeof entity}:count`>;
-	export let pagination: InferQueryOutput<`${typeof entity}:list`>['pagination'];
+	export let entityTitle: EntityTitle;
+	export let data: InferQueryOutput<`${typeof entityTitle}:list`>['data'];
+	export let total: InferQueryOutput<`${typeof entityTitle}:count`>;
+	export let pagination: InferQueryOutput<`${typeof entityTitle}:list`>['pagination'];
 </script>
 
 <svelte:head>
-	<title>{startCase(entity)}</title>
+	<title>{startCase(entityTitle)}</title>
 </svelte:head>
 
-<TableParent {data} {total} {pagination} />
+<TableParent {data} {total} {pagination} {entityTitle} />

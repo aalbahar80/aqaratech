@@ -13,7 +13,7 @@
 	const createHref = getCreateHref($page.url.pathname);
 </script>
 
-<StackedList entity="leases" count={leases.length} {createHref}>
+<StackedList entityTitle="leases" count={leases.length} {createHref}>
 	{#each leases as lease, index (lease.id)}
 		<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 			<LeaseCard

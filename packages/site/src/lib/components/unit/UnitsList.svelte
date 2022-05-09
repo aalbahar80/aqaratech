@@ -27,7 +27,7 @@
 		: '/new/units';
 </script>
 
-<StackedList entity="units" count={units.length} {createHref}>
+<StackedList entityTitle="units" count={units.length} {createHref}>
 	{#each units as unit (unit.id)}
 		<!-- Check out dan-fns isWithinInterval()
 		https://date-fns.org/v2.28.0/docs/isWithinInterval -->

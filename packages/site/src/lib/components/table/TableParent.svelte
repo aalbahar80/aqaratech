@@ -1,11 +1,18 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import EmptyState from '$lib/components/EmptyState.svelte';
+	import { classMap } from '$lib/models/classes/all.class';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { PaginationInfo } from '$lib/utils/table-utils';
 	import Pagination from './Pagination.svelte';
 	import Table from './Table.svelte';
 
+	export let entityTitle: EntityTitle;
+
 	let modifier: number = 1;
+	$: entity = classMap[entityTitle];
+	$: createHref = `/new/${entity?.plural}`;
 
 	const setModifier = (from: number, to: number) => {
 		if (from < to) {
@@ -44,8 +51,12 @@
 	>
 		New
 	</a>
-	<Table {rows} {modifier} />
-	<Pagination {total} currentSize={data.length} {pagination} />
+	{#if rows.length}
+		<Table {rows} {modifier} />
+		<Pagination {total} currentSize={data.length} {pagination} />
+	{:else}
+		<EmptyState {entity} {createHref} />
+	{/if}
 </div>
 
 <style lang="postcss">
