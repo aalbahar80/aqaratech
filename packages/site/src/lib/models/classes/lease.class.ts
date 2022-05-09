@@ -23,7 +23,12 @@ export class Lease extends Entity {
 	static pluralCap = 'Leases';
 	static schema = baseSchema;
 	static leaseFormSchema = extendedSchema;
-	static relationalFields = ['clientId', 'propertyId', 'tenantId'] as const;
+	static relationalFields = [
+		'clientId',
+		'propertyId',
+		'unitId',
+		'tenantId',
+	] as const;
 	static basicFields = [
 		'monthlyRent',
 		'start',
