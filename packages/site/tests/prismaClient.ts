@@ -24,11 +24,13 @@
 // export default prisma;
 
 // https://github.com/prisma/prisma/discussions/9027#discussioncomment-1585810
-import pkg, { PrismaClient } from '@prisma/client';
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
+import type { PrismaClient as PrismaClientType } from '@prisma/client';
 
 const dev = true;
 declare global {
-	var _prisma: PrismaClient; // eslint-disable-line
+	var _prisma: PrismaClientType; // eslint-disable-line
 }
 
 let prisma;
@@ -42,4 +44,4 @@ if (dev) {
 	prisma = new PrismaClientProd();
 }
 
-export default prisma as PrismaClient; // type assertion for shim
+export default prisma as PrismaClientType; // type assertion for shim
