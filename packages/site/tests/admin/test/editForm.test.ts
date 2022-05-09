@@ -3,6 +3,7 @@ import path from 'path';
 import { test as base } from '../../config';
 import { formClasses, type FormType } from '../form.js';
 import type { FormFixtures } from '../playwright.config.js';
+import * as R from 'remeda';
 
 base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 const test = base.extend<FormFixtures & { form: FormType }>({
@@ -52,5 +53,27 @@ test(`basic details are correct`, async ({ form, page }) => {
 		const el = page.locator(`text=${b}`).first();
 		const re = new RegExp(`${b}`);
 		await expect(el).toContainText(re);
+	}
+});
+
+test('relations are preselected', async ({ form, page }) => {
+	const fields = form.ins.relationalFields as string[];
+	const relations = form.ins.getRelationOptions();
+	const relationMap: Record<string, keyof typeof relations> = {
+		clientId: 'client',
+		propertyId: 'property',
+		unitId: 'unit',
+		tenantId: 'tenant',
+		leaseId: 'lease',
+	};
+
+	for (const [field, relation] of R.toPairs(relationMap)) {
+		if (fields.includes(field)) {
+			const el = page.locator(`#${field}`);
+			const label = relations[relation]?.label;
+			if (label) {
+				await expect(el).toContainText(label);
+			}
+		}
 	}
 });

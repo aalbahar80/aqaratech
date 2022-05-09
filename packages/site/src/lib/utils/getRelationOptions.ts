@@ -7,7 +7,9 @@ import {
 } from '$lib/models/classes';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 
-export const parseRelationOptions = (data: MaintenanceOrder['data'] | Expense['data']) => {
+export const parseRelationOptions = (
+	data: MaintenanceOrder['data'] | Expense['data'],
+) => {
 	const options: RelationOptions = {
 		client: undefined,
 		property: undefined,
@@ -16,6 +18,7 @@ export const parseRelationOptions = (data: MaintenanceOrder['data'] | Expense['d
 		lease: undefined,
 	};
 	let attribution: string | undefined;
+	if (!data) return { options, attribution };
 	if ('unit' in data && data.unit) {
 		attribution = data.unit?.id;
 		options.unit = new Unit(data.unit).toOption();

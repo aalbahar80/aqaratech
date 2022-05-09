@@ -17,7 +17,7 @@ export class Property extends Entity {
 	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'properties:basic'>
 			| InferQueryOutput<'properties:read'>
 			| Partial<PProperty>
@@ -44,7 +44,7 @@ export class Property extends Entity {
 
 	override getRelationOptions = () => ({
 		client:
-			'client' in this.data
+			this.data && 'client' in this.data
 				? new Client(this.data.client).toOption()
 				: undefined,
 		property: undefined,
@@ -58,7 +58,7 @@ export class Property extends Entity {
 	// TODO: DRY this with Entity classes once the following is fixed:
 	// Problem: importing property.class in a test file breaks vscode playwright extenstion
 	override getLabel = () => {
-		if (this.data.area && this.data.block && this.data.number) {
+		if (this?.data?.area && this.data.block && this.data.number) {
 			return getAddress(this.data);
 			// return concatIfExists([
 			// 	this.data.area,

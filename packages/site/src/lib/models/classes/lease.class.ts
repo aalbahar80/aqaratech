@@ -32,7 +32,7 @@ export class Lease extends Entity {
 	] as const;
 
 	constructor(
-		public data: InferQueryOutput<'leases:basic'> | Partial<PLease>,
+		public data?: InferQueryOutput<'leases:basic'> | Partial<PLease>,
 		public urlName = Lease.urlName,
 		public singular = 'lease',
 		public singularCap = 'Lease',
@@ -71,10 +71,10 @@ export class Lease extends Entity {
 			lease: undefined,
 		};
 
-		if ('tenant' in data) {
+		if (data && 'tenant' in data) {
 			options.tenant = new Tenant(data.tenant).toOption();
 		}
-		if ('unit' in data) {
+		if (data && 'unit' in data) {
 			options.unit = new Unit(data.unit).toOption();
 			options.property = new Property(data.unit.property).toOption();
 			options.client = new Client(data.unit.property.client).toOption();

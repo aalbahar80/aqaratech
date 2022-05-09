@@ -22,7 +22,7 @@ export class MaintenanceOrder extends Entity {
 	] as const;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'maintenanceOrders:basic'>
 			| InferQueryOutput<'maintenanceOrders:list'>['data'][number]
 			| Partial<PMaintenanceOrder>,

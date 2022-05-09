@@ -14,7 +14,7 @@ export class Client extends Entity {
 	static schema = baseSchema;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'clients:basic'>
 			| InferQueryOutput<'clients:read'>
 			| Partial<PClient>
@@ -24,9 +24,8 @@ export class Client extends Entity {
 		public singularCap = 'Client',
 		public plural = 'clients',
 		public pluralCap = 'Clients',
-		public schema = baseSchema
-	)
-	{
+		public schema = baseSchema,
+	) {
 		super();
 	}
 
@@ -51,7 +50,7 @@ export class Client extends Entity {
 	public static getLabel = (item: ILabel) => getName(item);
 
 	override getLabel = () => {
-		if (this.data.firstName && this.data.lastName) {
+		if (this.data?.firstName && this.data.lastName) {
 			return concatIfExists([this.data.firstName, this.data.lastName]);
 		} else {
 			console.warn('no firstName or lastName');

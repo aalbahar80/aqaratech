@@ -9,11 +9,13 @@ import {
 	fakeUnit,
 } from '../../../seed/generators.js';
 import {
+	Client,
 	Expense,
 	Lease,
 	MaintenanceOrder,
 	Property,
 	Unit,
+	Tenant,
 } from '../../src/lib/models/classes';
 import type { EntityTitle } from '../../src/lib/models/types/entity.type';
 import {
@@ -77,6 +79,7 @@ export class Form {
 
 export class ClientForm extends Form {
 	static urlName: EntityTitle = 'clients';
+	ins = new Client();
 	constructor(public data = fakeClient()) {
 		super(ClientForm.urlName, data.id);
 	}
@@ -114,6 +117,7 @@ export class ClientForm extends Form {
 
 export class PropertyForm extends Form {
 	static urlName: EntityTitle = 'properties';
+	ins = new Property();
 	override relationalFields = Property.relationalFields;
 
 	client: ReturnType<typeof fakeClient>;
@@ -166,6 +170,7 @@ export class PropertyForm extends Form {
 
 export class UnitForm extends Form {
 	static urlName: EntityTitle = 'units';
+	ins = new Unit();
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	constructor(public data = fakeUnit()) {
@@ -222,6 +227,7 @@ export class UnitForm extends Form {
 
 export class TenantForm extends Form {
 	static urlName: EntityTitle = 'tenants';
+	ins = new Tenant();
 	constructor(public data = fakeTenant()) {
 		super(TenantForm.urlName, data.id);
 	}
@@ -257,6 +263,7 @@ export class TenantForm extends Form {
 
 export class LeaseForm extends Form {
 	static urlName: EntityTitle = 'leases';
+	ins = new Lease();
 	override relationalFields = Lease.relationalFields;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
@@ -329,6 +336,7 @@ export class LeaseForm extends Form {
 
 export class ExpenseForm extends Form {
 	static urlName: EntityTitle = 'expenses';
+	ins = new Expense();
 	override relationalFields = Expense.relationalFields;
 	constructor(
 		public client = fakeClient(),
@@ -401,6 +409,7 @@ export class ExpenseForm extends Form {
 
 export class MaintenanceOrderForm extends Form {
 	static urlName: EntityTitle = 'maintenanceOrders';
+	ins = new MaintenanceOrder();
 	override relationalFields = MaintenanceOrder.relationalFields;
 	constructor(
 		public client = fakeClient(),

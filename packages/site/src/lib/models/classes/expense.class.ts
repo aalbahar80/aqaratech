@@ -18,7 +18,7 @@ export class Expense extends Entity {
 	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'expenses:basic'>
 			| InferQueryOutput<'expenses:list'>['data'][number]
 			| Partial<PExpense>,

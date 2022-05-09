@@ -14,7 +14,7 @@ export class Tenant extends Entity {
 	static schema = baseSchema;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'tenants:basic'>
 			| InferQueryOutput<'tenants:read'>
 			| Partial<PTenant>
@@ -58,7 +58,7 @@ export class Tenant extends Entity {
 	static getLabel = (item: ILabel) => getName(item);
 
 	override getLabel = () => {
-		if (this.data.firstName && this.data.lastName) {
+		if (this?.data?.firstName && this.data.lastName) {
 			return concatIfExists([this.data.firstName, this.data.lastName]);
 		} else {
 			console.warn('no firstName or lastName');
