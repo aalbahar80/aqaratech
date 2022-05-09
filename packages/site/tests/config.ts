@@ -42,7 +42,8 @@ export const config: PlaywrightTestConfig = {
 		// },
 	},
 	webServer: {
-		reuseExistingServer: true,
+		// to make sure app and tests are using same db branch
+		reuseExistingServer: !!process.env.DEV,
 		port: 3000,
 		command: process.env.DEV
 			? `cd ${path.resolve(__dirname, '..')} && pnpm run dev`
