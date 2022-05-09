@@ -1,4 +1,3 @@
-import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { Client } from './client.class.js';
 import { Expense } from './expense.class.js';
 import { Lease } from './lease.class.js';

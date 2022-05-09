@@ -1,11 +1,12 @@
 import { Entity } from '$lib/models/classes/entity.class.js';
+import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/maintenanceOrder.schema.js';
 
 export class MaintenanceOrder extends Entity {
-	static urlName = 'maintenanceOrders' as const;
+	static urlName = 'maintenanceOrders' as EntityTitle;
 	static entity = 'maintenanceOrders' as const;
 	static singular = 'maintenanceOrder';
 	static singularCap = 'MaintenanceOrder';

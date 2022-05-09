@@ -2,6 +2,7 @@ import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Client } from '$lib/models/classes/client.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
+import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { getUnitLabel } from '$lib/utils/common.js';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
@@ -9,7 +10,7 @@ import { schema as baseSchema } from '../schemas/unit.schema.js';
 import { Entity } from './entity.class.js';
 
 export class Unit extends Entity {
-	static urlName = 'units' as const;
+	static urlName = 'units' as EntityTitle;
 	static singular = 'unit';
 	static singularCap = 'Unit';
 	static plural = 'units';

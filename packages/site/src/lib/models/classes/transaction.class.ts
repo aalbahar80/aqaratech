@@ -1,12 +1,13 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Entity } from '$lib/models/classes/entity.class.js';
 import { Lease } from '$lib/models/classes/lease.class.js';
-import { schema as baseSchema } from '../schemas/transaction.schema.js';
+import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
+import { schema as baseSchema } from '../schemas/transaction.schema.js';
 
 export class Transaction extends Entity {
-	static urlName = 'transactions' as const;
+	static urlName = 'transactions' as EntityTitle;
 	static singular = 'transaction';
 	static singularCap = 'Transaction';
 	static plural = 'transactions';

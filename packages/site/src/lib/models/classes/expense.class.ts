@@ -1,12 +1,13 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Entity } from '$lib/models/classes/entity.class.js';
+import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/expense.schema.js';
 
 export class Expense extends Entity {
-	static urlName = 'expenses' as const;
+	static urlName = 'expenses' as EntityTitle;
 	static entity = 'expenses' as const;
 	static singular = 'expense';
 	static singularCap = 'Expense';
