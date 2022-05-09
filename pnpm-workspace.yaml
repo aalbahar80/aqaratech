@@ -2,3 +2,4 @@
 packages:
   - "packages/*"
   - "packages/site/tests/"
+  - "packages/site/package/"
