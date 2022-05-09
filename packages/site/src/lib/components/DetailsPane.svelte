@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
-	import type { Option } from '$lib/types';
+	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -9,7 +9,7 @@
 	export let files: [string, string][] | undefined = undefined;
 
 	const hideFiles = true;
-	const options: Option[] = [
+	const options: MenuOption[] = [
 		{ label: 'Update', href: '#', icon: Pencil },
 		{ label: 'Remove', href: '#', icon: Trash },
 	];

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Option } from '$lib/types';
+	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import {
 		MenuItem,
 		MenuItems,
@@ -7,7 +7,7 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let options: Option[];
+	export let options: MenuOption[];
 </script>
 
 <Transition

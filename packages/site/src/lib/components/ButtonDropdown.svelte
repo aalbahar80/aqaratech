@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Option } from '$lib/types';
+	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { Menu, MenuButton } from '@rgossiaux/svelte-headlessui';
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import DropdownMenu from './DropdownMenu.svelte';
 
-	export let defaultOption: Option;
-	export let options: Option[];
+	export let defaultOption: MenuOption;
+	export let options: MenuOption[];
 </script>
 
 <span class="relative inline-flex rounded-md shadow-sm">

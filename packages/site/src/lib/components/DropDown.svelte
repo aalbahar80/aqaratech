@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Option } from '$lib/types';
+	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { Menu, MenuButton } from '@rgossiaux/svelte-headlessui';
 	import { DotsVertical } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import DropdownMenu from './DropdownMenu.svelte';
 
-	export let options: Option[];
+	export let options: MenuOption[];
 </script>
 
 <Menu as="div" class="relative inline-block text-left align-middle">
