@@ -13,9 +13,6 @@ const config = {
 	// experimental: {
 	// 	prebundleSvelteLibraries: true,
 	// },
-	package: {
-		exports: (file) => file === 'index.js',
-	},
 	kit: {
 		adapter: adapter(),
 		vite: {

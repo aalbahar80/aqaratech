@@ -1,16 +1,18 @@
 {
-	"extends": "../tsconfig.json",
+	// "extends": "../tsconfig.json",
 	"compilerOptions": {
-		"target": "ES2021",
-		"rootDirs": ["..", "."],
-		"noUncheckedIndexedAccess": false,
-		"skipLibCheck": true,
-		"resolveJsonModule": true,
-		"exactOptionalPropertyTypes": false
+		"target": "ESNext",
+		"moduleResolution": "Node",
+		"module": "ESNext",
+		// "rootDirs": ["..", "."],
+		// "noUncheckedIndexedAccess": false,
+		// "skipLibCheck": true,
+		// "resolveJsonModule": true,
+		// "exactOptionalPropertyTypes": false
 		// "typeRoots": ["../src/types"],
 		// "types": ["@sveltejs/kit"],
-		// "allowSyntheticDefaultImports": true
-	},
-	"include": ["./**/*.ts"],
-	"exclude": ["node_modules"]
+		"allowSyntheticDefaultImports": true
+	}
+	// "include": ["./**/*.ts"],
+	// "exclude": ["node_modules"]
 }

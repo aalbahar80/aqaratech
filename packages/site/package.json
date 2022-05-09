@@ -5,6 +5,9 @@
     ".": "./index.js",
     "./package.json": "./package.json"
   },
+  "files": [
+    "package"
+  ],
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",

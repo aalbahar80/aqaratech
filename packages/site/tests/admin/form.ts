@@ -7,24 +7,24 @@ import {
 	fakeProperty,
 	fakeTenant,
 	fakeUnit,
-} from '../../../seed/generators.js';
+} from '@self/seed';
 import {
 	Client,
 	Expense,
 	Lease,
 	MaintenanceOrder,
 	Property,
-	Unit,
 	Tenant,
-} from '../../src/lib/models/classes';
-import type { EntityTitle } from '../../src/lib/models/types/entity.type';
+	Unit,
+} from '@self/site';
+import type { EntityTitle } from '@self/site/models/types/entity.type';
 import {
 	dateToInput,
 	getAddress,
 	getName,
 	getUnitLabel,
 	kwdFormat,
-} from '../../src/lib/utils/common.js';
+} from '@self/site/utils/common';
 import prisma from '../prismaClient.js';
 
 export type FormType =
