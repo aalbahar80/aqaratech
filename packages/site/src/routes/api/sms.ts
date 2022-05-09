@@ -1,4 +1,4 @@
-import { environment } from '$environ';
+import { environment } from '$environment';
 import type { RequestHandler } from '@sveltejs/kit';
 import Twilio from 'twilio';
 

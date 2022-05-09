@@ -1,4 +1,4 @@
-import { environment } from '$environ';
+import { environment } from '$environment';
 import type { Authz } from '$lib/models/types/auth.type';
 import { validateAccessToken } from '$lib/server/utils';
 

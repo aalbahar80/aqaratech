@@ -36,7 +36,7 @@ const config = {
 					$models: resolve('./src/lib/models'),
 					$utils: resolve('.', './src/lib/utils'),
 					$routers: resolve('.', './src/lib/server/trpc/routers'),
-					$environ: resolve('.', './src/environment'),
+					$environment: resolve('.', './src/lib/environment'),
 					$user: resolve('.', './src/user'),
 					'@self/site': resolve('./src/lib'),
 				},

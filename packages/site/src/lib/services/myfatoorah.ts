@@ -1,4 +1,4 @@
-import { environment } from '$environ';
+import { environment } from '$environment';
 import prismaClient from '$lib/server/prismaClient';
 
 const { myfatoorahConfig } = environment;
