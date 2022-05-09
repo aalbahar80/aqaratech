@@ -1,6 +1,13 @@
 {
 	"extends": "@tsconfig/esm/tsconfig.json",
 	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"noEmit": true,
+		"lib": ["esnext", "dom"],
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
 		"moduleResolution": "Node",
 		"strict": true,
 		"allowUnreachableCode": false,
@@ -11,6 +18,7 @@
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true
-	},
-	"include": ["./seed.ts", "./generators.ts"]
+	}
+	// "files": ["src/types.ts"]
+	// "include": ["./seed.ts", "./generators.ts"]
 }

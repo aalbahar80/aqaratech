@@ -1,12 +1,11 @@
 import { faker } from "@faker-js/faker";
-import { randomUUID } from "crypto";
 import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import {
 	areas,
 	coordinates,
 	expenseCats,
 	unitTypeOptions,
-} from "../site/src/lib/config/constants.js";
+} from "./constants.js";
 
 faker.setLocale("ar");
 
@@ -34,7 +33,7 @@ export const fakeEmail = () => {
 };
 
 export const fakeClient = () => ({
-	id: randomUUID(),
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	firstName: faker.name.firstName(),
@@ -49,7 +48,7 @@ export const fakeClient = () => ({
 });
 
 export const fakeTenant = () => ({
-	id: randomUUID(),
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	firstName: faker.name.firstName(),
@@ -72,7 +71,7 @@ export const fakeTenant = () => ({
 });
 
 export const fakeUnit = (propertyId?: string) => ({
-	id: randomUUID(),
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	floor: faker.datatype.number({ min: -2, max: 10 }),
@@ -83,14 +82,14 @@ export const fakeUnit = (propertyId?: string) => ({
 	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	type: faker.helpers.arrayElement(unitTypeValues),
 	usage: null,
-	propertyId: propertyId ?? randomUUID(),
+	propertyId: propertyId ?? faker.datatype.uuid(),
 });
 
 export const fakeProperty = (clientId?: string) => {
 	const random = Math.floor(Math.random() * coordinates.length);
 	const propCoordinates = coordinates[random];
 	return {
-		id: randomUUID(),
+		id: faker.datatype.uuid(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		area: areas[Math.floor(Math.random() * areas.length)]![1],
@@ -103,7 +102,7 @@ export const fakeProperty = (clientId?: string) => {
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 		lat: propCoordinates?.[0] ?? 0,
 		long: propCoordinates?.[1] ?? 0,
-		clientId: clientId ?? randomUUID(),
+		clientId: clientId ?? faker.datatype.uuid(),
 	};
 };
 
@@ -121,7 +120,7 @@ export const fakeTransaction = (
 	const postAt = addMonths(nextMonth, count);
 	const isPaid = postAt < new Date() ? Math.random() > 0.15 : false;
 	return {
-		id: randomUUID(),
+		id: faker.datatype.uuid(),
 		createdAt: leaseStart,
 		updatedAt: leaseStart,
 		amount,
@@ -141,7 +140,7 @@ export const fakeTransaction = (
 
 export const fakeTransactionBasic = () => {
 	return {
-		id: randomUUID(),
+		id: faker.datatype.uuid(),
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		amount: faker.datatype.number({ min: 200, max: 2000 }),
@@ -160,7 +159,7 @@ export const fakeLease = (
 	const start = startDate ?? faker.date.past(timespan);
 	const end = subDays(addMonths(start, 12), 1);
 	return {
-		id: randomUUID(),
+		id: faker.datatype.uuid(),
 		createdAt: start,
 		updatedAt: start,
 		start,
@@ -169,14 +168,14 @@ export const fakeLease = (
 		monthlyRent: +faker.finance.amount(100, 3000, 0),
 		license: faker.company.bs(),
 		active: true,
-		tenantId: tenantId ?? randomUUID(),
-		unitId: unitId ?? randomUUID(),
+		tenantId: tenantId ?? faker.datatype.uuid(),
+		unitId: unitId ?? faker.datatype.uuid(),
 		shouldNotify: true,
 	};
 };
 
 export const fakeExpense = () => ({
-	id: randomUUID(),
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(100, 3000, 0),
@@ -186,7 +185,7 @@ export const fakeExpense = () => ({
 });
 
 export const fakeMaintenanceOrder = () => ({
-	id: randomUUID(),
+	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	completedAt: faker.date.future(1),
