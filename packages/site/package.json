@@ -1,8 +1,9 @@
 {
   "name": "@self/site",
   "version": "0.0.1",
-  "prisma": {
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "svelte-kit dev",
@@ -37,7 +38,7 @@
     "@steeze-ui/svelte-icon": "^1.3.1",
     "@sveltejs/adapter-auto": "^1.0.0-next.39",
     "@sveltejs/adapter-vercel": "^1.0.0-next.50",
-    "@sveltejs/kit": "^1.0.0-next.321",
+    "@sveltejs/kit": "1.0.0-next.326",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
@@ -85,6 +86,7 @@
     "svelte-fa": "^2.4.0",
     "svelte-preprocess": "^4.10.6",
     "svelte-select": "^4.4.7",
+    "svelte2tsx": "^0.5.9",
     "tailwindcss": "^3.0.23",
     "tippy.js": "^6.3.7",
     "trpc-sveltekit": "^1.2.3",
@@ -94,7 +96,7 @@
     "uuid": "^8.3.2",
     "vitest": "^0.10.0",
     "vitest-svelte-kit": "^0.0.6",
-    "zod": "^3.14.4"
+    "zod": "^3.15.1"
   },
   "type": "module"
 }

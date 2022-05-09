@@ -1,7 +1,7 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Entity } from '$lib/models/classes/entity.class';
-import { Lease } from '$lib/models/classes/lease.class';
-import { schema as baseSchema } from '$models/schemas/transaction.schema';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Entity } from '$lib/models/classes/entity.class.js';
+import { Lease } from '$lib/models/classes/lease.class.js';
+import { schema as baseSchema } from '../schemas/transaction.schema.js';
 import type { Transaction as PTransaction } from '@prisma/client';
 import type { z } from 'zod';
 
@@ -58,16 +58,6 @@ export class Transaction extends Entity {
 		unit: undefined,
 		tenant: undefined,
 	});
-
-	static getList = async () => {
-		const result = await trpc().query('transactions:list', { size: 20 });
-		return result.data.map((data) => new Transaction(data));
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('transactions:read', id);
-		return new Transaction(data);
-	}
 
 	static getBadge = (trx: {
 		isPaid: boolean;

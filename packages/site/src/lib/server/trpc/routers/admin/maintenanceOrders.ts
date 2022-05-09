@@ -1,9 +1,9 @@
-import { MaintenanceOrder } from '$lib/models/classes/maintenanceOrder.class';
-import prismaClient from '$lib/server/prismaClient';
-import { paginationSchema } from '$models/common';
+import { MaintenanceOrder } from '$lib/models/classes/maintenanceOrder.class.js';
+import prismaClient from '$lib/server/prismaClient.js';
+import { paginationSchema } from '$models/common.js';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from './createRouter';
+import { createRouter } from './createRouter.js';
 
 export const maintenanceOrders = createRouter()
 	.query('read', {

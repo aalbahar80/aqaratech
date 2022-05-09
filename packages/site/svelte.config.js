@@ -13,7 +13,9 @@ const config = {
 	// experimental: {
 	// 	prebundleSvelteLibraries: true,
 	// },
-
+	package: {
+		exports: (file) => file === 'index.js',
+	},
 	kit: {
 		adapter: adapter(),
 		vite: {
@@ -34,11 +36,12 @@ const config = {
 				alias: {
 					$components: resolve('./src/lib/components'),
 					$lib: resolve('./src/lib'),
-					$models: resolve('.', './src/lib/models'),
+					$models: resolve('./src/lib/models'),
 					$utils: resolve('.', './src/lib/utils'),
 					$routers: resolve('.', './src/lib/server/trpc/routers'),
 					$environment: resolve('.', './src/environment'),
 					$user: resolve('.', './src/user'),
+					'@self/site': resolve('./src/lib'),
 				},
 			},
 			ssr: {

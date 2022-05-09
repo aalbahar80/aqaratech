@@ -1,9 +1,9 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { concatIfExists, getName } from '$lib/utils/common';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { concatIfExists, getName } from '$lib/utils/common.js';
 import type { Client as PClient } from '@prisma/client';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/client.schema';
-import { Entity } from './entity.class';
+import { schema as baseSchema } from '../schemas/client.schema.js';
+import { Entity } from './entity.class.js';
 
 export class Client extends Entity {
 	static urlName = 'clients' as const;
@@ -58,17 +58,6 @@ export class Client extends Entity {
 		}
 	};
 
-	static getList = async () => {
-		const result = await trpc().query('clients:list', {
-			size: 1000,
-		});
-		return result.data.map((data) => new Client(data));
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('clients:read', id);
-		return new Client(data);
-	}
 	static relationalFields = null;
 }
 

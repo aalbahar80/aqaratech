@@ -1,9 +1,8 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "Node",
-		"module": "ES2020",
 		"strict": true,
+		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"noImplicitAny": true,
 		"noImplicitOverride": true,
@@ -13,7 +12,7 @@
 		"noUncheckedIndexedAccess": true,
 		// "exactOptionalPropertyTypes": true,
 		"esModuleInterop": true,
-		"sourceMap": true,
+		// "sourceMap": true,
 		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
@@ -24,8 +23,10 @@
 			"$utils/*": ["src/lib/utils/*"],
 			"$routers": ["src/lib/server/trpc/routers/index.ts"],
 			"$routers/*": ["src/lib/server/trpc/routers/*"],
-			"$environment": ["src/environment/index.ts"],
-			"$user": ["src/user/index.ts"]
+			// "$environment": ["src/environment/index.ts"]
+			"$user": ["src/user/index.ts"],
+			"@self/site": ["src/lib/index.ts"],
+			"@self/site/*": ["src/lib/*"]
 		}
 	}
 }

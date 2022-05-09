@@ -1,3 +1,4 @@
+import { trpc } from '$lib/client/trpc';
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { reject } from 'remeda';
 import { writable } from 'svelte/store';
@@ -22,12 +23,15 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 	return {
 		subscribe,
 		fetchData: async (parentId?: string) => {
-			let result: Awaited<ReturnType<T['getList']>>[number][];
+			let result: InstanceType<EntityConstructor>[] = [];
 			try {
-				result = await cstor.getList(parentId);
+				const data = await trpc().query(`${cstor.urlName}:list`, {
+					size: 1000,
+					...(parentId && { parentId }),
+				});
+				result = data.data.map((data) => new cstor(data));
 			} catch (e) {
 				console.warn({ e }, 'SelectStore.ts ~ 29');
-				result = [];
 			}
 			const options = result.map((i) => i.toOption());
 

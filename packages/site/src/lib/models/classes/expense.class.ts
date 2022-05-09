@@ -1,9 +1,9 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Entity } from '$lib/models/classes/entity.class';
-import { parseRelationOptions } from '$lib/utils/getRelationOptions';
-import { schema as baseSchema } from '$models/schemas/expense.schema';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Entity } from '$lib/models/classes/entity.class.js';
+import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
 import type { z } from 'zod';
+import { schema as baseSchema } from '../schemas/expense.schema.js';
 
 export class Expense extends Entity {
 	static urlName = 'expenses' as const;
@@ -49,14 +49,4 @@ export class Expense extends Entity {
 		this.attribution = parsed.attribution;
 		return parsed.options;
 	};
-
-	static getList = async () => {
-		const result = await trpc().query('expenses:list', { size: 20 });
-		return result.data.map((data) => new Expense(data));
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('expenses:read', id);
-		return new Expense(data);
-	}
 }

@@ -1,12 +1,12 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Client } from '$lib/models/classes/client.class';
-import { Property } from '$lib/models/classes/property.class';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Client } from '$lib/models/classes/client.class.js';
+import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
-import { getUnitLabel } from '$lib/utils/common';
+import { getUnitLabel } from '$lib/utils/common.js';
 import type { Unit as PUnit } from '@prisma/client';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/unit.schema';
-import { Entity } from './entity.class';
+import { schema as baseSchema } from '../schemas/unit.schema.js';
+import { Entity } from './entity.class.js';
 
 export class Unit extends Entity {
 	static urlName = 'units' as const;
@@ -77,25 +77,6 @@ export class Unit extends Entity {
 	override getLabel = () => {
 		return this.data ? getUnitLabel(this.data) : '';
 	};
-
-	static getList = async (propertyId?: string) => {
-		try {
-			// catch error when empty string is passed
-			const result = await trpc().query('units:list', {
-				size: 1000,
-				propertyId,
-			});
-			return result.data.map((data) => new Unit(data));
-		} catch (error) {
-			console.error(error);
-			return [];
-		}
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('units:read', id);
-		return new Unit(data);
-	}
 }
 
 interface ILabel {

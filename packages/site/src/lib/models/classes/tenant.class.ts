@@ -1,9 +1,9 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { concatIfExists, getName } from '$lib/utils/common';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { concatIfExists, getName } from '$lib/utils/common.js';
 import type { Tenant as PTenant } from '@prisma/client';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/tenant.schema';
-import { Entity } from './entity.class';
+import { schema as baseSchema } from '../schemas/tenant.schema.js';
+import { Entity } from './entity.class.js';
 
 export class Tenant extends Entity {
 	static urlName = 'tenants' as const;
@@ -65,24 +65,6 @@ export class Tenant extends Entity {
 			return '';
 		}
 	};
-
-	static getList = async (query?: string) => {
-		try {
-			const result = await trpc().query('tenants:search', {
-				query,
-				size: 1000, // TODO replace this after implementing combobox search
-			});
-			return result.map((data) => new Tenant(data));
-		} catch (error) {
-			console.error(error);
-			return [];
-		}
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('tenants:read', id);
-		return new Tenant(data);
-	}
 }
 
 interface ILabel {

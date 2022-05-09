@@ -1,4 +1,9 @@
-import { digitsOnly, falsyToNull, strToDate, trim } from '$lib/zodTransformers';
+import {
+	digitsOnly,
+	falsyToNull,
+	strToDate,
+	trim,
+} from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const schema = z.object({

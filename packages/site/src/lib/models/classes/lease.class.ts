@@ -1,18 +1,18 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Client } from '$lib/models/classes/client.class';
-import { Property } from '$lib/models/classes/property.class';
-import { Tenant } from '$lib/models/classes/tenant.class';
-import { Unit } from '$lib/models/classes/unit.class';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Client } from '$lib/models/classes/client.class.js';
+import { Property } from '$lib/models/classes/property.class.js';
+import { Tenant } from '$lib/models/classes/tenant.class.js';
+import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import {
 	leaseFormSchema as extendedSchema,
 	schema as baseSchema,
-} from '$models/schemas/lease.schema';
+} from '../schemas/lease.schema.js';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
-import { Entity } from './entity.class';
+import { Entity } from './entity.class.js';
 
 export class Lease extends Entity {
 	static urlName = 'leases' as const;
@@ -81,16 +81,6 @@ export class Lease extends Entity {
 		}
 		return options;
 	};
-
-	static getList = async () => {
-		const result = await trpc().query('leases:search', {});
-		return result.map((data) => new Lease(data));
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('leases:read', id);
-		return new Lease(data);
-	}
 
 	static generateSchedule({
 		count,

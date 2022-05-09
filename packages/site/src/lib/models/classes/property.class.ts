@@ -1,10 +1,10 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Client } from '$lib/models/classes/client.class';
-import { getAddress } from '$lib/utils/common';
-import { schema as baseSchema } from '$models/schemas/property.schema';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Client } from '$lib/models/classes/client.class.js';
+import { getAddress } from '$lib/utils/common.js';
+import { schema as baseSchema } from '../schemas/property.schema.js';
 import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
-import { Entity } from './entity.class';
+import { Entity } from './entity.class.js';
 
 export class Property extends Entity {
 	static urlName = 'properties' as const;
@@ -72,19 +72,6 @@ export class Property extends Entity {
 			return '';
 		}
 	};
-
-	static getList = async (clientId?: string) => {
-		const result = await trpc().query('properties:list', {
-			size: 1000,
-			clientId,
-		});
-		return result.data.map((data) => new Property(data));
-	};
-
-	static async grab(id: string) {
-		const data = await trpc().query('properties:read', id);
-		return new Property(data);
-	}
 }
 
 interface ILabel {

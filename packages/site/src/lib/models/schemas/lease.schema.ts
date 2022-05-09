@@ -1,4 +1,4 @@
-import { strToDate } from '$lib/zodTransformers';
+import { strToDate } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const baseSchema = z.object({

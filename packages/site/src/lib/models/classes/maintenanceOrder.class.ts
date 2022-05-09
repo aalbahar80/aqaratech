@@ -1,12 +1,12 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-import { Entity } from '$lib/models/classes/entity.class';
-import { parseRelationOptions } from '$lib/utils/getRelationOptions';
+import { Entity } from '$lib/models/classes/entity.class.js';
+import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/maintenanceOrder.schema';
+import { schema as baseSchema } from '../schemas/maintenanceOrder.schema.js';
 
 export class MaintenanceOrder extends Entity {
 	static urlName = 'maintenanceOrders' as const;
+	static entity = 'maintenanceOrders' as const;
 	static singular = 'maintenanceOrder';
 	static singularCap = 'MaintenanceOrder';
 	static plural = 'maintenanceOrders';
@@ -23,10 +23,12 @@ export class MaintenanceOrder extends Entity {
 
 	constructor(
 		public data?:
-			| InferQueryOutput<'maintenanceOrders:basic'>
-			| InferQueryOutput<'maintenanceOrders:list'>['data'][number]
+			| undefined
+			// | InferQueryOutput<'maintenanceOrders:basic'>
+			// | InferQueryOutput<'maintenanceOrders:list'>['data'][number]
 			| Partial<PMaintenanceOrder>,
 		public urlName = MaintenanceOrder.urlName,
+		public entity = 'maintenanceOrders' as const,
 		public singular = 'maintenanceOrder',
 		public singularCap = 'MaintenanceOrder',
 		public plural = 'maintenanceOrders',
@@ -52,13 +54,4 @@ export class MaintenanceOrder extends Entity {
 		this.attribution = parsed.attribution;
 		return parsed.options;
 	};
-
-	static getList = async () => {
-		const result = await trpc().query('maintenanceOrders:list', { size: 20 });
-		return result.data.map((data) => new MaintenanceOrder(data));
-	};
-	static async grab(id: string) {
-		const data = await trpc().query('maintenanceOrders:read', id);
-		return new MaintenanceOrder(data);
-	}
 }

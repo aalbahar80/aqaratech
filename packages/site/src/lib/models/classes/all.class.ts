@@ -1,28 +1,29 @@
-import { Client } from './client.class';
-import { Expense } from './expense.class';
-import { Lease } from './lease.class';
-import { MaintenanceOrder } from './maintenanceOrder.class';
-import { Property } from './property.class';
-import { Tenant } from './tenant.class';
-import { Transaction } from './transaction.class';
-import { Unit } from './unit.class';
+import type { EntityTitle } from '$lib/models/types/entity.type.js';
+import { Client } from './client.class.js';
+import { Expense } from './expense.class.js';
+import { Lease } from './lease.class.js';
+import { MaintenanceOrder } from './maintenanceOrder.class.js';
+import { Property } from './property.class.js';
+import { Tenant } from './tenant.class.js';
+import { Transaction } from './transaction.class.js';
+import { Unit } from './unit.class.js';
 
 export const classMap = {
-	clientId: Client,
+	// 	clientId: Client,
 	clients: Client,
-	propertyId: Property,
+	// 	propertyId: Property,
 	properties: Property,
-	unitId: Unit,
+	// 	unitId: Unit,
 	units: Unit,
-	tenantId: Tenant,
+	// 	tenantId: Tenant,
 	tenants: Tenant,
-	leaseId: Lease,
+	// 	leaseId: Lease,
 	leases: Lease,
-	transactionId: Transaction,
+	// 	transactionId: Transaction,
 	transactions: Transaction,
-	expenseId: Expense,
+	// 	expenseId: Expense,
 	expenses: Expense,
-	maintenanceOrderId: MaintenanceOrder,
+	// 	maintenanceOrderId: MaintenanceOrder,
 	maintenanceOrders: MaintenanceOrder,
 };
 

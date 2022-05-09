@@ -1,10 +1,7 @@
-import {
-	Client,
-	Property,
-	Unit,
-	type Expense,
-	type MaintenanceOrder,
-} from '$lib/models/classes';
+import type { Expense, MaintenanceOrder } from '$lib/models/classes';
+import { Client } from '$lib/models/classes/client.class.js';
+import { Property } from '$lib/models/classes/property.class.js';
+import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 
 export const parseRelationOptions = (
