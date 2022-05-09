@@ -15,6 +15,9 @@ const config = {
 	// },
 	kit: {
 		adapter: adapter(),
+		package: {
+			files: (file) => !file.includes('environment'),
+		},
 		vite: {
 			// delete .svelte-kit folder b4 testing
 			test: {
