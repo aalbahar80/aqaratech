@@ -12,7 +12,7 @@ const config: Config = {
 	projects: [
 		{
 			name: 'general',
-			testMatch: ['lease.test.ts', 'property.test.ts'],
+			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
 		},
 		{
 			name: 'client',
