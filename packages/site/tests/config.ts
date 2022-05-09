@@ -2,7 +2,10 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 import { test as base } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenvConfig({
 	path: path.resolve(__dirname, '../../../.env.test'),
 });

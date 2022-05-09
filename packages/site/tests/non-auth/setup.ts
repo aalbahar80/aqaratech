@@ -6,7 +6,7 @@ import {
 	fakeTransactionBasic,
 	fakeUnit,
 	testTenantId,
-} from '../../../seed/generators.js';
+} from '../../../seed/src/generators.js';
 import prisma from '../prismaClient.js';
 
 export const setupLease = async (tenantId: string) => {

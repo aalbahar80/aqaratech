@@ -1,6 +1,6 @@
 import { expect, type Page } from '@playwright/test';
-import { testTenantId } from '../../../../seed/generators.js';
-import { test as base } from '../../config';
+import { testTenantId } from '../../../../seed/src/generators.js';
+import { test as base } from '../../config.js';
 import { setupLease, setupTrx } from '../setup.js';
 
 const fill = async (page: Page, success = true) => {
@@ -18,11 +18,10 @@ const fill = async (page: Page, success = true) => {
 	await page.locator('input[name="cardPin"]').fill('1111');
 	await page.locator('text=Submit').click();
 	page.locator('input:has-text("Confirm")').click(),
-
-	// myfatoorah test env can be slow (especially declined transactions)
-	await expect(page).toHaveURL(/^http:\/\/127\.0\.0\.1.*/, {
-		timeout: 90 * 1000,
-	});
+		// myfatoorah test env can be slow (especially declined transactions)
+		await expect(page).toHaveURL(/^http:\/\/127\.0\.0\.1.*/, {
+			timeout: 90 * 1000,
+		});
 };
 
 const test = base.extend<{ trxId: string }>({

@@ -7,6 +7,9 @@
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"exactOptionalPropertyTypes": false
+		// "typeRoots": ["../src/types"],
+		// "types": ["@sveltejs/kit"],
+		// "allowSyntheticDefaultImports": true
 	},
 	"include": ["./**/*.ts"],
 	"exclude": ["node_modules"]

@@ -1,7 +1,11 @@
 import { chromium, type FullConfig } from '@playwright/test';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 async function globalSetup(config: FullConfig) {
+	const __filename = fileURLToPath(import.meta.url);
+	const __dirname = path.dirname(__filename);
+
 	const adminEmail = 'admin.dev@mailthink.net';
 	const password = 'test12';
 
