@@ -1,4 +1,4 @@
-import { environment } from '$environment';
+import { environment } from '$environ';
 import type { RequestHandler } from '@sveltejs/kit';
 import { v4 } from 'uuid';
 

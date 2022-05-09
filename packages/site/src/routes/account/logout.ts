@@ -1,5 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { environment } from '$environment';
+import { environment } from '$environ';
 
 const { authConfig } = environment;
 

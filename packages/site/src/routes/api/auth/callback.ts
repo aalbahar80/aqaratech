@@ -1,4 +1,4 @@
-import { environment } from '$environment';
+import { environment } from '$environ';
 import { getAuthz } from '$lib/server/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 

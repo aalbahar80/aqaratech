@@ -1,4 +1,4 @@
-import { environment } from '$environment';
+import { environment } from '$environ';
 import { createLocalJWKSet, jwtVerify } from 'jose';
 
 const { authConfig } = environment;
