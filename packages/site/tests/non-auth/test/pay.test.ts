@@ -73,6 +73,18 @@ test('indicate payment failure', async ({ page, trxId }) => {
 	await expect.soft(btn).toBeVisible();
 });
 
+test('display toast when /getUrl throws', async ({ page, trxId }) => {
+	await page.goto(`/p/transactions/${trxId}`);
+	await page.route(/\/api\/payments\/getUrl.*/, (route) =>
+		route.fulfill({ status: 404 }),
+	);
+	await page.locator('text=Pay').click();
+	const toasts = page.locator('id=toasts');
+	await expect.soft(toasts).toContainText('Failed to contact MyFatoorah');
+
+	const btn = page.locator('text=Pay');
+	await expect(btn).toBeEnabled();
+});
 // test('portal shows correct payment status', async ({ page, trxId }) => {
 // 	// Login
 // 	await page.goto('/');

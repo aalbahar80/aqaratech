@@ -1,12 +1,8 @@
 import { environment } from '$environment';
 import prismaClient from '$lib/server/prismaClient';
+import { z } from 'zod';
 
 const { myfatoorahConfig } = environment;
-interface MFResponse {
-	Data: {
-		PaymentURL: string;
-	};
-}
 
 interface MyFatoorahPaymentStatusResponse {
 	Data: {
@@ -104,8 +100,13 @@ export const getMFUrl = async ({
 			},
 		);
 
-		const data = (await res.json()) as MFResponse;
-		console.log(data, 'myfatoorah.ts ~ 85');
+		const MFResponse = z.object({
+			Data: z.object({
+				PaymentURL: z.string().url(),
+			}),
+		});
+		const raw = await res.json();
+		const data = MFResponse.parse(raw);
 		return data.Data.PaymentURL;
 	} catch (err) {
 		console.error(err);
@@ -135,6 +136,7 @@ export const getPaymentStatus = async (
 		},
 	);
 
+	// TODO: use zod to parse response. Good to catch any errors early.
 	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
 	console.log({ data }, 'myfatoorah.ts ~ 116');
 

@@ -59,6 +59,8 @@
 	});
 
 	const handlePayment = async () => {
+		// TODO: move this to use:action
+		// TODO: button spinner should also be use:action
 		loading = true;
 		try {
 			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
@@ -66,7 +68,13 @@
 			mfUrl = data.mfUrl;
 			goto(mfUrl).catch(console.error);
 		} catch (err) {
-			console.error(err);
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Error',
+					subtitle: 'Failed to contact MyFatoorah',
+				},
+			});
 		} finally {
 			loading = false;
 		}
