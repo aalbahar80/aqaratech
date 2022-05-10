@@ -4,19 +4,18 @@ import { Property } from '$lib/models/classes/property.class.js';
 import { Tenant } from '$lib/models/classes/tenant.class.js';
 import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
-import type { EntityTitle } from '$lib/models/types/entity.type.js';
-import type { Lease as PLease } from '@prisma/client';
-import { addMonths, format } from 'date-fns';
-import { nanoid } from 'nanoid';
-import type { z } from 'zod';
 import {
 	leaseFormSchema as extendedSchema,
 	schema as baseSchema,
 } from '../schemas/lease.schema.js';
+import type { Lease as PLease } from '@prisma/client';
+import { addMonths, format } from 'date-fns';
+import { nanoid } from 'nanoid';
+import type { z } from 'zod';
 import { Entity } from './entity.class.js';
 
 export class Lease extends Entity {
-	static urlName = 'leases' as EntityTitle;
+	static urlName = 'leases' as const;
 	static singular = 'lease';
 	static singularCap = 'Lease';
 	static plural = 'leases';

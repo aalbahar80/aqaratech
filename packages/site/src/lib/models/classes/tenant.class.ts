@@ -1,5 +1,4 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
-import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { concatIfExists, getName } from '$lib/utils/common.js';
 import type { Tenant as PTenant } from '@prisma/client';
 import type { z } from 'zod';
@@ -7,7 +6,7 @@ import { schema as baseSchema } from '../schemas/tenant.schema.js';
 import { Entity } from './entity.class.js';
 
 export class Tenant extends Entity {
-	static urlName = 'tenants' as EntityTitle;
+	static urlName = 'tenants' as const;
 	static singular = 'tenant';
 	static singularCap = 'Tenant';
 	static plural = 'tenants';

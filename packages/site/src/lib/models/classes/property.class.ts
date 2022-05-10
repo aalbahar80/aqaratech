@@ -1,14 +1,13 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Client } from '$lib/models/classes/client.class.js';
-import type { EntityTitle } from '$lib/models/types/entity.type.js';
 import { getAddress } from '$lib/utils/common.js';
+import { schema as baseSchema } from '../schemas/property.schema.js';
 import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/property.schema.js';
 import { Entity } from './entity.class.js';
 
 export class Property extends Entity {
-	static urlName = 'properties' as EntityTitle;
+	static urlName = 'properties' as const;
 	static singular = 'property';
 	static singularCap = 'Property';
 	static plural = 'properties';
