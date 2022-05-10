@@ -4,6 +4,7 @@
 
 	export let kind: 'success' | 'error';
 	export let title = 'Success';
+	export let subtitle: string | undefined = undefined;
 	export let close: () => void;
 </script>
 
@@ -12,8 +13,8 @@
 	class:bg-green-100={kind === 'success'}
 	class:bg-red-100={kind === 'error'}
 >
-	<div class="flex items-center">
-		<div class="flex-shrink-0">
+	<div class="flex">
+		<div class="flex-shrink-0 pt-1">
 			<div
 				class="toast__icon-container"
 				class:toast__icon-container--success={kind === 'success'}
@@ -27,13 +28,22 @@
 			</div>
 		</div>
 		<div class="ml-3">
-			<p
+			<h3
 				class="text-sm font-medium lg:text-lg"
 				class:text-red-800={kind === 'error'}
 				class:text-green-800={kind === 'success'}
 			>
 				{title}
-			</p>
+			</h3>
+			<div
+				class="mt-2 text-sm"
+				class:text-red-800={kind === 'error'}
+				class:text-green-800={kind === 'success'}
+			>
+				<p>
+					{subtitle}
+				</p>
+			</div>
 		</div>
 		<div class="ml-auto pl-3">
 			<div class="-mx-1.5 -my-1.5">
