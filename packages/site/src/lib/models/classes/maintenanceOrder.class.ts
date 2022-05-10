@@ -36,6 +36,7 @@ export class MaintenanceOrder extends Entity {
 		public pluralCap = 'MaintenanceOrders',
 		public schema = baseSchema,
 		public override basicFields = MaintenanceOrder.basicFields,
+		public override relationalFields = MaintenanceOrder.relationalFields,
 	) {
 		super();
 	}

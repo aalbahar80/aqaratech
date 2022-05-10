@@ -31,6 +31,7 @@ export class Expense extends Entity {
 		public pluralCap = 'Expenses',
 		public schema = baseSchema,
 		public override basicFields = Expense.basicFields,
+		public override relationalFields = Expense.relationalFields,
 	) {
 		super();
 	}

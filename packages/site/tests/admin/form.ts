@@ -79,11 +79,14 @@ export class Form {
 
 export class ClientForm extends Form {
 	static urlName: EntityTitle = 'clients';
-	ins = new Client();
 	constructor(public data = fakeClient()) {
 		super(ClientForm.urlName, data.id);
 	}
 	override relationalFields = Unit.relationalFields;
+
+	public get ins(): Client {
+		return new Client({ ...this.data });
+	}
 
 	public async fill(page: Page) {
 		await page.fill('input[name="firstName"]', this.data.firstName);
@@ -117,13 +120,16 @@ export class ClientForm extends Form {
 
 export class PropertyForm extends Form {
 	static urlName: EntityTitle = 'properties';
-	ins = new Property();
 	override relationalFields = Property.relationalFields;
 
 	client: ReturnType<typeof fakeClient>;
 	constructor(public data = fakeProperty()) {
 		super(PropertyForm.urlName, data.id);
 		this.client = { ...fakeClient(), id: data.clientId };
+	}
+
+	public get ins(): Property {
+		return new Property({ ...this.data, client: this.client });
 	}
 
 	public async fill(page: Page) {
@@ -170,7 +176,6 @@ export class PropertyForm extends Form {
 
 export class UnitForm extends Form {
 	static urlName: EntityTitle = 'units';
-	ins = new Unit();
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
 	constructor(public data = fakeUnit()) {
@@ -188,6 +193,13 @@ export class UnitForm extends Form {
 		await page.fill('input[name="bed"]', this.data.bed.toString());
 		await page.fill('input[name="bath"]', this.data.bath.toString());
 		await page.fill('input[name="floor"]', this.data.floor.toString());
+	}
+
+	public get ins(): Unit {
+		return new Unit({
+			...this.data,
+			property: { ...this.property, client: { ...this.client } },
+		});
 	}
 
 	public alter() {
@@ -227,7 +239,6 @@ export class UnitForm extends Form {
 
 export class TenantForm extends Form {
 	static urlName: EntityTitle = 'tenants';
-	ins = new Tenant();
 	constructor(public data = fakeTenant()) {
 		super(TenantForm.urlName, data.id);
 	}
@@ -239,6 +250,10 @@ export class TenantForm extends Form {
 		await page.fill('input[name="phone"]', this.data.phone);
 		await page.fill('input[name="civilid"]', this.data.civilid);
 		await page.fill('input[name="dob"]', dateToInput(this.data.dob));
+	}
+
+	public get ins(): Tenant {
+		return new Tenant({ ...this.data });
 	}
 
 	public alter() {
@@ -263,7 +278,6 @@ export class TenantForm extends Form {
 
 export class LeaseForm extends Form {
 	static urlName: EntityTitle = 'leases';
-	ins = new Lease();
 	override relationalFields = Lease.relationalFields;
 	client: ReturnType<typeof fakeClient>;
 	property: ReturnType<typeof fakeProperty>;
@@ -275,6 +289,17 @@ export class LeaseForm extends Form {
 		this.property = { ...fakeProperty(), id: this.unit.propertyId };
 		this.client = { ...fakeClient(), id: this.property.clientId };
 		this.tenant = { ...fakeTenant(), id: data.tenantId };
+	}
+
+	public get ins(): Lease {
+		return new Lease({
+			...this.data,
+			unit: {
+				...this.unit,
+				property: { ...this.property, client: { ...this.client } },
+			},
+			tenant: { ...this.tenant },
+		});
 	}
 
 	public async fill(page: Page) {
@@ -336,7 +361,6 @@ export class LeaseForm extends Form {
 
 export class ExpenseForm extends Form {
 	static urlName: EntityTitle = 'expenses';
-	ins = new Expense();
 	override relationalFields = Expense.relationalFields;
 	constructor(
 		public client = fakeClient(),
@@ -350,6 +374,21 @@ export class ExpenseForm extends Form {
 		},
 	) {
 		super(ExpenseForm.urlName, data.id);
+	}
+
+	public get ins(): Expense {
+		return new Expense({
+			...this.data,
+			client: { ...this.client },
+			property: {
+				...this.property,
+				client: { ...this.client },
+			},
+			unit: {
+				...this.unit,
+				property: { ...this.property, client: { ...this.client } },
+			},
+		});
 	}
 
 	public async fill(page: Page) {
@@ -409,7 +448,6 @@ export class ExpenseForm extends Form {
 
 export class MaintenanceOrderForm extends Form {
 	static urlName: EntityTitle = 'maintenanceOrders';
-	ins = new MaintenanceOrder();
 	override relationalFields = MaintenanceOrder.relationalFields;
 	constructor(
 		public client = fakeClient(),
@@ -423,6 +461,21 @@ export class MaintenanceOrderForm extends Form {
 		},
 	) {
 		super(MaintenanceOrderForm.urlName, data.id);
+	}
+
+	public get ins(): MaintenanceOrder {
+		return new MaintenanceOrder({
+			...this.data,
+			client: { ...this.client },
+			property: {
+				...this.property,
+				client: { ...this.client },
+			},
+			unit: {
+				...this.unit,
+				property: { ...this.property, client: { ...this.client } },
+			},
+		});
 	}
 
 	public async fill(page: Page) {

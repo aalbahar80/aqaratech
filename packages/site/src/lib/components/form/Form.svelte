@@ -97,7 +97,7 @@
 						{entity.data?.id ? 'Edit ' : 'New '}{entity.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
-						{#if entity.relationalFields}
+						{#if entity.relationalFields && entity.urlName !== 'expenses' && entity.urlName !== 'maintenanceOrders'}
 							{#each entity.relationalFields as field}
 								{#if field === 'clientId'}
 									<SelectEntity
