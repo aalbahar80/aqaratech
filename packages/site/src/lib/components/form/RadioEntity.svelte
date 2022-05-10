@@ -24,8 +24,9 @@
 	export let invalidText: string | undefined;
 	export let initial: string | undefined = undefined;
 
-	const initialIdx = options.findIndex((option) => option.value === initial);
-	let selected: SelectedRadioOption = options[initialIdx];
+	let selected: SelectedRadioOption = initial
+		? options.find((option) => option.value === initial)
+		: undefined;
 
 	const dispatch = createEventDispatcher<{
 		select: RadioOption[];
