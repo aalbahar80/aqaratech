@@ -4,14 +4,6 @@ import { z } from 'zod';
 
 const { myfatoorahConfig } = environment;
 
-interface MyFatoorahPaymentStatusResponse {
-	Data: {
-		InvoiceId: number;
-		CustomerReference: string;
-		InvoiceStatus: string;
-	};
-}
-
 // TODO: setup proper auth later as per:
 // https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
 
@@ -120,33 +112,43 @@ export const getMFUrl = async ({
 export const getPaymentStatus = async (
 	paymentId: string,
 ): Promise<{ trxId: string; isPaid: boolean }> => {
-	// get payment status from myfatoorah
-	const res = await fetch(
-		`${myfatoorahConfig.MYFATOORAH_BASE_URL}/v2/GetPaymentStatus`,
-		{
-			headers: {
-				Authorization: `Bearer ${myfatoorahConfig.MYFATOORAH_TOKEN}`,
-				'Content-Type': 'application/json',
+	try {
+		const res = await fetch(
+			`${myfatoorahConfig.MYFATOORAH_BASE_URL}/v2/GetPaymentStatus`,
+			{
+				headers: {
+					Authorization: `Bearer ${myfatoorahConfig.MYFATOORAH_TOKEN}`,
+					'Content-Type': 'application/json',
+				},
+				method: 'POST',
+				body: JSON.stringify({
+					Key: paymentId,
+					KeyType: 'PaymentId',
+				}),
 			},
-			method: 'POST',
-			body: JSON.stringify({
-				Key: paymentId,
-				KeyType: 'PaymentId',
+		);
+
+		const PaymentStatus = z.object({
+			Data: z.object({
+				InvoiceId: z.number(),
+				CustomerReference: z.string(),
+				InvoiceStatus: z.string(),
 			}),
-		},
-	);
+		});
+		const raw = await res.json();
+		const paymentStatus = PaymentStatus.parse(raw);
 
-	// TODO: use zod to parse response. Good to catch any errors early.
-	const data = (await res.json()) as MyFatoorahPaymentStatusResponse;
-	console.log({ data }, 'myfatoorah.ts ~ 116');
+		const isPaid = paymentStatus.Data.InvoiceStatus === 'Paid';
+		const trxId = paymentStatus.Data.CustomerReference;
 
-	const isPaid = data.Data.InvoiceStatus === 'Paid';
-	const trxId = data.Data.CustomerReference;
-
-	return {
-		trxId,
-		isPaid,
-	};
+		return {
+			trxId,
+			isPaid,
+		};
+	} catch (err) {
+		console.error(err);
+		throw err;
+	}
 };
 
 /**
