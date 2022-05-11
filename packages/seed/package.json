@@ -15,8 +15,8 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc --project tsconfig.build.json && microbundle",
-        "seed": "ts-node-esm -T ./seed.ts",
+        "build": "tsc --project tsconfig.build.json && microbundle --tsconfig tsconfig.build.json",
+        "seed": "node dist/seed.js",
         "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma"
     },
     "devDependencies": {

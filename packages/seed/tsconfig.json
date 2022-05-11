@@ -18,7 +18,6 @@
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true
-	}
-	// "files": ["src/types.ts"]
-	// "include": ["./seed.ts", "./generators.ts"]
+	},
+	"include": ["src/**/*"]
 }
