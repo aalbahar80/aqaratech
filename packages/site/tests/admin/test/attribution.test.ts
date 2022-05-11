@@ -53,17 +53,11 @@ test('new: preselected unit from URL', async ({ page, form }) => {
 	await expect.soft(radio).toContainText(label);
 });
 
-// test('edit: correct radio button is preselected', async ({ page, form }) => {
-// 	await page.goto(`/expenses/${form.id}/edit`);
-// 	const radio = page.locator('role=radio[checked=true]');
-// 	await expect(radio).toBeVisible();
-// });
-
-// test('new: no radio option is preselected', async ({ page, form }) => {
-// 	await page.goto(`/expenses/${form.id}/edit`);
-// 	const radio = page.locator('role=radio[checked=true]');
-// 	await expect(radio).toHaveCount(0);
-// });
+test('new: no radio option is preselected', async ({ page }) => {
+	await page.goto('new/expenses');
+	const radio = page.locator('role=radio[checked=true]');
+	await expect(radio).toHaveCount(0);
+});
 
 // test.describe('Edit expense form', async () => {
 // 	test('category is preselected', async ({ form, page }) => {

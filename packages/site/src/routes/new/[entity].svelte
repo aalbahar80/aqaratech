@@ -16,7 +16,6 @@
 		const searchParams = Object.fromEntries(url.searchParams.entries());
 		const keys: Relation[] = ['clientId', 'propertyId', 'unitId', 'leaseId'];
 		const key = keys.find((key) => key in searchParams);
-		console.log({ entityTitle }, '[entity].svelte ~ 20');
 		if (!key) return { props: { entityTitle } };
 
 		const value = z.string().uuid().safeParse(searchParams[key]);
