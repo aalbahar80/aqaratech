@@ -85,6 +85,22 @@ test('display toast when /getUrl throws', async ({ page, trxId }) => {
 	const btn = page.locator('text=Pay');
 	await expect(btn).toBeEnabled();
 });
+
+test('myFatoorah callback throws on malformed searchParams', async ({
+	page,
+}) => {
+	// zod parser should throw because of malformed searchParams
+	await page.goto('/api/payments/mfcallback?patId=123&Id=456');
+
+	const h1 = page.locator('h1');
+	await expect.soft(h1).toContainText('Internal server error');
+
+	const body = page.locator('body');
+	await expect.soft(body).toContainText('500');
+	await expect.soft(body).toContainText('Failed to fetch payment status');
+	await expect.soft(body).toContainText('Internal server error');
+});
+
 // test('portal shows correct payment status', async ({ page, trxId }) => {
 // 	// Login
 // 	await page.goto('/');

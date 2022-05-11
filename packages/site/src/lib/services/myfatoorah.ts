@@ -161,16 +161,14 @@ export const markAsPaid = async ({
 	trxId: string;
 	mfPaymentId: string;
 }) => {
-	// TODO how to get correct invoice URL?
-	// const invoiceUrl =
-	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
-	// const mfInvoiceUrl =
-	// 	'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
+	// TODO: how to get correct invoice URL?
+	// 'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
+	// 'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
 
 	try {
-		console.log(`attempting to mark trx ${trxId} as paid`);
-		// TODO auth here (machine to machine)?
-		const result = await prismaClient.transaction.update({
+		// TODO: use prisma's $transaction api to only change the
+		// paidAt field if it's not already paid
+		await prismaClient.transaction.update({
 			where: { id: trxId },
 			data: {
 				mfPaymentId,
@@ -178,9 +176,9 @@ export const markAsPaid = async ({
 				paidAt: new Date(),
 			},
 		});
-		console.log({ result }, 'myfatoorah.ts ~ 159');
+		return;
 	} catch (err) {
 		console.error(err);
-		return;
+		throw err;
 	}
 };

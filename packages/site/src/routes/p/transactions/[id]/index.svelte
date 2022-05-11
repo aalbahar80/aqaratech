@@ -114,32 +114,30 @@
 	const { label, color: badgeColor } = Transaction.getBadge(trx);
 </script>
 
-<div class="mx-auto flex max-w-4xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-	<Heading title={Transaction.singularCap} id={trx.id} entity="leases" {icons}>
-		<svelte:fragment slot="breadcrumbs">
-			<BreadCrumb crumbs={[['leases', trx.leaseId]]} />
-		</svelte:fragment>
-	</Heading>
-	<Badge {label} {badgeColor} />
-	<DetailsPane {details} />
-	<div class="mt-4 flex self-end md:mt-0">
-		{#if !trx.isPaid}
-			<Button
-				class="h-12 w-32"
-				on:click={handlePayment}
-				{loading}
-				disabled={loading}
-				icon={CreditCard}
-				text="Pay"
-			/>
-		{:else}
-			<!-- <button
-				type="button"
-				class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			>
-				<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-				Invoice
-			</button> -->
-		{/if}
-	</div>
+<Heading title={Transaction.singularCap} id={trx.id} entity="leases" {icons}>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb crumbs={[['leases', trx.leaseId]]} />
+	</svelte:fragment>
+</Heading>
+<Badge {label} {badgeColor} />
+<DetailsPane {details} />
+<div class="mt-4 flex self-end md:mt-0">
+	{#if !trx.isPaid}
+		<Button
+			class="h-12 w-32"
+			on:click={handlePayment}
+			{loading}
+			disabled={loading}
+			icon={CreditCard}
+			text="Pay"
+		/>
+	{:else}
+		<!-- <button
+			type="button"
+			class="inline-flex h-12 w-32 items-center justify-center rounded-md border border-transparent border-gray-300 bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+		>
+			<Icon src={ReceiptTax} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+			Invoice
+		</button> -->
+	{/if}
 </div>

@@ -19,11 +19,19 @@ export const get: RequestHandler = async ({ url }) => {
 		};
 	} catch (error) {
 		console.error(error);
-		return {
-			status: 302,
-			headers: {
-				location: '/',
-			},
-		};
+		throw new Error('Failed to fetch payment status');
+
+		// render empty page
+		// return {
+		// 	status: 404,
+		// };
+
+		// Redirect to home page
+		// return {
+		// 	status: 302,
+		// 	headers: {
+		// 		location: '/',
+		// 	},
+		// };
 	}
 };
