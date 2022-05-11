@@ -22,18 +22,22 @@ export const post: RequestHandler = async ({ params }) => {
 		const Client = z.object({
 			id: z.string(),
 			email: z.string().email(),
-			civilId: z.string(),
+			civilid: z.string(),
 		});
-		const { id, email, civilId } = Client.parse(rawClient);
+		const { id, email, civilid } = Client.parse(rawClient);
 
 		let rawUserId: string | undefined;
 		// create auth0 user
-		const created = await createAuth0User({ id, email, civilId });
+		const created = await createAuth0User({ id, email, civilid });
 		if (created.status === 201) {
 			rawUserId = created.userData.user_id;
 		} else if (created.status === 409) {
 			// update existing auth0 user
-			const updated = await updateAuth0User({ sub: id, email, civilId });
+			const updated = await updateAuth0User({
+				sub: created.userData,
+				email,
+				civilid,
+			});
 			rawUserId = updated.userData.user_id;
 		} else {
 			// Case won't be reached in current implementation

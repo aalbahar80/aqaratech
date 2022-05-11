@@ -10,7 +10,6 @@ const UserData = z.object({
 		client_id: z.string().uuid(),
 	}),
 	email_verified: z.boolean(),
-	password: z.string(),
 });
 
 // const base = `https://${AUTH0_DOMAIN}/api/v2/users`;
@@ -27,12 +26,12 @@ const auth0Fetch = async (url: string, options: RequestInit) => {
 interface ToCreate {
 	id: string;
 	email: string;
-	civilId: string;
+	civilid: string;
 }
 interface ToUpdate {
 	sub: string;
 	email: string;
-	civilId: string;
+	civilid: string;
 }
 
 /**
@@ -40,7 +39,7 @@ interface ToUpdate {
  *
  * `409`: Conflict (email already exists)
  */
-export const createAuth0User = async ({ id, email, civilId }: ToCreate) => {
+export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 	try {
 		// TODO: zod parse ToAuth0
 		const res = await fetch(base, {
@@ -52,21 +51,22 @@ export const createAuth0User = async ({ id, email, civilId }: ToCreate) => {
 			body: JSON.stringify({
 				connection: 'Username-Password-Authentication',
 				email,
-				password: civilId,
+				password: civilid,
 				verify_email: true,
-				app_metadata: { client_id: id },
-				user_metadata: { client_id: id }, // TODO: delete me
+				app_metadata: { idInternal: id },
+				user_metadata: { idInternal: id }, // TODO: delete me
 			}),
 		});
 		const raw = await res.json();
 		const { status } = res;
+		console.debug({ raw }, 'invite.ts ~ 23');
 		if (status === 201) {
 			// created
-			console.debug({ raw }, 'invite.ts ~ 23');
 			const userData = UserData.parse(raw);
+			await updateAuthId(id, userData.user_id);
 			return { status: 201 as const, userData };
 		} else if (status === 409) {
-			return { status: 409 as const, userData: null };
+			return { status: 409 as const, userData };
 		} else {
 			console.debug({ raw }, 'auth0.ts ~ 121');
 			throw new Error('CREATE_USER_FAILED');
@@ -89,6 +89,9 @@ export const assignRole = async (sub: string) => {
 				roles: ['rol_n6YdReDFqv4IG60y'], // TODO: replace with .env
 			}),
 		});
+		const data = await res.json();
+		console.log({ data }, 'auth0.ts ~ 93');
+
 		if (res.status === 201) {
 			// role assigned
 			return true;
@@ -119,7 +122,7 @@ export const updateAuth0User = async ({ sub, email }: ToUpdate) => {
 				connection: 'Username-Password-Authentication',
 				email,
 				verify_email: true,
-				// password: civilId, // can't combine with email, what happens to password here?
+				// password: civilid, // can't combine with email, what happens to password here?
 				// email_verified: false,
 			}),
 		});
@@ -132,6 +135,18 @@ export const updateAuth0User = async ({ sub, email }: ToUpdate) => {
 			console.log({ raw }, 'auth0.ts ~ 121');
 			throw new Error('UPDATE_USER_FAILED');
 		}
+	} catch (e) {
+		console.error(e);
+		throw e;
+	}
+};
+
+export const updateAuthId = async (id: string, userId: string) => {
+	try {
+		await prismaClient.client.update({
+			where: { id },
+			data: { auth0Id: userId },
+		});
 	} catch (e) {
 		console.error(e);
 		throw e;
