@@ -10,16 +10,13 @@ export const handleInvite = async (clientId: string) => {
 		const raw = await res.json();
 
 		const Data = z.object({
-			success: z.literal(true),
-			email: z.string().email(),
-		});
-		const Err = z.object({
-			success: z.literal(false),
+			email: z.string().email().optional(),
 			message: z.string(),
 		});
-		const data = z.discriminatedUnion('success', [Data, Err]).parse(raw);
 
-		if (data.success) {
+		const data = Data.parse(raw);
+
+		if (res.ok) {
 			addToast({
 				props: {
 					kind: 'success',

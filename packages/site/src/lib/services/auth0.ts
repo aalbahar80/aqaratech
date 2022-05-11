@@ -66,7 +66,7 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 			await updateAuthId(id, userData.user_id);
 			return { status: 201 as const, userData };
 		} else if (status === 409) {
-			return { status: 409 as const, userData };
+			return { status: 409 as const };
 		} else {
 			console.debug({ raw }, 'auth0.ts ~ 121');
 			throw new Error('CREATE_USER_FAILED');
