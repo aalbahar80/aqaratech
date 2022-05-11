@@ -72,6 +72,7 @@
 			as="a"
 			href={`/new/leases?leaseId=${lease.id}&renew=true`}
 			class="w-full sm:w-auto"
+			prefetch
 		/>
 
 		<Button
@@ -80,6 +81,7 @@
 			as="a"
 			href={`/leases/${lease.id}/contract`}
 			class="w-full sm:w-auto"
+			prefetch
 		/>
 	</svelte:fragment>
 </Heading>
