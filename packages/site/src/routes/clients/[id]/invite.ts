@@ -1,4 +1,3 @@
-// import { environment } from '$environment';
 import prismaClient from '$lib/server/prismaClient';
 import {
 	assignRole,
@@ -13,7 +12,6 @@ export const post: RequestHandler = async ({ params }) => {
 	try {
 		// get data from db
 		const rawClient = await prismaClient.client.findUnique({
-			// const abc = await prismaClient.client.findUnique({
 			where: { id: params.id },
 			select: {
 				id: true,
@@ -21,7 +19,6 @@ export const post: RequestHandler = async ({ params }) => {
 				civilid: true,
 			},
 		});
-
 		const Client = z.object({
 			id: z.string(),
 			email: z.string().email(),
@@ -42,7 +39,10 @@ export const post: RequestHandler = async ({ params }) => {
 			// Case won't be reached in current implementation
 			return {
 				status: 404,
-				body: { message: 'Failed to create or update user in Auth0' },
+				body: {
+					success: false,
+					message: 'Failed to create or update user in Auth0',
+				},
 			};
 		}
 		const userId = z.string().parse(rawUserId);
@@ -50,15 +50,18 @@ export const post: RequestHandler = async ({ params }) => {
 		// check/assign correct role
 		const roleAssigned = await assignRole(userId);
 		if (roleAssigned) {
-			return { status: 200 };
+			return { status: 200, body: { success: true, email } };
 		} else {
 			return {
 				status: 500,
-				body: { message: 'Failed to assign role in Auth0' },
+				body: { success: false, message: 'Failed to assign role in Auth0' },
 			};
 		}
 	} catch (err) {
 		console.error(err);
-		throw err;
+		return {
+			status: 500,
+			body: { success: false, message: 'Faled to send invitation email' },
+		};
 	}
 };

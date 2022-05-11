@@ -8,24 +8,41 @@ export const handleInvite = async (clientId: string) => {
 			body: JSON.stringify({ clientId }),
 		});
 		const raw = await res.json();
+
 		const Data = z.object({
-			user_id: z.string(),
+			success: z.literal(true),
 			email: z.string().email(),
 		});
-		const data = Data.parse(raw);
-		addToast({
-			props: {
-				kind: 'success',
-				title: 'Sent',
-				subtitle: `Invite sent to ${data.email}`,
-			},
+		const Err = z.object({
+			success: z.literal(false),
+			message: z.string(),
 		});
+		const data = z.discriminatedUnion('success', [Data, Err]).parse(raw);
+
+		if (data.success) {
+			addToast({
+				props: {
+					kind: 'success',
+					title: 'Sent',
+					subtitle: `Email sent to ${data.email}`,
+				},
+			});
+		} else {
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Error',
+					subtitle: `${data.message}`,
+				},
+			});
+		}
 	} catch (e) {
 		console.error(e);
 		addToast({
 			props: {
 				kind: 'error',
-				title: 'Failed to send email',
+				title: 'Error',
+				// subtitle: `${e.message}`,
 			},
 		});
 	}
