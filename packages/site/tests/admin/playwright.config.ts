@@ -16,12 +16,7 @@ const config: Config = {
 	projects: [
 		{
 			name: 'general',
-			testMatch: [
-				'lease.test.ts',
-				'property.test.ts',
-				'unit.test.ts',
-				'attribution.test.ts',
-			],
+			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
 		},
 		{
 			name: 'client',
@@ -46,12 +41,12 @@ const config: Config = {
 		{
 			name: 'expense',
 			use: { baseForm: 'expenses' },
-			testMatch: commonForms,
+			testMatch: [...commonForms, 'attribution.test.ts'],
 		},
 		{
 			name: 'maintenanceOrder',
 			use: { baseForm: 'maintenanceOrders' },
-			testMatch: commonForms,
+			testMatch: [...commonForms, 'attribution.test.ts'],
 		},
 		{
 			name: 'lease',
