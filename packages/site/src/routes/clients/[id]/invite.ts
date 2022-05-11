@@ -29,23 +29,33 @@ export const post: RequestHandler = async ({ params }) => {
 		});
 		const { id, email, civilId } = Client.parse(rawClient);
 
+		let rawUserId: string | undefined;
 		// create auth0 user
 		const created = await createAuth0User({ id, email, civilId });
 		if (created.status === 201) {
-			const roleAssigned = await assignRole(created.userData?.user_id);
-			if (roleAssigned) {
-				return { status: 201, body: { userData: created.userData } };
-			}
+			rawUserId = created.userData.user_id;
 		} else if (created.status === 409) {
+			// update existing auth0 user
 			const updated = await updateAuth0User({ sub: id, email, civilId });
-			if (updated.status === 200) {
-				const roleAssigned = await assignRole(updated.userData?.user_id);
-				if (roleAssigned) {
-					return { status: 201, body: { userData: created.userData } };
-				}
-			}
+			rawUserId = updated.userData.user_id;
 		} else {
-			return { status: 500, body: { userData: null } };
+			// Case won't be reached in current implementation
+			return {
+				status: 404,
+				body: { message: 'Failed to create or update user in Auth0' },
+			};
+		}
+		const userId = z.string().parse(rawUserId);
+
+		// check/assign correct role
+		const roleAssigned = await assignRole(userId);
+		if (roleAssigned) {
+			return { status: 200 };
+		} else {
+			return {
+				status: 500,
+				body: { message: 'Failed to assign role in Auth0' },
+			};
 		}
 	} catch (err) {
 		console.error(err);
