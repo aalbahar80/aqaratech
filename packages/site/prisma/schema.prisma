@@ -22,6 +22,7 @@ model Client {
   phone             String?
   email             String?
   dob               DateTime?
+  auth0Id           String?
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   properties        Property[]
@@ -140,7 +141,7 @@ model Tenant {
   lastName          String
   civilid           String?
   dob               DateTime?
-  phone             String
+  phone             String?
   email             String?
   passportNum       String?
   nationality       String?
