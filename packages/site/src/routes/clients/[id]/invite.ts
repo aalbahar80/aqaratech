@@ -56,6 +56,8 @@ export const post: RequestHandler = async ({ params }) => {
 		// create auth0 user
 		const created = await createAuth0User({ id, email, civilid });
 		if (created.status === 409) {
+			// TODO: get user by email and populate auth0Id
+			// await updateAuthId(id, created.body.auth0Id);
 			return {
 				status: 409,
 				body: {

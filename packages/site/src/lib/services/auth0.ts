@@ -7,7 +7,7 @@ const UserData = z.object({
 	user_id: z.string(),
 	email: z.string().email(),
 	app_metadata: z.object({
-		client_id: z.string().uuid(),
+		idInternal: z.string().uuid(),
 	}),
 	email_verified: z.boolean(),
 });
@@ -59,21 +59,21 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 		});
 		const raw = await res.json();
 		const { status } = res;
-		console.debug({ raw }, 'invite.ts ~ 23');
 		if (status === 201) {
 			// created
 			const userData = UserData.parse(raw);
 			await updateAuthId(id, userData.user_id);
+			console.debug({ raw }, 'invite.ts ~ 23');
 			return { status: 201 as const, userData };
 		} else if (status === 409) {
-			return { status: 409 as const };
+			return { status: 409 as const, userData: undefined };
 		} else {
 			console.debug({ raw }, 'auth0.ts ~ 121');
 			throw new Error('CREATE_USER_FAILED');
 		}
 	} catch (e) {
 		console.error(e);
-		throw e;
+		return { status: 500 as const, userData: undefined };
 	}
 };
 
@@ -109,7 +109,7 @@ export const assignRole = async (sub: string) => {
  *
  * `404`: Not found
  */
-export const updateAuth0User = async ({ sub, email }: ToUpdate) => {
+const updateAuth0User = async ({ sub, email }: ToUpdate) => {
 	try {
 		// TODO: zod parse ToAuth0
 		const res = await fetch(`${base}/${sub}`, {
@@ -141,11 +141,11 @@ export const updateAuth0User = async ({ sub, email }: ToUpdate) => {
 	}
 };
 
-export const updateAuthId = async (id: string, userId: string) => {
+export const updateAuthId = async (id: string, auth0Id: string) => {
 	try {
 		await prismaClient.client.update({
 			where: { id },
-			data: { auth0Id: userId },
+			data: { auth0Id },
 		});
 	} catch (e) {
 		console.error(e);
