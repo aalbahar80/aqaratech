@@ -4,7 +4,7 @@
 
 	export let kind: 'success' | 'error';
 	export let title = 'Success';
-	export let subtitle: string | undefined = undefined;
+	export let subtitle = '';
 	export let close: () => void;
 </script>
 
