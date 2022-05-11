@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const handleInvite = async (clientId: string) => {
 	try {
-		const res = await fetch('/api/invite', {
+		const res = await fetch(`/clients/${clientId}/invite`, {
 			method: 'POST',
 			body: JSON.stringify({ clientId }),
 		});
