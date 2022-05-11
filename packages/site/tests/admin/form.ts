@@ -113,7 +113,7 @@ export class ClientForm extends Form {
 	async setupNew() {}
 
 	async setupEdit() {
-		const { id } = await prisma.client.create({ data: this.data });
+		await prisma.client.create({ data: this.data });
 	}
 }
 
@@ -157,13 +157,11 @@ export class PropertyForm extends Form {
 	}
 
 	async setupNew() {
-		const [client] = await Promise.all([
-			prisma.client.create({ data: this.client }),
-		]);
+		await Promise.all([prisma.client.create({ data: this.client })]);
 	}
 
 	async setupEdit() {
-		const [client, property] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.data }),
 		]);
@@ -213,14 +211,14 @@ export class UnitForm extends Form {
 	}
 
 	async setupNew() {
-		const [client, property] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 		]);
 	}
 
 	async setupEdit() {
-		const [client, property, unit] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.data }),
@@ -259,7 +257,7 @@ export class TenantForm extends Form {
 	}
 
 	async setupEdit() {
-		const { id } = await prisma.tenant.create({ data: this.data });
+		await prisma.tenant.create({ data: this.data });
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -321,7 +319,7 @@ export class LeaseForm extends Form {
 	}
 
 	async setupNew() {
-		const [client, property, unit, tenant] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
@@ -330,7 +328,7 @@ export class LeaseForm extends Form {
 	}
 
 	async setupEdit() {
-		const [client, property, unit, tenant, lease] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
