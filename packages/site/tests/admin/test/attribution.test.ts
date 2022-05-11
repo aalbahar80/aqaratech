@@ -12,12 +12,18 @@ base.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 const test = base.extend<{ form: ExpenseForm }>({
 	form: async ({}, use) => {
 		const form = new ExpenseForm();
-		await form.setupEdit();
 		await use(form);
 	},
 });
 
+test('new: no radio option is preselected', async ({ page }) => {
+	await page.goto('new/expenses');
+	const radio = page.locator('role=radio[checked=true]');
+	await expect(radio).toHaveCount(0);
+});
+
 test('new: preselected client from URL', async ({ page, form }) => {
+	await form.setupEdit();
 	await page.goto(`/new/expenses?clientId=${form.client.id}`);
 	const el = page.locator('#clientId');
 	const label = getName(form.client);
@@ -30,6 +36,7 @@ test('new: preselected client from URL', async ({ page, form }) => {
 });
 
 test('new: preselected property from URL', async ({ page, form }) => {
+	await form.setupEdit();
 	await page.goto(`/new/expenses?propertyId=${form.property.id}`);
 	const el = page.locator('#propertyId');
 	const label = getAddress(form.property);
@@ -42,6 +49,7 @@ test('new: preselected property from URL', async ({ page, form }) => {
 });
 
 test('new: preselected unit from URL', async ({ page, form }) => {
+	await form.setupEdit();
 	await page.goto(`/new/expenses?unitId=${form.unit.id}`);
 	const el = page.locator('#unitId');
 	const label = getUnitLabel(form.unit);
@@ -53,14 +61,7 @@ test('new: preselected unit from URL', async ({ page, form }) => {
 	await expect.soft(radio).toContainText(label);
 });
 
-test('new: no radio option is preselected', async ({ page }) => {
-	await page.goto('new/expenses');
-	const radio = page.locator('role=radio[checked=true]');
-	await expect(radio).toHaveCount(0);
-});
-
-test('edit: preselected unit', async ({ page }) => {
-	const form = new ExpenseForm();
+test('edit: preselected unit', async ({ page, form }) => {
 	await form.setupEdit('unit');
 	await page.goto(`/expenses/${form.data.id}/edit`);
 
@@ -74,8 +75,7 @@ test('edit: preselected unit', async ({ page }) => {
 	await expect.soft(radio).toContainText(label);
 });
 
-test('edit: preselected property', async ({ page }) => {
-	const form = new ExpenseForm();
+test('edit: preselected property', async ({ page, form }) => {
 	await form.setupEdit('property');
 	await page.goto(`/expenses/${form.data.id}/edit`);
 
@@ -89,8 +89,7 @@ test('edit: preselected property', async ({ page }) => {
 	await expect.soft(radio).toContainText(label);
 });
 
-test('edit: preselected client', async ({ page }) => {
-	const form = new ExpenseForm();
+test('edit: preselected client', async ({ page, form }) => {
 	await form.setupEdit('client');
 	await page.goto(`/expenses/${form.data.id}/edit`);
 

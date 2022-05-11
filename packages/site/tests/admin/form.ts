@@ -36,6 +36,23 @@ export type FormType =
 	| ExpenseForm
 	| MaintenanceOrderForm;
 
+type Attribution = 'client' | 'property' | 'unit';
+export const getRelations = (
+	data: {
+		client: { id: string };
+		property: { id: string };
+		unit: { id: string };
+	},
+	attribution?: Attribution,
+) =>
+	attribution
+		? {
+				clientId: attribution === 'client' ? data.client.id : null,
+				propertyId: attribution === 'property' ? data.property.id : null,
+				unitId: attribution === 'unit' ? data.unit.id : null,
+		  }
+		: {};
+
 export class Form {
 	createUrl: string;
 	editUrl: string;
@@ -393,20 +410,13 @@ export class ExpenseForm extends Form {
 		]);
 	}
 
-	async setupEdit(attribution?: 'client' | 'property' | 'unit') {
-		const amendment = attribution
-			? {
-					clientId: attribution === 'client' ? this.client.id : null,
-					propertyId: attribution === 'property' ? this.property.id : null,
-					unitId: attribution === 'unit' ? this.unit.id : null,
-			  }
-			: {};
+	async setupEdit(attribution?: Attribution) {
 		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 			prisma.expense.create({
-				data: { ...this.data, ...amendment },
+				data: { ...this.data, ...getRelations(this, attribution) },
 			}),
 		]);
 	}
@@ -477,19 +487,21 @@ export class MaintenanceOrderForm extends Form {
 	}
 
 	async setupNew() {
-		const [client, property, unit] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
 	}
 
-	async setupEdit() {
-		const [client, property, unit, expense] = await Promise.all([
+	async setupEdit(attribution?: Attribution) {
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
-			prisma.maintenanceOrder.create({ data: this.data }),
+			prisma.maintenanceOrder.create({
+				data: { ...this.data, ...getRelations(this, attribution) },
+			}),
 		]);
 	}
 }
