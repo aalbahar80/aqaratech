@@ -13,51 +13,41 @@
 	export let prefetch: true | undefined = undefined;
 </script>
 
-{#if as === 'button' || disabled}
-	<button type="submit" {disabled} class={$$props.class} on:click>
-		<Spinner {loading} />
-		{#if icon && !loading}
-			<Icon
-				src={icon}
-				theme={solid ? 'solid' : 'default'}
-				class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-				aria-hidden="true"
-			/>
-		{/if}
-		{text}
-	</button>
-{:else}
-	<!-- disabled <a> is rendered as button for convenience -->
-	<a {href} class={$$props.class} sveltekit:prefetch={prefetch}>
-		{#if icon}
-			<Icon
-				src={icon}
-				theme={solid ? 'solid' : 'default'}
-				class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-				aria-hidden="true"
-			/>
-		{/if}
-		{text}
-	</a>
-{/if}
+<svelte:element
+	this={as}
+	id="sbutton"
+	class={$$props.class}
+	{href}
+	sveltekit:prefetch={prefetch}
+	{disabled}
+	on:click
+>
+	<Spinner {loading} />
+	{#if icon && !loading}
+		<Icon
+			src={icon}
+			theme={solid ? 'solid' : 'default'}
+			class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
+			aria-hidden="true"
+		/>
+	{/if}
+	{text}
+</svelte:element>
 
 <style lang="postcss">
-	button,
-	a {
+	#sbutton {
 		@apply inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm;
 		min-width: var(--min-width);
 		min-height: var(--min-height);
 		/* border-bottom-right-radius: var(--border-radius-b, 0.375rem); */
 	}
-	button:disabled {
+	#sbutton:disabled {
 		@apply cursor-not-allowed opacity-50;
 	}
-	button:hover,
-	a:hover {
+	#sbutton:hover {
 		@apply bg-indigo-700;
 	}
-	button:focus,
-	a:focus {
+	#sbutton:focus {
 		@apply outline-none ring-2 ring-indigo-500 ring-offset-2;
 	}
 </style>
