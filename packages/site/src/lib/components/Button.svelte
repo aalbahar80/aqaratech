@@ -19,6 +19,7 @@
 	class={$$props.class}
 	{href}
 	sveltekit:prefetch={prefetch}
+	type="submit"
 	{disabled}
 	on:click
 >
