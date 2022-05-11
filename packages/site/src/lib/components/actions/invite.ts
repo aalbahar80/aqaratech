@@ -18,14 +18,16 @@ export const handleInvite = async (clientId: string) => {
 
 		if (res.ok) {
 			addToast({
+				duration: 90000,
 				props: {
 					kind: 'success',
 					title: 'Sent',
-					subtitle: `Email sent to ${data.email}`,
+					subtitle: `${data.message}`,
 				},
 			});
 		} else {
 			addToast({
+				duration: 90000,
 				props: {
 					kind: 'error',
 					title: 'Error',

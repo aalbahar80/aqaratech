@@ -75,6 +75,7 @@ export const post: RequestHandler = async ({ params }) => {
 					body: {
 						code: 'SUCCESS',
 						message: `Account created. An email with a link to activate it has been sent to the client: ${email}`,
+						email: created.userData.email,
 					},
 				};
 			} else {
