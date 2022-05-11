@@ -15,7 +15,7 @@ export class Expense extends Entity {
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
 	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
-	static basicFields = ['amount', 'postAt', 'memo', 'category'] as const;
+	static basicFields = ['amount', 'postAt', 'category', 'memo'] as const;
 
 	constructor(
 		public data?:
