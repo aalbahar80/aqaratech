@@ -8,7 +8,7 @@
 	export let text: string = '';
 	export let icon: IconSource | undefined = undefined;
 	export let solid: boolean = false;
-	export let as: 'button' | 'a' = 'button';
+	export let as: 'button' | 'a' | 'div' = 'button';
 	export let href: string = '';
 	export let prefetch: true | undefined = undefined;
 </script>
