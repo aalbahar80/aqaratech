@@ -89,10 +89,7 @@ export const assignRole = async (sub: string) => {
 				roles: ['rol_n6YdReDFqv4IG60y'], // TODO: replace with .env
 			}),
 		});
-		const data = await res.json();
-		console.log({ data }, 'auth0.ts ~ 93');
-
-		if (res.status === 201) {
+		if (res.status === 204) {
 			// role assigned
 			return true;
 		} else {

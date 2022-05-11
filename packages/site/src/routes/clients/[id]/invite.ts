@@ -47,7 +47,7 @@ export const post: RequestHandler = async ({ params }) => {
 				status: 400,
 				body: {
 					code: 'INVALID_DATA',
-					message: 'email and civilid are required to create a user account',
+					message: 'Email and Civilid are required to create a user account',
 				},
 			};
 		}
