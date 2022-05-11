@@ -386,19 +386,28 @@ export class ExpenseForm extends Form {
 	}
 
 	async setupNew() {
-		const [client, property, unit] = await Promise.all([
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
 	}
 
-	async setupEdit() {
-		const [client, property, unit, expense] = await Promise.all([
+	async setupEdit(attribution?: 'client' | 'property' | 'unit') {
+		const amendment = attribution
+			? {
+					clientId: attribution === 'client' ? this.client.id : null,
+					propertyId: attribution === 'property' ? this.property.id : null,
+					unitId: attribution === 'unit' ? this.unit.id : null,
+			  }
+			: {};
+		await Promise.all([
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
-			prisma.expense.create({ data: this.data }),
+			prisma.expense.create({
+				data: { ...this.data, ...amendment },
+			}),
 		]);
 	}
 }

@@ -59,6 +59,51 @@ test('new: no radio option is preselected', async ({ page }) => {
 	await expect(radio).toHaveCount(0);
 });
 
+test('edit: preselected unit', async ({ page }) => {
+	const form = new ExpenseForm();
+	await form.setupEdit('unit');
+	await page.goto(`/expenses/${form.data.id}/edit`);
+
+	const el = page.locator('#unitId');
+	const label = getUnitLabel(form.unit);
+	await expect(el).toContainText(label);
+
+	const radio = page.locator('role=radio[checked=true]');
+	await expect.soft(radio).not.toHaveAttribute('aria-disabled', 'true');
+
+	await expect.soft(radio).toContainText(label);
+});
+
+test('edit: preselected property', async ({ page }) => {
+	const form = new ExpenseForm();
+	await form.setupEdit('property');
+	await page.goto(`/expenses/${form.data.id}/edit`);
+
+	const el = page.locator('#propertyId');
+	const label = getAddress(form.property);
+	await expect(el).toContainText(label);
+
+	const radio = page.locator('role=radio[checked=true]');
+	await expect.soft(radio).not.toHaveAttribute('aria-disabled', 'true');
+
+	await expect.soft(radio).toContainText(label);
+});
+
+test('edit: preselected client', async ({ page }) => {
+	const form = new ExpenseForm();
+	await form.setupEdit('client');
+	await page.goto(`/expenses/${form.data.id}/edit`);
+
+	const el = page.locator('#clientId');
+	const label = getName(form.client);
+	await expect(el).toContainText(label);
+
+	const radio = page.locator('role=radio[checked=true]');
+	await expect.soft(radio).not.toHaveAttribute('aria-disabled', 'true');
+
+	await expect.soft(radio).toContainText(label);
+});
+
 // test.describe('Edit expense form', async () => {
 // 	test('category is preselected', async ({ form, page }) => {
 // 		await page.goto(`/${form.data.id}/edit`);
