@@ -36,25 +36,10 @@ export type FormType =
 	| ExpenseForm
 	| MaintenanceOrderForm;
 
-class Basket {
-	constructor(
-		public clients: string[] = [],
-		public properties: string[] = [],
-		public units: string[] = [],
-		public tenants: string[] = [],
-		public leases: string[] = [],
-		public expenses: string[] = [],
-		public maintenanceOrders: string[] = [],
-	) {}
-
-	async clean() {}
-}
-
 export class Form {
 	createUrl: string;
 	editUrl: string;
 	relationalFields: readonly string[] = [];
-	public basket = new Basket();
 
 	constructor(public urlName: EntityTitle, public id: string) {
 		// super(urlName);
@@ -72,9 +57,7 @@ export class Form {
 		}
 	}
 
-	async clean() {
-		await this.basket.clean();
-	}
+	async clean() {}
 }
 
 export class ClientForm extends Form {
@@ -114,7 +97,6 @@ export class ClientForm extends Form {
 
 	async setupEdit() {
 		const { id } = await prisma.client.create({ data: this.data });
-		this.basket.clients.push(id);
 	}
 }
 
@@ -161,7 +143,6 @@ export class PropertyForm extends Form {
 		const [client] = await Promise.all([
 			prisma.client.create({ data: this.client }),
 		]);
-		this.basket.clients.push(client.id);
 	}
 
 	async setupEdit() {
@@ -169,8 +150,6 @@ export class PropertyForm extends Form {
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.data }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
 	}
 }
 
@@ -221,8 +200,6 @@ export class UnitForm extends Form {
 			prisma.client.create({ data: this.client }),
 			prisma.property.create({ data: this.property }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
 	}
 
 	async setupEdit() {
@@ -231,9 +208,6 @@ export class UnitForm extends Form {
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.data }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
 	}
 }
 
@@ -269,7 +243,6 @@ export class TenantForm extends Form {
 
 	async setupEdit() {
 		const { id } = await prisma.tenant.create({ data: this.data });
-		this.basket.tenants.push(id);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -337,10 +310,6 @@ export class LeaseForm extends Form {
 			prisma.unit.create({ data: this.unit }),
 			prisma.tenant.create({ data: this.tenant }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
-		this.basket.tenants.push(tenant.id);
 	}
 
 	async setupEdit() {
@@ -351,11 +320,6 @@ export class LeaseForm extends Form {
 			prisma.tenant.create({ data: this.tenant }),
 			prisma.lease.create({ data: this.data }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
-		this.basket.tenants.push(tenant.id);
-		this.basket.leases.push(lease.id);
 	}
 }
 
@@ -427,9 +391,6 @@ export class ExpenseForm extends Form {
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
 	}
 
 	async setupEdit() {
@@ -439,10 +400,6 @@ export class ExpenseForm extends Form {
 			prisma.unit.create({ data: this.unit }),
 			prisma.expense.create({ data: this.data }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
-		this.basket.expenses.push(expense.id);
 	}
 }
 
@@ -516,9 +473,6 @@ export class MaintenanceOrderForm extends Form {
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
 	}
 
 	async setupEdit() {
@@ -528,10 +482,6 @@ export class MaintenanceOrderForm extends Form {
 			prisma.unit.create({ data: this.unit }),
 			prisma.maintenanceOrder.create({ data: this.data }),
 		]);
-		this.basket.clients.push(client.id);
-		this.basket.properties.push(property.id);
-		this.basket.units.push(unit.id);
-		this.basket.maintenanceOrders.push(expense.id);
 	}
 }
 
