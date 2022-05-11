@@ -14,7 +14,7 @@
 </script>
 
 <svelte:element
-	this={as}
+	this={disabled ? 'button' : as}
 	id="sbutton"
 	class={$$props.class}
 	{href}
