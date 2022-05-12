@@ -4,7 +4,7 @@ import { getAddress } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';
-import { sortBy } from 'lodash-es';
+import * as R from 'remeda';
 import { currencyTooltip } from './utils/currency';
 
 type Data = InferQueryOutput<'owner:charts:expenses'>;
@@ -20,7 +20,7 @@ type Dataset = {
 	address: string;
 }[];
 
-const sort = (data: Data) => sortBy(data, 'postAt');
+const sort = (data: Data) => R.sortBy(data, (item) => item.postAt);
 
 const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 	const sorted = sort(data);
