@@ -32,7 +32,7 @@ export const getAuthz = async (
 		const isOwner = roles.includes('property-owner');
 		const isAdmin = roles.includes('admin');
 		const isTenant = roles.includes('tenant');
-		const sub = payload.sub || '';
+		const sub = payload.sub;
 		if (isTenant) {
 			return {
 				role: 'tenant',
