@@ -39,13 +39,13 @@ export class Client extends Entity {
 	});
 
 	basicFields = [
-		'auth0Id',
 		'firstName',
 		'lastName',
 		'phone',
 		'email',
 		'civilid',
 		'dob',
+		'auth0Id',
 	] as const;
 
 	public static getLabel = (item: ILabel) => getName(item);

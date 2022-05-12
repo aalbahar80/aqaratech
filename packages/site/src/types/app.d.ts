@@ -42,8 +42,6 @@ declare namespace App {
 	}
 }
 
-type FormType = 'create' | 'update';
-
 declare module 'chart.js/dist/chart.esm' {
 	// https://github.com/ivanhofer/sveltekit-typescript-showcase#2-extend-existing-type-definitions
 	import type { Chart } from 'chart.js/types/index.esm';

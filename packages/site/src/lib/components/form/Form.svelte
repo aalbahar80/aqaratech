@@ -79,6 +79,8 @@
 
 	const options = entity.getRelationOptions();
 	let { client, property, unit, tenant } = options;
+
+	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
 </script>
 
 <svelte:head>
@@ -158,6 +160,7 @@
 						{#each entity.basicFields as field}
 							<Input
 								name={field}
+								disabled={field === 'auth0Id' && FormType === 'new'}
 								value={getValue($data2, field)}
 								invalid={!!getValue($errors, field)}
 								invalidText={getValue($errors, field)?.[0]}

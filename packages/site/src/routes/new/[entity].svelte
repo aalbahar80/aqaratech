@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
 	import Form from '$components/form/Form.svelte';
 	import { trpc } from '$lib/client/trpc';
 	import type { EntityTitle, Relation } from '$lib/models/types/entity.type';
