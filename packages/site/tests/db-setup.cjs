@@ -4,6 +4,7 @@ require('dotenv').config({
 });
 
 const { PrismaClient } = require('@prisma/client');
+const { testTenantAuth0Id, testClientAuth0Id } = require('@self/seed');
 const prisma = new PrismaClient();
 
 async function cleanupDatabase() {
@@ -41,6 +42,7 @@ const setupTenant = async () => {
 			residencyNum: '534184025',
 			residencyEnd: new Date(),
 			contactMethod: null,
+			auth0Id: testTenantAuth0Id,
 		},
 	});
 	console.timeEnd('creating test tenant');
@@ -62,6 +64,7 @@ const setupClient = async () => {
 			phone: '11096260',
 			email: 'client.dev@mailthink.net',
 			dob: new Date(),
+			auth0Id: testClientAuth0Id,
 		},
 	});
 	console.timeEnd('creating test client');

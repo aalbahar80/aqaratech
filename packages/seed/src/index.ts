@@ -11,9 +11,11 @@ export {
 	fakeUnit,
 	testClientEmail,
 	testClientId,
+	testClientAuth0Id,
 	testClientPassword,
 	testTenantEmail,
 	testTenantId,
+	testTenantAuth0Id,
 	testTenantPassword,
 	timespan,
 } from "./generators";
