@@ -1,4 +1,5 @@
 import { environment } from '$environment';
+import prismaClient from '$lib/server/prismaClient';
 import type { JSONObject } from 'superjson/dist/types';
 import { z, ZodError } from 'zod';
 

@@ -85,7 +85,7 @@ declare global {
 	}
 
 	// eslint-disable-next-line no-var
-	var prismaClient: PrismaClient;
+	// var prismaClient: PrismaClient;
 }
 
 // If this file has no import/export statements (i.e. is a script)
