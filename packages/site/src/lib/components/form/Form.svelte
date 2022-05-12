@@ -96,7 +96,7 @@
 			<div class="flex flex-col justify-between">
 				<div class="divide-y divide-gray-200 px-4 sm:px-6">
 					<h1 class="py-4 text-lg font-medium text-gray-700">
-						{entity.data?.id ? 'Edit ' : 'New '}{entity.singularCap}
+						{FormType === 'edit' ? 'Edit ' : 'New '}{entity.singularCap}
 					</h1>
 					<div class="space-y-6 pt-6 pb-5">
 						{#if entity.relationalFields && entity.urlName !== 'expenses' && entity.urlName !== 'maintenanceOrders'}
@@ -211,7 +211,7 @@
 			</button>
 
 			<Button
-				text={entity.data?.id ? 'Save changes' : 'Create new'}
+				text={FormType === 'edit' ? 'Save changes' : 'Create new'}
 				disabled={!noErrorMsg || $isSubmitting}
 				loading={$isSubmitting}
 			/>
