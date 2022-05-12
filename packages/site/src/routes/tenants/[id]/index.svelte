@@ -5,8 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { getName } from '$lib/utils/common';
-	import flatten from 'lodash-es/flatten.js';
-	import map from 'lodash-es/map.js';
+	import * as R from 'remeda';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -36,9 +35,11 @@
 		['Civil Id', ''],
 		['Passport', ''],
 	];
+
+	const transactions = R.flatMap(tenant.leases, (lease) => lease.transactions);
 </script>
 
 <Heading title="Tenant" id={tenant.id} entity="tenants" />
 <DetailsPane {details} {files} />
 <LeaseList leases={tenant.leases} showIndex />
-<TrxColumn transactions={flatten(map(tenant.leases, 'transactions'))} />
+<TrxColumn {transactions} />
