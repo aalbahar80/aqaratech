@@ -69,7 +69,7 @@ const setupClient = async () => {
 
 async function main() {
 	await cleanupDatabase();
-	await Promise.all([await setupClient(), await setupTenant()]);
+	await Promise.all([setupClient(), setupTenant()]);
 }
 
 main().catch((e) => {

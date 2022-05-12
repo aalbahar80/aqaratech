@@ -7,7 +7,7 @@ on:
     branches: [stage]
 
 env:
-  DATABASE_URL: "mysql://p68lrlva51jx:pscale_pw_ShiW8uf2pDZVUTB3kil0EwTpCvawu869t0bIlXKGk5E@t1cp4lkeutv3.eu-central-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
+  DATABASE_URL: "mysql://9pig6sun8cyh:pscale_pw_ASXrHfYwfwc9vSHd860uTJ-2MO90WkbGmgLEIfOHd2A@86asp07tzffr.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
   REUSE_PRISMA: 1
 
   DOMAIN: "https://dev.letand.be"
