@@ -24,9 +24,6 @@ const {
 const UserData = z.object({
 	user_id: z.string(),
 	email: z.string().email(),
-	app_metadata: z.object({
-		idInternal: z.string().uuid(),
-	}),
 	email_verified: z.boolean(),
 });
 
@@ -112,8 +109,6 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 				email,
 				password: civilid,
 				verify_email: true,
-				app_metadata: { idInternal: id },
-				user_metadata: { idInternal: id }, // TODO: delete me
 			},
 		});
 

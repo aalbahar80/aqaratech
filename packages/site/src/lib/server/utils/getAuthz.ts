@@ -4,12 +4,6 @@ import { validateAccessToken } from '$lib/server/utils';
 
 const { authConfig } = environment;
 
-interface Auth0UserMeta {
-	userMetadata: {
-		idInternal: string;
-	};
-}
-
 export const getAuthz = async (
 	token: string | undefined,
 	tokenType: 'idToken' | 'accessToken' = 'accessToken',
@@ -22,23 +16,19 @@ export const getAuthz = async (
 		const roles = payload[
 			`https://${authConfig.AUTH0_API_NAMESPACE}/roles`
 		] as string[];
-		const metadata = {
-			userMetadata: payload[
-				`https://${authConfig.AUTH0_API_NAMESPACE}/userMetadata`
-			] as Auth0UserMeta['userMetadata'],
-		};
 
 		const isOwner = roles.includes('property-owner');
 		const isAdmin = roles.includes('admin');
 		const isTenant = roles.includes('tenant');
+		const sub = payload.sub || '';
 		if (isTenant) {
 			return {
 				role: 'tenant',
 				isAdmin: false,
 				isOwner: false,
 				isTenant: true,
-				id: metadata.userMetadata.idInternal,
-				sub: payload.sub || '',
+				id: sub,
+				sub,
 			};
 		} else if (isOwner) {
 			return {
@@ -46,8 +36,8 @@ export const getAuthz = async (
 				isAdmin: false,
 				isOwner: true,
 				isTenant: false,
-				id: metadata.userMetadata.idInternal,
-				sub: payload.sub || '',
+				id: sub,
+				sub,
 			};
 		} else if (isAdmin) {
 			return {
@@ -56,7 +46,7 @@ export const getAuthz = async (
 				isOwner: false,
 				isTenant: false,
 				id: undefined,
-				sub: payload.sub || '',
+				sub,
 			};
 		} else {
 			return null;
