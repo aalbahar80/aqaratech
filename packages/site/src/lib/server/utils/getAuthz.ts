@@ -4,6 +4,12 @@ import { validateAccessToken } from '$lib/server/utils';
 
 const { authConfig } = environment;
 
+interface Auth0UserMeta {
+	appMetadata: {
+		idInternal: string;
+	};
+}
+
 export const getAuthz = async (
 	token: string | undefined,
 	tokenType: 'idToken' | 'accessToken' = 'accessToken',
@@ -17,34 +23,32 @@ export const getAuthz = async (
 			`https://${authConfig.AUTH0_API_NAMESPACE}/roles`
 		] as string[];
 
+		const metadata = {
+			appMetadata: payload[
+				`https://${authConfig.AUTH0_API_NAMESPACE}/appMetadata`
+			] as Auth0UserMeta['appMetadata'],
+		};
+
 		const isOwner = roles.includes('property-owner');
 		const isAdmin = roles.includes('admin');
 		const isTenant = roles.includes('tenant');
 		const sub = payload.sub || '';
 		if (isTenant) {
-			const { id } = await prismaClient.tenant.findFirst({
-				where: { auth0Id: sub },
-				rejectOnNotFound: true,
-			});
 			return {
 				role: 'tenant',
 				isAdmin: false,
 				isOwner: false,
 				isTenant: true,
-				id,
+				id: metadata.appMetadata.idInternal,
 				sub,
 			};
 		} else if (isOwner) {
-			const { id } = await prismaClient.client.findFirst({
-				where: { auth0Id: sub },
-				rejectOnNotFound: true,
-			});
 			return {
 				role: 'property-owner',
 				isAdmin: false,
 				isOwner: true,
 				isTenant: false,
-				id,
+				id: metadata.appMetadata.idInternal,
 				sub,
 			};
 		} else if (isAdmin) {

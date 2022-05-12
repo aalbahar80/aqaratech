@@ -25,6 +25,9 @@ const UserData = z.object({
 	user_id: z.string(),
 	email: z.string().email(),
 	email_verified: z.boolean(),
+	app_metadata: z.object({
+		idInternal: z.string().uuid(),
+	}),
 });
 
 const base = `${AUTH0_DOMAIN}/api/v2/users`;
@@ -109,6 +112,9 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 				email,
 				password: civilid,
 				verify_email: true,
+				app_metadata: {
+					idInternal: id,
+				},
 			},
 		});
 
