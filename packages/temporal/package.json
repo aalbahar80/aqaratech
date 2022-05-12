@@ -4,8 +4,7 @@
     "scripts": {
         "build": "tsc --build ./tsconfig.json",
         "build:watch": "tsc --build --watch ./tsconfig.json",
-        "prisma:cp": "cp -r ../site/prisma ./prisma",
-        "prisma:gen": "pnpm run prisma:cp && prisma generate",
+        "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma",
         "postinstall": "pnpm run prisma:gen",
         "start": "node --loader ts-node/esm ./src/worker.ts",
         "start:watch": "nodemon --watch './lib/**/*.{ts,js}' --exec 'node --loader ts-node/esm' ./src/worker.ts",
