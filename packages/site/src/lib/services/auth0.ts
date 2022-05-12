@@ -31,7 +31,7 @@ const UserData = z.object({
 	}),
 });
 
-const base = `${AUTH0_DOMAIN}/api/v2/users`;
+const base = `${AUTH0_DEFAULT_DOMAIN}/api/v2/users`;
 
 /**
  * Gets Auth0 token for management API. Calls default domain (not custom).
@@ -144,7 +144,7 @@ export const assignRole = async (sub: string) => {
 		const res = await auth0Fetch({
 			url: `${base}/${sub}/roles`,
 			body: {
-				roles: AUTH0_ROLE_ID_PROPERTY_OWNER,
+				roles: [AUTH0_ROLE_ID_PROPERTY_OWNER],
 			},
 		});
 		if (res.status === 204) {
