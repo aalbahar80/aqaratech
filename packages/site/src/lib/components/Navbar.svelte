@@ -25,7 +25,7 @@
 		aria-label="Global"
 	>
 		<div class="flex flex-1 items-center">
-			<div class="flex w-full items-center justify-between md:w-auto">
+			<div class="flex w-full items-center justify-between lg:w-auto">
 				<a href="/">
 					<span class="sr-only">Workflow</span>
 					<img
@@ -36,10 +36,10 @@
 				</a>
 
 				{#if $session.authz}
-					<div class="-mr-2 flex items-center gap-6 md:hidden">
+					<div class="-mr-2 flex items-center gap-6 lg:hidden">
 						<a
 							href={dashboard}
-							class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 md:hidden"
+							class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 						>
 							Dashboard
 						</a>
@@ -48,7 +48,7 @@
 				{:else}
 					<a
 						href="/api/auth/login"
-						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 md:hidden"
+						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 					>
 						Log in
 					</a>
@@ -56,7 +56,7 @@
 			</div>
 
 			<!-- Large screen: nav links -->
-			<div class="hidden space-x-8 md:ml-10 md:flex">
+			<div class="hidden space-x-8 lg:ml-10 lg:flex">
 				{#each navigation as item (item.name)}
 					<a
 						sveltekit:prefetch
@@ -69,7 +69,7 @@
 			</div>
 		</div>
 		<!-- Large screen: nav actions -->
-		<div class="hidden md:flex md:items-center md:space-x-6">
+		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.authz}
 				<!-- TODO change href -->
 				<a
