@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { categoryGroups, getColor } from '$lib/config/constants';
-import { getAddress } from '$lib/utils/common';
+import { expenseCats, getColor } from '$lib/config/constants';
+import { getAddress, startCase } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { closestTo, isSameDay } from 'date-fns';
@@ -29,10 +29,9 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 	const buckets: Dataset = [];
 	sorted.forEach((trx) => {
 		const month = closestTo(trx.postAt, months);
-		const trxCategoryIndex = categoryGroups.findIndex(
-			(g) => g[0] === trx.category,
-		);
-		const expenseGroup = categoryGroups[trxCategoryIndex]?.[3] ?? 'Other';
+		const group =
+			expenseCats.find((g) => g.en === trx.category)?.group ?? 'OTHER';
+		const groupLabel = startCase(group);
 		const address = trx.relatedProperty
 			? getAddress(trx.relatedProperty)
 			: 'Common';
@@ -41,7 +40,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 				const condition =
 					groupBy === 'property'
 						? bucket.address === address
-						: bucket.category === expenseGroup;
+						: bucket.category === groupLabel;
 				return isSameDay(bucket.date, month) && condition;
 			});
 			if (index !== -1) {
@@ -50,7 +49,7 @@ const aggregate = (data: Data, groupBy: GroupBy): Dataset => {
 				buckets.push({
 					total: trx.amount,
 					date: month,
-					category: expenseGroup,
+					category: groupLabel,
 					address,
 				});
 			}
@@ -66,7 +65,10 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const uniqueProperties = [...new Set(properties)];
 	uniqueProperties.sort((a, b) => a.localeCompare(b)); // alphabetical
 
-	const categories = categoryGroups.map((g) => g[3]);
+	console.log(startCase('ABC'));
+	const categories = expenseCats.map((g) => startCase(g.group));
+	console.log({ expenseCats }, 'expenses.ts ~ 69');
+	console.log({ categories }, 'expenses.ts ~ 69');
 	const uniqueCategories = [...new Set(categories)];
 
 	const groups = groupBy === 'property' ? uniqueProperties : uniqueCategories;
