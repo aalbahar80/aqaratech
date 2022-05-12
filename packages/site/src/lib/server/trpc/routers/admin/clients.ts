@@ -30,6 +30,7 @@ export const clients = createRouter()
 				},
 				select: {
 					id: true,
+					auth0Id: true,
 					createdAt: true,
 					updatedAt: true,
 					firstName: true,

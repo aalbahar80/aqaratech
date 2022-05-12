@@ -39,6 +39,7 @@ export class Client extends Entity {
 	});
 
 	basicFields = [
+		'auth0Id',
 		'firstName',
 		'lastName',
 		'phone',
