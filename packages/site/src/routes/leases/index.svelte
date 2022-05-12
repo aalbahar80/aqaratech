@@ -5,7 +5,7 @@
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
 	import type { LoadInput } from '@sveltejs/kit';
-	import { isEqual } from 'lodash-es';
+	import compare from 'just-compare';
 
 	export const load = async ({ session, fetch }: LoadInput) => {
 		type Options = Partial<InferQueryInput<'owner:leases:list'>>;
@@ -62,7 +62,7 @@
 	];
 
 	const handleFilter = async (newOptions: typeof options) => {
-		if (isEqual(newOptions, currentOptions)) {
+		if (compare(newOptions, currentOptions)) {
 			return; // no change
 		}
 		currentOptions = newOptions;

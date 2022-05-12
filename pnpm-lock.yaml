@@ -79,6 +79,7 @@ importers:
       jose: ^4.8.1
       jsdom: ^19.0.0
       jsonwebtoken: ^8.5.1
+      just-compare: ^2.1.0
       lodash-es: ^4.17.21
       logrocket: ^3.0.0
       nanoid: ^3.3.3
@@ -154,6 +155,7 @@ importers:
       jose: 4.8.1
       jsdom: 19.0.0
       jsonwebtoken: 8.5.1
+      just-compare: 2.1.0
       lodash-es: 4.17.21
       logrocket: 3.0.0
       nanoid: 3.3.4
@@ -5868,6 +5870,10 @@ packages:
       lodash.once: 4.1.1
       ms: 2.1.3
       semver: 5.7.1
+    dev: true
+
+  /just-compare/2.1.0:
+    resolution: {integrity: sha512-3khZL/G9XsMuwFfaZ2Avkzjiasty9B0MOk7JdVjdMM6SSfY6gaTk1T28bVSzuyr38hdaOp6I7HuulkWJkbyHPw==}
     dev: true
 
   /just-extend/4.2.1:

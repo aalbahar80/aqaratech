@@ -37,6 +37,8 @@
 		['Monthly Rent', kwdFormat(lease.monthlyRent)],
 		['Deposit', kwdFormat(lease.deposit)],
 		['License', lease.license],
+		['Created on', dateFormat(lease.createdAt)],
+		['Last updated', lease.updatedAt.toLocaleString()],
 	];
 
 	const files: [string, string][] = [['Lease', 'TODO implement']];

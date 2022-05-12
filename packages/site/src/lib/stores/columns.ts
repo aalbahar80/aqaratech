@@ -1,4 +1,5 @@
-import { isEqual, startCase } from 'lodash-es';
+import { startCase } from '$lib/utils/common';
+import compare from 'just-compare';
 import { get, writable, type Writable } from 'svelte/store';
 
 export type Head = {
@@ -8,7 +9,7 @@ export type Head = {
 };
 
 function isSameTable(a: Head[], b: Head[]) {
-	const isIdentical = isEqual(
+	const isIdentical = compare(
 		a.map((head) => head.key),
 		b.map((head) => head.key),
 	);
