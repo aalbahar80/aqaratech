@@ -23,7 +23,6 @@ async function getTokens(code: string) {
 			code,
 			redirect_uri: authConfig.AUTH0_REDIRECT_URI,
 		});
-		console.log({ body }, 'callback.ts ~ 26');
 
 		const res = await fetch(`${authConfig.AUTH0_DOMAIN}/oauth/token`, {
 			method: 'POST',
@@ -46,10 +45,8 @@ export const get: RequestHandler = async (req) => {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');
 
-		console.log({ code }, 'callback.ts ~ 50');
 		const tokens = await getTokens(code);
 
-		console.log({ tokens }, 'callback.ts ~ 52');
 		req.locals.accessToken = tokens.access_token;
 		req.locals.idToken = tokens.id_token || '';
 		// req.locals.user = await validateAccessToken(tokens.id_token, 'idToken');
