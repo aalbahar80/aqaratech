@@ -13,7 +13,8 @@ interface ToUpdate {
 	civilid: string;
 }
 
-const { AUTH0_DOMAIN } = environment.authConfig;
+const { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET } =
+	environment.authConfig;
 
 const UserData = z.object({
 	user_id: z.string(),
@@ -24,25 +25,25 @@ const UserData = z.object({
 	email_verified: z.boolean(),
 });
 
-// const base = `https://${AUTH0_DOMAIN}/api/v2/users`;
-const base = 'https://dev-eehvhdp2.eu.auth0.com/api/v2/users';
+const base = `${AUTH0_DOMAIN}/api/v2/users`;
 
 /**
  * Gets Auth0 token for management API.
  */
 const getAuth0Token = async () => {
 	// TODO: read from env
-	const res = await fetch('https://dev-eehvhdp2.eu.auth0.com/oauth/token', {
+	const res = await fetch(`${AUTH0_DOMAIN}/oauth/token`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			// TODO: read from env
-			client_id: 'nn0xC6sKtxXQZ0QLPSsBjooZJfx9lVaK',
-			client_secret:
-				'8gtNSYjXD6rQmd41d5zbooS_SoXmJFSAKSGoTA7vh91-F-_df9VUjwQ06k_XlY1B',
-			audience: 'https://dev-eehvhdp2.eu.auth0.com/api/v2/',
+			// client_id: 'nn0xC6sKtxXQZ0QLPSsBjooZJfx9lVaK',
+			// client_secret: '8gtNSYjXD6rQmd41d5zbooS_SoXmJFSAKSGoTA7vh91-F-_df9VUjwQ06k_XlY1B',
+			client_id: AUTH0_CLIENT_ID,
+			client_secret: AUTH0_CLIENT_SECRET,
+			audience: `${AUTH0_DOMAIN}/api/v2/`,
 			grant_type: 'client_credentials',
 		}),
 	});
