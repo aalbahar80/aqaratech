@@ -148,6 +148,7 @@ model Tenant {
   residencyNum      String?
   residencyEnd      DateTime?
   contactMethod     String?
+  auth0Id           String?
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
 }

@@ -3,8 +3,10 @@ import {
 	fakeTenant,
 	testClientEmail,
 	testClientId,
+	testClientAuth0Id,
 	testTenantEmail,
 	testTenantId,
+	testTenantAuth0Id,
 } from '../../seed/src/generators';
 import prisma from './prismaClient';
 
@@ -30,6 +32,7 @@ export const setupTenant = async () => {
 			...fakeTenant(),
 			email: testTenantEmail,
 			id: testTenantId,
+			auth0Id: testTenantAuth0Id,
 		},
 	});
 	console.timeEnd('creating test tenant');
@@ -42,6 +45,7 @@ export const setupClient = async () => {
 			...fakeClient(),
 			email: testClientEmail,
 			id: testClientId,
+			auth0Id: testClientAuth0Id,
 		},
 	});
 	console.timeEnd('creating test client');

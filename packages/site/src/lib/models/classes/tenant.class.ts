@@ -53,6 +53,7 @@ export class Tenant extends Entity {
 		'nationality',
 		'residencyNum',
 		'residencyEnd',
+		'auth0Id',
 	] as const;
 
 	static getLabel = (item: ILabel) => getName(item);
