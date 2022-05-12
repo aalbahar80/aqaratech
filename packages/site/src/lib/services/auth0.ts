@@ -133,16 +133,11 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 
 export const assignRole = async (sub: string) => {
 	try {
-		const token = await getAuth0Token();
-		const res = await fetch(`${base}/${sub}/roles`, {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
+		const res = await auth0Fetch({
+			url: `${base}/${sub}/roles`,
+			body: {
 				roles: ['rol_n6YdReDFqv4IG60y'], // TODO: replace with .env
-			}),
+			},
 		});
 		if (res.status === 204) {
 			// role assigned
