@@ -17,7 +17,7 @@
     "@playwright/test": "1.22.0",
     "@prisma/client": "3.14.0",
     "@self/seed": "workspace:0.0.1",
-    "@self/site": "../package",
+    "@self/site": "workspace:../package",
     "cross-env": "7.0.3",
     "dotenv": "16.0.1",
     "prisma": "3.14.0",
