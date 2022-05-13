@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { classes } from '$lib/utils';
+
 	const transactions = [
 		{
 			id: 'AAPS0L',
@@ -111,54 +113,29 @@
 					<table class="min-w-full divide-y divide-gray-300">
 						<thead class="bg-gray-50">
 							<tr>
-								<th
-									scope="col"
-									class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-								>
-									Transaction ID
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Company
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Share
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Commision
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Price
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Quantity
-								</th>
-								<th
-									scope="col"
-									class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-								>
-									Net amount
-								</th>
-								<th
-									scope="col"
-									class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
-								>
-									<span class="sr-only">Edit</span>
-								</th>
+								{#each trxs as trx, idx (trx.id)}
+									<th
+										scope="col"
+										class={classes(
+											idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+											'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+										)}
+									>
+										Transaction ID
+									</th>
+									<th
+										scope="col"
+										class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+									>
+										Net amount
+									</th>
+									<th
+										scope="col"
+										class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
+									>
+										<span class="sr-only">Edit</span>
+									</th>
+								{/each}
 							</tr>
 						</thead>
 						<tbody class="divide-y divide-gray-200 bg-white">
