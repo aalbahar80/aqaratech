@@ -195,8 +195,9 @@
 											<td
 												class={classes(
 													idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-													'whitespace-nowrap py-2 text-sm text-gray-500',
+													'whitespace-nowrap py-2 text-sm',
 												)}
+												class:text-gray-500={header.style === 'regular'}
 												class:font-medium={header.style === 'bold1'}
 												class:text-gray-900={header.style === 'bold1' ||
 													header.style === 'bold2'}
