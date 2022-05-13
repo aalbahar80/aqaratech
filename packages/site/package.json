@@ -13,7 +13,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "postbuild:vercel": "cp ../../node_modules/.pnpm/@prisma+engines@* .vercel_build_output/functions/node/render/;cp prisma/schema.prisma .vercel_build_output/functions/node/render/;ls .vercel_build_output/functions/node/render/",
+    "postbuild:vercel": "find ../../node_modules/.pnpm/ -name \"*libquery_engine*\" -type f -exec cp {} .vercel_build_output/functions/node/render/ \\;cp prisma/schema.prisma .vercel_build_output/functions/node/render/;ls .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
     "test": "vitest run"
