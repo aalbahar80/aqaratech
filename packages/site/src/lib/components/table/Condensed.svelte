@@ -83,8 +83,18 @@
 		// style: string;
 		style: 'regular' | 'bold1' | 'bold2';
 	}
-	export let headers: RowHeader[];
+	export let headers = [
+		'Transaction ID',
+		'Company',
+		'Share',
+		'Commision',
+		'Price',
+		'Quantity',
+		'Net amount',
+		'edit',
+	];
 	export let trxs = transactions;
+	export let actionRow = true;
 </script>
 
 <div class="px-4 sm:px-6 lg:px-8">
@@ -113,28 +123,25 @@
 					<table class="min-w-full divide-y divide-gray-300">
 						<thead class="bg-gray-50">
 							<tr>
-								{#each trxs as trx, idx (trx.id)}
-									<th
-										scope="col"
-										class={classes(
-											idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-											'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
-										)}
-									>
-										Transaction ID
-									</th>
-									<th
-										scope="col"
-										class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-									>
-										Net amount
-									</th>
-									<th
-										scope="col"
-										class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
-									>
-										<span class="sr-only">Edit</span>
-									</th>
+								{#each headers as header, idx (header)}
+									{#if header === 'edit'}
+										<th
+											scope="col"
+											class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
+										>
+											<span class="sr-only">Edit</span>
+										</th>
+									{:else}
+										<th
+											scope="col"
+											class={classes(
+												idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+												'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+											)}
+										>
+											{header}
+										</th>
+									{/if}
 								{/each}
 							</tr>
 						</thead>
