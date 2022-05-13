@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CondensedActionCell from '$lib/components/table/CondensedActionCell.svelte';
+	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
 	import { classes } from '$lib/utils';
 
 	const transactions = [
@@ -181,29 +183,13 @@
 								<tr>
 									{#each headers as header, idx (header)}
 										{#if header.key === 'edit'}
-											<td
-												class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
-											>
-												<a
-													href="#"
-													class="text-indigo-600 hover:text-indigo-900"
-												>
-													Edit<span class="sr-only">, {transaction.id}</span>
-												</a>
-											</td>
+											<CondensedActionCell href="#" label="Edit" />
 										{:else}
-											<td
-												class={classes(
-													idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-													'whitespace-nowrap py-2 text-sm',
-												)}
-												class:text-gray-500={header.style === 'regular'}
-												class:font-medium={header.style === 'bold1'}
-												class:text-gray-900={header.style === 'bold1' ||
-													header.style === 'bold2'}
-											>
-												{transaction[header.key]}
-											</td>
+											<CondensedCell
+												{idx}
+												value={transaction[header.key]}
+												weight={header.style}
+											/>
 										{/if}
 									{/each}
 								</tr>
