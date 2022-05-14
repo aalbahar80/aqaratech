@@ -45,8 +45,8 @@ importers:
       '@sentry/tracing': 6.19.7
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
-      '@sveltejs/adapter-auto': 1.0.0-next.42
-      '@sveltejs/adapter-vercel': 1.0.0-next.51
+      '@sveltejs/adapter-auto': 1.0.0-next.41
+      '@sveltejs/adapter-vercel': 1.0.0-next.50
       '@sveltejs/kit': 1.0.0-next.330
       '@tailwindcss/aspect-ratio': 0.4.0
       '@tailwindcss/forms': 0.5.1
@@ -119,8 +119,8 @@ importers:
       '@sentry/tracing': 6.19.7
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
-      '@sveltejs/adapter-auto': 1.0.0-next.42
-      '@sveltejs/adapter-vercel': 1.0.0-next.51
+      '@sveltejs/adapter-auto': 1.0.0-next.41
+      '@sveltejs/adapter-vercel': 1.0.0-next.50
       '@sveltejs/kit': 1.0.0-next.330_svelte@3.48.0
       '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.0.24
       '@tailwindcss/forms': 0.5.1_tailwindcss@3.0.24
@@ -2076,12 +2076,12 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.42:
-    resolution: {integrity: sha512-AMTrR0A2Uss1FQkpYDV/7lYgQtRHyTrvwGCrll1lwZNPexb9MZGU4+x8csGKTNgf29Dg3lCEc9JBQti89rHZbw==}
+  /@sveltejs/adapter-auto/1.0.0-next.41:
+    resolution: {integrity: sha512-CbC2YIgsUaxyMyOiUNYyWeJOgoYGdXkEUXT4t+dLr1lDOtf0TL2ws1rdM5C7iKoCXtUFbf3J58f6JxZ85ggWVg==}
     dependencies:
       '@sveltejs/adapter-cloudflare': 1.0.0-next.19
       '@sveltejs/adapter-netlify': 1.0.0-next.57
-      '@sveltejs/adapter-vercel': 1.0.0-next.51
+      '@sveltejs/adapter-vercel': 1.0.0-next.50
     dev: true
 
   /@sveltejs/adapter-cloudflare/1.0.0-next.19:
@@ -2099,8 +2099,8 @@ packages:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/adapter-vercel/1.0.0-next.51:
-    resolution: {integrity: sha512-U4GSe1tYcWq90XCQfLK4qmEEVA1MyWgnT6i7LhbLVOoNP8bf3ict3xKjGrHcx/CY4jNUBA80DXSkj/hpFkweAg==}
+  /@sveltejs/adapter-vercel/1.0.0-next.50:
+    resolution: {integrity: sha512-yta0AkuWEr7qrm8LB34F4ZdCtMxj+cHD4huwrRYCgjv+PSJHLPwe7aH53+Mhrv6La0TgeyQ/f2lTyhBMXZXn9Q==}
     dependencies:
       esbuild: 0.14.39
     dev: true
