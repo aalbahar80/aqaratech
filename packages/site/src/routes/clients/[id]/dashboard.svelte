@@ -252,13 +252,15 @@
 			}}
 		/>
 	</div>
-	<Chart let:height let:width>
-		<canvas
-			{height}
-			{width}
-			use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
-		/>
-	</Chart>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas
+				{height}
+				{width}
+				use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
+			/>
+		</Chart>
+	</div>
 </DashCard>
 
 <!-- Expenses Chart -->
@@ -312,9 +314,11 @@
 	subtitle="The percentage of units that are empty."
 	empty={occupancy.length < 1}
 >
-	<Chart let:height let:width>
-		<canvas {height} {width} use:occupancyChart={occupancy} />
-	</Chart>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas {height} {width} use:occupancyChart={occupancy} />
+		</Chart>
+	</div>
 </DashCard>
 
 <style lang="postcss">
