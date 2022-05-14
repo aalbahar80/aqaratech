@@ -65,10 +65,7 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const uniqueProperties = [...new Set(properties)];
 	uniqueProperties.sort((a, b) => a.localeCompare(b)); // alphabetical
 
-	console.log(startCase('ABC'));
 	const categories = expenseCats.map((g) => startCase(g.group));
-	console.log({ expenseCats }, 'expenses.ts ~ 69');
-	console.log({ categories }, 'expenses.ts ~ 69');
 	const uniqueCategories = [...new Set(categories)];
 
 	const groups = groupBy === 'property' ? uniqueProperties : uniqueCategories;
