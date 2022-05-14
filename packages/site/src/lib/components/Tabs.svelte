@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
-	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { IconSource } from '@steeze-ui/svelte-icon/types';
 
-	const tabs = [
-		{ name: 'Chart', href: '#', icon: ChartBar, current: true },
-		{ name: 'Data', href: '#', icon: Database, current: false },
-	];
+	interface ITab {
+		name: string;
+		icon: IconSource;
+		current: boolean;
+	}
+	export let tabs: ITab[];
+
+	export let tab: string;
 </script>
 
 <div>
@@ -16,39 +20,40 @@
 			id="tabs"
 			name="tabs"
 			class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+			bind:value={tab}
 		>
-			{#each tabs as tab (tab.name)}
-				<option>{tab.name}</option>
+			{#each tabs as { name } (name)}
+				<option>{name}</option>
 			{/each}
 		</select>
 	</div>
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav class="-mb-px flex flex-row-reverse gap-x-8" aria-label="Tabs">
-				{#each tabs as tab (tab.name)}
-					<a
-						href={tab.href}
+				{#each tabs as { name, current, icon } (name)}
+					<button
+						on:click={() => (tab = name)}
 						class={classes(
-							tab.current
+							current
 								? 'border-indigo-500 text-indigo-600'
 								: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
 							'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm',
 						)}
-						aria-current={tab.current ? 'page' : undefined}
+						aria-current={current ? 'page' : undefined}
 					>
 						<Icon
-							src={tab.icon}
+							src={icon}
 							theme="solid"
 							class={classes(
-								tab.current
+								current
 									? 'text-indigo-500'
 									: 'text-gray-400 group-hover:text-gray-500',
 								'-ml-0.5 mr-2 h-5 w-5',
 							)}
 							aria-hidden="true"
 						/>
-						<span>{tab.name}</span>
-					</a>
+						<span>{name}</span>
+					</button>
 				{/each}
 			</nav>
 		</div>

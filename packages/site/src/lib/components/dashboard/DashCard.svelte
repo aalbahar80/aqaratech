@@ -1,7 +1,19 @@
 <script lang="ts">
+	import Tabs from '$lib/components/Tabs.svelte';
+	import { ChartBar, Database } from '@steeze-ui/heroicons';
+
 	export let title: string;
 	export let subtitle = '';
 	export let empty = false;
+
+	const tabs = [
+		{ name: 'Chart', icon: ChartBar, current: true },
+		{ name: 'Data', icon: Database, current: false },
+	];
+	type Tab = 'chart' | 'data';
+	let tab: Tab = 'chart';
+
+	$: console.log({ tab }, 'DashCard.svelte ~ 12');
 </script>
 
 <div class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl">
@@ -20,12 +32,15 @@
 			</div>
 		</div>
 	{:else}
-		<div class="sm:block" aria-hidden="true">
+		<Tabs {tabs} bind:tab />
+		<!-- <div class="sm:block" aria-hidden="true">
 			<div class="py-1">
 				<div class="border-t border-gray-200" />
 			</div>
+		</div> -->
+		<div class="pt-4">
+			<slot name="groupBy" />
 		</div>
-		<slot name="groupBy" />
 		<slot />
 	{/if}
 </div>
