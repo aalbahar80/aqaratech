@@ -8,6 +8,7 @@
 	import {
 		expenseTableHeaders,
 		getExpenseTableData,
+		getExpenseTableTotals,
 	} from '$lib/components/dashboard/stores/expense';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
@@ -19,7 +20,7 @@
 	import type { z } from 'zod';
 	import type { Load } from './index';
 
-	const defaultRange = 1;
+	const defaultRange = 6;
 	const getRange = (months: number) => ({
 		start: subMonths(
 			new Date(Date.now()).setHours(0, 0, 0, 0),
@@ -130,6 +131,7 @@
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
 	const expenseTableData = getExpenseTableData(expenseData);
+	const expenseTableTotals = getExpenseTableTotals(expenseData);
 </script>
 
 <div class="prose">
@@ -313,7 +315,11 @@
 		</Chart>
 	</div>
 	<div slot="data">
-		<CondensedTable data={$expenseTableData} headers={expenseTableHeaders} />
+		<CondensedTable
+			data={$expenseTableData}
+			headers={expenseTableHeaders}
+			totals={$expenseTableTotals}
+		/>
 	</div>
 </DashCard>
 

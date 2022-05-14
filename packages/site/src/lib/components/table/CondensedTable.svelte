@@ -9,6 +9,7 @@
 	}
 	export let headers: RowHeader[];
 	export let data: any[] = [];
+	export let totals: Record<string, string> | undefined = undefined;
 </script>
 
 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -55,6 +56,22 @@
 					</tr>
 				{/each}
 			</tbody>
+			<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
+				{#each headers as header, idx (header.key)}
+					{@const value = totals[header.key]}
+					<th
+						scope="col"
+						class={classes(
+							idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+							'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+						)}
+					>
+						{#if value}
+							{value}
+						{/if}
+					</th>
+				{/each}
+			</tfoot>
 		</table>
 	</div>
 </div>

@@ -33,3 +33,11 @@ export const getExpenseTableData = (expenses: Writable<Data>) =>
 				: '-',
 		})),
 	);
+
+export const getExpenseTableTotals = (expenses: Writable<Data>) =>
+	derived(expenses, ($expenses) => {
+		const total = $expenses.reduce((acc, entry) => acc + entry.amount, 0);
+		return {
+			Amount: kwdFormat(total),
+		};
+	});
