@@ -6,6 +6,7 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
+	import ExpensesTable from '$lib/components/table/ExpensesTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
@@ -291,13 +292,18 @@
 			}}
 		/>
 	</div>
-	<Chart let:height let:width>
-		<canvas
-			{height}
-			{width}
-			use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
-		/>
-	</Chart>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas
+				{height}
+				{width}
+				use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
+			/>
+		</Chart>
+	</div>
+	<div slot="data">
+		<ExpensesTable data={expenses} />
+	</div>
 </DashCard>
 
 <!-- Occupancy Chart -->

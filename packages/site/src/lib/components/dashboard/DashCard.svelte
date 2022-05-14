@@ -35,9 +35,13 @@
 				<div class="border-t border-gray-200" />
 			</div>
 		</div> -->
-		<div class="pt-4">
-			<slot name="groupBy" />
-		</div>
-		<slot />
+		{#if tab === 'Chart'}
+			<div class="pt-4">
+				<slot name="groupBy" />
+			</div>
+			<slot name="chart" />
+		{:else}
+			<slot name="data" />
+		{/if}
 	{/if}
 </div>
