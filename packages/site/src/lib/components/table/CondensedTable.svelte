@@ -5,8 +5,9 @@
 
 	interface RowHeader {
 		key: string;
-		title: string;
-		style: 'regular' | 'bold1' | 'bold2';
+		label: string;
+		style?: 'regular' | 'bold1' | 'bold2';
+		format?: (value: any) => string;
 	}
 	export let headers: RowHeader[];
 	export let trxs: any[] = [];
@@ -54,7 +55,7 @@
 												'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
 											)}
 										>
-											{header.title}
+											{header.label}
 										</th>
 									{/if}
 								{/each}
@@ -69,7 +70,8 @@
 										{:else}
 											<CondensedCell
 												{idx}
-												value={transaction[header.key]}
+												value={header.format?.(transaction[header.key]) ??
+													transaction[header.key]}
 												weight={header.style}
 											/>
 										{/if}
