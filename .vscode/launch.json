@@ -12,6 +12,18 @@
 			"cwd": "${workspaceFolder}/packages/site",
 			"name": "sveltekit ssr: debug2",
 			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"type": "node",
+			// "type": "pwa-node",
+			"request": "launch",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["./node_modules/.bin/svelte-kit", "preview"],
+			// "args": ["./node_modules/.bin/svelte-kit", "dev"]
+			"protocol": "inspector",
+			"cwd": "${workspaceFolder}/packages/site",
+			"name": "sveltekit ssr: debug2 preview",
+			"skipFiles": ["<node_internals>/**"]
 		}
 	]
 }
