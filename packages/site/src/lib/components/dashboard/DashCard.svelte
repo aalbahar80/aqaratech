@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tabs from '$lib/components/Tabs.svelte';
 	import { ChartBar, Database } from '@steeze-ui/heroicons';
+	import { tweened } from 'svelte/motion';
 
 	export let title: string;
 	export let subtitle = '';
@@ -11,9 +12,21 @@
 		{ name: 'Data', icon: Database },
 	];
 	let tab = 'Chart';
+	const height = tweened(900);
+
+	$: {
+		if (tab === 'Chart') {
+			$height = 900;
+		} else {
+			$height = 1200;
+		}
+	}
 </script>
 
-<div class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl">
+<div
+	class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl"
+	style:height={`${$height}px`}
+>
 	<div class="prose prose-base">
 		<h3>{title}</h3>
 		<p>{subtitle}</p>
