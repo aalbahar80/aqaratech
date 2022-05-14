@@ -3,131 +3,13 @@
 	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
 	import { classes } from '$lib/utils';
 
-	const transactions = [
-		{
-			id: 'AAPS0L',
-			company: 'Chase & Co.',
-			share: 'CAC',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		// add more dummy data
-		{
-			id: 'MSFT0L',
-			company: 'Microsoft',
-			share: 'MSFT',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'AAPL0L',
-			company: 'Apple',
-			share: 'AAPL',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'GOOGL0L',
-			company: 'Alphabet',
-			share: 'GOOGL',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'FB0L',
-			company: 'Facebook',
-			share: 'FB',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'AMZN0L',
-			company: 'Amazon',
-			share: 'AMZN',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'INTC0L',
-			company: 'Intel',
-			share: 'INTC',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-		{
-			id: 'NVDA0L',
-			company: 'Nvidia',
-			share: 'NVDA',
-			commission: '+$4.37',
-			price: '$3,509.00',
-			quantity: '12.00',
-			netAmount: '$4,397.00',
-		},
-	];
-
 	interface RowHeader {
 		key: string;
 		title: string;
 		style: 'regular' | 'bold1' | 'bold2';
 	}
-	export let headers: RowHeader[] = [
-		{
-			key: 'id',
-			title: 'Transaction ID',
-			style: 'regular',
-		},
-		{
-			key: 'company',
-			title: 'Company',
-			style: 'bold1',
-		},
-		{
-			key: 'share',
-			title: 'Share',
-			style: 'bold2',
-		},
-		{
-			key: 'commission',
-			title: 'Commission',
-			style: 'regular',
-		},
-		{
-			key: 'price',
-			title: 'Price',
-			style: 'regular',
-		},
-		{
-			key: 'quantity',
-			title: 'Quantity',
-			style: 'regular',
-		},
-		{
-			key: 'netAmount',
-			title: 'Net Amount',
-			style: 'regular',
-		},
-		{
-			key: 'edit',
-			title: '',
-			style: 'regular',
-		},
-	];
-	export let trxs = transactions;
-	export let actionRow = true;
+	export let headers: RowHeader[];
+	export let trxs: any[] = [];
 </script>
 
 <div class="px-4 sm:px-6 lg:px-8">
@@ -179,7 +61,7 @@
 							</tr>
 						</thead>
 						<tbody class="divide-y divide-gray-200 bg-white">
-							{#each transactions as transaction (transaction.id)}
+							{#each trxs as transaction (transaction.id)}
 								<tr>
 									{#each headers as header, idx (header)}
 										{#if header.key === 'edit'}
