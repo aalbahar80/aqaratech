@@ -43,11 +43,6 @@
 		</div>
 	{:else}
 		<Tabs {tabs} bind:tab />
-		<!-- <div class="sm:block" aria-hidden="true">
-			<div class="py-1">
-				<div class="border-t border-gray-200" />
-			</div>
-		</div> -->
 		{#if tab === 'Chart'}
 			<div class="pt-4">
 				<slot name="groupBy" />
@@ -57,7 +52,6 @@
 			<div class="overflow-auto">
 				<slot name="data" />
 			</div>
-			<!-- <slot name="data" /> -->
 		{/if}
 	{/if}
 </div>
