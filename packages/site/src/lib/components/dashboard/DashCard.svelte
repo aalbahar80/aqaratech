@@ -54,7 +54,9 @@
 			</div>
 			<slot name="chart" />
 		{:else}
-			<slot name="data" />
+			<div class="overflow-auto">
+				<slot name="data" />
+			</div>
 		{/if}
 	{/if}
 </div>
