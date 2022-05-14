@@ -38,4 +38,13 @@
 	];
 </script>
 
-<CondensedTable {headers} trxs={data.slice(0, 100)} />
+<div class="px-4 sm:px-6 lg:px-8">
+	<div class="mt-8 flex flex-col">
+		<div
+			class="-my-2 -mx-4 overflow-auto sm:-mx-6 lg:-mx-8"
+			style="height: 600px;"
+		>
+			<CondensedTable {headers} trxs={data.slice(0, 100)} />
+		</div>
+	</div>
+</div>
