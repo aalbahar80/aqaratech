@@ -7,13 +7,10 @@
 	export let empty = false;
 
 	const tabs = [
-		{ name: 'Chart', icon: ChartBar, current: true },
-		{ name: 'Data', icon: Database, current: false },
+		{ name: 'Chart', icon: ChartBar },
+		{ name: 'Data', icon: Database },
 	];
-	type Tab = 'chart' | 'data';
-	let tab: Tab = 'chart';
-
-	$: console.log({ tab }, 'DashCard.svelte ~ 12');
+	let tab = 'Chart';
 </script>
 
 <div class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl">

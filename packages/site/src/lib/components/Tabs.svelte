@@ -6,10 +6,9 @@
 	interface ITab {
 		name: string;
 		icon: IconSource;
-		current: boolean;
 	}
-	export let tabs: ITab[];
 
+	export let tabs: ITab[];
 	export let tab: string;
 </script>
 
@@ -30,7 +29,8 @@
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav class="-mb-px flex flex-row-reverse gap-x-8" aria-label="Tabs">
-				{#each tabs as { name, current, icon } (name)}
+				{#each tabs as { name, icon } (name)}
+					{@const current = tab === name}
 					<button
 						on:click={() => (tab = name)}
 						class={classes(
