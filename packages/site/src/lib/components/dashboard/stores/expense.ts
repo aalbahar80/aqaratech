@@ -26,7 +26,7 @@ export const getExpenseTableData = (expenses: Writable<Data>) =>
 		$expenses.map((entry) => ({
 			id: entry.id,
 			Date: dateFormat(entry.postAt),
-			Category: entry.category,
+			Category: entry.category || '',
 			Amount: kwdFormat(entry.amount),
 			Location: entry.relatedProperty
 				? Property.getLabel(entry.relatedProperty)

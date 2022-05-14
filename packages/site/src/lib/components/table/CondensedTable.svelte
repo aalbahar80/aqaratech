@@ -10,7 +10,7 @@
 	}
 	type Headers = typeof headers[number]['key'];
 	type Totals = { [key in Headers]?: string };
-	type Row = { [key in Headers]: string | null } & { id: string };
+	type Row = { [key in Headers]: string } & { id: string };
 
 	export let headers: RowHeader[];
 	export let data: Row[] = [];
@@ -61,22 +61,24 @@
 					</tr>
 				{/each}
 			</tbody>
-			<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
-				{#each headers as header, idx (header.key)}
-					{@const value = totals[header.key]}
-					<th
-						scope="col"
-						class={classes(
-							idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-							'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
-						)}
-					>
-						{#if value}
-							{value}
-						{/if}
-					</th>
-				{/each}
-			</tfoot>
+			{#if totals}
+				<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
+					{#each headers as header, idx (header.key)}
+						{@const value = totals[header.key]}
+						<th
+							scope="col"
+							class={classes(
+								idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+								'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+							)}
+						>
+							{#if value}
+								{value}
+							{/if}
+						</th>
+					{/each}
+				</tfoot>
+			{/if}
 		</table>
 	</div>
 </div>
