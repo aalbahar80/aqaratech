@@ -60,4 +60,4 @@
 	</div>
 </div> -->
 
-<CondensedTable {headers} trxs={data.slice(0, 100)} />
+<CondensedTable {headers} data={data.slice(1, 4)} />

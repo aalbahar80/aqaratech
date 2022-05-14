@@ -11,7 +11,7 @@
 		format?: (value: any) => string;
 	}
 	export let headers: RowHeader[];
-	export let trxs: any[] = [];
+	export let data: any[] = [];
 </script>
 
 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -42,7 +42,7 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each trxs as transaction (transaction.id)}
+				{#each data as transaction (transaction.id)}
 					<tr>
 						{#each headers as header, idx (header)}
 							{#if header.key === 'edit'}
