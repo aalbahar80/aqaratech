@@ -1,14 +1,11 @@
 <script lang="ts">
 	import CondensedActionCell from '$lib/components/table/CondensedActionCell.svelte';
 	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
-	import CondensedTitle from '$lib/components/table/CondensedTitle.svelte';
 	import { classes } from '$lib/utils';
 
 	interface RowHeader {
 		key: string;
-		label: string;
 		style?: 'regular' | 'bold1' | 'bold2';
-		format?: (value: any) => string;
 	}
 	export let headers: RowHeader[];
 	export let data: any[] = [];
@@ -19,7 +16,7 @@
 		<table class="min-w-full divide-y divide-gray-300">
 			<thead class="sticky bg-gray-50" style="inset-block-start: 0;">
 				<tr>
-					{#each headers as header, idx (header)}
+					{#each headers as header, idx (header.key)}
 						{#if header.key === 'edit'}
 							<th
 								scope="col"
@@ -35,23 +32,22 @@
 									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
 								)}
 							>
-								{header.label}
+								{header.key}
 							</th>
 						{/if}
 					{/each}
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each data as transaction (transaction.id)}
+				{#each data as row (row.id)}
 					<tr>
-						{#each headers as header, idx (header)}
+						{#each headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
 								<CondensedActionCell href="#" label="Edit" />
 							{:else}
 								<CondensedCell
 									{idx}
-									value={header.format?.(transaction[header.key]) ??
-										transaction[header.key]}
+									value={row[header.key]}
 									weight={header.style}
 								/>
 							{/if}

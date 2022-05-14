@@ -5,16 +5,21 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import {
+		expenseTableHeaders,
+		getExpenseTableData,
+	} from '$lib/components/dashboard/stores/expense';
 	import Select from '$lib/components/Select.svelte';
-	import ExpensesTable from '$lib/components/table/ExpensesTable.svelte';
+	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
+	import { writable } from 'svelte/store';
 	import type { z } from 'zod';
 	import type { Load } from './index';
 
-	const defaultRange = 6;
+	const defaultRange = 1;
 	const getRange = (months: number) => ({
 		start: subMonths(
 			new Date(Date.now()).setHours(0, 0, 0, 0),
@@ -121,6 +126,10 @@
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
 	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
+
+	const expenseData = writable(expenses);
+	$: $expenseData = expenses;
+	const expenseTableData = getExpenseTableData(expenseData);
 </script>
 
 <div class="prose">
@@ -304,7 +313,7 @@
 		</Chart>
 	</div>
 	<div slot="data">
-		<ExpensesTable data={expenses} />
+		<CondensedTable data={$expenseTableData} headers={expenseTableHeaders} />
 	</div>
 </DashCard>
 

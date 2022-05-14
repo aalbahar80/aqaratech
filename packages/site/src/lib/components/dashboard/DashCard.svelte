@@ -57,6 +57,7 @@
 			<div class="overflow-auto">
 				<slot name="data" />
 			</div>
+			<!-- <slot name="data" /> -->
 		{/if}
 	{/if}
 </div>
