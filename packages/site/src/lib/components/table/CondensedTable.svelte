@@ -10,9 +10,10 @@
 	}
 	type Headers = typeof headers[number]['key'];
 	type Totals = { [key in Headers]?: string };
+	type Row = { [key in Headers]: string | null } & { id: string };
 
 	export let headers: RowHeader[];
-	export let data: any[] = [];
+	export let data: Row[] = [];
 	export let totals: Totals | undefined = undefined;
 </script>
 
