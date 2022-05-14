@@ -3,13 +3,17 @@
 	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
 	import { classes } from '$lib/utils';
 
+	type T = $$Generic<string>;
 	interface RowHeader {
-		key: string;
+		key: T;
 		style?: 'regular' | 'bold1' | 'bold2';
 	}
+	type Headers = typeof headers[number]['key'];
+	type Totals = { [key in Headers]?: string };
+
 	export let headers: RowHeader[];
 	export let data: any[] = [];
-	export let totals: Record<string, string> | undefined = undefined;
+	export let totals: Totals | undefined = undefined;
 </script>
 
 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

@@ -7,17 +7,17 @@ type Data = InferQueryOutput<'owner:charts:expenses'>;
 
 export const expenseTableHeaders = [
 	{
-		key: 'Date',
+		key: 'Date' as const,
 	},
 	{
-		key: 'Category',
+		key: 'Category' as const,
 		style: 'bold1' as const,
 	},
 	{
-		key: 'Amount',
+		key: 'Amount' as const,
 	},
 	{
-		key: 'Location',
+		key: 'Location' as const,
 	},
 ];
 
