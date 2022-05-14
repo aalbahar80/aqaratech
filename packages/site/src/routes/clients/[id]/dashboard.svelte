@@ -5,11 +5,18 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import {
+		expenseTableHeaders,
+		getExpenseTableData,
+		getExpenseTableTotals,
+	} from '$lib/components/dashboard/stores/expense';
 	import Select from '$lib/components/Select.svelte';
+	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
+	import { writable } from 'svelte/store';
 	import type { z } from 'zod';
 	import type { Load } from './index';
 
@@ -120,6 +127,11 @@
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
 	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
+
+	const expenseData = writable(expenses);
+	$: $expenseData = expenses;
+	const expenseTableData = getExpenseTableData(expenseData);
+	const expenseTableTotals = getExpenseTableTotals(expenseData);
 </script>
 
 <div class="prose">
@@ -251,13 +263,15 @@
 			}}
 		/>
 	</div>
-	<Chart let:height let:width>
-		<canvas
-			{height}
-			{width}
-			use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
-		/>
-	</Chart>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas
+				{height}
+				{width}
+				use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
+			/>
+		</Chart>
+	</div>
 </DashCard>
 
 <!-- Expenses Chart -->
@@ -291,13 +305,22 @@
 			}}
 		/>
 	</div>
-	<Chart let:height let:width>
-		<canvas
-			{height}
-			{width}
-			use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas
+				{height}
+				{width}
+				use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
+			/>
+		</Chart>
+	</div>
+	<div slot="data">
+		<CondensedTable
+			data={$expenseTableData}
+			headers={expenseTableHeaders}
+			totals={$expenseTableTotals}
 		/>
-	</Chart>
+	</div>
 </DashCard>
 
 <!-- Occupancy Chart -->
@@ -306,9 +329,11 @@
 	subtitle="The percentage of units that are empty."
 	empty={occupancy.length < 1}
 >
-	<Chart let:height let:width>
-		<canvas {height} {width} use:occupancyChart={occupancy} />
-	</Chart>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas {height} {width} use:occupancyChart={occupancy} />
+		</Chart>
+	</div>
 </DashCard>
 
 <style lang="postcss">
