@@ -5,8 +5,8 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import { getExpenseTableStore } from '$lib/components/dashboard/stores/expense';
-	import { getExpenseChartStore } from '$lib/components/dashboard/stores/expenseChart';
+	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
+	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
