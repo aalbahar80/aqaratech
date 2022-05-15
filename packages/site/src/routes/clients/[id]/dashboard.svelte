@@ -127,7 +127,7 @@
 
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
-	const expenseTable = getExpenseTableStore(expenseData);
+	const expenseTableData = getExpenseTableStore(expenseData);
 	const expenseChartData = getExpenseChartStore(expenseData, expensesGroupBy);
 </script>
 
@@ -308,7 +308,7 @@
 		</Chart>
 	</div>
 	<div slot="data">
-		<CondensedTable table={$expenseTable} />
+		<CondensedTable table={$expenseTableData} />
 	</div>
 </DashCard>
 
