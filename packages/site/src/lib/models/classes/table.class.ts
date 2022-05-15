@@ -33,7 +33,7 @@ export class CTable<T extends string> {
 	// use R.chunk for consistency?
 	getPageCount = (size: number) => Math.ceil(this.rows.length / size);
 
-	getPagination = (pageIdx = 1, pageSize = 10): IPagination =>
+	getPagination = (pageSize = 10, pageIdx = 1): IPagination =>
 		calculatePagination(pageIdx, {
 			pageCount: this.getPageCount(pageSize),
 			pageSize: pageSize,

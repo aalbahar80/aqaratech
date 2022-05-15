@@ -18,7 +18,7 @@
 		if (tab === 'Chart') {
 			$height = 1000;
 		} else {
-			$height = 1500;
+			$height = 1350;
 		}
 	}
 </script>
