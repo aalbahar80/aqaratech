@@ -17,41 +17,13 @@ export function createPagination(pgn: IPagination) {
 	return {
 		subscribe,
 		next: () =>
-			update((n) => {
-				const pageIdx = Math.min(n.pageIdx + 1, n.pageCount);
-				const buttons = getButtons(pageIdx, n.pageCount);
-				console.log({ buttons }, 'pagination.ts ~ 22');
-				return {
-					...n,
-					pageIdx,
-					buttons,
-					hasPrevious: pageIdx > 1,
-					hasNext: pageIdx < n.pageCount,
-				};
-			}),
+			update((n) =>
+				calculatePagination(Math.min(n.pageIdx + 1, n.pageCount), n),
+			),
 		previous: () =>
-			update((n) => {
-				const pageIdx = Math.max(n.pageIdx - 1, 1);
-				const buttons = getButtons(pageIdx, n.pageCount);
-				return {
-					...n,
-					pageIdx,
-					buttons,
-					hasPrevious: pageIdx > 1,
-					hasNext: pageIdx < n.pageCount,
-				};
-			}),
+			update((n) => calculatePagination(Math.max(n.pageIdx - 1, 1), n)),
 		setPage: (pageIdx: number) =>
-			update((n) => {
-				const buttons = getButtons(pageIdx, n.pageCount);
-				return {
-					...n,
-					pageIdx,
-					buttons,
-					hasPrevious: pageIdx > 1,
-					hasNext: pageIdx < n.pageCount,
-				};
-			}),
+			update((n) => calculatePagination(pageIdx, n)),
 	};
 }
 
@@ -71,3 +43,31 @@ export function getButtons(pageIdx: number, pageCount: number) {
 
 	return [1, ...filteredCenter, pageCount];
 }
+
+export const pagination = createPagination({
+	pageIdx: 1,
+	pageCount: 1,
+	pageSize: 10,
+	itemCount: 0,
+	buttons: [1],
+	hasNext: false,
+	hasPrevious: false,
+});
+
+export const calculatePagination = (
+	pageIdx: number,
+	pgn: {
+		pageCount: number;
+		pageSize: number;
+		itemCount: number;
+	},
+): IPagination => {
+	const buttons = getButtons(pageIdx, pgn.pageCount);
+	return {
+		...pgn,
+		pageIdx,
+		buttons,
+		hasPrevious: pageIdx > 1,
+		hasNext: pageIdx < pgn.pageCount,
+	};
+};
