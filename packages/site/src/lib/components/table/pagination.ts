@@ -28,7 +28,7 @@ export function createPagination(pgn: IPagination) {
 }
 
 export function getButtons(pageIdx: number, pageCount: number) {
-	const center = [pageIdx - 2, pageIdx - 1, pageIdx, pageIdx + 1, pageIdx + 2],
+	const center = [pageIdx - 1, pageIdx, pageIdx + 1],
 		filteredCenter = center.filter((p) => p > 1 && p < pageCount),
 		includeThreeLeft = pageIdx === 5,
 		includeThreeRight = pageIdx === pageCount - 4,
