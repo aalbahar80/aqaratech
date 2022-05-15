@@ -7,6 +7,7 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
 	import { getIncomeChartStore } from '$lib/components/dashboard/stores/charts/income';
+	import { getNetChartStore } from '$lib/components/dashboard/stores/charts/net';
 	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
 	import { getIncomeTableStore } from '$lib/components/dashboard/stores/tables/income';
 	import Select from '$lib/components/Select.svelte';
@@ -138,6 +139,9 @@
 	$: $incomeData = income;
 	const incomeTableData = getIncomeTableStore(incomeData);
 	const incomeChartData = getIncomeChartStore(incomeData, incomeGroupBy);
+
+	// Net
+	const netChartData = getNetChartStore(incomeData, expenseData);
 </script>
 
 <div class="prose">
