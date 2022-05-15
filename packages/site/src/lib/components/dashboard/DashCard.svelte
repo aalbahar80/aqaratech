@@ -16,9 +16,9 @@
 
 	$: {
 		if (tab === 'Chart') {
-			$height = 900;
+			$height = 1000;
 		} else {
-			$height = 1200;
+			$height = 1500;
 		}
 	}
 </script>
@@ -49,7 +49,7 @@
 			</div>
 			<slot name="chart" />
 		</div>
-		<div class="overflow-auto" class:hidden={tab !== 'Data'}>
+		<div class="overflow-y-hidden" class:hidden={tab !== 'Data'}>
 			<slot name="data" />
 		</div>
 	{/if}
