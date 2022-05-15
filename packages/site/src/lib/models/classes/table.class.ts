@@ -24,21 +24,8 @@ export class CTable<T extends string> {
 		this.footer = data.footer;
 	}
 
-	paginate(size = 10) {
-		this.paginated = R.chunk(this.rows, size);
-	}
+	getPage = (page = 1, size = 10) => R.chunk(this.rows, size)[page - 1] || [];
 
-	getPage(page = 1, size = 10) {
-		// return this.paginated[page - 1];
-		console.time('paginating');
-		const result = R.chunk(this.rows, size)[page - 1];
-		console.timeEnd('paginating');
-		return result;
-	}
-
-	getPageCount() {
-		return this.paginated.length;
-	}
+	// use R.chunk for consistency?
+	getPageCount = (size: number) => Math.ceil(this.rows.length / size);
 }
-
-// const a = new Table()

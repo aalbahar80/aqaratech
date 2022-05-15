@@ -6,6 +6,8 @@
 
 	type T = $$Generic<string>;
 	export let table: CTable<T>;
+
+	let pageIdx = 1;
 </script>
 
 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -36,7 +38,7 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each table.rows as row (row.id)}
+				{#each table.getPage(pageIdx, 10) as row (row.id)}
 					<tr>
 						{#each table.headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
