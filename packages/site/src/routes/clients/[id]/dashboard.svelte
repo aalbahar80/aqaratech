@@ -5,8 +5,9 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
 	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
+	import { getIncomeChartStore } from '$lib/components/dashboard/stores/charts/income';
+	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
@@ -122,13 +123,20 @@
 		]);
 		filter = newFilter;
 	};
-	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
 	const expensesGroupBy: Writable<'ratio' | 'property'> = writable('ratio');
+	const incomeGroupBy: Writable<'ratio' | 'property'> = writable('ratio');
 
+	// Expense
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
 	const expenseTableData = getExpenseTableStore(expenseData);
 	const expenseChartData = getExpenseChartStore(expenseData, expensesGroupBy);
+
+	// Income
+	const incomeData = writable(income);
+	$: $incomeData = income;
+	// const incomeTableData = getIncomeTableStore(incomeData);
+	const incomeChartData = getIncomeChartStore(incomeData, incomeGroupBy);
 </script>
 
 <div class="prose">
@@ -209,7 +217,7 @@
 						unitId: null,
 					});
 					if (e.detail.value) {
-						incomeGroupBy = 'ratio';
+						$incomeGroupBy = 'ratio';
 						$expensesGroupBy = 'ratio';
 					}
 				}}
@@ -242,7 +250,7 @@
 			Group By
 		</span>
 		<Select
-			current={incomeGroupBy}
+			current={$incomeGroupBy}
 			disabled={!!selectedProperty || !!selectedUnit}
 			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
 			options={[
@@ -255,18 +263,14 @@
 			]}
 			on:select={(e) => {
 				if (e.detail.value === 'ratio' || e.detail.value === 'property') {
-					incomeGroupBy = e.detail.value;
+					$incomeGroupBy = e.detail.value;
 				}
 			}}
 		/>
 	</div>
 	<div slot="chart">
 		<Chart let:height let:width>
-			<canvas
-				{height}
-				{width}
-				use:incomeChart={{ data: income, groupBy: incomeGroupBy }}
-			/>
+			<canvas {height} {width} use:incomeChart={$incomeChartData} />
 		</Chart>
 	</div>
 </DashCard>
