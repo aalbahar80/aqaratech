@@ -4,25 +4,18 @@ interface TableHeader<T> {
 	key: T;
 	style?: 'regular' | 'bold1' | 'bold2';
 }
+type TableRow<T extends string> = { [key in T]: string } & { id: string };
+type TableFooter<T extends string> = { [key in T]?: string };
 
-// type Headers = typeof headers[number]['key'];
-// type Totals = { [key in Headers]?: string };
-// type Row = { [key in Headers]: string } & { id: string };
-
-interface ITableData<T> {
+interface ITable<T extends string> {
 	headers: TableHeader<T>[];
-	rows: any[];
-	/**
-	 * Array of headers that should be displayed as totals.
-	 * If empty, no totals will be displayed.
-	 */
-	// totals: [];
-	totals: Record<string, string>;
+	rows: TableRow<T>[];
+	totals: TableFooter<T>;
 }
 
 export class CTable<T> {
 	public paginated = [[]];
-	constructor(public data: ITableData<T>) {
+	constructor(public data: ITable<T>) {
 		Object.assign(this, data);
 	}
 
