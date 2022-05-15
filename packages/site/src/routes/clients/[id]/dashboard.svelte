@@ -8,6 +8,7 @@
 	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
 	import { getIncomeChartStore } from '$lib/components/dashboard/stores/charts/income';
 	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
+	import { getIncomeTableStore } from '$lib/components/dashboard/stores/tables/income';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
@@ -135,7 +136,7 @@
 	// Income
 	const incomeData = writable(income);
 	$: $incomeData = income;
-	// const incomeTableData = getIncomeTableStore(incomeData);
+	const incomeTableData = getIncomeTableStore(incomeData);
 	const incomeChartData = getIncomeChartStore(incomeData, incomeGroupBy);
 </script>
 
@@ -272,6 +273,9 @@
 		<Chart let:height let:width>
 			<canvas {height} {width} use:incomeChart={$incomeChartData} />
 		</Chart>
+	</div>
+	<div slot="data">
+		<CondensedTable table={$incomeTableData} />
 	</div>
 </DashCard>
 

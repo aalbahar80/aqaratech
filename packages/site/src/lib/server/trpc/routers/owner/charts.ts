@@ -64,6 +64,7 @@ export const charts = createRouter()
 													},
 												},
 												select: {
+													id: true,
 													postAt: true,
 													amount: true,
 													isPaid: true,

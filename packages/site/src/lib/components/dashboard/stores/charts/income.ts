@@ -14,16 +14,26 @@ const normalize = (data: Data) =>
 		property.units.flatMap((unit) =>
 			unit.leases.flatMap((lease) =>
 				lease.transactions.flatMap((transaction) => {
-					const { amount, isPaid, postAt } = transaction;
+					const { amount, isPaid, postAt, id } = transaction;
 					const address = getAddress(property);
 					const { propertyId } = unit;
-					return { amount, isPaid, postAt, address, propertyId };
+					return {
+						amount,
+						isPaid,
+						postAt,
+						address,
+						propertyId,
+						id,
+						property,
+						unit,
+					};
 				}),
 			),
 		),
 	);
 
-const sort = (data: Data) => R.sortBy(normalize(data), (item) => item.postAt);
+export const sort = (data: Data) =>
+	R.sortBy(normalize(data), (item) => item.postAt);
 
 type Bucket = {
 	total: number;
