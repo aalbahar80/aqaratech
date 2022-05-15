@@ -2,6 +2,7 @@
 	import Tabs from '$lib/components/Tabs.svelte';
 	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import { tweened } from 'svelte/motion';
+	import { fade } from 'svelte/transition';
 
 	export let title: string;
 	export let subtitle = '';
@@ -49,7 +50,7 @@
 			</div>
 			<slot name="chart" />
 		{:else}
-			<div class="overflow-x-auto overflow-y-hidden">
+			<div in:fade class="overflow-x-auto overflow-y-hidden">
 				<slot name="data" />
 			</div>
 		{/if}
