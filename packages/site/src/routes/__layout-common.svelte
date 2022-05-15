@@ -11,6 +11,8 @@
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
+	import LogRocket from 'logrocket';
+	import * as R from 'remeda';
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import '../styles/tailwind.css';
@@ -31,14 +33,19 @@
 <script lang="ts">
 	export let navigation: NavbarItem[];
 	onMount(() => {
-		if (
-			import.meta.env.VERCEL_ENV === 'production' ||
-			import.meta.env.VERCEL_ENV === 'preview'
-		) {
+		if (!window.location.href.includes('localhost')) {
+			LogRocket.init('n4p0hb/aqaratech');
+			if ($session.authz) {
+				LogRocket.identify($session.authz.sub || '', {
+					...R.mapValues($session.authz, (v) => v ?? ''),
+					...$session.user,
+				});
+			}
+
 			Sentry.init({
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
-				tracesSampleRate: 1.0,
+				tracesSampleRate: 0.25,
 				// debug: dev,
 				environment:
 					import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
