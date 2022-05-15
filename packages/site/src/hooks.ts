@@ -14,7 +14,7 @@ if (
 ) {
 	Sentry.init({
 		dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-		tracesSampleRate: 1.0,
+		tracesSampleRate: 0.25,
 		release: import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localServerRelease',
 		environment: process.env.VERCEL
 			? process.env.VERCEL_GIT_COMMIT_REF
