@@ -6,8 +6,8 @@ type ChartData = {
 	date: Date;
 	category: string;
 	address: string;
-}[];
-type DataSets = Chart<'bar', ChartData>['data']['datasets'];
+};
+type DataSets = Chart<'bar', ChartData[]>['data']['datasets'];
 
 export function expensesChart(node: HTMLCanvasElement, datasets: DataSets) {
 	console.time('creating chart');
