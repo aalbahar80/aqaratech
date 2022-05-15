@@ -12,9 +12,11 @@
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
-	<div class="shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+	<div
+		class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+	>
 		<table class="min-w-full divide-y divide-gray-300">
-			<thead class="sticky bg-gray-50" style="inset-block-start: 0;">
+			<thead class="bg-gray-50">
 				<tr>
 					{#each table.headers as header, idx (header.key)}
 						{#if header.key === 'edit'}
@@ -56,7 +58,7 @@
 				{/each}
 			</tbody>
 			{#if table.footer}
-				<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
+				<tfoot class="bg-gray-50">
 					{#each table.headers as header, idx (header.key)}
 						{@const value = table.footer[header.key]}
 						<th
