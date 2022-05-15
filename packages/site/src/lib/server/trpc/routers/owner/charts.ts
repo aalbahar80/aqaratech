@@ -1,6 +1,7 @@
 import prismaClient from '$lib/server/prismaClient';
 import { groupOccupancy } from '$lib/utils/group';
 import { TRPCError } from '@trpc/server';
+import * as R from 'remeda';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
 
@@ -175,20 +176,19 @@ export const charts = createRouter()
 						})) || [],
 				),
 			);
-			type P =
+			type Trx =
 				| typeof clientExpenses[0]
 				| typeof propertyExpenses[0]
 				| typeof unitExpenses[0];
-			const allExpenses: P[] = [
+
+			const all: Trx[] = [
 				...clientExpenses,
 				...propertyExpenses,
 				...unitExpenses,
 			];
-			// Can replace with lodash.soryBy
-			const sortedExpenses = allExpenses
-				.slice()
-				.sort((a, b) => a.postAt.getTime() - b.postAt.getTime());
-			return sortedExpenses;
+
+			const sorted = R.sortBy(all, (e) => e.postAt);
+			return sorted;
 		},
 	})
 	.query('occupancy', {

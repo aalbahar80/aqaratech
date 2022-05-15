@@ -3,7 +3,6 @@ import { expenseCats, getColor } from '$lib/config/constants';
 import { getAddress, startCase } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
-import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'owner:charts:expenses'>;
@@ -15,15 +14,12 @@ type ChartData = {
 	address: string;
 }[];
 
-const sort = (data: Data) => R.sortBy(data, (item) => item.postAt);
-
 const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
 	console.time('aggregate');
-	const sorted = sort(data);
-	const months = getMonths(sorted);
-
+	const months = getMonths(data);
 	const buckets: ChartData = [];
-	sorted.forEach((trx) => {
+
+	data.forEach((trx) => {
 		const month = closestTo(trx.postAt, months);
 		const group =
 			expenseCats.find((g) => g.en === trx.category)?.group ?? 'OTHER';
