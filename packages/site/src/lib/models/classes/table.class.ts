@@ -1,3 +1,4 @@
+import { getButtons, type IPagination } from '$lib/components/table/pagination';
 import * as R from 'remeda';
 
 interface TableHeader<T> {
@@ -28,4 +29,18 @@ export class CTable<T extends string> {
 
 	// use R.chunk for consistency?
 	getPageCount = (size: number) => Math.ceil(this.rows.length / size);
+
+	getPagination = (pageIdx = 1, pageSize = 10): IPagination => {
+		const pageCount = this.getPageCount(pageSize);
+		const buttons = getButtons(pageIdx, pageCount);
+		return {
+			pageIdx,
+			pageCount,
+			pageSize: pageSize,
+			itemCount: this.rows.length,
+			buttons,
+			hasNext: pageIdx < pageCount,
+			hasPrevious: pageIdx > 1,
+		};
+	};
 }

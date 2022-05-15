@@ -1,13 +1,15 @@
 <script lang="ts">
 	import CondensedActionCell from '$lib/components/table/CondensedActionCell.svelte';
 	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
+	import CondensedPagination from '$lib/components/table/CondensedPagination.svelte';
+	import { createPagination } from '$lib/components/table/pagination';
 	import type { CTable } from '$lib/models/classes/table.class';
 	import { classes } from '$lib/utils';
 
 	type T = $$Generic<string>;
 	export let table: CTable<T>;
 
-	let pageIdx = 1;
+	const pgn = createPagination(table.getPagination());
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
@@ -38,7 +40,7 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each table.getPage(pageIdx, 30) as row (row.id)}
+				{#each table.getPage($pgn.pageIdx, $pgn.pageSize) as row (row.id)}
 					<tr>
 						{#each table.headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
@@ -73,5 +75,6 @@
 				</tfoot>
 			{/if}
 		</table>
+		<CondensedPagination {pgn} />
 	</div>
 </div>
