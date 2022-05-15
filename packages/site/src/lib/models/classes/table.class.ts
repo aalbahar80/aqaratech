@@ -11,14 +11,15 @@ interface TableHeader<T> {
 type TableRow<T extends string> = { [key in T]: string } & { id: string };
 type TableFooter<T extends string> = { [key in T]?: string };
 
+// TODO: dry types
 interface ITable<T extends string> {
-	headers: TableHeader<T>[];
+	headers: readonly TableHeader<T>[];
 	rows: TableRow<T>[];
 	footer: TableFooter<T>;
 }
 
 export class CTable<T extends string> {
-	headers: TableHeader<T>[];
+	headers: readonly TableHeader<T>[];
 	rows: TableRow<T>[];
 	footer: TableFooter<T>;
 	paginated: typeof this.rows[] = [];

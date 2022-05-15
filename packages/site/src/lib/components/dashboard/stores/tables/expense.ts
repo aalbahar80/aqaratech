@@ -7,20 +7,11 @@ import { CTable } from '$lib/models/classes/table.class';
 type Data = InferQueryOutput<'owner:charts:expenses'>;
 
 export const expenseTableHeaders = [
-	{
-		key: 'Date' as const,
-	},
-	{
-		key: 'Category' as const,
-		style: 'bold1' as const,
-	},
-	{
-		key: 'Amount' as const,
-	},
-	{
-		key: 'Location' as const,
-	},
-];
+	{ key: 'Date' },
+	{ key: 'Category', style: 'bold1' },
+	{ key: 'Amount' },
+	{ key: 'Location' },
+] as const;
 
 export const getExpenseTableStore = (expenses: Writable<Data>) =>
 	derived(expenses, ($expenses) => {

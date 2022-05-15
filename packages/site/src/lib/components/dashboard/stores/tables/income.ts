@@ -9,15 +9,12 @@ import { Unit } from '$lib/models/classes/unit.class';
 type Data = InferQueryOutput<'owner:charts:income'>;
 
 export const incomeTableHeaders = [
-	{ key: 'Date' as const },
-	{
-		key: 'Status' as const,
-		style: 'bold1' as const,
-	},
-	{ key: 'Amount' as const },
-	{ key: 'Location' as const },
-	{ key: 'Unit' as const, style: 'bold2' as const },
-];
+	{ key: 'Date' },
+	{ key: 'Status', style: 'bold1' },
+	{ key: 'Amount' },
+	{ key: 'Location' },
+	{ key: 'Unit', style: 'bold2' },
+] as const;
 
 export const getIncomeTableStore = (income: Writable<Data>) =>
 	derived(income, ($income) => {
