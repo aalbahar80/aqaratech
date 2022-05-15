@@ -8,8 +8,7 @@
 
 	type T = $$Generic<string>;
 	export let table: CTable<T>;
-
-	const pgn = createPagination(table.getPagination(25));
+	$: pgn = createPagination(table.getPagination(25));
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
