@@ -35,7 +35,9 @@ export function getButtons(
 	const center = extended
 			? [pageIdx - 2, pageIdx - 1, pageIdx, pageIdx + 1, pageIdx + 2]
 			: [pageIdx - 1, pageIdx, pageIdx + 1],
-		filteredCenter = center.filter((p) => p > 1 && p < pageCount),
+		filteredCenter: Array<number | null> = center.filter(
+			(p) => p > 1 && p < pageCount,
+		),
 		includeThreeLeft = pageIdx === 5,
 		includeThreeRight = pageIdx === pageCount - 4,
 		includeLeftDots = pageIdx > 5,
