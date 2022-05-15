@@ -1,49 +1,19 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import type { ChartData } from '$lib/components/dashboard/charts/income';
 import { getColor } from '$lib/config/constants';
-import { getAddress } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
-import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'owner:charts:income'>;
 type GroupBy = 'ratio' | 'property';
 type Bucket = ChartData;
 
-const normalize = (data: Data) =>
-	data.properties.flatMap((property) =>
-		property.units.flatMap((unit) =>
-			unit.leases.flatMap((lease) =>
-				lease.transactions.flatMap((transaction) => {
-					const { amount, isPaid, postAt, id } = transaction;
-					const address = getAddress(property);
-					const { propertyId } = unit;
-					return {
-						amount,
-						isPaid,
-						postAt,
-						address,
-						propertyId,
-						id,
-						property,
-						unit,
-					};
-				}),
-			),
-		),
-	);
-
-export const sort = (data: Data) =>
-	R.sortBy(normalize(data), (item) => item.postAt);
-
 const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
-	const sorted = sort(data);
-	const months = getMonths(sorted);
-
+	const months = getMonths(data);
 	const buckets: Bucket[] = [];
 
-	sorted.forEach((trx) => {
+	data.forEach((trx) => {
 		const month = closestTo(trx.postAt, months);
 		if (month) {
 			// search for the bucket with the same date  propertyId

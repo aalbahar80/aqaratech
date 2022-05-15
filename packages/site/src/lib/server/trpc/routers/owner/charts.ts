@@ -1,4 +1,5 @@
 import prismaClient from '$lib/server/prismaClient';
+import { getAddress } from '$lib/utils/common';
 import { groupOccupancy } from '$lib/utils/group';
 import { TRPCError } from '@trpc/server';
 import * as R from 'remeda';
@@ -85,7 +86,30 @@ export const charts = createRouter()
 					message: 'Unable to get data',
 				});
 			}
-			return data;
+
+			const normalized = data.properties.flatMap((property) =>
+				property.units.flatMap((unit) =>
+					unit.leases.flatMap((lease) =>
+						lease.transactions.flatMap((transaction) => {
+							const { amount, isPaid, postAt, id } = transaction;
+							const address = getAddress(property);
+							const { propertyId } = unit;
+							return {
+								amount,
+								isPaid,
+								postAt,
+								address,
+								propertyId,
+								id,
+								property,
+								unit,
+							};
+						}),
+					),
+				),
+			);
+			const sorted = R.sortBy(normalized, (i) => i.postAt);
+			return sorted;
 		},
 	})
 	.query('expenses', {
