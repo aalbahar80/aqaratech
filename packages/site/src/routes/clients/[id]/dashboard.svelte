@@ -6,13 +6,14 @@
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getExpenseTableStore } from '$lib/components/dashboard/stores/expense';
+	import { getExpenseChartStore } from '$lib/components/dashboard/stores/expenseChart';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
-	import { writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import type { z } from 'zod';
 	import type { Load } from './index';
 
@@ -122,13 +123,12 @@
 		filter = newFilter;
 	};
 	let incomeGroupBy: 'ratio' | 'property' = 'ratio';
-	let expensesGroupBy: 'ratio' | 'property' = 'ratio';
+	const expensesGroupBy: Writable<'ratio' | 'property'> = writable('ratio');
 
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
-	// const expenseTableData = getExpenseTableData(expenseData);
-	// const expenseTableTotals = getExpenseTableTotals(expenseData);
 	const expenseTable = getExpenseTableStore(expenseData);
+	const expenseChartData = getExpenseChartStore(expenseData, expensesGroupBy);
 </script>
 
 <div class="prose">
@@ -210,7 +210,7 @@
 					});
 					if (e.detail.value) {
 						incomeGroupBy = 'ratio';
-						expensesGroupBy = 'ratio';
+						$expensesGroupBy = 'ratio';
 					}
 				}}
 			/>
@@ -284,7 +284,7 @@
 			Group By
 		</span>
 		<Select
-			current={expensesGroupBy}
+			current={$expensesGroupBy}
 			disabled={!!selectedProperty || !!selectedUnit}
 			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
 			options={[
@@ -297,18 +297,14 @@
 			]}
 			on:select={(e) => {
 				if (e.detail.value === 'ratio' || e.detail.value === 'property') {
-					expensesGroupBy = e.detail.value;
+					$expensesGroupBy = e.detail.value;
 				}
 			}}
 		/>
 	</div>
 	<div slot="chart">
 		<Chart let:height let:width>
-			<canvas
-				{height}
-				{width}
-				use:expensesChart={{ data: expenses, groupBy: expensesGroupBy }}
-			/>
+			<canvas {height} {width} use:expensesChart={$expenseChartData} />
 		</Chart>
 	</div>
 	<div slot="data">
