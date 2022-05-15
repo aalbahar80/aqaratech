@@ -60,6 +60,12 @@
 					username: $session.user?.name || '',
 				});
 			});
+
+			LogRocket.getSessionURL((sessionURL) => {
+				Sentry.configureScope((scope) => {
+					scope.setExtra('sessionURL', sessionURL);
+				});
+			});
 		}
 	});
 </script>
