@@ -10,16 +10,16 @@
 <div
 	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
 >
-	<div class="flex flex-1 justify-between sm:hidden">
+	<div class="flex flex-1 sm:hidden">
 		<button
-			class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+			class="relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 			on:click={pgn.previous}
 			disabled={!$pgn.hasPrevious}
 		>
 			Previous
 		</button>
 		<button
-			class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+			class="relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 			on:click={pgn.next}
 			disabled={!$pgn.hasNext}
 		>
@@ -70,7 +70,6 @@
 							...
 						</span>
 					{/if}
-					<!-- ellipses twind class? -->
 				{/each}
 				<button
 					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
