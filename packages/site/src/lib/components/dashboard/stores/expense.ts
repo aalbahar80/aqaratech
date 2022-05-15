@@ -37,7 +37,7 @@ export const getExpenseTableStore = (expenses: Writable<Data>) =>
 		const table = new CTable({
 			headers: expenseTableHeaders,
 			rows,
-			totals: {
+			footer: {
 				Amount: kwdFormat(total),
 			},
 		});

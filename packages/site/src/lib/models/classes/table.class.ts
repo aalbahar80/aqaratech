@@ -10,18 +10,18 @@ type TableFooter<T extends string> = { [key in T]?: string };
 interface ITable<T extends string> {
 	headers: TableHeader<T>[];
 	rows: TableRow<T>[];
-	totals: TableFooter<T>;
+	footer: TableFooter<T>;
 }
 
 export class CTable<T extends string> {
 	headers: TableHeader<T>[];
 	rows: TableRow<T>[];
-	totals: TableFooter<T>;
+	footer: TableFooter<T>;
 	paginated: typeof this.rows[] = [];
 	constructor(data: ITable<T>) {
 		this.headers = data.headers;
 		this.rows = data.rows;
-		this.totals = data.totals;
+		this.footer = data.footer;
 	}
 
 	paginate(size = 10) {

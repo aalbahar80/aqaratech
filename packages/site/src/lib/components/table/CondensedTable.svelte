@@ -52,10 +52,10 @@
 					</tr>
 				{/each}
 			</tbody>
-			{#if table.totals}
+			{#if table.footer}
 				<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
 					{#each table.headers as header, idx (header.key)}
-						{@const value = table.totals[header.key]}
+						{@const value = table.footer[header.key]}
 						<th
 							scope="col"
 							class={classes(
