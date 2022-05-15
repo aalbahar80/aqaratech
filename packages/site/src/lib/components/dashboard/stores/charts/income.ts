@@ -9,7 +9,7 @@ type Data = InferQueryOutput<'owner:charts:income'>;
 type GroupBy = 'ratio' | 'property';
 type Bucket = ChartData;
 
-const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
+export const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 	const months = getMonths(data);
 	const buckets: Bucket[] = [];
 
@@ -37,12 +37,15 @@ const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 			}
 		}
 	});
-	if (groupBy === 'ratio') {
-		buckets.sort((a, b) => +b.isPaid - +a.isPaid); // true first
-	} else if (groupBy === 'property') {
-		buckets.sort((a, b) => a.address.localeCompare(b.address)); // alphabetical
-	}
 	return buckets;
+};
+export const group = (data: Bucket[], groupBy: GroupBy): Bucket[] => {
+	if (groupBy === 'ratio') {
+		data.sort((a, b) => +b.isPaid - +a.isPaid); // true first
+	} else if (groupBy === 'property') {
+		data.sort((a, b) => a.address.localeCompare(b.address)); // alphabetical
+	}
+	return data;
 };
 
 const getLabel = <T>(group: T, groupBy: GroupBy): string => {
@@ -57,7 +60,8 @@ const getLabel = <T>(group: T, groupBy: GroupBy): string => {
 
 const getDatasets = (data: Data, groupBy: GroupBy) => {
 	const aggregated = aggregate(data, groupBy);
-	const groups = aggregated
+	const grouped = group(aggregated, groupBy);
+	const groups = grouped
 		.map((item) => (groupBy === 'property' ? item.address : item.isPaid))
 		.filter((value, index, self) => self.indexOf(value) === index);
 
@@ -67,8 +71,8 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 			label: getLabel(group, groupBy),
 			data:
 				groupBy === 'property'
-					? aggregated.filter((item) => item.address === group)
-					: aggregated.filter((item) => item.isPaid === group),
+					? grouped.filter((item) => item.address === group)
+					: grouped.filter((item) => item.isPaid === group),
 			parsing: {
 				yAxisKey: 'total',
 				xAxisKey: 'date',
