@@ -41,6 +41,17 @@ export function createPagination(pgn: IPagination) {
 					hasNext: pageIdx < n.pageCount,
 				};
 			}),
+		setPage: (pageIdx: number) =>
+			update((n) => {
+				const buttons = getButtons(pageIdx, n.pageCount);
+				return {
+					...n,
+					pageIdx,
+					buttons,
+					hasPrevious: pageIdx > 1,
+					hasNext: pageIdx < n.pageCount,
+				};
+			}),
 	};
 }
 
