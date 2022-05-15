@@ -49,19 +49,27 @@
 					<Icon src={ChevronLeft} class="h-5 w-5" aria-hidden="true" />
 				</button>
 				{#each $pgn.buttons as button}
-					{@const current = button === $pgn.pageIdx}
-					<button
-						aria-current={current ? 'page' : null}
-						class={classes(
-							current
-								? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-								: 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
-							'relative inline-flex items-center px-4 py-2 border text-sm font-medium',
-						)}
-						on:click={pgn.setPage(button)}
-					>
-						{button || '...'}
-					</button>
+					{#if button}
+						{@const current = button === $pgn.pageIdx}
+						<button
+							aria-current={current ? 'page' : null}
+							class={classes(
+								current
+									? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+									: 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
+								'relative inline-flex items-center px-4 py-2 border text-sm font-medium',
+							)}
+							on:click={() => pgn.setPage(button)}
+						>
+							{button}
+						</button>
+					{:else}
+						<span
+							class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+						>
+							...
+						</span>
+					{/if}
 					<!-- ellipses twind class? -->
 				{/each}
 				<button
