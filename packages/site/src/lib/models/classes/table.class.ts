@@ -13,27 +13,31 @@ interface ITable<T extends string> {
 	totals: TableFooter<T>;
 }
 
-export class CTable<T> {
-	public paginated = [[]];
-	constructor(public data: ITable<T>) {
-		Object.assign(this, data);
+export class CTable<T extends string> {
+	headers: TableHeader<T>[];
+	rows: TableRow<T>[];
+	totals: TableFooter<T>;
+	paginated: typeof this.rows[] = [];
+	constructor(data: ITable<T>) {
+		this.headers = data.headers;
+		this.rows = data.rows;
+		this.totals = data.totals;
 	}
 
 	paginate(size = 10) {
-		this.paginated = R.chunk(this.data.rows, size);
+		this.paginated = R.chunk(this.rows, size);
 	}
 
-	getPage(page = 1) {
-		return this.paginated[page - 1];
+	getPage(page = 1, size = 10) {
+		// return this.paginated[page - 1];
+		console.time('paginating');
+		const result = R.chunk(this.rows, size)[page - 1];
+		console.timeEnd('paginating');
+		return result;
 	}
 
 	getPageCount() {
 		return this.paginated.length;
-	}
-
-	getFooter() {
-		// TODO: use getter? use if/else to avoid recalculation?
-		const total = this.data.rows.reduce((acc, row) => acc + row.amount, 0);
 	}
 }
 

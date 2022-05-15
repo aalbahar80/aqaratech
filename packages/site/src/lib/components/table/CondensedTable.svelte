@@ -13,7 +13,7 @@
 		<table class="min-w-full divide-y divide-gray-300">
 			<thead class="sticky bg-gray-50" style="inset-block-start: 0;">
 				<tr>
-					{#each table.data.headers as header, idx (header.key)}
+					{#each table.headers as header, idx (header.key)}
 						{#if header.key === 'edit'}
 							<th
 								scope="col"
@@ -36,9 +36,9 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each table.data.rows as row (row.id)}
+				{#each table.rows as row (row.id)}
 					<tr>
-						{#each table.data.headers as header, idx (header.key)}
+						{#each table.headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
 								<CondensedActionCell href="#" label="Edit" />
 							{:else}
@@ -52,10 +52,10 @@
 					</tr>
 				{/each}
 			</tbody>
-			{#if table.data.totals}
+			{#if table.totals}
 				<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
-					{#each table.data.headers as header, idx (header.key)}
-						{@const value = table.data.totals[header.key]}
+					{#each table.headers as header, idx (header.key)}
+						{@const value = table.totals[header.key]}
 						<th
 							scope="col"
 							class={classes(
