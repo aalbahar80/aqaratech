@@ -1,20 +1,11 @@
 <script lang="ts">
 	import CondensedActionCell from '$lib/components/table/CondensedActionCell.svelte';
 	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
+	import type { CTable } from '$lib/models/classes/table.class';
 	import { classes } from '$lib/utils';
 
 	type T = $$Generic<string>;
-	interface RowHeader {
-		key: T;
-		style?: 'regular' | 'bold1' | 'bold2';
-	}
-	type Headers = typeof headers[number]['key'];
-	type Totals = { [key in Headers]?: string };
-	type Row = { [key in Headers]: string } & { id: string };
-
-	export let headers: RowHeader[];
-	export let data: Row[] = [];
-	export let totals: Totals | undefined = undefined;
+	export let table: CTable<T>;
 </script>
 
 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -22,7 +13,7 @@
 		<table class="min-w-full divide-y divide-gray-300">
 			<thead class="sticky bg-gray-50" style="inset-block-start: 0;">
 				<tr>
-					{#each headers as header, idx (header.key)}
+					{#each table.data.headers as header, idx (header.key)}
 						{#if header.key === 'edit'}
 							<th
 								scope="col"
@@ -45,9 +36,9 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each data as row (row.id)}
+				{#each table.data.rows as row (row.id)}
 					<tr>
-						{#each headers as header, idx (header.key)}
+						{#each table.data.headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
 								<CondensedActionCell href="#" label="Edit" />
 							{:else}
@@ -61,10 +52,10 @@
 					</tr>
 				{/each}
 			</tbody>
-			{#if totals}
+			{#if table.data.totals}
 				<tfoot class="sticky bg-gray-50" style="inset-block-end: 0;">
-					{#each headers as header, idx (header.key)}
-						{@const value = totals[header.key]}
+					{#each table.data.headers as header, idx (header.key)}
+						{@const value = table.data.totals[header.key]}
 						<th
 							scope="col"
 							class={classes(

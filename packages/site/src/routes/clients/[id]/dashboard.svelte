@@ -5,11 +5,7 @@
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import {
-		expenseTableHeaders,
-		getExpenseTableData,
-		getExpenseTableTotals,
-	} from '$lib/components/dashboard/stores/expense';
+	import { getExpenseTableStore } from '$lib/components/dashboard/stores/expense';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { Unit } from '$lib/models/classes/unit.class';
@@ -130,8 +126,9 @@
 
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
-	const expenseTableData = getExpenseTableData(expenseData);
-	const expenseTableTotals = getExpenseTableTotals(expenseData);
+	// const expenseTableData = getExpenseTableData(expenseData);
+	// const expenseTableTotals = getExpenseTableTotals(expenseData);
+	const expenseTable = getExpenseTableStore(expenseData);
 </script>
 
 <div class="prose">
@@ -315,11 +312,7 @@
 		</Chart>
 	</div>
 	<div slot="data">
-		<CondensedTable
-			data={$expenseTableData}
-			headers={expenseTableHeaders}
-			totals={$expenseTableTotals}
-		/>
+		<CondensedTable table={$expenseTable} />
 	</div>
 </DashCard>
 
