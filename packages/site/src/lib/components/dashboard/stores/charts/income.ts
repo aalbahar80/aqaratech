@@ -1,4 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import type { ChartData } from '$lib/components/dashboard/charts/income';
 import { getColor } from '$lib/config/constants';
 import { getAddress } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
@@ -8,6 +9,7 @@ import { derived, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'owner:charts:income'>;
 type GroupBy = 'ratio' | 'property';
+type Bucket = ChartData;
 
 const normalize = (data: Data) =>
 	data.properties.flatMap((property) =>
@@ -35,13 +37,6 @@ const normalize = (data: Data) =>
 export const sort = (data: Data) =>
 	R.sortBy(normalize(data), (item) => item.postAt);
 
-type Bucket = {
-	total: number;
-	date: Date;
-	address: string;
-	propertyId: string;
-	isPaid: boolean;
-};
 const aggregate = (data: Data, groupBy: GroupBy): Bucket[] => {
 	const sorted = sort(data);
 	const months = getMonths(sorted);

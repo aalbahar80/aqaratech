@@ -1,9 +1,14 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 
-type ChartData = InferQueryOutput<'owner:charts:income'>;
-type DataSets = Chart<'bar', ChartData>['data']['datasets'];
+export type ChartData = {
+	total: number;
+	date: Date;
+	address: string;
+	propertyId: string;
+	isPaid: boolean;
+};
+type DataSets = Chart<'bar', ChartData[]>['data']['datasets'];
 
 export function incomeChart(node: HTMLCanvasElement, datasets: DataSets) {
 	const chart = new Chart(node, {
