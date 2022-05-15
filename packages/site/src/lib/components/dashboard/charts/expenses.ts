@@ -132,6 +132,7 @@ export function expensesChart(node: HTMLCanvasElement, config: ChartConfig) {
 
 	return {
 		update(newChartConfig: ChartConfig) {
+			console.log('updating chart');
 			chart.data.datasets = getDatasets(
 				newChartConfig.data,
 				newChartConfig.groupBy,

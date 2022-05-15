@@ -43,15 +43,14 @@
 		</div>
 	{:else}
 		<Tabs {tabs} bind:tab />
-		{#if tab === 'Chart'}
+		<div class:hidden={tab !== 'Chart'}>
 			<div class="pt-4">
 				<slot name="groupBy" />
 			</div>
 			<slot name="chart" />
-		{:else}
-			<div class="overflow-auto">
-				<slot name="data" />
-			</div>
-		{/if}
+		</div>
+		<div class="overflow-auto" class:hidden={tab !== 'Data'}>
+			<slot name="data" />
+		</div>
 	{/if}
 </div>

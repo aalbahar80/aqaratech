@@ -38,7 +38,7 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each table.getPage(pageIdx, 10) as row (row.id)}
+				{#each table.getPage(pageIdx, 30) as row (row.id)}
 					<tr>
 						{#each table.headers as header, idx (header.key)}
 							{#if header.key === 'edit'}
