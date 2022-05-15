@@ -9,6 +9,8 @@ export interface IPagination {
 	buttons: PaginationButtons;
 	hasNext: boolean;
 	hasPrevious: boolean;
+	idxStart: number;
+	idxEnd: number;
 }
 
 export function createPagination(pgn: IPagination) {
@@ -52,16 +54,6 @@ export function getButtons(
 	return [1, ...filteredCenter, pageCount];
 }
 
-export const pagination = createPagination({
-	pageIdx: 1,
-	pageCount: 1,
-	pageSize: 10,
-	itemCount: 0,
-	buttons: [1],
-	hasNext: false,
-	hasPrevious: false,
-});
-
 export const calculatePagination = (
 	pageIdx: number,
 	pgn: {
@@ -71,11 +63,17 @@ export const calculatePagination = (
 	},
 ): IPagination => {
 	const buttons = getButtons(pageIdx, pgn.pageCount);
+	const idxStart = (pageIdx - 1) * pgn.pageSize + 1;
+	const idxEnd =
+		pageIdx === pgn.pageCount ? pgn.itemCount : idxStart + pgn.pageSize;
+
 	return {
 		...pgn,
 		pageIdx,
 		buttons,
 		hasPrevious: pageIdx > 1,
 		hasNext: pageIdx < pgn.pageCount,
+		idxStart,
+		idxEnd,
 	};
 };
