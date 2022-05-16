@@ -1,5 +1,7 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import type { ChartData, DataSet } from '$lib/components/dashboard/charts/net';
 import { getColor } from '$lib/config/constants';
+import type Chart from 'chart.js/dist/chart.esm';
 import {
 	addMonths,
 	closestTo,
@@ -24,12 +26,19 @@ const getClosestStartOfMonth = (date: Date) => {
 	return closest;
 };
 
-const getDatasets = (data: Data) => {
-	const groups = ['income', 'expenses'];
-	const datasets = groups.map((group, n) => {
+type DataA = {
+	income: ChartData[];
+	expenses: ChartData[];
+};
+const getDatasets = (
+	data: DataA,
+): Chart<'line', ChartData[]>['data']['datasets'] => {
+	const groups = ['income', 'expenses'] as const;
+	const datasets: DataSet[] = groups.map((group, n) => {
 		const backgroundColor = getColor(n, groups.length);
 		return {
 			label: group,
+			borderColor: backgroundColor,
 			data: data[group],
 			parsing: {
 				yAxisKey: 'total',

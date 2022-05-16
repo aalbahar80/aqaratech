@@ -6,14 +6,12 @@ export type ChartData = {
 	total: number;
 };
 
-type DataSets = Chart<'line', ChartData[]>['data']['datasets'];
+export type DataSet = Chart<'line', ChartData[]>['data']['datasets'][number];
 
-export function netChart(node: HTMLCanvasElement, datasets: DataSets) {
+export function netChart(node: HTMLCanvasElement, datasets: DataSet[]) {
 	const chart = new Chart(node, {
 		type: 'line',
-		data: {
-			datasets,
-		},
+		data: { datasets },
 		options: {
 			scales: {
 				x: {
@@ -51,7 +49,7 @@ export function netChart(node: HTMLCanvasElement, datasets: DataSets) {
 	});
 
 	return {
-		update(datasets: DataSets) {
+		update(datasets: DataSet[]) {
 			chart.data.datasets = datasets;
 			chart.update();
 		},
