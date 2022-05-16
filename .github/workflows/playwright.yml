@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [dev, stage, prod]
+    branches: [stage, prod]
   pull_request:
     branches: [stage, prod]
 

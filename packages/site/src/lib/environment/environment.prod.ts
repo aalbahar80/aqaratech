@@ -56,7 +56,7 @@ export const productionEnvironment: EnvironmentConfig = {
 	twilioConfig: {
 		TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
 		TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-		TWILIO_FROM_NUMBER: process.env.TWILIO_FROM_NUMBER,
+		TWILIO_MESSAGING_SERVICE_SID: process.env.TWILIO_MESSAGING_SERVICE_SID,
 	},
 	debug: false,
 };
