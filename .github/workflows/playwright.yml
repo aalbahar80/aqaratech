@@ -42,7 +42,7 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Build deps
-        run: pnpm run --filter "@self/site-test^..." build
+        run: pnpm run --filter "@self/site-test^..." build && pnpm run --filter "@self/site" package
       - name: Run Playwright tests
         run: pnpm test --filter "@self/site-test"
       - uses: actions/upload-artifact@v2
