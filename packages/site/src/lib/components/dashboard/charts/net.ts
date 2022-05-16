@@ -16,14 +16,12 @@ export function netChart(node: HTMLCanvasElement, datasets: DataSet[]) {
 			scales: {
 				x: {
 					type: 'time',
-					stacked: true,
 					grid: {
 						display: false,
 						// drawBorder: false,
 					},
 				},
 				y: {
-					stacked: true,
 					ticks: {
 						// maxTicksLimit: 6,
 						autoSkipPadding: 50,
