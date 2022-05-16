@@ -46,7 +46,8 @@ export const fakeClient = () => ({
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
 	email: fakeEmail(),
-	phone: faker.phone.phoneNumber("1#######"),
+	// phone: faker.phone.phoneNumber("1#######"),
+	phone: "+96599212976",
 	dob: faker.date.past(),
 });
 
@@ -63,7 +64,8 @@ export const fakeTenant = () => ({
 		.toString(),
 	email: fakeEmail(),
 	dob: faker.date.past(),
-	phone: faker.phone.phoneNumber("1#######"),
+	// phone: faker.phone.phoneNumber("1#######"),
+	phone: "+96599212976",
 	passportNum: faker.datatype
 		.number({ min: 100000000, max: 999999999 })
 		.toString(),

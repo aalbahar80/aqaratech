@@ -29,6 +29,10 @@ export const post: RequestHandler = async ({ params }) => {
 			},
 			rejectOnNotFound: true,
 		});
+		const phone = trx.lease.tenant.phone;
+		if (!phone) {
+			throw new Error('Missing phone number');
+		}
 		console.log(`Notifying ${trxId}...`);
 
 		const paymentUrl = `${callbackDomain}/p/transactions/${trxId}`;
@@ -48,7 +52,8 @@ export const post: RequestHandler = async ({ params }) => {
 					Body:
 						'Your rent is due! \n Please use this link to pay: \n' + paymentUrl,
 					MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
-					To: `+965${trx.lease.tenant.phone}`, // TODO: normalize phone number
+					// From: '+15005550006',
+					To: phone, // TODO: normalize phone number
 				}),
 			},
 		);
