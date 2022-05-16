@@ -117,9 +117,7 @@ export const fakeTransaction = (
 	count: number
 ) => {
 	const nextMonth = new Date(
-		leaseStart.getFullYear(),
-		leaseStart.getMonth() + 1,
-		1
+		Date.UTC(leaseStart.getFullYear(), leaseStart.getMonth() + 1, 1)
 	);
 	const postAt = addMonths(nextMonth, count);
 	const isPaid = postAt < new Date() ? Math.random() > 0.15 : false;
