@@ -71,7 +71,7 @@
     "nodemon": "2.0.16",
     "postcss": "8.4.13",
     "prettier": "2.6.2",
-    "prettier-plugin-tailwindcss": "0.1.10",
+    "prettier-plugin-tailwindcss": "0.1.11",
     "prisma": "3.14.0",
     "remeda": "0.0.32",
     "superjson": "1.9.1",
