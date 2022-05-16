@@ -1,6 +1,8 @@
 import prismaClient from '$lib/server/prismaClient';
 
-// Get eligibile transactions
+/**
+ * Grabs recent transactions eligible for payment reminders.
+ */
 export const eligibleTrxs = async (date = new Date()) => {
 	// end is 7 days before date
 	const end = new Date(date.getTime() - 30 * 24 * 60 * 60 * 1000);

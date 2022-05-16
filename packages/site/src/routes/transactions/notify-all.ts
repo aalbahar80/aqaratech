@@ -1,6 +1,9 @@
 import { eligibleTrxs } from '$lib/server/cron/blast-sms';
 import type { RequestHandler } from '@sveltejs/kit';
 
+/**
+ * Grabs eligible transactions and sends them a sms.
+ */
 export const post: RequestHandler = async ({ url }) => {
 	try {
 		const trxs = await eligibleTrxs();

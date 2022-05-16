@@ -11,6 +11,9 @@ const {
 	callbackDomain,
 } = environment;
 
+/**
+ * Sends a payment link to tenant.
+ */
 export const post: RequestHandler = async ({ params }) => {
 	try {
 		const trxId = params.id;
@@ -51,8 +54,8 @@ export const post: RequestHandler = async ({ params }) => {
 				body: new URLSearchParams({
 					Body:
 						'Your rent is due! \n Please use this link to pay: \n' + paymentUrl,
-					MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
-					// From: '+15005550006',
+					// MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
+					From: '+15005550006',
 					To: phone, // TODO: normalize phone number
 				}),
 			},
