@@ -8,7 +8,10 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
 	import { getIncomeChartStore } from '$lib/components/dashboard/stores/charts/income';
-	import { getNetChartStore } from '$lib/components/dashboard/stores/charts/net';
+	import {
+		getNetChartStore,
+		getNetTableStore,
+	} from '$lib/components/dashboard/stores/charts/net';
 	import { getExpenseTableStore } from '$lib/components/dashboard/stores/tables/expense';
 	import { getIncomeTableStore } from '$lib/components/dashboard/stores/tables/income';
 	import Select from '$lib/components/Select.svelte';
@@ -143,6 +146,7 @@
 
 	// Net
 	const netChartData = getNetChartStore(incomeData, expenseData);
+	const netTableData = getNetTableStore(incomeData, expenseData);
 </script>
 
 <div class="prose">
@@ -335,6 +339,9 @@
 		<Chart let:height let:width>
 			<canvas {height} {width} use:netChart={$netChartData} />
 		</Chart>
+	</div>
+	<div slot="data">
+		<CondensedTable table={$netTableData} />
 	</div>
 </DashCard>
 

@@ -49,7 +49,7 @@
 							{:else}
 								<CondensedCell
 									{idx}
-									value={row[header.key]}
+									value={row[header.key] ?? ''}
 									weight={header.style}
 								/>
 							{/if}

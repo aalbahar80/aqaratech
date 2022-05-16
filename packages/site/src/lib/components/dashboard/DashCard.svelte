@@ -45,7 +45,7 @@
 		</div>
 	{:else}
 		{#if tabbed}
-		<Tabs {tabs} bind:tab />
+			<Tabs {tabs} bind:tab />
 		{/if}
 		{#if tab === 'Chart'}
 			<div class="pt-4">
