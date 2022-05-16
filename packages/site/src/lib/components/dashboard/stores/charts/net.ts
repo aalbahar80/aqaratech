@@ -51,6 +51,19 @@ const getDatasets = (
 	return datasets;
 };
 
+const aggregate = <T extends { id: string; amount: number; postAt: Date }>(
+	data: T[],
+) => {
+	const a = data.map((e) => R.pick(e, ['id', 'amount', 'postAt']));
+	const b = R.groupBy(a, (e) => format(e.postAt, 'yyyy-MM'));
+	const c = R.mapValues(b, (v) => R.reduce(v, (acc, e) => acc + e.amount, 0));
+	const d = Object.entries(c).map(([k, v]) => ({
+		date: new Date(k),
+		total: v,
+	}));
+	return d;
+};
+
 export const getNetChartStore = (
 	income: Writable<Income>,
 	expenses: Writable<Expense>,
@@ -59,39 +72,11 @@ export const getNetChartStore = (
 	// TODO: instead, derive everything from filters?
 	derived([income, expenses], ([$income, $expenses]) => {
 		const revenue = R.filter($income, (e) => e.isPaid);
-		const a = revenue.map((e) =>
-			R.pick(e, ['id', 'amount', 'postAt', 'isPaid']),
-		);
-		const b = R.groupBy(a, (e) => format(e.postAt, 'yyyy-MM'));
-		const c = R.mapValues(b, (v) => R.reduce(v, (acc, e) => acc + e.amount, 0));
-		const d = Object.entries(c).map(([k, v]) => ({
-			date: new Date(k),
-			total: v,
-		}));
-		const e = getDatasets(d);
-		console.log({ d }, 'net.ts ~ 50');
-
-		const costs = R.groupBy($expenses, (e) => format(e.postAt, 'yyyy-MM'));
-		const cc = R.mapValues(costs, (v) =>
-			R.reduce(v, (acc, e) => acc + e.amount, 0),
-		);
-		const cd = Object.entries(cc).map(([k, v]) => ({
-			date: new Date(k),
-			total: v,
-		}));
-		const ee = getDatasets(cd);
-		// const xx = getDatasets([e, ee]);
-		const xy = {
-			income: d,
-			expenses: cd,
-		};
-		const xx = getDatasets(xy);
-
-		return xx;
-		// return [e, ee];
-		// return {
-		// 	income: d,
-		// 	expenses: cd,
-		// };
-		// const datasets = getDatasets(d);
+		const aggRevenue = aggregate(revenue);
+		const aggExpenses = aggregate($expenses);
+		const datasets = getDatasets({
+			income: aggRevenue,
+			expenses: aggExpenses,
+		});
+		return datasets;
 	});
