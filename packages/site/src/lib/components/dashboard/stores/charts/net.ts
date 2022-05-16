@@ -1,10 +1,11 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
+import { getColor } from '$lib/config/constants';
 import {
 	addMonths,
 	closestTo,
+	format,
 	startOfMonth,
 	subMonths,
-	format,
 } from 'date-fns';
 import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
@@ -23,6 +24,24 @@ const getClosestStartOfMonth = (date: Date) => {
 	return closest;
 };
 
+const getDatasets = (data: Data) => {
+	const groups = ['income', 'expenses'];
+	const datasets = groups.map((group, n) => {
+		const backgroundColor = getColor(n, groups.length);
+		return {
+			label: group,
+			data: data[group],
+			parsing: {
+				yAxisKey: 'total',
+				xAxisKey: 'date',
+			},
+			backgroundColor,
+			borderRadius: 10,
+		};
+	});
+	return datasets;
+};
+
 export const getNetChartStore = (
 	income: Writable<Income>,
 	expenses: Writable<Expense>,
@@ -38,8 +57,9 @@ export const getNetChartStore = (
 		const c = R.mapValues(b, (v) => R.reduce(v, (acc, e) => acc + e.amount, 0));
 		const d = Object.entries(c).map(([k, v]) => ({
 			date: new Date(k),
-			revenue: v,
+			total: v,
 		}));
+		const e = getDatasets(d);
 		console.log({ d }, 'net.ts ~ 50');
 
 		const costs = R.groupBy($expenses, (e) => format(e.postAt, 'yyyy-MM'));
@@ -48,10 +68,21 @@ export const getNetChartStore = (
 		);
 		const cd = Object.entries(cc).map(([k, v]) => ({
 			date: new Date(k),
-			expenses: v,
+			total: v,
 		}));
-		return {
+		const ee = getDatasets(cd);
+		// const xx = getDatasets([e, ee]);
+		const xy = {
 			income: d,
 			expenses: cd,
 		};
+		const xx = getDatasets(xy);
+
+		return xx;
+		// return [e, ee];
+		// return {
+		// 	income: d,
+		// 	expenses: cd,
+		// };
+		// const datasets = getDatasets(d);
 	});

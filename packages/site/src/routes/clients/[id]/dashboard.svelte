@@ -3,6 +3,7 @@
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';
+	import { netChart } from '$lib/components/dashboard/charts/net';
 	import { occupancyChart } from '$lib/components/dashboard/charts/occupancy';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getExpenseChartStore } from '$lib/components/dashboard/stores/charts/expense';
@@ -321,6 +322,19 @@
 	</div>
 	<div slot="data">
 		<CondensedTable table={$expenseTableData} />
+	</div>
+</DashCard>
+
+<!-- Net Chart -->
+<DashCard
+	title="Net"
+	subtitle="Income - Expenses"
+	empty={expenses.length < 1 && income.length < 1}
+>
+	<div slot="chart">
+		<Chart let:height let:width>
+			<canvas {height} {width} use:netChart={$netChartData} />
+		</Chart>
 	</div>
 </DashCard>
 
