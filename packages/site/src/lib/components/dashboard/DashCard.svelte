@@ -7,6 +7,7 @@
 	export let title: string;
 	export let subtitle = '';
 	export let empty = false;
+	export let tabbed = true;
 
 	const tabs = [
 		{ name: 'Chart', icon: ChartBar },
@@ -43,7 +44,9 @@
 			</div>
 		</div>
 	{:else}
+		{#if tabbed}
 		<Tabs {tabs} bind:tab />
+		{/if}
 		{#if tab === 'Chart'}
 			<div class="pt-4">
 				<slot name="groupBy" />

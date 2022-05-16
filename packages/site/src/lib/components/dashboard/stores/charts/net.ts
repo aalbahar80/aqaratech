@@ -1,6 +1,7 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import type { ChartData, DataSet } from '$lib/components/dashboard/charts/net';
 import { getColor } from '$lib/config/constants';
+import { startCase } from '$lib/utils/common';
 import type Chart from 'chart.js/dist/chart.esm';
 import {
 	addMonths,
@@ -37,7 +38,7 @@ const getDatasets = (
 	const datasets: DataSet[] = groups.map((group, n) => {
 		const backgroundColor = getColor(n, groups.length);
 		return {
-			label: group,
+			label: startCase(group),
 			borderColor: backgroundColor,
 			data: data[group],
 			parsing: {

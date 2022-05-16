@@ -328,7 +328,7 @@
 <!-- Net Chart -->
 <DashCard
 	title="Net"
-	subtitle="Income - Expenses"
+	subtitle="Total Rent Income vs Total Expenses"
 	empty={expenses.length < 1 && income.length < 1}
 >
 	<div slot="chart">
@@ -343,6 +343,7 @@
 	title="Occupancy"
 	subtitle="The percentage of units that are empty."
 	empty={occupancy.length < 1}
+	tabbed={false}
 >
 	<div slot="chart">
 		<Chart let:height let:width>
