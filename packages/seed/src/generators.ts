@@ -19,7 +19,7 @@ export const testTenantAuth0Id = "auth0|625eb6d7da8018006732e9df";
 export const testTenantEmail = "tenant.dev@mailthink.net";
 export const testTenantPassword = "test12";
 
-export const timespan = 4;
+export const timespan = 3;
 const createdAt = () => faker.date.past(timespan);
 const updatedAt = () => faker.date.past(timespan);
 
@@ -167,7 +167,7 @@ export const fakeLease = (
 		start,
 		end,
 		deposit: +faker.finance.amount(100, 3000, 0),
-		monthlyRent: +faker.finance.amount(100, 3000, 0),
+		monthlyRent: +faker.finance.amount(1500, 3000, 0),
 		license: faker.company.bs(),
 		active: true,
 		tenantId: tenantId ?? faker.datatype.uuid(),
@@ -180,7 +180,7 @@ export const fakeExpense = () => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	amount: +faker.finance.amount(100, 3000, 0),
+	amount: +faker.finance.amount(10, 250, 0),
 	category: faker.helpers.arrayElement(expenseCats.map((e) => e.en)),
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),

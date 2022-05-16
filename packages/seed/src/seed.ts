@@ -57,10 +57,10 @@ async function main({
 	let clientCount = 3;
 	let propertyMin = 2;
 	let propertyMax = 6;
-	let unitMax = 15;
+	let unitMax = 5;
 	let moCount = 100;
-	let expenseCount = 100;
-	const min = 0;
+	let expenseCount = 150;
+	const min = 1;
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	clients[0]!.id = testClientId;
