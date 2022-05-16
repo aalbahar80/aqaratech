@@ -76,6 +76,8 @@
 				</tfoot>
 			{/if}
 		</table>
-		<CondensedPagination {pgn} />
+		{#if $pgn.pageCount > 1}
+			<CondensedPagination {pgn} />
+		{/if}
 	</div>
 </div>

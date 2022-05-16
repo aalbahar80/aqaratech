@@ -65,7 +65,7 @@
 						</button>
 					{:else}
 						<span
-							class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+							class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700"
 						>
 							...
 						</span>

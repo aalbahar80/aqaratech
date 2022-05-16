@@ -34,6 +34,7 @@ export function getButtons(
 	pageCount: number,
 	extended = false,
 ) {
+	if (pageCount === 1) return [1];
 	const center = extended
 			? [pageIdx - 2, pageIdx - 1, pageIdx, pageIdx + 1, pageIdx + 2]
 			: [pageIdx - 1, pageIdx, pageIdx + 1],
