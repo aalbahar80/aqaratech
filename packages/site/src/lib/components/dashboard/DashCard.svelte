@@ -12,17 +12,23 @@
 	const tabs = [
 		{ name: 'Chart', icon: ChartBar },
 		{ name: 'Data', icon: Database },
-	];
-	let tab = 'Chart';
-	const height = tweened(900);
+	] as const;
 
-	$: {
+	type TabName = typeof tabs[number]['name'];
+	let tab: TabName = 'Chart';
+	const height = tweened(900);
+	let heightTable: number | undefined;
+
+	const recalcHeight = (tab: 'Chart' | 'Data', h: typeof heightTable) => {
 		if (tab === 'Chart') {
 			$height = 1000;
 		} else {
-			$height = 1350;
+			const newHeight = h ?? 0;
+			$height = 200 + newHeight;
 		}
-	}
+	};
+
+	$: recalcHeight(tab, heightTable);
 </script>
 
 <div
@@ -53,8 +59,10 @@
 			</div>
 			<slot name="chart" />
 		{:else}
-			<div in:fade class="overflow-x-auto overflow-y-hidden">
-				<slot name="data" />
+			<div bind:offsetHeight={heightTable}>
+				<div in:fade class="overflow-x-auto overflow-y-hidden">
+					<slot name="data" />
+				</div>
 			</div>
 		{/if}
 	{/if}

@@ -8,7 +8,7 @@
 		icon: IconSource;
 	}
 
-	export let tabs: ITab[];
+	export let tabs: readonly ITab[];
 	export let tab: string;
 </script>
 
