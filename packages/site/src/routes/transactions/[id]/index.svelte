@@ -8,7 +8,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { CurrencyDollar } from '@steeze-ui/heroicons';
+	import { Mail } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -71,15 +71,8 @@
 
 	<svelte:fragment slot="actions">
 		<Button
-			icon={CurrencyDollar}
-			text={trx.isPaid ? 'Mark as Unpaid' : 'Mark as Paid'}
-			solid
-			on:click={toggleIsPaid}
-			loading={loadingPaid}
-		/>
-		<Button
-			icon={CurrencyDollar}
-			text={'Send email'}
+			icon={Mail}
+			text={'Send email reminder'}
 			solid
 			on:click={() =>
 				fetch('/transactions/' + trx.id + '/notify', {
