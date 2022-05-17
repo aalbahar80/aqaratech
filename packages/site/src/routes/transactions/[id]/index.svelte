@@ -52,10 +52,11 @@
 				})}
 			disabled={!sendEnabled}
 			let:loading
+			let:disabled
 		>
 			<Button
 				as="div"
-				disabled={!sendEnabled}
+				{disabled}
 				{loading}
 				icon={Mail}
 				text={'Send email reminder'}
