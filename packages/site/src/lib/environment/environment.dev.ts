@@ -74,5 +74,9 @@ export const developmentEnvironment: EnvironmentConfig = {
 		TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
 		TWILIO_MESSAGING_SERVICE_SID: process.env.TWILIO_MESSAGING_SERVICE_SID,
 	},
+	gsuiteConfig: {
+		GSUITE_EMAIL: process.env.GSUITE_EMAIL,
+		GSUITE_PASSWORD: process.env.GSUITE_PASSWORD,
+	},
 	debug: true,
 };

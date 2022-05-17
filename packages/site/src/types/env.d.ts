@@ -47,6 +47,12 @@ declare global {
 			readonly TWILIO_MESSAGING_SERVICE_SID: string;
 
 			/**
+			 * GSuite Account for sending emails
+			 */
+			readonly GSUITE_EMAIL: string;
+			readonly GSUITE_PASSWORD: string;
+
+			/**
 			 * Domain used for callbacks (Twilio, myFatoorah)
 			 */
 			readonly CALLBACK_DOMAIN: string;
