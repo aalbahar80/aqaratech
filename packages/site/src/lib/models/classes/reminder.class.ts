@@ -5,6 +5,11 @@ import { createTransport } from 'nodemailer';
 const {
 	callbackDomain,
 	gsuiteConfig: { GSUITE_EMAIL, GSUITE_PASSWORD },
+	twilioConfig: {
+		TWILIO_ACCOUNT_SID,
+		TWILIO_AUTH_TOKEN,
+		TWILIO_MESSAGING_SERVICE_SID,
+	},
 } = environment;
 
 export class Reminder {
@@ -15,11 +20,35 @@ export class Reminder {
 		public email?: string | null,
 	) {}
 
-	async sendSMS() {
-		if (!this.email || !this.phone) {
+	async sendSms() {
+		if (!this.phone) {
 			await this.getContactInfo();
 		}
-		throw new Error('Method not implemented.');
+		if (this.phone) {
+			const res = await fetch(
+				`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+				{
+					method: 'POST',
+					redirect: 'follow',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						Authorization: `Basic ${Buffer.from(
+							`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`,
+						).toString('base64')}`,
+					},
+					body: new URLSearchParams({
+						Body: this.url,
+						MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
+						To: this.phone,
+					}),
+				},
+			);
+			const sms = await res.json();
+			console.log({ sms }, 'notify.ts ~ 64');
+			return sms;
+		} else {
+			throw new Error('No phone number');
+		}
 	}
 
 	async sendEmail() {

@@ -82,7 +82,10 @@
 			text={'Send email'}
 			solid
 			on:click={() =>
-				fetch('/transactions/' + trx.id + '/notify-email', { method: 'POST' })}
+				fetch('/transactions/' + trx.id + '/notify', {
+					method: 'POST',
+					body: JSON.stringify({ mode: 'email' }),
+				})}
 			loading={loadingPaid}
 		/>
 	</svelte:fragment>
