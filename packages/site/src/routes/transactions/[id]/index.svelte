@@ -12,23 +12,14 @@
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
-		const [trx, nextReminder] = await Promise.all([
-			trpc(fetch).query('transactions:read', params.id),
-			// needs optimization, load in onMount?
-			trpc(fetch).query('transactions:nextReminder', params.id),
-		]);
-
-		console.log({ nextReminder }, 'index.svelte ~ 22');
-		return { props: { trx, nextReminder } };
+		const trx = await trpc(fetch).query('transactions:read', params.id);
+		return { props: { trx } };
 	};
 </script>
 
 <script lang="ts">
-	import Timeline from '$lib/components/Timeline.svelte';
-
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
-	export let nextReminder: string | null;
 
 	let details: [string, string | null][];
 	$: details = [
@@ -86,6 +77,14 @@
 			on:click={toggleIsPaid}
 			loading={loadingPaid}
 		/>
+		<Button
+			icon={CurrencyDollar}
+			text={'Send email'}
+			solid
+			on:click={() =>
+				fetch('/transactions/' + trx.id + '/notify-email', { method: 'POST' })}
+			loading={loadingPaid}
+		/>
 	</svelte:fragment>
 </Heading>
 <Badge
@@ -94,5 +93,4 @@
 />
 <div class="grid gap-y-6">
 	<DetailsPane {details} />
-	<Timeline {trx} {nextReminder} />
 </div>
