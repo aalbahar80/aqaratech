@@ -16,12 +16,12 @@ export const schema = z.object({
 		.transform(falsyToNull),
 	phone: z
 		.string()
-		.refine((val) => val.trim().length === 8, {
-			message: 'Phone number must be 8 digits',
-		})
-		.refine(digitsOnly, {
-			message: 'Phone must contain only numbers',
-		})
+		// .refine((val) => val.trim().length === 8, {
+		// 	message: 'Phone number must be 8 digits',
+		// })
+		// .refine(digitsOnly, {
+		// 	message: 'Phone must contain only numbers',
+		// })
 		.transform(trim),
 	dob: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
