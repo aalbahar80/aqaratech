@@ -5,11 +5,7 @@ import { createTransport } from 'nodemailer';
 const {
 	callbackDomain,
 	gsuiteConfig: { GSUITE_EMAIL, GSUITE_PASSWORD },
-	twilioConfig: {
-		TWILIO_ACCOUNT_SID,
-		TWILIO_AUTH_TOKEN,
-		TWILIO_MESSAGING_SERVICE_SID,
-	},
+	twilioConfig: { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER },
 } = environment;
 
 export class Reminder {
@@ -38,7 +34,8 @@ export class Reminder {
 					},
 					body: new URLSearchParams({
 						Body: this.url,
-						MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
+						// MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
+						From: TWILIO_FROM_NUMBER,
 						To: this.phone,
 					}),
 				},
