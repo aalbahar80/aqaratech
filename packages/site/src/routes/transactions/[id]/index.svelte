@@ -2,11 +2,11 @@
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
+	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Mail } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
@@ -30,33 +30,7 @@
 		['Last updated', trx.updatedAt.toLocaleString()],
 	];
 
-	let loadingPaid = false;
-	const toggleIsPaid = async () => {
-		loadingPaid = true;
-		try {
-			const updated = await trpc().mutation('transactions:updatePaid', {
-				id: trx.id,
-				isPaid: !trx.isPaid,
-			});
-			trx = { ...trx, ...updated };
-			addToast({
-				props: {
-					kind: 'success',
-					title: 'Success',
-				},
-			});
-		} catch (e) {
-			console.error(e);
-			addToast({
-				props: {
-					kind: 'error',
-					title: 'Unable to update status',
-				},
-			});
-		} finally {
-			loadingPaid = false;
-		}
-	};
+	$: sendEnabled = !trx.isPaid;
 </script>
 
 <Heading title="Transaction" id={trx.id} entity="transactions">
@@ -70,17 +44,24 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
-		<Button
-			icon={Mail}
-			text={'Send email reminder'}
-			solid
-			on:click={() =>
+		<AsyncButton
+			func={() =>
 				fetch('/transactions/' + trx.id + '/notify', {
 					method: 'POST',
 					body: JSON.stringify({ mode: 'email' }),
 				})}
-			loading={loadingPaid}
-		/>
+			disabled={!sendEnabled}
+			let:loading
+		>
+			<Button
+				as="div"
+				disabled={!sendEnabled}
+				{loading}
+				icon={Mail}
+				text={'Send email reminder'}
+				solid
+			/>
+		</AsyncButton>
 	</svelte:fragment>
 </Heading>
 <Badge
