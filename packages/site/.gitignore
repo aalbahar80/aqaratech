@@ -4,6 +4,7 @@ node_modules
 /.svelte-kit
 /package
 .env
+.env.prod
 src/styles/tailwind-output.css
 cypress/videos
 stats.html
