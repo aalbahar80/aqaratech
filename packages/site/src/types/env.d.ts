@@ -44,6 +44,7 @@ declare global {
 
 			readonly TWILIO_ACCOUNT_SID: string;
 			readonly TWILIO_AUTH_TOKEN: string;
+			readonly TWILIO_FROM_NUMBER: string;
 			readonly TWILIO_MESSAGING_SERVICE_SID: string;
 
 			/**
