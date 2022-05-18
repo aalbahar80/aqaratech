@@ -9,8 +9,5 @@ src/styles/tailwind-output.css
 cypress/videos
 stats.html
 
-temporal/lib/
-temporal/tsconfig.tsbuildinfo
-
 coverage/
 src/__tests__/__snapshots__

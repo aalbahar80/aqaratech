@@ -44,22 +44,3 @@ pnpm run build:vercel
 ## install
 pnpm install --filter=@self/site... --unsafe-perm
 ```
-
-# Temporal
-
-### Run
-
-```bash
-## TODO: Environment should have pscale cli/DB_URL
-pnpm install --filter=@self/temporal...
-pnpm run --filter=@self/temporal... build
-pnpm start --filter=@self/temporal
-```
-
-### Test
-
-```bash
-pnpm install --filter=@self/temporal...
-pnpm run --filter=@self/temporal... build
-pnpm test --filter=@self/temporal
-```

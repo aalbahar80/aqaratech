@@ -10,8 +10,6 @@ ENV REUSE_PRISMA=true
 ADD . ./
 RUN pnpm install --filter=@self/site-test... --offline
 RUN ["pnpm", "run", "--filter=@self/site", "prisma:gen"]
-RUN ["pnpm", "run", "--filter=@self/temporal", "prisma:gen"]
-RUN pnpm run --filter=@self/temporal build
 EXPOSE 9323
 
 # CMD ["bash"]

@@ -50,22 +50,11 @@ const config = {
 						? [
 								'superjson',
 								// 'ms',
-								// '@self/temporal',
 								// 'date-fns',
 								// '@fortawesome/free-solid-svg-icons',
-								// '@temporalio/workflow',
 						  ]
 						: undefined,
-				// external:
-				// 	process.env.NODE_ENV === 'production'
-				// 		? ['@self/temporal']
-				// 		: undefined,
 			},
-
-			// optimizeDeps: {
-			// 	exclude: ['@self/temporal'],
-			// },
-			// process.env.NODE_ENV !== 'production' ? ['@self/temporal'] : undefined,
 
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
