@@ -14,13 +14,9 @@ const getRedirectUri = (): string => {
 	}
 };
 
-/**
- * This is currently only active locally based on `dev`.
- * Which means svelte-kit preview will not work properly.
- */
 export const developmentEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.DEVELOPMENT,
-	name: 'development',
+	envName: 'dev',
 	callbackDomain: process.env.CALLBACK_DOMAIN,
 	authConfig: {
 		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,

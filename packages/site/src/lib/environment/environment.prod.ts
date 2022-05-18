@@ -4,9 +4,10 @@ import { config } from 'dotenv';
 
 config();
 
+// TODO: populate constants such as domain, callbackDomain, etc.
 export const productionEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.PRODUCTION,
-	name: 'production',
+	envName: 'prod',
 	callbackDomain: process.env.CALLBACK_DOMAIN,
 	authConfig: {
 		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
