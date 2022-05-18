@@ -5,7 +5,11 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { z, ZodError } from 'zod';
 
 /**
- * Grabs eligible transactions and sends them a sms.
+ * Grabs eligible transactions and sends them a payment reminder.
+ * @augments mode: `sms` or `email`
+ * @augments duration: How many days before `rangeEnd` to to consider a transaction eligible.
+ * @augments rangeEnd: The end of the range to consider transactions.
+ *
  */
 export const post: RequestHandler = async ({ request }) => {
 	try {
@@ -23,15 +27,14 @@ export const post: RequestHandler = async ({ request }) => {
 		const options = Options.parse(body);
 		console.log({ options }, 'notify-all.ts ~ 20');
 
-		let trxs = await eligibleTrxs(duration, rangeEnd);
-
-		// Remove in prod
-		trxs = trxs.slice(0, 1);
+		const trxs = await eligibleTrxs(duration, rangeEnd);
 
 		const reminders = trxs.map((id) => new Reminder(id));
 		console.log({ reminders }, 'notify-all.ts ~ 32');
 
-		const promises = reminders.map((r) => r.sendEmail());
+		const promises = reminders.map((r) =>
+			mode === 'sms' ? r.sendSms() : r.sendEmail(),
+		);
 		const results = await Promise.all(promises);
 		console.log({ results }, 'notify-all.ts ~ 41');
 
