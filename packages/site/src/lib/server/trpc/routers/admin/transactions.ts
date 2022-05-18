@@ -6,19 +6,6 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
 
-let url: string;
-
-// TODO: DRY this up (lib/client/trpc.ts)
-if (process.env.VERCEL) {
-	// url = `https://${process.env.VERCEL_URL}`;
-	url = `https://dev.letand.be`;
-} else {
-	const message =
-		'Could not determine url. transactions.ts ~ 19, assuming localhost';
-	console.warn(message);
-	url = 'http://localhost:3000';
-}
-
 export const transactions = createRouter()
 	.query('read', {
 		input: z.string(),
@@ -84,28 +71,6 @@ export const transactions = createRouter()
 	.query('count', {
 		resolve: () => prismaClient.transaction.count({}),
 	})
-	.query('nextReminder', {
-		input: z.string(),
-		resolve: async ({ input }) => {
-			// const res = await fetch(`/transactions/${input}/next-reminder`);
-			if (
-				process.env.VERCEL_GIT_COMMIT_REF === 'stage' ||
-				process.env.VERCEL_ENV === 'production'
-			) {
-				// TODO: REMOVE IN PRODUCTION
-				return new Date().toString();
-			}
-			const res = await fetch(`${url}/transactions/${input}/next-reminder`);
-			if (!res.ok) {
-				console.error('Unable to get next reminder');
-				return null;
-			}
-			type Data = { reminder: string };
-			const data = (await res.json()) as Data;
-			console.log({ data }, 'transactions.ts ~ 98');
-			return data.reminder;
-		},
-	})
 	.mutation('updatePaid', {
 		input: z.object({
 			id: z.string().uuid(),
@@ -152,24 +117,6 @@ export const transactions = createRouter()
 			prismaClient.transaction.createMany({
 				data: input,
 			}),
-	})
-	.mutation('startWF', {
-		input: z.array(z.string()),
-		resolve: async ({ input }) => {
-			console.log({ url }, 'transactions.ts ~ 152');
-			await Promise.all(
-				input.map(async (id) => {
-					const res = await fetch(`${url}/transactions/${id}/start-notify-wf`);
-					if (!res.ok) {
-						throw new TRPCError({
-							code: 'BAD_REQUEST',
-							message: 'Error starting workflow from TRPC',
-						});
-					}
-					return res.json();
-				}),
-			);
-		},
 	})
 	.mutation('delete', {
 		input: z.string(),

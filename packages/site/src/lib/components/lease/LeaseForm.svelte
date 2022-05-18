@@ -114,12 +114,6 @@
 				);
 				console.log(`created ${newTrxs.count} transactions`);
 
-				const trpcres = await trpc().mutation(
-					'transactions:startWF',
-					trxValues.map((e) => e.id),
-				);
-				console.log({ trpcres }, 'LeaseForm.svelte ~ 128');
-
 				await goto(`/leases/${newLease.id}`);
 				addToast({
 					props: {
