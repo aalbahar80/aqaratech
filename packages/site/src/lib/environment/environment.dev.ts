@@ -66,14 +66,15 @@ export const developmentEnvironment: EnvironmentConfig = {
 			: 'http://127.0.0.1:3000',
 	},
 	twilioConfig: {
-		TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
-		TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-		TWILIO_FROM_NUMBER: process.env.TWILIO_FROM_NUMBER,
+		TWILIO_ACCOUNT_SID: 'ACbffc494534d2b9823213e4538d71c98d',
+		TWILIO_AUTH_TOKEN: 'a94743f7f5baf621a2f2535f05c03970',
+		TWILIO_FROM_NUMBER: '+15005550006',
 		TWILIO_MESSAGING_SERVICE_SID: process.env.TWILIO_MESSAGING_SERVICE_SID,
 	},
-	gsuiteConfig: {
-		GSUITE_EMAIL: process.env.GSUITE_EMAIL,
-		GSUITE_PASSWORD: process.env.GSUITE_PASSWORD,
+	mailConfig: {
+		USER: 'oleta.kreiger23@ethereal.email',
+		PASS: 'aNH61bz9J8342y1jr3',
+		HOST: 'smtp.ethereal.email',
 	},
 	debug: true,
 };

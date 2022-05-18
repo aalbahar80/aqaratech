@@ -1,4 +1,4 @@
-import type { GSuiteConfigType } from '$lib/models/types/gsuite.type';
+import type { MailConfigType } from '$lib/models/types/mail.type';
 import type { AuthConfigType } from '$models/types/auth.type';
 import type { MyFatoorahConfigType } from '$models/types/myfatoorah.type';
 import type { TwilioConfigType } from '$models/types/twilio.type';
@@ -15,6 +15,6 @@ export interface EnvironmentConfig {
 	myfatoorahConfig: MyFatoorahConfigType;
 	twilioConfig: TwilioConfigType;
 	authConfig: AuthConfigType;
-	gsuiteConfig: GSuiteConfigType;
+	mailConfig: MailConfigType;
 	debug: boolean;
 }

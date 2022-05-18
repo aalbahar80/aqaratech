@@ -60,9 +60,10 @@ export const productionEnvironment: EnvironmentConfig = {
 		TWILIO_FROM_NUMBER: process.env.TWILIO_FROM_NUMBER,
 		TWILIO_MESSAGING_SERVICE_SID: process.env.TWILIO_MESSAGING_SERVICE_SID,
 	},
-	gsuiteConfig: {
-		GSUITE_EMAIL: process.env.GSUITE_EMAIL,
-		GSUITE_PASSWORD: process.env.GSUITE_PASSWORD,
+	mailConfig: {
+		USER: process.env.GSUITE_EMAIL,
+		PASS: process.env.GSUITE_PASSWORD,
+		HOST: 'smtp.gmail.com',
 	},
 	debug: false,
 };
