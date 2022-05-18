@@ -40,7 +40,7 @@ export class Reminder {
 				},
 			);
 			const sms = await res.json();
-			console.log({ sms }, 'notify.ts ~ 64');
+			console.log(sms);
 			return sms;
 		} else {
 			throw new Error('No phone number');
@@ -71,7 +71,7 @@ export class Reminder {
 
 			const info = await transporter.sendMail(mailOptions);
 			console.log('Preview URL: ' + getTestMessageUrl(info));
-			console.log({ info }, 'reminder.class.ts ~ 46');
+			console.log(info);
 			return info;
 		} else {
 			throw new Error('No email');
