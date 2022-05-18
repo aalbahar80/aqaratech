@@ -12,13 +12,13 @@ config({
 
 const getToken = async () => {
 	try {
-		const res = await fetch("https://dev-eehvhdp2.eu.auth0.com/oauth/token", {
+		const res = await fetch(`${process.env.AUTH0_DOMAIN}/oauth/token`, {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
 				client_id: process.env.AUTH0_CLIENT_ID,
 				client_secret: process.env.AUTH0_CLIENT_SECRET,
-				audience: "letand.be/api", // TODO: use env
+				audience: process.env.AUTH0_API_AUDIENCE,
 				grant_type: "client_credentials", // TODO: use env
 			}),
 		});

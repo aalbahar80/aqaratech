@@ -1,5 +1,6 @@
 import { Reminder } from '$lib/models/classes/reminder.class';
 import { eligibleTrxs } from '$lib/server/cron/blast-sms';
+import { validateAccessToken } from '$lib/server/utils/validate';
 import { strToDate } from '$lib/zodTransformers';
 import type { RequestHandler } from '@sveltejs/kit';
 import { z, ZodError } from 'zod';
@@ -13,6 +14,17 @@ import { z, ZodError } from 'zod';
  */
 export const post: RequestHandler = async ({ request }) => {
 	try {
+		// Validate bearer token
+		const authHeader = request.headers.get('authorization');
+		const token = authHeader?.split(' ')[1];
+		if (!token) {
+			return {
+				status: 401,
+				body: { message: 'Missing bearer token' },
+			};
+		}
+		await validateAccessToken(token, 'accessToken');
+
 		const body = await request.json();
 		const Options = z.object({
 			mode: z.enum(['email', 'sms']),
@@ -47,11 +59,16 @@ export const post: RequestHandler = async ({ request }) => {
 		};
 	} catch (e) {
 		console.error(e);
+		const msg =
+			e instanceof ZodError
+				? JSON.parse(e.toString())
+				: e instanceof Error
+				? e.message
+				: 'Unknown error';
 		return {
 			status: 500,
 			body: {
-				error:
-					e instanceof ZodError ? JSON.parse(e.toString()) : 'Unknown error',
+				error: msg,
 			},
 		};
 	}
