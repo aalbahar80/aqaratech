@@ -15,9 +15,9 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --project tsconfig.build.json",
+        "dev": "tsc --project tsconfig.build.json && pnpm run start",
         "build": "tsc --project tsconfig.build.json",
-        "start": "node dist/notify-all.js"
+        "start": "node --experimental-fetch dist/notify-all.js"
     },
     "devDependencies": {
         "@tsconfig/esm": "1.0.0",

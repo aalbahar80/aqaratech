@@ -1,3 +1,15 @@
+import { config } from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+config({ path: path.resolve(__dirname, "../../site/.env") });
+config({
+	path: path.resolve(__dirname, "../.env"),
+	override: true, // override auth0 id/secret to give this cron job it's own auth0 tenant.
+});
+
 const getToken = async () => {
 	try {
 		const res = await fetch("https://dev-eehvhdp2.eu.auth0.com/oauth/token", {
@@ -19,6 +31,7 @@ const getToken = async () => {
 
 const notifyAll = async (token: string) => {
 	try {
+		// console.log(process.env, "notify-all.ts ~ 26");
 		const res = await fetch(`${process.env.DOMAIN}/transactions/notify-all`, {
 			method: "POST",
 			headers: {
@@ -34,3 +47,6 @@ const notifyAll = async (token: string) => {
 		console.error(err);
 	}
 };
+
+const token = await getToken();
+await notifyAll(token);
