@@ -1,6 +1,6 @@
 import { environment } from '$lib/environment';
 import prismaClient from '$lib/server/prismaClient';
-import { createTransport } from 'nodemailer';
+import { createTransport, getTestMessageUrl } from 'nodemailer';
 
 const {
 	callbackDomain,
@@ -11,7 +11,6 @@ const {
 export class Reminder {
 	constructor(
 		public trxId: string,
-		// public url?: string,
 		public phone?: string | null,
 		public email?: string | null,
 	) {}
@@ -53,22 +52,45 @@ export class Reminder {
 			await this.getContactInfo();
 		}
 		if (this.email) {
-			const transporter = createTransport({
-				service: 'gmail',
-				auth: {
-					user: GSUITE_EMAIL,
-					pass: GSUITE_PASSWORD,
-				},
-			});
+			let mailConfig;
+			if (process.env.NODE_ENV === 'production') {
+				mailConfig = {
+					service: 'gmail',
+					auth: {
+						user: GSUITE_EMAIL,
+						pass: GSUITE_PASSWORD,
+					},
+				};
+			} else {
+				mailConfig = {
+					host: 'smtp.ethereal.email',
+					port: 587,
+					auth: {
+						user: 'oleta.kreiger23@ethereal.email',
+						pass: 'aNH61bz9J8342y1jr3',
+					},
+				};
 
+				// const transporter = createTransport({
+				// 	host: 'smtp.mailtrap.io',
+				// 	port: 2525,
+				// 	auth: {
+				// 		user: '868fba14d89d58',
+				// 		pass: '7ef852ab942de2',
+				// 	},
+				// });
+			}
+
+			const transporter = createTransport(mailConfig);
 			const mailOptions = {
-				from: GSUITE_EMAIL,
+				from: 'Aqaratech <donotreply@aqaratech.com>',
 				to: this.email,
 				subject: 'Node test',
 				text: this.body,
 			};
 
 			const info = await transporter.sendMail(mailOptions);
+			console.log('Preview URL: ' + getTestMessageUrl(info));
 			console.log({ info }, 'reminder.class.ts ~ 46');
 			return info;
 		} else {
