@@ -7,7 +7,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenvConfig({
-	path: path.resolve(__dirname, '../../../.env.test'),
+	// TODO: handle CI (gh actions)
+	path: process.env.DOCKER
+		? path.resolve(__dirname, '../../../.env.test')
+		: path.resolve(__dirname, '../.env'),
 });
 
 // This is a common configuration for different test directories.
