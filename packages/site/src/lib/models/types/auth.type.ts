@@ -8,7 +8,8 @@ type AuthConfigKeys =
 	| 'AUTH0_REDIRECT_URI'
 	| 'AUTH0_API_NAMESPACE'
 	| 'AUTH0_API_AUDIENCE'
-	| 'AUTH0_ROLE_ID_PROPERTY_OWNER';
+	| 'AUTH0_ROLE_ID_PROPERTY_OWNER'
+	| 'AUTH0_ROLE_ID_TENANT';
 
 export type AuthConfigType = {
 	[key in AuthConfigKeys]: string;

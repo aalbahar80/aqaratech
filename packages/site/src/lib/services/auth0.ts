@@ -14,6 +14,7 @@ const {
 	AUTH0_CLIENT_ID,
 	AUTH0_CLIENT_SECRET,
 	AUTH0_ROLE_ID_PROPERTY_OWNER,
+	AUTH0_ROLE_ID_TENANT,
 } = environment.authConfig;
 
 const UserData = z.object({
@@ -135,12 +136,25 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 	}
 };
 
-export const assignRole = async (sub: string) => {
+export const assignRole = async (
+	sub: string,
+	role: 'propertyOwner' | 'tenant',
+) => {
+	const Input = z.object({
+		sub: z.string().uuid(),
+		role: z.enum(['propertyOwner', 'tenant']),
+	});
+	const input = Input.parse({ sub, role });
+	const userRole =
+		input.role === 'propertyOwner'
+			? AUTH0_ROLE_ID_PROPERTY_OWNER
+			: AUTH0_ROLE_ID_TENANT;
+
 	const res = await auth0Fetch({
-		url: `${base}/users/${sub}/roles`,
+		url: `${base}/users/${input.sub}/roles`,
 		body: {
 			// TODO: add tenant roleid
-			roles: [AUTH0_ROLE_ID_PROPERTY_OWNER],
+			roles: [userRole],
 		},
 	});
 	if (res.status === 204) {

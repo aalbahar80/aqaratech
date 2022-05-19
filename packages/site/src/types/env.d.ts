@@ -29,6 +29,7 @@ declare global {
 			readonly AUTH0_DEFAULT_DOMAIN: string;
 
 			readonly AUTH0_ROLE_ID_PROPERTY_OWNER: string;
+			readonly AUTH0_ROLE_ID_TENANT: string;
 
 			/**
 			 * Auth0 claims namespace as configured in Auth0 (login) action

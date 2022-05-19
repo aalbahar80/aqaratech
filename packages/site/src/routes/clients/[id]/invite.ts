@@ -61,7 +61,7 @@ export const post: RequestHandler = async ({ params }) => {
 		if (created.success) {
 			// assign correct role
 			const userId = z.string().parse(created.userData.user_id);
-			const roleAssigned = await assignRole(userId);
+			const roleAssigned = await assignRole(userId, 'propertyOwner');
 			if (roleAssigned) {
 				return {
 					status: 201,

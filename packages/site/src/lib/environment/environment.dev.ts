@@ -24,6 +24,7 @@ export const developmentEnvironment: EnvironmentConfig = {
 		AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 		AUTH0_DEFAULT_DOMAIN: process.env.AUTH0_DEFAULT_DOMAIN,
 		AUTH0_ROLE_ID_PROPERTY_OWNER: process.env.AUTH0_ROLE_ID_PROPERTY_OWNER,
+		AUTH0_ROLE_ID_TENANT: process.env.AUTH0_ROLE_ID_TENANT,
 		AUTH0_API_NAMESPACE: process.env.AUTH0_API_NAMESPACE,
 		AUTH0_API_AUDIENCE: process.env.AUTH0_API_AUDIENCE,
 		AUTH0_REDIRECT_URI: getRedirectUri(),
