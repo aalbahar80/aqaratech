@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.21.0-focal
+FROM mcr.microsoft.com/playwright:v1.22.1-focal
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
@@ -8,7 +8,7 @@ ENV DOCKER=true
 ENV REUSE_PRISMA=true
 
 ADD . ./
-RUN pnpm install --filter=@self/site-test... --offline
+RUN pnpm install -r --offline
 RUN ["pnpm", "run", "--filter=@self/site", "prisma:gen"]
 EXPOSE 9323
 
