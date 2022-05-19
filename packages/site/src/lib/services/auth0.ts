@@ -1,5 +1,4 @@
 import { environment } from '$environment';
-import prismaClient from '$lib/server/prismaClient';
 import type { JSONObject } from 'superjson/dist/types';
 import { z, ZodError } from 'zod';
 
@@ -163,7 +162,7 @@ export const usersByEmail = async (email: string) => {
 	// TODO: zod parse ToAuth0
 	// TODO: wrap consumer in try/catch
 	const res = await auth0Fetch({
-		url: `${base}/users-by-email?email=${email}`,
+		url: `${base}/users-by-email?email=${email.toLowerCase()}`,
 		method: 'GET',
 	});
 
@@ -214,7 +213,7 @@ export const inviteUser = async (
 
 	// check if user exists
 	const existingUsers = await usersByEmail(email);
-	const userExists = existingUsers.some((u) => u.email === email);
+	const userExists = existingUsers.some((u) => u.email === email.toLowerCase());
 	if (userExists) {
 		return {
 			status: 409,
