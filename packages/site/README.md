@@ -34,6 +34,11 @@ pnpm exec eslint .
 node --inspect node_modules/.bin/svelte-kit dev
 ```
 
+```bash
+cd packages/site
+node ./node_modules/@sveltejs/kit/svelte-kit.js dev
+```
+
 ```json
 // .vscode/launch.json
 {

@@ -24,6 +24,48 @@
 			"cwd": "${workspaceFolder}/packages/site",
 			"name": "sveltekit ssr: debug2 preview",
 			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"name": "Debug server",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "node",
+			"runtimeArgs": [
+				"--inspect-brk",
+				"--enable-source-maps",
+				"${workspaceFolder}/packages/site/node_modules/@sveltejs/kit/svelte-kit.js",
+				"dev"
+			],
+			"cwd": "${workspaceFolder}/packages/site",
+			// "console": "externalTerminal",
+			"autoAttachChildProcesses": true
+			// "outFiles": [
+			// 	"${workspaceFolder}/packages/site/**/*.ts",
+			// 	"!**/node_modules/**"
+			// ]
+			// "args": ["./node_modules/.bin/svelte-kit", "dev"],
+			// "protocol": "inspector",
+			// "env": {
+			// 	"NODE_OPTIONS": "--inspect"
+			// },
+			// "enableContentValidation": true,
+			// "localRoot": "${workspaceFolder}/packages/site/node_modules/.bin/svelte-kit",
+			// "program": "${workspaceFolder}/packages/site/node_modules/.bin/svelte-kit",
+			// "pauseForSourceMap": true,
+			// "resolveSourceMapLocations": [
+			// 	"${workspaceFolder}/packages/site/.svelte-kit/**/*.js",
+			// 	"${workspaceFolder}/**",
+			// 	"!**/node_modules/**"
+			// ]
+		},
+		{
+			"type": "pwa-chrome",
+			"request": "launch",
+			// "skipFiles": ["${workspaceFolder}/node_modules/**/*.js"],
+			"name": "Debug client",
+			// "preLaunchTask": "npm: start",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}/packages/site/src"
 		}
 	]
 }
