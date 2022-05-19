@@ -14,3 +14,4 @@ EXPOSE 9323
 
 # CMD ["bash"]
 CMD [ "pnpm", "test", "--filter=@self/site-test" ]
+# CMD cd packages/site/tests && pnpm test && pnpm exec playwright show-report
