@@ -40,23 +40,24 @@ export const getMFUrl = async (trx: TrxPaymentInfo): Promise<string> => {
 		.join(' ');
 
 	const callbackUrl = `${myfatoorahConfig.MYFATOORAH_CALLBACK_URL}/api/payments/mfcallback`;
-	let trxData = {
+	// get last 8 characters of tenant's phone number
+	const trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
 		CustomerName: name,
-		CustomerEmail: tenant.email,
-		CustomerMobile: tenant.phone,
+		// CustomerEmail: tenant.email,
+		// CustomerMobile: tenant.phone?.slice(-8), // TODO: don't include if null
 		CallBackUrl: callbackUrl,
 	};
 
-	if (process.env.VERCEL_ENV !== 'production') {
-		console.debug('using email/phone from env variables');
-		trxData = {
-			...trxData,
-			CustomerEmail: myfatoorahConfig.MYFATOORAH_EMAIL,
-			CustomerMobile: myfatoorahConfig.MYFATOORAH_PHONE,
-		};
-	}
+	// if (process.env.VERCEL_ENV !== 'production') {
+	// 	console.debug('using email/phone from env variables');
+	// 	trxData = {
+	// 		...trxData,
+	// CustomerEmail: myfatoorahConfig.MYFATOORAH_EMAIL,
+	// CustomerMobile: '99999991',
+	// };
+	// }
 	console.log({ trxData }, 'myfatoorah.ts ~ 70');
 
 	try {
