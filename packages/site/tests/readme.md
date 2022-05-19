@@ -1,3 +1,15 @@
+#
+
+```bash
+# get shell to running test container
+docker exec -it sitetest bash
+```
+
+```bash
+# run locally
+DEV=1 pnpm exec playwright test
+```
+
 # Enables inspector
 
 PWDEBUG=1 npx playwright test test/pay.test.ts
