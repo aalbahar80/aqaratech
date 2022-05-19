@@ -345,7 +345,7 @@
 											Auto payment reminders
 										</SwitchLabel>
 										<SwitchDescription as="span" class="text-sm text-gray-500">
-											Send sms reminders to tenants.
+											Send payment reminders to tenant (sms/email)
 										</SwitchDescription>
 									</span>
 									<Switch
