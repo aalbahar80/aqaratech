@@ -4,29 +4,23 @@ import { getColor } from '$lib/config/constants';
 import { CTable } from '$lib/models/classes/table.class';
 import { kwdFormat, startCase } from '$lib/utils/common';
 import type Chart from 'chart.js/dist/chart.esm';
-import {
-	addMonths,
-	closestTo,
-	format,
-	startOfMonth,
-	subMonths,
-} from 'date-fns';
+import { format } from 'date-fns';
 import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
 
 type Income = InferQueryOutput<'owner:charts:income'>;
 type Expense = InferQueryOutput<'owner:charts:expenses'>;
 
-const getClosestStartOfMonth = (date: Date) => {
-	const prevMonth = subMonths(date, 1);
-	const startOfPrevMonth = startOfMonth(prevMonth);
-	const nextMonth = addMonths(date, 1);
-	const startOfNextMonth = startOfMonth(nextMonth);
-	const startOfThisMonth = startOfMonth(date);
-	const potentials = [startOfPrevMonth, startOfNextMonth, startOfThisMonth];
-	const closest = closestTo(date, potentials);
-	return closest;
-};
+// const getClosestStartOfMonth = (date: Date) => {
+// 	const prevMonth = subMonths(date, 1);
+// 	const startOfPrevMonth = startOfMonth(prevMonth);
+// 	const nextMonth = addMonths(date, 1);
+// 	const startOfNextMonth = startOfMonth(nextMonth);
+// 	const startOfThisMonth = startOfMonth(date);
+// 	const potentials = [startOfPrevMonth, startOfNextMonth, startOfThisMonth];
+// 	const closest = closestTo(date, potentials);
+// 	return closest;
+// };
 
 type DataA = {
 	income: ChartData[];

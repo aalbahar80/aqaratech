@@ -8,14 +8,8 @@ interface ToCreate {
 	email: string;
 	civilid: string;
 }
-interface ToUpdate {
-	sub: string;
-	email: string;
-	civilid: string;
-}
 
 const {
-	AUTH0_DOMAIN,
 	AUTH0_DEFAULT_DOMAIN,
 	AUTH0_CLIENT_ID,
 	AUTH0_CLIENT_SECRET,
@@ -164,30 +158,35 @@ export const assignRole = async (sub: string) => {
  *
  * `404`: Not found
  */
-const updateAuth0User = async ({ sub, email }: ToUpdate) => {
-	try {
-		// TODO: zod parse ToAuth0
-		const res = await auth0Fetch({
-			url: `${base}/${sub}`,
-			body: {
-				connection: 'Username-Password-Authentication',
-				email,
-				verify_email: true,
-				// password: civilid, // can't combine with email, what happens to password here?
-				// email_verified: false,
-			},
-		});
-		const raw = await res.json();
-		console.log({ raw }, 'auth0.ts ~ 111'); // del
-		if (res.status === 200) {
-			const userData = UserData.parse(raw);
-			return { status: 200 as const, userData };
-		} else {
-			console.log({ raw }, 'auth0.ts ~ 121');
-			throw new Error('UPDATE_USER_FAILED');
-		}
-	} catch (e) {
-		console.error(e);
-		throw e;
-	}
-};
+// interface ToUpdate {
+// 	sub: string;
+// 	email: string;
+// 	civilid: string;
+// }
+// const updateAuth0User = async ({ sub, email }: ToUpdate) => {
+// 	try {
+// 		// TODO: zod parse ToAuth0
+// 		const res = await auth0Fetch({
+// 			url: `${base}/${sub}`,
+// 			body: {
+// 				connection: 'Username-Password-Authentication',
+// 				email,
+// 				verify_email: true,
+// 				// password: civilid, // can't combine with email, what happens to password here?
+// 				// email_verified: false,
+// 			},
+// 		});
+// 		const raw = await res.json();
+// 		console.log({ raw }, 'auth0.ts ~ 111'); // del
+// 		if (res.status === 200) {
+// 			const userData = UserData.parse(raw);
+// 			return { status: 200 as const, userData };
+// 		} else {
+// 			console.log({ raw }, 'auth0.ts ~ 121');
+// 			throw new Error('UPDATE_USER_FAILED');
+// 		}
+// 	} catch (e) {
+// 		console.error(e);
+// 		throw e;
+// 	}
+// };
