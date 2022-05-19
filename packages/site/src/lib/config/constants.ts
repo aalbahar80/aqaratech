@@ -341,16 +341,16 @@ export const getColor = (index: number, total: number) => {
 	return backgroundColor;
 };
 type ExpenseGroup =
-	| 'UTILITIES'
-	| 'AMENITIES'
-	| 'LEGAL'
-	| 'UPKEEP'
-	| 'CARETAKER'
-	| 'OTHER'
-	| 'INSURANCE'
-	| 'GOVERNMENT'
-	| 'MANAGEMENT FEES'
-	| 'HVAC';
+	| 'utilities'
+	| 'amenities'
+	| 'legal'
+	| 'upkeep'
+	| 'caretaker'
+	| 'other'
+	| 'insurance'
+	| 'government'
+	| 'managementFees'
+	| 'hvac';
 
 interface ExpenseCategory {
 	en: string;
@@ -359,47 +359,47 @@ interface ExpenseCategory {
 }
 
 export const expenseCats: ExpenseCategory[] = [
-	{ en: 'Management Fees', ar: 'استهلاك مياة', group: 'MANAGEMENT FEES' },
-	{ en: 'Water consumption', ar: 'استهلاك مياة', group: 'UTILITIES' },
-	{ en: 'Electricity consumption', ar: 'استهلاك كهرباء', group: 'UTILITIES' },
-	{ en: 'Satellite & Internet connectivity', ar: 'ستلايت', group: 'UTILITIES' },
-	{ en: 'Electrical Maintenance', ar: 'كهرباء', group: 'UTILITIES' },
-	{ en: 'Elevator Contract', ar: 'عقد مصعد', group: 'AMENITIES' },
-	{ en: 'Elevator Maintenance Part', ar: 'ق.غ. مصعد', group: 'AMENITIES' },
+	{ en: 'Management Fees', ar: 'استهلاك مياة', group: 'managementFees' },
+	{ en: 'Water consumption', ar: 'استهلاك مياة', group: 'utilities' },
+	{ en: 'Electricity consumption', ar: 'استهلاك كهرباء', group: 'utilities' },
+	{ en: 'Satellite & Internet connectivity', ar: 'ستلايت', group: 'utilities' },
+	{ en: 'Electrical Maintenance', ar: 'كهرباء', group: 'utilities' },
+	{ en: 'Elevator Contract', ar: 'عقد مصعد', group: 'amenities' },
+	{ en: 'Elevator Maintenance Part', ar: 'ق.غ. مصعد', group: 'amenities' },
 	{
 		en: 'Swimming Pool Maintenance',
 		ar: 'صيانة أحواض السباحة',
-		group: 'AMENITIES',
+		group: 'amenities',
 	},
-	{ en: 'Caretaker Wages', ar: 'حارس', group: 'CARETAKER' },
-	{ en: 'Caretaker Vacation leave', ar: 'اجازات حارس', group: 'CARETAKER' },
-	{ en: 'Caretaker pension', ar: 'نهايه خدمه حارس', group: 'CARETAKER' },
+	{ en: 'Caretaker Wages', ar: 'حارس', group: 'caretaker' },
+	{ en: 'Caretaker Vacation leave', ar: 'اجازات حارس', group: 'caretaker' },
+	{ en: 'Caretaker pension', ar: 'نهايه خدمه حارس', group: 'caretaker' },
 	{
 		en: 'Caretaker Insurance & resident permit',
 		ar: 'اقامات حارس',
-		group: 'CARETAKER',
+		group: 'caretaker',
 	},
-	{ en: 'Attorneys Fee', ar: 'مصاريف قضايا', group: 'LEGAL' },
-	{ en: 'Municipal fees', ar: 'رسوم بلديه', group: 'GOVERNMENT' },
-	{ en: 'Government Paperwork', ar: 'طوابع', group: 'GOVERNMENT' },
-	{ en: 'Government Violations', ar: 'ازاله مخالفات', group: 'GOVERNMENT' },
-	{ en: 'HVAC Contract', ar: 'عقد تكييف', group: 'HVAC' },
-	{ en: 'HVAC Maintenance Part', ar: 'ق.غ. تكييف', group: 'HVAC' },
-	{ en: 'Plasterwork Maintenance', ar: 'فتحات تكييف', group: 'HVAC' },
-	{ en: 'HVAC Maintenance', ar: 'صيانه مكيف', group: 'HVAC' },
-	{ en: 'Cleaning supplies', ar: 'معدات تنظيف', group: 'UPKEEP' },
-	{ en: 'Plumbing Maintenance', ar: 'صحي', group: 'UPKEEP' },
-	{ en: 'Paint Maintenance', ar: 'صبغ', group: 'UPKEEP' },
-	{ en: 'Flooring Maintenance', ar: 'تبليط', group: 'UPKEEP' },
-	{ en: 'Kitchen Maintenance', ar: 'مطابخ', group: 'UPKEEP' },
-	{ en: 'Aluminum Maintenance', ar: 'المنيوم', group: 'UPKEEP' },
-	{ en: 'Gypsum Maintenance', ar: 'صيانة الجبس', group: 'UPKEEP' },
-	{ en: 'Doors Maintenance', ar: 'صيانة الابواب', group: 'UPKEEP' },
-	{ en: 'Glass Maintenance', ar: 'زجاج معلق', group: 'UPKEEP' },
-	{ en: 'Fire Fighting Contract', ar: 'عقد اطفاء', group: 'OTHER' },
-	{ en: 'Bank charges', ar: 'مصاريف بنكيه', group: 'OTHER' },
-	{ en: 'Insurance', ar: 'تامين علي البنايه', group: 'OTHER' },
-	{ en: 'Other Maintenance cost', ar: 'اخرى', group: 'OTHER' },
+	{ en: 'Attorneys Fee', ar: 'مصاريف قضايا', group: 'legal' },
+	{ en: 'Municipal fees', ar: 'رسوم بلديه', group: 'government' },
+	{ en: 'Government Paperwork', ar: 'طوابع', group: 'government' },
+	{ en: 'Government Violations', ar: 'ازاله مخالفات', group: 'government' },
+	{ en: 'hvac Contract', ar: 'عقد تكييف', group: 'hvac' },
+	{ en: 'hvac Maintenance Part', ar: 'ق.غ. تكييف', group: 'hvac' },
+	{ en: 'Plasterwork Maintenance', ar: 'فتحات تكييف', group: 'hvac' },
+	{ en: 'hvac Maintenance', ar: 'صيانه مكيف', group: 'hvac' },
+	{ en: 'Cleaning supplies', ar: 'معدات تنظيف', group: 'upkeep' },
+	{ en: 'Plumbing Maintenance', ar: 'صحي', group: 'upkeep' },
+	{ en: 'Paint Maintenance', ar: 'صبغ', group: 'upkeep' },
+	{ en: 'Flooring Maintenance', ar: 'تبليط', group: 'upkeep' },
+	{ en: 'Kitchen Maintenance', ar: 'مطابخ', group: 'upkeep' },
+	{ en: 'Aluminum Maintenance', ar: 'المنيوم', group: 'upkeep' },
+	{ en: 'Gypsum Maintenance', ar: 'صيانة الجبس', group: 'upkeep' },
+	{ en: 'Doors Maintenance', ar: 'صيانة الابواب', group: 'upkeep' },
+	{ en: 'Glass Maintenance', ar: 'زجاج معلق', group: 'upkeep' },
+	{ en: 'Fire Fighting Contract', ar: 'عقد اطفاء', group: 'other' },
+	{ en: 'Bank charges', ar: 'مصاريف بنكيه', group: 'other' },
+	{ en: 'Insurance', ar: 'تامين علي البنايه', group: 'other' },
+	{ en: 'Other Maintenance cost', ar: 'اخرى', group: 'other' },
 ];
 
 export const unitTypeOptions = [
