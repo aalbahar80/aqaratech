@@ -252,7 +252,10 @@
 </div>
 
 <!-- Income Chart -->
-<DashCard title="Rent Income" subtitle="The total amount of rent due.">
+<DashCard
+	title="Income"
+	subtitle="Breakdown of rent income by status & property."
+>
 	<div slot="groupBy" class="flex w-64 pb-4">
 		<span
 			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
@@ -291,7 +294,7 @@
 <!-- Expenses Chart -->
 <DashCard
 	title="Expenses"
-	subtitle="The total amount of expenses."
+	subtitle="The total amount of expenses by category & property."
 	empty={expenses.length < 1}
 >
 	<div slot="groupBy" class="flex w-64 pb-4">
@@ -348,7 +351,7 @@
 <!-- Occupancy Chart -->
 <DashCard
 	title="Occupancy"
-	subtitle="The percentage of units that are empty."
+	subtitle="The percentage of empty units over time."
 	empty={occupancy.length < 1}
 	tabbed={false}
 >
