@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Badge from '$components/Badge.svelte';
+	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { kwdFormat } from '$lib/utils/common';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { format } from 'date-fns';
-	import Button from '../Button.svelte';
 
 	interface Transaction {
 		id: string;
@@ -22,20 +21,6 @@
 	export let trx: Transaction;
 
 	const badge = Transaction.getBadge(trx);
-
-	let loading = false;
-	const handlePayment = async () => {
-		loading = true;
-		try {
-			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
-			const data = await res.json();
-			goto(data.mfUrl).catch(console.error);
-		} catch (err) {
-			console.error(err);
-		} finally {
-			loading = false;
-		}
-	};
 </script>
 
 <div
@@ -84,15 +69,7 @@
 					</span>
 				{:else}
 					<div>
-						<Button
-							--min-width="6rem"
-							--min-height="4rem"
-							text="Pay"
-							icon={Cash}
-							disabled={trx.postAt > new Date()}
-							{loading}
-							on:click={handlePayment}
-						/>
+						<PayButton {trx} />
 					</div>
 				{/if}
 			</div>

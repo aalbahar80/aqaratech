@@ -1,13 +1,12 @@
 <script context="module" lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { Property } from '$lib/models/classes/property.class';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import { addToast } from '$lib/stores/toast';
@@ -15,7 +14,6 @@
 	import { Transaction } from '$models/classes/transaction.class';
 	import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
 	import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
-	import { CreditCard } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import { onMount } from 'svelte';
 	import type { Load } from './index';
@@ -30,8 +28,6 @@
 <script lang="ts">
 	type Transaction = NonNullable<InferQueryOutput<'public:transactions:read'>>;
 	export let trx: Transaction;
-	export let mfUrl: string;
-	let loading = false;
 
 	onMount(() => {
 		const success = $page.url.searchParams.get('success');
@@ -57,28 +53,6 @@
 		const noQuery = $page.url.origin + $page.url.pathname;
 		window.history.pushState({}, '', noQuery);
 	});
-
-	const handlePayment = async () => {
-		// TODO: move this to use:action
-		// TODO: button spinner should also be use:action
-		loading = true;
-		try {
-			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
-			const data = await res.json();
-			mfUrl = data.mfUrl;
-			goto(mfUrl).catch(console.error);
-		} catch (err) {
-			addToast({
-				props: {
-					kind: 'error',
-					title: 'Error',
-					subtitle: 'Failed to contact MyFatoorah',
-				},
-			});
-		} finally {
-			loading = false;
-		}
-	};
 
 	const details: [string, string | null][] = [
 		['Date', dateFormat(trx.postAt)],
@@ -123,14 +97,7 @@
 <DetailsPane {details} />
 <div class="mt-4 flex self-end md:mt-0">
 	{#if !trx.isPaid}
-		<Button
-			class="h-12 w-32"
-			on:click={handlePayment}
-			{loading}
-			disabled={loading}
-			icon={CreditCard}
-			text="Pay"
-		/>
+		<PayButton {trx} />
 	{:else}
 		<!-- <button
 			type="button"

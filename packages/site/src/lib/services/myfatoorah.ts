@@ -4,6 +4,21 @@ import { z } from 'zod';
 
 const { myfatoorahConfig } = environment;
 
+interface TrxPaymentInfo {
+	id: string;
+	amount: number;
+	lease: {
+		tenant: {
+			email: string | null;
+			phone: string | null;
+			firstName: string;
+			secondName: string | null;
+			thirdName: string | null;
+			lastName: string;
+		};
+	};
+}
+
 // TODO: setup proper auth later as per:
 // https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow
 
@@ -11,39 +26,9 @@ const { myfatoorahConfig } = environment;
  * Fetches a payment URL from myfatoorah for a given transaction.
  * This is used to redirect the user for payment.
  */
-export const getMFUrl = async ({
-	trxId,
-}: {
-	trxId: string;
-}): Promise<string> => {
+export const getMFUrl = async (trx: TrxPaymentInfo): Promise<string> => {
 	// get necessary info for payment
 	console.log('fetching mf url');
-	const trx = await prismaClient.transaction.findUnique({
-		where: { id: trxId },
-		select: {
-			id: true,
-			amount: true,
-			lease: {
-				select: {
-					tenant: {
-						select: {
-							firstName: true,
-							secondName: true,
-							thirdName: true,
-							lastName: true,
-							email: true,
-							phone: true,
-						},
-					},
-				},
-			},
-		},
-	});
-
-	if (!trx) {
-		throw new Error('Transaction not found');
-	}
-
 	const { tenant } = trx.lease;
 	const name = [
 		tenant.firstName,
