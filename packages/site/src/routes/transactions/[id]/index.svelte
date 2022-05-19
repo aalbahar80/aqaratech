@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
@@ -8,7 +9,8 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import { Mail } from '@steeze-ui/heroicons';
+	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
+	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
 	import type { Load } from './index';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -44,6 +46,13 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
+		<Button
+			as="button"
+			icon={ClipboardCopy}
+			on:click={() => copyTrxUrl(trx.id, $page.url.origin)}
+			text={'Copy public URL'}
+			solid
+		/>
 		<AsyncButton
 			func={() =>
 				fetch('/transactions/' + trx.id + '/notify', {

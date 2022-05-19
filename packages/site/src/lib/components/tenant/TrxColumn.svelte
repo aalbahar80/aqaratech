@@ -7,6 +7,7 @@
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { dateFormat } from '$lib/utils/common';
+	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
 		Cash,
@@ -71,28 +72,6 @@
 		}
 		return total;
 	}, 0);
-
-	const copyUrl = (id: string) => {
-		navigator.clipboard
-			.writeText(`${$page.url.host}/p/transactions/${id}`)
-			.catch((e) => {
-				console.error(e);
-				addToast({
-					duration: 3000,
-					props: {
-						kind: 'error',
-						title: 'Unable to copy link',
-					},
-				});
-			});
-		addToast({
-			duration: 3000,
-			props: {
-				kind: 'success',
-				title: 'Copied link to clipboard!',
-			},
-		});
-	};
 </script>
 
 <section>
@@ -249,7 +228,8 @@
 												icon: ClipboardCopy,
 												label: 'Copy payment URL',
 												onClick: () => {
-													copyUrl(transaction.id);
+													console.log($page);
+													copyTrxUrl(transaction.id, $page.url.origin);
 												},
 											},
 											{
@@ -311,7 +291,7 @@
 		</nav>
 	{:else}
 		<div class="overflow-hidden bg-white shadow sm:rounded-md">
-			<div class="text-center py-16 sm:py-28">
+			<div class="py-16 text-center sm:py-28">
 				<svg
 					class="mx-auto h-12 w-12 text-gray-400"
 					fill="none"
