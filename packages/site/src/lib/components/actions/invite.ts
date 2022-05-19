@@ -2,14 +2,20 @@ import { addToast } from '$lib/stores/toast';
 import { z } from 'zod';
 
 export const handleInvite = async (
-	clientId: string,
-	userType: 'client' | 'tenant',
+	id: string,
+	userType: 'propertyOwner' | 'tenant',
 ) => {
 	try {
+		const Input = z.object({
+			id: z.string().uuid(),
+			userType: z.enum(['propertyOwner', 'tenant']),
+		});
+		const input = Input.parse({ id, userType });
+		const urlPrefix =
+			input.userType === 'propertyOwner' ? 'clients' : 'tenants';
 		// TODO: is this endpoint protected?
-		const res = await fetch(`/clients/${clientId}/invite`, {
+		const res = await fetch(`/${urlPrefix}/${input.id}/invite`, {
 			method: 'POST',
-			body: JSON.stringify({ clientId }),
 		});
 		const raw = await res.json();
 

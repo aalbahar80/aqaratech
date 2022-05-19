@@ -3,12 +3,6 @@ import prismaClient from '$lib/server/prismaClient';
 import type { JSONObject } from 'superjson/dist/types';
 import { z, ZodError } from 'zod';
 
-interface ToCreate {
-	id: string;
-	email: string;
-	civilid: string;
-}
-
 const {
 	AUTH0_DEFAULT_DOMAIN,
 	AUTH0_CLIENT_ID,
@@ -86,20 +80,20 @@ const auth0Fetch = async ({
 	return res;
 };
 
-/**
- * Updates our db with the client's auth0 id
- */
-export const updateAuthId = async (id: string, auth0Id: string) => {
-	try {
-		await prismaClient.client.update({
-			where: { id },
-			data: { auth0Id },
-		});
-	} catch (e) {
-		console.error(e);
-		throw e;
-	}
-};
+// /**
+//  * Updates our db with the client's auth0 id
+//  */
+// export const updateAuthId = async (id: string, auth0Id: string) => {
+// 	try {
+// 		await prismaClient.client.update({
+// 			where: { id },
+// 			data: { auth0Id },
+// 		});
+// 	} catch (e) {
+// 		console.error(e);
+// 		throw e;
+// 	}
+// };
 
 /**
  * `201`: Created
@@ -127,7 +121,7 @@ export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
 	if (status === 201) {
 		// created
 		const userData = UserData.parse(raw);
-		await updateAuthId(id, userData.user_id);
+		// await updateAuthId(id, userData.user_id);
 		console.debug({ raw }, 'invite.ts ~ 23');
 		return { success: true as const, userData };
 	} else {
@@ -141,7 +135,7 @@ export const assignRole = async (
 	role: 'propertyOwner' | 'tenant',
 ) => {
 	const Input = z.object({
-		sub: z.string().uuid(),
+		sub: z.string(),
 		role: z.enum(['propertyOwner', 'tenant']),
 	});
 	const input = Input.parse({ sub, role });
@@ -181,4 +175,71 @@ export const usersByEmail = async (email: string) => {
 	} else {
 		return [];
 	}
+};
+
+interface ToCreate {
+	id: string;
+	email: string | null;
+	civilid: string | null;
+}
+export const inviteUser = async (
+	rawInput: ToCreate | null,
+	role: 'propertyOwner' | 'tenant',
+) => {
+	if (!rawInput) {
+		return {
+			status: 404,
+			body: {
+				errorMsg: 'Not found',
+			},
+		};
+	}
+
+	const User = z.object({
+		id: z.string(),
+		email: z.string().email(),
+		civilid: z.string(),
+	});
+
+	const user = User.safeParse(rawInput);
+	if (!user.success) {
+		return {
+			status: 400,
+			body: {
+				errorMsg: 'Email and civilid are required to create a user account',
+			},
+		};
+	}
+	const { email } = user.data;
+
+	// check if user exists
+	const existingUsers = await usersByEmail(email);
+	const userExists = existingUsers.some((u) => u.email === email);
+	if (userExists) {
+		return {
+			status: 409,
+			body: {
+				errorMsg: 'A user with this email already exists',
+			},
+		};
+	}
+
+	// create auth0 user
+	const created = await createAuth0User(user.data);
+	if (created.success) {
+		// assign correct role
+		const userId = z.string().parse(created.userData.user_id);
+		console.log({ userId }, 'auth0.ts ~ 232');
+		const roleAssigned = await assignRole(userId, role);
+		if (roleAssigned) {
+			return {
+				status: 201,
+				body: {
+					email: created.userData.email,
+				},
+			};
+		}
+	}
+
+	throw new Error('Failed to create user');
 };
