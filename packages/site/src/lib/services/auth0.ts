@@ -205,7 +205,8 @@ export const inviteUser = async (
 		return {
 			status: 400,
 			body: {
-				errorMsg: 'Email and civilid are required to create a user account',
+				errorMsg:
+					'Email and civil id number are required to create a user account',
 			},
 		};
 	}
