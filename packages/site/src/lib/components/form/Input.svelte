@@ -118,7 +118,7 @@
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
 					{name === 'active'
-						? 'Active leases generate transactions automatically. You can activate later.'
+						? 'TRUE: The lease is active. Rent payments are enabled. FALSE: Rent cannot be paid. Rent reminders will not be sent. Useful for preparing draft leases.'
 						: name === 'shouldNotify'
 						? 'Enable to send payment reminders automatically.'
 						: name === 'isPaid'
