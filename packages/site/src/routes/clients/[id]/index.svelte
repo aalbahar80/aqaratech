@@ -30,8 +30,6 @@
 		['Created on', dateFormat(client.createdAt)],
 		['Last updated', client.updatedAt.toLocaleString()],
 	];
-
-	$: inviteDisabled = !!client.auth0Id;
 </script>
 
 <Heading title="Client" id={client.id} entity="clients">
@@ -44,14 +42,9 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<AsyncButton
-			func={() => handleInvite(client.id)}
-			disabled={inviteDisabled}
-			let:loading
-		>
+		<AsyncButton func={() => handleInvite(client.id)} let:loading>
 			<Button
 				as="div"
-				disabled={inviteDisabled}
 				{loading}
 				icon={Mail}
 				solid
