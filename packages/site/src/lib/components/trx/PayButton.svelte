@@ -36,7 +36,7 @@
 				props: {
 					kind: 'error',
 					title: 'Error',
-					subtitle: 'Unable to get payment URL',
+					subtitle: 'An error occured while grabbing payment url',
 				},
 			});
 		} finally {

@@ -80,7 +80,9 @@ test('display toast when /getUrl throws', async ({ page, trxId }) => {
 	);
 	await page.locator('text=Pay').click();
 	const toasts = page.locator('id=toasts');
-	await expect.soft(toasts).toContainText('Failed to contact MyFatoorah');
+	await expect
+		.soft(toasts)
+		.toContainText('An error occured while grabbing payment url');
 
 	const btn = page.locator('text=Pay');
 	await expect(btn).toBeEnabled();
