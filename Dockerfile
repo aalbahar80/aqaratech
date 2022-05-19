@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.22.1-focal
+FROM mcr.microsoft.com/playwright:v1.21.1-focal
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
@@ -14,4 +14,4 @@ EXPOSE 9323
 
 # CMD ["bash"]
 CMD [ "pnpm", "test", "--filter=@self/site-test" ]
-# CMD cd packages/site/tests && pnpm test && pnpm exec playwright show-report
+# CMD cd packages/site/tests && npx playwright test && npx playwright show-report
