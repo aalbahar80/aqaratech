@@ -14,7 +14,6 @@
 	import LogRocket from 'logrocket';
 	import * as R from 'remeda';
 	import { onMount } from 'svelte';
-	import 'tippy.js/dist/tippy.css';
 	import '../styles/tailwind.css';
 	import type { Load } from './__layout-common';
 
