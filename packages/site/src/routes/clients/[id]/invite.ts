@@ -1,5 +1,5 @@
 import prismaClient from '$lib/server/prismaClient';
-import { assignRole, createAuth0User } from '$lib/services/auth0';
+import { assignRole, createAuth0User, usersByEmail } from '$lib/services/auth0';
 import { z } from 'zod';
 import type { RequestHandler } from './invite.d';
 
@@ -11,26 +11,16 @@ export const post: RequestHandler = async ({ params }) => {
 			where: { id: params.id },
 			select: {
 				id: true,
-				auth0Id: true,
 				email: true,
 				civilid: true,
 			},
 		});
+
 		if (!rawClient) {
 			return {
 				status: 404,
 				body: {
-					code: 'NOT_FOUND',
-					message: 'Client not found',
-				},
-			};
-		}
-		if (rawClient.auth0Id) {
-			return {
-				status: 409,
-				body: {
-					code: 'ALREADY_EXISTS',
-					message: 'Client has an existing account', // add info about steps to resolve
+					errorMsg: 'Client not found',
 				},
 			};
 		}
@@ -46,26 +36,29 @@ export const post: RequestHandler = async ({ params }) => {
 			return {
 				status: 400,
 				body: {
-					code: 'INVALID_DATA',
-					message: 'Email and Civilid are required to create a user account',
+					errorMsg: 'Email and civilid are required to create a user account',
 				},
 			};
 		}
 		const { id, email, civilid } = client.data;
 
-		// create auth0 user
-		const created = await createAuth0User({ id, email, civilid });
-		if (created.status === 409) {
-			// TODO: get user by email and populate auth0Id
-			// await updateAuthId(id, created.body.auth0Id);
+		// check if user exists
+		const existingUsers = await usersByEmail(email);
+		console.log({ existingUsers }, 'invite.ts ~ 47');
+		const userExists = existingUsers.some((u) => u.email === email);
+		console.log({ userExists }, 'invite.ts ~ 49');
+		if (userExists) {
 			return {
 				status: 409,
 				body: {
-					code: 'ALREADY_EXISTS',
-					message: 'Client has an existing account', // add info about steps to resolve
+					errorMsg: 'A user with this email already exists',
 				},
 			};
-		} else if (created.status === 201) {
+		}
+
+		// create auth0 user
+		const created = await createAuth0User({ id, email, civilid });
+		if (created.success) {
 			// assign correct role
 			const userId = z.string().parse(created.userData.user_id);
 			const roleAssigned = await assignRole(userId);
@@ -73,39 +66,19 @@ export const post: RequestHandler = async ({ params }) => {
 				return {
 					status: 201,
 					body: {
-						code: 'SUCCESS',
-						message: `Account created. An email with a link to activate it has been sent to the client: ${email}`,
 						email: created.userData.email,
 					},
 				};
-			} else {
-				return {
-					status: 500,
-					body: {
-						code: 'ROLE_ASSIGNMENT_FAILED',
-						message:
-							'A user account account has been created but the role assignment failed. Log in to Auth0 and assign the correct role to the user',
-					},
-				};
 			}
-		} else {
-			return {
-				status: 404,
-				body: {
-					success: false,
-					code: 'ACCOUNT_CREATION_FAILED',
-					message: 'Failed to create user account in Auth0',
-				},
-			};
 		}
+
+		throw new Error('Failed to create user');
 	} catch (err) {
 		console.error(err);
 		return {
 			status: 500,
 			body: {
-				success: false,
-				code: 'UNKNOWN_ERROR',
-				message: 'Log into Auth0 to manage user',
+				errMsg: 'Failed to create user',
 			},
 		};
 	}

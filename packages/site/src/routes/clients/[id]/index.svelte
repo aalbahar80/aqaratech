@@ -42,7 +42,7 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<AsyncButton func={() => handleInvite(client.id)} let:loading>
+		<AsyncButton func={() => handleInvite(client.id, 'client')} let:loading>
 			<Button
 				as="div"
 				{loading}

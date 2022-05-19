@@ -25,7 +25,7 @@ const UserData = z.object({
 	}),
 });
 
-const base = `${AUTH0_DEFAULT_DOMAIN}/api/v2/users`;
+const base = `${AUTH0_DEFAULT_DOMAIN}/api/v2`;
 
 /**
  * Gets Auth0 token for management API. Calls default domain (not custom).
@@ -64,15 +64,23 @@ const getAuth0Token = async () => {
 /**
  * Fetch wrapper for Auth0.
  */
-const auth0Fetch = async ({ url, body }: { url: string; body: JSONObject }) => {
+const auth0Fetch = async ({
+	url,
+	body,
+	method = 'POST',
+}: {
+	url: string;
+	body?: JSONObject;
+	method?: string;
+}) => {
 	const token = await getAuth0Token();
 	const res = await fetch(url, {
-		method: 'POST',
+		method,
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(body),
+		body: body ? JSON.stringify(body) : undefined,
 	});
 	return res;
 };
@@ -98,66 +106,56 @@ export const updateAuthId = async (id: string, auth0Id: string) => {
  * `409`: Conflict (email already exists)
  */
 export const createAuth0User = async ({ id, email, civilid }: ToCreate) => {
-	try {
-		// TODO: zod parse ToAuth0
-		const res = await auth0Fetch({
-			url: base,
-			body: {
-				connection: 'Username-Password-Authentication',
-				email,
-				password: civilid,
-				verify_email: true,
-				app_metadata: {
-					idInternal: id,
-				},
+	// TODO: zod parse ToAuth0
+	// TODO: wrap consumer in try/catch
+	const res = await auth0Fetch({
+		url: `${base}/users`,
+		body: {
+			connection: 'Username-Password-Authentication',
+			email,
+			password: civilid,
+			verify_email: true,
+			app_metadata: {
+				idInternal: id,
 			},
-		});
+		},
+	});
 
-		const raw = await res.json();
-		const { status } = res;
-		if (status === 201) {
-			// created
-			const userData = UserData.parse(raw);
-			await updateAuthId(id, userData.user_id);
-			console.debug({ raw }, 'invite.ts ~ 23');
-			return { status: 201 as const, userData };
-		} else if (status === 409) {
-			return { status: 409 as const, userData: undefined };
-		} else {
-			console.debug({ raw }, 'auth0.ts ~ 121');
-			throw new Error('CREATE_USER_FAILED');
-		}
-	} catch (e) {
-		console.error(e);
-		return { status: 500 as const, userData: undefined };
+	const raw = await res.json();
+	const { status } = res;
+	if (status === 201) {
+		// created
+		const userData = UserData.parse(raw);
+		await updateAuthId(id, userData.user_id);
+		console.debug({ raw }, 'invite.ts ~ 23');
+		return { success: true as const, userData };
+	} else {
+		// conflict
+		return { success: false as const };
 	}
 };
 
 export const assignRole = async (sub: string) => {
-	try {
-		const res = await auth0Fetch({
-			url: `${base}/${sub}/roles`,
-			body: {
-				roles: [AUTH0_ROLE_ID_PROPERTY_OWNER],
-			},
-		});
-		if (res.status === 204) {
-			// role assigned
-			return true;
-		} else {
-			return false;
-		}
-	} catch (e) {
-		console.error(e);
-		return false;
+	const res = await auth0Fetch({
+		url: `${base}/users/${sub}/roles`,
+		body: {
+			// TODO: add tenant roleid
+			roles: [AUTH0_ROLE_ID_PROPERTY_OWNER],
+		},
+	});
+	if (res.status === 204) {
+		// role assigned
+		return true;
+	} else {
+		throw new Error('Failed to assign role');
 	}
 };
 
-/**
- * `200`: Updated
- *
- * `404`: Not found
- */
+// /**
+//  * `200`: Updated
+//  *
+//  * `404`: Not found
+//  */
 // interface ToUpdate {
 // 	sub: string;
 // 	email: string;
@@ -167,7 +165,7 @@ export const assignRole = async (sub: string) => {
 // 	try {
 // 		// TODO: zod parse ToAuth0
 // 		const res = await auth0Fetch({
-// 			url: `${base}/${sub}`,
+// 			url: `${base}/users/${sub}`,
 // 			body: {
 // 				connection: 'Username-Password-Authentication',
 // 				email,
@@ -190,3 +188,21 @@ export const assignRole = async (sub: string) => {
 // 		throw e;
 // 	}
 // };
+
+export const usersByEmail = async (email: string) => {
+	// TODO: zod parse ToAuth0
+	// TODO: wrap consumer in try/catch
+	const res = await auth0Fetch({
+		url: `${base}/users-by-email?email=${email}`,
+		method: 'GET',
+	});
+
+	const raw = await res.json();
+	if (res.ok) {
+		const Auth0Response = z.array(z.object({ email: z.string().email() }));
+		const data = Auth0Response.parse(raw);
+		return data;
+	} else {
+		return [];
+	}
+};

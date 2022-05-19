@@ -1,8 +1,12 @@
 import { addToast } from '$lib/stores/toast';
 import { z } from 'zod';
 
-export const handleInvite = async (clientId: string) => {
+export const handleInvite = async (
+	clientId: string,
+	userType: 'client' | 'tenant',
+) => {
 	try {
+		// TODO: is this endpoint protected?
 		const res = await fetch(`/clients/${clientId}/invite`, {
 			method: 'POST',
 			body: JSON.stringify({ clientId }),
@@ -11,7 +15,7 @@ export const handleInvite = async (clientId: string) => {
 
 		const Data = z.object({
 			email: z.string().email().optional(),
-			message: z.string(),
+			errorMsg: z.string().optional(),
 		});
 
 		const data = Data.parse(raw);
@@ -22,7 +26,7 @@ export const handleInvite = async (clientId: string) => {
 				props: {
 					kind: 'success',
 					title: 'Sent',
-					subtitle: `${data.message}`,
+					subtitle: `Invitation sent to ${data.email}`,
 				},
 			});
 		} else {
@@ -31,7 +35,7 @@ export const handleInvite = async (clientId: string) => {
 				props: {
 					kind: 'error',
 					title: 'Error',
-					subtitle: `${data.message}`,
+					subtitle: `${data.errorMsg}`,
 				},
 			});
 		}
@@ -41,7 +45,6 @@ export const handleInvite = async (clientId: string) => {
 			props: {
 				kind: 'error',
 				title: 'Error',
-				// subtitle: `${e.message}`,
 			},
 		});
 	}
