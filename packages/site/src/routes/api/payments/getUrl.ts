@@ -20,7 +20,7 @@ export const get: RequestHandler = async ({ url }) => {
 			return {
 				status: 400,
 				body: {
-					errorMsg: input.error,
+					errorMsg: JSON.parse(input.error.toString()),
 				},
 			};
 		}
