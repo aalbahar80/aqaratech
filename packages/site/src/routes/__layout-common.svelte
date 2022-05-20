@@ -15,7 +15,7 @@
 	import * as R from 'remeda';
 	import { onMount } from 'svelte';
 	import '../styles/tailwind.css';
-	import type { Load } from './__layout-common';
+	import type { Load } from './__types/__layout-common';
 
 	export const load: Load = async ({ session, url: { pathname } }) => {
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);

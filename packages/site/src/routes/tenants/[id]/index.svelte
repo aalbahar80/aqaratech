@@ -10,7 +10,7 @@
 	import { getName } from '$lib/utils/common';
 	import { Collection, Mail } from '@steeze-ui/heroicons';
 	import * as R from 'remeda';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const tenant = await trpc(fetch).query('tenants:read', params.id);

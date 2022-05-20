@@ -1,6 +1,6 @@
 import type { createTRPCHandle } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
-import type { RequestEvent } from '@sveltejs/kit/types/private';
+import type { RequestEvent } from '@sveltejs/kit';
 import type { inferAsyncReturnType } from '@trpc/server';
 
 type TRPCHandler = Parameters<typeof createTRPCHandle>;

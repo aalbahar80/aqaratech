@@ -3,7 +3,7 @@
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { startCase } from '$lib/utils/common';
-	import type { Load } from './index@blank';
+	import type { Load } from './__types/index@blank';
 
 	export const load: Load = async ({ url, params, fetch }) => {
 		const entityTitle = params.entity as EntityTitle;

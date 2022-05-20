@@ -9,7 +9,7 @@
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { dateFormat, getName } from '$lib/utils/common';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		if (params.id === 'add') return { fallthrough: true };

@@ -1,4 +1,5 @@
-import type { MaybePromise, RequestEvent } from '@sveltejs/kit/types/internal';
+import type { RequestEvent } from '@sveltejs/kit';
+import type { MaybePromise } from '@sveltejs/kit/types/private';
 import type {
 	AnyRouter,
 	inferRouterContext,

@@ -16,7 +16,7 @@
 	import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
 	import { formatDistance } from 'date-fns';
 	import { onMount } from 'svelte';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;

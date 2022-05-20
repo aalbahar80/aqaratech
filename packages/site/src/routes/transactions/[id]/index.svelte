@@ -11,7 +11,7 @@
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const trx = await trpc(fetch).query('transactions:read', params.id);

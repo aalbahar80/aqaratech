@@ -7,7 +7,7 @@
 		classMap,
 		relationalClassMap,
 	} from '../../lib/models/classes/all.class';
-	import type { Load } from './[entity]';
+	import type { Load } from './__types/[entity]';
 
 	export const load: Load = async ({ url, fetch, params }) => {
 		const entityTitle = params.entity as EntityTitle;

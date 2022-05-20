@@ -1,6 +1,6 @@
 import { Reminder } from '$lib/models/classes/reminder.class';
 import { z, ZodError } from 'zod';
-import type { RequestHandler } from './notify.d';
+import type { RequestHandler } from './__types/notify';
 
 /**
  * Sends a payment link to tenant.

@@ -4,7 +4,7 @@
 	import { trpc } from '$lib/client/trpc';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { classMap } from '$models/classes/all.class';
-	import type { Load } from './edit';
+	import type { Load } from './__types/edit';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const id = params.id;

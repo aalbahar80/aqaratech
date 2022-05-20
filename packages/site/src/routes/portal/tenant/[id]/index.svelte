@@ -3,7 +3,7 @@
 	import Select from '$lib/components/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
 	import { format } from 'date-fns';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const { id } = params;

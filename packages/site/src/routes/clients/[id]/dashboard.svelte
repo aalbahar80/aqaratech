@@ -22,7 +22,7 @@
 	import { subMonths } from 'date-fns';
 	import { writable, type Writable } from 'svelte/store';
 	import type { z } from 'zod';
-	import type { Load } from './index';
+	import type { Load } from './__types/index';
 
 	const defaultRange = 6;
 	const getRange = (months: number) => ({

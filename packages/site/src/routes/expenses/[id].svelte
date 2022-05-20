@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { Client, Expense, Property, Unit } from '$lib/models/classes';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
-	import type { Load } from './[id]';
+	import type { Load } from './__types/[id]';
 
 	export const load: Load = async ({ params, fetch }) => {
 		const expense = await trpc(fetch).query('expenses:read', params.id);

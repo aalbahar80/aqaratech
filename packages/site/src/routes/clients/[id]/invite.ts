@@ -1,6 +1,6 @@
 import prismaClient from '$lib/server/prismaClient';
 import { inviteUser } from '$lib/services/auth0';
-import type { RequestHandler } from './invite.d';
+import type { RequestHandler } from './__types/invite';
 
 // TODO protect this route? with _? Call it in postman
 export const post: RequestHandler = async ({ params }) => {
