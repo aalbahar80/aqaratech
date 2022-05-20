@@ -167,7 +167,7 @@ export const fakeLease = (
 		deposit: +faker.finance.amount(100, 3000, 0),
 		monthlyRent: +faker.finance.amount(1500, 3000, 0),
 		license: faker.company.bs(),
-		active: true,
+		deactivated: false,
 		tenantId: tenantId ?? faker.datatype.uuid(),
 		unitId: unitId ?? faker.datatype.uuid(),
 		notify: true,
