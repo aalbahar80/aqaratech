@@ -60,7 +60,7 @@
 			break;
 		case 'isPaid':
 		case 'active':
-		case 'shouldNotify':
+		case 'notify':
 			type = 'checkbox';
 			break;
 		case 'email':
@@ -109,7 +109,7 @@
 				>
 					{name === 'active'
 						? 'Active'
-						: name === 'shouldNotify'
+						: name === 'notify'
 						? 'Auto payment reminders'
 						: name === 'isPaid'
 						? 'Paid?'
@@ -118,7 +118,7 @@
 				<SwitchDescription as="span" class="text-sm text-gray-500">
 					{name === 'active'
 						? 'TRUE: The lease is active. Rent payments are enabled. FALSE: Rent cannot be paid. Rent reminders will not be sent. Useful for preparing draft leases.'
-						: name === 'shouldNotify'
+						: name === 'notify'
 						? 'Enable to send payment reminders automatically.'
 						: name === 'isPaid'
 						? 'Whether this transaction has already been paid or not.'

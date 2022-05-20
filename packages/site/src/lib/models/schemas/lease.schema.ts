@@ -8,7 +8,7 @@ const baseSchema = z.object({
 	end: z.preprocess(strToDate, z.date()),
 	tenantId: z.string().uuid(),
 	unitId: z.string().uuid(),
-	shouldNotify: z.boolean(),
+	notify: z.boolean(),
 	active: z.boolean(),
 });
 

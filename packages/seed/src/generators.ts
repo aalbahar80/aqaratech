@@ -170,7 +170,7 @@ export const fakeLease = (
 		active: true,
 		tenantId: tenantId ?? faker.datatype.uuid(),
 		unitId: unitId ?? faker.datatype.uuid(),
-		shouldNotify: true,
+		notify: true,
 	};
 };
 

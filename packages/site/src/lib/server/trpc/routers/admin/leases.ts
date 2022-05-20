@@ -80,7 +80,7 @@ export const leases = createRouter()
 					start: true,
 					end: true,
 					active: true,
-					shouldNotify: true,
+					notify: true,
 					createdAt: true,
 					updatedAt: true,
 					tenantId: true,

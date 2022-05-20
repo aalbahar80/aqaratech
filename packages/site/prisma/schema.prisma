@@ -61,7 +61,7 @@ model Lease {
   monthlyRent  Float
   deposit      Float         @default(0)
   active       Boolean       @default(false)
-  shouldNotify Boolean       @default(true)
+  notify       Boolean       @default(true)
   license      String?
   tenant       Tenant        @relation(fields: [tenantId], references: [id])
   unit         Unit          @relation(fields: [unitId], references: [id])

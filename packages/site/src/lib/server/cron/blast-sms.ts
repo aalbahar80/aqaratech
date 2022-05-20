@@ -10,7 +10,7 @@ export const eligibleTrxs = async (duration: number, rangeEnd = new Date()) => {
 		where: {
 			isPaid: false,
 			postAt: { lte: rangeEnd, gte: end },
-			lease: { shouldNotify: true, active: true },
+			lease: { notify: true, active: true },
 		},
 	});
 
