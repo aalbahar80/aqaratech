@@ -6,17 +6,7 @@
 
 	export let navigation: UserConfig['navLinks'] = [];
 
-	const dashboards = {
-		admin: '/clients',
-		owner: `/clients/${$session.authz?.id}/dashboard`,
-		tenant: `/portal/tenant/${$session.authz?.id}`,
-	};
-
-	const dashboard = $session.authz?.isOwner
-		? dashboards.owner
-		: $session.authz?.isTenant
-		? dashboards.tenant
-		: dashboards.admin;
+	$: showDashboard = $session.authz?.isOwner || $session.authz?.isTenant;
 </script>
 
 <div class="bg-gray-900 py-6 print:hidden">
@@ -37,12 +27,14 @@
 
 				{#if $session.authz}
 					<div class="-mr-2 flex items-center gap-6 lg:hidden">
-						<a
-							href={dashboard}
-							class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
-						>
-							Dashboard
-						</a>
+						{#if showDashboard}
+							<a
+								href={$session.authz.home}
+								class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
+							>
+								Dashboard
+							</a>
+						{/if}
 						<NavPopover {navigation} />
 					</div>
 				{:else}
@@ -72,13 +64,15 @@
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.authz}
 				<!-- TODO change href -->
-				<a
-					href={dashboard}
-					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
-					sveltekit:prefetch
-				>
-					Dashboard
-				</a>
+				{#if showDashboard}
+					<a
+						href={$session.authz.home}
+						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
+						sveltekit:prefetch
+					>
+						Dashboard
+					</a>
+				{/if}
 				{#if dev}
 					<a
 						href="/account/profile"

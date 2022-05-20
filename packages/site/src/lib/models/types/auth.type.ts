@@ -24,6 +24,7 @@ interface Admin {
 	isTenant: false;
 	id: undefined;
 	sub: string | undefined;
+	home: string;
 }
 
 interface Owner {
@@ -33,6 +34,7 @@ interface Owner {
 	isTenant: false;
 	id: string;
 	sub: string | undefined;
+	home: string;
 }
 
 interface Tenant {
@@ -42,6 +44,7 @@ interface Tenant {
 	isTenant: true;
 	id: string;
 	sub: string | undefined;
+	home: string;
 }
 
 export type Authz = Admin | Owner | Tenant;

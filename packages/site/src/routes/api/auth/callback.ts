@@ -51,13 +51,8 @@ export const get: RequestHandler = async (req) => {
 		req.locals.idToken = tokens.id_token || '';
 		// req.locals.user = await validateAccessToken(tokens.id_token, 'idToken');
 
-		let location = '/';
 		const authz = await getAuthz(req.locals.idToken, 'idToken');
-		if (authz?.isTenant) {
-			location = `/portal/tenant/${authz.id}`;
-		} else if (authz?.isOwner) {
-			location = `/clients/${authz.id}/dashboard`;
-		}
+		const location = authz?.home || '/';
 
 		return {
 			status: 302,

@@ -34,22 +34,26 @@ export const getAuthz = async (
 		const isTenant = roles.includes('tenant');
 		const sub = payload.sub;
 		if (isTenant) {
+			const id = metadata.appMetadata.idInternal;
 			return {
 				role: 'tenant',
 				isAdmin: false,
 				isOwner: false,
 				isTenant: true,
-				id: metadata.appMetadata.idInternal,
+				id,
 				sub,
+				home: `/portal/tenant/${id}`,
 			};
 		} else if (isOwner) {
+			const id = metadata.appMetadata.idInternal;
 			return {
 				role: 'property-owner',
 				isAdmin: false,
 				isOwner: true,
 				isTenant: false,
-				id: metadata.appMetadata.idInternal,
+				id,
 				sub,
+				home: `/clients/${id}/dashboard`,
 			};
 		} else if (isAdmin) {
 			return {
@@ -59,6 +63,7 @@ export const getAuthz = async (
 				isTenant: false,
 				id: undefined,
 				sub,
+				home: '/',
 			};
 		} else {
 			return null;
