@@ -105,6 +105,7 @@ model Property {
   avenue            String?
   street            String?
   number            String?
+  cost              Float?
   long              Float?
   lat               Float?
   client            Client             @relation(fields: [clientId], references: [id])
