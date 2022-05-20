@@ -1,7 +1,7 @@
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
-import adapter from '@sveltejs/adapter-auto';
-// import adapter from '@sveltejs/adapter-vercel';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 /** @type {import('@sveltejs/kit').Config} */
