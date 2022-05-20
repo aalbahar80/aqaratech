@@ -53,7 +53,7 @@ const setupClient = async () => {
 			id: 'c0183a5d-2875-488b-b86f-e1c5628262df',
 			createdAt: new Date(),
 			updatedAt: new Date(),
-			isActive: true,
+			deactivated: false,
 			firstName: 'عمر',
 			secondName: 'ادريس',
 			thirdName: null,
