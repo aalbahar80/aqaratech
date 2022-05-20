@@ -45,7 +45,6 @@ export class Client extends Entity {
 		'email',
 		'civilid',
 		'dob',
-		'auth0Id',
 	] as const;
 
 	public static getLabel = (item: ILabel) => getName(item);

@@ -160,7 +160,6 @@
 						{#each entity.basicFields as field}
 							<Input
 								name={field}
-								disabled={field === 'auth0Id' && FormType === 'new'}
 								value={getValue($data2, field)}
 								invalid={!!getValue($errors, field)}
 								invalidText={getValue($errors, field)?.[0]}

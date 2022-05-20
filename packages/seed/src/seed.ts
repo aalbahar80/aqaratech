@@ -16,9 +16,7 @@ import {
 	fakeTransaction,
 	fakeUnit,
 	testClientId,
-	testClientAuth0Id,
 	testTenantId,
-	testTenantAuth0Id,
 	timespan,
 } from "./generators.js";
 
@@ -63,8 +61,6 @@ async function main({
 
 	const clients = Array.from({ length: clientCount }, fakeClient);
 	clients[0]!.id = testClientId;
-	//@ts-ignore
-	clients[0]!.auth0Id = testClientAuth0Id;
 
 	const properties = clients.flatMap((client) =>
 		Array.from(
@@ -85,8 +81,6 @@ async function main({
 		let tenantN = fakeTenant();
 		if (idx === 0) {
 			tenantN.id = testTenantId;
-			//@ts-ignore
-			tenantN.auth0Id = testTenantAuth0Id;
 		}
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {

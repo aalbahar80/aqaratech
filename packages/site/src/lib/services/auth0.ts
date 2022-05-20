@@ -79,21 +79,6 @@ const auth0Fetch = async ({
 	return res;
 };
 
-// /**
-//  * Updates our db with the client's auth0 id
-//  */
-// export const updateAuthId = async (id: string, auth0Id: string) => {
-// 	try {
-// 		await prismaClient.client.update({
-// 			where: { id },
-// 			data: { auth0Id },
-// 		});
-// 	} catch (e) {
-// 		console.error(e);
-// 		throw e;
-// 	}
-// };
-
 /**
  * `201`: Created
  *

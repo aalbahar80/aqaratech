@@ -18,7 +18,6 @@
 	export let value: string | Date | null | number | boolean | undefined = '';
 	export let invalid = false;
 	export let invalidText: string | undefined = '';
-	export let disabled = false;
 
 	let type = 'text';
 	switch (name) {
@@ -157,7 +156,7 @@
 				{value}
 				id={name}
 				class="form__input"
-				{disabled}
+				disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
 				class:form__input--invalid={invalid}
 			/>
 			<div
