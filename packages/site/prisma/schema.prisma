@@ -72,21 +72,6 @@ model Lease {
   @@index([unitId])
 }
 
-model Listing {
-  id          String    @id @default(uuid())
-  unitId      String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  isActive    Boolean?
-  availableOn DateTime?
-  leaseLength String?
-  title       String?
-  description String?   @db.Text
-  unit        Unit      @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@index([unitId])
-}
-
 model MaintenanceOrder {
   id          String    @id @default(uuid())
   tenantId    String?
@@ -187,7 +172,6 @@ model Unit {
   property          Property           @relation(fields: [propertyId], references: [id])
   expenses          Expense[]
   leases            Lease[]
-  listings          Listing[]
   maintenanceOrders MaintenanceOrder[]
 
   @@index([propertyId])
