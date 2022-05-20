@@ -32,7 +32,8 @@
 <script lang="ts">
 	export let navigation: NavbarItem[];
 	onMount(() => {
-		if (!window.location.href.includes('localhost')) {
+		const href = window.location.href;
+		if (!href.includes('localhost') && !href.includes('127.0.0.1')) {
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($session.authz) {
 				LogRocket.identify($session.authz.sub || '', {
