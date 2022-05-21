@@ -227,7 +227,16 @@ export const charts = createRouter()
 				...unitExpenses,
 			];
 
-			const sorted = R.sortBy(all, (e) => e.postAt);
+			const slim = all.map((expense) => {
+				return {
+					...R.pick(expense, ['id', 'amount', 'category', 'postAt']),
+					address: expense.relatedProperty
+						? Property.getLabel(expense.relatedProperty)
+						: 'Common',
+				};
+			});
+
+			const sorted = R.sortBy(slim, (e) => e.postAt);
 			return sorted;
 		},
 	})

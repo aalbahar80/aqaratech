@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import { expenseCats, getColor } from '$lib/config/constants';
-import { getAddress, startCase } from '$lib/utils/common';
+import { startCase } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
 import { derived, type Writable } from 'svelte/store';
@@ -24,9 +24,7 @@ const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
 		const group =
 			expenseCats.find((g) => g.en === trx.category)?.group ?? 'OTHER';
 		const groupLabel = startCase(group);
-		const address = trx.relatedProperty
-			? getAddress(trx.relatedProperty)
-			: 'Common';
+		const address = trx.address;
 		if (month) {
 			const index = buckets.findIndex((bucket) => {
 				const condition =

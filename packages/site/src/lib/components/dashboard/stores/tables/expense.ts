@@ -1,8 +1,7 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { Property } from '$lib/models/classes/property.class';
+import { CTable } from '$lib/models/classes/table.class';
 import { dateFormat, kwdFormat } from '$lib/utils/common';
 import { derived, type Writable } from 'svelte/store';
-import { CTable } from '$lib/models/classes/table.class';
 
 type Data = InferQueryOutput<'owner:charts:expenses'>;
 
@@ -20,9 +19,7 @@ export const getExpenseTableStore = (expenses: Writable<Data>) =>
 			Date: dateFormat(entry.postAt),
 			Category: entry.category || '',
 			Amount: kwdFormat(entry.amount),
-			Location: entry.relatedProperty
-				? Property.getLabel(entry.relatedProperty)
-				: '-',
+			Location: entry.address,
 		}));
 		const total = $expenses.reduce((acc, entry) => acc + entry.amount, 0);
 		const table = new CTable({
