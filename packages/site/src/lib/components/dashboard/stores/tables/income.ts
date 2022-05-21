@@ -1,7 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { Property } from '$lib/models/classes/property.class';
 import { CTable } from '$lib/models/classes/table.class';
-import { Unit } from '$lib/models/classes/unit.class';
 import { dateFormat, kwdFormat } from '$lib/utils/common';
 import { derived, type Writable } from 'svelte/store';
 
@@ -22,8 +20,8 @@ export const getIncomeTableStore = (income: Writable<Data>) =>
 			Date: dateFormat(entry.postAt),
 			Status: entry.isPaid ? 'Paid' : 'Unpaid',
 			Amount: kwdFormat(entry.amount),
-			Location: Property.getLabel(entry.property),
-			Unit: Unit.getLabel(entry.unit),
+			Location: entry.propertyLabel,
+			Unit: entry.unitLabel,
 		}));
 		const total = $income.reduce((acc, entry) => acc + entry.amount, 0);
 		const table = new CTable({

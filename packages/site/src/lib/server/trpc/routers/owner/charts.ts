@@ -1,3 +1,4 @@
+import { Property, Unit } from '$lib/models/classes';
 import prismaClient from '$lib/server/prismaClient';
 import { getAddress } from '$lib/utils/common';
 import { groupOccupancy } from '$lib/utils/group';
@@ -87,6 +88,7 @@ export const charts = createRouter()
 				});
 			}
 
+			// single Client object => array of transactions
 			const normalized = data.properties.flatMap((property) =>
 				property.units.flatMap((unit) =>
 					unit.leases.flatMap((lease) =>
@@ -108,7 +110,21 @@ export const charts = createRouter()
 					),
 				),
 			);
-			const sorted = R.sortBy(normalized, (i) => i.postAt);
+			const slim = normalized.map((trx) => {
+				return {
+					...R.pick(trx, [
+						'id',
+						'amount',
+						'isPaid',
+						'propertyId',
+						'address',
+						'postAt',
+					]),
+					propertyLabel: Property.getLabel(trx.property),
+					unitLabel: Unit.getLabel(trx.unit),
+				};
+			});
+			const sorted = R.sortBy(slim, (i) => i.postAt);
 			return sorted;
 		},
 	})
