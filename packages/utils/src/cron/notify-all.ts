@@ -14,7 +14,7 @@ const { client_id, client_secret, audience, authOrigin, server } = prod
 				"dbbsv2QSRrPtQaRENuDn4SXwWtWBwkB614aRMOsodlSAiY5edqw43KOGclwuksnh",
 			audience: "letand.be/api",
 			authOrigin: "https://auth.letand.be",
-			server: process.env.serverOrigin || "http://localhost:3000",
+			server: process.env.SERVER_ORIGIN || "http://localhost:3000",
 	  };
 
 const getToken = async () => {
@@ -38,8 +38,7 @@ const getToken = async () => {
 
 const notifyAll = async (token: string) => {
 	try {
-		// console.log(process.env, "notify-all.ts ~ 26");
-		const res = await fetch(`${authOrigin}/transactions/notify-all`, {
+		const res = await fetch(`${server}/transactions/notify-all`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${token}`,
