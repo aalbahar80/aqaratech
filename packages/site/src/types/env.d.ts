@@ -1,17 +1,10 @@
 /// <reference types="node" />
 
-import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '@prisma/client';
 
 declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
-			/**
-			 * Auth0 client identifier provided by Auth0
-			 * @example '0oajq1q4qj7qj7qj7qj7qj7qj7qj7qj7q'
-			 * @see https://auth0.com/docs/quickstart/backend/nodejs/01-authorization#configuration
-			 */
-			readonly AUTH0_CLIENT_ID: string;
-
 			/**
 			 * Auth0 client secret provided by Auth0
 			 */
@@ -27,30 +20,12 @@ declare global {
 			 */
 			readonly AUTH0_DEFAULT_DOMAIN: string;
 
-			readonly AUTH0_ROLE_ID_PROPERTY_OWNER: string;
-			readonly AUTH0_ROLE_ID_TENANT: string;
-
-			/**
-			 * Auth0 claims namespace as configured in Auth0 (login) action
-			 */
-			readonly AUTH0_API_NAMESPACE: string;
-			readonly AUTH0_API_AUDIENCE: string;
-
-			/**
-			 * MyFatoorah API key
-			 */
 			readonly MYFATOORAH_TOKEN: string;
-			readonly MYFATOORAH_BASE_URL: string;
-
-			readonly TWILIO_ACCOUNT_SID: string;
 			readonly TWILIO_AUTH_TOKEN: string;
-			readonly TWILIO_FROM_NUMBER: string;
-			readonly TWILIO_MESSAGING_SERVICE_SID: string;
 
 			/**
 			 * GSuite Account for sending emails
 			 */
-			readonly GSUITE_EMAIL: string;
 			readonly GSUITE_PASSWORD: string;
 
 			/**
@@ -61,16 +36,6 @@ declare global {
 			 * otherwise return the deployment domain  `https://my-site-7q03y4pi5.vercel.app`.
 			 */
 			readonly URL_ORIGIN: string;
-
-			/**
-			 * Phone number used for myfatoorah invoices when not in production
-			 */
-			readonly MYFATOORAH_PHONE: string;
-
-			/**
-			 * Email used for myfatoorah invoices when not in production
-			 */
-			readonly MYFATOORAH_EMAIL: string;
 
 			/**
 			 * An indicator that the app is deployed and running on Vercel. Example: `1`.

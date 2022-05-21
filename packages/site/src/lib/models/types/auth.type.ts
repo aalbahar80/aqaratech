@@ -11,6 +11,9 @@ type AuthConfigKeys =
 	| 'AUTH0_ROLE_ID_PROPERTY_OWNER'
 	| 'AUTH0_ROLE_ID_TENANT';
 
+/**
+ *  `AUTH0_API_NAMESPACE` is configured in Auth0 (login) action
+ */
 export type AuthConfigType = {
 	[key in AuthConfigKeys]: string;
 } & {
