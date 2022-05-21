@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-          cache: "pnpm"
+          # cache: "pnpm"
       - name: Install & build dependencies
         run: pnpm --filter "@self/site-test^..." install && pnpm --filter "@self/site-test^..." run package
       - name: Install @self/test dependencies
