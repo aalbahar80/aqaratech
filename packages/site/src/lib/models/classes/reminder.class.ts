@@ -63,7 +63,7 @@ export class Reminder {
 
 			const transporter = createTransport(mailConfig);
 			const mailOptions = {
-				from: 'Aqaratech <donotreply@aqaratech.com>',
+				from: 'Aqaratech <support@aqaratech.com>',
 				to: this.email,
 				subject: 'Node test',
 				text: this.body,
@@ -83,7 +83,7 @@ export class Reminder {
 	}
 
 	get body(): string {
-		return `Your rent is due! \n Please use this link to pay: \n ${this.url}`;
+		return `Please use this link to pay your monthly rent: \n ${this.url}`;
 	}
 
 	private async getContactInfo() {

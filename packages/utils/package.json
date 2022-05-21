@@ -15,14 +15,13 @@
         "dist"
     ],
     "scripts": {
-        "dev": "tsc --project tsconfig.build.json && pnpm run start",
+        "dev": "tsc --project tsconfig.build.json && NODE_ENV=development node --experimental-fetch dist/notify-all.js",
         "build": "tsc --project tsconfig.build.json",
         "start": "node --experimental-fetch dist/notify-all.js"
     },
     "devDependencies": {
         "@tsconfig/esm": "1.0.0",
         "@types/node": "17.0.35",
-        "dotenv": "16.0.1",
         "typescript": "4.6.4"
     }
 }

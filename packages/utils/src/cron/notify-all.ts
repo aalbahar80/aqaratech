@@ -1,25 +1,32 @@
-import { config } from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+const prod = process.env.NODE_ENV === "production";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-config({ path: path.resolve(__dirname, "../../site/.env") });
-config({
-	path: path.resolve(__dirname, "../.env"),
-	override: true, // override auth0 id/secret to give this cron job it's own auth0 tenant.
-});
+const { client_id, client_secret, audience, authOrigin, server } = prod
+	? {
+			client_id: "qryphRH2sF6l9blvQEbZj2qV565znp3d",
+			client_secret: process.env.AUTH0_CLIENT_SECRET,
+			audience: "https://aqaratech.com/api",
+			authOrigin: "https://auth.aqaratech.com",
+			server: "https://aqaratech.com",
+	  }
+	: {
+			client_id: "46xg2CFeKgkRl3WjoELZIQ3TizcV4MSb",
+			client_secret:
+				"dbbsv2QSRrPtQaRENuDn4SXwWtWBwkB614aRMOsodlSAiY5edqw43KOGclwuksnh",
+			audience: "letand.be/api",
+			authOrigin: "https://auth.letand.be",
+			server: process.env.serverOrigin || "http://localhost:3000",
+	  };
 
 const getToken = async () => {
 	try {
-		const res = await fetch(`${process.env.AUTH0_DOMAIN}/oauth/token`, {
+		const res = await fetch(`${authOrigin}/oauth/token`, {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
-				client_id: process.env.AUTH0_CLIENT_ID,
-				client_secret: process.env.AUTH0_CLIENT_SECRET,
-				audience: process.env.AUTH0_API_AUDIENCE,
-				grant_type: "client_credentials", // TODO: use env
+				client_id,
+				client_secret,
+				audience,
+				grant_type: "client_credentials",
 			}),
 		});
 		const data = await res.json();
@@ -32,7 +39,7 @@ const getToken = async () => {
 const notifyAll = async (token: string) => {
 	try {
 		// console.log(process.env, "notify-all.ts ~ 26");
-		const res = await fetch(`${process.env.DOMAIN}/transactions/notify-all`, {
+		const res = await fetch(`${authOrigin}/transactions/notify-all`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -50,3 +57,5 @@ const notifyAll = async (token: string) => {
 
 const token = await getToken();
 await notifyAll(token);
+
+export {};
