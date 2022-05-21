@@ -20,12 +20,12 @@ export const getAuthz = async (
 	try {
 		const payload = await validateAccessToken(token, tokenType);
 		const roles = payload[
-			`https://${authConfig.AUTH0_API_NAMESPACE}/roles`
+			`${authConfig.AUTH0_API_NAMESPACE}/roles`
 		] as string[];
 
 		const metadata = {
 			appMetadata: payload[
-				`https://${authConfig.AUTH0_API_NAMESPACE}/appMetadata`
+				`${authConfig.AUTH0_API_NAMESPACE}/appMetadata`
 			] as Auth0UserMeta['appMetadata'],
 		};
 
