@@ -37,13 +37,12 @@ jobs:
         with:
           node-version: "16.x"
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install -r
-        # run: pnpm install --frozen-lockfile
+      - name: Install & build dependencies
+        run: pnpm --filter "@self/site-test^..." install && pnpm --filter "@self/site-test^..." run package
+      - name: Install @self/test dependencies
+        run: pnpm --filter "@self/site-test" install
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Build deps
-        run: pnpm --filter "@self/site" run package && pnpm --filter "@self/seed" build && pnpm --filter "@self/site-test" test
       - name: Run Playwright tests
         run: pnpm --filter "@self/site-test" test
       - uses: actions/upload-artifact@v2

@@ -99,7 +99,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}),
 	);
 
-	response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
+	// response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
 	return response;
 };
 
