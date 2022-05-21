@@ -11,7 +11,7 @@ export enum EnvironmentType {
 export interface EnvironmentConfig {
 	type: EnvironmentType;
 	envName: 'dev' | 'prod';
-	callbackDomain: string;
+	urlOrigin: string;
 	myfatoorahConfig: MyFatoorahConfigType;
 	twilioConfig: TwilioConfigType;
 	authConfig: AuthConfigType;

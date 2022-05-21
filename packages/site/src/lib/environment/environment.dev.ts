@@ -4,29 +4,31 @@ import { config } from 'dotenv';
 
 config();
 
-const getRedirectUri = (): string => {
-	const fromEnv = process.env.AUTH0_REDIRECT_URI;
-	if (fromEnv && fromEnv.includes('stage')) {
-		return process.env.AUTH0_REDIRECT_URI;
+const getOrigin = (localhostAllowed = true): string => {
+	const origin = process.env.URL_ORIGIN;
+	if (origin && origin.includes('stage')) {
+		return origin;
 	} else if (process.env.VERCEL) {
-		return `https://${process.env.VERCEL_URL}/api/auth/callback`;
+		return `https://${process.env.VERCEL_URL}`;
+	} else if (!localhostAllowed) {
+		return 'http://127.0.0.1:3000';
 	} else {
-		return 'http://localhost:3000/api/auth/callback';
+		return 'http://localhost:3000';
 	}
 };
 
 export const developmentEnvironment: EnvironmentConfig = {
 	type: EnvironmentType.DEVELOPMENT,
 	envName: 'dev',
-	callbackDomain: process.env.CALLBACK_DOMAIN,
+	urlOrigin: getOrigin(),
 	authConfig: {
-		AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+		AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
 		AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
-		AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-		AUTH0_DEFAULT_DOMAIN: process.env.AUTH0_DEFAULT_DOMAIN,
+		AUTH0_DOMAIN: 'https://auth.letand.be',
+		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_n6YdReDFqv4IG60y',
 		AUTH0_ROLE_ID_TENANT: 'rol_7C04rw2vmXs2pOTx',
-		AUTH0_REDIRECT_URI: getRedirectUri(),
+		AUTH0_REDIRECT_URI: `${getOrigin()}/api/auth/callback`,
 		AUTH0_API_NAMESPACE: 'https://letand.be',
 		AUTH0_API_AUDIENCE: 'letand.be/api',
 		JWKS: {
@@ -59,19 +61,16 @@ export const developmentEnvironment: EnvironmentConfig = {
 		},
 	},
 	myfatoorahConfig: {
-		MYFATOORAH_BASE_URL: process.env.MYFATOORAH_BASE_URL,
-		MYFATOORAH_TOKEN: process.env.MYFATOORAH_TOKEN,
-		MYFATOORAH_EMAIL: process.env.MYFATOORAH_EMAIL,
-		MYFATOORAH_PHONE: process.env.MYFATOORAH_PHONE,
-		MYFATOORAH_CALLBACK_URL: process.env.VERCEL
-			? `https://${process.env.VERCEL_URL}`
-			: 'http://127.0.0.1:3000',
+		MYFATOORAH_BASE_URL: 'https://apitest.myfatoorah.com',
+		MYFATOORAH_TOKEN:
+			'HKcuHSpmaDG3SDluux5XDOm6aucEO3KKddJcDNZ71CRYgTNRhKRJXV4LezbvXV2mw3gJ3uH5fZr0Hpi-55p1Yo9Bpr7aX3OsGuNGllBdpCUfli2wXfPnlbwtfKVY1UnOUsqeoFUUjD7SbsOZY5Rz_OgL26dd-bLDX4ToB08XuudcxKzNqCKncqP-4maqQlOdGUm1krElqwzReJK5U4OX1PFy7xNAABRIztQ0OHSiuge4l2m-WwvLZ_47BBK2P_uXAY1UI0g5OB3_Pyy9soZ4v9lAPM2Mb1rVBRZ0LbkS0LQquIJjRaOZzPymzsdcGJfpOgg3VrmpbUUma6I0tCSeorlLveuYPW0sYszzrTVuDDYQ_DvMe1jtQZFDHsH_cPP4YGIBJEC0F92gj7yU3T3p47hKAmrqiWC63fKvRsOVNZHrceCa6RlCNLyBR6qszh5YIKWo8yC2EqbNkb4bFstQ4NL7oFUnIC2nqCQ4Awfts5u85ygBaN1uLtxDKxUAgN3ZyteyGaYndjSl2AFBtae4mrPz7Q_dMHp8rY4AA0KLOG9fqpDzdcGEeYlE-dMQtpStvhHwty9Pob5-eTk4xXIBUGHedVI5eSdpyuj_xT3tgasHaJhQi5J9NTDphCiBCTa2YZYiMzXVx78NiuDuP-ytp9Y42nbqF4X3BJ2j1BkmoAql7sTR3P-VPJ8CL9PD2_9SAUtgIw',
+		MYFATOORAH_CALLBACK_URL: getOrigin(false),
 	},
 	twilioConfig: {
 		TWILIO_ACCOUNT_SID: 'ACbffc494534d2b9823213e4538d71c98d',
 		TWILIO_AUTH_TOKEN: 'a94743f7f5baf621a2f2535f05c03970',
 		TWILIO_FROM_NUMBER: '+15005550006',
-		TWILIO_MESSAGING_SERVICE_SID: process.env.TWILIO_MESSAGING_SERVICE_SID,
+		TWILIO_MESSAGING_SERVICE_SID: 'MG3f2cf0ea4f8d7c554cad650ef646da65',
 	},
 	mailConfig: {
 		USER: 'oleta.kreiger23@ethereal.email',

@@ -3,7 +3,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { createTransport, getTestMessageUrl } from 'nodemailer';
 
 const {
-	callbackDomain,
+	urlOrigin,
 	mailConfig: { HOST, PASS, USER },
 	twilioConfig: { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER },
 } = environment;
@@ -79,7 +79,7 @@ export class Reminder {
 	}
 
 	public get url(): string {
-		return `${callbackDomain}/p/transactions/${this.trxId}`;
+		return `${urlOrigin}/p/transactions/${this.trxId}`;
 	}
 
 	get body(): string {
