@@ -5,7 +5,8 @@ import { config } from 'dotenv';
 config();
 
 const getRedirectUri = (): string => {
-	if (process.env.AUTH0_REDIRECT_URI) {
+	const fromEnv = process.env.AUTH0_REDIRECT_URI;
+	if (fromEnv && fromEnv.includes('stage')) {
 		return process.env.AUTH0_REDIRECT_URI;
 	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}/api/auth/callback`;
