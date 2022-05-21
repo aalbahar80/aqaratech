@@ -24,7 +24,7 @@ export const developmentEnvironment: EnvironmentConfig = {
 	authConfig: {
 		AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
 		AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
-		AUTH0_DOMAIN: 'https://auth.letand.be',
+		AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_n6YdReDFqv4IG60y',
 		AUTH0_ROLE_ID_TENANT: 'rol_7C04rw2vmXs2pOTx',

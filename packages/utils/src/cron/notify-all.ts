@@ -13,7 +13,7 @@ const { client_id, client_secret, audience, authOrigin, server } = prod
 			client_secret:
 				"dbbsv2QSRrPtQaRENuDn4SXwWtWBwkB614aRMOsodlSAiY5edqw43KOGclwuksnh",
 			audience: "letand.be/api",
-			authOrigin: "https://auth.letand.be",
+			authOrigin: "https://dev-eehvhdp2.eu.auth0.com",
 			server: process.env.SERVER_ORIGIN || "http://localhost:3000",
 	  };
 
