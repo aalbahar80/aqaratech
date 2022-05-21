@@ -5,7 +5,7 @@ import {
 	testClientId,
 	testTenantEmail,
 	testTenantId,
-} from '../../seed/src/generators';
+} from '@self/seed';
 import prisma from './prismaClient';
 
 export async function cleanupDatabase() {

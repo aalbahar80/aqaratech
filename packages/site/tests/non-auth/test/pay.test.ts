@@ -1,5 +1,5 @@
 import { expect, type Page } from '@playwright/test';
-import { testTenantId } from '../../../../seed/src/generators.js';
+import { testTenantId } from '@self/seed';
 import { test as base } from '../../config.js';
 import { setupLease, setupTrx } from '../setup.js';
 
