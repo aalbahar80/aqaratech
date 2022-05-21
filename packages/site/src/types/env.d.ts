@@ -35,7 +35,7 @@ declare global {
 			 * Returns a preview branch's dedicated domain if it exists `https://stage.letand.be`,
 			 * otherwise return the deployment domain  `https://my-site-7q03y4pi5.vercel.app`.
 			 */
-			readonly URL_ORIGIN: string;
+			readonly URL_ORIGIN: string | undefined;
 
 			/**
 			 * An indicator that the app is deployed and running on Vercel. Example: `1`.

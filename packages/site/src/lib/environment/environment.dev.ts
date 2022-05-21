@@ -6,7 +6,7 @@ config();
 
 const getOrigin = (localhostAllowed = true): string => {
 	const origin = process.env.URL_ORIGIN;
-	if (origin && origin.includes('stage')) {
+	if (origin?.includes('stage')) {
 		return origin;
 	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}`;
