@@ -79,7 +79,7 @@ export const leases = createRouter()
 					deposit: true,
 					start: true,
 					end: true,
-					active: true,
+					deactivated: true,
 					notify: true,
 					createdAt: true,
 					updatedAt: true,

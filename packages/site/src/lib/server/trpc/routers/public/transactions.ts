@@ -22,7 +22,7 @@ export const transactions = router().query('read', {
 				paidAt: true,
 				lease: {
 					select: {
-						active: true,
+						deactivated: true,
 						unit: {
 							select: {
 								type: true,

@@ -316,13 +316,13 @@
 										</SwitchDescription>
 									</span>
 									<Switch
-										checked={!!getValue($data2, 'active')}
+										checked={!!getValue($data2, 'deactivated')}
 										let:checked
 										on:change={(e) => {
-											setFields('active', e.detail, true);
+											setFields('deactivated', !e.detail, true);
 										}}
 										class={classes(
-											$data2.active ? 'bg-indigo-600' : 'bg-gray-200',
+											!$data2.deactivated ? 'bg-indigo-600' : 'bg-gray-200',
 											'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
 										)}
 									>

@@ -9,7 +9,7 @@ const baseSchema = z.object({
 	tenantId: z.string().uuid(),
 	unitId: z.string().uuid(),
 	notify: z.boolean(),
-	active: z.boolean(),
+	deactivated: z.boolean(),
 });
 
 export const schema = baseSchema

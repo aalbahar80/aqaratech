@@ -33,7 +33,7 @@ export class Lease extends Entity {
 		'start',
 		'end',
 		'notify',
-		'active',
+		'deactivated',
 	] as const;
 
 	constructor(
@@ -58,7 +58,7 @@ export class Lease extends Entity {
 		tenantId: '',
 		unitId: '',
 		notify: true,
-		active: true,
+		deactivated: false,
 		schedule: Lease.generateSchedule({
 			count: 12,
 			amount: 0,

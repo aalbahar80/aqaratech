@@ -59,7 +59,7 @@
 			type = 'number';
 			break;
 		case 'isPaid':
-		case 'active':
+		case 'deactivated':
 		case 'notify':
 			type = 'checkbox';
 			break;
@@ -107,8 +107,8 @@
 					class="text-sm font-medium text-gray-700"
 					passive
 				>
-					{name === 'active'
-						? 'Active'
+					{name === 'deactivated'
+						? 'Deactivated'
 						: name === 'notify'
 						? 'Auto payment reminders'
 						: name === 'isPaid'
@@ -116,8 +116,8 @@
 						: ''}
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
-					{name === 'active'
-						? 'TRUE: The lease is active. Rent payments are enabled. FALSE: Rent cannot be paid. Rent reminders will not be sent. Useful for preparing draft leases.'
+					{name === 'deactivated'
+						? 'TRUE: Useful for preparing draft leases. Note that payments cannot be paid until lease is activated. FALSE: The lease is active. Rent payments are enabled.'
 						: name === 'notify'
 						? 'Enable to send payment reminders automatically.'
 						: name === 'isPaid'
