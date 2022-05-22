@@ -17,14 +17,6 @@ interface ReminderData {
 	date: Date;
 }
 
-interface EmailModel {
-	email: string;
-	name: string;
-	amount: string;
-	date: string;
-	trxUrl: string;
-}
-
 export class Reminder {
 	constructor(public trxId: string, public data?: ReminderData) {}
 
