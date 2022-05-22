@@ -26,7 +26,7 @@ jobs:
       - name: Install all
         run: pnpm install -r --no-frozen-lockfile
       - name: Install & build dependencies
-        run: pnpm --filter "@self/site" run package && pnpm --filter "@self/seed" run dev
+        run: pnpm --filter "@self/site" run package && pnpm --filter "@self/seed" run package
       - name: Install @self/test dependencies
         run: pnpm --filter "@self/site-test" install --no-frozen-lockfile
       - name: Install Playwright
