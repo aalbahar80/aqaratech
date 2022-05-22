@@ -24,11 +24,6 @@ declare global {
 			readonly TWILIO_AUTH_TOKEN: string;
 
 			/**
-			 * GSuite Account for sending emails
-			 */
-			readonly GSUITE_PASSWORD: string;
-
-			/**
 			 * The current url origin where the site is hosted.
 			 * Used for callbacks (Twilio, myFatoorah).
 			 * Handles production, vercel previews, and local dev.
@@ -57,6 +52,8 @@ declare global {
 			 * The git branch of the commit the deployment was triggered by. Example: `improve-about-page`.
 			 */
 			readonly VERCEL_GIT_COMMIT_REF: string;
+
+			readonly POSTMARK_TOKEN: string;
 		}
 	}
 

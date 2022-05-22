@@ -60,9 +60,7 @@ export const productionEnvironment: EnvironmentConfig = {
 		TWILIO_MESSAGING_SERVICE_SID: 'MG3f2cf0ea4f8d7c554cad650ef646da65',
 	},
 	mailConfig: {
-		USER: 'services@aqaratech.com',
-		PASS: process.env.GSUITE_PASSWORD,
-		HOST: 'smtp.gmail.com',
+		POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
 	},
 	debug: false,
 };

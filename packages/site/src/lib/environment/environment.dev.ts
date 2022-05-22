@@ -74,9 +74,7 @@ export const developmentEnvironment: EnvironmentConfig = {
 		TWILIO_MESSAGING_SERVICE_SID: 'MG3f2cf0ea4f8d7c554cad650ef646da65',
 	},
 	mailConfig: {
-		USER: 'oleta.kreiger23@ethereal.email',
-		PASS: 'aNH61bz9J8342y1jr3',
-		HOST: 'smtp.ethereal.email',
+		POSTMARK_TOKEN: 'aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca',
 	},
 	debug: true,
 };
