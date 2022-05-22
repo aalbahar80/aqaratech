@@ -3,6 +3,6 @@ import { developmentEnvironment } from './environment.dev';
 import { productionEnvironment } from './environment.prod';
 
 export const environment: EnvironmentConfig =
-	process.env.VERCEL_ENV !== 'production'
-		? developmentEnvironment
-		: productionEnvironment;
+	process.env.VERCEL_ENV === 'production'
+		? productionEnvironment
+		: developmentEnvironment;
