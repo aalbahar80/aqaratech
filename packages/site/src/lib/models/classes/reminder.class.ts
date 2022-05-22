@@ -1,18 +1,26 @@
 import { environment } from '$lib/environment';
 import prismaClient from '$lib/server/prismaClient';
-import { createTransport, getTestMessageUrl } from 'nodemailer';
+import { kwdFormat } from '$lib/utils/common';
+import { format } from 'date-fns';
 
 const {
 	urlOrigin,
-	mailConfig: { HOST, PASS, USER },
 	twilioConfig: { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER },
 } = environment;
+
+interface EmailModel {
+	trxUrl: string;
+	name: string;
+	amount: string;
+	date: string;
+}
 
 export class Reminder {
 	constructor(
 		public trxId: string,
 		public phone?: string | null,
 		public email?: string | null,
+		public emailModel?: EmailModel | null,
 	) {}
 
 	async sendSms() {
@@ -52,27 +60,32 @@ export class Reminder {
 			await this.getContactInfo();
 		}
 		if (this.email) {
-			const mailConfig = {
-				host: HOST,
-				port: 587,
-				auth: {
-					user: USER,
-					pass: PASS,
+			// handle res.ok/notok
+			const res = await fetch(
+				'https://api.postmarkapp.com/email/withTemplate',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						'X-Postmark-Server-Token': 'cd6245ee-08c5-44ff-bfe0-5e4c4361ab70',
+					},
+					body: JSON.stringify({
+						From: 'Aqaratech <notifications@aqaratech.com>',
+						// To: this.email,
+						To: 'dev@aqaratech.com',
+						TemplateAlias: 'invoice',
+						TemplateModel: this.getEmailModel(),
+					}),
 				},
-			};
-
-			const transporter = createTransport(mailConfig);
-			const mailOptions = {
-				from: 'Aqaratech <support@aqaratech.com>',
-				to: this.email,
-				subject: 'Node test',
-				text: this.body,
-			};
-
-			const info = await transporter.sendMail(mailOptions);
-			console.log('Preview URL: ' + getTestMessageUrl(info));
-			console.log(info);
-			return info;
+			);
+			const data = await res.json();
+			console.log(data);
+			if (data.Message === 'OK') {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			throw new Error('No email');
 		}
@@ -84,6 +97,25 @@ export class Reminder {
 
 	get body(): string {
 		return `Please use this link to pay your monthly rent: \n ${this.url}`;
+	}
+
+	getEmailModel() {
+		if (!this.emailModel) {
+			const trx = {
+				id: 'a1145396-0e06-4e26-8891-e0ee0ec97902',
+				amount: 2826,
+				postAt: new Date(),
+				// address: '' // TODO: add
+			};
+			const body = {
+				name: 'John Doe',
+				amount: kwdFormat(trx.amount),
+				date: format(trx.postAt, 'MMM yyyy'),
+				trxUrl: this.url,
+			};
+			this.emailModel = body;
+		}
+		return this.emailModel;
 	}
 
 	private async getContactInfo() {
