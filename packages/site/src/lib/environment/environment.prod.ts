@@ -1,12 +1,11 @@
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
-import { EnvironmentType } from '$models/interfaces/environment.interface';
 import { config } from 'dotenv';
 
 config();
 
 // TODO: populate constants such as domain, callbackDomain, etc.
 export const productionEnvironment: EnvironmentConfig = {
-	type: EnvironmentType.PRODUCTION,
+	type: 'PRODUCTION',
 	envName: 'prod',
 	urlOrigin: 'https://aqaratech.com',
 	authConfig: {

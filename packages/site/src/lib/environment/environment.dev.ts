@@ -1,5 +1,4 @@
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
-import { EnvironmentType } from '$models/interfaces/environment.interface';
 import { config } from 'dotenv';
 
 config();
@@ -18,7 +17,7 @@ const getOrigin = (localhostAllowed = true): string => {
 };
 
 export const developmentEnvironment: EnvironmentConfig = {
-	type: EnvironmentType.DEVELOPMENT,
+	type: 'DEVELOPMENT',
 	envName: 'dev',
 	urlOrigin: getOrigin(),
 	authConfig: {
