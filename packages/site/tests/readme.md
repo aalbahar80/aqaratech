@@ -34,3 +34,12 @@ TODO: make it so that:
 
 1. global-setup is exucted once for all test directories. no need to clean up db twice.
 2. combine html reports
+
+# TODO:
+
+merge tests back into site dir, use $lib for imports
+-- unresolved: will bloat final svelte bundle? Check by diffing the output of sveltekit build
+working file: https://github.com/aqaratech/aqtech/actions/runs/2364807382/workflow
+svelte.config.js -> keep exclude environment?
+install @self/seed using link: `pnpm add -D @self/seed`
+revert to using action versions same as here https://pnpm.io/continuous-integration#github-actions
