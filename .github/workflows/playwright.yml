@@ -7,22 +7,8 @@ on:
     branches: [stage, prod]
 
 env:
-  DATABASE_URL: "mysql://862k5346c5q6:pscale_pw_aETUs5s9KQhjsjkoxuamsqyn-c2VmpqVGPSBvVJxTS0@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
   REUSE_PRISMA: 1
-
-  DOMAIN: "https://dev.letand.be"
-  CALLBACK_DOMAIN: "https://dev.letand.be"
-  AUTH0_DOMAIN: "https://dev-eehvhdp2.eu.auth0.com"
-  AUTH0_CLIENT_ID: "z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct"
-  AUTH0_CLIENT_SECRET: "uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf"
-  AUTH0_API_AUDIENCE: "letand.be/api"
-  AUTH0_API_NAMESPACE: "letand.be"
-  MYFATOORAH_BASE_URL: "https://apitest.myfatoorah.com"
-  MYFATOORAH_TOKEN: "HKcuHSpmaDG3SDluux5XDOm6aucEO3KKddJcDNZ71CRYgTNRhKRJXV4LezbvXV2mw3gJ3uH5fZr0Hpi-55p1Yo9Bpr7aX3OsGuNGllBdpCUfli2wXfPnlbwtfKVY1UnOUsqeoFUUjD7SbsOZY5Rz_OgL26dd-bLDX4ToB08XuudcxKzNqCKncqP-4maqQlOdGUm1krElqwzReJK5U4OX1PFy7xNAABRIztQ0OHSiuge4l2m-WwvLZ_47BBK2P_uXAY1UI0g5OB3_Pyy9soZ4v9lAPM2Mb1rVBRZ0LbkS0LQquIJjRaOZzPymzsdcGJfpOgg3VrmpbUUma6I0tCSeorlLveuYPW0sYszzrTVuDDYQ_DvMe1jtQZFDHsH_cPP4YGIBJEC0F92gj7yU3T3p47hKAmrqiWC63fKvRsOVNZHrceCa6RlCNLyBR6qszh5YIKWo8yC2EqbNkb4bFstQ4NL7oFUnIC2nqCQ4Awfts5u85ygBaN1uLtxDKxUAgN3ZyteyGaYndjSl2AFBtae4mrPz7Q_dMHp8rY4AA0KLOG9fqpDzdcGEeYlE-dMQtpStvhHwty9Pob5-eTk4xXIBUGHedVI5eSdpyuj_xT3tgasHaJhQi5J9NTDphCiBCTa2YZYiMzXVx78NiuDuP-ytp9Y42nbqF4X3BJ2j1BkmoAql7sTR3P-VPJ8CL9PD2_9SAUtgIw"
-  MYFATOORAH_EMAIL: "dev.tester.4@mailthink.net"
-  TWILIO_ACCOUNT_SID: "ACbffc494534d2b9823213e4538d71c98d"
-  TWILIO_AUTH_TOKEN: "a94743f7f5baf621a2f2535f05c03970"
-  TWILIO_FROM_NUMBER: "+15005550006	"
+  DATABASE_URL: "mysql://862k5346c5q6:pscale_pw_aETUs5s9KQhjsjkoxuamsqyn-c2VmpqVGPSBvVJxTS0@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
 
 jobs:
   test:
