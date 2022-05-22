@@ -16,7 +16,7 @@
   "devDependencies": {
     "@playwright/test": "1.21.1",
     "@prisma/client": "3.14.0",
-    "@self/seed": "workspace:0.0.1",
+    "@self/seed": "workspace:^0.0.1",
     "@self/site": "link:../package",
     "cross-env": "7.0.3",
     "dotenv": "16.0.1",
