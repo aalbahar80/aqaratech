@@ -22,9 +22,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-          # cache: "pnpm"
+          # cache: "pnpm" // TODO: add back
+      - name: Install all
+        run: pnpm install -r
       - name: Install & build dependencies
-        run: pnpm --filter "@self/site-test^..." install && pnpm --filter "@self/site-test^..." run package
+        run: pnpm --filter "@self/site" run package && pnpm --filter "@self/seed" run dev
       - name: Install @self/test dependencies
         run: pnpm --filter "@self/site-test" install
       - name: Install Playwright
