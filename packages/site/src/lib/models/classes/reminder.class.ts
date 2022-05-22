@@ -40,7 +40,7 @@ export class Reminder {
 						).toString('base64')}`,
 					},
 					body: new URLSearchParams({
-						Body: this.url,
+						Body: this.trxUrl,
 						// MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
 						From: TWILIO_FROM_NUMBER,
 						To: this.phone,
@@ -91,12 +91,12 @@ export class Reminder {
 		}
 	}
 
-	public get url(): string {
+	public get trxUrl(): string {
 		return `${urlOrigin}/p/transactions/${this.trxId}`;
 	}
 
 	get body(): string {
-		return `Please use this link to pay your monthly rent: \n ${this.url}`;
+		return `Please use this link to pay your monthly rent: \n ${this.trxUrl}`;
 	}
 
 	getEmailModel() {
@@ -111,7 +111,7 @@ export class Reminder {
 				name: 'John Doe',
 				amount: kwdFormat(trx.amount),
 				date: format(trx.postAt, 'MMM yyyy'),
-				trxUrl: this.url,
+				trxUrl: this.trxUrl,
 			};
 			this.emailModel = body;
 		}
