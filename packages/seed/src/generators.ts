@@ -27,7 +27,7 @@ const unitTypeValues = unitTypeOptions
 
 export const fakeEmail = () => {
 	faker.setLocale("en");
-	const email = faker.internet.email(undefined, undefined, "example99.com");
+	const email = faker.internet.email(undefined, undefined, "aqaratech.com");
 	faker.setLocale("ar");
 	return email;
 };
