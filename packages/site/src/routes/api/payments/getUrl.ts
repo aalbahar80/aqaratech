@@ -17,10 +17,12 @@ export const get: RequestHandler = async ({ url }) => {
 	try {
 		const input = ID.safeParse(raw);
 		if (!input.success) {
+			console.error(input.error);
 			return {
 				status: 400,
 				body: {
-					errorMsg: JSON.parse(input.error.toString()),
+					error: JSON.parse(input.error.toString()),
+					errorMsg: 'Invalid transaction id',
 				},
 			};
 		}
