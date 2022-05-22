@@ -6,7 +6,7 @@
     "lint": "tsc --noEmit --project tsconfig.json",
     "test:setup": "node ./db-setup.cjs",
     "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
-    "test:dev": "cross-env DEV=true pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
+    "test:dev": "pnpm run test:setup && cross-env PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test",
     "prisma:gen": "prisma generate --schema=../prisma/schema.prisma",
     "postinstall": "pnpm run prisma:gen"
   },
