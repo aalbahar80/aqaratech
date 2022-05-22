@@ -1,6 +1,7 @@
 import { environment } from '$lib/environment';
 import prismaClient from '$lib/server/prismaClient';
 import { kwdFormat } from '$lib/utils/common';
+import { sendEmail } from '$lib/utils/sendEmail';
 import { format } from 'date-fns';
 
 const {
@@ -110,44 +111,21 @@ export class Reminder {
 		};
 	}
 
-	async sendEmail() {
-		// TODO: handle res.ok/notok
+	async sendByEmail() {
 		const info = await this.getContactInfo();
-		const res = await fetch('https://api.postmarkapp.com/email/withTemplate', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				'X-Postmark-Server-Token': 'cd6245ee-08c5-44ff-bfe0-5e4c4361ab70',
-			},
-			body: JSON.stringify({
-				From: 'Aqaratech <notifications@aqaratech.com>',
-				To: info.email,
-				// To: 'dev@aqaratech.com',
-				TemplateAlias: 'invoice',
-				TemplateModel: {
-					email: info.email,
-					phone: info.phone,
-					amount: kwdFormat(info.amount),
-					date: format(info.date, 'MMM yyyy'),
-					name: info.name,
-					trxUrl: this.trxUrl,
-				} as EmailModel,
-			}),
-		});
-		const data = await res.json();
-		console.log(data);
-		if (data.Message === 'OK') {
+		if (!info.email) {
 			return {
-				success: true,
-				data,
-			};
-		} else {
-			return {
-				success: false, // true here refers to fetch not throwing, still need to handle status >= 400
-				data,
-				errorMsg: 'Failed to send email',
+				success: false,
+				errorMsg: 'No email found',
 			};
 		}
+		const model = {
+			email: info.email,
+			amount: kwdFormat(info.amount),
+			date: format(info.date, 'MMM yyyy'),
+			name: info.name,
+			trxUrl: this.trxUrl,
+		};
+		return await sendEmail(model);
 	}
 }

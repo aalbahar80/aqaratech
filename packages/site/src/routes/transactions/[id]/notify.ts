@@ -17,7 +17,7 @@ export const post: RequestHandler = async ({ params, request }) => {
 
 		let result: any;
 		if (mode === 'email') {
-			result = await reminder.sendEmail();
+			result = await reminder.sendByEmail();
 		} else if (mode === 'sms') {
 			result = await reminder.sendSms();
 		}

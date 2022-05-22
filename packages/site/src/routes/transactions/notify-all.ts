@@ -45,7 +45,7 @@ export const post: RequestHandler = async ({ request }) => {
 		console.log({ reminders }, 'notify-all.ts ~ 32');
 
 		const promises = reminders.map((r) =>
-			mode === 'sms' ? r.sendSms() : r.sendEmail(),
+			mode === 'sms' ? r.sendSms() : r.sendByEmail(),
 		);
 		const results = await Promise.all(promises);
 		console.log({ results }, 'notify-all.ts ~ 41');
