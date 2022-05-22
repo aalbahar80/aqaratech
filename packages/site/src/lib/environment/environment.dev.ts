@@ -23,7 +23,8 @@ export const developmentEnvironment: EnvironmentConfig = {
 	urlOrigin: getOrigin(),
 	authConfig: {
 		AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-		AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
+		AUTH0_CLIENT_SECRET:
+			'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 		AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_n6YdReDFqv4IG60y',
