@@ -17,6 +17,10 @@
             "dependsOn": [
                 "package",
                 "build"
+            ],
+            "outputs": [
+                "playwright-report",
+                "test-results"
             ]
         },
         "lint": {
