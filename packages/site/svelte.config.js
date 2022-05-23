@@ -32,13 +32,13 @@ const config = {
 			resolve: {
 				alias: {
 					$components: resolve('./src/lib/components'),
-					$lib: resolve('./src/lib'),
+					$lib: resolve('.', './src/lib'),
 					$models: resolve('./src/lib/models'),
 					$utils: resolve('.', './src/lib/utils'),
 					$routers: resolve('.', './src/lib/server/trpc/routers'),
 					$environment: resolve('.', './src/lib/environment'),
 					$user: resolve('.', './src/user'),
-					'@self/site': resolve('./src/lib'),
+					// '@self/site': resolve('./src/lib'),
 				},
 			},
 			ssr: {
