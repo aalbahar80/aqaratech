@@ -17,13 +17,14 @@ export const schema = z.object({
 		.union([
 			z.null(),
 			z.literal(''),
-			z.string(),
-			// .refine((val) => val.trim().length === 8, {
-			// 	message: 'Phone number must be 8 digits',
-			// })
-			// .refine(digitsOnly, {
-			// 	message: 'Phone must contain only numbers',
-			// }),
+			z
+				.string()
+				.refine((val) => val.trim().length === 8, {
+					message: 'Phone number must be 8 digits',
+				})
+				.refine(digitsOnly, {
+					message: 'Phone must contain only numbers',
+				}),
 		])
 		.transform(trim)
 		.transform(falsyToNull),

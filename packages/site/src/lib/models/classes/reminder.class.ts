@@ -90,7 +90,7 @@ export class Reminder {
 					Body: smsBody,
 					// MessagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
 					From: TWILIO_FROM_NUMBER,
-					To: info.phone,
+					To: `+965${info.phone}`,
 				}),
 			},
 		);
