@@ -1,18 +1,10 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
-import { test as base } from '@playwright/test';
 import { config as dotenvConfig } from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import type { formClasses } from './tests/admin/form.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenvConfig({
 	// TODO: handle CI (gh actions)
-	path: process.env.DOCKER
-		? path.resolve(__dirname, '../../.env.test')
-		: path.resolve(__dirname, './.env'),
+	path: process.env.DOCKER ? '../../.env.test' : './.env',
 });
 // console.log(process.env);
 
@@ -36,8 +28,9 @@ export const config: Config = {
 	forbidOnly: !!process.env.CI,
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
-	globalSetup: path.resolve(__dirname, './tests/global-setup.ts'),
+	globalSetup: './tests/global-setup.ts',
 	reporter: process.env.CI ? [['list'], ['html']] : [['list'], ['html']],
+	testDir: './tests',
 	use: {
 		baseURL: 'http://localhost:3000/',
 		screenshot: 'only-on-failure',
@@ -61,11 +54,8 @@ export const config: Config = {
 		reuseExistingServer: !!process.env.DEV,
 		port: 3000,
 		command: process.env.DEV
-			? `cd ${path.resolve(__dirname, '..')} && pnpm run dev`
-			: `cd ${path.resolve(
-					__dirname,
-					'..',
-			  )} && pnpm run build && pnpm run preview`,
+			? `pnpm run dev`
+			: `pnpm run build && pnpm run preview`,
 	},
 	projects: [
 		// {
@@ -119,25 +109,5 @@ export const config: Config = {
 		},
 	],
 };
-
-export const test = base.extend({
-	page: async ({ page }, use) => {
-		page.addInitScript({
-			content: `
-				addEventListener('sveltekit:start', () => {
-					document.body.classList.add('started');
-				});
-			`,
-		});
-
-		const goto = page.goto;
-		page.goto = async function (url, opts) {
-			const res = await goto.call(page, url, opts);
-			await page.waitForSelector('body.started', { timeout: 5000 });
-			return res;
-		};
-		await use(page);
-	},
-});
 
 export default config;

@@ -1,9 +1,9 @@
-import { browser } from '$app/env';
 import type { AppRouter } from '$lib/server/trpc';
 import { createTRPCClient } from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
+const browser = typeof window != 'undefined';
 export const trpc = (loadFetch?: typeof fetch) => {
 	const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
 	return createTRPCClient<AppRouter>({
