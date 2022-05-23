@@ -1,6 +1,6 @@
 {
     "$schema": "https://turborepo.org/schema.json",
-    "baseBranch": "origin/main",
+    "baseBranch": "origin/dev",
     "pipeline": {
         "build": {
             "dependsOn": [
@@ -12,6 +12,9 @@
             ]
         },
         "package": {
+            "dependsOn": [
+                "build"
+            ],
             "outputs": [
                 "dist/**",
                 "package/**"
@@ -19,7 +22,7 @@
         },
         "test": {
             "dependsOn": [
-                "^package"
+                "package"
             ],
             "outputs": [
                 "dist/**",
