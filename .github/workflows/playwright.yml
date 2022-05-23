@@ -8,7 +8,7 @@ on:
 
 env:
   REUSE_PRISMA: 1
-  DATABASE_URL: "mysql://862k5346c5q6:pscale_pw_aETUs5s9KQhjsjkoxuamsqyn-c2VmpqVGPSBvVJxTS0@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
+  DATABASE_URL: "mysql://lp5w7h865rnm:pscale_pw_HuGMgxfTQ4X1-bW1BXm0xkYNnIBhjX5o4BjPP8G8cqE@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict"
 
 jobs:
   test:
