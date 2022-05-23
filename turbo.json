@@ -11,6 +11,12 @@
                 "dist/**"
             ]
         },
+        "package": {
+            "outputs": [
+                "dist/**",
+                "package/**"
+            ]
+        },
         "test": {
             "dependsOn": [
                 "^package"
@@ -25,12 +31,6 @@
         },
         "dev": {
             "cache": false
-        },
-        "package": {
-            "outputs": [
-                "dist/**",
-                "package/**"
-            ]
         }
     }
 }
