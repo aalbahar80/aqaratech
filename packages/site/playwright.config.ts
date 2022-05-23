@@ -53,9 +53,7 @@ export const config: Config = {
 		// to make sure app and tests are using same db branch
 		reuseExistingServer: !!process.env.DEV,
 		port: 3000,
-		command: process.env.DEV
-			? `pnpm run dev`
-			: `pnpm run build && pnpm run preview`,
+		command: 'pnpm run preview',
 	},
 	projects: [
 		// {
