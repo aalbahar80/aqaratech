@@ -21,7 +21,7 @@ jobs:
           version: 7.1.0
       - uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "14.x"
           # cache: "pnpm" // TODO: add back
       - name: Install all
         run: pnpm install -r --no-frozen-lockfile
@@ -30,7 +30,7 @@ jobs:
       - name: Install @self/test dependencies
         run: pnpm --filter "@self/site-test" install --no-frozen-lockfile
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: npx playwright@1.21.1 install --with-deps
       - name: Run Playwright tests
         run: pnpm --filter "@self/site-test" test
       - uses: actions/upload-artifact@v2
