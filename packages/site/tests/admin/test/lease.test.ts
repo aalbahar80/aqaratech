@@ -5,7 +5,7 @@ import {
 	getAddress,
 	getName,
 	getUnitLabel,
-} from '../../../src/lib/utils/common.js';
+} from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import { LeaseForm } from '../form.js';
 
