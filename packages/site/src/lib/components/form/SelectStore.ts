@@ -24,10 +24,17 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 		subscribe,
 		fetchData: async (parentId?: string) => {
 			let result: InstanceType<EntityConstructor>[] = [];
+			let parentFilter = {};
+			if (
+				parentId &&
+				(cstor.urlName === 'units' || cstor.urlName === 'properties')
+			) {
+				parentFilter = cstor.getParentFilter(parentId);
+			}
 			try {
 				const data = await trpc().query(`${cstor.urlName}:list`, {
 					size: 1000,
-					...(parentId && { parentId }),
+					...parentFilter,
 				});
 				result = data.data.map((data) => new cstor(data));
 			} catch (e) {

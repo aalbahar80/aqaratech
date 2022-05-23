@@ -72,6 +72,10 @@ export class Property extends Entity {
 			return '';
 		}
 	};
+
+	static getParentFilter = (id: string) => ({
+		clientId: id,
+	});
 }
 
 interface ILabel {

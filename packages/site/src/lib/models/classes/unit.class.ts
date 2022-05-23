@@ -77,6 +77,10 @@ export class Unit extends Entity {
 	override getLabel = () => {
 		return this.data ? getUnitLabel(this.data) : '';
 	};
+
+	static getParentFilter = (id: string) => ({
+		propertyId: id,
+	});
 }
 
 interface ILabel {
