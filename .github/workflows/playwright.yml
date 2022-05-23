@@ -21,7 +21,7 @@ jobs:
           version: 7.1.0
       - uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          node-version: "16.x"
           # cache: "pnpm" // TODO: add back
       - name: Install all
         run: pnpm install -r --no-frozen-lockfile
