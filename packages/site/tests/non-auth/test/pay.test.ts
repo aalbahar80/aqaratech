@@ -73,7 +73,7 @@ test('indicate payment failure', async ({ page, trxId }) => {
 	await expect.soft(btn).toBeVisible();
 });
 
-test('display toast when /getUrl throws', async ({ page, trxId }) => {
+test('display toast when getUrl throws', async ({ page, trxId }) => {
 	await page.goto(`/p/transactions/${trxId}`);
 	await page.route(/\/api\/payments\/getUrl.*/, (route) =>
 		route.fulfill({ status: 404 }),
@@ -84,7 +84,7 @@ test('display toast when /getUrl throws', async ({ page, trxId }) => {
 		.soft(toasts)
 		.toContainText('An error occured while grabbing payment url');
 
-	const btn = page.locator('text=Pay');
+	const btn = page.locator('text=Pay', { hasText: /\bPay\b/ });
 	await expect(btn).toBeEnabled();
 });
 
