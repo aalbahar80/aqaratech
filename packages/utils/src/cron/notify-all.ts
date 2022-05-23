@@ -54,7 +54,18 @@ const notifyAll = async (token: string) => {
 	}
 };
 
-const token = await getToken();
-await notifyAll(token);
+// const token = await getToken();
+// await notifyAll(token);
+
+async function main() {
+	console.log({ prod, server });
+	const token = await getToken();
+	await notifyAll(token);
+}
+
+main().catch((e) => {
+	console.error(e);
+	process.exit(1);
+});
 
 export {};
