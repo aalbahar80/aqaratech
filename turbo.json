@@ -3,30 +3,20 @@
     "baseBranch": "origin/dev",
     "pipeline": {
         "build": {
-            "dependsOn": [
-                "^build"
-            ],
             "outputs": [
                 ".svelte-kit/**",
                 "dist/**"
             ]
         },
         "package": {
-            "dependsOn": [
-                "build"
-            ],
             "outputs": [
-                "dist/**",
                 "package/**"
             ]
         },
         "test": {
             "dependsOn": [
-                "package"
-            ],
-            "outputs": [
-                "dist/**",
-                "package/**"
+                "package",
+                "build"
             ]
         },
         "lint": {

@@ -10,7 +10,6 @@
     ],
     "scripts": {
         "build": "tsc --project tsconfig.build.json",
-        "package": "tsc --project tsconfig.build.json",
         "seed": "node dist/seed.js",
         "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma"
     },
