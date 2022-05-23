@@ -19,7 +19,7 @@
     "test:vitest": "vitest run",
     "test:setup": "node tests/db-setup.cjs",
     "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
-    "test:dev": "pnpm run test:setup && cross-env PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test"
+    "test:dev": "cross-env PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "1.1.2",
@@ -50,7 +50,6 @@
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.25.0",
     "@typescript-eslint/parser": "5.25.0",
-    "@vitest/ui": "0.12.7",
     "autoprefixer": "10.4.7",
     "chart.js": "3.7.1",
     "chartjs-adapter-date-fns": "2.0.0",
@@ -88,8 +87,6 @@
     "tslib": "2.4.0",
     "typescript": "4.6.4",
     "uuid": "8.3.2",
-    "vitest": "0.12.7",
-    "vitest-svelte-kit": "0.0.6",
     "zod": "3.16.1"
   },
   "type": "module"

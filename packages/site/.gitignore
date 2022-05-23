@@ -12,3 +12,6 @@ stats.html
 
 coverage/
 src/__tests__/__snapshots__
+test-results/
+playwright-report/
+# adminState.json
