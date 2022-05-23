@@ -117,7 +117,7 @@
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
 					{name === 'deactivated'
-						? 'TRUE: Useful for preparing draft leases. Note that payments cannot be paid until lease is activated. FALSE: The lease is active. Rent payments are enabled.'
+						? 'TRUE: Payments cannot be paid. FALSE: Rent payments are enabled.'
 						: name === 'notify'
 						? 'Enable to send payment reminders automatically.'
 						: name === 'isPaid'

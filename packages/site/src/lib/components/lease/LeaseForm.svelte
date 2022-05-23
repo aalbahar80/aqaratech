@@ -311,12 +311,12 @@
 											as="span"
 											class="w-3/4 text-sm text-gray-500"
 										>
-											Would you like to activate this lease now? Payment
-											reminders will only be sent if a lease is active.
+											Would you like to activate this lease now? Payments can
+											only be made once a lease is active.
 										</SwitchDescription>
 									</span>
 									<Switch
-										checked={!!getValue($data2, 'deactivated')}
+										checked={!getValue($data2, 'deactivated')}
 										let:checked
 										on:change={(e) => {
 											setFields('deactivated', !e.detail, true);
