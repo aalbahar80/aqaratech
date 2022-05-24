@@ -69,49 +69,49 @@ export const config: Config = {
 		// 	timeout: 60 * 1000,
 		// 	retries: 0, // until mocking
 		// },
-		// {
-		// 	name: 'login',
-		// 	testMatch: ['login.spec.ts'],
-		// },
-		// {
-		// 	name: 'general',
-		// 	testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
-		// },
+		{
+			name: 'login',
+			testMatch: ['login.spec.ts'],
+		},
+		{
+			name: 'general',
+			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
+		},
 		{
 			name: 'client',
 			use: { baseForm: 'clients' },
 			testMatch: commonForms,
 		},
-		// {
-		// 	name: 'tenant',
-		// 	use: { baseForm: 'tenants' },
-		// 	testMatch: commonForms,
-		// },
-		// {
-		// 	name: 'property',
-		// 	use: { baseForm: 'properties' },
-		// 	testMatch: commonForms,
-		// },
-		// {
-		// 	name: 'unit',
-		// 	use: { baseForm: 'units' },
-		// 	testMatch: commonForms,
-		// },
-		// {
-		// 	name: 'expense',
-		// 	use: { baseForm: 'expenses' },
-		// 	testMatch: [...commonForms, 'attribution.test.ts'],
-		// },
-		// {
-		// 	name: 'maintenanceOrder',
-		// 	use: { baseForm: 'maintenanceOrders' },
-		// 	testMatch: [...commonForms, 'attribution.test.ts'],
-		// },
-		// {
-		// 	name: 'lease',
-		// 	use: { baseForm: 'leases' },
-		// 	testMatch: commonForms,
-		// },
+		{
+			name: 'tenant',
+			use: { baseForm: 'tenants' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'property',
+			use: { baseForm: 'properties' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'unit',
+			use: { baseForm: 'units' },
+			testMatch: commonForms,
+		},
+		{
+			name: 'expense',
+			use: { baseForm: 'expenses' },
+			testMatch: [...commonForms, 'attribution.test.ts'],
+		},
+		{
+			name: 'maintenanceOrder',
+			use: { baseForm: 'maintenanceOrders' },
+			testMatch: [...commonForms, 'attribution.test.ts'],
+		},
+		{
+			name: 'lease',
+			use: { baseForm: 'leases' },
+			testMatch: commonForms,
+		},
 	],
 };
 
