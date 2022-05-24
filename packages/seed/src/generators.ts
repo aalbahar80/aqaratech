@@ -5,7 +5,7 @@ import {
 	coordinates,
 	expenseCats,
 	unitTypeOptions,
-} from "./constants.js";
+} from "../../site/src/lib/config/constants.js";
 
 faker.setLocale("ar");
 
