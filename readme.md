@@ -33,7 +33,7 @@ pnpm install
 ## Docker Test
 
 ```bash
-# using the Dockerfile
+# TODO: update to use turbo
 cd packages/site/tests
 ./run-docker-test.sh
 # result will be served on port 3001 to avoid conflict with any local playwright instances
