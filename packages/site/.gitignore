@@ -5,7 +5,7 @@ node_modules
 /.vercel_build_output
 /package
 .env
-.env.prod
+.env.test
 src/styles/tailwind-output.css
 cypress/videos
 stats.html
