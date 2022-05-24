@@ -9,6 +9,8 @@ dotenvConfig({
 	debug: true,
 });
 
+console.log({ TEST_DB: process.env.TEST_DB }, 'prismaClient.ts ~ 12');
+console.log({ DATABASE_URL: process.env.DATABASE_URL }, 'prismaClient.ts ~ 14');
 const { PrismaClient } = pkg;
 
 const prismaClient =
@@ -17,7 +19,6 @@ const prismaClient =
 	new PrismaClient({
 		// log: [{ level: 'query', emit: 'event' }, 'info', 'warn', 'error'],
 		// errorFormat: 'pretty',
-		datasources: { db: { url: db } },
 	});
 
 if (process.env.NODE_ENV === 'development') {

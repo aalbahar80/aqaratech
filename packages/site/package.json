@@ -19,6 +19,7 @@
     "test:vitest": "vitest run",
     "test:setup": "node tests/db-setup.cjs",
     "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
+    "report": "playwright show-report",
     "test:dev": "PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test"
   },
   "devDependencies": {
