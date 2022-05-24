@@ -3,14 +3,15 @@
     "type": "module",
     "version": "0.0.1",
     "source": "src/index.ts",
-    "main": "./dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/seed/src/index.js",
+    "types": "dist/seed/src/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
         "build": "tsc --project tsconfig.build.json",
         "seed": "pnpm run build && node dist/seed/src/seed.js",
+        "prep": "pnpm run build && node dist/seed/src/prep-db.js",
         "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma"
     },
     "devDependencies": {
