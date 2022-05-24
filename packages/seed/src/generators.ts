@@ -179,7 +179,7 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(10, 250, 0),
-	category: faker.helpers.arrayElement(expenseCats.map((e) => e.en)),
+	expenseCategoryId: faker.helpers.arrayElement(expenseCats.map((e) => e.en)),
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });

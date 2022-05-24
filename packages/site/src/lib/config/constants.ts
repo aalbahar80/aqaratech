@@ -340,22 +340,45 @@ export const getColor = (index: number, total: number) => {
 	const backgroundColor = palette[size]?.[index];
 	return backgroundColor;
 };
-type ExpenseGroup =
-	| 'utilities'
-	| 'amenities'
-	| 'legal'
-	| 'upkeep'
-	| 'caretaker'
-	| 'other'
-	| 'insurance'
-	| 'government'
-	| 'managementFees'
-	| 'hvac';
+
+export const ExpenseGroupIds = [
+	'utilities',
+	'amenities',
+	'legal',
+	'upkeep',
+	'caretaker',
+	'other',
+	'insurance',
+	'government',
+	'managementFees',
+	'hvac',
+] as const;
+
+interface ExpenseGroup {
+	id: ExpenseGroupId;
+	en: string;
+	ar: string;
+}
+
+export const ExpenseGroups: ExpenseGroup[] = [
+	{ id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
+	{ id: 'amenities', en: 'Amenities', ar: 'المرافق' },
+	{ id: 'legal', en: 'Legal', ar: 'القانونية' },
+	{ id: 'upkeep', en: 'Upkeep', ar: 'الصيانة' },
+	{ id: 'caretaker', en: 'Caretaker', ar: 'الحارس' },
+	{ id: 'other', en: 'Other', ar: 'أخرى' },
+	{ id: 'insurance', en: 'Insurance', ar: 'التأمين' },
+	{ id: 'government', en: 'Government', ar: 'الحكومية' },
+	{ id: 'managementFees', en: 'Management Fees', ar: 'الإدارية' },
+	{ id: 'hvac', en: 'HVAC', ar: 'التكييف' },
+];
+
+type ExpenseGroupId = typeof ExpenseGroupIds[number];
 
 interface ExpenseCategory {
 	en: string;
 	ar: string;
-	group: ExpenseGroup;
+	group: ExpenseGroupId;
 }
 
 export const expenseCats: ExpenseCategory[] = [

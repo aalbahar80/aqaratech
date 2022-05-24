@@ -33,11 +33,11 @@ model Expense {
   propertyId         String?
   clientId           String?
   maintenanceOrderId String?
+  expenseCategoryId  String?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   amount             Float
   postAt             DateTime
-  category           String?
   memo               String?           @db.Text
   client             Client?           @relation(fields: [clientId], references: [id])
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id])
@@ -48,6 +48,22 @@ model Expense {
   @@index([propertyId])
   @@index([clientId])
   @@index([maintenanceOrderId])
+  @@index([expenseCategoryId])
+}
+
+model ExpenseCategory {
+  id             String @unique
+  expenseGroupId String
+  en             String
+  ar             String
+
+  @@index([expenseGroupId])
+}
+
+model ExpenseGroup {
+  id String @unique
+  en String
+  ar String
 }
 
 model Lease {
