@@ -1,31 +1,36 @@
-# Test
-
-```bash
-pnpm test
-```
-
 # Site
 
-### Run
+## Dev
 
 ```bash
-pnpm install --filter=@self/site...
-pnpm run --filter=@self/site... build
-## TODO: replace `pnpm run v-postbuild-new`
+pnpm dev
 ```
 
-### Test
-
-#### Local
+## Build
 
 ```bash
-# It's important to reuse the Prisma instance when running tests to avoid connection pooling limits
-# To do that: Set REUSE_PRISMA=TRUE in site/.env
-cd packages/site/tests
+pnpm build
+```
+
+## Test
+
+```bash
 pnpm test
 ```
 
-#### Docker
+## Vercel
+
+root: packages/site
+
+```bash
+# build
+pnpm build && pnpm run postbuild:vercel
+
+# install
+pnpm install
+```
+
+## Docker Test
 
 ```bash
 # using the Dockerfile
@@ -39,14 +44,4 @@ cd packages/site/tests
 pnpm install --filter=@self/site-test...
 pnpm run --filter=@self/site-test... build
 pnpm test --filter=@self/site-test
-```
-
-### Vercel
-
-```bash
-## build
-pnpm run build:vercel
-
-## install
-pnpm install --filter=@self/site... --unsafe-perm
 ```
