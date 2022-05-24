@@ -16,7 +16,10 @@
     "postbuild:vercel": "find ../../node_modules/.pnpm/ -name \"*libquery_engine*\" -type f -exec cp {} .vercel_build_output/functions/node/render \\;;cp prisma/schema.prisma .vercel_build_output/functions/node/render/;ls .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
-    "test": "vitest run"
+    "test:vitest": "vitest run",
+    "test:setup": "node tests/db-setup.cjs",
+    "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test --quiet",
+    "test:dev": "cross-env PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "1.1.2",
@@ -24,8 +27,10 @@
     "@felte/validator-zod": "1.0.10",
     "@fortawesome/free-brands-svg-icons": "6.1.1",
     "@fortawesome/free-solid-svg-icons": "6.1.1",
+    "@playwright/test": "1.22.2",
     "@prisma/client": "3.14.0",
     "@rgossiaux/svelte-headlessui": "1.0.1",
+    "@self/seed": "workspace:^0.0.1",
     "@sentry/browser": "6.19.7",
     "@sentry/node": "6.19.7",
     "@sentry/tracing": "6.19.7",
@@ -45,11 +50,11 @@
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.25.0",
     "@typescript-eslint/parser": "5.25.0",
-    "@vitest/ui": "0.12.7",
     "autoprefixer": "10.4.7",
     "chart.js": "3.7.1",
     "chartjs-adapter-date-fns": "2.0.0",
     "cookie": "0.5.0",
+    "cross-env": "7.0.3",
     "date-fns": "2.28.0",
     "dotenv": "16.0.1",
     "eslint": "8.15.0",
@@ -82,8 +87,6 @@
     "tslib": "2.4.0",
     "typescript": "4.6.4",
     "uuid": "8.3.2",
-    "vitest": "0.12.7",
-    "vitest-svelte-kit": "0.0.6",
     "zod": "3.16.1"
   },
   "type": "module"

@@ -3,8 +3,8 @@
     "type": "module",
     "version": "0.0.1",
     "scripts": {
-        "dev": "tsc --project tsconfig.build.json && NODE_ENV=development node --experimental-fetch dist/notify-all.js",
         "build": "tsc --project tsconfig.build.json",
+        "start:dev": "tsc --project tsconfig.build.json && NODE_ENV=development node --experimental-fetch dist/notify-all.js",
         "start": "node --experimental-fetch dist/notify-all.js"
     },
     "devDependencies": {

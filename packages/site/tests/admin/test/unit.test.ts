@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { getAddress, getName } from '@self/site/utils/common';
+import { getAddress, getName } from '../../../package/utils/common.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { test as base } from '../../config.js';

@@ -2,9 +2,9 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [prod]
+    branches: [turbosinglesite, dev, stage, prod]
   pull_request:
-    branches: [prod]
+    branches: [dev, stage, prod]
 
 env:
   REUSE_PRISMA: 1

@@ -1,9 +1,13 @@
 import { expect } from '@playwright/test';
 import path from 'path';
-import { getAddress, getName, getUnitLabel } from '@self/site/utils/common';
+import { fileURLToPath } from 'url';
+import {
+	getAddress,
+	getName,
+	getUnitLabel,
+} from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import { LeaseForm } from '../form.js';
-import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

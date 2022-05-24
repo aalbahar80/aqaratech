@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [turbosinglesite, dev, stage, prod]
+  pull_request:
+    branches: [dev, stage, prod]
+
+env:
+  REUSE_PRISMA: 1
+  DATABASE_URL: "mysql://862k5346c5q6:pscale_pw_aETUs5s9KQhjsjkoxuamsqyn-c2VmpqVGPSBvVJxTS0@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ${{ matrix.os }}
+    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        # os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.32.2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install Playwright
+        run: npx playwright install
+
+      - name: Test
+        run: pnpm test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-report
+          path: packages/site/playwright-report

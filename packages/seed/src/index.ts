@@ -16,4 +16,4 @@ export {
 	testTenantId,
 	testTenantPassword,
 	timespan,
-} from "./generators";
+} from "./generators.js";

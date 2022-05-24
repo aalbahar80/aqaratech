@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import path from 'path';
-import { getAddress, getName } from '@self/site/utils/common';
+import { getAddress, getName } from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import { PropertyForm } from '../form.js';
 import { fileURLToPath } from 'url';

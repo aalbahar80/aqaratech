@@ -1,7 +1,11 @@
 import { expect } from '@playwright/test';
-import { getAddress, getName, getUnitLabel } from '@self/site/utils/common';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+	getAddress,
+	getName,
+	getUnitLabel,
+} from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import {
 	ExpenseForm,

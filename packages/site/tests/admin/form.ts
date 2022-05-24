@@ -16,15 +16,15 @@ import {
 	Property,
 	Tenant,
 	Unit,
-} from '@self/site';
-import type { EntityTitle } from '@self/site/models/types/entity.type';
+} from '../../package/index.js';
+import type { EntityTitle } from '../../package/models/types/entity.type';
 import {
 	dateToInput,
 	getAddress,
 	getName,
 	getUnitLabel,
 	kwdFormat,
-} from '@self/site/utils/common';
+} from '../../package/utils/common.js';
 import prisma from '../prismaClient.js';
 
 export type FormType =

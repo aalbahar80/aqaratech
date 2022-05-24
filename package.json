@@ -1,0 +1,13 @@
+{
+  "name": "aqtech",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^1.2.11"
+  }
+}
