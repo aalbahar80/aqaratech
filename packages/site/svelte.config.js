@@ -16,8 +16,6 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		vite: {
-			// load .env.test by running `TEST_DB=1 pnpm run dev`
-			mode: process.env.TEST_DB ? 'test' : undefined,
 			// delete .svelte-kit folder b4 testing
 			test: {
 				exclude: ['**/tests/**', 'node_modules'],

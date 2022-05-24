@@ -1,5 +1,17 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import type { formClasses } from './tests/admin/form.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+	path: path.resolve(__dirname, '.env.test'),
+	override: true,
+	debug: true,
+});
 
 const commonForms = [
 	'newForm.test.ts',
@@ -48,7 +60,7 @@ export const config: Config = {
 		// to make sure app and tests are using same db branch
 		reuseExistingServer: false,
 		port: 3000,
-		command: 'TEST_DB=1 pnpm run preview',
+		command: 'pnpm run preview',
 	},
 	projects: [
 		// {

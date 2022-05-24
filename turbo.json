@@ -32,6 +32,8 @@
     },
     "globalDependencies": [
         "**/.env",
-        "**/.env.*"
+        "**/.env.*",
+        ".env",
+        ".env.test"
     ]
 }
