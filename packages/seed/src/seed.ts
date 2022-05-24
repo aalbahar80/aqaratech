@@ -1,15 +1,8 @@
 import { faker } from "@faker-js/faker";
-import type { PrismaClient as PrismaClientType } from "@prisma/client";
-// TODO avoid ts-ignore below by fixing tsconfig.json
-// @ts-ignore
-import pkg from "@prisma/client";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
-import {
-	expenseCats,
-	ExpenseGroups,
-} from "../../site/src/lib/config/constants.js";
+import { cleanupDatabase } from "./clean-db.js";
 import {
 	fakeClient,
 	fakeExpense,
@@ -23,35 +16,12 @@ import {
 	testTenantId,
 	timespan,
 } from "./generators.js";
+import { insertExpenseCategories, insertExpenseGroups } from "./prep-db.js";
+import prisma from "./prisma.js";
 
 config({
 	path: "../site/.env",
 });
-
-const { PrismaClient } = pkg;
-const prisma = new PrismaClient({
-	// log: [{ level: "query", emit: "event" }, "info", "warn", "error"],
-	// errorFormat: "pretty",
-}) as PrismaClientType;
-
-// @ts-ignore
-// prisma.$on("query", (e) => {
-// 	console.log(e);
-// });
-
-const cleanupDatabase = async (): Promise<void> => {
-	await prisma.$transaction([
-		prisma.$executeRaw`DELETE FROM Expense`,
-		prisma.$executeRaw`DELETE FROM ExpenseCategory`,
-		prisma.$executeRaw`DELETE FROM ExpenseGroup`,
-		prisma.$executeRaw`DELETE FROM MaintenanceOrder`,
-		prisma.$executeRaw`DELETE FROM Lease`,
-		prisma.$executeRaw`DELETE FROM Unit`,
-		prisma.$executeRaw`DELETE FROM Property`,
-		prisma.$executeRaw`DELETE FROM Client`,
-		prisma.$executeRaw`DELETE FROM Tenant`,
-	]);
-};
 
 async function main({
 	sample = true,
@@ -322,25 +292,6 @@ async function main({
 	} catch (e) {
 		console.error(e);
 	}
-}
-
-async function insertExpenseGroups() {
-	const data = ExpenseGroups.map((group) => ({
-		id: group.id,
-		en: group.en,
-		ar: group.ar,
-	}));
-	await prisma.expenseGroup.createMany({ data });
-}
-
-async function insertExpenseCategories() {
-	const data = expenseCats.map((cat) => ({
-		id: cat.en,
-		en: cat.en,
-		ar: cat.ar,
-		expenseGroupId: cat.group,
-	}));
-	await prisma.expenseCategory.createMany({ data });
 }
 
 main({ sample: false, clean: true })
