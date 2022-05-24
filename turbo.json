@@ -29,5 +29,9 @@
         "dev": {
             "cache": false
         }
-    }
+    },
+    "globalDependencies": [
+        "**/.env",
+        "**/.env.*"
+    ]
 }
