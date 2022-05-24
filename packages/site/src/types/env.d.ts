@@ -5,6 +5,8 @@
 declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
+			readonly DATABASE_URL: string;
+
 			/**
 			 * Auth0 client secret provided by Auth0
 			 */

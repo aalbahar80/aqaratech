@@ -205,6 +205,7 @@ async function main({
 	console.log(`${propsWithUnit} properties with a unit`);
 	console.log(`${unitsWithLease} units with a lease`);
 
+	console.log("Seeding to database:", process.env.DATABASE_URL);
 	const summary = `Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
 	console.log(summary);
 

@@ -8,6 +8,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function cleanupDatabase() {
+	console.warn('deleting database:', process.env.DATABASE_URL);
 	console.time('cleanup');
 	await prisma.$transaction([
 		prisma.$executeRaw`DELETE FROM Expense`,

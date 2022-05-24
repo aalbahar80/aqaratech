@@ -53,7 +53,7 @@ export const config: Config = {
 	},
 	webServer: {
 		// to make sure app and tests are using same db branch
-		reuseExistingServer: !!process.env.DEV,
+		reuseExistingServer: false,
 		port: 3000,
 		command: 'pnpm run preview',
 	},
