@@ -17,9 +17,9 @@
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
     "test:vitest": "vitest run",
-    "test:setup": "TEST_DB=1 node tests/db-setup.cjs",
-    "test": "pnpm run test:setup && TEST_DB=1 PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
-    "test:dev": "cross-env TEST_DB=1 PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test"
+    "test:setup": "node tests/db-setup.cjs",
+    "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
+    "test:dev": "PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "1.1.2",

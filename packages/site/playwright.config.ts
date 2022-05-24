@@ -1,12 +1,5 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
-import { config as dotenvConfig } from 'dotenv';
 import type { formClasses } from './tests/admin/form.js';
-
-dotenvConfig({
-	// TODO: handle CI (gh actions)
-	path: process.env.DOCKER ? '../../.env.test' : './.env',
-});
-// console.log(process.env);
 
 const commonForms = [
 	'newForm.test.ts',
@@ -55,7 +48,7 @@ export const config: Config = {
 		// to make sure app and tests are using same db branch
 		reuseExistingServer: false,
 		port: 3000,
-		command: 'pnpm run preview',
+		command: 'TEST_DB=1 pnpm run preview',
 	},
 	projects: [
 		// {
@@ -64,49 +57,49 @@ export const config: Config = {
 		// 	timeout: 60 * 1000,
 		// 	retries: 0, // until mocking
 		// },
-		{
-			name: 'login',
-			testMatch: ['login.spec.ts'],
-		},
-		{
-			name: 'general',
-			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
-		},
+		// {
+		// 	name: 'login',
+		// 	testMatch: ['login.spec.ts'],
+		// },
+		// {
+		// 	name: 'general',
+		// 	testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
+		// },
 		{
 			name: 'client',
 			use: { baseForm: 'clients' },
 			testMatch: commonForms,
 		},
-		{
-			name: 'tenant',
-			use: { baseForm: 'tenants' },
-			testMatch: commonForms,
-		},
-		{
-			name: 'property',
-			use: { baseForm: 'properties' },
-			testMatch: commonForms,
-		},
-		{
-			name: 'unit',
-			use: { baseForm: 'units' },
-			testMatch: commonForms,
-		},
-		{
-			name: 'expense',
-			use: { baseForm: 'expenses' },
-			testMatch: [...commonForms, 'attribution.test.ts'],
-		},
-		{
-			name: 'maintenanceOrder',
-			use: { baseForm: 'maintenanceOrders' },
-			testMatch: [...commonForms, 'attribution.test.ts'],
-		},
-		{
-			name: 'lease',
-			use: { baseForm: 'leases' },
-			testMatch: commonForms,
-		},
+		// {
+		// 	name: 'tenant',
+		// 	use: { baseForm: 'tenants' },
+		// 	testMatch: commonForms,
+		// },
+		// {
+		// 	name: 'property',
+		// 	use: { baseForm: 'properties' },
+		// 	testMatch: commonForms,
+		// },
+		// {
+		// 	name: 'unit',
+		// 	use: { baseForm: 'units' },
+		// 	testMatch: commonForms,
+		// },
+		// {
+		// 	name: 'expense',
+		// 	use: { baseForm: 'expenses' },
+		// 	testMatch: [...commonForms, 'attribution.test.ts'],
+		// },
+		// {
+		// 	name: 'maintenanceOrder',
+		// 	use: { baseForm: 'maintenanceOrders' },
+		// 	testMatch: [...commonForms, 'attribution.test.ts'],
+		// },
+		// {
+		// 	name: 'lease',
+		// 	use: { baseForm: 'leases' },
+		// 	testMatch: commonForms,
+		// },
 	],
 };
 
