@@ -18,7 +18,7 @@
     "prisma:gen": "prisma generate",
     "test:vitest": "vitest run",
     "test:setup": "node tests/db-setup.cjs",
-    "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test --quiet",
+    "test": "pnpm run test:setup && TEST_DB=1 PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
     "test:dev": "cross-env PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 DEV=1 playwright test"
   },
   "devDependencies": {

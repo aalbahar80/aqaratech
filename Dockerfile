@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pnpm-lock.yaml ./
 RUN pnpm fetch 
 ENV DOCKER=true
-ENV REUSE_PRISMA=true
+ENV TEST_DB=1
 
 ADD . ./
 RUN pnpm install -r --offline

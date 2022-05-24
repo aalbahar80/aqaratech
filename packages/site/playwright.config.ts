@@ -29,7 +29,9 @@ export const config: Config = {
 	timeout: process.env.CI ? 30000 : 30000,
 	expect: { timeout: 10000 },
 	globalSetup: './tests/global-setup.ts',
-	reporter: process.env.CI ? [['list'], ['html']] : [['list'], ['html']],
+	reporter: process.env.CI
+		? [['list'], ['html']]
+		: [['list'], ['html', { open: 'never' }]],
 	testDir: './tests',
 	use: {
 		baseURL: 'http://localhost:3000/',

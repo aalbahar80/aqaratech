@@ -1,9 +1,10 @@
 //@ts-check
+const path = require('path');
 require('dotenv').config({
-	path: '../../.env.test',
+	path: path.join(__dirname, '../.env.test'),
 });
-
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 
 async function cleanupDatabase() {

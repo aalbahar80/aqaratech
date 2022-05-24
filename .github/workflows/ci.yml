@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [dev, stage, prod]
 
-env:
-  REUSE_PRISMA: 1
-  DATABASE_URL: "mysql://862k5346c5q6:pscale_pw_aETUs5s9KQhjsjkoxuamsqyn-c2VmpqVGPSBvVJxTS0@kz17sp33s8ut.ap-south-2.psdb.cloud/aqaratechdb?sslaccept=strict&pool_timeout=0"
-
 jobs:
   build:
     name: Build and Test

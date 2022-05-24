@@ -25,7 +25,7 @@ import {
 	getUnitLabel,
 	kwdFormat,
 } from '../../package/utils/common.js';
-import prisma from '../prismaClient.js';
+import prisma from '../../src/lib/server/prismaClient.js';
 
 export type FormType =
 	| ClientForm
