@@ -1,18 +1,32 @@
 <script lang="ts">
 	import Select from '$components/Select.svelte';
-	import { expenseCats } from '$lib/config/constants';
+	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
+	import * as R from 'remeda';
+	import { onMount } from 'svelte';
 
 	export let value: any;
 
+	let categories:
+		| InferQueryOutput<'public:expenses:meta'>['categories']
+		| undefined;
+
+	onMount(async () => {
+		const meta = await trpc().query('public:expenses:meta');
+		categories = meta.categories;
+	});
+
 	const baseOption = {
-		value: '',
-		label: '',
+		value,
+		label: value,
 	};
 
-	const categoryOptions = expenseCats.map((cat) => ({
-		label: `${cat.en} - ${cat.ar}`,
-		value: cat.en,
-	}));
+	$: categoryOptions =
+		categories !== undefined
+			? categories.map((cat) => ({
+					label: `${cat.en} - ${cat.ar}`,
+					value: cat.id,
+			  }))
+			: [];
 
 	$: options = [baseOption, ...categoryOptions];
 </script>
