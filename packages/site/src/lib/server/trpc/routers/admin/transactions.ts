@@ -18,6 +18,11 @@ export const transactions = createRouter()
 					lease: {
 						include: {
 							tenant: true,
+							unit: {
+								include: {
+									property: true,
+								},
+							},
 						},
 					},
 				},

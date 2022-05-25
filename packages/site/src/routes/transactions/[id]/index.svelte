@@ -8,6 +8,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { Property, Unit } from '$lib/models/classes';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
@@ -23,13 +24,12 @@
 	type Transaction = InferQueryOutput<'transactions:read'>;
 	export let trx: Transaction;
 
-	let details: [string, string | null][];
-	$: details = [
+	const details: [string, string | null][] = [
+		['Post Date', dateFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
-		['Posted', dateFormat(trx.postAt)],
-		['Due', trx.dueAt ? dateFormat(trx.dueAt) : '-'],
-		['Created', dateFormat(trx.createdAt)],
-		['Last updated', trx.updatedAt.toLocaleString()],
+		['Memo', trx.memo || '-'],
+		['Address', Property.getLabel(trx.lease.unit.property)],
+		['Unit', Unit.getLabel(trx.lease.unit)],
 	];
 
 	$: sendEnabled = !trx.isPaid;

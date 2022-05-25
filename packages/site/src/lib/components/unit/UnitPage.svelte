@@ -4,7 +4,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { kwdFormat } from '$lib/utils/common';
 	import { faBath } from '@fortawesome/free-solid-svg-icons/faBath';
 	import { faBed } from '@fortawesome/free-solid-svg-icons/faBed';
 	import { faElevator } from '@fortawesome/free-solid-svg-icons/faElevator';
@@ -21,8 +21,7 @@
 		['Unit Number', unit.unitNumber],
 		['Type', unit.type],
 		['Market Rent', kwdFormat(unit.marketRent)],
-		['Created on', dateFormat(unit.createdAt)],
-		['Last updated', unit.updatedAt.toLocaleString()],
+		['Usage', unit.usage || '-'],
 	];
 
 	const icons = [

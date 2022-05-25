@@ -7,7 +7,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
-	import { dateFormat, getName } from '$lib/utils/common';
+	import { getName } from '$lib/utils/common';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
 	import type { Load } from './__types/index';
 
@@ -27,8 +27,6 @@
 		['Name', getName(client)],
 		['Phone', client.phone],
 		['Email', client.email],
-		['Created on', dateFormat(client.createdAt)],
-		['Last updated', client.updatedAt.toLocaleString()],
 	];
 </script>
 

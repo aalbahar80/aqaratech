@@ -4,8 +4,8 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { Client, Expense, Property, Unit } from '$lib/models/classes';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { Expense } from '$lib/models/classes';
+	import { kwdFormat } from '$lib/utils/common';
 	import type { Load } from './__types/[id]';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -20,15 +20,13 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Post At', expense.postAt?.toLocaleString() ?? '-'],
+		['Post Date', expense.postAt?.toLocaleString() ?? '-'],
 		['Amount', kwdFormat(expense.amount)],
-		['Category', expense.expenseCategoryId],
+		['Category', expense.expenseCategoryId || '-'],
 		['Memo', expense.memo],
-		['Client', expense.client ? Client.getLabel(expense.client) : '-'],
-		['Property', expense.property ? Property.getLabel(expense.property) : '-'],
-		['Unit', expense.unit ? Unit.getLabel(expense.unit) : '-'],
-		['Created on', dateFormat(expense.createdAt)],
-		['Last updated', expense.updatedAt.toLocaleString()],
+		// ['Client', expense.client ? Client.getLabel(expense.client) : '-'],
+		// ['Property', expense.property ? Property.getLabel(expense.property) : '-'],
+		// ['Unit', expense.unit ? Unit.getLabel(expense.unit) : '-'],
 	];
 
 	const crumbs = [

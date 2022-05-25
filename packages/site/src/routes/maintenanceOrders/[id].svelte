@@ -41,8 +41,6 @@
 			maintenanceOrder.unit ? Unit.getLabel(maintenanceOrder.unit) : '-',
 		],
 		['Completed At', maintenanceOrder.completedAt?.toLocaleString() ?? '-'],
-		['Created on', dateFormat(maintenanceOrder.createdAt)],
-		['Last updated', maintenanceOrder.updatedAt.toLocaleString()],
 	];
 
 	const crumbs = [

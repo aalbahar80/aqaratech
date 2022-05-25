@@ -55,9 +55,9 @@
 	});
 
 	const details: [string, string | null][] = [
-		['Date', dateFormat(trx.postAt)],
+		['Post Date', dateFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
-		['Memo', trx.memo],
+		['Memo', trx.memo || '-'],
 		['Address', Property.getLabel(trx.lease.unit.property)],
 		['Unit', Unit.getLabel(trx.lease.unit)],
 	];

@@ -26,11 +26,7 @@
 	export let property: Property;
 
 	let details: [string, string | null][];
-	$: details = [
-		['Address', getAddress(property)],
-		['Created on', dateFormat(property.createdAt)],
-		['Last updated', property.updatedAt.toLocaleString()],
-	];
+	$: details = [['Address', getAddress(property)]];
 </script>
 
 <svelte:head>
