@@ -2,10 +2,10 @@
 	import { page } from '$app/stores';
 	import UnitCard from '$components/unit/UnitCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { faBath } from '@fortawesome/free-solid-svg-icons/faBath';
-	import { faBed } from '@fortawesome/free-solid-svg-icons/faBed';
-	import { faElevator } from '@fortawesome/free-solid-svg-icons/faElevator';
-	import { faMaximize } from '@fortawesome/free-solid-svg-icons/faMaximize';
+	import FaSolidBath from '~icons/fa-solid/bath';
+	import Fa6SolidBed from '~icons/fa6-solid/bed';
+	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
+	import GisMeasure from '~icons/gis/measure';
 
 	interface Unit {
 		id: string;
@@ -35,23 +35,23 @@
 		{@const icons = [
 			{
 				label: unit.bed,
-				icon: faBed,
+				icon: Fa6SolidBed,
 				tooltip: 'Bedrooms',
 			},
 			{
 				label: unit.bath,
-				icon: faBath,
+				icon: FaSolidBath,
 				tooltip: 'Bathrooms',
 			},
 			{
-				label: unit.floor,
-				icon: faElevator,
-				tooltip: 'Elevator',
+				label: `${unit.size?.toLocaleString()} m²`,
+				tooltip: 'Size',
+				icon: GisMeasure,
 			},
 			{
-				label: `${unit.size?.toLocaleString()} m²`,
-				icon: faMaximize,
-				tooltip: 'Size',
+				label: unit.floor,
+				icon: Fa6SolidElevator,
+				tooltip: 'Elevator',
 			},
 		]}
 		<li>

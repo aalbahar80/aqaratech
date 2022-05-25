@@ -3,7 +3,6 @@
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
-	import Fa from 'svelte-fa';
 
 	interface Unit {
 		id: string;
@@ -39,7 +38,10 @@
 				{#each icons as { label, icon, tooltip } (tooltip)}
 					{#if label}
 						<p class="flex items-center text-sm text-gray-500">
-							<Fa {icon} class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" />
+							<svelte:component
+								this={icon}
+								class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
+							/>
 							{label}
 						</p>
 					{/if}
