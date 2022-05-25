@@ -4,8 +4,7 @@ import { currencyTooltip } from './utils/currency';
 type ChartData = {
 	total: number;
 	date: Date;
-	category: string;
-	address: string;
+	group: string;
 };
 type DataSets = Chart<'bar', ChartData[]>['data']['datasets'];
 
