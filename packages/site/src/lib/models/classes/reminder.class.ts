@@ -104,11 +104,18 @@ export class Reminder {
 	}
 
 	async sendByEmail() {
+		// TODO: dry this up with sendSms
 		const info = await this.getContactInfo();
 		if (!info.email) {
 			return {
 				success: false,
 				errorMsg: 'No email found',
+			};
+		}
+		if (info.date > new Date()) {
+			return {
+				success: false,
+				errorMsg: 'Transaction post date is in the future.',
 			};
 		}
 		const model = {

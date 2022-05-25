@@ -15,11 +15,19 @@ export const post: RequestHandler = async ({ params, request }) => {
 
 		const reminder = new Reminder(params.id);
 
-		let result: any;
+		let result;
 		if (mode === 'email') {
 			result = await reminder.sendByEmail();
 		} else if (mode === 'sms') {
 			result = await reminder.sendSms();
+		}
+		if (!result?.success) {
+			return {
+				status: 400,
+				body: {
+					errorMsg: result?.errorMsg,
+				},
+			};
 		}
 		return {
 			status: 200,

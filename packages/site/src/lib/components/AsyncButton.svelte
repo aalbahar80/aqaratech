@@ -13,6 +13,7 @@
 			const res = await func();
 			// check if function is a promise that resolves to a response
 			if (res instanceof Response) {
+				const data = await res.json();
 				// dispatch success event
 				if (res.ok) {
 					addToast({
@@ -20,6 +21,15 @@
 						props: {
 							kind: 'success',
 							title: 'Success',
+						},
+					});
+				} else if ('errorMsg' in data) {
+					addToast({
+						duration: 30000,
+						props: {
+							kind: 'error',
+							title: 'Error',
+							subtitle: data.errorMsg,
 						},
 					});
 				} else {
