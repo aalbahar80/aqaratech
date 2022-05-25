@@ -10,9 +10,10 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [preprocess({ postcss: true })],
 
-	// experimental: {
-	// 	prebundleSvelteLibraries: true,
-	// },
+	experimental: {
+		// 	prebundleSvelteLibraries: true,
+		inspector: true,
+	},
 	kit: {
 		adapter: adapter(),
 		vite: {
