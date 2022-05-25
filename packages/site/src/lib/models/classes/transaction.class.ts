@@ -12,7 +12,7 @@ export class Transaction extends Entity {
 	static plural = 'transactions';
 	static pluralCap = 'Transactions';
 	static schema = baseSchema;
-	static relationalFields = ['tenantId', 'leaseId'] as const;
+	static relationalFields = ['leaseId'] as const;
 	static basicFields = [
 		'amount',
 		'dueAt',
