@@ -1,5 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 /// <reference types="vite/client" />
+/// <reference types="unplugin-icons/types/svelte" />
 
 interface Auth0Profile {
 	sub: string | undefined;

@@ -9,10 +9,10 @@
 	import type { Props } from '$lib/models/types/Props.type';
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
-	import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons/faCalendarXmark';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { LoadInput } from '@sveltejs/kit';
 	import { formatDistance } from 'date-fns';
+	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 
 	export const load = async ({
 		params,
@@ -45,7 +45,7 @@
 			label: `Expiry: ${formatDistance(lease.end, new Date(), {
 				addSuffix: true,
 			})}`,
-			icon: faCalendarXmark,
+			icon: Fa6SolidCalendarXmark,
 			tooltip: 'Bedrooms',
 		},
 	];

@@ -12,10 +12,10 @@
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Transaction } from '$models/classes/transaction.class';
-	import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar';
-	import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
 	import { formatDistance } from 'date-fns';
 	import { onMount } from 'svelte';
+	import Fa6SolidCalendar from '~icons/fa6-solid/calendar';
+	import Fa6SolidCalendarCheck from '~icons/fa6-solid/calendar-check';
 	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -69,7 +69,7 @@
 						label: `Due: ${formatDistance(trx.dueAt, new Date(), {
 							addSuffix: true,
 						})}`,
-						icon: faCalendar,
+						icon: Fa6SolidCalendar,
 						tooltip: 'Due',
 					},
 			  ]
@@ -79,7 +79,7 @@
 						label: `Paid: ${formatDistance(trx.paidAt, new Date(), {
 							addSuffix: true,
 						})}`,
-						icon: faCalendarCheck,
+						icon: Fa6SolidCalendarCheck,
 						tooltip: 'Paid',
 					},
 			  ]

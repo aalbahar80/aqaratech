@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
-	import { faBellSlash } from '@fortawesome/free-solid-svg-icons/faBellSlash';
+	import Fa6SolidBellSlash from '~icons/fa6-solid/bell-slash';
 	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
 	import Fa from 'svelte-fa';
@@ -128,11 +128,7 @@
 			</div>
 		{:else}
 			<div class="text-center">
-				<Fa
-					icon={faBellSlash}
-					class="mx-auto h-12 w-12 my-4 text-gray-400"
-					size="2x"
-				/>
+				<Fa6SolidBellSlash class="mx-auto my-4 h-12 w-12 text-gray-400" />
 				<h3 class="mt-2 text-sm font-medium text-gray-900">No notifications</h3>
 				<p class="mt-1 text-sm text-gray-500">
 					There are no scheduled reminders for this transaction.

@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
-	import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
-	import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
-	import { faDribbble } from '@fortawesome/free-brands-svg-icons/faDribbble';
-	import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
 	import {
 		ChevronRight,
 		CloudUpload,
@@ -15,7 +10,6 @@
 		ShieldCheck,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import Fa from 'svelte-fa';
 
 	const features = [
 		{
@@ -143,27 +137,27 @@
 			{
 				name: 'Facebook',
 				href: '/',
-				icon: faFacebook,
+				// icon: faFacebook,
 			},
 			{
 				name: 'Instagram',
 				href: '/',
-				icon: faInstagram,
+				// icon: faInstagram,
 			},
 			{
 				name: 'Twitter',
 				href: '/',
-				icon: faTwitter,
+				// icon: faTwitter,
 			},
 			{
 				name: 'GitHub',
 				href: '/',
-				icon: faGithub,
+				// icon: faGithub,
 			},
 			{
 				name: 'Dribbble',
 				href: '/',
-				icon: faDribbble,
+				// icon: faDribbble,
 			},
 		],
 	};
@@ -562,7 +556,7 @@
 									<span class="sr-only">{item.name}</span>
 									<item.icon class="h-6 w-6" aria-hidden="true" />
 
-									<Fa icon={item.icon} class="h-6 w-6" />
+									<!-- <Fa icon={item.icon} class="h-6 w-6" /> -->
 									<!-- <Icon src={item.icon} class="h-6 w-6" aria-hidden="true" /> -->
 								</a>
 							{/each}

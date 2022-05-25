@@ -3,13 +3,12 @@
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { Trash } from '@steeze-ui/heroicons';
-	import Fa from 'svelte-fa';
+	import Fa6SolidCalendar from '~icons/fa6-solid/calendar';
 
 	type IconTooltip = {
 		label: string | number | null | undefined;
-		icon: IconDefinition;
+		icon: any;
 		tooltip: string;
 	};
 
@@ -70,9 +69,12 @@
 			class="col-span-full mt-0 flex flex-row flex-wrap space-x-6 sm:col-span-1"
 		>
 			{#each icons as { label, icon, tooltip } (tooltip)}
-				{#if label}
+				{#if label && icon}
 					<div class="mt-2 flex items-center text-sm text-gray-500">
-						<Fa {icon} class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" />
+						<svelte:component
+							this={icon}
+							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+						/>
 						{label}
 					</div>
 				{/if}

@@ -48,9 +48,7 @@ const config = {
 					process.env.NODE_ENV === 'production'
 						? [
 								'superjson',
-								// 'ms',
 								// 'date-fns',
-								// '@fortawesome/free-solid-svg-icons',
 						  ]
 						: undefined,
 			},
