@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
@@ -136,7 +137,11 @@
 	const expenseData = writable(expenses);
 	$: $expenseData = expenses;
 	const expenseTableData = getExpenseTableStore(expenseData);
-	const expenseChartData = getExpenseChartStore(expenseData, expensesGroupBy);
+	const expenseChartData = getExpenseChartStore(
+		expenseData,
+		expensesGroupBy,
+		$page.stuff.expenseMeta,
+	);
 
 	// Income
 	const incomeData = writable(income);

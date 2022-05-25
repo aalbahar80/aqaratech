@@ -1,6 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
-import { expenseCats, getColor } from '$lib/config/constants';
-import { startCase } from '$lib/utils/common';
+import { getColor } from '$lib/config/constants';
 import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
 import { derived, type Writable } from 'svelte/store';
@@ -10,28 +9,31 @@ type GroupBy = 'ratio' | 'property';
 type ChartData = {
 	total: number;
 	date: Date;
-	category: string;
+	group: string;
 	address: string;
 }[];
 
-const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
+const aggregate = (
+	data: Data,
+	groupBy: GroupBy,
+	expenseMeta: App.Stuff['expenseMeta'],
+): ChartData => {
 	console.time('aggregate');
 	const months = getMonths(data);
 	const buckets: ChartData = [];
 
 	data.forEach((trx) => {
 		const month = closestTo(trx.postAt, months);
-		// TODO: fetch from db
 		const group =
-			expenseCats.find((g) => g.en === trx.expenseCategoryId)?.group ?? 'OTHER';
-		const groupLabel = startCase(group);
+			expenseMeta.categories.find((c) => c.id === trx.expenseCategoryId)
+				?.expenseGroupId ?? 'other';
 		const address = trx.address;
 		if (month) {
 			const index = buckets.findIndex((bucket) => {
 				const condition =
 					groupBy === 'property'
 						? bucket.address === address
-						: bucket.category === groupLabel;
+						: bucket.group === group;
 				return isSameDay(bucket.date, month) && condition;
 			});
 			if (index !== -1) {
@@ -40,7 +42,7 @@ const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
 				buckets.push({
 					total: trx.amount,
 					date: month,
-					category: groupLabel,
+					group: group,
 					address,
 				});
 			}
@@ -50,18 +52,21 @@ const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
 	return buckets;
 };
 
-const getDatasets = (data: Data, groupBy: GroupBy) => {
+const getDatasets = (
+	data: Data,
+	groupBy: GroupBy,
+	expenseMeta: App.Stuff['expenseMeta'],
+) => {
 	console.time('getDatasets');
-	const aggregated = aggregate(data, groupBy);
+	const aggregated = aggregate(data, groupBy, expenseMeta);
 
 	const properties = aggregated.map((bucket) => bucket.address); // use id here?
 	const uniqueProperties = [...new Set(properties)];
 	uniqueProperties.sort((a, b) => a.localeCompare(b)); // alphabetical
 
-	const categories = expenseCats.map((g) => startCase(g.group));
-	const uniqueCategories = [...new Set(categories)];
+	const expenseGroups = expenseMeta.groups.map((c) => c.id);
 
-	const groups = groupBy === 'property' ? uniqueProperties : uniqueCategories;
+	const groups = groupBy === 'property' ? uniqueProperties : expenseGroups;
 	const datasets = groups.map((group, n) => {
 		const backgroundColor = getColor(n, groups.length);
 		return {
@@ -69,7 +74,7 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 			data:
 				groupBy === 'property'
 					? aggregated.filter((item) => item.address === group)
-					: aggregated.filter((item) => item.category === group),
+					: aggregated.filter((item) => item.group === group),
 			parsing: {
 				yAxisKey: 'total',
 				xAxisKey: 'date',
@@ -84,7 +89,8 @@ const getDatasets = (data: Data, groupBy: GroupBy) => {
 export const getExpenseChartStore = (
 	expenses: Writable<Data>,
 	groupBy: Writable<GroupBy>,
+	expenseMeta: App.Stuff['expenseMeta'],
 ) =>
 	derived([expenses, groupBy], ([$expenses, $groupBy]) =>
-		getDatasets($expenses, $groupBy),
+		getDatasets($expenses, $groupBy, expenseMeta),
 	);

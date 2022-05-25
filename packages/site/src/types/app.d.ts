@@ -38,7 +38,7 @@ declare namespace App {
 	}
 
 	interface Stuff {
-		lease: import('$lib/client/trpc').InferQueryOutput<'leases:read'>;
+		expenseMeta: import('$lib/client/trpc').InferQueryOutput<'public:expenses:meta'>;
 	}
 }
 
