@@ -51,8 +51,7 @@
 <SelectEntity
 	field="clientId"
 	selected={client}
-	{invalid}
-	{invalidText}
+	invalid={invalid && !client}
 	on:select={(e) => {
 		client = e.detail;
 		property = undefined;
@@ -66,8 +65,6 @@
 	selected={property}
 	parent={client}
 	disabled={!client}
-	{invalid}
-	{invalidText}
 	on:select={(e) => {
 		property = e.detail;
 		unit = undefined;
@@ -80,8 +77,6 @@
 	selected={unit}
 	parent={property}
 	disabled={!client || !property}
-	{invalid}
-	{invalidText}
 	on:select={(e) => {
 		unit = e.detail;
 		radio.clear();
