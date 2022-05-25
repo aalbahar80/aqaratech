@@ -3,6 +3,7 @@ import { resolve } from 'path';
 // import adapter from '@sveltejs/adapter-auto';
 import adapter from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
+import icons from 'unplugin-icons/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -53,7 +54,7 @@ const config = {
 						  ]
 						: undefined,
 			},
-
+			plugins: [icons({ compiler: 'svelte' })],
 			// plugins:
 			// 	process.env.NODE_ENV === 'development'
 			// 		? [
