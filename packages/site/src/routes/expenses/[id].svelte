@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
+	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { Client, Expense, Property, Unit } from '$lib/models/classes';
@@ -29,7 +30,17 @@
 		['Created on', dateFormat(expense.createdAt)],
 		['Last updated', expense.updatedAt.toLocaleString()],
 	];
+
+	const crumbs = [
+		expense.client ? ['clients', expense.client.id] : null,
+		expense.property ? ['properties', expense.property.id] : null,
+		expense.unit ? ['units', expense.unit.id] : null,
+	].filter(Boolean);
 </script>
 
-<Heading title={Expense.singularCap} id={expense.id} entity={Expense.entity} />
+<Heading title={Expense.singularCap} id={expense.id} entity={Expense.entity}>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb {crumbs} />
+	</svelte:fragment>
+</Heading>
 <DetailsPane {details} />

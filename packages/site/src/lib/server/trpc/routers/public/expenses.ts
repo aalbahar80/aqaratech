@@ -7,8 +7,6 @@ export const expenses = router().query('meta', {
 			prismaClient.expenseCategory.findMany(),
 			prismaClient.expenseGroup.findMany(),
 		]);
-		console.log({ categories }, 'expenses.ts ~ 14');
-		console.log({ groups }, 'expenses.ts ~ 16');
 		return { categories, groups };
 	},
 });

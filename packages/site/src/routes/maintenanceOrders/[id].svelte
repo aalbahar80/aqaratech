@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
+	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { Client, Property, Unit } from '$lib/models/classes';
@@ -43,11 +44,23 @@
 		['Created on', dateFormat(maintenanceOrder.createdAt)],
 		['Last updated', maintenanceOrder.updatedAt.toLocaleString()],
 	];
+
+	const crumbs = [
+		maintenanceOrder.client ? ['clients', maintenanceOrder.client.id] : null,
+		maintenanceOrder.property
+			? ['properties', maintenanceOrder.property.id]
+			: null,
+		maintenanceOrder.unit ? ['units', maintenanceOrder.unit.id] : null,
+	].filter(Boolean);
 </script>
 
 <Heading
 	title="Maintenance Order"
 	id={maintenanceOrder.id}
 	entity="maintenanceOrders"
-/>
+>
+	<svelte:fragment slot="breadcrumbs">
+		<BreadCrumb {crumbs} />
+	</svelte:fragment>
+</Heading>
 <DetailsPane {details} />
