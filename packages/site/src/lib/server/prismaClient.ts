@@ -2,8 +2,8 @@
 import type { PrismaClient as PrismaClientType } from '@prisma/client';
 import pkg from '@prisma/client';
 
-console.log({ TEST_DB: process.env.TEST_DB }, 'prismaClient.ts ~ 12');
-console.log({ DATABASE_URL: process.env.DATABASE_URL }, 'prismaClient.ts ~ 14');
+// console.log({ TEST_DB: process.env.TEST_DB }, 'prismaClient.ts ~ 12');
+// console.log({ DATABASE_URL: process.env.DATABASE_URL }, 'prismaClient.ts ~ 14');
 const { PrismaClient } = pkg;
 
 const prismaClient =

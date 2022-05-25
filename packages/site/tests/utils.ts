@@ -1,3 +1,4 @@
+// Unused
 import {
 	fakeClient,
 	fakeTenant,
@@ -6,7 +7,7 @@ import {
 	testTenantEmail,
 	testTenantId,
 } from '@self/seed';
-import prisma from './prismaClient';
+import prisma from '../src/lib/server/prismaClient.js';
 
 export async function cleanupDatabase() {
 	console.time('cleanup');
