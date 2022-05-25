@@ -16,11 +16,8 @@
     "postbuild:vercel": "find ../../node_modules/.pnpm/ -name \"*libquery_engine*\" -type f -exec cp {} .vercel_build_output/functions/node/render \\;;cp prisma/schema.prisma .vercel_build_output/functions/node/render/;ls .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
-    "test:vitest": "vitest run",
-    "test:setup": "node tests/db-setup.cjs",
-    "test": "pnpm run test:setup && PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
-    "report": "playwright show-report",
-    "test:dev": "PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test"
+    "test": "PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
+    "report": "playwright show-report"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "1.1.2",

@@ -1,6 +1,8 @@
 import prisma from "./prisma.js";
 
 export const cleanupDatabase = async (): Promise<void> => {
+	console.warn("deleting database:", process.env.DATABASE_URL);
+	console.time("cleanup");
 	await prisma.$transaction([
 		prisma.$executeRaw`DELETE FROM Expense`,
 		prisma.$executeRaw`DELETE FROM ExpenseCategory`,
@@ -12,4 +14,5 @@ export const cleanupDatabase = async (): Promise<void> => {
 		prisma.$executeRaw`DELETE FROM Client`,
 		prisma.$executeRaw`DELETE FROM Tenant`,
 	]);
+	console.timeEnd("cleanup");
 };

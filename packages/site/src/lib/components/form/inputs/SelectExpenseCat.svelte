@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Select from '$components/Select.svelte';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
-	import * as R from 'remeda';
 	import { onMount } from 'svelte';
 
 	export let value: any;

@@ -1,8 +1,19 @@
 import { chromium, type FullConfig } from '@playwright/test';
+import {
+	cleanupDatabase,
+	insertExpenseCategories,
+	insertExpenseGroups,
+	setupClient,
+	setupTenant,
+} from '@self/seed';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 async function globalSetup(config: FullConfig) {
+	await cleanupDatabase();
+	await insertExpenseGroups();
+	await Promise.all([insertExpenseCategories(), setupTenant(), setupClient()]);
+
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = path.dirname(__filename);
 

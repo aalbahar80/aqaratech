@@ -1,3 +1,4 @@
+export { cleanupDatabase } from "./clean-db.js";
 export {
 	fakeClient,
 	fakeEmail,
@@ -17,3 +18,9 @@ export {
 	testTenantPassword,
 	timespan,
 } from "./generators.js";
+export {
+	insertExpenseCategories,
+	insertExpenseGroups,
+	setupClient,
+	setupTenant,
+} from "./prep-db.js";
