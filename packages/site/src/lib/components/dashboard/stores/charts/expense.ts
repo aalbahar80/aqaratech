@@ -21,8 +21,9 @@ const aggregate = (data: Data, groupBy: GroupBy): ChartData => {
 
 	data.forEach((trx) => {
 		const month = closestTo(trx.postAt, months);
+		// TODO: fetch from db
 		const group =
-			expenseCats.find((g) => g.en === trx.category)?.group ?? 'OTHER';
+			expenseCats.find((g) => g.en === trx.expenseCategoryId)?.group ?? 'OTHER';
 		const groupLabel = startCase(group);
 		const address = trx.address;
 		if (month) {

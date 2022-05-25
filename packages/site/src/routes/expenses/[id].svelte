@@ -21,7 +21,7 @@
 	$: details = [
 		['Post At', expense.postAt?.toLocaleString() ?? '-'],
 		['Amount', kwdFormat(expense.amount)],
-		['Category', expense.category],
+		['Category', expense.expenseCategoryId],
 		['Memo', expense.memo],
 		['Client', expense.client ? Client.getLabel(expense.client) : '-'],
 		['Property', expense.property ? Property.getLabel(expense.property) : '-'],

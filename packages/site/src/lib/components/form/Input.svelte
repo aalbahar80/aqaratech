@@ -1,7 +1,8 @@
 <script lang="ts">
 	import SelectArea from '$components/form/inputs/SelectArea.svelte';
 	import Select from '$components/Select.svelte';
-	import { expenseCats, unitTypeOptions } from '$lib/config/constants';
+	import SelectExpenseCat from '$lib/components/form/inputs/SelectExpenseCat.svelte';
+	import { unitTypeOptions } from '$lib/config/constants';
 	import { classes } from '$lib/utils';
 	import { startCase } from '$lib/utils/common';
 	import {
@@ -78,11 +79,6 @@
 		{ label: 'Completed', value: 'completed' },
 		{ label: 'Closed', value: 'closed' },
 	];
-
-	const categoryOptions = expenseCats.map((cat) => ({
-		label: `${cat.en} - ${cat.ar}`,
-		value: cat.en,
-	}));
 </script>
 
 <div>
@@ -97,8 +93,8 @@
 		<Select id={name} current={value} options={unitTypeOptions} on:select />
 	{:else if name === 'status'}
 		<Select id={name} current={value} options={statusOptions} on:select />
-	{:else if name === 'category'}
-		<Select id={name} current={value} options={categoryOptions} on:select />
+	{:else if name === 'expenseCategoryId'}
+		<SelectExpenseCat {value} on:select />
 	{:else if type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

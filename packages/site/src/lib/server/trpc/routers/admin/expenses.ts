@@ -65,7 +65,7 @@ export const expenses = createRouter()
 				select: {
 					id: true,
 					amount: true,
-					category: true,
+					expenseCategoryId: true,
 					postAt: true,
 				},
 			}),

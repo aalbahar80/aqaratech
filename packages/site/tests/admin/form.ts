@@ -374,7 +374,9 @@ export class ExpenseForm extends Form {
 		await page.fill('input[name="amount"]', this.data.amount.toString());
 		await page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
 		await page.fill('input[name="memo"]', this.data.memo);
-		await page.selectOption('#category', { value: this.data.category });
+		await page.selectOption('#expenseCategoryId', {
+			value: this.data.expenseCategoryId,
+		});
 		await page.selectOption('#clientId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
 		await page.selectOption('#unitId', { index: 0 });
@@ -394,7 +396,7 @@ export class ExpenseForm extends Form {
 	public basic() {
 		return [
 			kwdFormat(this.data.amount),
-			this.data.category,
+			this.data.expenseCategoryId,
 			// this.data.postAt,
 			this.data.memo,
 		];

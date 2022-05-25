@@ -15,7 +15,12 @@ export class Expense extends Entity {
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
 	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
-	static basicFields = ['amount', 'postAt', 'category', 'memo'] as const;
+	static basicFields = [
+		'amount',
+		'postAt',
+		'expenseCategoryId',
+		'memo',
+	] as const;
 
 	constructor(
 		public data?:
@@ -37,7 +42,7 @@ export class Expense extends Entity {
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		amount: 0,
-		category: '',
+		expenseCategoryId: '',
 		postAt: new Date(),
 		memo: '',
 		clientId: null,
