@@ -6,11 +6,11 @@
 
 	export let entityTitle: EntityTitle;
 	export let count: number;
+	export let createHref: string | undefined = undefined;
 
 	const hideActions = $session.authz?.role !== 'admin';
-	const entity = classMap[entityTitle];
-
-	export let createHref = `/new/${entity.plural}`;
+	$: entity = classMap[entityTitle];
+	$: href = createHref ?? `/new/${entityTitle}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -29,7 +29,7 @@
 				{#if !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
 						<a
-							href={createHref}
+							{href}
 							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							sveltekit:prefetch
 						>
@@ -44,7 +44,7 @@
 			<slot />
 		</ul>
 	{:else}
-		<EmptyState {entity} {createHref} />
+		<EmptyState {entity} createHref={href} />
 	{/if}
 </section>
 
