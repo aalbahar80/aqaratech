@@ -1,4 +1,5 @@
 import { dev } from '$app/env';
+import { environment } from '$environment';
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
@@ -99,7 +100,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}),
 	);
 
-	// response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
+	if (environment.envName !== 'prod') {
+		response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
+	}
 	return response;
 };
 
