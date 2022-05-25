@@ -83,7 +83,7 @@
 	<!-- Actions -->
 	{#if $$slots.actions && $session.authz?.isAdmin}
 		<div
-			class="col-span-full col-start-1 flex flex-col justify-between space-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0"
+			class="col-span-full col-start-1 flex flex-col justify-between gap-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:gap-x-4 sm:gap-y-0"
 		>
 			<slot name="actions" />
 		</div>

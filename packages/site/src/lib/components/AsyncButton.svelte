@@ -53,6 +53,6 @@
 	};
 </script>
 
-<button {disabled} on:click={handle}>
+<button {disabled} on:click={handle} class="contents">
 	<slot {loading} {disabled} />
 </button>
