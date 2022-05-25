@@ -59,7 +59,16 @@ const getDatasets = (
 
 	const groups = aggregated.map((bucket) => bucket.group); // use id here?
 	const uniqueGroups = [...new Set(groups)];
-	uniqueGroups.sort((a, b) => a.localeCompare(b)); // alphabetical
+	uniqueGroups.sort((a, b) => {
+		// make sure 'other' is always last
+		if (a === 'other') {
+			return 1;
+		}
+		if (b === 'other') {
+			return -1;
+		}
+		return a.localeCompare(b);
+	});
 
 	const datasets = uniqueGroups.map((group, n) => {
 		const backgroundColor = getColor(n, uniqueGroups.length);
