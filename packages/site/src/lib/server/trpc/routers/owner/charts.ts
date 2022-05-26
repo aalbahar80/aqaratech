@@ -51,7 +51,7 @@ export const charts = createRouter()
 				},
 				include: {
 					properties: {
-						take: 5, // TODO remove in prod
+						// take: 5, // TODO remove in prod
 						where: propertyId ? { id: propertyId } : {},
 						include: {
 							units: {
@@ -157,7 +157,7 @@ export const charts = createRouter()
 				include: {
 					expenses: propertyId || unitId ? false : getExpenses,
 					properties: {
-						take: 5, // TODO remove in prod
+						// take: 5, // TODO remove in prod
 						where: propertyId ? { id: propertyId } : {},
 						include: {
 							expenses: unitId ? false : getExpenses,
