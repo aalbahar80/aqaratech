@@ -39,10 +39,10 @@ model Expense {
   amount             Float
   postAt             DateTime
   memo               String?           @db.Text
-  client             Client?           @relation(fields: [clientId], references: [id])
-  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id])
-  property           Property?         @relation(fields: [propertyId], references: [id])
-  unit               Unit?             @relation(fields: [unitId], references: [id])
+  client             Client?           @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
+  property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
 
   @@index([unitId])
   @@index([propertyId])
@@ -79,8 +79,8 @@ model Lease {
   deactivated  Boolean       @default(false)
   notify       Boolean       @default(true)
   license      String?
-  tenant       Tenant        @relation(fields: [tenantId], references: [id])
-  unit         Unit          @relation(fields: [unitId], references: [id])
+  tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit         Unit          @relation(fields: [unitId], references: [id], onDelete: Restrict)
   transactions Transaction[]
 
   @@index([tenantId])
@@ -99,10 +99,10 @@ model MaintenanceOrder {
   title       String?
   description String?   @db.Text
   status      String?
-  client      Client?   @relation(fields: [clientId], references: [id])
-  property    Property? @relation(fields: [propertyId], references: [id])
-  tenant      Tenant?   @relation(fields: [tenantId], references: [id])
-  unit        Unit?     @relation(fields: [unitId], references: [id])
+  client      Client?   @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  tenant      Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit        Unit?     @relation(fields: [unitId], references: [id], onDelete: Restrict)
   expenses    Expense[]
 
   @@index([tenantId])
@@ -124,7 +124,7 @@ model Property {
   cost              Float?
   long              Float?
   lat               Float?
-  client            Client             @relation(fields: [clientId], references: [id])
+  client            Client             @relation(fields: [clientId], references: [id], onDelete: Restrict)
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
@@ -166,7 +166,7 @@ model Transaction {
   mfPaymentId String?
   leaseId     String
   reminderAt  DateTime?
-  lease       Lease     @relation(fields: [leaseId], references: [id])
+  lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 
   @@index([leaseId])
 }
@@ -184,7 +184,7 @@ model Unit {
   marketRent        Float?
   type              String?
   usage             String?
-  property          Property           @relation(fields: [propertyId], references: [id])
+  property          Property           @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   expenses          Expense[]
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
