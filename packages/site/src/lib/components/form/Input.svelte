@@ -26,33 +26,6 @@
 		field.valid = !getValue(errors, field.name);
 		field.errorMessage = getValue(errors, field.name)?.[0];
 	}
-
-	switch (field.name) {
-		case 'dob':
-		case 'end':
-		case 'start':
-		case 'dueAt':
-		case 'postAt':
-		case 'paidAt':
-		case 'residencyEnd':
-		case 'completedAt':
-			if (field.value instanceof Date) {
-				// eslint-disable-next-line prefer-destructuring
-				field.value = field.value.toISOString().split('T')[0];
-				break;
-			}
-			break;
-		case 'createdAt':
-		case 'updatedAt':
-			if (field.value instanceof Date) {
-				field.value = field.value.toISOString();
-				// remove timezone
-				field.value = field.value.substring(0, field.value.length - 1);
-				break;
-			}
-			console.warn(field.value, "This case shouldn't happen");
-			break;
-	}
 	const dispatch = createEventDispatcher();
 
 	const statusOptions = [

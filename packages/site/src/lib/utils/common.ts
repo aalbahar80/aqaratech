@@ -1,4 +1,4 @@
-import { format, differenceInCalendarDays } from 'date-fns';
+import { differenceInCalendarDays, format } from 'date-fns';
 
 export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const total = differenceInCalendarDays(end, start);
@@ -127,3 +127,10 @@ export const startCase = (str: string): string =>
 	str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
 		return str.toUpperCase();
 	});
+
+export const toDateInput = (date: any) => {
+	if (date instanceof Date) {
+		return date.toISOString().split('T')[0];
+	}
+	return date;
+};
