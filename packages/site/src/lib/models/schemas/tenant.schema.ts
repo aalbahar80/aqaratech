@@ -14,14 +14,20 @@ export const schema = z.object({
 		.union([z.null(), z.literal(''), z.string().email()])
 		.transform(falsyToNull),
 	phone: z
-		.string()
-		.refine((val) => val.trim().length === 8, {
-			message: 'Phone number must be 8 digits',
-		})
-		.refine(digitsOnly, {
-			message: 'Phone must contain only numbers',
-		})
-		.transform(trim),
+		.union([
+			z.null(),
+			z.literal(''),
+			z
+				.string()
+				.refine((val) => val.trim().length === 8, {
+					message: 'Phone number must be 8 digits',
+				})
+				.refine(digitsOnly, {
+					message: 'Phone must contain only numbers',
+				}),
+		])
+		.transform(trim)
+		.transform(falsyToNull),
 	dob: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),
