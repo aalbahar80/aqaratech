@@ -1,9 +1,12 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Entity } from '$lib/models/classes/entity.class.js';
+import { Field } from '$lib/models/classes/Field.class.js';
 import { Lease } from '$lib/models/classes/lease.class.js';
-import { schema as baseSchema } from '../schemas/transaction.schema.js';
+import { toDateInput } from '$lib/utils/common.js';
 import type { Transaction as PTransaction } from '@prisma/client';
+import * as R from 'remeda';
 import type { z } from 'zod';
+import { schema as baseSchema } from '../schemas/transaction.schema.js';
 
 export class Transaction extends Entity {
 	static urlName = 'transactions' as const;
@@ -13,14 +16,6 @@ export class Transaction extends Entity {
 	static pluralCap = 'Transactions';
 	static schema = baseSchema;
 	static relationalFields = ['leaseId'] as const;
-	static basicFields = [
-		'amount',
-		'dueAt',
-		'postAt',
-		'isPaid',
-		'paidAt',
-		'memo',
-	] as const;
 
 	constructor(
 		public data:
@@ -35,10 +30,43 @@ export class Transaction extends Entity {
 		public pluralCap = 'Transactions',
 		public schema = baseSchema,
 		public override relationalFields = Transaction.relationalFields,
-		public override basicFields = Transaction.basicFields,
 	) {
 		super();
 	}
+
+	override basicFields = [
+		new Field('amount', {
+			type: 'number',
+			required: true,
+			value: this.data.amount,
+			label: 'Amount (KWD)',
+		}),
+		new Field('postAt', {
+			type: 'date',
+			required: true,
+			value: toDateInput(R.pathOr(this.data, ['postAt'], '')),
+			label: 'Post Date',
+		}),
+		new Field('dueAt', {
+			type: 'date',
+			value: toDateInput(this.data.dueAt),
+			label: 'Due Date',
+		}),
+		new Field('isPaid', {
+			type: 'checkbox',
+			value: this.data.isPaid,
+			label: 'Paid',
+		}),
+		// new Field('paidAt', {
+		// 	type: 'date',
+		// 	value: toDateInput(R.pathOr(this.data, ['paidAt'], '')),
+		// 	label: 'Payment Date',
+		// }),
+		new Field('memo', {
+			value: R.pathOr(this.data, ['memo'], ''),
+			hint: 'Enter a short description of the transaction. This will be visible to the tenant.',
+		}),
+	];
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		dueAt: new Date(),

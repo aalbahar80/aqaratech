@@ -1,17 +1,19 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Client } from '$lib/models/classes/client.class.js';
+import { Field } from '$lib/models/classes/Field.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import { Tenant } from '$lib/models/classes/tenant.class.js';
 import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
-import {
-	leaseFormSchema as extendedSchema,
-	schema as baseSchema,
-} from '../schemas/lease.schema.js';
+import { toDateInput } from '$lib/utils/common.js';
 import type { Lease as PLease } from '@prisma/client';
 import { addMonths, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
+import {
+	leaseFormSchema as extendedSchema,
+	schema as baseSchema,
+} from '../schemas/lease.schema.js';
 import { Entity } from './entity.class.js';
 
 export class Lease extends Entity {
@@ -28,13 +30,6 @@ export class Lease extends Entity {
 		'unitId',
 		'tenantId',
 	] as const;
-	static basicFields = [
-		'monthlyRent',
-		'start',
-		'end',
-		'notify',
-		'deactivated',
-	] as const;
 
 	constructor(
 		public data?: InferQueryOutput<'leases:basic'> | Partial<PLease>,
@@ -46,7 +41,6 @@ export class Lease extends Entity {
 		public schema = baseSchema,
 		public leaseFormSchema = extendedSchema,
 		public override relationalFields = Lease.relationalFields,
-		public override basicFields = Lease.basicFields,
 	) {
 		super();
 	}
@@ -65,6 +59,32 @@ export class Lease extends Entity {
 			scheduleStart: new Date(),
 		}),
 	});
+
+	override basicFields = [
+		new Field('monthlyRent', {
+			type: 'number',
+			required: true,
+			value: this.data?.monthlyRent,
+		}),
+		new Field('start', {
+			type: 'date',
+			required: true,
+			value: toDateInput(this.data?.start),
+		}),
+		new Field('end', {
+			type: 'date',
+			required: true,
+			value: toDateInput(this.data?.start),
+		}),
+		new Field('notify', {
+			type: 'checkbox',
+			value: this.data?.notify,
+		}),
+		new Field('deactivated', {
+			type: 'checkbox',
+			value: this.data?.deactivated,
+		}),
+	];
 
 	override getRelationOptions = () => {
 		const data = this.data;

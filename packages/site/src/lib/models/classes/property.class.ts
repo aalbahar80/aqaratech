@@ -5,6 +5,7 @@ import { schema as baseSchema } from '../schemas/property.schema.js';
 import type { Property as PProperty } from '@prisma/client';
 import type { z } from 'zod';
 import { Entity } from './entity.class.js';
+import { Field } from '$lib/models/classes/Field.class.js';
 
 export class Property extends Entity {
 	static urlName = 'properties' as const;
@@ -14,7 +15,6 @@ export class Property extends Entity {
 	static pluralCap = 'Properties';
 	static schema = baseSchema;
 	static relationalFields = ['clientId'] as const;
-	static basicFields = ['area', 'block', 'street', 'avenue', 'number'] as const;
 
 	constructor(
 		public data?:
@@ -29,7 +29,6 @@ export class Property extends Entity {
 		public pluralCap = 'Properties',
 		public schema = baseSchema,
 		public override relationalFields = Property.relationalFields,
-		public override basicFields = Property.basicFields,
 	) {
 		super();
 	}
@@ -41,6 +40,14 @@ export class Property extends Entity {
 		street: '',
 		number: '',
 	});
+
+	override basicFields = [
+		new Field('area', { required: true, value: this.data?.area }),
+		new Field('block', { required: true, value: this.data?.block }),
+		new Field('avenue', { value: this.data?.avenue }),
+		new Field('street', { required: true, value: this.data?.street }),
+		new Field('number', { required: true, value: this.data?.number }),
+	];
 
 	override getRelationOptions = () => ({
 		client:
