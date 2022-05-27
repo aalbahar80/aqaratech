@@ -1,8 +1,11 @@
 <script lang="ts">
 	import SelectArea from '$components/form/inputs/SelectArea.svelte';
 	import Select from '$components/Select.svelte';
-	import SelectExpenseCat from '$lib/components/form/inputs/SelectExpenseCat.svelte';
-	import { SelectField, type Field } from '$lib/models/classes/Field.class';
+	import {
+		AsyncSelectField,
+		SelectField,
+		type Field,
+	} from '$lib/models/classes/Field.class';
 	import { classes } from '$lib/utils';
 	import { tippyHint } from '$lib/utils/tippy';
 	import {
@@ -15,8 +18,10 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
+	import type { Option } from '$lib/models/interfaces/option.interface';
 
 	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
@@ -26,6 +31,11 @@
 		field.errorMessage = getValue(errors, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
+
+	let options: Option[] | Writable<Option[]>;
+	if (field instanceof AsyncSelectField) {
+		options = field.options;
+	}
 </script>
 
 <div>
@@ -61,8 +71,13 @@
 			options={field.options}
 			on:select
 		/>
-	{:else if field.name === 'expenseCategoryId'}
-		<SelectExpenseCat value={field.value} on:select />
+	{:else if field instanceof AsyncSelectField}
+		<Select
+			id={field.name}
+			bind:current={field.value}
+			options={$options}
+			on:select
+		/>
 	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

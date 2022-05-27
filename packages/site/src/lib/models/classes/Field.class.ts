@@ -1,5 +1,6 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { startCase } from '$lib/utils/common';
+import type { Writable } from 'svelte/store';
 
 type FieldType =
 	| 'text'
@@ -37,6 +38,15 @@ export class SelectField extends Field {
 	override type = 'select' as const;
 	options: Option[] = [];
 	constructor(name: string, data?: Partial<SelectField>) {
+		super(name, data);
+		Object.assign(this, data);
+	}
+}
+
+export class AsyncSelectField extends Field {
+	override type = 'select' as const;
+	options: Writable<Option[]>;
+	constructor(name: string, data?: Partial<AsyncSelectField>) {
 		super(name, data);
 		Object.assign(this, data);
 	}

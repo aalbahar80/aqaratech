@@ -1,6 +1,7 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Entity } from '$lib/models/classes/entity.class.js';
-import { Field } from '$lib/models/classes/Field.class.js';
+import { AsyncSelectField, Field } from '$lib/models/classes/Field.class.js';
+import { categories } from '$lib/stores/expenseMeta.js';
 import { toDateInput } from '$lib/utils/common.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
@@ -57,9 +58,9 @@ export class Expense extends Entity {
 			type: 'date',
 			value: toDateInput(this.data?.postAt),
 		}),
-		new Field('expenseCategoryId', {
+		new AsyncSelectField('expenseCategoryId', {
 			required: true,
-			type: 'number',
+			options: categories,
 			value: this.data?.expenseCategoryId || '',
 			label: 'Expense Category',
 		}),
