@@ -6,7 +6,7 @@ import type { RequestHandler } from './__types/invite';
 export const post: RequestHandler = async ({ params }) => {
 	try {
 		// get data from db
-		const rawClient = await prismaClient.tenant.findUnique({
+		const rawTenant = await prismaClient.tenant.findUnique({
 			where: { id: params.id },
 			select: {
 				id: true,
@@ -14,7 +14,7 @@ export const post: RequestHandler = async ({ params }) => {
 				civilid: true,
 			},
 		});
-		const created = await inviteUser(rawClient, 'tenant');
+		const created = await inviteUser(rawTenant, 'tenant');
 		return created;
 	} catch (err) {
 		console.error(err);
