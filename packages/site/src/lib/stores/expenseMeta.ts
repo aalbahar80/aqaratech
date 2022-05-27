@@ -1,4 +1,4 @@
-import { trpc } from '$lib/client/trpc';
+import { trpc } from '$lib/client/trpc.js';
 import { writable, type Writable } from 'svelte/store';
 
 async function getExpenseCategories() {
