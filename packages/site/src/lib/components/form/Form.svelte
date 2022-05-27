@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import { trpc } from '$lib/client/trpc';
+	import Input2 from '$lib/components/form/Input2.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
@@ -81,6 +82,7 @@
 	let { client, property, unit, tenant } = options;
 
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
+	console.log({ entity }, 'Form.svelte ~ 84');
 </script>
 
 <svelte:head>
@@ -158,7 +160,7 @@
 						{/if}
 						<slot {setData} errors={$errors} {getValue} />
 						{#each entity.basicFields as field}
-							<Input
+							<!-- <Input
 								name={field}
 								value={getValue($data2, field)}
 								invalid={!!getValue($errors, field)}
@@ -169,8 +171,23 @@
 								on:clear={() => {
 									setData(field, '');
 								}}
-							/>
+							/> -->
 						{/each}
+						{#if entity.urlName === 'tenants'}
+							{#each entity.basicFields2 as field}
+								<Input2
+									{field}
+									on:select={(e) => {
+										setData(field.name, e.detail.value);
+									}}
+									on:clear={() => {
+										setData(field.name, '');
+									}}
+									invalid={!!getValue($errors, field.name)}
+									invalidText={getValue($errors, field.name)?.[0]}
+								/>
+							{/each}
+						{/if}
 						{#if entity.urlName === 'maintenanceOrders' || entity.urlName === 'expenses'}
 							<div class="relative pt-10">
 								<div

@@ -1,0 +1,210 @@
+<script lang="ts">
+	import SelectArea from '$components/form/inputs/SelectArea.svelte';
+	import Select from '$components/Select.svelte';
+	import SelectExpenseCat from '$lib/components/form/inputs/SelectExpenseCat.svelte';
+	import { unitTypeOptions } from '$lib/config/constants';
+	import type { Field } from '$lib/models/classes/Field.class';
+	import { classes } from '$lib/utils';
+	import { tippyHint } from '$lib/utils/tippy';
+	import {
+		Switch,
+		SwitchDescription,
+		SwitchGroup,
+		SwitchLabel,
+	} from '@rgossiaux/svelte-headlessui';
+	import { ExclamationCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { createEventDispatcher } from 'svelte';
+	import 'tippy.js/dist/tippy.css';
+	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
+
+	export let field: Field;
+	export let invalid = false;
+	export let invalidText: string | undefined = '';
+
+	$: {
+		field.valid = !invalid;
+		field.errorMessage = invalidText;
+	}
+
+	switch (field.name) {
+		case 'dob':
+		case 'end':
+		case 'start':
+		case 'dueAt':
+		case 'postAt':
+		case 'paidAt':
+		case 'residencyEnd':
+		case 'completedAt':
+			if (field.value instanceof Date) {
+				// eslint-disable-next-line prefer-destructuring
+				field.value = field.value.toISOString().split('T')[0];
+				break;
+			}
+			break;
+		case 'createdAt':
+		case 'updatedAt':
+			if (field.value instanceof Date) {
+				field.value = field.value.toISOString();
+				// remove timezone
+				field.value = field.value.substring(0, field.value.length - 1);
+				break;
+			}
+			console.warn(field.value, "This case shouldn't happen");
+			break;
+	}
+	const dispatch = createEventDispatcher();
+
+	const statusOptions = [
+		{ label: '', value: null },
+		{ label: 'Pending', value: 'pending' },
+		{ label: 'Completed', value: 'completed' },
+		{ label: 'Closed', value: 'closed' },
+	];
+</script>
+
+<div>
+	{#if field.type !== 'checkbox'}
+		<div class="flex items-center gap-2">
+			<label for={field.name} class="text-sm font-medium text-gray-700">
+				{field.label}
+				{#if field.required}
+					<span class="text-red-600">*</span>
+				{/if}
+			</label>
+			{#if field.hint}
+				<div use:tippyHint={{ content: field.hint }}>
+					<Fa6SolidCircleInfo
+						class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
+					/>
+				</div>
+			{/if}
+		</div>
+	{/if}
+	{#if field.name === 'area'}
+		<SelectArea
+			id={field.name}
+			value={field.value}
+			invalidText={field.errorMessage}
+			on:select
+			on:clear
+		/>
+	{:else if field.name === 'type'}
+		<Select
+			id={field.name}
+			current={field.value}
+			options={unitTypeOptions}
+			on:select
+		/>
+	{:else if field.name === 'status'}
+		<Select
+			id={field.name}
+			current={field.value}
+			options={statusOptions}
+			on:select
+		/>
+	{:else if field.name === 'expenseCategoryId'}
+		<SelectExpenseCat value={field.value} on:select />
+	{:else if field.type === 'checkbox'}
+		<SwitchGroup class="flex items-center justify-between">
+			<span class="flex flex-grow flex-col">
+				<SwitchLabel
+					as="span"
+					class="text-sm font-medium text-gray-700"
+					passive
+				>
+					{field.name === 'deactivated'
+						? 'Deactivated'
+						: field.name === 'notify'
+						? 'Auto payment reminders'
+						: field.name === 'isPaid'
+						? 'Paid?'
+						: ''}
+				</SwitchLabel>
+				<SwitchDescription as="span" class="text-sm text-gray-500">
+					{field.name === 'deactivated'
+						? 'TRUE: Payments cannot be paid. FALSE: Rent payments are enabled.'
+						: field.name === 'notify'
+						? 'Enable to send payment reminders automatically.'
+						: field.name === 'isPaid'
+						? 'Whether this transaction has already been paid or not.'
+						: ''}
+				</SwitchDescription>
+			</span>
+			<Switch
+				checked={!!field.value}
+				let:checked
+				on:change={(e) => {
+					field.value = e.detail;
+					dispatch('select', {
+						value: e.detail,
+					});
+				}}
+				class={classes(
+					field.value ? 'bg-indigo-600' : 'bg-gray-200',
+					'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+				)}
+			>
+				<span
+					aria-hidden="true"
+					class={classes(
+						checked ? 'translate-x-5' : 'translate-x-0',
+						'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+					)}
+				/>
+			</Switch>
+		</SwitchGroup>
+	{:else}
+		<div class="relative mt-1 rounded-md">
+			<input
+				type={field.type}
+				name={field.name}
+				value={field.value}
+				id={field.name}
+				class="form__input"
+				disabled={field.name === 'id' ||
+					field.name === 'createdAt' ||
+					field.name === 'updatedAt'}
+				class:form__input--invalid={!field.valid}
+			/>
+			<div
+				class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+			>
+				{#if !field.valid && field.type !== 'date'}
+					<Icon
+						src={ExclamationCircle}
+						class="h-5 w-5 text-red-500"
+						aria-hidden="true"
+					/>
+				{/if}
+			</div>
+		</div>
+	{/if}
+	{#if !field.valid}
+		<p class="mt-2 text-sm text-red-600" id={`${field.name}-error`}>
+			{field.errorMessage ?? ''}
+		</p>
+	{/if}
+</div>
+
+<style lang="postcss">
+	.form__input {
+		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+	}
+	.form__input--invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+
+	/* Remove arrow steppers */
+	/* Firefox */
+	input[type='number']:not([id='cycleCount']) {
+		-moz-appearance: textfield;
+	}
+	/* Chrome, Safari, Edge, Opera */
+	input:not([id='cycleCount'])::-webkit-outer-spin-button,
+	input:not([id='cycleCount'])::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+</style>

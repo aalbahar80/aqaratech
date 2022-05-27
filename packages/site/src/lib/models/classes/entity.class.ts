@@ -1,3 +1,4 @@
+import type { Field } from '$lib/models/classes/Field.class';
 import type {
 	Option,
 	RelationOptions,
@@ -30,6 +31,7 @@ export abstract class Entity {
 	toOptions = (instances: this[]): Option[] => instances.map(this.toOption);
 
 	relationalFields: readonly string[] = [];
+	basicFields2: Field[] = [];
 
 	getRelationOptions = (): RelationOptions => ({
 		client: undefined,
