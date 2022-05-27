@@ -1,10 +1,11 @@
 import type { AppRouter } from '$lib/server/trpc';
+import type { LoadEvent } from '@sveltejs/kit';
 import { createTRPCClient } from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
 const browser = typeof window != 'undefined';
-export const trpc = (loadFetch?: typeof fetch) => {
+export const trpc = (loadFetch?: LoadEvent['fetch']) => {
 	const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
 	return createTRPCClient<AppRouter>({
 		url: loadFetch ? '/trpc' : url,

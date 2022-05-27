@@ -4,10 +4,10 @@
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
-	import type { LoadInput } from '@sveltejs/kit';
+	import type { LoadEvent } from '@sveltejs/kit';
 	import compare from 'just-compare';
 
-	export const load = async ({ session, fetch }: LoadInput) => {
+	export const load = async ({ session, fetch }: LoadEvent) => {
 		type Options = Partial<InferQueryInput<'owner:leases:list'>>;
 		const options: Options = {
 			pageIndex: 1,

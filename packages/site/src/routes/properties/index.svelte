@@ -2,9 +2,9 @@
 	import { trpc } from '$lib/client/trpc';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import type { Props } from '$models/types/Props.type';
-	import type { LoadInput } from '@sveltejs/kit';
+	import type { LoadEvent } from '@sveltejs/kit';
 
-	export const load = async ({ session, fetch }: LoadInput) => {
+	export const load = async ({ session, fetch }: LoadEvent) => {
 		const { data: properties } = session.authz?.isOwner
 			? await trpc(fetch).query('owner:properties:list', {
 					clientId: session.authz?.id,

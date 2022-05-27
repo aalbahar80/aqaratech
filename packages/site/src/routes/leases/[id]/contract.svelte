@@ -4,9 +4,9 @@
 	import type { Props } from '$lib/models/types/Props.type';
 	import { getAddress, getName } from '$lib/utils/common';
 	import { inWords } from '$lib/utils/currency';
-	import type { LoadInput } from '@sveltejs/kit';
+	import type { LoadEvent } from '@sveltejs/kit';
 
-	export const load = async ({ params, fetch }: LoadInput<{ id: string }>) => {
+	export const load = async ({ params, fetch }: LoadEvent<{ id: string }>) => {
 		const lease = await trpc(fetch).query('leases:read', params.id);
 		return { props: { lease } };
 	};

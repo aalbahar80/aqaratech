@@ -10,7 +10,7 @@
 	import { dateFormat, getName, kwdFormat } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
-	import type { LoadInput } from '@sveltejs/kit';
+	import type { LoadEvent } from '@sveltejs/kit';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 
@@ -18,7 +18,7 @@
 		params,
 		session,
 		fetch,
-	}: LoadInput<{ id: string }>) => {
+	}: LoadEvent<{ id: string }>) => {
 		const lease = session.authz?.isAdmin
 			? await trpc(fetch).query('leases:read', params.id)
 			: await trpc(fetch).query('owner:leases:read', params.id);

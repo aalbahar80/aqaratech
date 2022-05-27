@@ -6,13 +6,13 @@
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { dateFormat, getAddress } from '$lib/utils/common';
 	import type { Props } from '$models/types/Props.type';
-	import type { LoadInput } from '@sveltejs/kit';
+	import type { LoadEvent } from '@sveltejs/kit';
 
 	export const load = async ({
 		params,
 		session,
 		fetch,
-	}: LoadInput<{ id: string }>) => {
+	}: LoadEvent<{ id: string }>) => {
 		const property = session.authz?.isAdmin
 			? await trpc(fetch).query('properties:read', params.id)
 			: await trpc(fetch).query('owner:properties:read', params.id);
