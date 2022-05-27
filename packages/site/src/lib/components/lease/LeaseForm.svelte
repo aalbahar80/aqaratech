@@ -4,9 +4,10 @@
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import { trpc } from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
+	import { Field } from '$lib/models/classes/Field.class';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
-	import { forceDate, forceDateToInput } from '$lib/utils/common';
+	import { forceDate, forceDateToInput, toDateInput } from '$lib/utils/common';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
@@ -373,20 +374,24 @@
 							<!-- Start Date -->
 							<div class="col-span-6 sm:col-span-3">
 								<Input
-									name="start"
-									value={lease.start}
-									invalid={!!getValue($errors, 'start')}
-									invalidText={getValue($errors, 'start')?.[0]}
+									field={new Field('start', {
+										type: 'date',
+										required: true,
+										value: toDateInput(lease.start),
+									})}
+									errors={$errors}
 								/>
 							</div>
 
 							<!-- End Date -->
 							<div class="col-span-6 sm:col-span-3">
 								<Input
-									name="end"
-									value={lease.end}
-									invalid={!!getValue($errors, 'end')}
-									invalidText={getValue($errors, 'end')?.[0]}
+									field={new Field('end', {
+										type: 'date',
+										required: true,
+										value: toDateInput(lease.end),
+									})}
+									errors={$errors}
 								/>
 							</div>
 
