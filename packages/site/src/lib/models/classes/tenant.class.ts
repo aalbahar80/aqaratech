@@ -43,20 +43,7 @@ export class Tenant extends Entity {
 		residencyEnd: '',
 	});
 
-	basicFields = [
-		'firstName',
-		'lastName',
-		'email',
-		'phone',
-		'dob',
-		'civilid',
-		'passportNum',
-		'nationality',
-		'residencyNum',
-		'residencyEnd',
-	] as const;
-
-	override basicFields2 = [
+	override basicFields = [
 		new Field('firstName', { required: true }),
 		new Field('lastName', { required: true }),
 		new Field('email', {
@@ -67,11 +54,11 @@ export class Tenant extends Entity {
 			hint: "Adding a tenant's phone unlocks SMS payment reminders.",
 		}),
 		new Field('dob', { type: 'date', label: 'Date of Birth' }),
-		new Field('civilid'),
-		new Field('passportNum'),
+		new Field('civilid', { label: 'Civil ID' }),
+		new Field('passportNum', { label: 'Passport Number' }),
 		new Field('nationality'),
-		new Field('residencyNum'),
-		new Field('residencyEnd', { type: 'date' }),
+		new Field('residencyNum', { label: 'Residency Number' }),
+		new Field('residencyEnd', { type: 'date', label: 'Residency Expiration' }),
 	];
 
 	static getLabel = (item: ILabel) => getName(item);

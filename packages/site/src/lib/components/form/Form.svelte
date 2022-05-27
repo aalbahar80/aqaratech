@@ -174,7 +174,7 @@
 							/> -->
 						{/each}
 						{#if entity.urlName === 'tenants'}
-							{#each entity.basicFields2 as field}
+							{#each entity.basicFields as field}
 								<Input2
 									{field}
 									on:select={(e) => {
@@ -183,8 +183,7 @@
 									on:clear={() => {
 										setData(field.name, '');
 									}}
-									invalid={!!getValue($errors, field.name)}
-									invalidText={getValue($errors, field.name)?.[0]}
+									errors={$errors}
 								/>
 							{/each}
 						{/if}

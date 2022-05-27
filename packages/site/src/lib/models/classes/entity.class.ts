@@ -9,7 +9,7 @@ export abstract class Entity {
 	// abstract schema: T;
 	// abstract default: () => z.input<typeof this.schema>;
 	abstract urlName: EntityTitle;
-	abstract basicFields: readonly string[];
+	abstract basicFields: readonly string[] | Field[];
 	abstract data?: { id?: string };
 
 	getLabel = () => {
@@ -31,7 +31,6 @@ export abstract class Entity {
 	toOptions = (instances: this[]): Option[] => instances.map(this.toOption);
 
 	relationalFields: readonly string[] = [];
-	basicFields2: Field[] = [];
 
 	getRelationOptions = (): RelationOptions => ({
 		client: undefined,

@@ -14,17 +14,17 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
 	export let field: Field;
-	export let invalid = false;
-	export let invalidText: string | undefined = '';
+	export let errors: Record<string, any>;
 
 	$: {
-		field.valid = !invalid;
-		field.errorMessage = invalidText;
+		field.valid = !getValue(errors, field.name);
+		field.errorMessage = getValue(errors, field.name)?.[0];
 	}
 
 	switch (field.name) {
