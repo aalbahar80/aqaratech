@@ -1,7 +1,8 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
-import { concatIfExists, getName } from '$lib/utils/common.js';
+import { concatIfExists, getName, toDateInput } from '$lib/utils/common.js';
 import type { Client as PClient } from '@prisma/client';
+import * as R from 'remeda';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/client.schema.js';
 import { Entity } from './entity.class.js';
@@ -40,15 +41,23 @@ export class Client extends Entity {
 	});
 
 	override basicFields = [
-		new Field('firstName', { required: true }),
-		new Field('lastName', { required: true }),
+		new Field('firstName', { required: true, value: this.data?.firstName }),
+		new Field('lastName', { required: true, value: this.data?.lastName }),
 		new Field('email', {
 			type: 'email',
 			hint: "Adding a client's email unlocks (1) email payment reminders and (2) client portal invitations.",
+			value: this.data?.email,
 		}),
-		new Field('phone'),
-		new Field('civilid', { label: 'Civil ID' }),
-		new Field('dob', { type: 'date', label: 'Date of Birth' }),
+		new Field('phone', { value: this.data?.phone }),
+		new Field('civilid', {
+			label: 'Civil ID',
+			value: R.pathOr(this.data, ['civilid'], ''),
+		}),
+		new Field('dob', {
+			type: 'date',
+			label: 'Date of Birth',
+			value: toDateInput(R.pathOr(this.data, ['dob'], '')),
+		}),
 	];
 
 	public static getLabel = (item: ILabel) => getName(item);
