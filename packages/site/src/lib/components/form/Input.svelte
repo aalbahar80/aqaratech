@@ -2,8 +2,7 @@
 	import SelectArea from '$components/form/inputs/SelectArea.svelte';
 	import Select from '$components/Select.svelte';
 	import SelectExpenseCat from '$lib/components/form/inputs/SelectExpenseCat.svelte';
-	import { unitTypeOptions } from '$lib/config/constants';
-	import type { Field } from '$lib/models/classes/Field.class';
+	import { SelectField, type Field } from '$lib/models/classes/Field.class';
 	import { classes } from '$lib/utils';
 	import { tippyHint } from '$lib/utils/tippy';
 	import {
@@ -19,7 +18,7 @@
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
-	export let field: Field;
+	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
 
 	$: {
@@ -27,13 +26,6 @@
 		field.errorMessage = getValue(errors, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
-
-	const statusOptions = [
-		{ label: '', value: null },
-		{ label: 'Pending', value: 'pending' },
-		{ label: 'Completed', value: 'completed' },
-		{ label: 'Closed', value: 'closed' },
-	];
 </script>
 
 <div>
@@ -62,18 +54,11 @@
 			on:select
 			on:clear
 		/>
-	{:else if field.name === 'type'}
+	{:else if field instanceof SelectField}
 		<Select
 			id={field.name}
-			current={field.value}
-			options={unitTypeOptions}
-			on:select
-		/>
-	{:else if field.name === 'status'}
-		<Select
-			id={field.name}
-			current={field.value}
-			options={statusOptions}
+			bind:current={field.value}
+			options={field.options}
 			on:select
 		/>
 	{:else if field.name === 'expenseCategoryId'}

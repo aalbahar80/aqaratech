@@ -1,6 +1,7 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { unitTypeOptions } from '$lib/config/constants';
 import { Client } from '$lib/models/classes/client.class.js';
-import { Field } from '$lib/models/classes/Field.class.js';
+import { Field, SelectField } from '$lib/models/classes/Field.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { getUnitLabel } from '$lib/utils/common.js';
@@ -17,16 +18,6 @@ export class Unit extends Entity {
 	static pluralCap = 'Units';
 	static schema = baseSchema;
 	static relationalFields = ['clientId', 'propertyId'] as const;
-	// static basicFields = [
-	// 	'type',
-	// 	'unitNumber',
-	// 	'bed',
-	// 	'bath',
-	// 	'size',
-	// 	'marketRent',
-	// 	'floor',
-	// 	'usage',
-	// ] as const;
 
 	constructor(
 		public data?:
@@ -57,7 +48,10 @@ export class Unit extends Entity {
 	});
 
 	override basicFields = [
-		new Field('type', { value: this.data?.unitNumber }),
+		new SelectField('type', {
+			value: this.data?.type,
+			options: unitTypeOptions,
+		}),
 		new Field('unitNumber', { required: true, value: this.data?.unitNumber }),
 		new Field('bed', { type: 'number', value: this.data?.bed }),
 		new Field('bath', { type: 'number', value: this.data?.bath }),

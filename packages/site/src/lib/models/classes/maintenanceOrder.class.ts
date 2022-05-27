@@ -1,5 +1,5 @@
 import { Entity } from '$lib/models/classes/entity.class.js';
-import { Field } from '$lib/models/classes/Field.class.js';
+import { Field, SelectField } from '$lib/models/classes/Field.class.js';
 import { toDateInput } from '$lib/utils/common.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { MaintenanceOrder as PMaintenanceOrder } from '@prisma/client';
@@ -43,15 +43,14 @@ export class MaintenanceOrder extends Entity {
 		new Field('description', {
 			value: this.data?.description,
 		}),
-		new Field('status', {
+		new SelectField('status', {
 			type: 'select',
-			required: true,
-			// options: [
-			// 	{ label: '', value: null },
-			// 	{ label: 'Pending', value: 'pending' },
-			// 	{ label: 'Completed', value: 'completed' },
-			// 	{ label: 'Closed', value: 'closed' },
-			// ],
+			options: [
+				{ label: '', value: null },
+				{ label: 'Pending', value: 'pending' },
+				{ label: 'Completed', value: 'completed' },
+				{ label: 'Closed', value: 'closed' },
+			],
 			value: this.data?.status,
 		}),
 		new Field('completedAt', {

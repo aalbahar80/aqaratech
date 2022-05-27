@@ -1,6 +1,7 @@
+import type { Option } from '$lib/models/interfaces/option.interface';
 import { startCase } from '$lib/utils/common';
 
-type FeildType =
+type FieldType =
 	| 'text'
 	| 'email'
 	| 'number'
@@ -11,7 +12,7 @@ type FeildType =
 	| 'radio';
 
 export class Field {
-	type: FeildType = 'text';
+	type: FieldType = 'text';
 	private _label = '';
 	valid = true;
 	errorMessage: string | undefined = '';
@@ -29,5 +30,14 @@ export class Field {
 
 	public set label(value: string) {
 		this._label = value;
+	}
+}
+
+export class SelectField extends Field {
+	override type = 'select' as const;
+	options: Option[] = [];
+	constructor(name: string, data?: Partial<SelectField>) {
+		super(name, data);
+		Object.assign(this, data);
 	}
 }

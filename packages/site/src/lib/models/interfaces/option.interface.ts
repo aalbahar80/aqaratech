@@ -1,8 +1,8 @@
 import type { IconSource } from '@steeze-ui/svelte-icon/types';
 
 export interface Option {
-	value: string | undefined;
-	label: string | undefined;
+	value: string | null | undefined;
+	label: string;
 }
 
 export type SelectedOption = Option | undefined;
