@@ -1,7 +1,7 @@
 import { trpc } from '$lib/client/trpc';
 import { writable, type Writable } from 'svelte/store';
 
-export async function getExpenseCategories() {
+async function getExpenseCategories() {
 	const meta = await trpc().query('public:expenses:meta');
 	const categories = meta.categories;
 	const categoryOptions =
@@ -11,17 +11,22 @@ export async function getExpenseCategories() {
 					value: cat.id,
 			  }))
 			: [];
-	return [{ label: '', value: null }, ...categoryOptions];
+	const options = [{ label: '', value: null }, ...categoryOptions];
+	return { options, meta }; // simplify this by removing from stuff, only after chart stores are updated
 }
 
-type CategoryOptions = Awaited<ReturnType<typeof getExpenseCategories>>;
+type CategoryOptions = Awaited<
+	ReturnType<typeof getExpenseCategories>
+>['options'];
 
 export const categories: Writable<CategoryOptions> = writable([]);
 
-const fetchItems = async () => {
+export const fetchItems = async () => {
 	const result = await getExpenseCategories();
 
-	categories.set(result);
+	categories.set(result.options);
+
+	return result.meta;
 };
 
-fetchItems();
+// fetchItems();
