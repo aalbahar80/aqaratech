@@ -3,8 +3,9 @@
 	import Select from '$components/Select.svelte';
 	import SelectExpenseCat from '$lib/components/form/inputs/SelectExpenseCat.svelte';
 	import { unitTypeOptions } from '$lib/config/constants';
+	import type { Field } from '$lib/models/classes/Field.class';
 	import { classes } from '$lib/utils';
-	import { startCase } from '$lib/utils/common';
+	import { tippyHint } from '$lib/utils/tippy';
 	import {
 		Switch,
 		SwitchDescription,
@@ -13,15 +14,20 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
+	import 'tippy.js/dist/tippy.css';
+	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
-	export let name = '';
-	export let value: string | Date | null | number | boolean | undefined = '';
-	export let invalid = false;
-	export let invalidText: string | undefined = '';
+	export let field: Field;
+	export let errors: Record<string, any>;
 
-	let type = 'text';
-	switch (name) {
+	$: {
+		field.valid = !getValue(errors, field.name);
+		field.errorMessage = getValue(errors, field.name)?.[0];
+	}
+
+	switch (field.name) {
 		case 'dob':
 		case 'end':
 		case 'start':
@@ -30,45 +36,21 @@
 		case 'paidAt':
 		case 'residencyEnd':
 		case 'completedAt':
-			type = 'date';
-			if (value instanceof Date) {
+			if (field.value instanceof Date) {
 				// eslint-disable-next-line prefer-destructuring
-				value = value.toISOString().split('T')[0];
+				field.value = field.value.toISOString().split('T')[0];
 				break;
 			}
 			break;
 		case 'createdAt':
 		case 'updatedAt':
-			type = 'datetime-local';
-			if (value instanceof Date) {
-				value = value.toISOString();
+			if (field.value instanceof Date) {
+				field.value = field.value.toISOString();
 				// remove timezone
-				value = value.substring(0, value.length - 1);
+				field.value = field.value.substring(0, field.value.length - 1);
 				break;
 			}
-			console.warn(value, "This case shouldn't happen");
-			break;
-
-		case 'monthlyRent':
-		case 'marketRent':
-		case 'deposit':
-		case 'amount':
-		case 'size':
-		case 'bed':
-		case 'bath':
-		case 'floor':
-			type = 'number';
-			break;
-		case 'isPaid':
-		case 'deactivated':
-		case 'notify':
-			type = 'checkbox';
-			break;
-		case 'email':
-			type = 'email';
-			break;
-		default:
-			type = 'text';
+			console.warn(field.value, "This case shouldn't happen");
 			break;
 	}
 	const dispatch = createEventDispatcher();
@@ -82,20 +64,48 @@
 </script>
 
 <div>
-	{#if type !== 'checkbox'}
-		<label for={name} class="text-sm font-medium text-gray-700">
-			{startCase(name)}
-		</label>
+	{#if field.type !== 'checkbox'}
+		<div class="flex items-center gap-2">
+			<label for={field.name} class="text-sm font-medium text-gray-700">
+				{field.label}
+				{#if field.required}
+					<span class="text-red-600">*</span>
+				{/if}
+			</label>
+			{#if field.hint}
+				<div use:tippyHint={{ content: field.hint }}>
+					<Fa6SolidCircleInfo
+						class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
+					/>
+				</div>
+			{/if}
+		</div>
 	{/if}
-	{#if name === 'area'}
-		<SelectArea id={name} {value} {invalidText} on:select on:clear />
-	{:else if name === 'type'}
-		<Select id={name} current={value} options={unitTypeOptions} on:select />
-	{:else if name === 'status'}
-		<Select id={name} current={value} options={statusOptions} on:select />
-	{:else if name === 'expenseCategoryId'}
-		<SelectExpenseCat {value} on:select />
-	{:else if type === 'checkbox'}
+	{#if field.name === 'area'}
+		<SelectArea
+			id={field.name}
+			value={field.value}
+			invalidText={field.errorMessage}
+			on:select
+			on:clear
+		/>
+	{:else if field.name === 'type'}
+		<Select
+			id={field.name}
+			current={field.value}
+			options={unitTypeOptions}
+			on:select
+		/>
+	{:else if field.name === 'status'}
+		<Select
+			id={field.name}
+			current={field.value}
+			options={statusOptions}
+			on:select
+		/>
+	{:else if field.name === 'expenseCategoryId'}
+		<SelectExpenseCat value={field.value} on:select />
+	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">
 				<SwitchLabel
@@ -103,35 +113,35 @@
 					class="text-sm font-medium text-gray-700"
 					passive
 				>
-					{name === 'deactivated'
+					{field.name === 'deactivated'
 						? 'Deactivated'
-						: name === 'notify'
+						: field.name === 'notify'
 						? 'Auto payment reminders'
-						: name === 'isPaid'
+						: field.name === 'isPaid'
 						? 'Paid?'
 						: ''}
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
-					{name === 'deactivated'
+					{field.name === 'deactivated'
 						? 'TRUE: Payments cannot be paid. FALSE: Rent payments are enabled.'
-						: name === 'notify'
+						: field.name === 'notify'
 						? 'Enable to send payment reminders automatically.'
-						: name === 'isPaid'
+						: field.name === 'isPaid'
 						? 'Whether this transaction has already been paid or not.'
 						: ''}
 				</SwitchDescription>
 			</span>
 			<Switch
-				checked={!!value}
+				checked={!!field.value}
 				let:checked
 				on:change={(e) => {
-					value = e.detail;
+					field.value = e.detail;
 					dispatch('select', {
 						value: e.detail,
 					});
 				}}
 				class={classes(
-					value ? 'bg-indigo-600' : 'bg-gray-200',
+					field.value ? 'bg-indigo-600' : 'bg-gray-200',
 					'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
 				)}
 			>
@@ -147,18 +157,20 @@
 	{:else}
 		<div class="relative mt-1 rounded-md">
 			<input
-				{type}
-				{name}
-				{value}
-				id={name}
+				type={field.type}
+				name={field.name}
+				value={field.value}
+				id={field.name}
 				class="form__input"
-				disabled={name === 'id' || name === 'createdAt' || name === 'updatedAt'}
-				class:form__input--invalid={invalid}
+				disabled={field.name === 'id' ||
+					field.name === 'createdAt' ||
+					field.name === 'updatedAt'}
+				class:form__input--invalid={!field.valid}
 			/>
 			<div
 				class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
 			>
-				{#if invalid && type !== 'date'}
+				{#if !field.valid && field.type !== 'date'}
 					<Icon
 						src={ExclamationCircle}
 						class="h-5 w-5 text-red-500"
@@ -168,9 +180,9 @@
 			</div>
 		</div>
 	{/if}
-	{#if invalid}
-		<p class="mt-2 text-sm text-red-600" id={`${name}-error`}>
-			{invalidText ?? ''}
+	{#if !field.valid}
+		<p class="mt-2 text-sm text-red-600" id={`${field.name}-error`}>
+			{field.errorMessage ?? ''}
 		</p>
 	{/if}
 </div>

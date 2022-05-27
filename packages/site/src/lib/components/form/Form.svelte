@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import { trpc } from '$lib/client/trpc';
-	import Input2 from '$lib/components/form/Input2.svelte';
+	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { forceDateToInput, objectKeys } from '$lib/utils/common';
@@ -14,7 +14,6 @@
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
 	import AttributeEntity from './AttributeEntity.svelte';
-	import Input from './Input.svelte';
 
 	export let entity: EntityInstance;
 
@@ -160,7 +159,7 @@
 						{/if}
 						<slot {setData} errors={$errors} {getValue} />
 						{#each entity.basicFields as field}
-							<Input2
+							<Input
 								{field}
 								errors={$errors}
 								on:select={(e) => {
