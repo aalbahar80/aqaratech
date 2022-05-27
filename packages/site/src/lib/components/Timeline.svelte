@@ -4,7 +4,6 @@
 	import Fa6SolidBellSlash from '~icons/fa6-solid/bell-slash';
 	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
-	import Fa from 'svelte-fa';
 	import Button from './Button.svelte';
 
 	type TimelineEvent = {
