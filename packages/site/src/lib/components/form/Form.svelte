@@ -160,33 +160,17 @@
 						{/if}
 						<slot {setData} errors={$errors} {getValue} />
 						{#each entity.basicFields as field}
-							<!-- <Input
-								name={field}
-								value={getValue($data2, field)}
-								invalid={!!getValue($errors, field)}
-								invalidText={getValue($errors, field)?.[0]}
+							<Input2
+								{field}
+								errors={$errors}
 								on:select={(e) => {
-									setData(field, e.detail.value);
+									setData(field.name, e.detail.value);
 								}}
 								on:clear={() => {
-									setData(field, '');
+									setData(field.name, '');
 								}}
-							/> -->
+							/>
 						{/each}
-						{#if entity.urlName === 'tenants'}
-							{#each entity.basicFields as field}
-								<Input2
-									{field}
-									on:select={(e) => {
-										setData(field.name, e.detail.value);
-									}}
-									on:clear={() => {
-										setData(field.name, '');
-									}}
-									errors={$errors}
-								/>
-							{/each}
-						{/if}
 						{#if entity.urlName === 'maintenanceOrders' || entity.urlName === 'expenses'}
 							<div class="relative pt-10">
 								<div
@@ -218,13 +202,6 @@
 			</div>
 		</div>
 		<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
-			<!-- <button
-				type="button"
-				class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			>
-				Cancel
-			</button> -->
-
 			<Button
 				text={FormType === 'edit' ? 'Save changes' : 'Create new'}
 				disabled={!noErrorMsg || $isSubmitting}
