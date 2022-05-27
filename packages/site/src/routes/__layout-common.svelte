@@ -7,7 +7,7 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import type { NavbarItem } from '$lib/models/interfaces/user.interface';
-	import { fetchItems } from '$lib/stores/expenseMeta';
+	import { categories, getExpenseCategories } from '$lib/stores/expenseMeta';
 	import { protectRoute } from '$lib/utils/auth';
 	import { getUserConfig } from '$user';
 	import type { Scope } from '@sentry/browser';
@@ -25,7 +25,9 @@
 		fetch,
 		stuff,
 	}) => {
-		const expenseMeta = await fetchItems();
+		const expenseMeta = await trpc(fetch).query('public:expenses:meta');
+		categories.set(getExpenseCategories(expenseMeta));
+
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
 		return {
