@@ -1,5 +1,5 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
-import { startCase } from '$lib/utils/common';
+import { startCase } from '$lib/utils/common.js';
 import type { Writable } from 'svelte/store';
 
 type FieldType =

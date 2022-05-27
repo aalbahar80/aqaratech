@@ -1,5 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
-import { unitTypeOptions } from '$lib/config/constants';
+import { unitTypeOptions } from '$lib/config/constants.js';
 import { Client } from '$lib/models/classes/client.class.js';
 import { Field, SelectField } from '$lib/models/classes/Field.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
