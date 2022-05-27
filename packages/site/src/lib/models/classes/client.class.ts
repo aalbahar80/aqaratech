@@ -1,4 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { Field } from '$lib/models/classes/Field.class.js';
 import { concatIfExists, getName } from '$lib/utils/common.js';
 import type { Client as PClient } from '@prisma/client';
 import type { z } from 'zod';
@@ -38,14 +39,17 @@ export class Client extends Entity {
 		dob: null,
 	});
 
-	basicFields = [
-		'firstName',
-		'lastName',
-		'phone',
-		'email',
-		'civilid',
-		'dob',
-	] as const;
+	override basicFields = [
+		new Field('firstName', { required: true }),
+		new Field('lastName', { required: true }),
+		new Field('email', {
+			type: 'email',
+			hint: "Adding a client's email unlocks (1) email payment reminders and (2) client portal invitations.",
+		}),
+		new Field('phone'),
+		new Field('civilid', { label: 'Civil ID' }),
+		new Field('dob', { type: 'date', label: 'Date of Birth' }),
+	];
 
 	public static getLabel = (item: ILabel) => getName(item);
 
