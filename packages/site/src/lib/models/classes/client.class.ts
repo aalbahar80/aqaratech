@@ -45,7 +45,7 @@ export class Client extends Entity {
 		new Field('lastName', { required: true, value: this.data?.lastName }),
 		new Field('email', {
 			type: 'email',
-			hint: "Adding a client's email unlocks (1) email payment reminders and (2) client portal invitations.",
+			hint: "Once a client's email has been entered, you will be able to send him a portal invitation.",
 			value: this.data?.email,
 		}),
 		new Field('phone', { value: this.data?.phone }),
