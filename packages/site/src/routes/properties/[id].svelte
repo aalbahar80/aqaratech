@@ -4,7 +4,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
-	import { dateFormat, getAddress } from '$lib/utils/common';
+	import { getAddress } from '$lib/utils/common';
 	import type { Props } from '$models/types/Props.type';
 	import type { LoadEvent } from '@sveltejs/kit';
 

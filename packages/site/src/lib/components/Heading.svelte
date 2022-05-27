@@ -4,7 +4,6 @@
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { Trash } from '@steeze-ui/heroicons';
-	import Fa6SolidCalendar from '~icons/fa6-solid/calendar';
 
 	type IconTooltip = {
 		label: string | number | null | undefined;
