@@ -128,21 +128,9 @@ export const properties = createRouter()
 	})
 	.mutation('delete', {
 		input: z.string(),
-		resolve: async ({ input: id }) => {
-			const property = await prismaClient.property.findUnique({
+		resolve: ({ input: id }) =>
+			prismaClient.property.delete({
 				where: { id },
-				select: {
-					clientId: true,
-				},
-			});
-			if (!property) {
-				throw new TRPCError({ code: 'NOT_FOUND' });
-			}
-			const deleted = await prismaClient.property.delete({
-				where: {
-					id,
-				},
-			});
-			return deleted;
-		},
+				select: { id: true },
+			}),
 	});
