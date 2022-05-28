@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
+	import { getDocs } from '$lib/components/navbar/docs-url';
 	import {
 		Popover,
 		PopoverButton,
@@ -14,6 +15,8 @@
 		href: string;
 	}
 	export let navigation: Navigation[] = [];
+
+	const docs = getDocs();
 </script>
 
 <Popover as="header" let:close>
@@ -78,12 +81,24 @@
 								</div>
 								<div class="relative flex justify-start" />
 							</div>
+
+							{#if $session.authz.isAdmin}
+								<a
+									on:click={() => close(null)}
+									href={docs}
+									target="_blank"
+									class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+								>
+									Docs
+								</a>
+							{/if}
+
 							<a
 								on:click={() => close(null)}
 								href="/account/logout"
 								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
 							>
-								Logout
+								Log out
 							</a>
 						{/if}
 					</div>

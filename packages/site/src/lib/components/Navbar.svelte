@@ -2,11 +2,14 @@
 	import { dev } from '$app/env';
 	import { session } from '$app/stores';
 	import NavPopover from '$components/navbar/NavPopover.svelte';
+	import { getDocs } from '$lib/components/navbar/docs-url';
 	import type { UserConfig } from '$lib/models/interfaces/user.interface';
 
 	export let navigation: UserConfig['navLinks'] = [];
 
 	$: showDashboard = $session.authz?.isOwner || $session.authz?.isTenant;
+
+	const docs = getDocs();
 </script>
 
 <div class="bg-gray-900 py-6 print:hidden">
@@ -81,6 +84,18 @@
 						Profile
 					</a>
 				{/if}
+
+				{#if $session.authz.isAdmin}
+					<a
+						href={docs}
+						sveltekit:reload
+						target="_blank"
+						class="text-base font-medium text-white hover:text-gray-300"
+					>
+						Docs
+					</a>
+				{/if}
+
 				<a
 					href="/account/logout"
 					class="text-base font-medium text-white hover:text-gray-300"
