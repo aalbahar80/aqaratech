@@ -5,8 +5,7 @@
 	export function load() {
 		return {
 			status: 307,
-			// redirect: '/docs/first-category/first-page'
-			redirect: '/docs/user-management/types-of-users'
+			redirect: '/docs'
 		};
 	}
 </script>
