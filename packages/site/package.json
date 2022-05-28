@@ -23,7 +23,7 @@
     "@felte/reporter-svelte": "1.1.2",
     "@felte/reporter-tippy": "1.1.2",
     "@felte/validator-zod": "1.0.10",
-    "@iconify/json": "2.1.51",
+    "@iconify/json": "2.1.52",
     "@playwright/test": "1.22.2",
     "@prisma/client": "3.14.0",
     "@rgossiaux/svelte-headlessui": "1.0.2",
