@@ -4,9 +4,9 @@ export function getDocs() {
 	if (env === 'production') {
 		return 'https://docs.aqaratech.com';
 	} else if (branch === 'stage') {
-		return 'stage.docs.letand.be';
+		return 'https://stage.docs.letand.be';
 	} else if (branch === 'dev') {
-		return 'dev.docs.letand.be';
+		return 'https://dev.docs.letand.be';
 	} else {
 		return 'http://localhost:3001';
 	}
