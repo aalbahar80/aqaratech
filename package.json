@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "turbo run build",
+    "build:site": "turbo run build --filter=@self/site",
+    "build:docs": "turbo run build --filter=@self/docs",
     "test": "turbo run test --",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint"
