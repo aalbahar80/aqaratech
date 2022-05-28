@@ -13,6 +13,7 @@ importers:
       '@iconify-json/ri': 1.1.2
       '@playwright/test': 1.22.2
       '@sveltejs/adapter-auto': 1.0.0-next.48
+      '@sveltejs/adapter-static': 1.0.0-next.32
       '@sveltejs/kit': 1.0.0-next.345
       '@svelteness/kit-docs': 0.22.12
       '@typescript-eslint/eslint-plugin': 5.26.0
@@ -34,6 +35,7 @@ importers:
       '@iconify-json/ri': 1.1.2
       '@playwright/test': 1.22.2
       '@sveltejs/adapter-auto': 1.0.0-next.48
+      '@sveltejs/adapter-static': 1.0.0-next.32
       '@sveltejs/kit': 1.0.0-next.345_svelte@3.48.0
       '@svelteness/kit-docs': 0.22.12_svelte@3.48.0
       '@typescript-eslint/eslint-plugin': 5.26.0_hzuh7e2up357pvq3mkokjvu2lq
@@ -1964,6 +1966,12 @@ packages:
       '@iarna/toml': 2.2.5
       esbuild: 0.14.41
       set-cookie-parser: 2.4.8
+      tiny-glob: 0.2.9
+    dev: true
+
+  /@sveltejs/adapter-static/1.0.0-next.32:
+    resolution: {integrity: sha512-kpYlghqxVWbrIdbzoiQTe1kSq9/+xlAkcd8eXTAGGPCBPYTUa0bkxt1NEfoNC+h7a+KlFoLMTi9W0AxnrNuiIQ==}
+    dependencies:
       tiny-glob: 0.2.9
     dev: true
 
