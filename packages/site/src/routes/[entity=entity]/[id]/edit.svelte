@@ -22,8 +22,4 @@
 	const entity = new classMap[entityName](data);
 </script>
 
-<svelte:head>
-	<title>{`Edit ${entity.singularCap}`}</title>
-</svelte:head>
-
 <Form {entity} />

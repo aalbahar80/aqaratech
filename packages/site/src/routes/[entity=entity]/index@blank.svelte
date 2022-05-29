@@ -3,7 +3,6 @@
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import { startCase } from '$lib/utils/common';
 	import type { Load } from './__types/index@blank';
 
 	export const load: Load = async ({ url, params, fetch }) => {
@@ -25,10 +24,6 @@
 	export let total: InferQueryOutput<`${typeof entityTitle}:count`>;
 	export let pagination: InferQueryOutput<`${typeof entityTitle}:list`>['pagination'];
 </script>
-
-<svelte:head>
-	<title>{startCase(entityTitle)}</title>
-</svelte:head>
 
 {#if data.length}
 	<TableParent {data} {total} {pagination} {entityTitle} />
