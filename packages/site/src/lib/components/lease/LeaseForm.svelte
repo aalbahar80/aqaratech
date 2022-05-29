@@ -190,6 +190,8 @@
 								<SelectEntity
 									field="tenantId"
 									selected={tenant}
+									invalid={!!getValue($errors, 'tenantId')}
+									invalidText={getValue($errors, 'tenantId')?.[0]}
 									on:select={(e) => {
 										setData('tenantId', e.detail.value);
 									}}
