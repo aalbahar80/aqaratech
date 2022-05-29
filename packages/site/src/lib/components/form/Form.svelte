@@ -6,7 +6,7 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import { forceDateToInput, objectKeys } from '$lib/utils/common';
+	import { forceDateToInput, objectKeys, startCase } from '$lib/utils/common';
 	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -85,7 +85,7 @@
 </script>
 
 <svelte:head>
-	<title>{`Edit ${entity.singularCap}`}</title>
+	<title>{`${startCase(FormType)} ${entity.singularCap}`}</title>
 </svelte:head>
 <div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
