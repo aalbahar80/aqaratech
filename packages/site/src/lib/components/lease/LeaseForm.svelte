@@ -191,7 +191,6 @@
 									field="tenantId"
 									selected={tenant}
 									invalid={!!getValue($errors, 'tenantId')}
-									invalidText={getValue($errors, 'tenantId')?.[0]}
 									on:select={(e) => {
 										setData('tenantId', e.detail.value);
 									}}
@@ -264,7 +263,6 @@
 									parent={property}
 									disabled={!property}
 									invalid={!!getValue($errors, 'unitId')}
-									invalidText={getValue($errors, 'unitId')?.[0]}
 									on:select={(e) => {
 										setData('unitId', e.detail.value);
 									}}

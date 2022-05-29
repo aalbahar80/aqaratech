@@ -107,7 +107,6 @@
 										{field}
 										selected={client}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											client = e.detail;
 											setData('clientId', e.detail.value);
@@ -124,7 +123,6 @@
 										parent={client}
 										disabled={!client}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											property = e.detail;
 											setData('propertyId', e.detail.value);
@@ -139,7 +137,6 @@
 										parent={property}
 										disabled={!client || !property}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											setData('unitId', e.detail.value);
 										}}
@@ -149,7 +146,6 @@
 										{field}
 										selected={tenant}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											setData('tenantId', e.detail.value);
 										}}
@@ -159,7 +155,6 @@
 										{field}
 										selected={lease}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											setData('leaseId', e.detail.value);
 										}}
