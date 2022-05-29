@@ -17,9 +17,21 @@ export class Field {
 	private _label = '';
 	valid = true;
 	errorMessage: string | undefined = '';
-	value: any;
 	hint = '';
 	required = false; // TODO: derive from zod schema
+	private _value: any;
+
+	public get value(): any {
+		if (this.type === 'number' && this._value === undefined) {
+			// <input type="number"> prints a warning if value is undefined
+			return null;
+		}
+		return this._value;
+	}
+
+	public set value(value: any) {
+		this._value = value;
+	}
 
 	constructor(public name: string, data?: Partial<Field>) {
 		Object.assign(this, data);
