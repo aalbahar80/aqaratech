@@ -33,6 +33,7 @@ export class Client extends Entity {
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
+		secondName: null,
 		lastName: '',
 		phone: null,
 		email: null,
@@ -42,6 +43,7 @@ export class Client extends Entity {
 
 	override basicFields = [
 		new Field('firstName', { required: true, value: this.data?.firstName }),
+		new Field('secondName', { value: R.pathOr(this.data, ['secondName'], '') }),
 		new Field('lastName', { required: true, value: this.data?.lastName }),
 		new Field('email', {
 			type: 'email',

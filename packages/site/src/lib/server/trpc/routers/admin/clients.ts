@@ -33,6 +33,7 @@ export const clients = createRouter()
 					createdAt: true,
 					updatedAt: true,
 					firstName: true,
+					secondName: true,
 					lastName: true,
 					phone: true,
 					email: true,
