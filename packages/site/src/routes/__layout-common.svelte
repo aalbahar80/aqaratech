@@ -84,9 +84,6 @@
 	});
 </script>
 
-<svelte:head>
-	<!-- <meta http-equiv="refresh" content="3" /> -->
-</svelte:head>
 {#if $navigating && !$page.error}
 	<PreloadingIndicator />
 {/if}
