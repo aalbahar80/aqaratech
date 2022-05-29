@@ -18,7 +18,7 @@ export class Transaction extends Entity {
 	static relationalFields = ['leaseId'] as const;
 
 	constructor(
-		public data:
+		public data?:
 			| InferQueryOutput<'transactions:basic'>
 			| InferQueryOutput<'transactions:read'>
 			| InferQueryOutput<'transactions:list'>['data'][number]
@@ -38,7 +38,7 @@ export class Transaction extends Entity {
 		new Field('amount', {
 			type: 'number',
 			required: true,
-			value: this.data.amount,
+			value: this.data?.amount,
 			label: 'Amount (KWD)',
 		}),
 		new Field('postAt', {
@@ -49,12 +49,12 @@ export class Transaction extends Entity {
 		}),
 		new Field('dueAt', {
 			type: 'date',
-			value: toDateInput(this.data.dueAt),
+			value: toDateInput(this.data?.dueAt),
 			label: 'Due Date',
 		}),
 		new Field('isPaid', {
 			type: 'checkbox',
-			value: this.data.isPaid,
+			value: this.data?.isPaid,
 			label: 'Paid',
 		}),
 		// new Field('paidAt', {
@@ -80,7 +80,9 @@ export class Transaction extends Entity {
 
 	override getRelationOptions = () => ({
 		lease:
-			'lease' in this.data ? new Lease(this.data.lease).toOption() : undefined,
+			this.data && 'lease' in this.data
+				? new Lease(this.data.lease).toOption()
+				: undefined,
 		client: undefined,
 		property: undefined,
 		unit: undefined,
