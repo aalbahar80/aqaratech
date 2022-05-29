@@ -42,6 +42,7 @@
 	{#if !hideLabel}
 		<label for={field} class="block text-sm font-medium text-gray-700">
 			{title ?? cstor.singularCap}
+			<span class="text-red-600">*</span>
 		</label>
 	{/if}
 	<select
