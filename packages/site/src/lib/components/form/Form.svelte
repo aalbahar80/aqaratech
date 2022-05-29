@@ -78,7 +78,7 @@
 	});
 
 	const options = entity.getRelationOptions();
-	let { client, property, unit, tenant } = options;
+	let { client, property, unit, tenant, lease } = options;
 
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
 	console.log({ entity }, 'Form.svelte ~ 84');
@@ -153,6 +153,17 @@
 										on:select={(e) => {
 											setData('tenantId', e.detail.value);
 										}}
+									/>
+								{:else if field === 'leaseId'}
+									<SelectEntity
+										{field}
+										selected={lease}
+										invalid={!!getValue($errors, field)}
+										invalidText={getValue($errors, field)?.[0]}
+										on:select={(e) => {
+											setData('leaseId', e.detail.value);
+										}}
+										disabled
 									/>
 								{/if}
 							{/each}
