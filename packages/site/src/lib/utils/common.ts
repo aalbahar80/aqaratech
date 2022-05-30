@@ -37,7 +37,7 @@ export const getName = <
 	},
 >(
 	person: T,
-	short = true,
+	short = false,
 ): string => {
 	if (short) {
 		return concatIfExists([person.firstName, person.lastName]);

@@ -85,7 +85,7 @@ export class Tenant extends Entity {
 		}),
 	];
 
-	static getLabel = (item: ILabel) => getName(item, false);
+	static getLabel = (item: ILabel) => getName(item);
 
 	override getLabel = () => {
 		if (this?.data?.firstName && this.data.lastName) {
