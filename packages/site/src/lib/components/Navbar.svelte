@@ -66,7 +66,6 @@
 		<!-- Large screen: nav actions -->
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.authz}
-				<!-- TODO change href -->
 				{#if showDashboard}
 					<a
 						href={$session.authz.home}
