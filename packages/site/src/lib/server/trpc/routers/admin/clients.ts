@@ -58,6 +58,7 @@ export const clients = createRouter()
 					id: true,
 					firstName: true,
 					lastName: true,
+					secondName: true,
 					phone: true,
 					email: true,
 				},

@@ -87,6 +87,7 @@ export const tenants = createRouter()
 					id: true,
 					firstName: true,
 					lastName: true,
+					secondName: true,
 					email: true,
 					phone: true,
 					updatedAt: true,
