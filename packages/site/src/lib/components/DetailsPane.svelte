@@ -20,7 +20,7 @@
 		{#each details as [key, value]}
 			<div class="row">
 				<dt class="label">{key}</dt>
-				<dd class="definition">{value}</dd>
+				<dd class="definition">{value ?? '-'}</dd>
 			</div>
 		{/each}
 		{#if files && !hideFiles}
