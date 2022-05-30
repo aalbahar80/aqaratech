@@ -22,7 +22,7 @@ export const responseMeta: ResponseMetaFn = ({ type, errors, paths }) => {
 			const duration = 60 * 60 * 24 * 7;
 			return {
 				headers: {
-					'cache-control': `max-age=60, stale-while-revalidate=${duration}`,
+					'cache-control': `max-age=59, stale-while-revalidate=${duration}`,
 				},
 			};
 		} else {

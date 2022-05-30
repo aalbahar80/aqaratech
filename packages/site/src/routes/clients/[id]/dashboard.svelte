@@ -121,13 +121,17 @@
 	$: unitOptions = getUnitOptions(selectedProperty);
 	$: startInput = forceDateToInput(filter.start);
 	$: endInput = forceDateToInput(filter.end);
+	let rangeValid = true;
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
-		[income, expenses, occupancy] = await Promise.all([
-			trpc().query('owner:charts:income', newFilter),
-			trpc().query('owner:charts:expenses', newFilter),
-			trpc().query('owner:charts:occupancy', newFilter),
-		]);
+		rangeValid = newFilter.start <= newFilter.end;
+		if (rangeValid) {
+			[income, expenses, occupancy] = await Promise.all([
+				trpc().query('owner:charts:income', newFilter),
+				trpc().query('owner:charts:expenses', newFilter),
+				trpc().query('owner:charts:occupancy', newFilter),
+			]);
+		}
 		filter = newFilter;
 	};
 	const expensesGroupBy: Writable<'ratio' | 'property'> = writable('ratio');
@@ -183,6 +187,7 @@
 				type="date"
 				name="start"
 				class="date-input"
+				class:date-input-invalid={!rangeValid}
 				value={startInput}
 				on:change={(e) => {
 					const newDate = e.currentTarget.valueAsNumber;
@@ -201,9 +206,11 @@
 				type="date"
 				name="end"
 				class="date-input"
+				class:date-input-invalid={!rangeValid}
 				value={endInput}
 				on:change={(e) => {
 					const newDate = e.currentTarget.valueAsNumber;
+					console.log({ newDate }, 'dashboard.svelte ~ 209');
 					if (newDate) {
 						selectedRange = 0;
 						handleFilter({
@@ -371,5 +378,8 @@
 	.date-input {
 		@apply block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+	}
+	.date-input-invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
 	}
 </style>
