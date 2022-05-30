@@ -5,6 +5,7 @@
 	import { trpc } from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
+	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { forceDate, forceDateToInput, toDateInput } from '$lib/utils/common';
@@ -18,6 +19,7 @@
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
 	import { TRPCClientError } from '@trpc/client';
+	import { addDays } from 'date-fns';
 	import { createForm, getValue } from 'felte';
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
@@ -96,14 +98,14 @@
 		onSubmit: async (values) => {
 			try {
 				console.log({ values }, 'LeaseForm.svelte ~ 95');
-				const { schedule, ...leaseValues } = values;
+				const { schedule: unparsed, ...leaseValues } = values;
+				const schedule = scheduleSchema.parse(unparsed);
 				const newLease = await trpc().mutation('leases:save', leaseValues);
 				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
 					leaseId: newLease.id,
-					// TODO fix this
-					dueAt: e.postAt,
+					dueAt: addDays(e.postAt, 14),
 					isPaid: false,
 					paidAt: null,
 					...e,

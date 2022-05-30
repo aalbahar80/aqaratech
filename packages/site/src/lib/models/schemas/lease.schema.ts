@@ -22,7 +22,7 @@ export const schema = baseSchema
 		message: 'End date must be after start date',
 	});
 
-const scheduleSchema = z.array(
+export const scheduleSchema = z.array(
 	// should schedule be array or object?
 	// TODO import schema from ./transaction
 	z.object({
