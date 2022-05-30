@@ -46,11 +46,13 @@ export class Transaction extends Entity {
 			required: true,
 			value: toDateInput(R.pathOr(this.data, ['postAt'], '')),
 			label: 'Post Date',
+			hint: "A transaction cannot be paid before it's post date.",
 		}),
 		new Field('dueAt', {
 			type: 'date',
 			value: toDateInput(this.data?.dueAt),
 			label: 'Due Date',
+			hint: 'If a due date is set, the transaction will be marked as "Past Due" after the due date. If a due date is not set, the transaction will only be marked as "Due" after it\'s post date.',
 		}),
 		new Field('isPaid', {
 			type: 'checkbox',
@@ -69,7 +71,7 @@ export class Transaction extends Entity {
 	];
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
-		dueAt: new Date(),
+		dueAt: null,
 		postAt: new Date(),
 		isPaid: false,
 		amount: 0,

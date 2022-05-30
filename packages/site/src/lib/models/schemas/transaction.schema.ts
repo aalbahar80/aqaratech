@@ -19,11 +19,10 @@ export const schema = z
 		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 		leaseId: z.string().uuid(),
 	})
-	.refine((val) => val.dueAt && val.postAt <= val.dueAt, {
-		path: ['postAt'],
-		message: 'Post date must be before due date',
-	})
-	.refine((val) => val.dueAt && val.postAt <= val.dueAt, {
-		path: ['dueAt'],
-		message: 'Due date must be after post date',
-	});
+	.refine(
+		(val) => val.dueAt === null || val.dueAt === '' || val.postAt <= val.dueAt,
+		{
+			path: ['dueAt'],
+			message: 'Due date cannot be after post date',
+		},
+	);
