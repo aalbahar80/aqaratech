@@ -20,41 +20,7 @@
 										manage your properties
 									</span>
 								</h1>
-								<p
-									class="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl"
-								>
-									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-									qui Lorem cupidatat commodo. Elit sunt amet fugiat veniam
-									occaecat fugiat.
-								</p>
-								<div class="mt-10 sm:mt-12">
-									<form class="sm:mx-auto sm:max-w-xl lg:mx-0">
-										<div class="sm:flex">
-											<div class="min-w-0 flex-1">
-												<label for="email" class="sr-only">
-													Email address
-												</label>
-												<input
-													id="email"
-													type="email"
-													placeholder="Enter your email"
-													class="block w-full rounded-md border-0 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
-												/>
-											</div>
-											<div class="mt-3 sm:mt-0 sm:ml-3">
-												<button
-													type="submit"
-													class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
-												>
-													Notify Me
-												</button>
-											</div>
-										</div>
-										<p class="mt-3 text-sm text-gray-300 sm:mt-4">
-											Get notified when we're launching.
-										</p>
-									</form>
-								</div>
+								<div class="mt-10 sm:mt-12" />
 							</div>
 						</div>
 						<div class="mt-12 -mb-16 sm:-mb-48 lg:relative lg:m-0">
