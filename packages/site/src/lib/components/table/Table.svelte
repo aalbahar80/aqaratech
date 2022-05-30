@@ -18,9 +18,24 @@
 
 	$: {
 		if (innerWidth < 500) {
-			hidden = [...alwaysHidden, 'email', 'completedAt', 'phone'];
+			hidden = [
+				...alwaysHidden,
+				'phone',
+				'email',
+				'completedAt',
+				'secondName',
+				'createdAt',
+				'updatedAt',
+			];
 		} else if (innerWidth < 800) {
-			hidden = [...alwaysHidden, 'email', 'completedAt'];
+			hidden = [
+				...alwaysHidden,
+				'email',
+				'completedAt',
+				'secondName',
+				'createdAt',
+				'updatedAt',
+			];
 		} else {
 			hidden = alwaysHidden;
 		}
