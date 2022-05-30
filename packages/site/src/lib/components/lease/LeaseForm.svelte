@@ -5,6 +5,7 @@
 	import { trpc } from '$lib/client/trpc';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
+	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { forceDate, forceDateToInput, toDateInput } from '$lib/utils/common';
@@ -18,6 +19,7 @@
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
 	import { TRPCClientError } from '@trpc/client';
+	import { addDays } from 'date-fns';
 	import { createForm, getValue } from 'felte';
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
@@ -34,7 +36,6 @@
 		...new Lease({}).defaultForm(),
 		...predefined,
 	};
-	console.log({ lease }, 'LeaseForm.svelte ~ 42');
 
 	let client = lease.client;
 	let property = lease.property;
@@ -97,14 +98,14 @@
 		onSubmit: async (values) => {
 			try {
 				console.log({ values }, 'LeaseForm.svelte ~ 95');
-				const { schedule, ...leaseValues } = values;
+				const { schedule: unparsed, ...leaseValues } = values;
+				const schedule = scheduleSchema.parse(unparsed);
 				const newLease = await trpc().mutation('leases:save', leaseValues);
 				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
 					leaseId: newLease.id,
-					// TODO fix this
-					dueAt: e.postAt,
+					dueAt: addDays(e.postAt, 14),
 					isPaid: false,
 					paidAt: null,
 					...e,
@@ -190,6 +191,7 @@
 								<SelectEntity
 									field="tenantId"
 									selected={tenant}
+									invalid={!!getValue($errors, 'tenantId')}
 									on:select={(e) => {
 										setData('tenantId', e.detail.value);
 									}}
@@ -262,7 +264,6 @@
 									parent={property}
 									disabled={!property}
 									invalid={!!getValue($errors, 'unitId')}
-									invalidText={getValue($errors, 'unitId')?.[0]}
 									on:select={(e) => {
 										setData('unitId', e.detail.value);
 									}}
@@ -441,14 +442,6 @@
 	/>
 
 	<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
-		<button
-			type="button"
-			class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			on:click={() => console.log($data2, $errors)}
-		>
-			Cancel
-		</button>
-
 		<Button
 			loading={$isSubmitting}
 			text={lease.id ? 'Save changes' : 'Create new'}

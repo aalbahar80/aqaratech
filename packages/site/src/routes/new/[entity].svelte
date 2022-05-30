@@ -41,8 +41,4 @@
 	entity.data = { ...entity.defaultForm(), ...predefined };
 </script>
 
-<svelte:head>
-	<title>{`New ${entity.singularCap}`}</title>
-</svelte:head>
-
 <Form {entity} />

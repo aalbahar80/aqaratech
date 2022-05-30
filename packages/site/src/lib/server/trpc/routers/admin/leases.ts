@@ -89,6 +89,7 @@ export const leases = createRouter()
 							id: true,
 							firstName: true,
 							lastName: true,
+							secondName: true,
 						},
 					},
 					unitId: true,
@@ -226,6 +227,7 @@ export const leases = createRouter()
 						select: {
 							firstName: true,
 							lastName: true,
+							secondName: true,
 						},
 					},
 					unit: {

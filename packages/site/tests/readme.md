@@ -43,3 +43,9 @@ working file: https://github.com/aqaratech/aqtech/actions/runs/2364807382/workfl
 svelte.config.js -> keep exclude environment?
 install @self/seed using link: `pnpm add -D @self/seed`
 revert to using action versions same as here https://pnpm.io/continuous-integration#github-actions
+
+To forward cli args from root:
+
+```bash
+pnpm run test --project "property"
+```

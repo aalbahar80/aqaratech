@@ -90,6 +90,7 @@ export class ClientForm extends Form {
 
 	public async fill(page: Page) {
 		await page.fill('input[name="firstName"]', this.data.firstName);
+		await page.fill('input[name="secondName"]', this.data.secondName);
 		await page.fill('input[name="lastName"]', this.data.lastName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);
@@ -234,6 +235,7 @@ export class TenantForm extends Form {
 
 	public async fill(page: Page) {
 		await page.fill('input[name="firstName"]', this.data.firstName);
+		await page.fill('input[name="secondName"]', this.data.secondName);
 		await page.fill('input[name="lastName"]', this.data.lastName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);

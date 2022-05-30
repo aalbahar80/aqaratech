@@ -3,6 +3,7 @@
 	import DropDown from '$components/DropDown.svelte';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
+	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
@@ -10,16 +11,14 @@
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
-		Cash,
-		Check,
 		ChevronRight,
 		ClipboardCopy,
+		Eye,
 		PencilAlt,
-		Speakerphone,
-		X,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { draw, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
+	import TeenyiconsReceiptSolid from '~icons/teenyicons/receipt-solid';
 	import Chip from '../Chip.svelte';
 
 	type Transactions = NonNullable<
@@ -121,14 +120,12 @@
 					>
 						<span class="flex items-center space-x-4">
 							<span class="flex flex-1 space-x-2 truncate">
-								<Icon
-									src={Cash}
-									theme="solid"
+								<TeenyiconsReceiptSolid
 									class="h-5 w-5 flex-shrink-0 text-gray-400"
 									aria-hidden="true"
 								/>
 								<span class="flex flex-col truncate text-sm text-gray-500">
-									<span class="truncate">{transaction.memo}</span>
+									<span class="truncate">{transaction.memo || ''}</span>
 									<span>
 										<span class="font-medium text-gray-900"
 											>{transaction.amount}</span
@@ -182,14 +179,12 @@
 										class="inline-flex space-x-2 truncate text-sm"
 										class:group={!hideActions}
 									>
-										<Icon
-											src={Cash}
-											theme="solid"
+										<TeenyiconsReceiptSolid
 											class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 											aria-hidden="true"
 										/>
 										<p class="truncate text-gray-500 group-hover:text-gray-900">
-											{transaction.memo}
+											{transaction.memo || ''}
 										</p>
 									</svelte:element>
 								</div>
@@ -220,10 +215,15 @@
 									<DropDown
 										options={[
 											{
-												icon: PencilAlt,
-												label: 'Edit',
-												href: `/transactions/${transaction.id}/edit`,
+												icon: Eye,
+												label: 'View',
+												href: `/transactions/${transaction.id}`,
 											},
+											// {
+											// 	icon: PencilAlt,
+											// 	label: 'Edit',
+											// 	href: `/transactions/${transaction.id}/edit`,
+											// },
 											{
 												icon: ClipboardCopy,
 												label: 'Copy payment URL',
@@ -232,29 +232,6 @@
 													copyTrxUrl(transaction.id, $page.url.origin);
 												},
 											},
-											{
-												icon: Speakerphone,
-												label: 'Send reminder',
-												disabled: transaction.isPaid,
-												onClick: () => {
-													console.log('TODO implement');
-												},
-											},
-											transaction.isPaid
-												? {
-														icon: X,
-														label: 'Mark as unpaid',
-														onClick: async () => {
-															await togglePaid(transaction.id, false);
-														},
-												  }
-												: {
-														icon: Check,
-														label: 'Mark as paid',
-														onClick: async () => {
-															await togglePaid(transaction.id, true);
-														},
-												  },
 										]}
 									/>
 								</td>
@@ -290,27 +267,10 @@
 			</div>
 		</nav>
 	{:else}
-		<div class="overflow-hidden bg-white shadow sm:rounded-md">
-			<div class="py-16 text-center sm:py-28">
-				<svg
-					class="mx-auto h-12 w-12 text-gray-400"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						in:draw
-						vector-effect="non-scaling-stroke"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width={2}
-						d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-					/>
-				</svg>
-				<h3 class="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
-			</div>
-		</div>
+		<EmptyState
+			entity={Transaction}
+			createHref={`/new/transactions?leaseId=${leaseId}`}
+		/>
 	{/if}
 </section>
 

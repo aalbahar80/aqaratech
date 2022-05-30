@@ -29,10 +29,6 @@
 	$: details = [['Address', getAddress(property)]];
 </script>
 
-<svelte:head>
-	<title>{getAddress(property)}</title>
-</svelte:head>
-
 <Heading title="Property" id={property.id} entity="properties">
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={[['clients', property.clientId]]} />

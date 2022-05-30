@@ -8,7 +8,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { Property, Unit } from '$lib/models/classes';
+	import { Property, Transaction, Unit } from '$lib/models/classes';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
@@ -33,6 +33,8 @@
 	];
 
 	$: sendEnabled = !trx.isPaid;
+
+	const { label, color: badgeColor } = Transaction.getBadge(trx);
 </script>
 
 <Heading title="Transaction" id={trx.id} entity="transactions">
@@ -74,10 +76,7 @@
 		</AsyncButton>
 	</svelte:fragment>
 </Heading>
-<Badge
-	label={trx.isPaid ? 'Paid' : 'Not paid'}
-	badgeColor={trx.isPaid ? 'green' : 'red'}
-/>
+<Badge {label} {badgeColor} />
 <div class="grid gap-y-6">
 	<DetailsPane {details} />
 </div>

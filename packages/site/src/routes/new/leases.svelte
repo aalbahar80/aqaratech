@@ -92,9 +92,6 @@
 	export let predefined: Predefined;
 </script>
 
-<svelte:head>
-	<title>{`New Lease`}</title>
-</svelte:head>
 <div class="mx-auto flex max-w-6xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 	<div class="min-w-0 flex-1">
 		<h2

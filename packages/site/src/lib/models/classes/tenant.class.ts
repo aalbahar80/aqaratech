@@ -33,6 +33,7 @@ export class Tenant extends Entity {
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		firstName: '',
+		secondName: '',
 		lastName: '',
 		dob: '',
 		email: '',
@@ -46,6 +47,7 @@ export class Tenant extends Entity {
 
 	override basicFields = [
 		new Field('firstName', { required: true, value: this.data?.firstName }),
+		new Field('secondName', { value: R.pathOr(this.data, ['secondName'], '') }),
 		new Field('lastName', { required: true, value: this.data?.lastName }),
 		new Field('email', {
 			type: 'email',
@@ -87,7 +89,11 @@ export class Tenant extends Entity {
 
 	override getLabel = () => {
 		if (this?.data?.firstName && this.data.lastName) {
-			return concatIfExists([this.data.firstName, this.data.lastName]);
+			return concatIfExists([
+				this.data.firstName,
+				this.data.secondName,
+				this.data.lastName,
+			]);
 		} else {
 			console.warn('no firstName or lastName');
 			return '';

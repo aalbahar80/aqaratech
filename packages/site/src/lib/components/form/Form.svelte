@@ -6,7 +6,7 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import { forceDateToInput, objectKeys } from '$lib/utils/common';
+	import { forceDateToInput, objectKeys, startCase } from '$lib/utils/common';
 	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -78,14 +78,13 @@
 	});
 
 	const options = entity.getRelationOptions();
-	let { client, property, unit, tenant } = options;
+	let { client, property, unit, tenant, lease } = options;
 
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
-	console.log({ entity }, 'Form.svelte ~ 84');
 </script>
 
 <svelte:head>
-	<title>{`Edit ${entity.singularCap}`}</title>
+	<title>{`${startCase(FormType)} ${entity.singularCap}`}</title>
 </svelte:head>
 <div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
@@ -107,7 +106,6 @@
 										{field}
 										selected={client}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											client = e.detail;
 											setData('clientId', e.detail.value);
@@ -124,7 +122,6 @@
 										parent={client}
 										disabled={!client}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											property = e.detail;
 											setData('propertyId', e.detail.value);
@@ -139,7 +136,6 @@
 										parent={property}
 										disabled={!client || !property}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											setData('unitId', e.detail.value);
 										}}
@@ -149,10 +145,19 @@
 										{field}
 										selected={tenant}
 										invalid={!!getValue($errors, field)}
-										invalidText={getValue($errors, field)?.[0]}
 										on:select={(e) => {
 											setData('tenantId', e.detail.value);
 										}}
+									/>
+								{:else if field === 'leaseId'}
+									<SelectEntity
+										{field}
+										selected={lease}
+										invalid={!!getValue($errors, field)}
+										on:select={(e) => {
+											setData('leaseId', e.detail.value);
+										}}
+										disabled
 									/>
 								{/if}
 							{/each}

@@ -18,6 +18,7 @@
 		size: number | null;
 		leases: {
 			end: Date;
+			start: Date;
 		}[];
 	}
 	export let units: Unit[];
@@ -29,9 +30,9 @@
 
 <StackedList entityTitle="units" count={units.length} {createHref}>
 	{#each units as unit (unit.id)}
-		<!-- Check out dan-fns isWithinInterval()
-		https://date-fns.org/v2.28.0/docs/isWithinInterval -->
-		{@const occupied = unit.leases.some((lease) => lease.end > new Date())}
+		{@const occupied = unit.leases.some(
+			(lease) => lease.end > new Date() && lease.start < new Date(),
+		)}
 		{@const icons = [
 			{
 				label: unit.bed,

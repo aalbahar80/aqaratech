@@ -52,6 +52,7 @@
 	field="clientId"
 	selected={client}
 	invalid={invalid && !client}
+	required={false}
 	on:select={(e) => {
 		client = e.detail;
 		property = undefined;
@@ -65,6 +66,7 @@
 	selected={property}
 	parent={client}
 	disabled={!client}
+	required={false}
 	on:select={(e) => {
 		property = e.detail;
 		unit = undefined;
@@ -77,6 +79,7 @@
 	selected={unit}
 	parent={property}
 	disabled={!client || !property}
+	required={false}
 	on:select={(e) => {
 		unit = e.detail;
 		radio.clear();

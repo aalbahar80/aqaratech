@@ -1,7 +1,7 @@
 import { Transaction } from '$lib/models/classes/transaction.class';
 import prismaClient from '$lib/server/prismaClient';
 import { falsyToNull, trim } from '$lib/zodTransformers.js';
-import { paginationSchema, withId } from '$models/common';
+import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
@@ -117,7 +117,7 @@ export const transactions = createRouter()
 				  }),
 	})
 	.mutation('saveMany', {
-		input: z.array(withId(Transaction.schema)),
+		input: z.array(Transaction.schema),
 		resolve: ({ input }) =>
 			prismaClient.transaction.createMany({
 				data: input,

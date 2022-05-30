@@ -17,6 +17,7 @@
 	export let hideLabel = false;
 	export let invalid = false;
 	export let invalidText = '';
+	export let required = true;
 
 	const cstor = relationalClassMap[field];
 
@@ -42,6 +43,9 @@
 	{#if !hideLabel}
 		<label for={field} class="block text-sm font-medium text-gray-700">
 			{title ?? cstor.singularCap}
+			{#if required}
+				<span class="text-red-600">*</span>
+			{/if}
 		</label>
 	{/if}
 	<select
