@@ -12,8 +12,3 @@ export const paginationSchema = z.object({
 		.nullish()
 		.transform((val) => Number(val) || 20),
 });
-
-export const withId = <T extends z.ZodRawShape>(schema: z.ZodObject<T>) =>
-	schema.extend({
-		id: z.string().uuid(),
-	});
