@@ -34,7 +34,6 @@
 		...new Lease({}).defaultForm(),
 		...predefined,
 	};
-	console.log({ lease }, 'LeaseForm.svelte ~ 42');
 
 	let client = lease.client;
 	let property = lease.property;
@@ -441,14 +440,6 @@
 	/>
 
 	<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
-		<button
-			type="button"
-			class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			on:click={() => console.log($data2, $errors)}
-		>
-			Cancel
-		</button>
-
 		<Button
 			loading={$isSubmitting}
 			text={lease.id ? 'Save changes' : 'Create new'}

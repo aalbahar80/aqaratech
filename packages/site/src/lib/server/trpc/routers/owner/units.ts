@@ -8,7 +8,6 @@ export const units = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ ctx, input: id }) => {
-			console.log({ ctx }, 'units.ts ~ 13');
 			const data = await prismaClient.unit.findUnique({
 				where: {
 					id,

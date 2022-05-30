@@ -81,7 +81,6 @@
 	let { client, property, unit, tenant, lease } = options;
 
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
-	console.log({ entity }, 'Form.svelte ~ 84');
 </script>
 
 <svelte:head>
