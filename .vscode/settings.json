@@ -2,7 +2,8 @@
 	"css.validate": false,
 	"files.exclude": {
 		"**/node_modules/": true,
-		"packages/site/package/**": true
+		"packages/site/package/**": true,
+		"packages/site/.svelte-kit/**": true
 	},
 	"html.autoCreateQuotes": false,
 	"editor.suggest.showWords": false,

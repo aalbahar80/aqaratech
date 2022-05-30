@@ -13,7 +13,7 @@ const config = {
 
 	experimental: {
 		// 	prebundleSvelteLibraries: true,
-		// inspector: true,
+		inspector: true,
 	},
 	kit: {
 		adapter: adapter(),
