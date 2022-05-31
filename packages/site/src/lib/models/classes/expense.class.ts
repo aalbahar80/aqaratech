@@ -57,6 +57,7 @@ export class Expense extends Entity {
 			required: true,
 			type: 'date',
 			value: toDateInput(this.data?.postAt),
+			label: 'Post Date',
 		}),
 		new AsyncSelectField('expenseCategoryId', {
 			required: true,
