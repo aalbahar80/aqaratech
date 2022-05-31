@@ -40,7 +40,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright
-        run: npx playwright install
+        run: npx playwright install@1.22.2
 
       - name: Test
         run: pnpm test

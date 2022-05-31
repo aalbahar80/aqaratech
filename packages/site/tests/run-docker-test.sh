@@ -15,5 +15,5 @@ docker build --pull --rm -f "Dockerfile" -t aqtech:latest "."
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 # Run contaner from image
-# use port 3001 to avoid conflict with a local playwright instance
-docker run -it -p 3001:9323/tcp --ipc=host --name sitetest aqtech:latest
+# use port 3002 to avoid conflict with a local playwright instance
+docker run -it -p 3002:9323/tcp --ipc=host --name sitetest aqtech:latest
