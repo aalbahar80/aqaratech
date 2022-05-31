@@ -1,6 +1,6 @@
 This repository is a mono-repo containing multiple packages located in the `packages` directory. Maintained using [pnpm](https://pnpm.io/) and [turborepo](https://turborepo.org/).
 
-`site`: Main site built with [sveltekit](https://kit.svelte.dev/). Fully typed with `typescript` & [trpc](https://trpc.io/).
+`site`: Main site built with [sveltekit](https://kit.svelte.dev/). Fully typed with `typescript` & [trpc](https://trpc.io/). Uses [playwright](https://playwright.dev/) for testing.
 
 `docs`: Documentation for site. Built using [kit-docs](https://github.com/svelteness/kit-docs).
 
@@ -10,7 +10,7 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 ## Develop:
 
-> Run in the root directory:
+> In the root directory, run `pnpm install`, then:
 
 ### Dev 🛠️
 
@@ -20,12 +20,6 @@ pnpm dev
 ```
 
 Take a look [.env.example](packages/site/.env.example) to know what env vars are required.
-
-### Build 📦
-
-```bash
-pnpm build
-```
 
 ### Test 🧪
 
@@ -38,6 +32,12 @@ cd packages/site/tests && ./run-docker-test.sh
 ```
 
 Requires [.env.test](packages/site/.env.test.example) for the db connection string. Will delete and set up the db on each run.
+
+### Build 📦
+
+```bash
+pnpm build
+```
 
 ## Deploy:
 
