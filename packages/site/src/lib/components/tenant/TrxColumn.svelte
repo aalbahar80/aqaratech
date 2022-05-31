@@ -10,12 +10,7 @@
 	import { dateFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
-	import {
-		ChevronRight,
-		ClipboardCopy,
-		Eye,
-		PencilAlt,
-	} from '@steeze-ui/heroicons';
+	import { ChevronRight, ClipboardCopy, Eye } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { scale } from 'svelte/transition';
 	import TeenyiconsReceiptSolid from '~icons/teenyicons/receipt-solid';
