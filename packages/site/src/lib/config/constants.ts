@@ -382,7 +382,7 @@ interface ExpenseCategory {
 }
 
 export const expenseCats: ExpenseCategory[] = [
-	{ en: 'Management Fees', ar: 'استهلاك مياة', group: 'managementFees' },
+	{ en: 'Management Fees', ar: 'رسوم إدارية', group: 'managementFees' },
 	{ en: 'Water consumption', ar: 'استهلاك مياة', group: 'utilities' },
 	{ en: 'Electricity consumption', ar: 'استهلاك كهرباء', group: 'utilities' },
 	{ en: 'Satellite & Internet connectivity', ar: 'ستلايت', group: 'utilities' },
