@@ -16,7 +16,7 @@
     "postbuild:vercel": "find ../../node_modules/.pnpm/ -name \"*libquery_engine*\" -type f -exec cp {} .vercel_build_output/functions/node/render \\;;cp prisma/schema.prisma .vercel_build_output/functions/node/render/;ls .vercel_build_output/functions/node/render/",
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
-    "test": "PLAYWRIGHT_EXPERIMENTAL_FEATURES=1 playwright test",
+    "test": "playwright test",
     "report": "playwright show-report"
   },
   "devDependencies": {
