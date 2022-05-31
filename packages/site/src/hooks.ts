@@ -1,10 +1,11 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
+import prismaClient from '$lib/server/prismaClient';
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
 import * as Sentry from '@sentry/node';
-import '@sentry/tracing'; // has to be after @sentry/node
+import * as Tracing from '@sentry/tracing'; // has to be after @sentry/node
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import { parse, serialize } from 'cookie';
@@ -21,6 +22,7 @@ if (
 			? process.env.VERCEL_GIT_COMMIT_REF
 			: 'localServer',
 		debug: dev,
+		integrations: [new Tracing.Integrations.Prisma({ client: prismaClient })],
 	});
 }
 
