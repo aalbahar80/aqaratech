@@ -38,10 +38,6 @@ for (const user of users) {
 		});
 
 		test(`redirected to correct url`, async ({ page }) => {
-			await page.waitForNavigation({
-				waitUntil: 'networkidle',
-				timeout: 10000,
-			});
 			await expect(page).toHaveURL(user.destination);
 		});
 
