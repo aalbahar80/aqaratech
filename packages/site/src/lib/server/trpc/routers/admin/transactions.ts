@@ -1,6 +1,5 @@
 import { Transaction } from '$lib/models/classes/transaction.class';
 import prismaClient from '$lib/server/prismaClient';
-import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { paginationSchema } from '$models/common';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
@@ -80,15 +79,13 @@ export const transactions = createRouter()
 		input: z.object({
 			id: z.string().uuid(),
 			isPaid: z.boolean(),
-			mfPaymentId: z.string().optional().transform(trim).transform(falsyToNull),
 		}),
-		resolve: ({ input: { id, isPaid, mfPaymentId } }) =>
+		resolve: ({ input: { id, isPaid } }) =>
 			prismaClient.transaction.update({
 				where: { id: id },
 				data: {
 					isPaid,
 					paidAt: isPaid ? new Date() : null,
-					mfPaymentId: mfPaymentId || null,
 				},
 			}),
 	})
