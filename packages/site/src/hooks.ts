@@ -63,7 +63,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 			createContext: async () => createContext?.(event),
 			responseMeta,
 			onError: async (error) => {
-				console.error(error);
+				console.error('Error (from onError):', error);
+				// if (error.code === 'INTERNAL_SERVER_ERROR') {
+				// 	// send to sentry
+				// }
 			},
 		});
 
@@ -107,7 +110,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleError: HandleError = async ({ error, event }) => {
-	console.error(error, 'hooks.ts ~ 104');
+	console.error('Error (from handleError):', error);
 	const user = event.locals.user;
 	Sentry.captureException(error, {
 		user: {
