@@ -16,6 +16,7 @@
 	import LogRocket from 'logrocket';
 	import * as R from 'remeda';
 	import { onMount } from 'svelte';
+	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';
 
@@ -83,6 +84,12 @@
 		}
 	});
 </script>
+
+<MetaTags
+	title="Aqaratech"
+	description="Your property at a glance."
+	canonical="https://www.aqaratech.com/"
+/>
 
 {#if $navigating && !$page.error}
 	<PreloadingIndicator />

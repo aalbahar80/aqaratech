@@ -141,6 +141,7 @@ importers:
       svelecte: 3.7.7
       svelte: 3.48.0
       svelte-check: 2.7.1
+      svelte-meta-tags: ^2.6.1
       svelte-preprocess: 4.10.6
       svelte-select: 4.4.7
       svelte2tsx: 0.5.10
@@ -207,6 +208,7 @@ importers:
       svelecte: 3.7.7
       svelte: 3.48.0
       svelte-check: 2.7.1_s3dopqgs4h45owyu2kxaf6kyfu
+      svelte-meta-tags: 2.6.1_rxzurg3hjloskwsrdpptpplucy
       svelte-preprocess: 4.10.6_qrkd3lh3z7rt44bd22xwke4zou
       svelte-select: 4.4.7
       svelte2tsx: 0.5.10_rxzurg3hjloskwsrdpptpplucy
@@ -6429,6 +6431,14 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
+  /schema-dts/1.1.0_typescript@4.7.2:
+    resolution: {integrity: sha512-vdmbs/5ycj4zyKpZIDqTcy+IZi4s7c38RVAYuDmRi7zgxUT8wRWPMLzg0jr7FjdVunYu9yZ00F3+XcZTTFcTOQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: 4.7.2
+    dev: true
+
   /semver-diff/3.1.1:
     resolution: {integrity: sha512-GX0Ix/CJcHyB8c4ykpHGIAvLyOwOobtM/8d+TQkAd81/bEjgPHrfba41Vpesr7jX/t8Uh+R3EX9eAS5be+jQYg==}
     engines: {node: '>=8'}
@@ -6772,6 +6782,17 @@ packages:
       svelte: '>=3.19.0'
     dependencies:
       svelte: 3.48.0
+    dev: true
+
+  /svelte-meta-tags/2.6.1_rxzurg3hjloskwsrdpptpplucy:
+    resolution: {integrity: sha512-cjtwhzOrRq96ZrsSYNhdLPhI7Xw4MP8RGPFfhOKVPnLXqz4kK8MK9EK/ArltzwEexVfTr2nBx3Z3rGXIsVFOfw==}
+    peerDependencies:
+      svelte: ^3.39.0
+    dependencies:
+      schema-dts: 1.1.0_typescript@4.7.2
+      svelte: 3.48.0
+    transitivePeerDependencies:
+      - typescript
     dev: true
 
   /svelte-preprocess/4.10.6_qrkd3lh3z7rt44bd22xwke4zou:
