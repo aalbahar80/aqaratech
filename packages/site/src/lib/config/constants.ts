@@ -362,12 +362,12 @@ interface ExpenseGroup {
 }
 
 export const ExpenseGroups: ExpenseGroup[] = [
-	{ idNum: 1, id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
+	{ idNum: 1, id: 'other', en: 'Other', ar: 'أخرى' },
 	{ idNum: 2, id: 'amenities', en: 'Amenities', ar: 'المرافق' },
 	{ idNum: 3, id: 'legal', en: 'Legal', ar: 'القانونية' },
 	{ idNum: 4, id: 'upkeep', en: 'Upkeep', ar: 'الصيانة' },
 	{ idNum: 5, id: 'caretaker', en: 'Caretaker', ar: 'الحارس' },
-	{ idNum: 6, id: 'other', en: 'Other', ar: 'أخرى' },
+	{ idNum: 6, id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
 	{ idNum: 7, id: 'insurance', en: 'Insurance', ar: 'التأمين' },
 	{ idNum: 8, id: 'government', en: 'Government', ar: 'الحكومية' },
 	{ idNum: 9, id: 'hvac', en: 'HVAC', ar: 'التكييف' },

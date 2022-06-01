@@ -7,11 +7,7 @@ import { derived, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'owner:charts:expenses'>;
 type GroupBy = 'ratio' | 'property';
-type ChartData = {
-	total: number;
-	date: Date;
-	group: string;
-}[];
+type ChartData = { total: number; date: Date; group: number | string }[];
 
 const aggregate = (
 	data: Data,
@@ -28,7 +24,7 @@ const aggregate = (
 			groupBy === 'property'
 				? trx.address
 				: expenseMeta.categories.find((c) => c.id === trx.expenseCategoryId)
-						?.expenseGroupId ?? 'other';
+						?.expenseGroupId ?? 1;
 		if (month) {
 			const index = buckets.findIndex((bucket) => {
 				const condition = bucket.group === group;
@@ -38,9 +34,10 @@ const aggregate = (
 				buckets[index]!.total += trx.amount;
 			} else {
 				buckets.push({
+					// g: 'property',
 					total: trx.amount,
 					date: month,
-					group: group,
+					group,
 				});
 			}
 		}
@@ -61,19 +58,22 @@ const getDatasets = (
 	const uniqueGroups = [...new Set(groups)];
 	uniqueGroups.sort((a, b) => {
 		// make sure 'other' is always last
-		if (a === 'other') {
+		if (a === 1) {
 			return 1;
 		}
-		if (b === 'other') {
+		if (b === 1) {
 			return -1;
 		}
-		return a.localeCompare(b);
+		return a.toString().localeCompare(b.toString());
 	});
 
 	const datasets = uniqueGroups.map((group, n) => {
 		const backgroundColor = getColor(n, uniqueGroups.length);
 		return {
-			label: startCase(group),
+			label:
+				groupBy === 'property'
+					? startCase(group)
+					: expenseMeta.groups.find((c) => c.id === group)?.en ?? 'Other',
 			data: aggregated.filter((item) => item.group === group),
 			parsing: {
 				yAxisKey: 'total',
