@@ -32,3 +32,12 @@ export const addToast = (toast: Omit<ToastItem, 'id'>) => {
 	// If toast is dismissible, dismiss it after "timeout" amount of time.
 	if (newToast.duration) setTimeout(() => dismissToast(id), newToast.duration);
 };
+
+export const addErrorToast = () => {
+	addToast({
+		props: {
+			kind: 'error',
+			title: 'Error',
+		},
+	});
+};
