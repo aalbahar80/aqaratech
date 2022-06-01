@@ -356,21 +356,22 @@ export const ExpenseGroupIds = [
 
 interface ExpenseGroup {
 	id: ExpenseGroupId;
+	idNum: number;
 	en: string;
 	ar: string;
 }
 
 export const ExpenseGroups: ExpenseGroup[] = [
-	{ id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
-	{ id: 'amenities', en: 'Amenities', ar: 'المرافق' },
-	{ id: 'legal', en: 'Legal', ar: 'القانونية' },
-	{ id: 'upkeep', en: 'Upkeep', ar: 'الصيانة' },
-	{ id: 'caretaker', en: 'Caretaker', ar: 'الحارس' },
-	{ id: 'other', en: 'Other', ar: 'أخرى' },
-	{ id: 'insurance', en: 'Insurance', ar: 'التأمين' },
-	{ id: 'government', en: 'Government', ar: 'الحكومية' },
-	{ id: 'managementFees', en: 'Management Fees', ar: 'الإدارية' },
-	{ id: 'hvac', en: 'HVAC', ar: 'التكييف' },
+	{ idNum: 1, id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
+	{ idNum: 2, id: 'amenities', en: 'Amenities', ar: 'المرافق' },
+	{ idNum: 3, id: 'legal', en: 'Legal', ar: 'القانونية' },
+	{ idNum: 4, id: 'upkeep', en: 'Upkeep', ar: 'الصيانة' },
+	{ idNum: 5, id: 'caretaker', en: 'Caretaker', ar: 'الحارس' },
+	{ idNum: 6, id: 'other', en: 'Other', ar: 'أخرى' },
+	{ idNum: 7, id: 'insurance', en: 'Insurance', ar: 'التأمين' },
+	{ idNum: 8, id: 'government', en: 'Government', ar: 'الحكومية' },
+	{ idNum: 9, id: 'hvac', en: 'HVAC', ar: 'التكييف' },
+	{ idNum: 10, id: 'managementFees', en: 'Management Fees', ar: 'الإدارية' },
 ];
 
 type ExpenseGroupId = typeof ExpenseGroupIds[number];

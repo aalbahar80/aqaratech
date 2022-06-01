@@ -7,23 +7,25 @@ import prisma from "./prisma.js";
 export async function insertExpenseGroups() {
 	console.time("inserting expense groups");
 	const data = ExpenseGroups.map((group) => ({
-		id: group.id,
+		id: group.idNum,
 		en: group.en,
 		ar: group.ar,
 	}));
-	await prisma.expenseGroup.createMany({ data });
-	console.time("inserting expense groups");
+	const created = await prisma.expenseGroup.createMany({ data });
+	console.log(`${created.count} expense groups inserted`);
+	console.timeEnd("inserting expense groups");
 }
 
 export async function insertExpenseCategories() {
 	console.time("inserting expense categories");
-	const data = expenseCats.map((cat) => ({
-		id: cat.en,
+	const data = expenseCats.map((cat, idx) => ({
+		id: idx + 1,
 		en: cat.en,
 		ar: cat.ar,
-		expenseGroupId: cat.group,
+		expenseGroupId: ExpenseGroups.find((g) => g.id === cat.group)?.idNum ?? 0,
 	}));
-	await prisma.expenseCategory.createMany({ data });
+	const created = await prisma.expenseCategory.createMany({ data });
+	console.log(`${created.count} expense categories inserted`);
 	console.timeEnd("inserting expense categories");
 }
 

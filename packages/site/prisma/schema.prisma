@@ -33,7 +33,7 @@ model Expense {
   propertyId         String?
   clientId           String?
   maintenanceOrderId String?
-  expenseCategoryId  String?
+  expenseCategoryId  Int?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   amount             Float
@@ -52,10 +52,10 @@ model Expense {
 }
 
 model ExpenseCategory {
-  id             String @unique
-  expenseGroupId String
-  en             String
-  ar             String
+  id             Int    @id @default(autoincrement())
+  expenseGroupId Int
+  en             String @unique
+  ar             String @unique
 
   @@index([expenseGroupId])
 }
