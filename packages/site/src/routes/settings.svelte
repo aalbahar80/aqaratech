@@ -1,14 +1,12 @@
 <script context="module" lang="ts">
 	import Select from '$components/Select.svelte';
-	import Spinner from '$components/Spinner.svelte';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import type { Load } from '@sveltejs/kit';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { flip } from 'svelte/animate';
-	import { tick } from 'svelte';
+	import type { Load } from '@sveltejs/kit';
+
 	export const load: Load = async ({ fetch }) => {
 		const { categories, groups } = await trpc(fetch).query(
 			'public:expenses:meta',
@@ -33,49 +31,62 @@
 	};
 
 	const addGroup = async () => {
-		groups = [...groups, { id: '', en: '', ar: '' }];
+		groups = [...groups, { en: '', ar: '' }];
 	};
 </script>
 
 <h1>Expense Groups</h1>
 {#each groups as group}
-	<div class="flex gap-4">
+	<div class="flex h-10 gap-4">
 		<input type="text" bind:value={group.en} class="form__input" />
 		<input type="text" bind:value={group.ar} class="form__input" />
 
 		<AsyncButton
-			func={() => trpc().mutation('expenseMeta:group:save', group)}
+			func={async () => {
+				const { id } = await trpc().mutation('expenseMeta:group:save', group);
+				group.id = id;
+			}}
 			let:loading
 		>
-			<Button text={'Save'} {loading} />
+			<Button text={'Save'} {loading} --min-width="100px" />
 		</AsyncButton>
 
-		<AsyncButton
-			func={() => trpc().mutation('expenseMeta:group:save', group)}
-			let:loading
-		>
-			{#if !loading}
-				<button
-					class="w-1/12"
-					on:click={async () => {
-						if (group.id) {
-							await trpc().mutation('expenseMeta:group:delete', group.id);
-							await fetchGroups();
-						} else {
-							groups = groups.filter(({ id }) => id !== group.id);
-						}
+		<div class="w-1/12 self-center text-red-300">
+			{#if group.id}
+				<AsyncButton
+					func={async () => {
+						await trpc().mutation('expenseMeta:group:delete', group.id);
+						await fetchGroups();
 					}}
+					let:loading
 				>
-					<Icon
-						src={Trash}
-						class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
-						aria-hidden="true"
-					/>
-				</button>
-			{:else}
-				<Spinner />
+					{#if !loading}
+						<Icon src={Trash} aria-hidden="true" />
+					{:else}
+						<svg
+							class="animate-spin"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<circle
+								class="opacity-25"
+								cx="12"
+								cy="12"
+								r="10"
+								stroke="currentColor"
+								stroke-width="4"
+							/>
+							<path
+								class="opacity-75"
+								fill="currentColor"
+								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+							/>
+						</svg>
+					{/if}
+				</AsyncButton>
 			{/if}
-		</AsyncButton>
+		</div>
 	</div>
 {/each}
 
@@ -100,20 +111,5 @@
 	.form__input {
 		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
-	}
-	.form__input--invalid {
-		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
-	}
-
-	/* Remove arrow steppers */
-	/* Firefox */
-	input[type='number']:not([id='cycleCount']) {
-		-moz-appearance: textfield;
-	}
-	/* Chrome, Safari, Edge, Opera */
-	input:not([id='cycleCount'])::-webkit-outer-spin-button,
-	input:not([id='cycleCount'])::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
 	}
 </style>
