@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
+	import { isTRPCError } from '$lib/client/is-trpc-error';
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { trpc } from '$lib/client/trpc';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { Transaction } from '$lib/models/classes/transaction.class';
-	import { addToast } from '$lib/stores/toast';
+	import { addErrorToast, addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { dateFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
-	import { ChevronRight, ClipboardCopy, Eye } from '@steeze-ui/heroicons';
+	import {
+		Check,
+		ChevronRight,
+		ClipboardCopy,
+		Eye,
+		X,
+	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { scale } from 'svelte/transition';
 	import TeenyiconsReceiptSolid from '~icons/teenyicons/receipt-solid';
@@ -49,14 +56,18 @@
 					  }
 					: transaction,
 			);
-		} catch (e) {
-			console.error(e);
-			addToast({
-				props: {
-					kind: 'error',
-					title: 'Unable to update status',
-				},
-			});
+		} catch (err) {
+			if (isTRPCError(err)) {
+				addToast({
+					props: {
+						kind: 'error',
+						title: `Error: ${err.data?.code}`,
+						subtitle: JSON.stringify(err.data?.zodError?.fieldErrors, null, 2),
+					},
+				});
+			} else {
+				addErrorToast();
+			}
 		}
 	};
 
@@ -227,6 +238,21 @@
 													copyTrxUrl(transaction.id, $page.url.origin);
 												},
 											},
+											transaction.isPaid
+												? {
+														icon: X,
+														label: 'Mark as unpaid',
+														onClick: async () => {
+															await togglePaid(transaction.id, false);
+														},
+												  }
+												: {
+														icon: Check,
+														label: 'Mark as paid',
+														onClick: async () => {
+															await togglePaid(transaction.id, true);
+														},
+												  },
 										]}
 									/>
 								</td>
