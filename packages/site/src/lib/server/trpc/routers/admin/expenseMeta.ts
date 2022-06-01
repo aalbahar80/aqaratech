@@ -36,4 +36,41 @@ export const expenseMeta = createRouter()
 				where: { id: input },
 			});
 		},
+	})
+	.mutation('category:save', {
+		input: z.object({
+			id: z.number().optional(),
+			expenseGroupId: z.number(),
+			en: z.string(),
+			ar: z.string(),
+		}),
+		resolve: ({ input: { id, ...data } }) =>
+			id
+				? prismaClient.expenseCategory.update({
+						data,
+						where: { id },
+						select: {
+							id: true,
+							en: true,
+							ar: true,
+							expenseGroupId: true,
+						},
+				  })
+				: prismaClient.expenseCategory.create({
+						data,
+						select: {
+							id: true,
+							en: true,
+							ar: true,
+							expenseGroupId: true,
+						},
+				  }),
+	})
+	.mutation('category:delete', {
+		input: z.number(),
+		resolve: async ({ input }) => {
+			await prismaClient.expenseCategory.delete({
+				where: { id: input },
+			});
+		},
 	});
