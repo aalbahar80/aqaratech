@@ -1,8 +1,10 @@
 <script context="module" lang="ts">
 	import Select from '$components/Select.svelte';
+	import { isTRPCError } from '$lib/client/is-trpc-error';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import { addToast } from '$lib/stores/toast';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Load } from '@sveltejs/kit';
@@ -54,8 +56,21 @@
 			{#if group.id}
 				<AsyncButton
 					func={async () => {
-						await trpc().mutation('expenseMeta:group:delete', group.id);
-						await fetchGroups();
+						try {
+							await trpc().mutation('expenseMeta:group:delete', group.id);
+							await fetchGroups();
+						} catch (e) {
+							if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
+								addToast({
+									props: {
+										kind: 'error',
+										title: 'Error',
+										subtitle:
+											'Cannot delete group because it is used by one or more expense categories. Change those categories then try again.',
+									},
+								});
+							}
+						}
 					}}
 					let:loading
 				>
@@ -120,8 +135,21 @@
 			{#if cat.id}
 				<AsyncButton
 					func={async () => {
-						await trpc().mutation('expenseMeta:category:delete', cat.id);
-						await fetchCategories();
+						try {
+							await trpc().mutation('expenseMeta:category:delete', cat.id);
+							await fetchCategories();
+						} catch (e) {
+							if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
+								addToast({
+									props: {
+										kind: 'error',
+										title: 'Error',
+										subtitle:
+											'Cannot delete category because it is used by existing expenses.',
+									},
+								});
+							}
+						}
 					}}
 					let:loading
 				>
