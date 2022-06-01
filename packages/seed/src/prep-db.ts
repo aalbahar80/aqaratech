@@ -22,7 +22,7 @@ export async function insertExpenseCategories() {
 		id: idx + 1,
 		en: cat.en,
 		ar: cat.ar,
-		expenseGroupId: ExpenseGroups.find((g) => g.id === cat.group)?.idNum ?? 0,
+		expenseGroupId: ExpenseGroups.find((g) => g.id === cat.group)?.idNum ?? 1,
 	}));
 	const created = await prisma.expenseCategory.createMany({ data });
 	console.log(`${created.count} expense categories inserted`);
