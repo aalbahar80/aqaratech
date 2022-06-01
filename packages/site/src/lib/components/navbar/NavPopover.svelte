@@ -92,6 +92,12 @@
 								>
 									Docs
 								</a>
+								<a
+									href="/settings"
+									class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+								>
+									Settings
+								</a>
 							{/if}
 
 							<a

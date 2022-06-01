@@ -93,6 +93,12 @@
 					>
 						Docs
 					</a>
+					<a
+						href="/settings"
+						class="text-base font-medium text-white hover:text-gray-300"
+					>
+						Settings
+					</a>
 				{/if}
 
 				<a
