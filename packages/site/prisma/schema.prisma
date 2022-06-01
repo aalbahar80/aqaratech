@@ -61,9 +61,9 @@ model ExpenseCategory {
 }
 
 model ExpenseGroup {
-  id String @unique
-  en String
-  ar String
+  id Int    @id @default(autoincrement())
+  en String @unique
+  ar String @unique
 }
 
 model Lease {
