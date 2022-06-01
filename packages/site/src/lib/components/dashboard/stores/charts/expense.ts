@@ -23,8 +23,8 @@ const aggregate = (
 		const group =
 			groupBy === 'property'
 				? trx.address
-				: expenseMeta.categories.find((c) => c.id === trx.expenseCategoryId)
-						?.expenseGroupId ?? 1;
+				: expenseMeta.categories.find((c) => c.id === trx.categoryId)
+						?.groupId ?? 1;
 		if (month) {
 			const index = buckets.findIndex((bucket) => {
 				const condition = bucket.group === group;

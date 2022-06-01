@@ -229,7 +229,7 @@ export const charts = createRouter()
 
 			const slim = all.map((expense) => {
 				return {
-					...R.pick(expense, ['id', 'amount', 'expenseCategoryId', 'postAt']),
+					...R.pick(expense, ['id', 'amount', 'categoryId', 'postAt']),
 					address: expense.relatedProperty
 						? Property.getLabel(expense.relatedProperty)
 						: 'Common',

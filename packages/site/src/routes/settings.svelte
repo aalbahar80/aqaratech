@@ -28,7 +28,7 @@
 		({ categories } = await trpc().query('public:expenses:meta'));
 		return categories;
 	};
-
+	$: console.log(categories, 'categories');
 	const addGroup = async () => {
 		groups = [...groups, { en: '', ar: '' }];
 	};
@@ -92,13 +92,13 @@
 <Button text={'New'} on:click={() => addGroup()} />
 
 <h1>Expense Categories</h1>
-{#each categories as cat (cat.id)}
+{#each categories as cat}
 	<div class="flex flex-col gap-4 sm:h-10 sm:flex-row">
 		<input type="text" bind:value={cat.en} />
 		<input type="text" bind:value={cat.ar} />
 		<Select
-			id="expenseCategoryId"
-			current={cat.expenseGroupId}
+			id="categoryId"
+			bind:current={cat.groupId}
 			options={groups.map((i) => ({
 				label: `${i.en} - ${i.ar}`,
 				value: i.id,

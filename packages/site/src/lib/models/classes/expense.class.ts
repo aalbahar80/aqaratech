@@ -39,7 +39,7 @@ export class Expense extends Entity {
 
 	defaultForm = (): z.input<typeof baseSchema> => ({
 		amount: 0,
-		expenseCategoryId: '',
+		categoryId: '',
 		postAt: new Date(),
 		memo: '',
 		clientId: null,
@@ -59,10 +59,10 @@ export class Expense extends Entity {
 			value: toDateInput(this.data?.postAt),
 			label: 'Post Date',
 		}),
-		new AsyncSelectField('expenseCategoryId', {
+		new AsyncSelectField('categoryId', {
 			required: true,
 			options: categories,
-			value: this.data?.expenseCategoryId || '',
+			value: this.data?.categoryId || '',
 			label: 'Expense Category',
 		}),
 		new Field('memo', {

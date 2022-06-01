@@ -30,4 +30,4 @@
 	$: options = [baseOption, ...categoryOptions];
 </script>
 
-<Select id="expenseCategoryId" current={value} {options} on:select />
+<Select id="categoryId" current={value} {options} on:select />

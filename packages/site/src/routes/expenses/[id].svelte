@@ -22,7 +22,7 @@
 	$: details = [
 		['Post Date', expense.postAt?.toLocaleString() ?? '-'],
 		['Amount', kwdFormat(expense.amount)],
-		['Category', expense.expenseCategoryId || '-'],
+		['Category', `${expense.category?.en} - ${expense.category?.ar}`],
 		['Memo', expense.memo],
 		// ['Client', expense.client ? Client.getLabel(expense.client) : '-'],
 		// ['Property', expense.property ? Property.getLabel(expense.property) : '-'],

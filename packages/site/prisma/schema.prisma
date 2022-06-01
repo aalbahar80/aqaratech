@@ -33,7 +33,7 @@ model Expense {
   propertyId         String?
   clientId           String?
   maintenanceOrderId String?
-  expenseCategoryId  Int?
+  categoryId         Int?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   amount             Float
@@ -43,27 +43,31 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  category           ExpenseCategory?  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@index([unitId])
   @@index([propertyId])
   @@index([clientId])
   @@index([maintenanceOrderId])
-  @@index([expenseCategoryId])
+  @@index([categoryId])
 }
 
 model ExpenseCategory {
-  id             Int    @id @default(autoincrement())
-  expenseGroupId Int
-  en             String @unique
-  ar             String @unique
+  id       Int           @id @default(autoincrement())
+  groupId  Int
+  en       String        @unique
+  ar       String        @unique
+  group    ExpenseGroup? @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  expenses Expense[]
 
-  @@index([expenseGroupId])
+  @@index([groupId])
 }
 
 model ExpenseGroup {
-  id Int    @id @default(autoincrement())
-  en String @unique
-  ar String @unique
+  id         Int               @id @default(autoincrement())
+  en         String            @unique
+  ar         String            @unique
+  categories ExpenseCategory[]
 }
 
 model Lease {

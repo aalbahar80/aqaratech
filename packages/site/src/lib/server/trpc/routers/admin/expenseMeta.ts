@@ -40,7 +40,7 @@ export const expenseMeta = createRouter()
 	.mutation('category:save', {
 		input: z.object({
 			id: z.number().optional(),
-			expenseGroupId: z.number(),
+			groupId: z.number(),
 			en: z.string(),
 			ar: z.string(),
 		}),
@@ -53,7 +53,7 @@ export const expenseMeta = createRouter()
 							id: true,
 							en: true,
 							ar: true,
-							expenseGroupId: true,
+							groupId: true,
 						},
 				  })
 				: prismaClient.expenseCategory.create({
@@ -62,7 +62,7 @@ export const expenseMeta = createRouter()
 							id: true,
 							en: true,
 							ar: true,
-							expenseGroupId: true,
+							groupId: true,
 						},
 				  }),
 	})

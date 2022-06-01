@@ -17,6 +17,11 @@ export const expenses = createRouter()
 					client: true,
 					property: true,
 					unit: true,
+					category: {
+						include: {
+							group: true,
+						},
+					},
 				},
 			});
 			if (data) return data;
@@ -65,7 +70,7 @@ export const expenses = createRouter()
 				select: {
 					id: true,
 					amount: true,
-					expenseCategoryId: true,
+					categoryId: true,
 					postAt: true,
 				},
 			}),
