@@ -377,7 +377,7 @@ export class ExpenseForm extends Form {
 		await page.fill('input[name="postAt"]', dateToInput(this.data.postAt));
 		await page.fill('input[name="memo"]', this.data.memo);
 		await page.selectOption('#categoryId', {
-			value: this.data.categoryId,
+			label: 'Management Fees - رسوم إدارية',
 		});
 		await page.selectOption('#clientId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
@@ -398,7 +398,7 @@ export class ExpenseForm extends Form {
 	public basic() {
 		return [
 			kwdFormat(this.data.amount),
-			this.data.categoryId,
+			'Management Fees - رسوم إدارية',
 			// this.data.postAt,
 			this.data.memo,
 		];
