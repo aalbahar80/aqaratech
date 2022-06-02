@@ -9,7 +9,9 @@
 	$: {
 		// remove clients crumb if not admin
 		if (!$session.authz?.isAdmin) {
-			crumbs = crumbs.filter(([entity]) => entity !== 'clients');
+			crumbs = crumbs.filter(
+				([entity]) => entity !== 'clients' && entity !== 'tenants',
+			);
 		}
 	}
 </script>
