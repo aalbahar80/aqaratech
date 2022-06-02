@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
 	import Select from '$components/Select.svelte';
+	import Spinner from '$components/Spinner.svelte';
 	import { isTRPCError } from '$lib/client/is-trpc-error';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -36,11 +36,12 @@
 	};
 </script>
 
-<h1>Expense Groups</h1>
+<h1 class="text-lg font-medium leading-6 text-gray-900">Expense Groups</h1>
+
 {#each groups as group}
 	<div class="flex flex-col gap-4 sm:h-10 sm:flex-row">
 		<input type="text" bind:value={group.en} />
-		<input type="text" bind:value={group.ar} />
+		<input type="text" dir="rtl" bind:value={group.ar} />
 
 		<AsyncButton
 			func={async () => {
@@ -49,7 +50,13 @@
 			}}
 			let:loading
 		>
-			<Button text={'Save'} {loading} --min-width="100px" />
+			<button
+				type="button"
+				class="inline-flex w-3/12 items-center justify-center gap-2 rounded-md border border-transparent bg-indigo-100 px-6 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			>
+				Save
+				<Spinner {loading} />
+			</button>
 		</AsyncButton>
 
 		<div class="w-1/12 self-center text-red-300">
@@ -104,13 +111,20 @@
 	</div>
 {/each}
 
-<Button text={'New'} on:click={() => addGroup()} />
+<button
+	type="button"
+	class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-100 px-6 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+	on:click={() => addGroup()}
+>
+	New
+</button>
 
-<h1>Expense Categories</h1>
+<h1 class="text-lg font-medium leading-6 text-gray-900">Expense Categories</h1>
+
 {#each categories as cat}
 	<div class="flex flex-col gap-4 sm:h-10 sm:flex-row">
 		<input type="text" bind:value={cat.en} />
-		<input type="text" bind:value={cat.ar} />
+		<input type="text" dir="rtl" bind:value={cat.ar} />
 		<Select
 			id="categoryId"
 			bind:current={cat.groupId}
@@ -128,10 +142,16 @@
 			}}
 			let:loading
 		>
-			<Button text={'Save'} {loading} --min-width="100px" />
+			<button
+				type="button"
+				class="inline-flex w-3/12 items-center justify-center gap-2 rounded-md border border-transparent bg-indigo-100 px-6 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			>
+				Save
+				<Spinner {loading} />
+			</button>
 		</AsyncButton>
 
-		<div class="w-1/12 self-center text-red-300">
+		<div class="w-2/12 self-center text-red-300">
 			{#if cat.id}
 				<AsyncButton
 					func={async () => {
