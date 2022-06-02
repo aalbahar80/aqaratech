@@ -19,10 +19,10 @@ export type Context = inferAsyncReturnType<typeof createContext>;
 export const responseMeta: ResponseMetaFn = ({ type, errors, paths }) => {
 	if (type === 'query' && errors.length === 0) {
 		if (paths?.includes('public:expenses:meta')) {
-			const duration = 60 * 60 * 24 * 7;
+			// const duration = 60 * 60 * 24 * 7;
 			return {
 				headers: {
-					'cache-control': `max-age=59, stale-while-revalidate=${duration}`,
+					// 'cache-control': `max-age=59, stale-while-revalidate=${duration}`,
 				},
 			};
 		} else {

@@ -25,8 +25,6 @@
 		({ categories } = await trpc().query('public:expenses:meta'));
 		return categories;
 	};
-	$: console.log(categories, 'categories');
-	$: console.log(groups, 'groups');
 	const addCategory = async () => {
 		categories = [...categories, { en: '', ar: '' }];
 	};
