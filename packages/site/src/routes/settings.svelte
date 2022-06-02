@@ -59,7 +59,7 @@
 			</button>
 		</AsyncButton>
 
-		<div class="w-1/12 self-center text-red-300">
+		<div class="w-1/12 text-red-300 sm:w-2/12 sm:self-center">
 			{#if group.id}
 				<AsyncButton
 					func={async () => {
@@ -151,7 +151,7 @@
 			</button>
 		</AsyncButton>
 
-		<div class="w-2/12 self-center text-red-300">
+		<div class="w-1/12 text-red-300 sm:w-2/12 sm:self-center">
 			{#if cat.id}
 				<AsyncButton
 					func={async () => {
