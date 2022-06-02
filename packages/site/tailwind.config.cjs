@@ -6,9 +6,6 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		fontFamily: {
-			sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-		},
 		extend: {
 			// colors: colors.rose,
 			teal: colors.teal,
