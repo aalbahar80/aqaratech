@@ -2,8 +2,6 @@ import prismaClient from '$lib/server/prismaClient';
 import { router, TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-// TODO ensure these endpoints return minimal data.
-// Use tenant: transactions to return any privilieged data.
 export const transactions = router().query('read', {
 	input: z.string(),
 	resolve: async ({ input: id }) => {
