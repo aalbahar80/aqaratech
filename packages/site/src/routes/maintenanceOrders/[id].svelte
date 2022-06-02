@@ -4,7 +4,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { Client, Property, Unit } from '$lib/models/classes';
+	import { dateFormat } from '$lib/utils/common';
 	import type { Load } from './__types/[id]';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -24,22 +24,27 @@
 	$: details = [
 		['Title', maintenanceOrder.title],
 		['Status', maintenanceOrder.status ?? '-'],
+		[
+			'Completed At',
+			maintenanceOrder.completedAt
+				? dateFormat(maintenanceOrder.completedAt)
+				: null,
+		],
 		['Description', maintenanceOrder.description ?? '-'],
-		[
-			'Client',
-			maintenanceOrder.client ? Client.getLabel(maintenanceOrder.client) : '-',
-		],
-		[
-			'Property',
-			maintenanceOrder.property
-				? Property.getLabel(maintenanceOrder.property)
-				: '-',
-		],
-		[
-			'Unit',
-			maintenanceOrder.unit ? Unit.getLabel(maintenanceOrder.unit) : '-',
-		],
-		['Completed At', maintenanceOrder.completedAt?.toLocaleString() ?? '-'],
+		// [
+		// 	'Client',
+		// 	maintenanceOrder.client ? Client.getLabel(maintenanceOrder.client) : '-',
+		// ],
+		// [
+		// 	'Property',
+		// 	maintenanceOrder.property
+		// 		? Property.getLabel(maintenanceOrder.property)
+		// 		: '-',
+		// ],
+		// [
+		// 	'Unit',
+		// 	maintenanceOrder.unit ? Unit.getLabel(maintenanceOrder.unit) : '-',
+		// ],
 	];
 
 	const crumbs = [

@@ -26,6 +26,7 @@
 
 	const details: [string, string | null][] = [
 		['Post Date', dateFormat(trx.postAt)],
+		['Due Date', trx.dueAt ? dateFormat(trx.dueAt) : null],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo || '-'],
 		['Address', Property.getLabel(trx.lease.unit.property)],
