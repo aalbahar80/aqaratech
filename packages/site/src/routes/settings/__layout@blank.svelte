@@ -8,26 +8,20 @@
 		{
 			name: 'Expense Categories',
 			href: '/settings/expense-categories',
-			current: true,
 			icon: UisLayerGroup,
 		},
 		{
 			name: 'Expense Groups',
 			href: '/settings/expense-groups',
-			current: false,
 			icon: HeroiconsSolidChartPie,
 		},
-		// { name: 'Password', href: '#', current: false },
-		// { name: 'Notifications', href: '#', current: false },
-		// { name: 'Billing', href: '#', current: false },
-		// { name: 'Integrations', href: '#', current: false },
 	];
 </script>
 
 <div
 	class="mx-auto mt-4 flex max-w-7xl flex-col space-y-6 rounded-md  p-4 sm:p-6 lg:p-8"
 >
-	<div class="flex gap-4">
+	<div class="flex flex-col gap-4 lg:flex-row">
 		<aside class="py-6 lg:col-span-3">
 			<nav class="space-y-1">
 				{#each subNavigation as item (item.name)}
