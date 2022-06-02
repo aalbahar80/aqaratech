@@ -66,7 +66,7 @@
 					</button>
 				</AsyncButton>
 
-				<div class="w-1/12 text-red-300 sm:w-2/12 sm:self-center">
+				<div class="w-1/12 text-red-300 sm:self-center">
 					{#if group.id}
 						<AsyncButton
 							func={async () => {
