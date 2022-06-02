@@ -4,7 +4,7 @@ import { z } from 'zod';
 const baseSchema = z.object({
 	id: z.string().uuid().optional(),
 	amount: z.number().gt(0),
-	categoryId: z.number(),
+	categoryId: z.number({ invalid_type_error: 'Required' }),
 	postAt: z.preprocess(strToDate, z.date()),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 	clientId: z.string().uuid().nullable(),
