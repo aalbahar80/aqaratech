@@ -149,7 +149,10 @@ export const charts = createRouter()
 			const getExpenses = {
 				...dated,
 				...ordered,
-			};
+				include: {
+					category: true,
+				},
+			} as const;
 			const data = await prismaClient.client.findUnique({
 				where: {
 					id: clientId,
@@ -186,6 +189,7 @@ export const charts = createRouter()
 					: data.expenses.map((e) => ({
 							...e,
 							relatedProperty: null,
+							categoryLabel: e.category?.en,
 					  })) || [];
 			const propertyExpenses = unitId
 				? // if there's a unit id, then we only want the expenses for that unit
@@ -200,6 +204,7 @@ export const charts = createRouter()
 									street: property.street,
 									number: property.number,
 								},
+								categoryLabel: e.category?.en,
 							})) || [],
 				  );
 			const unitExpenses = data.properties.flatMap((property) =>
@@ -213,6 +218,7 @@ export const charts = createRouter()
 								street: property.street,
 								number: property.number,
 							},
+							categoryLabel: e.category?.en,
 						})) || [],
 				),
 			);
@@ -233,6 +239,7 @@ export const charts = createRouter()
 					address: expense.relatedProperty
 						? Property.getLabel(expense.relatedProperty)
 						: 'Common',
+					categoryLabel: expense.categoryLabel,
 				};
 			});
 

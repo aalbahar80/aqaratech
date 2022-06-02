@@ -17,7 +17,7 @@ export const getExpenseTableStore = (expenses: Writable<Data>) =>
 		const rows = $expenses.map((entry) => ({
 			id: entry.id,
 			Date: dateFormat(entry.postAt),
-			Category: entry.categoryId || '',
+			Category: entry.categoryLabel || '',
 			Amount: kwdFormat(entry.amount),
 			Location: entry.address,
 		}));
