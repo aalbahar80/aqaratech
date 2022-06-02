@@ -39,6 +39,8 @@ export class Property extends Entity {
 		avenue: '',
 		street: '',
 		number: '',
+		paci: '',
+		parcel: '',
 	});
 
 	override basicFields = [
@@ -47,6 +49,16 @@ export class Property extends Entity {
 		new Field('avenue', { value: this.data?.avenue }),
 		new Field('street', { required: true, value: this.data?.street }),
 		new Field('number', { required: true, value: this.data?.number }),
+		new Field('parcel', {
+			required: false,
+			value: this.data?.parcel,
+			hint: 'رقم القسيمة',
+		}),
+		new Field('paci', {
+			required: false,
+			value: this.data?.paci,
+			hint: 'الرقم الآلي للعنوان',
+		}),
 	];
 
 	override getRelationOptions = () => ({

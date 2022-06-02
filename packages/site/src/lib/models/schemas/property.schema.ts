@@ -22,6 +22,8 @@ export const schema = z.object({
 		.transform(trim)
 		.transform(falsyToNull),
 	avenue: z.string().nullable().transform(trim).transform(falsyToNull),
+	parcel: z.string().nullable().transform(trim).transform(falsyToNull),
+	paci: z.string().nullable().transform(trim).transform(falsyToNull),
 	number: z
 		.string()
 		.min(1, { message: 'Required' })

@@ -141,6 +141,8 @@ export class PropertyForm extends Form {
 		await page.fill('input[name="street"]', this.data.street);
 		await page.fill('input[name="avenue"]', this.data.avenue ?? '');
 		await page.fill('input[name="number"]', this.data.number);
+		await page.fill('input[name="parcel"]', this.data.parcel);
+		await page.fill('input[name="paci"]', this.data.paci);
 	}
 
 	public alter() {

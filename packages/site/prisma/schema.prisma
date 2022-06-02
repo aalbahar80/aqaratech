@@ -125,6 +125,8 @@ model Property {
   avenue            String?
   street            String?
   number            String?
+  parcel            String?
+  paci              String?
   cost              Float?
   long              Float?
   lat               Float?

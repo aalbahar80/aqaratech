@@ -104,6 +104,8 @@ export const fakeProperty = (clientId?: string) => {
 		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 		lat: propCoordinates?.[0] ?? 0,
 		long: propCoordinates?.[1] ?? 0,
+		parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
+		paci: faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
 		clientId: clientId ?? faker.datatype.uuid(),
 	};
 };
