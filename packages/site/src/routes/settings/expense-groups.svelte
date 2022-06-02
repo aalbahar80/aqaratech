@@ -22,7 +22,6 @@
 		return groups;
 	};
 
-	$: console.log(groups, 'groups');
 	const addGroup = async () => {
 		groups = [...groups, { id: undefined, en: '', ar: '' }];
 	};
