@@ -94,7 +94,7 @@
 						Docs
 					</a>
 					<a
-						href="/settings"
+						href="/settings/expense-categories"
 						class="text-base font-medium text-white hover:text-gray-300"
 					>
 						Settings
