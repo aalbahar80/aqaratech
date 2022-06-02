@@ -21,7 +21,7 @@
 		['Unit Number', unit.unitNumber],
 		['Type', unit.type],
 		['Market Rent', kwdFormat(unit.marketRent)],
-		['Usage', unit.usage || '-'],
+		['Usage', unit.usage],
 	];
 
 	const icons = [
