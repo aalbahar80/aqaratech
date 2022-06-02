@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import type { FormFixtures } from '../../../playwright.config.js';
 import { test as base } from '../../config.js';
 import { formClasses, type FormType } from '../form.js';
-import type { FormFixtures } from '../playwright.config.js';
-import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,11 +50,11 @@ test(`basic details are correct`, async ({ form, page }) => {
 		page.click('button[type="submit"]'),
 		page.waitForURL(/^((?!new).)*$/),
 	]);
+	const pane = page.locator('#detailsPane');
 
 	for (const b of form.basic()) {
-		const el = page.locator(`text=${b}`).first();
 		const re = new RegExp(`${b}`);
-		await expect(el).toContainText(re);
+		await expect(pane).toContainText(re);
 	}
 });
 

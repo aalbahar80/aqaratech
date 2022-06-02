@@ -15,7 +15,7 @@
 	];
 </script>
 
-<div>
+<div id="detailsPane">
 	<dl class="rounded-lg shadow">
 		{#each details as [key, value]}
 			<div class="row">
