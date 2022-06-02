@@ -33,7 +33,9 @@
 </script>
 
 <div class="flex flex-col gap-8">
-	<h1 class="text-lg font-medium leading-6 text-gray-900">
+	<h1
+		class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
+	>
 		Expense Categories
 	</h1>
 

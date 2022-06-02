@@ -29,7 +29,11 @@
 </script>
 
 <div class="flex flex-col gap-8">
-	<h1 class="text-lg font-medium leading-6 text-gray-900">Expense Groups</h1>
+	<h1
+		class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
+	>
+		Expense Groups
+	</h1>
 
 	<p>Expense groups are used in charts to summarize expenses.</p>
 	<div class="flex flex-col gap-4">
