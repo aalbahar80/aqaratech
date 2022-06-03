@@ -50,29 +50,31 @@ export class Expense extends Entity {
 		unitId: null,
 	});
 
-	override basicFields = [
-		new Field('amount', {
-			required: true,
-			type: 'number',
-			value: this.data?.amount,
-		}),
-		new Field('postAt', {
-			required: true,
-			type: 'date',
-			value: toDateInput(this.data?.postAt),
-			label: 'Post Date',
-		}),
-		new AsyncSelectField('categoryId', {
-			required: true,
-			options: categories,
-			value: this.data?.categoryId || '',
-			label: 'Expense Category',
-		}),
-		new Field('memo', {
-			value: R.pathOr(this.data, ['memo'], ''),
-			hint: 'Enter a short description of the expense. This will be visible to the client.',
-		}),
-	];
+	get basicFields() {
+		return [
+			new Field('amount', {
+				required: true,
+				type: 'number',
+				value: this.data?.amount,
+			}),
+			new Field('postAt', {
+				required: true,
+				type: 'date',
+				value: toDateInput(this.data?.postAt),
+				label: 'Post Date',
+			}),
+			new AsyncSelectField('categoryId', {
+				required: true,
+				options: categories,
+				value: this.data?.categoryId || '',
+				label: 'Expense Category',
+			}),
+			new Field('memo', {
+				value: R.pathOr(this.data, ['memo'], ''),
+				hint: 'Enter a short description of the expense. This will be visible to the client.',
+			}),
+		];
+	}
 
 	override getRelationOptions = () => {
 		const parsed = parseRelationOptions(this.data);

@@ -41,26 +41,30 @@ export class Client extends Entity {
 		dob: null,
 	});
 
-	override basicFields = [
-		new Field('firstName', { required: true, value: this.data?.firstName }),
-		new Field('secondName', { value: R.pathOr(this.data, ['secondName'], '') }),
-		new Field('lastName', { required: true, value: this.data?.lastName }),
-		new Field('email', {
-			type: 'email',
-			hint: "Once a client's email has been entered, you will be able to send him a portal invitation.",
-			value: this.data?.email,
-		}),
-		new Field('phone', { value: this.data?.phone }),
-		new Field('civilid', {
-			label: 'Civil ID',
-			value: R.pathOr(this.data, ['civilid'], ''),
-		}),
-		new Field('dob', {
-			type: 'date',
-			label: 'Date of Birth',
-			value: toDateInput(R.pathOr(this.data, ['dob'], '')),
-		}),
-	];
+	get basicFields() {
+		return [
+			new Field('firstName', { required: true, value: this.data?.firstName }),
+			new Field('secondName', {
+				value: R.pathOr(this.data, ['secondName'], ''),
+			}),
+			new Field('lastName', { required: true, value: this.data?.lastName }),
+			new Field('email', {
+				type: 'email',
+				hint: "Once a client's email has been entered, you will be able to send him a portal invitation.",
+				value: this.data?.email,
+			}),
+			new Field('phone', { value: this.data?.phone }),
+			new Field('civilid', {
+				label: 'Civil ID',
+				value: R.pathOr(this.data, ['civilid'], ''),
+			}),
+			new Field('dob', {
+				type: 'date',
+				label: 'Date of Birth',
+				value: toDateInput(R.pathOr(this.data, ['dob'], '')),
+			}),
+		];
+	}
 
 	public static getLabel = (item: ILabel) => getName(item);
 
