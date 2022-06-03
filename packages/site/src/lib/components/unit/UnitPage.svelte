@@ -14,7 +14,6 @@
 		| InferQueryOutput<'units:read'>
 		| InferQueryOutput<'owner:units:read'>;
 	export let unit: Unit;
-	export let hideActions = false;
 
 	let details: [string, string | null][];
 	$: details = [
@@ -51,12 +50,7 @@
 <Heading title="Unit" id={unit.id} entity="units" {icons}>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb
-			crumbs={hideActions
-				? [['properties', unit.property.id]]
-				: [
-						['clients', unit.property.clientId],
-						['properties', unit.property.id],
-				  ]}
+			crumbs={{ client: unit.property.clientId, property: unit.property.id }}
 		/>
 	</svelte:fragment>
 </Heading>

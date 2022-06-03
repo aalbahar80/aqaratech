@@ -56,12 +56,12 @@
 <Heading title="Lease" id={lease.id} entity="leases" {icons}>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb
-			crumbs={[
-				// ['clients', lease.unit.property.clientId],
-				['properties', lease.unit.property.id],
-				['units', lease.unit.id],
-				['tenants', lease.tenant.id],
-			]}
+			crumbs={{
+				client: lease.unit.property.clientId,
+				property: lease.unit.property.id,
+				unit: lease.unit.id,
+				tenant: lease.tenant.id,
+			}}
 		/>
 	</svelte:fragment>
 

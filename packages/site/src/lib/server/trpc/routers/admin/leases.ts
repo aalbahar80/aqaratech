@@ -49,6 +49,7 @@ export const leases = createRouter()
 									street: true,
 									number: true,
 									avenue: true,
+									clientId: true,
 									client: {
 										select: {
 											id: true,
