@@ -90,7 +90,7 @@
 
 <Heading title={Transaction.singularCap} id={trx.id} entity="leases" {icons}>
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb crumbs={[['leases', trx.leaseId]]} />
+		<BreadCrumb crumbs={{ lease: trx?.leaseId }} />
 	</svelte:fragment>
 </Heading>
 <Badge {label} {badgeColor} />

@@ -31,29 +31,7 @@
 				: null,
 		],
 		['Description', maintenanceOrder.description ?? '-'],
-		// [
-		// 	'Client',
-		// 	maintenanceOrder.client ? Client.getLabel(maintenanceOrder.client) : '-',
-		// ],
-		// [
-		// 	'Property',
-		// 	maintenanceOrder.property
-		// 		? Property.getLabel(maintenanceOrder.property)
-		// 		: '-',
-		// ],
-		// [
-		// 	'Unit',
-		// 	maintenanceOrder.unit ? Unit.getLabel(maintenanceOrder.unit) : '-',
-		// ],
 	];
-
-	const crumbs = [
-		maintenanceOrder.client ? ['clients', maintenanceOrder.client.id] : null,
-		maintenanceOrder.property
-			? ['properties', maintenanceOrder.property.id]
-			: null,
-		maintenanceOrder.unit ? ['units', maintenanceOrder.unit.id] : null,
-	].filter(Boolean);
 </script>
 
 <Heading
@@ -62,7 +40,13 @@
 	entity="maintenanceOrders"
 >
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb {crumbs} />
+		<BreadCrumb
+			crumbs={{
+				client: maintenanceOrder.client?.id,
+				property: maintenanceOrder.property?.id,
+				unit: maintenanceOrder.unit?.id,
+			}}
+		/>
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} />

@@ -24,21 +24,18 @@
 		['Amount', kwdFormat(expense.amount)],
 		['Category', `${expense.category?.en} - ${expense.category?.ar}`],
 		['Memo', expense.memo],
-		// ['Client', expense.client ? Client.getLabel(expense.client) : '-'],
-		// ['Property', expense.property ? Property.getLabel(expense.property) : '-'],
-		// ['Unit', expense.unit ? Unit.getLabel(expense.unit) : '-'],
 	];
-
-	const crumbs = [
-		expense.client ? ['clients', expense.client.id] : null,
-		expense.property ? ['properties', expense.property.id] : null,
-		expense.unit ? ['units', expense.unit.id] : null,
-	].filter(Boolean);
 </script>
 
 <Heading title={Expense.singularCap} id={expense.id} entity={Expense.entity}>
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb {crumbs} />
+		<BreadCrumb
+			crumbs={{
+				client: expense.client?.id,
+				property: expense.property?.id,
+				unit: expense.unit?.id,
+			}}
+		/>
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} />
