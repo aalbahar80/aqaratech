@@ -23,11 +23,14 @@
 			console.log({ crumbs }, 'after');
 		}
 	}
+
+	type Filtered = [keyof typeof routes, string][];
+	$: filtered = Object.entries(crumbs).filter(([, value]) => value) as Filtered;
 </script>
 
 <nav class="flex" aria-label="Breadcrumb">
 	<ol class="flex items-center space-x-4">
-		{#each objectEntries(crumbs) as [entity, id], idx}
+		{#each filtered as [entity, id], idx}
 			{#if id}
 				<li>
 					<div class="flex items-center">
