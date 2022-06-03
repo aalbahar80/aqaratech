@@ -1,10 +1,11 @@
+import type { Locator } from '@playwright/test';
 import { expect } from '@playwright/test';
 import path from 'path';
-import { test as base } from '../../config.js';
-import { formClasses, type FormType } from '../form.js';
-import type { FormFixtures } from '../playwright.config.js';
 import * as R from 'remeda';
 import { fileURLToPath } from 'url';
+import type { FormFixtures } from '../../../playwright.config.js';
+import { test as base } from '../../config.js';
+import { formClasses, type FormType } from '../form.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,7 +36,14 @@ test('Edit form: relations are preselected', async ({ form, page }) => {
 
 	for (const [field, relation] of R.toPairs(relationMap)) {
 		if (fields.includes(field)) {
-			const el = page.locator(`#${field}`);
+			let el: Locator;
+			if (relation == 'tenant') {
+				el = page.locator('.sv-content', {
+					has: page.locator(`#${field}`),
+				});
+			} else {
+				el = page.locator(`#${field}`);
+			}
 			const label = relations[relation]?.label;
 			await page.pause();
 			if (label) {

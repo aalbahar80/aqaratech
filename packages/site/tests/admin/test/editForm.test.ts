@@ -73,10 +73,17 @@ test('relations are preselected', async ({ form, page }) => {
 
 	for (const [field, relation] of R.toPairs(relationMap)) {
 		if (fields.includes(field)) {
-			const el = page.locator(`#${field}`);
 			const label = relations[relation]?.label;
 			if (label) {
-				await expect(el).toContainText(label);
+				if (relation === 'tenant') {
+					const el = page.locator('.sv-content', {
+						has: page.locator(`#${field}`),
+					});
+					await expect(el).toContainText(label);
+				} else {
+					const el = page.locator(`#${field}`);
+					await expect(el).toContainText(label);
+				}
 			}
 		}
 	}

@@ -295,7 +295,11 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.selectOption('#tenantId', { label: getName(this.tenant) });
+		await page.fill('[id="tenantId"]', getName(this.tenant));
+		await page
+			.locator(`.sv-item >> text=${getName(this.tenant)}`)
+			.first()
+			.click();
 		await page.selectOption('#clientId', {
 			label: getName(this.client),
 		});

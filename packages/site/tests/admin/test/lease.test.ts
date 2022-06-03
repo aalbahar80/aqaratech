@@ -41,7 +41,7 @@ test('new lease: preselected unit from URL', async ({ page, form }) => {
 
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?tenantId=${form.tenant.id}`);
-	const el = page.locator('#tenantId');
+	const el = page.locator('.sv-content', { has: page.locator('#tenantId') });
 	await expect(el).toContainText(getName(form.tenant));
 });
 
@@ -66,7 +66,7 @@ test.describe('edit lease', async () => {
 	});
 
 	test('tenant is preselected', async ({ page, form }) => {
-		const el = page.locator('#tenantId');
+		const el = page.locator('.sv-content', { has: page.locator('#tenantId') });
 		await expect(el).toContainText(getName(form.tenant));
 	});
 });
