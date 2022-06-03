@@ -120,7 +120,7 @@
 													in:flash|local={{ duration: 1000 }}
 													class="table__cell"
 												>
-													{value}
+													{value || '-'}
 												</td>
 											{/if}
 										{/if}
