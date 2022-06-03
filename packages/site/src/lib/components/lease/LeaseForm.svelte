@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import { trpc } from '$lib/client/trpc';
+	import ComboboxSvelecte from '$lib/components/ComboboxSvelecte.svelte';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
@@ -195,6 +196,7 @@
 									on:select={(e) => {
 										setData('tenantId', e.detail.value);
 									}}
+									combobox
 								/>
 							</div>
 						</div>

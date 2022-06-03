@@ -148,6 +148,7 @@
 										on:select={(e) => {
 											setData('tenantId', e.detail.value);
 										}}
+										combobox
 									/>
 								{:else if field === 'leaseId'}
 									<SelectEntity

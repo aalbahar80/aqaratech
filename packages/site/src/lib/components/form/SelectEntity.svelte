@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import ComboboxSvelecte from '$lib/components/ComboboxSvelecte.svelte';
 	import { relationalClassMap } from '$lib/models/classes/all.class';
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 	import type { Relation } from '$lib/models/types/entity.type';
+	import { formNone } from '$lib/utils/form-none';
 	import { createEventDispatcher } from 'svelte';
 	import { createMyCustomStore } from './SelectStore';
 
@@ -18,6 +20,7 @@
 	export let invalid = false;
 	export let invalidText = '';
 	export let required = true;
+	export let combobox = false;
 
 	const cstor = relationalClassMap[field];
 
@@ -48,24 +51,41 @@
 			{/if}
 		</label>
 	{/if}
-	<select
-		id={field}
-		class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-		class:invalid-select={invalid}
-		class:disabled
-		{disabled}
-		bind:value={selected}
-		on:change={() => {
-			dispatch('select', selected);
-		}}
-	>
-		{#each $options as option (option.value)}
-			<option value={option}>{option.label}</option>
-		{/each}
-	</select>
+	{#if combobox}
+		<div
+			use:formNone
+			class="border-pink-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+		>
+			<ComboboxSvelecte
+				name={field}
+				options={$options}
+				value={selected?.value}
+				on:change={(e) => {
+					console.log(e.detail, 'SelectEntity.svelte ~ 61');
+					dispatch('select', e.detail ?? { value: null });
+				}}
+			/>
+		</div>
+	{:else}
+		<select
+			id={field}
+			class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+			class:invalid-select={invalid}
+			class:disabled
+			{disabled}
+			bind:value={selected}
+			on:change={() => {
+				dispatch('select', selected);
+			}}
+		>
+			{#each $options as option (option.value)}
+				<option value={option}>{option.label}</option>
+			{/each}
+		</select>
+	{/if}
 	{#if invalid}
 		<p class="mt-2 text-sm text-red-600" id={`${field}-error`}>
-			{invalidText ?? ''}
+			{invalidText ? invalidText : 'Required'}
 		</p>
 	{/if}
 </div>
