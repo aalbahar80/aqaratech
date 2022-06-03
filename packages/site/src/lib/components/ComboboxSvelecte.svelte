@@ -26,6 +26,7 @@
 	<Svelecte
 		{options}
 		{name}
+		inputId={name}
 		bind:readSelection={selection}
 		bind:value
 		{placeholder}

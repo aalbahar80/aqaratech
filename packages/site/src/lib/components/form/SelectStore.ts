@@ -22,7 +22,7 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 
 	return {
 		subscribe,
-		fetchData: async (parentId?: string) => {
+		fetchData: async (parentId?: string | null) => {
 			let result: InstanceType<EntityConstructor>[] = [];
 			let parentFilter = {};
 			if (

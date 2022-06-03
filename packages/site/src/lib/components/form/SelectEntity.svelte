@@ -61,8 +61,7 @@
 				options={$options}
 				value={selected?.value}
 				on:change={(e) => {
-					console.log(e.detail, 'SelectEntity.svelte ~ 61');
-					dispatch('select', e.detail ?? { value: null });
+					dispatch('select', e.detail ?? { value: null, label: '' });
 				}}
 			/>
 		</div>
@@ -85,7 +84,7 @@
 	{/if}
 	{#if invalid}
 		<p class="mt-2 text-sm text-red-600" id={`${field}-error`}>
-			{invalidText ? invalidText : 'Required'}
+			{invalidText || 'Required'}
 		</p>
 	{/if}
 </div>
