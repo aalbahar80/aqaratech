@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { areas } from '$lib/config/constants';
+	import { formNone } from '$lib/utils/form-none';
 	import Fuse from 'fuse.js';
 	import Select from 'svelte-select';
 
@@ -24,14 +25,6 @@
 			value: result.item[1],
 			label: `${result.item[0]} | ${result.item[1]}`,
 		}));
-
-	function formNone(node: HTMLElement) {
-		// Remove's tailwind from class
-		const input = node.querySelector('input');
-		if (input) {
-			input.removeAttribute('type');
-		}
-	}
 </script>
 
 <div use:formNone>
