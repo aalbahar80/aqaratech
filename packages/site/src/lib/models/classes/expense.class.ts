@@ -37,9 +37,12 @@ export class Expense extends Entity {
 		super();
 	}
 
-	defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		amount: 0,
-		categoryId: '',
+		categoryId: null,
 		postAt: new Date(),
 		memo: '',
 		clientId: null,

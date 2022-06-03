@@ -60,8 +60,8 @@ export const expenses = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema,
-		resolve: async ({ input }) => ({
-			data: await prismaClient.expense.findMany({
+		resolve: async ({ input }) => {
+			const data = await prismaClient.expense.findMany({
 				take: input.size,
 				skip: input.size * (input.pageIndex - 1),
 				orderBy: {
@@ -70,16 +70,29 @@ export const expenses = createRouter()
 				select: {
 					id: true,
 					amount: true,
-					categoryId: true,
 					postAt: true,
+					category: {
+						include: {
+							group: true,
+						},
+					},
 				},
-			}),
-			pagination: {
+			});
+			const pagination = {
 				size: input.size,
 				start: input.size * (input.pageIndex - 1) + 1,
 				pageIndex: input.pageIndex,
-			},
-		}),
+			};
+
+			const formatted = data.map((d) => ({
+				...d,
+				category: d.category?.en,
+				group: d.category?.group?.en,
+			}));
+
+			const result = { data: formatted, pagination };
+			return result;
+		},
 	})
 	.query('count', {
 		resolve: () => prismaClient.expense.count({}),

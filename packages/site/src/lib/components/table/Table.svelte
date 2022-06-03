@@ -26,6 +26,7 @@
 				'secondName',
 				'createdAt',
 				'updatedAt',
+				'group',
 			];
 		} else if (innerWidth < 800) {
 			hidden = [
@@ -35,6 +36,7 @@
 				'secondName',
 				'createdAt',
 				'updatedAt',
+				'group',
 			];
 		} else {
 			hidden = alwaysHidden;
