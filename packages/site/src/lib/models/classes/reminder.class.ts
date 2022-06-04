@@ -46,6 +46,7 @@ export class Reminder {
 									email: true,
 									firstName: true,
 									lastName: true,
+									fullName: true,
 								},
 							},
 						},

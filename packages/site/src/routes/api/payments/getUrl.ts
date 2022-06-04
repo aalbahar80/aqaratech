@@ -44,6 +44,8 @@ export const get: RequestHandler = async ({ url }) => {
 								secondName: true,
 								thirdName: true,
 								lastName: true,
+								fullName: true,
+								shortName: true,
 								email: true,
 								phone: true,
 							},

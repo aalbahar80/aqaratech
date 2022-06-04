@@ -92,6 +92,8 @@ export class ClientForm extends Form {
 		await page.fill('input[name="firstName"]', this.data.firstName);
 		await page.fill('input[name="secondName"]', this.data.secondName);
 		await page.fill('input[name="lastName"]', this.data.lastName);
+		await page.fill('input[name="fullName"]', this.data.fullName);
+		await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);
 		await page.fill('input[name="civilid"]', this.data.civilid);
@@ -107,7 +109,7 @@ export class ClientForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.firstName, this.data.email];
+		return [this.data.firstName, this.data.fullName, this.data.email];
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -239,6 +241,8 @@ export class TenantForm extends Form {
 		await page.fill('input[name="firstName"]', this.data.firstName);
 		await page.fill('input[name="secondName"]', this.data.secondName);
 		await page.fill('input[name="lastName"]', this.data.lastName);
+		await page.fill('input[name="fullName"]', this.data.fullName);
+		await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);
 		await page.fill('input[name="civilid"]', this.data.civilid);
@@ -257,7 +261,7 @@ export class TenantForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.firstName, this.data.email];
+		return [this.data.firstName, this.data.fullName, this.data.email];
 	}
 
 	async setupEdit() {

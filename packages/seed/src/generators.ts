@@ -39,6 +39,7 @@ export const fakeClient = () => ({
 	firstName: faker.name.firstName(),
 	lastName: faker.name.lastName(),
 	secondName: faker.name.lastName(),
+	fullName: faker.name.firstName() + " " + faker.name.lastName(),
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
@@ -55,6 +56,7 @@ export const fakeTenant = () => ({
 	firstName: faker.name.firstName(),
 	lastName: faker.name.lastName(),
 	secondName: faker.name.lastName(),
+	fullName: faker.name.firstName() + " " + faker.name.lastName(),
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),

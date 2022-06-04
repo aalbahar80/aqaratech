@@ -14,6 +14,8 @@ model Client {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   deactivated       Boolean?           @default(false)
+  fullName          String             @default("")
+  shortName         String?
   firstName         String
   secondName        String?
   thirdName         String?
@@ -146,6 +148,8 @@ model Tenant {
   secondName        String?
   thirdName         String?
   lastName          String
+  fullName          String             @default("")
+  shortName         String?
   civilid           String?
   dob               DateTime?
   phone             String?

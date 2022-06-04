@@ -5,6 +5,7 @@ interface PredefinedTenant {
 	tenantId: string;
 	firstName: string;
 	lastName: string;
+	fullName: string;
 	tenant: SelectedOption;
 	client: SelectedOption;
 	property: SelectedOption;
@@ -28,6 +29,7 @@ interface PredefinedLease {
 	tenantId: string;
 	firstName: string;
 	lastName: string;
+	fullName: string;
 	unitId: string;
 	unitType: string | null;
 	unitNumber: string;
@@ -48,6 +50,7 @@ interface LeaseWTenant {
 		id: string;
 		firstName: string;
 		lastName: string;
+		fullName: string;
 	};
 	start: Date;
 	end: Date;

@@ -20,6 +20,7 @@
 				tenantId: lease.tenantId,
 				firstName: lease.tenant.firstName,
 				lastName: lease.tenant.lastName,
+				fullName: lease.tenant.fullName ?? '',
 				unitId: lease.unitId,
 				unitType: lease.unit.type,
 				unitNumber: lease.unit.unitNumber,
@@ -50,6 +51,7 @@
 				tenantId: tenant.id,
 				firstName: tenant.firstName,
 				lastName: tenant.lastName,
+				fullName: tenant.fullName ?? '',
 				tenant: {
 					label: Tenant.getLabel(tenant),
 					value: tenant.id,

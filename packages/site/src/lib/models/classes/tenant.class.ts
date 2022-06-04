@@ -38,6 +38,8 @@ export class Tenant extends Entity {
 		firstName: '',
 		secondName: '',
 		lastName: '',
+		fullName: '',
+		shortName: '',
 		dob: '',
 		email: '',
 		civilid: '',
@@ -59,6 +61,11 @@ export class Tenant extends Entity {
 				type: 'email',
 				hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
 				value: this.data?.email,
+			}),
+			new Field('fullName', { required: true, value: this.data?.fullName }),
+			new Field('shortName', {
+				value: R.pathOr(this.data, ['shortName'], ''),
+				hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
 			}),
 			new Field('phone', {
 				hint: "Adding a tenant's phone unlocks SMS payment reminders.",

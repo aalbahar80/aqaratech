@@ -38,6 +38,8 @@ export class Client extends Entity {
 		firstName: '',
 		secondName: null,
 		lastName: '',
+		fullName: '',
+		shortName: '',
 		phone: null,
 		email: null,
 		civilid: null,
@@ -51,6 +53,11 @@ export class Client extends Entity {
 				value: R.pathOr(this.data, ['secondName'], ''),
 			}),
 			new Field('lastName', { required: true, value: this.data?.lastName }),
+			new Field('fullName', { required: true, value: this.data?.fullName }),
+			new Field('shortName', {
+				value: R.pathOr(this.data, ['shortName'], ''),
+				hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
+			}),
 			new Field('email', {
 				type: 'email',
 				hint: "Once a client's email has been entered, you will be able to send him a portal invitation.",

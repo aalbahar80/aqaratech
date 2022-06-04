@@ -23,6 +23,8 @@ export const leases = createRouter()
 							id: true,
 							firstName: true,
 							lastName: true,
+							fullName: true,
+							shortName: true,
 						},
 					},
 					unit: {

@@ -15,6 +15,7 @@ interface TrxPaymentInfo {
 			secondName: string | null;
 			thirdName: string | null;
 			lastName: string;
+			fullName: string;
 		};
 	};
 }
