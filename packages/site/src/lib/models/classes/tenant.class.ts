@@ -93,7 +93,7 @@ export class Tenant extends Entity {
 
 	public static getLabel = (item: ILabel) => item.shortName || item.fullName;
 
-	override getLabel = () => this.data?.shortName || this.data?.fullName || '';
+	override getLabel = () => this.data?.fullName || '';
 }
 
 interface ILabel {

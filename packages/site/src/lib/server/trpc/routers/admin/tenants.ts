@@ -83,7 +83,6 @@ export const tenants = createRouter()
 				select: {
 					id: true,
 					fullName: true,
-					shortName: true,
 					email: true,
 					phone: true,
 					updatedAt: true,

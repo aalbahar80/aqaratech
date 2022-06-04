@@ -3,9 +3,7 @@
 	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import type { Load } from '@sveltejs/kit';
-	import { Client } from '../../lib/models/classes/client.class';
 	import { Property } from '../../lib/models/classes/property.class';
-	import { Tenant } from '../../lib/models/classes/tenant.class';
 	import { Unit } from '../../lib/models/classes/unit.class';
 
 	export const load: Load = async ({ url, fetch }) => {
