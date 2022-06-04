@@ -89,7 +89,7 @@ export class ClientForm extends Form {
 
 	public async fill(page: Page) {
 		await page.fill('input[name="fullName"]', this.data.fullName);
-		await page.fill('input[name="shortName"]', this.data.shortName);
+		// await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);
 		await page.fill('input[name="civilid"]', this.data.civilid);
@@ -235,7 +235,7 @@ export class TenantForm extends Form {
 
 	public async fill(page: Page) {
 		await page.fill('input[name="fullName"]', this.data.fullName);
-		await page.fill('input[name="shortName"]', this.data.shortName);
+		// await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
 		await page.fill('input[name="phone"]', this.data.phone);
 		await page.fill('input[name="civilid"]', this.data.civilid);
@@ -292,7 +292,7 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.fill('[id="tenantId"]', this.tenant.fullName
+		await page.fill('[id="tenantId"]', this.tenant.fullName);
 		await page
 			.locator(`.sv-item >> text=${this.tenant.fullName}`)
 			.first()

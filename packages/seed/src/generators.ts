@@ -32,41 +32,49 @@ export const fakeEmail = () => {
 	return email;
 };
 
-export const fakeClient = () => ({
-	id: faker.datatype.uuid(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	fullName: faker.name.firstName() + " " + faker.name.lastName(),
-	civilid: faker.datatype
-		.number({ min: 200000000000, max: 399999999999 })
-		.toString(),
-	email: fakeEmail(),
-	// phone: faker.phone.phoneNumber("1#######"),
-	phone: "99212976",
-	dob: faker.date.past(),
-});
+export const fakeClient = () => {
+	const fullName = faker.name.firstName() + " " + faker.name.lastName();
+	return {
+		id: faker.datatype.uuid(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		fullName,
+		shortName: fullName,
+		civilid: faker.datatype
+			.number({ min: 200000000000, max: 399999999999 })
+			.toString(),
+		email: fakeEmail(),
+		// phone: faker.phone.phoneNumber("1#######"),
+		phone: "99212976",
+		dob: faker.date.past(),
+	};
+};
 
-export const fakeTenant = () => ({
-	id: faker.datatype.uuid(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	fullName: faker.name.firstName() + " " + faker.name.lastName(),
-	civilid: faker.datatype
-		.number({ min: 200000000000, max: 399999999999 })
-		.toString(),
-	email: fakeEmail(),
-	dob: faker.date.past(),
-	// phone: faker.phone.phoneNumber("1#######"),
-	phone: "99212976",
-	passportNum: faker.datatype
-		.number({ min: 100000000, max: 999999999 })
-		.toString(),
-	nationality: faker.address.countryCode(),
-	residencyNum: faker.datatype
-		.number({ min: 100000000, max: 999999999 })
-		.toString(),
-	residencyEnd: faker.date.future(2),
-});
+export const fakeTenant = () => {
+	const fullName = faker.name.firstName() + " " + faker.name.lastName();
+	return {
+		id: faker.datatype.uuid(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		fullName,
+		shortName: fullName,
+		civilid: faker.datatype
+			.number({ min: 200000000000, max: 399999999999 })
+			.toString(),
+		email: fakeEmail(),
+		dob: faker.date.past(),
+		// phone: faker.phone.phoneNumber("1#######"),
+		phone: "99212976",
+		passportNum: faker.datatype
+			.number({ min: 100000000, max: 999999999 })
+			.toString(),
+		nationality: faker.address.countryCode(),
+		residencyNum: faker.datatype
+			.number({ min: 100000000, max: 999999999 })
+			.toString(),
+		residencyEnd: faker.date.future(2),
+	};
+};
 
 export const fakeUnit = (propertyId?: string) => ({
 	id: faker.datatype.uuid(),
