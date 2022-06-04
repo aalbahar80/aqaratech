@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
-import { getAddress, getName } from '../../../package/utils/common.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getAddress } from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import { PropertyForm } from '../form.js';
 
@@ -24,7 +24,7 @@ test.describe('new unit', async () => {
 
 	test('preselected client from URL', async ({ page, form }) => {
 		const el = page.locator('#clientId');
-		await expect(el).toContainText(getName(form.client));
+		await expect(el).toContainText(form.client.fullName);
 	});
 
 	test('preselected property from URL', async ({ page, form }) => {

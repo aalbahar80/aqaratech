@@ -21,7 +21,6 @@ import type { EntityTitle } from '../../package/models/types/entity.type';
 import {
 	dateToInput,
 	getAddress,
-	getName,
 	getUnitLabel,
 	kwdFormat,
 } from '../../package/utils/common.js';
@@ -89,9 +88,6 @@ export class ClientForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.fill('input[name="firstName"]', this.data.firstName);
-		await page.fill('input[name="secondName"]', this.data.secondName);
-		await page.fill('input[name="lastName"]', this.data.lastName);
 		await page.fill('input[name="fullName"]', this.data.fullName);
 		await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
@@ -109,7 +105,7 @@ export class ClientForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.firstName, this.data.fullName, this.data.email];
+		return [this.data.fullName, this.data.email];
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -135,7 +131,7 @@ export class PropertyForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.selectOption('#clientId', { label: getName(this.client) });
+		await page.selectOption('#clientId', { label: this.client.fullName });
 		await page.fill('[id="area"]', this.data.area);
 		await page.locator(`.item >> text=${this.data.area}`).first().click();
 		await page.keyboard.press('Enter');
@@ -184,7 +180,7 @@ export class UnitForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.selectOption('#clientId', { label: getName(this.client) });
+		await page.selectOption('#clientId', { label: this.client.fullName });
 		await page.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
@@ -238,9 +234,6 @@ export class TenantForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.fill('input[name="firstName"]', this.data.firstName);
-		await page.fill('input[name="secondName"]', this.data.secondName);
-		await page.fill('input[name="lastName"]', this.data.lastName);
 		await page.fill('input[name="fullName"]', this.data.fullName);
 		await page.fill('input[name="shortName"]', this.data.shortName);
 		await page.fill('input[name="email"]', this.data.email);
@@ -261,7 +254,7 @@ export class TenantForm extends Form {
 	}
 
 	public basic() {
-		return [this.data.firstName, this.data.fullName, this.data.email];
+		return [this.data.fullName, this.data.email];
 	}
 
 	async setupEdit() {
@@ -299,13 +292,13 @@ export class LeaseForm extends Form {
 	}
 
 	public async fill(page: Page) {
-		await page.fill('[id="tenantId"]', getName(this.tenant));
+		await page.fill('[id="tenantId"]', this.tenant.fullName
 		await page
-			.locator(`.sv-item >> text=${getName(this.tenant)}`)
+			.locator(`.sv-item >> text=${this.tenant.fullName}`)
 			.first()
 			.click();
 		await page.selectOption('#clientId', {
-			label: getName(this.client),
+			label: this.client.fullName,
 		});
 		await page.selectOption('#propertyId', {
 			label: getAddress(this.property),

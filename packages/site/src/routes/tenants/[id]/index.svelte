@@ -7,7 +7,6 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import { getName } from '$lib/utils/common';
 	import { Collection, Mail } from '@steeze-ui/heroicons';
 	import * as R from 'remeda';
 	import type { Load } from './__types/index';
@@ -25,7 +24,7 @@
 	export let tenant: Tenant;
 
 	const details: [string, string | null][] = [
-		['Full Name', getName(tenant, false)],
+		['Full Name', tenant.fullName],
 		['Phone', tenant.phone],
 		['Email', tenant.email],
 		['Civil id', tenant.civilid],

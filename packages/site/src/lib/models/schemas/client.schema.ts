@@ -8,9 +8,6 @@ import { z } from 'zod';
 
 export const schema = z.object({
 	id: z.string().uuid().optional(),
-	firstName: z.string().min(1, { message: 'Required' }).transform(trim),
-	lastName: z.string().min(1, { message: 'Required' }).transform(trim),
-	secondName: z.string().nullable().transform(trim).transform(falsyToNull),
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 	shortName: z.string().nullable().transform(trim).transform(falsyToNull),
 	email: z

@@ -11,10 +11,6 @@ interface TrxPaymentInfo {
 		tenant: {
 			email: string | null;
 			phone: string | null;
-			firstName: string;
-			secondName: string | null;
-			thirdName: string | null;
-			lastName: string;
 			fullName: string;
 		};
 	};
@@ -31,21 +27,13 @@ export const getMFUrl = async (trx: TrxPaymentInfo): Promise<string> => {
 	// get necessary info for payment
 	console.log('fetching mf url');
 	const { tenant } = trx.lease;
-	const name = [
-		tenant.firstName,
-		tenant.secondName,
-		tenant.thirdName,
-		tenant.lastName,
-	]
-		.filter(Boolean)
-		.join(' ');
 
 	const callbackUrl = `${myfatoorahConfig.MYFATOORAH_CALLBACK_URL}/api/payments/mfcallback`;
 	// get last 8 characters of tenant's phone number
 	const trxData = {
 		InvoiceValue: trx.amount,
 		CustomerReference: trx.id,
-		CustomerName: name,
+		CustomerName: tenant.fullName,
 		// CustomerEmail: tenant.email,
 		// CustomerMobile: tenant.phone?.slice(-8), // TODO: don't include if null
 		CallBackUrl: callbackUrl,

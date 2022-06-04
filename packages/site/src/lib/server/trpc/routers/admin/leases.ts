@@ -22,10 +22,6 @@ export const leases = createRouter()
 					tenant: {
 						select: {
 							id: true,
-							firstName: true,
-							lastName: true,
-							secondName: true,
-							thirdName: true,
 							fullName: true,
 							shortName: true,
 							civilid: true,
@@ -55,8 +51,6 @@ export const leases = createRouter()
 									client: {
 										select: {
 											id: true,
-											firstName: true,
-											lastName: true,
 											fullName: true,
 											shortName: true,
 										},
@@ -92,9 +86,6 @@ export const leases = createRouter()
 					tenant: {
 						select: {
 							id: true,
-							firstName: true,
-							lastName: true,
-							secondName: true,
 							fullName: true,
 							shortName: true,
 						},
@@ -232,9 +223,6 @@ export const leases = createRouter()
 					end: true,
 					tenant: {
 						select: {
-							firstName: true,
-							lastName: true,
-							secondName: true,
 							fullName: true,
 							shortName: true,
 						},
@@ -255,8 +243,6 @@ export const leases = createRouter()
 							OR: [
 								{ id: { contains: query } },
 								{ license: { contains: query } },
-								{ tenant: { firstName: { contains: query } } },
-								{ tenant: { lastName: { contains: query } } },
 								{ tenant: { fullName: { contains: query } } },
 								{ tenant: { shortName: { contains: query } } },
 							],

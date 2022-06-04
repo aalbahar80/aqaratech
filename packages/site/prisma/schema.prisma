@@ -16,10 +16,6 @@ model Client {
   deactivated       Boolean?           @default(false)
   fullName          String             @default("")
   shortName         String?
-  firstName         String
-  secondName        String?
-  thirdName         String?
-  lastName          String
   civilid           String?
   phone             String?
   email             String?
@@ -144,10 +140,6 @@ model Tenant {
   id                String             @id @default(uuid())
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
-  firstName         String
-  secondName        String?
-  thirdName         String?
-  lastName          String
   fullName          String             @default("")
   shortName         String?
   civilid           String?

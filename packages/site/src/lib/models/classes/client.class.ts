@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
-import { concatIfExists, getName, toDateInput } from '$lib/utils/common.js';
+import { toDateInput } from '$lib/utils/common.js';
 import type { Client as PClient } from '@prisma/client';
 import * as R from 'remeda';
 import type { z } from 'zod';
@@ -35,9 +35,6 @@ export class Client extends Entity {
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,
 		any
 	> => ({
-		firstName: '',
-		secondName: null,
-		lastName: '',
 		fullName: '',
 		shortName: '',
 		phone: null,
@@ -48,11 +45,6 @@ export class Client extends Entity {
 
 	get basicFields() {
 		return [
-			new Field('firstName', { required: true, value: this.data?.firstName }),
-			new Field('secondName', {
-				value: R.pathOr(this.data, ['secondName'], ''),
-			}),
-			new Field('lastName', { required: true, value: this.data?.lastName }),
 			new Field('fullName', { required: true, value: this.data?.fullName }),
 			new Field('shortName', {
 				value: R.pathOr(this.data, ['shortName'], ''),
@@ -76,25 +68,14 @@ export class Client extends Entity {
 		];
 	}
 
-	public static getLabel = (item: ILabel) => getName(item);
+	public static getLabel = (item: ILabel) => item.shortName || item.fullName;
 
-	override getLabel = () => {
-		if (this.data?.firstName && this.data.lastName) {
-			return concatIfExists([
-				this.data.firstName,
-				this.data.secondName,
-				this.data.lastName,
-			]);
-		} else {
-			console.warn('no firstName or lastName');
-			return '';
-		}
-	};
+	override getLabel = () => this.data?.shortName || this.data?.fullName || '';
 
 	static relationalFields = null;
 }
 
 interface ILabel {
-	firstName: string | null;
-	lastName: string | null;
+	fullName: string;
+	shortName: string | null;
 }

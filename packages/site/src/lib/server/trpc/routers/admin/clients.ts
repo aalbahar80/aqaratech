@@ -32,9 +32,6 @@ export const clients = createRouter()
 					id: true,
 					createdAt: true,
 					updatedAt: true,
-					firstName: true,
-					secondName: true,
-					lastName: true,
 					fullName: true,
 					shortName: true,
 					phone: true,
@@ -58,9 +55,6 @@ export const clients = createRouter()
 				},
 				select: {
 					id: true,
-					firstName: true,
-					lastName: true,
-					secondName: true,
 					fullName: true,
 					shortName: true,
 					phone: true,
@@ -86,8 +80,6 @@ export const clients = createRouter()
 				},
 				select: {
 					id: true,
-					firstName: true,
-					lastName: true,
 					fullName: true,
 					shortName: true,
 				},
@@ -95,10 +87,6 @@ export const clients = createRouter()
 					? {
 							OR: [
 								{ id: { contains: query } },
-								{ firstName: { contains: query } },
-								{ secondName: { contains: query } },
-								{ thirdName: { contains: query } },
-								{ lastName: { contains: query } },
 								{ fullName: { contains: query } },
 								{ shortName: { contains: query } },
 								{ email: { contains: query } },

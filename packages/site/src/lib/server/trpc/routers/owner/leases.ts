@@ -21,8 +21,6 @@ export const leases = createRouter()
 					tenant: {
 						select: {
 							id: true,
-							firstName: true,
-							lastName: true,
 							fullName: true,
 							shortName: true,
 						},

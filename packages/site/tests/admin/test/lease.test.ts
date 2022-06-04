@@ -1,11 +1,7 @@
 import { expect } from '@playwright/test';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
-	getAddress,
-	getName,
-	getUnitLabel,
-} from '../../../package/utils/common.js';
+import { getAddress, getUnitLabel } from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import { LeaseForm } from '../form.js';
 
@@ -24,7 +20,7 @@ const test = base.extend<{ form: LeaseForm }>({
 test('new lease: preselected client from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
 	const el = page.locator('#clientId');
-	await expect(el).toContainText(getName(form.client));
+	await expect(el).toContainText(form.client.fullName);
 });
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
@@ -42,7 +38,7 @@ test('new lease: preselected unit from URL', async ({ page, form }) => {
 test('new lease: preselected tenant from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?tenantId=${form.tenant.id}`);
 	const el = page.locator('.sv-content', { has: page.locator('#tenantId') });
-	await expect(el).toContainText(getName(form.tenant));
+	await expect(el).toContainText(form.tenant.fullName);
 });
 
 test.describe('edit lease', async () => {
@@ -52,7 +48,7 @@ test.describe('edit lease', async () => {
 
 	test('client is preselected', async ({ page, form }) => {
 		const el = page.locator('#clientId');
-		await expect(el).toContainText(getName(form.client));
+		await expect(el).toContainText(form.client.fullName);
 	});
 
 	test('property is preselected', async ({ page, form }) => {
@@ -67,6 +63,6 @@ test.describe('edit lease', async () => {
 
 	test('tenant is preselected', async ({ page, form }) => {
 		const el = page.locator('.sv-content', { has: page.locator('#tenantId') });
-		await expect(el).toContainText(getName(form.tenant));
+		await expect(el).toContainText(form.tenant.fullName);
 	});
 });

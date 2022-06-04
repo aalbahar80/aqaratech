@@ -18,8 +18,6 @@
 			predefined = {
 				initiator: 'lease',
 				tenantId: lease.tenantId,
-				firstName: lease.tenant.firstName,
-				lastName: lease.tenant.lastName,
 				fullName: lease.tenant.fullName ?? '',
 				unitId: lease.unitId,
 				unitType: lease.unit.type,
@@ -28,11 +26,13 @@
 				address: Property.getLabel(lease.unit.property),
 				monthlyRent: lease.monthlyRent,
 				tenant: {
-					label: Tenant.getLabel(lease.tenant),
+					label: lease.tenant.shortName || lease.tenant.fullName,
 					value: lease.tenantId,
 				},
 				client: {
-					label: Client.getLabel(lease.unit.property.client),
+					label:
+						lease.unit.property.client.shortName ||
+						lease.unit.property.client.fullName,
 					value: lease.unit.property.client.id,
 				},
 				property: {
@@ -49,11 +49,9 @@
 			predefined = {
 				initiator: 'tenant',
 				tenantId: tenant.id,
-				firstName: tenant.firstName,
-				lastName: tenant.lastName,
-				fullName: tenant.fullName ?? '',
+				fullName: tenant.fullName,
 				tenant: {
-					label: Tenant.getLabel(tenant),
+					label: tenant.shortName || tenant.fullName,
 					value: tenant.id,
 				},
 				client: undefined,
@@ -71,7 +69,8 @@
 				address: Property.getLabel(unit.property),
 				tenant: undefined,
 				client: {
-					label: Client.getLabel(unit.property.client),
+					label:
+						unit.property.client.shortName || unit.property.client.fullName,
 					value: unit.property.client.id,
 				},
 				property: {

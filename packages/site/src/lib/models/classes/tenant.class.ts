@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
-import { concatIfExists, getName, toDateInput } from '$lib/utils/common.js';
+import { toDateInput } from '$lib/utils/common.js';
 import type { Tenant as PTenant } from '@prisma/client';
 import * as R from 'remeda';
 import type { z } from 'zod';
@@ -35,9 +35,6 @@ export class Tenant extends Entity {
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,
 		any
 	> => ({
-		firstName: '',
-		secondName: '',
-		lastName: '',
 		fullName: '',
 		shortName: '',
 		dob: '',
@@ -52,16 +49,6 @@ export class Tenant extends Entity {
 
 	get basicFields() {
 		return [
-			new Field('firstName', { required: true, value: this.data?.firstName }),
-			new Field('secondName', {
-				value: R.pathOr(this.data, ['secondName'], ''),
-			}),
-			new Field('lastName', { required: true, value: this.data?.lastName }),
-			new Field('email', {
-				type: 'email',
-				hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
-				value: this.data?.email,
-			}),
 			new Field('fullName', { required: true, value: this.data?.fullName }),
 			new Field('shortName', {
 				value: R.pathOr(this.data, ['shortName'], ''),
@@ -70,6 +57,11 @@ export class Tenant extends Entity {
 			new Field('phone', {
 				hint: "Adding a tenant's phone unlocks SMS payment reminders.",
 				value: this.data?.phone,
+			}),
+			new Field('email', {
+				type: 'email',
+				hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
+				value: this.data?.email,
 			}),
 			new Field('dob', {
 				type: 'date',
@@ -99,23 +91,12 @@ export class Tenant extends Entity {
 		];
 	}
 
-	static getLabel = (item: ILabel) => getName(item);
+	public static getLabel = (item: ILabel) => item.shortName || item.fullName;
 
-	override getLabel = () => {
-		if (this?.data?.firstName && this.data.lastName) {
-			return concatIfExists([
-				this.data.firstName,
-				this.data.secondName,
-				this.data.lastName,
-			]);
-		} else {
-			console.warn('no firstName or lastName');
-			return '';
-		}
-	};
+	override getLabel = () => this.data?.shortName || this.data?.fullName || '';
 }
 
 interface ILabel {
-	firstName: string | null;
-	lastName: string | null;
+	fullName: string;
+	shortName: string | null;
 }

@@ -3,8 +3,6 @@ import type { SelectedOption } from './option.interface';
 interface PredefinedTenant {
 	initiator: 'tenant';
 	tenantId: string;
-	firstName: string;
-	lastName: string;
 	fullName: string;
 	tenant: SelectedOption;
 	client: SelectedOption;
@@ -27,8 +25,6 @@ interface PredefinedUnit {
 interface PredefinedLease {
 	initiator: 'lease';
 	tenantId: string;
-	firstName: string;
-	lastName: string;
 	fullName: string;
 	unitId: string;
 	unitType: string | null;
@@ -48,8 +44,6 @@ interface LeaseWTenant {
 	id: string;
 	tenant: {
 		id: string;
-		firstName: string;
-		lastName: string;
 		fullName: string;
 	};
 	start: Date;

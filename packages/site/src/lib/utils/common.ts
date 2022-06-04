@@ -28,28 +28,6 @@ export const concatIfExists = (strings: (string | null | undefined)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
 
-export const getName = <
-	T extends {
-		firstName: string | null;
-		lastName: string | null;
-		secondName?: string | null;
-		thirdName?: string | null;
-	},
->(
-	person: T,
-	short = false,
-): string => {
-	if (short) {
-		return concatIfExists([person.firstName, person.lastName]);
-	}
-	return concatIfExists([
-		person.firstName,
-		person.secondName,
-		person.thirdName,
-		person.lastName,
-	]);
-};
-
 export const forceDate = (date: Date | string | number): Date => {
 	if (date instanceof Date) return date;
 	if (typeof date === 'string' || typeof date === 'number') {

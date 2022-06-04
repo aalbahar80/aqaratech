@@ -2,7 +2,7 @@
 	import { trpc } from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
-	import { getAddress, getName } from '$lib/utils/common';
+	import { getAddress } from '$lib/utils/common';
 	import { inWords } from '$lib/utils/currency';
 	import type { LoadEvent } from '@sveltejs/kit';
 
@@ -29,7 +29,7 @@
 
 	const fillable = {
 		contractDate: new Date().toLocaleDateString(),
-		name: getName(lease.tenant, false),
+		name: lease.tenant.fullName,
 		civilid: lease.tenant.civilid,
 		phone: lease.tenant.phone,
 		tenantAddress: '',

@@ -1,9 +1,8 @@
 import { expect } from '@playwright/test';
 import path from 'path';
-import { getAddress, getName } from '../../../package/utils/common.js';
+import { fileURLToPath } from 'url';
 import { test as base } from '../../config.js';
 import { PropertyForm } from '../form.js';
-import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +23,7 @@ test.describe('Edit property form', async () => {
 
 	test('client is preselected', async ({ form, page }) => {
 		const el = page.locator('#clientId');
-		await expect(el).toContainText(getName(form.client));
+		await expect(el).toContainText(form.client.fullName);
 	});
 
 	test('area is preselected', async ({ form, page }) => {
@@ -36,5 +35,5 @@ test.describe('Edit property form', async () => {
 test('New property: preselected clientId from URL', async ({ page, form }) => {
 	await page.goto(`/new/properties?clientId=${form.client.id}`);
 	const el = page.locator('#clientId');
-	await expect(el).toContainText(getName(form.client));
+	await expect(el).toContainText(form.client.fullName);
 });

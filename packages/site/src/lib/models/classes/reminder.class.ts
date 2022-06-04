@@ -44,8 +44,6 @@ export class Reminder {
 								select: {
 									phone: true,
 									email: true,
-									firstName: true,
-									lastName: true,
 									fullName: true,
 								},
 							},
@@ -61,7 +59,7 @@ export class Reminder {
 				// date: format(trx.postAt, 'MMM yyyy'),
 				amount: trx.amount,
 				date: trx.postAt,
-				name: `${trx.lease.tenant.firstName} ${trx.lease.tenant.lastName}`,
+				name: `${trx.lease.tenant.fullName}`,
 			};
 		}
 		return this.data;

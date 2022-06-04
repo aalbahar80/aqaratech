@@ -1,11 +1,7 @@
 import { expect } from '@playwright/test';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
-	getAddress,
-	getName,
-	getUnitLabel,
-} from '../../../package/utils/common.js';
+import { getAddress, getUnitLabel } from '../../../package/utils/common.js';
 import { test as base } from '../../config.js';
 import {
 	ExpenseForm,
@@ -51,7 +47,7 @@ test('new: preselected client from URL', async ({ page, form }) => {
 	await form.setupEdit();
 	await page.goto(`/new/${form.urlName}?clientId=${form.client.id}`);
 	const el = page.locator('#clientId');
-	const label = getName(form.client);
+	const label = form.client.fullName;
 	await expect(el).toContainText(label);
 
 	const radio = page.locator('role=radio[checked=true]');
@@ -119,7 +115,7 @@ test('edit: preselected client', async ({ page, form }) => {
 	await page.goto(`/${form.urlName}/${form.data.id}/edit`);
 
 	const el = page.locator('#clientId');
-	const label = getName(form.client);
+	const label = form.client.fullName;
 	await expect(el).toContainText(label);
 
 	const radio = page.locator('role=radio[checked=true]');

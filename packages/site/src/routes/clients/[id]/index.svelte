@@ -7,7 +7,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
-	import { dateFormat, getName } from '$lib/utils/common';
+	import { dateFormat } from '$lib/utils/common';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
 	import type { Load } from './__types/index';
 
@@ -24,7 +24,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Name', getName(client)],
+		['Name', client.fullName],
 		['Phone', client.phone],
 		['Email', client.email],
 		['Civil ID', client.civilid],

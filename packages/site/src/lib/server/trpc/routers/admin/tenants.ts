@@ -15,9 +15,6 @@ export const tenants = createRouter()
 				},
 				select: {
 					id: true,
-					firstName: true,
-					secondName: true,
-					lastName: true,
 					fullName: true,
 					shortName: true,
 					email: true,
@@ -56,10 +53,6 @@ export const tenants = createRouter()
 				},
 				select: {
 					id: true,
-					firstName: true,
-					secondName: true,
-					thirdName: true,
-					lastName: true,
 					fullName: true,
 					shortName: true,
 					email: true,
@@ -89,9 +82,6 @@ export const tenants = createRouter()
 				},
 				select: {
 					id: true,
-					firstName: true,
-					lastName: true,
-					secondName: true,
 					fullName: true,
 					shortName: true,
 					email: true,
@@ -122,10 +112,6 @@ export const tenants = createRouter()
 					? {
 							OR: [
 								{ id: { contains: query } },
-								{ firstName: { contains: query } },
-								{ secondName: { contains: query } },
-								{ thirdName: { contains: query } },
-								{ lastName: { contains: query } },
 								{ fullName: { contains: query } },
 								{ shortName: { contains: query } },
 								{ email: { contains: query } },

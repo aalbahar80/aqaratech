@@ -40,10 +40,6 @@ export const get: RequestHandler = async ({ url }) => {
 						deactivated: true,
 						tenant: {
 							select: {
-								firstName: true,
-								secondName: true,
-								thirdName: true,
-								lastName: true,
 								fullName: true,
 								shortName: true,
 								email: true,
