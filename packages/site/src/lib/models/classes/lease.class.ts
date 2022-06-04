@@ -45,7 +45,8 @@ export class Lease extends Entity {
 		super();
 	}
 
-	defaultForm = (): z.input<typeof extendedSchema> => ({
+	defaultForm = (): Record<keyof Omit<z.input<typeof baseSchema>, 'id'>, any> &
+		z.input<typeof extendedSchema> => ({
 		start: new Date(),
 		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 		monthlyRent: 0,
@@ -60,31 +61,33 @@ export class Lease extends Entity {
 		}),
 	});
 
-	override basicFields = [
-		new Field('monthlyRent', {
-			type: 'number',
-			required: true,
-			value: this.data?.monthlyRent,
-		}),
-		new Field('start', {
-			type: 'date',
-			required: true,
-			value: toDateInput(this.data?.start),
-		}),
-		new Field('end', {
-			type: 'date',
-			required: true,
-			value: toDateInput(this.data?.start),
-		}),
-		new Field('notify', {
-			type: 'checkbox',
-			value: this.data?.notify,
-		}),
-		new Field('deactivated', {
-			type: 'checkbox',
-			value: this.data?.deactivated,
-		}),
-	];
+	get basicFields() {
+		return [
+			new Field('monthlyRent', {
+				type: 'number',
+				required: true,
+				value: this.data?.monthlyRent,
+			}),
+			new Field('start', {
+				type: 'date',
+				required: true,
+				value: toDateInput(this.data?.start),
+			}),
+			new Field('end', {
+				type: 'date',
+				required: true,
+				value: toDateInput(this.data?.start),
+			}),
+			new Field('notify', {
+				type: 'checkbox',
+				value: this.data?.notify,
+			}),
+			new Field('deactivated', {
+				type: 'checkbox',
+				value: this.data?.deactivated,
+			}),
+		];
+	}
 
 	override getRelationOptions = () => {
 		const data = this.data;

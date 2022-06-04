@@ -35,32 +35,10 @@ export class MaintenanceOrder extends Entity {
 		super();
 	}
 
-	override basicFields = [
-		new Field('title', {
-			required: true,
-			value: this.data?.title,
-		}),
-		new Field('description', {
-			value: this.data?.description,
-		}),
-		new SelectField('status', {
-			type: 'select',
-			options: [
-				{ label: '', value: null },
-				{ label: 'Pending', value: 'pending' },
-				{ label: 'Completed', value: 'completed' },
-				{ label: 'Closed', value: 'closed' },
-			],
-			value: this.data?.status,
-		}),
-		new Field('completedAt', {
-			type: 'date',
-			value: toDateInput(this.data?.completedAt),
-			label: 'Completion Date',
-		}),
-	];
-
-	defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		completedAt: '',
 		title: '',
 		description: '',
@@ -69,6 +47,33 @@ export class MaintenanceOrder extends Entity {
 		propertyId: null,
 		clientId: null,
 	});
+
+	get basicFields() {
+		return [
+			new Field('title', {
+				required: true,
+				value: this.data?.title,
+			}),
+			new Field('description', {
+				value: this.data?.description,
+			}),
+			new SelectField('status', {
+				type: 'select',
+				options: [
+					{ label: '', value: null },
+					{ label: 'Pending', value: 'pending' },
+					{ label: 'Completed', value: 'completed' },
+					{ label: 'Closed', value: 'closed' },
+				],
+				value: this.data?.status,
+			}),
+			new Field('completedAt', {
+				type: 'date',
+				value: toDateInput(this.data?.completedAt),
+				label: 'Completion Date',
+			}),
+		];
+	}
 
 	override getRelationOptions = () => {
 		const parsed = parseRelationOptions(this.data);

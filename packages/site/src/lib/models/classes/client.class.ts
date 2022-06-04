@@ -31,7 +31,10 @@ export class Client extends Entity {
 		super();
 	}
 
-	defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		firstName: '',
 		secondName: null,
 		lastName: '',

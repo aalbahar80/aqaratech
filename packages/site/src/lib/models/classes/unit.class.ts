@@ -35,7 +35,11 @@ export class Unit extends Entity {
 	) {
 		super();
 	}
-	defaultForm = (): z.input<typeof baseSchema> => ({
+
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		unitNumber: '',
 		bed: null,
 		bath: null,
@@ -47,19 +51,21 @@ export class Unit extends Entity {
 		propertyId: '',
 	});
 
-	override basicFields = [
-		new SelectField('type', {
-			value: this.data?.type,
-			options: unitTypeOptions,
-		}),
-		new Field('unitNumber', { required: true, value: this.data?.unitNumber }),
-		new Field('bed', { type: 'number', value: this.data?.bed }),
-		new Field('bath', { type: 'number', value: this.data?.bath }),
-		new Field('size', { type: 'number', value: this.data?.size }),
-		new Field('marketRent', { type: 'number', value: this.data?.marketRent }),
-		new Field('floor', { type: 'number', value: this.data?.floor }),
-		new Field('usage', { value: this.data?.usage }),
-	];
+	get basicFields() {
+		return [
+			new SelectField('type', {
+				value: this.data?.type,
+				options: unitTypeOptions,
+			}),
+			new Field('unitNumber', { required: true, value: this.data?.unitNumber }),
+			new Field('bed', { type: 'number', value: this.data?.bed }),
+			new Field('bath', { type: 'number', value: this.data?.bath }),
+			new Field('size', { type: 'number', value: this.data?.size }),
+			new Field('marketRent', { type: 'number', value: this.data?.marketRent }),
+			new Field('floor', { type: 'number', value: this.data?.floor }),
+			new Field('usage', { value: this.data?.usage }),
+		];
+	}
 
 	override getRelationOptions = () => {
 		const data = this.data;

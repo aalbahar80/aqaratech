@@ -6,10 +6,8 @@ import type {
 import type { EntityTitle } from '$lib/models/types/entity.type';
 
 export abstract class Entity {
-	// abstract schema: T;
-	// abstract default: () => z.input<typeof this.schema>;
 	abstract urlName: EntityTitle;
-	abstract basicFields: readonly string[] | Field[];
+	abstract basicFields: Field[];
 	abstract data?: { id?: string };
 
 	getLabel = () => {

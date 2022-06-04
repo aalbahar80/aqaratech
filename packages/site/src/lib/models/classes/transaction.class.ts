@@ -34,43 +34,10 @@ export class Transaction extends Entity {
 		super();
 	}
 
-	override basicFields = [
-		new Field('amount', {
-			type: 'number',
-			required: true,
-			value: this.data?.amount,
-			label: 'Amount (KWD)',
-		}),
-		new Field('postAt', {
-			type: 'date',
-			required: true,
-			value: toDateInput(R.pathOr(this.data, ['postAt'], '')),
-			label: 'Post Date',
-			hint: "A transaction cannot be paid before it's post date.",
-		}),
-		new Field('dueAt', {
-			type: 'date',
-			value: toDateInput(this.data?.dueAt),
-			label: 'Due Date',
-			hint: 'If a due date is set, the transaction will be marked as "Past Due" after the due date. If a due date is not set, the transaction will only be marked as "Due" after it\'s post date.',
-		}),
-		new Field('isPaid', {
-			type: 'checkbox',
-			value: this.data?.isPaid,
-			label: 'Paid',
-		}),
-		// new Field('paidAt', {
-		// 	type: 'date',
-		// 	value: toDateInput(R.pathOr(this.data, ['paidAt'], '')),
-		// 	label: 'Payment Date',
-		// }),
-		new Field('memo', {
-			value: R.pathOr(this.data, ['memo'], ''),
-			hint: 'Enter a short description of the transaction. This will be visible to the tenant.',
-		}),
-	];
-
-	defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		dueAt: null,
 		postAt: new Date(),
 		isPaid: false,
@@ -79,6 +46,44 @@ export class Transaction extends Entity {
 		leaseId: '',
 		paidAt: '',
 	});
+
+	get basicFields() {
+		return [
+			new Field('amount', {
+				type: 'number',
+				required: true,
+				value: this.data?.amount,
+				label: 'Amount (KWD)',
+			}),
+			new Field('postAt', {
+				type: 'date',
+				required: true,
+				value: toDateInput(R.pathOr(this.data, ['postAt'], '')),
+				label: 'Post Date',
+				hint: "A transaction cannot be paid before it's post date.",
+			}),
+			new Field('dueAt', {
+				type: 'date',
+				value: toDateInput(this.data?.dueAt),
+				label: 'Due Date',
+				hint: 'If a due date is set, the transaction will be marked as "Past Due" after the due date. If a due date is not set, the transaction will only be marked as "Due" after it\'s post date.',
+			}),
+			new Field('isPaid', {
+				type: 'checkbox',
+				value: this.data?.isPaid,
+				label: 'Paid',
+			}),
+			// new Field('paidAt', {
+			// 	type: 'date',
+			// 	value: toDateInput(R.pathOr(this.data, ['paidAt'], '')),
+			// 	label: 'Payment Date',
+			// }),
+			new Field('memo', {
+				value: R.pathOr(this.data, ['memo'], ''),
+				hint: 'Enter a short description of the transaction. This will be visible to the tenant.',
+			}),
+		];
+	}
 
 	override getRelationOptions = () => ({
 		lease:

@@ -33,7 +33,10 @@ export class Property extends Entity {
 		super();
 	}
 
-	defaultForm = (): Partial<z.input<typeof baseSchema>> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		area: '',
 		block: '',
 		avenue: '',
@@ -41,25 +44,28 @@ export class Property extends Entity {
 		number: '',
 		paci: '',
 		parcel: '',
+		clientId: '',
 	});
 
-	override basicFields = [
-		new Field('area', { required: true, value: this.data?.area }),
-		new Field('block', { required: true, value: this.data?.block }),
-		new Field('avenue', { value: this.data?.avenue }),
-		new Field('street', { required: true, value: this.data?.street }),
-		new Field('number', { required: true, value: this.data?.number }),
-		new Field('parcel', {
-			required: false,
-			value: this.data?.parcel,
-			hint: 'رقم القسيمة',
-		}),
-		new Field('paci', {
-			required: false,
-			value: this.data?.paci,
-			hint: 'الرقم الآلي للعنوان',
-		}),
-	];
+	get basicFields() {
+		return [
+			new Field('area', { required: true, value: this.data?.area }),
+			new Field('block', { required: true, value: this.data?.block }),
+			new Field('avenue', { value: this.data?.avenue }),
+			new Field('street', { required: true, value: this.data?.street }),
+			new Field('number', { required: true, value: this.data?.number }),
+			new Field('parcel', {
+				required: false,
+				value: this.data?.parcel,
+				hint: 'رقم القسيمة',
+			}),
+			new Field('paci', {
+				required: false,
+				value: this.data?.paci,
+				hint: 'الرقم الآلي للعنوان',
+			}),
+		];
+	}
 
 	override getRelationOptions = () => ({
 		client:

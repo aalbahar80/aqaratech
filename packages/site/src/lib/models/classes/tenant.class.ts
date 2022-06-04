@@ -31,7 +31,10 @@ export class Tenant extends Entity {
 		super();
 	}
 
-	defaultForm = (): z.input<typeof baseSchema> => ({
+	defaultForm = (): Record<
+		keyof Omit<z.input<typeof baseSchema>, 'id'>,
+		any
+	> => ({
 		firstName: '',
 		secondName: '',
 		lastName: '',
@@ -45,45 +48,49 @@ export class Tenant extends Entity {
 		residencyEnd: '',
 	});
 
-	override basicFields = [
-		new Field('firstName', { required: true, value: this.data?.firstName }),
-		new Field('secondName', { value: R.pathOr(this.data, ['secondName'], '') }),
-		new Field('lastName', { required: true, value: this.data?.lastName }),
-		new Field('email', {
-			type: 'email',
-			hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
-			value: this.data?.email,
-		}),
-		new Field('phone', {
-			hint: "Adding a tenant's phone unlocks SMS payment reminders.",
-			value: this.data?.phone,
-		}),
-		new Field('dob', {
-			type: 'date',
-			label: 'Date of Birth',
-			value: toDateInput(R.pathOr(this.data, ['dob'], '')),
-		}),
-		new Field('civilid', {
-			label: 'Civil ID',
-			value: R.pathOr(this.data, ['civilid'], ''),
-		}),
-		new Field('passportNum', {
-			label: 'Passport Number',
-			value: R.pathOr(this.data, ['passportNum'], ''),
-		}),
-		new Field('nationality', {
-			value: R.pathOr(this.data, ['nationality'], ''),
-		}),
-		new Field('residencyNum', {
-			label: 'Residency Number',
-			value: R.pathOr(this.data, ['residencyNum'], ''),
-		}),
-		new Field('residencyEnd', {
-			type: 'date',
-			label: 'Residency Expiration',
-			value: toDateInput(R.pathOr(this.data, ['residencyEnd'], '')),
-		}),
-	];
+	get basicFields() {
+		return [
+			new Field('firstName', { required: true, value: this.data?.firstName }),
+			new Field('secondName', {
+				value: R.pathOr(this.data, ['secondName'], ''),
+			}),
+			new Field('lastName', { required: true, value: this.data?.lastName }),
+			new Field('email', {
+				type: 'email',
+				hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
+				value: this.data?.email,
+			}),
+			new Field('phone', {
+				hint: "Adding a tenant's phone unlocks SMS payment reminders.",
+				value: this.data?.phone,
+			}),
+			new Field('dob', {
+				type: 'date',
+				label: 'Date of Birth',
+				value: toDateInput(R.pathOr(this.data, ['dob'], '')),
+			}),
+			new Field('civilid', {
+				label: 'Civil ID',
+				value: R.pathOr(this.data, ['civilid'], ''),
+			}),
+			new Field('passportNum', {
+				label: 'Passport Number',
+				value: R.pathOr(this.data, ['passportNum'], ''),
+			}),
+			new Field('nationality', {
+				value: R.pathOr(this.data, ['nationality'], ''),
+			}),
+			new Field('residencyNum', {
+				label: 'Residency Number',
+				value: R.pathOr(this.data, ['residencyNum'], ''),
+			}),
+			new Field('residencyEnd', {
+				type: 'date',
+				label: 'Residency Expiration',
+				value: toDateInput(R.pathOr(this.data, ['residencyEnd'], '')),
+			}),
+		];
+	}
 
 	static getLabel = (item: ILabel) => getName(item);
 
