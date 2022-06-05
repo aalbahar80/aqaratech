@@ -41,6 +41,7 @@
 		min-width: var(--min-width);
 		min-height: var(--min-height);
 		/* border-bottom-right-radius: var(--border-radius-b, 0.375rem); */
+		-webkit-appearance: none;
 	}
 	#sbutton:disabled {
 		@apply cursor-not-allowed opacity-50;
