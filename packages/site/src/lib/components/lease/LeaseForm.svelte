@@ -3,7 +3,6 @@
 	import { goto } from '$app/navigation';
 	import getEditorErrors from '$lib/client/getEditorErrors';
 	import { trpc } from '$lib/client/trpc';
-	import ComboboxSvelecte from '$lib/components/ComboboxSvelecte.svelte';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
@@ -159,6 +158,8 @@
 			handleAmountChange(lease.monthlyRent);
 		}
 	});
+
+	$: isActive = !getValue($data2, 'deactivated');
 </script>
 
 <form use:form data-test={$isValid ? 'ok' : 'error'}>
@@ -320,21 +321,22 @@
 										</SwitchDescription>
 									</span>
 									<Switch
-										checked={!getValue($data2, 'deactivated')}
+										checked={isActive}
 										let:checked
 										on:change={(e) => {
 											setFields('deactivated', !e.detail, true);
 										}}
 										class={classes(
-											!$data2.deactivated ? 'bg-indigo-600' : 'bg-gray-200',
+											isActive ? 'bg-indigo-600' : 'bg-gray-200',
 											'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
 										)}
 									>
 										<span
 											aria-hidden="true"
-											class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-											class:translate-x-5={checked}
-											class:translate-x-0={!checked}
+											class={classes(
+												checked ? 'translate-x-5' : 'translate-x-0',
+												'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+											)}
 										/>
 									</Switch>
 								</SwitchGroup>
@@ -366,9 +368,10 @@
 									>
 										<span
 											aria-hidden="true"
-											class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-											class:translate-x-5={checked}
-											class:translate-x-0={!checked}
+											class={classes(
+												checked ? 'translate-x-5' : 'translate-x-0',
+												'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+											)}
 										/>
 									</Switch>
 								</SwitchGroup>
