@@ -80,7 +80,7 @@ export class Transaction extends Entity {
 			// }),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
-				hint: 'Enter a short description of the transaction. This will be visible to the tenant.',
+				hint: 'Enter a short description of the transaction. This will be visible to the tenant user.',
 			}),
 		];
 	}

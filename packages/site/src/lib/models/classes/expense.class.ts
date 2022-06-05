@@ -71,7 +71,7 @@ export class Expense extends Entity {
 			}),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
-				hint: 'Enter a short description of the expense. This will be visible to the portfolio.',
+				hint: 'Enter a short description of the expense. This will be visible to the portfolio user.',
 			}),
 		];
 	}

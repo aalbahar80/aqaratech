@@ -52,7 +52,7 @@ export class Portfolio extends Entity {
 			}),
 			new Field('email', {
 				type: 'email',
-				hint: "Once a portfolio's email has been entered, you will be able to send him a portal invitation.",
+				hint: "Once a portfolio's email has been entered, you will be able to send them a portal invitation.",
 				value: this.data?.email,
 			}),
 			new Field('phone', { value: this.data?.phone }),
