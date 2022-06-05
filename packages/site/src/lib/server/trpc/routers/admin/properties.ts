@@ -43,7 +43,7 @@ export const properties = createRouter()
 					id,
 				},
 				include: {
-					client: true,
+					portfolio: true,
 				},
 			});
 
@@ -58,13 +58,13 @@ export const properties = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema.extend({
-			clientId: z.string().uuid().optional(),
+			portfolioId: z.string().uuid().optional(),
 			query: z.string().optional(),
 		}),
-		resolve: async ({ input: { query, clientId, pageIndex, size } }) => {
+		resolve: async ({ input: { query, portfolioId, pageIndex, size } }) => {
 			let filter = {};
-			if (clientId) {
-				filter = { clientId };
+			if (portfolioId) {
+				filter = { portfolioId };
 			} else if (query) {
 				filter = {
 					OR: [

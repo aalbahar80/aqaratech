@@ -1,9 +1,9 @@
 // Unused
 import {
-	fakeClient,
+	fakePortfolio,
 	fakeTenant,
-	testClientEmail,
-	testClientId,
+	testPortfolioEmail,
+	testPortfolioId,
 	testTenantEmail,
 	testTenantId,
 } from '@self/seed';
@@ -19,7 +19,7 @@ export async function cleanupDatabase() {
 		prisma.$executeRaw`DELETE FROM Lease`,
 		prisma.$executeRaw`DELETE FROM Unit`,
 		prisma.$executeRaw`DELETE FROM Property`,
-		prisma.$executeRaw`DELETE FROM Client`,
+		prisma.$executeRaw`DELETE FROM Portfolio`,
 		prisma.$executeRaw`DELETE FROM Tenant`,
 		prisma.$executeRaw`DELETE FROM Transaction`,
 	]);
@@ -38,14 +38,14 @@ export const setupTenant = async () => {
 	console.timeEnd('creating test tenant');
 };
 
-export const setupClient = async () => {
-	console.time('creating test client');
-	await prisma.client.create({
+export const setupPortfolio = async () => {
+	console.time('creating test portfolio');
+	await prisma.portfolio.create({
 		data: {
-			...fakeClient(),
-			email: testClientEmail,
-			id: testClientId,
+			...fakePortfolio(),
+			email: testPortfolioEmail,
+			id: testPortfolioId,
 		},
 	});
-	console.timeEnd('creating test client');
+	console.timeEnd('creating test portfolio');
 };

@@ -9,13 +9,13 @@
 	export let invalid = false;
 	export let invalidText: string = '';
 
-	export let client: SelectedOption = undefined;
+	export let portfolio: SelectedOption = undefined;
 	export let property: SelectedOption = undefined;
 	export let unit: SelectedOption = undefined;
 	export let initial: string | undefined = undefined;
 
 	// # Begin radio config #
-	type Field = 'clientId' | 'propertyId' | 'unitId';
+	type Field = 'portfolioId' | 'propertyId' | 'unitId';
 	interface RadioOption extends Option {
 		fieldName: Field;
 		title: string;
@@ -23,10 +23,10 @@
 	let radioOptions: RadioOption[];
 	$: radioOptions = [
 		{
-			value: client?.value,
-			title: 'Client',
-			label: client?.label,
-			fieldName: 'clientId',
+			value: portfolio?.value,
+			title: 'Portfolio',
+			label: portfolio?.label,
+			fieldName: 'portfolioId',
 		},
 		{
 			value: property?.value,
@@ -49,12 +49,12 @@
 </script>
 
 <SelectEntity
-	field="clientId"
-	selected={client}
-	invalid={invalid && !client}
+	field="portfolioId"
+	selected={portfolio}
+	invalid={invalid && !portfolio}
 	required={false}
 	on:select={(e) => {
-		client = e.detail;
+		portfolio = e.detail;
 		property = undefined;
 		unit = undefined;
 		radio.clear();
@@ -64,8 +64,8 @@
 <SelectEntity
 	field="propertyId"
 	selected={property}
-	parent={client}
-	disabled={!client}
+	parent={portfolio}
+	disabled={!portfolio}
 	required={false}
 	on:select={(e) => {
 		property = e.detail;
@@ -78,7 +78,7 @@
 	field="unitId"
 	selected={unit}
 	parent={property}
-	disabled={!client || !property}
+	disabled={!portfolio || !property}
 	required={false}
 	on:select={(e) => {
 		unit = e.detail;

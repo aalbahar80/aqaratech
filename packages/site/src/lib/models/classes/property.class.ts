@@ -1,5 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
-import { Client } from '$lib/models/classes/client.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { getAddress } from '$lib/utils/common.js';
 import { schema as baseSchema } from '../schemas/property.schema.js';
 import type { Property as PProperty } from '@prisma/client';
@@ -14,7 +14,7 @@ export class Property extends Entity {
 	static plural = 'properties';
 	static pluralCap = 'Properties';
 	static schema = baseSchema;
-	static relationalFields = ['clientId'] as const;
+	static relationalFields = ['portfolioId'] as const;
 
 	constructor(
 		public data?:
@@ -44,7 +44,7 @@ export class Property extends Entity {
 		number: '',
 		paci: '',
 		parcel: '',
-		clientId: '',
+		portfolioId: '',
 	});
 
 	get basicFields() {
@@ -68,9 +68,9 @@ export class Property extends Entity {
 	}
 
 	override getRelationOptions = () => ({
-		client:
-			this.data && 'client' in this.data
-				? new Client(this.data.client).toOption()
+		portfolio:
+			this.data && 'portfolio' in this.data
+				? new Portfolio(this.data.portfolio).toOption()
 				: undefined,
 		property: undefined,
 		unit: undefined,
@@ -99,7 +99,7 @@ export class Property extends Entity {
 	};
 
 	static getParentFilter = (id: string) => ({
-		clientId: id,
+		portfolioId: id,
 	});
 }
 

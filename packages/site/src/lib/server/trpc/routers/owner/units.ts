@@ -23,7 +23,7 @@ export const units = createRouter()
 			if (!data) {
 				throw new TRPCError({ code: 'NOT_FOUND' });
 			}
-			if (data.property.clientId !== ctx.authz.id) {
+			if (data.property.portfolioId !== ctx.authz.id) {
 				throw new TRPCError({ code: 'FORBIDDEN' });
 			}
 			return data;
@@ -32,17 +32,17 @@ export const units = createRouter()
 	.query('list', {
 		input: paginationSchema
 			.extend({
-				clientId: z.string().uuid().optional(),
+				portfolioId: z.string().uuid().optional(),
 				propertyId: z.string().uuid().optional(),
 				query: z.string().optional(),
 			})
 			.passthrough(),
 		resolve: async ({ ctx, input: { query, pageIndex, size, propertyId } }) => {
-			const sameClient = ctx.authz.isAdmin
+			const samePortfolio = ctx.authz.isAdmin
 				? {}
 				: {
 						property: {
-							clientId: ctx.authz.id,
+							portfolioId: ctx.authz.id,
 						},
 				  };
 
@@ -57,7 +57,7 @@ export const units = createRouter()
 				: {};
 			const data = await prismaClient.unit.findMany({
 				where: {
-					AND: [sameClient, propertyFilter, queryFilter],
+					AND: [samePortfolio, propertyFilter, queryFilter],
 				},
 				take: size,
 				skip: size * (pageIndex - 1),

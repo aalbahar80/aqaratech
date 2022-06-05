@@ -23,7 +23,7 @@
 		const { data, pagination } = session.authz?.isOwner
 			? await trpc(fetch).query('owner:leases:list', {
 					...options,
-					clientId: session.authz.id,
+					portfolioId: session.authz.id,
 			  })
 			: await trpc(fetch).query('leases:list', options);
 
@@ -69,7 +69,7 @@
 		({ data: leases, pagination } = $session.authz?.isOwner
 			? await trpc().query('owner:leases:list', {
 					...newOptions,
-					clientId: $session.authz.id,
+					portfolioId: $session.authz.id,
 			  })
 			: await trpc().query('leases:list', newOptions));
 	};

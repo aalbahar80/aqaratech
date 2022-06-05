@@ -40,7 +40,7 @@
 
 <Heading title="Property" id={property.id} entity="properties">
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb crumbs={{ client: property.clientId }} />
+		<BreadCrumb crumbs={{ portfolio: property.portfolioId }} />
 	</svelte:fragment>
 </Heading>
 

@@ -1,5 +1,5 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
-import { Client } from '$lib/models/classes/client.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Field } from '$lib/models/classes/Field.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import { Tenant } from '$lib/models/classes/tenant.class.js';
@@ -25,7 +25,7 @@ export class Lease extends Entity {
 	static schema = baseSchema;
 	static leaseFormSchema = extendedSchema;
 	static relationalFields = [
-		'clientId',
+		'portfolioId',
 		'propertyId',
 		'unitId',
 		'tenantId',
@@ -92,7 +92,7 @@ export class Lease extends Entity {
 	override getRelationOptions = () => {
 		const data = this.data;
 		const options: RelationOptions = {
-			client: undefined,
+			portfolio: undefined,
 			property: undefined,
 			unit: undefined,
 			tenant: undefined,
@@ -105,7 +105,9 @@ export class Lease extends Entity {
 		if (data && 'unit' in data) {
 			options.unit = new Unit(data.unit).toOption();
 			options.property = new Property(data.unit.property).toOption();
-			options.client = new Client(data.unit.property.client).toOption();
+			options.portfolio = new Portfolio(
+				data.unit.property.portfolio,
+			).toOption();
 		}
 		return options;
 	};

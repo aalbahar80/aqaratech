@@ -1,4 +1,4 @@
-export { Client } from './client.class.js';
+export { Portfolio } from './portfolio.class.js';
 // export { Entity } from './entity.class';
 export { Expense } from './expense.class.js';
 export { Lease } from './lease.class.js';

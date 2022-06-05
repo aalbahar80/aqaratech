@@ -40,12 +40,12 @@
 		const defaultFilter: Filter = {
 			propertyId: null,
 			unitId: null,
-			clientId: params.id,
+			portfolioId: params.id,
 			...getRange(defaultRange),
 		};
 
-		const [client, income, expenses, occupancy] = await Promise.all([
-			trpc(fetch).query('owner:charts:client', { clientId: params.id }), // TODO use read?
+		const [portfolio, income, expenses, occupancy] = await Promise.all([
+			trpc(fetch).query('owner:charts:portfolio', { portfolioId: params.id }), // TODO use read?
 			trpc(fetch).query('owner:charts:income', {
 				...defaultFilter,
 			}),
@@ -58,7 +58,7 @@
 		]);
 		return {
 			props: {
-				client,
+				portfolio,
 				income,
 				filter: defaultFilter,
 				expenses,
@@ -69,7 +69,7 @@
 </script>
 
 <script lang="ts">
-	export let client: InferQueryOutput<'owner:charts:client'>;
+	export let portfolio: InferQueryOutput<'owner:charts:portfolio'>;
 	export let income: InferQueryOutput<'owner:charts:income'>;
 	export let expenses: InferQueryOutput<'owner:charts:expenses'>;
 	export let occupancy: InferQueryOutput<'owner:charts:occupancy'>;
@@ -87,7 +87,7 @@
 		{ value: 0, label: 'Custom' },
 	];
 
-	const properties = client.properties.map((property) => ({
+	const properties = portfolio.properties.map((property) => ({
 		value: property.id,
 		label: getAddress(property),
 	}));
@@ -101,7 +101,7 @@
 		const defaultUnit = { value: null, label: 'All units' };
 		if (!newPropertyId) return [defaultUnit];
 
-		const newProperty = client.properties.find(
+		const newProperty = portfolio.properties.find(
 			(property) => property.id === newPropertyId,
 		);
 

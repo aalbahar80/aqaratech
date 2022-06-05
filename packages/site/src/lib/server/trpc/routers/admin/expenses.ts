@@ -14,7 +14,7 @@ export const expenses = createRouter()
 					id,
 				},
 				include: {
-					client: true,
+					portfolio: true,
 					property: true,
 					unit: true,
 					category: {
@@ -36,17 +36,17 @@ export const expenses = createRouter()
 					id,
 				},
 				include: {
-					client: true,
+					portfolio: true,
 					property: {
 						include: {
-							client: true,
+							portfolio: true,
 						},
 					},
 					unit: {
 						include: {
 							property: {
 								include: {
-									client: true,
+									portfolio: true,
 								},
 							},
 						},

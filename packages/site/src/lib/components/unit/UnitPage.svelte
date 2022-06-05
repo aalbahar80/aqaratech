@@ -50,7 +50,10 @@
 <Heading title="Unit" id={unit.id} entity="units" {icons}>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb
-			crumbs={{ client: unit.property.clientId, property: unit.property.id }}
+			crumbs={{
+				portfolio: unit.property.portfolioId,
+				property: unit.property.id,
+			}}
 		/>
 	</svelte:fragment>
 </Heading>

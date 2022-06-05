@@ -77,8 +77,8 @@ export const config: Config = {
 			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
 		},
 		{
-			name: 'client',
-			use: { baseForm: 'clients' },
+			name: 'portfolio',
+			use: { baseForm: 'portfolios' },
 			testMatch: commonForms,
 		},
 		{

@@ -8,7 +8,7 @@
 		const { data: units } = session.authz?.isAdmin
 			? await trpc(fetch).query('units:list', {})
 			: await trpc(fetch).query('owner:units:list', {
-					clientId: session.authz?.id,
+					portfolioId: session.authz?.id,
 			  });
 
 		return {

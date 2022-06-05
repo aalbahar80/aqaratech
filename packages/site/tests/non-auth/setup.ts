@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import {
-	fakeClient,
+	fakePortfolio,
 	fakeLease,
 	fakeProperty,
 	fakeTransactionBasic,
@@ -10,16 +10,16 @@ import {
 import prisma from '../../src/lib/server/prismaClient.js';
 
 export const setupLease = async (tenantId: string) => {
-	const { clientId: _c, ...property } = fakeProperty();
+	const { portfolioId: _c, ...property } = fakeProperty();
 	const { propertyId: _p, ...unit } = fakeUnit();
 	const {
 		tenantId: _,
 		unitId: __,
 		...lease
 	} = fakeLease(testTenantId, randomUUID(), new Date());
-	await prisma.client.create({
+	await prisma.portfolio.create({
 		data: {
-			...fakeClient(),
+			...fakePortfolio(),
 			properties: {
 				connectOrCreate: [
 					{

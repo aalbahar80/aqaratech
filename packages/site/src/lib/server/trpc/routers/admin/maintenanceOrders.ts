@@ -14,7 +14,7 @@ export const maintenanceOrders = createRouter()
 					id,
 				},
 				include: {
-					client: true,
+					portfolio: true,
 					property: true,
 					unit: true,
 				},
@@ -34,17 +34,17 @@ export const maintenanceOrders = createRouter()
 					id,
 				},
 				include: {
-					client: true,
+					portfolio: true,
 					property: {
 						include: {
-							client: true,
+							portfolio: true,
 						},
 					},
 					unit: {
 						include: {
 							property: {
 								include: {
-									client: true,
+									portfolio: true,
 								},
 							},
 						},

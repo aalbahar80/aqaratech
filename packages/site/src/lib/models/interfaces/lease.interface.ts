@@ -5,7 +5,7 @@ interface PredefinedTenant {
 	tenantId: string;
 	fullName: string;
 	tenant: SelectedOption;
-	client: SelectedOption;
+	portfolio: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }
@@ -17,7 +17,7 @@ interface PredefinedUnit {
 	propertyId: string;
 	address: string;
 	tenant: SelectedOption;
-	client: SelectedOption;
+	portfolio: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }
@@ -33,7 +33,7 @@ interface PredefinedLease {
 	address: string;
 	monthlyRent: number;
 	tenant: SelectedOption;
-	client: SelectedOption;
+	portfolio: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }

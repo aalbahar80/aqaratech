@@ -18,7 +18,7 @@ export class Expense extends Entity {
 	static pluralCap = 'Expenses';
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
-	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
+	static relationalFields = ['portfolioId', 'propertyId', 'unitId'] as const;
 
 	constructor(
 		public data?:
@@ -45,7 +45,7 @@ export class Expense extends Entity {
 		categoryId: null,
 		postAt: new Date(),
 		memo: '',
-		clientId: null,
+		portfolioId: null,
 		propertyId: null,
 		unitId: null,
 	});
@@ -71,7 +71,7 @@ export class Expense extends Entity {
 			}),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
-				hint: 'Enter a short description of the expense. This will be visible to the client.',
+				hint: 'Enter a short description of the expense. This will be visible to the portfolio.',
 			}),
 		];
 	}

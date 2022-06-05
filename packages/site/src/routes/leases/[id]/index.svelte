@@ -57,7 +57,7 @@
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb
 			crumbs={{
-				client: lease.unit.property.clientId,
+				portfolio: lease.unit.property.portfolioId,
 				property: lease.unit.property.id,
 				unit: lease.unit.id,
 				tenant: lease.tenant.id,

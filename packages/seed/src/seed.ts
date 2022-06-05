@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import { inspect } from "util";
 import { cleanupDatabase } from "./clean-db.js";
 import {
-	fakeClient,
+	fakePortfolio,
 	fakeExpense,
 	fakeLease,
 	fakeMaintenanceOrder,
@@ -12,7 +12,7 @@ import {
 	fakeTenant,
 	fakeTransaction,
 	fakeUnit,
-	testClientId,
+	testPortfolioId,
 	testTenantId,
 	timespan,
 } from "./generators.js";
@@ -27,7 +27,7 @@ async function main({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
-	let clientCount = 3;
+	let portfolioCount = 3;
 	let propertyMin = 2;
 	let propertyMax = 6;
 	let unitMax = 5;
@@ -35,13 +35,13 @@ async function main({
 	let expenseCount = 150;
 	const min = 1;
 
-	const clients = Array.from({ length: clientCount }, fakeClient);
-	clients[0]!.id = testClientId;
+	const portfolios = Array.from({ length: portfolioCount }, fakePortfolio);
+	portfolios[0]!.id = testPortfolioId;
 
-	const properties = clients.flatMap((client) =>
+	const properties = portfolios.flatMap((portfolio) =>
 		Array.from(
 			{ length: faker.datatype.number({ min: propertyMin, max: propertyMax }) },
-			() => fakeProperty(client.id)
+			() => fakeProperty(portfolio.id)
 		)
 	);
 	const units = properties.flatMap((property) =>
@@ -98,14 +98,15 @@ async function main({
 
 	const maintenanceOrders = Array.from({ length: moCount }, () => {
 		const mo = fakeMaintenanceOrder();
-		// add either a client or a property or a unit
+		// add either a portfolio or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
 			return {
 				...mo,
-				clientId:
-					clients.length > 0
-						? clients[faker.datatype.number(clients.length - 1)]?.id ?? null
+				portfolioId:
+					portfolios.length > 0
+						? portfolios[faker.datatype.number(portfolios.length - 1)]?.id ??
+						  null
 						: null,
 			};
 		}
@@ -132,15 +133,15 @@ async function main({
 	});
 
 	type Expense = ReturnType<typeof fakeExpense> & {
-		clientId?: string;
+		portfolioId?: string;
 		propertyId?: string;
 		unitId?: string;
 	};
 	const expenses: Expense[] = [];
-	clients.forEach((client) => {
+	portfolios.forEach((portfolio) => {
 		for (let i = 0; i < expenseCount; i++) {
 			const expense = fakeExpense();
-			expenses.push({ ...expense, clientId: client.id });
+			expenses.push({ ...expense, portfolioId: portfolio.id });
 		}
 	});
 	properties.forEach((property) => {
@@ -164,8 +165,8 @@ async function main({
 		(tenant) => !leases.find((lease) => lease.tenantId === tenant.id)
 	).length;
 
-	const clientsWithProperty = clients.filter((client) =>
-		properties.find((property) => property.clientId === client.id)
+	const portfoliosWithProperty = portfolios.filter((portfolio) =>
+		properties.find((property) => property.portfolioId === portfolio.id)
 	).length;
 	const propsWithUnit = properties.filter((property) =>
 		units.find((unit) => unit.propertyId === property.id)
@@ -177,19 +178,19 @@ async function main({
 
 	console.log(`${tenantsWithLease} tenants with a lease`);
 	console.log(`${homelessTenantCount} homeless tenants`);
-	console.log(`${clientsWithProperty} clients with a property`);
+	console.log(`${portfoliosWithProperty} portfolios with a property`);
 	console.log(`${propsWithUnit} properties with a unit`);
 	console.log(`${unitsWithLease} units with a lease`);
 
 	console.log("Seeding to database:", process.env.DATABASE_URL);
-	const summary = `Totals: \n ${clients.length} clients \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
+	const summary = `Totals: \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
 	console.log(summary);
 
 	if (sample) {
 		console.log(
 			inspect(
 				{
-					clients,
+					portfolios,
 					properties,
 					units,
 					tenants,
@@ -220,10 +221,10 @@ async function main({
 		console.time("insert");
 		await insertExpenseGroups();
 		await insertExpenseCategories();
-		await prisma.client.createMany({
-			data: clients,
+		await prisma.portfolio.createMany({
+			data: portfolios,
 		});
-		console.log("clients created");
+		console.log("portfolios created");
 		await prisma.property.createMany({
 			data: properties,
 		});

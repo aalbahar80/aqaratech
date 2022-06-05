@@ -7,7 +7,7 @@
 	export const load = async ({ session, fetch }: LoadEvent) => {
 		const { data: properties } = session.authz?.isOwner
 			? await trpc(fetch).query('owner:properties:list', {
-					clientId: session.authz?.id,
+					portfolioId: session.authz?.id,
 			  })
 			: await trpc(fetch).query('properties:list', {});
 

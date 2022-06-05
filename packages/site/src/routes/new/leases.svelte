@@ -27,11 +27,11 @@
 					label: lease.tenant.shortName || lease.tenant.fullName,
 					value: lease.tenantId,
 				},
-				client: {
+				portfolio: {
 					label:
-						lease.unit.property.client.shortName ||
-						lease.unit.property.client.fullName,
-					value: lease.unit.property.client.id,
+						lease.unit.property.portfolio.shortName ||
+						lease.unit.property.portfolio.fullName,
+					value: lease.unit.property.portfolio.id,
 				},
 				property: {
 					label: Property.getLabel(lease.unit.property),
@@ -52,7 +52,7 @@
 					label: tenant.shortName || tenant.fullName,
 					value: tenant.id,
 				},
-				client: undefined,
+				portfolio: undefined,
 				property: undefined,
 				unit: undefined,
 			};
@@ -66,10 +66,11 @@
 				propertyId: unit.propertyId,
 				address: Property.getLabel(unit.property),
 				tenant: undefined,
-				client: {
+				portfolio: {
 					label:
-						unit.property.client.shortName || unit.property.client.fullName,
-					value: unit.property.client.id,
+						unit.property.portfolio.shortName ||
+						unit.property.portfolio.fullName,
+					value: unit.property.portfolio.id,
 				},
 				property: {
 					label: Property.getLabel(unit.property),

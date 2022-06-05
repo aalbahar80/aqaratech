@@ -22,9 +22,9 @@ test.describe('new unit', async () => {
 		await page.goto(`/new/units?propertyId=${form.id}`);
 	});
 
-	test('preselected client from URL', async ({ page, form }) => {
-		const el = page.locator('#clientId');
-		await expect(el).toContainText(form.client.fullName);
+	test('preselected portfolio from URL', async ({ page, form }) => {
+		const el = page.locator('#portfolioId');
+		await expect(el).toContainText(form.portfolio.fullName);
 	});
 
 	test('preselected property from URL', async ({ page, form }) => {

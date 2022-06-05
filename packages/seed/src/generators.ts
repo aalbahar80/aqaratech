@@ -10,9 +10,9 @@ import {
 faker.setLocale("ar");
 
 // consistent id's for testing
-export const testClientId = "c0183a5d-2875-488b-b86f-e1c5628262df";
-export const testClientEmail = "client.dev@mailthink.net";
-export const testClientPassword = "test12";
+export const testPortfolioId = "c0183a5d-2875-488b-b86f-e1c5628262df";
+export const testPortfolioEmail = "portfolio.dev@mailthink.net";
+export const testPortfolioPassword = "test12";
 export const testTenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
 export const testTenantEmail = "tenant.dev@mailthink.net";
 export const testTenantPassword = "test12";
@@ -32,7 +32,7 @@ export const fakeEmail = () => {
 	return email;
 };
 
-export const fakeClient = () => {
+export const fakePortfolio = () => {
 	const fullName = faker.name.firstName() + " " + faker.name.lastName();
 	return {
 		id: faker.datatype.uuid(),
@@ -91,7 +91,7 @@ export const fakeUnit = (propertyId?: string) => ({
 	propertyId: propertyId ?? faker.datatype.uuid(),
 });
 
-export const fakeProperty = (clientId?: string) => {
+export const fakeProperty = (portfolioId?: string) => {
 	const random = Math.floor(Math.random() * coordinates.length);
 	const propCoordinates = coordinates[random];
 	return {
@@ -110,7 +110,7 @@ export const fakeProperty = (clientId?: string) => {
 		long: propCoordinates?.[1] ?? 0,
 		parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
 		paci: faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
-		clientId: clientId ?? faker.datatype.uuid(),
+		portfolioId: portfolioId ?? faker.datatype.uuid(),
 	};
 };
 

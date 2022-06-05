@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 import {
-	fakeClient,
+	fakePortfolio,
 	fakeExpense,
 	fakeLease,
 	fakeMaintenanceOrder,
@@ -9,7 +9,7 @@ import {
 	fakeUnit,
 } from '@self/seed';
 import {
-	Client,
+	Portfolio,
 	Expense,
 	Lease,
 	MaintenanceOrder,
@@ -27,7 +27,7 @@ import {
 import prisma from '../../src/lib/server/prismaClient.js';
 
 export type FormType =
-	| ClientForm
+	| PortfolioForm
 	| PropertyForm
 	| UnitForm
 	| TenantForm
@@ -35,10 +35,10 @@ export type FormType =
 	| ExpenseForm
 	| MaintenanceOrderForm;
 
-type Attribution = 'client' | 'property' | 'unit';
+type Attribution = 'portfolio' | 'property' | 'unit';
 export const getRelations = (
 	data: {
-		client: { id: string };
+		portfolio: { id: string };
 		property: { id: string };
 		unit: { id: string };
 	},
@@ -46,7 +46,7 @@ export const getRelations = (
 ) =>
 	attribution
 		? {
-				clientId: attribution === 'client' ? data.client.id : null,
+				portfolioId: attribution === 'portfolio' ? data.portfolio.id : null,
 				propertyId: attribution === 'property' ? data.property.id : null,
 				unitId: attribution === 'unit' ? data.unit.id : null,
 		  }
@@ -76,15 +76,15 @@ export class Form {
 	async clean() {}
 }
 
-export class ClientForm extends Form {
-	static urlName: EntityTitle = 'clients';
-	constructor(public data = fakeClient()) {
-		super(ClientForm.urlName, data.id);
+export class PortfolioForm extends Form {
+	static urlName: EntityTitle = 'portfolios';
+	constructor(public data = fakePortfolio()) {
+		super(PortfolioForm.urlName, data.id);
 	}
 	override relationalFields = Unit.relationalFields;
 
-	public get ins(): Client {
-		return new Client({ ...this.data });
+	public get ins(): Portfolio {
+		return new Portfolio({ ...this.data });
 	}
 
 	public async fill(page: Page) {
@@ -99,7 +99,7 @@ export class ClientForm extends Form {
 	// TODO: move to ancestor class
 	public alter() {
 		this.data = {
-			...fakeClient(),
+			...fakePortfolio(),
 			id: this.data.id,
 		};
 	}
@@ -112,7 +112,7 @@ export class ClientForm extends Form {
 	async setupNew() {}
 
 	async setupEdit() {
-		await prisma.client.create({ data: this.data });
+		await prisma.portfolio.create({ data: this.data });
 	}
 }
 
@@ -120,18 +120,18 @@ export class PropertyForm extends Form {
 	static urlName: EntityTitle = 'properties';
 	override relationalFields = Property.relationalFields;
 
-	client: ReturnType<typeof fakeClient>;
+	portfolio: ReturnType<typeof fakePortfolio>;
 	constructor(public data = fakeProperty()) {
 		super(PropertyForm.urlName, data.id);
-		this.client = { ...fakeClient(), id: data.clientId };
+		this.portfolio = { ...fakePortfolio(), id: data.portfolioId };
 	}
 
 	public get ins(): Property {
-		return new Property({ ...this.data, client: this.client });
+		return new Property({ ...this.data, portfolio: this.portfolio });
 	}
 
 	public async fill(page: Page) {
-		await page.selectOption('#clientId', { label: this.client.fullName });
+		await page.selectOption('#portfolioId', { label: this.portfolio.fullName });
 		await page.fill('[id="area"]', this.data.area);
 		await page.locator(`.item >> text=${this.data.area}`).first().click();
 		await page.keyboard.press('Enter');
@@ -158,12 +158,12 @@ export class PropertyForm extends Form {
 	}
 
 	async setupNew() {
-		await Promise.all([prisma.client.create({ data: this.client })]);
+		await Promise.all([prisma.portfolio.create({ data: this.portfolio })]);
 	}
 
 	async setupEdit() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.data }),
 		]);
 	}
@@ -171,16 +171,16 @@ export class PropertyForm extends Form {
 
 export class UnitForm extends Form {
 	static urlName: EntityTitle = 'units';
-	client: ReturnType<typeof fakeClient>;
+	portfolio: ReturnType<typeof fakePortfolio>;
 	property: ReturnType<typeof fakeProperty>;
 	constructor(public data = fakeUnit()) {
 		super(UnitForm.urlName, data.id);
 		this.property = { ...fakeProperty(), id: data.propertyId };
-		this.client = { ...fakeClient(), id: this.property.clientId };
+		this.portfolio = { ...fakePortfolio(), id: this.property.portfolioId };
 	}
 
 	public async fill(page: Page) {
-		await page.selectOption('#clientId', { label: this.client.fullName });
+		await page.selectOption('#portfolioId', { label: this.portfolio.fullName });
 		await page.selectOption('#propertyId', {
 			label: getAddress(this.property),
 		});
@@ -193,7 +193,7 @@ export class UnitForm extends Form {
 	public get ins(): Unit {
 		return new Unit({
 			...this.data,
-			property: { ...this.property, client: { ...this.client } },
+			property: { ...this.property, portfolio: { ...this.portfolio } },
 		});
 	}
 
@@ -213,14 +213,14 @@ export class UnitForm extends Form {
 
 	async setupNew() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 		]);
 	}
 
 	async setupEdit() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.data }),
 		]);
@@ -268,7 +268,7 @@ export class TenantForm extends Form {
 export class LeaseForm extends Form {
 	static urlName: EntityTitle = 'leases';
 	override relationalFields = Lease.relationalFields;
-	client: ReturnType<typeof fakeClient>;
+	portfolio: ReturnType<typeof fakePortfolio>;
 	property: ReturnType<typeof fakeProperty>;
 	unit: ReturnType<typeof fakeUnit>;
 	tenant: ReturnType<typeof fakeTenant>;
@@ -276,7 +276,7 @@ export class LeaseForm extends Form {
 		super(LeaseForm.urlName, data.id);
 		this.unit = { ...fakeUnit(), id: data.unitId };
 		this.property = { ...fakeProperty(), id: this.unit.propertyId };
-		this.client = { ...fakeClient(), id: this.property.clientId };
+		this.portfolio = { ...fakePortfolio(), id: this.property.portfolioId };
 		this.tenant = { ...fakeTenant(), id: data.tenantId };
 	}
 
@@ -285,7 +285,7 @@ export class LeaseForm extends Form {
 			...this.data,
 			unit: {
 				...this.unit,
-				property: { ...this.property, client: { ...this.client } },
+				property: { ...this.property, portfolio: { ...this.portfolio } },
 			},
 			tenant: { ...this.tenant },
 		});
@@ -297,8 +297,8 @@ export class LeaseForm extends Form {
 			.locator(`.sv-item >> text=${this.tenant.fullName}`)
 			.first()
 			.click();
-		await page.selectOption('#clientId', {
-			label: this.client.fullName,
+		await page.selectOption('#portfolioId', {
+			label: this.portfolio.fullName,
 		});
 		await page.selectOption('#propertyId', {
 			label: getAddress(this.property),
@@ -325,7 +325,7 @@ export class LeaseForm extends Form {
 
 	async setupNew() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 			prisma.tenant.create({ data: this.tenant }),
@@ -334,7 +334,7 @@ export class LeaseForm extends Form {
 
 	async setupEdit() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 			prisma.tenant.create({ data: this.tenant }),
@@ -347,12 +347,12 @@ export class ExpenseForm extends Form {
 	static urlName: EntityTitle = 'expenses';
 	override relationalFields = Expense.relationalFields;
 	constructor(
-		public client = fakeClient(),
-		public property = fakeProperty(client.id),
+		public portfolio = fakePortfolio(),
+		public property = fakeProperty(portfolio.id),
 		public unit = fakeUnit(property.id),
 		public data = {
 			...fakeExpense(),
-			clientId: null,
+			portfolioId: null,
 			propertyId: property.id,
 			unitId: null,
 		},
@@ -363,14 +363,14 @@ export class ExpenseForm extends Form {
 	public get ins(): Expense {
 		return new Expense({
 			...this.data,
-			client: { ...this.client },
+			portfolio: { ...this.portfolio },
 			property: {
 				...this.property,
-				client: { ...this.client },
+				portfolio: { ...this.portfolio },
 			},
 			unit: {
 				...this.unit,
-				property: { ...this.property, client: { ...this.client } },
+				property: { ...this.property, portfolio: { ...this.portfolio } },
 			},
 		});
 	}
@@ -382,7 +382,7 @@ export class ExpenseForm extends Form {
 		await page.selectOption('#categoryId', {
 			label: 'Management Fees - رسوم إدارية',
 		});
-		await page.selectOption('#clientId', { index: 0 });
+		await page.selectOption('#portfolioId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
 		await page.selectOption('#unitId', { index: 0 });
 		await page.locator('#propertyId-radio').click();
@@ -391,7 +391,7 @@ export class ExpenseForm extends Form {
 	public alter() {
 		this.data = {
 			...fakeExpense(),
-			clientId: null,
+			portfolioId: null,
 			propertyId: this.property.id,
 			unitId: null,
 			id: this.data.id,
@@ -409,7 +409,7 @@ export class ExpenseForm extends Form {
 
 	async setupNew() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
@@ -417,7 +417,7 @@ export class ExpenseForm extends Form {
 
 	async setupEdit(attribution?: Attribution) {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 			prisma.expense.create({
@@ -431,12 +431,12 @@ export class MaintenanceOrderForm extends Form {
 	static urlName: EntityTitle = 'maintenanceOrders';
 	override relationalFields = MaintenanceOrder.relationalFields;
 	constructor(
-		public client = fakeClient(),
-		public property = fakeProperty(client.id),
+		public portfolio = fakePortfolio(),
+		public property = fakeProperty(portfolio.id),
 		public unit = fakeUnit(property.id),
 		public data = {
 			...fakeMaintenanceOrder(),
-			clientId: null,
+			portfolioId: null,
 			propertyId: property.id,
 			unitId: null,
 		},
@@ -447,14 +447,14 @@ export class MaintenanceOrderForm extends Form {
 	public get ins(): MaintenanceOrder {
 		return new MaintenanceOrder({
 			...this.data,
-			client: { ...this.client },
+			portfolio: { ...this.portfolio },
 			property: {
 				...this.property,
-				client: { ...this.client },
+				portfolio: { ...this.portfolio },
 			},
 			unit: {
 				...this.unit,
-				property: { ...this.property, client: { ...this.client } },
+				property: { ...this.property, portfolio: { ...this.portfolio } },
 			},
 		});
 	}
@@ -467,7 +467,7 @@ export class MaintenanceOrderForm extends Form {
 		await page.fill('input[name="title"]', this.data.title);
 		await page.fill('input[name="description"]', this.data.description);
 		await page.selectOption('#status', { index: 0 });
-		await page.selectOption('#clientId', { index: 0 });
+		await page.selectOption('#portfolioId', { index: 0 });
 		await page.selectOption('#propertyId', { index: 0 });
 		await page.selectOption('#unitId', { index: 0 });
 		await page.locator('#unitId-radio').click();
@@ -476,7 +476,7 @@ export class MaintenanceOrderForm extends Form {
 	public alter() {
 		this.data = {
 			...fakeMaintenanceOrder(),
-			clientId: null,
+			portfolioId: null,
 			propertyId: this.property.id,
 			unitId: null,
 			id: this.data.id,
@@ -493,7 +493,7 @@ export class MaintenanceOrderForm extends Form {
 
 	async setupNew() {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 		]);
@@ -501,7 +501,7 @@ export class MaintenanceOrderForm extends Form {
 
 	async setupEdit(attribution?: Attribution) {
 		await Promise.all([
-			prisma.client.create({ data: this.client }),
+			prisma.portfolio.create({ data: this.portfolio }),
 			prisma.property.create({ data: this.property }),
 			prisma.unit.create({ data: this.unit }),
 			prisma.maintenanceOrder.create({
@@ -512,7 +512,7 @@ export class MaintenanceOrderForm extends Form {
 }
 
 export const formClasses = {
-	clients: ClientForm,
+	portfolios: PortfolioForm,
 	properties: PropertyForm,
 	units: UnitForm,
 	leases: LeaseForm,

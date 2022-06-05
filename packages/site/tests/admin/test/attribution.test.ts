@@ -43,11 +43,11 @@ test('new: no radio option is preselected', async ({ page, form }) => {
 	await expect(radio).toHaveCount(0);
 });
 
-test('new: preselected client from URL', async ({ page, form }) => {
+test('new: preselected portfolio from URL', async ({ page, form }) => {
 	await form.setupEdit();
-	await page.goto(`/new/${form.urlName}?clientId=${form.client.id}`);
-	const el = page.locator('#clientId');
-	const label = form.client.fullName;
+	await page.goto(`/new/${form.urlName}?portfolioId=${form.portfolio.id}`);
+	const el = page.locator('#portfolioId');
+	const label = form.portfolio.fullName;
 	await expect(el).toContainText(label);
 
 	const radio = page.locator('role=radio[checked=true]');
@@ -110,12 +110,12 @@ test('edit: preselected property', async ({ page, form }) => {
 	await expect.soft(radio).toContainText(label);
 });
 
-test('edit: preselected client', async ({ page, form }) => {
-	await form.setupEdit('client');
+test('edit: preselected portfolio', async ({ page, form }) => {
+	await form.setupEdit('portfolio');
 	await page.goto(`/${form.urlName}/${form.data.id}/edit`);
 
-	const el = page.locator('#clientId');
-	const label = form.client.fullName;
+	const el = page.locator('#portfolioId');
+	const label = form.portfolio.fullName;
 	await expect(el).toContainText(label);
 
 	const radio = page.locator('role=radio[checked=true]');
@@ -152,12 +152,12 @@ test('edit: preselected client', async ({ page, form }) => {
 // 	await expect(el).toContainText(getUnitLabel(form.unit));
 // });
 
-// test('New expense: preselected clientId from URL', async ({
+// test('New expense: preselected portfolioId from URL', async ({
 // 	page,
 // 	clientForm,
 // }) => {
-// 	await page.goto(`/new/expenses?clientId=${clientForm.id}`);
-// 	await preselected(page, page.locator('#clientId'), getName(clientForm.data));
+// 	await page.goto(`/new/expenses?portfolioId=${clientForm.id}`);
+// 	await preselected(page, page.locator('#portfolioId'), getName(clientForm.data));
 // });
 
 // test.describe('new unit', async () => {
@@ -176,7 +176,7 @@ test('edit: preselected client', async ({ page, form }) => {
 // 	test('preselected client from URL', async ({ page, form }) => {
 // 		await preselected(
 // 			page,
-// 			page.locator('#clientId'),
+// 			page.locator('#portfolioId'),
 // 			getName(form.client),
 // 		);
 // 	});

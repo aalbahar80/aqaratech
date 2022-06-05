@@ -20,7 +20,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await form.fill(page);
 		await use(form);
 	},
-	baseForm: ['clients', { option: true }],
+	baseForm: ['portfolios', { option: true }],
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,7 +64,7 @@ test('relations are preselected', async ({ form, page }) => {
 	const fields = form.ins.relationalFields as string[];
 	const relations = form.ins.getRelationOptions();
 	const relationMap: Record<string, keyof typeof relations> = {
-		clientId: 'client',
+		portfolioId: 'portfolio',
 		propertyId: 'property',
 		unitId: 'unit',
 		tenantId: 'tenant',

@@ -78,7 +78,7 @@
 	});
 
 	const options = entity.getRelationOptions();
-	let { client, property, unit, tenant, lease } = options;
+	let { portfolio, property, unit, tenant, lease } = options;
 
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
 </script>
@@ -101,14 +101,14 @@
 					<div class="space-y-6 pt-6 pb-5">
 						{#if entity.relationalFields && entity.urlName !== 'expenses' && entity.urlName !== 'maintenanceOrders'}
 							{#each entity.relationalFields as field}
-								{#if field === 'clientId'}
+								{#if field === 'portfolioId'}
 									<SelectEntity
 										{field}
-										selected={client}
+										selected={portfolio}
 										invalid={!!getValue($errors, field)}
 										on:select={(e) => {
-											client = e.detail;
-											setData('clientId', e.detail.value);
+											portfolio = e.detail;
+											setData('portfolioId', e.detail.value);
 											property = undefined;
 											setData('propertyId', null);
 											unit = undefined;
@@ -119,8 +119,8 @@
 									<SelectEntity
 										{field}
 										selected={property}
-										parent={client}
-										disabled={!client}
+										parent={portfolio}
+										disabled={!portfolio}
 										invalid={!!getValue($errors, field)}
 										on:select={(e) => {
 											property = e.detail;
@@ -134,7 +134,7 @@
 										{field}
 										selected={unit}
 										parent={property}
-										disabled={!client || !property}
+										disabled={!portfolio || !property}
 										invalid={!!getValue($errors, field)}
 										on:select={(e) => {
 											setData('unitId', e.detail.value);
@@ -188,12 +188,12 @@
 							</div>
 							<div class="flex flex-col gap-6">
 								<AttributeEntity
-									{client}
+									{portfolio}
 									{property}
 									{unit}
 									initial={entity.attribution}
-									invalid={!!getValue($errors, 'clientId')}
-									invalidText={getValue($errors, 'clientId')?.[0]}
+									invalid={!!getValue($errors, 'portfolioId')}
+									invalidText={getValue($errors, 'portfolioId')?.[0]}
 									on:select={(e) => {
 										e.detail.forEach((item) => {
 											setData(item.fieldName, item.value ?? null);

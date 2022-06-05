@@ -13,7 +13,7 @@
 		const entityTitle = params.entity as EntityTitle;
 
 		const searchParams = Object.fromEntries(url.searchParams.entries());
-		const keys: Relation[] = ['clientId', 'propertyId', 'unitId', 'leaseId'];
+		const keys: Relation[] = ['portfolioId', 'propertyId', 'unitId', 'leaseId'];
 		const key = keys.find((key) => key in searchParams);
 		if (!key) return { props: { entityTitle } };
 

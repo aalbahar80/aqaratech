@@ -14,30 +14,32 @@ const baseSchema = z.object({
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),
 	propertyId: z.string().uuid().nullable(),
-	clientId: z.string().uuid().nullable(),
+	portfolioId: z.string().uuid().nullable(),
 	unitId: z.string().uuid().nullable(),
 });
 
 export const schema = baseSchema.superRefine((val, ctx) => {
 	if (
-		+Boolean(val.unitId) + +Boolean(val.propertyId) + +Boolean(val.clientId) !==
+		+Boolean(val.unitId) +
+			+Boolean(val.propertyId) +
+			+Boolean(val.portfolioId) !==
 		1
-		// Boolean(val.clientId)
+		// Boolean(val.portfolioId)
 	) {
 		ctx.addIssue({
 			code: z.ZodIssueCode.custom,
-			path: ['clientId'],
-			message: 'At least one of unit, property, or client must be selected.',
+			path: ['portfolioId'],
+			message: 'At least one of unit, property, or portfolio must be selected.',
 		});
 		ctx.addIssue({
 			code: z.ZodIssueCode.custom,
 			path: ['propertyId'],
-			message: 'At least one of unit, property, or client must be selected.',
+			message: 'At least one of unit, property, or portfolio must be selected.',
 		});
 		ctx.addIssue({
 			code: z.ZodIssueCode.custom,
 			path: ['unitId'],
-			message: 'At least one of unit, property, or client must be selected.',
+			message: 'At least one of unit, property, or portfolio must be selected.',
 		});
 	}
 });

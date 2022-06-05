@@ -90,7 +90,7 @@ export class Transaction extends Entity {
 			this.data && 'lease' in this.data
 				? new Lease(this.data.lease).toOption()
 				: undefined,
-		client: undefined,
+		portfolio: undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,

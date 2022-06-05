@@ -3,7 +3,7 @@ import {
 	cleanupDatabase,
 	insertExpenseCategories,
 	insertExpenseGroups,
-	setupClient,
+	setupPortfolio,
 	setupTenant,
 } from '@self/seed';
 import path from 'path';
@@ -12,7 +12,11 @@ import { fileURLToPath } from 'url';
 async function globalSetup(config: FullConfig) {
 	await cleanupDatabase();
 	await insertExpenseGroups();
-	await Promise.all([insertExpenseCategories(), setupTenant(), setupClient()]);
+	await Promise.all([
+		insertExpenseCategories(),
+		setupTenant(),
+		setupPortfolio(),
+	]);
 
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = path.dirname(__filename);

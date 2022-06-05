@@ -1,4 +1,4 @@
-import type { Client } from '../classes/client.class';
+import type { Portfolio } from '../classes/portfolio.class';
 import type { Expense } from '../classes/expense.class';
 import type { Lease } from '../classes/lease.class';
 import type { MaintenanceOrder } from '../classes/maintenanceOrder.class';
@@ -8,7 +8,7 @@ import type { Transaction } from '../classes/transaction.class';
 import type { Unit } from '../classes/unit.class';
 
 export type EntityConstructor =
-	| typeof Client
+	| typeof Portfolio
 	| typeof Property
 	| typeof Unit
 	| typeof Tenant
@@ -18,7 +18,7 @@ export type EntityConstructor =
 	| typeof MaintenanceOrder;
 
 export type EntityInstance =
-	| Client
+	| Portfolio
 	| Property
 	| Unit
 	| Tenant
@@ -29,7 +29,7 @@ export type EntityInstance =
 
 export type EntityTitle =
 	| 'properties'
-	| 'clients'
+	| 'portfolios'
 	| 'leases'
 	| 'tenants'
 	| 'units'
@@ -40,7 +40,7 @@ export type EntityTitle =
 export type GenericFormModel = Exclude<EntityConstructor, typeof Lease>;
 
 export type Relation =
-	| 'clientId'
+	| 'portfolioId'
 	| 'propertyId'
 	| 'unitId'
 	| 'leaseId'

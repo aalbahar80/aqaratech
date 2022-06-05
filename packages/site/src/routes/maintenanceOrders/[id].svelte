@@ -42,7 +42,7 @@
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb
 			crumbs={{
-				client: maintenanceOrder.client?.id,
+				portfolio: maintenanceOrder.portfolio?.id,
 				property: maintenanceOrder.property?.id,
 				unit: maintenanceOrder.unit?.id,
 			}}

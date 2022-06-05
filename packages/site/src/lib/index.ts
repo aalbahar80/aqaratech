@@ -1,4 +1,4 @@
-export { Client } from './models/classes/client.class.js';
+export { Portfolio } from './models/classes/portfolio.class.js';
 export { Expense } from './models/classes/expense.class.js';
 export { Lease } from './models/classes/lease.class.js';
 export { MaintenanceOrder } from './models/classes/maintenanceOrder.class.js';

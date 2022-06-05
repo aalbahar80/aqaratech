@@ -8,7 +8,7 @@ export interface Option {
 export type SelectedOption = Option | undefined;
 
 export interface RelationOptions {
-	client?: SelectedOption;
+	portfolio?: SelectedOption;
 	property?: SelectedOption;
 	unit?: SelectedOption;
 	tenant?: SelectedOption;

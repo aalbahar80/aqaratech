@@ -31,7 +31,7 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
-			if (ctx.authz.isOwner && ctx.authz.id !== data.clientId) {
+			if (ctx.authz.isOwner && ctx.authz.id !== data.portfolioId) {
 				throw new TRPCError({
 					code: 'FORBIDDEN',
 				});
@@ -41,13 +41,13 @@ export const properties = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema.extend({
-			clientId: z.string().uuid(),
+			portfolioId: z.string().uuid(),
 			query: z.string().optional(),
 		}),
-		resolve: async ({ input: { query, clientId, pageIndex, size } }) => {
+		resolve: async ({ input: { query, portfolioId, pageIndex, size } }) => {
 			let filter = {};
-			if (clientId) {
-				filter = { clientId };
+			if (portfolioId) {
+				filter = { portfolioId };
 			} else if (query) {
 				filter = {
 					OR: [

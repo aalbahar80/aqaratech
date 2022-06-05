@@ -38,7 +38,7 @@
 		...predefined,
 	};
 
-	let client = lease.client;
+	let portfolio = lease.portfolio;
 	let property = lease.property;
 	let unit = lease.unit;
 	let tenant = lease.tenant;
@@ -232,9 +232,9 @@
 						>
 							<div class="sm:w-3/4">
 								<SelectEntity
-									field="clientId"
-									bind:selected={client}
-									invalid={!!getValue($errors, 'unitId') && !client}
+									field="portfolioId"
+									bind:selected={portfolio}
+									invalid={!!getValue($errors, 'unitId') && !portfolio}
 									on:select={() => {
 										property = undefined;
 										unit = undefined;
@@ -250,8 +250,8 @@
 								<SelectEntity
 									field="propertyId"
 									bind:selected={property}
-									parent={client}
-									disabled={!client}
+									parent={portfolio}
+									disabled={!portfolio}
 									invalid={!!getValue($errors, 'unitId') && !property}
 									on:select={() => {
 										unit = undefined;

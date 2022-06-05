@@ -52,9 +52,9 @@ export const setupTenant = async () => {
 	console.timeEnd("creating test tenant");
 };
 
-export const setupClient = async () => {
-	console.time("creating test client");
-	await prisma.client.create({
+export const setupPortfolio = async () => {
+	console.time("creating test portfolio");
+	await prisma.portfolio.create({
 		data: {
 			id: "c0183a5d-2875-488b-b86f-e1c5628262df",
 			createdAt: new Date(),
@@ -64,9 +64,9 @@ export const setupClient = async () => {
 			shortName: "عمر شقرون",
 			civilid: "360506007960",
 			phone: "11096260",
-			email: "client.dev@mailthink.net",
+			email: "portfolio.dev@mailthink.net",
 			dob: new Date(),
 		},
 	});
-	console.timeEnd("creating test client");
+	console.timeEnd("creating test portfolio");
 };

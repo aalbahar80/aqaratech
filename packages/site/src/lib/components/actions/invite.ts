@@ -12,7 +12,7 @@ export const handleInvite = async (
 		});
 		const input = Input.parse({ id, userType });
 		const urlPrefix =
-			input.userType === 'propertyOwner' ? 'clients' : 'tenants';
+			input.userType === 'propertyOwner' ? 'portfolios' : 'tenants';
 		// TODO: is this endpoint protected?
 		const res = await fetch(`/${urlPrefix}/${input.id}/invite`, {
 			method: 'POST',

@@ -47,8 +47,8 @@ export const leases = createRouter()
 									street: true,
 									number: true,
 									avenue: true,
-									clientId: true,
-									client: {
+									portfolioId: true,
+									portfolio: {
 										select: {
 											id: true,
 											fullName: true,
@@ -98,7 +98,7 @@ export const leases = createRouter()
 							type: true,
 							property: {
 								include: {
-									client: true,
+									portfolio: true,
 								},
 							},
 						},

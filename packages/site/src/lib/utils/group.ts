@@ -1,7 +1,7 @@
-import type { Client, Lease, Property, Unit } from '@prisma/client';
+import type { Portfolio, Lease, Property, Unit } from '@prisma/client';
 import { eachMonthOfInterval } from 'date-fns';
 
-type OccupancyRawData = Client & {
+type OccupancyRawData = Portfolio & {
 	properties: (Property & {
 		units: (Unit & {
 			leases: Lease[];

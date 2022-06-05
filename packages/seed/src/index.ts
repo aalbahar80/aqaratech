@@ -1,6 +1,6 @@
 export { cleanupDatabase } from "./clean-db.js";
 export {
-	fakeClient,
+	fakePortfolio,
 	fakeEmail,
 	fakeExpense,
 	fakeLease,
@@ -10,9 +10,9 @@ export {
 	fakeTransaction,
 	fakeTransactionBasic,
 	fakeUnit,
-	testClientEmail,
-	testClientId,
-	testClientPassword,
+	testPortfolioEmail,
+	testPortfolioId,
+	testPortfolioPassword,
 	testTenantEmail,
 	testTenantId,
 	testTenantPassword,
@@ -21,6 +21,6 @@ export {
 export {
 	insertExpenseCategories,
 	insertExpenseGroups,
-	setupClient,
+	setupPortfolio,
 	setupTenant,
 } from "./prep-db.js";

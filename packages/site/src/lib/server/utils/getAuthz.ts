@@ -53,7 +53,7 @@ export const getAuthz = async (
 				isTenant: false,
 				id,
 				sub,
-				home: `/clients/${id}/dashboard`,
+				home: `/portfolios/${id}/dashboard`,
 			};
 		} else if (isAdmin) {
 			return {

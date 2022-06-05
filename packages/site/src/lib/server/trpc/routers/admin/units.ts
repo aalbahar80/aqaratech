@@ -16,7 +16,7 @@ export const units = createRouter()
 				include: {
 					property: {
 						include: {
-							client: true,
+							portfolio: true,
 						},
 					},
 					leases: {
@@ -39,7 +39,7 @@ export const units = createRouter()
 				include: {
 					property: {
 						include: {
-							client: true,
+							portfolio: true,
 						},
 					},
 				},
@@ -50,7 +50,7 @@ export const units = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema.extend({
-			clientId: z.string().uuid().optional(),
+			portfolioId: z.string().uuid().optional(),
 			propertyId: z.string().uuid().optional(),
 			query: z.string().optional(),
 		}),

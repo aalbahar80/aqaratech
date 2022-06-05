@@ -11,7 +11,7 @@ export const cleanupDatabase = async (): Promise<void> => {
 		prisma.$executeRaw`DELETE FROM Lease`,
 		prisma.$executeRaw`DELETE FROM Unit`,
 		prisma.$executeRaw`DELETE FROM Property`,
-		prisma.$executeRaw`DELETE FROM Client`,
+		prisma.$executeRaw`DELETE FROM Portfolio`,
 		prisma.$executeRaw`DELETE FROM Tenant`,
 	]);
 	console.timeEnd("cleanup");

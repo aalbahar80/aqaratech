@@ -38,7 +38,7 @@ export const leases = createRouter()
 									street: true,
 									number: true,
 									avenue: true,
-									clientId: true,
+									portfolioId: true,
 								},
 							},
 						},
@@ -51,7 +51,7 @@ export const leases = createRouter()
 	})
 	.query('list', {
 		input: paginationSchema.extend({
-			clientId: z.string().uuid(),
+			portfolioId: z.string().uuid(),
 			status: z
 				.object({
 					current: z.boolean().default(true),
@@ -107,7 +107,7 @@ export const leases = createRouter()
 				},
 				where: {
 					AND: [
-						{ unit: { property: { clientId: input.clientId } } },
+						{ unit: { property: { portfolioId: input.portfolioId } } },
 						{
 							OR: [
 								input.status?.upcoming ? filters.upcoming : {},
@@ -134,7 +134,7 @@ export const leases = createRouter()
 			const totalQuery = prismaClient.lease.count({
 				where: {
 					AND: [
-						{ unit: { property: { clientId: input.clientId } } },
+						{ unit: { property: { portfolioId: input.portfolioId } } },
 						{
 							OR: [
 								input.status?.upcoming ? filters.upcoming : {},

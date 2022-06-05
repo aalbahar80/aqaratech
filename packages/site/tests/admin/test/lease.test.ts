@@ -17,10 +17,10 @@ const test = base.extend<{ form: LeaseForm }>({
 	},
 });
 
-test('new lease: preselected client from URL', async ({ page, form }) => {
+test('new lease: preselected portfolio from URL', async ({ page, form }) => {
 	await page.goto(`/new/leases?unitId=${form.unit.id}`);
-	const el = page.locator('#clientId');
-	await expect(el).toContainText(form.client.fullName);
+	const el = page.locator('#portfolioId');
+	await expect(el).toContainText(form.portfolio.fullName);
 });
 
 test('new lease: preselected property from URL', async ({ page, form }) => {
@@ -46,9 +46,9 @@ test.describe('edit lease', async () => {
 		await page.goto(`/leases/${form.id}/edit`);
 	});
 
-	test('client is preselected', async ({ page, form }) => {
-		const el = page.locator('#clientId');
-		await expect(el).toContainText(form.client.fullName);
+	test('portfolio is preselected', async ({ page, form }) => {
+		const el = page.locator('#portfolioId');
+		await expect(el).toContainText(form.portfolio.fullName);
 	});
 
 	test('property is preselected', async ({ page, form }) => {

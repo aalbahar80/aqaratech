@@ -13,37 +13,37 @@
 
 	export const load: Load = async ({ params, fetch }) => {
 		if (params.id === 'add') return { fallthrough: true };
-		const client = await trpc(fetch).query('clients:read', params.id);
-		return { props: { client } };
+		const portfolio = await trpc(fetch).query('portfolios:read', params.id);
+		return { props: { portfolio } };
 	};
 </script>
 
 <script lang="ts">
-	type Client = InferQueryOutput<'clients:read'>;
-	export let client: Client;
+	type Portfolio = InferQueryOutput<'portfolios:read'>;
+	export let portfolio: Portfolio;
 
 	let details: [string, string | null][];
 	$: details = [
-		['Name', client.fullName],
-		['Phone', client.phone],
-		['Email', client.email],
-		['Civil ID', client.civilid],
-		['Date of birth', client.dob ? dateFormat(client.dob) : null],
+		['Name', portfolio.fullName],
+		['Phone', portfolio.phone],
+		['Email', portfolio.email],
+		['Civil ID', portfolio.civilid],
+		['Date of birth', portfolio.dob ? dateFormat(portfolio.dob) : null],
 	];
 </script>
 
-<Heading title="Client" id={client.id} entity="clients">
+<Heading title="Portfolio" id={portfolio.id} entity="portfolios">
 	<svelte:fragment slot="actions">
 		<Button
 			icon={PresentationChartBar}
 			text="Dashboard"
 			as="a"
-			href={`/clients/${client.id}/dashboard`}
+			href={`/portfolios/${portfolio.id}/dashboard`}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
 		<AsyncButton
-			func={() => handleInvite(client.id, 'propertyOwner')}
+			func={() => handleInvite(portfolio.id, 'propertyOwner')}
 			let:loading
 		>
 			<Button
@@ -58,4 +58,4 @@
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} />
-<PropertyList properties={client.properties} />
+<PropertyList properties={portfolio.properties} />

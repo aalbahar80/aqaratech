@@ -31,7 +31,7 @@ export abstract class Entity {
 	relationalFields: readonly string[] = [];
 
 	getRelationOptions = (): RelationOptions => ({
-		client: undefined,
+		portfolio: undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,

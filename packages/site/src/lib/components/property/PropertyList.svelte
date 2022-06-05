@@ -4,11 +4,13 @@
 	import type { InferQueryOutput } from '$lib/client/trpc';
 	import StackedList from '$lib/components/StackedList.svelte';
 
-	type Properties = NonNullable<InferQueryOutput<'clients:read'>>['properties'];
+	type Properties = NonNullable<
+		InferQueryOutput<'portfolios:read'>
+	>['properties'];
 	export let properties: Properties;
 
-	const createHref = $page.url.pathname.startsWith('/clients')
-		? `/new/properties?clientId=${$page.url.pathname.split('/').pop()}`
+	const createHref = $page.url.pathname.startsWith('/portfolios')
+		? `/new/properties?portfolioId=${$page.url.pathname.split('/').pop()}`
 		: '/new/properties';
 </script>
 

@@ -5,7 +5,7 @@ const prisma = new PrismaClient({});
 
 async function main() {
 	// FILTERS
-	const clientId = "139d84db-1b44-4829-a422-5573c24adea9";
+	const portfolioId = "139d84db-1b44-4829-a422-5573c24adea9";
 
 	// const start = new Date('2021-01-01');
 	// const end = new Date('2021-04-31');
@@ -30,7 +30,7 @@ async function main() {
 					  }
 					: {
 							property: {
-								clientId,
+								portfolioId,
 							},
 					  },
 			},

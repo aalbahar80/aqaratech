@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { createRouter } from './createRouter';
 
 export const filterSchema = z.object({
-	clientId: z.string().uuid(),
+	portfolioId: z.string().uuid(),
 	start: z.number(),
 	end: z.number(),
 	propertyId: z.string().uuid().nullish(),
@@ -17,37 +17,40 @@ export const filterSchema = z.object({
 
 export const charts = createRouter()
 	.middleware(({ ctx, next, rawInput }) => {
-		const schema = z.object({ clientId: z.string().uuid() });
+		const schema = z.object({ portfolioId: z.string().uuid() });
 		const input = schema.safeParse(rawInput);
 		if (!input.success) {
 			throw new TRPCError({ code: 'BAD_REQUEST' });
 		}
-		if (ctx.authz.id === input.data.clientId || ctx.authz.isAdmin) {
+		if (ctx.authz.id === input.data.portfolioId || ctx.authz.isAdmin) {
 			return next();
 		}
 		throw new TRPCError({ code: 'FORBIDDEN' });
 	})
-	.query('client', {
+	.query('portfolio', {
 		input: z.object({
-			clientId: z.string().uuid(),
+			portfolioId: z.string().uuid(),
 		}),
 		resolve: async ({ input }) => {
-			const data = await prismaClient.client.findUnique({
-				where: { id: input.clientId },
-				include: { properties: { include: { client: true, units: true } } },
+			const data = await prismaClient.portfolio.findUnique({
+				where: { id: input.portfolioId },
+				include: { properties: { include: { portfolio: true, units: true } } },
 			});
 			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Client not found' });
+			throw new TRPCError({
+				code: 'NOT_FOUND',
+				message: 'Portfolio not found',
+			});
 		},
 	})
 	.query('income', {
 		input: filterSchema,
 		resolve: async ({
-			input: { end, start, clientId, propertyId, unitId },
+			input: { end, start, portfolioId, propertyId, unitId },
 		}) => {
-			const data = await prismaClient.client.findUnique({
+			const data = await prismaClient.portfolio.findUnique({
 				where: {
-					id: clientId,
+					id: portfolioId,
 				},
 				include: {
 					properties: {
@@ -88,7 +91,7 @@ export const charts = createRouter()
 				});
 			}
 
-			// single Client object => array of transactions
+			// single Portfolio object => array of transactions
 			const normalized = data.properties.flatMap((property) =>
 				property.units.flatMap((unit) =>
 					unit.leases.flatMap((lease) =>
@@ -131,7 +134,7 @@ export const charts = createRouter()
 	.query('expenses', {
 		input: filterSchema,
 		resolve: async ({
-			input: { end, start, clientId, propertyId, unitId },
+			input: { end, start, portfolioId, propertyId, unitId },
 		}) => {
 			const dated = {
 				where: {
@@ -153,9 +156,9 @@ export const charts = createRouter()
 					category: true,
 				},
 			} as const;
-			const data = await prismaClient.client.findUnique({
+			const data = await prismaClient.portfolio.findUnique({
 				where: {
-					id: clientId,
+					id: portfolioId,
 				},
 				include: {
 					expenses: propertyId || unitId ? false : getExpenses,
@@ -182,7 +185,7 @@ export const charts = createRouter()
 			}
 
 			// group all expenses in one array
-			const clientExpenses =
+			const portfolioExpenses =
 				// if there's a property or unit id, then we only want the expenses for that property or unit
 				propertyId || unitId
 					? []
@@ -223,12 +226,12 @@ export const charts = createRouter()
 				),
 			);
 			type Trx =
-				| typeof clientExpenses[0]
+				| typeof portfolioExpenses[0]
 				| typeof propertyExpenses[0]
 				| typeof unitExpenses[0];
 
 			const all: Trx[] = [
-				...clientExpenses,
+				...portfolioExpenses,
 				...propertyExpenses,
 				...unitExpenses,
 			];
@@ -250,11 +253,11 @@ export const charts = createRouter()
 	.query('occupancy', {
 		input: filterSchema,
 		resolve: async ({
-			input: { end, start, clientId, propertyId, unitId },
+			input: { end, start, portfolioId, propertyId, unitId },
 		}) => {
-			const data = await prismaClient.client.findUnique({
+			const data = await prismaClient.portfolio.findUnique({
 				where: {
-					id: clientId,
+					id: portfolioId,
 				},
 				include: {
 					properties: {

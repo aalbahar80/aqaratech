@@ -18,7 +18,7 @@ const test = base.extend<FormFixtures & { form: FormType }>({
 		await form.fill(page);
 		await use(form);
 	},
-	baseForm: ['clients', { option: true }],
+	baseForm: ['portfolios', { option: true }],
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

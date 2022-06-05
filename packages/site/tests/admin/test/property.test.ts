@@ -21,9 +21,9 @@ test.describe('Edit property form', async () => {
 		await page.goto(`/properties/${form.data.id}/edit`);
 	});
 
-	test('client is preselected', async ({ form, page }) => {
-		const el = page.locator('#clientId');
-		await expect(el).toContainText(form.client.fullName);
+	test('portfolio is preselected', async ({ form, page }) => {
+		const el = page.locator('#portfolioId');
+		await expect(el).toContainText(form.portfolio.fullName);
 	});
 
 	test('area is preselected', async ({ form, page }) => {
@@ -32,8 +32,11 @@ test.describe('Edit property form', async () => {
 	});
 });
 
-test('New property: preselected clientId from URL', async ({ page, form }) => {
-	await page.goto(`/new/properties?clientId=${form.client.id}`);
-	const el = page.locator('#clientId');
-	await expect(el).toContainText(form.client.fullName);
+test('New property: preselected portfolioId from URL', async ({
+	page,
+	form,
+}) => {
+	await page.goto(`/new/properties?portfolioId=${form.portfolio.id}`);
+	const el = page.locator('#portfolioId');
+	await expect(el).toContainText(form.portfolio.fullName);
 });

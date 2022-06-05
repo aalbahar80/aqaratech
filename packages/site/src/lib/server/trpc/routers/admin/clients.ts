@@ -1,15 +1,15 @@
 import prismaClient from '$lib/server/prismaClient';
 import { paginationSchema } from '$models/common';
-import { Client } from '$models/classes/client.class';
+import { Portfolio } from '$models/classes/portfolio.class';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { createRouter } from './createRouter';
 
-export const clients = createRouter()
+export const portfolios = createRouter()
 	.query('read', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
-			const data = await prismaClient.client.findUnique({
+			const data = await prismaClient.portfolio.findUnique({
 				where: {
 					id,
 				},
@@ -18,13 +18,16 @@ export const clients = createRouter()
 				},
 			});
 			if (data) return data;
-			throw new TRPCError({ code: 'NOT_FOUND', message: 'Client not found' });
+			throw new TRPCError({
+				code: 'NOT_FOUND',
+				message: 'Portfolio not found',
+			});
 		},
 	})
 	.query('basic', {
 		input: z.string(),
 		resolve: async ({ input: id }) => {
-			const data = await prismaClient.client.findUnique({
+			const data = await prismaClient.portfolio.findUnique({
 				where: {
 					id,
 				},
@@ -47,7 +50,7 @@ export const clients = createRouter()
 	.query('list', {
 		input: paginationSchema,
 		resolve: async ({ input }) => ({
-			data: await prismaClient.client.findMany({
+			data: await prismaClient.portfolio.findMany({
 				take: input.size,
 				skip: input.size * (input.pageIndex - 1),
 				orderBy: {
@@ -73,7 +76,7 @@ export const clients = createRouter()
 			query: z.string().optional(),
 		}),
 		resolve: ({ input: { query } }) =>
-			prismaClient.client.findMany({
+			prismaClient.portfolio.findMany({
 				take: 20,
 				orderBy: {
 					updatedAt: 'desc',
@@ -98,13 +101,13 @@ export const clients = createRouter()
 			}),
 	})
 	.query('count', {
-		resolve: () => prismaClient.client.count({}),
+		resolve: () => prismaClient.portfolio.count({}),
 	})
 	.mutation('create', {
-		input: Client.schema,
+		input: Portfolio.schema,
 		resolve: ({ input }) => {
 			const { id, ...data } = input;
-			return prismaClient.client.create({
+			return prismaClient.portfolio.create({
 				data: {
 					...data,
 					...(id ? { id } : {}),
@@ -113,21 +116,21 @@ export const clients = createRouter()
 		},
 	})
 	.mutation('save', {
-		input: Client.schema,
+		input: Portfolio.schema,
 		resolve: ({ input: { id, ...data } }) =>
 			id
-				? prismaClient.client.update({
+				? prismaClient.portfolio.update({
 						data,
 						where: { id },
 				  })
-				: prismaClient.client.create({
+				: prismaClient.portfolio.create({
 						data,
 				  }),
 	})
 	.mutation('delete', {
 		input: z.string(),
 		resolve: ({ input: id }) =>
-			prismaClient.client.delete({
+			prismaClient.portfolio.delete({
 				where: {
 					id,
 				},

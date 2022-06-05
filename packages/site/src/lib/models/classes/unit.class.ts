@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { unitTypeOptions } from '$lib/config/constants.js';
-import { Client } from '$lib/models/classes/client.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Field, SelectField } from '$lib/models/classes/Field.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
@@ -17,7 +17,7 @@ export class Unit extends Entity {
 	static plural = 'units';
 	static pluralCap = 'Units';
 	static schema = baseSchema;
-	static relationalFields = ['clientId', 'propertyId'] as const;
+	static relationalFields = ['portfolioId', 'propertyId'] as const;
 
 	constructor(
 		public data?:
@@ -70,7 +70,7 @@ export class Unit extends Entity {
 	override getRelationOptions = () => {
 		const data = this.data;
 		const options: RelationOptions = {
-			client: undefined,
+			portfolio: undefined,
 			property: undefined,
 			unit: undefined,
 			tenant: undefined,
@@ -78,7 +78,7 @@ export class Unit extends Entity {
 		};
 		if (data && 'property' in data) {
 			options.property = new Property(data.property).toOption();
-			options.client = new Client(data.property.client).toOption();
+			options.portfolio = new Portfolio(data.property.portfolio).toOption();
 		}
 		return options;
 	};

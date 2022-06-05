@@ -29,5 +29,5 @@ export const schema = z.object({
 		.min(1, { message: 'Required' })
 		.transform(trim)
 		.transform(falsyToNull),
-	clientId: z.string().uuid(),
+	portfolioId: z.string().uuid(),
 });

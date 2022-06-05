@@ -1,4 +1,4 @@
-import { clients } from './clients';
+import { portfolios } from './portfolios';
 import { createRouter } from './createRouter';
 import { expenseMeta } from './expenseMeta';
 import { expenses } from './expenses';
@@ -12,7 +12,7 @@ import { units } from './units';
 export const adminRouter = createRouter()
 	.merge('units:', units)
 	.merge('leases:', leases)
-	.merge('clients:', clients)
+	.merge('portfolios:', portfolios)
 	.merge('maintenanceOrders:', maintenanceOrders)
 	.merge('transactions:', transactions)
 	.merge('tenants:', tenants)

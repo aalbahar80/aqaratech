@@ -4,7 +4,7 @@
 	import * as R from 'remeda';
 
 	const routes = {
-		client: { url: 'clients', label: 'Client' },
+		portfolio: { url: 'portfolios', label: 'Portfolio' },
 		property: { url: 'properties', label: 'Property' },
 		unit: { url: 'units', label: 'Unit' },
 		lease: { url: 'leases', label: 'Lease' },
@@ -19,7 +19,7 @@
 		// remove some crumbs if not admin
 		if (!$session.authz?.isAdmin) {
 			console.log({ crumbs }, 'before');
-			crumbs = R.omit(crumbs, ['client', 'tenant']);
+			crumbs = R.omit(crumbs, ['portfolio', 'tenant']);
 			console.log({ crumbs }, 'after');
 		}
 	}

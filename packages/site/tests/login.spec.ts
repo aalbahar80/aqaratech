@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { testClientId, testTenantId } from '@self/seed';
+import { testPortfolioId, testTenantId } from '@self/seed';
 import { test } from './config.js';
 
 const users = [
@@ -11,11 +11,11 @@ const users = [
 	},
 	{
 		role: 'owner',
-		id: testClientId,
-		email: 'client.dev@mailthink.net',
+		id: testPortfolioId,
+		email: 'portfolio.dev@mailthink.net',
 		password: 'test12',
-		// destination: /^http:\/\/localhost:3000\/clients\/.+\/dashboard$/,
-		destination: `/clients/${testClientId}/dashboard`,
+		// destination: /^http:\/\/localhost:3000\/portfolios\/.+\/dashboard$/,
+		destination: `/portfolios/${testPortfolioId}/dashboard`,
 	},
 	{
 		role: 'tenant',

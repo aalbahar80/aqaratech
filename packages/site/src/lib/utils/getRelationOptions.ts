@@ -1,5 +1,5 @@
 import type { Expense, MaintenanceOrder } from '$lib/models/classes';
-import { Client } from '$lib/models/classes/client.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
@@ -8,7 +8,7 @@ export const parseRelationOptions = (
 	data: MaintenanceOrder['data'] | Expense['data'],
 ) => {
 	const options: RelationOptions = {
-		client: undefined,
+		portfolio: undefined,
 		property: undefined,
 		unit: undefined,
 		tenant: undefined,
@@ -20,14 +20,14 @@ export const parseRelationOptions = (
 		attribution = data.unit?.id;
 		options.unit = new Unit(data.unit).toOption();
 		options.property = new Property(data.unit.property).toOption();
-		options.client = new Client(data.unit.property.client).toOption();
+		options.portfolio = new Portfolio(data.unit.property.portfolio).toOption();
 	} else if ('property' in data && data.property) {
 		attribution = data.property?.id;
 		options.property = new Property(data.property).toOption();
-		options.client = new Client(data.property.client).toOption();
-	} else if ('client' in data && data.client) {
-		attribution = data.client?.id;
-		options.client = new Client(data.client).toOption();
+		options.portfolio = new Portfolio(data.property.portfolio).toOption();
+	} else if ('portfolio' in data && data.portfolio) {
+		attribution = data.portfolio?.id;
+		options.portfolio = new Portfolio(data.portfolio).toOption();
 	}
 	return {
 		options,

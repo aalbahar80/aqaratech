@@ -1,31 +1,31 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
 import { toDateInput } from '$lib/utils/common.js';
-import type { Client as PClient } from '@prisma/client';
+import type { Portfolio as PPortfolio } from '@prisma/client';
 import * as R from 'remeda';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/client.schema.js';
+import { schema as baseSchema } from '../schemas/portfolio.schema.js';
 import { Entity } from './entity.class.js';
 
-export class Client extends Entity {
-	static urlName = 'clients' as const;
-	static singular = 'client';
-	static singularCap = 'Client';
-	static plural = 'clients';
-	static pluralCap = 'Clients';
+export class Portfolio extends Entity {
+	static urlName = 'portfolios' as const;
+	static singular = 'portfolio';
+	static singularCap = 'Portfolio';
+	static plural = 'portfolios';
+	static pluralCap = 'Portfolios';
 	static schema = baseSchema;
 
 	constructor(
 		public data?:
-			| InferQueryOutput<'clients:basic'>
-			| InferQueryOutput<'clients:read'>
-			| Partial<PClient>
-			| InferQueryOutput<'clients:list'>['data'][number],
-		public urlName = Client.urlName,
-		public singular = 'client',
-		public singularCap = 'Client',
-		public plural = 'clients',
-		public pluralCap = 'Clients',
+			| InferQueryOutput<'portfolios:basic'>
+			| InferQueryOutput<'portfolios:read'>
+			| Partial<PPortfolio>
+			| InferQueryOutput<'portfolios:list'>['data'][number],
+		public urlName = Portfolio.urlName,
+		public singular = 'portfolio',
+		public singularCap = 'Portfolio',
+		public plural = 'portfolios',
+		public pluralCap = 'Portfolios',
 		public schema = baseSchema,
 	) {
 		super();
@@ -52,7 +52,7 @@ export class Client extends Entity {
 			}),
 			new Field('email', {
 				type: 'email',
-				hint: "Once a client's email has been entered, you will be able to send him a portal invitation.",
+				hint: "Once a portfolio's email has been entered, you will be able to send him a portal invitation.",
 				value: this.data?.email,
 			}),
 			new Field('phone', { value: this.data?.phone }),

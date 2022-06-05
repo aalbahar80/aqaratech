@@ -15,7 +15,7 @@ export class MaintenanceOrder extends Entity {
 	static pluralCap = 'MaintenanceOrders';
 	static schema = baseSchema;
 	public attribution: string | undefined = undefined;
-	static relationalFields = ['clientId', 'propertyId', 'unitId'] as const;
+	static relationalFields = ['portfolioId', 'propertyId', 'unitId'] as const;
 
 	constructor(
 		public data?:
@@ -45,7 +45,7 @@ export class MaintenanceOrder extends Entity {
 		status: null,
 		unitId: null,
 		propertyId: null,
-		clientId: null,
+		portfolioId: null,
 	});
 
 	get basicFields() {
