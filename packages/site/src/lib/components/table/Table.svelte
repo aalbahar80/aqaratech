@@ -10,7 +10,7 @@
 	export let rows: any[];
 	export let modifier = 1;
 
-	const alwaysHidden = ['id'];
+	const alwaysHidden = ['id', 'shortName'];
 	let hidden = alwaysHidden;
 
 	// columns store should know whenever data changes
