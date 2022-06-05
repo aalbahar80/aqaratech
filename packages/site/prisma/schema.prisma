@@ -9,7 +9,7 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-model Client {
+model Portfolio {
   id                String             @id @default(uuid())
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
@@ -29,7 +29,7 @@ model Expense {
   id                 String            @id @default(uuid())
   unitId             String?
   propertyId         String?
-  clientId           String?
+  portfolioId        String?
   maintenanceOrderId String?
   categoryId         Int?
   createdAt          DateTime          @default(now())
@@ -37,7 +37,7 @@ model Expense {
   amount             Float
   postAt             DateTime
   memo               String?           @db.Text
-  client             Client?           @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  portfolio          Portfolio?        @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
@@ -45,7 +45,7 @@ model Expense {
 
   @@index([unitId])
   @@index([propertyId])
-  @@index([clientId])
+  @@index([portfolioId])
   @@index([maintenanceOrderId])
   @@index([categoryId])
 }
@@ -90,32 +90,32 @@ model Lease {
 }
 
 model MaintenanceOrder {
-  id          String    @id @default(uuid())
+  id          String     @id @default(uuid())
   tenantId    String?
   unitId      String?
   propertyId  String?
-  clientId    String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  portfolioId String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   completedAt DateTime?
   title       String?
-  description String?   @db.Text
+  description String?    @db.Text
   status      String?
-  client      Client?   @relation(fields: [clientId], references: [id], onDelete: Restrict)
-  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-  tenant      Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-  unit        Unit?     @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  property    Property?  @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
   expenses    Expense[]
 
   @@index([tenantId])
   @@index([unitId])
   @@index([propertyId])
-  @@index([clientId])
+  @@index([portfolioId])
 }
 
 model Property {
   id                String             @id @default(uuid())
-  clientId          String
+  portfolioId       String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   area              String?
@@ -128,12 +128,12 @@ model Property {
   cost              Float?
   long              Float?
   lat               Float?
-  client            Client             @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  portfolio         Portfolio          @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
 
-  @@index([clientId])
+  @@index([portfolioId])
 }
 
 model Tenant {
