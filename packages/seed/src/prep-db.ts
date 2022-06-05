@@ -64,7 +64,7 @@ export const setupPortfolio = async () => {
 			shortName: "عمر شقرون",
 			civilid: "360506007960",
 			phone: "11096260",
-			email: "portfolio.dev@mailthink.net",
+			email: "client.dev@mailthink.net",
 			dob: new Date(),
 		},
 	});

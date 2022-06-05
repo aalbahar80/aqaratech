@@ -12,7 +12,7 @@ const users = [
 	{
 		role: 'owner',
 		id: testPortfolioId,
-		email: 'portfolio.dev@mailthink.net',
+		email: 'client.dev@mailthink.net',
 		password: 'test12',
 		// destination: /^http:\/\/localhost:3000\/portfolios\/.+\/dashboard$/,
 		destination: `/portfolios/${testPortfolioId}/dashboard`,

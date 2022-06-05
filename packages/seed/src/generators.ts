@@ -11,7 +11,7 @@ faker.setLocale("ar");
 
 // consistent id's for testing
 export const testPortfolioId = "c0183a5d-2875-488b-b86f-e1c5628262df";
-export const testPortfolioEmail = "portfolio.dev@mailthink.net";
+export const testPortfolioEmail = "client.dev@mailthink.net";
 export const testPortfolioPassword = "test12";
 export const testTenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
 export const testTenantEmail = "tenant.dev@mailthink.net";
