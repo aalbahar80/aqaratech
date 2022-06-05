@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
-import { cleanupDatabase } from "./clean-db.js";
+import { cleanupDatabase, isProdBranch } from "./clean-db.js";
 import {
 	fakePortfolio,
 	fakeExpense,
@@ -27,6 +27,9 @@ async function main({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
+	if (await isProdBranch()) {
+		return;
+	}
 	let portfolioCount = 3;
 	let propertyMin = 2;
 	let propertyMax = 6;

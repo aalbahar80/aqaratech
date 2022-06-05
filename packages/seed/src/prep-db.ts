@@ -2,6 +2,12 @@ import {
 	expenseCats,
 	ExpenseGroups,
 } from "../../site/src/lib/config/constants.js";
+import {
+	testPortfolioEmail,
+	testPortfolioId,
+	testTenantEmail,
+	testTenantId,
+} from "./generators.js";
 import prisma from "./prisma.js";
 
 export async function insertExpenseGroups() {
@@ -33,7 +39,7 @@ export const setupTenant = async () => {
 	console.time("creating test tenant");
 	await prisma.tenant.create({
 		data: {
-			id: "3dcef1c0-aae7-4766-968e-ad31b443bcc9",
+			id: testTenantId,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			fullName: "نعيم الشيباني بن عاشور",
@@ -41,7 +47,7 @@ export const setupTenant = async () => {
 			civilid: "259618795849",
 			dob: new Date(),
 			phone: "14347945",
-			email: "tenant.dev@mailthink.net",
+			email: testTenantEmail,
 			passportNum: "346780239",
 			nationality: "CV",
 			residencyNum: "534184025",
@@ -56,7 +62,7 @@ export const setupPortfolio = async () => {
 	console.time("creating test portfolio");
 	await prisma.portfolio.create({
 		data: {
-			id: "c0183a5d-2875-488b-b86f-e1c5628262df",
+			id: testPortfolioId,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			deactivated: false,
@@ -64,7 +70,7 @@ export const setupPortfolio = async () => {
 			shortName: "عمر شقرون",
 			civilid: "360506007960",
 			phone: "11096260",
-			email: "client.dev@mailthink.net",
+			email: testPortfolioEmail,
 			dob: new Date(),
 		},
 	});
