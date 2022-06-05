@@ -3,7 +3,8 @@
 	"files.exclude": {
 		"**/node_modules/": true,
 		"packages/site/package/**": true,
-		"packages/site/.svelte-kit/**": true
+		"packages/site/.svelte-kit/**": true,
+		"**/dist/**": true
 	},
 	"html.autoCreateQuotes": false,
 	"editor.suggest.showWords": false,
