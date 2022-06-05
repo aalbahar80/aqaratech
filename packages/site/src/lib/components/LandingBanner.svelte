@@ -21,21 +21,24 @@
 									</span>
 								</h1>
 								<div class="mt-10 sm:mt-12">
-									<form action="#" class="sm:mx-auto sm:max-w-xl lg:mx-0">
+									<div class="sm:mx-auto sm:max-w-xl lg:mx-0">
+										<p class="mt-3 text-sm text-gray-300 sm:mt-0 sm:ml-3">
+											Coming soon. Currently in a closed beta.
+										</p>
 										<div class="sm:flex sm:justify-center lg:justify-start">
-											<div class="mt-3 sm:mt-0 sm:ml-3 sm:w-1/2">
+											<div class="mt-3 sm:mt-4 sm:ml-3 sm:w-1/2">
 												<a
+													href="https://ojab1kn3vda.typeform.com/to/eet5fojG"
+													target="_blank"
+													sveltekit:reload
 													type="submit"
-													class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+													class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
 												>
 													Join the waitlist
 												</a>
 											</div>
 										</div>
-										<p class="mt-3 text-sm text-gray-300 sm:mt-4 sm:ml-3">
-											Aqaratech is in a closed beta.
-										</p>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>
