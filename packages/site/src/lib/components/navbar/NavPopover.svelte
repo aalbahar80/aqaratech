@@ -103,6 +103,7 @@
 							<a
 								on:click={() => close(null)}
 								href="/account/logout"
+								sveltekit:reload
 								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
 							>
 								Log out
@@ -113,6 +114,7 @@
 						<div class="mt-6 px-5">
 							<a
 								href="/api/auth/login"
+								sveltekit:reload
 								class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
 							>
 								Login

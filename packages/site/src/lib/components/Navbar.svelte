@@ -43,6 +43,7 @@
 				{:else}
 					<a
 						href="/api/auth/login"
+						sveltekit:reload
 						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 					>
 						Log in
@@ -103,6 +104,7 @@
 
 				<a
 					href="/account/logout"
+					sveltekit:reload
 					class="text-base font-medium text-white hover:text-gray-300"
 				>
 					Log out
@@ -110,6 +112,7 @@
 			{:else}
 				<a
 					href="/api/auth/login"
+					sveltekit:reload
 					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 				>
 					Log in
