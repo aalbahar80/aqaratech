@@ -23,7 +23,7 @@
 								<div class="mt-10 sm:mt-12">
 									<div class="sm:mx-auto sm:max-w-xl lg:mx-0">
 										<p class="mt-3 text-sm text-gray-300 sm:mt-0 sm:ml-3">
-											Coming soon. Currently in a closed beta.
+											Coming soon. Currently in closed beta.
 										</p>
 										<div class="sm:flex sm:justify-center lg:justify-start">
 											<div class="mt-3 sm:mt-4 sm:ml-3 sm:w-1/2">
