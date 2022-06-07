@@ -38,13 +38,13 @@ export class Transaction extends Entity {
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,
 		any
 	> => ({
-		dueAt: null,
 		postAt: new Date(),
+		dueAt: null,
+		paidAt: null,
 		isPaid: false,
 		amount: 0,
 		memo: '',
 		leaseId: '',
-		paidAt: '',
 	});
 
 	get basicFields() {
@@ -73,11 +73,12 @@ export class Transaction extends Entity {
 				value: this.data?.isPaid,
 				label: 'Paid',
 			}),
-			// new Field('paidAt', {
-			// 	type: 'date',
-			// 	value: toDateInput(R.pathOr(this.data, ['paidAt'], '')),
-			// 	label: 'Payment Date',
-			// }),
+			new Field('paidAt', {
+				type: 'date',
+				value: toDateInput(this.data?.paidAt),
+				label: 'Payment Date',
+				hint: 'When was this transaction paid? :: تاريخ الدفع',
+			}),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
 				hint: 'Enter a short description of the transaction. This will be visible to the tenant user.',

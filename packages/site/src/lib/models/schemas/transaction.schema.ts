@@ -9,11 +9,8 @@ export const schema = z
 			.transform(falsyToNull),
 		postAt: z.preprocess(strToDate, z.date()),
 		paidAt: z
-			.union([
-				z.preprocess(strToDate, z.date()).transform(falsyToNull),
-				z.literal('').transform(() => null),
-			])
-			.nullable(),
+			.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
+			.transform(falsyToNull),
 		isPaid: z.boolean(),
 		amount: z.number().gt(0),
 		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
