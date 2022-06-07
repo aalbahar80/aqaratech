@@ -12,7 +12,7 @@
 	import { addToast } from '$lib/stores/toast';
 	import { dateFormat, kwdFormat } from '$lib/utils/common';
 	import { Transaction } from '$models/classes/transaction.class';
-	import { formatDistance } from 'date-fns';
+	import { formatDistance, isSameDay } from 'date-fns';
 	import { onMount } from 'svelte';
 	import Fa6SolidCalendar from '~icons/fa6-solid/calendar';
 	import Fa6SolidCalendarCheck from '~icons/fa6-solid/calendar-check';
@@ -73,12 +73,14 @@
 						tooltip: 'Due',
 					},
 			  ]
-			: trx.paidAt
+			: trx.isPaid && trx.paidAt
 			? [
 					{
-						label: `Paid: ${formatDistance(trx.paidAt, new Date(), {
-							addSuffix: true,
-						})}`,
+						label: isSameDay(trx.paidAt, new Date())
+							? 'Paid: today'
+							: `Paid: ${formatDistance(trx.paidAt, new Date(), {
+									addSuffix: true,
+							  })}`,
 						icon: Fa6SolidCalendarCheck,
 						tooltip: 'Paid',
 					},
