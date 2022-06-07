@@ -32,10 +32,11 @@ export const properties = createRouter()
 				});
 			}
 			// sort units by unitNumber
-			data.units.sort(
-				(a, b) =>
-					+a.unitNumber.match(/\d+/)?.[0] - +b.unitNumber.match(/\d+/)?.[0],
-			);
+			data.units.sort((a, b) => {
+				const aa = a.unitNumber.match(/\d+/)?.[0] ?? 0;
+				const bb = b.unitNumber.match(/\d+/)?.[0] ?? 0;
+				return +aa - +bb;
+			});
 			return data;
 		},
 	})

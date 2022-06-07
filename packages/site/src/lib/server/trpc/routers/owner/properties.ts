@@ -36,6 +36,13 @@ export const properties = createRouter()
 					code: 'FORBIDDEN',
 				});
 			}
+			// TODO: dedupe with admin:properties.read
+			// sort units by unitNumber
+			data.units.sort((a, b) => {
+				const aa = a.unitNumber.match(/\d+/)?.[0] ?? 0;
+				const bb = b.unitNumber.match(/\d+/)?.[0] ?? 0;
+				return +aa - +bb;
+			});
 			return data;
 		},
 	})
