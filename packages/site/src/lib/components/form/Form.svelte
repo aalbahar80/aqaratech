@@ -29,15 +29,17 @@
 	} = createForm<z.infer<typeof entity.schema>>({
 		transform: (values) => {
 			const original = values as z.infer<typeof entity.schema>;
-			const dateFields = [
-				'dob',
-				'end',
-				'start',
-				'dueAt',
-				'postAt',
-				'residencyEnd',
-				'completedAt',
-			];
+
+			/**
+			 * Names of `Fields` with type `date`
+			 */
+			const dateFields = entity.basicFields.reduce((acc, field) => {
+				if (field.type === 'date') {
+					acc.push(field.name);
+				}
+				return acc;
+			}, [] as string[]);
+
 			objectKeys(original).forEach((key) => {
 				if (dateFields.includes(key) && original[key]) {
 					original[key] = forceDateToInput(original[key]!);
