@@ -107,7 +107,6 @@ export const startCase = (str: string): string =>
 	});
 
 export const toDateInput = (date: any) => {
-	console.log({ date }, 'common.ts ~ 132');
 	if (date instanceof Date) {
 		return date.toISOString().split('T')[0];
 	}
