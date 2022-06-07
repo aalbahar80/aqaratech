@@ -85,9 +85,9 @@
 	$: FormType = entity.data?.id ? ('edit' as const) : ('new' as const);
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	<title>{`${startCase(FormType)} ${entity.singularCap}`}</title>
-</svelte:head>
+</svelte:head> -->
 <div class="mx-auto h-full py-8 sm:w-[500px]">
 	<form
 		use:form
