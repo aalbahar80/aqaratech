@@ -21,7 +21,10 @@
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">
-				{Unit.getLabel(unit)}
+				{unit.unitNumber}
+				<span dir="auto">
+					{unit.type ?? ''}
+				</span>
 			</p>
 			<div class="ml-2 flex flex-shrink-0">
 				<p

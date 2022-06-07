@@ -15,11 +15,10 @@ export const properties = createRouter()
 				},
 				include: {
 					units: {
+						orderBy: { unitNumber: 'asc' },
 						include: {
 							leases: {
-								orderBy: {
-									end: 'desc',
-								},
+								orderBy: { end: 'desc' },
 								take: 2,
 							},
 						},
@@ -32,6 +31,11 @@ export const properties = createRouter()
 					message: 'Property not found',
 				});
 			}
+			// sort units by unitNumber
+			data.units.sort(
+				(a, b) =>
+					+a.unitNumber.match(/\d+/)?.[0] - +b.unitNumber.match(/\d+/)?.[0],
+			);
 			return data;
 		},
 	})
