@@ -90,7 +90,12 @@
 	const { label, color: badgeColor } = Transaction.getBadge(trx);
 </script>
 
-<Heading title={Transaction.singularCap} id={trx.id} entity="leases" {icons}>
+<Heading
+	title={Transaction.singularCap}
+	id={trx.id}
+	entity="transactions"
+	{icons}
+>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={{ lease: trx?.leaseId }} />
 	</svelte:fragment>
