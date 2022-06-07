@@ -85,6 +85,11 @@ export const units = createRouter()
 				pageIndex: pageIndex,
 			};
 			if (data) {
+				data.sort((a, b) => {
+					const aa = a.unitNumber.match(/\d+/)?.[0] ?? 0;
+					const bb = b.unitNumber.match(/\d+/)?.[0] ?? 0;
+					return +aa - +bb;
+				});
 				return { data, pagination };
 			} else {
 				throw new TRPCError({ code: 'NOT_FOUND' });

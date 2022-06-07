@@ -36,7 +36,16 @@ export const charts = createRouter()
 				where: { id: input.portfolioId },
 				include: { properties: { include: { portfolio: true, units: true } } },
 			});
-			if (data) return data;
+			if (data) {
+				data.properties.forEach((p) => {
+					p.units.sort((a, b) => {
+						const aa = a.unitNumber.match(/\d+/)?.[0] ?? 0;
+						const bb = b.unitNumber.match(/\d+/)?.[0] ?? 0;
+						return +aa - +bb;
+					});
+				});
+				return data;
+			}
 			throw new TRPCError({
 				code: 'NOT_FOUND',
 				message: 'Portfolio not found',

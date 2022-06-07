@@ -70,6 +70,11 @@ export const units = createRouter()
 					},
 				},
 			});
+			data.sort((a, b) => {
+				const aa = a.unitNumber.match(/\d+/)?.[0] ?? 0;
+				const bb = b.unitNumber.match(/\d+/)?.[0] ?? 0;
+				return +aa - +bb;
+			});
 			const pagination = {
 				size: size,
 				start: size * (pageIndex - 1) + 1,
