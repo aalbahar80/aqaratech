@@ -17,7 +17,10 @@ export const schema = z
 		leaseId: z.string().uuid(),
 	})
 	.refine(
-		(val) => val.dueAt === null || val.dueAt === '' || val.postAt <= val.dueAt,
+		(val) => {
+			console.table(val);
+			return val.dueAt === null || val.dueAt === '' || val.postAt <= val.dueAt;
+		},
 		{
 			path: ['dueAt'],
 			message: 'Due date cannot be after post date',
@@ -30,4 +33,13 @@ export const schema = z
 			path: ['paidAt'],
 			message: 'Payment date cannot be after post date',
 		},
+	)
+	.refine(
+		(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
+		(val) => ({
+			path: ['paidAt'],
+			message: val.isPaid
+				? 'Payment date should be set if transaction is paid'
+				: 'Payment date should not be set if the transaction is not paid. Clear the payment date or mark the transaction as paid.',
+		}),
 	);
