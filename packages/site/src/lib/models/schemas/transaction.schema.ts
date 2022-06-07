@@ -23,7 +23,7 @@ export const schema = z
 		},
 		{
 			path: ['dueAt'],
-			message: 'Due date cannot be after post date',
+			message: 'Due date cannot be before post date',
 		},
 	)
 	.refine(
@@ -31,7 +31,7 @@ export const schema = z
 			val.paidAt === null || val.paidAt === '' || val.postAt <= val.paidAt,
 		{
 			path: ['paidAt'],
-			message: 'Payment date cannot be after post date',
+			message: 'Payment date cannot be before post date',
 		},
 	)
 	.refine(
@@ -39,7 +39,7 @@ export const schema = z
 		(val) => ({
 			path: ['paidAt'],
 			message: val.isPaid
-				? 'Payment date should be set if transaction is paid'
-				: 'Payment date should not be set if the transaction is not paid. Clear the payment date or mark the transaction as paid.',
+				? 'If this transaction is paid, you must enter a payment date'
+				: 'If this transaction is not paid, you must clear the payment date',
 		}),
 	);
