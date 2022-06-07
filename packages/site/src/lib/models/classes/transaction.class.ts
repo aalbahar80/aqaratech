@@ -60,7 +60,7 @@ export class Transaction extends Entity {
 				required: true,
 				value: toDateInput(R.pathOr(this.data, ['postAt'], '')),
 				label: 'Post Date',
-				hint: "Note that a transaction cannot be paid before it's post date. :: تاريخ الاستحقاق",
+				hint: "Note that a transaction cannot be paid before it's post date.\n\nتاريخ الاستحقاق",
 			}),
 			new Field('dueAt', {
 				type: 'date',
@@ -77,7 +77,7 @@ export class Transaction extends Entity {
 				type: 'date',
 				value: toDateInput(this.data?.paidAt),
 				label: 'Payment Date',
-				hint: 'When was this transaction paid? :: تاريخ الدفع',
+				hint: 'When was this transaction paid?\n\nتاريخ الدفع',
 			}),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
