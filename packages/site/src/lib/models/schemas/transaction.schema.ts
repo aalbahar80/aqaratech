@@ -22,4 +22,12 @@ export const schema = z
 			path: ['dueAt'],
 			message: 'Due date cannot be after post date',
 		},
+	)
+	.refine(
+		(val) =>
+			val.paidAt === null || val.paidAt === '' || val.postAt <= val.paidAt,
+		{
+			path: ['paidAt'],
+			message: 'Payment date cannot be after post date',
+		},
 	);
