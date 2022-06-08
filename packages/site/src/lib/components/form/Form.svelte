@@ -22,6 +22,7 @@
 	const {
 		form,
 		errors,
+		warnings,
 		isSubmitting,
 		data: data2,
 		setData,
@@ -49,6 +50,8 @@
 		},
 		initialValues: entity.data,
 		schema: entity.schema,
+		warn:
+			'warnSchema' in entity ? validateSchema(entity.warnSchema) : undefined,
 		validate: validateSchema(entity.schema),
 		onError: (err: any) => {
 			addToast({
@@ -170,6 +173,7 @@
 							<Input
 								{field}
 								errors={$errors}
+								warnings={$warnings}
 								on:select={(e) => {
 									setData(field.name, e.detail.value);
 								}}
@@ -219,5 +223,8 @@
 	{#if dev}
 		<div class="prose py-6"><pre>{JSON.stringify($data2, null, 2)}</pre></div>
 		<div class="prose py-6"><pre>{JSON.stringify($errors, null, 2)}</pre></div>
+		<div class="prose py-6">
+			<pre>{JSON.stringify($warnings, null, 2)}</pre>
+		</div>
 	{/if}
 </div>

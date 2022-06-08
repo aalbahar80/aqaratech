@@ -6,7 +6,10 @@ import { toDateInput } from '$lib/utils/common.js';
 import type { Transaction as PTransaction } from '@prisma/client';
 import * as R from 'remeda';
 import type { z } from 'zod';
-import { schema as baseSchema } from '../schemas/transaction.schema.js';
+import {
+	schema as baseSchema,
+	warnSchema as baseWarnSchema,
+} from '../schemas/transaction.schema.js';
 
 export class Transaction extends Entity {
 	static urlName = 'transactions' as const;
@@ -29,6 +32,7 @@ export class Transaction extends Entity {
 		public plural = 'transactions',
 		public pluralCap = 'Transactions',
 		public schema = baseSchema,
+		public warnSchema = baseWarnSchema,
 		public override relationalFields = Transaction.relationalFields,
 	) {
 		super();

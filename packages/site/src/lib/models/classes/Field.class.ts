@@ -17,6 +17,7 @@ export class Field {
 	private _label = '';
 	valid = true;
 	errorMessage: string | undefined = '';
+	warnMessage: string | undefined = '';
 	hint = '';
 	required = false; // TODO: derive from zod schema
 	private _value: any;

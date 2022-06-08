@@ -25,10 +25,12 @@
 
 	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
+	export let warnings: Record<string, any>;
 
 	$: {
 		field.valid = !getValue(errors, field.name);
 		field.errorMessage = getValue(errors, field.name)?.[0];
+		field.warnMessage = getValue(warnings, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
 
@@ -139,6 +141,7 @@
 					field.name === 'createdAt' ||
 					field.name === 'updatedAt'}
 				class:form__input--invalid={!field.valid}
+				class:form__input--warn={field.warnMessage}
 			/>
 			<div
 				class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
@@ -150,12 +153,24 @@
 						aria-hidden="true"
 					/>
 				{/if}
+				{#if field.warnMessage && field.type !== 'date'}
+					<Icon
+						src={ExclamationCircle}
+						class="h-5 w-5 text-yellow-500"
+						aria-hidden="true"
+					/>
+				{/if}
 			</div>
 		</div>
 	{/if}
 	{#if !field.valid}
 		<p class="mt-2 text-sm text-red-600" id={`${field.name}-error`}>
 			{field.errorMessage ?? ''}
+		</p>
+	{/if}
+	{#if field.warnMessage}
+		<p class="mt-2 text-sm text-yellow-600" id={`${field.name}-warning`}>
+			{field.warnMessage ?? ''}
 		</p>
 	{/if}
 </div>
@@ -167,6 +182,9 @@
 	}
 	.form__input--invalid {
 		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+	.form__input--warn {
+		@apply border-yellow-500 text-yellow-600 focus:invalid:border-yellow-500 focus:invalid:ring-yellow-500;
 	}
 
 	/* Remove arrow steppers */
