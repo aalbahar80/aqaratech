@@ -26,13 +26,21 @@
 	import type { Load } from './__types/index';
 
 	const defaultRange = 6;
-	const getRange = (months: number) => ({
-		start: subMonths(
-			new Date(Date.now()).setHours(0, 0, 0, 0),
-			months,
-		).getTime(),
-		end: new Date(Date.now()).setHours(0, 0, 0, 0),
-	});
+	const getRange = (months: number) => {
+		const start = subMonths(new Date().setHours(0, 0, 0, 0), months);
+		return {
+			start: Date.UTC(
+				new Date(start).getUTCFullYear(),
+				new Date(start).getUTCMonth(),
+				new Date(start).getUTCDate(),
+			),
+			end: Date.UTC(
+				new Date(Date.now()).getUTCFullYear(),
+				new Date(Date.now()).getUTCMonth(),
+				new Date(Date.now()).getUTCDate(),
+			),
+		};
+	};
 
 	type Filter = z.infer<typeof filterSchema>;
 
