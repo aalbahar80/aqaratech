@@ -275,6 +275,7 @@
 <DashCard
 	title="Income"
 	subtitle="Breakdown of rent income by status & property."
+	empty={income.length < 1}
 >
 	<div slot="groupBy" class="flex w-64 pb-4">
 		<span
