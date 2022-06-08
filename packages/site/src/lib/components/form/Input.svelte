@@ -38,6 +38,8 @@
 	onMount(async () => {
 		if (field instanceof AsyncSelectField) {
 			options = await field.getOptions();
+		} else if (field instanceof SelectField) {
+			options = field.options;
 		}
 	});
 </script>

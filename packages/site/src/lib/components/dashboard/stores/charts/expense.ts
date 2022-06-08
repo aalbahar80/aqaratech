@@ -12,7 +12,7 @@ type ChartData = { total: number; date: Date; group: number | string }[];
 const aggregate = (
 	data: Data,
 	groupBy: GroupBy,
-	expenseMeta: App.Stuff['expenseMeta'],
+	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
 ): ChartData => {
 	console.time('aggregate');
 	const months = getMonths(data);
@@ -49,7 +49,7 @@ const aggregate = (
 const getDatasets = (
 	data: Data,
 	groupBy: GroupBy,
-	expenseMeta: App.Stuff['expenseMeta'],
+	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
 ) => {
 	console.time('getDatasets');
 	const aggregated = aggregate(data, groupBy, expenseMeta);
@@ -89,7 +89,7 @@ const getDatasets = (
 export const getExpenseChartStore = (
 	expenses: Writable<Data>,
 	groupBy: Writable<GroupBy>,
-	expenseMeta: App.Stuff['expenseMeta'],
+	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
 ) =>
 	derived([expenses, groupBy], ([$expenses, $groupBy]) =>
 		getDatasets($expenses, $groupBy, expenseMeta),
