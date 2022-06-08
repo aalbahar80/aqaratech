@@ -4,13 +4,15 @@ import { createTRPCClient } from '@trpc/client';
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import superjson from 'superjson';
 
+type TRPCHeaders = Parameters<typeof createTRPCClient>['0']['headers'];
 const browser = typeof window != 'undefined';
-export const trpc = (loadFetch?: LoadEvent['fetch']) => {
+export const trpc = (loadFetch?: LoadEvent['fetch'], headers?: TRPCHeaders) => {
 	const url = browser ? '/trpc' : 'http://localhost:3000/trpc';
 	return createTRPCClient<AppRouter>({
 		url: loadFetch ? '/trpc' : url,
 		transformer: superjson,
 		...(loadFetch && { fetch: loadFetch }),
+		...(headers && { headers }),
 	});
 };
 

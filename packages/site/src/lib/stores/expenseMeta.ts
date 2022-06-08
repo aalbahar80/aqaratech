@@ -1,4 +1,4 @@
-import type { InferQueryOutput } from '$lib/client/trpc.js';
+import { trpc, type InferQueryOutput } from '$lib/client/trpc.js';
 import { writable, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'public:expenses:meta'>;
@@ -18,3 +18,8 @@ export function getExpenseCategories(data: Data) {
 	const options = [{ label: '', value: null }, ...categoryOptions];
 	return options;
 }
+
+export const getExpenseMeta = async () => {
+	const expenseMeta = await trpc().query('public:expenses:meta');
+	return getExpenseCategories(expenseMeta);
+};

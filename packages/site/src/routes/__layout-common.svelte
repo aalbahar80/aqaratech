@@ -2,12 +2,10 @@
 	// This is a base layout for other layouts to extend.
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import { trpc } from '$lib/client/trpc';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import type { NavbarItem } from '$lib/models/interfaces/user.interface';
-	import { categories, getExpenseCategories } from '$lib/stores/expenseMeta';
 	import { protectRoute } from '$lib/utils/auth';
 	import { getUserConfig } from '$user';
 	import type { Scope } from '@sentry/browser';
@@ -20,25 +18,13 @@
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';
 
-	export const load: Load = async ({
-		session,
-		url: { pathname },
-		fetch,
-		stuff,
-	}) => {
-		const expenseMeta = await trpc(fetch).query('public:expenses:meta');
-		categories.set(getExpenseCategories(expenseMeta));
-
+	export const load: Load = async ({ session, url: { pathname } }) => {
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
 		return {
 			...protectRoute(session, pathname),
 			props: {
 				navigation,
-			},
-			stuff: {
-				...stuff,
-				expenseMeta, // TODO: remove this
 			},
 		};
 	};

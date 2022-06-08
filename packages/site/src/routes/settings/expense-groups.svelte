@@ -9,7 +9,9 @@
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ fetch }) => {
-		const { groups } = await trpc(fetch).query('public:expenses:meta');
+		const { groups } = await trpc(fetch, { 'cache-control': 'no-cache' }).query(
+			'public:expenses:meta',
+		);
 		return { props: { groups } };
 	};
 </script>

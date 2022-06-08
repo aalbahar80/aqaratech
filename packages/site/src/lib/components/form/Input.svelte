@@ -18,7 +18,6 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 	import type { Option } from '$lib/models/interfaces/option.interface';
@@ -34,7 +33,7 @@
 	}
 	const dispatch = createEventDispatcher();
 
-	let options: Option[] | Writable<Option[]>;
+	let options: Option[] | Promise<Option[]>;
 	if (field instanceof AsyncSelectField) {
 		options = field.options;
 	}
@@ -74,12 +73,16 @@
 			on:select
 		/>
 	{:else if field instanceof AsyncSelectField}
-		<Select
-			id={field.name}
-			bind:current={field.value}
-			options={$options}
-			on:select
-		/>
+		{#await field.options}
+			<Select
+				id={field.name}
+				bind:current={field.value}
+				options={[field.value]}
+				on:select
+			/>
+		{:then options}
+			<Select id={field.name} bind:current={field.value} {options} on:select />
+		{/await}
 	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

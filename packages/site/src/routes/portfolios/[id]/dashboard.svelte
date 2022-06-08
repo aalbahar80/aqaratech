@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
@@ -52,18 +51,20 @@
 			...getRange(defaultRange),
 		};
 
-		const [portfolio, income, expenses, occupancy] = await Promise.all([
-			trpc(fetch).query('owner:charts:portfolio', { portfolioId: params.id }), // TODO use read?
-			trpc(fetch).query('owner:charts:income', {
-				...defaultFilter,
-			}),
-			trpc(fetch).query('owner:charts:expenses', {
-				...defaultFilter,
-			}),
-			trpc(fetch).query('owner:charts:occupancy', {
-				...defaultFilter,
-			}),
-		]);
+		const [portfolio, income, expenses, occupancy, expenseMeta] =
+			await Promise.all([
+				trpc(fetch).query('owner:charts:portfolio', { portfolioId: params.id }), // TODO use read?
+				trpc(fetch).query('owner:charts:income', {
+					...defaultFilter,
+				}),
+				trpc(fetch).query('owner:charts:expenses', {
+					...defaultFilter,
+				}),
+				trpc(fetch).query('owner:charts:occupancy', {
+					...defaultFilter,
+				}),
+				trpc(fetch).query('public:expenses:meta'),
+			]);
 		return {
 			props: {
 				portfolio,
@@ -71,6 +72,7 @@
 				filter: defaultFilter,
 				expenses,
 				occupancy,
+				expenseMeta,
 			},
 		};
 	};
@@ -81,6 +83,7 @@
 	export let income: InferQueryOutput<'owner:charts:income'>;
 	export let expenses: InferQueryOutput<'owner:charts:expenses'>;
 	export let occupancy: InferQueryOutput<'owner:charts:occupancy'>;
+	export let expenseMeta: InferQueryOutput<'public:expenses:meta'>;
 	export let filter: Filter;
 
 	interface Option {
@@ -152,7 +155,7 @@
 	const expenseChartData = getExpenseChartStore(
 		expenseData,
 		expensesGroupBy,
-		$page.stuff.expenseMeta,
+		expenseMeta,
 	);
 
 	// Income
