@@ -37,10 +37,13 @@ export const schema = base
 		}),
 	);
 
-export const warnSchema = base.refine(
-	(val) => val.paidAt === null || val.paidAt === '' || val.postAt <= val.paidAt,
-	{
-		path: ['paidAt'],
-		message: 'Payment date is before post date',
-	},
-);
+export const warnSchema = base
+	.pick({ paidAt: true, postAt: true })
+	.refine(
+		(val) =>
+			val.paidAt === null || val.paidAt === '' || val.postAt <= val.paidAt,
+		{
+			path: ['paidAt'],
+			message: 'Payment date is before post date',
+		},
+	);
