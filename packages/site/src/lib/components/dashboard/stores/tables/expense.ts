@@ -10,12 +10,14 @@ export const expenseTableHeaders = [
 	{ key: 'Category', style: 'bold1' },
 	{ key: 'Amount' },
 	{ key: 'Location' },
+	{ key: 'view', style: 'bold2' },
 ] as const;
 
 export const getExpenseTableStore = (expenses: Writable<Data>) =>
 	derived(expenses, ($expenses) => {
 		const rows = $expenses.map((entry) => ({
 			id: entry.id,
+			view: `/expenses/${entry.id}`,
 			Date: dateFormat(entry.postAt),
 			Category: entry.categoryLabel || '',
 			Amount: kwdFormat(entry.amount),

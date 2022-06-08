@@ -11,12 +11,14 @@ export const incomeTableHeaders = [
 	{ key: 'Amount' },
 	{ key: 'Location' },
 	{ key: 'Unit', style: 'bold2' },
+	{ key: 'view', style: 'bold2' },
 ] as const;
 
 export const getIncomeTableStore = (income: Writable<Data>) =>
 	derived(income, ($income) => {
 		const rows = $income.map((entry) => ({
 			id: entry.id,
+			view: `/transactions/${entry.id}`,
 			Date: dateFormat(entry.postAt),
 			Status: entry.isPaid ? 'Paid' : 'Unpaid',
 			Amount: kwdFormat(entry.amount),

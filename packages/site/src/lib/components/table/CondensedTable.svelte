@@ -19,12 +19,12 @@
 			<thead class="bg-gray-50">
 				<tr>
 					{#each table.headers as header, idx (header.key)}
-						{#if header.key === 'edit'}
+						{#if header.key === 'view'}
 							<th
 								scope="col"
 								class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
 							>
-								<span class="sr-only">Edit</span>
+								<span class="sr-only">View</span>
 							</th>
 						{:else}
 							<th
@@ -44,8 +44,8 @@
 				{#each table.getPage($pgn.pageIdx, $pgn.pageSize) as row (row.id)}
 					<tr>
 						{#each table.headers as header, idx (header.key)}
-							{#if header.key === 'edit'}
-								<CondensedActionCell href="#" label="Edit" />
+							{#if header.key === 'view'}
+								<CondensedActionCell href={row[header.key]} label="View" />
 							{:else}
 								<CondensedCell
 									{idx}
