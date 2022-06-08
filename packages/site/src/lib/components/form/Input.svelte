@@ -6,6 +6,7 @@
 		SelectField,
 		type Field,
 	} from '$lib/models/classes/Field.class';
+	import type { Option } from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils';
 	import { tippyHint } from '$lib/utils/tippy';
 	import {
@@ -17,6 +18,7 @@
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
+	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
@@ -31,6 +33,13 @@
 		field.warnMessage = getValue(warnings, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
+
+	let options: Option[] = [];
+	onMount(async () => {
+		if (field instanceof AsyncSelectField) {
+			options = await field.getOptions();
+		}
+	});
 </script>
 
 <div>
@@ -59,24 +68,8 @@
 			on:select
 			on:clear
 		/>
-	{:else if field instanceof SelectField}
-		<Select
-			id={field.name}
-			bind:current={field.value}
-			options={field.options}
-			on:select
-		/>
-	{:else if field instanceof AsyncSelectField}
-		{#await field.options}
-			<Select
-				id={field.name}
-				bind:current={field.value}
-				options={[{ label: field.selectionLabel, value: field.value }]}
-				on:select
-			/>
-		{:then options}
-			<Select id={field.name} bind:current={field.value} {options} on:select />
-		{/await}
+	{:else if field instanceof SelectField || field instanceof AsyncSelectField}
+		<Select id={field.name} bind:current={field.value} {options} on:select />
 	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

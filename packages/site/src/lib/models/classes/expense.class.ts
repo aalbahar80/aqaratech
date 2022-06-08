@@ -65,9 +65,10 @@ export class Expense extends Entity {
 			}),
 			new AsyncSelectField('categoryId', {
 				required: true,
-				options: trpc()
-					.query('public:expenses:meta')
-					.then((res) => getExpenseCategories(res)),
+				getOptions: async () => {
+					const data = await trpc().query('public:expenses:meta');
+					return getExpenseCategories(data);
+				},
 				value: this.data?.categoryId || '',
 				label: 'Expense Category',
 				selectionLabel: this.data?.category

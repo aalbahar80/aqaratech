@@ -58,7 +58,7 @@ export class SelectField extends Field {
 export class AsyncSelectField extends Field {
 	override type = 'select' as const;
 	selectionLabel = '';
-	options: Promise<Option[]> = Promise.resolve([]);
+	getOptions: () => Promise<Option[]> = async () => [];
 	constructor(name: string, data?: Partial<AsyncSelectField>) {
 		super(name, data);
 		Object.assign(this, data);
