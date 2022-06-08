@@ -1,7 +1,7 @@
 import type { IconSource } from '@steeze-ui/svelte-icon/types';
 
 export interface Option {
-	value: string | null | undefined;
+	value: string | number | null | undefined;
 	label: string;
 }
 

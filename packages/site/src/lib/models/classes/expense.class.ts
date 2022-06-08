@@ -1,11 +1,7 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc.js';
 import { Entity } from '$lib/models/classes/entity.class.js';
-import {
-	AsyncSelectField,
-	Field,
-	SelectField,
-} from '$lib/models/classes/Field.class.js';
-import { categories, getExpenseCategories } from '$lib/stores/expenseMeta.js';
+import { AsyncSelectField, Field } from '$lib/models/classes/Field.class.js';
+import { getExpenseCategories } from '$lib/stores/expenseMeta.js';
 import { toDateInput } from '$lib/utils/common.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
@@ -69,15 +65,14 @@ export class Expense extends Entity {
 			}),
 			new AsyncSelectField('categoryId', {
 				required: true,
-				// options: async () => {
-				// 	const res = await trpc().query('public:expenses:meta');
-				// 	return getExpenseCategories(res);
-				// },
 				options: trpc()
 					.query('public:expenses:meta')
 					.then((res) => getExpenseCategories(res)),
 				value: this.data?.categoryId || '',
 				label: 'Expense Category',
+				selectionLabel: this.data?.category
+					? `${this.data?.category?.en} - ${this.data?.category?.ar}`
+					: '',
 			}),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),

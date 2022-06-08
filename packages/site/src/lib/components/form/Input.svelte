@@ -20,7 +20,6 @@
 	import { createEventDispatcher } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
-	import type { Option } from '$lib/models/interfaces/option.interface';
 
 	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
@@ -32,11 +31,6 @@
 		field.warnMessage = getValue(warnings, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
-
-	let options: Option[] | Promise<Option[]>;
-	if (field instanceof AsyncSelectField) {
-		options = field.options;
-	}
 </script>
 
 <div>
@@ -77,7 +71,7 @@
 			<Select
 				id={field.name}
 				bind:current={field.value}
-				options={[field.value]}
+				options={[{ label: field.selectionLabel, value: field.value }]}
 				on:select
 			/>
 		{:then options}

@@ -1,6 +1,5 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { startCase } from '$lib/utils/common.js';
-import type { Writable } from 'svelte/store';
 
 type FieldType =
 	| 'text'
@@ -58,6 +57,7 @@ export class SelectField extends Field {
 
 export class AsyncSelectField extends Field {
 	override type = 'select' as const;
+	selectionLabel = '';
 	options: Promise<Option[]> = Promise.resolve([]);
 	constructor(name: string, data?: Partial<AsyncSelectField>) {
 		super(name, data);

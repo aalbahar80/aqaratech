@@ -36,6 +36,7 @@ export const expenses = createRouter()
 					id,
 				},
 				include: {
+					category: true,
 					portfolio: true,
 					property: {
 						include: {
