@@ -14,8 +14,10 @@
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
 	import type { Load } from './__types/index';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const trx = await trpc(fetch).query('transactions:read', params.id);
+	export const load: Load = async ({ params, fetch, session }) => {
+		const trx = session.authz?.isAdmin
+			? await trpc(fetch).query('transactions:read', params.id)
+			: await trpc(fetch).query('owner:transactions:read', params.id);
 		return { props: { trx } };
 	};
 </script>
