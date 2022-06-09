@@ -7,9 +7,11 @@ module.exports = {
 
 	theme: {
 		extend: {
-			// colors: colors.rose,
 			teal: colors.teal,
 			cyan: colors.cyan,
+			fontFamily: {
+				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+			},
 		},
 	},
 	plugins: [
