@@ -18,6 +18,7 @@ export {
 	testTenantPassword,
 	timespan,
 } from "./generators.js";
+export { seed } from "./seed.js";
 export {
 	insertExpenseCategories,
 	insertExpenseGroups,

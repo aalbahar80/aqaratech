@@ -74,7 +74,12 @@ export const config: Config = {
 		},
 		{
 			name: 'general',
-			testMatch: ['lease.test.ts', 'property.test.ts', 'unit.test.ts'],
+			testMatch: [
+				'lease.test.ts',
+				'property.test.ts',
+				'unit.test.ts',
+				'date-range.test.ts',
+			],
 		},
 		{
 			name: 'portfolio',

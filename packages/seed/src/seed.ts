@@ -23,19 +23,19 @@ config({
 	path: "../site/.env",
 });
 
-async function main({
+export async function seed({
 	sample = true,
 	clean = false,
 }: { sample?: boolean; clean?: boolean } = {}) {
 	if (await isProdBranch()) {
 		return;
 	}
-	let portfolioCount = 3;
-	let propertyMin = 2;
-	let propertyMax = 6;
-	let unitMax = 5;
-	let moCount = 100;
-	let expenseCount = 150;
+	let portfolioCount = 2;
+	let propertyMin = 1;
+	let propertyMax = 2;
+	let unitMax = 2;
+	let moCount = 5;
+	let expenseCount = 5;
 	const min = 1;
 
 	const portfolios = Array.from({ length: portfolioCount }, fakePortfolio);
@@ -298,7 +298,7 @@ async function main({
 	}
 }
 
-main({ sample: false, clean: true })
+seed({ sample: false, clean: true })
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);

@@ -8,6 +8,7 @@ import {
 } from "../../site/src/lib/config/constants.js";
 
 faker.setLocale("ar");
+faker.seed(123);
 
 // consistent id's for testing
 export const testPortfolioId = "c0183a5d-2875-488b-b86f-e1c5628262df";
