@@ -8,8 +8,11 @@
 	import { kwdFormat, dateFormat } from '$lib/utils/common';
 	import type { Load } from './__types/[id]';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const expense = await trpc(fetch).query('expenses:read', params.id);
+	export const load: Load = async ({ params, fetch, session }) => {
+		const expense = session.authz?.isAdmin
+			? await trpc(fetch).query('expenses:read', params.id)
+			: await trpc(fetch).query('owner:expenses:read', params.id);
+
 		return { props: { expense } };
 	};
 </script>
