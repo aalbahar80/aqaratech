@@ -35,7 +35,6 @@ export const expenses = createRouter().query('read', {
 		const sameProperty = data.property?.portfolioId === ctx.authz.id;
 		const sameUnit = data.unit?.property?.portfolioId === ctx.authz.id;
 		const allowed = samePortfolio || sameProperty || sameUnit;
-		console.log({ allowed }, 'expenses.ts ~ 38');
 
 		if (allowed) {
 			return data;
