@@ -7,7 +7,7 @@ import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { toDateInput } from '$lib/utils/common.js';
 import type { Lease as PLease } from '@prisma/client';
-import { addMonths, format } from 'date-fns';
+import { addMonths, addYears, format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
 import {
@@ -48,7 +48,7 @@ export class Lease extends Entity {
 	defaultForm = (): Record<keyof Omit<z.input<typeof baseSchema>, 'id'>, any> &
 		z.input<typeof extendedSchema> => ({
 		start: new Date(),
-		end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+		end: addYears(new Date(), 1),
 		monthlyRent: 0,
 		tenantId: '',
 		unitId: '',
@@ -122,27 +122,20 @@ export class Lease extends Entity {
 		scheduleStart: Date;
 	}) {
 		const newSchedule = [];
-		// get the date of the 1st day of the next month
-		// const leaseStart = new Date(lease.scheduleStart);
-
-		// Check out date-fns eachMonthOfInterval
-		// https://date-fns.org/v2.28.0/docs/eachMonthOfInterval
-		const nextMonth = new Date(
-			scheduleStart.getFullYear(),
-			scheduleStart.getMonth(),
-			scheduleStart.getUTCDate() + 1,
+		const startDate = new Date(
+			scheduleStart.getUTCFullYear(),
+			scheduleStart.getUTCMonth(),
+			scheduleStart.getUTCDate(),
 		);
-
 		for (let bp = 0; bp < Math.min(count, 24); bp++) {
-			// TODO change to 1 month
-			const dueAt = addMonths(nextMonth, bp);
-			const memo = `Rent for: ${format(dueAt, 'MMMM yyyy')}`;
+			const postAt = addMonths(startDate, bp);
+			const memo = `Rent for: ${format(postAt, 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),
 				amount,
-				// postAt: dueAt.toISOString().split('T')[0],
-				postAt: dueAt,
+				postAt,
 				memo,
+				// dueAt: addDays(postAt, 14),
 			});
 		}
 		return newSchedule;

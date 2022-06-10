@@ -23,8 +23,6 @@ export const schema = baseSchema
 	});
 
 export const scheduleSchema = z.array(
-	// should schedule be array or object?
-	// TODO import schema from ./transaction
 	z.object({
 		amount: z.number().min(1),
 		postAt: z.preprocess(strToDate, z.date()),
@@ -46,6 +44,7 @@ export const leaseFormSchema = baseSchema
 		message: 'End date must be after start date',
 	})
 	.superRefine((val, ctx) => {
+		console.log({ val }, 'lease.schema.ts ~ 39');
 		val.schedule.map((item, idx) => {
 			if (item.postAt > val.end) {
 				ctx.addIssue({
