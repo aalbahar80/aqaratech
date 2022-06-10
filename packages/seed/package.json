@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "build": "tsc --project tsconfig.build.json",
-        "seed": "pnpm run build && node dist/seed/src/seed.js",
+        "seed": "pnpm run build && node dist/seed/src/go-seed.js",
         "prep": "pnpm run build && node dist/seed/src/prep-db.js",
         "prisma:gen": "prisma generate --schema=../site/prisma/schema.prisma"
     },

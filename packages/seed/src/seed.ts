@@ -309,10 +309,3 @@ export async function seed({
 		console.error(e);
 	}
 }
-
-seed({ sample: false, clean: true })
-	.catch((e) => {
-		console.error(e);
-		process.exit(1);
-	})
-	.finally(() => prisma.$disconnect());
