@@ -18,7 +18,7 @@ export function falsyToNullExceptZero<T>(v: T) {
 export function strToDate(v: unknown) {
 	if (v instanceof Date) {
 		return v;
-	} else if (typeof v === 'string') {
+	} else if (typeof v === 'string' || typeof v === 'number') {
 		return new Date(v);
 	} else {
 		return;
