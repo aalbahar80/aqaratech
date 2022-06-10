@@ -2,7 +2,7 @@ import { environment } from '$lib/environment';
 import prismaClient from '$lib/server/prismaClient';
 import { kwdFormat } from '$lib/utils/common';
 import { sendEmail } from '$lib/utils/sendEmail';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone } from 'date-fns-tz/esm';
 
 const {
 	urlOrigin,

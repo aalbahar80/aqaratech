@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from 'date-fns';
-import { formatInTimeZone } from 'date-fns-tz';
+import { formatInTimeZone } from 'date-fns-tz/esm';
 
 export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const total = differenceInCalendarDays(end, start);
