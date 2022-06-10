@@ -83,6 +83,20 @@ export const config: Config = {
 			],
 		},
 		{
+			name: 'dates-LA',
+			testMatch: ['date-range.test.ts', 'trx-schedule.test.ts'],
+			use: {
+				timezoneId: 'America/Los_Angeles',
+			},
+		},
+		{
+			name: 'dates-Tokyo',
+			testMatch: ['date-range.test.ts', 'trx-schedule.test.ts'],
+			use: {
+				timezoneId: 'Asia/Tokyo',
+			},
+		},
+		{
 			name: 'portfolio',
 			use: { baseForm: 'portfolios' },
 			testMatch: commonForms,
