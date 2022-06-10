@@ -8,15 +8,12 @@ const __dirname = path.dirname(__filename);
 
 test.use({ storageState: path.resolve(__dirname, '../../adminState.json') });
 test('Lease transactions have correct dates', async ({ page }) => {
-	await page.goto('/new/leases');
+	await page.goto('/leases');
 
-	// select tenant
-	await page.locator('.sv-control').click();
-	await page.locator('.sv-dd-item > .sv-item').first().click();
+	// grab an existing lease to avoid creating tenants/portfolios/properties/units
+	await page.locator('text=Expiry').first().click();
+	await page.locator('text=Renew').click();
 
-	await page.selectOption('#portfolioId', { index: 0 });
-	await page.selectOption('#propertyId', { index: 0 });
-	await page.selectOption('#unitId', { index: 0 });
 	await page.locator('input[name="start"]').fill('2022-07-01');
 	await page.locator('input[name="end"]').fill('2023-07-01');
 	await page.locator('input[name="monthlyRent"]').fill('555');
