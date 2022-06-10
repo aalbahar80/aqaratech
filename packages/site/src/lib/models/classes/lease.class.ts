@@ -1,13 +1,13 @@
 import type { InferQueryOutput } from '$lib/client/trpc.js';
-import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Field } from '$lib/models/classes/Field.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import { Tenant } from '$lib/models/classes/tenant.class.js';
 import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
-import { toDateInput } from '$lib/utils/common.js';
+import { toDateInput, toUTCFormat } from '$lib/utils/common.js';
 import type { Lease as PLease } from '@prisma/client';
-import { addMonths, addYears, format } from 'date-fns';
+import { addMonths, addYears } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
 import {
@@ -129,7 +129,7 @@ export class Lease extends Entity {
 		);
 		for (let bp = 0; bp < Math.min(count, 24); bp++) {
 			const postAt = addMonths(startDate, bp);
-			const memo = `Rent for: ${format(postAt, 'MMMM yyyy')}`;
+			const memo = `Rent for: ${toUTCFormat(postAt, 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),
 				amount,

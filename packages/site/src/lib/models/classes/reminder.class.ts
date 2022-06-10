@@ -58,7 +58,7 @@ export class Reminder {
 				email: trx.lease.tenant.email,
 				phone: trx.lease.tenant.phone,
 				// amount: kwdFormat(trx.amount),
-				// date: format(trx.postAt, 'MMM yyyy'),
+				// date: toUTCFormat(trx.postAt, 'MMM yyyy'),
 				amount: trx.amount,
 				date: trx.postAt,
 				name: `${trx.lease.tenant.fullName}`,
