@@ -1,24 +1,19 @@
 import { chromium, type FullConfig } from '@playwright/test';
-import {
-	cleanupDatabase,
-	insertExpenseCategories,
-	insertExpenseGroups,
-	seed,
-	setupPortfolio,
-	setupTenant,
-} from '@self/seed';
+import { seed } from '@self/seed';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 async function globalSetup(config: FullConfig) {
-	// await cleanupDatabase();
-	await seed({ sample: false, clean: true });
-	// await insertExpenseGroups();
-	// await Promise.all([
-	// insertExpenseCategories(),
-	// setupTenant(),
-	// setupPortfolio(),
-	// ]);
+	await seed({
+		sample: false,
+		clean: true,
+		portfolioCount: 2,
+		propertyMin: 1,
+		propertyMax: 2,
+		unitMax: 2,
+		moCount: 5,
+		expenseCount: 5,
+	});
 
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = path.dirname(__filename);
