@@ -28,10 +28,11 @@ export const isProdBranch = async () => {
 	try {
 		console.log("Checking if database branch is in production");
 		console.log("DATABASE_URL: ", process.env.DATABASE_URL);
-		await prisma.$transaction([
-			prisma.$executeRaw`CREATE TABLE MyEscapeHatch(dummy varchar(255))`,
-			prisma.$executeRaw`DROP TABLE MyEscapeHatch`,
-		]);
+
+		await prisma.$executeRaw`DROP TABLE IF EXISTS MyEscapeHatch`;
+		await prisma.$executeRaw`CREATE TABLE MyEscapeHatch(dummy varchar(255))`;
+		await prisma.$executeRaw`DROP TABLE MyEscapeHatch`;
+
 		console.log("Branch is not production");
 		return false;
 	} catch (e) {
