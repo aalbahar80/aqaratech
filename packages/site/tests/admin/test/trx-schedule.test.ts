@@ -16,7 +16,11 @@ test('Lease transactions have correct dates', async ({ page }) => {
 
 	await page.locator('input[name="start"]').fill('2022-07-01');
 	await page.locator('input[name="end"]').fill('2023-07-01');
-	await page.locator('input[name="monthlyRent"]').fill('555');
+
+	// use random number to avoid schedule not updating
+	const random = (Math.random() * 1000).toString();
+	await page.locator('input[name="monthlyRent"]').fill(random);
+
 	await page.locator('#count').fill('12');
 	await Promise.all([
 		page.waitForNavigation(),

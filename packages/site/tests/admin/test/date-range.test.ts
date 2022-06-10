@@ -74,7 +74,11 @@ test('Expense included in start range', async ({ page, expense }) => {
 	await page
 		.locator('input[name="end"]')
 		.fill(`${expense.postAt.year.toString()}-0${month.toString()}-01`);
-	await page.locator('button:below(:text("Expenses"))').first().click();
+
+	const expenseCard = page.locator('data-test-id=dashcard', {
+		has: page.locator('h3:has-text("Expenses")'),
+	});
+	await expenseCard.locator('button:has-text("Data")').click();
 
 	const amountCell = page
 		.locator(`text=KWD ${expense.amount.toString()}`)
@@ -100,7 +104,11 @@ test('Expense included in end range', async ({ page, expense }) => {
 		.locator('input[name="start"]')
 		.fill(`${expense.postAt.year.toString()}-0${month.toString()}-01`);
 	await page.locator('input[name="end"]').fill(expense.postAt.asString);
-	await page.locator('button:below(:text("Expenses"))').first().click();
+
+	const expenseCard = page.locator('data-test-id=dashcard', {
+		has: page.locator('h3:has-text("Expenses")'),
+	});
+	await expenseCard.locator('button:has-text("Data")').click();
 
 	const amountCell = page
 		.locator(`text=KWD ${expense.amount.toString()}`)

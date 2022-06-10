@@ -87,6 +87,7 @@ export const config: Config = {
 			testMatch: ['date-range.test.ts', 'trx-schedule.test.ts'],
 			use: {
 				timezoneId: 'America/Los_Angeles',
+				screenshot: 'on',
 			},
 		},
 		{
@@ -94,6 +95,7 @@ export const config: Config = {
 			testMatch: ['date-range.test.ts', 'trx-schedule.test.ts'],
 			use: {
 				timezoneId: 'Asia/Tokyo',
+				screenshot: 'on',
 			},
 		},
 		{

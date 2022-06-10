@@ -34,6 +34,7 @@
 <div
 	class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl"
 	style:height={`${$height}px`}
+	data-test-id="dashcard"
 >
 	<div class="prose prose-base">
 		<h3>{title}</h3>
