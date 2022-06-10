@@ -29,7 +29,8 @@
             "outputs": [
                 "playwright-report",
                 "test-results"
-            ]
+            ],
+            "cache": false
         },
         "lint": {
             "outputs": []
