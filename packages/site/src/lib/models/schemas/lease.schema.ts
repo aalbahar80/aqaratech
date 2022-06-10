@@ -44,7 +44,6 @@ export const leaseFormSchema = baseSchema
 		message: 'End date must be after start date',
 	})
 	.superRefine((val, ctx) => {
-		console.log({ val }, 'lease.schema.ts ~ 39');
 		val.schedule.map((item, idx) => {
 			if (item.postAt > val.end) {
 				ctx.addIssue({

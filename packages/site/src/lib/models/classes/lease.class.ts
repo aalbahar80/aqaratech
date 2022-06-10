@@ -7,7 +7,7 @@ import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { toDateInput, toUTCFormat } from '$lib/utils/common.js';
 import type { Lease as PLease } from '@prisma/client';
-import { addMonths, addYears } from 'date-fns';
+import { addMonths, addYears, eachMonthOfInterval } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
 import {
@@ -122,15 +122,27 @@ export class Lease extends Entity {
 		scheduleStart: Date;
 	}) {
 		const newSchedule = [];
+		const intervals = eachMonthOfInterval({
+			start: scheduleStart,
+			end: addMonths(scheduleStart, count),
+		});
+		console.debug(intervals);
+		const start = scheduleStart;
 		for (let bp = 0; bp < Math.min(count, 24); bp++) {
-			const postAt = addMonths(scheduleStart, bp);
-			const memo = `Rent for: ${toUTCFormat(postAt, 'MMMM yyyy')}`;
+			const postAt = Date.UTC(
+				start.getUTCFullYear(),
+				start.getUTCMonth() + bp,
+				start.getUTCDate(),
+				start.getUTCHours(),
+				start.getUTCMinutes(),
+				start.getUTCSeconds(),
+			);
+			const memo = `Rent for: ${toUTCFormat(new Date(postAt), 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),
 				amount,
 				postAt,
 				memo,
-				// dueAt: addDays(postAt, 14),
 			});
 		}
 		return newSchedule;

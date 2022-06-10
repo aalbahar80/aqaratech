@@ -15,10 +15,14 @@ export function falsyToNullExceptZero<T>(v: T) {
 	return isNumber(v) ? v : null;
 }
 
-// export a function that z.preprocess string or date to Date
 export function strToDate(v: unknown) {
-	if (typeof v === 'string' || v instanceof Date) return new Date(v);
-	return;
+	if (v instanceof Date) {
+		return v;
+	} else if (typeof v === 'string') {
+		return new Date(v);
+	} else {
+		return;
+	}
 }
 
 // TODO Doesn't infer correctly

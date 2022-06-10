@@ -97,25 +97,36 @@
 		},
 		onSubmit: async (values) => {
 			try {
-				console.log({ values }, 'LeaseForm.svelte ~ 95');
+				console.debug(values);
 				const { schedule: unparsed, ...leaseValues } = values;
 				const schedule = scheduleSchema.parse(unparsed);
 				const newLease = await trpc().mutation('leases:save', leaseValues);
-				console.log({ newLease }, 'LeaseForm.svelte ~ 108');
+				console.debug(newLease);
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
 					leaseId: newLease.id,
-					dueAt: addDays(e.postAt, 14),
+					// dueAt: addDays(e.postAt, 15),
 					isPaid: false,
 					paidAt: null,
 					...e,
 					postAt: e.postAt,
+					dueAt: new Date(
+						Date.UTC(
+							e.postAt.getUTCFullYear(),
+							e.postAt.getUTCMonth(),
+							e.postAt.getUTCDate() + 14,
+							e.postAt.getUTCHours(),
+							e.postAt.getUTCMinutes(),
+							e.postAt.getUTCSeconds(),
+						),
+					),
 				}));
+				console.debug(trxValues);
 				const newTrxs = await trpc().mutation(
 					'transactions:saveMany',
 					trxValues,
 				);
-				console.log(`created ${newTrxs.count} transactions`);
+				console.debug(`created ${newTrxs.count} transactions`);
 
 				await goto(`/leases/${newLease.id}`);
 				addToast({
