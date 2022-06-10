@@ -1,4 +1,3 @@
 # recursive-install: false
 packages:
   - "packages/*"
-  - "packages/site/tests/"
