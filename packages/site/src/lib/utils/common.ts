@@ -1,4 +1,5 @@
-import { differenceInCalendarDays, format } from 'date-fns';
+import { differenceInCalendarDays } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	const total = differenceInCalendarDays(end, start);
@@ -8,7 +9,8 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	return rounded;
 };
 
-export const dateFormat = (date: Date): string => format(date, 'MMM dd, yy');
+export const dateFormat = (date: Date): string =>
+	formatInTimeZone(date, 'UTC', 'MMM dd, yy');
 
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {
@@ -43,8 +45,11 @@ export const forceDate = (date: Date | string | number): Date => {
 
 const inputDateFormat = 'yyyy-MM-dd';
 export const dateToInput = (date: Date): string => {
+	console.log({ date }, 'common.ts ~ 46');
 	try {
-		return format(date, inputDateFormat);
+		const result = formatInTimeZone(date, 'UTC', inputDateFormat);
+		console.log({ result }, 'common.ts ~ 49');
+		return result;
 	} catch (e) {
 		throw new Error(`Can not format date to ${inputDateFormat}.`);
 	}
