@@ -122,13 +122,8 @@ export class Lease extends Entity {
 		scheduleStart: Date;
 	}) {
 		const newSchedule = [];
-		const startDate = new Date(
-			scheduleStart.getUTCFullYear(),
-			scheduleStart.getUTCMonth(),
-			scheduleStart.getUTCDate(),
-		);
 		for (let bp = 0; bp < Math.min(count, 24); bp++) {
-			const postAt = addMonths(startDate, bp);
+			const postAt = addMonths(scheduleStart, bp);
 			const memo = `Rent for: ${toUTCFormat(postAt, 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),

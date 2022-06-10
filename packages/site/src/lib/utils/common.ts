@@ -45,10 +45,8 @@ export const forceDate = (date: Date | string | number): Date => {
 
 const inputDateFormat = 'yyyy-MM-dd';
 export const dateToInput = (date: Date): string => {
-	console.log({ date }, 'common.ts ~ 46');
 	try {
 		const result = toUTCFormat(date, inputDateFormat);
-		console.log({ result }, 'common.ts ~ 49');
 		return result;
 	} catch (e) {
 		throw new Error(`Can not format date to ${inputDateFormat}.`);
