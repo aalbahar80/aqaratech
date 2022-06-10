@@ -43,9 +43,7 @@ const test = base.extend<{ expense: ExpenseSample }>({
 		await page.selectOption('#categoryId', { index: 1 });
 		await page.locator('input[name="memo"]').fill('some memo here');
 		await page.selectOption('#portfolioId', { index: 0 });
-		await page.selectOption('#propertyId', { index: 0 });
-		await page.selectOption('#unitId', { index: 0 });
-		await page.locator('div[role="radio"]:has-text("Property")').click();
+		await page.locator('div[role="radio"]:has-text("Portfolio")').click();
 		await Promise.all([
 			page.waitForNavigation(),
 			page.locator('text=Create new').click(),
@@ -54,10 +52,9 @@ const test = base.extend<{ expense: ExpenseSample }>({
 		const url = page.url();
 		await Promise.all([
 			page.waitForNavigation(),
-			page.locator('text=Property').click(),
+			page.locator('[aria-label="Breadcrumb"] >> text=Portfolio').click(),
 		]);
 
-		await page.locator('[aria-label="Breadcrumb"] >> text=Portfolio').click();
 		await page.locator('text=Dashboard').click();
 		const dashboardUrl = page.url();
 
