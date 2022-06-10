@@ -3,9 +3,6 @@
     "baseBranch": "origin/dev",
     "pipeline": {
         "build": {
-            "inputs": [
-                "!(tests/**)"
-            ],
             "outputs": [
                 ".svelte-kit/**",
                 "dist/**",
@@ -14,9 +11,6 @@
             ]
         },
         "package": {
-            "inputs": [
-                "!(tests/**)"
-            ],
             "outputs": [
                 "package/**"
             ]
