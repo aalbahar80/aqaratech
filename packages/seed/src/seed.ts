@@ -26,17 +26,29 @@ config({
 export async function seed({
 	sample = true,
 	clean = false,
-}: { sample?: boolean; clean?: boolean } = {}) {
+	portfolioCount = 3,
+	propertyMin = 2,
+	propertyMax = 6,
+	unitMax = 5,
+	moCount = 100,
+	expenseCount = 150,
+	min = 1,
+	trxPerLease = 12,
+}: {
+	sample?: boolean;
+	clean?: boolean;
+	portfolioCount?: number;
+	propertyMin?: number;
+	propertyMax?: number;
+	unitMax?: number;
+	moCount?: number;
+	expenseCount?: number;
+	min?: number;
+	trxPerLease?: number;
+} = {}) {
 	if (await isProdBranch()) {
 		return;
 	}
-	let portfolioCount = 2;
-	let propertyMin = 1;
-	let propertyMax = 2;
-	let unitMax = 2;
-	let moCount = 5;
-	let expenseCount = 5;
-	const min = 1;
 
 	const portfolios = Array.from({ length: portfolioCount }, fakePortfolio);
 	portfolios[0]!.id = testPortfolioId;
@@ -93,7 +105,7 @@ export async function seed({
 
 	const transactions = leases.length
 		? leases.flatMap((lease) =>
-				Array.from({ length: 12 }, (_, n) =>
+				Array.from({ length: trxPerLease }, (_, n) =>
 					fakeTransaction(lease.id, lease.monthlyRent, lease.start, n)
 				)
 		  )
