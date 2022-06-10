@@ -7,7 +7,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -32,8 +32,8 @@
 
 	const details: [string, string | null][] = [
 		['Tenant', lease.tenant.fullName],
-		['Start Date', dateFormat(lease.start)],
-		['End Date', dateFormat(lease.end)],
+		['Start Date', toUTCFormat(lease.start)],
+		['End Date', toUTCFormat(lease.end)],
 		['Monthly Rent', kwdFormat(lease.monthlyRent)],
 		['Deposit', kwdFormat(lease.deposit)],
 		['License', lease.license || '-'],

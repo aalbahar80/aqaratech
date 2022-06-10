@@ -9,7 +9,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { Property, Transaction, Unit } from '$lib/models/classes';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
 	import type { Load } from './__types/index';
@@ -27,8 +27,8 @@
 	export let trx: Transaction;
 
 	const details: [string, string | null][] = [
-		['Post Date', dateFormat(trx.postAt)],
-		['Due Date', trx.dueAt ? dateFormat(trx.dueAt) : null],
+		['Post Date', toUTCFormat(trx.postAt)],
+		['Due Date', trx.dueAt ? toUTCFormat(trx.dueAt) : null],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo || '-'],
 		['Address', Property.getLabel(trx.lease.unit.property)],

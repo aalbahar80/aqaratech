@@ -7,7 +7,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
-	import { dateFormat } from '$lib/utils/common';
+	import { toUTCFormat } from '$lib/utils/common';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
 	import type { Load } from './__types/index';
 
@@ -28,7 +28,7 @@
 		['Phone', portfolio.phone],
 		['Email', portfolio.email],
 		['Civil ID', portfolio.civilid],
-		['Date of birth', portfolio.dob ? dateFormat(portfolio.dob) : null],
+		['Date of birth', portfolio.dob ? toUTCFormat(portfolio.dob) : null],
 	];
 </script>
 

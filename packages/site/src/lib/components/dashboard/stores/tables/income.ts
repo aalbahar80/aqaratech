@@ -1,6 +1,6 @@
 import type { InferQueryOutput } from '$lib/client/trpc';
 import { CTable } from '$lib/models/classes/table.class';
-import { dateFormat, kwdFormat } from '$lib/utils/common';
+import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 import { derived, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'owner:charts:income'>;
@@ -19,7 +19,7 @@ export const getIncomeTableStore = (income: Writable<Data>) =>
 		const rows = $income.map((entry) => ({
 			id: entry.id,
 			view: `/transactions/${entry.id}`,
-			Date: dateFormat(entry.postAt),
+			Date: toUTCFormat(entry.postAt),
 			Status: entry.isPaid ? 'Paid' : 'Unpaid',
 			Amount: kwdFormat(entry.amount),
 			Location: entry.propertyLabel,

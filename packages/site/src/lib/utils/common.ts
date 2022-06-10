@@ -9,9 +9,6 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	return rounded;
 };
 
-export const dateFormat = (date: Date): string =>
-	formatInTimeZone(date, 'UTC', 'MMM dd, yy');
-
 export const toUTCFormat = (date: Date, format = 'MMM dd, yy'): string =>
 	formatInTimeZone(date, 'UTC', format);
 
@@ -50,7 +47,7 @@ const inputDateFormat = 'yyyy-MM-dd';
 export const dateToInput = (date: Date): string => {
 	console.log({ date }, 'common.ts ~ 46');
 	try {
-		const result = formatInTimeZone(date, 'UTC', inputDateFormat);
+		const result = toUTCFormat(date, inputDateFormat);
 		console.log({ result }, 'common.ts ~ 49');
 		return result;
 	} catch (e) {

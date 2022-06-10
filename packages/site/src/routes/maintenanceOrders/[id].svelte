@@ -4,7 +4,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { dateFormat } from '$lib/utils/common';
+	import { toUTCFormat } from '$lib/utils/common';
 	import type { Load } from './__types/[id]';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -27,7 +27,7 @@
 		[
 			'Completed At',
 			maintenanceOrder.completedAt
-				? dateFormat(maintenanceOrder.completedAt)
+				? toUTCFormat(maintenanceOrder.completedAt)
 				: null,
 		],
 		['Description', maintenanceOrder.description ?? '-'],

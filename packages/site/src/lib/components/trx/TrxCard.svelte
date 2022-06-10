@@ -2,7 +2,7 @@
 	import Badge from '$components/Badge.svelte';
 	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { Transaction } from '$lib/models/classes/transaction.class';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -50,7 +50,7 @@
 							aria-hidden="true"
 						/>
 						<time dateTime={trx.postAt.toISOString()}
-							>{dateFormat(trx.postAt)}</time
+							>{toUTCFormat(trx.postAt)}</time
 						>
 					</p>
 					<p class="text flex items-center">

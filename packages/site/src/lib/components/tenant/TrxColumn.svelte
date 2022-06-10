@@ -8,7 +8,7 @@
 	import { Transaction } from '$lib/models/classes/transaction.class';
 	import { addErrorToast, addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
-	import { dateFormat } from '$lib/utils/common';
+	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getPaginatedItems } from '$lib/utils/table-utils';
 	import {
@@ -139,7 +139,7 @@
 										{'KWD'}
 									</span>
 									<time dateTime={transaction.postAt.toISOString()}
-										>{dateFormat(transaction.postAt)}</time
+										>{toUTCFormat(transaction.postAt)}</time
 									>
 								</span>
 							</span>
@@ -210,7 +210,7 @@
 							</td>
 							<td>
 								<time dateTime={transaction.postAt.toISOString()}
-									>{dateFormat(transaction.postAt)}</time
+									>{toUTCFormat(transaction.postAt)}</time
 								>
 							</td>
 							{#if hideActions}

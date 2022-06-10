@@ -5,7 +5,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { Expense } from '$lib/models/classes';
-	import { kwdFormat, dateFormat } from '$lib/utils/common';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { Load } from './__types/[id]';
 
 	export const load: Load = async ({ params, fetch, session }) => {
@@ -23,7 +23,7 @@
 
 	let details: [string, string | null][];
 	$: details = [
-		['Post Date', dateFormat(expense.postAt)],
+		['Post Date', toUTCFormat(expense.postAt)],
 		['Amount', kwdFormat(expense.amount)],
 		['Category', `${expense.category?.en} - ${expense.category?.ar}`],
 		['Memo', expense.memo],

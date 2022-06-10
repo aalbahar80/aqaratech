@@ -2,7 +2,7 @@
 	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Select from '$lib/components/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
-	import { dateFormat } from '$lib/utils/common';
+	import { toUTCFormat } from '$lib/utils/common';
 	import type { Load } from './__types/index';
 
 	export const load: Load = async ({ params, fetch }) => {
@@ -17,9 +17,9 @@
 
 	const options = leases.map((lease, idx) => ({
 		value: lease.id,
-		label: `Lease #${leases.length - idx}: ${dateFormat(
+		label: `Lease #${leases.length - idx}: ${toUTCFormat(
 			lease.start,
-		)} - ${dateFormat(lease.end)}`,
+		)} - ${toUTCFormat(lease.end)}`,
 	}));
 
 	let selected = options[0]?.value;

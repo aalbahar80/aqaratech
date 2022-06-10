@@ -10,7 +10,7 @@
 	import { Property } from '$lib/models/classes/property.class';
 	import { Unit } from '$lib/models/classes/unit.class';
 	import { addToast } from '$lib/stores/toast';
-	import { dateFormat, kwdFormat } from '$lib/utils/common';
+	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 	import { Transaction } from '$models/classes/transaction.class';
 	import { formatDistance, isSameDay } from 'date-fns';
 	import { onMount } from 'svelte';
@@ -55,7 +55,7 @@
 	});
 
 	const details: [string, string | null][] = [
-		['Post Date', dateFormat(trx.postAt)],
+		['Post Date', toUTCFormat(trx.postAt)],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo || '-'],
 		['Address', Property.getLabel(trx.lease.unit.property)],
