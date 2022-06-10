@@ -79,6 +79,7 @@ export const config: Config = {
 				'property.test.ts',
 				'unit.test.ts',
 				'date-range.test.ts',
+				'trx-schedule.test.ts',
 			],
 		},
 		{
