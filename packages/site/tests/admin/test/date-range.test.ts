@@ -88,6 +88,7 @@ test('Expense included in start range', async ({ page, expense }) => {
 
 	const [page1] = await Promise.all([
 		page.waitForEvent('popup'),
+		// https://playwright.dev/docs/selectors#augmenting-existing-locators
 		page
 			.locator(`a:right-of(:text("KWD ${expense.amount.toString()}"))`)
 			.first()
