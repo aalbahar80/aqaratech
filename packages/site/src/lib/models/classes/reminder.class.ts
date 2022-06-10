@@ -2,7 +2,7 @@ import { environment } from '$lib/environment';
 import prismaClient from '$lib/server/prismaClient';
 import { kwdFormat } from '$lib/utils/common';
 import { sendEmail } from '$lib/utils/sendEmail';
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 const {
 	urlOrigin,
@@ -26,9 +26,11 @@ export class Reminder {
 
 	async getSmsBody(): Promise<string> {
 		const info = await this.getContactInfo();
-		return `Use this link to pay your ${format(info.date, 'MMM')} : \n ${
-			this.trxUrl
-		}`;
+		return `Use this link to pay your ${formatInTimeZone(
+			info.date,
+			'UTC',
+			'MMM',
+		)} : \n ${this.trxUrl}`;
 	}
 
 	private async getContactInfo() {
@@ -120,7 +122,7 @@ export class Reminder {
 		const model = {
 			email: info.email,
 			amount: kwdFormat(info.amount),
-			date: format(info.date, 'MMM yyyy'),
+			date: formatInTimeZone(info.date, 'UTC', 'MMM yyyy'),
 			name: info.name,
 			trxUrl: this.trxUrl,
 		};

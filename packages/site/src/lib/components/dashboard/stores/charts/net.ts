@@ -2,9 +2,8 @@ import type { InferQueryOutput } from '$lib/client/trpc';
 import type { ChartData, DataSet } from '$lib/components/dashboard/charts/net';
 import { getColor } from '$lib/config/constants';
 import { CTable } from '$lib/models/classes/table.class';
-import { kwdFormat, startCase } from '$lib/utils/common';
+import { kwdFormat, startCase, toUTCFormat } from '$lib/utils/common';
 import type Chart from 'chart.js/dist/chart.esm';
-import { format } from 'date-fns';
 import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
 
@@ -51,7 +50,7 @@ const aggregate = <T extends { id: string; amount: number; postAt: Date }>(
 	data: T[],
 ) => {
 	const a = data.map((e) => R.pick(e, ['id', 'amount', 'postAt']));
-	const b = R.groupBy(a, (e) => format(e.postAt, 'yyyy-MM'));
+	const b = R.groupBy(a, (e) => toUTCFormat(e.postAt, 'yyyy-MM'));
 	const c = R.mapValues(b, (v) => R.reduce(v, (acc, e) => acc + e.amount, 0));
 	const d = Object.entries(c).map(([k, v]) => ({
 		date: new Date(k),
@@ -93,25 +92,25 @@ export const getNetTableStore = (
 				aggRevenue.map((e) => e.date),
 				aggExpenses.map((e) => e.date),
 			),
-			(e) => format(e, 'yyyy-MM'),
+			(e) => toUTCFormat(e, 'yyyy-MM'),
 		);
 		const sortedAllDates = R.sortBy(allDates, (e) => e);
 		const headers = sortedAllDates.map((e) => ({
-			key: format(e, 'MMM yyyy'),
+			key: toUTCFormat(e, 'MMM yyyy'),
 		}));
 		const revenueRow = R.mapToObj(aggRevenue, (r) => [
-			format(r.date, 'MMM yyyy'),
+			toUTCFormat(r.date, 'MMM yyyy'),
 			r.total,
 		]);
 		const expensesRow = R.mapToObj(aggExpenses, (r) => [
-			format(r.date, 'MMM yyyy'),
+			toUTCFormat(r.date, 'MMM yyyy'),
 			r.total,
 		]);
 		const footer = R.mapToObj(allDates, (r) => {
-			const revenue = revenueRow[format(r, 'MMM yyyy')] ?? 0;
-			const expenses = expensesRow[format(r, 'MMM yyyy')] ?? 0;
+			const revenue = revenueRow[toUTCFormat(r, 'MMM yyyy')] ?? 0;
+			const expenses = expensesRow[toUTCFormat(r, 'MMM yyyy')] ?? 0;
 			const sum = kwdFormat(revenue - expenses);
-			return [format(r, 'MMM yyyy'), sum];
+			return [toUTCFormat(r, 'MMM yyyy'), sum];
 		});
 		const revenueRowStr = R.mapValues(revenueRow, (r) => kwdFormat(r));
 		const expensesRowStr = R.mapValues(expensesRow, (r) => kwdFormat(r));

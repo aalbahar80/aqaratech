@@ -12,6 +12,9 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 export const dateFormat = (date: Date): string =>
 	formatInTimeZone(date, 'UTC', 'MMM dd, yy');
 
+export const toUTCFormat = (date: Date, format = 'MMM dd, yy'): string =>
+	formatInTimeZone(date, 'UTC', format);
+
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {
 		style: 'currency',
