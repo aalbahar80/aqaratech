@@ -15,6 +15,7 @@ importers:
       '@nestjs/core': 8.4.6
       '@nestjs/platform-express': 8.4.6
       '@nestjs/schematics': 8.0.11
+      '@nestjs/swagger': 5.2.1
       '@nestjs/testing': 8.4.6
       '@types/express': 4.17.13
       '@types/jest': 28.1.1
@@ -32,6 +33,7 @@ importers:
       rxjs: 7.5.5
       source-map-support: 0.5.21
       supertest: 6.2.3
+      swagger-ui-express: 4.4.0
       ts-jest: 28.0.4
       ts-loader: 9.3.0
       ts-node: 10.8.1
@@ -47,6 +49,7 @@ importers:
     devDependencies:
       '@nestjs/cli': 8.2.6
       '@nestjs/schematics': 8.0.11_typescript@4.7.3
+      '@nestjs/swagger': 5.2.1_cmb2bwnkdwdkgaavjahikdhps4
       '@nestjs/testing': 8.4.6_ao2apqzecfj6tlim53vr4xrmvq
       '@types/express': 4.17.13
       '@types/jest': 28.1.1
@@ -61,6 +64,7 @@ importers:
       prettier: 2.6.2
       source-map-support: 0.5.21
       supertest: 6.2.3
+      swagger-ui-express: 4.4.0
       ts-jest: 28.0.4_vz6zla63wvofljfl6elifyg77e
       ts-loader: 9.3.0_typescript@4.7.3
       ts-node: 10.8.1_wpmar7q2se7jlmxe5wggegnl2m
@@ -2184,6 +2188,23 @@ packages:
     transitivePeerDependencies:
       - encoding
 
+  /@nestjs/mapped-types/1.0.1_f46vijsikqlv4pbheayygwtz5a:
+    resolution: {integrity: sha512-NFvofzSinp00j5rzUd4tf+xi9od6383iY0JP7o0Bnu1fuItAUkWBgc4EKuIQ3D+c2QI3i9pG1kDWAeY27EMGtg==}
+    peerDependencies:
+      '@nestjs/common': ^7.0.8 || ^8.0.0
+      class-transformer: ^0.2.0 || ^0.3.0 || ^0.4.0 || ^0.5.0
+      class-validator: ^0.11.1 || ^0.12.0 || ^0.13.0
+      reflect-metadata: ^0.1.12
+    peerDependenciesMeta:
+      class-transformer:
+        optional: true
+      class-validator:
+        optional: true
+    dependencies:
+      '@nestjs/common': 8.4.6_47vcjb2de6lyibr6g4enoa5lyu
+      reflect-metadata: 0.1.13
+    dev: true
+
   /@nestjs/platform-express/8.4.6_etfae4mmenqzp3rs3pua7csngy:
     resolution: {integrity: sha512-OserZ+RwjMyECFAL0/12Bztf63EnFhlFUEJ4/a502RQ0eZogt4M3ROauaW4bpt2Q3YH4hy0eT+4eqkVOMzjtPQ==}
     peerDependencies:
@@ -2228,6 +2249,32 @@ packages:
       typescript: 4.7.3
     transitivePeerDependencies:
       - chokidar
+    dev: true
+
+  /@nestjs/swagger/5.2.1_cmb2bwnkdwdkgaavjahikdhps4:
+    resolution: {integrity: sha512-7dNa08WCnTsW/oAk3Ujde+z64JMfNm19DhpXasFR8oJp/9pggYAbYU927HpA+GJsSFJX6adjIRZsCKUqaGWznw==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      fastify-swagger: '*'
+      reflect-metadata: ^0.1.12
+      swagger-ui-express: '*'
+    peerDependenciesMeta:
+      fastify-swagger:
+        optional: true
+      swagger-ui-express:
+        optional: true
+    dependencies:
+      '@nestjs/common': 8.4.6_47vcjb2de6lyibr6g4enoa5lyu
+      '@nestjs/core': 8.4.6_suave6mfkne66p6dqupcjv2744
+      '@nestjs/mapped-types': 1.0.1_f46vijsikqlv4pbheayygwtz5a
+      lodash: 4.17.21
+      path-to-regexp: 3.2.0
+      reflect-metadata: 0.1.13
+      swagger-ui-express: 4.4.0
+    transitivePeerDependencies:
+      - class-transformer
+      - class-validator
     dev: true
 
   /@nestjs/testing/8.4.6_ao2apqzecfj6tlim53vr4xrmvq:
@@ -2704,24 +2751,12 @@ packages:
     resolution: {integrity: sha512-vrMQ/cCJ4YBj1iAdbh4Pmaw2aEdwwyjhM8KA9wOjHsm+aPvCnV2/rYY6zzpOW6UuYrrmZBRjIO75/X+e0CXZ5w==}
     dev: true
 
-  /@tsconfig/node10/1.0.8:
-    resolution: {integrity: sha512-6XFfSQmMgq0CFLY1MslA/CPUfhIL919M1rMsa5lP2P097N2Wd1sSX0tx1u4olM16fLNhtHZpRhedZJphNJqmZg==}
-    dev: true
-
   /@tsconfig/node10/1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
     dev: true
 
   /@tsconfig/node12/1.0.10:
     resolution: {integrity: sha512-N+srakvPaYMGkwjNDx3ASx65Zl3QG8dJgVtIB+YMOkucU+zctlv/hdP5250VKdDHSDoW9PFZoCqbqNcAPjCjXA==}
-    dev: true
-
-  /@tsconfig/node12/1.0.9:
-    resolution: {integrity: sha512-/yBMcem+fbvhSREH+s14YJi18sp7J9jpuhYByADT2rypfajMZZN4WQ6zBGgBKp53NKmqI36wFYDb3yaMPurITw==}
-    dev: true
-
-  /@tsconfig/node14/1.0.1:
-    resolution: {integrity: sha512-509r2+yARFfHHE7T6Puu2jjkoycftovhXRqW328PDXTVGKihlb1P8Z9mMZH04ebyajfRY7dedfGynlrFHJUQCg==}
     dev: true
 
   /@tsconfig/node14/1.0.2:
@@ -9752,6 +9787,19 @@ packages:
       stable: 0.1.8
     dev: true
 
+  /swagger-ui-dist/4.12.0:
+    resolution: {integrity: sha512-B0Iy2ueXtbByE6OOyHTi3lFQkpPi/L7kFOKFeKTr44za7dJIELa9kzaca6GkndCgpK1QTjArnoXG+aUy0XQp1w==}
+    dev: true
+
+  /swagger-ui-express/4.4.0:
+    resolution: {integrity: sha512-1CzRkHG386VQMVZK406jcpgnW2a9A5A/NiAjKhsFTQqUBWRF+uGbXTU/mA7WSV3mTzyOQDvjBdWP/c2qd5lqKw==}
+    engines: {node: '>= v0.10.32'}
+    peerDependencies:
+      express: '>=4.0.0'
+    dependencies:
+      swagger-ui-dist: 4.12.0
+    dev: true
+
   /symbol-observable/4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
     engines: {node: '>=0.10'}
@@ -10032,10 +10080,10 @@ packages:
         optional: true
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.8
-      '@tsconfig/node12': 1.0.9
-      '@tsconfig/node14': 1.0.1
-      '@tsconfig/node16': 1.0.2
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.10
+      '@tsconfig/node14': 1.0.2
+      '@tsconfig/node16': 1.0.3
       '@types/node': 17.0.41
       acorn: 8.7.1
       acorn-walk: 8.2.0

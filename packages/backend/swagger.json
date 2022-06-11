@@ -1,0 +1,1 @@
+{"openapi":"3.0.0","paths":{"/":{"get":{"operationId":"AppController_getHello","parameters":[],"responses":{"200":{"description":""}}}}},"info":{"title":"Aqaratech API","description":"The Aqratech API description","version":"1.0","contact":{}},"tags":[{"name":"aqaratech","description":""}],"servers":[],"components":{"schemas":{}}}
