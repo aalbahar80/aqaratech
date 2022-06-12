@@ -1,19 +1,15 @@
-import { ApiHideProperty } from '@nestjs/swagger';
 import {
   IsEmail,
-  IsString,
-  IsUUID,
-  MinLength,
-  MaxLength,
-  IsDate,
   IsISO31661Alpha3,
   IsISO8601,
+  IsString,
+  IsUUID,
+  Length,
 } from 'class-validator';
 
 export class CreateTenantDto {
-  @ApiHideProperty()
-  @IsUUID()
-  id: string;
+  // @IsUUID()
+  // id: string;
 
   @IsString()
   fullName: string;
@@ -28,11 +24,10 @@ export class CreateTenantDto {
   orgId: string;
 
   @IsString()
-  @MinLength(12)
-  @MaxLength(12)
+  @Length(12, 12)
   civilid?: string;
 
-  @IsDate()
+  @IsISO8601()
   dob?: Date;
 
   @IsString()
