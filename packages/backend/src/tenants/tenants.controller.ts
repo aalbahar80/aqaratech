@@ -6,8 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
@@ -18,8 +16,8 @@ export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}
 
   @Post()
-  @UsePipes(new ValidationPipe())
   create(@Body() createTenantDto: CreateTenantDto) {
+    console.log({ createTenantDto }, 'tenants.controller.ts ~ 23');
     return this.tenantsService.create(createTenantDto);
   }
 

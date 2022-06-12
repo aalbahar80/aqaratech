@@ -1,43 +1,40 @@
-import {
-  IsEmail,
-  IsISO31661Alpha3,
-  IsISO8601,
-  IsString,
-  IsUUID,
-  Length,
-} from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsEmail, IsISO31661Alpha3, IsISO8601 } from 'class-validator';
 
 export class CreateTenantDto {
   // @IsUUID()
   // id: string;
 
-  @IsString()
+  @ApiProperty({ example: 'John Doe' })
   fullName: string;
 
-  @IsString()
+  @ApiPropertyOptional({ example: 'JD' })
   shortName?: string;
 
+  @ApiPropertyOptional({ example: 'abc@example.com', type: 'email' })
   @IsEmail()
   email?: string;
 
-  @IsUUID()
+  @ApiProperty({ example: '123' })
   orgId: string;
 
-  @IsString()
-  @Length(12, 12)
+  @ApiPropertyOptional({ example: '123456789012', minimum: 12, maximum: 12 })
   civilid?: string;
 
+  @ApiPropertyOptional({ example: new Date().toISOString() })
   @IsISO8601()
   dob?: Date;
 
-  @IsString()
+  @ApiPropertyOptional({ example: '123' })
   passportNum?: string;
 
+  @ApiPropertyOptional({ example: 'KWT' })
   @IsISO31661Alpha3()
   nationality?: string;
 
+  @ApiPropertyOptional({ example: new Date().toISOString() })
   @IsISO8601()
-  residencyEnd?: string;
+  residencyEnd?: Date;
 
   //   @IsString()
   //   contactMethod?: string;
