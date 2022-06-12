@@ -8,7 +8,7 @@
     "generators": {
       "fetch-client": {
         "generatorName": "typescript-fetch",
-        "inputSpec": "./swagger.json",
+        "inputSpec": "./openapi.json",
         "output": "./src/generated/openapi",
         "additionalProperties": {
           "supportsES6": true,
