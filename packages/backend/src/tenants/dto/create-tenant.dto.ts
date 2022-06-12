@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
@@ -10,6 +11,7 @@ import {
 } from 'class-validator';
 
 export class CreateTenantDto {
+  @ApiHideProperty()
   @IsUUID()
   id: string;
 

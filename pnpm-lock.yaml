@@ -46,15 +46,16 @@ importers:
       '@nestjs/common': 8.4.6_kgmvgmqc4iohdboj3f7yqhrie4
       '@nestjs/core': 8.4.6_suave6mfkne66p6dqupcjv2744
       '@nestjs/platform-express': 8.4.6_etfae4mmenqzp3rs3pua7csngy
+      '@nestjs/swagger': 5.2.1_zi4tuyx3qtp34xthrn3ho5tamm
       class-transformer: 0.5.1
       class-validator: 0.13.2
       reflect-metadata: 0.1.13
       rimraf: 3.0.2
       rxjs: 7.5.5
+      swagger-ui-express: 4.4.0
     devDependencies:
       '@nestjs/cli': 8.2.6
       '@nestjs/schematics': 8.0.11_typescript@4.7.3
-      '@nestjs/swagger': 5.2.1_zi4tuyx3qtp34xthrn3ho5tamm
       '@nestjs/testing': 8.4.6_ao2apqzecfj6tlim53vr4xrmvq
       '@openapitools/openapi-generator-cli': 2.5.1_ftosvyjifr6llmbfkwbb4qatmq
       '@types/express': 4.17.13
@@ -70,7 +71,6 @@ importers:
       prettier: 2.6.2
       source-map-support: 0.5.21
       supertest: 6.2.3
-      swagger-ui-express: 4.4.0
       ts-jest: 28.0.4_vz6zla63wvofljfl6elifyg77e
       ts-loader: 9.3.0_typescript@4.7.3
       ts-node: 10.8.1_wpmar7q2se7jlmxe5wggegnl2m
@@ -2274,7 +2274,7 @@ packages:
       class-transformer: 0.5.1
       class-validator: 0.13.2
       reflect-metadata: 0.1.13
-    dev: true
+    dev: false
 
   /@nestjs/platform-express/8.4.6_etfae4mmenqzp3rs3pua7csngy:
     resolution: {integrity: sha512-OserZ+RwjMyECFAL0/12Bztf63EnFhlFUEJ4/a502RQ0eZogt4M3ROauaW4bpt2Q3YH4hy0eT+4eqkVOMzjtPQ==}
@@ -2346,7 +2346,7 @@ packages:
     transitivePeerDependencies:
       - class-transformer
       - class-validator
-    dev: true
+    dev: false
 
   /@nestjs/testing/8.4.6_ao2apqzecfj6tlim53vr4xrmvq:
     resolution: {integrity: sha512-uGRNQ0iWIHqjz5CLxQCTtQ3dB1KyPfkHXnko5mBwKk/iBTiACmll61rVt89Wh8RM+w0bmvCHp9sacNI7IynESg==}
@@ -7498,7 +7498,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -9993,7 +9992,7 @@ packages:
 
   /swagger-ui-dist/4.12.0:
     resolution: {integrity: sha512-B0Iy2ueXtbByE6OOyHTi3lFQkpPi/L7kFOKFeKTr44za7dJIELa9kzaca6GkndCgpK1QTjArnoXG+aUy0XQp1w==}
-    dev: true
+    dev: false
 
   /swagger-ui-express/4.4.0:
     resolution: {integrity: sha512-1CzRkHG386VQMVZK406jcpgnW2a9A5A/NiAjKhsFTQqUBWRF+uGbXTU/mA7WSV3mTzyOQDvjBdWP/c2qd5lqKw==}
@@ -10002,7 +10001,7 @@ packages:
       express: '>=4.0.0'
     dependencies:
       swagger-ui-dist: 4.12.0
-    dev: true
+    dev: false
 
   /symbol-observable/4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
