@@ -4,25 +4,93 @@ generator client {
 }
 
 datasource db {
-    provider             = "mysql"
-    url                  = env("DATABASE_URL")
+    // provider             = "mysql"
+    // url                  = env("DATABASE_URL")
     referentialIntegrity = "prisma"
 }
 
+model User {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    email    String  @unique
+    fullName String?
+
+    admins     Admin[]
+    portfolios Portfolio[]
+    tenants    Tenant[]
+}
+
+model Admin {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    isSuper Boolean @default(false)
+
+    userId String?
+    user   User?   @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+}
+
+model Tenant {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    fullName      String    @default("")
+    shortName     String?
+    civilid       String?
+    dob           DateTime?
+    phone         String?
+    email         String?
+    passportNum   String?
+    nationality   String?
+    residencyNum  String?
+    residencyEnd  DateTime?
+    contactMethod String?
+
+    leases            Lease[]
+    maintenanceOrders MaintenanceOrder[]
+
+    users User[]
+}
+
 model Portfolio {
-    id                String             @id @default(uuid())
-    createdAt         DateTime           @default(now())
-    updatedAt         DateTime           @updatedAt
-    deactivated       Boolean?           @default(false)
-    fullName          String             @default("")
-    shortName         String?
-    civilid           String?
-    phone             String?
-    email             String?
-    dob               DateTime?
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    fullName  String    @default("")
+    shortName String?
+    civilid   String?
+    phone     String?
+    email     String?
+    dob       DateTime?
+
     expenses          Expense[]
     maintenanceOrders MaintenanceOrder[]
     properties        Property[]
+
+    users User[]
+
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+}
+
+model Organization {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    fullName  String  @default("")
+    shortName String?
+
+    admins     Admin[]
+    portfolios Portfolio[]
 }
 
 model Expense {
@@ -134,25 +202,6 @@ model Property {
     units             Unit[]
 
     @@index([portfolioId])
-}
-
-model Tenant {
-    id                String             @id @default(uuid())
-    createdAt         DateTime           @default(now())
-    updatedAt         DateTime           @updatedAt
-    fullName          String             @default("")
-    shortName         String?
-    civilid           String?
-    dob               DateTime?
-    phone             String?
-    email             String?
-    passportNum       String?
-    nationality       String?
-    residencyNum      String?
-    residencyEnd      DateTime?
-    contactMethod     String?
-    leases            Lease[]
-    maintenanceOrders MaintenanceOrder[]
 }
 
 model Transaction {
