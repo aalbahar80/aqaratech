@@ -91,6 +91,37 @@ model Organization {
 
     admins     Admin[]
     portfolios Portfolio[]
+
+    planId String?
+    plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+    planInvoices PlanInvoice[]
+}
+
+model Plan {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    label       String  @default("")
+    title       String  @default("")
+    description String?
+    amount      Int     @default(0)
+
+    organizations Organization[]
+}
+
+model PlanInvoice {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    label       String  @default("")
+    title       String  @default("")
+    description String?
+    amount      Int     @default(0)
+
+    organization Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 }
 
 model Expense {
