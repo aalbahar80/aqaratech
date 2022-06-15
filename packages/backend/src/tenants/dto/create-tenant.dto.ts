@@ -11,7 +11,7 @@ export class CreateTenantDto {
   @ApiPropertyOptional({ example: 'JD' })
   shortName?: string;
 
-  @ApiPropertyOptional({ example: 'abc@example.com', type: 'email' })
+  @ApiPropertyOptional({ example: 'abc@example.com' })
   @IsEmail()
   email?: string;
 
