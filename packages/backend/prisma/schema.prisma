@@ -124,6 +124,19 @@ model PlanInvoice {
     organization Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 }
 
+model ExpenseType {
+    id          String  @id @default(autoincrement())
+    label_en    String  @unique
+    label_ar    String  @unique
+    description String?
+
+    parentId   Int?
+    parentType ExpenseType?  @relation(fields: [parentId], references: [id], onDelete: Restrict)
+    childTypes ExpenseType[] @relation(fields: [id], references: [parentId], onDelete: Restrict)
+
+    expenses Expense[]
+}
+
 model Expense {
     id                 String            @id @default(uuid())
     unitId             String?
@@ -140,31 +153,13 @@ model Expense {
     maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
     property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
     unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
-    category           ExpenseCategory?  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+    expenseType        ExpenseType?      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
     @@index([unitId])
     @@index([propertyId])
     @@index([portfolioId])
     @@index([maintenanceOrderId])
     @@index([categoryId])
-}
-
-model ExpenseCategory {
-    id       Int           @id @default(autoincrement())
-    groupId  Int
-    en       String        @unique
-    ar       String        @unique
-    group    ExpenseGroup? @relation(fields: [groupId], references: [id], onDelete: Restrict)
-    expenses Expense[]
-
-    @@index([groupId])
-}
-
-model ExpenseGroup {
-    id         Int               @id @default(autoincrement())
-    en         String            @unique
-    ar         String            @unique
-    categories ExpenseCategory[]
 }
 
 model Lease {
