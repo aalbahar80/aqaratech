@@ -2,11 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
+import { PrismaService } from 'src/prisma/prisma.service';
+
 @Injectable()
 export class TenantsService {
+  constructor(private prisma: PrismaService) {}
+
   create(createTenantDto: CreateTenantDto) {
-    console.log(createTenantDto);
-    return createTenantDto;
+    return this.prisma.tenant.create({
+      data: createTenantDto,
+    });
   }
 
   findAll() {

@@ -1,10 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmail, IsISO31661Alpha3, IsISO8601 } from 'class-validator';
+import {
+  IsEmail,
+  IsISO31661Alpha3,
+  IsISO8601,
+  IsPhoneNumber,
+} from 'class-validator';
 
 export class CreateTenantDto {
-  // @IsUUID()
-  // id: string;
-
   @ApiProperty({ example: 'John Doe' })
   fullName: string;
 
@@ -15,8 +17,9 @@ export class CreateTenantDto {
   @IsEmail()
   email?: string;
 
-  @ApiProperty({ example: '123' })
-  orgId: string;
+  @ApiPropertyOptional({ example: '+96599212976' })
+  @IsPhoneNumber()
+  phone?: string;
 
   @ApiPropertyOptional({ example: '123456789012', minimum: 12, maximum: 12 })
   civilid?: string;
@@ -25,17 +28,17 @@ export class CreateTenantDto {
   @IsISO8601()
   dob?: Date;
 
-  @ApiPropertyOptional({ example: '123' })
+  @ApiPropertyOptional()
   passportNum?: string;
 
   @ApiPropertyOptional({ example: 'KWT' })
   @IsISO31661Alpha3()
   nationality?: string;
 
+  @ApiPropertyOptional()
+  residencyNum?: string;
+
   @ApiPropertyOptional({ example: new Date().toISOString() })
   @IsISO8601()
   residencyEnd?: Date;
-
-  //   @IsString()
-  //   contactMethod?: string;
 }

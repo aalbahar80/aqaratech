@@ -51,7 +51,7 @@ model Tenant {
     nationality   String?
     residencyNum  String?
     residencyEnd  DateTime?
-    contactMethod String?
+    contactMethod String? // rethink
 
     leases            Lease[]
     maintenanceOrders MaintenanceOrder[]
