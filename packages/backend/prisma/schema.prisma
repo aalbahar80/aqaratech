@@ -4,8 +4,8 @@ generator client {
 }
 
 datasource db {
-    // provider             = "mysql"
-    // url                  = env("DATABASE_URL")
+    provider             = "postgres"
+    url                  = env("DATABASE_URL")
     referentialIntegrity = "prisma"
 }
 
@@ -121,18 +121,18 @@ model PlanInvoice {
     description String?
     amount      Int     @default(0)
 
-    organization Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+    organizations Organization[]
 }
 
 model ExpenseType {
-    id          String  @id @default(autoincrement())
+    id          Int     @id @default(autoincrement())
     label_en    String  @unique
     label_ar    String  @unique
     description String?
 
     parentId   Int?
-    parentType ExpenseType?  @relation(fields: [parentId], references: [id], onDelete: Restrict)
-    childTypes ExpenseType[] @relation(fields: [id], references: [parentId], onDelete: Restrict)
+    parentType ExpenseType?  @relation("ExpenseTypeTree", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    childTypes ExpenseType[] @relation("ExpenseTypeTree")
 
     expenses Expense[]
 }
@@ -148,7 +148,7 @@ model Expense {
     updatedAt          DateTime          @updatedAt
     amount             Float
     postAt             DateTime
-    memo               String?           @db.Text
+    memo               String?
     portfolio          Portfolio?        @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
     maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
     property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
@@ -193,7 +193,7 @@ model MaintenanceOrder {
     updatedAt   DateTime   @updatedAt
     completedAt DateTime?
     title       String?
-    description String?    @db.Text
+    description String?
     status      String?
     portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
     property    Property?  @relation(fields: [propertyId], references: [id], onDelete: Restrict)
@@ -239,7 +239,7 @@ model Transaction {
     paidAt      DateTime?
     isPaid      Boolean   @default(false)
     amount      Float
-    memo        String?   @db.Text
+    memo        String?
     mfPaymentId String?
     leaseId     String
     reminderAt  DateTime?
