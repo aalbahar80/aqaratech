@@ -18,6 +18,7 @@ importers:
       '@nestjs/swagger': 5.2.1
       '@nestjs/testing': 8.4.6
       '@openapitools/openapi-generator-cli': 2.5.1
+      '@prisma/client': 3.14.0
       '@types/express': 4.17.13
       '@types/jest': 28.1.1
       '@types/node': 17.0.42
@@ -48,6 +49,7 @@ importers:
       '@nestjs/core': 8.4.6_suave6mfkne66p6dqupcjv2744
       '@nestjs/platform-express': 8.4.6_etfae4mmenqzp3rs3pua7csngy
       '@nestjs/swagger': 5.2.1_zi4tuyx3qtp34xthrn3ho5tamm
+      '@prisma/client': 3.14.0_prisma@3.14.0
       class-transformer: 0.5.1
       class-validator: 0.13.2
       reflect-metadata: 0.1.13
@@ -2458,16 +2460,13 @@ packages:
     dependencies:
       '@prisma/engines-version': 3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a
       prisma: 3.14.0
-    dev: true
 
   /@prisma/engines-version/3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a:
     resolution: {integrity: sha512-D+yHzq4a2r2Rrd0ZOW/mTZbgDIkUkD8ofKgusEI1xPiZz60Daks+UM7Me2ty5FzH3p/TgyhBpRrfIHx+ha20RQ==}
-    dev: true
 
   /@prisma/engines/3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a:
     resolution: {integrity: sha512-LwZvI3FY6f43xFjQNRuE10JM5R8vJzFTSmbV9X0Wuhv9kscLkjRlZt0BEoiHmO+2HA3B3xxbMfB5du7ZoSFXGg==}
     requiresBuild: true
-    dev: true
 
   /@rgossiaux/svelte-headlessui/1.0.2_svelte@3.48.0:
     resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
@@ -8846,7 +8845,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a
-    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
