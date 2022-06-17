@@ -1,6 +1,5 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
-import prismaClient from '$lib/server/prismaClient';
 import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
@@ -22,7 +21,6 @@ if (
 			? process.env.VERCEL_GIT_COMMIT_REF
 			: 'localServer',
 		debug: dev,
-		integrations: [new Tracing.Integrations.Prisma({ client: prismaClient })],
 	});
 }
 
