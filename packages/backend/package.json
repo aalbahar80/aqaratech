@@ -55,6 +55,7 @@
     "jest": "28.1.1",
     "prettier": "2.6.2",
     "prisma": "3.15.2",
+    "prisma-dbml-generator": "0.9.1",
     "source-map-support": "0.5.21",
     "supertest": "6.2.3",
     "ts-jest": "28.0.4",
