@@ -10,5 +10,5 @@ export class PaginatedDto<TData> {
   @ApiProperty()
   offset: number;
 
-  //   results: TData[];
+  results: TData[];
 }
