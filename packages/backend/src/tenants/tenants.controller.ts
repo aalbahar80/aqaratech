@@ -12,9 +12,9 @@ import {
   ApiExtraModels,
   ApiOkResponse,
   ApiTags,
-  getSchemaPath,
 } from '@nestjs/swagger';
 import { PaginatedDto } from 'src/common/dto/paginated.dto';
+import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
@@ -34,21 +34,7 @@ export class TenantsController {
   }
 
   @Get()
-  @ApiOkResponse({
-    schema: {
-      allOf: [
-        { $ref: getSchemaPath(PaginatedDto) },
-        {
-          properties: {
-            results: {
-              type: 'array',
-              items: { $ref: getSchemaPath(TenantDto) },
-            },
-          },
-        },
-      ],
-    },
-  })
+  @ApiPaginatedResponse(TenantDto)
   findAll(): Promise<PaginatedDto<TenantDto>> {
     return this.tenantsService.findAll();
   }
