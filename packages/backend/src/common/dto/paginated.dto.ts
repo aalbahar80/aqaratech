@@ -1,14 +1,48 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+import type { PageOptionsDto } from './page-options.dto';
+
+interface IPageMetaDtoParameters {
+  pageOptionsDto: PageOptionsDto;
+  itemCount: number;
+}
+
 export class PaginatedDto<TData> {
-  @ApiProperty()
-  total: number;
+  // @ApiProperty()
+  // total: number;
+
+  // @ApiProperty()
+  // limit: number;
+
+  // @ApiProperty()
+  // offset: number;
+
+  // results: TData[];
 
   @ApiProperty()
-  limit: number;
+  readonly page: number;
 
   @ApiProperty()
-  offset: number;
+  readonly take: number;
 
-  results: TData[];
+  @ApiProperty()
+  readonly itemCount: number;
+
+  @ApiProperty()
+  readonly pageCount: number;
+
+  @ApiProperty()
+  readonly hasPreviousPage: boolean;
+
+  @ApiProperty()
+  readonly hasNextPage: boolean;
+
+  constructor({ pageOptionsDto, itemCount }: IPageMetaDtoParameters) {
+    this.page = pageOptionsDto.page;
+    this.take = pageOptionsDto.take;
+    this.itemCount = itemCount;
+    this.pageCount = Math.ceil(this.itemCount / this.take);
+    this.hasPreviousPage = this.page > 1;
+    this.hasNextPage = this.page < this.pageCount;
+  }
 }

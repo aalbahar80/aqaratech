@@ -21,6 +21,7 @@ importers:
       '@prisma/client': 3.14.0
       '@types/express': 4.17.13
       '@types/jest': 28.1.1
+      '@types/lodash': 4.14.182
       '@types/node': 17.0.42
       '@types/supertest': 2.0.12
       '@typescript-eslint/eslint-plugin': 5.27.1
@@ -31,9 +32,11 @@ importers:
       eslint-config-prettier: 8.5.0
       eslint-plugin-prettier: 4.0.0
       jest: 28.1.1
+      lodash: 4.17.21
       prettier: 2.6.2
       prisma: 3.14.0
       reflect-metadata: 0.1.13
+      remeda: 0.0.35
       rimraf: 3.0.2
       rxjs: 7.5.5
       source-map-support: 0.5.21
@@ -52,7 +55,9 @@ importers:
       '@prisma/client': 3.14.0_prisma@3.14.0
       class-transformer: 0.5.1
       class-validator: 0.13.2
+      lodash: 4.17.21
       reflect-metadata: 0.1.13
+      remeda: 0.0.35
       rimraf: 3.0.2
       rxjs: 7.5.5
       swagger-ui-express: 4.4.0
@@ -63,6 +68,7 @@ importers:
       '@openapitools/openapi-generator-cli': 2.5.1_ftosvyjifr6llmbfkwbb4qatmq
       '@types/express': 4.17.13
       '@types/jest': 28.1.1
+      '@types/lodash': 4.14.182
       '@types/node': 17.0.42
       '@types/supertest': 2.0.12
       '@typescript-eslint/eslint-plugin': 5.27.1_aq7uryhocdbvbqum33pitcm3y4
@@ -3019,6 +3025,10 @@ packages:
 
   /@types/linkify-it/3.0.2:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
+    dev: true
+
+  /@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
     dev: true
 
   /@types/lru-cache/7.10.10:
@@ -9090,7 +9100,6 @@ packages:
 
   /remeda/0.0.35:
     resolution: {integrity: sha512-3/HunoFQVnPNkh8tX1kmKx8thZWpnENgRVRbaze0IYiWkLDbMxrQWai5bZt+yOedf5fkrnj9+iJ+bCU27+Zuzw==}
-    dev: true
 
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}

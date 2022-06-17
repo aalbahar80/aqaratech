@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -15,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { PaginatedDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
@@ -35,8 +37,10 @@ export class TenantsController {
 
   @Get()
   @ApiPaginatedResponse(TenantDto)
-  findAll(): Promise<PaginatedDto<TenantDto>> {
-    return this.tenantsService.findAll();
+  findAll(
+    @Query() tenantPageOptionsDto: TenantPageOptionsDto,
+  ): Promise<PaginatedDto<TenantDto>> {
+    return this.tenantsService.findAll(tenantPageOptionsDto);
   }
 
   @Get(':id')
