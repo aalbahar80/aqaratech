@@ -9,6 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
@@ -30,7 +31,9 @@ export class TenantsController {
 
   @Get()
   @ApiPaginatedResponse(TenantDto)
-  findAll(@Query() tenantPageOptionsDto: TenantPageOptionsDto) {
+  findAll(
+    @Query() tenantPageOptionsDto: TenantPageOptionsDto,
+  ): Promise<PaginatedMetaDto<TenantDto>> {
     return this.tenantsService.findAll(tenantPageOptionsDto);
   }
 

@@ -3,8 +3,9 @@ import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PaginatedDto } from 'src/common/dto/paginated.dto';
+import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
 export class TenantsService {
@@ -16,15 +17,17 @@ export class TenantsService {
     });
   }
 
-  async findAll(tenantPageOptionsDto: TenantPageOptionsDto) {
-    const data = await this.prisma.tenant.findMany();
+  async findAll(
+    tenantPageOptionsDto: TenantPageOptionsDto,
+  ): Promise<PaginatedMetaDto<TenantDto>> {
+    const results = await this.prisma.tenant.findMany();
 
     const meta = new PaginatedDto({
-      itemCount: 33,
+      itemCount: results.length,
       pageOptionsDto: tenantPageOptionsDto,
     });
 
-    return { ...meta, results: data };
+    return { meta, results };
   }
 
   findOne(id: string) {

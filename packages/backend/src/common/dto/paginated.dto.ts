@@ -23,7 +23,7 @@ export class PaginatedDto {
   @ApiProperty()
   readonly take: number;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'Total number of items in the collection' })
   readonly itemCount: number;
 
   @ApiProperty()
@@ -45,7 +45,10 @@ export class PaginatedDto {
   }
 }
 
-export class PaginatedMetaDto {
+export class PaginatedMetaDto<TData> {
   @ApiProperty()
   readonly meta: PaginatedDto;
+
+  @ApiProperty()
+  readonly results: TData[];
 }
