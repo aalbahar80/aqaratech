@@ -8,15 +8,6 @@ interface IPageMetaDtoParameters {
 }
 
 export class PaginatedDto {
-  // @ApiProperty()
-  // total: number;
-
-  // @ApiProperty()
-  // limit: number;
-
-  // @ApiProperty()
-  // offset: number;
-
   @ApiProperty()
   readonly page: number;
 
