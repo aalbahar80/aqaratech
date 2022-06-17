@@ -8,7 +8,9 @@ export const ApiPaginatedResponse = <TModel extends Type<any>>(
   return applyDecorators(
     ApiOkResponse({
       schema: {
+        title: `PaginatedResponseOf${model.name}`,
         allOf: [
+          // https://docs.nestjs.com/openapi/operations#advanced-generic-apiresponse
           { $ref: getSchemaPath(PaginatedDto) },
           {
             properties: {
