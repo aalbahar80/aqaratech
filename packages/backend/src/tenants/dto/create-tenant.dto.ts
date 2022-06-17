@@ -24,7 +24,7 @@ export class CreateTenantDto {
   @ApiPropertyOptional({ example: '123456789012', minimum: 12, maximum: 12 })
   civilid?: string;
 
-  @ApiPropertyOptional({ example: new Date().toISOString() })
+  @ApiPropertyOptional()
   @IsISO8601()
   dob?: Date;
 
@@ -38,7 +38,7 @@ export class CreateTenantDto {
   @ApiPropertyOptional()
   residencyNum?: string;
 
-  @ApiPropertyOptional({ example: new Date().toISOString() })
+  @ApiPropertyOptional()
   @IsISO8601()
   residencyEnd?: Date;
 }
