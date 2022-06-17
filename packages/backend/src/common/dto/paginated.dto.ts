@@ -7,7 +7,7 @@ interface IPageMetaDtoParameters {
   itemCount: number;
 }
 
-export class PaginatedDto<TData> {
+export class PaginatedDto {
   // @ApiProperty()
   // total: number;
 
@@ -16,8 +16,6 @@ export class PaginatedDto<TData> {
 
   // @ApiProperty()
   // offset: number;
-
-  // results: TData[];
 
   @ApiProperty()
   readonly page: number;
@@ -45,4 +43,9 @@ export class PaginatedDto<TData> {
     this.hasPreviousPage = this.page > 1;
     this.hasNextPage = this.page < this.pageCount;
   }
+}
+
+export class PaginatedMetaDto {
+  @ApiProperty()
+  readonly meta: PaginatedDto;
 }

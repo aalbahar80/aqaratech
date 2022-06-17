@@ -4,7 +4,6 @@ import { UpdateTenantDto } from './dto/update-tenant.dto';
 
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PaginatedDto } from 'src/common/dto/paginated.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class TenantsService {
   async findAll(tenantPageOptionsDto: TenantPageOptionsDto) {
     const data = await this.prisma.tenant.findMany();
 
-    const meta = new PaginatedDto<TenantDto>({
+    const meta = new PaginatedDto({
       itemCount: 33,
       pageOptionsDto: tenantPageOptionsDto,
     });
