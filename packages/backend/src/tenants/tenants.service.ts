@@ -3,6 +3,8 @@ import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PaginatedDto } from 'src/common/dto/paginated.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
 export class TenantsService {
@@ -14,7 +16,7 @@ export class TenantsService {
     });
   }
 
-  findAll() {
+  findAll(): Promise<PaginatedDto<TenantDto>> {
     return this.prisma.tenant.findMany();
   }
 

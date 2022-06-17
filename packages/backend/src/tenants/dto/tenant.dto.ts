@@ -1,6 +1,6 @@
 import { Tenant } from '@prisma/client';
 
-export class TenantEntity implements Tenant {
+export class TenantDto implements Tenant {
   id: string;
   createdAt: Date;
   updatedAt: Date;
