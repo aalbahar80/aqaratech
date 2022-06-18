@@ -13,7 +13,7 @@ export class TenantsService {
 
   create(createTenantDto: CreateTenantDto) {
     return this.prisma.tenant.create({
-      data: createTenantDto,
+      data: { ...createTenantDto, organizationId: 'implement' },
     });
   }
 

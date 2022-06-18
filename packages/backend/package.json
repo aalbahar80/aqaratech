@@ -20,6 +20,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
+  "prisma": {
+    "seed": "node ../seed/dist/seed/src/go-seed.js"
+  },
   "dependencies": {
     "@nestjs/common": "8.4.6",
     "@nestjs/core": "8.4.6",

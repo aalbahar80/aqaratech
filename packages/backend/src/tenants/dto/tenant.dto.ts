@@ -2,6 +2,7 @@ import { Tenant } from '@prisma/client';
 
 export class TenantDto implements Tenant {
   id: string;
+  organizationId: string;
   createdAt: Date;
   updatedAt: Date;
   fullName: string;
