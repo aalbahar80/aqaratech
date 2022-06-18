@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { ConfigModule } from '@nestjs/config';
+
 import { PortfoliosController } from 'src/portfolios/portfolios.controller';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
 import { PortfoliosModule } from './portfolios/portfolios.module';
@@ -14,7 +16,12 @@ import { PrismaModule } from './prisma/prisma.module';
 
 // should prisma be here or in local modules?
 @Module({
-  imports: [PortfoliosModule, TenantsModule, PrismaModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+    TenantsModule,
+    PortfoliosModule,
+  ],
   controllers: [AppController, TenantsController, PortfoliosController],
   providers: [AppService, TenantsService, PortfoliosService],
 })

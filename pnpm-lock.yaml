@@ -12,6 +12,7 @@ importers:
     specifiers:
       '@nestjs/cli': 8.2.6
       '@nestjs/common': 8.4.6
+      '@nestjs/config': 2.1.0
       '@nestjs/core': 8.4.6
       '@nestjs/platform-express': 8.4.6
       '@nestjs/schematics': 8.0.11
@@ -52,6 +53,7 @@ importers:
       typescript: 4.7.3
     dependencies:
       '@nestjs/common': 8.4.6_kgmvgmqc4iohdboj3f7yqhrie4
+      '@nestjs/config': 2.1.0_qna2ix3wuyhvmc56wewcijj25m
       '@nestjs/core': 8.4.6_suave6mfkne66p6dqupcjv2744
       '@nestjs/platform-express': 8.4.6_etfae4mmenqzp3rs3pua7csngy
       '@nestjs/swagger': 5.2.1_zi4tuyx3qtp34xthrn3ho5tamm
@@ -2203,6 +2205,22 @@ packages:
       uuid: 8.3.2
     transitivePeerDependencies:
       - debug
+
+  /@nestjs/config/2.1.0_qna2ix3wuyhvmc56wewcijj25m:
+    resolution: {integrity: sha512-wUpt1/QJEN7xnJl4pM3c9rHrY1widq2yPOZfjaMD1//XAP9LLHTaW+RxSEG6BSGIm3w4wGtjco+gKNB2WL7yRg==}
+    peerDependencies:
+      '@nestjs/common': ^7.0.0 || ^8.0.0
+      reflect-metadata: ^0.1.13
+      rxjs: ^6.0.0 || ^7.2.0
+    dependencies:
+      '@nestjs/common': 8.4.6_kgmvgmqc4iohdboj3f7yqhrie4
+      dotenv: 16.0.1
+      dotenv-expand: 8.0.3
+      lodash: 4.17.21
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
+      uuid: 8.3.2
+    dev: false
 
   /@nestjs/core/8.4.4_4a5jf4f4bd5veoonzqxaizqv2i:
     resolution: {integrity: sha512-Ef3yJPuzAttpNfehnGqIV5kHIL9SHptB5F4ERxoU7pT61H3xiYpZw6hSjx68cJO7cc6rm7/N+b4zeuJvFHtvBg==}
@@ -5068,6 +5086,11 @@ packages:
       is-obj: 2.0.0
     dev: true
 
+  /dotenv-expand/8.0.3:
+    resolution: {integrity: sha512-SErOMvge0ZUyWd5B0NXMQlDkN+8r+HhVUsxgOO7IoPDOdDRD2JjExpN6y3KnFR66jsJMwSn1pqIivhU5rcJiNg==}
+    engines: {node: '>=12'}
+    dev: false
+
   /dotenv/16.0.0:
     resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
     engines: {node: '>=12'}
@@ -5076,7 +5099,6 @@ packages:
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
-    dev: true
 
   /duplexer/0.1.1:
     resolution: {integrity: sha512-sxNZ+ljy+RA1maXoUReeqBBpBC6RLKmg5ewzV+x+mSETmWNoKdZN6vcQjpFROemza23hGFskJtFNoUWUaQ+R4Q==}
