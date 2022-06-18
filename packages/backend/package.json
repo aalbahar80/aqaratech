@@ -24,6 +24,7 @@
     "seed": "node ../seed/dist/seed/src/go-seed.js"
   },
   "dependencies": {
+    "@casl/ability": "5.4.4",
     "@nestjs/common": "8.4.6",
     "@nestjs/config": "2.1.0",
     "@nestjs/core": "8.4.6",
