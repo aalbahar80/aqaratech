@@ -13,19 +13,19 @@ import { TenantsController } from 'src/tenants/tenants.controller';
 import { TenantsService } from 'src/tenants/tenants.service';
 import { TenantsModule } from './tenants/tenants.module';
 
-import { PrismaModule } from './prisma/prisma.module';
-import { AuthzModule } from './authz/authz.module';
+import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
+import { PrismaModule } from './prisma/prisma.module';
 
-// should prisma/authz be here or in local modules?
+// should prisma/auth be here or in local modules?
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
-    AuthzModule,
     PrismaModule,
     TenantsModule,
     PortfoliosModule,
     CaslModule,
+    AuthModule,
   ],
   controllers: [AppController, TenantsController, PortfoliosController],
   providers: [AppService, TenantsService, PortfoliosService],

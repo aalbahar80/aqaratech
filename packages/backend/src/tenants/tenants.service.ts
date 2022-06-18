@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
-import { PrismaService } from 'src/prisma/prisma.service';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TenantsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private caslAbilityFactory: CaslAbilityFactory,
+  ) {}
 
   create(createTenantDto: CreateTenantDto) {
     return this.prisma.tenant.create({
@@ -20,6 +24,7 @@ export class TenantsService {
   async findAll(
     tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
+    // const ability = this.caslAbilityFactory.createForUser(user);
     const { page, take } = tenantPageOptionsDto;
 
     // TODO authz for both queries
