@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 import { PortfoliosController } from 'src/portfolios/portfolios.controller';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
@@ -13,11 +14,13 @@ import { TenantsService } from 'src/tenants/tenants.service';
 import { TenantsModule } from './tenants/tenants.module';
 
 import { PrismaModule } from './prisma/prisma.module';
+import { AuthzModule } from './authz/authz.module';
 
-// should prisma be here or in local modules?
+// should prisma/authz be here or in local modules?
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ load: [configuration] }),
+    AuthzModule,
     PrismaModule,
     TenantsModule,
     PortfoliosModule,
