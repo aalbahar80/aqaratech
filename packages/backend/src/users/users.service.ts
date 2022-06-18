@@ -16,12 +16,47 @@ export class UsersService {
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: {
+        admins: {
+          select: {
+            organizationId: true,
+          },
+        },
+        portfolios: {
+          select: {
+            organizationId: true,
+          },
+        },
+        tenants: {
+          select: {
+            organizationId: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: string) {
     return this.prisma.user.findUnique({
       where: { id },
+      include: {
+        admins: {
+          select: {
+            organizationId: true,
+          },
+        },
+        portfolios: {
+          select: {
+            organizationId: true,
+          },
+        },
+        tenants: {
+          select: {
+            organizationId: true,
+          },
+        },
+      },
     });
   }
 
