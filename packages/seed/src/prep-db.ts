@@ -21,7 +21,7 @@ export const setupTenant = async () => {
 	await prisma.tenant.create({
 		data: {
 			id: testTenantId,
-			// orgId: testOrgId,
+			organizationId: testOrgId,
 			// userId: testUserIdTenant,
 			createdAt: new Date(),
 			updatedAt: new Date(),

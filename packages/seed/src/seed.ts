@@ -20,7 +20,7 @@ import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
 
 config({
-	path: "../backend/.env",
+	path: "../backend/prisma/.env",
 });
 
 export async function seed({
@@ -265,7 +265,7 @@ export async function seed({
 					data: chunk,
 				});
 			}),
-				console.time("transactions created");
+				console.timeEnd("transactions created");
 		}
 
 		if (maintenanceOrders.length) {

@@ -63,7 +63,6 @@ export const fakePortfolio = (orgId?: string) => {
 		// phone: faker.phone.phoneNumber("1#######"),
 		phone: "99212976",
 		dob: faker.date.past(),
-		users: [fakeUser()],
 	};
 };
 

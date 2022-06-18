@@ -60,6 +60,9 @@ model Tenant {
     leases            Lease[]
     maintenanceOrders MaintenanceOrder[]
 
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
     users User[]
 }
 
@@ -95,6 +98,7 @@ model Organization {
 
     admins     Admin[]
     portfolios Portfolio[]
+    tenants    Tenant[]
 
     planId String?
     plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
