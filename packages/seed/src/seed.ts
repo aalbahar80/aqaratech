@@ -16,6 +16,8 @@ import {
 	testTenantId,
 	timespan,
 	fakeOrganization,
+	fakeAdmin,
+	fakeUser,
 } from "./generators.js";
 import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
@@ -39,7 +41,9 @@ export async function seed({
 	if (await isProdBranch()) {
 		return;
 	}
+	let userCount = 5;
 	let orgCount = 3;
+	let adminCount = 5;
 	let portfolioCount = 9;
 	let propertyMin = 2;
 	let propertyMax = 6;
@@ -50,7 +54,11 @@ export async function seed({
 	const min = 1;
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
+	const users = Array.from({ length: userCount }, fakeUser);
 
+	const admins = Array.from({ length: adminCount }, () =>
+		fakeAdmin({ orgId: randId(organizations), userId: randId(users) })
+	);
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
 	);
@@ -202,7 +210,7 @@ export async function seed({
 	console.log(`${unitsWithLease} units with a lease`);
 
 	console.log("Seeding to database:", process.env.DATABASE_URL);
-	const summary = `Totals: \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
+	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
 	console.log(summary);
 
 	if (sample) {
@@ -237,7 +245,9 @@ export async function seed({
 
 		console.time("insert");
 		await insertExpenseTypes();
+		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
+		await prisma.admin.createMany({ data: admins });
 		await prisma.portfolio.createMany({ data: portfolios });
 		await prisma.property.createMany({ data: properties });
 		await prisma.unit.createMany({ data: units });

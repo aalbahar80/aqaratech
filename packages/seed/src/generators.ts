@@ -47,6 +47,21 @@ export const fakeUser = () => {
 	};
 };
 
+export const fakeAdmin = ({
+	userId,
+	orgId,
+}: {
+	userId: string;
+	orgId: string;
+}) => ({
+	id: faker.datatype.uuid(),
+	createdAt: createdAt(),
+	updatedAt: updatedAt(),
+	organizationId: orgId,
+	userId,
+	isSuper: true,
+});
+
 export const fakeOrganization = () => ({
 	id: faker.datatype.uuid(),
 	createdAt: createdAt(),
