@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { TenantsController } from './tenants.controller';
 import { TenantsService } from './tenants.service';
 
-import { PrismaModule } from 'src/prisma/prisma.module';
 import { CaslModule } from 'src/casl/casl.module';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   controllers: [TenantsController],
