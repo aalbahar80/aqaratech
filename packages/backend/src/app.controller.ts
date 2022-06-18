@@ -13,10 +13,12 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('/profile')
   @UseGuards(JwtAuthGuard)
-  @Get('/p')
-  getP(@Request() req: any): string {
+  // TODO register authguard globally
+  // https://docs.nestjs.com/security/authentication#enable-authentication-globally
+  getProfile(@Request() req: any): string {
     console.log(req.user);
-    return this.appService.getHello();
+    return req.user;
   }
 }
