@@ -20,7 +20,7 @@ import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
 
 config({
-	path: "../site/.env",
+	path: "../backend/.env",
 });
 
 export async function seed({
