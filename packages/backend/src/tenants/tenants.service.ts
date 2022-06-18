@@ -20,10 +20,19 @@ export class TenantsService {
   async findAll(
     tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    const results = await this.prisma.tenant.findMany();
+    const { page, take } = tenantPageOptionsDto;
+
+    // TODO authz for both queries
+    const [results, itemCount] = await Promise.all([
+      this.prisma.tenant.findMany({
+        take,
+        skip: (page - 1) * take,
+      }),
+      this.prisma.tenant.count(),
+    ]);
 
     const meta = new PaginatedDto({
-      itemCount: results.length,
+      itemCount,
       pageOptionsDto: tenantPageOptionsDto,
     });
 
