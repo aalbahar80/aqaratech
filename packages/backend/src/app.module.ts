@@ -16,6 +16,7 @@ import { TenantsModule } from './tenants/tenants.module';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './users/users.module';
 
 // should prisma/auth be here or in local modules?
 @Module({
@@ -26,6 +27,7 @@ import { PrismaModule } from './prisma/prisma.module';
     PortfoliosModule,
     CaslModule,
     AuthModule,
+    UsersModule,
   ],
   controllers: [AppController, TenantsController, PortfoliosController],
   providers: [AppService, TenantsService, PortfoliosService],

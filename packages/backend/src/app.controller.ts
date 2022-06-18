@@ -15,7 +15,11 @@ export class AppController {
   @UseGuards(JwtAuthGuard)
   // TODO register authguard globally
   // https://docs.nestjs.com/security/authentication#enable-authentication-globally
-  getProfile(@Request() req: any): string {
+  getProfile(
+    // TODO implement and use a User type (Dto + roles property)
+    @Request()
+    req: Request & { user: { sub: string } },
+  ) {
     console.log(req.user);
     return req.user;
   }
