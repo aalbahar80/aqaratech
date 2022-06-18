@@ -6,6 +6,7 @@
     "preview": "turbo run preview",
     "build:site": "turbo run build --filter=@self/site",
     "build:docs": "turbo run build --filter=@self/docs",
+    "seed": "turbo run seed --filter=@self/backend --filter=@self/seed",
     "test": "turbo run test --",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint"

@@ -36,6 +36,12 @@
             "dependsOn": [
                 "build"
             ]
+        },
+        "seed": {
+            "dependsOn": [
+                "build"
+            ],
+            "cache": false
         }
     },
     "globalDependencies": [
