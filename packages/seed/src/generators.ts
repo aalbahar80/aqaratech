@@ -47,6 +47,13 @@ export const fakeUser = () => {
 	};
 };
 
+export const fakeOrganization = () => ({
+	id: faker.datatype.uuid(),
+	createdAt: createdAt(),
+	updatedAt: updatedAt(),
+	fullName: faker.company.companyName(),
+});
+
 export const fakePortfolio = (orgId?: string) => {
 	const fullName = faker.name.firstName() + " " + faker.name.lastName();
 	return {

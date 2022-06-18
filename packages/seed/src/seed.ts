@@ -15,6 +15,7 @@ import {
 	testPortfolioId,
 	testTenantId,
 	timespan,
+	fakeOrganization,
 } from "./generators.js";
 import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
@@ -23,6 +24,14 @@ config({
 	path: "../backend/prisma/.env",
 });
 
+const randId = <T extends { id: string }>(entities: T[]): string => {
+	const entity = entities[Math.floor(Math.random() * entities.length)];
+	if (!entity) {
+		throw new Error(`No entity found. List is empty.`);
+	}
+	return entity.id;
+};
+
 export async function seed({
 	sample = true,
 	clean = false,
@@ -30,7 +39,8 @@ export async function seed({
 	if (await isProdBranch()) {
 		return;
 	}
-	let portfolioCount = 3;
+	let orgCount = 3;
+	let portfolioCount = 9;
 	let propertyMin = 2;
 	let propertyMax = 6;
 	let unitMax = 5;
@@ -39,7 +49,11 @@ export async function seed({
 	let trxPerLease = 12;
 	const min = 1;
 
-	const portfolios = Array.from({ length: portfolioCount }, fakePortfolio);
+	const organizations = Array.from({ length: orgCount }, fakeOrganization);
+
+	const portfolios = Array.from({ length: portfolioCount }, () =>
+		fakePortfolio(randId(organizations))
+	);
 	portfolios[0]!.id = testPortfolioId;
 
 	const properties = portfolios.flatMap((portfolio) =>
@@ -58,7 +72,8 @@ export async function seed({
 	units.forEach((unit, idx) => {
 		let date = new Date();
 		date.setFullYear(date.getFullYear() - timespan);
-		let tenantN = fakeTenant();
+		let tenantN = fakeTenant(randId(organizations));
+
 		if (idx === 0) {
 			tenantN.id = testTenantId;
 		}
@@ -78,7 +93,7 @@ export async function seed({
 				// lease ended, move to next tenant
 				const tenantSearch = faker.datatype.number({ min: 1, max: 30 * 6 });
 				date = addDays(leaseN.end, tenantSearch);
-				tenantN = fakeTenant();
+				tenantN = fakeTenant(randId(organizations));
 				tenants.push(tenantN);
 				continue tenantLoop;
 			}
@@ -222,27 +237,13 @@ export async function seed({
 
 		console.time("insert");
 		await insertExpenseTypes();
-		await prisma.portfolio.createMany({
-			data: portfolios,
-		});
-		console.log("portfolios created");
-		await prisma.property.createMany({
-			data: properties,
-		});
-		console.log("properties created");
-		await prisma.unit.createMany({
-			data: units,
-		});
-		console.log("units created");
-		await prisma.tenant.createMany({
-			data: tenants,
-		});
-		console.log("tenants created");
+		await prisma.organization.createMany({ data: organizations });
+		await prisma.portfolio.createMany({ data: portfolios });
+		await prisma.property.createMany({ data: properties });
+		await prisma.unit.createMany({ data: units });
+		await prisma.tenant.createMany({ data: tenants });
 		if (leases.length) {
-			await prisma.lease.createMany({
-				data: leases,
-			});
-			console.log("leases created");
+			await prisma.lease.createMany({ data: leases });
 		}
 		// define a function to split the maintenance orders into n chunks
 		const split = <T>(array: T[], n: number): T[][] => {
