@@ -130,8 +130,8 @@ model PlanInvoice {
 
 model ExpenseType {
     id          Int     @id @default(autoincrement())
-    label_en    String  @unique
-    label_ar    String  @unique
+    labelEn     String  @unique
+    labelAr     String  @unique
     description String?
 
     parentId   Int?

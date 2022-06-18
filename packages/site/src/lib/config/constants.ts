@@ -341,89 +341,66 @@ export const getColor = (index: number, total: number) => {
 	return backgroundColor;
 };
 
-export const ExpenseGroupIds = [
-	'utilities',
-	'amenities',
-	'legal',
-	'upkeep',
-	'caretaker',
-	'other',
-	'insurance',
-	'government',
-	'managementFees',
-	'hvac',
-] as const;
-
-interface ExpenseGroup {
-	id: ExpenseGroupId;
-	idNum: number;
-	en: string;
-	ar: string;
+interface ExpenseType {
+	id: number;
+	parentId: number | null;
+	labelEn: string;
+	labelAr: string;
 }
 
-export const ExpenseGroups: ExpenseGroup[] = [
-	{ idNum: 1, id: 'other', en: 'Other', ar: 'أخرى' },
-	{ idNum: 2, id: 'amenities', en: 'Amenities', ar: 'المرافق' },
-	{ idNum: 3, id: 'legal', en: 'Legal', ar: 'القانونية' },
-	{ idNum: 4, id: 'upkeep', en: 'Upkeep', ar: 'الصيانة' },
-	{ idNum: 5, id: 'caretaker', en: 'Caretaker', ar: 'الحارس' },
-	{ idNum: 6, id: 'utilities', en: 'Utilities', ar: 'الخدمات' },
-	{ idNum: 7, id: 'insurance', en: 'Insurance', ar: 'التأمين' },
-	{ idNum: 8, id: 'government', en: 'Government', ar: 'الحكومية' },
-	{ idNum: 9, id: 'hvac', en: 'HVAC', ar: 'التكييف' },
-	{ idNum: 10, id: 'managementFees', en: 'Management Fees', ar: 'الإدارية' },
-];
-
-type ExpenseGroupId = typeof ExpenseGroupIds[number];
-
-interface ExpenseCategory {
-	en: string;
-	ar: string;
-	group: ExpenseGroupId;
-}
-
-export const expenseCats: ExpenseCategory[] = [
-	{ en: 'Management Fees', ar: 'رسوم إدارية', group: 'managementFees' },
-	{ en: 'Water consumption', ar: 'استهلاك مياة', group: 'utilities' },
-	{ en: 'Electricity consumption', ar: 'استهلاك كهرباء', group: 'utilities' },
-	{ en: 'Satellite & Internet connectivity', ar: 'ستلايت', group: 'utilities' },
-	{ en: 'Electrical Maintenance', ar: 'كهرباء', group: 'utilities' },
-	{ en: 'Elevator Contract', ar: 'عقد مصعد', group: 'amenities' },
-	{ en: 'Elevator Maintenance Part', ar: 'ق.غ. مصعد', group: 'amenities' },
-	{
-		en: 'Swimming Pool Maintenance',
-		ar: 'صيانة أحواض السباحة',
-		group: 'amenities',
-	},
-	{ en: 'Caretaker Wages', ar: 'حارس', group: 'caretaker' },
-	{ en: 'Caretaker Vacation leave', ar: 'اجازات حارس', group: 'caretaker' },
-	{ en: 'Caretaker pension', ar: 'نهايه خدمه حارس', group: 'caretaker' },
-	{
-		en: 'Caretaker Insurance & resident permit',
-		ar: 'اقامات حارس',
-		group: 'caretaker',
-	},
-	{ en: 'Attorneys Fee', ar: 'مصاريف قضايا', group: 'legal' },
-	{ en: 'Municipal fees', ar: 'رسوم بلديه', group: 'government' },
-	{ en: 'Government Paperwork', ar: 'طوابع', group: 'government' },
-	{ en: 'Government Violations', ar: 'ازاله مخالفات', group: 'government' },
-	{ en: 'hvac Contract', ar: 'عقد تكييف', group: 'hvac' },
-	{ en: 'hvac Maintenance Part', ar: 'ق.غ. تكييف', group: 'hvac' },
-	{ en: 'Plasterwork Maintenance', ar: 'فتحات تكييف', group: 'hvac' },
-	{ en: 'hvac Maintenance', ar: 'صيانه مكيف', group: 'hvac' },
-	{ en: 'Cleaning supplies', ar: 'معدات تنظيف', group: 'upkeep' },
-	{ en: 'Plumbing Maintenance', ar: 'صحي', group: 'upkeep' },
-	{ en: 'Paint Maintenance', ar: 'صبغ', group: 'upkeep' },
-	{ en: 'Flooring Maintenance', ar: 'تبليط', group: 'upkeep' },
-	{ en: 'Kitchen Maintenance', ar: 'مطابخ', group: 'upkeep' },
-	{ en: 'Aluminum Maintenance', ar: 'المنيوم', group: 'upkeep' },
-	{ en: 'Gypsum Maintenance', ar: 'صيانة الجبس', group: 'upkeep' },
-	{ en: 'Doors Maintenance', ar: 'صيانة الابواب', group: 'upkeep' },
-	{ en: 'Glass Maintenance', ar: 'زجاج معلق', group: 'upkeep' },
-	{ en: 'Fire Fighting Contract', ar: 'عقد اطفاء', group: 'other' },
-	{ en: 'Bank charges', ar: 'مصاريف بنكيه', group: 'other' },
-	{ en: 'Insurance', ar: 'تامين علي البنايه', group: 'other' },
-	{ en: 'Other Maintenance cost', ar: 'اخرى', group: 'other' },
+// prettier-ignore
+export const expenseTypes: ExpenseType[] = [
+	{ id: 1, labelEn: 'CapEx', labelAr: 'المصاريف الرأسمالية', parentId: null },
+	{ id: 2, labelEn: 'Annual Contracts', labelAr: 'عقود الصيانة السنوية', parentId: 1 },
+	{ id: 3, labelEn: 'AC Contract', labelAr: '', parentId: 2 },
+	{ id: 4, labelEn: 'Elevator Contract', labelAr: '', parentId: 2 },
+	{ id: 5, labelEn: 'Fire Fighting Contract', labelAr: '', parentId: 2 },
+	{ id: 6, labelEn: 'Other CapEx', labelAr: '', parentId: 1 },
+	{ id: 7, labelEn: 'Waterproofing', labelAr: '', parentId: 6 },
+	{ id: 8, labelEn: 'Renovation', labelAr: '', parentId: 6 },
+	{ id: 9, labelEn: 'Major repairs', labelAr: '', parentId: 6 },
+	{ id: 10, labelEn: 'Structural Integrity', labelAr: '', parentId: 6 },
+	{ id: 11, labelEn: 'OpEx', labelAr: 'المصاريف التشغيلية', parentId: null },
+	{ id: 12, labelEn: 'Legal & Financial', labelAr: 'المصاريف القانونية', parentId: 11 },
+	{ id: 13, labelEn: 'Attorneys Fee', labelAr: '', parentId: 12 },
+	{ id: 14, labelEn: 'Insurance', labelAr: '', parentId: 12 },
+	{ id: 15, labelEn: 'Bank charges', labelAr: '', parentId: 12 },
+	{ id: 16, labelEn: 'Government', labelAr: 'المصاريف الحكومية', parentId: 11 },
+	{ id: 17, labelEn: 'Municipal fees', labelAr: '', parentId: 16 },
+	{ id: 18, labelEn: 'Government Stamps', labelAr: '', parentId: 16 },
+	{ id: 19, labelEn: 'Government Paperwork', labelAr: '', parentId: 16 },
+	{ id: 20, labelEn: 'Government Violations', labelAr: '', parentId: 16 },
+	{ id: 21, labelEn: 'Salaries', labelAr: 'رواتب الحارس', parentId: 11 },
+	{ id: 22, labelEn: 'Caretaker Wages', labelAr: '', parentId: 21 },
+	{ id: 23, labelEn: 'Caretaker Vacation leave', labelAr: '', parentId: 21 },
+	{ id: 24, labelEn: 'Caretaker pension', labelAr: '', parentId: 21 },
+	{ id: 25, labelEn: 'Caretaker Insurance & resident permit', labelAr: '', parentId: 21 },
+	{ id: 26, labelEn: 'Utilities', labelAr: 'خدمات الكهرباء والماء', parentId: 11 },
+	{ id: 27, labelEn: 'Water Consumption', labelAr: '', parentId: 26 },
+	{ id: 28, labelEn: 'Electrical Consumption', labelAr: '', parentId: 26 },
+	{ id: 29, labelEn: 'Gas', labelAr: '', parentId: 26 },
+	{ id: 30, labelEn: 'Trash', labelAr: '', parentId: 26 },
+	{ id: 31, labelEn: 'Repairs', labelAr: 'خدمات الإصلاحات', parentId: 11 },
+	{ id: 32, labelEn: 'Central Ventilation', labelAr: '', parentId: 31 },
+	{ id: 33, labelEn: 'Paint repairs', labelAr: '', parentId: 31 },
+	{ id: 34, labelEn: 'Doors repairs', labelAr: '', parentId: 31 },
+	{ id: 35, labelEn: 'Glass repairs', labelAr: '', parentId: 31 },
+	{ id: 36, labelEn: 'Aluminum repairs', labelAr: '', parentId: 31 },
+	{ id: 37, labelEn: 'Plasterwork repairs', labelAr: '', parentId: 31 },
+	{ id: 38, labelEn: 'Electrical repairs', labelAr: '', parentId: 31 },
+	{ id: 39, labelEn: 'Plumbing repairs', labelAr: '', parentId: 31 },
+	{ id: 40, labelEn: 'Gypsum repairs', labelAr: '', parentId: 31 },
+	{ id: 41, labelEn: 'Maintenance', labelAr: 'خدمات الصيانة', parentId: 11 },
+	{ id: 42, labelEn: 'Property Maintenance', labelAr: '', parentId: 41 },
+	{ id: 43, labelEn: 'Amenities Maintenance', labelAr: '', parentId: 41 },
+	{ id: 44, labelEn: 'Apartment Maintenance', labelAr: '', parentId: 41 },
+	{ id: 45, labelEn: 'AC Maintenance', labelAr: '', parentId: 41 },
+	{ id: 46, labelEn: 'Elevator Maintenance', labelAr: '', parentId: 41 },
+	{ id: 47, labelEn: 'Electrical Maintenance', labelAr: '', parentId: 41 },
+	{ id: 48, labelEn: 'Plumbing maintenance', labelAr: '', parentId: 41 },
+	{ id: 49, labelEn: 'Management', labelAr: 'المصاريف الإدارية', parentId: null },
+	{ id: 50, labelEn: 'Management fees', labelAr: '', parentId: 49 },
+	{ id: 51, labelEn: 'Subscription fees', labelAr: '', parentId: 49 },
 ];
 
 export const unitTypeOptions = [

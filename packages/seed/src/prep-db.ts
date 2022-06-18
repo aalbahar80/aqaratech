@@ -1,38 +1,19 @@
+import { expenseTypes } from "../../site/src/lib/config/constants.js";
 import {
-	expenseCats,
-	ExpenseGroups,
-} from "../../site/src/lib/config/constants.js";
-import {
-	testPortfolioEmail,
+	testOrgId,
+	// testPortfolioEmail,
 	testPortfolioId,
 	testTenantEmail,
 	testTenantId,
+	testUserId,
 } from "./generators.js";
 import prisma from "./prisma.js";
 
-export async function insertExpenseGroups() {
+export async function insertExpenseTypes() {
 	console.time("inserting expense groups");
-	const data = ExpenseGroups.map((group) => ({
-		id: group.idNum,
-		en: group.en,
-		ar: group.ar,
-	}));
-	const created = await prisma.expenseGroup.createMany({ data });
+	const created = await prisma.expenseType.createMany({ data: expenseTypes });
 	console.log(`${created.count} expense groups inserted`);
 	console.timeEnd("inserting expense groups");
-}
-
-export async function insertExpenseCategories() {
-	console.time("inserting expense categories");
-	const data = expenseCats.map((cat, idx) => ({
-		id: idx + 1,
-		en: cat.en,
-		ar: cat.ar,
-		groupId: ExpenseGroups.find((g) => g.id === cat.group)?.idNum ?? 1,
-	}));
-	const created = await prisma.expenseCategory.createMany({ data });
-	console.log(`${created.count} expense categories inserted`);
-	console.timeEnd("inserting expense categories");
 }
 
 export const setupTenant = async () => {
@@ -40,6 +21,8 @@ export const setupTenant = async () => {
 	await prisma.tenant.create({
 		data: {
 			id: testTenantId,
+			// orgId: testOrgId,
+			// userId: testUserIdTenant,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			fullName: "نعيم الشيباني بن عاشور",
@@ -63,16 +46,32 @@ export const setupPortfolio = async () => {
 	await prisma.portfolio.create({
 		data: {
 			id: testPortfolioId,
+			organizationId: testOrgId,
+			// userId: testUserIdPortfolio,
 			createdAt: new Date(),
 			updatedAt: new Date(),
-			deactivated: false,
+			// deactivated: false,
 			fullName: "عمر ادريس شقرون",
 			shortName: "عمر شقرون",
 			civilid: "360506007960",
 			phone: "11096260",
-			email: testPortfolioEmail,
+			// email: testPortfolioEmail,
 			dob: new Date(),
 		},
 	});
 	console.timeEnd("creating test portfolio");
+};
+
+export const setupAdmin = async () => {
+	console.time("creating test admin");
+	await prisma.admin.create({
+		data: {
+			id: testPortfolioId,
+			organizationId: testOrgId,
+			userId: testUserId,
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	});
+	console.timeEnd("creating test admin");
 };

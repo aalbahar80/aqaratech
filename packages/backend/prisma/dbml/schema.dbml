@@ -99,8 +99,8 @@ Table PlanInvoice {
 
 Table ExpenseType {
   id Int [pk, increment]
-  label_en String [unique, not null]
-  label_ar String [unique, not null]
+  labelEn String [unique, not null]
+  labelAr String [unique, not null]
   description String
   parentId Int
   parentType ExpenseType

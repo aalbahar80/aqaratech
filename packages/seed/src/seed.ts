@@ -16,7 +16,7 @@ import {
 	testTenantId,
 	timespan,
 } from "./generators.js";
-import { insertExpenseCategories, insertExpenseGroups } from "./prep-db.js";
+import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
 
 config({
@@ -26,29 +26,18 @@ config({
 export async function seed({
 	sample = true,
 	clean = false,
-	portfolioCount = 3,
-	propertyMin = 2,
-	propertyMax = 6,
-	unitMax = 5,
-	moCount = 100,
-	expenseCount = 150,
-	min = 1,
-	trxPerLease = 12,
-}: {
-	sample?: boolean;
-	clean?: boolean;
-	portfolioCount?: number;
-	propertyMin?: number;
-	propertyMax?: number;
-	unitMax?: number;
-	moCount?: number;
-	expenseCount?: number;
-	min?: number;
-	trxPerLease?: number;
-} = {}) {
+}: { sample?: boolean; clean?: boolean } = {}) {
 	if (await isProdBranch()) {
 		return;
 	}
+	let portfolioCount = 3;
+	let propertyMin = 2;
+	let propertyMax = 6;
+	let unitMax = 5;
+	let moCount = 100;
+	let expenseCount = 150;
+	let trxPerLease = 12;
+	const min = 1;
 
 	const portfolios = Array.from({ length: portfolioCount }, fakePortfolio);
 	portfolios[0]!.id = testPortfolioId;
@@ -228,14 +217,11 @@ export async function seed({
 		console.log(`preparing to insert...`);
 		// TODO add a NODE_ENV check to only run this in development
 		if (clean) {
-			console.time("cleanup");
 			await cleanupDatabase();
-			console.timeEnd("cleanup");
 		}
 
 		console.time("insert");
-		await insertExpenseGroups();
-		await insertExpenseCategories();
+		await insertExpenseTypes();
 		await prisma.portfolio.createMany({
 			data: portfolios,
 		});
