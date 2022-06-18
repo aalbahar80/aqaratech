@@ -1,7 +1,4 @@
 import type { EnvironmentConfig } from '../interfaces/environment.interface';
-// import { config } from 'dotenv';
-
-// config();
 
 const getOrigin = (localhostAllowed = true): string => {
   const origin = process.env.URL_ORIGIN;

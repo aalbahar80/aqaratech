@@ -1,7 +1,4 @@
 import type { EnvironmentConfig } from '../interfaces/environment.interface';
-// import { config } from 'dotenv';
-
-// config();
 
 // TODO: populate constants such as domain, callbackDomain, etc.
 export const productionEnvironment: EnvironmentConfig = {
