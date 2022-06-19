@@ -1,49 +1,59 @@
-import {
-  Ability,
-  AbilityBuilder,
-  AbilityClass,
-  ExtractSubjectType,
-  InferSubjects,
-} from '@casl/ability';
+import { AbilityBuilder, AbilityClass } from '@casl/ability';
+import { PrismaAbility, Subjects } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import {
+  Expense,
+  ExpenseType,
+  Lease,
+  MaintenanceOrder,
+  Organization,
+  Plan,
+  PlanInvoice,
+  Portfolio,
+  Property,
+  Role,
+  Tenant,
+  Transaction,
+  Unit,
+  User,
+} from '@prisma/client';
+import { UserDto } from 'src/users/dto/user.dto';
 
-type Subjects = InferSubjects<typeof Article | typeof User> | 'all';
-
-export type AppAbility = Ability<[Action, Subjects]>;
+type AppAbility = PrismaAbility<
+  [
+    string,
+    Subjects<{
+      Expense: Expense;
+      ExpenseType: ExpenseType;
+      Lease: Lease;
+      MaintenanceOrder: MaintenanceOrder;
+      Organization: Organization;
+      Plan: Plan;
+      PlanInvoice: PlanInvoice;
+      Portfolio: Portfolio;
+      Property: Property;
+      Role: Role;
+      Tenant: Tenant;
+      Transaction: Transaction;
+      Unit: Unit;
+      User: User;
+    }>,
+  ]
+>;
 
 @Injectable()
 export class CaslAbilityFactory {
-  createForUser(user: User) {
-    const { can, cannot, build } = new AbilityBuilder<
-      Ability<[Action, Subjects]>
-    >(Ability as AbilityClass<AppAbility>);
+  defineAbility(user: UserDto) {
+    const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
+    const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
-    if (user.isAdmin) {
-      can(Action.Manage, 'all'); // read-write access to everything
-    } else {
-      can(Action.Read, 'all'); // read-only access to everything
-    }
+    can(Action.Read, 'Tenant');
+    // cannot(Action.Read, TenantDto, { residencyNum: '2' });
 
-    can(Action.Update, Article, { authorId: user.id });
-    cannot(Action.Delete, Article, { isPublished: true });
-
-    return build({
-      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) =>
-        item.constructor as ExtractSubjectType<Subjects>,
-    });
+    return build();
   }
 }
 
-class User {
-  id: number;
-  isAdmin: boolean;
-}
-class Article {
-  id: number;
-  isPublished: boolean;
-  authorId: number;
-}
 export enum Action {
   Manage = 'manage',
   Create = 'create',

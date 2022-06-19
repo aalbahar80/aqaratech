@@ -7,9 +7,11 @@ import {
   Patch,
   Post,
   Query,
+  Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
@@ -17,6 +19,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { UserDto } from 'src/users/dto/user.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { TenantsService } from './tenants.service';
@@ -48,8 +51,16 @@ export class TenantsController {
 
   @Get(':id')
   @ApiOkResponse({ type: TenantDto })
-  findOne(@Param('id') id: string) {
-    return this.tenantsService.findOne(id);
+  async findOne(
+    @Param('id') id: string,
+    @Request() req: Request & { user: UserDto },
+  ) {
+    const tenant = await this.tenantsService.findOne(id);
+    const ability = this.caslAbilityFactory.defineAbility(req.user);
+    if (ability.can(Action.Read, 'Tenant')) {
+      return tenant;
+    }
+    throw new UnauthorizedException('no mas');
   }
 
   @Patch(':id')
