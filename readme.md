@@ -16,7 +16,10 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 ```bash
 pnpm dev
-# runs site on port 3000 and docs on port 3001
+# runs site on port 3000, docs on port 3001, and backend on port 3002.
+
+pnpm outdated --long -r # view outdated deps
+pnpm update -iLr # interactively update deps
 ```
 
 Take a look [.env.example](packages/site/.env.example) to know what env vars are required.
