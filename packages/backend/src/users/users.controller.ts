@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
@@ -30,6 +30,14 @@ export class UsersController {
   @ApiPaginatedResponse(UserDto)
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @Get('by-email')
+  @ApiOkResponse({ type: UserDto })
+  @ApiNotFoundResponse()
+  // TODO validate email qparam
+  findOneByEmail(@Query('email') email: string): Promise<UserDto> {
+    return this.usersService.findOneByEmail(email);
   }
 
   @Get(':id')
