@@ -1,5 +1,11 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { UserDto } from 'src/users/dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -24,6 +30,7 @@ export class UsersController {
 
   @Get(':id')
   @ApiOkResponse({ type: UserDto })
+  @ApiNotFoundResponse()
   findOne(@Param('id') id: string): Promise<UserDto> {
     return this.usersService.findOne(id);
   }
