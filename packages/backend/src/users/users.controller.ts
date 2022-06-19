@@ -24,7 +24,7 @@ export class UsersController {
 
   @Get(':id')
   @ApiOkResponse({ type: UserDto })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<UserDto> {
     return this.usersService.findOne(id);
   }
 
