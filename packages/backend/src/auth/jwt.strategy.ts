@@ -39,6 +39,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * access token as received from Auth0
    */
   validate(payload: any) {
+    console.log(payload);
     // Auth0 will hit our /user/by-email endpoint on each login to get a UserDto.
     // It will then place that UserDto in the access token.
     // Here, we extract that UserDto and place it in the request object,
