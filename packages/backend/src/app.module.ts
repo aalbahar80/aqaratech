@@ -17,7 +17,7 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ load: [configuration] }),
+    ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     PrismaModule,
     TenantsModule,
     PortfoliosModule,
