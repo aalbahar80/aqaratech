@@ -7,14 +7,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiHeader } from '@nestjs/swagger';
+import { OrgHeaders } from 'src/decorators/org-header.decorator';
 
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
 @Controller('portfolios')
-@ApiHeader({ name: 'x-organization-id' })
+@OrgHeaders()
 export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
