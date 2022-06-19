@@ -35,7 +35,10 @@ async function bootstrap() {
             tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
             scopes: {
               'openid profile email': 'default scope',
-              openid: true,
+              openid:
+                "to indicate that the application intends to use OIDC to verify the user's identity",
+              profile: 'to get name, nickname, and picture',
+              email: 'to get email and email_verified',
             },
           },
         },
