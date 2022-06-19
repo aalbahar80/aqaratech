@@ -9,6 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
@@ -25,7 +26,10 @@ import { TenantsService } from './tenants.service';
 @SwaggerAuth()
 @OrgHeaders()
 export class TenantsController {
-  constructor(private readonly tenantsService: TenantsService) {}
+  constructor(
+    private readonly tenantsService: TenantsService,
+    private caslAbilityFactory: CaslAbilityFactory,
+  ) {}
 
   @Post()
   @ApiCreatedResponse({ type: TenantDto })
