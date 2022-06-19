@@ -47,9 +47,9 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
-    can(Action.Read, 'Tenant');
-    // cannot(Action.Read, TenantDto, { residencyNum: '2' });
-
+    can(Action.Read, 'Tenant', { residencyNum: { equals: '1' } }).because(
+      "he's the chosen one",
+    );
     return build();
   }
 }

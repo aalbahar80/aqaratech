@@ -1,3 +1,4 @@
+import { subject } from '@casl/ability';
 import {
   Body,
   Controller,
@@ -57,10 +58,10 @@ export class TenantsController {
   ) {
     const tenant = await this.tenantsService.findOne(id);
     const ability = this.caslAbilityFactory.defineAbility(req.user);
-    if (ability.can(Action.Read, 'Tenant')) {
+    if (ability.can(Action.Read, subject('Tenant', tenant))) {
       return tenant;
     }
-    throw new UnauthorizedException('no mas');
+    throw new UnauthorizedException();
   }
 
   @Patch(':id')
