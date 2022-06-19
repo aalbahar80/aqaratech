@@ -8,7 +8,12 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiHeader,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
@@ -18,6 +23,7 @@ import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { TenantsService } from './tenants.service';
 
 @Controller('tenants')
+@ApiHeader({ name: 'x-organization-id' })
 @ApiTags('tenants')
 export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}

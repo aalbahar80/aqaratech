@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PortfoliosService } from './portfolios.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ApiHeader } from '@nestjs/swagger';
+
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
+import { PortfoliosService } from './portfolios.service';
 
 @Controller('portfolios')
+@ApiHeader({ name: 'x-organization-id' })
 export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
@@ -23,7 +34,10 @@ export class PortfoliosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePortfolioDto: UpdatePortfolioDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePortfolioDto: UpdatePortfolioDto,
+  ) {
     return this.portfoliosService.update(+id, updatePortfolioDto);
   }
 
