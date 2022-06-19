@@ -9,7 +9,7 @@ services:
     branch: initNestjs
     # numInstances: 1
     # maxInstances: 1
-    buildCommand: cd packages/backend && npm run build
+    buildCommand: cd packages/backend && npm install && npm run build
     startCommand: cd packages/backend && npm run start:prod
     # healthCheckPath: /
     envVars:
