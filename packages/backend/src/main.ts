@@ -30,7 +30,8 @@ async function bootstrap() {
         scheme: 'bearer',
         flows: {
           authorizationCode: {
-            authorizationUrl: 'https://dev-eehvhdp2.eu.auth0.com/authorize',
+            authorizationUrl:
+              'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
             tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
             scopes: {
               'openid profile email': 'default scope',
