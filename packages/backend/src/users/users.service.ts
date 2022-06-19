@@ -18,21 +18,7 @@ export class UsersService {
   findAll() {
     return this.prisma.user.findMany({
       include: {
-        admins: {
-          select: {
-            organizationId: true,
-          },
-        },
-        portfolios: {
-          select: {
-            organizationId: true,
-          },
-        },
-        tenants: {
-          select: {
-            organizationId: true,
-          },
-        },
+        roles: true,
       },
     });
   }
@@ -41,21 +27,7 @@ export class UsersService {
     return this.prisma.user.findUnique({
       where: { id },
       include: {
-        admins: {
-          select: {
-            organizationId: true,
-          },
-        },
-        portfolios: {
-          select: {
-            organizationId: true,
-          },
-        },
-        tenants: {
-          select: {
-            organizationId: true,
-          },
-        },
+        roles: true,
       },
     });
   }
@@ -72,21 +44,7 @@ export class UsersService {
     const result = await this.prisma.user.findUnique({
       where: { id },
       select: {
-        tenants: {
-          select: {
-            organizationId: true,
-          },
-        },
-        portfolios: {
-          select: {
-            organizationId: true,
-          },
-        },
-        admins: {
-          select: {
-            organizationId: true,
-          },
-        },
+        roles: true,
       },
     });
     return result;
