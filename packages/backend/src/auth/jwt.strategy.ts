@@ -62,9 +62,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     // grab userStuff, which auth0 places in the access token on every login
     // TODO handle case where auth0 did not find user by email.
-    const user = payload[`${apiNamespace}/appMetadata`][
-      'userStuff'
-    ] as unknown as UserDto;
+    const user = payload[`${apiNamespace}/userStuff`] as unknown as UserDto;
     return user;
   }
 }
