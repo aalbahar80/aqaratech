@@ -10,6 +10,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private configService: ConfigService<EnvironmentConfig>) {
     super({
+      // TODO: use configService to get the correct values
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
         rateLimit: true,
