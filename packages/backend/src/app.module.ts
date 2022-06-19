@@ -2,20 +2,16 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+// common
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-
-import { PortfoliosController } from 'src/portfolios/portfolios.controller';
-import { PortfoliosService } from 'src/portfolios/portfolios.service';
-import { PortfoliosModule } from './portfolios/portfolios.module';
-
-import { TenantsController } from 'src/tenants/tenants.controller';
-import { TenantsService } from 'src/tenants/tenants.service';
-import { TenantsModule } from './tenants/tenants.module';
-
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
+import configuration from './config/configuration';
+
+// resources
+import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { TenantsModule } from './tenants/tenants.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -28,7 +24,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
   ],
-  controllers: [AppController, TenantsController, PortfoliosController],
-  providers: [AppService, TenantsService, PortfoliosService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
