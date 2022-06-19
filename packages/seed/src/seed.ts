@@ -16,7 +16,7 @@ import {
 	testTenantId,
 	timespan,
 	fakeOrganization,
-	fakeAdmin,
+	fakeRole,
 	fakeUser,
 } from "./generators.js";
 import { insertExpenseTypes } from "./prep-db.js";
@@ -43,7 +43,7 @@ export async function seed({
 	}
 	let userCount = 5;
 	let orgCount = 3;
-	let adminCount = 5;
+	let roleCount = 5;
 	let portfolioCount = 9;
 	let propertyMin = 2;
 	let propertyMax = 6;
@@ -56,8 +56,8 @@ export async function seed({
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
 	const users = Array.from({ length: userCount }, fakeUser);
 
-	const admins = Array.from({ length: adminCount }, () =>
-		fakeAdmin({ orgId: randId(organizations), userId: randId(users) })
+	const roles = Array.from({ length: roleCount }, () =>
+		fakeRole({ orgId: randId(organizations), userId: randId(users) })
 	);
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
@@ -247,7 +247,7 @@ export async function seed({
 		await insertExpenseTypes();
 		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
-		await prisma.admin.createMany({ data: admins });
+		await prisma.role.createMany({ data: roles });
 		await prisma.portfolio.createMany({ data: portfolios });
 		await prisma.property.createMany({ data: properties });
 		await prisma.unit.createMany({ data: units });

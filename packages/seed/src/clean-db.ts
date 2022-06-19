@@ -7,7 +7,6 @@ export const cleanupDatabase = async (): Promise<void> => {
 	console.warn("deleting database:", process.env.DATABASE_URL);
 	console.time("cleanup");
 	await prisma.$transaction([
-		prisma.$executeRaw`DELETE FROM Admin`,
 		prisma.$executeRaw`DELETE FROM Plan`,
 		prisma.$executeRaw`DELETE FROM PlanInvoice`,
 		prisma.$executeRaw`DELETE FROM Expense`,
@@ -17,6 +16,7 @@ export const cleanupDatabase = async (): Promise<void> => {
 		prisma.$executeRaw`DELETE FROM Organization`,
 		prisma.$executeRaw`DELETE FROM Property`,
 		prisma.$executeRaw`DELETE FROM Portfolio`,
+		prisma.$executeRaw`DELETE FROM Role`,
 		prisma.$executeRaw`DELETE FROM Tenant`,
 		prisma.$executeRaw`DELETE FROM Transaction`,
 		prisma.$executeRaw`DELETE FROM Unit`,
