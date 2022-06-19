@@ -12,6 +12,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
@@ -20,8 +21,9 @@ import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { TenantsService } from './tenants.service';
 
 @Controller('tenants')
-@OrgHeaders()
 @ApiTags('tenants')
+@SwaggerAuth()
+@OrgHeaders()
 export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}
 

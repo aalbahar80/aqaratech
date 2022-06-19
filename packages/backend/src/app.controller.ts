@@ -1,7 +1,9 @@
 import { Controller, Get, Request } from '@nestjs/common';
+import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { AppService } from './app.service';
 
 @Controller()
+@SwaggerAuth()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 

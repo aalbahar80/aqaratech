@@ -7,13 +7,17 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
+import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
 @Controller('portfolios')
+@ApiTags('portfolios')
+@SwaggerAuth()
 @OrgHeaders()
 export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}

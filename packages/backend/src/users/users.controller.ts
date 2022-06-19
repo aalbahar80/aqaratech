@@ -7,6 +7,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
+
 import { UserDto } from 'src/users/dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
@@ -14,6 +16,7 @@ import { UsersService } from './users.service';
 @ApiOAuth2(['openid', 'profile', 'email'], 'oauth-swagger')
 @Controller('users')
 @ApiTags('users')
+@SwaggerAuth()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
