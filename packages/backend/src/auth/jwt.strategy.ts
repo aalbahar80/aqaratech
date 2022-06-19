@@ -8,28 +8,31 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private configService: ConfigService<EnvironmentConfig>) {
+  constructor(readonly configService: ConfigService<EnvironmentConfig>) {
+    const jwksUri = `${configService.get('authConfig.AUTH0_DOMAIN', {
+      infer: true,
+    })}/.well-known/jwks.json`;
+
+    const audience = `${configService.get('authConfig.AUTH0_API_AUDIENCE', {
+      infer: true,
+    })}`;
+
+    const issuer = `${configService.get('authConfig.AUTH0_DOMAIN', {
+      infer: true,
+    })}/`;
+
     super({
-      // TODO: use configService to get the correct values
+      // TODO: simplify configService vars
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://dev-eehvhdp2.eu.auth0.com/.well-known/jwks.json`,
-        // jwksUri: `${this.configService.get('authConfig.AUTH0_DOMAIN', {
-        //   infer: true,
-        // })}.well-known/jwks.json`,
+        jwksUri,
       }),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // https://github.com/mikenicholson/passport-jwt#configure-strategy
-      // issuer: `${this.configService.get('authConfig.AUTH0_API_AUDIENCE', {
-      //   infer: true,
-      // })}/`,
-      // issuer: `${this.configService.get('authConfig.AUTH0_DOMAIN', {
-      //   infer: true,
-      // })}/`,
-      audience: 'letand.be/api',
-      issuer: `https://dev-eehvhdp2.eu.auth0.com/`, // TODO ensure backslash
+      audience,
+      issuer,
       algorithms: ['RS256'],
     });
   }
