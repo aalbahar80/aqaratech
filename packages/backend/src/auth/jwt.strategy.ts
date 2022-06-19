@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -25,7 +26,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: unknown) {
-    return payload;
+  validate(payload: any) {
+    return payload['https://letand.be/appMetadata'][
+      'userStuff'
+    ] as unknown as UserDto;
+
+    // TODO: prod
+    // return payload[`${config.AUTH0_API_NAMESPACE}/appMetadata`][
+    //   'userStuff'
+    // ] as unknown as UserDto;
   }
 }
