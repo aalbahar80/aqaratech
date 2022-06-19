@@ -18,7 +18,6 @@ import { CaslModule } from './casl/casl.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
-// should prisma/auth be here or in local modules?
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
