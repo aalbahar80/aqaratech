@@ -1,5 +1,4 @@
-import { Controller, Get, UseGuards, Request } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Controller, Get, Request } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -12,9 +11,6 @@ export class AppController {
   }
 
   @Get('/profile')
-  @UseGuards(JwtAuthGuard)
-  // TODO register authguard globally
-  // https://docs.nestjs.com/security/authentication#enable-authentication-globally
   getProfile(
     // TODO implement and use a User type (Dto + roles property)
     @Request()

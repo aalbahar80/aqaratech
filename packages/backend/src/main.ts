@@ -55,7 +55,7 @@ async function bootstrap() {
   });
 
   const document = SwaggerModule.createDocument(app, config, {
-    include: [UsersModule, TenantsModule, PortfoliosModule],
+    include: [AppModule, UsersModule, TenantsModule, PortfoliosModule],
   });
   // move below?
   writeFileSync('./openapi.json', JSON.stringify(document));
