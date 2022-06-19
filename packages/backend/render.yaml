@@ -1,0 +1,27 @@
+services:
+  # Nestjs server
+  - type: web
+    name: nestjs-dev
+    env: node
+    repo: https://github.com/aqaratech/aqtech.git
+    region: frankfurt
+    plan: Free
+    branch: initNestjs
+    dockerCommand: ./webdis.sh # optional (defaults to Dockerfile command)
+    numInstances: 1
+    maxInstances: 1
+    buildCommand: cd packages/backend && npm run build
+    startCommand: cd packages/backend && npm run start:prod
+    # healthCheckPath: /
+    envVars:
+      - key: DB_URL
+        fromDatabase:
+          name: elephant
+          property: connectionString
+
+databases:
+  - name: elephant
+    region: frankfurt
+    plan: Free
+    databaseName: postgres # optional (Render may add a suffix)
+    user: postgres # optional
