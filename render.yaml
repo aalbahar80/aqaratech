@@ -7,7 +7,6 @@ services:
     region: frankfurt
     plan: Free
     branch: initNestjs
-    dockerCommand: ./webdis.sh # optional (defaults to Dockerfile command)
     # numInstances: 1
     # maxInstances: 1
     buildCommand: cd packages/backend && npm run build
@@ -23,5 +22,5 @@ databases:
   - name: elephant
     region: frankfurt
     plan: Free
-    databaseName: postgres # optional (Render may add a suffix)
-    user: postgres # optional
+    # databaseName: postgres # optional (Render may add a suffix)
+    # user: postgres # optional
