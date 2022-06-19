@@ -24,6 +24,23 @@ async function bootstrap() {
     .setDescription('The Aqratech API description')
     .setVersion('1.0')
     .addTag('aqaratech')
+    .addOAuth2(
+      {
+        type: 'oauth2',
+        scheme: 'bearer',
+        flows: {
+          authorizationCode: {
+            authorizationUrl: 'https://dev-eehvhdp2.eu.auth0.com/authorize',
+            tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
+            scopes: {
+              'openid profile email': 'default scope',
+              openid: true,
+            },
+          },
+        },
+      },
+      'oauth-swagger',
+    )
     .build();
 
   Sentry.init({

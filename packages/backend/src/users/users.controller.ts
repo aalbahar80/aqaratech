@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import {
   ApiCreatedResponse,
-  ApiNoContentResponse,
   ApiNotFoundResponse,
+  ApiOAuth2,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -11,6 +11,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 
+@ApiOAuth2(['openid', 'profile', 'email'], 'oauth-swagger')
 @Controller('users')
 @ApiTags('users')
 export class UsersController {
