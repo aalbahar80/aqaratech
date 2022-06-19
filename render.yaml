@@ -17,6 +17,8 @@ services:
         fromDatabase:
           name: elephant
           property: connectionString
+      - key: PORT
+        value: 3002
 
 databases:
   - name: elephant
