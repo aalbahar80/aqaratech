@@ -21,23 +21,25 @@ model User {
     email    String  @unique
     fullName String?
 
-    admins     Admin[]
-    portfolios Portfolio[]
-    tenants    Tenant[]
+    roles Role[]
 }
 
-model Admin {
+model Role {
     id        String   @id @default(uuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    isSuper Boolean @default(false)
+    permissions Json?
 
     userId String?
     user   User?   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
-    organizationId String
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+    organizationId String?
+    organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+    portfolioId    String?
+    portfolio      Portfolio?    @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+    tenantId       String?
+    tenant         Tenant?       @relation(fields: [tenantId], references: [id], onDelete: Restrict)
 }
 
 model Tenant {
@@ -63,7 +65,7 @@ model Tenant {
     organizationId String
     organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
-    users User[]
+    roles Role[]
 }
 
 model Portfolio {
@@ -82,7 +84,7 @@ model Portfolio {
     maintenanceOrders MaintenanceOrder[]
     properties        Property[]
 
-    users User[]
+    roles Role[]
 
     organizationId String
     organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
@@ -96,7 +98,7 @@ model Organization {
     fullName  String  @default("")
     shortName String?
 
-    admins     Admin[]
+    roles      Role[]
     portfolios Portfolio[]
     tenants    Tenant[]
 

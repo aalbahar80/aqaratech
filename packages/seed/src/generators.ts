@@ -47,7 +47,7 @@ export const fakeUser = () => {
 	};
 };
 
-export const fakeAdmin = ({
+export const fakeRole = ({
 	userId,
 	orgId,
 }: {
@@ -59,7 +59,7 @@ export const fakeAdmin = ({
 	updatedAt: updatedAt(),
 	organizationId: orgId,
 	userId,
-	isSuper: true,
+	// permissions: [],
 });
 
 export const fakeOrganization = () => ({

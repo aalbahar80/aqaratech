@@ -1,17 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { User } from '@prisma/client';
-import { IsUUID } from 'class-validator';
+import { Prisma, Role, User } from '@prisma/client';
 
-class Role {
-  @ApiProperty({ example: '73306383-93a8-4b61-a2f6-58866dcc2ae9' })
-  @IsUUID()
-  organizationId: string;
-}
-
-class Roles {
-  admins: Role[];
-  portfolios: Role[];
-  tenants: Role[];
+class RoleDto implements Role {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  permissions: Prisma.JsonValue;
+  userId: string | null;
+  organizationId: string | null;
+  portfolioId: string | null;
+  tenantId: string | null;
 }
 
 export class UserDto implements User {
@@ -20,5 +17,5 @@ export class UserDto implements User {
   updatedAt: Date;
   email: string;
   fullName: string | null;
-  roles: Roles;
+  roles: RoleDto[];
 }
