@@ -45,9 +45,10 @@ export class TenantsController {
   @Get()
   @ApiPaginatedResponse(TenantDto)
   findAll(
+    @Request() req: Request & { user: UserDto },
     @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    return this.tenantsService.findAll(tenantPageOptionsDto);
+    return this.tenantsService.findAll(tenantPageOptionsDto, req.user);
   }
 
   @Get(':id')

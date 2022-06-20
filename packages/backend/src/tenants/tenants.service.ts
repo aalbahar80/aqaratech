@@ -4,12 +4,18 @@ import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
 
+import { accessibleBy } from '@casl/prisma';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class TenantsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private caslAbilityFactory: CaslAbilityFactory,
+  ) {}
 
   create(createTenantDto: CreateTenantDto) {
     return this.prisma.tenant.create({
@@ -19,17 +25,21 @@ export class TenantsService {
 
   async findAll(
     tenantPageOptionsDto: TenantPageOptionsDto,
+    user: UserDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    // const ability = this.caslAbilityFactory.createForUser(user);
     const { page, take } = tenantPageOptionsDto;
 
-    // TODO authz for both queries
+    // get req.user from request
+    const ability = this.caslAbilityFactory.defineAbility(user);
     const [results, itemCount] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
+        where: accessibleBy(ability).Tenant,
       }),
-      this.prisma.tenant.count(),
+      this.prisma.tenant.count({
+        where: accessibleBy(ability).Tenant,
+      }),
     ]);
 
     const meta = new PaginatedDto({
