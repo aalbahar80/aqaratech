@@ -34,6 +34,8 @@ export class TenantsController {
   constructor(private readonly tenantsService: TenantsService) {}
 
   @Post()
+  @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
+  @UseGuards(AbilitiesGuard)
   @ApiCreatedResponse({ type: TenantDto })
   create(@Body() createTenantDto: CreateTenantDto) {
     console.log({ createTenantDto }, 'tenants.controller.ts ~ 23');
@@ -41,6 +43,8 @@ export class TenantsController {
   }
 
   @Get()
+  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @UseGuards(AbilitiesGuard)
   @ApiPaginatedResponse(TenantDto)
   findAll(
     @User() user: UserDto,
@@ -50,12 +54,16 @@ export class TenantsController {
   }
 
   @Get(':id')
+  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @UseGuards(AbilitiesGuard)
   @ApiOkResponse({ type: TenantDto })
   async findOne(@Param('id') id: string, @User() user: UserDto) {
     return this.tenantsService.findOne(id, user);
   }
 
   @Patch(':id')
+  @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
+  @UseGuards(AbilitiesGuard)
   @ApiOkResponse({ type: TenantDto })
   update(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantDto) {
     return this.tenantsService.update(id, updateTenantDto);
@@ -66,8 +74,6 @@ export class TenantsController {
   @UseGuards(AbilitiesGuard)
   @ApiOkResponse({ type: TenantDto })
   remove(@Param('id') id: string, @User() user: UserDto) {
-    // console.log({ user }, 'tenants.controller.ts ~ 79');
-    console.log('granted access to delllete tenant ' + id);
     return this.tenantsService.remove({ id, user });
   }
 }
