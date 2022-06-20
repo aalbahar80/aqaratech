@@ -4,6 +4,9 @@ import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { TRequest } from 'src/types/request.type';
 
+/**
+ * Decorator to check authz permissions. Consumes metadata from `@CheckAbilities`.
+ */
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
   constructor(
