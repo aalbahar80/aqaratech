@@ -25,8 +25,6 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
-    console.log(user.roles);
-
     // opaque id type would be useful here
     const orgs: string[] = [];
     const portfolios: string[] = [];
@@ -48,14 +46,56 @@ export class CaslAbilityFactory {
     console.log({ portfolios });
     console.log({ tenants });
 
-    // Role: Organization
-    // org users can manage tenants in their org
+    // ### Role: Organization###
+
+    // can manage tenants in their org
     can(Action.Manage, ['Tenant'], {
       organizationId: { in: orgs },
     });
 
-    // Role: Portfolio
-    // users can can view tenants who have leases in their properties
+    can(Action.Manage, ['Portfolio'], {
+      organizationId: { in: orgs },
+    });
+
+    can(Action.Manage, ['Expense'], {
+      OR: [
+        { portfolio: { organizationId: { in: orgs } } },
+        { property: { portfolio: { organizationId: { in: orgs } } } },
+        { unit: { property: { portfolio: { organizationId: { in: orgs } } } } },
+      ],
+    });
+
+    can(Action.Manage, ['Lease'], {
+      unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+    });
+
+    can(Action.Manage, ['Property'], {
+      portfolio: { organizationId: { in: orgs } },
+    });
+
+    can(Action.Manage, ['MaintenanceOrder'], {
+      OR: [
+        { portfolio: { organizationId: { in: orgs } } },
+        { property: { portfolio: { organizationId: { in: orgs } } } },
+        { unit: { property: { portfolio: { organizationId: { in: orgs } } } } },
+        { tenant: { organizationId: { in: orgs } } },
+        // {expenses: {some: {}}}
+      ],
+    });
+
+    can(Action.Manage, ['Transaction'], {
+      lease: {
+        unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+      },
+    });
+
+    can(Action.Manage, ['Unit'], {
+      property: { portfolio: { organizationId: { in: orgs } } },
+    });
+
+    // ### Role: Portfolio ###
+
+    // can view tenants who have leases in their properties
     can(Action.Read, 'Tenant', {
       leases: {
         some: {
@@ -68,11 +108,72 @@ export class CaslAbilityFactory {
       },
     });
 
-    // Role: Tenant
-    // users can view all their tenant profiles
+    can(Action.Read, ['Expense'], {
+      OR: [
+        { portfolioId: { in: portfolios } },
+        { property: { portfolioId: { in: portfolios } } },
+        { unit: { property: { portfolioId: { in: portfolios } } } },
+      ],
+    });
+
+    can(Action.Read, ['MaintenanceOrder'], {
+      OR: [
+        { portfolioId: { in: portfolios } },
+        { property: { portfolioId: { in: portfolios } } },
+        { unit: { property: { portfolioId: { in: portfolios } } } },
+      ],
+    });
+
+    can(Action.Read, ['Lease'], {
+      unit: { property: { portfolioId: { in: portfolios } } },
+    });
+
+    can(Action.Read, ['Property'], {
+      portfolioId: { in: portfolios },
+    });
+
+    can(Action.Read, ['Transaction'], {
+      lease: {
+        unit: { property: { portfolioId: { in: portfolios } } },
+      },
+    });
+
+    can(Action.Read, ['Unit'], {
+      property: { portfolioId: { in: portfolios } },
+    });
+
+    // ### Role: Tenant###
+
+    // can view all their tenant profiles
     can(Action.Read, 'Tenant', {
       id: { in: tenants },
     });
+
+    // can view all their leases
+    can(Action.Read, ['Lease'], {
+      tenantId: { in: tenants },
+    });
+
+    can(Action.Read, ['MaintenanceOrder'], {
+      tenantId: { in: tenants },
+    });
+
+    // TODO some fields should be public
+    can(Action.Read, ['Transaction'], {
+      lease: {
+        tenantId: { in: tenants },
+      },
+    });
+
+    // only some fields
+    // can(Action.Read, ['Property'], {
+    //   units: { some: { leases: { some: { tenantId: { in: tenants } } } } },
+    // });
+
+    // only some fields
+    // can(Action.Read, ['Unit'], {
+    //   leases: { some: { tenantId: { in: tenants } } },
+    // });
 
     // users can
     return build();
