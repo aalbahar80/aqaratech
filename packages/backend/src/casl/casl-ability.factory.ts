@@ -47,9 +47,36 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
-    can(Action.Read, 'Tenant', { residencyNum: { equals: '1' } }).because(
-      "he's the chosen one",
-    );
+    console.log(user.roles);
+
+    // opaque id type would be useful here
+    const orgs: string[] = [];
+    const portfolios: string[] = [];
+    const tenants: string[] = [];
+
+    user.roles.forEach((role) => {
+      if (role.organizationId) {
+        orgs.push(role.organizationId);
+      }
+      if (role.portfolioId) {
+        portfolios.push(role.portfolioId);
+      }
+      if (role.tenantId) {
+        tenants.push(role.tenantId);
+      }
+    });
+
+    console.log({ orgs });
+    console.log({ portfolios });
+    console.log({ tenants });
+
+    // users can manage tenants in their org
+    can(Action.Manage, 'Tenant', {
+      organizationId: { in: orgs },
+    });
+    // can(Action.Read, 'Tenant', { residencyNum: { equals: '1' } }).because(
+    //   "he's the chosen one",
+    // );
     return build();
   }
 }
