@@ -53,7 +53,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
      * @Get('/profile')
      * getProfile(
      *   @Request()
-     *   req: Request & { user: UserDto },
+     *   req: TRequest,
      * ) {
      *   console.log(req.user);
      *   return req.user;
