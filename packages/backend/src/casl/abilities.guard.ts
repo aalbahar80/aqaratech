@@ -6,6 +6,14 @@ import { TRequest } from 'src/types/request.type';
 
 /**
  * Decorator to check authz permissions. Consumes metadata from `@CheckAbilities`.
+ * This decorator is used to check permissions for a specific action on an entity type,
+ * not an entity instance. This makes it useful for failing fast if a user is not authorized.
+ *
+ * For example, if a user is only allowed to read a `Unit` in his organization, we need to retrieve
+ * the `Unit` from the database, then check if it's in the user's organization.
+ *
+ * On the other hand, if a user does not have permission to read any `Unit`,
+ * we can just fail fast and return a 403 without needing to call the db.
  */
 @Injectable()
 export class AbilitiesGuard implements CanActivate {

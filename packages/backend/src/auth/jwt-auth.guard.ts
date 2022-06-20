@@ -3,6 +3,9 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 
+/**
+ * Decorator that verifies jwt token, and if it's valid, injects user into request.
+ */
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
