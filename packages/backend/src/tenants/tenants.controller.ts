@@ -1,4 +1,3 @@
-import { subject } from '@casl/ability';
 import {
   Body,
   Controller,
@@ -9,10 +8,8 @@ import {
   Post,
   Query,
   Request,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
@@ -30,10 +27,7 @@ import { TenantsService } from './tenants.service';
 @SwaggerAuth()
 @OrgHeaders()
 export class TenantsController {
-  constructor(
-    private readonly tenantsService: TenantsService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private readonly tenantsService: TenantsService) {}
 
   @Post()
   @ApiCreatedResponse({ type: TenantDto })
@@ -57,12 +51,7 @@ export class TenantsController {
     @Param('id') id: string,
     @Request() req: Request & { user: UserDto },
   ) {
-    const tenant = await this.tenantsService.findOne(id);
-    const ability = this.caslAbilityFactory.defineAbility(req.user);
-    if (ability.can(Action.Read, subject('Tenant', tenant))) {
-      return tenant;
-    }
-    throw new UnauthorizedException();
+    return this.tenantsService.findOne(id, req.user);
   }
 
   @Patch(':id')
