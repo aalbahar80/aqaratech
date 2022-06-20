@@ -7,7 +7,6 @@ import {
   Patch,
   Post,
   Query,
-  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
@@ -18,7 +17,8 @@ import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { OrgHeaders } from 'src/decorators/org-header.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
-import { TRequest } from 'src/types/request.type';
+import { User } from 'src/decorators/user.decorator';
+import { UserDto } from 'src/users/dto/user.dto';
 
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
@@ -43,16 +43,16 @@ export class TenantsController {
   @Get()
   @ApiPaginatedResponse(TenantDto)
   findAll(
-    @Request() req: TRequest,
+    @User() user: UserDto,
     @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    return this.tenantsService.findAll(tenantPageOptionsDto, req.user);
+    return this.tenantsService.findAll(tenantPageOptionsDto, user);
   }
 
   @Get(':id')
   @ApiOkResponse({ type: TenantDto })
-  async findOne(@Param('id') id: string, @Request() req: TRequest) {
-    return this.tenantsService.findOne(id, req.user);
+  async findOne(@Param('id') id: string, @User() user: UserDto) {
+    return this.tenantsService.findOne(id, user);
   }
 
   @Patch(':id')
@@ -65,7 +65,9 @@ export class TenantsController {
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @UseGuards(AbilitiesGuard)
   @ApiOkResponse({ type: TenantDto })
-  remove(@Param('id') id: string) {
-    return this.tenantsService.remove(id);
+  remove(@Param('id') id: string, @User() user: UserDto) {
+    // console.log({ user }, 'tenants.controller.ts ~ 79');
+    console.log('granted access to delllete tenant ' + id);
+    return this.tenantsService.remove({ id, user });
   }
 }
