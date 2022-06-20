@@ -9,6 +9,7 @@ import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
 
 // resources
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TenantsModule } from './tenants/tenants.module';
@@ -25,9 +26,6 @@ import { UsersModule } from './users/users.module';
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    // { provide: 'APP_GUARD', useClass: JwtAuthGuard }
-  ],
+  providers: [AppService, { provide: 'APP_GUARD', useClass: JwtAuthGuard }],
 })
 export class AppModule {}
