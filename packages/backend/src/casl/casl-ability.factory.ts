@@ -19,28 +19,6 @@ import {
 } from '@prisma/client';
 import { UserDto } from 'src/users/dto/user.dto';
 
-type AppAbility = PrismaAbility<
-  [
-    string,
-    Subjects<{
-      Expense: Expense;
-      ExpenseType: ExpenseType;
-      Lease: Lease;
-      MaintenanceOrder: MaintenanceOrder;
-      Organization: Organization;
-      Plan: Plan;
-      PlanInvoice: PlanInvoice;
-      Portfolio: Portfolio;
-      Property: Property;
-      Role: Role;
-      Tenant: Tenant;
-      Transaction: Transaction;
-      Unit: Unit;
-      User: User;
-    }>,
-  ]
->;
-
 @Injectable()
 export class CaslAbilityFactory {
   defineAbility(user: UserDto) {
@@ -70,16 +48,38 @@ export class CaslAbilityFactory {
     console.log({ portfolios });
     console.log({ tenants });
 
-    // users can manage tenants in their org
-    can(Action.Manage, 'Tenant', {
+    // Role: Organization
+    // org users can manage tenants in their org
+    can(Action.Manage, ['Tenant'], {
       organizationId: { in: orgs },
     });
-    // can(Action.Read, 'Tenant', { residencyNum: { equals: '1' } }).because(
-    //   "he's the chosen one",
-    // );
+
+    // Role: Portfolio
+    // users can can view tenants who have leases in their properties
+    can(Action.Read, 'Tenant', {
+      leases: {
+        some: {
+          unit: {
+            property: {
+              portfolioId: { in: portfolios },
+            },
+          },
+        },
+      },
+    });
+
+    // Role: Tenant
+    // users can view all their tenant profiles
+    can(Action.Read, 'Tenant', {
+      id: { in: tenants },
+    });
+
+    // users can
     return build();
   }
 }
+
+type AppAbility = PrismaAbility<[string, Subject]>;
 
 export enum Action {
   Manage = 'manage',
@@ -88,3 +88,20 @@ export enum Action {
   Update = 'update',
   Delete = 'delete',
 }
+
+export type Subject = Subjects<{
+  Expense: Expense;
+  ExpenseType: ExpenseType;
+  Lease: Lease;
+  MaintenanceOrder: MaintenanceOrder;
+  Organization: Organization;
+  Plan: Plan;
+  PlanInvoice: PlanInvoice;
+  Portfolio: Portfolio;
+  Property: Property;
+  Role: Role;
+  Tenant: Tenant;
+  Transaction: Transaction;
+  Unit: Unit;
+  User: User;
+}>;
