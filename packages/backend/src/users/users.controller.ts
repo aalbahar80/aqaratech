@@ -6,6 +6,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Public } from 'src/auth/public.decorator';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
@@ -32,6 +33,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Public() // TODO prod remove
   @Get('by-email')
   @ApiOkResponse({ type: UserDto })
   @ApiNotFoundResponse()
