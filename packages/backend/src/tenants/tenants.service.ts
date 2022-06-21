@@ -10,8 +10,7 @@ import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
-
-import * as FusePkg from 'fuse.js';
+import { search } from 'src/utils/search';
 
 @Injectable()
 export class TenantsService {
@@ -59,13 +58,9 @@ export class TenantsService {
     ]);
 
     if (q) {
-      type TFuse = typeof FusePkg['default'];
-      // type Config = ConstructorParameters<TFuse>['1'];
-      // const config: Config = {
-      type PartialConfig = Partial<TFuse['config']>;
-      const config: PartialConfig = {
-        shouldSort: true,
-        includeScore: true,
+      results = search({
+        data: results,
+        q,
         keys: [
           'fullName',
           'shortName',
@@ -78,11 +73,7 @@ export class TenantsService {
           'residencyNum',
           'residencyEnd',
         ],
-      };
-      const Fuse: TFuse = FusePkg as unknown as TFuse;
-      const fuse = new Fuse(results, config);
-      const searchResults = fuse.search(q);
-      results = searchResults.map(({ item }) => item);
+      });
     }
 
     const meta = new PaginatedDto({
