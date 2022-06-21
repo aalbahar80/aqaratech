@@ -34,10 +34,11 @@ export class TenantsController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
   @ApiCreatedResponse({ type: TenantDto })
-  create(@Body() createTenantDto: CreateTenantDto, @User() user: UserDto) {
-    // options for orgId:
-    // 1. grab from header
-    // 2. grab from req.body
+  create(
+    @Body() createTenantDto: CreateTenantDto,
+    @User() user: UserDto,
+  ): Promise<TenantDto> {
+    // TODO grab from header `x-role-id`
     return this.tenantsService.create({ createTenantDto, user });
   }
 
@@ -54,21 +55,24 @@ export class TenantsController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  async findOne(@Param('id') id: string, @User() user: UserDto) {
+  findOne(@Param('id') id: string, @User() user: UserDto): Promise<TenantDto> {
     return this.tenantsService.findOne(id, user);
   }
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  update(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTenantDto: UpdateTenantDto,
+  ): Promise<TenantDto> {
     return this.tenantsService.update(id, updateTenantDto);
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  remove(@Param('id') id: string, @User() user: UserDto) {
+  remove(@Param('id') id: string, @User() user: UserDto): Promise<TenantDto> {
     return this.tenantsService.remove({ id, user });
   }
 }
