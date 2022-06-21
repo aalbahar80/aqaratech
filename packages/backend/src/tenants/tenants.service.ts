@@ -33,14 +33,18 @@ export class TenantsService {
     }
   }
 
-  async findAll(
-    tenantPageOptionsDto: TenantPageOptionsDto,
-    user: UserDto,
-  ): Promise<PaginatedMetaDto<TenantDto>> {
+  async findAll({
+    tenantPageOptionsDto,
+    user,
+  }: {
+    tenantPageOptionsDto: TenantPageOptionsDto;
+    user: UserDto;
+  }): Promise<PaginatedMetaDto<TenantDto>> {
     const { page, take } = tenantPageOptionsDto;
 
-    // get req.user from request
     const ability = this.caslAbilityFactory.defineAbility(user);
+    // TODO test this
+    // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     const [results, itemCount] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
@@ -60,23 +64,46 @@ export class TenantsService {
     return { meta, results };
   }
 
-  async findOne(id: string, user: UserDto) {
+  async findOne({ id, user }: { id: string; user: UserDto }) {
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    const tenant = await this.prisma.tenant.findFirst({
+      where: {
+        AND: [accessibleBy(ability).Tenant, { id }],
+      },
+    });
+    return tenant;
+  }
+
+  async update({
+    id,
+    updateTenantDto,
+    user,
+  }: {
+    id: string;
+    updateTenantDto: UpdateTenantDto;
+    user: UserDto;
+  }) {
+    const tenant = await this.prisma.tenant.findUnique({ where: { id } });
+
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    if (ability.can(Action.Update, subject('Tenant', tenant))) {
+      return this.prisma.tenant.update({
+        where: { id },
+        data: updateTenantDto,
+      });
+    } else {
+      throw new ForbiddenException();
+    }
+  }
+
+  async remove({ id, user }: { id: string; user: UserDto }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });
     const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Read, subject('Tenant', tenant))) {
-      return tenant;
+
+    if (ability.can(Action.Delete, subject('Tenant', tenant))) {
+      return this.prisma.tenant.delete({ where: { id } });
+    } else {
+      throw new ForbiddenException();
     }
-    throw new UnauthorizedException();
-  }
-
-  update(id: string, updateTenantDto: UpdateTenantDto) {
-    return this.prisma.tenant.update({
-      where: { id },
-      data: updateTenantDto,
-    });
-  }
-
-  remove(id: string) {
-    return this.prisma.tenant.delete({ where: { id } });
   }
 }

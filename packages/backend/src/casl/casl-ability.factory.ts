@@ -23,7 +23,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 export class CaslAbilityFactory {
   defineAbility(user: UserDto) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
-    const { can, cannot, build } = new AbilityBuilder(AppAbility);
+    const { can, build } = new AbilityBuilder(AppAbility);
 
     // opaque id type would be useful here
     const orgs: string[] = [];
@@ -205,19 +205,20 @@ export enum Action {
   Delete = 'delete',
 }
 
+type P<T> = Partial<T>;
 export type Subject = Subjects<{
-  Expense: Expense;
-  ExpenseType: ExpenseType;
-  Lease: Lease;
-  MaintenanceOrder: MaintenanceOrder;
-  Organization: Organization;
-  Plan: Plan;
-  PlanInvoice: PlanInvoice;
-  Portfolio: Portfolio;
-  Property: Property;
-  Role: Role;
-  Tenant: Tenant;
-  Transaction: Transaction;
-  Unit: Unit;
-  User: User;
+  Expense: P<Expense>;
+  ExpenseType: P<ExpenseType>;
+  Lease: P<Lease>;
+  MaintenanceOrder: P<MaintenanceOrder>;
+  Organization: P<Organization>;
+  Plan: P<Plan>;
+  PlanInvoice: P<PlanInvoice>;
+  Portfolio: P<Portfolio>;
+  Property: P<Property>;
+  Role: P<Role>;
+  Tenant: Partial<Tenant>;
+  Transaction: P<Transaction>;
+  Unit: P<Unit>;
+  User: P<User>;
 }>;

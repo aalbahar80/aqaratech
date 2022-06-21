@@ -49,14 +49,14 @@ export class TenantsController {
     @User() user: UserDto,
     @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    return this.tenantsService.findAll(tenantPageOptionsDto, user);
+    return this.tenantsService.findAll({ tenantPageOptionsDto, user });
   }
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
   findOne(@Param('id') id: string, @User() user: UserDto): Promise<TenantDto> {
-    return this.tenantsService.findOne(id, user);
+    return this.tenantsService.findOne({ id, user });
   }
 
   @Patch(':id')
@@ -65,8 +65,9 @@ export class TenantsController {
   update(
     @Param('id') id: string,
     @Body() updateTenantDto: UpdateTenantDto,
+    @User() user: UserDto,
   ): Promise<TenantDto> {
-    return this.tenantsService.update(id, updateTenantDto);
+    return this.tenantsService.update({ id, updateTenantDto, user });
   }
 
   @Delete(':id')
