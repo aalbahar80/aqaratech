@@ -14,7 +14,6 @@ import { UserDto } from 'src/users/dto/user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 
-@ApiOAuth2(['openid', 'profile', 'email'], 'oauth-swagger')
 @Controller('users')
 @ApiTags('users')
 @SwaggerAuth()
