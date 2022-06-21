@@ -17,7 +17,7 @@ export const search = <T>({
     // const config: PartialConfig = {
     shouldSort: true,
     includeScore: true,
-    includeMatches: true,
+    includeMatches: true, // TODO: use this to highlight matches
     //@ts-ignore
     keys,
   };
