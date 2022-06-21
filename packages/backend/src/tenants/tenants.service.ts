@@ -11,6 +11,8 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 
+import * as FusePkg from 'fuse.js';
+
 @Injectable()
 export class TenantsService {
   constructor(
@@ -40,12 +42,12 @@ export class TenantsService {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: UserDto;
   }): Promise<PaginatedMetaDto<TenantDto>> {
-    const { page, take } = tenantPageOptionsDto;
+    const { page, take, q } = tenantPageOptionsDto;
 
     const ability = this.caslAbilityFactory.defineAbility(user);
     // TODO test this
     // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
-    const [results, itemCount] = await Promise.all([
+    let [results, itemCount] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
@@ -55,6 +57,33 @@ export class TenantsService {
         where: accessibleBy(ability).Tenant,
       }),
     ]);
+
+    if (q) {
+      type TFuse = typeof FusePkg['default'];
+      // type Config = ConstructorParameters<TFuse>['1'];
+      // const config: Config = {
+      type PartialConfig = Partial<TFuse['config']>;
+      const config: PartialConfig = {
+        shouldSort: true,
+        includeScore: true,
+        keys: [
+          'fullName',
+          'shortName',
+          'civilid',
+          'dob',
+          'phone',
+          'email',
+          'passportNum',
+          'nationality',
+          'residencyNum',
+          'residencyEnd',
+        ],
+      };
+      const Fuse: TFuse = FusePkg as unknown as TFuse;
+      const fuse = new Fuse(results, config);
+      const searchResults = fuse.search(q);
+      results = searchResults.map(({ item }) => item);
+    }
 
     const meta = new PaginatedDto({
       itemCount,
