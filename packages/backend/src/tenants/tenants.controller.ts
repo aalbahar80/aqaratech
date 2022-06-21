@@ -34,9 +34,11 @@ export class TenantsController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
   @ApiCreatedResponse({ type: TenantDto })
-  create(@Body() createTenantDto: CreateTenantDto) {
-    console.log({ createTenantDto }, 'tenants.controller.ts ~ 23');
-    return this.tenantsService.create(createTenantDto);
+  create(@Body() createTenantDto: CreateTenantDto, @User() user: UserDto) {
+    // options for orgId:
+    // 1. grab from header
+    // 2. grab from req.body
+    return this.tenantsService.create({ createTenantDto, user });
   }
 
   @Get()

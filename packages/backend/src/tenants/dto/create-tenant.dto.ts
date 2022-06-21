@@ -4,6 +4,7 @@ import {
   IsISO31661Alpha3,
   IsISO8601,
   IsPhoneNumber,
+  IsUUID,
 } from 'class-validator';
 
 export class CreateTenantDto {
@@ -41,4 +42,9 @@ export class CreateTenantDto {
   @ApiPropertyOptional()
   @IsISO8601()
   residencyEnd?: Date;
+
+  // Consider moving to header/extracting from x-role-id
+  @ApiProperty({ example: '1859ea1b-a5bc-4961-a846-86347f18a4ab' })
+  @IsUUID()
+  organizationId: string;
 }

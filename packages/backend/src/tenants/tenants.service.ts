@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateTenantDto } from './dto/create-tenant.dto';
@@ -18,10 +18,19 @@ export class TenantsService {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
-  create(createTenantDto: CreateTenantDto) {
-    return this.prisma.tenant.create({
-      data: { ...createTenantDto, organizationId: 'implement' },
-    });
+  create({
+    createTenantDto,
+    user,
+  }: {
+    createTenantDto: CreateTenantDto;
+    user: UserDto;
+  }) {
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    if (ability.can(Action.Create, subject('Tenant', createTenantDto))) {
+      return this.prisma.tenant.create({ data: createTenantDto });
+    } else {
+      throw new ForbiddenException();
+    }
   }
 
   async findAll(
