@@ -35,8 +35,8 @@ export class TenantsController {
   @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
   @ApiCreatedResponse({ type: TenantDto })
   create(
-    @Body() createTenantDto: CreateTenantDto,
     @User() user: UserDto,
+    @Body() createTenantDto: CreateTenantDto,
   ): Promise<TenantDto> {
     // TODO grab from header `x-role-id`
     return this.tenantsService.create({ createTenantDto, user });
@@ -55,7 +55,7 @@ export class TenantsController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  findOne(@Param('id') id: string, @User() user: UserDto): Promise<TenantDto> {
+  findOne(@User() user: UserDto, @Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.findOne({ id, user });
   }
 
@@ -63,9 +63,9 @@ export class TenantsController {
   @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
   update(
+    @User() user: UserDto,
     @Param('id') id: string,
     @Body() updateTenantDto: UpdateTenantDto,
-    @User() user: UserDto,
   ): Promise<TenantDto> {
     return this.tenantsService.update({ id, updateTenantDto, user });
   }
@@ -73,7 +73,7 @@ export class TenantsController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  remove(@Param('id') id: string, @User() user: UserDto): Promise<TenantDto> {
+  remove(@User() user: UserDto, @Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.remove({ id, user });
   }
 }
