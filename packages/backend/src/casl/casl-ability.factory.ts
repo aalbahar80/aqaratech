@@ -42,9 +42,9 @@ export class CaslAbilityFactory {
       }
     });
 
-    console.log({ orgs });
-    console.log({ portfolios });
-    console.log({ tenants });
+    // console.log({ orgs });
+    // console.log({ portfolios });
+    // console.log({ tenants });
 
     // ### Role: Organization###
     if (orgs.length > 0) {
