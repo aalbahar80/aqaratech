@@ -17,7 +17,7 @@ export class CreateTenantDto {
   @IsEmail()
   email?: string;
 
-  @ApiPropertyOptional({ example: '+96599212976' })
+  @ApiPropertyOptional({ example: '+96591234567' })
   @IsPhoneNumber()
   phone?: string;
 
