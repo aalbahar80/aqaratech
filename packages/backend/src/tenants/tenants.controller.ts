@@ -50,14 +50,12 @@ export class TenantsController {
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
-  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiPaginatedResponse(TenantDto)
   findAll(
     @User() user: UserDto,
-    @Org() orgId: string,
     @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    return this.tenantsService.findAll({ tenantPageOptionsDto, user, orgId });
+    return this.tenantsService.findAll({ tenantPageOptionsDto, user });
   }
 
   @Get(':id')

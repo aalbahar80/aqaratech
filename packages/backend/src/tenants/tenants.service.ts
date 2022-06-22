@@ -41,11 +41,9 @@ export class TenantsService {
   async findAll({
     tenantPageOptionsDto,
     user,
-    orgId,
   }: {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: UserDto;
-    orgId: string;
   }): Promise<PaginatedMetaDto<TenantDto>> {
     const { page, take, q } = tenantPageOptionsDto;
 
@@ -56,14 +54,10 @@ export class TenantsService {
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
-        where: {
-          AND: [accessibleBy(ability).Tenant, { organizationId: orgId }],
-        },
+        where: accessibleBy(ability).Tenant,
       }),
       this.prisma.tenant.count({
-        where: {
-          AND: [accessibleBy(ability).Tenant, { organizationId: orgId }],
-        },
+        where: accessibleBy(ability).Tenant,
       }),
     ]);
 
