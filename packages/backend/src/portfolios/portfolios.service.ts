@@ -79,12 +79,12 @@ export class PortfoliosService {
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
     const ability = this.caslAbilityFactory.defineAbility(user);
-    const portfolio = await this.prisma.portfolio.findFirst({
+    const data = await this.prisma.portfolio.findFirst({
       where: {
         AND: [accessibleBy(ability).Portfolio, { id }],
       },
     });
-    return portfolio;
+    return data;
   }
 
   async update({
@@ -96,10 +96,10 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: UserDto;
   }) {
-    const portfolio = await this.prisma.portfolio.findUnique({ where: { id } });
+    const data = await this.prisma.portfolio.findUnique({ where: { id } });
 
     const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Update, subject('Portfolio', portfolio))) {
+    if (ability.can(Action.Update, subject('Portfolio', data))) {
       return this.prisma.portfolio.update({
         where: { id },
         data: updatePortfolioDto,
@@ -110,10 +110,10 @@ export class PortfoliosService {
   }
 
   async remove({ id, user }: { id: string; user: UserDto }) {
-    const portfolio = await this.prisma.portfolio.findUnique({ where: { id } });
+    const data = await this.prisma.portfolio.findUnique({ where: { id } });
 
     const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Delete, subject('Portfolio', portfolio))) {
+    if (ability.can(Action.Delete, subject('Portfolio', data))) {
       return this.prisma.portfolio.delete({ where: { id } });
     } else {
       throw new ForbiddenException();

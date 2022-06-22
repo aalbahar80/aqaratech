@@ -88,12 +88,12 @@ export class TenantsService {
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
     const ability = this.caslAbilityFactory.defineAbility(user);
-    const tenant = await this.prisma.tenant.findFirst({
+    const data = await this.prisma.tenant.findFirst({
       where: {
         AND: [accessibleBy(ability).Tenant, { id }],
       },
     });
-    return tenant;
+    return data;
   }
 
   async update({
@@ -105,12 +105,12 @@ export class TenantsService {
     updateTenantDto: UpdateTenantDto;
     user: UserDto;
   }) {
-    const tenant = await this.prisma.tenant.findUnique({ where: { id } });
+    const data = await this.prisma.tenant.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Update,
-      subject('Tenant', tenant),
+      subject('Tenant', data),
     );
 
     return this.prisma.tenant.update({
@@ -120,12 +120,12 @@ export class TenantsService {
   }
 
   async remove({ id, user }: { id: string; user: UserDto }) {
-    const tenant = await this.prisma.tenant.findUnique({ where: { id } });
+    const data = await this.prisma.tenant.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Delete,
-      subject('Tenant', tenant),
+      subject('Tenant', data),
     );
 
     return this.prisma.tenant.delete({ where: { id } });
