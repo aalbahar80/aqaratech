@@ -12,7 +12,6 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
 import { UserDto } from 'src/users/dto/user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -24,7 +23,7 @@ export class UsersController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'User' })
   @ApiCreatedResponse({ type: UserDto })
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: UserDto) {
     return this.usersService.create(createUserDto);
   }
 

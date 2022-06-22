@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/swagger';
 import { Prisma, Role, User } from '@prisma/client';
 
 class RoleDto implements Role {
@@ -19,3 +20,5 @@ export class UserDto implements User {
   fullName: string | null;
   roles: RoleDto[];
 }
+
+export class UpdateUserDto extends PartialType(UserDto) {}
