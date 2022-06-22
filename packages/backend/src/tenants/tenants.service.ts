@@ -118,8 +118,8 @@ export class TenantsService {
 
   async remove({ id, user }: { id: string; user: UserDto }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });
-    const ability = this.caslAbilityFactory.defineAbility(user);
 
+    const ability = this.caslAbilityFactory.defineAbility(user);
     if (ability.can(Action.Delete, subject('Tenant', tenant))) {
       return this.prisma.tenant.delete({ where: { id } });
     } else {
