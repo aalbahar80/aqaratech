@@ -16,11 +16,11 @@ async function bootstrap() {
     new ValidationPipe({
       transform: true,
       skipNullProperties: true,
-      enableDebugMessages: true,
       // forbidUnknownValues: true,
       forbidNonWhitelisted: true,
       whitelist: true,
       validateCustomDecorators: true,
+      enableDebugMessages: true, // TODO prod remove
       //  disableErrorMessages: true, // TODO prod only
     }),
   );
