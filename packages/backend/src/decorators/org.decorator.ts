@@ -1,4 +1,8 @@
-import { createParamDecorator, ExecutionContext, Header } from '@nestjs/common';
+import {
+  createParamDecorator,
+  ExecutionContext,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { TRequest } from 'src/types/request.type';
 
@@ -12,10 +16,19 @@ export const Org = createParamDecorator<string>(
     const request = ctx.switchToHttp().getRequest<TRequest>();
     const roles = request.user!.roles; // TODO ensure user exists at this point
     const currentRoleId = request.get(ROLE_HEADER_NAME);
+    let orgId;
 
-    const orgId = roles.find(
-      (role) => role.id === currentRoleId,
-    )?.organizationId;
+    if (currentRoleId) {
+      orgId = roles.find((role) => role.id === currentRoleId)?.organizationId;
+    } else {
+      // TODO: consider getting from the user's default role in settings
+
+      // get the first role with a non-null organizationId
+      orgId = roles.find((role) => role.organizationId)?.organizationId;
+    }
+    if (!orgId) {
+      throw new InternalServerErrorException('No organizationId found');
+    }
     return orgId;
   },
 );
