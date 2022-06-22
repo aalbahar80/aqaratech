@@ -26,8 +26,6 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
-import { CreateTenantDto } from './dto/create-tenant.dto';
-import { UpdateTenantDto } from './dto/update-tenant.dto';
 import { TenantsService } from './tenants.service';
 
 @Controller('tenants')
@@ -43,7 +41,7 @@ export class TenantsController {
   create(
     @User() user: UserDto,
     @Org() orgId: string,
-    @Body() createTenantDto: CreateTenantDto,
+    @Body() createTenantDto: TenantDto,
   ): Promise<TenantDto> {
     return this.tenantsService.create({ createTenantDto, user, orgId });
   }
@@ -71,7 +69,7 @@ export class TenantsController {
   update(
     @User() user: UserDto,
     @Param('id') id: string,
-    @Body() updateTenantDto: UpdateTenantDto,
+    @Body() updateTenantDto: TenantDto,
   ): Promise<TenantDto> {
     return this.tenantsService.update({ id, updateTenantDto, user });
   }

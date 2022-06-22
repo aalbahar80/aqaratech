@@ -1,14 +1,11 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
-import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
-import { CreateTenantDto } from './dto/create-tenant.dto';
-import { UpdateTenantDto } from './dto/update-tenant.dto';
-
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
@@ -24,7 +21,7 @@ export class TenantsService {
     user,
     orgId,
   }: {
-    createTenantDto: CreateTenantDto;
+    createTenantDto: TenantDto;
     user: UserDto;
     orgId: string;
   }) {
@@ -104,7 +101,7 @@ export class TenantsService {
     user,
   }: {
     id: string;
-    updateTenantDto: UpdateTenantDto;
+    updateTenantDto: TenantDto;
     user: UserDto;
   }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });

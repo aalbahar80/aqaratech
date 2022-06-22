@@ -1,4 +1,8 @@
-import { ApiHideProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  ApiHideProperty,
+  ApiPropertyOptional,
+  PartialType,
+} from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
   IsEmail,
@@ -57,3 +61,5 @@ export class TenantDto extends AbstractDto implements Tenant {
   @ApiHideProperty()
   contactMethod: string | null = null;
 }
+
+export class UpdateTenantDto extends PartialType(TenantDto) {}
