@@ -1,4 +1,9 @@
-import { ApiHideProperty, ApiProperty, PartialType } from '@nestjs/swagger';
+import {
+  ApiHideProperty,
+  ApiProperty,
+  ApiPropertyOptional,
+  PartialType,
+} from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
 import {
   IsEmail,
@@ -24,18 +29,23 @@ export class PortfolioDto implements Portfolio {
   @Length(1, 255)
   fullName: string;
 
+  @ApiPropertyOptional()
   @IsString()
   shortName: string | null = null;
 
+  @ApiPropertyOptional()
   @IsString()
   civilid: string | null = null;
 
+  @ApiPropertyOptional()
   @IsPhoneNumber()
   phone: string | null = null;
 
+  @ApiPropertyOptional()
   @IsEmail()
   email: string | null = null;
 
+  @ApiPropertyOptional()
   @IsISO8601()
   dob: Date | null = null;
 }
