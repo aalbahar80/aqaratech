@@ -1,10 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Prisma, Role, User } from '@prisma/client';
+import { IsEmail, IsString } from 'class-validator';
+import { AbstractDto } from 'src/common/dto/abstract.dto';
 
-class RoleDto implements Role {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
+class RoleDto extends AbstractDto implements Role {
   permissions: Prisma.JsonValue;
   userId: string | null;
   organizationId: string | null;
@@ -12,12 +11,14 @@ class RoleDto implements Role {
   tenantId: string | null;
 }
 
-export class UserDto implements User {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
+export class UserDto extends AbstractDto implements User {
+  @IsEmail()
   email: string;
-  fullName: string | null;
+
+  @ApiPropertyOptional()
+  @IsString()
+  fullName: string | null = null;
+
   roles: RoleDto[];
 }
 
