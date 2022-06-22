@@ -3,12 +3,13 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { OrgHeaders } from 'src/decorators/org-header.decorator';
+import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
@@ -18,17 +19,19 @@ import { PortfoliosService } from './portfolios.service';
 @Controller('portfolios')
 @ApiTags('portfolios')
 @SwaggerAuth()
-@OrgHeaders()
 export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
   @Post()
-  create(@Body() createPortfolioDto: CreatePortfolioDto) {
+  create(
+    @Headers(ROLE_HEADER_NAME) roleId: string,
+    @Body() createPortfolioDto: CreatePortfolioDto,
+  ) {
     return this.portfoliosService.create(createPortfolioDto);
   }
 
   @Get()
-  findAll() {
+  findAll(@Headers(ROLE_HEADER_NAME) roleId: string) {
     return this.portfoliosService.findAll();
   }
 
