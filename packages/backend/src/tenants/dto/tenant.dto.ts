@@ -59,7 +59,7 @@ export class TenantDto extends AbstractDto implements Tenant {
 
   // TODO remove
   @ApiHideProperty()
-  contactMethod: string | null = null;
+  contactMethod: string | null;
 }
 
 export class UpdateTenantDto extends PartialType(TenantDto) {}
