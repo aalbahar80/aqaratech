@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { expenseTypes } from "../../site/src/lib/config/constants.js";
+import { expenseTypes } from "./constants.js";
 import {
 	testOrgId,
 	// testPortfolioEmail,
