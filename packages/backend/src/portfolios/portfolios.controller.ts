@@ -3,14 +3,28 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiHeader,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/casl-ability.factory';
+import { PageOptionsDto } from 'src/common/dto/page-options.dto';
+import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
+import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
+import { User } from 'src/decorators/user.decorator';
+import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
+import { UserDto } from 'src/users/dto/user.dto';
 
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
@@ -23,33 +37,55 @@ export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) {}
 
   @Post()
+  @CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
+  @ApiHeader({ name: ROLE_HEADER_NAME })
+  @ApiCreatedResponse({ type: PortfolioDto })
   create(
-    @Headers(ROLE_HEADER_NAME) roleId: string,
+    @User() user: UserDto,
+    @Org() orgId: string,
     @Body() createPortfolioDto: CreatePortfolioDto,
-  ) {
-    return this.portfoliosService.create(createPortfolioDto);
+  ): Promise<PortfolioDto> {
+    return this.portfoliosService.create({ createPortfolioDto, user, orgId });
   }
 
   @Get()
-  findAll(@Headers(ROLE_HEADER_NAME) roleId: string) {
-    return this.portfoliosService.findAll();
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @ApiPaginatedResponse(PortfolioDto)
+  findAll(
+    @User() user: UserDto,
+    @Query() portfolioPageOptionsDto: PageOptionsDto,
+  ): Promise<PaginatedMetaDto<PortfolioDto>> {
+    return this.portfoliosService.findAll({ portfolioPageOptionsDto, user });
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.portfoliosService.findOne(+id);
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @ApiOkResponse({ type: PortfolioDto })
+  findOne(
+    @User() user: UserDto,
+    @Param('id') id: string,
+  ): Promise<PortfolioDto> {
+    return this.portfoliosService.findOne({ id, user });
   }
 
   @Patch(':id')
+  @CheckAbilities({ action: Action.Update, subject: 'Portfolio' })
+  @ApiOkResponse({ type: PortfolioDto })
   update(
+    @User() user: UserDto,
     @Param('id') id: string,
     @Body() updatePortfolioDto: UpdatePortfolioDto,
-  ) {
-    return this.portfoliosService.update(+id, updatePortfolioDto);
+  ): Promise<PortfolioDto> {
+    return this.portfoliosService.update({ id, updatePortfolioDto, user });
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.portfoliosService.remove(+id);
+  @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
+  @ApiOkResponse({ type: PortfolioDto })
+  remove(
+    @User() user: UserDto,
+    @Param('id') id: string,
+  ): Promise<PortfolioDto> {
+    return this.portfoliosService.remove({ id, user });
   }
 }
