@@ -25,7 +25,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { UserDto } from 'src/users/dto/user.dto';
 
-import { PortfolioDto } from './dto/create-portfolio.dto';
+import { PortfolioDto } from './dto/portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 

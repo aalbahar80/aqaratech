@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/swagger';
-import { PortfolioDto } from './create-portfolio.dto';
+import { PortfolioDto } from './portfolio.dto';
 
 export class UpdatePortfolioDto extends PartialType(PortfolioDto) {}

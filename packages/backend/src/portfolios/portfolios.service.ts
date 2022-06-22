@@ -8,7 +8,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
-import { PortfolioDto } from 'src/portfolios/dto/create-portfolio.dto';
+import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 import { UpdatePortfolioDto } from 'src/portfolios/dto/update-portfolio.dto';
 
 @Injectable()
