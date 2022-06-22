@@ -16,6 +16,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UsersModule } from './users/users.module';
+import { PropertiesModule } from './properties/properties.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from './users/users.module';
     CaslModule,
     AuthModule,
     UsersModule,
+    PropertiesModule,
   ],
   controllers: [AppController],
   providers: [

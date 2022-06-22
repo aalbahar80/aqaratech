@@ -9,6 +9,7 @@ import { AppModule } from './app.module';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import { UsersModule } from 'src/users/users.module';
+import { PropertiesModule } from 'src/properties/properties.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -61,7 +62,13 @@ async function bootstrap() {
   });
 
   const document = SwaggerModule.createDocument(app, config, {
-    include: [AppModule, UsersModule, TenantsModule, PortfoliosModule],
+    include: [
+      AppModule,
+      UsersModule,
+      TenantsModule,
+      PortfoliosModule,
+      PropertiesModule,
+    ],
   });
   // move below?
   writeFileSync('./openapi.json', JSON.stringify(document));
