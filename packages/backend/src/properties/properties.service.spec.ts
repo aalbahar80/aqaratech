@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertiesService } from './properties.service';
 
 describe('PropertiesService', () => {
@@ -6,7 +8,7 @@ describe('PropertiesService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [PropertiesService],
+      providers: [PropertiesService, PrismaService, CaslAbilityFactory],
     }).compile();
 
     service = module.get<PropertiesService>(PropertiesService);
