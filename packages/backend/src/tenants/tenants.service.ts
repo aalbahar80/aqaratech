@@ -1,6 +1,6 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -27,12 +27,13 @@ export class TenantsService {
   }) {
     const data = { ...createTenantDto, organizationId: orgId };
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Create, subject('Tenant', data))) {
-      return this.prisma.tenant.create({ data });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Create,
+      subject('Tenant', data),
+    );
+
+    return this.prisma.tenant.create({ data });
   }
 
   async findAll({
@@ -106,25 +107,27 @@ export class TenantsService {
   }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Update, subject('Tenant', tenant))) {
-      return this.prisma.tenant.update({
-        where: { id },
-        data: updateTenantDto,
-      });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Update,
+      subject('Tenant', tenant),
+    );
+
+    return this.prisma.tenant.update({
+      where: { id },
+      data: updateTenantDto,
+    });
   }
 
   async remove({ id, user }: { id: string; user: UserDto }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Delete, subject('Tenant', tenant))) {
-      return this.prisma.tenant.delete({ where: { id } });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Delete,
+      subject('Tenant', tenant),
+    );
+
+    return this.prisma.tenant.delete({ where: { id } });
   }
 }
