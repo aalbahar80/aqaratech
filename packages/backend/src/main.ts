@@ -19,7 +19,7 @@ async function bootstrap() {
       // forbidUnknownValues: true,
       forbidNonWhitelisted: true,
       whitelist: true,
-      validateCustomDecorators: true,
+      // validateCustomDecorators: true, // fails eveything?
       enableDebugMessages: true, // TODO prod remove
       //  disableErrorMessages: true, // TODO prod only
     }),
