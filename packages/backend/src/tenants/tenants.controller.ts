@@ -25,7 +25,7 @@ import { User } from 'src/decorators/user.decorator';
 import { UserDto } from 'src/users/dto/user.dto';
 
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
 
 @Controller('tenants')
@@ -69,7 +69,7 @@ export class TenantsController {
   update(
     @User() user: UserDto,
     @Param('id') id: string,
-    @Body() updateTenantDto: TenantDto,
+    @Body() updateTenantDto: UpdateTenantDto,
   ): Promise<TenantDto> {
     return this.tenantsService.update({ id, updateTenantDto, user });
   }

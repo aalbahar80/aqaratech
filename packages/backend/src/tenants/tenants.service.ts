@@ -5,7 +5,7 @@ import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
@@ -101,7 +101,7 @@ export class TenantsService {
     user,
   }: {
     id: string;
-    updateTenantDto: TenantDto;
+    updateTenantDto: UpdateTenantDto;
     user: UserDto;
   }) {
     const tenant = await this.prisma.tenant.findUnique({ where: { id } });
