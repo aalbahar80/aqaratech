@@ -8,7 +8,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
-import { CreatePortfolioDto } from 'src/portfolios/dto/create-portfolio.dto';
+import { PortfolioDto } from 'src/portfolios/dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from 'src/portfolios/dto/update-portfolio.dto';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class PortfoliosService {
     user,
     orgId,
   }: {
-    createPortfolioDto: CreatePortfolioDto;
+    createPortfolioDto: PortfolioDto;
     user: UserDto;
     orgId: string;
   }) {
@@ -43,7 +43,7 @@ export class PortfoliosService {
   }: {
     portfolioPageOptionsDto: PageOptionsDto;
     user: UserDto;
-  }): Promise<PaginatedMetaDto<CreatePortfolioDto>> {
+  }): Promise<PaginatedMetaDto<PortfolioDto>> {
     const { page, take, q } = portfolioPageOptionsDto;
 
     const ability = this.caslAbilityFactory.defineAbility(user);

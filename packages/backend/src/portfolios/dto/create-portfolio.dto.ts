@@ -8,7 +8,7 @@ import {
   Length,
 } from 'class-validator';
 
-export class CreatePortfolioDto implements Portfolio {
+export class PortfolioDto implements Portfolio {
   @ApiProperty({ readOnly: true })
   id: string;
 
