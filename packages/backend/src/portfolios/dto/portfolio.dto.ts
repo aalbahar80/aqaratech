@@ -1,4 +1,4 @@
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
 import {
   IsEmail,
@@ -39,3 +39,5 @@ export class PortfolioDto implements Portfolio {
   @IsISO8601()
   dob: Date | null = null;
 }
+
+export class UpdatePortfolioDto extends PartialType(PortfolioDto) {}

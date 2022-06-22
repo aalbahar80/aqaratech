@@ -4,12 +4,13 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import {
+  PortfolioDto,
+  UpdatePortfolioDto,
+} from 'src/portfolios/dto/portfolio.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
-
-import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
-import { UpdatePortfolioDto } from 'src/portfolios/dto/update-portfolio.dto';
 
 @Injectable()
 export class PortfoliosService {

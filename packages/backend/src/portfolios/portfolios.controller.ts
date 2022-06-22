@@ -24,9 +24,7 @@ import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { UserDto } from 'src/users/dto/user.dto';
-
-import { PortfolioDto } from './dto/portfolio.dto';
-import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
+import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
 @Controller('portfolios')
