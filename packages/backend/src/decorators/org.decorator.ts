@@ -14,10 +14,10 @@ import { TRequest } from 'src/types/request.type';
 export const Org = createParamDecorator<string>(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest<TRequest>();
-    const roles = request.user!.roles; // TODO ensure user exists at this point
+    const roles = request.user.roles;
     const currentRoleId = request.get(ROLE_HEADER_NAME);
-    let orgId;
 
+    let orgId;
     if (currentRoleId) {
       orgId = roles.find((role) => role.id === currentRoleId)?.organizationId;
     } else {
