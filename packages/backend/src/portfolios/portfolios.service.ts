@@ -1,6 +1,6 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -30,12 +30,13 @@ export class PortfoliosService {
   }) {
     const data = { ...createPortfolioDto, organizationId: orgId };
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Create, subject('Portfolio', data))) {
-      return this.prisma.portfolio.create({ data });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Create,
+      subject('Portfolio', data),
+    );
+
+    return this.prisma.portfolio.create({ data });
   }
 
   async findAll({
@@ -98,25 +99,27 @@ export class PortfoliosService {
   }) {
     const data = await this.prisma.portfolio.findUnique({ where: { id } });
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Update, subject('Portfolio', data))) {
-      return this.prisma.portfolio.update({
-        where: { id },
-        data: updatePortfolioDto,
-      });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Update,
+      subject('Portfolio', data),
+    );
+
+    return this.prisma.portfolio.update({
+      where: { id },
+      data: updatePortfolioDto,
+    });
   }
 
   async remove({ id, user }: { id: string; user: UserDto }) {
     const data = await this.prisma.portfolio.findUnique({ where: { id } });
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Delete, subject('Portfolio', data))) {
-      return this.prisma.portfolio.delete({ where: { id } });
-    } else {
-      throw new ForbiddenException();
-    }
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Delete,
+      subject('Portfolio', data),
+    );
+
+    return this.prisma.portfolio.delete({ where: { id } });
   }
 }
