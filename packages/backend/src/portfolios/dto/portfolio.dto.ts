@@ -12,17 +12,9 @@ import {
   IsString,
   Length,
 } from 'class-validator';
+import { AbstractDto } from 'src/common/dto/abstract.dto';
 
-export class PortfolioDto implements Portfolio {
-  @ApiProperty({ readOnly: true })
-  id: string;
-
-  @ApiProperty({ readOnly: true })
-  createdAt: Date;
-
-  @ApiProperty({ readOnly: true })
-  updatedAt: Date;
-
+export class PortfolioDto extends AbstractDto implements Portfolio {
   @ApiHideProperty()
   organizationId: string;
 
