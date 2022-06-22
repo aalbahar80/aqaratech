@@ -9,7 +9,6 @@ import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
 import { CreatePortfolioDto } from 'src/portfolios/dto/create-portfolio.dto';
-import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 import { UpdatePortfolioDto } from 'src/portfolios/dto/update-portfolio.dto';
 
 @Injectable()
@@ -44,7 +43,7 @@ export class PortfoliosService {
   }: {
     portfolioPageOptionsDto: PageOptionsDto;
     user: UserDto;
-  }): Promise<PaginatedMetaDto<PortfolioDto>> {
+  }): Promise<PaginatedMetaDto<CreatePortfolioDto>> {
     const { page, take, q } = portfolioPageOptionsDto;
 
     const ability = this.caslAbilityFactory.defineAbility(user);

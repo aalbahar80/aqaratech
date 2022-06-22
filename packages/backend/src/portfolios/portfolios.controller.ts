@@ -23,10 +23,9 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 
-import { CreatePortfolioDto } from './dto/create-portfolio.dto';
+import { CreatePortfolioDto as PortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
@@ -43,7 +42,7 @@ export class PortfoliosController {
   create(
     @User() user: UserDto,
     @Org() orgId: string,
-    @Body() createPortfolioDto: CreatePortfolioDto,
+    @Body() createPortfolioDto: PortfolioDto,
   ): Promise<PortfolioDto> {
     return this.portfoliosService.create({ createPortfolioDto, user, orgId });
   }
