@@ -1,6 +1,6 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility, Subjects } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import {
   Expense,
   ExpenseType,
@@ -193,6 +193,17 @@ export class CaslAbilityFactory {
 
     return build();
   }
+
+  /**
+   * Helper to dry up authz logic in services.
+   */
+  throwIfForbidden(user: UserDto, action: Action, subject: Subject) {
+    const ability = this.defineAbility(user);
+
+    if (ability.cannot(action, subject)) {
+      throw new ForbiddenException();
+    }
+  }
 }
 
 type AppAbility = PrismaAbility<[string, Subject]>;
@@ -205,7 +216,8 @@ export enum Action {
   Delete = 'delete',
 }
 
-type P<T> = Partial<T>;
+// type P<T> = Partial<T>;
+type P<T> = T;
 export type Subject = Subjects<{
   Expense: P<Expense>;
   ExpenseType: P<ExpenseType>;
