@@ -22,13 +22,17 @@ export class TenantsService {
   create({
     createTenantDto,
     user,
+    orgId,
   }: {
     createTenantDto: CreateTenantDto;
     user: UserDto;
+    orgId: string;
   }) {
+    const data = { ...createTenantDto, organizationId: orgId };
+
     const ability = this.caslAbilityFactory.defineAbility(user);
-    if (ability.can(Action.Create, subject('Tenant', createTenantDto))) {
-      return this.prisma.tenant.create({ data: createTenantDto });
+    if (ability.can(Action.Create, subject('Tenant', data))) {
+      return this.prisma.tenant.create({ data });
     } else {
       throw new ForbiddenException();
     }
@@ -37,9 +41,11 @@ export class TenantsService {
   async findAll({
     tenantPageOptionsDto,
     user,
+    orgId,
   }: {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: UserDto;
+    orgId: string;
   }): Promise<PaginatedMetaDto<TenantDto>> {
     const { page, take, q } = tenantPageOptionsDto;
 
@@ -50,10 +56,14 @@ export class TenantsService {
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(ability).Tenant,
+        where: {
+          AND: [accessibleBy(ability).Tenant, { organizationId: orgId }],
+        },
       }),
       this.prisma.tenant.count({
-        where: accessibleBy(ability).Tenant,
+        where: {
+          AND: [accessibleBy(ability).Tenant, { organizationId: orgId }],
+        },
       }),
     ]);
 

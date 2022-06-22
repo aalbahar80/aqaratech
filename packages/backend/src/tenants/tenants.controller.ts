@@ -3,18 +3,23 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   Param,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiHeader,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { UserDto } from 'src/users/dto/user.dto';
@@ -33,24 +38,26 @@ export class TenantsController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
+  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: TenantDto })
   create(
     @User() user: UserDto,
-    @Headers(ROLE_HEADER_NAME) roleId: string,
+    @Org() orgId: string,
     @Body() createTenantDto: CreateTenantDto,
   ): Promise<TenantDto> {
-    return this.tenantsService.create({ createTenantDto, user });
+    return this.tenantsService.create({ createTenantDto, user, orgId });
   }
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiPaginatedResponse(TenantDto)
   findAll(
     @User() user: UserDto,
-    @Headers(ROLE_HEADER_NAME) roleId: string,
+    @Org() orgId: string,
     @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
-    return this.tenantsService.findAll({ tenantPageOptionsDto, user });
+    return this.tenantsService.findAll({ tenantPageOptionsDto, user, orgId });
   }
 
   @Get(':id')
