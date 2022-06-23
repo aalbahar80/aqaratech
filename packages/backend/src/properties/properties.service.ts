@@ -121,7 +121,23 @@ export class PropertiesService {
       subject('Property', toUpdate),
     );
 
-    // TODO: check permissions on new data
+    // check permissions on new data
+    if (updatePropertyDto.portfolioId) {
+      const portfolio = await this.prisma.portfolio.findUnique({
+        where: { id: updatePropertyDto.portfolioId },
+        select: { id: true, organizationId: true },
+      });
+
+      this.caslAbilityFactory.throwIfForbidden(
+        user,
+        Action.Create,
+        subject('Property', {
+          ...updatePropertyDto,
+          portfolio,
+        }),
+      );
+    }
+
     const data: Prisma.PropertyUpdateArgs['data'] = updatePropertyDto; // to make prisma call type
     return this.prisma.property.update({
       where: { id },
