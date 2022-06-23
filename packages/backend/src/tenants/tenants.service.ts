@@ -1,6 +1,7 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -25,15 +26,16 @@ export class TenantsService {
     user: UserDto;
     orgId: string;
   }) {
-    const data = { ...createTenantDto, organizationId: orgId };
+    const toCreate = { ...createTenantDto, organizationId: orgId };
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Create,
-      subject('Tenant', data),
+      subject('Tenant', toCreate),
     );
 
-    return this.prisma.tenant.create({ data });
+    const input: Prisma.TenantCreateArgs['data'] = toCreate;
+    return this.prisma.tenant.create({ data: input });
   }
 
   async findAll({
@@ -105,17 +107,18 @@ export class TenantsService {
     updateTenantDto: UpdateTenantDto;
     user: UserDto;
   }) {
-    const data = await this.prisma.tenant.findUnique({ where: { id } });
+    const toUpdate = await this.prisma.tenant.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Update,
-      subject('Tenant', data),
+      subject('Tenant', toUpdate),
     );
 
+    const input: Prisma.TenantUpdateArgs['data'] = updateTenantDto;
     return this.prisma.tenant.update({
       where: { id },
-      data: updateTenantDto,
+      data: input,
     });
   }
 

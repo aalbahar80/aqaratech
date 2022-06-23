@@ -1,6 +1,7 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -28,15 +29,16 @@ export class PortfoliosService {
     user: UserDto;
     orgId: string;
   }) {
-    const data = { ...createPortfolioDto, organizationId: orgId };
+    const toCreate = { ...createPortfolioDto, organizationId: orgId };
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Create,
-      subject('Portfolio', data),
+      subject('Portfolio', toCreate),
     );
 
-    return this.prisma.portfolio.create({ data });
+    const input: Prisma.PortfolioCreateArgs['data'] = toCreate;
+    return this.prisma.portfolio.create({ data: input });
   }
 
   async findAll({
@@ -97,17 +99,18 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: UserDto;
   }) {
-    const data = await this.prisma.portfolio.findUnique({ where: { id } });
+    const toUpdate = await this.prisma.portfolio.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Update,
-      subject('Portfolio', data),
+      subject('Portfolio', toUpdate),
     );
 
+    const input: Prisma.PortfolioUpdateArgs['data'] = updatePortfolioDto;
     return this.prisma.portfolio.update({
       where: { id },
-      data: updatePortfolioDto,
+      data: input,
     });
   }
 
