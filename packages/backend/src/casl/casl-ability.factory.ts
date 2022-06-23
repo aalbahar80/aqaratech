@@ -95,7 +95,9 @@ export class CaslAbilityFactory {
       });
 
       can(Action.Manage, ['Unit'], {
-        property: { portfolio: { organizationId: { in: orgs } } },
+        property: {
+          is: { portfolio: { is: { organizationId: { in: orgs } } } },
+        },
       });
     }
 
@@ -216,6 +218,8 @@ export enum Action {
   Delete = 'delete',
 }
 
+// type withoutAbstract<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
+// type P<T> = withoutAbstract<Partial<T>>;
 // type P<T> = Partial<T>;
 type P<T> = T;
 export type Subject = Subjects<{

@@ -1,6 +1,7 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -16,23 +17,37 @@ export class UnitsService {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
-  create({
+  async create({
     createUnitDto,
     user,
-    orgId,
   }: {
     createUnitDto: UnitDto;
     user: UserDto;
-    orgId: string;
   }) {
-    const data = { ...createUnitDto, organizationId: orgId };
+    // check if user has access to create unit in this organization
+    // alt: use prismawhere to filter if user has access to create unit in this organization
+    const property = await this.prisma.property.findUnique({
+      where: { id: createUnitDto.propertyId },
+      select: {
+        id: true,
+        portfolioId: true,
+        portfolio: { select: { id: true, organizationId: true } },
+      },
+    });
+
+    const toCreate = {
+      ...createUnitDto,
+      property,
+    };
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Create,
-      subject('Unit', data),
+      subject('Unit', toCreate),
     );
 
+    // insert
+    const data: Prisma.UnitCreateArgs['data'] = createUnitDto; // to make prisma call typesafe
     return this.prisma.unit.create({ data });
   }
 
@@ -102,9 +117,11 @@ export class UnitsService {
       subject('Unit', data),
     );
 
+    const updated: Prisma.UnitUpdateArgs['data'] = updateUnitDto;
+
     return this.prisma.unit.update({
       where: { id },
-      data: updateUnitDto,
+      data: updated,
     });
   }
 

@@ -19,7 +19,6 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
-import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { UserDto } from 'src/users/dto/user.dto';
@@ -40,10 +39,9 @@ export class UnitsController {
   @ApiCreatedResponse({ type: UnitDto })
   create(
     @User() user: UserDto,
-    @Org() orgId: string,
     @Body() createUnitDto: UnitDto,
   ): Promise<UnitDto> {
-    return this.unitsService.create({ createUnitDto, user, orgId });
+    return this.unitsService.create({ createUnitDto, user });
   }
 
   @Get()
