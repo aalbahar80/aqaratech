@@ -73,7 +73,7 @@ export class CaslAbilityFactory {
       });
 
       can(Action.Manage, ['Property'], {
-        portfolio: { organizationId: { in: orgs } },
+        portfolio: { is: { organizationId: { in: orgs } } },
       });
 
       can(Action.Manage, ['MaintenanceOrder'], {
@@ -220,8 +220,8 @@ export enum Action {
 
 // type withoutAbstract<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
 // type P<T> = withoutAbstract<Partial<T>>;
-// type P<T> = Partial<T>;
-type P<T> = T;
+type P<T> = Partial<T>;
+// type P<T> = T;
 export type Subject = Subjects<{
   Expense: P<Expense>;
   ExpenseType: P<ExpenseType>;

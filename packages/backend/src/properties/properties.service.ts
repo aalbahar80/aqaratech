@@ -1,6 +1,7 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -19,23 +20,31 @@ export class PropertiesService {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
-  create({
+  async create({
     createPropertyDto,
     user,
-    orgId,
   }: {
     createPropertyDto: PropertyDto;
     user: UserDto;
-    orgId: string;
   }) {
-    const data = { ...createPropertyDto, organizationId: orgId };
+    // check if user has access to create property
+    const portfolio = await this.prisma.portfolio.findUnique({
+      where: { id: createPropertyDto.portfolioId },
+      select: { id: true, organizationId: true },
+    });
+
+    const toCreate = {
+      ...createPropertyDto,
+      portfolio,
+    };
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Create,
-      subject('Property', data),
+      subject('Property', toCreate),
     );
 
+    const data: Prisma.PropertyCreateArgs['data'] = createPropertyDto; // to make prisma call type
     return this.prisma.property.create({ data });
   }
 
@@ -97,17 +106,26 @@ export class PropertiesService {
     updatePropertyDto: UpdatePropertyDto;
     user: UserDto;
   }) {
-    const data = await this.prisma.property.findUnique({ where: { id } });
+    const toUpdate = await this.prisma.property.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        portfolioId: true,
+        portfolio: { select: { id: true, organizationId: true } },
+      },
+    });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Update,
-      subject('Property', data),
+      subject('Property', toUpdate),
     );
 
+    // TODO: check permissions on new data
+    const data: Prisma.PropertyUpdateArgs['data'] = updatePropertyDto; // to make prisma call type
     return this.prisma.property.update({
       where: { id },
-      data: updatePropertyDto,
+      data,
     });
   }
 

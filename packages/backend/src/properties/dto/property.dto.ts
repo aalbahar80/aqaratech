@@ -4,7 +4,14 @@ import {
   PartialType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
-import { IsString, IsUUID, Length } from 'class-validator';
+import {
+  IsLatitude,
+  IsLongitude,
+  IsNumber,
+  IsString,
+  IsUUID,
+  Length,
+} from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 export class PropertyDto extends AbstractDto implements Property {
@@ -39,12 +46,15 @@ export class PropertyDto extends AbstractDto implements Property {
   paci: string | null = null;
 
   @ApiPropertyOptional()
+  @IsNumber()
   cost: number | null = null;
 
   @ApiHideProperty()
+  @IsLongitude()
   long: number | null = null;
 
   @ApiHideProperty()
+  @IsLatitude()
   lat: number | null = null;
 }
 
