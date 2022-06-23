@@ -8,6 +8,7 @@ import { AppModule } from './app.module';
 
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
+import { LeasesModule } from 'src/leases/leases.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
@@ -72,6 +73,7 @@ async function bootstrap() {
       PortfoliosModule,
       PropertiesModule,
       UnitsModule,
+      LeasesModule,
     ],
   });
   // move below?

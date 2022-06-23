@@ -18,6 +18,7 @@ import { TenantsModule } from './tenants/tenants.module';
 import { UsersModule } from './users/users.module';
 import { PropertiesModule } from './properties/properties.module';
 import { UnitsModule } from './units/units.module';
+import { LeasesModule } from './leases/leases.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UnitsModule } from './units/units.module';
     UsersModule,
     PropertiesModule,
     UnitsModule,
+    LeasesModule,
   ],
   controllers: [AppController],
   providers: [

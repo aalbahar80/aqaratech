@@ -1,0 +1,166 @@
+import { subject } from '@casl/ability';
+import { accessibleBy } from '@casl/prisma';
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { PageOptionsDto } from 'src/common/dto/page-options.dto';
+import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
+import { UserDto } from 'src/users/dto/user.dto';
+import { search } from 'src/utils/search';
+
+@Injectable()
+export class LeasesService {
+  constructor(
+    private prisma: PrismaService,
+    private caslAbilityFactory: CaslAbilityFactory,
+  ) {}
+
+  async create({
+    createLeaseDto,
+    user,
+  }: {
+    createLeaseDto: LeaseDto;
+    user: UserDto;
+  }) {
+    // check if user has access to create lease in this organization
+    const unit = await this.prisma.unit.findUnique({
+      where: { id: createLeaseDto.unitId },
+      select: {
+        property: {
+          select: {
+            id: true,
+            portfolioId: true,
+            portfolio: { select: { id: true, organizationId: true } },
+          },
+        },
+      },
+    });
+
+    // TODO: add tenantId check
+    const toCreate = {
+      ...createLeaseDto,
+      unit,
+    };
+
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Create,
+      subject('Lease', toCreate),
+    );
+
+    // insert
+    const input: Prisma.LeaseCreateArgs['data'] = createLeaseDto; // to make prisma call typesafe
+    return this.prisma.lease.create({ data: input });
+  }
+
+  async findAll({
+    leasePageOptionsDto,
+    user,
+  }: {
+    leasePageOptionsDto: PageOptionsDto;
+    user: UserDto;
+  }): Promise<PaginatedMetaDto<LeaseDto>> {
+    const { page, take, q } = leasePageOptionsDto;
+
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    // returns a 404 whether not found or not accessible
+    let [results, itemCount] = await Promise.all([
+      this.prisma.lease.findMany({
+        take,
+        skip: (page - 1) * take,
+        where: accessibleBy(ability).Lease,
+      }),
+      this.prisma.lease.count({
+        where: accessibleBy(ability).Lease,
+      }),
+    ]);
+
+    if (q) {
+      results = search({
+        data: results,
+        q,
+        keys: ['id', 'tenantId', 'unitId', 'license'],
+      });
+    }
+
+    const meta = new PaginatedDto({
+      itemCount,
+      pageOptionsDto: leasePageOptionsDto,
+    });
+
+    return { meta, results };
+  }
+
+  async findOne({ id, user }: { id: string; user: UserDto }) {
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    const data = await this.prisma.lease.findFirst({
+      where: {
+        AND: [accessibleBy(ability).Lease, { id }],
+      },
+    });
+    return data;
+  }
+
+  async update({
+    id,
+    updateLeaseDto,
+    user,
+  }: {
+    id: string;
+    updateLeaseDto: UpdateLeaseDto;
+    user: UserDto;
+  }) {
+    // grab necessary data for ability check
+    // TODO grab tenant stuff
+    const toUpdate = await this.prisma.lease.findUnique({
+      where: { id },
+      select: {
+        unit: {
+          select: {
+            id: true,
+            propertyId: true,
+            property: {
+              select: {
+                id: true,
+                portfolioId: true,
+                portfolio: {
+                  select: {
+                    id: true,
+                    organizationId: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Update,
+      subject('Lease', toUpdate),
+    );
+
+    // no need to check for permissions here, since propertyId is forbidden in this endpoint
+    const input: Prisma.LeaseUpdateArgs['data'] = updateLeaseDto;
+    return this.prisma.lease.update({
+      where: { id },
+      data: input,
+    });
+  }
+
+  async remove({ id, user }: { id: string; user: UserDto }) {
+    const data = await this.prisma.lease.findUnique({ where: { id } });
+
+    this.caslAbilityFactory.throwIfForbidden(
+      user,
+      Action.Delete,
+      subject('Lease', data),
+    );
+
+    return this.prisma.lease.delete({ where: { id } });
+  }
+}

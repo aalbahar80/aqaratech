@@ -68,8 +68,15 @@ export class CaslAbilityFactory {
         ],
       });
 
+      // todo: add check tenantId is in same org
       can(Action.Manage, ['Lease'], {
-        unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+        unit: {
+          is: {
+            property: {
+              is: { portfolio: { is: { organizationId: { in: orgs } } } },
+            },
+          },
+        },
       });
 
       can(Action.Manage, ['Property'], {
@@ -135,7 +142,7 @@ export class CaslAbilityFactory {
       });
 
       can(Action.Read, ['Lease'], {
-        unit: { property: { portfolioId: { in: portfolios } } },
+        unit: { is: { property: { is: { portfolioId: { in: portfolios } } } } },
       });
 
       can(Action.Read, ['Property'], {
