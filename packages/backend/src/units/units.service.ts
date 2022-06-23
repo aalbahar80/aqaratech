@@ -47,8 +47,8 @@ export class UnitsService {
     );
 
     // insert
-    const data: Prisma.UnitCreateArgs['data'] = createUnitDto; // to make prisma call typesafe
-    return this.prisma.unit.create({ data });
+    const input: Prisma.UnitCreateArgs['data'] = createUnitDto; // to make prisma call typesafe
+    return this.prisma.unit.create({ data: input });
   }
 
   async findAll({
@@ -111,7 +111,7 @@ export class UnitsService {
     user: UserDto;
   }) {
     // grab necessary data for ability check
-    const data = await this.prisma.unit.findUnique({
+    const toUpdate = await this.prisma.unit.findUnique({
       where: { id },
       select: {
         id: true,
@@ -134,14 +134,14 @@ export class UnitsService {
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Update,
-      subject('Unit', data),
+      subject('Unit', toUpdate),
     );
 
     // no need to check for permissions here, since propertyId is forbidden in this endpoint
-    const updated: Prisma.UnitUpdateArgs['data'] = updateUnitDto;
+    const input: Prisma.UnitUpdateArgs['data'] = updateUnitDto;
     return this.prisma.unit.update({
       where: { id },
-      data: updated,
+      data: input,
     });
   }
 

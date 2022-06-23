@@ -44,8 +44,8 @@ export class PropertiesService {
       subject('Property', toCreate),
     );
 
-    const data: Prisma.PropertyCreateArgs['data'] = createPropertyDto; // to make prisma call type
-    return this.prisma.property.create({ data });
+    const input: Prisma.PropertyCreateArgs['data'] = createPropertyDto; // to make prisma call type
+    return this.prisma.property.create({ data: input });
   }
 
   async findAll({
@@ -140,10 +140,10 @@ export class PropertiesService {
       );
     }
 
-    const data: Prisma.PropertyUpdateArgs['data'] = updatePropertyDto; // to make prisma call type
+    const input: Prisma.PropertyUpdateArgs['data'] = updatePropertyDto; // to make prisma call type
     return this.prisma.property.update({
       where: { id },
-      data,
+      data: input,
     });
   }
 
