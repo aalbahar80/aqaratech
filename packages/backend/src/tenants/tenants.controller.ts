@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
+  ApiExtraModels,
   ApiHeader,
   ApiOkResponse,
   ApiTags,

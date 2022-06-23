@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 
 import type { PageOptionsDto } from './page-options.dto';
 
@@ -40,6 +40,6 @@ export class PaginatedMetaDto<TData> {
   @ApiProperty()
   readonly meta: PaginatedDto;
 
-  @ApiProperty()
+  @ApiHideProperty()
   readonly results: TData[];
 }

@@ -51,6 +51,7 @@
     "swagger-ui-express": "4.4.0"
   },
   "devDependencies": {
+    "@apideck/portman": "^1.17.0",
     "@nestjs/cli": "8.2.6",
     "@nestjs/schematics": "8.0.11",
     "@nestjs/testing": "8.4.7",
