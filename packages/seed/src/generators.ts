@@ -112,6 +112,7 @@ export const fakeTenant = (orgId?: string) => {
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
 		residencyEnd: faker.date.future(2),
+		contactMethod: "email",
 	};
 };
 
