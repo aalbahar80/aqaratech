@@ -1,7 +1,7 @@
 import {
   ApiHideProperty,
-  ApiProperty,
   ApiPropertyOptional,
+  OmitType,
   PartialType,
 } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
@@ -42,4 +42,6 @@ export class PortfolioDto extends AbstractDto implements Portfolio {
   dob: Date | null = null;
 }
 
-export class UpdatePortfolioDto extends PartialType(PortfolioDto) {}
+export class UpdatePortfolioDto extends PartialType(
+  OmitType(PortfolioDto, ['organizationId']),
+) {}
