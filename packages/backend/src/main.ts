@@ -32,10 +32,12 @@ async function bootstrap() {
     .setDescription('The Aqratech API description')
     .setVersion('1.0')
     .addTag('aqaratech')
+    .addServer('http://localhost:3002')
+    .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {
         type: 'oauth2',
-        scheme: 'bearer',
+        // scheme: 'Bearer',
         flows: {
           authorizationCode: {
             authorizationUrl:
