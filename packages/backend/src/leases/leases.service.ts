@@ -1,12 +1,12 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
@@ -25,7 +25,7 @@ export class LeasesService {
     user: UserDto;
   }) {
     // check if user has access to create lease in this organization
-    const unit = await this.prisma.unit.findUnique({
+    const unitQ = this.prisma.unit.findUnique({
       where: { id: createLeaseDto.unitId },
       select: {
         property: {
@@ -37,11 +37,27 @@ export class LeasesService {
         },
       },
     });
+    const tenantQ = this.prisma.tenant.findUnique({
+      where: { id: createLeaseDto.tenantId },
+      select: {
+        id: true,
+        organizationId: true,
+      },
+    });
+    const [tenant, unit] = await Promise.all([tenantQ, unitQ]);
 
-    // TODO: add tenantId check
+    // check if tenant and unit are in the same organization
+    if (unit.property.portfolio.organizationId !== tenant.organizationId) {
+      // test case
+      throw new BadRequestException(
+        'Tenant and unit must be in the same organization',
+      );
+    }
+
     const toCreate = {
       ...createLeaseDto,
       unit,
+      tenant,
     };
 
     this.caslAbilityFactory.throwIfForbidden(
@@ -113,7 +129,8 @@ export class LeasesService {
     user: UserDto;
   }) {
     // grab necessary data for ability check
-    // TODO grab tenant stuff
+    // alt: use findFirst with accessibleBy,
+    // but we still need to check if tenant/unit are in the same organization
     const toUpdate = await this.prisma.lease.findUnique({
       where: { id },
       select: {
@@ -135,6 +152,12 @@ export class LeasesService {
             },
           },
         },
+        tenant: {
+          select: {
+            id: true,
+            organizationId: true,
+          },
+        },
       },
     });
 
@@ -144,7 +167,8 @@ export class LeasesService {
       subject('Lease', toUpdate),
     );
 
-    // no need to check for permissions here, since propertyId is forbidden in this endpoint
+    // not checking if tenant and unit are in the same organization
+    // since it is not possible to update tenantId or unitId
     const input: Prisma.LeaseUpdateArgs['data'] = updateLeaseDto;
     return this.prisma.lease.update({
       where: { id },
