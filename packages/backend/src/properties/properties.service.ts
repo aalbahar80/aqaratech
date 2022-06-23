@@ -89,6 +89,8 @@ export class PropertiesService {
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
     const ability = this.caslAbilityFactory.defineAbility(user);
+
+    // returns a 404 whether not found or not accessible
     const data = await this.prisma.property.findFirst({
       where: {
         AND: [accessibleBy(ability).Property, { id }],

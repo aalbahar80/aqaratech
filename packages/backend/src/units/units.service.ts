@@ -63,6 +63,7 @@ export class UnitsService {
     const ability = this.caslAbilityFactory.defineAbility(user);
     // TODO test this
     // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
+    // returns a 404 whether not found or not accessible
     let [results, itemCount] = await Promise.all([
       this.prisma.unit.findMany({
         take,
@@ -109,7 +110,26 @@ export class UnitsService {
     updateUnitDto: UpdateUnitDto;
     user: UserDto;
   }) {
-    const data = await this.prisma.unit.findUnique({ where: { id } });
+    // grab necessary data for ability check
+    const data = await this.prisma.unit.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        propertyId: true,
+        property: {
+          select: {
+            id: true,
+            portfolioId: true,
+            portfolio: {
+              select: {
+                id: true,
+                organizationId: true,
+              },
+            },
+          },
+        },
+      },
+    });
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
@@ -117,8 +137,8 @@ export class UnitsService {
       subject('Unit', data),
     );
 
+    // no need to check for permissions here, since propertyId is forbidden in this endpoint
     const updated: Prisma.UnitUpdateArgs['data'] = updateUnitDto;
-
     return this.prisma.unit.update({
       where: { id },
       data: updated,

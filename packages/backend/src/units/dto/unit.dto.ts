@@ -1,4 +1,9 @@
-import { ApiPropertyOptional, PartialType } from '@nestjs/swagger';
+import {
+  ApiHideProperty,
+  ApiPropertyOptional,
+  PartialType,
+  OmitType,
+} from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import {
   IsNumber,
@@ -45,4 +50,6 @@ export class UnitDto extends AbstractDto implements Unit {
   usage: string | null = null;
 }
 
-export class UpdateUnitDto extends PartialType(UnitDto) {}
+export class UpdateUnitDto extends PartialType(
+  OmitType(UnitDto, ['propertyId']),
+) {}
