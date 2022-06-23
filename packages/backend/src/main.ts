@@ -8,8 +8,9 @@ import { AppModule } from './app.module';
 
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
-import { UsersModule } from 'src/users/users.module';
 import { PropertiesModule } from 'src/properties/properties.module';
+import { UnitsModule } from 'src/units/units.module';
+import { UsersModule } from 'src/users/users.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -68,6 +69,7 @@ async function bootstrap() {
       TenantsModule,
       PortfoliosModule,
       PropertiesModule,
+      UnitsModule,
     ],
   });
   // move below?
