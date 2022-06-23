@@ -8,13 +8,13 @@ import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaService
-  extends PrismaClient<{ rejectOnNotFound: () => Error }>
+  extends PrismaClient<{ rejectOnNotFound: (e: Error) => Error }>
   implements OnModuleInit
 {
   constructor() {
     super({
-      rejectOnNotFound() {
-        throw new NotFoundException();
+      rejectOnNotFound(e) {
+        throw new NotFoundException(e.message);
       },
     });
   }
