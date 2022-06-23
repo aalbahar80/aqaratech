@@ -3,7 +3,7 @@ import { Prisma, Role, User } from '@prisma/client';
 import { IsEmail, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
-class RoleDto extends AbstractDto implements Role {
+export class RoleDto extends AbstractDto implements Role {
   permissions: Prisma.JsonValue;
   userId: string | null;
   organizationId: string | null;

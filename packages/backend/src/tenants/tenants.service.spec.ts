@@ -1,9 +1,10 @@
+import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { fakeTenant } from '@self/seed';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
-import { UserDto } from 'src/users/dto/user.dto';
+import { RoleDto, UserDto } from 'src/users/dto/user.dto';
 import { TenantsService } from './tenants.service';
 
 const authorized = {
@@ -82,6 +83,20 @@ describe('TenantsService', () => {
           user: authorized,
         }),
       ).resolves.toEqual(oneTenant);
+    });
+  });
+
+  describe('noauth', () => {
+    it('should return a 403 if orgId is different', () => {
+      try {
+        service.create({
+          createTenantDto: fakeTenant(),
+          orgId: '2',
+          user: { roles: [] as unknown as RoleDto } as unknown as UserDto,
+        });
+      } catch (e) {
+        expect(e).toBeInstanceOf(ForbiddenException);
+      }
     });
   });
 
