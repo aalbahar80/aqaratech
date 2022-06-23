@@ -154,7 +154,7 @@ export const fakeProperty = (portfolioId?: string) => {
 	};
 };
 
-export const fakeTransaction = (
+export const fakeLeaseInvoice = (
 	leaseId: string,
 	amount: number,
 	leaseStart: Date,
@@ -184,7 +184,7 @@ export const fakeTransaction = (
 	};
 };
 
-export const fakeTransactionBasic = () => {
+export const fakeLeaseInvoiceBasic = () => {
 	return {
 		id: faker.datatype.uuid(),
 		createdAt: new Date(),

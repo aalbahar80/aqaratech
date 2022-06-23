@@ -10,7 +10,7 @@ import {
 	fakeMaintenanceOrder,
 	fakeProperty,
 	fakeTenant,
-	fakeTransaction,
+	fakeLeaseInvoice,
 	fakeUnit,
 	testPortfolioId,
 	testTenantId,
@@ -115,10 +115,10 @@ export async function seed({
 		}
 	});
 
-	const transactions = leases.length
+	const leaseInvoices = leases.length
 		? leases.flatMap((lease) =>
 				Array.from({ length: trxPerLease }, (_, n) =>
-					fakeTransaction(lease.id, lease.monthlyRent, lease.start, n)
+					fakeLeaseInvoice(lease.id, lease.monthlyRent, lease.start, n)
 				)
 		  )
 		: [];
@@ -210,7 +210,7 @@ export async function seed({
 	console.log(`${unitsWithLease} units with a lease`);
 
 	console.log("Seeding to database:", process.env.DATABASE_URL);
-	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${transactions.length} transactions \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
+	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${leaseInvoices.length} leaseInvoices \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
 	console.log(summary);
 
 	if (sample) {
@@ -222,7 +222,7 @@ export async function seed({
 					units,
 					tenants,
 					leases,
-					transactions,
+					leaseInvoices,
 					maintenanceOrders,
 					expenses,
 				},
@@ -266,17 +266,17 @@ export async function seed({
 			return chunked;
 		};
 
-		if (transactions.length) {
-			console.time("transactions created");
+		if (leaseInvoices.length) {
+			console.time("leaseInvoices created");
 			// split the maintenance orders into chunks of 10
-			const transactionsChunks = split(transactions, 1000);
+			const leaseInvoicesChunks = split(leaseInvoices, 1000);
 			// create the chunks
-			transactionsChunks.forEach(async (chunk) => {
-				await prisma.transaction.createMany({
+			leaseInvoicesChunks.forEach(async (chunk) => {
+				await prisma.leaseInvoice.createMany({
 					data: chunk,
 				});
 			}),
-				console.timeEnd("transactions created");
+				console.timeEnd("leaseInvoices created");
 		}
 
 		if (maintenanceOrders.length) {

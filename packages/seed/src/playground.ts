@@ -17,7 +17,7 @@ async function main() {
 	const propertyId = "ed082329-c4d5-453b-98c0-865d2b94daa5";
 	// const propertyId = '';
 
-	const data = await prisma.transaction.findMany({
+	const data = await prisma.leaseInvoice.findMany({
 		where: {
 			postAt: {
 				gte: start,

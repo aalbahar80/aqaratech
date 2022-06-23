@@ -13,7 +13,7 @@ import {
   Property,
   Role,
   Tenant,
-  Transaction,
+  LeaseInvoice,
   Unit,
   User,
 } from '@prisma/client';
@@ -99,7 +99,7 @@ export class CaslAbilityFactory {
         ],
       });
 
-      can(Action.Manage, ['Transaction'], {
+      can(Action.Manage, ['LeaseInvoice'], {
         lease: {
           unit: { property: { portfolio: { organizationId: { in: orgs } } } },
         },
@@ -153,7 +153,7 @@ export class CaslAbilityFactory {
         portfolioId: { in: portfolios },
       });
 
-      can(Action.Read, ['Transaction'], {
+      can(Action.Read, ['LeaseInvoice'], {
         lease: {
           unit: { property: { portfolioId: { in: portfolios } } },
         },
@@ -187,7 +187,7 @@ export class CaslAbilityFactory {
       });
 
       // TODO some fields should be public
-      can(Action.Read, ['Transaction'], {
+      can(Action.Read, ['LeaseInvoice'], {
         lease: {
           tenantId: { in: tenants },
         },
@@ -245,7 +245,7 @@ export type Subject = Subjects<{
   Property: P<Property>;
   Role: P<Role>;
   Tenant: Partial<Tenant>;
-  Transaction: P<Transaction>;
+  LeaseInvoice: P<LeaseInvoice>;
   Unit: P<Unit>;
   User: P<User>;
 }>;

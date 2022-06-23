@@ -173,21 +173,21 @@ model Expense {
 }
 
 model Lease {
-    id           String        @id @default(uuid())
-    tenantId     String
-    unitId       String
-    createdAt    DateTime      @default(now())
-    updatedAt    DateTime      @updatedAt
-    start        DateTime
-    end          DateTime
-    monthlyRent  Float
-    deposit      Float         @default(0)
-    deactivated  Boolean       @default(false)
-    notify       Boolean       @default(true)
-    license      String?
-    tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-    unit         Unit          @relation(fields: [unitId], references: [id], onDelete: Restrict)
-    transactions Transaction[]
+    id            String         @id @default(uuid())
+    tenantId      String
+    unitId        String
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    start         DateTime
+    end           DateTime
+    monthlyRent   Float
+    deposit       Float          @default(0)
+    deactivated   Boolean        @default(false)
+    notify        Boolean        @default(true)
+    license       String?
+    tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+    unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
+    leaseInvoices LeaseInvoice[]
 
     @@index([tenantId])
     @@index([unitId])
@@ -240,7 +240,7 @@ model Property {
     @@index([portfolioId])
 }
 
-model Transaction {
+model LeaseInvoice {
     id          String    @id @default(uuid())
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
