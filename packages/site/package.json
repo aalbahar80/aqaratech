@@ -23,7 +23,7 @@
     "@iconify/json": "2.1.63",
     "@playwright/test": "1.22.2",
     "@rgossiaux/svelte-headlessui": "1.0.2",
-    "@self/seed": "workspace:^0.0.1",
+    "@self/seed": "workspace:0.0.1",
     "@sentry/browser": "7.2.0",
     "@sentry/node": "7.2.0",
     "@sentry/tracing": "7.2.0",
