@@ -1,6 +1,6 @@
-import { randomUUID } from "crypto";
 import { expenseTypes } from "./constants.js";
 import {
+	generateId,
 	testOrgId,
 	// testPortfolioEmail,
 	testPortfolioId,
@@ -66,7 +66,7 @@ export const setupAdmin = async () => {
 	console.time("creating test admin");
 	await prisma.role.create({
 		data: {
-			id: randomUUID(),
+			id: generateId(),
 			organizationId: testOrgId,
 			userId: testUserId,
 			createdAt: new Date(),
