@@ -223,6 +223,8 @@ export class CaslAbilityFactory {
 
   /**
    * Helper to dry up authz logic in services.
+   * Often, it will be required to pass in not only the basic subject,
+   * but also the subject's organization, portfolio, tenant, etc.
    */
   throwIfForbidden(user: UserDto, action: Action, subject: Subject) {
     const ability = this.defineAbility(user);
