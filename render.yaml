@@ -12,6 +12,7 @@ services:
     buildCommand: pnpm install --filter @self/backend... && cd packages/backend && pnpm build
     startCommand: cd packages/backend && pnpm run start:prod
     # healthCheckPath: /
+    autoDeploy: false
     envVars:
       - key: DATABASE_URL
         fromDatabase:
