@@ -8,6 +8,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UserDto } from 'src/users/dto/user.dto';
+import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -28,11 +29,7 @@ export class UnitsService {
     // alt: use prismawhere to filter if user has access to create unit in this organization
     const property = await this.prisma.property.findUnique({
       where: { id: createUnitDto.propertyId },
-      select: {
-        id: true,
-        portfolioId: true,
-        portfolio: { select: { id: true, organizationId: true } },
-      },
+      select: selectForAuthz.property,
     });
 
     const toCreate = {
@@ -113,22 +110,7 @@ export class UnitsService {
     // grab necessary data for ability check
     const toUpdate = await this.prisma.unit.findUnique({
       where: { id },
-      select: {
-        id: true,
-        propertyId: true,
-        property: {
-          select: {
-            id: true,
-            portfolioId: true,
-            portfolio: {
-              select: {
-                id: true,
-                organizationId: true,
-              },
-            },
-          },
-        },
-      },
+      select: selectForAuthz.unit,
     });
 
     this.caslAbilityFactory.throwIfForbidden(

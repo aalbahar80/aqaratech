@@ -1,4 +1,12 @@
+const property = {
+  id: true,
+  portfolioId: true,
+  portfolio: { select: { id: true, organizationId: true } },
+};
+
 const unit = {
+  id: true,
+  propertyId: true,
   property: {
     select: {
       id: true,
@@ -63,4 +71,4 @@ const leaseInvoice = {
 /**
  * Get fields necessary for ability checks
  */
-export const selectForAuthz = { unit, lease, leaseInvoice };
+export const selectForAuthz = { property, unit, lease, leaseInvoice };
