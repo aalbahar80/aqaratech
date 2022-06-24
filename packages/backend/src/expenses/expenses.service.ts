@@ -1,6 +1,6 @@
 import { subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -8,7 +8,6 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
-import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -25,30 +24,30 @@ export class ExpensesService {
     createExpenseDto: ExpenseDto;
     user: UserDto;
   }) {
-    // check if user has access to create expense in this organization
-    const unitQ = this.prisma.unit.findUnique({
-      where: { id: createExpenseDto.unitId },
-      select: selectForAuthz.unit,
-    });
-    const tenantQ = this.prisma.tenant.findUnique({
-      where: { id: createExpenseDto.tenantId },
-      select: selectForAuthz.tenant,
-    });
-    const [tenant, unit] = await Promise.all([tenantQ, unitQ]);
+    // check if user has access to create expense for property/unit/portfolio
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    const { unitId, propertyId, portfolioId, maintenanceOrderId } =
+      createExpenseDto;
 
-    // check if tenant and unit are in the same organization
-    if (unit.property.portfolio.organizationId !== tenant.organizationId) {
-      // test case
-      throw new BadRequestException(
-        'Tenant and unit must be in the same organization',
-      );
+    let toCreate: ExpenseDto & Record<string, any> = { ...createExpenseDto };
+
+    // TODO validate that only one of unitId, propertyId, portfolioId is set
+    if (unitId) {
+      const unit = await this.prisma.unit.findFirst({
+        where: { AND: [accessibleBy(ability).Unit, { id: unitId }] },
+      });
+      toCreate.unit = unit;
+    } else if (propertyId) {
+      const property = await this.prisma.property.findFirst({
+        where: { AND: [accessibleBy(ability).Property, { id: propertyId }] },
+      });
+      toCreate.property = property;
+    } else if (portfolioId) {
+      const portfolio = await this.prisma.portfolio.findFirst({
+        where: { AND: [accessibleBy(ability).Portfolio, { id: portfolioId }] },
+      });
+      toCreate.portfolio = portfolio;
     }
-
-    const toCreate = {
-      ...createExpenseDto,
-      unit,
-      tenant,
-    };
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
@@ -84,11 +83,7 @@ export class ExpensesService {
     ]);
 
     if (q) {
-      results = search({
-        data: results,
-        q,
-        keys: ['id', 'tenantId', 'unitId', 'license'],
-      });
+      results = search({ data: results, q, keys: ['id', 'memo', 'amount'] });
     }
 
     const meta = new PaginatedDto({

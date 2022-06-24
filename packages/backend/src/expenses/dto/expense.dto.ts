@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiHideProperty, PartialType } from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
 import { IsISO8601, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -15,8 +15,9 @@ export class ExpenseDto extends AbstractDto implements Expense {
   @Nanoid()
   portfolioId: string | null = null;
 
-  @Nanoid()
-  maintenanceOrderId: string | null = null;
+  // TODO remove from schema
+  @ApiHideProperty()
+  maintenanceOrderId: string | null;
 
   // use category name
   categoryId: number | null = null;
