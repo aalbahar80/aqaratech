@@ -9,8 +9,8 @@ services:
     branch: initNestjs
     # numInstances: 1
     # maxInstances: 1
-    buildCommand: cd packages/backend && npm install && npm run build
-    startCommand: cd packages/backend && npx prisma generate && npm run start:prod
+    buildCommand: pnpm install --filter @self/backend... && cd packages/backend && pnpm build
+    startCommand: cd packages/backend && npx prisma generate && pnpm run start:prod
     # healthCheckPath: /
     envVars:
       - key: DATABASE_URL
