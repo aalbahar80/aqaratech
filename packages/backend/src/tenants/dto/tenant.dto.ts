@@ -55,6 +55,9 @@ export class TenantDto extends AbstractDto implements Tenant {
   residencyEnd: Date | null = null;
 }
 
+// If option to update organizationId is added, be sure to
+// 1. use Prisma's `connect` to enforce referential integrity (instead of passing in foreign key into organizationId field)
+// 2. check permissions for new organizationId
 export class UpdateTenantDto extends PartialType(
   OmitType(TenantDto, ['organizationId']),
 ) {}

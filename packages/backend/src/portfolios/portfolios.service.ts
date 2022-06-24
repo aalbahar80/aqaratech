@@ -111,7 +111,6 @@ export class PortfoliosService {
     );
 
     const input: Prisma.PortfolioUpdateArgs['data'] = updatePortfolioDto;
-    // TODO use connect to enforce referential integrity
     return this.prisma.portfolio.update({
       where: { id },
       data: input,

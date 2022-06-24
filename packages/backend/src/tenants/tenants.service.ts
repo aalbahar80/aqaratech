@@ -20,11 +20,11 @@ export class TenantsService {
   create({
     createTenantDto,
     user,
-    orgId,
+    orgId, // use for explicit role check or remove
   }: {
     createTenantDto: TenantDto;
     user: UserDto;
-    orgId: string; // use for explicit role check or remove
+    orgId: string;
   }) {
     this.caslAbilityFactory.throwIfForbidden(
       user,
@@ -118,7 +118,6 @@ export class TenantsService {
       subject('Tenant', toUpdate),
     );
 
-    // TODO use connect to enforce referential integrity
     const input: Prisma.TenantUpdateArgs['data'] = updateTenantDto;
     return this.prisma.tenant.update({
       where: { id },
