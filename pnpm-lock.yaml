@@ -61,6 +61,7 @@ importers:
       ts-loader: 9.3.0
       ts-node: 10.8.1
       tsconfig-paths: 4.0.0
+      tsx: 3.6.0
       typescript: 4.7.4
     dependencies:
       '@casl/ability': 5.4.4
@@ -115,6 +116,7 @@ importers:
       ts-loader: 9.3.0_typescript@4.7.4
       ts-node: 10.8.1_qiyc72axg2v44xl4yovan2v55u
       tsconfig-paths: 4.0.0
+      tsx: 3.6.0
       typescript: 4.7.4
 
   packages/docs:
@@ -1817,6 +1819,27 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+    dev: true
+
+  /@esbuild-kit/cjs-loader/2.2.1:
+    resolution: {integrity: sha512-pq2Z4DcqTBF7y1wQuIzFVqmHJVnmP6hgHEWN2ubPjeG7OzXMZ9NvozW+YA/MIeMdZWp1jcJ/EvXk2+mfEKoCDQ==}
+    dependencies:
+      '@esbuild-kit/core-utils': 2.0.1
+      get-tsconfig: 4.0.5
+    dev: true
+
+  /@esbuild-kit/core-utils/2.0.1:
+    resolution: {integrity: sha512-gSpJ59VeFI4/eZjD8hxVGSOf1pQYT7AE6vP9CzH3Igk6EDm72PPj1u2mUawfdzmZLSBj9gDKIuxX/biT3yzAjg==}
+    dependencies:
+      esbuild: 0.14.47
+      source-map-support: 0.5.21
+    dev: true
+
+  /@esbuild-kit/esm-loader/2.3.1:
+    resolution: {integrity: sha512-CC0H91Oa02cczLswEoiLowTzWxvnS3tIBGkQa1BnieFK7HHV4whrBFGRlUD9rMHfyyoO55IuOqNujycXX+gI8A==}
+    dependencies:
+      '@esbuild-kit/core-utils': 2.0.1
+      get-tsconfig: 4.0.5
     dev: true
 
   /@eslint/eslintrc/1.3.0:
@@ -6545,6 +6568,10 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.2
+    dev: true
+
+  /get-tsconfig/4.0.5:
+    resolution: {integrity: sha512-UiOHySG2zoM0krlrfJOMQoY5UR1Z57/HjMUJdi7lJHCLKiES9zZsDXtU0BPo2GUI5EqJmNRnqU3FdMjDmf2XaA==}
     dev: true
 
   /getpass/0.1.7:
@@ -11554,6 +11581,17 @@ packages:
     dependencies:
       tslib: 1.14.1
       typescript: 4.7.4
+    dev: true
+
+  /tsx/3.6.0:
+    resolution: {integrity: sha512-XzqSxPmyJnI7ZtEX/CLE/CSDkqbL7dK4jwtJRIZpV0EhCxWqtb1OqJPlUc4CVS3/MFdpt8ZxLpvPFohWRTHbzw==}
+    hasBin: true
+    dependencies:
+      '@esbuild-kit/cjs-loader': 2.2.1
+      '@esbuild-kit/core-utils': 2.0.1
+      '@esbuild-kit/esm-loader': 2.3.1
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /turbo-darwin-64/1.2.16:
