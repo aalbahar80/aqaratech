@@ -10,6 +10,7 @@ import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
+import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
@@ -28,6 +29,8 @@ async function bootstrap() {
       //  disableErrorMessages: true, // TODO prod only
     }),
   );
+
+  app.useGlobalFilters(new PrismaExceptionFilter());
 
   const config = new DocumentBuilder()
     .setTitle('Aqaratech API')
