@@ -4,20 +4,21 @@ import { config } from "dotenv";
 import { inspect } from "util";
 import { cleanupDatabase, isProdBranch } from "./clean-db.js";
 import {
-	fakePortfolio,
 	fakeExpense,
 	fakeLease,
-	fakeMaintenanceOrder,
-	fakeProperty,
-	fakeTenant,
 	fakeLeaseInvoice,
-	fakeUnit,
-	testPortfolioId,
-	testTenantId,
-	timespan,
+	fakeMaintenanceOrder,
 	fakeOrganization,
+	fakePortfolio,
+	fakeProperty,
 	fakeRole,
+	fakeTenant,
+	fakeUnit,
 	fakeUser,
+	testPortfolioEmail,
+	testTenantEmail,
+	testUserEmail,
+	timespan,
 } from "./generators.js";
 import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
@@ -54,7 +55,10 @@ export async function seed({
 	const min = 1;
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
+	// users[0]!.email = testUserEmail;
+
 	const users = Array.from({ length: userCount }, fakeUser);
+	users[0]!.email = testUserEmail;
 
 	const roles = Array.from({ length: roleCount }, () =>
 		fakeRole({ orgId: randId(organizations), userId: randId(users) })
@@ -62,7 +66,7 @@ export async function seed({
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
 	);
-	portfolios[0]!.id = testPortfolioId;
+	portfolios[0]!.email = testPortfolioEmail;
 
 	const properties = portfolios.flatMap((portfolio) =>
 		Array.from(
@@ -83,7 +87,7 @@ export async function seed({
 		let tenantN = fakeTenant(randId(organizations));
 
 		if (idx === 0) {
-			tenantN.id = testTenantId;
+			tenantN.email = testTenantEmail;
 		}
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {

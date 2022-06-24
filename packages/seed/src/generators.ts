@@ -11,16 +11,11 @@ import {
 faker.setLocale("ar");
 
 // consistent id's for testing
-export const testOrgId = "0fc6183e-929a-433d-8526-bfe02656a4f5";
-export const testUserId = "52e6fbb1-ec7e-4261-9375-2e95ea6d5bd8";
-export const testUserEmail = "client.dev@mailthink.net";
-export const testUserPassword = "test12";
-export const testPortfolioId = "c0183a5d-2875-488b-b86f-e1c5628262df";
-// export const testPortfolioEmail = "client.dev@mailthink.net";
-// export const testPortfolioPassword = "test12";
-export const testTenantId = "3dcef1c0-aae7-4766-968e-ad31b443bcc9";
+export const testPassword = "test12";
+export const testUserEmail = "admin.dev@mailthink.net";
+export const testOrgEmail = "org.dev@mailthink.net";
+export const testPortfolioEmail = "client.dev@mailthink.net";
 export const testTenantEmail = "tenant.dev@mailthink.net";
-export const testTenantPassword = "test12";
 
 export const timespan = 3;
 const createdAt = () => faker.date.past(timespan);
