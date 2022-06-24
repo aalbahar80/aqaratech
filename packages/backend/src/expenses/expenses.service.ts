@@ -26,8 +26,7 @@ export class ExpensesService {
   }) {
     // check if user has access to create expense for property/unit/portfolio
     const ability = this.caslAbilityFactory.defineAbility(user);
-    const { unitId, propertyId, portfolioId, maintenanceOrderId } =
-      createExpenseDto;
+    const { unitId, propertyId, portfolioId } = createExpenseDto;
 
     let toCreate: ExpenseDto & Record<string, any> = { ...createExpenseDto };
 
