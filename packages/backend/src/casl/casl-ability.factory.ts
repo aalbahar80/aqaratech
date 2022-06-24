@@ -101,7 +101,15 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['LeaseInvoice'], {
         lease: {
-          unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+          is: {
+            unit: {
+              is: {
+                property: {
+                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
+                },
+              },
+            },
+          },
         },
       });
 
@@ -155,7 +163,13 @@ export class CaslAbilityFactory {
 
       can(Action.Read, ['LeaseInvoice'], {
         lease: {
-          unit: { property: { portfolioId: { in: portfolios } } },
+          is: {
+            unit: {
+              is: {
+                property: { portfolioId: { in: portfolios } },
+              },
+            },
+          },
         },
       });
 
