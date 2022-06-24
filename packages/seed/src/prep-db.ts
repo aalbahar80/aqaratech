@@ -36,7 +36,6 @@ export const setupTenant = async () => {
 			nationality: "CV",
 			residencyNum: "534184025",
 			residencyEnd: new Date(),
-			contactMethod: null,
 		},
 	});
 	console.timeEnd("creating test tenant");

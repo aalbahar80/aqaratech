@@ -57,10 +57,6 @@ export class TenantDto extends AbstractDto implements Tenant {
   @ApiPropertyOptional()
   @IsISO8601()
   residencyEnd: Date | null = null;
-
-  // TODO remove
-  @ApiHideProperty()
-  contactMethod: string | null;
 }
 
 export class UpdateTenantDto extends PartialType(

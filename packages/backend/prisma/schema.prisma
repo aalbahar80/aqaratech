@@ -47,17 +47,16 @@ model Tenant {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    fullName      String    @default("")
-    shortName     String?
-    civilid       String?
-    dob           DateTime?
-    phone         String?
-    email         String?
-    passportNum   String?
-    nationality   String?
-    residencyNum  String?
-    residencyEnd  DateTime?
-    contactMethod String? // rethink
+    fullName     String    @default("")
+    shortName    String?
+    civilid      String?
+    dob          DateTime?
+    phone        String?
+    email        String?
+    passportNum  String?
+    nationality  String?
+    residencyNum String?
+    residencyEnd DateTime?
 
     leases            Lease[]
     maintenanceOrders MaintenanceOrder[]
@@ -252,7 +251,6 @@ model LeaseInvoice {
     memo        String?
     mfPaymentId String?
     leaseId     String
-    reminderAt  DateTime?
     lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 
     @@index([leaseId])
