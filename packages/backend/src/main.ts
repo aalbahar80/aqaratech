@@ -1,17 +1,18 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { writeFileSync } from 'fs';
-import { PortfoliosModule } from 'src/portfolios/portfolios.module';
-import { TenantsModule } from 'src/tenants/tenants.module';
-import { AppModule } from './app.module';
-
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
+import { writeFileSync } from 'fs';
+import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
+import { AppModule } from './app.module';
+
+import { ExpensesModule } from 'src/expenses/expenses.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
-import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
+import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
+import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
 
@@ -81,6 +82,7 @@ async function bootstrap() {
       UnitsModule,
       LeasesModule,
       LeaseInvoicesModule,
+      ExpensesModule,
     ],
   });
   // move below?

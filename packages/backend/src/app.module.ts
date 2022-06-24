@@ -13,13 +13,14 @@ import configuration from './config/configuration';
 import { PrismaModule } from './prisma/prisma.module';
 
 // resources
-import { PortfoliosModule } from './portfolios/portfolios.module';
-import { TenantsModule } from './tenants/tenants.module';
-import { UsersModule } from './users/users.module';
-import { PropertiesModule } from './properties/properties.module';
-import { UnitsModule } from './units/units.module';
-import { LeasesModule } from './leases/leases.module';
+import { ExpensesModule } from './expenses/expenses.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
+import { LeasesModule } from './leases/leases.module';
+import { PortfoliosModule } from './portfolios/portfolios.module';
+import { PropertiesModule } from './properties/properties.module';
+import { TenantsModule } from './tenants/tenants.module';
+import { UnitsModule } from './units/units.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
     UnitsModule,
     LeasesModule,
     LeaseInvoicesModule,
+    ExpensesModule,
   ],
   controllers: [AppController],
   providers: [
