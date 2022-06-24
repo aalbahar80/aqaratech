@@ -6,15 +6,15 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  IsUUID,
+  Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 export class LeaseDto extends AbstractDto implements Lease {
-  @IsUUID()
+  @Length(12)
   tenantId: string;
 
-  @IsUUID()
+  @Length(12)
   unitId: string;
 
   @IsISO8601()

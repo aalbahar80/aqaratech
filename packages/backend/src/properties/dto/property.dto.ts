@@ -9,13 +9,12 @@ import {
   IsLongitude,
   IsNumber,
   IsString,
-  IsUUID,
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 export class PropertyDto extends AbstractDto implements Property {
-  @IsUUID()
+  @Length(12)
   portfolioId: string;
 
   @Length(1, 255)

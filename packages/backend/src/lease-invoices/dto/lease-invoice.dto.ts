@@ -10,7 +10,7 @@ import {
   IsISO8601,
   IsPositive,
   IsString,
-  IsUUID,
+  Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
@@ -21,7 +21,7 @@ export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
   @IsISO8601()
   postAt: Date;
 
-  @IsUUID()
+  @Length(12)
   leaseId: string;
 
   @ApiPropertyOptional()

@@ -5,13 +5,12 @@ import {
   IsISO8601,
   IsPhoneNumber,
   IsString,
-  IsUUID,
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 export class PortfolioDto extends AbstractDto implements Portfolio {
-  @IsUUID()
+  @Length(12)
   organizationId: string;
 
   @Length(1, 255)
