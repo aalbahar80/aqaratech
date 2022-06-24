@@ -1,7 +1,7 @@
 import { seed } from "./seed.js";
 import prisma from "./prisma.js";
 
-seed({ sample: false, printOnly: false })
+seed({ sample: true, printOnly: false })
 	.catch((e) => {
 		console.error(e);
 		process.exit(1);
