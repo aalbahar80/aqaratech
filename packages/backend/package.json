@@ -23,7 +23,7 @@
     "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "tsx ../seed/dist/go-seed.ts"
+    "seed": "tsx ../seed/src/go-seed.ts"
   },
   "dependencies": {
     "@casl/ability": "5.4.4",
