@@ -2,7 +2,6 @@ import { faker } from "@faker-js/faker";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
-import { cleanupDatabase, isProdBranch } from "./clean-db.js";
 import {
 	fakeExpense,
 	fakeLease,
@@ -37,11 +36,8 @@ const randId = <T extends { id: string }>(entities: T[]): string => {
 
 export async function seed({
 	sample = true,
-	clean = false,
-}: { sample?: boolean; clean?: boolean } = {}) {
-	if (await isProdBranch()) {
-		return;
-	}
+	printOnly = false,
+}: { sample?: boolean; printOnly?: boolean } = {}) {
 	let userCount = 5;
 	let orgCount = 3;
 	let roleCount = 5;
@@ -250,9 +246,6 @@ export async function seed({
 	try {
 		console.log(`preparing to insert...`);
 		// TODO add a NODE_ENV check to only run this in development
-		if (clean) {
-			await cleanupDatabase();
-		}
 
 		console.time("insert");
 		await insertExpenseTypes();
