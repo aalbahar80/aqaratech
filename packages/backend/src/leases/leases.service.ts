@@ -8,6 +8,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
+import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -27,15 +28,7 @@ export class LeasesService {
     // check if user has access to create lease in this organization
     const unitQ = this.prisma.unit.findUnique({
       where: { id: createLeaseDto.unitId },
-      select: {
-        property: {
-          select: {
-            id: true,
-            portfolioId: true,
-            portfolio: { select: { id: true, organizationId: true } },
-          },
-        },
-      },
+      select: selectForAuthz.unit,
     });
     const tenantQ = this.prisma.tenant.findUnique({
       where: { id: createLeaseDto.tenantId },
@@ -133,32 +126,7 @@ export class LeasesService {
     // but we still need to check if tenant/unit are in the same organization
     const toUpdate = await this.prisma.lease.findUnique({
       where: { id },
-      select: {
-        unit: {
-          select: {
-            id: true,
-            propertyId: true,
-            property: {
-              select: {
-                id: true,
-                portfolioId: true,
-                portfolio: {
-                  select: {
-                    id: true,
-                    organizationId: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-        tenant: {
-          select: {
-            id: true,
-            organizationId: true,
-          },
-        },
-      },
+      select: selectForAuthz.lease,
     });
 
     this.caslAbilityFactory.throwIfForbidden(

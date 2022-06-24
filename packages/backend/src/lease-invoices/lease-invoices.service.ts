@@ -117,7 +117,7 @@ export class LeaseInvoicesService {
     // grab necessary data for ability check
     const toUpdate = await this.prisma.leaseInvoice.findUnique({
       where: { id },
-      select: selectForAuthz.lease,
+      select: selectForAuthz.leaseInvoice,
     });
 
     this.caslAbilityFactory.throwIfForbidden(
@@ -136,7 +136,7 @@ export class LeaseInvoicesService {
   async remove({ id, user }: { id: string; user: UserDto }) {
     const data = await this.prisma.leaseInvoice.findUnique({
       where: { id },
-      select: selectForAuthz.lease,
+      select: selectForAuthz.leaseInvoice,
     });
 
     this.caslAbilityFactory.throwIfForbidden(

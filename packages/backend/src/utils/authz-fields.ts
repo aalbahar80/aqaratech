@@ -1,6 +1,14 @@
-import { Prisma } from '@prisma/client';
+const unit = {
+  property: {
+    select: {
+      id: true,
+      portfolioId: true,
+      portfolio: { select: { id: true, organizationId: true } },
+    },
+  },
+};
 
-export const lease: Prisma.LeaseSelect = {
+const lease = {
   unit: {
     select: {
       id: true,
@@ -27,7 +35,32 @@ export const lease: Prisma.LeaseSelect = {
   },
 };
 
+const leaseInvoice = {
+  lease: {
+    select: {
+      unit: {
+        select: {
+          id: true,
+          propertyId: true,
+          property: {
+            select: {
+              id: true,
+              portfolioId: true,
+              portfolio: {
+                select: {
+                  id: true,
+                  organizationId: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
 /**
  * Get fields necessary for ability checks
  */
-export const selectForAuthz = { lease };
+export const selectForAuthz = { unit, lease, leaseInvoice };
