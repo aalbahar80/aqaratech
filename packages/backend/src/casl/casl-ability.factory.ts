@@ -25,6 +25,11 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
+    // TODO fix type, handle case where auth0 user email is not in the database
+    if (!user?.roles) {
+      throw new ForbiddenException('User has no roles');
+    }
+
     // opaque id type would be useful here
     const orgs: string[] = [];
     const portfolios: string[] = [];
