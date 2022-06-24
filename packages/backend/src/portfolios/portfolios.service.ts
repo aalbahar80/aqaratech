@@ -23,7 +23,7 @@ export class PortfoliosService {
   create({
     createPortfolioDto,
     user,
-    orgId,
+    orgId, // use for explicit role check or remove
   }: {
     createPortfolioDto: PortfolioDto;
     user: UserDto;
@@ -36,9 +36,9 @@ export class PortfoliosService {
     );
     const { organizationId, ...toCreate } = createPortfolioDto;
 
+    // use Prisma's `connect` to enforce referential integrity
     const input: Prisma.PortfolioCreateArgs['data'] = {
       ...toCreate,
-      // use connect to enforce referential integrity
       organization: { connect: { id: organizationId } },
     };
     return this.prisma.portfolio.create({ data: input });
