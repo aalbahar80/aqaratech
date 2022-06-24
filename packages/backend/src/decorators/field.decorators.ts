@@ -3,7 +3,6 @@ import { applyDecorators } from '@nestjs/common';
 import type { ApiPropertyOptions } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import * as R from 'remeda';
 import {
   IsInt,
   IsNotEmpty,
@@ -14,15 +13,16 @@ import {
   IsOptional,
   IsPositive,
   IsString,
-  MaxLength,
-  MinLength,
+  Length,
   Max,
+  MaxLength,
   Min,
+  MinLength,
 } from 'class-validator';
+import * as R from 'remeda';
 
 // import { supportedLanguageCount } from '../constants';
 import {
-  //   PhoneNumberSerializer,
   ToArray,
   ToLowerCase,
   ToUpperCase,
@@ -45,6 +45,13 @@ interface INumberFieldOptions {
   int?: boolean;
   isPositive?: boolean;
   swagger?: boolean;
+}
+
+/**
+ * Nano id validator
+ */
+export function Nanoid(): PropertyDecorator {
+  return applyDecorators(Length(12, 12));
 }
 
 export function NumberField(

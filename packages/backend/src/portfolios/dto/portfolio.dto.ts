@@ -8,9 +8,10 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class PortfolioDto extends AbstractDto implements Portfolio {
-  @Length(12)
+  @Nanoid()
   organizationId: string;
 
   @Length(1, 255)

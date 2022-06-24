@@ -5,14 +5,9 @@ import {
   PartialType,
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
-import {
-  IsBoolean,
-  IsISO8601,
-  IsPositive,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsBoolean, IsISO8601, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
   @IsPositive()
@@ -21,7 +16,7 @@ export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
   @IsISO8601()
   postAt: Date;
 
-  @Length(12)
+  @Nanoid()
   leaseId: string;
 
   @ApiPropertyOptional()

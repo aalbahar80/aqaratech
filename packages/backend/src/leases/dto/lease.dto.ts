@@ -6,15 +6,15 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class LeaseDto extends AbstractDto implements Lease {
-  @Length(12)
+  @Nanoid()
   tenantId: string;
 
-  @Length(12)
+  @Nanoid()
   unitId: string;
 
   @IsISO8601()

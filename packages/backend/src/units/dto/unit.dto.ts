@@ -2,9 +2,10 @@ import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class UnitDto extends AbstractDto implements Unit {
-  @Length(12)
+  @Nanoid()
   propertyId: string;
 
   @Length(1, 255)

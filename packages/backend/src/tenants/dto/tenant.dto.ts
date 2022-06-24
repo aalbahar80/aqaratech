@@ -9,9 +9,10 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class TenantDto extends AbstractDto implements Tenant {
-  @Length(12)
+  @Nanoid()
   organizationId: string;
 
   @Length(1, 255)

@@ -12,9 +12,10 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class PropertyDto extends AbstractDto implements Property {
-  @Length(12)
+  @Nanoid()
   portfolioId: string;
 
   @Length(1, 255)
