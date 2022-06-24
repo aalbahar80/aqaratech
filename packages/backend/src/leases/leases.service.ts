@@ -32,10 +32,7 @@ export class LeasesService {
     });
     const tenantQ = this.prisma.tenant.findUnique({
       where: { id: createLeaseDto.tenantId },
-      select: {
-        id: true,
-        organizationId: true,
-      },
+      select: selectForAuthz.tenant,
     });
     const [tenant, unit] = await Promise.all([tenantQ, unitQ]);
 

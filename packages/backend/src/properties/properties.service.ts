@@ -11,6 +11,7 @@ import {
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
 import { UserDto } from 'src/users/dto/user.dto';
+import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -30,7 +31,7 @@ export class PropertiesService {
     // check if user has access to create property
     const portfolio = await this.prisma.portfolio.findUnique({
       where: { id: createPropertyDto.portfolioId },
-      select: { id: true, organizationId: true },
+      select: selectForAuthz.portfolio,
     });
 
     const toCreate = {
@@ -110,11 +111,7 @@ export class PropertiesService {
   }) {
     const toUpdate = await this.prisma.property.findUnique({
       where: { id },
-      select: {
-        id: true,
-        portfolioId: true,
-        portfolio: { select: { id: true, organizationId: true } },
-      },
+      select: selectForAuthz.property,
     });
 
     this.caslAbilityFactory.throwIfForbidden(
@@ -127,7 +124,7 @@ export class PropertiesService {
     if (updatePropertyDto.portfolioId) {
       const portfolio = await this.prisma.portfolio.findUnique({
         where: { id: updatePropertyDto.portfolioId },
-        select: { id: true, organizationId: true },
+        select: selectForAuthz.portfolio,
       });
 
       this.caslAbilityFactory.throwIfForbidden(

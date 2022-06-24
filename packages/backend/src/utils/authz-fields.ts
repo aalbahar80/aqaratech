@@ -1,5 +1,15 @@
 import { Prisma } from '@prisma/client';
 
+const tenant = Prisma.validator<Prisma.TenantSelect>()({
+  id: true,
+  organizationId: true,
+});
+
+const portfolio = Prisma.validator<Prisma.PortfolioSelect>()({
+  id: true,
+  organizationId: true,
+});
+
 const property = Prisma.validator<Prisma.PropertySelect>()({
   id: true,
   portfolioId: true,
@@ -73,4 +83,11 @@ const leaseInvoice = Prisma.validator<Prisma.LeaseInvoiceSelect>()({
 /**
  * Get fields necessary for ability checks
  */
-export const selectForAuthz = { property, unit, lease, leaseInvoice };
+export const selectForAuthz = {
+  tenant,
+  portfolio,
+  property,
+  unit,
+  lease,
+  leaseInvoice,
+};
