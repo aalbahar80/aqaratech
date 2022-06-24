@@ -45,14 +45,21 @@ export async function seed({
 	let userCount = 5;
 	let orgCount = 3;
 	let roleCount = 5;
-	let portfolioCount = 9;
+	let portfolioCount = 2;
 	let propertyMin = 2;
 	let propertyMax = 6;
 	let unitMax = 5;
-	let moCount = 100;
-	let expenseCount = 150;
-	let trxPerLease = 12;
+	let moCount = 20;
+	let expenseCount = 10;
+	let trxPerLease = 3;
 	const min = 1;
+
+	if (sample) {
+		portfolioCount = 2;
+		moCount = 20;
+		expenseCount = 10;
+		trxPerLease = 3;
+	}
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
 	// users[0]!.email = testUserEmail;
@@ -217,7 +224,7 @@ export async function seed({
 	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${leaseInvoices.length} leaseInvoices \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
 	console.log(summary);
 
-	if (sample) {
+	if (printOnly) {
 		console.log(
 			inspect(
 				{
