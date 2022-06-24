@@ -29,15 +29,18 @@ export class PortfoliosService {
     user: UserDto;
     orgId: string;
   }) {
-    const toCreate = { ...createPortfolioDto, organizationId: orgId };
-
     this.caslAbilityFactory.throwIfForbidden(
       user,
       Action.Create,
-      subject('Portfolio', toCreate),
+      subject('Portfolio', createPortfolioDto),
     );
+    const { organizationId, ...toCreate } = createPortfolioDto;
 
-    const input: Prisma.PortfolioCreateArgs['data'] = toCreate;
+    const input: Prisma.PortfolioCreateArgs['data'] = {
+      ...toCreate,
+      // use connect to enforce referential integrity
+      organization: { connect: { id: organizationId } },
+    };
     return this.prisma.portfolio.create({ data: input });
   }
 
@@ -108,6 +111,7 @@ export class PortfoliosService {
     );
 
     const input: Prisma.PortfolioUpdateArgs['data'] = updatePortfolioDto;
+    // TODO use connect to enforce referential integrity
     return this.prisma.portfolio.update({
       where: { id },
       data: input,

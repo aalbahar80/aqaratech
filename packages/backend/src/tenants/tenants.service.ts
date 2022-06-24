@@ -26,6 +26,7 @@ export class TenantsService {
     user: UserDto;
     orgId: string;
   }) {
+    // TODO handle orgId from request body
     const toCreate = { ...createTenantDto, organizationId: orgId };
 
     this.caslAbilityFactory.throwIfForbidden(
@@ -34,6 +35,7 @@ export class TenantsService {
       subject('Tenant', toCreate),
     );
 
+    // TODO use connect to enforce referential integrity
     const input: Prisma.TenantCreateArgs['data'] = toCreate;
     return this.prisma.tenant.create({ data: input });
   }
@@ -115,6 +117,7 @@ export class TenantsService {
       subject('Tenant', toUpdate),
     );
 
+    // TODO use connect to enforce referential integrity
     const input: Prisma.TenantUpdateArgs['data'] = updateTenantDto;
     return this.prisma.tenant.update({
       where: { id },

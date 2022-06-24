@@ -1,9 +1,4 @@
-import {
-  ApiHideProperty,
-  ApiPropertyOptional,
-  OmitType,
-  PartialType,
-} from '@nestjs/swagger';
+import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
   IsEmail,
@@ -11,12 +6,13 @@ import {
   IsISO8601,
   IsPhoneNumber,
   IsString,
+  IsUUID,
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 export class TenantDto extends AbstractDto implements Tenant {
-  @ApiHideProperty()
+  @IsUUID()
   organizationId: string;
 
   @Length(1, 255)
