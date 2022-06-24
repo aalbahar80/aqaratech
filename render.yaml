@@ -10,7 +10,7 @@ services:
     # numInstances: 1
     # maxInstances: 1
     buildCommand: pnpm install --filter @self/backend... && cd packages/backend && pnpm build
-    startCommand: cd packages/backend && npx prisma generate && pnpm run start:prod
+    startCommand: cd packages/backend && pnpm run start:prod
     # healthCheckPath: /
     envVars:
       - key: DATABASE_URL
