@@ -1,10 +1,12 @@
-const property = {
+import { Prisma } from '@prisma/client';
+
+const property = Prisma.validator<Prisma.PropertySelect>()({
   id: true,
   portfolioId: true,
   portfolio: { select: { id: true, organizationId: true } },
-};
+});
 
-const unit = {
+const unit = Prisma.validator<Prisma.UnitSelect>()({
   id: true,
   propertyId: true,
   property: {
@@ -14,9 +16,9 @@ const unit = {
       portfolio: { select: { id: true, organizationId: true } },
     },
   },
-};
+});
 
-const lease = {
+const lease = Prisma.validator<Prisma.LeaseSelect>()({
   unit: {
     select: {
       id: true,
@@ -41,9 +43,9 @@ const lease = {
       organizationId: true,
     },
   },
-};
+});
 
-const leaseInvoice = {
+const leaseInvoice = Prisma.validator<Prisma.LeaseInvoiceSelect>()({
   lease: {
     select: {
       unit: {
@@ -66,7 +68,7 @@ const leaseInvoice = {
       },
     },
   },
-};
+});
 
 /**
  * Get fields necessary for ability checks
