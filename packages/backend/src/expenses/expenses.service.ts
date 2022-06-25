@@ -26,7 +26,7 @@ export class ExpensesService {
     user: UserDto;
   }) {
     // check if user has access to create expense for property/unit/portfolio
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const { unitId, propertyId, portfolioId } = createExpenseDto;
 
     let toCreate: ExpenseDto & Record<string, any> = { ...createExpenseDto };
@@ -72,7 +72,7 @@ export class ExpensesService {
   }): Promise<PaginatedMetaDto<ExpenseDto>> {
     const { page, take, q } = expensePageOptionsDto;
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     // returns a 404 whether not found or not accessible
     let [results, itemCount] = await Promise.all([
       this.prisma.expense.findMany({
@@ -98,7 +98,7 @@ export class ExpensesService {
   }
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.expense.findFirst({
       where: {
         AND: [accessibleBy(ability).Expense, { id }],
@@ -117,7 +117,7 @@ export class ExpensesService {
     user: UserDto;
   }) {
     // check if user has access to update expense
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     await this.prisma.expense.findFirst({
       where: { AND: [accessibleBy(ability, Action.Update).Expense, { id }] },
     });

@@ -70,7 +70,7 @@ export class LeasesService {
   }): Promise<PaginatedMetaDto<LeaseDto>> {
     const { page, take, q } = leasePageOptionsDto;
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     // returns a 404 whether not found or not accessible
     let [results, itemCount] = await Promise.all([
       this.prisma.lease.findMany({
@@ -100,7 +100,7 @@ export class LeasesService {
   }
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.lease.findFirst({
       where: {
         AND: [accessibleBy(ability).Lease, { id }],

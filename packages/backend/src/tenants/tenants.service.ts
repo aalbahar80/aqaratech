@@ -50,7 +50,7 @@ export class TenantsService {
   }): Promise<PaginatedMetaDto<TenantDto>> {
     const { page, take, q } = tenantPageOptionsDto;
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     // TODO test this
     // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     let [results, itemCount] = await Promise.all([
@@ -92,7 +92,7 @@ export class TenantsService {
   }
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.tenant.findFirst({
       where: {
         AND: [accessibleBy(ability).Tenant, { id }],

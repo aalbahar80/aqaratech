@@ -21,7 +21,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class CaslAbilityFactory {
-  defineAbility(user: UserDto) {
+  async defineAbility(user: UserDto) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
@@ -251,8 +251,8 @@ export class CaslAbilityFactory {
    * Often, it will be required to pass in not only the basic subject,
    * but also the subject's organization, portfolio, tenant, etc.
    */
-  throwIfForbidden(user: UserDto, action: Action, subject: Subject) {
-    const ability = this.defineAbility(user);
+  async throwIfForbidden(user: UserDto, action: Action, subject: Subject) {
+    const ability = await this.defineAbility(user);
 
     if (ability.cannot(action, subject)) {
       throw new ForbiddenException();

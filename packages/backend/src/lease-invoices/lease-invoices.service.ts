@@ -28,7 +28,7 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: LeaseInvoiceDto;
     user: UserDto;
   }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const lease = await this.prisma.lease.findFirst({
       where: {
         AND: [
@@ -64,7 +64,7 @@ export class LeaseInvoicesService {
   }): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     const { page, take, q } = leaseInvoicePageOptionsDto;
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     // TODO test this
     // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     // returns a 404 whether not found or not accessible
@@ -96,7 +96,7 @@ export class LeaseInvoicesService {
   }
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.leaseInvoice.findFirst({
       where: {
         AND: [accessibleBy(ability).LeaseInvoice, { id }],

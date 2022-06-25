@@ -44,7 +44,7 @@ export class AbilitiesGuard implements CanActivate {
       return false;
     }
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
 
     const isAllowed = rules.every((rule) => {
       return ability.can(rule.action, rule.subject);

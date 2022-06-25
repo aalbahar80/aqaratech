@@ -53,7 +53,7 @@ export class PortfoliosService {
   }): Promise<PaginatedMetaDto<PortfolioDto>> {
     const { page, take, q } = portfolioPageOptionsDto;
 
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     // TODO test this
     // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     let [results, itemCount] = await Promise.all([
@@ -84,7 +84,7 @@ export class PortfoliosService {
   }
 
   async findOne({ id, user }: { id: string; user: UserDto }) {
-    const ability = this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.portfolio.findFirst({
       where: {
         AND: [accessibleBy(ability).Portfolio, { id }],
