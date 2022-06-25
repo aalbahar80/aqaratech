@@ -65,10 +65,20 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['Expense'], {
         OR: [
-          { portfolio: { organizationId: { in: orgs } } },
-          { property: { portfolio: { organizationId: { in: orgs } } } },
+          { portfolio: { is: { organizationId: { in: orgs } } } },
           {
-            unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+            property: {
+              is: { portfolio: { is: { organizationId: { in: orgs } } } },
+            },
+          },
+          {
+            unit: {
+              is: {
+                property: {
+                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
+                },
+              },
+            },
           },
         ],
       });
@@ -94,12 +104,22 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['MaintenanceOrder'], {
         OR: [
-          { portfolio: { organizationId: { in: orgs } } },
-          { property: { portfolio: { organizationId: { in: orgs } } } },
+          { portfolio: { is: { organizationId: { in: orgs } } } },
           {
-            unit: { property: { portfolio: { organizationId: { in: orgs } } } },
+            property: {
+              is: { portfolio: { is: { organizationId: { in: orgs } } } },
+            },
           },
-          { tenant: { organizationId: { in: orgs } } },
+          {
+            unit: {
+              is: {
+                property: {
+                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
+                },
+              },
+            },
+          },
+          { tenant: { is: { organizationId: { in: orgs } } } },
           // {expenses: {some: {}}}
         ],
       });
