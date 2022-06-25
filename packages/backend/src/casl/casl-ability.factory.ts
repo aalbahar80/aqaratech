@@ -5,6 +5,7 @@ import {
   Expense,
   ExpenseType,
   Lease,
+  LeaseInvoice,
   MaintenanceOrder,
   Organization,
   Plan,
@@ -13,7 +14,6 @@ import {
   Property,
   Role,
   Tenant,
-  LeaseInvoice,
   Unit,
   User,
 } from '@prisma/client';
@@ -69,9 +69,6 @@ export class CaslAbilityFactory {
 
     // Define an org user's manageable entities
 
-    // interface ManageableResource {
-    //   id: string;
-    // }
     type ManageableResource = string;
     interface Manageable {
       orgs: ManageableResource[];
@@ -82,7 +79,7 @@ export class CaslAbilityFactory {
       leases: ManageableResource[];
       leaseInvoices: ManageableResource[];
       expenses: ManageableResource[];
-      // maintenanceOrders: ManageableResource[];
+      maintenanceOrders: ManageableResource[];
     }
 
     const tenantsQ = this.prisma.tenant.findMany({
@@ -141,6 +138,20 @@ export class CaslAbilityFactory {
       },
     });
 
+    // prettier-ignore
+    const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
+      select: { id: true },
+      where: {
+        OR: [
+          { tenant: { organizationId: { in: own.orgs } } },
+          { portfolio: { organizationId: { in: own.orgs } } },
+          { property: { portfolio: { organizationId: { in: own.orgs } } } },
+          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } }, }, },
+        ],
+      },
+    });
+
+    console.time('defineAbility:queries');
     const [
       tenants,
       portfolios,
@@ -149,6 +160,7 @@ export class CaslAbilityFactory {
       leases,
       leaseInvoices,
       expenses,
+      maintenanceOrders,
     ] = await Promise.all([
       tenantsQ,
       portfoliosQ,
@@ -157,7 +169,9 @@ export class CaslAbilityFactory {
       leasesQ,
       leaseInvoicesQ,
       expensesQ,
+      maintenanceOrdersQ,
     ]);
+    console.timeEnd('defineAbility:queries');
 
     const manageable: Manageable = {
       orgs: own.orgs, // TODO consider contraining to superadmins only
@@ -168,205 +182,190 @@ export class CaslAbilityFactory {
       leases: leases.map((i) => i.id),
       leaseInvoices: leaseInvoices.map((i) => i.id),
       expenses: expenses.map((i) => i.id),
+      maintenanceOrders: maintenanceOrders.map((i) => i.id),
     };
-
-    console.log({ manageable });
 
     // ### Role: Organization###
     if (own.orgs.length > 0) {
       // fail fast if no orgs
 
+      // TODO handle updating parentId's by adding a cannot clause
       can(Action.Manage, ['Tenant'], {
-        // organizationId: { in: orgs },
-        id: { in: manageable.tenants },
+        OR: [
+          { id: { in: manageable.tenants } },
+          { organizationId: { in: manageable.orgs } }, // new tenant
+        ],
       });
 
       can(Action.Manage, ['Portfolio'], {
-        organizationId: { in: orgs },
+        OR: [
+          { id: { in: manageable.tenants } },
+          { organizationId: { in: manageable.orgs } },
+        ],
       });
 
-      can(Action.Manage, ['Expense'], {
+      can(Action.Manage, ['Property'], {
         OR: [
-          { portfolio: { is: { organizationId: { in: orgs } } } },
-          {
-            property: {
-              is: { portfolio: { is: { organizationId: { in: orgs } } } },
-            },
-          },
-          {
-            unit: {
-              is: {
-                property: {
-                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
-                },
-              },
-            },
-          },
+          { id: { in: manageable.properties } },
+          { portfolioId: { in: manageable.portfolios } },
+        ],
+      });
+
+      can(Action.Manage, ['Unit'], {
+        OR: [
+          { id: { in: manageable.units } },
+          { propertyId: { in: manageable.properties } },
         ],
       });
 
       can(Action.Manage, ['Lease'], {
         OR: [
+          { id: { in: manageable.leases } },
           {
-            unit: {
-              is: {
-                property: {
-                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
-                },
-              },
-            },
+            AND: [
+              { unitId: { in: manageable.units } },
+              { tenantId: { in: manageable.tenants } },
+            ],
           },
-          { tenant: { is: { organizationId: { in: orgs } } } },
-        ],
-      });
-
-      can(Action.Manage, ['Property'], {
-        portfolio: { is: { organizationId: { in: orgs } } },
-      });
-
-      can(Action.Manage, ['MaintenanceOrder'], {
-        OR: [
-          { portfolio: { is: { organizationId: { in: orgs } } } },
-          {
-            property: {
-              is: { portfolio: { is: { organizationId: { in: orgs } } } },
-            },
-          },
-          {
-            unit: {
-              is: {
-                property: {
-                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
-                },
-              },
-            },
-          },
-          { tenant: { is: { organizationId: { in: orgs } } } },
-          // {expenses: {some: {}}}
         ],
       });
 
       can(Action.Manage, ['LeaseInvoice'], {
-        lease: {
-          is: {
-            unit: {
-              is: {
-                property: {
-                  is: { portfolio: { is: { organizationId: { in: orgs } } } },
-                },
-              },
-            },
-          },
-        },
+        OR: [
+          { id: { in: manageable.leaseInvoices } },
+          { leaseId: { in: manageable.leases } },
+        ],
       });
 
-      can(Action.Manage, ['Unit'], {
-        property: {
-          is: { portfolio: { is: { organizationId: { in: orgs } } } },
-        },
+      can(Action.Manage, ['Expense'], {
+        OR: [
+          { id: { in: manageable.leases } },
+          {
+            OR: [
+              { unitId: { in: manageable.units } },
+              { propertyId: { in: manageable.properties } },
+              { portfolioId: { in: manageable.portfolios } },
+              // {maintenanceOrderId: { in: manageable.maintenanceOrders } },
+            ],
+          },
+        ],
+      });
+
+      can(Action.Manage, ['MaintenanceOrder'], {
+        OR: [
+          { id: { in: manageable.maintenanceOrders } },
+          {
+            OR: [
+              { tenantId: { in: manageable.tenants } },
+              { unitId: { in: manageable.units } },
+              { propertyId: { in: manageable.properties } },
+              { portfolioId: { in: manageable.portfolios } },
+            ],
+          },
+        ],
       });
     }
 
     // ### Role: Portfolio ###
     // const portfoliosChangeMe = [];
-    if (portfoliosChangeMe.length > 0) {
-      // fail fast if no portfolios
+    // if (portfoliosChangeMe.length > 0) {
+    //   // fail fast if no portfolios
 
-      // can view tenants who have leases in their properties
-      can(Action.Read, 'Tenant', {
-        leases: {
-          some: {
-            unit: {
-              property: {
-                portfolioId: { in: portfoliosChangeMe },
-              },
-            },
-          },
-        },
-      });
+    //   // can view tenants who have leases in their properties
+    //   can(Action.Read, 'Tenant', {
+    //     leases: {
+    //       some: {
+    //         unit: {
+    //           property: {
+    //             portfolioId: { in: portfoliosChangeMe },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   });
 
-      can(Action.Read, ['Expense'], {
-        OR: [
-          { portfolioId: { in: portfoliosChangeMe } },
-          { property: { portfolioId: { in: portfoliosChangeMe } } },
-          { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
-        ],
-      });
+    //   can(Action.Read, ['Expense'], {
+    //     OR: [
+    //       { portfolioId: { in: portfoliosChangeMe } },
+    //       { property: { portfolioId: { in: portfoliosChangeMe } } },
+    //       { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
+    //     ],
+    //   });
 
-      can(Action.Read, ['MaintenanceOrder'], {
-        OR: [
-          { portfolioId: { in: portfoliosChangeMe } },
-          { property: { portfolioId: { in: portfoliosChangeMe } } },
-          { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
-        ],
-      });
+    //   can(Action.Read, ['MaintenanceOrder'], {
+    //     OR: [
+    //       { portfolioId: { in: portfoliosChangeMe } },
+    //       { property: { portfolioId: { in: portfoliosChangeMe } } },
+    //       { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
+    //     ],
+    //   });
 
-      can(Action.Read, ['Lease'], {
-        unit: {
-          is: { property: { is: { portfolioId: { in: portfoliosChangeMe } } } },
-        },
-      });
+    //   can(Action.Read, ['Lease'], {
+    //     unit: {
+    //       is: { property: { is: { portfolioId: { in: portfoliosChangeMe } } } },
+    //     },
+    //   });
 
-      can(Action.Read, ['Property'], {
-        portfolioId: { in: portfoliosChangeMe },
-      });
+    //   can(Action.Read, ['Property'], {
+    //     portfolioId: { in: portfoliosChangeMe },
+    //   });
 
-      can(Action.Read, ['LeaseInvoice'], {
-        lease: {
-          is: {
-            unit: {
-              is: {
-                property: { portfolioId: { in: portfoliosChangeMe } },
-              },
-            },
-          },
-        },
-      });
+    //   can(Action.Read, ['LeaseInvoice'], {
+    //     lease: {
+    //       is: {
+    //         unit: {
+    //           is: {
+    //             property: { portfolioId: { in: portfoliosChangeMe } },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   });
 
-      can(Action.Read, ['Unit'], {
-        property: { portfolioId: { in: portfoliosChangeMe } },
-      });
+    //   can(Action.Read, ['Unit'], {
+    //     property: { portfolioId: { in: portfoliosChangeMe } },
+    //   });
 
-      can(Action.Read, ['Portfolio'], {
-        id: { in: portfoliosChangeMe },
-      });
-    }
+    //   can(Action.Read, ['Portfolio'], {
+    //     id: { in: portfoliosChangeMe },
+    //   });
+    // }
 
     // ### Role: Tenant###
-    if (tenants.length > 0) {
-      // fail fast if no tenants
+    // if (tenants.length > 0) {
+    //   // fail fast if no tenants
 
-      // can view all their tenant profiles
-      can(Action.Read, 'Tenant', {
-        id: { in: tenants },
-      });
+    //   // can view all their tenant profiles
+    //   can(Action.Read, 'Tenant', {
+    //     id: { in: tenants },
+    //   });
 
-      // can view all their leases
-      can(Action.Read, ['Lease'], {
-        tenantId: { in: tenants },
-      });
+    //   // can view all their leases
+    //   can(Action.Read, ['Lease'], {
+    //     tenantId: { in: tenants },
+    //   });
 
-      can(Action.Read, ['MaintenanceOrder'], {
-        tenantId: { in: tenants },
-      });
+    //   can(Action.Read, ['MaintenanceOrder'], {
+    //     tenantId: { in: tenants },
+    //   });
 
-      // TODO some fields should be public
-      can(Action.Read, ['LeaseInvoice'], {
-        lease: {
-          tenantId: { in: tenants },
-        },
-      });
+    //   // TODO some fields should be public
+    //   can(Action.Read, ['LeaseInvoice'], {
+    //     lease: {
+    //       tenantId: { in: tenants },
+    //     },
+    //   });
 
-      // only some fields
-      // can(Action.Read, ['Property'], {
-      //   units: { some: { leases: { some: { tenantId: { in: tenants } } } } },
-      // });
+    //   // only some fields
+    //   // can(Action.Read, ['Property'], {
+    //   //   units: { some: { leases: { some: { tenantId: { in: tenants } } } } },
+    //   // });
 
-      // only some fields
-      // can(Action.Read, ['Unit'], {
-      //   leases: { some: { tenantId: { in: tenants } } },
-      // });
-    }
+    //   // only some fields
+    //   // can(Action.Read, ['Unit'], {
+    //   //   leases: { some: { tenantId: { in: tenants } } },
+    //   // });
+    // }
 
     console.timeEnd('defineAbility');
     return build();
