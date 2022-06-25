@@ -26,6 +26,8 @@ export class PaginatedDto {
   @ApiProperty()
   readonly hasNextPage: boolean;
 
+  // TODO fix pagination meta when no results
+  // handle when requesting page 5 but there are only 2 pages
   constructor({ pageOptionsDto, itemCount }: IPageMetaDtoParameters) {
     this.page = pageOptionsDto.page;
     this.take = pageOptionsDto.take;
