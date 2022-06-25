@@ -8,6 +8,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
+import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -34,16 +35,19 @@ export class ExpensesService {
     if (unitId) {
       const unit = await this.prisma.unit.findFirst({
         where: { AND: [accessibleBy(ability).Unit, { id: unitId }] },
+        select: selectForAuthz.unit,
       });
       toCreate.unit = unit;
     } else if (propertyId) {
       const property = await this.prisma.property.findFirst({
         where: { AND: [accessibleBy(ability).Property, { id: propertyId }] },
+        select: selectForAuthz.property,
       });
       toCreate.property = property;
     } else if (portfolioId) {
       const portfolio = await this.prisma.portfolio.findFirst({
         where: { AND: [accessibleBy(ability).Portfolio, { id: portfolioId }] },
+        select: selectForAuthz.portfolio,
       });
       toCreate.portfolio = portfolio;
     }
