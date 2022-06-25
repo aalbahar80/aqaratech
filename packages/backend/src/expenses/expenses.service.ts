@@ -116,13 +116,40 @@ export class ExpensesService {
     updateExpenseDto: UpdateExpenseDto;
     user: UserDto;
   }) {
-    // grab necessary data for ability check
-    // alt: use findFirst with accessibleBy,
-    // but we still need to check if tenant/unit are in the same organization
-    const toUpdate = await this.prisma.expense.findUnique({
-      where: { id },
-      select: selectForAuthz.expense,
+    // check if user has access to update expense
+    const ability = this.caslAbilityFactory.defineAbility(user);
+    await this.prisma.expense.findFirst({
+      where: { AND: [accessibleBy(ability, Action.Update).Expense, { id }] },
     });
+
+    const { unitId, propertyId, portfolioId } = updateExpenseDto;
+
+    let toUpdate: UpdateExpenseDto & Record<string, any> = {
+      ...updateExpenseDto,
+    };
+
+    // TODO validate that only one of unitId, propertyId, portfolioId is set
+    // TODO dry with /create
+    // check if user has access to new unit/property/portfolio
+    if (unitId) {
+      const unit = await this.prisma.unit.findFirst({
+        where: { AND: [accessibleBy(ability).Unit, { id: unitId }] },
+        select: selectForAuthz.unit,
+      });
+      toUpdate.unit = unit;
+    } else if (propertyId) {
+      const property = await this.prisma.property.findFirst({
+        where: { AND: [accessibleBy(ability).Property, { id: propertyId }] },
+        select: selectForAuthz.property,
+      });
+      toUpdate.property = property;
+    } else if (portfolioId) {
+      const portfolio = await this.prisma.portfolio.findFirst({
+        where: { AND: [accessibleBy(ability).Portfolio, { id: portfolioId }] },
+        select: selectForAuthz.portfolio,
+      });
+      toUpdate.portfolio = portfolio;
+    }
 
     this.caslAbilityFactory.throwIfForbidden(
       user,
@@ -130,8 +157,6 @@ export class ExpensesService {
       subject('Expense', toUpdate),
     );
 
-    // not checking if tenant and unit are in the same organization
-    // since it is not possible to update tenantId or unitId
     const input: Prisma.ExpenseUpdateArgs['data'] = updateExpenseDto;
     return this.prisma.expense.update({
       where: { id },
