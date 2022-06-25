@@ -1,6 +1,8 @@
 This repository is a mono-repo containing multiple packages located in the `packages` directory. Maintained using [pnpm](https://pnpm.io/) and [turborepo](https://turborepo.org/).
 
-`site`: Main site built with [sveltekit](https://kit.svelte.dev/). Fully typed with `typescript` & [trpc](https://trpc.io/). Uses [playwright](https://playwright.dev/) for testing.
+`site`: Main site built with [sveltekit](https://kit.svelte.dev/) & `typescript`. Uses [playwright](https://playwright.dev/) for testing.
+
+`backend`: Server built with [nest](https://github.com/nestjs/nest) & `typescript`.
 
 `docs`: Documentation for site. Built using [kit-docs](https://github.com/svelteness/kit-docs).
 
