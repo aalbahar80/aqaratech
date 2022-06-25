@@ -17,11 +17,16 @@ import {
   Unit,
   User,
 } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class CaslAbilityFactory {
+  constructor(private prisma: PrismaService) {}
+
   async defineAbility(user: UserDto) {
+    // TODO cache db queries
+    console.time('defineAbility');
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
@@ -30,33 +35,150 @@ export class CaslAbilityFactory {
       throw new ForbiddenException('User has no roles');
     }
 
-    // opaque id type would be useful here
-    const orgs: string[] = [];
-    const portfolios: string[] = [];
-    const tenants: string[] = [];
+    // Define user's own roles
+
+    interface Own {
+      orgs: string[];
+      portfolios: string[];
+      tenants: string[];
+    }
+
+    /**
+     * A user's own role.
+     * A user can belong to an organization (ex. creator, staff, admin, etc.)
+     * A user can belong to a portfolio (ex. owner, family-member, etc)
+     * A user can belong to a tenant (ex. renter)
+     *
+     * A user can have multiple roles. Example: An employee of a an organization is also a tenant of a different organization.
+     * @example
+     * own.portfolio represents read-only access to the user's portfolio.
+     */
+    const own: Own = { orgs: [], portfolios: [], tenants: [] };
 
     user.roles.forEach((role) => {
       if (role.organizationId) {
-        orgs.push(role.organizationId);
+        own.orgs.push(role.organizationId);
       }
       if (role.portfolioId) {
-        portfolios.push(role.portfolioId);
+        own.portfolios.push(role.portfolioId);
       }
       if (role.tenantId) {
-        tenants.push(role.tenantId);
+        own.tenants.push(role.tenantId);
       }
     });
 
-    // console.log({ orgs });
-    // console.log({ portfolios });
-    // console.log({ tenants });
+    // Define an org user's manageable entities
+
+    // interface ManageableResource {
+    //   id: string;
+    // }
+    type ManageableResource = string;
+    interface Manageable {
+      orgs: ManageableResource[];
+      tenants: ManageableResource[];
+      portfolios: ManageableResource[];
+      properties: ManageableResource[];
+      units: ManageableResource[];
+      leases: ManageableResource[];
+      leaseInvoices: ManageableResource[];
+      expenses: ManageableResource[];
+      // maintenanceOrders: ManageableResource[];
+    }
+
+    const tenantsQ = this.prisma.tenant.findMany({
+      select: { id: true },
+      where: { organization: { id: { in: own.orgs } } },
+    });
+
+    const portfoliosQ = this.prisma.portfolio.findMany({
+      select: { id: true },
+      where: { organization: { id: { in: own.orgs } } },
+    });
+
+    const propertiesQ = this.prisma.property.findMany({
+      select: { id: true },
+      where: { portfolio: { organizationId: { in: own.orgs } } },
+    });
+
+    const unitsQ = this.prisma.unit.findMany({
+      select: { id: true },
+      where: { property: { portfolio: { organizationId: { in: own.orgs } } } },
+    });
+
+    // prettier-ignore
+    const leasesQ = this.prisma.lease.findMany({
+      select: { id: true },
+      where: {
+        OR: [
+          { tenant: { organizationId: { in: own.orgs } } },
+          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } } } },
+        ]
+      },
+    });
+
+    // prettier-ignore
+    const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
+      select: { id: true },
+      where: {
+        lease: {
+          OR: [
+            { tenant: { organizationId: { in: own.orgs } } },
+            { unit: { property: { portfolio: { organizationId: { in: own.orgs } } }, }, },
+          ],
+        },
+      },
+    });
+
+    // prettier-ignore
+    const expensesQ = this.prisma.expense.findMany({
+      select: { id: true },
+      where: {
+        OR: [
+          { portfolio: { organizationId: { in: own.orgs } } },
+          { property: { portfolio: { organizationId: { in: own.orgs } } } },
+          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } } } },
+        ],
+      },
+    });
+
+    const [
+      tenants,
+      portfolios,
+      properties,
+      units,
+      leases,
+      leaseInvoices,
+      expenses,
+    ] = await Promise.all([
+      tenantsQ,
+      portfoliosQ,
+      propertiesQ,
+      unitsQ,
+      leasesQ,
+      leaseInvoicesQ,
+      expensesQ,
+    ]);
+
+    const manageable: Manageable = {
+      orgs: own.orgs, // TODO consider contraining to superadmins only
+      tenants: tenants.map((i) => i.id),
+      portfolios: portfolios.map((i) => i.id),
+      properties: properties.map((i) => i.id),
+      units: units.map((i) => i.id),
+      leases: leases.map((i) => i.id),
+      leaseInvoices: leaseInvoices.map((i) => i.id),
+      expenses: expenses.map((i) => i.id),
+    };
+
+    console.log({ manageable });
 
     // ### Role: Organization###
-    if (orgs.length > 0) {
+    if (own.orgs.length > 0) {
       // fail fast if no orgs
 
       can(Action.Manage, ['Tenant'], {
-        organizationId: { in: orgs },
+        // organizationId: { in: orgs },
+        id: { in: manageable.tenants },
       });
 
       can(Action.Manage, ['Portfolio'], {
@@ -146,7 +268,8 @@ export class CaslAbilityFactory {
     }
 
     // ### Role: Portfolio ###
-    if (portfolios.length > 0) {
+    // const portfoliosChangeMe = [];
+    if (portfoliosChangeMe.length > 0) {
       // fail fast if no portfolios
 
       // can view tenants who have leases in their properties
@@ -155,7 +278,7 @@ export class CaslAbilityFactory {
           some: {
             unit: {
               property: {
-                portfolioId: { in: portfolios },
+                portfolioId: { in: portfoliosChangeMe },
               },
             },
           },
@@ -164,26 +287,28 @@ export class CaslAbilityFactory {
 
       can(Action.Read, ['Expense'], {
         OR: [
-          { portfolioId: { in: portfolios } },
-          { property: { portfolioId: { in: portfolios } } },
-          { unit: { property: { portfolioId: { in: portfolios } } } },
+          { portfolioId: { in: portfoliosChangeMe } },
+          { property: { portfolioId: { in: portfoliosChangeMe } } },
+          { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
         ],
       });
 
       can(Action.Read, ['MaintenanceOrder'], {
         OR: [
-          { portfolioId: { in: portfolios } },
-          { property: { portfolioId: { in: portfolios } } },
-          { unit: { property: { portfolioId: { in: portfolios } } } },
+          { portfolioId: { in: portfoliosChangeMe } },
+          { property: { portfolioId: { in: portfoliosChangeMe } } },
+          { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
         ],
       });
 
       can(Action.Read, ['Lease'], {
-        unit: { is: { property: { is: { portfolioId: { in: portfolios } } } } },
+        unit: {
+          is: { property: { is: { portfolioId: { in: portfoliosChangeMe } } } },
+        },
       });
 
       can(Action.Read, ['Property'], {
-        portfolioId: { in: portfolios },
+        portfolioId: { in: portfoliosChangeMe },
       });
 
       can(Action.Read, ['LeaseInvoice'], {
@@ -191,7 +316,7 @@ export class CaslAbilityFactory {
           is: {
             unit: {
               is: {
-                property: { portfolioId: { in: portfolios } },
+                property: { portfolioId: { in: portfoliosChangeMe } },
               },
             },
           },
@@ -199,11 +324,11 @@ export class CaslAbilityFactory {
       });
 
       can(Action.Read, ['Unit'], {
-        property: { portfolioId: { in: portfolios } },
+        property: { portfolioId: { in: portfoliosChangeMe } },
       });
 
       can(Action.Read, ['Portfolio'], {
-        id: { in: portfolios },
+        id: { in: portfoliosChangeMe },
       });
     }
 
@@ -243,6 +368,7 @@ export class CaslAbilityFactory {
       // });
     }
 
+    console.timeEnd('defineAbility');
     return build();
   }
 
