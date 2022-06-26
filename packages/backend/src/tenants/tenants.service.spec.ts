@@ -1,7 +1,6 @@
-import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { fakeTenant } from '@self/seed';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { RoleDto, UserDto } from 'src/users/dto/user.dto';
@@ -41,11 +40,7 @@ describe('TenantsService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        TenantsService,
-        { provide: PrismaService, useValue: db },
-        CaslAbilityFactory,
-      ],
+      providers: [TenantsService, { provide: PrismaService, useValue: db }],
     }).compile();
 
     service = module.get<TenantsService>(TenantsService);

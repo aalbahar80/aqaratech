@@ -1,9 +1,8 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -13,10 +12,7 @@ import { search } from 'src/utils/search';
 
 @Injectable()
 export class TenantsService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create({
     createTenantDto,
@@ -47,7 +43,6 @@ export class TenantsService {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: IUser;
   }): Promise<PaginatedMetaDto<TenantDto>> {
-    console.log({ user }, 'tenants.service.ts ~ 55');
     const { page, take, q } = tenantPageOptionsDto;
 
     let [results, itemCount] = await Promise.all([
@@ -89,10 +84,9 @@ export class TenantsService {
   }
 
   async findOne({ id, user }: { id: string; user: IUser }) {
-    const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.tenant.findFirst({
       where: {
-        AND: [accessibleBy(ability).Tenant, { id }],
+        AND: [accessibleBy(user.ability).Tenant, { id }],
       },
     });
     return data;
@@ -107,28 +101,21 @@ export class TenantsService {
     updateTenantDto: UpdateTenantDto;
     user: IUser;
   }) {
-    const toUpdate = await this.prisma.tenant.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Tenant', toUpdate),
+      subject('Tenant', { id, ...updateTenantDto }),
     );
 
-    const input: Prisma.TenantUpdateArgs['data'] = updateTenantDto;
     return this.prisma.tenant.update({
       where: { id },
-      data: input,
+      data: updateTenantDto,
     });
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.tenant.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Delete,
-      subject('Tenant', data),
+      subject('Tenant', { id }),
     );
 
     return this.prisma.tenant.delete({ where: { id } });
