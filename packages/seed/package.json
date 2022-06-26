@@ -14,7 +14,7 @@
         "prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma"
     },
     "devDependencies": {
-        "@faker-js/faker": "7.2.0",
+        "@faker-js/faker": "7.3.0",
         "@prisma/client": "3.15.2",
         "@tsconfig/esm": "1.0.1",
         "@tsconfig/node16": "1.0.3",
