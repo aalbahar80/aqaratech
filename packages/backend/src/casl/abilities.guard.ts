@@ -6,7 +6,7 @@ import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { TRequest } from 'src/types/request.type';
 
 /**
- * Decorator to check authz permissions. Consumes metadata from `@CheckAbilities`.
+ * Guard to check authz permissions. Consumes metadata from `@CheckAbilities`.
  * This decorator is used to check permissions for a specific action on an entity type,
  * not an entity instance. This makes it useful for failing fast if a user is not authorized.
  *
@@ -15,6 +15,8 @@ import { TRequest } from 'src/types/request.type';
  *
  * On the other hand, if a user does not have permission to read any `Unit`,
  * we can just fail fast and return a 403 without needing to call the db.
+ *
+ * Attach ability to a request. Handle caching of abilities.
  */
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
@@ -25,6 +27,7 @@ export class AbilitiesGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // TODO: dry up isPublic check with src/auth/JwtAuthGuard
+    console.log('abilities.guard.ts ~ 28');
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -38,13 +41,10 @@ export class AbilitiesGuard implements CanActivate {
       [];
 
     const request = context.switchToHttp().getRequest<TRequest>();
-    const user = request?.user;
 
-    if (!user) {
-      return false;
-    }
-
-    const ability = await this.caslAbilityFactory.defineAbility(user);
+    const ability = await this.caslAbilityFactory.defineAbility(request.user);
+    // attach ability to request, to be used by services for further permission checks
+    request.ability = ability;
 
     const isAllowed = rules.every((rule) => {
       return ability.can(rule.action, rule.subject);

@@ -385,7 +385,7 @@ export class CaslAbilityFactory {
   }
 }
 
-type AppAbility = PrismaAbility<[string, Subject]>;
+export type AppAbility = PrismaAbility<[string, Subject]>;
 
 export enum Action {
   Manage = 'manage',
