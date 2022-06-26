@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import { writeFileSync } from 'fs';
+import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { AppModule } from './app.module';
 
@@ -34,7 +35,7 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new PrismaExceptionFilter());
+  app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
   const config = new DocumentBuilder()
     .setTitle('Aqaratech API')
