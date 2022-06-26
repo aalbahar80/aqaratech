@@ -18,8 +18,8 @@ export const testPortfolioEmail = "client.dev@mailthink.net";
 export const testTenantEmail = "tenant.dev@mailthink.net";
 
 export const timespan = 3;
-const createdAt = () => faker.date.past(timespan);
-const updatedAt = () => faker.date.past(timespan);
+export const createdAt = () => faker.date.past(timespan);
+export const updatedAt = () => faker.date.past(timespan);
 
 export const generateId = (): string =>
 	customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 12)();

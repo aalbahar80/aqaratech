@@ -3,6 +3,7 @@ import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
 import {
+	createdAt,
 	fakeExpense,
 	fakeLease,
 	fakeLeaseInvoice,
@@ -14,10 +15,12 @@ import {
 	fakeTenant,
 	fakeUnit,
 	fakeUser,
+	generateId,
 	testPortfolioEmail,
 	testTenantEmail,
 	testUserEmail,
 	timespan,
+	updatedAt,
 } from "./generators.js";
 import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
@@ -43,8 +46,8 @@ export async function seed({
 	let roleCount = 5;
 	let portfolioCount = 9;
 	let propertyMin = 2;
-	let propertyMax = 6;
-	let unitMax = 5;
+	let propertyMax = 20;
+	let unitMax = 30;
 	let moCount = 100;
 	let expenseCount = 150;
 	let trxPerLease = 12;
@@ -58,7 +61,7 @@ export async function seed({
 	}
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
-	// users[0]!.email = testUserEmail;
+	organizations[0]!.id = "hdmp5pje1a7o";
 
 	const users = Array.from({ length: userCount }, fakeUser);
 	users[0]!.email = testUserEmail;
@@ -66,6 +69,14 @@ export async function seed({
 	const roles = Array.from({ length: roleCount }, () =>
 		fakeRole({ orgId: randId(organizations), userId: randId(users) })
 	);
+	roles.push({
+		id: generateId(),
+		organizationId: organizations[0]!.id,
+		userId: users[0]!.id,
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+	});
+
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
 	);
