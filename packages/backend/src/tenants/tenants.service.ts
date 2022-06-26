@@ -3,17 +3,12 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
-import {
-  Action,
-  AppAbility,
-  CaslAbilityFactory,
-} from 'src/casl/casl-ability.factory';
+import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
-import { IUser } from 'src/types/request.type';
-import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -93,7 +88,7 @@ export class TenantsService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.tenant.findFirst({
       where: {
@@ -110,7 +105,7 @@ export class TenantsService {
   }: {
     id: string;
     updateTenantDto: UpdateTenantDto;
-    user: UserDto;
+    user: IUser;
   }) {
     const toUpdate = await this.prisma.tenant.findUnique({ where: { id } });
 
@@ -127,7 +122,7 @@ export class TenantsService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.tenant.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

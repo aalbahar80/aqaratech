@@ -10,7 +10,7 @@ import { Cache } from 'cache-manager';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
-import { TRequest } from 'src/types/request.type';
+import { IUser } from 'src/interfaces/user.interface';
 
 /**
  * Guard to check authz permissions. Consumes metadata from `@CheckAbilities`.
@@ -48,7 +48,7 @@ export class AbilitiesGuard implements CanActivate {
       this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
       [];
 
-    const request = context.switchToHttp().getRequest<TRequest>();
+    const request = context.switchToHttp().getRequest<IRequest>();
 
     const cached = await this.cacheManager.get<AppAbility>(request.user.id);
 
@@ -75,4 +75,8 @@ export class AbilitiesGuard implements CanActivate {
 
     return isAllowed;
   }
+}
+
+interface IRequest extends Request {
+  user: IUser;
 }

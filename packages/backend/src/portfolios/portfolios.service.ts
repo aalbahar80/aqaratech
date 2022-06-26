@@ -5,12 +5,12 @@ import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import {
   PortfolioDto,
   UpdatePortfolioDto,
 } from 'src/portfolios/dto/portfolio.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -23,11 +23,9 @@ export class PortfoliosService {
   create({
     createPortfolioDto,
     user,
-    orgId, // use for explicit role check or remove
   }: {
     createPortfolioDto: PortfolioDto;
-    user: UserDto;
-    orgId: string;
+    user: IUser;
   }) {
     this.caslAbilityFactory.throwIfForbidden(
       user,
@@ -49,7 +47,7 @@ export class PortfoliosService {
     user,
   }: {
     portfolioPageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<PortfolioDto>> {
     const { page, take, q } = portfolioPageOptionsDto;
 
@@ -83,7 +81,7 @@ export class PortfoliosService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.portfolio.findFirst({
       where: {
@@ -100,7 +98,7 @@ export class PortfoliosService {
   }: {
     id: string;
     updatePortfolioDto: UpdatePortfolioDto;
-    user: UserDto;
+    user: IUser;
   }) {
     const toUpdate = await this.prisma.portfolio.findUnique({ where: { id } });
 
@@ -117,7 +115,7 @@ export class PortfoliosService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.portfolio.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

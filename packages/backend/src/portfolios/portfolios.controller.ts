@@ -20,10 +20,9 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
-import { Org } from 'src/decorators/org.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { UserDto } from 'src/users/dto/user.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
@@ -38,18 +37,17 @@ export class PortfoliosController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: PortfolioDto })
   create(
-    @User() user: UserDto,
-    @Org() orgId: string,
+    @User() user: IUser,
     @Body() createPortfolioDto: PortfolioDto,
   ): Promise<PortfolioDto> {
-    return this.portfoliosService.create({ createPortfolioDto, user, orgId });
+    return this.portfoliosService.create({ createPortfolioDto, user });
   }
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(PortfolioDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() portfolioPageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<PortfolioDto>> {
     return this.portfoliosService.findAll({ portfolioPageOptionsDto, user });
@@ -58,10 +56,7 @@ export class PortfoliosController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  findOne(
-    @User() user: UserDto,
-    @Param('id') id: string,
-  ): Promise<PortfolioDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.findOne({ id, user });
   }
 
@@ -69,7 +64,7 @@ export class PortfoliosController {
   @CheckAbilities({ action: Action.Update, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updatePortfolioDto: UpdatePortfolioDto,
   ): Promise<PortfolioDto> {
@@ -79,10 +74,7 @@ export class PortfoliosController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  remove(
-    @User() user: UserDto,
-    @Param('id') id: string,
-  ): Promise<PortfolioDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.remove({ id, user });
   }
 }

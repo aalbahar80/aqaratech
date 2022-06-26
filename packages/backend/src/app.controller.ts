@@ -1,6 +1,7 @@
 import { Controller, Get, Request } from '@nestjs/common';
+import { Request as ERequest } from 'express';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
-import { TRequest } from 'src/types/request.type';
+import { ValidatedUser } from 'src/types/user-validated.type';
 import { AppService } from './app.service';
 
 @Controller()
@@ -14,11 +15,7 @@ export class AppController {
   }
 
   @Get('/profile')
-  getProfile(
-    // TODO implement and use a User type (Dto + roles property)
-    @Request()
-    req: TRequest,
-  ) {
+  getProfile(@Request() req: ERequest & { user: ValidatedUser }) {
     console.log(req.user);
     return req.user;
   }

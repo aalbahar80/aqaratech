@@ -21,9 +21,8 @@ import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { IUser } from 'src/types/request.type';
-import { UserDto } from 'src/users/dto/user.dto';
 
+import { IUser } from 'src/interfaces/user.interface';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
@@ -49,8 +48,8 @@ export class TenantsController {
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiPaginatedResponse(TenantDto)
   findAll(
-    @Query() tenantPageOptionsDto: TenantPageOptionsDto,
     @User() user: IUser,
+    @Query() tenantPageOptionsDto: TenantPageOptionsDto,
   ): Promise<PaginatedMetaDto<TenantDto>> {
     return this.tenantsService.findAll({ tenantPageOptionsDto, user });
   }
@@ -58,7 +57,7 @@ export class TenantsController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  findOne(@User() user: UserDto, @Param('id') id: string): Promise<TenantDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.findOne({ id, user });
   }
 
@@ -66,7 +65,7 @@ export class TenantsController {
   @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateTenantDto: UpdateTenantDto,
   ): Promise<TenantDto> {
@@ -76,7 +75,7 @@ export class TenantsController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  remove(@User() user: UserDto, @Param('id') id: string): Promise<TenantDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.remove({ id, user });
   }
 }
