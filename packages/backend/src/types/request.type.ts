@@ -4,3 +4,4 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 // TODO remove optional from user/ability
 export type TRequest = Request & { user: UserDto; ability?: AppAbility };
+export type TRequestWUser = Request & { user: UserDto };

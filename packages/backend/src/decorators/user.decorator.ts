@@ -3,11 +3,11 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { TRequest } from 'src/types/request.type';
+import { TRequestWUser } from 'src/types/request.type';
 
 export const User = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest<TRequest>();
+    const request = ctx.switchToHttp().getRequest<TRequestWUser>();
 
     if (!request.user) {
       // In a public route, the jwt strategy is bypassed, so there won't be a user.
