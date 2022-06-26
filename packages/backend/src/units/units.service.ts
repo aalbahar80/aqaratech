@@ -5,9 +5,9 @@ import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
-import { UserDto } from 'src/users/dto/user.dto';
 import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
@@ -23,7 +23,7 @@ export class UnitsService {
     user,
   }: {
     createUnitDto: UnitDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // check if user has access to create unit in this organization
     // alt: use prismawhere to filter if user has access to create unit in this organization
@@ -53,7 +53,7 @@ export class UnitsService {
     user,
   }: {
     unitPageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<UnitDto>> {
     const { page, take, q } = unitPageOptionsDto;
 
@@ -88,7 +88,7 @@ export class UnitsService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.unit.findFirst({
       where: {
@@ -105,7 +105,7 @@ export class UnitsService {
   }: {
     id: string;
     updateUnitDto: UpdateUnitDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // grab necessary data for ability check
     const toUpdate = await this.prisma.unit.findUnique({
@@ -127,7 +127,7 @@ export class UnitsService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.unit.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

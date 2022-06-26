@@ -5,12 +5,12 @@ import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
-import { UserDto } from 'src/users/dto/user.dto';
 import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
@@ -26,7 +26,7 @@ export class PropertiesService {
     user,
   }: {
     createPropertyDto: PropertyDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // check if user has access to create property
     const portfolio = await this.prisma.portfolio.findUnique({
@@ -54,7 +54,7 @@ export class PropertiesService {
     user,
   }: {
     propertyPageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<PropertyDto>> {
     const { page, take, q } = propertyPageOptionsDto;
 
@@ -88,7 +88,7 @@ export class PropertiesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
 
     // returns a 404 whether not found or not accessible
@@ -107,7 +107,7 @@ export class PropertiesService {
   }: {
     id: string;
     updatePropertyDto: UpdatePropertyDto;
-    user: UserDto;
+    user: IUser;
   }) {
     const toUpdate = await this.prisma.property.findUnique({
       where: { id },
@@ -144,7 +144,7 @@ export class PropertiesService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.property.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

@@ -5,12 +5,12 @@ import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import {
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UserDto } from 'src/users/dto/user.dto';
 import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
@@ -26,7 +26,7 @@ export class LeaseInvoicesService {
     user,
   }: {
     createLeaseInvoiceDto: LeaseInvoiceDto;
-    user: UserDto;
+    user: IUser;
   }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const lease = await this.prisma.lease.findFirst({
@@ -60,7 +60,7 @@ export class LeaseInvoicesService {
     user,
   }: {
     leaseInvoicePageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     const { page, take, q } = leaseInvoicePageOptionsDto;
 
@@ -95,7 +95,7 @@ export class LeaseInvoicesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.leaseInvoice.findFirst({
       where: {
@@ -112,7 +112,7 @@ export class LeaseInvoicesService {
   }: {
     id: string;
     updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // grab necessary data for ability check
     const toUpdate = await this.prisma.leaseInvoice.findUnique({
@@ -133,7 +133,7 @@ export class LeaseInvoicesService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.leaseInvoice.findUnique({
       where: { id },
       select: selectForAuthz.leaseInvoice,

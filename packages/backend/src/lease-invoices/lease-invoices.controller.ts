@@ -41,7 +41,7 @@ export class LeaseInvoicesController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: LeaseInvoiceDto })
   create(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Body() createLeaseInvoiceDto: LeaseInvoiceDto,
   ): Promise<LeaseInvoiceDto> {
     return this.leaseInvoicesService.create({ createLeaseInvoiceDto, user });
@@ -51,7 +51,7 @@ export class LeaseInvoicesController {
   @CheckAbilities({ action: Action.Read, subject: 'LeaseInvoice' })
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() leaseInvoicePageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     return this.leaseInvoicesService.findAll({
@@ -64,7 +64,7 @@ export class LeaseInvoicesController {
   @CheckAbilities({ action: Action.Read, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: LeaseInvoiceDto })
   findOne(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
   ): Promise<LeaseInvoiceDto> {
     return this.leaseInvoicesService.findOne({ id, user });
@@ -74,7 +74,7 @@ export class LeaseInvoicesController {
   @CheckAbilities({ action: Action.Update, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: LeaseInvoiceDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
   ): Promise<LeaseInvoiceDto> {
@@ -89,7 +89,7 @@ export class LeaseInvoicesController {
   @CheckAbilities({ action: Action.Delete, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: LeaseInvoiceDto })
   remove(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
   ): Promise<LeaseInvoiceDto> {
     return this.leaseInvoicesService.remove({ id, user });

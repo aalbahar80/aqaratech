@@ -21,9 +21,9 @@ import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { UserDto } from 'src/users/dto/user.dto';
 
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
@@ -38,7 +38,7 @@ export class UnitsController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: UnitDto })
   create(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Body() createUnitDto: UnitDto,
   ): Promise<UnitDto> {
     return this.unitsService.create({ createUnitDto, user });
@@ -48,7 +48,7 @@ export class UnitsController {
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
   @ApiPaginatedResponse(UnitDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() unitPageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<UnitDto>> {
     return this.unitsService.findAll({ unitPageOptionsDto, user });
@@ -57,7 +57,7 @@ export class UnitsController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
   @ApiOkResponse({ type: UnitDto })
-  findOne(@User() user: UserDto, @Param('id') id: string): Promise<UnitDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<UnitDto> {
     return this.unitsService.findOne({ id, user });
   }
 
@@ -65,7 +65,7 @@ export class UnitsController {
   @CheckAbilities({ action: Action.Update, subject: 'Unit' })
   @ApiOkResponse({ type: UnitDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateUnitDto: UpdateUnitDto,
   ): Promise<UnitDto> {
@@ -75,7 +75,7 @@ export class UnitsController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Unit' })
   @ApiOkResponse({ type: UnitDto })
-  remove(@User() user: UserDto, @Param('id') id: string): Promise<UnitDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<UnitDto> {
     return this.unitsService.remove({ id, user });
   }
 }

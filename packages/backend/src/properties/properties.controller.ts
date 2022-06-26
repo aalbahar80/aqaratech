@@ -41,7 +41,7 @@ export class PropertiesController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: PropertyDto })
   create(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Body() createPropertyDto: PropertyDto,
   ): Promise<PropertyDto> {
     return this.propertiesService.create({ createPropertyDto, user });
@@ -51,7 +51,7 @@ export class PropertiesController {
   @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiPaginatedResponse(PropertyDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() propertyPageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<PropertyDto>> {
     return this.propertiesService.findAll({ propertyPageOptionsDto, user });
@@ -60,10 +60,7 @@ export class PropertiesController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  findOne(
-    @User() user: UserDto,
-    @Param('id') id: string,
-  ): Promise<PropertyDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.findOne({ id, user });
   }
 
@@ -71,7 +68,7 @@ export class PropertiesController {
   @CheckAbilities({ action: Action.Update, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
   ): Promise<PropertyDto> {
@@ -81,7 +78,7 @@ export class PropertiesController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  remove(@User() user: UserDto, @Param('id') id: string): Promise<PropertyDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.remove({ id, user });
   }
 }

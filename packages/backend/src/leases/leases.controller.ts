@@ -38,7 +38,7 @@ export class LeasesController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: LeaseDto })
   create(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Body() createLeaseDto: LeaseDto,
   ): Promise<LeaseDto> {
     return this.leasesService.create({ createLeaseDto, user });
@@ -48,7 +48,7 @@ export class LeasesController {
   @CheckAbilities({ action: Action.Read, subject: 'Lease' })
   @ApiPaginatedResponse(LeaseDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() leasePageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<LeaseDto>> {
     return this.leasesService.findAll({ leasePageOptionsDto, user });
@@ -57,7 +57,7 @@ export class LeasesController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Lease' })
   @ApiOkResponse({ type: LeaseDto })
-  findOne(@User() user: UserDto, @Param('id') id: string): Promise<LeaseDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<LeaseDto> {
     return this.leasesService.findOne({ id, user });
   }
 
@@ -65,7 +65,7 @@ export class LeasesController {
   @CheckAbilities({ action: Action.Update, subject: 'Lease' })
   @ApiOkResponse({ type: LeaseDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseDto: UpdateLeaseDto,
   ): Promise<LeaseDto> {
@@ -75,7 +75,7 @@ export class LeasesController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Lease' })
   @ApiOkResponse({ type: LeaseDto })
-  remove(@User() user: UserDto, @Param('id') id: string): Promise<LeaseDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<LeaseDto> {
     return this.leasesService.remove({ id, user });
   }
 }

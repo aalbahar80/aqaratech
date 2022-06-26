@@ -23,7 +23,7 @@ export class ExpensesService {
     user,
   }: {
     createExpenseDto: ExpenseDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // check if user has access to create expense for property/unit/portfolio
     const ability = await this.caslAbilityFactory.defineAbility(user);
@@ -68,7 +68,7 @@ export class ExpensesService {
     user,
   }: {
     expensePageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<ExpenseDto>> {
     const { page, take, q } = expensePageOptionsDto;
 
@@ -97,7 +97,7 @@ export class ExpensesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.expense.findFirst({
       where: {
@@ -114,7 +114,7 @@ export class ExpensesService {
   }: {
     id: string;
     updateExpenseDto: UpdateExpenseDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // check if user has access to update expense
     const ability = await this.caslAbilityFactory.defineAbility(user);
@@ -164,7 +164,7 @@ export class ExpensesService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.expense.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

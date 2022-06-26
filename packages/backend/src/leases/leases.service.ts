@@ -23,7 +23,7 @@ export class LeasesService {
     user,
   }: {
     createLeaseDto: LeaseDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // check if user has access to create lease in this organization
     const unitQ = this.prisma.unit.findUnique({
@@ -66,7 +66,7 @@ export class LeasesService {
     user,
   }: {
     leasePageOptionsDto: PageOptionsDto;
-    user: UserDto;
+    user: IUser;
   }): Promise<PaginatedMetaDto<LeaseDto>> {
     const { page, take, q } = leasePageOptionsDto;
 
@@ -99,7 +99,7 @@ export class LeasesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: UserDto }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const ability = await this.caslAbilityFactory.defineAbility(user);
     const data = await this.prisma.lease.findFirst({
       where: {
@@ -116,7 +116,7 @@ export class LeasesService {
   }: {
     id: string;
     updateLeaseDto: UpdateLeaseDto;
-    user: UserDto;
+    user: IUser;
   }) {
     // grab necessary data for ability check
     // alt: use findFirst with accessibleBy,
@@ -141,7 +141,7 @@ export class LeasesService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: UserDto }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
     const data = await this.prisma.lease.findUnique({ where: { id } });
 
     this.caslAbilityFactory.throwIfForbidden(

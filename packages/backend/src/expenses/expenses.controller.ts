@@ -38,7 +38,7 @@ export class ExpensesController {
   @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: ExpenseDto })
   create(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Body() createExpenseDto: ExpenseDto,
   ): Promise<ExpenseDto> {
     return this.expensesService.create({ createExpenseDto, user });
@@ -48,7 +48,7 @@ export class ExpensesController {
   @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiPaginatedResponse(ExpenseDto)
   findAll(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Query() expensePageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<ExpenseDto>> {
     return this.expensesService.findAll({ expensePageOptionsDto, user });
@@ -57,7 +57,7 @@ export class ExpensesController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
-  findOne(@User() user: UserDto, @Param('id') id: string): Promise<ExpenseDto> {
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<ExpenseDto> {
     return this.expensesService.findOne({ id, user });
   }
 
@@ -65,7 +65,7 @@ export class ExpensesController {
   @CheckAbilities({ action: Action.Update, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
   update(
-    @User() user: UserDto,
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateExpenseDto: UpdateExpenseDto,
   ): Promise<ExpenseDto> {
@@ -75,7 +75,7 @@ export class ExpensesController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
-  remove(@User() user: UserDto, @Param('id') id: string): Promise<ExpenseDto> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<ExpenseDto> {
     return this.expensesService.remove({ id, user });
   }
 }
