@@ -83,12 +83,8 @@ export class TenantsService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.tenant.findFirst({
-      where: {
-        AND: [accessibleBy(user.ability).Tenant, { id }],
-      },
-    });
+  async findOne({ id }: { id: string }) {
+    const data = await this.prisma.tenant.findUnique({ where: { id } });
     return data;
   }
 

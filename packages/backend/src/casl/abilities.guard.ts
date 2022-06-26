@@ -1,3 +1,4 @@
+import { subject } from '@casl/ability';
 import {
   CACHE_MANAGER,
   CanActivate,
@@ -7,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Cache } from 'cache-manager';
+import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
@@ -62,15 +64,23 @@ export class AbilitiesGuard implements CanActivate {
       ability = await this.caslAbilityFactory.defineAbility(request.user);
       // TODO handle cache ttl/invalidation
       await this.cacheManager.set(request.user.id, ability, {
-        ttl: 60 * 60 * 24,
+        ttl: 60 * 60 * 24, // TODO adjust
       });
     }
 
     // attach ability to request, to be used by services for any further permission checks
     request.user.ability = ability;
 
+    const id = request.params.id as string | undefined;
     const isAllowed = rules.every((rule) => {
-      return ability.can(rule.action, rule.subject);
+      if (id) {
+        console.debug({ id }, 'rule.subject.id'); // use nest logger
+        // TODO fix type
+        // @ts-ignore
+        return ability.can(rule.action, subject(rule.subject, { id }));
+      } else {
+        return ability.can(rule.action, rule.subject);
+      }
     });
 
     return isAllowed;
