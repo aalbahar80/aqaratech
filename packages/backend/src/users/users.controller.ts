@@ -10,7 +10,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
-
+import { ValidatedUser } from 'src/types/user-validated.type';
 import { UserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
@@ -40,7 +40,7 @@ export class UsersController {
   @ApiOkResponse({ type: UserDto })
   @ApiNotFoundResponse()
   // TODO validate email qparam
-  findOneByEmail(@Query('email') email: string): Promise<UserDto> {
+  findOneByEmail(@Query('email') email: string): Promise<ValidatedUser> {
     return this.usersService.findOneByEmail(email);
   }
 

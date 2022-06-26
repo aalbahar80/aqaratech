@@ -4,7 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
-import { UserDto } from 'src/users/dto/user.dto';
+import { ValidatedUser } from 'src/types/user-validated.type';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -41,7 +41,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param payload
    * access token as received from Auth0
    */
-  validate(payload: any) {
+  validate(payload: any): ValidatedUser {
     // Auth0 will hit our /user/by-email endpoint on each login to get a UserDto.
     // It will then place that UserDto in the access token.
     // Here, we extract that UserDto and place it in the request object,
@@ -65,7 +65,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     // grab userStuff, which auth0 places in the access token on every login
     // TODO handle case where auth0 did not find user by email.
-    const user = payload[`${apiNamespace}/userStuff`] as unknown as UserDto;
+    const user = payload[
+      `${apiNamespace}/userStuff`
+    ] as unknown as ValidatedUser;
     return user;
   }
 }
