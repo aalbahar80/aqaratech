@@ -41,13 +41,13 @@ export async function seed({
 	let userCount = 5;
 	let orgCount = 3;
 	let roleCount = 5;
-	let portfolioCount = 2;
+	let portfolioCount = 9;
 	let propertyMin = 2;
 	let propertyMax = 6;
 	let unitMax = 5;
-	let moCount = 20;
-	let expenseCount = 10;
-	let trxPerLease = 3;
+	let moCount = 100;
+	let expenseCount = 150;
+	let trxPerLease = 12;
 	const min = 1;
 
 	if (sample) {
