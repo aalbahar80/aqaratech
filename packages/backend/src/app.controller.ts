@@ -17,6 +17,10 @@ export class AppController {
   @Get('/profile')
   getProfile(@Request() req: ERequest & { user: ValidatedUser }) {
     console.log(req.user);
-    return req.user;
+    // @ts-ignore
+    // returning the ability crashes the client/server
+    // TODO explicitly select the properties to return
+    const { ability, ...result } = req.user;
+    return result;
   }
 }
