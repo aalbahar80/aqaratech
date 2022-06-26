@@ -25,8 +25,6 @@ export class CaslAbilityFactory {
   constructor(private prisma: PrismaService) {}
 
   async defineAbility(user: UserDto) {
-    // TODO cache db queries
-    console.time('defineAbility');
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
@@ -366,8 +364,6 @@ export class CaslAbilityFactory {
     //   //   leases: { some: { tenantId: { in: tenants } } },
     //   // });
     // }
-
-    console.timeEnd('defineAbility');
     return build();
   }
 
