@@ -17,7 +17,10 @@ import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['verbose', 'debug', 'log', 'warn', 'error'],
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
