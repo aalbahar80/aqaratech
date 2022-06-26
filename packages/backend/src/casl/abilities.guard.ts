@@ -49,9 +49,8 @@ export class AbilitiesGuard implements CanActivate {
       [];
 
     const request = context.switchToHttp().getRequest<TRequest>();
-    const user = request.user;
 
-    const cached = await this.cacheManager.get<AppAbility>(user.id);
+    const cached = await this.cacheManager.get<AppAbility>(request.user.id);
 
     let ability: AppAbility;
 
@@ -62,11 +61,13 @@ export class AbilitiesGuard implements CanActivate {
       console.log('cache miss');
       ability = await this.caslAbilityFactory.defineAbility(request.user);
       // TODO handle cache ttl/invalidation
-      await this.cacheManager.set(user.id, ability, { ttl: 60 * 60 * 24 });
+      await this.cacheManager.set(request.user.id, ability, {
+        ttl: 60 * 60 * 24,
+      });
     }
 
     // attach ability to request, to be used by services for any further permission checks
-    request.ability = ability;
+    request.user.ability = ability;
 
     const isAllowed = rules.every((rule) => {
       return ability.can(rule.action, rule.subject);

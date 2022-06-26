@@ -12,6 +12,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
+import { IUser } from 'src/types/request.type';
 import { UserDto } from 'src/users/dto/user.dto';
 import { search } from 'src/utils/search';
 
@@ -24,12 +25,12 @@ export class TenantsService {
 
   async create({
     createTenantDto,
-    ability,
+    user,
   }: {
     createTenantDto: TenantDto;
-    ability: AppAbility;
+    user: IUser;
   }) {
-    ForbiddenError.from(ability).throwUnlessCan(
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
       subject('Tenant', createTenantDto),
     );
@@ -46,21 +47,22 @@ export class TenantsService {
 
   async findAll({
     tenantPageOptionsDto,
-    ability,
+    user,
   }: {
     tenantPageOptionsDto: TenantPageOptionsDto;
-    ability: AppAbility;
+    user: IUser;
   }): Promise<PaginatedMetaDto<TenantDto>> {
+    console.log({ user }, 'tenants.service.ts ~ 55');
     const { page, take, q } = tenantPageOptionsDto;
 
     let [results, itemCount] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(ability).Tenant,
+        where: accessibleBy(user.ability).Tenant,
       }),
       this.prisma.tenant.count({
-        where: accessibleBy(ability).Tenant,
+        where: accessibleBy(user.ability).Tenant,
       }),
     ]);
 
