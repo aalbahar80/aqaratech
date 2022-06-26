@@ -1,8 +1,15 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CACHE_MANAGER,
+  CanActivate,
+  ExecutionContext,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Cache } from 'cache-manager';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { TRequest } from 'src/types/request.type';
 
 /**
@@ -21,6 +28,7 @@ import { TRequest } from 'src/types/request.type';
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
   constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private reflector: Reflector,
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
@@ -41,9 +49,23 @@ export class AbilitiesGuard implements CanActivate {
       [];
 
     const request = context.switchToHttp().getRequest<TRequest>();
+    const user = request.user;
 
-    const ability = await this.caslAbilityFactory.defineAbility(request.user);
-    // attach ability to request, to be used by services for further permission checks
+    const cached = await this.cacheManager.get<AppAbility>(user.id);
+
+    let ability: AppAbility;
+
+    if (cached) {
+      console.log('cache hit');
+      ability = cached;
+    } else {
+      console.log('cache miss');
+      ability = await this.caslAbilityFactory.defineAbility(request.user);
+      // TODO handle cache ttl/invalidation
+      await this.cacheManager.set(user.id, ability, { ttl: 60 * 60 * 24 });
+    }
+
+    // attach ability to request, to be used by services for any further permission checks
     request.ability = ability;
 
     const isAllowed = rules.every((rule) => {
