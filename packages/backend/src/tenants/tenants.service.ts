@@ -1,8 +1,13 @@
-import { subject } from '@casl/ability';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import * as R from 'remeda';
+import {
+  Action,
+  AppAbility,
+  CaslAbilityFactory,
+} from 'src/casl/casl-ability.factory';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
@@ -17,42 +22,37 @@ export class TenantsService {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
-  create({
+  async create({
     createTenantDto,
-    user,
-    orgId, // use for explicit role check or remove
+    ability,
   }: {
     createTenantDto: TenantDto;
-    user: UserDto;
-    orgId: string;
+    ability: AppAbility;
   }) {
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(ability).throwUnlessCan(
       Action.Create,
       subject('Tenant', createTenantDto),
     );
 
     // use Prisma's `connect` to enforce referential integrity
-    const { organizationId, ...toCreate } = createTenantDto;
-    const input: Prisma.TenantCreateArgs['data'] = {
-      ...toCreate,
-      organization: { connect: { id: organizationId } },
-    };
-    return this.prisma.tenant.create({ data: input });
+    const toCreate = R.omit(createTenantDto, ['organizationId']);
+    return this.prisma.tenant.create({
+      data: {
+        ...toCreate,
+        organization: { connect: { id: createTenantDto.organizationId } },
+      },
+    });
   }
 
   async findAll({
     tenantPageOptionsDto,
-    user,
+    ability,
   }: {
     tenantPageOptionsDto: TenantPageOptionsDto;
-    user: UserDto;
+    ability: AppAbility;
   }): Promise<PaginatedMetaDto<TenantDto>> {
     const { page, take, q } = tenantPageOptionsDto;
 
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    // TODO test this
-    // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     let [results, itemCount] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
