@@ -83,6 +83,10 @@ export class AbilitiesGuard implements CanActivate {
       }
     });
 
+    // TODO add event listener to invalidate all cache entries whenever resource is created/updated
+    // https://docs.nestjs.com/techniques/events
+
+    // Fallback in case of bad cache
     if (!isAllowed && cached) {
       console.debug('cache invalidate');
       await this.cacheManager.del(request.user.id);
