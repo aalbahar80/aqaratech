@@ -75,7 +75,7 @@ export class TenantsController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  remove(@User() user: IUser, @Param('id') id: string): Promise<TenantDto> {
-    return this.tenantsService.remove({ id, user });
+  remove(@Param('id') id: string): Promise<TenantDto> {
+    return this.tenantsService.remove({ id });
   }
 }

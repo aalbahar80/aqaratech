@@ -108,12 +108,7 @@ export class TenantsService {
     });
   }
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Delete,
-      subject('Tenant', { id }),
-    );
-
+  async remove({ id }: { id: string }) {
     return this.prisma.tenant.delete({ where: { id } });
   }
 }
