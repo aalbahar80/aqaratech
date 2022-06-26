@@ -83,6 +83,14 @@ export class AbilitiesGuard implements CanActivate {
       }
     });
 
+    if (!isAllowed && cached) {
+      console.debug('cache invalidate');
+      await this.cacheManager.del(request.user.id);
+
+      // try again
+      return this.canActivate(context);
+    }
+
     return isAllowed;
   }
 }
