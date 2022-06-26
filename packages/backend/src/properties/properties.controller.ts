@@ -21,9 +21,9 @@ import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { UserDto } from 'src/users/dto/user.dto';
 
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import {
   PropertyDto,
   UpdatePropertyDto,

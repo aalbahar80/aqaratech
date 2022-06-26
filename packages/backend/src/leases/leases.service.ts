@@ -5,9 +5,9 @@ import { Prisma } from '@prisma/client';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UserDto } from 'src/users/dto/user.dto';
 import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
