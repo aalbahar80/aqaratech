@@ -147,4 +147,8 @@ export class LeaseInvoicesService {
 
     return this.prisma.leaseInvoice.delete({ where: { id } });
   }
+
+  // https://youtu.be/btLyiMUs_Cw?t=424
+  // @Cron
+  // notifyAll() {}
 }

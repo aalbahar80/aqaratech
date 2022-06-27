@@ -52,6 +52,10 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  // https://youtu.be/btLyiMUs_Cw?t=424
+  // @OnEvent('user.created')
+  // implementMe() {}
+
   // @Patch(':id')
   // @CheckAbilities({ action: Action.Update, subject: 'User' })
   // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
