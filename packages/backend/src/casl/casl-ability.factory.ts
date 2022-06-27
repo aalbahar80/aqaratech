@@ -197,7 +197,7 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['Portfolio'], {
         OR: [
-          { id: { in: manageable.tenants } },
+          { id: { in: manageable.portfolios } },
           { organizationId: { in: manageable.orgs } },
         ],
       });
