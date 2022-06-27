@@ -1,6 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as R from 'remeda';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -20,6 +20,8 @@ export class PortfoliosService {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
+  private readonly logger = new Logger(PortfoliosService.name);
+
   create({
     createPortfolioDto,
     user,
@@ -32,8 +34,9 @@ export class PortfoliosService {
       subject('Portfolio', createPortfolioDto),
     );
 
+    this.logger.log('Creating portfolio: ', { createPortfolioDto });
     const toCreate = R.omit(createPortfolioDto, ['organizationId']);
-    return this.prisma.tenant.create({
+    return this.prisma.portfolio.create({
       data: {
         ...toCreate,
         organization: { connect: { id: createPortfolioDto.organizationId } },
@@ -50,6 +53,12 @@ export class PortfoliosService {
   }): Promise<PaginatedMetaDto<PortfolioDto>> {
     const { page, take, q } = portfolioPageOptionsDto;
 
+    this.logger.log('Fetching portfolios: ', {
+      userId: user.id,
+      page,
+      take,
+      q,
+    });
     const ability = await this.caslAbilityFactory.defineAbility(user);
     let [results, itemCount] = await Promise.all([
       this.prisma.portfolio.findMany({
@@ -79,6 +88,7 @@ export class PortfoliosService {
   }
 
   async findOne({ id }: { id: string }) {
+    this.logger.log('Fetching portfolio: ', { id });
     const data = await this.prisma.portfolio.findUnique({ where: { id } });
     return data;
   }
@@ -97,6 +107,7 @@ export class PortfoliosService {
       subject('Portfolio', { id, ...updatePortfolioDto }),
     );
 
+    this.logger.log('Updating portfolio: ', { id, updatePortfolioDto });
     return this.prisma.portfolio.update({
       where: { id },
       data: updatePortfolioDto,
@@ -104,6 +115,7 @@ export class PortfoliosService {
   }
 
   async remove({ id }: { id: string }) {
+    this.logger.log('Deleting portfolio: ', { id });
     return this.prisma.tenant.delete({ where: { id } });
   }
 }
