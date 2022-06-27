@@ -72,6 +72,23 @@ export class AbilitiesGuard implements CanActivate {
     request.user.ability = ability;
 
     const id = request.params.id as string | undefined;
+
+    /**
+     * `isAllowed` here refers to the rule defined in the guard decorator.
+     * _Not_ to be confused with rules defined in the service.
+     *
+     * Example:
+     * A POST /tenants request goes through more than one permisson check.
+     *
+     * First, the request is allowed if the user has the ability to create any tenant.
+     * This is defined in the guard decorator.
+     * When *this* rule fails, the cache is invalidated and one more attempt is made to grant the user permission.
+     *
+     * Second, the request is allowed if the user has the ability to create this particular tenant subject.
+     * This is defined in the service.
+     * When *this* rule fails, the cache is not invalidated (as things stand).
+     * TODO should this also be invalidated?
+     */
     const isAllowed = rules.every((rule) => {
       if (id) {
         console.debug({ id }, 'rule.subject.id'); // use nest logger
@@ -88,7 +105,8 @@ export class AbilitiesGuard implements CanActivate {
 
     // Fallback in case of bad cache
     if (!isAllowed && cached) {
-      console.debug('cache invalidate');
+      // prettier-ignore
+      console.debug('Permission denied in guard. Invalidating cache and reattempting.');
       await this.cacheManager.del(request.user.id);
 
       // try again
