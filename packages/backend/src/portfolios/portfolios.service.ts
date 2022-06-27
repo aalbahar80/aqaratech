@@ -1,7 +1,7 @@
-import { subject } from '@casl/ability';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import * as R from 'remeda';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -27,19 +27,18 @@ export class PortfoliosService {
     createPortfolioDto: PortfolioDto;
     user: IUser;
   }) {
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
       subject('Portfolio', createPortfolioDto),
     );
-    const { organizationId, ...toCreate } = createPortfolioDto;
 
-    // use Prisma's `connect` to enforce referential integrity
-    const input: Prisma.PortfolioCreateArgs['data'] = {
-      ...toCreate,
-      organization: { connect: { id: organizationId } },
-    };
-    return this.prisma.portfolio.create({ data: input });
+    const toCreate = R.omit(createPortfolioDto, ['organizationId']);
+    return this.prisma.tenant.create({
+      data: {
+        ...toCreate,
+        organization: { connect: { id: createPortfolioDto.organizationId } },
+      },
+    });
   }
 
   async findAll({
@@ -52,8 +51,6 @@ export class PortfoliosService {
     const { page, take, q } = portfolioPageOptionsDto;
 
     const ability = await this.caslAbilityFactory.defineAbility(user);
-    // TODO test this
-    // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     let [results, itemCount] = await Promise.all([
       this.prisma.portfolio.findMany({
         take,
@@ -81,13 +78,8 @@ export class PortfoliosService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    const data = await this.prisma.portfolio.findFirst({
-      where: {
-        AND: [accessibleBy(ability).Portfolio, { id }],
-      },
-    });
+  async findOne({ id }: { id: string }) {
+    const data = await this.prisma.portfolio.findUnique({ where: { id } });
     return data;
   }
 
@@ -100,30 +92,18 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    const toUpdate = await this.prisma.portfolio.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Portfolio', toUpdate),
+      subject('Portfolio', { id, ...updatePortfolioDto }),
     );
 
-    const input: Prisma.PortfolioUpdateArgs['data'] = updatePortfolioDto;
     return this.prisma.portfolio.update({
       where: { id },
-      data: input,
+      data: updatePortfolioDto,
     });
   }
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.portfolio.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
-      Action.Delete,
-      subject('Portfolio', data),
-    );
-
-    return this.prisma.portfolio.delete({ where: { id } });
+  async remove({ id }: { id: string }) {
+    return this.prisma.tenant.delete({ where: { id } });
   }
 }

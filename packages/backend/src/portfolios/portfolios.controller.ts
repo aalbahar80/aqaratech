@@ -56,8 +56,8 @@ export class PortfoliosController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  findOne(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
-    return this.portfoliosService.findOne({ id, user });
+  findOne(@Param('id') id: string): Promise<PortfolioDto> {
+    return this.portfoliosService.findOne({ id });
   }
 
   @Patch(':id')
@@ -74,7 +74,7 @@ export class PortfoliosController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  remove(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
-    return this.portfoliosService.remove({ id, user });
+  remove(@Param('id') id: string): Promise<PortfolioDto> {
+    return this.portfoliosService.remove({ id });
   }
 }
