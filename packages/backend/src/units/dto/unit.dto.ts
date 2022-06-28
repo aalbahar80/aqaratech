@@ -60,8 +60,8 @@ export class UnitVacancyDto extends UnitDto {
   isVacant: boolean;
 
   @IsString()
-  vacancyDistance: string | undefined;
+  vacancyDistance: string | null;
 
   @IsISO8601()
-  vacancy: Date | undefined;
+  vacancy: Date | null;
 }

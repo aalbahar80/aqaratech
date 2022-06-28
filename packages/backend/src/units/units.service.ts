@@ -77,8 +77,8 @@ export class UnitsService {
     const results = data.map((unit) => ({
       ...unit,
       isVacant: this.isVacant(unit.leases),
-      vacancyDistance: this.vacancy(unit.leases)?.distance,
-      vacancy: this.vacancy(unit.leases)?.date,
+      vacancyDistance: this.vacancy(unit.leases).distance,
+      vacancy: this.vacancy(unit.leases).date,
     }));
 
     return { meta, results };
@@ -91,9 +91,10 @@ export class UnitsService {
     return true;
   }
 
-  vacancy(
-    leases: { start: Date; end: Date }[],
-  ): { distance: string; date: Date } | undefined {
+  vacancy(leases: { start: Date; end: Date }[]): {
+    distance: string;
+    date: Date | null;
+  } {
     const lease = leases[0];
     if (lease?.end) {
       const distance = formatDistance(leases[0].end, new Date(), {
@@ -101,9 +102,10 @@ export class UnitsService {
       });
       return {
         distance,
-        date: lease.end,
+        date: lease?.end ?? null,
       };
     }
+    return { distance: '', date: null };
   }
 
   findOne({ id }: { id: string }) {
