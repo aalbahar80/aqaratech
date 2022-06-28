@@ -1,4 +1,4 @@
-import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
+import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
 import {
   IsBoolean,
@@ -10,7 +10,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-export class LeaseDto extends AbstractDto implements Lease {
+class LeaseRequiredDto extends AbstractDto {
   @Nanoid()
   tenantId: string;
 
@@ -25,24 +25,31 @@ export class LeaseDto extends AbstractDto implements Lease {
 
   @IsPositive()
   monthlyRent: number;
+}
 
-  @ApiPropertyOptional()
+class LeaseOptionalDto {
   @IsNumber()
-  deposit: number = 0;
+  deposit = 0;
 
-  @ApiPropertyOptional()
   @IsBoolean()
-  deactivated: boolean = false;
+  deactivated = false;
 
-  @ApiPropertyOptional()
   @IsBoolean()
-  notify: boolean = true;
+  notify = true;
 
-  @ApiPropertyOptional()
   @IsString()
   license: string | null = null;
 }
 
+export class LeaseDto extends IntersectionType(
+  LeaseRequiredDto,
+  LeaseOptionalDto,
+) {}
+
+export class CreateLeaseDto
+  extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
+  implements Partial<Lease> {}
+
 export class UpdateLeaseDto extends PartialType(
-  OmitType(LeaseDto, ['tenantId', 'unitId']),
+  OmitType(CreateLeaseDto, ['tenantId', 'unitId']),
 ) {}

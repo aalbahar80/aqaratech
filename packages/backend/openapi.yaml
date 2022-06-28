@@ -1424,19 +1424,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
         tenantId:
           type: string
         unitId:
@@ -1450,6 +1437,19 @@ components:
         monthlyRent:
           type: number
           minimum: 1
+        deposit:
+          type: object
+          default: 0
+        deactivated:
+          type: object
+          default: false
+        notify:
+          type: object
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
       required:
         - id
         - createdAt
@@ -1459,6 +1459,10 @@ components:
         - start
         - end
         - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
     UnitDto:
       type: object
       properties:
@@ -1593,19 +1597,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
         start:
           format: date-time
           type: string
@@ -1615,6 +1606,19 @@ components:
         monthlyRent:
           type: number
           minimum: 1
+        deposit:
+          type: object
+          default: 0
+        deactivated:
+          type: object
+          default: false
+        notify:
+          type: object
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
     LeaseInvoiceDto:
       type: object
       properties:
