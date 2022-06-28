@@ -102,7 +102,7 @@ export class UnitsService {
       });
       return {
         distance,
-        date: lease?.end ?? null,
+        date: lease.end,
       };
     }
     return { distance: '', date: null };
