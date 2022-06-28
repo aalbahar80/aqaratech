@@ -1,9 +1,4 @@
-import {
-  ApiPropertyOptional,
-  IntersectionType,
-  OmitType,
-  PartialType,
-} from '@nestjs/swagger';
+import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import {
   IsBoolean,
@@ -60,11 +55,9 @@ export class UpdateUnitDto extends PartialType(
 ) {}
 
 export class UnitVacancyDto extends UnitDto {
-  @ApiPropertyOptional({ readOnly: true })
   @IsBoolean()
   isVacant: boolean;
 
-  @ApiPropertyOptional({ readOnly: true })
   @IsString()
   vacancy: string;
 }
