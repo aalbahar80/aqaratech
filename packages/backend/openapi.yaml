@@ -1529,7 +1529,10 @@ components:
           default: null
         isVacant:
           type: boolean
+        vacancyDistance:
+          type: string
         vacancy:
+          format: date-time
           type: string
       required:
         - id
@@ -1545,6 +1548,7 @@ components:
         - type
         - usage
         - isVacant
+        - vacancyDistance
         - vacancy
     UpdateUnitDto:
       type: object

@@ -16,10 +16,9 @@
 		bath: number | null;
 		floor: number | null;
 		size: number | null;
-		leases?: {
-			end: Date;
-			start: Date;
-		}[];
+		isVacant: boolean;
+		vacancy: Date;
+		vacancyDistance: string;
 	}
 	export let units: Unit[];
 
@@ -30,10 +29,6 @@
 
 <StackedList entityTitle="units" count={units.length} {createHref}>
 	{#each units as unit (unit.id)}
-		{@const occupied =
-			unit.leases?.some(
-				(lease) => lease.end > new Date() && lease.start < new Date(),
-			) ?? false}
 		{@const icons = [
 			{
 				label: unit.bed,
@@ -57,7 +52,7 @@
 			},
 		]}
 		<li>
-			<UnitCard {unit} {icons} {occupied} />
+			<UnitCard {unit} {icons} />
 		</li>
 	{/each}
 </StackedList>

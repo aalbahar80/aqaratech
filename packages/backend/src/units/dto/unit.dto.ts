@@ -2,6 +2,7 @@ import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import {
   IsBoolean,
+  IsISO8601,
   IsNumber,
   IsPositive,
   IsString,
@@ -59,5 +60,8 @@ export class UnitVacancyDto extends UnitDto {
   isVacant: boolean;
 
   @IsString()
-  vacancy: string;
+  vacancyDistance: string | undefined;
+
+  @IsISO8601()
+  vacancy: Date | undefined;
 }

@@ -1,19 +1,17 @@
 <script lang="ts">
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { formatDistance } from 'date-fns';
 
 	interface Unit {
 		id: string;
 		type: string | null;
 		unitNumber: string;
-		leases?: {
-			end: Date;
-		}[];
+		isVacant: boolean;
+		vacancy: Date;
+		vacancyDistance: string;
 	}
 	export let unit: Unit;
 	export let icons: any[];
-	export let occupied: boolean;
 </script>
 
 <a href={`/units/${unit.id}`} class="block hover:bg-gray-50" sveltekit:prefetch>
@@ -28,10 +26,10 @@
 			<div class="ml-2 flex flex-shrink-0">
 				<p
 					class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
-					class:badge-green={!occupied}
-					class:badge-yellow={occupied}
+					class:badge-green={unit.isVacant}
+					class:badge-yellow={!unit.isVacant}
 				>
-					{occupied ? 'Occupied' : 'Vacant'}
+					{unit.isVacant ? 'Vacant' : 'Occupied'}
 				</p>
 			</div>
 		</div>
@@ -49,7 +47,7 @@
 					{/if}
 				{/each}
 			</div>
-			{#if unit.leases?.[0]}
+			{#if unit.vacancy}
 				<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
 					<Icon
 						src={Calendar}
@@ -58,11 +56,7 @@
 					/>
 					<p>
 						Vacancy:
-						<time dateTime={unit.leases[0].end.toISOString()}
-							>{formatDistance(unit.leases[0].end, new Date(), {
-								addSuffix: true,
-							})}</time
-						>
+						<time dateTime={unit.vacancy}>{unit.vacancyDistance}</time>
 					</p>
 				</div>
 			{/if}
