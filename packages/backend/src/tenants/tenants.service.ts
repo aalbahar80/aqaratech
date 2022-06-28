@@ -14,7 +14,7 @@ import { search } from 'src/utils/search';
 export class TenantsService {
   constructor(private prisma: PrismaService) {}
 
-  async create({
+  create({
     createTenantDto,
     user,
   }: {
@@ -26,7 +26,6 @@ export class TenantsService {
       subject('Tenant', createTenantDto),
     );
 
-    // use Prisma's `connect` to enforce referential integrity
     const toCreate = R.omit(createTenantDto, ['organizationId']);
     return this.prisma.tenant.create({
       data: {
@@ -83,12 +82,11 @@ export class TenantsService {
     return { meta, results };
   }
 
-  async findOne({ id }: { id: string }) {
-    const data = await this.prisma.tenant.findUnique({ where: { id } });
-    return data;
+  findOne({ id }: { id: string }) {
+    return this.prisma.tenant.findUnique({ where: { id } });
   }
 
-  async update({
+  update({
     id,
     updateTenantDto,
     user,
@@ -108,7 +106,7 @@ export class TenantsService {
     });
   }
 
-  async remove({ id }: { id: string }) {
+  remove({ id }: { id: string }) {
     return this.prisma.tenant.delete({ where: { id } });
   }
 }
