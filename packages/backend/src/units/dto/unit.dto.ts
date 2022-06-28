@@ -1,8 +1,14 @@
-import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  ApiPropertyOptional,
+  OmitType,
+  PartialType,
+} from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
 
 export class CreateUnitDto extends AbstractDto implements Unit {
   @Nanoid()
@@ -31,7 +37,7 @@ export class CreateUnitDto extends AbstractDto implements Unit {
   @IsPositive()
   marketRent: number | null = null;
 
-  @ApiPropertyOptional()
+  @ApiProperty()
   @IsString()
   type: string | null = null;
 
@@ -43,3 +49,8 @@ export class CreateUnitDto extends AbstractDto implements Unit {
 export class UpdateUnitDto extends PartialType(
   OmitType(CreateUnitDto, ['propertyId']),
 ) {}
+
+export class UnitDto extends CreateUnitDto {
+  @ApiProperty({ readOnly: true })
+  leases: LeaseDto[];
+}

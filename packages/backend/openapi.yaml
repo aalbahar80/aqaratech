@@ -501,14 +501,14 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfCreateUnitDto
+                title: PaginatedResponseOfUnitDto
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CreateUnitDto'
+                          $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
   /units/{id}:
     get:
@@ -525,7 +525,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUnitDto'
+                $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
     patch:
       operationId: UnitsController_update
@@ -1408,6 +1408,121 @@ components:
         - id
         - createdAt
         - updatedAt
+        - type
+        - propertyId
+        - unitNumber
+    LeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+    UnitDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        floor:
+          type: number
+          nullable: true
+          default: null
+        size:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+          default: null
+        usage:
+          type: string
+          nullable: true
+          default: null
+        leases:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LeaseDto'
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - type
+        - leases
         - propertyId
         - unitNumber
     UpdateUnitDto:
@@ -1460,55 +1575,6 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-    LeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
     UpdateLeaseDto:
       type: object
       properties:
