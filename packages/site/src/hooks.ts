@@ -1,5 +1,6 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
+import { appRouter, createContext, responseMeta } from '$lib/server/trpc';
 import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
 import * as Sentry from '@sentry/node';
@@ -40,7 +41,51 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.authz = authz;
 	event.locals.user = user;
 
-	const response = await resolve(event);
+	let response;
+
+	const url = '/trpc';
+	if (event.url.pathname.startsWith(`${url}/`)) {
+		const request = event.request as Request & {
+			headers: Dict<string | string[]>;
+		};
+
+		const req = {
+			method: request.method,
+			headers: request.headers,
+			query: event.url.searchParams,
+			body: await request.text(),
+		};
+
+		const httpResponse = await resolveHTTPResponse({
+			router: appRouter,
+			req,
+			path: event.url.pathname.substring(url.length + 1),
+			createContext: async () => createContext?.(event),
+			responseMeta,
+			onError: async (error) => {
+				console.error('Error (from onError):', error);
+				// if (error.code === 'INTERNAL_SERVER_ERROR') {}
+				const user = event.locals.user;
+				Sentry.captureException(error, {
+					user: {
+						id: user?.sub || '',
+						email: user?.email || '',
+						username: user?.name || '',
+					},
+				});
+			},
+		});
+
+		const { status, headers, body } = httpResponse as {
+			status: number;
+			headers: Record<string, string>;
+			body: string;
+		};
+
+		response = new Response(body, { status, headers });
+	} else {
+		response = await resolve(event);
+	}
 
 	response.headers.append(
 		'Set-Cookie',
