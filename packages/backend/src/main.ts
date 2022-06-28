@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import { writeFileSync } from 'fs';
+import { dump } from 'js-yaml';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { AppModule } from './app.module';
@@ -91,6 +92,13 @@ async function bootstrap() {
   });
   // move below?
   writeFileSync('./openapi.json', JSON.stringify(document));
+  writeFileSync(
+    './openapi.yaml',
+    dump(document, {
+      // schema: 'http://json-schema.org/draft-04/schema#',
+    }),
+  );
+
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: {
       // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
@@ -107,4 +115,4 @@ async function bootstrap() {
   await app.listen(3002);
 }
 
-bootstrap();
+void bootstrap();
