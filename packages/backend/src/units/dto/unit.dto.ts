@@ -1,6 +1,6 @@
 import {
   ApiProperty,
-  ApiPropertyOptional,
+  IntersectionType,
   OmitType,
   PartialType,
 } from '@nestjs/swagger';
@@ -10,46 +10,51 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 
-export class UnitDto extends AbstractDto {
+class UnitRequiredDto extends AbstractDto {
   @Nanoid()
   propertyId: string;
 
   @Length(1, 255)
   unitNumber: string;
+}
 
-  @ApiPropertyOptional()
+class UnitOptionalDto {
   @IsNumber()
   floor: number | null = null;
 
-  @ApiPropertyOptional()
   @IsPositive()
   size: number | null = null;
 
-  @ApiPropertyOptional()
   @IsPositive()
   bed: number | null = null;
 
-  @ApiPropertyOptional()
   @IsPositive()
   bath: number | null = null;
 
-  @ApiPropertyOptional()
   @IsPositive()
   marketRent: number | null = null;
 
-  @ApiProperty()
   @IsString()
   type: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   usage: string | null = null;
 
-  @ApiProperty({ readOnly: true })
-  leases: LeaseDto[];
+  @ApiProperty({ readOnly: true }) // needed?
+  leases?: LeaseDto[];
 }
 
-export class CreateUnitDto extends UnitDto implements Unit {}
+export class UnitDto extends IntersectionType(
+  UnitRequiredDto,
+  UnitOptionalDto,
+) {}
+
+export class CreateUnitDto
+  extends IntersectionType(
+    UnitRequiredDto,
+    PartialType(OmitType(UnitOptionalDto, ['leases'])),
+  )
+  implements Partial<Unit> {}
 
 export class UpdateUnitDto extends PartialType(
   OmitType(CreateUnitDto, ['propertyId']),

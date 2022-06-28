@@ -36,11 +36,11 @@ export class UnitsController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Unit' })
   @ApiHeader({ name: ROLE_HEADER_NAME })
-  @ApiCreatedResponse({ type: CreateUnitDto })
+  @ApiCreatedResponse({ type: UnitDto })
   create(
     @User() user: IUser,
     @Body() createUnitDto: CreateUnitDto,
-  ): Promise<CreateUnitDto> {
+  ): Promise<UnitDto> {
     return this.unitsService.create({ createUnitDto, user });
   }
 
@@ -63,19 +63,19 @@ export class UnitsController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Unit' })
-  @ApiOkResponse({ type: CreateUnitDto })
+  @ApiOkResponse({ type: UnitDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateUnitDto: UpdateUnitDto,
-  ): Promise<CreateUnitDto> {
+  ): Promise<UnitDto> {
     return this.unitsService.update({ id, updateUnitDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Unit' })
-  @ApiOkResponse({ type: CreateUnitDto })
-  remove(@Param('id') id: string): Promise<CreateUnitDto> {
+  @ApiOkResponse({ type: UnitDto })
+  remove(@Param('id') id: string): Promise<UnitDto> {
     return this.unitsService.remove({ id });
   }
 }

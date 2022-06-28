@@ -467,7 +467,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUnitDto'
+                $ref: '#/components/schemas/UnitDto'
       tags: &ref_4
         - units
     get:
@@ -547,7 +547,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUnitDto'
+                $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
     delete:
       operationId: UnitsController_remove
@@ -563,7 +563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUnitDto'
+                $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
   /leases:
     post:
@@ -1366,6 +1366,12 @@ components:
           format: date-time
           type: string
           readOnly: true
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
         floor:
           type: number
           nullable: true
@@ -1398,17 +1404,10 @@ components:
           type: string
           nullable: true
           default: null
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
       required:
         - id
         - createdAt
         - updatedAt
-        - type
         - propertyId
         - unitNumber
     LeaseDto:
@@ -1474,6 +1473,17 @@ components:
           format: date-time
           type: string
           readOnly: true
+        leases:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LeaseDto'
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
         floor:
           type: number
           nullable: true
@@ -1506,25 +1516,19 @@ components:
           type: string
           nullable: true
           default: null
-        leases:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/LeaseDto'
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
       required:
         - id
         - createdAt
         - updatedAt
-        - type
-        - leases
         - propertyId
         - unitNumber
+        - floor
+        - size
+        - bed
+        - bath
+        - marketRent
+        - type
+        - usage
     UpdateUnitDto:
       type: object
       properties:
@@ -1539,6 +1543,10 @@ components:
           format: date-time
           type: string
           readOnly: true
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
         floor:
           type: number
           nullable: true
@@ -1571,10 +1579,6 @@ components:
           type: string
           nullable: true
           default: null
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
     UpdateLeaseDto:
       type: object
       properties:
