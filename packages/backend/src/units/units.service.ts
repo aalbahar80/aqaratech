@@ -1,13 +1,18 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+  CreateUnitDto,
+  UnitVacancyDto,
+  UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -41,20 +46,15 @@ export class UnitsService {
   }: {
     unitPageOptionsDto: PageOptionsDto;
     user: IUser;
-  }): Promise<PaginatedMetaDto<UnitDto>> {
+  }): Promise<PaginatedMetaDto<UnitVacancyDto>> {
     const { page, take, q } = unitPageOptionsDto;
 
-    let [results, itemCount] = await Promise.all([
+    let [data, itemCount] = await Promise.all([
       this.prisma.unit.findMany({
         take,
         skip: (page - 1) * take,
         where: accessibleBy(user.ability).Unit,
-        include: {
-          leases: {
-            take: 1,
-            orderBy: { start: 'desc' },
-          },
-        },
+        include: { leases: { select: { start: true, end: true } } },
       }),
       this.prisma.unit.count({
         where: accessibleBy(user.ability).Unit,
@@ -62,8 +62,8 @@ export class UnitsService {
     ]);
 
     if (q) {
-      results = search({
-        data: results,
+      data = search({
+        data: data,
         q,
         keys: ['id', 'unitNumber', 'usage', 'type'],
       });
@@ -74,7 +74,26 @@ export class UnitsService {
       pageOptionsDto: unitPageOptionsDto,
     });
 
+    const results = data.map((unit) => ({
+      ...unit,
+      isVacant: this.isVacant(unit.leases),
+      vacancy: this.vacancy(unit.leases),
+    }));
+
     return { meta, results };
+  }
+
+  isVacant(leases: { start: Date; end: Date }[]): boolean {
+    if (leases.some((l) => l.start <= new Date() && l.end >= new Date())) {
+      return false;
+    }
+    return true;
+  }
+
+  vacancy(leases: { start: Date; end: Date }[]): string {
+    return formatDistance(leases[0].end, new Date(), {
+      addSuffix: true,
+    });
   }
 
   findOne({ id }: { id: string }) {

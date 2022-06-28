@@ -501,14 +501,14 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUnitDto
+                title: PaginatedResponseOfUnitVacancyDto
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/UnitDto'
+                          $ref: '#/components/schemas/UnitVacancyDto'
       tags: *ref_4
   /units/{id}:
     get:
@@ -1410,59 +1410,6 @@ components:
         - updatedAt
         - propertyId
         - unitNumber
-    LeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - deactivated
-        - notify
-        - license
     UnitDto:
       type: object
       properties:
@@ -1477,11 +1424,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        leases:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/LeaseDto'
         propertyId:
           type: string
         unitNumber:
@@ -1583,6 +1525,59 @@ components:
           type: string
           nullable: true
           default: null
+    LeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
     UpdateLeaseDto:
       type: object
       properties:

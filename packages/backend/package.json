@@ -41,6 +41,7 @@
     "cache-manager": "4.0.1",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",
+    "date-fns": "2.28.0",
     "fuse.js": "6.6.2",
     "jwks-rsa": "2.1.4",
     "lodash": "4.17.21",

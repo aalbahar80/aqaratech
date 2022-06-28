@@ -24,7 +24,12 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+  CreateUnitDto,
+  UnitDto,
+  UnitVacancyDto,
+  UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 @Controller('units')
@@ -46,11 +51,11 @@ export class UnitsController {
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiPaginatedResponse(UnitDto)
+  @ApiPaginatedResponse(UnitVacancyDto)
   findAll(
     @User() user: IUser,
     @Query() unitPageOptionsDto: PageOptionsDto,
-  ): Promise<PaginatedMetaDto<UnitDto>> {
+  ): Promise<PaginatedMetaDto<UnitVacancyDto>> {
     return this.unitsService.findAll({ unitPageOptionsDto, user });
   }
 

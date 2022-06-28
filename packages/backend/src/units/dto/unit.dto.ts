@@ -1,14 +1,19 @@
 import {
-  ApiProperty,
+  ApiPropertyOptional,
   IntersectionType,
   OmitType,
   PartialType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
-import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsPositive,
+  IsString,
+  Length,
+} from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { LeaseDto } from 'src/leases/dto/lease.dto';
 
 class UnitRequiredDto extends AbstractDto {
   @Nanoid()
@@ -39,9 +44,6 @@ class UnitOptionalDto {
 
   @IsString()
   usage: string | null = null;
-
-  @ApiProperty({ readOnly: true }) // needed?
-  leases?: LeaseDto[];
 }
 
 export class UnitDto extends IntersectionType(
@@ -50,12 +52,19 @@ export class UnitDto extends IntersectionType(
 ) {}
 
 export class CreateUnitDto
-  extends IntersectionType(
-    UnitRequiredDto,
-    PartialType(OmitType(UnitOptionalDto, ['leases'])),
-  )
+  extends IntersectionType(UnitRequiredDto, PartialType(UnitOptionalDto))
   implements Partial<Unit> {}
 
 export class UpdateUnitDto extends PartialType(
   OmitType(CreateUnitDto, ['propertyId']),
 ) {}
+
+export class UnitVacancyDto extends UnitDto {
+  @ApiPropertyOptional({ readOnly: true })
+  @IsBoolean()
+  isVacant: boolean;
+
+  @ApiPropertyOptional({ readOnly: true })
+  @IsString()
+  vacancy: string;
+}
