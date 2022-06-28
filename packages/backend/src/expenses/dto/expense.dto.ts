@@ -30,8 +30,8 @@ export class ExpenseDto
   maintenanceOrderId: string | null;
 
   // TODO use category name/prisma connect & set default here
-  @ApiHideProperty()
-  categoryId: number | null;
+  // @ApiHideProperty()
+  // categoryId: number | null;
 
   @IsPositive()
   amount: number;

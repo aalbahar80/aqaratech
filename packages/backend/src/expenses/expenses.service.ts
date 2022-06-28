@@ -1,22 +1,18 @@
-import { subject } from '@casl/ability';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import * as R from 'remeda';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class ExpensesService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create({
     createExpenseDto,
@@ -25,42 +21,34 @@ export class ExpensesService {
     createExpenseDto: ExpenseDto;
     user: IUser;
   }) {
-    // check if user has access to create expense for property/unit/portfolio
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    const { unitId, propertyId, portfolioId } = createExpenseDto;
-
-    let toCreate: ExpenseDto & Record<string, any> = { ...createExpenseDto };
-
-    // TODO validate that only one of unitId, propertyId, portfolioId is set
-    if (unitId) {
-      const unit = await this.prisma.unit.findFirst({
-        where: { AND: [accessibleBy(ability).Unit, { id: unitId }] },
-        select: selectForAuthz.unit,
-      });
-      toCreate.unit = unit;
-    } else if (propertyId) {
-      const property = await this.prisma.property.findFirst({
-        where: { AND: [accessibleBy(ability).Property, { id: propertyId }] },
-        select: selectForAuthz.property,
-      });
-      toCreate.property = property;
-    } else if (portfolioId) {
-      const portfolio = await this.prisma.portfolio.findFirst({
-        where: { AND: [accessibleBy(ability).Portfolio, { id: portfolioId }] },
-        select: selectForAuthz.portfolio,
-      });
-      toCreate.portfolio = portfolio;
-    }
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Expense', toCreate),
+      subject('Expense', createExpenseDto),
     );
 
-    // insert
-    const input: Prisma.ExpenseCreateArgs['data'] = createExpenseDto; // to make prisma call typesafe
-    return this.prisma.expense.create({ data: input });
+    const toCreate = R.omit(createExpenseDto, [
+      'portfolioId',
+      'propertyId',
+      'unitId',
+      'maintenanceOrderId',
+    ]);
+    return this.prisma.expense.create({
+      data: {
+        ...toCreate,
+        ...(createExpenseDto.portfolioId && {
+          portfolio: { connect: { id: createExpenseDto.portfolioId } },
+        }),
+        ...(createExpenseDto.propertyId && {
+          property: { connect: { id: createExpenseDto.propertyId } },
+        }),
+        ...(createExpenseDto.unitId && {
+          unit: { connect: { id: createExpenseDto.unitId } },
+        }),
+        // ...(createExpenseDto.maintenanceOrderId && {
+        //   unit: { connect: { id: createExpenseDto.maintenanceOrderId } },
+        // }),
+      },
+    });
   }
 
   async findAll({
@@ -72,16 +60,14 @@ export class ExpensesService {
   }): Promise<PaginatedMetaDto<ExpenseDto>> {
     const { page, take, q } = expensePageOptionsDto;
 
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    // returns a 404 whether not found or not accessible
     let [results, itemCount] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(ability).Expense,
+        where: accessibleBy(user.ability).Expense,
       }),
       this.prisma.expense.count({
-        where: accessibleBy(ability).Expense,
+        where: accessibleBy(user.ability).Expense,
       }),
     ]);
 
@@ -97,17 +83,11 @@ export class ExpensesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    const data = await this.prisma.expense.findFirst({
-      where: {
-        AND: [accessibleBy(ability).Expense, { id }],
-      },
-    });
-    return data;
+  findOne({ id }: { id: string }) {
+    return this.prisma.expense.findUnique({ where: { id } });
   }
 
-  async update({
+  update({
     id,
     updateExpenseDto,
     user,
@@ -116,63 +96,18 @@ export class ExpensesService {
     updateExpenseDto: UpdateExpenseDto;
     user: IUser;
   }) {
-    // check if user has access to update expense
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    await this.prisma.expense.findFirst({
-      where: { AND: [accessibleBy(ability, Action.Update).Expense, { id }] },
-    });
-
-    const { unitId, propertyId, portfolioId } = updateExpenseDto;
-
-    let toUpdate: UpdateExpenseDto & Record<string, any> = {
-      ...updateExpenseDto,
-    };
-
-    // TODO validate that only one of unitId, propertyId, portfolioId is set
-    // TODO dry with /create
-    // check if user has access to new unit/property/portfolio
-    if (unitId) {
-      const unit = await this.prisma.unit.findFirst({
-        where: { AND: [accessibleBy(ability).Unit, { id: unitId }] },
-        select: selectForAuthz.unit,
-      });
-      toUpdate.unit = unit;
-    } else if (propertyId) {
-      const property = await this.prisma.property.findFirst({
-        where: { AND: [accessibleBy(ability).Property, { id: propertyId }] },
-        select: selectForAuthz.property,
-      });
-      toUpdate.property = property;
-    } else if (portfolioId) {
-      const portfolio = await this.prisma.portfolio.findFirst({
-        where: { AND: [accessibleBy(ability).Portfolio, { id: portfolioId }] },
-        select: selectForAuthz.portfolio,
-      });
-      toUpdate.portfolio = portfolio;
-    }
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Expense', toUpdate),
+      subject('Expense', { id, ...updateExpenseDto }),
     );
 
-    const input: Prisma.ExpenseUpdateArgs['data'] = updateExpenseDto;
     return this.prisma.expense.update({
       where: { id },
-      data: input,
+      data: updateExpenseDto,
     });
   }
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.expense.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
-      Action.Delete,
-      subject('Expense', data),
-    );
-
+  remove({ id }: { id: string }) {
     return this.prisma.expense.delete({ where: { id } });
   }
 }

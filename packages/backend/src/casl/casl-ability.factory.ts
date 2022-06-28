@@ -239,7 +239,7 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['Expense'], {
         OR: [
-          { id: { in: manageable.leases } },
+          { id: { in: manageable.expenses } },
           {
             OR: [
               { unitId: { in: manageable.units } },
