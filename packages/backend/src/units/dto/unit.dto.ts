@@ -10,7 +10,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 
-export class CreateUnitDto extends AbstractDto implements Unit {
+export class UnitDto extends AbstractDto {
   @Nanoid()
   propertyId: string;
 
@@ -44,13 +44,13 @@ export class CreateUnitDto extends AbstractDto implements Unit {
   @ApiPropertyOptional()
   @IsString()
   usage: string | null = null;
+
+  @ApiProperty({ readOnly: true })
+  leases: LeaseDto[];
 }
+
+export class CreateUnitDto extends UnitDto implements Unit {}
 
 export class UpdateUnitDto extends PartialType(
   OmitType(CreateUnitDto, ['propertyId']),
 ) {}
-
-export class UnitDto extends CreateUnitDto {
-  @ApiProperty({ readOnly: true })
-  leases: LeaseDto[];
-}
