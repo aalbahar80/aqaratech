@@ -22,7 +22,7 @@
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
 		return {
-			...protectRoute(session, pathname),
+			// ...protectRoute(session, pathname),
 			props: {
 				navigation,
 			},
