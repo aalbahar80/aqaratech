@@ -1,6 +1,7 @@
 import {
   ApiHideProperty,
   ApiPropertyOptional,
+  OmitType,
   PartialType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
@@ -58,4 +59,6 @@ export class PropertyDto extends AbstractDto implements Property {
   lat: number | null = null;
 }
 
-export class UpdatePropertyDto extends PartialType(PropertyDto) {}
+export class UpdatePropertyDto extends PartialType(
+  OmitType(PropertyDto, ['portfolioId']),
+) {}

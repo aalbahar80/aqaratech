@@ -1,8 +1,8 @@
-import { subject } from '@casl/ability';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import * as R from 'remeda';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -11,15 +11,11 @@ import {
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
-import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class PropertiesService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create({
     createPropertyDto,
@@ -28,25 +24,18 @@ export class PropertiesService {
     createPropertyDto: PropertyDto;
     user: IUser;
   }) {
-    // check if user has access to create property
-    const portfolio = await this.prisma.portfolio.findUnique({
-      where: { id: createPropertyDto.portfolioId },
-      select: selectForAuthz.portfolio,
-    });
-
-    const toCreate = {
-      ...createPropertyDto,
-      portfolio,
-    };
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Property', toCreate),
+      subject('Property', createPropertyDto),
     );
 
-    const input: Prisma.PropertyCreateArgs['data'] = createPropertyDto; // to make prisma call type
-    return this.prisma.property.create({ data: input });
+    const toCreate = R.omit(createPropertyDto, ['portfolioId']);
+    return this.prisma.property.create({
+      data: {
+        ...toCreate,
+        portfolio: { connect: { id: createPropertyDto.portfolioId } },
+      },
+    });
   }
 
   async findAll({
@@ -58,17 +47,14 @@ export class PropertiesService {
   }): Promise<PaginatedMetaDto<PropertyDto>> {
     const { page, take, q } = propertyPageOptionsDto;
 
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    // TODO test this
-    // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
     let [results, itemCount] = await Promise.all([
       this.prisma.property.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(ability).Property,
+        where: accessibleBy(user.ability).Property,
       }),
       this.prisma.property.count({
-        where: accessibleBy(ability).Property,
+        where: accessibleBy(user.ability).Property,
       }),
     ]);
 
@@ -88,19 +74,11 @@ export class PropertiesService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-
-    // returns a 404 whether not found or not accessible
-    const data = await this.prisma.property.findFirst({
-      where: {
-        AND: [accessibleBy(ability).Property, { id }],
-      },
-    });
-    return data;
+  findOne({ id }: { id: string }) {
+    return this.prisma.property.findUnique({ where: { id } });
   }
 
-  async update({
+  update({
     id,
     updatePropertyDto,
     user,
@@ -109,50 +87,18 @@ export class PropertiesService {
     updatePropertyDto: UpdatePropertyDto;
     user: IUser;
   }) {
-    const toUpdate = await this.prisma.property.findUnique({
-      where: { id },
-      select: selectForAuthz.property,
-    });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Property', toUpdate),
+      subject('Property', { id, ...updatePropertyDto }),
     );
 
-    // check permissions on new data
-    if (updatePropertyDto.portfolioId) {
-      const portfolio = await this.prisma.portfolio.findUnique({
-        where: { id: updatePropertyDto.portfolioId },
-        select: selectForAuthz.portfolio,
-      });
-
-      this.caslAbilityFactory.throwIfForbidden(
-        user,
-        Action.Create,
-        subject('Property', {
-          ...updatePropertyDto,
-          portfolio,
-        }),
-      );
-    }
-
-    const input: Prisma.PropertyUpdateArgs['data'] = updatePropertyDto; // to make prisma call type
     return this.prisma.property.update({
       where: { id },
-      data: input,
+      data: updatePropertyDto,
     });
   }
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.property.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
-      Action.Delete,
-      subject('Property', data),
-    );
-
+  remove({ id }: { id: string }) {
     return this.prisma.property.delete({ where: { id } });
   }
 }

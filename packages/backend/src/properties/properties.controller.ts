@@ -60,8 +60,8 @@ export class PropertiesController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  findOne(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
-    return this.propertiesService.findOne({ id, user });
+  findOne(@Param('id') id: string): Promise<PropertyDto> {
+    return this.propertiesService.findOne({ id });
   }
 
   @Patch(':id')
@@ -78,7 +78,7 @@ export class PropertiesController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  remove(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
-    return this.propertiesService.remove({ id, user });
+  remove(@Param('id') id: string): Promise<PropertyDto> {
+    return this.propertiesService.remove({ id });
   }
 }
