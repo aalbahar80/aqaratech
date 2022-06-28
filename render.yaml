@@ -20,6 +20,11 @@ services:
           property: connectionString
       - key: PORT
         value: 3002
+    buildFilter:
+      paths:
+        - packages/backend/**
+      ignoredPaths:
+        - packages/backend/**/*.spec.ts
 
 databases:
   - name: elephant
