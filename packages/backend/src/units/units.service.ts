@@ -1,22 +1,18 @@
-import { subject } from '@casl/ability';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import * as R from 'remeda';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
-import { selectForAuthz } from 'src/utils/authz-fields';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class UnitsService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create({
     createUnitDto,
@@ -25,27 +21,18 @@ export class UnitsService {
     createUnitDto: UnitDto;
     user: IUser;
   }) {
-    // check if user has access to create unit in this organization
-    // alt: use prismawhere to filter if user has access to create unit in this organization
-    const property = await this.prisma.property.findUnique({
-      where: { id: createUnitDto.propertyId },
-      select: selectForAuthz.property,
-    });
-
-    const toCreate = {
-      ...createUnitDto,
-      property,
-    };
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Unit', toCreate),
+      subject('Unit', createUnitDto),
     );
 
-    // insert
-    const input: Prisma.UnitCreateArgs['data'] = createUnitDto; // to make prisma call typesafe
-    return this.prisma.unit.create({ data: input });
+    const toCreate = R.omit(createUnitDto, ['propertyId']);
+    return this.prisma.unit.create({
+      data: {
+        ...toCreate,
+        property: { connect: { id: createUnitDto.propertyId } },
+      },
+    });
   }
 
   async findAll({
@@ -57,18 +44,14 @@ export class UnitsService {
   }): Promise<PaginatedMetaDto<UnitDto>> {
     const { page, take, q } = unitPageOptionsDto;
 
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    // TODO test this
-    // https://casl.js.org/v5/en/package/casl-prisma#finding-accessible-records
-    // returns a 404 whether not found or not accessible
     let [results, itemCount] = await Promise.all([
       this.prisma.unit.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(ability).Unit,
+        where: accessibleBy(user.ability).Unit,
       }),
       this.prisma.unit.count({
-        where: accessibleBy(ability).Unit,
+        where: accessibleBy(user.ability).Unit,
       }),
     ]);
 
@@ -88,17 +71,11 @@ export class UnitsService {
     return { meta, results };
   }
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const ability = await this.caslAbilityFactory.defineAbility(user);
-    const data = await this.prisma.unit.findFirst({
-      where: {
-        AND: [accessibleBy(ability).Unit, { id }],
-      },
-    });
-    return data;
+  findOne({ id }: { id: string }) {
+    return this.prisma.unit.findUnique({ where: { id } });
   }
 
-  async update({
+  update({
     id,
     updateUnitDto,
     user,
@@ -107,35 +84,18 @@ export class UnitsService {
     updateUnitDto: UpdateUnitDto;
     user: IUser;
   }) {
-    // grab necessary data for ability check
-    const toUpdate = await this.prisma.unit.findUnique({
-      where: { id },
-      select: selectForAuthz.unit,
-    });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Unit', toUpdate),
+      subject('Unit', { id, ...updateUnitDto }),
     );
 
-    // no need to check for permissions here, since propertyId is forbidden in this endpoint
-    const input: Prisma.UnitUpdateArgs['data'] = updateUnitDto;
     return this.prisma.unit.update({
       where: { id },
-      data: input,
+      data: updateUnitDto,
     });
   }
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    const data = await this.prisma.unit.findUnique({ where: { id } });
-
-    this.caslAbilityFactory.throwIfForbidden(
-      user,
-      Action.Delete,
-      subject('Unit', data),
-    );
-
+  remove({ id }: { id: string }) {
     return this.prisma.unit.delete({ where: { id } });
   }
 }
