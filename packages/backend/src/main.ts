@@ -20,7 +20,8 @@ import { UsersModule } from 'src/users/users.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['verbose', 'debug', 'log', 'warn', 'error'],
+    logger: ['log', 'warn', 'error'],
+    cors: true, // TODO adjust in prod
   });
 
   app.useGlobalPipes(
