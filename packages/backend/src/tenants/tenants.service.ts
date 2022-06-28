@@ -14,7 +14,7 @@ import { search } from 'src/utils/search';
 export class TenantsService {
   constructor(private prisma: PrismaService) {}
 
-  create({
+  async create({
     createTenantDto,
     user,
   }: {
