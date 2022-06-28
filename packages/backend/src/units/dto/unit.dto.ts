@@ -4,7 +4,7 @@ import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-export class UnitDto extends AbstractDto implements Unit {
+export class CreateUnitDto extends AbstractDto implements Unit {
   @Nanoid()
   propertyId: string;
 
@@ -41,5 +41,5 @@ export class UnitDto extends AbstractDto implements Unit {
 }
 
 export class UpdateUnitDto extends PartialType(
-  OmitType(UnitDto, ['propertyId']),
+  OmitType(CreateUnitDto, ['propertyId']),
 ) {}

@@ -7,7 +7,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import { CreateUnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class UnitsService {
     createUnitDto,
     user,
   }: {
-    createUnitDto: UnitDto;
+    createUnitDto: CreateUnitDto;
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
@@ -41,7 +41,7 @@ export class UnitsService {
   }: {
     unitPageOptionsDto: PageOptionsDto;
     user: IUser;
-  }): Promise<PaginatedMetaDto<UnitDto>> {
+  }): Promise<PaginatedMetaDto<CreateUnitDto>> {
     const { page, take, q } = unitPageOptionsDto;
 
     let [results, itemCount] = await Promise.all([
@@ -49,6 +49,12 @@ export class UnitsService {
         take,
         skip: (page - 1) * take,
         where: accessibleBy(user.ability).Unit,
+        include: {
+          leases: {
+            take: 1,
+            orderBy: { start: 'desc' },
+          },
+        },
       }),
       this.prisma.unit.count({
         where: accessibleBy(user.ability).Unit,

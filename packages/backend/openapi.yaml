@@ -460,14 +460,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UnitDto'
+              $ref: '#/components/schemas/CreateUnitDto'
       responses:
         '201':
           description: ''
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                $ref: '#/components/schemas/CreateUnitDto'
       tags: &ref_4
         - units
     get:
@@ -501,14 +501,14 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUnitDto
+                title: PaginatedResponseOfCreateUnitDto
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/UnitDto'
+                          $ref: '#/components/schemas/CreateUnitDto'
       tags: *ref_4
   /units/{id}:
     get:
@@ -525,7 +525,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                $ref: '#/components/schemas/CreateUnitDto'
       tags: *ref_4
     patch:
       operationId: UnitsController_update
@@ -547,7 +547,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                $ref: '#/components/schemas/CreateUnitDto'
       tags: *ref_4
     delete:
       operationId: UnitsController_remove
@@ -563,7 +563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                $ref: '#/components/schemas/CreateUnitDto'
       tags: *ref_4
   /leases:
     post:
@@ -1352,7 +1352,7 @@ components:
           default: null
           minLength: 1
           maxLength: 255
-    UnitDto:
+    CreateUnitDto:
       type: object
       properties:
         id:

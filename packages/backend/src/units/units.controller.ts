@@ -24,7 +24,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import { CreateUnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 @Controller('units')
@@ -36,46 +36,46 @@ export class UnitsController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Unit' })
   @ApiHeader({ name: ROLE_HEADER_NAME })
-  @ApiCreatedResponse({ type: UnitDto })
+  @ApiCreatedResponse({ type: CreateUnitDto })
   create(
     @User() user: IUser,
-    @Body() createUnitDto: UnitDto,
-  ): Promise<UnitDto> {
+    @Body() createUnitDto: CreateUnitDto,
+  ): Promise<CreateUnitDto> {
     return this.unitsService.create({ createUnitDto, user });
   }
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiPaginatedResponse(UnitDto)
+  @ApiPaginatedResponse(CreateUnitDto)
   findAll(
     @User() user: IUser,
     @Query() unitPageOptionsDto: PageOptionsDto,
-  ): Promise<PaginatedMetaDto<UnitDto>> {
+  ): Promise<PaginatedMetaDto<CreateUnitDto>> {
     return this.unitsService.findAll({ unitPageOptionsDto, user });
   }
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitDto })
-  findOne(@Param('id') id: string): Promise<UnitDto> {
+  @ApiOkResponse({ type: CreateUnitDto })
+  findOne(@Param('id') id: string): Promise<CreateUnitDto> {
     return this.unitsService.findOne({ id });
   }
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitDto })
+  @ApiOkResponse({ type: CreateUnitDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateUnitDto: UpdateUnitDto,
-  ): Promise<UnitDto> {
+  ): Promise<CreateUnitDto> {
     return this.unitsService.update({ id, updateUnitDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitDto })
-  remove(@Param('id') id: string): Promise<UnitDto> {
+  @ApiOkResponse({ type: CreateUnitDto })
+  remove(@Param('id') id: string): Promise<CreateUnitDto> {
     return this.unitsService.remove({ id });
   }
 }
