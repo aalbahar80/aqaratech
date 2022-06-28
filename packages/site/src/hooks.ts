@@ -5,7 +5,6 @@ import { getUser } from '$lib/server/utils/getAuthz';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing'; // has to be after @sentry/node
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
-import { resolveHTTPResponse, type Dict } from '@trpc/server';
 import { parse, serialize } from 'cookie';
 
 if (
@@ -26,6 +25,7 @@ if (
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
 	authz: locals.authz,
+	accessToken: locals.accessToken,
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
