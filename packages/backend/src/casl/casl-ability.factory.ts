@@ -220,6 +220,8 @@ export class CaslAbilityFactory {
         OR: [
           { id: { in: manageable.leases } },
           {
+            // TODO add condition to only allow if unit & tenant in same org?
+            // Otherwise, define ability on a per-role basis from x-role-id header
             AND: [
               { unitId: { in: manageable.units } },
               { tenantId: { in: manageable.tenants } },
