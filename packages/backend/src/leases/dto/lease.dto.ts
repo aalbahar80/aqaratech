@@ -29,13 +29,13 @@ class LeaseRequiredDto extends AbstractDto {
 
 class LeaseOptionalDto {
   @IsNumber()
-  deposit = 0;
+  deposit: number = 0;
 
   @IsBoolean()
-  deactivated = false;
+  deactivated: boolean = false;
 
   @IsBoolean()
-  notify = true;
+  notify: boolean = true;
 
   @IsString()
   license: string | null = null;

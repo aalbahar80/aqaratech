@@ -1438,13 +1438,13 @@ components:
           type: number
           minimum: 1
         deposit:
-          type: object
+          type: number
           default: 0
         deactivated:
-          type: object
+          type: boolean
           default: false
         notify:
-          type: object
+          type: boolean
           default: true
         license:
           type: string
@@ -1607,13 +1607,13 @@ components:
           type: number
           minimum: 1
         deposit:
-          type: object
+          type: number
           default: 0
         deactivated:
-          type: object
+          type: boolean
           default: false
         notify:
-          type: object
+          type: boolean
           default: true
         license:
           type: string

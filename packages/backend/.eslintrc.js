@@ -41,5 +41,9 @@ module.exports = {
 
     '@typescript-eslint/no-floating-promises': 'error', // forgetting to await Activities and Workflow APIs is bad
     '@typescript-eslint/no-misused-promises': ['error'],
+
+    '@typescript-eslint/no-inferrable-types': {
+      ignoreProperties: true,
+    },
   },
 };
