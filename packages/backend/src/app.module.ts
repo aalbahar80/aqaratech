@@ -1,12 +1,13 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { CacheModule, Module, Scope } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // common
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
+import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
@@ -41,8 +42,13 @@ import { UsersModule } from './users/users.module';
   controllers: [AppController],
   providers: [
     AppService,
-    { provide: 'APP_GUARD', useClass: JwtAuthGuard }, // parses JWT and sets user in request
+    { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
     { provide: APP_GUARD, useClass: AbilitiesGuard },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+      scope: Scope.REQUEST,
+    },
   ],
 })
 export class AppModule {}
