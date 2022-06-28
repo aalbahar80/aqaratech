@@ -7,8 +7,8 @@
 		type: string | null;
 		unitNumber: string;
 		isVacant: boolean;
-		vacancy: Date;
-		vacancyDistance: string;
+		vacancy: Date | undefined;
+		vacancyDistance: string | undefined;
 	}
 	export let unit: Unit;
 	export let icons: any[];
@@ -47,7 +47,7 @@
 					{/if}
 				{/each}
 			</div>
-			{#if unit.vacancy}
+			{#if unit?.vacancy}
 				<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
 					<Icon
 						src={Calendar}
@@ -56,7 +56,9 @@
 					/>
 					<p>
 						Vacancy:
-						<time dateTime={unit.vacancy}>{unit.vacancyDistance}</time>
+						<!-- <time dateTime={unit?.vacancy?.toISOString()}
+							>{unit?.vacancyDistance}</time
+						> -->
 					</p>
 				</div>
 			{/if}

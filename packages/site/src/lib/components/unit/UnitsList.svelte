@@ -17,8 +17,8 @@
 		floor: number | null;
 		size: number | null;
 		isVacant: boolean;
-		vacancy: Date;
-		vacancyDistance: string;
+		vacancy: Date | undefined;
+		vacancyDistance: string | undefined;
 	}
 	export let units: Unit[];
 
