@@ -16,7 +16,7 @@
 		bath: number | null;
 		floor: number | null;
 		size: number | null;
-		leases: {
+		leases?: {
 			end: Date;
 			start: Date;
 		}[];
@@ -30,9 +30,10 @@
 
 <StackedList entityTitle="units" count={units.length} {createHref}>
 	{#each units as unit (unit.id)}
-		{@const occupied = unit.leases.some(
-			(lease) => lease.end > new Date() && lease.start < new Date(),
-		)}
+		{@const occupied =
+			unit.leases?.some(
+				(lease) => lease.end > new Date() && lease.start < new Date(),
+			) ?? false}
 		{@const icons = [
 			{
 				label: unit.bed,

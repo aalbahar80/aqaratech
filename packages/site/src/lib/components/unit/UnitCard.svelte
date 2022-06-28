@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Unit } from '$lib/models/classes/unit.class';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
@@ -8,7 +7,7 @@
 		id: string;
 		type: string | null;
 		unitNumber: string;
-		leases: {
+		leases?: {
 			end: Date;
 		}[];
 	}
@@ -50,7 +49,7 @@
 					{/if}
 				{/each}
 			</div>
-			{#if unit.leases[0]}
+			{#if unit.leases?.[0]}
 				<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
 					<Icon
 						src={Calendar}
