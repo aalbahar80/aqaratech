@@ -14,7 +14,7 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbsDto } from 'src/common/dto/breadcrumbs.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class UnitRequiredDto extends AbstractDto {

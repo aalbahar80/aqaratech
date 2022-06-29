@@ -12,7 +12,7 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
-import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumbs.dto';
+import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
