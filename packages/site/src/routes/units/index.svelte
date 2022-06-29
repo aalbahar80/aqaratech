@@ -1,16 +1,12 @@
 <script context="module" lang="ts">
+	import { config } from '$lib/client/api-config';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
+	import { UnitsApi } from '@self/sdk';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
-	import {
-		Configuration,
-		UnitsApi,
-	} from '../../../../backend/src/generated/openapi';
 
 	export const load = async ({ fetch }: LoadEvent) => {
-		const data = await new UnitsApi(
-			new Configuration({ fetchApi: fetch }),
-		).unitsControllerFindAll();
+		const data = await new UnitsApi(config(fetch)).unitsControllerFindAll();
 
 		return {
 			props: { data },
