@@ -92,6 +92,10 @@ async function bootstrap() {
       LeaseInvoicesModule,
       ExpensesModule,
     ],
+    operationIdFactory(controllerKey, methodKey) {
+      const controller = controllerKey.replace(/Controller$/, '');
+      return `${methodKey}${controller}`;
+    },
   });
   // move below?
   writeFileSync('./openapi.json', JSON.stringify(document));

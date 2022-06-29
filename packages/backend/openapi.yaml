@@ -2,7 +2,7 @@ openapi: 3.0.0
 paths:
   /:
     get:
-      operationId: AppController_getHello
+      operationId: getHelloApp
       parameters: []
       responses:
         '200':
@@ -13,14 +13,14 @@ paths:
                 type: string
   /profile:
     get:
-      operationId: AppController_getProfile
+      operationId: getProfileApp
       parameters: []
       responses:
         '200':
           description: ''
   /tenants:
     post:
-      operationId: TenantsController_create
+      operationId: createTenants
       parameters:
         - name: x-role-id
           in: header
@@ -42,7 +42,7 @@ paths:
       tags: &ref_0
         - tenants
     get:
-      operationId: TenantsController_findAll
+      operationId: findAllTenants
       parameters:
         - name: page
           required: false
@@ -83,7 +83,7 @@ paths:
       tags: *ref_0
   /tenants/{id}:
     get:
-      operationId: TenantsController_findOne
+      operationId: findOneTenants
       parameters:
         - name: id
           required: true
@@ -99,7 +99,7 @@ paths:
                 $ref: '#/components/schemas/TenantDto'
       tags: *ref_0
     patch:
-      operationId: TenantsController_update
+      operationId: updateTenants
       parameters:
         - name: id
           required: true
@@ -121,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/TenantDto'
       tags: *ref_0
     delete:
-      operationId: TenantsController_remove
+      operationId: removeTenants
       parameters:
         - name: id
           required: true
@@ -138,7 +138,7 @@ paths:
       tags: *ref_0
   /portfolios:
     post:
-      operationId: PortfoliosController_create
+      operationId: createPortfolios
       parameters:
         - name: x-role-id
           in: header
@@ -160,7 +160,7 @@ paths:
       tags: &ref_1
         - portfolios
     get:
-      operationId: PortfoliosController_findAll
+      operationId: findAllPortfolios
       parameters:
         - name: page
           required: false
@@ -201,7 +201,7 @@ paths:
       tags: *ref_1
   /portfolios/{id}:
     get:
-      operationId: PortfoliosController_findOne
+      operationId: findOnePortfolios
       parameters:
         - name: id
           required: true
@@ -217,7 +217,7 @@ paths:
                 $ref: '#/components/schemas/PortfolioDto'
       tags: *ref_1
     patch:
-      operationId: PortfoliosController_update
+      operationId: updatePortfolios
       parameters:
         - name: id
           required: true
@@ -239,7 +239,7 @@ paths:
                 $ref: '#/components/schemas/PortfolioDto'
       tags: *ref_1
     delete:
-      operationId: PortfoliosController_remove
+      operationId: removePortfolios
       parameters:
         - name: id
           required: true
@@ -256,7 +256,7 @@ paths:
       tags: *ref_1
   /users:
     post:
-      operationId: UsersController_create
+      operationId: createUsers
       parameters: []
       requestBody:
         required: true
@@ -274,7 +274,7 @@ paths:
       tags: &ref_2
         - users
     get:
-      operationId: UsersController_findAll
+      operationId: findAllUsers
       parameters: []
       responses:
         '200':
@@ -293,7 +293,7 @@ paths:
       tags: *ref_2
   /users/by-email:
     get:
-      operationId: UsersController_findOneByEmail
+      operationId: findOneByEmailUsers
       parameters:
         - name: email
           required: true
@@ -312,7 +312,7 @@ paths:
       tags: *ref_2
   /users/{id}:
     get:
-      operationId: UsersController_findOne
+      operationId: findOneUsers
       parameters:
         - name: id
           required: true
@@ -331,7 +331,7 @@ paths:
       tags: *ref_2
   /properties:
     post:
-      operationId: PropertiesController_create
+      operationId: createProperties
       parameters:
         - name: x-role-id
           in: header
@@ -353,7 +353,7 @@ paths:
       tags: &ref_3
         - properties
     get:
-      operationId: PropertiesController_findAll
+      operationId: findAllProperties
       parameters:
         - name: page
           required: false
@@ -394,7 +394,7 @@ paths:
       tags: *ref_3
   /properties/{id}:
     get:
-      operationId: PropertiesController_findOne
+      operationId: findOneProperties
       parameters:
         - name: id
           required: true
@@ -410,7 +410,7 @@ paths:
                 $ref: '#/components/schemas/PropertyDto'
       tags: *ref_3
     patch:
-      operationId: PropertiesController_update
+      operationId: updateProperties
       parameters:
         - name: id
           required: true
@@ -432,7 +432,7 @@ paths:
                 $ref: '#/components/schemas/PropertyDto'
       tags: *ref_3
     delete:
-      operationId: PropertiesController_remove
+      operationId: removeProperties
       parameters:
         - name: id
           required: true
@@ -449,7 +449,7 @@ paths:
       tags: *ref_3
   /units:
     post:
-      operationId: UnitsController_create
+      operationId: createUnits
       parameters:
         - name: x-role-id
           in: header
@@ -471,7 +471,7 @@ paths:
       tags: &ref_4
         - units
     get:
-      operationId: UnitsController_findAll
+      operationId: findAllUnits
       parameters:
         - name: page
           required: false
@@ -512,7 +512,7 @@ paths:
       tags: *ref_4
   /units/{id}:
     get:
-      operationId: UnitsController_findOne
+      operationId: findOneUnits
       parameters:
         - name: id
           required: true
@@ -528,7 +528,7 @@ paths:
                 $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
     patch:
-      operationId: UnitsController_update
+      operationId: updateUnits
       parameters:
         - name: id
           required: true
@@ -550,7 +550,7 @@ paths:
                 $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
     delete:
-      operationId: UnitsController_remove
+      operationId: removeUnits
       parameters:
         - name: id
           required: true
@@ -567,7 +567,7 @@ paths:
       tags: *ref_4
   /leases:
     post:
-      operationId: LeasesController_create
+      operationId: createLeases
       parameters:
         - name: x-role-id
           in: header
@@ -589,7 +589,7 @@ paths:
       tags: &ref_5
         - leases
     get:
-      operationId: LeasesController_findAll
+      operationId: findAllLeases
       parameters:
         - name: page
           required: false
@@ -630,7 +630,7 @@ paths:
       tags: *ref_5
   /leases/{id}:
     get:
-      operationId: LeasesController_findOne
+      operationId: findOneLeases
       parameters:
         - name: id
           required: true
@@ -646,7 +646,7 @@ paths:
                 $ref: '#/components/schemas/LeaseDto'
       tags: *ref_5
     patch:
-      operationId: LeasesController_update
+      operationId: updateLeases
       parameters:
         - name: id
           required: true
@@ -668,7 +668,7 @@ paths:
                 $ref: '#/components/schemas/LeaseDto'
       tags: *ref_5
     delete:
-      operationId: LeasesController_remove
+      operationId: removeLeases
       parameters:
         - name: id
           required: true
@@ -685,7 +685,7 @@ paths:
       tags: *ref_5
   /leaseInvoices:
     post:
-      operationId: LeaseInvoicesController_create
+      operationId: createLeaseInvoices
       parameters:
         - name: x-role-id
           in: header
@@ -707,7 +707,7 @@ paths:
       tags: &ref_6
         - leaseInvoices
     get:
-      operationId: LeaseInvoicesController_findAll
+      operationId: findAllLeaseInvoices
       parameters:
         - name: page
           required: false
@@ -748,7 +748,7 @@ paths:
       tags: *ref_6
   /leaseInvoices/{id}:
     get:
-      operationId: LeaseInvoicesController_findOne
+      operationId: findOneLeaseInvoices
       parameters:
         - name: id
           required: true
@@ -764,7 +764,7 @@ paths:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_6
     patch:
-      operationId: LeaseInvoicesController_update
+      operationId: updateLeaseInvoices
       parameters:
         - name: id
           required: true
@@ -786,7 +786,7 @@ paths:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_6
     delete:
-      operationId: LeaseInvoicesController_remove
+      operationId: removeLeaseInvoices
       parameters:
         - name: id
           required: true
@@ -803,7 +803,7 @@ paths:
       tags: *ref_6
   /expenses:
     post:
-      operationId: ExpensesController_create
+      operationId: createExpenses
       parameters:
         - name: x-role-id
           in: header
@@ -825,7 +825,7 @@ paths:
       tags: &ref_7
         - expenses
     get:
-      operationId: ExpensesController_findAll
+      operationId: findAllExpenses
       parameters:
         - name: page
           required: false
@@ -866,7 +866,7 @@ paths:
       tags: *ref_7
   /expenses/{id}:
     get:
-      operationId: ExpensesController_findOne
+      operationId: findOneExpenses
       parameters:
         - name: id
           required: true
@@ -882,7 +882,7 @@ paths:
                 $ref: '#/components/schemas/ExpenseDto'
       tags: *ref_7
     patch:
-      operationId: ExpensesController_update
+      operationId: updateExpenses
       parameters:
         - name: id
           required: true
@@ -904,7 +904,7 @@ paths:
                 $ref: '#/components/schemas/ExpenseDto'
       tags: *ref_7
     delete:
-      operationId: ExpensesController_remove
+      operationId: removeExpenses
       parameters:
         - name: id
           required: true
