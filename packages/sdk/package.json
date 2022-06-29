@@ -9,7 +9,7 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "openapi-generator-cli generate && tsc",
-        "dev": "nodemon -w openapi.yaml --exec \"openapi-generator-cli generate && tsc\"",
+        "dev": "nodemon -V --delay 2 -w openapi.yaml --exec \"openapi-generator-cli generate && tsc\"",
         "generate": "openapi-generator-cli generate"
     },
     "devDependencies": {
