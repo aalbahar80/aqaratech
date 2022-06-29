@@ -8,7 +8,7 @@
     "generators": {
       "fetch-client": {
         "generatorName": "typescript-fetch",
-        "inputSpec": "./openapi.json",
+        "inputSpec": "./openapi.yaml",
         "output": "../sdk/src",
         "additionalProperties": {
           "supportsES6": true,

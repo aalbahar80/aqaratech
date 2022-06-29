@@ -97,8 +97,6 @@ async function bootstrap() {
       return `${methodKey}${controller}`;
     },
   });
-  // move below?
-  writeFileSync('./openapi.json', JSON.stringify(document));
   writeFileSync(
     './openapi.yaml',
     dump(document, {
