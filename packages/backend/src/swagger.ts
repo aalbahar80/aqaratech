@@ -12,6 +12,7 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
+import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumbs.dto';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -57,6 +58,7 @@ export const setupSwagger = (app: INestApplication) => {
       LeaseInvoicesModule,
       ExpensesModule,
     ],
+    extraModels: [BreadcrumbDto, BreadcrumbsDto],
     operationIdFactory(controllerKey, methodKey) {
       const controller = controllerKey.replace(/Controller$/, '');
       return `${methodKey}${controller}`;

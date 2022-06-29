@@ -1,4 +1,9 @@
-import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
+import {
+  IntersectionType,
+  OmitType,
+  PartialType,
+  PickType,
+} from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import {
   IsBoolean,
@@ -9,6 +14,7 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumbs.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class UnitRequiredDto extends AbstractDto {
@@ -64,4 +70,13 @@ export class UnitVacancyDto extends UnitDto {
 
   @IsISO8601()
   vacancy: Date | null;
+}
+
+class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'portfolio',
+  'property',
+]) {}
+
+export class UnitOneDto extends UnitDto {
+  breadcrumbs: UnitBreadcrumbsDto;
 }

@@ -6,6 +6,7 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { REL } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
@@ -108,11 +109,33 @@ export class UnitsService {
     return { distance: '', date: null };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.unit.findUnique({
+  async findOne({ id }: { id: string }) {
+    const unit = await this.prisma.unit.findUnique({
       where: { id },
-      include: { leases: true },
+      include: {
+        leases: true,
+        property: {
+          select: {
+            id: true,
+            portfolioId: true,
+          },
+        },
+      },
     });
+
+    return {
+      ...unit,
+      breadcrumbs: {
+        portfolio: {
+          rel: REL.portfolio,
+          href: `/portfolios/${unit.property.portfolioId}`,
+        },
+        property: {
+          rel: REL.property,
+          href: `/properties/${unit.propertyId}`,
+        },
+      },
+    };
   }
 
   update({

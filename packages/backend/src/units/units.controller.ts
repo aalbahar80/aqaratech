@@ -27,6 +27,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import {
   CreateUnitDto,
   UnitDto,
+  UnitOneDto,
   UnitVacancyDto,
   UpdateUnitDto,
 } from 'src/units/dto/unit.dto';
@@ -61,8 +62,8 @@ export class UnitsController {
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitDto })
-  findOne(@Param('id') id: string): Promise<UnitDto> {
+  @ApiOkResponse({ type: UnitOneDto })
+  findOne(@Param('id') id: string): Promise<UnitOneDto> {
     return this.unitsService.findOne({ id });
   }
 

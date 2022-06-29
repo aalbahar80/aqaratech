@@ -525,7 +525,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                $ref: '#/components/schemas/UnitOneDto'
       tags: *ref_4
     patch:
       operationId: updateUnits
@@ -1553,6 +1553,105 @@ components:
         - isVacant
         - vacancyDistance
         - vacancy
+    BreadcrumbDto:
+      type: object
+      properties:
+        rel:
+          enum:
+            - tenant
+            - portfolio
+            - property
+            - unit
+            - lease
+            - maintenanceOrder
+          type: string
+        href:
+          type: string
+      required:
+        - rel
+        - href
+    UnitBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+        - property
+    UnitOneDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+        floor:
+          type: number
+          nullable: true
+          default: null
+        size:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+          default: null
+        usage:
+          type: string
+          nullable: true
+          default: null
+        breadcrumbs:
+          $ref: '#/components/schemas/UnitBreadcrumbsDto'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - propertyId
+        - unitNumber
+        - floor
+        - size
+        - bed
+        - bath
+        - marketRent
+        - type
+        - usage
+        - breadcrumbs
     UpdateUnitDto:
       type: object
       properties:
@@ -1846,5 +1945,34 @@ components:
         memo:
           type: string
           nullable: true
+    BreadcrumbsDto:
+      type: object
+      properties:
+        tenant:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        lease:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - tenant
+        - portfolio
+        - property
+        - unit
+        - lease
 security:
   - oauth-swagger: []
