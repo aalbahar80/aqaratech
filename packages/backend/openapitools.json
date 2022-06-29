@@ -12,7 +12,9 @@
         "output": "../sdk/src",
         "additionalProperties": {
           "supportsES6": true,
-          "typescriptThreePlus": true
+          "typescriptThreePlus": true,
+          "nullSafeAdditionalProps": true,
+          "withInterfaces": true
         }
       }
     }
