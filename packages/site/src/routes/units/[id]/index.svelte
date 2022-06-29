@@ -1,24 +1,18 @@
 <script lang="ts" context="module">
-	import { trpc } from '$lib/client/trpc';
+	import { api } from '$lib/client/api';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
-	import type { Props } from '$lib/models/types/Props.type';
 	import type { LoadEvent } from '@sveltejs/kit';
+	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({
-		params,
-		session,
-		fetch,
-	}: LoadEvent<{ id: string }>) => {
-		const unit = session.authz?.isAdmin
-			? await trpc(fetch).query('units:read', params.id)
-			: await trpc(fetch).query('owner:units:read', params.id);
-		return { props: { unit } };
+	export const load = async ({ fetch, params }: LoadEvent<{ id: string }>) => {
+		const data = await api(fetch).units.findOneUnits({ id: params.id });
+		return { props: { data } };
 	};
 </script>
 
 <script lang="ts">
-	type Unit = Props<typeof load>['unit'];
-	export let unit: Unit;
+	type Prop = LP<typeof load>;
+	export let data: Prop['data'];
 </script>
 
-<UnitPage {unit} />
+<UnitPage unit={data} />
