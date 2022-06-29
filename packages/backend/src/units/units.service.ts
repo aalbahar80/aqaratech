@@ -6,11 +6,12 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { REL } from 'src/constants/rel.enum';
+import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CreateUnitDto,
+  UnitOneDto,
   UnitVacancyDto,
   UpdateUnitDto,
 } from 'src/units/dto/unit.dto';
@@ -109,29 +110,29 @@ export class UnitsService {
     return { distance: '', date: null };
   }
 
-  async findOne({ id }: { id: string }) {
+  async findOne({ id }: { id: string }): Promise<UnitOneDto> {
     const unit = await this.prisma.unit.findUnique({
       where: { id },
       include: {
         leases: true,
         property: {
           select: {
-            id: true,
             portfolioId: true,
           },
         },
       },
     });
 
+    const { leases, property, ...fields } = unit;
     return {
-      ...unit,
+      ...fields,
       breadcrumbs: {
         portfolio: {
-          rel: REL.portfolio,
+          rel: Rel.Portfolio,
           href: `/portfolios/${unit.property.portfolioId}`,
         },
         property: {
-          rel: REL.property,
+          rel: Rel.Property,
           href: `/properties/${unit.propertyId}`,
         },
       },

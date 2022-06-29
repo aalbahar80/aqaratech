@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { REL } from 'src/constants/rel.enum';
+import { Rel } from 'src/constants/rel.enum';
 
 export class BreadcrumbDto {
-  @ApiProperty({ enum: REL })
-  rel: REL;
+  @ApiProperty({ enum: Rel })
+  rel: Rel;
 
   @ApiProperty()
   href: string;
 }
 
 export class BreadcrumbsDto {
-  @ApiProperty({ readOnly: true })
+  // @ApiProperty({ readOnly: true })
   tenant: BreadcrumbDto;
 
   @ApiProperty({ readOnly: true })

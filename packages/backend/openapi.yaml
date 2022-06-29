@@ -1558,12 +1558,12 @@ components:
       properties:
         rel:
           enum:
-            - tenant
-            - portfolio
-            - property
-            - unit
-            - lease
-            - maintenanceOrder
+            - Tenant
+            - Portfolio
+            - Property
+            - Unit
+            - Lease
+            - Maintenance Order
           type: string
         href:
           type: string
@@ -1948,10 +1948,6 @@ components:
     BreadcrumbsDto:
       type: object
       properties:
-        tenant:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
         portfolio:
           readOnly: true
           allOf:
@@ -1968,11 +1964,13 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/BreadcrumbDto'
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
-        - tenant
         - portfolio
         - property
         - unit
         - lease
+        - tenant
 security:
   - oauth-swagger: []
