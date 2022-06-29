@@ -16,6 +16,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
 
 class UnitRequiredDto extends AbstractDto {
   @Nanoid()
@@ -79,4 +80,5 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
 
 export class UnitOneDto extends UnitDto {
   breadcrumbs: UnitBreadcrumbsDto;
+  leases: LeaseDto[];
 }

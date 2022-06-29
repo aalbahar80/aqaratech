@@ -11,7 +11,6 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CreateUnitDto,
-  UnitOneDto,
   UnitVacancyDto,
   UpdateUnitDto,
 } from 'src/units/dto/unit.dto';
@@ -110,7 +109,7 @@ export class UnitsService {
     return { distance: '', date: null };
   }
 
-  async findOne({ id }: { id: string }): Promise<UnitOneDto> {
+  async findOne({ id }: { id: string }) {
     const unit = await this.prisma.unit.findUnique({
       where: { id },
       include: {
@@ -126,6 +125,7 @@ export class UnitsService {
     const { leases, property, ...fields } = unit;
     return {
       ...fields,
+      leases,
       breadcrumbs: {
         portfolio: {
           rel: Rel.Portfolio,
