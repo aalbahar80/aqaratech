@@ -40,8 +40,13 @@ async function bootstrap() {
   });
 
   setupSwagger(app);
-
-  await app.listen(3002);
+  console.log('OpenApi schema generated');
+  if (process.env.GENERATE_OPENAPI_SCHEMA) {
+    console.log('Quitting...');
+    await app.close();
+    process.exit(0);
+  } else {
+    await app.listen(3002);
+  }
 }
-
 void bootstrap();
