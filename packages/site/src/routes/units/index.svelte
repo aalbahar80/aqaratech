@@ -7,13 +7,10 @@
 		UnitsApi,
 	} from '../../../../backend/src/generated/openapi';
 
-	export const load = async ({ session, fetch, url }: LoadEvent) => {
+	export const load = async ({ fetch }: LoadEvent) => {
 		const data = await new UnitsApi(
 			new Configuration({ fetchApi: fetch }),
-		).unitsControllerFindAll(
-			{},
-			{ headers: { Authorization: `Bearer ${session.accessToken}` } },
-		);
+		).unitsControllerFindAll();
 
 		return {
 			props: { data },
