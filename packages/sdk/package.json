@@ -8,12 +8,13 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "build": "tsc",
-        "dev": "tsc --watch",
+        "build": "openapi-generator-cli generate && tsc",
+        "dev": "nodemon -w openapi.yaml --exec \"openapi-generator-cli generate && tsc\"",
         "generate": "openapi-generator-cli generate"
     },
     "devDependencies": {
         "@openapitools/openapi-generator-cli": "2.5.1",
+        "nodemon": "2.0.16",
         "typescript": "4.7.4"
     }
 }
