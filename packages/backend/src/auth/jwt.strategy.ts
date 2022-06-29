@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
-import { Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { ValidatedUser } from 'src/types/user-validated.type';
 
@@ -37,7 +37,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         jwksRequestsPerMinute: 5,
         jwksUri,
       }),
-      jwtFromRequest: cookieExtractor,
+      // jwtFromRequest: cookieExtractor,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // https://github.com/mikenicholson/passport-jwt#configure-strategy
       audience,
       issuer,
