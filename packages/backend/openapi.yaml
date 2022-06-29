@@ -929,6 +929,7 @@ tags:
     description: ''
 servers:
   - url: http://localhost:3002
+  - url: https://nestjs-dev.onrender.com
 components:
   securitySchemes:
     oauth-swagger:

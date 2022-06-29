@@ -47,6 +47,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('aqaratech')
     .addServer('http://localhost:3002')
+    .addServer('https://nestjs-dev.onrender.com')
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {
