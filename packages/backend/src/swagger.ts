@@ -63,12 +63,16 @@ export const setupSwagger = (app: INestApplication) => {
     },
   });
 
+  // For consumption of swagger-ui
   writeFileSync(
     './openapi.yaml',
     dump(document, {
       // schema: 'http://json-schema.org/draft-04/schema#',
     }),
   );
+
+  // For consumption of @self/sdk
+  writeFileSync('../sdk/openapi.yaml', dump(document, {}));
 
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: {
