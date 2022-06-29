@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
+import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { ValidatedUser } from 'src/types/user-validated.type';
 
@@ -21,6 +22,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       infer: true,
     })}/`;
 
+    const cookieExtractor = function (req: Request) {
+      let token = null;
+      if (req && req.headers.cookie) {
+        token = req.cookies['accessToken'];
+      }
+      return token;
+    };
     super({
       // TODO: simplify configService vars
       secretOrKeyProvider: passportJwtSecret({
@@ -29,7 +37,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         jwksRequestsPerMinute: 5,
         jwksUri,
       }),
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: cookieExtractor,
       // https://github.com/mikenicholson/passport-jwt#configure-strategy
       audience,
       issuer,

@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
+import * as cookieParser from 'cookie-parser';
 import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
@@ -24,6 +25,7 @@ async function bootstrap() {
     cors: true, // TODO adjust in prod
   });
 
+  app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
