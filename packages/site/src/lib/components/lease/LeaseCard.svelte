@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
-	import { Tenant } from '$lib/models/classes/tenant.class';
 	import type { LeaseCardData } from '$lib/models/interfaces/lease.interface';
 	import { getAddress, getProgress } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
@@ -44,7 +43,7 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						{Tenant.getLabel(lease.tenant)}
+						{lease.tenant.fullName}
 					</p>
 				{/if}
 				{#if 'unit' in lease}
