@@ -15,15 +15,21 @@ const token =
 
 export const api = (loadFetch?: LoadEvent['fetch']) => {
 	let config: Configuration;
+
+	const basePath = import.meta.env.VITE_VERCEL_ENV
+		? 'https://nestjs-dev.onrender.com'
+		: 'http://localhost:3002';
+
+	const headers = { Authorization: `Bearer ${token}` };
+
 	if (loadFetch) {
 		config = new Configuration({
 			fetchApi: loadFetch,
-			headers: { Authorization: `Bearer ${token}` },
+			headers,
+			basePath,
 		});
 	} else {
-		config = new Configuration({
-			headers: { Authorization: `Bearer ${token}` },
-		});
+		config = new Configuration({ headers, basePath });
 	}
 
 	return {
