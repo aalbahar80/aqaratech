@@ -3,12 +3,10 @@
   "spaces": 2,
   "generator-cli": {
     "version": "6.0.0",
-    "useDocker": true,
-    "dockerImageName": "openapitools/openapi-generator-cli",
     "generators": {
       "fetch-client": {
         "generatorName": "typescript-fetch",
-        "inputSpec": "./openapi.yaml",
+        "inputSpec": "../backend/openapi.yaml",
         "output": "src",
         "additionalProperties": {
           "supportsES6": true,

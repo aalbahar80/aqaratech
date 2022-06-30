@@ -8,9 +8,10 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "build": "tsc",
-        "dev": "nodemon -V --delay 2 -w openapi.yaml --exec \"openapi-generator-cli generate && tsc\"",
-        "generate": "openapi-generator-cli generate"
+        "build": "pnpm run generate && tsc",
+        "dev": "pnpm run generate && tsc",
+        "dev:watch": "nodemon -V --delay 1 -w openapi.yaml --exec \"pnpm run dev\"",
+        "generate": "./gen-sdk-docker.sh"
     },
     "devDependencies": {
         "@openapitools/openapi-generator-cli": "2.5.1",
