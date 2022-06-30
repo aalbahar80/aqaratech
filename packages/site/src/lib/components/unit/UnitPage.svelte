@@ -10,45 +10,45 @@
 	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
 	import GisMeasure from '~icons/gis/measure';
 
-	export let unit: UnitOneDto;
+	export let data: UnitOneDto;
 
 	let details: [string, string | null][];
 	$: details = [
-		['Unit Number', unit.unitNumber],
-		['Type', unit.type],
-		['Market Rent', kwdFormat(unit.marketRent)],
-		['Usage', unit.usage],
+		['Unit Number', data.unitNumber],
+		['Type', data.type],
+		['Market Rent', kwdFormat(data.marketRent)],
+		['Usage', data.usage],
 	];
 
 	const icons = [
 		{
-			label: unit.bed,
+			label: data.bed,
 			icon: Fa6SolidBed,
 			tooltip: 'Bedrooms',
 		},
 		{
-			label: unit.bath,
+			label: data.bath,
 			icon: FaSolidBath,
 			tooltip: 'Bathrooms',
 		},
 		{
-			label: `${unit.size?.toLocaleString()} m²`,
+			label: `${data.size?.toLocaleString()} m²`,
 			tooltip: 'Size',
 			icon: GisMeasure,
 		},
 		{
-			label: unit.floor,
+			label: data.floor,
 			icon: Fa6SolidElevator,
 			tooltip: 'Elevator',
 		},
 	];
 </script>
 
-<Heading title="Unit" id={unit.id} entity="units" {icons}>
+<Heading title="Unit" id={data.id} entity="units" {icons}>
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb crumbs={unit.breadcrumbs} />
+		<BreadCrumb crumbs={data.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
 
 <DetailsPane {details} />
-<LeaseList leases={unit.leases} showIndex />
+<LeaseList leases={data.leases} showIndex />

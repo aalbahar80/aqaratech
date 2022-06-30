@@ -5,26 +5,26 @@
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import type { PropertyOneDto } from '@self/sdk';
 
-	export let property: PropertyOneDto;
+	export let data: PropertyOneDto;
 
 	let details: [string, string | null][];
 	$: details = [
-		// ['Address', property.address],
-		['Area', property.area],
-		['Block', property.block],
-		['Avenue', property.avenue],
-		['Street', property.street],
-		['Number', property.number],
-		['Parcel', property.parcel],
-		['Paci', property.paci],
+		// ['Address', data.address],
+		['Area', data.area],
+		['Block', data.block],
+		['Avenue', data.avenue],
+		['Street', data.street],
+		['Number', data.number],
+		['Parcel', data.parcel],
+		['Paci', data.paci],
 	];
 </script>
 
-<Heading title="Property" id={property.id} entity="properties">
+<Heading title="Property" id={data.id} entity="properties">
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb crumbs={property.breadcrumbs} />
+		<BreadCrumb crumbs={data.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
 
 <DetailsPane {details} />
-<UnitsList units={property.units} />
+<UnitsList units={data.units} />
