@@ -7,7 +7,7 @@
 
 	export const load = async ({ fetch, url }: LoadEvent) => {
 		const { page, take, q } = parseParams(url);
-		const data = await api(fetch).units.findAllUnits({ page, take, q });
+		const data = await api(fetch).units.findAll({ page, take, q });
 
 		return {
 			props: { data },

@@ -5,7 +5,7 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ fetch, params }: LoadEvent<{ id: string }>) => {
-		const data = await api(fetch).properties.findOneProperties({
+		const data = await api(fetch).properties.findOne({
 			id: params.id,
 		});
 		return { props: { data } };
@@ -18,3 +18,5 @@
 </script>
 
 <PropertyPage property={data} />
+
+<!-- <svelte:component this={currentSelection.component} {data} /> -->

@@ -7,7 +7,7 @@
 
 	export const load = async ({ fetch, url }: LoadEvent) => {
 		const { page, take, q } = parseParams(url);
-		const data = await api(fetch).properties.findAllProperties({
+		const data = await api(fetch).properties.findAll({
 			page,
 			take,
 			q,

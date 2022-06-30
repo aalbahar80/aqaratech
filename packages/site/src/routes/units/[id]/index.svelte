@@ -5,7 +5,7 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ fetch, params }: LoadEvent<{ id: string }>) => {
-		const data = await api(fetch).units.findOneUnits({ id: params.id });
+		const data = await api(fetch).units.findOne({ id: params.id });
 		return { props: { data } };
 	};
 </script>
