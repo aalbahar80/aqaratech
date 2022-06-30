@@ -1,10 +1,11 @@
 import {
+  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
-import { Unit } from '@prisma/client';
+import { Tenant, Unit } from '@prisma/client';
 import {
   IsBoolean,
   IsISO8601,
@@ -17,6 +18,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
 class UnitRequiredDto extends AbstractDto {
   @Nanoid()
@@ -78,7 +80,20 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'property',
 ]) {}
 
+class UnitTenantDto extends PickType(TenantDto, [
+  'id',
+  'fullName',
+  'shortName',
+]) {}
+
+class UnitLeaseTenantDto extends LeaseDto {
+  @ApiProperty({ readOnly: true })
+  tenant: UnitTenantDto;
+}
+
 export class UnitOneDto extends UnitDto {
   breadcrumbs: UnitBreadcrumbsDto;
-  leases: LeaseDto[];
+
+  @ApiProperty({ readOnly: true })
+  leases: UnitLeaseTenantDto[];
 }

@@ -118,6 +118,7 @@ export class UnitsService {
           include: {
             tenant: {
               select: {
+                id: true,
                 fullName: true,
                 shortName: true,
               },

@@ -1553,6 +1553,81 @@ components:
         - isVacant
         - vacancyDistance
         - vacancy
+    UnitTenantDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+      required:
+        - id
+        - fullName
+    UnitLeaseTenantDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenant:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/UnitTenantDto'
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenant
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
     BreadcrumbDto:
       type: object
       properties:
@@ -1584,6 +1659,130 @@ components:
       required:
         - portfolio
         - property
+    UnitOneDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        leases:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UnitLeaseTenantDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+        floor:
+          type: number
+          nullable: true
+          default: null
+        size:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+          default: null
+        usage:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - leases
+        - breadcrumbs
+        - propertyId
+        - unitNumber
+        - floor
+        - size
+        - bed
+        - bath
+        - marketRent
+        - type
+        - usage
+    UpdateUnitDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+        floor:
+          type: number
+          nullable: true
+          default: null
+        size:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+          default: null
+        usage:
+          type: string
+          nullable: true
+          default: null
     LeaseDto:
       type: object
       properties:
@@ -1637,129 +1836,6 @@ components:
         - deactivated
         - notify
         - license
-    UnitOneDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
-        floor:
-          type: number
-          nullable: true
-          default: null
-        size:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bed:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bath:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        marketRent:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        type:
-          type: string
-          nullable: true
-          default: null
-        usage:
-          type: string
-          nullable: true
-          default: null
-        breadcrumbs:
-          $ref: '#/components/schemas/UnitBreadcrumbsDto'
-        leases:
-          type: array
-          items:
-            $ref: '#/components/schemas/LeaseDto'
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - propertyId
-        - unitNumber
-        - floor
-        - size
-        - bed
-        - bath
-        - marketRent
-        - type
-        - usage
-        - breadcrumbs
-        - leases
-    UpdateUnitDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
-        floor:
-          type: number
-          nullable: true
-          default: null
-        size:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bed:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bath:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        marketRent:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        type:
-          type: string
-          nullable: true
-          default: null
-        usage:
-          type: string
-          nullable: true
-          default: null
     UpdateLeaseDto:
       type: object
       properties:
