@@ -8,11 +8,13 @@
         "generatorName": "typescript-fetch",
         "inputSpec": "../backend/openapi.yaml",
         "output": "src",
+        "skipValidateSpec": true,
         "additionalProperties": {
           "supportsES6": true,
           "typescriptThreePlus": true,
           "nullSafeAdditionalProps": true,
-          "withInterfaces": true
+          "withInterfaces": true,
+          "prefixParameterInterfaces": true
         }
       }
     }

@@ -60,8 +60,7 @@ export const setupSwagger = (app: INestApplication) => {
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto],
     operationIdFactory(controllerKey, methodKey) {
-      const controller = controllerKey.replace(/Controller$/, '');
-      return `${methodKey}${controller}`;
+      return methodKey;
     },
   });
 
