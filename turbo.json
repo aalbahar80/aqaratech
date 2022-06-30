@@ -3,6 +3,9 @@
     "baseBranch": "origin/dev",
     "pipeline": {
         "build": {
+            "dependsOn": [
+                "^build"
+            ],
             "outputs": [
                 ".svelte-kit/**",
                 "dist/**",

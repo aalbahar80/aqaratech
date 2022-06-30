@@ -14,6 +14,7 @@
     },
     "devDependencies": {
         "@openapitools/openapi-generator-cli": "2.5.1",
+        "@self/backend": "workspace:0.0.1",
         "nodemon": "2.0.18",
         "typescript": "4.7.4"
     }
