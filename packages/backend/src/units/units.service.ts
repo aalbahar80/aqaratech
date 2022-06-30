@@ -133,6 +133,9 @@ export class UnitsService {
     return {
       ...fields,
       leases,
+      isVacant: this.isVacant(leases),
+      vacancyDistance: this.vacancy(leases).distance,
+      vacancy: this.vacancy(leases).date,
       breadcrumbs: {
         portfolio: {
           rel: Rel.Portfolio,

@@ -17,7 +17,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { UnitDto } from 'src/units/dto/unit.dto';
+import { UnitVacancyDto } from 'src/units/dto/unit.dto';
 
 class PropertyRequiredDto extends AbstractDto {
   @Nanoid()
@@ -74,13 +74,11 @@ export class UpdatePropertyDto extends PartialType(
   OmitType(CreatePropertyDto, ['portfolioId']),
 ) {}
 
-// class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, ['portfolio']) {}
+class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, ['portfolio']) {}
 
-// class PropertyUnitDto extends PickType(UnitDto, ['id', 'type', 'bed']) {}
+export class PropertyOneDto extends PropertyDto {
+  breadcrumbs: PropertyBreadcrumbsDto;
 
-// export class PropertyOneDto extends UnitDto {
-//   breadcrumbs: PropertyBreadcrumbsDto;
-
-//   @ApiProperty({ readOnly: true })
-//   units: PropertyUnitDto[];
-// }
+  @ApiProperty({ readOnly: true })
+  units: UnitVacancyDto[];
+}

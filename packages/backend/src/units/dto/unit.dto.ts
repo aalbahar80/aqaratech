@@ -91,7 +91,7 @@ class UnitLeaseDto extends LeaseDto {
   tenant: UnitTenantDto;
 }
 
-export class UnitOneDto extends UnitDto {
+export class UnitOneDto extends UnitVacancyDto {
   breadcrumbs: UnitBreadcrumbsDto;
 
   @ApiProperty({ readOnly: true })

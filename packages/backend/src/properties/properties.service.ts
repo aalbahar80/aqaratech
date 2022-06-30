@@ -5,17 +5,19 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
+import { UnitsService } from 'src/units/units.service';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class PropertiesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private units: UnitsService) {}
 
   async create({
     createPropertyDto,
@@ -74,8 +76,34 @@ export class PropertiesService {
     return { meta, results };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.property.findUnique({ where: { id } });
+  async findOne({ id }: { id: string }) {
+    const property = await this.prisma.property.findUnique({
+      where: { id },
+      include: {
+        units: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+
+    const units = await Promise.all(
+      property.units.map((unit) => {
+        return this.units.findOne({ id: unit.id });
+      }),
+    );
+
+    return {
+      ...property,
+      breadcrumbs: {
+        portfolio: {
+          rel: Rel.Portfolio,
+          href: `/portfolios/${property.portfolioId}`,
+        },
+      },
+      units,
+    };
   }
 
   update({

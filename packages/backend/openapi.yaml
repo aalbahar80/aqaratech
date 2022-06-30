@@ -407,7 +407,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                $ref: '#/components/schemas/PropertyOneDto'
       tags: *ref_3
     patch:
       operationId: updateProperties
@@ -1312,6 +1312,181 @@ components:
         - parcel
         - paci
         - cost
+    UnitVacancyDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        isVacant:
+          type: boolean
+        vacancyDistance:
+          type: string
+          nullable: true
+        vacancy:
+          format: date-time
+          type: string
+          nullable: true
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+        floor:
+          type: number
+          nullable: true
+          default: null
+        size:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+          default: null
+        usage:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - isVacant
+        - vacancyDistance
+        - vacancy
+        - propertyId
+        - unitNumber
+        - floor
+        - size
+        - bed
+        - bath
+        - marketRent
+        - type
+        - usage
+    BreadcrumbDto:
+      type: object
+      properties:
+        rel:
+          enum:
+            - Tenant
+            - Portfolio
+            - Property
+            - Unit
+            - Lease
+            - Maintenance Order
+          type: string
+        href:
+          type: string
+      required:
+        - rel
+        - href
+    PropertyBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+    PropertyOneDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        units:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UnitVacancyDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+        portfolioId:
+          type: string
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
+        block:
+          type: string
+          nullable: true
+          default: null
+        avenue:
+          type: string
+          nullable: true
+          default: null
+        street:
+          type: string
+          nullable: true
+          default: null
+        number:
+          type: string
+          nullable: true
+          default: null
+        parcel:
+          type: string
+          nullable: true
+          default: null
+        paci:
+          type: string
+          nullable: true
+          default: null
+        cost:
+          type: number
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - units
+        - breadcrumbs
+        - portfolioId
+        - area
+        - block
+        - avenue
+        - street
+        - number
+        - parcel
+        - paci
+        - cost
     UpdatePropertyDto:
       type: object
       properties:
@@ -1483,83 +1658,6 @@ components:
         - marketRent
         - type
         - usage
-    UnitVacancyDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
-        floor:
-          type: number
-          nullable: true
-          default: null
-        size:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bed:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        bath:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        marketRent:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        type:
-          type: string
-          nullable: true
-          default: null
-        usage:
-          type: string
-          nullable: true
-          default: null
-        isVacant:
-          type: boolean
-        vacancyDistance:
-          type: string
-          nullable: true
-        vacancy:
-          format: date-time
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - propertyId
-        - unitNumber
-        - floor
-        - size
-        - bed
-        - bath
-        - marketRent
-        - type
-        - usage
-        - isVacant
-        - vacancyDistance
-        - vacancy
     UnitTenantDto:
       type: object
       properties:
@@ -1635,23 +1733,6 @@ components:
         - deactivated
         - notify
         - license
-    BreadcrumbDto:
-      type: object
-      properties:
-        rel:
-          enum:
-            - Tenant
-            - Portfolio
-            - Property
-            - Unit
-            - Lease
-            - Maintenance Order
-          type: string
-        href:
-          type: string
-      required:
-        - rel
-        - href
     UnitBreadcrumbsDto:
       type: object
       properties:
@@ -1687,6 +1768,15 @@ components:
             $ref: '#/components/schemas/UnitLeaseDto'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        isVacant:
+          type: boolean
+        vacancyDistance:
+          type: string
+          nullable: true
+        vacancy:
+          format: date-time
+          type: string
+          nullable: true
         propertyId:
           type: string
         unitNumber:
@@ -1731,6 +1821,9 @@ components:
         - updatedAt
         - leases
         - breadcrumbs
+        - isVacant
+        - vacancyDistance
+        - vacancy
         - propertyId
         - unitNumber
         - floor
