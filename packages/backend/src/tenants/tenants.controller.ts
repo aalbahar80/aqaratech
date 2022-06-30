@@ -24,7 +24,11 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
+import {
+  TenantDto,
+  TenantOneDto,
+  UpdateTenantDto,
+} from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
 
 @Controller('tenants')
@@ -56,8 +60,8 @@ export class TenantsController {
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
-  @ApiOkResponse({ type: TenantDto })
-  findOne(@Param('id') id: string): Promise<TenantDto> {
+  @ApiOkResponse({ type: TenantOneDto })
+  findOne(@Param('id') id: string): Promise<TenantOneDto> {
     return this.tenantsService.findOne({ id });
   }
 

@@ -1,4 +1,10 @@
-import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  IntersectionType,
+  OmitType,
+  PartialType,
+  PickType,
+} from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
   IsEmail,
@@ -10,56 +16,67 @@ import {
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
+import { UnitDto } from 'src/units/dto/unit.dto';
 
-export class TenantDto extends AbstractDto implements Tenant {
+class TenantRequiredDto extends AbstractDto {
   @Nanoid()
   organizationId: string;
 
   @Length(1, 255)
   fullName: string;
+}
 
-  @ApiPropertyOptional()
+class TenantOptionalDto {
   @IsString()
   shortName: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   civilid: string | null = null;
 
-  @ApiPropertyOptional()
   @IsPhoneNumber()
   phone: string | null = null;
 
-  @ApiPropertyOptional()
   @IsEmail()
   email: string | null = null;
 
-  @ApiPropertyOptional()
   @IsISO8601()
   dob: Date | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   passportNum: string | null = null;
 
-  @ApiPropertyOptional()
   @IsISO31661Alpha3()
   nationality: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   residencyNum: string | null = null;
 
-  @ApiPropertyOptional()
   @IsISO8601()
   residencyEnd: Date | null = null;
 }
 
-// If option to update organizationId is added, be sure to
-// 1. use Prisma's `connect` to enforce referential integrity (instead of passing in foreign key into organizationId field)
-// https://github.com/prisma/prisma/issues/13242#issuecomment-1125066906
-//
-// 2. check permissions for new organizationId
-export class UpdateTenantDto extends PartialType(
-  OmitType(TenantDto, ['organizationId']),
+export class TenantDto extends IntersectionType(
+  TenantRequiredDto,
+  TenantOptionalDto,
 ) {}
+
+export class CreateTenantDto
+  extends IntersectionType(TenantRequiredDto, PartialType(TenantOptionalDto))
+  implements Partial<Tenant> {}
+
+export class UpdateTenantDto extends PartialType(
+  OmitType(CreateTenantDto, ['organizationId']),
+) {}
+
+class TenantUnitDto extends PickType(UnitDto, ['id', 'unitNumber']) {}
+
+class TenantLeaseDto extends PartialType(LeaseDto) {
+  @ApiProperty({ readOnly: true })
+  unit: TenantUnitDto;
+}
+
+export class TenantOneDto extends TenantDto {
+  @ApiProperty({ readOnly: true })
+  leases: TenantLeaseDto[];
+}

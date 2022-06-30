@@ -96,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantDto'
+                $ref: '#/components/schemas/TenantOneDto'
       tags: *ref_0
     patch:
       operationId: update
@@ -960,6 +960,12 @@ components:
           format: date-time
           type: string
           readOnly: true
+        organizationId:
+          type: string
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
         shortName:
           type: string
           nullable: true
@@ -998,18 +1004,21 @@ components:
           type: string
           nullable: true
           default: null
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
       required:
         - id
         - createdAt
         - updatedAt
         - organizationId
         - fullName
+        - shortName
+        - civilid
+        - phone
+        - email
+        - dob
+        - passportNum
+        - nationality
+        - residencyNum
+        - residencyEnd
     PaginatedDto:
       type: object
       properties:
@@ -1040,7 +1049,20 @@ components:
           $ref: '#/components/schemas/PaginatedDto'
       required:
         - meta
-    UpdateTenantDto:
+    TenantUnitDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+      required:
+        - id
+        - unitNumber
+    TenantLeaseDto:
       type: object
       properties:
         id:
@@ -1054,6 +1076,63 @@ components:
           format: date-time
           type: string
           readOnly: true
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/TenantUnitDto'
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - unit
+    TenantOneDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        leases:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantLeaseDto'
+        organizationId:
+          type: string
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
         shortName:
           type: string
           nullable: true
@@ -1092,10 +1171,78 @@ components:
           type: string
           nullable: true
           default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - leases
+        - organizationId
+        - fullName
+        - shortName
+        - civilid
+        - phone
+        - email
+        - dob
+        - passportNum
+        - nationality
+        - residencyNum
+        - residencyEnd
+    UpdateTenantDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
         fullName:
           type: string
           minLength: 1
           maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        civilid:
+          type: string
+          nullable: true
+          default: null
+        phone:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+          nullable: true
+          default: null
+        dob:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        passportNum:
+          type: string
+          nullable: true
+          default: null
+        nationality:
+          type: string
+          nullable: true
+          default: null
+        residencyNum:
+          type: string
+          nullable: true
+          default: null
+        residencyEnd:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
     PortfolioDto:
       type: object
       properties:
@@ -1658,23 +1805,6 @@ components:
         - marketRent
         - type
         - usage
-    UnitTenantDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        shortName:
-          type: string
-          nullable: true
-          default: null
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-      required:
-        - id
-        - fullName
     UnitLeaseDto:
       type: object
       properties:
@@ -1689,10 +1819,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        tenant:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/UnitTenantDto'
         tenantId:
           type: string
         unitId:
@@ -1723,7 +1849,6 @@ components:
         - id
         - createdAt
         - updatedAt
-        - tenant
         - tenantId
         - unitId
         - start

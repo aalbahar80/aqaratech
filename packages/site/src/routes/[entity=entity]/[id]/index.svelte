@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import { api } from '$lib/client/api';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
+	import TenantPage from '$lib/components/tenant/TenantPage.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -26,6 +27,7 @@
 	const components = [
 		{ component: PropertyPage, entity: 'properties' },
 		{ component: UnitPage, entity: 'units' },
+		{ component: TenantPage, entity: 'tenants' },
 	];
 
 	$: component = components.find(

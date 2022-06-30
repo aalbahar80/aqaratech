@@ -80,15 +80,16 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'property',
 ]) {}
 
-class UnitTenantDto extends PickType(TenantDto, [
-  'id',
-  'fullName',
-  'shortName',
-]) {}
+// class UnitTenantDto extends PickType(TenantDto, [
+//   'id',
+//   'fullName',
+//   'shortName',
+// ]) {}
 
 class UnitLeaseDto extends LeaseDto {
-  @ApiProperty({ readOnly: true })
-  tenant: UnitTenantDto;
+  // @ApiProperty({ readOnly: true })
+  // @ApiProperty({ type: () => Node })
+  // tenant: UnitTenantDto;
 }
 
 export class UnitOneDto extends UnitVacancyDto {

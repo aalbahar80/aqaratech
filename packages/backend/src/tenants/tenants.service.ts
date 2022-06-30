@@ -83,7 +83,19 @@ export class TenantsService {
   }
 
   findOne({ id }: { id: string }) {
-    return this.prisma.tenant.findUnique({ where: { id } });
+    return this.prisma.tenant.findUnique({
+      where: { id },
+      include: {
+        leases: {
+          select: {
+            id: true,
+            start: true,
+            end: true,
+            unit: { select: { id: true, unitNumber: true } },
+          },
+        },
+      },
+    });
   }
 
   update({
