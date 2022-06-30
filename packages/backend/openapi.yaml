@@ -1263,6 +1263,14 @@ components:
           format: date-time
           type: string
           readOnly: true
+        portfolioId:
+          type: string
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
         block:
           type: string
           nullable: true
@@ -1291,20 +1299,19 @@ components:
           type: number
           nullable: true
           default: null
-        portfolioId:
-          type: string
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
       required:
         - id
         - createdAt
         - updatedAt
         - portfolioId
         - area
+        - block
+        - avenue
+        - street
+        - number
+        - parcel
+        - paci
+        - cost
     UpdatePropertyDto:
       type: object
       properties:
@@ -1319,6 +1326,12 @@ components:
           format: date-time
           type: string
           readOnly: true
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
         block:
           type: string
           nullable: true
@@ -1347,12 +1360,6 @@ components:
           type: number
           nullable: true
           default: null
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
     CreateUnitDto:
       type: object
       properties:

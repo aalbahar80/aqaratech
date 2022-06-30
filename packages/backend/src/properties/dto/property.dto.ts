@@ -1,8 +1,10 @@
 import {
   ApiHideProperty,
-  ApiPropertyOptional,
+  ApiProperty,
+  IntersectionType,
   OmitType,
   PartialType,
+  PickType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
 import {
@@ -13,40 +15,37 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { UnitDto } from 'src/units/dto/unit.dto';
 
-export class PropertyDto extends AbstractDto implements Property {
+class PropertyRequiredDto extends AbstractDto {
   @Nanoid()
   portfolioId: string;
 
   @Length(1, 255)
   area: string | null = null;
+}
 
-  @ApiPropertyOptional()
+class PropertyOptionalDto {
   @IsString()
   block: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   avenue: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   street: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   number: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   parcel: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   paci: string | null = null;
 
-  @ApiPropertyOptional()
   @IsNumber()
   cost: number | null = null;
 
@@ -59,6 +58,29 @@ export class PropertyDto extends AbstractDto implements Property {
   lat: number | null = null;
 }
 
-export class UpdatePropertyDto extends PartialType(
-  OmitType(PropertyDto, ['portfolioId']),
+export class PropertyDto extends IntersectionType(
+  PropertyRequiredDto,
+  PropertyOptionalDto,
 ) {}
+
+export class CreatePropertyDto
+  extends IntersectionType(
+    PropertyRequiredDto,
+    PartialType(PropertyOptionalDto),
+  )
+  implements Partial<Property> {}
+
+export class UpdatePropertyDto extends PartialType(
+  OmitType(CreatePropertyDto, ['portfolioId']),
+) {}
+
+// class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, ['portfolio']) {}
+
+// class PropertyUnitDto extends PickType(UnitDto, ['id', 'type', 'bed']) {}
+
+// export class PropertyOneDto extends UnitDto {
+//   breadcrumbs: PropertyBreadcrumbsDto;
+
+//   @ApiProperty({ readOnly: true })
+//   units: PropertyUnitDto[];
+// }

@@ -1,25 +1,27 @@
 <script context="module" lang="ts">
-	import { trpc } from '$lib/client/trpc';
+	import { api } from '$lib/client/api';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
-	import type { Props } from '$models/types/Props.type';
+	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
+	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ session, fetch }: LoadEvent) => {
-		const { data: properties } = session.authz?.isOwner
-			? await trpc(fetch).query('owner:properties:list', {
-					portfolioId: session.authz?.id,
-			  })
-			: await trpc(fetch).query('properties:list', {});
+	export const load = async ({ fetch, url }: LoadEvent) => {
+		const { page, take, q } = parseParams(url);
+		const data = await api(fetch).properties.findAllProperties({
+			page,
+			take,
+			q,
+		});
 
 		return {
-			props: { properties },
+			props: { data },
 		};
 	};
 </script>
 
 <script lang="ts">
-	type Properties = Props<typeof load>['properties'];
-	export let properties: Properties;
+	type Prop = LP<typeof load>;
+	export let data: Prop['data'];
 </script>
 
-<PropertyList {properties} />
+<PropertyList properties={data.results || []} />

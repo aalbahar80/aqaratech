@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import PropertyCard from '$components/property/PropertyCard.svelte';
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import StackedList from '$lib/components/StackedList.svelte';
+	import type { PropertyDto } from '@self/sdk';
 
-	type Properties = NonNullable<
-		InferQueryOutput<'portfolios:read'>
-	>['properties'];
-	export let properties: Properties;
+	export let properties: PropertyDto[];
 
 	const createHref = $page.url.pathname.startsWith('/portfolios')
 		? `/new/properties?portfolioId=${$page.url.pathname.split('/').pop()}`

@@ -42,6 +42,12 @@ export interface UpdatePropertyDto {
      * @type {string}
      * @memberof UpdatePropertyDto
      */
+    area?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePropertyDto
+     */
     block?: string | null;
     /**
      * 
@@ -79,12 +85,6 @@ export interface UpdatePropertyDto {
      * @memberof UpdatePropertyDto
      */
     cost?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    area?: string | null;
 }
 
 export function UpdatePropertyDtoFromJSON(json: any): UpdatePropertyDto {
@@ -100,6 +100,7 @@ export function UpdatePropertyDtoFromJSONTyped(json: any, ignoreDiscriminator: b
         'id': !exists(json, 'id') ? undefined : json['id'],
         'createdAt': !exists(json, 'createdAt') ? undefined : (new Date(json['createdAt'])),
         'updatedAt': !exists(json, 'updatedAt') ? undefined : (new Date(json['updatedAt'])),
+        'area': !exists(json, 'area') ? undefined : json['area'],
         'block': !exists(json, 'block') ? undefined : json['block'],
         'avenue': !exists(json, 'avenue') ? undefined : json['avenue'],
         'street': !exists(json, 'street') ? undefined : json['street'],
@@ -107,7 +108,6 @@ export function UpdatePropertyDtoFromJSONTyped(json: any, ignoreDiscriminator: b
         'parcel': !exists(json, 'parcel') ? undefined : json['parcel'],
         'paci': !exists(json, 'paci') ? undefined : json['paci'],
         'cost': !exists(json, 'cost') ? undefined : json['cost'],
-        'area': !exists(json, 'area') ? undefined : json['area'],
     };
 }
 
@@ -120,6 +120,7 @@ export function UpdatePropertyDtoToJSON(value?: UpdatePropertyDto | null): any {
     }
     return {
         
+        'area': value.area,
         'block': value.block,
         'avenue': value.avenue,
         'street': value.street,
@@ -127,7 +128,6 @@ export function UpdatePropertyDtoToJSON(value?: UpdatePropertyDto | null): any {
         'parcel': value.parcel,
         'paci': value.paci,
         'cost': value.cost,
-        'area': value.area,
     };
 }
 

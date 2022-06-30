@@ -42,48 +42,6 @@ export interface PropertyDto {
      * @type {string}
      * @memberof PropertyDto
      */
-    block?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    avenue?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    street?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    number?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    parcel?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    paci?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PropertyDto
-     */
-    cost?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
     portfolioId: string;
     /**
      * 
@@ -91,6 +49,48 @@ export interface PropertyDto {
      * @memberof PropertyDto
      */
     area: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    block: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    avenue: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    street: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    number: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    parcel: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropertyDto
+     */
+    paci: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropertyDto
+     */
+    cost: number | null;
 }
 
 export function PropertyDtoFromJSON(json: any): PropertyDto {
@@ -106,15 +106,15 @@ export function PropertyDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'block': !exists(json, 'block') ? undefined : json['block'],
-        'avenue': !exists(json, 'avenue') ? undefined : json['avenue'],
-        'street': !exists(json, 'street') ? undefined : json['street'],
-        'number': !exists(json, 'number') ? undefined : json['number'],
-        'parcel': !exists(json, 'parcel') ? undefined : json['parcel'],
-        'paci': !exists(json, 'paci') ? undefined : json['paci'],
-        'cost': !exists(json, 'cost') ? undefined : json['cost'],
         'portfolioId': json['portfolioId'],
         'area': json['area'],
+        'block': json['block'],
+        'avenue': json['avenue'],
+        'street': json['street'],
+        'number': json['number'],
+        'parcel': json['parcel'],
+        'paci': json['paci'],
+        'cost': json['cost'],
     };
 }
 
@@ -127,6 +127,8 @@ export function PropertyDtoToJSON(value?: PropertyDto | null): any {
     }
     return {
         
+        'portfolioId': value.portfolioId,
+        'area': value.area,
         'block': value.block,
         'avenue': value.avenue,
         'street': value.street,
@@ -134,8 +136,6 @@ export function PropertyDtoToJSON(value?: PropertyDto | null): any {
         'parcel': value.parcel,
         'paci': value.paci,
         'cost': value.cost,
-        'portfolioId': value.portfolioId,
-        'area': value.area,
     };
 }
 
