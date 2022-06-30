@@ -40,8 +40,8 @@ models/TenantDto.ts
 models/UnitBreadcrumbsDto.ts
 models/UnitBreadcrumbsDtoPortfolio.ts
 models/UnitDto.ts
-models/UnitLeaseTenantDto.ts
-models/UnitLeaseTenantDtoTenant.ts
+models/UnitLeaseDto.ts
+models/UnitLeaseDtoTenant.ts
 models/UnitOneDto.ts
 models/UnitTenantDto.ts
 models/UnitVacancyDto.ts

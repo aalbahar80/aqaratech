@@ -5,7 +5,7 @@ import {
   PartialType,
   PickType,
 } from '@nestjs/swagger';
-import { Tenant, Unit } from '@prisma/client';
+import { Unit } from '@prisma/client';
 import {
   IsBoolean,
   IsISO8601,
@@ -86,7 +86,7 @@ class UnitTenantDto extends PickType(TenantDto, [
   'shortName',
 ]) {}
 
-class UnitLeaseTenantDto extends LeaseDto {
+class UnitLeaseDto extends LeaseDto {
   @ApiProperty({ readOnly: true })
   tenant: UnitTenantDto;
 }
@@ -95,5 +95,5 @@ export class UnitOneDto extends UnitDto {
   breadcrumbs: UnitBreadcrumbsDto;
 
   @ApiProperty({ readOnly: true })
-  leases: UnitLeaseTenantDto[];
+  leases: UnitLeaseDto[];
 }

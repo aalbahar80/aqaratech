@@ -1570,7 +1570,7 @@ components:
       required:
         - id
         - fullName
-    UnitLeaseTenantDto:
+    UnitLeaseDto:
       type: object
       properties:
         id:
@@ -1677,7 +1677,7 @@ components:
           readOnly: true
           type: array
           items:
-            $ref: '#/components/schemas/UnitLeaseTenantDto'
+            $ref: '#/components/schemas/UnitLeaseDto'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
         propertyId:

@@ -20,11 +20,11 @@ import {
     UnitBreadcrumbsDtoToJSON,
 } from './UnitBreadcrumbsDto';
 import {
-    UnitLeaseTenantDto,
-    UnitLeaseTenantDtoFromJSON,
-    UnitLeaseTenantDtoFromJSONTyped,
-    UnitLeaseTenantDtoToJSON,
-} from './UnitLeaseTenantDto';
+    UnitLeaseDto,
+    UnitLeaseDtoFromJSON,
+    UnitLeaseDtoFromJSONTyped,
+    UnitLeaseDtoToJSON,
+} from './UnitLeaseDto';
 
 /**
  * 
@@ -52,10 +52,10 @@ export interface UnitOneDto {
     readonly updatedAt: Date;
     /**
      * 
-     * @type {Array<UnitLeaseTenantDto>}
+     * @type {Array<UnitLeaseDto>}
      * @memberof UnitOneDto
      */
-    readonly leases: Array<UnitLeaseTenantDto>;
+    readonly leases: Array<UnitLeaseDto>;
     /**
      * 
      * @type {UnitBreadcrumbsDto}
@@ -131,7 +131,7 @@ export function UnitOneDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'id': json['id'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
-        'leases': ((json['leases'] as Array<any>).map(UnitLeaseTenantDtoFromJSON)),
+        'leases': ((json['leases'] as Array<any>).map(UnitLeaseDtoFromJSON)),
         'breadcrumbs': UnitBreadcrumbsDtoFromJSON(json['breadcrumbs']),
         'propertyId': json['propertyId'],
         'unitNumber': json['unitNumber'],
