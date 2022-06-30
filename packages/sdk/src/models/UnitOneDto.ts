@@ -64,6 +64,24 @@ export interface UnitOneDto {
     breadcrumbs: UnitBreadcrumbsDto;
     /**
      * 
+     * @type {boolean}
+     * @memberof UnitOneDto
+     */
+    isVacant: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UnitOneDto
+     */
+    vacancyDistance: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UnitOneDto
+     */
+    vacancy: Date | null;
+    /**
+     * 
      * @type {string}
      * @memberof UnitOneDto
      */
@@ -133,6 +151,9 @@ export function UnitOneDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'updatedAt': (new Date(json['updatedAt'])),
         'leases': ((json['leases'] as Array<any>).map(UnitLeaseDtoFromJSON)),
         'breadcrumbs': UnitBreadcrumbsDtoFromJSON(json['breadcrumbs']),
+        'isVacant': json['isVacant'],
+        'vacancyDistance': json['vacancyDistance'],
+        'vacancy': (json['vacancy'] === null ? null : new Date(json['vacancy'])),
         'propertyId': json['propertyId'],
         'unitNumber': json['unitNumber'],
         'floor': json['floor'],
@@ -155,6 +176,9 @@ export function UnitOneDtoToJSON(value?: UnitOneDto | null): any {
     return {
         
         'breadcrumbs': UnitBreadcrumbsDtoToJSON(value.breadcrumbs),
+        'isVacant': value.isVacant,
+        'vacancyDistance': value.vacancyDistance,
+        'vacancy': (value.vacancy === null ? null : value.vacancy.toISOString()),
         'propertyId': value.propertyId,
         'unitNumber': value.unitNumber,
         'floor': value.floor,

@@ -23,39 +23,32 @@ import {
 /**
  * 
  * @export
- * @interface UnitBreadcrumbsDto
+ * @interface PropertyBreadcrumbsDto
  */
-export interface UnitBreadcrumbsDto {
+export interface PropertyBreadcrumbsDto {
     /**
      * 
      * @type {PropertyBreadcrumbsDtoPortfolio}
-     * @memberof UnitBreadcrumbsDto
+     * @memberof PropertyBreadcrumbsDto
      */
     portfolio: PropertyBreadcrumbsDtoPortfolio;
-    /**
-     * 
-     * @type {PropertyBreadcrumbsDtoPortfolio}
-     * @memberof UnitBreadcrumbsDto
-     */
-    property: PropertyBreadcrumbsDtoPortfolio;
 }
 
-export function UnitBreadcrumbsDtoFromJSON(json: any): UnitBreadcrumbsDto {
-    return UnitBreadcrumbsDtoFromJSONTyped(json, false);
+export function PropertyBreadcrumbsDtoFromJSON(json: any): PropertyBreadcrumbsDto {
+    return PropertyBreadcrumbsDtoFromJSONTyped(json, false);
 }
 
-export function UnitBreadcrumbsDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UnitBreadcrumbsDto {
+export function PropertyBreadcrumbsDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean): PropertyBreadcrumbsDto {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'portfolio': PropertyBreadcrumbsDtoPortfolioFromJSON(json['portfolio']),
-        'property': PropertyBreadcrumbsDtoPortfolioFromJSON(json['property']),
     };
 }
 
-export function UnitBreadcrumbsDtoToJSON(value?: UnitBreadcrumbsDto | null): any {
+export function PropertyBreadcrumbsDtoToJSON(value?: PropertyBreadcrumbsDto | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -65,7 +58,6 @@ export function UnitBreadcrumbsDtoToJSON(value?: UnitBreadcrumbsDto | null): any
     return {
         
         'portfolio': PropertyBreadcrumbsDtoPortfolioToJSON(value.portfolio),
-        'property': PropertyBreadcrumbsDtoPortfolioToJSON(value.property),
     };
 }
 

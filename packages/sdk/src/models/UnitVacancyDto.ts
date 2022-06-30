@@ -39,6 +39,24 @@ export interface UnitVacancyDto {
     readonly updatedAt: Date;
     /**
      * 
+     * @type {boolean}
+     * @memberof UnitVacancyDto
+     */
+    isVacant: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UnitVacancyDto
+     */
+    vacancyDistance: string | null;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UnitVacancyDto
+     */
+    vacancy: Date | null;
+    /**
+     * 
      * @type {string}
      * @memberof UnitVacancyDto
      */
@@ -91,24 +109,6 @@ export interface UnitVacancyDto {
      * @memberof UnitVacancyDto
      */
     usage: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UnitVacancyDto
-     */
-    isVacant: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitVacancyDto
-     */
-    vacancyDistance: string | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof UnitVacancyDto
-     */
-    vacancy: Date | null;
 }
 
 export function UnitVacancyDtoFromJSON(json: any): UnitVacancyDto {
@@ -124,6 +124,9 @@ export function UnitVacancyDtoFromJSONTyped(json: any, ignoreDiscriminator: bool
         'id': json['id'],
         'createdAt': (new Date(json['createdAt'])),
         'updatedAt': (new Date(json['updatedAt'])),
+        'isVacant': json['isVacant'],
+        'vacancyDistance': json['vacancyDistance'],
+        'vacancy': (json['vacancy'] === null ? null : new Date(json['vacancy'])),
         'propertyId': json['propertyId'],
         'unitNumber': json['unitNumber'],
         'floor': json['floor'],
@@ -133,9 +136,6 @@ export function UnitVacancyDtoFromJSONTyped(json: any, ignoreDiscriminator: bool
         'marketRent': json['marketRent'],
         'type': json['type'],
         'usage': json['usage'],
-        'isVacant': json['isVacant'],
-        'vacancyDistance': json['vacancyDistance'],
-        'vacancy': (json['vacancy'] === null ? null : new Date(json['vacancy'])),
     };
 }
 
@@ -148,6 +148,9 @@ export function UnitVacancyDtoToJSON(value?: UnitVacancyDto | null): any {
     }
     return {
         
+        'isVacant': value.isVacant,
+        'vacancyDistance': value.vacancyDistance,
+        'vacancy': (value.vacancy === null ? null : value.vacancy.toISOString()),
         'propertyId': value.propertyId,
         'unitNumber': value.unitNumber,
         'floor': value.floor,
@@ -157,9 +160,6 @@ export function UnitVacancyDtoToJSON(value?: UnitVacancyDto | null): any {
         'marketRent': value.marketRent,
         'type': value.type,
         'usage': value.usage,
-        'isVacant': value.isVacant,
-        'vacancyDistance': value.vacancyDistance,
-        'vacancy': (value.vacancy === null ? null : value.vacancy.toISOString()),
     };
 }
 

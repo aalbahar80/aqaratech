@@ -34,11 +34,13 @@ models/PaginatedResponseOfUnitVacancyDtoAllOf.ts
 models/PaginatedResponseOfUserDto.ts
 models/PaginatedResponseOfUserDtoAllOf.ts
 models/PortfolioDto.ts
+models/PropertyBreadcrumbsDto.ts
+models/PropertyBreadcrumbsDtoPortfolio.ts
 models/PropertyDto.ts
+models/PropertyOneDto.ts
 models/RoleDto.ts
 models/TenantDto.ts
 models/UnitBreadcrumbsDto.ts
-models/UnitBreadcrumbsDtoPortfolio.ts
 models/UnitDto.ts
 models/UnitLeaseDto.ts
 models/UnitLeaseDtoTenant.ts

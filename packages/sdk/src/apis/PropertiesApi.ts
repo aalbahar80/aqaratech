@@ -21,6 +21,9 @@ import {
     PropertyDto,
     PropertyDtoFromJSON,
     PropertyDtoToJSON,
+    PropertyOneDto,
+    PropertyOneDtoFromJSON,
+    PropertyOneDtoToJSON,
     UpdatePropertyDto,
     UpdatePropertyDtoFromJSON,
     UpdatePropertyDtoToJSON,
@@ -93,11 +96,11 @@ export interface PropertiesApiInterface {
      * @throws {RequiredError}
      * @memberof PropertiesApiInterface
      */
-    findOnePropertiesRaw(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<PropertyDto>>;
+    findOnePropertiesRaw(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<PropertyOneDto>>;
 
     /**
      */
-    findOneProperties(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<PropertyDto>;
+    findOneProperties(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<PropertyOneDto>;
 
     /**
      * 
@@ -216,7 +219,7 @@ export class PropertiesApi extends runtime.BaseAPI implements PropertiesApiInter
 
     /**
      */
-    async findOnePropertiesRaw(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<PropertyDto>> {
+    async findOnePropertiesRaw(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<PropertyOneDto>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling findOneProperties.');
         }
@@ -237,12 +240,12 @@ export class PropertiesApi extends runtime.BaseAPI implements PropertiesApiInter
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyDtoFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyOneDtoFromJSON(jsonValue));
     }
 
     /**
      */
-    async findOneProperties(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<PropertyDto> {
+    async findOneProperties(requestParameters: FindOnePropertiesRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<PropertyOneDto> {
         const response = await this.findOnePropertiesRaw(requestParameters, initOverrides);
         return await response.value();
     }

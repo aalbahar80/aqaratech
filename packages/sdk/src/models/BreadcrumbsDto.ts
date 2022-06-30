@@ -20,11 +20,11 @@ import {
     BreadcrumbDtoToJSON,
 } from './BreadcrumbDto';
 import {
-    UnitBreadcrumbsDtoPortfolio,
-    UnitBreadcrumbsDtoPortfolioFromJSON,
-    UnitBreadcrumbsDtoPortfolioFromJSONTyped,
-    UnitBreadcrumbsDtoPortfolioToJSON,
-} from './UnitBreadcrumbsDtoPortfolio';
+    PropertyBreadcrumbsDtoPortfolio,
+    PropertyBreadcrumbsDtoPortfolioFromJSON,
+    PropertyBreadcrumbsDtoPortfolioFromJSONTyped,
+    PropertyBreadcrumbsDtoPortfolioToJSON,
+} from './PropertyBreadcrumbsDtoPortfolio';
 
 /**
  * 
@@ -34,28 +34,28 @@ import {
 export interface BreadcrumbsDto {
     /**
      * 
-     * @type {UnitBreadcrumbsDtoPortfolio}
+     * @type {PropertyBreadcrumbsDtoPortfolio}
      * @memberof BreadcrumbsDto
      */
-    portfolio: UnitBreadcrumbsDtoPortfolio;
+    portfolio: PropertyBreadcrumbsDtoPortfolio;
     /**
      * 
-     * @type {UnitBreadcrumbsDtoPortfolio}
+     * @type {PropertyBreadcrumbsDtoPortfolio}
      * @memberof BreadcrumbsDto
      */
-    property: UnitBreadcrumbsDtoPortfolio;
+    property: PropertyBreadcrumbsDtoPortfolio;
     /**
      * 
-     * @type {UnitBreadcrumbsDtoPortfolio}
+     * @type {PropertyBreadcrumbsDtoPortfolio}
      * @memberof BreadcrumbsDto
      */
-    unit: UnitBreadcrumbsDtoPortfolio;
+    unit: PropertyBreadcrumbsDtoPortfolio;
     /**
      * 
-     * @type {UnitBreadcrumbsDtoPortfolio}
+     * @type {PropertyBreadcrumbsDtoPortfolio}
      * @memberof BreadcrumbsDto
      */
-    lease: UnitBreadcrumbsDtoPortfolio;
+    lease: PropertyBreadcrumbsDtoPortfolio;
     /**
      * 
      * @type {BreadcrumbDto}
@@ -74,10 +74,10 @@ export function BreadcrumbsDtoFromJSONTyped(json: any, ignoreDiscriminator: bool
     }
     return {
         
-        'portfolio': UnitBreadcrumbsDtoPortfolioFromJSON(json['portfolio']),
-        'property': UnitBreadcrumbsDtoPortfolioFromJSON(json['property']),
-        'unit': UnitBreadcrumbsDtoPortfolioFromJSON(json['unit']),
-        'lease': UnitBreadcrumbsDtoPortfolioFromJSON(json['lease']),
+        'portfolio': PropertyBreadcrumbsDtoPortfolioFromJSON(json['portfolio']),
+        'property': PropertyBreadcrumbsDtoPortfolioFromJSON(json['property']),
+        'unit': PropertyBreadcrumbsDtoPortfolioFromJSON(json['unit']),
+        'lease': PropertyBreadcrumbsDtoPortfolioFromJSON(json['lease']),
         'tenant': BreadcrumbDtoFromJSON(json['tenant']),
     };
 }
@@ -91,10 +91,10 @@ export function BreadcrumbsDtoToJSON(value?: BreadcrumbsDto | null): any {
     }
     return {
         
-        'portfolio': UnitBreadcrumbsDtoPortfolioToJSON(value.portfolio),
-        'property': UnitBreadcrumbsDtoPortfolioToJSON(value.property),
-        'unit': UnitBreadcrumbsDtoPortfolioToJSON(value.unit),
-        'lease': UnitBreadcrumbsDtoPortfolioToJSON(value.lease),
+        'portfolio': PropertyBreadcrumbsDtoPortfolioToJSON(value.portfolio),
+        'property': PropertyBreadcrumbsDtoPortfolioToJSON(value.property),
+        'unit': PropertyBreadcrumbsDtoPortfolioToJSON(value.unit),
+        'lease': PropertyBreadcrumbsDtoPortfolioToJSON(value.lease),
         'tenant': BreadcrumbDtoToJSON(value.tenant),
     };
 }
