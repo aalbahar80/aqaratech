@@ -17,7 +17,7 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 	let config: Configuration;
 
 	const basePath = import.meta.env.VITE_VERCEL_ENV
-		? 'https://nestjs-dev.onrender.com' // set to a vite env var in vercel
+		? import.meta.env.VITE_API_URL
 		: 'http://localhost:3002';
 
 	const headers = { Authorization: `Bearer ${token}` };
