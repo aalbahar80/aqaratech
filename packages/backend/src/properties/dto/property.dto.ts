@@ -17,7 +17,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { UnitVacancyDto } from 'src/units/dto/unit.dto';
+import { UnitDto } from 'src/units/dto/unit.dto';
 
 class PropertyRequiredDto extends AbstractDto {
   @Nanoid()
@@ -80,5 +80,5 @@ export class PropertyOneDto extends PropertyDto {
   breadcrumbs: PropertyBreadcrumbsDto;
 
   @ApiProperty({ readOnly: true })
-  units: UnitVacancyDto[];
+  units: UnitDto[];
 }

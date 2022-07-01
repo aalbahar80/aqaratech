@@ -24,13 +24,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import {
-  CreateUnitDto,
-  UnitDto,
-  UnitOneDto,
-  UnitVacancyDto,
-  UpdateUnitDto,
-} from 'src/units/dto/unit.dto';
+import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 @Controller('units')
@@ -52,18 +46,18 @@ export class UnitsController {
 
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiPaginatedResponse(UnitVacancyDto)
+  @ApiPaginatedResponse(UnitDto)
   findAll(
     @User() user: IUser,
     @Query() unitPageOptionsDto: PageOptionsDto,
-  ): Promise<PaginatedMetaDto<UnitVacancyDto>> {
+  ): Promise<PaginatedMetaDto<UnitDto>> {
     return this.unitsService.findAll({ unitPageOptionsDto, user });
   }
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitOneDto })
-  findOne(@Param('id') id: string): Promise<UnitOneDto> {
+  @ApiOkResponse({ type: UnitDto })
+  findOne(@Param('id') id: string): Promise<UnitDto> {
     return this.unitsService.findOne({ id });
   }
 
@@ -80,8 +74,8 @@ export class UnitsController {
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Unit' })
-  @ApiOkResponse({ type: UnitDto })
-  remove(@Param('id') id: string): Promise<UnitDto> {
+  // @ApiOkResponse({ type: UnitDto })
+  remove(@Param('id') id: string): Promise<string> {
     return this.unitsService.remove({ id });
   }
 }

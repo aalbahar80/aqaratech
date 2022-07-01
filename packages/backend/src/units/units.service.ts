@@ -9,12 +9,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import {
-  CreateUnitDto,
-  UnitOneDto,
-  UnitVacancyDto,
-  UpdateUnitDto,
-} from 'src/units/dto/unit.dto';
+import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -34,12 +29,17 @@ export class UnitsService {
     );
 
     const toCreate = R.omit(createUnitDto, ['propertyId']);
-    return this.prisma.unit.create({
+    const unit = await this.prisma.unit.create({
       data: {
         ...toCreate,
         property: { connect: { id: createUnitDto.propertyId } },
       },
     });
+
+    return {
+      ...unit,
+      href: this.href(unit.id),
+    };
   }
 
   async findAll({
@@ -48,7 +48,7 @@ export class UnitsService {
   }: {
     unitPageOptionsDto: PageOptionsDto;
     user: IUser;
-  }): Promise<PaginatedMetaDto<UnitVacancyDto>> {
+  }): Promise<PaginatedMetaDto<UnitDto>> {
     const { page, take, q } = unitPageOptionsDto;
 
     let [data, itemCount] = await Promise.all([
@@ -56,7 +56,7 @@ export class UnitsService {
         take,
         skip: (page - 1) * take,
         where: accessibleBy(user.ability).Unit,
-        include: { leases: { select: { start: true, end: true } } },
+        include: { leases: { select: { id: true, start: true, end: true } } },
       }),
       this.prisma.unit.count({
         where: accessibleBy(user.ability).Unit,
@@ -81,6 +81,7 @@ export class UnitsService {
       isVacant: this.isVacant(unit.leases),
       vacancyDistance: this.vacancy(unit.leases).distance,
       vacancy: this.vacancy(unit.leases).date,
+      href: this.href(unit.id),
     }));
 
     return { meta, results };
@@ -110,7 +111,7 @@ export class UnitsService {
     return { distance: '', date: null };
   }
 
-  async findOne({ id }: { id: string }): Promise<UnitOneDto> {
+  async findOne({ id }: { id: string }): Promise<UnitDto> {
     const unit = await this.prisma.unit.findUnique({
       where: { id },
       include: {
@@ -136,6 +137,7 @@ export class UnitsService {
       isVacant: this.isVacant(leases),
       vacancyDistance: this.vacancy(leases).distance,
       vacancy: this.vacancy(leases).date,
+      href: this.href(id),
       breadcrumbs: {
         portfolio: {
           rel: Rel.Portfolio,
@@ -149,7 +151,7 @@ export class UnitsService {
     };
   }
 
-  update({
+  async update({
     id,
     updateUnitDto,
     user,
@@ -163,13 +165,23 @@ export class UnitsService {
       subject('Unit', { id, ...updateUnitDto }),
     );
 
-    return this.prisma.unit.update({
+    const unit = await this.prisma.unit.update({
       where: { id },
       data: updateUnitDto,
     });
+
+    return {
+      ...unit,
+      href: this.href(id),
+    };
   }
 
-  remove({ id }: { id: string }) {
-    return this.prisma.unit.delete({ where: { id } });
+  async remove({ id }: { id: string }) {
+    await this.prisma.unit.delete({ where: { id } });
+    return id;
+  }
+
+  href(id: string) {
+    return `/units/${id}`;
   }
 }

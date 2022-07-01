@@ -16,6 +16,7 @@ import {
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { HateoasDto } from 'src/common/dto/hateoas.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
@@ -51,10 +52,7 @@ class UnitOptionalDto {
   usage: string | null = null;
 }
 
-export class UnitDto extends IntersectionType(
-  UnitRequiredDto,
-  UnitOptionalDto,
-) {}
+// InputDtos
 
 export class CreateUnitDto
   extends IntersectionType(UnitRequiredDto, PartialType(UnitOptionalDto))
@@ -64,21 +62,24 @@ export class UpdateUnitDto extends PartialType(
   OmitType(CreateUnitDto, ['propertyId']),
 ) {}
 
-export class UnitVacancyDto extends UnitDto {
-  @IsBoolean()
-  isVacant: boolean;
+// OutputDtos
 
-  @IsString()
-  vacancyDistance: string | null;
-
-  @IsISO8601()
-  vacancy: Date | null;
-}
+class AllFields extends IntersectionType(UnitRequiredDto, UnitOptionalDto) {}
 
 class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
   'property',
 ]) {}
+
+export class UnitDto extends IntersectionType(HateoasDto, AllFields) {
+  breadcrumbs?: UnitBreadcrumbsDto;
+  leases?: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
+  isVacant?: boolean;
+  vacancyDistance?: string | null;
+  vacancy?: Date | null;
+}
+
+// TODO get tenants from lease
 
 // class UnitTenantDto extends PickType(TenantDto, [
 //   'id',
@@ -86,15 +87,8 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
 //   'shortName',
 // ]) {}
 
-class UnitLeaseDto extends LeaseDto {
-  // @ApiProperty({ readOnly: true })
-  // @ApiProperty({ type: () => Node })
-  // tenant: UnitTenantDto;
-}
-
-export class UnitOneDto extends UnitVacancyDto {
-  breadcrumbs: UnitBreadcrumbsDto;
-
-  @ApiProperty({ readOnly: true })
-  leases: UnitLeaseDto[];
-}
+// class UnitLeaseDto extends LeaseDto {
+// @ApiProperty({ readOnly: true })
+// @ApiProperty({ type: () => Node })
+// tenant: UnitTenantDto;
+// }
