@@ -9,7 +9,6 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CreateUnitDto,
@@ -167,7 +166,7 @@ export class UnitsService {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
     id: string;
-  }): Promise<PaginatedMetaDto<LeaseDto>> {
+  }) {
     const { page, take } = pageOptionsDto;
 
     const where: Prisma.LeaseWhereInput = {
@@ -175,7 +174,14 @@ export class UnitsService {
     };
 
     let [results, itemCount] = await Promise.all([
-      this.prisma.lease.findMany({ take, skip: (page - 1) * take, where }),
+      this.prisma.lease.findMany({
+        take,
+        skip: (page - 1) * take,
+        where,
+        include: {
+          tenant: true,
+        },
+      }),
       this.prisma.lease.count({ where }),
     ]);
 

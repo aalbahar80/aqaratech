@@ -613,14 +613,19 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfLeaseDto
+                title: PaginatedResponseOfFindLeases
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/LeaseDto'
+                          type: object
+                          allOf:
+                            - $ref: '#/components/schemas/LeaseDto'
+                              properties:
+                                tenant:
+                                  $ref: '#/components/schemas/TenantDto'
       tags: *ref_4
   /leases:
     post:

@@ -13,6 +13,7 @@ import {
   ApiHeader,
   ApiOkResponse,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -25,6 +26,7 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
 import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
@@ -81,13 +83,43 @@ export class UnitsController {
   }
 
   @Get(':id/leases')
-  @CheckAbilities({ action: Action.Read, subject: 'Lease' })
-  @ApiPaginatedResponse(LeaseDto)
+  // @CheckAbilities(
+  //   { action: Action.Read, subject: 'Lease' },
+  //   { action: Action.Read, subject: 'Tenant' },
+  // )
+  @ApiOkResponse({
+    schema: {
+      title: `PaginatedResponseOf${'FindLeases'}`,
+      allOf: [
+        // https://docs.nestjs.com/openapi/operations#advanced-generic-apiresponse
+        { $ref: getSchemaPath(PaginatedMetaDto) },
+        {
+          properties: {
+            results: {
+              type: 'array',
+              items: {
+                allOf: [
+                  {
+                    $ref: getSchemaPath(LeaseDto),
+                    properties: {
+                      tenant: {
+                        $ref: getSchemaPath(TenantDto),
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      ],
+    },
+  })
   findLeases(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
-  ): Promise<PaginatedMetaDto<LeaseDto>> {
+  ): Promise<PaginatedMetaDto<LeaseDto & { tenant: TenantDto }>> {
     return this.unitsService.findLeases({ id, user, pageOptionsDto });
   }
 }
