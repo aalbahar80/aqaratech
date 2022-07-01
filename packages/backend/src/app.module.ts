@@ -13,6 +13,7 @@ import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
 import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { PrometheusModule } from './prometheus/prometheus.module';
 
 // resources
 import { ExpensesModule } from './expenses/expenses.module';
@@ -40,6 +41,7 @@ import { UsersModule } from './users/users.module';
     LeaseInvoicesModule,
     ExpensesModule,
     HealthModule,
+    PrometheusModule,
   ],
   controllers: [AppController],
   providers: [
