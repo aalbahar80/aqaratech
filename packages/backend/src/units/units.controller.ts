@@ -24,6 +24,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
@@ -81,13 +82,12 @@ export class UnitsController {
 
   @Get(':id/leases')
   @CheckAbilities({ action: Action.Read, subject: 'Lease' })
-  // TODO add swagger type
-  // TODO add function return type
+  @ApiPaginatedResponse(LeaseDto)
   findLeases(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
-  ) {
+  ): Promise<PaginatedMetaDto<LeaseDto>> {
     return this.unitsService.findLeases({ id, user, pageOptionsDto });
   }
 }

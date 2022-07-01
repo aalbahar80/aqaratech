@@ -610,6 +610,17 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedResponseOfLeaseDto
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseDto'
       tags: *ref_4
   /leases:
     post:
