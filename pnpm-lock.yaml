@@ -21,6 +21,7 @@ importers:
       '@nestjs/platform-express': 8.4.7
       '@nestjs/schematics': 8.0.11
       '@nestjs/swagger': 5.2.1
+      '@nestjs/terminus': 8.1.0
       '@nestjs/testing': 8.4.7
       '@prisma/client': 3.15.2
       '@self/seed': workspace:0.0.1
@@ -55,6 +56,7 @@ importers:
       prettier: 2.7.1
       prisma: 3.15.2
       prisma-dbml-generator: 0.9.1
+      prom-client: 14.0.1
       reflect-metadata: 0.1.13
       remeda: 0.0.35
       rimraf: 3.0.2
@@ -78,6 +80,7 @@ importers:
       '@nestjs/passport': 8.2.2_ajebcnomotz225cztrmzhvaeiq
       '@nestjs/platform-express': 8.4.7_7tsmhnugyerf5okgqzer2mfqme
       '@nestjs/swagger': 5.2.1_22mmkdqibyufqwcxfa6zn2qjnu
+      '@nestjs/terminus': 8.1.0_is5nhplidwfwwktrrhg7r46vx4
       '@prisma/client': 3.15.2_prisma@3.15.2
       '@sentry/node': 7.3.1
       '@sentry/tracing': 7.3.1
@@ -91,6 +94,7 @@ importers:
       lodash: 4.17.21
       passport: 0.6.0
       passport-jwt: 4.0.0
+      prom-client: 14.0.1
       reflect-metadata: 0.1.13
       remeda: 0.0.35
       rimraf: 3.0.2
@@ -2481,6 +2485,21 @@ packages:
       - class-validator
     dev: false
 
+  /@nestjs/terminus/8.1.0_is5nhplidwfwwktrrhg7r46vx4:
+    resolution: {integrity: sha512-ZX+0zFYwJSs+ArszxJnYB0ESUnp266UthfOGkLfCBQpYA9nNmHTUHjAju6Mr9JzeL4Iv4W1phhkSyaLxNR2a8A==}
+    peerDependencies:
+      '@nestjs/common': 8.x
+      '@nestjs/core': 8.x
+      reflect-metadata: 0.1.x
+      rxjs: 7.x
+    dependencies:
+      '@nestjs/common': 8.4.7_rfiwcbffiuhkhhtbrxxsyxpam4
+      '@nestjs/core': 8.4.7_fkqgj3xrohk2pflugljc4sz7ea
+      check-disk-space: 3.3.0
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
+    dev: false
+
   /@nestjs/testing/8.4.7_yg656aic4dli3q2c2sx4xyqza4:
     resolution: {integrity: sha512-aedpeJFicTBeiTCvJWUG45WMMS53f5eu8t2fXsfjsU1t+WdDJqYcZyrlCzA4dL1B7MfbqaTURdvuVVHTmJO8ag==}
     peerDependencies:
@@ -4188,6 +4207,10 @@ packages:
       file-uri-to-path: 1.0.0
     dev: true
 
+  /bintrees/1.0.2:
+    resolution: {integrity: sha512-VOMgTMwjAaUG580SXn3LacVgjurrbMme7ZZNYGSSV7mmtY6QQRh0Eg3pwIcntQ77DErK1L0NxkbetjcoXzVwKw==}
+    dev: false
+
   /bl/4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
     dependencies:
@@ -4449,6 +4472,11 @@ packages:
     dependencies:
       chart.js: 3.8.0
     dev: true
+
+  /check-disk-space/3.3.0:
+    resolution: {integrity: sha512-Hvr+Nr01xSSvuCpXvJ8oZ2iXjIu4XT3uHbw3g7F/Uiw6O5xk8c/Ot7ZGFDaTRDf2Bz8AdWA4DvpAgCJVKt8arw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /checkpoint-client/1.1.21:
     resolution: {integrity: sha512-bcrcnJncn6uGhj06IIsWvUBPyJWK1ZezDbLCJ//IQEYXkUobhGvOOBlHe9K5x0ZMkAZGinPB4T+lTUmFz/acWQ==}
@@ -9097,6 +9125,13 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
+  /prom-client/14.0.1:
+    resolution: {integrity: sha512-HxTArb6fkOntQHoRGvv4qd/BkorjliiuO2uSWC2KC17MUTKYttWdDoXX/vxOhQdkoECEM9BBH0pj2l8G8kev6w==}
+    engines: {node: '>=10'}
+    dependencies:
+      tdigest: 0.1.2
+    dev: false
+
   /promise.series/0.2.0:
     resolution: {integrity: sha512-VWQJyU2bcDTgZw8kpfBpB/ejZASlCrzwz5f2hjb/zlujOEB4oeiAhHygAWq8ubsX2GVkD4kCU5V2dwOTaCY5EQ==}
     engines: {node: '>=0.12'}
@@ -10368,6 +10403,12 @@ packages:
       mkdirp: 1.0.4
       yallist: 4.0.0
     dev: true
+
+  /tdigest/0.1.2:
+    resolution: {integrity: sha512-+G0LLgjjo9BZX2MfdvPfH+MKLCrxlXSYec5DaPYP1fe6Iyhf0/fSmJ0bFiZ1F8BT6cGXl2LpltQptzjXKWEkKA==}
+    dependencies:
+      bintrees: 1.0.2
+    dev: false
 
   /temp-dir/1.0.0:
     resolution: {integrity: sha512-xZFXEGbG7SNC3itwBzI3RYjq/cEhBkx2hJuKGIUOcEULmkQExXiHat2z/qkISYsuR+IKumhEfKKbV5qXmhICFQ==}
