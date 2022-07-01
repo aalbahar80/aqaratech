@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
 import { HealthModule } from './health/health.module';
+import { MetricsModule } from './metrics/metrics.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrometheusModule } from './prometheus/prometheus.module';
 
@@ -42,6 +43,7 @@ import { UsersModule } from './users/users.module';
     ExpensesModule,
     HealthModule,
     PrometheusModule,
+    MetricsModule,
   ],
   controllers: [AppController],
   providers: [
