@@ -11,7 +11,7 @@ services:
     # maxInstances: 1
     buildCommand: pnpm install --filter @self/backend... && cd packages/backend && pnpm build
     startCommand: cd packages/backend && pnpm run start:prod
-    # healthCheckPath: /
+    healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: DATABASE_URL
