@@ -11,6 +11,7 @@ import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
+import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 // resources
@@ -38,6 +39,7 @@ import { UsersModule } from './users/users.module';
     LeasesModule,
     LeaseInvoicesModule,
     ExpensesModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [
