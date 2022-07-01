@@ -61,7 +61,7 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'property',
 ]) {}
 
-class UnitVacancy {
+export class UnitVacancy {
   isVacant: boolean;
   vacancyDistance: string | null;
   vacancyDate: Date | null;

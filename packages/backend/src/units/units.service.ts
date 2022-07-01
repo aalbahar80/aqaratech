@@ -11,7 +11,12 @@ import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+  CreateUnitDto,
+  UnitDto,
+  UnitVacancy,
+  UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 import { search } from 'src/utils/search';
 
 @Injectable()
@@ -82,11 +87,7 @@ export class UnitsService {
 
     const results = data.map((unit) => ({
       ...unit,
-      vacancy: {
-        isVacant: this.isVacant(unit.leases),
-        vacancyDistance: this.vacancy(unit.leases).distance,
-        vacancyDate: this.vacancy(unit.leases).date,
-      },
+      vacancy: this.vacancy(unit.leases),
       hateoas: {
         href: this.href(unit.id),
       },
@@ -117,11 +118,7 @@ export class UnitsService {
     const { leases, property, ...fields } = unit;
     return {
       ...fields,
-      vacancy: {
-        isVacant: this.isVacant(leases),
-        vacancyDistance: this.vacancy(leases).distance,
-        vacancyDate: this.vacancy(leases).date,
-      },
+      vacancy: this.vacancy(leases),
       hateoas: {
         href: this.href(unit.id),
       },
@@ -201,27 +198,20 @@ export class UnitsService {
     return `/units/${id}`;
   }
 
-  isVacant(leases: { start: Date; end: Date }[]): boolean {
-    if (leases.some((l) => l.start <= new Date() && l.end >= new Date())) {
-      return false;
-    }
-    return true;
-  }
-
-  vacancy(leases: { start: Date; end: Date }[]): {
-    distance: string;
-    date: Date | null;
-  } {
+  vacancy(leases: { start: Date; end: Date }[]): UnitVacancy {
+    const isVacant = leases.some(
+      (l) => l.start <= new Date() && l.end >= new Date(),
+    );
     const lease = leases[0];
-    if (lease?.end) {
-      const distance = formatDistance(leases[0].end, new Date(), {
-        addSuffix: true,
-      });
-      return {
-        distance,
-        date: lease.end,
-      };
-    }
-    return { distance: '', date: null };
+
+    const vacancyDistance = lease?.end
+      ? formatDistance(leases[0].end, new Date(), {
+          addSuffix: true,
+        })
+      : '';
+
+    const vacancyDate = lease?.end ?? null;
+
+    return { isVacant, vacancyDistance, vacancyDate };
   }
 }
