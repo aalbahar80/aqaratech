@@ -80,9 +80,11 @@ export class UnitsService {
 
     const results = data.map((unit) => ({
       ...unit,
-      isVacant: this.isVacant(unit.leases),
-      vacancyDistance: this.vacancy(unit.leases).distance,
-      vacancy: this.vacancy(unit.leases).date,
+      vacancy: {
+        isVacant: this.isVacant(unit.leases),
+        vacancyDistance: this.vacancy(unit.leases).distance,
+        vacancyDate: this.vacancy(unit.leases).date,
+      },
       hateoas: {
         href: this.href(unit.id),
       },
@@ -138,9 +140,11 @@ export class UnitsService {
     return {
       ...fields,
       leases,
-      isVacant: this.isVacant(leases),
-      vacancyDistance: this.vacancy(leases).distance,
-      vacancy: this.vacancy(leases).date,
+      vacancy: {
+        isVacant: this.isVacant(leases),
+        vacancyDistance: this.vacancy(leases).distance,
+        vacancyDate: this.vacancy(leases).date,
+      },
       hateoas: {
         href: this.href(unit.id),
       },

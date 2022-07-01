@@ -6,20 +6,12 @@ import {
   PickType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
-import {
-  IsBoolean,
-  IsISO8601,
-  IsNumber,
-  IsPositive,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { HateoasDto } from 'src/common/dto/hateoas.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
 class UnitRequiredDto extends AbstractDto {
   @Nanoid()
@@ -69,6 +61,12 @@ class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'property',
 ]) {}
 
+class UnitVacancy {
+  isVacant: boolean;
+  vacancyDistance: string | null;
+  vacancyDate: Date | null;
+}
+
 export class UnitDto extends IntersectionType(
   UnitRequiredDto,
   UnitOptionalDto,
@@ -80,10 +78,7 @@ export class UnitDto extends IntersectionType(
   @ApiProperty({ type: PickType(LeaseDto, ['id', 'start', 'end']) })
   leases?: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
 
-  // computed
-  isVacant?: boolean;
-  vacancyDistance?: string | null;
-  vacancy?: Date | null;
+  vacancy?: UnitVacancy;
 }
 
 // TODO get tenants from lease
