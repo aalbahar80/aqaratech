@@ -3,9 +3,9 @@ import {
   HealthCheck,
   HealthCheckResult,
   HealthCheckService,
-  HealthIndicator,
   HttpHealthIndicator,
 } from '@nestjs/terminus';
+import { HealthIndicator } from 'src/health/interfaces/health-indicator.interface';
 import { NestjsHealthIndicator } from 'src/health/models/nestjs-health.indicator';
 import { PrometheusService } from 'src/prometheus/prometheus.service';
 // import { AnyOtherService } from '../any-other-module/any-other.service';
@@ -31,7 +31,7 @@ export class HealthService {
   }
 
   @HealthCheck()
-  public async check(): Promise<HealthCheckResult | undefined> {
+  public async check(): Promise<HealthCheckResult> {
     return await this.health.check(
       this.listOfThingsToMonitor.map(
         (apiIndicator: HealthIndicator) => async () => {
