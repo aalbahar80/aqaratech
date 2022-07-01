@@ -1,7 +1,10 @@
-import { HealthIndicatorResult, HttpHealthIndicator } from '@nestjs/terminus';
-import { PrometheusService } from '../../prometheus/prometheus.service';
-import { HealthIndicator } from '../interfaces/health-indicator.interface';
-import { BaseHealthIndicator } from './base-health.indicator';
+import {
+  HealthIndicator,
+  HealthIndicatorResult,
+  HttpHealthIndicator,
+} from '@nestjs/terminus';
+import { BaseHealthIndicator } from 'src/health/models/base-health.indicator';
+import { PrometheusService } from 'src/prometheus/prometheus.service';
 
 export class NestjsHealthIndicator
   extends BaseHealthIndicator

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TerminusModule } from '@nestjs/terminus';
+import { HealthController } from 'src/health/health.controller';
+import { HealthService } from 'src/health/health.service';
 import { PrometheusModule } from 'src/prometheus/prometheus.module';
-import { HealthController } from './health.controller';
-import { HealthService } from './health.service';
 
 @Module({
   imports: [TerminusModule, PrometheusModule],

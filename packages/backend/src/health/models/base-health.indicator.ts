@@ -4,7 +4,7 @@ import { Gauge } from 'prom-client';
 import {
   PrometheusHistogram,
   PrometheusService,
-} from '../../prometheus/prometheus.service';
+} from 'src/prometheus/prometheus.service';
 
 // Design Pattern: Template Method
 

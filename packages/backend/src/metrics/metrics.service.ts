@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { HealthService } from '../health/health.service';
-import { PrometheusService } from '../prometheus/prometheus.service';
+import { HealthService } from 'src/health/health.service';
+import { PrometheusService } from 'src/prometheus/prometheus.service';
 
 @Injectable()
 export class MetricsService {

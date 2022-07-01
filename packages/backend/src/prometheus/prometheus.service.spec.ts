@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PrometheusService } from './prometheus.service';
+import { PrometheusService } from 'src/prometheus/prometheus.service';
 
 describe('PrometheusService', () => {
   let service: PrometheusService;

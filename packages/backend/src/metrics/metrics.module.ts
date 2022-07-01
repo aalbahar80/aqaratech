@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { HealthModule } from 'src/health/health.module';
+import { MetricsController } from 'src/metrics/metrics.controller';
+import { MetricsService } from 'src/metrics/metrics.service';
 import { PrometheusModule } from 'src/prometheus/prometheus.module';
-import { MetricsController } from './metrics.controller';
-import { MetricsService } from './metrics.service';
 
 @Module({
   providers: [MetricsService],

@@ -3,11 +3,11 @@ import {
   HealthCheck,
   HealthCheckResult,
   HealthCheckService,
+  HealthIndicator,
   HttpHealthIndicator,
 } from '@nestjs/terminus';
-import { PrometheusService } from '../prometheus/prometheus.service';
-import { HealthIndicator } from './interfaces/health-indicator.interface';
-import { NestjsHealthIndicator } from './models/nestjs-health.indicator';
+import { NestjsHealthIndicator } from 'src/health/models/nestjs-health.indicator';
+import { PrometheusService } from 'src/prometheus/prometheus.service';
 // import { AnyOtherService } from '../any-other-module/any-other.service';
 // import { AnyOtherHealthIndicator } from './models/any-other-health.indicator';
 
