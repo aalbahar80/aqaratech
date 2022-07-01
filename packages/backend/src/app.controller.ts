@@ -26,7 +26,7 @@ export class AppController {
     return result;
   }
 
-  @Get('/metrics')
+  @Get('/manualmetrics')
   getMetrics() {
     return this.appService.getMetrics();
   }
