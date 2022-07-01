@@ -576,6 +576,41 @@ paths:
               schema:
                 type: string
       tags: *ref_4
+  /units/{id}/leases:
+    get:
+      operationId: findLeases
+      parameters:
+        - name: page
+          required: false
+          in: query
+          example: 1
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          example: 1
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 10
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_4
   /leases:
     post:
       operationId: create
@@ -1470,22 +1505,6 @@ components:
         - parcel
         - paci
         - cost
-    PickTypeClass:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-      required:
-        - id
-        - start
-        - end
     HateoasDto:
       type: object
       properties:
@@ -1556,8 +1575,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        leases:
-          $ref: '#/components/schemas/PickTypeClass'
         hateoas:
           $ref: '#/components/schemas/HateoasDto'
         breadcrumbs:

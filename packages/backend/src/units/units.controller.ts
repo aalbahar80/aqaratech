@@ -78,4 +78,16 @@ export class UnitsController {
   remove(@Param('id') id: string): Promise<string> {
     return this.unitsService.remove({ id });
   }
+
+  @Get(':id/leases')
+  @CheckAbilities({ action: Action.Read, subject: 'Lease' })
+  // TODO add swagger type
+  // TODO add function return type
+  findLeases(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ) {
+    return this.unitsService.findLeases({ id, user, pageOptionsDto });
+  }
 }

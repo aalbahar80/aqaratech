@@ -72,14 +72,15 @@ export class UnitDto extends IntersectionType(
   UnitOptionalDto,
 ) {
   hateoas: HateoasDto;
-
   breadcrumbs?: UnitBreadcrumbsDto;
-
-  @ApiProperty({ type: PickType(LeaseDto, ['id', 'start', 'end']) })
-  leases?: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
-
   vacancy?: UnitVacancy;
 }
+
+// @ApiProperty({ type: PickType(LeaseDto, ['id', 'start', 'end']) })
+// leases?: {
+//   hateoas: HateoasDto;
+//   items: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
+// };
 
 // TODO get tenants from lease
 

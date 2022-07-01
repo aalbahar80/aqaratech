@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -8,6 +9,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { search } from 'src/utils/search';
@@ -58,7 +60,7 @@ export class UnitsService {
         take,
         skip: (page - 1) * take,
         where: accessibleBy(user.ability).Unit,
-        include: { leases: { select: { id: true, start: true, end: true } } },
+        include: { leases: { select: { start: true, end: true } } },
       }),
       this.prisma.unit.count({
         where: accessibleBy(user.ability).Unit,
@@ -115,7 +117,6 @@ export class UnitsService {
     const { leases, property, ...fields } = unit;
     return {
       ...fields,
-      leases,
       vacancy: {
         isVacant: this.isVacant(leases),
         vacancyDistance: this.vacancy(leases).distance,
@@ -169,7 +170,33 @@ export class UnitsService {
     return id;
   }
 
-  // helpers
+  async findLeases({
+    pageOptionsDto,
+    user,
+    id,
+  }: {
+    pageOptionsDto: PageOptionsDto;
+    user: IUser;
+    id: string;
+  }): Promise<PaginatedMetaDto<LeaseDto>> {
+    const { page, take } = pageOptionsDto;
+
+    const where: Prisma.LeaseWhereInput = {
+      AND: [accessibleBy(user.ability).Lease, { unitId: { equals: id } }],
+    };
+
+    let [results, itemCount] = await Promise.all([
+      this.prisma.lease.findMany({ take, skip: (page - 1) * take, where }),
+      this.prisma.lease.count({ where }),
+    ]);
+
+    const meta = new PaginatedDto({ itemCount, pageOptionsDto });
+
+    return { meta, results };
+  }
+
+  // ::: HELPERS :::
+
   href(id: string) {
     return `/units/${id}`;
   }
