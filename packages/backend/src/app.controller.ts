@@ -1,5 +1,6 @@
 import { Controller, Get, Request } from '@nestjs/common';
 import { Request as ERequest } from 'express';
+import { Public } from 'src/auth/public.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { AppService } from './app.service';
@@ -26,6 +27,7 @@ export class AppController {
     return result;
   }
 
+  @Public()
   @Get('/manualmetrics')
   getMetrics() {
     return this.appService.getMetrics();
