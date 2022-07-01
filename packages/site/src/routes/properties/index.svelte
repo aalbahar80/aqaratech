@@ -23,4 +23,4 @@
 	export let data: Prop['data'];
 </script>
 
-<PropertyList properties={data.results || []} />
+<PropertyList properties={data.results} />

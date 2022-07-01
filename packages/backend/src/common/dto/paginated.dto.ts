@@ -44,6 +44,6 @@ export class PaginatedMetaDto<TData> {
   readonly meta: PaginatedDto;
 
   // TODO rename to items
-  @ApiHideProperty()
+  @ApiProperty()
   readonly results: TData[];
 }
