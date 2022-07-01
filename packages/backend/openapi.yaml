@@ -620,10 +620,18 @@ paths:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/LeaseDto'
-                          properties:
-                            tenant:
-                              $ref: '#/components/schemas/TenantDto'
+                          type: object
+                          required:
+                            - lease
+                          allOf:
+                            - $ref: '#/components/schemas/LeaseDto'
+                            - type: object
+                              required:
+                                - tenant
+                              properties:
+                                tenant:
+                                  type: object
+                                  $ref: '#/components/schemas/TenantDto'
       tags: *ref_4
   /leases:
     post:

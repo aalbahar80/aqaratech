@@ -91,19 +91,27 @@ export class UnitsController {
     schema: {
       title: `PaginatedResponseOf${'FindLeases'}`,
       allOf: [
-        // https://docs.nestjs.com/openapi/operations#advanced-generic-apiresponse
         { $ref: getSchemaPath(PaginatedMetaDto) },
         {
           properties: {
             results: {
               type: 'array',
               items: {
-                $ref: getSchemaPath(LeaseDto),
-                properties: {
-                  tenant: {
-                    $ref: getSchemaPath(TenantDto),
+                type: 'object',
+                required: ['lease'],
+                allOf: [
+                  { $ref: getSchemaPath(LeaseDto) },
+                  {
+                    type: 'object',
+                    required: ['tenant'],
+                    properties: {
+                      tenant: {
+                        type: 'object',
+                        $ref: getSchemaPath(TenantDto),
+                      },
+                    },
                   },
-                },
+                ],
               },
             },
           },
