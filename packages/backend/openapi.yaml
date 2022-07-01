@@ -18,6 +18,17 @@ paths:
       responses:
         '200':
           description: ''
+  /metrics:
+    get:
+      operationId: getMetrics
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
   /tenants:
     post:
       operationId: create

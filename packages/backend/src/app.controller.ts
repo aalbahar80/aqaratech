@@ -25,4 +25,9 @@ export class AppController {
     const { ability, ...result } = req.user;
     return result;
   }
+
+  @Get('/metrics')
+  getMetrics() {
+    return this.appService.getMetrics();
+  }
 }
