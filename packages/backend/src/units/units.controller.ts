@@ -98,16 +98,12 @@ export class UnitsController {
             results: {
               type: 'array',
               items: {
-                allOf: [
-                  {
-                    $ref: getSchemaPath(LeaseDto),
-                    properties: {
-                      tenant: {
-                        $ref: getSchemaPath(TenantDto),
-                      },
-                    },
+                $ref: getSchemaPath(LeaseDto),
+                properties: {
+                  tenant: {
+                    $ref: getSchemaPath(TenantDto),
                   },
-                ],
+                },
               },
             },
           },
