@@ -93,30 +93,6 @@ export class UnitsService {
     return { meta, results };
   }
 
-  isVacant(leases: { start: Date; end: Date }[]): boolean {
-    if (leases.some((l) => l.start <= new Date() && l.end >= new Date())) {
-      return false;
-    }
-    return true;
-  }
-
-  vacancy(leases: { start: Date; end: Date }[]): {
-    distance: string;
-    date: Date | null;
-  } {
-    const lease = leases[0];
-    if (lease?.end) {
-      const distance = formatDistance(leases[0].end, new Date(), {
-        addSuffix: true,
-      });
-      return {
-        distance,
-        date: lease.end,
-      };
-    }
-    return { distance: '', date: null };
-  }
-
   async findOne({ id }: { id: string }): Promise<UnitDto> {
     const unit = await this.prisma.unit.findUnique({
       where: { id },
@@ -193,7 +169,32 @@ export class UnitsService {
     return id;
   }
 
+  // helpers
   href(id: string) {
     return `/units/${id}`;
+  }
+
+  isVacant(leases: { start: Date; end: Date }[]): boolean {
+    if (leases.some((l) => l.start <= new Date() && l.end >= new Date())) {
+      return false;
+    }
+    return true;
+  }
+
+  vacancy(leases: { start: Date; end: Date }[]): {
+    distance: string;
+    date: Date | null;
+  } {
+    const lease = leases[0];
+    if (lease?.end) {
+      const distance = formatDistance(leases[0].end, new Date(), {
+        addSuffix: true,
+      });
+      return {
+        distance,
+        date: lease.end,
+      };
+    }
+    return { distance: '', date: null };
   }
 }
