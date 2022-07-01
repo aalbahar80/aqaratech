@@ -4,3 +4,7 @@
 npx openapi-generator-cli generate
 # uses configs defined in openapitools.json (requires docker or java)
 ```
+
+```bash
+docker compose -f docker-compose-monitor.yml up
+```
