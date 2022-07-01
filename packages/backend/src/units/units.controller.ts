@@ -98,7 +98,6 @@ export class UnitsController {
               type: 'array',
               items: {
                 type: 'object',
-                required: ['lease'],
                 allOf: [
                   { $ref: getSchemaPath(LeaseDto) },
                   {
@@ -106,7 +105,6 @@ export class UnitsController {
                     required: ['tenant'],
                     properties: {
                       tenant: {
-                        type: 'object',
                         $ref: getSchemaPath(TenantDto),
                       },
                     },
