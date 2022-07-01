@@ -18,7 +18,7 @@
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';
 
-	export const load: Load = async ({ session, url: { pathname }, stuff }) => {
+	export const load: Load = async ({ session, stuff, fetch }) => {
 		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
 		const navigation = userConfig.navLinks;
 		const apiClient = api({ token: session.accessToken, loadFetch: fetch });
