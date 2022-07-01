@@ -17,23 +17,17 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	let config: Configuration;
-
 	const basePath = import.meta.env.VITE_VERCEL_ENV
 		? import.meta.env.VITE_API_URL // TODO prod
 		: 'http://localhost:3002';
 
 	const headers = { Authorization: `Bearer ${token}` };
 
-	if (loadFetch) {
-		config = new Configuration({
-			fetchApi: loadFetch,
-			headers,
-			basePath,
-		});
-	} else {
-		config = new Configuration({ headers, basePath });
-	}
+	const config = new Configuration({
+		...(loadFetch && { fetchApi: loadFetch }),
+		headers,
+		basePath,
+	});
 
 	return {
 		tenants: new TenantsApi(config),
