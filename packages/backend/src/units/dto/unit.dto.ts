@@ -56,7 +56,7 @@ export class UpdateUnitDto extends PartialType(
 
 // OutputDtos
 
-class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+export class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
   'property',
 ]) {}

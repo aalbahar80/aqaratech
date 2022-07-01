@@ -13,6 +13,7 @@ import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CreateUnitDto,
+  UnitBreadcrumbsDto,
   UnitDto,
   UnitVacancy,
   UpdateUnitDto,
@@ -122,16 +123,7 @@ export class UnitsService {
       hateoas: {
         href: this.href(unit.id),
       },
-      breadcrumbs: {
-        portfolio: {
-          rel: Rel.Portfolio,
-          href: `/portfolios/${unit.property.portfolioId}`,
-        },
-        property: {
-          rel: Rel.Property,
-          href: `/properties/${unit.propertyId}`,
-        },
-      },
+      breadcrumbs: this.breadcrumbs(unit),
     };
   }
 
@@ -196,6 +188,22 @@ export class UnitsService {
 
   href(id: string) {
     return `/units/${id}`;
+  }
+
+  breadcrumbs(unit: {
+    propertyId: string;
+    property: { portfolioId: string };
+  }): UnitBreadcrumbsDto {
+    return {
+      portfolio: {
+        rel: Rel.Portfolio,
+        href: `/portfolios/${unit.property.portfolioId}`,
+      },
+      property: {
+        rel: Rel.Property,
+        href: `/properties/${unit.propertyId}`,
+      },
+    };
   }
 
   vacancy(leases: { start: Date; end: Date }[]): UnitVacancy {
