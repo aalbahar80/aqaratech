@@ -38,7 +38,9 @@ export class UnitsService {
 
     return {
       ...unit,
-      href: this.href(unit.id),
+      hateoas: {
+        href: this.href(unit.id),
+      },
     };
   }
 
@@ -81,7 +83,9 @@ export class UnitsService {
       isVacant: this.isVacant(unit.leases),
       vacancyDistance: this.vacancy(unit.leases).distance,
       vacancy: this.vacancy(unit.leases).date,
-      href: this.href(unit.id),
+      hateoas: {
+        href: this.href(unit.id),
+      },
     }));
 
     return { meta, results };
@@ -137,7 +141,9 @@ export class UnitsService {
       isVacant: this.isVacant(leases),
       vacancyDistance: this.vacancy(leases).distance,
       vacancy: this.vacancy(leases).date,
-      href: this.href(id),
+      hateoas: {
+        href: this.href(unit.id),
+      },
       breadcrumbs: {
         portfolio: {
           rel: Rel.Portfolio,
@@ -172,7 +178,9 @@ export class UnitsService {
 
     return {
       ...unit,
-      href: this.href(id),
+      hateoas: {
+        href: this.href(unit.id),
+      },
     };
   }
 

@@ -64,16 +64,23 @@ export class UpdateUnitDto extends PartialType(
 
 // OutputDtos
 
-class AllFields extends IntersectionType(UnitRequiredDto, UnitOptionalDto) {}
-
 class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
   'property',
 ]) {}
 
-export class UnitDto extends IntersectionType(HateoasDto, AllFields) {
+export class UnitDto extends IntersectionType(
+  UnitRequiredDto,
+  UnitOptionalDto,
+) {
+  hateoas: HateoasDto;
+
   breadcrumbs?: UnitBreadcrumbsDto;
+
+  @ApiProperty({ type: PickType(LeaseDto, ['id', 'start', 'end']) })
   leases?: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
+
+  // computed
   isVacant?: boolean;
   vacancyDistance?: string | null;
   vacancy?: Date | null;

@@ -1470,6 +1470,31 @@ components:
         - parcel
         - paci
         - cost
+    PickTypeClass:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+      required:
+        - id
+        - start
+        - end
+    HateoasDto:
+      type: object
+      properties:
+        href:
+          type: string
+        mediaType:
+          type: string
+      required:
+        - href
     BreadcrumbDto:
       type: object
       properties:
@@ -1515,12 +1540,12 @@ components:
           format: date-time
           type: string
           readOnly: true
+        leases:
+          $ref: '#/components/schemas/PickTypeClass'
+        hateoas:
+          $ref: '#/components/schemas/HateoasDto'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
-        leases:
-          type: array
-          items:
-            type: object
         isVacant:
           type: boolean
         vacancyDistance:
@@ -1530,10 +1555,6 @@ components:
           format: date-time
           type: string
           nullable: true
-        href:
-          type: string
-        mediaType:
-          type: string
         propertyId:
           type: string
         unitNumber:
@@ -1576,7 +1597,7 @@ components:
         - id
         - createdAt
         - updatedAt
-        - href
+        - hateoas
         - propertyId
         - unitNumber
         - floor
