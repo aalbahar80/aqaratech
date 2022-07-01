@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { api } from '$lib/client/api';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
 	import TenantPage from '$lib/components/tenant/TenantPage.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
@@ -8,10 +7,10 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({
-		fetch,
 		params,
+		stuff,
 	}: LoadEvent<{ id: string; entity: EntityTitle }>) => {
-		const data = await api(fetch)[params.entity].findOne({
+		const data = await stuff.api![params.entity].findOne({
 			id: params.id,
 		});
 

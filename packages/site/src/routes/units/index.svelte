@@ -1,13 +1,12 @@
 <script context="module" lang="ts">
-	import { api } from '$lib/client/api';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ fetch, url }: LoadEvent) => {
+	export const load = async ({ url, stuff }: LoadEvent) => {
 		const { page, take, q } = parseParams(url);
-		const data = await api(fetch).units.findAll({ page, take, q });
+		const data = await stuff.api!.units.findAll({ page, take, q });
 
 		return {
 			props: { data },
