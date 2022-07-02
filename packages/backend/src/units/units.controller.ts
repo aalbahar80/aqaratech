@@ -87,7 +87,7 @@ export class UnitsController {
   @Get(':id/leases')
   // TODO? possible alternative
   // @CheckAbilities({ action: Action.Read, subject: 'Tenant', field: 'leases' })
-  // @ApiPaginatedResponse(UnitLeaseDto)
+  @ApiPaginatedResponse(UnitLeaseDto)
   findLeases(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
