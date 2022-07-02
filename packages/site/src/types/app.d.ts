@@ -25,17 +25,15 @@ interface ImportMeta {
 }
 declare namespace App {
 	interface Locals {
+		user: import('$models/types/auth.type').User | undefined;
 		accessToken: string;
 		idToken: string;
-		user: Auth0Profile | undefined;
-		authz: import('$models/types/auth.type').Authz | null;
 	}
 
 	// interface Platform {}
 
 	interface Session {
-		user: Readonly<Auth0Profile> | undefined;
-		authz: import('$models/types/auth.type').Authz | null;
+		user: Readonly<import('$models/types/auth.type').User> | undefined;
 		accessToken: string;
 	}
 

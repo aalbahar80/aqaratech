@@ -1,76 +1,55 @@
 import { environment } from '$environment';
-import type { Authz } from '$lib/models/types/auth.type';
+import type { Authz, User } from '$lib/models/types/auth.type';
 import { validateAccessToken } from '$lib/server/utils';
+import type { UserDto } from '@self/sdk';
 
 const { authConfig } = environment;
 
-interface Auth0UserMeta {
-	appMetadata: {
-		idInternal: string;
-	};
-}
+const getAuthz = (user: UserDto): Authz => {
+	const orgs: string[] = [];
+	const portfolios: string[] = [];
+	const tenants: string[] = [];
 
-export const getAuthz = async (
-	token: string | undefined,
-	tokenType: 'idToken' | 'accessToken' = 'accessToken',
-): Promise<Authz | null> => {
-	if (!token) {
-		return null;
-	}
-	try {
-		const payload = await validateAccessToken(token, tokenType);
-		const roles = payload[
-			`${authConfig.AUTH0_API_NAMESPACE}/roles`
-		] as string[];
-
-		const metadata = {
-			appMetadata: payload[
-				`${authConfig.AUTH0_API_NAMESPACE}/appMetadata`
-			] as Auth0UserMeta['appMetadata'],
-		};
-
-		const isOwner = roles.includes('property-owner');
-		const isAdmin = roles.includes('admin');
-		const isTenant = roles.includes('tenant');
-		const sub = payload.sub;
-		if (isTenant) {
-			const id = metadata.appMetadata.idInternal;
-			return {
-				role: 'tenant',
-				isAdmin: false,
-				isOwner: false,
-				isTenant: true,
-				id,
-				sub,
-				home: `/portal/tenant/${id}`,
-			};
-		} else if (isOwner) {
-			const id = metadata.appMetadata.idInternal;
-			return {
-				role: 'property-owner',
-				isAdmin: false,
-				isOwner: true,
-				isTenant: false,
-				id,
-				sub,
-				home: `/portfolios/${id}/dashboard`,
-			};
-		} else if (isAdmin) {
-			return {
-				role: 'admin',
-				isAdmin: true,
-				isOwner: false,
-				isTenant: false,
-				id: undefined,
-				sub,
-				home: '/',
-			};
-		} else {
-			return null;
+	user?.roles.forEach((role) => {
+		if (role.organizationId) {
+			orgs.push(role.organizationId);
+		} else if (role.portfolioId) {
+			portfolios.push(role.portfolioId);
+		} else if (role.tenantId) {
+			tenants.push(role.tenantId);
 		}
-	} catch (e) {
-		console.error(e);
-		return null;
+	});
+
+	const defaultRole = user?.roles.find(
+		(role) => role.organizationId || role.portfolioId || role.tenantId,
+	);
+
+	if (defaultRole?.organizationId) {
+		return {
+			home: '/',
+			roleId: defaultRole.id,
+			isAdmin: true,
+			isOwner: false,
+			isTenant: false,
+		};
+	} else if (defaultRole?.portfolioId) {
+		return {
+			home: `/portfolios/${defaultRole.portfolioId}/dashboard`,
+			roleId: defaultRole.id,
+			isAdmin: false,
+			isOwner: true,
+			isTenant: false,
+		};
+	} else if (defaultRole?.tenantId) {
+		return {
+			home: `/portal/tenant/${defaultRole.tenantId}`,
+			roleId: defaultRole.id,
+			isAdmin: false,
+			isOwner: false,
+			isTenant: true,
+		};
+	} else {
+		throw new Error('No default role found');
 	}
 };
 
@@ -82,16 +61,18 @@ export const getUser = async (
 	}
 	try {
 		const payload = await validateAccessToken(token, 'idToken');
-		const email = payload.email as string;
-		const name = payload.name as string;
-		const updatedAt = payload.updated_at as string;
 
-		const user = {
-			sub: payload.sub,
-			email,
-			name,
-			updatedAt,
+		const userStuff = payload[
+			`${authConfig.AUTH0_API_NAMESPACE}/userStuff`
+		] as UserDto;
+
+		const role = getAuthz(userStuff);
+
+		const user: User = {
+			...userStuff,
+			role,
 		};
+
 		return user;
 	} catch (e) {
 		console.error(e);

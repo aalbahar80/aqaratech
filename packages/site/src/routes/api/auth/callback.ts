@@ -1,5 +1,5 @@
 import { environment } from '$environment';
-import { getAuthz } from '$lib/server/utils';
+import { getUser } from '$lib/server/utils/getAuthz';
 import type { RequestHandler } from '@sveltejs/kit';
 
 const { authConfig } = environment;
@@ -48,11 +48,12 @@ export const get: RequestHandler = async (req) => {
 		const tokens = await getTokens(code);
 
 		req.locals.accessToken = tokens.access_token;
-		req.locals.idToken = tokens.id_token || '';
-		// req.locals.user = await validateAccessToken(tokens.id_token, 'idToken');
 
-		const authz = await getAuthz(req.locals.idToken, 'idToken');
-		const location = authz?.home || '/';
+		// TODO shouldn't add idToken to locals, instead extract user then discard it
+		req.locals.idToken = tokens.id_token || '';
+
+		const user = await getUser(req.locals.idToken);
+		const location = user?.role.home || '/';
 
 		return {
 			status: 302,

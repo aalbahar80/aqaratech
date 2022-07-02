@@ -1,6 +1,5 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
-import { getAuthz } from '$lib/server/utils';
 import { getUser } from '$lib/server/utils/getAuthz';
 import * as Sentry from '@sentry/node';
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
@@ -23,7 +22,6 @@ if (
 
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
-	authz: locals.authz,
 	accessToken: locals.accessToken,
 });
 
@@ -34,9 +32,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
 
-	const authz = await getAuthz(cookies.idToken, 'idToken');
 	const user = await getUser(cookies.idToken);
-	event.locals.authz = authz;
 	event.locals.user = user;
 
 	const response = await resolve(event);
@@ -73,9 +69,9 @@ export const handleError: HandleError = async ({ error, event }) => {
 	const user = event.locals.user;
 	Sentry.captureException(error, {
 		user: {
-			id: user?.sub || '',
+			id: user?.id || '',
 			email: user?.email || '',
-			username: user?.name || '',
+			username: user?.fullName || '',
 		},
 	});
 };
