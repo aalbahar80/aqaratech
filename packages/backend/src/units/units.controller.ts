@@ -83,10 +83,8 @@ export class UnitsController {
   }
 
   @Get(':id/leases')
-  // @CheckAbilities(
-  //   { action: Action.Read, subject: 'Lease' },
-  //   { action: Action.Read, subject: 'Tenant' },
-  // )
+  // TODO? possible alternative
+  // @CheckAbilities({ action: Action.Read, subject: 'Tenant', field: 'leases' })
   @ApiOkResponse({
     schema: {
       title: `PaginatedResponseOf${'FindLeases'}`,
