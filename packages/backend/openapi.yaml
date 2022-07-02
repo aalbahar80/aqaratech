@@ -613,23 +613,14 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfFindLeases
+                title: PaginatedResponseOfUnitLeaseDto
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - properties:
                       results:
                         type: array
                         items:
-                          type: object
-                          title: UnitLease
-                          allOf:
-                            - $ref: '#/components/schemas/LeaseDto'
-                            - type: object
-                              required:
-                                - tenant
-                              properties:
-                                tenant:
-                                  $ref: '#/components/schemas/TenantDto'
+                          $ref: '#/components/schemas/UnitLeaseDto'
       tags: *ref_4
   /leases:
     post:
@@ -1896,6 +1887,76 @@ components:
           type: string
           nullable: true
           default: null
+    UnitLeaseTenant:
+      type: object
+      properties:
+        id:
+          type: string
+        fullName:
+          type: string
+        shortName:
+          type: string
+          nullable: true
+      required:
+        - id
+        - fullName
+        - shortName
+    UnitLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenant:
+          $ref: '#/components/schemas/UnitLeaseTenant'
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenant
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
     LeaseDto:
       type: object
       properties:

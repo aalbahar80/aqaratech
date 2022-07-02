@@ -1,5 +1,4 @@
 import {
-  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
@@ -76,22 +75,12 @@ export class UnitDto extends IntersectionType(
   vacancy?: UnitVacancy;
 }
 
-// @ApiProperty({ type: PickType(LeaseDto, ['id', 'start', 'end']) })
-// leases?: {
-//   hateoas: HateoasDto;
-//   items: Pick<LeaseDto, 'id' | 'start' | 'end'>[];
-// };
+class UnitLeaseTenant {
+  id: string;
+  fullName: string;
+  shortName: string | null;
+}
 
-// TODO get tenants from lease
-
-// class UnitTenantDto extends PickType(TenantDto, [
-//   'id',
-//   'fullName',
-//   'shortName',
-// ]) {}
-
-// class UnitLeaseDto extends LeaseDto {
-// @ApiProperty({ readOnly: true })
-// @ApiProperty({ type: () => Node })
-// tenant: UnitTenantDto;
-// }
+export class UnitLeaseDto extends LeaseDto {
+  tenant: UnitLeaseTenant;
+}

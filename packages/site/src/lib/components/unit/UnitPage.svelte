@@ -4,14 +4,14 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import type { UnitDto, UnitLease } from '@self/sdk';
+	import type { UnitDto, UnitLeaseDto } from '@self/sdk';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
 	import GisMeasure from '~icons/gis/measure';
 
 	export let unit: UnitDto;
-	export let leases: UnitLease[];
+	export let leases: UnitLeaseDto[];
 
 	let details: [string, string | null][];
 	$: details = [

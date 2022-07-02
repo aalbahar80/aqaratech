@@ -179,7 +179,13 @@ export class UnitsService {
         skip: (page - 1) * take,
         where,
         include: {
-          tenant: true,
+          tenant: {
+            select: {
+              id: true,
+              fullName: true,
+              shortName: true,
+            },
+          },
         },
       }),
       this.prisma.lease.count({ where }),
