@@ -22,6 +22,7 @@ export const setupSwagger = (app: INestApplication) => {
     .addTag('aqaratech')
     .addServer('http://localhost:3002')
     .addServer('https://nestjs-dev.onrender.com')
+    .addServer('https://api.nest.letand.be')
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {

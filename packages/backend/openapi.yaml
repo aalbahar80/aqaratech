@@ -995,6 +995,7 @@ tags:
 servers:
   - url: http://localhost:3002
   - url: https://nestjs-dev.onrender.com
+  - url: https://api.nest.letand.be
 components:
   securitySchemes:
     oauth-swagger:

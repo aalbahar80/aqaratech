@@ -17,7 +17,6 @@ export class AppController {
 
   @Get('/profile')
   getProfile(@Request() req: ERequest & { user: IUser }) {
-    console.log(req.user);
     // TODO explicitly select the properties to return
     //
     // Warning: returning the ability crashes the client/server,
