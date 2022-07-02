@@ -11,6 +11,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import { createMyCustomStore } from './SelectStore';
 
+	// READ: https://github.com/mskocik/svelecte/releases/tag/v3.9.0
+
 	export let parent: SelectedOption = undefined;
 	export let selected: SelectedOption = undefined;
 	export let field: Relation;
