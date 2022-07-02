@@ -85,13 +85,16 @@ export class UnitsService {
       pageOptionsDto: unitPageOptionsDto,
     });
 
-    const results = data.map((unit) => ({
-      ...unit,
-      vacancy: this.vacancy(unit.leases),
-      hateoas: {
-        href: this.href(unit.id),
-      },
-    }));
+    const results = data.map((unit) => {
+      const { leases, ...unitFields } = unit;
+      return {
+        ...unitFields,
+        vacancy: this.vacancy(leases),
+        hateoas: {
+          href: this.href(unitFields.id),
+        },
+      };
+    });
 
     return { meta, results };
   }
