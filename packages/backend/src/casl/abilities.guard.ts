@@ -59,10 +59,10 @@ export class AbilitiesGuard implements CanActivate {
     let ability: AppAbility;
 
     if (cached) {
-      this.logger.debug('Cache hit: Ability', { ability: cached });
+      this.logger.log(`Cache hit: Ability for user ${request.user.email}`);
       ability = cached;
     } else {
-      this.logger.debug('Cache miss: Ability', { ability: cached });
+      this.logger.log(`Cache miss: Ability for user ${request.user.email}`);
       ability = await this.caslAbilityFactory.defineAbility(request.user);
       // TODO handle cache ttl/invalidation
       await this.cacheManager.set(request.user.id, ability, {
