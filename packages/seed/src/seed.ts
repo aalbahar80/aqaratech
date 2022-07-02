@@ -16,9 +16,9 @@ import {
 	fakeUnit,
 	fakeUser,
 	generateId,
+	testOrgEmail,
 	testPortfolioEmail,
 	testTenantEmail,
-	testUserEmail,
 	timespan,
 	updatedAt,
 } from "./generators.js";
@@ -64,7 +64,9 @@ export async function seed({
 	organizations[0]!.id = "hdmp5pje1a7o";
 
 	const users = Array.from({ length: userCount }, fakeUser);
-	users[0]!.email = testUserEmail;
+	users[0]!.email = testOrgEmail;
+	users[1]!.email = testPortfolioEmail;
+	users[2]!.email = testTenantEmail;
 
 	const roles = Array.from({ length: roleCount }, () =>
 		fakeRole({ orgId: randId(organizations), userId: randId(users) })
@@ -80,7 +82,13 @@ export async function seed({
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
 	);
-	portfolios[0]!.email = testPortfolioEmail;
+	roles.push({
+		id: generateId(),
+		portfolioId: portfolios[0]!.id,
+		userId: users[1]!.id,
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+	});
 
 	const properties = portfolios.flatMap((portfolio) =>
 		Array.from(
@@ -100,9 +108,6 @@ export async function seed({
 		date.setFullYear(date.getFullYear() - timespan);
 		let tenantN = fakeTenant(randId(organizations));
 
-		if (idx === 0) {
-			tenantN.email = testTenantEmail;
-		}
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
@@ -124,6 +129,13 @@ export async function seed({
 				continue tenantLoop;
 			}
 		}
+	});
+	roles.push({
+		id: generateId(),
+		tenantId: tenants[0]!.id,
+		userId: users[2]!.id,
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
 	});
 
 	// test that all tenantIds in leases are in tenants
@@ -262,6 +274,7 @@ export async function seed({
 		await insertExpenseTypes();
 		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
+		//@ts-ignore
 		await prisma.role.createMany({ data: roles });
 		await prisma.portfolio.createMany({ data: portfolios });
 		await prisma.property.createMany({ data: properties });

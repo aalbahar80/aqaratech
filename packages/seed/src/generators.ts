@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { Role } from "@prisma/client";
 import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import { customAlphabet } from "nanoid";
 import {
@@ -12,7 +13,6 @@ faker.setLocale("ar");
 
 // consistent id's for testing
 export const testPassword = "test12";
-export const testUserEmail = "admin.dev@mailthink.net";
 export const testOrgEmail = "org.dev@mailthink.net";
 export const testPortfolioEmail = "client.dev@mailthink.net";
 export const testTenantEmail = "tenant.dev@mailthink.net";
@@ -52,13 +52,15 @@ export const fakeRole = ({
 }: {
 	userId: string;
 	orgId: string;
-}) => ({
+}): Partial<Role> => ({
 	id: generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	organizationId: orgId,
+	// portfolioId: null,
+	// tenantId: null,
+	// permissions: null,
 	userId,
-	// permissions: [],
 });
 
 export const fakeOrganization = () => ({
