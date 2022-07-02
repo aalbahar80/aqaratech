@@ -6,15 +6,16 @@ export const ApiPaginatedResponse = <TModel extends Type<any>>(
   model: TModel,
 ) => {
   return applyDecorators(
-    ApiExtraModels(PaginatedMetaDto),
     ApiExtraModels(model),
     ApiOkResponse({
       schema: {
         title: `PaginatedResponseOf${model.name}`,
+        required: ['results'],
         allOf: [
           // https://docs.nestjs.com/openapi/operations#advanced-generic-apiresponse
           { $ref: getSchemaPath(PaginatedMetaDto) },
           {
+            title: `ArrayOf${model.name}`,
             properties: {
               results: {
                 type: 'array',

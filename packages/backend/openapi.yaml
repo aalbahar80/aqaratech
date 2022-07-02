@@ -84,9 +84,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfTenantDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfTenantDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -202,9 +205,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfPortfolioDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfPortfolioDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -294,9 +300,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfUserDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfUserDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -395,9 +404,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfPropertyDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfPropertyDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -513,9 +525,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfUnitDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfUnitDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -614,9 +629,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfUnitLeaseDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfUnitLeaseDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -677,9 +695,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfLeaseDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfLeaseDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -795,9 +816,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfLeaseInvoiceDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -913,9 +937,12 @@ paths:
             application/json:
               schema:
                 title: PaginatedResponseOfExpenseDto
+                required:
+                  - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
+                  - title: ArrayOfExpenseDto
+                    properties:
                       results:
                         type: array
                         items:
@@ -1077,41 +1104,6 @@ components:
         - nationality
         - residencyNum
         - residencyEnd
-    PaginatedDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-          description: Total number of items in the collection
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-        - page
-        - take
-        - itemCount
-        - pageCount
-        - hasPreviousPage
-        - hasNextPage
-    PaginatedMetaDto:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaginatedDto'
-        results:
-          type: array
-          items:
-            type: string
-      required:
-        - meta
-        - results
     TenantLeaseDto:
       type: object
       properties:
@@ -2212,5 +2204,35 @@ components:
         - unit
         - lease
         - tenant
+    PaginatedDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+          description: Total number of items in the collection
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+        - page
+        - take
+        - itemCount
+        - pageCount
+        - hasPreviousPage
+        - hasNextPage
+    PaginatedMetaDto:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaginatedDto'
+      required:
+        - meta
 security:
   - oauth-swagger: []
