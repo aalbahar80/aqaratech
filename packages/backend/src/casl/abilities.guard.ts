@@ -5,6 +5,7 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Cache } from 'cache-manager';
@@ -35,9 +36,10 @@ export class AbilitiesGuard implements CanActivate {
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
+  private readonly logger = new Logger(AbilitiesGuard.name);
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // TODO: dry up isPublic check with src/auth/JwtAuthGuard
-    console.log('abilities.guard.ts ~ 28');
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -57,10 +59,10 @@ export class AbilitiesGuard implements CanActivate {
     let ability: AppAbility;
 
     if (cached) {
-      console.log('cache hit');
+      this.logger.debug('Cache hit: Ability', { ability: cached });
       ability = cached;
     } else {
-      console.log('cache miss');
+      this.logger.debug('Cache miss: Ability', { ability: cached });
       ability = await this.caslAbilityFactory.defineAbility(request.user);
       // TODO handle cache ttl/invalidation
       await this.cacheManager.set(request.user.id, ability, {
@@ -91,7 +93,7 @@ export class AbilitiesGuard implements CanActivate {
      */
     const isAllowed = rules.every((rule) => {
       if (id) {
-        console.debug({ id }, 'rule.subject.id'); // use nest logger
+        this.logger.log({ id }, 'rule.subject.id');
         // TODO fix type
         // @ts-ignore
         return ability.can(rule.action, subject(rule.subject, { id }));
@@ -106,13 +108,17 @@ export class AbilitiesGuard implements CanActivate {
     // Fallback in case of bad cache
     if (!isAllowed && cached) {
       // prettier-ignore
-      console.debug('Permission denied in guard. Invalidating cache and reattempting.');
+      this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
       await this.cacheManager.del(request.user.id);
 
       // try again
       return this.canActivate(context);
     }
 
+    this.logger.log('Permission granted in guard.');
+    this.logger.log(
+      `User ${request.user.id} has been granted preliminary access to ${request.method} ${request.url}`,
+    );
     return isAllowed;
   }
 }
