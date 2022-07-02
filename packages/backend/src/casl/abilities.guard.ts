@@ -73,7 +73,7 @@ export class AbilitiesGuard implements CanActivate {
     // attach ability to request, to be used by services for any further permission checks
     request.user.ability = ability;
 
-    const id = request.params.id as string | undefined;
+    const requestHasParams = Object.keys(request.params).length > 0;
 
     /**
      * `isAllowed` here refers to the rule defined in the guard decorator.
@@ -92,7 +92,7 @@ export class AbilitiesGuard implements CanActivate {
      * TODO should this also be invalidated?
      */
     const isAllowed = rules.every((rule) => {
-      if (request.params && !rule.skipParamCheck) {
+      if (requestHasParams && !rule.skipParamCheck) {
         const params = rule.params || ['id'];
 
         const subjectFields: Record<string, any> = {};
