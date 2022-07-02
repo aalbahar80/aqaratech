@@ -65,43 +65,33 @@ export class CaslAbilityFactory {
       }
     });
 
+    // ### Role: Organization###
     // Define an org user's manageable entities
+    if (own.orgs.length > 0) {
+      const tenantsQ = this.prisma.tenant.findMany({
+        select: { id: true },
+        where: { organization: { id: { in: own.orgs } } },
+      });
 
-    type ManageableResource = string;
-    interface Manageable {
-      orgs: ManageableResource[];
-      tenants: ManageableResource[];
-      portfolios: ManageableResource[];
-      properties: ManageableResource[];
-      units: ManageableResource[];
-      leases: ManageableResource[];
-      leaseInvoices: ManageableResource[];
-      expenses: ManageableResource[];
-      maintenanceOrders: ManageableResource[];
-    }
+      const portfoliosQ = this.prisma.portfolio.findMany({
+        select: { id: true },
+        where: { organization: { id: { in: own.orgs } } },
+      });
 
-    const tenantsQ = this.prisma.tenant.findMany({
-      select: { id: true },
-      where: { organization: { id: { in: own.orgs } } },
-    });
+      const propertiesQ = this.prisma.property.findMany({
+        select: { id: true },
+        where: { portfolio: { organizationId: { in: own.orgs } } },
+      });
 
-    const portfoliosQ = this.prisma.portfolio.findMany({
-      select: { id: true },
-      where: { organization: { id: { in: own.orgs } } },
-    });
+      const unitsQ = this.prisma.unit.findMany({
+        select: { id: true },
+        where: {
+          property: { portfolio: { organizationId: { in: own.orgs } } },
+        },
+      });
 
-    const propertiesQ = this.prisma.property.findMany({
-      select: { id: true },
-      where: { portfolio: { organizationId: { in: own.orgs } } },
-    });
-
-    const unitsQ = this.prisma.unit.findMany({
-      select: { id: true },
-      where: { property: { portfolio: { organizationId: { in: own.orgs } } } },
-    });
-
-    // prettier-ignore
-    const leasesQ = this.prisma.lease.findMany({
+      // prettier-ignore
+      const leasesQ = this.prisma.lease.findMany({
       select: { id: true },
       where: {
         OR: [
@@ -111,8 +101,8 @@ export class CaslAbilityFactory {
       },
     });
 
-    // prettier-ignore
-    const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
+      // prettier-ignore
+      const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
       select: { id: true },
       where: {
         lease: {
@@ -124,8 +114,8 @@ export class CaslAbilityFactory {
       },
     });
 
-    // prettier-ignore
-    const expensesQ = this.prisma.expense.findMany({
+      // prettier-ignore
+      const expensesQ = this.prisma.expense.findMany({
       select: { id: true },
       where: {
         OR: [
@@ -136,8 +126,8 @@ export class CaslAbilityFactory {
       },
     });
 
-    // prettier-ignore
-    const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
+      // prettier-ignore
+      const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
       select: { id: true },
       where: {
         OR: [
@@ -149,43 +139,39 @@ export class CaslAbilityFactory {
       },
     });
 
-    console.time('defineAbility:queries');
-    const [
-      tenants,
-      portfolios,
-      properties,
-      units,
-      leases,
-      leaseInvoices,
-      expenses,
-      maintenanceOrders,
-    ] = await Promise.all([
-      tenantsQ,
-      portfoliosQ,
-      propertiesQ,
-      unitsQ,
-      leasesQ,
-      leaseInvoicesQ,
-      expensesQ,
-      maintenanceOrdersQ,
-    ]);
-    console.timeEnd('defineAbility:queries');
+      console.time('defineAbility:queries:org');
+      const [
+        tenants,
+        portfolios,
+        properties,
+        units,
+        leases,
+        leaseInvoices,
+        expenses,
+        maintenanceOrders,
+      ] = await Promise.all([
+        tenantsQ,
+        portfoliosQ,
+        propertiesQ,
+        unitsQ,
+        leasesQ,
+        leaseInvoicesQ,
+        expensesQ,
+        maintenanceOrdersQ,
+      ]);
+      console.timeEnd('defineAbility:queries:org');
 
-    const manageable: Manageable = {
-      orgs: own.orgs, // TODO consider contraining to superadmins only
-      tenants: tenants.map((i) => i.id),
-      portfolios: portfolios.map((i) => i.id),
-      properties: properties.map((i) => i.id),
-      units: units.map((i) => i.id),
-      leases: leases.map((i) => i.id),
-      leaseInvoices: leaseInvoices.map((i) => i.id),
-      expenses: expenses.map((i) => i.id),
-      maintenanceOrders: maintenanceOrders.map((i) => i.id),
-    };
-
-    // ### Role: Organization###
-    if (own.orgs.length > 0) {
-      // fail fast if no orgs
+      const manageable: OrgManageableResources = {
+        orgs: own.orgs, // TODO consider contraining to superadmins only
+        tenants: tenants.map((i) => i.id),
+        portfolios: portfolios.map((i) => i.id),
+        properties: properties.map((i) => i.id),
+        units: units.map((i) => i.id),
+        leases: leases.map((i) => i.id),
+        leaseInvoices: leaseInvoices.map((i) => i.id),
+        expenses: expenses.map((i) => i.id),
+        maintenanceOrders: maintenanceOrders.map((i) => i.id),
+      };
 
       // TODO handle updating parentId's by adding a cannot clause
       can(Action.Manage, ['Tenant'], {
@@ -267,105 +253,181 @@ export class CaslAbilityFactory {
     }
 
     // ### Role: Portfolio ###
-    // const portfoliosChangeMe = [];
-    // if (portfoliosChangeMe.length > 0) {
-    //   // fail fast if no portfolios
+    // Define a portfolio user's readable entities
+    if (own.portfolios.length > 0) {
+      const tenantsQ = this.prisma.tenant.findMany({
+        select: { id: true },
+        where: {
+          leases: {
+            some: {
+              unit: { property: { portfolioId: { in: own.portfolios } } },
+            },
+          },
+        },
+      });
 
-    //   // can view tenants who have leases in their properties
-    //   can(Action.Read, 'Tenant', {
-    //     leases: {
-    //       some: {
-    //         unit: {
-    //           property: {
-    //             portfolioId: { in: portfoliosChangeMe },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   });
+      const propertiesQ = this.prisma.property.findMany({
+        select: { id: true },
+        where: { portfolioId: { in: own.portfolios } },
+      });
 
-    //   can(Action.Read, ['Expense'], {
-    //     OR: [
-    //       { portfolioId: { in: portfoliosChangeMe } },
-    //       { property: { portfolioId: { in: portfoliosChangeMe } } },
-    //       { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
-    //     ],
-    //   });
+      const unitsQ = this.prisma.unit.findMany({
+        select: { id: true },
+        where: { property: { portfolioId: { in: own.portfolios } } },
+      });
 
-    //   can(Action.Read, ['MaintenanceOrder'], {
-    //     OR: [
-    //       { portfolioId: { in: portfoliosChangeMe } },
-    //       { property: { portfolioId: { in: portfoliosChangeMe } } },
-    //       { unit: { property: { portfolioId: { in: portfoliosChangeMe } } } },
-    //     ],
-    //   });
+      const leasesQ = this.prisma.lease.findMany({
+        select: { id: true },
+        where: { unit: { property: { portfolioId: { in: own.portfolios } } } },
+      });
 
-    //   can(Action.Read, ['Lease'], {
-    //     unit: {
-    //       is: { property: { is: { portfolioId: { in: portfoliosChangeMe } } } },
-    //     },
-    //   });
+      const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
+        select: { id: true },
+        where: {
+          lease: {
+            unit: { property: { portfolioId: { in: own.portfolios } } },
+          },
+        },
+      });
 
-    //   can(Action.Read, ['Property'], {
-    //     portfolioId: { in: portfoliosChangeMe },
-    //   });
+      const expensesQ = this.prisma.expense.findMany({
+        select: { id: true },
+        where: {
+          OR: [
+            { portfolioId: { in: own.portfolios } },
+            { property: { portfolioId: { in: own.portfolios } } },
+            { unit: { property: { portfolioId: { in: own.portfolios } } } },
+          ],
+        },
+      });
 
-    //   can(Action.Read, ['LeaseInvoice'], {
-    //     lease: {
-    //       is: {
-    //         unit: {
-    //           is: {
-    //             property: { portfolioId: { in: portfoliosChangeMe } },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   });
+      const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
+        select: { id: true },
+        where: {
+          OR: [
+            { portfolioId: { in: own.portfolios } },
+            { property: { portfolioId: { in: own.portfolios } } },
+            { unit: { property: { portfolioId: { in: own.portfolios } } } },
+          ],
+        },
+      });
 
-    //   can(Action.Read, ['Unit'], {
-    //     property: { portfolioId: { in: portfoliosChangeMe } },
-    //   });
+      console.time('defineAbility:queries:portfolio');
+      const [
+        tenants,
+        properties,
+        units,
+        leases,
+        leaseInvoices,
+        expenses,
+        maintenanceOrders,
+      ] = await Promise.all([
+        tenantsQ,
+        propertiesQ,
+        unitsQ,
+        leasesQ,
+        leaseInvoicesQ,
+        expensesQ,
+        maintenanceOrdersQ,
+      ]);
+      console.timeEnd('defineAbility:queries:portfolio');
 
-    //   can(Action.Read, ['Portfolio'], {
-    //     id: { in: portfoliosChangeMe },
-    //   });
-    // }
+      const readable: PortfolioReadableResources = {
+        tenants: tenants.map((i) => i.id),
+        portfolios: own.portfolios,
+        properties: properties.map((i) => i.id),
+        units: units.map((i) => i.id),
+        leases: leases.map((i) => i.id),
+        leaseInvoices: leaseInvoices.map((i) => i.id),
+        expenses: expenses.map((i) => i.id),
+        maintenanceOrders: maintenanceOrders.map((i) => i.id),
+      };
+
+      can(Action.Read, 'Tenant', {
+        id: { in: readable.tenants },
+      });
+
+      can(Action.Read, ['Portfolio'], {
+        id: { in: readable.portfolios },
+      });
+
+      can(Action.Read, ['Property'], {
+        id: { in: readable.properties },
+      });
+
+      can(Action.Read, ['Unit'], {
+        id: { in: readable.units },
+      });
+
+      can(Action.Read, ['Lease'], {
+        id: { in: readable.leases },
+      });
+
+      can(Action.Read, ['LeaseInvoice'], {
+        id: { in: readable.leaseInvoices },
+      });
+
+      can(Action.Read, ['Expense'], {
+        id: { in: readable.expenses },
+      });
+
+      can(Action.Read, ['MaintenanceOrder'], {
+        id: { in: readable.maintenanceOrders },
+      });
+    }
 
     // ### Role: Tenant###
-    // if (tenants.length > 0) {
-    //   // fail fast if no tenants
+    // Define a tenant user's readable entities
+    // TODO restrict fields
+    if (own.tenants.length > 0) {
+      const leasesQ = this.prisma.lease.findMany({
+        select: { id: true },
+        where: { tenantId: { in: own.tenants } },
+      });
 
-    //   // can view all their tenant profiles
-    //   can(Action.Read, 'Tenant', {
-    //     id: { in: tenants },
-    //   });
+      const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
+        select: { id: true },
+        where: { lease: { tenantId: { in: own.tenants } } },
+      });
 
-    //   // can view all their leases
-    //   can(Action.Read, ['Lease'], {
-    //     tenantId: { in: tenants },
-    //   });
+      const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
+        select: { id: true },
+        where: { tenantId: { in: own.tenants } },
+      });
 
-    //   can(Action.Read, ['MaintenanceOrder'], {
-    //     tenantId: { in: tenants },
-    //   });
+      console.time('defineAbility:queries:tenant');
+      const [leases, leaseInvoices, maintenanceOrders] = await Promise.all([
+        leasesQ,
+        leaseInvoicesQ,
+        maintenanceOrdersQ,
+      ]);
+      console.timeEnd('defineAbility:queries:tenant');
 
-    //   // TODO some fields should be public
-    //   can(Action.Read, ['LeaseInvoice'], {
-    //     lease: {
-    //       tenantId: { in: tenants },
-    //     },
-    //   });
+      const readable: TenantReadableResources = {
+        tenants: own.tenants,
+        leases: leases.map((i) => i.id),
+        leaseInvoices: leaseInvoices.map((i) => i.id),
+        maintenanceOrders: maintenanceOrders.map((i) => i.id),
+      };
 
-    //   // only some fields
-    //   // can(Action.Read, ['Property'], {
-    //   //   units: { some: { leases: { some: { tenantId: { in: tenants } } } } },
-    //   // });
+      can(Action.Read, 'Tenant', {
+        id: { in: readable.tenants },
+      });
 
-    //   // only some fields
-    //   // can(Action.Read, ['Unit'], {
-    //   //   leases: { some: { tenantId: { in: tenants } } },
-    //   // });
-    // }
+      can(Action.Read, ['Lease'], {
+        id: { in: readable.leases },
+      });
+
+      // TODO some fields should be public
+      can(Action.Read, ['LeaseInvoice'], {
+        id: { in: readable.leaseInvoices },
+      });
+
+      can(Action.Read, ['MaintenanceOrder'], {
+        id: { in: readable.maintenanceOrders },
+      });
+    }
+
     return build();
   }
 
@@ -413,3 +475,33 @@ export type Subject = Subjects<{
   Unit: P<Unit>;
   User: P<User>;
 }>;
+
+type Resource = string;
+interface Resources {
+  orgs: Resource[];
+  tenants: Resource[];
+  portfolios: Resource[];
+  properties: Resource[];
+  units: Resource[];
+  leases: Resource[];
+  leaseInvoices: Resource[];
+  expenses: Resource[];
+  maintenanceOrders: Resource[];
+}
+
+type OrgManageableResources = Resources;
+type PortfolioReadableResources = Pick<
+  Resources,
+  | 'tenants'
+  | 'portfolios'
+  | 'properties'
+  | 'units'
+  | 'leases'
+  | 'leaseInvoices'
+  | 'expenses'
+  | 'maintenanceOrders'
+>;
+type TenantReadableResources = Pick<
+  Resources,
+  'tenants' | 'leases' | 'leaseInvoices' | 'maintenanceOrders'
+>;
