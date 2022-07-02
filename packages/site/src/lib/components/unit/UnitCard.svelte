@@ -1,16 +1,9 @@
 <script lang="ts">
+	import type { UnitDto } from '@self/sdk';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	interface Unit {
-		id: string;
-		type: string | null;
-		unitNumber: string;
-		isVacant: boolean;
-		vacancy: Date | null;
-		vacancyDistance: string | null;
-	}
-	export let unit: Unit;
+	export let unit: UnitDto;
 	export let icons: any[];
 </script>
 
@@ -23,15 +16,17 @@
 					{unit.type ?? ''}
 				</span>
 			</p>
-			<div class="ml-2 flex flex-shrink-0">
-				<p
-					class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
-					class:badge-green={unit.isVacant}
-					class:badge-yellow={!unit.isVacant}
-				>
-					{unit.isVacant ? 'Vacant' : 'Occupied'}
-				</p>
-			</div>
+			{#if unit.vacancy}
+				<div class="ml-2 flex flex-shrink-0">
+					<p
+						class={'inline-flex rounded-full px-2 text-xs font-semibold leading-5'}
+						class:badge-green={unit.vacancy.isVacant}
+						class:badge-yellow={!unit.vacancy.isVacant}
+					>
+						{unit.vacancy.isVacant ? 'Vacant' : 'Occupied'}
+					</p>
+				</div>
+			{/if}
 		</div>
 		<div class="mt-2 sm:flex sm:justify-between">
 			<div class="sm:flex sm:space-x-4">
@@ -48,7 +43,7 @@
 				{/each}
 			</div>
 			<!-- bug: null is being typecasted to 1/1/1970 -->
-			{#if unit.vacancyDistance}
+			{#if unit.vacancy?.vacancyDistance && unit.vacancy.vacancyDate}
 				<!-- <pre>{JSON.stringify(unit.vacancy, null, 2)}</pre> -->
 				<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
 					<Icon
@@ -58,8 +53,8 @@
 					/>
 					<p>
 						Vacancy:
-						<time dateTime={unit?.vacancy?.toISOString()}>
-							{unit?.vacancyDistance}</time
+						<time dateTime={unit.vacancy.vacancyDate.toISOString()}>
+							{unit.vacancy.vacancyDistance}</time
 						>
 					</p>
 				</div>

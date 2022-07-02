@@ -2,25 +2,13 @@
 	import { page } from '$app/stores';
 	import UnitCard from '$components/unit/UnitCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
+	import type { UnitDto } from '@self/sdk';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
 	import GisMeasure from '~icons/gis/measure';
 
-	interface Unit {
-		id: string;
-		type: string | null;
-		unitNumber: string;
-		propertyId: string;
-		bed: number | null;
-		bath: number | null;
-		floor: number | null;
-		size: number | null;
-		isVacant: boolean;
-		vacancy: Date | null;
-		vacancyDistance: string | null;
-	}
-	export let units: Unit[];
+	export let units: UnitDto[];
 
 	const createHref = $page.url.pathname.startsWith('/properties')
 		? `/new/units?propertyId=${$page.url.pathname.split('/').pop()}`
