@@ -610,17 +610,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedResponseOfUnitLeaseDto
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UnitLeaseDto'
       tags: *ref_4
   /leases:
     post:
@@ -1112,19 +1101,6 @@ components:
       required:
         - meta
         - results
-    TenantUnitDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
-      required:
-        - id
-        - unitNumber
     TenantLeaseDto:
       type: object
       properties:
@@ -1139,10 +1115,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/TenantUnitDto'
         tenantId:
           type: string
         unitId:
@@ -1169,8 +1141,6 @@ components:
           type: string
           nullable: true
           default: null
-      required:
-        - unit
     TenantOneDto:
       type: object
       properties:
@@ -1887,76 +1857,6 @@ components:
           type: string
           nullable: true
           default: null
-    UnitLeaseTenant:
-      type: object
-      properties:
-        id:
-          type: string
-        fullName:
-          type: string
-        shortName:
-          type: string
-          nullable: true
-      required:
-        - id
-        - fullName
-        - shortName
-    UnitLeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        tenant:
-          $ref: '#/components/schemas/UnitLeaseTenant'
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - tenant
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - deactivated
-        - notify
-        - license
     LeaseDto:
       type: object
       properties:
