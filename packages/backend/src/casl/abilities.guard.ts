@@ -92,8 +92,21 @@ export class AbilitiesGuard implements CanActivate {
      * TODO should this also be invalidated?
      */
     const isAllowed = rules.every((rule) => {
-      if (id) {
-        this.logger.log({ id }, 'rule.subject.id');
+      if (request.params && !rule.skipParamCheck) {
+        const params = rule.params || ['id'];
+
+        const subjectFields: Record<string, any> = {};
+        params.forEach((param) => {
+          const paramValue = request.params[param];
+          if (paramValue) {
+            subjectFields[param] = paramValue;
+          } else {
+            this.logger.warn(
+              `param with name ${param} was either not found in request or was falsy`,
+            );
+          }
+        });
+
         // TODO fix type
         // @ts-ignore
         return ability.can(rule.action, subject(rule.subject, { id }));
