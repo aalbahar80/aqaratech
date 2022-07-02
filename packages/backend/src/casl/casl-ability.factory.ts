@@ -1,6 +1,6 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility, Subjects } from '@casl/prisma';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import {
   Expense,
   ExpenseType,
@@ -23,6 +23,8 @@ import { UserDto } from 'src/users/dto/user.dto';
 @Injectable()
 export class CaslAbilityFactory {
   constructor(private prisma: PrismaService) {}
+
+  private readonly logger = new Logger(CaslAbilityFactory.name);
 
   async defineAbility(user: UserDto) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
@@ -139,7 +141,7 @@ export class CaslAbilityFactory {
       },
     });
 
-      console.time('defineAbility:queries:org');
+      const now = Date.now();
       const [
         tenants,
         portfolios,
@@ -159,7 +161,11 @@ export class CaslAbilityFactory {
         expensesQ,
         maintenanceOrdersQ,
       ]);
-      console.timeEnd('defineAbility:queries:org');
+      this.logger.log(
+        `Defined manageable entities for organization user ${user.email} in ${
+          Date.now() - now
+        }ms`,
+      );
 
       const manageable: OrgManageableResources = {
         orgs: own.orgs, // TODO consider contraining to superadmins only
@@ -312,7 +318,7 @@ export class CaslAbilityFactory {
         },
       });
 
-      console.time('defineAbility:queries:portfolio');
+      const now = Date.now();
       const [
         tenants,
         properties,
@@ -330,7 +336,11 @@ export class CaslAbilityFactory {
         expensesQ,
         maintenanceOrdersQ,
       ]);
-      console.timeEnd('defineAbility:queries:portfolio');
+      this.logger.log(
+        `Defined readable entities for portfolio user ${user.email} in ${
+          Date.now() - now
+        }ms`,
+      );
 
       const readable: PortfolioReadableResources = {
         tenants: tenants.map((i) => i.id),
@@ -395,13 +405,17 @@ export class CaslAbilityFactory {
         where: { tenantId: { in: own.tenants } },
       });
 
-      console.time('defineAbility:queries:tenant');
+      const now = Date.now();
       const [leases, leaseInvoices, maintenanceOrders] = await Promise.all([
         leasesQ,
         leaseInvoicesQ,
         maintenanceOrdersQ,
       ]);
-      console.timeEnd('defineAbility:queries:tenant');
+      this.logger.log(
+        `Defined readable entities for tenant user ${user.email} in ${
+          Date.now() - now
+        }ms`,
+      );
 
       const readable: TenantReadableResources = {
         tenants: own.tenants,
