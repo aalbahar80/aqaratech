@@ -115,7 +115,6 @@ export class AbilitiesGuard implements CanActivate {
       return this.canActivate(context);
     }
 
-    this.logger.log('Permission granted in guard.');
     this.logger.log(
       `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url}`,
     );
