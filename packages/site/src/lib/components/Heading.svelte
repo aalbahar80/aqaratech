@@ -39,7 +39,7 @@
 		</h2>
 	</div>
 
-	{#if $session.authz?.isAdmin}
+	{#if $session.user?.role.isAdmin}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} />
@@ -82,7 +82,7 @@
 	{/if}
 
 	<!-- Actions -->
-	{#if $$slots.actions && $session.authz?.isAdmin}
+	{#if $$slots.actions && $session.user?.role.isAdmin}
 		<div
 			class="col-span-full col-start-1 flex flex-col justify-between gap-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:gap-x-4 sm:gap-y-0"
 		>

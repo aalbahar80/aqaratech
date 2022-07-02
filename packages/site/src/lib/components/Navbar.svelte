@@ -7,7 +7,8 @@
 
 	export let navigation: UserConfig['navLinks'] = [];
 
-	$: showDashboard = $session.authz?.isOwner || $session.authz?.isTenant;
+	$: showDashboard =
+		$session.user?.role.isOwner || $session.user?.role.isTenant;
 
 	const docs = getDocs();
 </script>
@@ -28,11 +29,11 @@
 					/>
 				</a>
 
-				{#if $session.authz}
+				{#if $session.user}
 					<div class="-mr-2 flex items-center gap-6 lg:hidden">
 						{#if showDashboard}
 							<a
-								href={$session.authz.home}
+								href={$session.user.role.home}
 								class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 							>
 								Dashboard
@@ -66,10 +67,10 @@
 		</div>
 		<!-- Large screen: nav actions -->
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
-			{#if $session.authz}
+			{#if $session.user}
 				{#if showDashboard}
 					<a
-						href={$session.authz.home}
+						href={$session.user.role.home}
 						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 						sveltekit:prefetch
 					>
@@ -85,7 +86,7 @@
 					</a>
 				{/if}
 
-				{#if $session.authz.isAdmin}
+				{#if $session.user.role.isAdmin}
 					<a
 						href={docs}
 						sveltekit:reload

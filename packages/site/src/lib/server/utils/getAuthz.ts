@@ -31,6 +31,7 @@ const getAuthz = (user: UserDto): Authz => {
 			isAdmin: true,
 			isOwner: false,
 			isTenant: false,
+			roleName: 'OrgUser',
 		};
 	} else if (defaultRole?.portfolioId) {
 		return {
@@ -39,6 +40,7 @@ const getAuthz = (user: UserDto): Authz => {
 			isAdmin: false,
 			isOwner: true,
 			isTenant: false,
+			roleName: 'PortfolioUser',
 		};
 	} else if (defaultRole?.tenantId) {
 		return {
@@ -47,6 +49,7 @@ const getAuthz = (user: UserDto): Authz => {
 			isAdmin: false,
 			isOwner: false,
 			isTenant: true,
+			roleName: 'TenantUser',
 		};
 	} else {
 		throw new Error('No default role found');

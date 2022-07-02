@@ -12,14 +12,13 @@
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
 	import LogRocket from 'logrocket';
-	import * as R from 'remeda';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';
 
 	export const load: Load = async ({ session, stuff, fetch }) => {
-		const userConfig = getUserConfig(session.authz?.role, session.authz?.id);
+		const userConfig = getUserConfig(session.user);
 		const navigation = userConfig.navLinks;
 		const apiClient = api({ token: session.accessToken, loadFetch: fetch });
 		return {
@@ -41,10 +40,11 @@
 		const href = window.location.href;
 		if (!href.includes('localhost') && !href.includes('127.0.0.1')) {
 			LogRocket.init('n4p0hb/aqaratech');
-			if ($session.authz) {
-				LogRocket.identify($session.authz.sub || '', {
-					...R.mapValues($session.authz, (v) => v ?? ''),
-					...$session.user,
+			if ($session.user) {
+				LogRocket.identify($session.user.id || '', {
+					email: $session.user.email,
+					roleId: $session.user.role.roleId,
+					name: $session.user.fullName || '',
 				});
 			}
 
@@ -59,11 +59,11 @@
 					import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
 			});
 			Sentry.configureScope((scope: Scope) => {
-				scope.setTag('role', $session.authz?.role || '');
+				scope.setTag('role', $session.user?.role.roleName || '');
 				scope.setUser({
-					id: $session.authz?.sub || '',
+					id: $session.user?.id || '',
 					email: $session.user?.email || '',
-					username: $session.user?.name || '',
+					name: $session.user?.fullName || '',
 				});
 			});
 

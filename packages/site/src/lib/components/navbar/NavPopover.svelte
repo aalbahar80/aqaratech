@@ -71,7 +71,7 @@
 								{item.name}
 							</a>
 						{/each}
-						{#if $session.authz}
+						{#if $session.user}
 							<div class="relative py-2">
 								<div
 									class="absolute inset-0 inset-x-2 flex items-center"
@@ -82,7 +82,7 @@
 								<div class="relative flex justify-start" />
 							</div>
 
-							{#if $session.authz.isAdmin}
+							{#if $session.user.role.isAdmin}
 								<a
 									on:click={() => close(null)}
 									href={docs}
@@ -110,7 +110,7 @@
 							</a>
 						{/if}
 					</div>
-					{#if !$session.authz}
+					{#if !$session.user}
 						<div class="mt-6 px-5">
 							<a
 								href="/api/auth/login"

@@ -28,6 +28,7 @@ interface Admin {
 	isTenant: false;
 	roleId: string;
 	home: string;
+	roleName: 'OrgUser';
 }
 
 interface Owner {
@@ -36,6 +37,7 @@ interface Owner {
 	isTenant: false;
 	roleId: string;
 	home: string;
+	roleName: 'PortfolioUser';
 }
 
 interface Tenant {
@@ -44,6 +46,7 @@ interface Tenant {
 	isTenant: true;
 	roleId: string;
 	home: string;
+	roleName: 'TenantUser';
 }
 
 export type Authz = Admin | Owner | Tenant;
