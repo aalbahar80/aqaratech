@@ -96,6 +96,7 @@ export class UnitsController {
               type: 'array',
               items: {
                 type: 'object',
+                title: 'UnitLease',
                 allOf: [
                   { $ref: getSchemaPath(LeaseDto) },
                   {

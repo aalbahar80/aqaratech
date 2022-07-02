@@ -621,6 +621,7 @@ paths:
                         type: array
                         items:
                           type: object
+                          title: UnitLease
                           allOf:
                             - $ref: '#/components/schemas/LeaseDto'
                             - type: object
