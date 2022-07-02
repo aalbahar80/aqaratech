@@ -17,7 +17,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
-import { UnitDto } from 'src/units/dto/unit.dto';
+// import { UnitDto } from 'src/units/dto/unit.dto';
 
 class TenantRequiredDto extends AbstractDto {
   @Nanoid()
@@ -69,11 +69,11 @@ export class UpdateTenantDto extends PartialType(
   OmitType(CreateTenantDto, ['organizationId']),
 ) {}
 
-class TenantUnitDto extends PickType(UnitDto, ['id', 'unitNumber']) {}
+// class TenantUnitDto extends PickType(UnitDto, ['id', 'unitNumber']) {}
 
 class TenantLeaseDto extends PartialType(LeaseDto) {
-  @ApiProperty({ readOnly: true })
-  unit: TenantUnitDto;
+  // @ApiProperty({ readOnly: true })
+  // unit: TenantUnitDto;
 }
 
 export class TenantOneDto extends TenantDto {
