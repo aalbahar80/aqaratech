@@ -108,8 +108,11 @@ export class AbilitiesGuard implements CanActivate {
         });
 
         // TODO fix type
-        // @ts-ignore
-        return ability.can(rule.action, subject(rule.subject, { id }));
+        return ability.can(
+          rule.action,
+          // @ts-ignore
+          subject(rule.subject, { ...subjectFields }),
+        );
       } else {
         return ability.can(rule.action, rule.subject);
       }
