@@ -19,4 +19,4 @@
 	export let leases: Prop['leases'];
 </script>
 
-<UnitPage {unit} leases={leases.results} />
+<UnitPage {unit} {leases} />
