@@ -75,13 +75,13 @@ export class ExpensesService {
       results = search({ data: results, q, keys: ['id', 'memo', 'amount'] });
     }
 
-    const meta = new PaginatedDto({
+    const pagination = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
       pageSize: results.length,
     });
 
-    return { meta, results };
+    return { pagination, results };
   }
 
   findOne({ id }: { id: string }) {

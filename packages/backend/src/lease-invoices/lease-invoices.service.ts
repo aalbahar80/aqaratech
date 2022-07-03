@@ -82,13 +82,13 @@ export class LeaseInvoicesService {
 
     const invoices = await Promise.all(promises);
 
-    const meta = new PaginatedDto({
+    const pagination = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
       pageSize: invoices.length,
     });
 
-    return { meta, results: invoices };
+    return { pagination, results: invoices };
   }
 
   async findOne({ id }: { id: string }) {

@@ -84,7 +84,7 @@ export class UnitsService {
       });
     }
 
-    const meta = new PaginatedDto({
+    const pagination = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
       pageSize: data.length,
@@ -101,7 +101,7 @@ export class UnitsService {
       };
     });
 
-    return { meta, results };
+    return { pagination, results };
   }
 
   async findOne({ id }: { id: string }): Promise<UnitDto> {

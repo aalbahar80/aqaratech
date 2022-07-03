@@ -2476,10 +2476,10 @@ components:
     PaginatedMetaDto:
       type: object
       properties:
-        meta:
+        pagination:
           $ref: '#/components/schemas/PaginatedDto'
       required:
-        - meta
+        - pagination
     UnitLeaseTenantDto:
       type: object
       properties:

@@ -74,13 +74,13 @@ export class TenantsService {
       });
     }
 
-    const meta = new PaginatedDto({
+    const pagination = new PaginatedDto({
       itemCount,
       pageOptionsDto: tenantPageOptionsDto,
       pageSize: results.length,
     });
 
-    return { meta, results };
+    return { pagination, results };
   }
 
   findOne({ id }: { id: string }) {

@@ -97,13 +97,13 @@ export class LeasesService {
 
     const leases = await Promise.all(promises);
 
-    const meta = new PaginatedDto({
+    const pagination = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
       pageSize: leases.length,
     });
 
-    return { meta, results: leases };
+    return { pagination, results: leases };
   }
 
   async findOne({ id }: { id: string }) {
