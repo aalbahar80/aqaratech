@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { Prisma, Role } from "@prisma/client";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
@@ -68,9 +69,7 @@ export async function seed({
 	users[1]!.email = testPortfolioEmail;
 	users[2]!.email = testTenantEmail;
 
-	const roles = Array.from({ length: roleCount }, () =>
-		fakeRole({ orgId: randId(organizations), userId: randId(users) })
-	);
+	const roles: Partial<Role>[] = [];
 	roles.push({
 		id: generateId(),
 		organizationId: organizations[0]!.id,
