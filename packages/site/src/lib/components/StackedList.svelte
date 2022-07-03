@@ -8,7 +8,7 @@
 	export let count: number;
 	export let createHref: string | undefined = undefined;
 
-	const hideActions = $session.authz?.role !== 'admin';
+	const hideActions = !$session.user?.role.isAdmin;
 	$: entity = classMap[entityTitle];
 	$: href = createHref ?? `/new/${entityTitle}`;
 </script>
