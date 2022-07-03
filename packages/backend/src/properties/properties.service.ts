@@ -140,12 +140,7 @@ export class PropertiesService {
     user: IUser;
     id: string;
   }) {
-    const { page, take } = pageOptionsDto;
-
-    const where: Prisma.UnitWhereInput = {
-      AND: [accessibleBy(user.ability).Unit, { propertyId: { equals: id } }],
-    };
-
-    return this.units.findAll({ user, pageOptionsDto });
+    const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
+    return this.units.findAll({ user, pageOptionsDto, where });
   }
 }

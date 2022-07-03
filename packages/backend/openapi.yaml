@@ -472,7 +472,7 @@ paths:
       tags: *ref_3
   /properties/{id}/units:
     get:
-      operationId: findLeases
+      operationId: findUnits
       parameters:
         - name: page
           required: false

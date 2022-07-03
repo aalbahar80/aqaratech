@@ -87,7 +87,7 @@ export class PropertiesController {
   @Get(':id/units')
   @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiPaginatedResponse(UnitDto)
-  findLeases(
+  findUnits(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,

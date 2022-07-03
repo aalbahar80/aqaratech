@@ -54,22 +54,26 @@ export class UnitsService {
   async findAll({
     pageOptionsDto,
     user,
+    where,
   }: {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
+    where?: Prisma.UnitWhereInput;
   }): Promise<PaginatedMetaDto<UnitDto>> {
     const { page, take, q } = pageOptionsDto;
+
+    const filter: Prisma.UnitWhereInput = {
+      AND: [accessibleBy(user.ability).Unit, ...(where ? [where] : [])],
+    };
 
     let [data, itemCount] = await Promise.all([
       this.prisma.unit.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(user.ability).Unit,
+        where: filter,
         include: { leases: { select: { start: true, end: true } } },
       }),
-      this.prisma.unit.count({
-        where: accessibleBy(user.ability).Unit,
-      }),
+      this.prisma.unit.count({ where: filter }),
     ]);
 
     if (q) {
