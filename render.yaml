@@ -58,6 +58,6 @@ services:
 databases:
   - name: elephant
     region: frankfurt
-    plan: Free
+    plan: Standard
     # databaseName: postgres # optional (Render may add a suffix)
     # user: postgres # optional
