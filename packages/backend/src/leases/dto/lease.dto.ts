@@ -44,7 +44,9 @@ class LeaseOptionalDto {
 export class LeaseDto extends IntersectionType(
   LeaseRequiredDto,
   LeaseOptionalDto,
-) {}
+) {
+  ext?: LeaseExtendedDto;
+}
 
 export class CreateLeaseDto
   extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
@@ -53,3 +55,9 @@ export class CreateLeaseDto
 export class UpdateLeaseDto extends PartialType(
   OmitType(CreateLeaseDto, ['tenantId', 'unitId']),
 ) {}
+
+export class LeaseExtendedDto {
+  tenantName: string;
+  address: string;
+  unitLabel: string;
+}

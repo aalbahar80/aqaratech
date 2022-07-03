@@ -121,4 +121,8 @@ export class TenantsService {
   remove({ id }: { id: string }) {
     return this.prisma.tenant.delete({ where: { id } });
   }
+
+  getName(tenant: TenantDto) {
+    return tenant.shortName || tenant.fullName;
+  }
 }

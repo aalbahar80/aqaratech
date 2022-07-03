@@ -1,7 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, Property } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -123,5 +123,11 @@ export class PropertiesService {
         href: `/portfolios/${property.portfolioId}`,
       },
     };
+  }
+
+  getAddress(property: Property) {
+    return [property.area, 'ق', property.block, 'م', property.number]
+      .filter(Boolean)
+      .join(' ');
   }
 }

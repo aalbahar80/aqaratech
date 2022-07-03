@@ -1202,6 +1202,19 @@ components:
         - nationality
         - residencyNum
         - residencyEnd
+    LeaseExtendedDto:
+      type: object
+      properties:
+        tenantName:
+          type: string
+        address:
+          type: string
+        unitLabel:
+          type: string
+      required:
+        - tenantName
+        - address
+        - unitLabel
     TenantLeaseDto:
       type: object
       properties:
@@ -1242,6 +1255,8 @@ components:
           type: string
           nullable: true
           default: null
+        ext:
+          $ref: '#/components/schemas/LeaseExtendedDto'
     TenantOneDto:
       type: object
       properties:
@@ -1954,6 +1969,8 @@ components:
           format: date-time
           type: string
           readOnly: true
+        ext:
+          $ref: '#/components/schemas/LeaseExtendedDto'
         tenantId:
           type: string
         unitId:
@@ -2272,6 +2289,8 @@ components:
           format: date-time
           type: string
           readOnly: true
+        ext:
+          $ref: '#/components/schemas/LeaseExtendedDto'
         tenantId:
           type: string
         unitId:

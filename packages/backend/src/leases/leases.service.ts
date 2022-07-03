@@ -1,19 +1,33 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
+import {
+  LeaseDto,
+  LeaseExtendedDto,
+  UpdateLeaseDto,
+} from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PropertiesService } from 'src/properties/properties.service';
+import { TenantsService } from 'src/tenants/tenants.service';
+import { UnitsService } from 'src/units/units.service';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class LeasesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly unitsService: UnitsService,
+    private readonly propertiesService: PropertiesService,
+    private readonly tenantsService: TenantsService,
+  ) {}
+
+  private readonly logger = new Logger(LeasesService.name);
 
   async create({
     createLeaseDto,
@@ -69,16 +83,25 @@ export class LeasesService {
       });
     }
 
+    const promises = results.map((lease) =>
+      this.getExtendedInfo(lease.id).then((ext) => ({ ...lease, ext })),
+    );
+
+    const leases = await Promise.all(promises);
+
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
     });
 
-    return { meta, results };
+    return { meta, results: leases };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.lease.findUnique({ where: { id } });
+  async findOne({ id }: { id: string }) {
+    const lease = await this.prisma.lease.findUnique({ where: { id } });
+    const ext = await this.getExtendedInfo(id);
+
+    return { ...lease, ext };
   }
 
   update({
@@ -103,5 +126,31 @@ export class LeasesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.lease.delete({ where: { id } });
+  }
+
+  // ::: HELPERS :::
+
+  async getExtendedInfo(id: string): Promise<LeaseExtendedDto> {
+    const now = new Date();
+    const data = await this.prisma.lease.findUnique({
+      where: { id },
+      select: {
+        unit: {
+          include: {
+            property: true,
+          },
+        },
+        tenant: true,
+      },
+    });
+
+    const tenantName = this.tenantsService.getName(data.tenant);
+    const unitLabel = this.unitsService.getLabel(data.unit);
+    const address = this.propertiesService.getAddress(data.unit.property);
+    this.logger.log(
+      `Getting Extended Info took: ${new Date().getTime() - now.getTime()} ms`,
+    );
+
+    return { tenantName, unitLabel, address };
   }
 }

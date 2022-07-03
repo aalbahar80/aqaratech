@@ -1,7 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, Unit } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -202,5 +202,9 @@ export class UnitsService {
     const vacancyDate = lease?.end ?? null;
 
     return { isVacant, vacancyDistance, vacancyDate };
+  }
+
+  getLabel(unit: Unit) {
+    return `${unit.type} ${unit.unitNumber}`;
   }
 }
