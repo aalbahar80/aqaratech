@@ -12,7 +12,6 @@
 	export const load = async ({ url, stuff }: LoadEvent) => {
 		const { page, take, q } = parseParams(url);
 		const leases = await stuff.api!.leases.findAll({ page, take, q });
-		console.log({ leases }, 'index.svelte ~ 15');
 
 		return {
 			props: { leases },

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
-	import type { LeaseCardData } from '$lib/models/interfaces/lease.interface';
-	import { getAddress, getProgress } from '$lib/utils/common';
+	import { getProgress } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
+	import type { LeaseDto } from '@self/sdk';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
 
-	export let lease: LeaseCardData;
+	export let lease: LeaseDto;
 	export let index: number | undefined = undefined;
 
 	const expired = lease.end < new Date();
@@ -35,27 +35,23 @@
 		<div class="mt-2 sm:flex sm:justify-between">
 			<!-- Tenant/Unit Icons -->
 			<div class="flex flex-col gap-2">
-				{#if 'tenant' in lease}
-					<p class="flex items-center text-sm text-gray-500">
-						<Icon
-							src={User}
-							theme="solid"
-							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-							aria-hidden="true"
-						/>
-						{lease.tenant.fullName}
-					</p>
-				{/if}
-				{#if 'unit' in lease}
-					<p class="flex items-center text-sm text-gray-500">
-						<Icon
-							src={Home}
-							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-							aria-hidden="true"
-						/>
-						{getAddress(lease.unit.property)}
-					</p>
-				{/if}
+				<p class="flex items-center text-sm text-gray-500">
+					<Icon
+						src={User}
+						theme="solid"
+						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+						aria-hidden="true"
+					/>
+					{lease.ext?.tenantName}
+				</p>
+				<p class="flex items-center text-sm text-gray-500">
+					<Icon
+						src={Home}
+						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+						aria-hidden="true"
+					/>
+					{lease.ext?.address}
+				</p>
 			</div>
 
 			<!-- Calendar Icon -->
