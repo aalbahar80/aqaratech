@@ -14,6 +14,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -23,6 +24,8 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
+import { PropertyDto } from 'src/properties/dto/property.dto';
+import { PropertiesService } from 'src/properties/properties.service';
 import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
@@ -30,7 +33,10 @@ import { PortfoliosService } from './portfolios.service';
 @ApiTags('portfolios')
 @SwaggerAuth()
 export class PortfoliosController {
-  constructor(private readonly portfoliosService: PortfoliosService) {}
+  constructor(
+    private readonly portfoliosService: PortfoliosService,
+    private properties: PropertiesService,
+  ) {}
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
@@ -76,5 +82,17 @@ export class PortfoliosController {
   @ApiOkResponse({ type: PortfolioDto })
   remove(@Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.remove({ id });
+  }
+
+  @Get(':id/properties')
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @ApiPaginatedResponse(PropertyDto)
+  findProperties(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<PaginatedMetaDto<PropertyDto>> {
+    const where: Prisma.PropertyWhereInput = { portfolioId: { equals: id } };
+    return this.properties.findAll({ user, pageOptionsDto, where });
   }
 }

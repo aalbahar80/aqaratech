@@ -45,21 +45,25 @@ export class PropertiesService {
   async findAll({
     pageOptionsDto,
     user,
+    where,
   }: {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
+    where?: Prisma.PropertyWhereInput;
   }): Promise<PaginatedMetaDto<PropertyDto>> {
     const { page, take, q } = pageOptionsDto;
+
+    const filter: Prisma.PropertyWhereInput = {
+      AND: [accessibleBy(user.ability).Property, ...(where ? [where] : [])],
+    };
 
     let [results, itemCount] = await Promise.all([
       this.prisma.property.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(user.ability).Property,
+        where: filter,
       }),
-      this.prisma.property.count({
-        where: accessibleBy(user.ability).Property,
-      }),
+      this.prisma.property.count({ where: filter }),
     ]);
 
     if (q) {

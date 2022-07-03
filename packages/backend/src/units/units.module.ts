@@ -4,6 +4,7 @@ import { UnitsController } from './units.controller';
 
 @Module({
   controllers: [UnitsController],
-  providers: [UnitsService]
+  providers: [UnitsService],
+  exports: [UnitsService],
 })
 export class UnitsModule {}
