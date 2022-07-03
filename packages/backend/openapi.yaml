@@ -83,7 +83,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfTenantDto
+                title: PaginatedTenantDto
                 required:
                   - results
                 allOf:
@@ -204,7 +204,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfPortfolioDto
+                title: PaginatedPortfolioDto
                 required:
                   - results
                 allOf:
@@ -308,7 +308,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfPropertyDto
+                title: PaginatedPropertyDto
                 required:
                   - results
                 allOf:
@@ -374,7 +374,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfPropertyDto
+                title: PaginatedPropertyDto
                 required:
                   - results
                 allOf:
@@ -478,7 +478,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUnitDto
+                title: PaginatedUnitDto
                 required:
                   - results
                 allOf:
@@ -544,7 +544,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUnitDto
+                title: PaginatedUnitDto
                 required:
                   - results
                 allOf:
@@ -648,7 +648,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfLeaseDto
+                title: PaginatedLeaseDto
                 required:
                   - results
                 allOf:
@@ -714,7 +714,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfLeaseDto
+                title: PaginatedLeaseDto
                 required:
                   - results
                 allOf:
@@ -818,7 +818,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfLeaseInvoiceDto
+                title: PaginatedLeaseInvoiceDto
                 required:
                   - results
                 allOf:
@@ -884,7 +884,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfLeaseInvoiceDto
+                title: PaginatedLeaseInvoiceDto
                 required:
                   - results
                 allOf:
@@ -979,7 +979,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUserDto
+                title: PaginatedUserDto
                 required:
                   - results
                 allOf:
@@ -1083,7 +1083,7 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfExpenseDto
+                title: PaginatedExpenseDto
                 required:
                   - results
                 allOf:

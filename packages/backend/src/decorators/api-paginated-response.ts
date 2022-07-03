@@ -9,7 +9,7 @@ export const ApiPaginatedResponse = <TModel extends Type<any>>(
     ApiExtraModels(model), // needed?
     ApiOkResponse({
       schema: {
-        title: `PaginatedResponseOf${model.name}`,
+        title: `Paginated${model.name}`,
         required: ['results'],
         allOf: [
           // https://docs.nestjs.com/openapi/operations#advanced-generic-apiresponse

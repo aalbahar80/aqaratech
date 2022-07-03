@@ -14,7 +14,7 @@ chokidar
 			console.log(message);
 
 			const changed = stats.size !== oldStats?.size;
-			if (changed) {
+			if (changed || !oldStats) {
 				console.log("openapi.yaml changed detected, generating new sdk...");
 
 				// delete /dist directory
