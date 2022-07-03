@@ -14,6 +14,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -24,6 +25,8 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import {
   LeaseBasicDto,
   LeaseDto,
@@ -35,7 +38,10 @@ import { LeasesService } from './leases.service';
 @ApiTags('leases')
 @SwaggerAuth()
 export class LeasesController {
-  constructor(private readonly leasesService: LeasesService) {}
+  constructor(
+    private readonly leasesService: LeasesService,
+    private readonly leaseInvoicesService: LeaseInvoicesService,
+  ) {}
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Lease' })
@@ -81,5 +87,17 @@ export class LeasesController {
   @ApiOkResponse({ type: LeaseBasicDto })
   remove(@Param('id') id: string): Promise<LeaseBasicDto> {
     return this.leasesService.remove({ id });
+  }
+
+  @Get('/:id/invoices')
+  @CheckAbilities({ action: Action.Read, subject: 'Lease' })
+  @ApiPaginatedResponse(LeaseInvoiceDto)
+  findInvoices(
+    @User() user: IUser,
+    @Param('id') id: string,
+    @Query() pageOptionsDto: PageOptionsDto,
+  ): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
+    const where: Prisma.LeaseInvoiceWhereInput = { leaseId: { equals: id } };
+    return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
   }
 }

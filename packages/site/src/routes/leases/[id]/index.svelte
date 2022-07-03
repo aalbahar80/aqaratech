@@ -1,90 +1,22 @@
 <script lang="ts" context="module">
-	import Button from '$components/Button.svelte';
-	import { trpc } from '$lib/client/trpc';
-	import Badge from '$lib/components/Badge.svelte';
-	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
-	import Heading from '$lib/components/Heading.svelte';
-	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
-	import type { Props } from '$lib/models/types/Props.type';
-	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
-	import { Lease } from '$models/classes/lease.class';
-	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
+	import LeasePage from '$lib/components/lease/LeasePage.svelte';
 	import type { LoadEvent } from '@sveltejs/kit';
-	import { formatDistance } from 'date-fns';
-	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
+	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({
-		params,
-		session,
-		fetch,
-	}: LoadEvent<{ id: string }>) => {
-		const lease = session.authz?.isAdmin
-			? await trpc(fetch).query('leases:read', params.id)
-			: await trpc(fetch).query('owner:leases:read', params.id);
-		return { props: { lease } };
+	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
+		const [lease, invoices] = await Promise.all([
+			stuff.api!.leases.findOne({ id: params.id }),
+			stuff.api!.leases.findInvoices({ id: params.id }),
+		]);
+
+		return { props: { lease, invoices } };
 	};
 </script>
 
 <script lang="ts">
-	type Lease = Props<typeof load>['lease'];
-	export let lease: Lease;
-
-	const details: [string, string | null][] = [
-		['Tenant', lease.tenant.fullName],
-		['Start Date', toUTCFormat(lease.start)],
-		['End Date', toUTCFormat(lease.end)],
-		['Monthly Rent', kwdFormat(lease.monthlyRent)],
-		['Deposit', kwdFormat(lease.deposit)],
-		['License', lease.license || '-'],
-	];
-
-	const files: [string, string][] = [['Lease', 'TODO implement']];
-	const icons = [
-		{
-			label: `Expiry: ${formatDistance(lease.end, new Date(), {
-				addSuffix: true,
-			})}`,
-			icon: Fa6SolidCalendarXmark,
-			tooltip: 'Bedrooms',
-		},
-	];
-
-	const badge = Lease.getBadge(lease);
+	type Prop = LP<typeof load>;
+	export let lease: Prop['lease'];
+	export let invoices: Prop['invoices'];
 </script>
 
-<Heading title="Lease" id={lease.id} entity="leases" {icons}>
-	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb
-			crumbs={{
-				portfolio: lease.unit.property.portfolioId,
-				property: lease.unit.property.id,
-				unit: lease.unit.id,
-				tenant: lease.tenant.id,
-			}}
-		/>
-	</svelte:fragment>
-
-	<svelte:fragment slot="actions">
-		<Button
-			icon={Refresh}
-			text="Renew"
-			as="a"
-			href={`/new/leases?leaseId=${lease.id}&renew=true`}
-			class="w-full sm:w-auto"
-			prefetch
-		/>
-
-		<Button
-			icon={DocumentText}
-			text="Contract"
-			as="a"
-			href={`/leases/${lease.id}/contract`}
-			class="w-full sm:w-auto"
-			prefetch
-		/>
-	</svelte:fragment>
-</Heading>
-<Badge label={badge.label} badgeColor={badge.color} />
-<DetailsPane {details} {files} />
-<TrxColumn transactions={lease.transactions} leaseId={lease.id} />
+<LeasePage {lease} {invoices} />

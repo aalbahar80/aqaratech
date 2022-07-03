@@ -781,52 +781,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
       tags: *ref_4
-  /users:
-    post:
-      operationId: create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-      tags: &ref_5
-        - users
+  /leases/{id}/invoices:
     get:
-      operationId: findAll
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedResponseOfUserDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUserDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UserDto'
-      tags: *ref_5
-  /users/by-email:
-    get:
-      operationId: findOneByEmail
+      operationId: findInvoices
       parameters:
-        - name: email
+        - name: id
           required: true
+          in: path
+          schema:
+            type: string
+        - name: page
+          required: false
+          in: query
+          example: 1
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          example: 1
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 10
+            type: number
+        - name: q
+          required: false
           in: query
           schema:
             type: string
@@ -836,29 +818,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDto'
-        '404':
-          description: ''
-      tags: *ref_5
-  /users/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        '404':
-          description: ''
-      tags: *ref_5
+                title: PaginatedResponseOfLeaseInvoiceDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_4
   /leaseInvoices:
     post:
       operationId: create
@@ -879,8 +850,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: &ref_6
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: &ref_5
         - leaseInvoices
     get:
       operationId: findAll
@@ -924,7 +895,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
+      tags: *ref_5
   /leaseInvoices/{id}:
     get:
       operationId: findOne
@@ -941,7 +912,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
+      tags: *ref_5
     patch:
       operationId: update
       parameters:
@@ -962,8 +933,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: *ref_5
     delete:
       operationId: remove
       parameters:
@@ -978,7 +949,85 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: *ref_5
+  /users:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: &ref_6
+        - users
+    get:
+      operationId: findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedResponseOfUserDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfUserDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UserDto'
+      tags: *ref_6
+  /users/by-email:
+    get:
+      operationId: findOneByEmail
+      parameters:
+        - name: email
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '404':
+          description: ''
+      tags: *ref_6
+  /users/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '404':
+          description: ''
       tags: *ref_6
   /expenses:
     post:
@@ -2060,6 +2109,173 @@ components:
           type: string
           nullable: true
           default: null
+    LeaseInvoiceBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        lease:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+        - property
+        - unit
+        - lease
+        - tenant
+    LeaseInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - breadcrumbs
+        - amount
+        - postAt
+        - leaseId
+        - dueAt
+        - paidAt
+        - isPaid
+        - memo
+    LeaseInvoiceBasicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - amount
+        - postAt
+        - leaseId
+        - dueAt
+        - paidAt
+        - isPaid
+        - memo
+    UpdateLeaseInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
     RoleDto:
       type: object
       properties:
@@ -2127,89 +2343,6 @@ components:
         - updatedAt
         - email
         - roles
-    LeaseInvoiceDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
-          type: string
-          nullable: true
-          default: null
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
-        leaseId:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - amount
-        - postAt
-        - leaseId
-    UpdateLeaseInvoiceDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
-          type: string
-          nullable: true
-          default: null
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
     ExpenseDto:
       type: object
       properties:

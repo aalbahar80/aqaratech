@@ -1,15 +1,17 @@
 import {
   ApiHideProperty,
-  ApiPropertyOptional,
+  IntersectionType,
   OmitType,
   PartialType,
+  PickType,
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
 import { IsBoolean, IsISO8601, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
+class LeaseInvoiceRequiredDto extends AbstractDto {
   @IsPositive()
   amount: number;
 
@@ -18,20 +20,18 @@ export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
 
   @Nanoid()
   leaseId: string;
+}
 
-  @ApiPropertyOptional()
+class LeaseInvoiceOptionalDto {
   @IsISO8601()
   dueAt: Date | null = null;
 
-  @ApiPropertyOptional()
   @IsISO8601()
   paidAt: Date | null = null;
 
-  @ApiPropertyOptional()
   @IsBoolean()
   isPaid: boolean = false;
 
-  @ApiPropertyOptional()
   @IsString()
   memo: string | null = null;
 
@@ -40,6 +40,30 @@ export class LeaseInvoiceDto extends AbstractDto implements LeaseInvoice {
   mfPaymentId: string | null;
 }
 
-export class UpdateLeaseInvoiceDto extends PartialType(
-  OmitType(LeaseInvoiceDto, ['leaseId']),
+export class LeaseInvoiceBasicDto extends IntersectionType(
+  LeaseInvoiceRequiredDto,
+  LeaseInvoiceOptionalDto,
 ) {}
+
+export class LeaseInvoiceDto extends LeaseInvoiceBasicDto {
+  breadcrumbs: LeaseInvoiceBreadcrumbsDto;
+}
+
+export class CreateLeaseInvoiceDto
+  extends IntersectionType(
+    LeaseInvoiceRequiredDto,
+    PartialType(LeaseInvoiceOptionalDto),
+  )
+  implements Partial<LeaseInvoice> {}
+
+export class UpdateLeaseInvoiceDto extends PartialType(
+  OmitType(CreateLeaseInvoiceDto, ['leaseId']),
+) {}
+
+export class LeaseInvoiceBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'tenant',
+  'portfolio',
+  'property',
+  'unit',
+  'lease',
+]) {}

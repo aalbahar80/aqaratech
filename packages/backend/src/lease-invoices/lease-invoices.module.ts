@@ -4,6 +4,7 @@ import { LeaseInvoicesController } from './lease-invoices.controller';
 
 @Module({
   controllers: [LeaseInvoicesController],
-  providers: [LeaseInvoicesService]
+  providers: [LeaseInvoicesService],
+  exports: [LeaseInvoicesService],
 })
 export class LeaseInvoicesModule {}

@@ -1,12 +1,15 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import {
+  LeaseInvoiceBreadcrumbsDto,
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
@@ -41,21 +44,25 @@ export class LeaseInvoicesService {
   async findAll({
     pageOptionsDto,
     user,
+    where,
   }: {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
+    where?: Prisma.LeaseWhereInput;
   }): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     const { page, take, q } = pageOptionsDto;
+
+    const filter: Prisma.LeaseInvoiceWhereInput = {
+      AND: [accessibleBy(user.ability).LeaseInvoice, ...(where ? [where] : [])],
+    };
 
     let [results, itemCount] = await Promise.all([
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(user.ability).LeaseInvoice,
+        where: filter,
       }),
-      this.prisma.leaseInvoice.count({
-        where: accessibleBy(user.ability).LeaseInvoice,
-      }),
+      this.prisma.leaseInvoice.count({ where: filter }),
     ]);
 
     if (q) {
@@ -65,17 +72,30 @@ export class LeaseInvoicesService {
         keys: ['id'],
       });
     }
+    const promises = results.map(async (result) => {
+      const breadcrumbs = await this.getBreadcrumbs(result.id);
+      return {
+        ...result,
+        breadcrumbs,
+      };
+    });
+
+    const invoices = await Promise.all(promises);
 
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
     });
 
-    return { meta, results };
+    return { meta, results: invoices };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.leaseInvoice.findUnique({ where: { id } });
+  async findOne({ id }: { id: string }) {
+    const [lease, breadcrumbs] = await Promise.all([
+      this.prisma.leaseInvoice.findUnique({ where: { id } }),
+      this.getBreadcrumbs(id),
+    ]);
+    return { ...lease, breadcrumbs };
   }
 
   update({
@@ -100,5 +120,51 @@ export class LeaseInvoicesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.leaseInvoice.delete({ where: { id } });
+  }
+
+  // ::: HELPERS :::
+
+  async getBreadcrumbs(id: string): Promise<LeaseInvoiceBreadcrumbsDto> {
+    const invoice = await this.prisma.leaseInvoice.findUnique({
+      where: { id },
+      select: {
+        leaseId: true,
+        lease: {
+          select: {
+            tenantId: true,
+            unit: {
+              select: {
+                id: true,
+                propertyId: true,
+                property: { select: { portfolioId: true } },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return {
+      portfolio: {
+        rel: Rel.Portfolio,
+        href: `/portfolios/${invoice.lease.unit.property.portfolioId}`,
+      },
+      property: {
+        rel: Rel.Property,
+        href: `/properties/${invoice.lease.unit.propertyId}`,
+      },
+      unit: {
+        rel: Rel.Unit,
+        href: `/units/${invoice.lease.unit.id}`,
+      },
+      tenant: {
+        rel: Rel.Tenant,
+        href: `/tenants/${invoice.lease.tenantId}`,
+      },
+      lease: {
+        rel: Rel.Lease,
+        href: `/leases/${invoice.leaseId}`,
+      },
+    };
   }
 }

@@ -25,6 +25,7 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import {
+  LeaseInvoiceBasicDto,
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
@@ -39,11 +40,11 @@ export class LeaseInvoicesController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
   @ApiHeader({ name: ROLE_HEADER_NAME })
-  @ApiCreatedResponse({ type: LeaseInvoiceDto })
+  @ApiCreatedResponse({ type: LeaseInvoiceBasicDto })
   create(
     @User() user: IUser,
     @Body() createLeaseInvoiceDto: LeaseInvoiceDto,
-  ): Promise<LeaseInvoiceDto> {
+  ): Promise<LeaseInvoiceBasicDto> {
     return this.leaseInvoicesService.create({ createLeaseInvoiceDto, user });
   }
 
@@ -69,12 +70,12 @@ export class LeaseInvoicesController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'LeaseInvoice' })
-  @ApiOkResponse({ type: LeaseInvoiceDto })
+  @ApiOkResponse({ type: LeaseInvoiceBasicDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
-  ): Promise<LeaseInvoiceDto> {
+  ): Promise<LeaseInvoiceBasicDto> {
     return this.leaseInvoicesService.update({
       id,
       updateLeaseInvoiceDto,
@@ -84,8 +85,8 @@ export class LeaseInvoicesController {
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'LeaseInvoice' })
-  @ApiOkResponse({ type: LeaseInvoiceDto })
-  remove(@Param('id') id: string): Promise<LeaseInvoiceDto> {
+  @ApiOkResponse({ type: LeaseInvoiceBasicDto })
+  remove(@Param('id') id: string): Promise<LeaseInvoiceBasicDto> {
     return this.leaseInvoicesService.remove({ id });
   }
 }
