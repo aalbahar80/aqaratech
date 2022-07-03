@@ -9,14 +9,14 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "pnpm run generate && tsc",
-        "dev": "pnpm run generate && tsc",
-        "dev:watch": "nodemon -V --delay 1 -w openapi.yaml --exec \"pnpm run dev\"",
+        "dev": "tsx watcher.ts",
         "generate": "./gen-sdk-docker.sh"
     },
     "devDependencies": {
         "@openapitools/openapi-generator-cli": "2.5.1",
         "@self/backend": "workspace:0.0.1",
-        "nodemon": "2.0.18",
+        "chokidar": "3.5.3",
+        "tsx": "3.7.0",
         "typescript": "4.7.4"
     }
 }
