@@ -430,7 +430,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyOneDto'
+                $ref: '#/components/schemas/PropertyDto'
       tags: *ref_3
     patch:
       operationId: update
@@ -1481,6 +1481,32 @@ components:
         - updatedAt
         - email
         - roles
+    BreadcrumbDto:
+      type: object
+      properties:
+        rel:
+          enum:
+            - Tenant
+            - Portfolio
+            - Property
+            - Unit
+            - Lease
+            - Maintenance Order
+          type: string
+        href:
+          type: string
+      required:
+        - rel
+        - href
+    PropertyBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
     PropertyDto:
       type: object
       properties:
@@ -1495,6 +1521,8 @@ components:
           format: date-time
           type: string
           readOnly: true
+        breadcrumbs:
+          $ref: '#/components/schemas/PropertyBreadcrumbsDto'
         portfolioId:
           type: string
         area:
@@ -1544,6 +1572,54 @@ components:
         - parcel
         - paci
         - cost
+    UpdatePropertyDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
+        block:
+          type: string
+          nullable: true
+          default: null
+        avenue:
+          type: string
+          nullable: true
+          default: null
+        street:
+          type: string
+          nullable: true
+          default: null
+        number:
+          type: string
+          nullable: true
+          default: null
+        parcel:
+          type: string
+          nullable: true
+          default: null
+        paci:
+          type: string
+          nullable: true
+          default: null
+        cost:
+          type: number
+          nullable: true
+          default: null
     HateoasDto:
       type: object
       properties:
@@ -1552,23 +1628,6 @@ components:
         mediaType:
           type: string
       required:
-        - href
-    BreadcrumbDto:
-      type: object
-      properties:
-        rel:
-          enum:
-            - Tenant
-            - Portfolio
-            - Property
-            - Unit
-            - Lease
-            - Maintenance Order
-          type: string
-        href:
-          type: string
-      required:
-        - rel
         - href
     UnitBreadcrumbsDto:
       type: object
@@ -1672,135 +1731,6 @@ components:
         - marketRent
         - type
         - usage
-    PropertyBreadcrumbsDto:
-      type: object
-      properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - portfolio
-    PropertyOneDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        units:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/UnitDto'
-        breadcrumbs:
-          $ref: '#/components/schemas/PropertyBreadcrumbsDto'
-        portfolioId:
-          type: string
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
-        block:
-          type: string
-          nullable: true
-          default: null
-        avenue:
-          type: string
-          nullable: true
-          default: null
-        street:
-          type: string
-          nullable: true
-          default: null
-        number:
-          type: string
-          nullable: true
-          default: null
-        parcel:
-          type: string
-          nullable: true
-          default: null
-        paci:
-          type: string
-          nullable: true
-          default: null
-        cost:
-          type: number
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - units
-        - breadcrumbs
-        - portfolioId
-        - area
-        - block
-        - avenue
-        - street
-        - number
-        - parcel
-        - paci
-        - cost
-    UpdatePropertyDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
-        block:
-          type: string
-          nullable: true
-          default: null
-        avenue:
-          type: string
-          nullable: true
-          default: null
-        street:
-          type: string
-          nullable: true
-          default: null
-        number:
-          type: string
-          nullable: true
-          default: null
-        parcel:
-          type: string
-          nullable: true
-          default: null
-        paci:
-          type: string
-          nullable: true
-          default: null
-        cost:
-          type: number
-          nullable: true
-          default: null
     CreateUnitDto:
       type: object
       properties:

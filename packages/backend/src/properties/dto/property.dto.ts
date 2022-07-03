@@ -61,7 +61,9 @@ class PropertyOptionalDto {
 export class PropertyDto extends IntersectionType(
   PropertyRequiredDto,
   PropertyOptionalDto,
-) {}
+) {
+  breadcrumbs?: PropertyBreadcrumbsDto;
+}
 
 export class CreatePropertyDto
   extends IntersectionType(
@@ -77,10 +79,3 @@ export class UpdatePropertyDto extends PartialType(
 export class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
 ]) {}
-
-export class PropertyOneDto extends PropertyDto {
-  breadcrumbs: PropertyBreadcrumbsDto;
-
-  @ApiProperty({ readOnly: true })
-  units: UnitDto[];
-}

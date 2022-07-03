@@ -26,7 +26,6 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import {
   PropertyDto,
-  PropertyOneDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
 import { UnitDto } from 'src/units/dto/unit.dto';
@@ -61,7 +60,7 @@ export class PropertiesController {
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Property' })
-  @ApiOkResponse({ type: PropertyOneDto })
+  @ApiOkResponse({ type: PropertyDto })
   findOne(@Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.findOne({ id });
   }
