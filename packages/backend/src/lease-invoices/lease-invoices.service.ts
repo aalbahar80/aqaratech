@@ -85,6 +85,7 @@ export class LeaseInvoicesService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
+      pageSize: invoices.length,
     });
 
     return { meta, results: invoices };

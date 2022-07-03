@@ -2457,6 +2457,12 @@ components:
           type: boolean
         hasNextPage:
           type: boolean
+        pageSize:
+          type: number
+        start:
+          type: number
+        end:
+          type: number
       required:
         - page
         - take
@@ -2464,6 +2470,9 @@ components:
         - pageCount
         - hasPreviousPage
         - hasNextPage
+        - pageSize
+        - start
+        - end
     PaginatedMetaDto:
       type: object
       properties:

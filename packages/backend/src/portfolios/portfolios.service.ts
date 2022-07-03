@@ -74,6 +74,7 @@ export class PortfoliosService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
+      pageSize: results.length,
     });
 
     return { meta, results };

@@ -78,6 +78,7 @@ export class ExpensesService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
+      pageSize: results.length,
     });
 
     return { meta, results };

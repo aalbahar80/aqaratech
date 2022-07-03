@@ -100,6 +100,7 @@ export class LeasesService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
+      pageSize: leases.length,
     });
 
     return { meta, results: leases };

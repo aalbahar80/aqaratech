@@ -87,6 +87,7 @@ export class UnitsService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: pageOptionsDto,
+      pageSize: data.length,
     });
 
     const results = data.map((unit) => {

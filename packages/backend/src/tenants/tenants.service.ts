@@ -77,6 +77,7 @@ export class TenantsService {
     const meta = new PaginatedDto({
       itemCount,
       pageOptionsDto: tenantPageOptionsDto,
+      pageSize: results.length,
     });
 
     return { meta, results };
