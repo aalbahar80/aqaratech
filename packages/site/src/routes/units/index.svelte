@@ -19,4 +19,4 @@
 	export let data: Prop['data'];
 </script>
 
-<UnitsList units={data.results || []} />
+<UnitsList units={data.results} />
