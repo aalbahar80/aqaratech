@@ -680,7 +680,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseDto'
+                $ref: '#/components/schemas/LeaseBasicDto'
       tags: &ref_4
         - leases
     get:
@@ -763,7 +763,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseDto'
+                $ref: '#/components/schemas/LeaseBasicDto'
       tags: *ref_4
     delete:
       operationId: remove
@@ -779,7 +779,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseDto'
+                $ref: '#/components/schemas/LeaseBasicDto'
       tags: *ref_4
   /users:
     post:
@@ -1215,6 +1215,45 @@ components:
         - tenantName
         - address
         - unitLabel
+    BreadcrumbDto:
+      type: object
+      properties:
+        rel:
+          enum:
+            - Tenant
+            - Portfolio
+            - Property
+            - Unit
+            - Lease
+            - Maintenance Order
+          type: string
+        href:
+          type: string
+      required:
+        - rel
+        - href
+    LeaseBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+        - property
+        - unit
+        - tenant
     TenantLeaseDto:
       type: object
       properties:
@@ -1257,6 +1296,8 @@ components:
           default: null
         ext:
           $ref: '#/components/schemas/LeaseExtendedDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
     TenantOneDto:
       type: object
       properties:
@@ -1530,23 +1571,6 @@ components:
           type: string
           nullable: true
           default: null
-    BreadcrumbDto:
-      type: object
-      properties:
-        rel:
-          enum:
-            - Tenant
-            - Portfolio
-            - Property
-            - Unit
-            - Lease
-            - Maintenance Order
-          type: string
-        href:
-          type: string
-      required:
-        - rel
-        - href
     PropertyBreadcrumbsDto:
       type: object
       properties:
@@ -1904,6 +1928,63 @@ components:
           readOnly: true
         ext:
           $ref: '#/components/schemas/LeaseExtendedDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - ext
+        - breadcrumbs
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
+    LeaseBasicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
         tenantId:
           type: string
         unitId:
@@ -2291,6 +2372,8 @@ components:
           readOnly: true
         ext:
           $ref: '#/components/schemas/LeaseExtendedDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
         tenantId:
           type: string
         unitId:
@@ -2323,6 +2406,8 @@ components:
         - id
         - createdAt
         - updatedAt
+        - ext
+        - breadcrumbs
         - tenantId
         - unitId
         - start

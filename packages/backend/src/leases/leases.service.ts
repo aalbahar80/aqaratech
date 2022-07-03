@@ -6,8 +6,10 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import {
+  LeaseBreadcrumbsDto,
   LeaseDto,
   LeaseExtendedDto,
   UpdateLeaseDto,
@@ -83,9 +85,15 @@ export class LeasesService {
       });
     }
 
-    const promises = results.map((lease) =>
-      this.getExtendedInfo(lease.id).then((ext) => ({ ...lease, ext })),
-    );
+    const promises = results.map((lease) => {
+      const ext = this.getExtendedInfo(lease.id);
+      const breadcrumbs = this.getBreadcrumbs(lease.id);
+      return Promise.all([ext, breadcrumbs]).then(([ext, breadcrumbs]) => ({
+        ...lease,
+        ext,
+        breadcrumbs,
+      }));
+    });
 
     const leases = await Promise.all(promises);
 
@@ -98,10 +106,13 @@ export class LeasesService {
   }
 
   async findOne({ id }: { id: string }) {
-    const lease = await this.prisma.lease.findUnique({ where: { id } });
-    const ext = await this.getExtendedInfo(id);
+    const [lease, ext, breadcrumbs] = await Promise.all([
+      this.prisma.lease.findUnique({ where: { id } }),
+      this.getExtendedInfo(id),
+      this.getBreadcrumbs(id),
+    ]);
 
-    return { ...lease, ext };
+    return { ...lease, ext, breadcrumbs };
   }
 
   update({
@@ -152,5 +163,42 @@ export class LeasesService {
     );
 
     return { tenantName, unitLabel, address };
+  }
+
+  // ::: HELPERS :::
+
+  async getBreadcrumbs(id: string): Promise<LeaseBreadcrumbsDto> {
+    const lease = await this.prisma.lease.findUnique({
+      where: { id },
+      select: {
+        tenantId: true,
+        unit: {
+          select: {
+            id: true,
+            propertyId: true,
+            property: { select: { portfolioId: true } },
+          },
+        },
+      },
+    });
+
+    return {
+      portfolio: {
+        rel: Rel.Portfolio,
+        href: `/portfolios/${lease.unit.property.portfolioId}`,
+      },
+      property: {
+        rel: Rel.Property,
+        href: `/properties/${lease.unit.propertyId}`,
+      },
+      unit: {
+        rel: Rel.Unit,
+        href: `/units/${lease.unit.id}`,
+      },
+      tenant: {
+        rel: Rel.Tenant,
+        href: `/tenants/${lease.tenantId}`,
+      },
+    };
   }
 }

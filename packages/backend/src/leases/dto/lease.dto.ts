@@ -1,4 +1,9 @@
-import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
+import {
+  IntersectionType,
+  OmitType,
+  PartialType,
+  PickType,
+} from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
 import {
   IsBoolean,
@@ -8,6 +13,7 @@ import {
   IsString,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class LeaseRequiredDto extends AbstractDto {
@@ -41,11 +47,14 @@ class LeaseOptionalDto {
   license: string | null = null;
 }
 
-export class LeaseDto extends IntersectionType(
+export class LeaseBasicDto extends IntersectionType(
   LeaseRequiredDto,
   LeaseOptionalDto,
-) {
-  ext?: LeaseExtendedDto;
+) {}
+
+export class LeaseDto extends LeaseBasicDto {
+  ext: LeaseExtendedDto;
+  breadcrumbs: LeaseBreadcrumbsDto;
 }
 
 export class CreateLeaseDto
@@ -61,3 +70,10 @@ export class LeaseExtendedDto {
   address: string;
   unitLabel: string;
 }
+
+export class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'tenant',
+  'portfolio',
+  'property',
+  'unit',
+]) {}

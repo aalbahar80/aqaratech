@@ -24,7 +24,11 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
+import {
+  LeaseBasicDto,
+  LeaseDto,
+  UpdateLeaseDto,
+} from 'src/leases/dto/lease.dto';
 import { LeasesService } from './leases.service';
 
 @Controller('leases')
@@ -36,11 +40,11 @@ export class LeasesController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Lease' })
   @ApiHeader({ name: ROLE_HEADER_NAME })
-  @ApiCreatedResponse({ type: LeaseDto })
+  @ApiCreatedResponse({ type: LeaseBasicDto })
   create(
     @User() user: IUser,
     @Body() createLeaseDto: LeaseDto,
-  ): Promise<LeaseDto> {
+  ): Promise<LeaseBasicDto> {
     return this.leasesService.create({ createLeaseDto, user });
   }
 
@@ -63,19 +67,19 @@ export class LeasesController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Lease' })
-  @ApiOkResponse({ type: LeaseDto })
+  @ApiOkResponse({ type: LeaseBasicDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseDto: UpdateLeaseDto,
-  ): Promise<LeaseDto> {
+  ): Promise<LeaseBasicDto> {
     return this.leasesService.update({ id, updateLeaseDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Lease' })
-  @ApiOkResponse({ type: LeaseDto })
-  remove(@Param('id') id: string): Promise<LeaseDto> {
+  @ApiOkResponse({ type: LeaseBasicDto })
+  remove(@Param('id') id: string): Promise<LeaseBasicDto> {
     return this.leasesService.remove({ id });
   }
 }
