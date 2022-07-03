@@ -7,7 +7,7 @@
 	import { classes } from '$lib/utils';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
-	import type { PaginatedResponseOfLeaseInvoiceDto } from '@self/sdk';
+	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import {
 		Check,
 		ChevronRight,
@@ -21,7 +21,7 @@
 	import TeenyiconsReceiptSolid from '~icons/teenyicons/receipt-solid';
 	import Chip from '../Chip.svelte';
 
-	export let invoices: PaginatedResponseOfLeaseInvoiceDto;
+	export let invoices: PaginatedLeaseInvoiceDto;
 	export let leaseId: string | undefined = undefined;
 
 	const hideActions = !$session.user?.role.isAdmin;

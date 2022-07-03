@@ -6,11 +6,11 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { PaginatedResponseOfPropertyDto, PortfolioDto } from '@self/sdk';
+	import type { PaginatedPropertyDto, PortfolioDto } from '@self/sdk';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
 
 	export let portfolio: PortfolioDto;
-	export let properties: PaginatedResponseOfPropertyDto;
+	export let properties: PaginatedPropertyDto;
 
 	let details: [string, string | null][];
 	$: details = [

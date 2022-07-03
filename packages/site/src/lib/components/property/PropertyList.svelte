@@ -2,9 +2,9 @@
 	import { page } from '$app/stores';
 	import PropertyCard from '$components/property/PropertyCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { PaginatedResponseOfPropertyDto } from '@self/sdk';
+	import type { PaginatedPropertyDto } from '@self/sdk';
 
-	export let properties: PaginatedResponseOfPropertyDto;
+	export let properties: PaginatedPropertyDto;
 
 	const createHref = $page.url.pathname.startsWith('/portfolios')
 		? `/new/properties?portfolioId=${$page.url.pathname.split('/').pop()}`

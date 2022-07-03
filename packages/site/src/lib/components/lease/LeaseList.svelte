@@ -3,11 +3,11 @@
 	import { getCreateHref } from '$components/lease/utils';
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { PaginatedResponseOfLeaseDto } from '@self/sdk';
+	import type { PaginatedLeaseDto } from '@self/sdk';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let leases: PaginatedResponseOfLeaseDto;
+	export let leases: PaginatedLeaseDto;
 	export let showIndex = false;
 
 	const createHref = getCreateHref($page.url.pathname);

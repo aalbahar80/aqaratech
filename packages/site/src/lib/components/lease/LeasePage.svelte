@@ -7,13 +7,13 @@
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { Lease } from '$models/classes/lease.class';
-	import type { LeaseDto, PaginatedResponseOfLeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 
 	export let lease: LeaseDto;
-	export let invoices: PaginatedResponseOfLeaseInvoiceDto;
+	export let invoices: PaginatedLeaseInvoiceDto;
 
 	const details: [string, string | null][] = [
 		['Tenant', lease.ext.tenantName],
