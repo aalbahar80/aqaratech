@@ -39,7 +39,7 @@ export class PaginatedDto {
   // TODO fix pagination meta when no results
   // handle when requesting page 5 but there are only 2 pages
   constructor({ pageOptionsDto, itemCount, pageSize }: IPageMetaDtoParameters) {
-    const offset = (pageOptionsDto.page - 1) * pageSize;
+    const offset = (pageOptionsDto.page - 1) * pageOptionsDto.take;
     this.page = pageOptionsDto.page;
     this.take = pageOptionsDto.take;
     this.itemCount = itemCount;
