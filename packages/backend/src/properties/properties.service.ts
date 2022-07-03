@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -128,5 +129,34 @@ export class PropertiesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.property.delete({ where: { id } });
+  }
+
+  async findUnits({
+    pageOptionsDto,
+    user,
+    id,
+  }: {
+    pageOptionsDto: PageOptionsDto;
+    user: IUser;
+    id: string;
+  }) {
+    const { page, take } = pageOptionsDto;
+
+    const where: Prisma.UnitWhereInput = {
+      AND: [accessibleBy(user.ability).Unit, { propertyId: { equals: id } }],
+    };
+
+    let [results, itemCount] = await Promise.all([
+      this.prisma.unit.findMany({
+        take,
+        skip: (page - 1) * take,
+        where,
+      }),
+      this.prisma.unit.count({ where }),
+    ]);
+
+    const meta = new PaginatedDto({ itemCount, pageOptionsDto });
+
+    return { meta, results };
   }
 }

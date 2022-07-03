@@ -29,6 +29,7 @@ import {
   PropertyOneDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
+import { UnitDto } from 'src/units/dto/unit.dto';
 import { PropertiesService } from './properties.service';
 
 @Controller('properties')
@@ -81,5 +82,16 @@ export class PropertiesController {
   @ApiOkResponse({ type: PropertyDto })
   remove(@Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.remove({ id });
+  }
+
+  @Get(':id/units')
+  @CheckAbilities({ action: Action.Read, subject: 'Property' })
+  @ApiPaginatedResponse(UnitDto)
+  findLeases(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<PaginatedMetaDto<UnitDto>> {
+    return this.propertiesService.findUnits({ id, user, pageOptionsDto });
   }
 }
