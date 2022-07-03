@@ -222,14 +222,24 @@ export class CaslAbilityFactory {
         ],
       });
 
-      can(Action.Manage, ['LeaseInvoice'], {
+      // Seperate Read ability for better performance
+      can(Action.Read, ['LeaseInvoice'], {
+        id: { in: manageable.leaseInvoices },
+      });
+
+      can([Action.Create, Action.Update, Action.Delete], ['LeaseInvoice'], {
         OR: [
           { id: { in: manageable.leaseInvoices } },
           { leaseId: { in: manageable.leases } },
         ],
       });
 
-      can(Action.Manage, ['Expense'], {
+      // Seperate Read ability for better performance
+      can(Action.Read, ['Expense'], {
+        id: { in: manageable.expenses },
+      });
+
+      can([Action.Create, Action.Update, Action.Delete], ['Expense'], {
         OR: [
           { id: { in: manageable.expenses } },
           {
@@ -243,7 +253,12 @@ export class CaslAbilityFactory {
         ],
       });
 
-      can(Action.Manage, ['MaintenanceOrder'], {
+      // Seperate Read ability for better performance
+      can(Action.Read, ['MaintenanceOrder'], {
+        id: { in: manageable.maintenanceOrders },
+      });
+
+      can([Action.Create, Action.Update, Action.Delete], ['MaintenanceOrder'], {
         OR: [
           { id: { in: manageable.maintenanceOrders } },
           {
