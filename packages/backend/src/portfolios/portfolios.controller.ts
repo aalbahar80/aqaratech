@@ -26,7 +26,11 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
-import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
+import {
+  CreatePortfolioDto,
+  PortfolioDto,
+  UpdatePortfolioDto,
+} from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
 @Controller('portfolios')
@@ -44,7 +48,7 @@ export class PortfoliosController {
   @ApiCreatedResponse({ type: PortfolioDto })
   create(
     @User() user: IUser,
-    @Body() createPortfolioDto: PortfolioDto,
+    @Body() createPortfolioDto: CreatePortfolioDto,
   ): Promise<PortfolioDto> {
     return this.portfoliosService.create({ createPortfolioDto, user });
   }

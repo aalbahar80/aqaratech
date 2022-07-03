@@ -163,7 +163,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PortfolioDto'
+              $ref: '#/components/schemas/CreatePortfolioDto'
       responses:
         '201':
           description: ''
@@ -1377,6 +1377,53 @@ components:
           type: string
           nullable: true
           default: null
+    CreatePortfolioDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        organizationId:
+          type: string
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        civilid:
+          type: string
+          nullable: true
+          default: null
+        phone:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+          nullable: true
+          default: null
+        dob:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - organizationId
+        - fullName
     PortfolioDto:
       type: object
       properties:
@@ -1391,6 +1438,12 @@ components:
           format: date-time
           type: string
           readOnly: true
+        organizationId:
+          type: string
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
         shortName:
           type: string
           nullable: true
@@ -1412,18 +1465,17 @@ components:
           type: string
           nullable: true
           default: null
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
       required:
         - id
         - createdAt
         - updatedAt
         - organizationId
         - fullName
+        - shortName
+        - civilid
+        - phone
+        - email
+        - dob
     UpdatePortfolioDto:
       type: object
       properties:
@@ -1438,6 +1490,10 @@ components:
           format: date-time
           type: string
           readOnly: true
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
         shortName:
           type: string
           nullable: true
@@ -1459,10 +1515,6 @@ components:
           type: string
           nullable: true
           default: null
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
     BreadcrumbDto:
       type: object
       properties:

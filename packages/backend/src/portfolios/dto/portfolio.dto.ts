@@ -1,4 +1,4 @@
-import { ApiPropertyOptional, OmitType, PartialType } from '@nestjs/swagger';
+import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
 import {
   IsEmail,
@@ -10,33 +10,42 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-export class PortfolioDto extends AbstractDto implements Portfolio {
+class PortfolioRequiredDto extends AbstractDto {
   @Nanoid()
   organizationId: string;
 
   @Length(1, 255)
   fullName: string;
+}
 
-  @ApiPropertyOptional()
+class PortfolioOptionalDto {
   @IsString()
   shortName: string | null = null;
 
-  @ApiPropertyOptional()
   @IsString()
   civilid: string | null = null;
 
-  @ApiPropertyOptional()
   @IsPhoneNumber()
   phone: string | null = null;
 
-  @ApiPropertyOptional()
   @IsEmail()
   email: string | null = null;
 
-  @ApiPropertyOptional()
   @IsISO8601()
   dob: Date | null = null;
 }
+
+export class PortfolioDto extends IntersectionType(
+  PortfolioRequiredDto,
+  PortfolioOptionalDto,
+) {}
+
+export class CreatePortfolioDto
+  extends IntersectionType(
+    PortfolioRequiredDto,
+    PartialType(PortfolioOptionalDto),
+  )
+  implements Partial<Portfolio> {}
 
 export class UpdatePortfolioDto extends PartialType(
   OmitType(PortfolioDto, ['organizationId']),
