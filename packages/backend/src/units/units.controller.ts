@@ -36,7 +36,7 @@ import { UnitsService } from './units.service';
 export class UnitsController {
   constructor(
     private readonly unitsService: UnitsService,
-    private readonly leasesService: LeasesService,
+    private leasesService: LeasesService,
   ) {}
 
   @Post()

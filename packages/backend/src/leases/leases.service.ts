@@ -22,7 +22,7 @@ import { search } from 'src/utils/search';
 export class LeasesService {
   constructor(
     private prisma: PrismaService,
-    private readonly unitsService: UnitsService,
+    private unitsService: UnitsService,
     private readonly propertiesService: PropertiesService,
     private readonly tenantsService: TenantsService,
   ) {}

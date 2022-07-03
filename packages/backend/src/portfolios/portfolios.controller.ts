@@ -39,7 +39,7 @@ import { PortfoliosService } from './portfolios.service';
 export class PortfoliosController {
   constructor(
     private readonly portfoliosService: PortfoliosService,
-    private properties: PropertiesService,
+    private propertiesService: PropertiesService,
   ) {}
 
   @Post()
@@ -97,6 +97,6 @@ export class PortfoliosController {
     @Param('id') id: string,
   ): Promise<PaginatedMetaDto<PropertyDto>> {
     const where: Prisma.PropertyWhereInput = { portfolioId: { equals: id } };
-    return this.properties.findAll({ user, pageOptionsDto, where });
+    return this.propertiesService.findAll({ user, pageOptionsDto, where });
   }
 }

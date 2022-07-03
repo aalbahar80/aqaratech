@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { LeasesService } from 'src/leases/leases.service';
-import { PropertiesService } from 'src/properties/properties.service';
-import { TenantsService } from 'src/tenants/tenants.service';
+import { forwardRef, Module } from '@nestjs/common';
+import { LeasesModule } from 'src/leases/leases.module';
 import { UnitsController } from './units.controller';
 import { UnitsService } from './units.service';
 
 @Module({
   controllers: [UnitsController],
-  providers: [UnitsService, LeasesService, TenantsService, PropertiesService],
+  providers: [UnitsService],
+  exports: [UnitsService],
+  imports: [forwardRef(() => LeasesModule)],
 })
 export class UnitsModule {}
