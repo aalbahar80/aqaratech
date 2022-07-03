@@ -65,4 +65,4 @@
 </Heading>
 <Badge label={badge.label} badgeColor={badge.color} />
 <DetailsPane {details} {files} />
-<TrxColumn transactions={invoices} leaseId={lease.id} />
+<TrxColumn {invoices} leaseId={lease.id} />

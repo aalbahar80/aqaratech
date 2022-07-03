@@ -1,16 +1,13 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
-	import { isTRPCError } from '$lib/client/is-trpc-error';
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { trpc } from '$lib/client/trpc';
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import { Transaction } from '$lib/models/classes/transaction.class';
-	import { addErrorToast, addToast } from '$lib/stores/toast';
+	import { Transaction } from '$lib/models/classes';
+	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
-	import { getPaginatedItems } from '$lib/utils/table-utils';
+	import type { PaginatedResponseOfLeaseInvoiceDto } from '@self/sdk';
 	import {
 		Check,
 		ChevronRight,
@@ -19,77 +16,62 @@
 		X,
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import * as R from 'remeda';
 	import { scale } from 'svelte/transition';
 	import TeenyiconsReceiptSolid from '~icons/teenyicons/receipt-solid';
 	import Chip from '../Chip.svelte';
 
-	type Transactions = NonNullable<
-		InferQueryOutput<'tenants:read'>
-	>['leases'][number]['transactions'];
-	export let transactions: Transactions;
+	export let invoices: PaginatedResponseOfLeaseInvoiceDto;
 	export let leaseId: string | undefined = undefined;
 
-	const hideActions = !$session.authz?.isAdmin;
-	let pageIndex = 1;
-	let data: typeof transactions;
-	let totalPages: number;
-	let start: number;
-	let end: number;
-	$: ({ data, totalPages, start, end } = getPaginatedItems(
-		transactions,
-		pageIndex,
-		12,
-	));
+	const hideActions = !$session.user?.role.isAdmin;
 
 	const togglePaid = async (id: string, isPaid: boolean) => {
 		try {
-			const updated = await trpc().mutation('transactions:updatePaid', {
+			const updated = await $page.stuff.api.leaseInvoices.update({
 				id,
-				isPaid,
+				updateLeaseInvoiceDto: { isPaid },
 			});
-			// update transactions array
-			transactions = transactions.map((transaction) =>
-				transaction.id === id
+
+			// update invoices array
+			invoices.results = invoices.results.map((invoice) =>
+				invoice.id === id
 					? {
-							...transaction,
+							...invoice,
 							...updated,
 					  }
-					: transaction,
+					: invoice,
 			);
 		} catch (err) {
-			if (isTRPCError(err)) {
+			if (R.isError(err)) {
 				addToast({
 					props: {
 						kind: 'error',
-						title: `Error: ${err.data?.code}`,
-						subtitle: JSON.stringify(err.data?.zodError?.fieldErrors, null, 2),
+						title: `Error: ${err.name}`,
+						subtitle: JSON.stringify(err.message),
 					},
 				});
-			} else {
-				addErrorToast();
 			}
 		}
 	};
 
-	$: balance = transactions.reduce((total, transaction) => {
-		if (!transaction.isPaid) {
-			total -= transaction.amount;
+	$: balance = invoices.results.reduce((total, invoice) => {
+		if (!invoice.isPaid) {
+			total -= invoice.amount;
 		}
 		return total;
 	}, 0);
 </script>
 
 <section>
-	{#if transactions.length}
+	{#if invoices.results.length}
 		<!-- Section heading -->
 		<div class="section-heading">
 			<div
 				class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
 			>
 				<div class="ml-4 mt-2">
-					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						Transactions
-					</h3>
+					<h3 class="text-lg font-medium leading-6 text-gray-900">Invoices</h3>
 				</div>
 				<div>
 					<dt class="truncate text-sm font-medium text-gray-500">
@@ -103,8 +85,8 @@
 				</div>
 				{#if leaseId && !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
-						<a href={`/new/transactions?leaseId=${leaseId}`}>
-							Create new transaction
+						<a href={`/new/invoices?leaseId=${leaseId}`}>
+							Create new invoice
 						</a>
 					</div>
 				{/if}
@@ -113,7 +95,7 @@
 
 		<!-- List for small screens -->
 		<ul>
-			{#each data as transaction (transaction.id)}
+			{#each invoices.results as invoice (invoice.id)}
 				<li>
 					<!-- class="block bg-white px-4 py-4" -->
 					<svelte:element
@@ -122,7 +104,7 @@
 							hideActions ? '' : 'hover:bg-gray-50',
 							'block bg-white px-4 py-4',
 						)}
-						href={`/transactions/${transaction.id}`}
+						href={`/invoices/${invoice.id}`}
 					>
 						<span class="flex items-center space-x-4">
 							<span class="flex flex-1 space-x-2 truncate">
@@ -131,15 +113,15 @@
 									aria-hidden="true"
 								/>
 								<span class="flex flex-col truncate text-sm text-gray-500">
-									<span class="truncate">{transaction.memo || ''}</span>
+									<span class="truncate">{invoice.memo || ''}</span>
 									<span>
 										<span class="font-medium text-gray-900"
-											>{transaction.amount}</span
+											>{invoice.amount}</span
 										>{' '}
 										{'KWD'}
 									</span>
-									<time dateTime={transaction.postAt.toISOString()}
-										>{toUTCFormat(transaction.postAt)}</time
+									<time dateTime={invoice.postAt.toISOString()}
+										>{toUTCFormat(invoice.postAt)}</time
 									>
 								</span>
 							</span>
@@ -151,7 +133,7 @@
 									aria-hidden="true"
 								/>
 							{:else}
-								<Chip {...Transaction.getBadge(transaction)} />
+								<Chip {...Transaction.getBadge(invoice)} />
 							{/if}
 						</span>
 					</svelte:element>
@@ -174,14 +156,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each data as transaction (transaction.id)}
-						{@const chip = Transaction.getBadge(transaction)}
+					{#each invoices.results as invoice (invoice.id)}
+						{@const chip = Transaction.getBadge(invoice)}
 						<tr>
 							<td>
 								<div class="flex">
 									<svelte:element
 										this={hideActions ? 'div' : 'a'}
-										href={`/transactions/${transaction.id}`}
+										href={`/invoices/${invoice.id}`}
 										class="inline-flex space-x-2 truncate text-sm"
 										class:group={!hideActions}
 									>
@@ -190,27 +172,27 @@
 											aria-hidden="true"
 										/>
 										<p class="truncate text-gray-500 group-hover:text-gray-900">
-											{transaction.memo || ''}
+											{invoice.memo || ''}
 										</p>
 									</svelte:element>
 								</div>
 							</td>
 							<td class="text-right">
 								<span class="font-medium tabular-nums text-gray-900"
-									>{transaction.amount.toLocaleString()}
+									>{invoice.amount.toLocaleString()}
 								</span>
 								{'KWD'}
 							</td>
 							<td>
-								{#key transaction.isPaid}
+								{#key invoice.isPaid}
 									<div in:scale>
 										<Chip {...chip} />
 									</div>
 								{/key}
 							</td>
 							<td>
-								<time dateTime={transaction.postAt.toISOString()}
-									>{toUTCFormat(transaction.postAt)}</time
+								<time dateTime={invoice.postAt.toISOString()}
+									>{toUTCFormat(invoice.postAt)}</time
 								>
 							</td>
 							{#if hideActions}
@@ -223,34 +205,34 @@
 											{
 												icon: Eye,
 												label: 'View',
-												href: `/transactions/${transaction.id}`,
+												href: `/transactions/${invoice.id}`,
 											},
 											// {
 											// 	icon: PencilAlt,
 											// 	label: 'Edit',
-											// 	href: `/transactions/${transaction.id}/edit`,
+											// 	href: `/transactions/${invoice.id}/edit`,
 											// },
 											{
 												icon: ClipboardCopy,
 												label: 'Copy payment URL',
 												onClick: () => {
 													console.log($page);
-													copyTrxUrl(transaction.id, $page.url.origin);
+													copyTrxUrl(invoice.id, $page.url.origin);
 												},
 											},
-											transaction.isPaid
+											invoice.isPaid
 												? {
 														icon: X,
 														label: 'Mark as unpaid',
 														onClick: async () => {
-															await togglePaid(transaction.id, false);
+															await togglePaid(invoice.id, false);
 														},
 												  }
 												: {
 														icon: Check,
 														label: 'Mark as paid',
 														onClick: async () => {
-															await togglePaid(transaction.id, true);
+															await togglePaid(invoice.id, true);
 														},
 												  },
 										]}
@@ -266,25 +248,31 @@
 		<nav aria-label="Pagination">
 			<div class="hidden sm:block">
 				<p class="text-sm text-gray-700">
-					Showing <span class="font-medium">{start}</span> to
-					<span class="font-medium">{end}</span>
-					of{' '}
-					<span class="font-medium">{transactions.length}</span> results
+					Showing <span class="font-medium"
+						>{invoices.meta.take * (invoices.meta.page - 1) + 1}</span
+					>
+					to
+					<span class="font-medium"
+						>{invoices.meta.take * (invoices.meta.page - 1) +
+							invoices.results.length}</span
+					>
+					of
+					<span class="font-medium">{invoices.meta.itemCount}</span> results
 				</p>
 			</div>
 			<div>
-				<button
-					disabled={pageIndex <= 1}
+				<!-- <button
+					disabled={!invoices.meta.hasPreviousPage}
 					on:click={() => pageIndex > 1 && pageIndex--}
 				>
 					Previous
-				</button>
-				<button
-					disabled={pageIndex >= totalPages}
+				</button> -->
+				<!-- <button
+					disabled={!invoices.meta.hasNextPage}
 					on:click={() => pageIndex < totalPages && pageIndex++}
 				>
 					Next
-				</button>
+				</button> -->
 			</div>
 		</nav>
 	{:else}
