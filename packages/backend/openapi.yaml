@@ -726,17 +726,17 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedResponseOfUnitLeaseDto
+                title: PaginatedResponseOfLeaseDto
                 required:
                   - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUnitLeaseDto
+                  - title: ArrayOfLeaseDto
                     properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/UnitLeaseDto'
+                          $ref: '#/components/schemas/LeaseDto'
       tags: *ref_4
   /leases:
     post:
@@ -1940,80 +1940,6 @@ components:
           type: string
           nullable: true
           default: null
-    UnitLeaseTenantDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        shortName:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - fullName
-        - shortName
-    UnitLeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        tenant:
-          $ref: '#/components/schemas/UnitLeaseTenantDto'
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - tenant
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - deactivated
-        - notify
-        - license
     LeaseDto:
       type: object
       properties:
@@ -2314,5 +2240,79 @@ components:
           $ref: '#/components/schemas/PaginatedDto'
       required:
         - meta
+    UnitLeaseTenantDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - fullName
+        - shortName
+    UnitLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+        tenant:
+          $ref: '#/components/schemas/UnitLeaseTenantDto'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
+        - tenant
 security:
   - oauth-swagger: []

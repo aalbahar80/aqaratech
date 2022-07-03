@@ -14,6 +14,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -24,19 +25,19 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import {
-  CreateUnitDto,
-  UnitDto,
-  UnitLeaseDto,
-  UpdateUnitDto,
-} from 'src/units/dto/unit.dto';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
+import { LeasesService } from 'src/leases/leases.service';
+import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 @Controller('units')
 @ApiTags('units')
 @SwaggerAuth()
 export class UnitsController {
-  constructor(private readonly unitsService: UnitsService) {}
+  constructor(
+    private readonly unitsService: UnitsService,
+    private readonly leasesService: LeasesService,
+  ) {}
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Unit' })
@@ -86,12 +87,13 @@ export class UnitsController {
 
   @Get(':id/leases')
   @CheckAbilities({ action: Action.Read, subject: 'Unit' })
-  @ApiPaginatedResponse(UnitLeaseDto)
+  @ApiPaginatedResponse(LeaseDto)
   findLeases(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
-  ): Promise<PaginatedMetaDto<UnitLeaseDto>> {
-    return this.unitsService.findLeases({ id, user, pageOptionsDto });
+  ): Promise<PaginatedMetaDto<LeaseDto>> {
+    const where: Prisma.LeaseWhereInput = { unitId: { equals: id } };
+    return this.leasesService.findAll({ user, pageOptionsDto, where });
   }
 }

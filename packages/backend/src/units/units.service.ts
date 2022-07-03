@@ -165,44 +165,6 @@ export class UnitsService {
     return id;
   }
 
-  async findLeases({
-    pageOptionsDto,
-    user,
-    id,
-  }: {
-    pageOptionsDto: PageOptionsDto;
-    user: IUser;
-    id: string;
-  }) {
-    const { page, take } = pageOptionsDto;
-
-    const where: Prisma.LeaseWhereInput = {
-      AND: [accessibleBy(user.ability).Lease, { unitId: { equals: id } }],
-    };
-
-    let [results, itemCount] = await Promise.all([
-      this.prisma.lease.findMany({
-        take,
-        skip: (page - 1) * take,
-        where,
-        include: {
-          tenant: {
-            select: {
-              id: true,
-              fullName: true,
-              shortName: true,
-            },
-          },
-        },
-      }),
-      this.prisma.lease.count({ where }),
-    ]);
-
-    const meta = new PaginatedDto({ itemCount, pageOptionsDto });
-
-    return { meta, results };
-  }
-
   // ::: HELPERS :::
 
   href(id: string) {

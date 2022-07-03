@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -39,21 +40,25 @@ export class LeasesService {
   async findAll({
     pageOptionsDto,
     user,
+    where,
   }: {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
+    where?: Prisma.LeaseWhereInput;
   }): Promise<PaginatedMetaDto<LeaseDto>> {
     const { page, take, q } = pageOptionsDto;
+
+    const filter: Prisma.LeaseWhereInput = {
+      AND: [accessibleBy(user.ability).Lease, ...(where ? [where] : [])],
+    };
 
     let [results, itemCount] = await Promise.all([
       this.prisma.lease.findMany({
         take,
         skip: (page - 1) * take,
-        where: accessibleBy(user.ability).Lease,
+        where: filter,
       }),
-      this.prisma.lease.count({
-        where: accessibleBy(user.ability).Lease,
-      }),
+      this.prisma.lease.count({ where: filter }),
     ]);
 
     if (q) {
