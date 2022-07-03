@@ -4,15 +4,22 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { classMap } from '$lib/models/classes/all.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import type { PaginationInfo } from '$lib/utils/table-utils';
+	import type { PaginatedDto } from '@self/sdk';
 	import Pagination from './Pagination.svelte';
 	import Table from './Table.svelte';
 
-	export let entityTitle: EntityTitle;
+	interface Data {
+		results: Array<{ id: string }>;
+		pagination: PaginatedDto;
+	}
 
-	let modifier: number = 1;
+	export let data: Data;
+	$: entityTitle = $page.params.entity as EntityTitle;
 	$: entity = classMap[entityTitle];
 	$: createHref = `/new/${entity?.plural}`;
+
+	// animation
+	let modifier: number = 1;
 
 	const setModifier = (from: number, to: number) => {
 		if (from < to) {
@@ -31,12 +38,8 @@
 		modifier = result;
 	});
 
-	export let total: number;
-	export let pagination: PaginationInfo;
-	export let data: { id: string; [key: string]: unknown }[];
-
 	// add view & edit to each row
-	$: rows = data.map((row) => ({
+	$: rows = data.results.map((row) => ({
 		...row,
 		view: `${row.id}`,
 		// edit: `${row.id}/edit`,
@@ -53,7 +56,7 @@
 	</a>
 	{#if rows.length}
 		<Table {rows} {modifier} />
-		<Pagination {total} currentSize={data.length} {pagination} />
+		<Pagination pagination={data.pagination} />
 	{:else}
 		<EmptyState {entity} {createHref} />
 	{/if}

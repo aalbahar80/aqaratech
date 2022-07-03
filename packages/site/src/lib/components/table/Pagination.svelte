@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { getTableUrl, type PaginationInfo } from '$lib/utils/table-utils';
+	import { getTableUrl } from '$lib/utils/table-utils';
+	import type { PaginatedDto } from '@self/sdk';
 
-	export let total: number;
-	export let currentSize: number;
-	export let pagination: PaginationInfo;
+	export let pagination: PaginatedDto;
 
 	const newPageHref = (url: URL, newPageIndex: number) =>
 		getTableUrl(url, { p: newPageIndex.toString() });
 
-	$: hasNextPage = pagination.start + pagination.size < total;
-	$: hasPrevPage = pagination.pageIndex > 1;
-	$: nextPageHref = newPageHref($page.url, pagination.pageIndex + 1);
-	$: prevPageHref = newPageHref($page.url, pagination.pageIndex - 1);
+	$: nextPageHref = newPageHref($page.url, pagination.page + 1);
+	$: prevPageHref = newPageHref($page.url, pagination.page - 1);
 </script>
 
 <nav
@@ -22,16 +19,16 @@
 	<div class="hidden sm:block">
 		<p class="text-sm text-gray-700">
 			Showing <span class="font-medium">{pagination.start}</span> to
-			<span class="font-medium">{pagination.start + currentSize - 1}</span>
+			<span class="font-medium">{pagination.end}</span>
 			of{' '}
-			<span class="font-medium">{total}</span> results
+			<span class="font-medium">{pagination.pageSize}</span> results
 		</p>
 	</div>
 	<div class="flex flex-1 justify-between sm:justify-end">
 		<a
 			class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			class:disabled-anchor={!hasPrevPage}
-			href={hasPrevPage ? prevPageHref : null}
+			class:disabled-anchor={!pagination.hasPreviousPage}
+			href={pagination.hasPreviousPage ? prevPageHref : null}
 			rel="prev"
 			sveltekit:noscroll
 			sveltekit:prefetch
@@ -40,8 +37,8 @@
 		</a>
 		<a
 			class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			class:disabled-anchor={!hasNextPage}
-			href={hasNextPage ? nextPageHref : null}
+			class:disabled-anchor={!pagination.hasNextPage}
+			href={pagination.hasNextPage ? nextPageHref : null}
 			rel="next"
 			sveltekit:noscroll
 			sveltekit:prefetch
