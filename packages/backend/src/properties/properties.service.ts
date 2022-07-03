@@ -42,13 +42,13 @@ export class PropertiesService {
   }
 
   async findAll({
-    propertyPageOptionsDto,
+    pageOptionsDto,
     user,
   }: {
-    propertyPageOptionsDto: PageOptionsDto;
+    pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<PaginatedMetaDto<PropertyDto>> {
-    const { page, take, q } = propertyPageOptionsDto;
+    const { page, take, q } = pageOptionsDto;
 
     let [results, itemCount] = await Promise.all([
       this.prisma.property.findMany({
@@ -71,7 +71,7 @@ export class PropertiesService {
 
     const meta = new PaginatedDto({
       itemCount,
-      pageOptionsDto: propertyPageOptionsDto,
+      pageOptionsDto: pageOptionsDto,
     });
 
     return { meta, results };
@@ -146,17 +146,6 @@ export class PropertiesService {
       AND: [accessibleBy(user.ability).Unit, { propertyId: { equals: id } }],
     };
 
-    let [results, itemCount] = await Promise.all([
-      this.prisma.unit.findMany({
-        take,
-        skip: (page - 1) * take,
-        where,
-      }),
-      this.prisma.unit.count({ where }),
-    ]);
-
-    const meta = new PaginatedDto({ itemCount, pageOptionsDto });
-
-    return { meta, results };
+    return this.units.findAll({ user, pageOptionsDto });
   }
 }

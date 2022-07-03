@@ -54,9 +54,9 @@ export class UnitsController {
   @ApiPaginatedResponse(UnitDto)
   findAll(
     @User() user: IUser,
-    @Query() unitPageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<UnitDto>> {
-    return this.unitsService.findAll({ unitPageOptionsDto, user });
+    return this.unitsService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')

@@ -52,10 +52,10 @@ export class LeaseInvoicesController {
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findAll(
     @User() user: IUser,
-    @Query() leaseInvoicePageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     return this.leaseInvoicesService.findAll({
-      leaseInvoicePageOptionsDto,
+      pageOptionsDto,
       user,
     });
   }

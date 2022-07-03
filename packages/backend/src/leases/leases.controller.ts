@@ -49,9 +49,9 @@ export class LeasesController {
   @ApiPaginatedResponse(LeaseDto)
   findAll(
     @User() user: IUser,
-    @Query() leasePageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<LeaseDto>> {
-    return this.leasesService.findAll({ leasePageOptionsDto, user });
+    return this.leasesService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')

@@ -52,13 +52,13 @@ export class UnitsService {
   }
 
   async findAll({
-    unitPageOptionsDto,
+    pageOptionsDto,
     user,
   }: {
-    unitPageOptionsDto: PageOptionsDto;
+    pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<PaginatedMetaDto<UnitDto>> {
-    const { page, take, q } = unitPageOptionsDto;
+    const { page, take, q } = pageOptionsDto;
 
     let [data, itemCount] = await Promise.all([
       this.prisma.unit.findMany({
@@ -82,7 +82,7 @@ export class UnitsService {
 
     const meta = new PaginatedDto({
       itemCount,
-      pageOptionsDto: unitPageOptionsDto,
+      pageOptionsDto: pageOptionsDto,
     });
 
     const results = data.map((unit) => {

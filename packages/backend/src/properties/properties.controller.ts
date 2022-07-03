@@ -54,9 +54,9 @@ export class PropertiesController {
   @ApiPaginatedResponse(PropertyDto)
   findAll(
     @User() user: IUser,
-    @Query() propertyPageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<PropertyDto>> {
-    return this.propertiesService.findAll({ propertyPageOptionsDto, user });
+    return this.propertiesService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')

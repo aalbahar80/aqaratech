@@ -52,13 +52,13 @@ export class ExpensesService {
   }
 
   async findAll({
-    expensePageOptionsDto,
+    pageOptionsDto,
     user,
   }: {
-    expensePageOptionsDto: PageOptionsDto;
+    pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<PaginatedMetaDto<ExpenseDto>> {
-    const { page, take, q } = expensePageOptionsDto;
+    const { page, take, q } = pageOptionsDto;
 
     let [results, itemCount] = await Promise.all([
       this.prisma.expense.findMany({
@@ -77,7 +77,7 @@ export class ExpensesService {
 
     const meta = new PaginatedDto({
       itemCount,
-      pageOptionsDto: expensePageOptionsDto,
+      pageOptionsDto: pageOptionsDto,
     });
 
     return { meta, results };

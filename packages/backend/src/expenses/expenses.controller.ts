@@ -49,9 +49,9 @@ export class ExpensesController {
   @ApiPaginatedResponse(ExpenseDto)
   findAll(
     @User() user: IUser,
-    @Query() expensePageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<ExpenseDto>> {
-    return this.expensesService.findAll({ expensePageOptionsDto, user });
+    return this.expensesService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')

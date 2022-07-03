@@ -45,13 +45,13 @@ export class PortfoliosService {
   }
 
   async findAll({
-    portfolioPageOptionsDto,
+    pageOptionsDto,
     user,
   }: {
-    portfolioPageOptionsDto: PageOptionsDto;
+    pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<PaginatedMetaDto<PortfolioDto>> {
-    const { page, take, q } = portfolioPageOptionsDto;
+    const { page, take, q } = pageOptionsDto;
 
     this.logger.log('Fetching portfolios: ', {
       userId: user.id,
@@ -81,7 +81,7 @@ export class PortfoliosService {
 
     const meta = new PaginatedDto({
       itemCount,
-      pageOptionsDto: portfolioPageOptionsDto,
+      pageOptionsDto: pageOptionsDto,
     });
 
     return { meta, results };

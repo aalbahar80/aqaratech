@@ -48,9 +48,9 @@ export class PortfoliosController {
   @ApiPaginatedResponse(PortfolioDto)
   findAll(
     @User() user: IUser,
-    @Query() portfolioPageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PaginatedMetaDto<PortfolioDto>> {
-    return this.portfoliosService.findAll({ portfolioPageOptionsDto, user });
+    return this.portfoliosService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')
