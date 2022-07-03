@@ -10,6 +10,7 @@ import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
+  PropertyBreadcrumbsDto,
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -78,32 +79,11 @@ export class PropertiesService {
   }
 
   async findOne({ id }: { id: string }) {
-    const property = await this.prisma.property.findUnique({
-      where: { id },
-      include: {
-        units: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-
-    const units = await Promise.all(
-      property.units.map((unit) => {
-        return this.units.findOne({ id: unit.id });
-      }),
-    );
+    const property = await this.prisma.property.findUnique({ where: { id } });
 
     return {
       ...property,
-      breadcrumbs: {
-        portfolio: {
-          rel: Rel.Portfolio,
-          href: `/portfolios/${property.portfolioId}`,
-        },
-      },
-      units,
+      breadcrumbs: this.breadcrumbs(property),
     };
   }
 
@@ -142,5 +122,16 @@ export class PropertiesService {
   }) {
     const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
     return this.units.findAll({ user, pageOptionsDto, where });
+  }
+
+  // ::: HELPERS :::
+
+  breadcrumbs(property: { portfolioId: string }): PropertyBreadcrumbsDto {
+    return {
+      portfolio: {
+        rel: Rel.Portfolio,
+        href: `/portfolios/${property.portfolioId}`,
+      },
+    };
   }
 }

@@ -74,7 +74,9 @@ export class UpdatePropertyDto extends PartialType(
   OmitType(CreatePropertyDto, ['portfolioId']),
 ) {}
 
-class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, ['portfolio']) {}
+export class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'portfolio',
+]) {}
 
 export class PropertyOneDto extends PropertyDto {
   breadcrumbs: PropertyBreadcrumbsDto;
