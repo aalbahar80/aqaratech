@@ -14,12 +14,11 @@ import {
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
-import { UnitsService } from 'src/units/units.service';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class PropertiesService {
-  constructor(private prisma: PrismaService, private units: UnitsService) {}
+  constructor(private prisma: PrismaService) {}
 
   async create({
     createPropertyDto,
@@ -113,19 +112,6 @@ export class PropertiesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.property.delete({ where: { id } });
-  }
-
-  async findUnits({
-    pageOptionsDto,
-    user,
-    id,
-  }: {
-    pageOptionsDto: PageOptionsDto;
-    user: IUser;
-    id: string;
-  }) {
-    const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
-    return this.units.findAll({ user, pageOptionsDto, where });
   }
 
   // ::: HELPERS :::

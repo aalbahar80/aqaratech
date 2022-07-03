@@ -14,6 +14,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -29,13 +30,17 @@ import {
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
 import { UnitDto } from 'src/units/dto/unit.dto';
+import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
 @Controller('properties')
 @ApiTags('properties')
 @SwaggerAuth()
 export class PropertiesController {
-  constructor(private readonly propertiesService: PropertiesService) {}
+  constructor(
+    private readonly propertiesService: PropertiesService,
+    private unitsService: UnitsService,
+  ) {}
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Property' })
@@ -91,6 +96,7 @@ export class PropertiesController {
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
   ): Promise<PaginatedMetaDto<UnitDto>> {
-    return this.propertiesService.findUnits({ id, user, pageOptionsDto });
+    const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
+    return this.unitsService.findAll({ user, pageOptionsDto, where });
   }
 }

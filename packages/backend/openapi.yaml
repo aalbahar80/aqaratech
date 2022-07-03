@@ -320,6 +320,84 @@ paths:
                         items:
                           $ref: '#/components/schemas/PropertyDto'
       tags: *ref_1
+  /users:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: &ref_2
+        - users
+    get:
+      operationId: findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedResponseOfUserDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfUserDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UserDto'
+      tags: *ref_2
+  /users/by-email:
+    get:
+      operationId: findOneByEmail
+      parameters:
+        - name: email
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '404':
+          description: ''
+      tags: *ref_2
+  /users/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '404':
+          description: ''
+      tags: *ref_2
   /properties:
     post:
       operationId: create
@@ -341,7 +419,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_2
+      tags: &ref_3
         - properties
     get:
       operationId: findAll
@@ -385,7 +463,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
   /properties/{id}:
     get:
       operationId: findOne
@@ -402,7 +480,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
     patch:
       operationId: update
       parameters:
@@ -424,7 +502,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
     delete:
       operationId: remove
       parameters:
@@ -440,7 +518,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
   /properties/{id}/units:
     get:
       operationId: findUnits
@@ -489,7 +567,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_2
+      tags: *ref_3
   /units:
     post:
       operationId: create
@@ -511,7 +589,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_3
+      tags: &ref_4
         - units
     get:
       operationId: findAll
@@ -555,7 +633,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
   /units/{id}:
     get:
       operationId: findOne
@@ -572,7 +650,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
     patch:
       operationId: update
       parameters:
@@ -594,7 +672,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
     delete:
       operationId: remove
       parameters:
@@ -610,7 +688,7 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_3
+      tags: *ref_4
   /units/{id}/leases:
     get:
       operationId: findLeases
@@ -659,84 +737,6 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitLeaseDto'
-      tags: *ref_3
-  /users:
-    post:
-      operationId: create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-      tags: &ref_4
-        - users
-    get:
-      operationId: findAll
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedResponseOfUserDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUserDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UserDto'
-      tags: *ref_4
-  /users/by-email:
-    get:
-      operationId: findOneByEmail
-      parameters:
-        - name: email
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        '404':
-          description: ''
-      tags: *ref_4
-  /users/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-        '404':
-          description: ''
       tags: *ref_4
   /leases:
     post:
@@ -1606,6 +1606,73 @@ components:
         - parcel
         - paci
         - cost
+    RoleDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        permissions:
+          type: object
+        userId:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
+          nullable: true
+        portfolioId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - permissions
+        - userId
+        - organizationId
+        - portfolioId
+        - tenantId
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDto'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - email
+        - roles
     UpdatePropertyDto:
       type: object
       properties:
@@ -1947,73 +2014,6 @@ components:
         - deactivated
         - notify
         - license
-    RoleDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        permissions:
-          type: object
-        userId:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
-          nullable: true
-        portfolioId:
-          type: string
-          nullable: true
-        tenantId:
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - permissions
-        - userId
-        - organizationId
-        - portfolioId
-        - tenantId
-    UserDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        fullName:
-          type: string
-          nullable: true
-          default: null
-        email:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleDto'
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - email
-        - roles
     LeaseDto:
       type: object
       properties:
