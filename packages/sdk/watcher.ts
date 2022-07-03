@@ -1,6 +1,6 @@
-import * as fs from "fs";
-import chokidar from "chokidar";
 import child_process from "child_process";
+import chokidar from "chokidar";
+import * as fs from "fs";
 
 let oldStats: fs.Stats | undefined;
 chokidar
@@ -9,16 +9,15 @@ chokidar
 		awaitWriteFinish: true,
 	})
 	.on("change", (path, stats) => {
-		// console.log(event, path, stats);
 		if (stats) {
-			const message = `oldsize: ${oldStats?.size}, newsize: ${stats.size}`;
+			const message = `openapi.yml stats: oldsize: ${oldStats?.size}, newsize: ${stats.size}`;
 			console.log(message);
 
 			const changed = stats.size !== oldStats?.size;
 			if (changed) {
-				console.log("size changed");
+				console.log("openapi.yaml changed detected, generating new sdk...");
 
-				// delete /dist folder
+				// delete /dist directory
 				child_process.execSync("rm -rf ./dist");
 
 				// generate sdk
@@ -36,7 +35,7 @@ chokidar
 					console.log(`child process exited with code ${code}`);
 				});
 			} else {
-				console.log("no change in size");
+				console.log("skipping sdk generation...");
 			}
 
 			oldStats = stats;
