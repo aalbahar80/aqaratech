@@ -53,7 +53,6 @@ export class PaginatedDto {
 }
 
 export class PaginatedMetaDto<TData> {
-  // TODO rename to pagination, or move to root
   @ApiProperty()
   readonly pagination: PaginatedDto;
 
