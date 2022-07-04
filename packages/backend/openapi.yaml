@@ -772,18 +772,6 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/SortOrderEnum'
-        - name: start
-          required: false
-          in: query
-          schema:
-            format: date-time
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            format: date-time
-            type: string
       responses:
         '200':
           description: ''

@@ -1,6 +1,7 @@
 // https://github.com/NarHakobyan/awesome-nest-boilerplate/blob/e12eac62d08bc107ae50fd814a6917c555d1884e/src/decorators/field.decorators.ts#L100
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { Transform } from 'class-transformer';
 import { IsEnum, IsIn, IsJSON, IsObject, IsOptional } from 'class-validator';
 import { SortOrder } from 'src/constants/sort-order.enum';
 import {
@@ -59,9 +60,8 @@ export class PageOptionsDto {
   sortOrder: SortOrder = SortOrder.ASC;
 
   // @ApiPropertyOptional({ type: 'object' })
-  // TODO parse to object
-  @IsJSON()
-  // @IsObject()
+  @Transform((value) => JSON.parse(value.value))
+  @IsObject()
   @IsOptional()
-  filter?: string;
+  filter?: object;
 }
