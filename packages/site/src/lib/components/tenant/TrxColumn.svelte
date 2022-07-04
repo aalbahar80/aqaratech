@@ -2,6 +2,7 @@
 	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
+	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { Transaction } from '$lib/models/classes';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
@@ -55,6 +56,7 @@
 		}
 	};
 
+	// TODO get from server
 	$: balance = invoices.results.reduce((total, invoice) => {
 		if (!invoice.isPaid) {
 			total -= invoice.amount;
@@ -245,36 +247,7 @@
 			</table>
 		</div>
 
-		<nav aria-label="Pagination">
-			<div class="hidden sm:block">
-				<p class="text-sm text-gray-700">
-					Showing <span class="font-medium"
-						>{invoices.meta.take * (invoices.meta.page - 1) + 1}</span
-					>
-					to
-					<span class="font-medium"
-						>{invoices.meta.take * (invoices.meta.page - 1) +
-							invoices.results.length}</span
-					>
-					of
-					<span class="font-medium">{invoices.meta.itemCount}</span> results
-				</p>
-			</div>
-			<div>
-				<!-- <button
-					disabled={!invoices.meta.hasPreviousPage}
-					on:click={() => pageIndex > 1 && pageIndex--}
-				>
-					Previous
-				</button> -->
-				<!-- <button
-					disabled={!invoices.meta.hasNextPage}
-					on:click={() => pageIndex < totalPages && pageIndex++}
-				>
-					Next
-				</button> -->
-			</div>
-		</nav>
+		<Pagination pagination={invoices.pagination} />
 	{:else}
 		<EmptyState
 			entity={Transaction}
