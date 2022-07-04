@@ -14,6 +14,9 @@ const config = {
 		// 	prebundleSvelteLibraries: true,
 		inspector: true,
 	},
+	compilerOptions: {
+		loopGuardTimeout: process.env.NODE_ENV === 'production' ? undefined : 300,
+	},
 	kit: {
 		adapter: adapter(),
 		vite: {
