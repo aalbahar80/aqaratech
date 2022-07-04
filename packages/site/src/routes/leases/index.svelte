@@ -44,10 +44,8 @@
 					label: 'Current',
 					checked: true,
 					action: () => {
-						const today = new Date().toISOString();
-						const f = { end: { gte: today } };
-						const fstring = JSON.stringify(f);
-						goto(`/leases?filter=${fstring}`);
+						const filter = { end: { gte: new Date() } };
+						goto(`/leases?filter=${JSON.stringify(filter)}`);
 					},
 				},
 				{ value: 'expired', label: 'Expired', checked: true },
