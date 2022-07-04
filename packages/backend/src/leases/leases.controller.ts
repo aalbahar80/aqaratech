@@ -28,6 +28,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import {
+  CreateLeaseDto,
   LeaseBasicDto,
   LeaseDto,
   UpdateLeaseDto,
@@ -49,7 +50,7 @@ export class LeasesController {
   @ApiCreatedResponse({ type: LeaseBasicDto })
   create(
     @User() user: IUser,
-    @Body() createLeaseDto: LeaseDto,
+    @Body() createLeaseDto: CreateLeaseDto,
   ): Promise<LeaseBasicDto> {
     return this.leasesService.create({ createLeaseDto, user });
   }

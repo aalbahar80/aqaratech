@@ -9,6 +9,7 @@ import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import {
+  CreateLeaseInvoiceDto,
   LeaseInvoiceBreadcrumbsDto,
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
@@ -24,7 +25,7 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto,
     user,
   }: {
-    createLeaseInvoiceDto: LeaseInvoiceDto;
+    createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(

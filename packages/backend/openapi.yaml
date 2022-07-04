@@ -673,7 +673,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeaseDto'
+              $ref: '#/components/schemas/CreateLeaseDto'
       responses:
         '201':
           description: ''
@@ -843,7 +843,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LeaseInvoiceDto'
+              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
       responses:
         '201':
           description: ''
@@ -2020,6 +2020,55 @@ components:
         - deactivated
         - notify
         - license
+    CreateLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
     LeaseBasicDto:
       type: object
       properties:
@@ -2189,6 +2238,52 @@ components:
         - paidAt
         - isPaid
         - memo
+    CreateLeaseInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - amount
+        - postAt
+        - leaseId
     LeaseInvoiceBasicDto:
       type: object
       properties:
