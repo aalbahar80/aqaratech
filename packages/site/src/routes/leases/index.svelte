@@ -32,8 +32,8 @@
 	// let currentOptions = options;
 
 	const sortOptions = [
-		{ name: 'Created', value: 'createdAt' as const, active: true },
-		{ name: 'Expiration', value: 'end' as const, active: false },
+		{ name: 'Created', value: 'createdAt' as const },
+		{ name: 'Expiration', value: 'end' as const },
 	];
 
 	let filters = [

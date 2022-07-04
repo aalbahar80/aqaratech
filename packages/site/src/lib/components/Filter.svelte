@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { classes } from '$lib/utils';
 	import {
 		Dialog,
@@ -30,6 +31,7 @@
 			checked: boolean;
 		}[];
 	}
+
 	interface SortOption {
 		name: string;
 		value: string;
@@ -37,7 +39,6 @@
 
 	export let sortOptions: SortOption[];
 	export let filters: Filter[];
-	export let currentSort: SortOption['value'];
 
 	let isOpen = false;
 	const close = () => {
@@ -191,22 +192,20 @@
 						>
 							<div class="py-1">
 								{#each sortOptions as option (option.name)}
-									<MenuItem let:active>
-										<label
+									{@const active =
+										option.value === $page.url.searchParams.get('orderBy')}
+									<MenuItem>
+										<a
+											sveltekit:noscroll
+											sveltekit:prefetch
+											href={`?orderBy=${option.value}&sortOrder=desc`}
 											class={classes(
 												active ? 'bg-gray-100' : '',
 												'block px-4 py-2 text-sm font-medium text-gray-900',
 											)}
 										>
-											<input
-												type="radio"
-												name="sort"
-												bind:group={currentSort}
-												value={option.value}
-												class="hidden"
-											/>
 											{option.name}
-										</label>
+										</a>
 									</MenuItem>
 								{/each}
 							</div>
@@ -270,6 +269,9 @@
 													id={`filter-${section.id}-${optionIdx}`}
 													name={`${section.id}[]`}
 													bind:checked={option.checked}
+													on:change={(e) => {
+														console.log({ e }, 'Filter.svelte ~ 279');
+													}}
 													type="checkbox"
 													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 												/>
