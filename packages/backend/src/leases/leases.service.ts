@@ -63,10 +63,11 @@ export class LeasesService {
     user: IUser;
     where?: Prisma.LeaseWhereInput;
   }): Promise<PaginatedMetaDto<LeaseDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take, q, filter: qfilter } = pageOptionsDto;
 
     const filter: Prisma.LeaseWhereInput = {
       AND: [accessibleBy(user.ability).Lease, ...(where ? [where] : [])],
+      ...qfilter,
     };
 
     let [results, itemCount] = await Promise.all([

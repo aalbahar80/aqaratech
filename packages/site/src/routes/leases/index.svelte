@@ -44,7 +44,7 @@
 					label: 'Current',
 					checked: true,
 					action: () => {
-						const today = new Date().toISOString().split('T')[0];
+						const today = new Date().toISOString();
 						const f = { end: { gte: today } };
 						const fstring = JSON.stringify(f);
 						goto(`/leases?filter=${fstring}`);
