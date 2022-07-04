@@ -7,8 +7,15 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ url, stuff }: LoadEvent) => {
-		const { page, take, q } = parseParams(url);
-		const leases = await stuff.api!.leases.findAll({ page, take, q });
+		const { page, take, q, orderBy, sortOrder } = parseParams(url);
+
+		const leases = await stuff.api!.leases.findAll({
+			page,
+			take,
+			q,
+			orderBy,
+			sortOrder,
+		});
 
 		return {
 			props: { leases },
@@ -25,10 +32,9 @@
 	// let currentOptions = options;
 
 	const sortOptions = [
-		{ name: 'Created', value: 'createdAt' as const },
-		{ name: 'Expiration', value: 'end' as const },
+		{ name: 'Created', value: 'createdAt' as const, active: true },
+		{ name: 'Expiration', value: 'end' as const, active: false },
 	];
-	let currentSort = sortOptions[0]!.value;
 
 	let filters = [
 		{
@@ -41,34 +47,9 @@
 			],
 		},
 	];
-
-	// const handleFilter = async (newOptions: typeof options) => {
-	// 	if (compare(newOptions, currentOptions)) {
-	// 		return; // no change
-	// 	}
-	// 	currentOptions = newOptions;
-	// 	({ data: leases, pagination } = $session.authz?.isOwner
-	// 		? await trpc().query('owner:leases:list', {
-	// 				...newOptions,
-	// 				portfolioId: $session.authz.id,
-	// 		  })
-	// 		: await trpc().query('leases:list', newOptions));
-	// };
-
-	// changes to options will trigger a new query
-	// $: options = {
-	// 	...options,
-	// 	sortBy: { key: currentSort, order: 'desc' },
-	// 	status: {
-	// 		current: filters[0]?.options[0]?.checked,
-	// 		expired: filters[0]?.options[1]?.checked,
-	// 		upcoming: filters[0]?.options[2]?.checked,
-	// 	},
-	// };
-	// $: handleFilter(options);
 </script>
 
-<Filter bind:filters bind:currentSort {sortOptions} />
+<Filter {filters} {sortOptions} />
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />
 	<Pagination pagination={leases.pagination} />
