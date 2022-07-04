@@ -28,6 +28,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
+import { LeasePageOptionsDto } from 'src/leases/dto/lease-page-options.dto';
 import {
   CreateLeaseDto,
   LeaseBasicDto,
@@ -66,7 +67,7 @@ export class LeasesController {
   })
   findAll(
     @User() user: IUser,
-    @Query() pageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: LeasePageOptionsDto,
   ): Promise<PaginatedMetaDto<LeaseDto>> {
     return this.leasesService.findAll({ pageOptionsDto, user });
   }
