@@ -77,6 +77,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum:
+              - asc
+              - desc
+            type: string
       responses:
         '200':
           description: ''
@@ -198,6 +212,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: &ref_2
+              - asc
+              - desc
+            type: string
       responses:
         '200':
           description: ''
@@ -297,6 +325,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
         - name: id
           required: true
           in: path
@@ -341,7 +381,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_2
+      tags: &ref_3
         - properties
     get:
       operationId: findAll
@@ -368,6 +408,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -385,7 +437,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
   /properties/{id}:
     get:
       operationId: findOne
@@ -402,7 +454,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
     patch:
       operationId: update
       parameters:
@@ -424,7 +476,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
     delete:
       operationId: remove
       parameters:
@@ -440,7 +492,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
+      tags: *ref_3
   /properties/{id}/units:
     get:
       operationId: findUnits
@@ -467,6 +519,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
         - name: id
           required: true
           in: path
@@ -489,7 +553,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_2
+      tags: *ref_3
   /units:
     post:
       operationId: create
@@ -511,7 +575,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_3
+      tags: &ref_4
         - units
     get:
       operationId: findAll
@@ -538,6 +602,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -555,7 +631,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
   /units/{id}:
     get:
       operationId: findOne
@@ -572,7 +648,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
     patch:
       operationId: update
       parameters:
@@ -594,7 +670,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
+      tags: *ref_4
     delete:
       operationId: remove
       parameters:
@@ -610,7 +686,7 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_3
+      tags: *ref_4
   /units/{id}/leases:
     get:
       operationId: findLeases
@@ -637,6 +713,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
         - name: id
           required: true
           in: path
@@ -659,7 +747,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_3
+      tags: *ref_4
   /leases:
     post:
       operationId: create
@@ -681,7 +769,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: &ref_4
+      tags: &ref_5
         - leases
     get:
       operationId: findAll
@@ -708,6 +796,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -725,7 +825,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_4
+      tags: *ref_5
   /leases/{id}:
     get:
       operationId: findOne
@@ -742,7 +842,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_4
+      tags: *ref_5
     patch:
       operationId: update
       parameters:
@@ -764,7 +864,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_4
+      tags: *ref_5
     delete:
       operationId: remove
       parameters:
@@ -780,7 +880,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_4
+      tags: *ref_5
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
@@ -812,6 +912,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -829,7 +941,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_4
+      tags: *ref_5
   /leaseInvoices:
     post:
       operationId: create
@@ -851,7 +963,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: &ref_5
+      tags: &ref_6
         - leaseInvoices
     get:
       operationId: findAll
@@ -878,6 +990,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -895,7 +1019,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_5
+      tags: *ref_6
   /leaseInvoices/{id}:
     get:
       operationId: findOne
@@ -912,7 +1036,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_5
+      tags: *ref_6
     patch:
       operationId: update
       parameters:
@@ -934,7 +1058,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_5
+      tags: *ref_6
     delete:
       operationId: remove
       parameters:
@@ -950,7 +1074,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_5
+      tags: *ref_6
   /users:
     post:
       operationId: create
@@ -968,7 +1092,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-      tags: &ref_6
+      tags: &ref_7
         - users
     get:
       operationId: findAll
@@ -990,7 +1114,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserDto'
-      tags: *ref_6
+      tags: *ref_7
   /users/by-email:
     get:
       operationId: findOneByEmail
@@ -1009,7 +1133,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_6
+      tags: *ref_7
   /users/{id}:
     get:
       operationId: findOne
@@ -1028,7 +1152,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_6
+      tags: *ref_7
   /expenses:
     post:
       operationId: create
@@ -1050,7 +1174,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_7
+      tags: &ref_8
         - expenses
     get:
       operationId: findAll
@@ -1077,6 +1201,18 @@ paths:
           in: query
           schema:
             type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            default: asc
+            enum: *ref_2
+            type: string
       responses:
         '200':
           description: ''
@@ -1094,7 +1230,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
   /expenses/{id}:
     get:
       operationId: findOne
@@ -1111,7 +1247,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
     patch:
       operationId: update
       parameters:
@@ -1133,7 +1269,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
     delete:
       operationId: remove
       parameters:
@@ -1149,7 +1285,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
 info:
   title: Aqaratech API
   description: The Aqratech API description

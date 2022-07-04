@@ -1,4 +1,5 @@
 // https://github.com/NarHakobyan/awesome-nest-boilerplate/blob/e12eac62d08bc107ae50fd814a6917c555d1884e/src/decorators/field.decorators.ts#L100
+import { SortOrder } from 'src/constants/sort-order.enum';
 import {
   // EnumFieldOptional,
   NumberFieldOptional,
@@ -32,4 +33,8 @@ export class PageOptionsDto {
 
   @StringFieldOptional()
   readonly q?: string;
+
+  readonly orderBy?: string;
+
+  readonly sortOrder: SortOrder = SortOrder.ASC;
 }
