@@ -21,7 +21,7 @@
 			Showing <span class="font-medium">{pagination.start}</span> to
 			<span class="font-medium">{pagination.end}</span>
 			of{' '}
-			<span class="font-medium">{pagination.pageSize}</span> results
+			<span class="font-medium">{pagination.itemCount}</span> results
 		</p>
 	</div>
 	<div class="flex flex-1 justify-between sm:justify-end">
