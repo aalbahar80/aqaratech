@@ -70,16 +70,15 @@
 				</p>
 			</div>
 		</div>
-		{#if !expired}
+		<div
+			class="mt-4 animate-pulse overflow-hidden rounded-full bg-gray-200"
+			class:animate-pulse={progress === 0}
+			style={`visibility: ${!expired ? 'visible' : 'hidden'};`}
+		>
 			<div
-				class="mt-4 animate-pulse overflow-hidden rounded-full bg-gray-200"
-				class:animate-pulse={progress === 0}
-			>
-				<div
-					class="h-1 rounded-full bg-indigo-600"
-					style:width={`${progress}%`}
-				/>
-			</div>
-		{/if}
+				class="h-1 rounded-full bg-indigo-600"
+				style:width={`${progress}%`}
+			/>
+		</div>
 	</div>
 </a>
