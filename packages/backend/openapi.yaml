@@ -58,7 +58,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -66,11 +65,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -81,9 +79,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -193,7 +192,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -201,11 +199,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -216,9 +213,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -306,7 +304,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -314,11 +311,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -329,9 +325,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -389,7 +386,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -397,11 +393,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -412,9 +407,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -500,7 +496,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -508,11 +503,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -523,9 +517,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -583,7 +578,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -591,11 +585,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -606,9 +599,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -694,7 +688,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -702,11 +695,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -717,9 +709,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -777,7 +770,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -785,11 +777,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -800,9 +791,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -893,7 +885,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -901,11 +892,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -916,9 +906,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -971,7 +962,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -979,11 +969,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -994,9 +983,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc
@@ -1182,7 +1172,6 @@ paths:
         - name: page
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             default: 1
@@ -1190,11 +1179,10 @@ paths:
         - name: take
           required: false
           in: query
-          example: 1
           schema:
             minimum: 1
             maximum: 50
-            default: 10
+            default: 20
             type: number
         - name: q
           required: false
@@ -1205,9 +1193,10 @@ paths:
           required: false
           in: query
           schema:
+            default: ''
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             default: asc

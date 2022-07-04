@@ -65,7 +65,7 @@ export function NumberField(
   if (swagger !== false) {
     decorators.push(
       // ApiProperty({ type: Number, ...options, example: int ? 1 : 1.2 }),
-      ApiProperty({ type: Number, ...options, example: int ? 1 : 1 }),
+      ApiProperty({ type: Number, ...options }),
     );
   }
 

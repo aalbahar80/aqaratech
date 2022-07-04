@@ -74,6 +74,9 @@ export class LeasesService {
         take,
         skip: (page - 1) * take,
         where: filter,
+        ...(pageOptionsDto.orderBy
+          ? { orderBy: { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder } }
+          : {}),
       }),
       this.prisma.lease.count({ where: filter }),
     ]);

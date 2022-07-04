@@ -1,4 +1,5 @@
 // https://github.com/NarHakobyan/awesome-nest-boilerplate/blob/e12eac62d08bc107ae50fd814a6917c555d1884e/src/decorators/field.decorators.ts#L100
+import { IsEnum, IsString } from 'class-validator';
 import { SortOrder } from 'src/constants/sort-order.enum';
 import {
   // EnumFieldOptional,
@@ -22,10 +23,10 @@ export class PageOptionsDto {
   @NumberFieldOptional({
     minimum: 1,
     maximum: 50,
-    default: 10,
+    default: 20,
     // int: true,
   })
-  readonly take: number = 10;
+  readonly take: number = 20;
 
   get skip(): number {
     return (this.page - 1) * this.take;
@@ -34,7 +35,9 @@ export class PageOptionsDto {
   @StringFieldOptional()
   readonly q?: string;
 
-  readonly orderBy?: string;
+  @IsString()
+  readonly orderBy?: string = '';
 
-  readonly sortOrder: SortOrder = SortOrder.ASC;
+  @IsEnum(SortOrder)
+  readonly sortOrder?: SortOrder = SortOrder.ASC;
 }
