@@ -12,6 +12,7 @@ import {
   ApiCreatedResponse,
   ApiHeader,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
@@ -58,6 +59,11 @@ export class LeasesController {
   @Get()
   @CheckAbilities({ action: Action.Read, subject: 'Lease' })
   @ApiPaginatedResponse(LeaseDto)
+  @ApiQuery({
+    name: 'orderBy',
+    enum: Prisma.LeaseScalarFieldEnum,
+    required: false,
+  })
   findAll(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,

@@ -791,7 +791,19 @@ paths:
           required: false
           in: query
           schema:
-            default: ''
+            enum:
+              - id
+              - tenantId
+              - unitId
+              - createdAt
+              - updatedAt
+              - start
+              - end
+              - monthlyRent
+              - deposit
+              - deactivated
+              - notify
+              - license
             type: string
         - name: sortOrder
           required: false
