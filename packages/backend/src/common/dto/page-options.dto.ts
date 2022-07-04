@@ -1,6 +1,7 @@
 // https://github.com/NarHakobyan/awesome-nest-boilerplate/blob/e12eac62d08bc107ae50fd814a6917c555d1884e/src/decorators/field.decorators.ts#L100
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { IsEnum, IsIn, IsOptional } from 'class-validator';
+import { IsEnum, IsIn } from 'class-validator';
 import { SortOrder } from 'src/constants/sort-order.enum';
 import {
   // EnumFieldOptional,
@@ -48,10 +49,11 @@ export class PageOptionsDto {
   @StringFieldOptional()
   readonly q?: string;
 
-  @IsOptional()
+  @ApiPropertyOptional({ enum: Combined, enumName: 'CombinedEnum' })
   @IsIn(Object.keys(Combined), { message: 'Invalid orderBy field' })
   readonly orderBy?: string;
 
+  @ApiPropertyOptional({ enum: SortOrder, enumName: 'SortOrderEnum' })
   @IsEnum(SortOrder)
-  readonly sortOrder?: SortOrder = SortOrder.ASC;
+  sortOrder: SortOrder = SortOrder.ASC;
 }

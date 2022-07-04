@@ -79,74 +79,12 @@ paths:
           required: false
           in: query
           schema:
-            enum:
-              - id
-              - createdAt
-              - updatedAt
-              - fullName
-              - shortName
-              - civilid
-              - dob
-              - phone
-              - email
-              - passportNum
-              - nationality
-              - residencyNum
-              - residencyEnd
-              - organizationId
-              - portfolioId
-              - area
-              - block
-              - avenue
-              - street
-              - number
-              - parcel
-              - paci
-              - cost
-              - long
-              - lat
-              - propertyId
-              - unitNumber
-              - floor
-              - size
-              - bed
-              - bath
-              - marketRent
-              - type
-              - usage
-              - tenantId
-              - unitId
-              - start
-              - end
-              - monthlyRent
-              - deposit
-              - deactivated
-              - notify
-              - license
-              - dueAt
-              - postAt
-              - paidAt
-              - isPaid
-              - amount
-              - memo
-              - mfPaymentId
-              - leaseId
-              - maintenanceOrderId
-              - categoryId
-              - completedAt
-              - title
-              - description
-              - status
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum:
-              - asc
-              - desc
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -270,74 +208,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: &ref_2
-              - id
-              - createdAt
-              - updatedAt
-              - fullName
-              - shortName
-              - civilid
-              - dob
-              - phone
-              - email
-              - passportNum
-              - nationality
-              - residencyNum
-              - residencyEnd
-              - organizationId
-              - portfolioId
-              - area
-              - block
-              - avenue
-              - street
-              - number
-              - parcel
-              - paci
-              - cost
-              - long
-              - lat
-              - propertyId
-              - unitNumber
-              - floor
-              - size
-              - bed
-              - bath
-              - marketRent
-              - type
-              - usage
-              - tenantId
-              - unitId
-              - start
-              - end
-              - monthlyRent
-              - deposit
-              - deactivated
-              - notify
-              - license
-              - dueAt
-              - postAt
-              - paidAt
-              - isPaid
-              - amount
-              - memo
-              - mfPaymentId
-              - leaseId
-              - maintenanceOrderId
-              - categoryId
-              - completedAt
-              - title
-              - description
-              - status
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: &ref_3
-              - asc
-              - desc
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -439,15 +315,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
         - name: id
           required: true
           in: path
@@ -492,7 +365,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_4
+      tags: &ref_2
         - properties
     get:
       operationId: findAll
@@ -521,15 +394,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -547,7 +417,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_2
   /properties/{id}:
     get:
       operationId: findOne
@@ -564,7 +434,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_2
     patch:
       operationId: update
       parameters:
@@ -586,7 +456,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_2
     delete:
       operationId: remove
       parameters:
@@ -602,7 +472,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_2
   /properties/{id}/units:
     get:
       operationId: findUnits
@@ -631,15 +501,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
         - name: id
           required: true
           in: path
@@ -662,7 +529,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_4
+      tags: *ref_2
   /units:
     post:
       operationId: create
@@ -684,7 +551,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_5
+      tags: &ref_3
         - units
     get:
       operationId: findAll
@@ -713,15 +580,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -739,7 +603,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_3
   /units/{id}:
     get:
       operationId: findOne
@@ -756,7 +620,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_3
     patch:
       operationId: update
       parameters:
@@ -778,7 +642,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_3
     delete:
       operationId: remove
       parameters:
@@ -794,7 +658,7 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_5
+      tags: *ref_3
   /units/{id}/leases:
     get:
       operationId: findLeases
@@ -823,15 +687,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
         - name: id
           required: true
           in: path
@@ -854,7 +715,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_5
+      tags: *ref_3
   /leases:
     post:
       operationId: create
@@ -876,7 +737,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: &ref_6
+      tags: &ref_4
         - leases
     get:
       operationId: findAll
@@ -905,27 +766,12 @@ paths:
           required: false
           in: query
           schema:
-            enum:
-              - id
-              - tenantId
-              - unitId
-              - createdAt
-              - updatedAt
-              - start
-              - end
-              - monthlyRent
-              - deposit
-              - deactivated
-              - notify
-              - license
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
         - name: start
           required: false
           in: query
@@ -955,7 +801,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_6
+      tags: *ref_4
   /leases/{id}:
     get:
       operationId: findOne
@@ -972,7 +818,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_6
+      tags: *ref_4
     patch:
       operationId: update
       parameters:
@@ -994,7 +840,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_6
+      tags: *ref_4
     delete:
       operationId: remove
       parameters:
@@ -1010,7 +856,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_6
+      tags: *ref_4
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
@@ -1044,15 +890,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -1070,7 +913,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
+      tags: *ref_4
   /leaseInvoices:
     post:
       operationId: create
@@ -1092,7 +935,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: &ref_7
+      tags: &ref_5
         - leaseInvoices
     get:
       operationId: findAll
@@ -1121,15 +964,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -1147,7 +987,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_7
+      tags: *ref_5
   /leaseInvoices/{id}:
     get:
       operationId: findOne
@@ -1164,7 +1004,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_7
+      tags: *ref_5
     patch:
       operationId: update
       parameters:
@@ -1186,7 +1026,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_7
+      tags: *ref_5
     delete:
       operationId: remove
       parameters:
@@ -1202,7 +1042,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_7
+      tags: *ref_5
   /users:
     post:
       operationId: create
@@ -1220,7 +1060,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-      tags: &ref_8
+      tags: &ref_6
         - users
     get:
       operationId: findAll
@@ -1242,7 +1082,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserDto'
-      tags: *ref_8
+      tags: *ref_6
   /users/by-email:
     get:
       operationId: findOneByEmail
@@ -1261,7 +1101,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_8
+      tags: *ref_6
   /users/{id}:
     get:
       operationId: findOne
@@ -1280,7 +1120,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_8
+      tags: *ref_6
   /expenses:
     post:
       operationId: create
@@ -1302,7 +1142,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_9
+      tags: &ref_7
         - expenses
     get:
       operationId: findAll
@@ -1331,15 +1171,12 @@ paths:
           required: false
           in: query
           schema:
-            enum: *ref_2
-            type: string
+            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
           schema:
-            default: asc
-            enum: *ref_3
-            type: string
+            $ref: '#/components/schemas/SortOrderEnum'
       responses:
         '200':
           description: ''
@@ -1357,7 +1194,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_9
+      tags: *ref_7
   /expenses/{id}:
     get:
       operationId: findOne
@@ -1374,7 +1211,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_9
+      tags: *ref_7
     patch:
       operationId: update
       parameters:
@@ -1396,7 +1233,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_9
+      tags: *ref_7
     delete:
       operationId: remove
       parameters:
@@ -1412,7 +1249,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_9
+      tags: *ref_7
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -1514,6 +1351,71 @@ components:
         - nationality
         - residencyNum
         - residencyEnd
+    CombinedEnum:
+      type: string
+      enum:
+        - id
+        - createdAt
+        - updatedAt
+        - fullName
+        - shortName
+        - civilid
+        - dob
+        - phone
+        - email
+        - passportNum
+        - nationality
+        - residencyNum
+        - residencyEnd
+        - organizationId
+        - portfolioId
+        - area
+        - block
+        - avenue
+        - street
+        - number
+        - parcel
+        - paci
+        - cost
+        - long
+        - lat
+        - propertyId
+        - unitNumber
+        - floor
+        - size
+        - bed
+        - bath
+        - marketRent
+        - type
+        - usage
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
+        - dueAt
+        - postAt
+        - paidAt
+        - isPaid
+        - amount
+        - memo
+        - mfPaymentId
+        - leaseId
+        - maintenanceOrderId
+        - categoryId
+        - completedAt
+        - title
+        - description
+        - status
+    SortOrderEnum:
+      type: string
+      enum:
+        - asc
+        - desc
     LeaseExtendedDto:
       type: object
       properties:
