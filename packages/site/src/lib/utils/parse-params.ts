@@ -8,5 +8,6 @@ export const parseParams = (url: URL) => {
 		sortOrder: (url.searchParams.get('sortOrder') ??
 			'asc') as FindAllSortOrderEnum,
 		orderBy: url.searchParams.get('orderBy') ?? undefined,
+		filter: url.searchParams.get('filter') ?? undefined,
 	};
 };

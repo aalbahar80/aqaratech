@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { goto } from '$app/navigation';
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
@@ -7,7 +8,7 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ url, stuff }: LoadEvent) => {
-		const { page, take, q, orderBy, sortOrder } = parseParams(url);
+		const { page, take, q, orderBy, sortOrder, filter } = parseParams(url);
 
 		const leases = await stuff.api!.leases.findAll({
 			page,
@@ -15,6 +16,7 @@
 			q,
 			orderBy,
 			sortOrder,
+			filter,
 		});
 
 		return {
@@ -27,10 +29,6 @@
 	type Prop = LP<typeof load>;
 	export let leases: Prop['leases'];
 
-	// type Options = Props<typeof load>['options'];
-	// export let options: Options;
-	// let currentOptions = options;
-
 	const sortOptions = [
 		{ name: 'Created', value: 'createdAt' as const },
 		{ name: 'Expiration', value: 'end' as const },
@@ -41,7 +39,17 @@
 			id: 'status',
 			name: 'Status',
 			options: [
-				{ value: 'current', label: 'Current', checked: true },
+				{
+					value: 'current',
+					label: 'Current',
+					checked: true,
+					action: () => {
+						const today = new Date().toISOString().split('T')[0];
+						const f = { end: { gte: today } };
+						const fstring = JSON.stringify(f);
+						goto(`/leases?filter=${fstring}`);
+					},
+				},
 				{ value: 'expired', label: 'Expired', checked: true },
 				{ value: 'upcoming', label: 'Upcoming', checked: true },
 			],
