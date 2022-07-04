@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Filter from '$lib/components/Filter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
@@ -10,6 +11,7 @@
 	export const load = async ({ url, stuff }: LoadEvent) => {
 		const { page, take, q, orderBy, sortOrder, filter } = parseParams(url);
 
+		console.log({ filter }, 'index.svelte ~ 14');
 		const leases = await stuff.api!.leases.findAll({
 			page,
 			take,
@@ -44,12 +46,34 @@
 					label: 'Current',
 					checked: true,
 					action: () => {
+						const url = new URL($page.url);
 						const filter = { end: { gte: new Date() } };
-						goto(`/leases?filter=${JSON.stringify(filter)}`);
+						url.searchParams.set('filter', JSON.stringify(filter));
+						goto(url);
 					},
 				},
-				{ value: 'expired', label: 'Expired', checked: true },
-				{ value: 'upcoming', label: 'Upcoming', checked: true },
+				{
+					value: 'expired',
+					label: 'Expired',
+					checked: true,
+					action: () => {
+						const url = new URL($page.url);
+						const filter = { end: { lt: new Date() } };
+						url.searchParams.set('filter', JSON.stringify(filter));
+						goto(url);
+					},
+				},
+				{
+					value: 'upcoming',
+					label: 'Upcoming',
+					checked: true,
+					action: () => {
+						const url = new URL($page.url);
+						const filter = { start: { gt: new Date() } };
+						url.searchParams.set('filter', JSON.stringify(filter));
+						goto(url);
+					},
+				},
 			],
 		},
 	];
