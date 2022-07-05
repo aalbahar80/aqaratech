@@ -29,6 +29,7 @@
 			value: string;
 			label: string;
 			checked: boolean;
+			action: () => void;
 		}[];
 	}
 
@@ -125,7 +126,8 @@
 												<input
 													id={`filter-mobile-${section.id}-${optionIdx}`}
 													name={`${section.id}[]`}
-													bind:checked={option.checked}
+													checked={option.checked}
+													on:change={() => option.action()}
 													type="checkbox"
 													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 												/>
@@ -268,10 +270,8 @@
 												<input
 													id={`filter-${section.id}-${optionIdx}`}
 													name={`${section.id}[]`}
-													bind:checked={option.checked}
-													on:change={(e) => {
-														console.log({ e }, 'Filter.svelte ~ 279');
-													}}
+													checked={option.checked}
+													on:change={() => option.action()}
 													type="checkbox"
 													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 												/>
