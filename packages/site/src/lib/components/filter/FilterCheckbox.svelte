@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import {
 		Popover,
 		PopoverButton,
@@ -8,17 +9,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	interface Filter {
-		id: string;
-		name: string;
-		options: {
-			value: string;
-			label: string;
-			checked: boolean;
-			action: () => void;
-		}[];
-	}
 
 	export let section: Filter;
 	export let showCount = false;
@@ -39,7 +29,7 @@
 					<span
 						class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700"
 					>
-						{section.options.filter((o) => o.checked).length}
+						{section.options.filter((o) => o.active).length}
 					</span>
 				{/if}
 
@@ -69,7 +59,7 @@
 							<input
 								id={`filter-${section.id}-${optionIdx}`}
 								name={`${section.id}[]`}
-								checked={option.checked}
+								checked={option.active}
 								on:change={() => option.action()}
 								type="checkbox"
 								class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"

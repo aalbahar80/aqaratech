@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import { classes } from '$lib/utils';
 	import {
 		Menu,
@@ -11,13 +12,7 @@
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	interface SortOption {
-		name: string;
-		value: string;
-		action: () => void;
-	}
-
-	export let sortOptions: SortOption[];
+	export let sortOptions: Filter;
 </script>
 
 <Menu as="div" class="relative z-10 inline-block text-left">
@@ -47,7 +42,7 @@
 			class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
 		>
 			<div class="py-1">
-				{#each sortOptions as option (option.name)}
+				{#each sortOptions.options as option (option.label)}
 					{@const active =
 						option.value === $page.url.searchParams.get('orderBy')}
 					<MenuItem>
@@ -64,7 +59,7 @@
 								on:change={() => option.action()}
 								class="hidden"
 							/>
-							{option.name}
+							{option.label}
 						</label>
 					</MenuItem>
 				{/each}

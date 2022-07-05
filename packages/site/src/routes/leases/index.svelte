@@ -4,6 +4,7 @@
 	import FilterBar from '$lib/components/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -30,20 +31,27 @@
 	type Prop = LP<typeof load>;
 	export let leases: Prop['leases'];
 
-	const sortOptions = [
+	const sortOptions: Filter['options'] = [
 		{
-			name: 'Created',
+			label: 'Created',
 			value: 'createdAt' as const,
 			action: () => setQuery('orderBy', 'createdAt'),
+			active: 'createdAt' === $page.url.searchParams.get('orderBy'),
 		},
 		{
-			name: 'Expiration',
+			label: 'Expiration',
 			value: 'end' as const,
 			action: () => setQuery('orderBy', 'end'),
+			active: 'end' === $page.url.searchParams.get('orderBy'),
 		},
 	];
 
-	let filters = [
+	let filters: Filter[] = [
+		{
+			id: 'sort',
+			name: 'Sort',
+			options: sortOptions,
+		},
 		{
 			id: 'status',
 			name: 'Status',
@@ -51,19 +59,19 @@
 				{
 					value: 'current',
 					label: 'Current',
-					checked: true,
+					active: true,
 					action: () => setQuery('filter', { end: { gte: new Date() } }),
 				},
 				{
 					value: 'expired',
 					label: 'Expired',
-					checked: true,
+					active: true,
 					action: () => setQuery('filter', { end: { lt: new Date() } }),
 				},
 				{
 					value: 'upcoming',
 					label: 'Upcoming',
-					checked: true,
+					active: true,
 					action: () => setQuery('filter', { start: { gt: new Date() } }),
 				},
 			],
@@ -81,7 +89,7 @@
 	};
 </script>
 
-<FilterBar {filters} {sortOptions} />
+<FilterBar filters={[filters[1]]} sortOptions={filters[0]} />
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />
 	<Pagination pagination={leases.pagination} />

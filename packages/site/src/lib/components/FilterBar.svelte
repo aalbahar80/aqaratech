@@ -2,25 +2,9 @@
 	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
-	interface Filter {
-		id: string;
-		name: string;
-		options: {
-			value: string;
-			label: string;
-			checked: boolean;
-			action: () => void;
-		}[];
-	}
-
-	interface SortOption {
-		name: string;
-		value: string;
-		action: () => void;
-	}
-
-	export let sortOptions: SortOption[];
+	export let sortOptions: Filter;
 	export let filters: Filter[];
 
 	let slideover: FilterSlideover | undefined;

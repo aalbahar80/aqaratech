@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import { classes } from '$lib/utils';
 	import {
 		Dialog,
@@ -11,17 +12,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { ChevronDown, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	interface Filter {
-		id: string;
-		name: string;
-		options: {
-			value: string;
-			label: string;
-			checked: boolean;
-			action: () => void;
-		}[];
-	}
 
 	export let filters: Filter[];
 
@@ -107,7 +97,7 @@
 											<input
 												id={`filter-mobile-${section.id}-${optionIdx}`}
 												name={`${section.id}[]`}
-												checked={option.checked}
+												checked={option.active}
 												on:change={() => option.action()}
 												type="checkbox"
 												class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
