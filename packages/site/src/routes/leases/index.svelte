@@ -9,21 +9,9 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ url, stuff }: LoadEvent) => {
-		const { page, take, q, orderBy, sortOrder, filter } = parseParams(url);
-
-		const leases = await stuff.api!.leases.findAll({
-			page,
-			take,
-			q,
-			//@ts-ignore
-			orderBy,
-			sortOrder,
-			filter,
-		});
-
-		return {
-			props: { leases },
-		};
+		const sParams = parseParams(url);
+		const leases = await stuff.api!.leases.findAll(sParams);
+		return { props: { leases } };
 	};
 </script>
 
