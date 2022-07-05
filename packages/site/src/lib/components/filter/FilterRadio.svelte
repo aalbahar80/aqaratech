@@ -12,6 +12,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let filter: Filter;
+	export let align = 'left';
 </script>
 
 <Menu as="div" class="relative z-10 inline-block text-left">
@@ -38,7 +39,12 @@
 		leaveTo="transform opacity-0 scale-95"
 	>
 		<MenuItems
-			class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+			class={classes(
+				align === 'left'
+					? 'left-0 origin-top-left'
+					: 'right-0 origin-top-right',
+				'absolute z-10 mt-2 w-40  rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none',
+			)}
 		>
 			<div class="py-1">
 				{#each filter.options as option (option.label)}
