@@ -59,7 +59,7 @@ export class PageOptionsDto {
   @IsEnum(SortOrder)
   sortOrder: SortOrder = SortOrder.ASC;
 
-  // @ApiPropertyOptional({ type: 'object' })
+  @ApiPropertyOptional({ type: 'object' })
   @Transform((value) => JSON.parse(value.value))
   @IsObject()
   @IsOptional()
