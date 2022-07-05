@@ -63,7 +63,11 @@
 			{
 				label: 'Expiration',
 				value: Sort.Expiration,
-				action: () => setQuery({ title: 'orderBy', value: Sort.Expiration }),
+				action: () =>
+					setQuery(
+						{ title: 'orderBy', value: Sort.Expiration },
+						{ title: 'sortOrder', value: 'asc' },
+					),
 				active: Sort.Expiration === $page.url.searchParams.get('orderBy'),
 			},
 		],
