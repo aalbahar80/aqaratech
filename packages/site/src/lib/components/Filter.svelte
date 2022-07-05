@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
 	import { classes } from '$lib/utils';
 	import {
 		Dialog,
@@ -11,10 +12,6 @@
 		MenuButton,
 		MenuItem,
 		MenuItems,
-		Popover,
-		PopoverButton,
-		PopoverGroup,
-		PopoverPanel,
 		Transition,
 		TransitionChild,
 		TransitionRoot,
@@ -222,73 +219,9 @@
 				>
 					Filters
 				</button>
-
-				<PopoverGroup class="hidden sm:flex sm:items-baseline sm:space-x-8">
-					{#each filters as section, sectionIdx (section.name)}
-						<Popover
-							as="div"
-							id="desktop-menu"
-							class="relative z-10 inline-block text-left"
-						>
-							<div>
-								<PopoverButton
-									class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
-								>
-									<span>{section.name}</span>
-									{#if sectionIdx === 0}
-										<span
-											class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700"
-										>
-											{filters[sectionIdx]?.options.filter((o) => o.checked)
-												.length}
-										</span>
-									{/if}
-
-									<Icon
-										src={ChevronDown}
-										theme="solid"
-										class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-										aria-hidden="true"
-									/>
-								</PopoverButton>
-							</div>
-
-							<Transition
-								enter="transition ease-out duration-100"
-								enterFrom="transform opacity-0 scale-95"
-								enterTo="transform opacity-100 scale-100"
-								leave="transition ease-in duration-75"
-								leaveFrom="transform opacity-100 scale-100"
-								leaveTo="transform opacity-0 scale-95"
-							>
-								<PopoverPanel
-									class="absolute right-0 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
-								>
-									<form class="space-y-4">
-										{#each section.options as option, optionIdx (option.value)}
-											<div class="flex items-center">
-												<input
-													id={`filter-${section.id}-${optionIdx}`}
-													name={`${section.id}[]`}
-													checked={option.checked}
-													on:change={() => option.action()}
-													type="checkbox"
-													class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-												/>
-												<label
-													for={`filter-${section.id}-${optionIdx}`}
-													class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
-												>
-													{option.label}
-												</label>
-											</div>
-										{/each}
-									</form>
-								</PopoverPanel>
-							</Transition>
-						</Popover>
-					{/each}
-				</PopoverGroup>
+				{#each filters as section (section.name)}
+					<FilterCheckbox {section} />
+				{/each}
 			</div>
 		</section>
 	</div>
