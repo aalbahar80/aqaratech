@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Filter from '$lib/components/Filter.svelte';
+	import FilterBar from '$lib/components/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
@@ -81,7 +81,7 @@
 	};
 </script>
 
-<Filter {filters} {sortOptions} />
+<FilterBar {filters} {sortOptions} />
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />
 	<Pagination pagination={leases.pagination} />
