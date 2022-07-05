@@ -23,10 +23,13 @@ export class HealthService {
     this.listOfThingsToMonitor = [
       new NestjsHealthIndicator(
         this.http,
-        'https://docs.nestjs.com',
+        process.env.NODE_ENV === 'production'
+          ? 'https://nestjs-dev.onrender.com' // TODO use render's env var
+          : 'http://localhost:3002',
         this.promClientService,
       ),
-      //   new AnyOtherHealthIndicator(this.anyOtherService, this.promClientService),
+      // new AnyOtherHealthIndicator(this.anyOtherService, this.promClientService),
+      // add site check?
     ];
   }
 
