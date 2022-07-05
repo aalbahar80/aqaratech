@@ -4,8 +4,8 @@
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
-	export let persistent: Filter[];
-	export let responsive: Filter[];
+	export let persistent: Filter[] = [];
+	export let responsive: Filter[] = [];
 
 	let slideover: FilterSlideover | undefined;
 </script>
@@ -37,13 +37,15 @@
 				{#each responsive as filter (filter.id)}
 					<FilterCheckbox {filter} />
 				{/each}
-				<button
-					type="button"
-					class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
-					on:click={() => slideover?.open()}
-				>
-					Filters
-				</button>
+				{#if responsive.length}
+					<button
+						type="button"
+						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
+						on:click={() => slideover?.open()}
+					>
+						Filters
+					</button>
+				{/if}
 			</div>
 		</section>
 	</div>
