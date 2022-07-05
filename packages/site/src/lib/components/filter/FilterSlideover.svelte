@@ -66,7 +66,7 @@
 
 				<!-- Filters -->
 				<form class="mt-4">
-					{#each filters as section (section.name)}
+					{#each filters as filter (filter.label)}
 						<Disclosure
 							as="div"
 							class="border-t border-gray-200 px-4 py-6"
@@ -76,7 +76,7 @@
 								<DisclosureButton
 									class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400"
 								>
-									<span class="font-medium text-gray-900">{section.name}</span>
+									<span class="font-medium text-gray-900">{filter.label}</span>
 									<span class="ml-6 flex items-center">
 										<Icon
 											src={ChevronDown}
@@ -92,18 +92,18 @@
 							</h3>
 							<DisclosurePanel class="pt-6">
 								<div class="space-y-6">
-									{#each section.options as option, optionIdx (option.value)}
+									{#each filter.options as option, optionIdx (option.value)}
 										<div class="flex items-center">
 											<input
-												id={`filter-mobile-${section.id}-${optionIdx}`}
-												name={`${section.id}[]`}
+												id={`filter-mobile-${filter.id}-${optionIdx}`}
+												name={`${filter.id}[]`}
 												checked={option.active}
 												on:change={() => option.action()}
 												type="checkbox"
 												class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 											/>
 											<label
-												for={`filter-mobile-${section.id}-${optionIdx}`}
+												for={`filter-mobile-${filter.id}-${optionIdx}`}
 												class="ml-3 text-sm text-gray-500"
 											>
 												{option.label}

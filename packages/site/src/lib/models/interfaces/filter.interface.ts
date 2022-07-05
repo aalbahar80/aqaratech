@@ -1,6 +1,6 @@
 export interface Filter {
 	id: string;
-	name: string;
+	label: string;
 	options: FilterOption[];
 }
 

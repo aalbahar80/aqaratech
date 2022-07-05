@@ -31,52 +31,49 @@
 	type Prop = LP<typeof load>;
 	export let leases: Prop['leases'];
 
-	const sortOptions: Filter['options'] = [
-		{
-			label: 'Created',
-			value: 'createdAt' as const,
-			action: () => setQuery('orderBy', 'createdAt'),
-			active: 'createdAt' === $page.url.searchParams.get('orderBy'),
-		},
-		{
-			label: 'Expiration',
-			value: 'end' as const,
-			action: () => setQuery('orderBy', 'end'),
-			active: 'end' === $page.url.searchParams.get('orderBy'),
-		},
-	];
+	const sort: Filter = {
+		id: 'sort',
+		label: 'Sort',
+		options: [
+			{
+				label: 'Created',
+				value: 'createdAt',
+				action: () => setQuery('orderBy', 'createdAt'),
+				active: 'createdAt' === $page.url.searchParams.get('orderBy'),
+			},
+			{
+				label: 'Expiration',
+				value: 'end',
+				action: () => setQuery('orderBy', 'end'),
+				active: 'end' === $page.url.searchParams.get('orderBy'),
+			},
+		],
+	};
 
-	let filters: Filter[] = [
-		{
-			id: 'sort',
-			name: 'Sort',
-			options: sortOptions,
-		},
-		{
-			id: 'status',
-			name: 'Status',
-			options: [
-				{
-					value: 'current',
-					label: 'Current',
-					active: true,
-					action: () => setQuery('filter', { end: { gte: new Date() } }),
-				},
-				{
-					value: 'expired',
-					label: 'Expired',
-					active: true,
-					action: () => setQuery('filter', { end: { lt: new Date() } }),
-				},
-				{
-					value: 'upcoming',
-					label: 'Upcoming',
-					active: true,
-					action: () => setQuery('filter', { start: { gt: new Date() } }),
-				},
-			],
-		},
-	];
+	let status: Filter = {
+		id: 'status',
+		label: 'Status',
+		options: [
+			{
+				value: 'current',
+				label: 'Current',
+				active: true,
+				action: () => setQuery('filter', { end: { gte: new Date() } }),
+			},
+			{
+				value: 'expired',
+				label: 'Expired',
+				active: true,
+				action: () => setQuery('filter', { end: { lt: new Date() } }),
+			},
+			{
+				value: 'upcoming',
+				label: 'Upcoming',
+				active: true,
+				action: () => setQuery('filter', { start: { gt: new Date() } }),
+			},
+		],
+	};
 
 	const setQuery = (title: string, value: any) => {
 		if (typeof value !== 'string') {
@@ -89,7 +86,8 @@
 	};
 </script>
 
-<FilterBar filters={[filters[1]]} sortOptions={filters[0]} />
+<FilterBar responsive={[status]} persistent={[sort]} />
+
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />
 	<Pagination pagination={leases.pagination} />

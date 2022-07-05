@@ -4,14 +4,14 @@
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
-	export let sortOptions: Filter;
-	export let filters: Filter[];
+	export let persistent: Filter[];
+	export let responsive: Filter[];
 
 	let slideover: FilterSlideover | undefined;
 </script>
 
 <div class="bg-gray-50">
-	<FilterSlideover bind:this={slideover} {filters} />
+	<FilterSlideover bind:this={slideover} filters={responsive} />
 
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
 		<!-- <div class="py-24">
@@ -30,8 +30,13 @@
 			<h2 id="filter-heading" class="sr-only">Filters</h2>
 
 			<div class="flex items-center justify-between">
-				<FilterRadio {sortOptions} />
+				{#each persistent as filter (filter.id)}
+					<FilterRadio {filter} />
+				{/each}
 
+				{#each responsive as filter (filter.id)}
+					<FilterCheckbox {filter} />
+				{/each}
 				<button
 					type="button"
 					class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
@@ -39,9 +44,6 @@
 				>
 					Filters
 				</button>
-				{#each filters as section (section.name)}
-					<FilterCheckbox {section} />
-				{/each}
 			</div>
 		</section>
 	</div>

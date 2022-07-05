@@ -12,7 +12,7 @@
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let sortOptions: Filter;
+	export let filter: Filter;
 </script>
 
 <Menu as="div" class="relative z-10 inline-block text-left">
@@ -20,7 +20,7 @@
 		<MenuButton
 			class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
 		>
-			Sort
+			{filter.label}
 			<Icon
 				src={ChevronDown}
 				theme="solid"
@@ -42,7 +42,7 @@
 			class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
 		>
 			<div class="py-1">
-				{#each sortOptions.options as option (option.label)}
+				{#each filter.options as option (option.label)}
 					{@const active =
 						option.value === $page.url.searchParams.get('orderBy')}
 					<MenuItem>
