@@ -28,6 +28,7 @@
 	interface SortOption {
 		name: string;
 		value: string;
+		action: () => void;
 	}
 
 	export let sortOptions: SortOption[];

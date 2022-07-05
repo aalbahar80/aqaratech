@@ -11,7 +11,6 @@
 	export const load = async ({ url, stuff }: LoadEvent) => {
 		const { page, take, q, orderBy, sortOrder, filter } = parseParams(url);
 
-		console.log({ filter }, 'index.svelte ~ 14');
 		const leases = await stuff.api!.leases.findAll({
 			page,
 			take,
@@ -32,8 +31,24 @@
 	export let leases: Prop['leases'];
 
 	const sortOptions = [
-		{ name: 'Created', value: 'createdAt' as const },
-		{ name: 'Expiration', value: 'end' as const },
+		{
+			name: 'Created',
+			value: 'createdAt' as const,
+			action: () => {
+				const url = new URL($page.url);
+				url.searchParams.set('orderBy', 'createdAt'); // TODO dyanmic value
+				goto(url);
+			},
+		},
+		{
+			name: 'Expiration',
+			value: 'end' as const,
+			action: () => {
+				const url = new URL($page.url);
+				url.searchParams.set('orderBy', 'end');
+				goto(url);
+			},
+		},
 	];
 
 	let filters = [
@@ -45,27 +60,27 @@
 					value: 'current',
 					label: 'Current',
 					checked: true,
-					action: () => onFilter({ end: { gte: new Date() } }),
+					action: () => onFilter('filter', { end: { gte: new Date() } }),
 				},
 				{
 					value: 'expired',
 					label: 'Expired',
 					checked: true,
-					action: () => onFilter({ end: { lt: new Date() } }),
+					action: () => onFilter('filter', { end: { lt: new Date() } }),
 				},
 				{
 					value: 'upcoming',
 					label: 'Upcoming',
 					checked: true,
-					action: () => onFilter({ start: { gt: new Date() } }),
+					action: () => onFilter('filter', { start: { gt: new Date() } }),
 				},
 			],
 		},
 	];
 
-	const onFilter = (filter: any) => {
+	const onFilter = (title: string, filter: any) => {
 		const url = new URL($page.url);
-		url.searchParams.set('filter', JSON.stringify(filter));
+		url.searchParams.set(title, JSON.stringify(filter));
 		goto(url);
 	};
 </script>

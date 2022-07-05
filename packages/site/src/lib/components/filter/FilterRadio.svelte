@@ -14,6 +14,7 @@
 	interface SortOption {
 		name: string;
 		value: string;
+		action: () => void;
 	}
 
 	export let sortOptions: SortOption[];
@@ -50,17 +51,21 @@
 					{@const active =
 						option.value === $page.url.searchParams.get('orderBy')}
 					<MenuItem>
-						<a
-							sveltekit:noscroll
-							sveltekit:prefetch
-							href={`?orderBy=${option.value}&sortOrder=desc`}
+						<label
 							class={classes(
 								active ? 'bg-gray-100' : '',
 								'block px-4 py-2 text-sm font-medium text-gray-900',
 							)}
 						>
+							<input
+								type="radio"
+								name="sort"
+								value={option.value}
+								on:change={() => option.action()}
+								class="hidden"
+							/>
 							{option.name}
-						</a>
+						</label>
 					</MenuItem>
 				{/each}
 			</div>
