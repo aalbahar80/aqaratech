@@ -26,14 +26,14 @@ services:
       ignoredPaths:
         - packages/backend/**/*.spec.ts
 
-  # A Docker web service
+  # Sveltekit site
   - type: web
     name: site-docker
     env: docker
     repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
     plan: standard
-    branch: dockerize-site
+    branch: initNestjs
     dockerfilePath: ./Dockerfile.site
     # healthCheckPath: /
     envVars:
@@ -42,35 +42,6 @@ services:
           type: web
           name: nestjs-dev
           property: hostport
-
-  # Site
-  # - type: web
-  #   name: site
-  #   env: node
-  #   repo: https://github.com/aqaratech/aqtech.git
-  #   region: frankfurt
-  #   plan: Starter
-  #   branch: initNestjs
-  #   # numInstances: 1
-  #   # maxInstances: 1
-  #   buildCommand: pnpm install --filter=. --filter=@self/site... && pnpm build --filter=@self/site...
-  #   startCommand: cd packages/site && node build/index.js
-  #   # healthCheckPath: /health
-  #   autoDeploy: true
-  #   envVars:
-  #     - key: VITE_API_URL
-  #       fromService:
-  #         type: web
-  #         name: nestjs-dev
-  #         property: hostport
-  #     - key: VITE_RENDER
-  #       value: true
-
-  #   buildFilter:
-  #     paths:
-  #       - packages/site/**
-  #     ignoredPaths:
-  #       - packages/site/**/*.spec.ts
 
 databases:
   - name: elephant
