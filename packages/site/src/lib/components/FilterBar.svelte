@@ -27,7 +27,7 @@
 			aria-labelledby="filter-heading"
 			class="border-t border-gray-200 py-6"
 		>
-			<h2 id="filter-heading" class="sr-only">Product filters</h2>
+			<h2 id="filter-heading" class="sr-only">Filters</h2>
 
 			<div class="flex items-center justify-between">
 				<FilterRadio {sortOptions} />
