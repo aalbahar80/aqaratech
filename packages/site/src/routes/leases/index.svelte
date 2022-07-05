@@ -31,7 +31,7 @@
 	type Prop = LP<typeof load>;
 	export let leases: Prop['leases'];
 
-	const sort: Filter = {
+	$: sort = {
 		id: 'sort',
 		label: 'Sort',
 		options: [
@@ -69,7 +69,7 @@
 			{
 				value: 'upcoming',
 				label: 'Upcoming',
-				active: true,
+				active: true, // TODO handle with headlessui
 				action: () => setQuery('filter', { start: { gt: new Date() } }),
 			},
 		],
@@ -86,7 +86,7 @@
 	};
 </script>
 
-<FilterBar responsive={[status]} persistent={[sort]} />
+<FilterBar responsive={[status]} persistent={[sort, status]} />
 
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />

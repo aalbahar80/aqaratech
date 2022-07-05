@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import { classes } from '$lib/utils';
 	import {
@@ -43,12 +42,10 @@
 		>
 			<div class="py-1">
 				{#each filter.options as option (option.label)}
-					{@const active =
-						option.value === $page.url.searchParams.get('orderBy')}
 					<MenuItem>
 						<label
 							class={classes(
-								active ? 'bg-gray-100' : '',
+								option.active ? 'bg-gray-100' : '',
 								'block px-4 py-2 text-sm font-medium text-gray-900',
 							)}
 						>
