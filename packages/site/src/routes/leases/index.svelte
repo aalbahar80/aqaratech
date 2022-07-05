@@ -34,20 +34,12 @@
 		{
 			name: 'Created',
 			value: 'createdAt' as const,
-			action: () => {
-				const url = new URL($page.url);
-				url.searchParams.set('orderBy', 'createdAt'); // TODO dyanmic value
-				goto(url);
-			},
+			action: () => setQuery('orderBy', 'createdAt'),
 		},
 		{
 			name: 'Expiration',
 			value: 'end' as const,
-			action: () => {
-				const url = new URL($page.url);
-				url.searchParams.set('orderBy', 'end');
-				goto(url);
-			},
+			action: () => setQuery('orderBy', 'end'),
 		},
 	];
 
@@ -60,27 +52,31 @@
 					value: 'current',
 					label: 'Current',
 					checked: true,
-					action: () => onFilter('filter', { end: { gte: new Date() } }),
+					action: () => setQuery('filter', { end: { gte: new Date() } }),
 				},
 				{
 					value: 'expired',
 					label: 'Expired',
 					checked: true,
-					action: () => onFilter('filter', { end: { lt: new Date() } }),
+					action: () => setQuery('filter', { end: { lt: new Date() } }),
 				},
 				{
 					value: 'upcoming',
 					label: 'Upcoming',
 					checked: true,
-					action: () => onFilter('filter', { start: { gt: new Date() } }),
+					action: () => setQuery('filter', { start: { gt: new Date() } }),
 				},
 			],
 		},
 	];
 
-	const onFilter = (title: string, filter: any) => {
+	const setQuery = (title: string, value: any) => {
+		if (typeof value !== 'string') {
+			value = JSON.stringify(value);
+		}
 		const url = new URL($page.url);
-		url.searchParams.set(title, JSON.stringify(filter));
+		url.searchParams.set(title, value);
+		url.searchParams.sort(); // good for caching
 		goto(url);
 	};
 </script>
