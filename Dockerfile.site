@@ -1,0 +1,27 @@
+FROM node:16
+
+# Install OpenJDK-11
+# https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jre-headless && \
+    apt-get clean;
+
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+WORKDIR /app
+COPY pnpm-lock.yaml ./
+RUN pnpm fetch 
+
+ADD . ./
+# TODO only intall site stuff
+# RUN pnpm install -r --offline 
+RUN pnpm install --filter=. --filter=@self/site...
+
+# https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
+# TODO copy over the modules from above onto a `slim` image
+
+# TODO move env var to bash script
+ENV CI=0
+RUN pnpm -w run build --filter=@self/site...
+EXPOSE 3000
+
+CMD [ "node", "packages/site/build/index.js"]
