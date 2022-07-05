@@ -37,11 +37,12 @@ services:
     dockerfilePath: ./Dockerfile.site
     # healthCheckPath: /
     envVars:
+      - key: VITE_RENDER
+        value: true
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nestjs-dev
-          property: hostport
+        sync: false
+      - key: AUTH0_CLIENT_SECRET
+        sync: false
 
 databases:
   - name: elephant

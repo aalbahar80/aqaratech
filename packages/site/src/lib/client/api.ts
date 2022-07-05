@@ -19,7 +19,7 @@ export const api = ({
 }) => {
 	console.log(import.meta.env);
 	const basePath =
-		import.meta.env.VITE_VERCEL_ENV || import.meta.env.RENDER_ENV_IS_DOCKER
+		import.meta.env.VITE_VERCEL_ENV || import.meta.env.VITE_RENDER
 			? import.meta.env.VITE_API_URL // TODO prod
 			: 'http://localhost:3002';
 
