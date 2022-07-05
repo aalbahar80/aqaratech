@@ -50,48 +50,60 @@
 		],
 	};
 
-	let currentStatus: string | undefined = 'all';
+	enum Status {
+		All = 'all',
+		Current = 'current',
+		Expired = 'expired',
+		Upcoming = 'upcoming',
+	}
+
+	let currentStatus: Status;
 	$: status = {
-		id: 'status',
+		id: Status.All,
 		label: 'Status',
 		options: [
 			{
-				value: 'all',
+				value: Status.All,
 				label: 'All',
-				active: currentStatus === 'all',
+				active: currentStatus === Status.All,
 				action: () => {
-					currentStatus = 'all';
+					currentStatus = Status.All;
 					setQuery('filter', null);
 				},
 			},
 			{
-				value: 'current',
+				value: Status.Current,
 				label: 'Current',
-				active: currentStatus === 'current',
+				active: currentStatus === Status.Current,
 				action: () => {
-					currentStatus = 'current';
-					setQuery('filter', { end: { gte: new Date() } });
+					currentStatus = Status.Current;
+					setQuery('filter', { end: { gte: today() } });
 				},
 			},
 			{
-				value: 'expired',
+				value: Status.Expired,
 				label: 'Expired',
-				active: currentStatus === 'expired',
+				active: currentStatus === Status.Expired,
 				action: () => {
-					currentStatus = 'expired';
-					setQuery('filter', { end: { lt: new Date() } });
+					currentStatus = Status.Expired;
+					setQuery('filter', { end: { lt: today() } });
 				},
 			},
 			{
-				value: 'upcoming',
+				value: Status.Upcoming,
 				label: 'Upcoming',
-				active: currentStatus === 'upcoming',
+				active: currentStatus === Status.Upcoming,
 				action: () => {
-					currentStatus = 'upcoming';
-					setQuery('filter', { start: { gt: new Date() } });
+					currentStatus = Status.Upcoming;
+					setQuery('filter', { start: { gt: today() } });
 				},
 			},
 		],
+	};
+
+	const today = () => {
+		const now = new Date().toISOString().split('T')[0];
+		return `${now}T00:00:00.000Z`;
 	};
 
 	const setQuery = (title: string, value: any) => {
