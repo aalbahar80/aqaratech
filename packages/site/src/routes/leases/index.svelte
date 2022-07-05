@@ -45,25 +45,25 @@
 			{
 				label: 'Default',
 				value: Sort.Default,
-				action: () => setQuery('orderBy', null),
+				action: () => setQuery({ title: 'orderBy', value: null }),
 				active: null === $page.url.searchParams.get('orderBy'),
 			},
 			{
 				label: 'Created',
 				value: Sort.Created,
-				action: () => setQuery('orderBy', Sort.Created),
+				action: () => setQuery({ title: 'orderBy', value: Sort.Created }),
 				active: Sort.Created === $page.url.searchParams.get('orderBy'),
 			},
 			{
 				label: 'Modified',
 				value: Sort.Modified,
-				action: () => setQuery('orderBy', Sort.Modified),
+				action: () => setQuery({ title: 'orderBy', value: Sort.Modified }),
 				active: Sort.Modified === $page.url.searchParams.get('orderBy'),
 			},
 			{
 				label: 'Expiration',
 				value: Sort.Expiration,
-				action: () => setQuery('orderBy', Sort.Expiration),
+				action: () => setQuery({ title: 'orderBy', value: Sort.Expiration }),
 				active: Sort.Expiration === $page.url.searchParams.get('orderBy'),
 			},
 		],
@@ -87,7 +87,7 @@
 				active: currentStatus === Status.All,
 				action: () => {
 					currentStatus = Status.All;
-					setQuery('filter', null);
+					setQuery({ title: 'filter', value: null });
 				},
 			},
 			{
@@ -96,7 +96,7 @@
 				active: currentStatus === Status.Current,
 				action: () => {
 					currentStatus = Status.Current;
-					setQuery('filter', { end: { gte: today() } });
+					setQuery({ title: 'filter', value: { end: { gte: today() } } });
 				},
 			},
 			{
@@ -105,7 +105,7 @@
 				active: currentStatus === Status.Expired,
 				action: () => {
 					currentStatus = Status.Expired;
-					setQuery('filter', { end: { lt: today() } });
+					setQuery({ title: 'filter', value: { end: { lt: today() } } });
 				},
 			},
 			{
@@ -114,7 +114,7 @@
 				active: currentStatus === Status.Upcoming,
 				action: () => {
 					currentStatus = Status.Upcoming;
-					setQuery('filter', { start: { gt: today() } });
+					setQuery({ title: 'filter', value: { start: { gt: today() } } });
 				},
 			},
 		],
@@ -125,20 +125,28 @@
 		return `${now}T00:00:00.000Z`;
 	};
 
-	const setQuery = (title: string, value: any) => {
+	interface UrlQuery {
+		title: string;
+		value: any;
+	}
+
+	const setQuery = (...queries: UrlQuery[]) => {
 		const url = new URL($page.url);
 
-		if (!value) {
-			url.searchParams.delete(title);
-			goto(url);
-			return;
+		for (let { title, value } of queries) {
+			if (!value) {
+				url.searchParams.delete(title);
+				goto(url);
+				return;
+			}
+
+			if (typeof value !== 'string') {
+				value = JSON.stringify(value);
+			}
+
+			url.searchParams.set(title, value);
 		}
 
-		if (typeof value !== 'string') {
-			value = JSON.stringify(value);
-		}
-
-		url.searchParams.set(title, value);
 		url.searchParams.sort(); // good for caching
 		goto(url);
 	};
