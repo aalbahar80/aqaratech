@@ -31,21 +31,40 @@
 	type Prop = LP<typeof load>;
 	export let leases: Prop['leases'];
 
+	enum Sort {
+		Default = 'createdAt',
+		Created = 'createdAt',
+		Modified = 'updatedAt',
+		Expiration = 'end',
+	}
+
 	$: sort = {
 		id: 'sort',
 		label: 'Sort',
 		options: [
 			{
+				label: 'Default',
+				value: Sort.Default,
+				action: () => setQuery('orderBy', null),
+				active: null === $page.url.searchParams.get('orderBy'),
+			},
+			{
 				label: 'Created',
-				value: 'createdAt',
-				action: () => setQuery('orderBy', 'createdAt'),
-				active: 'createdAt' === $page.url.searchParams.get('orderBy'),
+				value: Sort.Created,
+				action: () => setQuery('orderBy', Sort.Created),
+				active: Sort.Created === $page.url.searchParams.get('orderBy'),
+			},
+			{
+				label: 'Modified',
+				value: Sort.Modified,
+				action: () => setQuery('orderBy', Sort.Modified),
+				active: Sort.Modified === $page.url.searchParams.get('orderBy'),
 			},
 			{
 				label: 'Expiration',
-				value: 'end',
-				action: () => setQuery('orderBy', 'end'),
-				active: 'end' === $page.url.searchParams.get('orderBy'),
+				value: Sort.Expiration,
+				action: () => setQuery('orderBy', Sort.Expiration),
+				active: Sort.Expiration === $page.url.searchParams.get('orderBy'),
 			},
 		],
 	};

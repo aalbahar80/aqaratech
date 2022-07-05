@@ -70,14 +70,16 @@ export class LeasesService {
       ...qfilter,
     };
 
+    const orderBy = pageOptionsDto.orderBy
+      ? { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder }
+      : {};
+
     let [results, itemCount] = await Promise.all([
       this.prisma.lease.findMany({
         take,
         skip: (page - 1) * take,
         where: filter,
-        ...(pageOptionsDto.orderBy
-          ? { orderBy: { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder } }
-          : {}),
+        orderBy,
       }),
       this.prisma.lease.count({ where: filter }),
     ]);
