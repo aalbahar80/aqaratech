@@ -45,38 +45,29 @@
 					value: 'current',
 					label: 'Current',
 					checked: true,
-					action: () => {
-						const url = new URL($page.url);
-						const filter = { end: { gte: new Date() } };
-						url.searchParams.set('filter', JSON.stringify(filter));
-						goto(url);
-					},
+					action: () => onFilter({ end: { gte: new Date() } }),
 				},
 				{
 					value: 'expired',
 					label: 'Expired',
 					checked: true,
-					action: () => {
-						const url = new URL($page.url);
-						const filter = { end: { lt: new Date() } };
-						url.searchParams.set('filter', JSON.stringify(filter));
-						goto(url);
-					},
+					action: () => onFilter({ end: { lt: new Date() } }),
 				},
 				{
 					value: 'upcoming',
 					label: 'Upcoming',
 					checked: true,
-					action: () => {
-						const url = new URL($page.url);
-						const filter = { start: { gt: new Date() } };
-						url.searchParams.set('filter', JSON.stringify(filter));
-						goto(url);
-					},
+					action: () => onFilter({ start: { gt: new Date() } }),
 				},
 			],
 		},
 	];
+
+	const onFilter = (filter: any) => {
+		const url = new URL($page.url);
+		url.searchParams.set('filter', JSON.stringify(filter));
+		goto(url);
+	};
 </script>
 
 <Filter {filters} {sortOptions} />
