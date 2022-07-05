@@ -13,6 +13,8 @@ const getOrigin = (localhostAllowed = true): string => {
 		return origin;
 	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}`;
+	} else if (process.env.RENDER) {
+		return `https://${process.env.RENDER_EXTERNAL_HOSTNAME}`;
 	} else if (!localhostAllowed) {
 		return 'http://127.0.0.1:3000';
 	} else {
