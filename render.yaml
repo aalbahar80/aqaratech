@@ -26,6 +26,23 @@ services:
       ignoredPaths:
         - packages/backend/**/*.spec.ts
 
+  # A Docker web service
+  - type: web
+    name: site-docker
+    env: docker
+    repo: https://github.com/aqaratech/aqtech.git
+    region: frankfurt
+    plan: standard
+    branch: dockerize-site
+    dockerfilePath: ./Dockerfile.site
+    # healthCheckPath: /
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: nestjs-dev
+          property: hostport
+
   # Site
   # - type: web
   #   name: site
