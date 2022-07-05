@@ -17,8 +17,11 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	// TODO prod
-	const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';
+	console.log(import.meta.env);
+	const basePath =
+		import.meta.env.VITE_VERCEL_ENV || import.meta.env.RENDER_ENV_IS_DOCKER
+			? import.meta.env.VITE_API_URL // TODO prod
+			: 'http://localhost:3002';
 
 	const headers = { Authorization: `Bearer ${token}` };
 
