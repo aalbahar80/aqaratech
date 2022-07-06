@@ -20,6 +20,24 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		vite: {
+			optimizeDeps: {
+				// exclude: ['@self/sdk'],
+				include: ['@self/sdk'],
+			},
+			server: {
+				watch: {
+					ignored: [
+						(path) => {
+							console.log({ path }, 'svelte.config.js ~ 32');
+							if (path.includes('layout')) {
+								console.log({ path }, 'svelte.config.js ~ 32');
+								console.log('---------------------');
+								return true;
+							}
+						},
+					],
+				},
+			},
 			// delete .svelte-kit folder b4 testing
 			test: {
 				exclude: ['**/tests/**', 'node_modules'],

@@ -8,7 +8,7 @@
     "build:docs": "turbo run build --filter=@self/docs",
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
     "test": "turbo run test --",
-    "dev": "turbo run dev --parallel",
+    "dev": "turbo run dev",
     "lint": "turbo run lint"
   },
   "devDependencies": {
