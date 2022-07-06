@@ -14,7 +14,8 @@
           "typescriptThreePlus": true,
           "nullSafeAdditionalProps": true,
           "withInterfaces": true,
-          "prefixParameterInterfaces": true
+          "prefixParameterInterfaces": true,
+          "disallowAdditionalPropertiesIfNotPresent": false
         }
       }
     }
