@@ -1,6 +1,5 @@
 import {
   ApiHideProperty,
-  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
@@ -17,7 +16,6 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { UnitDto } from 'src/units/dto/unit.dto';
 
 class PropertyRequiredDto extends AbstractDto {
   @Nanoid()
