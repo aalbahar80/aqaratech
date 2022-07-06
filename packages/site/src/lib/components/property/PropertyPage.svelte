@@ -3,10 +3,10 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
-	import type { PropertyDto, UnitDto } from '@self/sdk';
+	import type { PaginatedUnitDto, PropertyDto } from '@self/sdk';
 
 	export let property: PropertyDto;
-	export let units: UnitDto[];
+	export let units: PaginatedUnitDto;
 
 	let details: [string, string | null][];
 	$: details = [
