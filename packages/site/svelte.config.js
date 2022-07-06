@@ -22,6 +22,7 @@ const config = {
 	kit: {
 		adapter: process.env.VERCEL ? adapterV() : adapterN(),
 		vite: {
+			envDir: resolve(__dirname, './env'),
 			optimizeDeps: {
 				include: process.env.NODE_ENV === 'production' ? [] : ['@self/sdk'],
 			},
