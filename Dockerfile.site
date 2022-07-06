@@ -24,4 +24,4 @@ ENV CI=0
 RUN pnpm -w run build --filter=@self/site...
 EXPOSE 3000
 
-CMD [ "node", "packages/site/build/index.js"]
+CMD [ "ORIGIN=rp1.nbe.workers.dev node", "packages/site/build/index.js"]
