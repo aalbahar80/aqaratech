@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getButtons } from '$lib/components/table/pagination';
 	import { classes } from '$lib/utils';
-	import { getTableUrl } from '$lib/utils/table-utils';
 	import type { PaginatedDto } from '@self/sdk';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -10,9 +9,6 @@
 		PaginatedDto,
 		'pageCount' | 'itemCount' | 'take' | 'pageSize'
 	>;
-
-	const newPageHref = (url: URL, newPageIndex: number) =>
-		getTableUrl(url, { p: newPageIndex.toString() });
 
 	$: pageCounter = 1; // might need to get default from prop
 
@@ -27,7 +23,10 @@
 			: idxStart + pagination.pageSize;
 </script>
 
-<pre>{JSON.stringify(pageCounter, null, 2)}</pre>
+<!--
+@component
+Manage the page using `pageCounter` prop.
+-->
 
 <div
 	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
