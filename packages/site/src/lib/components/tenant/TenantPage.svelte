@@ -59,4 +59,4 @@
 </Heading>
 <DetailsPane {details} {files} />
 <LeaseList {leases} showIndex />
-<!-- <TrxColumn transactions={invoices.results} /> -->
+<TrxColumn {invoices} />

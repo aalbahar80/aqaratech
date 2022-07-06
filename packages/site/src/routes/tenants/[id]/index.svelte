@@ -28,5 +28,4 @@
 	export let invoices: Prop['invoices'];
 </script>
 
-<pre>{JSON.stringify(tenant, null, 2)}</pre>
-<!-- <TenantPage {tenant} {leases} {invoices} /> -->
+<TenantPage {tenant} {leases} {invoices} />
