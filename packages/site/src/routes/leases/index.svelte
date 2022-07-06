@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import { getQuery, type UrlQuery } from '$lib/utils/set-query';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -131,5 +130,4 @@
 
 <div class="">
 	<LeaseList {leases} --border-radius-b="0" />
-	<AnchorPagination pagination={leases.pagination} />
 </div>
