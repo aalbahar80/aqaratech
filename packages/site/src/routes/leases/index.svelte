@@ -123,7 +123,7 @@
 			url: $page.url,
 			queries: [...queries, { title: 'p', value: null }],
 		});
-		goto(url);
+		goto(url, { noscroll: true });
 	};
 </script>
 
