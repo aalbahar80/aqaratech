@@ -5,6 +5,7 @@
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
+	import { getQuery, type UrlQuery } from '$lib/utils/set-query';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -117,29 +118,11 @@
 		return `${now}T00:00:00.000Z`;
 	};
 
-	interface UrlQuery {
-		title: string;
-		value: any;
-	}
-
 	const setQuery = (...queries: UrlQuery[]) => {
-		const url = new URL($page.url);
-
-		for (let { title, value } of queries) {
-			if (!value) {
-				url.searchParams.delete(title);
-				goto(url);
-				return;
-			}
-
-			if (typeof value !== 'string') {
-				value = JSON.stringify(value);
-			}
-
-			url.searchParams.set(title, value);
-		}
-
-		url.searchParams.sort(); // good for caching
+		const url = getQuery({
+			url: $page.url,
+			queries: [...queries, { title: 'p', value: null }],
+		});
 		goto(url);
 	};
 </script>

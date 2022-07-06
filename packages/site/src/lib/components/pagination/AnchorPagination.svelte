@@ -2,18 +2,21 @@
 	import { page } from '$app/stores';
 	import { getButtons } from '$lib/components/table/pagination';
 	import { classes } from '$lib/utils';
-	import { getTableUrl } from '$lib/utils/table-utils';
+	import { getQuery } from '$lib/utils/set-query';
 	import type { PaginatedDto } from '@self/sdk';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let pagination: PaginatedDto;
 
-	const newPageHref = (url: URL, newPageIndex: number) =>
-		getTableUrl(url, { p: newPageIndex.toString() });
+	const getPageHref = (newPage: number, url: URL) =>
+		getQuery({
+			url,
+			queries: [{ title: 'p', value: newPage }],
+		}).href;
 
-	$: nextPageHref = newPageHref($page.url, pagination.page + 1);
-	$: prevPageHref = newPageHref($page.url, pagination.page - 1);
+	$: nextPageHref = getPageHref(pagination.page + 1, $page.url);
+	$: prevPageHref = getPageHref(pagination.page - 1, $page.url);
 
 	$: buttons = getButtons(pagination.page, pagination.pageCount);
 </script>
@@ -68,7 +71,7 @@
 						<a
 							sveltekit:noscroll
 							aria-current={current ? 'page' : null}
-							href={newPageHref($page.url, button)}
+							href={getPageHref(button, $page.url)}
 							class={classes(
 								current
 									? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
