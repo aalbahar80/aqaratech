@@ -163,533 +163,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TenantDto'
       tags: *ref_0
-  /portfolios:
-    post:
-      operationId: create
-      parameters:
-        - name: x-role-id
-          in: header
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePortfolioDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_1
-        - portfolios
-    get:
-      operationId: findAll
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 50
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedPortfolioDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfPortfolioDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_1
-  /portfolios/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_1
-    patch:
-      operationId: update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePortfolioDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_1
-    delete:
-      operationId: remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_1
-  /portfolios/{id}/properties:
-    get:
-      operationId: findProperties
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 50
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedPropertyDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfPropertyDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_1
-  /properties:
-    post:
-      operationId: create
-      parameters:
-        - name: x-role-id
-          in: header
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PropertyDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_2
-        - properties
-    get:
-      operationId: findAll
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 50
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedPropertyDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfPropertyDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
-  /properties/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
-    patch:
-      operationId: update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePropertyDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
-    delete:
-      operationId: remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_2
-  /properties/{id}/units:
-    get:
-      operationId: findUnits
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 50
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedUnitDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUnitDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UnitDto'
-      tags: *ref_2
-  /units:
-    post:
-      operationId: create
-      parameters:
-        - name: x-role-id
-          in: header
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateUnitDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnitDto'
-      tags: &ref_3
-        - units
-    get:
-      operationId: findAll
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 50
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedUnitDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUnitDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
-  /units/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
-    patch:
-      operationId: update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateUnitDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnitDto'
-      tags: *ref_3
-    delete:
-      operationId: remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_3
-  /units/{id}/leases:
+  /tenants/{id}/leases:
     get:
       operationId: findLeases
       parameters:
@@ -750,7 +224,203 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_3
+      tags: *ref_0
+  /tenants/{id}/invoices:
+    get:
+      operationId: findInvoices
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseInvoiceDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_0
+  /leaseInvoices:
+    post:
+      operationId: create
+      parameters:
+        - name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: &ref_1
+        - leaseInvoices
+    get:
+      operationId: findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseInvoiceDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_1
+  /leaseInvoices/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_1
+    patch:
+      operationId: update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLeaseInvoiceDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: *ref_1
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: *ref_1
   /leases:
     post:
       operationId: create
@@ -772,7 +442,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: &ref_4
+      tags: &ref_2
         - leases
     get:
       operationId: findAll
@@ -829,7 +499,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_4
+      tags: *ref_2
   /leases/{id}:
     get:
       operationId: findOne
@@ -846,7 +516,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_4
+      tags: *ref_2
     patch:
       operationId: update
       parameters:
@@ -868,7 +538,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_4
+      tags: *ref_2
     delete:
       operationId: remove
       parameters:
@@ -884,7 +554,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_4
+      tags: *ref_2
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
@@ -946,8 +616,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_4
-  /leaseInvoices:
+      tags: *ref_2
+  /properties:
     post:
       operationId: create
       parameters:
@@ -960,16 +630,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+              $ref: '#/components/schemas/PropertyDto'
       responses:
         '201':
           description: ''
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: &ref_5
-        - leaseInvoices
+                $ref: '#/components/schemas/PropertyDto'
+      tags: &ref_3
+        - properties
     get:
       operationId: findAll
       parameters:
@@ -1014,19 +684,19 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedLeaseInvoiceDto
+                title: PaginatedPropertyDto
                 required:
                   - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfLeaseInvoiceDto
+                  - title: ArrayOfPropertyDto
                     properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_5
-  /leaseInvoices/{id}:
+                          $ref: '#/components/schemas/PropertyDto'
+      tags: *ref_3
+  /properties/{id}:
     get:
       operationId: findOne
       parameters:
@@ -1041,7 +711,399 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
+                $ref: '#/components/schemas/PropertyDto'
+      tags: *ref_3
+    patch:
+      operationId: update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePropertyDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyDto'
+      tags: *ref_3
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyDto'
+      tags: *ref_3
+  /properties/{id}/units:
+    get:
+      operationId: findUnits
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedUnitDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfUnitDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UnitDto'
+      tags: *ref_3
+  /units:
+    post:
+      operationId: create
+      parameters:
+        - name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUnitDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitDto'
+      tags: &ref_4
+        - units
+    get:
+      operationId: findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedUnitDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfUnitDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UnitDto'
+      tags: *ref_4
+  /units/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitDto'
+      tags: *ref_4
+    patch:
+      operationId: update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUnitDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitDto'
+      tags: *ref_4
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_4
+  /units/{id}/leases:
+    get:
+      operationId: findLeases
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseDto'
+      tags: *ref_4
+  /portfolios:
+    post:
+      operationId: create
+      parameters:
+        - name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortfolioDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioDto'
+      tags: &ref_5
+        - portfolios
+    get:
+      operationId: findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedPortfolioDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfPortfolioDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PortfolioDto'
+      tags: *ref_5
+  /portfolios/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioDto'
       tags: *ref_5
     patch:
       operationId: update
@@ -1056,14 +1118,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateLeaseInvoiceDto'
+              $ref: '#/components/schemas/UpdatePortfolioDto'
       responses:
         '200':
           description: ''
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                $ref: '#/components/schemas/PortfolioDto'
       tags: *ref_5
     delete:
       operationId: remove
@@ -1079,7 +1141,69 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                $ref: '#/components/schemas/PortfolioDto'
+      tags: *ref_5
+  /portfolios/{id}/properties:
+    get:
+      operationId: findProperties
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedPropertyDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfPropertyDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PropertyDto'
       tags: *ref_5
   /users:
     post:
@@ -1690,7 +1814,7 @@ components:
           type: string
           nullable: true
           default: null
-    CreatePortfolioDto:
+    LeaseDto:
       type: object
       properties:
         id:
@@ -1704,30 +1828,33 @@ components:
           format: date-time
           type: string
           readOnly: true
-        organizationId:
+        ext:
+          $ref: '#/components/schemas/LeaseExtendedDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        tenantId:
           type: string
-        fullName:
+        unitId:
           type: string
-          minLength: 1
-          maxLength: 255
-        shortName:
-          type: string
-          nullable: true
-          default: null
-        civilid:
-          type: string
-          nullable: true
-          default: null
-        phone:
-          type: string
-          nullable: true
-          default: null
-        email:
-          type: string
-          nullable: true
-          default: null
-        dob:
+        start:
           format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
           type: string
           nullable: true
           default: null
@@ -1735,9 +1862,45 @@ components:
         - id
         - createdAt
         - updatedAt
-        - organizationId
-        - fullName
-    PortfolioDto:
+        - ext
+        - breadcrumbs
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
+    LeaseInvoiceBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        lease:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+        - property
+        - unit
+        - lease
+        - tenant
+    LeaseInvoiceDto:
       type: object
       properties:
         id:
@@ -1751,30 +1914,30 @@ components:
           format: date-time
           type: string
           readOnly: true
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        shortName:
-          type: string
-          nullable: true
-          default: null
-        civilid:
-          type: string
-          nullable: true
-          default: null
-        phone:
-          type: string
-          nullable: true
-          default: null
-        email:
-          type: string
-          nullable: true
-          default: null
-        dob:
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        amount:
+          type: number
+          minimum: 1
+        postAt:
           format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
           type: string
           nullable: true
           default: null
@@ -1782,14 +1945,15 @@ components:
         - id
         - createdAt
         - updatedAt
-        - organizationId
-        - fullName
-        - shortName
-        - civilid
-        - phone
-        - email
-        - dob
-    UpdatePortfolioDto:
+        - breadcrumbs
+        - amount
+        - postAt
+        - leaseId
+        - dueAt
+        - paidAt
+        - isPaid
+        - memo
+    CreateLeaseInvoiceDto:
       type: object
       properties:
         id:
@@ -1803,28 +1967,260 @@ components:
           format: date-time
           type: string
           readOnly: true
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        shortName:
-          type: string
-          nullable: true
-          default: null
-        civilid:
-          type: string
-          nullable: true
-          default: null
-        phone:
-          type: string
-          nullable: true
-          default: null
-        email:
-          type: string
-          nullable: true
-          default: null
-        dob:
+        amount:
+          type: number
+          minimum: 1
+        postAt:
           format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - amount
+        - postAt
+        - leaseId
+    LeaseInvoiceBasicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        leaseId:
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - amount
+        - postAt
+        - leaseId
+        - dueAt
+        - paidAt
+        - isPaid
+        - memo
+    UpdateLeaseInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        isPaid:
+          type: boolean
+          default: false
+        memo:
+          type: string
+          nullable: true
+          default: null
+    CreateLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+    LeaseBasicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - deactivated
+        - notify
+        - license
+    UpdateLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+          default: 0
+        deactivated:
+          type: boolean
+          default: false
+        notify:
+          type: boolean
+          default: true
+        license:
           type: string
           nullable: true
           default: null
@@ -2169,7 +2565,7 @@ components:
           type: string
           nullable: true
           default: null
-    LeaseDto:
+    CreatePortfolioDto:
       type: object
       properties:
         id:
@@ -2183,33 +2579,30 @@ components:
           format: date-time
           type: string
           readOnly: true
-        ext:
-          $ref: '#/components/schemas/LeaseExtendedDto'
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
-        tenantId:
+        organizationId:
           type: string
-        unitId:
+        fullName:
           type: string
-        start:
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        civilid:
+          type: string
+          nullable: true
+          default: null
+        phone:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+          nullable: true
+          default: null
+        dob:
           format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
           type: string
           nullable: true
           default: null
@@ -2217,18 +2610,9 @@ components:
         - id
         - createdAt
         - updatedAt
-        - ext
-        - breadcrumbs
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - deactivated
-        - notify
-        - license
-    CreateLeaseDto:
+        - organizationId
+        - fullName
+    PortfolioDto:
       type: object
       properties:
         id:
@@ -2242,29 +2626,30 @@ components:
           format: date-time
           type: string
           readOnly: true
-        tenantId:
+        organizationId:
           type: string
-        unitId:
+        fullName:
           type: string
-        start:
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        civilid:
+          type: string
+          nullable: true
+          default: null
+        phone:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+          nullable: true
+          default: null
+        dob:
           format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
           type: string
           nullable: true
           default: null
@@ -2272,12 +2657,14 @@ components:
         - id
         - createdAt
         - updatedAt
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-    LeaseBasicDto:
+        - organizationId
+        - fullName
+        - shortName
+        - civilid
+        - phone
+        - email
+        - dob
+    UpdatePortfolioDto:
       type: object
       properties:
         id:
@@ -2291,291 +2678,28 @@ components:
           format: date-time
           type: string
           readOnly: true
-        tenantId:
+        fullName:
           type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
+          minLength: 1
+          maxLength: 255
+        shortName:
           type: string
           nullable: true
           default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - deactivated
-        - notify
-        - license
-    UpdateLeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-          default: 0
-        deactivated:
-          type: boolean
-          default: false
-        notify:
-          type: boolean
-          default: true
-        license:
+        civilid:
           type: string
           nullable: true
           default: null
-    LeaseInvoiceBreadcrumbsDto:
-      type: object
-      properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        lease:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        tenant:
-          $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - portfolio
-        - property
-        - unit
-        - lease
-        - tenant
-    LeaseInvoiceDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
-        leaseId:
-          type: string
-        dueAt:
-          format: date-time
+        phone:
           type: string
           nullable: true
           default: null
-        paidAt:
-          format: date-time
+        email:
           type: string
           nullable: true
           default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - breadcrumbs
-        - amount
-        - postAt
-        - leaseId
-        - dueAt
-        - paidAt
-        - isPaid
-        - memo
-    CreateLeaseInvoiceDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
+        dob:
           format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
-        leaseId:
-          type: string
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - amount
-        - postAt
-        - leaseId
-    LeaseInvoiceBasicDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
-        leaseId:
-          type: string
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
-          type: string
-          nullable: true
-          default: null
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - amount
-        - postAt
-        - leaseId
-        - dueAt
-        - paidAt
-        - isPaid
-        - memo
-    UpdateLeaseInvoiceDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        amount:
-          type: number
-          minimum: 1
-        postAt:
-          format: date-time
-          type: string
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-          default: null
-        isPaid:
-          type: boolean
-          default: false
-        memo:
           type: string
           nullable: true
           default: null

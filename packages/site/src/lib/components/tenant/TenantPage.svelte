@@ -6,42 +6,46 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import type { TenantOneDto } from '@self/sdk';
+	import type {
+		LeaseInvoiceDto,
+		PaginatedLeaseDto,
+		PaginatedLeaseInvoiceDto,
+		TenantDto,
+	} from '@self/sdk';
 	import { Collection, Mail } from '@steeze-ui/heroicons';
-	import * as R from 'remeda';
 
-	export let data: TenantOneDto;
+	export let tenant: TenantDto;
+	export let leases: PaginatedLeaseDto;
+	export let invoices: PaginatedLeaseInvoiceDto;
 
 	const details: [string, string | null][] = [
-		['Full Name', data.fullName],
-		['Phone', data.phone],
-		['Email', data.email],
-		['Civil id', data.civilid],
-		['Passport #', data.passportNum],
-		['Residency #', data.residencyNum],
-		['Residency Expiration', data.residencyEnd?.toLocaleDateString() ?? ''],
-		['Nationality', data.nationality],
+		['Full Name', tenant.fullName],
+		['Phone', tenant.phone],
+		['Email', tenant.email],
+		['Civil id', tenant.civilid],
+		['Passport #', tenant.passportNum],
+		['Residency #', tenant.residencyNum],
+		['Residency Expiration', tenant.residencyEnd?.toLocaleDateString() ?? ''],
+		['Nationality', tenant.nationality],
 	];
 
 	const files: [string, string][] = [
 		['Civil Id', ''],
 		['Passport', ''],
 	];
-
-	const transactions = R.flatMap(data.leases, (lease) => lease.transactions);
 </script>
 
-<Heading title="Tenant" id={data.id} entity="tenants">
+<Heading title="Tenant" id={tenant.id} entity="tenants">
 	<svelte:fragment slot="actions">
 		<Button
 			icon={Collection}
 			text="Tenant Dashboard"
 			as="a"
-			href={`/portal/tenant/${data.id}`}
+			href={`/portal/tenant/${tenant.id}`}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<AsyncButton func={() => handleInvite(data.id, 'tenant')} let:loading>
+		<AsyncButton func={() => handleInvite(tenant.id, 'tenant')} let:loading>
 			<Button
 				as="div"
 				{loading}
@@ -54,5 +58,5 @@
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} {files} />
-<LeaseList leases={data.leases} showIndex />
-<TrxColumn {transactions} />
+<LeaseList {leases} showIndex />
+<!-- <TrxColumn transactions={invoices.results} /> -->
