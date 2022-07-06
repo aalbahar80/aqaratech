@@ -17,7 +17,8 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	console.log(import.meta.env);
+	console.log(import.meta.env, 'api.ts');
+
 	const basePath = import.meta.env.VITE_VERCEL_ENV
 		? import.meta.env.VITE_API_URL
 		: import.meta.env.PROD // for render docker

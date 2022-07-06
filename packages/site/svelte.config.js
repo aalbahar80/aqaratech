@@ -1,9 +1,11 @@
 import preprocess from 'svelte-preprocess';
 import { resolve } from 'path';
-import adapter from '@sveltejs/adapter-node';
+import adapterN from '@sveltejs/adapter-node';
+import adapterV from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
 
+console.log(process.env, 'svelte.config.js');
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -18,7 +20,7 @@ const config = {
 		loopGuardTimeout: process.env.NODE_ENV === 'production' ? undefined : 300,
 	},
 	kit: {
-		adapter: adapter(),
+		adapter: process.env.VERCEL ? adapterV() : adapterN(),
 		vite: {
 			optimizeDeps: {
 				include: process.env.NODE_ENV === 'production' ? [] : ['@self/sdk'],
