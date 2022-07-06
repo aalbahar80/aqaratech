@@ -21,8 +21,7 @@ const config = {
 		adapter: adapter(),
 		vite: {
 			optimizeDeps: {
-				// exclude: ['@self/sdk'],
-				include: ['@self/sdk'],
+				include: process.env.NODE_ENV === 'production' ? [] : ['@self/sdk'],
 			},
 			server: {
 				watch: {
