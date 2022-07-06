@@ -4,8 +4,15 @@ import adapterN from '@sveltejs/adapter-node';
 import adapterV from '@sveltejs/adapter-vercel';
 // import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-console.log(process.env, 'svelte.config.js');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+console.log(process.env, 'process.env:svelte.config.js');
+console.log(import.meta.url, 'import.meta.url:svelte.config.js');
+console.log(resolve(__dirname, './env'), 'envpath:svelte.config.js');
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -30,10 +37,7 @@ const config = {
 				watch: {
 					ignored: [
 						(path) => {
-							console.log({ path }, 'svelte.config.js ~ 32');
 							if (path.includes('layout')) {
-								console.log({ path }, 'svelte.config.js ~ 32');
-								console.log('---------------------');
 								return true;
 							}
 						},
