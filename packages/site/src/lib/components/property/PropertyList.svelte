@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import PropertyCard from '$components/property/PropertyCard.svelte';
+	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import type { PaginatedPropertyDto } from '@self/sdk';
 
@@ -21,4 +22,5 @@
 			<PropertyCard {property} {idx} />
 		</li>
 	{/each}
+	<AnchorPagination pagination={properties.pagination} />
 </StackedList>
