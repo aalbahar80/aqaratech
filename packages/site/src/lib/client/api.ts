@@ -17,11 +17,13 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
+	console.log(import.meta.env);
 	const basePath = import.meta.env.VITE_VERCEL_ENV
 		? import.meta.env.VITE_API_URL
 		: import.meta.env.PROD // for render docker
-		? 'https://nestjs-dev.onrender.com'
-		: 'http://localhost:3002';
+		? 'https://rp1.nbe.workers.dev'
+		: // ? 'https://nestjs-dev.onrender.com'
+		  'http://localhost:3002';
 
 	const headers = { Authorization: `Bearer ${token}` };
 

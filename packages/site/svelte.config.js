@@ -48,6 +48,7 @@ const config = {
 				process.env.NODE_ENV === 'production'
 					? {
 							__SENTRY_DEBUG__: false,
+							VITE_MY_VAR: 'SOME_VALUE',
 					  }
 					: undefined,
 			resolve: {
