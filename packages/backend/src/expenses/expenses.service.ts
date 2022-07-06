@@ -5,7 +5,12 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
+import { Rel } from 'src/constants/rel.enum';
+import {
+  ExpenseBreadcrumbsDto,
+  ExpenseDto,
+  UpdateExpenseDto,
+} from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { search } from 'src/utils/search';
@@ -84,8 +89,9 @@ export class ExpensesService {
     return { pagination, results };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.expense.findUnique({ where: { id } });
+  async findOne({ id }: { id: string }) {
+    const expense = await this.prisma.expense.findUnique({ where: { id } });
+    return { ...expense, breadcrumbs: this.breadcrumbs(expense) };
   }
 
   update({
@@ -110,5 +116,38 @@ export class ExpensesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.expense.delete({ where: { id } });
+  }
+
+  // ::: HELPERS :::
+
+  breadcrumbs(expense: {
+    portfolioId: string | null;
+    propertyId: string | null;
+    unitId: string | null;
+  }): ExpenseBreadcrumbsDto | undefined {
+    if (expense.portfolioId) {
+      return {
+        portfolio: {
+          rel: Rel.Portfolio,
+          href: `/portfolios/${expense.portfolioId}`,
+        },
+      };
+    }
+    if (expense.propertyId) {
+      return {
+        property: {
+          rel: Rel.Property,
+          href: `/properties/${expense.propertyId}`,
+        },
+      };
+    }
+    if (expense.unitId) {
+      return {
+        unit: {
+          rel: Rel.Unit,
+          href: `/units/${expense.unitId}`,
+        },
+      };
+    }
   }
 }

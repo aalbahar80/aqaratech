@@ -1,17 +1,33 @@
-import { ApiHideProperty, PartialType } from '@nestjs/swagger';
+import {
+  ApiHideProperty,
+  IntersectionType,
+  OmitType,
+  PartialType,
+  PickType,
+} from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
 import { IsISO8601, IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-type IsNullable<T> = null extends T ? T : never;
-type OptionalIfNullable<T> = {
-  [P in keyof T]?: T[P] extends IsNullable<T[P]> ? T[P] | undefined : T[P];
-};
-export class ExpenseDto
-  extends AbstractDto
-  implements OptionalIfNullable<Expense>
-{
+class ExpenseRequiredDto extends AbstractDto {
+  @IsPositive()
+  amount: number;
+
+  @IsISO8601()
+  postAt: Date;
+
+  @IsString()
+  memo: string | null;
+
+  // TODO use category name/prisma connect & set default here
+  // @ApiHideProperty()
+  // categoryId: number | null;
+  //
+}
+
+class ExpenseOptionalDto {
   // TODO: constrain only one of the following fields to be set
   @Nanoid()
   @IsOptional()
@@ -28,19 +44,23 @@ export class ExpenseDto
   // TODO remove from schema
   @ApiHideProperty()
   maintenanceOrderId: string | null;
-
-  // TODO use category name/prisma connect & set default here
-  // @ApiHideProperty()
-  // categoryId: number | null;
-
-  @IsPositive()
-  amount: number;
-
-  @IsISO8601()
-  postAt: Date;
-
-  @IsString()
-  memo: string | null;
 }
 
-export class UpdateExpenseDto extends PartialType(ExpenseDto) {}
+export class ExpenseDto extends IntersectionType(
+  ExpenseRequiredDto,
+  ExpenseOptionalDto,
+) {
+  breadcrumbs?: ExpenseBreadcrumbsDto;
+}
+
+export class CreateExpenseDto
+  extends IntersectionType(ExpenseRequiredDto, PartialType(ExpenseOptionalDto))
+  implements Partial<Expense> {}
+
+export class UpdateExpenseDto extends PartialType(
+  OmitType(CreateExpenseDto, ['portfolioId']),
+) {}
+
+export class ExpenseBreadcrumbsDto extends PartialType(
+  PickType(BreadcrumbsDto, ['portfolio', 'property', 'unit']),
+) {}
