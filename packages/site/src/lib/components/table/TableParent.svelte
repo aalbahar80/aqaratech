@@ -2,10 +2,10 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
+	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import { classMap } from '$lib/models/classes/all.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { PaginatedDto } from '@self/sdk';
-	import Pagination from './Pagination.svelte';
 	import Table from './Table.svelte';
 
 	interface Data {
@@ -56,7 +56,7 @@
 	</a>
 	{#if rows.length}
 		<Table {rows} {modifier} />
-		<Pagination pagination={data.pagination} />
+		<AnchorPagination pagination={data.pagination} />
 	{:else}
 		<EmptyState {entity} {createHref} />
 	{/if}
