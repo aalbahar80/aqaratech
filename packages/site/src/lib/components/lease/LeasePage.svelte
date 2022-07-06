@@ -65,4 +65,5 @@
 </Heading>
 <Badge label={badge.label} badgeColor={badge.color} />
 <DetailsPane {details} {files} />
+<!-- TODO: convert trxColumn to stacked list to take advantage of anchor pagination etc -->
 <TrxColumn {invoices} leaseId={lease.id} />
