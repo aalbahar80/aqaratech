@@ -22,7 +22,7 @@ export const api = ({
 	const basePath = import.meta.env.VITE_VERCEL_ENV
 		? import.meta.env.VITE_API_URL
 		: import.meta.env.PROD // for render docker
-		? 'https://rp1.nbe.workers.dev'
+		? 'https://rp1.nbe.workers.dev/api'
 		: // ? 'https://nestjs-dev.onrender.com'
 		  'http://localhost:3002';
 
