@@ -7,7 +7,7 @@
 	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
-	import { forceDate, forceDateToInput, toDateInput } from '$lib/utils/common';
+	import { forceDate, toDateInput } from '$lib/utils/common';
 	import type { Predefined } from '$models/interfaces/lease.interface';
 	import reporter from '@felte/reporter-tippy';
 	import { validateSchema, type ValidatorConfig } from '@felte/validator-zod';
@@ -49,34 +49,6 @@
 		unsetField,
 		isValid,
 	} = createForm<z.infer<typeof Lease.leaseFormSchema>, ValidatorConfig>({
-		transform: (values: unknown) => {
-			// make sure each element in schedule array is an object whose postAt is a date
-			const original = values as z.infer<typeof Lease.leaseFormSchema>;
-			console.log({ original }, 'LeaseForm.svelte ~ 55');
-			const newValues = {} as any;
-			if (Array.isArray(original.schedule)) {
-				newValues.schedule = original?.schedule.map((item) => {
-					if (item?.postAt) {
-						return {
-							...item,
-							postAt: forceDateToInput(item.postAt),
-						};
-					}
-					return item;
-				});
-			}
-			if (original.start) {
-				newValues.start = new Date(original.start);
-			}
-			if (original.end) {
-				newValues.end = new Date(original.end);
-			}
-			console.log({ newValues }, 'LeaseForm.svelte ~ 74');
-			return {
-				...original,
-				...newValues,
-			};
-		},
 		initialValues: lease,
 		schema: Lease.leaseFormSchema, // only to make linter happy
 		extend: reporter(),
@@ -97,16 +69,31 @@
 		},
 		onSubmit: async (values) => {
 			try {
-				console.debug(values);
+				// start/end/postAt are strings here, fix type to reflect this
 				const { schedule: unparsed, ...leaseValues } = values;
+				console.debug({ unparsed }, 'LeaseForm.svelte ~ 103');
+
+				// convert postAt to date objects
 				const schedule = scheduleSchema.parse(unparsed);
-				// const newLease = await trpc().mutation('leases:save', leaseValues);
+				console.debug({ schedule }, 'LeaseForm.svelte ~ 104');
+
+				// convert strings from `html date inputs` to date objects.
+				// api client will convert them back to dates.
+				const formatted = {
+					...leaseValues,
+					start: new Date(leaseValues.start),
+					end: new Date(leaseValues.end),
+				};
+
+				// create lease
 				const newLease = await $page.stuff.api.leases.create({
-					createLeaseDto: values,
+					createLeaseDto: formatted,
 				});
 				console.debug(newLease);
+
+				// prepare invoices for creation
 				const trxValues = schedule.map((e) => ({
-					id: uuidv4(),
+					id: uuidv4(), // TODO remove
 					leaseId: newLease.id,
 					// dueAt: addDays(e.postAt, 15),
 					isPaid: false,
@@ -125,6 +112,8 @@
 					),
 				}));
 				console.debug(trxValues);
+
+				// create invoices
 				const newTrxs = await $page.stuff.api.leases.createInvoices({
 					id: newLease.id,
 					createLeaseInvoiceDto: trxValues,

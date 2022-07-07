@@ -56,8 +56,8 @@ export class Lease extends Entity {
 
 	defaultForm = (): Record<keyof Omit<z.input<typeof baseSchema>, 'id'>, any> &
 		z.input<typeof extendedSchema> => ({
-		start: new Date(),
-		end: addYears(new Date(), 1),
+		start: new Date().toISOString().split('T')[0],
+		end: addYears(new Date(), 1).toISOString().split('T')[0],
 		monthlyRent: 0,
 		tenantId: '',
 		unitId: '',
@@ -133,7 +133,7 @@ export class Lease extends Entity {
 		const newSchedule = [];
 		const start = scheduleStart;
 		for (let bp = 0; bp < Math.min(count, 24); bp++) {
-			const postAt = Date.UTC(
+			const postAtMS = Date.UTC(
 				start.getUTCFullYear(),
 				start.getUTCMonth() + bp,
 				start.getUTCDate(),
@@ -141,8 +141,9 @@ export class Lease extends Entity {
 				start.getUTCMinutes(),
 				start.getUTCSeconds(),
 			);
-			console.log(new Date(postAt), 'postAt');
-			const memo = `Rent for: ${toUTCFormat(new Date(postAt), 'MMMM yyyy')}`;
+			console.log(new Date(postAtMS), 'postAt');
+			const postAt = new Date(postAtMS).toISOString().split('T')[0];
+			const memo = `Rent for: ${toUTCFormat(new Date(postAtMS), 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),
 				amount,
