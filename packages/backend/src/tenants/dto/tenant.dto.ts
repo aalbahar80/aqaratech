@@ -3,7 +3,6 @@ import {
   IntersectionType,
   OmitType,
   PartialType,
-  PickType,
 } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
@@ -17,9 +16,8 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
-// import { UnitDto } from 'src/units/dto/unit.dto';
 
-class TenantRequiredDto extends AbstractDto {
+class TenantRequiredDto {
   @Nanoid()
   organizationId: string;
 
@@ -57,8 +55,8 @@ class TenantOptionalDto {
 }
 
 export class TenantDto extends IntersectionType(
-  TenantRequiredDto,
-  TenantOptionalDto,
+  AbstractDto,
+  IntersectionType(TenantRequiredDto, TenantOptionalDto),
 ) {}
 
 export class CreateTenantDto
@@ -69,12 +67,7 @@ export class UpdateTenantDto extends PartialType(
   OmitType(CreateTenantDto, ['organizationId']),
 ) {}
 
-// class TenantUnitDto extends PickType(UnitDto, ['id', 'unitNumber']) {}
-
-class TenantLeaseDto extends PartialType(LeaseDto) {
-  // @ApiProperty({ readOnly: true })
-  // unit: TenantUnitDto;
-}
+class TenantLeaseDto extends PartialType(LeaseDto) {}
 
 export class TenantOneDto extends TenantDto {
   @ApiProperty({ readOnly: true })

@@ -11,7 +11,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class LeaseInvoiceRequiredDto extends AbstractDto {
+class LeaseInvoiceRequiredDto {
   @IsPositive()
   amount: number;
 
@@ -45,7 +45,10 @@ export class LeaseInvoiceBasicDto extends IntersectionType(
   LeaseInvoiceOptionalDto,
 ) {}
 
-export class LeaseInvoiceDto extends LeaseInvoiceBasicDto {
+export class LeaseInvoiceDto extends IntersectionType(
+  AbstractDto,
+  LeaseInvoiceBasicDto,
+) {
   breadcrumbs: LeaseInvoiceBreadcrumbsDto;
 }
 

@@ -1761,17 +1761,6 @@ components:
     UpdateTenantDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         fullName:
           type: string
           minLength: 1
@@ -1956,17 +1945,6 @@ components:
     CreateLeaseInvoiceDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         amount:
           type: number
           minimum: 1
@@ -1993,26 +1971,12 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - amount
         - postAt
         - leaseId
     LeaseInvoiceBasicDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         amount:
           type: number
           minimum: 1
@@ -2039,9 +2003,6 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - amount
         - postAt
         - leaseId
@@ -2052,17 +2013,6 @@ components:
     UpdateLeaseInvoiceDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         amount:
           type: number
           minimum: 1
@@ -2089,17 +2039,6 @@ components:
     CreateLeaseDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         tenantId:
           type: string
         unitId:
@@ -2127,9 +2066,6 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - tenantId
         - unitId
         - start
@@ -2138,17 +2074,6 @@ components:
     LeaseBasicDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         tenantId:
           type: string
         unitId:
@@ -2176,9 +2101,6 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - tenantId
         - unitId
         - start
@@ -2191,17 +2113,6 @@ components:
     UpdateLeaseDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         start:
           format: date-time
           type: string
@@ -2227,17 +2138,6 @@ components:
     CreatePropertyDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         portfolioId:
           type: string
         area:
@@ -2275,9 +2175,6 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - portfolioId
         - area
     PropertyBreadcrumbsDto:
@@ -2357,17 +2254,6 @@ components:
     UpdatePropertyDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         area:
           type: string
           nullable: true
@@ -2516,17 +2402,6 @@ components:
     CreateUnitDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         propertyId:
           type: string
         unitNumber:
@@ -2566,25 +2441,11 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - propertyId
         - unitNumber
     UpdateUnitDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         unitNumber:
           type: string
           minLength: 1
@@ -2624,17 +2485,6 @@ components:
     CreatePortfolioDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         organizationId:
           type: string
         fullName:
@@ -2663,9 +2513,6 @@ components:
           nullable: true
           default: null
       required:
-        - id
-        - createdAt
-        - updatedAt
         - organizationId
         - fullName
     PortfolioDto:
@@ -2723,17 +2570,6 @@ components:
     UpdatePortfolioDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         fullName:
           type: string
           minLength: 1
@@ -2885,17 +2721,6 @@ components:
     UpdateExpenseDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
         amount:
           type: number
           minimum: 1

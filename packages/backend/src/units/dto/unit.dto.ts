@@ -13,7 +13,7 @@ import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
-class UnitRequiredDto extends AbstractDto {
+class UnitRequiredDto {
   @Nanoid()
   propertyId: string;
 
@@ -68,8 +68,8 @@ export class UnitVacancy {
 }
 
 export class UnitDto extends IntersectionType(
-  UnitRequiredDto,
-  UnitOptionalDto,
+  AbstractDto,
+  IntersectionType(UnitRequiredDto, UnitOptionalDto),
 ) {
   hateoas: HateoasDto;
   breadcrumbs?: UnitBreadcrumbsDto;

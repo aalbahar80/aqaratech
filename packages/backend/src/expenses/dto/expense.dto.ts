@@ -11,7 +11,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class ExpenseRequiredDto extends AbstractDto {
+class ExpenseRequiredDto {
   @IsPositive()
   amount: number;
 
@@ -47,8 +47,8 @@ class ExpenseOptionalDto {
 }
 
 export class ExpenseDto extends IntersectionType(
-  ExpenseRequiredDto,
-  ExpenseOptionalDto,
+  AbstractDto,
+  IntersectionType(ExpenseRequiredDto, ExpenseOptionalDto),
 ) {
   breadcrumbs?: ExpenseBreadcrumbsDto;
 }

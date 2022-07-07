@@ -17,7 +17,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class PropertyRequiredDto extends AbstractDto {
+class PropertyRequiredDto {
   @Nanoid()
   portfolioId: string;
 
@@ -57,8 +57,8 @@ class PropertyOptionalDto {
 }
 
 export class PropertyDto extends IntersectionType(
-  PropertyRequiredDto,
-  PropertyOptionalDto,
+  AbstractDto,
+  IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
 ) {
   breadcrumbs?: PropertyBreadcrumbsDto;
 }

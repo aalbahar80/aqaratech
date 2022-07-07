@@ -10,7 +10,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class PortfolioRequiredDto extends AbstractDto {
+class PortfolioRequiredDto {
   @Nanoid()
   organizationId: string;
 
@@ -36,8 +36,8 @@ class PortfolioOptionalDto {
 }
 
 export class PortfolioDto extends IntersectionType(
-  PortfolioRequiredDto,
-  PortfolioOptionalDto,
+  AbstractDto,
+  IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
 ) {}
 
 export class CreatePortfolioDto
@@ -48,5 +48,5 @@ export class CreatePortfolioDto
   implements Partial<Portfolio> {}
 
 export class UpdatePortfolioDto extends PartialType(
-  OmitType(PortfolioDto, ['organizationId']),
+  OmitType(CreatePortfolioDto, ['organizationId']),
 ) {}

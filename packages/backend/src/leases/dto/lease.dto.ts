@@ -16,7 +16,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class LeaseRequiredDto extends AbstractDto {
+class LeaseRequiredDto {
   @Nanoid()
   tenantId: string;
 
@@ -52,7 +52,7 @@ export class LeaseBasicDto extends IntersectionType(
   LeaseOptionalDto,
 ) {}
 
-export class LeaseDto extends LeaseBasicDto {
+export class LeaseDto extends IntersectionType(AbstractDto, LeaseBasicDto) {
   ext: LeaseExtendedDto;
   breadcrumbs: LeaseBreadcrumbsDto;
 }
