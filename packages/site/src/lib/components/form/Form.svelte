@@ -2,13 +2,11 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page, session } from '$app/stores';
-	import getEditorErrors from '$lib/client/getEditorErrors';
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
-	import { TRPCClientError } from '@trpc/client';
 	import { createForm, getValue } from 'felte';
 	import type { z } from 'zod';
 	import Button from '../Button.svelte';
