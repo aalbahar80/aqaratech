@@ -9,9 +9,6 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-console.log(process.env, 'process.env:svelte.config.js');
-console.log(import.meta.url, 'import.meta.url:svelte.config.js');
-console.log(resolve(__dirname, './env'), 'envpath:svelte.config.js');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
