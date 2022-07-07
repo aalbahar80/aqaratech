@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { page } from '$app/stores';
 	import ComboboxSvelecte from '$lib/components/ComboboxSvelecte.svelte';
 	import { relationalClassMap } from '$lib/models/classes/all.class';
 	import type {
@@ -35,7 +36,7 @@
 	$: {
 		if (browser) {
 			// fetching needs to be in onMount or in load. Otherwise, cookies won't be passed to trpc and app will crash/error out.
-			options.fetchData(parent?.value);
+			options.fetchData($page.stuff.api, parent?.value);
 		}
 	}
 </script>

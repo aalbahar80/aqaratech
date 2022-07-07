@@ -1,7 +1,8 @@
+import type { Api } from '$lib/client/api.js';
 import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { unitTypeOptions } from '$lib/config/constants.js';
-import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Field, SelectField } from '$lib/models/classes/Field.class.js';
+import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { getUnitLabel } from '$lib/utils/common.js';
@@ -89,9 +90,9 @@ export class Unit extends Entity {
 		return this.data ? getUnitLabel(this.data) : '';
 	};
 
-	static getParentFilter = (id: string) => ({
-		propertyId: id,
-	});
+	static getByParent = (id: string, api: Api) => {
+		return api.properties.findUnits({ id });
+	};
 }
 
 interface ILabel {

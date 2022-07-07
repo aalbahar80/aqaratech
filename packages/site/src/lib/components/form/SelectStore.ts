@@ -1,9 +1,9 @@
-import { trpc } from '$lib/client/trpc';
+import type { Api } from '$lib/client/api';
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { reject } from 'remeda';
 import { writable } from 'svelte/store';
-import type { Portfolio } from '../../models/classes/portfolio.class';
 import type { Lease } from '../../models/classes/lease.class';
+import type { Portfolio } from '../../models/classes/portfolio.class';
 import type { Property } from '../../models/classes/property.class';
 import type { Tenant } from '../../models/classes/tenant.class';
 import type { Unit } from '../../models/classes/unit.class';
@@ -22,21 +22,19 @@ export const createMyCustomStore = <T extends EntityConstructor>(
 
 	return {
 		subscribe,
-		fetchData: async (parentId?: string | null) => {
+		fetchData: async (api: Api, parentId?: string | null) => {
 			let result: InstanceType<EntityConstructor>[] = [];
-			let parentFilter = {};
-			if (
-				parentId &&
-				(cstor.urlName === 'units' || cstor.urlName === 'properties')
-			) {
-				parentFilter = cstor.getParentFilter(parentId);
-			}
 			try {
-				const data = await trpc().query(`${cstor.urlName}:list`, {
-					size: 1000,
-					...parentFilter,
-				});
-				result = data.data.map((data) => new cstor(data));
+				let data;
+				if (
+					parentId &&
+					(cstor.urlName === 'units' || cstor.urlName === 'properties')
+				) {
+					data = await cstor.getByParent(parentId, api);
+				} else {
+					data = await api[cstor.urlName].findAll();
+				}
+				result = data.results.map((data) => new cstor(data));
 			} catch (e) {
 				console.warn({ e }, 'SelectStore.ts ~ 29');
 			}
