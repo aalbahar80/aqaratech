@@ -15,7 +15,8 @@
           "nullSafeAdditionalProps": true,
           "withInterfaces": true,
           "prefixParameterInterfaces": true,
-          "disallowAdditionalPropertiesIfNotPresent": false
+          "disallowAdditionalPropertiesIfNotPresent": false,
+          "legacyDiscriminatorBehavior": false
         }
       }
     }
