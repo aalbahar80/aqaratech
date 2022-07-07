@@ -2,10 +2,11 @@ import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
 import { toDateInput } from '$lib/utils/common.js';
 import type { Portfolio as PPortfolio } from '@prisma/client';
+import type { CreatePortfolioDto, UpdatePortfolioDto } from '@self/sdk';
 import * as R from 'remeda';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/portfolio.schema.js';
-import { Entity } from './entity.class.js';
+import { Entity, type CreateForm, type UpdateForm } from './entity.class.js';
 
 export class Portfolio extends Entity {
 	static urlName = 'portfolios' as const;
@@ -30,6 +31,24 @@ export class Portfolio extends Entity {
 	) {
 		super();
 	}
+
+	create = async (info: CreateForm<CreatePortfolioDto>) => {
+		const data = await info.api.portfolios.create({
+			createPortfolioDto: {
+				...info.values,
+				organizationId: info.user.role.orgId!,
+			},
+		});
+		return { redirectTo: `/${this.urlName}/${data.id}`, data };
+	};
+
+	update = async (form: UpdateForm<UpdatePortfolioDto>) => {
+		const data = await form.api.portfolios.update({
+			id: form.id,
+			updatePortfolioDto: form.values,
+		});
+		return { redirectTo: `/${this.urlName}/${form.id}`, data };
+	};
 
 	defaultForm = (): Record<
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,

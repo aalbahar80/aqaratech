@@ -27,6 +27,7 @@ const getAuthz = (user: UserDto): Authz => {
 	if (defaultRole?.organizationId) {
 		return {
 			home: '/',
+			orgId: defaultRole.organizationId,
 			roleId: defaultRole.id,
 			isAdmin: true,
 			isOwner: false,
@@ -37,6 +38,7 @@ const getAuthz = (user: UserDto): Authz => {
 		return {
 			home: `/portfolios/${defaultRole.portfolioId}/dashboard`,
 			roleId: defaultRole.id,
+			orgId: null,
 			isAdmin: false,
 			isOwner: true,
 			isTenant: false,
@@ -46,6 +48,7 @@ const getAuthz = (user: UserDto): Authz => {
 		return {
 			home: `/portal/tenant/${defaultRole.tenantId}`,
 			roleId: defaultRole.id,
+			orgId: null,
 			isAdmin: false,
 			isOwner: false,
 			isTenant: true,

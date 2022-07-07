@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
+	import { page, session } from '$app/stores';
 	import getEditorErrors from '$lib/client/getEditorErrors';
-	import { trpc } from '$lib/client/trpc';
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import { forceDateToInput, objectKeys, startCase } from '$lib/utils/common';
+	import { forceDateToInput, objectKeys } from '$lib/utils/common';
 	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { TRPCClientError } from '@trpc/client';
@@ -70,9 +70,25 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
-			const submitted = await trpc().mutation(`${entity.urlName}:save`, values);
-			console.log({ submitted }, 'Form.svelte ~ 44');
-			await goto(`/${entity.urlName}/${submitted.id}`);
+			let submission: Awaited<
+				ReturnType<EntityInstance['create'] | EntityInstance['update']>
+			>;
+			if (FormType === 'edit') {
+				submission = await entity.update({
+					api: $page.stuff.api,
+					user: $session.user!,
+					id: entity.data.id,
+					values,
+				});
+			} else {
+				submission = await entity.create({
+					api: $page.stuff.api,
+					user: $session.user!,
+					values,
+				});
+			}
+			console.log({ submission }, 'Form.svelte ~ 44');
+			await goto(submission.redirectTo);
 			addToast({
 				props: {
 					kind: 'success',

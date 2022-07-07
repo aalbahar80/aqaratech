@@ -27,6 +27,7 @@ interface Admin {
 	isOwner: false;
 	isTenant: false;
 	roleId: string;
+	orgId: string;
 	home: string;
 	roleName: 'OrgUser';
 }
@@ -36,6 +37,7 @@ interface Owner {
 	isOwner: true;
 	isTenant: false;
 	roleId: string;
+	orgId: null;
 	home: string;
 	roleName: 'PortfolioUser';
 }
@@ -45,6 +47,7 @@ interface Tenant {
 	isOwner: false;
 	isTenant: true;
 	roleId: string;
+	orgId: null;
 	home: string;
 	roleName: 'TenantUser';
 }
