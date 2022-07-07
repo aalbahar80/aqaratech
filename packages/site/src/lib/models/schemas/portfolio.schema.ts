@@ -7,7 +7,7 @@ import {
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: z.string().uuid().optional(),
+	id: z.string().min(12).max(12).optional(),
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 	shortName: z.string().nullable().transform(trim).transform(falsyToNull),
 	email: z
@@ -17,14 +17,13 @@ export const schema = z.object({
 		.union([
 			z.null(),
 			z.literal(''),
-			z
-				.string()
-				.refine((val) => val.trim().length === 8, {
-					message: 'Phone number must be 8 digits',
-				})
-				.refine(digitsOnly, {
-					message: 'Phone must contain only numbers',
-				}),
+			z.string(),
+			// .refine((val) => val.trim().length === 8, {
+			// 	message: 'Phone number must be 8 digits',
+			// })
+			// .refine(digitsOnly, {
+			// 	message: 'Phone must contain only numbers',
+			// }),
 		])
 		.transform(trim)
 		.transform(falsyToNull),
