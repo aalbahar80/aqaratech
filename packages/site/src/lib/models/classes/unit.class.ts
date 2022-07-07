@@ -7,9 +7,10 @@ import { Property } from '$lib/models/classes/property.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { getUnitLabel } from '$lib/utils/common.js';
 import type { Unit as PUnit } from '@prisma/client';
+import type { CreateUnitDto, UpdateUnitDto } from '@self/sdk';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/unit.schema.js';
-import { Entity } from './entity.class.js';
+import { Entity, type CreateForm, type UpdateForm } from './entity.class.js';
 
 export class Unit extends Entity {
 	static urlName = 'units' as const;
@@ -36,6 +37,19 @@ export class Unit extends Entity {
 	) {
 		super();
 	}
+
+	create = async (info: CreateForm<CreateUnitDto>) => {
+		const data = await info.api.units.create({ createUnitDto: info.values });
+		return { redirectTo: `/${this.urlName}/${data.id}`, data };
+	};
+
+	update = async (form: UpdateForm<UpdateUnitDto>) => {
+		const data = await form.api.units.update({
+			id: form.id,
+			updateUnitDto: form.values,
+		});
+		return { redirectTo: `/${this.urlName}/${form.id}`, data };
+	};
 
 	defaultForm = (): Record<
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,
