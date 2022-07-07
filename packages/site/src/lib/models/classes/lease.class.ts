@@ -7,6 +7,7 @@ import { Unit } from '$lib/models/classes/unit.class.js';
 import type { RelationOptions } from '$lib/models/interfaces/option.interface';
 import { toDateInput, toUTCFormat } from '$lib/utils/common.js';
 import type { Lease as PLease } from '@prisma/client';
+import type { UpdateLeaseDto } from '@self/sdk';
 import { addYears } from 'date-fns';
 import { nanoid } from 'nanoid';
 import type { z } from 'zod';
@@ -14,7 +15,7 @@ import {
 	leaseFormSchema as extendedSchema,
 	schema as baseSchema,
 } from '../schemas/lease.schema.js';
-import { Entity } from './entity.class.js';
+import { Entity, type UpdateForm } from './entity.class.js';
 
 export class Lease extends Entity {
 	static urlName = 'leases' as const;
@@ -44,6 +45,14 @@ export class Lease extends Entity {
 	) {
 		super();
 	}
+
+	update = async (form: UpdateForm<UpdateLeaseDto>) => {
+		const data = await form.api.leases.update({
+			id: form.id,
+			updateLeaseDto: form.values,
+		});
+		return { redirectTo: `/${this.urlName}/${form.id}`, data };
+	};
 
 	defaultForm = (): Record<keyof Omit<z.input<typeof baseSchema>, 'id'>, any> &
 		z.input<typeof extendedSchema> => ({
@@ -132,6 +141,7 @@ export class Lease extends Entity {
 				start.getUTCMinutes(),
 				start.getUTCSeconds(),
 			);
+			console.log(new Date(postAt), 'postAt');
 			const memo = `Rent for: ${toUTCFormat(new Date(postAt), 'MMMM yyyy')}`;
 			newSchedule.push({
 				nanoid: nanoid(),
