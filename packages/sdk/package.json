@@ -9,7 +9,7 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "pnpm run generate && tsc",
-        "dev": "tsx watcher.ts",
+        "dev:watch": "tsx watcher.ts",
         "generate": "openapi-generator-cli generate"
     },
     "devDependencies": {
