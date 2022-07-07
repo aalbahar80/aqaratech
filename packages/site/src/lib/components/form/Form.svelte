@@ -38,12 +38,6 @@
 				},
 			});
 			// TODO format/parse server error message
-			// if (err instanceof TRPCClientError) {
-			// 	const code = err.data.code;
-			// 	console.error(code, 'Form.svelte ~ 65');
-			// 	const serverErrors = getEditorErrors(err);
-			// 	return serverErrors;
-			// }
 			console.error(err);
 			return err;
 		},

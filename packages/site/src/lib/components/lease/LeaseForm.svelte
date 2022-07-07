@@ -54,16 +54,13 @@
 		extend: reporter(),
 		validate: validateSchema(Lease.leaseFormSchema),
 		onError: (err) => {
+			// TODO format/parse server error message
 			addToast({
 				props: {
 					kind: 'error',
 					title: 'Error',
 				},
 			});
-			// if (err instanceof TRPCClientError) {
-			// 	const serverErrors = getEditorErrors(err);
-			// 	return serverErrors;
-			// }
 			console.error(err);
 			return err;
 		},
