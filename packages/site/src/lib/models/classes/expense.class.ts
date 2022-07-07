@@ -64,7 +64,7 @@ export class Expense extends Entity {
 	> => ({
 		amount: 0,
 		// categoryId: null,
-		postAt: new Date(),
+		postAt: new Date().toISOString().split('T')[0],
 		memo: '',
 		portfolioId: null,
 		propertyId: null,

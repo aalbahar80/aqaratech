@@ -5,6 +5,7 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/SelectEntity.svelte';
 	import { addToast } from '$lib/stores/toast';
+	import { forceDateToInput, objectKeys } from '$lib/utils/common';
 	import type { EntityInstance } from '$models/types/entity.type';
 	import { validateSchema } from '@felte/validator-zod';
 	import { createForm, getValue } from 'felte';
@@ -25,7 +26,6 @@
 		setData,
 		isValid,
 	} = createForm<z.infer<typeof entity.schema>>({
-		initialValues: entity.data,
 		schema: entity.schema,
 		warn:
 			'warnSchema' in entity ? validateSchema(entity.warnSchema) : undefined,
@@ -49,6 +49,26 @@
 		},
 		onSubmit: async (values) => {
 			console.log(values);
+			// convert strings to dates
+			const original = values as z.infer<typeof entity.schema>;
+
+			/**
+			 * Names of `Fields` with type `date`
+			 */
+			const dateFields = entity.basicFields.reduce((acc, field) => {
+				if (field.type === 'date') {
+					acc.push(field.name);
+				}
+				return acc;
+			}, [] as string[]);
+
+			objectKeys(original).forEach((key) => {
+				if (dateFields.includes(key) && original[key]) {
+					// original[key] = forceDateToInput(original[key]!);
+					original[key] = new Date(original[key]!);
+				}
+			});
+
 			let submission: Awaited<
 				ReturnType<EntityInstance['create'] | EntityInstance['update']>
 			>;
@@ -57,13 +77,13 @@
 					api: $page.stuff.api,
 					user: $session.user!,
 					id: entity.data.id,
-					values,
+					values: original,
 				});
 			} else {
 				submission = await entity.create({
 					api: $page.stuff.api,
 					user: $session.user!,
-					values,
+					values: original,
 				});
 			}
 			console.log({ submission }, 'Form.svelte ~ 44');
