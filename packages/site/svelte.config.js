@@ -20,16 +20,10 @@ const config = {
 		// 	prebundleSvelteLibraries: true,
 		inspector: true,
 	},
-	compilerOptions: {
-		loopGuardTimeout: process.env.NODE_ENV === 'production' ? undefined : 300,
-	},
 	kit: {
 		adapter: process.env.VERCEL ? adapterV() : adapterN(),
 		vite: {
 			envDir: resolve(__dirname, './env'),
-			optimizeDeps: {
-				include: process.env.NODE_ENV === 'production' ? [] : ['@self/sdk'],
-			},
 			server: {
 				watch: {
 					ignored: [
