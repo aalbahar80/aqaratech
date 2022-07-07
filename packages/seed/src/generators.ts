@@ -14,8 +14,11 @@ faker.setLocale("ar");
 // consistent id's for testing
 export const testPassword = "test12";
 export const testOrgEmail = "org.dev@mailthink.net";
+export const testOrgId = "hdmp5pje1a7o";
 export const testPortfolioEmail = "client.dev@mailthink.net";
+export const testPortfolioId = "portfolio-1a";
 export const testTenantEmail = "tenant.dev@mailthink.net";
+export const testTenantId = "tenant-1aaaa";
 
 export const timespan = 3;
 export const createdAt = () => faker.date.past(timespan);

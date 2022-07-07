@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Prisma, Role } from "@prisma/client";
+import { Role } from "@prisma/client";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
@@ -12,14 +12,16 @@ import {
 	fakeOrganization,
 	fakePortfolio,
 	fakeProperty,
-	fakeRole,
 	fakeTenant,
 	fakeUnit,
 	fakeUser,
 	generateId,
 	testOrgEmail,
+	testOrgId,
 	testPortfolioEmail,
+	testPortfolioId,
 	testTenantEmail,
+	testTenantId,
 	timespan,
 	updatedAt,
 } from "./generators.js";
@@ -62,7 +64,7 @@ export async function seed({
 	}
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
-	organizations[0]!.id = "hdmp5pje1a7o";
+	organizations[0]!.id = testOrgId;
 
 	const users = Array.from({ length: userCount }, fakeUser);
 	users[0]!.email = testOrgEmail;
@@ -81,6 +83,7 @@ export async function seed({
 	const portfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(randId(organizations))
 	);
+	portfolios[0]!.id = testPortfolioId;
 	roles.push({
 		id: generateId(),
 		portfolioId: portfolios[0]!.id,
@@ -129,6 +132,8 @@ export async function seed({
 			}
 		}
 	});
+
+	tenants[0]!.id = testTenantId;
 	roles.push({
 		id: generateId(),
 		tenantId: tenants[0]!.id,

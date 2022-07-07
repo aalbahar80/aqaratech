@@ -1,27 +1,39 @@
 import { expect } from '@playwright/test';
 import { testPortfolioId, testTenantId } from '@self/seed';
+import {
+	testOrgEmail,
+	testPassword,
+	testPortfolioEmail,
+	testTenantEmail,
+} from '@self/seed/dist/generators.js';
 import { test } from './config.js';
 
 const users = [
+	// {
+	// 	role: 'admin',
+	// 	email: 'admin.dev@mailthink.net',
+	// 	password: testPassword,
+	// 	destination: '/',
+	// },
 	{
-		role: 'admin',
-		email: 'admin.dev@mailthink.net',
-		password: 'test12',
+		role: 'orgadmin',
+		email: testOrgEmail,
+		password: testPassword,
 		destination: '/',
 	},
 	{
 		role: 'owner',
 		id: testPortfolioId,
-		email: 'client.dev@mailthink.net',
-		password: 'test12',
+		email: testPortfolioEmail,
+		password: testPassword,
 		// destination: /^http:\/\/localhost:3000\/portfolios\/.+\/dashboard$/,
 		destination: `/portfolios/${testPortfolioId}/dashboard`,
 	},
 	{
 		role: 'tenant',
 		id: testTenantId,
-		email: 'tenant.dev@mailthink.net',
-		password: 'test12',
+		email: testTenantEmail,
+		password: testPassword,
 		destination: `/portal/tenant/${testTenantId}`,
 	},
 ] as const;
