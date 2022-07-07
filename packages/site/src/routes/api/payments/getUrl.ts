@@ -1,10 +1,10 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import prismaClient from '$lib/server/prismaClient';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
-import { z } from 'zod';
 
 export const get: RequestHandler = async ({ url }) => {
-	const ID = z.string().uuid();
+	const ID = zodnanoid;
 	const raw = url.searchParams.get('id');
 	if (!raw) {
 		return {

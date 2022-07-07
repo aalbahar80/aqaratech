@@ -1,13 +1,14 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { strToDate } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const baseSchema = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	monthlyRent: z.number().min(1),
 	start: z.preprocess(strToDate, z.date()),
 	end: z.preprocess(strToDate, z.date()),
-	tenantId: z.string().uuid(),
-	unitId: z.string().uuid(),
+	tenantId: zodnanoid,
+	unitId: zodnanoid,
 	notify: z.boolean(),
 	deactivated: z.boolean(),
 });

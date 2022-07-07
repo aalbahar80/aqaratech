@@ -1,3 +1,4 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import {
 	falsyToNull,
 	falsyToNullExceptZero,
@@ -6,7 +7,7 @@ import {
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	unitNumber: z
 		.string()
 		.refine((val) => val.trim().length > 0, { message: 'Required' })
@@ -30,5 +31,5 @@ export const schema = z.object({
 		.nonnegative()
 		.nullish()
 		.transform(falsyToNullExceptZero),
-	propertyId: z.string().uuid(),
+	propertyId: zodnanoid,
 });

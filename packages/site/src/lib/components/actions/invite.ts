@@ -1,3 +1,4 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { addToast } from '$lib/stores/toast';
 import { z } from 'zod';
 
@@ -7,7 +8,7 @@ export const handleInvite = async (
 ) => {
 	try {
 		const Input = z.object({
-			id: z.string().uuid(),
+			id: zodnanoid,
 			userType: z.enum(['propertyOwner', 'tenant']),
 		});
 		const input = Input.parse({ id, userType });

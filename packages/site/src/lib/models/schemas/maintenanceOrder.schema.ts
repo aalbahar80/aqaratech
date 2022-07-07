@@ -1,8 +1,9 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const baseSchema = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	title: z
 		.string()
 		.min(3, { message: 'Required' })
@@ -13,9 +14,9 @@ const baseSchema = z.object({
 	completedAt: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),
-	propertyId: z.string().uuid().nullable(),
-	portfolioId: z.string().uuid().nullable(),
-	unitId: z.string().uuid().nullable(),
+	propertyId: zodnanoid.nullable(),
+	portfolioId: zodnanoid.nullable(),
+	unitId: zodnanoid.nullable(),
 });
 
 export const schema = baseSchema.superRefine((val, ctx) => {

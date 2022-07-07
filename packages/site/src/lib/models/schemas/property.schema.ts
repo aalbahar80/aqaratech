@@ -1,8 +1,9 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	area: z
 		.string()
 		.min(1, { message: 'Required' })
@@ -29,5 +30,5 @@ export const schema = z.object({
 		.min(1, { message: 'Required' })
 		.transform(trim)
 		.transform(falsyToNull),
-	portfolioId: z.string().uuid(),
+	portfolioId: zodnanoid,
 });

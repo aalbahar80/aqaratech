@@ -1,8 +1,9 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const base = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	dueAt: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),
@@ -13,7 +14,7 @@ const base = z.object({
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
-	leaseId: z.string().uuid(),
+	leaseId: zodnanoid,
 });
 
 export const schema = base

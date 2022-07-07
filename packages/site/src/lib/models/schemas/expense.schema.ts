@@ -1,15 +1,16 @@
+import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const baseSchema = z.object({
-	id: z.string().uuid().optional(),
+	id: zodnanoid.optional(),
 	amount: z.number().gt(0),
 	categoryId: z.number({ invalid_type_error: 'Required' }),
 	postAt: z.preprocess(strToDate, z.date()),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
-	portfolioId: z.string().uuid().nullable(),
-	propertyId: z.string().uuid().nullable(),
-	unitId: z.string().uuid().nullable(),
+	portfolioId: zodnanoid.nullable(),
+	propertyId: zodnanoid.nullable(),
+	unitId: zodnanoid.nullable(),
 });
 
 export const schema = baseSchema.superRefine((val, ctx) => {
