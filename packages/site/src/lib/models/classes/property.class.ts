@@ -4,9 +4,10 @@ import { Field } from '$lib/models/classes/Field.class.js';
 import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { getAddress } from '$lib/utils/common.js';
 import type { Property as PProperty } from '@prisma/client';
+import type { CreatePropertyDto, UpdatePropertyDto } from '@self/sdk';
 import type { z } from 'zod';
 import { schema as baseSchema } from '../schemas/property.schema.js';
-import { Entity } from './entity.class.js';
+import { Entity, type CreateForm, type UpdateForm } from './entity.class.js';
 
 export class Property extends Entity {
 	static urlName = 'properties' as const;
@@ -33,6 +34,21 @@ export class Property extends Entity {
 	) {
 		super();
 	}
+
+	create = async (info: CreateForm<CreatePropertyDto>) => {
+		const data = await info.api.properties.create({
+			createPropertyDto: info.values,
+		});
+		return { redirectTo: `/${this.urlName}/${data.id}`, data };
+	};
+
+	update = async (form: UpdateForm<UpdatePropertyDto>) => {
+		const data = await form.api.properties.update({
+			id: form.id,
+			updatePropertyDto: form.values,
+		});
+		return { redirectTo: `/${this.urlName}/${form.id}`, data };
+	};
 
 	defaultForm = (): Record<
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,

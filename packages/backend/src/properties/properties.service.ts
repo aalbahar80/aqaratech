@@ -10,6 +10,7 @@ import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
+  CreatePropertyDto,
   PropertyBreadcrumbsDto,
   PropertyDto,
   UpdatePropertyDto,
@@ -24,7 +25,7 @@ export class PropertiesService {
     createPropertyDto,
     user,
   }: {
-    createPropertyDto: PropertyDto;
+    createPropertyDto: CreatePropertyDto;
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(

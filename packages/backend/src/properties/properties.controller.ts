@@ -26,6 +26,7 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import {
+  CreatePropertyDto,
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -48,7 +49,7 @@ export class PropertiesController {
   @ApiCreatedResponse({ type: PropertyDto })
   create(
     @User() user: IUser,
-    @Body() createPropertyDto: PropertyDto,
+    @Body() createPropertyDto: CreatePropertyDto,
   ): Promise<PropertyDto> {
     return this.propertiesService.create({ createPropertyDto, user });
   }

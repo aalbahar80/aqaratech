@@ -630,7 +630,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PropertyDto'
+              $ref: '#/components/schemas/CreatePropertyDto'
       responses:
         '201':
           description: ''
@@ -2224,6 +2224,62 @@ components:
           type: string
           nullable: true
           default: null
+    CreatePropertyDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        portfolioId:
+          type: string
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
+        block:
+          type: string
+          nullable: true
+          default: null
+        avenue:
+          type: string
+          nullable: true
+          default: null
+        street:
+          type: string
+          nullable: true
+          default: null
+        number:
+          type: string
+          nullable: true
+          default: null
+        parcel:
+          type: string
+          nullable: true
+          default: null
+        paci:
+          type: string
+          nullable: true
+          default: null
+        cost:
+          type: number
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - portfolioId
+        - area
     PropertyBreadcrumbsDto:
       type: object
       properties:
