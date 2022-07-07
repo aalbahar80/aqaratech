@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
-	import getEditorErrors from '$lib/client/getEditorErrors';
-	import { trpc } from '$lib/client/trpc';
+	import { page } from '$app/stores';
 	import Schedule from '$lib/components/lease/Schedule.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { scheduleSchema } from '$lib/models/schemas/lease.schema';
@@ -18,8 +17,6 @@
 		SwitchGroup,
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
-	import { TRPCClientError } from '@trpc/client';
-	import { addDays } from 'date-fns';
 	import { createForm, getValue } from 'felte';
 	import { onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
@@ -55,6 +52,7 @@
 		transform: (values: unknown) => {
 			// make sure each element in schedule array is an object whose postAt is a date
 			const original = values as z.infer<typeof Lease.leaseFormSchema>;
+			console.log({ original }, 'LeaseForm.svelte ~ 55');
 			const newValues = {} as any;
 			if (Array.isArray(original.schedule)) {
 				newValues.schedule = original?.schedule.map((item) => {
@@ -68,11 +66,12 @@
 				});
 			}
 			if (original.start) {
-				newValues.start = forceDateToInput(original.start);
+				newValues.start = new Date(original.start);
 			}
 			if (original.end) {
-				newValues.end = forceDateToInput(original.end);
+				newValues.end = new Date(original.end);
 			}
+			console.log({ newValues }, 'LeaseForm.svelte ~ 74');
 			return {
 				...original,
 				...newValues,
@@ -89,10 +88,11 @@
 					title: 'Error',
 				},
 			});
-			if (err instanceof TRPCClientError) {
-				const serverErrors = getEditorErrors(err);
-				return serverErrors;
-			}
+			// if (err instanceof TRPCClientError) {
+			// 	const serverErrors = getEditorErrors(err);
+			// 	return serverErrors;
+			// }
+			console.error(err);
 			return err;
 		},
 		onSubmit: async (values) => {
@@ -100,7 +100,10 @@
 				console.debug(values);
 				const { schedule: unparsed, ...leaseValues } = values;
 				const schedule = scheduleSchema.parse(unparsed);
-				const newLease = await trpc().mutation('leases:save', leaseValues);
+				// const newLease = await trpc().mutation('leases:save', leaseValues);
+				const newLease = await $page.stuff.api.leases.create({
+					createLeaseDto: values,
+				});
 				console.debug(newLease);
 				const trxValues = schedule.map((e) => ({
 					id: uuidv4(),
@@ -122,11 +125,11 @@
 					),
 				}));
 				console.debug(trxValues);
-				const newTrxs = await trpc().mutation(
-					'transactions:saveMany',
-					trxValues,
-				);
-				console.debug(`created ${newTrxs.count} transactions`);
+				const newTrxs = await $page.stuff.api.leases.createInvoices({
+					id: newLease.id,
+					createLeaseInvoiceDto: trxValues,
+				});
+				console.debug(`created ${newTrxs.length} transactions`, newTrxs);
 
 				await goto(`/leases/${newLease.id}`);
 				addToast({

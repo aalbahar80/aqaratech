@@ -9,6 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import {
+  ApiBody,
   ApiCreatedResponse,
   ApiHeader,
   ApiOkResponse,
@@ -26,7 +27,11 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import {
+  CreateLeaseInvoiceDto,
+  LeaseInvoiceBasicDto,
+  LeaseInvoiceDto,
+} from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { LeasePageOptionsDto } from 'src/leases/dto/lease-page-options.dto';
 import {
@@ -107,5 +112,28 @@ export class LeasesController {
   ): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
     const where: Prisma.LeaseInvoiceWhereInput = { leaseId: { equals: id } };
     return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
+  }
+
+  @Post('/:id/invoices')
+  @CheckAbilities({
+    action: Action.Create,
+    subject: 'LeaseInvoice',
+    skipParamCheck: true,
+  })
+  @ApiOkResponse({ type: LeaseInvoiceBasicDto, isArray: true })
+  @ApiBody({ type: CreateLeaseInvoiceDto, isArray: true })
+  createInvoices(
+    @User() user: IUser,
+    @Param('id') id: string,
+    @Body() createLeaseInvoiceDto: CreateLeaseInvoiceDto[],
+  ): Promise<LeaseInvoiceBasicDto[]> {
+    return Promise.all(
+      createLeaseInvoiceDto.map((invoice) => {
+        return this.leaseInvoicesService.create({
+          user,
+          createLeaseInvoiceDto: { ...invoice, leaseId: id },
+        });
+      }),
+    );
   }
 }

@@ -48,11 +48,11 @@ class LeaseOptionalDto {
 }
 
 export class LeaseBasicDto extends IntersectionType(
-  LeaseRequiredDto,
-  LeaseOptionalDto,
+  AbstractDto,
+  IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
 ) {}
 
-export class LeaseDto extends IntersectionType(AbstractDto, LeaseBasicDto) {
+export class LeaseDto extends LeaseBasicDto {
   ext: LeaseExtendedDto;
   breadcrumbs: LeaseBreadcrumbsDto;
 }

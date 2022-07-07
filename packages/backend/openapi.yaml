@@ -617,6 +617,40 @@ paths:
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_2
+    post:
+      operationId: createInvoices
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+      tags: *ref_2
   /properties:
     post:
       operationId: create
@@ -2074,6 +2108,17 @@ components:
     LeaseBasicDto:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
         tenantId:
           type: string
         unitId:
@@ -2101,6 +2146,9 @@ components:
           nullable: true
           default: null
       required:
+        - id
+        - createdAt
+        - updatedAt
         - tenantId
         - unitId
         - start

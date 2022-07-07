@@ -3,7 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -19,7 +19,10 @@ import { search } from 'src/utils/search';
 
 @Injectable()
 export class LeaseInvoicesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private caslAbilityFactory: CaslAbilityFactory,
+  ) {}
 
   async create({
     createLeaseInvoiceDto,
@@ -28,7 +31,9 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
+    // not using cached user ability since this endpoint is often hit directly after creating lease.
+    const ability = await this.caslAbilityFactory.defineAbility(user);
+    ForbiddenError.from(ability).throwUnlessCan(
       Action.Create,
       subject('LeaseInvoice', createLeaseInvoiceDto),
     );
