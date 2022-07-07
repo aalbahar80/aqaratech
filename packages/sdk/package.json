@@ -16,7 +16,7 @@
         "@openapitools/openapi-generator-cli": "2.5.1",
         "@self/backend": "workspace:0.0.1",
         "chokidar": "3.5.3",
-        "tsx": "3.7.0",
+        "tsx": "3.7.1",
         "typescript": "4.7.4"
     }
 }
