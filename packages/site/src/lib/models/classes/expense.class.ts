@@ -1,17 +1,18 @@
-import { trpc, type InferQueryOutput } from '$lib/client/trpc.js';
+import type { InferQueryOutput } from '$lib/client/trpc.js';
 import {
 	Entity,
 	type CreateForm,
 	type UpdateForm,
 } from '$lib/models/classes/entity.class.js';
-import { AsyncSelectField, Field } from '$lib/models/classes/Field.class.js';
-import { getExpenseCategories } from '$lib/stores/expenseMeta.js';
+import { Field } from '$lib/models/classes/Field.class.js';
+// import { AsyncSelectField, Field } from '$lib/models/classes/Field.class.js';
+// import { getExpenseCategories } from '$lib/stores/expenseMeta.js';
 import { toDateInput } from '$lib/utils/common.js';
 import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
+import type { CreateExpenseDto, UpdateExpenseDto } from '@self/sdk';
 import * as R from 'remeda';
 import type { z } from 'zod';
-import type { UpdateExpenseDto, CreateExpenseDto } from '@self/sdk';
 import { schema as baseSchema } from '../schemas/expense.schema.js';
 
 export class Expense extends Entity {
@@ -62,7 +63,7 @@ export class Expense extends Entity {
 		any
 	> => ({
 		amount: 0,
-		categoryId: null,
+		// categoryId: null,
 		postAt: new Date(),
 		memo: '',
 		portfolioId: null,
@@ -83,18 +84,18 @@ export class Expense extends Entity {
 				value: toDateInput(this.data?.postAt),
 				label: 'Post Date',
 			}),
-			new AsyncSelectField('categoryId', {
-				required: true,
-				getOptions: async () => {
-					const data = await trpc().query('public:expenses:meta');
-					return getExpenseCategories(data);
-				},
-				value: this.data?.categoryId || '',
-				label: 'Expense Category',
-				selectionLabel: this.data?.category
-					? `${this.data?.category?.en} - ${this.data?.category?.ar}`
-					: '',
-			}),
+			// new AsyncSelectField('categoryId', {
+			// 	required: true,
+			// 	getOptions: async () => {
+			// 		const data = await trpc().query('public:expenses:meta');
+			// 		return getExpenseCategories(data);
+			// 	},
+			// 	value: this.data?.categoryId || '',
+			// 	label: 'Expense Category',
+			// 	selectionLabel: this.data?.category
+			// 		? `${this.data?.category?.en} - ${this.data?.category?.ar}`
+			// 		: '',
+			// }),
 			new Field('memo', {
 				value: R.pathOr(this.data, ['memo'], ''),
 				hint: 'Enter a short description of the expense. This will be visible to the portfolio user.',

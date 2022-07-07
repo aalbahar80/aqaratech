@@ -5,7 +5,7 @@ import { z } from 'zod';
 const baseSchema = z.object({
 	id: zodnanoid.optional(),
 	amount: z.number().gt(0),
-	categoryId: z.number({ invalid_type_error: 'Required' }),
+	// categoryId: z.number({ invalid_type_error: 'Required' }),
 	postAt: z.preprocess(strToDate, z.date()),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 	portfolioId: zodnanoid.nullable(),
