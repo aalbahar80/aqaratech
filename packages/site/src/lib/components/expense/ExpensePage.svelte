@@ -18,7 +18,6 @@
 	];
 </script>
 
-<pre>{JSON.stringify(expense, null, 2)}</pre>
 <Heading title={Expense.singularCap} id={expense.id} entity={Expense.entity}>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={expense.breadcrumbs} />
