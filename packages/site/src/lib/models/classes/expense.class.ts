@@ -1,5 +1,9 @@
 import { trpc, type InferQueryOutput } from '$lib/client/trpc.js';
-import { Entity } from '$lib/models/classes/entity.class.js';
+import {
+	Entity,
+	type CreateForm,
+	type UpdateForm,
+} from '$lib/models/classes/entity.class.js';
 import { AsyncSelectField, Field } from '$lib/models/classes/Field.class.js';
 import { getExpenseCategories } from '$lib/stores/expenseMeta.js';
 import { toDateInput } from '$lib/utils/common.js';
@@ -7,6 +11,7 @@ import { parseRelationOptions } from '$lib/utils/getRelationOptions.js';
 import type { Expense as PExpense } from '@prisma/client';
 import * as R from 'remeda';
 import type { z } from 'zod';
+import type { UpdateExpenseDto, CreateExpenseDto } from '@self/sdk';
 import { schema as baseSchema } from '../schemas/expense.schema.js';
 
 export class Expense extends Entity {
@@ -36,6 +41,21 @@ export class Expense extends Entity {
 	) {
 		super();
 	}
+
+	create = async (info: CreateForm<CreateExpenseDto>) => {
+		const data = await info.api.expenses.create({
+			createExpenseDto: info.values,
+		});
+		return { redirectTo: `/${this.urlName}/${data.id}`, data };
+	};
+
+	update = async (form: UpdateForm<UpdateExpenseDto>) => {
+		const data = await form.api.expenses.update({
+			id: form.id,
+			updateExpenseDto: form.values,
+		});
+		return { redirectTo: `/${this.urlName}/${form.id}`, data };
+	};
 
 	defaultForm = (): Record<
 		keyof Omit<z.input<typeof baseSchema>, 'id'>,

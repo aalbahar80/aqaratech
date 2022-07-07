@@ -1330,7 +1330,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExpenseDto'
+              $ref: '#/components/schemas/CreateExpenseDto'
       responses:
         '201':
           description: ''
@@ -2710,6 +2710,31 @@ components:
         - updatedAt
         - email
         - roles
+    CreateExpenseDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 1
+        postAt:
+          format: date-time
+          type: string
+        memo:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        propertyId:
+          type: string
+          nullable: true
+        portfolioId:
+          type: string
+          nullable: true
+      required:
+        - amount
+        - postAt
+        - memo
     ExpenseBreadcrumbsDto:
       type: object
       properties:

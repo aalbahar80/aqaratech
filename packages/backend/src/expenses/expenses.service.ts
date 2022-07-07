@@ -7,6 +7,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import {
+  CreateExpenseDto,
   ExpenseBreadcrumbsDto,
   ExpenseDto,
   UpdateExpenseDto,
@@ -23,7 +24,7 @@ export class ExpensesService {
     createExpenseDto,
     user,
   }: {
-    createExpenseDto: ExpenseDto;
+    createExpenseDto: CreateExpenseDto;
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(

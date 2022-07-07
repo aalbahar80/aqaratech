@@ -23,7 +23,11 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
-import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
+import {
+  CreateExpenseDto,
+  ExpenseDto,
+  UpdateExpenseDto,
+} from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { ExpensesService } from './expenses.service';
 
@@ -39,7 +43,7 @@ export class ExpensesController {
   @ApiCreatedResponse({ type: ExpenseDto })
   create(
     @User() user: IUser,
-    @Body() createExpenseDto: ExpenseDto,
+    @Body() createExpenseDto: CreateExpenseDto,
   ): Promise<ExpenseDto> {
     return this.expensesService.create({ createExpenseDto, user });
   }
