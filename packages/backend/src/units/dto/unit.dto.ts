@@ -57,6 +57,7 @@ export class UpdateUnitDto extends PartialType(
 export class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
   'property',
+  'unit',
 ]) {}
 
 export class UnitVacancy {

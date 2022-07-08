@@ -167,18 +167,22 @@ export class UnitsService {
   }
 
   async breadcrumbs(unitId: string): Promise<UnitBreadcrumbsDto> {
-    const property = await this.prisma.property.findFirst({
-      where: { units: { some: { id: unitId } } },
-      include: { portfolio: true },
+    const unit = await this.prisma.unit.findUnique({
+      where: { id: unitId },
+      include: { property: { include: { portfolio: true } } },
     });
     return {
       portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        ...property.portfolio,
+        ...unit.property.portfolio,
       }),
       property: new BreadcrumbDto({
         rel: Rel.Property,
-        ...property,
+        ...unit.property,
+      }),
+      unit: new BreadcrumbDto({
+        rel: Rel.Unit,
+        ...unit,
       }),
     };
   }

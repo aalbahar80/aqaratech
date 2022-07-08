@@ -2457,9 +2457,14 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
         - property
+        - unit
     UnitVacancy:
       type: object
       properties:

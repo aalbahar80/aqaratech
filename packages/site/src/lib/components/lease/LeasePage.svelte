@@ -16,7 +16,7 @@
 	export let invoices: PaginatedLeaseInvoiceDto;
 
 	const details: [string, string | null][] = [
-		['Tenant', lease.ext.tenantName],
+		['Tenant', lease.breadcrumbs.tenant.label],
 		['Start Date', toUTCFormat(lease.start)],
 		['End Date', toUTCFormat(lease.end)],
 		['Monthly Rent', kwdFormat(lease.monthlyRent)],

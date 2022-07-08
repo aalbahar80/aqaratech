@@ -1,41 +1,29 @@
 import type { SelectedOption } from './option.interface';
 
-interface PredefinedTenant {
-	initiator: 'tenant';
-	tenantId: string;
-	fullName: string;
-	tenant: SelectedOption;
-	portfolio: SelectedOption;
-	property: SelectedOption;
-	unit: SelectedOption;
-}
-interface PredefinedUnit {
-	initiator: 'unit';
-	unitId: string;
-	unitType: string | null;
-	unitNumber: string;
-	propertyId: string;
-	address: string;
+interface LeaseOptions {
 	tenant: SelectedOption;
 	portfolio: SelectedOption;
 	property: SelectedOption;
 	unit: SelectedOption;
 }
 
-interface PredefinedLease {
+interface PredefinedTenant extends LeaseOptions {
+	initiator: 'tenant';
+	tenantId: string;
+}
+
+interface PredefinedUnit extends LeaseOptions {
+	initiator: 'unit';
+	unitId: string;
+	propertyId: string;
+}
+
+interface PredefinedLease extends LeaseOptions {
 	initiator: 'lease';
 	tenantId: string;
-	fullName: string;
 	unitId: string;
-	unitType: string | null;
-	unitNumber: string;
 	propertyId: string;
-	address: string;
 	monthlyRent: number;
-	tenant: SelectedOption;
-	portfolio: SelectedOption;
-	property: SelectedOption;
-	unit: SelectedOption;
 }
 // helper type for new lease form
 export type Predefined = PredefinedTenant | PredefinedUnit | PredefinedLease;
@@ -54,7 +42,7 @@ interface LeaseWUnit {
 	id: string;
 	unit: {
 		id: string;
-		unitNumber: string;
+		unitLabel: string;
 		property: {
 			area: string | null;
 			block: string | null;
