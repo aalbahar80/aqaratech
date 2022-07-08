@@ -4,6 +4,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -191,22 +192,22 @@ export class LeasesService {
     });
 
     return {
-      portfolio: {
+      portfolio: new BreadcrumbDto({
+        id: lease.unit.property.portfolioId,
         rel: Rel.Portfolio,
-        href: `/portfolios/${lease.unit.property.portfolioId}`,
-      },
-      property: {
+      }),
+      property: new BreadcrumbDto({
+        id: lease.unit.propertyId,
         rel: Rel.Property,
-        href: `/properties/${lease.unit.propertyId}`,
-      },
-      unit: {
+      }),
+      unit: new BreadcrumbDto({
+        id: lease.unit.id,
         rel: Rel.Unit,
-        href: `/units/${lease.unit.id}`,
-      },
-      tenant: {
+      }),
+      tenant: new BreadcrumbDto({
+        id: lease.tenantId,
         rel: Rel.Tenant,
-        href: `/tenants/${lease.tenantId}`,
-      },
+      }),
     };
   }
 }

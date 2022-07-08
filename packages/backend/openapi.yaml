@@ -1644,9 +1644,12 @@ components:
           type: string
         href:
           type: string
+        id:
+          type: string
       required:
         - rel
         - href
+        - id
     LeaseBreadcrumbsDto:
       type: object
       properties:

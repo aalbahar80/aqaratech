@@ -5,6 +5,7 @@ import { Prisma, Unit } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -177,14 +178,14 @@ export class UnitsService {
     property: { portfolioId: string };
   }): UnitBreadcrumbsDto {
     return {
-      portfolio: {
+      portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        href: `/portfolios/${unit.property.portfolioId}`,
-      },
-      property: {
+        id: unit.property.portfolioId,
+      }),
+      property: new BreadcrumbDto({
         rel: Rel.Property,
-        href: `/properties/${unit.propertyId}`,
-      },
+        id: unit.propertyId,
+      }),
     };
   }
 

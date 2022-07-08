@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -152,26 +153,26 @@ export class LeaseInvoicesService {
     });
 
     return {
-      portfolio: {
+      portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        href: `/portfolios/${invoice.lease.unit.property.portfolioId}`,
-      },
-      property: {
+        id: invoice.lease.unit.property.portfolioId,
+      }),
+      property: new BreadcrumbDto({
         rel: Rel.Property,
-        href: `/properties/${invoice.lease.unit.propertyId}`,
-      },
-      unit: {
+        id: invoice.lease.unit.propertyId,
+      }),
+      unit: new BreadcrumbDto({
         rel: Rel.Unit,
-        href: `/units/${invoice.lease.unit.id}`,
-      },
-      tenant: {
+        id: invoice.lease.unit.id,
+      }),
+      tenant: new BreadcrumbDto({
         rel: Rel.Tenant,
-        href: `/tenants/${invoice.lease.tenantId}`,
-      },
-      lease: {
+        id: invoice.lease.tenantId,
+      }),
+      lease: new BreadcrumbDto({
         rel: Rel.Lease,
-        href: `/leases/${invoice.leaseId}`,
-      },
+        id: invoice.leaseId,
+      }),
     };
   }
 }

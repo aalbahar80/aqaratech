@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma, Property } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -120,10 +121,10 @@ export class PropertiesService {
 
   breadcrumbs(property: { portfolioId: string }): PropertyBreadcrumbsDto {
     return {
-      portfolio: {
+      portfolio: new BreadcrumbDto({
+        id: property.portfolioId,
         rel: Rel.Portfolio,
-        href: `/portfolios/${property.portfolioId}`,
-      },
+      }),
     };
   }
 

@@ -3,6 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -128,26 +129,26 @@ export class ExpensesService {
   }): ExpenseBreadcrumbsDto | undefined {
     if (expense.portfolioId) {
       return {
-        portfolio: {
+        portfolio: new BreadcrumbDto({
           rel: Rel.Portfolio,
-          href: `/portfolios/${expense.portfolioId}`,
-        },
+          id: expense.portfolioId,
+        }),
       };
     }
     if (expense.propertyId) {
       return {
-        property: {
+        property: new BreadcrumbDto({
           rel: Rel.Property,
-          href: `/properties/${expense.propertyId}`,
-        },
+          id: expense.propertyId,
+        }),
       };
     }
     if (expense.unitId) {
       return {
-        unit: {
+        unit: new BreadcrumbDto({
           rel: Rel.Unit,
-          href: `/units/${expense.unitId}`,
-        },
+          id: expense.unitId,
+        }),
       };
     }
   }
