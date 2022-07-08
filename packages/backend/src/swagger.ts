@@ -14,6 +14,7 @@ import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { SearchModule } from 'src/search/search.module';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -59,6 +60,7 @@ export const setupSwagger = (app: INestApplication) => {
       LeasesModule,
       LeaseInvoicesModule,
       ExpensesModule,
+      SearchModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
 

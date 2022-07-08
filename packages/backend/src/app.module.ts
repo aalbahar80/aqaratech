@@ -15,6 +15,7 @@ import { HealthModule } from './health/health.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrometheusModule } from './prometheus/prometheus.module';
+import { SearchModule } from './search/search.module';
 
 // resources
 import { ExpensesModule } from './expenses/expenses.module';
@@ -44,6 +45,7 @@ import { UsersModule } from './users/users.module';
     HealthModule,
     PrometheusModule,
     MetricsModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [
