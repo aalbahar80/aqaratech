@@ -2,12 +2,14 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
+  Logger,
   NestInterceptor,
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import {
   PaginatedDto,
@@ -15,10 +17,15 @@ import {
   WithCount,
 } from 'src/common/dto/paginated.dto';
 
+/**
+ * DRY approach to pagination.
+ */
 @Injectable()
 export class PaginationInterceptor<T>
   implements NestInterceptor<T, PaginatedMetaDto<T>>
 {
+  private readonly logger = new Logger(AbilitiesGuard.name);
+
   intercept(
     context: ExecutionContext,
     next: CallHandler,
@@ -29,7 +36,11 @@ export class PaginationInterceptor<T>
 
     return next.handle().pipe(
       map((data: WithCount<T>) => {
-        // TODO gracefully handle no `total`
+        if (!data?.total) {
+          this.logger.error(
+            'No `total` found in response. Attempted to paginate a response that did not have a `total` property.',
+          );
+        }
         const itemCount = data.total;
 
         const pageSize = data.results.length;
