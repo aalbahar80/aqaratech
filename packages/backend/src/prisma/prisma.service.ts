@@ -4,11 +4,14 @@ import {
   NotFoundException,
   OnModuleInit,
 } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaService
-  extends PrismaClient<{ rejectOnNotFound: (e: Error) => Error }>
+  extends PrismaClient<{
+    rejectOnNotFound: (e: Error) => Error;
+    log: Prisma.PrismaClientOptions['log'];
+  }>
   implements OnModuleInit
 {
   constructor() {
@@ -16,6 +19,7 @@ export class PrismaService
       rejectOnNotFound(e) {
         throw new NotFoundException(e.message);
       },
+      log: ['info', 'warn', 'error'],
     });
   }
 
