@@ -3,7 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
-import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
@@ -41,10 +41,10 @@ export class TenantsService {
   }: {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: IUser;
-  }): Promise<PaginatedMetaDto<TenantDto>> {
+  }): Promise<WithCount<TenantDto>> {
     const { page, take, q } = tenantPageOptionsDto;
 
-    let [results, itemCount] = await Promise.all([
+    let [results, total] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
@@ -74,13 +74,7 @@ export class TenantsService {
       });
     }
 
-    const pagination = new PaginatedDto({
-      itemCount,
-      pageOptionsDto: tenantPageOptionsDto,
-      pageSize: results.length,
-    });
-
-    return { pagination, results };
+    return { total, results };
   }
 
   findOne({ id }: { id: string }) {

@@ -6,7 +6,7 @@ import * as R from 'remeda';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
-import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import {
@@ -56,14 +56,14 @@ export class LeaseInvoicesService {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
     where?: Prisma.LeaseWhereInput;
-  }): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
+  }): Promise<WithCount<LeaseInvoiceDto>> {
     const { page, take, q } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [accessibleBy(user.ability).LeaseInvoice, ...(where ? [where] : [])],
     };
 
-    let [results, itemCount] = await Promise.all([
+    let [results, total] = await Promise.all([
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,
@@ -89,13 +89,7 @@ export class LeaseInvoicesService {
 
     const invoices = await Promise.all(promises);
 
-    const pagination = new PaginatedDto({
-      itemCount,
-      pageOptionsDto: pageOptionsDto,
-      pageSize: invoices.length,
-    });
-
-    return { pagination, results: invoices };
+    return { total, results: invoices };
   }
 
   async findOne({ id }: { id: string }) {

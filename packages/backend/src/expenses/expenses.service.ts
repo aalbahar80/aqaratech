@@ -5,7 +5,7 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
-import { PaginatedDto, PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import {
   CreateExpenseDto,
@@ -64,10 +64,10 @@ export class ExpensesService {
   }: {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
-  }): Promise<PaginatedMetaDto<ExpenseDto>> {
+  }): Promise<WithCount<ExpenseDto>> {
     const { page, take, q } = pageOptionsDto;
 
-    let [results, itemCount] = await Promise.all([
+    let [results, total] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
@@ -82,13 +82,7 @@ export class ExpensesService {
       results = search({ data: results, q, keys: ['id', 'memo', 'amount'] });
     }
 
-    const pagination = new PaginatedDto({
-      itemCount,
-      pageOptionsDto: pageOptionsDto,
-      pageSize: results.length,
-    });
-
-    return { pagination, results };
+    return { total, results };
   }
 
   async findOne({ id }: { id: string }) {
