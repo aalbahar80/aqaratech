@@ -1,11 +1,12 @@
 import { expect } from '@playwright/test';
-import { testPortfolioId, testTenantId } from '@self/seed';
 import {
 	testOrgEmail,
 	testPassword,
 	testPortfolioEmail,
+	testPortfolioId,
 	testTenantEmail,
-} from '@self/seed/dist/generators.js';
+	testTenantId,
+} from '@self/seed';
 import { test } from './config.js';
 
 const users = [
