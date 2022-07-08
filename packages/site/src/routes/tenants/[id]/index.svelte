@@ -13,7 +13,7 @@
 
 		const [tenant, leases, invoices] = await Promise.all([
 			stuff.api!.tenants.findOne({ id: params.id }),
-			stuff.api!.tenants.findLeases({ id: params.id, ...sParams }),
+			stuff.api!.tenants.findLeases({ id: params.id }),
 			stuff.api!.tenants.findInvoices({ id: params.id, ...sParams }),
 		]);
 

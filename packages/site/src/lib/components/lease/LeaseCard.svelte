@@ -42,7 +42,7 @@
 						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 						aria-hidden="true"
 					/>
-					{lease.ext?.tenantName}
+					{lease.breadcrumbs.tenant.label}
 				</p>
 				<p class="flex items-center text-sm text-gray-500">
 					<Icon
@@ -50,7 +50,8 @@
 						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 						aria-hidden="true"
 					/>
-					{lease.ext?.address}
+					{lease.breadcrumbs.property.label}
+					{lease.breadcrumbs.unit.label}
 				</p>
 			</div>
 

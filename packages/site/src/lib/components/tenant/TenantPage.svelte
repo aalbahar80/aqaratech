@@ -7,7 +7,6 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import type {
-		LeaseInvoiceDto,
 		PaginatedLeaseDto,
 		PaginatedLeaseInvoiceDto,
 		TenantDto,
