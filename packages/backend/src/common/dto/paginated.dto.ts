@@ -59,3 +59,11 @@ export class PaginatedMetaDto<TData> {
   @ApiHideProperty()
   readonly results: TData[];
 }
+
+/**
+ * To be consumed by the pagination interceptor.
+ */
+export interface WithCount<T> {
+  total: number;
+  results: T[];
+}
