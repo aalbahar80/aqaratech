@@ -1,6 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -21,8 +21,6 @@ import { search } from 'src/utils/search';
 @Injectable()
 export class LeasesService {
   constructor(private prisma: PrismaService) {}
-
-  private readonly logger = new Logger(LeasesService.name);
 
   async create({
     createLeaseDto,
