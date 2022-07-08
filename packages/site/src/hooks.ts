@@ -66,6 +66,28 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const handleError: HandleError = async ({ error, event }) => {
 	console.error('Error (from handleError):', error);
+	const { locals, params } = event;
+	const details = {
+		name: 'handleError',
+		url: event.url.href,
+		locals,
+		params,
+	};
+	console.error(details);
+
+	// @ts-ignore
+	const res = error?.response as Response | undefined;
+	if (res) {
+		const body = await res.json();
+		const resDetails = {
+			name: 'Response Error (from handleError)',
+			status: res.status,
+			url: res.url,
+			body,
+		};
+		console.error(resDetails);
+	}
+
 	const user = event.locals.user;
 	Sentry.captureException(error, {
 		user: {
