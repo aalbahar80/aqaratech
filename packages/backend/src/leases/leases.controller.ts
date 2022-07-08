@@ -20,7 +20,7 @@ import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
-import { PaginatedMetaDto, WithCount } from 'src/common/dto/paginated.dto';
+import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -109,7 +109,7 @@ export class LeasesController {
     @User() user: IUser,
     @Param('id') id: string,
     @Query() pageOptionsDto: PageOptionsDto,
-  ): Promise<PaginatedMetaDto<LeaseInvoiceDto>> {
+  ): Promise<WithCount<LeaseInvoiceDto>> {
     const where: Prisma.LeaseInvoiceWhereInput = { leaseId: { equals: id } };
     return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
   }
