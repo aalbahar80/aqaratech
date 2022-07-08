@@ -12,7 +12,7 @@ import {
 } from '../schemas/transaction.schema.js';
 
 export class Transaction extends Entity {
-	static urlName = 'transactions' as const;
+	static urlName = 'leaseInvoices' as const;
 	static singular = 'transaction';
 	static singularCap = 'Transaction';
 	static plural = 'transactions';

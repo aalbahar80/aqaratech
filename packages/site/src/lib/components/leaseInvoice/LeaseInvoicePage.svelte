@@ -1,29 +1,18 @@
-<script lang="ts" context="module">
+<script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { trpc } from '$lib/client/trpc';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { Property, Transaction, Unit } from '$lib/models/classes';
-	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
+	import { Transaction } from '$lib/models/classes';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
+	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
-	import type { Load } from './__types/index';
 
-	export const load: Load = async ({ params, fetch, session }) => {
-		const trx = session.authz?.isAdmin
-			? await trpc(fetch).query('transactions:read', params.id)
-			: await trpc(fetch).query('owner:transactions:read', params.id);
-		return { props: { trx } };
-	};
-</script>
-
-<script lang="ts">
-	type Transaction = InferQueryOutput<'transactions:read'>;
+	type Transaction = LeaseInvoiceDto;
 	export let trx: Transaction;
 
 	const details: [string, string | null][] = [
@@ -31,8 +20,8 @@
 		['Due Date', trx.dueAt ? toUTCFormat(trx.dueAt) : null],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo || '-'],
-		['Address', Property.getLabel(trx.lease.unit.property)],
-		['Unit', Unit.getLabel(trx.lease.unit)],
+		['Address', trx.breadcrumbs.property.label],
+		['Unit', trx.breadcrumbs.unit.label],
 	];
 
 	$: sendEnabled = !trx.isPaid;
@@ -40,14 +29,9 @@
 	const { label, color: badgeColor } = Transaction.getBadge(trx);
 </script>
 
-<Heading title="Transaction" id={trx.id} entity="transactions">
+<Heading title="Invoice" id={trx.id} entity="leaseInvoices">
 	<svelte:fragment slot="breadcrumbs">
-		<BreadCrumb
-			crumbs={{
-				lease: trx.leaseId,
-				tenant: trx.lease.tenantId,
-			}}
-		/>
+		<BreadCrumb crumbs={trx.breadcrumbs} />
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
@@ -58,6 +42,7 @@
 			text={'Copy public URL'}
 			solid
 		/>
+		<!-- TODO implement nest -->
 		<AsyncButton
 			func={() =>
 				fetch('/transactions/' + trx.id + '/notify', {

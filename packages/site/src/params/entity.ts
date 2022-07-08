@@ -9,7 +9,7 @@ export const match: ParamMatcher = (param) => {
 		'tenants',
 		'maintenanceOrders',
 		'expenses',
-		'transactions',
+		'leaseInvoices',
 	];
 	return entities.includes(param);
 };
