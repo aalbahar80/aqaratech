@@ -10,7 +10,7 @@
     "scripts": {
         "build": "pnpm run generate && tsc",
         "dev:watch": "tsx watcher.ts",
-        "generate": "openapi-generator-cli generate"
+        "generate": "rm -rf ./src && rm -rf ./dist && openapi-generator-cli generate"
     },
     "devDependencies": {
         "@openapitools/openapi-generator-cli": "2.5.1",
