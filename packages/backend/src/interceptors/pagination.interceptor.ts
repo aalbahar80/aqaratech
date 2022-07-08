@@ -9,7 +9,6 @@ import { plainToInstance } from 'class-transformer';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import {
   PaginatedDto,
@@ -24,7 +23,7 @@ import {
 export class PaginationInterceptor<T>
   implements NestInterceptor<T, PaginatedMetaDto<T>>
 {
-  private readonly logger = new Logger(AbilitiesGuard.name);
+  private readonly logger = new Logger(PaginationInterceptor.name);
 
   intercept(
     context: ExecutionContext,
