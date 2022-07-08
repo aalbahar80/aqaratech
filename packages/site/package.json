@@ -2,11 +2,11 @@
   "name": "@self/site",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
+    "dev": "vite dev",
+    "build": "vite build",
     "build:vercel": "pnpm --filter=@self/site... build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
+    "preview": "vite preview",
     "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
     "check:watch": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --watch",
     "check:nodemon": "nodemon --exec 'pnpm run check' -e 'ts svelte' --watch 'src' --delay 2",
@@ -82,6 +82,7 @@
     "typescript": "4.7.4",
     "unplugin-icons": "0.14.3",
     "uuid": "8.3.2",
+    "vite": "2.9.13",
     "zod": "3.17.3"
   },
   "type": "module",
