@@ -10,8 +10,6 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { HateoasDto } from 'src/common/dto/hateoas.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { LeaseDto } from 'src/leases/dto/lease.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
 
 class UnitRequiredDto {
   @Nanoid()
@@ -74,14 +72,4 @@ export class UnitDto extends IntersectionType(
   hateoas: HateoasDto;
   breadcrumbs?: UnitBreadcrumbsDto;
   vacancy?: UnitVacancy;
-}
-
-class UnitLeaseTenantDto extends PickType(TenantDto, [
-  'id',
-  'fullName',
-  'shortName',
-] as const) {}
-
-export class UnitLeaseDto extends LeaseDto {
-  tenant: UnitLeaseTenantDto;
 }

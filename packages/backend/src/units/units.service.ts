@@ -1,7 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma, Unit } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -106,23 +106,16 @@ export class UnitsService {
   }
 
   async findOne({ id }: { id: string }): Promise<UnitDto> {
-    const unit = await this.prisma.unit.findUnique({
-      where: { id },
-      include: {
-        leases: {
-          include: {
-            tenant: {
-              select: {
-                id: true,
-                fullName: true,
-                shortName: true,
-              },
-            },
-          },
+    const [unit, breadcrumbs] = await Promise.all([
+      this.prisma.unit.findUnique({
+        where: { id },
+        include: {
+          leases: true,
+          property: true,
         },
-        property: true,
-      },
-    });
+      }),
+      this.breadcrumbs(id),
+    ]);
 
     const { leases, property, ...fields } = unit;
     return {
@@ -131,7 +124,7 @@ export class UnitsService {
       hateoas: {
         href: this.href(unit.id),
       },
-      breadcrumbs: this.breadcrumbs(unit),
+      breadcrumbs,
     };
   }
 
@@ -173,18 +166,19 @@ export class UnitsService {
     return `/units/${id}`;
   }
 
-  breadcrumbs(unit: {
-    propertyId: string;
-    property: { portfolioId: string };
-  }): UnitBreadcrumbsDto {
+  async breadcrumbs(unitId: string): Promise<UnitBreadcrumbsDto> {
+    const property = await this.prisma.property.findFirst({
+      where: { units: { some: { id: unitId } } },
+      include: { portfolio: true },
+    });
     return {
       portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        id: unit.property.portfolioId,
+        ...property.portfolio,
       }),
       property: new BreadcrumbDto({
         rel: Rel.Property,
-        id: unit.propertyId,
+        ...property,
       }),
     };
   }
@@ -204,9 +198,5 @@ export class UnitsService {
     const vacancyDate = lease?.end ?? null;
 
     return { isVacant, vacancyDistance, vacancyDate };
-  }
-
-  getLabel(unit: Unit) {
-    return `${unit.type} ${unit.unitNumber}`;
   }
 }

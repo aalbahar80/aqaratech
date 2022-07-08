@@ -132,6 +132,7 @@ export class ExpensesService {
         portfolio: new BreadcrumbDto({
           rel: Rel.Portfolio,
           id: expense.portfolioId,
+          fullName: '',
         }),
       };
     }
@@ -140,6 +141,9 @@ export class ExpensesService {
         property: new BreadcrumbDto({
           rel: Rel.Property,
           id: expense.propertyId,
+          area: '',
+          block: '',
+          number: '',
         }),
       };
     }
@@ -148,6 +152,8 @@ export class ExpensesService {
         unit: new BreadcrumbDto({
           rel: Rel.Unit,
           id: expense.unitId,
+          type: '',
+          unitNumber: '',
         }),
       };
     }

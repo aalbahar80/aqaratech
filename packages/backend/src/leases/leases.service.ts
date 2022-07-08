@@ -13,23 +13,14 @@ import {
   CreateLeaseDto,
   LeaseBreadcrumbsDto,
   LeaseDto,
-  LeaseExtendedDto,
   UpdateLeaseDto,
 } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertiesService } from 'src/properties/properties.service';
-import { TenantsService } from 'src/tenants/tenants.service';
-import { UnitsService } from 'src/units/units.service';
 import { search } from 'src/utils/search';
 
 @Injectable()
 export class LeasesService {
-  constructor(
-    private prisma: PrismaService,
-    private unitsService: UnitsService,
-    private readonly propertiesService: PropertiesService,
-    private readonly tenantsService: TenantsService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   private readonly logger = new Logger(LeasesService.name);
 
@@ -94,11 +85,9 @@ export class LeasesService {
     }
 
     const promises = results.map((lease) => {
-      const ext = this.getExtendedInfo(lease.id);
       const breadcrumbs = this.getBreadcrumbs(lease.id);
-      return Promise.all([ext, breadcrumbs]).then(([ext, breadcrumbs]) => ({
+      return Promise.all([breadcrumbs]).then(([breadcrumbs]) => ({
         ...lease,
-        ext,
         breadcrumbs,
       }));
     });
@@ -115,13 +104,12 @@ export class LeasesService {
   }
 
   async findOne({ id }: { id: string }) {
-    const [lease, ext, breadcrumbs] = await Promise.all([
+    const [lease, breadcrumbs] = await Promise.all([
       this.prisma.lease.findUnique({ where: { id } }),
-      this.getExtendedInfo(id),
       this.getBreadcrumbs(id),
     ]);
 
-    return { ...lease, ext, breadcrumbs };
+    return { ...lease, breadcrumbs };
   }
 
   update({
@@ -150,42 +138,19 @@ export class LeasesService {
 
   // ::: HELPERS :::
 
-  async getExtendedInfo(id: string): Promise<LeaseExtendedDto> {
-    const now = new Date();
-    const data = await this.prisma.lease.findUnique({
-      where: { id },
-      select: {
-        unit: {
-          include: {
-            property: true,
-          },
-        },
-        tenant: true,
-      },
-    });
-
-    const tenantName = this.tenantsService.getName(data.tenant);
-    const unitLabel = this.unitsService.getLabel(data.unit);
-    const address = this.propertiesService.getAddress(data.unit.property);
-    this.logger.log(
-      `Getting Extended Info took: ${new Date().getTime() - now.getTime()} ms`,
-    );
-
-    return { tenantName, unitLabel, address };
-  }
-
-  // ::: HELPERS :::
-
   async getBreadcrumbs(id: string): Promise<LeaseBreadcrumbsDto> {
     const lease = await this.prisma.lease.findUnique({
       where: { id },
       select: {
-        tenantId: true,
+        tenant: true,
         unit: {
           select: {
             id: true,
             propertyId: true,
-            property: { select: { portfolioId: true } },
+            unitNumber: true,
+            type: true,
+            // TODO only fetch relevant fields
+            property: { include: { portfolio: true } },
           },
         },
       },
@@ -193,20 +158,20 @@ export class LeasesService {
 
     return {
       portfolio: new BreadcrumbDto({
-        id: lease.unit.property.portfolioId,
         rel: Rel.Portfolio,
+        ...lease.unit.property.portfolio,
       }),
       property: new BreadcrumbDto({
-        id: lease.unit.propertyId,
         rel: Rel.Property,
+        ...lease.unit.property,
       }),
       unit: new BreadcrumbDto({
-        id: lease.unit.id,
         rel: Rel.Unit,
+        ...lease.unit,
       }),
       tenant: new BreadcrumbDto({
-        id: lease.tenantId,
         rel: Rel.Tenant,
+        ...lease.tenant,
       }),
     };
   }

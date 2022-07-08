@@ -139,12 +139,16 @@ export class LeaseInvoicesService {
         leaseId: true,
         lease: {
           select: {
-            tenantId: true,
+            id: true,
+            tenant: true,
             unit: {
               select: {
                 id: true,
                 propertyId: true,
-                property: { select: { portfolioId: true } },
+                type: true,
+                unitNumber: true,
+                // TODO only fetch relevant fields
+                property: { include: { portfolio: true } },
               },
             },
           },
@@ -155,23 +159,23 @@ export class LeaseInvoicesService {
     return {
       portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        id: invoice.lease.unit.property.portfolioId,
+        ...invoice.lease.unit.property.portfolio,
       }),
       property: new BreadcrumbDto({
         rel: Rel.Property,
-        id: invoice.lease.unit.propertyId,
+        ...invoice.lease.unit.property,
       }),
       unit: new BreadcrumbDto({
         rel: Rel.Unit,
-        id: invoice.lease.unit.id,
+        ...invoice.lease.unit,
       }),
       tenant: new BreadcrumbDto({
         rel: Rel.Tenant,
-        id: invoice.lease.tenantId,
+        ...invoice.lease.tenant,
       }),
       lease: new BreadcrumbDto({
         rel: Rel.Lease,
-        id: invoice.leaseId,
+        ...invoice.lease,
       }),
     };
   }

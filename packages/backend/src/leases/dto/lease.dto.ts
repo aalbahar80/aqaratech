@@ -53,7 +53,6 @@ export class LeaseBasicDto extends IntersectionType(
 ) {}
 
 export class LeaseDto extends LeaseBasicDto {
-  ext: LeaseExtendedDto;
   breadcrumbs: LeaseBreadcrumbsDto;
 }
 
@@ -64,12 +63,6 @@ export class CreateLeaseDto
 export class UpdateLeaseDto extends PartialType(
   OmitType(CreateLeaseDto, ['tenantId', 'unitId']),
 ) {}
-
-export class LeaseExtendedDto {
-  tenantName: string;
-  address: string;
-  unitLabel: string;
-}
 
 export class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'tenant',

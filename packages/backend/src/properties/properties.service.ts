@@ -1,7 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma, Property } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
@@ -85,12 +85,12 @@ export class PropertiesService {
   }
 
   async findOne({ id }: { id: string }) {
-    const property = await this.prisma.property.findUnique({ where: { id } });
+    const [property, breadcrumbs] = await Promise.all([
+      this.prisma.property.findUnique({ where: { id } }),
+      this.getBreadcrumbs(id),
+    ]);
 
-    return {
-      ...property,
-      breadcrumbs: this.breadcrumbs(property),
-    };
+    return { ...property, breadcrumbs };
   }
 
   update({
@@ -119,18 +119,12 @@ export class PropertiesService {
 
   // ::: HELPERS :::
 
-  breadcrumbs(property: { portfolioId: string }): PropertyBreadcrumbsDto {
+  async getBreadcrumbs(propertyId: string): Promise<PropertyBreadcrumbsDto> {
+    const portfolio = await this.prisma.portfolio.findFirst({
+      where: { properties: { some: { id: propertyId } } },
+    });
     return {
-      portfolio: new BreadcrumbDto({
-        id: property.portfolioId,
-        rel: Rel.Portfolio,
-      }),
+      portfolio: new BreadcrumbDto({ rel: Rel.Portfolio, ...portfolio }),
     };
-  }
-
-  getAddress(property: Property) {
-    return [property.area, 'ق', property.block, 'م', property.number]
-      .filter(Boolean)
-      .join(' ');
   }
 }
