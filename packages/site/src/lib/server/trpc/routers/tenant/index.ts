@@ -1,1 +1,0 @@
-export { tenantRouter } from './router';

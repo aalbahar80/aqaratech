@@ -1,1 +1,0 @@
-export { ownerRouter } from './router';
