@@ -15,7 +15,13 @@ export class SearchService {
   private _client: MeiliSearch;
 
   async search(query: string) {
-    const indexNames = ['tenants', 'portfolios', 'properties', 'leases'];
+    const indexNames = [
+      'tenants',
+      'portfolios',
+      'properties',
+      'leases',
+    ] as const;
+
     // get indexes and search
     const indexes = await Promise.all(
       indexNames.map((indexName) => {
@@ -23,9 +29,15 @@ export class SearchService {
       }),
     );
 
-    const result = {};
+    const result: Record<typeof indexNames[number], any> = {
+      tenants: [],
+      portfolios: [],
+      properties: [],
+      leases: [],
+    };
+
     const results = await Promise.all(
-      indexes.forEach((index, n) => {
+      indexes.map((index, n) => {
         const name = indexNames[n];
         result[name] = this.searchIndex({
           index,
@@ -36,8 +48,10 @@ export class SearchService {
         });
       }),
     );
+
     console.log({ results }, 'search.service.ts ~ 38');
-    return results;
+    console.log({ result }, 'search.service.ts ~ 42');
+    return result;
   }
 
   async searchIndex({
@@ -74,7 +88,6 @@ export class SearchService {
   }
 
   async init() {
-    await this._client.createIndex('movies');
     return await Promise.all([
       this.addTenants(),
       this.addPortfolios(),
