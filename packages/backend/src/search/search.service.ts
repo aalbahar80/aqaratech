@@ -16,9 +16,9 @@ export class SearchService {
 
   async search(query: string) {
     const indexNames = [
-      'tenants',
       'portfolios',
       'properties',
+      'tenants',
       'leases',
     ] as const;
 
@@ -42,9 +42,9 @@ export class SearchService {
     );
 
     const result: Record<typeof indexNames[number], any> = {
-      tenants: results[0],
-      portfolios: results[1],
-      properties: results[2],
+      portfolios: results[0],
+      properties: results[1],
+      tenants: results[2],
       leases: results[3],
     };
 
