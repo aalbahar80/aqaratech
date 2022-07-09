@@ -30,12 +30,12 @@ export class SearchService {
     );
 
     const results = await Promise.all(
-      indexes.map((index) => {
+      indexes.map((index, n) => {
         return this.searchIndex({
           index,
           query,
           createUrl(id) {
-            return `/api/tenants/${id}`;
+            return `/${indexNames[n]}/${id}`;
           },
         });
       }),
@@ -48,8 +48,6 @@ export class SearchService {
       leases: results[3],
     };
 
-    console.log({ results }, 'search.service.ts ~ 38');
-    console.log({ result }, 'search.service.ts ~ 42');
     return result;
   }
 
