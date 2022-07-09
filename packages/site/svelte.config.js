@@ -15,6 +15,13 @@ const config = {
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE'],
 		},
+		alias: {
+			$components: 'src/lib/components',
+			$models: 'src/lib/models',
+			$utils: 'src/lib/utils',
+			$environment: 'src/lib/environment',
+			$user: 'src/user',
+		},
 	},
 };
 

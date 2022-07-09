@@ -1,5 +1,4 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { resolve } from 'path';
 import icons from 'unplugin-icons/vite';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -20,17 +19,6 @@ const config = {
 					VITE_MY_VAR: 'SOME_VALUE',
 			  }
 			: undefined,
-	resolve: {
-		alias: {
-			$components: resolve('./src/lib/components'),
-			$lib: resolve('.', './src/lib'),
-			$models: resolve('./src/lib/models'),
-			$utils: resolve('.', './src/lib/utils'),
-			$environment: resolve('.', './src/lib/environment'),
-			$user: resolve('.', './src/user'),
-			// '@self/site': resolve('./src/lib'),
-		},
-	},
 	ssr: {
 		noExternal:
 			process.env.NODE_ENV === 'production'
