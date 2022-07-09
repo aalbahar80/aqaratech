@@ -14,39 +14,66 @@ export class SearchService {
 
   private _client: MeiliSearch;
 
-  getMovieIndex(): Index {
-    return this._client.index('movies');
-  }
-
-  async addDocuments(documents: any) {
-    const index = this.getMovieIndex();
-    return index.addDocuments(documents);
-  }
-
   async search(query: string) {
-    const index = this.getMovieIndex();
+    const indexNames = ['tenants', 'portfolios', 'properties', 'leases'];
+    // get indexes and search
+    const indexes = await Promise.all(
+      indexNames.map((indexName) => {
+        return this._client.getIndex(indexName);
+      }),
+    );
+
+    const results = await Promise.all(
+      indexes.map((index) => {
+        // return index.search(query);
+        return this.searchIndex({
+          index,
+          query,
+          createUrl(id) {
+            return `/api/tenants/${id}`;
+          },
+        });
+      }),
+    );
+    console.log({ results }, 'search.service.ts ~ 38');
+    return results;
+  }
+
+  async searchIndex({
+    index,
+    query,
+    createUrl,
+  }: {
+    index: Index;
+    query: string;
+    createUrl: (id: string) => string;
+  }) {
     const data = await index.search(query, {
       highlightPreTag: '<mark>',
       highlightPostTag: '</mark>',
       attributesToHighlight: ['title'],
-      limit: 5,
+      limit: 20,
     });
 
     data.hits = data.hits.map((hit) => ({
       ...hit,
-      url: `/leases/${hit.id}`,
+      url: createUrl(hit.id),
     }));
 
     return data;
   }
 
-  remove() {
-    return this.getMovieIndex().deleteAllDocuments();
+  async remove() {
+    const indexes = await this._client.getIndexes();
+    return await Promise.all(
+      indexes.map((index) => {
+        return this._client.deleteIndex(index.uid);
+      }),
+    );
   }
 
   async init() {
     await this._client.createIndex('movies');
-    await this.getMovieIndex().addDocuments([{ title: 'Star Wars' }]);
     return await Promise.all([
       this.addTenants(),
       this.addPortfolios(),
@@ -76,7 +103,8 @@ export class SearchService {
       };
     });
 
-    return this.addDocuments(documents);
+    const index = this._client.index('tenants');
+    return index.addDocuments(documents);
   }
 
   async addPortfolios() {
@@ -98,7 +126,8 @@ export class SearchService {
       };
     });
 
-    return this.addDocuments(documents);
+    const index = this._client.index('portfolios');
+    return index.addDocuments(documents);
   }
 
   async addProperties() {
@@ -117,7 +146,8 @@ export class SearchService {
       };
     });
 
-    return this.addDocuments(documents);
+    const index = this._client.index('properties');
+    return index.addDocuments(documents);
   }
 
   async addLeases() {
@@ -139,6 +169,7 @@ export class SearchService {
       };
     });
 
-    return this.addDocuments(documents);
+    const index = this._client.index('leases');
+    return index.addDocuments(documents);
   }
 }
