@@ -35,8 +35,19 @@
 
 				<MSearch bind:open />
 				<div class="flex flex-1 justify-center px-2 lg:ml-6 lg:justify-end">
-					<div class="w-full max-w-lg lg:max-w-xs">
-						<button class="relative">
+					<!-- <button
+						class="w-full max-w-lg lg:max-w-xs"
+						on:click={() => {
+							open = true;
+						}}
+					> -->
+					<button
+						class="block w-full max-w-lg rounded-md border border-transparent bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm lg:max-w-xs"
+						on:click={() => {
+							open = true;
+						}}
+					>
+						<div class="relative">
 							<div
 								class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
 							>
@@ -47,18 +58,15 @@
 									theme="solid"
 								/>
 							</div>
-							<input
+							<span
 								id="search"
 								name="search"
 								class="block w-full rounded-md border border-transparent bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
-								placeholder="Search"
-								type="search"
-								on:click={() => {
-									open = true;
-								}}
-							/>
-						</button>
-					</div>
+							>
+								Quick search...
+							</span>
+						</div>
+					</button>
 				</div>
 				{#if $session.user}
 					<div class="-mr-2 flex items-center gap-6 lg:hidden">
