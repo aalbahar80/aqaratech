@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SearchPalette from '$lib/components/SearchPalette.svelte';
+	import SearchPalette from '$lib/components/search/SearchPalette.svelte';
 	import { Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
