@@ -4,7 +4,12 @@
 	import '../styles/tailwind.css';
 
 	export const load: Load = ({ error, status }) => {
-		const getTitle = (code: number | null) => {
+		// TODO replace manual type cast with type predicate
+		// @ts-ignore
+		const res = error?.response as Response | undefined;
+		const code = res?.status ?? status;
+
+		const getTitle = () => {
 			if (code === 404) {
 				return 'Page not found';
 			} else if (code === 403) {
@@ -18,8 +23,8 @@
 
 		return {
 			props: {
-				status,
-				title: getTitle(status),
+				code,
+				title: getTitle(),
 				message: error?.message,
 				stack: error?.stack,
 			},
@@ -28,7 +33,7 @@
 </script>
 
 <script lang="ts">
-	export let status: number;
+	export let code: number;
 	export let title: string;
 	export let message: string;
 	export let stack: string;
@@ -40,7 +45,7 @@
 	<div class="mx-auto max-w-max">
 		<main class="sm:flex">
 			<p class="text-4xl font-extrabold text-indigo-600 sm:text-5xl">
-				{status}
+				{code}
 			</p>
 			<div class="sm:ml-6">
 				<div class="sm:border-l sm:border-gray-200 sm:pl-6">
