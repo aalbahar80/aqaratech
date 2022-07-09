@@ -1,7 +1,12 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
+		DialogOverlay,
+		Listbox,
+		ListboxOption,
+		ListboxOptions,
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
@@ -10,13 +15,15 @@
 
 	const items = [
 		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '#' },
-		// More items...
+		{ id: 2, name: 'Apple Inc.', category: 'Computers', url: '#' },
+		{ id: 3, name: 'Google Inc.', category: 'Search', url: '#' },
+		{ id: 4, name: 'Microsoft Inc.', category: 'Computers', url: '#' },
 	];
 
 	let query = '';
 	let open = true;
 
-	const filteredItems =
+	$: filteredItems =
 		query === ''
 			? []
 			: items.filter((item) => {
@@ -24,20 +31,20 @@
 			  });
 
 	// make reactive
-	const groups = filteredItems.reduce((groups, item) => {
+	$: groups = filteredItems.reduce((groups, item) => {
 		return {
 			...groups,
 			[item.category]: [...(groups[item.category] || []), item],
 		};
 	}, {});
+	$: console.log(groups);
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
 	<Dialog
-		as="div"
 		class="relative z-10"
 		on:close={() => {
-			open = true;
+			open = false;
 		}}
 	>
 		<TransitionChild
@@ -63,7 +70,7 @@
 				<DialogPanel
 					class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 				>
-					<Combobox on:change={(item) => (window.location = item.url)}>
+					<Listbox on:change={(item) => goto(item.url)}>
 						<div class="relative">
 							<Icon
 								src={Search}
@@ -71,10 +78,12 @@
 								aria-hidden="true"
 								theme="solid"
 							/>
-							<ComboboxInput
+							<input
 								class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
 								placeholder="Search..."
-								on:change={(event) => setQuery(event.target.value)}
+								on:input={(event) => {
+									query = event.currentTarget?.value;
+								}}
 							/>
 						</div>
 
@@ -99,7 +108,7 @@
 						{/if}
 
 						{#if filteredItems.length > 0}
-							<ComboboxOptions
+							<ListboxOptions
 								static
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
 							>
@@ -112,21 +121,21 @@
 										</h2>
 										<ul class="mt-2 text-sm text-gray-800">
 											{#each items as item (item.id)}
-												<ComboboxOption
+												<ListboxOption
 													value={item}
 													class={({ active }) =>
 														classes(
 															'cursor-default select-none px-4 py-2',
-															active && 'bg-indigo-600 text-white',
+															active ? 'bg-indigo-600 text-white' : '',
 														)}
 												>
 													{item.name}
-												</ComboboxOption>
+												</ListboxOption>
 											{/each}
 										</ul>
 									</li>
 								{/each}
-							</ComboboxOptions>
+							</ListboxOptions>
 						{/if}
 
 						{#if query !== '' && filteredItems.length === 0}
@@ -145,7 +154,7 @@
 								</p>
 							</div>
 						{/if}
-					</Combobox>
+					</Listbox>
 				</DialogPanel>
 			</TransitionChild>
 		</div>
