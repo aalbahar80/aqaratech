@@ -8,12 +8,12 @@ export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
   @Post('/')
-  getSearch() {
+  initSearch() {
     return this.searchService.init();
   }
 
   @Get('/')
-  getSearchPost(@Query('query') query: string) {
+  get(@Query('query') query: string) {
     return this.searchService.search(query);
   }
 

@@ -1453,7 +1453,7 @@ paths:
       tags: *ref_7
   /search:
     post:
-      operationId: getSearch
+      operationId: initSearch
       parameters: []
       responses:
         '201':
@@ -1461,7 +1461,7 @@ paths:
       tags: &ref_8
         - search
     get:
-      operationId: getSearchPost
+      operationId: get
       parameters:
         - name: query
           required: true
