@@ -23,10 +23,11 @@ export class SearchService {
       }),
     );
 
+    const result = {};
     const results = await Promise.all(
-      indexes.map((index) => {
-        // return index.search(query);
-        return this.searchIndex({
+      indexes.forEach((index, n) => {
+        const name = indexNames[n];
+        result[name] = this.searchIndex({
           index,
           query,
           createUrl(id) {
