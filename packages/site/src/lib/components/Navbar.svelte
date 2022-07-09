@@ -2,6 +2,7 @@
 	import { dev } from '$app/env';
 	import { session } from '$app/stores';
 	import NavPopover from '$components/navbar/NavPopover.svelte';
+	import MSearch from '$lib/components/MSearch.svelte';
 	import { getDocs } from '$lib/components/navbar/docs-url';
 	import type { UserConfig } from '$lib/models/interfaces/user.interface';
 
@@ -11,6 +12,7 @@
 		$session.user?.role.isOwner || $session.user?.role.isTenant;
 
 	const docs = getDocs();
+	let open = false;
 </script>
 
 <div class="bg-gray-900 py-6 print:hidden">
@@ -77,6 +79,14 @@
 						Dashboard
 					</a>
 				{/if}
+				<MSearch bind:open />
+				<button
+					on:click={() => {
+						open = true;
+					}}
+				>
+					search
+				</button>
 				{#if dev}
 					<a
 						href="/account/profile"

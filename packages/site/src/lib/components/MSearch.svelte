@@ -21,7 +21,7 @@
 	];
 
 	let query = '';
-	let open = true;
+	export let open = false;
 
 	$: filteredItems =
 		query === ''
