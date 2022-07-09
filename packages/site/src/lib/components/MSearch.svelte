@@ -13,11 +13,24 @@
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const items = [
-		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '#' },
-		{ id: 2, name: 'Apple Inc.', category: 'Computers', url: '#' },
-		{ id: 3, name: 'Google Inc.', category: 'Search', url: '#' },
-		{ id: 4, name: 'Microsoft Inc.', category: 'Computers', url: '#' },
+	interface Item {
+		id: number;
+		name: string;
+		category: string;
+		url: string;
+	}
+	type Groups = Record<string, Array<Item>>;
+
+	const items: Item[] = [
+		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '/clients' },
+		{ id: 2, name: 'Apple Inc.', category: 'Computers', url: '/leases' },
+		{ id: 3, name: 'Google Inc.', category: 'Search', url: '/units' },
+		{
+			id: 4,
+			name: 'Microsoft Inc.',
+			category: 'Computers',
+			url: '/properties',
+		},
 	];
 
 	let query = '';
@@ -30,14 +43,12 @@
 					return item.name.toLowerCase().includes(query.toLowerCase());
 			  });
 
-	// make reactive
-	$: groups = filteredItems.reduce((groups, item) => {
+	$: groups = filteredItems.reduce<Groups>((groups, item) => {
 		return {
 			...groups,
 			[item.category]: [...(groups[item.category] || []), item],
 		};
-	}, {});
-	$: console.log(groups);
+	}, {}) as Groups;
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
@@ -72,7 +83,7 @@
 			<div
 				class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 			>
-				<Listbox on:change={(item) => goto(item.url)}>
+				<Listbox on:change={(item) => goto(item.detail.url)}>
 					<div class="relative">
 						<Icon
 							src={Search}
@@ -125,11 +136,10 @@
 										{#each items as item (item.id)}
 											<ListboxOption
 												value={item}
-												class={({ active }) =>
-													classes(
-														'cursor-default select-none px-4 py-2',
-														active ? 'bg-indigo-600 text-white' : '',
-													)}
+												class={classes(
+													'cursor-default select-none px-4 py-2',
+													'hover:bg-indigo-600 hover:text-white',
+												)}
 											>
 												{item.name}
 											</ListboxOption>
