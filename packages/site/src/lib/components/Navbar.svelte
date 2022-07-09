@@ -30,7 +30,6 @@
 						alt=""
 					/>
 				</a>
-				<SearchButton />
 				{#if $session.user}
 					<div class="-mr-2 flex items-center gap-6 lg:hidden">
 						{#if showDashboard}
@@ -66,7 +65,9 @@
 					</a>
 				{/each}
 			</div>
+			<SearchButton />
 		</div>
+
 		<!-- Large screen: nav actions -->
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.user}
