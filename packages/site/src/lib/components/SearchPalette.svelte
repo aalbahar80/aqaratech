@@ -26,7 +26,7 @@
 	let groups: Groups = {};
 
 	let query = 'حط';
-	export let open = true;
+	export let open = false;
 
 	const search = async (q: string) => {
 		const res = await $page.stuff.api.search.getSearchPost({ query: q });

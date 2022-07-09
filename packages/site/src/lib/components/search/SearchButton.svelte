@@ -1,12 +1,12 @@
 <script lang="ts">
-	import MSearch from '$lib/components/MSearch.svelte';
+	import SearchPalette from '$lib/components/SearchPalette.svelte';
 	import { Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	let open = false;
 </script>
 
-<MSearch bind:open />
+<SearchPalette bind:open />
 <button
 	class="flex flex-1 justify-center px-8 lg:ml-6 lg:justify-end"
 	on:click={() => {
