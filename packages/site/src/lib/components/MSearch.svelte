@@ -25,8 +25,8 @@
 
 	let groups: Groups = {};
 
-	let query = '';
-	export let open = false;
+	let query = 'حط';
+	export let open = true;
 
 	const search = async (q: string) => {
 		const res = await $page.stuff.api.search.getSearchPost({ query: q });
@@ -126,16 +126,17 @@
 									<ul class="mt-2 text-sm text-gray-800">
 										{#each items as item (item.id)}
 											<Hoverable let:hovering>
-												<ListboxOption
-													value={item}
-													class={classes(
-														'cursor-default select-none px-4 py-2 search-hit',
-														'hover:bg-indigo-600 hover:text-white',
-													)}
-												>
-													<div class:hovering>
+												<ListboxOption value={item}>
+													<div
+														class={classes(
+															'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
+															hovering
+																? 'bg-indigo-600 text-white [&_mark]:text-white [&_mark]:bg-inherit'
+																: '[&_mark]:text-indigo-600 [&_mark]:bg-inherit [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
+														)}
+													>
 														{@html item._formatted.title}
-														<!-- example: abc<mark>def</mark>hij -->
+														<!-- example: abc<mark>def</mark>hij <mark>ح</mark>افظ المحجوب -->
 													</div>
 												</ListboxOption>
 											</Hoverable>
@@ -167,20 +168,3 @@
 		</TransitionChild>
 	</Dialog>
 </TransitionRoot>
-
-<style :global>
-	:global(mark) {
-		background: none;
-		border-bottom-width: 2px;
-		--tw-border-opacity: 1;
-		border-color: rgb(125 211 252 / var(--tw-border-opacity));
-		font-weight: 600;
-		--tw-text-opacity: 1;
-		color: rgb(2 132 199 / var(--tw-text-opacity));
-	}
-
-	:global(.hovering mark) {
-		color: inherit;
-		border-bottom-color: currentColor;
-	}
-</style>
