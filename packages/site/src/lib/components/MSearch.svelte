@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
@@ -34,7 +35,6 @@
 
 	$: search(query);
 	$: hasHits = Object.values(groups).some((groupHits) => groupHits.length > 0);
-	$: console.table(groups['leases']);
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
@@ -125,15 +125,20 @@
 									</h2>
 									<ul class="mt-2 text-sm text-gray-800">
 										{#each items as item (item.id)}
-											<ListboxOption
-												value={item}
-												class={classes(
-													'cursor-default select-none px-4 py-2',
-													'hover:bg-indigo-600 hover:text-white',
-												)}
-											>
-												{item.title}
-											</ListboxOption>
+											<Hoverable let:hovering>
+												<ListboxOption
+													value={item}
+													class={classes(
+														'cursor-default select-none px-4 py-2 search-hit',
+														'hover:bg-indigo-600 hover:text-white',
+													)}
+												>
+													<div class:hovering>
+														{@html item._formatted.title}
+														<!-- example: abc<mark>def</mark>hij -->
+													</div>
+												</ListboxOption>
+											</Hoverable>
 										{/each}
 									</ul>
 								</li>
@@ -162,3 +167,20 @@
 		</TransitionChild>
 	</Dialog>
 </TransitionRoot>
+
+<style :global>
+	:global(mark) {
+		background: none;
+		border-bottom-width: 2px;
+		--tw-border-opacity: 1;
+		border-color: rgb(125 211 252 / var(--tw-border-opacity));
+		font-weight: 600;
+		--tw-text-opacity: 1;
+		color: rgb(2 132 199 / var(--tw-text-opacity));
+	}
+
+	:global(.hovering mark) {
+		color: inherit;
+		border-bottom-color: currentColor;
+	}
+</style>

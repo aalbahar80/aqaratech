@@ -26,8 +26,8 @@ export class SearchService {
     const index = this.getMovieIndex();
     // return index.search(query);
     const data = await index.search(query, {
-      highlightPreTag: '<em>',
-      highlightPostTag: '</em>',
+      highlightPreTag: '<mark>',
+      highlightPostTag: '</mark>',
       attributesToHighlight: ['title'],
       limit: 5,
     });

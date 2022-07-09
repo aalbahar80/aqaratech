@@ -8,17 +8,6 @@ import { fileURLToPath } from 'url';
 const config = {
 	plugins: [sveltekit(), icons({ compiler: 'svelte' })],
 	envDir: resolve(path.dirname(fileURLToPath(import.meta.url)), './env'),
-	server: {
-		watch: {
-			ignored: [
-				(path) => {
-					if (path.includes('layout')) {
-						return true;
-					}
-				},
-			],
-		},
-	},
 	// delete .svelte-kit folder b4 testing
 	test: {
 		exclude: ['**/tests/**', 'node_modules'],
