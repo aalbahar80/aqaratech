@@ -234,15 +234,15 @@ importers:
       '@felte/reporter-svelte': 1.1.2
       '@felte/reporter-tippy': 1.1.2
       '@felte/validator-zod': 1.0.10
-      '@iconify/json': 2.1.63
+      '@iconify/json': 2.1.75
       '@playwright/test': 1.23.2
       '@prisma/client': 3.15.2
       '@rgossiaux/svelte-headlessui': 1.0.2
       '@self/sdk': workspace:0.0.1
       '@self/seed': workspace:0.0.1
-      '@sentry/browser': 7.5.1
-      '@sentry/node': 7.5.1
-      '@sentry/tracing': 7.5.1
+      '@sentry/browser': 7.6.0
+      '@sentry/node': 7.6.0
+      '@sentry/tracing': 7.6.0
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.79
@@ -285,7 +285,7 @@ importers:
       prisma: 3.15.2
       remeda: 0.0.35
       superjson: 1.9.1
-      svelecte: 3.8.1
+      svelecte: 3.9.0
       svelte: 3.49.0
       svelte-check: 2.8.0
       svelte-meta-tags: 2.6.1
@@ -296,7 +296,7 @@ importers:
       tippy.js: 6.3.7
       tslib: 2.4.0
       typescript: 4.7.4
-      unplugin-icons: 0.14.3
+      unplugin-icons: 0.14.7
       uuid: 8.3.2
       vite: 2.9.14
       zod: 3.17.3
@@ -307,14 +307,14 @@ importers:
       '@felte/reporter-svelte': 1.1.2_svelte@3.49.0
       '@felte/reporter-tippy': 1.1.2_tippy.js@6.3.7
       '@felte/validator-zod': 1.0.10_zod@3.17.3
-      '@iconify/json': 2.1.63
+      '@iconify/json': 2.1.75
       '@playwright/test': 1.23.2
       '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.49.0
       '@self/sdk': link:../sdk
       '@self/seed': link:../seed
-      '@sentry/browser': 7.5.1
-      '@sentry/node': 7.5.1
-      '@sentry/tracing': 7.5.1
+      '@sentry/browser': 7.6.0
+      '@sentry/node': 7.6.0
+      '@sentry/tracing': 7.6.0
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.79
@@ -356,7 +356,7 @@ importers:
       prettier-plugin-tailwindcss: 0.1.12_prettier@2.7.1
       remeda: 0.0.35
       superjson: 1.9.1
-      svelecte: 3.8.1
+      svelecte: 3.9.0
       svelte: 3.49.0
       svelte-check: 2.8.0_nxvsp6sjiltnatqa6jdm4mr6zu
       svelte-meta-tags: 2.6.1_uslzfc62di2n2otc2tvfklnwji
@@ -367,7 +367,7 @@ importers:
       tippy.js: 6.3.7
       tslib: 2.4.0
       typescript: 4.7.4
-      unplugin-icons: 0.14.3_vite@2.9.14
+      unplugin-icons: 0.14.7_vite@2.9.14
       uuid: 8.3.2
       vite: 2.9.14
       zod: 3.17.3
@@ -1904,11 +1904,11 @@ packages:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify/json/2.1.63:
-    resolution: {integrity: sha512-WQwTV6KUl0C+VkH3/j9kwlHLOHyPn0pM7f0kFmJgghQ9Ha672UHr/KTuwVqbqn3c+RxnJyY+jIap4ewawMeaZA==}
+  /@iconify/json/2.1.75:
+    resolution: {integrity: sha512-JkrchHjjS/f5dRqNUi0M+cWQrPTJonNf51LsFA5GUo3Q9xhRoxaOMf8Hcn2VcG6e2mzvjpHc7fBiqh+aRtdrPQ==}
     dependencies:
       '@iconify/types': 1.1.0
-      pathe: 0.2.0
+      pathe: 0.3.2
     dev: true
 
   /@iconify/types/1.1.0:
@@ -2869,13 +2869,13 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sentry/browser/7.5.1:
-    resolution: {integrity: sha512-zea3+LzFFE58UuPXFfrmT2tJMCE6JJ0I5Pb7cTB8BojTU+3s8IQwTiN4cqcFZbuZ0zrJByCnJ8ohYYvzpO5XiQ==}
+  /@sentry/browser/7.6.0:
+    resolution: {integrity: sha512-1gdvV8RtTnNFyc790t49MAgFuHAP43NEZvdQOMw5KFnDwSGYFqfBtvJ8tUm125UPbi2fghBryO9M1gfIWboKUg==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.5.1
-      '@sentry/types': 7.5.1
-      '@sentry/utils': 7.5.1
+      '@sentry/core': 7.6.0
+      '@sentry/types': 7.6.0
+      '@sentry/utils': 7.6.0
       tslib: 1.14.1
     dev: true
 
@@ -2887,6 +2887,17 @@ packages:
       '@sentry/types': 7.5.1
       '@sentry/utils': 7.5.1
       tslib: 1.14.1
+    dev: false
+
+  /@sentry/core/7.6.0:
+    resolution: {integrity: sha512-vXIuUZbHVSAXh2xZ3NyXYXqVvVQSbGEpgtQxLutwocvD88JFK6aZqO+WQG69GY1b1fKSeE9faEDDS6WGAi46mQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/hub': 7.6.0
+      '@sentry/types': 7.6.0
+      '@sentry/utils': 7.6.0
+      tslib: 1.14.1
+    dev: true
 
   /@sentry/hub/7.5.1:
     resolution: {integrity: sha512-q14zzf5GlE4xvwFP7lZaAI4UnuqWMc3nD62Md5XBptY35bm42CGzawx9aDQ8cegZoQ5bHyX1GPzFju4lDO3O6g==}
@@ -2895,6 +2906,16 @@ packages:
       '@sentry/types': 7.5.1
       '@sentry/utils': 7.5.1
       tslib: 1.14.1
+    dev: false
+
+  /@sentry/hub/7.6.0:
+    resolution: {integrity: sha512-TbieNZInpnR5STXykT1zXoKVAsm8ju1RZyzMqYR8nzURbjlMVVEzFRglNY1Ap5MRkbEuYpAc6zUvgLQe8b6Q3w==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.6.0
+      '@sentry/utils': 7.6.0
+      tslib: 1.14.1
+    dev: true
 
   /@sentry/node/7.5.1:
     resolution: {integrity: sha512-XSpNbxBVIpcklLpk9NtQSkTZM0/mEj0TYMnzQmE2UR7UChpGhZyc19nbQWceSsaLMrrAgOX4Zzo28ENk/QY5FA==}
@@ -2910,6 +2931,23 @@ packages:
       tslib: 1.14.1
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@sentry/node/7.6.0:
+    resolution: {integrity: sha512-B6DAle4xMUnmY1SlEyO+zAnS+HHae75GiD4zliYMA8plhd3+UcsYN3LpmhgYSfxvckYBjG/YcqQl9HWJV+s3tw==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/core': 7.6.0
+      '@sentry/hub': 7.6.0
+      '@sentry/types': 7.6.0
+      '@sentry/utils': 7.6.0
+      cookie: 0.4.2
+      https-proxy-agent: 5.0.1
+      lru_map: 0.3.3
+      tslib: 1.14.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /@sentry/tracing/7.5.1:
     resolution: {integrity: sha512-fOmzTk3/mTKF5d1P43yZ29lc5z/1wyL2+qX+N5rLluIeR6dEYISyjFistK8z1esMCCvJu8/x3u0imbrrFDNx0Q==}
@@ -2919,10 +2957,27 @@ packages:
       '@sentry/types': 7.5.1
       '@sentry/utils': 7.5.1
       tslib: 1.14.1
+    dev: false
+
+  /@sentry/tracing/7.6.0:
+    resolution: {integrity: sha512-ydlIk8FpuXiQm3Y0cLwXMOUYv5UtniP8ylWw3ix0sF5sTpJWSaC/g8P8yrzkYV+pm28kde5qfE3nocGhpwxZcA==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/hub': 7.6.0
+      '@sentry/types': 7.6.0
+      '@sentry/utils': 7.6.0
+      tslib: 1.14.1
+    dev: true
 
   /@sentry/types/7.5.1:
     resolution: {integrity: sha512-+OHxQL4lXCEsUA31qlhcPABOjxtbuL+VTpgamXJjxEpQQDPUPyPK0pu7c+uTc7x4Re96Ss3pwUYE9tl3WW3xIg==}
     engines: {node: '>=8'}
+    dev: false
+
+  /@sentry/types/7.6.0:
+    resolution: {integrity: sha512-POimbDwr9tmHSKksJTXe5VQpvjkFO4/UWUptigwqf8684rkS7Ie2BT2uyp5GD2EgYFf0BwUOWi98FTYTvUGT+Q==}
+    engines: {node: '>=8'}
+    dev: true
 
   /@sentry/utils/7.5.1:
     resolution: {integrity: sha512-5w5dEDilAkH/4x5h8VMlfFcGKdDQ8tbSEfxnMOheD3/bwk18lTVTgp6kk+VxmugGdvxsTLiPEoORsuofufWvGQ==}
@@ -2930,6 +2985,15 @@ packages:
     dependencies:
       '@sentry/types': 7.5.1
       tslib: 1.14.1
+    dev: false
+
+  /@sentry/utils/7.6.0:
+    resolution: {integrity: sha512-p0Byi6hgawp/sBMY88RY8OmkiAR2jxbjnl8gSo+y3YEu+KeXBUxXMBsI7YeW+1lSb6z8DGhUAOBszTeI4wAr2w==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.6.0
+      tslib: 1.14.1
+    dev: true
 
   /@sinclair/typebox/0.23.5:
     resolution: {integrity: sha512-AFBVi/iT4g20DHoujvMH1aEDn8fGJh4xsRGCP6d8RpLPMqsNPvW01Jcn0QysXTsg++/xj25NmJsGyH9xug/wKg==}
@@ -8393,8 +8457,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pathe/0.2.0:
-    resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==}
+  /pathe/0.3.2:
+    resolution: {integrity: sha512-qhnmX0TOqlCvdWWTkoM83wh5J8fZ2yhbDEc9MlsnAEtEc+JCwxUKEwmd6pkY9hRe6JR1Uecbc14VcAKX2yFSTA==}
     dev: true
 
   /pause/0.0.1:
@@ -9911,8 +9975,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelecte/3.8.1:
-    resolution: {integrity: sha512-xY6HpdBUtPwKU+y4eWZIKT4ENva7gx1t0KxNaoJ6keQFyFVoVE7GhPjj8j/6fDWIYVPVPD2Lp3PtoyLEc3XP8A==}
+  /svelecte/3.9.0:
+    resolution: {integrity: sha512-0n3qUaD0Gh5hj6/VxVdsAt+An6UoWg64ygdOG4tIILUWGlglRbM3Bu8yYNP7yymUOEeW9V/tfe8XrPgeKjxFmQ==}
     dependencies:
       svelte-tiny-virtual-list: 2.0.5
     dev: true
@@ -10832,6 +10896,38 @@ packages:
       - webpack
     dev: true
 
+  /unplugin-icons/0.14.7_vite@2.9.14:
+    resolution: {integrity: sha512-TrNnEdpaXMdiG5BsCgvU6cv/gSLYvIk1f8wGCGZmOo4wmi3nqYBuqIEuiXhmmyXdDZuRRpCaOzCnCYYZ5H7U8g==}
+    peerDependencies:
+      '@svgr/core': '>=5.5.0'
+      '@vue/compiler-sfc': ^3.0.2
+      vue-template-compiler: ^2.6.12
+      vue-template-es2015-compiler: ^1.9.0
+    peerDependenciesMeta:
+      '@svgr/core':
+        optional: true
+      '@vue/compiler-sfc':
+        optional: true
+      vue-template-compiler:
+        optional: true
+      vue-template-es2015-compiler:
+        optional: true
+    dependencies:
+      '@antfu/install-pkg': 0.1.0
+      '@antfu/utils': 0.5.2
+      '@iconify/utils': 1.0.33
+      debug: 4.3.4
+      kolorist: 1.5.1
+      local-pkg: 0.4.1
+      unplugin: 0.7.1_vite@2.9.14
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - supports-color
+      - vite
+      - webpack
+    dev: true
+
   /unplugin/0.6.3_vite@2.9.14:
     resolution: {integrity: sha512-CoW88FQfCW/yabVc4bLrjikN9HC8dEvMU4O7B6K2jsYMPK0l6iAnd9dpJwqGcmXJKRCU9vwSsy653qg+RK0G6A==}
     peerDependencies:
@@ -10849,6 +10945,30 @@ packages:
       webpack:
         optional: true
     dependencies:
+      chokidar: 3.5.3
+      vite: 2.9.14
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.4.4
+    dev: true
+
+  /unplugin/0.7.1_vite@2.9.14:
+    resolution: {integrity: sha512-Z6hNDXDNh9aimMkPU1mEjtk+2ova8gh0y7rJeJdGH1vWZOHwF2lLQiQ/R97rv9ymmzEQXsR2fyMet72T8jy6ew==}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0 || ^3.0.0-0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      acorn: 8.7.1
       chokidar: 3.5.3
       vite: 2.9.14
       webpack-sources: 3.2.3
