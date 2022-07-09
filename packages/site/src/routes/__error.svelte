@@ -1,12 +1,14 @@
 <script context="module" lang="ts">
 	import { dev } from '$app/env';
+	import type { ResponseError } from '@self/sdk';
 	import type { Load } from '@sveltejs/kit';
 	import '../styles/tailwind.css';
 
 	export const load: Load = ({ error, status }) => {
 		// TODO replace manual type cast with type predicate
-		// @ts-ignore
-		const res = error?.response as Response | undefined;
+		const thrown = error as Error | ResponseError;
+
+		const res = 'response' in thrown ? thrown.response : undefined;
 		const code = res?.status ?? status;
 
 		const getTitle = () => {
@@ -25,8 +27,8 @@
 			props: {
 				code,
 				title: getTitle(),
-				message: error?.message,
-				stack: error?.stack,
+				message: thrown?.message,
+				stack: thrown?.stack,
 			},
 		};
 	};
