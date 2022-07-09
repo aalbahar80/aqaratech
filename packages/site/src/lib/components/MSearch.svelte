@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
@@ -15,40 +16,25 @@
 
 	interface Item {
 		id: number;
-		name: string;
+		title: string;
 		category: string;
 		url: string;
 	}
 	type Groups = Record<string, Array<Item>>;
 
-	const items: Item[] = [
-		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '/portfolios' },
-		{ id: 2, name: 'Apple Inc.', category: 'Computers', url: '/leases' },
-		{ id: 3, name: 'Google Inc.', category: 'Search', url: '/units' },
-		{
-			id: 4,
-			name: 'Microsoft Inc.',
-			category: 'Computers',
-			url: '/properties',
-		},
-	];
+	let groups: Groups = {};
 
 	let query = '';
 	export let open = false;
 
-	$: filteredItems =
-		query === ''
-			? []
-			: items.filter((item) => {
-					return item.name.toLowerCase().includes(query.toLowerCase());
-			  });
+	const search = async (q: string) => {
+		const res = await $page.stuff.api.search.getSearchPost({ query: q });
+		groups = { ...groups, leases: res.hits };
+	};
 
-	$: groups = filteredItems.reduce<Groups>((groups, item) => {
-		return {
-			...groups,
-			[item.category]: [...(groups[item.category] || []), item],
-		};
-	}, {}) as Groups;
+	$: search(query);
+	$: hasHits = Object.values(groups).some((groupHits) => groupHits.length > 0);
+	$: console.table(groups['leases']);
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
@@ -125,7 +111,7 @@
 						</div>
 					{/if}
 
-					{#if filteredItems.length > 0}
+					{#if hasHits}
 						<ListboxOptions
 							static
 							class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
@@ -146,7 +132,7 @@
 													'hover:bg-indigo-600 hover:text-white',
 												)}
 											>
-												{item.name}
+												{item.title}
 											</ListboxOption>
 										{/each}
 									</ul>
@@ -155,7 +141,7 @@
 						</ListboxOptions>
 					{/if}
 
-					{#if query !== '' && filteredItems.length === 0}
+					{#if query !== '' && !hasHits}
 						<div
 							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
 						>

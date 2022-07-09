@@ -5,6 +5,7 @@ import {
 	LeasesApi,
 	PortfoliosApi,
 	PropertiesApi,
+	SearchApi,
 	TenantsApi,
 	UnitsApi,
 } from '@self/sdk';
@@ -17,8 +18,6 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	console.log(import.meta.env, 'api.ts');
-
 	const basePath = import.meta.env.VITE_VERCEL_ENV
 		? import.meta.env.VITE_API_URL
 		: import.meta.env.PROD // for render docker
@@ -42,6 +41,7 @@ export const api = ({
 		leases: new LeasesApi(config),
 		leaseInvoices: new LeaseInvoicesApi(config),
 		expenses: new ExpensesApi(config),
+		search: new SearchApi(config),
 	};
 };
 

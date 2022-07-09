@@ -3,6 +3,7 @@
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import { api } from '$lib/client/api';
+	import MSearch from '$lib/components/MSearch.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -92,5 +93,6 @@
 	{/if}
 	<ToastParent />
 	<Navbar {navigation} />
+	<MSearch />
 	<slot />
 </div>

@@ -30,4 +30,9 @@ export class SearchController {
     console.log({ query }, 'search.controller.ts ~ 30');
     return this.searchService.search(query);
   }
+
+  @Post('/leases')
+  addLeases() {
+    return this.searchService.addLeases();
+  }
 }
