@@ -48,10 +48,10 @@ export class SearchService {
     await this._client.createIndex('movies');
     await this.getMovieIndex().addDocuments([{ title: 'Star Wars' }]);
     return await Promise.all([
-      this.addTenants,
-      this.addPortfolios,
-      this.addProperties,
-      this.addLeases,
+      this.addTenants(),
+      this.addPortfolios(),
+      this.addProperties(),
+      this.addLeases(),
     ]);
   }
 
