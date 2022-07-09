@@ -1,9 +1,5 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
-	// import { Fragment, useState } from 'react'
-	// import { SearchIcon } from '@heroicons/react/solid'
-	// import { EmojiSadIcon, GlobeIcon } from '@heroicons/react/outline'
-	// import { Combobox, Dialog, Transition } from '@headlessui/react'
 	import {
 		Dialog,
 		TransitionChild,
@@ -36,8 +32,14 @@
 	}, {});
 </script>
 
-<TransitionRoot show={open} afterLeave={() => setQuery('')} appear>
-	<Dialog as="div" class="relative z-10" onClose={setOpen}>
+<TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
+	<Dialog
+		as="div"
+		class="relative z-10"
+		on:close={() => {
+			open = true;
+		}}
+	>
 		<TransitionChild
 			enter="ease-out duration-300"
 			enterFrom="opacity-0"
@@ -61,7 +63,7 @@
 				<DialogPanel
 					class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 				>
-					<Combobox onChange={(item) => (window.location = item.url)}>
+					<Combobox on:change={(item) => (window.location = item.url)}>
 						<div class="relative">
 							<Icon
 								src={Search}
@@ -72,7 +74,7 @@
 							<ComboboxInput
 								class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
 								placeholder="Search..."
-								onChange={(event) => setQuery(event.target.value)}
+								on:change={(event) => setQuery(event.target.value)}
 							/>
 						</div>
 
@@ -109,9 +111,8 @@
 											{category}
 										</h2>
 										<ul class="mt-2 text-sm text-gray-800">
-											{#each items as item}
+											{#each items as item (item.id)}
 												<ComboboxOption
-													key={item.id}
 													value={item}
 													class={({ active }) =>
 														classes(
