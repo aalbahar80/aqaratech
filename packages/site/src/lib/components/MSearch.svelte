@@ -22,7 +22,7 @@
 	type Groups = Record<string, Array<Item>>;
 
 	const items: Item[] = [
-		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '/clients' },
+		{ id: 1, name: 'Workflow Inc.', category: 'Clients', url: '/portfolios' },
 		{ id: 2, name: 'Apple Inc.', category: 'Computers', url: '/leases' },
 		{ id: 3, name: 'Google Inc.', category: 'Search', url: '/units' },
 		{
@@ -83,7 +83,12 @@
 			<div
 				class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 			>
-				<Listbox on:change={(item) => goto(item.detail.url)}>
+				<Listbox
+					on:change={(item) => {
+						goto(item.detail.url);
+						open = false;
+					}}
+				>
 					<div class="relative">
 						<Icon
 							src={Search}
