@@ -55,21 +55,27 @@
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
 		>
-			<div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity" />
+			<!-- <div class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity" /> -->
+			<DialogOverlay
+				class="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity"
+			/>
 		</TransitionChild>
 
-		<div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
-			<TransitionChild
-				enter="ease-out duration-300"
-				enterFrom="opacity-0 scale-95"
-				enterTo="opacity-100 scale-100"
-				leave="ease-in duration-200"
-				leaveFrom="opacity-100 scale-100"
-				leaveTo="opacity-0 scale-95"
-			>
-				<DialogPanel
+		<TransitionChild
+			enter="ease-out duration-300"
+			enterFrom="opacity-0 scale-95"
+			enterTo="opacity-100 scale-100"
+			leave="ease-in duration-200"
+			leaveFrom="opacity-100 scale-100"
+			leaveTo="opacity-0 scale-95"
+		>
+			<div class="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
+				<div
 					class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 				>
+					<!-- <DialogPanel
+					class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
+				> -->
 					<Listbox on:change={(item) => goto(item.url)}>
 						<div class="relative">
 							<Icon
@@ -155,8 +161,8 @@
 							</div>
 						{/if}
 					</Listbox>
-				</DialogPanel>
-			</TransitionChild>
-		</div>
+				</div>
+			</div>
+		</TransitionChild>
 	</Dialog>
 </TransitionRoot>
