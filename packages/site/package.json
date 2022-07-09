@@ -2,6 +2,7 @@
   "name": "@self/site",
   "version": "0.0.1",
   "scripts": {
+    "prepare": "svelte-kit sync",
     "dev": "vite dev",
     "build": "vite build",
     "build:vercel": "pnpm --filter=@self/site... build",
