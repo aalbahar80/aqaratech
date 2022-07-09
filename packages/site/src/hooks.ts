@@ -1,6 +1,7 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
 import { getUser } from '$lib/server/utils/getAuthz';
+import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
 import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
@@ -65,7 +66,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleError: HandleError = async ({ error, event }) => {
-	console.error('Error (from handleError):', error);
 	const { locals, params } = event;
 	const details = {
 		name: 'handleError',
@@ -75,8 +75,8 @@ export const handleError: HandleError = async ({ error, event }) => {
 	};
 	console.error(details);
 
-	// @ts-ignore
-	const res = error?.response as Response | undefined;
+	const thrown = error as Error | ResponseError;
+	const res = 'response' in thrown ? thrown.response : undefined;
 	if (res) {
 		const body = await res.json();
 		const resDetails = {
