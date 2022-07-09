@@ -8,7 +8,6 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class TenantsService {
@@ -42,7 +41,7 @@ export class TenantsService {
     tenantPageOptionsDto: TenantPageOptionsDto;
     user: IUser;
   }): Promise<WithCount<TenantDto>> {
-    const { page, take, q } = tenantPageOptionsDto;
+    const { page, take } = tenantPageOptionsDto;
 
     let [results, total] = await Promise.all([
       this.prisma.tenant.findMany({
@@ -54,25 +53,6 @@ export class TenantsService {
         where: accessibleBy(user.ability).Tenant,
       }),
     ]);
-
-    if (q) {
-      results = search({
-        data: results,
-        q,
-        keys: [
-          'fullName',
-          'shortName',
-          'civilid',
-          'dob',
-          'phone',
-          'email',
-          'passportNum',
-          'nationality',
-          'residencyNum',
-          'residencyEnd',
-        ],
-      });
-    }
 
     return { total, results };
   }

@@ -1458,10 +1458,6 @@ paths:
       responses:
         '201':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
       tags: &ref_8
         - search
     get:
@@ -1480,12 +1476,11 @@ paths:
               schema:
                 type: object
       tags: *ref_8
-  /search/leases:
-    post:
-      operationId: addLeases
+    delete:
+      operationId: remove
       parameters: []
       responses:
-        '201':
+        '200':
           description: ''
           content:
             application/json:

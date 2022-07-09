@@ -12,7 +12,6 @@ import {
   UpdatePortfolioDto,
 } from 'src/portfolios/dto/portfolio.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class PortfoliosService {
@@ -49,7 +48,7 @@ export class PortfoliosService {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<WithCount<PortfolioDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take } = pageOptionsDto;
 
     const ability = await this.caslAbilityFactory.defineAbility(user);
     let [results, total] = await Promise.all([
@@ -62,14 +61,6 @@ export class PortfoliosService {
         where: accessibleBy(ability).Portfolio,
       }),
     ]);
-
-    if (q) {
-      results = search({
-        data: results,
-        q,
-        keys: ['fullName', 'shortName', 'civilid', 'dob', 'phone', 'email'],
-      });
-    }
 
     return { total, results };
   }

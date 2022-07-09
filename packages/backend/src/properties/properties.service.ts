@@ -16,7 +16,6 @@ import {
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class PropertiesService {
@@ -52,7 +51,7 @@ export class PropertiesService {
     user: IUser;
     where?: Prisma.PropertyWhereInput;
   }): Promise<WithCount<PropertyDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take } = pageOptionsDto;
 
     const filter: Prisma.PropertyWhereInput = {
       AND: [accessibleBy(user.ability).Property, ...(where ? [where] : [])],
@@ -66,14 +65,6 @@ export class PropertiesService {
       }),
       this.prisma.property.count({ where: filter }),
     ]);
-
-    if (q) {
-      results = search({
-        data: results,
-        q,
-        keys: ['id', 'area', 'avenue', 'paci', 'parcel', 'street'],
-      });
-    }
 
     return { total, results };
   }
