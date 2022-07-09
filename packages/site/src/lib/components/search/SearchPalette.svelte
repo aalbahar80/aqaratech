@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
+	import { startCase } from '$lib/utils/common';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -21,20 +22,25 @@
 		category: string;
 		url: string;
 	}
-	type Groups = Record<string, Array<Item>>;
+	interface Group {
+		hits: Item[];
+		nbHits: number;
+	}
+	type Groups = Record<string, Group>;
 
 	let groups: Groups = {};
 
-	let query = 'حط';
+	let query = '';
 	export let open = false;
 
 	const search = async (q: string) => {
-		const res = await $page.stuff.api.search.getSearchPost({ query: q });
-		groups = { ...groups, leases: res.hits };
+		groups = (await $page.stuff.api.search.getSearchPost({
+			query: q,
+		})) as Groups;
 	};
 
 	$: search(query);
-	$: hasHits = Object.values(groups).some((groupHits) => groupHits.length > 0);
+	$: hasHits = Object.values(groups).some((groupHits) => groupHits.nbHits > 0);
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
@@ -121,10 +127,10 @@
 									<h2
 										class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
 									>
-										{category}
+										{startCase(category)}
 									</h2>
 									<ul class="mt-2 text-sm text-gray-800">
-										{#each items as item (item.id)}
+										{#each items.hits as item (item.id)}
 											<Hoverable let:hovering>
 												<ListboxOption value={item}>
 													<div

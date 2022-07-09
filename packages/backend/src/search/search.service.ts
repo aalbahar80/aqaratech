@@ -29,17 +29,9 @@ export class SearchService {
       }),
     );
 
-    const result: Record<typeof indexNames[number], any> = {
-      tenants: [],
-      portfolios: [],
-      properties: [],
-      leases: [],
-    };
-
     const results = await Promise.all(
-      indexes.map((index, n) => {
-        const name = indexNames[n];
-        result[name] = this.searchIndex({
+      indexes.map((index) => {
+        return this.searchIndex({
           index,
           query,
           createUrl(id) {
@@ -48,6 +40,13 @@ export class SearchService {
         });
       }),
     );
+
+    const result: Record<typeof indexNames[number], any> = {
+      tenants: results[0],
+      portfolios: results[1],
+      properties: results[2],
+      leases: results[3],
+    };
 
     console.log({ results }, 'search.service.ts ~ 38');
     console.log({ result }, 'search.service.ts ~ 42');
