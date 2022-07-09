@@ -1,4 +1,3 @@
-import adapterN from '@sveltejs/adapter-node';
 import adapterV from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 
@@ -12,7 +11,7 @@ const config = {
 		inspector: true,
 	},
 	kit: {
-		adapter: process.env.VERCEL ? adapterV() : adapterN(),
+		adapter: adapterV(),
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE'],
 		},

@@ -1,13 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import path, { resolve } from 'path';
+import { resolve } from 'path';
 import icons from 'unplugin-icons/vite';
-import { fileURLToPath } from 'url';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [sveltekit(), icons({ compiler: 'svelte' })],
-	envDir: resolve(path.dirname(fileURLToPath(import.meta.url)), './env'),
 	// delete .svelte-kit folder b4 testing
 	test: {
 		exclude: ['**/tests/**', 'node_modules'],
