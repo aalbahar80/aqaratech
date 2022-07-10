@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 
 console.log(process.env.VERCEL ? 'ONVERCEL' : 'NOVERCEL');
 console.log(process.env.RENDER ? 'ONRENDER' : 'NORENDER');
+console.log(process.env, 'svelte.config');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -24,7 +25,7 @@ const config = {
 	kit: {
 		adapter: process.env.VERCEL ? adapter() : adapterNode(),
 		vite: {
-			envDir: resolve(__dirname, './env'),
+			envDir: process.env.RENDER ? resolve(__dirname, '../..') : undefined,
 			server: {
 				watch: {
 					ignored: [
