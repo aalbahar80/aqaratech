@@ -1,4 +1,4 @@
-import adapterV from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -11,7 +11,7 @@ const config = {
 		inspector: true,
 	},
 	kit: {
-		adapter: adapterV(),
+		adapter: adapter(),
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE'],
 		},
