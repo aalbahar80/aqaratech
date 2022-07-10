@@ -8,12 +8,13 @@ RUN pnpm fetch
 ADD . ./
 # TODO only intall site stuff
 # RUN pnpm install -r --offline 
+# # TODO might only install prod deps
 RUN pnpm --filter=. --filter=@self/backend... install
 
 # https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
 # TODO copy over the modules from above onto a `slim` image
 
-RUN pnpm --filter=@self/backend... run build 
+RUN pnpm --filter=@self/backend run build 
 
 WORKDIR packages/backend
 EXPOSE 3002
