@@ -1,11 +1,10 @@
+import adapter from '@sveltejs/adapter-auto';
+import adapterNode from '@sveltejs/adapter-node';
+import path, { resolve } from 'path';
 import preprocess from 'svelte-preprocess';
-import { resolve } from 'path';
-import adapterN from '@sveltejs/adapter-node';
-import adapterV from '@sveltejs/adapter-vercel';
-// import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
-import path from 'path';
 import { fileURLToPath } from 'url';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +12,6 @@ const __dirname = path.dirname(__filename);
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
 	preprocess: [preprocess({ postcss: true })],
 
 	experimental: {
@@ -21,7 +19,7 @@ const config = {
 		inspector: true,
 	},
 	kit: {
-		adapter: process.env.VERCEL ? adapterV() : adapterN(),
+		adapter: process.env.VERCEL ? adapter() : adapterNode(),
 		vite: {
 			envDir: resolve(__dirname, './env'),
 			server: {
@@ -42,13 +40,13 @@ const config = {
 					inline: ['date-fns'],
 				},
 			},
-			define:
-				process.env.NODE_ENV === 'production'
-					? {
-							__SENTRY_DEBUG__: false,
-							VITE_MY_VAR: 'SOME_VALUE',
-					  }
-					: undefined,
+			// define:
+			// 	process.env.NODE_ENV === 'production'
+			// 		? {
+			// 				__SENTRY_DEBUG__: false,
+			// 				VITE_MY_VAR: 'SOME_VALUE',
+			// 		  }
+			// 		: undefined,
 			resolve: {
 				alias: {
 					$components: resolve('./src/lib/components'),
@@ -60,15 +58,6 @@ const config = {
 					$user: resolve('.', './src/user'),
 					// '@self/site': resolve('./src/lib'),
 				},
-			},
-			ssr: {
-				noExternal:
-					process.env.NODE_ENV === 'production'
-						? [
-								'superjson',
-								// 'date-fns',
-						  ]
-						: undefined,
 			},
 			plugins: [icons({ compiler: 'svelte' })],
 			// plugins:
