@@ -17,10 +17,15 @@
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';
 
-	export const load: Load = async ({ session, stuff, fetch }) => {
+	export const load: Load = async ({ session, stuff, fetch, url }) => {
 		const userConfig = getUserConfig(session.user);
 		const navigation = userConfig.navLinks;
-		const apiClient = api({ token: session.accessToken, loadFetch: fetch });
+		console.log('layout');
+		const apiClient = api({
+			token: session.accessToken,
+			url,
+			loadFetch: fetch,
+		});
 		return {
 			// ...protectRoute(session, pathname),
 			props: {

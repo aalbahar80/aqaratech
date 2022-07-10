@@ -13,13 +13,14 @@ import type { LoadEvent } from '@sveltejs/kit';
 
 export const api = ({
 	token,
+	url,
 	loadFetch,
 }: {
 	token: string;
+	url: URL;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	const basePath =
-		import.meta.env.VITE_API_URL ?? 'https://nestjs-dev.onrender.com';
+	const basePath = `${url.origin}/api`;
 
 	const headers = { Authorization: `Bearer ${token}` };
 
