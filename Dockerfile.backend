@@ -15,7 +15,8 @@ RUN pnpm --filter=. --filter=@self/backend... install --prod=false
 
 RUN pnpm --filter=@self/backend run build 
 
-WORKDIR packages/backend
+# TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
+WORKDIR /app/packages/backend
 EXPOSE 3002
 
 # TODO use .env

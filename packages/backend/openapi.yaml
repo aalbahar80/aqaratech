@@ -1501,6 +1501,7 @@ servers:
   - url: http://localhost:3002
   - url: https://nestjs-dev.onrender.com
   - url: https://api.nest.letand.be
+  - url: https://domm80hlzp3li.cloudfront.net
 components:
   securitySchemes:
     oauth-swagger:

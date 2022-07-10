@@ -25,6 +25,7 @@ export const setupSwagger = (app: INestApplication) => {
     .addServer('http://localhost:3002')
     .addServer('https://nestjs-dev.onrender.com')
     .addServer('https://api.nest.letand.be')
+    .addServer('https://domm80hlzp3li.cloudfront.net')
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {
