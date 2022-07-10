@@ -1,1 +1,5 @@
-reverse_proxy /api/* http://domm80hlzp3li.cloudfront.net
+# reverse_proxy /api/* http://domm80hlzp3li.cloudfront.net
+handle_path /api/* {
+  # rewrite * /{path}
+	reverse_proxy http://domm80hlzp3li.cloudfront.net
+}
