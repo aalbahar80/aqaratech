@@ -26,7 +26,7 @@ const config = {
 		},
 	},
 	vite: {
-		plugins: [icons({ compiler: 'svelte', autoInstall: false })],
+		plugins: [icons({ compiler: 'svelte' })],
 		// resolve: {
 		// alias: {
 		// 	$components: resolve('./src/lib/components'),
@@ -39,28 +39,28 @@ const config = {
 		// 	// '@self/site': resolve('./src/lib'),
 		// },
 		// },
-		// test: {
-		// 	exclude: ['**/tests/**', 'node_modules'],
-		// 	deps: {
-		// 		inline: ['date-fns'],
-		// 	},
-		// },
-		// define:
-		// 	process.env.NODE_ENV === 'production'
-		// 		? {
-		// 				__SENTRY_DEBUG__: false,
-		// 				VITE_MY_VAR: 'SOME_VALUE',
-		// 		  }
-		// 		: undefined,
-		// ssr: {
-		// 	noExternal:
-		// 		process.env.NODE_ENV === 'production'
-		// 			? [
-		// 					'superjson',
-		// 					// 'date-fns',
-		// 			  ]
-		// 			: undefined,
-		// },
+		test: {
+			exclude: ['**/tests/**', 'node_modules'],
+			deps: {
+				inline: ['date-fns'],
+			},
+		},
+		define:
+			process.env.NODE_ENV === 'production'
+				? {
+						__SENTRY_DEBUG__: false,
+						VITE_MY_VAR: 'SOME_VALUE',
+				  }
+				: undefined,
+		ssr: {
+			noExternal:
+				process.env.NODE_ENV === 'production'
+					? [
+							'superjson',
+							// 'date-fns',
+					  ]
+					: undefined,
+		},
 	},
 };
 
