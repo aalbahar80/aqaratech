@@ -8,8 +8,7 @@ RUN pnpm fetch
 ADD . ./
 # TODO only intall site stuff
 # RUN pnpm install -r --offline 
-# # TODO might only install prod deps
-RUN pnpm --filter=. --filter=@self/backend... install
+RUN pnpm --filter=. --filter=@self/backend... install --prod=false
 
 # https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
 # TODO copy over the modules from above onto a `slim` image
