@@ -34,9 +34,13 @@
 	export let open = false;
 
 	const search = async (q: string) => {
-		groups = (await $page.stuff.api.search.get({
-			query: q,
-		})) as Groups;
+		try {
+			groups = (await $page.stuff.api.search.get({
+				query: q,
+			})) as Groups;
+		} catch (e) {
+			console.error(e);
+		}
 	};
 
 	$: search(query);
