@@ -4,7 +4,7 @@ import icons from 'unplugin-icons/vite';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [sveltekit(), icons({ compiler: 'svelte' })],
+	plugins: [sveltekit(), icons({ compiler: 'svelte', autoInstall: true })],
 	// delete .svelte-kit folder b4 testing
 	test: {
 		exclude: ['**/tests/**', 'node_modules'],
