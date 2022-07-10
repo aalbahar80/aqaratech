@@ -2,7 +2,6 @@
   "name": "@self/site",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "svelte-kit sync",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "build:vercel": "pnpm --filter=@self/site... build",
