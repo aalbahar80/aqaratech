@@ -14,6 +14,7 @@ RUN pnpm fetch
 ADD . ./
 # TODO only intall site stuff
 # RUN pnpm install -r --offline 
+# TODO install should be after filter arg
 RUN pnpm install --filter=. --filter=@self/site...
 
 # https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
