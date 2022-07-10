@@ -9,6 +9,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+console.log(process.env.VERCEL ? 'ONVERCEL' : 'NOVERCEL');
+console.log(process.env.RENDER ? 'ONRENDER' : 'NORENDER');
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
