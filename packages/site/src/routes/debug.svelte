@@ -16,7 +16,7 @@
 </script>
 
 <div class="prose">
-	<h3>import.meta.env</h3>
+	<h3>importmetaenv</h3>
 	<pre>{JSON.stringify(import.meta.env, null, 2)}</pre>
 	<h3>import.meta.url</h3>
 	<pre>{JSON.stringify(import.meta.url, null, 2)}</pre>
