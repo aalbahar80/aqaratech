@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import type { ChartData } from '$lib/components/dashboard/charts/income';
 import { getColor } from '$lib/config/constants';
 import { getMonths } from '$lib/utils/group';

@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { trpc } from '$lib/client/trpc';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
 	import type { Props } from '$lib/models/types/Props.type';
 	import { getAddress } from '$lib/utils/common';

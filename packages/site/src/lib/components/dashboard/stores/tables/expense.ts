@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { CTable } from '$lib/models/classes/table.class';
 import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 import { derived, type Writable } from 'svelte/store';

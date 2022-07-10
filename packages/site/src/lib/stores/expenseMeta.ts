@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { writable, type Writable } from 'svelte/store';
 
 type Data = InferQueryOutput<'public:expenses:meta'>;

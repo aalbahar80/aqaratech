@@ -39,7 +39,6 @@ declare namespace App {
 
 	interface Stuff {
 		api: import('$lib/client/api').Api;
-		// expenseMeta: import('$lib/client/trpc').InferQueryOutput<'public:expenses:meta'>;
 	}
 }
 

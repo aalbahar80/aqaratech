@@ -1,6 +1,4 @@
 <script lang="ts" context="module">
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { trpc } from '$lib/client/trpc';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';

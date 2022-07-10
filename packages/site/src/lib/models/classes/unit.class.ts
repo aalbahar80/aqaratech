@@ -1,5 +1,5 @@
 import type { Api } from '$lib/client/api.js';
-import type { InferQueryOutput } from '$lib/client/trpc.js';
+
 import { unitTypeOptions } from '$lib/config/constants.js';
 import { Field, SelectField } from '$lib/models/classes/Field.class.js';
 import { Portfolio } from '$lib/models/classes/portfolio.class.js';

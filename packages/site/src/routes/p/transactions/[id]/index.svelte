@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	import { page } from '$app/stores';
-	import type { InferQueryOutput } from '$lib/client/trpc';
-	import { trpc } from '$lib/client/trpc';
+
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';

@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Chart from '$lib/components/Chart.svelte';
 	import { expensesChart } from '$lib/components/dashboard/charts/expenses';
 	import { incomeChart } from '$lib/components/dashboard/charts/income';

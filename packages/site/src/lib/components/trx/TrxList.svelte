@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import TrxCard from '$lib/components/trx/TrxCard.svelte';
 	import { FolderAdd } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -41,7 +40,7 @@
 		</ul>
 	{:else}
 		<!-- Empty State -->
-		<div class="text-center py-8 sm:py-16">
+		<div class="py-8 text-center sm:py-16">
 			<Icon
 				src={FolderAdd}
 				class="mx-auto h-12 w-12 text-gray-400"

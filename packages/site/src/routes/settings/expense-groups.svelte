@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	import Spinner from '$components/Spinner.svelte';
-	import { isTRPCError } from '$lib/client/is-trpc-error';
-	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
+
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { Trash } from '@steeze-ui/heroicons';

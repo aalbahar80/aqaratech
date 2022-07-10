@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
 import { Portfolio } from '$lib/models/classes/portfolio.class.js';
 import { Property } from '$lib/models/classes/property.class.js';

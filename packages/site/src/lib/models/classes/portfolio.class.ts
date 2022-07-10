@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc.js';
 import { Field } from '$lib/models/classes/Field.class.js';
 import { toDateInput } from '$lib/utils/common.js';
 import type { Portfolio as PPortfolio } from '@prisma/client';

@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	import Form from '$components/form/Form.svelte';
-	import { trpc } from '$lib/client/trpc';
 	import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 	import type { EntityTitle, Relation } from '$lib/models/types/entity.type';
 	import {
@@ -21,7 +20,7 @@
 		if (!value.success) return { props: { entityTitle } };
 
 		const cstor = relationalClassMap[key];
-		const data = await trpc(fetch).query(`${cstor.urlName}:basic`, value.data);
+		const data = {};
 		const predefined = {
 			...searchParams,
 			[cstor.singular]: data,

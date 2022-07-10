@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { getColor } from '$lib/config/constants';
 import { startCase } from '$lib/utils/common';
 import { getMonths } from '$lib/utils/group';

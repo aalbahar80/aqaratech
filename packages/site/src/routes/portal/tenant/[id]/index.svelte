@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { trpc, type InferQueryOutput } from '$lib/client/trpc';
 	import Select from '$lib/components/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';

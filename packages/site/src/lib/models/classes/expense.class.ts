@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc.js';
 import {
 	Entity,
 	type CreateForm,

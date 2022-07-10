@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import { Chart } from 'chart.js/dist/chart.esm';
 
 export function occupancyChart(

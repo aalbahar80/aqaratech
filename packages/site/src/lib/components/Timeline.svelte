@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { InferQueryOutput } from '$lib/client/trpc';
 	import { addToast } from '$lib/stores/toast';
 	import Fa6SolidBellSlash from '~icons/fa6-solid/bell-slash';
 	import { Speakerphone } from '@steeze-ui/heroicons';
@@ -11,7 +10,7 @@
 		status: 'SCHEDULED' | 'SENT' | 'DELIVERED' | 'FAILED';
 	};
 
-	export let trx: InferQueryOutput<'transactions:read'>;
+	export let trx: any;
 	export let nextReminder: string | null;
 	console.log({ nextReminder }, 'Timeline.svelte ~ 18');
 	let timeline: TimelineEvent[] = [];

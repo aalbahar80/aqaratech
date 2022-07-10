@@ -1,4 +1,3 @@
-import type { InferQueryOutput } from '$lib/client/trpc';
 import type { ChartData, DataSet } from '$lib/components/dashboard/charts/net';
 import { getColor } from '$lib/config/constants';
 import { CTable } from '$lib/models/classes/table.class';
