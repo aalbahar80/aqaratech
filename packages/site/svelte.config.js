@@ -40,23 +40,21 @@ const config = {
 					inline: ['date-fns'],
 				},
 			},
-			// define:
-			// 	process.env.NODE_ENV === 'production'
-			// 		? {
-			// 				__SENTRY_DEBUG__: false,
-			// 				VITE_MY_VAR: 'SOME_VALUE',
-			// 		  }
-			// 		: undefined,
+			define:
+				process.env.NODE_ENV === 'production'
+					? {
+							__SENTRY_DEBUG__: false,
+							VITE_MY_VAR: 'SOME_VALUE',
+					  }
+					: undefined,
 			resolve: {
 				alias: {
 					$components: resolve('./src/lib/components'),
 					$lib: resolve('.', './src/lib'),
 					$models: resolve('./src/lib/models'),
 					$utils: resolve('.', './src/lib/utils'),
-					$routers: resolve('.', './src/lib/server/trpc/routers'),
 					$environment: resolve('.', './src/lib/environment'),
 					$user: resolve('.', './src/user'),
-					// '@self/site': resolve('./src/lib'),
 				},
 			},
 			plugins: [icons({ compiler: 'svelte' })],
