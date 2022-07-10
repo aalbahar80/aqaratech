@@ -20,7 +20,7 @@ RUN pnpm --filter=. --filter=@self/site... install
 # TODO copy over the modules from above onto a `slim` image
 
 # TODO move env var to bash script
-RUN pnpm -w --filter=@self/site... run build 
+RUN pnpm --filter=@self/site --filter=@self/sdk run build 
 
 WORKDIR /app/packages/site
 EXPOSE 3000
@@ -28,4 +28,4 @@ EXPOSE 3000
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
 # CMD ["sh", "-c", "ORIGIN=https://rp1.nbe.workers.dev node packages/site/build/index.js"]
-CMD ["node", "packages/site/build/index.js"]
+CMD ["node", "build/index.js"]
