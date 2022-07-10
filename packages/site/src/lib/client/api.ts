@@ -18,6 +18,7 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
+	// get from flightcontrol.json https://flightcontrol.notion.site/Flightcontrol-Docs-8d9ca4edb5564165a9557df32818af0c
 	const basePath =
 		import.meta.env.VITE_API_URL ?? 'https://nestjs-dev.onrender.com';
 
