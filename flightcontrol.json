@@ -7,6 +7,11 @@
       "source": {
         "branch": "initNestjs"
       },
+      "envVariables": {
+        "VITE_FLIGHT_CONTROL_COMMON": {
+          "fromParameterStore": "FROM_FC_COMMON"
+        }
+      },
       "services": [
         {
           "id": "nest-docker-2",
@@ -60,7 +65,7 @@
               "fromParameterStore": "VITE_SITE_URL"
             },
             "VITE_API_URL": {
-              "fromParameterStore": "VITE_SITE_URL"
+              "fromParameterStore": "VITE_API_URL"
             }
           }
         },
