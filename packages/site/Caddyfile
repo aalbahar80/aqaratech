@@ -11,8 +11,7 @@ handle_path /api/* {
   }
 }
 
-handle_path / {
-  # reverse_proxy http://domm80hlzp3li.cloudfront.net
+handle {
   reverse_proxy 127.0.0.1:3000
 }
 
