@@ -10,7 +10,13 @@ handle /api/auth/* {
 }
 
 handle_path /api/* {
-  reverse_proxy http://domm80hlzp3li.cloudfront.net {
+  reverse_proxy http://d164hjk5s8rpsc.cloudfront.net {
+    header_up Host {upstream_hostport}
+  }
+}
+
+handle /tryenvurl {
+  reverse_proxy {$CADDY_API_URL} {
     header_up Host {upstream_hostport}
   }
 }
