@@ -24,17 +24,17 @@ export const api = ({
 	// Else VITE_SITE_URL is appended with `/api` and used as the base path
 
 	const proxied = import.meta.env.VITE_SITE_URL
-		? `${import.meta.env.VITE_SITE_URL}/api`
+		? `${import.meta.env.VITE_SITE_URL}`
 		: undefined;
 
 	const basePath = import.meta.env.VITE_API_URL || proxied;
 
 	const headers = { Authorization: `Bearer ${token}` };
-
 	const config = new Configuration({
 		...(loadFetch && { fetchApi: loadFetch }),
 		headers,
-		basePath,
+		// TODO replace with url
+		basePath: 'http://localhost:3005/v1/api',
 	});
 
 	return {

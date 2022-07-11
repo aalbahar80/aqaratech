@@ -66,6 +66,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleError: HandleError = async ({ error, event }) => {
+	console.error(error);
 	const { locals, params } = event;
 	const details = {
 		name: 'handleError',

@@ -24,10 +24,13 @@ export const setupSwagger = (app: INestApplication) => {
     .setDescription('The Aqratech API description')
     .setVersion('1.0')
     .addTag('aqaratech')
-    .addServer('http://localhost:3002')
-    .addServer('https://nestjs-dev.onrender.com')
-    .addServer('https://api.nest.letand.be')
-    .addServer('https://domm80hlzp3li.cloudfront.net')
+    .addServer('http://localhost:3005')
+    .setBasePath('http://localhost:3005')
+    // .addServer('https://d164hjk5s8rpsc.cloudfront.net')
+    // .addServer('https://d3rgr0em5u5yko.cloudfront.net/api')
+    // .addServer('https://d3rgr0em5u5yko.cloudfront.net/api/')
+    // .addServer('https://nestjs-dev.onrender.com')
+    // .addServer('https://api.nest.letand.be')
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {
@@ -68,6 +71,7 @@ export const setupSwagger = (app: INestApplication) => {
       OrganizationsModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
+    ignoreGlobalPrefix: true,
 
     operationIdFactory(controllerKey, methodKey) {
       return methodKey;
@@ -85,7 +89,7 @@ export const setupSwagger = (app: INestApplication) => {
   // For consumption of @self/sdk
   writeFileSync('../sdk/openapi.yaml', dump(document, {}));
 
-  SwaggerModule.setup('api', app, document, {
+  SwaggerModule.setup('swagger', app, document, {
     swaggerOptions: {
       // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
       oauth: {

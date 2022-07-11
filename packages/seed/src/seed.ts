@@ -110,6 +110,10 @@ export async function seed({
 		date.setFullYear(date.getFullYear() - timespan);
 		let tenantN = fakeTenant(randId(organizations));
 
+		if (idx === 0) {
+			tenantN.id = testTenantId;
+		}
+
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
@@ -133,7 +137,6 @@ export async function seed({
 		}
 	});
 
-	tenants[0]!.id = testTenantId;
 	roles.push({
 		id: generateId(),
 		tenantId: tenants[0]!.id,

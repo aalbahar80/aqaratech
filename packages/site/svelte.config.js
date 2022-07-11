@@ -26,17 +26,6 @@ const config = {
 		adapter: process.env.VERCEL ? adapter() : adapterNode(),
 		vite: {
 			envDir: process.env.RENDER ? resolve(__dirname, '../..') : undefined,
-			server: {
-				watch: {
-					ignored: [
-						(path) => {
-							if (path.includes('layout')) {
-								return true;
-							}
-						},
-					],
-				},
-			},
 			// delete .svelte-kit folder b4 testing
 			test: {
 				exclude: ['**/tests/**', 'node_modules'],

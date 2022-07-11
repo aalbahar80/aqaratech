@@ -10,9 +10,10 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['log', 'warn', 'error'],
+    logger: ['debug', 'log', 'warn', 'error'],
     cors: true, // TODO adjust in prod
   });
+  app.setGlobalPrefix('v1/api');
 
   app.use(cookieParser());
   app.useGlobalPipes(

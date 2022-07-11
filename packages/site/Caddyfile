@@ -3,25 +3,26 @@
   debug
 }
 
-:2016
+:2016, :3005
 
 handle /api/auth/* {
-  reverse_proxy 127.0.0.1:3000
-}
-
-handle_path /api/* {
-  reverse_proxy http://d164hjk5s8rpsc.cloudfront.net {
-    header_up Host {upstream_hostport}
+  reverse_proxy localhost:3000 {
+    header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    header_up X-Real-IP {remote}
   }
 }
 
-handle /tryenvurl {
-  reverse_proxy {$CADDY_API_URL} {
-    header_up Host {upstream_hostport}
-  }
+# TODO replace with url
+reverse_proxy /v1/* localhost:3002 {
+  header_up Host {upstream_hostport}
+  header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  header_up X-Real-IP {remote}
 }
 
-handle {
-  reverse_proxy 127.0.0.1:3000
+@notapi {
+  not path *api*
 }
-
+reverse_proxy @notapi localhost:3000 {
+  header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  header_up X-Real-IP {remote}
+}

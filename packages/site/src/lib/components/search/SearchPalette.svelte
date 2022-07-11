@@ -34,7 +34,9 @@
 	export let open = false;
 
 	const search = async (q: string) => {
+		if (!q) return;
 		try {
+			console.debug('searching');
 			groups = (await $page.stuff.api.search.get({
 				query: q,
 			})) as Groups;
