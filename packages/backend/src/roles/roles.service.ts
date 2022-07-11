@@ -36,6 +36,7 @@ export class RolesService {
         take,
         skip: (page - 1) * take,
         where: filter,
+        include: { user: true },
       }),
       this.prisma.role.count({ where: filter }),
     ]);

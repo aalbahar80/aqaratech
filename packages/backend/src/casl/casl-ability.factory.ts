@@ -179,6 +179,18 @@ export class CaslAbilityFactory {
         maintenanceOrders: maintenanceOrders.map((i) => i.id),
       };
 
+      // TODO: limit fields
+      can(Action.Read, ['Organization'], { id: { in: own.orgs } });
+
+      // TODO: limit fields
+      can(Action.Read, ['Role'], {
+        OR: [
+          { organizationId: { in: own.orgs } },
+          { portfolioId: { in: manageable.portfolios } },
+          { tenantId: { in: manageable.tenants } },
+        ],
+      });
+
       // TODO handle updating parentId's by adding a cannot clause
       can(Action.Manage, ['Tenant'], {
         OR: [

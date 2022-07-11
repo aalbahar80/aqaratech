@@ -287,6 +287,104 @@ paths:
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_0
+  /tenants/{id}/roles:
+    get:
+      operationId: findRoles
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_0
+  /role:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_1
+        - users
+  /role/{id}:
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_1
   /leaseInvoices:
     post:
       operationId: create
@@ -308,7 +406,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: &ref_1
+      tags: &ref_2
         - leaseInvoices
     get:
       operationId: findAll
@@ -365,7 +463,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_1
+      tags: *ref_2
   /leaseInvoices/{id}:
     get:
       operationId: findOne
@@ -382,7 +480,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_1
+      tags: *ref_2
     patch:
       operationId: update
       parameters:
@@ -404,7 +502,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_1
+      tags: *ref_2
     delete:
       operationId: remove
       parameters:
@@ -420,7 +518,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_1
+      tags: *ref_2
   /leases:
     post:
       operationId: create
@@ -442,7 +540,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: &ref_2
+      tags: &ref_3
         - leases
     get:
       operationId: findAll
@@ -499,7 +597,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_2
+      tags: *ref_3
   /leases/{id}:
     get:
       operationId: findOne
@@ -516,7 +614,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_2
+      tags: *ref_3
     patch:
       operationId: update
       parameters:
@@ -538,7 +636,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_2
+      tags: *ref_3
     delete:
       operationId: remove
       parameters:
@@ -554,7 +652,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_2
+      tags: *ref_3
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
@@ -616,7 +714,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_2
+      tags: *ref_3
     post:
       operationId: createInvoices
       parameters:
@@ -650,7 +748,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_2
+      tags: *ref_3
   /portfolios:
     post:
       operationId: create
@@ -672,7 +770,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_3
+      tags: &ref_4
         - portfolios
     get:
       operationId: findAll
@@ -729,7 +827,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_3
+      tags: *ref_4
   /portfolios/{id}:
     get:
       operationId: findOne
@@ -746,7 +844,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_3
+      tags: *ref_4
     patch:
       operationId: update
       parameters:
@@ -768,7 +866,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_3
+      tags: *ref_4
     delete:
       operationId: remove
       parameters:
@@ -784,7 +882,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_3
+      tags: *ref_4
   /portfolios/{id}/properties:
     get:
       operationId: findProperties
@@ -846,7 +944,69 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_3
+      tags: *ref_4
+  /portfolios/{id}/roles:
+    get:
+      operationId: findRoles
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_4
   /properties:
     post:
       operationId: create
@@ -868,7 +1028,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_4
+      tags: &ref_5
         - properties
     get:
       operationId: findAll
@@ -925,7 +1085,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_5
   /properties/{id}:
     get:
       operationId: findOne
@@ -942,7 +1102,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_5
     patch:
       operationId: update
       parameters:
@@ -964,7 +1124,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_5
     delete:
       operationId: remove
       parameters:
@@ -980,7 +1140,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_5
   /properties/{id}/units:
     get:
       operationId: findUnits
@@ -1042,7 +1202,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_4
+      tags: *ref_5
   /units:
     post:
       operationId: create
@@ -1064,7 +1224,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_5
+      tags: &ref_6
         - units
     get:
       operationId: findAll
@@ -1121,7 +1281,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_6
   /units/{id}:
     get:
       operationId: findOne
@@ -1138,7 +1298,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_6
     patch:
       operationId: update
       parameters:
@@ -1160,7 +1320,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_6
     delete:
       operationId: remove
       parameters:
@@ -1176,7 +1336,7 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_5
+      tags: *ref_6
   /units/{id}/leases:
     get:
       operationId: findLeases
@@ -1238,7 +1398,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_5
+      tags: *ref_6
   /users:
     post:
       operationId: create
@@ -1256,7 +1416,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-      tags: &ref_6
+      tags: &ref_7
         - users
     get:
       operationId: findAll
@@ -1278,7 +1438,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserDto'
-      tags: *ref_6
+      tags: *ref_7
   /users/by-email:
     get:
       operationId: findOneByEmail
@@ -1297,7 +1457,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_6
+      tags: *ref_7
   /users/{id}:
     get:
       operationId: findOne
@@ -1316,7 +1476,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_6
+      tags: *ref_7
   /expenses:
     post:
       operationId: create
@@ -1338,7 +1498,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_7
+      tags: &ref_8
         - expenses
     get:
       operationId: findAll
@@ -1395,7 +1555,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
   /expenses/{id}:
     get:
       operationId: findOne
@@ -1412,7 +1572,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
     patch:
       operationId: update
       parameters:
@@ -1434,7 +1594,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
     delete:
       operationId: remove
       parameters:
@@ -1450,7 +1610,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
+      tags: *ref_8
   /search:
     post:
       operationId: initSearch
@@ -1458,7 +1618,7 @@ paths:
       responses:
         '201':
           description: ''
-      tags: &ref_8
+      tags: &ref_9
         - search
     get:
       operationId: get
@@ -1475,7 +1635,7 @@ paths:
             application/json:
               schema:
                 type: object
-      tags: *ref_8
+      tags: *ref_9
     delete:
       operationId: remove
       parameters: []
@@ -1488,42 +1648,6 @@ paths:
                 type: array
                 items:
                   type: object
-      tags: *ref_8
-  /role:
-    post:
-      operationId: create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: &ref_9
-        - users
-  /role/{id}:
-    delete:
-      operationId: remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
       tags: *ref_9
   /organizations:
     post:
@@ -2137,6 +2261,60 @@ components:
         - paidAt
         - isPaid
         - memo
+    RoleDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        userId:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
+          nullable: true
+        portfolioId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+        permissions:
+          type: object
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - userId
+        - organizationId
+        - portfolioId
+        - tenantId
+        - permissions
+    CreateRoleDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
+          nullable: true
+        portfolioId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+        permissions:
+          type: object
     CreateLeaseInvoiceDto:
       type: object
       properties:
@@ -2809,43 +2987,6 @@ components:
           type: string
           nullable: true
           default: null
-    RoleDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        userId:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
-          nullable: true
-        portfolioId:
-          type: string
-          nullable: true
-        tenantId:
-          type: string
-          nullable: true
-        permissions:
-          type: object
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - userId
-        - organizationId
-        - portfolioId
-        - tenantId
-        - permissions
     UserDto:
       type: object
       properties:
@@ -2975,23 +3116,6 @@ components:
         propertyId:
           type: string
           nullable: true
-    CreateRoleDto:
-      type: object
-      properties:
-        userId:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
-          nullable: true
-        portfolioId:
-          type: string
-          nullable: true
-        tenantId:
-          type: string
-          nullable: true
-        permissions:
-          type: object
     CreateOrganizationDto:
       type: object
       properties:

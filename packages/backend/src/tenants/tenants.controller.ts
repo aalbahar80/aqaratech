@@ -29,6 +29,8 @@ import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
+import { RoleDto } from 'src/roles/dto/role.dto';
+import { RolesService } from 'src/roles/roles.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import {
   TenantDto,
@@ -45,6 +47,7 @@ export class TenantsController {
     private readonly tenantsService: TenantsService,
     private readonly leasesService: LeasesService,
     private readonly leaseInvoicesService: LeaseInvoicesService,
+    private readonly rolesService: RolesService,
   ) {}
 
   @Post()
@@ -117,5 +120,17 @@ export class TenantsController {
       lease: { tenantId: { equals: id } },
     };
     return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
+  }
+
+  @Get(':id/roles')
+  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @ApiPaginatedResponse(RoleDto)
+  findRoles(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<WithCount<RoleDto>> {
+    const where: Prisma.RoleWhereInput = { tenantId: id };
+    return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 }

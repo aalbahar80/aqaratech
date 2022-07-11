@@ -26,6 +26,8 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
+import { RoleDto } from 'src/roles/dto/role.dto';
+import { RolesService } from 'src/roles/roles.service';
 import {
   CreatePortfolioDto,
   PortfolioDto,
@@ -39,7 +41,8 @@ import { PortfoliosService } from './portfolios.service';
 export class PortfoliosController {
   constructor(
     private readonly portfoliosService: PortfoliosService,
-    private propertiesService: PropertiesService,
+    private readonly propertiesService: PropertiesService,
+    private readonly rolesService: RolesService,
   ) {}
 
   @Post()
@@ -98,5 +101,17 @@ export class PortfoliosController {
   ): Promise<WithCount<PropertyDto>> {
     const where: Prisma.PropertyWhereInput = { portfolioId: { equals: id } };
     return this.propertiesService.findAll({ user, pageOptionsDto, where });
+  }
+
+  @Get(':id/roles')
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @ApiPaginatedResponse(RoleDto)
+  findRoles(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<WithCount<RoleDto>> {
+    const where: Prisma.RoleWhereInput = { portfolioId: id };
+    return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 }
