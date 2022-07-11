@@ -5,6 +5,10 @@
 
 :2016
 
+handle /api/auth/* {
+  reverse_proxy 127.0.0.1:3000
+}
+
 handle_path /api/* {
   reverse_proxy http://domm80hlzp3li.cloudfront.net {
     header_up Host {upstream_hostport}
