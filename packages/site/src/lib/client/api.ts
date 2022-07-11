@@ -19,8 +19,15 @@ export const api = ({
 	loadFetch?: LoadEvent['fetch'];
 }) => {
 	// get from flightcontrol.json https://flightcontrol.notion.site/Flightcontrol-Docs-8d9ca4edb5564165a9557df32818af0c
-	const basePath =
-		import.meta.env.VITE_API_URL ?? 'https://nestjs-dev.onrender.com';
+
+	// Else VITE_API_URL is set, it is used as the base path
+	// Else VITE_SITE_URL is appended with `/api` and used as the base path
+
+	const proxied = import.meta.env.VITE_SITE_URL
+		? `${import.meta.env.VITE_SITE_URL}/api`
+		: undefined;
+
+	const basePath = import.meta.env.VITE_API_URL || proxied;
 
 	const headers = { Authorization: `Bearer ${token}` };
 

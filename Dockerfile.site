@@ -3,15 +3,16 @@ FROM node:16.9
 # Install OpenJDK-11
 # https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
 RUN apt-get update && \
-    apt-get install -y openjdk-11-jre-headless && \
-    apt-get clean;
+  apt-get install -y openjdk-11-jre-headless && \
+  apt-get clean;
 
 # Install Caddy
+# use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 RUN apt install -y debian-keyring debian-archive-keyring apt-transport-https && \
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && \
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
-    apt update && \
-    apt install caddy;
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && \
+  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
+  apt update && \
+  apt install caddy;
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
@@ -31,12 +32,11 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false
 RUN pnpm --filter=@self/site --filter=@self/sdk run build 
 
 WORKDIR /app/packages/site
-EXPOSE 3000
+EXPOSE 80
+EXPOSE 443
 
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
 # CMD ["sh", "-c", "ORIGIN=https://rp1.nbe.workers.dev node packages/site/build/index.js"]
 # start caddy in bg then run site 
 CMD ["sh", "-c", "caddy start && node build/index.js"]
-
-

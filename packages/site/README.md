@@ -123,3 +123,12 @@ node --inspect node_modules/.bin/svelte-kit dev
 # or
 pnpm dev
 ```
+
+# Docker
+
+```bash
+docker build --pull --rm -f "Dockerfile.site" -t aqtech-site:latest "." && \
+docker run --rm -it -p 3000:80 -p 3005:443 aqtech-site:latest
+# localhost:3005
+# localhost:3005/api/health
+```
