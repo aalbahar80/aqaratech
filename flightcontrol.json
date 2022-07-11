@@ -1,0 +1,80 @@
+{
+  "environments": [
+    {
+      "id": "dev2",
+      "name": "Dev2",
+      "region": "me-south-1",
+      "source": {
+        "branch": "initNestjs"
+      },
+      "services": [
+        {
+          "id": "nest-docker-2",
+          "name": "nest-docker-2",
+          "type": "fargate",
+          "buildType": "docker",
+          "cpu": 0.5,
+          "memory": 1,
+          "minInstances": 1,
+          "maxInstances": 1,
+          "domain": "api-aws.letand.be",
+          "healthCheckPath": "/health",
+          "port": 3002,
+          "enableCloudfrontSwr": false,
+          "dockerfilePath": "./Dockerfile.backend",
+          "envVariables": {
+            "DATABASE_URL": {
+              "fromService": {
+                "id": "db-dev-2",
+                "value": "dbConnectionString"
+              }
+            },
+            "AUTH0_CLIENT_SECRET": {
+              "fromParameterStore": "AUTH0_CLIENT_SECRET"
+            },
+            "VITE_SITE_URL": {
+              "fromParameterStore": "VITE_SITE_URL"
+            }
+          }
+        },
+        {
+          "id": "sk-site-docker-2",
+          "name": "sk-site-docker-2",
+          "type": "fargate",
+          "buildType": "docker",
+          "cpu": 0.5,
+          "memory": 1,
+          "minInstances": 1,
+          "maxInstances": 1,
+          "domain": "site-aws.letand.be",
+          "healthCheckPath": "/",
+          "port": 2016,
+          "enableCloudfrontSwr": false,
+          "dockerfilePath": "./Dockerfile.site",
+          "dockerContext": ".",
+          "envVariables": {
+            "AUTH0_CLIENT_SECRET": {
+              "fromParameterStore": "AUTH0_CLIENT_SECRET"
+            },
+            "VITE_SITE_URL": {
+              "fromParameterStore": "VITE_SITE_URL"
+            },
+            "VITE_API_URL": {
+              "fromParameterStore": "VITE_SITE_URL"
+            }
+          }
+        },
+        {
+          "id": "db-dev-2",
+          "name": "db-dev-2",
+          "type": "rds",
+          "engine": "postgres",
+          "engineVersion": "14",
+          "instanceSize": "db.t3.micro",
+          "storage": 20,
+          "private": false
+        }
+      ]
+    }
+  ]
+}
