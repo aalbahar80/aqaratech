@@ -32,8 +32,10 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false
 RUN pnpm --filter=@self/site --filter=@self/sdk run build 
 
 WORKDIR /app/packages/site
-EXPOSE 80
-EXPOSE 443
+# EXPOSE 80
+# EXPOSE 443
+# remove?
+EXPOSE 3000
 
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 

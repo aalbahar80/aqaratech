@@ -1,16 +1,18 @@
-localhost {
+{
   log
-  handle_path /api/* {
-    # rewrite * /{path}
-    reverse_proxy http://domm80hlzp3li.cloudfront.net {
-      # header_down Strict-Transport-Security max-age=31536000;
-    }
-  }
+  debug
+}
 
-  handle_path / {
-    reverse_proxy localhost:3000 {
-      # header_up Host {upstream_hostport}
-      # header_down Strict-Transport-Security max-age=31536000;
-    } 
+:2016
+
+handle_path /api/* {
+  reverse_proxy http://domm80hlzp3li.cloudfront.net {
+    header_up Host {upstream_hostport}
   }
 }
+
+handle_path / {
+  # reverse_proxy http://domm80hlzp3li.cloudfront.net
+  reverse_proxy 127.0.0.1:3000
+}
+
