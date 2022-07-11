@@ -13,9 +13,14 @@
 		page: $page,
 		session: $session,
 	};
+	$: console.log({ url: $page.url });
 </script>
 
 <div class="prose">
+	<h3>importmetaenvapiurl.viteapiurl</h3>
+	<pre>{JSON.stringify(import.meta.env.VITE_API_URL, null, 2)}</pre>
+	<h3>importmetaenv[viteapiurl]</h3>
+	<pre>{JSON.stringify(import.meta.env['VITE_API_URL'], null, 2)}</pre>
 	<h3>importmetaenv</h3>
 	<pre>{JSON.stringify(import.meta.env, null, 2)}</pre>
 	<h3>import.meta.url</h3>
