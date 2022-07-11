@@ -128,7 +128,5 @@ pnpm dev
 
 ```bash
 docker build --pull --rm -f "Dockerfile.site" -t aqtech-site:latest "." && \
-docker run --rm -it -p 3000:80 -p 3005:443 aqtech-site:latest
-# localhost:3005
-# localhost:3005/api/health
+docker run --rm -it -p 3000:2016 aqtech-site:latest
 ```
