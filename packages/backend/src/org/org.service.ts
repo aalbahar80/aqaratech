@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
-import { CreateOrgDto } from 'src/orgs/dto/org.dto';
+import { CreateOrgDto } from 'src/org/dto/org.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
