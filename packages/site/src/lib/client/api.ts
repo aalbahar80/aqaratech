@@ -23,18 +23,18 @@ export const api = ({
 	// Else VITE_API_URL is set, it is used as the base path
 	// Else VITE_SITE_URL is appended with `/api` and used as the base path
 
+	// d3rgr0em5u5yko.cloudfront.net
 	const proxied = import.meta.env.VITE_SITE_URL
-		? `${import.meta.env.VITE_SITE_URL}`
-		: undefined;
+		? import.meta.env.VITE_SITE_URL
+		: 'http://localhost:3005';
 
-	const basePath = import.meta.env.VITE_API_URL || proxied;
+	const basePath = import.meta.env.VITE_API_URL || `${proxied}/v1/api`;
 
 	const headers = { Authorization: `Bearer ${token}` };
 	const config = new Configuration({
 		...(loadFetch && { fetchApi: loadFetch }),
 		headers,
-		// TODO replace with url
-		basePath: 'http://localhost:3005/v1/api',
+		basePath,
 	});
 
 	return {

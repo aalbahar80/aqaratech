@@ -24,13 +24,9 @@ export const setupSwagger = (app: INestApplication) => {
     .setDescription('The Aqratech API description')
     .setVersion('1.0')
     .addTag('aqaratech')
-    .addServer('http://localhost:3005')
-    .setBasePath('http://localhost:3005')
-    // .addServer('https://d164hjk5s8rpsc.cloudfront.net')
-    // .addServer('https://d3rgr0em5u5yko.cloudfront.net/api')
-    // .addServer('https://d3rgr0em5u5yko.cloudfront.net/api/')
-    // .addServer('https://nestjs-dev.onrender.com')
-    // .addServer('https://api.nest.letand.be')
+    .addServer('https://d164hjk5s8rpsc.cloudfront.net')
+    // .addServer('http://localhost:3005')
+    // .setBasePath('http://localhost:3005')
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {

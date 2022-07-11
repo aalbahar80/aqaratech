@@ -1,9 +1,11 @@
 {
   log
   debug
+  admin off
 }
 
 :2016, :3005
+# d3rgr0em5u5yko.cloudfront.net
 
 handle /api/auth/* {
   reverse_proxy localhost:3000 {
@@ -12,8 +14,9 @@ handle /api/auth/* {
   }
 }
 
-# TODO replace with url
-reverse_proxy /v1/* localhost:3002 {
+# TODO better matching
+# reverse_proxy /v1/* localhost:3002 {
+reverse_proxy /v1/* https://d164hjk5s8rpsc.cloudfront.net {
   header_up Host {upstream_hostport}
   header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
   header_up X-Real-IP {remote}

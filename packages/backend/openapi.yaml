@@ -1756,7 +1756,7 @@ tags:
   - name: aqaratech
     description: ''
 servers:
-  - url: http://localhost:3005
+  - url: https://d164hjk5s8rpsc.cloudfront.net
 components:
   securitySchemes:
     oauth-swagger:
