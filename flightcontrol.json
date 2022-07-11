@@ -33,12 +33,6 @@
                 "id": "db-dev-2",
                 "value": "dbConnectionString"
               }
-            },
-            "AUTH0_CLIENT_SECRET": {
-              "fromParameterStore": "AUTH0_CLIENT_SECRET"
-            },
-            "VITE_SITE_URL": {
-              "fromParameterStore": "VITE_SITE_URL"
             }
           }
         },
@@ -56,18 +50,7 @@
           "port": 2016,
           "enableCloudfrontSwr": false,
           "dockerfilePath": "./Dockerfile.site",
-          "dockerContext": ".",
-          "envVariables": {
-            "AUTH0_CLIENT_SECRET": {
-              "fromParameterStore": "AUTH0_CLIENT_SECRET"
-            },
-            "VITE_SITE_URL": {
-              "fromParameterStore": "VITE_SITE_URL"
-            },
-            "VITE_API_URL": {
-              "fromParameterStore": "VITE_API_URL"
-            }
-          }
+          "dockerContext": "."
         },
         {
           "id": "db-dev-2",
