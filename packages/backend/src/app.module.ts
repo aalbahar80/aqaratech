@@ -24,6 +24,7 @@ import { LeasesModule } from './leases/leases.module';
 import { OrgModule } from './org/org.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PropertiesModule } from './properties/properties.module';
+import { RolesModule } from './role/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
@@ -48,6 +49,7 @@ import { UsersModule } from './users/users.module';
     MetricsModule,
     SearchModule,
     OrgModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [
