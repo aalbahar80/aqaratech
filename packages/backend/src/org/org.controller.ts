@@ -9,6 +9,8 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
+import { RoleDto } from 'src/roles/dto/role.dto';
+import { RolesService } from 'src/roles/roles.service';
 import { CreateOrgDto, OrgDto } from './dto/org.dto';
 import { OrgsService } from './orgs.service';
 
