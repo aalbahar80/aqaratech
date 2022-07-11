@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from './roles.service';
 
 @Controller('role')
+@ApiTags('users')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
@@ -11,10 +13,10 @@ export class RolesController {
     return this.rolesService.create(createRoleDto);
   }
 
-  @Get()
-  findAll() {
-    return this.rolesService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.rolesService.findAll();
+  // }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
@@ -28,6 +30,6 @@ export class RolesController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.rolesService.remove(+id);
+    return this.rolesService.remove(id);
   }
 }

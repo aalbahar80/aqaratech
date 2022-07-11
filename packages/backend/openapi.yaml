@@ -1489,6 +1489,140 @@ paths:
                 items:
                   type: object
       tags: *ref_8
+  /role:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_9
+        - users
+  /role/{id}:
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_9
+  /organizations:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: &ref_10
+        - organizations
+  /organizations/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_10
+  /organizations/{id}/roles:
+    get:
+      operationId: findRoles
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_10
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -2689,8 +2823,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        permissions:
-          type: object
         userId:
           type: string
           nullable: true
@@ -2703,15 +2835,17 @@ components:
         tenantId:
           type: string
           nullable: true
+        permissions:
+          type: object
       required:
         - id
         - createdAt
         - updatedAt
-        - permissions
         - userId
         - organizationId
         - portfolioId
         - tenantId
+        - permissions
     UserDto:
       type: object
       properties:
@@ -2841,6 +2975,64 @@ components:
         propertyId:
           type: string
           nullable: true
+    CreateRoleDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
+          nullable: true
+        portfolioId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+        permissions:
+          type: object
+    CreateOrganizationDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - fullName
+    OrganizationDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - fullName
+        - shortName
     BreadcrumbsDto:
       type: object
       properties:

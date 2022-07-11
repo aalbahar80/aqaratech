@@ -1,8 +1,11 @@
 import { ExpensesModule } from 'src/expenses/expenses.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
+import { OrganizationsModule } from 'src/organizations/organizations.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
+import { RolesModule } from 'src/roles/roles.module';
+import { SearchModule } from 'src/search/search.module';
 import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
@@ -14,7 +17,6 @@ import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { SearchModule } from 'src/search/search.module';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -62,6 +64,8 @@ export const setupSwagger = (app: INestApplication) => {
       LeaseInvoicesModule,
       ExpensesModule,
       SearchModule,
+      RolesModule,
+      OrganizationsModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
 
