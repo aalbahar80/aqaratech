@@ -4,7 +4,7 @@
   admin off
 }
 
-:2016, :3005
+:2016
 # d3rgr0em5u5yko.cloudfront.net
 
 handle /api/auth/* {

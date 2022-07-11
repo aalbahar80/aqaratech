@@ -26,7 +26,7 @@ export const api = ({
 	// d3rgr0em5u5yko.cloudfront.net
 	const proxied = import.meta.env.VITE_SITE_URL
 		? import.meta.env.VITE_SITE_URL
-		: 'http://localhost:3005';
+		: 'http://localhost:2016';
 
 	const basePath = import.meta.env.VITE_API_URL || `${proxied}/v1/api`;
 
