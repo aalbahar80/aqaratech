@@ -21,14 +21,13 @@ import { SearchModule } from './search/search.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
-import { OrgModule } from './org/org.module';
+import { OrganizationsModule } from './organizations/organizations.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PropertiesModule } from './properties/properties.module';
 import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
-import { OrganizationsModule } from './organizations/organizations.module';
 
 @Module({
   imports: [
@@ -49,7 +48,6 @@ import { OrganizationsModule } from './organizations/organizations.module';
     PrometheusModule,
     MetricsModule,
     SearchModule,
-    OrgModule,
     RolesModule,
     OrganizationsModule,
   ],
