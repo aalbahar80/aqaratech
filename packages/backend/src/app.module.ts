@@ -21,6 +21,7 @@ import { SearchModule } from './search/search.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
+import { OrgModule } from './org/org.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PropertiesModule } from './properties/properties.module';
 import { TenantsModule } from './tenants/tenants.module';
@@ -46,6 +47,7 @@ import { UsersModule } from './users/users.module';
     PrometheusModule,
     MetricsModule,
     SearchModule,
+    OrgModule,
   ],
   controllers: [AppController],
   providers: [
