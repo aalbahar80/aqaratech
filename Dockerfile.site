@@ -39,4 +39,5 @@ EXPOSE 3000
 
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
+# https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
 CMD ["sh", "-c", "caddy start && PORT=3000 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
