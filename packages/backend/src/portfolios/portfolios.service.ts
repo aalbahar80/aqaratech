@@ -91,6 +91,6 @@ export class PortfoliosService {
   }
 
   async remove({ id }: { id: string }) {
-    return this.prisma.tenant.delete({ where: { id } });
+    return this.prisma.portfolio.delete({ where: { id } });
   }
 }
