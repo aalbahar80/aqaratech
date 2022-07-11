@@ -23,7 +23,7 @@
           "minInstances": 1,
           "maxInstances": 1,
           "domain": "apidev.aqaratech.net",
-          "healthCheckPath": "/health",
+          "healthCheckPath": "/v1/api/health",
           "port": 3002,
           "enableCloudfrontSwr": false,
           "dockerfilePath": "./Dockerfile.backend",
