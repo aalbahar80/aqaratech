@@ -41,4 +41,4 @@ ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPU
 
 # CMD ["sh", "-c", "ORIGIN=https://rp1.nbe.workers.dev node packages/site/build/index.js"]
 # start caddy in bg then run site 
-CMD ["sh", "-c", "caddy start && node build/index.js"]
+CMD ["sh", "-c", "caddy start && PORT=3000 node build/index.js"]
