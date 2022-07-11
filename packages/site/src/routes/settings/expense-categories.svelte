@@ -1,26 +1,22 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import Select from '$components/Select.svelte';
 	import Spinner from '$components/Spinner.svelte';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Load } from '@sveltejs/kit';
+	import { categories as cCategories, groups as cGroups } from './_constants';
 
-	export const load: Load = async ({ fetch }) => {
-		const { categories, groups } = await trpc(fetch, {
-			'cache-control': 'no-cache',
-		}).query('public:expenses:meta');
-		return { props: { groups, categories } };
-	};
-</script>
-
-<script lang="ts">
-	export let groups: InferQueryOutput<'public:expenses:meta'>['groups'];
-	export let categories: InferQueryOutput<'public:expenses:meta'>['categories'];
+	export let groups = cGroups;
+	export let categories = cCategories;
 
 	const fetchCategories = async () => {
-		({ categories } = await trpc().query('public:expenses:meta'));
+		categories = await new Promise((resolve, reject) => {
+			// TODO refactor
+			setTimeout(() => {
+				resolve(cCategories);
+			}, 1000);
+		});
 		return categories;
 	};
 	const addCategory = async () => {
@@ -62,11 +58,16 @@
 				/>
 				<AsyncButton
 					func={async () => {
-						const { id } = await trpc().mutation(
-							'expenseMeta:category:save',
-							cat,
-						);
-						cat.id = id;
+						new Promise((resolve, reject) => {
+							setTimeout(() => {
+								resolve();
+							}, 1000);
+						});
+						// const { id } = await trpc().mutation(
+						// 	'expenseMeta:category:save',
+						// 	cat,
+						// );
+						// cat.id = id;
 					}}
 					let:loading
 				>
@@ -83,19 +84,19 @@
 						<AsyncButton
 							func={async () => {
 								try {
-									await trpc().mutation('expenseMeta:category:delete', cat.id);
+									// await trpc().mutation('expenseMeta:category:delete', cat.id);
 									await fetchCategories();
 								} catch (e) {
-									if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
-										addToast({
-											props: {
-												kind: 'error',
-												title: 'Error',
-												subtitle:
-													'Cannot delete category because it is used by existing expenses.',
-											},
-										});
-									}
+									// if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
+									addToast({
+										props: {
+											kind: 'error',
+											title: 'Error',
+											subtitle:
+												'Cannot delete category because it is used by existing expenses.',
+										},
+									});
+									// }
 								}
 							}}
 							let:loading

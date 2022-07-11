@@ -1,26 +1,20 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
-
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Load } from '@sveltejs/kit';
+	import { categories as cCategories, groups as cGroups } from './_constants';
 
-	export const load: Load = async ({ fetch }) => {
-		const { groups } = await trpc(fetch, { 'cache-control': 'no-cache' }).query(
-			'public:expenses:meta',
-		);
-		return { props: { groups } };
-	};
-</script>
-
-<script lang="ts">
-	export let groups: InferQueryOutput<'public:expenses:meta'>['groups'];
+	export let groups = cGroups;
 
 	const fetchGroups = async () => {
-		({ groups } = await trpc().query('public:expenses:meta'));
-		return groups;
+		groups = await new Promise((resolve, reject) => {
+			// TODO refactor
+			setTimeout(() => {
+				resolve(cCategories);
+			}, 1000);
+		});
 	};
 
 	const addGroup = async () => {
@@ -49,11 +43,11 @@
 
 				<AsyncButton
 					func={async () => {
-						const { id } = await trpc().mutation(
-							'expenseMeta:group:save',
-							group,
-						);
-						group.id = id;
+						// const { id } = await trpc().mutation(
+						// 	'expenseMeta:group:save',
+						// 	group,
+						// );
+						// group.id = id;
 					}}
 					let:loading
 				>
@@ -69,23 +63,23 @@
 				<div class="w-1/12 text-red-300 sm:self-center">
 					{#if group.id}
 						<AsyncButton
-							func={async () => {
+							func="{async () => {
 								try {
-									await trpc().mutation('expenseMeta:group:delete', group.id);
+									console.log('todo');
+									// await trpc().mutation('expenseMeta:group:delete', group.id);
 									await fetchGroups();
 								} catch (e) {
-									if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
-										addToast({
-											props: {
-												kind: 'error',
-												title: 'Error',
-												subtitle:
-													'Cannot delete group because it is used by one or more expense categories. Change those categories then try again.',
-											},
-										});
-									}
+									// if (isTRPCError(e) && e.data?.prismaError?.code === 'P2014') {
+									addToast({
+										props: {
+											kind: 'error',
+											title: 'Error',
+											subtitle:
+												'Cannot delete group because it is used by one or more expense categories. Change those categories then try again.',
+										},
+									});
 								}
-							}}
+							}}}"
 							let:loading
 						>
 							{#if !loading}
