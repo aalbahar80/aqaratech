@@ -47,7 +47,7 @@
 <Form2
 	entityTitle="portfolios"
 	{schema}
-	type="create"
+	formType="create"
 	{basicFields}
 	onCreate={async (values) => {
 		$page.stuff.api.portfolios.create({
