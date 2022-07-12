@@ -17,6 +17,8 @@
 </script>
 
 <div class="prose">
+	<h3>User</h3>
+	<pre>{JSON.stringify($session.user, null, 2)}</pre>
 	<h3>importmetaenvapiurl.viteapiurl</h3>
 	<pre>{JSON.stringify(import.meta.env.VITE_API_URL, null, 2)}</pre>
 	<h3>importmetaenv[viteapiurl]</h3>

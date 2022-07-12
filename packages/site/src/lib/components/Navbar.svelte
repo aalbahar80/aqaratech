@@ -78,10 +78,10 @@
 				{/if}
 				{#if dev}
 					<a
-						href="/account/profile"
+						href="/debug"
 						class="text-base font-medium text-white hover:text-gray-300"
 					>
-						Profile
+						Debug
 					</a>
 				{/if}
 
