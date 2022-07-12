@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import type { EntityConstructor } from '$lib/models/types/entity.type';
+	import { entityNameMap } from '$lib/constants/names';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	const hideActions = !$session.user?.role.isAdmin;
-	export let entity: EntityConstructor;
+	export let entity: EntityTitle;
 	export let createHref: string;
 </script>
 
@@ -15,12 +16,14 @@
 		class="mx-auto h-12 w-12 text-gray-400"
 		aria-hidden="true"
 	/>
-	<h3 class="mt-2 text-sm font-medium text-gray-900">No {entity.plural}</h3>
+	<h3 class="mt-2 text-sm font-medium text-gray-900">
+		No {entityNameMap[entity].plural}
+	</h3>
 	{#if hideActions}
 		<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>
 	{:else}
 		<p class="mt-1 text-sm text-gray-500">
-			Get started by creating a new {entity.singular}.
+			Get started by creating a new {entityNameMap[entity].singular}.
 		</p>
 		<div class="mt-6">
 			<a
@@ -29,7 +32,7 @@
 				sveltekit:prefetch
 			>
 				<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-				New {entity.singular}
+				New {entityNameMap[entity].singular}
 			</a>
 		</div>
 	{/if}

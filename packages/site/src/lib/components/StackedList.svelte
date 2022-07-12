@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import { classMap } from '$lib/models/classes/all.class';
-	import type { EntityTitle } from '$models/types/entity.type';
+	import { entityNameMap } from '$lib/constants/names';
+	import type { EntityTitle } from '$lib/models/types/entity.type';
 
 	export let entityTitle: EntityTitle;
 	export let count: number;
 	export let createHref: string | undefined = undefined;
 
 	const hideActions = !$session.user?.role.isAdmin;
-	$: entity = classMap[entityTitle];
-	$: href = createHref ?? `/new/${entityTitle}`;
+	$: href = createHref ?? `/new/${entityNameMap[entityTitle].urlName}`;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -22,7 +21,7 @@
 			>
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						{entity.pluralCap}
+						{entityNameMap[entityTitle].pluralCap}
 					</h3>
 				</div>
 
@@ -33,7 +32,7 @@
 							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							sveltekit:prefetch
 						>
-							Create new {entity.singular}
+							Create new {entityNameMap[entityTitle].singular}
 						</a>
 					</div>
 				{/if}
@@ -44,7 +43,7 @@
 			<slot />
 		</ul>
 	{:else}
-		<EmptyState {entity} createHref={href} />
+		<EmptyState entity={entityTitle} createHref={href} />
 	{/if}
 </section>
 
