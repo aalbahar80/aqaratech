@@ -106,9 +106,16 @@ export async function seed({
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit, idx) => {
+		const unitPortfolioId = properties.find(
+			(p) => p.id === unit.propertyId
+		)!.portfolioId;
+		const unitOrganizationId = portfolios.find(
+			(o) => o.id === unitPortfolioId
+		)!.organizationId;
+
 		let date = new Date();
 		date.setFullYear(date.getFullYear() - timespan);
-		let tenantN = fakeTenant(randId(organizations));
+		let tenantN = fakeTenant(unitOrganizationId);
 
 		if (idx === 0) {
 			tenantN.id = testTenantId;
@@ -117,7 +124,7 @@ export async function seed({
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(tenantN.id, unit.id, date);
-			leases.push(leaseN);
+			leases.push({ ...leaseN });
 
 			const renewal = Math.random() > 0.3;
 			if (leaseN.end > new Date()) {
@@ -130,7 +137,7 @@ export async function seed({
 				// lease ended, move to next tenant
 				const tenantSearch = faker.datatype.number({ min: 1, max: 30 * 6 });
 				date = addDays(leaseN.end, tenantSearch);
-				tenantN = fakeTenant(randId(organizations));
+				tenantN = fakeTenant(unitOrganizationId);
 				tenants.push(tenantN);
 				continue tenantLoop;
 			}
