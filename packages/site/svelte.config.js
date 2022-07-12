@@ -1,17 +1,15 @@
 import adapter from '@sveltejs/adapter-auto';
 import adapterNode from '@sveltejs/adapter-node';
-import path, { resolve } from 'path';
+import { resolve } from 'path';
 import preprocess from 'svelte-preprocess';
 import icons from 'unplugin-icons/vite';
-import { fileURLToPath } from 'url';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-console.log(process.env.VERCEL ? 'ONVERCEL' : 'NOVERCEL');
-console.log(process.env.RENDER ? 'ONRENDER' : 'NORENDER');
-console.log(process.env, 'svelte.config');
+if (process.env.AQ_DEBUG == '1') {
+	// passed in as command line argument
+	// ex: `AQ_DEBUG=1 pnpm run build`
+	console.log(process.env);
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
