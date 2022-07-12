@@ -1,9 +1,10 @@
-import { IntersectionType, PartialType } from '@nestjs/swagger';
+import { IntersectionType, PartialType, PickType } from '@nestjs/swagger';
 import { Prisma, Role } from '@prisma/client';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { UserDto } from 'src/users/dto/user.dto';
 
-class RoleRequiredDto {}
+class RoleRequiredDto extends PickType(UserDto, ['email']) {}
 
 class RoleOptionalDto {
   // should be required?

@@ -34,7 +34,8 @@ export type EntityTitle =
 	| 'tenants'
 	| 'units'
 	| 'leaseInvoices'
-	| 'expenses';
+	| 'expenses'
+	| 'roles';
 // | 'maintenanceOrders';
 
 export type GenericFormModel = Exclude<EntityConstructor, typeof Lease>;

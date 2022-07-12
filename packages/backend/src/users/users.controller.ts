@@ -37,7 +37,7 @@ export class UsersController {
   @Public() // TODO prod remove
   @Get('by-email')
   // @CheckAbilities({ action: Action.Read, subject: 'User' })
-  @ApiOkResponse({ type: UserDto })
+  @ApiOkResponse({ type: UserDto }) // TODO type by hand if needed to add roles
   @ApiNotFoundResponse()
   // TODO validate email qparam
   findOneByEmail(@Query('email') email: string): Promise<ValidatedUser> {

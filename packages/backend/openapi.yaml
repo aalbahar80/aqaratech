@@ -2275,6 +2275,8 @@ components:
           format: date-time
           type: string
           readOnly: true
+        email:
+          type: string
         userId:
           type: string
           nullable: true
@@ -2293,6 +2295,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - email
         - userId
         - organizationId
         - portfolioId
@@ -2301,6 +2304,8 @@ components:
     CreateRoleDto:
       type: object
       properties:
+        email:
+          type: string
         userId:
           type: string
           nullable: true
@@ -2315,6 +2320,8 @@ components:
           nullable: true
         permissions:
           type: object
+      required:
+        - email
     CreateLeaseInvoiceDto:
       type: object
       properties:
@@ -3007,16 +3014,11 @@ components:
           default: null
         email:
           type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleDto'
       required:
         - id
         - createdAt
         - updatedAt
         - email
-        - roles
     CreateExpenseDto:
       type: object
       properties:

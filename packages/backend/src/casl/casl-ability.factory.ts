@@ -18,7 +18,7 @@ import {
   User,
 } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UserDto } from 'src/users/dto/user.dto';
+import { ValidatedUser } from 'src/types/user-validated.type';
 
 @Injectable()
 export class CaslAbilityFactory {
@@ -26,7 +26,7 @@ export class CaslAbilityFactory {
 
   private readonly logger = new Logger(CaslAbilityFactory.name);
 
-  async defineAbility(user: UserDto) {
+  async defineAbility(user: ValidatedUser) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
@@ -477,7 +477,11 @@ export class CaslAbilityFactory {
    * Often, it will be required to pass in not only the basic subject,
    * but also the subject's organization, portfolio, tenant, etc.
    */
-  async throwIfForbidden(user: UserDto, action: Action, subject: Subject) {
+  async throwIfForbidden(
+    user: ValidatedUser,
+    action: Action,
+    subject: Subject,
+  ) {
     const ability = await this.defineAbility(user);
 
     if (ability.cannot(action, subject)) {

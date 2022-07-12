@@ -36,12 +36,17 @@ export class RolesService {
         take,
         skip: (page - 1) * take,
         where: filter,
-        include: { user: true },
+        include: { user: { select: { email: true } } },
       }),
       this.prisma.role.count({ where: filter }),
     ]);
 
-    return { total, results: data };
+    let results: RoleDto[] = data.map((r) => {
+      const { user, ...role } = r;
+      return { ...role, email: user!.email }; // TODO SCHEMA: email required
+    });
+
+    return { total, results };
   }
 
   // findOne(id: number) {
