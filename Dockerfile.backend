@@ -1,12 +1,14 @@
 FROM node:16
 
+# Optimize: https://docs.docker.com/get-started/09_image_best/
+
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
 COPY pnpm-lock.yaml ./
 RUN pnpm fetch 
 
 ADD . ./
-# TODO only intall site stuff
+# TODO only intall be stuff
 # RUN pnpm install -r --offline 
 RUN pnpm --filter=. --filter=@self/backend... install --prod=false
 
