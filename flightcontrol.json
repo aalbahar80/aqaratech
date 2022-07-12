@@ -5,7 +5,8 @@
       "name": "Dev2",
       "region": "me-south-1",
       "source": {
-        "branch": "initNestjs"
+        "branch": "initNestjs",
+        "trigger": "manual"
       },
       "envVariables": {
         "VITE_FLIGHT_CONTROL_COMMON": {
