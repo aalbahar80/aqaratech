@@ -11,12 +11,14 @@
 	}: LoadEvent<{ id: string }>) => {
 		const sParams = parseParams(url);
 
-		const [portfolio, properties] = await Promise.all([
+		const [portfolio, properties, roles] = await Promise.all([
 			stuff.api!.portfolios.findOne({ id: params.id }),
 			stuff.api!.portfolios.findProperties({ id: params.id, ...sParams }),
+			// TODO handle pagination & default limit
+			stuff.api!.portfolios.findRoles({ id: params.id }),
 		]);
 
-		return { props: { portfolio, properties } };
+		return { props: { portfolio, properties, roles } };
 	};
 </script>
 
@@ -24,6 +26,7 @@
 	type Prop = LP<typeof load>;
 	export let portfolio: Prop['portfolio'];
 	export let properties: Prop['properties'];
+	export let roles: Prop['roles'];
 </script>
 
-<PortfolioPage {portfolio} {properties} />
+<PortfolioPage {portfolio} {properties} {roles} />

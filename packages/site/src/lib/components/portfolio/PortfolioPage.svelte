@@ -5,12 +5,18 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
+	import RoleList from '$lib/components/role/RoleList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { PaginatedPropertyDto, PortfolioDto } from '@self/sdk';
+	import type {
+		PaginatedPropertyDto,
+		PaginatedRoleDto,
+		PortfolioDto,
+	} from '@self/sdk';
 	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
 
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
+	export let roles: PaginatedRoleDto;
 
 	let details: [string, string | null][];
 	$: details = [
@@ -49,3 +55,4 @@
 </Heading>
 <DetailsPane {details} />
 <PropertyList {properties} />
+<RoleList {roles} />

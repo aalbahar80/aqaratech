@@ -15,6 +15,7 @@
 		class:yellow={badgeColor === 'yellow'}
 		in:scale
 	>
+		<slot />
 		{label}
 	</div>
 {/key}
