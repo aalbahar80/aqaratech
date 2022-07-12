@@ -4,6 +4,7 @@
 	import NavPopover from '$components/navbar/NavPopover.svelte';
 	import { getDocs } from '$lib/components/navbar/docs-url';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
+	import { LOGIN, LOGOUT } from '$lib/constants/routes';
 	import type { UserConfig } from '$lib/models/interfaces/user.interface';
 
 	export let navigation: UserConfig['navLinks'] = [];
@@ -42,7 +43,7 @@
 			</div>
 		{:else}
 			<a
-				href="/api/auth/login"
+				href={LOGIN}
 				sveltekit:reload
 				class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 			>
@@ -103,7 +104,7 @@
 				{/if}
 
 				<a
-					href="/account/logout"
+					href={LOGOUT}
 					sveltekit:reload
 					class="text-base font-medium text-white hover:text-gray-300"
 				>
@@ -111,7 +112,7 @@
 				</a>
 			{:else}
 				<a
-					href="/api/auth/login"
+					href={LOGIN}
 					sveltekit:reload
 					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 				>

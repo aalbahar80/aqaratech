@@ -1,3 +1,5 @@
+import { LOGIN } from '$lib/constants/routes';
+
 export const protectRoute = (session: App.Session, pathname: string) => {
 	const profileUrl = '/account/profile';
 	const publicTrxUrl = '/p/transactions/';
@@ -12,7 +14,7 @@ export const protectRoute = (session: App.Session, pathname: string) => {
 	} else if (!session.authz) {
 		// Unauthenticated user
 		shouldRedirect = true;
-		redirectUrl = '/api/auth/login';
+		redirectUrl = LOGIN;
 	} else if (session.authz?.isTenant) {
 		// Lost tenant
 		shouldRedirect = !pathname.startsWith('/portal/tenant/');
