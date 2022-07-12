@@ -1,3 +1,4 @@
+import { CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 import { config } from 'dotenv';
 
@@ -15,7 +16,7 @@ export const productionEnvironment: EnvironmentConfig = {
 		AUTH0_DEFAULT_DOMAIN: 'https://aqaratech.eu.auth0.com',
 		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_UD1FC1yzwrtoAAKe',
 		AUTH0_ROLE_ID_TENANT: 'rol_5xmAmhrwRtC83E9n',
-		AUTH0_REDIRECT_URI: 'https://aqaratech.com/api/auth/callback',
+		AUTH0_REDIRECT_URI: `https://aqaratech.com${CALLBACK}`,
 		AUTH0_API_NAMESPACE: 'https://aqaratech.com',
 		AUTH0_API_AUDIENCE: 'https://aqaratech.com/api',
 		JWKS: {
