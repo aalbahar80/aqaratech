@@ -13,7 +13,6 @@ async function bootstrap() {
     logger: ['debug', 'log', 'warn', 'error'],
     cors: true, // TODO adjust in prod
   });
-  app.setGlobalPrefix('v1/api');
 
   app.use(cookieParser());
   app.useGlobalPipes(

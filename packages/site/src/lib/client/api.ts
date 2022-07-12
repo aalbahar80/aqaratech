@@ -18,19 +18,10 @@ export const api = ({
 	token: string;
 	loadFetch?: LoadEvent['fetch'];
 }) => {
-	// get from flightcontrol.json https://flightcontrol.notion.site/Flightcontrol-Docs-8d9ca4edb5564165a9557df32818af0c
-
-	// Else VITE_API_URL is set, it is used as the base path
-	// Else VITE_SITE_URL is appended with `/api` and used as the base path
-
-	// d3rgr0em5u5yko.cloudfront.net
-	const proxied = import.meta.env.VITE_SITE_URL
-		? import.meta.env.VITE_SITE_URL
-		: 'http://localhost:2016';
-
-	const basePath = import.meta.env.VITE_API_URL || `${proxied}/v1/api`;
-
 	const headers = { Authorization: `Bearer ${token}` };
+
+	const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';
+
 	const config = new Configuration({
 		...(loadFetch && { fetchApi: loadFetch }),
 		headers,

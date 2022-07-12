@@ -1756,6 +1756,9 @@ tags:
   - name: aqaratech
     description: ''
 servers:
+  - url: http://localhost:3002
+  - url: https://nestjs-dev.onrender.com
+  - url: https://api.nest.letand.be
   - url: https://d164hjk5s8rpsc.cloudfront.net
 components:
   securitySchemes:
