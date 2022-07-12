@@ -11,13 +11,14 @@
 	}: LoadEvent<{ id: string }>) => {
 		const sParams = parseParams(url);
 
-		const [tenant, leases, invoices] = await Promise.all([
+		const [tenant, leases, invoices, roles] = await Promise.all([
 			stuff.api!.tenants.findOne({ id: params.id }),
 			stuff.api!.tenants.findLeases({ id: params.id }),
 			stuff.api!.tenants.findInvoices({ id: params.id, ...sParams }),
+			stuff.api!.tenants.findRoles({ id: params.id }),
 		]);
 
-		return { props: { tenant, leases, invoices } };
+		return { props: { tenant, leases, invoices, roles } };
 	};
 </script>
 
@@ -26,6 +27,7 @@
 	export let tenant: Prop['tenant'];
 	export let leases: Prop['leases'];
 	export let invoices: Prop['invoices'];
+	export let roles: Prop['roles'];
 </script>
 
-<TenantPage {tenant} {leases} {invoices} />
+<TenantPage {tenant} {leases} {invoices} {roles} />

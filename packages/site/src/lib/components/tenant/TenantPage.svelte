@@ -6,9 +6,11 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
+	import RoleList from '$lib/components/role/RoleList.svelte';
 	import type {
 		PaginatedLeaseDto,
 		PaginatedLeaseInvoiceDto,
+		PaginatedRoleDto,
 		TenantDto,
 	} from '@self/sdk';
 	import { Collection, Mail } from '@steeze-ui/heroicons';
@@ -16,6 +18,7 @@
 	export let tenant: TenantDto;
 	export let leases: PaginatedLeaseDto;
 	export let invoices: PaginatedLeaseInvoiceDto;
+	export let roles: PaginatedRoleDto;
 
 	const details: [string, string | null][] = [
 		['Full Name', tenant.fullName],
@@ -57,5 +60,6 @@
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} {files} />
+<RoleList {roles} />
 <LeaseList {leases} showIndex />
 <TrxColumn {invoices} />
