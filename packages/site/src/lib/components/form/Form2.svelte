@@ -5,6 +5,8 @@
 	import { entityNameMap } from '$lib/constants/names';
 	import type { Field } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import { addErrorToast } from '$lib/stores/toast';
+	import { validator } from '@felte/validator-zod';
 	import { createForm } from 'felte';
 	import type { ZodSchema } from 'zod';
 
@@ -27,13 +29,25 @@
 		isValid,
 	} = createForm({
 		schema,
-		onSubmit: async (values) => {
+
+		extend: validator({ schema }),
+
+		onSubmit: async (original) => {
+			console.log({ original }, 'Form2.svelte ~ 36');
+			const values = schema.parse(original); // let zod handle date parsing ("" to null)
 			console.log({ values }, 'Form2.svelte ~ 25');
 			if (formType === 'update') {
-				await onCreate(values);
-			} else if (formType === 'create') {
 				await onUpdate(values);
+			} else if (formType === 'create') {
+				await onCreate(values);
 			}
+		},
+
+		onError: (err: any) => {
+			// TODO format/parse server error message
+			addErrorToast();
+			console.error(err);
+			return err;
 		},
 	});
 </script>

@@ -36,22 +36,25 @@
 			label: 'Civil ID',
 			value: R.pathOr(data, ['civilid'], ''),
 		}),
-		// new Field('dob', {
-		// 	type: 'date',
-		// 	label: 'Date of Birth',
-		// 	value: toDateInput(R.pathOr(data, ['dob'], '')),
-		// }),
+		new Field('dob', {
+			type: 'date',
+			label: 'Date of Birth',
+			// value: toDateInput(R.pathOr(data, ['dob'], '')),
+		}),
 	];
 </script>
 
 <Form2
-	entityTitle="portfolios"
 	{schema}
+	entityTitle="portfolios"
 	formType="create"
 	{basicFields}
 	onCreate={async (values) => {
 		$page.stuff.api.portfolios.create({
-			createPortfolioDto: values,
+			createPortfolioDto: {
+				...values,
+				organizationId: $session.user?.role.orgId,
+			},
 		});
 	}}
 	onUpdate={async (values) => {
