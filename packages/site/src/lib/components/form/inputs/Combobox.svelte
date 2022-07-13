@@ -78,6 +78,9 @@
 			placeholder="Search..."
 			type="text"
 			value={selection?.label ?? ''}
+			on:click={() => {
+				forceOpen = true;
+			}}
 			on:input={(event) => {
 				query = event.currentTarget?.value;
 				forceOpen = true;
