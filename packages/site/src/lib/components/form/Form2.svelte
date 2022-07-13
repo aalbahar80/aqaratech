@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { dev } from '$app/env';
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { Field } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import { addErrorToast } from '$lib/stores/toast';
+	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
+	import { ResponseError } from '@self/sdk';
 	import { createForm } from 'felte';
 	import type { ZodSchema } from 'zod';
 
@@ -14,8 +16,8 @@
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let formType: 'create' | 'update';
-	export let onCreate: (values: any) => Promise<void>;
-	export let onUpdate: (values: any) => Promise<void>;
+	export let onCreate: (values: any) => Promise<{ id: string }>;
+	export let onUpdate: (values: any) => Promise<{ id: string }>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -36,18 +38,30 @@
 			console.log({ original }, 'Form2.svelte ~ 36');
 			const values = schema.parse(original); // let zod handle date parsing ("" to null)
 			console.log({ values }, 'Form2.svelte ~ 25');
+			let id: string;
 			if (formType === 'update') {
-				await onUpdate(values);
-			} else if (formType === 'create') {
-				await onCreate(values);
+				({ id } = await onUpdate(values));
+			} else {
+				({ id } = await onCreate(values));
 			}
+
+			goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
 		},
 
-		onError: (err: any) => {
-			// TODO format/parse server error message
-			addErrorToast();
-			console.error(err);
-			return err;
+		onError: async (error: any) => {
+			let message = '';
+			if (error instanceof ResponseError) {
+				const data = await error.response.json();
+				console.error(data);
+				message = data.message;
+			}
+			addToast({
+				props: {
+					kind: 'error',
+					title: 'Error',
+					subtitle: message,
+				},
+			});
 		},
 	});
 </script>

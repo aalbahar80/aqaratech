@@ -2,28 +2,19 @@
 	import { page, session } from '$app/stores';
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
+	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/portfolio.schema.js';
-	import * as R from 'remeda';
+	import type { CreatePortfolioDto, UpdatePortfolioDto } from '@self/sdk';
 
-	// TODO infer id if update form
-	let id = '';
-	const data = {
-		id: 'string',
-		createdAt: '2022-07-12T19:30:29.162Z',
-		updatedAt: '2022-07-12T19:30:29.162Z',
-		organizationId: 'string',
-		fullName: 'string',
-		shortName: null,
-		civilid: null,
-		phone: null,
-		email: null,
-		dob: null,
-	};
+	export let data: CreatePortfolioDto | UpdatePortfolioDto | undefined =
+		undefined;
+
+	const formType = data && 'id' in data ? 'update' : 'create';
 
 	const basicFields = [
 		new Field('fullName', { required: true, value: data?.fullName }),
 		new Field('shortName', {
-			value: R.pathOr(data, ['shortName'], ''),
+			value: data?.shortName,
 			hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
 		}),
 		new Field('email', {
@@ -34,12 +25,12 @@
 		new Field('phone', { value: data?.phone }),
 		new Field('civilid', {
 			label: 'Civil ID',
-			value: R.pathOr(data, ['civilid'], ''),
+			value: data?.civilid,
 		}),
 		new Field('dob', {
 			type: 'date',
 			label: 'Date of Birth',
-			// value: toDateInput(R.pathOr(data, ['dob'], '')),
+			value: toDateInput(data?.dob),
 		}),
 	];
 </script>
@@ -47,20 +38,18 @@
 <Form2
 	{schema}
 	entityTitle="portfolios"
-	formType="create"
+	{formType}
 	{basicFields}
-	onCreate={async (values) => {
+	onCreate={(values) =>
 		$page.stuff.api.portfolios.create({
 			createPortfolioDto: {
 				...values,
 				organizationId: $session.user?.role.orgId,
 			},
-		});
-	}}
-	onUpdate={async (values) => {
+		})}
+	onUpdate={(values) =>
 		$page.stuff.api.portfolios.update({
-			id: values.id,
+			id: data.id,
 			updatePortfolioDto: values,
-		});
-	}}
+		})}
 />
