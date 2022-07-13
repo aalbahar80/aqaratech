@@ -12,8 +12,8 @@
 	export let units: PaginatedUnitDto;
 
 	const createHref = $page.url.pathname.startsWith('/properties')
-		? `/new/units?propertyId=${$page.url.pathname.split('/').pop()}`
-		: '/new/units';
+		? `/units/new?propertyId=${$page.url.pathname.split('/').pop()}`
+		: '/units/new';
 </script>
 
 <StackedList entityTitle="units" count={units.results.length} {createHref}>
