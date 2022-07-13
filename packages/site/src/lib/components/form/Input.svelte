@@ -2,7 +2,6 @@
 	import Combobox from '$components/form/inputs/Combobox.svelte';
 	import Select from '$components/Select.svelte';
 	import { SelectField, type Field } from '$lib/models/classes/Field.class';
-	import type { Option } from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils';
 	import { tippyHint } from '$lib/utils/tippy';
 	import {
@@ -14,7 +13,7 @@
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
@@ -28,8 +27,6 @@
 		field.warnMessage = getValue(warnings, field.name)?.[0];
 	}
 	const dispatch = createEventDispatcher();
-
-	let options: Option[] = [];
 </script>
 
 <div>
@@ -59,7 +56,12 @@
 				on:select
 			/>
 		{:else}
-			<Select id={field.name} bind:current={field.value} {options} on:select />
+			<Select
+				id={field.name}
+				bind:current={field.value}
+				options={field.options}
+				on:select
+			/>
 		{/if}
 	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
