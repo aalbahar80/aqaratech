@@ -11,11 +11,54 @@
 		UnitDto,
 	} from '@self/sdk';
 
-	export let data: UnitDto | undefined = undefined;
-	export let portfolios: PaginatedPortfolioDto;
-	export let properties: PaginatedPropertyDto;
-	export let predefined: PredefinedUnit | undefined = undefined;
-	export let formType: 'create' | 'update';
+	// export let data: UnitDto | undefined = undefined;
+	// export let portfolios: PaginatedPortfolioDto;
+	// export let properties: PaginatedPropertyDto;
+	// export let predefined: PredefinedUnit | undefined = undefined;
+	// export let formType: 'create' | 'update';
+
+	// we need to use two generic types
+	// on the first we say it is either from some type (`string`) or `undefined`
+	// type Title = $$Generic<string | undefined>;
+	type TPredefinedUnit = $$Generic<PredefinedUnit | undefined>;
+	type TPortfolios = $$Generic<PaginatedPortfolioDto>;
+	type TProperties = $$Generic<PaginatedPropertyDto>;
+	// for the second generic type we use a conditional type and assign it
+	// either to some type (`string`) if the other type is `undefined`
+	// or to `undefined` if the other type is defined
+	// type Label = $$Generic<Title extends undefined ? string : undefined>;
+	type TUnitDto = $$Generic<
+		TPredefinedUnit extends undefined ? UnitDto : undefined
+	>;
+
+	// define the props this component always has
+	interface Props {
+		name: string;
+	}
+
+	// define the props this component can have in variant A (update)
+	interface WithLabel extends Props {
+		// label: Label
+		data: TUnitDto;
+	}
+
+	// define the props this component can have in variant B (create)
+	interface WithTitle extends Props {
+		// title: Title
+		predefined: TPredefinedUnit;
+		portfolios: TPortfolios;
+		properties: TProperties;
+	}
+
+	// combine both variants via an union type
+	type $$Props = WithLabel | WithTitle;
+
+	export let name: string;
+	// we need to cast `undefined` to the variable we haave specified
+	// export let label: Label = undefined as Label;
+	export let data: TUnitDto = undefined as TUnitDto;
+	// export let title: Title = undefined as Title;
+	export let predefined: TPredefinedUnit = undefined as TPredefinedUnit;
 
 	const basicFields = [
 		new SelectField('portfolioId', {
