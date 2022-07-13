@@ -1,11 +1,7 @@
 <script lang="ts">
-	import SelectArea from '$components/form/inputs/SelectArea.svelte';
+	import Combobox from '$components/form/inputs/Combobox.svelte';
 	import Select from '$components/Select.svelte';
-	import {
-		AsyncSelectField,
-		SelectField,
-		type Field,
-	} from '$lib/models/classes/Field.class';
+	import { SelectField, type Field } from '$lib/models/classes/Field.class';
 	import type { Option } from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils';
 	import { tippyHint } from '$lib/utils/tippy';
@@ -18,8 +14,7 @@
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
-	import { onMount } from 'svelte';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
@@ -35,13 +30,6 @@
 	const dispatch = createEventDispatcher();
 
 	let options: Option[] = [];
-	onMount(async () => {
-		if (field instanceof AsyncSelectField) {
-			options = await field.getOptions();
-		} else if (field instanceof SelectField) {
-			options = field.options;
-		}
-	});
 </script>
 
 <div>
@@ -62,16 +50,12 @@
 			{/if}
 		</div>
 	{/if}
-	{#if field.name === 'area'}
-		<SelectArea
-			id={field.name}
-			value={field.value}
-			invalidText={field.errorMessage}
-			on:select
-			on:clear
-		/>
-	{:else if field instanceof SelectField || field instanceof AsyncSelectField}
-		<Select id={field.name} bind:current={field.value} {options} on:select />
+	{#if field instanceof SelectField}
+		{#if field.combobox}
+			<Combobox options={field.options} initialValue={field.value} on:select />
+		{:else}
+			<Select id={field.name} bind:current={field.value} {options} on:select />
+		{/if}
 	{:else if field.type === 'checkbox'}
 		<SwitchGroup class="flex items-center justify-between">
 			<span class="flex flex-grow flex-col">

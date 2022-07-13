@@ -49,17 +49,8 @@ export class Field {
 export class SelectField extends Field {
 	override type = 'select' as const;
 	options: Option[] = [];
+	combobox = false;
 	constructor(name: string, data?: Partial<SelectField>) {
-		super(name, data);
-		Object.assign(this, data);
-	}
-}
-
-export class AsyncSelectField extends Field {
-	override type = 'select' as const;
-	selectionLabel = '';
-	getOptions: () => Promise<Option[]> = async () => [];
-	constructor(name: string, data?: Partial<AsyncSelectField>) {
 		super(name, data);
 		Object.assign(this, data);
 	}
