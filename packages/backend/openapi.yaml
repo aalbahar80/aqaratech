@@ -67,7 +67,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -179,7 +179,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -241,7 +241,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -303,7 +303,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -423,7 +423,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -557,7 +557,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -674,7 +674,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -787,7 +787,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -899,7 +899,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -961,7 +961,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1045,7 +1045,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1157,7 +1157,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1241,7 +1241,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1353,7 +1353,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1515,7 +1515,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q
@@ -1701,7 +1701,7 @@ paths:
           in: query
           schema:
             minimum: 1
-            maximum: 50
+            maximum: 1000
             default: 20
             type: number
         - name: q

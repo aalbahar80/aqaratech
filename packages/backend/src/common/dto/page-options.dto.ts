@@ -37,7 +37,7 @@ export class PageOptionsDto {
 
   @NumberFieldOptional({
     minimum: 1,
-    maximum: 50,
+    maximum: 1000,
     default: 20,
     // int: true,
   })

@@ -5,15 +5,19 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ stuff, url }: LoadEvent) => {
-		const predefined: PredefinedUnit = {
-			// portfolioId: url.searchParams.get('portfolioId'),
-			propertyId: url.searchParams.get('propertyId'),
-		};
+		const propertyId = url.searchParams.get('propertyId');
 
 		const [portfolios, properties] = await Promise.all([
-			stuff.api!.portfolios.findAll(),
-			stuff.api!.properties.findAll(),
+			stuff.api!.portfolios.findAll({ take: 1000 }),
+			stuff.api!.properties.findAll({ take: 1000 }),
 		]);
+
+		const predefined: PredefinedUnit = {
+			portfolioId: properties.results.find(
+				(property) => property.id === propertyId,
+			)?.portfolioId,
+			propertyId: url.searchParams.get('propertyId'),
+		};
 
 		return { props: { portfolios, properties, predefined } };
 	};

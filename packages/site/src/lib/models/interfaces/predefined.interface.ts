@@ -1,11 +1,15 @@
+type SearchParam = string | null;
+type FindIdFromArray = string | undefined;
+
 export interface PredefinedProperty {
-	portfolioId: string | null;
+	portfolioId: SearchParam;
 }
 
-export interface PredefinedUnit extends PredefinedProperty {
-	propertyId: string | null;
+export interface PredefinedUnit {
+	portfolioId: FindIdFromArray;
+	propertyId: SearchParam;
 }
 
 // export interface PredefinedLease extends PredefinedUnit {
-// 	tenantId: string | null;
+// 	tenantId: SearchParam;
 // }

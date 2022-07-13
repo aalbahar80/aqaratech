@@ -16,8 +16,6 @@
 	export let properties: PaginatedPropertyDto;
 	export let predefined: PredefinedUnit | undefined = undefined;
 
-	console.log({ portfolios }, 'UnitForm.svelte ~ 19');
-	console.log({ properties }, 'UnitForm.svelte ~ 20');
 	const formType = data && 'id' in data ? 'update' : 'create';
 
 	const basicFields = [
