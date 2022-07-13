@@ -4,7 +4,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
-	import { schema } from '$models/schemas/unit.schema.js';
+	import { createSchema, updateSchema } from '$models/schemas/unit.schema.js';
 	import type {
 		PaginatedPortfolioDto,
 		PaginatedPropertyDto,
@@ -92,7 +92,7 @@
 </script>
 
 <Form2
-	schema={formType === 'create' ? schema : schema.omit({ portfolioId: true })}
+	schema={formType === 'create' ? createSchema : updateSchema}
 	entityTitle="units"
 	{formType}
 	{basicFields}
