@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
@@ -11,54 +11,37 @@
 		UnitDto,
 	} from '@self/sdk';
 
-	// export let data: UnitDto | undefined = undefined;
-	// export let portfolios: PaginatedPortfolioDto;
-	// export let properties: PaginatedPropertyDto;
-	// export let predefined: PredefinedUnit | undefined = undefined;
-	// export let formType: 'create' | 'update';
-
-	// we need to use two generic types
-	// on the first we say it is either from some type (`string`) or `undefined`
-	// type Title = $$Generic<string | undefined>;
 	type TPredefinedUnit = $$Generic<PredefinedUnit | undefined>;
-	type TPortfolios = $$Generic<PaginatedPortfolioDto>;
-	type TProperties = $$Generic<PaginatedPropertyDto>;
-	// for the second generic type we use a conditional type and assign it
-	// either to some type (`string`) if the other type is `undefined`
-	// or to `undefined` if the other type is defined
-	// type Label = $$Generic<Title extends undefined ? string : undefined>;
+	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
+	type TProperties = $$Generic<PaginatedPropertyDto | undefined>;
+
 	type TUnitDto = $$Generic<
-		TPredefinedUnit extends undefined ? UnitDto : undefined
+		TPortfolios extends undefined ? UnitDto : undefined
 	>;
 
-	// define the props this component always has
 	interface Props {
-		name: string;
+		formType: 'create' | 'update';
 	}
 
-	// define the props this component can have in variant A (update)
-	interface WithLabel extends Props {
-		// label: Label
+	interface UpdateForm extends Props {
+		formType: 'update';
 		data: TUnitDto;
 	}
 
-	// define the props this component can have in variant B (create)
-	interface WithTitle extends Props {
-		// title: Title
+	interface CreateForm extends Props {
+		formType: 'create';
 		predefined: TPredefinedUnit;
 		portfolios: TPortfolios;
 		properties: TProperties;
 	}
 
-	// combine both variants via an union type
-	type $$Props = WithLabel | WithTitle;
+	type $$Props = CreateForm | UpdateForm;
 
-	export let name: string;
-	// we need to cast `undefined` to the variable we haave specified
-	// export let label: Label = undefined as Label;
+	export let formType: $$Props['formType'];
 	export let data: TUnitDto = undefined as TUnitDto;
-	// export let title: Title = undefined as Title;
 	export let predefined: TPredefinedUnit = undefined as TPredefinedUnit;
+	export let portfolios: TPortfolios = undefined as TPortfolios;
+	export let properties: TProperties = undefined as TProperties;
 
 	const basicFields = [
 		new SelectField('portfolioId', {
@@ -69,14 +52,14 @@
 			disabled: formType === 'update',
 			options:
 				formType === 'create'
-					? portfolios.results.map((portfolio) => ({
+					? portfolios!.results.map((portfolio) => ({
 							value: portfolio.id,
 							label: portfolio.fullName,
 					  }))
 					: [
 							{
 								value: data?.breadcrumbs?.portfolio.id,
-								label: data?.breadcrumbs?.portfolio.label,
+								label: data?.breadcrumbs?.portfolio.label!, // temp
 							},
 					  ],
 		}),
@@ -88,11 +71,11 @@
 			disabled: formType === 'update',
 			options:
 				formType === 'create'
-					? properties.results.map((property) => ({
+					? properties!.results.map((property) => ({
 							value: property.id,
 							label: getAddress(property),
 					  }))
-					: [{ value: data?.propertyId, label: getUnitLabel(data) }],
+					: [{ value: data!.propertyId, label: getUnitLabel(data!) }],
 		}),
 		// new SelectField('type', {
 		// 	value: data?.type,
