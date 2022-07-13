@@ -4,7 +4,10 @@
 	import { areas } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
-	import { schema } from '$models/schemas/property.schema.js';
+	import {
+		createSchema,
+		updateSchema,
+	} from '$models/schemas/property.schema.js';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
 	export let data: PropertyDto | undefined = undefined;
@@ -52,7 +55,7 @@
 </script>
 
 <Form2
-	schema={formType === 'create' ? schema : schema.omit({ portfolioId: true })}
+	schema={formType === 'create' ? createSchema : updateSchema}
 	entityTitle="properties"
 	{formType}
 	{basicFields}
