@@ -29,8 +29,9 @@ export class CaslExceptionFilter
     const response = ctx.getResponse<Response>();
 
     const { ability, ...exceptionDetails } = exception;
+    // TODO monitor
     this.logger.debug({ ...exceptionDetails });
-    this.logger.log(
+    this.logger.warn(
       `User: ${JSON.stringify(userSummary)} - is forbidden to - ${
         exception.action
       } - ${exception.subjectType} - ${JSON.stringify(exception.subject)}`,
