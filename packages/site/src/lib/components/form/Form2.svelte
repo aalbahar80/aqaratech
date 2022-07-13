@@ -16,6 +16,8 @@
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let formType: 'create' | 'update';
+	/** To simplify setting initial values of `SelectFields` into Felte's data store */
+	export let initialValues: Record<string, any> | undefined = undefined;
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
 
@@ -31,6 +33,8 @@
 		isValid,
 	} = createForm({
 		schema,
+
+		...(initialValues && { initialValues }), // To easily set initial `SelectFields`
 
 		extend: validator({ schema }),
 
