@@ -3,14 +3,13 @@
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { areas } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
+	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
 	import { schema } from '$models/schemas/property.schema.js';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
-	type Predefined = { portfolioId: string | null };
-
 	export let data: PropertyDto | undefined = undefined;
 	export let portfolios: PaginatedPortfolioDto;
-	export let predefined: Predefined | undefined = undefined;
+	export let predefined: PredefinedProperty | undefined = undefined;
 
 	const formType = data && 'id' in data ? 'update' : 'create';
 
