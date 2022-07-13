@@ -27,12 +27,11 @@
 	);
 
 	/**
-	 * Helper to force the combobox to open.
+	 * Helper to manually force the combobox to open.
 	 * Complement's headlessui's default `open` prop,
 	 * which is only designed for listboxes not for comboboxes.
 	 */
-
-	let isOpen = false;
+	let forceOpen = false;
 
 	const dispatch = createEventDispatcher<{
 		select: { value: Option['value'] };
@@ -61,7 +60,7 @@
 	on:change={(e) => {
 		selection = e.detail;
 		dispatch('select', { value: selection?.value });
-		isOpen = false;
+		forceOpen = false;
 	}}
 	{disabled}
 >
@@ -71,7 +70,7 @@
 	<div
 		class="relative mt-1"
 		use:clickOutside
-		on:outclick={() => (isOpen = false)}
+		on:outclick={() => (forceOpen = false)}
 	>
 		<input
 			{disabled}
@@ -81,7 +80,7 @@
 			value={selection?.label ?? ''}
 			on:input={(event) => {
 				query = event.currentTarget?.value;
-				isOpen = true;
+				forceOpen = true;
 			}}
 		/>
 		<ListboxButton
@@ -95,7 +94,7 @@
 			/>
 		</ListboxButton>
 
-		{#if (isOpen || open) && filtered.length}
+		{#if (forceOpen || open) && filtered.length}
 			<ListboxOptions
 				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				static
