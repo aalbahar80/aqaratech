@@ -3,15 +3,23 @@
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ stuff }: LoadEvent) => {
+	export const load = async ({ stuff, url }: LoadEvent) => {
+		const portfolioId = url.searchParams.get('portfolioId');
+
 		const portfolios = await stuff.api!.portfolios.findAll();
-		return { props: { portfolios } };
+		return {
+			props: {
+				portfolios,
+				...(portfolioId && { predefined: { portfolioId } }),
+			},
+		};
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let portfolios: Prop['portfolios'];
+	export let predefined: Prop['predefined'];
 </script>
 
-<PropertyForm {portfolios} />
+<PropertyForm {portfolios} {predefined} />

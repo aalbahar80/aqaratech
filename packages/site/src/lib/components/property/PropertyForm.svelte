@@ -4,14 +4,11 @@
 	import { areas } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { schema } from '$models/schemas/property.schema.js';
-	import type {
-		CreatePropertyDto,
-		PaginatedPortfolioDto,
-		UpdatePropertyDto,
-	} from '@self/sdk';
+	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
-	export let data: CreatePropertyDto | UpdatePropertyDto | undefined =
-		undefined;
+	type Predefined = { portfolioId: string };
+	export let predefined: Predefined | undefined;
+	export let data: PropertyDto | undefined = undefined;
 	export let portfolios: PaginatedPortfolioDto;
 
 	const formType = data && 'id' in data ? 'update' : 'create';
@@ -20,7 +17,7 @@
 		new SelectField('portfolioId', {
 			label: 'Portfolio',
 			required: true,
-			value: data && 'portfolioId' in data ? data?.portfolioId : null,
+			value: data?.portfolioId || predefined?.portfolioId || null,
 			combobox: true,
 			disabled: formType === 'update',
 			options: portfolios.results.map((portfolio) => ({
