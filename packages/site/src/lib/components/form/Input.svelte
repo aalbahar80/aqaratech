@@ -52,7 +52,12 @@
 	{/if}
 	{#if field instanceof SelectField}
 		{#if field.combobox}
-			<Combobox options={field.options} initialValue={field.value} on:select />
+			<Combobox
+				options={field.options}
+				initialValue={field.value}
+				disabled={field.disabled}
+				on:select
+			/>
 		{:else}
 			<Select id={field.name} bind:current={field.value} {options} on:select />
 		{/if}

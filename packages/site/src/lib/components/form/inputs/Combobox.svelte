@@ -18,8 +18,9 @@
 	import { createEventDispatcher } from 'svelte';
 
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
-	export let initialValue: SelectedOption = undefined;
+	export let initialValue: Option['value'] = undefined;
 	export let options: Option[];
+	export let disabled = false;
 
 	let selection: SelectedOption = options.find(
 		(option) => option.value === initialValue,
@@ -58,6 +59,7 @@
 		dispatch('select', { value: selection?.value });
 		isOpen = false;
 	}}
+	{disabled}
 >
 	<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
 		>Assigned to</ListboxLabel
@@ -68,7 +70,8 @@
 		on:outclick={() => (isOpen = false)}
 	>
 		<input
-			class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+			{disabled}
+			class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
 			placeholder="Search..."
 			type="text"
 			value={selection?.label ?? ''}

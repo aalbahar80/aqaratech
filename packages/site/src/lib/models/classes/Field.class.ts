@@ -19,6 +19,7 @@ export class Field {
 	warnMessage: string | undefined = '';
 	hint = '';
 	required = false; // TODO: derive from zod schema
+	disabled = false;
 	private _value: any;
 
 	public get value(): any {
