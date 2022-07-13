@@ -3,7 +3,7 @@
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
-	import { getAddress } from '$lib/utils/get-label';
+	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { schema } from '$models/schemas/unit.schema.js';
 	import type {
 		PaginatedPortfolioDto,
@@ -15,8 +15,7 @@
 	export let portfolios: PaginatedPortfolioDto;
 	export let properties: PaginatedPropertyDto;
 	export let predefined: PredefinedUnit | undefined = undefined;
-
-	const formType = data && 'id' in data ? 'update' : 'create';
+	export let formType: 'create' | 'update';
 
 	const basicFields = [
 		new SelectField('portfolioId', {
@@ -25,10 +24,18 @@
 			value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
 			combobox: true,
 			disabled: formType === 'update',
-			options: portfolios.results.map((portfolio) => ({
-				value: portfolio.id,
-				label: portfolio.fullName,
-			})),
+			options:
+				formType === 'create'
+					? portfolios.results.map((portfolio) => ({
+							value: portfolio.id,
+							label: portfolio.fullName,
+					  }))
+					: [
+							{
+								value: data?.breadcrumbs?.portfolio.id,
+								label: data?.breadcrumbs?.portfolio.label,
+							},
+					  ],
 		}),
 		new SelectField('propertyId', {
 			label: 'Property',
@@ -36,10 +43,13 @@
 			value: data?.propertyId || predefined?.propertyId,
 			combobox: true,
 			disabled: formType === 'update',
-			options: properties.results.map((property) => ({
-				value: property.id,
-				label: getAddress(property),
-			})),
+			options:
+				formType === 'create'
+					? properties.results.map((property) => ({
+							value: property.id,
+							label: getAddress(property),
+					  }))
+					: [{ value: data?.propertyId, label: getUnitLabel(data) }],
 		}),
 		// new SelectField('type', {
 		// 	value: data?.type,

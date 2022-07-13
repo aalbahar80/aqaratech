@@ -30,4 +30,4 @@
 	export let predefined: Prop['predefined'];
 </script>
 
-<UnitForm {portfolios} {properties} {predefined} />
+<UnitForm formType="create" {portfolios} {properties} {predefined} />
