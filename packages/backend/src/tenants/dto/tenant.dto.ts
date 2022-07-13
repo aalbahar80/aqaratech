@@ -32,7 +32,7 @@ class TenantOptionalDto {
   @IsString()
   civilid: string | null = null;
 
-  @IsPhoneNumber()
+  @IsPhoneNumber('KW')
   phone: string | null = null;
 
   @IsEmail()
