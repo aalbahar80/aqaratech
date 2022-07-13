@@ -128,6 +128,7 @@ export class AbilitiesGuard implements CanActivate {
       await this.cacheManager.del(request.user.id);
 
       // try again
+      // TODO monitor
       return this.canActivate(context);
     }
 
