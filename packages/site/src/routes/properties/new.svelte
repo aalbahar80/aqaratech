@@ -10,7 +10,7 @@
 		return {
 			props: {
 				portfolios,
-				...(portfolioId && { predefined: { portfolioId } }),
+				predefined: { portfolioId },
 			},
 		};
 	};
