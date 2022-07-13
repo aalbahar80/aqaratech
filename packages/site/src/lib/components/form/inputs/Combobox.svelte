@@ -5,6 +5,7 @@
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils/classes';
+	import { clickOutside } from '$lib/utils/click-outside';
 	import {
 		Listbox,
 		ListboxButton,
@@ -56,7 +57,11 @@
 	<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
 		>Assigned to</ListboxLabel
 	> -->
-	<div class="relative mt-1">
+	<div
+		class="relative mt-1"
+		use:clickOutside
+		on:outclick={() => (isOpen = false)}
+	>
 		<input
 			class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
 			placeholder="Search..."
