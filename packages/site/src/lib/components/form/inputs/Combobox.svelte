@@ -26,8 +26,12 @@
 		(option) => option.value === initialValue,
 	);
 
-	// Complement headlessui's default `open` prop,
-	// which is only designed for listboxes not for comboboxes.
+	/**
+	 * Helper to force the combobox to open.
+	 * Complement's headlessui's default `open` prop,
+	 * which is only designed for listboxes not for comboboxes.
+	 */
+
 	let isOpen = false;
 
 	const dispatch = createEventDispatcher<{
