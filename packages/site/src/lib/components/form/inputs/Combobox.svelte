@@ -17,8 +17,13 @@
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher } from 'svelte';
 
+	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
+	export let initialValue: SelectedOption = undefined;
 	export let options: Option[];
-	export let selection: SelectedOption = undefined;
+
+	let selection: SelectedOption = options.find(
+		(option) => option.value === initialValue,
+	);
 
 	// Complement headlessui's default `open` prop,
 	// which is only designed for listboxes not for comboboxes.
