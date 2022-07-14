@@ -23,8 +23,8 @@ services:
     build:
       context: .
       target: "${NODE_ENV}"
-      dockerfile: Dockerfile.backend
-    command: [ "./wait-for-postgres.sh", "./docker-entrypoint.sh" ]
+      dockerfile: ./Dockerfile.backend
+    # command: [ "./wait-for-postgres.sh", "./docker-entrypoint.sh" ]
     env_file:
       - .env
     ports:
