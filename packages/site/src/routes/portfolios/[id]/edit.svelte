@@ -15,4 +15,4 @@
 	export let portfolio: Prop['portfolio'];
 </script>
 
-<PortfolioForm data={portfolio} />
+<PortfolioForm formType="update" data={portfolio} />

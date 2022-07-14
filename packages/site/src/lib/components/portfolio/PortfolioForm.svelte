@@ -4,12 +4,29 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/portfolio.schema.js';
-	import type { CreatePortfolioDto, UpdatePortfolioDto } from '@self/sdk';
+	import type { PortfolioDto } from '@self/sdk';
 
-	export let data: CreatePortfolioDto | UpdatePortfolioDto | undefined =
-		undefined;
+	type TPortfolioDto = $$Generic<
+		TPortfolios extends undefined ? PortfolioDto : undefined
+	>;
 
-	const formType = data && 'id' in data ? 'update' : 'create';
+	interface Props {
+		formType: 'create' | 'update';
+	}
+
+	interface UpdateForm extends Props {
+		formType: 'update';
+		data: TPortfolioDto;
+	}
+
+	interface CreateForm extends Props {
+		formType: 'create';
+	}
+
+	type $$Props = CreateForm | UpdateForm;
+
+	export let formType: $$Props['formType'];
+	export let data: TPortfolioDto = undefined as TPortfolioDto;
 
 	const basicFields = [
 		new Field('fullName', { required: true, value: data?.fullName }),
