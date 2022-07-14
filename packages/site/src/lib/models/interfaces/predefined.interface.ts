@@ -10,6 +10,12 @@ export interface PredefinedUnit {
 	propertyId: SearchParam;
 }
 
+export interface PredefinedExpense {
+	portfolioId: FindIdFromArray | SearchParam;
+	propertyId: FindIdFromArray | SearchParam;
+	unitId: FindIdFromArray | SearchParam;
+}
+
 // export interface PredefinedLease extends PredefinedUnit {
 // 	tenantId: SearchParam;
 // }
