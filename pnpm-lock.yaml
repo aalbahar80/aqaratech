@@ -284,7 +284,6 @@ importers:
       prisma: 3.15.2
       remeda: 0.0.35
       superjson: 1.9.1
-      svelecte: 3.9.0
       svelte: 3.48.0
       svelte-check: 2.8.0
       svelte-meta-tags: 2.6.1
@@ -353,7 +352,6 @@ importers:
       prettier-plugin-tailwindcss: 0.1.12_prettier@2.7.1
       remeda: 0.0.35
       superjson: 1.9.1
-      svelecte: 3.9.0
       svelte: 3.48.0
       svelte-check: 2.8.0_s3dopqgs4h45owyu2kxaf6kyfu
       svelte-meta-tags: 2.6.1_lvfi2wesz6u4l5rfbnetbucfmm
@@ -9944,12 +9942,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelecte/3.9.0:
-    resolution: {integrity: sha512-0n3qUaD0Gh5hj6/VxVdsAt+An6UoWg64ygdOG4tIILUWGlglRbM3Bu8yYNP7yymUOEeW9V/tfe8XrPgeKjxFmQ==}
-    dependencies:
-      svelte-tiny-virtual-list: 2.0.5
-    dev: true
-
   /svelte-check/2.8.0_s3dopqgs4h45owyu2kxaf6kyfu:
     resolution: {integrity: sha512-HRL66BxffMAZusqe5I5k26mRWQ+BobGd9Rxm3onh7ZVu0nTk8YTKJ9vu3LVPjUGLU9IX7zS+jmwPVhJYdXJ8vg==}
     hasBin: true
@@ -10148,10 +10140,6 @@ packages:
 
   /svelte-select/4.4.7:
     resolution: {integrity: sha512-fIf9Z8rPI6F8naHZ9wjXT0Pv5gLyhdHAFkHFJnCfVVfELE8e82uOoF0xEVQP6Kir+b4Q5yOvNAzZ61WbSU6A0A==}
-    dev: true
-
-  /svelte-tiny-virtual-list/2.0.5:
-    resolution: {integrity: sha512-xg9ckb8UeeIme4/5qlwCrl2QNmUZ8SCQYZn3Ji83cUsoASqRNy3KWjpmNmzYvPDqCHSZjruBBsoB7t5hwuzw5g==}
     dev: true
 
   /svelte/3.48.0:
