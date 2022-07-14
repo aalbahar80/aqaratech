@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import SelectEntity2 from '$lib/components/form/inputs/SelectEntity2.svelte';
+	import SelectEntity from '$lib/components/form/inputs/SelectEntity.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
@@ -93,7 +93,7 @@
 						.singularCap}
 				</h1>
 				<div class="space-y-6 pt-6 pb-5">
-					<SelectEntity2
+					<SelectEntity
 						fields={relationalFields}
 						on:select={(e) => {
 							setData(e.detail.name, e.detail.value);
