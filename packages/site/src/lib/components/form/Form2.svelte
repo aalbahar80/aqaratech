@@ -16,7 +16,7 @@
 	export let schema: ZodSchema;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
-	export let relationalFields: SelectField[];
+	export let relationalFields: SelectField[] = [];
 	export let formType: 'create' | 'update';
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
