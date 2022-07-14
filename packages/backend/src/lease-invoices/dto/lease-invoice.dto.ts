@@ -41,14 +41,11 @@ class LeaseInvoiceOptionalDto {
 }
 
 export class LeaseInvoiceBasicDto extends IntersectionType(
-  LeaseInvoiceRequiredDto,
-  LeaseInvoiceOptionalDto,
+  AbstractDto,
+  IntersectionType(LeaseInvoiceRequiredDto, LeaseInvoiceOptionalDto),
 ) {}
 
-export class LeaseInvoiceDto extends IntersectionType(
-  AbstractDto,
-  LeaseInvoiceBasicDto,
-) {
+export class LeaseInvoiceDto extends LeaseInvoiceBasicDto {
   breadcrumbs: LeaseInvoiceBreadcrumbsDto;
 }
 

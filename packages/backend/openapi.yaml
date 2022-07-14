@@ -2407,6 +2407,17 @@ components:
     LeaseInvoiceBasicDto:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
         amount:
           type: number
           minimum: 1
@@ -2433,6 +2444,9 @@ components:
           nullable: true
           default: null
       required:
+        - id
+        - createdAt
+        - updatedAt
         - amount
         - postAt
         - leaseId
