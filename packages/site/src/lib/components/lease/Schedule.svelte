@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Lease } from '$lib/models/classes';
 	import { forceDateToInput } from '$lib/utils/common';
+	import type { generateSchedule } from '$lib/utils/generate-schedule';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
 
 	export let errors: any;
-	export let schedule: ReturnType<typeof Lease.generateSchedule>;
+	export let schedule: ReturnType<typeof generateSchedule>;
 
 	const dispatch = createEventDispatcher<{
 		countChange: number;
