@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
-	import { classMap } from '$lib/models/classes/all.class';
+	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { PaginatedDto } from '@self/sdk';
 	import Table from './Table.svelte';
@@ -14,9 +14,8 @@
 	}
 
 	export let data: Data;
-	$: entityTitle = $page.params.entity as EntityTitle;
-	$: entity = classMap[entityTitle];
-	$: createHref = `/new/${entity?.plural}`;
+	$: entity = $page.params.entity as EntityTitle;
+	$: createHref = `/new/${entityNameMap[entity].plural}`;
 
 	// animation
 	let modifier: number = 1;
@@ -47,14 +46,6 @@
 </script>
 
 <div class="mx-auto flex max-w-7xl flex-col p-4 sm:p-6 lg:p-8">
-	<!-- TODO remove -->
-	<a
-		href={`/new${$page.url.pathname}`}
-		class="table__add-button"
-		sveltekit:prefetch
-	>
-		New
-	</a>
 	<a
 		href={`${$page.url.pathname}/new`}
 		class="table__add-button"
