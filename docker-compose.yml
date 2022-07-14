@@ -5,7 +5,8 @@ services:
     container_name: caddy-service
     restart: unless-stopped
     ports:
-      - "80:80"
+      # - "80:80"
+      - "2016:80"
       - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
@@ -20,16 +21,16 @@ services:
     environment:
       - NODE_ENV:${NODE_ENV}
     build:
-      context: ./app
+      context: .
       target: "${NODE_ENV}"
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
     command: [ "./wait-for-postgres.sh", "./docker-entrypoint.sh" ]
     env_file:
       - .env
     ports:
       - 3002:3002
     depends_on:
-      # - redis
+      - redis
       - postgres
     networks:
       - aq-network
