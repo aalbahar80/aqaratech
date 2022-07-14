@@ -18,14 +18,14 @@
 			? fields[1].options.filter(
 					(option) => option.meta?.parentId === portfolioId,
 			  )
-			: fields[1]?.options;
+			: fields[1]?.options || [];
 
 	$: filteredUnits =
 		portfolioId && propertyId && fields[2]
 			? fields[2].options.filter(
 					(option) => option.meta?.parentId === propertyId,
 			  )
-			: fields[2]?.options;
+			: fields[2]?.options || [];
 
 	let propertySelector: Combobox | undefined;
 	let unitSelector: Combobox | undefined;
