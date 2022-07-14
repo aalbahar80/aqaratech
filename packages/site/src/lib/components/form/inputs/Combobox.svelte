@@ -56,10 +56,9 @@
 
 	/** Clear input/selection then dispatch `select` event. */
 	export const clear = () => {
-		// order?
+		dispatch('select', { value: null }); // has to be first
 		query = '';
 		selection = undefined;
-		dispatch('select', { value: undefined });
 	};
 </script>
 
