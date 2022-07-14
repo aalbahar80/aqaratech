@@ -10,9 +10,9 @@ respond /hello/* "hello world"
 handle /site/* {
   reverse_proxy site:3000
 }
-handle /docs/* {
-  reverse_proxy site:3001
-}
+# handle /docs/* {
+#   reverse_proxy site:3001
+# }
 handle_path /api/* {
   reverse_proxy backend:3002
 }
