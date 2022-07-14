@@ -5,6 +5,10 @@ export interface Option {
 	label: string;
 }
 
+export interface RelOption extends Option {
+	meta?: { parentId: string };
+}
+
 export type SelectedOption = Option | undefined;
 
 export interface RelationOptions {

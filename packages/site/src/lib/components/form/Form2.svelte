@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
+	import SelectEntity2 from '$lib/components/form/inputs/SelectEntity2.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import { SelectField, type Field } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
@@ -15,6 +16,7 @@
 	export let schema: ZodSchema;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
+	export let relationalFields: SelectField[];
 	export let formType: 'create' | 'update';
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
@@ -92,6 +94,12 @@
 						.singularCap}
 				</h1>
 				<div class="space-y-6 pt-6 pb-5">
+					<SelectEntity2
+						fields={relationalFields}
+						on:select={(e) => {
+							setData(e.detail.name, e.detail.value);
+						}}
+					/>
 					{#each basicFields as field}
 						<Input
 							{field}

@@ -3,6 +3,7 @@
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { unitTypeOptions } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
+	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/unit.schema.js';
@@ -44,7 +45,7 @@
 	export let portfolios: TPortfolios = undefined as TPortfolios;
 	export let properties: TProperties = undefined as TProperties;
 
-	const basicFields = [
+	const relationalFields: SelectField<RelOption>[] = [
 		new SelectField('portfolioId', {
 			label: 'Portfolio',
 			required: true,
@@ -75,9 +76,13 @@
 					? properties!.results.map((property) => ({
 							value: property.id,
 							label: getAddress(property),
+							meta: { parentId: property.portfolioId },
 					  }))
 					: [{ value: data!.propertyId, label: getUnitLabel(data!) }],
 		}),
+	];
+
+	const basicFields = [
 		new SelectField('type', {
 			value: data?.type,
 			options: unitTypeOptions,
@@ -98,6 +103,7 @@
 	entityTitle="units"
 	{formType}
 	{basicFields}
+	{relationalFields}
 	onCreate={(values) => $page.stuff.api.units.create({ createUnitDto: values })}
 	onUpdate={(values) =>
 		$page.stuff.api.units.update({
