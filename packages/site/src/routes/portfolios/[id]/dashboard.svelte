@@ -15,8 +15,8 @@
 	import { getIncomeTableStore } from '$lib/components/dashboard/stores/tables/income';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { Unit } from '$lib/models/classes/unit.class';
-	import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
+	// import { Unit } from '$lib/models/classes/unit.class';
+	// import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
 	import { subMonths } from 'date-fns';
 	import { writable, type Writable } from 'svelte/store';
@@ -40,49 +40,50 @@
 		};
 	};
 
-	type Filter = z.infer<typeof filterSchema>;
+	// type Filter = z.infer<typeof filterSchema>;
+	type Filter = any;
 
-	export const load: Load = async ({ params, fetch }) => {
-		const defaultFilter: Filter = {
-			propertyId: null,
-			unitId: null,
-			portfolioId: params.id,
-			...getRange(defaultRange),
-		};
+	// export const load: Load = async ({ params, fetch }) => {
+	// 	const defaultFilter: Filter = {
+	// 		propertyId: null,
+	// 		unitId: null,
+	// 		portfolioId: params.id,
+	// 		...getRange(defaultRange),
+	// 	};
 
-		const [portfolio, income, expenses, occupancy, expenseMeta] =
-			await Promise.all([
-				trpc(fetch).query('owner:charts:portfolio', { portfolioId: params.id }), // TODO use read?
-				trpc(fetch).query('owner:charts:income', {
-					...defaultFilter,
-				}),
-				trpc(fetch).query('owner:charts:expenses', {
-					...defaultFilter,
-				}),
-				trpc(fetch).query('owner:charts:occupancy', {
-					...defaultFilter,
-				}),
-				trpc(fetch).query('public:expenses:meta'),
-			]);
-		return {
-			props: {
-				portfolio,
-				income,
-				filter: defaultFilter,
-				expenses,
-				occupancy,
-				expenseMeta,
-			},
-		};
-	};
+	// const [portfolio, income, expenses, occupancy, expenseMeta] =
+	// 	await Promise.all([
+	// 		trpc(fetch).query('owner:charts:portfolio', { portfolioId: params.id }), // TODO use read?
+	// 		trpc(fetch).query('owner:charts:income', {
+	// 			...defaultFilter,
+	// 		}),
+	// 		trpc(fetch).query('owner:charts:expenses', {
+	// 			...defaultFilter,
+	// 		}),
+	// 		trpc(fetch).query('owner:charts:occupancy', {
+	// 			...defaultFilter,
+	// 		}),
+	// 		trpc(fetch).query('public:expenses:meta'),
+	// 	]);
+	// return {
+	// 	props: {
+	// 		portfolio,
+	// 		income,
+	// 		filter: defaultFilter,
+	// 		expenses,
+	// 		occupancy,
+	// 		expenseMeta,
+	// 	},
+	// };
+	// };
 </script>
 
 <script lang="ts">
-	export let portfolio: InferQueryOutput<'owner:charts:portfolio'>;
-	export let income: InferQueryOutput<'owner:charts:income'>;
-	export let expenses: InferQueryOutput<'owner:charts:expenses'>;
-	export let occupancy: InferQueryOutput<'owner:charts:occupancy'>;
-	export let expenseMeta: InferQueryOutput<'public:expenses:meta'>;
+	export let portfolio: any;
+	export let income: any;
+	export let expenses: any;
+	export let occupancy: any;
+	export let expenseMeta: any;
 	export let filter: Filter;
 
 	interface Option {
@@ -135,13 +136,13 @@
 	const handleFilter = async (newFilter: Filter) => {
 		console.log({ newFilter }, 'dashboard.svelte ~ 116');
 		rangeValid = newFilter.start <= newFilter.end;
-		if (rangeValid) {
-			[income, expenses, occupancy] = await Promise.all([
-				trpc().query('owner:charts:income', newFilter),
-				trpc().query('owner:charts:expenses', newFilter),
-				trpc().query('owner:charts:occupancy', newFilter),
-			]);
-		}
+		// if (rangeValid) {
+		// 	[income, expenses, occupancy] = await Promise.all([
+		// 		trpc().query('owner:charts:income', newFilter),
+		// 		trpc().query('owner:charts:expenses', newFilter),
+		// 		trpc().query('owner:charts:occupancy', newFilter),
+		// 	]);
+		// }
 		filter = newFilter;
 	};
 	const expensesGroupBy: Writable<'ratio' | 'property'> = writable('ratio');
