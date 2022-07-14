@@ -3,6 +3,7 @@
 	import Form2 from '$lib/components/form/Form2.svelte';
 	import { areas } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
+	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
 	import {
 		createSchema,
@@ -10,24 +11,62 @@
 	} from '$models/schemas/property.schema.js';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
-	export let data: PropertyDto | undefined = undefined;
-	export let portfolios: PaginatedPortfolioDto;
-	export let predefined: PredefinedProperty | undefined = undefined;
+	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;
+	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
 
-	const formType = data && 'id' in data ? 'update' : 'create';
+	type TPropertyDto = $$Generic<
+		TPortfolios extends undefined ? PropertyDto : undefined
+	>;
+
+	interface Props {
+		formType: 'create' | 'update';
+	}
+
+	interface UpdateForm extends Props {
+		formType: 'update';
+		data: TPropertyDto;
+	}
+
+	interface CreateForm extends Props {
+		formType: 'create';
+		predefined: TPredefinedProperty;
+		portfolios: TPortfolios;
+	}
+
+	type $$Props = CreateForm | UpdateForm;
+
+	export let formType: $$Props['formType'];
+	export let data: TPropertyDto = undefined as TPropertyDto;
+	export let predefined: TPredefinedProperty = undefined as TPredefinedProperty;
+	export let portfolios: TPortfolios = undefined as TPortfolios;
+
+	const relationalFields: SelectField<RelOption>[] =
+		formType === 'create'
+			? [
+					new SelectField('portfolioId', {
+						label: 'Portfolio',
+						required: true,
+						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
+						autoInit: true,
+						combobox: true,
+						disabled: formType === 'update',
+						options:
+							formType === 'create'
+								? portfolios!.results.map((portfolio) => ({
+										value: portfolio.id,
+										label: portfolio.fullName,
+								  }))
+								: [
+										{
+											value: data?.breadcrumbs?.portfolio.id,
+											label: data?.breadcrumbs?.portfolio.label!, // temp
+										},
+								  ],
+					}),
+			  ]
+			: [];
 
 	const basicFields = [
-		new SelectField('portfolioId', {
-			label: 'Portfolio',
-			required: true,
-			value: data?.portfolioId || predefined?.portfolioId,
-			combobox: true,
-			disabled: formType === 'update',
-			options: portfolios.results.map((portfolio) => ({
-				value: portfolio.id,
-				label: portfolio.fullName,
-			})),
-		}),
 		new SelectField('area', {
 			required: true,
 			value: data?.area,
@@ -60,6 +99,7 @@
 	entityTitle="properties"
 	{formType}
 	{basicFields}
+	{relationalFields}
 	onCreate={(values) =>
 		$page.stuff.api.properties.create({
 			createPropertyDto: {

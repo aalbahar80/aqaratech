@@ -5,16 +5,14 @@
 
 	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
 		const property = await stuff.api!.properties.findOne({ id: params.id });
-		const portfolios = await stuff.api!.portfolios.findAll();
 
-		return { props: { property, portfolios } };
+		return { props: { property } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let property: Prop['property'];
-	export let portfolios: Prop['portfolios'];
 </script>
 
-<PropertyForm data={property} {portfolios} />
+<PropertyForm formType="update" data={property} />

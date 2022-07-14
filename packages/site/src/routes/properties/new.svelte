@@ -21,4 +21,4 @@
 	export let predefined: Prop['predefined'];
 </script>
 
-<PropertyForm {portfolios} {predefined} />
+<PropertyForm formType="create" {portfolios} {predefined} />
