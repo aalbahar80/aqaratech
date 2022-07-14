@@ -71,6 +71,7 @@
 			value: data?.propertyId || predefined?.propertyId,
 			combobox: true,
 			disabled: formType === 'update',
+			autoInit: true,
 			options:
 				formType === 'create'
 					? properties!.results.map((property) => ({

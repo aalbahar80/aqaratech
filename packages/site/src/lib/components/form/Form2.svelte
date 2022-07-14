@@ -24,15 +24,14 @@
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// Manually pass initialValues for fields that do not use the `name` attribute.
-	const initialValues = basicFields.reduce<Record<string, any>>(
-		(acc, field) => {
-			if (field instanceof SelectField && field.autoInit) {
-				acc[field.name] = field.value;
-			}
-			return acc;
-		},
-		{},
-	);
+	const initialValues = [...basicFields, ...relationalFields].reduce<
+		Record<string, any>
+	>((acc, field) => {
+		if (field instanceof SelectField && field.autoInit) {
+			acc[field.name] = field.value;
+		}
+		return acc;
+	}, {});
 
 	const {
 		form,
