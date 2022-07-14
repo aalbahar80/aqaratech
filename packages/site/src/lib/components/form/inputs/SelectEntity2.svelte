@@ -58,6 +58,7 @@
 	<Combobox
 		bind:this={propertySelector}
 		options={filteredProperties}
+		initialValue={fields[1].value}
 		disabled={fields[1].disabled}
 		on:select={(e) => {
 			unitSelector?.clear();

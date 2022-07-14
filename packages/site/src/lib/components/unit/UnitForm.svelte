@@ -79,7 +79,12 @@
 							label: getAddress(property),
 							meta: { parentId: property.portfolioId },
 					  }))
-					: [{ value: data!.propertyId, label: getUnitLabel(data!) }],
+					: [
+							{
+								value: data!.propertyId,
+								label: data?.breadcrumbs?.property.label,
+							},
+					  ],
 		}),
 	];
 
