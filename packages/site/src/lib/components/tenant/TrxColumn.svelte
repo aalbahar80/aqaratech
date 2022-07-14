@@ -249,8 +249,9 @@
 
 		<Pagination pagination={invoices.pagination} />
 	{:else}
+		<!-- TODO change all /new urls -->
 		<EmptyState
-			entity={Transaction}
+			entity="leaseInvoices"
 			createHref={`/new/transactions?leaseId=${leaseId}`}
 		/>
 	{/if}
