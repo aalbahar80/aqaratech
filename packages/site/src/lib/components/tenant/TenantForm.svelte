@@ -3,7 +3,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { toDateInput } from '$lib/utils/common';
-	import { schema } from '$models/schemas/tenant.schema.js';
+	import { schema } from '$models/schemas/tenant.schema';
 	import type { TenantDto } from '@self/sdk';
 
 	type TTenantDto = $$Generic<

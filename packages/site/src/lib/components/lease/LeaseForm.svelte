@@ -6,7 +6,7 @@
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
 	import { getUnitLabel, toDateInput } from '$lib/utils/common';
 	import { getAddress } from '$lib/utils/get-label';
-	import { createSchema, updateSchema } from '$models/schemas/lease.schema.js';
+	import { createSchema, updateSchema } from '$models/schemas/lease.schema';
 	import type {
 		LeaseDto,
 		PaginatedPortfolioDto,

@@ -6,10 +6,7 @@
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
-	import {
-		createSchema,
-		updateSchema,
-	} from '$models/schemas/expense.schema.js';
+	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
 		ExpenseDto,
 		PaginatedPortfolioDto,

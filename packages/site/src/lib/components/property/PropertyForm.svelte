@@ -5,10 +5,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
-	import {
-		createSchema,
-		updateSchema,
-	} from '$models/schemas/property.schema.js';
+	import { createSchema, updateSchema } from '$models/schemas/property.schema';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;

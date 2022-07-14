@@ -7,7 +7,7 @@
 	import {
 		createSchema,
 		updateSchema,
-	} from '$models/schemas/transaction.schema.js';
+	} from '$models/schemas/transaction.schema';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 
 	type TPredefinedInvoice = $$Generic<PredefinedInvoice | undefined>;

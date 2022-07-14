@@ -6,7 +6,7 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { getAddress } from '$lib/utils/get-label';
-	import { createSchema, updateSchema } from '$models/schemas/unit.schema.js';
+	import { createSchema, updateSchema } from '$models/schemas/unit.schema';
 	import type {
 		PaginatedPortfolioDto,
 		PaginatedPropertyDto,
