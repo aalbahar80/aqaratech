@@ -33,10 +33,6 @@
 	 */
 	let forceOpen = false;
 
-	const dispatch = createEventDispatcher<{
-		select: { value: Option['value'] };
-	}>();
-
 	// SEARCH
 	let query = '';
 
@@ -52,6 +48,19 @@
 				label: result.item.label,
 		  }))
 		: options;
+
+	// EVENTS
+	const dispatch = createEventDispatcher<{
+		select: { value: Option['value'] };
+	}>();
+
+	/** Clear input/selection then dispatch `select` event. */
+	export const clear = () => {
+		// order?
+		query = '';
+		selection = undefined;
+		dispatch('select', { value: undefined });
+	};
 </script>
 
 <Listbox

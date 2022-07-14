@@ -47,9 +47,9 @@ export class Field {
 	}
 }
 
-export class SelectField extends Field {
+export class SelectField<T = Option> extends Field {
 	override type = 'select' as const;
-	options: Option[] = [];
+	options: T[] = [];
 	combobox = false;
 	/**
 	 * If true, the value of this field will be passed to Felte's `initialValues` argument.
