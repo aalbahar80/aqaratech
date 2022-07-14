@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import LeaseForm from '$lib/components/lease/LeaseForm2.svelte';
+	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
