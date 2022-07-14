@@ -6,7 +6,6 @@
 	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
 		const expense = await stuff.api!.expenses.findOne({ id: params.id });
 
-		console.log({ expense }, 'edit.svelte ~ 9');
 		return { props: { expense } };
 	};
 </script>
