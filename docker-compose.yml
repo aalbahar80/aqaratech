@@ -1,0 +1,81 @@
+version: "3.5"
+services:
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - aq-network
+
+  backend:
+    container_name: "hrm_api_${NODE_ENV}"
+    image: "hrm_api_${NODE_ENV}"
+    environment:
+      - NODE_ENV:${NODE_ENV}
+    build:
+      context: ./app
+      target: "${NODE_ENV}"
+      dockerfile: Dockerfile
+    command: [ "./wait-for-postgres.sh", "./docker-entrypoint.sh" ]
+    env_file:
+      - .env
+    ports:
+      - 3002:3002
+    depends_on:
+      # - redis
+      - postgres
+    networks:
+      - aq-network
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  # redis:
+  #   container_name: redis
+  #   image: redis:latest
+  #   networks:
+  #     - aq-network
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    networks:
+      - aq-network
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: "${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME}"
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    links:
+      - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    volumes:
+      - ./pgdata/pgadmin:/root/.pgadmin
+    env_file:
+      - .env
+    networks:
+      - aq-network
+
+networks:
+  aq-network:
+    driver: bridge
+    name: aq-network
+
+volumes:
+  caddy_data:
+  caddy_config:

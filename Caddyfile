@@ -1,0 +1,17 @@
+temporal.letand.be {
+	reverse_proxy temporal:7233 {
+		header_down Strict-Transport-Security max-age=31536000;
+	} 
+}
+
+temporal-web.letand.be {
+	reverse_proxy temporal-web:8088 {
+		header_down Strict-Transport-Security max-age=31536000;
+	} 
+}
+
+temporal-ui.letand.be {
+	reverse_proxy temporal-ui:8080 {
+		header_down Strict-Transport-Security max-age=31536000;
+	} 
+}
