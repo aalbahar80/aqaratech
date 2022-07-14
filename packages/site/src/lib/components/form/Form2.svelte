@@ -5,7 +5,7 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity2 from '$lib/components/form/inputs/SelectEntity2.svelte';
 	import { entityNameMap } from '$lib/constants/names';
-	import { SelectField, type Field } from '$lib/models/classes/Field.class';
+	import type { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
@@ -27,7 +27,7 @@
 	const initialValues = [...basicFields, ...relationalFields].reduce<
 		Record<string, any>
 	>((acc, field) => {
-		if (field instanceof SelectField && field.autoInit) {
+		if (field.autoInit) {
 			acc[field.name] = field.value;
 		}
 		return acc;
