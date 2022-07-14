@@ -45,48 +45,51 @@
 	export let portfolios: TPortfolios = undefined as TPortfolios;
 	export let properties: TProperties = undefined as TProperties;
 
-	const relationalFields: SelectField<RelOption>[] = [
-		new SelectField('portfolioId', {
-			label: 'Portfolio',
-			required: true,
-			value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
-			combobox: true,
-			disabled: formType === 'update',
-			options:
-				formType === 'create'
-					? portfolios!.results.map((portfolio) => ({
-							value: portfolio.id,
-							label: portfolio.fullName,
-					  }))
-					: [
-							{
-								value: data?.breadcrumbs?.portfolio.id,
-								label: data?.breadcrumbs?.portfolio.label!, // temp
-							},
-					  ],
-		}),
-		new SelectField('propertyId', {
-			label: 'Property',
-			required: true,
-			value: data?.propertyId || predefined?.propertyId,
-			combobox: true,
-			disabled: formType === 'update',
-			autoInit: true,
-			options:
-				formType === 'create'
-					? properties!.results.map((property) => ({
-							value: property.id,
-							label: getAddress(property),
-							meta: { parentId: property.portfolioId },
-					  }))
-					: [
-							{
-								value: data!.propertyId,
-								label: data?.breadcrumbs?.property.label,
-							},
-					  ],
-		}),
-	];
+	const relationalFields: SelectField<RelOption>[] =
+		formType === 'create'
+			? [
+					new SelectField('portfolioId', {
+						label: 'Portfolio',
+						required: true,
+						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
+						combobox: true,
+						disabled: formType === 'update',
+						options:
+							formType === 'create'
+								? portfolios!.results.map((portfolio) => ({
+										value: portfolio.id,
+										label: portfolio.fullName,
+								  }))
+								: [
+										{
+											value: data?.breadcrumbs?.portfolio.id,
+											label: data?.breadcrumbs?.portfolio.label!, // temp
+										},
+								  ],
+					}),
+					new SelectField('propertyId', {
+						label: 'Property',
+						required: true,
+						value: data?.propertyId || predefined?.propertyId,
+						combobox: true,
+						disabled: formType === 'update',
+						autoInit: true,
+						options:
+							formType === 'create'
+								? properties!.results.map((property) => ({
+										value: property.id,
+										label: getAddress(property),
+										meta: { parentId: property.portfolioId },
+								  }))
+								: [
+										{
+											value: data!.propertyId,
+											label: data?.breadcrumbs?.property.label,
+										},
+								  ],
+					}),
+			  ]
+			: [];
 
 	const basicFields = [
 		new SelectField('type', {
