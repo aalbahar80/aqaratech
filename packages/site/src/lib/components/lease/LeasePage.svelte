@@ -6,7 +6,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import { Lease } from '$models/classes/lease.class';
+	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import type { LeaseDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
@@ -35,7 +35,7 @@
 		},
 	];
 
-	const badge = Lease.getBadge(lease);
+	const badge = getLeaseBadge(lease);
 </script>
 
 <Heading title="Lease" id={lease.id} entity="leases" {icons}>

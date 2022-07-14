@@ -6,9 +6,9 @@
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { Transaction } from '$lib/models/classes';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
+	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
 
@@ -26,7 +26,7 @@
 
 	$: sendEnabled = !trx.isPaid;
 
-	const { label, color: badgeColor } = Transaction.getBadge(trx);
+	const { label, color: badgeColor } = getInvoiceBadge(trx);
 </script>
 
 <Heading title="Invoice" id={trx.id} entity="leaseInvoices">

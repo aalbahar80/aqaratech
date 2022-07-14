@@ -3,11 +3,11 @@
 	import DropDown from '$components/DropDown.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
-	import { Transaction } from '$lib/models/classes';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
+	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import {
 		Check,
@@ -135,7 +135,7 @@
 									aria-hidden="true"
 								/>
 							{:else}
-								<Chip {...Transaction.getBadge(invoice)} />
+								<Chip {...getInvoiceBadge(invoice)} />
 							{/if}
 						</span>
 					</svelte:element>
@@ -159,7 +159,7 @@
 				</thead>
 				<tbody>
 					{#each invoices.results as invoice (invoice.id)}
-						{@const chip = Transaction.getBadge(invoice)}
+						{@const chip = getInvoiceBadge(invoice)}
 						<tr>
 							<td>
 								<div class="flex">

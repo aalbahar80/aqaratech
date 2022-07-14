@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
 	import PayButton from '$lib/components/trx/PayButton.svelte';
-	import { Transaction } from '$lib/models/classes/transaction.class';
-	import { toUTCFormat, kwdFormat } from '$lib/utils/common';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
+	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -19,7 +19,7 @@
 
 	export let trx: Transaction;
 
-	const badge = Transaction.getBadge(trx);
+	const badge = getInvoiceBadge(trx);
 </script>
 
 <div

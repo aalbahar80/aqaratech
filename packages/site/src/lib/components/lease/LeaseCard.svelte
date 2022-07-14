@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Badge from '$components/Badge.svelte';
 	import { getProgress } from '$lib/utils/common';
-	import { Lease } from '$models/classes/lease.class';
 	import type { LeaseDto } from '@self/sdk';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -12,7 +11,26 @@
 
 	const expired = lease.end < new Date();
 
-	const badge = Lease.getBadge(lease);
+	const getBadge = (dates: { start: Date; end: Date }) => {
+		if (dates.end < new Date()) {
+			return {
+				label: 'Expired',
+				color: 'red',
+			};
+		}
+		if (dates.start > new Date()) {
+			return {
+				label: 'Upcoming',
+				color: 'indigo',
+			};
+		}
+		return {
+			label: 'Current',
+			color: 'green',
+		};
+	};
+
+	const badge = getBadge(lease);
 	const progress = getProgress(lease.start, lease.end);
 </script>
 
