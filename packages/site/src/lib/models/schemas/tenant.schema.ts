@@ -1,4 +1,3 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import {
 	digitsOnly,
 	falsyToNull,
@@ -8,7 +7,6 @@ import {
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: zodnanoid.optional(),
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 	shortName: z.string().nullable().transform(trim).transform(falsyToNull),
 	email: z
