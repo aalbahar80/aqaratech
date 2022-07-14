@@ -22,3 +22,7 @@ export interface PredefinedLease {
 	unitId: SearchParam;
 	tenantId: SearchParam;
 }
+
+export interface PredefinedInvoice {
+	leaseId: SearchParam;
+}
