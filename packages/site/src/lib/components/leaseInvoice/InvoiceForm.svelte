@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Form2 from '$lib/components/form/Form2.svelte';
+	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
 	import { toDateInput } from '$lib/utils/common';
@@ -80,7 +80,7 @@
 	];
 </script>
 
-<Form2
+<Form
 	schema={formType === 'create' ? createSchema : updateSchema}
 	entityTitle="leaseInvoices"
 	{formType}

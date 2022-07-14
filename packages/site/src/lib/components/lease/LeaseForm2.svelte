@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Form2 from '$lib/components/form/Form2.svelte';
+	import Form from '$lib/components/form/Form.svelte';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
@@ -164,7 +164,7 @@
 	];
 </script>
 
-<Form2
+<Form
 	schema={formType === 'create' ? createSchema : updateSchema}
 	entityTitle="leases"
 	{formType}
