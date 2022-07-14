@@ -4,7 +4,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import { entityNameMap } from '$lib/constants/names';
-	import type { Field } from '$lib/models/classes/Field.class';
+	import { SelectField, type Field } from '$lib/models/classes/Field.class';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
@@ -16,12 +16,21 @@
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let formType: 'create' | 'update';
-	/** To simplify setting initial values of `SelectFields` into Felte's data store */
-	export let initialValues: Record<string, any> | undefined = undefined;
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
+
+	// Manually pass initialValues for fields that do not use the `name` attribute.
+	const initialValues = basicFields.reduce<Record<string, any>>(
+		(acc, field) => {
+			if (field instanceof SelectField && field.autoInit) {
+				acc[field.name] = field.value;
+			}
+			return acc;
+		},
+		{},
+	);
 
 	const {
 		form,
@@ -34,7 +43,7 @@
 	} = createForm({
 		schema,
 
-		...(initialValues && { initialValues }), // To easily set initial `SelectFields`
+		...(initialValues && { initialValues }), // for fields that do not use the `name` attribute.
 
 		extend: validator({ schema }),
 

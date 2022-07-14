@@ -32,6 +32,7 @@
 			required: true,
 			value: data?.area,
 			combobox: true,
+			autoInit: true,
 			options: areas.map((area) => ({
 				value: area[1],
 				label: `${area[0]} | ${area[1]}`,
@@ -59,7 +60,6 @@
 	entityTitle="properties"
 	{formType}
 	{basicFields}
-	initialValues={{ area: data?.area }}
 	onCreate={(values) =>
 		$page.stuff.api.properties.create({
 			createPropertyDto: {

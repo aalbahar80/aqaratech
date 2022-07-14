@@ -51,6 +51,19 @@ export class SelectField extends Field {
 	override type = 'select' as const;
 	options: Option[] = [];
 	combobox = false;
+	/**
+	 * If true, the value of this field will be passed to Felte's `initialValues` argument.
+	 *
+	 * Otherwise, this field will not be initialized in felte's store
+	 * unless it's input directly edited by the user.
+	 * This is because Felte normally used the `name` of the input element to initialize the field,
+	 * which we are not using for listboxes/comboxes.
+	 *
+	 * Unless this field is disabled, this should probably be set to true.
+	 *
+	 * Note to self: consider automatically setting to true based on `super.disabled`.
+	 */
+	autoInit = false;
 	constructor(name: string, data?: Partial<SelectField>) {
 		super(name, data);
 		Object.assign(this, data);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Form2 from '$lib/components/form/Form2.svelte';
+	import { unitTypeOptions } from '$lib/config/constants';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
@@ -77,10 +78,11 @@
 					  }))
 					: [{ value: data!.propertyId, label: getUnitLabel(data!) }],
 		}),
-		// new SelectField('type', {
-		// 	value: data?.type,
-		// 	options: unitTypeOptions,
-		// }),
+		new SelectField('type', {
+			value: data?.type,
+			options: unitTypeOptions,
+			autoInit: true,
+		}),
 		new Field('unitNumber', { required: true, value: data?.unitNumber }),
 		new Field('bed', { type: 'number', value: data?.bed }),
 		new Field('bath', { type: 'number', value: data?.bath }),
