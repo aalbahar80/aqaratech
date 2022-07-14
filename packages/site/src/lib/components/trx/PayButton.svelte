@@ -1,15 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { addToast } from '$lib/stores/toast';
+	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { Cash } from '@steeze-ui/heroicons';
 	import Button from '../Button.svelte';
 
-	interface Transaction {
-		id: string;
-		postAt: Date;
-	}
-
-	export let trx: Transaction;
+	export let invoice: LeaseInvoiceDto;
 
 	let loading = false;
 	const handlePayment = async () => {
@@ -17,7 +13,7 @@
 		// TODO: button spinner should also be use:action
 		loading = true;
 		try {
-			const res = await fetch(`/api/payments/getUrl?id=${trx.id}`);
+			const res = await fetch(`/api/payments/getUrl?id=${invoice.id}`);
 			const data = await res.json();
 			if (res.ok) {
 				goto(data.paymentUrl).catch(console.error);
@@ -50,7 +46,7 @@
 	--min-height="4rem"
 	text="Pay"
 	icon={Cash}
-	disabled={trx.postAt > new Date()}
+	disabled={invoice.postAt > new Date()}
 	{loading}
 	on:click={handlePayment}
 />

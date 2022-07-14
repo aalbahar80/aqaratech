@@ -7,16 +7,16 @@
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let trx: LeaseInvoiceDto;
+	export let invoice: LeaseInvoiceDto;
 
-	const badge = getInvoiceBadge(trx);
+	const badge = getInvoiceBadge(invoice);
 </script>
 
 <div
 	class="block"
-	id={trx.id}
-	class:isPaid={trx.isPaid}
-	class:notPaid={!trx.isPaid}
+	id={invoice.id}
+	class:isPaid={invoice.isPaid}
+	class:notPaid={!invoice.isPaid}
 >
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-col">
@@ -30,7 +30,7 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						{kwdFormat(trx.amount)}
+						{kwdFormat(invoice.amount)}
 					</p>
 					<p class="text flex items-center">
 						<Icon
@@ -39,18 +39,18 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						<time dateTime={trx.postAt.toISOString()}
-							>{toUTCFormat(trx.postAt)}</time
+						<time dateTime={invoice.postAt.toISOString()}
+							>{toUTCFormat(invoice.postAt)}</time
 						>
 					</p>
 					<p class="text flex items-center">
-						{trx.memo}
+						{invoice.memo}
 					</p>
 				</div>
-				{#if trx.isPaid}
+				{#if invoice.isPaid}
 					<span class="mt-4 sm:mt-0">
 						<a
-							href={`/p/transactions/${trx.id}`}
+							href={`/invoices/${invoice.id}`}
 							class="font-medium text-indigo-600 hover:text-indigo-500"
 						>
 							Details <span aria-hidden="true"> &rarr;</span>
@@ -58,7 +58,7 @@
 					</span>
 				{:else}
 					<div>
-						<PayButton {trx} />
+						<PayButton {invoice} />
 					</div>
 				{/if}
 			</div>

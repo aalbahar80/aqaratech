@@ -28,10 +28,12 @@
 	}));
 
 	let selected = options[0]?.value;
-	$: trxs = invoices.results.filter((invoice) => invoice.leaseId === selected);
+	$: filtered = invoices.results.filter(
+		(invoice) => invoice.leaseId === selected,
+	);
 </script>
 
-<TrxList {trxs}>
+<TrxList invoices={filtered}>
 	<Select
 		disabled={leases.results.length < 2}
 		{options}

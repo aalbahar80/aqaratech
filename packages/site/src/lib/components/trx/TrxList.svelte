@@ -1,12 +1,12 @@
 <script lang="ts">
-	import TrxCard from '$lib/components/trx/TrxCard.svelte';
+	import InvoiceCard from '$lib/components/trx/TrxCard.svelte';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { FolderAdd } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let trxs: LeaseInvoiceDto[];
+	export let invoices: LeaseInvoiceDto[];
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -26,16 +26,16 @@
 		</div>
 	</div>
 
-	{#if trxs.length}
+	{#if invoices.length}
 		<!-- TODO: check user is returned to same page -->
 		<ul
-			id="trxList"
+			id="invoiceList"
 			class="divide-y divide-gray-200"
-			data-uuid={trxs[0]?.leaseId}
+			data-uuid={invoices[0]?.leaseId}
 		>
-			{#each trxs as trx (trx.id)}
+			{#each invoices as invoice (invoice.id)}
 				<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
-					<TrxCard {trx} />
+					<InvoiceCard {invoice} />
 				</li>
 			{/each}
 		</ul>
