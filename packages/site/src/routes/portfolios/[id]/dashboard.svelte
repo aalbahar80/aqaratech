@@ -18,10 +18,9 @@
 	// import { Unit } from '$lib/models/classes/unit.class';
 	// import type { filterSchema } from '$lib/server/trpc/routers/owner/charts';
 	import { forceDateToInput, getAddress } from '$lib/utils/common';
+	import { getUnitLabel } from '$lib/utils/get-label';
 	import { subMonths } from 'date-fns';
 	import { writable, type Writable } from 'svelte/store';
-	import type { z } from 'zod';
-	import type { Load } from './__types/index';
 
 	const defaultRange = 6;
 	const getRange = (months: number) => {
@@ -119,7 +118,7 @@
 		const newUnits = newProperty
 			? newProperty.units.map((unit) => ({
 					value: unit.id,
-					label: Unit.getLabel(unit),
+					label: getUnitLabel(unit),
 			  }))
 			: [defaultUnit];
 

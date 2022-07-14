@@ -2,7 +2,8 @@ import { CTable } from '$lib/models/classes/table.class';
 import { toUTCFormat, kwdFormat } from '$lib/utils/common';
 import { derived, type Writable } from 'svelte/store';
 
-type Data = InferQueryOutput<'owner:charts:expenses'>;
+// type Data = InferQueryOutput<'owner:charts:expenses'>;
+type Data = any;
 
 export const expenseTableHeaders = [
 	{ key: 'Date' },

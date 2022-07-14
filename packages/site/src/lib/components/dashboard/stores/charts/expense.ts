@@ -4,14 +4,16 @@ import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
 import { derived, type Writable } from 'svelte/store';
 
-type Data = InferQueryOutput<'owner:charts:expenses'>;
+// type Data = InferQueryOutput<'owner:charts:expenses'>;
+type Data = any;
 type GroupBy = 'ratio' | 'property';
 type ChartData = { total: number; date: Date; group: number | string }[];
 
 const aggregate = (
 	data: Data,
 	groupBy: GroupBy,
-	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	// expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	expenseMeta: any,
 ): ChartData => {
 	console.time('aggregate');
 	const months = getMonths(data);
@@ -48,7 +50,8 @@ const aggregate = (
 const getDatasets = (
 	data: Data,
 	groupBy: GroupBy,
-	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	// expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	expenseMeta: any,
 ) => {
 	console.time('getDatasets');
 	const aggregated = aggregate(data, groupBy, expenseMeta);
@@ -88,7 +91,8 @@ const getDatasets = (
 export const getExpenseChartStore = (
 	expenses: Writable<Data>,
 	groupBy: Writable<GroupBy>,
-	expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	// expenseMeta: InferQueryOutput<'public:expenses:meta'>,
+	expenseMeta: any,
 ) =>
 	derived([expenses, groupBy], ([$expenses, $groupBy]) =>
 		getDatasets($expenses, $groupBy, expenseMeta),

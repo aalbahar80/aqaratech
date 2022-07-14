@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<!-- <script lang="ts" context="module">
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -12,9 +12,9 @@
 		);
 		return { props: { maintenanceOrder } };
 	};
-</script>
+</script> -->
 
-<script lang="ts">
+<!-- <script lang="ts">
 	type MaintenanceOrder = InferQueryOutput<'maintenanceOrders:read'>;
 	export let maintenanceOrder: MaintenanceOrder;
 
@@ -30,9 +30,9 @@
 		],
 		['Description', maintenanceOrder.description ?? '-'],
 	];
-</script>
+</script> -->
 
-<Heading
+<!-- <Heading
 	title="Maintenance Order"
 	id={maintenanceOrder.id}
 	entity="maintenanceOrders"
@@ -46,5 +46,5 @@
 			}}
 		/>
 	</svelte:fragment>
-</Heading>
-<DetailsPane {details} />
+</Heading> -->
+<!-- <DetailsPane {details} /> -->

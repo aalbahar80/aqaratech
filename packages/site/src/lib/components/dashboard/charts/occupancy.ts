@@ -2,7 +2,8 @@ import { Chart } from 'chart.js/dist/chart.esm';
 
 export function occupancyChart(
 	node: HTMLCanvasElement,
-	data: InferQueryOutput<'owner:charts:occupancy'>,
+	// data: InferQueryOutput<'owner:charts:occupancy'>,
+	data: any,
 ) {
 	const chart = new Chart(node, {
 		type: 'line',
@@ -63,7 +64,7 @@ export function occupancyChart(
 	});
 
 	return {
-		update(newData: InferQueryOutput<'owner:charts:occupancy'>) {
+		update(newData: any) {
 			if (chart.data.datasets[0] && chart.data.datasets[1]) {
 				chart.data.datasets[0].data = newData;
 				chart.data.datasets[1].data = newData;

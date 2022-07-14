@@ -6,8 +6,10 @@ import type Chart from 'chart.js/dist/chart.esm';
 import * as R from 'remeda';
 import { derived, type Writable } from 'svelte/store';
 
-type Income = InferQueryOutput<'owner:charts:income'>;
-type Expense = InferQueryOutput<'owner:charts:expenses'>;
+// type Income = InferQueryOutput<'owner:charts:income'>;
+// type Expense = InferQueryOutput<'owner:charts:expenses'>;
+type Income = any;
+type Expense = any;
 
 // const getClosestStartOfMonth = (date: Date) => {
 // 	const prevMonth = subMonths(date, 1);

@@ -4,7 +4,8 @@ import { getMonths } from '$lib/utils/group';
 import { closestTo, isSameDay } from 'date-fns';
 import { derived, type Writable } from 'svelte/store';
 
-type Data = InferQueryOutput<'owner:charts:income'>;
+// type Data = InferQueryOutput<'owner:charts:income'>;
+type Data = any;
 type GroupBy = 'ratio' | 'property';
 type Bucket = ChartData;
 
