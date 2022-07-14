@@ -39,11 +39,11 @@ services:
       - /usr/src/app/node_modules
     restart: unless-stopped
 
-  # redis:
-  #   container_name: redis
-  #   image: redis:latest
-  #   networks:
-  #     - aq-network
+  redis:
+    container_name: redis
+    image: redis:latest
+    networks:
+      - aq-network
 
   postgres:
     container_name: postgres
