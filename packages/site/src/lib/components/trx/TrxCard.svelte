@@ -3,21 +3,11 @@
 	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
+	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	interface Transaction {
-		id: string;
-		amount: number;
-		postAt: Date;
-		dueAt: Date | null;
-		paidAt: Date | null;
-		isPaid: boolean;
-		memo: string | null;
-		mfPaymentId: string | null;
-	}
-
-	export let trx: Transaction;
+	export let trx: LeaseInvoiceDto;
 
 	const badge = getInvoiceBadge(trx);
 </script>

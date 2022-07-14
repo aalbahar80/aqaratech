@@ -1,11 +1,12 @@
 <script lang="ts">
 	import TrxCard from '$lib/components/trx/TrxCard.svelte';
+	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { FolderAdd } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	export let trxs: InferQueryOutput<'tenant:leases:list'>[number]['transactions'];
+	export let trxs: LeaseInvoiceDto[];
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">

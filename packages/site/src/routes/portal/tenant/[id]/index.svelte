@@ -2,29 +2,39 @@
 	import Select from '$lib/components/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { Load } from './__types/index';
+	import type { LoadEvent } from '@sveltejs/kit';
+	import type { LP } from 'src/types/load-props';
 
-	export const load: Load = async ({ params, fetch }) => {
-		const { id } = params;
-		const leases = await trpc(fetch).query('tenant:leases:list', id);
-		return { props: { leases } };
+	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
+		const [leases, invoices] = await Promise.all([
+			stuff.api!.tenants.findLeases({ id: params.id, take: 50 }),
+			stuff.api!.tenants.findInvoices({ id: params.id, take: 1000 }),
+		]);
+
+		return { props: { leases, invoices } };
 	};
 </script>
 
 <script lang="ts">
-	export let leases: InferQueryOutput<'tenant:leases:list'>;
+	type Prop = LP<typeof load>;
+	export let leases: Prop['leases'];
+	export let invoices: Prop['invoices'];
 
-	const options = leases.map((lease, idx) => ({
+	const options = leases.results.map((lease, idx) => ({
 		value: lease.id,
-		label: `Lease #${leases.length - idx}: ${toUTCFormat(
+		label: `Lease #${leases.results.length - idx}: ${toUTCFormat(
 			lease.start,
 		)} - ${toUTCFormat(lease.end)}`,
 	}));
 
 	let selected = options[0]?.value;
-	$: trxs = leases.find((lease) => lease.id === selected)?.transactions ?? [];
+	$: trxs = invoices.results.filter((invoice) => invoice.leaseId === selected);
 </script>
 
 <TrxList {trxs}>
-	<Select disabled={leases.length < 2} {options} bind:current={selected} />
+	<Select
+		disabled={leases.results.length < 2}
+		{options}
+		bind:current={selected}
+	/>
 </TrxList>
