@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TenantDto'
+              $ref: '#/components/schemas/CreateTenantDto'
       responses:
         '201':
           description: ''
@@ -1776,6 +1776,56 @@ components:
             profile: to get name, nickname, and picture
             email: to get email and email_verified
   schemas:
+    CreateTenantDto:
+      type: object
+      properties:
+        organizationId:
+          type: string
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        shortName:
+          type: string
+          nullable: true
+          default: null
+        civilid:
+          type: string
+          nullable: true
+          default: null
+        phone:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+          nullable: true
+          default: null
+        dob:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+        passportNum:
+          type: string
+          nullable: true
+          default: null
+        nationality:
+          type: string
+          nullable: true
+          default: null
+        residencyNum:
+          type: string
+          nullable: true
+          default: null
+        residencyEnd:
+          format: date-time
+          type: string
+          nullable: true
+          default: null
+      required:
+        - organizationId
+        - fullName
     TenantDto:
       type: object
       properties:

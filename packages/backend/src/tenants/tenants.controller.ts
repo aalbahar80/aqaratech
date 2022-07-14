@@ -33,6 +33,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import {
+  CreateTenantDto,
   TenantDto,
   TenantOneDto,
   UpdateTenantDto,
@@ -56,7 +57,7 @@ export class TenantsController {
   @ApiCreatedResponse({ type: TenantDto })
   create(
     @User() user: IUser,
-    @Body() createTenantDto: TenantDto,
+    @Body() createTenantDto: CreateTenantDto,
   ): Promise<TenantDto> {
     return this.tenantsService.create({ createTenantDto, user });
   }

@@ -7,7 +7,11 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
-import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
+import {
+  CreateTenantDto,
+  TenantDto,
+  UpdateTenantDto,
+} from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
 export class TenantsService {
@@ -17,7 +21,7 @@ export class TenantsService {
     createTenantDto,
     user,
   }: {
-    createTenantDto: TenantDto;
+    createTenantDto: CreateTenantDto;
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
