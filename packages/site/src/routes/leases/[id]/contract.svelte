@@ -1,19 +1,26 @@
 <script lang="ts" context="module">
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
-	import type { Props } from '$lib/models/types/Props.type';
 	import { getAddress } from '$lib/utils/common';
 	import { inWords } from '$lib/utils/currency';
 	import type { LoadEvent } from '@sveltejs/kit';
+	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ params, fetch }: LoadEvent<{ id: string }>) => {
-		const lease = await trpc(fetch).query('leases:read', params.id);
-		return { props: { lease } };
+	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
+		const lease = await stuff.api!.leases.findOne({ id: params.id });
+
+		const [tenant, unit] = await Promise.all([
+			stuff.api!.tenants.findOne({ id: lease.tenantId }),
+			stuff.api!.units.findOne({ id: lease.unitId }),
+		]);
+		return { props: { lease, tenant, unit } };
 	};
 </script>
 
 <script lang="ts">
-	type Lease = Props<typeof load>['lease'];
-	export let lease: Lease;
+	type Prop = LP<typeof load>;
+	export let lease: Prop['lease'];
+	export let tenant: Prop['tenant'];
+	export let unit: Prop['unit'];
 
 	const arabicLabels: Record<string, string> = {
 		name: 'الطرف الثاني',
@@ -28,22 +35,22 @@
 
 	const fillable = {
 		contractDate: new Date().toLocaleDateString(),
-		name: lease.tenant.fullName,
-		civilid: lease.tenant.civilid,
-		phone: lease.tenant.phone,
+		name: tenant.fullName,
+		civilid: tenant.civilid,
+		phone: tenant.phone,
 		tenantAddress: '',
-		nationality: lease.tenant.nationality,
-		passport: lease.tenant.passportNum,
-		residency: lease.tenant.residencyNum,
-		residencyEnd: lease.tenant.residencyEnd,
+		nationality: tenant.nationality,
+		passport: tenant.passportNum,
+		residency: tenant.residencyNum,
+		residencyEnd: tenant.residencyEnd,
 		rentNumber: lease.monthlyRent.toLocaleString('en-KW', {
 			minimumFractionDigits: 3,
 		}),
 		rentWords: inWords(lease.monthlyRent),
 		start: lease.start.toLocaleDateString(),
-		unitAddress: getAddress(lease.unit.property),
-		unitNumber: lease.unit.unitNumber,
-		unitType: lease.unit.type,
+		unitAddress: getAddress(unit.breadcrumbs?.property.label),
+		unitNumber: unit.unitNumber,
+		unitType: unit.type,
 		purpose: lease.license,
 	};
 </script>
