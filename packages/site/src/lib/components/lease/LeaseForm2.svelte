@@ -153,15 +153,17 @@
 		new Field('end', {
 			type: 'date',
 			required: true,
-			value: toDateInput(data?.start),
+			value: toDateInput(data?.end),
 		}),
 		new Field('notify', {
 			type: 'checkbox',
-			value: data?.notify,
+			value: data?.notify || true,
+			autoInit: true,
 		}),
 		new Field('deactivated', {
 			type: 'checkbox',
-			value: data?.deactivated,
+			value: data?.deactivated || false,
+			autoInit: true,
 		}),
 	];
 </script>
