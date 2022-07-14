@@ -48,9 +48,3 @@ declare module 'chart.js/dist/chart.esm' {
 	export * from 'chart.js/types/index.esm';
 	export default Chart;
 }
-
-declare module 'svelte-select' {
-	import type { SelectProps } from 'svelte-select/src/index.d';
-	import type { SvelteComponentTyped } from 'svelte';
-	export default class SvelteSelect extends SvelteComponentTyped<SelectProps> {}
-}
