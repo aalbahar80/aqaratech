@@ -2,18 +2,19 @@ import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import { strToDate } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
-const baseSchema = z.object({
-	id: zodnanoid.optional(),
+export const updateSchema = z.object({
 	monthlyRent: z.number().min(1),
 	start: z.preprocess(strToDate, z.date()),
 	end: z.preprocess(strToDate, z.date()),
-	tenantId: zodnanoid,
-	unitId: zodnanoid,
 	notify: z.boolean(),
 	deactivated: z.boolean(),
 });
 
-export const schema = baseSchema
+export const createSchema = updateSchema
+	.extend({
+		tenantId: zodnanoid,
+		unitId: zodnanoid,
+	})
 	.refine((val) => val.start < val.end, {
 		path: ['start'],
 		message: 'Start date must be before end date',
@@ -32,32 +33,32 @@ export const scheduleSchema = z.array(
 	}),
 );
 
-export const leaseFormSchema = baseSchema
-	.extend({
-		schedule: scheduleSchema,
-	})
-	.refine((val) => val.start < val.end, {
-		path: ['start'],
-		message: 'Start date must be before end date',
-	})
-	.refine((val) => val.start < val.end, {
-		path: ['end'],
-		message: 'End date must be after start date',
-	})
-	.superRefine((val, ctx) => {
-		val.schedule.map((item, idx) => {
-			if (item.postAt > val.end) {
-				ctx.addIssue({
-					code: z.ZodIssueCode.invalid_date,
-					path: ['schedule', idx, 'postAt'],
-					message: 'Post date must be before end date',
-				});
-			} else if (item.postAt < val.start) {
-				ctx.addIssue({
-					code: z.ZodIssueCode.invalid_date,
-					path: ['schedule', idx, 'postAt'],
-					message: 'Post date must be after start date',
-				});
-			}
-		});
-	});
+// export const leaseFormSchema = baseSchema
+// 	.extend({
+// 		schedule: scheduleSchema,
+// 	})
+// 	.refine((val) => val.start < val.end, {
+// 		path: ['start'],
+// 		message: 'Start date must be before end date',
+// 	})
+// 	.refine((val) => val.start < val.end, {
+// 		path: ['end'],
+// 		message: 'End date must be after start date',
+// 	})
+// 	.superRefine((val, ctx) => {
+// 		val.schedule.map((item, idx) => {
+// 			if (item.postAt > val.end) {
+// 				ctx.addIssue({
+// 					code: z.ZodIssueCode.invalid_date,
+// 					path: ['schedule', idx, 'postAt'],
+// 					message: 'Post date must be before end date',
+// 				});
+// 			} else if (item.postAt < val.start) {
+// 				ctx.addIssue({
+// 					code: z.ZodIssueCode.invalid_date,
+// 					path: ['schedule', idx, 'postAt'],
+// 					message: 'Post date must be after start date',
+// 				});
+// 			}
+// 		});
+// 	});

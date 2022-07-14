@@ -11,11 +11,14 @@ export interface PredefinedUnit {
 }
 
 export interface PredefinedExpense {
-	portfolioId: FindIdFromArray | SearchParam;
-	propertyId: FindIdFromArray | SearchParam;
-	unitId: FindIdFromArray | SearchParam;
+	portfolioId: SearchParam;
+	propertyId: SearchParam;
+	unitId: SearchParam;
 }
 
-// export interface PredefinedLease extends PredefinedUnit {
-// 	tenantId: SearchParam;
-// }
+export interface PredefinedLease {
+	portfolioId: SearchParam;
+	propertyId: SearchParam;
+	unitId: SearchParam;
+	tenantId: SearchParam;
+}
