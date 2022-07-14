@@ -5,7 +5,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
-	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
+	import { getAddress } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/unit.schema.js';
 	import type {
 		PaginatedPortfolioDto,
@@ -53,7 +53,6 @@
 						required: true,
 						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
 						combobox: true,
-						disabled: formType === 'update',
 						options:
 							formType === 'create'
 								? portfolios!.results.map((portfolio) => ({
@@ -72,7 +71,6 @@
 						required: true,
 						value: data?.propertyId || predefined?.propertyId,
 						combobox: true,
-						disabled: formType === 'update',
 						autoInit: true,
 						options:
 							formType === 'create'

@@ -60,7 +60,6 @@
 						required: true,
 						value: data?.portfolioId || predefined?.portfolioId,
 						combobox: true,
-						disabled: formType === 'update',
 						autoInit: true,
 						options:
 							formType === 'create'
@@ -80,7 +79,6 @@
 						required: true,
 						value: data?.propertyId || predefined?.propertyId,
 						combobox: true,
-						disabled: formType === 'update',
 						autoInit: true,
 						options:
 							formType === 'create'
@@ -101,7 +99,6 @@
 						required: true,
 						value: data?.unitId || predefined?.unitId,
 						combobox: true,
-						disabled: formType === 'update',
 						autoInit: true,
 						options:
 							formType === 'create'

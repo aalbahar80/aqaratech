@@ -49,7 +49,6 @@
 						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
 						autoInit: true,
 						combobox: true,
-						disabled: formType === 'update',
 						options:
 							formType === 'create'
 								? portfolios!.results.map((portfolio) => ({
