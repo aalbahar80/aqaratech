@@ -10,6 +10,7 @@
 	 * index 0: SelectField(portfolioId)
 	 * index 1?: SelectField(propertyId)
 	 * index 2?: SelectField(unitId)
+	 * index 3?: SelectField(tenantId)
 	 * ```
 	 */
 	export let fields: SelectField<RelOption>[];
@@ -38,6 +39,18 @@
 	let propertySelector: Combobox | undefined;
 	let unitSelector: Combobox | undefined;
 </script>
+
+<!-- Tenant -->
+{#if fields[3] && fields[3].name === 'tenantId'}
+	<Combobox
+		options={fields[3].options}
+		initialValue={fields[3].value}
+		disabled={fields[3].disabled}
+		on:select={(e) => {
+			dispatch('select', { name: 'tenantId', value: e.detail.value });
+		}}
+	/>
+{/if}
 
 <!-- Portfolio -->
 {#if fields[0] && fields[0].name === 'portfolioId'}
