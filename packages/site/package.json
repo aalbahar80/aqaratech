@@ -38,8 +38,6 @@
     "@tailwindcss/forms": "0.5.2",
     "@tailwindcss/typography": "0.5.3",
     "@testing-library/svelte": "3.1.3",
-    "@trpc/client": "9.24.0",
-    "@trpc/server": "9.24.0",
     "@types/cookie": "0.5.1",
     "@types/jsonwebtoken": "8.5.8",
     "@types/uuid": "8.3.4",
