@@ -18,7 +18,7 @@ const getOrigin = (localhostAllowed = true): string => {
 		return `https://${process.env.RENDER_EXTERNAL_HOSTNAME}`;
 	} else if (process.env.AUTH0_CALLBACK_URL) {
 		return `https://${process.env.AUTH0_CALLBACK_URL}`;
-	} else if (process.env.AWS_DEFAULT_REGION && process.env.VITE_SITE_URL) {
+	} else if (process.env.VITE_SITE_URL) {
 		return process.env.VITE_SITE_URL;
 	} else if (!localhostAllowed) {
 		return 'http://127.0.0.1:3000';

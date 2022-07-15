@@ -115,14 +115,12 @@ export const handleError: HandleError = async ({ error, event }) => {
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
-	// export const etternalFetch: ExternalFetch = async (request) => {
 	// const basePath = 'https://localhost/api';
-	const basePath = 'https://localhost/api/';
-	// const newPath = 'http://backend:3002';
-	const newPath = 'http://backend:3002/';
-	if (request.url.startsWith(basePath)) {
-		// if (request.url.startsWith('https://localhost/api')) {
-		// clone the original request, but change the URL
+	// const newPath = 'http://backend:3002/';
+	const basePath = import.meta.env.VITE_API_URL;
+	const newPath = import.meta.env.VITE_API_URL_LOCAL;
+
+	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);
 	}
 

@@ -22,10 +22,6 @@ const config = {
 	},
 	kit: {
 		adapter: process.env.VERCEL ? adapter() : adapterNode(),
-		// paths: {
-		// 	base: '/site/site',
-		// },
-		trailingSlash: 'ignore',
 		vite: {
 			envDir: process.env.RENDER ? resolve(__dirname, '../..') : undefined,
 			// delete .svelte-kit folder b4 testing

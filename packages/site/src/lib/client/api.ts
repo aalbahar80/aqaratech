@@ -22,7 +22,9 @@ export const api = ({
 	const headers = { Authorization: `Bearer ${token}` };
 
 	// const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';
-	const basePath = 'https://localhost/api';
+	const basePath = import.meta.env.VITE_API_URL;
+	// const basePath = 'http://localhost:3002';
+	// const basePath = 'https://localhost/api';
 	// const basePath = 'https://localhost/api/';
 
 	const config = new Configuration({
