@@ -16,25 +16,15 @@ services:
       - aq-network
 
   site:
-    container_name: "hrm_site_${NODE_ENV}"
-    image: "hrm_site_${NODE_ENV}"
-    environment:
-      - NODE_ENV:${NODE_ENV}
     build:
       context: .
-      target: "${NODE_ENV}"
       dockerfile: ./Dockerfile.site
-    env_file:
-      - .env
     ports:
       - 3000:3000
     depends_on:
       - backend
     networks:
       - aq-network
-    volumes:
-      - ./app:/usr/src/app
-      - /usr/src/app/node_modules
     restart: unless-stopped
 
   backend:
@@ -69,7 +59,7 @@ services:
     ports:
       - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
   pgadmin:
     links:
@@ -77,7 +67,7 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4
     volumes:
-      - ./pgdata/pgadmin:/root/.pgadmin
+      - postgres:/root/.pgadmin
     env_file:
       - .env
     networks:
@@ -91,3 +81,4 @@ networks:
 volumes:
   caddy_data:
   caddy_config:
+  postgres:
