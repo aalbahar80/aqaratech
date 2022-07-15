@@ -21,3 +21,11 @@ localhost {
 
   respond "Fallback. You made a request to path:{path} port:{hostport}"
 }
+
+pgadmin.localhost, pgadmin.aqar.house {
+  reverse_proxy pgadmin:80 {
+    header_up Host {upstream_hostport}
+    header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    header_up X-Real-IP {remote}
+  }
+}
