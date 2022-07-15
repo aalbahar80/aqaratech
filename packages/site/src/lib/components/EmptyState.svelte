@@ -7,12 +7,7 @@
 
 	const hideActions = !$session.user?.role.isAdmin;
 	export let entity: EntityTitle;
-	export let predefined: Map<string, any> | false | undefined = undefined;
-
-	const formBaseUrl = `/${entityNameMap[entity].urlName}/new`;
-	$: href = predefined
-		? `${formBaseUrl}?${new URLSearchParams([...predefined])}`
-		: formBaseUrl;
+	export let formUrl: string;
 </script>
 
 <div class="py-8 text-center sm:py-16">
@@ -32,7 +27,7 @@
 		</p>
 		<div class="mt-6">
 			<a
-				{href}
+				href={formUrl}
 				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 				sveltekit:prefetch
 			>

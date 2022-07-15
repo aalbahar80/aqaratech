@@ -6,14 +6,9 @@
 
 	export let entityTitle: EntityTitle;
 	export let count: number;
-	export let predefined: Map<string, any> | false | undefined = undefined;
+	export let formUrl: string;
 
 	const hideActions = !$session.user?.role.isAdmin;
-
-	const formBaseUrl = `/${entityNameMap[entityTitle].urlName}/new`;
-	$: href = predefined
-		? `${formBaseUrl}?${new URLSearchParams([...predefined])}`
-		: formBaseUrl;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -32,7 +27,7 @@
 				{#if !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
 						<a
-							{href}
+							href={formUrl}
 							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							sveltekit:prefetch
 						>
@@ -47,7 +42,7 @@
 			<slot />
 		</ul>
 	{:else}
-		<EmptyState entity={entityTitle} {predefined} />
+		<EmptyState entity={entityTitle} {formUrl} />
 	{/if}
 </section>
 

@@ -60,7 +60,7 @@ export class Form {
 	constructor(public urlName: EntityTitle, public id: string) {
 		// super(urlName);
 		this.editUrl = `/${this.urlName}/${this.id}/edit`;
-		this.createUrl = `/new/${this.urlName}`;
+		this.createUrl = `/${this.urlName}/new`;
 	}
 
 	getUrl(type: 'new' | 'edit') {

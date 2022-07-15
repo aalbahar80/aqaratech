@@ -3,21 +3,25 @@
 	import PropertyCard from '$components/property/PropertyCard.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
+	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedPropertyDto } from '@self/sdk';
 
 	export let properties: PaginatedPropertyDto;
 
-	const predefined =
-		$page.url.pathname.startsWith('/portfolios') &&
-		new Map<string, any>([
-			['portfolioId', $page.url.pathname.split('/').pop()],
-		]);
+	const formUrl = create({
+		entity: 'properties',
+		predefined:
+			$page.url.pathname.startsWith('/portfolios') &&
+			new Map<string, any>([
+				['portfolioId', $page.url.pathname.split('/').pop()],
+			]),
+	});
 </script>
 
 <StackedList
 	entityTitle="properties"
 	count={properties.results.length}
-	{predefined}
+	{formUrl}
 >
 	{#each properties.results as property, idx (property.id)}
 		<li>

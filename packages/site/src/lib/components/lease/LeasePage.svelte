@@ -7,6 +7,7 @@
 	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
+	import { create } from '$lib/utils/route-helpers';
 	import type { LeaseDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
@@ -48,7 +49,10 @@
 			icon={Refresh}
 			text="Renew"
 			as="a"
-			href={`/leases/new?leaseId=${lease.id}&renew=true`}
+			href={create({
+				entity: 'leases',
+				predefined: new Map([['leaseId', lease.id]]),
+			})}
 			class="w-full sm:w-auto"
 			prefetch
 		/>

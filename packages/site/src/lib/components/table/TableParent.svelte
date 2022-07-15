@@ -4,6 +4,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedDto } from '@self/sdk';
 	import Table from './Table.svelte';
 
@@ -14,6 +15,7 @@
 
 	export let data: Data;
 	$: entity = $page.params.entity as EntityTitle;
+	$: formUrl = create({ entity });
 
 	// animation
 	let modifier: number = 1;
@@ -44,18 +46,12 @@
 </script>
 
 <div class="mx-auto flex max-w-7xl flex-col p-4 sm:p-6 lg:p-8">
-	<a
-		href={`${$page.url.pathname}/new`}
-		class="table__add-button"
-		sveltekit:prefetch
-	>
-		New
-	</a>
+	<a href={formUrl} class="table__add-button" sveltekit:prefetch> New </a>
 	{#if rows.length}
 		<Table {rows} {modifier} />
 		<AnchorPagination pagination={data.pagination} />
 	{:else}
-		<EmptyState {entity} />
+		<EmptyState {entity} {formUrl} />
 	{/if}
 </div>
 

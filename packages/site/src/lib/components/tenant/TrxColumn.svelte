@@ -8,6 +8,7 @@
 	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
+	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 	import {
 		Check,
@@ -26,6 +27,10 @@
 	export let leaseId: string | undefined = undefined;
 
 	const hideActions = !$session.user?.role.isAdmin;
+	const formUrl = create({
+		entity: 'leaseInvoices',
+		predefined: new Map([['leaseId', leaseId]]),
+	});
 
 	const togglePaid = async (id: string, isPaid: boolean) => {
 		try {
@@ -87,9 +92,7 @@
 				</div>
 				{#if leaseId && !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
-						<a href={`/invoices/new?leaseId=${leaseId}`}>
-							Create new invoice
-						</a>
+						<a href={formUrl}> Create new invoice </a>
 					</div>
 				{/if}
 			</div>
@@ -249,10 +252,7 @@
 
 		<Pagination pagination={invoices.pagination} />
 	{:else}
-		<EmptyState
-			entity="leaseInvoices"
-			predefined={new Map([['leaseId', leaseId]])}
-		/>
+		<EmptyState entity="leaseInvoices" {formUrl} />
 	{/if}
 </section>
 
