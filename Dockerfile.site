@@ -1,18 +1,11 @@
 FROM node:16.9
 
+# use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
 # https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
 RUN apt-get update && \
   apt-get install -y openjdk-11-jre-headless && \
   apt-get clean;
-
-# Install Caddy
-# use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
-RUN apt install -y debian-keyring debian-archive-keyring apt-transport-https && \
-  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && \
-  curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
-  apt update && \
-  apt install caddy;
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
@@ -40,4 +33,11 @@ EXPOSE 3000
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-CMD ["sh", "-c", "caddy start && PORT=3000 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
+# CMD ["sh", "-c", "caddy start && PORT=3000 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
+# CMD ["PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
+# CMD ["pnpm", "run", "dev", "--host"]
+# CMD ["pnpm", "run", "preview"]
+
+# make docker sleep infinitely
+# CMD ["sleep", "9999999999999"]
+CMD ["sh", "-c", "PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]

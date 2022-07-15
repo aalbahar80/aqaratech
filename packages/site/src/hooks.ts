@@ -3,7 +3,12 @@ import { environment } from '$environment';
 import { getUser } from '$lib/server/utils/getAuthz';
 import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
-import type { GetSession, Handle, HandleError } from '@sveltejs/kit';
+import type {
+	ExternalFetch,
+	GetSession,
+	Handle,
+	HandleError,
+} from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 
 if (
@@ -107,4 +112,19 @@ export const handleError: HandleError = async ({ error, event }) => {
 			username: user?.fullName || '',
 		},
 	});
+};
+
+export const externalFetch: ExternalFetch = async (request) => {
+	// export const etternalFetch: ExternalFetch = async (request) => {
+	// const basePath = 'https://localhost/api';
+	const basePath = 'https://localhost/api/';
+	// const newPath = 'http://backend:3002';
+	const newPath = 'http://backend:3002/';
+	if (request.url.startsWith(basePath)) {
+		// if (request.url.startsWith('https://localhost/api')) {
+		// clone the original request, but change the URL
+		request = new Request(request.url.replace(basePath, newPath), request);
+	}
+
+	return fetch(request);
 };

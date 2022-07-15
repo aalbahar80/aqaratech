@@ -7,14 +7,25 @@ localhost
 
 respond /hello/* "hello world"
 
-handle /site/* {
-  reverse_proxy site:3000
-}
-# handle /docs/* {
-#   reverse_proxy site:3001
-# }
+reverse_proxy site:3000
+
 handle_path /api/* {
-  reverse_proxy backend:3002
+  reverse_proxy backend:3002 {
+    header_up Host {upstream_hostport}
+    header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    # header_up X-Real-IP {remote}
+  }
 }
 
-respond "fallback. You made a request to path:{path}"
+handle /* {
+  reverse_proxy site:3000 {
+    header_up Host {upstream_hostport}
+    header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    # header_down Host {upstream_hostport}
+    # header_down Host {downstream_hostport}
+  }
+}
+# reverse_proxy site:3000 {
+#   header_up Host {upstream_hostport}
+# }
+respond "fallback. You made a request to path:{path} port:{hostport} upstreamhost:{upstream_hostport} downstreamhost:{downstream_hostport}"

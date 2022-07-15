@@ -12,6 +12,8 @@ services:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    links:
+      - site:site
     networks:
       - aq-network
 
@@ -23,6 +25,8 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    volumes:
+      - $PWD/packages/site:/app/packages/site
     networks:
       - aq-network
     restart: unless-stopped
