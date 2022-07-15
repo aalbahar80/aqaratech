@@ -48,7 +48,7 @@
 			icon={Refresh}
 			text="Renew"
 			as="a"
-			href={`/new/leases?leaseId=${lease.id}&renew=true`}
+			href={`/leases/new?leaseId=${lease.id}&renew=true`}
 			class="w-full sm:w-auto"
 			prefetch
 		/>

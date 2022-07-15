@@ -11,10 +11,10 @@
 	export let leases: PaginatedLeaseDto;
 	export let showIndex = false;
 
-	const createHref = getCreateHref($page.url.pathname);
+	const predefined = getCreateHref($page.url.pathname);
 </script>
 
-<StackedList entityTitle="leases" count={leases.results.length} {createHref}>
+<StackedList entityTitle="leases" count={leases.results.length} {predefined}>
 	{#each leases.results as lease, index (lease.id)}
 		<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 			<LeaseCard

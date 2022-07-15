@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import type { PaginatedDto } from '@self/sdk';
 	import Table from './Table.svelte';
@@ -15,7 +14,6 @@
 
 	export let data: Data;
 	$: entity = $page.params.entity as EntityTitle;
-	$: createHref = `/new/${entityNameMap[entity].plural}`;
 
 	// animation
 	let modifier: number = 1;
@@ -57,7 +55,7 @@
 		<Table {rows} {modifier} />
 		<AnchorPagination pagination={data.pagination} />
 	{:else}
-		<EmptyState {entity} {createHref} />
+		<EmptyState {entity} />
 	{/if}
 </div>
 

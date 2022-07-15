@@ -7,15 +7,17 @@
 
 	export let properties: PaginatedPropertyDto;
 
-	const createHref = $page.url.pathname.startsWith('/portfolios')
-		? `/new/properties?portfolioId=${$page.url.pathname.split('/').pop()}`
-		: '/new/properties';
+	const predefined =
+		$page.url.pathname.startsWith('/portfolios') &&
+		new Map<string, any>([
+			['portfolioId', $page.url.pathname.split('/').pop()],
+		]);
 </script>
 
 <StackedList
 	entityTitle="properties"
 	count={properties.results.length}
-	{createHref}
+	{predefined}
 >
 	{#each properties.results as property, idx (property.id)}
 		<li>

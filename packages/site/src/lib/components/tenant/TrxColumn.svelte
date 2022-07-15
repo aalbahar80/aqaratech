@@ -87,7 +87,7 @@
 				</div>
 				{#if leaseId && !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
-						<a href={`/new/invoices?leaseId=${leaseId}`}>
+						<a href={`/invoices/new?leaseId=${leaseId}`}>
 							Create new invoice
 						</a>
 					</div>
@@ -249,10 +249,9 @@
 
 		<Pagination pagination={invoices.pagination} />
 	{:else}
-		<!-- TODO change all /new urls -->
 		<EmptyState
 			entity="leaseInvoices"
-			createHref={`/new/transactions?leaseId=${leaseId}`}
+			predefined={new Map([['leaseId', leaseId]])}
 		/>
 	{/if}
 </section>

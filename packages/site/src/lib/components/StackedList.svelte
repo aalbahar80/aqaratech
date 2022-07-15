@@ -6,10 +6,14 @@
 
 	export let entityTitle: EntityTitle;
 	export let count: number;
-	export let createHref: string | undefined = undefined;
+	export let predefined: Map<string, any> | false | undefined = undefined;
 
 	const hideActions = !$session.user?.role.isAdmin;
-	$: href = createHref ?? `/new/${entityNameMap[entityTitle].urlName}`;
+
+	const formBaseUrl = `/${entityNameMap[entityTitle].urlName}/new`;
+	$: href = predefined
+		? `${formBaseUrl}?${new URLSearchParams([...predefined])}`
+		: formBaseUrl;
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -43,7 +47,7 @@
 			<slot />
 		</ul>
 	{:else}
-		<EmptyState entity={entityTitle} createHref={href} />
+		<EmptyState entity={entityTitle} {predefined} />
 	{/if}
 </section>
 
