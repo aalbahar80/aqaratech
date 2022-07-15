@@ -10,4 +10,9 @@ export class AnalyticsController {
   getIncomeByMonth(@Param('portfolioId') portfolioId: string) {
     return this.analyticsService.incomeByMonth(portfolioId);
   }
+
+  @Get('/expensesByMonth/:id')
+  getExpensesByMonth(@Param('portfolioId') portfolioId: string) {
+    return this.analyticsService.expensesByMonth(portfolioId);
+  }
 }

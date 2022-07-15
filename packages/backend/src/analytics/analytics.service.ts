@@ -17,6 +17,15 @@ export class AnalyticsService {
     return this.groupByMonth(leaseInvoices);
   }
 
+  async expensesByMonth(portfolioId: string) {
+    const expenses = await this.prisma.expense.findMany({
+      where: { portfolioId },
+      select: { amount: true, postAt: true },
+    });
+
+    return this.groupByMonth(expenses);
+  }
+
   groupByMonth(
     records: { amount: number; postAt: Date }[],
   ): { monthYear: string; amount: number }[] {

@@ -1759,6 +1759,18 @@ paths:
       responses:
         '200':
           description: ''
+  /analytics/expensesByMonth/{id}:
+    get:
+      operationId: getExpensesByMonth
+      parameters:
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
 info:
   title: Aqaratech API
   description: The Aqratech API description
