@@ -28,6 +28,7 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { UsersModule } from './users/users.module';
     SearchModule,
     RolesModule,
     OrganizationsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [

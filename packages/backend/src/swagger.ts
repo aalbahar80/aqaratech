@@ -1,3 +1,4 @@
+import { AnalyticsModule } from 'src/analytics/analytics.module';
 import { ExpensesModule } from 'src/expenses/expenses.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
@@ -68,6 +69,7 @@ export const setupSwagger = (app: INestApplication) => {
       SearchModule,
       RolesModule,
       OrganizationsModule,
+      AnalyticsModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
     ignoreGlobalPrefix: true,

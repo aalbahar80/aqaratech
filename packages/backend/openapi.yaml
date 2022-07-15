@@ -1747,6 +1747,18 @@ paths:
                         items:
                           $ref: '#/components/schemas/RoleDto'
       tags: *ref_10
+  /analytics/incomeByMonth/{id}:
+    get:
+      operationId: getIncomeByMonth
+      parameters:
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
 info:
   title: Aqaratech API
   description: The Aqratech API description
