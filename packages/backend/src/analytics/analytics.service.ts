@@ -14,35 +14,29 @@ export class AnalyticsService {
       select: { amount: true, postAt: true },
     });
 
-    const leaseInvoicesByMonth = leaseInvoices.reduce<Record<string, number>>(
-      (acc, leaseInvoice) => {
-        const date = leaseInvoice.postAt.toISOString().split('T')[0];
-        const month = date.split('-')[1];
-        const year = date.split('-')[0];
-        const monthYear = `${month}-${year}`;
-        if (acc[monthYear]) {
-          acc[monthYear] += leaseInvoice.amount;
-        } else {
-          acc[monthYear] = leaseInvoice.amount;
-        }
-        return acc;
-      },
-      {},
-    );
-
-    const leaseInvoicesByMonthArray = Object.keys(leaseInvoicesByMonth).map(
-      (monthYear) => {
-        return {
-          monthYear,
-          amount: leaseInvoicesByMonth[monthYear],
-        };
-      },
-    );
-
-    return leaseInvoicesByMonthArray;
+    return this.groupByMonth(leaseInvoices);
   }
 
-  // groupByMonth(records: {amount: number, postAt: Date}[]): {monthYear: string, amount: number}[] {
+  groupByMonth(
+    records: { amount: number; postAt: Date }[],
+  ): { monthYear: string; amount: number }[] {
+    const byMonth = records.reduce<Record<string, number>>((acc, record) => {
+      const date = record.postAt.toISOString().split('T')[0];
+      const month = date.split('-')[1];
+      const year = date.split('-')[0];
+      const monthYear = `${month}-${year}`;
+      if (acc[monthYear]) {
+        acc[monthYear] += record.amount;
+      } else {
+        acc[monthYear] = record.amount;
+      }
+      return acc;
+    }, {});
 
-  // }
+    const byMonthArray = Object.keys(byMonth).map((monthYear) => {
+      return { monthYear, amount: byMonth[monthYear] };
+    });
+
+    return byMonthArray;
+  }
 }
