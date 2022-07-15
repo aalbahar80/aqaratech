@@ -2,7 +2,7 @@
   debug
 }
 
-localhost {
+localhost, aqar.house {
   handle_path /api/* {
     reverse_proxy backend:3002 {
       header_up Host {upstream_hostport}
