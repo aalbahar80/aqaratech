@@ -4,33 +4,27 @@ import {
 } from '$lib/components/table/pagination';
 import * as R from 'remeda';
 
-interface TableHeader<T> {
-	key: T;
+export interface TableHeader {
+	key: string;
 	label: string;
 	style?: 'regular' | 'bold1' | 'bold2';
 }
-
-type TableRow<T extends TableHeader<T>[]> = {
-	[key in keyof T[number]['key']]: string;
-} & { id: string };
-
-type TableFooter<T extends TableHeader<T>[]> = {
-	[key in keyof T[number]['key']]?: string;
-};
+type TableRow = Record<string, any> & { id: string };
+type TableFooter = Record<string, any>;
 
 // TODO: dry types
-interface ITable<T extends TableHeader<T>[]> {
-	headers: T;
-	rows: TableRow<T>[];
-	footer: TableFooter<T>;
+interface ITable {
+	headers: TableHeader[];
+	rows: TableRow[];
+	footer: TableFooter;
 }
 
-export class CTable<T extends TableHeader<T>[]> {
-	headers: T;
-	rows: TableRow<T>[];
-	footer: TableFooter<T>;
+export class CTable {
+	headers: TableHeader[];
+	rows: TableRow[];
+	footer: TableFooter;
 	paginated: typeof this.rows[] = [];
-	constructor(data: ITable<T>) {
+	constructor(data: ITable) {
 		this.headers = data.headers;
 		this.rows = data.rows;
 		this.footer = data.footer;

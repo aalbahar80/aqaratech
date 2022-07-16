@@ -5,7 +5,7 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { getColor } from '$lib/config/constants';
-	import { CTable } from '$lib/models/classes/table.class';
+	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -84,30 +84,26 @@
 	});
 	console.log({ tabular }, 'dashboard2.svelte ~ 76');
 	// TABLE STYLE
-	const headers = [
+	const headers: TableHeader[] = [
 		{
-			label: 'Date',
 			key: 'date',
-			type: 'date',
+			label: 'Date',
 			// take any custom style/twind class?
 			style: 'bold1',
 		},
 		{
-			label: 'Income',
 			key: 'income',
-			type: 'number',
+			label: 'Income',
 		},
 		{
-			label: 'Expenses',
 			key: 'expense',
-			type: 'number',
+			label: 'Expenses',
 		},
 		{
-			label: 'Net',
 			key: 'net',
-			type: 'number',
+			label: 'Net',
 		},
-	] as const;
+	];
 	$: footer = {
 		date: 'Total for period',
 		income: income.reduce((acc, i) => acc + i.amount, 0),
@@ -117,8 +113,7 @@
 			expenses.reduce((acc, i) => acc + i.amount, 0),
 	};
 	$: console.log({ footer }, 'dashboard2.svelte ~ 121');
-	// const table: ITable2<typeof headers[number]['key']> = {
-	$: tableData = new CTable<typeof headers>({
+	$: tableData = new CTable({
 		headers,
 		rows: tabular || [],
 		footer,
