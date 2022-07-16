@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import {
   ByMonthDto,
@@ -14,19 +14,15 @@ export class AnalyticsController {
   // TODO abilitycheck
   @ApiOkResponse({ type: ByMonthDto, isArray: true })
   @Get('/incomeByMonth/:id')
-  getIncomeByMonth(
-    @Param('portfolioId') portfolioId: string,
-    @Query() filter: DashboardFilterDto,
-  ): Promise<ByMonthDto[]> {
-    return this.analyticsService.incomeByMonth({ portfolioId, filter });
+  getIncomeByMonth(@Query() filter: DashboardFilterDto): Promise<ByMonthDto[]> {
+    return this.analyticsService.incomeByMonth({ filter });
   }
 
   @ApiOkResponse({ type: ByMonthDto, isArray: true })
   @Get('/expensesByMonth/:id')
   getExpensesByMonth(
-    @Param('portfolioId') portfolioId: string,
     @Query() filter: DashboardFilterDto,
   ): Promise<ByMonthDto[]> {
-    return this.analyticsService.expensesByMonth({ portfolioId, filter });
+    return this.analyticsService.expensesByMonth({ filter });
   }
 }

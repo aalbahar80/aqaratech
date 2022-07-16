@@ -1751,17 +1751,17 @@ paths:
     get:
       operationId: getIncomeByMonth
       parameters:
-        - name: portfolioId
-          required: true
-          in: path
-          schema:
-            type: string
         - name: start
           required: false
           in: query
           schema:
             type: string
         - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
           required: false
           in: query
           schema:
@@ -1791,17 +1791,17 @@ paths:
     get:
       operationId: getExpensesByMonth
       parameters:
-        - name: portfolioId
-          required: true
-          in: path
-          schema:
-            type: string
         - name: start
           required: false
           in: query
           schema:
             type: string
         - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
           required: false
           in: query
           schema:

@@ -12,8 +12,8 @@
 		params,
 		url,
 	}: LoadEvent<{ id: string }>) => {
-		const portfolioId = params.id;
 		const filter = {
+			portfolioId: params.id,
 			propertyId: url.searchParams.get('propertyId') || undefined,
 			unitId: url.searchParams.get('unitId') || undefined,
 			start: url.searchParams.get('start') || undefined,
@@ -24,8 +24,8 @@
 			stuff.api!.properties.findAll(), // filter by portfolioId
 			stuff.api!.units.findAll(), // filter by portfolioId
 
-			stuff.api!.analytics.getIncomeByMonth({ portfolioId, ...filter }),
-			stuff.api!.analytics.getExpensesByMonth({ portfolioId, ...filter }),
+			stuff.api!.analytics.getIncomeByMonth(filter),
+			stuff.api!.analytics.getExpensesByMonth(filter),
 		]);
 
 		return { props: { properties, units, income, expenses } };

@@ -11,6 +11,10 @@ export class ByMonthDto {
 export class DashboardFilterDto {
   @Nanoid()
   @IsOptional()
+  portfolioId?: string;
+
+  @Nanoid()
+  @IsOptional()
   propertyId?: string;
 
   @Nanoid()
