@@ -16,7 +16,6 @@ import {
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -24,6 +23,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
   CreateLeaseInvoiceDto,
   LeaseInvoiceBasicDto,
@@ -54,12 +54,9 @@ export class LeaseInvoicesController {
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findAll(
     @User() user: IUser,
-    @Query() pageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: LeaseInvoiceOptionsDto,
   ): Promise<WithCount<LeaseInvoiceDto>> {
-    return this.leaseInvoicesService.findAll({
-      pageOptionsDto,
-      user,
-    });
+    return this.leaseInvoicesService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')

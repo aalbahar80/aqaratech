@@ -3,12 +3,13 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
+import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
   CreateLeaseInvoiceDto,
   LeaseInvoiceBreadcrumbsDto,
@@ -53,14 +54,19 @@ export class LeaseInvoicesService {
     user,
     where,
   }: {
-    pageOptionsDto: PageOptionsDto;
+    pageOptionsDto: LeaseInvoiceOptionsDto;
     user: IUser;
     where?: Prisma.LeaseWhereInput;
   }): Promise<WithCount<LeaseInvoiceDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take, q, start, end } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
-      AND: [accessibleBy(user.ability).LeaseInvoice, ...(where ? [where] : [])],
+      AND: [
+        accessibleBy(user.ability).LeaseInvoice,
+        this.parseLocationFilter(pageOptionsDto),
+        { postAt: { gte: start, lte: end } },
+        ...(where ? [where] : []),
+      ],
     };
 
     let [results, total] = await Promise.all([
@@ -172,5 +178,23 @@ export class LeaseInvoicesService {
         ...invoice.lease,
       }),
     };
+  }
+
+  parseLocationFilter({
+    filter,
+  }: {
+    filter?: DashboardFilterDto;
+  }): Prisma.LeaseInvoiceWhereInput {
+    let locationFilter: Prisma.LeaseInvoiceWhereInput;
+    if (filter?.unitId) {
+      locationFilter = { lease: { unit: { id: filter.unitId } } };
+    } else if (filter?.propertyId) {
+      locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
+    } else {
+      locationFilter = {
+        lease: { unit: { property: { portfolioId: filter?.portfolioId } } },
+      };
+    }
+    return locationFilter;
   }
 }

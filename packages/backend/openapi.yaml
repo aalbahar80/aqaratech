@@ -446,6 +446,31 @@ paths:
           in: query
           schema:
             type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
