@@ -34,7 +34,7 @@
 									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
 								)}
 							>
-								{header.key}
+								{header.label}
 							</th>
 						{/if}
 					{/each}
