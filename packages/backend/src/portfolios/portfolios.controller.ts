@@ -28,6 +28,8 @@ import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
+import { UnitDto } from 'src/units/dto/unit.dto';
+import { UnitsService } from 'src/units/units.service';
 import {
   CreatePortfolioDto,
   PortfolioDto,
@@ -41,8 +43,9 @@ import { PortfoliosService } from './portfolios.service';
 export class PortfoliosController {
   constructor(
     private readonly portfoliosService: PortfoliosService,
-    private readonly propertiesService: PropertiesService,
     private readonly rolesService: RolesService,
+    private readonly propertiesService: PropertiesService,
+    private unitsService: UnitsService,
   ) {}
 
   @Post()
@@ -91,6 +94,18 @@ export class PortfoliosController {
     return this.portfoliosService.remove({ id });
   }
 
+  @Get(':id/roles')
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @ApiPaginatedResponse(RoleDto)
+  findRoles(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<WithCount<RoleDto>> {
+    const where: Prisma.RoleWhereInput = { portfolioId: id };
+    return this.rolesService.findAll({ user, pageOptionsDto, where });
+  }
+
   @Get(':id/properties')
   @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(PropertyDto)
@@ -103,15 +118,17 @@ export class PortfoliosController {
     return this.propertiesService.findAll({ user, pageOptionsDto, where });
   }
 
-  @Get(':id/roles')
+  @Get(':id/units')
   @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
-  @ApiPaginatedResponse(RoleDto)
-  findRoles(
+  @ApiPaginatedResponse(UnitDto)
+  findUnits(
     @User() user: IUser,
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
-  ): Promise<WithCount<RoleDto>> {
-    const where: Prisma.RoleWhereInput = { portfolioId: id };
-    return this.rolesService.findAll({ user, pageOptionsDto, where });
+  ): Promise<WithCount<UnitDto>> {
+    const where: Prisma.UnitWhereInput = {
+      property: { portfolioId: { equals: id } },
+    };
+    return this.unitsService.findAll({ user, pageOptionsDto, where });
   }
 }

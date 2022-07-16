@@ -883,6 +883,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
       tags: *ref_4
+  /portfolios/{id}/roles:
+    get:
+      operationId: findRoles
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 1000
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_4
   /portfolios/{id}/properties:
     get:
       operationId: findProperties
@@ -945,9 +1007,9 @@ paths:
                         items:
                           $ref: '#/components/schemas/PropertyDto'
       tags: *ref_4
-  /portfolios/{id}/roles:
+  /portfolios/{id}/units:
     get:
-      operationId: findRoles
+      operationId: findUnits
       parameters:
         - name: page
           required: false
@@ -995,17 +1057,17 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedRoleDto
+                title: PaginatedUnitDto
                 required:
                   - results
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfRoleDto
+                  - title: ArrayOfUnitDto
                     properties:
                       results:
                         type: array
                         items:
-                          $ref: '#/components/schemas/RoleDto'
+                          $ref: '#/components/schemas/UnitDto'
       tags: *ref_4
   /properties:
     post:
@@ -2859,85 +2921,6 @@ components:
         - parcel
         - paci
         - cost
-    CreatePropertyDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
-        block:
-          type: string
-          nullable: true
-          default: null
-        avenue:
-          type: string
-          nullable: true
-          default: null
-        street:
-          type: string
-          nullable: true
-          default: null
-        number:
-          type: string
-          nullable: true
-          default: null
-        parcel:
-          type: string
-          nullable: true
-          default: null
-        paci:
-          type: string
-          nullable: true
-          default: null
-        cost:
-          type: number
-          nullable: true
-          default: null
-      required:
-        - portfolioId
-        - area
-    UpdatePropertyDto:
-      type: object
-      properties:
-        area:
-          type: string
-          nullable: true
-          default: null
-          minLength: 1
-          maxLength: 255
-        block:
-          type: string
-          nullable: true
-          default: null
-        avenue:
-          type: string
-          nullable: true
-          default: null
-        street:
-          type: string
-          nullable: true
-          default: null
-        number:
-          type: string
-          nullable: true
-          default: null
-        parcel:
-          type: string
-          nullable: true
-          default: null
-        paci:
-          type: string
-          nullable: true
-          default: null
-        cost:
-          type: number
-          nullable: true
-          default: null
     HateoasDto:
       type: object
       properties:
@@ -3054,6 +3037,85 @@ components:
         - marketRent
         - type
         - usage
+    CreatePropertyDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
+        block:
+          type: string
+          nullable: true
+          default: null
+        avenue:
+          type: string
+          nullable: true
+          default: null
+        street:
+          type: string
+          nullable: true
+          default: null
+        number:
+          type: string
+          nullable: true
+          default: null
+        parcel:
+          type: string
+          nullable: true
+          default: null
+        paci:
+          type: string
+          nullable: true
+          default: null
+        cost:
+          type: number
+          nullable: true
+          default: null
+      required:
+        - portfolioId
+        - area
+    UpdatePropertyDto:
+      type: object
+      properties:
+        area:
+          type: string
+          nullable: true
+          default: null
+          minLength: 1
+          maxLength: 255
+        block:
+          type: string
+          nullable: true
+          default: null
+        avenue:
+          type: string
+          nullable: true
+          default: null
+        street:
+          type: string
+          nullable: true
+          default: null
+        number:
+          type: string
+          nullable: true
+          default: null
+        parcel:
+          type: string
+          nullable: true
+          default: null
+        paci:
+          type: string
+          nullable: true
+          default: null
+        cost:
+          type: number
+          nullable: true
+          default: null
     CreateUnitDto:
       type: object
       properties:

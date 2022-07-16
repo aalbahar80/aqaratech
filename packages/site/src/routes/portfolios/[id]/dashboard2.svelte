@@ -12,8 +12,9 @@
 		params,
 		url,
 	}: LoadEvent<{ id: string }>) => {
+		const portfolioId = params.id;
 		const filter = {
-			portfolioId: params.id,
+			portfolioId,
 			propertyId: url.searchParams.get('propertyId') || undefined,
 			unitId: url.searchParams.get('unitId') || undefined,
 			start: url.searchParams.get('start') || undefined,
@@ -21,8 +22,8 @@
 		};
 
 		const [properties, units, income, expenses] = await Promise.all([
-			stuff.api!.properties.findAll(), // filter by portfolioId
-			stuff.api!.units.findAll(), // filter by portfolioId
+			stuff.api!.portfolios.findProperties({ id: portfolioId }),
+			stuff.api!.portfolios.findUnits({ id: portfolioId }),
 
 			stuff.api!.analytics.getIncomeByMonth(filter),
 			stuff.api!.analytics.getExpensesByMonth(filter),
