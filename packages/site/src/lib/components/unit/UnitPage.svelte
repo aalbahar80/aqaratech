@@ -1,10 +1,11 @@
 <script lang="ts">
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import type { PaginatedLeaseDto, UnitDto } from '@self/sdk';
+	import type { ByMonthDto, PaginatedLeaseDto, UnitDto } from '@self/sdk';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
@@ -12,6 +13,9 @@
 
 	export let unit: UnitDto;
 	export let leases: PaginatedLeaseDto;
+
+	export let income: ByMonthDto[];
+	export let expenses: ByMonthDto[];
 
 	let details: [string, string | null][];
 	$: details = [
@@ -53,3 +57,5 @@
 
 <DetailsPane {details} />
 <LeaseList {leases} showIndex />
+
+<NetIncomeCard {income} {expenses} />
