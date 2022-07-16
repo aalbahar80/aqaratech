@@ -38,6 +38,8 @@
 		{ value: 12, label: 'Last 12 months' },
 		{ value: 0, label: 'Custom' },
 	];
+
+	$: rangeValid = start && end && new Date(start) < new Date(end);
 </script>
 
 <div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
@@ -65,13 +67,13 @@
 			/>
 		</div>
 
-		<!-- class:date-input-invalid={!rangeValid} -->
 		<div class="md:1/2 flex gap-1">
 			<!-- Start -->
 			<input
 				type="date"
 				name="start"
 				class="date-input"
+				class:date-input-invalid={!rangeValid}
 				value={start ? toDateInput(new Date(start)) : ''}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
@@ -83,11 +85,11 @@
 			/>
 
 			<!-- End -->
-			<!-- class:date-input-invalid={!rangeValid} -->
 			<input
 				type="date"
 				name="end"
 				class="date-input"
+				class:date-input-invalid={!rangeValid}
 				value={end ? toDateInput(new Date(end)) : ''}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
