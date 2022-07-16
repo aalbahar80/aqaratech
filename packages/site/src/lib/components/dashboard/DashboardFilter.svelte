@@ -106,11 +106,18 @@
 		<div class="md:w-2/3">
 			<Select
 				current={selectedProperty}
-				options={propertyOptions}
+				options={[{ label: 'All Properties', value: null }, ...propertyOptions]}
 				on:select={(e) => {
 					const url = new URL($page.url);
 					url.searchParams.delete('unitId');
-					url.searchParams.set('propertyId', e.detail.value);
+
+					const id = e.detail.value;
+					if (id) {
+						url.searchParams.set('propertyId', id);
+					} else {
+						url.searchParams.delete('propertyId');
+					}
+
 					goto(url);
 				}}
 			/>
@@ -120,11 +127,18 @@
 		<div class="md:w-1/3">
 			<Select
 				current={selectedUnit}
-				options={unitOptions}
+				options={[{ label: 'All Units', value: null }, ...unitOptions]}
 				disabled={false && !selectedProperty}
 				on:select={async (e) => {
 					const url = new URL($page.url);
-					url.searchParams.set('unitId', e.detail.value);
+
+					const id = e.detail.value;
+					if (id) {
+						url.searchParams.set('unitId', id);
+					} else {
+						url.searchParams.delete('unitId');
+					}
+
 					goto(url);
 				}}
 			/>
