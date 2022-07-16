@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Select from '$lib/components/Select.svelte';
+	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PaginatedPropertyDto, PaginatedUnitDto } from '@self/sdk';
 
@@ -10,6 +11,8 @@
 
 	$: selectedProperty = $page.url.searchParams.get('propertyId');
 	$: selectedUnit = $page.url.searchParams.get('unitId');
+	$: start = $page.url.searchParams.get('start');
+	$: end = $page.url.searchParams.get('end');
 
 	const propertyOptions = properties.results.map((property) => ({
 		label: getAddress(property),
@@ -39,9 +42,9 @@
 
 <div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
 	Date Filters
-	<!-- <div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
+	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 		Range
-		<div class="md:w-1/2">
+		<!-- <div class="md:w-1/2">
 			rethink bind
 			<Select
 				bind:current={selectedRange}
@@ -55,49 +58,42 @@
 					}
 				}}
 			/>
-		</div>
+		</div> -->
 
+		<!-- class:date-input-invalid={!rangeValid} -->
 		<div class="md:1/2 flex gap-1">
 			Start
 			<input
 				type="date"
 				name="start"
 				class="date-input"
-				class:date-input-invalid={!rangeValid}
-				value={startInput}
+				value={start ? toDateInput(new Date(start)) : ''}
 				on:change={(e) => {
-					const newDate = e.currentTarget.valueAsNumber;
-					if (newDate) {
-						selectedRange = 0;
-						handleFilter({
-							...filter,
-							start: newDate,
-						});
-					}
+					const baseDate = e.currentTarget.value;
+					const date = `${baseDate}T00:00:00.000Z`;
+					const url = new URL($page.url);
+					url.searchParams.set('start', date);
+					goto(url);
 				}}
 			/>
 
 			End
+			<!-- class:date-input-invalid={!rangeValid} -->
 			<input
 				type="date"
 				name="end"
 				class="date-input"
-				class:date-input-invalid={!rangeValid}
-				value={endInput}
+				value={end ? toDateInput(new Date(end)) : ''}
 				on:change={(e) => {
-					const newDate = e.currentTarget.valueAsNumber;
-					console.log({ newDate }, 'dashboard.svelte ~ 209');
-					if (newDate) {
-						selectedRange = 0;
-						handleFilter({
-							...filter,
-							end: newDate,
-						});
-					}
+					const baseDate = e.currentTarget.value;
+					const date = `${baseDate}T00:00:00.000Z`;
+					const url = new URL($page.url);
+					url.searchParams.set('end', date);
+					goto(url);
 				}}
 			/>
 		</div>
-	</div> -->
+	</div>
 
 	Property/Unit Filters
 	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
@@ -130,3 +126,13 @@
 		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+	.date-input {
+		@apply block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
+	}
+	.date-input-invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+	}
+</style>

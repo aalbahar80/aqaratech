@@ -18,7 +18,10 @@ export class AnalyticsService {
     // TODO abilitycheck
     const leaseInvoices = await this.prisma.leaseInvoice.findMany({
       where: {
-        AND: [this.parseInvoiceLocationFilter({ portfolioId, filter })],
+        AND: [
+          this.parseInvoiceLocationFilter({ portfolioId, filter }),
+          { postAt: { gte: filter?.start, lte: filter?.end } },
+        ],
       },
       select: { amount: true, postAt: true },
     });
@@ -35,7 +38,10 @@ export class AnalyticsService {
   }) {
     const expenses = await this.prisma.expense.findMany({
       where: {
-        AND: [this.parseExpenseLocationFilter({ portfolioId, filter })],
+        AND: [
+          this.parseExpenseLocationFilter({ portfolioId, filter }),
+          { postAt: { gte: filter?.start, lte: filter?.end } },
+        ],
       },
       select: { amount: true, postAt: true },
     });

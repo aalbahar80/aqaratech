@@ -1,29 +1,46 @@
 <script context="module" lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
-	import { netChart, type DataSet } from '$lib/components/dashboard/charts/net';
+	import { netChart } from '$lib/components/dashboard/charts/net';
+	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import { getColor } from '$lib/config/constants';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ stuff, params }: LoadEvent<{ id: string }>) => {
+	export const load = async ({
+		stuff,
+		params,
+		url,
+	}: LoadEvent<{ id: string }>) => {
 		const portfolioId = params.id;
+		const filter = {
+			propertyId: url.searchParams.get('propertyId') || undefined,
+			unitId: url.searchParams.get('unitId') || undefined,
+			start: url.searchParams.get('start') || undefined,
+			end: url.searchParams.get('end') || undefined,
+		};
 
-		const [income, expenses] = await Promise.all([
-			stuff.api!.analytics.getIncomeByMonth({ portfolioId }),
-			stuff.api!.analytics.getExpensesByMonth({ portfolioId }),
+		const [properties, units, income, expenses] = await Promise.all([
+			stuff.api!.properties.findAll(), // filter by portfolioId
+			stuff.api!.units.findAll(), // filter by portfolioId
+
+			stuff.api!.analytics.getIncomeByMonth({ portfolioId, ...filter }),
+			stuff.api!.analytics.getExpensesByMonth({ portfolioId, ...filter }),
 		]);
 
-		return { props: { income, expenses } };
+		return { props: { properties, units, income, expenses } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
+	export let properties: Prop['properties'];
+	export let units: Prop['units'];
+
 	export let income: Prop['income'];
 	export let expenses: Prop['expenses'];
 
-	const datasets: DataSet[] = [
+	$: datasets = [
 		{
 			label: 'Income',
 			borderColor: getColor(0, 2),
@@ -48,6 +65,12 @@
 		},
 	];
 </script>
+
+<div class="prose">
+	<h1>Dashboard</h1>
+</div>
+
+<DashboardFilter {properties} {units} />
 
 <!-- Net Chart -->
 <DashCard
