@@ -26,24 +26,24 @@
 	const datasets: DataSet[] = [
 		{
 			label: 'Income',
-			borderColor: getColor(1, 2),
+			borderColor: getColor(0, 2),
 			data: income,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',
 			},
-			backgroundColor: getColor(1, 2),
+			backgroundColor: getColor(0, 2),
 			// borderRadius: 10,
 		},
 		{
 			label: 'Expenses',
-			borderColor: getColor(2, 2),
+			borderColor: getColor(1, 2),
 			data: expenses,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',
 			},
-			backgroundColor: getColor(2, 2),
+			backgroundColor: getColor(1, 2),
 			// borderRadius: 10,
 		},
 	];

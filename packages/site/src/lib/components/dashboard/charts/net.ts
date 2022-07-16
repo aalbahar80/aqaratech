@@ -1,12 +1,8 @@
+import type { ByMonthDto } from '@self/sdk';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 
-export type ChartData = {
-	date: Date;
-	total: number;
-};
-
-export type DataSet = Chart<'line', ChartData[]>['data']['datasets'][number];
+export type DataSet = Chart<'line', ByMonthDto[]>['data']['datasets'][number];
 
 export function netChart(node: HTMLCanvasElement, datasets: DataSet[]) {
 	const chart = new Chart(node, {
