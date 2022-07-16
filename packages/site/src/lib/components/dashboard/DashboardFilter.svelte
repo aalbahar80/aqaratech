@@ -5,6 +5,7 @@
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PaginatedPropertyDto, PaginatedUnitDto } from '@self/sdk';
+	import { subMonths } from 'date-fns';
 
 	export let properties: PaginatedPropertyDto;
 	export let units: PaginatedUnitDto;
@@ -31,38 +32,42 @@
 				value: unit.id,
 		  }));
 
-	// const rangeOptions = [
-	// 	{ value: 3, label: 'Last 3 months' },
-	// 	{ value: 6, label: 'Last 6 months' }, // rethink selected vs bind
-	// 	{ value: 12, label: 'Last 12 months' },
-	// 	{ value: 0, label: 'Custom' },
-	// ];
-	// let selectedRange = 6;
+	const rangeOptions = [
+		{ value: 3, label: 'Last 3 months' },
+		{ value: 6, label: 'Last 6 months' },
+		{ value: 12, label: 'Last 12 months' },
+		{ value: 0, label: 'Custom' },
+	];
 </script>
 
 <div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
-	Date Filters
+	<!-- Date Filters -->
 	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
-		Range
-		<!-- <div class="md:w-1/2">
-			rethink bind
+		<!-- Range -->
+		<div class="md:w-1/2">
+			<!-- current={6} -->
 			<Select
-				bind:current={selectedRange}
 				options={rangeOptions}
 				on:select={(e) => {
-					if (+e.detail.value) {
-						handleFilter({
-							...filter,
-							...getRange(+e.detail.value),
-						});
+					const value = e.detail.value;
+					if (value) {
+						const rangeStart = subMonths(
+							new Date().setHours(0, 0, 0, 0),
+							value,
+						).toISOString();
+
+						const url = new URL($page.url);
+						url.searchParams.set('start', rangeStart);
+						url.searchParams.set('end', new Date().toISOString());
+						goto(url);
 					}
 				}}
 			/>
-		</div> -->
+		</div>
 
 		<!-- class:date-input-invalid={!rangeValid} -->
 		<div class="md:1/2 flex gap-1">
-			Start
+			<!-- Start -->
 			<input
 				type="date"
 				name="start"
@@ -77,7 +82,7 @@
 				}}
 			/>
 
-			End
+			<!-- End -->
 			<!-- class:date-input-invalid={!rangeValid} -->
 			<input
 				type="date"
@@ -95,9 +100,9 @@
 		</div>
 	</div>
 
-	Property/Unit Filters
+	<!-- Property/Unit Filters -->
 	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
-		Property
+		<!-- Property -->
 		<div class="md:w-2/3">
 			<Select
 				current={selectedProperty}
@@ -111,7 +116,7 @@
 			/>
 		</div>
 
-		Unit
+		<!-- Unit -->
 		<div class="md:w-1/3">
 			<Select
 				current={selectedUnit}
