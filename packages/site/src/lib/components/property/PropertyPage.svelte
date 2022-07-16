@@ -1,12 +1,16 @@
 <script lang="ts">
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
+	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
-	import type { PaginatedUnitDto, PropertyDto } from '@self/sdk';
+	import type { ByMonthDto, PaginatedUnitDto, PropertyDto } from '@self/sdk';
 
 	export let property: PropertyDto;
 	export let units: PaginatedUnitDto;
+
+	export let income: ByMonthDto[];
+	export let expenses: ByMonthDto[];
 
 	let details: [string, string | null][];
 	$: details = [
@@ -29,3 +33,5 @@
 
 <DetailsPane {details} />
 <UnitsList {units} />
+
+<NetIncomeCard {income} {expenses} />
