@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
+	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -33,4 +35,7 @@
 	export let expenses: Prop['expenses'];
 </script>
 
-<UnitPage {unit} {leases} {income} {expenses} />
+<UnitPage {unit}>
+	<LeaseList {leases} showIndex />
+	<NetIncomeCard {income} {expenses} />
+</UnitPage>

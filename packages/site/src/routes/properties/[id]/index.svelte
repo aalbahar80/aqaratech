@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
+	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
+	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -33,4 +35,7 @@
 	export let expenses: Prop['expenses'];
 </script>
 
-<PropertyPage {property} {units} {income} {expenses} />
+<PropertyPage {property}>
+	<UnitsList {units} />
+	<NetIncomeCard {income} {expenses} />
+</PropertyPage>
