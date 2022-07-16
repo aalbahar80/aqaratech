@@ -58,5 +58,8 @@ export const productionEnvironment = (): EnvironmentConfig => ({
   mailConfig: {
     POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
   },
-  debug: false,
-};
+  debug: {
+    DEBUG_NEST: false,
+    DEBUG_PRISMA: false,
+  },
+});

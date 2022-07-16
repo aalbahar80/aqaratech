@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: [
-      ...(process.env?.AQ_DEBUG == '1' ? ['debug'] : ([] as any[])),
+      ...(process.env?.AQ_DEBUG_NEST == '1' ? ['debug'] : ([] as any[])),
       'log',
       'warn',
       'error',

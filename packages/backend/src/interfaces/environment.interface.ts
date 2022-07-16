@@ -1,5 +1,6 @@
-import type { MailConfigType } from '../types/mail.type';
+import { DebugConfigType } from 'src/types/debug.type';
 import type { AuthConfigType } from '../types/auth.type';
+import type { MailConfigType } from '../types/mail.type';
 import type { MyFatoorahConfigType } from '../types/myfatoorah.type';
 import type { TwilioConfigType } from '../types/twilio.type';
 
@@ -13,5 +14,5 @@ export interface EnvironmentConfig {
   twilioConfig: TwilioConfigType;
   authConfig: AuthConfigType;
   mailConfig: MailConfigType;
-  debug: boolean;
+  debug: DebugConfigType;
 }

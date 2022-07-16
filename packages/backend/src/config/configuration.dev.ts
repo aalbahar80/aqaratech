@@ -72,5 +72,8 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
   mailConfig: {
     POSTMARK_TOKEN: 'aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca',
   },
-  debug: true,
-};
+  debug: {
+    DEBUG_NEST: process.env.AQ_DEBUG_NEST == '1',
+    DEBUG_PRISMA: process.env.AQ_DEBUG_PRISMA == '1',
+  },
+});

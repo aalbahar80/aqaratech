@@ -4,7 +4,9 @@ import {
   NotFoundException,
   OnModuleInit,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Prisma, PrismaClient } from '@prisma/client';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class PrismaService
@@ -14,12 +16,15 @@ export class PrismaService
   }>
   implements OnModuleInit
 {
-  constructor() {
+  constructor(readonly configService: ConfigService<EnvironmentConfig>) {
+    const debug = configService.get('debug.DEBUG_PRISMA', {
+      infer: true,
+    });
     super({
       rejectOnNotFound(e) {
         throw new NotFoundException(e.message);
       },
-      log: ['info', 'warn', 'error'],
+      log: [...(debug ? ['query'] : ([] as any[])), 'info', 'warn', 'error'],
     });
   }
 
