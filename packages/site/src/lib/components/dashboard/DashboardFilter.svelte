@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Select from '$lib/components/Select.svelte';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
@@ -7,8 +8,8 @@
 	export let properties: PaginatedPropertyDto;
 	export let units: PaginatedUnitDto;
 
-	const selectedProperty = $page.url.searchParams.get('propertyId');
-	const selectedUnit = $page.url.searchParams.get('unitId');
+	$: selectedProperty = $page.url.searchParams.get('propertyId');
+	$: selectedUnit = $page.url.searchParams.get('unitId');
 
 	const propertyOptions = properties.results.map((property) => ({
 		label: getAddress(property),
@@ -27,18 +28,18 @@
 				value: unit.id,
 		  }));
 
-	const rangeOptions = [
-		{ value: 3, label: 'Last 3 months' },
-		{ value: 6, label: 'Last 6 months' }, // rethink selected vs bind
-		{ value: 12, label: 'Last 12 months' },
-		{ value: 0, label: 'Custom' },
-	];
-	let selectedRange = 6;
+	// const rangeOptions = [
+	// 	{ value: 3, label: 'Last 3 months' },
+	// 	{ value: 6, label: 'Last 6 months' }, // rethink selected vs bind
+	// 	{ value: 12, label: 'Last 12 months' },
+	// 	{ value: 0, label: 'Custom' },
+	// ];
+	// let selectedRange = 6;
 </script>
 
-<!-- <div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
+<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
 	Date Filters
-	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
+	<!-- <div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 		Range
 		<div class="md:w-1/2">
 			rethink bind
@@ -96,27 +97,20 @@
 				}}
 			/>
 		</div>
-	</div>
+	</div> -->
 
 	Property/Unit Filters
 	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
 		Property
 		<div class="md:w-2/3">
 			<Select
-				bind:current={selectedProperty}
+				current={selectedProperty}
 				options={propertyOptions}
-				on:select={async (e) => {
-					selectedProperty = e.detail.value;
-					selectedUnit = null;
-					await handleFilter({
-						...filter,
-						propertyId: selectedProperty,
-						unitId: null,
-					});
-					if (e.detail.value) {
-						$incomeGroupBy = 'ratio';
-						$expensesGroupBy = 'ratio';
-					}
+				on:select={(e) => {
+					const url = new URL($page.url);
+					url.searchParams.delete('unitId');
+					url.searchParams.set('propertyId', e.detail.value);
+					goto(url);
 				}}
 			/>
 		</div>
@@ -124,16 +118,15 @@
 		Unit
 		<div class="md:w-1/3">
 			<Select
-				bind:current={selectedUnit}
+				current={selectedUnit}
 				options={unitOptions}
-				disabled={!selectedProperty}
+				disabled={false && !selectedProperty}
 				on:select={async (e) => {
-					handleFilter({
-						...filter,
-						unitId: e.detail.value,
-					});
+					const url = new URL($page.url);
+					url.searchParams.set('unitId', e.detail.value);
+					goto(url);
 				}}
 			/>
 		</div>
 	</div>
-</div> -->
+</div>

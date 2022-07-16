@@ -1756,6 +1756,16 @@ paths:
           in: path
           schema:
             type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -1774,6 +1784,16 @@ paths:
         - name: portfolioId
           required: true
           in: path
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
           schema:
             type: string
       responses:

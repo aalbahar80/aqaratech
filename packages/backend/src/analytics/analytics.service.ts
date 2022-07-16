@@ -1,15 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class AnalyticsService {
   constructor(private prisma: PrismaService) {}
 
-  async incomeByMonth(portfolioId: string) {
+  async incomeByMonth({
+    portfolioId,
+    filter,
+  }: {
+    portfolioId: string;
+    filter?: DashboardFilterDto;
+  }) {
     // get sum of all leaseInvoices for portfolio and group by month
+    // TODO abilitycheck
     const leaseInvoices = await this.prisma.leaseInvoice.findMany({
       where: {
-        lease: { unit: { property: { portfolio: { id: portfolioId } } } },
+        AND: [this.parseInvoiceLocationFilter({ portfolioId, filter })],
       },
       select: { amount: true, postAt: true },
     });
@@ -17,9 +26,17 @@ export class AnalyticsService {
     return this.groupByMonth(leaseInvoices);
   }
 
-  async expensesByMonth(portfolioId: string) {
+  async expensesByMonth({
+    portfolioId,
+    filter,
+  }: {
+    portfolioId: string;
+    filter?: DashboardFilterDto;
+  }) {
     const expenses = await this.prisma.expense.findMany({
-      where: { portfolioId },
+      where: {
+        AND: [this.parseExpenseLocationFilter({ portfolioId, filter })],
+      },
       select: { amount: true, postAt: true },
     });
 
@@ -60,5 +77,41 @@ export class AnalyticsService {
     });
 
     return byMonthArray;
+  }
+
+  parseInvoiceLocationFilter({
+    portfolioId,
+    filter,
+  }: {
+    portfolioId: string;
+    filter?: DashboardFilterDto;
+  }) {
+    let locationFilter: Prisma.LeaseInvoiceWhereInput;
+    if (filter?.unitId) {
+      locationFilter = { lease: { unit: { id: filter.unitId } } };
+    } else if (filter?.propertyId) {
+      locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
+    } else {
+      locationFilter = { lease: { unit: { property: { portfolioId } } } };
+    }
+    return locationFilter;
+  }
+
+  parseExpenseLocationFilter({
+    portfolioId,
+    filter,
+  }: {
+    portfolioId: string;
+    filter?: DashboardFilterDto;
+  }) {
+    let locationFilter: Prisma.ExpenseWhereInput;
+    if (filter?.unitId) {
+      locationFilter = { unitId: filter.unitId };
+    } else if (filter?.propertyId) {
+      locationFilter = { propertyId: filter.propertyId };
+    } else {
+      locationFilter = { portfolioId };
+    }
+    return locationFilter;
   }
 }
