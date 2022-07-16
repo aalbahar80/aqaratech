@@ -1,4 +1,5 @@
 import {
+	AnalyticsApi,
 	Configuration,
 	ExpensesApi,
 	LeaseInvoicesApi,
@@ -37,6 +38,7 @@ export const api = ({
 		leaseInvoices: new LeaseInvoicesApi(config),
 		expenses: new ExpensesApi(config),
 		search: new SearchApi(config),
+		analytics: new AnalyticsApi(config),
 	};
 };
 

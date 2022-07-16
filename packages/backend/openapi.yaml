@@ -1759,6 +1759,14 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ByMonthDto'
+      tags: &ref_11
+        - analytics
   /analytics/expensesByMonth/{id}:
     get:
       operationId: getExpensesByMonth
@@ -1771,6 +1779,13 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ByMonthDto'
+      tags: *ref_11
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -3247,6 +3262,16 @@ components:
         - updatedAt
         - fullName
         - shortName
+    ByMonthDto:
+      type: object
+      properties:
+        amount:
+          type: number
+        date:
+          type: string
+      required:
+        - amount
+        - date
     BreadcrumbsDto:
       type: object
       properties:

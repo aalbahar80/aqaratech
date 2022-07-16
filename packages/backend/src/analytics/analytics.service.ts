@@ -28,7 +28,7 @@ export class AnalyticsService {
 
   groupByMonth(
     records: { amount: number; postAt: Date }[],
-  ): { monthYear: string; amount: number }[] {
+  ): { date: string; amount: number }[] {
     const byMonth = records.reduce<Record<string, number>>((acc, record) => {
       const date = record.postAt.toISOString().split('T')[0];
       const month = date.split('-')[1];
@@ -43,7 +43,12 @@ export class AnalyticsService {
     }, {});
 
     const byMonthArray = Object.keys(byMonth).map((monthYear) => {
-      return { monthYear, amount: byMonth[monthYear] };
+      return {
+        date: `${monthYear.split('-')[1]}-${
+          monthYear.split('-')[0]
+        }-01T00:00:00.000Z`,
+        amount: byMonth[monthYear],
+      };
     });
 
     return byMonthArray;
