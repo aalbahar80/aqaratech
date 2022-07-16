@@ -34,7 +34,7 @@
 			icon={PresentationChartBar}
 			text="Dashboard"
 			as="a"
-			href={`/portfolios/${portfolio.id}/dashboard`}
+			href={`/portfolios/${portfolio.id}/dashboard2`}
 			class="w-full sm:w-auto"
 			prefetch
 		/>

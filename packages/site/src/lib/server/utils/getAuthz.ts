@@ -36,7 +36,7 @@ const getAuthz = (user: UserDto): Authz => {
 		};
 	} else if (defaultRole?.portfolioId) {
 		return {
-			home: `/portfolios/${defaultRole.portfolioId}/dashboard`,
+			home: `/portfolios/${defaultRole.portfolioId}/dashboard/2`,
 			roleId: defaultRole.id,
 			orgId: null,
 			isAdmin: false,
