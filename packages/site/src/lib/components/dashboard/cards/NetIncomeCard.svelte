@@ -10,6 +10,7 @@
 	export let income: ByMonthDto[];
 	export let expenses: ByMonthDto[];
 
+	// CHART
 	$: datasets = [
 		{
 			label: 'Income',
@@ -35,7 +36,7 @@
 		},
 	];
 
-	// TABULAR DATA
+	// TABLE
 	$: tabular = income.map((i, index) => {
 		const expense = expenses[index]?.amount || 0;
 		// format to currency here?
@@ -47,8 +48,7 @@
 			net: i.amount - expense,
 		};
 	});
-	console.log({ tabular }, 'dashboard2.svelte ~ 76');
-	// TABLE STYLE
+
 	const headers: TableHeader[] = [
 		{
 			key: 'date',
@@ -69,6 +69,7 @@
 			label: 'Net',
 		},
 	];
+
 	$: footer = {
 		date: 'Total for period',
 		income: income.reduce((acc, i) => acc + i.amount, 0),
@@ -77,8 +78,8 @@
 			income.reduce((acc, i) => acc + i.amount, 0) -
 			expenses.reduce((acc, i) => acc + i.amount, 0),
 	};
-	$: console.log({ footer }, 'dashboard2.svelte ~ 121');
-	$: tableData = new CTable({
+
+	$: table = new CTable({
 		headers,
 		rows: tabular || [],
 		footer,
@@ -96,7 +97,6 @@
 		</Chart>
 	</div>
 	<div slot="data">
-		<!-- TODO extract into seperate compoenent + simplify name -->
-		<CondensedTable table={tableData} />
+		<CondensedTable {table} />
 	</div>
 </DashCard>
