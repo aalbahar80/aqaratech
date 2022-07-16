@@ -42,6 +42,7 @@ export class AnalyticsService {
       return acc;
     }, {});
 
+    // return dates as ISO strings
     const byMonthArray = Object.keys(byMonth).map((monthYear) => {
       return {
         date: `${monthYear.split('-')[1]}-${
@@ -49,6 +50,13 @@ export class AnalyticsService {
         }-01T00:00:00.000Z`,
         amount: byMonth[monthYear],
       };
+    });
+
+    // sort by date
+    byMonthArray.sort((a, b) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      return aDate.getTime() - bDate.getTime();
     });
 
     return byMonthArray;
