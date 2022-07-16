@@ -13,7 +13,7 @@ const getOrigin = (localhostAllowed = true): string => {
   }
 };
 
-export const developmentEnvironment: EnvironmentConfig = {
+export const developmentEnvironment = (): EnvironmentConfig => ({
   type: 'DEVELOPMENT',
   envName: 'dev',
   urlOrigin: getOrigin(),

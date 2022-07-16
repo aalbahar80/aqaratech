@@ -1,7 +1,7 @@
 import type { EnvironmentConfig } from '../interfaces/environment.interface';
 
 // TODO: populate constants such as domain, callbackDomain, etc.
-export const productionEnvironment: EnvironmentConfig = {
+export const productionEnvironment = (): EnvironmentConfig => ({
   type: 'PRODUCTION',
   envName: 'prod',
   urlOrigin: 'https://aqaratech.com',
