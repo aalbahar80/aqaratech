@@ -6,20 +6,27 @@ import * as R from 'remeda';
 
 interface TableHeader<T> {
 	key: T;
+	label: string;
 	style?: 'regular' | 'bold1' | 'bold2';
 }
-type TableRow<T extends string> = { [key in T]: string } & { id: string };
-type TableFooter<T extends string> = { [key in T]?: string };
+
+type TableRow<T extends TableHeader<T>[]> = {
+	[key in keyof T[number]['key']]: string;
+} & { id: string };
+
+type TableFooter<T extends TableHeader<T>[]> = {
+	[key in keyof T[number]['key']]?: string;
+};
 
 // TODO: dry types
-interface ITable<T extends string> {
-	headers: readonly TableHeader<T>[];
+interface ITable<T extends TableHeader<T>[]> {
+	headers: T;
 	rows: TableRow<T>[];
 	footer: TableFooter<T>;
 }
 
-export class CTable<T extends string> {
-	headers: readonly TableHeader<T>[];
+export class CTable<T extends TableHeader<T>[]> {
+	headers: T;
 	rows: TableRow<T>[];
 	footer: TableFooter<T>;
 	paginated: typeof this.rows[] = [];

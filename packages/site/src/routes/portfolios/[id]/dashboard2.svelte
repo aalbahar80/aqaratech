@@ -107,7 +107,7 @@
 			key: 'net',
 			type: 'number',
 		},
-	];
+	] as const;
 	$: footer = {
 		date: 'Total for period',
 		income: income.reduce((acc, i) => acc + i.amount, 0),
@@ -118,7 +118,7 @@
 	};
 	$: console.log({ footer }, 'dashboard2.svelte ~ 121');
 	// const table: ITable2<typeof headers[number]['key']> = {
-	$: tableData = new CTable({
+	$: tableData = new CTable<typeof headers>({
 		headers,
 		rows: tabular || [],
 		footer,
