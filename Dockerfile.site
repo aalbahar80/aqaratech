@@ -30,8 +30,9 @@ WORKDIR /app/packages/site
 # remove?
 EXPOSE 3000
 
-ARG ORIGIN
+ARG SITE_ORIGIN
+ENV SITE_ORIGIN_2=${SITE_ORIGIN}
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-CMD ["sh", "-c", "ORIGIN=${ORIGIN} node build/index.js"]
+CMD ["sh", "-c", "ORIGIN=$SITE_ORIGIN_2 node build/index.js"]
