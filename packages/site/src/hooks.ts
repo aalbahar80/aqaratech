@@ -27,6 +27,11 @@ export const getSession: GetSession = async ({ locals }) => ({
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const now = Date.now();
+	const method = event.request.method;
+	console.log(
+		`Request: ${method} ${event.url.href} ${event.clientAddress}: ${event.routeId} ${event.request.headers.get('user-agent')}`);
+
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
 
@@ -37,6 +42,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.user = user;
 
 	const response = await resolve(event);
+	console.log(
+		`Response: ${Date.now() - now
+		}ms - ${method} ${event.url.pathname} ${response.status} - ${event.request.headers.get('user-agent')} ${event.clientAddress} - ${event.locals.user?.email}`,
+	);
+
 	response.headers.append(
 		'Set-Cookie',
 		serialize('idToken', event.locals.idToken, {
