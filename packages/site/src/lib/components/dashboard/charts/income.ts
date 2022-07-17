@@ -1,14 +1,8 @@
+import type { LeaseInvoiceDto } from '@self/sdk';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 
-export type ChartData = {
-	total: number;
-	date: Date;
-	address: string;
-	propertyId: string;
-	isPaid: boolean;
-};
-type DataSets = Chart<'bar', ChartData[]>['data']['datasets'];
+type DataSets = Chart<'bar', LeaseInvoiceDto[]>['data']['datasets'];
 
 export function incomeChart(node: HTMLCanvasElement, datasets: DataSets) {
 	const chart = new Chart(node, {
