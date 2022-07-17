@@ -25,10 +25,6 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false
 RUN pnpm --filter=@self/site --filter=@self/sdk run build 
 
 WORKDIR /app/packages/site
-# EXPOSE 80
-# EXPOSE 443
-# remove?
-EXPOSE 3000
 
 ARG SITE_ORIGIN
 ENV SITE_ORIGIN_2=${SITE_ORIGIN}

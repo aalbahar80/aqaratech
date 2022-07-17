@@ -19,7 +19,6 @@ RUN pnpm --filter=@self/backend run build
 
 # TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
 WORKDIR /app/packages/backend
-EXPOSE 3002
 
 # TODO use .env
 # ENV DATABASE_URL=postgres://elephant_1obz_user:9T3Og1XLPk3apR7u0fHeysx96DaiZ3S3@dpg-cangdn46fj34f1f162f0-a.frankfurt-postgres.render.com/elephant_1obz
