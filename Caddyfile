@@ -2,7 +2,7 @@
   debug
 }
 
-localhost, aqar.house {
+aqar.live {
   handle_path /api/* {
     reverse_proxy backend:3002 {
       header_up Host {upstream_hostport}
@@ -24,11 +24,11 @@ localhost, aqar.house {
   respond "Fallback. You made a request to path:{path} port:{hostport}"
 }
 
-pgadmin.localhost, pgadmin.aqar.house {
-  reverse_proxy pgadmin:80 {
-    header_up Host {upstream_hostport}
-    # header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    header_up X-Real-IP {remote}
-    header_down Strict-Transport-Security max-age=31536000;
-  }
-}
+# pgadmin.localhost, pgadmin.aqar.live {
+#   reverse_proxy pgadmin:80 {
+#     header_up Host {upstream_hostport}
+#     # header_up Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#     header_up X-Real-IP {remote}
+#     header_down Strict-Transport-Security max-age=31536000;
+#   }
+# }

@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      - "2016:80"
+      # - "2016:80"
       - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
