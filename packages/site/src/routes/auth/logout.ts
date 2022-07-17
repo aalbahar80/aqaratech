@@ -8,11 +8,14 @@ export const get: RequestHandler = (req) => {
 	req.locals.user = undefined;
 	req.locals.accessToken = '';
 	req.locals.idToken = '';
+  
+  console.log('req', req)
+  console.log('req.request.url', req.request.url)
 
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = authConfig.AUTH0_CLIENT_ID;
-	const redirectUrl = `${req.url.origin}`;
+  const redirectUrl = new URL(req.request.url).origin;
 	const query = new URLSearchParams({
 		client_id: clientId,
 		returnTo: redirectUrl,
