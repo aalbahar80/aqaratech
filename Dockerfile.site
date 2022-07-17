@@ -30,14 +30,8 @@ WORKDIR /app/packages/site
 # remove?
 EXPOSE 3000
 
+ARG ORIGIN
 ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
 
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-# CMD ["sh", "-c", "caddy start && PORT=3000 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
-# CMD ["PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
-# CMD ["pnpm", "run", "dev", "--host"]
-# CMD ["pnpm", "run", "preview"]
-
-# make docker sleep infinitely
-# CMD ["sleep", "9999999999999"]
-CMD ["sh", "-c", "PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build/index.js"]
+CMD ["sh", "-c", "ORIGIN=${ORIGIN} node build/index.js"]
