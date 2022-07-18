@@ -16,12 +16,12 @@ import {
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER_NAME } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
+import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 
 import {
   CreateExpenseDto,
@@ -53,7 +53,7 @@ export class ExpensesController {
   @ApiPaginatedResponse(ExpenseDto)
   findAll(
     @User() user: IUser,
-    @Query() pageOptionsDto: PageOptionsDto,
+    @Query() pageOptionsDto: ExpensePageOptionsDto,
   ): Promise<WithCount<ExpenseDto>> {
     return this.expensesService.findAll({ pageOptionsDto, user });
   }

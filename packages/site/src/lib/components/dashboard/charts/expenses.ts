@@ -1,12 +1,8 @@
+import type { ExpenseDto } from '@self/sdk';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 
-type ChartData = {
-	total: number;
-	date: Date;
-	group: string;
-};
-type DataSets = Chart<'bar', ChartData[]>['data']['datasets'];
+type DataSets = Chart<'bar', ExpenseDto[]>['data']['datasets'];
 
 export function expensesChart(node: HTMLCanvasElement, datasets: DataSets) {
 	console.time('creating chart');

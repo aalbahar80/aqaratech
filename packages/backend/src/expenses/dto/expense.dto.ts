@@ -12,6 +12,9 @@ import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class ExpenseRequiredDto {
+  @Nanoid()
+  portfolioId: string;
+
   @IsPositive()
   amount: number;
 
@@ -20,30 +23,25 @@ class ExpenseRequiredDto {
 
   @IsString()
   memo: string | null;
-
-  // TODO use category name/prisma connect & set default here
-  // @ApiHideProperty()
-  // categoryId: number | null;
-  //
 }
 
 class ExpenseOptionalDto {
-  // TODO: constrain only one of the following fields to be set
   @Nanoid()
   @IsOptional()
+  // TODO remove question mark?
   unitId?: string | null;
 
   @Nanoid()
   @IsOptional()
+  // TODO remove question mark?
   propertyId?: string | null;
-
-  @Nanoid()
-  @IsOptional()
-  portfolioId?: string | null;
 
   // TODO remove from schema
   @ApiHideProperty()
   maintenanceOrderId: string | null;
+
+  // TODO use category name/prisma connect & set default here?
+  categoryId: number | null;
 }
 
 export class ExpenseDto extends IntersectionType(

@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
@@ -20,16 +21,20 @@
 			take: 1000,
 		};
 
-		const [properties, units, income, expenses, invoices] = await Promise.all([
-			stuff.api!.portfolios.findProperties({ id: portfolioId }),
-			stuff.api!.portfolios.findUnits({ id: portfolioId }),
+		const [properties, units, income, expensesGrouped, invoices, expenses] =
+			await Promise.all([
+				stuff.api!.portfolios.findProperties({ id: portfolioId }),
+				stuff.api!.portfolios.findUnits({ id: portfolioId }),
 
-			stuff.api!.analytics.getIncomeByMonth(filter),
-			stuff.api!.analytics.getExpensesByMonth(filter),
-			stuff.api!.leaseInvoices.findAll(filter),
-		]);
+				stuff.api!.analytics.getIncomeByMonth(filter),
+				stuff.api!.analytics.getExpensesByMonth(filter),
+				stuff.api!.leaseInvoices.findAll(filter),
+				stuff.api!.expenses.findAll(filter), // TODO filter serverside
+			]);
 
-		return { props: { properties, units, income, expenses, invoices } };
+		return {
+			props: { properties, units, income, expensesGrouped, invoices, expenses },
+		};
 	};
 </script>
 
@@ -39,8 +44,9 @@
 	export let units: Prop['units'];
 
 	export let income: Prop['income'];
-	export let expenses: Prop['expenses'];
+	export let expensesGrouped: Prop['expensesGrouped'];
 	export let invoices: Prop['invoices'];
+	export let expenses: Prop['expenses'];
 </script>
 
 <div class="prose">
@@ -49,5 +55,6 @@
 
 <DashboardFilter {properties} {units} />
 
-<NetIncomeCard {income} {expenses} />
+<NetIncomeCard {income} expenses={expensesGrouped} />
 <RevenueCard {invoices} />
+<ExpensesCard {expenses} />
