@@ -38,21 +38,32 @@
 	// TABLE
 	$: tabular = invoices.results.map((i) => {
 		return {
-			id: i.id,
-			postAt: i.postAt,
-			amount: i.amount,
-			status: i.isPaid,
-			view: `/invoices/${i.id}`,
+			id: { label: i.id, hide: true },
+			// postAt: i.postAt.toISOString(),
+			amount: { label: i.amount },
+			status: { label: i.isPaid },
+			property: {
+				label: i.breadcrumbs.property.label,
+				href: i.breadcrumbs.property.href,
+			},
+			unit: {
+				label: i.breadcrumbs.unit.label,
+				href: i.breadcrumbs.unit.href,
+			},
+			view: {
+				label: 'view',
+				href: `/invoices/${i.id}`,
+			},
 		};
 	});
 
 	const headers: TableHeader[] = [
-		{ key: 'postAt', label: 'Date' },
+		// { key: 'postAt', label: 'Date' },
 		{ key: 'status', label: 'Status', style: 'bold1' },
 		{ key: 'amount', label: 'Amount' },
-		// { key: 'Location' },
-		// { key: 'Unit', style: 'bold2' },
-		{ key: 'view', label: 'view', style: 'bold2' },
+		{ key: 'property', label: 'Property' },
+		{ key: 'unit', label: 'Unit', isHref: true, style: 'bold2' },
+		{ key: 'view', label: 'view', isHref: true, style: 'bold2' },
 	];
 
 	$: footer = {

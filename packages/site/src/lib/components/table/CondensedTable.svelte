@@ -5,9 +5,9 @@
 	import { createPagination } from '$lib/components/table/pagination';
 	import type { CTable } from '$lib/models/classes/table.class';
 	import { classes } from '$lib/utils';
+	import * as R from 'remeda';
 
-	type T = $$Generic<string>;
-	export let table: CTable<T>;
+	export let table: CTable;
 	$: pgn = createPagination(table.getPagination(25));
 </script>
 
@@ -44,14 +44,11 @@
 				{#each table.getPage($pgn.pageIdx, $pgn.pageSize) as row (row.id)}
 					<tr>
 						{#each table.headers as header, idx (header.key)}
-							{#if header.key === 'view'}
-								<CondensedActionCell href={row[header.key]} label="View" />
+							{@const cell = row[header.key] || { label: '' }}
+							{#if R.isObject(cell) && 'href' in cell}
+								<CondensedActionCell {cell} />
 							{:else}
-								<CondensedCell
-									{idx}
-									value={row[header.key] ?? ''}
-									weight={header.style}
-								/>
+								<CondensedCell {idx} {cell} weight={header.style} />
 							{/if}
 						{/each}
 					</tr>

@@ -41,11 +41,11 @@
 		const expense = expenses[index]?.amount || 0;
 		// format to currency here?
 		return {
-			id: i.date, // for keyed #each
-			date: i.date,
-			income: i.amount,
-			expense,
-			net: i.amount - expense,
+			id: { label: i.date, hide: true },
+			date: { label: i.date },
+			income: { label: i.amount },
+			expense: { label: expense },
+			net: { label: i.amount - expense },
 		};
 	});
 
