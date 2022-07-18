@@ -61,7 +61,7 @@
 						const url = new URL($page.url);
 						url.searchParams.set('start', rangeStart);
 						url.searchParams.set('end', new Date().toISOString());
-						goto(url);
+						goto(url, { noscroll: true });
 					}
 				}}
 			/>
@@ -80,7 +80,7 @@
 					const date = `${baseDate}T00:00:00.000Z`;
 					const url = new URL($page.url);
 					url.searchParams.set('start', date);
-					goto(url);
+					goto(url, { noscroll: true });
 				}}
 			/>
 
@@ -96,7 +96,7 @@
 					const date = `${baseDate}T00:00:00.000Z`;
 					const url = new URL($page.url);
 					url.searchParams.set('end', date);
-					goto(url);
+					goto(url, { noscroll: true });
 				}}
 			/>
 		</div>
@@ -120,7 +120,7 @@
 						url.searchParams.delete('propertyId');
 					}
 
-					goto(url);
+					goto(url, { noscroll: true });
 				}}
 			/>
 		</div>
@@ -141,7 +141,7 @@
 						url.searchParams.delete('unitId');
 					}
 
-					goto(url);
+					goto(url, { noscroll: true });
 				}}
 			/>
 		</div>
