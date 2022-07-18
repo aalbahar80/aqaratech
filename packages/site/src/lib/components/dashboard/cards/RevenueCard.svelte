@@ -4,6 +4,7 @@
 	import RevenueArea from '$lib/components/dashboard/charts/RevenueArea.svelte';
 	import RevenuePie from '$lib/components/dashboard/charts/RevenuePie.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { getColor } from '$lib/config/constants';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
@@ -77,6 +78,8 @@
 		rows: tabular || [],
 		footer,
 	});
+
+	let chartType = 'ratio';
 </script>
 
 <DashCard
@@ -84,12 +87,32 @@
 	subtitle="Breakdown of rent income by status & property."
 	empty={invoices.results.length < 1}
 >
+	<div slot="groupBy" class="flex w-64 pb-4">
+		<span
+			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+		>
+			Group By
+		</span>
+		<Select
+			bind:current={chartType}
+			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
+			options={[
+				{ label: 'Ratio', value: 'ratio' },
+				{ label: 'Ratio Over Time', value: 'time' },
+				{ label: 'Property', value: 'property' },
+			]}
+		/>
+	</div>
 	<div slot="chart">
-		<RevenuePie {invoices} />
-		<RevenueArea {invoices} />
-		<Chart let:height let:width>
-			<canvas {height} {width} use:revenueChart={datasets} />
-		</Chart>
+		{#if chartType === 'property'}
+			<RevenueArea {invoices} />
+		{:else if chartType === 'time'}
+			<Chart let:height let:width>
+				<canvas {height} {width} use:revenueChart={datasets} />
+			</Chart>
+		{:else}
+			<RevenuePie {invoices} />
+		{/if}
 	</div>
 	<div slot="data">
 		<CondensedTable {table} />
