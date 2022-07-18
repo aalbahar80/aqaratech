@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
-	import { revenueChart } from '$lib/components/dashboard/charts/income';
+	import { revenueChart } from '$lib/components/dashboard/charts/revenue';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { getColor } from '$lib/config/constants';
