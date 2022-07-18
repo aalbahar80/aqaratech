@@ -15,6 +15,8 @@
 		LineController,
 		PieController,
 		ArcElement,
+		PolarAreaController,
+		RadialLinearScale,
 		type ActiveElement,
 	} from 'chart.js/dist/chart.esm';
 
@@ -46,6 +48,8 @@
 		LineController,
 		PieController,
 		ArcElement,
+		PolarAreaController,
+		RadialLinearScale,
 		legendMargin,
 	);
 	// Chart.defaults.aspectRatio = 2;

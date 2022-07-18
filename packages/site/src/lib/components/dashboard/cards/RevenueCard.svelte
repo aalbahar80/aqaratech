@@ -1,4 +1,7 @@
 <script lang="ts">
+	import Chart from '$lib/components/Chart.svelte';
+	import { revenueChart } from '$lib/components/dashboard/charts/revenue';
+	import RevenueArea from '$lib/components/dashboard/charts/RevenueArea.svelte';
 	import RevenuePie from '$lib/components/dashboard/charts/RevenuePie.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
@@ -83,9 +86,10 @@
 >
 	<div slot="chart">
 		<RevenuePie {invoices} />
-		<!-- <Chart let:height let:width>
+		<RevenueArea {invoices} />
+		<Chart let:height let:width>
 			<canvas {height} {width} use:revenueChart={datasets} />
-		</Chart> -->
+		</Chart>
 	</div>
 	<div slot="data">
 		<CondensedTable {table} />
