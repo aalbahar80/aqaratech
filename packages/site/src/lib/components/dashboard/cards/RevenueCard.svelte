@@ -61,9 +61,9 @@
 		// { key: 'postAt', label: 'Date' },
 		{ key: 'status', label: 'Status', style: 'bold1' },
 		{ key: 'amount', label: 'Amount' },
-		{ key: 'property', label: 'Property' },
 		{ key: 'unit', label: 'Unit', isHref: true, style: 'bold2' },
-		{ key: 'view', label: 'view', isHref: true, style: 'bold2' },
+		{ key: 'property', label: 'Property' },
+		{ key: 'view', label: 'view', isHref: true, style: 'bold2', hide: true },
 	];
 
 	$: footer = {

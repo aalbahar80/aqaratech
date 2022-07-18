@@ -9,6 +9,7 @@ export interface TableHeader {
   label: string;
   style?: 'regular' | 'bold1' | 'bold2';
   isHref?: boolean;
+  hide?: boolean;
 }
 
 export interface TableCellScalar {

@@ -19,12 +19,12 @@
 			<thead class="bg-gray-50">
 				<tr>
 					{#each table.headers as header, idx (header.key)}
-						{#if header.key === 'view'}
+						{#if header.hide}
 							<th
 								scope="col"
 								class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6"
 							>
-								<span class="sr-only">View</span>
+								<span class="sr-only">{header.label}</span>
 							</th>
 						{:else}
 							<th
