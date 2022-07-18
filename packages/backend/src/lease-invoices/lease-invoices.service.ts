@@ -16,7 +16,6 @@ import {
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class LeaseInvoicesService {
@@ -57,7 +56,7 @@ export class LeaseInvoicesService {
     user: IUser;
     where?: Prisma.LeaseWhereInput;
   }): Promise<WithCount<LeaseInvoiceDto>> {
-    const { page, take, q, start, end } = pageOptionsDto;
+    const { page, take, start, end } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [
@@ -77,13 +76,6 @@ export class LeaseInvoicesService {
       this.prisma.leaseInvoice.count({ where: filter }),
     ]);
 
-    if (q) {
-      results = search({
-        data: results,
-        q,
-        keys: ['id'],
-      });
-    }
     const promises = results.map(async (result) => {
       const breadcrumbs = await this.getBreadcrumbs(result.id);
       return {

@@ -1,6 +1,6 @@
 import * as FusePkg from 'fuse.js';
 
-export const search = <T>({
+const search = <T>({
   data,
   q,
   keys,

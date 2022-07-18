@@ -18,7 +18,6 @@ import {
   UnitVacancy,
   UpdateUnitDto,
 } from 'src/units/dto/unit.dto';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class UnitsService {
@@ -61,7 +60,7 @@ export class UnitsService {
     user: IUser;
     where?: Prisma.UnitWhereInput;
   }): Promise<WithCount<UnitDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take } = pageOptionsDto;
 
     const filter: Prisma.UnitWhereInput = {
       AND: [accessibleBy(user.ability).Unit, ...(where ? [where] : [])],
@@ -76,14 +75,6 @@ export class UnitsService {
       }),
       this.prisma.unit.count({ where: filter }),
     ]);
-
-    if (q) {
-      data = search({
-        data: data,
-        q,
-        keys: ['id', 'unitNumber', 'usage', 'type'],
-      });
-    }
 
     const results = data.map((unit) => {
       const { leases, ...unitFields } = unit;

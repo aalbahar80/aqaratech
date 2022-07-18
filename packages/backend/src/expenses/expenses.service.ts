@@ -15,7 +15,6 @@ import {
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { search } from 'src/utils/search';
 
 @Injectable()
 export class ExpensesService {
@@ -65,7 +64,7 @@ export class ExpensesService {
     pageOptionsDto: PageOptionsDto;
     user: IUser;
   }): Promise<WithCount<ExpenseDto>> {
-    const { page, take, q } = pageOptionsDto;
+    const { page, take } = pageOptionsDto;
 
     let [results, total] = await Promise.all([
       this.prisma.expense.findMany({
@@ -77,10 +76,6 @@ export class ExpensesService {
         where: accessibleBy(user.ability).Expense,
       }),
     ]);
-
-    if (q) {
-      results = search({ data: results, q, keys: ['id', 'memo', 'amount'] });
-    }
 
     return { total, results };
   }
