@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
-	import { revenueArea } from '$lib/components/dashboard/charts/revenue-area';
+	import { polarArea } from '$lib/components/dashboard/charts/polar-area';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
@@ -66,5 +66,5 @@
 </script>
 
 <Chart let:height let:width>
-	<canvas {height} {width} use:revenueArea={data} />
+	<canvas {height} {width} use:polarArea={data} />
 </Chart>
