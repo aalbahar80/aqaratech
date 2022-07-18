@@ -4,43 +4,37 @@ import { getAddress, getUnitLabel } from 'src/utils/address';
 
 type TenantLabelParams = {
   id: string;
-  rel: Rel.Tenant;
   fullName: string;
 };
-interface PortfolioLabelParams {
+export interface PortfolioLabelParams {
   id: string;
-  rel: Rel.Portfolio;
   fullName: string;
 }
-interface PropertyLabelParams {
+export interface PropertyLabelParams {
   id: string;
-  rel: Rel.Property;
   area: string | null;
   block: string | null;
   number: string | null;
 }
-interface UnitLabelParams {
+export interface UnitLabelParams {
   id: string;
-  rel: Rel.Unit;
   type: string | null;
   unitNumber: string;
 }
 interface LeaseLabelParams {
   id: string;
-  rel: Rel.Lease;
 }
 interface MOParams {
   id: string;
-  rel: Rel.MaintenanceOrder;
 }
 
 type BreadcrumbDtoParameters =
-  | TenantLabelParams
-  | PortfolioLabelParams
-  | PropertyLabelParams
-  | UnitLabelParams
-  | LeaseLabelParams
-  | MOParams;
+  | (TenantLabelParams & { rel: Rel.Tenant })
+  | (PortfolioLabelParams & { rel: Rel.Portfolio })
+  | (PropertyLabelParams & { rel: Rel.Property })
+  | (UnitLabelParams & { rel: Rel.Unit })
+  | (LeaseLabelParams & { rel: Rel.Lease })
+  | (MOParams & { rel: Rel.MaintenanceOrder });
 
 // interface BreadcrumbDtoParameters {
 //   labelParams: LabelParams;

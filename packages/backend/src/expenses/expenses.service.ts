@@ -3,7 +3,12 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
-import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  PortfolioLabelParams,
+  PropertyLabelParams,
+  UnitLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -71,13 +76,23 @@ export class ExpensesService {
         take,
         skip: (page - 1) * take,
         where: accessibleBy(user.ability).Expense,
+        include: {
+          portfolio: true,
+          property: true,
+          unit: true,
+        },
       }),
       this.prisma.expense.count({
         where: accessibleBy(user.ability).Expense,
       }),
     ]);
 
-    return { total, results };
+    const expenses = results.map((expense) => ({
+      ...expense,
+      breadcrumbs: this.breadcrumbs(expense),
+    }));
+
+    return { total, results: expenses };
   }
 
   async findOne({ id }: { id: string }) {
@@ -112,37 +127,31 @@ export class ExpensesService {
   // ::: HELPERS :::
 
   breadcrumbs(expense: {
-    portfolioId: string | null;
-    propertyId: string | null;
-    unitId: string | null;
+    portfolio: PortfolioLabelParams;
+    property: PropertyLabelParams;
+    unit: UnitLabelParams;
   }): ExpenseBreadcrumbsDto | undefined {
-    if (expense.portfolioId) {
+    if (expense.portfolio) {
       return {
         portfolio: new BreadcrumbDto({
           rel: Rel.Portfolio,
-          id: expense.portfolioId,
-          fullName: '',
+          ...expense.portfolio,
         }),
       };
     }
-    if (expense.propertyId) {
+    if (expense.property) {
       return {
         property: new BreadcrumbDto({
           rel: Rel.Property,
-          id: expense.propertyId,
-          area: '',
-          block: '',
-          number: '',
+          ...expense.property,
         }),
       };
     }
-    if (expense.unitId) {
+    if (expense.unit) {
       return {
         unit: new BreadcrumbDto({
           rel: Rel.Unit,
-          id: expense.unitId,
-          type: '',
-          unitNumber: '',
+          ...expense.unit,
         }),
       };
     }
