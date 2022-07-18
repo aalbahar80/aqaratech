@@ -60,7 +60,6 @@
 					(i, idx) =>
 						`rgba(54, 162, 235, ${Math.max(0.3, idx / parsed.length)})`,
 				),
-				// hoverOffset: 4,
 			},
 		],
 	};
