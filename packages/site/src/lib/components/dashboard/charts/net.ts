@@ -32,6 +32,12 @@ export function netChart(node: HTMLCanvasElement, datasets: DataSet[]) {
 					},
 				},
 			},
+			interaction: {
+				mode: 'nearest',
+				axis: 'x',
+				intersect: false,
+				includeInvisible: false,
+			},
 			plugins: {
 				tooltip: {
 					callbacks: {

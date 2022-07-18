@@ -36,6 +36,12 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
           },
         },
       },
+			interaction: {
+				mode: 'nearest',
+				axis: 'x',
+				intersect: false,
+				includeInvisible: false,
+			},
       plugins: {
         tooltip: {
           callbacks: {

@@ -64,12 +64,6 @@
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
-	Chart.defaults.interaction = {
-		mode: 'nearest',
-		axis: 'x',
-		intersect: false,
-		includeInvisible: false,
-	};
 	Chart.defaults.plugins.legend.align = 'start';
 	Chart.defaults.plugins.legend.labels.usePointStyle = true;
 	Chart.defaults.plugins.legend.labels.pointStyle = 'rectRounded';
