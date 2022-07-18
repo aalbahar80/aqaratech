@@ -1,42 +1,14 @@
 <script lang="ts">
-	import Chart from '$lib/components/Chart.svelte';
-	import { revenueChart } from '$lib/components/dashboard/charts/revenue';
 	import RevenueArea from '$lib/components/dashboard/charts/RevenueArea.svelte';
 	import RevenuePie from '$lib/components/dashboard/charts/RevenuePie.svelte';
+	import RevenueTime from '$lib/components/dashboard/charts/RevenueTime.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { getColor } from '$lib/config/constants';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
-
-	// CHART
-	$: datasets = [
-		{
-			label: 'Paid',
-			borderColor: getColor(0, 2),
-			data: invoices.results.filter((i) => i.isPaid),
-			parsing: {
-				yAxisKey: 'amount',
-				xAxisKey: 'postAt',
-			},
-			backgroundColor: getColor(0, 2),
-			borderRadius: 10,
-		},
-		{
-			label: 'Unpaid',
-			borderColor: getColor(1, 2),
-			data: invoices.results.filter((i) => !i.isPaid),
-			parsing: {
-				yAxisKey: 'amount',
-				xAxisKey: 'postAt',
-			},
-			backgroundColor: getColor(1, 2),
-			borderRadius: 10,
-		},
-	];
 
 	// TABLE
 	$: tabular = invoices.results.map((i) => {
@@ -107,9 +79,7 @@
 		{#if chartType === 'property'}
 			<RevenueArea {invoices} />
 		{:else if chartType === 'time'}
-			<Chart let:height let:width>
-				<canvas {height} {width} use:revenueChart={datasets} />
-			</Chart>
+			<RevenueTime {invoices} />
 		{:else}
 			<RevenuePie {invoices} />
 		{/if}
