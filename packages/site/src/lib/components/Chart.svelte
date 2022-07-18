@@ -36,7 +36,7 @@
 
 	Chart.register(
 		Legend,
-		Tooltip,
+		// Tooltip,
 		Filler,
 		LinearScale,
 		CategoryScale,
@@ -52,6 +52,13 @@
 		RadialLinearScale,
 		legendMargin,
 	);
+
+	// optimization
+	Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	// Chart.defaults.animation = false;
+	// Chart.defaults.animations.colors = false;
+	// Chart.defaults.animations.x = false; // disables animation defined by the 'x' property
+
 	// Chart.defaults.aspectRatio = 2;
 	Chart.defaults.maintainAspectRatio = false; // important for responsiveness
 	Chart.defaults.font.size = 16;
@@ -61,6 +68,7 @@
 		mode: 'nearest',
 		axis: 'x',
 		intersect: false,
+		includeInvisible: false,
 	};
 	Chart.defaults.plugins.legend.align = 'start';
 	Chart.defaults.plugins.legend.labels.usePointStyle = true;
