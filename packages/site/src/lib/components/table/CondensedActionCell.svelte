@@ -10,7 +10,6 @@
 	<a
 		href={cell.href}
 		target="_blank"
-		sveltekit:prefetch
 		class="text-indigo-600 hover:text-indigo-900"
 	>
 		{cell.label}
