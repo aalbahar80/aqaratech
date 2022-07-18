@@ -150,7 +150,7 @@ model Expense {
     id                 String            @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
     unitId             String?
     propertyId         String?
-    portfolioId        String?
+    portfolioId        String
     maintenanceOrderId String?
     categoryId         Int?
     createdAt          DateTime          @default(now())
@@ -158,7 +158,7 @@ model Expense {
     amount             Float
     postAt             DateTime
     memo               String?
-    portfolio          Portfolio?        @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+    portfolio          Portfolio        @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
     maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
     property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
     unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)

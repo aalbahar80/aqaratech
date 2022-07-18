@@ -1625,6 +1625,31 @@ paths:
           in: query
           schema:
             type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -3252,6 +3277,8 @@ components:
     CreateExpenseDto:
       type: object
       properties:
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
@@ -3267,10 +3294,11 @@ components:
         propertyId:
           type: string
           nullable: true
-        portfolioId:
-          type: string
+        categoryId:
+          type: number
           nullable: true
       required:
+        - portfolioId
         - amount
         - postAt
         - memo
@@ -3305,6 +3333,8 @@ components:
           readOnly: true
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
@@ -3320,16 +3350,18 @@ components:
         propertyId:
           type: string
           nullable: true
-        portfolioId:
-          type: string
+        categoryId:
+          type: number
           nullable: true
       required:
         - id
         - createdAt
         - updatedAt
+        - portfolioId
         - amount
         - postAt
         - memo
+        - categoryId
     UpdateExpenseDto:
       type: object
       properties:
@@ -3347,6 +3379,9 @@ components:
           nullable: true
         propertyId:
           type: string
+          nullable: true
+        categoryId:
+          type: number
           nullable: true
     CreateOrganizationDto:
       type: object

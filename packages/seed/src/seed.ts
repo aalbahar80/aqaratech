@@ -52,14 +52,13 @@ export async function seed({
 	let propertyMax = 20;
 	let unitMax = 30;
 	let moCount = 100;
-	let expenseCount = 150;
+	let expenseCount = 1000;
 	let trxPerLease = 12;
 	const min = 1;
 
 	if (sample) {
 		portfolioCount = 2;
 		moCount = 20;
-		expenseCount = 10;
 		trxPerLease = 3;
 	}
 
@@ -212,19 +211,19 @@ export async function seed({
 	portfolios.forEach((portfolio) => {
 		for (let i = 0; i < expenseCount; i++) {
 			const expense = fakeExpense();
-			expenses.push({ ...expense, portfolioId: portfolio.id });
-		}
-	});
-	properties.forEach((property) => {
-		for (let i = 0; i < expenseCount; i++) {
-			const expense = fakeExpense();
-			expenses.push({ ...expense, propertyId: property.id });
-		}
-	});
-	units.forEach((unit) => {
-		for (let i = 0; i < expenseCount; i++) {
-			const expense = fakeExpense();
-			expenses.push({ ...expense, unitId: unit.id });
+			const ownProperties = properties.filter(
+				(p) => p.portfolioId === portfolio.id
+			);
+			const randomProperty =
+				ownProperties[faker.datatype.number(ownProperties.length - 1)];
+			// const ownUnits = units.filter((u) => ownProperties.find((p) => p.id === u.propertyId));
+			const includeProperty = faker.datatype.boolean();
+			expenses.push({
+				...expense,
+				portfolioId: portfolio.id,
+				...(includeProperty &&
+					randomProperty && { propertyId: randomProperty?.id }),
+			});
 		}
 	});
 
