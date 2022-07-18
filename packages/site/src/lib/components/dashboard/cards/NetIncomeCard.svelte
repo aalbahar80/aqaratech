@@ -44,7 +44,7 @@
 			id: { label: i.date, hide: true },
 			date: { label: i.date },
 			income: { label: i.amount },
-			expense: { label: expense },
+			expense: { label: expense, extraStyles: ['text-red-700'] },
 			net: { label: i.amount - expense },
 		};
 	});
