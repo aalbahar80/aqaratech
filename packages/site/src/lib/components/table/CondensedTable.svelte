@@ -46,7 +46,7 @@
 						{#each table.headers as header, idx (header.key)}
 							{@const cell = row[header.key] || { label: '' }}
 							{#if R.isObject(cell) && 'href' in cell}
-								<CondensedActionCell {cell} />
+								<CondensedActionCell {cell} weight={header.style} />
 							{:else}
 								<CondensedCell {idx} {cell} weight={header.style} />
 							{/if}

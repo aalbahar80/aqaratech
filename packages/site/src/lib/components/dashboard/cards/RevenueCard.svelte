@@ -51,7 +51,7 @@
 				href: i.breadcrumbs.unit.href,
 			},
 			view: {
-				label: 'view',
+				label: 'View',
 				href: `/invoices/${i.id}`,
 			},
 		};
@@ -61,9 +61,9 @@
 		// { key: 'postAt', label: 'Date' },
 		{ key: 'status', label: 'Status', style: 'bold1' },
 		{ key: 'amount', label: 'Amount' },
-		{ key: 'unit', label: 'Unit', isHref: true, style: 'bold2' },
-		{ key: 'property', label: 'Property' },
-		{ key: 'view', label: 'view', isHref: true, style: 'bold2', hide: true },
+		{ key: 'unit', label: 'Unit', isHref: true, style: 'regular' },
+		{ key: 'property', label: 'Property', style: 'regular' },
+		{ key: 'view', label: 'View', isHref: true, hide: true },
 	];
 
 	$: footer = {

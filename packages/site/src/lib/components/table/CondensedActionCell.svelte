@@ -1,7 +1,10 @@
 <script lang="ts">
 	import type { TableCellLink } from '$lib/models/classes/table.class';
+	import { classes } from '$lib/utils/classes';
 
+	type Weight = 'bold1' | 'bold2' | 'regular';
 	export let cell: TableCellLink;
+	export let weight: Weight | undefined = undefined;
 </script>
 
 <td
@@ -10,7 +13,13 @@
 	<a
 		href={cell.href}
 		target="_blank"
-		class="text-indigo-600 hover:text-indigo-900"
+		class={classes(
+			'text-indigo-600 hover:text-indigo-900',
+			...(cell.extraStyles || []),
+		)}
+		class:text-gray-500={weight === 'regular'}
+		class:font-medium={weight === 'bold1'}
+		class:text-gray-900={weight === 'bold1' || weight === 'bold2'}
 	>
 		{cell.label}
 	</a>
