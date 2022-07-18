@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Chart from '$lib/components/Chart.svelte';
-	import { revenueChart } from '$lib/components/dashboard/charts/revenue';
+	import RevenuePie from '$lib/components/dashboard/charts/RevenuePie.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { getColor } from '$lib/config/constants';
@@ -83,9 +82,10 @@
 	empty={invoices.results.length < 1}
 >
 	<div slot="chart">
-		<Chart let:height let:width>
+		<RevenuePie {invoices} />
+		<!-- <Chart let:height let:width>
 			<canvas {height} {width} use:revenueChart={datasets} />
-		</Chart>
+		</Chart> -->
 	</div>
 	<div slot="data">
 		<CondensedTable {table} />

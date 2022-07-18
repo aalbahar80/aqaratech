@@ -13,6 +13,8 @@
 		BarController,
 		LineElement,
 		LineController,
+		PieController,
+		ArcElement,
 		type ActiveElement,
 	} from 'chart.js/dist/chart.esm';
 
@@ -42,6 +44,8 @@
 		BarController,
 		LineElement,
 		LineController,
+		PieController,
+		ArcElement,
 		legendMargin,
 	);
 	// Chart.defaults.aspectRatio = 2;
