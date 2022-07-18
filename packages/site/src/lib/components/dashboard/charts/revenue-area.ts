@@ -12,9 +12,6 @@ export function revenueArea(node: HTMLCanvasElement, data: Data) {
 		data,
 		options: {
 			plugins: {
-				tooltip: {
-					// enabled: false,
-				},
 				legend: {
 					display: false,
 				},
