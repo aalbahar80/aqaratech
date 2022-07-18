@@ -36,7 +36,7 @@
 
 	Chart.register(
 		Legend,
-		// Tooltip,
+		Tooltip,
 		Filler,
 		LinearScale,
 		CategoryScale,
@@ -53,11 +53,10 @@
 		legendMargin,
 	);
 
-	// optimization
-	Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	// Disable some animations that cause high CPU usage
 	// Chart.defaults.animation = false;
-	// Chart.defaults.animations.colors = false;
-	// Chart.defaults.animations.x = false; // disables animation defined by the 'x' property
+	Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	Chart.defaults.animations.colors = false; // could enable
 
 	// Chart.defaults.aspectRatio = 2;
 	Chart.defaults.maintainAspectRatio = false; // important for responsiveness
@@ -98,6 +97,8 @@
 		boxWidth: 40,
 		footerColor: '#f3f4f6',
 		// multiKeyBackground: 'hsl(195, 100%, 50%)',
+
+		animation: { duration: 0 }, // animating tooltip causes high CPU usage!
 
 		position: 'top',
 	};
