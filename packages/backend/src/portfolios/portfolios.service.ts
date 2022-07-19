@@ -55,6 +55,7 @@ export class PortfoliosService {
       this.prisma.portfolio.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { createdAt: 'desc' },
         where: accessibleBy(ability).Portfolio,
       }),
       this.prisma.portfolio.count({

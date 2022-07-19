@@ -35,6 +35,7 @@ export class RolesService {
       this.prisma.role.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { createdAt: 'desc' },
         where: filter,
         include: { user: { select: { email: true } } },
       }),

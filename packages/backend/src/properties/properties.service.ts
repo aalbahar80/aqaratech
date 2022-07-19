@@ -65,6 +65,7 @@ export class PropertiesService {
       this.prisma.property.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { createdAt: 'desc' },
         where: filter,
         include: { portfolio: true },
       }),

@@ -51,6 +51,7 @@ export class TenantsService {
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { createdAt: 'desc' },
         where: accessibleBy(user.ability).Tenant,
       }),
       this.prisma.tenant.count({
