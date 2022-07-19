@@ -7,11 +7,6 @@ import { UserDto } from 'src/users/dto/user.dto';
 class RoleRequiredDto extends PickType(UserDto, ['email']) {}
 
 class RoleOptionalDto {
-  // should be required?
-  // @Nanoid()
-  // userId: string | null;
-
-  // validate only 1 of the following:
   @Nanoid()
   organizationId: string | null = null;
 
