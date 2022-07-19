@@ -1,5 +1,6 @@
 <script lang="ts">
 	import RoleCard from '$components/role/RoleCard.svelte';
+	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import type { PaginatedRoleDto } from '@self/sdk';
@@ -26,5 +27,12 @@
 			<RoleCard {role} {icons} />
 		</li>
 	{/each}
+	<div slot="emptyState">
+		<EmptyState
+			entity="roles"
+			message="No members have been invited yet."
+			buttonText="Invite member"
+		/>
+	</div>
 	<AnchorPagination pagination={roles.pagination} />
 </StackedList>

@@ -42,7 +42,9 @@
 			<slot />
 		</ul>
 	{:else}
-		<EmptyState entity={entityTitle} {formUrl} />
+		<slot name="emptyState">
+			<EmptyState entity={entityTitle} {formUrl} />
+		</slot>
 	{/if}
 </section>
 

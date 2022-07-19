@@ -10,10 +10,10 @@ export interface EntityName {
 
 const role: EntityName = {
 	urlName: 'roles',
-	singular: 'role',
-	singularCap: 'Role',
-	plural: 'roles',
-	pluralCap: 'Roles',
+	singular: 'member',
+	singularCap: 'Member',
+	plural: 'members',
+	pluralCap: 'Members',
 };
 
 // do the same for tenant,unit,property,lease,invoice,maintenanceOrder, and expense

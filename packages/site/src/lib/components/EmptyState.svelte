@@ -8,6 +8,8 @@
 	const hideActions = !$session.user?.role.isAdmin;
 	export let entity: EntityTitle;
 	export let formUrl: string;
+	export let message: string = `Get started by creating a new ${entityNameMap[entity].singular}.`;
+	export let buttonText: string = `New ${entityNameMap[entity].singular}`;
 </script>
 
 <div class="py-8 text-center sm:py-16">
@@ -23,7 +25,7 @@
 		<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>
 	{:else}
 		<p class="mt-1 text-sm text-gray-500">
-			Get started by creating a new {entityNameMap[entity].singular}.
+			{message}
 		</p>
 		<div class="mt-6">
 			<a
@@ -32,7 +34,7 @@
 				sveltekit:prefetch
 			>
 				<Icon src={Plus} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-				New {entityNameMap[entity].singular}
+				{buttonText}
 			</a>
 		</div>
 	{/if}
