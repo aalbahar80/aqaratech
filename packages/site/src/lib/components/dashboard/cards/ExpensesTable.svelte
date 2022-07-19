@@ -19,7 +19,7 @@
 		return {
 			id: { label: i.id, hide: true },
 			postAt: { label: toUTCFormat(i.postAt) },
-			amount: { label: kwdFormat(i.amount) },
+			amount: { label: kwdFormat(i.amount), extraStyles: ['tabular-nums'] },
 			type: { label: i.expenseType?.labelEn },
 			property,
 			unit,
