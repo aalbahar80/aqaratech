@@ -380,6 +380,9 @@ export class CaslAbilityFactory {
         maintenanceOrders: maintenanceOrders.map((i) => i.id),
       };
 
+      // TODO: limit fields
+      can(Action.Read, ['Role'], { tenantId: { in: readable.tenants } });
+
       can(Action.Read, 'Tenant', {
         id: { in: readable.tenants },
       });

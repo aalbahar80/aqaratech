@@ -6,7 +6,7 @@ export const ownerUser: UserConfig = {
 		{ name: 'Properties', href: '/properties' },
 		// { name: 'Units', href: '/units' },
 		{ name: 'Leases', href: '/leases' },
-		// { name: 'Tenants', href: base + '/tenants' },
+		{ name: 'Tenants', href: '/tenants' },
 		// { name: 'Maintenance', href: base + '/maintenanceOrders' },
 	],
 };

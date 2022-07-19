@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import TrxColumn from '$components/tenant/TrxColumn.svelte';
 	import { handleInvite } from '$lib/components/actions/invite';
 	import AsyncButton from '$lib/components/AsyncButton.svelte';
@@ -60,6 +61,8 @@
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} {files} />
-<RoleList {roles} />
+{#if $session.user?.role.isAdmin}
+	<RoleList {roles} />
+{/if}
 <LeaseList {leases} showIndex />
 <TrxColumn {invoices} />
