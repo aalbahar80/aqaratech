@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
@@ -8,8 +9,8 @@
 	$: tabular = invoices.results.map((i) => {
 		return {
 			id: { label: i.id, hide: true },
-			// postAt: i.postAt.toISOString(),
-			amount: { label: i.amount },
+			postAt: { label: toUTCFormat(i.postAt) },
+			amount: { label: kwdFormat(i.amount) },
 			status: { label: i.isPaid },
 			property: {
 				label: i.breadcrumbs.property.label,
@@ -27,7 +28,7 @@
 	});
 
 	const headers: TableHeader[] = [
-		// { key: 'postAt', label: 'Date' },
+		{ key: 'postAt', label: 'Date' },
 		{ key: 'status', label: 'Status', style: 'bold1' },
 		{ key: 'amount', label: 'Amount' },
 		{ key: 'unit', label: 'Unit', isHref: true, style: 'regular' },
