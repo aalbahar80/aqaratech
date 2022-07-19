@@ -232,7 +232,7 @@ importers:
       '@felte/reporter-svelte': 1.1.2
       '@felte/reporter-tippy': 1.1.2
       '@felte/validator-zod': 1.0.10
-      '@iconify/json': 2.1.63
+      '@iconify/json': 2.1.79
       '@playwright/test': 1.23.4
       '@rgossiaux/svelte-headlessui': 1.0.2
       '@self/sdk': workspace:0.0.1
@@ -287,7 +287,7 @@ importers:
       tippy.js: 6.3.7
       tslib: 2.4.0
       typescript: 4.7.4
-      unplugin-icons: 0.14.3
+      unplugin-icons: 0.14.7
       uuid: 8.3.2
       vite: 3.0.2
       zod: 3.17.9
@@ -295,7 +295,7 @@ importers:
       '@felte/reporter-svelte': 1.1.2_svelte@3.49.0
       '@felte/reporter-tippy': 1.1.2_tippy.js@6.3.7
       '@felte/validator-zod': 1.0.10_zod@3.17.9
-      '@iconify/json': 2.1.63
+      '@iconify/json': 2.1.79
       '@playwright/test': 1.23.4
       '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.49.0
       '@self/sdk': link:../sdk
@@ -350,7 +350,7 @@ importers:
       tippy.js: 6.3.7
       tslib: 2.4.0
       typescript: 4.7.4
-      unplugin-icons: 0.14.3_vite@3.0.2
+      unplugin-icons: 0.14.7_vite@3.0.2
       uuid: 8.3.2
       vite: 3.0.2
       zod: 3.17.9
@@ -1891,11 +1891,11 @@ packages:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify/json/2.1.63:
-    resolution: {integrity: sha512-WQwTV6KUl0C+VkH3/j9kwlHLOHyPn0pM7f0kFmJgghQ9Ha672UHr/KTuwVqbqn3c+RxnJyY+jIap4ewawMeaZA==}
+  /@iconify/json/2.1.79:
+    resolution: {integrity: sha512-4jCX9hRhZmJqeUQ+gTVH867FYdUvBkIZ4UYwWstHXPMIuCVsfqXy5OZn8wDIkEYfvfNy+s1m28/g4PSrWzdUtg==}
     dependencies:
       '@iconify/types': 1.1.0
-      pathe: 0.2.0
+      pathe: 0.3.2
     dev: true
 
   /@iconify/types/1.1.0:
@@ -1910,7 +1910,7 @@ packages:
       '@iconify/types': 1.1.0
       debug: 4.3.4
       kolorist: 1.5.1
-      local-pkg: 0.4.1
+      local-pkg: 0.4.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8037,6 +8037,11 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
+  /local-pkg/0.4.2:
+    resolution: {integrity: sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==}
+    engines: {node: '>=14'}
+    dev: true
+
   /locate-path/5.0.0:
     resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
     engines: {node: '>=8'}
@@ -8835,8 +8840,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pathe/0.2.0:
-    resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==}
+  /pathe/0.3.2:
+    resolution: {integrity: sha512-qhnmX0TOqlCvdWWTkoM83wh5J8fZ2yhbDEc9MlsnAEtEc+JCwxUKEwmd6pkY9hRe6JR1Uecbc14VcAKX2yFSTA==}
     dev: true
 
   /pause/0.0.1:
@@ -11244,8 +11249,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-icons/0.14.3_vite@3.0.2:
-    resolution: {integrity: sha512-PyyNMACpZ/EAiG3B6K1wPGZ151VGdlHIEx8/utgP546yVmPpV/xC1k1V2eEebf71fGm3WD6gzPrERNsbMgIVgg==}
+  /unplugin-icons/0.14.7_vite@3.0.2:
+    resolution: {integrity: sha512-TrNnEdpaXMdiG5BsCgvU6cv/gSLYvIk1f8wGCGZmOo4wmi3nqYBuqIEuiXhmmyXdDZuRRpCaOzCnCYYZ5H7U8g==}
     peerDependencies:
       '@svgr/core': '>=5.5.0'
       '@vue/compiler-sfc': ^3.0.2
@@ -11266,8 +11271,8 @@ packages:
       '@iconify/utils': 1.0.33
       debug: 4.3.4
       kolorist: 1.5.1
-      local-pkg: 0.4.1
-      unplugin: 0.6.3_vite@3.0.2
+      local-pkg: 0.4.2
+      unplugin: 0.7.2_vite@3.0.2
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -11299,12 +11304,12 @@ packages:
       webpack-virtual-modules: 0.4.4
     dev: true
 
-  /unplugin/0.6.3_vite@3.0.2:
-    resolution: {integrity: sha512-CoW88FQfCW/yabVc4bLrjikN9HC8dEvMU4O7B6K2jsYMPK0l6iAnd9dpJwqGcmXJKRCU9vwSsy653qg+RK0G6A==}
+  /unplugin/0.7.2_vite@3.0.2:
+    resolution: {integrity: sha512-m7thX4jP8l5sETpLdUASoDOGOcHaOVtgNyrYlToyQUvILUtEzEnngRBrHnAX3IKqooJVmXpoa/CwQ/QqzvGaHQ==}
     peerDependencies:
       esbuild: '>=0.13'
       rollup: ^2.50.0
-      vite: ^2.3.0
+      vite: ^2.3.0 || ^3.0.0-0
       webpack: 4 || 5
     peerDependenciesMeta:
       esbuild:
@@ -11316,6 +11321,7 @@ packages:
       webpack:
         optional: true
     dependencies:
+      acorn: 8.7.1
       chokidar: 3.5.3
       vite: 3.0.2
       webpack-sources: 3.2.3
