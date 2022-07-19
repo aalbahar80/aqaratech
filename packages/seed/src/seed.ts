@@ -57,7 +57,7 @@ export async function seed({
 	const min = 1;
 
 	if (sample) {
-		portfolioCount = 2;
+		// portfolioCount = 2;
 		moCount = 20;
 		trxPerLease = 3;
 	}
