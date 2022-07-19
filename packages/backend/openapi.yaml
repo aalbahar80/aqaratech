@@ -368,6 +368,10 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '201':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: object
       tags: &ref_1
         - roles
   /roles/{id}:

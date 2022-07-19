@@ -11,7 +11,7 @@ import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 export class RolesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createRoleDto: CreateRoleDto) {
+  async create(createRoleDto: CreateRoleDto) {
     let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
     if (createRoleDto.organizationId) {
       create = {
@@ -27,6 +27,21 @@ export class RolesService {
       );
     }
 
+    const existingRole = await this.prisma.role.findFirst({
+      where: {
+        user: { email: createRoleDto.email },
+        organizationId: createRoleDto.organizationId,
+        portfolioId: createRoleDto.portfolioId,
+        tenantId: createRoleDto.tenantId,
+      },
+      rejectOnNotFound: false,
+    });
+
+    if (existingRole) {
+      throw new BadRequestException('Role already exists for this user');
+    }
+
+    // upsert user with new role
     return this.prisma.user.upsert({
       where: { email: createRoleDto.email },
       create: { email: createRoleDto.email, roles: { create } },
