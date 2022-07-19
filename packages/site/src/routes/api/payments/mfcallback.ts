@@ -2,7 +2,7 @@ import { getPaymentStatus, markAsPaid } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
 import { z } from 'zod';
 
-export const get: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url }) => {
 	try {
 		const rawPaymentId = url.searchParams.get('paymentId');
 		const paymentId = z.string().parse(rawPaymentId);

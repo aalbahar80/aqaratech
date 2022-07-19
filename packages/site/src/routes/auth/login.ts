@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 const { authConfig } = environment;
 
-export const get: RequestHandler = () => {
+export const GET: RequestHandler = () => {
 	const query = new URLSearchParams({
 		response_type: 'code',
 		client_id: authConfig.AUTH0_CLIENT_ID,

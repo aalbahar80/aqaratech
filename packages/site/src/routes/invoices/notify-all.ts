@@ -12,7 +12,7 @@ import { z, ZodError } from 'zod';
  * @augments rangeEnd: The end of the range to consider transactions.
  *
  */
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	try {
 		// Validate bearer token
 		const authHeader = request.headers.get('authorization');

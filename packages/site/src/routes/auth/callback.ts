@@ -40,7 +40,7 @@ async function getTokens(code: string) {
 	}
 }
 
-export const get: RequestHandler = async (req) => {
+export const GET: RequestHandler = async (req) => {
 	try {
 		const code = req.url.searchParams.get('code');
 		if (!code) throw new Error('Unable to get code from URL');

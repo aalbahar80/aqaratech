@@ -5,7 +5,7 @@ import type { RequestHandler } from './__types/notify';
 /**
  * Sends a payment link to tenant.
  */
-export const post: RequestHandler = async ({ params, request }) => {
+export const POST: RequestHandler = async ({ params, request }) => {
 	try {
 		const body = await request.json();
 		const Options = z.object({

@@ -3,12 +3,12 @@ import { environment } from '$environment';
 
 const { authConfig } = environment;
 
-export const get: RequestHandler = (req) => {
+export const GET: RequestHandler = (req) => {
 	//  Sets the user equal to null (local sign out)
 	req.locals.user = undefined;
 	req.locals.accessToken = '';
 	req.locals.idToken = '';
-  
+
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = authConfig.AUTH0_CLIENT_ID;

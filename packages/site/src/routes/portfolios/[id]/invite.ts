@@ -3,7 +3,7 @@ import { inviteUser } from '$lib/services/auth0';
 import type { RequestHandler } from './__types/invite';
 
 // TODO protect this route? with _? Call it in postman
-export const post: RequestHandler = async ({ params }) => {
+export const POST: RequestHandler = async ({ params }) => {
 	try {
 		// get data from db
 		const rawPortfolio = await prismaClient.portfolio.findUnique({

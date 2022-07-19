@@ -3,7 +3,7 @@ import prismaClient from '$lib/server/prismaClient';
 import { getMFUrl } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ url }) => {
 	const ID = zodnanoid;
 	const raw = url.searchParams.get('id');
 	if (!raw) {

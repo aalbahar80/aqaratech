@@ -1,7 +1,7 @@
 import { environment } from '$environment';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
 	if (environment.envName === 'prod') {
 		return { status: 403 };
 	}
