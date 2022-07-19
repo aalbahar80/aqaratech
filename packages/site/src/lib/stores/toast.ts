@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store';
+import { ResponseError } from '@self/sdk';
 import type { Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 interface ToastItem {
 	id: number;
@@ -38,6 +39,26 @@ export const addErrorToast = () => {
 		props: {
 			kind: 'error',
 			title: 'Error',
+		},
+	});
+};
+
+/**
+ * Attempts to parse a `ResponseError` into a toast message.
+ */
+export const handleApiError = async (error: any) => {
+	let message = '';
+	console.error(error);
+	if (error instanceof ResponseError) {
+		const data = await error.response.json();
+		console.error(data);
+		message = data.message;
+	}
+	addToast({
+		props: {
+			kind: 'error',
+			title: 'Error',
+			subtitle: message,
 		},
 	});
 };

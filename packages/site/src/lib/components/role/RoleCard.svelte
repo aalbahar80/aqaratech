@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import DropDown from '$lib/components/DropDown.svelte';
+	import { handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
-	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
 	import { Mail, Trash } from '@steeze-ui/heroicons';
+	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
 
 	export let role: RoleDto;
 	export let icons: any[];
@@ -31,7 +33,13 @@
 				{
 					icon: Trash,
 					label: 'Remove',
-					onClick: () => {},
+					onClick: async () => {
+						try {
+							await $page.stuff.api.roles.remove({ id: role.id });
+						} catch (error) {
+							await handleApiError(error);
+						}
+					},
 				},
 			]}
 		/>
