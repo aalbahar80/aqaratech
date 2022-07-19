@@ -71,6 +71,7 @@ export class LeaseInvoicesService {
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { postAt: 'desc' },
         where: filter,
       }),
       this.prisma.leaseInvoice.count({ where: filter }),

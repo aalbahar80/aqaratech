@@ -86,6 +86,7 @@ export class ExpensesService {
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { postAt: 'desc' },
         where: filter,
         include: {
           expenseType: true,
