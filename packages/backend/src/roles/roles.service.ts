@@ -84,15 +84,7 @@ export class RolesService {
     return { total, results };
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} role`;
-  // }
-
-  // update(id: number, updateRoleDto: UpdateRoleDto) {
-  //   return `This action updates a #${id} role`;
-  // }
-
   remove(id: string) {
-    return `This action removes a #${id} role`;
+    return this.prisma.role.delete({ where: { id } });
   }
 }

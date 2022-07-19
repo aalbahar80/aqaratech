@@ -70,6 +70,16 @@ export class CaslAbilityFactory {
     // ### Role: Organization###
     // Define an org user's manageable entities
     if (own.orgs.length > 0) {
+      const rolesQ = this.prisma.role.findMany({
+        where: {
+          OR: [
+            { organization: { id: { in: own.orgs } } },
+            { portfolio: { organizationId: { in: own.orgs } } },
+            { tenant: { organizationId: { in: own.orgs } } },
+          ],
+        },
+      });
+
       const tenantsQ = this.prisma.tenant.findMany({
         select: { id: true },
         where: { organization: { id: { in: own.orgs } } },
@@ -143,6 +153,7 @@ export class CaslAbilityFactory {
 
       const now = Date.now();
       const [
+        roles,
         tenants,
         portfolios,
         properties,
@@ -152,6 +163,7 @@ export class CaslAbilityFactory {
         expenses,
         maintenanceOrders,
       ] = await Promise.all([
+        rolesQ,
         tenantsQ,
         portfoliosQ,
         propertiesQ,
@@ -169,6 +181,7 @@ export class CaslAbilityFactory {
 
       const manageable: OrgManageableResources = {
         orgs: own.orgs, // TODO consider contraining to superadmins only
+        roles: roles.map((r) => r.id),
         tenants: tenants.map((i) => i.id),
         portfolios: portfolios.map((i) => i.id),
         properties: properties.map((i) => i.id),
@@ -184,6 +197,19 @@ export class CaslAbilityFactory {
 
       // TODO: limit fields
       // TODO only superadmins can manage org roles?
+      can(Action.Manage, ['Role'], {
+        OR: [
+          { id: { in: manageable.roles } },
+          {
+            OR: [
+              { organizationId: { in: own.orgs } },
+              { portfolioId: { in: manageable.portfolios } },
+              { tenantId: { in: manageable.tenants } },
+            ],
+          },
+        ],
+      });
+
       can(Action.Manage, ['Role'], {
         OR: [
           { organizationId: { in: own.orgs } },
@@ -528,6 +554,7 @@ export type Subject = Subjects<{
 type Resource = string;
 interface Resources {
   orgs: Resource[];
+  roles: Resource[];
   tenants: Resource[];
   portfolios: Resource[];
   properties: Resource[];

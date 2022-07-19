@@ -386,10 +386,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: string
       tags: *ref_1
   /leaseInvoices:
     post:
