@@ -1,17 +1,11 @@
 <script lang="ts">
 	import { getAddress } from '$lib/utils/get-label';
+	import type { PropertyDto } from '@self/sdk';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	interface Property {
-		id: string;
-		area: string | null;
-		block: string | null;
-		street: string | null;
-		number: string | null;
-	}
 	export let idx: number;
-	export let property: Property;
+	export let property: PropertyDto;
 </script>
 
 <a
