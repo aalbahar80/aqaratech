@@ -5,6 +5,7 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toDateInput } from '$lib/utils/common';
+	import { parseExpenseTypeOptions } from '$lib/utils/expense-type-options';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
@@ -131,10 +132,7 @@
 		}),
 		new SelectField('categoryId', {
 			required: true,
-			options: expenseTypes.map((type) => ({
-				value: type.id,
-				label: type.labelEn,
-			})),
+			options: parseExpenseTypeOptions(expenseTypes),
 			value: data?.categoryId || '',
 			combobox: true,
 			label: 'Expense Category',
