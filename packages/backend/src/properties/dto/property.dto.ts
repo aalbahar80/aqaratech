@@ -56,11 +56,13 @@ class PropertyOptionalDto {
   lat: number | null = null;
 }
 
-export class PropertyDto extends IntersectionType(
+export class PropertyBasicDto extends IntersectionType(
   AbstractDto,
   IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
-) {
-  breadcrumbs?: PropertyBreadcrumbsDto;
+) {}
+
+export class PropertyDto extends PropertyBasicDto {
+  breadcrumbs: PropertyBreadcrumbsDto;
 }
 
 export class CreatePropertyDto
@@ -76,4 +78,5 @@ export class UpdatePropertyDto extends PartialType(
 
 export class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
+  'property',
 ]) {}

@@ -44,11 +44,13 @@ class ExpenseOptionalDto {
   categoryId: number | null;
 }
 
-export class ExpenseDto extends IntersectionType(
+export class ExpenseBasicDto extends IntersectionType(
   AbstractDto,
   IntersectionType(ExpenseRequiredDto, ExpenseOptionalDto),
-) {
-  breadcrumbs?: ExpenseBreadcrumbsDto;
+) {}
+
+export class ExpenseDto extends ExpenseBasicDto {
+  breadcrumbs: ExpenseBreadcrumbsDto;
 }
 
 export class CreateExpenseDto

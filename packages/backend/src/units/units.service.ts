@@ -5,7 +5,12 @@ import { Prisma } from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
-import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  PortfolioLabelParams,
+  PropertyLabelParams,
+  UnitLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -71,19 +76,27 @@ export class UnitsService {
         take,
         skip: (page - 1) * take,
         where: filter,
-        include: { leases: { select: { start: true, end: true } } },
+        include: {
+          leases: { select: { start: true, end: true } },
+          // TODO only select the fields we need for breadcrumbs
+          property: { include: { portfolio: true } },
+        },
       }),
       this.prisma.unit.count({ where: filter }),
     ]);
 
     const results = data.map((unit) => {
-      const { leases, ...unitFields } = unit;
+      const breadcrumbs = this.breadcrumbs(unit);
+      const {
+        leases,
+        property: { portfolio },
+        ...unitFields
+      } = unit;
       return {
         ...unitFields,
+        breadcrumbs,
         vacancy: this.vacancy(leases),
-        hateoas: {
-          href: this.href(unitFields.id),
-        },
+        hateoas: { href: this.href(unitFields.id) },
       };
     });
 
@@ -91,25 +104,29 @@ export class UnitsService {
   }
 
   async findOne({ id }: { id: string }): Promise<UnitDto> {
-    const [unit, breadcrumbs] = await Promise.all([
-      this.prisma.unit.findUnique({
-        where: { id },
-        include: {
-          leases: true,
-          property: true,
-        },
-      }),
-      this.breadcrumbs(id),
-    ]);
+    const unit = await this.prisma.unit.findUnique({
+      where: { id },
+      include: {
+        leases: true,
+        // TODO only select the fields we need for breadcrumbs
+        property: { include: { portfolio: true } },
+      },
+    });
+    const breadcrumbs = this.breadcrumbs(unit);
 
-    const { leases, property, ...fields } = unit;
+    const {
+      leases,
+      property: { portfolio },
+      ...toReturn
+    } = unit;
+
     return {
-      ...fields,
+      ...toReturn,
+      breadcrumbs,
       vacancy: this.vacancy(leases),
       hateoas: {
         href: this.href(unit.id),
       },
-      breadcrumbs,
     };
   }
 
@@ -151,11 +168,11 @@ export class UnitsService {
     return `/units/${id}`;
   }
 
-  async breadcrumbs(unitId: string): Promise<UnitBreadcrumbsDto> {
-    const unit = await this.prisma.unit.findUnique({
-      where: { id: unitId },
-      include: { property: { include: { portfolio: true } } },
-    });
+  breadcrumbs(
+    unit: UnitLabelParams & {
+      property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+    },
+  ): UnitBreadcrumbsDto {
     return {
       portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,

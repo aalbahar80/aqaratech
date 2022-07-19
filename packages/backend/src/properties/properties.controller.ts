@@ -27,6 +27,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import {
   CreatePropertyDto,
+  PropertyBasicDto,
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -50,7 +51,7 @@ export class PropertiesController {
   create(
     @User() user: IUser,
     @Body() createPropertyDto: CreatePropertyDto,
-  ): Promise<PropertyDto> {
+  ): Promise<PropertyBasicDto> {
     return this.propertiesService.create({ createPropertyDto, user });
   }
 
@@ -78,14 +79,14 @@ export class PropertiesController {
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
-  ): Promise<PropertyDto> {
+  ): Promise<PropertyBasicDto> {
     return this.propertiesService.update({ id, updatePropertyDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  remove(@Param('id') id: string): Promise<PropertyDto> {
+  remove(@Param('id') id: string): Promise<PropertyBasicDto> {
     return this.propertiesService.remove({ id });
   }
 

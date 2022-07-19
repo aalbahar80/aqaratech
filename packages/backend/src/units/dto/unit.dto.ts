@@ -66,11 +66,14 @@ export class UnitVacancy {
   vacancyDate: Date | null;
 }
 
-export class UnitDto extends IntersectionType(
+export class UnitBasicDto extends IntersectionType(
   AbstractDto,
   IntersectionType(UnitRequiredDto, UnitOptionalDto),
 ) {
   hateoas: HateoasDto;
-  breadcrumbs?: UnitBreadcrumbsDto;
-  vacancy?: UnitVacancy;
+}
+
+export class UnitDto extends UnitBasicDto {
+  breadcrumbs: UnitBreadcrumbsDto;
+  vacancy: UnitVacancy;
 }

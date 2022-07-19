@@ -27,7 +27,12 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+  CreateUnitDto,
+  UnitBasicDto,
+  UnitDto,
+  UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 @Controller('units')
@@ -46,7 +51,7 @@ export class UnitsController {
   create(
     @User() user: IUser,
     @Body() createUnitDto: CreateUnitDto,
-  ): Promise<UnitDto> {
+  ): Promise<UnitBasicDto> {
     return this.unitsService.create({ createUnitDto, user });
   }
 
@@ -74,7 +79,7 @@ export class UnitsController {
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateUnitDto: UpdateUnitDto,
-  ): Promise<UnitDto> {
+  ): Promise<UnitBasicDto> {
     return this.unitsService.update({ id, updateUnitDto, user });
   }
 

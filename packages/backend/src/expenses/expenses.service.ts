@@ -154,7 +154,7 @@ export class ExpensesService {
     portfolio: PortfolioLabelParams;
     property: PropertyLabelParams | null;
     unit: UnitLabelParams | null;
-  }): ExpenseBreadcrumbsDto | undefined {
+  }): ExpenseBreadcrumbsDto {
     const crumbs: ExpenseBreadcrumbsDto = {
       portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,

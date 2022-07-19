@@ -4,7 +4,11 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
-import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  PortfolioLabelParams,
+  PropertyLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -62,18 +66,27 @@ export class PropertiesService {
         take,
         skip: (page - 1) * take,
         where: filter,
+        include: { portfolio: true },
       }),
       this.prisma.property.count({ where: filter }),
     ]);
 
-    return { total, results };
+    const properties = results.map((property) => {
+      const breadcrumbs = this.getBreadcrumbs(property);
+      const { portfolio, ...toReturn } = property;
+      return { ...toReturn, breadcrumbs };
+    });
+
+    return { total, results: properties };
   }
 
   async findOne({ id }: { id: string }) {
-    const [property, breadcrumbs] = await Promise.all([
-      this.prisma.property.findUnique({ where: { id } }),
-      this.getBreadcrumbs(id),
-    ]);
+    const property = await this.prisma.property.findUnique({
+      where: { id },
+      // TODO only select the fields we need for breadcrumbs
+      include: { portfolio: true },
+    });
+    const breadcrumbs = this.getBreadcrumbs(property);
 
     return { ...property, breadcrumbs };
   }
@@ -104,12 +117,15 @@ export class PropertiesService {
 
   // ::: HELPERS :::
 
-  async getBreadcrumbs(propertyId: string): Promise<PropertyBreadcrumbsDto> {
-    const portfolio = await this.prisma.portfolio.findFirst({
-      where: { properties: { some: { id: propertyId } } },
-    });
+  getBreadcrumbs(
+    property: PropertyLabelParams & { portfolio: PortfolioLabelParams },
+  ): PropertyBreadcrumbsDto {
     return {
-      portfolio: new BreadcrumbDto({ rel: Rel.Portfolio, ...portfolio }),
+      portfolio: new BreadcrumbDto({
+        rel: Rel.Portfolio,
+        ...property.portfolio,
+      }),
+      property: new BreadcrumbDto({ rel: Rel.Property, ...property }),
     };
   }
 }

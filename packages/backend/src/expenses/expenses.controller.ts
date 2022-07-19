@@ -25,6 +25,7 @@ import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto
 
 import {
   CreateExpenseDto,
+  ExpenseBasicDto,
   ExpenseDto,
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
@@ -44,7 +45,7 @@ export class ExpensesController {
   create(
     @User() user: IUser,
     @Body() createExpenseDto: CreateExpenseDto,
-  ): Promise<ExpenseDto> {
+  ): Promise<ExpenseBasicDto> {
     return this.expensesService.create({ createExpenseDto, user });
   }
 
@@ -72,14 +73,14 @@ export class ExpensesController {
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateExpenseDto: UpdateExpenseDto,
-  ): Promise<ExpenseDto> {
+  ): Promise<ExpenseBasicDto> {
     return this.expensesService.update({ id, updateExpenseDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
-  remove(@Param('id') id: string): Promise<ExpenseDto> {
+  remove(@Param('id') id: string): Promise<ExpenseBasicDto> {
     return this.expensesService.remove({ id });
   }
 }

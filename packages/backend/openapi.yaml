@@ -2904,8 +2904,13 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
+        - property
     PropertyDto:
       type: object
       properties:
@@ -2962,6 +2967,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - breadcrumbs
         - portfolioId
         - area
         - block
@@ -2971,15 +2977,6 @@ components:
         - parcel
         - paci
         - cost
-    HateoasDto:
-      type: object
-      properties:
-        href:
-          type: string
-        mediaType:
-          type: string
-      required:
-        - href
     UnitBreadcrumbsDto:
       type: object
       properties:
@@ -3015,6 +3012,15 @@ components:
         - isVacant
         - vacancyDistance
         - vacancyDate
+    HateoasDto:
+      type: object
+      properties:
+        href:
+          type: string
+        mediaType:
+          type: string
+      required:
+        - href
     UnitDto:
       type: object
       properties:
@@ -3029,12 +3035,12 @@ components:
           format: date-time
           type: string
           readOnly: true
-        hateoas:
-          $ref: '#/components/schemas/HateoasDto'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
+        hateoas:
+          $ref: '#/components/schemas/HateoasDto'
         propertyId:
           type: string
         unitNumber:
@@ -3077,6 +3083,8 @@ components:
         - id
         - createdAt
         - updatedAt
+        - breadcrumbs
+        - vacancy
         - hateoas
         - propertyId
         - unitNumber
@@ -3357,6 +3365,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - breadcrumbs
         - portfolioId
         - amount
         - postAt
