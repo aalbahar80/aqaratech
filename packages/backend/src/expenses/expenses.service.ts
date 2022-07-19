@@ -88,6 +88,7 @@ export class ExpensesService {
         skip: (page - 1) * take,
         where: filter,
         include: {
+          expenseType: true,
           portfolio: true,
           property: true,
           unit: true,
@@ -111,6 +112,7 @@ export class ExpensesService {
     const expense = await this.prisma.expense.findUnique({
       where: { id },
       include: {
+        expenseType: true,
         portfolio: true,
         property: true,
         unit: true,

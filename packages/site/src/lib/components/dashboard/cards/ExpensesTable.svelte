@@ -10,8 +10,7 @@
 			id: { label: i.id, hide: true },
 			postAt: { label: i.postAt.toISOString() },
 			amount: { label: i.amount },
-			// type: { label: i.expenseType.labelEn },
-			type: { label: 'Capex' },
+			type: { label: i.expenseType?.labelEn },
 			// property: {
 			// 	label: i.breadcrumbs?.property?.label,
 			// 	href: i.breadcrumbs?.property?.href,

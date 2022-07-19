@@ -3327,6 +3327,27 @@ components:
             - $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
+    ExpenseTypeDto:
+      type: object
+      properties:
+        id:
+          type: number
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+        description:
+          type: string
+          nullable: true
+        parentId:
+          type: number
+          nullable: true
+      required:
+        - id
+        - labelEn
+        - labelAr
+        - description
+        - parentId
     ExpenseDto:
       type: object
       properties:
@@ -3343,6 +3364,10 @@ components:
           readOnly: true
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
+        expenseType:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ExpenseTypeDto'
         portfolioId:
           type: string
         amount:
@@ -3368,6 +3393,7 @@ components:
         - createdAt
         - updatedAt
         - breadcrumbs
+        - expenseType
         - portfolioId
         - amount
         - postAt
