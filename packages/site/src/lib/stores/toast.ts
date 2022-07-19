@@ -34,6 +34,16 @@ export const addToast = (toast: Omit<ToastItem, 'id'>) => {
 	if (newToast.duration) setTimeout(() => dismissToast(id), newToast.duration);
 };
 
+export const addSuccessToast = (subtitle = '') => {
+	addToast({
+		props: {
+			kind: 'success',
+			title: 'Success',
+			subtitle,
+		},
+	});
+};
+
 export const addErrorToast = () => {
 	addToast({
 		props: {

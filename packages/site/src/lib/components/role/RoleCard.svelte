@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import DropDown from '$lib/components/DropDown.svelte';
-	import { handleApiError } from '$lib/stores/toast';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
 	import { Mail, Trash } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
@@ -41,6 +41,7 @@
 							.remove({ id: role.id })
 							.then((id) => {
 								dispatch('delete', { id });
+								addSuccessToast('Member deleted');
 							})
 							.catch(handleApiError);
 					},
