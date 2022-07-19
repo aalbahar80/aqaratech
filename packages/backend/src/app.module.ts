@@ -29,6 +29,7 @@ import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { MetaModule } from './meta/meta.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
     RolesModule,
     OrganizationsModule,
     AnalyticsModule,
+    MetaModule,
   ],
   controllers: [AppController],
   providers: [

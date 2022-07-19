@@ -18,6 +18,7 @@ import { writeFileSync } from 'fs';
 import { dump } from 'js-yaml';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { MetaModule } from 'src/meta/meta.module';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -70,6 +71,7 @@ export const setupSwagger = (app: INestApplication) => {
       RolesModule,
       OrganizationsModule,
       AnalyticsModule,
+      MetaModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
     ignoreGlobalPrefix: true,

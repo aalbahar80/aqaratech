@@ -6,7 +6,7 @@
 	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
 		const [expense, expenseTypes] = await Promise.all([
 			stuff.api!.expenses.findOne({ id: params.id }),
-			stuff.api!.expenses.findTypes(),
+			stuff.api!.meta.findExpenseTypes(),
 		]);
 
 		return { props: { expense, expenseTypes } };

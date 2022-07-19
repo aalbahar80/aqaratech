@@ -14,7 +14,6 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Public } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -23,7 +22,6 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
-import { ExpenseTypeDto } from 'src/expenses/dto/expense-type.dto';
 
 import {
   CreateExpenseDto,
@@ -84,12 +82,5 @@ export class ExpensesController {
   @ApiOkResponse({ type: ExpenseDto })
   remove(@Param('id') id: string): Promise<ExpenseBasicDto> {
     return this.expensesService.remove({ id });
-  }
-
-  @Public()
-  @Get('/types')
-  @ApiOkResponse({ type: ExpenseTypeDto, isArray: true })
-  findTypes(): Promise<ExpenseTypeDto[]> {
-    return this.expensesService.findTypes();
   }
 }

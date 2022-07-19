@@ -15,7 +15,7 @@
 			stuff.api!.portfolios.findAll({ take: 1000 }),
 			stuff.api!.properties.findAll({ take: 1000 }),
 			stuff.api!.units.findAll({ take: 1000 }),
-			stuff.api!.expenses.findTypes(),
+			stuff.api!.meta.findExpenseTypes(),
 		]);
 
 		return {
