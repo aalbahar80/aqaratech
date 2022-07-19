@@ -13,16 +13,19 @@
 		let predefined: PredefinedRole;
 		if (sParams.organizationId) {
 			predefined = {
+				entity: 'organizations',
 				fieldName: 'organizationId',
 				fieldValue: sParams.organizationId,
 			};
 		} else if (sParams.portfolioId) {
 			predefined = {
+				entity: 'portfolios',
 				fieldName: 'portfolioId',
 				fieldValue: sParams.portfolioId,
 			};
 		} else if (sParams.tenantId) {
 			predefined = {
+				entity: 'tenants',
 				fieldName: 'tenantId',
 				fieldValue: sParams.tenantId,
 			};

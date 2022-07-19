@@ -20,6 +20,8 @@
 	export let formType: 'create' | 'update';
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
+	export let onSuccess: (id: string) => Promise<void> = (id) =>
+		goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -59,7 +61,7 @@
 				({ id } = await onCreate(values));
 			}
 
-			goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
+			onSuccess(id);
 		},
 
 		onError: async (error: any) => {

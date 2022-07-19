@@ -1,7 +1,10 @@
+import type { EntityTitle } from '$lib/models/types/entity.type';
+
 type SearchParam = string | null;
 type FindIdFromArray = string | undefined;
 
 export interface PredefinedRole {
+	entity: EntityTitle;
 	fieldName: string;
 	fieldValue: string;
 }
