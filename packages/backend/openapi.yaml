@@ -2538,12 +2538,15 @@ components:
         organizationId:
           type: string
           nullable: true
+          default: null
         portfolioId:
           type: string
           nullable: true
+          default: null
         tenantId:
           type: string
           nullable: true
+          default: null
       required:
         - id
         - createdAt
@@ -2560,12 +2563,15 @@ components:
         organizationId:
           type: string
           nullable: true
+          default: null
         portfolioId:
           type: string
           nullable: true
+          default: null
         tenantId:
           type: string
           nullable: true
+          default: null
       required:
         - email
     UserDto:

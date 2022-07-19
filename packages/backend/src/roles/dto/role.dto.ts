@@ -13,13 +13,13 @@ class RoleOptionalDto {
 
   // validate only 1 of the following:
   @Nanoid()
-  organizationId: string | null;
+  organizationId: string | null = null;
 
   @Nanoid()
-  portfolioId: string | null;
+  portfolioId: string | null = null;
 
   @Nanoid()
-  tenantId: string | null;
+  tenantId: string | null = null;
 
   // permissions: Prisma.JsonValue;
 }
