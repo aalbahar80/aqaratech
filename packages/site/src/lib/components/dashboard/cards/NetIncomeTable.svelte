@@ -12,14 +12,17 @@
 		return {
 			id: { label: i.date, hide: true },
 			date: { label: toUTCFormat(new Date(i.date)) },
-			income: { label: kwdFormat(i.amount), extraStyles: ['tabular-nums'] },
+			income: {
+				label: kwdFormat(i.amount),
+				extraStyles: ['tabular-nums', 'slashed-zero'],
+			},
 			expense: {
 				label: kwdFormat(expense),
-				extraStyles: ['text-red-600', 'tabular-nums'],
+				extraStyles: ['text-red-600', 'tabular-nums', 'slashed-zero'],
 			},
 			net: {
 				label: kwdFormat(i.amount - expense),
-				extraStyles: ['tabular-nums'],
+				extraStyles: ['tabular-nums', 'slashed-zero'],
 			},
 		};
 	});
