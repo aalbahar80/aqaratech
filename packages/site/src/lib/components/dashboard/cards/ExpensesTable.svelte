@@ -1,24 +1,28 @@
 <script lang="ts">
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;
 
 	$: tabular = expenses.results.map((i) => {
+		const property = {
+			label: i.breadcrumbs?.property?.label ?? 'General',
+			href: i.breadcrumbs?.property?.href ?? `/portfolios/${i.portfolioId}`,
+		};
+		const unit = {
+			label: property.label ? i.breadcrumbs?.unit?.label : '',
+			href: property.label ? i.breadcrumbs?.unit?.href : '',
+			extraStyles: i.breadcrumbs?.unit ? [''] : ['invisible'],
+		};
 		return {
 			id: { label: i.id, hide: true },
-			postAt: { label: i.postAt.toISOString() },
-			amount: { label: i.amount },
+			postAt: { label: toUTCFormat(i.postAt) },
+			amount: { label: kwdFormat(i.amount) },
 			type: { label: i.expenseType?.labelEn },
-			// property: {
-			// 	label: i.breadcrumbs?.property?.label,
-			// 	href: i.breadcrumbs?.property?.href,
-			// },
-			// unit: {
-			// 	label: i.breadcrumbs?.unit?.label,
-			// 	href: i.breadcrumbs?.unit?.href,
-			// },
+			property,
+			unit,
 			view: {
 				label: 'View',
 				href: `/expenses/${i.id}`,
@@ -30,8 +34,8 @@
 		{ key: 'postAt', label: 'Date' },
 		{ key: 'type', label: 'Category', style: 'bold1' },
 		{ key: 'amount', label: 'Amount' },
-		// { key: 'unit', label: 'Unit', isHref: true, style: 'regular' },
-		// { key: 'property', label: 'Property', style: 'regular' },
+		{ key: 'unit', label: 'Unit', isHref: true, style: 'regular' },
+		{ key: 'property', label: 'Property', style: 'regular' },
 		{ key: 'view', label: 'View', isHref: true, hide: true },
 	];
 
