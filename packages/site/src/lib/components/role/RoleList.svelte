@@ -14,7 +14,8 @@
 	const formUrl = create({
 		entity: 'roles',
 		predefined: new Map<string, any>([
-			['portfolioId', $page.url.pathname.split('/').pop()],
+			['entity', $page.url.pathname.split('/')[1]],
+			['entityId', $page.url.pathname.split('/')[2]],
 		]),
 	});
 </script>

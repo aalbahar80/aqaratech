@@ -6,6 +6,7 @@ export interface EntityName {
 	singularCap: string;
 	plural: string;
 	pluralCap: string;
+	idField: string;
 }
 
 const role: EntityName = {
@@ -14,6 +15,7 @@ const role: EntityName = {
 	singularCap: 'Member',
 	plural: 'members',
 	pluralCap: 'Members',
+	idField: 'roleId',
 };
 
 // do the same for tenant,unit,property,lease,invoice,maintenanceOrder, and expense
@@ -23,6 +25,7 @@ const tenant: EntityName = {
 	singularCap: 'Tenant',
 	plural: 'tenants',
 	pluralCap: 'Tenants',
+	idField: 'tenantId',
 };
 
 const portfolio: EntityName = {
@@ -31,6 +34,7 @@ const portfolio: EntityName = {
 	singularCap: 'Portfolio',
 	plural: 'portfolios',
 	pluralCap: 'Portfolios',
+	idField: 'portfolioId',
 };
 
 const property: EntityName = {
@@ -39,6 +43,7 @@ const property: EntityName = {
 	singularCap: 'Property',
 	plural: 'properties',
 	pluralCap: 'Properties',
+	idField: 'propertyId',
 };
 
 const unit: EntityName = {
@@ -47,6 +52,7 @@ const unit: EntityName = {
 	singularCap: 'Unit',
 	plural: 'units',
 	pluralCap: 'Units',
+	idField: 'unitId',
 };
 
 const lease: EntityName = {
@@ -55,6 +61,7 @@ const lease: EntityName = {
 	singularCap: 'Lease',
 	plural: 'leases',
 	pluralCap: 'Leases',
+	idField: 'leaseId',
 };
 
 const invoice: EntityName = {
@@ -63,6 +70,7 @@ const invoice: EntityName = {
 	singularCap: 'Invoice',
 	plural: 'invoices',
 	pluralCap: 'Invoices',
+	idField: 'invoiceId',
 };
 
 const expense: EntityName = {
@@ -71,6 +79,7 @@ const expense: EntityName = {
 	singularCap: 'Expense',
 	plural: 'expenses',
 	pluralCap: 'Expenses',
+	idField: 'expenseId',
 };
 
 const maintenanceOrder: EntityName = {
@@ -79,6 +88,7 @@ const maintenanceOrder: EntityName = {
 	singularCap: 'MaintenanceOrder',
 	plural: 'maintenanceOrders',
 	pluralCap: 'MaintenanceOrders',
+	idField: 'maintenanceOrderId',
 };
 
 type EntityNameMap = Record<EntityTitle, EntityName>;

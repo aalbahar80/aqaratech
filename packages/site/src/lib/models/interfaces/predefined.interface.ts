@@ -5,8 +5,8 @@ type FindIdFromArray = string | undefined;
 
 export interface PredefinedRole {
 	entity: EntityTitle;
-	fieldName: string;
-	fieldValue: string;
+	entityId: string;
+	idField: string;
 }
 
 export interface PredefinedProperty {

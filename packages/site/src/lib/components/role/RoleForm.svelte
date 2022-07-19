@@ -10,8 +10,8 @@
 	export let predefined: PredefinedRole;
 
 	const basicFields = [
-		new Field(predefined.fieldName, {
-			value: predefined.fieldValue,
+		new Field(predefined.idField, {
+			value: predefined.entityId,
 			disabled: true,
 			autoInit: true,
 			type: 'text',
@@ -27,7 +27,5 @@
 	{basicFields}
 	onCreate={(values) => $page.stuff.api.roles.create({ createRoleDto: values })}
 	onSuccess={() =>
-		goto(
-			`/${entityNameMap[predefined.entity].urlName}/${predefined.fieldValue}`,
-		)}
+		goto(`/${entityNameMap[predefined.entity].urlName}/${predefined.entityId}`)}
 />
