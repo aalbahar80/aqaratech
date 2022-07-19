@@ -1723,6 +1723,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
       tags: *ref_8
+  /expenses/types:
+    get:
+      operationId: findTypes
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseTypeDto'
+      tags: *ref_8
   /search:
     post:
       operationId: initSearch

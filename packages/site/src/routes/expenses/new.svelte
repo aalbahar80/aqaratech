@@ -11,13 +11,16 @@
 			unitId: url.searchParams.get('unitId'),
 		};
 
-		const [portfolios, properties, units] = await Promise.all([
+		const [portfolios, properties, units, expenseTypes] = await Promise.all([
 			stuff.api!.portfolios.findAll({ take: 1000 }),
 			stuff.api!.properties.findAll({ take: 1000 }),
 			stuff.api!.units.findAll({ take: 1000 }),
+			stuff.api!.expenses.findTypes(),
 		]);
 
-		return { props: { portfolios, properties, units, predefined } };
+		return {
+			props: { portfolios, properties, units, predefined, expenseTypes },
+		};
 	};
 </script>
 
@@ -27,6 +30,14 @@
 	export let properties: Prop['properties'];
 	export let predefined: Prop['predefined'];
 	export let units: Prop['units'];
+	export let expenseTypes: Prop['expenseTypes'];
 </script>
 
-<ExpenseForm formType="create" {portfolios} {properties} {units} {predefined} />
+<ExpenseForm
+	formType="create"
+	{portfolios}
+	{properties}
+	{units}
+	{predefined}
+	{expenseTypes}
+/>

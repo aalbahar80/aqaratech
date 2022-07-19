@@ -9,6 +9,7 @@
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
 		ExpenseDto,
+		ExpenseTypeDto,
 		PaginatedPortfolioDto,
 		PaginatedPropertyDto,
 		PaginatedUnitDto,
@@ -25,6 +26,7 @@
 
 	interface Props {
 		formType: 'create' | 'update';
+		expenseTypes: ExpenseTypeDto[];
 	}
 
 	interface UpdateForm extends Props {
@@ -43,6 +45,7 @@
 	type $$Props = CreateForm | UpdateForm;
 
 	export let formType: $$Props['formType'];
+	export let expenseTypes: $$Props['expenseTypes'];
 	export let data: TExpenseDto = undefined as TExpenseDto;
 	export let predefined: TPredefinedExpense = undefined as TPredefinedExpense;
 	export let portfolios: TPortfolios = undefined as TPortfolios;
@@ -126,18 +129,16 @@
 			value: toDateInput(data?.postAt),
 			label: 'Post Date',
 		}),
-		// new AsyncSelectField('categoryId', {
-		// 	required: true,
-		// 	getOptions: async () => {
-		// 		const data = await trpc().query('public:expenses:meta');
-		// 		return getExpenseCategories(data);
-		// 	},
-		// 	value: data?.categoryId || '',
-		// 	label: 'Expense Category',
-		// 	selectionLabel: data?.category
-		// 		? `${data?.category?.en} - ${data?.category?.ar}`
-		// 		: '',
-		// }),
+		new SelectField('categoryId', {
+			required: true,
+			options: expenseTypes.map((type) => ({
+				value: type.id,
+				label: type.labelEn,
+			})),
+			value: data?.categoryId || '',
+			combobox: true,
+			label: 'Expense Category',
+		}),
 		new Field('memo', {
 			value: data?.memo,
 			hint: 'Enter a short description of the expense. This will be visible to the portfolio user.',

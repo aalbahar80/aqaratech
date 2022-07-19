@@ -192,4 +192,10 @@ export class ExpensesService {
     }
     return locationFilter;
   }
+
+  // ::: EXPENSE TYPES :::
+
+  findTypes() {
+    return this.prisma.expenseType.findMany();
+  }
 }
