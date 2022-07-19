@@ -1,6 +1,11 @@
 type SearchParam = string | null;
 type FindIdFromArray = string | undefined;
 
+export interface PredefinedRole {
+	fieldName: string;
+	fieldValue: string;
+}
+
 export interface PredefinedProperty {
 	portfolioId: SearchParam;
 }

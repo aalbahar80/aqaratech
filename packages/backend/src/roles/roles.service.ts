@@ -12,7 +12,20 @@ export class RolesService {
   constructor(private prisma: PrismaService) {}
 
   create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+    // upsert?
+    return this.prisma.user.update({
+      where: { email: createRoleDto.email },
+      data: {
+        roles: {
+          create: {
+            // handle org, portfolio, or tenant
+            portfolio: {
+              connect: { id: createRoleDto.portfolioId! },
+            },
+          },
+        },
+      },
+    });
   }
 
   async findAll({

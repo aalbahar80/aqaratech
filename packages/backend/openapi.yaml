@@ -349,7 +349,7 @@ paths:
                         items:
                           $ref: '#/components/schemas/RoleDto'
       tags: *ref_0
-  /role:
+  /roles:
     post:
       operationId: create
       parameters: []
@@ -360,15 +360,17 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateRoleDto'
       responses:
-        '201':
+        '200':
           description: ''
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/UserDto'
+        '201':
+          description: ''
       tags: &ref_1
-        - users
-  /role/{id}:
+        - roles
+  /roles/{id}:
     delete:
       operationId: remove
       parameters:
@@ -2533,9 +2535,6 @@ components:
           readOnly: true
         email:
           type: string
-        userId:
-          type: string
-          nullable: true
         organizationId:
           type: string
           nullable: true
@@ -2545,26 +2544,19 @@ components:
         tenantId:
           type: string
           nullable: true
-        permissions:
-          type: object
       required:
         - id
         - createdAt
         - updatedAt
         - email
-        - userId
         - organizationId
         - portfolioId
         - tenantId
-        - permissions
     CreateRoleDto:
       type: object
       properties:
         email:
           type: string
-        userId:
-          type: string
-          nullable: true
         organizationId:
           type: string
           nullable: true
@@ -2574,9 +2566,32 @@ components:
         tenantId:
           type: string
           nullable: true
-        permissions:
-          type: object
       required:
+        - email
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          default: null
+        email:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
         - email
     CreateLeaseInvoiceDto:
       type: object
@@ -3272,31 +3287,6 @@ components:
           type: string
           nullable: true
           default: null
-    UserDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        fullName:
-          type: string
-          nullable: true
-          default: null
-        email:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - email
     CreateExpenseDto:
       type: object
       properties:

@@ -1,14 +1,17 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
+import { UserDto } from 'src/users/dto/user.dto';
 import { RolesService } from './roles.service';
 
-@Controller('role')
-@ApiTags('users')
+@Controller('roles')
+@ApiTags('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @Post()
+  // return email string?
+  @ApiOkResponse({ type: UserDto })
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.rolesService.create(createRoleDto);
   }

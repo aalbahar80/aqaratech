@@ -1,5 +1,5 @@
 import { IntersectionType, PartialType, PickType } from '@nestjs/swagger';
-import { Prisma, Role } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { UserDto } from 'src/users/dto/user.dto';
@@ -8,9 +8,10 @@ class RoleRequiredDto extends PickType(UserDto, ['email']) {}
 
 class RoleOptionalDto {
   // should be required?
-  @Nanoid()
-  userId: string | null;
+  // @Nanoid()
+  // userId: string | null;
 
+  // validate only 1 of the following:
   @Nanoid()
   organizationId: string | null;
 
@@ -20,7 +21,7 @@ class RoleOptionalDto {
   @Nanoid()
   tenantId: string | null;
 
-  permissions: Prisma.JsonValue;
+  // permissions: Prisma.JsonValue;
 }
 
 export class RoleDto extends IntersectionType(
