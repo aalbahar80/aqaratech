@@ -1,5 +1,5 @@
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -12,19 +12,25 @@ export class RolesService {
   constructor(private prisma: PrismaService) {}
 
   create(createRoleDto: CreateRoleDto) {
-    // upsert?
-    return this.prisma.user.update({
+    let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
+    if (createRoleDto.organizationId) {
+      create = {
+        organization: { connect: { id: createRoleDto.organizationId } },
+      };
+    } else if (createRoleDto.portfolioId) {
+      create = { portfolio: { connect: { id: createRoleDto.portfolioId } } };
+    } else if (createRoleDto.tenantId) {
+      create = { tenant: { connect: { id: createRoleDto.tenantId } } };
+    } else {
+      throw new BadRequestException(
+        'No organization, portfolio or tenant specified',
+      );
+    }
+
+    return this.prisma.user.upsert({
       where: { email: createRoleDto.email },
-      data: {
-        roles: {
-          create: {
-            // handle org, portfolio, or tenant
-            portfolio: {
-              connect: { id: createRoleDto.portfolioId! },
-            },
-          },
-        },
-      },
+      create: { email: createRoleDto.email, roles: { create } },
+      update: { roles: { create } },
     });
   }
 
