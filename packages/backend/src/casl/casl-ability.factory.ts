@@ -183,7 +183,8 @@ export class CaslAbilityFactory {
       can(Action.Read, ['Organization'], { id: { in: own.orgs } });
 
       // TODO: limit fields
-      can(Action.Read, ['Role'], {
+      // TODO only superadmins can manage org roles?
+      can(Action.Manage, ['Role'], {
         OR: [
           { organizationId: { in: own.orgs } },
           { portfolioId: { in: manageable.portfolios } },
