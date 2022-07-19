@@ -5,12 +5,15 @@
 	import { handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
 	import { Mail, Trash } from '@steeze-ui/heroicons';
+	import { createEventDispatcher } from 'svelte';
 	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
 
 	export let role: RoleDto;
 	export let icons: any[];
 
 	const isActive = Math.random() >= 0.5;
+
+	const dispatch = createEventDispatcher<{ delete: { id: string } }>();
 </script>
 
 <div class="px-4 py-4 sm:px-6">
@@ -33,12 +36,13 @@
 				{
 					icon: Trash,
 					label: 'Remove',
-					onClick: async () => {
-						try {
-							await $page.stuff.api.roles.remove({ id: role.id });
-						} catch (error) {
-							await handleApiError(error);
-						}
+					onClick: () => {
+						$page.stuff.api.roles
+							.remove({ id: role.id })
+							.then((id) => {
+								dispatch('delete', { id });
+							})
+							.catch(handleApiError);
 					},
 				},
 			]}

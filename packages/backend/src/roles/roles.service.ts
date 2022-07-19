@@ -85,6 +85,6 @@ export class RolesService {
   }
 
   remove(id: string) {
-    return this.prisma.role.delete({ where: { id } });
+    return this.prisma.role.delete({ where: { id } }).then(() => id);
   }
 }

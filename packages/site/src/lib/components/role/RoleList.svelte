@@ -34,7 +34,13 @@
 			},
 		]}
 		<li>
-			<RoleCard {role} {icons} />
+			<RoleCard
+				{role}
+				{icons}
+				on:delete={(e) => {
+					roles.results = roles.results.filter((r) => r.id !== e.detail.id);
+				}}
+			/>
 		</li>
 	{/each}
 	<div slot="emptyState">
