@@ -65,4 +65,7 @@
 	<RoleList {roles} />
 {/if}
 <LeaseList {leases} showIndex />
-<TrxColumn {invoices} />
+
+{#if invoices.results.length}
+	<TrxColumn {invoices} />
+{/if}
