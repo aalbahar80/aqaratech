@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PortfolioDto } from '@self/sdk';
-	import { AtSymbol, Phone, User } from '@steeze-ui/heroicons';
+	import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let portfolio: PortfolioDto;
@@ -21,7 +21,7 @@
 			<div class="sm:flex sm:space-x-4">
 				<p class="flex items-center text-sm text-gray-500">
 					<Icon
-						src={User}
+						src={FolderOpen}
 						theme="solid"
 						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 						aria-hidden="true"
