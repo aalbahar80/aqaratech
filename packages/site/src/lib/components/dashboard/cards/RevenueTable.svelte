@@ -11,7 +11,10 @@
 			id: { label: i.id, hide: true },
 			postAt: { label: toUTCFormat(i.postAt) },
 			amount: { label: kwdFormat(i.amount) },
-			status: { label: i.isPaid },
+			status: {
+				label: i.isPaid ? 'Paid' : 'Unpaid',
+				extraStyles: i.isPaid ? ['text-green-600'] : ['text-red-600'],
+			},
 			property: {
 				label: i.breadcrumbs.property.label,
 				href: i.breadcrumbs.property.href,
