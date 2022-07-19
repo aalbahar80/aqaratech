@@ -3,6 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
+import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -175,7 +176,7 @@ export class LeaseInvoicesService {
   parseLocationFilter({
     filter,
   }: {
-    filter?: LeaseInvoiceOptionsDto;
+    filter?: DashboardFilterDto;
   }): Prisma.LeaseInvoiceWhereInput {
     let locationFilter: Prisma.LeaseInvoiceWhereInput;
     if (filter?.unitId) {

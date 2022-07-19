@@ -3,6 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
+import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import {
   BreadcrumbDto,
@@ -182,7 +183,7 @@ export class ExpensesService {
     return crumbs;
   }
 
-  parseLocationFilter({ filter }: { filter?: ExpensePageOptionsDto }) {
+  parseLocationFilter({ filter }: { filter?: DashboardFilterDto }) {
     let locationFilter: Prisma.ExpenseWhereInput;
     if (filter?.unitId) {
       locationFilter = { unitId: filter.unitId };

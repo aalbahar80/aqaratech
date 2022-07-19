@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
+import { ExpensesService } from 'src/expenses/expenses.service';
+import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class AnalyticsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private leaseInvoicesService: LeaseInvoicesService,
+    private expensesService: ExpensesService,
+  ) {}
 
   async incomeByMonth({ filter }: { filter?: DashboardFilterDto }) {
     // get sum of all leaseInvoices for portfolio and group by month
@@ -13,7 +18,7 @@ export class AnalyticsService {
     const leaseInvoices = await this.prisma.leaseInvoice.findMany({
       where: {
         AND: [
-          this.parseInvoiceLocationFilter({ filter }),
+          this.leaseInvoicesService.parseLocationFilter({ filter }),
           { postAt: { gte: filter?.start, lte: filter?.end } },
         ],
       },
@@ -27,7 +32,7 @@ export class AnalyticsService {
     const expenses = await this.prisma.expense.findMany({
       where: {
         AND: [
-          this.parseExpenseLocationFilter({ filter }),
+          this.expensesService.parseLocationFilter({ filter }),
           { postAt: { gte: filter?.start, lte: filter?.end } },
         ],
       },
@@ -71,31 +76,5 @@ export class AnalyticsService {
     });
 
     return byMonthArray;
-  }
-
-  parseInvoiceLocationFilter({ filter }: { filter?: DashboardFilterDto }) {
-    let locationFilter: Prisma.LeaseInvoiceWhereInput;
-    if (filter?.unitId) {
-      locationFilter = { lease: { unit: { id: filter.unitId } } };
-    } else if (filter?.propertyId) {
-      locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
-    } else {
-      locationFilter = {
-        lease: { unit: { property: { portfolioId: filter?.portfolioId } } },
-      };
-    }
-    return locationFilter;
-  }
-
-  parseExpenseLocationFilter({ filter }: { filter?: DashboardFilterDto }) {
-    let locationFilter: Prisma.ExpenseWhereInput;
-    if (filter?.unitId) {
-      locationFilter = { unitId: filter.unitId };
-    } else if (filter?.propertyId) {
-      locationFilter = { propertyId: filter.propertyId };
-    } else {
-      locationFilter = { portfolioId: filter?.portfolioId };
-    }
-    return locationFilter;
   }
 }
