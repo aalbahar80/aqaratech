@@ -15,7 +15,6 @@
 </script> -->
 
 <!-- <script lang="ts">
-	type MaintenanceOrder = InferQueryOutput<'maintenanceOrders:read'>;
 	export let maintenanceOrder: MaintenanceOrder;
 
 	let details: [string, string | null][];

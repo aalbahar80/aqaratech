@@ -4,7 +4,6 @@
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	// type Data = NonNullable<InferQueryOutput<`${'tenants' | 'leases'}:read`>>;
 	export let details: [string, string | null][];
 	export let files: [string, string][] | undefined = undefined;
 
