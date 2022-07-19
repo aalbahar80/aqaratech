@@ -61,6 +61,7 @@ export class UpdateExpenseDto extends PartialType(
   OmitType(CreateExpenseDto, ['portfolioId']),
 ) {}
 
-export class ExpenseBreadcrumbsDto extends PartialType(
-  PickType(BreadcrumbsDto, ['portfolio', 'property', 'unit']),
+export class ExpenseBreadcrumbsDto extends IntersectionType(
+  PickType(BreadcrumbsDto, ['portfolio']),
+  PartialType(PickType(BreadcrumbsDto, ['property', 'unit'])),
 ) {}
