@@ -20,7 +20,7 @@
 			if (!propertyId) return acc;
 			if (acc[propertyId]) {
 				acc[propertyId].total += i.amount;
-				acc[propertyId].label = i.breadcrumbs.property.label;
+				acc[propertyId].label = i.breadcrumbs.property?.label;
 			} else {
 				acc[propertyId] = {
 					total: i.amount,
