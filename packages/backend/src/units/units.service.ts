@@ -75,6 +75,7 @@ export class UnitsService {
       this.prisma.unit.findMany({
         take,
         skip: (page - 1) * take,
+        orderBy: { unitNumber: 'asc' },
         where: filter,
         include: {
           leases: { select: { start: true, end: true } },
