@@ -4,6 +4,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -43,7 +44,8 @@ export class PrismaExceptionFilter
     } else {
       // TODO return error message?
       // TODO Test minimial error message (auto set in prod by Prisma)
-      responseError = new BadRequestException(); // change to 500?
+      this.logger.warn('Potentially unhandled Prisma error:', exception);
+      responseError = new InternalServerErrorException();
     }
 
     response
