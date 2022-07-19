@@ -16,6 +16,9 @@
 			<p class="truncate text-sm font-medium text-indigo-600">
 				# {tenant.shortName}
 			</p>
+			<div class="ml-2 flex flex-shrink-0">
+				<Badge label="Active" badgeColor="green" />
+			</div>
 		</div> -->
 		<div class="mt-2 sm:flex sm:justify-between">
 			<div class="sm:flex sm:space-x-4">
