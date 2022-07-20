@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { browser, dev, mode, prerendering, prod, server } from '$app/env';
+	import { browser, dev, prerendering } from '$app/env';
 	import { assets, base } from '$app/paths';
 	import { navigating, page, session, updated } from '$app/stores';
 
 	export let processEnv: Record<string, any>;
 	export let environment: Record<string, any>;
 
-	const appEnv = { browser, dev, mode, prerendering, prod, server };
+	const appEnv = { browser, dev, prerendering };
 	const appStores = {
 		updated: $updated,
 		navigating: $navigating,
