@@ -6,6 +6,7 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedRole } from '$lib/models/interfaces/predefined.interface';
 	import { createSchema } from '$lib/models/schemas/role.schema';
+	import { addSuccessToast } from '$lib/stores/toast';
 
 	export let predefined: PredefinedRole;
 
@@ -26,6 +27,12 @@
 	formType="create"
 	{basicFields}
 	onCreate={(values) => $page.stuff.api.roles.create({ createRoleDto: values })}
-	onSuccess={() =>
-		goto(`/${entityNameMap[predefined.entity].urlName}/${predefined.entityId}`)}
+	onSuccess={() => {
+		addSuccessToast(
+			'Member added. An email invitation will be sent to the user.',
+		);
+		return goto(
+			`/${entityNameMap[predefined.entity].urlName}/${predefined.entityId}`,
+		);
+	}}
 />

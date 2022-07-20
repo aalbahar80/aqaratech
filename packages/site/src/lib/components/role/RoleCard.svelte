@@ -11,8 +11,6 @@
 	export let role: RoleDto;
 	export let icons: any[];
 
-	const isActive = Math.random() >= 0.5;
-
 	const dispatch = createEventDispatcher<{ delete: { id: string } }>();
 </script>
 
@@ -21,40 +19,44 @@
 		<p class="truncate text-sm font-medium text-indigo-600">
 			{role.email}
 		</p>
-		{#if !isActive}
-			<Badge label="Invited" badgeColor="indigo">
-				<Fa6SolidEnvelope class="mr-2 inline" />
-			</Badge>
-		{/if}
-		<DropDown
-			options={[
-				{
-					icon: Mail,
-					label: 'Resend email',
-					onClick: () => {
-						$page.stuff.api.roles
-							.sendInvite({ id: role.id })
-							.then(() => {
-								addSuccessToast(`A new email will be sent to ${role.email}`);
-							})
-							.catch(handleApiError);
+		<div class="flex place-items-center space-x-4">
+			{#if !role.isAccepted}
+				<Badge label="Invited" badgeColor="indigo">
+					<Fa6SolidEnvelope class="mr-2 inline" />
+				</Badge>
+			{/if}
+			<DropDown
+				options={[
+					{
+						icon: Mail,
+						label: 'Resend email',
+						onClick: () => {
+							$page.stuff.api.roles
+								.sendInvite({ id: role.id })
+								.then(() => {
+									addSuccessToast(
+										`A new email invite will be sent to ${role.email}`,
+									);
+								})
+								.catch(handleApiError);
+						},
 					},
-				},
-				{
-					icon: Trash,
-					label: 'Remove',
-					onClick: () => {
-						$page.stuff.api.roles
-							.remove({ id: role.id })
-							.then((id) => {
-								dispatch('delete', { id });
-								addSuccessToast(`${role.email} has been removed`);
-							})
-							.catch(handleApiError);
+					{
+						icon: Trash,
+						label: 'Remove',
+						onClick: () => {
+							$page.stuff.api.roles
+								.remove({ id: role.id })
+								.then((id) => {
+									dispatch('delete', { id });
+									addSuccessToast(`${role.email} has been removed`);
+								})
+								.catch(handleApiError);
+						},
 					},
-				},
-			]}
-		/>
+				]}
+			/>
+		</div>
 	</div>
 	<div class="mt-2 sm:flex sm:justify-between">
 		<div class="sm:flex sm:space-x-4">
