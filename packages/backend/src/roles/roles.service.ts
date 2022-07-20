@@ -46,24 +46,26 @@ export class RolesService {
       throw new BadRequestException('Role already exists for this user');
     }
 
-    // upsert user with new role
-    const user = await this.prisma.user.upsert({
-      where: { email: createRoleDto.email },
-      create: { email: createRoleDto.email, roles: { create } },
-      update: { roles: { create } },
+    const role = await this.prisma.role.create({
+      data: {
+        ...create,
+        user: {
+          connectOrCreate: {
+            where: { email: createRoleDto.email },
+            create: { email: createRoleDto.email },
+          },
+        },
+      },
     });
 
-    this.eventEmitter.emit(
-      'role.created',
-      new RoleCreatedEvent(user.id, user.email),
-    );
+    this.eventEmitter.emit('role.created', new RoleCreatedEvent(role.id));
 
-    return user;
+    return role;
   }
 
   @OnEvent('role.created')
-  sendWelcomeEmail(payload: RoleCreatedEvent) {
-    console.log('sendWelcomeEmail', payload);
+  async sendWelcomeEmail(payload: RoleCreatedEvent) {
+    console.log('TODO: sendWelcomeEmail', payload);
   }
 
   async findAll({

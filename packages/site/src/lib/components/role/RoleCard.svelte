@@ -31,7 +31,14 @@
 				{
 					icon: Mail,
 					label: 'Resend email',
-					onClick: () => {},
+					onClick: () => {
+						$page.stuff.api.roles
+							.sendInvite({ id: role.id })
+							.then(() => {
+								addSuccessToast(`A new email will be sent to ${role.email}`);
+							})
+							.catch(handleApiError);
+					},
 				},
 				{
 					icon: Trash,
@@ -41,7 +48,7 @@
 							.remove({ id: role.id })
 							.then((id) => {
 								dispatch('delete', { id });
-								addSuccessToast('Member deleted');
+								addSuccessToast(`${role.email} has been removed`);
 							})
 							.catch(handleApiError);
 					},
