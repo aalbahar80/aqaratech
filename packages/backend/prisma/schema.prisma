@@ -32,8 +32,8 @@ model Role {
     isAccepted Boolean @default(false)
     permissions Json?
 
-    userId String?
-    user   User?   @relation(fields: [userId], references: [id], onDelete: Restrict)
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
     organizationId String?
     organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
