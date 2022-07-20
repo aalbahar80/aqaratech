@@ -32,7 +32,7 @@ export class RolesController {
       Action.Create,
       subject('Role', createRoleDto),
     );
-    return this.rolesService.create(createRoleDto);
+    return this.rolesService.create({ createRoleDto, user });
   }
 
   @CheckAbilities({ action: Action.Delete, subject: 'Role' })
@@ -43,7 +43,10 @@ export class RolesController {
 
   @CheckAbilities({ action: Action.Manage, subject: 'Role' })
   @Post(':id/send-invite')
-  sendInvite(@Param('id') id: string) {
-    this.eventEmitter.emit('role.created', new RoleCreatedEvent(id));
+  sendInvite(@User() user: IUser, @Param('id') id: string) {
+    this.eventEmitter.emit(
+      'role.created',
+      new RoleCreatedEvent(id, user.email),
+    );
   }
 }

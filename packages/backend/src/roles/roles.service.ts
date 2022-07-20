@@ -18,7 +18,13 @@ export class RolesService {
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
-  async create(createRoleDto: CreateRoleDto) {
+  async create({
+    createRoleDto,
+    user,
+  }: {
+    createRoleDto: CreateRoleDto;
+    user: IUser;
+  }) {
     let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
     if (createRoleDto.organizationId) {
       create = {
@@ -60,21 +66,39 @@ export class RolesService {
       },
     });
 
-    this.eventEmitter.emit('role.created', new RoleCreatedEvent(role.id));
+    this.eventEmitter.emit(
+      'role.created',
+      new RoleCreatedEvent(role.id, user.email),
+    );
 
     return role;
   }
 
   @OnEvent('role.created')
   async sendWelcomeEmail(payload: RoleCreatedEvent) {
-    // TODO replace with real data
+    const role = await this.prisma.role.findUnique({
+      where: { id: payload.roleId },
+      include: {
+        user: { select: { email: true } },
+        organization: { select: { fullName: true } },
+        portfolio: { select: { organization: { select: { fullName: true } } } },
+        tenant: { select: { organization: { select: { fullName: true } } } },
+      },
+    });
+
+    let organizationName =
+      role.organization?.fullName ||
+      role.portfolio?.organization?.fullName ||
+      role.tenant?.organization?.fullName ||
+      '';
+
     await this.postmarkService.client.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
-      To: 'dev.tester.2@mailthink.net',
+      To: role.user.email,
       TemplateAlias: 'user-invitation',
       TemplateModel: {
-        invite_sender_email: 'John@example.com',
-        invite_sender_organization_name: 'The Real Estate Co',
+        invite_sender_email: payload.senderEmail,
+        invite_sender_organization_name: organizationName,
         action_url: 'https://aqaratech.com',
       },
     });
