@@ -30,6 +30,7 @@ import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { MetaModule } from './meta/meta.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { MetaModule } from './meta/meta.module';
     OrganizationsModule,
     AnalyticsModule,
     MetaModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [

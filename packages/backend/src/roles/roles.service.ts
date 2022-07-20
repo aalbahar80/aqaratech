@@ -1,15 +1,20 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 
 @Injectable()
 export class RolesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
 
   async create(createRoleDto: CreateRoleDto) {
     let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
@@ -42,11 +47,23 @@ export class RolesService {
     }
 
     // upsert user with new role
-    return this.prisma.user.upsert({
+    const user = await this.prisma.user.upsert({
       where: { email: createRoleDto.email },
       create: { email: createRoleDto.email, roles: { create } },
       update: { roles: { create } },
     });
+
+    this.eventEmitter.emit(
+      'role.created',
+      new RoleCreatedEvent(user.id, user.email),
+    );
+
+    return user;
+  }
+
+  @OnEvent('role.created')
+  sendWelcomeEmail(payload: RoleCreatedEvent) {
+    console.log('sendWelcomeEmail', payload);
   }
 
   async findAll({
