@@ -1,6 +1,6 @@
 import { environment } from '$environment';
 import type { RequestHandler } from '@sveltejs/kit';
-import { v4 } from 'uuid';
+import { randomUUID } from 'crypto';
 
 const { authConfig } = environment;
 
@@ -10,7 +10,7 @@ export const GET: RequestHandler = () => {
 		client_id: authConfig.AUTH0_CLIENT_ID,
 		redirect_uri: authConfig.AUTH0_REDIRECT_URI,
 		scope: 'openid profile email',
-		state: v4(),
+		state: randomUUID(),
 		audience: authConfig.AUTH0_API_AUDIENCE,
 	});
 	const url = `${authConfig.AUTH0_DOMAIN}/authorize?${decodeURIComponent(
