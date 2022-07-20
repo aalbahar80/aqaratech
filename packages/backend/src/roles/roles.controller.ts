@@ -1,5 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -14,7 +15,10 @@ import { RolesService } from './roles.service';
 @Controller('roles')
 @ApiTags('roles')
 export class RolesController {
-  constructor(private readonly rolesService: RolesService) {}
+  constructor(
+    private readonly rolesService: RolesService,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
 
   @Post()
   // return email string?
@@ -40,6 +44,6 @@ export class RolesController {
   @CheckAbilities({ action: Action.Manage, subject: 'Role' })
   @Post(':id/send-invite')
   sendInvite(@Param('id') id: string) {
-    return this.rolesService.sendWelcomeEmail(new RoleCreatedEvent(id));
+    this.eventEmitter.emit('role.created', new RoleCreatedEvent(id));
   }
 }

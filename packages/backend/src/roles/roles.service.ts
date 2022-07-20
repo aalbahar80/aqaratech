@@ -6,6 +6,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
+import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 
@@ -13,6 +14,7 @@ import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 export class RolesService {
   constructor(
     private prisma: PrismaService,
+    private postmarkService: PostmarkService,
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
@@ -65,7 +67,17 @@ export class RolesService {
 
   @OnEvent('role.created')
   async sendWelcomeEmail(payload: RoleCreatedEvent) {
-    console.log('TODO: sendWelcomeEmail', payload);
+    // TODO replace with real data
+    await this.postmarkService.client.sendEmailWithTemplate({
+      From: 'Aqaratech <notifications@aqaratech.com>',
+      To: 'dev.tester.2@mailthink.net',
+      TemplateAlias: 'user-invitation',
+      TemplateModel: {
+        invite_sender_email: 'John@example.com',
+        invite_sender_organization_name: 'The Real Estate Co',
+        action_url: 'https://aqaratech.com',
+      },
+    });
   }
 
   async findAll({
