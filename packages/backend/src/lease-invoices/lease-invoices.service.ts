@@ -1,6 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
@@ -16,13 +16,16 @@ import {
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { kwdFormat } from 'src/utils/format';
 
 @Injectable()
 export class LeaseInvoicesService {
   constructor(
     private prisma: PrismaService,
     private caslAbilityFactory: CaslAbilityFactory,
+    private postmarkService: PostmarkService,
   ) {}
 
   async create({
@@ -121,6 +124,41 @@ export class LeaseInvoicesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.leaseInvoice.delete({ where: { id } });
+  }
+
+  async sendEmail(id: string) {
+    const invoice = await this.prisma.leaseInvoice.findUnique({
+      where: { id },
+      select: {
+        amount: true,
+        postAt: true,
+        lease: {
+          select: {
+            tenant: { select: { phone: true, email: true, fullName: true } },
+          },
+        },
+      },
+    });
+
+    const tenant = invoice.lease.tenant;
+    if (!tenant.email) {
+      throw new BadRequestException('Tenant has no email');
+    }
+
+    await this.postmarkService.client.sendEmailWithTemplate({
+      From: 'Aqaratech <notifications@aqaratech.com>',
+      To: tenant.email,
+      TemplateAlias: 'invoice',
+      TemplateModel: {
+        amount: kwdFormat(invoice.amount),
+        date: invoice.postAt.toISOString().split('T')[0],
+        trxUrl: `https://aqaratech.com/invoices/${id}`,
+        monthYear: new Date(invoice.postAt).toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
+        }),
+      },
+    });
   }
 
   // ::: HELPERS :::

@@ -44,11 +44,7 @@
 		/>
 		<!-- TODO implement nest -->
 		<AsyncButton
-			func={() =>
-				fetch('/transactions/' + trx.id + '/notify', {
-					method: 'POST',
-					body: JSON.stringify({ mode: 'email' }),
-				})}
+			func={() => $page.stuff.api.leaseInvoices.sendEmail({ id: trx.id })}
 			disabled={!sendEnabled}
 			let:loading
 			let:disabled

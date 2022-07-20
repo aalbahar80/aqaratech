@@ -87,4 +87,10 @@ export class LeaseInvoicesController {
   remove(@Param('id') id: string): Promise<LeaseInvoiceBasicDto> {
     return this.leaseInvoicesService.remove({ id });
   }
+
+  @Post('/:id/send-email')
+  @CheckAbilities({ action: Action.Read, subject: 'LeaseInvoice' })
+  sendEmail(@Param('id') id: string) {
+    return this.leaseInvoicesService.sendEmail(id);
+  }
 }
