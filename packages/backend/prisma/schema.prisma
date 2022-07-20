@@ -29,6 +29,7 @@ model Role {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    isAccepted Boolean @default(false)
     permissions Json?
 
     userId String?

@@ -1,5 +1,6 @@
 import { IntersectionType, PartialType, PickType } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
+import { IsBoolean } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { UserDto } from 'src/users/dto/user.dto';
@@ -15,6 +16,9 @@ class RoleOptionalDto {
 
   @Nanoid()
   tenantId: string | null = null;
+
+  @IsBoolean()
+  isAccepted: boolean;
 
   // permissions: Prisma.JsonValue;
 }

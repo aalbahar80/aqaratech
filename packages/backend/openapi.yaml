@@ -2551,6 +2551,8 @@ components:
           type: string
           nullable: true
           default: null
+        isAccepted:
+          type: boolean
       required:
         - id
         - createdAt
@@ -2559,6 +2561,7 @@ components:
         - organizationId
         - portfolioId
         - tenantId
+        - isAccepted
     CreateRoleDto:
       type: object
       properties:
@@ -2576,6 +2579,8 @@ components:
           type: string
           nullable: true
           default: null
+        isAccepted:
+          type: boolean
       required:
         - email
     UserDto:
