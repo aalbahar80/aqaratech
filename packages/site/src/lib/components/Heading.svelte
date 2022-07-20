@@ -2,6 +2,7 @@
 	import { session } from '$app/stores';
 	import ButtonDropdown from '$components/ButtonDropdown.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { Trash } from '@steeze-ui/heroicons';
 
@@ -46,7 +47,7 @@
 			<ButtonDropdown
 				defaultOption={{
 					label: 'Edit',
-					href: `/${entity}/${id}/edit`,
+					href: `/${entityNameMap[entity].urlName}/${id}/edit`,
 				}}
 				options={[
 					{
