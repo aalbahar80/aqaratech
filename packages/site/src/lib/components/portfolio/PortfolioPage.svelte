@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { handleInvite } from '$lib/components/actions/invite';
-	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -12,7 +10,7 @@
 		PaginatedRoleDto,
 		PortfolioDto,
 	} from '@self/sdk';
-	import { Mail, PresentationChartBar } from '@steeze-ui/heroicons';
+	import { PresentationChartBar } from '@steeze-ui/heroicons';
 
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
@@ -38,19 +36,6 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<AsyncButton
-			func={() => handleInvite(portfolio.id, 'propertyOwner')}
-			let:loading
-		>
-			<Button
-				as="div"
-				{loading}
-				icon={Mail}
-				solid
-				text="Invite"
-				class="w-full sm:w-auto"
-			/></AsyncButton
-		>
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} />

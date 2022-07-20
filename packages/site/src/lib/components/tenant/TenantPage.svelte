@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import TrxColumn from '$components/tenant/TrxColumn.svelte';
-	import { handleInvite } from '$lib/components/actions/invite';
-	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -14,7 +12,7 @@
 		PaginatedRoleDto,
 		TenantDto,
 	} from '@self/sdk';
-	import { Collection, Mail } from '@steeze-ui/heroicons';
+	import { Collection } from '@steeze-ui/heroicons';
 
 	export let tenant: TenantDto;
 	export let leases: PaginatedLeaseDto;
@@ -48,16 +46,6 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<AsyncButton func={() => handleInvite(tenant.id, 'tenant')} let:loading>
-			<Button
-				as="div"
-				{loading}
-				icon={Mail}
-				solid
-				text="Invite"
-				class="w-full sm:w-auto"
-			/></AsyncButton
-		>
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} {files} />
