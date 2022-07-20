@@ -83,6 +83,7 @@ export async function seed({
 		fakePortfolio(randId(organizations))
 	);
 	portfolios[0]!.id = testPortfolioId;
+	portfolios[0]!.organizationId = testOrgId;
 	roles.push({
 		id: generateId(),
 		portfolioId: portfolios[0]!.id,
@@ -118,6 +119,7 @@ export async function seed({
 
 		if (idx === 0) {
 			tenantN.id = testTenantId;
+			tenantN.organizationId = testOrgId;
 		}
 
 		tenants.push(tenantN);
