@@ -1975,10 +1975,45 @@ paths:
                         items:
                           $ref: '#/components/schemas/RoleDto'
       tags: *ref_10
-  /analytics/incomeByMonth/{id}:
+  /analytics/incomeByMonth:
     get:
       operationId: getIncomeByMonth
       parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 1000
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
         - name: start
           required: false
           in: query
@@ -1989,6 +2024,16 @@ paths:
           in: query
           schema:
             type: string
+        - name: paidStatus
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaidStatusEnum'
+        - name: groupBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -2015,7 +2060,7 @@ paths:
                   $ref: '#/components/schemas/ByMonthDto'
       tags: &ref_11
         - analytics
-  /analytics/expensesByMonth/{id}:
+  /analytics/expensesByMonth:
     get:
       operationId: getExpensesByMonth
       parameters:
