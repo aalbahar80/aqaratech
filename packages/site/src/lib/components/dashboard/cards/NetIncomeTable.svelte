@@ -4,10 +4,10 @@
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { ByMonthDto } from '@self/sdk';
 
-	export let income: ByMonthDto[];
+	export let invoicesGrouped: ByMonthDto[];
 	export let expenses: ByMonthDto[];
 
-	$: tabular = income.map((i, index) => {
+	$: tabular = invoicesGrouped.map((i, index) => {
 		const expense = expenses[index]?.amount || 0;
 		return {
 			id: { label: i.date, hide: true },
@@ -36,10 +36,10 @@
 
 	$: footer = {
 		date: 'Total for period',
-		income: kwdFormat(income.reduce((acc, i) => acc + i.amount, 0)),
+		income: kwdFormat(invoicesGrouped.reduce((acc, i) => acc + i.amount, 0)),
 		expense: kwdFormat(expenses.reduce((acc, i) => acc + i.amount, 0)),
 		net: kwdFormat(
-			income.reduce((acc, i) => acc + i.amount, 0) -
+			invoicesGrouped.reduce((acc, i) => acc + i.amount, 0) -
 				expenses.reduce((acc, i) => acc + i.amount, 0),
 		),
 	};

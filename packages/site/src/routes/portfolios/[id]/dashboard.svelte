@@ -24,12 +24,12 @@
 		const [
 			properties,
 			units,
-			income,
+			invoicesGrouped,
 			expensesGrouped,
 			invoices,
 			expenses,
-			incomeGroupedPaid,
-			incomeGroupedUnpaid,
+			invoicesGroupedPaid,
+			invoicesGroupedUnpaid,
 		] = await Promise.all([
 			stuff.api!.portfolios.findProperties({ id: portfolioId }),
 			stuff.api!.portfolios.findUnits({ id: portfolioId }),
@@ -50,12 +50,12 @@
 			props: {
 				properties,
 				units,
-				income,
+				invoicesGrouped,
 				expensesGrouped,
 				invoices,
 				expenses,
-				incomeGroupedPaid,
-				incomeGroupedUnpaid,
+				invoicesGroupedPaid,
+				invoicesGroupedUnpaid,
 			},
 		};
 	};
@@ -66,13 +66,13 @@
 	export let properties: Prop['properties'];
 	export let units: Prop['units'];
 
-	export let income: Prop['income'];
+	export let invoicesGrouped: Prop['invoicesGrouped'];
 	export let expensesGrouped: Prop['expensesGrouped'];
 	export let invoices: Prop['invoices'];
 	export let expenses: Prop['expenses'];
 
-	export let incomeGroupedPaid: Prop['incomeGroupedPaid'];
-	export let incomeGroupedUnpaid: Prop['incomeGroupedUnpaid'];
+	export let invoicesGroupedPaid: Prop['invoicesGroupedPaid'];
+	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
 </script>
 
 <div class="prose">
@@ -81,6 +81,6 @@
 
 <DashboardFilter {properties} {units} />
 
-<NetIncomeCard {income} expenses={expensesGrouped} />
-<RevenueCard {invoices} {incomeGroupedPaid} {incomeGroupedUnpaid} />
+<NetIncomeCard {invoicesGrouped} expenses={expensesGrouped} />
+<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 <ExpensesCard {expenses} />

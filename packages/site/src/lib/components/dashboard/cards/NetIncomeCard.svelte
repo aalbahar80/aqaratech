@@ -4,19 +4,19 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import type { ByMonthDto } from '@self/sdk';
 
-	export let income: ByMonthDto[];
+	export let invoicesGrouped: ByMonthDto[];
 	export let expenses: ByMonthDto[];
 </script>
 
 <DashCard
 	title="Net"
 	subtitle="Total Rent Income vs Total Expenses"
-	empty={expenses.length < 1 && income.length < 1}
+	empty={expenses.length < 1 && invoicesGrouped.length < 1}
 >
 	<div slot="chart">
-		<NetIncomeLineChart {income} {expenses} />
+		<NetIncomeLineChart {invoicesGrouped} {expenses} />
 	</div>
 	<div slot="data">
-		<NetIncomeTable {income} {expenses} />
+		<NetIncomeTable {invoicesGrouped} {expenses} />
 	</div>
 </DashCard>

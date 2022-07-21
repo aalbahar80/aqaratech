@@ -4,14 +4,14 @@
 	import { getColor } from '$lib/config/constants';
 	import type { ByMonthDto } from '@self/sdk';
 
-	export let incomeGroupedPaid: ByMonthDto[];
-	export let incomeGroupedUnpaid: ByMonthDto[];
+	export let invoicesGroupedPaid: ByMonthDto[];
+	export let invoicesGroupedUnpaid: ByMonthDto[];
 
 	$: datasets = [
 		{
 			label: 'Paid',
 			borderColor: getColor(0, 2),
-			data: incomeGroupedPaid,
+			data: invoicesGroupedPaid,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',
@@ -22,7 +22,7 @@
 		{
 			label: 'Unpaid',
 			borderColor: getColor(1, 2),
-			data: incomeGroupedUnpaid,
+			data: invoicesGroupedUnpaid,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',
