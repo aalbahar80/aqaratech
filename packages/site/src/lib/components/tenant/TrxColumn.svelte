@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
-	import Dropdown from '$components/Dropdown.svelte';
-	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
+	import Dropdown from '$components/buttons/Dropdown.svelte';
+	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { addToast } from '$lib/stores/toast';

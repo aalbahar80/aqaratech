@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
-	import Dropdown from '$lib/components/Dropdown.svelte';
-	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
+	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
+	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
-	import Dropdown from '$lib/components/Dropdown.svelte';
-	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
+	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
+	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

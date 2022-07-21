@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
-	import Dropdown from '$lib/components/Dropdown.svelte';
-	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
+	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
+	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
 	import { Mail, Trash } from '@steeze-ui/heroicons';
