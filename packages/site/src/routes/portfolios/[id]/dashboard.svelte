@@ -28,8 +28,8 @@
 			expensesGrouped,
 			invoices,
 			expenses,
-			incomePaid,
-			incomeUnpaid,
+			incomeGroupedPaid,
+			incomeGroupedUnpaid,
 		] = await Promise.all([
 			stuff.api!.portfolios.findProperties({ id: portfolioId }),
 			stuff.api!.portfolios.findUnits({ id: portfolioId }),
@@ -39,7 +39,6 @@
 			stuff.api!.leaseInvoices.findAll(filter),
 			stuff.api!.expenses.findAll(filter), // TODO filter serverside
 
-			// TODO better names
 			stuff.api!.analytics.getIncomeByMonth({ ...filter, paidStatus: 'paid' }),
 			stuff.api!.analytics.getIncomeByMonth({
 				...filter,
@@ -55,8 +54,8 @@
 				expensesGrouped,
 				invoices,
 				expenses,
-				incomePaid,
-				incomeUnpaid,
+				incomeGroupedPaid,
+				incomeGroupedUnpaid,
 			},
 		};
 	};
@@ -72,8 +71,8 @@
 	export let invoices: Prop['invoices'];
 	export let expenses: Prop['expenses'];
 
-	export let incomePaid: Prop['incomePaid'];
-	export let incomeUnpaid: Prop['incomeUnpaid'];
+	export let incomeGroupedPaid: Prop['incomeGroupedPaid'];
+	export let incomeGroupedUnpaid: Prop['incomeGroupedUnpaid'];
 </script>
 
 <div class="prose">
@@ -83,5 +82,5 @@
 <DashboardFilter {properties} {units} />
 
 <NetIncomeCard {income} expenses={expensesGrouped} />
-<RevenueCard {invoices} {incomePaid} {incomeUnpaid} />
+<RevenueCard {invoices} {incomeGroupedPaid} {incomeGroupedUnpaid} />
 <ExpensesCard {expenses} />

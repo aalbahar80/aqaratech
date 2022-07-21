@@ -8,8 +8,8 @@
 	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
-	export let incomePaid: ByMonthDto[];
-	export let incomeUnpaid: ByMonthDto[];
+	export let incomeGroupedPaid: ByMonthDto[];
+	export let incomeGroupedUnpaid: ByMonthDto[];
 
 	let chartType = 'time';
 </script>
@@ -39,7 +39,7 @@
 		{#if chartType === 'property'}
 			<RevenuePolarArea {invoices} />
 		{:else if chartType === 'time'}
-			<RevenueBar {incomePaid} {incomeUnpaid} />
+			<RevenueBar {incomeGroupedPaid} {incomeGroupedUnpaid} />
 		{:else}
 			<RevenuePie {invoices} />
 		{/if}
