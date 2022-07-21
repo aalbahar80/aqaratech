@@ -9,7 +9,7 @@ import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { SendInvoiceEvent } from 'src/events/send-invoice.event';
+import { InvoiceSendEvent } from 'src/events/invoice-send.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
@@ -157,7 +157,7 @@ export class LeaseInvoicesService {
     emails.forEach((email) =>
       this.eventEmitter.emit(
         'invoice.send',
-        new SendInvoiceEvent(email, invoice),
+        new InvoiceSendEvent(email, invoice),
       ),
     );
 
@@ -165,7 +165,7 @@ export class LeaseInvoicesService {
   }
 
   @OnEvent('invoice.send')
-  async sendEmail(payload: SendInvoiceEvent) {
+  async sendEmail(payload: InvoiceSendEvent) {
     return this.postmarkService.client.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
       To: payload.email,
