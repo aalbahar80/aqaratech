@@ -33,7 +33,7 @@
 	];
 </script>
 
-<div class="bg-gray-900 py-2 print:hidden">
+<div class="bg-gray-900 py-1.5 print:hidden">
 	<nav
 		class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6"
 		aria-label="Global"
@@ -69,12 +69,12 @@
 		{/if}
 
 		<!-- Large screen: nav links -->
-		<div class="hidden space-x-8 lg:ml-10 lg:flex">
+		<div class="hidden space-x-4 lg:ml-10 lg:flex">
 			{#each navigation as item (item.name)}
 				<a
 					sveltekit:prefetch
 					href={item.href}
-					class="text-base font-medium text-white hover:text-gray-300"
+					class="rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
 				>
 					{item.name}
 				</a>
