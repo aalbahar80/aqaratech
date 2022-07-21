@@ -1,11 +1,10 @@
-import { IntersectionType, PartialType, PickType } from '@nestjs/swagger';
+import { IntersectionType, PartialType } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
-import { IsBoolean } from 'class-validator';
+import { IsBoolean, IsEmail } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { UserDto } from 'src/users/dto/user.dto';
 
-class RoleRequiredDto extends PickType(UserDto, ['email']) {}
+class RoleRequiredDto {}
 
 class RoleOptionalDto {
   @Nanoid()
@@ -30,6 +29,10 @@ export class RoleDto extends IntersectionType(
 
 export class CreateRoleDto
   extends IntersectionType(RoleRequiredDto, PartialType(RoleOptionalDto))
-  implements Partial<Role> {}
+  implements Partial<Role>
+{
+  @IsEmail()
+  email: string;
+}
 
 export class UpdateRoleDto extends PartialType(CreateRoleDto) {}

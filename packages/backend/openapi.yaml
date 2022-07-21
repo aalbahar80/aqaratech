@@ -1631,7 +1631,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDto'
+                $ref: '#/components/schemas/ValidatedUserDto'
         '404':
           description: ''
       tags: *ref_7
@@ -2648,8 +2648,6 @@ components:
           format: date-time
           type: string
           readOnly: true
-        email:
-          type: string
         organizationId:
           type: string
           nullable: true
@@ -2668,7 +2666,6 @@ components:
         - id
         - createdAt
         - updatedAt
-        - email
         - organizationId
         - portfolioId
         - tenantId
@@ -3400,6 +3397,46 @@ components:
           type: string
           nullable: true
           default: null
+    ValidatedUserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          default: null
+        roles:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/RoleDto'
+              - type: object
+                properties:
+                  organization:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      fullName:
+                        type: string
+        email:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - roles
+        - email
     CreateExpenseDto:
       type: object
       properties:

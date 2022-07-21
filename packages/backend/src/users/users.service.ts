@@ -31,11 +31,13 @@ export class UsersService {
     });
   }
 
-  findOneByEmail(email: string) {
+  async findOneByEmail(email: string) {
     return this.prisma.user.findUnique({
       where: { email },
       include: {
-        roles: true,
+        roles: {
+          include: { organization: { select: { id: true, fullName: true } } },
+        },
       },
     });
   }
