@@ -85,8 +85,7 @@ export const fakePortfolio = (orgId?: string) => {
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
-		// phone: faker.phone.phoneNumber("1#######"),
-		phone: "99212976",
+		phone: faker.phone.number("9#######"),
 		dob: faker.date.past(),
 	};
 };
@@ -104,8 +103,7 @@ export const fakeTenant = (orgId?: string) => {
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
 		dob: faker.date.past(),
-		// phone: faker.phone.phoneNumber("1#######"),
-		phone: "99212976",
+		phone: faker.phone.number("9#######"),
 		passportNum: faker.datatype
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
