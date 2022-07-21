@@ -12,6 +12,9 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 			scales: {
 				x: {
 					type: 'time',
+					time: {
+						round: 'day',
+					},
 					stacked: true,
 					grid: {
 						display: false,

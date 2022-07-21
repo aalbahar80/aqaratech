@@ -12,11 +12,11 @@ export function netChart(node: HTMLCanvasElement, datasets: DataSets) {
 			scales: {
 				x: {
 					type: 'time',
+					time: {
+						round: 'day', // https://github.com/chartjs/Chart.js/issues/9470#issuecomment-888837234
+					},
 					grid: {
 						drawOnChartArea: false,
-					},
-					ticks: {
-						display: true,
 					},
 				},
 				y: {
