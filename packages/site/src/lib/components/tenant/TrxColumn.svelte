@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
 	import DropDown from '$components/DropDown.svelte';
+	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { addToast } from '$lib/stores/toast';
@@ -205,43 +206,48 @@
 								<td />
 							{:else}
 								<td class="text-center">
-									<DropDown
-										options={[
-											{
-												icon: Eye,
-												label: 'View',
-												href: `/transactions/${invoice.id}`,
-											},
-											// {
-											// 	icon: PencilAlt,
-											// 	label: 'Edit',
-											// 	href: `/transactions/${invoice.id}/edit`,
-											// },
-											{
-												icon: ClipboardCopy,
-												label: 'Copy payment URL',
-												onClick: () => {
-													console.log($page);
-													copyTrxUrl(invoice.id, $page.url.origin);
-												},
-											},
-											invoice.isPaid
-												? {
-														icon: X,
-														label: 'Mark as unpaid',
-														onClick: async () => {
-															await togglePaid(invoice.id, false);
+									<DropDown>
+										<div slot="menu">
+											<DropdownMenu
+												class="bottom-10"
+												options={[
+													{
+														icon: Eye,
+														label: 'View',
+														href: `/transactions/${invoice.id}`,
+													},
+													// {
+													// 	icon: PencilAlt,
+													// 	label: 'Edit',
+													// 	href: `/transactions/${invoice.id}/edit`,
+													// },
+													{
+														icon: ClipboardCopy,
+														label: 'Copy payment URL',
+														onClick: () => {
+															console.log($page);
+															copyTrxUrl(invoice.id, $page.url.origin);
 														},
-												  }
-												: {
-														icon: Check,
-														label: 'Mark as paid',
-														onClick: async () => {
-															await togglePaid(invoice.id, true);
-														},
-												  },
-										]}
-									/>
+													},
+													invoice.isPaid
+														? {
+																icon: X,
+																label: 'Mark as unpaid',
+																onClick: async () => {
+																	await togglePaid(invoice.id, false);
+																},
+														  }
+														: {
+																icon: Check,
+																label: 'Mark as paid',
+																onClick: async () => {
+																	await togglePaid(invoice.id, true);
+																},
+														  },
+												]}
+											/>
+										</div>
+									</DropDown>
 								</td>
 							{/if}
 						</tr>

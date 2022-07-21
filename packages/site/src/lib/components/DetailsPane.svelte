@@ -1,5 +1,7 @@
 <script lang="ts">
-	import ButtonDropdown from '$components/ButtonDropdown.svelte';
+	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import DropDown from '$lib/components/DropDown.svelte';
+	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -41,11 +43,17 @@
 									/>
 									<span class="ml-2 w-0 flex-1 truncate">{key}</span>
 								</div>
-								<ButtonDropdown
-									class="bottom-10"
-									defaultOption={{ label: 'View', href: value }}
-									{options}
-								/>
+								<DropDown>
+									<div slot="button">
+										<!-- Investigate layout shift -->
+										<HybridButton
+											defaultOption={{ label: 'View', href: value }}
+										/>
+									</div>
+									<div slot="menu">
+										<DropdownMenu {options} class="bottom-10" />
+									</div>
+								</DropDown>
 							</li>
 						{/each}
 					</ul>

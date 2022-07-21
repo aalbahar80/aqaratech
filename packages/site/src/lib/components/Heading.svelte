@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import ButtonDropdown from '$components/ButtonDropdown.svelte';
+	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import DropDown from '$lib/components/DropDown.svelte';
+	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
@@ -44,19 +46,27 @@
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} />
-			<ButtonDropdown
-				defaultOption={{
-					label: 'Edit',
-					href: `/${entityNameMap[entity].urlName}/${id}/edit`,
-				}}
-				options={[
-					{
-						label: 'Delete',
-						icon: Trash,
-						onClick: openModal,
-					},
-				]}
-			/>
+			<DropDown>
+				<div slot="button">
+					<HybridButton
+						defaultOption={{
+							label: 'Edit',
+							href: `/${entityNameMap[entity].urlName}/${id}/edit`,
+						}}
+					/>
+				</div>
+				<div slot="menu">
+					<DropdownMenu
+						options={[
+							{
+								label: 'Delete',
+								icon: Trash,
+								onClick: openModal,
+							},
+						]}
+					/>
+				</div>
+			</DropDown>
 		</div>
 	{:else}
 		<!-- hack to keep flex children position consistent -->

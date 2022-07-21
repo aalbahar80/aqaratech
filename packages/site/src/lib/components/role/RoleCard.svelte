@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import DropDown from '$lib/components/DropDown.svelte';
+	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
 	import { Mail, Trash } from '@steeze-ui/heroicons';
@@ -25,37 +26,42 @@
 					<Fa6SolidEnvelope class="mr-2 inline" />
 				</Badge>
 			{/if}
-			<DropDown
-				options={[
-					{
-						icon: Mail,
-						label: 'Resend email',
-						onClick: () => {
-							$page.stuff.api.roles
-								.sendInvite({ id: role.id })
-								.then(() => {
-									addSuccessToast(
-										`A new email invite will be sent to ${role.email}`,
-									);
-								})
-								.catch(handleApiError);
-						},
-					},
-					{
-						icon: Trash,
-						label: 'Remove',
-						onClick: () => {
-							$page.stuff.api.roles
-								.remove({ id: role.id })
-								.then((id) => {
-									dispatch('delete', { id });
-									addSuccessToast(`${role.email} has been removed`);
-								})
-								.catch(handleApiError);
-						},
-					},
-				]}
-			/>
+			<DropDown>
+				<div slot="menu">
+					<DropdownMenu
+						class="bottom-10"
+						options={[
+							{
+								icon: Mail,
+								label: 'Resend email',
+								onClick: () => {
+									$page.stuff.api.roles
+										.sendInvite({ id: role.id })
+										.then(() => {
+											addSuccessToast(
+												`A new email invite will be sent to ${role.email}`,
+											);
+										})
+										.catch(handleApiError);
+								},
+							},
+							{
+								icon: Trash,
+								label: 'Remove',
+								onClick: () => {
+									$page.stuff.api.roles
+										.remove({ id: role.id })
+										.then((id) => {
+											dispatch('delete', { id });
+											addSuccessToast(`${role.email} has been removed`);
+										})
+										.catch(handleApiError);
+								},
+							},
+						]}
+					/>
+				</div>
+			</DropDown>
 		</div>
 	</div>
 	<div class="mt-2 sm:flex sm:justify-between">
