@@ -1,8 +1,8 @@
 <script lang="ts">
 	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
-	import RevenueArea from '$lib/components/dashboard/charts/RevenueArea.svelte';
-	import RevenuePie from '$lib/components/dashboard/charts/RevenuePie.svelte';
-	import RevenueTime from '$lib/components/dashboard/charts/RevenueTime.svelte';
+	import RevenueArea from '$lib/components/charts/RevenueArea.svelte';
+	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
+	import RevenueTime from '$lib/components/charts/RevenueTime.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';

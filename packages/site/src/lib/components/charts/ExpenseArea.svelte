@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
-	import { polarArea } from '$lib/components/dashboard/charts/polar-area';
+	import { polarArea } from '$lib/components/charts/polar-area';
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;

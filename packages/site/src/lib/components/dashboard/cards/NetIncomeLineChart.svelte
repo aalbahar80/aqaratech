@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
-	import { netChart } from '$lib/components/dashboard/charts/net';
+	import { netChart } from '$lib/components/charts/net';
 	import { getColor } from '$lib/config/constants';
 	import type { ByMonthDto } from '@self/sdk';
 

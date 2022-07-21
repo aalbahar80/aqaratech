@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
-	import ExpenseArea from '$lib/components/dashboard/charts/ExpenseArea.svelte';
+	import ExpenseArea from '$lib/components/charts/ExpenseArea.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
