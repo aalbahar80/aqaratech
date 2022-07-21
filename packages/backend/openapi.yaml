@@ -264,6 +264,41 @@ paths:
           in: query
           schema:
             type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: paidStatus
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaidStatusEnum'
+        - name: groupBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/GroupByEnum'
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -475,6 +510,16 @@ paths:
           in: query
           schema:
             type: string
+        - name: paidStatus
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaidStatusEnum'
+        - name: groupBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -758,6 +803,41 @@ paths:
           in: query
           schema:
             type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: paidStatus
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaidStatusEnum'
+        - name: groupBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/GroupByEnum'
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -2534,6 +2614,17 @@ components:
         - paidAt
         - isPaid
         - memo
+    PaidStatusEnum:
+      type: string
+      enum:
+        - all
+        - paid
+        - unpaid
+    GroupByEnum:
+      type: string
+      enum:
+        - none
+        - monthyear
     RoleDto:
       type: object
       properties:
