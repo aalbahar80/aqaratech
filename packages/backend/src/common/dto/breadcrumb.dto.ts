@@ -71,7 +71,7 @@ export class BreadcrumbDto {
       this.href = `/units/${id}`;
       this.label = getUnitLabel(labelParams);
     } else if (rel === Rel.Lease) {
-      this.href = `/portfolios/${id}`;
+      this.href = `/leases/${id}`;
       this.label = labelParams.id;
     } else if (rel === Rel.MaintenanceOrder) {
       this.href = `/maintenanceOrders/${id}`;
