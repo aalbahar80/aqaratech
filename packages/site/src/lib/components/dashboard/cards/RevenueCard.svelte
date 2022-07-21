@@ -1,15 +1,17 @@
 <script lang="ts">
-	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
-	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
-	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
 	import RevenueBar from '$lib/components/charts/RevenueBar.svelte';
+	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
+	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
+	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
+	export let incomePaid: ByMonthDto[];
+	export let incomeUnpaid: ByMonthDto[];
 
-	let chartType = 'ratio';
+	let chartType = 'time';
 </script>
 
 <DashCard
@@ -37,7 +39,7 @@
 		{#if chartType === 'property'}
 			<RevenuePolarArea {invoices} />
 		{:else if chartType === 'time'}
-			<RevenueBar {invoices} />
+			<RevenueBar {incomePaid} {incomeUnpaid} />
 		{:else}
 			<RevenuePie {invoices} />
 		{/if}

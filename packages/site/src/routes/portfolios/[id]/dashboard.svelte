@@ -21,19 +21,41 @@
 			take: 1000,
 		};
 
-		const [properties, units, income, expensesGrouped, invoices, expenses] =
-			await Promise.all([
-				stuff.api!.portfolios.findProperties({ id: portfolioId }),
-				stuff.api!.portfolios.findUnits({ id: portfolioId }),
+		const [
+			properties,
+			units,
+			income,
+			expensesGrouped,
+			invoices,
+			expenses,
+			incomePaid,
+			incomeUnpaid,
+		] = await Promise.all([
+			stuff.api!.portfolios.findProperties({ id: portfolioId }),
+			stuff.api!.portfolios.findUnits({ id: portfolioId }),
 
-				stuff.api!.analytics.getIncomeByMonth(filter),
-				stuff.api!.analytics.getExpensesByMonth(filter),
-				stuff.api!.leaseInvoices.findAll(filter),
-				stuff.api!.expenses.findAll(filter), // TODO filter serverside
-			]);
+			stuff.api!.analytics.getIncomeByMonth(filter),
+			stuff.api!.analytics.getExpensesByMonth(filter),
+			stuff.api!.leaseInvoices.findAll(filter),
+			stuff.api!.expenses.findAll(filter), // TODO filter serverside
+
+			// TODO filter by paid status serverside
+			// TODO better names
+			stuff.api!.analytics.getIncomeByMonth(filter),
+			stuff.api!.analytics.getIncomeByMonth(filter),
+		]);
 
 		return {
-			props: { properties, units, income, expensesGrouped, invoices, expenses },
+			props: {
+				properties,
+				units,
+				income,
+				expensesGrouped,
+				invoices,
+				expenses,
+				incomePaid,
+				incomeUnpaid,
+			},
 		};
 	};
 </script>
@@ -47,6 +69,9 @@
 	export let expensesGrouped: Prop['expensesGrouped'];
 	export let invoices: Prop['invoices'];
 	export let expenses: Prop['expenses'];
+
+	export let incomePaid: Prop['incomePaid'];
+	export let incomeUnpaid: Prop['incomeUnpaid'];
 </script>
 
 <div class="prose">
@@ -56,5 +81,5 @@
 <DashboardFilter {properties} {units} />
 
 <NetIncomeCard {income} expenses={expensesGrouped} />
-<RevenueCard {invoices} />
+<RevenueCard {invoices} {incomePaid} {incomeUnpaid} />
 <ExpensesCard {expenses} />

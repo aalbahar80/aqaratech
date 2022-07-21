@@ -1,15 +1,13 @@
-import type { LeaseInvoiceDto } from '@self/sdk';
+import type { ByMonthDto } from '@self/sdk';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 
-type DataSets = Chart<'bar', LeaseInvoiceDto[]>['data']['datasets'];
+type DataSets = Chart<'bar', ByMonthDto[]>['data']['datasets'];
 
 export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 	const chart = new Chart(node, {
 		type: 'bar',
-		data: {
-			datasets,
-		},
+		data: { datasets },
 		options: {
 			scales: {
 				x: {

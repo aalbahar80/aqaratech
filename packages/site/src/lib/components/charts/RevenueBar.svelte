@@ -2,18 +2,19 @@
 	import Chart from '$lib/components/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
 	import { getColor } from '$lib/config/constants';
-	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import type { ByMonthDto } from '@self/sdk';
 
-	export let invoices: PaginatedLeaseInvoiceDto;
+	export let incomePaid: ByMonthDto[];
+	export let incomeUnpaid: ByMonthDto[];
 
 	$: datasets = [
 		{
 			label: 'Paid',
 			borderColor: getColor(0, 2),
-			data: invoices.results.filter((i) => i.isPaid),
+			data: incomePaid,
 			parsing: {
 				yAxisKey: 'amount',
-				xAxisKey: 'postAt',
+				xAxisKey: 'date',
 			},
 			backgroundColor: getColor(0, 2),
 			borderRadius: 10,
@@ -21,10 +22,10 @@
 		{
 			label: 'Unpaid',
 			borderColor: getColor(1, 2),
-			data: invoices.results.filter((i) => !i.isPaid),
+			data: incomeUnpaid,
 			parsing: {
 				yAxisKey: 'amount',
-				xAxisKey: 'postAt',
+				xAxisKey: 'date',
 			},
 			backgroundColor: getColor(1, 2),
 			borderRadius: 10,
