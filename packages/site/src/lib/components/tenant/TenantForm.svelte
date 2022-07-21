@@ -38,11 +38,6 @@
 			hint: "Adding a tenant's phone unlocks SMS payment reminders.",
 			value: data?.phone,
 		}),
-		new Field('email', {
-			type: 'email',
-			hint: "Adding a tenant's email unlocks (1) email payment reminders and (2) tenant portal invitations.",
-			value: data?.email,
-		}),
 		new Field('dob', {
 			type: 'date',
 			label: 'Date of Birth',

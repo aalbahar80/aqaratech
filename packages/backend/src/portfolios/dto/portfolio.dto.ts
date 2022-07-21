@@ -28,9 +28,6 @@ class PortfolioOptionalDto {
   @IsPhoneNumber('KW')
   phone: string | null = null;
 
-  @IsEmail()
-  email: string | null = null;
-
   @IsISO8601()
   dob: Date | null = null;
 }

@@ -6,7 +6,6 @@ import {
 } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
-  IsEmail,
   IsISO31661Alpha3,
   IsISO8601,
   IsPhoneNumber,
@@ -34,9 +33,6 @@ class TenantOptionalDto {
 
   @IsPhoneNumber('KW')
   phone: string | null = null;
-
-  @IsEmail()
-  email: string | null = null;
 
   @IsISO8601()
   dob: Date | null = null;

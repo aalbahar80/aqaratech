@@ -22,7 +22,6 @@
 	const details: [string, string | null][] = [
 		['Full Name', tenant.fullName],
 		['Phone', tenant.phone],
-		['Email', tenant.email],
 		['Civil id', tenant.civilid],
 		['Passport #', tenant.passportNum],
 		['Residency #', tenant.residencyNum],

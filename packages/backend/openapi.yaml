@@ -2035,10 +2035,6 @@ components:
           type: string
           nullable: true
           default: null
-        email:
-          type: string
-          nullable: true
-          default: null
         dob:
           format: date-time
           type: string
@@ -2096,10 +2092,6 @@ components:
           type: string
           nullable: true
           default: null
-        email:
-          type: string
-          nullable: true
-          default: null
         dob:
           format: date-time
           type: string
@@ -2131,7 +2123,6 @@ components:
         - shortName
         - civilid
         - phone
-        - email
         - dob
         - passportNum
         - nationality
@@ -2148,7 +2139,6 @@ components:
         - civilid
         - dob
         - phone
-        - email
         - passportNum
         - nationality
         - residencyNum
@@ -2326,10 +2316,6 @@ components:
           type: string
           nullable: true
           default: null
-        email:
-          type: string
-          nullable: true
-          default: null
         dob:
           format: date-time
           type: string
@@ -2362,7 +2348,6 @@ components:
         - shortName
         - civilid
         - phone
-        - email
         - dob
         - passportNum
         - nationality
@@ -2384,10 +2369,6 @@ components:
           nullable: true
           default: null
         phone:
-          type: string
-          nullable: true
-          default: null
-        email:
           type: string
           nullable: true
           default: null
@@ -2876,10 +2857,6 @@ components:
           type: string
           nullable: true
           default: null
-        email:
-          type: string
-          nullable: true
-          default: null
         dob:
           format: date-time
           type: string
@@ -2920,10 +2897,6 @@ components:
           type: string
           nullable: true
           default: null
-        email:
-          type: string
-          nullable: true
-          default: null
         dob:
           format: date-time
           type: string
@@ -2938,7 +2911,6 @@ components:
         - shortName
         - civilid
         - phone
-        - email
         - dob
     UpdatePortfolioDto:
       type: object
@@ -2956,10 +2928,6 @@ components:
           nullable: true
           default: null
         phone:
-          type: string
-          nullable: true
-          default: null
-        email:
           type: string
           nullable: true
           default: null

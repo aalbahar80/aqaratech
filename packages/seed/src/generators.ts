@@ -85,7 +85,6 @@ export const fakePortfolio = (orgId?: string) => {
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
-		email: fakeEmail(),
 		// phone: faker.phone.phoneNumber("1#######"),
 		phone: "99212976",
 		dob: faker.date.past(),
@@ -104,7 +103,6 @@ export const fakeTenant = (orgId?: string) => {
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
-		email: fakeEmail(),
 		dob: faker.date.past(),
 		// phone: faker.phone.phoneNumber("1#######"),
 		phone: "99212976",

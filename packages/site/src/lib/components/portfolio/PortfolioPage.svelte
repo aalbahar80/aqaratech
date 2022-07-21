@@ -20,7 +20,6 @@
 	$: details = [
 		['Name', portfolio.fullName],
 		['Phone', portfolio.phone],
-		['Email', portfolio.email],
 		['Civil ID', portfolio.civilid],
 		['Date of birth', portfolio.dob ? toUTCFormat(portfolio.dob) : null],
 	];

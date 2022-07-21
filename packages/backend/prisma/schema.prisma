@@ -53,7 +53,6 @@ model Tenant {
   civilid      String?
   dob          DateTime?
   phone        String?
-  email        String?
   passportNum  String?
   nationality  String?
   residencyNum String?
@@ -77,7 +76,6 @@ model Portfolio {
   shortName String?
   civilid   String?
   phone     String?
-  email     String?
   dob       DateTime?
 
   expenses          Expense[]

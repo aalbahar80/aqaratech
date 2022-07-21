@@ -126,33 +126,51 @@ export class LeaseInvoicesService {
     return this.prisma.leaseInvoice.delete({ where: { id } });
   }
 
-  async sendEmail(id: string) {
+  async sendInvoice(id: string) {
     const invoice = await this.prisma.leaseInvoice.findUnique({
       where: { id },
       select: {
+        id: true,
         amount: true,
         postAt: true,
         lease: {
           select: {
-            tenant: { select: { phone: true, email: true, fullName: true } },
+            tenant: {
+              select: {
+                roles: { select: { user: { select: { email: true } } } },
+              },
+            },
           },
         },
       },
     });
 
-    const tenant = invoice.lease.tenant;
-    if (!tenant.email) {
-      throw new BadRequestException('Tenant has no email');
+    const emails = invoice.lease.tenant.roles.map((role) => role.user.email);
+
+    if (!emails.length) {
+      throw new BadRequestException('No emails found for tenant.');
     }
 
-    await this.postmarkService.client.sendEmailWithTemplate({
+    await Promise.all(
+      emails.map((email) => this.sendEmail({ email, invoice })),
+    );
+  }
+
+  async sendEmail({
+    email,
+    invoice,
+  }: {
+    email: string;
+    invoice: { id: string; amount: number; postAt: Date };
+  }) {
+    return this.postmarkService.client.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
-      To: tenant.email,
+      To: email,
       TemplateAlias: 'invoice',
       TemplateModel: {
         amount: kwdFormat(invoice.amount),
         date: invoice.postAt.toISOString().split('T')[0],
-        trxUrl: `https://aqaratech.com/invoices/${id}`,
+        trxUrl: `https://aqaratech.com/invoices/${invoice.id}`,
         monthYear: new Date(invoice.postAt).toLocaleDateString('en-US', {
           month: 'long',
           year: 'numeric',

@@ -34,11 +34,6 @@
 			value: data?.shortName,
 			hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
 		}),
-		new Field('email', {
-			type: 'email',
-			hint: "Once a portfolio's email has been entered, you will be able to send them a portal invitation.",
-			value: data?.email,
-		}),
 		new Field('phone', { value: data?.phone }),
 		new Field('civilid', {
 			label: 'Civil ID',

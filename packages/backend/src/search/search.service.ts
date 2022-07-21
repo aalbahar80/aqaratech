@@ -96,11 +96,11 @@ export class SearchService {
   async addTenants() {
     const tenants = await this.prisma.tenant.findMany({
       select: {
+        // TODO add search by role.email
         id: true,
         fullName: true,
         shortName: true,
         phone: true,
-        email: true,
         passportNum: true,
         civilid: true,
         residencyNum: true,
@@ -121,11 +121,11 @@ export class SearchService {
   async addPortfolios() {
     const portfolios = await this.prisma.portfolio.findMany({
       select: {
+        // TODO add search by role.email
         id: true,
         fullName: true,
         shortName: true,
         phone: true,
-        email: true,
         civilid: true,
       },
     });
