@@ -14,21 +14,47 @@
 		url,
 	}: LoadEvent<{ id: string }>) => {
 		const sParams = parseParams(url);
-		const chartFilter = { unitId: params.id };
+		const filter = { unitId: params.id };
 
-		const [unit, leases, income, expensesGrouped, invoices, expenses] =
-			await Promise.all([
-				stuff.api!.units.findOne({ id: params.id }),
-				stuff.api!.units.findLeases({ id: params.id, ...sParams }),
+		const [
+			unit,
+			leases,
+			invoicesGrouped,
+			expensesGrouped,
+			invoices,
+			expenses,
+			invoicesGroupedPaid,
+			invoicesGroupedUnpaid,
+		] = await Promise.all([
+			stuff.api!.units.findOne({ id: params.id }),
+			stuff.api!.units.findLeases({ id: params.id, ...sParams }),
 
-				stuff.api!.analytics.getIncomeByMonth(chartFilter),
-				stuff.api!.analytics.getExpensesByMonth(chartFilter),
-				stuff.api!.leaseInvoices.findAll(chartFilter),
-				stuff.api!.expenses.findAll(chartFilter), // TODO filter serverside
-			]);
+			stuff.api!.analytics.getIncomeByMonth(filter),
+			stuff.api!.analytics.getExpensesByMonth(filter),
+			stuff.api!.leaseInvoices.findAll(filter),
+			stuff.api!.expenses.findAll(filter), // TODO filter serverside
+
+			stuff.api!.analytics.getIncomeByMonth({
+				...filter,
+				paidStatus: 'paid',
+			}),
+			stuff.api!.analytics.getIncomeByMonth({
+				...filter,
+				paidStatus: 'unpaid',
+			}),
+		]);
 
 		return {
-			props: { unit, leases, income, expensesGrouped, invoices, expenses },
+			props: {
+				unit,
+				leases,
+				invoicesGrouped,
+				expensesGrouped,
+				invoices,
+				expenses,
+				invoicesGroupedPaid,
+				invoicesGroupedUnpaid,
+			},
 		};
 	};
 </script>
@@ -38,15 +64,18 @@
 	export let unit: Prop['unit'];
 	export let leases: Prop['leases'];
 
-	export let income: Prop['income'];
+	export let invoicesGrouped: Prop['invoicesGrouped'];
 	export let expensesGrouped: Prop['expensesGrouped'];
 	export let invoices: Prop['invoices'];
 	export let expenses: Prop['expenses'];
+
+	export let invoicesGroupedPaid: Prop['invoicesGroupedPaid'];
+	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
 </script>
 
 <UnitPage {unit}>
 	<LeaseList {leases} showIndex />
-	<NetIncomeCard {income} expenses={expensesGrouped} />
-	<RevenueCard {invoices} />
+	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
+	<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 	<ExpensesCard {expenses} />
 </UnitPage>
