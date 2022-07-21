@@ -13,8 +13,10 @@ export function netChart(node: HTMLCanvasElement, datasets: DataSets) {
 				x: {
 					type: 'time',
 					grid: {
-						display: false,
-						// drawBorder: false,
+						drawOnChartArea: false,
+					},
+					ticks: {
+						display: true,
 					},
 				},
 				y: {
