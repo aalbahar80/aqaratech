@@ -1,12 +1,12 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity", "metrics"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity", "metrics"]
 }
 
 datasource db {
-    provider             = "postgres"
-    url                  = env("DATABASE_URL")
-    referentialIntegrity = "prisma"
+  provider             = "postgres"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 // generator dbml {
@@ -14,266 +14,266 @@ datasource db {
 // }
 
 model User {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    email    String  @unique
-    fullName String?
+  email    String  @unique
+  fullName String?
 
-    roles Role[]
+  roles Role[]
 }
 
 model Role {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    isAccepted Boolean @default(false)
-    permissions Json?
+  isAccepted  Boolean @default(false)
+  permissions Json?
 
-    userId String
-    user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
-    organizationId String?
-    organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
-    portfolioId    String?
-    portfolio      Portfolio?    @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-    tenantId       String?
-    tenant         Tenant?       @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  portfolioId    String?
+  portfolio      Portfolio?    @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  tenantId       String?
+  tenant         Tenant?       @relation(fields: [tenantId], references: [id], onDelete: Restrict)
 }
 
 model Tenant {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    fullName     String    @default("")
-    shortName    String?
-    civilid      String?
-    dob          DateTime?
-    phone        String?
-    email        String?
-    passportNum  String?
-    nationality  String?
-    residencyNum String?
-    residencyEnd DateTime?
+  fullName     String    @default("")
+  shortName    String?
+  civilid      String?
+  dob          DateTime?
+  phone        String?
+  email        String?
+  passportNum  String?
+  nationality  String?
+  residencyNum String?
+  residencyEnd DateTime?
 
-    leases            Lease[]
-    maintenanceOrders MaintenanceOrder[]
+  leases            Lease[]
+  maintenanceOrders MaintenanceOrder[]
 
-    organizationId String
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
-    roles Role[]
+  roles Role[]
 }
 
 model Portfolio {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    fullName  String    @default("")
-    shortName String?
-    civilid   String?
-    phone     String?
-    email     String?
-    dob       DateTime?
+  fullName  String    @default("")
+  shortName String?
+  civilid   String?
+  phone     String?
+  email     String?
+  dob       DateTime?
 
-    expenses          Expense[]
-    maintenanceOrders MaintenanceOrder[]
-    properties        Property[]
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  properties        Property[]
 
-    roles Role[]
+  roles Role[]
 
-    organizationId String
-    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 }
 
 model Organization {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    fullName  String  @default("")
-    shortName String?
+  fullName  String  @default("")
+  shortName String?
 
-    roles      Role[]
-    portfolios Portfolio[]
-    tenants    Tenant[]
+  roles      Role[]
+  portfolios Portfolio[]
+  tenants    Tenant[]
 
-    planId String?
-    plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
+  planId String?
+  plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
 
-    planInvoices PlanInvoice[]
+  planInvoices PlanInvoice[]
 }
 
 model Plan {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    label       String  @default("")
-    title       String  @default("")
-    description String?
-    amount      Int     @default(0)
+  label       String  @default("")
+  title       String  @default("")
+  description String?
+  amount      Int     @default(0)
 
-    organizations Organization[]
+  organizations Organization[]
 }
 
 model PlanInvoice {
-    id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    label       String  @default("")
-    title       String  @default("")
-    description String?
-    amount      Int     @default(0)
+  label       String  @default("")
+  title       String  @default("")
+  description String?
+  amount      Int     @default(0)
 
-    organizations Organization[]
+  organizations Organization[]
 }
 
 model ExpenseType {
-    id          Int     @id @default(autoincrement())
-    labelEn     String
-    labelAr     String
-    description String?
+  id          Int     @id @default(autoincrement())
+  labelEn     String
+  labelAr     String
+  description String?
 
-    parentId   Int?
-    parentType ExpenseType?  @relation("ExpenseTypeTree", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    childTypes ExpenseType[] @relation("ExpenseTypeTree")
+  parentId   Int?
+  parentType ExpenseType?  @relation("ExpenseTypeTree", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  childTypes ExpenseType[] @relation("ExpenseTypeTree")
 
-    expenses Expense[]
+  expenses Expense[]
 }
 
 model Expense {
-    id                 String            @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    unitId             String?
-    propertyId         String?
-    portfolioId        String
-    maintenanceOrderId String?
-    categoryId         Int?
-    createdAt          DateTime          @default(now())
-    updatedAt          DateTime          @updatedAt
-    amount             Float
-    postAt             DateTime
-    memo               String?
-    portfolio          Portfolio        @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-    maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
-    property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-    unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
-    expenseType        ExpenseType?      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  id                 String            @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  unitId             String?
+  propertyId         String?
+  portfolioId        String
+  maintenanceOrderId String?
+  categoryId         Int?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  amount             Float
+  postAt             DateTime
+  memo               String?
+  portfolio          Portfolio         @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
+  property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  expenseType        ExpenseType?      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
-    @@index([unitId])
-    @@index([propertyId])
-    @@index([portfolioId])
-    @@index([maintenanceOrderId])
-    @@index([categoryId])
+  @@index([unitId])
+  @@index([propertyId])
+  @@index([portfolioId])
+  @@index([maintenanceOrderId])
+  @@index([categoryId])
 }
 
 model Lease {
-    id            String         @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    tenantId      String
-    unitId        String
-    createdAt     DateTime       @default(now())
-    updatedAt     DateTime       @updatedAt
-    start         DateTime
-    end           DateTime
-    monthlyRent   Float
-    deposit       Float          @default(0)
-    deactivated   Boolean        @default(false)
-    notify        Boolean        @default(true)
-    license       String?
-    tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-    unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
-    leaseInvoices LeaseInvoice[]
+  id            String         @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  tenantId      String
+  unitId        String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  start         DateTime
+  end           DateTime
+  monthlyRent   Float
+  deposit       Float          @default(0)
+  deactivated   Boolean        @default(false)
+  notify        Boolean        @default(true)
+  license       String?
+  tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  leaseInvoices LeaseInvoice[]
 
-    @@index([tenantId])
-    @@index([unitId])
+  @@index([tenantId])
+  @@index([unitId])
 }
 
 model MaintenanceOrder {
-    id          String     @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    tenantId    String?
-    unitId      String?
-    propertyId  String?
-    portfolioId String?
-    createdAt   DateTime   @default(now())
-    updatedAt   DateTime   @updatedAt
-    completedAt DateTime?
-    title       String?
-    description String?
-    status      String?
-    portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-    property    Property?  @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-    tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-    unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
-    expenses    Expense[]
+  id          String     @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  tenantId    String?
+  unitId      String?
+  propertyId  String?
+  portfolioId String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  completedAt DateTime?
+  title       String?
+  description String?
+  status      String?
+  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  property    Property?  @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  expenses    Expense[]
 
-    @@index([tenantId])
-    @@index([unitId])
-    @@index([propertyId])
-    @@index([portfolioId])
+  @@index([tenantId])
+  @@index([unitId])
+  @@index([propertyId])
+  @@index([portfolioId])
 }
 
 model Property {
-    id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    portfolioId       String
-    createdAt         DateTime           @default(now())
-    updatedAt         DateTime           @updatedAt
-    area              String?
-    block             String?
-    avenue            String?
-    street            String?
-    number            String?
-    parcel            String?
-    paci              String?
-    cost              Float?
-    long              Float?
-    lat               Float?
-    portfolio         Portfolio          @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-    expenses          Expense[]
-    maintenanceOrders MaintenanceOrder[]
-    units             Unit[]
+  id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  portfolioId       String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  area              String?
+  block             String?
+  avenue            String?
+  street            String?
+  number            String?
+  parcel            String?
+  paci              String?
+  cost              Float?
+  long              Float?
+  lat               Float?
+  portfolio         Portfolio          @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  units             Unit[]
 
-    @@index([portfolioId])
+  @@index([portfolioId])
 }
 
 model LeaseInvoice {
-    id          String    @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    dueAt       DateTime?
-    postAt      DateTime
-    paidAt      DateTime?
-    isPaid      Boolean   @default(false)
-    amount      Float
-    memo        String?
-    mfPaymentId String?
-    leaseId     String
-    lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+  id          String    @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  dueAt       DateTime?
+  postAt      DateTime
+  paidAt      DateTime?
+  isPaid      Boolean   @default(false)
+  amount      Float
+  memo        String?
+  mfPaymentId String?
+  leaseId     String
+  lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 
-    @@index([leaseId])
+  @@index([leaseId])
 }
 
 model Unit {
-    id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
-    propertyId        String
-    createdAt         DateTime           @default(now())
-    updatedAt         DateTime           @updatedAt
-    unitNumber        String
-    floor             Float?
-    size              Float?
-    bed               Float?
-    bath              Float?
-    marketRent        Float?
-    type              String?
-    usage             String?
-    property          Property           @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-    expenses          Expense[]
-    leases            Lease[]
-    maintenanceOrders MaintenanceOrder[]
+  id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  propertyId        String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  unitNumber        String
+  floor             Float?
+  size              Float?
+  bed               Float?
+  bath              Float?
+  marketRent        Float?
+  type              String?
+  usage             String?
+  property          Property           @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  expenses          Expense[]
+  leases            Lease[]
+  maintenanceOrders MaintenanceOrder[]
 
-    @@index([propertyId])
+  @@index([propertyId])
 }
