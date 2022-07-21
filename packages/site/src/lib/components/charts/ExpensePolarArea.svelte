@@ -4,6 +4,7 @@
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;
+	console.log({ expenses }, 'ExpensePolarArea.svelte ~ 7');
 
 	type Dataset = {
 		propertyId: string;
@@ -15,16 +16,14 @@
 		const invoicesByPropertyId = invoices.results.reduce<
 			Record<string, { total: number; label: string }>
 		>((acc, i) => {
-			const propertyId = i.breadcrumbs?.property?.id;
+			const propertyId = i.breadcrumbs?.property?.id || 'Portfolio';
 
-			if (!propertyId) return acc;
 			if (acc[propertyId]) {
 				acc[propertyId].total += i.amount;
-				acc[propertyId].label = i.breadcrumbs.property?.label;
 			} else {
 				acc[propertyId] = {
 					total: i.amount,
-					label: i.breadcrumbs.property.label,
+					label: i.breadcrumbs.property?.label || propertyId,
 				};
 			}
 			return acc;
