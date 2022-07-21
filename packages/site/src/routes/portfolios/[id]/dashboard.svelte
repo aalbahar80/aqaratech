@@ -39,10 +39,12 @@
 			stuff.api!.leaseInvoices.findAll(filter),
 			stuff.api!.expenses.findAll(filter), // TODO filter serverside
 
-			// TODO filter by paid status serverside
 			// TODO better names
-			stuff.api!.analytics.getIncomeByMonth(filter),
-			stuff.api!.analytics.getIncomeByMonth(filter),
+			stuff.api!.analytics.getIncomeByMonth({ ...filter, paidStatus: 'paid' }),
+			stuff.api!.analytics.getIncomeByMonth({
+				...filter,
+				paidStatus: 'unpaid',
+			}),
 		]);
 
 		return {
