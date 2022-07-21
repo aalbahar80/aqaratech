@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
+	import { classes } from '$lib/utils';
 	import {
 		MenuItem,
 		MenuItems,
@@ -27,10 +28,10 @@
 				{#if option.href && !option.disabled}
 					<MenuItem let:active as="a" href={option.href}>
 						<div
-							class="group flex items-center px-4 py-2 text-sm"
-							class:bg-gray-100={active}
-							class:text-gray-900={active}
-							class:text-gray-700={!active}
+							class={classes(
+								active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+								'group flex items-center px-4 py-2 text-sm',
+							)}
 						>
 							{#if option.icon}
 								<Icon
@@ -55,12 +56,11 @@
 						let:disabled
 					>
 						<div
-							class={`group flex items-center px-4 py-2 text-sm ${
-								disabled ? 'disabledLink' : ''
-							}`}
-							class:bg-gray-100={active}
-							class:text-gray-900={active}
-							class:text-gray-700={!active}
+							class={classes(
+								active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+								disabled ? 'disabledLink' : '',
+								'group flex items-center px-4 py-2 text-sm',
+							)}
 						>
 							{#if option.icon}
 								<Icon
