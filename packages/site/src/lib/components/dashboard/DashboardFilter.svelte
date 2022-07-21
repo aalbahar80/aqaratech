@@ -15,8 +15,8 @@
 
 	$: selectedProperty = $page.url.searchParams.get('propertyId');
 	$: selectedUnit = $page.url.searchParams.get('unitId');
-	$: start = $page.url.searchParams.get('start');
-	$: end = $page.url.searchParams.get('end');
+	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
+	$: end = $page.url.searchParams.get('end') || new Date().toISOString();
 
 	const propertyOptions = properties.results.map((property) => ({
 		label: getAddress(property),
@@ -72,9 +72,7 @@
 				name="start"
 				class="date-input"
 				class:date-input-invalid={!rangeValid}
-				value={start
-					? toDateInput(new Date(start))
-					: rangeStart(defaultRange).split('T')[0]}
+				value={start ? toDateInput(new Date(start)) : ''}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
 					const date = `${baseDate}T00:00:00.000Z`;
@@ -90,7 +88,7 @@
 				name="end"
 				class="date-input"
 				class:date-input-invalid={!rangeValid}
-				value={end ? toDateInput(new Date(end)) : toDateInput(new Date())}
+				value={end ? toDateInput(new Date(end)) : ''}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
 					const date = `${baseDate}T00:00:00.000Z`;
