@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import {
+		defaultRange,
+		rangeStart,
+	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PaginatedPropertyDto, PaginatedUnitDto } from '@self/sdk';
-	import { subMonths } from 'date-fns';
 
 	export let properties: PaginatedPropertyDto;
 	export let units: PaginatedUnitDto;
@@ -47,19 +50,14 @@
 	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
 		<!-- Range -->
 		<div class="md:w-1/2">
-			<!-- current={6} -->
 			<Select
+				current={defaultRange}
 				options={rangeOptions}
 				on:select={(e) => {
 					const value = e.detail.value;
 					if (value) {
-						const rangeStart = subMonths(
-							new Date().setHours(0, 0, 0, 0),
-							value,
-						).toISOString();
-
 						const url = new URL($page.url);
-						url.searchParams.set('start', rangeStart);
+						url.searchParams.set('start', rangeStart(value));
 						url.searchParams.set('end', new Date().toISOString());
 						goto(url, { noscroll: true });
 					}
@@ -74,7 +72,9 @@
 				name="start"
 				class="date-input"
 				class:date-input-invalid={!rangeValid}
-				value={start ? toDateInput(new Date(start)) : ''}
+				value={start
+					? toDateInput(new Date(start))
+					: rangeStart(defaultRange).split('T')[0]}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
 					const date = `${baseDate}T00:00:00.000Z`;
@@ -90,7 +90,7 @@
 				name="end"
 				class="date-input"
 				class:date-input-invalid={!rangeValid}
-				value={end ? toDateInput(new Date(end)) : ''}
+				value={end ? toDateInput(new Date(end)) : toDateInput(new Date())}
 				on:change={(e) => {
 					const baseDate = e.currentTarget.value;
 					const date = `${baseDate}T00:00:00.000Z`;
