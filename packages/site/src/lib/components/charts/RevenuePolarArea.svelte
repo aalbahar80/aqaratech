@@ -13,32 +13,30 @@
 
 	const calculate = (invoices: PaginatedLeaseInvoiceDto): Dataset[] => {
 		const invoicesByPropertyId = invoices.results.reduce<
-			Record<
+			Map<
 				string,
 				{ paid: number; unpaid: number; total: number; label: string }
 			>
 		>((acc, i) => {
 			const propertyId = i.breadcrumbs.property.id;
-			if (acc[propertyId]) {
-				acc[propertyId].paid += i.isPaid ? i.amount : 0;
-				acc[propertyId].unpaid += i.isPaid ? 0 : i.amount;
-				acc[propertyId].total += i.amount;
-				acc[propertyId].label = i.breadcrumbs.property.label;
+			const property = acc.get(propertyId);
+			const paid = i.isPaid ? i.amount : 0;
+			const unpaid = i.isPaid ? 0 : i.amount;
+			const total = i.amount;
+			const label = i.breadcrumbs.property.label;
+			if (property) {
+				property.paid += paid;
+				property.unpaid += unpaid;
+				property.total += total;
+				property.label = label;
 			} else {
-				acc[propertyId] = {
-					paid: i.isPaid ? i.amount : 0,
-					unpaid: i.isPaid ? 0 : i.amount,
-					total: i.amount,
-					label: i.breadcrumbs.property.label,
-				};
+				acc.set(propertyId, { paid, unpaid, total, label });
 			}
 			return acc;
-		}, {});
+		}, new Map());
 
 		const datasets: Dataset[] = [];
-		for (const [propertyId, { paid, total, label }] of Object.entries(
-			invoicesByPropertyId,
-		)) {
+		for (const [propertyId, { paid, total, label }] of invoicesByPropertyId) {
 			datasets.push({
 				propertyId,
 				label,

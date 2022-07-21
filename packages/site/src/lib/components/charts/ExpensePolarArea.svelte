@@ -4,7 +4,6 @@
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;
-	console.log({ expenses }, 'ExpensePolarArea.svelte ~ 7');
 
 	type Dataset = {
 		propertyId: string;
@@ -13,32 +12,33 @@
 	};
 
 	const calculate = (invoices: PaginatedExpenseDto): Dataset[] => {
-		const invoicesByPropertyId = invoices.results.reduce<
-			Record<string, { total: number; label: string }>
+		const expensesByPropertyId = invoices.results.reduce<
+			Map<string, { total: number; label: string }>
 		>((acc, i) => {
 			const propertyId = i.breadcrumbs?.property?.id || 'Portfolio';
-
-			if (acc[propertyId]) {
-				acc[propertyId].total += i.amount;
+			const propertyLabel = i.breadcrumbs?.property?.label || propertyId;
+			const propertyTotal = i.amount;
+			const property = acc.get(propertyId);
+			if (property) {
+				property.total += propertyTotal;
 			} else {
-				acc[propertyId] = {
-					total: i.amount,
-					label: i.breadcrumbs.property?.label || propertyId,
-				};
+				acc.set(propertyId, {
+					total: propertyTotal,
+					label: propertyLabel,
+				});
 			}
 			return acc;
-		}, {});
+		}, new Map());
 
 		const datasets: Dataset[] = [];
-		for (const [propertyId, { total, label }] of Object.entries(
-			invoicesByPropertyId,
-		)) {
+		for (const [propertyId, { total, label }] of expensesByPropertyId) {
 			datasets.push({
 				propertyId,
 				label,
 				total,
 			});
 		}
+
 		return datasets;
 	};
 
