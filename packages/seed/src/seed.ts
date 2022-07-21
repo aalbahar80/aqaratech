@@ -75,6 +75,7 @@ export async function seed({
 		id: generateId(),
 		organizationId: organizations[0]!.id,
 		userId: users[0]!.id,
+		roleType: "ORGADMIN",
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -89,6 +90,7 @@ export async function seed({
 		userId: users[1]!.id,
 		organizationId: testOrgId,
 		portfolioId: portfolios[0]!.id,
+		roleType: "PORTFOLIO",
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -98,6 +100,7 @@ export async function seed({
 		userId: users[0]!.id,
 		organizationId: organizations[0]!.id,
 		portfolioId: portfolios[0]!.id,
+		roleType: "PORTFOLIO",
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -160,6 +163,7 @@ export async function seed({
 		userId: users[2]!.id,
 		organizationId: testOrgId,
 		tenantId: tenants[0]!.id,
+		roleType: "TENANT",
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -169,6 +173,7 @@ export async function seed({
 		userId: users[0]!.id,
 		organizationId: organizations[0]!.id,
 		tenantId: tenants[0]!.id,
+		roleType: "TENANT",
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});

@@ -2648,6 +2648,12 @@ components:
         - all
         - paid
         - unpaid
+    RoleTypeEnum:
+      type: string
+      enum:
+        - ORGADMIN
+        - PORTFOLIO
+        - TENANT
     RoleDto:
       type: object
       properties:
@@ -2662,6 +2668,8 @@ components:
           format: date-time
           type: string
           readOnly: true
+        roleType:
+          $ref: '#/components/schemas/RoleTypeEnum'
         organizationId:
           type: string
         portfolioId:
@@ -2680,6 +2688,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - roleType
         - organizationId
         - portfolioId
         - tenantId
@@ -2688,6 +2697,8 @@ components:
     CreateRoleDto:
       type: object
       properties:
+        roleType:
+          $ref: '#/components/schemas/RoleTypeEnum'
         email:
           type: string
         organizationId:
@@ -2705,6 +2716,7 @@ components:
         isDefault:
           type: boolean
       required:
+        - roleType
         - email
         - organizationId
     UserDto:

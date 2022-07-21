@@ -29,6 +29,7 @@ export class RoleValidationPipe implements PipeTransform<any, any> {
 
   private validate(value: CreateRoleDto) {
     const count = +Boolean(value.portfolioId) + +Boolean(value.tenantId);
+    // if (value.)
 
     if (count > 1) {
       throw new BadRequestException(

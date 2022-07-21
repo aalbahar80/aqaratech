@@ -27,20 +27,25 @@ export class RolesService {
   }) {
     let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
     // TODO test verification only one or zero of portfolio or tenant is set
-    if (createRoleDto.portfolioId) {
+    if (createRoleDto.roleType === 'PORTFOLIO' && createRoleDto.portfolioId) {
       create = {
+        roleType: createRoleDto.roleType,
         portfolio: { connect: { id: createRoleDto.portfolioId } },
         organization: { connect: { id: createRoleDto.organizationId } },
       };
-    } else if (createRoleDto.tenantId) {
+    } else if (createRoleDto.roleType === 'TENANT' && createRoleDto.tenantId) {
       create = {
+        roleType: createRoleDto.roleType,
         tenant: { connect: { id: createRoleDto.tenantId } },
         organization: { connect: { id: createRoleDto.organizationId } },
       };
-    } else {
+    } else if (createRoleDto.roleType === 'ORGADMIN') {
       create = {
+        roleType: createRoleDto.roleType,
         organization: { connect: { id: createRoleDto.organizationId } },
       };
+    } else {
+      throw new BadRequestException('Invalid role type');
     }
 
     const existingRole = await this.prisma.role.findFirst({
