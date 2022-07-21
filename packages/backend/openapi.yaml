@@ -1635,6 +1635,20 @@ paths:
         '404':
           description: ''
       tags: *ref_7
+  /users/profile:
+    get:
+      operationId: findProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatedUserDto'
+        '404':
+          description: ''
+      tags: *ref_7
   /users/{id}:
     get:
       operationId: findOne

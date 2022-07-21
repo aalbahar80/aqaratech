@@ -86,9 +86,18 @@ export async function seed({
 	portfolios[0]!.organizationId = testOrgId;
 	roles.push({
 		id: generateId(),
-		portfolioId: portfolios[0]!.id,
 		userId: users[1]!.id,
 		organizationId: testOrgId,
+		portfolioId: portfolios[0]!.id,
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+	});
+
+	roles.push({
+		id: generateId(),
+		userId: users[0]!.id,
+		organizationId: organizations[0]!.id,
+		portfolioId: portfolios[0]!.id,
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -148,9 +157,18 @@ export async function seed({
 
 	roles.push({
 		id: generateId(),
-		tenantId: tenants[0]!.id,
 		userId: users[2]!.id,
 		organizationId: testOrgId,
+		tenantId: tenants[0]!.id,
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+	});
+
+	roles.push({
+		id: generateId(),
+		userId: users[0]!.id,
+		organizationId: organizations[0]!.id,
+		tenantId: tenants[0]!.id,
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});

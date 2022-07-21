@@ -10,6 +10,8 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
+import { User } from 'src/decorators/user.decorator';
+import { IUser } from 'src/interfaces/user.interface';
 import { UserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
@@ -42,6 +44,16 @@ export class UsersController {
   findOneByEmail(@Query('email') email: string): Promise<ValidatedUserDto> {
     //@ts-ignore
     return this.usersService.findOneByEmail(email);
+  }
+
+  @Public() // TODO prod remove
+  @Get('profile')
+  @ApiOkResponse({ type: ValidatedUserDto }) // TODO type by hand if needed to add roles
+  @ApiNotFoundResponse()
+  findProfile(@User() user: IUser): Promise<ValidatedUserDto> {
+    console.log({ user }, 'users.controller.ts ~ 55');
+    //@ts-ignore
+    return this.usersService.findOneByEmail(user.email);
   }
 
   @Get(':id')
