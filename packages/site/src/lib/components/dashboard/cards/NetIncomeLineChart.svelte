@@ -5,7 +5,7 @@
 	import type { ByMonthDto } from '@self/sdk';
 
 	export let invoicesGrouped: ByMonthDto[];
-	export let expenses: ByMonthDto[];
+	export let expensesGrouped: ByMonthDto[];
 
 	$: datasets = [
 		{
@@ -22,7 +22,7 @@
 		{
 			label: 'Expenses',
 			borderColor: getColor(1, 2),
-			data: expenses,
+			data: expensesGrouped,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',

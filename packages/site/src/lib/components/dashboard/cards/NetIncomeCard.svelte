@@ -5,18 +5,18 @@
 	import type { ByMonthDto } from '@self/sdk';
 
 	export let invoicesGrouped: ByMonthDto[];
-	export let expenses: ByMonthDto[];
+	export let expensesGrouped: ByMonthDto[];
 </script>
 
 <DashCard
 	title="Net"
 	subtitle="Total Rent Income vs Total Expenses"
-	empty={expenses.length < 1 && invoicesGrouped.length < 1}
+	empty={expensesGrouped.length < 1 && invoicesGrouped.length < 1}
 >
 	<div slot="chart">
-		<NetIncomeLineChart {invoicesGrouped} {expenses} />
+		<NetIncomeLineChart {invoicesGrouped} {expensesGrouped} />
 	</div>
 	<div slot="data">
-		<NetIncomeTable {invoicesGrouped} {expenses} />
+		<NetIncomeTable {invoicesGrouped} {expensesGrouped} />
 	</div>
 </DashCard>

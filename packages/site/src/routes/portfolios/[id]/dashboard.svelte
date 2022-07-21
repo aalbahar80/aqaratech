@@ -81,6 +81,6 @@
 
 <DashboardFilter {properties} {units} />
 
-<NetIncomeCard {invoicesGrouped} expenses={expensesGrouped} />
+<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 <RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 <ExpensesCard {expenses} />
