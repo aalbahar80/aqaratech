@@ -4,12 +4,12 @@ import { IsBoolean, IsEmail } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
-class RoleRequiredDto {}
+class RoleRequiredDto {
+  @Nanoid()
+  organizationId: string;
+}
 
 class RoleOptionalDto {
-  @Nanoid()
-  organizationId: string | null = null;
-
   @Nanoid()
   portfolioId: string | null = null;
 

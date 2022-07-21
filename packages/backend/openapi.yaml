@@ -2650,8 +2650,6 @@ components:
           readOnly: true
         organizationId:
           type: string
-          nullable: true
-          default: null
         portfolioId:
           type: string
           nullable: true
@@ -2677,8 +2675,6 @@ components:
           type: string
         organizationId:
           type: string
-          nullable: true
-          default: null
         portfolioId:
           type: string
           nullable: true
@@ -2691,6 +2687,7 @@ components:
           type: boolean
       required:
         - email
+        - organizationId
     UserDto:
       type: object
       properties:

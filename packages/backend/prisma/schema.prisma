@@ -35,12 +35,12 @@ model Role {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
-  organizationId String?
-  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   portfolioId    String?
-  portfolio      Portfolio?    @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  portfolio      Portfolio?   @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   tenantId       String?
-  tenant         Tenant?       @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  tenant         Tenant?      @relation(fields: [tenantId], references: [id], onDelete: Restrict)
 }
 
 model Tenant {

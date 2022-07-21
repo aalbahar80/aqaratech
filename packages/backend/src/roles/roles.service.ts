@@ -26,18 +26,21 @@ export class RolesService {
     user: IUser;
   }) {
     let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
-    if (createRoleDto.organizationId) {
+    // TODO test verification only one or zero of portfolio or tenant is set
+    if (createRoleDto.portfolioId) {
+      create = {
+        portfolio: { connect: { id: createRoleDto.portfolioId } },
+        organization: { connect: { id: createRoleDto.organizationId } },
+      };
+    } else if (createRoleDto.tenantId) {
+      create = {
+        tenant: { connect: { id: createRoleDto.tenantId } },
+        organization: { connect: { id: createRoleDto.organizationId } },
+      };
+    } else {
       create = {
         organization: { connect: { id: createRoleDto.organizationId } },
       };
-    } else if (createRoleDto.portfolioId) {
-      create = { portfolio: { connect: { id: createRoleDto.portfolioId } } };
-    } else if (createRoleDto.tenantId) {
-      create = { tenant: { connect: { id: createRoleDto.tenantId } } };
-    } else {
-      throw new BadRequestException(
-        'No organization, portfolio or tenant specified',
-      );
     }
 
     const existingRole = await this.prisma.role.findFirst({

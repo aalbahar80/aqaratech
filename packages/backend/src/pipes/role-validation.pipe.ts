@@ -28,14 +28,11 @@ export class RoleValidationPipe implements PipeTransform<any, any> {
   }
 
   private validate(value: CreateRoleDto) {
-    const count =
-      +Boolean(value.organizationId) +
-      +Boolean(value.portfolioId) +
-      +Boolean(value.tenantId);
+    const count = +Boolean(value.portfolioId) + +Boolean(value.tenantId);
 
-    if (count !== 1) {
+    if (count > 1) {
       throw new BadRequestException(
-        'Must specify exactly one of organizationId, portfolioId, or tenantId',
+        'Must specify exactly one or zero of portfolioId and tenantId',
       );
     }
   }
