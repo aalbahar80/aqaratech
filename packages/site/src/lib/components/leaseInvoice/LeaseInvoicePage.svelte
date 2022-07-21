@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import AsyncButton from '$lib/components/AsyncButton.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
@@ -42,22 +42,20 @@
 			text={'Copy public URL'}
 			solid
 		/>
-		<!-- TODO implement nest -->
-		<AsyncButton
-			func={() => $page.stuff.api.leaseInvoices.sendEmail({ id: trx.id })}
+		<Button
+			icon={Mail}
+			text={'Send email reminder'}
+			solid
 			disabled={!sendEnabled}
-			let:loading
-			let:disabled
-		>
-			<Button
-				as="div"
-				{disabled}
-				{loading}
-				icon={Mail}
-				text={'Send email reminder'}
-				solid
-			/>
-		</AsyncButton>
+			on:click={() => {
+				$page.stuff.api.leaseInvoices
+					.sendEmail({ id: trx.id })
+					.then((res) => {
+						addSuccessToast(res);
+					})
+					.catch(handleApiError);
+			}}
+		/>
 	</svelte:fragment>
 </Heading>
 <Badge {label} {badgeColor} />

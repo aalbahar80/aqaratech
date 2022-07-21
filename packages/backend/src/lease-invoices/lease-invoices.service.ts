@@ -161,7 +161,7 @@ export class LeaseInvoicesService {
       ),
     );
 
-    return `Invoices will be sent to ${emails.join(', ')}.`;
+    return `Invoice will be sent to ${emails.join(', ')}.`;
   }
 
   @OnEvent('invoice.send')
