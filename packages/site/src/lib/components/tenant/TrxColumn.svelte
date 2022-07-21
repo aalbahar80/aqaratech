@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
-	import DropDown from '$components/DropDown.svelte';
+	import Dropdown from '$components/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
@@ -206,7 +206,7 @@
 								<td />
 							{:else}
 								<td class="text-center">
-									<DropDown>
+									<Dropdown>
 										<div slot="menu">
 											<DropdownMenu
 												class="bottom-10"
@@ -247,7 +247,7 @@
 												]}
 											/>
 										</div>
-									</DropDown>
+									</Dropdown>
 								</td>
 							{/if}
 						</tr>

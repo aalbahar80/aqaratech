@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
-	import DropDown from '$lib/components/DropDown.svelte';
+	import Dropdown from '$lib/components/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import type { RoleDto } from '@self/sdk';
@@ -26,7 +26,7 @@
 					<Fa6SolidEnvelope class="mr-2 inline" />
 				</Badge>
 			{/if}
-			<DropDown>
+			<Dropdown>
 				<div slot="menu">
 					<DropdownMenu
 						class="bottom-10"
@@ -61,7 +61,7 @@
 						]}
 					/>
 				</div>
-			</DropDown>
+			</Dropdown>
 		</div>
 	</div>
 	<div class="mt-2 sm:flex sm:justify-between">

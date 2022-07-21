@@ -1,6 +1,6 @@
 <script lang="ts">
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
-	import DropDown from '$lib/components/DropDown.svelte';
+	import Dropdown from '$lib/components/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
@@ -43,7 +43,7 @@
 									/>
 									<span class="ml-2 w-0 flex-1 truncate">{key}</span>
 								</div>
-								<DropDown>
+								<Dropdown>
 									<div slot="button">
 										<!-- Investigate layout shift -->
 										<HybridButton
@@ -53,7 +53,7 @@
 									<div slot="menu">
 										<DropdownMenu {options} class="bottom-10" />
 									</div>
-								</DropDown>
+								</Dropdown>
 							</li>
 						{/each}
 					</ul>

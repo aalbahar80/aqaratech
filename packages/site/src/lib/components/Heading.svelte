@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
-	import DropDown from '$lib/components/DropDown.svelte';
+	import Dropdown from '$lib/components/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
@@ -46,7 +46,7 @@
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} />
-			<DropDown>
+			<Dropdown>
 				<div slot="button">
 					<HybridButton
 						defaultOption={{
@@ -66,7 +66,7 @@
 						]}
 					/>
 				</div>
-			</DropDown>
+			</Dropdown>
 		</div>
 	{:else}
 		<!-- hack to keep flex children position consistent -->
