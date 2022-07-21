@@ -35,13 +35,14 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
-		<Button
+		<!-- TODO PAYMENT -->
+		<!-- <Button
 			as="button"
 			icon={ClipboardCopy}
 			on:click={() => copyTrxUrl(trx.id, $page.url.origin)}
 			text={'Copy public URL'}
 			solid
-		/>
+		/> -->
 		<Button
 			icon={Mail}
 			text={'Send email reminder'}
