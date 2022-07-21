@@ -2,7 +2,7 @@
 	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
 	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
 	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
-	import RevenueTime from '$lib/components/charts/RevenueTime.svelte';
+	import RevenueBar from '$lib/components/charts/RevenueBar.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
@@ -37,7 +37,7 @@
 		{#if chartType === 'property'}
 			<RevenuePolarArea {invoices} />
 		{:else if chartType === 'time'}
-			<RevenueTime {invoices} />
+			<RevenueBar {invoices} />
 		{:else}
 			<RevenuePie {invoices} />
 		{/if}
