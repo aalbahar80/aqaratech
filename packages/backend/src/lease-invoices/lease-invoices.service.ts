@@ -62,19 +62,15 @@ export class LeaseInvoicesService {
   }: {
     pageOptionsDto: LeaseInvoiceOptionsDto;
     user: IUser;
-    where?: Prisma.LeaseWhereInput;
+    where?: Prisma.LeaseInvoiceWhereInput;
   }): Promise<WithCount<LeaseInvoiceDto>> {
-    const { page, take, start, end, paidStatus, groupBy } = pageOptionsDto;
+    const { page, take } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [
         accessibleBy(user.ability).LeaseInvoice,
-        this.parseLocationFilter({ filter: pageOptionsDto }), // combine with other filters?
-        {
-          postAt: { gte: start, lte: end },
-          ...this.parseIsPaidFilter({ paidStatus }),
-        },
-        ...(where ? [where] : []),
+        ...this.parseFilter({ pageOptionsDto }),
+        ...(where ? [where] : []), // combine with other filters/remove?
       ],
     };
 
@@ -237,6 +233,21 @@ export class LeaseInvoicesService {
         ...invoice.lease,
       }),
     };
+  }
+
+  parseFilter({
+    pageOptionsDto,
+  }: {
+    pageOptionsDto: LeaseInvoiceOptionsDto;
+  }): Prisma.LeaseInvoiceWhereInput[] {
+    const { start, end, paidStatus } = pageOptionsDto;
+    return [
+      this.parseLocationFilter({ filter: pageOptionsDto }),
+      {
+        postAt: { gte: start, lte: end },
+        ...this.parseIsPaidFilter({ paidStatus }),
+      },
+    ];
   }
 
   parseLocationFilter({
