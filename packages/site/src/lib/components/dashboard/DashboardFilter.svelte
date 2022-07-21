@@ -36,6 +36,7 @@
 		  }));
 
 	const rangeOptions = [
+		{ value: 1, label: 'Month to date' },
 		{ value: 3, label: 'Last 3 months' },
 		{ value: 6, label: 'Last 6 months' },
 		{ value: 12, label: 'Last 12 months' },
