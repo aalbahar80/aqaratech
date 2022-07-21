@@ -36,11 +36,11 @@
 		  }));
 
 	const rangeOptions = [
-		{ value: 1, label: 'Month to date' },
+		{ value: 0, label: 'Month to date' },
 		{ value: 3, label: 'Last 3 months' },
 		{ value: 6, label: 'Last 6 months' },
 		{ value: 12, label: 'Last 12 months' },
-		{ value: 0, label: 'Custom' },
+		{ value: null, label: 'Custom' },
 	];
 
 	$: rangeValid = start && end && new Date(start) < new Date(end);
@@ -56,7 +56,8 @@
 				options={rangeOptions}
 				on:select={(e) => {
 					const value = e.detail.value;
-					if (value) {
+					if (value !== null && value !== undefined) {
+						// value of zero is acceptable here since it represents month-to-date
 						const url = new URL($page.url);
 						url.searchParams.set('start', rangeStart(value));
 						url.searchParams.set('end', new Date().toISOString());
