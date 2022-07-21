@@ -57,13 +57,13 @@ export class CaslAbilityFactory {
     const own: Own = { orgs: [], portfolios: [], tenants: [] };
 
     user.roles.forEach((role) => {
-      if (role.organizationId) {
+      if (role.roleType === 'ORGADMIN' && role.organizationId) {
         own.orgs.push(role.organizationId);
       }
-      if (role.portfolioId) {
+      if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
         own.portfolios.push(role.portfolioId);
       }
-      if (role.tenantId) {
+      if (role.roleType === 'TENANT' && role.tenantId) {
         own.tenants.push(role.tenantId);
       }
     });
@@ -499,6 +499,7 @@ export class CaslAbilityFactory {
         id: { in: readable.maintenanceOrders },
       });
     }
+    console.log(own);
 
     return build();
   }

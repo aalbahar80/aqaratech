@@ -1,30 +1,15 @@
 import { environment } from '$environment';
 import type { Authz, User } from '$lib/models/types/auth.type';
 import { validateAccessToken } from '$lib/server/utils';
-import type { UserDto } from '@self/sdk';
+import type { ValidatedUserDto } from '@self/sdk';
 
 const { authConfig } = environment;
 
-const getAuthz = (user: UserDto): Authz => {
-	const orgs: string[] = [];
-	const portfolios: string[] = [];
-	const tenants: string[] = [];
+const getAuthz = (user: ValidatedUserDto): Authz => {
+	const defaultRole =
+		user.roles.find((role) => role.isDefault) || user.roles[0];
 
-	user?.roles.forEach((role) => {
-		if (role.organizationId) {
-			orgs.push(role.organizationId);
-		} else if (role.portfolioId) {
-			portfolios.push(role.portfolioId);
-		} else if (role.tenantId) {
-			tenants.push(role.tenantId);
-		}
-	});
-
-	const defaultRole = user?.roles.find(
-		(role) => role.organizationId || role.portfolioId || role.tenantId,
-	);
-
-	if (defaultRole?.organizationId) {
+	if (defaultRole?.roleType === 'ORGADMIN') {
 		return {
 			home: '/',
 			orgId: defaultRole.organizationId,
@@ -35,7 +20,7 @@ const getAuthz = (user: UserDto): Authz => {
 			roleName: 'OrgUser',
 			roleLabel: 'Organization',
 		};
-	} else if (defaultRole?.portfolioId) {
+	} else if (defaultRole?.roleType === 'PORTFOLIO') {
 		return {
 			home: `/portfolios/${defaultRole.portfolioId}/dashboard`,
 			roleId: defaultRole.id,
@@ -46,7 +31,7 @@ const getAuthz = (user: UserDto): Authz => {
 			roleName: 'PortfolioUser',
 			roleLabel: 'Portfolio',
 		};
-	} else if (defaultRole?.tenantId) {
+	} else if (defaultRole?.roleType === 'TENANT') {
 		return {
 			home: `/portal/tenant/${defaultRole.tenantId}`,
 			roleId: defaultRole.id,

@@ -1,4 +1,4 @@
-import type { UserDto } from '@self/sdk';
+import type { ValidatedUserDto } from '@self/sdk';
 import type { JSONWebKeySet } from 'jose';
 
 type AuthConfigKeys =
@@ -25,7 +25,6 @@ interface BaseRole {
 	roleId: string;
 	home: string;
 	roleLabel: string;
-	orgLabel: string;
 }
 
 // Rename: add User suffix
@@ -54,4 +53,7 @@ interface Tenant extends BaseRole {
 }
 
 export type Authz = Admin | Owner | Tenant;
-export type User = UserDto & { role: Authz };
+export type User = ValidatedUserDto & {
+	role: Authz;
+	currentRole: ValidatedUserDto['roles'][number];
+};
