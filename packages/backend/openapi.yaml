@@ -279,11 +279,6 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
-        - name: groupBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -515,11 +510,6 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
-        - name: groupBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -818,11 +808,6 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
-        - name: groupBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -2029,11 +2014,6 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
-        - name: groupBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/GroupByEnum'
         - name: portfolioId
           required: false
           in: query
@@ -2665,11 +2645,6 @@ components:
         - all
         - paid
         - unpaid
-    GroupByEnum:
-      type: string
-      enum:
-        - none
-        - monthyear
     RoleDto:
       type: object
       properties:
