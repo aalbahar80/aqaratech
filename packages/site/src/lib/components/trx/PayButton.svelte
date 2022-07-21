@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { Cash } from '@steeze-ui/heroicons';
-	import Button from '../Button.svelte';
 
 	export let invoice: LeaseInvoiceDto;
 
