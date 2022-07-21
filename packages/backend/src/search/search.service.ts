@@ -99,7 +99,7 @@ export class SearchService {
         // TODO add search by role.email
         id: true,
         fullName: true,
-        shortName: true,
+        label: true,
         phone: true,
         passportNum: true,
         civilid: true,
@@ -124,7 +124,7 @@ export class SearchService {
         // TODO add search by role.email
         id: true,
         fullName: true,
-        shortName: true,
+        label: true,
         phone: true,
         civilid: true,
       },

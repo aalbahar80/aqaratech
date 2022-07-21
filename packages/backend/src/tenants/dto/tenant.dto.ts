@@ -26,7 +26,7 @@ class TenantRequiredDto {
 
 class TenantOptionalDto {
   @IsString()
-  shortName: string | null = null;
+  label: string | null = null;
 
   @IsString()
   civilid: string | null = null;

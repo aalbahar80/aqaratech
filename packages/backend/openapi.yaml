@@ -2121,7 +2121,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -2178,7 +2178,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -2218,7 +2218,7 @@ components:
         - updatedAt
         - organizationId
         - fullName
-        - shortName
+        - label
         - civilid
         - phone
         - dob
@@ -2233,7 +2233,7 @@ components:
         - createdAt
         - updatedAt
         - fullName
-        - shortName
+        - label
         - civilid
         - dob
         - phone
@@ -2402,7 +2402,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -2443,7 +2443,7 @@ components:
         - leases
         - organizationId
         - fullName
-        - shortName
+        - label
         - civilid
         - phone
         - dob
@@ -2458,7 +2458,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -2943,7 +2943,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -2983,7 +2983,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -3006,7 +3006,7 @@ components:
         - updatedAt
         - organizationId
         - fullName
-        - shortName
+        - label
         - civilid
         - phone
         - dob
@@ -3017,7 +3017,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -3579,7 +3579,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -3603,7 +3603,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        shortName:
+        label:
           type: string
           nullable: true
           default: null
@@ -3612,7 +3612,7 @@ components:
         - createdAt
         - updatedAt
         - fullName
-        - shortName
+        - label
     ByMonthDto:
       type: object
       properties:

@@ -1,12 +1,6 @@
 import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
-import {
-  IsEmail,
-  IsISO8601,
-  IsPhoneNumber,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsISO8601, IsPhoneNumber, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
 
@@ -20,7 +14,7 @@ class PortfolioRequiredDto {
 
 class PortfolioOptionalDto {
   @IsString()
-  shortName: string | null = null;
+  label: string | null = null;
 
   @IsString()
   civilid: string | null = null;

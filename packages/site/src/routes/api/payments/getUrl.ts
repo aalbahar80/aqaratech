@@ -41,7 +41,7 @@ export const GET: RequestHandler = async ({ url }) => {
 						tenant: {
 							select: {
 								fullName: true,
-								shortName: true,
+								label: true,
 								email: true,
 								phone: true,
 							},

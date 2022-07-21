@@ -10,7 +10,7 @@ import { z } from 'zod';
 export const schema = z.object({
 	id: zodnanoid.optional(),
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
-	shortName: z.string().nullable().transform(trim).transform(falsyToNull),
+	label: z.string().nullable().transform(trim).transform(falsyToNull),
 	email: z
 		.union([z.null(), z.literal(''), z.string().email()])
 		.transform(falsyToNull),

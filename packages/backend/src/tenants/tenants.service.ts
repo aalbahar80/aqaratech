@@ -103,6 +103,6 @@ export class TenantsService {
   }
 
   getName(tenant: TenantDto) {
-    return tenant.shortName || tenant.fullName;
+    return tenant.label || tenant.fullName;
   }
 }

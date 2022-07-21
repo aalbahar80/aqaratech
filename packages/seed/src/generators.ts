@@ -81,7 +81,7 @@ export const fakePortfolio = (orgId?: string) => {
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		shortName: fullName,
+		label: fullName,
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
@@ -99,7 +99,7 @@ export const fakeTenant = (orgId?: string) => {
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		shortName: fullName,
+		label: fullName,
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),

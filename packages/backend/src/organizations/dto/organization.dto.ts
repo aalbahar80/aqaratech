@@ -10,7 +10,7 @@ class OrganizationRequiredDto {
 
 class OrganizationOptionalDto {
   @IsString()
-  shortName: string | null = null;
+  label: string | null = null;
 }
 
 export class OrganizationDto extends IntersectionType(

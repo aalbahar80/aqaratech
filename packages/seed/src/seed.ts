@@ -88,6 +88,7 @@ export async function seed({
 		id: generateId(),
 		portfolioId: portfolios[0]!.id,
 		userId: users[1]!.id,
+		organizationId: testOrgId,
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
@@ -149,6 +150,7 @@ export async function seed({
 		id: generateId(),
 		tenantId: tenants[0]!.id,
 		userId: users[2]!.id,
+		organizationId: testOrgId,
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 	});
