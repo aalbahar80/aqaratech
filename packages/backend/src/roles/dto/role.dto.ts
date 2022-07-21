@@ -19,6 +19,9 @@ class RoleOptionalDto {
   @IsBoolean()
   isAccepted: boolean;
 
+  @IsBoolean()
+  isDefault: boolean;
+
   // permissions: Prisma.JsonValue;
 }
 

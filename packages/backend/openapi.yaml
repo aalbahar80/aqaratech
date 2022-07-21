@@ -2660,6 +2660,8 @@ components:
           default: null
         isAccepted:
           type: boolean
+        isDefault:
+          type: boolean
       required:
         - id
         - createdAt
@@ -2668,6 +2670,7 @@ components:
         - portfolioId
         - tenantId
         - isAccepted
+        - isDefault
     CreateRoleDto:
       type: object
       properties:
@@ -2684,6 +2687,8 @@ components:
           nullable: true
           default: null
         isAccepted:
+          type: boolean
+        isDefault:
           type: boolean
       required:
         - email
