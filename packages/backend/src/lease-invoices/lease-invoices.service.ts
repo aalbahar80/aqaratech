@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
@@ -8,6 +9,7 @@ import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
+import { SendInvoiceEvent } from 'src/events/send-invoice.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
@@ -26,6 +28,7 @@ export class LeaseInvoicesService {
     private prisma: PrismaService,
     private caslAbilityFactory: CaslAbilityFactory,
     private postmarkService: PostmarkService,
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   async create({
@@ -151,30 +154,33 @@ export class LeaseInvoicesService {
       throw new BadRequestException('No emails found for tenant.');
     }
 
-    await Promise.all(
-      emails.map((email) => this.sendEmail({ email, invoice })),
+    emails.forEach((email) =>
+      this.eventEmitter.emit(
+        'invoice.send',
+        new SendInvoiceEvent(email, invoice),
+      ),
     );
+
+    return `Invoices will be sent to ${emails.join(', ')}.`;
   }
 
-  async sendEmail({
-    email,
-    invoice,
-  }: {
-    email: string;
-    invoice: { id: string; amount: number; postAt: Date };
-  }) {
+  @OnEvent('invoice.send')
+  async sendEmail(payload: SendInvoiceEvent) {
     return this.postmarkService.client.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
-      To: email,
+      To: payload.email,
       TemplateAlias: 'invoice',
       TemplateModel: {
-        amount: kwdFormat(invoice.amount),
-        date: invoice.postAt.toISOString().split('T')[0],
-        trxUrl: `https://aqaratech.com/invoices/${invoice.id}`,
-        monthYear: new Date(invoice.postAt).toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        }),
+        amount: kwdFormat(payload.invoice.amount),
+        date: payload.invoice.postAt.toISOString().split('T')[0],
+        trxUrl: `https://aqaratech.com/invoices/${payload.invoice.id}`,
+        monthYear: new Date(payload.invoice.postAt).toLocaleDateString(
+          'en-US',
+          {
+            month: 'long',
+            year: 'numeric',
+          },
+        ),
       },
     });
   }
