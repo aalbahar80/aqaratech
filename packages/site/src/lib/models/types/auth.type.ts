@@ -21,34 +21,35 @@ export type AuthConfigType = {
 	JWKS: JSONWebKeySet;
 };
 
+interface BaseRole {
+	roleId: string;
+	home: string;
+	roleLabel: string;
+	orgLabel: string;
+}
+
 // Rename: add User suffix
-interface Admin {
+interface Admin extends BaseRole {
 	isAdmin: true;
 	isOwner: false;
 	isTenant: false;
-	roleId: string;
 	orgId: string;
-	home: string;
 	roleName: 'OrgUser';
 }
 
-interface Owner {
+interface Owner extends BaseRole {
 	isAdmin: false;
 	isOwner: true;
 	isTenant: false;
-	roleId: string;
 	orgId: null;
-	home: string;
 	roleName: 'PortfolioUser';
 }
 
-interface Tenant {
+interface Tenant extends BaseRole {
 	isAdmin: false;
 	isOwner: false;
 	isTenant: true;
-	roleId: string;
 	orgId: null;
-	home: string;
 	roleName: 'TenantUser';
 }
 
