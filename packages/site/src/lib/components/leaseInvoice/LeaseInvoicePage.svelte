@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import Badge from '$lib/components/Badge.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';

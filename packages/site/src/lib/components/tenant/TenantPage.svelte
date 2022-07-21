@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import TrxColumn from '$components/tenant/TrxColumn.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';

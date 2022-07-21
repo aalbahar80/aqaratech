@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/inputs/SelectEntity.svelte';
 	import { entityNameMap } from '$lib/constants/names';

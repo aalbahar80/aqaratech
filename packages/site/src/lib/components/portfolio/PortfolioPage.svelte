@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
