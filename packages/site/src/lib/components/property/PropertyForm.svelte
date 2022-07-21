@@ -87,6 +87,12 @@
 			value: data?.paci,
 			hint: 'الرقم الآلي للعنوان',
 		}),
+		// new Field('label', {
+		// 	required: false,
+		// 	value: data?.label,
+		// 	// TODO placeholder to show inferred label?
+		// 	hint: 'What should we call this property? If you wish, provide a short user-friendly name for this property to use whenever we need to refer to it, otherwise an automatic label will be used by combining the `area` and `block` fields.\n\nCan be changed at any time.',
+		// }),
 	];
 </script>
 
