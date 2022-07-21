@@ -18,17 +18,6 @@ paths:
       responses:
         '200':
           description: ''
-  /manualmetrics:
-    get:
-      operationId: getMetrics
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
   /tenants:
     post:
       operationId: create

@@ -26,10 +26,4 @@ export class AppController {
     const { ability, ...result } = req.user;
     return result;
   }
-
-  @Public()
-  @Get('/manualmetrics')
-  getMetrics() {
-    return this.appService.getMetrics();
-  }
 }
