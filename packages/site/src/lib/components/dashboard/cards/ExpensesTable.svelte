@@ -43,7 +43,7 @@
 	];
 
 	$: footer = {
-		amount: expenses.results.reduce((acc, i) => acc + i.amount, 0),
+		amount: kwdFormat(expenses.results.reduce((acc, i) => acc + i.amount, 0)),
 	};
 
 	$: table = new CTable({
