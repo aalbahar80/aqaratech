@@ -8,6 +8,7 @@ import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
 import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { PaidStatus } from 'src/constants/paid-status.enum';
 import { Rel } from 'src/constants/rel.enum';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
 import { IUser } from 'src/interfaces/user.interface';
@@ -63,13 +64,16 @@ export class LeaseInvoicesService {
     user: IUser;
     where?: Prisma.LeaseWhereInput;
   }): Promise<WithCount<LeaseInvoiceDto>> {
-    const { page, take, start, end } = pageOptionsDto;
+    const { page, take, start, end, paidStatus, groupBy } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [
         accessibleBy(user.ability).LeaseInvoice,
-        this.parseLocationFilter({ filter: pageOptionsDto }),
-        { postAt: { gte: start, lte: end } },
+        this.parseLocationFilter({ filter: pageOptionsDto }), // combine with other filters?
+        {
+          postAt: { gte: start, lte: end },
+          ...this.parseIsPaidFilter({ paidStatus }),
+        },
         ...(where ? [where] : []),
       ],
     };
@@ -251,5 +255,19 @@ export class LeaseInvoicesService {
       };
     }
     return locationFilter;
+  }
+
+  parseIsPaidFilter({
+    paidStatus,
+  }: {
+    paidStatus: LeaseInvoiceOptionsDto['paidStatus'];
+  }): Prisma.LeaseInvoiceWhereInput {
+    if (paidStatus === PaidStatus.PAID) {
+      return { isPaid: true };
+    } else if (paidStatus === PaidStatus.UNPAID) {
+      return { isPaid: false };
+    } else {
+      return { isPaid: undefined };
+    }
   }
 }
