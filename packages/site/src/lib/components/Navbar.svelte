@@ -9,7 +9,12 @@
 	import { LOGIN, LOGOUT } from '$lib/constants/routes';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import type { UserConfig } from '$lib/models/interfaces/user.interface';
-	import { ChevronDown, Code, Cog, Logout } from '@steeze-ui/heroicons';
+	import {
+		ChevronDown,
+		Code,
+		InformationCircle,
+		Logout,
+	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let navigation: UserConfig['navLinks'] = [];
@@ -22,12 +27,13 @@
 
 	const options: MenuOption[] = [
 		...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
-		{ label: 'Settings', href: '#', icon: Cog },
+		// { label: 'Settings', href: '#', icon: Cog },
+		{ label: 'Docs', href: docs, icon: InformationCircle }, // TODO: open in new tab { target="_blank" } & sveltekit:reload
 		{ label: 'Logout', href: LOGOUT, icon: Logout }, // sveltekit:reload?
 	];
 </script>
 
-<div class="bg-gray-900 py-6 print:hidden">
+<div class="bg-gray-900 py-2 print:hidden">
 	<nav
 		class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6"
 		aria-label="Global"
@@ -45,7 +51,7 @@
 				{#if showDashboard}
 					<a
 						href={$session.user.role.home}
-						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
+						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 					>
 						Dashboard
 					</a>
@@ -56,7 +62,7 @@
 			<a
 				href={LOGIN}
 				sveltekit:reload
-				class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
+				class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 			>
 				Log in
 			</a>
@@ -82,35 +88,27 @@
 				{#if showDashboard}
 					<a
 						href={$session.user.role.home}
-						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
+						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 						sveltekit:prefetch
 					>
 						Dashboard
 					</a>
 				{/if}
 
-				{#if $session.user.role.isAdmin}
-					<a
-						href={docs}
-						sveltekit:reload
-						target="_blank"
-						class="text-base font-medium text-white hover:text-gray-300"
-					>
-						Docs
-					</a>
-				{/if}
 				<Dropdown>
 					<div
 						slot="button"
-						class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2  text-xs font-medium text-white hover:bg-gray-700"
+						class="group inline-flex items-center rounded border border-transparent px-4 py-2  text-sm font-medium text-white hover:bg-gray-700"
 					>
-						<div>
-							<p>{$session.user?.role.roleId}</p>
-							<span>{$session.user?.role.roleName}</span>
+						<div class="pr-3">
+							<p>The Real Estate Co</p>
+							<span class="font-medium text-slate-300 group-hover:text-white"
+								>Portfolio</span
+							>
 						</div>
 						<Icon
 							src={ChevronDown}
-							class="h-5 w-5"
+							class="h-5 w-5 text-slate-300 group-hover:text-white"
 							aria-hidden="true"
 							theme="solid"
 						/>
@@ -123,7 +121,7 @@
 				<a
 					href={LOGIN}
 					sveltekit:reload
-					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
+					class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 				>
 					Log in
 				</a>
