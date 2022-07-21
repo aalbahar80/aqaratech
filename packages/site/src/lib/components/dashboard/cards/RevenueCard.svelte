@@ -1,6 +1,6 @@
 <script lang="ts">
 	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
-	import RevenueArea from '$lib/components/charts/RevenueArea.svelte';
+	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
 	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
 	import RevenueTime from '$lib/components/charts/RevenueTime.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
@@ -35,7 +35,7 @@
 	</div>
 	<div slot="chart">
 		{#if chartType === 'property'}
-			<RevenueArea {invoices} />
+			<RevenuePolarArea {invoices} />
 		{:else if chartType === 'time'}
 			<RevenueTime {invoices} />
 		{:else}

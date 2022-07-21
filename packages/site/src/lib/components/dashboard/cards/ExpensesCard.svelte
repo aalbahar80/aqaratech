@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
-	import ExpenseArea from '$lib/components/charts/ExpenseArea.svelte';
+	import ExpensePolarArea from '$lib/components/charts/ExpensePolarArea.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import type { PaginatedExpenseDto } from '@self/sdk';
 
@@ -30,7 +30,7 @@
 		/>
 	</div> -->
 	<div slot="chart">
-		<ExpenseArea {expenses} />
+		<ExpensePolarArea {expenses} />
 	</div>
 	<div slot="data">
 		<ExpensesTable {expenses} />
