@@ -26,35 +26,16 @@ export interface NavbarItem {
 	href: string;
 }
 
-interface BaseRole {
+export interface UserMeta {
 	home: string;
 	roleLabel: string;
 	navLinks?: NavbarItem[];
 }
 
-// Rename: add User suffix
-interface Admin extends BaseRole {
-	isAdmin: true;
-	isOwner: false;
-	isTenant: false;
-}
-
-interface Owner extends BaseRole {
-	isAdmin: false;
-	isOwner: true;
-	isTenant: false;
-}
-
-interface Tenant extends BaseRole {
-	isAdmin: false;
-	isOwner: false;
-	isTenant: true;
-}
-
-export type UserMeta = Admin | Owner | Tenant;
 export type RoleSK = ValidatedUserDtoRolesInner & {
 	meta: UserMeta;
 };
+
 export type User = ValidatedUserDto & {
 	roles: RoleSK[];
 	role: RoleSK;

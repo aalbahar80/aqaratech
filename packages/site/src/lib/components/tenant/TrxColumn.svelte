@@ -27,7 +27,7 @@
 	export let invoices: PaginatedLeaseInvoiceDto;
 	export let leaseId: string | undefined = undefined;
 
-	const hideActions = !$session.user?.role.isAdmin;
+	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
 	const formUrl = create({
 		entity: 'leaseInvoices',
 		predefined: new Map([['leaseId', leaseId]]),

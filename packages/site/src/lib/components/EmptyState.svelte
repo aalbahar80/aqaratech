@@ -5,7 +5,7 @@
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const hideActions = !$session.user?.role.isAdmin;
+	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
 	export let entity: EntityTitle;
 	export let formUrl: string;
 	export let message: string = `Get started by creating a new ${entityNameMap[entity].singular}.`;

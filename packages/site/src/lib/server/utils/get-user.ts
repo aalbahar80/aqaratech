@@ -23,9 +23,6 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 		return {
 			roleLabel: 'Organization',
 			home: '/',
-			isAdmin: true,
-			isOwner: false,
-			isTenant: false,
 			navLinks: [
 				{ name: 'Portfolios', href: '/portfolios' },
 				{ name: 'Properties', href: '/properties' },
@@ -41,9 +38,6 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 		return {
 			roleLabel: 'Portfolio',
 			home: `/portfolios/${role.portfolioId}/dashboard`,
-			isAdmin: false,
-			isOwner: true,
-			isTenant: false,
 			navLinks: [
 				{ name: 'Properties', href: '/properties' },
 				{ name: 'Leases', href: '/leases' },
@@ -54,9 +48,6 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 		return {
 			roleLabel: 'Tenant',
 			home: `/portal/tenant/${role.tenantId}`,
-			isAdmin: false,
-			isOwner: false,
-			isTenant: true,
 		};
 	} else {
 		throw new Error('Unknown role type');

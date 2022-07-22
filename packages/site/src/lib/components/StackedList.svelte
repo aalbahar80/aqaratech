@@ -8,7 +8,7 @@
 	export let count: number;
 	export let formUrl: string;
 
-	const hideActions = !$session.user?.role.isAdmin;
+	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
