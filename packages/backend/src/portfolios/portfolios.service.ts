@@ -2,7 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import * as R from 'remeda';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -15,10 +15,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PortfoliosService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   create({
     createPortfolioDto,
@@ -50,17 +47,15 @@ export class PortfoliosService {
   }): Promise<WithCount<PortfolioDto>> {
     const { page, take } = pageOptionsDto;
 
-    // TODO is ability needed here?
-    const ability = await this.caslAbilityFactory.defineAbility(user.role);
     let [results, total] = await Promise.all([
       this.prisma.portfolio.findMany({
         take,
         skip: (page - 1) * take,
         orderBy: { createdAt: 'desc' },
-        where: accessibleBy(ability).Portfolio,
+        where: accessibleBy(user.ability).Portfolio,
       }),
       this.prisma.portfolio.count({
-        where: accessibleBy(ability).Portfolio,
+        where: accessibleBy(user.ability).Portfolio,
       }),
     ]);
 

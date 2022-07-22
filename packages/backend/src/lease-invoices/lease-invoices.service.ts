@@ -5,7 +5,7 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
-import { Action, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -27,7 +27,6 @@ import { kwdFormat } from 'src/utils/format';
 export class LeaseInvoicesService {
   constructor(
     private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
     private postmarkService: PostmarkService,
     private readonly eventEmitter: EventEmitter2,
   ) {}
@@ -39,10 +38,7 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
-    // not using cached user ability since this endpoint is often hit directly after creating lease.
-    // TODO is ability needed here?
-    const ability = await this.caslAbilityFactory.defineAbility(user.role);
-    ForbiddenError.from(ability).throwUnlessCan(
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
       subject('LeaseInvoice', createLeaseInvoiceDto),
     );
