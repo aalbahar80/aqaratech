@@ -36,7 +36,7 @@ export type RoleSK = ValidatedUserDtoRolesInner & {
 	meta: UserMeta;
 };
 
-export type User = ValidatedUserDto & {
+export type User = Omit<ValidatedUserDto, 'roles'> & {
 	roles: RoleSK[];
 	role: RoleSK;
 };
