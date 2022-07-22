@@ -17,19 +17,27 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.meta.navLinks || [];
+	const navigation = $session.user?.role.meta.navLinks || [];
 
 	$: showDashboard =
-		$session.user?.meta.isOwner || $session.user?.meta.isTenant;
+		$session.user?.role.meta.isOwner || $session.user?.role.meta.isTenant;
 
 	const docs = getDocs();
 
-	const options: MenuOption[] = [
+	const getRoleOptions = (user: App.Session['user']): MenuOption[] =>
+		user?.roles.map((role) => ({
+			href: '/',
+			label: `${role.organization.fullName} : ${role.meta.roleLabel}`,
+		})) || [];
+
+	const options = [
+		...getRoleOptions($session.user),
 		...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
 		// { label: 'Settings', href: '#', icon: Cog },
 		{ label: 'Docs', href: docs, icon: InformationCircle }, // TODO: open in new tab { target="_blank" } & sveltekit:reload
 		{ label: 'Logout', href: LOGOUT, icon: Logout }, // sveltekit:reload?
 	];
+	$: console.log(options);
 </script>
 
 <div class="bg-gray-900 py-1.5 print:hidden">
@@ -49,7 +57,7 @@
 			<div class="order-last -mr-2 flex items-center gap-6 lg:hidden">
 				{#if showDashboard}
 					<a
-						href={$session.user.meta.home}
+						href={$session.user.role.meta.home}
 						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 					>
 						Dashboard
@@ -86,7 +94,7 @@
 			{#if $session.user}
 				{#if showDashboard}
 					<a
-						href={$session.user.meta.home}
+						href={$session.user.role.meta.home}
 						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 						sveltekit:prefetch
 					>
@@ -102,7 +110,7 @@
 						<div class="pr-3">
 							<p>{$session.user.role.organization.fullName}</p>
 							<span class="font-medium text-slate-300 group-hover:text-white">
-								{$session.user.meta.roleLabel}
+								{$session.user.role.meta.roleLabel}
 							</span>
 						</div>
 						<Icon

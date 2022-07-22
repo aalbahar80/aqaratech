@@ -53,7 +53,7 @@ export const GET: RequestHandler = async (req) => {
 		req.locals.idToken = tokens.id_token || '';
 
 		const user = await getUser(req.locals.idToken);
-		const location = user?.role.home || '/';
+		const location = user?.role.meta.home || '/';
 
 		return {
 			status: 302,

@@ -12,7 +12,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.meta.navLinks || [];
+	const navigation = $session.user?.role.meta.navLinks || [];
 
 	const docs = getDocs();
 </script>

@@ -1,24 +1,24 @@
 import { environment } from '$environment';
-import type { User, UserMeta } from '$lib/models/types/auth.type';
+import type { RoleSK, User, UserMeta } from '$lib/models/types/auth.type';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
 
 const { authConfig } = environment;
 
-type UserRole = ValidatedUserDtoRolesInner;
-
-const getUserRole = (user: ValidatedUserDto): UserRole => {
-	const defaultRole =
-		user.roles.find((role) => role.isDefault) || user.roles[0];
+const getDefaultRole = (roles: ValidatedUserDtoRolesInner[]): RoleSK => {
+	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
 
 	if (!defaultRole) {
 		// TODO: handle new user signups/invitations
 		throw new Error('User has no roles');
 	}
-	return defaultRole;
+	return {
+		...defaultRole,
+		meta: getRoleMeta(defaultRole),
+	};
 };
 
-const getUserMeta = (role: UserRole): UserMeta => {
+const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 	if (role.roleType === 'ORGADMIN') {
 		return {
 			roleLabel: 'Organization',
@@ -76,13 +76,17 @@ export const getUser = async (
 			`${authConfig.AUTH0_API_NAMESPACE}/userStuff`
 		] as ValidatedUserDto;
 
-		const role = getUserRole(userStuff);
-		const meta = getUserMeta(role);
+		// augment each role with metadata
+		const roles = userStuff.roles.map((role) => ({
+			...role,
+			meta: getRoleMeta(role),
+		}));
+		const role = getDefaultRole(roles);
 
 		const user: User = {
 			...userStuff,
+			roles,
 			role,
-			meta,
 		};
 
 		return user;

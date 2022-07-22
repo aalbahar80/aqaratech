@@ -1,4 +1,4 @@
-import type { ValidatedUserDto } from '@self/sdk';
+import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
 import type { JSONWebKeySet } from 'jose';
 
 type AuthConfigKeys =
@@ -52,7 +52,10 @@ interface Tenant extends BaseRole {
 }
 
 export type UserMeta = Admin | Owner | Tenant;
-export type User = ValidatedUserDto & {
+export type RoleSK = ValidatedUserDtoRolesInner & {
 	meta: UserMeta;
-	role: ValidatedUserDto['roles'][number];
+};
+export type User = ValidatedUserDto & {
+	roles: RoleSK[];
+	role: RoleSK;
 };
