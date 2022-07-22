@@ -3,16 +3,12 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { IconSource } from '@steeze-ui/svelte-icon/types';
 
-	// interface MenuOption {
-	// 	label: string;
-	// 	icon: IconSource;
-	// 	active?: boolean;
-	// 	// disabled?: boolean;
-	// }
+	interface MenuOption {
+		label: string;
+		icon?: IconSource;
+	}
 
-	// export let option: MenuOption;
-	export let label: string;
-	export let icon: IconSource | undefined = undefined;
+	export let option: MenuOption;
 	export let active: boolean;
 </script>
 
@@ -22,13 +18,13 @@
 		'group flex items-center px-4 py-2 text-sm',
 	)}
 >
-	{#if icon}
+	{#if option.icon}
 		<Icon
-			src={icon}
+			src={option.icon}
 			class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
 			aria-hidden="true"
 			theme="solid"
 		/>
 	{/if}
-	{label}
+	{option.label}
 </div>

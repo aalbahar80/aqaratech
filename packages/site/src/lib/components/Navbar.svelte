@@ -123,10 +123,10 @@
 					</div>
 					<div slot="menu">
 						<DropdownMenu>
-							{#each options as { label, href }}
+							{#each options as option}
 								<MenuItem let:active>
-									<a {href} sveltekit:reload>
-										<MenuIconItem {label} icon={Code} {active} />
+									<a href={option.href} sveltekit:reload>
+										<MenuIconItem {option} {active} />
 									</a>
 								</MenuItem>
 							{/each}
