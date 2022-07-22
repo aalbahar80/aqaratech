@@ -1,5 +1,5 @@
 import { environment } from '$environment';
-import { getUser } from '$lib/server/utils/getAuthz';
+import { getUser } from '$lib/server/utils/get-user';
 import type { RequestHandler } from '@sveltejs/kit';
 
 const { authConfig } = environment;
