@@ -8,6 +8,7 @@ export const GET: RequestHandler = (req) => {
 	req.locals.user = undefined;
 	req.locals.accessToken = '';
 	req.locals.idToken = '';
+	req.locals.xRoleId = '';
 
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
