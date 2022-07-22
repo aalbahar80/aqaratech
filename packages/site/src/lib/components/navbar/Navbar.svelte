@@ -13,38 +13,41 @@
 
 <div class="bg-gray-900 py-1.5 print:hidden">
 	<nav
-		class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6"
+		class="relative mx-auto flex max-w-7xl items-center justify-between gap-x-4 px-4 sm:px-6"
 		aria-label="Global"
 	>
 		<NavbarIcon />
-		{#if $session.user}
-			<div class="order-last -mr-2 flex items-center gap-6 lg:hidden">
-				<DashboardButton />
-				<NavPopover {navigation} />
-			</div>
-		{/if}
 
-		<!-- Large screen: nav links -->
-		<div class="hidden space-x-4 lg:ml-10 lg:flex">
+		<div class="flex space-x-4 lg:ml-10">
 			<DashboardButton />
+
+			<!-- Large screen: nav links -->
 			{#each navigation as item (item.name)}
 				<a
 					sveltekit:prefetch
 					href={item.href}
-					class="rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+					class="hidden rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white lg:flex"
 				>
 					{item.name}
 				</a>
 			{/each}
 		</div>
+
 		<SearchButton />
 
-		<!-- Large screen: nav actions -->
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.user}
 				<NavbarDropdown />
 			{/if}
 		</div>
+
 		<LoginButton />
+
+		<div
+			class="-mr-2 flex items-center gap-6 lg:hidden"
+			class:hidden={!$session.user}
+		>
+			<NavPopover {navigation} />
+		</div>
 	</nav>
 </div>
