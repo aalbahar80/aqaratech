@@ -50,7 +50,8 @@ export class PortfoliosService {
   }): Promise<WithCount<PortfolioDto>> {
     const { page, take } = pageOptionsDto;
 
-    const ability = await this.caslAbilityFactory.defineAbility(user);
+    // TODO is ability needed here?
+    const ability = await this.caslAbilityFactory.defineAbility(user.role);
     let [results, total] = await Promise.all([
       this.prisma.portfolio.findMany({
         take,

@@ -3,4 +3,5 @@ import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 export interface IUser extends ValidatedUserDto {
   ability: AppAbility;
+  role: ValidatedUserDto['roles'][number];
 }

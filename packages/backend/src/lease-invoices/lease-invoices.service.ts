@@ -40,7 +40,8 @@ export class LeaseInvoicesService {
     user: IUser;
   }) {
     // not using cached user ability since this endpoint is often hit directly after creating lease.
-    const ability = await this.caslAbilityFactory.defineAbility(user);
+    // TODO is ability needed here?
+    const ability = await this.caslAbilityFactory.defineAbility(user.role);
     ForbiddenError.from(ability).throwUnlessCan(
       Action.Create,
       subject('LeaseInvoice', createLeaseInvoiceDto),

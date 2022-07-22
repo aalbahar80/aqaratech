@@ -14,6 +14,7 @@ import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 /**
  * Attaches a role's `ability` to the `request.user` object. Handles caching of abilities.
@@ -57,37 +58,51 @@ export class AbilitiesGuard implements CanActivate {
 
     // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
     const xRoleId = request.headers['x-role-id'] as string | undefined;
+    const hasDefaultRole = request.user.roles.some((role) => role.isDefault);
 
-    const defaultRoleId =
-      request.user.roles.find((role) => role.isDefault)?.id ||
-      request.user.roles[0].id;
+    let role: ValidatedUserDto['roles'][number] | undefined;
+    if (xRoleId) {
+      // If the `x-role-id` header is set, use that.
+      role = request.user.roles.find((r) => r.id === xRoleId);
+    } else if (hasDefaultRole) {
+      // If the user has a default role, use that.
+      role = request.user.roles.find((r) => r.isDefault);
+    } else if (request.user.roles.length > 0) {
+      // Otherwise, use the first role.
+      role = request.user.roles[0];
+    }
 
-    const roleId = xRoleId || defaultRoleId;
+    if (!role) {
+      // If the user has no roles, return false.
+      this.logger.error(`User ${request.user.id} has no roles.`);
+      return false;
+    }
 
     // Get the cached ability for this user and role.
     // Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-    const cached = await this.cacheManager.get<AppAbility>(roleId);
+    const cached = await this.cacheManager.get<AppAbility>(role.id);
 
     let ability: AppAbility;
 
     if (cached) {
       this.logger.log(
-        `Cache hit: Ability for user ${request.user.email} - RoleId: ${roleId}`,
+        `Cache hit: Ability for user ${request.user.email} - RoleId: ${role.id}`,
       );
       ability = cached;
     } else {
       this.logger.log(
-        `Cache miss: Ability for user ${request.user.email} - RoleId: ${roleId}`,
+        `Cache miss: Ability for user ${request.user.email} - RoleId: ${role.id}`,
       );
-      ability = await this.caslAbilityFactory.defineAbility(request.user);
+      ability = await this.caslAbilityFactory.defineAbility(role);
       // TODO handle cache ttl/invalidation
-      await this.cacheManager.set(roleId, ability, {
+      await this.cacheManager.set(role.id, ability, {
         ttl: 60 * 60 * 24, // TODO adjust
       });
     }
 
     // attach ability to request, to be used by services for any further permission checks
     request.user.ability = ability;
+    request.user.role = role;
 
     const requestHasParams = Object.keys(request.params).length > 0;
 
@@ -141,7 +156,7 @@ export class AbilitiesGuard implements CanActivate {
     if (!isAllowed && cached) {
       // prettier-ignore
       this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
-      await this.cacheManager.del(roleId);
+      await this.cacheManager.del(role.id);
 
       // try again
       // TODO monitor
@@ -149,7 +164,7 @@ export class AbilitiesGuard implements CanActivate {
     }
 
     this.logger.log(
-      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${roleId}`,
+      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${role.id}`,
     );
     return isAllowed;
   }

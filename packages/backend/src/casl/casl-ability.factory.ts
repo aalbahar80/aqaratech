@@ -26,23 +26,19 @@ export class CaslAbilityFactory {
 
   private readonly logger = new Logger(CaslAbilityFactory.name);
 
-  async defineAbility(user: ValidatedUserDto) {
+  async defineAbility(role: ValidatedUserDto['roles'][number]) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
-    console.log({ user }, 'casl-ability.factory.ts ~ 33');
+    this.logger.debug(`Defining ability for role: ${role.id}`);
     // TODO fix type, handle case where auth0 user email is not in the database
-    if (!user?.roles) {
-      throw new ForbiddenException('User has no roles');
-    }
 
     // Define user's own roles
-
-    interface Own {
-      orgs: string[];
-      portfolios: string[];
-      tenants: string[];
-    }
+    // interface Own {
+    //   orgs: string[];
+    //   portfolios: string[];
+    //   tenants: string[];
+    // }
 
     /**
      * A user's own role.
@@ -54,52 +50,56 @@ export class CaslAbilityFactory {
      * @example
      * own.portfolio represents read-only access to the user's portfolio.
      */
-    const own: Own = { orgs: [], portfolios: [], tenants: [] };
+    // const own: Own = { orgs: [], portfolios: [], tenants: [] };
 
-    user.roles.forEach((role) => {
-      if (role.roleType === 'ORGADMIN' && role.organizationId) {
-        own.orgs.push(role.organizationId);
-      }
-      if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-        own.portfolios.push(role.portfolioId);
-      }
-      if (role.roleType === 'TENANT' && role.tenantId) {
-        own.tenants.push(role.tenantId);
-      }
-    });
+    // user.roles.forEach((role) => {
+    //   if (role.roleType === 'ORGADMIN' && role.organizationId) {
+    //     own.orgs.push(role.organizationId);
+    //   }
+    //   if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
+    //     own.portfolios.push(role.portfolioId);
+    //   }
+    //   if (role.roleType === 'TENANT' && role.tenantId) {
+    //     own.tenants.push(role.tenantId);
+    //   }
+    // });
 
     // ### Role: Organization###
     // Define an org user's manageable entities
-    if (own.orgs.length > 0) {
+    if (role.roleType === 'ORGADMIN') {
       const rolesQ = this.prisma.role.findMany({
         where: {
           OR: [
-            { organization: { id: { in: own.orgs } } },
-            { portfolio: { organizationId: { in: own.orgs } } },
-            { tenant: { organizationId: { in: own.orgs } } },
+            { organization: { id: { equals: role.organizationId } } },
+            { portfolio: { organizationId: { equals: role.organizationId } } },
+            { tenant: { organizationId: { equals: role.organizationId } } },
           ],
         },
       });
 
       const tenantsQ = this.prisma.tenant.findMany({
         select: { id: true },
-        where: { organization: { id: { in: own.orgs } } },
+        where: { organization: { id: { equals: role.organizationId } } },
       });
 
       const portfoliosQ = this.prisma.portfolio.findMany({
         select: { id: true },
-        where: { organization: { id: { in: own.orgs } } },
+        where: { organization: { id: { equals: role.organizationId } } },
       });
 
       const propertiesQ = this.prisma.property.findMany({
         select: { id: true },
-        where: { portfolio: { organizationId: { in: own.orgs } } },
+        where: {
+          portfolio: { organizationId: { equals: role.organizationId } },
+        },
       });
 
       const unitsQ = this.prisma.unit.findMany({
         select: { id: true },
         where: {
-          property: { portfolio: { organizationId: { in: own.orgs } } },
+          property: {
+            portfolio: { organizationId: { equals: role.organizationId } },
+          },
         },
       });
 
@@ -108,8 +108,8 @@ export class CaslAbilityFactory {
       select: { id: true },
       where: {
         OR: [
-          { tenant: { organizationId: { in: own.orgs } } },
-          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } } } },
+          { tenant: { organizationId: { equals: role.organizationId} } },
+          { unit: { property: { portfolio: { organizationId: { equals: role.organizationId} } } } },
         ]
       },
     });
@@ -120,8 +120,8 @@ export class CaslAbilityFactory {
       where: {
         lease: {
           OR: [
-            { tenant: { organizationId: { in: own.orgs } } },
-            { unit: { property: { portfolio: { organizationId: { in: own.orgs } } }, }, },
+            { tenant: { organizationId: { equals: role.organizationId} } },
+            { unit: { property: { portfolio: { organizationId: { equals: role.organizationId} } }, }, },
           ],
         },
       },
@@ -132,9 +132,9 @@ export class CaslAbilityFactory {
       select: { id: true },
       where: {
         OR: [
-          { portfolio: { organizationId: { in: own.orgs } } },
-          { property: { portfolio: { organizationId: { in: own.orgs } } } },
-          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } } } },
+          { portfolio: { organizationId: { equals: role.organizationId} } },
+          { property: { portfolio: { organizationId: { equals: role.organizationId} } } },
+          { unit: { property: { portfolio: { organizationId: { equals: role.organizationId} } } } },
         ],
       },
     });
@@ -144,10 +144,10 @@ export class CaslAbilityFactory {
       select: { id: true },
       where: {
         OR: [
-          { tenant: { organizationId: { in: own.orgs } } },
-          { portfolio: { organizationId: { in: own.orgs } } },
-          { property: { portfolio: { organizationId: { in: own.orgs } } } },
-          { unit: { property: { portfolio: { organizationId: { in: own.orgs } } }, }, },
+          { tenant: { organizationId: { equals: role.organizationId} } },
+          { portfolio: { organizationId: { equals: role.organizationId} } },
+          { property: { portfolio: { organizationId: { equals: role.organizationId} } } },
+          { unit: { property: { portfolio: { organizationId: { equals: role.organizationId} } }, }, },
         ],
       },
     });
@@ -175,13 +175,13 @@ export class CaslAbilityFactory {
         maintenanceOrdersQ,
       ]);
       this.logger.log(
-        `Defined manageable entities for organization user ${user.email} in ${
+        `Defined manageable entities for rold ${role.id} in ${
           Date.now() - now
         }ms`,
       );
 
       const manageable: OrgManageableResources = {
-        orgs: own.orgs, // TODO consider contraining to superadmins only
+        orgs: [role.organizationId], // TODO consider contraining to superadmins only
         roles: roles.map((r) => r.id),
         tenants: tenants.map((i) => i.id),
         portfolios: portfolios.map((i) => i.id),
@@ -194,7 +194,7 @@ export class CaslAbilityFactory {
       };
 
       // TODO: limit fields
-      can(Action.Read, ['Organization'], { id: { in: own.orgs } });
+      can(Action.Read, ['Organization'], { id: { in: manageable.orgs } });
 
       // TODO: limit fields
       // TODO only superadmins can manage org roles?
@@ -203,7 +203,7 @@ export class CaslAbilityFactory {
           { id: { in: manageable.roles } },
           {
             OR: [
-              { organizationId: { in: own.orgs } },
+              { organizationId: { in: manageable.orgs } },
               { portfolioId: { in: manageable.portfolios } },
               { tenantId: { in: manageable.tenants } },
             ],
@@ -213,7 +213,7 @@ export class CaslAbilityFactory {
 
       can(Action.Manage, ['Role'], {
         OR: [
-          { organizationId: { in: own.orgs } },
+          { organizationId: { in: manageable.orgs } },
           { portfolioId: { in: manageable.portfolios } },
           { tenantId: { in: manageable.tenants } },
         ],
@@ -315,13 +315,14 @@ export class CaslAbilityFactory {
 
     // ### Role: Portfolio ###
     // Define a portfolio user's readable entities
-    if (own.portfolios.length > 0) {
+    // TODO change to else if
+    if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
       const tenantsQ = this.prisma.tenant.findMany({
         select: { id: true },
         where: {
           leases: {
             some: {
-              unit: { property: { portfolioId: { in: own.portfolios } } },
+              unit: { property: { portfolioId: { equals: role.portfolioId } } },
             },
           },
         },
@@ -329,24 +330,26 @@ export class CaslAbilityFactory {
 
       const propertiesQ = this.prisma.property.findMany({
         select: { id: true },
-        where: { portfolioId: { in: own.portfolios } },
+        where: { portfolioId: { equals: role.portfolioId } },
       });
 
       const unitsQ = this.prisma.unit.findMany({
         select: { id: true },
-        where: { property: { portfolioId: { in: own.portfolios } } },
+        where: { property: { portfolioId: { equals: role.portfolioId } } },
       });
 
       const leasesQ = this.prisma.lease.findMany({
         select: { id: true },
-        where: { unit: { property: { portfolioId: { in: own.portfolios } } } },
+        where: {
+          unit: { property: { portfolioId: { equals: role.portfolioId } } },
+        },
       });
 
       const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
         select: { id: true },
         where: {
           lease: {
-            unit: { property: { portfolioId: { in: own.portfolios } } },
+            unit: { property: { portfolioId: { equals: role.portfolioId } } },
           },
         },
       });
@@ -355,9 +358,11 @@ export class CaslAbilityFactory {
         select: { id: true },
         where: {
           OR: [
-            { portfolioId: { in: own.portfolios } },
-            { property: { portfolioId: { in: own.portfolios } } },
-            { unit: { property: { portfolioId: { in: own.portfolios } } } },
+            { portfolioId: { equals: role.portfolioId } },
+            { property: { portfolioId: { equals: role.portfolioId } } },
+            {
+              unit: { property: { portfolioId: { equals: role.portfolioId } } },
+            },
           ],
         },
       });
@@ -366,9 +371,11 @@ export class CaslAbilityFactory {
         select: { id: true },
         where: {
           OR: [
-            { portfolioId: { in: own.portfolios } },
-            { property: { portfolioId: { in: own.portfolios } } },
-            { unit: { property: { portfolioId: { in: own.portfolios } } } },
+            { portfolioId: { equals: role.portfolioId } },
+            { property: { portfolioId: { equals: role.portfolioId } } },
+            {
+              unit: { property: { portfolioId: { equals: role.portfolioId } } },
+            },
           ],
         },
       });
@@ -392,14 +399,14 @@ export class CaslAbilityFactory {
         maintenanceOrdersQ,
       ]);
       this.logger.log(
-        `Defined readable entities for portfolio user ${user.email} in ${
+        `Defined readable entities for role ${role.id} in ${
           Date.now() - now
         }ms`,
       );
 
       const readable: PortfolioReadableResources = {
         tenants: tenants.map((i) => i.id),
-        portfolios: own.portfolios,
+        portfolios: [role.portfolioId],
         properties: properties.map((i) => i.id),
         units: units.map((i) => i.id),
         leases: leases.map((i) => i.id),
@@ -447,20 +454,22 @@ export class CaslAbilityFactory {
     // ### Role: Tenant###
     // Define a tenant user's readable entities
     // TODO restrict fields
-    if (own.tenants.length > 0) {
+    // TODO change to else if
+    // TODO: disambiguated unions for roleType and tenantId/portfolioId?
+    if (role.roleType === 'TENANT' && role.tenantId) {
       const leasesQ = this.prisma.lease.findMany({
         select: { id: true },
-        where: { tenantId: { in: own.tenants } },
+        where: { tenantId: { equals: role.tenantId } },
       });
 
       const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
         select: { id: true },
-        where: { lease: { tenantId: { in: own.tenants } } },
+        where: { lease: { tenantId: { equals: role.tenantId } } },
       });
 
       const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
         select: { id: true },
-        where: { tenantId: { in: own.tenants } },
+        where: { tenantId: { equals: role.tenantId } },
       });
 
       const now = Date.now();
@@ -470,13 +479,13 @@ export class CaslAbilityFactory {
         maintenanceOrdersQ,
       ]);
       this.logger.log(
-        `Defined readable entities for tenant user ${user.email} in ${
+        `Defined readable entities for tenant role ${role.id} in ${
           Date.now() - now
         }ms`,
       );
 
       const readable: TenantReadableResources = {
-        tenants: own.tenants,
+        tenants: [role.tenantId],
         leases: leases.map((i) => i.id),
         leaseInvoices: leaseInvoices.map((i) => i.id),
         maintenanceOrders: maintenanceOrders.map((i) => i.id),
@@ -499,7 +508,6 @@ export class CaslAbilityFactory {
         id: { in: readable.maintenanceOrders },
       });
     }
-    console.log(own);
 
     return build();
   }
@@ -509,17 +517,17 @@ export class CaslAbilityFactory {
    * Often, it will be required to pass in not only the basic subject,
    * but also the subject's organization, portfolio, tenant, etc.
    */
-  async throwIfForbidden(
-    user: ValidatedUser,
-    action: Action,
-    subject: Subject,
-  ) {
-    const ability = await this.defineAbility(user);
+  // async throwIfForbidden(
+  //   user: ValidatedUserDto,
+  //   action: Action,
+  //   subject: Subject,
+  // ) {
+  //   const ability = await this.defineAbility(user);
 
-    if (ability.cannot(action, subject)) {
-      throw new ForbiddenException();
-    }
-  }
+  //   if (ability.cannot(action, subject)) {
+  //     throw new ForbiddenException();
+  //   }
+  // }
 }
 
 export type AppAbility = PrismaAbility<[string, Subject]>;
