@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { getDocs } from '$lib/components/navbar/docs-url';
+	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
+	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
 	import { LOGIN, LOGOUT } from '$lib/constants/routes';
 	import {
 		Popover,
@@ -64,50 +66,31 @@
 								on:click={() => close(null)}
 								sveltekit:prefetch
 								href={item.href}
-								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
 							>
-								{item.name}
+								<PopoverItem option={{ label: item.name }} />
 							</a>
 						{/each}
-						{#if $session.user}
-							<div class="relative py-2">
-								<div
-									class="absolute inset-0 inset-x-2 flex items-center"
-									aria-hidden="true"
-								>
-									<div class="w-full border-t border-gray-300" />
-								</div>
-								<div class="relative flex justify-start" />
-							</div>
 
-							{#if $session.user.role.roleType === 'ORGADMIN'}
-								<a
-									on:click={() => close(null)}
-									href={docs}
-									sveltekit:reload
-									target="_blank"
-									class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
-								>
-									Docs
-								</a>
-								<a
-									href="/settings/expense-categories"
-									class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
-								>
-									Settings
-								</a>
-							{/if}
+						<PopoverDivider />
 
-							<a
-								on:click={() => close(null)}
-								href={LOGOUT}
-								sveltekit:reload
-								class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
-							>
-								Log out
-							</a>
-						{/if}
+						<a
+							on:click={() => close(null)}
+							href={docs}
+							sveltekit:reload
+							target="_blank"
+						>
+							<PopoverItem option={{ label: 'Docs' }} />
+						</a>
+
+						<a on:click={() => close(null)} href="/settings/expense-categories">
+							<PopoverItem option={{ label: 'Settings' }} />
+						</a>
+
+						<a on:click={() => close(null)} href={LOGOUT} sveltekit:reload>
+							<PopoverItem option={{ label: 'Logout' }} />
+						</a>
 					</div>
+
 					{#if !$session.user}
 						<div class="mt-6 px-5">
 							<a

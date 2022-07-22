@@ -1,36 +1,12 @@
 <script lang="ts">
-	import { dev } from '$app/env';
 	import { session } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import MenuIconItem from '$lib/components/buttons/MenuIconItem.svelte';
-	import { getDocs } from '$lib/components/navbar/docs-url';
-	import { LOGOUT } from '$lib/constants/routes';
-	import type { MenuOption } from '$lib/models/interfaces/option.interface';
+	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import {
-		ChevronDown,
-		Code,
-		InformationCircle,
-		Logout,
-	} from '@steeze-ui/heroicons';
+	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	const docs = getDocs();
-
-	const getRoleOptions = (user: App.Session['user']): MenuOption[] =>
-		user?.roles.map((role) => ({
-			href: `/auth/roles/${role.id}`,
-			label: `${role.organization.fullName} : ${role.meta.roleLabel}`,
-		})) || [];
-
-	const options = [
-		...getRoleOptions($session.user),
-		...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
-		// { label: 'Settings', href: '#', icon: Cog },
-		{ label: 'Docs', href: docs, icon: InformationCircle }, // TODO: open in new tab { target="_blank" } & sveltekit:reload
-		{ label: 'Logout', href: LOGOUT, icon: Logout }, // sveltekit:reload?
-	];
 </script>
 
 <Dropdown>
@@ -53,7 +29,7 @@
 	</div>
 	<div slot="menu">
 		<DropdownMenu>
-			{#each options as option}
+			{#each getNavOptions($session.user) as option}
 				<MenuItem let:active>
 					<a href={option.href} sveltekit:reload>
 						<MenuIconItem {option} {active} />
