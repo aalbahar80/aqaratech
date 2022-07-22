@@ -142,7 +142,7 @@ export class RolesService {
 
     let results: RoleDto[] = data.map((r) => {
       const { user, ...role } = r;
-      return { ...role, email: user!.email }; // TODO SCHEMA: email required
+      return { ...role, email: user.email };
     });
 
     return { total, results };
