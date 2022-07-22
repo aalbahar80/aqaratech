@@ -22,7 +22,8 @@
 	const navigation = $session.user?.role.meta.navLinks || [];
 
 	$: showDashboard =
-		$session.user?.role.meta.isOwner || $session.user?.role.meta.isTenant;
+		$session.user?.role.roleType === 'PORTFOLIO' ||
+		$session.user?.role.roleType === 'TENANT';
 
 	const docs = getDocs();
 
