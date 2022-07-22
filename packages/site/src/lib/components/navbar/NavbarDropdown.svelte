@@ -52,7 +52,7 @@
 		/>
 	</div>
 	<div slot="menu">
-		<DropdownMenu class="z-10">
+		<DropdownMenu>
 			{#each options as option}
 				<MenuItem let:active>
 					<a href={option.href} sveltekit:reload>
