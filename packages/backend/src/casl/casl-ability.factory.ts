@@ -1,6 +1,6 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility, Subjects } from '@casl/prisma';
-import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import {
   Expense,
   ExpenseType,
@@ -26,6 +26,11 @@ export class CaslAbilityFactory {
 
   private readonly logger = new Logger(CaslAbilityFactory.name);
 
+  /**
+   * Creates a CASL ability for a given role. Does so by querying the database for
+   * id's of all the objects that the role has access to.
+   * Then, creates the ability using the id's.
+   */
   async defineAbility(role: ValidatedUserDto['roles'][number]) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
@@ -33,39 +38,7 @@ export class CaslAbilityFactory {
     this.logger.debug(`Defining ability for role: ${role.id}`);
     // TODO fix type, handle case where auth0 user email is not in the database
 
-    // Define user's own roles
-    // interface Own {
-    //   orgs: string[];
-    //   portfolios: string[];
-    //   tenants: string[];
-    // }
-
-    /**
-     * A user's own role.
-     * A user can belong to an organization (ex. creator, staff, admin, etc.)
-     * A user can belong to a portfolio (ex. owner, family-member, etc)
-     * A user can belong to a tenant (ex. renter)
-     *
-     * A user can have multiple roles. Example: An employee of a an organization is also a tenant of a different organization.
-     * @example
-     * own.portfolio represents read-only access to the user's portfolio.
-     */
-    // const own: Own = { orgs: [], portfolios: [], tenants: [] };
-
-    // user.roles.forEach((role) => {
-    //   if (role.roleType === 'ORGADMIN' && role.organizationId) {
-    //     own.orgs.push(role.organizationId);
-    //   }
-    //   if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-    //     own.portfolios.push(role.portfolioId);
-    //   }
-    //   if (role.roleType === 'TENANT' && role.tenantId) {
-    //     own.tenants.push(role.tenantId);
-    //   }
-    // });
-
-    // ### Role: Organization###
-    // Define an org user's manageable entities
+    // ### Role: Organization Admin###
     if (role.roleType === 'ORGADMIN') {
       const rolesQ = this.prisma.role.findMany({
         where: {
@@ -175,7 +148,7 @@ export class CaslAbilityFactory {
         maintenanceOrdersQ,
       ]);
       this.logger.log(
-        `Defined manageable entities for rold ${role.id} in ${
+        `Defined manageable entities for role ${role.id} in ${
           Date.now() - now
         }ms`,
       );
@@ -314,7 +287,6 @@ export class CaslAbilityFactory {
     }
 
     // ### Role: Portfolio ###
-    // Define a portfolio user's readable entities
     // TODO change to else if
     if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
       const tenantsQ = this.prisma.tenant.findMany({
@@ -452,10 +424,8 @@ export class CaslAbilityFactory {
     }
 
     // ### Role: Tenant###
-    // Define a tenant user's readable entities
     // TODO restrict fields
     // TODO change to else if
-    // TODO: disambiguated unions for roleType and tenantId/portfolioId?
     if (role.roleType === 'TENANT' && role.tenantId) {
       const leasesQ = this.prisma.lease.findMany({
         select: { id: true },
@@ -511,23 +481,6 @@ export class CaslAbilityFactory {
 
     return build();
   }
-
-  /**
-   * Helper to dry up authz logic in services.
-   * Often, it will be required to pass in not only the basic subject,
-   * but also the subject's organization, portfolio, tenant, etc.
-   */
-  // async throwIfForbidden(
-  //   user: ValidatedUserDto,
-  //   action: Action,
-  //   subject: Subject,
-  // ) {
-  //   const ability = await this.defineAbility(user);
-
-  //   if (ability.cannot(action, subject)) {
-  //     throw new ForbiddenException();
-  //   }
-  // }
 }
 
 export type AppAbility = PrismaAbility<[string, Subject]>;
