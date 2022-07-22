@@ -23,7 +23,6 @@
 		$session.user?.meta.isOwner || $session.user?.meta.isTenant;
 
 	const docs = getDocs();
-	let open = false;
 
 	const options: MenuOption[] = [
 		...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
@@ -101,10 +100,10 @@
 						class="group inline-flex items-center rounded border border-transparent px-4 py-2  text-sm font-medium text-white hover:bg-gray-700"
 					>
 						<div class="pr-3">
-							<p>The Real Estate Co</p>
-							<span class="font-medium text-slate-300 group-hover:text-white"
-								>Portfolio</span
-							>
+							<p>{$session.user.role.organization.fullName}</p>
+							<span class="font-medium text-slate-300 group-hover:text-white">
+								{$session.user.meta.roleLabel}
+							</span>
 						</div>
 						<Icon
 							src={ChevronDown}
