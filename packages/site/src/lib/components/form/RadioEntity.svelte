@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import {
 		RadioGroup,
 		RadioGroupDescription,

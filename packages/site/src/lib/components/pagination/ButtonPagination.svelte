@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getButtons } from '$lib/components/table/pagination';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import type { PaginatedDto } from '@self/sdk';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

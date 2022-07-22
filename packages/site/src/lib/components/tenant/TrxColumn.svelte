@@ -5,7 +5,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';

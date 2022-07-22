@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { getButtons } from '$lib/components/table/pagination';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import { getQuery } from '$lib/utils/set-query';
 	import type { PaginatedDto } from '@self/sdk';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';

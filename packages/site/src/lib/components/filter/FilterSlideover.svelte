@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
 		DialogOverlay,

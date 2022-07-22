@@ -4,7 +4,7 @@
 	import CondensedPagination from '$lib/components/table/CondensedPagination.svelte';
 	import { createPagination } from '$lib/components/table/pagination';
 	import type { CTable } from '$lib/models/classes/table.class';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import * as R from 'remeda';
 
 	export let table: CTable;

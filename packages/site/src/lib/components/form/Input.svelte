@@ -2,7 +2,7 @@
 	import Combobox from '$components/form/inputs/Combobox.svelte';
 	import Select from '$components/Select.svelte';
 	import { SelectField, type Field } from '$lib/models/classes/Field.class';
-	import { classes } from '$lib/utils';
+	import { classes } from '$lib/utils/classes';
 	import { tippyHint } from '$lib/utils/tippy';
 	import {
 		Switch,
