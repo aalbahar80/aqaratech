@@ -1,9 +1,10 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { User } from 'src/decorators/user.decorator';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
@@ -12,6 +13,7 @@ import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 import { RolesService } from './roles.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('roles')
 @ApiTags('roles')
 export class RolesController {

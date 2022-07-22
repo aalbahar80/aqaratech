@@ -22,7 +22,8 @@ paths:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_0
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -39,11 +40,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: &ref_0
+      tags: &ref_1
         - tenants
     get:
       operationId: findAll
       parameters:
+        - *ref_0
         - name: page
           required: false
           in: query
@@ -96,11 +98,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
+      tags: *ref_1
   /tenants/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_0
         - name: id
           required: true
           in: path
@@ -113,10 +116,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantOneDto'
-      tags: *ref_0
+      tags: *ref_1
     patch:
       operationId: update
       parameters:
+        - *ref_0
         - name: id
           required: true
           in: path
@@ -135,10 +139,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
+      tags: *ref_1
     delete:
       operationId: remove
       parameters:
+        - *ref_0
         - name: id
           required: true
           in: path
@@ -151,11 +156,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
+      tags: *ref_1
   /tenants/{id}/leases:
     get:
       operationId: findLeases
       parameters:
+        - *ref_0
         - name: page
           required: false
           in: query
@@ -213,11 +219,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_0
+      tags: *ref_1
   /tenants/{id}/invoices:
     get:
       operationId: findInvoices
       parameters:
+        - *ref_0
         - name: page
           required: false
           in: query
@@ -305,11 +312,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_0
+      tags: *ref_1
   /tenants/{id}/roles:
     get:
       operationId: findRoles
       parameters:
+        - *ref_0
         - name: page
           required: false
           in: query
@@ -367,11 +375,16 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_0
+      tags: *ref_1
   /roles:
     post:
       operationId: create
-      parameters: []
+      parameters:
+        - &ref_2
+          name: x-role-id
+          in: header
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -391,12 +404,13 @@ paths:
             application/json:
               schema:
                 type: object
-      tags: &ref_1
+      tags: &ref_3
         - roles
   /roles/{id}:
     delete:
       operationId: remove
       parameters:
+        - *ref_2
         - name: id
           required: true
           in: path
@@ -409,11 +423,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_1
+      tags: *ref_3
   /roles/{id}/send-invite:
     post:
       operationId: sendInvite
       parameters:
+        - *ref_2
         - name: id
           required: true
           in: path
@@ -422,12 +437,13 @@ paths:
       responses:
         '201':
           description: ''
-      tags: *ref_1
+      tags: *ref_3
   /leaseInvoices:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_4
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -444,11 +460,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: &ref_2
+      tags: &ref_5
         - leaseInvoices
     get:
       operationId: findAll
       parameters:
+        - *ref_4
         - name: page
           required: false
           in: query
@@ -531,11 +548,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_2
+      tags: *ref_5
   /leaseInvoices/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_4
         - name: id
           required: true
           in: path
@@ -548,10 +566,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_2
+      tags: *ref_5
     patch:
       operationId: update
       parameters:
+        - *ref_4
         - name: id
           required: true
           in: path
@@ -570,10 +589,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_2
+      tags: *ref_5
     delete:
       operationId: remove
       parameters:
+        - *ref_4
         - name: id
           required: true
           in: path
@@ -586,11 +606,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_2
+      tags: *ref_5
   /leaseInvoices/{id}/send-email:
     post:
       operationId: sendEmail
       parameters:
+        - *ref_4
         - name: id
           required: true
           in: path
@@ -603,12 +624,13 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_2
+      tags: *ref_5
   /leases:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_6
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -625,11 +647,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: &ref_3
+      tags: &ref_7
         - leases
     get:
       operationId: findAll
       parameters:
+        - *ref_6
         - name: page
           required: false
           in: query
@@ -682,11 +705,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_3
+      tags: *ref_7
   /leases/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_6
         - name: id
           required: true
           in: path
@@ -699,10 +723,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_3
+      tags: *ref_7
     patch:
       operationId: update
       parameters:
+        - *ref_6
         - name: id
           required: true
           in: path
@@ -721,10 +746,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_3
+      tags: *ref_7
     delete:
       operationId: remove
       parameters:
+        - *ref_6
         - name: id
           required: true
           in: path
@@ -737,11 +763,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseBasicDto'
-      tags: *ref_3
+      tags: *ref_7
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
       parameters:
+        - *ref_6
         - name: id
           required: true
           in: path
@@ -829,10 +856,11 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_3
+      tags: *ref_7
     post:
       operationId: createInvoices
       parameters:
+        - *ref_6
         - name: id
           required: true
           in: path
@@ -863,12 +891,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LeaseInvoiceBasicDto'
-      tags: *ref_3
+      tags: *ref_7
   /portfolios:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_8
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -885,11 +914,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_4
+      tags: &ref_9
         - portfolios
     get:
       operationId: findAll
       parameters:
+        - *ref_8
         - name: page
           required: false
           in: query
@@ -942,11 +972,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_4
+      tags: *ref_9
   /portfolios/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_8
         - name: id
           required: true
           in: path
@@ -959,10 +990,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_4
+      tags: *ref_9
     patch:
       operationId: update
       parameters:
+        - *ref_8
         - name: id
           required: true
           in: path
@@ -981,10 +1013,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_4
+      tags: *ref_9
     delete:
       operationId: remove
       parameters:
+        - *ref_8
         - name: id
           required: true
           in: path
@@ -997,11 +1030,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_4
+      tags: *ref_9
   /portfolios/{id}/roles:
     get:
       operationId: findRoles
       parameters:
+        - *ref_8
         - name: page
           required: false
           in: query
@@ -1059,11 +1093,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_4
+      tags: *ref_9
   /portfolios/{id}/properties:
     get:
       operationId: findProperties
       parameters:
+        - *ref_8
         - name: page
           required: false
           in: query
@@ -1121,11 +1156,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_4
+      tags: *ref_9
   /portfolios/{id}/units:
     get:
       operationId: findUnits
       parameters:
+        - *ref_8
         - name: page
           required: false
           in: query
@@ -1183,12 +1219,13 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_4
+      tags: *ref_9
   /properties:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_10
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -1205,11 +1242,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_5
+      tags: &ref_11
         - properties
     get:
       operationId: findAll
       parameters:
+        - *ref_10
         - name: page
           required: false
           in: query
@@ -1262,11 +1300,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_5
+      tags: *ref_11
   /properties/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_10
         - name: id
           required: true
           in: path
@@ -1279,10 +1318,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_5
+      tags: *ref_11
     patch:
       operationId: update
       parameters:
+        - *ref_10
         - name: id
           required: true
           in: path
@@ -1301,10 +1341,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_5
+      tags: *ref_11
     delete:
       operationId: remove
       parameters:
+        - *ref_10
         - name: id
           required: true
           in: path
@@ -1317,11 +1358,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_5
+      tags: *ref_11
   /properties/{id}/units:
     get:
       operationId: findUnits
       parameters:
+        - *ref_10
         - name: page
           required: false
           in: query
@@ -1379,12 +1421,13 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_5
+      tags: *ref_11
   /units:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_12
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -1401,11 +1444,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_6
+      tags: &ref_13
         - units
     get:
       operationId: findAll
       parameters:
+        - *ref_12
         - name: page
           required: false
           in: query
@@ -1458,11 +1502,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_6
+      tags: *ref_13
   /units/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_12
         - name: id
           required: true
           in: path
@@ -1475,10 +1520,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_6
+      tags: *ref_13
     patch:
       operationId: update
       parameters:
+        - *ref_12
         - name: id
           required: true
           in: path
@@ -1497,10 +1543,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_6
+      tags: *ref_13
     delete:
       operationId: remove
       parameters:
+        - *ref_12
         - name: id
           required: true
           in: path
@@ -1513,11 +1560,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_6
+      tags: *ref_13
   /units/{id}/leases:
     get:
       operationId: findLeases
       parameters:
+        - *ref_12
         - name: page
           required: false
           in: query
@@ -1575,11 +1623,16 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_6
+      tags: *ref_13
   /users:
     post:
       operationId: create
-      parameters: []
+      parameters:
+        - &ref_14
+          name: x-role-id
+          in: header
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -1593,11 +1646,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-      tags: &ref_7
+      tags: &ref_15
         - users
     get:
       operationId: findAll
-      parameters: []
+      parameters:
+        - *ref_14
       responses:
         '200':
           description: ''
@@ -1615,11 +1669,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserDto'
-      tags: *ref_7
+      tags: *ref_15
   /users/by-email:
     get:
       operationId: findOneByEmail
       parameters:
+        - *ref_14
         - name: email
           required: true
           in: query
@@ -1634,11 +1689,12 @@ paths:
                 $ref: '#/components/schemas/ValidatedUserDto'
         '404':
           description: ''
-      tags: *ref_7
+      tags: *ref_15
   /users/profile:
     get:
       operationId: findProfile
-      parameters: []
+      parameters:
+        - *ref_14
       responses:
         '200':
           description: ''
@@ -1648,11 +1704,12 @@ paths:
                 $ref: '#/components/schemas/ValidatedUserDto'
         '404':
           description: ''
-      tags: *ref_7
+      tags: *ref_15
   /users/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_14
         - name: id
           required: true
           in: path
@@ -1667,12 +1724,13 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '404':
           description: ''
-      tags: *ref_7
+      tags: *ref_15
   /expenses:
     post:
       operationId: create
       parameters:
-        - name: x-role-id
+        - &ref_16
+          name: x-role-id
           in: header
           schema:
             type: string
@@ -1689,11 +1747,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_8
+      tags: &ref_17
         - expenses
     get:
       operationId: findAll
       parameters:
+        - *ref_16
         - name: page
           required: false
           in: query
@@ -1771,11 +1830,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_8
+      tags: *ref_17
   /expenses/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_16
         - name: id
           required: true
           in: path
@@ -1788,10 +1848,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_8
+      tags: *ref_17
     patch:
       operationId: update
       parameters:
+        - *ref_16
         - name: id
           required: true
           in: path
@@ -1810,10 +1871,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_8
+      tags: *ref_17
     delete:
       operationId: remove
       parameters:
+        - *ref_16
         - name: id
           required: true
           in: path
@@ -1826,19 +1888,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_8
+      tags: *ref_17
   /search:
     post:
       operationId: initSearch
-      parameters: []
+      parameters:
+        - &ref_18
+          name: x-role-id
+          in: header
+          schema:
+            type: string
       responses:
         '201':
           description: ''
-      tags: &ref_9
+      tags: &ref_19
         - search
     get:
       operationId: get
       parameters:
+        - *ref_18
         - name: query
           required: true
           in: query
@@ -1851,10 +1919,11 @@ paths:
             application/json:
               schema:
                 type: object
-      tags: *ref_9
+      tags: *ref_19
     delete:
       operationId: remove
-      parameters: []
+      parameters:
+        - *ref_18
       responses:
         '200':
           description: ''
@@ -1864,11 +1933,16 @@ paths:
                 type: array
                 items:
                   type: object
-      tags: *ref_9
+      tags: *ref_19
   /organizations:
     post:
       operationId: create
-      parameters: []
+      parameters:
+        - &ref_20
+          name: x-role-id
+          in: header
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -1882,12 +1956,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: &ref_10
+      tags: &ref_21
         - organizations
   /organizations/{id}:
     get:
       operationId: findOne
       parameters:
+        - *ref_20
         - name: id
           required: true
           in: path
@@ -1900,11 +1975,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_10
+      tags: *ref_21
   /organizations/{id}/roles:
     get:
       operationId: findRoles
       parameters:
+        - *ref_20
         - name: page
           required: false
           in: query
@@ -1962,11 +2038,16 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_10
+      tags: *ref_21
   /analytics/incomeByMonth:
     get:
       operationId: getIncomeByMonth
       parameters:
+        - &ref_22
+          name: x-role-id
+          in: header
+          schema:
+            type: string
         - name: page
           required: false
           in: query
@@ -2041,12 +2122,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: &ref_11
+      tags: &ref_23
         - analytics
   /analytics/expensesByMonth:
     get:
       operationId: getExpensesByMonth
       parameters:
+        - *ref_22
         - name: start
           required: false
           in: query
@@ -2081,7 +2163,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: *ref_11
+      tags: *ref_23
   /meta/types:
     get:
       operationId: findExpenseTypes

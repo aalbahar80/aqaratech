@@ -17,7 +17,7 @@ import {
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER_NAME } from 'src/constants/header-role';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -32,6 +32,7 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { ExpensesService } from './expenses.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('expenses')
 @ApiTags('expenses')
 @SwaggerAuth()
@@ -40,7 +41,6 @@ export class ExpensesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Expense' })
-  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: ExpenseDto })
   create(
     @User() user: IUser,

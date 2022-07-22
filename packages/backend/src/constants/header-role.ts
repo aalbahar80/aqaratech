@@ -1,1 +1,1 @@
-export const ROLE_HEADER_NAME = 'x-role-id';
+export const ROLE_HEADER = 'x-role-id';

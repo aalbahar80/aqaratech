@@ -1,14 +1,16 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import {
   ByMonthDto,
   DashboardFilterDto,
 } from 'src/analytics/dto/analytics.dto';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { AnalyticsService } from './analytics.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @ApiTags('analytics')
 @Controller('analytics')
 export class AnalyticsController {

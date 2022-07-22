@@ -13,6 +13,7 @@ import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { IUser } from 'src/interfaces/user.interface';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
@@ -57,7 +58,7 @@ export class AbilitiesGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<IRequest>();
 
     // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
-    const xRoleId = request.headers['x-role-id'] as string | undefined;
+    const xRoleId = request.headers[ROLE_HEADER] as string | undefined;
     const hasDefaultRole = request.user.roles.some((role) => role.isDefault);
 
     let role: ValidatedUserDto['roles'][number] | undefined;

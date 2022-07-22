@@ -20,7 +20,7 @@ import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER_NAME } from 'src/constants/header-role';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -42,6 +42,7 @@ import {
 } from 'src/leases/dto/lease.dto';
 import { LeasesService } from './leases.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('leases')
 @ApiTags('leases')
 @SwaggerAuth()
@@ -53,7 +54,6 @@ export class LeasesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Lease' })
-  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: LeaseBasicDto })
   create(
     @User() user: IUser,

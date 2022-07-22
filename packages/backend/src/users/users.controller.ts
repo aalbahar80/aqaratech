@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import {
   ApiCreatedResponse,
+  ApiHeader,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
@@ -8,6 +9,7 @@ import {
 import { Public } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -15,6 +17,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { UserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('users')
 @ApiTags('users')
 @SwaggerAuth()

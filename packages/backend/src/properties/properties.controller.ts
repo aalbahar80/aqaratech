@@ -19,7 +19,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER_NAME } from 'src/constants/header-role';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -35,6 +35,7 @@ import { UnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('properties')
 @ApiTags('properties')
 @SwaggerAuth()
@@ -46,7 +47,6 @@ export class PropertiesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Property' })
-  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: PropertyDto })
   create(
     @User() user: IUser,

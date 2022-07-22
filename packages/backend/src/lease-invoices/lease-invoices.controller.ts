@@ -17,7 +17,7 @@ import {
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER_NAME } from 'src/constants/header-role';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -32,6 +32,7 @@ import {
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from './lease-invoices.service';
 
+@ApiHeader({ name: ROLE_HEADER })
 @Controller('leaseInvoices')
 @ApiTags('leaseInvoices')
 @SwaggerAuth()
@@ -40,7 +41,6 @@ export class LeaseInvoicesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
-  @ApiHeader({ name: ROLE_HEADER_NAME })
   @ApiCreatedResponse({ type: LeaseInvoiceBasicDto })
   create(
     @User() user: IUser,
