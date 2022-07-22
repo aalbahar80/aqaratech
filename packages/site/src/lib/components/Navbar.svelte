@@ -26,7 +26,7 @@
 
 	const getRoleOptions = (user: App.Session['user']): MenuOption[] =>
 		user?.roles.map((role) => ({
-			href: '/',
+			href: `/auth/roles/${role.id}`,
 			label: `${role.organization.fullName} : ${role.meta.roleLabel}`,
 		})) || [];
 

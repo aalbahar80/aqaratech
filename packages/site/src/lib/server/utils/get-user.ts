@@ -65,6 +65,7 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 
 export const getUser = async (
 	token: string | undefined,
+	selectedRoleId?: string,
 ): Promise<App.Session['user']> => {
 	if (!token) {
 		return;
@@ -81,7 +82,15 @@ export const getUser = async (
 			...role,
 			meta: getRoleMeta(role),
 		}));
-		const role = getDefaultRole(roles);
+
+		const role = selectedRoleId
+			? roles.find((role) => role.id === selectedRoleId)
+			: getDefaultRole(roles);
+
+		// TODO dedupe error
+		if (!role) {
+			throw new Error('User has no roles');
+		}
 
 		const user: User = {
 			...userStuff,
