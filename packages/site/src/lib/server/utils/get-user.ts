@@ -24,14 +24,14 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 			roleLabel: 'Organization',
 			home: '/',
 			navLinks: [
-				{ name: 'Portfolios', href: '/portfolios' },
-				{ name: 'Properties', href: '/properties' },
-				// { name: 'Units', href: '/units' },
-				{ name: 'Leases', href: '/leases' },
-				{ name: 'Tenants', href: '/tenants' },
-				// { name: 'Transactions', href: '/transactions' },
-				// { name: 'Expenses', href: '/expenses' },
-				// { name: 'Maintenance', href: '/maintenanceOrders' },
+				{ label: 'Portfolios', href: '/portfolios' },
+				{ label: 'Properties', href: '/properties' },
+				// { label: 'Units', href: '/units' },
+				{ label: 'Leases', href: '/leases' },
+				{ label: 'Tenants', href: '/tenants' },
+				// { label: 'Transactions', href: '/transactions' },
+				// { label: 'Expenses', href: '/expenses' },
+				// { label: 'Maintenance', href: '/maintenanceOrders' },
 			],
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
@@ -39,9 +39,9 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 			roleLabel: 'Portfolio',
 			home: `/portfolios/${role.portfolioId}/dashboard`,
 			navLinks: [
-				{ name: 'Properties', href: '/properties' },
-				{ name: 'Leases', href: '/leases' },
-				{ name: 'Tenants', href: '/tenants' },
+				{ label: 'Properties', href: '/properties' },
+				{ label: 'Leases', href: '/leases' },
+				{ label: 'Tenants', href: '/tenants' },
 			],
 		};
 	} else if (role.roleType === 'TENANT') {

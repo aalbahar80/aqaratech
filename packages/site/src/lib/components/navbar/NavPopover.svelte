@@ -61,13 +61,13 @@
 				</div>
 				<div class="pt-5 pb-6">
 					<div class="space-y-1 px-2">
-						{#each navigation as item (item.name)}
+						{#each navigation as item (item.label)}
 							<a
 								on:click={() => close(null)}
 								sveltekit:prefetch
 								href={item.href}
 							>
-								<PopoverItem option={{ label: item.name }} />
+								<PopoverItem option={{ label: item.label }} />
 							</a>
 						{/each}
 

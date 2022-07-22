@@ -1,10 +1,10 @@
 import { dev } from '$app/env';
 import { getDocs } from '$lib/components/navbar/docs-url';
 import { LOGOUT } from '$lib/constants/routes';
-import type { MenuOption } from '$lib/models/interfaces/option.interface';
+import type { NavbarItem } from '$lib/models/types/auth.type';
 import { Code, InformationCircle, Logout } from '@steeze-ui/heroicons';
 
-const getRoleOptions = (user: App.Session['user']): MenuOption[] =>
+export const getRoleOptions = (user: App.Session['user']): NavbarItem[] =>
 	user?.roles.map((role) => ({
 		href: `/auth/roles/${role.id}`,
 		label: `${role.organization.fullName} : ${role.meta.roleLabel}`,

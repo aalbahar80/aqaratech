@@ -22,7 +22,7 @@ export type AuthConfigType = {
 };
 
 export interface NavbarItem {
-	name: string;
+	label: string;
 	href: string;
 }
 

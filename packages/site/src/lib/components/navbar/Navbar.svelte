@@ -22,13 +22,13 @@
 			<DashboardButton />
 
 			<!-- Large screen: nav links -->
-			{#each navigation as item (item.name)}
+			{#each navigation as item (item.label)}
 				<a
 					sveltekit:prefetch
 					href={item.href}
 					class="hidden rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white lg:flex"
 				>
-					{item.name}
+					{item.label}
 				</a>
 			{/each}
 		</div>
