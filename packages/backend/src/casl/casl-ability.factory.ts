@@ -32,11 +32,10 @@ export class CaslAbilityFactory {
    * Then, creates the ability using the id's.
    */
   async defineAbility(role: ValidatedUserDto['roles'][number]) {
+    const now = Date.now();
+
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
-
-    this.logger.debug(`Defining ability for role: ${role.id}`);
-    // TODO fix type, handle case where auth0 user email is not in the database
 
     // ### Role: Organization Admin###
     if (role.roleType === 'ORGADMIN') {
@@ -125,7 +124,6 @@ export class CaslAbilityFactory {
       },
     });
 
-      const now = Date.now();
       const [
         roles,
         tenants,
@@ -147,11 +145,6 @@ export class CaslAbilityFactory {
         expensesQ,
         maintenanceOrdersQ,
       ]);
-      this.logger.log(
-        `Defined manageable entities for role ${role.id} in ${
-          Date.now() - now
-        }ms`,
-      );
 
       const manageable: OrgManageableResources = {
         orgs: [role.organizationId], // TODO consider contraining to superadmins only
@@ -284,11 +277,8 @@ export class CaslAbilityFactory {
           },
         ],
       });
-    }
-
-    // ### Role: Portfolio ###
-    // TODO change to else if
-    if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
+    } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
+      // ### Role: Portfolio ###
       const tenantsQ = this.prisma.tenant.findMany({
         select: { id: true },
         where: {
@@ -352,7 +342,6 @@ export class CaslAbilityFactory {
         },
       });
 
-      const now = Date.now();
       const [
         tenants,
         properties,
@@ -370,11 +359,6 @@ export class CaslAbilityFactory {
         expensesQ,
         maintenanceOrdersQ,
       ]);
-      this.logger.log(
-        `Defined readable entities for role ${role.id} in ${
-          Date.now() - now
-        }ms`,
-      );
 
       const readable: PortfolioReadableResources = {
         tenants: tenants.map((i) => i.id),
@@ -421,12 +405,9 @@ export class CaslAbilityFactory {
       can(Action.Read, ['MaintenanceOrder'], {
         id: { in: readable.maintenanceOrders },
       });
-    }
-
-    // ### Role: Tenant###
-    // TODO restrict fields
-    // TODO change to else if
-    if (role.roleType === 'TENANT' && role.tenantId) {
+    } else if (role.roleType === 'TENANT' && role.tenantId) {
+      // ### Role: Tenant###
+      // TODO restrict fields
       const leasesQ = this.prisma.lease.findMany({
         select: { id: true },
         where: { tenantId: { equals: role.tenantId } },
@@ -442,17 +423,11 @@ export class CaslAbilityFactory {
         where: { tenantId: { equals: role.tenantId } },
       });
 
-      const now = Date.now();
       const [leases, leaseInvoices, maintenanceOrders] = await Promise.all([
         leasesQ,
         leaseInvoicesQ,
         maintenanceOrdersQ,
       ]);
-      this.logger.log(
-        `Defined readable entities for tenant role ${role.id} in ${
-          Date.now() - now
-        }ms`,
-      );
 
       const readable: TenantReadableResources = {
         tenants: [role.tenantId],
@@ -478,6 +453,12 @@ export class CaslAbilityFactory {
         id: { in: readable.maintenanceOrders },
       });
     }
+
+    this.logger.log(
+      `Defined manageable entities for role ${role.id} in ${
+        Date.now() - now
+      }ms`,
+    );
 
     return build();
   }
