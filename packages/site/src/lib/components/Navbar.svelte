@@ -4,10 +4,12 @@
 	import NavPopover from '$components/navbar/NavPopover.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
+	import MenuIconItem from '$lib/components/buttons/MenuIconItem.svelte';
 	import { getDocs } from '$lib/components/navbar/docs-url';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import { LOGIN, LOGOUT } from '$lib/constants/routes';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import {
 		ChevronDown,
 		Code,
@@ -37,7 +39,6 @@
 		{ label: 'Docs', href: docs, icon: InformationCircle }, // TODO: open in new tab { target="_blank" } & sveltekit:reload
 		{ label: 'Logout', href: LOGOUT, icon: Logout }, // sveltekit:reload?
 	];
-	$: console.log(options);
 </script>
 
 <div class="bg-gray-900 py-1.5 print:hidden">
@@ -121,7 +122,15 @@
 						/>
 					</div>
 					<div slot="menu">
-						<DropdownMenu {options} />
+						<DropdownMenu>
+							{#each options as { label, href }}
+								<MenuItem let:active>
+									<a {href} sveltekit:reload>
+										<MenuIconItem {label} icon={Code} {active} />
+									</a>
+								</MenuItem>
+							{/each}
+						</DropdownMenu>
 					</div>
 				</Dropdown>
 			{:else}
