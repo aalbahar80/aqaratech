@@ -12,14 +12,18 @@ if (process.env.AQ_DEBUG == '1') {
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	preprocess: [preprocess({ postcss: true })],
-	// experimental: {
-	// 	// 	prebundleSvelteLibraries: true,
-	// 	inspector: true,
-	// },
 	kit: {
 		adapter:
 			process.env.VERCEL || process.env.CF_PAGES ? adapter() : adapterNode(),
 	},
+	// vitePlugin: {
+	// 	experimental: {
+	// 		// 	prebundleSvelteLibraries: true,
+	// 		inspector: {
+	// 			showToggleButton: 'always',
+	// 		},
+	// 	},
+	// },
 };
 
 export default config;
