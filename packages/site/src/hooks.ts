@@ -35,7 +35,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();
 	const method = event.request.method;
 	console.log(
-		`Request: ${method} ${event.url.href}: ${
+		`${new Date().toISOString()} Request: ${method} ${event.url.href}: ${
 			event.routeId
 		} ${event.request.headers.get('user-agent')}`,
 	);
@@ -51,9 +51,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 	console.log(
-		`Response: ${Date.now() - now}ms - ${method} ${event.url.pathname} ${
-			response.status
-		} - ${event.request.headers.get('user-agent')} - ${
+		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
+			event.url.pathname
+		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
 			event.locals.user?.email
 		}`,
 	);
