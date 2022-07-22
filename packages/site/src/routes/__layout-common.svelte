@@ -20,7 +20,11 @@
 	export const load: Load = async ({ session, stuff, fetch }) => {
 		const userConfig = getUserConfig(session.user);
 		const navigation = userConfig.navLinks;
-		const apiClient = api({ token: session.accessToken, loadFetch: fetch });
+		const apiClient = api({
+			loadFetch: fetch,
+			token: session.accessToken,
+			roleId: session.user?.role.roleId,
+		});
 		return {
 			// ...protectRoute(session, pathname),
 			props: {

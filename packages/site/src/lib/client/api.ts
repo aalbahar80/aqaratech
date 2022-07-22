@@ -15,13 +15,18 @@ import {
 import type { LoadEvent } from '@sveltejs/kit';
 
 export const api = ({
-	token,
 	loadFetch,
+	token,
+	roleId,
 }: {
-	token: string;
 	loadFetch?: LoadEvent['fetch'];
+	token: string;
+	roleId?: string | undefined;
 }) => {
-	const headers = { Authorization: `Bearer ${token}` };
+	const headers = {
+		Authorization: `Bearer ${token}`,
+		...(roleId && { 'x-role-id': roleId }),
+	};
 
 	// const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';
 	const basePath = import.meta.env.VITE_API_URL;

@@ -75,7 +75,10 @@ export class AbilitiesGuard implements CanActivate {
 
     if (!role) {
       // If the user has no roles, return false.
-      this.logger.error(`User ${request.user.id} has no roles.`);
+      this.logger.log(request.user);
+      this.logger.error(
+        `Could not resolve role for userId: ${request.user.id} - x-role-id: ${xRoleId} - hasDefaultRole: ${hasDefaultRole}`,
+      );
       return false;
     }
 
