@@ -11,6 +11,9 @@ class RoleRequiredDto {
   @ApiProperty({ enum: RoleType, enumName: 'RoleTypeEnum' })
   @IsEnum(RoleType)
   roleType: RoleType;
+
+  @IsEmail()
+  email: string;
 }
 
 class RoleOptionalDto {
@@ -36,10 +39,6 @@ export class RoleDto extends IntersectionType(
 
 export class CreateRoleDto
   extends IntersectionType(RoleRequiredDto, PartialType(RoleOptionalDto))
-  implements Partial<Role>
-{
-  @IsEmail()
-  email: string;
-}
+  implements Partial<Role> {}
 
-export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
+// export class UpdateRoleDto extends PartialType(CreateRoleDto) {}

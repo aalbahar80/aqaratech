@@ -2754,6 +2754,8 @@ components:
           $ref: '#/components/schemas/RoleTypeEnum'
         organizationId:
           type: string
+        email:
+          type: string
         portfolioId:
           type: string
           nullable: true
@@ -2772,6 +2774,7 @@ components:
         - updatedAt
         - roleType
         - organizationId
+        - email
         - portfolioId
         - tenantId
         - isAccepted
@@ -2781,9 +2784,9 @@ components:
       properties:
         roleType:
           $ref: '#/components/schemas/RoleTypeEnum'
-        email:
-          type: string
         organizationId:
+          type: string
+        email:
           type: string
         portfolioId:
           type: string
@@ -2799,8 +2802,8 @@ components:
           type: boolean
       required:
         - roleType
-        - email
         - organizationId
+        - email
     UserDto:
       type: object
       properties:

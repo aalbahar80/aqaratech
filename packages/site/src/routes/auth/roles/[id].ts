@@ -11,7 +11,8 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 	return {
 		status: 302,
 		headers: {
-			location,
+			// location,
+			location: 'http://localhost:3000/properties/g2q91lb9foi2',
 		},
 	};
 };
