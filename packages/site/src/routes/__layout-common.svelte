@@ -6,8 +6,6 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
-	import type { NavbarItem } from '$lib/models/interfaces/user.interface';
-	import { getUserConfig } from '$user';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
@@ -18,18 +16,14 @@
 	import type { Load } from './__types/__layout-common';
 
 	export const load: Load = async ({ session, stuff, fetch }) => {
-		const userConfig = getUserConfig(session.user);
-		const navigation = userConfig.navLinks;
 		const apiClient = api({
 			loadFetch: fetch,
 			token: session.accessToken,
-			roleId: session.user?.role.roleId,
+			roleId: session.user?.role.id,
 		});
 		return {
 			// ...protectRoute(session, pathname),
-			props: {
-				navigation,
-			},
+			props: {},
 			stuff: {
 				...stuff,
 				api: apiClient,
@@ -39,7 +33,6 @@
 </script>
 
 <script lang="ts">
-	export let navigation: NavbarItem[];
 	onMount(() => {
 		const href = window.location.href;
 		if (!href.includes('localhost') && !href.includes('127.0.0.1')) {
@@ -47,7 +40,7 @@
 			if ($session.user) {
 				LogRocket.identify($session.user.id || '', {
 					email: $session.user.email,
-					roleId: $session.user.role.roleId,
+					roleId: $session.user.role.id,
 					name: $session.user.fullName || '',
 				});
 			}
@@ -63,7 +56,7 @@
 					import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
 			});
 			Sentry.configureScope((scope: Scope) => {
-				scope.setTag('role', $session.user?.role.roleName || '');
+				scope.setTag('role', $session.user?.role.roleType || '');
 				scope.setUser({
 					id: $session.user?.id || '',
 					email: $session.user?.email || '',
@@ -95,6 +88,6 @@
 		<Alert />
 	{/if}
 	<ToastParent />
-	<Navbar {navigation} />
+	<Navbar />
 	<slot />
 </div>

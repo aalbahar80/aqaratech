@@ -21,9 +21,15 @@ export type AuthConfigType = {
 	JWKS: JSONWebKeySet;
 };
 
+export interface NavbarItem {
+	name: string;
+	href: string;
+}
+
 interface BaseRole {
 	home: string;
 	roleLabel: string;
+	navLinks?: NavbarItem[];
 }
 
 // Rename: add User suffix

@@ -11,11 +11,8 @@
 	import { Menu, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	interface Navigation {
-		name: string;
-		href: string;
-	}
-	export let navigation: Navigation[] = [];
+	// Needs to be reactive?
+	const navigation = $session.user?.meta.navLinks || [];
 
 	const docs = getDocs();
 </script>
@@ -83,7 +80,7 @@
 								<div class="relative flex justify-start" />
 							</div>
 
-							{#if $session.user.role.isAdmin}
+							{#if $session.user.role.roleType === 'ORGADMIN'}
 								<a
 									on:click={() => close(null)}
 									href={docs}

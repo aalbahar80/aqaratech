@@ -26,6 +26,16 @@ const getUserMeta = (role: UserRole): UserMeta => {
 			isAdmin: true,
 			isOwner: false,
 			isTenant: false,
+			navLinks: [
+				{ name: 'Portfolios', href: '/portfolios' },
+				{ name: 'Properties', href: '/properties' },
+				// { name: 'Units', href: '/units' },
+				{ name: 'Leases', href: '/leases' },
+				{ name: 'Tenants', href: '/tenants' },
+				// { name: 'Transactions', href: '/transactions' },
+				// { name: 'Expenses', href: '/expenses' },
+				// { name: 'Maintenance', href: '/maintenanceOrders' },
+			],
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
 		return {
@@ -34,6 +44,11 @@ const getUserMeta = (role: UserRole): UserMeta => {
 			isAdmin: false,
 			isOwner: true,
 			isTenant: false,
+			navLinks: [
+				{ name: 'Properties', href: '/properties' },
+				{ name: 'Leases', href: '/leases' },
+				{ name: 'Tenants', href: '/tenants' },
+			],
 		};
 	} else if (role.roleType === 'TENANT') {
 		return {

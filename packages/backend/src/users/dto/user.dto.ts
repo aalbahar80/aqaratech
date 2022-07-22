@@ -37,9 +37,11 @@ export class ValidatedUserDto extends UserDto {
         { $ref: '#/components/schemas/RoleDto' },
         {
           type: 'object',
+          required: ['organization'],
           properties: {
             organization: {
               type: 'object',
+              required: ['id', 'fullName'],
               properties: {
                 id: { type: 'string' },
                 fullName: { type: 'string' },

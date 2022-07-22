@@ -24,9 +24,7 @@
 			"$routers": ["src/lib/server/trpc/routers/index.ts"],
 			"$routers/*": ["src/lib/server/trpc/routers/*"],
 			"$environment": ["src/lib/environment/index.ts"],
-			"$environment/*": ["src/lib/environment/*"],
-			"$user": ["src/user/index.ts"],
-			"$user/*": ["src/user/*"]
+			"$environment/*": ["src/lib/environment/*"]
 			// "@self/site": ["src/lib/index.ts"],
 			// "@self/site/*": ["src/lib/*"]
 		}

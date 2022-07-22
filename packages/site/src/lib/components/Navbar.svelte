@@ -8,7 +8,6 @@
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import { LOGIN, LOGOUT } from '$lib/constants/routes';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
-	import type { UserConfig } from '$lib/models/interfaces/user.interface';
 	import {
 		ChevronDown,
 		Code,
@@ -17,10 +16,11 @@
 	} from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let navigation: UserConfig['navLinks'] = [];
+	// Needs to be reactive?
+	const navigation = $session.user?.meta.navLinks || [];
 
 	$: showDashboard =
-		$session.user?.role.isOwner || $session.user?.role.isTenant;
+		$session.user?.meta.isOwner || $session.user?.meta.isTenant;
 
 	const docs = getDocs();
 	let open = false;
@@ -50,7 +50,7 @@
 			<div class="order-last -mr-2 flex items-center gap-6 lg:hidden">
 				{#if showDashboard}
 					<a
-						href={$session.user.role.home}
+						href={$session.user.meta.home}
 						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700 lg:hidden"
 					>
 						Dashboard
@@ -87,7 +87,7 @@
 			{#if $session.user}
 				{#if showDashboard}
 					<a
-						href={$session.user.role.home}
+						href={$session.user.meta.home}
 						class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
 						sveltekit:prefetch
 					>

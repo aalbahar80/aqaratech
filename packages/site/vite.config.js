@@ -25,7 +25,6 @@ const config = {
 			$models: resolve('./src/lib/models'),
 			$utils: resolve('.', './src/lib/utils'),
 			$environment: resolve('.', './src/lib/environment'),
-			$user: resolve('.', './src/user'),
 		},
 	},
 	plugins: [sveltekit(), icons({ compiler: 'svelte' })],
