@@ -16,17 +16,18 @@ import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
 
 /**
- * Guard to check authz permissions. Consumes metadata from `@CheckAbilities`.
+ * Attaches a role's `ability` to the `request.user` object. Handles caching of abilities.
+ * Respects the `@Public` decorator.
+ *
+ * Also checks authz permissions. Consumes metadata from `@CheckAbilities`.
  * This decorator is used to check permissions for a specific action on an entity type,
  * not an entity instance. This makes it useful for failing fast if a user is not authorized.
  *
- * For example, if a user is only allowed to read a `Unit` in his organization, we need to retrieve
- * the `Unit` from the database, then check if it's in the user's organization.
+ * For example, if a `role` is only allowed to read a `Unit` in a it's organization, we need to retrieve
+ * the `Unit` from the database, then check if it's in the `role`'s organization.
  *
- * On the other hand, if a user does not have permission to read any `Unit`,
+ * On the other hand, if a `role` does not have permission to read any `Unit` at all,
  * we can just fail fast and return a 403 without needing to call the db.
- *
- * Attach ability to a request. Handle caching of abilities.
  */
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
@@ -54,18 +55,33 @@ export class AbilitiesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest<IRequest>();
 
-    const cached = await this.cacheManager.get<AppAbility>(request.user.id);
+    // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
+    const xRoleId = request.headers['x-role-id'] as string | undefined;
+
+    const defaultRoleId =
+      request.user.roles.find((role) => role.isDefault)?.id ||
+      request.user.roles[0].id;
+
+    const roleId = xRoleId || defaultRoleId;
+
+    // Get the cached ability for this user and role.
+    // Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
+    const cached = await this.cacheManager.get<AppAbility>(roleId);
 
     let ability: AppAbility;
 
     if (cached) {
-      this.logger.log(`Cache hit: Ability for user ${request.user.email}`);
+      this.logger.log(
+        `Cache hit: Ability for user ${request.user.email} - RoleId: ${roleId}`,
+      );
       ability = cached;
     } else {
-      this.logger.log(`Cache miss: Ability for user ${request.user.email}`);
+      this.logger.log(
+        `Cache miss: Ability for user ${request.user.email} - RoleId: ${roleId}`,
+      );
       ability = await this.caslAbilityFactory.defineAbility(request.user);
       // TODO handle cache ttl/invalidation
-      await this.cacheManager.set(request.user.id, ability, {
+      await this.cacheManager.set(roleId, ability, {
         ttl: 60 * 60 * 24, // TODO adjust
       });
     }
@@ -82,11 +98,11 @@ export class AbilitiesGuard implements CanActivate {
      * Example:
      * A POST /tenants request goes through more than one permisson check.
      *
-     * First, the request is allowed if the user has the ability to create any tenant.
+     * First, the request is allowed if the `role` has the ability to create any tenant.
      * This is defined in the guard decorator.
-     * When *this* rule fails, the cache is invalidated and one more attempt is made to grant the user permission.
+     * When *this* rule fails, the cache is invalidated and one more attempt is made to grant permission to the request.
      *
-     * Second, the request is allowed if the user has the ability to create this particular tenant subject.
+     * Second, the request is allowed if the `role` has the ability to create this particular tenant subject.
      * This is defined in the service.
      * When *this* rule fails, the cache is not invalidated (as things stand).
      * TODO should this also be invalidated?
@@ -125,7 +141,7 @@ export class AbilitiesGuard implements CanActivate {
     if (!isAllowed && cached) {
       // prettier-ignore
       this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
-      await this.cacheManager.del(request.user.id);
+      await this.cacheManager.del(roleId);
 
       // try again
       // TODO monitor
@@ -133,7 +149,7 @@ export class AbilitiesGuard implements CanActivate {
     }
 
     this.logger.log(
-      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url}`,
+      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${roleId}`,
     );
     return isAllowed;
   }
