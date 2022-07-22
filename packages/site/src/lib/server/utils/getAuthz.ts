@@ -21,33 +21,27 @@ const getUserRole = (user: ValidatedUserDto): UserRole => {
 const getUserMeta = (role: UserRole): UserMeta => {
 	if (role.roleType === 'ORGADMIN') {
 		return {
+			roleLabel: 'Organization',
 			home: '/',
-			orgId: role.organizationId,
-			roleId: role.id,
 			isAdmin: true,
 			isOwner: false,
 			isTenant: false,
-			roleLabel: 'Organization',
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
 		return {
+			roleLabel: 'Portfolio',
 			home: `/portfolios/${role.portfolioId}/dashboard`,
-			roleId: role.id,
-			orgId: null,
 			isAdmin: false,
 			isOwner: true,
 			isTenant: false,
-			roleLabel: 'Portfolio',
 		};
 	} else if (role.roleType === 'TENANT') {
 		return {
+			roleLabel: 'Tenant',
 			home: `/portal/tenant/${role.tenantId}`,
-			roleId: role.id,
-			orgId: null,
 			isAdmin: false,
 			isOwner: false,
 			isTenant: true,
-			roleLabel: 'Tenant',
 		};
 	} else {
 		throw new Error('Unknown role type');

@@ -22,7 +22,6 @@ export type AuthConfigType = {
 };
 
 interface BaseRole {
-	roleId: string;
 	home: string;
 	roleLabel: string;
 }
@@ -32,21 +31,18 @@ interface Admin extends BaseRole {
 	isAdmin: true;
 	isOwner: false;
 	isTenant: false;
-	orgId: string;
 }
 
 interface Owner extends BaseRole {
 	isAdmin: false;
 	isOwner: true;
 	isTenant: false;
-	orgId: null;
 }
 
 interface Tenant extends BaseRole {
 	isAdmin: false;
 	isOwner: false;
 	isTenant: true;
-	orgId: null;
 }
 
 export type UserMeta = Admin | Owner | Tenant;
