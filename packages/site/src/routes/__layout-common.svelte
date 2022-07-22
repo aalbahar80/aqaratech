@@ -3,8 +3,8 @@
 	import { navigating, page, session } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import { api } from '$lib/client/api';
-	import Navbar from '$lib/components/Navbar.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
+	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
