@@ -3,9 +3,9 @@ import { createLocalJWKSet, jwtVerify } from 'jose';
 
 const { authConfig } = environment;
 
-export const validateAccessToken = async (
+export const validateToken = async (
 	token: string,
-	tokenType: 'idToken' | 'accessToken' = 'accessToken',
+	tokenType: 'idToken' | 'accessToken' = 'idToken',
 ) => {
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
 	const audience =

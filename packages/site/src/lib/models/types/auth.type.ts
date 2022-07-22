@@ -33,7 +33,6 @@ interface Admin extends BaseRole {
 	isOwner: false;
 	isTenant: false;
 	orgId: string;
-	roleName: 'OrgUser';
 }
 
 interface Owner extends BaseRole {
@@ -41,7 +40,6 @@ interface Owner extends BaseRole {
 	isOwner: true;
 	isTenant: false;
 	orgId: null;
-	roleName: 'PortfolioUser';
 }
 
 interface Tenant extends BaseRole {
@@ -49,11 +47,10 @@ interface Tenant extends BaseRole {
 	isOwner: false;
 	isTenant: true;
 	orgId: null;
-	roleName: 'TenantUser';
 }
 
-export type Authz = Admin | Owner | Tenant;
+export type UserMeta = Admin | Owner | Tenant;
 export type User = ValidatedUserDto & {
-	role: Authz;
-	currentRole: ValidatedUserDto['roles'][number];
+	meta: UserMeta;
+	role: ValidatedUserDto['roles'][number];
 };
