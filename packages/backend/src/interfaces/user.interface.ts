@@ -1,6 +1,6 @@
 import { AppAbility } from 'src/casl/casl-ability.factory';
-import { ValidatedUser } from 'src/types/user-validated.type';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
-export interface IUser extends ValidatedUser {
+export interface IUser extends ValidatedUserDto {
   ability: AppAbility;
 }

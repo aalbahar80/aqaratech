@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { ValidatedUser } from 'src/types/user-validated.type';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 export const User = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
@@ -15,7 +15,7 @@ export const User = createParamDecorator(
       // So either don't use this decorator in public routes, or try to get the user in a different way.
 
       // TODO decorator shouldn't throw 401, make jwt.strategy/jwtauthguard throw 401 instead
-      throw new UnauthorizedException('No user found');
+      throw new UnauthorizedException('No user found', 'user.decorator.ts: 18');
     }
 
     return request.user;
@@ -23,5 +23,5 @@ export const User = createParamDecorator(
 );
 
 interface IRequest extends Request {
-  user?: ValidatedUser;
+  user?: ValidatedUserDto;
 }

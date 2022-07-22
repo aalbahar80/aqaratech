@@ -5,7 +5,7 @@ import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
-import { ValidatedUser } from 'src/types/user-validated.type';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -50,7 +50,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param payload
    * access token as received from Auth0
    */
-  validate(payload: any): ValidatedUser {
+  validate(payload: any): ValidatedUserDto {
     // Auth0 will hit our /user/by-email endpoint on each login to get a UserDto.
     // It will then place that UserDto in the access token.
     // Here, we extract that UserDto and place it in the request object,
@@ -76,7 +76,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     // TODO handle case where auth0 did not find user by email.
     const user = payload[
       `${apiNamespace}/userStuff`
-    ] as unknown as ValidatedUser;
+    ] as unknown as ValidatedUserDto;
     return user;
   }
 }

@@ -18,7 +18,7 @@ import {
   User,
 } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ValidatedUser } from 'src/types/user-validated.type';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class CaslAbilityFactory {
@@ -26,7 +26,7 @@ export class CaslAbilityFactory {
 
   private readonly logger = new Logger(CaslAbilityFactory.name);
 
-  async defineAbility(user: ValidatedUser) {
+  async defineAbility(user: ValidatedUserDto) {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
