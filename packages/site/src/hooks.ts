@@ -29,6 +29,7 @@ if (
 export const getSession: GetSession = async ({ locals }) => ({
 	user: locals.user,
 	accessToken: locals.accessToken,
+	xRoleId: locals.xRoleId,
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -42,11 +43,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
+	const user = await getUser(cookies.idToken, cookies.xRoleId);
 
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
-
-	const user = await getUser(cookies.idToken);
+	event.locals.xRoleId = cookies.xRoleId || '';
 	event.locals.user = user;
 
 	const response = await resolve(event);
@@ -72,6 +73,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 	response.headers.append(
 		'Set-Cookie',
 		serialize('accessToken', event.locals.accessToken, {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
+
+	response.headers.append(
+		'Set-Cookie',
+		serialize('xRoleId', event.locals.xRoleId, {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,

@@ -4,7 +4,7 @@ import type { RequestHandler } from './__types/[id]';
 export const GET: RequestHandler = async ({ locals, params }) => {
 	const user = await getUser(locals.idToken, params.id);
 
-	locals.user = user;
+	locals.xRoleId = user?.role.id || '';
 
 	const location = user?.role.meta.home || '/';
 

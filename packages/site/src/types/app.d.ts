@@ -28,6 +28,7 @@ declare namespace App {
 		user: import('$models/types/auth.type').User | undefined;
 		accessToken: string;
 		idToken: string;
+		xRoleId: string;
 	}
 
 	// interface Platform {}
@@ -35,6 +36,7 @@ declare namespace App {
 	interface Session {
 		user: Readonly<import('$models/types/auth.type').User> | undefined;
 		accessToken: string;
+		xRoleId: string;
 	}
 
 	interface Stuff {
