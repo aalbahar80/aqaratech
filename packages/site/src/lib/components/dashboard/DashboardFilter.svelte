@@ -8,29 +8,29 @@
 	import Select from '$lib/components/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
-	import type { PaginatedPropertyDto, PaginatedUnitDto } from '@self/sdk';
+	import type { PropertyDto, UnitDto } from '@self/sdk';
 
-	export let properties: PaginatedPropertyDto;
-	export let units: PaginatedUnitDto;
+	export let properties: PropertyDto[];
+	export let units: UnitDto[];
 
 	$: selectedProperty = $page.url.searchParams.get('propertyId');
 	$: selectedUnit = $page.url.searchParams.get('unitId');
 	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
 	$: end = $page.url.searchParams.get('end') || new Date().toISOString();
 
-	const propertyOptions = properties.results.map((property) => ({
+	const propertyOptions = properties.map((property) => ({
 		label: getAddress(property),
 		value: property.id,
 	}));
 
 	const unitOptions = selectedProperty
-		? units.results
+		? units
 				.filter((unit) => unit.propertyId === selectedProperty)
 				.map((unit) => ({
 					label: getUnitLabel(unit),
 					value: unit.id,
 				}))
-		: units.results.map((unit) => ({
+		: units.map((unit) => ({
 				label: getUnitLabel(unit),
 				value: unit.id,
 		  }));

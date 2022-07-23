@@ -2,6 +2,7 @@
 	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
+	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
@@ -72,6 +73,7 @@
 
 <PropertyPage {property}>
 	<UnitsList {units} />
+	<DashboardFilter properties={[property]} units={units.results} />
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 	<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 	<ExpensesCard {expenses} />

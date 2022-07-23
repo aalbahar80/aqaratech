@@ -87,7 +87,7 @@
 	<h1>Dashboard</h1>
 </div>
 
-<DashboardFilter {properties} {units} />
+<DashboardFilter properties={properties.results} units={units.results} />
 
 <NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 <RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
