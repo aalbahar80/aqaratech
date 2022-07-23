@@ -73,7 +73,11 @@
 
 <PropertyPage {property}>
 	<UnitsList {units} />
-	<DashboardFilter properties={[property]} units={units.results} />
+	<DashboardFilter
+		properties={[property]}
+		units={units.results}
+		disablePropertySelector
+	/>
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 	<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 	<ExpensesCard {expenses} />

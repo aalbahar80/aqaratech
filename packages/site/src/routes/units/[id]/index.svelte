@@ -2,6 +2,7 @@
 	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
+	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
@@ -75,6 +76,12 @@
 
 <UnitPage {unit}>
 	<LeaseList {leases} showIndex />
+	<DashboardFilter
+		properties={[]}
+		units={[unit]}
+		disablePropertySelector
+		disableUnitSelector
+	/>
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 	<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
 	<ExpensesCard {expenses} />

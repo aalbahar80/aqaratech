@@ -12,6 +12,8 @@
 
 	export let properties: PropertyDto[];
 	export let units: UnitDto[];
+	export let disablePropertySelector = false;
+	export let disableUnitSelector = false;
 
 	$: selectedProperty = $page.url.searchParams.get('propertyId');
 	$: selectedUnit = $page.url.searchParams.get('unitId');
@@ -105,7 +107,7 @@
 	<!-- Property/Unit Filters -->
 	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
 		<!-- Property -->
-		<div class="md:w-2/3">
+		<div class="md:w-2/3" class:hidden={disablePropertySelector}>
 			<Select
 				current={selectedProperty}
 				options={[{ label: 'All Properties', value: null }, ...propertyOptions]}
@@ -126,7 +128,7 @@
 		</div>
 
 		<!-- Unit -->
-		<div class="md:w-1/3">
+		<div class="md:w-1/3" class:hidden={disableUnitSelector}>
 			<Select
 				current={selectedUnit}
 				options={[{ label: 'All Units', value: null }, ...unitOptions]}
