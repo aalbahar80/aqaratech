@@ -85,8 +85,8 @@
 	<DashboardFilter
 		properties={[]}
 		units={[unit]}
-		disablePropertySelector
-		disableUnitSelector
+		disabledPropertySelector
+		disabledUnitSelector
 	/>
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 	<RevenueCard

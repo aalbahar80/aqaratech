@@ -83,7 +83,7 @@
 	<DashboardFilter
 		properties={[property]}
 		units={units.results}
-		disablePropertySelector
+		disabledPropertySelector
 	/>
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
 	<RevenueCard
