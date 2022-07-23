@@ -6,7 +6,6 @@
 		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/Select.svelte';
-	import { classes } from '$lib/utils';
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PropertyDto, UnitDto } from '@self/sdk';
@@ -111,7 +110,7 @@
 		class:hidden={disablePropertySelector && disableUnitSelector}
 	>
 		<!-- Property -->
-		<div class="md:w-2/3" class:hidden={disablePropertySelector}>
+		<div class="md:w-2/3 md:flex-auto" class:hidden={disablePropertySelector}>
 			<Select
 				current={selectedProperty}
 				options={[{ label: 'All Properties', value: null }, ...propertyOptions]}
@@ -132,11 +131,7 @@
 		</div>
 
 		<!-- Unit -->
-		<!-- <div class="md:w-1/3" class:hidden={disableUnitSelector}> -->
-		<div
-			class={classes(disablePropertySelector ? 'md:w-full' : 'md:w-1/3')}
-			class:hidden={disableUnitSelector}
-		>
+		<div class="md:w-1/3 md:flex-auto" class:hidden={disableUnitSelector}>
 			<Select
 				current={selectedUnit}
 				options={[{ label: 'All Units', value: null }, ...unitOptions]}
