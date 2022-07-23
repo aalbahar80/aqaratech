@@ -6,6 +6,7 @@
 		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/Select.svelte';
+	import { classes } from '$lib/utils';
 	import { toDateInput } from '$lib/utils/common';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PropertyDto, UnitDto } from '@self/sdk';
@@ -50,7 +51,7 @@
 
 <div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
 	<!-- Date Filters -->
-	<div class="flex flex-col gap-1 md:w-3/5 md:flex-row">
+	<div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
 		<!-- Range -->
 		<div class="md:w-1/2">
 			<Select
@@ -69,7 +70,7 @@
 			/>
 		</div>
 
-		<div class="md:1/2 flex gap-1">
+		<div class="flex gap-1 md:w-1/2">
 			<!-- Start -->
 			<input
 				type="date"
@@ -105,7 +106,10 @@
 	</div>
 
 	<!-- Property/Unit Filters -->
-	<div class="flex flex-col gap-2 md:w-1/2 md:flex-row">
+	<div
+		class="flex flex-col gap-2 md:w-1/2 md:flex-row"
+		class:hidden={disablePropertySelector && disableUnitSelector}
+	>
 		<!-- Property -->
 		<div class="md:w-2/3" class:hidden={disablePropertySelector}>
 			<Select
@@ -128,7 +132,11 @@
 		</div>
 
 		<!-- Unit -->
-		<div class="md:w-1/3" class:hidden={disableUnitSelector}>
+		<!-- <div class="md:w-1/3" class:hidden={disableUnitSelector}> -->
+		<div
+			class={classes(disablePropertySelector ? 'md:w-full' : 'md:w-1/3')}
+			class:hidden={disableUnitSelector}
+		>
 			<Select
 				current={selectedUnit}
 				options={[{ label: 'All Units', value: null }, ...unitOptions]}
