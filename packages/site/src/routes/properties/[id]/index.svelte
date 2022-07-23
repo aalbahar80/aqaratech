@@ -86,6 +86,11 @@
 		disablePropertySelector
 	/>
 	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
-	<RevenueCard {invoices} {invoicesGroupedPaid} {invoicesGroupedUnpaid} />
+	<RevenueCard
+		{invoices}
+		{invoicesGroupedPaid}
+		{invoicesGroupedUnpaid}
+		disabledPropertyBreakdown
+	/>
 	<ExpensesCard {expenses} />
 </PropertyPage>

@@ -10,6 +10,7 @@
 	export let invoices: PaginatedLeaseInvoiceDto;
 	export let invoicesGroupedPaid: ByMonthDto[];
 	export let invoicesGroupedUnpaid: ByMonthDto[];
+	export let disabledPropertyBreakdown = false;
 
 	let chartType = 'time';
 </script>
@@ -31,7 +32,9 @@
 			options={[
 				{ label: 'Ratio', value: 'ratio' },
 				{ label: 'Ratio Over Time', value: 'time' },
-				{ label: 'Property', value: 'property' },
+				...(disabledPropertyBreakdown
+					? []
+					: [{ label: 'Property', value: 'property' }]),
 			]}
 		/>
 	</div>
