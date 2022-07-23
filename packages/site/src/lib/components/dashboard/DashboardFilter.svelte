@@ -48,7 +48,9 @@
 	$: rangeValid = start && end && new Date(start) < new Date(end);
 </script>
 
-<div class="flex max-w-screen-lg flex-col justify-between gap-3 md:flex-row">
+<div
+	class="sticky top-0 flex max-w-screen-lg flex-col justify-between gap-3 bg-gray-100 bg-opacity-90 pb-0.5 pt-4 backdrop-blur md:flex-row"
+>
 	<!-- Date Filters -->
 	<div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
 		<!-- Range -->
