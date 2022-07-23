@@ -25,12 +25,15 @@
 >
 	<Spinner {loading} />
 	{#if icon && !loading}
-		<Icon
-			src={icon}
-			theme={solid ? 'solid' : 'default'}
-			class="-ml-1 mr-2 hidden h-5 w-5 sm:block"
-			aria-hidden="true"
-		/>
+		<div class="-ml-1 mr-2 hidden h-5 w-5 sm:block">
+			<slot>
+				<Icon
+					src={icon}
+					theme={solid ? 'solid' : 'default'}
+					aria-hidden="true"
+				/>
+			</slot>
+		</div>
 	{/if}
 	{text}
 </svelte:element>

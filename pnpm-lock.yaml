@@ -274,6 +274,7 @@ importers:
       jsdom: 20.0.0
       jsonwebtoken: 8.5.1
       just-compare: 2.1.1
+      just-deep-map-values: 1.0.0
       logrocket: 3.0.1
       nanoid: 4.0.0
       postcss: 8.4.14
@@ -283,6 +284,7 @@ importers:
       superjson: 1.9.1
       svelte: 3.49.0
       svelte-check: 2.8.0
+      svelte-dnd-action: 0.9.19
       svelte-meta-tags: 2.6.1
       svelte-preprocess: 4.10.7
       svelte2tsx: 0.5.12
@@ -335,6 +337,7 @@ importers:
       jsdom: 20.0.0
       jsonwebtoken: 8.5.1
       just-compare: 2.1.1
+      just-deep-map-values: 1.0.0
       logrocket: 3.0.1
       nanoid: 4.0.0
       postcss: 8.4.14
@@ -344,6 +347,7 @@ importers:
       superjson: 1.9.1
       svelte: 3.49.0
       svelte-check: 2.8.0_nxvsp6sjiltnatqa6jdm4mr6zu
+      svelte-dnd-action: 0.9.19
       svelte-meta-tags: 2.6.1_uslzfc62di2n2otc2tvfklnwji
       svelte-preprocess: 4.10.7_bgntxiihuqhg5mwaa7nczjwpga
       svelte2tsx: 0.5.12_uslzfc62di2n2otc2tvfklnwji
@@ -8094,6 +8098,10 @@ packages:
     resolution: {integrity: sha512-gURHr8T4pTZaQOUHd518LptAhWOfSp+nm+Cvk23yaMJPdVTAXw+9xdJowLjA33A+M5BGaI51VcNhHMldZwqiqg==}
     dev: true
 
+  /just-deep-map-values/1.0.0:
+    resolution: {integrity: sha512-rLmRYzJUOmKyDiSYdNXyyAOFdYZfjsna33BpS1ApWDWYFEsxAX2CVEi2WEdLOibrd+f+UK16fiiSO5ZJTMiKWQ==}
+    dev: true
+
   /jwa/1.4.1:
     resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==}
     dependencies:
@@ -10597,6 +10605,10 @@ packages:
       svelte: ^3.21.0
     dependencies:
       svelte: 3.49.0
+    dev: true
+
+  /svelte-dnd-action/0.9.19:
+    resolution: {integrity: sha512-1Jsym2HN0TJVUl09wLGASkHg937+ZecnnekPiwC0J6K7mCzOxCuIQSVnIxoQLLeiXv74joNVNpVofX9Z0jM4Vw==}
     dev: true
 
   /svelte-hmr/0.14.12_svelte@3.49.0:

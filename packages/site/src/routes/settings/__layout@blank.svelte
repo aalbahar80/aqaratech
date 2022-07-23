@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
+	import Fa6SolidNetworkWired from '~icons/fa6-solid/network-wired';
 	import HeroiconsSolidChartPie from '~icons/heroicons-solid/chart-pie';
 	import UisLayerGroup from '~icons/uis/layer-group';
 
@@ -15,13 +16,18 @@
 			href: '/settings/expense-groups',
 			icon: HeroiconsSolidChartPie,
 		},
+		{
+			name: 'Expense Tree',
+			href: '/settings/expense-tree',
+			icon: Fa6SolidNetworkWired,
+		},
 	];
 </script>
 
 <div
 	class="mx-auto mt-4 flex max-w-7xl flex-col space-y-6 rounded-md  p-4 sm:p-6 lg:p-8"
 >
-	<div class="flex flex-col gap-8 py-6 lg:flex-row">
+	<div class="flex flex-col gap-8 py-6 lg:flex-auto lg:flex-row">
 		<aside class="lg:col-span-3">
 			<nav class="space-y-1">
 				{#each subNavigation as item (item.name)}
@@ -50,7 +56,7 @@
 				{/each}
 			</nav>
 		</aside>
-		<div>
+		<div class="w-full">
 			<slot />
 		</div>
 	</div>

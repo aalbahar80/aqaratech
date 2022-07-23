@@ -50,3 +50,15 @@ declare module 'chart.js/dist/chart.esm' {
 	export * from 'chart.js/types/index.esm';
 	export default Chart;
 }
+
+declare type DndEvent = import('svelte-dnd-action').DndEvent;
+declare namespace svelte.JSX {
+	interface HTMLAttributes<T> {
+		onconsider?: (
+			event: CustomEvent<DndEvent> & { target: EventTarget & T },
+		) => void;
+		onfinalize?: (
+			event: CustomEvent<DndEvent> & { target: EventTarget & T },
+		) => void;
+	}
+}
