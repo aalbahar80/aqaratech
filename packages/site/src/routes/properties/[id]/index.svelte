@@ -15,7 +15,14 @@
 		url,
 	}: LoadEvent<{ id: string }>) => {
 		const sParams = parseParams(url);
-		const filter = { propertyId: params.id };
+		const filter = {
+			...sParams,
+			propertyId: params.id,
+			unitId: url.searchParams.get('unitId') || undefined,
+			start: url.searchParams.get('start') || undefined,
+			end: url.searchParams.get('end') || undefined,
+			take: 1000,
+		};
 
 		const [
 			property,
