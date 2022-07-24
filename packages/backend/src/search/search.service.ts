@@ -78,7 +78,7 @@ export class SearchService {
   async remove() {
     const indexes = await this._client.getIndexes();
     return await Promise.all(
-      indexes.results.map((index) => {
+      indexes.map((index) => {
         return this._client.deleteIndex(index.uid);
       }),
     );
