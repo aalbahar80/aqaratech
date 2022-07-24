@@ -20,7 +20,7 @@
 	subtitle="Breakdown of rent income by status & property."
 	empty={invoices.results.length < 1}
 >
-	<div slot="groupBy" class="flex w-64 pb-4">
+	<div slot="groupBy" class="flex h-14 w-1/3 pb-4">
 		<span
 			class="mt-1 inline-flex w-full items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
 		>
@@ -28,10 +28,10 @@
 		</span>
 		<Select
 			bind:current={chartType}
-			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
+			class="rounded-none rounded-r-md py-0 sm:text-sm"
 			options={[
 				{ label: 'Ratio', value: 'ratio' },
-				{ label: 'Ratio Over Time', value: 'time' },
+				{ label: 'Time', value: 'time' },
 				...(disabledPropertyBreakdown
 					? []
 					: [{ label: 'Property', value: 'property' }]),
