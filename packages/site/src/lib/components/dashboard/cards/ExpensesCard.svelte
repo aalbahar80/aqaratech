@@ -1,12 +1,15 @@
 <script lang="ts">
+	import ExpenseTreemapProperty from '$lib/components/charts/ExpenseTreemapProperty.svelte';
+	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
-	import ExpensePolarArea from '$lib/components/charts/ExpensePolarArea.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import type { PaginatedExpenseDto } from '@self/sdk';
+	import Select from '$lib/components/Select.svelte';
+	import type { ExpenseTypeDto, PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;
+	export let categories: ExpenseTypeDto[];
 
-	let chartType = 'category';
+	let chartType = 'categoryTreemap';
 </script>
 
 <DashCard
@@ -14,9 +17,9 @@
 	subtitle="The total amount of expenses by category & property."
 	empty={expenses.results.length < 1}
 >
-	<!-- <div slot="groupBy" class="flex w-64 pb-4">
+	<div slot="groupBy" class="flex w-64 pb-4">
 		<span
-			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+			class="mt-1 inline-flex w-full items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
 		>
 			Group By
 		</span>
@@ -24,13 +27,23 @@
 			bind:current={chartType}
 			class="w-1/2 rounded-none rounded-r-md py-0 sm:text-sm"
 			options={[
-				{ label: 'Type', value: 'category' },
-				{ label: 'Property', value: 'property' },
+				{ label: 'Category', value: 'categoryTreemap' },
+				{ label: 'Property', value: 'propertyTreemap' },
+				// { label: 'Property 2', value: 'propertyPolar' },
+				// { label: 'Force', value: 'force' },
 			]}
 		/>
-	</div> -->
+	</div>
 	<div slot="chart">
-		<ExpensePolarArea {expenses} />
+		{#if chartType === 'propertyTreemap'}
+			<ExpenseTreemapProperty {expenses} />
+			<!-- {:else if chartType === 'propertyPolar'}
+			<ExpensePolarArea {expenses} />
+			{:else if chartType === 'force'}
+			<ExpensePackForce {expenses} /> -->
+		{:else}
+			<ExpenseTreemapCategory {expenses} {categories} />
+		{/if}
 	</div>
 	<div slot="data">
 		<ExpensesTable {expenses} />

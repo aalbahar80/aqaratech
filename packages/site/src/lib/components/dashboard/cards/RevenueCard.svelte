@@ -22,7 +22,7 @@
 >
 	<div slot="groupBy" class="flex w-64 pb-4">
 		<span
-			class="mt-1 inline-flex w-1/2 items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
+			class="mt-1 inline-flex w-full items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"
 		>
 			Group By
 		</span>
