@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ExpenseTreemapProperty from '$lib/components/charts/ExpenseTreemapProperty.svelte';
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
+	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
