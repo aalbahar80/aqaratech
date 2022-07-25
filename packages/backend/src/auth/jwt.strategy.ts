@@ -10,17 +10,19 @@ import { ValidatedUserDto } from 'src/users/dto/user.dto';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(readonly configService: ConfigService<EnvironmentConfig>) {
-    const jwksUri = `${configService.get('authConfig.AUTH0_DOMAIN', {
+    const domain = configService.get('authConfig.AUTH0_DOMAIN', {
       infer: true,
-    })}/.well-known/jwks.json`;
+    });
+    const audience = configService.get('authConfig.AUTH0_API_AUDIENCE', {
+      infer: true,
+    });
+    if (!domain || !audience) {
+      throw new Error(
+        'authConfig.AUTH0_DOMAIN and authConfig.AUTH0_API_AUDIENCE must be set',
+      );
+    }
 
-    const audience = `${configService.get('authConfig.AUTH0_API_AUDIENCE', {
-      infer: true,
-    })}`;
-
-    const issuer = `${configService.get('authConfig.AUTH0_DOMAIN', {
-      infer: true,
-    })}/`;
+    const jwksUri = `${domain}/.well-known/jwks.json`;
 
     const cookieExtractor = function (req: Request) {
       let token = null;
@@ -41,7 +43,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // https://github.com/mikenicholson/passport-jwt#configure-strategy
       audience,
-      issuer,
+      domain,
       algorithms: ['RS256'],
     });
   }
@@ -71,6 +73,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       'authConfig.AUTH0_API_NAMESPACE',
       { infer: true },
     );
+    if (!apiNamespace) {
+      throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
+    }
 
     // grab userStuff, which auth0 places in the access token on every login
     // TODO handle case where auth0 did not find user by email.
