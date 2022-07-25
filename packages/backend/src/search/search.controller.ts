@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Controller, Delete, Post } from '@nestjs/common';
 import { ApiHeader, ApiTags } from '@nestjs/swagger';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { SearchService } from 'src/search/search.service';
@@ -12,11 +12,6 @@ export class SearchController {
   @Post('/')
   initSearch() {
     return this.searchService.init();
-  }
-
-  @Get('/')
-  get(@Query('query') query: string) {
-    return this.searchService.search(query);
   }
 
   @Delete('/')

@@ -1903,23 +1903,6 @@ paths:
           description: ''
       tags: &ref_19
         - search
-    get:
-      operationId: get
-      parameters:
-        - *ref_18
-        - name: query
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *ref_19
     delete:
       operationId: remove
       parameters:
@@ -2038,6 +2021,29 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
+      tags: *ref_21
+  /organizations/{id}/search:
+    get:
+      operationId: search
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: query
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
       tags: *ref_21
   /analytics/incomeByMonth:
     get:

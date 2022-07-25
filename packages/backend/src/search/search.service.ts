@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Index, MeiliSearch } from 'meilisearch';
+import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { getAddress } from 'src/utils/address';
 
@@ -14,12 +14,18 @@ export class SearchService {
 
   private _client: MeiliSearch;
 
-  async search(query: string) {
+  async search({
+    query,
+    organizationId,
+  }: {
+    query: string;
+    organizationId: string;
+  }) {
     const indexNames = [
       'portfolios',
       'properties',
       'tenants',
-      'leases',
+      // 'leases',
     ] as const;
 
     // get indexes and search
@@ -33,6 +39,7 @@ export class SearchService {
       indexes.map((index, n) => {
         return this.searchIndex({
           index,
+          filter: `organizationId = ${organizationId}`,
           query,
           createUrl(id) {
             return `/${indexNames[n]}/${id}`;
@@ -45,7 +52,7 @@ export class SearchService {
       portfolios: results[0],
       properties: results[1],
       tenants: results[2],
-      leases: results[3],
+      // leases: results[3],
     };
 
     return result;
@@ -55,16 +62,19 @@ export class SearchService {
     index,
     query,
     createUrl,
+    filter,
   }: {
     index: Index;
     query: string;
     createUrl: (id: string) => string;
+    filter?: Filter | undefined;
   }) {
     const data = await index.search(query, {
       highlightPreTag: '<mark>',
       highlightPostTag: '</mark>',
       attributesToHighlight: ['title'],
       limit: 20,
+      filter,
     });
 
     data.hits = data.hits.map((hit) => ({
@@ -89,14 +99,13 @@ export class SearchService {
       this.addTenants(),
       this.addPortfolios(),
       this.addProperties(),
-      this.addLeases(),
+      // this.addLeases(),
     ]);
   }
 
   async addTenants() {
     const tenants = await this.prisma.tenant.findMany({
       select: {
-        // TODO add search by role.email
         id: true,
         fullName: true,
         label: true,
@@ -104,46 +113,76 @@ export class SearchService {
         passportNum: true,
         civilid: true,
         residencyNum: true,
+        organizationId: true,
+        roles: { select: { user: { select: { email: true } } } },
       },
     });
 
     const documents = tenants.map((tenant) => {
       return {
-        ...tenant,
+        id: tenant.id,
+        fullName: tenant.fullName,
+        label: tenant.label,
+        phone: tenant.phone,
+        passportNum: tenant.passportNum,
+        civilid: tenant.civilid,
+        residencyNum: tenant.residencyNum,
         title: tenant.fullName,
+        email: tenant.roles.map((role) => role.user.email),
+        organizationId: tenant.organizationId,
       };
     });
 
     const index = this._client.index('tenants');
+    await index.updateFilterableAttributes(['organizationId']);
     return index.addDocuments(documents);
   }
 
   async addPortfolios() {
     const portfolios = await this.prisma.portfolio.findMany({
       select: {
-        // TODO add search by role.email
         id: true,
         fullName: true,
         label: true,
         phone: true,
         civilid: true,
+        organizationId: true,
+        roles: { select: { user: { select: { email: true } } } },
       },
     });
 
     const documents = portfolios.map((portfolio) => {
       return {
-        ...portfolio,
+        id: portfolio.id,
+        fullName: portfolio.fullName,
+        label: portfolio.label,
+        phone: portfolio.phone,
+        civilid: portfolio.civilid,
+        organizationId: portfolio.organizationId,
         title: portfolio.fullName,
+        email: portfolio.roles.map((role) => role.user.email),
       };
     });
 
     const index = this._client.index('portfolios');
+    await index.updateFilterableAttributes(['organizationId']);
     return index.addDocuments(documents);
   }
 
   async addProperties() {
     // TODO only fetch relevant fields
-    const properties = await this.prisma.property.findMany();
+    const properties = await this.prisma.property.findMany({
+      select: {
+        id: true,
+        area: true,
+        paci: true,
+        street: true,
+        parcel: true,
+        block: true,
+        number: true,
+        portfolio: { select: { organizationId: true } },
+      },
+    });
 
     const documents = properties.map((property) => {
       const { id } = property;
@@ -154,33 +193,35 @@ export class SearchService {
         paci: property.paci,
         parcel: property.parcel,
         street: property.street,
+        organizationId: property.portfolio.organizationId,
       };
     });
 
     const index = this._client.index('properties');
+    await index.updateFilterableAttributes(['organizationId']);
     return index.addDocuments(documents);
   }
 
-  async addLeases() {
-    const leases = await this.prisma.lease.findMany({
-      include: {
-        tenant: true,
-        unit: true,
-        leaseInvoices: true,
-      },
-    });
+  // async addLeases() {
+  //   const leases = await this.prisma.lease.findMany({
+  //     include: {
+  //       tenant: true,
+  //       unit: true,
+  //       leaseInvoices: true,
+  //     },
+  //   });
 
-    const documents = leases.map((lease) => {
-      const { id, tenant, leaseInvoices } = lease;
-      return {
-        id,
-        title: tenant.fullName,
-        unitType: lease.unit.type,
-        unitNumber: lease.unit.unitNumber,
-      };
-    });
+  //   const documents = leases.map((lease) => {
+  //     const { id, tenant, leaseInvoices } = lease;
+  //     return {
+  //       id,
+  //       title: tenant.fullName,
+  //       unitType: lease.unit.type,
+  //       unitNumber: lease.unit.unitNumber,
+  //     };
+  //   });
 
-    const index = this._client.index('leases');
-    return index.addDocuments(documents);
-  }
+  //   const index = this._client.index('leases');
+  //   return index.addDocuments(documents);
+  // }
 }

@@ -17,6 +17,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
+import { SearchService } from 'src/search/search.service';
 import { CreateOrganizationDto, OrganizationDto } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
@@ -28,6 +29,7 @@ export class OrganizationsController {
   constructor(
     private readonly organizationsService: OrganizationsService,
     private rolesService: RolesService,
+    private readonly searchService: SearchService,
   ) {}
 
   @Post()
@@ -58,5 +60,11 @@ export class OrganizationsController {
   ): Promise<WithCount<RoleDto>> {
     const where: Prisma.RoleWhereInput = { organizationId: id };
     return this.rolesService.findAll({ user, pageOptionsDto, where });
+  }
+
+  @CheckAbilities({ action: Action.Read, subject: 'Organization' })
+  @Get(':id/search')
+  search(@Param('id') id: string, @Query('query') query: string) {
+    return this.searchService.search({ query, organizationId: id });
   }
 }
