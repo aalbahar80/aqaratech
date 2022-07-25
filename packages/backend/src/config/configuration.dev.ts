@@ -20,6 +20,6 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
   },
   meiliSearchConfig: {
     HOST: process.env.MEILISEARCH_HOST || 'http://localhost:7700',
-    API_KEY: process.env.MEILISEARCH_API_KEY || 'MASTER_KEY',
+    API_KEY: process.env.MEILI_MASTER_KEY || 'MASTER_KEY',
   },
 });

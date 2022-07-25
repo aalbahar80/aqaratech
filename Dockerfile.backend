@@ -20,9 +20,4 @@ RUN pnpm --filter=@self/backend run build
 # TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
 WORKDIR /app/packages/backend
 
-# TODO use .env
-# ENV DATABASE_URL=postgres://elephant_1obz_user:9T3Og1XLPk3apR7u0fHeysx96DaiZ3S3@dpg-cangdn46fj34f1f162f0-a.frankfurt-postgres.render.com/elephant_1obz
-ENV DATABASE_URL="postgres://postgres:postgres@postgres:5432/aq-db"
-ENV AUTH0_CLIENT_SECRET=uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
-
 CMD ["pnpm", "run", "start:prod"]
