@@ -17,7 +17,6 @@
 <!-- <script lang="ts">
 	export let maintenanceOrder: MaintenanceOrder;
 
-	let details: [string, string | null][];
 	$: details = [
 		['Title', maintenanceOrder.title],
 		['Status', maintenanceOrder.status ?? '-'],
@@ -28,7 +27,7 @@
 				: null,
 		],
 		['Description', maintenanceOrder.description ?? '-'],
-	];
+	] as [string, string | null][];
 </script> -->
 
 <!-- <Heading

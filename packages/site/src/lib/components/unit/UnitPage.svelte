@@ -11,13 +11,12 @@
 
 	export let unit: UnitDto;
 
-	let details: [string, string | null][];
 	$: details = [
 		['Unit Number', unit.unitNumber],
 		['Type', unit.type],
 		['Market Rent', kwdFormat(unit.marketRent)],
 		['Usage', unit.usage],
-	];
+	] as [string, string | null][];
 
 	const icons = [
 		{

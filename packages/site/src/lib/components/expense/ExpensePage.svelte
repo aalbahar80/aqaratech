@@ -7,14 +7,13 @@
 
 	export let expense: ExpenseDto;
 
-	let details: [string, string | null][];
 	$: details = [
 		['Post Date', toUTCFormat(expense.postAt)],
 		['Amount', kwdFormat(expense.amount)],
 		// TODO fix
 		// ['Category', `${expense.category?.en} - ${expense.category?.ar}`],
 		['Memo', expense.memo],
-	];
+	] as [string, string | null][];
 </script>
 
 <Heading title="Expense" id={expense.id} entity="expenses">

@@ -83,7 +83,7 @@
 			>
 				<Listbox
 					on:change={(item) => {
-						goto(item.detail.url);
+						goto(item.detail.url, { noscroll: true });
 						open = false;
 					}}
 				>

@@ -33,7 +33,9 @@
 			{/each}
 		</div>
 
-		<SearchButton />
+		{#if $session.user?.role.roleType === 'ORGADMIN'}
+			<SearchButton />
+		{/if}
 
 		<div class="hidden lg:flex lg:items-center lg:space-x-6">
 			{#if $session.user}

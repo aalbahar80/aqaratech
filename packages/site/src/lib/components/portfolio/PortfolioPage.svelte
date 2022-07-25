@@ -16,13 +16,12 @@
 	export let properties: PaginatedPropertyDto;
 	export let roles: PaginatedRoleDto;
 
-	let details: [string, string | null][];
 	$: details = [
 		['Name', portfolio.fullName],
 		['Phone', portfolio.phone],
 		['Civil ID', portfolio.civilid],
 		['Date of birth', portfolio.dob ? toUTCFormat(portfolio.dob) : null],
-	];
+	] as [string, string | null][];
 </script>
 
 <Heading title="Portfolio" id={portfolio.id} entity="portfolios">

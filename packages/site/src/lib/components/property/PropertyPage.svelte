@@ -6,7 +6,6 @@
 
 	export let property: PropertyDto;
 
-	let details: [string, string | null][];
 	$: details = [
 		// ['Address', property.address],
 		['Area', property.area],
@@ -16,7 +15,7 @@
 		['Number', property.number],
 		['Parcel', property.parcel],
 		['Paci', property.paci],
-	];
+	] as [string, string | null][];
 </script>
 
 <Heading title="Property" id={property.id} entity="properties">

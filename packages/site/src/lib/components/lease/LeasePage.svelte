@@ -16,14 +16,14 @@
 	export let lease: LeaseDto;
 	export let invoices: PaginatedLeaseInvoiceDto;
 
-	const details: [string, string | null][] = [
+	$: details = [
 		['Tenant', lease.breadcrumbs.tenant.label],
 		['Start Date', toUTCFormat(lease.start)],
 		['End Date', toUTCFormat(lease.end)],
 		['Monthly Rent', kwdFormat(lease.monthlyRent)],
 		['Deposit', kwdFormat(lease.deposit)],
 		['License', lease.license || '-'],
-	];
+	] as [string, string | null][];
 
 	const files: [string, string][] = [['Lease', 'TODO implement']];
 	const icons = [

@@ -19,7 +19,7 @@
 	export let invoices: PaginatedLeaseInvoiceDto;
 	export let roles: PaginatedRoleDto;
 
-	const details: [string, string | null][] = [
+	$: details = [
 		['Full Name', tenant.fullName],
 		['Phone', tenant.phone],
 		['Civil id', tenant.civilid],
@@ -27,7 +27,7 @@
 		['Residency #', tenant.residencyNum],
 		['Residency Expiration', tenant.residencyEnd?.toLocaleDateString() ?? ''],
 		['Nationality', tenant.nationality],
-	];
+	] as [string, string | null][];
 
 	const files: [string, string][] = [
 		['Civil Id', ''],

@@ -7,22 +7,21 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import { copyTrxUrl } from '$lib/utils/copy-trx-url';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { LeaseInvoiceDto } from '@self/sdk';
-	import { ClipboardCopy, Mail } from '@steeze-ui/heroicons';
+	import { Mail } from '@steeze-ui/heroicons';
 
 	type Transaction = LeaseInvoiceDto;
 	export let trx: Transaction;
 
-	const details: [string, string | null][] = [
+	$: details = [
 		['Post Date', toUTCFormat(trx.postAt)],
 		['Due Date', trx.dueAt ? toUTCFormat(trx.dueAt) : null],
 		['Amount', kwdFormat(trx.amount)],
 		['Memo', trx.memo || '-'],
 		['Address', trx.breadcrumbs.property.label],
 		['Unit', trx.breadcrumbs.unit.label],
-	];
+	] as [string, string | null][];
 
 	$: sendEnabled = !trx.isPaid;
 
