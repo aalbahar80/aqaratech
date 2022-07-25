@@ -1,4 +1,5 @@
 export type EntityTitle =
+	| 'organizations'
 	| 'properties'
 	| 'portfolios'
 	| 'leases'

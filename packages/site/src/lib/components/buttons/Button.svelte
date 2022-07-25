@@ -24,17 +24,17 @@
 	on:click
 >
 	<Spinner {loading} />
-	{#if icon && !loading}
-		<div class="-ml-1 mr-2 hidden h-5 w-5 sm:block">
-			<slot>
+	<div class="-ml-1 mr-2 hidden h-5 w-5 sm:block">
+		<slot>
+			{#if icon && !loading}
 				<Icon
 					src={icon}
 					theme={solid ? 'solid' : 'default'}
 					aria-hidden="true"
 				/>
-			</slot>
-		</div>
-	{/if}
+			{/if}
+		</slot>
+	</div>
 	{text}
 </svelte:element>
 

@@ -33,7 +33,7 @@ export class OrganizationsController {
   ) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'Organization' })
+  // No need to check abilities here. Any authenticated user can create an organization.
   @ApiCreatedResponse({ type: OrganizationDto })
   create(
     @User() user: IUser,

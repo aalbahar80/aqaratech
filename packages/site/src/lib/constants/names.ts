@@ -9,6 +9,15 @@ export interface EntityName {
 	idField: string;
 }
 
+const organization: EntityName = {
+	urlName: 'organizations',
+	singular: 'organization',
+	singularCap: 'Organization',
+	plural: 'organizations',
+	pluralCap: 'Organizations',
+	idField: 'organizationId',
+};
+
 const role: EntityName = {
 	urlName: 'roles',
 	singular: 'member',
@@ -94,6 +103,7 @@ const maintenanceOrder: EntityName = {
 type EntityNameMap = Record<EntityTitle, EntityName>;
 
 export const entityNameMap: EntityNameMap = {
+	organizations: organization,
 	roles: role,
 	tenants: tenant,
 	portfolios: portfolio,

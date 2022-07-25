@@ -1,23 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   create({
     createOrganizationDto,
+    user,
   }: {
     createOrganizationDto: CreateOrganizationDto;
     user: IUser;
   }) {
-    return this.prisma.organization.create({ data: createOrganizationDto });
+    console.log({ user }, 'organizations.service.ts ~ 21');
+    return this.prisma.organization.create({
+      data: {
+        fullName: createOrganizationDto.fullName,
+        label: createOrganizationDto.label,
+        roles: {
+          create: [
+            {
+              roleType: 'ORGADMIN',
+              isAccepted: true,
+              user: { connect: { email: user.email } },
+            },
+          ],
+        },
+      },
+    });
   }
 
   async findOne({ id }: { id: string }) {
