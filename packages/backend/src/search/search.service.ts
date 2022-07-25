@@ -21,12 +21,7 @@ export class SearchService {
     query: string;
     organizationId: string;
   }) {
-    const indexNames = [
-      'portfolios',
-      'properties',
-      'tenants',
-      // 'leases',
-    ] as const;
+    const indexNames = ['portfolios', 'properties', 'tenants'] as const;
 
     // get indexes and search
     const indexes = await Promise.all(
@@ -52,7 +47,6 @@ export class SearchService {
       portfolios: results[0],
       properties: results[1],
       tenants: results[2],
-      // leases: results[3],
     };
 
     return result;
@@ -99,7 +93,6 @@ export class SearchService {
       this.addTenants(),
       this.addPortfolios(),
       this.addProperties(),
-      // this.addLeases(),
     ]);
   }
 
@@ -201,27 +194,4 @@ export class SearchService {
     await index.updateFilterableAttributes(['organizationId']);
     return index.addDocuments(documents);
   }
-
-  // async addLeases() {
-  //   const leases = await this.prisma.lease.findMany({
-  //     include: {
-  //       tenant: true,
-  //       unit: true,
-  //       leaseInvoices: true,
-  //     },
-  //   });
-
-  //   const documents = leases.map((lease) => {
-  //     const { id, tenant, leaseInvoices } = lease;
-  //     return {
-  //       id,
-  //       title: tenant.fullName,
-  //       unitType: lease.unit.type,
-  //       unitNumber: lease.unit.unitNumber,
-  //     };
-  //   });
-
-  //   const index = this._client.index('leases');
-  //   return index.addDocuments(documents);
-  // }
 }
