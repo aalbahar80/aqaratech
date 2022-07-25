@@ -57,6 +57,8 @@ declare global {
       readonly VERCEL_GIT_COMMIT_REF: string;
 
       readonly POSTMARK_TOKEN: string;
+      readonly MEILISEARCH_HOST: string;
+      readonly MEILISEARCH_API_KEY: string;
     }
   }
 
