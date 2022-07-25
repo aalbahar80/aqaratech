@@ -1,15 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { getAddress } from 'src/utils/address';
 
 @Injectable()
 export class SearchService {
-  constructor(private prisma: PrismaService) {
-    this._client = new MeiliSearch({
-      host: 'http://localhost:7700',
-      apiKey: 'MASTER_KEY',
+  constructor(
+    private prisma: PrismaService,
+    readonly configService: ConfigService<EnvironmentConfig>,
+  ) {
+    const host = configService.get('meiliSearchConfig.HOST', {
+      infer: true,
     });
+    const apiKey = configService.get('meiliSearchConfig.API_KEY', {
+      infer: true,
+    });
+    if (!host || !apiKey) {
+      throw new Error('MeiliSearch config is not set');
+    }
+    this._client = new MeiliSearch({ host, apiKey });
   }
 
   private _client: MeiliSearch;
