@@ -32,6 +32,7 @@
 			expenses,
 			invoicesGroupedPaid,
 			invoicesGroupedUnpaid,
+			categories,
 		] = await Promise.all([
 			stuff.api!.units.findOne({ id: params.id }),
 			stuff.api!.units.findLeases({ id: params.id, ...sParams }),
@@ -49,6 +50,7 @@
 				...filter,
 				paidStatus: 'unpaid',
 			}),
+			stuff.api!.meta.findExpenseTypes(),
 		]);
 
 		return {
@@ -61,6 +63,7 @@
 				expenses,
 				invoicesGroupedPaid,
 				invoicesGroupedUnpaid,
+				categories,
 			},
 		};
 	};
@@ -78,6 +81,8 @@
 
 	export let invoicesGroupedPaid: Prop['invoicesGroupedPaid'];
 	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
+
+	export let categories: Prop['categories'];
 </script>
 
 <UnitPage {unit}>
@@ -95,5 +100,5 @@
 		{invoicesGroupedUnpaid}
 		disabledPropertyBreakdown
 	/>
-	<ExpensesCard {expenses} />
+	<ExpensesCard {expenses} {categories} />
 </UnitPage>
