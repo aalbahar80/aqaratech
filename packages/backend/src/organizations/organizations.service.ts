@@ -16,7 +16,6 @@ export class OrganizationsService {
     createOrganizationDto: CreateOrganizationDto;
     user: IUser;
   }) {
-    console.log({ user }, 'organizations.service.ts ~ 21');
     return this.prisma.organization.create({
       data: {
         fullName: createOrganizationDto.fullName,
@@ -32,7 +31,8 @@ export class OrganizationsService {
         },
         organizationSettings: {
           create: {
-            expenseCategoryTree: defaultExpenseCategoryTree as Prisma.JsonArray,
+            expenseCategoryTree:
+              defaultExpenseCategoryTree as unknown as Prisma.JsonArray,
           },
         },
       },
