@@ -35,7 +35,9 @@ class RoleOptionalDto {
 export class RoleDto extends IntersectionType(
   AbstractDto,
   IntersectionType(RoleRequiredDto, RoleOptionalDto),
-) {}
+) {
+  userId: string;
+}
 
 export class CreateRoleDto
   extends IntersectionType(RoleRequiredDto, PartialType(RoleOptionalDto))

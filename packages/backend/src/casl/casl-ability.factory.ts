@@ -37,6 +37,8 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
+    can(Action.Read, ['User'], { id: { equals: role.userId } });
+
     // ### Role: Organization Admin###
     if (role.roleType === 'ORGADMIN') {
       const rolesQ = this.prisma.role.findMany({

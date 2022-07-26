@@ -2820,6 +2820,8 @@ components:
           readOnly: true
         roleType:
           $ref: '#/components/schemas/RoleTypeEnum'
+        userId:
+          type: string
         organizationId:
           type: string
         email:
@@ -2841,6 +2843,7 @@ components:
         - createdAt
         - updatedAt
         - roleType
+        - userId
         - organizationId
         - email
         - portfolioId
