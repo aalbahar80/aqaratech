@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -27,6 +29,11 @@ export class OrganizationsService {
               user: { connect: { email: user.email } },
             },
           ],
+        },
+        organizationSettings: {
+          create: {
+            expenseCategoryTree: defaultExpenseCategoryTree as Prisma.JsonArray,
+          },
         },
       },
     });
