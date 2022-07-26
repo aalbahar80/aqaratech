@@ -10,7 +10,6 @@ export const create = ({
 	entity: EntityTitle;
 	predefined?: Predefined;
 }) => {
-	console.log({ entity }, 'route-helpers.ts ~ 13');
 	const formBaseUrl = `/${entityNameMap[entity].urlName}/new`;
 
 	if (predefined) {
