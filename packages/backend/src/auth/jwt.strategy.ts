@@ -1,4 +1,10 @@
-import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import {
+  CACHE_MANAGER,
+  Inject,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Cache } from 'cache-manager';
@@ -98,14 +104,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       this.logger.log(`user ${email} found in cache`);
     } else {
       this.logger.log(`user ${email} not found in cache`);
-      user = await this.usersService.findOneByEmail(email);
-      await this.cacheManager.set(email, user, { ttl: 60 * 60 * 24 });
-      this.logger.log(`user ${email} added to cache`);
-    }
-
-    if (!user) {
-      this.logger.error(`user ${email} not found`);
-      throw new Error(`User with email ${email} not found`);
+      try {
+        user = await this.usersService.findOneByEmail(email);
+        await this.cacheManager.set(email, user, { ttl: 60 * 60 * 24 });
+        this.logger.log(`user ${email} added to cache`);
+      } catch (error) {
+        this.logger.error(`user ${email} not found`, error);
+        throw new UnauthorizedException('User not found');
+      }
     }
 
     return user;
