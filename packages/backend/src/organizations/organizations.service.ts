@@ -52,7 +52,7 @@ export class OrganizationsService {
   // ### SETTINGS ###
   async findSettings({ organizationId }: { organizationId: string }) {
     return this.prisma.organizationSettings.findUnique({
-      where: { id: organizationId },
+      where: { organizationId },
     });
   }
 
