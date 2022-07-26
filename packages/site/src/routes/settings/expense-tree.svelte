@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import {
@@ -47,9 +48,13 @@
 	text="Save"
 	as="button"
 	class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-	on:click={() => {
+	on:click={async () => {
 		const updated = getUpdatedExpenses(nodes);
-		console.log({ updated }, 'sample4.svelte ~ 63');
+		console.log({ updated }, 'expense-tree.svelte ~ 54');
+		const saved = await $page.stuff.api.meta.saveExpenseTypes({
+			requestBody: updated,
+		});
+		console.log({ saved }, 'expense-tree.svelte ~ 55');
 	}}
 >
 	<Fa6SolidFloppyDisk />

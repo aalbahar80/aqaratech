@@ -2183,8 +2183,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseTypeDto'
-      tags:
+      tags: &ref_24
         - meta
+    post:
+      operationId: saveExpenseTypes
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UpdateExpenseTypeDto'
+      tags: *ref_24
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -3612,22 +3633,24 @@ components:
       properties:
         id:
           type: number
+          minimum: 1
         labelEn:
           type: string
-        labelAr:
-          type: string
-        description:
-          type: string
-          nullable: true
         parentId:
           type: number
           nullable: true
+          default: null
+          minimum: 1
+        labelAr:
+          type: string
+          default: ''
+        description:
+          type: string
+          nullable: true
+          default: null
       required:
         - id
         - labelEn
-        - labelAr
-        - description
-        - parentId
     ExpenseDto:
       type: object
       properties:
@@ -3751,6 +3774,23 @@ components:
       required:
         - amount
         - date
+    UpdateExpenseTypeDto:
+      type: object
+      properties:
+        labelEn:
+          type: string
+        parentId:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        labelAr:
+          type: string
+          default: ''
+        description:
+          type: string
+          nullable: true
+          default: null
     BreadcrumbsDto:
       type: object
       properties:
