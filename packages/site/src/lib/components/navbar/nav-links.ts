@@ -1,7 +1,6 @@
 import { dev } from '$app/env';
 import { getDocs } from '$lib/components/navbar/docs-url';
 import { LOGOUT } from '$lib/constants/routes';
-import type { NavbarItem } from '$lib/models/types/auth.type';
 import {
 	Code,
 	Cog,
@@ -10,14 +9,7 @@ import {
 	SwitchHorizontal,
 } from '@steeze-ui/heroicons';
 
-export const getRoleOptions = (user: App.Session['user']): NavbarItem[] =>
-	user?.roles.map((role) => ({
-		href: `/auth/roles/${role.id}`,
-		label: `${role.organization.fullName} : ${role.meta.roleLabel}`,
-	})) || [];
-
 export const getNavOptions = (user: App.Session['user']) => [
-	...getRoleOptions(user),
 	...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
 	{
 		label: 'Switch Role',

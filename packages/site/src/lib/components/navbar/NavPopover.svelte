@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { getDocs } from '$lib/components/navbar/docs-url';
-	import { getRoleOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
 	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
 	import { LOGIN, LOGOUT } from '$lib/constants/routes';
@@ -73,21 +72,12 @@
 							</a>
 						{/each}
 
-						<!-- Roles -->
-						{#if getRoleOptions($session.user).length > 1}
-							<PopoverDivider />
-							{#each getRoleOptions($session.user) as option (option.label)}
-								<a
-									on:click={() => close(null)}
-									sveltekit:reload
-									href={option.href}
-								>
-									<PopoverItem option={{ label: option.label }} />
-								</a>
-							{/each}
-						{/if}
-
-						<PopoverDivider />
+						<a
+							on:click={() => close(null)}
+							href={`/users/${$session.user?.id}/roles`}
+						>
+							<PopoverItem option={{ label: 'Switch Role' }} />
+						</a>
 
 						<a
 							on:click={() => close(null)}
