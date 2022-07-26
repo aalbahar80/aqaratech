@@ -37,9 +37,23 @@ export const getUser = async ({
 			meta: getRoleMeta(role),
 		}));
 
-		const role = selectedRoleId
-			? roles.find((role) => role.id === selectedRoleId)
-			: getDefaultRole(roles);
+		let role: RoleSK | undefined;
+		if (selectedRoleId) {
+			console.log(
+				`Attempting to set role to selectedRoleId: ${selectedRoleId}`,
+			);
+			role = roles.find((role) => role.id === selectedRoleId);
+			if (!role) {
+				console.warn(
+					`Could not find role with selected id: ${selectedRoleId}. Falling back to default role.`,
+				);
+			}
+		} else {
+			role = getDefaultRole(roles);
+			console.warn(
+				`No role selected, attempting to use default role: ${role.id}`,
+			);
+		}
 
 		// TODO dedupe error
 		if (!role) {
