@@ -27,10 +27,9 @@ export const getUser = async ({
 		return;
 	}
 	try {
-		const payload = await validateToken(token, 'idToken');
+		await validateToken(token, 'accessToken');
 
-		// TODO find way to avoid making this call every time.
-		const userStuff = await getUserStuff(payload.email as string);
+		const userStuff = await getUserStuff(token);
 
 		// augment each role with metadata
 		const roles = userStuff.roles.map((role) => ({
@@ -60,20 +59,21 @@ export const getUser = async ({
 	}
 };
 
-const getUserStuff = async (email: string): Promise<ValidatedUserDto> => {
-	// const apiUrl = 'http://localhost:3002/users/me';
-	// const apiUrl = 'http://localhost:3002/users/' + params.id + '/roles';
-	const apiUrl = 'http://localhost:3002/users/by-email?email=' + email;
+const getUserStuff = async (token: string): Promise<ValidatedUserDto> => {
+	// TODO find way to avoid making this call every time. (secure-cookie/cache)
+	const now = Date.now();
+	const apiUrl = 'http://localhost:3002/users/me';
 
 	const response = await fetch(apiUrl, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			// Authorization: 'Bearer ' + token,
+			Authorization: 'Bearer ' + token,
 		},
 	});
 
 	const user = (await response.json()) as ValidatedUserDto;
+	console.debug(`Fetched user info for ${user.email} in ${Date.now() - now}ms`);
 
 	return user;
 };
