@@ -11,13 +11,6 @@ paths:
             application/json:
               schema:
                 type: string
-  /profile:
-    get:
-      operationId: getProfile
-      parameters: []
-      responses:
-        '200':
-          description: ''
   /tenants:
     post:
       operationId: create
@@ -1652,7 +1645,7 @@ paths:
                           $ref: '#/components/schemas/UserDto'
       tags: &ref_15
         - users
-  /users/profile:
+  /users/me:
     get:
       operationId: findProfile
       parameters:

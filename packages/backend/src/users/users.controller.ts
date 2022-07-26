@@ -29,7 +29,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get('profile')
+  @Get('me')
   @CheckAbilities({ action: Action.Read, subject: 'User' })
   @ApiOkResponse({ type: ValidatedUserDto })
   @ApiNotFoundResponse()
