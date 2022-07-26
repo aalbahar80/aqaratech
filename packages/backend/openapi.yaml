@@ -1625,33 +1625,14 @@ paths:
                           $ref: '#/components/schemas/LeaseDto'
       tags: *ref_13
   /users:
-    post:
-      operationId: create
+    get:
+      operationId: findAll
       parameters:
         - &ref_14
           name: x-role-id
           in: header
           schema:
             type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
-      tags: &ref_15
-        - users
-    get:
-      operationId: findAll
-      parameters:
-        - *ref_14
       responses:
         '200':
           description: ''
@@ -1669,27 +1650,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UserDto'
-      tags: *ref_15
-  /users/by-email:
-    get:
-      operationId: findOneByEmail
-      parameters:
-        - *ref_14
-        - name: email
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags: *ref_15
+      tags: &ref_15
+        - users
   /users/profile:
     get:
       operationId: findProfile
@@ -2824,8 +2786,6 @@ components:
           type: string
         organizationId:
           type: string
-        email:
-          type: string
         portfolioId:
           type: string
           nullable: true
@@ -2845,7 +2805,6 @@ components:
         - roleType
         - userId
         - organizationId
-        - email
         - portfolioId
         - tenantId
         - isAccepted

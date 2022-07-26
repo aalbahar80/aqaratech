@@ -22,10 +22,7 @@ export class UpdateUserDto extends PartialType(UserDto) {}
  *
  * /users-by-email
  * Flow: user signs in through Auth0
- * -> Auth0 (Action) hits /users-by-email
- * -> Auth0 embeds response in access token metadata
- * -> jwt.strategy.ts extracts said metadata and places it in the request object
- * -> Abilities.guard calculates the user's `role` and places it in `request.user.role`: `IUser interface`
+ * -> jwt.strategy.ts extracts user's email from accesstoken places it in the request object
  * -> Abilities.guard calculates the user's `ability` and places it in `request.user.ability` `IUser interface`
  * ----> Applied globally. Respects `@Public` decorator.
  */

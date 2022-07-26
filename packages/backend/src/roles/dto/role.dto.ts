@@ -1,4 +1,9 @@
-import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  IntersectionType,
+  OmitType,
+  PartialType,
+} from '@nestjs/swagger';
 import { Role, RoleType } from '@prisma/client';
 import { IsBoolean, IsEmail, IsEnum } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -34,7 +39,7 @@ class RoleOptionalDto {
 
 export class RoleDto extends IntersectionType(
   AbstractDto,
-  IntersectionType(RoleRequiredDto, RoleOptionalDto),
+  IntersectionType(OmitType(RoleRequiredDto, ['email']), RoleOptionalDto),
 ) {
   userId: string;
 }

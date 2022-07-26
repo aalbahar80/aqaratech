@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
+import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -13,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService<EnvironmentConfig>,
     readonly usersService: UsersService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {
     const domain = configService.get('authConfig.AUTH0_DOMAIN', {
       infer: true,
@@ -52,6 +54,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  private readonly logger = new Logger(JwtStrategy.name);
+
   /**
    * @param payload
    * access token as received from Auth0
@@ -83,11 +87,27 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     const email = payload[`${apiNamespace}/email`] as unknown as string;
 
-    // TODO find way to avoid making this call every time.
-    const user = await this.usersService.findOneByEmail(email);
+    // TODO validate email with class-validator
+    if (!email) {
+      throw new Error('email must be set');
+    }
 
-    // TODO fix type
-    //@ts-ignore
+    let user = await this.cacheManager.get<ValidatedUserDto>(email);
+
+    if (user) {
+      this.logger.log(`user ${email} found in cache`);
+    } else {
+      this.logger.log(`user ${email} not found in cache`);
+      user = await this.usersService.findOneByEmail(email);
+      await this.cacheManager.set(email, user, { ttl: 60 * 60 * 24 });
+      this.logger.log(`user ${email} added to cache`);
+    }
+
+    if (!user) {
+      this.logger.error(`user ${email} not found`);
+      throw new Error(`User with email ${email} not found`);
+    }
+
     return user;
   }
 }

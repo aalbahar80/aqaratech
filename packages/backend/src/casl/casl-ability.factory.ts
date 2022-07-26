@@ -18,7 +18,6 @@ import {
   User,
 } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class CaslAbilityFactory {
@@ -31,13 +30,51 @@ export class CaslAbilityFactory {
    * id's of all the objects that the role has access to.
    * Then, creates the ability using the id's.
    */
-  async defineAbility(role: ValidatedUserDto['roles'][number]) {
+  async defineAbility({ email, xRoleId }: { email: string; xRoleId?: string }) {
     const now = Date.now();
 
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
-    can(Action.Read, ['User'], { id: { equals: role.userId } });
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+      include: { roles: true },
+    });
+
+    // ### DETERMINE ROLE TO DEFINE ABILITY FOR ###
+
+    // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
+    const hasDefaultRole = user.roles.some((role) => role.isDefault);
+
+    let role: typeof user['roles'][0] | undefined;
+    if (xRoleId) {
+      // If the `x-role-id` header is set, use that.
+      role = user.roles.find((r) => r.id === xRoleId);
+      if (!role) {
+        this.logger.warn(
+          'x-role-id header is set but no role with that id found',
+        );
+      }
+    } else if (hasDefaultRole) {
+      // If the user has a default role, use that.
+      role = user.roles.find((r) => r.isDefault);
+    } else if (user.roles.length > 0) {
+      // Otherwise, use the first role.
+      role = user.roles[0];
+    }
+
+    if (!role) {
+      // If the user has no roles, return false.
+      this.logger.log(user);
+      this.logger.error(
+        `Could not resolve role for userId: ${user.id} - x-role-id: ${xRoleId} - hasDefaultRole: ${hasDefaultRole}`,
+      );
+      throw new Error('Could not resolve role');
+    }
+
+    // ### DEFINE ABILITY ###
+
+    can(Action.Read, ['User'], { id: { equals: user.id } });
 
     // ### Role: Organization Admin###
     if (role.roleType === 'ORGADMIN') {

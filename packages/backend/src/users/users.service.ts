@@ -1,18 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UpdateUserDto, UserDto } from 'src/users/dto/user.dto';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private prisma: PrismaService,
-    private caslAbilityFactory: CaslAbilityFactory,
-  ) {}
-
-  create(createUserDto: UserDto) {
-    return 'This action adds a new user';
-  }
+  constructor(private prisma: PrismaService) {}
 
   findAll() {
     return this.prisma.user.findMany({
@@ -22,7 +14,7 @@ export class UsersService {
     });
   }
 
-  findOne(id: string) {
+  findOne(id: string): Promise<ValidatedUserDto> {
     return this.prisma.user.findUnique({
       where: { id },
       include: {
@@ -33,7 +25,7 @@ export class UsersService {
     });
   }
 
-  async findOneByEmail(email: string) {
+  async findOneByEmail(email: string): Promise<ValidatedUserDto> {
     return this.prisma.user.findUnique({
       where: { email },
       include: {
@@ -43,15 +35,6 @@ export class UsersService {
       },
     });
   }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   async getRoles(id: string) {
     const result = await this.prisma.user.findUnique({
       where: { id },

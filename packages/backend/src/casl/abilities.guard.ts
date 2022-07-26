@@ -15,7 +15,6 @@ import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { IUser } from 'src/interfaces/user.interface';
-import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 /**
  * Attaches a role's `ability` to the `request.user` object. Handles caching of abilities.
@@ -56,62 +55,37 @@ export class AbilitiesGuard implements CanActivate {
       [];
 
     const request = context.switchToHttp().getRequest<IRequest>();
-
-    // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
     const xRoleId = request.headers[ROLE_HEADER] as string | undefined;
-    const hasDefaultRole = request.user.roles.some((role) => role.isDefault);
-
-    let role: ValidatedUserDto['roles'][number] | undefined;
-    if (xRoleId) {
-      // If the `x-role-id` header is set, use that.
-      role = request.user.roles.find((r) => r.id === xRoleId);
-      if (!role) {
-        this.logger.warn(
-          'x-role-id header is set but no role with that id found',
-        );
-      }
-    } else if (hasDefaultRole) {
-      // If the user has a default role, use that.
-      role = request.user.roles.find((r) => r.isDefault);
-    } else if (request.user.roles.length > 0) {
-      // Otherwise, use the first role.
-      role = request.user.roles[0];
-    }
-
-    if (!role) {
-      // If the user has no roles, return false.
-      this.logger.log(request.user);
-      this.logger.error(
-        `Could not resolve role for userId: ${request.user.id} - x-role-id: ${xRoleId} - hasDefaultRole: ${hasDefaultRole}`,
-      );
-      return false;
-    }
+    const user = request.user as { email: string }; // safe to use email because it is set by jwt.strategy from accessToken
 
     // Get the cached ability for this user and role.
     // Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-    const cached = await this.cacheManager.get<AppAbility>(role.id);
+    const cached = await this.cacheManager.get<AppAbility>(
+      `ability:${user.email}:${xRoleId}`,
+    );
 
     let ability: AppAbility;
 
     if (cached) {
       this.logger.log(
-        `Cache hit: Ability for user ${request.user.email} - RoleId: ${role.id}`,
+        `Cache hit: Ability for user ${request.user.email} - RoleId: ${xRoleId}`,
       );
       ability = cached;
     } else {
       this.logger.log(
-        `Cache miss: Ability for user ${request.user.email} - RoleId: ${role.id}`,
+        `Cache miss: Ability for user ${request.user.email} - RoleId: ${xRoleId}`,
       );
-      ability = await this.caslAbilityFactory.defineAbility(role);
+
+      ability = await this.caslAbilityFactory.defineAbility({
+        email: user.email,
+        xRoleId,
+      });
+
       // TODO handle cache ttl/invalidation
-      await this.cacheManager.set(role.id, ability, {
+      await this.cacheManager.set(`ability:${user.email}:${xRoleId}`, ability, {
         ttl: 60 * 60 * 24, // TODO adjust
       });
     }
-
-    // attach ability to request, to be used by services for any further permission checks
-    request.user.ability = ability;
-    request.user.role = role;
 
     const requestHasParams = Object.keys(request.params).length > 0;
 
@@ -165,7 +139,7 @@ export class AbilitiesGuard implements CanActivate {
     if (!isAllowed && cached) {
       // prettier-ignore
       this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
-      await this.cacheManager.del(role.id);
+      await this.cacheManager.del(`ability:${user.email}:${xRoleId}`);
 
       // try again
       // TODO monitor
@@ -173,8 +147,12 @@ export class AbilitiesGuard implements CanActivate {
     }
 
     this.logger.log(
-      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${role.id}`,
+      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
     );
+
+    // // attach ability to request, to be used by services for any further permission checks
+    request.user.ability = ability;
+
     return isAllowed;
   }
 }
