@@ -37,6 +37,11 @@ declare namespace App {
 		user: Readonly<import('$models/types/auth.type').User> | undefined;
 		accessToken: string;
 		xRoleId: string;
+		/**
+		 * Whether the user is authenticated. This is different from `user` being defined.
+		 * When a user first signs up in auth0 and redirected to the app, `user` is undefined but `isAuthenticated` is true.
+		 */
+		isAuthenticated: boolean;
 	}
 
 	interface Stuff {

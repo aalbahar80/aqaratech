@@ -1,6 +1,7 @@
 import { dev } from '$app/env';
 import { environment } from '$environment';
 import { getUser } from '$lib/server/utils/get-user';
+import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
 import type {
@@ -26,11 +27,19 @@ if (
 	});
 }
 
-export const getSession: GetSession = async ({ locals }) => ({
-	user: locals.user,
-	accessToken: locals.accessToken,
-	xRoleId: locals.xRoleId,
-});
+export const getSession: GetSession = async ({ locals }) => {
+	let isAuthenticated = false;
+	if (locals.idToken) {
+		await validateToken(locals.idToken, 'idToken'); // TODO ensure this throws if it fails
+		isAuthenticated = true;
+	}
+	return {
+		user: locals.user,
+		accessToken: locals.accessToken,
+		xRoleId: locals.xRoleId,
+		isAuthenticated,
+	};
+};
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();
