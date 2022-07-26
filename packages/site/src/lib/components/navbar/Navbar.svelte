@@ -37,17 +37,17 @@
 			<SearchButton />
 		{/if}
 
-		<div class="hidden lg:flex lg:items-center lg:space-x-6">
-			{#if $session.user}
+		{#if $session.isAuthenticated}
+			<div class="hidden lg:flex lg:items-center lg:space-x-6">
 				<NavbarDropdown />
-			{/if}
-		</div>
-
-		<LoginButton />
+			</div>
+		{:else}
+			<LoginButton />
+		{/if}
 
 		<div
 			class="-mr-2 flex items-center gap-6 lg:hidden"
-			class:hidden={!$session.user}
+			class:hidden={!$session.isAuthenticated}
 		>
 			<NavPopover {navigation} />
 		</div>

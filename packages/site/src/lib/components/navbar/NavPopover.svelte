@@ -97,7 +97,7 @@
 						</a>
 					</div>
 
-					{#if !$session.user}
+					{#if !$session.isAuthenticated}
 						<div class="mt-6 px-5">
 							<a
 								href={LOGIN}
