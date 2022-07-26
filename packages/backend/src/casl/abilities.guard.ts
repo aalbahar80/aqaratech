@@ -65,6 +65,11 @@ export class AbilitiesGuard implements CanActivate {
     if (xRoleId) {
       // If the `x-role-id` header is set, use that.
       role = request.user.roles.find((r) => r.id === xRoleId);
+      if (!role) {
+        this.logger.warn(
+          'x-role-id header is set but no role with that id found',
+        );
+      }
     } else if (hasDefaultRole) {
       // If the user has a default role, use that.
       role = request.user.roles.find((r) => r.isDefault);

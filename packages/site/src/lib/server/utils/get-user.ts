@@ -1,9 +1,6 @@
-import { environment } from '$environment';
 import type { RoleSK, User, UserMeta } from '$lib/models/types/auth.type';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
-
-const { authConfig } = environment;
 
 const getDefaultRole = (roles: ValidatedUserDtoRolesInner[]): RoleSK => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
@@ -67,9 +64,8 @@ export const getUser = async ({
 	try {
 		const payload = await validateToken(token, 'idToken');
 
-		const userStuff = payload[
-			`${authConfig.AUTH0_API_NAMESPACE}/userStuff`
-		] as ValidatedUserDto;
+		// TODO find way to avoid making this call every time.
+		const userStuff = await getUserStuff(payload.email as string);
 
 		// augment each role with metadata
 		const roles = userStuff.roles.map((role) => ({
@@ -97,4 +93,22 @@ export const getUser = async ({
 		console.error(e);
 		return undefined;
 	}
+};
+
+const getUserStuff = async (email: string): Promise<ValidatedUserDto> => {
+	// const apiUrl = 'http://localhost:3002/users/me';
+	// const apiUrl = 'http://localhost:3002/users/' + params.id + '/roles';
+	const apiUrl = 'http://localhost:3002/users/by-email?email=' + email;
+
+	const response = await fetch(apiUrl, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			// Authorization: 'Bearer ' + token,
+		},
+	});
+
+	const user = (await response.json()) as ValidatedUserDto;
+
+	return user;
 };

@@ -2,7 +2,10 @@ import { getUser } from '$lib/server/utils/get-user';
 import type { RequestHandler } from './__types/[id]';
 
 export const GET: RequestHandler = async ({ locals, params }) => {
-	const user = await getUser(locals.idToken, params.id);
+	const user = await getUser({
+		token: locals.idToken,
+		selectedRoleId: params.id,
+	});
 
 	locals.xRoleId = user?.role.id || '';
 

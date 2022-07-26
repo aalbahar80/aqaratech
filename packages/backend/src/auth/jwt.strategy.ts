@@ -6,10 +6,14 @@ import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(readonly configService: ConfigService<EnvironmentConfig>) {
+  constructor(
+    readonly configService: ConfigService<EnvironmentConfig>,
+    readonly usersService: UsersService,
+  ) {
     const domain = configService.get('authConfig.AUTH0_DOMAIN', {
       infer: true,
     });
@@ -52,7 +56,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param payload
    * access token as received from Auth0
    */
-  validate(payload: any): ValidatedUserDto {
+  async validate(payload: any): Promise<ValidatedUserDto> {
     // Auth0 will hit our /user/by-email endpoint on each login to get a UserDto.
     // It will then place that UserDto in the access token.
     // Here, we extract that UserDto and place it in the request object,
@@ -77,11 +81,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
     }
 
-    // grab userStuff, which auth0 places in the access token on every login
-    // TODO handle case where auth0 did not find user by email.
-    const user = payload[
-      `${apiNamespace}/userStuff`
-    ] as unknown as ValidatedUserDto;
+    const email = payload[`${apiNamespace}/email`] as unknown as string;
+
+    // TODO find way to avoid making this call every time.
+    const user = await this.usersService.findOneByEmail(email);
+
+    // TODO fix type
+    //@ts-ignore
     return user;
   }
 }
