@@ -2,20 +2,8 @@
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import Fa6SolidNetworkWired from '~icons/fa6-solid/network-wired';
-	import HeroiconsSolidChartPie from '~icons/heroicons-solid/chart-pie';
-	import UisLayerGroup from '~icons/uis/layer-group';
 
 	const subNavigation = [
-		{
-			name: 'Expense Categories',
-			href: '/settings/expense-categories',
-			icon: UisLayerGroup,
-		},
-		{
-			name: 'Expense Groups',
-			href: '/settings/expense-groups',
-			icon: HeroiconsSolidChartPie,
-		},
 		{
 			name: 'Expense Tree',
 			href: '/settings/expense-tree',
@@ -34,7 +22,7 @@
 					<a
 						href={item.href}
 						class={classes(
-							$page.url.pathname === item.href
+							$page.url.pathname.endsWith(item.href)
 								? 'bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700'
 								: 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
 							'group border-l-4 px-3 py-2 flex items-center text-sm font-medium',
@@ -44,7 +32,7 @@
 						<svelte:component
 							this={item.icon}
 							class={classes(
-								$page.url.pathname === item.href
+								$page.url.pathname.endsWith(item.href)
 									? 'text-indigo-500 group-hover:text-indigo-500'
 									: 'text-gray-400 group-hover:text-gray-500',
 								'flex-shrink-0 -ml-1 mr-3 h-6 w-6',

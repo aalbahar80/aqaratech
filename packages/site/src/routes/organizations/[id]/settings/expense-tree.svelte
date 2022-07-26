@@ -12,10 +12,10 @@
 	import type { LP } from 'src/types/load-props';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 
-	export const load = async ({ stuff, url }: LoadEvent) => {
-		const id = url.searchParams.get('id'); // TODO: use url.params.id
-		const settings = await stuff.api!.organizations.findSettings({ id });
-		console.log({ settings }, 'expense-tree.svelte ~ 18');
+	export const load = async ({ stuff, params }: LoadEvent<{ id: string }>) => {
+		const settings = await stuff.api!.organizations.findSettings({
+			id: params.id,
+		});
 		return { props: { settings } };
 	};
 </script>
@@ -54,7 +54,7 @@
 		const updated = getUpdatedExpenses(nodes);
 		console.log({ updated }, 'expense-tree.svelte ~ 54');
 		const saved = await $page.stuff.api.organizations.updateSettings({
-			id: $page.url.searchParams.get('id'), // TODO use url.params.id
+			id: $page.params.id,
 			updateOrganizationSettingsDto: {
 				expenseCategoryTree: updated,
 			},
