@@ -57,11 +57,11 @@ export async function seed({
 	let trxPerLease = 12;
 	const min = 1;
 
-	if (sample) {
-		// portfolioCount = 2;
-		moCount = 20;
-		trxPerLease = 3;
-	}
+	// if (sample) {
+	// 	// portfolioCount = 2;
+	// 	moCount = 20;
+	// 	trxPerLease = 3;
+	// }
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
 	organizations[0]!.id = testOrgId;
@@ -244,13 +244,22 @@ export async function seed({
 			);
 			const randomProperty =
 				ownProperties[faker.datatype.number(ownProperties.length - 1)];
-			// const ownUnits = units.filter((u) => ownProperties.find((p) => p.id === u.propertyId));
-			const includeProperty = faker.datatype.boolean();
+			const randomPropertyUnits = units.filter(
+				(u) => u.propertyId === randomProperty?.id
+			);
+			const randomUnit =
+				randomPropertyUnits[
+					faker.datatype.number(randomPropertyUnits.length - 1)
+				];
+			const includeProperty = Math.random() < 0.7; // 70% true
+			const includeUnit = includeProperty && Math.random() < 0.5;
+
 			expenses.push({
 				...expense,
 				portfolioId: portfolio.id,
 				...(includeProperty &&
 					randomProperty && { propertyId: randomProperty?.id }),
+				...(includeUnit && randomUnit && { unitId: randomUnit?.id }),
 			});
 		}
 	});

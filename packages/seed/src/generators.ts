@@ -20,7 +20,7 @@ export const testPortfolioId = "portfolio-1a";
 export const testTenantEmail = "tenant.dev@mailthink.net";
 export const testTenantId = "tenant-1aaaa";
 
-export const timespan = 3;
+export const timespan = 2;
 export const createdAt = () => faker.date.past(timespan);
 export const updatedAt = () => faker.date.past(timespan);
 
