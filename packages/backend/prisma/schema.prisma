@@ -111,7 +111,17 @@ model Organization {
   planId String?
   plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
 
-  planInvoices PlanInvoice[]
+  planInvoices         PlanInvoice[]
+  OrganizationSettings OrganizationSettings?
+}
+
+model OrganizationSettings {
+  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organizationId String       @unique
 }
 
 model Plan {
