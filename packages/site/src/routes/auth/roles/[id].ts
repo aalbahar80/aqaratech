@@ -3,7 +3,7 @@ import type { RequestHandler } from './__types/[id]';
 
 export const GET: RequestHandler = async ({ locals, params }) => {
 	const user = await getUser({
-		token: locals.idToken,
+		token: locals.accessToken,
 		selectedRoleId: params.id,
 	});
 
