@@ -4,6 +4,7 @@ import {
 	ExpensesApi,
 	LeaseInvoicesApi,
 	LeasesApi,
+	MetaApi,
 	OrganizationsApi,
 	PortfoliosApi,
 	PropertiesApi,
@@ -52,6 +53,7 @@ export const api = ({
 		search: new SearchApi(config),
 		analytics: new AnalyticsApi(config),
 		organizations: new OrganizationsApi(config),
+		meta: new MetaApi(config),
 	};
 };
 

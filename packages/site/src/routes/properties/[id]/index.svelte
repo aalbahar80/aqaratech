@@ -14,10 +14,11 @@
 		stuff,
 		url,
 	}: LoadEvent<{ id: string }>) => {
+		const propertyId = params.id;
 		const sParams = parseParams(url);
 		const filter = {
 			...sParams,
-			propertyId: params.id,
+			propertyId,
 			unitId: url.searchParams.get('unitId') || undefined,
 			start: url.searchParams.get('start') || undefined,
 			end: url.searchParams.get('end') || undefined,
@@ -35,8 +36,8 @@
 			invoicesGroupedUnpaid,
 			categories,
 		] = await Promise.all([
-			stuff.api!.properties.findOne({ id: params.id }),
-			stuff.api!.properties.findUnits({ id: params.id, ...sParams }),
+			stuff.api!.properties.findOne({ id: propertyId }),
+			stuff.api!.properties.findUnits({ id: propertyId, ...sParams }),
 
 			stuff.api!.analytics.getIncomeByMonth(filter),
 			stuff.api!.analytics.getExpensesByMonth(filter),
@@ -48,7 +49,7 @@
 				...filter,
 				paidStatus: 'unpaid',
 			}),
-			stuff.api!.meta.findExpenseTypes(),
+			stuff.api!.meta.findExpenseTypes({ propertyId }),
 		]);
 
 		return {

@@ -14,10 +14,11 @@
 		stuff,
 		url,
 	}: LoadEvent<{ id: string }>) => {
+		const unitId = params.id;
 		const sParams = parseParams(url);
 		const filter = {
 			...sParams,
-			unitId: params.id,
+			unitId,
 			start: url.searchParams.get('start') || undefined,
 			end: url.searchParams.get('end') || undefined,
 			take: 1000,
@@ -34,8 +35,8 @@
 			invoicesGroupedUnpaid,
 			categories,
 		] = await Promise.all([
-			stuff.api!.units.findOne({ id: params.id }),
-			stuff.api!.units.findLeases({ id: params.id, ...sParams }),
+			stuff.api!.units.findOne({ id: unitId }),
+			stuff.api!.units.findLeases({ id: unitId, ...sParams }),
 
 			stuff.api!.analytics.getIncomeByMonth(filter),
 			stuff.api!.analytics.getExpensesByMonth(filter),
@@ -50,7 +51,7 @@
 				...filter,
 				paidStatus: 'unpaid',
 			}),
-			stuff.api!.meta.findExpenseTypes(),
+			stuff.api!.meta.findExpenseTypes({ unitId }),
 		]);
 
 		return {

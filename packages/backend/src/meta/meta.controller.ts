@@ -1,24 +1,19 @@
-import { Controller } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Query } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { FindExpenseTreeDto } from 'src/meta/dto/find-expense-tree.dto';
 import { MetaService } from 'src/meta/meta.service';
+import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 
-// TODO rm
 @ApiTags('meta')
 @Controller('meta')
 export class MetaController {
   constructor(private readonly metaService: MetaService) {}
 
-  // @Get('types')
-  // @ApiOkResponse({ type: ExpenseTypeDto, isArray: true })
-  // findExpenseTypes(): Promise<ExpenseTypeDto[]> {
-  //   return this.metaService.findExpenseTypes();
-  // }
-
-  // @Post('types')
-  // @ApiCreatedResponse({ type: UpdateExpenseTypeDto, isArray: true })
-  // saveExpenseTypes(
-  //   @Body() updateExpenseTypesDto: UpdateExpenseTypeDto[],
-  // ): Promise<UpdateExpenseTypeDto[]> {
-  //   return this.metaService.saveExpenseTypes({ updateExpenseTypesDto });
-  // }
+  @Get('expenseTree')
+  @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
+  findExpenseTypes(
+    @Query() findExpenseTreeDto: FindExpenseTreeDto,
+  ): Promise<ExpenseCategoryDto[]> {
+    return this.metaService.findExpenseTypes({ findExpenseTreeDto });
+  }
 }
