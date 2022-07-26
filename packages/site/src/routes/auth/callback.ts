@@ -52,7 +52,7 @@ export const GET: RequestHandler = async (req) => {
 		// TODO shouldn't add idToken to locals, instead extract user then discard it
 		req.locals.idToken = tokens.id_token || '';
 
-		const user = await getUser(req.locals.idToken);
+		const user = await getUser({ token: req.locals.idToken });
 		const location = user?.role.meta.home || '/';
 
 		return {

@@ -54,10 +54,13 @@ const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 	}
 };
 
-export const getUser = async (
-	token: string | undefined,
-	selectedRoleId?: string,
-): Promise<App.Session['user']> => {
+export const getUser = async ({
+	token,
+	selectedRoleId,
+}: {
+	token: string | undefined;
+	selectedRoleId?: string;
+}): Promise<App.Session['user']> => {
 	if (!token) {
 		return;
 	}

@@ -43,7 +43,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
-	const user = await getUser(cookies.idToken, cookies.xRoleId);
+	const user = await getUser({
+		token: cookies.idToken,
+		selectedRoleId: cookies.xRoleId,
+	});
 
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
