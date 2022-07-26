@@ -1721,7 +1721,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDto'
+                $ref: '#/components/schemas/ValidatedUserDto'
         '404':
           description: ''
       tags: *ref_15

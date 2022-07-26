@@ -1,5 +1,6 @@
-import type { RoleSK, User, UserMeta } from '$lib/models/types/auth.type';
+import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { validateToken } from '$lib/server/utils/validate';
+import { getRoleMeta } from '$lib/utils/get-role-meta';
 import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
 
 const getDefaultRole = (roles: ValidatedUserDtoRolesInner[]): RoleSK => {
@@ -13,42 +14,6 @@ const getDefaultRole = (roles: ValidatedUserDtoRolesInner[]): RoleSK => {
 		...defaultRole,
 		meta: getRoleMeta(defaultRole),
 	};
-};
-
-const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
-	if (role.roleType === 'ORGADMIN') {
-		return {
-			roleLabel: 'Organization',
-			home: '/',
-			navLinks: [
-				{ label: 'Portfolios', href: '/portfolios' },
-				{ label: 'Properties', href: '/properties' },
-				// { label: 'Units', href: '/units' },
-				{ label: 'Leases', href: '/leases' },
-				{ label: 'Tenants', href: '/tenants' },
-				// { label: 'Transactions', href: '/transactions' },
-				// { label: 'Expenses', href: '/expenses' },
-				// { label: 'Maintenance', href: '/maintenanceOrders' },
-			],
-		};
-	} else if (role.roleType === 'PORTFOLIO') {
-		return {
-			roleLabel: 'Portfolio',
-			home: `/portfolios/${role.portfolioId}/dashboard`,
-			navLinks: [
-				{ label: 'Properties', href: '/properties' },
-				{ label: 'Leases', href: '/leases' },
-				{ label: 'Tenants', href: '/tenants' },
-			],
-		};
-	} else if (role.roleType === 'TENANT') {
-		return {
-			roleLabel: 'Tenant',
-			home: `/portal/tenant/${role.tenantId}`,
-		};
-	} else {
-		throw new Error('Unknown role type');
-	}
 };
 
 export const getUser = async ({

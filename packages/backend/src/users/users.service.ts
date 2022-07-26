@@ -26,7 +26,9 @@ export class UsersService {
     return this.prisma.user.findUnique({
       where: { id },
       include: {
-        roles: true,
+        roles: {
+          include: { organization: { select: { id: true, fullName: true } } },
+        },
       },
     });
   }

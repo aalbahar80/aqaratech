@@ -2,7 +2,13 @@ import { dev } from '$app/env';
 import { getDocs } from '$lib/components/navbar/docs-url';
 import { LOGOUT } from '$lib/constants/routes';
 import type { NavbarItem } from '$lib/models/types/auth.type';
-import { Code, Cog, InformationCircle, Logout } from '@steeze-ui/heroicons';
+import {
+	Code,
+	Cog,
+	InformationCircle,
+	Logout,
+	SwitchHorizontal,
+} from '@steeze-ui/heroicons';
 
 export const getRoleOptions = (user: App.Session['user']): NavbarItem[] =>
 	user?.roles.map((role) => ({
@@ -13,6 +19,11 @@ export const getRoleOptions = (user: App.Session['user']): NavbarItem[] =>
 export const getNavOptions = (user: App.Session['user']) => [
 	...getRoleOptions(user),
 	...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
+	{
+		label: 'Switch Role',
+		href: `/users/${user?.id}/roles`,
+		icon: SwitchHorizontal,
+	},
 	{
 		label: 'Settings',
 		href: `/organizations/${user?.role.organizationId}/settings/expense-tree`,

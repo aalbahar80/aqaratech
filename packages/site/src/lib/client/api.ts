@@ -12,6 +12,7 @@ import {
 	SearchApi,
 	TenantsApi,
 	UnitsApi,
+	UsersApi,
 } from '@self/sdk';
 import type { LoadEvent } from '@sveltejs/kit';
 
@@ -54,6 +55,7 @@ export const api = ({
 		analytics: new AnalyticsApi(config),
 		organizations: new OrganizationsApi(config),
 		meta: new MetaApi(config),
+		users: new UsersApi(config),
 	};
 };
 

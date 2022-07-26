@@ -61,9 +61,11 @@ export class UsersController {
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'User' })
-  @ApiOkResponse({ type: UserDto })
+  @ApiOkResponse({ type: ValidatedUserDto })
   @ApiNotFoundResponse()
-  findOne(@Param('id') id: string): Promise<UserDto> {
+  findOne(@Param('id') id: string): Promise<ValidatedUserDto> {
+    // TODO fix type
+    //@ts-ignore
     return this.usersService.findOne(id);
   }
 
