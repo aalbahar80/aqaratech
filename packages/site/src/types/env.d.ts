@@ -56,6 +56,25 @@ declare global {
 			readonly VERCEL_GIT_COMMIT_REF: string;
 
 			readonly POSTMARK_TOKEN: string;
+
+			/**
+			 * Api url reachable from the client.
+			 * In development, this could be `http://localhost:3002`.
+			 * In a docker environment behind a reverse proxy, this could be something like: `https://aqar.live/api`,
+			 * where the reverse proxy strips the `/api` path and forwards the request to the backend.
+			 * Doing so allows us to avoid a preflight requests and serve both site and api from the same origin.
+			 */
+			readonly VITE_API_URL: string;
+			/**
+			 * Api url reachable from the server. Used to access the api from the svelte-kit server.
+			 * In development, this could be `http://backend:3002` since both site and backend are on the same docker compose network.
+			 * In production, this could be the same as VITE_API_URL.
+			 *
+			 * From: https://kit.svelte.dev/docs/hooks#externalfetch
+			 *
+			 * For example, your load function might make a request to a public URL like https://api.yourapp.com when the user performs a client-side navigation to the respective page, but during SSR it might make sense to hit the API directly (bypassing whatever proxies and load balancers sit between it and the public internet).
+			 */
+			readonly VITE_API_URL_LOCAL: string;
 		}
 	}
 

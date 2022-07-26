@@ -136,8 +136,6 @@ export const handleError: HandleError = async ({ error, event }) => {
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
-	// const basePath = 'https://localhost/api';
-	// const newPath = 'http://backend:3002/';
 	const basePath = import.meta.env.VITE_API_URL;
 	const newPath = import.meta.env.VITE_API_URL_LOCAL;
 

@@ -74,7 +74,8 @@ export const getUser = async ({
 };
 
 const getUserStuff = async (token: string): Promise<ValidatedUserDto> => {
-	// TODO find way to avoid making this call every time. (secure-cookie/cache)
+	// TODO find way to avoid making this call every time. (secure-cookie/cache).
+	// If session.user isn't used for sensitive data, we can just use the same strategy we use for persisting the x-role-id header/cookie.
 	const now = Date.now();
 	const apiUrl = import.meta.env.VITE_API_URL_LOCAL;
 
