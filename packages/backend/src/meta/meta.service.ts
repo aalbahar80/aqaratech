@@ -39,9 +39,13 @@ export class MetaService {
         })
         .organization()
         .organizationSettings();
+    } else if (findExpenseTreeDto.organizationId) {
+      settings = await this.prisma.organization
+        .findUnique({ where: { id: findExpenseTreeDto.organizationId } })
+        .organizationSettings();
     } else {
       throw new BadRequestException(
-        'No unit, property or portfolio id provided',
+        'No unit, property, portfolio, or organizaiton id provided',
       );
     }
     return settings!.expenseCategoryTree as unknown as ExpenseCategoryDto[]; // TODO rm !

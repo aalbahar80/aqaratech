@@ -4,6 +4,10 @@ import { Nanoid } from 'src/decorators/field.decorators';
 export class FindExpenseTreeDto {
   @IsOptional()
   @Nanoid()
+  organizationId?: string;
+
+  @IsOptional()
+  @Nanoid()
   portfolioId?: string;
 
   @IsOptional()

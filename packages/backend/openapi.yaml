@@ -2215,6 +2215,11 @@ paths:
     get:
       operationId: findExpenseTypes
       parameters:
+        - name: organizationId
+          required: false
+          in: query
+          schema:
+            type: string
         - name: portfolioId
           required: false
           in: query

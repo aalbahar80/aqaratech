@@ -10,6 +10,7 @@ export class MetaController {
   constructor(private readonly metaService: MetaService) {}
 
   @Get('expenseTree')
+  // TODO ability check
   @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
   findExpenseTypes(
     @Query() findExpenseTreeDto: FindExpenseTreeDto,
