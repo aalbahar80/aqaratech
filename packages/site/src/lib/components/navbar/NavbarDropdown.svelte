@@ -15,10 +15,14 @@
 		class="group inline-flex items-center rounded border border-transparent px-4 py-2  text-sm font-medium text-white hover:bg-gray-700"
 	>
 		<div class="pr-3">
-			<p>{$session.user?.role.organization.fullName}</p>
-			<span class="font-medium text-slate-300 group-hover:text-white">
-				{$session.user?.role.meta.roleLabel}
-			</span>
+			{#if $session.user}
+				<p>{$session.user?.role.organization.fullName}</p>
+				<span class="font-medium text-slate-300 group-hover:text-white">
+					{$session.user?.role.meta.roleLabel}
+				</span>
+			{:else}
+				<p>Welcome to Aqaratech</p>
+			{/if}
 		</div>
 		<Icon
 			src={ChevronDown}
