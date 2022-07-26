@@ -10,6 +10,7 @@ import {
 	fakeLeaseInvoice,
 	fakeMaintenanceOrder,
 	fakeOrganization,
+	fakeOrganizationSettings,
 	fakePortfolio,
 	fakeProperty,
 	fakeTenant,
