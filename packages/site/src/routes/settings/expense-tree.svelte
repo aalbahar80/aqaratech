@@ -54,7 +54,7 @@
 		const updated = getUpdatedExpenses(nodes);
 		console.log({ updated }, 'expense-tree.svelte ~ 54');
 		const saved = await $page.stuff.api.organizations.updateSettings({
-			id: settings.id,
+			id: $page.url.searchParams.get('id'), // TODO use url.params.id
 			updateOrganizationSettingsDto: {
 				expenseCategoryTree: updated,
 			},

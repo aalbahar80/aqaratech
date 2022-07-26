@@ -160,7 +160,10 @@ export class CaslAbilityFactory {
       };
 
       // TODO: limit fields
-      can(Action.Read, ['Organization'], { id: { in: manageable.orgs } });
+      // TODO only superadmins can manage orgs/orgSettings?
+      can([Action.Read, Action.Update], ['Organization'], {
+        id: { in: manageable.orgs },
+      });
 
       // TODO: limit fields
       // TODO only superadmins can manage org roles?
