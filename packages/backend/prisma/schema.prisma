@@ -112,7 +112,7 @@ model Organization {
   plan   Plan?   @relation(fields: [planId], references: [id], onDelete: Restrict)
 
   planInvoices         PlanInvoice[]
-  OrganizationSettings OrganizationSettings?
+  organizationSettings OrganizationSettings?
 }
 
 model OrganizationSettings {
