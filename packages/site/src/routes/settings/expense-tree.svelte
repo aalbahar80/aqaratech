@@ -12,15 +12,17 @@
 	import type { LP } from 'src/types/load-props';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 
-	export const load = async ({ stuff }: LoadEvent) => {
-		const expenseTypes = await stuff.api!.meta.findExpenseTypes();
-		return { props: { expenseTypes } };
+	export const load = async ({ stuff, url }: LoadEvent) => {
+		const id = url.searchParams.get('id'); // TODO: use url.params.id
+		const settings = await stuff.api!.organizations.findSettings({ id });
+		console.log({ settings }, 'expense-tree.svelte ~ 18');
+		return { props: { settings } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
-	export let expenseTypes: Prop['expenseTypes'];
+	export let settings: Prop['settings'];
 
 	let nodes: Nodes = {};
 
@@ -28,7 +30,7 @@
 	nodes.root = {
 		id: 'root',
 		labelEn: '',
-		items: expenseTypes
+		items: settings.expenseCategoryTree
 			.filter((t) => !t.parentId)
 			.map((t) => ({ id: t.id, labelEn: t.labelEn })),
 	};
@@ -51,8 +53,11 @@
 	on:click={async () => {
 		const updated = getUpdatedExpenses(nodes);
 		console.log({ updated }, 'expense-tree.svelte ~ 54');
-		const saved = await $page.stuff.api.meta.saveExpenseTypes({
-			requestBody: updated,
+		const saved = await $page.stuff.api.organizations.updateSettings({
+			id: settings.id,
+			updateOrganizationSettingsDto: {
+				expenseCategoryTree: updated,
+			},
 		});
 		console.log({ saved }, 'expense-tree.svelte ~ 55');
 	}}

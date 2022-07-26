@@ -10,7 +10,7 @@ import { IsISO8601, IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { ExpenseTypeDto } from 'src/expenses/dto/expense-type.dto';
+import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 
 class ExpenseRequiredDto {
   @Nanoid()
@@ -52,7 +52,7 @@ export class ExpenseBasicDto extends IntersectionType(
 
 export class ExpenseDto extends ExpenseBasicDto {
   breadcrumbs: ExpenseBreadcrumbsDto;
-  expenseType: ExpenseTypeDto | null;
+  expenseType: ExpenseCategoryDto | null;
 }
 
 export class CreateExpenseDto

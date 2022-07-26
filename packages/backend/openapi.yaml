@@ -2045,6 +2045,47 @@ paths:
               schema:
                 type: object
       tags: *ref_21
+  /organizations/{id}/settings:
+    get:
+      operationId: findSettings
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsDto'
+      tags: *ref_21
+    patch:
+      operationId: updateSettings
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationSettingsDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsDto'
+      tags: *ref_21
   /analytics/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -2170,42 +2211,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
       tags: *ref_23
-  /meta/types:
-    get:
-      operationId: findExpenseTypes
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseTypeDto'
-      tags: &ref_24
-        - meta
-    post:
-      operationId: saveExpenseTypes
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: string
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UpdateExpenseTypeDto'
-      tags: *ref_24
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -3628,7 +3633,7 @@ components:
             - $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
-    ExpenseTypeDto:
+    ExpenseCategoryDto:
       type: object
       properties:
         id:
@@ -3670,7 +3675,7 @@ components:
         expenseType:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/ExpenseTypeDto'
+            - $ref: '#/components/schemas/ExpenseCategoryDto'
         portfolioId:
           type: string
         amount:
@@ -3764,6 +3769,39 @@ components:
         - updatedAt
         - fullName
         - label
+    OrganizationSettingsDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        expenseCategoryTree:
+          type: object
+        organizationId:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - expenseCategoryTree
+        - organizationId
+    UpdateOrganizationSettingsDto:
+      type: object
+      properties:
+        expenseCategoryTree:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryDto'
+      required:
+        - expenseCategoryTree
     ByMonthDto:
       type: object
       properties:
@@ -3774,23 +3812,6 @@ components:
       required:
         - amount
         - date
-    UpdateExpenseTypeDto:
-      type: object
-      properties:
-        labelEn:
-          type: string
-        parentId:
-          type: number
-          nullable: true
-          default: null
-          minimum: 1
-        labelAr:
-          type: string
-          default: ''
-        description:
-          type: string
-          nullable: true
-          default: null
     BreadcrumbsDto:
       type: object
       properties:

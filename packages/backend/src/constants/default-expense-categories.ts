@@ -1,9 +1,4 @@
-interface ExpenseCategory {
-  id: number;
-  parentId: number | null;
-  labelEn: string;
-  labelAr: string;
-}
+import { ExpenseCategory } from 'src/organizations/dto/expenseCategory.dto';
 
 // prettier-ignore
 export const defaultExpenseCategoryTree: ExpenseCategory[] = [

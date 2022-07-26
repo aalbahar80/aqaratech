@@ -71,6 +71,12 @@ export const fakeOrganization = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	fullName: faker.company.companyName(),
+	organizationSettings: {
+		id: generateId(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		expenseCategoryTree: expenseTypes,
+	},
 });
 
 export const fakePortfolio = (orgId?: string) => {
