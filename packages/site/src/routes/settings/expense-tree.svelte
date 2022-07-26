@@ -35,10 +35,10 @@
 			.map((t) => ({ id: t.id, labelEn: t.labelEn })),
 	};
 
-	expenseTypes.forEach((expenseType) => {
+	settings.expenseCategoryTree.forEach((expenseType) => {
 		nodes[expenseType.id] = {
 			...expenseType,
-			items: getExpenseTypeTree(expenseType, expenseTypes),
+			items: getExpenseTypeTree(expenseType, settings.expenseCategoryTree),
 		};
 	});
 
