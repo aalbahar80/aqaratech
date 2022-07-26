@@ -1,8 +1,32 @@
-import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  ApiPropertyOptional,
+  IntersectionType,
+  OmitType,
+  PartialType,
+} from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { IsEmail, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
+
+export class UserRequiredDto implements Partial<User> {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  fullName: string;
+}
+
+export class UserOptionalDto implements Partial<User> {}
+
+export class CreateUserDto
+  extends IntersectionType(UserRequiredDto, PartialType(UserOptionalDto))
+  implements Partial<User> {}
+
+export class UpdateUserDto extends PartialType(
+  OmitType(CreateUserDto, ['email']),
+) {}
 
 export class UserDto extends AbstractDto implements User {
   @IsEmail()
@@ -12,8 +36,6 @@ export class UserDto extends AbstractDto implements User {
   @IsString()
   fullName: string | null = null;
 }
-
-export class UpdateUserDto extends PartialType(UserDto) {}
 
 /**
  * Type to be returned in /users-by-email endpoint,
