@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import { entityNameMap } from '$lib/constants/names';
-	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import type { EntityName } from '$lib/constants/names';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
-	export let entity: EntityTitle;
+	export let nameMap: EntityName;
 	export let formUrl: string;
-	export let message: string = `Get started by creating a new ${entityNameMap[entity].singular}.`;
-	export let buttonText: string = `New ${entityNameMap[entity].singular}`;
+	export let message: string = `Get started by creating a new ${nameMap.singular}.`;
+	export let buttonText: string = `New ${nameMap.singular}`;
 </script>
 
 <div class="py-8 text-center sm:py-16">
@@ -19,7 +18,7 @@
 		aria-hidden="true"
 	/>
 	<h3 class="mt-2 text-sm font-medium text-gray-900">
-		No {entityNameMap[entity].plural}
+		No {nameMap.plural}
 	</h3>
 	{#if hideActions}
 		<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>

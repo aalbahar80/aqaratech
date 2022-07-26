@@ -4,11 +4,13 @@
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 
-	export let entityTitle: EntityTitle;
 	export let count: number;
 	export let formUrl: string;
+	// TODO make type either nameMap or EntityTitle
+	export let entityTitle: EntityTitle | undefined = undefined;
+	export let nameMap = entityNameMap[entityTitle];
 
-	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
+	export let hideActions = $session.user?.role.roleType !== 'ORGADMIN';
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">
@@ -20,7 +22,7 @@
 			>
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						{entityNameMap[entityTitle].pluralCap}
+						{nameMap.pluralCap}
 					</h3>
 				</div>
 
@@ -31,7 +33,7 @@
 							class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							sveltekit:prefetch
 						>
-							Create new {entityNameMap[entityTitle].singular}
+							Create new {nameMap.singular}
 						</a>
 					</div>
 				{/if}
@@ -43,7 +45,7 @@
 		</ul>
 	{:else}
 		<slot name="emptyState">
-			<EmptyState entity={entityTitle} {formUrl} />
+			<EmptyState {nameMap} {formUrl} />
 		</slot>
 	{/if}
 </section>

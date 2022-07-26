@@ -21,7 +21,7 @@
 	};
 </script>
 
-<StackedList {nameMap} count={roles.length} {formUrl}>
+<StackedList {nameMap} count={roles.length} {formUrl} hideActions={false}>
 	{#each roles as role (role.id)}
 		{@const icons = [
 			{

@@ -4,6 +4,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
+	import { entityNameMap } from '$lib/constants/names';
 	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedRoleDto } from '@self/sdk';
 	import { formatDistance } from 'date-fns';
@@ -45,7 +46,7 @@
 	{/each}
 	<div slot="emptyState">
 		<EmptyState
-			entity="roles"
+			nameMap={entityNameMap['roles']}
 			message="No members have been invited yet."
 			buttonText="Invite member"
 			{formUrl}
