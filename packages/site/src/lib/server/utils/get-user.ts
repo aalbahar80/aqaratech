@@ -76,7 +76,7 @@ export const getUser = async ({
 const getUserStuff = async (token: string): Promise<ValidatedUserDto> => {
 	// TODO find way to avoid making this call every time. (secure-cookie/cache)
 	const now = Date.now();
-	const apiUrl = 'http://localhost:3002/users/me';
+	const apiUrl = import.meta.env.VITE_API_URL_LOCAL;
 
 	const response = await fetch(apiUrl, {
 		method: 'GET',
