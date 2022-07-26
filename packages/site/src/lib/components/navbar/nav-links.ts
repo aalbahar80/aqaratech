@@ -15,7 +15,7 @@ export const getNavOptions = (user: App.Session['user']) => [
 	...(dev ? [{ label: 'Debug', href: '/debug', icon: Code }] : []),
 	{
 		label: 'Settings',
-		href: `organizations/${user?.role.organizationId}/settings/expense-tree`,
+		href: `/organizations/${user?.role.organizationId}/settings/expense-tree`,
 		icon: Cog,
 	},
 	{ label: 'Docs', href: getDocs(), icon: InformationCircle }, // TODO: open in new tab { target="_blank" } & sveltekit:reload & only admins?
