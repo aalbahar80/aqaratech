@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { IconSource } from '@steeze-ui/svelte-icon/types';
+	import type { SvelteComponentTyped } from 'svelte';
 
 	interface MenuOption {
 		label: string;
-		icon?: IconSource;
+		icon?: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
 	}
 
 	export let option: MenuOption;
@@ -19,11 +18,10 @@
 	)}
 >
 	{#if option.icon}
-		<Icon
-			src={option.icon}
+		<svelte:component
+			this={option.icon}
 			class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
 			aria-hidden="true"
-			theme="solid"
 		/>
 	{/if}
 	{option.label}
