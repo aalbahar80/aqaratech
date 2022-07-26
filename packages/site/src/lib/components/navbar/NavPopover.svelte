@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import { getDocs } from '$lib/components/navbar/docs-url';
+	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
-	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
-	import { LOGIN, LOGOUT } from '$lib/constants/routes';
+	import { LOGIN } from '$lib/constants/routes';
 	import {
 		Popover,
 		PopoverButton,
@@ -15,8 +14,6 @@
 
 	// Needs to be reactive?
 	const navigation = $session.user?.role.meta.navLinks || [];
-
-	const docs = getDocs();
 </script>
 
 <Popover as="header" let:close>
@@ -72,29 +69,16 @@
 							</a>
 						{/each}
 
-						<a
-							on:click={() => close(null)}
-							href={`/users/${$session.user?.id}/roles`}
-						>
-							<PopoverItem option={{ label: 'Switch Role' }} />
-						</a>
-
-						<a
-							on:click={() => close(null)}
-							href={docs}
-							sveltekit:reload
-							target="_blank"
-						>
-							<PopoverItem option={{ label: 'Docs' }} />
-						</a>
-
-						<a on:click={() => close(null)} href="/settings/expense-categories">
-							<PopoverItem option={{ label: 'Settings' }} />
-						</a>
-
-						<a on:click={() => close(null)} href={LOGOUT} sveltekit:reload>
-							<PopoverItem option={{ label: 'Logout' }} />
-						</a>
+						<!-- General nav links -->
+						{#each getNavOptions($session.user) as option (option.label)}
+							<a
+								href={option.href}
+								sveltekit:reload={option.external || null}
+								on:click={() => close(null)}
+							>
+								<PopoverItem option={{ label: option.label }} />
+							</a>
+						{/each}
 					</div>
 
 					{#if !$session.isAuthenticated}
