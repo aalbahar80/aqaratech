@@ -20,8 +20,8 @@
 	export let formType: 'create' | 'update';
 	export let onCreate: (values: any) => Promise<{ id: string }>;
 	export let onUpdate: (values: any) => Promise<{ id: string }>;
-	export let onSuccess: (id: string) => Promise<void> = (id) =>
-		goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
+	export let onSuccess: (value: any) => Promise<void> = (value) =>
+		goto(`/${entityNameMap[entityTitle].urlName}/${value.id}`);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -54,14 +54,14 @@
 			console.log({ original }, 'Form2.svelte ~ 36');
 			const values = schema.parse(original); // let zod handle date parsing ("" to null)
 			console.log({ values }, 'Form2.svelte ~ 25');
-			let id: string;
+			let value: any;
 			if (formType === 'update') {
-				({ id } = await onUpdate(values));
+				value = await onUpdate(values);
 			} else {
-				({ id } = await onCreate(values));
+				value = await onCreate(values);
 			}
 
-			onSuccess(id);
+			onSuccess(value);
 		},
 
 		onError: async (error: any) => {

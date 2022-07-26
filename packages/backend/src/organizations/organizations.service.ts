@@ -10,14 +10,14 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class OrganizationsService {
   constructor(private prisma: PrismaService) {}
 
-  create({
+  async create({
     createOrganizationDto,
     user,
   }: {
     createOrganizationDto: CreateOrganizationDto;
     user: IUser;
   }) {
-    return this.prisma.organization.create({
+    const organization = await this.prisma.organization.create({
       data: {
         fullName: createOrganizationDto.fullName,
         label: createOrganizationDto.label,
@@ -37,7 +37,10 @@ export class OrganizationsService {
           },
         },
       },
+      include: { roles: true }, // used to redirect user to switch roles in frontend
     });
+
+    return { organization, roleId: organization.roles[0].id };
   }
 
   async findOne({ id }: { id: string }) {

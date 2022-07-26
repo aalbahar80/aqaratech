@@ -30,7 +30,11 @@ import {
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchService } from 'src/search/search.service';
-import { CreateOrganizationDto, OrganizationDto } from './dto/organization.dto';
+import {
+  CreateOrganizationDto,
+  OrganizationCreatedDto,
+  OrganizationDto,
+} from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
 @ApiHeader({ name: ROLE_HEADER })
@@ -46,11 +50,12 @@ export class OrganizationsController {
 
   @Post()
   // No need to check abilities here. Any authenticated user can create an organization.
-  @ApiCreatedResponse({ type: OrganizationDto })
+  @ApiCreatedResponse({ type: OrganizationCreatedDto })
   create(
     @User() user: IUser,
     @Body() createOrganizationDto: CreateOrganizationDto,
-  ): Promise<OrganizationDto> {
+  ): Promise<OrganizationCreatedDto> {
+    // also returns the roleId for the created organization admin
     return this.organizationsService.create({ createOrganizationDto, user });
   }
 

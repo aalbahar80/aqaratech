@@ -26,3 +26,8 @@ export class CreateOrganizationDto
   implements Partial<Organization> {}
 
 export class UpdateOrganizationDto extends PartialType(CreateOrganizationDto) {}
+
+export class OrganizationCreatedDto {
+  organization: OrganizationDto;
+  roleId: string;
+}

@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
+	import { addSuccessToast } from '$lib/stores/toast';
 	import { schema } from '$models/schemas/organization.schema';
 	import type { OrganizationDto } from '@self/sdk';
 
@@ -36,6 +38,7 @@
 	];
 </script>
 
+<!-- TODO add onUpdate callback -->
 <Form
 	{schema}
 	entityTitle="organizations"
@@ -45,9 +48,8 @@
 		$page.stuff.api.organizations.create({
 			createOrganizationDto: values,
 		})}
-	onUpdate={(values) =>
-		$page.stuff.api.organizations.update({
-			id: data.id,
-			updateOrganizationDto: values,
-		})}
+	onSuccess={(value) => {
+		addSuccessToast();
+		return goto(`/auth/roles/${value.roleId}`);
+	}}
 />
