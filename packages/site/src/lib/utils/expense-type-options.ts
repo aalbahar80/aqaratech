@@ -23,7 +23,6 @@ export const parseExpenseTypeOptions = (
 
 	root.eachBefore((leaf) => {
 		if (leaf.id === 'root') return;
-		console.log(leaf);
 		const labelPrefix =
 			leaf.depth > 1
 				? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(leaf.depth - 1)
