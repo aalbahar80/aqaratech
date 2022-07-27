@@ -4,7 +4,8 @@
 </script>
 
 <Menu as="div" class="relative inline-block text-left align-middle">
-	<div>
+	<div class="flex">
+		<slot name="beforeButton" />
 		<MenuButton>
 			<slot name="button">
 				<ThreeDotsButton />

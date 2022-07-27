@@ -47,13 +47,17 @@
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} />
 			<Dropdown>
+				<div slot="beforeButton">
+					<a
+						href={`/${entityNameMap[entity].urlName}/${id}/edit`}
+						class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+					>
+						Edit
+					</a>
+				</div>
 				<div slot="button">
-					<HybridButton
-						defaultOption={{
-							label: 'Edit',
-							href: `/${entityNameMap[entity].urlName}/${id}/edit`,
-						}}
-					/>
+					<!-- Rename to HybridButtonChevron  -->
+					<HybridButton />
 				</div>
 				<div slot="menu">
 					<DropdownMenu

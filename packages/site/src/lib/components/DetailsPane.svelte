@@ -45,6 +45,7 @@
 								</div>
 								<Dropdown>
 									<div slot="button">
+										<!-- See heading.svelte for updated example to avoid overlap  -->
 										<!-- Investigate layout shift -->
 										<HybridButton
 											defaultOption={{ label: 'View', href: value }}
