@@ -85,6 +85,32 @@ services:
     networks:
       - aq-network
 
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - $PWD/packages/backend/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+    networks:
+      - aq-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    links:
+      - prometheus:prometheus
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=12345
+    ports:
+      - '3003:3000'
+    networks:
+      - aq-network
+
 networks:
   aq-network:
     driver: bridge
@@ -95,3 +121,4 @@ volumes:
   caddy_config:
   postgres:
   meili_data:
+  grafana-storage:
