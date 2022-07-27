@@ -5,7 +5,6 @@
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import NavbarDropdown from '$lib/components/navbar/NavbarDropdown.svelte';
 	import NavbarIcon from '$lib/components/navbar/NavbarIcon.svelte';
-	import SearchButton from '$lib/components/search/SearchButton.svelte';
 
 	// Needs to be reactive?
 	const navigation = $session.user?.role.meta.navLinks || [];
@@ -18,9 +17,8 @@
 	>
 		<NavbarIcon />
 
-		<div class="flex space-x-4 lg:ml-10">
+		<div class="flex flex-auto space-x-4 justify-self-start lg:ml-10">
 			<DashboardButton />
-
 			<!-- Large screen: nav links -->
 			{#each navigation as item (item.label)}
 				<a
@@ -33,9 +31,9 @@
 			{/each}
 		</div>
 
-		{#if $session.user?.role.roleType === 'ORGADMIN'}
+		<!-- {#if $session.user?.role.roleType === 'ORGADMIN'}
 			<SearchButton />
-		{/if}
+		{/if} -->
 
 		{#if $session.isAuthenticated}
 			<div class="hidden lg:flex lg:items-center lg:space-x-6">
