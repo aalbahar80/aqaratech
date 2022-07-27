@@ -53,6 +53,7 @@
 				options={field.options}
 				initialValue={field.value}
 				disabled={field.disabled}
+				invalid={!field.valid}
 				on:select
 			/>
 		{:else}
