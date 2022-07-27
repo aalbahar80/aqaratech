@@ -20,3 +20,12 @@ export const rangeStart = (monthsAgo: number): string => {
 	const result = new Date(Date.UTC(year, month, 1)).toISOString();
 	return result;
 };
+
+// start of next month
+export const defaultRangeEnd = () => {
+	const now = new Date();
+	const nextMonth = new Date(
+		Date.UTC(now.getFullYear(), now.getMonth() + 1, 1),
+	);
+	return nextMonth.toISOString();
+};

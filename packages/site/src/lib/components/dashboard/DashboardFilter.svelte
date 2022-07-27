@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import {
 		defaultRange,
+		defaultRangeEnd,
 		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/Select.svelte';
@@ -18,7 +19,7 @@
 	$: selectedProperty = $page.url.searchParams.get('propertyId');
 	$: selectedUnit = $page.url.searchParams.get('unitId');
 	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
-	$: end = $page.url.searchParams.get('end') || new Date().toISOString();
+	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
 
 	const propertyOptions = properties.map((property) => ({
 		label: getAddress(property),

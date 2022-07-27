@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import {
 		defaultRange,
+		defaultRangeEnd,
 		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
 	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
@@ -27,6 +28,7 @@
 
 		if (!filter.start && !filter.end) {
 			filter.start = rangeStart(defaultRange);
+			filter.end = defaultRangeEnd();
 		}
 
 		const [

@@ -1,4 +1,9 @@
 <script lang="ts" context="module">
+	import {
+		defaultRange,
+		defaultRangeEnd,
+		rangeStart,
+	} from '$lib/components/charts/utils/date-range';
 	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
@@ -23,6 +28,11 @@
 			end: url.searchParams.get('end') || undefined,
 			take: 1000,
 		};
+
+		if (!filter.start && !filter.end) {
+			filter.start = rangeStart(defaultRange);
+			filter.end = defaultRangeEnd();
+		}
 
 		const [
 			unit,
