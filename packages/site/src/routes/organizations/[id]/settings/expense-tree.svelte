@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import {
 		getExpenseTypeTree,
 		getUpdatedExpenses,
@@ -53,13 +54,19 @@
 	on:click={async () => {
 		const updated = getUpdatedExpenses(nodes);
 		console.log({ updated }, 'expense-tree.svelte ~ 54');
-		const saved = await $page.stuff.api.organizations.updateSettings({
-			id: $page.params.id,
-			updateOrganizationSettingsDto: {
-				expenseCategoryTree: updated,
-			},
-		});
-		console.log({ saved }, 'expense-tree.svelte ~ 55');
+		try {
+			const saved = await $page.stuff.api.organizations.updateSettings({
+				id: $page.params.id,
+				updateOrganizationSettingsDto: {
+					expenseCategoryTree: updated,
+				},
+			});
+			console.log({ saved }, 'expense-tree.svelte ~ 55');
+			addSuccessToast('Expense tree saved');
+		} catch (e) {
+			handleApiError(e);
+			console.error(e);
+		}
 	}}
 >
 	<Fa6SolidFloppyDisk />
