@@ -3795,13 +3795,31 @@ components:
         - updatedAt
         - expenseCategoryTree
         - organizationId
+    UpdateExpenseCategoryDto:
+      type: object
+      properties:
+        id:
+          type: number
+          minimum: 1
+        labelEn:
+          type: string
+        parentId:
+          type: number
+          nullable: true
+          default: null
+          minimum: 1
+        labelAr:
+          type: string
+          default: ''
+        description:
+          type: string
+          nullable: true
+          default: null
     UpdateOrganizationSettingsDto:
       type: object
       properties:
         expenseCategoryTree:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpenseCategoryDto'
+          $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - expenseCategoryTree
     ByMonthDto:

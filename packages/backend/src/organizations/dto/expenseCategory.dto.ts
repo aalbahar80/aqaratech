@@ -1,4 +1,4 @@
-import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
+import { IntersectionType, PartialType } from '@nestjs/swagger';
 import { IsPositive, IsString } from 'class-validator';
 
 export interface ExpenseCategory {
@@ -42,5 +42,5 @@ export class CreateExpenseCategoryDto
   implements Partial<ExpenseCategory> {}
 
 export class UpdateExpenseCategoryDto extends PartialType(
-  OmitType(CreateExpenseCategoryDto, ['id']),
+  CreateExpenseCategoryDto,
 ) {}
