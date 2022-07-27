@@ -120,9 +120,7 @@
 				value={field.value || ''}
 				id={field.name}
 				class="form__input"
-				disabled={field.name === 'id' ||
-					field.name === 'createdAt' ||
-					field.name === 'updatedAt'}
+				disabled={field.disabled}
 				class:form__input--invalid={!field.valid}
 				class:form__input--warn={field.warnMessage}
 			/>
