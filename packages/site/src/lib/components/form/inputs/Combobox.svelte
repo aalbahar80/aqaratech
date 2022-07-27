@@ -23,14 +23,6 @@
 	export let disabled = false;
 	export let invalid = false;
 
-	let activeOption: Option | undefined;
-	$: console.log('activeOption: ', activeOption);
-	$: {
-		if (query) {
-			activeOption = filtered[0];
-		}
-	}
-
 	let selection: SelectedOption = options.find(
 		(option) => option.value === initialValue,
 	);
@@ -44,6 +36,22 @@
 
 	// SEARCH
 	let query = '';
+
+	/**
+	 * Helper to make combobox accessible.
+	 */
+	let activeOption: Option | undefined;
+	let autoScroll = true;
+
+	$: {
+		if (!forceOpen) {
+			// activeOption should be cleared when the combobox is closed.
+			// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
+			activeOption = undefined;
+		} else if (query) {
+			activeOption = filtered[0];
+		}
+	}
 
 	const config: ConstructorParameters<typeof Fuse>[1] = {
 		includeScore: true,
@@ -94,63 +102,45 @@
 				select(activeOption);
 				forceOpen = false;
 				activeOption = undefined;
-				// query = '';
-			}
-			// else if (allowUserOptions && searchText.length > 0) {
-			// 	// user entered text but no options match, so if allowUserOptions is truthy, we create new option
-			// 	add(searchText);
-			// }
-			// no active option and no search text means the options dropdown is closed
-			// in which case enter means open it
-			else {
+			} else {
+				// no active option means the options dropdown is closed
+				// in which case enter means open it
 				forceOpen = true;
 			}
 		}
 		// on up/down arrow keys: update active option
-		// else if ([`ArrowDown`, `ArrowUp`].includes(event.key)) {
-		// 	// if no option is active yet, but there are matching options, make first one active
-		// 	if (activeOption === null && matchingOptions.length > 0) {
-		// 		activeOption = matchingOptions[0];
-		// 		return;
-		// 	} else if (allowUserOptions && searchText.length > 0) {
-		// 		// if allowUserOptions is truthy and user entered text but no options match, we make
-		// 		// <li>{addUserMsg}</li> active on keydown (or toggle it if already active)
-		// 		activeMsg = !activeMsg;
-		// 		return;
-		// 	} else if (activeOption === null) {
-		// 		// if no option is active and no options are matching, do nothing
-		// 		return;
-		// 	}
-		// 	const increment = event.key === `ArrowUp` ? -1 : 1;
-		// 	const newActiveIdx = matchingOptions.indexOf(activeOption) + increment;
+		else if ([`ArrowDown`, `ArrowUp`].includes(event.key)) {
+			// if no option is active yet, but there are matching options, make first one active
+			if (!activeOption && filtered.length > 0) {
+				forceOpen = true;
+				activeOption = filtered[0];
+				return;
+			} else if (!activeOption) {
+				// if no option is active and no options are matching, do nothing
+				return;
+			}
 
-		// 	if (newActiveIdx < 0) {
-		// 		// wrap around top
-		// 		activeOption = matchingOptions[matchingOptions.length - 1];
-		// 	} else if (newActiveIdx === matchingOptions.length) {
-		// 		// wrap around bottom
-		// 		activeOption = matchingOptions[0];
-		// 	} else {
-		// 		// default case: select next/previous in item list
-		// 		activeOption = matchingOptions[newActiveIdx];
-		// 	}
-		// 	if (autoScroll) {
-		// 		// TODO This ugly timeout hack is needed to properly scroll element into view when wrapping
-		// 		// around start/end of option list. Find a better solution than waiting 10 ms to.
-		// 		setTimeout(() => {
-		// 			const li = document.querySelector(`ul.options > li.active`);
-		// 			li?.scrollIntoView();
-		// 		}, 10);
-		// 	}
-		// }
-		// // on backspace key: remove last selected option
-		// else if (
-		// 	event.key === `Backspace` &&
-		// 	selectedLabels.length > 0 &&
-		// 	!searchText
-		// ) {
-		// 	remove(selectedLabels.at(-1) as string | number);
-		// }
+			const increment = event.key === `ArrowUp` ? -1 : 1;
+			const newActiveIdx = filtered.indexOf(activeOption) + increment;
+
+			if (newActiveIdx < 0) {
+				// wrap around top
+				activeOption = filtered[filtered.length - 1];
+			} else if (newActiveIdx === filtered.length) {
+				// wrap around bottom
+				activeOption = filtered[0];
+			} else {
+				// default case: select next/previous in item list
+				activeOption = filtered[newActiveIdx];
+			}
+			if (autoScroll) {
+				// `await tick` is needed to properly scroll element into view
+				// when wrapping around start/end of option list.
+				await tick();
+				const li = document.querySelector(`li.isActive`);
+				li?.scrollIntoView();
+			}
+		}
 	}
 </script>
 
@@ -231,7 +221,7 @@
 							class={classes(
 								'relative cursor-default select-none py-2 pl-3 pr-9',
 								hovering || activeOption === item
-									? 'bg-indigo-600 text-white'
+									? 'bg-indigo-600 text-white isActive'
 									: 'text-gray-900',
 							)}
 							let:selected
