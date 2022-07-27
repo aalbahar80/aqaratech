@@ -42,6 +42,7 @@ export class RoleDto extends IntersectionType(
   IntersectionType(OmitType(RoleRequiredDto, ['email']), RoleOptionalDto),
 ) {
   userId: string;
+  email?: string;
 }
 
 export class CreateRoleDto

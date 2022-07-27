@@ -2777,6 +2777,8 @@ components:
           $ref: '#/components/schemas/RoleTypeEnum'
         userId:
           type: string
+        email:
+          type: string
         organizationId:
           type: string
         portfolioId:
