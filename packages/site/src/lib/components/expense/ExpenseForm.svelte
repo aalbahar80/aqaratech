@@ -135,6 +135,7 @@
 			options: parseExpenseTypeOptions(expenseTypes),
 			value: data?.categoryId || '',
 			combobox: true,
+			autoInit: true,
 			label: 'Expense Category',
 		}),
 		new Field('memo', {
