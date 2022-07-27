@@ -7,10 +7,18 @@ import {
 import { Request } from 'express';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
-export const User = createParamDecorator(
+/**
+ * For use in routes marked with `@SkipAbilityCheck()`,
+ * when we only care if the user is authenticated or not
+ * and no authorization checks are performed.
+ *
+ * One use-case for this decorator is for new users who just signed up in auth0,
+ * but haven't yet been added to our database.
+ */
+export const UserBasic = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest<IncomingRequest>();
-    const logger = new Logger('UserDecorator');
+    const logger = new Logger('UserBasic');
 
     logger.debug(`User email: ${request.user?.email}`);
 
@@ -24,11 +32,10 @@ export const User = createParamDecorator(
       throw new BadGatewayException();
     }
 
-    if (!('ability' in request.user)) {
-      logger.error(
-        "No ability found in request.user. This decorator shouldn't be used in routes marked with `@SkipAbilityCheck()`.",
+    if ('ability' in request.user) {
+      logger.warn(
+        'Ability property found in request.user. Did you mean to use `User` decorator instead of `UserBasic`?',
       );
-      throw new BadGatewayException();
     }
 
     return request.user;

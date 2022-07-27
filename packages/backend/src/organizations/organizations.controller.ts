@@ -22,8 +22,9 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
+import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { IUser } from 'src/interfaces/user.interface';
+import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,
@@ -54,7 +55,7 @@ export class OrganizationsController {
   @SkipAbilityCheck()
   @ApiCreatedResponse({ type: OrganizationCreatedDto })
   create(
-    @User() user: IUser,
+    @UserBasic() user: AuthenticatedUser,
     @Body() createOrganizationDto: CreateOrganizationDto,
   ): Promise<OrganizationCreatedDto> {
     // also returns the roleId for the created organization admin
