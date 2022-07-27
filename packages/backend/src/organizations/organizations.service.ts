@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
@@ -10,6 +10,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class OrganizationsService {
   constructor(private prisma: PrismaService) {}
 
+  private readonly logger = new Logger(OrganizationsService.name);
+
   async create({
     createOrganizationDto,
     user,
@@ -17,6 +19,10 @@ export class OrganizationsService {
     createOrganizationDto: CreateOrganizationDto;
     user: AuthenticatedUser;
   }) {
+    this.logger.debug(
+      `${user.email} creating organization ${createOrganizationDto.fullName}`,
+    );
+
     const organization = await this.prisma.organization.create({
       data: {
         fullName: createOrganizationDto.fullName,
