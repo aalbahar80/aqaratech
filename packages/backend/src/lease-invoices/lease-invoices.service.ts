@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
@@ -11,6 +12,7 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { Rel } from 'src/constants/rel.enum';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
@@ -29,7 +31,10 @@ export class LeaseInvoicesService {
     private prisma: PrismaService,
     private postmarkService: PostmarkService,
     private readonly eventEmitter: EventEmitter2,
+    readonly configService: ConfigService<EnvironmentConfig>,
   ) {}
+
+  private readonly logger = new Logger(LeaseInvoicesService.name);
 
   async create({
     createLeaseInvoiceDto,
@@ -163,6 +168,14 @@ export class LeaseInvoicesService {
 
   @OnEvent('invoice.send')
   async sendEmail(payload: InvoiceSendEvent) {
+    const origin = this.configService.get('siteConfig.SITE_ORIGIN', {
+      infer: true,
+    });
+
+    if (!origin) {
+      this.logger.warn('No site origin configured');
+    }
+
     return this.postmarkService.client.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
       To: payload.email,
@@ -170,7 +183,9 @@ export class LeaseInvoicesService {
       TemplateModel: {
         amount: kwdFormat(payload.invoice.amount),
         date: payload.invoice.postAt.toISOString().split('T')[0],
-        trxUrl: `https://aqaratech.com/invoices/${payload.invoice.id}`,
+        trxUrl: origin
+          ? `${origin}/invoices/${payload.invoice.id}`
+          : `https://aqaratech.com/invoices/${payload.invoice.id}`,
         monthYear: new Date(payload.invoice.postAt).toLocaleDateString(
           'en-US',
           {

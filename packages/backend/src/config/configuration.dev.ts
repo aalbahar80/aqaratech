@@ -12,7 +12,8 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
     AUTH0_API_AUDIENCE: 'letand.be/api',
   },
   mailConfig: {
-    POSTMARK_TOKEN: 'aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca',
+    POSTMARK_TOKEN:
+      process.env.POSTMARK_TOKEN || 'aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca',
   },
   debug: {
     DEBUG_NEST: process.env.AQ_DEBUG_NEST == '1',
