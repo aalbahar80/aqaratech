@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
-import { IUser } from 'src/interfaces/user.interface';
+import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import { UpdateOrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -15,7 +15,7 @@ export class OrganizationsService {
     user,
   }: {
     createOrganizationDto: CreateOrganizationDto;
-    user: IUser;
+    user: AuthenticatedUser;
   }) {
     const organization = await this.prisma.organization.create({
       data: {
@@ -26,7 +26,12 @@ export class OrganizationsService {
             {
               roleType: 'ORGADMIN',
               isAccepted: true,
-              user: { connect: { email: user.email } },
+              user: {
+                connectOrCreate: {
+                  where: { email: user.email },
+                  create: { email: user.email },
+                },
+              },
             },
           ],
         },
