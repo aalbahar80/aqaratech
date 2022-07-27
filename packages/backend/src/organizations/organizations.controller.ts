@@ -14,6 +14,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -50,6 +51,7 @@ export class OrganizationsController {
 
   @Post()
   // No need to check abilities here. Any authenticated user can create an organization.
+  @SkipAbilityCheck()
   @ApiCreatedResponse({ type: OrganizationCreatedDto })
   create(
     @User() user: IUser,

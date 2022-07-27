@@ -10,7 +10,10 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Cache } from 'cache-manager';
 import { Request } from 'express';
-import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
+import {
+  IS_PUBLIC_KEY,
+  SKIP_ABILITY_CHECK_KEY,
+} from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -46,9 +49,20 @@ export class AbilitiesGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
-    if (isPublic) {
+
+    const skipAbilityCheck = this.reflector.getAllAndOverride<boolean>(
+      SKIP_ABILITY_CHECK_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (isPublic || skipAbilityCheck) {
+      this.logger.debug(
+        `Public route, skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`,
+      );
       return true;
     }
+
+    this.logger.debug('Enforcing abilities guard');
 
     const rules =
       this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||

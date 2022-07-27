@@ -62,14 +62,14 @@ import { UsersModule } from './users/users.module';
   ],
   controllers: [AppController],
   providers: [
-    AppService,
-    { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
-    { provide: APP_GUARD, useClass: AbilitiesGuard },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
       scope: Scope.REQUEST,
     },
+    AppService,
+    { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
+    { provide: APP_GUARD, useClass: AbilitiesGuard },
     PostmarkService,
   ],
 })

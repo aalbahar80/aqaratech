@@ -1,18 +1,10 @@
-import {
-  CACHE_MANAGER,
-  Inject,
-  Injectable,
-  Logger,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
-import { ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -20,7 +12,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService<EnvironmentConfig>,
     readonly usersService: UsersService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {
     const domain = configService.get('authConfig.AUTH0_DOMAIN', {
       infer: true,
@@ -63,30 +54,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   private readonly logger = new Logger(JwtStrategy.name);
 
   /**
+   * Decorator that serves as an Authorization check only.
+   * It verifies the jwt token, and if it's valid, injects user's email into request.user
+   *
    * @param payload
    * access token as received from Auth0
    */
-  async validate(payload: any): Promise<ValidatedUserDto> {
-    // Auth0 will hit our /user/by-email endpoint on each login to get a UserDto.
-    // It will then place that UserDto in the access token.
-    // Here, we extract that UserDto and place it in the request object,
-    // where it can be accessed by the @Request() decorator (
-
-    /**
-     * @example of getting user in a route handler:
-     * @Get('/profile')
-     * getProfile(
-     *   @Request()
-     *   req: TRequest,
-     * ) {
-     *   console.log(req.user);
-     *   return req.user;
-     * }
-     */
+  async validate(payload: any): Promise<{ email: string }> {
     const apiNamespace = this.configService.get(
       'authConfig.AUTH0_API_NAMESPACE',
       { infer: true },
     );
+
     if (!apiNamespace) {
       throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
     }
@@ -98,22 +77,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new Error('email must be set');
     }
 
-    let user = await this.cacheManager.get<ValidatedUserDto>(email);
+    this.logger.debug(`Validated user with email ${email}`);
 
-    if (user) {
-      this.logger.log(`user ${email} found in cache`);
-    } else {
-      this.logger.log(`user ${email} not found in cache`);
-      try {
-        user = await this.usersService.findOneByEmail(email);
-        await this.cacheManager.set(email, user, { ttl: 60 * 60 * 24 });
-        this.logger.log(`user ${email} added to cache`);
-      } catch (error) {
-        this.logger.error(`user ${email} not found`, error);
-        throw new UnauthorizedException('User not found');
-      }
-    }
-
-    return user;
+    return { email };
   }
 }
