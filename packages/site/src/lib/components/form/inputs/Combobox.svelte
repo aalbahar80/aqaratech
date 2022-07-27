@@ -15,7 +15,7 @@
 	import { Check, Selector } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fuse from 'fuse.js';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, tick } from 'svelte';
 
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
 	export let initialValue: Option['value'] = undefined;
@@ -55,7 +55,8 @@
 	}>();
 
 	/** Clear input/selection then dispatch `select` event. */
-	export const clear = () => {
+	export const clear = async () => {
+		await tick();
 		dispatch('select', { value: null }); // has to be first
 		query = '';
 		selection = undefined;
