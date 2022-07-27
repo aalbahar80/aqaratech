@@ -1,13 +1,13 @@
 <script lang="ts">
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import type { ExpenseTypeDto, PaginatedExpenseDto } from '@self/sdk';
+	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '@self/sdk';
 	import * as d3 from 'd3';
 
 	export let expenses: PaginatedExpenseDto;
-	export let categories: ExpenseTypeDto[];
+	export let categories: ExpenseCategoryDto[];
 
 	const root = d3
-		.stratify<ExpenseTypeDto>()
+		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id.toString())
 		.parentId((d) => {
 			if (d.id === 'root') return null;

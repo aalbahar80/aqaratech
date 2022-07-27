@@ -9,8 +9,8 @@
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
+		ExpenseCategoryDto,
 		ExpenseDto,
-		ExpenseTypeDto,
 		PaginatedPortfolioDto,
 		PaginatedPropertyDto,
 		PaginatedUnitDto,
@@ -27,7 +27,7 @@
 
 	interface Props {
 		formType: 'create' | 'update';
-		expenseTypes: ExpenseTypeDto[];
+		expenseTypes: ExpenseCategoryDto[];
 	}
 
 	interface UpdateForm extends Props {

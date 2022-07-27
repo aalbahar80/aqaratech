@@ -1,8 +1,10 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
-import type { ExpenseTypeDto } from '@self/sdk';
+import type { ExpenseCategoryDto } from '@self/sdk';
 import deepMapValues from 'just-deep-map-values';
 
-export const parseExpenseTypeOptions = (types: ExpenseTypeDto[]): Option[] => {
+export const parseExpenseTypeOptions = (
+	types: ExpenseCategoryDto[],
+): Option[] => {
 	const options = types.map((type) => {
 		const path = getPathToRoot(type, types);
 		return {
@@ -18,7 +20,10 @@ export const parseExpenseTypeOptions = (types: ExpenseTypeDto[]): Option[] => {
 	return options;
 };
 
-const getPathToRoot = (type: ExpenseTypeDto, types: ExpenseTypeDto[]) => {
+const getPathToRoot = (
+	type: ExpenseCategoryDto,
+	types: ExpenseCategoryDto[],
+) => {
 	const pathToRoot: number[] = [];
 	if (type.parentId) {
 		pathToRoot.push(type.parentId);
@@ -32,7 +37,7 @@ const getPathToRoot = (type: ExpenseTypeDto, types: ExpenseTypeDto[]) => {
 };
 
 export interface ExpenseCategoryNode
-	extends Pick<ExpenseTypeDto, 'id' | 'parentId' | 'labelEn'> {
+	extends Pick<ExpenseCategoryDto, 'id' | 'parentId' | 'labelEn'> {
 	items: ExpenseCategoryNode[];
 }
 
@@ -42,8 +47,8 @@ export type Nodes = Record<string, ExpenseCategoryNode>;
  * For use in expense-dnd-tree.
  */
 export const getExpenseTypeTree = (
-	target: ExpenseTypeDto,
-	categories: ExpenseTypeDto[],
+	target: ExpenseCategoryDto,
+	categories: ExpenseCategoryDto[],
 ): ExpenseCategoryNode[] => {
 	const directChildren = categories.filter(
 		(category) => category.parentId === target.id,
@@ -60,9 +65,11 @@ export const getExpenseTypeTree = (
 /**
  * Prepares an expense type tree for db insertion after it has been edited
  */
-export const getUpdatedExpenses = (nodes: Nodes): Partial<ExpenseTypeDto>[] => {
+export const getUpdatedExpenses = (
+	nodes: Nodes,
+): Partial<ExpenseCategoryDto>[] => {
 	// TODO change type to UpdateExpenseTypeDto
-	const newTree: Partial<ExpenseTypeDto>[] = [];
+	const newTree: Partial<ExpenseCategoryDto>[] = [];
 
 	let currentParent: number | null | 'root' = null;
 	const getNewParents = (value: ExpenseCategoryNode, key: string) => {

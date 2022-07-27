@@ -4,10 +4,10 @@
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import type { ExpenseTypeDto, PaginatedExpenseDto } from '@self/sdk';
+	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;
-	export let categories: ExpenseTypeDto[];
+	export let categories: ExpenseCategoryDto[];
 
 	let chartType = 'categoryTreemap';
 </script>
