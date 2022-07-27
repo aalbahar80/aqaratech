@@ -94,6 +94,9 @@
 			}}
 			on:input={(event) => {
 				query = event.currentTarget?.value;
+				if (!query) {
+					dispatch('select', { value: null });
+				}
 				forceOpen = true;
 			}}
 		/>
