@@ -9,6 +9,8 @@ services:
       - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/certificate.pem:/etc/ssl/certs/certificate.pem
+      - $PWD/key.pem:/etc/ssl/private/key.pem
       - caddy_data:/data
       - caddy_config:/config
     networks:
