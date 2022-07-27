@@ -16,6 +16,7 @@ export interface AuthenticatedUser {
 
 /**
  *
+ * AKA `AuthorizedUser`.
  * The type of request.user after it has passed abilities guard.
  * At this point, we have identified the user in our database.
  * And attached that info to the request.user.
