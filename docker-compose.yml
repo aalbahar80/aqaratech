@@ -49,7 +49,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:latest
+    image: postgres:13.5
     networks:
       - aq-network
     environment:
