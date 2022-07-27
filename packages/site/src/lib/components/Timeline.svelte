@@ -4,6 +4,7 @@
 	import { Speakerphone } from '@steeze-ui/heroicons';
 	import { formatRelative } from 'date-fns';
 	import Button from './Button.svelte';
+	import { entityNameMap } from '$lib/constants/names';
 
 	type TimelineEvent = {
 		date: Date;
@@ -36,7 +37,7 @@
 					// phone: '+15005550009', // invalid
 					message: `Use the link below to pay your rent.\n${
 						import.meta.env.BASE_URL
-					}/p/transactions/${trx.id}`,
+					}/${entityNameMap.leaseInvoices.urlName}/${trx.id}`,
 				}),
 			});
 			const data = await res.json();

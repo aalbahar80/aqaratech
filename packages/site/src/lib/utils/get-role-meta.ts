@@ -12,7 +12,7 @@ export const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
 				// { label: 'Units', href: '/units' },
 				{ label: 'Leases', href: '/leases' },
 				{ label: 'Tenants', href: '/tenants' },
-				// { label: 'Transactions', href: '/transactions' },
+				// { label: 'Transactions', href: '/invoices' },
 				// { label: 'Expenses', href: '/expenses' },
 				// { label: 'Maintenance', href: '/maintenanceOrders' },
 			],

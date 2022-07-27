@@ -4,6 +4,7 @@
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
+	import { entityNameMap } from '$lib/constants/names';
 	import { addToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils/classes';
 	import { toUTCFormat } from '$lib/utils/common';
@@ -214,12 +215,12 @@
 													{
 														icon: Eye,
 														label: 'View',
-														href: `/transactions/${invoice.id}`,
+														href: `/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`,
 													},
 													// {
 													// 	icon: PencilAlt,
 													// 	label: 'Edit',
-													// 	href: `/transactions/${invoice.id}/edit`,
+													// 	href: `/${entityNameMap.leaseInvoices.urlName}/${invoice.id}/edit`,
 													// },
 													{
 														icon: ClipboardCopy,

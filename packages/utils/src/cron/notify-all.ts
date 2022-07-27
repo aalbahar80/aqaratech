@@ -38,6 +38,7 @@ const getToken = async () => {
 
 const notifyAll = async (token: string) => {
 	try {
+		// TODO change url to invoices
 		const res = await fetch(`${server}/transactions/notify-all`, {
 			method: "POST",
 			headers: {

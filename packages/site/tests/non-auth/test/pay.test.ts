@@ -33,6 +33,7 @@ const test = base.extend<{ trxId: string }>({
 });
 
 test('indicate payment success', async ({ page, trxId }) => {
+	// TODO change url
 	await page.goto(`/p/transactions/${trxId}`);
 	await Promise.all([
 		page.waitForNavigation(),

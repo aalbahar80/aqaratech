@@ -1,3 +1,4 @@
+import { entityNameMap } from '$lib/constants/names';
 import { getPaymentStatus, markAsPaid } from '$lib/services/myfatoorah';
 import type { RequestHandler } from '@sveltejs/kit';
 import { z } from 'zod';
@@ -14,7 +15,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		return {
 			status: 302,
 			headers: {
-				location: `/p/transactions/${trxId}?success=${isPaid}`,
+				location: `/${entityNameMap.leaseInvoices.urlName}/${trxId}?success=${isPaid}`,
 			},
 		};
 	} catch (error) {
