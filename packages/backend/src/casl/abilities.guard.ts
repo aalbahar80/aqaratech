@@ -15,15 +15,22 @@ import {
   SKIP_ABILITY_CHECK_KEY,
 } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
-import { AppAbility, CaslAbilityFactory } from 'src/casl/casl-ability.factory';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
-import { IUser } from 'src/interfaces/user.interface';
+import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { UsersService } from 'src/users/users.service';
 
 /**
- * Attaches a role's `ability` to the `request.user` object. Handles caching of abilities.
- * Respects the `@Public` decorator.
+ * Receives a user of type AuthenticatedUser as returned by the jwt.strategy.
+ * Uses the user's email to enhance the `request.user` object with additional information,
+ * including the caclulated abilities.
+ * Handles caching of users/abilities.
  *
- * Also checks authz permissions. Consumes metadata from `@CheckAbilities`.
+ * Skipped if either `@Public` or `@SkipAbiltiyCheck` decorators are used.
+ *
+ * Once a user's ability is calculated, it is compared againt metadata from `@CheckAbilities` decorator
+ * to determine if the user has the required abilities.
+ *
  * This decorator is used to check permissions for a specific action on an entity type,
  * not an entity instance. This makes it useful for failing fast if a user is not authorized.
  *
@@ -39,6 +46,7 @@ export class AbilitiesGuard implements CanActivate {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private reflector: Reflector,
     private caslAbilityFactory: CaslAbilityFactory,
+    private usersService: UsersService,
   ) {}
 
   private readonly logger = new Logger(AbilitiesGuard.name);
@@ -70,35 +78,48 @@ export class AbilitiesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest<IRequest>();
     const xRoleId = request.headers[ROLE_HEADER] as string | undefined;
-    const user = request.user as { email: string }; // safe to use email because it is set by jwt.strategy from accessToken
+    const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
-    // Get the cached ability for this user and role.
+    // Get the cached user/role.
     // Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-    const cached = await this.cacheManager.get<AppAbility>(
-      `ability:${user.email}:${xRoleId}`,
+    const cached = await this.cacheManager.get<IUser>(
+      `${authenticatedUser.email}:${xRoleId}`,
     );
 
-    let ability: AppAbility;
+    // let ability: AppAbility;
+    let user: IUser;
 
     if (cached) {
       this.logger.log(
-        `Cache hit: Ability for user ${request.user.email} - RoleId: ${xRoleId}`,
+        `Cache hit: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
-      ability = cached;
+      // ability = cached;
+      user = cached;
     } else {
       this.logger.log(
-        `Cache miss: Ability for user ${request.user.email} - RoleId: ${xRoleId}`,
+        `Cache miss: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
 
-      ability = await this.caslAbilityFactory.defineAbility({
-        email: user.email,
+      // TODO make async
+      const userP = await this.usersService.findOneByEmail(
+        authenticatedUser.email,
+      );
+      const abilityP = await this.caslAbilityFactory.defineAbility({
+        email: authenticatedUser.email,
         xRoleId,
       });
 
+      user = { ...userP, ability: abilityP };
+
       // TODO handle cache ttl/invalidation
-      await this.cacheManager.set(`ability:${user.email}:${xRoleId}`, ability, {
-        ttl: 60 * 60 * 24, // TODO adjust
-      });
+      // TODO use cache key variable
+      await this.cacheManager.set(
+        `${authenticatedUser.email}:${xRoleId}`,
+        user,
+        {
+          ttl: 60 * 60 * 24, // TODO adjust
+        },
+      );
     }
 
     const requestHasParams = Object.keys(request.params).length > 0;
@@ -136,13 +157,13 @@ export class AbilitiesGuard implements CanActivate {
         });
 
         // TODO fix type
-        return ability.can(
+        return user.ability.can(
           rule.action,
           // @ts-ignore
           subject(rule.subject, { ...subjectFields }),
         );
       } else {
-        return ability.can(rule.action, rule.subject);
+        return user.ability.can(rule.action, rule.subject);
       }
     });
 
@@ -153,7 +174,7 @@ export class AbilitiesGuard implements CanActivate {
     if (!isAllowed && cached) {
       // prettier-ignore
       this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
-      await this.cacheManager.del(`ability:${user.email}:${xRoleId}`);
+      await this.cacheManager.del(`${authenticatedUser.email}:${xRoleId}`);
 
       // try again
       // TODO monitor
@@ -164,13 +185,16 @@ export class AbilitiesGuard implements CanActivate {
       `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
     );
 
-    // // attach ability to request, to be used by services for any further permission checks
-    request.user.ability = ability;
+    // attach ability to request, to be used by services for any further permission checks
+    request.user = { ...request.user, ...user, ability: user.ability } as IUser;
 
     return isAllowed;
   }
 }
 
+/**
+ * As received from jwt.strategy
+ */
 interface IRequest extends Request {
-  user: IUser;
+  user: AuthenticatedUser;
 }

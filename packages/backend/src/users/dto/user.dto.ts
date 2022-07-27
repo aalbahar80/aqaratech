@@ -38,15 +38,7 @@ export class UserDto extends AbstractDto implements User {
 }
 
 /**
- * Type to be returned in /users-by-email endpoint,
- * then subsequently extracted by the jwt.strategy.ts
- * and placed in the request object.
- *
- * /users-by-email
- * Flow: user signs in through Auth0
- * -> jwt.strategy.ts extracts user's email from accesstoken places it in the request object
- * -> Abilities.guard calculates the user's `ability` and places it in `request.user.ability` `IUser interface`
- * ----> Applied globally. Respects `@Public` decorator.
+ * Attach helpful info to the userDto for simpler consumption.
  */
 export class ValidatedUserDto extends UserDto {
   @ApiProperty({
