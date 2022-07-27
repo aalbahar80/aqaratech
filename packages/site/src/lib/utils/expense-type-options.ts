@@ -1,39 +1,40 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 import type { ExpenseCategoryDto } from '@self/sdk';
 import deepMapValues from 'just-deep-map-values';
+import * as d3 from 'd3';
 
+/**
+ * Takes a list of expense categories and converts them to a list of options
+ * to be consumed by a select or combobox input.
+ */
 export const parseExpenseTypeOptions = (
-	types: ExpenseCategoryDto[],
+	categories: ExpenseCategoryDto[],
 ): Option[] => {
-	const options = types.map((type) => {
-		const path = getPathToRoot(type, types);
-		return {
-			value: type.id,
-			// prefix the label dashes to make it look like a tree
-			label: `${
-				path.length > 0
-					? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(path.length)
-					: ''
-			} ${type.labelEn}`,
-		};
-	});
-	return options;
-};
+	const root = d3
+		.stratify<ExpenseCategoryDto>()
+		.id((d) => d.id.toString())
+		.parentId((d) => {
+			if (d.id === 'root') return null;
+			if (!d.parentId) return 'root';
+			return categories.find((c) => c.id === d.parentId)?.id.toString();
+		})([{ id: 'root', parentId: null, labelEn: '' }, ...categories]);
 
-const getPathToRoot = (
-	type: ExpenseCategoryDto,
-	types: ExpenseCategoryDto[],
-) => {
-	const pathToRoot: number[] = [];
-	if (type.parentId) {
-		pathToRoot.push(type.parentId);
-		let parent = types.find((t) => t.id === type.parentId);
-		while (parent?.parentId) {
-			pathToRoot.push(parent.parentId);
-			parent = types.find((t) => t.id === parent?.parentId);
-		}
-	}
-	return pathToRoot;
+	const options: Option[] = [];
+
+	root.eachBefore((leaf) => {
+		if (leaf.id === 'root') return;
+		console.log(leaf);
+		const labelPrefix =
+			leaf.depth > 1
+				? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(leaf.depth - 1)
+				: '';
+		options.push({
+			value: leaf.id,
+			label: labelPrefix + '' + leaf.data.labelEn,
+		});
+	});
+
+	return options;
 };
 
 export interface ExpenseCategoryNode
