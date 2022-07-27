@@ -30,8 +30,13 @@ if (
 export const getSession: GetSession = async ({ locals }) => {
 	let isAuthenticated = false;
 	if (locals.idToken) {
-		await validateToken(locals.idToken, 'idToken'); // TODO ensure this throws if it fails
-		isAuthenticated = true;
+		try {
+			await validateToken(locals.idToken, 'idToken'); // TODO ensure this throws if it fails
+			isAuthenticated = true;
+		} catch (e) {
+			console.error(e);
+			Sentry.captureException(e);
+		}
 	}
 	return {
 		user: locals.user,
