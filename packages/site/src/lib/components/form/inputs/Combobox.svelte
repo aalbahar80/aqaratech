@@ -37,22 +37,6 @@
 	// SEARCH
 	let query = '';
 
-	/**
-	 * Helper to make combobox accessible.
-	 */
-	let activeOption: Option | undefined;
-	let autoScroll = true;
-
-	$: {
-		if (!forceOpen) {
-			// activeOption should be cleared when the combobox is closed.
-			// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
-			activeOption = undefined;
-		} else if (query) {
-			activeOption = filtered[0];
-		}
-	}
-
 	const config: ConstructorParameters<typeof Fuse>[1] = {
 		includeScore: true,
 		keys: ['label', 'value'],
@@ -85,6 +69,23 @@
 		selection = option;
 		query = '';
 	};
+
+	// ACCESSIBILITY
+	/**
+	 * Helper to make combobox accessible.
+	 */
+	let activeOption: Option | undefined;
+	let autoScroll = true;
+
+	$: {
+		if (!forceOpen) {
+			// activeOption should be cleared when the combobox is closed.
+			// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
+			activeOption = undefined;
+		} else if (query) {
+			activeOption = filtered[0];
+		}
+	}
 
 	async function handleKeydown(event: KeyboardEvent) {
 		// https://github.com/janosh/svelte-multiselect/blob/main/src/lib/MultiSelect.svelte#L192
