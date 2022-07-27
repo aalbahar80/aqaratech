@@ -12,7 +12,7 @@
 		ListboxOption,
 		ListboxOptions,
 	} from '@rgossiaux/svelte-headlessui';
-	import { Check, Selector } from '@steeze-ui/heroicons';
+	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
@@ -100,16 +100,32 @@
 				forceOpen = true;
 			}}
 		/>
-		<ListboxButton
+		<div
 			class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
 		>
-			<Icon
-				src={Selector}
-				theme="solid"
-				class="h-5 w-5 text-gray-400"
-				aria-hidden="true"
-			/>
-		</ListboxButton>
+			<button
+				class="mr-4"
+				hidden={!selection}
+				on:click|preventDefault={() => {
+					clear();
+				}}
+			>
+				<Icon
+					src={XCircle}
+					theme="solid"
+					class="h-5 w-5 text-gray-400"
+					aria-hidden="true"
+				/>
+			</button>
+			<ListboxButton>
+				<Icon
+					src={Selector}
+					theme="solid"
+					class="h-5 w-5 text-gray-400"
+					aria-hidden="true"
+				/>
+			</ListboxButton>
+		</div>
 
 		{#if (forceOpen || open) && filtered.length}
 			<ListboxOptions
