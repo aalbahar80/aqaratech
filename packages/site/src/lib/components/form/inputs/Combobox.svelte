@@ -21,6 +21,7 @@
 	export let initialValue: Option['value'] = undefined;
 	export let options: Option[];
 	export let disabled = false;
+	export let invalid = false;
 
 	let selection: SelectedOption = options.find(
 		(option) => option.value === initialValue,
@@ -84,6 +85,7 @@
 		<input
 			{disabled}
 			class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+			class:form-invalid={invalid}
 			placeholder="Search..."
 			type="text"
 			value={selection?.label ?? ''}
@@ -149,3 +151,9 @@
 		{/if}
 	</div>
 </Listbox>
+
+<style lang="postcss">
+	.form-invalid {
+		@apply border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500;
+	}
+</style>
