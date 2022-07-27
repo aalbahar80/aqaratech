@@ -97,6 +97,7 @@
 				<div class="space-y-6 pt-6 pb-5">
 					<SelectEntity
 						fields={relationalFields}
+						errors={$errors}
 						on:select={(e) => {
 							setData(e.detail.name, e.detail.value);
 						}}

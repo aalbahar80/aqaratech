@@ -14,6 +14,7 @@
 	 * ```
 	 */
 	export let fields: SelectField<RelOption>[];
+	export let errors: Record<string, any>;
 
 	let portfolioId: any;
 	let propertyId: any;
@@ -46,6 +47,7 @@
 		options={fields[3].options}
 		initialValue={fields[3].value}
 		disabled={fields[3].disabled}
+		invalid={errors.tenantId}
 		on:select={(e) => {
 			dispatch('select', { name: 'tenantId', value: e.detail.value });
 		}}
@@ -58,6 +60,7 @@
 		options={fields[0].options}
 		initialValue={fields[0].value}
 		disabled={fields[0].disabled}
+		invalid={errors.portfolioId}
 		on:select={(e) => {
 			propertySelector?.clear();
 			portfolioId = e.detail.value;
@@ -73,6 +76,7 @@
 		options={filteredProperties}
 		initialValue={fields[1].value}
 		disabled={fields[1].disabled}
+		invalid={errors.propertyId}
 		on:select={(e) => {
 			unitSelector?.clear();
 			propertyId = e.detail.value;
@@ -87,6 +91,7 @@
 		bind:this={unitSelector}
 		options={filteredUnits}
 		disabled={fields[2].disabled}
+		invalid={errors.unitId}
 		on:select={(e) => {
 			dispatch('select', { name: 'unitId', value: e.detail.value });
 		}}
