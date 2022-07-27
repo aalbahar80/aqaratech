@@ -9,8 +9,6 @@ import {
 	unitTypeOptions,
 } from "./constants.js";
 
-faker.setLocale("ar");
-
 // consistent id's for testing
 export const testPassword = "test12";
 export const testOrgEmail = "org.dev@mailthink.net";
@@ -32,9 +30,7 @@ const unitTypeValues = unitTypeOptions
 	.map((u) => u.value);
 
 export const fakeEmail = () => {
-	faker.setLocale("en");
 	const email = faker.internet.email(undefined, undefined, "aqaratech.com");
-	faker.setLocale("ar");
 	return email;
 };
 
