@@ -21,4 +21,7 @@ export const productionEnvironment = (): EnvironmentConfig => ({
     HOST: process.env.MEILISEARCH_HOST,
     API_KEY: process.env.MEILISEARCH_API_KEY,
   },
+  siteConfig: {
+    SITE_ORIGIN: process.env.SITE_ORIGIN,
+  },
 });

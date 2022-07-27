@@ -22,4 +22,7 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
     HOST: process.env.MEILISEARCH_HOST || 'http://localhost:7700',
     API_KEY: process.env.MEILI_MASTER_KEY || 'MASTER_KEY',
   },
+  siteConfig: {
+    SITE_ORIGIN: process.env.SITE_ORIGIN || 'http://localhost:3000',
+  },
 });
