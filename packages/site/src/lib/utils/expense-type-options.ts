@@ -27,8 +27,10 @@ export const parseExpenseTypeOptions = (
 			leaf.depth > 1
 				? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(leaf.depth - 1)
 				: '';
+
+		const value: ExpenseCategoryDto['id'] = Number(leaf.id);
 		options.push({
-			value: leaf.id,
+			value,
 			label: labelPrefix + '' + leaf.data.labelEn,
 		});
 	});
