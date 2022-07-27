@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import { Field } from '$lib/models/classes/Field.class';
@@ -26,7 +26,14 @@
 	entityTitle="roles"
 	formType="create"
 	{basicFields}
-	onCreate={(values) => $page.stuff.api.roles.create({ createRoleDto: values })}
+	onCreate={(values) =>
+		$page.stuff.api.roles.create({
+			createRoleDto: {
+				roleType: predefined.roleType,
+				organizationId: $session.user?.role.organizationId,
+				...values,
+			},
+		})}
 	onSuccess={() => {
 		addSuccessToast(
 			'Member added. An email invitation will be sent to the user.',

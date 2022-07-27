@@ -1,4 +1,5 @@
 import type { EntityTitle } from '$lib/models/types/entity.type';
+import type { RoleTypeEnum } from '@self/sdk';
 
 type SearchParam = string | null;
 type FindIdFromArray = string | undefined;
@@ -7,6 +8,7 @@ export interface PredefinedRole {
 	entity: EntityTitle;
 	entityId: string;
 	idField: string;
+	roleType: RoleTypeEnum;
 }
 
 export interface PredefinedProperty {

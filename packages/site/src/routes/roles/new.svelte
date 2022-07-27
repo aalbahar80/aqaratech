@@ -11,7 +11,16 @@
 		const entity = url.searchParams.get('entity') as EntityTitle | null;
 		const entityId = url.searchParams.get('entityId');
 
-		if (!entity || !entityId) {
+		let roleType: PredefinedRole['roleType'] | undefined = undefined;
+		if (entity === 'organizations') {
+			roleType = 'ORGADMIN';
+		} else if (entity === 'portfolios') {
+			roleType = 'PORTFOLIO';
+		} else if (entity === 'tenants') {
+			roleType = 'TENANT';
+		}
+
+		if (!entity || !entityId || !roleType) {
 			throw new Error('No predefined role in url');
 		}
 
@@ -21,7 +30,7 @@
 			throw new Error('Unable to get idField');
 		}
 
-		let predefined: PredefinedRole = { entity, entityId, idField };
+		let predefined: PredefinedRole = { entity, entityId, idField, roleType };
 
 		return { props: { predefined } };
 	};
