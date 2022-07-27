@@ -1,10 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ServerClient } from 'postmark';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
-export class PostmarkService {
-  constructor() {}
-  // TODO use config to get key
-  client = new ServerClient('aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca'); // test
-  // client = new ServerClient('d107c908-4ed3-45f4-b7e2-c40220cab455'); // prod
+export class PostmarkService extends ServerClient {
+  constructor(readonly configService: ConfigService<EnvironmentConfig>) {
+    const logger = new Logger(PostmarkService.name);
+    const token = configService.get('mailConfig.POSTMARK_TOKEN', {
+      infer: true,
+    });
+
+    if (!token) {
+      logger.warn('Postmark token not found');
+    }
+
+    super(token!);
+  }
 }

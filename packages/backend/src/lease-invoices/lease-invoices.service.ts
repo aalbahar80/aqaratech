@@ -176,7 +176,7 @@ export class LeaseInvoicesService {
       this.logger.warn('No site origin configured');
     }
 
-    return this.postmarkService.client.sendEmailWithTemplate({
+    return this.postmarkService.sendEmailWithTemplate({
       From: 'Aqaratech <notifications@aqaratech.com>',
       To: payload.email,
       TemplateAlias: 'invoice',
