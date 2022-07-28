@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { forceDateToInput } from '$lib/utils/common';
-	import type { generateSchedule } from '$lib/utils/generate-schedule';
+	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { createEventDispatcher } from 'svelte';
 
-	export let errors: any;
-	export let schedule: ReturnType<typeof generateSchedule>;
+	export let errors: any = undefined;
+	let schedule = generateSchedule({
+		scheduleStart: new Date(),
+		amount: 100,
+		count: 12,
+	});
 
 	const dispatch = createEventDispatcher<{
 		countChange: number;
