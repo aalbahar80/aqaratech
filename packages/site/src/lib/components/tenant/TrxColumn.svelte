@@ -3,6 +3,7 @@
 	import Dropdown from '$components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
+	import AddInvoiceButton from '$lib/components/leaseInvoice/addInvoiceButton.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import { addToast } from '$lib/stores/toast';
@@ -94,7 +95,7 @@
 				</div>
 				{#if leaseId && !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
-						<a href={formUrl}> Create new invoice </a>
+						<AddInvoiceButton {leaseId} />
 					</div>
 				{/if}
 			</div>
