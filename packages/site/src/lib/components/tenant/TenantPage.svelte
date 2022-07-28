@@ -6,6 +6,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import RoleList from '$lib/components/role/RoleList.svelte';
+	import { countries } from '$lib/constants/countries';
 	import { create } from '$lib/utils/route-helpers';
 	import type {
 		PaginatedLeaseDto,
@@ -21,10 +22,13 @@
 	export let roles: PaginatedRoleDto;
 
 	$: details = [
-		['Full Name', tenant.fullName],
+		['Name', tenant.fullName],
+		['Label', tenant.label],
 		['Phone', tenant.phone],
 		['Civil id', tenant.civilid],
 		['Passport #', tenant.passportNum],
+		// prettier-ignore
+		['Nationality', countries.find((c) => c.alpha3Code === tenant.nationality)?.name],
 		['Residency #', tenant.residencyNum],
 		['Residency Expiration', tenant.residencyEnd?.toLocaleDateString() ?? ''],
 		['Nationality', tenant.nationality],

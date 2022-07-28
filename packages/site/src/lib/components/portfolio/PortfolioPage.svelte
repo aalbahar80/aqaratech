@@ -18,6 +18,7 @@
 
 	$: details = [
 		['Name', portfolio.fullName],
+		['Label', portfolio.label],
 		['Phone', portfolio.phone],
 		['Civil ID', portfolio.civilid],
 		['Date of birth', portfolio.dob ? toUTCFormat(portfolio.dob) : null],

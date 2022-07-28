@@ -13,6 +13,7 @@
 	export let unit: UnitDto;
 
 	$: details = [
+		['Label', unit.label],
 		['Unit Number', unit.unitNumber],
 		['Type', unit.type],
 		['Market Rent', kwdFormat(unit.marketRent)],

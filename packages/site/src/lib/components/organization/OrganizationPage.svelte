@@ -9,7 +9,7 @@
 
 	$: details = [
 		['Name', organization.fullName],
-		['Phone', organization.label],
+		['Label', organization.label],
 	] as [string, string | null][];
 </script>
 
