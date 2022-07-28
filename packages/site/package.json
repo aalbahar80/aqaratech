@@ -82,5 +82,9 @@
     "vite": "3.0.2",
     "zod": "3.17.10"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@types/debounce": "^1.2.1",
+    "debounce": "^1.2.1"
+  }
 }

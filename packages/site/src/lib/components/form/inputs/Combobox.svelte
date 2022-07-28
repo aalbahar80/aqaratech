@@ -14,6 +14,7 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
@@ -57,12 +58,16 @@
 	};
 	const fuse = new Fuse<Option>(options, config);
 
-	$: filtered = query
-		? fuse.search(query).map((result) => ({
-				value: result.item.value,
-				label: result.item.label,
-		  }))
-		: options;
+	let filtered: Option[] = [];
+	const handleFilter = debounce((q: string) => {
+		filtered = q
+			? fuse.search(q).map((result) => ({
+					value: result.item.value,
+					label: result.item.label,
+			  }))
+			: options;
+	}, 100);
+	$: handleFilter(query);
 
 	// EVENTS
 	const dispatch = createEventDispatcher<{
@@ -238,7 +243,9 @@
 				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				static
 			>
-				{#each filtered as item (item.value)}
+				<!--  Don't render entire filtered results array for perf  -->
+				<!-- TODO handle initialvalue not in slice -->
+				{#each filtered.slice(1, 100) as item (item.value)}
 					<Hoverable let:hovering>
 						<ListboxOption
 							value={item}
