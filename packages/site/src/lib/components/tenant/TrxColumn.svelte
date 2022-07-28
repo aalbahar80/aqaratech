@@ -258,7 +258,7 @@
 
 		<Pagination pagination={invoices.pagination} />
 	{:else}
-		<EmptyState entity="leaseInvoices" {formUrl} />
+		<EmptyState nameMap={entityNameMap.leaseInvoices} {formUrl} />
 	{/if}
 </section>
 

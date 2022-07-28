@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
+	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedDto } from '@self/sdk';
@@ -51,7 +52,7 @@
 		<Table {rows} {modifier} />
 		<AnchorPagination pagination={data.pagination} />
 	{:else}
-		<EmptyState {entity} {formUrl} />
+		<EmptyState nameMap={entityNameMap[entity]} {formUrl} />
 	{/if}
 </div>
 
