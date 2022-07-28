@@ -6,11 +6,7 @@
 	export let portfolio: PortfolioDto;
 </script>
 
-<a
-	href={`/portfolios/${portfolio.id}`}
-	class="block hover:bg-gray-50"
-	sveltekit:prefetch
->
+<a href={`/portfolios/${portfolio.id}`} class="block hover:bg-gray-50">
 	<div class="px-4 py-4 sm:px-6">
 		<!-- <div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">

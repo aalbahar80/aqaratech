@@ -10,7 +10,6 @@
 <!-- <a
 	href={`/organizations/${organization.id}`}
 	class="block hover:bg-gray-50"
-	sveltekit:prefetch
 >
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex items-center justify-between">
