@@ -47,6 +47,8 @@
 							<input
 								id="count"
 								value={schedule.length}
+								min="1"
+								max="100"
 								type="number"
 								on:change={(e) => {
 									schedule = getSchedule(e.currentTarget.valueAsNumber);

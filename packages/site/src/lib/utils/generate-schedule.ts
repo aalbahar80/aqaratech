@@ -12,7 +12,7 @@ export const generateSchedule = ({
 }) => {
 	const newSchedule = [];
 	const start = scheduleStart;
-	for (let bp = 0; bp < Math.min(count, 24); bp++) {
+	for (let bp = 0; bp < count; bp++) {
 		const postAtMS = Date.UTC(
 			start.getUTCFullYear(),
 			start.getUTCMonth() + bp,
