@@ -12,6 +12,7 @@ interface NavOption {
 	href: string;
 	icon?: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
 	external?: boolean;
+	hideOnPopover?: boolean;
 }
 
 export const getNavOptions = (user: App.Session['user']): NavOption[] => [
@@ -39,6 +40,7 @@ export const getNavOptions = (user: App.Session['user']): NavOption[] => [
 					label: 'Settings',
 					href: `/organizations/${user?.role.organizationId}/settings/expense-tree`,
 					icon: HeroiconsSolidCog,
+					hideOnPopover: true,
 				},
 		  ]
 		: []),

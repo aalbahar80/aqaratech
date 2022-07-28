@@ -71,13 +71,15 @@
 
 						<!-- General nav links -->
 						{#each getNavOptions($session.user) as option (option.label)}
-							<a
-								href={option.href}
-								sveltekit:reload={option.external || null}
-								on:click={() => close(null)}
-							>
-								<PopoverItem option={{ label: option.label }} />
-							</a>
+							{#if !option.hideOnPopover}
+								<a
+									href={option.href}
+									sveltekit:reload={option.external || null}
+									on:click={() => close(null)}
+								>
+									<PopoverItem option={{ label: option.label }} />
+								</a>
+							{/if}
 						{/each}
 					</div>
 
