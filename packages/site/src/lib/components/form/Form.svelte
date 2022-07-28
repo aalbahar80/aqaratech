@@ -14,15 +14,17 @@
 	import type { z } from 'zod';
 
 	type Schema = $$Generic<z.ZodTypeAny>;
+	type Updated = $$Generic<{ id: string }>;
+	type Created = $$Generic<{ id: string }>;
 
 	export let schema: Schema;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
 	export let formType: 'create' | 'update';
-	export let onCreate: (values: z.infer<Schema>) => Promise<{ id: string }>;
-	export let onUpdate: (values: z.infer<Schema>) => Promise<{ id: string }>;
-	export let onSuccess: (value: any) => Promise<void> = (value) =>
+	export let onCreate: (values: z.infer<Schema>) => Promise<Created>;
+	export let onUpdate: (values: z.infer<Schema>) => Promise<Updated>;
+	export let onSuccess: (value: Updated | Created) => Promise<void> = (value) =>
 		goto(`/${entityNameMap[entityTitle].urlName}/${value.id}`);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
