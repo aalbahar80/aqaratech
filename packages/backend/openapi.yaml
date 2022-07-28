@@ -2041,7 +2041,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrganizationSettingsDto'
       tags: *ref_21
-  /analytics/incomeByMonth:
+  /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
       parameters:
@@ -2125,8 +2125,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
       tags: &ref_23
-        - analytics
-  /analytics/expensesByMonth:
+        - aggregate
+  /aggregate/expensesByMonth:
     get:
       operationId: getExpensesByMonth
       parameters:
