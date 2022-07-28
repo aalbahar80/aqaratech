@@ -67,5 +67,8 @@ export class SelectField<T = Option> extends Field {
 	constructor(name: string, data?: Partial<SelectField>) {
 		super(name, data);
 		Object.assign(this, data);
+		if (!data?.autoInit) {
+			console.warn(`SelectField ${name} has autoInit set to false.`);
+		}
 	}
 }

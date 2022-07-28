@@ -61,6 +61,7 @@
 						required: true,
 						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
 						combobox: true,
+						autoInit: true,
 						options:
 							formType === 'create'
 								? portfolios!.results.map((portfolio) => ({
@@ -119,6 +120,7 @@
 						required: true,
 						value: data?.breadcrumbs?.tenant.id || predefined?.tenantId,
 						combobox: true,
+						autoInit: true,
 						options:
 							formType === 'create'
 								? tenants!.results.map((tenant) => ({
