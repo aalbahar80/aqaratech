@@ -71,12 +71,15 @@ export const fakeRole = ({
 	userId,
 });
 
-export const fakeOrganization = () => ({
-	id: generateId(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	fullName: faker.company.companyName(),
-});
+export const fakeOrganization = () => {
+	const { fullName, label } = fakePerson();
+	return {
+		id: generateId(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		fullName: faker.company.companyName(),
+	};
+};
 
 export const fakeOrganizationSettings = (orgId: string) => ({
 	id: generateId(),
