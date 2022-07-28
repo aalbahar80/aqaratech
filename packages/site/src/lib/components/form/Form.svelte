@@ -11,15 +11,17 @@
 	import { validator } from '@felte/validator-zod';
 	import { ResponseError } from '@self/sdk';
 	import { createForm } from 'felte';
-	import type { ZodSchema } from 'zod';
+	import type { z } from 'zod';
 
-	export let schema: ZodSchema;
+	type Schema = $$Generic<z.ZodTypeAny>;
+
+	export let schema: Schema;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
 	export let formType: 'create' | 'update';
-	export let onCreate: (values: any) => Promise<{ id: string }>;
-	export let onUpdate: (values: any) => Promise<{ id: string }>;
+	export let onCreate: (values: z.infer<Schema>) => Promise<{ id: string }>;
+	export let onUpdate: (values: z.infer<Schema>) => Promise<{ id: string }>;
 	export let onSuccess: (value: any) => Promise<void> = (value) =>
 		goto(`/${entityNameMap[entityTitle].urlName}/${value.id}`);
 
