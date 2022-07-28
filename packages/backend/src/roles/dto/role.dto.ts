@@ -23,10 +23,10 @@ class RoleRequiredDto {
 
 class RoleOptionalDto {
   @Nanoid()
-  portfolioId: string | null = null;
+  portfolioId: string | null;
 
   @Nanoid()
-  tenantId: string | null = null;
+  tenantId: string | null;
 
   @IsBoolean()
   isAccepted: boolean;

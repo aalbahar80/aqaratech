@@ -18,13 +18,13 @@ class ExpenseCategoryRequiredDto implements Partial<ExpenseCategory> {
 
 class ExpenseCategoryOptionalDto implements Partial<ExpenseCategory> {
   @IsPositive()
-  parentId: number | null = null;
+  parentId: number | null;
 
   @IsString()
-  labelAr: string = '';
+  labelAr: string;
 
   @IsString()
-  description: string | null = null;
+  description: string | null;
 }
 
 export class ExpenseCategoryDto

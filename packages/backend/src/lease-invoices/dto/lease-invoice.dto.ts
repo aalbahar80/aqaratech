@@ -24,16 +24,16 @@ class LeaseInvoiceRequiredDto {
 
 class LeaseInvoiceOptionalDto {
   @IsISO8601()
-  dueAt: Date | null = null;
+  dueAt: Date | null;
 
   @IsISO8601()
-  paidAt: Date | null = null;
+  paidAt: Date | null;
 
   @IsBoolean()
-  isPaid: boolean = false;
+  isPaid: boolean;
 
   @IsString()
-  memo: string | null = null;
+  memo: string | null;
 
   // TODO replace with json field
   @ApiHideProperty()

@@ -35,16 +35,16 @@ class LeaseRequiredDto {
 
 class LeaseOptionalDto {
   @IsNumber()
-  deposit: number = 0;
+  deposit: number;
 
   @IsBoolean()
-  deactivated: boolean = false;
+  deactivated: boolean;
 
   @IsBoolean()
-  notify: boolean = true;
+  notify: boolean;
 
   @IsString()
-  license: string | null = null;
+  license: string | null;
 }
 
 export class LeaseBasicDto extends IntersectionType(

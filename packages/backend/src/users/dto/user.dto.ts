@@ -34,7 +34,7 @@ export class UserDto extends AbstractDto implements User {
 
   @ApiPropertyOptional()
   @IsString()
-  fullName: string | null = null;
+  fullName: string | null;
 }
 
 /**

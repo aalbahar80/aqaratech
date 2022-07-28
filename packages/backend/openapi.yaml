@@ -2243,37 +2243,29 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
         passportNum:
           type: string
           nullable: true
-          default: null
         nationality:
           type: string
           nullable: true
-          default: null
         residencyNum:
           type: string
           nullable: true
-          default: null
         residencyEnd:
           format: date-time
           type: string
           nullable: true
-          default: null
       required:
         - organizationId
         - fullName
@@ -2300,37 +2292,29 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
         passportNum:
           type: string
           nullable: true
-          default: null
         nationality:
           type: string
           nullable: true
-          default: null
         residencyNum:
           type: string
           nullable: true
-          default: null
         residencyEnd:
           format: date-time
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -2483,17 +2467,13 @@ components:
           minimum: 1
         deposit:
           type: number
-          default: 0
         deactivated:
           type: boolean
-          default: false
         notify:
           type: boolean
-          default: true
         license:
           type: string
           nullable: true
-          default: null
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
     TenantOneDto:
@@ -2524,37 +2504,29 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
         passportNum:
           type: string
           nullable: true
-          default: null
         nationality:
           type: string
           nullable: true
-          default: null
         residencyNum:
           type: string
           nullable: true
-          default: null
         residencyEnd:
           format: date-time
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -2580,37 +2552,29 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
         passportNum:
           type: string
           nullable: true
-          default: null
         nationality:
           type: string
           nullable: true
-          default: null
         residencyNum:
           type: string
           nullable: true
-          default: null
         residencyEnd:
           format: date-time
           type: string
           nullable: true
-          default: null
     LeaseDto:
       type: object
       properties:
@@ -2642,17 +2606,13 @@ components:
           minimum: 1
         deposit:
           type: number
-          default: 0
         deactivated:
           type: boolean
-          default: false
         notify:
           type: boolean
-          default: true
         license:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -2722,19 +2682,15 @@ components:
           format: date-time
           type: string
           nullable: true
-          default: null
         paidAt:
           format: date-time
           type: string
           nullable: true
-          default: null
         isPaid:
           type: boolean
-          default: false
         memo:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -2784,11 +2740,9 @@ components:
         portfolioId:
           type: string
           nullable: true
-          default: null
         tenantId:
           type: string
           nullable: true
-          default: null
         isAccepted:
           type: boolean
         isDefault:
@@ -2816,11 +2770,9 @@ components:
         portfolioId:
           type: string
           nullable: true
-          default: null
         tenantId:
           type: string
           nullable: true
-          default: null
         isAccepted:
           type: boolean
         isDefault:
@@ -2846,7 +2798,6 @@ components:
         fullName:
           type: string
           nullable: true
-          default: null
         email:
           type: string
       required:
@@ -2869,19 +2820,15 @@ components:
           format: date-time
           type: string
           nullable: true
-          default: null
         paidAt:
           format: date-time
           type: string
           nullable: true
-          default: null
         isPaid:
           type: boolean
-          default: false
         memo:
           type: string
           nullable: true
-          default: null
       required:
         - amount
         - postAt
@@ -2912,19 +2859,15 @@ components:
           format: date-time
           type: string
           nullable: true
-          default: null
         paidAt:
           format: date-time
           type: string
           nullable: true
-          default: null
         isPaid:
           type: boolean
-          default: false
         memo:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -2949,19 +2892,15 @@ components:
           format: date-time
           type: string
           nullable: true
-          default: null
         paidAt:
           format: date-time
           type: string
           nullable: true
-          default: null
         isPaid:
           type: boolean
-          default: false
         memo:
           type: string
           nullable: true
-          default: null
     CreateLeaseDto:
       type: object
       properties:
@@ -2980,17 +2919,13 @@ components:
           minimum: 1
         deposit:
           type: number
-          default: 0
         deactivated:
           type: boolean
-          default: false
         notify:
           type: boolean
-          default: true
         license:
           type: string
           nullable: true
-          default: null
       required:
         - tenantId
         - unitId
@@ -3026,17 +2961,13 @@ components:
           minimum: 1
         deposit:
           type: number
-          default: 0
         deactivated:
           type: boolean
-          default: false
         notify:
           type: boolean
-          default: true
         license:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -3064,17 +2995,13 @@ components:
           minimum: 1
         deposit:
           type: number
-          default: 0
         deactivated:
           type: boolean
-          default: false
         notify:
           type: boolean
-          default: true
         license:
           type: string
           nullable: true
-          default: null
     CreatePortfolioDto:
       type: object
       properties:
@@ -3087,20 +3014,16 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
       required:
         - organizationId
         - fullName
@@ -3127,20 +3050,16 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -3161,20 +3080,16 @@ components:
         label:
           type: string
           nullable: true
-          default: null
         civilid:
           type: string
           nullable: true
-          default: null
         phone:
           type: string
           nullable: true
-          default: null
         dob:
           format: date-time
           type: string
           nullable: true
-          default: null
     PropertyBreadcrumbsDto:
       type: object
       properties:
@@ -3210,41 +3125,32 @@ components:
         area:
           type: string
           nullable: true
-          default: null
           minLength: 1
           maxLength: 255
         block:
           type: string
           nullable: true
-          default: null
         avenue:
           type: string
           nullable: true
-          default: null
         street:
           type: string
           nullable: true
-          default: null
         number:
           type: string
           nullable: true
-          default: null
         parcel:
           type: string
           nullable: true
-          default: null
         paci:
           type: string
           nullable: true
-          default: null
         cost:
           type: number
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -3333,39 +3239,31 @@ components:
         floor:
           type: number
           nullable: true
-          default: null
         size:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bed:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bath:
           type: number
           nullable: true
-          default: null
           minimum: 1
         marketRent:
           type: number
           nullable: true
-          default: null
           minimum: 1
         type:
           type: string
           nullable: true
-          default: null
         usage:
           type: string
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -3391,41 +3289,32 @@ components:
         area:
           type: string
           nullable: true
-          default: null
           minLength: 1
           maxLength: 255
         block:
           type: string
           nullable: true
-          default: null
         avenue:
           type: string
           nullable: true
-          default: null
         street:
           type: string
           nullable: true
-          default: null
         number:
           type: string
           nullable: true
-          default: null
         parcel:
           type: string
           nullable: true
-          default: null
         paci:
           type: string
           nullable: true
-          default: null
         cost:
           type: number
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
       required:
         - portfolioId
         - area
@@ -3435,41 +3324,32 @@ components:
         area:
           type: string
           nullable: true
-          default: null
           minLength: 1
           maxLength: 255
         block:
           type: string
           nullable: true
-          default: null
         avenue:
           type: string
           nullable: true
-          default: null
         street:
           type: string
           nullable: true
-          default: null
         number:
           type: string
           nullable: true
-          default: null
         parcel:
           type: string
           nullable: true
-          default: null
         paci:
           type: string
           nullable: true
-          default: null
         cost:
           type: number
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
     CreateUnitDto:
       type: object
       properties:
@@ -3482,39 +3362,31 @@ components:
         floor:
           type: number
           nullable: true
-          default: null
         size:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bed:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bath:
           type: number
           nullable: true
-          default: null
           minimum: 1
         marketRent:
           type: number
           nullable: true
-          default: null
           minimum: 1
         type:
           type: string
           nullable: true
-          default: null
         usage:
           type: string
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
       required:
         - propertyId
         - unitNumber
@@ -3528,39 +3400,31 @@ components:
         floor:
           type: number
           nullable: true
-          default: null
         size:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bed:
           type: number
           nullable: true
-          default: null
           minimum: 1
         bath:
           type: number
           nullable: true
-          default: null
           minimum: 1
         marketRent:
           type: number
           nullable: true
-          default: null
           minimum: 1
         type:
           type: string
           nullable: true
-          default: null
         usage:
           type: string
           nullable: true
-          default: null
         label:
           type: string
           nullable: true
-          default: null
     ValidatedUserDto:
       type: object
       properties:
@@ -3578,7 +3442,6 @@ components:
         fullName:
           type: string
           nullable: true
-          default: null
         roles:
           type: array
           items:
@@ -3662,15 +3525,12 @@ components:
         parentId:
           type: number
           nullable: true
-          default: null
           minimum: 1
         labelAr:
           type: string
-          default: ''
         description:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - labelEn
@@ -3756,7 +3616,6 @@ components:
         label:
           type: string
           nullable: true
-          default: null
       required:
         - fullName
     OrganizationDto:
@@ -3780,7 +3639,6 @@ components:
         label:
           type: string
           nullable: true
-          default: null
       required:
         - id
         - createdAt
@@ -3832,15 +3690,12 @@ components:
         parentId:
           type: number
           nullable: true
-          default: null
           minimum: 1
         labelAr:
           type: string
-          default: ''
         description:
           type: string
           nullable: true
-          default: null
     UpdateOrganizationSettingsDto:
       type: object
       properties:

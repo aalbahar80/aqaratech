@@ -14,16 +14,16 @@ class PortfolioRequiredDto {
 
 class PortfolioOptionalDto {
   @IsString()
-  label: string | null = null;
+  label: string | null;
 
   @IsString()
-  civilid: string | null = null;
+  civilid: string | null;
 
   @IsPhoneNumber('KW')
-  phone: string | null = null;
+  phone: string | null;
 
   @IsISO8601()
-  dob: Date | null = null;
+  dob: Date | null;
 }
 
 export class PortfolioDto extends IntersectionType(

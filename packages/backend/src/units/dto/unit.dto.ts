@@ -21,28 +21,28 @@ class UnitRequiredDto {
 
 class UnitOptionalDto {
   @IsNumber()
-  floor: number | null = null;
+  floor: number | null;
 
   @IsPositive()
-  size: number | null = null;
+  size: number | null;
 
   @IsPositive()
-  bed: number | null = null;
+  bed: number | null;
 
   @IsPositive()
-  bath: number | null = null;
+  bath: number | null;
 
   @IsPositive()
-  marketRent: number | null = null;
+  marketRent: number | null;
 
   @IsString()
-  type: string | null = null;
+  type: string | null;
 
   @IsString()
-  usage: string | null = null;
+  usage: string | null;
 
   @IsString()
-  label: string | null = null;
+  label: string | null;
 }
 
 // InputDtos

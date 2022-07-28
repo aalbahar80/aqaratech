@@ -26,28 +26,28 @@ class TenantRequiredDto {
 
 class TenantOptionalDto {
   @IsString()
-  label: string | null = null;
+  label: string | null;
 
   @IsString()
-  civilid: string | null = null;
+  civilid: string | null;
 
   @IsPhoneNumber('KW')
-  phone: string | null = null;
+  phone: string | null;
 
   @IsISO8601()
-  dob: Date | null = null;
+  dob: Date | null;
 
   @IsString()
-  passportNum: string | null = null;
+  passportNum: string | null;
 
   @IsISO31661Alpha3()
-  nationality: string | null = null;
+  nationality: string | null;
 
   @IsString()
-  residencyNum: string | null = null;
+  residencyNum: string | null;
 
   @IsISO8601()
-  residencyEnd: Date | null = null;
+  residencyEnd: Date | null;
 }
 
 export class TenantDto extends IntersectionType(

@@ -22,41 +22,41 @@ class PropertyRequiredDto {
   portfolioId: string;
 
   @Length(1, 255)
-  area: string | null = null;
+  area: string | null;
 }
 
 class PropertyOptionalDto {
   @IsString()
-  block: string | null = null;
+  block: string | null;
 
   @IsString()
-  avenue: string | null = null;
+  avenue: string | null;
 
   @IsString()
-  street: string | null = null;
+  street: string | null;
 
   @IsString()
-  number: string | null = null;
+  number: string | null;
 
   @IsString()
-  parcel: string | null = null;
+  parcel: string | null;
 
   @IsString()
-  paci: string | null = null;
+  paci: string | null;
 
   @IsNumber()
-  cost: number | null = null;
+  cost: number | null;
 
   @IsString()
-  label: string | null = null;
+  label: string | null;
 
   @ApiHideProperty()
   @IsLongitude()
-  long: number | null = null;
+  long: number | null;
 
   @ApiHideProperty()
   @IsLatitude()
-  lat: number | null = null;
+  lat: number | null;
 }
 
 export class PropertyBasicDto extends IntersectionType(
