@@ -10,7 +10,7 @@
 		PaginatedRoleDto,
 		PortfolioDto,
 	} from '@self/sdk';
-	import { PresentationChartBar } from '@steeze-ui/heroicons';
+	import { CreditCard, PresentationChartBar } from '@steeze-ui/heroicons';
 
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
@@ -24,7 +24,18 @@
 	] as [string, string | null][];
 </script>
 
-<Heading title="Portfolio" id={portfolio.id} entity="portfolios">
+<Heading
+	title="Portfolio"
+	id={portfolio.id}
+	entity="portfolios"
+	extraMenuItems={[
+		{
+			icon: CreditCard,
+			label: 'Create expense',
+			href: `/expenses/new?portfolioId=${portfolio.id}`,
+		},
+	]}
+>
 	<svelte:fragment slot="actions">
 		<Button
 			icon={PresentationChartBar}

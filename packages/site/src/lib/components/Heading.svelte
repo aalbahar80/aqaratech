@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
+	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
+	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { Trash } from '@steeze-ui/heroicons';
 
@@ -18,6 +19,7 @@
 	export let id: string;
 	export let entity: EntityTitle;
 	export let icons: IconTooltip[] | undefined = undefined;
+	export let extraMenuItems: MenuOption[] = [];
 
 	let isOpen = false;
 	const openModal = () => {
@@ -62,6 +64,7 @@
 				<div slot="menu">
 					<DropdownMenu
 						options={[
+							...extraMenuItems,
 							{
 								label: 'Delete',
 								icon: Trash,

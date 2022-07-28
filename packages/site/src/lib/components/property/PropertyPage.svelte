@@ -3,6 +3,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import type { PropertyDto } from '@self/sdk';
+	import { CreditCard } from '@steeze-ui/heroicons';
 
 	export let property: PropertyDto;
 
@@ -18,7 +19,18 @@
 	] as [string, string | null][];
 </script>
 
-<Heading title="Property" id={property.id} entity="properties">
+<Heading
+	title="Property"
+	id={property.id}
+	entity="properties"
+	extraMenuItems={[
+		{
+			icon: CreditCard,
+			label: 'Create expense',
+			href: `/expenses/new?portfolioId=${property.portfolioId}&propertyId=${property.id}`,
+		},
+	]}
+>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={property.breadcrumbs} />
 	</svelte:fragment>

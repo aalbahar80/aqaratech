@@ -28,8 +28,9 @@
 			<div class="py-1">
 				{#each options as option (option.label)}
 					{#if option.href && !option.disabled}
-						<MenuItem let:active as="a" href={option.href}>
-							<div
+						<MenuItem let:active as="div">
+							<a
+								href={option.href}
 								class={classes(
 									active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
 									'group flex items-center px-4 py-2 text-sm',
@@ -44,7 +45,7 @@
 									/>
 								{/if}
 								{option.label}
-							</div>
+							</a>
 						</MenuItem>
 					{:else if option.onClick || option.disabled}
 						<MenuItem

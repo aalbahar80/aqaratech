@@ -4,6 +4,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import type { UnitDto } from '@self/sdk';
+	import { CreditCard } from '@steeze-ui/heroicons';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
@@ -42,7 +43,19 @@
 	];
 </script>
 
-<Heading title="Unit" id={unit.id} entity="units" {icons}>
+<Heading
+	title="Unit"
+	id={unit.id}
+	entity="units"
+	{icons}
+	extraMenuItems={[
+		{
+			icon: CreditCard,
+			label: 'Create expense',
+			href: `/expenses/new?portfolioId=${unit.breadcrumbs.portfolio.id}&propertyId=${unit.propertyId}&unitId=${unit.id}`,
+		},
+	]}
+>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={unit.breadcrumbs} />
 	</svelte:fragment>
