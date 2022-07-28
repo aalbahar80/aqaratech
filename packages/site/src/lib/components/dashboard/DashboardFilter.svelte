@@ -50,7 +50,7 @@
 </script>
 
 <div
-	class="sticky top-0 z-10 flex max-w-screen-lg flex-col justify-between gap-3 bg-gray-100 bg-opacity-20 pb-0.5 pt-4 backdrop-blur md:flex-row"
+	class="z-10 flex max-w-screen-lg flex-col justify-between gap-3 bg-gray-100 bg-opacity-20 pb-0.5 pt-4 backdrop-blur md:sticky md:top-0 md:flex-row"
 >
 	<!-- Date Filters -->
 	<div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
