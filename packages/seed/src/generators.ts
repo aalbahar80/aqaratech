@@ -40,7 +40,7 @@ const fakePerson = () => {
 	const middleName = faker.name.middleName(gender);
 	const lastName = faker.name.lastName(gender);
 	const fullName = `${firstName} ${middleName} ${lastName}`;
-	const label = `${firstName} $${lastName}`;
+	const label = `${firstName} ${lastName}`;
 	return { fullName, label };
 };
 
@@ -87,7 +87,7 @@ export const fakeOrganizationSettings = (orgId: string) => ({
 });
 
 export const fakePortfolio = (orgId?: string) => {
-	const { fullName, label } = fakeUser();
+	const { fullName, label } = fakePerson();
 	return {
 		id: generateId(),
 		organizationId: orgId ?? generateId(),
@@ -104,7 +104,7 @@ export const fakePortfolio = (orgId?: string) => {
 };
 
 export const fakeTenant = (orgId?: string) => {
-	const { fullName, label } = fakeUser();
+	const { fullName, label } = fakePerson();
 	return {
 		id: generateId(),
 		organizationId: orgId ?? generateId(),
