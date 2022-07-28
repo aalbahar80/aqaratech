@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
+	import InputWrapper from '$lib/components/form/inputs/InputWrapper.svelte';
 	import type { SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import { createEventDispatcher } from 'svelte';
@@ -44,58 +45,66 @@
 
 <!-- Tenant -->
 {#if fields[3] && fields[3].name === 'tenantId'}
-	<Combobox
-		options={fields[3].options}
-		initialValue={fields[3].value}
-		disabled={fields[3].disabled}
-		invalid={errors.tenantId}
-		on:select={(e) => {
-			dispatch('select', { name: 'tenantId', value: e.detail.value });
-		}}
-	/>
+	<InputWrapper field={fields[3]}>
+		<Combobox
+			options={fields[3].options}
+			initialValue={fields[3].value}
+			disabled={fields[3].disabled}
+			invalid={errors.tenantId}
+			on:select={(e) => {
+				dispatch('select', { name: 'tenantId', value: e.detail.value });
+			}}
+		/>
+	</InputWrapper>
 {/if}
 
 <!-- Portfolio -->
 {#if fields[0] && fields[0].name === 'portfolioId'}
-	<Combobox
-		options={fields[0].options}
-		initialValue={fields[0].value}
-		disabled={fields[0].disabled}
-		invalid={errors.portfolioId}
-		on:select={(e) => {
-			propertySelector?.clear();
-			portfolioId = e.detail.value;
-			dispatch('select', { name: 'portfolioId', value: e.detail.value });
-		}}
-	/>
+	<InputWrapper field={fields[0]}>
+		<Combobox
+			options={fields[0].options}
+			initialValue={fields[0].value}
+			disabled={fields[0].disabled}
+			invalid={errors.portfolioId}
+			on:select={(e) => {
+				propertySelector?.clear();
+				portfolioId = e.detail.value;
+				dispatch('select', { name: 'portfolioId', value: e.detail.value });
+			}}
+		/>
+	</InputWrapper>
 {/if}
 
 <!-- Property -->
 {#if fields[1] && fields[1].name === 'propertyId'}
-	<Combobox
-		bind:this={propertySelector}
-		options={filteredProperties}
-		initialValue={fields[1].value}
-		disabled={fields[1].disabled}
-		invalid={errors.propertyId}
-		on:select={(e) => {
-			unitSelector?.clear();
-			propertyId = e.detail.value;
-			dispatch('select', { name: 'propertyId', value: e.detail.value });
-		}}
-	/>
+	<InputWrapper field={fields[1]}>
+		<Combobox
+			bind:this={propertySelector}
+			options={filteredProperties}
+			initialValue={fields[1].value}
+			disabled={fields[1].disabled}
+			invalid={errors.propertyId}
+			on:select={(e) => {
+				unitSelector?.clear();
+				propertyId = e.detail.value;
+				dispatch('select', { name: 'propertyId', value: e.detail.value });
+			}}
+		/>
+	</InputWrapper>
 {/if}
 
 <!-- Unit -->
 {#if fields[2] && fields[2].name === 'unitId'}
-	<Combobox
-		bind:this={unitSelector}
-		options={filteredUnits}
-		initialValue={fields[2].value}
-		disabled={fields[2].disabled}
-		invalid={errors.unitId}
-		on:select={(e) => {
-			dispatch('select', { name: 'unitId', value: e.detail.value });
-		}}
-	/>
+	<InputWrapper field={fields[2]}>
+		<Combobox
+			bind:this={unitSelector}
+			options={filteredUnits}
+			initialValue={fields[2].value}
+			disabled={fields[2].disabled}
+			invalid={errors.unitId}
+			on:select={(e) => {
+				dispatch('select', { name: 'unitId', value: e.detail.value });
+			}}
+		/>
+	</InputWrapper>
 {/if}
