@@ -17,6 +17,7 @@
 	export let roles: PaginatedRoleDto;
 
 	$: details = [
+		...(portfolio.label ? [['Label', portfolio.label]] : []),
 		['Name', portfolio.fullName],
 		['Label', portfolio.label],
 		['Phone', portfolio.phone],

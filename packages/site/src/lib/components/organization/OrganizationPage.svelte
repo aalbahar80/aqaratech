@@ -9,7 +9,7 @@
 
 	$: details = [
 		['Name', organization.fullName],
-		['Label', organization.label],
+		...(organization.label ? [['Label', organization.label]] : []),
 	] as [string, string | null][];
 </script>
 

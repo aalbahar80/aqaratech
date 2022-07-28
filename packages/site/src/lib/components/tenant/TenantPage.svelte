@@ -23,6 +23,7 @@
 
 	$: details = [
 		['Name', tenant.fullName],
+		...(tenant.label ? [['Label', tenant.label]] : []),
 		['Label', tenant.label],
 		['Phone', tenant.phone],
 		['Civil id', tenant.civilid],

@@ -8,7 +8,7 @@
 	export let property: PropertyDto;
 
 	$: details = [
-		['Label', property.label],
+		...(property.label ? [['Label', property.label]] : []),
 		['Address', property.breadcrumbs.property.label],
 		['Area', property.area],
 		['Block', property.block],
