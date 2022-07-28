@@ -17,6 +17,15 @@
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
+	// NOTE consider not using headlessui for this component.
+	// Specifically, the ListBoxButton could interfere with our
+	// accessibility behavior.
+	//
+	// See: `open` vs `forceOpen`, where headlessui's `open` is only
+	// triggered by clicking it, whereas our `forceOpen` can be
+	// triggered by clicking anywhere on the component,
+	// pressing the down arrow, or by clicking enter.
+
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
 	export let initialValue: Option['value'] = undefined;
 	export let options: Option[];
@@ -172,11 +181,6 @@
 	}}
 	{disabled}
 >
-	<pre>{JSON.stringify(open, null, 2)}</pre>
-	<pre>{JSON.stringify(forceOpen, null, 2)}</pre>
-	<pre>{JSON.stringify(query, null, 2)}</pre>
-	<pre>{JSON.stringify(activeOption, null, 2)}</pre>
-	<pre>{JSON.stringify(selection, null, 2)}</pre>
 	<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
 		>Assigned to</ListboxLabel
 	> -->
@@ -203,14 +207,6 @@
 					dispatch('select', { value: null });
 				}
 				forceOpen = true;
-			}}
-			on:blur={() => {
-				console.log('blur');
-				// if (activeOption) {
-				// 	select(activeOption);
-				// } else {
-				// 	clear();
-				// }
 			}}
 		/>
 		<div
