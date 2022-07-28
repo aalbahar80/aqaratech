@@ -46,7 +46,7 @@
 	/**
 	 * Bound to the text input's value to communicate to the user what has been selected.
 	 */
-	let inputValue = selection?.label || '';
+	let inputValue = selection?.label.trim() || '';
 
 	// SEARCH
 	let query = '';
@@ -74,6 +74,7 @@
 		await tick();
 		dispatch('select', { value: null }); // has to be first
 		query = '';
+		inputValue = '';
 		selection = undefined;
 	};
 
@@ -83,6 +84,8 @@
 		selection = option;
 		query = '';
 		inputValue = selection?.label.trim() || '';
+		forceOpen = false;
+		activeOption = undefined;
 	};
 
 	// ACCESSIBILITY
@@ -112,8 +115,6 @@
 			// TODO can be deduped with 'enter' key logic
 			if (activeOption) {
 				select(activeOption);
-				forceOpen = false;
-				activeOption = undefined;
 			} else {
 				forceOpen = false;
 			}
@@ -123,8 +124,6 @@
 
 			if (activeOption && forceOpen) {
 				select(activeOption);
-				forceOpen = false;
-				activeOption = undefined;
 			} else if (forceOpen) {
 				forceOpen = false;
 			} else {
@@ -175,9 +174,7 @@
 	value={selection}
 	let:open
 	on:change={(e) => {
-		selection = e.detail;
-		dispatch('select', { value: selection?.value });
-		forceOpen = false;
+		select(e.detail);
 	}}
 	{disabled}
 >
@@ -204,7 +201,7 @@
 				// expense categories use leading spaces to indicate hierarchy
 				query = event.currentTarget?.value.trim();
 				if (!query) {
-					dispatch('select', { value: null });
+					clear();
 				}
 				forceOpen = true;
 			}}
