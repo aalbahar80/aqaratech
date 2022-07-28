@@ -34,13 +34,22 @@ export const fakeEmail = () => {
 	return email;
 };
 
+const fakePerson = () => {
+	const gender = Math.random() > 0.5 ? "male" : "female";
+	const firstName = faker.name.firstName(gender);
+	const middleName = faker.name.middleName(gender);
+	const lastName = faker.name.lastName(gender);
+	const fullName = `${firstName} ${middleName} ${lastName}`;
+	const label = `${firstName} $${lastName}`;
+	return { fullName, label };
+};
+
 export const fakeUser = () => {
-	const fullName = faker.name.firstName() + " " + faker.name.lastName();
 	return {
 		id: generateId(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
-		fullName,
+		fullName: fakePerson().fullName,
 		email: fakeEmail(),
 	};
 };
@@ -78,14 +87,14 @@ export const fakeOrganizationSettings = (orgId: string) => ({
 });
 
 export const fakePortfolio = (orgId?: string) => {
-	const fullName = faker.name.firstName() + " " + faker.name.lastName();
+	const { fullName, label } = fakeUser();
 	return {
 		id: generateId(),
 		organizationId: orgId ?? generateId(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		label: fullName,
+		label,
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
@@ -95,14 +104,14 @@ export const fakePortfolio = (orgId?: string) => {
 };
 
 export const fakeTenant = (orgId?: string) => {
-	const fullName = faker.name.firstName() + " " + faker.name.lastName();
+	const { fullName, label } = fakeUser();
 	return {
 		id: generateId(),
 		organizationId: orgId ?? generateId(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		label: fullName,
+		label,
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
