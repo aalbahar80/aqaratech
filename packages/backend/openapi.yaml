@@ -3845,7 +3845,9 @@ components:
       type: object
       properties:
         expenseCategoryTree:
-          $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - expenseCategoryTree
     ByMonthDto:

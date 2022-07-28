@@ -19,5 +19,5 @@ export class UpdateOrganizationSettingsDto
   @ValidateNested({ each: true })
   @Type(() => UpdateExpenseCategoryDto)
   //@ts-ignore: Index signature for type 'string' is missing in type 'ExpenseCategoryDto'.ts(2416)
-  expenseCategoryTree: UpdateExpenseCategoryDto;
+  expenseCategoryTree: UpdateExpenseCategoryDto[];
 }

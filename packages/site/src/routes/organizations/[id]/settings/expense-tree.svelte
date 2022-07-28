@@ -8,6 +8,7 @@
 		getUpdatedExpenses,
 		type Nodes,
 	} from '$lib/utils/expense-type-options';
+	import type { UpdateOrganizationSettingsDto } from '@self/sdk';
 	import { Check } from '@steeze-ui/heroicons';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -44,16 +45,11 @@
 	});
 
 	// $: console.log(nodes);
-</script>
 
-<Button
-	icon={Check}
-	text="Save"
-	as="button"
-	class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-	on:click={async () => {
-		const updated = getUpdatedExpenses(nodes);
-		console.log({ updated }, 'expense-tree.svelte ~ 54');
+	const saveTree = async () => {
+		const updated: UpdateOrganizationSettingsDto['expenseCategoryTree'] =
+			getUpdatedExpenses(nodes);
+		console.debug({ originalExpenseTree: updated });
 		try {
 			const saved = await $page.stuff.api.organizations.updateSettings({
 				id: $page.params.id,
@@ -61,13 +57,21 @@
 					expenseCategoryTree: updated,
 				},
 			});
-			console.log({ saved }, 'expense-tree.svelte ~ 55');
+			console.debug({ savedExpenseTree: saved });
 			addSuccessToast('Expense tree saved');
 		} catch (e) {
 			handleApiError(e);
 			console.error(e);
 		}
-	}}
+	};
+</script>
+
+<Button
+	icon={Check}
+	text="Save"
+	as="button"
+	class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+	on:click={saveTree}
 >
 	<Fa6SolidFloppyDisk />
 </Button>
