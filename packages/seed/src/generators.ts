@@ -11,7 +11,7 @@ import {
 
 // consistent id's for testing
 export const testPassword = "test12";
-export const testOrgEmail = "org.dev@mailthink.net";
+export const testOrgEmail = "org.demo@mailthink.net";
 export const testOrgId = "hdmp5pje1a7o";
 export const testPortfolioEmail = "client.dev@mailthink.net";
 export const testPortfolioId = "portfolio-1a";
