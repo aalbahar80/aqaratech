@@ -1,5 +1,5 @@
 import {
-  ApiHideProperty,
+  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
@@ -16,6 +16,7 @@ class LeaseInvoiceRequiredDto {
   amount: number;
 
   @IsISO8601()
+  @ApiProperty({ type: 'string' })
   postAt: Date;
 
   @Nanoid()
@@ -24,9 +25,11 @@ class LeaseInvoiceRequiredDto {
 
 class LeaseInvoiceOptionalDto {
   @IsISO8601()
+  @ApiProperty({ type: 'string' })
   dueAt: Date | null;
 
   @IsISO8601()
+  @ApiProperty({ type: 'string' })
   paidAt: Date | null;
 
   @IsBoolean()
@@ -55,6 +58,11 @@ export class CreateLeaseInvoiceDto
     PartialType(LeaseInvoiceOptionalDto),
   )
   implements Partial<LeaseInvoice> {}
+
+export class CreateManyLeaseInvoicesDto extends OmitType(
+  CreateLeaseInvoiceDto,
+  ['leaseId'],
+) {}
 
 export class UpdateLeaseInvoiceDto extends PartialType(
   OmitType(CreateLeaseInvoiceDto, ['leaseId']),

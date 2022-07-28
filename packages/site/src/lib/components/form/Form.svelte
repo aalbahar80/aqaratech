@@ -56,7 +56,8 @@
 
 		onSubmit: async (original) => {
 			console.debug({ originalFormValues: original });
-			const values = schema.passthrough().parse(original); // let zod handle date parsing ("" to null)
+			// const values = schema.passthrough().parse(original); // can be problematic with `refine()` enhancements.
+			const values = schema.parse(original); // let zod handle date parsing ("" to null)
 			console.debug({ parsedFormValues: values });
 			let value: any;
 			if (formType === 'update') {

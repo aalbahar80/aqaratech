@@ -28,8 +28,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
-  CreateLeaseInvoiceDto,
-  LeaseInvoiceBasicDto,
+  CreateManyLeaseInvoicesDto,
   LeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -115,25 +114,16 @@ export class LeasesController {
   }
 
   @Post('/:id/invoices')
-  @CheckAbilities({
-    action: Action.Create,
-    subject: 'LeaseInvoice',
-    skipParamCheck: true,
-  })
-  @ApiOkResponse({ type: LeaseInvoiceBasicDto, isArray: true })
-  @ApiBody({ type: CreateLeaseInvoiceDto, isArray: true })
+  @CheckAbilities({ action: Action.Update, subject: 'Lease' })
+  @ApiOkResponse({ type: LeaseBasicDto })
+  @ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
   createInvoices(
-    @User() user: IUser,
     @Param('id') id: string,
-    @Body() createLeaseInvoiceDto: CreateLeaseInvoiceDto[],
-  ): Promise<LeaseInvoiceBasicDto[]> {
-    return Promise.all(
-      createLeaseInvoiceDto.map((invoice) => {
-        return this.leaseInvoicesService.create({
-          user,
-          createLeaseInvoiceDto: { ...invoice, leaseId: id },
-        });
-      }),
-    );
+    @Body() createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[],
+  ): Promise<LeaseBasicDto> {
+    return this.leasesService.createInvoices({
+      leaseId: id,
+      createManyLeaseInvoicesDto,
+    });
   }
 }

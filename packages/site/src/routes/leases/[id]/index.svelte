@@ -9,11 +9,11 @@
 		stuff,
 		url,
 	}: LoadEvent<{ id: string }>) => {
-		const { page, take } = parseParams(url);
+		const { page } = parseParams(url);
 
 		const [lease, invoices] = await Promise.all([
 			stuff.api!.leases.findOne({ id: params.id }),
-			stuff.api!.leases.findInvoices({ id: params.id, page, take }),
+			stuff.api!.leases.findInvoices({ id: params.id, page, take: 100 }),
 		]);
 
 		return { props: { lease, invoices } };

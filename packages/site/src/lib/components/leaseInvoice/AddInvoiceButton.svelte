@@ -5,7 +5,7 @@
 	import { create } from '$lib/utils/route-helpers';
 	import { DocumentDuplicate } from '@steeze-ui/heroicons';
 
-	export let leaseId: string | undefined = undefined;
+	export let leaseId: string;
 </script>
 
 <Dropdown>
@@ -30,7 +30,7 @@
 				{
 					label: 'Add multiple invoices',
 					icon: DocumentDuplicate,
-					href: '/lease-invoices/add-multiple',
+					href: `/invoices/new-multiple?leaseId=${leaseId}`,
 				},
 			]}
 		/>

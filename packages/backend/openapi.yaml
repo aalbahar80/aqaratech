@@ -866,24 +866,20 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+                $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
       responses:
         '200':
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                $ref: '#/components/schemas/LeaseBasicDto'
         '201':
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                $ref: '#/components/schemas/LeaseBasicDto'
       tags: *ref_7
   /portfolios:
     post:
@@ -2668,24 +2664,21 @@ components:
           format: date-time
           type: string
           readOnly: true
+        postAt:
+          type: string
+        dueAt:
+          type: string
+          nullable: true
+        paidAt:
+          type: string
+          nullable: true
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
         amount:
           type: number
           minimum: 1
-        postAt:
-          format: date-time
-          type: string
         leaseId:
           type: string
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
         isPaid:
           type: boolean
         memo:
@@ -2698,12 +2691,12 @@ components:
         - id
         - createdAt
         - updatedAt
-        - breadcrumbs
-        - amount
         - postAt
-        - leaseId
         - dueAt
         - paidAt
+        - breadcrumbs
+        - amount
+        - leaseId
         - isPaid
         - memo
         - mfPaymentId
@@ -2812,22 +2805,19 @@ components:
     CreateLeaseInvoiceDto:
       type: object
       properties:
-        amount:
-          type: number
-          minimum: 1
         postAt:
-          format: date-time
-          type: string
-        leaseId:
           type: string
         dueAt:
-          format: date-time
           type: string
           nullable: true
         paidAt:
-          format: date-time
           type: string
           nullable: true
+        amount:
+          type: number
+          minimum: 1
+        leaseId:
+          type: string
         isPaid:
           type: boolean
         memo:
@@ -2837,8 +2827,8 @@ components:
           type: string
           nullable: true
       required:
-        - amount
         - postAt
+        - amount
         - leaseId
     LeaseInvoiceBasicDto:
       type: object
@@ -2854,22 +2844,19 @@ components:
           format: date-time
           type: string
           readOnly: true
-        amount:
-          type: number
-          minimum: 1
         postAt:
-          format: date-time
-          type: string
-        leaseId:
           type: string
         dueAt:
-          format: date-time
           type: string
           nullable: true
         paidAt:
-          format: date-time
           type: string
           nullable: true
+        amount:
+          type: number
+          minimum: 1
+        leaseId:
+          type: string
         isPaid:
           type: boolean
         memo:
@@ -2882,31 +2869,28 @@ components:
         - id
         - createdAt
         - updatedAt
-        - amount
         - postAt
-        - leaseId
         - dueAt
         - paidAt
+        - amount
+        - leaseId
         - isPaid
         - memo
         - mfPaymentId
     UpdateLeaseInvoiceDto:
       type: object
       properties:
-        amount:
-          type: number
-          minimum: 1
         postAt:
-          format: date-time
           type: string
         dueAt:
-          format: date-time
           type: string
           nullable: true
         paidAt:
-          format: date-time
           type: string
           nullable: true
+        amount:
+          type: number
+          minimum: 1
         isPaid:
           type: boolean
         memo:
@@ -3016,6 +3000,31 @@ components:
         license:
           type: string
           nullable: true
+    CreateManyLeaseInvoicesDto:
+      type: object
+      properties:
+        postAt:
+          type: string
+        dueAt:
+          type: string
+          nullable: true
+        paidAt:
+          type: string
+          nullable: true
+        amount:
+          type: number
+          minimum: 1
+        isPaid:
+          type: boolean
+        memo:
+          type: string
+          nullable: true
+        mfPaymentId:
+          type: string
+          nullable: true
+      required:
+        - postAt
+        - amount
     CreatePortfolioDto:
       type: object
       properties:

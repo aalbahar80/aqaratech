@@ -9,6 +9,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
+import { CreateManyLeaseInvoicesDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import {
   CreateLeaseDto,
   LeaseBreadcrumbsDto,
@@ -117,6 +118,27 @@ export class LeasesService {
 
   remove({ id }: { id: string }) {
     return this.prisma.lease.delete({ where: { id } });
+  }
+
+  // ::: INVOICES :::
+
+  async createInvoices({
+    leaseId,
+    createManyLeaseInvoicesDto,
+  }: {
+    leaseId: string;
+    createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[];
+  }) {
+    return this.prisma.lease.update({
+      where: { id: leaseId },
+      data: {
+        leaseInvoices: {
+          createMany: {
+            data: createManyLeaseInvoicesDto,
+          },
+        },
+      },
+    });
   }
 
   // ::: HELPERS :::
