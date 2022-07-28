@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page, session } from '$app/stores';
+	import { classes } from '$lib/utils/classes';
 	import type { BreadcrumbsDto } from '@self/sdk';
 	import * as R from 'remeda';
 
@@ -28,6 +29,7 @@
 	<nav class="flex" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
 			{#each truthyCrumbs as [name, crumb], idx}
+				{@const currentPage = $page.url.pathname === crumb.href}
 				{#if crumb}
 					<li>
 						<div class="flex items-center">
@@ -43,8 +45,13 @@
 								</svg>
 							{/if}
 							<a
-								href={crumb?.href}
-								class="text-sm font-medium text-gray-500 hover:text-gray-700"
+								href={currentPage ? null : crumb.href}
+								class={classes(
+									'text-sm font-medium',
+									currentPage
+										? 'text-indigo-600 font-semibold'
+										: 'text-gray-500 hover:text-gray-700',
+								)}
 								class:ml-4={idx !== 0}
 								sveltekit:prefetch
 							>
