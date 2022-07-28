@@ -1,14 +1,22 @@
 <script lang="ts">
+	import { session } from '$app/stores';
 	import type { BreadcrumbsDto } from '@self/sdk';
 	import * as R from 'remeda';
 
 	export let crumbs: Partial<BreadcrumbsDto> | undefined;
 
+	const tenantCrumbs = ['lease', 'invoice'];
+
 	// api client fills undefined crumbs (expenses)
 	$: truthyCrumbs = crumbs
 		? R.pipe(
 				R.toPairs(crumbs),
-				R.filter((c) => !R.isNil(c[1])),
+				R.filter((c) => {
+					if ($session.user?.role.roleType === 'TENANT') {
+						return tenantCrumbs.includes(c[0]);
+					}
+					return !R.isNil(c[1]);
+				}),
 				(c) => {
 					return c;
 				},
