@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
+	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
-	import { Field } from '$lib/models/classes/Field.class';
+	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/tenant.schema';
 	import type { TenantDto } from '@self/sdk';
@@ -56,8 +57,14 @@
 			label: 'Passport Number',
 			value: data?.passportNum,
 		}),
-		new Field('nationality', {
+		new SelectField('nationality', {
 			value: data?.nationality,
+			options: countries.map((country) => ({
+				label: country.name,
+				value: country.alpha3Code,
+			})),
+			autoInit: true,
+			combobox: true,
 		}),
 		new Field('residencyNum', {
 			label: 'Residency Number',

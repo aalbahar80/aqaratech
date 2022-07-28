@@ -111,7 +111,7 @@ export const fakeTenant = (orgId?: string) => {
 		passportNum: faker.datatype
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
-		nationality: faker.address.countryCode(),
+		nationality: faker.address.countryCode("alpha-3"),
 		residencyNum: faker.datatype
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
