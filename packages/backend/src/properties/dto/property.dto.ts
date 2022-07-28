@@ -1,5 +1,4 @@
 import {
-  ApiHideProperty,
   IntersectionType,
   OmitType,
   PartialType,
@@ -50,11 +49,9 @@ class PropertyOptionalDto {
   @IsString()
   label: string | null;
 
-  @ApiHideProperty()
   @IsLongitude()
   long: number | null;
 
-  @ApiHideProperty()
   @IsLatitude()
   lat: number | null;
 }

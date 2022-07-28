@@ -36,7 +36,7 @@ class LeaseInvoiceOptionalDto {
   memo: string | null;
 
   // TODO replace with json field
-  @ApiHideProperty()
+  @IsString()
   mfPaymentId: string | null;
 }
 

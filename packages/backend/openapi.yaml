@@ -2691,6 +2691,9 @@ components:
         memo:
           type: string
           nullable: true
+        mfPaymentId:
+          type: string
+          nullable: true
       required:
         - id
         - createdAt
@@ -2703,6 +2706,7 @@ components:
         - paidAt
         - isPaid
         - memo
+        - mfPaymentId
     PaidStatusEnum:
       type: string
       enum:
@@ -2829,6 +2833,9 @@ components:
         memo:
           type: string
           nullable: true
+        mfPaymentId:
+          type: string
+          nullable: true
       required:
         - amount
         - postAt
@@ -2868,6 +2875,9 @@ components:
         memo:
           type: string
           nullable: true
+        mfPaymentId:
+          type: string
+          nullable: true
       required:
         - id
         - createdAt
@@ -2879,6 +2889,7 @@ components:
         - paidAt
         - isPaid
         - memo
+        - mfPaymentId
     UpdateLeaseInvoiceDto:
       type: object
       properties:
@@ -2899,6 +2910,9 @@ components:
         isPaid:
           type: boolean
         memo:
+          type: string
+          nullable: true
+        mfPaymentId:
           type: string
           nullable: true
     CreateLeaseDto:
@@ -3151,6 +3165,12 @@ components:
         label:
           type: string
           nullable: true
+        long:
+          type: number
+          nullable: true
+        lat:
+          type: number
+          nullable: true
       required:
         - id
         - createdAt
@@ -3166,6 +3186,8 @@ components:
         - paci
         - cost
         - label
+        - long
+        - lat
     UnitBreadcrumbsDto:
       type: object
       properties:
@@ -3315,6 +3337,12 @@ components:
         label:
           type: string
           nullable: true
+        long:
+          type: number
+          nullable: true
+        lat:
+          type: number
+          nullable: true
       required:
         - portfolioId
         - area
@@ -3349,6 +3377,12 @@ components:
           nullable: true
         label:
           type: string
+          nullable: true
+        long:
+          type: number
+          nullable: true
+        lat:
+          type: number
           nullable: true
     CreateUnitDto:
       type: object
@@ -3489,6 +3523,9 @@ components:
         propertyId:
           type: string
           nullable: true
+        maintenanceOrderId:
+          type: string
+          nullable: true
         categoryId:
           type: number
           nullable: true
@@ -3571,6 +3608,9 @@ components:
         propertyId:
           type: string
           nullable: true
+        maintenanceOrderId:
+          type: string
+          nullable: true
         categoryId:
           type: number
           nullable: true
@@ -3584,6 +3624,7 @@ components:
         - amount
         - postAt
         - memo
+        - maintenanceOrderId
         - categoryId
     UpdateExpenseDto:
       type: object
@@ -3601,6 +3642,9 @@ components:
           type: string
           nullable: true
         propertyId:
+          type: string
+          nullable: true
+        maintenanceOrderId:
           type: string
           nullable: true
         categoryId:

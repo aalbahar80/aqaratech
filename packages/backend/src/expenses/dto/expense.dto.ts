@@ -38,7 +38,8 @@ class ExpenseOptionalDto {
   propertyId?: string | null;
 
   // TODO remove from schema
-  @ApiHideProperty()
+  @Nanoid()
+  @IsOptional()
   maintenanceOrderId: string | null;
 
   // TODO use category name/prisma connect & set default here?
