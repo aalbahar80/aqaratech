@@ -10,8 +10,7 @@
 	$: details = [
 		['Post Date', toUTCFormat(expense.postAt)],
 		['Amount', kwdFormat(expense.amount)],
-		// TODO fix
-		// ['Category', `${expense.category?.en} - ${expense.category?.ar}`],
+		['Category', expense.expenseType?.labelEn],
 		['Memo', expense.memo],
 	] as [string, string | null][];
 </script>
