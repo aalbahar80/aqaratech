@@ -131,7 +131,6 @@
 			label: 'Post Date',
 		}),
 		new SelectField('categoryId', {
-			required: true,
 			options: parseExpenseTypeOptions(expenseTypes),
 			value: data?.categoryId || '',
 			combobox: true,
