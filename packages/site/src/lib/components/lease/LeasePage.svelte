@@ -49,10 +49,16 @@
 			icon={Refresh}
 			text="Renew"
 			as="a"
-			href={create({
-				entity: 'leases',
-				predefined: new Map([['leaseId', lease.id]]),
-			})}
+			href={(function () {
+				const base = create({ entity: 'leases' });
+				const searchParams = new URLSearchParams({
+					portfolioId: lease.breadcrumbs.portfolio.id,
+					tenantId: lease.breadcrumbs.tenant.id,
+					propertyId: lease.breadcrumbs.property.id,
+					unitId: lease.breadcrumbs.unit.id,
+				});
+				return `${base}?${searchParams.toString()}`;
+			})()}
 			class="w-full sm:w-auto"
 			prefetch
 		/>

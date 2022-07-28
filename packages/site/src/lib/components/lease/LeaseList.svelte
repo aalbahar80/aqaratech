@@ -11,11 +11,7 @@
 
 	export let leases: PaginatedLeaseDto;
 	export let showIndex = false;
-
-	const formUrl = create({
-		entity: 'leases',
-		predefined: getCreateHref($page.url.pathname),
-	});
+	export let formUrl: string;
 </script>
 
 <StackedList entityTitle="leases" count={leases.results.length} {formUrl}>

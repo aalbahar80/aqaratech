@@ -51,7 +51,16 @@
 {#if $session.user?.role.roleType === 'ORGADMIN'}
 	<RoleList {roles} />
 {/if}
-<LeaseList {leases} showIndex />
+<LeaseList
+	{leases}
+	formUrl={(function () {
+		const s = new URLSearchParams({
+			tenantId: tenant.id,
+		});
+		return `/leases/new?${s.toString()}`;
+	})()}
+	showIndex
+/>
 
 {#if invoices.results.length}
 	<TrxColumn {invoices} />

@@ -97,7 +97,18 @@
 </script>
 
 <UnitPage {unit}>
-	<LeaseList {leases} showIndex />
+	<LeaseList
+		{leases}
+		formUrl={(function () {
+			const s = new URLSearchParams({
+				portfolioId: unit.breadcrumbs.portfolio.id,
+				propertyId: unit.propertyId,
+				unitId: unit.id,
+			});
+			return `/leases/new?${s.toString()}`;
+		})()}
+		showIndex
+	/>
 	<DashboardFilter
 		properties={[]}
 		units={[unit]}
