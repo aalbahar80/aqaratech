@@ -1,21 +1,31 @@
 <script lang="ts">
-	import { forceDateToInput } from '$lib/utils/common';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
+	import type { LeaseDto } from '@self/sdk';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { createEventDispatcher } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 
-	export let errors: any = undefined;
+	export let lease: LeaseDto;
+
+	let count = 12;
+
 	let schedule = generateSchedule({
-		scheduleStart: new Date(),
-		amount: 100,
-		count: 12,
+		scheduleStart: lease.start,
+		amount: lease.monthlyRent,
+		count,
 	});
 
-	const dispatch = createEventDispatcher<{
-		countChange: number;
-		delete: number;
-	}>();
+	const refresh = (n: number) => {
+		schedule = generateSchedule({
+			scheduleStart: lease.start,
+			amount: lease.monthlyRent,
+			count: n,
+		});
+	};
+
+	// set startLimit to be one day before lease start date
+	const startLimit = new Date(lease.start.getTime() - 1000 * 60 * 60 * 24);
 </script>
 
 <div class="mt-10 sm:mt-0">
@@ -44,7 +54,7 @@
 								value={schedule.length}
 								type="number"
 								on:change={(e) => {
-									dispatch('countChange', e.currentTarget.valueAsNumber);
+									refresh(e.currentTarget.valueAsNumber);
 								}}
 							/>
 						</div>
@@ -56,12 +66,10 @@
 							</div>
 						</div>
 
-						{#each schedule as trx, idx (idx)}
-							<!-- TODO add back animate after issue fix -->
-							<!-- https://github.com/pablo-abc/felte/issues/114 -->
-							<!-- animate:flip={{ duration: 200 }} -->
-							<!-- transition:fade|local={{ duration: 100 }} -->
+						{#each schedule as trx, idx (trx.nanoid)}
 							<div
+								animate:flip={{ duration: 200 }}
+								transition:fade|local={{ duration: 100 }}
 								class="col-span-full flex place-content-between items-center space-x-2"
 							>
 								<div class="hidden w-1/12 sm:block">
@@ -79,22 +87,23 @@
 										value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-										class:invalid={errors?.schedule?.[idx]?.amount}
+										class:invalid={trx.amount < 1}
 									/>
 								</div>
 								<span class="w-1/3 flex-1 sm:flex-initial">
+									<!-- <pre>{JSON.stringify(trx.postAt, null, 2)}</pre> -->
 									<input
 										id="schedule.{idx}.postAt"
 										name="schedule.{idx}.postAt"
-										value={forceDateToInput(trx.postAt)}
 										type="date"
-										class:invalid={errors?.schedule?.[idx]?.postAt}
+										bind:value={trx.postAt}
+										class:invalid={new Date(trx.postAt) < startLimit}
 									/>
 								</span>
 								<button
 									class="w-1/12"
 									on:click|preventDefault={() => {
-										dispatch('delete', idx);
+										schedule = schedule.filter((_, i) => i !== idx);
 									}}
 								>
 									<Icon

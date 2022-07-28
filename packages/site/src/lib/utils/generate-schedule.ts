@@ -22,7 +22,7 @@ export const generateSchedule = ({
 			start.getUTCSeconds(),
 		);
 		console.log(new Date(postAtMS), 'postAt');
-		const postAt = new Date(postAtMS).toISOString().split('T')[0];
+		const postAt = new Date(postAtMS).toISOString().split('T')[0] as string;
 		const memo = `Rent for: ${toUTCFormat(new Date(postAtMS), 'MMMM yyyy')}`;
 		newSchedule.push({
 			nanoid: nanoid(),
