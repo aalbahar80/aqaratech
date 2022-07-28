@@ -3,7 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
-import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
+import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import {
   BreadcrumbDto,

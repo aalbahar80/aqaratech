@@ -111,7 +111,7 @@
 	const footerNavigation = {
 		solutions: [
 			{ name: 'Marketing', href: '/' },
-			{ name: 'Analytics', href: '/' },
+			{ name: 'Aggregate', href: '/' },
 			{ name: 'Commerce', href: '/' },
 			{ name: 'Insights', href: '/' },
 		],

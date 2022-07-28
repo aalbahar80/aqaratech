@@ -48,16 +48,16 @@
 			stuff.api!.units.findOne({ id: unitId }),
 			stuff.api!.units.findLeases({ id: unitId, ...sParams }),
 
-			stuff.api!.analytics.getIncomeByMonth(filter),
-			stuff.api!.analytics.getExpensesByMonth(filter),
+			stuff.api!.aggregate.getIncomeByMonth(filter),
+			stuff.api!.aggregate.getExpensesByMonth(filter),
 			stuff.api!.leaseInvoices.findAll(filter),
 			stuff.api!.expenses.findAll(filter), // TODO filter serverside
 
-			stuff.api!.analytics.getIncomeByMonth({
+			stuff.api!.aggregate.getIncomeByMonth({
 				...filter,
 				paidStatus: 'paid',
 			}),
-			stuff.api!.analytics.getIncomeByMonth({
+			stuff.api!.aggregate.getIncomeByMonth({
 				...filter,
 				paidStatus: 'unpaid',
 			}),

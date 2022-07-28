@@ -1,6 +1,6 @@
 import { ApiPropertyOptional, IntersectionType } from '@nestjs/swagger';
 import { IsEnum } from 'class-validator';
-import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
+import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { PageOptionsDto } from '../../common/dto/page-options.dto';
 

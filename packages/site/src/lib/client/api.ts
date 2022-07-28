@@ -1,5 +1,5 @@
 import {
-	AnalyticsApi,
+	AggregateApi,
 	Configuration,
 	ExpensesApi,
 	LeaseInvoicesApi,
@@ -52,7 +52,7 @@ export const api = ({
 		expenses: new ExpensesApi(config),
 		roles: new RolesApi(config),
 		search: new SearchApi(config),
-		analytics: new AnalyticsApi(config),
+		aggregate: new AggregateApi(config),
 		organizations: new OrganizationsApi(config),
 		meta: new MetaApi(config),
 		users: new UsersApi(config),

@@ -1,7 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
-import { groupByMonth } from 'src/analytics/group-by-month';
+import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
+import { groupByMonth } from 'src/aggregate/group-by-month';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
@@ -9,7 +9,7 @@ import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service'
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class AnalyticsService {
+export class AggregateService {
   constructor(
     private prisma: PrismaService,
     private leaseInvoicesService: LeaseInvoicesService,

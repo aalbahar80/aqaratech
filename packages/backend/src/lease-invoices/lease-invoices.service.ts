@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
-import { DashboardFilterDto } from 'src/analytics/dto/analytics.dto';
+import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';

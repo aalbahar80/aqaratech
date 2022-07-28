@@ -9,7 +9,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
-import { AnalyticsModule } from './analytics/analytics.module';
+import { AggregateModule } from './aggregate/aggregate.module';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
@@ -55,7 +55,7 @@ import { UsersModule } from './users/users.module';
     SearchModule,
     RolesModule,
     OrganizationsModule,
-    AnalyticsModule,
+    AggregateModule,
     MetaModule,
     EventEmitterModule.forRoot(),
     PostmarkModule,
