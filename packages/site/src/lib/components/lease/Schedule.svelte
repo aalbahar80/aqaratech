@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/env';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import type { LeaseDto } from '@self/sdk';
 	import { Trash } from '@steeze-ui/heroicons';
@@ -8,21 +9,15 @@
 
 	export let lease: LeaseDto;
 
-	let count = 12;
-
-	let schedule = generateSchedule({
-		scheduleStart: lease.start,
-		amount: lease.monthlyRent,
-		count,
-	});
-
-	const refresh = (n: number) => {
-		schedule = generateSchedule({
+	const getSchedule = (n: number) => {
+		return generateSchedule({
 			scheduleStart: lease.start,
 			amount: lease.monthlyRent,
 			count: n,
 		});
 	};
+
+	let schedule = getSchedule(12);
 
 	// set startLimit to be one day before lease start date
 	const startLimit = new Date(lease.start.getTime() - 1000 * 60 * 60 * 24);
@@ -54,7 +49,7 @@
 								value={schedule.length}
 								type="number"
 								on:change={(e) => {
-									refresh(e.currentTarget.valueAsNumber);
+									schedule = getSchedule(e.currentTarget.valueAsNumber);
 								}}
 							/>
 						</div>
@@ -84,7 +79,7 @@
 									<input
 										id="schedule.{idx}.amount"
 										name="schedule.{idx}.amount"
-										value={trx.amount}
+										bind:value={trx.amount}
 										type="number"
 										class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
 										class:invalid={trx.amount < 1}
@@ -120,6 +115,10 @@
 		</div>
 	</div>
 </div>
+
+{#if dev}
+	<div class="prose py-6"><pre>{JSON.stringify(schedule, null, 2)}</pre></div>
+{/if}
 
 <style lang="postcss">
 	input:not(.schedule) {
