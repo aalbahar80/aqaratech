@@ -226,7 +226,6 @@
 														icon: ClipboardCopy,
 														label: 'Copy payment URL',
 														onClick: () => {
-															console.log($page);
 															copyTrxUrl(invoice.id, $page.url.origin);
 														},
 													},

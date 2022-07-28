@@ -51,9 +51,9 @@
 		extend: validator({ schema }),
 
 		onSubmit: async (original) => {
-			console.log({ original }, 'Form2.svelte ~ 36');
+			console.debug({ originalFormValues: original });
 			const values = schema.parse(original); // let zod handle date parsing ("" to null)
-			console.log({ values }, 'Form2.svelte ~ 25');
+			console.debug({ parsedFormValues: values });
 			let value: any;
 			if (formType === 'update') {
 				value = await onUpdate(values);
