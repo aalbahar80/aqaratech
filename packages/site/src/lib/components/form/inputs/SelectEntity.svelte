@@ -16,8 +16,9 @@
 	export let fields: SelectField<RelOption>[];
 	export let errors: Record<string, any>;
 
-	let portfolioId: any;
-	let propertyId: any;
+	// setting inital values here allow us children array filtering to be accurate from the start
+	let portfolioId = fields[0]?.value;
+	let propertyId = fields[1]?.value;
 
 	const dispatch = createEventDispatcher<{
 		select: { name: string; value: any };
