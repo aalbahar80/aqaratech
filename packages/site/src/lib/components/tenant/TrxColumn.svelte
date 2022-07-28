@@ -3,7 +3,7 @@
 	import Dropdown from '$components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import AddInvoiceButton from '$lib/components/leaseInvoice/addInvoiceButton.svelte';
+	import AddInvoiceButton from '$lib/components/leaseInvoice/AddInvoiceButton.svelte';
 	import Pagination from '$lib/components/table/Pagination.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import { addToast } from '$lib/stores/toast';
