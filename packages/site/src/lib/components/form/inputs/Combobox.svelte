@@ -56,10 +56,15 @@
 		includeScore: true,
 		keys: ['label', 'value'],
 	};
-	const fuse = new Fuse<Option>(options, config);
 
-	let filtered: Option[] = [];
+	// Because `handleFilter()` doesn't pick up `options` change by a parent component,
+	// we make `filtered` reactive here.
+	$: filtered = options;
+
 	const handleFilter = debounce((q: string) => {
+		// fuse instance needs to be recreated in case `options` array is changed by a parent component.
+		// if this is problematic, we can explore using `fuse.setCollection()` instead.
+		const fuse = new Fuse<Option>(options, config);
 		filtered = q
 			? fuse.search(q).map((result) => ({
 					value: result.item.value,
@@ -245,7 +250,7 @@
 			>
 				<!--  Don't render entire filtered results array for perf  -->
 				<!-- TODO handle initialvalue not in slice -->
-				{#each filtered.slice(1, 100) as item (item.value)}
+				{#each filtered.slice(0, 100) as item (item.value)}
 					<Hoverable let:hovering>
 						<ListboxOption
 							value={item}
