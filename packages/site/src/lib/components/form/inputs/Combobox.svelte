@@ -34,6 +34,11 @@
 	 */
 	let forceOpen = false;
 
+	/**
+	 * Bound to the text input's value to communicate to the user what has been selected.
+	 */
+	let inputValue = selection?.label || '';
+
 	// SEARCH
 	let query = '';
 
@@ -64,10 +69,11 @@
 	};
 
 	export const select = async (option: Option) => {
-		// await tick();
+		await tick();
 		dispatch('select', { value: option.value });
 		selection = option;
 		query = '';
+		inputValue = selection?.label.trim() || '';
 	};
 
 	// ACCESSIBILITY
@@ -90,19 +96,28 @@
 	async function handleKeydown(event: KeyboardEvent) {
 		// https://github.com/janosh/svelte-multiselect/blob/main/src/lib/MultiSelect.svelte#L192
 		// on escape or tab out of input: dismiss options dropdown and reset search text
-		https: console.log(event.key);
-		if (event.key === `Escape` || event.key === `Tab`) {
+		if (event.key === `Escape`) {
 			forceOpen = false;
 			query = '';
-		}
-		// on enter key: toggle active option and reset search text
-		else if (event.key === `Enter`) {
-			event.preventDefault(); // prevent enter key from triggering form submission
-
+		} else if (event.key === `Tab`) {
+			// TODO can be deduped with 'enter' key logic
 			if (activeOption) {
 				select(activeOption);
 				forceOpen = false;
 				activeOption = undefined;
+			} else {
+				forceOpen = false;
+			}
+		} else if (event.key === `Enter`) {
+			// on enter key: toggle active option and reset search text
+			event.preventDefault(); // prevent enter key from triggering form submission
+
+			if (activeOption && forceOpen) {
+				select(activeOption);
+				forceOpen = false;
+				activeOption = undefined;
+			} else if (forceOpen) {
+				forceOpen = false;
 			} else {
 				// no active option means the options dropdown is closed
 				// in which case enter means open it
@@ -138,8 +153,10 @@
 				// `await tick` is needed to properly scroll element into view
 				// when wrapping around start/end of option list.
 				await tick();
-				const li = document.querySelector(`li.isActive`);
-				li?.scrollIntoView();
+				const li = document.querySelector<HTMLLIElement>(`li.isActive`);
+				li?.scrollIntoView({
+					block: `nearest`, // only scroll the listbox & only when it's not visible
+				});
 			}
 		}
 	}
@@ -155,6 +172,11 @@
 	}}
 	{disabled}
 >
+	<pre>{JSON.stringify(open, null, 2)}</pre>
+	<pre>{JSON.stringify(forceOpen, null, 2)}</pre>
+	<pre>{JSON.stringify(query, null, 2)}</pre>
+	<pre>{JSON.stringify(activeOption, null, 2)}</pre>
+	<pre>{JSON.stringify(selection, null, 2)}</pre>
 	<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
 		>Assigned to</ListboxLabel
 	> -->
@@ -169,7 +191,7 @@
 			class:form-invalid={invalid}
 			placeholder="Search..."
 			type="text"
-			value={selection?.label?.trim() ?? ''}
+			bind:value={inputValue}
 			on:keydown={handleKeydown}
 			on:click={() => {
 				forceOpen = true;
@@ -181,6 +203,14 @@
 					dispatch('select', { value: null });
 				}
 				forceOpen = true;
+			}}
+			on:blur={() => {
+				console.log('blur');
+				// if (activeOption) {
+				// 	select(activeOption);
+				// } else {
+				// 	clear();
+				// }
 			}}
 		/>
 		<div
