@@ -28,7 +28,7 @@ export const parseExpenseTypeOptions = (
 				? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(leaf.depth - 1)
 				: '';
 
-		const value: ExpenseCategoryDto['id'] = Number(leaf.id);
+		const value: ExpenseCategoryDto['id'] = leaf.data.id;
 		options.push({
 			value,
 			label: labelPrefix + '' + leaf.data.labelEn,
