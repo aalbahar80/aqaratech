@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
+	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { schema } from '$models/schemas/organization.schema';
@@ -30,10 +31,14 @@
 	export let data: TOrganizationDto = undefined as TOrganizationDto;
 
 	const basicFields = [
-		new Field('fullName', { required: true, value: data?.fullName }),
+		new Field('fullName', {
+			required: true,
+			value: data?.fullName,
+			label: 'Organization Name',
+		}),
 		new Field('label', {
 			value: data?.label,
-			hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
+			hint: labelHint,
 		}),
 	];
 </script>

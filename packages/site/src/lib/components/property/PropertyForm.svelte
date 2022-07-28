@@ -2,6 +2,7 @@
 	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { areas } from '$lib/config/constants';
+	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
@@ -86,6 +87,10 @@
 			required: false,
 			value: data?.paci,
 			hint: 'الرقم الآلي للعنوان',
+		}),
+		new Field('label', {
+			value: data?.label,
+			hint: labelHint,
 		}),
 		// new Field('label', {
 		// 	required: false,

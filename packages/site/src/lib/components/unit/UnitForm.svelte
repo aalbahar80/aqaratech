@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { unitTypeOptions } from '$lib/config/constants';
+	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
@@ -102,6 +103,10 @@
 		new Field('marketRent', { type: 'number', value: data?.marketRent }),
 		new Field('floor', { type: 'number', value: data?.floor }),
 		new Field('usage', { value: data?.usage }),
+		new Field('label', {
+			value: data?.label,
+			hint: labelHint,
+		}),
 	];
 </script>
 

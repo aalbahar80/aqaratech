@@ -40,6 +40,9 @@ class UnitOptionalDto {
 
   @IsString()
   usage: string | null = null;
+
+  @IsString()
+  label: string | null = null;
 }
 
 // InputDtos

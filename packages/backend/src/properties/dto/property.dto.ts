@@ -47,6 +47,9 @@ class PropertyOptionalDto {
   @IsNumber()
   cost: number | null = null;
 
+  @IsString()
+  label: string | null = null;
+
   @ApiHideProperty()
   @IsLongitude()
   long: number | null = null;

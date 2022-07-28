@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
+	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/portfolio.schema';
@@ -29,10 +30,14 @@
 	export let data: TPortfolioDto = undefined as TPortfolioDto;
 
 	const basicFields = [
-		new Field('fullName', { required: true, value: data?.fullName }),
-		new Field('shortName', {
-			value: data?.shortName,
-			hint: 'If a short name is provided, it will be used instead of the full name in the UI.',
+		new Field('fullName', {
+			required: true,
+			value: data?.fullName,
+			label: 'Portfolio Name (full)',
+		}),
+		new Field('label', {
+			value: data?.label,
+			hint: labelHint,
 		}),
 		new Field('phone', { value: data?.phone }),
 		new Field('civilid', {

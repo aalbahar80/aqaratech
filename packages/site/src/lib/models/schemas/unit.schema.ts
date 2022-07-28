@@ -8,6 +8,7 @@ import { z } from 'zod';
 
 export const updateSchema = z.object({
 	id: zodnanoid.optional(),
+	label: z.string().nullable().transform(trim).transform(falsyToNull),
 	unitNumber: z
 		.string()
 		.refine((val) => val.trim().length > 0, { message: 'Required' })
