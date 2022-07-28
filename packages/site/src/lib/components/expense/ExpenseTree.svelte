@@ -19,7 +19,6 @@
 	}
 	function handleDndFinalize(e) {
 		node.items = e.detail.items;
-		console.log(e);
 		nodes = { ...nodes };
 	}
 </script>
