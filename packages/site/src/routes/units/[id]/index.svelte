@@ -11,6 +11,7 @@
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
+	import { create } from '$lib/utils/route-helpers';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -100,12 +101,13 @@
 	<LeaseList
 		{leases}
 		formUrl={(function () {
-			const s = new URLSearchParams({
+			const base = create({ entity: 'leases' });
+			const searchParams = new URLSearchParams({
 				portfolioId: unit.breadcrumbs.portfolio.id,
 				propertyId: unit.propertyId,
 				unitId: unit.id,
 			});
-			return `/leases/new?${s.toString()}`;
+			return `${base}?${searchParams.toString()}`;
 		})()}
 		showIndex
 	/>

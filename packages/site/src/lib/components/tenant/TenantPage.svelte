@@ -6,6 +6,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import RoleList from '$lib/components/role/RoleList.svelte';
+	import { create } from '$lib/utils/route-helpers';
 	import type {
 		PaginatedLeaseDto,
 		PaginatedLeaseInvoiceDto,
@@ -54,10 +55,11 @@
 <LeaseList
 	{leases}
 	formUrl={(function () {
-		const s = new URLSearchParams({
+		const base = create({ entity: 'leases' });
+		const searchParams = new URLSearchParams({
 			tenantId: tenant.id,
 		});
-		return `/leases/new?${s.toString()}`;
+		return `${base}?${searchParams.toString()}`;
 	})()}
 	showIndex
 />

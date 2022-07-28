@@ -4,6 +4,7 @@
 	import FilterBar from '$lib/components/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
+	import { create } from '$lib/utils/route-helpers';
 	import { getQuery, type UrlQuery } from '$lib/utils/set-query';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -129,5 +130,9 @@
 <FilterBar persistent={[sort, status]} />
 
 <div class="">
-	<LeaseList {leases} --border-radius-b="0" />
+	<LeaseList
+		{leases}
+		formUrl={create({ entity: 'leases' })}
+		--border-radius-b="0"
+	/>
 </div>
