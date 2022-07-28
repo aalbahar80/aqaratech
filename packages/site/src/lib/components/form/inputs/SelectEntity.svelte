@@ -90,6 +90,7 @@
 	<Combobox
 		bind:this={unitSelector}
 		options={filteredUnits}
+		initialValue={fields[2].value}
 		disabled={fields[2].disabled}
 		invalid={errors.unitId}
 		on:select={(e) => {
