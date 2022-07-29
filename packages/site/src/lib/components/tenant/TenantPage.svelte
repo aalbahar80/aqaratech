@@ -7,6 +7,7 @@
 	import LeaseInvoiceList from '$lib/components/leaseInvoice/LeaseInvoiceList.svelte';
 	import RoleList from '$lib/components/role/RoleList.svelte';
 	import { countries } from '$lib/constants/countries';
+	import { toUTCFormat } from '$lib/utils/common';
 	import { create } from '$lib/utils/route-helpers';
 	import type {
 		PaginatedLeaseDto,
@@ -28,10 +29,15 @@
 		['Phone', tenant.phone],
 		['Civil id', tenant.civilid],
 		['Passport #', tenant.passportNum],
-		// prettier-ignore
-		['Nationality', countries.find((c) => c.alpha3Code === tenant.nationality)?.name],
+		[
+			'Nationality',
+			countries.find((c) => c.alpha3Code === tenant.nationality)?.name,
+		],
 		['Residency #', tenant.residencyNum],
-		['Residency Expiration', tenant.residencyEnd?.toLocaleDateString() ?? ''],
+		[
+			'Residency Expiration',
+			tenant.residencyEnd ? toUTCFormat(tenant.residencyEnd) : '',
+		],
 		['Nationality', tenant.nationality],
 	] as [string, string | null][];
 

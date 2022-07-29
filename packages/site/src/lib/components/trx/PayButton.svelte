@@ -46,7 +46,7 @@
 	--min-height="4rem"
 	text="Pay"
 	icon={Cash}
-	disabled={invoice.postAt > new Date()}
+	disabled={new Date(invoice.postAt) > new Date()}
 	{loading}
 	on:click={handlePayment}
 />

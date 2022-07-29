@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
+	import { session } from '$app/stores';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
-	import { getAddress } from '$lib/utils/common';
 	import { inWords } from '$lib/utils/currency';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -47,8 +47,9 @@
 			minimumFractionDigits: 3,
 		}),
 		rentWords: inWords(lease.monthlyRent),
-		start: lease.start.toLocaleDateString(),
-		unitAddress: getAddress(unit.breadcrumbs?.property.label),
+		start: new Date(lease.start).toLocaleDateString(),
+		// unitAddress: getAddress(unit.breadcrumbs?.property.label),
+		unitAddress: unit.breadcrumbs.property.label,
 		unitNumber: unit.unitNumber,
 		unitType: unit.type,
 		purpose: lease.license,
@@ -67,7 +68,10 @@
 			<span dir="ltr">{fillable.contractDate}</span>
 		</p>
 		<h3 class="text-center">عقد ايجار</h3>
-		<p class="m-1">الطرف الأول: شركة الطائف الكبرى العقارية</p>
+		<p class="m-1">
+			الطرف الأول:
+			{$session.user?.role.organization.fullName}
+		</p>
 		<br />
 		{#each Object.entries(fillable) as field}
 			{#if arabicLabels[field[0]]}

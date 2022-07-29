@@ -15,7 +15,7 @@
 
 	const getSchedule = (n: number) => {
 		return generateSchedule({
-			scheduleStart: lease.start,
+			scheduleStart: new Date(lease.start),
 			amount: lease.monthlyRent,
 			count: n,
 		});
