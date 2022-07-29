@@ -14,7 +14,7 @@
 	import type { z, ZodSchema } from 'zod';
 
 	type Schema = $$Generic<z.ZodTypeAny>;
-	type Submitted = $$Generic<{ id: string } | Record<string, any>>;
+	type Submitted = $$Generic<string | { id: string } | Record<string, any>>;
 
 	export let formType: 'create' | 'update';
 	export let schema: Schema;
@@ -23,8 +23,15 @@
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
 	export let onSubmit: (values: z.infer<Schema>) => Promise<Submitted>;
-	export let onSuccess: (value: Submitted) => Promise<void> = (value) =>
-		goto(`/${entityNameMap[entityTitle].urlName}/${value?.id ?? ''}`);
+	export let onSuccess: (value: Submitted) => Promise<void> = (value) => {
+		let id = '';
+		if (typeof value === 'string') {
+			id = value;
+		} else if ('id' in value) {
+			id = value.id;
+		}
+		return goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
+	};
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
