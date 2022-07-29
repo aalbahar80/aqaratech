@@ -57,7 +57,7 @@
 			value: data?.passportNum,
 		}),
 		new SelectField('nationality', {
-			value: data?.nationality,
+			value: data?.nationality || null,
 			options: countries.map((country) => ({
 				label: country.name,
 				value: country.alpha3Code,
@@ -86,7 +86,7 @@
 		$page.stuff.api.tenants.create({
 			createTenantDto: {
 				...values,
-				organizationId: $session.user?.role.orgId,
+				organizationId: $session.user?.role.organizationId,
 			},
 		})}
 	onUpdate={(values) =>
