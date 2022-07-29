@@ -53,89 +53,54 @@
 	export let units: TUnits = undefined as TUnits;
 	export let tenants: TTenants = undefined as TTenants;
 
-	const relationalFields: SelectField<RelOption>[] =
-		formType === 'create'
-			? [
-					new SelectField('portfolioId', {
-						label: 'Portfolio',
-						required: true,
-						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
-						combobox: true,
-						autoInit: true,
-						options:
-							formType === 'create'
-								? portfolios!.results.map((portfolio) => ({
-										value: portfolio.id,
-										label: portfolio.fullName,
-								  }))
-								: [
-										{
-											value: data?.breadcrumbs?.portfolio.id,
-											label: data?.breadcrumbs?.portfolio.label!, // temp
-										},
-								  ],
-					}),
-					new SelectField('propertyId', {
-						label: 'Property',
-						required: true,
-						value: data?.propertyId || predefined?.propertyId,
-						combobox: true,
-						autoInit: true,
-						options:
-							formType === 'create'
-								? properties!.results.map((property) => ({
-										value: property.id,
-										label: getAddress(property),
-										meta: { parentId: property.portfolioId },
-								  }))
-								: [
-										{
-											value: data?.propertyId,
-											label: data?.breadcrumbs?.property.label,
-										},
-								  ],
-					}),
-					new SelectField('unitId', {
-						label: 'Unit',
-						required: true,
-						value: data?.unitId || predefined?.unitId,
-						combobox: true,
-						autoInit: true,
-						options:
-							formType === 'create'
-								? units!.results.map((unit) => ({
-										value: unit.id,
-										label: getUnitLabel(unit),
-										meta: { parentId: unit.propertyId },
-								  }))
-								: [
-										{
-											value: data?.breadcrumbs?.unit?.id,
-											label: data?.breadcrumbs?.unit?.label,
-										},
-								  ],
-					}),
-					new SelectField('tenantId', {
-						label: 'Tenant',
-						required: true,
-						value: data?.breadcrumbs?.tenant.id || predefined?.tenantId,
-						combobox: true,
-						autoInit: true,
-						options:
-							formType === 'create'
-								? tenants!.results.map((tenant) => ({
-										value: tenant.id,
-										label: tenant.fullName,
-								  }))
-								: [
-										{
-											value: data?.breadcrumbs?.portfolio.id,
-											label: data?.breadcrumbs?.portfolio.label!, // temp
-										},
-								  ],
-					}),
-			  ]
-			: [];
+	const relationalFields: SelectField<RelOption>[] = [
+		new SelectField('portfolioId', {
+			label: 'Portfolio',
+			required: true,
+			value: predefined?.portfolioId,
+			combobox: true,
+			autoInit: true,
+			options: portfolios!.results.map((portfolio) => ({
+				value: portfolio.id,
+				label: portfolio.fullName,
+			})),
+		}),
+		new SelectField('propertyId', {
+			label: 'Property',
+			required: true,
+			value: predefined?.propertyId,
+			combobox: true,
+			autoInit: true,
+			options: properties!.results.map((property) => ({
+				value: property.id,
+				label: getAddress(property),
+				meta: { parentId: property.portfolioId },
+			})),
+		}),
+		new SelectField('unitId', {
+			label: 'Unit',
+			required: true,
+			value: predefined?.unitId,
+			combobox: true,
+			autoInit: true,
+			options: units!.results.map((unit) => ({
+				value: unit.id,
+				label: getUnitLabel(unit),
+				meta: { parentId: unit.propertyId },
+			})),
+		}),
+		new SelectField('tenantId', {
+			label: 'Tenant',
+			required: true,
+			value: predefined?.tenantId,
+			combobox: true,
+			autoInit: true,
+			options: tenants!.results.map((tenant) => ({
+				value: tenant.id,
+				label: tenant.fullName,
+			})),
+		}),
+	];
 
 	const basicFields = [
 		new Field('monthlyRent', {
@@ -174,7 +139,6 @@
 		entityTitle="leases"
 		{formType}
 		{basicFields}
-		{relationalFields}
 		onSubmit={(values) =>
 			data &&
 			$page.stuff.api.leases.update({
