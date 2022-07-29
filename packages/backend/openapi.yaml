@@ -3140,6 +3140,20 @@ components:
         phone:
           type: string
           nullable: true
+    PropertyBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+        - property
     PropertyDto:
       type: object
       properties:
@@ -3157,7 +3171,9 @@ components:
         address:
           type: string
         breadcrumbs:
-          $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+        portfolio:
+          $ref: '#/components/schemas/PortfolioDto'
         portfolioId:
           type: string
         area:
@@ -3201,6 +3217,7 @@ components:
         - updatedAt
         - address
         - breadcrumbs
+        - portfolio
         - portfolioId
         - area
         - block

@@ -3,9 +3,10 @@ import {
   IntersectionType,
   OmitType,
   PartialType,
+  PickType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   IsLatitude,
   IsLongitude,
@@ -14,9 +15,10 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
+import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 
 class PropertyRequiredDto {
   @Nanoid()
@@ -58,6 +60,11 @@ class PropertyOptionalDto {
   lat: number | null;
 }
 
+export class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'portfolio',
+  'property',
+]) {}
+
 export class PropertyDto extends IntersectionType(
   AbstractDto,
   IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
@@ -66,6 +73,9 @@ export class PropertyDto extends IntersectionType(
     super();
     Object.assign(this, partial);
   }
+
+  @Exclude()
+  portfolio: PortfolioDto;
 
   @ApiProperty()
   @Expose()
@@ -77,12 +87,20 @@ export class PropertyDto extends IntersectionType(
 
   @ApiProperty()
   @Expose()
-  get breadcrumbs(): BreadcrumbDto {
+  get breadcrumbs(): PropertyBreadcrumbsDto {
     return {
-      label: this.address,
-      href: `/properties/${this.id}`,
-      id: this.id,
-      rel: Rel.Property, // TODO remove
+      portfolio: {
+        id: this.portfolioId,
+        label: this.portfolio.fullName,
+        rel: Rel.Portfolio,
+        href: `/portfolios/${this.portfolioId}`,
+      },
+      property: {
+        label: this.address,
+        href: `/properties/${this.id}`,
+        id: this.id,
+        rel: Rel.Property, // TODO remove
+      },
     };
   }
 }
