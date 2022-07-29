@@ -1,6 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsISO8601 } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsDate, IsISO8601 } from 'class-validator';
 
 /**
  * Decorator to make openapi-generator to treat dates as strings.
@@ -19,7 +20,10 @@ import { IsISO8601 } from 'class-validator';
 export function DateType(required = true): PropertyDecorator {
   const example = new Date('2012-12-21').toISOString();
   return applyDecorators(
-    IsISO8601(),
+    IsDate(),
+    Transform((p) => (p.value ? new Date(p.value) : null), {
+      toClassOnly: true,
+    }),
     ApiProperty({ type: 'string', example, required }),
   );
 }
