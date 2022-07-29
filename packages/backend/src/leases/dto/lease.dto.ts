@@ -38,7 +38,7 @@ class LeaseOptionalDto {
   deposit: number;
 
   @IsBoolean()
-  deactivated: boolean;
+  canPay: boolean;
 
   @IsBoolean()
   notify: boolean;

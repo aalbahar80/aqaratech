@@ -2367,7 +2367,7 @@ components:
         - end
         - monthlyRent
         - deposit
-        - deactivated
+        - canPay
         - notify
         - license
         - dueAt
@@ -2463,7 +2463,7 @@ components:
           minimum: 1
         deposit:
           type: number
-        deactivated:
+        canPay:
           type: boolean
         notify:
           type: boolean
@@ -2602,7 +2602,7 @@ components:
           minimum: 1
         deposit:
           type: number
-        deactivated:
+        canPay:
           type: boolean
         notify:
           type: boolean
@@ -2620,7 +2620,7 @@ components:
         - end
         - monthlyRent
         - deposit
-        - deactivated
+        - canPay
         - notify
         - license
     LeaseInvoiceBreadcrumbsDto:
@@ -2917,7 +2917,7 @@ components:
           minimum: 1
         deposit:
           type: number
-        deactivated:
+        canPay:
           type: boolean
         notify:
           type: boolean
@@ -2959,7 +2959,7 @@ components:
           minimum: 1
         deposit:
           type: number
-        deactivated:
+        canPay:
           type: boolean
         notify:
           type: boolean
@@ -2976,7 +2976,7 @@ components:
         - end
         - monthlyRent
         - deposit
-        - deactivated
+        - canPay
         - notify
         - license
     UpdateLeaseDto:
@@ -2993,7 +2993,7 @@ components:
           minimum: 1
         deposit:
           type: number
-        deactivated:
+        canPay:
           type: boolean
         notify:
           type: boolean

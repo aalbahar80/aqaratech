@@ -7,7 +7,7 @@ export const updateSchema = z.object({
 	start: z.preprocess(strToDate, z.date()),
 	end: z.preprocess(strToDate, z.date()),
 	notify: z.boolean(),
-	deactivated: z.boolean(),
+	canPay: z.boolean(),
 });
 
 export const createSchema = updateSchema

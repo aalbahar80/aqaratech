@@ -37,7 +37,7 @@ export const GET: RequestHandler = async ({ url }) => {
 				isPaid: true,
 				lease: {
 					select: {
-						deactivated: true,
+						canPay: true,
 						tenant: {
 							select: {
 								fullName: true,
@@ -78,7 +78,7 @@ export const GET: RequestHandler = async ({ url }) => {
 			};
 		}
 
-		if (trx.lease.deactivated) {
+		if (!trx.lease.canPay) {
 			return {
 				status: 400,
 				body: {

@@ -200,7 +200,7 @@ model Lease {
   end           DateTime
   monthlyRent   Float
   deposit       Float          @default(0)
-  deactivated   Boolean        @default(false)
+  canPay        Boolean        @default(true)
   notify        Boolean        @default(true)
   license       String?
   tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)

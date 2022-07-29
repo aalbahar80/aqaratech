@@ -153,10 +153,10 @@
 			required: true,
 			value: toDateInput(data?.end),
 		}),
-		new Field('deactivated', {
+		new Field('canPay', {
 			label: 'Allow tenant to pay invoices online',
 			type: 'checkbox',
-			value: data?.deactivated || false,
+			value: data?.canPay || true,
 			autoInit: true,
 		}),
 		new Field('notify', {
