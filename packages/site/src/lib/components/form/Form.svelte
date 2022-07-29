@@ -60,9 +60,7 @@
 
 		onSubmit: async (original) => {
 			console.debug({ originalFormValues: original });
-			const values = schema.passthrough().parse(original); // let zod handle date parsing ("" to null)
-			console.debug({ parsedFormValues: values });
-			const value = await onSubmit(values);
+			const value = await onSubmit(original);
 			onSuccess(value);
 		},
 
