@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { session } from '$app/stores';
-	import TrxColumn from '$components/tenant/TrxColumn.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
+	import LeaseInvoiceList from '$lib/components/leaseInvoice/LeaseInvoiceList.svelte';
 	import RoleList from '$lib/components/role/RoleList.svelte';
 	import { countries } from '$lib/constants/countries';
 	import { create } from '$lib/utils/route-helpers';
@@ -68,7 +68,4 @@
 	})()}
 	showIndex
 />
-
-{#if invoices.results.length}
-	<TrxColumn {invoices} />
-{/if}
+<LeaseInvoiceList leaseInvoices={invoices} />

@@ -4,7 +4,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import TrxColumn from '$lib/components/tenant/TrxColumn.svelte';
+	import LeaseInvoiceList from '$lib/components/leaseInvoice/LeaseInvoiceList.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import { create } from '$lib/utils/route-helpers';
@@ -75,5 +75,4 @@
 </Heading>
 <Badge label={badge.label} badgeColor={badge.color} />
 <DetailsPane {details} {files} />
-<!-- TODO: convert trxColumn to stacked list to take advantage of anchor pagination etc -->
-<TrxColumn {invoices} leaseId={lease.id} />
+<LeaseInvoiceList leaseInvoices={invoices} leaseId={lease.id} />

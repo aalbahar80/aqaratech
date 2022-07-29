@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TenantDto } from '@self/sdk';
-	import { AtSymbol, Phone, User } from '@steeze-ui/heroicons';
+	import { Phone, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let tenant: TenantDto;

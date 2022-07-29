@@ -1,19 +1,21 @@
 export const getInvoiceBadge = (trx: {
 	isPaid: boolean;
-	dueAt: Date | null;
-	postAt: Date;
+	dueAt: string | null;
+	postAt: string;
 }) => {
+	const due = trx.dueAt && new Date(trx.dueAt);
+	const post = new Date(trx.postAt);
 	if (trx.isPaid) {
 		return {
 			label: 'Paid',
 			color: 'green',
 		};
-	} else if (trx.dueAt && trx.dueAt < new Date()) {
+	} else if (due && due < new Date()) {
 		return {
 			label: 'Past due',
 			color: 'red',
 		};
-	} else if (trx.postAt < new Date()) {
+	} else if (post < new Date()) {
 		return {
 			label: 'Due',
 			color: 'yellow',

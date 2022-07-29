@@ -9,8 +9,10 @@ export const getProgress = (start: Date, end: Date, ref?: Date): number => {
 	return rounded;
 };
 
-export const toUTCFormat = (date: Date, format = 'MMM dd, yy'): string =>
-	formatInTimeZone(date, 'UTC', format);
+export const toUTCFormat = (
+	date: Date | string,
+	format = 'MMM dd, yy',
+): string => formatInTimeZone(date, 'UTC', format);
 
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {

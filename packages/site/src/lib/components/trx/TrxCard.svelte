@@ -39,9 +39,7 @@
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
-						<time dateTime={invoice.postAt.toISOString()}
-							>{toUTCFormat(invoice.postAt)}</time
-						>
+						<time dateTime={invoice.postAt}>{toUTCFormat(invoice.postAt)}</time>
 					</p>
 					<p class="text flex items-center">
 						{invoice.memo}
