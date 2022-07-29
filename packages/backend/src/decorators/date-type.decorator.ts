@@ -1,5 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsISO8601 } from 'class-validator';
 
 /**
@@ -16,22 +16,10 @@ import { IsISO8601 } from 'class-validator';
  *  },
  *```
  */
-export function DateType(): PropertyDecorator {
+export function DateType(required = true): PropertyDecorator {
+  const example = new Date('2012-12-21').toISOString();
   return applyDecorators(
     IsISO8601(),
-    ApiProperty({
-      type: 'string',
-      example: new Date('2012-12-21').toISOString(),
-    }),
-  );
-}
-
-export function DateTypeOptional(): PropertyDecorator {
-  return applyDecorators(
-    IsISO8601(),
-    ApiPropertyOptional({
-      type: 'string',
-      example: new Date('2012-12-21').toISOString(),
-    }),
+    ApiProperty({ type: 'string', example, required }),
   );
 }
