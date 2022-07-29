@@ -69,9 +69,14 @@
 			},
 		});
 	}}
-	onUpdate={(values) =>
-		$page.stuff.api.portfolios.update({
+	onUpdate={(values) => {
+		if (!data) {
+			// Type Redundancy
+			throw new Error('No data found in form');
+		}
+		return $page.stuff.api.portfolios.update({
 			id: data.id,
 			updatePortfolioDto: values,
-		})}
+		});
+	}}
 />

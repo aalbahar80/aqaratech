@@ -1,10 +1,5 @@
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
-import {
-	digitsOnly,
-	falsyToNull,
-	strToDate,
-	trim,
-} from '$lib/zodTransformers.js';
+import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const schema = z.object({
@@ -41,7 +36,5 @@ export const schema = z.object({
 		])
 		.transform(trim)
 		.transform(falsyToNull),
-	dob: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	dob: z.string().nullable().transform(falsyToNull),
 });
