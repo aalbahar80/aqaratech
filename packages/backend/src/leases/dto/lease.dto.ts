@@ -5,15 +5,10 @@ import {
   PickType,
 } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
-import {
-  IsBoolean,
-  IsISO8601,
-  IsNumber,
-  IsPositive,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class LeaseRequiredDto {
@@ -23,10 +18,10 @@ class LeaseRequiredDto {
   @Nanoid()
   unitId: string;
 
-  @IsISO8601()
+  @DateType()
   start: Date;
 
-  @IsISO8601()
+  @DateType()
   end: Date;
 
   @IsPositive()

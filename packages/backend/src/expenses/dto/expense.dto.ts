@@ -1,14 +1,14 @@
 import {
-  ApiHideProperty,
   IntersectionType,
   OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
-import { IsISO8601, IsOptional, IsPositive, IsString } from 'class-validator';
+import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 
@@ -19,7 +19,7 @@ class ExpenseRequiredDto {
   @IsPositive()
   amount: number;
 
-  @IsISO8601()
+  @DateType()
   postAt: Date;
 
   @IsString()

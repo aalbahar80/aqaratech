@@ -256,11 +256,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -497,11 +499,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -805,11 +809,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -1742,11 +1748,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: portfolioId
@@ -2084,11 +2092,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -2130,11 +2140,13 @@ paths:
         - name: start
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
+          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: portfolioId
@@ -2448,15 +2460,15 @@ components:
           format: date-time
           type: string
           readOnly: true
+        start:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
+        end:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         tenantId:
           type: string
         unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
           type: string
         monthlyRent:
           type: number
@@ -2585,17 +2597,17 @@ components:
           format: date-time
           type: string
           readOnly: true
+        start:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
+        end:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
         tenantId:
           type: string
         unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
           type: string
         monthlyRent:
           type: number
@@ -2613,11 +2625,11 @@ components:
         - id
         - createdAt
         - updatedAt
+        - start
+        - end
         - breadcrumbs
         - tenantId
         - unitId
-        - start
-        - end
         - monthlyRent
         - deposit
         - canPay
@@ -2914,15 +2926,15 @@ components:
     CreateLeaseDto:
       type: object
       properties:
+        start:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
+        end:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         tenantId:
           type: string
         unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
           type: string
         monthlyRent:
           type: number
@@ -2937,10 +2949,10 @@ components:
           type: string
           nullable: true
       required:
-        - tenantId
-        - unitId
         - start
         - end
+        - tenantId
+        - unitId
         - monthlyRent
     LeaseBasicDto:
       type: object
@@ -2956,15 +2968,15 @@ components:
           format: date-time
           type: string
           readOnly: true
+        start:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
+        end:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         tenantId:
           type: string
         unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
           type: string
         monthlyRent:
           type: number
@@ -2982,10 +2994,10 @@ components:
         - id
         - createdAt
         - updatedAt
-        - tenantId
-        - unitId
         - start
         - end
+        - tenantId
+        - unitId
         - monthlyRent
         - deposit
         - canPay
@@ -2995,11 +3007,11 @@ components:
       type: object
       properties:
         start:
-          format: date-time
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         end:
-          format: date-time
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         monthlyRent:
           type: number
           minimum: 1
@@ -3043,6 +3055,10 @@ components:
     CreatePortfolioDto:
       type: object
       properties:
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -3056,10 +3072,6 @@ components:
           type: string
           nullable: true
         phone:
-          type: string
-          nullable: true
-        dob:
-          format: date-time
           type: string
           nullable: true
       required:
@@ -3079,6 +3091,10 @@ components:
           format: date-time
           type: string
           readOnly: true
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -3094,23 +3110,23 @@ components:
         phone:
           type: string
           nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
       required:
         - id
         - createdAt
         - updatedAt
+        - dob
         - organizationId
         - fullName
         - label
         - civilid
         - phone
-        - dob
     UpdatePortfolioDto:
       type: object
       properties:
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         fullName:
           type: string
           minLength: 1
@@ -3122,10 +3138,6 @@ components:
           type: string
           nullable: true
         phone:
-          type: string
-          nullable: true
-        dob:
-          format: date-time
           type: string
           nullable: true
     PropertyBreadcrumbsDto:
@@ -3530,14 +3542,14 @@ components:
     CreateExpenseDto:
       type: object
       properties:
+        postAt:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         portfolioId:
           type: string
         amount:
           type: number
           minimum: 1
-        postAt:
-          format: date-time
-          type: string
         memo:
           type: string
           nullable: true
@@ -3554,9 +3566,9 @@ components:
           type: number
           nullable: true
       required:
+        - postAt
         - portfolioId
         - amount
-        - postAt
         - memo
     ExpenseBreadcrumbsDto:
       type: object
@@ -3609,6 +3621,9 @@ components:
           format: date-time
           type: string
           readOnly: true
+        postAt:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
         expenseType:
@@ -3620,9 +3635,6 @@ components:
         amount:
           type: number
           minimum: 1
-        postAt:
-          format: date-time
-          type: string
         memo:
           type: string
           nullable: true
@@ -3642,23 +3654,23 @@ components:
         - id
         - createdAt
         - updatedAt
+        - postAt
         - breadcrumbs
         - expenseType
         - portfolioId
         - amount
-        - postAt
         - memo
         - maintenanceOrderId
         - categoryId
     UpdateExpenseDto:
       type: object
       properties:
+        postAt:
+          type: string
+          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
-        postAt:
-          format: date-time
-          type: string
         memo:
           type: string
           nullable: true

@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsISO8601, IsOptional } from 'class-validator';
+import { IsOptional } from 'class-validator';
+import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 export class ByMonthDto {
@@ -21,13 +21,11 @@ export class DashboardFilterDto {
   @IsOptional()
   unitId?: string;
 
-  @IsISO8601()
+  @DateType(false)
   @IsOptional()
-  @ApiPropertyOptional({ type: 'string' }) // override sdk generator. Otherwise, it'll always expect a date and throw otherwise.
   start?: Date;
 
-  @IsISO8601()
+  @DateType(false)
   @IsOptional()
-  @ApiPropertyOptional({ type: 'string' })
   end?: Date;
 }
