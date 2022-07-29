@@ -3,7 +3,6 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
-	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/portfolio.schema';
 	import type { PortfolioDto } from '@self/sdk';
 
@@ -47,7 +46,7 @@
 		new Field('dob', {
 			type: 'date',
 			label: 'Date of Birth',
-			value: toDateInput(data?.dob),
+			value: data?.dob?.split('T')[0],
 		}),
 	];
 </script>
@@ -57,13 +56,19 @@
 	entityTitle="portfolios"
 	{formType}
 	{basicFields}
-	onCreate={(values) =>
-		$page.stuff.api.portfolios.create({
+	onCreate={(values) => {
+		const organizationId = $session.user?.role.organizationId;
+		if (!organizationId) {
+			// Type Redundancy
+			throw new Error('No organizationId found in session');
+		}
+		return $page.stuff.api.portfolios.create({
 			createPortfolioDto: {
 				...values,
-				organizationId: $session.user?.role.orgId,
+				organizationId,
 			},
-		})}
+		});
+	}}
 	onUpdate={(values) =>
 		$page.stuff.api.portfolios.update({
 			id: data.id,

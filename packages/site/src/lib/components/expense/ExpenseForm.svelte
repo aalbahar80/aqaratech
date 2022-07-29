@@ -4,7 +4,6 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
-	import { toDateInput } from '$lib/utils/common';
 	import { parseExpenseTypeOptions } from '$lib/utils/expense-type-options';
 	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
@@ -127,7 +126,7 @@
 		new Field('postAt', {
 			required: true,
 			type: 'date',
-			value: toDateInput(data?.postAt),
+			value: data?.postAt.split('T')[0],
 			label: 'Post Date',
 		}),
 		new SelectField('categoryId', {

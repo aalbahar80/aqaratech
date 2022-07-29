@@ -4,7 +4,6 @@
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
-	import { toDateInput } from '$lib/utils/common';
 	import { schema } from '$models/schemas/tenant.schema';
 	import type { TenantDto } from '@self/sdk';
 
@@ -46,7 +45,7 @@
 		new Field('dob', {
 			type: 'date',
 			label: 'Date of Birth',
-			value: toDateInput(data?.dob),
+			value: data?.dob?.split('T')[0],
 		}),
 		new Field('civilid', {
 			label: 'Civil ID',
@@ -72,7 +71,7 @@
 		new Field('residencyEnd', {
 			type: 'date',
 			label: 'Residency Expiration',
-			value: toDateInput(data?.residencyEnd),
+			value: data?.residencyEnd?.split('T')[0],
 		}),
 	];
 </script>

@@ -4,7 +4,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
-	import { getUnitLabel, toDateInput } from '$lib/utils/common';
+	import { getUnitLabel } from '$lib/utils/common';
 	import { getAddress } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/lease.schema';
 	import type {
@@ -146,12 +146,12 @@
 		new Field('start', {
 			type: 'date',
 			required: true,
-			value: toDateInput(data?.start),
+			value: data?.start.split('T')[0],
 		}),
 		new Field('end', {
 			type: 'date',
 			required: true,
-			value: toDateInput(data?.end),
+			value: data?.end.split('T')[0],
 		}),
 		new Field('canPay', {
 			label: 'Allow tenant to pay invoices online',
