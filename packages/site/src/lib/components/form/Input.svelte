@@ -72,22 +72,10 @@
 					class="text-sm font-medium text-gray-700"
 					passive
 				>
-					{field.name === 'deactivated'
-						? 'Deactivated'
-						: field.name === 'notify'
-						? 'Auto payment reminders'
-						: field.name === 'isPaid'
-						? 'Paid?'
-						: ''}
+					{field.label}
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
-					{field.name === 'deactivated'
-						? 'TRUE: Payments cannot be paid. FALSE: Rent payments are enabled.'
-						: field.name === 'notify'
-						? 'Enable to send payment reminders automatically.'
-						: field.name === 'isPaid'
-						? 'Whether this transaction has already been paid or not.'
-						: ''}
+					{field.description}
 				</SwitchDescription>
 			</span>
 			<Switch

@@ -153,14 +153,16 @@
 			required: true,
 			value: toDateInput(data?.end),
 		}),
-		new Field('notify', {
-			type: 'checkbox',
-			value: data?.notify || true,
-			autoInit: true,
-		}),
 		new Field('deactivated', {
+			label: 'Allow tenant to pay invoices online',
 			type: 'checkbox',
 			value: data?.deactivated || false,
+			autoInit: true,
+		}),
+		new Field('notify', {
+			label: 'Send payment reminders',
+			type: 'checkbox',
+			value: data?.notify || true,
 			autoInit: true,
 		}),
 	];

@@ -42,6 +42,12 @@
 			disabled: true,
 			autoInit: true,
 		}),
+		new Field('isPaid', {
+			label: 'Paid',
+			type: 'checkbox',
+			value: data?.isPaid ?? false,
+			autoInit: true,
+		}),
 		new Field('amount', {
 			type: 'number',
 			required: true,
@@ -60,12 +66,6 @@
 			value: data?.dueAt?.split('T')[0],
 			label: 'Due Date',
 			hint: 'If a due date is set, the transaction will be marked as "Past Due" after the due date. If a due date is not set, the transaction will only be marked as "Due" after it\'s post date.',
-		}),
-		new Field('isPaid', {
-			type: 'checkbox',
-			value: data?.isPaid ?? false,
-			autoInit: true,
-			label: 'Paid',
 		}),
 		new Field('paidAt', {
 			type: 'date',

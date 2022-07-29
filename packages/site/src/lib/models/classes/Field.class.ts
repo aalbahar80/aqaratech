@@ -17,7 +17,14 @@ export class Field {
 	valid = true;
 	errorMessage: string | undefined = '';
 	warnMessage: string | undefined = '';
+	/**
+	 * Displayed using tooltip.
+	 */
 	hint = '';
+	/**
+	 * Only shown for checkbox fields.
+	 */
+	description = '';
 	required = false; // TODO: derive from zod schema
 	disabled = false;
 	/**
