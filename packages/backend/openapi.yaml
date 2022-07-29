@@ -1236,7 +1236,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                type: string
       tags: &ref_11
         - properties
     get:
@@ -1335,7 +1335,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                type: string
       tags: *ref_11
     delete:
       operationId: remove
@@ -1352,7 +1352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                type: string
       tags: *ref_11
   /properties/{id}/units:
     get:
@@ -3140,20 +3140,6 @@ components:
         phone:
           type: string
           nullable: true
-    PropertyBreadcrumbsDto:
-      type: object
-      properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - portfolio
-        - property
     PropertyDto:
       type: object
       properties:
@@ -3168,8 +3154,10 @@ components:
           format: date-time
           type: string
           readOnly: true
+        address:
+          type: string
         breadcrumbs:
-          $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         portfolioId:
           type: string
         area:
@@ -3211,6 +3199,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - address
         - breadcrumbs
         - portfolioId
         - area

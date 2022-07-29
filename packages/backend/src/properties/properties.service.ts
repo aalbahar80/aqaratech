@@ -4,19 +4,12 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
-import {
-  BreadcrumbDto,
-  PortfolioLabelParams,
-  PropertyLabelParams,
-} from 'src/common/dto/breadcrumb.dto';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   CreatePropertyDto,
-  PropertyBreadcrumbsDto,
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -38,12 +31,13 @@ export class PropertiesService {
     );
 
     const toCreate = R.omit(createPropertyDto, ['portfolioId']);
-    return this.prisma.property.create({
+    const created = await this.prisma.property.create({
       data: {
         ...toCreate,
         portfolio: { connect: { id: createPropertyDto.portfolioId } },
       },
     });
+    return created.id;
   }
 
   async findAll({
@@ -72,13 +66,7 @@ export class PropertiesService {
       this.prisma.property.count({ where: filter }),
     ]);
 
-    const properties = results.map((property) => {
-      const breadcrumbs = this.getBreadcrumbs(property);
-      const { portfolio, ...toReturn } = property;
-      return { ...toReturn, breadcrumbs };
-    });
-
-    return { total, results: properties };
+    return { total, results: results.map((p) => new PropertyDto(p)) };
   }
 
   async findOne({ id }: { id: string }) {
@@ -87,12 +75,11 @@ export class PropertiesService {
       // TODO only select the fields we need for breadcrumbs
       include: { portfolio: true },
     });
-    const breadcrumbs = this.getBreadcrumbs(property);
 
-    return { ...property, breadcrumbs };
+    return new PropertyDto(property);
   }
 
-  update({
+  async update({
     id,
     updatePropertyDto,
     user,
@@ -106,27 +93,15 @@ export class PropertiesService {
       subject('Property', { id, ...updatePropertyDto }),
     );
 
-    return this.prisma.property.update({
+    const updated = await this.prisma.property.update({
       where: { id },
       data: updatePropertyDto,
     });
+    return updated.id;
   }
 
-  remove({ id }: { id: string }) {
-    return this.prisma.property.delete({ where: { id } });
-  }
-
-  // ::: HELPERS :::
-
-  getBreadcrumbs(
-    property: PropertyLabelParams & { portfolio: PortfolioLabelParams },
-  ): PropertyBreadcrumbsDto {
-    return {
-      portfolio: new BreadcrumbDto({
-        rel: Rel.Portfolio,
-        ...property.portfolio,
-      }),
-      property: new BreadcrumbDto({ rel: Rel.Property, ...property }),
-    };
+  async remove({ id }: { id: string }) {
+    const deleted = await this.prisma.property.delete({ where: { id } });
+    return deleted.id;
   }
 }

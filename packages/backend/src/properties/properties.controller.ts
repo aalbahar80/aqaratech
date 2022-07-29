@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -7,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -27,7 +29,6 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import {
   CreatePropertyDto,
-  PropertyBasicDto,
   PropertyDto,
   UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -36,6 +37,7 @@ import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
 @ApiHeader({ name: ROLE_HEADER })
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('properties')
 @ApiTags('properties')
 @SwaggerAuth()
@@ -47,11 +49,11 @@ export class PropertiesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Property' })
-  @ApiCreatedResponse({ type: PropertyDto })
+  @ApiCreatedResponse({ type: String })
   create(
     @User() user: IUser,
     @Body() createPropertyDto: CreatePropertyDto,
-  ): Promise<PropertyBasicDto> {
+  ): Promise<string> {
     return this.propertiesService.create({ createPropertyDto, user });
   }
 
@@ -74,19 +76,19 @@ export class PropertiesController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Property' })
-  @ApiOkResponse({ type: PropertyDto })
+  @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
-  ): Promise<PropertyBasicDto> {
+  ): Promise<string> {
     return this.propertiesService.update({ id, updatePropertyDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Property' })
-  @ApiOkResponse({ type: PropertyDto })
-  remove(@Param('id') id: string): Promise<PropertyBasicDto> {
+  @ApiOkResponse({ type: String })
+  remove(@Param('id') id: string): Promise<string> {
     return this.propertiesService.remove({ id });
   }
 
