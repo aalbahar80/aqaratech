@@ -59,7 +59,7 @@
 	onCreate={(values) => {
 		const organizationId = $session.user?.role.organizationId;
 		if (!organizationId) {
-			// Type Redundancy
+			// Type Hack
 			throw new Error('No organizationId found in session');
 		}
 		return $page.stuff.api.portfolios.create({
@@ -69,14 +69,10 @@
 			},
 		});
 	}}
-	onUpdate={(values) => {
-		if (!data) {
-			// Type Redundancy
-			throw new Error('No data found in form');
-		}
-		return $page.stuff.api.portfolios.update({
+	onUpdate={(values) =>
+		data && // type hack
+		$page.stuff.api.portfolios.update({
 			id: data.id,
 			updatePortfolioDto: values,
-		});
-	}}
+		})}
 />
