@@ -49,7 +49,7 @@
 	entityTitle="organizations"
 	{formType}
 	{basicFields}
-	onCreate={(values) =>
+	onSubmit={(values) =>
 		$page.stuff.api.organizations.create({
 			createOrganizationDto: values,
 		})}

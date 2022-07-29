@@ -80,17 +80,28 @@
 	];
 </script>
 
-<Form
-	schema={formType === 'create' ? createSchema : updateSchema}
-	{warnSchema}
-	entityTitle="leaseInvoices"
-	{formType}
-	{basicFields}
-	onCreate={(values) =>
-		$page.stuff.api.leaseInvoices.create({ createLeaseInvoiceDto: values })}
-	onUpdate={(values) =>
-		$page.stuff.api.leaseInvoices.update({
-			id: data.id,
-			updateLeaseInvoiceDto: values,
-		})}
-/>
+{#if formType === 'update'}
+	<Form
+		schema={updateSchema}
+		{warnSchema}
+		entityTitle="leaseInvoices"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			data &&
+			$page.stuff.api.leaseInvoices.update({
+				id: data.id,
+				updateLeaseInvoiceDto: values,
+			})}
+	/>
+{:else}
+	<Form
+		schema={createSchema}
+		{warnSchema}
+		entityTitle="leaseInvoices"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			$page.stuff.api.leaseInvoices.create({ createLeaseInvoiceDto: values })}
+	/>
+{/if}

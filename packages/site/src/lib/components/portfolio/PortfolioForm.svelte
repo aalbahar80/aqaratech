@@ -51,28 +51,37 @@
 	];
 </script>
 
-<Form
-	{schema}
-	entityTitle="portfolios"
-	{formType}
-	{basicFields}
-	onCreate={(values) => {
-		const organizationId = $session.user?.role.organizationId;
-		if (!organizationId) {
-			// Type Hack
-			throw new Error('No organizationId found in session');
-		}
-		return $page.stuff.api.portfolios.create({
-			createPortfolioDto: {
-				...values,
-				organizationId,
-			},
-		});
-	}}
-	onUpdate={(values) =>
-		data && // type hack
-		$page.stuff.api.portfolios.update({
-			id: data.id,
-			updatePortfolioDto: values,
-		})}
-/>
+{#if formType === 'update'}
+	<Form
+		{schema}
+		entityTitle="portfolios"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			data && // type hack
+			$page.stuff.api.portfolios.update({
+				id: data.id,
+				updatePortfolioDto: values,
+			})}
+	/>
+{:else}
+	<Form
+		{schema}
+		entityTitle="portfolios"
+		{formType}
+		{basicFields}
+		onSubmit={(values) => {
+			const organizationId = $session.user?.role.organizationId;
+			if (!organizationId) {
+				// type hack
+				throw new Error('No organizationId found in session');
+			}
+			return $page.stuff.api.portfolios.create({
+				createPortfolioDto: {
+					...values,
+					organizationId,
+				},
+			});
+		}}
+	/>
+{/if}

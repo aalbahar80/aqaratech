@@ -11,22 +11,20 @@
 	import { validator } from '@felte/validator-zod';
 	import { ResponseError } from '@self/sdk';
 	import { createForm } from 'felte';
-	import type { z } from 'zod';
+	import type { z, ZodSchema } from 'zod';
 
 	type Schema = $$Generic<z.ZodTypeAny>;
-	type Updated = $$Generic<{ id: string }>;
-	type Created = $$Generic<{ id: string }>;
+	type Submitted = $$Generic<{ id: string } | Record<string, any>>;
 
+	export let formType: 'create' | 'update';
 	export let schema: Schema;
-	export let warnSchema: Schema | undefined = undefined;
+	export let warnSchema: ZodSchema | undefined = undefined;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
-	export let formType: 'create' | 'update';
-	export let onCreate: (values: z.infer<Schema>) => Promise<Created>;
-	export let onUpdate: (values: z.infer<Schema>) => Promise<Updated>;
-	export let onSuccess: (value: Updated | Created) => Promise<void> = (value) =>
-		goto(`/${entityNameMap[entityTitle].urlName}/${value.id}`);
+	export let onSubmit: (values: z.infer<Schema>) => Promise<Submitted>;
+	export let onSuccess: (value: Submitted) => Promise<void> = (value) =>
+		goto(`/${entityNameMap[entityTitle].urlName}/${value?.id ?? ''}`);
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
 
@@ -62,16 +60,9 @@
 
 		onSubmit: async (original) => {
 			console.debug({ originalFormValues: original });
-			// const values = schema.passthrough().parse(original); // can be problematic with `refine()` enhancements.
-			const values = schema.parse(original); // let zod handle date parsing ("" to null)
+			const values = schema.passthrough().parse(original); // let zod handle date parsing ("" to null)
 			console.debug({ parsedFormValues: values });
-			let value: any;
-			if (formType === 'update') {
-				value = await onUpdate(values);
-			} else {
-				value = await onCreate(values);
-			}
-
+			const value = await onSubmit(values);
 			onSuccess(value);
 		},
 

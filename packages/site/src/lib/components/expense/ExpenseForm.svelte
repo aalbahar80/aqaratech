@@ -143,17 +143,28 @@
 	];
 </script>
 
-<Form
-	schema={formType === 'create' ? createSchema : updateSchema}
-	entityTitle="expenses"
-	{formType}
-	{basicFields}
-	{relationalFields}
-	onCreate={(values) =>
-		$page.stuff.api.expenses.create({ createExpenseDto: values })}
-	onUpdate={(values) =>
-		$page.stuff.api.expenses.update({
-			id: data.id,
-			updateExpenseDto: values,
-		})}
-/>
+{#if formType === 'update'}
+	<Form
+		schema={updateSchema}
+		entityTitle="expenses"
+		{formType}
+		{basicFields}
+		{relationalFields}
+		onSubmit={(values) =>
+			data &&
+			$page.stuff.api.expenses.update({
+				id: data.id,
+				updateExpenseDto: values,
+			})}
+	/>
+{:else}
+	<Form
+		schema={createSchema}
+		entityTitle="expenses"
+		{formType}
+		{basicFields}
+		{relationalFields}
+		onSubmit={(values) =>
+			$page.stuff.api.expenses.create({ createExpenseDto: values })}
+	/>
+{/if}

@@ -26,14 +26,20 @@
 	entityTitle="roles"
 	formType="create"
 	{basicFields}
-	onCreate={(values) =>
-		$page.stuff.api.roles.create({
+	onSubmit={(values) => {
+		const organizationId = $session.user?.role.organizationId;
+		if (!organizationId) {
+			// type hack
+			throw new Error('No organizationId found in session');
+		}
+		return $page.stuff.api.roles.create({
 			createRoleDto: {
 				roleType: predefined.roleType,
-				organizationId: $session.user?.role.organizationId,
+				organizationId,
 				...values,
 			},
-		})}
+		});
+	}}
 	onSuccess={() => {
 		addSuccessToast(
 			'Member added. An email invitation will be sent to the user.',

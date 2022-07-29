@@ -76,21 +76,37 @@
 	];
 </script>
 
-<Form
-	{schema}
-	entityTitle="tenants"
-	{formType}
-	{basicFields}
-	onCreate={(values) =>
-		$page.stuff.api.tenants.create({
-			createTenantDto: {
-				...values,
-				organizationId: $session.user?.role.organizationId,
-			},
-		})}
-	onUpdate={(values) =>
-		$page.stuff.api.tenants.update({
-			id: data.id,
-			updateTenantDto: values,
-		})}
-/>
+{#if formType === 'update'}
+	<Form
+		{schema}
+		entityTitle="tenants"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			data && // type hack
+			$page.stuff.api.tenants.update({
+				id: data.id,
+				updateTenantDto: values,
+			})}
+	/>
+{:else}
+	<Form
+		{schema}
+		entityTitle="tenants"
+		{formType}
+		{basicFields}
+		onSubmit={(values) => {
+			const organizationId = $session.user?.role.organizationId;
+			if (!organizationId) {
+				// type hack
+				throw new Error('No organizationId found in session');
+			}
+			return $page.stuff.api.tenants.create({
+				createTenantDto: {
+					...values,
+					organizationId,
+				},
+			});
+		}}
+	/>
+{/if}
