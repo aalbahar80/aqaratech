@@ -15,7 +15,7 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
@@ -89,18 +89,14 @@ export class PropertyDto extends IntersectionType(
   @Expose()
   get breadcrumbs(): PropertyBreadcrumbsDto {
     return {
-      portfolio: {
-        id: this.portfolioId,
-        label: this.portfolio.fullName,
+      portfolio: new BreadcrumbDto({
         rel: Rel.Portfolio,
-        href: `/portfolios/${this.portfolioId}`,
-      },
-      property: {
-        label: this.address,
-        href: `/properties/${this.id}`,
-        id: this.id,
-        rel: Rel.Property, // TODO remove
-      },
+        ...this.portfolio,
+      }),
+      property: new BreadcrumbDto({
+        rel: Rel.Property,
+        ...this,
+      }),
     };
   }
 }
