@@ -41,7 +41,6 @@
 			hint: labelHint,
 		}),
 		new Field('phone', {
-			hint: "Adding a tenant's phone unlocks SMS payment reminders.",
 			value: data?.phone,
 		}),
 		new Field('dob', {
