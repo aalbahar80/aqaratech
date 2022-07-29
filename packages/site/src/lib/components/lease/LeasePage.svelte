@@ -28,7 +28,7 @@
 	const files: [string, string][] = [['Lease', 'TODO implement']];
 	const icons = [
 		{
-			label: `Expiry: ${formatDistance(lease.end, new Date(), {
+			label: `Expiry: ${formatDistance(new Date(lease.end), new Date(), {
 				addSuffix: true,
 			})}`,
 			icon: Fa6SolidCalendarXmark,

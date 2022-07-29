@@ -28,14 +28,14 @@ export const getInvoiceBadge = (trx: {
 	}
 };
 
-export const getLeaseBadge = (dates: { start: Date; end: Date }) => {
-	if (dates.end < new Date()) {
+export const getLeaseBadge = (dates: { start: string; end: string }) => {
+	if (new Date(dates.end) < new Date()) {
 		return {
 			label: 'Expired',
 			color: 'red',
 		};
 	}
-	if (dates.start > new Date()) {
+	if (new Date(dates.start) > new Date()) {
 		return {
 			label: 'Upcoming',
 			color: 'indigo',
