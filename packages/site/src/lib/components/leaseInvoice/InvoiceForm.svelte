@@ -3,10 +3,10 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
-	import { toDateInput } from '$lib/utils/common';
 	import {
 		createSchema,
 		updateSchema,
+		warnSchema,
 	} from '$models/schemas/transaction.schema';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 
@@ -51,13 +51,13 @@
 		new Field('postAt', {
 			type: 'date',
 			required: true,
-			value: toDateInput(data?.postAt),
+			value: data?.postAt.split('T')[0],
 			label: 'Post Date',
 			hint: "Note that a transaction cannot be paid before it's post date.\n\nتاريخ الاستحقاق",
 		}),
 		new Field('dueAt', {
 			type: 'date',
-			value: toDateInput(data?.dueAt),
+			value: data?.dueAt?.split('T')[0],
 			label: 'Due Date',
 			hint: 'If a due date is set, the transaction will be marked as "Past Due" after the due date. If a due date is not set, the transaction will only be marked as "Due" after it\'s post date.',
 		}),
@@ -69,7 +69,7 @@
 		}),
 		new Field('paidAt', {
 			type: 'date',
-			value: toDateInput(data?.paidAt),
+			value: data?.paidAt?.split('T')[0],
 			label: 'Payment Date',
 			hint: 'When was this transaction paid?\n\nتاريخ الدفع',
 		}),
@@ -82,6 +82,7 @@
 
 <Form
 	schema={formType === 'create' ? createSchema : updateSchema}
+	{warnSchema}
 	entityTitle="leaseInvoices"
 	{formType}
 	{basicFields}

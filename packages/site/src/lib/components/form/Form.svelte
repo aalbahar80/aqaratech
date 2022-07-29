@@ -18,6 +18,7 @@
 	type Created = $$Generic<{ id: string }>;
 
 	export let schema: Schema;
+	export let warnSchema: Schema | undefined = undefined;
 	export let entityTitle: EntityTitle;
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
@@ -52,7 +53,12 @@
 
 		...(initialValues && { initialValues }), // for fields that do not use the `name` attribute.
 
-		extend: validator({ schema }),
+		extend: [
+			validator({ schema }),
+			...(warnSchema
+				? [validator({ schema: warnSchema, level: 'warning' })]
+				: []),
+		],
 
 		onSubmit: async (original) => {
 			console.debug({ originalFormValues: original });
