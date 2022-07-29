@@ -7,12 +7,12 @@ import {
 import { Tenant } from '@prisma/client';
 import {
   IsISO31661Alpha3,
-  IsISO8601,
   IsPhoneNumber,
   IsString,
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 
@@ -34,7 +34,7 @@ class TenantOptionalDto {
   @IsPhoneNumber('KW')
   phone: string | null;
 
-  @IsISO8601()
+  @DateType()
   dob: Date | null;
 
   @IsString()
@@ -46,7 +46,7 @@ class TenantOptionalDto {
   @IsString()
   residencyNum: string | null;
 
-  @IsISO8601()
+  @DateType()
   residencyEnd: Date | null;
 }
 

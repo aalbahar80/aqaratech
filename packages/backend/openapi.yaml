@@ -2230,6 +2230,14 @@ components:
     CreateTenantDto:
       type: object
       properties:
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        residencyEnd:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2245,10 +2253,6 @@ components:
         phone:
           type: string
           nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
         passportNum:
           type: string
           nullable: true
@@ -2256,10 +2260,6 @@ components:
           type: string
           nullable: true
         residencyNum:
-          type: string
-          nullable: true
-        residencyEnd:
-          format: date-time
           type: string
           nullable: true
       required:
@@ -2279,6 +2279,14 @@ components:
           format: date-time
           type: string
           readOnly: true
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        residencyEnd:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2294,10 +2302,6 @@ components:
         phone:
           type: string
           nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
         passportNum:
           type: string
           nullable: true
@@ -2307,24 +2311,20 @@ components:
         residencyNum:
           type: string
           nullable: true
-        residencyEnd:
-          format: date-time
-          type: string
-          nullable: true
       required:
         - id
         - createdAt
         - updatedAt
+        - dob
+        - residencyEnd
         - organizationId
         - fullName
         - label
         - civilid
         - phone
-        - dob
         - passportNum
         - nationality
         - residencyNum
-        - residencyEnd
     CombinedEnum:
       type: string
       enum:
@@ -2486,6 +2486,14 @@ components:
           format: date-time
           type: string
           readOnly: true
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        residencyEnd:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         leases:
           readOnly: true
           type: array
@@ -2506,10 +2514,6 @@ components:
         phone:
           type: string
           nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
         passportNum:
           type: string
           nullable: true
@@ -2519,28 +2523,32 @@ components:
         residencyNum:
           type: string
           nullable: true
-        residencyEnd:
-          format: date-time
-          type: string
-          nullable: true
       required:
         - id
         - createdAt
         - updatedAt
+        - dob
+        - residencyEnd
         - leases
         - organizationId
         - fullName
         - label
         - civilid
         - phone
-        - dob
         - passportNum
         - nationality
         - residencyNum
-        - residencyEnd
     UpdateTenantDto:
       type: object
       properties:
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        residencyEnd:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         fullName:
           type: string
           minLength: 1
@@ -2554,10 +2562,6 @@ components:
         phone:
           type: string
           nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
         passportNum:
           type: string
           nullable: true
@@ -2565,10 +2569,6 @@ components:
           type: string
           nullable: true
         residencyNum:
-          type: string
-          nullable: true
-        residencyEnd:
-          format: date-time
           type: string
           nullable: true
     LeaseDto:
@@ -2666,12 +2666,15 @@ components:
           readOnly: true
         postAt:
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
         amount:
@@ -2807,12 +2810,15 @@ components:
       properties:
         postAt:
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -2846,12 +2852,15 @@ components:
           readOnly: true
         postAt:
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -2882,12 +2891,15 @@ components:
       properties:
         postAt:
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -3005,12 +3017,15 @@ components:
       properties:
         postAt:
           type: string
+          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
+          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1

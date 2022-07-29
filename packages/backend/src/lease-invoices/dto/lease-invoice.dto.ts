@@ -1,22 +1,21 @@
 import {
-  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
-import { IsBoolean, IsISO8601, IsPositive, IsString } from 'class-validator';
+import { IsBoolean, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 class LeaseInvoiceRequiredDto {
   @IsPositive()
   amount: number;
 
-  @IsISO8601()
-  @ApiProperty({ type: 'string' })
+  @DateType()
   postAt: Date;
 
   @Nanoid()
@@ -24,12 +23,10 @@ class LeaseInvoiceRequiredDto {
 }
 
 class LeaseInvoiceOptionalDto {
-  @IsISO8601()
-  @ApiProperty({ type: 'string' })
+  @DateType()
   dueAt: Date | null;
 
-  @IsISO8601()
-  @ApiProperty({ type: 'string' })
+  @DateType()
   paidAt: Date | null;
 
   @IsBoolean()
