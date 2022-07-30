@@ -60,7 +60,7 @@ class PropertyOptionalDto {
   lat: number | null;
 }
 
-export class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'portfolio',
   'property',
 ]) {}
