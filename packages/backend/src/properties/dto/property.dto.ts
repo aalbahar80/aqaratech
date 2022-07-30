@@ -1,4 +1,5 @@
 import {
+  ApiHideProperty,
   ApiProperty,
   IntersectionType,
   OmitType,
@@ -15,10 +16,13 @@ import {
   Length,
 } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  BreadcrumbsDto,
+  PortfolioLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 
 class PropertyRequiredDto {
   @Nanoid()
@@ -74,8 +78,9 @@ export class PropertyDto extends IntersectionType(
     Object.assign(this, partial);
   }
 
+  @ApiHideProperty()
   @Exclude()
-  portfolio: PortfolioDto;
+  portfolio: PortfolioLabelParams;
 
   @ApiProperty()
   @Expose()

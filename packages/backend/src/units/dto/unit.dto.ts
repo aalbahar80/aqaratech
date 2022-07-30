@@ -1,15 +1,27 @@
 import {
+  ApiHideProperty,
+  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
-import { Unit } from '@prisma/client';
+import { Property, Unit } from '@prisma/client';
+import { Exclude, Expose, Type } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
+import { formatDistance } from 'date-fns';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  BreadcrumbsDto,
+  PortfolioLabelParams,
+  PropertyLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
 import { HateoasDto } from 'src/common/dto/hateoas.dto';
+import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { LeaseDto } from 'src/leases/dto/lease.dto';
+import { PropertyDto } from 'src/properties/dto/property.dto';
 
 class UnitRequiredDto {
   @Nanoid()
@@ -77,6 +89,49 @@ export class UnitBasicDto extends IntersectionType(
 }
 
 export class UnitDto extends UnitBasicDto {
-  breadcrumbs: UnitBreadcrumbsDto;
-  vacancy: UnitVacancy;
+  constructor(partial: Partial<UnitDto>) {
+    super();
+    Object.assign(this, partial);
+  }
+
+  @ApiHideProperty()
+  @Exclude()
+  leases: Pick<LeaseDto, 'start' | 'end'>[];
+
+  @ApiHideProperty()
+  @Exclude()
+  property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+
+  @ApiProperty()
+  @Expose()
+  get vacancy(): UnitVacancy {
+    const isVacant = this.leases.some(
+      (l) => l.start <= new Date() && l.end >= new Date(),
+    );
+    const lease = this.leases[0];
+
+    const vacancyDistance = lease?.end
+      ? formatDistance(this.leases[0].end, new Date(), {
+          addSuffix: true,
+        })
+      : '';
+
+    const vacancyDate = lease?.end ?? null;
+
+    return { isVacant, vacancyDistance, vacancyDate };
+  }
+
+  @ApiProperty()
+  @Expose()
+  get breadcrumbs(): UnitBreadcrumbsDto {
+    const property = new PropertyDto(this.property);
+    return {
+      portfolio: property.breadcrumbs.portfolio,
+      property: property.breadcrumbs.property,
+      unit: new BreadcrumbDto({
+        rel: Rel.Unit,
+        ...this,
+      }),
+    };
+  }
 }

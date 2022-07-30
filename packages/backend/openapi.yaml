@@ -3172,8 +3172,6 @@ components:
           type: string
         breadcrumbs:
           $ref: '#/components/schemas/PropertyBreadcrumbsDto'
-        portfolio:
-          $ref: '#/components/schemas/PortfolioDto'
         portfolioId:
           type: string
         area:
@@ -3217,7 +3215,6 @@ components:
         - updatedAt
         - address
         - breadcrumbs
-        - portfolio
         - portfolioId
         - area
         - block
@@ -3230,6 +3227,22 @@ components:
         - label
         - long
         - lat
+    UnitVacancy:
+      type: object
+      properties:
+        isVacant:
+          type: boolean
+        vacancyDistance:
+          type: string
+          nullable: true
+        vacancyDate:
+          format: date-time
+          type: string
+          nullable: true
+      required:
+        - isVacant
+        - vacancyDistance
+        - vacancyDate
     UnitBreadcrumbsDto:
       type: object
       properties:
@@ -3249,22 +3262,6 @@ components:
         - portfolio
         - property
         - unit
-    UnitVacancy:
-      type: object
-      properties:
-        isVacant:
-          type: boolean
-        vacancyDistance:
-          type: string
-          nullable: true
-        vacancyDate:
-          format: date-time
-          type: string
-          nullable: true
-      required:
-        - isVacant
-        - vacancyDistance
-        - vacancyDate
     HateoasDto:
       type: object
       properties:
@@ -3288,10 +3285,10 @@ components:
           format: date-time
           type: string
           readOnly: true
-        breadcrumbs:
-          $ref: '#/components/schemas/UnitBreadcrumbsDto'
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
+        breadcrumbs:
+          $ref: '#/components/schemas/UnitBreadcrumbsDto'
         hateoas:
           $ref: '#/components/schemas/HateoasDto'
         propertyId:
@@ -3332,8 +3329,8 @@ components:
         - id
         - createdAt
         - updatedAt
-        - breadcrumbs
         - vacancy
+        - breadcrumbs
         - hateoas
         - propertyId
         - unitNumber

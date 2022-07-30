@@ -61,7 +61,7 @@ export class PropertiesService {
         skip: (page - 1) * take,
         orderBy: { createdAt: 'desc' },
         where: filter,
-        include: { portfolio: true },
+        include: { portfolio: { select: { id: true, fullName: true } } },
       }),
       this.prisma.property.count({ where: filter }),
     ]);
@@ -72,8 +72,7 @@ export class PropertiesService {
   async findOne({ id }: { id: string }) {
     const property = await this.prisma.property.findUnique({
       where: { id },
-      // TODO only select the fields we need for breadcrumbs
-      include: { portfolio: true },
+      include: { portfolio: { select: { id: true, fullName: true } } },
     });
 
     return new PropertyDto(property);
