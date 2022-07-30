@@ -1,11 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsDate } from 'class-validator';
-// Uninstall `validator` once this issue is resolved:
-// Instead use the same function from `class-validator`, also called `isISO8601`.
-// https://github.com/typestack/class-validator/issues/1061
-import isISO8601 from 'validator/lib/isISO8601';
+import { IsDate, isISO8601 } from 'class-validator';
 
 /**
  * Decorator to make openapi-generator to treat dates as strings.
@@ -31,6 +27,9 @@ export function DateType(required = true): PropertyDecorator {
     // 1. Transform
     Transform((p) => {
       if (
+        // pending bug: strict option not being respected
+        // https://github.com/typestack/class-validator/issues/1061
+        // https://github.com/validatorjs/validator.js/issues/2003
         isISO8601(p.value, { strict: true }) &&
         typeof p.value === 'string' &&
         !p.value.endsWith('00:00:00.000Z')
