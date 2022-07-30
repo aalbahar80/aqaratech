@@ -19,6 +19,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
   BreadcrumbDto,
   BreadcrumbsDto,
+  IBreadcrumbs,
   PortfolioLabelParams,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
@@ -80,7 +81,7 @@ export class PropertyDto extends IntersectionType(
 
   @ApiHideProperty()
   @Exclude()
-  portfolio: PortfolioLabelParams;
+  portfolio: IBreadcrumbs['portfolio'];
 
   @ApiProperty()
   @Expose()

@@ -2,6 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Rel } from 'src/constants/rel.enum';
 import { getAddress, getUnitLabel } from 'src/utils/address';
 
+export interface IBreadcrumbs {
+  tenant: TenantLabelParams;
+  portfolio: PortfolioLabelParams;
+  property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+  unit: UnitLabelParams & {
+    property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+  };
+}
+
 export interface TenantLabelParams {
   id: string;
   fullName: string;

@@ -13,6 +13,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
   BreadcrumbDto,
   BreadcrumbsDto,
+  IBreadcrumbs,
   PortfolioLabelParams,
   PropertyLabelParams,
   TenantLabelParams,
@@ -72,13 +73,11 @@ export class LeaseDto extends IntersectionType(
 
   @ApiHideProperty()
   @Exclude()
-  tenant: TenantLabelParams;
+  tenant: IBreadcrumbs['tenant'];
 
   @ApiHideProperty()
   @Exclude()
-  unit: UnitLabelParams & {
-    property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
-  };
+  unit: IBreadcrumbs['unit'];
 
   @ApiProperty()
   @Expose()
