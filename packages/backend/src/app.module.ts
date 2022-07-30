@@ -1,4 +1,9 @@
-import { CacheModule, Module, Scope } from '@nestjs/common';
+import {
+  CacheModule,
+  ClassSerializerInterceptor,
+  Module,
+  Scope,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -70,6 +75,7 @@ import { UsersModule } from './users/users.module';
     AppService,
     { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
     { provide: APP_GUARD, useClass: AbilitiesGuard },
+    { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
     PostmarkService,
   ],
 })

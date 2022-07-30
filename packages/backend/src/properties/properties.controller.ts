@@ -1,6 +1,5 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -8,7 +7,6 @@ import {
   Patch,
   Post,
   Query,
-  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -37,7 +35,6 @@ import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
 @ApiHeader({ name: ROLE_HEADER })
-@UseInterceptors(ClassSerializerInterceptor)
 @Controller('properties')
 @ApiTags('properties')
 @SwaggerAuth()
