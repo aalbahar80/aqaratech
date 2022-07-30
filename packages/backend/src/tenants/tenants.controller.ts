@@ -59,7 +59,7 @@ export class TenantsController {
   create(
     @User() user: IUser,
     @Body() createTenantDto: CreateTenantDto,
-  ): Promise<TenantDto> {
+  ): Promise<string> {
     return this.tenantsService.create({ createTenantDto, user });
   }
 
@@ -87,14 +87,14 @@ export class TenantsController {
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateTenantDto: UpdateTenantDto,
-  ): Promise<TenantDto> {
+  ): Promise<string> {
     return this.tenantsService.update({ id, updateTenantDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
   @ApiOkResponse({ type: TenantDto })
-  remove(@Param('id') id: string): Promise<TenantDto> {
+  remove(@Param('id') id: string): Promise<string> {
     return this.tenantsService.remove({ id });
   }
 

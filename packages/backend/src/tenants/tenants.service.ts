@@ -30,12 +30,13 @@ export class TenantsService {
     );
 
     const toCreate = R.omit(createTenantDto, ['organizationId']);
-    return this.prisma.tenant.create({
+    const created = await this.prisma.tenant.create({
       data: {
         ...toCreate,
         organization: { connect: { id: createTenantDto.organizationId } },
       },
     });
+    return created.id;
   }
 
   async findAll({
@@ -78,7 +79,7 @@ export class TenantsService {
     });
   }
 
-  update({
+  async update({
     id,
     updateTenantDto,
     user,
@@ -92,14 +93,16 @@ export class TenantsService {
       subject('Tenant', { id, ...updateTenantDto }),
     );
 
-    return this.prisma.tenant.update({
+    const updated = await this.prisma.tenant.update({
       where: { id },
       data: updateTenantDto,
     });
+    return updated.id;
   }
 
-  remove({ id }: { id: string }) {
-    return this.prisma.tenant.delete({ where: { id } });
+  async remove({ id }: { id: string }) {
+    const deleted = await this.prisma.tenant.delete({ where: { id } });
+    return deleted.id;
   }
 
   getName(tenant: TenantDto) {
