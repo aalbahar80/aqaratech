@@ -2327,16 +2327,8 @@ components:
         - id
         - createdAt
         - updatedAt
-        - dob
-        - residencyEnd
         - organizationId
         - fullName
-        - label
-        - civilid
-        - phone
-        - passportNum
-        - nationality
-        - residencyNum
     CombinedEnum:
       type: string
       enum:
@@ -2539,17 +2531,9 @@ components:
         - id
         - createdAt
         - updatedAt
-        - dob
-        - residencyEnd
         - leases
         - organizationId
         - fullName
-        - label
-        - civilid
-        - phone
-        - passportNum
-        - nationality
-        - residencyNum
     UpdateTenantDto:
       type: object
       properties:

@@ -1,9 +1,4 @@
-import {
-  ApiProperty,
-  IntersectionType,
-  OmitType,
-  PartialType,
-} from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
   IsISO31661Alpha3,
@@ -16,47 +11,40 @@ import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 
-class TenantRequiredDto {
+export class TenantDto extends AbstractDto {
   @Nanoid()
   organizationId: string;
 
   @Length(1, 255)
   fullName: string;
-}
-
-class TenantOptionalDto {
-  @IsString()
-  label: string | null;
 
   @IsString()
-  civilid: string | null;
+  label?: string | null;
+
+  @IsString()
+  civilid?: string | null;
 
   @IsPhoneNumber('KW')
-  phone: string | null;
+  phone?: string | null;
 
-  @DateType()
-  dob: Date | null;
+  @DateType(false)
+  dob?: Date | null;
 
   @IsString()
-  passportNum: string | null;
+  passportNum?: string | null;
 
   @IsISO31661Alpha3()
-  nationality: string | null;
+  nationality?: string | null;
 
   @IsString()
-  residencyNum: string | null;
+  residencyNum?: string | null;
 
-  @DateType()
-  residencyEnd: Date | null;
+  @DateType(false)
+  residencyEnd?: Date | null;
 }
 
-export class TenantDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(TenantRequiredDto, TenantOptionalDto),
-) {}
-
 export class CreateTenantDto
-  extends IntersectionType(TenantRequiredDto, PartialType(TenantOptionalDto))
+  extends OmitType(TenantDto, ['id', 'createdAt', 'updatedAt'])
   implements Partial<Tenant> {}
 
 export class UpdateTenantDto extends PartialType(
