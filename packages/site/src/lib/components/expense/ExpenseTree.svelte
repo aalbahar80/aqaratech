@@ -1,24 +1,71 @@
 <script lang="ts">
-	import type { ExpenseNode } from '$lib/utils/expense-type-options';
-	import { dndzone, SHADOW_PLACEHOLDER_ITEM_ID } from 'svelte-dnd-action';
+	import {
+		fromHeirarchy,
+		toHeirarchy,
+		type ExpenseNode,
+	} from '$lib/utils/expense-type-options';
+	import * as d3 from 'd3';
+	import {
+		dndzone,
+		SHADOW_PLACEHOLDER_ITEM_ID,
+		type DndEvent,
+	} from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;
 
+	const handleAction = (e: any) => {
+		const detail: DndEvent<ExpenseNode> = e.detail;
+
+		// filter existing children, then add the new one
+		const newChildren = detail.items.filter(
+			(fresh) =>
+				!node.children?.some(
+					(existing) =>
+						existing.id === fresh.id && fresh instanceof d3.hierarchy,
+				),
+		);
+
+		// dedupe the new children by id
+		const deduped = newChildren.reduce<ExpenseNode[]>((acc, fresh) => {
+			if (acc.some((existing) => existing.id === fresh.id)) {
+				return acc;
+			}
+			return [...acc, fresh];
+		}, []);
+		console.log(
+			`${deduped.length} new children, discarded ${
+				newChildren.length - deduped.length
+			} duplicates`,
+		);
+
+		// give the new children a parent
+		deduped.forEach((child) => {
+			child.data.parentId = node.data.id;
+		});
+
+		const newChildrenNames = deduped.map((fresh) => fresh.data.labelEn);
+		if (!deduped.length) {
+			console.log(`no new children for ${node.data.labelEn}`);
+			return;
+		} else {
+			console.log(`${node.data.labelEn} has new child: ${newChildrenNames}`);
+			return deduped;
+			// return fromHeirarchy(root, deduped);
+		}
+	};
+
 	const flipDurationMs = 300;
-	function handleDndConsider(e) {
-		console.log('consider');
-		console.log(e.detail);
-		// node.items = e.detail.items;
-		// node.children = e.detail.items;
+	function handleDndConsider(e: any) {
+		handleAction(e);
 	}
-	function handleDndFinalize(e) {
-		console.log('finalize');
-		console.log(e.detail);
-		// node.items = e.detail.items;
-		// node.children = e.detail.items;
-		// root = { ...root };
+	function handleDndFinalize(e: any) {
+		const updatedNodes = handleAction(e);
+		if (updatedNodes) {
+			const updatedCategories = fromHeirarchy(root, updatedNodes);
+			root = toHeirarchy(updatedCategories);
+		}
 	}
 </script>
 
@@ -44,8 +91,7 @@
 		on:finalize={handleDndFinalize}
 	>
 		<!-- WE FILTER THE SHADOW PLACEHOLDER THAT WAS ADDED IN VERSION 0.7.4, filtering this way rather than checking whether 'nodes' have the id became possible in version 0.9.1 -->
-		<!-- {#each node.children.filter((n) => n.id !== SHADOW_PLACEHOLDER_ITEM_ID) as currentNode (currentNode.id)} -->
-		{#each node.children as currentNode (currentNode.id)}
+		{#each node.children.filter((n) => n.id !== SHADOW_PLACEHOLDER_ITEM_ID) as currentNode (currentNode.id)}
 			<!-- The div's y padding will determine how easy it is to insert nodes before/after it -->
 			<div
 				animate:flip={{ duration: flipDurationMs }}

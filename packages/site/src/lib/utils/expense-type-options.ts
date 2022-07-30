@@ -8,12 +8,15 @@ const rootId = 'root';
 export const toHeirarchy = (
 	categories: ExpenseCategoryDto[],
 ): d3.HierarchyNode<ExpenseCategoryDto> => {
-	categories.push({
-		id: rootId,
-		parentId: null,
-		labelEn: 'Root',
-		labelAr: 'Root',
-	});
+	if (!categories.some((c) => c.id === rootId)) {
+		// don't duplicate the root node
+		categories.push({
+			id: rootId,
+			parentId: null,
+			labelEn: 'Root',
+			labelAr: 'Root',
+		});
+	}
 	const root = d3
 		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id)
@@ -23,6 +26,33 @@ export const toHeirarchy = (
 			return categories.find((c) => c.id === d.parentId)?.id;
 		})(categories);
 	return root;
+};
+
+export const fromHeirarchy = (
+	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>,
+	updated: d3.HierarchyNode<ExpenseCategoryDto>[],
+): ExpenseCategoryDto[] => {
+	const categories: ExpenseCategoryDto[] = updated.map((d) => d.data);
+	console.log(`${categories.length} updates`, categories);
+
+	console.log(`${hierarchy.descendants().length} originals`);
+	hierarchy.descendants().forEach((d) => {
+		const category = categories.find((c) => c.id === d.data.id);
+		if (category) return;
+
+		categories.push(d.data);
+	});
+
+	return categories;
+};
+
+export const fromNode = (node: ExpenseNode): ExpenseCategoryDto => {
+	return {
+		id: node.data.id,
+		parentId: node.data.parentId,
+		labelEn: node.data.labelEn,
+		labelAr: node.data.labelAr,
+	};
 };
 
 /**
