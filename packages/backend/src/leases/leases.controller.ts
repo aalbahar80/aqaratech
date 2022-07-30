@@ -35,7 +35,6 @@ import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service'
 import { LeasePageOptionsDto } from 'src/leases/dto/lease-page-options.dto';
 import {
   CreateLeaseDto,
-  LeaseBasicDto,
   LeaseDto,
   UpdateLeaseDto,
 } from 'src/leases/dto/lease.dto';
@@ -53,11 +52,11 @@ export class LeasesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Lease' })
-  @ApiCreatedResponse({ type: LeaseBasicDto })
+  @ApiCreatedResponse({ type: String })
   create(
     @User() user: IUser,
     @Body() createLeaseDto: CreateLeaseDto,
-  ): Promise<LeaseBasicDto> {
+  ): Promise<string> {
     return this.leasesService.create({ createLeaseDto, user });
   }
 
@@ -85,19 +84,19 @@ export class LeasesController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Lease' })
-  @ApiOkResponse({ type: LeaseBasicDto })
+  @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseDto: UpdateLeaseDto,
-  ): Promise<LeaseBasicDto> {
+  ): Promise<string> {
     return this.leasesService.update({ id, updateLeaseDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Lease' })
-  @ApiOkResponse({ type: LeaseBasicDto })
-  remove(@Param('id') id: string): Promise<LeaseBasicDto> {
+  @ApiOkResponse({ type: String })
+  remove(@Param('id') id: string): Promise<string> {
     return this.leasesService.remove({ id });
   }
 
@@ -115,12 +114,12 @@ export class LeasesController {
 
   @Post('/:id/invoices')
   @CheckAbilities({ action: Action.Update, subject: 'Lease' })
-  @ApiOkResponse({ type: LeaseBasicDto })
+  @ApiOkResponse({ type: String })
   @ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
   createInvoices(
     @Param('id') id: string,
     @Body() createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[],
-  ): Promise<LeaseBasicDto> {
+  ): Promise<string> {
     return this.leasesService.createInvoices({
       leaseId: id,
       createManyLeaseInvoicesDto,

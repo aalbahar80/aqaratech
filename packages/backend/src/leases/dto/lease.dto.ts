@@ -1,15 +1,27 @@
 import {
+  ApiHideProperty,
+  ApiProperty,
   IntersectionType,
   OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
+import { Exclude, Expose } from 'class-transformer';
 import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import {
+  BreadcrumbDto,
+  BreadcrumbsDto,
+  PortfolioLabelParams,
+  PropertyLabelParams,
+  TenantLabelParams,
+  UnitLabelParams,
+} from 'src/common/dto/breadcrumb.dto';
+import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
+import { UnitDto } from 'src/units/dto/unit.dto';
 
 class LeaseRequiredDto {
   @Nanoid()
@@ -42,13 +54,46 @@ class LeaseOptionalDto {
   license: string | null;
 }
 
-export class LeaseBasicDto extends IntersectionType(
+class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
+  'tenant',
+  'portfolio',
+  'property',
+  'unit',
+]) {}
+
+export class LeaseDto extends IntersectionType(
   AbstractDto,
   IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
-) {}
+) {
+  constructor(partial: Partial<LeaseDto>) {
+    super();
+    Object.assign(this, partial);
+  }
 
-export class LeaseDto extends LeaseBasicDto {
-  breadcrumbs: LeaseBreadcrumbsDto;
+  @ApiHideProperty()
+  @Exclude()
+  tenant: TenantLabelParams;
+
+  @ApiHideProperty()
+  @Exclude()
+  unit: UnitLabelParams & {
+    property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+  };
+
+  @ApiProperty()
+  @Expose()
+  get breadcrumbs(): LeaseBreadcrumbsDto {
+    const unit = new UnitDto(this.unit);
+    return {
+      portfolio: unit.breadcrumbs.portfolio,
+      property: unit.breadcrumbs.property,
+      unit: unit.breadcrumbs.unit,
+      tenant: new BreadcrumbDto({
+        rel: Rel.Tenant,
+        ...this.tenant,
+      }),
+    };
+  }
 }
 
 export class CreateLeaseDto
@@ -58,10 +103,3 @@ export class CreateLeaseDto
 export class UpdateLeaseDto extends PartialType(
   OmitType(CreateLeaseDto, ['tenantId', 'unitId']),
 ) {}
-
-export class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
-  'tenant',
-  'portfolio',
-  'property',
-  'unit',
-]) {}

@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Rel } from 'src/constants/rel.enum';
 import { getAddress, getUnitLabel } from 'src/utils/address';
 
-type TenantLabelParams = {
+export interface TenantLabelParams {
   id: string;
   fullName: string;
-};
+}
 export interface PortfolioLabelParams {
   id: string;
   fullName: string;
