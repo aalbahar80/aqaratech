@@ -3262,15 +3262,6 @@ components:
         - portfolio
         - property
         - unit
-    HateoasDto:
-      type: object
-      properties:
-        href:
-          type: string
-        mediaType:
-          type: string
-      required:
-        - href
     UnitDto:
       type: object
       properties:
@@ -3289,8 +3280,6 @@ components:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
-        hateoas:
-          $ref: '#/components/schemas/HateoasDto'
         propertyId:
           type: string
         unitNumber:
@@ -3331,7 +3320,6 @@ components:
         - updatedAt
         - vacancy
         - breadcrumbs
-        - hateoas
         - propertyId
         - unitNumber
         - floor

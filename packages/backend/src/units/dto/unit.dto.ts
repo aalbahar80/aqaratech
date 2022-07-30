@@ -81,14 +81,10 @@ export class UnitVacancy {
   vacancyDate: Date | null;
 }
 
-export class UnitBasicDto extends IntersectionType(
+export class UnitDto extends IntersectionType(
   AbstractDto,
   IntersectionType(UnitRequiredDto, UnitOptionalDto),
 ) {
-  hateoas: HateoasDto;
-}
-
-export class UnitDto extends UnitBasicDto {
   constructor(partial: Partial<UnitDto>) {
     super();
     Object.assign(this, partial);
