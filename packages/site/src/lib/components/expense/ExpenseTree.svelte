@@ -1,36 +1,35 @@
 <script lang="ts">
-	import type {
-		ExpenseCategoryNode,
-		Nodes,
-	} from '$lib/utils/expense-type-options';
+	import type { ExpenseNode } from '$lib/utils/expense-type-options';
 	import { dndzone, SHADOW_PLACEHOLDER_ITEM_ID } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 
-	export let nodes: Nodes;
-	export let node: ExpenseCategoryNode;
-
-	// type Event = CustomEvent<DndEvent> & {
-	// 	target: EventTarget & ExpenseCategoryNode;
-	// };
+	export let root: ExpenseNode;
+	export let node: ExpenseNode;
 
 	const flipDurationMs = 300;
 	function handleDndConsider(e) {
-		node.items = e.detail.items;
+		console.log('consider');
+		console.log(e.detail);
+		// node.items = e.detail.items;
+		// node.children = e.detail.items;
 	}
 	function handleDndFinalize(e) {
-		node.items = e.detail.items;
-		nodes = { ...nodes };
+		console.log('finalize');
+		console.log(e.detail);
+		// node.items = e.detail.items;
+		// node.children = e.detail.items;
+		// root = { ...root };
 	}
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-<b class="px-6 py-2">{node.labelEn}</b>
-{#if node.hasOwnProperty('items')}
+<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
+{#if node.children}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
 		class="py-8"
 		use:dndzone={{
-			items: node.items,
+			items: node.descendants().slice(1),
 			flipDurationMs,
 			centreDraggedOnCursor: true,
 			dropTargetStyle: {
@@ -45,13 +44,17 @@
 		on:finalize={handleDndFinalize}
 	>
 		<!-- WE FILTER THE SHADOW PLACEHOLDER THAT WAS ADDED IN VERSION 0.7.4, filtering this way rather than checking whether 'nodes' have the id became possible in version 0.9.1 -->
-		{#each node.items.filter((item) => item.id.toString() !== SHADOW_PLACEHOLDER_ITEM_ID) as item (item.id)}
+		<!-- {#each node.children.filter((n) => n.id !== SHADOW_PLACEHOLDER_ITEM_ID) as currentNode (currentNode.id)} -->
+		{#each node.children as currentNode (currentNode.id)}
 			<!-- The div's y padding will determine how easy it is to insert nodes before/after it -->
 			<div
 				animate:flip={{ duration: flipDurationMs }}
 				class="my-6 mx-1 cursor-pointer rounded-lg border bg-white py-6 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
 			>
-				<svelte:self bind:nodes node={nodes[item.id]} />
+				<svelte:self
+					bind:root
+					node={root.find((n) => n.id === currentNode.id)}
+				/>
 			</div>
 		{/each}
 	</section>
