@@ -36,7 +36,6 @@ import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import {
   CreateTenantDto,
   TenantDto,
-  TenantOneDto,
   UpdateTenantDto,
 } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
@@ -55,7 +54,7 @@ export class TenantsController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
-  @ApiCreatedResponse({ type: TenantDto })
+  @ApiCreatedResponse({ type: String })
   create(
     @User() user: IUser,
     @Body() createTenantDto: CreateTenantDto,
@@ -75,14 +74,14 @@ export class TenantsController {
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
-  @ApiOkResponse({ type: TenantOneDto })
-  findOne(@Param('id') id: string): Promise<TenantOneDto> {
+  @ApiOkResponse({ type: TenantDto })
+  findOne(@Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.findOne({ id });
   }
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
-  @ApiOkResponse({ type: TenantDto })
+  @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
     @Param('id') id: string,
@@ -93,7 +92,7 @@ export class TenantsController {
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
-  @ApiOkResponse({ type: TenantDto })
+  @ApiOkResponse({ type: String })
   remove(@Param('id') id: string): Promise<string> {
     return this.tenantsService.remove({ id });
   }

@@ -32,7 +32,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantDto'
+                type: string
       tags: &ref_1
         - tenants
     get:
@@ -108,7 +108,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantOneDto'
+                $ref: '#/components/schemas/TenantDto'
       tags: *ref_1
     patch:
       operationId: update
@@ -131,7 +131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantDto'
+                type: string
       tags: *ref_1
     delete:
       operationId: remove
@@ -148,7 +148,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantDto'
+                type: string
       tags: *ref_1
   /tenants/{id}/leases:
     get:
@@ -643,7 +643,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseBasicDto'
+                type: string
       tags: &ref_7
         - leases
     get:
@@ -742,7 +742,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseBasicDto'
+                type: string
       tags: *ref_7
     delete:
       operationId: remove
@@ -759,7 +759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseBasicDto'
+                type: string
       tags: *ref_7
   /leases/{id}/invoices:
     get:
@@ -879,13 +879,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseBasicDto'
+                type: string
         '201':
           description: ''
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseBasicDto'
+                type: string
       tags: *ref_7
   /portfolios:
     post:
@@ -2393,6 +2393,39 @@ components:
       enum:
         - asc
         - desc
+    UpdateTenantDto:
+      type: object
+      properties:
+        dob:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        residencyEnd:
+          type: string
+          nullable: true
+          example: '2012-12-21T00:00:00.000Z'
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        label:
+          type: string
+          nullable: true
+        civilid:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        residencyNum:
+          type: string
+          nullable: true
     BreadcrumbDto:
       type: object
       properties:
@@ -2438,135 +2471,6 @@ components:
         - property
         - unit
         - tenant
-    TenantLeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        start:
-          type: string
-          example: '2012-12-21T00:00:00.000Z'
-        end:
-          type: string
-          example: '2012-12-21T00:00:00.000Z'
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-        canPay:
-          type: boolean
-        notify:
-          type: boolean
-        license:
-          type: string
-          nullable: true
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
-    TenantOneDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        dob:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        residencyEnd:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        leases:
-          readOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantLeaseDto'
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - leases
-        - organizationId
-        - fullName
-    UpdateTenantDto:
-      type: object
-      properties:
-        dob:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        residencyEnd:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
     LeaseDto:
       type: object
       properties:
@@ -2938,55 +2842,6 @@ components:
         - tenantId
         - unitId
         - monthlyRent
-    LeaseBasicDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        start:
-          type: string
-          example: '2012-12-21T00:00:00.000Z'
-        end:
-          type: string
-          example: '2012-12-21T00:00:00.000Z'
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        monthlyRent:
-          type: number
-          minimum: 1
-        deposit:
-          type: number
-        canPay:
-          type: boolean
-        notify:
-          type: boolean
-        license:
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - start
-        - end
-        - tenantId
-        - unitId
-        - monthlyRent
-        - deposit
-        - canPay
-        - notify
-        - license
     UpdateLeaseDto:
       type: object
       properties:

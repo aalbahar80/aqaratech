@@ -63,8 +63,8 @@ export class TenantsService {
     return { total, results };
   }
 
-  findOne({ id }: { id: string }) {
-    return this.prisma.tenant.findUnique({
+  async findOne({ id }: { id: string }) {
+    const data = await this.prisma.tenant.findUnique({
       where: { id },
       include: {
         leases: {
@@ -77,6 +77,7 @@ export class TenantsService {
         },
       },
     });
+    return new TenantDto(data);
   }
 
   async update({
@@ -103,9 +104,5 @@ export class TenantsService {
   async remove({ id }: { id: string }) {
     const deleted = await this.prisma.tenant.delete({ where: { id } });
     return deleted.id;
-  }
-
-  getName(tenant: TenantDto) {
-    return tenant.label || tenant.fullName;
   }
 }

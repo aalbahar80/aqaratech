@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
+import { OmitType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import {
   IsISO31661Alpha3,
@@ -9,7 +9,6 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { LeaseDto } from 'src/leases/dto/lease.dto';
 
 export class TenantDto extends AbstractDto {
   @Nanoid()
@@ -41,6 +40,11 @@ export class TenantDto extends AbstractDto {
 
   @DateType(false)
   residencyEnd?: Date | null;
+
+  constructor(partial: Partial<TenantDto>) {
+    super();
+    Object.assign(this, partial);
+  }
 }
 
 export class CreateTenantDto
@@ -50,10 +54,3 @@ export class CreateTenantDto
 export class UpdateTenantDto extends PartialType(
   OmitType(CreateTenantDto, ['organizationId']),
 ) {}
-
-class TenantLeaseDto extends PartialType(LeaseDto) {}
-
-export class TenantOneDto extends TenantDto {
-  @ApiProperty({ readOnly: true })
-  leases: TenantLeaseDto[];
-}
