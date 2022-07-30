@@ -9,6 +9,12 @@ export interface IBreadcrumbs {
   unit: UnitLabelParams & {
     property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
   };
+  lease: LeaseLabelParams & {
+    tenant: TenantLabelParams;
+    unit: UnitLabelParams & {
+      property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+    };
+  };
 }
 
 export interface TenantLabelParams {

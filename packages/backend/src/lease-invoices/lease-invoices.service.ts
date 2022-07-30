@@ -7,17 +7,14 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
-import { BreadcrumbDto } from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
-import { Rel } from 'src/constants/rel.enum';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
   CreateLeaseInvoiceDto,
-  LeaseInvoiceBreadcrumbsDto,
   LeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
@@ -49,12 +46,13 @@ export class LeaseInvoicesService {
     );
 
     const toCreate = R.omit(createLeaseInvoiceDto, ['leaseId']);
-    return this.prisma.leaseInvoice.create({
+    const created = await this.prisma.leaseInvoice.create({
       data: {
         ...toCreate,
         lease: { connect: { id: createLeaseInvoiceDto.leaseId } },
       },
     });
+    return created.id;
   }
 
   async findAll({
@@ -76,38 +74,87 @@ export class LeaseInvoicesService {
       ],
     };
 
-    let [results, total] = await Promise.all([
+    let [data, total] = await Promise.all([
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,
         orderBy: { postAt: 'desc' },
         where: filter,
+        include: {
+          lease: {
+            select: {
+              id: true,
+              tenant: {
+                select: {
+                  id: true,
+                  fullName: true,
+                },
+              },
+              unit: {
+                select: {
+                  id: true,
+                  propertyId: true,
+                  type: true,
+                  unitNumber: true,
+                  property: {
+                    select: {
+                      id: true,
+                      area: true,
+                      block: true,
+                      number: true,
+                      portfolio: { select: { id: true, fullName: true } },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       }),
       this.prisma.leaseInvoice.count({ where: filter }),
     ]);
 
-    const promises = results.map(async (result) => {
-      const breadcrumbs = await this.getBreadcrumbs(result.id);
-      return {
-        ...result,
-        breadcrumbs,
-      };
-    });
-
-    const invoices = await Promise.all(promises);
-
-    return { total, results: invoices };
+    return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
   }
 
   async findOne({ id }: { id: string }) {
-    const [lease, breadcrumbs] = await Promise.all([
-      this.prisma.leaseInvoice.findUnique({ where: { id } }),
-      this.getBreadcrumbs(id),
-    ]);
-    return { ...lease, breadcrumbs };
+    const data = await this.prisma.leaseInvoice.findUnique({
+      where: { id },
+      include: {
+        lease: {
+          select: {
+            id: true,
+            tenant: {
+              select: {
+                id: true,
+                fullName: true,
+              },
+            },
+            unit: {
+              select: {
+                id: true,
+                propertyId: true,
+                type: true,
+                unitNumber: true,
+                property: {
+                  select: {
+                    id: true,
+                    area: true,
+                    block: true,
+                    number: true,
+                    portfolio: { select: { id: true, fullName: true } },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+    return new LeaseInvoiceDto(data);
   }
 
-  update({
+  async update({
     id,
     updateLeaseInvoiceDto,
     user,
@@ -121,14 +168,16 @@ export class LeaseInvoicesService {
       subject('LeaseInvoice', { id, ...updateLeaseInvoiceDto }),
     );
 
-    return this.prisma.leaseInvoice.update({
+    const updated = await this.prisma.leaseInvoice.update({
       where: { id },
       data: updateLeaseInvoiceDto,
     });
+    return updated.id;
   }
 
-  remove({ id }: { id: string }) {
-    return this.prisma.leaseInvoice.delete({ where: { id } });
+  async remove({ id }: { id: string }) {
+    const removed = await this.prisma.leaseInvoice.delete({ where: { id } });
+    return removed.id;
   }
 
   async sendInvoice(id: string) {
@@ -198,54 +247,6 @@ export class LeaseInvoicesService {
   }
 
   // ::: HELPERS :::
-
-  async getBreadcrumbs(id: string): Promise<LeaseInvoiceBreadcrumbsDto> {
-    const invoice = await this.prisma.leaseInvoice.findUnique({
-      where: { id },
-      select: {
-        leaseId: true,
-        lease: {
-          select: {
-            id: true,
-            tenant: true,
-            unit: {
-              select: {
-                id: true,
-                propertyId: true,
-                type: true,
-                unitNumber: true,
-                // TODO only fetch relevant fields
-                property: { include: { portfolio: true } },
-              },
-            },
-          },
-        },
-      },
-    });
-
-    return {
-      portfolio: new BreadcrumbDto({
-        rel: Rel.Portfolio,
-        ...invoice.lease.unit.property.portfolio,
-      }),
-      property: new BreadcrumbDto({
-        rel: Rel.Property,
-        ...invoice.lease.unit.property,
-      }),
-      unit: new BreadcrumbDto({
-        rel: Rel.Unit,
-        ...invoice.lease.unit,
-      }),
-      tenant: new BreadcrumbDto({
-        rel: Rel.Tenant,
-        ...invoice.lease.tenant,
-      }),
-      lease: new BreadcrumbDto({
-        rel: Rel.Lease,
-        ...invoice.lease,
-      }),
-    };
-  }
 
   parseFilter({
     pageOptionsDto,

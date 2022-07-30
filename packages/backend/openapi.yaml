@@ -454,7 +454,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                type: string
       tags: &ref_5
         - leaseInvoices
     get:
@@ -585,7 +585,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                type: string
       tags: *ref_5
     delete:
       operationId: remove
@@ -602,7 +602,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceBasicDto'
+                type: string
       tags: *ref_5
   /leaseInvoices/{id}/send-email:
     post:
@@ -2736,56 +2736,6 @@ components:
         - postAt
         - amount
         - leaseId
-    LeaseInvoiceBasicDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        postAt:
-          type: string
-          example: '2012-12-21T00:00:00.000Z'
-        dueAt:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        paidAt:
-          type: string
-          nullable: true
-          example: '2012-12-21T00:00:00.000Z'
-        amount:
-          type: number
-          minimum: 1
-        leaseId:
-          type: string
-        isPaid:
-          type: boolean
-        memo:
-          type: string
-          nullable: true
-        mfPaymentId:
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - postAt
-        - dueAt
-        - paidAt
-        - amount
-        - leaseId
-        - isPaid
-        - memo
-        - mfPaymentId
     UpdateLeaseInvoiceDto:
       type: object
       properties:
