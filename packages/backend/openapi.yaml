@@ -1438,7 +1438,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                type: string
       tags: &ref_13
         - units
     get:
@@ -1537,7 +1537,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnitDto'
+                type: string
       tags: *ref_13
     delete:
       operationId: remove

@@ -41,19 +41,14 @@ export class UnitsService {
     );
 
     const toCreate = R.omit(createUnitDto, ['propertyId']);
-    const unit = await this.prisma.unit.create({
+    const created = await this.prisma.unit.create({
       data: {
         ...toCreate,
         property: { connect: { id: createUnitDto.propertyId } },
       },
     });
 
-    return {
-      ...unit,
-      hateoas: {
-        href: this.href(unit.id),
-      },
-    };
+    return created.id;
   }
 
   async findAll({
@@ -145,17 +140,11 @@ export class UnitsService {
       subject('Unit', { id, ...updateUnitDto }),
     );
 
-    const unit = await this.prisma.unit.update({
+    const updated = await this.prisma.unit.update({
       where: { id },
       data: updateUnitDto,
     });
-
-    return {
-      ...unit,
-      hateoas: {
-        href: this.href(unit.id),
-      },
-    };
+    return updated.id;
   }
 
   async remove({ id }: { id: string }) {
