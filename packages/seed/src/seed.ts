@@ -26,7 +26,6 @@ import {
 	timespan,
 	updatedAt,
 } from "./generators.js";
-import { insertExpenseTypes } from "./prep-db.js";
 import prisma from "./prisma.js";
 
 config({
@@ -321,7 +320,6 @@ export async function seed({
 		// TODO add a NODE_ENV check to only run this in development
 
 		console.time("insert");
-		await insertExpenseTypes();
 		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
 		await prisma.organizationSettings.createMany({

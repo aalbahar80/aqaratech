@@ -3339,7 +3339,7 @@ components:
           type: string
           nullable: true
         categoryId:
-          type: number
+          type: string
           nullable: true
       required:
         - postAt
@@ -3367,12 +3367,11 @@ components:
       type: object
       properties:
         id:
-          type: number
-          minimum: 1
+          type: string
         labelEn:
           type: string
         parentId:
-          type: number
+          type: string
           nullable: true
           minimum: 1
         labelAr:
@@ -3424,7 +3423,7 @@ components:
           type: string
           nullable: true
         categoryId:
-          type: number
+          type: string
           nullable: true
       required:
         - id
@@ -3460,7 +3459,7 @@ components:
           type: string
           nullable: true
         categoryId:
-          type: number
+          type: string
           nullable: true
     CreateOrganizationDto:
       type: object
@@ -3543,7 +3542,7 @@ components:
         labelEn:
           type: string
         parentId:
-          type: number
+          type: string
           nullable: true
           minimum: 1
         labelAr:

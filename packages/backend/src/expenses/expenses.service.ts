@@ -84,7 +84,6 @@ export class ExpensesService {
         orderBy: { postAt: 'desc' },
         where: filter,
         include: {
-          expenseType: true,
           portfolio: crumbs.portfolio,
           property: crumbs.property,
           unit: crumbs.unit,
@@ -100,7 +99,6 @@ export class ExpensesService {
     const data = await this.prisma.expense.findUnique({
       where: { id },
       include: {
-        expenseType: true,
         portfolio: crumbs.portfolio,
         property: crumbs.property,
         unit: crumbs.unit,

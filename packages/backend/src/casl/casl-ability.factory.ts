@@ -3,7 +3,6 @@ import { PrismaAbility, Subjects } from '@casl/prisma';
 import { Injectable, Logger } from '@nestjs/common';
 import {
   Expense,
-  ExpenseType,
   Lease,
   LeaseInvoice,
   MaintenanceOrder,
@@ -522,7 +521,6 @@ type P<T> = Partial<T>;
 // type P<T> = T;
 export type Subject = Subjects<{
   Expense: P<Expense>;
-  ExpenseType: P<ExpenseType>;
   Lease: P<Lease>;
   MaintenanceOrder: P<MaintenanceOrder>;
   Organization: P<Organization>;

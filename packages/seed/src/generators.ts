@@ -5,7 +5,7 @@ import { customAlphabet } from "nanoid";
 import {
 	areas,
 	coordinates,
-	expenseTypes,
+	defaultExpenseCategoryTree,
 	unitTypeOptions,
 } from "./constants.js";
 
@@ -86,7 +86,7 @@ export const fakeOrganizationSettings = (orgId: string) => ({
 	organizationId: orgId ?? generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	expenseCategoryTree: expenseTypes,
+	expenseCategoryTree: defaultExpenseCategoryTree,
 });
 
 export const fakePortfolio = (orgId?: string) => {
@@ -240,7 +240,7 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(10, 250, 0),
-	categoryId: Math.floor(Math.random() * expenseTypes.length) + 1,
+	categoryId: faker.helpers.arrayElement(defaultExpenseCategoryTree).id,
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });

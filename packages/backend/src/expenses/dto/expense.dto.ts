@@ -51,7 +51,7 @@ class ExpenseOptionalDto {
   maintenanceOrderId: string | null;
 
   // TODO use category name/prisma connect & set default here?
-  categoryId: number | null;
+  categoryId: string | null;
 }
 
 class ExpenseBreadcrumbsDto extends IntersectionType(

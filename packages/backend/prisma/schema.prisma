@@ -152,26 +152,13 @@ model PlanInvoice {
   organizations Organization[]
 }
 
-model ExpenseType {
-  id          Int     @id @default(autoincrement())
-  labelEn     String
-  labelAr     String
-  description String?
-
-  parentId   Int?
-  parentType ExpenseType?  @relation("ExpenseTypeTree", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  childTypes ExpenseType[] @relation("ExpenseTypeTree")
-
-  expenses Expense[]
-}
-
 model Expense {
   id                 String            @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
   unitId             String?
   propertyId         String?
   portfolioId        String
   maintenanceOrderId String?
-  categoryId         Int?
+  categoryId         String?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   amount             Float
@@ -181,7 +168,6 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
-  expenseType        ExpenseType?      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   @@index([unitId])
   @@index([propertyId])
