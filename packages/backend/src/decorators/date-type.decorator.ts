@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { Transform, Type } from 'class-transformer';
-import { IsDate, IsISO8601 } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsDate, isISO8601 } from 'class-validator';
 
 /**
  * Decorator to make openapi-generator to treat dates as strings.
@@ -24,7 +24,16 @@ import { IsDate, IsISO8601 } from 'class-validator';
 export function DateType(required = true): PropertyDecorator {
   const example = new Date('2012-12-21').toISOString();
   return applyDecorators(
-    Type(() => Date), // https://github.com/typestack/class-transformer#%D1%81onverting-date-strings-into-date-objects
+    // 1. Transform
+    Transform((p) => {
+      if (!isISO8601(p.value)) {
+        return null;
+      } else {
+        return new Date(p.value);
+      }
+    }),
+
+    // 2. Validate
     IsDate(),
     ApiProperty({ type: 'string', example, required }),
   );
