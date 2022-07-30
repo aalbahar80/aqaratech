@@ -23,7 +23,9 @@
 			(fresh) =>
 				!node.children?.some(
 					(existing) =>
-						existing.id === fresh.id && fresh instanceof d3.hierarchy,
+						existing.id === fresh.id &&
+						fresh instanceof d3.hierarchy &&
+						!fresh.isDndShadowItem,
 				),
 		);
 
@@ -58,7 +60,8 @@
 
 	const flipDurationMs = 300;
 	function handleDndConsider(e: any) {
-		handleAction(e);
+		const updatedNodes = handleAction(e);
+		node.children = updatedNodes;
 	}
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
