@@ -8,6 +8,7 @@
 	import {
 		dndzone,
 		SHADOW_PLACEHOLDER_ITEM_ID,
+		SHADOW_ITEM_MARKER_PROPERTY_NAME,
 		type DndEvent,
 	} from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
@@ -19,42 +20,23 @@
 		const detail: DndEvent<ExpenseNode> = e.detail;
 
 		// filter existing children, then add the new one
-		const newChildren = detail.items.filter(
-			(fresh) =>
-				!node.children?.some(
-					(existing) =>
-						existing.id === fresh.id &&
-						fresh instanceof d3.hierarchy &&
-						!fresh.isDndShadowItem,
-				),
-		);
-
-		// dedupe the new children by id
-		const deduped = newChildren.reduce<ExpenseNode[]>((acc, fresh) => {
-			if (acc.some((existing) => existing.id === fresh.id)) {
-				return acc;
-			}
-			return [...acc, fresh];
-		}, []);
-		console.log(
-			`${deduped.length} new children, discarded ${
-				newChildren.length - deduped.length
-			} duplicates`,
+		const newChildren: ExpenseNode[] = detail.items.filter(
+			(fresh) => fresh.id !== SHADOW_PLACEHOLDER_ITEM_ID,
 		);
 
 		// give the new children a parent
-		deduped.forEach((child) => {
+		newChildren.forEach((child) => {
 			child.data.parentId = node.data.id;
 		});
 
-		const newChildrenNames = deduped.map((fresh) => fresh.data.labelEn);
-		if (!deduped.length) {
+		const newChildrenNames = newChildren.map((fresh) => fresh.data.labelEn);
+		if (!newChildren.length) {
 			console.log(`no new children for ${node.data.labelEn}`);
 			return;
 		} else {
 			console.log(`${node.data.labelEn} has new child: ${newChildrenNames}`);
-			return deduped;
-			// return fromHeirarchy(root, deduped);
+			return newChildren;
+			// return fromHeirarchy(root, newChildren);
 		}
 	};
 
@@ -79,7 +61,7 @@
 	<section
 		class="py-8"
 		use:dndzone={{
-			items: node.descendants().slice(1),
+			items: node.children,
 			flipDurationMs,
 			centreDraggedOnCursor: true,
 			dropTargetStyle: {
@@ -94,12 +76,12 @@
 		on:finalize={handleDndFinalize}
 	>
 		<!-- WE FILTER THE SHADOW PLACEHOLDER THAT WAS ADDED IN VERSION 0.7.4, filtering this way rather than checking whether 'nodes' have the id became possible in version 0.9.1 -->
-		{#each node.children.filter((n) => n.id !== SHADOW_PLACEHOLDER_ITEM_ID) as currentNode (currentNode.id)}
-			<!-- The div's y padding will determine how easy it is to insert nodes before/after it -->
+		{#each node.children.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) as currentNode (currentNode.id)}
 			<div
 				animate:flip={{ duration: flipDurationMs }}
 				class="my-6 mx-1 cursor-pointer rounded-lg border bg-white py-6 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
 			>
+				<!-- The div's y padding will determine how easy it is to insert nodes before/after it -->
 				<svelte:self
 					bind:root
 					node={root.find((n) => n.id === currentNode.id)}
