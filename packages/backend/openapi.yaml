@@ -1703,7 +1703,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpenseDto'
+                type: string
       tags: &ref_17
         - expenses
     get:
@@ -1829,7 +1829,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpenseDto'
+                type: string
       tags: *ref_17
     delete:
       operationId: remove
@@ -1846,7 +1846,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpenseDto'
+                type: string
       tags: *ref_17
   /search:
     post:

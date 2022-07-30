@@ -5,18 +5,10 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
-import {
-  BreadcrumbDto,
-  PortfolioLabelParams,
-  PropertyLabelParams,
-  UnitLabelParams,
-} from 'src/common/dto/breadcrumb.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import {
   CreateExpenseDto,
-  ExpenseBreadcrumbsDto,
   ExpenseDto,
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
@@ -46,7 +38,7 @@ export class ExpensesService {
       'maintenanceOrderId',
       'categoryId',
     ]);
-    return this.prisma.expense.create({
+    const created = await this.prisma.expense.create({
       data: {
         ...toCreate,
         portfolio: { connect: { id: createExpenseDto.portfolioId } },
@@ -64,6 +56,7 @@ export class ExpensesService {
         }),
       },
     });
+    return created.id;
   }
 
   async findAll({
@@ -83,7 +76,7 @@ export class ExpensesService {
       ],
     };
 
-    let [results, total] = await Promise.all([
+    let [data, total] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
@@ -91,44 +84,80 @@ export class ExpensesService {
         where: filter,
         include: {
           expenseType: true,
-          portfolio: true,
-          property: true,
-          unit: true,
+          portfolio: { select: { id: true, fullName: true } },
+          property: {
+            select: {
+              id: true,
+              area: true,
+              block: true,
+              number: true,
+              portfolio: { select: { id: true, fullName: true } },
+            },
+          },
+          unit: {
+            select: {
+              id: true,
+              propertyId: true,
+              unitNumber: true,
+              type: true,
+              property: {
+                select: {
+                  id: true,
+                  area: true,
+                  block: true,
+                  number: true,
+                  portfolio: { select: { id: true, fullName: true } },
+                },
+              },
+            },
+          },
         },
       }),
       this.prisma.expense.count({ where: filter }),
     ]);
 
-    const expenses = results.map((expense) => {
-      const { portfolio, property, unit } = expense;
-      return {
-        ...expense,
-        breadcrumbs: this.breadcrumbs({ portfolio, property, unit }),
-      };
-    });
-
-    return { total, results: expenses };
+    return { total, results: data.map((e) => new ExpenseDto(e)) };
   }
 
   async findOne({ id }: { id: string }) {
-    const expense = await this.prisma.expense.findUnique({
+    const data = await this.prisma.expense.findUnique({
       where: { id },
       include: {
         expenseType: true,
-        portfolio: true,
-        property: true,
-        unit: true,
+        portfolio: { select: { id: true, fullName: true } },
+        property: {
+          select: {
+            id: true,
+            area: true,
+            block: true,
+            number: true,
+            portfolio: { select: { id: true, fullName: true } },
+          },
+        },
+        unit: {
+          select: {
+            id: true,
+            propertyId: true,
+            unitNumber: true,
+            type: true,
+            property: {
+              select: {
+                id: true,
+                area: true,
+                block: true,
+                number: true,
+                portfolio: { select: { id: true, fullName: true } },
+              },
+            },
+          },
+        },
       },
     });
-    const { portfolio, property, unit } = expense;
 
-    return {
-      ...expense,
-      breadcrumbs: this.breadcrumbs({ portfolio, property, unit }),
-    };
+    return new ExpenseDto(data);
   }
 
-  update({
+  async update({
     id,
     updateExpenseDto,
     user,
@@ -142,46 +171,19 @@ export class ExpensesService {
       subject('Expense', { id, ...updateExpenseDto }),
     );
 
-    return this.prisma.expense.update({
+    const updated = await this.prisma.expense.update({
       where: { id },
       data: updateExpenseDto,
     });
+    return updated.id;
   }
 
-  remove({ id }: { id: string }) {
-    return this.prisma.expense.delete({ where: { id } });
+  async remove({ id }: { id: string }) {
+    const deleted = await this.prisma.expense.delete({ where: { id } });
+    return deleted.id;
   }
 
   // ::: HELPERS :::
-
-  breadcrumbs(expense: {
-    portfolio: PortfolioLabelParams;
-    property: PropertyLabelParams | null;
-    unit: UnitLabelParams | null;
-  }): ExpenseBreadcrumbsDto {
-    const crumbs: ExpenseBreadcrumbsDto = {
-      portfolio: new BreadcrumbDto({
-        rel: Rel.Portfolio,
-        ...expense.portfolio,
-      }),
-    };
-
-    if (expense.property) {
-      crumbs.property = new BreadcrumbDto({
-        rel: Rel.Property,
-        ...expense.property,
-      });
-    }
-
-    if (expense.unit) {
-      crumbs.unit = new BreadcrumbDto({
-        rel: Rel.Unit,
-        ...expense.unit,
-      });
-    }
-
-    return crumbs;
-  }
 
   parseLocationFilter({ filter }: { filter?: DashboardFilterDto }) {
     let locationFilter: Prisma.ExpenseWhereInput;

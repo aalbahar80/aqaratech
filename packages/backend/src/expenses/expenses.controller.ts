@@ -25,7 +25,6 @@ import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto
 
 import {
   CreateExpenseDto,
-  ExpenseBasicDto,
   ExpenseDto,
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
@@ -41,11 +40,11 @@ export class ExpensesController {
 
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'Expense' })
-  @ApiCreatedResponse({ type: ExpenseDto })
+  @ApiCreatedResponse({ type: String })
   create(
     @User() user: IUser,
     @Body() createExpenseDto: CreateExpenseDto,
-  ): Promise<ExpenseBasicDto> {
+  ): Promise<string> {
     return this.expensesService.create({ createExpenseDto, user });
   }
 
@@ -68,19 +67,19 @@ export class ExpensesController {
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Expense' })
-  @ApiOkResponse({ type: ExpenseDto })
+  @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateExpenseDto: UpdateExpenseDto,
-  ): Promise<ExpenseBasicDto> {
+  ): Promise<string> {
     return this.expensesService.update({ id, updateExpenseDto, user });
   }
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Expense' })
-  @ApiOkResponse({ type: ExpenseDto })
-  remove(@Param('id') id: string): Promise<ExpenseBasicDto> {
+  @ApiOkResponse({ type: String })
+  remove(@Param('id') id: string): Promise<string> {
     return this.expensesService.remove({ id });
   }
 }
