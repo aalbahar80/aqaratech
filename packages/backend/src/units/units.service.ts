@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -61,15 +62,7 @@ export class UnitsService {
         include: {
           // TODO sort it. it affects vacancy calculation
           leases: { select: { start: true, end: true } },
-          property: {
-            select: {
-              id: true,
-              area: true,
-              block: true,
-              number: true,
-              portfolio: { select: { id: true, fullName: true } },
-            },
-          },
+          property: crumbs.property,
         },
       }),
       this.prisma.unit.count({ where: filter }),
@@ -84,15 +77,7 @@ export class UnitsService {
       include: {
         // TODO sort it. it affects vacancy calculation
         leases: { select: { start: true, end: true } },
-        property: {
-          select: {
-            id: true,
-            area: true,
-            block: true,
-            number: true,
-            portfolio: { select: { id: true, fullName: true } },
-          },
-        },
+        property: crumbs.property,
       },
     });
 

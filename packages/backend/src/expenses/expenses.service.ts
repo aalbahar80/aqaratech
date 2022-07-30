@@ -5,6 +5,7 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
+import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import {
@@ -84,33 +85,9 @@ export class ExpensesService {
         where: filter,
         include: {
           expenseType: true,
-          portfolio: { select: { id: true, fullName: true } },
-          property: {
-            select: {
-              id: true,
-              area: true,
-              block: true,
-              number: true,
-              portfolio: { select: { id: true, fullName: true } },
-            },
-          },
-          unit: {
-            select: {
-              id: true,
-              propertyId: true,
-              unitNumber: true,
-              type: true,
-              property: {
-                select: {
-                  id: true,
-                  area: true,
-                  block: true,
-                  number: true,
-                  portfolio: { select: { id: true, fullName: true } },
-                },
-              },
-            },
-          },
+          portfolio: crumbs.portfolio,
+          property: crumbs.property,
+          unit: crumbs.unit,
         },
       }),
       this.prisma.expense.count({ where: filter }),
@@ -124,33 +101,9 @@ export class ExpensesService {
       where: { id },
       include: {
         expenseType: true,
-        portfolio: { select: { id: true, fullName: true } },
-        property: {
-          select: {
-            id: true,
-            area: true,
-            block: true,
-            number: true,
-            portfolio: { select: { id: true, fullName: true } },
-          },
-        },
-        unit: {
-          select: {
-            id: true,
-            propertyId: true,
-            unitNumber: true,
-            type: true,
-            property: {
-              select: {
-                id: true,
-                area: true,
-                block: true,
-                number: true,
-                portfolio: { select: { id: true, fullName: true } },
-              },
-            },
-          },
-        },
+        portfolio: crumbs.portfolio,
+        property: crumbs.property,
+        unit: crumbs.unit,
       },
     });
 

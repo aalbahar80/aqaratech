@@ -7,6 +7,7 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
+import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
@@ -80,36 +81,7 @@ export class LeaseInvoicesService {
         skip: (page - 1) * take,
         orderBy: { postAt: 'desc' },
         where: filter,
-        include: {
-          lease: {
-            select: {
-              id: true,
-              tenant: {
-                select: {
-                  id: true,
-                  fullName: true,
-                },
-              },
-              unit: {
-                select: {
-                  id: true,
-                  propertyId: true,
-                  type: true,
-                  unitNumber: true,
-                  property: {
-                    select: {
-                      id: true,
-                      area: true,
-                      block: true,
-                      number: true,
-                      portfolio: { select: { id: true, fullName: true } },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
+        include: { lease: crumbs.lease },
       }),
       this.prisma.leaseInvoice.count({ where: filter }),
     ]);
@@ -120,36 +92,7 @@ export class LeaseInvoicesService {
   async findOne({ id }: { id: string }) {
     const data = await this.prisma.leaseInvoice.findUnique({
       where: { id },
-      include: {
-        lease: {
-          select: {
-            id: true,
-            tenant: {
-              select: {
-                id: true,
-                fullName: true,
-              },
-            },
-            unit: {
-              select: {
-                id: true,
-                propertyId: true,
-                type: true,
-                unitNumber: true,
-                property: {
-                  select: {
-                    id: true,
-                    area: true,
-                    block: true,
-                    number: true,
-                    portfolio: { select: { id: true, fullName: true } },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+      include: { lease: crumbs.lease },
     });
     return new LeaseInvoiceDto(data);
   }

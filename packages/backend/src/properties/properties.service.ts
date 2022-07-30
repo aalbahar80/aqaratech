@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -61,7 +62,7 @@ export class PropertiesService {
         skip: (page - 1) * take,
         orderBy: { createdAt: 'desc' },
         where: filter,
-        include: { portfolio: { select: { id: true, fullName: true } } },
+        include: { portfolio: crumbs.portfolio },
       }),
       this.prisma.property.count({ where: filter }),
     ]);
@@ -72,7 +73,7 @@ export class PropertiesService {
   async findOne({ id }: { id: string }) {
     const property = await this.prisma.property.findUnique({
       where: { id },
-      include: { portfolio: { select: { id: true, fullName: true } } },
+      include: { portfolio: crumbs.portfolio },
     });
 
     return new PropertyDto(property);
