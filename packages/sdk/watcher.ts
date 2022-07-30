@@ -10,6 +10,8 @@ chokidar
 	})
 	.on("change", (path, stats) => {
 		if (stats) {
+			const now = new Date();
+
 			const message = `openapi.yml stats: oldsize: ${oldStats?.size}, newsize: ${stats.size}`;
 			console.log(message);
 
@@ -23,5 +25,7 @@ chokidar
 			}
 
 			oldStats = stats;
+
+			console.log(`done in ${new Date().getTime() - now.getTime()}ms`);
 		}
 	});
