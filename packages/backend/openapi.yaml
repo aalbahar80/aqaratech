@@ -2040,10 +2040,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationSettingsDto'
       tags: *ref_21
   /aggregate/incomeByMonth:
     get:
@@ -3530,7 +3526,9 @@ components:
           type: string
           readOnly: true
         expenseCategoryTree:
-          type: object
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryDto'
         organizationId:
           type: string
       required:
@@ -3542,9 +3540,6 @@ components:
     UpdateExpenseCategoryDto:
       type: object
       properties:
-        id:
-          type: number
-          minimum: 1
         labelEn:
           type: string
         parentId:
@@ -3556,6 +3551,8 @@ components:
         description:
           type: string
           nullable: true
+      required:
+        - labelEn
     UpdateOrganizationSettingsDto:
       type: object
       properties:

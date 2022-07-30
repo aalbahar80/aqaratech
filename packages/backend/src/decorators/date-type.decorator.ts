@@ -25,27 +25,30 @@ export function DateType(required = true): PropertyDecorator {
   const example = new Date('2012-12-21').toISOString();
   return applyDecorators(
     // 1. Transform
-    Transform((p) => {
-      if (
-        // pending bug: strict option not being respected
-        // https://github.com/typestack/class-validator/issues/1061
-        // https://github.com/validatorjs/validator.js/issues/2003
-        isISO8601(p.value, { strict: true }) &&
-        typeof p.value === 'string' &&
-        !p.value.endsWith('00:00:00.000Z')
-      ) {
-        console.warn(
-          'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
-        );
-        console.log(p);
-      }
+    Transform(
+      (p) => {
+        if (
+          // pending bug: strict option not being respected
+          // https://github.com/typestack/class-validator/issues/1061
+          // https://github.com/validatorjs/validator.js/issues/2003
+          isISO8601(p.value, { strict: true }) &&
+          typeof p.value === 'string' &&
+          !p.value.endsWith('00:00:00.000Z')
+        ) {
+          console.warn(
+            'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
+          );
+          console.log(p);
+        }
 
-      if (!isISO8601(p.value)) {
-        return null;
-      } else {
-        return new Date(p.value);
-      }
-    }),
+        if (!isISO8601(p.value)) {
+          return null;
+        } else {
+          return new Date(p.value);
+        }
+      },
+      { toClassOnly: true },
+    ),
 
     // 2. Validate
     IsDate(),

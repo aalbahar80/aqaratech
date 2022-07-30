@@ -91,20 +91,23 @@ export class OrganizationsController {
   @Get(':id/settings')
   @CheckAbilities({ action: Action.Read, subject: 'Organization' })
   @ApiOkResponse({ type: OrganizationSettingsDto })
-  findSettings(
+  async findSettings(
     @Param('id') organizationId: string,
   ): Promise<OrganizationSettingsDto> {
-    return this.organizationsService.findSettings({ organizationId });
+    const data = await this.organizationsService.findSettings({
+      organizationId,
+    });
+    return new OrganizationSettingsDto(data);
   }
 
   @Patch(':id/settings')
   @CheckAbilities({ action: Action.Update, subject: 'Organization' })
-  @ApiOkResponse({ type: OrganizationSettingsDto })
+  @ApiOkResponse()
   updateSettings(
     @Param('id') organizationId: string,
     @Body() updateOrganizationSettingsDto: UpdateOrganizationSettingsDto,
-  ): Promise<OrganizationSettingsDto> {
-    return this.organizationsService.updateSettings({
+  ) {
+    this.organizationsService.updateSettings({
       organizationId,
       updateOrganizationSettingsDto,
     });

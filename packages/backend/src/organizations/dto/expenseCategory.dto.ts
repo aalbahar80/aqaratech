@@ -1,5 +1,5 @@
-import { IntersectionType, PartialType } from '@nestjs/swagger';
-import { IsPositive, IsString } from 'class-validator';
+import { OmitType } from '@nestjs/swagger';
+import { IsOptional, IsPositive, IsString } from 'class-validator';
 
 export interface ExpenseCategory {
   id: number;
@@ -8,39 +8,29 @@ export interface ExpenseCategory {
   labelAr: string;
 }
 
-class ExpenseCategoryRequiredDto implements Partial<ExpenseCategory> {
+export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
   @IsPositive()
   id: number;
 
   @IsString()
   labelEn: string;
-}
 
-class ExpenseCategoryOptionalDto implements Partial<ExpenseCategory> {
   @IsPositive()
-  parentId: number | null;
+  @IsOptional()
+  parentId?: number | null;
 
   @IsString()
-  labelAr: string;
+  @IsOptional()
+  labelAr?: string;
 
   @IsString()
-  description: string | null;
+  @IsOptional()
+  description?: string | null;
 }
 
-export class ExpenseCategoryDto
-  extends IntersectionType(
-    ExpenseCategoryRequiredDto,
-    PartialType(ExpenseCategoryOptionalDto),
-  )
-  implements Partial<ExpenseCategory> {}
+export class CreateExpenseCategoryDto extends ExpenseCategoryDto {}
 
-export class CreateExpenseCategoryDto
-  extends IntersectionType(
-    ExpenseCategoryRequiredDto,
-    PartialType(ExpenseCategoryOptionalDto),
-  )
-  implements Partial<ExpenseCategory> {}
-
-export class UpdateExpenseCategoryDto extends PartialType(
+export class UpdateExpenseCategoryDto extends OmitType(
   CreateExpenseCategoryDto,
+  ['id'],
 ) {}
