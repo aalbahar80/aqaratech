@@ -1,9 +1,4 @@
-import {
-	digitsOnly,
-	falsyToNull,
-	strToDate,
-	trim,
-} from '$lib/zodTransformers.js';
+import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const schema = z.object({
@@ -24,9 +19,7 @@ export const schema = z.object({
 		])
 		.transform(trim)
 		.transform(falsyToNull),
-	dob: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	dob: z.string().nullable().transform(falsyToNull),
 	civilid: z
 		.union([
 			z.null(),
@@ -45,7 +38,5 @@ export const schema = z.object({
 	passportNum: z.string().nullable().transform(trim).transform(falsyToNull),
 	residencyNum: z.string().nullable().transform(trim).transform(falsyToNull),
 	nationality: z.string().nullable().transform(trim).transform(falsyToNull),
-	residencyEnd: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	residencyEnd: z.string().nullable().transform(falsyToNull),
 });

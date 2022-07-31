@@ -2,7 +2,6 @@ import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import {
 	falsyToNull,
 	falsyToNullExceptZero,
-	strToDate,
 	trim,
 } from '$lib/zodTransformers.js';
 import { z } from 'zod';
@@ -13,7 +12,7 @@ export const updateSchema = z.object({
 		.union([z.number(), z.string()])
 		.nullable()
 		.transform(falsyToNullExceptZero),
-	postAt: z.preprocess(strToDate, z.date()),
+	postAt: z.string().min(1, { message: 'Required' }),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 });
 
