@@ -2040,6 +2040,10 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsDto'
       tags: *ref_21
   /aggregate/incomeByMonth:
     get:

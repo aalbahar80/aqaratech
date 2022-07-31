@@ -1,4 +1,3 @@
-import { OmitType } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
 export interface ExpenseCategory {

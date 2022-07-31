@@ -27,7 +27,7 @@
 	type Prop = LP<typeof load>;
 	export let settings: Prop['settings'];
 
-	const original = settings.expenseCategoryTree;
+	$: original = settings.expenseCategoryTree;
 
 	let root: ExpenseNode = toHeirarchy(cloneDeep(settings.expenseCategoryTree));
 
@@ -58,7 +58,11 @@
 								expenseCategoryTree: newList,
 							},
 						})
-						.then(() => addSuccessToast())
+						.then((res) => {
+							console.debug({ res }, 'expense-tree.svelte ~ 81');
+							addSuccessToast();
+							settings = res;
+						})
 						.catch(handleApiError);
 			}}
 		>

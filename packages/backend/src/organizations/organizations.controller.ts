@@ -102,12 +102,13 @@ export class OrganizationsController {
 
   @Patch(':id/settings')
   @CheckAbilities({ action: Action.Update, subject: 'Organization' })
-  @ApiOkResponse()
+  @ApiOkResponse({ type: OrganizationSettingsDto })
   updateSettings(
     @Param('id') organizationId: string,
     @Body() updateOrganizationSettingsDto: UpdateOrganizationSettingsDto,
-  ) {
-    this.organizationsService.updateSettings({
+  ): Promise<OrganizationSettingsDto> {
+    // @ts-ignore
+    return this.organizationsService.updateSettings({
       organizationId,
       updateOrganizationSettingsDto,
     });

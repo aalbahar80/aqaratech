@@ -86,7 +86,7 @@ export class OrganizationsService {
     organizationId: string;
     updateOrganizationSettingsDto: UpdateOrganizationSettingsDto;
   }) {
-    await this.prisma.organizationSettings.update({
+    return this.prisma.organizationSettings.update({
       where: { organizationId },
       data: {
         // @ts-ignore
