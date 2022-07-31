@@ -20,12 +20,18 @@
 		);
 
 		// give the new children a parent here, this is necessary for dnd to know
-		// how to handle the new children in `handleDndConsider`. Dnd will then
+		// how to handle the new children and update the tree. Dnd will then
 		// animate, etc based on this change
-		// set all changes here?
 		newChildren.forEach((child) => {
 			child.data.parentId = node.data.id;
 			child.parent = node;
+
+			// remove the child from the old parent?
+			// if (child.parent) {
+			// 	child.parent.children = child.parent.children?.filter(
+			// 		(child) => child.id !== child.data.id,
+			// 	);
+			// }
 		});
 
 		const newChildrenNames = newChildren.map((fresh) => fresh.data.labelEn);

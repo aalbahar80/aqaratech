@@ -28,9 +28,6 @@ export const fromHeirarchy = ({
 	const data: ExpenseCategoryDto[] = hierarchy.descendants().map((d) => d.data);
 
 	const potentialCategories = dejectRoot(data);
-	console.log(`${potentialCategories.length} potential updates`, [
-		...potentialCategories,
-	]);
 
 	// what d3 considers updated differs from what we consider updated
 	// For us, a node is only considered updated if it's parentId is different
@@ -55,13 +52,6 @@ export const fromHeirarchy = ({
 			});
 		}
 	});
-
-	// TODO original right count? contains root?
-	// is original same as heirarchy.descendants()?
-	console.log(
-		`${updatedCategories.length} updated categories out of a total of ${original.length}`,
-		updatedCategories,
-	);
 
 	if (updatedCategories.length < 1) return original;
 
