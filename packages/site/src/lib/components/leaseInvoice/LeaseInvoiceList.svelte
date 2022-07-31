@@ -5,8 +5,6 @@
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
-	import { formatDistance } from 'date-fns';
-	import Fa6SolidCalendarDay from '~icons/fa6-solid/calendar-day';
 
 	export let leaseId: string | undefined = undefined;
 	export let leaseInvoices: PaginatedLeaseInvoiceDto;
@@ -27,31 +25,9 @@
 		{/if}
 	</div>
 	{#each leaseInvoices.results as invoice (invoice.id)}
-		{@const icons = [
-			invoice.isPaid && invoice.paidAt
-				? {
-						label:
-							'Paid ' +
-							formatDistance(new Date(invoice.paidAt), new Date(), {
-								addSuffix: true,
-							}),
-						icon: Fa6SolidCalendarDay,
-						tooltip: 'createdAt',
-				  }
-				: {
-						label:
-							'Posted ' +
-							formatDistance(new Date(invoice.postAt), new Date(), {
-								addSuffix: true,
-							}),
-						icon: Fa6SolidCalendarDay,
-						tooltip: 'createdAt',
-				  },
-		]}
 		<li>
 			<LeaseInvoiceCard
 				{invoice}
-				{icons}
 				on:delete={(e) => {
 					leaseInvoices.results = leaseInvoices.results.filter(
 						(r) => r.id !== e.detail.id,

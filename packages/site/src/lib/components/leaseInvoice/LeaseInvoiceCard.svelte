@@ -9,16 +9,39 @@
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { LeaseInvoiceDto } from '@self/sdk';
 	import { Check, Eye, X } from '@steeze-ui/heroicons';
+	import { formatDistance } from 'date-fns';
+	import Fa6SolidCalendarDay from '~icons/fa6-solid/calendar-day';
 	import MajesticonsNoteText from '~icons/majesticons/note-text';
 
 	export let invoice: LeaseInvoiceDto;
-	export let icons: any[];
 
 	$: badge = getInvoiceBadge({
 		dueAt: invoice.dueAt,
 		isPaid: invoice.isPaid,
 		postAt: invoice.postAt,
 	});
+
+	$: icons = [
+		invoice.isPaid && invoice.paidAt
+			? {
+					label:
+						'Paid ' +
+						formatDistance(new Date(invoice.paidAt), new Date(), {
+							addSuffix: true,
+						}),
+					icon: Fa6SolidCalendarDay,
+					tooltip: 'createdAt',
+			  }
+			: {
+					label:
+						'Posted ' +
+						formatDistance(new Date(invoice.postAt), new Date(), {
+							addSuffix: true,
+						}),
+					icon: Fa6SolidCalendarDay,
+					tooltip: 'createdAt',
+			  },
+	];
 </script>
 
 <div class="px-4 py-4 sm:px-6">
