@@ -8,7 +8,6 @@
 	import { clickOutside } from '$lib/utils/click-outside';
 	import {
 		Listbox,
-		ListboxButton,
 		ListboxOption,
 		ListboxOptions,
 	} from '@rgossiaux/svelte-headlessui';
@@ -18,14 +17,11 @@
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
-	// NOTE consider not using headlessui for this component.
-	// Specifically, the ListBoxButton could interfere with our
+	// NOTE we're not using headlessui's `ListboxButton` for this component
+	// because the ListboxButton interferes with our
 	// accessibility behavior.
 	//
-	// See: `open` vs `forceOpen`, where headlessui's `open` is only
-	// triggered by clicking it, whereas our `forceOpen` can be
-	// triggered by clicking anywhere on the component,
-	// pressing the down arrow, or by clicking enter.
+	// P.S. At time of writing, headlessui does not have a native combobox.
 
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
 	export let initialValue: Option['value'] = undefined;
@@ -182,7 +178,6 @@
 
 <Listbox
 	value={selection}
-	let:open
 	on:change={(e) => {
 		select(e.detail);
 	}}
@@ -233,17 +228,21 @@
 					aria-hidden="true"
 				/>
 			</button>
-			<ListboxButton>
+			<button
+				on:click|preventDefault={() => {
+					forceOpen = !forceOpen;
+				}}
+			>
 				<Icon
 					src={Selector}
 					theme="solid"
 					class="h-5 w-5 text-gray-400"
 					aria-hidden="true"
 				/>
-			</ListboxButton>
+			</button>
 		</div>
 
-		{#if (forceOpen || open) && filtered.length}
+		{#if forceOpen && filtered.length}
 			<ListboxOptions
 				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 				static
