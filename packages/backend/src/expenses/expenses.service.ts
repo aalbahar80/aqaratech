@@ -32,6 +32,7 @@ export class ExpensesService {
       Action.Create,
       subject('Expense', createExpenseDto),
     );
+    console.log({ createExpenseDto }, 'expenses.service.ts ~ 35');
 
     const toCreate = R.omit(createExpenseDto, [
       'portfolioId',
@@ -40,6 +41,8 @@ export class ExpensesService {
       'maintenanceOrderId',
       'categoryId',
     ]);
+
+    // TODO validate categoryId is valid (exists, and is leaf node)
     const created = await this.prisma.expense.create({
       data: {
         ...toCreate,
@@ -53,9 +56,6 @@ export class ExpensesService {
         // ...(createExpenseDto.maintenanceOrderId && {
         //   unit: { connect: { id: createExpenseDto.maintenanceOrderId } },
         // }),
-        ...(createExpenseDto.categoryId && {
-          expenseType: { connect: { id: createExpenseDto.categoryId } },
-        }),
       },
     });
     return created.id;
