@@ -20,7 +20,6 @@ import {
   BreadcrumbDto,
   BreadcrumbsDto,
   IBreadcrumbs,
-  PortfolioLabelParams,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
