@@ -32,12 +32,13 @@ export function DateType(required = true): PropertyDecorator {
           // https://github.com/validatorjs/validator.js/issues/2003
           isISO8601(p.value, { strict: true }) &&
           typeof p.value === 'string' &&
+          p.value.length > 10 &&
           !p.value.endsWith('00:00:00.000Z')
         ) {
           console.warn(
             'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
+            { key: p.key, value: p.value, obj: p.obj },
           );
-          console.log(p);
         }
 
         if (isISO8601(p.value)) {
