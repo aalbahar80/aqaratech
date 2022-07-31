@@ -50,7 +50,8 @@ class ExpenseOptionalDto {
   @IsOptional()
   maintenanceOrderId: string | null;
 
-  // TODO use category name/prisma connect & set default here?
+  @IsString() // Use nanoid?
+  @IsOptional()
   categoryId: string | null;
 }
 

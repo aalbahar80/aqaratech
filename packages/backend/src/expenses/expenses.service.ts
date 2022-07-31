@@ -32,14 +32,12 @@ export class ExpensesService {
       Action.Create,
       subject('Expense', createExpenseDto),
     );
-    console.log({ createExpenseDto }, 'expenses.service.ts ~ 35');
 
     const toCreate = R.omit(createExpenseDto, [
       'portfolioId',
       'propertyId',
       'unitId',
       'maintenanceOrderId',
-      'categoryId',
     ]);
 
     // TODO validate categoryId is valid (exists, and is leaf node)
@@ -150,7 +148,6 @@ export class ExpensesService {
       Action.Update,
       subject('Expense', { id, ...updateExpenseDto }),
     );
-
     const updated = await this.prisma.expense.update({
       where: { id },
       data: updateExpenseDto,
