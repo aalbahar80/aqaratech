@@ -281,6 +281,8 @@ importers:
       jsonwebtoken: 8.5.1
       just-compare: 2.1.1
       just-deep-map-values: 1.0.0
+      just-diff: 5.0.3
+      just-index: 4.0.1
       lodash-es: 4.17.21
       logrocket: 3.0.1
       nanoid: 4.0.0
@@ -352,6 +354,8 @@ importers:
       jsonwebtoken: 8.5.1
       just-compare: 2.1.1
       just-deep-map-values: 1.0.0
+      just-diff: 5.0.3
+      just-index: 4.0.1
       lodash-es: 4.17.21
       logrocket: 3.0.1
       nanoid: 4.0.0
@@ -8595,6 +8599,14 @@ packages:
 
   /just-deep-map-values/1.0.0:
     resolution: {integrity: sha512-rLmRYzJUOmKyDiSYdNXyyAOFdYZfjsna33BpS1ApWDWYFEsxAX2CVEi2WEdLOibrd+f+UK16fiiSO5ZJTMiKWQ==}
+    dev: true
+
+  /just-diff/5.0.3:
+    resolution: {integrity: sha512-a8p80xcpJ6sdurk5PxDKb4mav9MeKjA3zFKZpCWBIfvg8mznfnmb13MKZvlrwJ+Lhis0wM3uGAzE0ArhFHvIcg==}
+    dev: true
+
+  /just-index/4.0.1:
+    resolution: {integrity: sha512-RP6Cjva53eQmdyi9OezZtvHMkouKZgQTH/RcWhKvygAiUmPkrf393abMKnmuhI/nzmTNk+dpSR/a1Dyb01j9+A==}
     dev: true
 
   /jwa/1.4.1:

@@ -11,6 +11,8 @@
 	import type { LP } from 'src/types/load-props';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import { differenceBy, clone, cloneDeep } from 'lodash-es';
+	import { diff } from 'just-diff';
+	import index from 'just-index';
 
 	export const load = async ({ stuff, params }: LoadEvent<{ id: string }>) => {
 		const settings = await stuff.api!.organizations.findSettings({
@@ -43,10 +45,11 @@
 		hierarchy: root,
 		original: getOriginalTreeClone(),
 	});
-	$: difference = differenceBy(original, newList, 'parentId');
-	// $: console.warn({ original });
-	// $: console.warn({ newList });
-	// $: console.warn({ difference });
+	$: difference = diff(original, newList);
+
+	$: console.warn({ original });
+	$: console.warn({ newList });
+	$: console.warn({ difference });
 </script>
 
 <!-- TODO rm -->
@@ -65,7 +68,7 @@
 			console.log(root.find((node) => node.data.id === '2'));
 			console.log(original);
 			console.log(newList);
-			console.log(differenceBy(original, newList, 'parentId'));
+			console.log(difference);
 		}}
 	>
 		<Fa6SolidFloppyDisk />
