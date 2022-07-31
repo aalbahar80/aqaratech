@@ -31,11 +31,12 @@
 			(fresh) => fresh.id !== SHADOW_PLACEHOLDER_ITEM_ID,
 		);
 
-		// REVIEW if this is needed here
-		// give the new children a parent
-		// newChildren.forEach((child) => {
-		// 	child.data.parentId = node.data.id;
-		// });
+		// give the new children a parent here, this is necessary for dnd to know
+		// how to handle the new children in `handleDndConsider`. Dnd will then
+		// animate, etc based on this change
+		newChildren.forEach((child) => {
+			child.data.parentId = node.data.id;
+		});
 
 		const newChildrenNames = newChildren.map((fresh) => fresh.data.labelEn);
 		if (!newChildren.length) {
@@ -53,8 +54,10 @@
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
 	}
+
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
+		node.children = updatedNodes;
 		if (updatedNodes) {
 			const updatedCategories = fromHeirarchy(
 				root,
@@ -62,7 +65,8 @@
 				original,
 				node,
 			);
-			root = toHeirarchy(updatedCategories);
+			console.log({ updatedCategories }, 'ExpenseTree.svelte ~ 67');
+			// root = toHeirarchy(updatedCategories);
 		}
 	}
 </script>

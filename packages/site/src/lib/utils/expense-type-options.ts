@@ -30,12 +30,14 @@ export const fromHeirarchy = (
 	nodeInQuestion: d3.HierarchyNode<ExpenseCategoryDto>,
 ): ExpenseCategoryDto[] => {
 	const data: ExpenseCategoryDto[] = updated.map((d) => d.data);
-	const categories = dejectRoot(data);
-	console.log(`${categories.length} potential updates`, [...categories]);
+	const potentialCategories = dejectRoot(data);
+	console.log(`${potentialCategories.length} potential updates`, [
+		...potentialCategories,
+	]);
 
 	// what d3 considers updated differs from what we consider updated
 	// For us, a node is only considered updated if it's parentId is different
-	const updatedCategories = categories.filter((child) => {
+	const updatedCategories = potentialCategories.filter((child) => {
 		const newParentId = nodeInQuestion.data.id;
 		const newParent = nodeInQuestion.data;
 		// const newParent = original.find((o) => o.id === newParentId);
@@ -56,21 +58,17 @@ export const fromHeirarchy = (
 		}
 	});
 
-	console.warn(`${updatedCategories.length} nodes had their parentId changed`, [
-		...updatedCategories,
-	]);
-
 	console.log(`${hierarchy.descendants().length} originals`);
 	hierarchy.descendants().forEach((d) => {
-		const category = categories.find((c) => c.id === d.data.id);
+		const category = updatedCategories.find((c) => c.id === d.data.id);
 		if (category) return;
 
-		categories.push(d.data);
+		updatedCategories.push(d.data);
 	});
 
 	// Handle the artificial root node which was injected by `toHeirarchy` to satisfy d3's "one root" requirement.
 	// This means converting any node with a parentId of 'root' back to it's original parentId of `null`.
-	return categories;
+	return updatedCategories;
 };
 
 /**
