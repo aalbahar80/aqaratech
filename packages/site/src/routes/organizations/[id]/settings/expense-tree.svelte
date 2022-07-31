@@ -2,6 +2,7 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import {
+		fromHeirarchy,
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
@@ -37,6 +38,8 @@
 	let root: ExpenseNode = toHeirarchy([...settings.expenseCategoryTree]);
 	// TODO rm
 	// $: console.log(settings.expenseCategoryTree.find((c) => c.id === '7'));
+	$: console.log(root);
+	$: newList = fromHeirarchy(root, [], original, root);
 </script>
 
 <!-- TODO rm -->
@@ -47,6 +50,7 @@
 		as="button"
 		class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 		on:click={() => {
+			console.log(newList);
 			console.log(original);
 		}}
 	>
@@ -55,6 +59,11 @@
 	<!-- TODO rm -->
 	<pre>{JSON.stringify(
 			original.map((o) => `${o.id}: ${o.labelEn} -- ${o.parentId}`),
+			null,
+			2,
+		)}</pre>
+	<pre>{JSON.stringify(
+			newList.map((o) => `${o.id}: ${o.labelEn} -- ${o.parentId}`),
 			null,
 			2,
 		)}</pre>
