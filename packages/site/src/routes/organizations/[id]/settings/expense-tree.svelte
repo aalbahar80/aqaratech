@@ -8,6 +8,7 @@
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
+	import { preventTabClose } from '$lib/utils/prevent-tab-close';
 	import { Check } from '@steeze-ui/heroicons';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import { diff } from 'just-diff';
@@ -39,7 +40,10 @@
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />
 	</div>
-	<div class="sticky top-0 flex w-2/6 flex-initial flex-col self-start p-2">
+	<div
+		use:preventTabClose={!!difference.length}
+		class="sticky top-0 flex w-2/6 flex-initial flex-col self-start p-2"
+	>
 		<Button
 			icon={Check}
 			text={difference.length ? `Save changes` : 'No pending changes'}
