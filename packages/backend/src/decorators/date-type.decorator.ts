@@ -1,4 +1,4 @@
-import { applyDecorators } from '@nestjs/common';
+import { applyDecorators, BadRequestException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsDate, isISO8601 } from 'class-validator';
@@ -42,7 +42,10 @@ export function DateType(required = true): PropertyDecorator {
         }
 
         if (!isISO8601(p.value)) {
-          return null;
+          // Find way to work this error into class-validator's error messsages.
+          // Returning null here makes class-validator skip the `IsDate` validation for some reason.
+          // return null;
+          throw new BadRequestException(`Invalid date: ${p.key}: ${p.value}`);
         } else {
           return new Date(p.value);
         }
