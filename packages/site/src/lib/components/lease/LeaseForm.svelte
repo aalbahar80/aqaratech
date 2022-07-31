@@ -124,13 +124,13 @@
 		new Field('canPay', {
 			label: 'Allow tenant to pay invoices online',
 			type: 'checkbox',
-			value: data?.canPay || true,
+			value: data?.canPay ?? true,
 			autoInit: true,
 		}),
 		new Field('notify', {
 			label: 'Send payment reminders',
 			type: 'checkbox',
-			value: data?.notify || true,
+			value: data?.notify ?? true,
 			autoInit: true,
 		}),
 	];
