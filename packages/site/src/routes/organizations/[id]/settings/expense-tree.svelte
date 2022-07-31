@@ -25,20 +25,18 @@
 	type Prop = LP<typeof load>;
 	export let settings: Prop['settings'];
 
-	const getOriginalTreeClone = () => [
-		...cloneDeep(settings.expenseCategoryTree),
-	];
-	const original = getOriginalTreeClone();
+	const original = settings.expenseCategoryTree;
 
-	let root: ExpenseNode = toHeirarchy(getOriginalTreeClone());
+	let root: ExpenseNode = toHeirarchy(cloneDeep(settings.expenseCategoryTree));
+
 	$: newList = fromHeirarchy({
 		hierarchy: root,
-		original: getOriginalTreeClone(),
+		original,
 	});
 	$: difference = diff(original, newList);
-	$: console.warn({ difference });
 </script>
 
+<pre>{JSON.stringify(difference)}</pre>
 <Button
 	icon={Check}
 	text="Save"
