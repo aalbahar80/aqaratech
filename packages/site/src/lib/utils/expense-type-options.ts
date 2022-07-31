@@ -27,13 +27,12 @@ export const fromHeirarchy = ({
 }): ExpenseCategoryDto[] => {
 	const data: ExpenseCategoryDto[] = root.descendants().map((d) => d.data);
 
-	const potentialCategories = dejectRoot(data);
+	const allCategories = dejectRoot(data);
 
-	// what d3 considers updated differs from what we consider updated
-	// For us, a node is only considered updated if it's parentId is different
-	const updatedCategories: ExpenseCategoryDto[] = [];
+	// A node is only considered updated if it's parentId is different
+	const updated: ExpenseCategoryDto[] = [];
 
-	potentialCategories.forEach((child) => {
+	allCategories.forEach((child) => {
 		const newParentId = child.parentId;
 		const newParent = original.find((o) => o.id === newParentId);
 
@@ -46,19 +45,19 @@ export const fromHeirarchy = ({
 			console.warn(
 				`${child.id}: ${child.labelEn} has new parent ${newParent?.id}: ${newParent?.labelEn}. Old parent: ${oldParentId}: ${oldParent?.labelEn}`,
 			);
-			updatedCategories.push({
+			updated.push({
 				...child,
 				parentId: newParentId,
 			});
 		}
 	});
 
-	if (updatedCategories.length < 1) return original;
+	if (updated.length < 1) return original;
 
 	const result = original.map((o) => {
-		const updated = updatedCategories.find((u) => u.id === o.id);
-		if (updated) {
-			return updated;
+		const changedCategory = updated.find((u) => u.id === o.id);
+		if (changedCategory) {
+			return changedCategory;
 		}
 		return o;
 	});
@@ -115,15 +114,6 @@ export const dejectRoot = (categories: ExpenseCategoryDto[]) => {
 	});
 
 	return updated;
-};
-
-export const fromNode = (node: ExpenseNode): ExpenseCategoryDto => {
-	return {
-		id: node.data.id,
-		parentId: node.data.parentId,
-		labelEn: node.data.labelEn,
-		labelAr: node.data.labelAr,
-	};
 };
 
 /**
