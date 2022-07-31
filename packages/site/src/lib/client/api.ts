@@ -37,7 +37,7 @@ export const api = ({
 	// const basePath = 'https://localhost/api/';
 
 	const config = new Configuration({
-		...(loadFetch && { fetchApi: loadFetch }),
+		...(loadFetch ? { fetchApi: loadFetch } : {}),
 		headers,
 		basePath,
 	});
