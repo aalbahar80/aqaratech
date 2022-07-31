@@ -67,8 +67,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
-	event.locals.xRoleId = cookies.xRoleId || '';
 	event.locals.user = user;
+	event.locals.xRoleId = user?.role.id || '';
 
 	const response = await resolve(event);
 	console.log(
