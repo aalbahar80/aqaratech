@@ -1,6 +1,8 @@
 <script context="module" lang="ts">
+	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import {
 		fromHeirarchy,
 		toHeirarchy,
@@ -45,11 +47,19 @@
 			as="button"
 			class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 			on:click={() => {
-				console.log(root.find((node) => node.data.id === '5'));
-				console.log(root.find((node) => node.data.id === '2'));
-				console.log(original);
-				console.log(newList);
-				console.log(difference);
+				console.debug(difference);
+				console.debug(newList);
+				const id = $page.params.id;
+				id &&
+					$page.stuff.api.organizations
+						.updateSettings({
+							id,
+							updateOrganizationSettingsDto: {
+								expenseCategoryTree: newList,
+							},
+						})
+						.then(() => addSuccessToast())
+						.catch(handleApiError);
 			}}
 		>
 			<Fa6SolidFloppyDisk />

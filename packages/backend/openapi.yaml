@@ -3373,7 +3373,6 @@ components:
         parentId:
           type: string
           nullable: true
-          minimum: 1
         labelAr:
           type: string
         description:
@@ -3540,18 +3539,20 @@ components:
     UpdateExpenseCategoryDto:
       type: object
       properties:
+        id:
+          type: string
         labelEn:
           type: string
         parentId:
           type: string
           nullable: true
-          minimum: 1
         labelAr:
           type: string
         description:
           type: string
           nullable: true
       required:
+        - id
         - labelEn
         - parentId
     UpdateOrganizationSettingsDto:

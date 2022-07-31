@@ -1,5 +1,5 @@
 import { OmitType } from '@nestjs/swagger';
-import { IsOptional, IsPositive, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export interface ExpenseCategory {
   id: string;
@@ -15,7 +15,7 @@ export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
   @IsString()
   labelEn: string;
 
-  @IsPositive()
+  @IsString()
   @IsOptional()
   parentId: string | null;
 
@@ -30,7 +30,4 @@ export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
 
 export class CreateExpenseCategoryDto extends ExpenseCategoryDto {}
 
-export class UpdateExpenseCategoryDto extends OmitType(
-  CreateExpenseCategoryDto,
-  ['id'],
-) {}
+export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {}
