@@ -42,13 +42,14 @@ export const fromHeirarchy = (
 	const updatedCategories: ExpenseCategoryDto[] = [];
 
 	potentialCategories.forEach((child) => {
-		const newParentId = nodeInQuestion.data.id;
-		const newParent = nodeInQuestion.data;
+		// const newParentId = nodeInQuestion.data.id;
+		// const newParent = nodeInQuestion.data;
 		// const newParent = original.find((o) => o.id === newParentId);
+		const newParentId = child.parentId;
+		const newParent = original.find((o) => o.id === newParentId);
 
-		// const oldSelf = original.find((o) => o.id === newSelf.id);
-		// const oldParentId = oldSelf?.parentId;
-		const oldParentId = child.parentId;
+		const oldSelf = original.find((o) => o.id === child.id);
+		const oldParentId = oldSelf?.parentId;
 		const oldParent = original.find((o) => o.id === oldParentId);
 
 		const hasNewParent = newParentId !== oldParentId;
@@ -73,6 +74,8 @@ export const fromHeirarchy = (
 	// console.log(`${hierarchy.descendants().length} originals`);
 	// const original2 = hierarchy.descendants().map((d) => d.data);
 	// console.log({ original2 }, 'expense-type-options.ts ~ 75');
+	if (updatedCategories.length < 1) return original;
+
 	const result = original.map((o) => {
 		const updated = updatedCategories.find((u) => u.id === o.id);
 		if (updated) {
