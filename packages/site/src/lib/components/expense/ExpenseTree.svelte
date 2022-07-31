@@ -34,12 +34,9 @@
 			// }
 		});
 
-		const newChildrenNames = newChildren.map((fresh) => fresh.data.labelEn);
 		if (!newChildren.length) {
-			console.log(`no new children for ${node.data.labelEn}`);
 			return;
 		} else {
-			console.log(`${node.data.labelEn} has new child: ${newChildrenNames}`);
 			return newChildren;
 		}
 	};

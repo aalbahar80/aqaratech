@@ -12,7 +12,6 @@ export const toHeirarchy = (
 	categories: ExpenseCategoryDto[],
 ): d3.HierarchyNode<ExpenseCategoryDto> => {
 	const rootedCatogories = injectRoot(categories);
-	console.log(categories);
 
 	const root = d3
 		.stratify<ExpenseCategoryDto>()
@@ -40,17 +39,12 @@ export const fromHeirarchy = ({
 
 	allCategories.forEach((child) => {
 		const newParentId = child.parentId;
-		const newParent = original.find((o) => o.id === newParentId);
 
 		const oldSelf = original.find((o) => o.id === child.id);
 		const oldParentId = oldSelf?.parentId;
-		const oldParent = original.find((o) => o.id === oldParentId);
 
 		const hasNewParent = newParentId !== oldParentId;
 		if (hasNewParent) {
-			console.warn(
-				`${child.id}: ${child.labelEn} has new parent ${newParent?.id}: ${newParent?.labelEn}. Old parent: ${oldParentId}: ${oldParent?.labelEn}`,
-			);
 			updated.push({
 				...child,
 				parentId: newParentId,
@@ -78,7 +72,6 @@ export const fromHeirarchy = ({
 export const injectRoot = (categories: ExpenseCategoryDto[]) => {
 	const hasRoot = categories.some((c) => c.id === rootId);
 	if (hasRoot) {
-		console.debug('Root node already exists. Skipping injection.');
 		return categories;
 	}
 
