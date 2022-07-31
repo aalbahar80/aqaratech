@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import { session } from '$app/stores';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
+	import { countries } from '$lib/constants/countries';
 	import { inWords } from '$lib/utils/currency';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
@@ -39,7 +40,8 @@
 		civilid: tenant.civilid,
 		phone: tenant.phone,
 		tenantAddress: '',
-		nationality: tenant.nationality,
+		nationality:
+			countries.find((c) => c.alpha3Code === tenant.nationality)?.nameAr ?? '',
 		passport: tenant.passportNum,
 		residency: tenant.residencyNum,
 		residencyEnd: tenant.residencyEnd,
@@ -51,8 +53,8 @@
 		// unitAddress: getAddress(unit.breadcrumbs?.property.label),
 		unitAddress: unit.breadcrumbs.property.label,
 		unitNumber: unit.unitNumber,
-		unitType: unit.type,
-		purpose: lease.license,
+		unitType: unit.type ?? '',
+		purpose: lease.license ?? '',
 	};
 </script>
 
@@ -77,7 +79,7 @@
 			{#if arabicLabels[field[0]]}
 				<p class="m-1">
 					<span>{arabicLabels[field[0]]}:</span>
-					<span>{field[1]}</span>
+					<span>{field[1] ?? ''}</span>
 				</p>
 			{/if}
 		{/each}
