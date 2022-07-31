@@ -14,7 +14,7 @@
 	export let invoice: LeaseInvoiceDto;
 	export let icons: any[];
 
-	const badge = getInvoiceBadge({
+	$: badge = getInvoiceBadge({
 		dueAt: invoice.dueAt,
 		isPaid: invoice.isPaid,
 		postAt: invoice.postAt,
@@ -38,41 +38,31 @@
 								label: 'View',
 								href: `/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`,
 							},
-							// {
-							// 	icon: ClipboardCopy,
-							// 	label: 'Copy payment URL',
-							// 	onClick: () => {
-							// 		copyTrxUrl(invoice.id, $page.url.origin);
-							// 	},
-							// },
-							invoice.isPaid
-								? {
-										icon: X,
-										label: 'Mark as unpaid',
-										// TODO invalidate
-										onClick: () => {
-											$page.stuff.api.leaseInvoices
-												.update({
-													id: invoice.id,
-													updateLeaseInvoiceDto: { isPaid: false },
-												})
-												.then(() => addSuccessToast())
-												.catch(handleApiError);
-										},
-								  }
-								: {
-										icon: Check,
-										label: 'Mark as paid',
-										onClick: () => {
-											$page.stuff.api.leaseInvoices
-												.update({
-													id: invoice.id,
-													updateLeaseInvoiceDto: { isPaid: true },
-												})
-												.then(() => addSuccessToast())
-												.catch(handleApiError);
-										},
-								  },
+							{
+								icon: invoice.isPaid ? X : Check,
+								label: invoice.isPaid ? 'Mark as unpaid' : 'Mark as paid',
+								onClick: async () => {
+									try {
+										await $page.stuff.api.leaseInvoices.update({
+											id: invoice.id,
+											updateLeaseInvoiceDto: {
+												isPaid: !invoice.isPaid,
+												paidAt: invoice.isPaid
+													? null
+													: new Date().toISOString(),
+											},
+										});
+
+										addSuccessToast('Invoice updated');
+										invoice = await $page.stuff.api.leaseInvoices.findOne({
+											id: invoice.id,
+										});
+									} catch (e) {
+										console.error(e);
+										handleApiError(e);
+									}
+								},
+							},
 						]}
 					/>
 				</div>
