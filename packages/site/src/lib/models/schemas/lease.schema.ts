@@ -1,12 +1,12 @@
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
-import { zodIsDate } from '$lib/utils/zod-validators';
+import { zodIsDateRequired } from '$lib/utils/zod-validators';
 import { strToDate } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const updateSchema = z.object({
 	monthlyRent: z.number().min(1),
-	start: zodIsDate(true),
-	end: zodIsDate(true),
+	start: zodIsDateRequired(),
+	end: zodIsDateRequired(),
 	notify: z.boolean(),
 	canPay: z.boolean(),
 });

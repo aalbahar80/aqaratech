@@ -1,4 +1,4 @@
-import { zodIsDate } from '$lib/utils/zod-validators';
+import { zodIsDateOptional } from '$lib/utils/zod-validators';
 import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
@@ -20,7 +20,7 @@ export const schema = z.object({
 		])
 		.transform(trim)
 		.transform(falsyToNull),
-	dob: zodIsDate(),
+	dob: zodIsDateOptional(),
 	civilid: z
 		.union([
 			z.null(),
@@ -39,5 +39,5 @@ export const schema = z.object({
 	passportNum: z.string().nullable().transform(trim).transform(falsyToNull),
 	residencyNum: z.string().nullable().transform(trim).transform(falsyToNull),
 	nationality: z.string().nullable().transform(trim).transform(falsyToNull),
-	residencyEnd: zodIsDate(),
+	residencyEnd: zodIsDateOptional(),
 });
