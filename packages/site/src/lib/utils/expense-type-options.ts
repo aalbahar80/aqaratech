@@ -22,6 +22,8 @@ export const toHeirarchy = (
 /**
  * @param nodeInQuestion
  * The main player. updated here means potentially new children of THIS node.
+ * Returns lists of categories after applying updates.
+ * TODO do we need both original and heirarchy?
  */
 export const fromHeirarchy = (
 	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>,
@@ -37,7 +39,9 @@ export const fromHeirarchy = (
 
 	// what d3 considers updated differs from what we consider updated
 	// For us, a node is only considered updated if it's parentId is different
-	const updatedCategories = potentialCategories.filter((child) => {
+	const updatedCategories: ExpenseCategoryDto[] = [];
+
+	potentialCategories.forEach((child) => {
 		const newParentId = nodeInQuestion.data.id;
 		const newParent = nodeInQuestion.data;
 		// const newParent = original.find((o) => o.id === newParentId);
@@ -52,23 +56,43 @@ export const fromHeirarchy = (
 			console.warn(
 				`${child.id}: ${child.labelEn} has new parent ${newParent?.id}: ${newParent?.labelEn}. Old parent: ${oldParentId}: ${oldParent?.labelEn}`,
 			);
-			return hasNewParent;
-		} else {
-			return !hasNewParent;
+			updatedCategories.push({
+				...child,
+				parentId: newParentId,
+			});
 		}
 	});
 
-	console.log(`${hierarchy.descendants().length} originals`);
-	hierarchy.descendants().forEach((d) => {
-		const category = updatedCategories.find((c) => c.id === d.data.id);
-		if (category) return;
+	// TODO original right count? contains root?
+	// is original same as heirarchy.descendants()?
+	console.log(
+		`${updatedCategories.length} updated categories out of a total of ${original.length}`,
+		updatedCategories,
+	);
 
-		updatedCategories.push(d.data);
+	// console.log(`${hierarchy.descendants().length} originals`);
+	// const original2 = hierarchy.descendants().map((d) => d.data);
+	// console.log({ original2 }, 'expense-type-options.ts ~ 75');
+	const result = original.map((o) => {
+		const updated = updatedCategories.find((u) => u.id === o.id);
+		if (updated) {
+			return updated;
+		}
+		return o;
 	});
 
-	// Handle the artificial root node which was injected by `toHeirarchy` to satisfy d3's "one root" requirement.
-	// This means converting any node with a parentId of 'root' back to it's original parentId of `null`.
-	return updatedCategories;
+	return result;
+
+	// hierarchy.descendants().forEach((d) => {
+	// 	const category = updatedCategories.find((c) => c.id === d.data.id);
+	// 	if (category) return;
+
+	// 	updatedCategories.push(d.data);
+	// });
+
+	// // Handle the artificial root node which was injected by `toHeirarchy` to satisfy d3's "one root" requirement.
+	// // This means converting any node with a parentId of 'root' back to it's original parentId of `null`.
+	// return updatedCategories;
 };
 
 /**
