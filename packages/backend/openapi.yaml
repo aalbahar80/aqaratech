@@ -256,13 +256,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -499,13 +497,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -809,13 +805,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -1748,13 +1742,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: portfolioId
@@ -2092,13 +2084,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: paidStatus
@@ -2140,13 +2130,11 @@ paths:
         - name: start
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: end
           required: false
           in: query
-          example: '2012-12-21T00:00:00.000Z'
           schema:
             type: string
         - name: portfolioId
@@ -2245,11 +2233,9 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         residencyEnd:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2294,11 +2280,9 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         residencyEnd:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2399,11 +2383,9 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         residencyEnd:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         fullName:
           type: string
           minLength: 1
@@ -2487,10 +2469,8 @@ components:
           readOnly: true
         start:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         end:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
         tenantId:
@@ -2566,15 +2546,12 @@ components:
           readOnly: true
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
         amount:
@@ -2708,15 +2685,12 @@ components:
       properties:
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -2739,15 +2713,12 @@ components:
       properties:
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -2764,10 +2735,8 @@ components:
       properties:
         start:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         end:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         tenantId:
           type: string
         unitId:
@@ -2795,10 +2764,8 @@ components:
       properties:
         start:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         end:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         monthlyRent:
           type: number
           minimum: 1
@@ -2816,15 +2783,12 @@ components:
       properties:
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         dueAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         paidAt:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1
@@ -2845,7 +2809,6 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2881,7 +2844,6 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         organizationId:
           type: string
         fullName:
@@ -2912,7 +2874,6 @@ components:
         dob:
           type: string
           nullable: true
-          example: '2012-12-21T00:00:00.000Z'
         fullName:
           type: string
           minLength: 1
@@ -3321,7 +3282,6 @@ components:
       properties:
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         portfolioId:
           type: string
         amount:
@@ -3399,7 +3359,6 @@ components:
           readOnly: true
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
         expenseType:
@@ -3443,7 +3402,6 @@ components:
       properties:
         postAt:
           type: string
-          example: '2012-12-21T00:00:00.000Z'
         amount:
           type: number
           minimum: 1

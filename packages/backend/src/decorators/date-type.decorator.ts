@@ -22,7 +22,6 @@ import { IsDate, isISO8601, IsOptional } from 'class-validator';
  * 2. Class-transformer will convert it to Date since we're using `Type(() => Date)`.
  */
 export function DateType(required = true): PropertyDecorator {
-  const example = new Date('2012-12-21').toISOString();
   return applyDecorators(
     // 1. Transform
     Transform(
@@ -62,6 +61,6 @@ export function DateType(required = true): PropertyDecorator {
     // 2. Validate
     ...(required ? [] : [IsOptional()]),
     IsDate(),
-    ApiProperty({ type: 'string', example, required }),
+    ApiProperty({ type: 'string', required }),
   );
 }
