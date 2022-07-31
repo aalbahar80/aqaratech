@@ -39,7 +39,7 @@
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />
 	</div>
-	<div class="flex w-2/6 flex-initial flex-col p-2">
+	<div class="sticky top-0 flex w-2/6 flex-initial flex-col self-start p-2">
 		<Button
 			icon={Check}
 			text={difference.length ? `Save changes` : 'No pending changes'}
