@@ -41,7 +41,10 @@ export const getSession: GetSession = async ({ locals }) => {
 	return {
 		user: locals.user,
 		accessToken: locals.accessToken,
-		xRoleId: locals.xRoleId,
+		// TODO remove xRoleId and use user.role.id instead.
+		// Ensure it persists role changes. Works for new signups.
+		// also change in layout/rolechange endpoint/and api.ts
+		xRoleId: locals.user?.role.id || '',
 		isAuthenticated,
 	};
 };

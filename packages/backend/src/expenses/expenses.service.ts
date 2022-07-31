@@ -64,16 +64,14 @@ export class ExpensesService {
   async findAll({
     pageOptionsDto,
     user,
-    roleId,
   }: {
     pageOptionsDto: ExpensePageOptionsDto;
     user: IUser;
-    roleId: string;
   }): Promise<WithCount<ExpenseDto>> {
     const { page, take, start, end } = pageOptionsDto;
 
     const organizationId = user.roles.find(
-      (r) => r.id === roleId,
+      (r) => r.id === user.xRoleId,
     )?.organizationId;
 
     const filter: Prisma.ExpenseWhereInput = {
@@ -111,17 +109,9 @@ export class ExpensesService {
     return { total, results: data.map((e) => new ExpenseDto(e, tree)) };
   }
 
-  async findOne({
-    id,
-    user,
-    roleId,
-  }: {
-    id: string;
-    user: IUser;
-    roleId: string;
-  }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
     const organizationId = user.roles.find(
-      (r) => r.id === roleId,
+      (r) => r.id === user.xRoleId,
     )?.organizationId;
 
     const [data, settings] = await Promise.all([

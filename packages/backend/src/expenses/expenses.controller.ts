@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Headers,
   Param,
   Patch,
   Post,
@@ -53,22 +52,17 @@ export class ExpensesController {
   @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiPaginatedResponse(ExpenseDto)
   findAll(
-    @Headers(ROLE_HEADER) roleId: string,
     @User() user: IUser,
     @Query() pageOptionsDto: ExpensePageOptionsDto,
   ): Promise<WithCount<ExpenseDto>> {
-    return this.expensesService.findAll({ pageOptionsDto, user, roleId });
+    return this.expensesService.findAll({ pageOptionsDto, user });
   }
 
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
-  findOne(
-    @Headers(ROLE_HEADER) roleId: string,
-    @User() user: IUser,
-    @Param('id') id: string,
-  ): Promise<ExpenseDto> {
-    return this.expensesService.findOne({ id, user, roleId });
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<ExpenseDto> {
+    return this.expensesService.findOne({ id, user });
   }
 
   @Patch(':id')

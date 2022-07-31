@@ -42,6 +42,7 @@ export class CaslAbilityFactory {
 
     // ### DETERMINE ROLE TO DEFINE ABILITY FOR ###
 
+    // TODO sec don't determine role here, move role fallback logic to the frontend.
     // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
     const hasDefaultRole = user.roles.some((role) => role.isDefault);
 
