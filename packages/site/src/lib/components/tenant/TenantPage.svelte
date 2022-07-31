@@ -27,18 +27,18 @@
 		...(tenant.label ? [['Label', tenant.label]] : []),
 		['Label', tenant.label],
 		['Phone', tenant.phone],
+		['Date of Birth', tenant.dob ? toUTCFormat(tenant.dob) : ''],
 		['Civil id', tenant.civilid],
-		['Passport #', tenant.passportNum],
 		[
 			'Nationality',
 			countries.find((c) => c.alpha3Code === tenant.nationality)?.name,
 		],
+		['Passport #', tenant.passportNum],
 		['Residency #', tenant.residencyNum],
 		[
 			'Residency Expiration',
 			tenant.residencyEnd ? toUTCFormat(tenant.residencyEnd) : '',
 		],
-		['Nationality', tenant.nationality],
 	] as [string, string | null][];
 
 	const files: [string, string][] = [
