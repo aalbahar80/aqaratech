@@ -3382,6 +3382,7 @@ components:
       required:
         - id
         - labelEn
+        - parentId
     ExpenseDto:
       type: object
       properties:
@@ -3552,6 +3553,7 @@ components:
           nullable: true
       required:
         - labelEn
+        - parentId
     UpdateOrganizationSettingsDto:
       type: object
       properties:

@@ -17,7 +17,7 @@ export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
 
   @IsPositive()
   @IsOptional()
-  parentId?: string | null;
+  parentId: string | null;
 
   @IsString()
   @IsOptional()
