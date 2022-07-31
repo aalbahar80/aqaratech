@@ -4,6 +4,7 @@
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
+	import type { ExpenseCategoryDto } from '@self/sdk';
 	import * as d3 from 'd3';
 	import {
 		dndzone,
@@ -15,6 +16,8 @@
 
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;
+	// use getContext for `original` prop
+	export let original: ExpenseCategoryDto[];
 
 	const handleAction = (e: any) => {
 		const detail: DndEvent<ExpenseNode> = e.detail;
@@ -48,7 +51,7 @@
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
 		if (updatedNodes) {
-			const updatedCategories = fromHeirarchy(root, updatedNodes);
+			const updatedCategories = fromHeirarchy(root, updatedNodes, original);
 			root = toHeirarchy(updatedCategories);
 		}
 	}
@@ -85,6 +88,7 @@
 				<svelte:self
 					bind:root
 					node={root.find((n) => n.id === currentNode.id)}
+					{original}
 				/>
 			</div>
 		{/each}

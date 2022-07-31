@@ -22,7 +22,8 @@
 	type Prop = LP<typeof load>;
 	export let settings: Prop['settings'];
 
-	let root: ExpenseNode = toHeirarchy(settings.expenseCategoryTree);
+	// let root: ExpenseNode = toHeirarchy(settings.expenseCategoryTree);
+	let root: ExpenseNode = toHeirarchy([...settings.expenseCategoryTree]);
 	$: console.log(root);
 </script>
 
@@ -35,4 +36,8 @@
 	<Fa6SolidFloppyDisk />
 </Button>
 
-<ExpenseTree node={root} bind:root />
+<ExpenseTree
+	node={root}
+	bind:root
+	original={[...settings.expenseCategoryTree]}
+/>
