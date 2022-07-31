@@ -3,6 +3,7 @@ import {
   CACHE_MANAGER,
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
   Inject,
   Injectable,
   Logger,
@@ -23,10 +24,11 @@ import { UsersService } from 'src/users/users.service';
 /**
  * Receives a user of type AuthenticatedUser as returned by the jwt.strategy.
  * Uses the user's email to enhance the `request.user` object with additional information,
- * including the caclulated abilities.
+ * including the calculated abilities.
  * Handles caching of users/abilities.
  *
- * Skipped if either `@Public` or `@SkipAbiltiyCheck` decorators are used.
+ * Skipped if either `@Public` or `@SkipAbiltiyCheck` decorators are used. Otherwise,
+ * it expects a concrete x-role-id header to be set, and will throw a 403 if not.
  *
  * Once a user's ability is calculated, it is compared againt metadata from `@CheckAbilities` decorator
  * to determine if the user has the required abilities.
@@ -52,7 +54,6 @@ export class AbilitiesGuard implements CanActivate {
   private readonly logger = new Logger(AbilitiesGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    // TODO: dry up isPublic check with src/auth/JwtAuthGuard
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -81,25 +82,21 @@ export class AbilitiesGuard implements CanActivate {
     const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
     if (!xRoleId) {
-      this.logger.warn(
-        `TODO: Missing ${ROLE_HEADER} header. See casl/abilities.guard.ts for notes.`,
-      );
+      throw new ForbiddenException('Missing role header');
     }
 
     // Get the cached user/role.
     // Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-    const cached = await this.cacheManager.get<IUser>(
-      `${authenticatedUser.email}:${xRoleId}`,
-    );
+    const userCacheKey = `${authenticatedUser.email}:${xRoleId}`;
+    const cached = await this.cacheManager.get<IUser>(userCacheKey);
 
-    // let ability: AppAbility;
     let user: IUser;
 
     if (cached) {
       this.logger.log(
         `Cache hit: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
-      // ability = cached;
+
       user = cached;
     } else {
       this.logger.log(
@@ -115,18 +112,13 @@ export class AbilitiesGuard implements CanActivate {
         xRoleId,
       });
 
-      // TODO rm ! from xRoleId after refactoring
-      user = { ...userP, ability: abilityP, xRoleId: xRoleId! };
+      user = { ...userP, ability: abilityP, xRoleId };
 
       // TODO handle cache ttl/invalidation
       // TODO use cache key variable
-      await this.cacheManager.set(
-        `${authenticatedUser.email}:${xRoleId}`,
-        user,
-        {
-          ttl: 60 * 60 * 24, // TODO adjust
-        },
-      );
+      await this.cacheManager.set(userCacheKey, user, {
+        ttl: 60 * 60 * 24, // TODO adjust
+      });
     }
 
     const requestHasParams = Object.keys(request.params).length > 0;
@@ -185,7 +177,7 @@ export class AbilitiesGuard implements CanActivate {
       // TODO sec don't determine role here, do it in frontend. Currently, there's no
       // guarantee the xRoleId we're using in the cache key is the one resolved
       // by casl.defineAbility.
-      await this.cacheManager.del(`${authenticatedUser.email}:${xRoleId}`);
+      await this.cacheManager.del(userCacheKey);
 
       // try again
       // TODO monitor

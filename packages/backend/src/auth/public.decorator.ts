@@ -9,6 +9,9 @@ export const SKIP_ABILITY_CHECK_KEY = 'skipAbilityCheck';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 /**
- * Decorator to skip ability check. For requests that need to be authenticated, but don't need to be authorized.
+ * Decorator to skip ability check.
+ * For requests that need to be authenticated, but don't need to be authorized.
+ * The user at this point is of type `AuthenticatedUser` (only has email).
+ *
  */
 export const SkipAbilityCheck = () => SetMetadata(SKIP_ABILITY_CHECK_KEY, true);

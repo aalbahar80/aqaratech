@@ -5,13 +5,14 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
-import { User } from 'src/decorators/user.decorator';
-import { IUser } from 'src/interfaces/user.interface';
+import { UserBasic } from 'src/decorators/user-basic.decorator';
+import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
@@ -29,11 +30,18 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  // Don't check abilities here. This endpoint will return a user's role data,
+  // which is necessary to pass ability.guard will be used to determine the user's abilities.
+  //
+  // This endpoint is hit by users who have just signed in.
+  // User will exchange his email (verified by Auth0) for his role data.
+  // User will then use role data to set a role header to gain access
+  // to endpoints that require an ability check.
   @Get('me')
-  @CheckAbilities({ action: Action.Read, subject: 'User' })
+  @SkipAbilityCheck()
   @ApiOkResponse({ type: ValidatedUserDto })
   @ApiNotFoundResponse()
-  findProfile(@User() user: IUser): Promise<ValidatedUserDto> {
+  findProfile(@UserBasic() user: AuthenticatedUser): Promise<ValidatedUserDto> {
     return this.usersService.findOneByEmail(user.email);
   }
 

@@ -1,6 +1,6 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility, Subjects } from '@casl/prisma';
-import { Injectable, Logger } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import {
   Expense,
   Lease,
@@ -35,41 +35,23 @@ export class CaslAbilityFactory {
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
     const { can, build } = new AbilityBuilder(AppAbility);
 
+    // We use email (NOT xRoleId) to find the user/role info.
+    // Email is verified by Auth0/jwt, so it's safe to use.
     const user = await this.prisma.user.findUnique({
       where: { email },
       include: { roles: true },
     });
 
-    // ### DETERMINE ROLE TO DEFINE ABILITY FOR ###
-
-    // TODO sec don't determine role here, move role fallback logic to the frontend.
-    // Use `x-role-id` header if it's set. Otherwise fallback to the user's default role.
-    const hasDefaultRole = user.roles.some((role) => role.isDefault);
-
-    let role: typeof user['roles'][0] | undefined;
-    if (xRoleId) {
-      // If the `x-role-id` header is set, use that.
-      role = user.roles.find((r) => r.id === xRoleId);
-      if (!role) {
-        this.logger.warn(
-          `x-role-id header is set to ${xRoleId} but no role with that id found`,
-        );
-      }
-    } else if (hasDefaultRole) {
-      // If the user has a default role, use that.
-      role = user.roles.find((r) => r.isDefault);
-    } else if (user.roles.length > 0) {
-      // Otherwise, use the first role.
-      role = user.roles[0];
-    }
-
+    // Once we retrieve the user, we can then use the xRoleId header to select their desired role.
+    const role = user.roles.find((role) => role.id === xRoleId);
     if (!role) {
-      // If the user has no roles, return false.
       this.logger.log(user);
+      // Log the userId for our own reference.
+      // But don't return it in the error message as it is priviliged info.
       this.logger.error(
-        `Could not resolve role for userId: ${user.id} - x-role-id: ${xRoleId} - hasDefaultRole: ${hasDefaultRole}`,
+        `Could not resolve roleId ${xRoleId} for userId: ${user.id}`,
       );
-      throw new Error('Could not resolve role');
+      throw new ForbiddenException('Role not found');
     }
 
     // ### DEFINE ABILITY ###
