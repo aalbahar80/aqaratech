@@ -53,7 +53,7 @@ export class UnitsService {
       AND: [accessibleBy(user.ability).Unit, ...(where ? [where] : [])],
     };
 
-    let [data, total] = await Promise.all([
+    const [data, total] = await Promise.all([
       this.prisma.unit.findMany({
         take,
         skip: (page - 1) * take,

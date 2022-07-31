@@ -107,7 +107,7 @@ export class RolesService {
       },
     });
 
-    let organizationName =
+    const organizationName =
       role.organization?.fullName ||
       role.portfolio?.organization?.fullName ||
       role.tenant?.organization?.fullName ||
@@ -142,7 +142,7 @@ export class RolesService {
     };
 
     // TODO fix filter/select
-    let [data, total] = await Promise.all([
+    const [data, total] = await Promise.all([
       this.prisma.role.findMany({
         take,
         skip: (page - 1) * take,
@@ -153,7 +153,7 @@ export class RolesService {
       this.prisma.role.count({ where: filter }),
     ]);
 
-    let results: RoleDto[] = data.map((r) => {
+    const results: RoleDto[] = data.map((r) => {
       const { user, ...role } = r;
       return { ...role, email: user.email };
     });

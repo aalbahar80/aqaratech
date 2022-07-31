@@ -62,7 +62,7 @@ export class LeasesService {
       ? { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder }
       : { createdAt: 'desc' as Prisma.SortOrder };
 
-    let [data, total] = await Promise.all([
+    const [data, total] = await Promise.all([
       this.prisma.lease.findMany({
         take,
         skip: (page - 1) * take,

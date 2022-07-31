@@ -48,7 +48,7 @@ export class TenantsService {
   }): Promise<WithCount<TenantDto>> {
     const { page, take } = tenantPageOptionsDto;
 
-    let [results, total] = await Promise.all([
+    const [results, total] = await Promise.all([
       this.prisma.tenant.findMany({
         take,
         skip: (page - 1) * take,

@@ -75,7 +75,7 @@ export class LeaseInvoicesService {
       ],
     };
 
-    let [data, total] = await Promise.all([
+    const [data, total] = await Promise.all([
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,

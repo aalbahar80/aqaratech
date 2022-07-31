@@ -82,7 +82,7 @@ export class ExpensesService {
       ],
     };
 
-    let [data, total, settings] = await Promise.all([
+    const [data, total, settings] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,

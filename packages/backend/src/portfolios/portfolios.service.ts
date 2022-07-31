@@ -47,7 +47,7 @@ export class PortfoliosService {
   }): Promise<WithCount<PortfolioDto>> {
     const { page, take } = pageOptionsDto;
 
-    let [results, total] = await Promise.all([
+    const [results, total] = await Promise.all([
       this.prisma.portfolio.findMany({
         take,
         skip: (page - 1) * take,

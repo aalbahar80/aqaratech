@@ -56,7 +56,7 @@ export class PropertiesService {
       AND: [accessibleBy(user.ability).Property, ...(where ? [where] : [])],
     };
 
-    let [results, total] = await Promise.all([
+    const [results, total] = await Promise.all([
       this.prisma.property.findMany({
         take,
         skip: (page - 1) * take,

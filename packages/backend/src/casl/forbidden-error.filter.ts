@@ -38,7 +38,7 @@ export class CaslExceptionFilter
     );
 
     // respond with 403
-    let responseError = new ForbiddenException();
+    const responseError = new ForbiddenException();
     this.logger.log(`Response: ${JSON.stringify(responseError)}`);
     response
       .status(responseError.getStatus())
