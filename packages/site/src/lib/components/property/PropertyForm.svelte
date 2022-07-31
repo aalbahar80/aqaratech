@@ -39,7 +39,7 @@
 	export let portfolios: TPortfolios = undefined as TPortfolios;
 
 	const relationalFields: SelectField<RelOption>[] =
-		formType === 'create'
+		formType === 'create' && portfolios
 			? [
 					new SelectField('portfolioId', {
 						label: 'Portfolio',
@@ -49,7 +49,7 @@
 						combobox: true,
 						options:
 							formType === 'create'
-								? portfolios!.results.map((portfolio) => ({
+								? portfolios.results.map((portfolio) => ({
 										value: portfolio.id,
 										label: portfolio.fullName,
 								  }))
@@ -107,7 +107,6 @@
 		entityTitle="properties"
 		{formType}
 		{basicFields}
-		{relationalFields}
 		onSubmit={(values) =>
 			data &&
 			$page.stuff.api.properties.update({

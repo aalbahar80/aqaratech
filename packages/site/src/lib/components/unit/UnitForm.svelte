@@ -46,31 +46,34 @@
 	export let portfolios: TPortfolios = undefined as TPortfolios;
 	export let properties: TProperties = undefined as TProperties;
 
-	const relationalFields: SelectField<RelOption>[] = [
-		new SelectField('portfolioId', {
-			label: 'Portfolio',
-			required: true,
-			value: predefined?.portfolioId,
-			combobox: true,
-			autoInit: true,
-			options: portfolios!.results.map((portfolio) => ({
-				value: portfolio.id,
-				label: portfolio.fullName,
-			})),
-		}),
-		new SelectField('propertyId', {
-			label: 'Property',
-			required: true,
-			value: predefined?.propertyId,
-			combobox: true,
-			autoInit: true,
-			options: properties!.results.map((property) => ({
-				value: property.id,
-				label: getAddress(property),
-				meta: { parentId: property.portfolioId },
-			})),
-		}),
-	];
+	const relationalFields: SelectField<RelOption>[] =
+		formType === 'create' && portfolios && properties
+			? [
+					new SelectField('portfolioId', {
+						label: 'Portfolio',
+						required: true,
+						value: predefined?.portfolioId,
+						combobox: true,
+						autoInit: true,
+						options: portfolios.results.map((portfolio) => ({
+							value: portfolio.id,
+							label: portfolio.fullName,
+						})),
+					}),
+					new SelectField('propertyId', {
+						label: 'Property',
+						required: true,
+						value: predefined?.propertyId,
+						combobox: true,
+						autoInit: true,
+						options: properties.results.map((property) => ({
+							value: property.id,
+							label: getAddress(property),
+							meta: { parentId: property.portfolioId },
+						})),
+					}),
+			  ]
+			: [];
 
 	const basicFields = [
 		new SelectField('type', {
