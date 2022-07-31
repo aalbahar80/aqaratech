@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { areas } from '$lib/config/constants';
 	import { labelHint } from '$lib/constants/form-hints';

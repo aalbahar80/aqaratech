@@ -6,8 +6,8 @@ import {
   PartialType,
   PickType,
 } from '@nestjs/swagger';
-import { Property, Unit } from '@prisma/client';
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Unit } from '@prisma/client';
+import { Exclude, Expose } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -15,10 +15,7 @@ import {
   BreadcrumbDto,
   BreadcrumbsDto,
   IBreadcrumbs,
-  PortfolioLabelParams,
-  PropertyLabelParams,
 } from 'src/common/dto/breadcrumb.dto';
-import { HateoasDto } from 'src/common/dto/hateoas.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { Nanoid } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';

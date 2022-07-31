@@ -1,4 +1,3 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';

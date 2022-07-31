@@ -2,7 +2,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { Transform } from 'class-transformer';
-import { IsEnum, IsIn, IsJSON, IsObject, IsOptional } from 'class-validator';
+import { IsEnum, IsIn, IsObject, IsOptional } from 'class-validator';
 import { SortOrder } from 'src/constants/sort-order.enum';
 import {
   // EnumFieldOptional,
