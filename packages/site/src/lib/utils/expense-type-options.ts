@@ -5,6 +5,9 @@ import * as d3 from 'd3';
 export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
 const rootId = 'root';
 
+/**
+ * Converts an array of ExpenseCategoryDto to d3.HierarchyNode
+ */
 export const toHeirarchy = (
 	categories: ExpenseCategoryDto[],
 ): d3.HierarchyNode<ExpenseCategoryDto> => {
@@ -18,6 +21,9 @@ export const toHeirarchy = (
 	return root;
 };
 
+/**
+ * Converts a d3.HierarchyNode to an array of ExpenseCategoryDto
+ */
 export const fromHeirarchy = ({
 	root,
 	original,
