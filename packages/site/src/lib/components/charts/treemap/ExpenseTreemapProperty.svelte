@@ -1,9 +1,9 @@
-<script lang="ts">
+<script>
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import type { PaginatedExpenseDto } from '@self/sdk';
 	import * as d3 from 'd3';
 
-	export let expenses: PaginatedExpenseDto;
+	// export let expenses: PaginatedExpenseDto;
+	export let expenses;
 
 	const rollupData = d3.rollup(
 		expenses.results,

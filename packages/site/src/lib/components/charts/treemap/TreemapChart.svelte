@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import * as Pancake from '@sveltejs/pancake';
@@ -7,8 +7,10 @@
 	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
 
-	export let hierarchy: d3.HierarchyNode<any>;
-	export let getLabel: (node: d3.HierarchyNode<any>) => string;
+	// export let hierarchy: d3.HierarchyNode<any>;
+	// export let getLabel: (node: d3.HierarchyNode<any>) => string;
+	export let hierarchy;
+	export let getLabel;
 
 	const treemap = d3.treemap();
 

@@ -29,7 +29,10 @@
 	root.sort((a, b) => {
 		return (b.value || 0) - (a.value || 0);
 	});
+
+	const getLabel = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
+		node.data.labelEn;
 </script>
 
 <!-- TODO prevent entering expenses in non-root nodes. Use a `General Opex` or `Other Opex` category instead -->
-<TreemapChart hierarchy={root} getLabel={(node) => node.data.labelEn} />
+<TreemapChart hierarchy={root} {getLabel} />
