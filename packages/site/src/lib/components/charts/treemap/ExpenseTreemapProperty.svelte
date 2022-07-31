@@ -12,9 +12,7 @@
 		// groupingFns,
 		(d) => d.breadcrumbs?.property?.label || 'Unspecified Property',
 		(d) => d.breadcrumbs?.unit?.label || 'Unspecified Unit',
-		(d) =>
-			`${d.postAt.toISOString().split('T')[0]}: ${d.expenseType?.labelEn}` ||
-			'',
+		(d) => `${d.postAt.split('T')[0]}: ${d.expenseType?.labelEn}` || '',
 	);
 
 	const hierarchyData = d3
