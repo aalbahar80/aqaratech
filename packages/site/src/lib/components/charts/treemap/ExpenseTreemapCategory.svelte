@@ -27,7 +27,7 @@
 	});
 
 	root.sort((a, b) => {
-		return b.value - a.value;
+		return (b.value || 0) - (a.value || 0);
 	});
 </script>
 
