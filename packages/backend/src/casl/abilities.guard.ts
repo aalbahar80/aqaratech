@@ -81,10 +81,9 @@ export class AbilitiesGuard implements CanActivate {
     const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
     if (!xRoleId) {
-      this.logger.error(
+      this.logger.warn(
         `TODO: Missing ${ROLE_HEADER} header. See casl/abilities.guard.ts for notes.`,
       );
-      throw new Error('Missing role header');
     }
 
     // Get the cached user/role.
@@ -116,7 +115,8 @@ export class AbilitiesGuard implements CanActivate {
         xRoleId,
       });
 
-      user = { ...userP, ability: abilityP, xRoleId };
+      // TODO rm ! from xRoleId after refactoring
+      user = { ...userP, ability: abilityP, xRoleId: xRoleId! };
 
       // TODO handle cache ttl/invalidation
       // TODO use cache key variable
