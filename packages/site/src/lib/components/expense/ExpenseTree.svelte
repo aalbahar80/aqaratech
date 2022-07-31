@@ -60,16 +60,16 @@
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
-		if (updatedNodes) {
-			const updatedCategories = fromHeirarchy(
-				root,
-				updatedNodes,
-				original,
-				node,
-			);
-			console.log({ updatedCategories }, 'ExpenseTree.svelte ~ 67');
-			// root = toHeirarchy(updatedCategories);
-		}
+		// if (updatedNodes) {
+		// 	const updatedCategories = fromHeirarchy(
+		// 		root,
+		// 		updatedNodes,
+		// 		original,
+		// 		node,
+		// 	);
+		// 	console.log({ updatedCategories }, 'ExpenseTree.svelte ~ 67');
+		// 	root = toHeirarchy(updatedCategories);
+		// }
 	}
 </script>
 

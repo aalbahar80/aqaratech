@@ -25,13 +25,17 @@ export const toHeirarchy = (
  * Returns lists of categories after applying updates.
  * TODO do we need both original and heirarchy?
  */
-export const fromHeirarchy = (
-	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>,
-	updated: d3.HierarchyNode<ExpenseCategoryDto>[],
-	original: ExpenseCategoryDto[],
-	nodeInQuestion: d3.HierarchyNode<ExpenseCategoryDto>,
-): ExpenseCategoryDto[] => {
-	const data: ExpenseCategoryDto[] = updated.map((d) => d.data);
+export const fromHeirarchy = ({
+	hierarchy,
+	updated,
+	original,
+}: {
+	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>;
+	updated?: d3.HierarchyNode<ExpenseCategoryDto>[];
+	original: ExpenseCategoryDto[];
+}): ExpenseCategoryDto[] => {
+	const nodes = updated || hierarchy.descendants();
+	const data: ExpenseCategoryDto[] = nodes.map((d) => d.data);
 	const potentialCategories = dejectRoot(data);
 	console.log(`${potentialCategories.length} potential updates`, [
 		...potentialCategories,
@@ -42,9 +46,6 @@ export const fromHeirarchy = (
 	const updatedCategories: ExpenseCategoryDto[] = [];
 
 	potentialCategories.forEach((child) => {
-		// const newParentId = nodeInQuestion.data.id;
-		// const newParent = nodeInQuestion.data;
-		// const newParent = original.find((o) => o.id === newParentId);
 		const newParentId = child.parentId;
 		const newParent = original.find((o) => o.id === newParentId);
 

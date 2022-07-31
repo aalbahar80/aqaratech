@@ -39,7 +39,10 @@
 	});
 
 	let root: ExpenseNode = toHeirarchy(getOriginalTreeClone());
-	$: newList = fromHeirarchy(root, [], getOriginalTreeClone(), root);
+	$: newList = fromHeirarchy({
+		hierarchy: root,
+		original: getOriginalTreeClone(),
+	});
 	$: difference = differenceBy(original, newList, 'parentId');
 	// $: console.warn({ original });
 	// $: console.warn({ newList });
