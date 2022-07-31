@@ -1,16 +1,17 @@
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import {
+	zodIsDateOptional,
+	zodIsDateRequired,
+} from '$lib/utils/zod-validators';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
 import { z, ZodSchema } from 'zod';
 
-export const schema = {};
 const base = z.object({
 	dueAt: z
 		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
 		.transform(falsyToNull),
-	postAt: z.preprocess(strToDate, z.date()),
-	paidAt: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	postAt: zodIsDateRequired(),
+	paidAt: zodIsDateOptional(),
 	isPaid: z.boolean(),
 	amount: z.number().gt(0),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
@@ -44,11 +45,17 @@ export const refined = (s: ZodSchema) =>
 			}),
 		);
 
-export const warnSchema = base
-	.pick({ paidAt: true, postAt: true })
+export const warnSchema = z
+	.object({
+		postAt: zodIsDateOptional(),
+		paidAt: zodIsDateOptional(),
+	})
 	.refine(
 		(val) =>
-			val.paidAt === null || val.paidAt === '' || val.postAt <= val.paidAt,
+			val.paidAt === null ||
+			val.paidAt === '' ||
+			!val.postAt ||
+			new Date(val.postAt) <= new Date(val.paidAt),
 		{
 			path: ['paidAt'],
 			message: 'Payment date is before post date',
