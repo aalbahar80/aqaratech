@@ -19,13 +19,13 @@ export const toHeirarchy = (
 };
 
 export const fromHeirarchy = ({
-	hierarchy,
+	root,
 	original,
 }: {
-	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>;
+	root: d3.HierarchyNode<ExpenseCategoryDto>;
 	original: ExpenseCategoryDto[];
 }): ExpenseCategoryDto[] => {
-	const data: ExpenseCategoryDto[] = hierarchy.descendants().map((d) => d.data);
+	const data: ExpenseCategoryDto[] = root.descendants().map((d) => d.data);
 
 	const potentialCategories = dejectRoot(data);
 

@@ -29,10 +29,7 @@
 
 	let root: ExpenseNode = toHeirarchy(cloneDeep(settings.expenseCategoryTree));
 
-	$: newList = fromHeirarchy({
-		hierarchy: root,
-		original,
-	});
+	$: newList = fromHeirarchy({ root, original });
 	$: difference = diff(original, newList);
 </script>
 
