@@ -18,24 +18,15 @@ export const toHeirarchy = (
 	return root;
 };
 
-// TODO destructure params
-/**
- * @param nodeInQuestion
- * The main player. updated here means potentially new children of THIS node.
- * Returns lists of categories after applying updates.
- * TODO do we need both original and heirarchy?
- */
 export const fromHeirarchy = ({
 	hierarchy,
-	updated,
 	original,
 }: {
 	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>;
-	updated?: d3.HierarchyNode<ExpenseCategoryDto>[];
 	original: ExpenseCategoryDto[];
 }): ExpenseCategoryDto[] => {
-	const nodes = updated || hierarchy.descendants();
-	const data: ExpenseCategoryDto[] = nodes.map((d) => d.data);
+	const data: ExpenseCategoryDto[] = hierarchy.descendants().map((d) => d.data);
+
 	const potentialCategories = dejectRoot(data);
 	console.log(`${potentialCategories.length} potential updates`, [
 		...potentialCategories,
@@ -72,9 +63,6 @@ export const fromHeirarchy = ({
 		updatedCategories,
 	);
 
-	// console.log(`${hierarchy.descendants().length} originals`);
-	// const original2 = hierarchy.descendants().map((d) => d.data);
-	// console.log({ original2 }, 'expense-type-options.ts ~ 75');
 	if (updatedCategories.length < 1) return original;
 
 	const result = original.map((o) => {
@@ -86,17 +74,6 @@ export const fromHeirarchy = ({
 	});
 
 	return result;
-
-	// hierarchy.descendants().forEach((d) => {
-	// 	const category = updatedCategories.find((c) => c.id === d.data.id);
-	// 	if (category) return;
-
-	// 	updatedCategories.push(d.data);
-	// });
-
-	// // Handle the artificial root node which was injected by `toHeirarchy` to satisfy d3's "one root" requirement.
-	// // This means converting any node with a parentId of 'root' back to it's original parentId of `null`.
-	// return updatedCategories;
 };
 
 /**

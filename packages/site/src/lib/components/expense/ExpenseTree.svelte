@@ -1,27 +1,21 @@
 <script lang="ts">
-	import {
-		fromHeirarchy,
-		toHeirarchy,
-		type ExpenseNode,
-	} from '$lib/utils/expense-type-options';
+	import type { ExpenseNode } from '$lib/utils/expense-type-options';
 	import type { ExpenseCategoryDto } from '@self/sdk';
-	import * as d3 from 'd3';
+	import { getContext } from 'svelte';
 	import {
 		dndzone,
-		SHADOW_PLACEHOLDER_ITEM_ID,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
+		SHADOW_PLACEHOLDER_ITEM_ID,
 		type DndEvent,
 	} from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 
-	import { getContext } from 'svelte';
+	export let root: ExpenseNode;
+	export let node: ExpenseNode;
 
 	const key = 'expenseTree';
 	const { getOriginalCategories } = getContext(key);
 	const original: ExpenseCategoryDto[] = getOriginalCategories();
-
-	export let root: ExpenseNode;
-	export let node: ExpenseNode;
 
 	const handleAction = (e: any) => {
 		const detail: DndEvent<ExpenseNode> = e.detail;
@@ -47,7 +41,6 @@
 		} else {
 			console.log(`${node.data.labelEn} has new child: ${newChildrenNames}`);
 			return newChildren;
-			// return fromHeirarchy(root, newChildren);
 		}
 	};
 
@@ -60,24 +53,11 @@
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
-		// if (updatedNodes) {
-		// 	const updatedCategories = fromHeirarchy(
-		// 		root,
-		// 		updatedNodes,
-		// 		original,
-		// 		node,
-		// 	);
-		// 	console.log({ updatedCategories }, 'ExpenseTree.svelte ~ 67');
-		// 	root = toHeirarchy(updatedCategories);
-		// }
 	}
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-<!-- TODO rm -->
-<div class:bg-red-500={original.find((c) => c.id === '5')?.parentId !== '2'}>
-	<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
-</div>
+<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
 {#if node.children}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
