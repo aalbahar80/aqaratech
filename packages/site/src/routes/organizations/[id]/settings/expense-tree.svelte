@@ -11,7 +11,6 @@
 	import { diff } from 'just-diff';
 	import { cloneDeep } from 'lodash-es';
 	import type { LP } from 'src/types/load-props';
-	import { setContext } from 'svelte';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 
 	export const load = async ({ stuff, params }: LoadEvent<{ id: string }>) => {
@@ -26,15 +25,10 @@
 	type Prop = LP<typeof load>;
 	export let settings: Prop['settings'];
 
-	const key = 'expenseTree';
 	const getOriginalTreeClone = () => [
 		...cloneDeep(settings.expenseCategoryTree),
 	];
 	const original = getOriginalTreeClone();
-
-	setContext(key, {
-		getOriginalCategories: () => getOriginalTreeClone(),
-	});
 
 	let root: ExpenseNode = toHeirarchy(getOriginalTreeClone());
 	$: newList = fromHeirarchy({

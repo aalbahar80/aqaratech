@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { ExpenseNode } from '$lib/utils/expense-type-options';
-	import type { ExpenseCategoryDto } from '@self/sdk';
-	import { getContext } from 'svelte';
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -12,10 +10,6 @@
 
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;
-
-	const key = 'expenseTree';
-	const { getOriginalCategories } = getContext(key);
-	const original: ExpenseCategoryDto[] = getOriginalCategories();
 
 	const handleAction = (e: any) => {
 		const detail: DndEvent<ExpenseNode> = e.detail;
