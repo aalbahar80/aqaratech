@@ -1710,6 +1710,11 @@ paths:
       operationId: findAll
       parameters:
         - *ref_16
+        - name: x-role-id
+          required: true
+          in: header
+          schema:
+            type: string
         - name: page
           required: false
           in: query
@@ -1795,6 +1800,11 @@ paths:
       operationId: findOne
       parameters:
         - *ref_16
+        - name: x-role-id
+          required: true
+          in: header
+          schema:
+            type: string
         - name: id
           required: true
           in: path

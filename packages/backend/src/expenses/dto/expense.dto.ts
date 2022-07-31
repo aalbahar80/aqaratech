@@ -63,12 +63,19 @@ export class ExpenseDto extends IntersectionType(
   AbstractDto,
   IntersectionType(ExpenseRequiredDto, ExpenseOptionalDto),
 ) {
-  expenseType: ExpenseCategoryDto | null;
-
-  constructor(partial: Partial<ExpenseDto>) {
+  constructor(partial: Partial<ExpenseDto>, tree?: ExpenseCategoryDto[]) {
     super();
     Object.assign(this, partial);
+
+    if (tree && Array.isArray(tree) && this.categoryId) {
+      const rawCategory = tree.find((c) => c.id === this.categoryId);
+      if (rawCategory) {
+        this.expenseType = new ExpenseCategoryDto(rawCategory);
+      }
+    }
   }
+
+  expenseType: ExpenseCategoryDto | null;
 
   @ApiHideProperty()
   @Exclude()

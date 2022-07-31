@@ -8,6 +8,10 @@ export interface ExpenseCategory {
 }
 
 export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
+  constructor(partial: Partial<ExpenseCategoryDto>) {
+    Object.assign(this, partial);
+  }
+
   @IsString()
   id: string;
 

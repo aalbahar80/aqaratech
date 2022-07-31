@@ -14,6 +14,7 @@ import {
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -63,11 +64,17 @@ export class ExpensesService {
   async findAll({
     pageOptionsDto,
     user,
+    roleId,
   }: {
     pageOptionsDto: ExpensePageOptionsDto;
     user: IUser;
+    roleId: string;
   }): Promise<WithCount<ExpenseDto>> {
     const { page, take, start, end } = pageOptionsDto;
+
+    const organizationId = user.roles.find(
+      (r) => r.id === roleId,
+    )?.organizationId;
 
     const filter: Prisma.ExpenseWhereInput = {
       AND: [
@@ -77,7 +84,7 @@ export class ExpensesService {
       ],
     };
 
-    let [data, total] = await Promise.all([
+    let [data, total, settings] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
@@ -90,22 +97,54 @@ export class ExpensesService {
         },
       }),
       this.prisma.expense.count({ where: filter }),
+
+      // TODO get from orgservice
+      this.prisma.organizationSettings.findUnique({
+        where: { organizationId },
+        select: { expenseCategoryTree: true },
+      }),
     ]);
 
-    return { total, results: data.map((e) => new ExpenseDto(e)) };
+    const tree =
+      settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
+
+    return { total, results: data.map((e) => new ExpenseDto(e, tree)) };
   }
 
-  async findOne({ id }: { id: string }) {
-    const data = await this.prisma.expense.findUnique({
-      where: { id },
-      include: {
-        portfolio: crumbs.portfolio,
-        property: crumbs.property,
-        unit: crumbs.unit,
-      },
-    });
+  async findOne({
+    id,
+    user,
+    roleId,
+  }: {
+    id: string;
+    user: IUser;
+    roleId: string;
+  }) {
+    const organizationId = user.roles.find(
+      (r) => r.id === roleId,
+    )?.organizationId;
 
-    return new ExpenseDto(data);
+    const [data, settings] = await Promise.all([
+      this.prisma.expense.findUnique({
+        where: { id },
+        include: {
+          portfolio: crumbs.portfolio,
+          property: crumbs.property,
+          unit: crumbs.unit,
+        },
+      }),
+
+      // TODO get from orgservice
+      this.prisma.organizationSettings.findUnique({
+        where: { organizationId },
+        select: { expenseCategoryTree: true },
+      }),
+    ]);
+
+    const tree =
+      settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
+
+    return new ExpenseDto(data, tree);
   }
 
   async update({
