@@ -31,10 +31,10 @@ class LeaseInvoiceRequiredDto {
 }
 
 class LeaseInvoiceOptionalDto {
-  @DateType()
+  @DateType(false)
   dueAt: Date | null;
 
-  @DateType()
+  @DateType(false)
   paidAt: Date | null;
 
   @IsBoolean()

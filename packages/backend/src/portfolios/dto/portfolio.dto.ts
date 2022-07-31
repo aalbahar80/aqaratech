@@ -1,6 +1,6 @@
 import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
-import { IsPhoneNumber, IsString, Length } from 'class-validator';
+import { IsOptional, IsPhoneNumber, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
@@ -23,7 +23,7 @@ class PortfolioOptionalDto {
   @IsPhoneNumber('KW')
   phone: string | null;
 
-  @DateType()
+  @DateType(false)
   dob: Date | null;
 }
 

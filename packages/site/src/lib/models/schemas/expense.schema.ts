@@ -1,4 +1,5 @@
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { zodIsDate } from '$lib/utils/zod-validators';
 import {
 	falsyToNull,
 	falsyToNullExceptZero,
@@ -12,7 +13,7 @@ export const updateSchema = z.object({
 		.union([z.number(), z.string()])
 		.nullable()
 		.transform(falsyToNullExceptZero),
-	postAt: z.string().min(1, { message: 'Required' }),
+	postAt: zodIsDate(true),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 });
 

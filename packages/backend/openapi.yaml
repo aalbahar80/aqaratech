@@ -2595,8 +2595,6 @@ components:
         - createdAt
         - updatedAt
         - postAt
-        - dueAt
-        - paidAt
         - breadcrumbs
         - amount
         - leaseId
@@ -2903,7 +2901,6 @@ components:
         - id
         - createdAt
         - updatedAt
-        - dob
         - organizationId
         - fullName
         - label

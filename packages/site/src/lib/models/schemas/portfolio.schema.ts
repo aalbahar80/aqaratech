@@ -1,4 +1,5 @@
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { zodIsDate } from '$lib/utils/zod-validators';
 import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
@@ -36,5 +37,5 @@ export const schema = z.object({
 		])
 		.transform(trim)
 		.transform(falsyToNull),
-	dob: z.string().nullable().transform(falsyToNull),
+	dob: zodIsDate(),
 });
