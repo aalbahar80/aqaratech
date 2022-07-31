@@ -27,7 +27,7 @@ export const api = ({
 }) => {
 	const headers = {
 		Authorization: `Bearer ${token}`,
-		...(roleId && { 'x-role-id': roleId }),
+		...(roleId ? { 'x-role-id': roleId } : {}),
 	};
 
 	// const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';

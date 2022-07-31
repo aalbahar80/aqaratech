@@ -52,7 +52,7 @@ export class CaslAbilityFactory {
       role = user.roles.find((r) => r.id === xRoleId);
       if (!role) {
         this.logger.warn(
-          'x-role-id header is set but no role with that id found',
+          `x-role-id header is set to ${xRoleId} but no role with that id found`,
         );
       }
     } else if (hasDefaultRole) {

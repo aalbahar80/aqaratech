@@ -29,7 +29,7 @@ export const getUser = async ({
 	try {
 		await validateToken(token, 'accessToken');
 
-		const userStuff = await getUserStuff(token);
+		const userStuff = await getUserStuff(token, selectedRoleId);
 
 		// augment each role with metadata
 		const roles = userStuff.roles.map((role) => ({
@@ -73,7 +73,10 @@ export const getUser = async ({
 	}
 };
 
-const getUserStuff = async (token: string): Promise<ValidatedUserDto> => {
+const getUserStuff = async (
+	token: string,
+	selectedRoleId?: string,
+): Promise<ValidatedUserDto> => {
 	// TODO find way to avoid making this call every time. (secure-cookie/cache).
 	// If session.user isn't used for sensitive data, we can just use the same strategy we use for persisting the x-role-id header/cookie.
 	const now = Date.now();
@@ -84,6 +87,7 @@ const getUserStuff = async (token: string): Promise<ValidatedUserDto> => {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: 'Bearer ' + token,
+			...(selectedRoleId ? { 'x-role-id': selectedRoleId } : {}),
 		},
 	});
 

@@ -44,7 +44,6 @@ export const getSession: GetSession = async ({ locals }) => {
 		// TODO remove xRoleId and use user.role.id instead.
 		// Ensure it persists role changes. Works for new signups.
 		// also change in layout/rolechange endpoint/and api.ts
-		xRoleId: locals.user?.role.id || '',
 		isAuthenticated,
 	};
 };
@@ -68,6 +67,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';
 	event.locals.user = user;
+
+	// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
+	// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
+	// Additionally, if the user never changes roles,
+	// this will take care of setting & persisting the default role.
 	event.locals.xRoleId = user?.role.id || '';
 
 	const response = await resolve(event);
