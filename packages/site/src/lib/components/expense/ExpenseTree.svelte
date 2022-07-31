@@ -14,10 +14,14 @@
 	} from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 
+	import { getContext } from 'svelte';
+
+	const key = 'expenseTree';
+	const { getOriginalCategories } = getContext(key);
+	const original: ExpenseCategoryDto[] = getOriginalCategories();
+
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;
-	// use getContext for `original` prop
-	export let original: ExpenseCategoryDto[];
 
 	const handleAction = (e: any) => {
 		const detail: DndEvent<ExpenseNode> = e.detail;
@@ -27,10 +31,11 @@
 			(fresh) => fresh.id !== SHADOW_PLACEHOLDER_ITEM_ID,
 		);
 
+		// REVIEW if this is needed here
 		// give the new children a parent
-		newChildren.forEach((child) => {
-			child.data.parentId = node.data.id;
-		});
+		// newChildren.forEach((child) => {
+		// 	child.data.parentId = node.data.id;
+		// });
 
 		const newChildrenNames = newChildren.map((fresh) => fresh.data.labelEn);
 		if (!newChildren.length) {
@@ -51,14 +56,22 @@
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
 		if (updatedNodes) {
-			const updatedCategories = fromHeirarchy(root, updatedNodes, original);
+			const updatedCategories = fromHeirarchy(
+				root,
+				updatedNodes,
+				original,
+				node,
+			);
 			root = toHeirarchy(updatedCategories);
 		}
 	}
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
+<!-- TODO rm -->
+<div class:bg-red-500={original.find((c) => c.id === '5')?.parentId !== '2'}>
+	<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
+</div>
 {#if node.children}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
@@ -88,7 +101,6 @@
 				<svelte:self
 					bind:root
 					node={root.find((n) => n.id === currentNode.id)}
-					{original}
 				/>
 			</div>
 		{/each}

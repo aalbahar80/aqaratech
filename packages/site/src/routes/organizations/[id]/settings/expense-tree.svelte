@@ -19,25 +19,41 @@
 </script>
 
 <script lang="ts">
+	// TODO rm
+	import { onDestroy, setContext } from 'svelte';
+
 	type Prop = LP<typeof load>;
 	export let settings: Prop['settings'];
 
+	const key = 'expenseTree';
+	// const original = [...settings.expenseCategoryTree];
+	const original = settings.expenseCategoryTree;
+
+	setContext(key, {
+		getOriginalCategories: () => original,
+	});
+
 	// let root: ExpenseNode = toHeirarchy(settings.expenseCategoryTree);
 	let root: ExpenseNode = toHeirarchy([...settings.expenseCategoryTree]);
-	$: console.log(root);
+	// TODO rm
+	$: console.log(settings.expenseCategoryTree.find((c) => c.id === '7'));
 </script>
 
-<Button
-	icon={Check}
-	text="Save"
-	as="button"
-	class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
->
-	<Fa6SolidFloppyDisk />
-</Button>
-
-<ExpenseTree
-	node={root}
-	bind:root
-	original={[...settings.expenseCategoryTree]}
-/>
+<!-- TODO rm -->
+<div class:bg-red-500={original.find((c) => c.id === '5')?.parentId !== '2'}>
+	<Button
+		icon={Check}
+		text="Save"
+		as="button"
+		class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+	>
+		<Fa6SolidFloppyDisk />
+	</Button>
+	<!-- TODO rm -->
+	<pre>{JSON.stringify(
+			original.map((o) => `${o.id}: ${o.labelEn} -- ${o.parentId}`),
+			null,
+			2,
+		)}</pre>
+	<ExpenseTree node={root} bind:root />
+</div>

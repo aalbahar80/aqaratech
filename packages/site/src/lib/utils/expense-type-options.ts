@@ -19,10 +19,15 @@ export const toHeirarchy = (
 };
 
 // TODO destructure params
+/**
+ * @param nodeInQuestion
+ * The main player. updated here means potentially new children of THIS node.
+ */
 export const fromHeirarchy = (
 	hierarchy: d3.HierarchyNode<ExpenseCategoryDto>,
 	updated: d3.HierarchyNode<ExpenseCategoryDto>[],
 	original: ExpenseCategoryDto[],
+	nodeInQuestion: d3.HierarchyNode<ExpenseCategoryDto>,
 ): ExpenseCategoryDto[] => {
 	const data: ExpenseCategoryDto[] = updated.map((d) => d.data);
 	const categories = dejectRoot(data);
@@ -30,17 +35,20 @@ export const fromHeirarchy = (
 
 	// what d3 considers updated differs from what we consider updated
 	// For us, a node is only considered updated if it's parentId is different
-	const updatedCategories = categories.filter((d) => {
-		const newParentId = d.parentId;
-		const newParent = data.find((d2) => d2.id === newParentId);
+	const updatedCategories = categories.filter((child) => {
+		const newParentId = nodeInQuestion.data.id;
+		const newParent = nodeInQuestion.data;
+		// const newParent = original.find((o) => o.id === newParentId);
 
-		const oldParent = original.find((o) => o.id === d.id);
-		const oldParentId = oldParent?.parentId;
+		// const oldSelf = original.find((o) => o.id === newSelf.id);
+		// const oldParentId = oldSelf?.parentId;
+		const oldParentId = child.parentId;
+		const oldParent = original.find((o) => o.id === oldParentId);
 
 		const hasNewParent = newParentId !== oldParentId;
 		if (hasNewParent) {
 			console.warn(
-				`${d.id}: ${d.labelEn} has new parent ${newParent?.id}: ${newParent?.labelEn}. Old parent: ${oldParentId}: ${oldParent?.labelEn}`,
+				`${child.id}: ${child.labelEn} has new parent ${newParent?.id}: ${newParent?.labelEn}. Old parent: ${oldParentId}: ${oldParent?.labelEn}`,
 			);
 			return hasNewParent;
 		} else {
