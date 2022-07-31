@@ -1,6 +1,6 @@
 export const getInvoiceBadge = (trx: {
 	isPaid: boolean;
-	dueAt: string | null;
+	dueAt?: string | null | undefined;
 	postAt: string;
 }) => {
 	const due = trx.dueAt && new Date(trx.dueAt);
