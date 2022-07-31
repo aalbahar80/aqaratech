@@ -57,7 +57,7 @@
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-<b class="px-6 py-2"> {`${node.id} ${node.data.labelEn}`} </b>
+<b class="px-6 py-2"> {`${node.data.labelEn}`} </b>
 {#if node.children}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section

@@ -94,7 +94,7 @@ export const injectRoot = (categories: ExpenseCategoryDto[]) => {
 	// add the artificial root node
 	const rootNode: ExpenseCategoryDto = {
 		id: rootId,
-		labelEn: 'Root',
+		labelEn: '',
 		parentId: null,
 	};
 

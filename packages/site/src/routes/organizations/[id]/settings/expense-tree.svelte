@@ -33,20 +33,39 @@
 	$: difference = diff(original, newList);
 </script>
 
-<pre>{JSON.stringify(difference)}</pre>
-<Button
-	icon={Check}
-	text="Save"
-	as="button"
-	class="inline-flex w-3/12 items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-	on:click={() => {
-		console.log(root.find((node) => node.data.id === '5'));
-		console.log(root.find((node) => node.data.id === '2'));
-		console.log(original);
-		console.log(newList);
-		console.log(difference);
-	}}
->
-	<Fa6SolidFloppyDisk />
-</Button>
-<ExpenseTree node={root} bind:root />
+<div class="flex flex-auto justify-between">
+	<div class="w-full">
+		<ExpenseTree node={root} bind:root />
+	</div>
+	<div class="flex w-2/6 flex-initial flex-col p-2">
+		<Button
+			icon={Check}
+			text={difference.length ? `Save changes` : 'No pending changes'}
+			disabled={difference.length === 0}
+			as="button"
+			class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+			on:click={() => {
+				console.log(root.find((node) => node.data.id === '5'));
+				console.log(root.find((node) => node.data.id === '2'));
+				console.log(original);
+				console.log(newList);
+				console.log(difference);
+			}}
+		>
+			<Fa6SolidFloppyDisk />
+		</Button>
+		{#each difference as change}
+			{@const newParentNode = newList.find((node) => node.id === change.value)}
+			{@const changedNode = newList[change.path[0]]}
+			<div class="flex items-center justify-between py-2 text-sm font-medium">
+				<span class="w-5/12">
+					{newParentNode?.labelEn || ''}
+				</span>
+				<span aria-hidden="true"> &rarr; </span>
+				<span class="w-5/12 text-indigo-600">
+					{changedNode?.labelEn}
+				</span>
+			</div>
+		{/each}
+	</div>
+</div>
