@@ -16,7 +16,8 @@ export const toHeirarchy = (
 	const root = d3
 		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id)
-		.parentId((d) => d.parentId)(rootedCatogories);
+		.parentId((d) => d.parentId)(rootedCatogories)
+		.sort((a, b) => a.data.labelEn.localeCompare(b.data.labelEn));
 	return root;
 };
 
