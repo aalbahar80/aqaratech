@@ -9,6 +9,8 @@ import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 export class MetaController {
   constructor(private readonly metaService: MetaService) {}
 
+  // TODO Rm entirely. Replace with call to org.findSettings.
+  // Prerequisite: porfolio user needs access to org.settings.expensetree field
   @Get('expenseTree')
   // TODO ability check
   @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
