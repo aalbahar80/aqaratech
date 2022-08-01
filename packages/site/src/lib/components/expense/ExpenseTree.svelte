@@ -58,7 +58,7 @@
 {#if node.children || node.data.isGroup}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
-		class="py-8"
+		class="py-12"
 		use:dndzone={{
 			items: node.children || [],
 			flipDurationMs,
