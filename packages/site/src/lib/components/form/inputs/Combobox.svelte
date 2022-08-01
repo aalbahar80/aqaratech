@@ -146,6 +146,8 @@
 		}
 		// on up/down arrow keys: update active option
 		else if ([`ArrowDown`, `ArrowUp`].includes(event.key)) {
+			// by default arrow up/down will go to beginning/end of text input
+			event.preventDefault();
 			// if no option is active yet, but there are matching options, make first one active
 			if (!activeOption && filtered.length > 0) {
 				forceOpen = true;
@@ -261,11 +263,18 @@
 							value={item}
 							class={classes(
 								'relative cursor-default select-none py-2 pl-3 pr-9',
-								hovering || activeOption === item
-									? 'bg-indigo-600 text-white isActive'
-									: 'text-gray-900',
+								hovering || activeOption === item ? 'isActive' : '',
+								(hovering || activeOption === item) && !item.disabled
+									? 'bg-indigo-600 text-white'
+									: '',
+								(hovering || activeOption === item) && item.disabled
+									? 'bg-zinc-200'
+									: '',
+								!hovering && !activeOption ? 'text-gray-900' : '',
 							)}
 							class:disabled={item.disabled}
+							aria-selected={selected}
+							aria-disabled={item.disabled}
 							on:click={() => {
 								select(item);
 							}}
@@ -304,6 +313,6 @@
 		@apply border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500;
 	}
 	.disabled {
-		@apply cursor-not-allowed border-slate-200 bg-zinc-200 text-slate-500 shadow-none;
+		@apply cursor-not-allowed border-slate-200 text-slate-500 shadow-none;
 	}
 </style>
