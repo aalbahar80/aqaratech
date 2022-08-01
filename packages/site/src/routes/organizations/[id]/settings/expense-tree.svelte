@@ -1,11 +1,10 @@
 <script context="module" lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import {
 		fromHeirarchy,
-		rootId,
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
@@ -17,63 +16,39 @@
 	import type { LP } from 'src/types/load-props';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 
-	export const load = async ({ stuff, params }: LoadEvent<{ id: string }>) => {
-		const settings = await stuff.api!.organizations.findSettings({
-			id: params.id,
-		});
-		return { props: { settings } };
+	export const load = async ({ stuff }: LoadEvent<{ id: string }>) => {
+		const categories = await stuff.api!.expenseCategories.findAll();
+		return { props: { categories } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
-	export let settings: Prop['settings'];
+	export let categories: Prop['categories'];
 
-	$: original = settings.expenseCategoryTree;
+	$: original = categories;
 
-	let root: ExpenseNode = toHeirarchy(cloneDeep(settings.expenseCategoryTree));
+	let root: ExpenseNode = toHeirarchy(cloneDeep(categories));
 
 	$: newList = fromHeirarchy({ root, original });
 	$: difference = diff(original, newList);
 </script>
 
-<a href={`/organizations/${settings.organizationId}/expenseCategories/new`}>
+<pre>{JSON.stringify(difference, null, 2)}</pre>
+
+<a
+	href={`/organizations/${$session.user?.role.organizationId}/expenseCategories/new`}
+>
 	new form
 </a>
 <!-- TODO rm hardcoded id -->
 <a
 	href={`/organizations/${
-		settings.organizationId
+		$session.user?.role.organizationId
 	}/expenseCategories/${'qe64220c63oq'}/edit`}
 >
 	edit form
 </a>
-<button
-	on:click={async () => {
-		try {
-			// Save new category
-			const id = $page.params.id;
-			if (!id) return;
-			await $page.stuff.api.organizations.createExpenseCategory({
-				id,
-				createExpenseCategoryDto: {
-					labelEn: new Date().toISOString(),
-					parentId: null,
-					isGroup: false,
-				},
-			});
-
-			// Refresh tree with updated categories
-			settings = await $page.stuff.api.organizations.findSettings({ id });
-
-			addSuccessToast();
-		} catch (e) {
-			handleApiError(e);
-		}
-	}}
->
-	new category
-</button>
 <div class="flex flex-auto justify-between">
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />
@@ -91,21 +66,13 @@
 			on:click={() => {
 				console.debug(difference);
 				console.debug(newList);
-				const id = $page.params.id;
-				id &&
-					$page.stuff.api.organizations
-						.updateSettings({
-							id,
-							updateOrganizationSettingsDto: {
-								expenseCategoryTree: newList,
-							},
-						})
-						.then((res) => {
-							console.debug({ res }, 'expense-tree.svelte ~ 81');
-							addSuccessToast();
-							settings = res;
-						})
-						.catch(handleApiError);
+				$page.stuff.api.expenseCategories
+					.updateAll({ updateAllExpenseCategoriesDto: { items: newList } })
+					.then((res) => {
+						addSuccessToast();
+						categories = res;
+					})
+					.catch(handleApiError);
 			}}
 		>
 			<Fa6SolidFloppyDisk />
