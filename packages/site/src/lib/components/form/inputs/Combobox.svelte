@@ -6,22 +6,21 @@
 	} from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils/classes';
 	import { clickOutside } from '$lib/utils/click-outside';
-	import { Listbox } from '@rgossiaux/svelte-headlessui';
 	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
-	// NOTE we're not using headlessui's `ListboxButton` for this component
-	// because the ListboxButton interferes with our
-	// accessibility behavior.
-	//
 	// P.S. At time of writing, headlessui does not have a native combobox.
 
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
 	export let initialValue: Option['value'] = undefined;
 	export let options: Option[];
+	/**
+	 * Whether the entire combobox is disabled.
+	 * Do not confuse with option.disabled or item.disabled.
+	 */
 	export let disabled = false;
 	export let invalid = false;
 
@@ -31,8 +30,6 @@
 
 	/**
 	 * Helper to manually force the combobox to open.
-	 * Complement's headlessui's default `open` prop,
-	 * which is only designed for listboxes not for comboboxes.
 	 */
 	let forceOpen = false;
 
@@ -66,7 +63,6 @@
 			: options;
 	}, 100);
 	$: handleFilter(query);
-	$: console.log(activeOption);
 
 	// EVENTS
 	const dispatch = createEventDispatcher<{
@@ -83,9 +79,7 @@
 	};
 
 	export const select = async (option: Option) => {
-		console.log({ option }, 'Combobox.svelte ~ 85');
 		if (option.disabled) return;
-		console.log('selecting');
 		await tick();
 		dispatch('select', { value: option.value });
 		selection = option;
@@ -184,129 +178,121 @@
 	}
 </script>
 
-<Listbox
-	value={selection}
-	on:change={(e) => {
-		select(e.detail);
-	}}
-	{disabled}
+<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
+>Assigned to</ListboxLabel
+> -->
+<div
+	class="relative mt-1"
+	use:clickOutside
+	on:outclick={() => (forceOpen = false)}
 >
-	<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
-		>Assigned to</ListboxLabel
-	> -->
+	<input
+		{disabled}
+		class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+		class:form-invalid={invalid}
+		placeholder="Search..."
+		type="text"
+		bind:value={inputValue}
+		on:keydown={handleKeydown}
+		on:click={() => {
+			forceOpen = true;
+		}}
+		on:input={(event) => {
+			// expense categories use leading spaces to indicate hierarchy
+			query = event.currentTarget?.value.trim();
+			if (!query) {
+				clear();
+			}
+			forceOpen = true;
+		}}
+	/>
 	<div
-		class="relative mt-1"
-		use:clickOutside
-		on:outclick={() => (forceOpen = false)}
+		class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
 	>
-		<input
-			{disabled}
-			class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
-			class:form-invalid={invalid}
-			placeholder="Search..."
-			type="text"
-			bind:value={inputValue}
-			on:keydown={handleKeydown}
-			on:click={() => {
-				forceOpen = true;
+		<button
+			class="mr-4"
+			hidden={!selection}
+			on:click|preventDefault={() => {
+				clear();
 			}}
-			on:input={(event) => {
-				// expense categories use leading spaces to indicate hierarchy
-				query = event.currentTarget?.value.trim();
-				if (!query) {
-					clear();
-				}
-				forceOpen = true;
-			}}
-		/>
-		<div
-			class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
 		>
-			<button
-				class="mr-4"
-				hidden={!selection}
-				on:click|preventDefault={() => {
-					clear();
-				}}
-			>
-				<Icon
-					src={XCircle}
-					theme="solid"
-					class="h-5 w-5 text-gray-400"
-					aria-hidden="true"
-				/>
-			</button>
-			<button
-				on:click|preventDefault={() => {
-					forceOpen = !forceOpen;
-				}}
-			>
-				<Icon
-					src={Selector}
-					theme="solid"
-					class="h-5 w-5 text-gray-400"
-					aria-hidden="true"
-				/>
-			</button>
-		</div>
+			<Icon
+				src={XCircle}
+				theme="solid"
+				class="h-5 w-5 text-gray-400"
+				aria-hidden="true"
+			/>
+		</button>
+		<button
+			on:click|preventDefault={() => {
+				forceOpen = !forceOpen;
+			}}
+		>
+			<Icon
+				src={Selector}
+				theme="solid"
+				class="h-5 w-5 text-gray-400"
+				aria-hidden="true"
+			/>
+		</button>
+	</div>
 
-		{#if forceOpen && filtered.length}
-			<ul
-				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-			>
-				<!--  Don't render entire filtered results array for perf  -->
-				<!-- TODO handle initialvalue not in slice -->
-				{#each filtered.slice(0, 100) as item (item.value)}
-					{@const selected = selection?.value === item.value}
-					<Hoverable let:hovering>
-						<li
-							value={item}
-							class={classes(
-								'relative cursor-default select-none py-2 pl-3 pr-9',
-								hovering || activeOption === item ? 'isActive' : '',
-								(hovering || activeOption === item) && !item.disabled
-									? 'bg-indigo-600 text-white'
-									: '',
-								(hovering || activeOption === item) && item.disabled
-									? 'bg-zinc-200'
-									: '',
-								!hovering && !activeOption ? 'text-gray-900' : '',
-							)}
-							class:disabled={item.disabled}
-							aria-selected={selected}
-							aria-disabled={item.disabled}
-							on:click={() => {
-								select(item);
-							}}
+	{#if forceOpen && filtered.length}
+		<ul
+			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+		>
+			<!--  Don't render entire filtered results array for perf  -->
+			<!-- TODO handle initialvalue not in slice -->
+			{#each filtered.slice(0, 100) as item (item.value)}
+				{@const selected = selection?.value === item.value}
+				<Hoverable let:hovering>
+					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `<style>` tag -->
+					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
+					<li
+						value={item}
+						class={classes(
+							'relative cursor-default select-none py-2 pl-3 pr-9',
+							hovering || activeOption === item ? 'isActive' : '',
+							(hovering || activeOption === item) && !item.disabled
+								? 'bg-indigo-600 text-white'
+								: '',
+							(hovering || activeOption === item) && item.disabled
+								? 'bg-zinc-200'
+								: '',
+							!hovering && !activeOption ? 'text-gray-900' : '',
+						)}
+						class:disabled={item.disabled}
+						aria-selected={selected}
+						aria-disabled={item.disabled}
+						on:click={() => {
+							select(item);
+						}}
+					>
+						<span
+							class={classes('block truncate', selected ? 'font-semibold' : '')}
+							>{item.label}</span
 						>
+						{#if selected}
 							<span
 								class={classes(
-									'block truncate',
-									selected ? 'font-semibold' : '',
-								)}>{item.label}</span
+									'absolute inset-y-0 right-0 flex items-center pr-4',
+									hovering ? 'text-white' : 'text-indigo-600',
+								)}
 							>
-							{#if selected}
-								<span
-									class={classes(
-										'absolute inset-y-0 right-0 flex items-center pr-4',
-										hovering ? 'text-white' : 'text-indigo-600',
-									)}
-								>
-									<Icon
-										src={Check}
-										theme="solid"
-										class="h-5 w-5"
-										aria-hidden="true"
-									/>
-								</span>
-							{/if}
-						</li>
-					</Hoverable>
-				{/each}
-			</ul>
-		{/if}
-	</div>
-</Listbox>
+								<Icon
+									src={Check}
+									theme="solid"
+									class="h-5 w-5"
+									aria-hidden="true"
+								/>
+							</span>
+						{/if}
+					</li>
+				</Hoverable>
+			{/each}
+		</ul>
+	{/if}
+</div>
 
 <style lang="postcss">
 	.form-invalid {
