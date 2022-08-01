@@ -3420,6 +3420,8 @@ components:
       required:
         - id
         - labelEn
+        - parentId
+        - labelAr
         - isGroup
     ExpenseDto:
       type: object
@@ -3562,6 +3564,8 @@ components:
       properties:
         labelEn:
           type: string
+        isGroup:
+          type: boolean
         parentId:
           type: string
           nullable: true
@@ -3571,14 +3575,14 @@ components:
         description:
           type: string
           nullable: true
-        isGroup:
-          type: boolean
       required:
         - labelEn
         - isGroup
     UpdateExpenseCategoryDto:
       type: object
       properties:
+        id:
+          type: string
         labelEn:
           type: string
         parentId:
@@ -3592,11 +3596,7 @@ components:
           nullable: true
         isGroup:
           type: boolean
-        id:
-          type: string
       required:
-        - labelEn
-        - isGroup
         - id
     UpdateAllExpenseCategoriesDto:
       type: object
