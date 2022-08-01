@@ -1,4 +1,11 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsBoolean,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { Nanoid } from 'src/decorators/field.decorators';
 
 export class CreateExpenseCategoryDto {
@@ -21,14 +28,21 @@ export class CreateExpenseCategoryDto {
   isGroup: boolean;
 }
 
-export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {}
+export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {
+  @Nanoid()
+  id: string;
+}
+
+export class UpdateAllExpenseCategoriesDto {
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateExpenseCategoryDto)
+  items: UpdateExpenseCategoryDto[];
+}
 
 export class ExpenseCategoryDto extends UpdateExpenseCategoryDto {
   constructor(partial: Partial<ExpenseCategoryDto>) {
     super();
     Object.assign(this, partial);
   }
-
-  @Nanoid()
-  id: string;
 }

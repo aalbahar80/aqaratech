@@ -2203,14 +2203,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateOrganizationSettingsDto'
+              $ref: '#/components/schemas/UpdateAllExpenseCategoriesDto'
       responses:
         '200':
           description: ''
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationSettingsDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_25
   /expense-categories/{id}:
     get:
@@ -3590,44 +3592,21 @@ components:
           nullable: true
         isGroup:
           type: boolean
+        id:
+          type: string
       required:
         - labelEn
         - isGroup
-    UpdateOrganizationSettingsDto:
+        - id
+    UpdateAllExpenseCategoriesDto:
       type: object
       properties:
-        expenseCategoryTree:
+        items:
           type: array
           items:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
-        - expenseCategoryTree
-    OrganizationSettingsDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        expenseCategoryTree:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpenseCategoryDto'
-        organizationId:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - expenseCategoryTree
-        - organizationId
+        - items
     BreadcrumbsDto:
       type: object
       properties:

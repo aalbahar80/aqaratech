@@ -7,12 +7,10 @@ import { Prisma } from '@prisma/client';
 import {
   CreateExpenseCategoryDto,
   ExpenseCategoryDto,
+  UpdateAllExpenseCategoriesDto,
   UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
-import {
-  OrganizationSettingsDto,
-  UpdateOrganizationSettingsDto,
-} from 'src/organizations/dto/organizationSettings.dto';
+import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId } from 'src/utils/get-nanoid';
 
@@ -60,18 +58,34 @@ export class ExpenseCategoriesService {
 
   async updateAll({
     organizationId,
-    updateOrganizationSettingsDto,
+    updateAllExpenseCategoriesDto,
   }: {
     organizationId: string;
-    updateOrganizationSettingsDto: UpdateOrganizationSettingsDto;
+    updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
   }) {
-    return this.prisma.organizationSettings.update({
+    const categories = await this.fetchJsonCategories({ organizationId });
+
+    categories.forEach((c) => {
+      const category = c as Prisma.JsonObject;
+      const changed = updateAllExpenseCategoriesDto.items.find(
+        (item) => item.id === category.id,
+      );
+      // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
+      if (changed) {
+        category.labelEn = changed.labelEn;
+        category.labelAr = changed.labelAr;
+        category.description = changed.description;
+        category.isGroup = changed.isGroup;
+      }
+    });
+
+    const updated = await this.prisma.organizationSettings.update({
       where: { organizationId },
-      data: {
-        // TODO is this validated by class-validator?
-        // @ts-ignore
-        expenseCategoryTree: updateOrganizationSettingsDto.expenseCategoryTree,
-      },
+      data: { expenseCategoryTree: categories },
+    });
+
+    return this.validateJsonCategories({
+      categories: updated.expenseCategoryTree,
     });
   }
 

@@ -21,13 +21,10 @@ import { User } from 'src/decorators/user.decorator';
 import {
   CreateExpenseCategoryDto,
   ExpenseCategoryDto,
+  UpdateAllExpenseCategoriesDto,
   UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import {
-  OrganizationSettingsDto,
-  UpdateOrganizationSettingsDto,
-} from 'src/organizations/dto/organizationSettings.dto';
 import { ExpenseCategoriesService } from './expense-categories.service';
 
 @ApiHeader({ name: ROLE_HEADER })
@@ -63,15 +60,15 @@ export class ExpenseCategoriesController {
 
   @Patch()
   @CheckAbilities({ action: Action.Update, subject: 'Organization' })
-  @ApiOkResponse({ type: OrganizationSettingsDto })
+  @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
   updateAll(
     @User() user: IUser,
-    @Body() updateOrganizationSettingsDto: UpdateOrganizationSettingsDto,
-  ): Promise<OrganizationSettingsDto> {
+    @Body() updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto,
+  ): Promise<ExpenseCategoryDto[]> {
     // @ts-ignore
     return this.expenseCategoriesService.updateAll({
       organizationId: user.role.organizationId,
-      updateOrganizationSettingsDto,
+      updateAllExpenseCategoriesDto,
     });
   }
 
