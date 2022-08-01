@@ -40,10 +40,11 @@
 <a href={`/organizations/${settings.organizationId}/expenseCategories/new`}>
 	new form
 </a>
+<!-- TODO rm hardcoded id -->
 <a
 	href={`/organizations/${
 		settings.organizationId
-	}/organizations/expenseCategories/${'categoryidhere'}/edit`}
+	}/expenseCategories/${'qe64220c63oq'}/edit`}
 >
 	edit form
 </a>
