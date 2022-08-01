@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { classes } from '$lib/utils/classes';
 	import type { ExpenseNode } from '$lib/utils/expense-type-options';
 	import {
 		dndzone,
@@ -54,7 +55,14 @@
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-<b class="px-6 py-2"> {`${node.data.labelEn}`} </b>
+<b
+	class={classes(
+		'px-6 py-2 font-medium',
+		node.data.isGroup ? 'text-gray-700' : 'text-indigo-600 font-semibold',
+	)}
+>
+	{`${node.data.labelEn}`}
+</b>
 {#if node.children || node.data.isGroup}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
