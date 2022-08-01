@@ -38,6 +38,7 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
+import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { UsersModule } from './users/users.module';
     MetaModule,
     EventEmitterModule.forRoot(),
     PostmarkModule,
+    ExpenseCategoriesModule,
   ],
   controllers: [AppController],
   providers: [
