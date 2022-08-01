@@ -178,9 +178,6 @@
 	}
 </script>
 
-<!-- <ListboxLabel class="block text-sm font-medium text-gray-700"
->Assigned to</ListboxLabel
-> -->
 <div
 	class="relative mt-1"
 	use:clickOutside
