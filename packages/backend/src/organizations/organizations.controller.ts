@@ -25,6 +25,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { CreateExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,
@@ -89,7 +90,7 @@ export class OrganizationsController {
   }
 
   @Get(':id/settings')
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' })
+  @CheckAbilities({ action: Action.Read, subject: 'Organization' }) // TODO: expensetree field should be accessible by portfolio users
   @ApiOkResponse({ type: OrganizationSettingsDto })
   async findSettings(
     @Param('id') organizationId: string,
@@ -111,6 +112,19 @@ export class OrganizationsController {
     return this.organizationsService.updateSettings({
       organizationId,
       updateOrganizationSettingsDto,
+    });
+  }
+
+  @Post(':id/settings/expenseCategories')
+  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @ApiCreatedResponse({ type: String })
+  createExpenseCategory(
+    @Param('id') organizationId: string,
+    @Body() createExpenseCategoryDto: CreateExpenseCategoryDto,
+  ): Promise<string> {
+    return this.organizationsService.createExpenseCategory({
+      organizationId,
+      createExpenseCategoryDto,
     });
   }
 }

@@ -2037,6 +2037,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrganizationSettingsDto'
       tags: *ref_21
+  /organizations/{id}/settings/expenseCategories:
+    post:
+      operationId: createExpenseCategory
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseCategoryDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -3529,6 +3553,25 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - expenseCategoryTree
+    CreateExpenseCategoryDto:
+      type: object
+      properties:
+        labelEn:
+          type: string
+        parentId:
+          type: string
+          nullable: true
+        labelAr:
+          type: string
+        description:
+          type: string
+          nullable: true
+        isGroup:
+          type: boolean
+      required:
+        - labelEn
+        - parentId
+        - isGroup
     ByMonthDto:
       type: object
       properties:

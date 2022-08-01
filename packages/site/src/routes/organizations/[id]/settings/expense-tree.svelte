@@ -5,6 +5,7 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import {
 		fromHeirarchy,
+		rootId,
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
@@ -36,6 +37,22 @@
 	$: difference = diff(original, newList);
 </script>
 
+<button
+	on:click={async () => {
+		const id = $page.params.id;
+		id &&
+			$page.stuff.api.organizations.createExpenseCategory({
+				id,
+				createExpenseCategoryDto: {
+					labelEn: new Date().toISOString(),
+					parentId: rootId,
+					isGroup: false,
+				},
+			});
+	}}
+>
+	new category
+</button>
 <div class="flex flex-auto justify-between">
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />

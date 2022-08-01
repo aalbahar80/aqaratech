@@ -3,7 +3,7 @@ import type { ExpenseCategoryDto } from '@self/sdk';
 import * as d3 from 'd3';
 
 export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
-const rootId = 'root';
+export const rootId = 'root';
 
 /**
  * Converts an array of ExpenseCategoryDto to d3.HierarchyNode

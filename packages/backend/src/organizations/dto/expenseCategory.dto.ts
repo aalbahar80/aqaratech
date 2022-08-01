@@ -1,13 +1,6 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export class ExpenseCategoryDto {
-  constructor(partial: Partial<ExpenseCategoryDto>) {
-    Object.assign(this, partial);
-  }
-
-  @IsString()
-  id: string;
-
+export class CreateExpenseCategoryDto {
   @IsString()
   labelEn: string;
 
@@ -27,6 +20,14 @@ export class ExpenseCategoryDto {
   isGroup: boolean;
 }
 
-export class CreateExpenseCategoryDto extends ExpenseCategoryDto {}
+export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {
+  @IsString()
+  id: string;
+}
 
-export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {}
+export class ExpenseCategoryDto extends UpdateExpenseCategoryDto {
+  constructor(partial: Partial<ExpenseCategoryDto>) {
+    super();
+    Object.assign(this, partial);
+  }
+}

@@ -1,14 +1,22 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
-import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import {
+  CreateExpenseCategoryDto,
+  ExpenseCategoryDto,
+} from 'src/organizations/dto/expenseCategory.dto';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,
 } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { generateId } from 'src/utils/get-nanoid';
 
 @Injectable()
 export class OrganizationsService {
@@ -89,9 +97,61 @@ export class OrganizationsService {
     return this.prisma.organizationSettings.update({
       where: { organizationId },
       data: {
+        // TODO is this validated by class-validator?
         // @ts-ignore
         expenseCategoryTree: updateOrganizationSettingsDto.expenseCategoryTree,
       },
     });
+  }
+
+  async createExpenseCategory({
+    organizationId,
+    createExpenseCategoryDto,
+  }: {
+    organizationId: string;
+    createExpenseCategoryDto: CreateExpenseCategoryDto;
+  }) {
+    // Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
+    const settings = await this.prisma.organizationSettings.findUnique({
+      where: { organizationId },
+      select: { expenseCategoryTree: true },
+    });
+
+    const categoriesJson = settings.expenseCategoryTree;
+
+    if (
+      categoriesJson &&
+      typeof categoriesJson === 'object' &&
+      Array.isArray(categoriesJson)
+    ) {
+      const categories = categoriesJson as Prisma.JsonArray;
+
+      categories.push({
+        ...createExpenseCategoryDto,
+        id: generateId(),
+      });
+
+      const updated = await this.prisma.organizationSettings.update({
+        where: { organizationId },
+        data: { expenseCategoryTree: categories },
+      });
+
+      if (
+        updated.expenseCategoryTree &&
+        typeof updated.expenseCategoryTree === 'object' &&
+        Array.isArray(updated.expenseCategoryTree)
+      ) {
+        return updated.expenseCategoryTree.length.toString();
+      } else {
+        this.logger.warn(
+          'Failed to properly handle JSON value in expenseCategoryTree',
+        );
+        return 'ok';
+      }
+    } else {
+      throw new InternalServerErrorException(
+        'Failed to parse expenseCategoryTree',
+      );
+    }
   }
 }

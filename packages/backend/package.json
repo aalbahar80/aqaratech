@@ -52,6 +52,7 @@
     "jwks-rsa": "2.1.4",
     "lodash": "4.17.21",
     "meilisearch": "0.26.0",
+    "nanoid": "3.3.4",
     "passport": "0.6.0",
     "passport-jwt": "4.0.0",
     "postmark": "3.0.12",
