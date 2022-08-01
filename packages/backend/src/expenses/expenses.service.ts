@@ -194,7 +194,6 @@ export class ExpensesService {
       (r) => r.id === user.xRoleId,
     )?.organizationId;
 
-    // TODO validate categoryId is leaf node?
     const settings = await this.prisma.organizationSettings.findUnique({
       where: { organizationId },
       select: { expenseCategoryTree: true },
@@ -211,10 +210,17 @@ export class ExpensesService {
           )
       : [];
 
+    // 1. Does the category exist?
     const categoryExists = categories.find((c) => c.id === categoryId);
-
     if (!categoryExists) {
       throw new BadRequestException('Expense Category does not exist');
+    }
+
+    // 2. Is the category a leaf node?
+    // TODO It'd be better to add an isLeaf property to the categoryDto
+    const hasChildren = categories.some((c) => c.parentId === categoryId);
+    if (hasChildren) {
+      throw new BadRequestException('Expense Category is not a leaf node');
     }
   }
 }
