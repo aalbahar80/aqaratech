@@ -58,6 +58,7 @@
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
 {#if node.id !== rootId}
 	<b
+		id={node.data.id}
 		class={classes(
 			'px-6 py-2 font-medium',
 			node.data.isGroup ? 'text-gray-700' : 'text-gray-600 font-semibold',

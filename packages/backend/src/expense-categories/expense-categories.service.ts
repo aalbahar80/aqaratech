@@ -125,11 +125,11 @@ export class ExpenseCategoriesService {
       data: { expenseCategoryTree: categories },
     });
 
-    const newCategories = this.validateJsonCategories({
+    this.validateJsonCategories({
       categories: updated.expenseCategoryTree,
     });
 
-    return newCategories.length.toString();
+    return expenseCategoryId;
   }
 
   remove(id: number) {

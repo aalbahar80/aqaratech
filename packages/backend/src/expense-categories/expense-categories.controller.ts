@@ -76,8 +76,13 @@ export class ExpenseCategoriesController {
     return this.expenseCategoriesService.findOne(+id);
   }
 
+  // TODO ability check
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @CheckAbilities({
+    action: Action.Update,
+    subject: 'Organization',
+    skipParamCheck: true,
+  })
   @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,

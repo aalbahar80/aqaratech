@@ -62,7 +62,7 @@
 			}
 			return $page.stuff.api.expenseCategories.update({
 				id: expenseCategoryId,
-				updateExpenseCategoryDto: values,
+				updateExpenseCategoryDto: { ...values, id: expenseCategoryId },
 			});
 		}}
 		onSuccess={(value) => {
@@ -71,7 +71,7 @@
 				throw new Error('organizationId not found');
 			}
 			addSuccessToast();
-			return goto(expenseTreeRoute(organizationId));
+			return goto(expenseTreeRoute(organizationId) + '#' + value);
 		}}
 	/>
 {:else}
