@@ -34,8 +34,6 @@
 	$: difference = diff(original, newList);
 </script>
 
-<pre>{JSON.stringify(difference, null, 2)}</pre>
-
 <a
 	href={`/organizations/${$session.user?.role.organizationId}/expenseCategories/new`}
 >
