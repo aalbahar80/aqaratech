@@ -114,22 +114,6 @@ Create a treemap from a d3-hierarchy.
 </div>
 
 <style>
-	.breadcrumbs {
-		width: 100%;
-		padding: 0.3rem 0.4rem;
-		background-color: transparent;
-		font-family: inherit;
-		font-size: inherit;
-		text-align: left;
-		border: none;
-		cursor: pointer;
-		outline: none;
-	}
-
-	.breadcrumbs:disabled {
-		cursor: default;
-	}
-
 	.chart {
 		width: calc(100% + 2px);
 		height: 600px;
