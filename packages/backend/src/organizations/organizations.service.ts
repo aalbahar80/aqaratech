@@ -1,23 +1,14 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
-import {
-  CreateExpenseCategoryDto,
-  ExpenseCategoryDto,
-  UpdateExpenseCategoryDto,
-} from 'src/expense-categories/expense-category.dto';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,
 } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { generateId } from 'src/utils/get-nanoid';
 
 @Injectable()
 export class OrganizationsService {
@@ -103,99 +94,5 @@ export class OrganizationsService {
         expenseCategoryTree: updateOrganizationSettingsDto.expenseCategoryTree,
       },
     });
-  }
-
-  async createExpenseCategory({
-    organizationId,
-    createExpenseCategoryDto,
-  }: {
-    organizationId: string;
-    createExpenseCategoryDto: CreateExpenseCategoryDto;
-  }) {
-    const categories = await this.fetchJsonCategories({ organizationId });
-
-    categories.push({
-      ...createExpenseCategoryDto,
-      id: generateId(),
-    });
-
-    const updated = await this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: { expenseCategoryTree: categories },
-    });
-
-    return this.validateJsonCategories({
-      categories: updated.expenseCategoryTree,
-    });
-  }
-
-  async updateExpenseCategory({
-    organizationId,
-    expenseCategoryId,
-    updateExpenseCategoryDto,
-  }: {
-    organizationId: string;
-    expenseCategoryId: string;
-    updateExpenseCategoryDto: UpdateExpenseCategoryDto;
-  }) {
-    const categories = await this.fetchJsonCategories({ organizationId });
-
-    categories.forEach((c) => {
-      const category = c as Prisma.JsonObject;
-      // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
-      if (category.id === expenseCategoryId) {
-        category.labelEn = updateExpenseCategoryDto.labelEn;
-        category.labelAr = updateExpenseCategoryDto.labelAr;
-        category.description = updateExpenseCategoryDto.description;
-        category.isGroup = updateExpenseCategoryDto.isGroup;
-      }
-    });
-
-    const updated = await this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: { expenseCategoryTree: categories },
-    });
-
-    return this.validateJsonCategories({
-      categories: updated.expenseCategoryTree,
-    });
-  }
-
-  async fetchJsonCategories({ organizationId }: { organizationId: string }) {
-    // Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
-    const settings = await this.prisma.organizationSettings.findUnique({
-      where: { organizationId },
-      select: { expenseCategoryTree: true },
-    });
-
-    const categoriesJson = settings.expenseCategoryTree;
-
-    if (
-      categoriesJson &&
-      typeof categoriesJson === 'object' &&
-      Array.isArray(categoriesJson)
-    ) {
-      const categories = categoriesJson as Prisma.JsonArray;
-      return categories;
-    } else {
-      throw new InternalServerErrorException(
-        'Failed to parse expenseCategoryTree',
-      );
-    }
-  }
-
-  validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
-    if (
-      categories &&
-      typeof categories === 'object' &&
-      Array.isArray(categories)
-    ) {
-      return categories.length.toString();
-    } else {
-      this.logger.warn(
-        'Failed to properly handle JSON value in expenseCategoryTree',
-      );
-      return 'ok';
-    }
   }
 }

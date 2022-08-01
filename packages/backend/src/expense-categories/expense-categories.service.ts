@@ -1,11 +1,44 @@
-import { Injectable } from '@nestjs/common';
-import { CreateExpenseCategoryDto } from './dto/create-expense-category.dto';
-import { UpdateExpenseCategoryDto } from './dto/update-expense-category.dto';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import {
+  CreateExpenseCategoryDto,
+  UpdateExpenseCategoryDto,
+} from 'src/expense-categories/expense-category.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { generateId } from 'src/utils/get-nanoid';
 
 @Injectable()
 export class ExpenseCategoriesService {
-  create(createExpenseCategoryDto: CreateExpenseCategoryDto) {
-    return 'This action adds a new expenseCategory';
+  constructor(private prisma: PrismaService) {}
+
+  private readonly logger = new Logger(ExpenseCategoriesService.name);
+
+  async create({
+    organizationId,
+    createExpenseCategoryDto,
+  }: {
+    organizationId: string;
+    createExpenseCategoryDto: CreateExpenseCategoryDto;
+  }) {
+    const categories = await this.fetchJsonCategories({ organizationId });
+
+    categories.push({
+      ...createExpenseCategoryDto,
+      id: generateId(),
+    });
+
+    const updated = await this.prisma.organizationSettings.update({
+      where: { organizationId },
+      data: { expenseCategoryTree: categories },
+    });
+
+    return this.validateJsonCategories({
+      categories: updated.expenseCategoryTree,
+    });
   }
 
   findAll() {
@@ -16,11 +49,79 @@ export class ExpenseCategoriesService {
     return `This action returns a #${id} expenseCategory`;
   }
 
-  update(id: number, updateExpenseCategoryDto: UpdateExpenseCategoryDto) {
-    return `This action updates a #${id} expenseCategory`;
+  async update({
+    organizationId,
+    expenseCategoryId,
+    updateExpenseCategoryDto,
+  }: {
+    organizationId: string;
+    expenseCategoryId: string;
+    updateExpenseCategoryDto: UpdateExpenseCategoryDto;
+  }) {
+    const categories = await this.fetchJsonCategories({ organizationId });
+
+    categories.forEach((c) => {
+      const category = c as Prisma.JsonObject;
+      // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
+      if (category.id === expenseCategoryId) {
+        category.labelEn = updateExpenseCategoryDto.labelEn;
+        category.labelAr = updateExpenseCategoryDto.labelAr;
+        category.description = updateExpenseCategoryDto.description;
+        category.isGroup = updateExpenseCategoryDto.isGroup;
+      }
+    });
+
+    const updated = await this.prisma.organizationSettings.update({
+      where: { organizationId },
+      data: { expenseCategoryTree: categories },
+    });
+
+    return this.validateJsonCategories({
+      categories: updated.expenseCategoryTree,
+    });
   }
 
   remove(id: number) {
     return `This action removes a #${id} expenseCategory`;
+  }
+
+  // HELPERS
+
+  async fetchJsonCategories({ organizationId }: { organizationId: string }) {
+    // Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
+    const settings = await this.prisma.organizationSettings.findUnique({
+      where: { organizationId },
+      select: { expenseCategoryTree: true },
+    });
+
+    const categoriesJson = settings.expenseCategoryTree;
+
+    if (
+      categoriesJson &&
+      typeof categoriesJson === 'object' &&
+      Array.isArray(categoriesJson)
+    ) {
+      const categories = categoriesJson as Prisma.JsonArray;
+      return categories;
+    } else {
+      throw new InternalServerErrorException(
+        'Failed to parse expenseCategoryTree',
+      );
+    }
+  }
+
+  validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
+    if (
+      categories &&
+      typeof categories === 'object' &&
+      Array.isArray(categories)
+    ) {
+      return categories.length.toString();
+    } else {
+      this.logger.warn(
+        'Failed to properly handle JSON value in expenseCategoryTree',
+      );
+      return 'ok';
+    }
   }
 }
