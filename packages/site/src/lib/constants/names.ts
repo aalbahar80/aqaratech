@@ -91,6 +91,15 @@ const expense: EntityName = {
 	idField: 'expenseId',
 };
 
+const expenseCategory: EntityName = {
+	urlName: 'expenseCategories',
+	singular: 'expense category',
+	singularCap: 'Expense Category',
+	plural: 'expense categories',
+	pluralCap: 'Expense Categories',
+	idField: '',
+};
+
 const maintenanceOrder: EntityName = {
 	urlName: 'maintenanceOrders',
 	singular: 'maintenanceOrder',
@@ -113,4 +122,5 @@ export const entityNameMap: EntityNameMap = {
 	leaseInvoices: invoice,
 	// maintenanceOrders: maintenanceOrder,
 	expenses: expense,
+	expenseCategories: expenseCategory,
 };

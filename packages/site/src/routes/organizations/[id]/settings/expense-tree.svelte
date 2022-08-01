@@ -37,6 +37,16 @@
 	$: difference = diff(original, newList);
 </script>
 
+<a href={`/organizations/${settings.organizationId}/expenseCategories/new`}>
+	new form
+</a>
+<a
+	href={`/organizations/${
+		settings.organizationId
+	}/organizations/expenseCategories/${'categoryidhere'}/edit`}
+>
+	edit form
+</a>
 <button
 	on:click={async () => {
 		try {
