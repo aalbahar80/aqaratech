@@ -134,6 +134,7 @@ export const toOptions = (categories: ExpenseCategoryDto[]): Option[] => {
 		options.push({
 			value,
 			label: labelPrefix + '' + leaf.data.labelEn,
+			disabled: leaf.children !== undefined,
 		});
 	});
 

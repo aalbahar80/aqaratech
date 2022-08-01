@@ -3,6 +3,7 @@ import type { IconSource } from '@steeze-ui/svelte-icon/types';
 export interface Option {
 	value: string | number | null | undefined;
 	label: string;
+	disabled?: boolean;
 }
 
 export interface RelOption extends Option {

@@ -6,11 +6,7 @@
 	} from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils/classes';
 	import { clickOutside } from '$lib/utils/click-outside';
-	import {
-		Listbox,
-		ListboxOption,
-		ListboxOptions,
-	} from '@rgossiaux/svelte-headlessui';
+	import { Listbox } from '@rgossiaux/svelte-headlessui';
 	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import debounce from 'debounce';
@@ -65,10 +61,12 @@
 			? fuse.search(q).map((result) => ({
 					value: result.item.value,
 					label: result.item.label,
+					disabled: result.item.disabled,
 			  }))
 			: options;
 	}, 100);
 	$: handleFilter(query);
+	$: console.log(activeOption);
 
 	// EVENTS
 	const dispatch = createEventDispatcher<{
@@ -85,13 +83,21 @@
 	};
 
 	export const select = async (option: Option) => {
+		console.log({ option }, 'Combobox.svelte ~ 85');
+		if (option.disabled) return;
+		console.log('selecting');
 		await tick();
 		dispatch('select', { value: option.value });
 		selection = option;
 		query = '';
 		inputValue = selection?.label.trim() || '';
 		forceOpen = false;
-		activeOption = undefined;
+		setActiveOption(undefined);
+	};
+
+	export const setActiveOption = async (option: Option | undefined) => {
+		// await tick();
+		activeOption = option;
 	};
 
 	// ACCESSIBILITY
@@ -105,9 +111,9 @@
 		if (!forceOpen) {
 			// activeOption should be cleared when the combobox is closed.
 			// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
-			activeOption = undefined;
+			setActiveOption(undefined);
 		} else if (query) {
-			activeOption = filtered[0];
+			setActiveOption(filtered[0]);
 		}
 	}
 
@@ -143,7 +149,7 @@
 			// if no option is active yet, but there are matching options, make first one active
 			if (!activeOption && filtered.length > 0) {
 				forceOpen = true;
-				activeOption = filtered[0];
+				setActiveOption(filtered[0]);
 				return;
 			} else if (!activeOption) {
 				// if no option is active and no options are matching, do nothing
@@ -155,13 +161,13 @@
 
 			if (newActiveIdx < 0) {
 				// wrap around top
-				activeOption = filtered[filtered.length - 1];
+				setActiveOption(filtered[filtered.length - 1]);
 			} else if (newActiveIdx === filtered.length) {
 				// wrap around bottom
-				activeOption = filtered[0];
+				setActiveOption(filtered[0]);
 			} else {
 				// default case: select next/previous in item list
-				activeOption = filtered[newActiveIdx];
+				setActiveOption(filtered[newActiveIdx]);
 			}
 			if (autoScroll) {
 				// `await tick` is needed to properly scroll element into view
@@ -243,15 +249,15 @@
 		</div>
 
 		{#if forceOpen && filtered.length}
-			<ListboxOptions
+			<ul
 				class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-				static
 			>
 				<!--  Don't render entire filtered results array for perf  -->
 				<!-- TODO handle initialvalue not in slice -->
 				{#each filtered.slice(0, 100) as item (item.value)}
+					{@const selected = selection?.value === item.value}
 					<Hoverable let:hovering>
-						<ListboxOption
+						<li
 							value={item}
 							class={classes(
 								'relative cursor-default select-none py-2 pl-3 pr-9',
@@ -259,7 +265,10 @@
 									? 'bg-indigo-600 text-white isActive'
 									: 'text-gray-900',
 							)}
-							let:selected
+							class:disabled={item.disabled}
+							on:click={() => {
+								select(item);
+							}}
 						>
 							<span
 								class={classes(
@@ -282,10 +291,10 @@
 									/>
 								</span>
 							{/if}
-						</ListboxOption>
+						</li>
 					</Hoverable>
 				{/each}
-			</ListboxOptions>
+			</ul>
 		{/if}
 	</div>
 </Listbox>
@@ -293,5 +302,8 @@
 <style lang="postcss">
 	.form-invalid {
 		@apply border-pink-500 text-pink-600 focus:border-pink-500 focus:ring-pink-500;
+	}
+	.disabled {
+		@apply cursor-not-allowed border-slate-200 bg-zinc-200 text-slate-500 shadow-none;
 	}
 </style>
