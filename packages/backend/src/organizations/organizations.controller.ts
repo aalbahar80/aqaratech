@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiHeader,
@@ -25,10 +17,6 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
-import {
-  OrganizationSettingsDto,
-  UpdateOrganizationSettingsDto,
-} from 'src/organizations/dto/organizationSettings.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchService } from 'src/search/search.service';
@@ -86,31 +74,5 @@ export class OrganizationsController {
   @Get(':id/search')
   search(@Param('id') id: string, @Query('query') query: string) {
     return this.searchService.search({ query, organizationId: id });
-  }
-
-  @Get(':id/settings')
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' }) // TODO: expensetree field should be accessible by portfolio users
-  @ApiOkResponse({ type: OrganizationSettingsDto })
-  async findSettings(
-    @Param('id') organizationId: string,
-  ): Promise<OrganizationSettingsDto> {
-    const data = await this.organizationsService.findSettings({
-      organizationId,
-    });
-    return new OrganizationSettingsDto(data);
-  }
-
-  @Patch(':id/settings')
-  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
-  @ApiOkResponse({ type: OrganizationSettingsDto })
-  updateSettings(
-    @Param('id') organizationId: string,
-    @Body() updateOrganizationSettingsDto: UpdateOrganizationSettingsDto,
-  ): Promise<OrganizationSettingsDto> {
-    // @ts-ignore
-    return this.organizationsService.updateSettings({
-      organizationId,
-      updateOrganizationSettingsDto,
-    });
   }
 }

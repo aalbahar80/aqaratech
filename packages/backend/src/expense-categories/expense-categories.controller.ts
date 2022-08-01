@@ -20,6 +20,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import {
   CreateExpenseCategoryDto,
+  ExpenseCategoryDto,
   UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -52,8 +53,12 @@ export class ExpenseCategoriesController {
   }
 
   @Get()
-  findAll() {
-    return this.expenseCategoriesService.findAll();
+  @CheckAbilities({ action: Action.Read, subject: 'Organization' }) // TODO: expensetree field should be accessible by portfolio users
+  @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
+  findAll(@User() user: IUser): Promise<ExpenseCategoryDto[]> {
+    return this.expenseCategoriesService.findAll({
+      organizationId: user.role.organizationId,
+    });
   }
 
   @Patch()

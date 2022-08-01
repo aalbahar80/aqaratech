@@ -1,10 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
-import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
-import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -62,17 +60,5 @@ export class OrganizationsService {
 
   async remove({ id }: { id: string }) {
     return this.prisma.organization.delete({ where: { id } });
-  }
-
-  // ### SETTINGS ###
-  async findSettings({ organizationId }: { organizationId: string }) {
-    const data = await this.prisma.organizationSettings.findUnique({
-      where: { organizationId },
-    });
-    return new OrganizationSettingsDto({
-      ...data,
-      expenseCategoryTree:
-        data.expenseCategoryTree as unknown as ExpenseCategoryDto[],
-    });
   }
 }

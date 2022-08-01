@@ -1996,47 +1996,6 @@ paths:
               schema:
                 type: object
       tags: *ref_21
-  /organizations/{id}/settings:
-    get:
-      operationId: findSettings
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationSettingsDto'
-      tags: *ref_21
-    patch:
-      operationId: updateSettings
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateOrganizationSettingsDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationSettingsDto'
-      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -2231,7 +2190,9 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_25
     patch:
       operationId: updateAll
@@ -3584,60 +3545,6 @@ components:
       required:
         - organization
         - roleId
-    OrganizationSettingsDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        expenseCategoryTree:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpenseCategoryDto'
-        organizationId:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - expenseCategoryTree
-        - organizationId
-    UpdateExpenseCategoryDto:
-      type: object
-      properties:
-        labelEn:
-          type: string
-        parentId:
-          type: string
-          nullable: true
-        labelAr:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        isGroup:
-          type: boolean
-      required:
-        - labelEn
-        - isGroup
-    UpdateOrganizationSettingsDto:
-      type: object
-      properties:
-        expenseCategoryTree:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateExpenseCategoryDto'
-      required:
-        - expenseCategoryTree
     ByMonthDto:
       type: object
       properties:
@@ -3667,6 +3574,60 @@ components:
       required:
         - labelEn
         - isGroup
+    UpdateExpenseCategoryDto:
+      type: object
+      properties:
+        labelEn:
+          type: string
+        parentId:
+          type: string
+          nullable: true
+        labelAr:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        isGroup:
+          type: boolean
+      required:
+        - labelEn
+        - isGroup
+    UpdateOrganizationSettingsDto:
+      type: object
+      properties:
+        expenseCategoryTree:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+      required:
+        - expenseCategoryTree
+    OrganizationSettingsDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        expenseCategoryTree:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryDto'
+        organizationId:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - expenseCategoryTree
+        - organizationId
     BreadcrumbsDto:
       type: object
       properties:
