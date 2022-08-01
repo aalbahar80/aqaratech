@@ -2037,65 +2037,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrganizationSettingsDto'
       tags: *ref_21
-  /organizations/{id}/settings/expenseCategories:
-    post:
-      operationId: createExpenseCategory
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateExpenseCategoryDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_21
-  /organizations/{id}/settings/expenseCategories/{expenseCategoryId}:
-    patch:
-      operationId: updateExpenseCategory
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: expenseCategoryId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -2256,6 +2197,100 @@ paths:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
       tags:
         - meta
+  /expense-categories:
+    post:
+      operationId: create
+      parameters:
+        - &ref_24
+          name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseCategoryDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_25
+        - expense-categories
+    get:
+      operationId: findAll
+      parameters:
+        - *ref_24
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_25
+  /expense-categories/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - *ref_24
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_25
+    patch:
+      operationId: update
+      parameters:
+        - *ref_24
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_25
+    delete:
+      operationId: remove
+      parameters:
+        - *ref_24
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_25
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -3585,6 +3620,16 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - expenseCategoryTree
+    ByMonthDto:
+      type: object
+      properties:
+        amount:
+          type: number
+        date:
+          type: string
+      required:
+        - amount
+        - date
     CreateExpenseCategoryDto:
       type: object
       properties:
@@ -3604,16 +3649,6 @@ components:
       required:
         - labelEn
         - isGroup
-    ByMonthDto:
-      type: object
-      properties:
-        amount:
-          type: number
-        date:
-          type: string
-      required:
-        - amount
-        - date
     BreadcrumbsDto:
       type: object
       properties:
