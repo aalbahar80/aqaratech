@@ -4,7 +4,7 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
   ExpenseCategoryDto,
   UpdateExpenseCategoryDto,
-} from 'src/organizations/dto/expenseCategory.dto';
+} from 'src/expense-categories/expense-category.dto';
 
 export class OrganizationSettingsDto extends AbstractDto {
   constructor(partial: Partial<OrganizationSettingsDto>) {

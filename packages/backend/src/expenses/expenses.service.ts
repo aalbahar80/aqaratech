@@ -14,7 +14,7 @@ import {
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import type { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import type { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 
 // prettier-ignore
 export const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [

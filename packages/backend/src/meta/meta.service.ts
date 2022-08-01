@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { OrganizationSettings } from '@prisma/client';
 import { FindExpenseTreeDto } from 'src/meta/dto/find-expense-tree.dto';
-import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()

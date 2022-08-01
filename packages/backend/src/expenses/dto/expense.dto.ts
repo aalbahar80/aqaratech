@@ -18,7 +18,7 @@ import {
 import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { Nanoid } from 'src/decorators/field.decorators';
-import { ExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 
 class ExpenseRequiredDto {
   @Nanoid()

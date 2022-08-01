@@ -28,7 +28,7 @@ import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {
   CreateExpenseCategoryDto,
   UpdateExpenseCategoryDto,
-} from 'src/organizations/dto/expenseCategory.dto';
+} from 'src/expense-categories/expense-category.dto';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,

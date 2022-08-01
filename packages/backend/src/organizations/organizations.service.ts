@@ -10,7 +10,7 @@ import {
   CreateExpenseCategoryDto,
   ExpenseCategoryDto,
   UpdateExpenseCategoryDto,
-} from 'src/organizations/dto/expenseCategory.dto';
+} from 'src/expense-categories/expense-category.dto';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import {
   OrganizationSettingsDto,
