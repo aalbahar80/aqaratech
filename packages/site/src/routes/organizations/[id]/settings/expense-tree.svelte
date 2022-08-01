@@ -39,14 +39,6 @@
 >
 	new form
 </a>
-<!-- TODO rm hardcoded id -->
-<a
-	href={`/organizations/${
-		$session.user?.role.organizationId
-	}/expenseCategories/${'qe64220c63oq'}/edit`}
->
-	edit form
-</a>
 <div class="flex flex-auto justify-between">
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />

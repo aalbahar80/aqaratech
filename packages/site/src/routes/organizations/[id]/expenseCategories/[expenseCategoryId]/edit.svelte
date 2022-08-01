@@ -7,11 +7,9 @@
 		params,
 		stuff,
 	}: LoadEvent<{ id: string; expenseCategoryId: string }>) => {
-		const settings = await stuff.api!.organizations.findSettings({
-			id: params.id,
-		});
+		const categories = await stuff.api!.expenseCategories.findAll();
 
-		const expenseCategory = settings.expenseCategoryTree.find(
+		const expenseCategory = categories.find(
 			(category) => category.id === params.expenseCategoryId,
 		);
 
