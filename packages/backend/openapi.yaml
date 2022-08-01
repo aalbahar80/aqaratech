@@ -2233,6 +2233,24 @@ paths:
               schema:
                 type: string
       tags: *ref_25
+    patch:
+      operationId: updateAll
+      parameters:
+        - *ref_24
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationSettingsDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSettingsDto'
+      tags: *ref_25
   /expense-categories/{id}:
     get:
       operationId: findOne

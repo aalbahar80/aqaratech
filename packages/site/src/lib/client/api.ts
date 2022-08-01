@@ -1,6 +1,7 @@
 import {
 	AggregateApi,
 	Configuration,
+	ExpenseCategoriesApi,
 	ExpensesApi,
 	LeaseInvoicesApi,
 	LeasesApi,
@@ -56,6 +57,7 @@ export const api = ({
 		organizations: new OrganizationsApi(config),
 		meta: new MetaApi(config),
 		users: new UsersApi(config),
+		expenseCategories: new ExpenseCategoriesApi(config),
 	};
 };
 

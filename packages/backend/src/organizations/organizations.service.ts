@@ -4,10 +4,7 @@ import { defaultExpenseCategoryTree } from 'src/constants/default-expense-catego
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
-import {
-  OrganizationSettingsDto,
-  UpdateOrganizationSettingsDto,
-} from 'src/organizations/dto/organizationSettings.dto';
+import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -76,23 +73,6 @@ export class OrganizationsService {
       ...data,
       expenseCategoryTree:
         data.expenseCategoryTree as unknown as ExpenseCategoryDto[],
-    });
-  }
-
-  async updateSettings({
-    organizationId,
-    updateOrganizationSettingsDto,
-  }: {
-    organizationId: string;
-    updateOrganizationSettingsDto: UpdateOrganizationSettingsDto;
-  }) {
-    return this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: {
-        // TODO is this validated by class-validator?
-        // @ts-ignore
-        expenseCategoryTree: updateOrganizationSettingsDto.expenseCategoryTree,
-      },
     });
   }
 }

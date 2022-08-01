@@ -56,14 +56,12 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			const organizationId = $page.params.id;
 			const expenseCategoryId = $page.params.expenseCategoryId;
-			if (!organizationId || !expenseCategoryId) {
-				throw new Error('organiztionId or expenseCategoryId not found');
+			if (!expenseCategoryId) {
+				throw new Error('expenseCategoryId not found');
 			}
-			return $page.stuff.api.organizations.updateExpenseCategory({
-				id: organizationId,
-				expenseCategoryId,
+			return $page.stuff.api.expenseCategories.update({
+				id: expenseCategoryId,
 				updateExpenseCategoryDto: values,
 			});
 		}}
@@ -82,16 +80,10 @@
 		entityTitle="expenseCategories"
 		{formType}
 		{basicFields}
-		onSubmit={(values) => {
-			const organizationId = $page.params.id;
-			if (!organizationId) {
-				throw new Error('organiztionId not found');
-			}
-			return $page.stuff.api.organizations.createExpenseCategory({
-				id: organizationId,
+		onSubmit={(values) =>
+			$page.stuff.api.expenseCategories.create({
 				createExpenseCategoryDto: { ...values, parentId: null },
-			});
-		}}
+			})}
 		onSuccess={(value) => {
 			const organizationId = $page.params.id;
 			if (!organizationId) {

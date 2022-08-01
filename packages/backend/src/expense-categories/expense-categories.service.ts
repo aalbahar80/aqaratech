@@ -8,6 +8,7 @@ import {
   CreateExpenseCategoryDto,
   UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
+import { UpdateOrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId } from 'src/utils/get-nanoid';
 
@@ -43,6 +44,23 @@ export class ExpenseCategoriesService {
 
   findAll() {
     return `This action returns all expenseCategories`;
+  }
+
+  async updateAll({
+    organizationId,
+    updateOrganizationSettingsDto,
+  }: {
+    organizationId: string;
+    updateOrganizationSettingsDto: UpdateOrganizationSettingsDto;
+  }) {
+    return this.prisma.organizationSettings.update({
+      where: { organizationId },
+      data: {
+        // TODO is this validated by class-validator?
+        // @ts-ignore
+        expenseCategoryTree: updateOrganizationSettingsDto.expenseCategoryTree,
+      },
+    });
   }
 
   findOne(id: number) {

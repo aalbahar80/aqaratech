@@ -23,6 +23,10 @@ import {
   UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import {
+  OrganizationSettingsDto,
+  UpdateOrganizationSettingsDto,
+} from 'src/organizations/dto/organizationSettings.dto';
 import { ExpenseCategoriesService } from './expense-categories.service';
 
 @ApiHeader({ name: ROLE_HEADER })
@@ -40,7 +44,7 @@ export class ExpenseCategoriesController {
   create(
     @User() user: IUser,
     @Body() createExpenseCategoryDto: CreateExpenseCategoryDto,
-  ) {
+  ): Promise<string> {
     return this.expenseCategoriesService.create({
       organizationId: user.role.organizationId,
       createExpenseCategoryDto,
@@ -50,6 +54,20 @@ export class ExpenseCategoriesController {
   @Get()
   findAll() {
     return this.expenseCategoriesService.findAll();
+  }
+
+  @Patch()
+  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @ApiOkResponse({ type: OrganizationSettingsDto })
+  updateAll(
+    @User() user: IUser,
+    @Body() updateOrganizationSettingsDto: UpdateOrganizationSettingsDto,
+  ): Promise<OrganizationSettingsDto> {
+    // @ts-ignore
+    return this.expenseCategoriesService.updateAll({
+      organizationId: user.role.organizationId,
+      updateOrganizationSettingsDto,
+    });
   }
 
   @Get(':id')
@@ -64,7 +82,7 @@ export class ExpenseCategoriesController {
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateExpenseCategoryDto: UpdateExpenseCategoryDto,
-  ) {
+  ): Promise<string> {
     return this.expenseCategoriesService.update({
       organizationId: user.role.organizationId,
       expenseCategoryId: id,
