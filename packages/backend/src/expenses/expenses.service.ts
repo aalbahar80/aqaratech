@@ -1,6 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
@@ -33,6 +33,14 @@ export class ExpensesService {
       subject('Expense', createExpenseDto),
     );
 
+    // VALIDATE EXPENSE CATEGORY
+
+    if (createExpenseDto.categoryId) {
+      await this.validateCategoryId(createExpenseDto.categoryId, user);
+    }
+
+    // INSERT
+
     const toCreate = R.omit(createExpenseDto, [
       'portfolioId',
       'propertyId',
@@ -40,7 +48,6 @@ export class ExpensesService {
       'maintenanceOrderId',
     ]);
 
-    // TODO validate categoryId is valid (exists, and is leaf node)
     const created = await this.prisma.expense.create({
       data: {
         ...toCreate,
@@ -148,6 +155,14 @@ export class ExpensesService {
       Action.Update,
       subject('Expense', { id, ...updateExpenseDto }),
     );
+
+    // VALIDATE EXPENSE CATEGORY
+
+    if (updateExpenseDto.categoryId) {
+      await this.validateCategoryId(updateExpenseDto.categoryId, user);
+    }
+
+    // INSERT
     const updated = await this.prisma.expense.update({
       where: { id },
       data: updateExpenseDto,
@@ -172,5 +187,34 @@ export class ExpensesService {
       locationFilter = { portfolioId: filter?.portfolioId };
     }
     return locationFilter;
+  }
+
+  async validateCategoryId(categoryId: string, user: IUser) {
+    const organizationId = user.roles.find(
+      (r) => r.id === user.xRoleId,
+    )?.organizationId;
+
+    // TODO validate categoryId is leaf node?
+    const settings = await this.prisma.organizationSettings.findUnique({
+      where: { organizationId },
+      select: { expenseCategoryTree: true },
+    });
+
+    const categories = Array.isArray(settings.expenseCategoryTree)
+      ? settings.expenseCategoryTree
+          .filter((e) => e)
+          .map(
+            (e) =>
+              new ExpenseCategoryDto(
+                e as unknown as Partial<ExpenseCategoryDto>,
+              ),
+          )
+      : [];
+
+    const categoryExists = categories.find((c) => c.id === categoryId);
+
+    if (!categoryExists) {
+      throw new BadRequestException('Expense Category does not exist');
+    }
   }
 }
