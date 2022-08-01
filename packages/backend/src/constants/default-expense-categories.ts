@@ -1,5 +1,8 @@
 import type { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 
+/**
+ * Generate a random nanoid for both the `id` and `parentId` fields.
+ */
 // prettier-ignore
 export const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [
   {"id":"1","labelAr":"المصاريف الرأسمالية","labelEn":"CapEx","parentId":null,"isGroup":true},
