@@ -25,4 +25,5 @@ export interface AuthenticatedUser {
 export interface IUser extends ValidatedUserDto {
   ability: AppAbility;
   xRoleId: string;
+  role: ValidatedUserDto['roles'][0];
 }

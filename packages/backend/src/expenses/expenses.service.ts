@@ -75,6 +75,8 @@ export class ExpensesService {
   }): Promise<WithCount<ExpenseDto>> {
     const { page, take, start, end } = pageOptionsDto;
 
+    // TODO use this instead:
+    // const organizationId = user.role.organizationId;
     const organizationId = user.roles.find(
       (r) => r.id === user.xRoleId,
     )?.organizationId;
@@ -190,6 +192,8 @@ export class ExpensesService {
   }
 
   async validateCategoryId(categoryId: string, user: IUser) {
+    // TODO use this instead:
+    // const organizationId = user.role.organizationId;
     const organizationId = user.roles.find(
       (r) => r.id === user.xRoleId,
     )?.organizationId;

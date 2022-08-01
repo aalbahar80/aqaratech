@@ -6,6 +6,7 @@ import {
   ForbiddenException,
   Inject,
   Injectable,
+  InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -112,7 +113,15 @@ export class AbilitiesGuard implements CanActivate {
         xRoleId,
       });
 
-      user = { ...userP, ability: abilityP, xRoleId };
+      const role = userP.roles.find((r) => r.id === xRoleId);
+      if (!role) {
+        this.logger.error(
+          `Role ${xRoleId} not found for user ${authenticatedUser.email}`,
+        );
+        throw new InternalServerErrorException();
+      }
+
+      user = { ...userP, ability: abilityP, xRoleId, role };
 
       // TODO handle cache ttl/invalidation
       // TODO use cache key variable
@@ -189,6 +198,7 @@ export class AbilitiesGuard implements CanActivate {
     );
 
     // attach ability to request, to be used by services for any further permission checks
+    // TODO spreading here works ok for nested object?
     request.user = {
       ...request.user,
       ...user,
