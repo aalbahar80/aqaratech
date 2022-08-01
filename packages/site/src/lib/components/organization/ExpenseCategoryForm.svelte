@@ -4,6 +4,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
+	import { expenseTreeRoute } from '$lib/utils/route-helpers';
 	import { schema } from '$models/schemas/expenseCategory.schema';
 	import type { ExpenseCategoryDto } from '@self/sdk';
 
@@ -49,35 +50,32 @@
 </script>
 
 {#if formType === 'update'}
-	<!-- TODO wire up new updateExpenseCategory endpoint -->
-	<!-- <Form
+	<Form
 		{schema}
 		entityTitle="expenseCategories"
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
 			const organizationId = $page.params.id;
-			if (!organizationId) {
-				throw new Error('organiztionId not found');
+			const expenseCategoryId = $page.params.expenseCategoryId;
+			if (!organizationId || !expenseCategoryId) {
+				throw new Error('organiztionId or expenseCategoryId not found');
 			}
-			return $page.stuff.api.organizations.createExpenseCategory({
+			return $page.stuff.api.organizations.updateExpenseCategory({
 				id: organizationId,
-				createExpenseCategoryDto: {
-					labelEn: new Date().toISOString(),
-					parentId: null,
-					isGroup: false,
-				},
+				expenseCategoryId,
+				updateExpenseCategoryDto: values,
 			});
 		}}
 		onSuccess={(value) => {
 			const organizationId = $page.params.id;
 			if (!organizationId) {
-				throw new Error('organiztionId not found');
+				throw new Error('organizationId not found');
 			}
 			addSuccessToast();
-			return goto(`/organizations/${organizationId}/expense-categories`);
+			return goto(expenseTreeRoute(organizationId));
 		}}
-	/> -->
+	/>
 {:else}
 	<Form
 		{schema}
@@ -91,11 +89,7 @@
 			}
 			return $page.stuff.api.organizations.createExpenseCategory({
 				id: organizationId,
-				createExpenseCategoryDto: {
-					labelEn: new Date().toISOString(),
-					parentId: null,
-					isGroup: false,
-				},
+				createExpenseCategoryDto: { ...values, parentId: null },
 			});
 		}}
 		onSuccess={(value) => {
@@ -104,7 +98,7 @@
 				throw new Error('organiztionId not found');
 			}
 			addSuccessToast();
-			return goto(`/organizations/${organizationId}/expense-categories`);
+			return goto(expenseTreeRoute(organizationId));
 		}}
 	/>
 {/if}

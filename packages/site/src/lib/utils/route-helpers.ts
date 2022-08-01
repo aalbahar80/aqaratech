@@ -18,3 +18,6 @@ export const create = ({
 		return formBaseUrl;
 	}
 };
+
+export const expenseTreeRoute = (orgId: string) =>
+	`/organizations/${orgId}/settings/expense-tree`;

@@ -2061,6 +2061,41 @@ paths:
               schema:
                 type: string
       tags: *ref_21
+  /organizations/{id}/settings/expenseCategories/{expenseCategoryId}:
+    patch:
+      operationId: updateExpenseCategory
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: expenseCategoryId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -3360,6 +3395,7 @@ components:
           nullable: true
         labelAr:
           type: string
+          nullable: true
         description:
           type: string
           nullable: true
@@ -3368,7 +3404,6 @@ components:
       required:
         - id
         - labelEn
-        - parentId
         - isGroup
     ExpenseDto:
       type: object
@@ -3525,8 +3560,6 @@ components:
     UpdateExpenseCategoryDto:
       type: object
       properties:
-        id:
-          type: string
         labelEn:
           type: string
         parentId:
@@ -3534,15 +3567,14 @@ components:
           nullable: true
         labelAr:
           type: string
+          nullable: true
         description:
           type: string
           nullable: true
         isGroup:
           type: boolean
       required:
-        - id
         - labelEn
-        - parentId
         - isGroup
     UpdateOrganizationSettingsDto:
       type: object
@@ -3563,6 +3595,7 @@ components:
           nullable: true
         labelAr:
           type: string
+          nullable: true
         description:
           type: string
           nullable: true
@@ -3570,7 +3603,6 @@ components:
           type: boolean
       required:
         - labelEn
-        - parentId
         - isGroup
     ByMonthDto:
       type: object

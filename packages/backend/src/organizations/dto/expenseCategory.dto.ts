@@ -1,4 +1,5 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Nanoid } from 'src/decorators/field.decorators';
 
 export class CreateExpenseCategoryDto {
   @IsString()
@@ -6,11 +7,11 @@ export class CreateExpenseCategoryDto {
 
   @IsString()
   @IsOptional()
-  parentId: string | null;
+  parentId?: string | null;
 
   @IsString()
   @IsOptional()
-  labelAr?: string;
+  labelAr?: string | null;
 
   @IsString()
   @IsOptional()
@@ -20,14 +21,14 @@ export class CreateExpenseCategoryDto {
   isGroup: boolean;
 }
 
-export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {
-  @IsString()
-  id: string;
-}
+export class UpdateExpenseCategoryDto extends CreateExpenseCategoryDto {}
 
 export class ExpenseCategoryDto extends UpdateExpenseCategoryDto {
   constructor(partial: Partial<ExpenseCategoryDto>) {
     super();
     Object.assign(this, partial);
   }
+
+  @Nanoid()
+  id: string;
 }

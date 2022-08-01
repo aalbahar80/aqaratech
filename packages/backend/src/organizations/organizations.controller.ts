@@ -25,7 +25,10 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
-import { CreateExpenseCategoryDto } from 'src/organizations/dto/expenseCategory.dto';
+import {
+  CreateExpenseCategoryDto,
+  UpdateExpenseCategoryDto,
+} from 'src/organizations/dto/expenseCategory.dto';
 import {
   OrganizationSettingsDto,
   UpdateOrganizationSettingsDto,
@@ -125,6 +128,21 @@ export class OrganizationsController {
     return this.organizationsService.createExpenseCategory({
       organizationId,
       createExpenseCategoryDto,
+    });
+  }
+
+  @Patch(':id/settings/expenseCategories/:expenseCategoryId')
+  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @ApiCreatedResponse({ type: String })
+  updateExpenseCategory(
+    @Param('id') organizationId: string,
+    @Param('expenseCategoryId') expenseCategoryId: string,
+    @Body() updateExpenseCategoryDto: UpdateExpenseCategoryDto,
+  ): Promise<string> {
+    return this.organizationsService.updateExpenseCategory({
+      organizationId,
+      expenseCategoryId,
+      updateExpenseCategoryDto,
     });
   }
 }
