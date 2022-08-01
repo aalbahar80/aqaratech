@@ -240,7 +240,9 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(10, 250, 0),
-	categoryId: faker.helpers.arrayElement(defaultExpenseCategoryTree).id,
+	categoryId: faker.helpers.arrayElement(
+		defaultExpenseCategoryTree.filter((c) => !c.isGroup)
+	).id,
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });

@@ -55,12 +55,12 @@
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
 <b class="px-6 py-2"> {`${node.data.labelEn}`} </b>
-{#if node.children}
+{#if node.children || node.data.isGroup}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
 		class="py-8"
 		use:dndzone={{
-			items: node.children,
+			items: node.children || [],
 			flipDurationMs,
 			centreDraggedOnCursor: true,
 			dropTargetStyle: {
@@ -74,8 +74,9 @@
 		on:consider={handleDndConsider}
 		on:finalize={handleDndFinalize}
 	>
-		<!-- WE FILTER THE SHADOW PLACEHOLDER THAT WAS ADDED IN VERSION 0.7.4, filtering this way rather than checking whether 'nodes' have the id became possible in version 0.9.1 -->
-		{#each node.children.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) as currentNode (currentNode.id)}
+		<!-- We fallback to en empty array because we still want empty `group nodes` (where node.data.isGroup = true) to be able to swallow new children. 
+         Otherwise, a dropzone will disappear as soon as all the children have been dragged out. -->
+		{#each node.children?.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) || [] as currentNode (currentNode.id)}
 			<div
 				animate:flip={{ duration: flipDurationMs }}
 				class="my-6 mx-1 cursor-pointer rounded-lg border bg-white py-6 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"

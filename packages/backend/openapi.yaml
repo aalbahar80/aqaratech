@@ -3339,10 +3339,13 @@ components:
         description:
           type: string
           nullable: true
+        isGroup:
+          type: boolean
       required:
         - id
         - labelEn
         - parentId
+        - isGroup
     ExpenseDto:
       type: object
       properties:
@@ -3510,10 +3513,13 @@ components:
         description:
           type: string
           nullable: true
+        isGroup:
+          type: boolean
       required:
         - id
         - labelEn
         - parentId
+        - isGroup
     UpdateOrganizationSettingsDto:
       type: object
       properties:

@@ -1,13 +1,6 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export interface ExpenseCategory {
-  id: string;
-  parentId: string | null;
-  labelEn: string;
-  labelAr: string;
-}
-
-export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
+export class ExpenseCategoryDto {
   constructor(partial: Partial<ExpenseCategoryDto>) {
     Object.assign(this, partial);
   }
@@ -29,6 +22,9 @@ export class ExpenseCategoryDto implements Partial<ExpenseCategory> {
   @IsString()
   @IsOptional()
   description?: string | null;
+
+  @IsBoolean()
+  isGroup: boolean;
 }
 
 export class CreateExpenseCategoryDto extends ExpenseCategoryDto {}
