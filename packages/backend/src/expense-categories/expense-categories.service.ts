@@ -39,9 +39,11 @@ export class ExpenseCategoriesService {
       data: { expenseCategoryTree: categories },
     });
 
-    return this.validateJsonCategories({
+    const newCategories = this.validateJsonCategories({
       categories: updated.expenseCategoryTree,
     });
+
+    return newCategories.length.toString();
   }
 
   async findAll({ organizationId }: { organizationId: string }) {
@@ -72,6 +74,7 @@ export class ExpenseCategoriesService {
       );
       // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
       if (changed) {
+        category.parentId = changed.parentId;
         category.labelEn = changed.labelEn;
         category.labelAr = changed.labelAr;
         category.description = changed.description;
@@ -84,9 +87,11 @@ export class ExpenseCategoriesService {
       data: { expenseCategoryTree: categories },
     });
 
-    return this.validateJsonCategories({
+    const newCategories = this.validateJsonCategories({
       categories: updated.expenseCategoryTree,
     });
+
+    return newCategories as unknown as ExpenseCategoryDto[];
   }
 
   findOne(id: number) {
@@ -120,9 +125,11 @@ export class ExpenseCategoriesService {
       data: { expenseCategoryTree: categories },
     });
 
-    return this.validateJsonCategories({
+    const newCategories = this.validateJsonCategories({
       categories: updated.expenseCategoryTree,
     });
+
+    return newCategories.length.toString();
   }
 
   remove(id: number) {
@@ -160,12 +167,12 @@ export class ExpenseCategoriesService {
       typeof categories === 'object' &&
       Array.isArray(categories)
     ) {
-      return categories.length.toString();
+      return categories;
     } else {
       this.logger.warn(
         'Failed to properly handle JSON value in expenseCategoryTree',
       );
-      return 'ok';
+      throw new InternalServerErrorException();
     }
   }
 }

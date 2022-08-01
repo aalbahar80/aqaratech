@@ -65,7 +65,6 @@ export class ExpenseCategoriesController {
     @User() user: IUser,
     @Body() updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto,
   ): Promise<ExpenseCategoryDto[]> {
-    // @ts-ignore
     return this.expenseCategoriesService.updateAll({
       organizationId: user.role.organizationId,
       updateAllExpenseCategoriesDto,
