@@ -39,16 +39,26 @@
 
 <button
 	on:click={async () => {
-		const id = $page.params.id;
-		id &&
-			$page.stuff.api.organizations.createExpenseCategory({
+		try {
+			// Save new category
+			const id = $page.params.id;
+			if (!id) return;
+			await $page.stuff.api.organizations.createExpenseCategory({
 				id,
 				createExpenseCategoryDto: {
 					labelEn: new Date().toISOString(),
-					parentId: rootId,
+					parentId: null,
 					isGroup: false,
 				},
 			});
+
+			// Refresh tree with updated categories
+			settings = await $page.stuff.api.organizations.findSettings({ id });
+
+			addSuccessToast();
+		} catch (e) {
+			handleApiError(e);
+		}
 	}}
 >
 	new category
