@@ -17,11 +17,11 @@ const base = z.object({
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
 });
 
-export const createBase = base.extend({
+const createBase = base.extend({
 	leaseId: zodnanoid,
 });
 
-export const refined = (s: ZodSchema) =>
+const refined = (s: ZodSchema) =>
 	s
 		.refine(
 			(val) => {
