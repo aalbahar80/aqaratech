@@ -26,9 +26,11 @@ export const getUser = async ({
 	if (!token) {
 		return;
 	}
+	// keep this in try/catch? how was this not redirecting before?
+	// hint: look at getSession when it calls get user.
+	// this should throw if the token is invalid
+	await validateToken(token, 'idToken');
 	try {
-		await validateToken(token, 'accessToken');
-
 		const userStuff = await getUserStuff(token, selectedRoleId);
 
 		// augment each role with metadata
@@ -82,6 +84,7 @@ const getUserStuff = async (
 	const now = Date.now();
 	const apiUrl = import.meta.env.VITE_API_URL_LOCAL + '/users/me';
 
+	// TODO ensure backend is expecting an id token for the users/me endpoint
 	const response = await fetch(apiUrl, {
 		method: 'GET',
 		headers: {

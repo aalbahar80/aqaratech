@@ -12,6 +12,9 @@ export const validateToken = async (
 		tokenType === 'accessToken'
 			? authConfig.AUTH0_API_AUDIENCE
 			: authConfig.AUTH0_CLIENT_ID;
+	console.log(token);
+	console.log('validating:----------- ' + tokenType);
+	console.log(audience);
 	const { payload } = await jwtVerify(token, JWKS, {
 		audience,
 		issuer: `${authConfig.AUTH0_DOMAIN}/`,

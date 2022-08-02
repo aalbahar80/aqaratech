@@ -38,8 +38,10 @@ export const getSession: GetSession = async ({ locals }) => {
 			Sentry.captureException(e);
 		}
 	}
+	// TOOD: if validateToken fails, we should set both user and isAuthenticated to false
+	// otherwise create a two tiered user inteface like backend
 	return {
-		user: locals.user,
+		user: isAuthenticated ? locals.user : undefined,
 		accessToken: locals.accessToken,
 		// TODO remove xRoleId and use user.role.id instead.
 		// Ensure it persists role changes. Works for new signups.
@@ -60,7 +62,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
 	const user = await getUser({
-		token: cookies.accessToken,
+		token: cookies.idToken,
 		selectedRoleId: cookies.xRoleId,
 	});
 
