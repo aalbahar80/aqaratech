@@ -29,9 +29,10 @@ export class ExpenseCategoriesService {
   }) {
     const categories = await this.fetchJsonCategories({ organizationId });
 
+    const id = generateId();
     categories.push({
       ...createExpenseCategoryDto,
-      id: generateId(),
+      id,
     });
 
     const updated = await this.prisma.organizationSettings.update({
@@ -39,11 +40,11 @@ export class ExpenseCategoriesService {
       data: { expenseCategoryTree: categories },
     });
 
-    const newCategories = this.validateJsonCategories({
+    this.validateJsonCategories({
       categories: updated.expenseCategoryTree,
     });
 
-    return newCategories.length.toString();
+    return id;
   }
 
   async findAll({ organizationId }: { organizationId: string }) {

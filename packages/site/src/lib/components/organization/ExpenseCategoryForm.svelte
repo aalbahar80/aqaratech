@@ -41,10 +41,11 @@
 			label: 'Name (arabic)',
 		}),
 		new Field('isGroup', {
-			label: 'TODO',
+			label: 'Create as group?',
 			type: 'checkbox',
 			value: data?.isGroup ?? false,
 			autoInit: true,
+			hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". \n\n Expense Category: Holds expense entries.',
 		}),
 	];
 </script>
@@ -84,13 +85,13 @@
 			$page.stuff.api.expenseCategories.create({
 				createExpenseCategoryDto: { ...values, parentId: null },
 			})}
-		onSuccess={() => {
+		onSuccess={(value) => {
 			const organizationId = $page.params.id;
 			if (!organizationId) {
 				throw new Error('organiztionId not found');
 			}
 			addSuccessToast();
-			return goto(expenseTreeRoute(organizationId));
+			return goto(expenseTreeRoute(organizationId) + '#' + value);
 		}}
 	/>
 {/if}
