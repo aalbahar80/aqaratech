@@ -7,6 +7,14 @@ export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
  * A constant artifical id to use around the app, to avoid inconsistencies.
  */
 export const ROOT_ID = 'root';
+export const ROOT_NODE: ExpenseCategoryDto = {
+	id: ROOT_ID,
+	parentId: null,
+	isGroup: true,
+	labelEn: '',
+	labelAr: '',
+	description: '',
+};
 
 /**
  * Converts an array of ExpenseCategoryDto to d3.HierarchyNode
@@ -89,13 +97,7 @@ export const injectRoot = (categories: ExpenseCategoryDto[]) => {
 	});
 
 	// add the artificial root node
-	const rootNode: ExpenseCategoryDto = {
-		id: ROOT_ID,
-		labelEn: '',
-		parentId: null,
-	};
-
-	updated.push(rootNode);
+	updated.push(ROOT_NODE);
 	return updated;
 };
 
