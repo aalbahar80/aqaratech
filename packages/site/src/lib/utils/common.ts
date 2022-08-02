@@ -66,47 +66,6 @@ export const forceDateToInput = (date: Date | string | number): string => {
 	}
 };
 
-// TODO: DRY this with Entity classes once the following is fixed:
-// Problem: importing property.class in a test file breaks vscode playwright extenstion
-export const getAddress = <
-	T extends {
-		area?: string | null;
-		block?: string | null;
-		street?: string | null;
-		number?: string | null;
-	},
->(
-	item: T,
-	full = false,
-) => {
-	if (full) {
-		return concatIfExists([
-			item.area,
-			'قطعة',
-			item.block,
-			item.street,
-			'مبنى',
-			item.number,
-		]);
-	}
-	return concatIfExists([item.area, 'ق', item.block, 'م', item.number]);
-};
-
-export const getUnitLabel = <
-	T extends { type?: string | null; unitNumber?: string | null },
->(
-	item: T,
-) => {
-	if (item.type && item.unitNumber) {
-		return concatIfExists([item.type, item.unitNumber]);
-	} else if (item.unitNumber) {
-		return item.unitNumber;
-	} else {
-		console.warn('no type or unitNumber');
-		return '';
-	}
-};
-
 export const startCase = (str: string): string =>
 	str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
 		return str.toUpperCase();

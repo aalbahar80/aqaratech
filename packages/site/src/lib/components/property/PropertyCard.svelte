@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getAddress } from '$lib/utils/get-label';
 	import type { PropertyDto } from '@self/sdk';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -24,7 +23,7 @@
 						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 						aria-hidden="true"
 					/>
-					{getAddress(property)}
+					{property.breadcrumbs.property.label}
 				</p>
 			</div>
 		</div>

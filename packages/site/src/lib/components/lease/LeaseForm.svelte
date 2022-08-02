@@ -4,8 +4,6 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
-	import { getUnitLabel } from '$lib/utils/common';
-	import { getAddress } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/lease.schema';
 	import type {
 		LeaseDto,
@@ -75,7 +73,7 @@
 						autoInit: true,
 						options: properties.results.map((property) => ({
 							value: property.id,
-							label: getAddress(property),
+							label: property.breadcrumbs.property.label,
 							meta: { parentId: property.portfolioId },
 						})),
 					}),
@@ -87,7 +85,7 @@
 						autoInit: true,
 						options: units.results.map((unit) => ({
 							value: unit.id,
-							label: getUnitLabel(unit),
+							label: unit.breadcrumbs.unit.label,
 							meta: { parentId: unit.propertyId },
 						})),
 					}),

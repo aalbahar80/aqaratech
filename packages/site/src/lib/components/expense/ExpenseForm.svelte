@@ -5,7 +5,6 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toOptions } from '$lib/utils/expense-type-options';
-	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
 		ExpenseCategoryDto,
@@ -74,7 +73,7 @@
 						autoInit: true,
 						options: properties.results.map((property) => ({
 							value: property.id,
-							label: getAddress(property),
+							label: property.breadcrumbs.property.label,
 							meta: { parentId: property.portfolioId },
 						})),
 					}),
@@ -86,7 +85,7 @@
 						autoInit: true,
 						options: units.results.map((unit) => ({
 							value: unit.id,
-							label: getUnitLabel(unit),
+							label: unit.breadcrumbs.unit.label,
 							meta: { parentId: unit.propertyId },
 						})),
 					}),

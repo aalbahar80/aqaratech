@@ -50,7 +50,6 @@
 		}),
 		rentWords: inWords(lease.monthlyRent),
 		start: new Date(lease.start).toLocaleDateString(),
-		// unitAddress: getAddress(unit.breadcrumbs?.property.label),
 		unitAddress: unit.breadcrumbs.property.label,
 		unitNumber: unit.unitNumber,
 		unitType: unit.type ?? '',

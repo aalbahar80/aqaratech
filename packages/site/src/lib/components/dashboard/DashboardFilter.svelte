@@ -8,7 +8,6 @@
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
-	import { getAddress, getUnitLabel } from '$lib/utils/get-label';
 	import type { PropertyDto, UnitDto } from '@self/sdk';
 
 	export let properties: PropertyDto[];
@@ -22,7 +21,7 @@
 	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
 
 	const propertyOptions = properties.map((property) => ({
-		label: getAddress(property),
+		label: property.breadcrumbs.property.label,
 		value: property.id,
 	}));
 
@@ -30,11 +29,11 @@
 		? units
 				.filter((unit) => unit.propertyId === selectedProperty)
 				.map((unit) => ({
-					label: getUnitLabel(unit),
+					label: unit.breadcrumbs.unit.label,
 					value: unit.id,
 				}))
 		: units.map((unit) => ({
-				label: getUnitLabel(unit),
+				label: unit.breadcrumbs.unit.label,
 				value: unit.id,
 		  }));
 
