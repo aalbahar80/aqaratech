@@ -6,7 +6,7 @@
 	export let expenses: PaginatedExpenseDto;
 	export let categories: ExpenseCategoryDto[];
 
-	const root = d3
+	$: root = d3
 		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id.toString())
 		.parentId((d) => {
@@ -15,7 +15,7 @@
 			return categories.find((c) => c.id === d.parentId)?.id.toString();
 		})([{ id: 'root', parentId: null, labelEn: '' }, ...categories]);
 
-	root.sum((d) => {
+	$: root.sum((d) => {
 		// get sum of all expenses for this category
 		const sum = expenses.results.reduce((acc, cur) => {
 			if (cur.expenseType?.id === d.id) {
@@ -26,7 +26,7 @@
 		return sum;
 	});
 
-	root.sort((a, b) => {
+	$: root.sort((a, b) => {
 		return (b.value || 0) - (a.value || 0);
 	});
 
@@ -35,4 +35,6 @@
 </script>
 
 <!-- TODO prevent entering expenses in non-root nodes. Use a `General Opex` or `Other Opex` category instead -->
-<TreemapChart hierarchy={root} {getLabel} />
+{#key expenses}
+	<TreemapChart hierarchy={root} {getLabel} />
+{/key}

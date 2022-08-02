@@ -5,7 +5,7 @@
 	// export let expenses: PaginatedExpenseDto;
 	export let expenses;
 
-	const rollupData = d3.rollup(
+	$: rollupData = d3.rollup(
 		expenses.results,
 		// reduceFn,
 		(d) => d3.sum(d, (e) => e.amount),
@@ -15,7 +15,7 @@
 		(d) => `${d.postAt.split('T')[0]}: ${d.expenseType?.labelEn}` || '',
 	);
 
-	const hierarchyData = d3
+	$: hierarchyData = d3
 		.hierarchy(
 			[null, rollupData],
 			// childrenAccessorFn,
@@ -25,4 +25,6 @@
 		.sort((a, b) => b.value - a.value);
 </script>
 
-<TreemapChart hierarchy={hierarchyData} getLabel={(node) => node.data[0]} />
+{#key expenses}
+	<TreemapChart hierarchy={hierarchyData} getLabel={(node) => node.data[0]} />
+{/key}
