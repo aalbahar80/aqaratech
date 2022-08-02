@@ -31,21 +31,18 @@ export const getSession: GetSession = async ({ locals }) => {
 	let isAuthenticated = false;
 	if (locals.idToken) {
 		try {
-			await validateToken(locals.idToken, 'idToken'); // TODO ensure this throws if it fails
+			await validateToken(locals.idToken);
 			isAuthenticated = true;
 		} catch (e) {
 			console.error(e);
 			Sentry.captureException(e);
 		}
 	}
-	// TOOD: if validateToken fails, we should set both user and isAuthenticated to false
-	// otherwise create a two tiered user inteface like backend
+	// If idToken validation fails, we set both user and isAuthenticated to false
+	// even though locals.user was populated using a valid accessToken.
 	return {
 		user: isAuthenticated ? locals.user : undefined,
 		accessToken: locals.accessToken,
-		// TODO remove xRoleId and use user.role.id instead.
-		// Ensure it persists role changes. Works for new signups.
-		// also change in layout/rolechange endpoint/and api.ts
 		isAuthenticated,
 	};
 };
@@ -61,10 +58,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
-	const user = await getUser({
-		token: cookies.idToken,
-		selectedRoleId: cookies.xRoleId,
-	});
+	const user = cookies.accessToken
+		? await getUser({
+				token: cookies.accessToken,
+				selectedRoleId: cookies.xRoleId,
+		  })
+		: undefined;
 
 	event.locals.idToken = cookies.idToken || '';
 	event.locals.accessToken = cookies.accessToken || '';

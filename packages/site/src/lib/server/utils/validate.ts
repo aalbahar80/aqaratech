@@ -3,20 +3,13 @@ import { createLocalJWKSet, jwtVerify } from 'jose';
 
 const { authConfig } = environment;
 
-export const validateToken = async (
-	token: string,
-	tokenType: 'idToken' | 'accessToken' = 'idToken',
-) => {
+/**
+ * Validates idtoken and returns payload.
+ */
+export const validateToken = async (token: string) => {
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
-	const audience =
-		tokenType === 'accessToken'
-			? authConfig.AUTH0_API_AUDIENCE
-			: authConfig.AUTH0_CLIENT_ID;
-	console.log(token);
-	console.log('validating:----------- ' + tokenType);
-	console.log(audience);
 	const { payload } = await jwtVerify(token, JWKS, {
-		audience,
+		audience: authConfig.AUTH0_CLIENT_ID,
 		issuer: `${authConfig.AUTH0_DOMAIN}/`,
 		algorithms: ['RS256'],
 	});
