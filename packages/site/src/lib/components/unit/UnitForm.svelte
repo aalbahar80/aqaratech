@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
-	import { unitTypeOptions } from '$lib/config/constants';
 	import { labelHint } from '$lib/constants/form-hints';
+	import { unitTypeOptions } from '$lib/constants/unit-options';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
