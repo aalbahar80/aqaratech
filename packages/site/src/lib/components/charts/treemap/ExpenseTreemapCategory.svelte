@@ -32,9 +32,12 @@
 
 	const getLabel = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
 		node.data.labelEn;
+
+	const getLink = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
+		`/expenses/${node.id}`;
 </script>
 
 <!-- TODO prevent entering expenses in non-root nodes. Use a `General Opex` or `Other Opex` category instead -->
 {#key expenses}
-	<TreemapChart hierarchy={root} {getLabel} />
+	<TreemapChart hierarchy={root} {getLabel} {getLink} />
 {/key}

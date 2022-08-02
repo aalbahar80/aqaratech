@@ -12,7 +12,7 @@
 		// groupingFns,
 		(d) => d.breadcrumbs?.property?.label || 'Unspecified Property',
 		(d) => d.breadcrumbs?.unit?.label || 'Unspecified Unit',
-		(d) => `${d.postAt.split('T')[0]}: ${d.expenseType?.labelEn}` || '',
+		(d) => `${d.expenseType?.labelEn}` || '',
 	);
 
 	$: hierarchyData = d3
@@ -26,5 +26,9 @@
 </script>
 
 {#key expenses}
-	<TreemapChart hierarchy={hierarchyData} getLabel={(node) => node.data[0]} />
+	<TreemapChart
+		hierarchy={hierarchyData}
+		getLabel={(node) => node.data[0]}
+		getLink={(node) => `/expenses/${node.id}`}
+	/>
 {/key}
