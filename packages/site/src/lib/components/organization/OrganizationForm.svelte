@@ -34,11 +34,12 @@
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,
-			label: 'Organization Name',
+			label: 'Organization Name (full)',
 		}),
 		new Field('label', {
 			value: data?.label,
 			hint: labelHint,
+			label: 'Label (short name)',
 		}),
 	];
 </script>
