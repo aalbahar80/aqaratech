@@ -3,6 +3,9 @@ import type { ExpenseCategoryDto } from '@self/sdk';
 import * as d3 from 'd3';
 
 export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
+/**
+ * A constant artifical rootId to use around the app, to avoid inconsistencies.
+ */
 export const rootId = 'root';
 
 /**
