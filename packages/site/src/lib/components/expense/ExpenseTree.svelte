@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
-	import { rootId, type ExpenseNode } from '$lib/utils/expense-type-options';
+	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -56,7 +56,7 @@
 </script>
 
 <!-- The text label. Doesn't affect dragging/dropping zones. -->
-{#if node.id !== rootId}
+{#if node.id !== ROOT_ID}
 	<b
 		id={node.data.id}
 		class={classes(

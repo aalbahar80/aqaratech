@@ -4,9 +4,9 @@ import * as d3 from 'd3';
 
 export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
 /**
- * A constant artifical rootId to use around the app, to avoid inconsistencies.
+ * A constant artifical id to use around the app, to avoid inconsistencies.
  */
-export const rootId = 'root';
+export const ROOT_ID = 'root';
 
 /**
  * Converts an array of ExpenseCategoryDto to d3.HierarchyNode
@@ -74,7 +74,7 @@ export const fromHeirarchy = ({
  * Convert any node with a parentId of `null` to have a parentId of 'root'.
  */
 export const injectRoot = (categories: ExpenseCategoryDto[]) => {
-	const hasRoot = categories.some((c) => c.id === rootId);
+	const hasRoot = categories.some((c) => c.id === ROOT_ID);
 	if (hasRoot) {
 		return categories;
 	}
@@ -83,14 +83,14 @@ export const injectRoot = (categories: ExpenseCategoryDto[]) => {
 	const updated = categories.map((c) => {
 		// check for both null and undefined
 		if (c.parentId === null || c.parentId === undefined) {
-			return { ...c, parentId: rootId };
+			return { ...c, parentId: ROOT_ID };
 		}
 		return c;
 	});
 
 	// add the artificial root node
 	const rootNode: ExpenseCategoryDto = {
-		id: rootId,
+		id: ROOT_ID,
 		labelEn: '',
 		parentId: null,
 	};
@@ -104,16 +104,16 @@ export const injectRoot = (categories: ExpenseCategoryDto[]) => {
  * Convert any node with a parentId of 'root' back to it's original parentId of `null`.
  */
 export const dejectRoot = (categories: ExpenseCategoryDto[]) => {
-	const hasRoot = categories.some((c) => c.id === rootId);
-	const hasRootChildren = categories.some((c) => c.parentId === rootId);
+	const hasRoot = categories.some((c) => c.id === ROOT_ID);
+	const hasRootChildren = categories.some((c) => c.parentId === ROOT_ID);
 	if (!hasRoot || !hasRootChildren) return categories;
 
 	// remove the root node
-	const updated = categories.filter((c) => c.id !== rootId);
+	const updated = categories.filter((c) => c.id !== ROOT_ID);
 
 	// convert any node with a parentId of 'root' back to it's original parentId of `null`
 	updated.forEach((c) => {
-		if (c.parentId === rootId) c.parentId = null;
+		if (c.parentId === ROOT_ID) c.parentId = null;
 	});
 
 	return updated;
@@ -128,7 +128,7 @@ export const toOptions = (categories: ExpenseCategoryDto[]): Option[] => {
 	const options: Option[] = [];
 
 	root.eachBefore((leaf) => {
-		if (leaf.id === rootId) return;
+		if (leaf.id === ROOT_ID) return;
 		const labelPrefix =
 			leaf.depth > 1
 				? '\u00A0\u00A0\u00A0\u00A0\u00A0'.repeat(leaf.depth - 1)

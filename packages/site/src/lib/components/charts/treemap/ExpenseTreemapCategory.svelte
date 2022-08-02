@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import { rootId } from '$lib/utils/expense-type-options';
+	import { ROOT_ID } from '$lib/utils/expense-type-options';
 	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '@self/sdk';
 	import * as d3 from 'd3';
 
@@ -11,11 +11,10 @@
 		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id.toString())
 		.parentId((d) => {
-			// use rootId constant
-			if (d.id === rootId) return null;
-			if (!d.parentId) return rootId;
+			if (d.id === ROOT_ID) return null;
+			if (!d.parentId) return ROOT_ID;
 			return categories.find((c) => c.id === d.parentId)?.id.toString();
-		})([{ id: rootId, parentId: null, labelEn: '' }, ...categories]);
+		})([{ id: ROOT_ID, parentId: null, labelEn: '' }, ...categories]);
 
 	$: root.sum((d) => {
 		// get sum of all expenses for this category
