@@ -26,9 +26,10 @@ interface ImportMeta {
 declare namespace App {
 	interface Locals {
 		user: import('$models/types/auth.type').User | undefined;
-		accessToken: string;
-		idToken: string;
-		xRoleId: string;
+		accessToken: string | undefined;
+		idToken: string | undefined;
+		xRoleId: string | undefined;
+		isAuthenticated: boolean;
 	}
 
 	// interface Platform {}

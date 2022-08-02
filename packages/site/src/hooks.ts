@@ -28,22 +28,12 @@ if (
 }
 
 export const getSession: GetSession = async ({ locals }) => {
-	let isAuthenticated = false;
-	if (locals.idToken) {
-		try {
-			await validateToken(locals.idToken);
-			isAuthenticated = true;
-		} catch (e) {
-			console.error(e);
-			Sentry.captureException(e);
-		}
-	}
 	// If idToken validation fails, we set both user and isAuthenticated to false
 	// even though locals.user was populated using a valid accessToken.
 	return {
-		user: isAuthenticated ? locals.user : undefined,
-		accessToken: locals.accessToken,
-		isAuthenticated,
+		user: locals.isAuthenticated ? locals.user : undefined,
+		accessToken: locals.accessToken ?? '',
+		isAuthenticated: locals.isAuthenticated,
 	};
 };
 
@@ -56,26 +46,44 @@ export const handle: Handle = async ({ event, resolve }) => {
 		} ${event.request.headers.get('user-agent')}`,
 	);
 
-	// TODO cast cookie type to avoid typos. OpenApi Auth0 type?
 	const cookies = parse(event.request.headers.get('cookie') || '');
-	const user = cookies.accessToken
-		? await getUser({
-				token: cookies.accessToken,
-				selectedRoleId: cookies.xRoleId,
-		  })
-		: undefined;
 
-	event.locals.idToken = cookies.idToken || '';
-	event.locals.accessToken = cookies.accessToken || '';
-	event.locals.user = user;
+	// Validate idToken, set locals.isAuthenticated to true if valid
+	let isAuthenticated = false;
+	if (cookies.idToken) {
+		try {
+			await validateToken(cookies.idToken);
+			isAuthenticated = true;
+			// only set idToken in locals if it is valid
+			event.locals.idToken = cookies.idToken;
+		} catch (e) {
+			console.error(e);
+			Sentry.captureException(e);
+		}
+	}
+	event.locals.isAuthenticated = isAuthenticated;
 
-	// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
-	// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
-	// Additionally, if the user never changes roles,
-	// this will take care of setting & persisting the default role.
-	event.locals.xRoleId = user?.role.id || '';
+	// attempt to get user from backend, set in locals.user
+	// We don't validate accessToken in the frontend. We only pass it along to the server.
+	if (cookies.accessToken) {
+		// Don't try to get user if we don't have an accessToken
+		// TODO what about public pages? what about public pages when a user is signed in?
+		const user = await getUser({
+			token: cookies.accessToken,
+			selectedRoleId: cookies.xRoleId,
+		});
+		event.locals.user = user;
+		event.locals.accessToken = cookies.accessToken;
+
+		// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
+		// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
+		// Additionally, if the user never changes roles,
+		// this will take care of setting & persisting the default role.
+		event.locals.xRoleId = user?.role.id;
+	}
 
 	const response = await resolve(event);
+
 	console.log(
 		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
 			event.url.pathname
@@ -84,38 +92,45 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}`,
 	);
 
-	response.headers.append(
-		'Set-Cookie',
-		serialize('idToken', event.locals.idToken, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	// only serialize cookies if values are truthy from locals. Don't set empty cookies
+	if (event.locals.idToken) {
+		response.headers.append(
+			'Set-Cookie',
+			serialize('idToken', event.locals.idToken, {
+				httpOnly: true,
+				path: '/',
+				maxAge: 60 * 60 * 24 * 7,
+				sameSite: 'none', // TODO research
+				secure: true,
+			}),
+		);
+	}
 
-	response.headers.append(
-		'Set-Cookie',
-		serialize('accessToken', event.locals.accessToken, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	if (event.locals.accessToken) {
+		response.headers.append(
+			'Set-Cookie',
+			serialize('accessToken', event.locals.accessToken, {
+				httpOnly: true,
+				path: '/',
+				maxAge: 60 * 60 * 24 * 7,
+				sameSite: 'none', // TODO research
+				secure: true,
+			}),
+		);
+	}
 
-	response.headers.append(
-		'Set-Cookie',
-		serialize('xRoleId', event.locals.xRoleId, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	if (event.locals.xRoleId) {
+		response.headers.append(
+			'Set-Cookie',
+			serialize('xRoleId', event.locals.xRoleId, {
+				httpOnly: true,
+				path: '/',
+				maxAge: 60 * 60 * 24 * 7,
+				sameSite: 'none', // TODO research
+				secure: true,
+			}),
+		);
+	}
 
 	if (environment.envName !== 'prod') {
 		response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
