@@ -15,6 +15,7 @@
 	import { cloneDeep } from 'lodash-es';
 	import type { LP } from 'src/types/load-props';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
+	import Fa6SolidPlus from '~icons/fa6-solid/plus';
 
 	export const load = async ({ stuff }: LoadEvent<{ id: string }>) => {
 		const categories = await stuff.api!.expenseCategories.findAll();
@@ -36,8 +37,10 @@
 
 <a
 	href={`/organizations/${$session.user?.role.organizationId}/expenseCategories/new`}
+	class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 >
-	new form
+	<Fa6SolidPlus class="-ml-1 mr-2 hidden h-5 w-5 sm:block" />
+	Create new category
 </a>
 <div class="flex flex-auto justify-between">
 	<div class="w-full">
