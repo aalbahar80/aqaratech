@@ -19,6 +19,7 @@ const getOrigin = (localhostAllowed = true): string => {
 	} else if (process.env.AUTH0_CALLBACK_URL) {
 		return `https://${process.env.AUTH0_CALLBACK_URL}`;
 	} else if (process.env.VITE_SITE_URL) {
+		// replaces URL_ORIGIN 's functionality
 		return process.env.VITE_SITE_URL;
 	} else if (!localhostAllowed) {
 		return 'http://127.0.0.1:3000';
