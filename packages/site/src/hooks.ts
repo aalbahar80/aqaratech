@@ -92,45 +92,40 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}`,
 	);
 
-	// only serialize cookies if values are truthy from locals. Don't set empty cookies
-	if (event.locals.idToken) {
-		response.headers.append(
-			'Set-Cookie',
-			serialize('idToken', event.locals.idToken, {
-				httpOnly: true,
-				path: '/',
-				maxAge: 60 * 60 * 24 * 7,
-				sameSite: 'none', // TODO research
-				secure: true,
-			}),
-		);
-	}
+	const maxAge = 60 * 60 * 24 * 7;
 
-	if (event.locals.accessToken) {
-		response.headers.append(
-			'Set-Cookie',
-			serialize('accessToken', event.locals.accessToken, {
-				httpOnly: true,
-				path: '/',
-				maxAge: 60 * 60 * 24 * 7,
-				sameSite: 'none', // TODO research
-				secure: true,
-			}),
-		);
-	}
+	response.headers.append(
+		'Set-Cookie',
+		serialize('idToken', event.locals.idToken || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.idToken ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
 
-	if (event.locals.xRoleId) {
-		response.headers.append(
-			'Set-Cookie',
-			serialize('xRoleId', event.locals.xRoleId, {
-				httpOnly: true,
-				path: '/',
-				maxAge: 60 * 60 * 24 * 7,
-				sameSite: 'none', // TODO research
-				secure: true,
-			}),
-		);
-	}
+	response.headers.append(
+		'Set-Cookie',
+		serialize('accessToken', event.locals.accessToken || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.accessToken ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
+
+	response.headers.append(
+		'Set-Cookie',
+		serialize('xRoleId', event.locals.xRoleId || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.xRoleId ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
 
 	if (environment.envName !== 'prod') {
 		response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod

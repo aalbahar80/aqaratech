@@ -6,9 +6,9 @@ const { authConfig } = environment;
 export const GET: RequestHandler = (req) => {
 	//  Sets the user equal to null (local sign out)
 	req.locals.user = undefined;
-	req.locals.accessToken = '';
-	req.locals.idToken = '';
-	req.locals.xRoleId = '';
+	req.locals.accessToken = undefined;
+	req.locals.idToken = undefined;
+	req.locals.xRoleId = undefined;
 
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;

@@ -49,7 +49,7 @@ export const GET: RequestHandler = async (req) => {
 	req.locals.accessToken = tokens.access_token;
 
 	// TODO shouldn't add idToken to locals, instead extract user then discard it
-	req.locals.idToken = tokens.id_token || '';
+	req.locals.idToken = tokens.id_token;
 
 	// If user exists in db, we can use his accesstoken to get his profile
 	const user = await getUser({ token: req.locals.accessToken });
