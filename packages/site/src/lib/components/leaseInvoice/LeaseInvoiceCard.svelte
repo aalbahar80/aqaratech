@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -61,31 +61,37 @@
 								label: 'View',
 								href: `/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`,
 							},
-							{
-								icon: invoice.isPaid ? X : Check,
-								label: invoice.isPaid ? 'Mark as unpaid' : 'Mark as paid',
-								onClick: async () => {
-									try {
-										await $page.stuff.api.leaseInvoices.update({
-											id: invoice.id,
-											updateLeaseInvoiceDto: {
-												isPaid: !invoice.isPaid,
-												paidAt: invoice.isPaid
-													? null
-													: new Date().toISOString(),
-											},
-										});
+							...($session.user?.role.roleType === 'ORGADMIN'
+								? [
+										{
+											icon: invoice.isPaid ? X : Check,
+											label: invoice.isPaid ? 'Mark as unpaid' : 'Mark as paid',
+											onClick: async () => {
+												try {
+													await $page.stuff.api.leaseInvoices.update({
+														id: invoice.id,
+														updateLeaseInvoiceDto: {
+															isPaid: !invoice.isPaid,
+															paidAt: invoice.isPaid
+																? null
+																: new Date().toISOString(),
+														},
+													});
 
-										addSuccessToast('Invoice updated');
-										invoice = await $page.stuff.api.leaseInvoices.findOne({
-											id: invoice.id,
-										});
-									} catch (e) {
-										console.error(e);
-										handleApiError(e);
-									}
-								},
-							},
+													addSuccessToast('Invoice updated');
+													invoice = await $page.stuff.api.leaseInvoices.findOne(
+														{
+															id: invoice.id,
+														},
+													);
+												} catch (e) {
+													console.error(e);
+													handleApiError(e);
+												}
+											},
+										},
+								  ]
+								: []),
 						]}
 					/>
 				</div>
