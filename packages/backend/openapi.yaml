@@ -3328,6 +3328,7 @@ components:
         roles:
           type: array
           items:
+            title: ValidatedRoleDto
             allOf:
               - $ref: '#/components/schemas/RoleDto'
               - type: object

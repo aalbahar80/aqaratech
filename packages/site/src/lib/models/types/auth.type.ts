@@ -1,4 +1,4 @@
-import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
+import type { ValidatedRoleDto, ValidatedUserDto } from '@self/sdk';
 import type { JSONWebKeySet } from 'jose';
 
 type AuthConfigKeys =
@@ -32,7 +32,7 @@ export interface UserMeta {
 	navLinks?: NavbarItem[];
 }
 
-export type RoleSK = ValidatedUserDtoRolesInner & {
+export type RoleSK = ValidatedRoleDto & {
 	meta: UserMeta;
 };
 

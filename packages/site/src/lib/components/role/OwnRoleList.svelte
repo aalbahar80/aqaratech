@@ -3,11 +3,11 @@
 	import OwnRoleCard from '$lib/components/role/OwnRoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import type { EntityName } from '$lib/constants/names';
-	import type { RoleDto } from '@self/sdk';
+	import type { ValidatedRoleDto } from '@self/sdk';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
-	export let roles: RoleDto[];
+	export let roles: ValidatedRoleDto[];
 
 	const formUrl = '/organizations/new';
 

@@ -1,7 +1,7 @@
 import type { UserMeta } from '$lib/models/types/auth.type';
-import type { ValidatedUserDtoRolesInner } from '@self/sdk';
+import type { ValidatedRoleDto } from '@self/sdk';
 
-export const getRoleMeta = (role: ValidatedUserDtoRolesInner): UserMeta => {
+export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 	if (role.roleType === 'ORGADMIN') {
 		return {
 			roleLabel: 'Organization',

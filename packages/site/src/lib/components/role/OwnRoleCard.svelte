@@ -1,15 +1,17 @@
 <script lang="ts">
 	import Badge from '$lib/components/Badge.svelte';
 	import { getRoleMeta } from '$lib/server/utils/get-role-meta';
-	import type { RoleDto } from '@self/sdk';
+	import type { ValidatedRoleDto } from '@self/sdk';
 	import BxsBusiness from '~icons/bxs/business';
 	import MdiAccount from '~icons/mdi/account';
 	import MdiAccountTie from '~icons/mdi/account-tie';
 
-	export let role: RoleDto;
+	export let role: ValidatedRoleDto;
 	export let icons: any[];
+	console.log({ role }, 'OwnRoleCard.svelte ~ 11');
 
 	const meta = getRoleMeta(role);
+	console.log({ meta }, 'OwnRoleCard.svelte ~ 13');
 </script>
 
 <a href={`/auth/roles/${role.id}`} class="block hover:bg-gray-50">

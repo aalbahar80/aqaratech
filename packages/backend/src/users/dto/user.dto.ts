@@ -44,6 +44,7 @@ export class ValidatedUserDto extends UserDto {
   @ApiProperty({
     type: 'array',
     items: {
+      title: 'ValidatedRoleDto',
       allOf: [
         { $ref: '#/components/schemas/RoleDto' },
         {
