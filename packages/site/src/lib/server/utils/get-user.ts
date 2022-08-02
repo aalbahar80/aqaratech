@@ -12,7 +12,7 @@ const getDefaultRole = (roles: ValidatedRoleDto[]): RoleSK => {
 
 	if (!defaultRole) {
 		// TODO: handle new user signups/invitations
-		throw new Error('User has no roles');
+		throw new Error('User has no roles.');
 	}
 	return {
 		...defaultRole,
@@ -65,7 +65,7 @@ export const getUser = async ({
 
 	// TODO dedupe error
 	if (!role) {
-		throw new Error('User has no roles');
+		throw new Error('Unable to find role.');
 	}
 
 	const user: User = {
