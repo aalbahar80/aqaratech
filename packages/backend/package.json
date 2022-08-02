@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@casl/ability": "6.0.0",
-    "@casl/prisma": "2.0.0-alpha.1",
+    "@casl/prisma": "1.0.4",
     "@nestjs/axios": "0.1.0",
     "@nestjs/common": "9.0.7",
     "@nestjs/config": "2.2.0",

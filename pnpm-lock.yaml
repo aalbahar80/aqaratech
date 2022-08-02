@@ -11,7 +11,7 @@ importers:
   packages/backend:
     specifiers:
       '@casl/ability': 6.0.0
-      '@casl/prisma': 2.0.0-alpha.1
+      '@casl/prisma': 1.0.4
       '@nestjs/axios': 0.1.0
       '@nestjs/cli': 9.0.0
       '@nestjs/common': 9.0.7
@@ -77,7 +77,7 @@ importers:
       typescript: 4.7.4
     dependencies:
       '@casl/ability': 6.0.0
-      '@casl/prisma': 2.0.0-alpha.1_dm2kwd2au6hytwlyhdhk5gkxem
+      '@casl/prisma': 1.0.4_dm2kwd2au6hytwlyhdhk5gkxem
       '@nestjs/axios': 0.1.0_4dbiavrsou3qkbphku77c4yu4y
       '@nestjs/common': 9.0.7_mgy7w2bm3yhmntrbe3boyroj6m
       '@nestjs/config': 2.2.0_4dbiavrsou3qkbphku77c4yu4y
@@ -2060,19 +2060,16 @@ packages:
       '@ucast/mongo2js': 1.3.3
     dev: false
 
-  /@casl/prisma/2.0.0-alpha.1_dm2kwd2au6hytwlyhdhk5gkxem:
-    resolution: {integrity: sha512-4gIOyymEgO+2tN17u5WyDAzcVbsC7j8kBGSs0ZZaCwzdDmLsimzUeKZBLQrg/mVgXdO+9GiMBfnPWcQMB+hLsg==}
+  /@casl/prisma/1.0.4_dm2kwd2au6hytwlyhdhk5gkxem:
+    resolution: {integrity: sha512-l7I7vmx0WnOW2+6p7+IO8Horktu8h9+tjk9GaTDOrjBCHC5ev71yTjWrG3Rq2KTcnfzPkGRve5rlkxVcRLMd1Q==}
     peerDependencies:
-      '@casl/ability': ^5.3.0
+      '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0
     dependencies:
       '@casl/ability': 6.0.0
       '@prisma/client': 4.1.1_prisma@4.1.1
-      '@prisma/generator-helper': 4.1.0
       '@ucast/core': 1.10.1
       '@ucast/js': 3.0.2
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@cloudflare/workers-types/3.14.1:
@@ -2985,16 +2982,6 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /@prisma/debug/4.1.0:
-    resolution: {integrity: sha512-lD3ZH3911td+Bh7Lq+/+pOhCr750e52UhPw9QWJwP0DH0HR71am53NwuRa2vmvwwG0N2XeTz5x0S5A5rsCPY4g==}
-    dependencies:
-      '@types/debug': 4.1.7
-      debug: 4.3.4
-      strip-ansi: 6.0.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@prisma/engine-core/3.11.0:
     resolution: {integrity: sha512-Mz/NnvVSbIaLIMFYKiXoFpMgtCQLTuaSXZXmUj/YKkMCUpYg29+rdnecz3hO4Q9eiMmNF14bLj9MDawtiDTXEw==}
     dependencies:
@@ -3058,17 +3045,6 @@ packages:
       chalk: 4.1.2
       cross-spawn: 7.0.3
     dev: true
-
-  /@prisma/generator-helper/4.1.0:
-    resolution: {integrity: sha512-isllZUQhf8zotV77mADf1WOoSdKVeCaRVzfgwUw0ZYaDmEx1AJqfAzrZPNgy98soQROOEpE/Hcr3lmesbxrz9Q==}
-    dependencies:
-      '@prisma/debug': 4.1.0
-      '@types/cross-spawn': 6.0.2
-      chalk: 4.1.2
-      cross-spawn: 7.0.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@prisma/get-platform/3.11.0-48.b371888aaf8f51357c7457d836b86d12da91658b:
     resolution: {integrity: sha512-+CpsuTYo9ng8P2e2RV8S9x+sAGQsxun1mXk22KKkIAxYrq2EbEnpQIqyGCfbO9SOdf/8CjE7PtH1EYwPAFaLkQ==}
@@ -3665,6 +3641,7 @@ packages:
     resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
     dependencies:
       '@types/node': 18.6.3
+    dev: true
 
   /@types/d3-array/3.0.3:
     resolution: {integrity: sha512-Reoy+pKnvsksN0lQUlcH6dOGjRZ/3WRwXR//m+/8lt1BXeI4xyaUZoqULNjyXXRuh0Mj4LNpkCvhUpQlY3X5xQ==}
@@ -3853,6 +3830,7 @@ packages:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
       '@types/ms': 0.7.31
+    dev: true
 
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
@@ -3982,6 +3960,7 @@ packages:
 
   /@types/ms/0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
+    dev: true
 
   /@types/node/18.0.3:
     resolution: {integrity: sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==}
@@ -5645,6 +5624,7 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: true
 
   /crypto-random-string/2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
@@ -8388,6 +8368,7 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: true
 
   /istanbul-lib-coverage/3.2.0:
     resolution: {integrity: sha512-eOeJ5BHCmHYvQK7xt9GkdHuzuCGS1Y6g9Gvnx3Ym33fz/HpLRYxiS0wHNr+m/MBC8B647Xt608vCDEvhl9c6Mw==}
@@ -9931,6 +9912,7 @@ packages:
   /path-key/3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
+    dev: true
 
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
@@ -11134,10 +11116,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       shebang-regex: 3.0.0
+    dev: true
 
   /shebang-regex/3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+    dev: true
 
   /shell-quote/1.7.3:
     resolution: {integrity: sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==}
@@ -12814,6 +12798,7 @@ packages:
     hasBin: true
     dependencies:
       isexe: 2.0.0
+    dev: true
 
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
