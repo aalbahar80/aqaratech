@@ -1,4 +1,5 @@
 <script lang="ts">
+	// TODO rm prod
 	import { browser, dev, prerendering } from '$app/env';
 	import { assets, base } from '$app/paths';
 	import { navigating, page, session, updated } from '$app/stores';
