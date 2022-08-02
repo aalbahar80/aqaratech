@@ -1,4 +1,5 @@
 import { differenceInCalendarDays } from 'date-fns';
+//@ts-ignore
 import { formatInTimeZone } from 'date-fns-tz/esm';
 
 export const getProgress = (start: string, end: string, ref?: Date): number => {

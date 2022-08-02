@@ -1,3 +1,5 @@
+//@ts-nocheck
+// TODO rm after moving to /backend
 import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
 import prismaClient from '$lib/server/prismaClient';
 import { getMFUrl } from '$lib/services/myfatoorah';

@@ -120,7 +120,7 @@ export const entityNameMap: EntityNameMap = {
 	units: unit,
 	leases: lease,
 	leaseInvoices: invoice,
-	// maintenanceOrders: maintenanceOrder,
+	maintenanceOrders: maintenanceOrder,
 	expenses: expense,
 	expenseCategories: expenseCategory,
 };

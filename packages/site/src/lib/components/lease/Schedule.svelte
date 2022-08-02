@@ -24,7 +24,9 @@
 	let schedule = getSchedule(12);
 
 	// set startLimit to be one day before lease start date
-	const startLimit = new Date(lease.start.getTime() - 1000 * 60 * 60 * 24);
+	const startLimit = new Date(
+		new Date(lease.start).getTime() - 1000 * 60 * 60 * 24,
+	);
 
 	const onSubmit = async () => {
 		const created = await $page.stuff.api.leases.createInvoices({

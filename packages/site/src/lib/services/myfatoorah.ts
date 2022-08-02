@@ -1,3 +1,5 @@
+//@ts-nocheck
+// TODO rm after moving to /backend
 import { environment } from '$environment';
 import prismaClient from '$lib/server/prismaClient';
 import { z } from 'zod';
