@@ -69,10 +69,17 @@
 			<span class="flex flex-grow flex-col">
 				<SwitchLabel
 					as="span"
-					class="text-sm font-medium text-gray-700"
+					class="flex items-center gap-2 text-sm font-medium text-gray-700"
 					passive
 				>
 					{field.label}
+					{#if field.hint}
+						<div use:tippyHint={{ content: field.hint }}>
+							<Fa6SolidCircleInfo
+								class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
+							/>
+						</div>
+					{/if}
 				</SwitchLabel>
 				<SwitchDescription as="span" class="text-sm text-gray-500">
 					{field.description}
