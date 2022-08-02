@@ -1,3 +1,4 @@
+//@ts-nocheck
 export const shortcut = (node, params) => {
 	let handler;
 	const removeHandler = () => window.removeEventListener('keydown', handler),

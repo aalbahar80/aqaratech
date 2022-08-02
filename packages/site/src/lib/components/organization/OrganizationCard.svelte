@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { OrganizationDto } from '@self/sdk';
-	import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	// import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
+	// import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let organization: OrganizationDto;
 </script>
