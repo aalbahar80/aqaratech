@@ -10,6 +10,7 @@
 		.stratify<ExpenseCategoryDto>()
 		.id((d) => d.id.toString())
 		.parentId((d) => {
+			// use rootId constant
 			if (d.id === 'root') return null;
 			if (!d.parentId) return 'root';
 			return categories.find((c) => c.id === d.parentId)?.id.toString();
@@ -32,12 +33,9 @@
 
 	const getLabel = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
 		node.data.labelEn;
-
-	const getLink = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
-		`/expenses/${node.id}`;
 </script>
 
 <!-- TODO prevent entering expenses in non-root nodes. Use a `General Opex` or `Other Opex` category instead -->
 {#key expenses}
-	<TreemapChart hierarchy={root} {getLabel} {getLink} />
+	<TreemapChart hierarchy={root} {getLabel} />
 {/key}

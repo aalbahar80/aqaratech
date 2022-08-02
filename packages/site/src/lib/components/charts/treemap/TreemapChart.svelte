@@ -11,7 +11,7 @@
 	// export let getLabel: (node: d3.HierarchyNode<any>) => string;
 	export let hierarchy;
 	export let getLabel;
-	export let getLink;
+	export let getLink = undefined;
 
 	const treemap = d3.treemap();
 
@@ -105,14 +105,16 @@ Create a treemap from a d3-hierarchy.
 					on:click={() => select(node)}
 				>
 					<div class="node-contents">
-						<a
-							class="inline-block align-middle text-indigo-600"
-							class:hidden={node.children}
-							target="_blank"
-							href={getLink(node.id)}
-						>
-							&#8599;
-						</a>
+						{#if getLink}
+							<a
+								class="inline-block align-middle text-indigo-600"
+								class:hidden={node.children}
+								href={getLink(node)}
+								target="_blank"
+							>
+								&#8599;
+							</a>
+						{/if}
 						<strong>{getLabel(node) ?? ''}</strong>
 						<span>{kwdFormat(node.value)}</span>
 					</div>
