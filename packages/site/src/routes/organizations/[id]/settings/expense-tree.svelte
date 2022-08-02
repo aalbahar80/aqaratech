@@ -69,7 +69,8 @@
 		</Button>
 		{#each difference as change}
 			{@const newParentNode = newList.find((node) => node.id === change.value)}
-			{@const changedNode = newList[change.path[0]]}
+			{@const changedNode =
+				typeof change.path[0] === 'number' ? newList[change.path[0]] : null}
 			<div class="flex items-center justify-between py-2 text-sm font-medium">
 				<span class="w-5/12">
 					{newParentNode?.labelEn || ''}

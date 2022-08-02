@@ -1,3 +1,4 @@
+export {};
 // import { describe, expect, test } from 'vitest';
 // import { inWords } from './currency';
 

@@ -66,3 +66,12 @@ declare namespace svelte.JSX {
 		) => void;
 	}
 }
+
+declare namespace svelte.JSX {
+	interface DOMAttributes<T> {
+		/**
+		 * Custom event I created to use along with `use:clickOutside` to detect when the user clicks outside of a component.
+		 */
+		onoutclick?: CompositionEventHandler<T>;
+	}
+}

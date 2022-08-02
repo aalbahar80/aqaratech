@@ -5,10 +5,10 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	const hideActions = $session.user?.role.roleType !== 'ORGADMIN';
-	export let nameMap: EntityName;
+	export let nameMap: EntityName | undefined = undefined;
 	export let formUrl: string;
-	export let message: string = `Get started by creating a new ${nameMap.singular}.`;
-	export let buttonText: string = `New ${nameMap.singular}`;
+	export let message: string = `Get started by creating a new ${nameMap?.singular}.`;
+	export let buttonText: string = `New ${nameMap?.singular}`;
 </script>
 
 <div class="py-8 text-center sm:py-16">
@@ -18,7 +18,7 @@
 		aria-hidden="true"
 	/>
 	<h3 class="mt-2 text-sm font-medium text-gray-900">
-		No {nameMap.plural}
+		No {nameMap?.plural}
 	</h3>
 	{#if hideActions}
 		<p class="mt-1 text-sm text-gray-500">Nothing here, yet.</p>

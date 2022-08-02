@@ -8,7 +8,7 @@
 	export let formUrl: string;
 	// TODO make type either nameMap or EntityTitle
 	export let entityTitle: EntityTitle | undefined = undefined;
-	export let nameMap = entityNameMap[entityTitle];
+	export let nameMap = entityTitle ? entityNameMap[entityTitle] : undefined;
 
 	export let hideActions = $session.user?.role.roleType !== 'ORGADMIN';
 </script>
@@ -22,7 +22,7 @@
 			>
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						{nameMap.pluralCap}
+						{nameMap?.pluralCap}
 					</h3>
 				</div>
 
@@ -33,7 +33,7 @@
 								href={formUrl}
 								class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							>
-								Create new {nameMap.singular}
+								Create new {nameMap?.singular}
 							</a>
 						</slot>
 					</div>
