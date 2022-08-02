@@ -84,7 +84,7 @@
 			$page.stuff.api.expenseCategories.create({
 				createExpenseCategoryDto: { ...values, parentId: null },
 			})}
-		onSuccess={(value) => {
+		onSuccess={() => {
 			const organizationId = $page.params.id;
 			if (!organizationId) {
 				throw new Error('organiztionId not found');

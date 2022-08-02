@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	import OrganizationList from '$lib/components/organization/OrganizationList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -23,5 +23,5 @@
 	export let data: Prop['data'];
 </script>
 
-<pre>{JSON.stringify(data, null, 2)}</pre>
+<pre>{JSON.stringify(data, null, 2)}</pre> -->
 <!-- <OrganizationList organizations={data} /> -->

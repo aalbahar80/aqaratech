@@ -9,6 +9,10 @@
 			leaseId: url.searchParams.get('leaseId'),
 		};
 
+		if (!predefined.leaseId) {
+			throw new Error('No leaseId provided');
+		}
+
 		const lease = await stuff.api!.leases.findOne({ id: predefined.leaseId });
 		return { props: { predefined, lease } };
 	};
@@ -18,7 +22,5 @@
 	type Prop = LP<typeof load>;
 	export let lease: Prop['lease'];
 </script>
-
-<!-- <pre>{JSON.stringify(lease, null, 2)}</pre> -->
 
 <Schedule {lease} />

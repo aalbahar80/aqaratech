@@ -28,7 +28,7 @@
 {#if crumbs}
 	<nav class="flex" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
-			{#each truthyCrumbs as [name, crumb], idx}
+			{#each truthyCrumbs as [_, crumb], idx}
 				{@const currentPage = $page.url.pathname === crumb.href}
 				{#if crumb}
 					<li>

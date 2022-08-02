@@ -21,6 +21,9 @@
 		title: string;
 		category: string;
 		url: string;
+		_formatted: {
+			title: string;
+		};
 	}
 	interface Group {
 		hits: Item[];

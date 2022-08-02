@@ -1,12 +1,12 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import type { OrganizationDto } from '@self/sdk';
-	// import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
-	// import { Icon } from '@steeze-ui/svelte-icon';
+	import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let organization: OrganizationDto;
-</script>
+</script> -->
 
-<pre>{JSON.stringify(organization, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(organization, null, 2)}</pre> -->
 <!-- <a
 	href={`/organizations/${organization.id}`}
 	class="block hover:bg-gray-50"

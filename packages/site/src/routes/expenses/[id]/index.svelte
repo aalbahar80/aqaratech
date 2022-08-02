@@ -3,11 +3,7 @@
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({
-		params,
-		stuff,
-		url,
-	}: LoadEvent<{ id: string }>) => {
+	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
 		const expense = await stuff.api!.expenses.findOne({ id: params.id });
 		return { props: { expense } };
 	};

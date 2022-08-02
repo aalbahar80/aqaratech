@@ -33,13 +33,15 @@
 		.hierarchy(
 			[null, rollupData],
 			// childrenAccessorFn,
-			([key, value]) => {
+			//@ts-ignore
+			([_key, value]) => {
 				// value.size checks if value is a Map, which is false for `non-leaf` rolledUp nodes.
 				const result = value?.size && Array.from(value);
 				return result;
 			},
 		)
-		.sum(([key, value]) => value)
+		//@ts-ignore
+		.sum(([_key, value]) => value)
 		.sort((a, b) => (b.value || 0) - (a.value || 0));
 
 	const getLabel = (node: typeof hierarchyData) => {
@@ -51,6 +53,7 @@
 		// 3. root node has data[1] as a Map (of children) from rollupData
 
 		const nonLeafLabel = node.data[0];
+		//@ts-ignore
 		const leafLabel = node.data[0]?.labelEn;
 		if (typeof nonLeafLabel === 'string') {
 			return nonLeafLabel;

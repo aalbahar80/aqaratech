@@ -55,7 +55,7 @@
 				label: 'Payment Status By Property',
 				data: parsed.map((i) => i.pctPaid),
 				backgroundColor: parsed.map(
-					(i, idx) =>
+					(_i, idx) =>
 						`rgba(54, 162, 235, ${Math.max(0.3, idx / parsed.length)})`,
 				),
 			},

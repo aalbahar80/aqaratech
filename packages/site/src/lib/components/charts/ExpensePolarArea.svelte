@@ -51,7 +51,7 @@
 				label: 'Expenses By Property',
 				data: parsed.map((i) => i.total),
 				backgroundColor: parsed.map(
-					(i, idx) =>
+					(_i, idx) =>
 						`rgba(255, 99, 132, ${Math.max(0.3, idx / parsed.length)})`,
 				),
 			},

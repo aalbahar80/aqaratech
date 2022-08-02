@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PortfolioDto } from '@self/sdk';
-	import { AtSymbol, FolderOpen, Phone } from '@steeze-ui/heroicons';
+	import { FolderOpen, Phone } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let portfolio: PortfolioDto;
