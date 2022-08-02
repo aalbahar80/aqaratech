@@ -1,6 +1,6 @@
 import type { RoleSK, User } from '$lib/models/types/auth.type';
+import { getRoleMeta } from '$lib/server/utils/get-role-meta';
 import { validateToken } from '$lib/server/utils/validate';
-import { getRoleMeta } from '$lib/utils/get-role-meta';
 import type { ValidatedUserDto, ValidatedUserDtoRolesInner } from '@self/sdk';
 
 const getDefaultRole = (roles: ValidatedUserDtoRolesInner[]): RoleSK => {

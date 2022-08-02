@@ -33,39 +33,6 @@ export const concatIfExists = (strings: (string | null | undefined)[]) => {
 	return strings.filter((str) => str).join(' ');
 };
 
-export const forceDate = (date: Date | string | number): Date => {
-	if (date instanceof Date) return date;
-	if (typeof date === 'string' || typeof date === 'number') {
-		try {
-			return new Date(date);
-		} catch (e) {
-			throw new Error('Can not parse date');
-		}
-	}
-	console.warn('forceDate: date is not a Date or string or number');
-	return new Date();
-};
-
-const inputDateFormat = 'yyyy-MM-dd';
-export const dateToInput = (date: Date): string => {
-	try {
-		const result = toUTCFormat(date, inputDateFormat);
-		return result;
-	} catch (e) {
-		throw new Error(`Can not format date to ${inputDateFormat}.`);
-	}
-};
-
-export const forceDateToInput = (date: Date | string | number): string => {
-	try {
-		return dateToInput(forceDate(date));
-	} catch (e) {
-		// TODO how to check error type?
-		console.warn(e);
-		return '';
-	}
-};
-
 export const startCase = (str: string): string =>
 	str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
 		return str.toUpperCase();
