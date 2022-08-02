@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Chart from '$lib/components/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
-	import { getColor } from '$lib/config/constants';
+	import { getColor } from '$lib/utils/colors';
 	import type { ByMonthDto } from '@self/sdk';
 
 	export let invoicesGroupedPaid: ByMonthDto[];
