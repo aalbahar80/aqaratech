@@ -17,7 +17,7 @@ import {
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 class LeaseInvoiceRequiredDto {
   @IsPositive()
@@ -26,7 +26,7 @@ class LeaseInvoiceRequiredDto {
   @DateType()
   postAt: Date;
 
-  @Nanoid()
+  @IsID()
   leaseId: string;
 }
 

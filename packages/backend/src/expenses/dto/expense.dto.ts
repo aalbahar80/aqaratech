@@ -17,11 +17,11 @@ import {
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 
 class ExpenseRequiredDto {
-  @Nanoid()
+  @IsID()
   portfolioId: string;
 
   @IsPositive()
@@ -35,18 +35,18 @@ class ExpenseRequiredDto {
 }
 
 class ExpenseOptionalDto {
-  @Nanoid()
+  @IsID()
   @IsOptional()
   // TODO remove question mark?
   unitId?: string | null;
 
-  @Nanoid()
+  @IsID()
   @IsOptional()
   // TODO remove question mark?
   propertyId?: string | null;
 
   // TODO remove from schema
-  @Nanoid()
+  @IsID()
   @IsOptional()
   maintenanceOrderId: string | null;
 

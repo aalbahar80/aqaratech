@@ -13,7 +13,7 @@ import {
   IsOptional,
   IsPositive,
   IsString,
-  Length,
+  IsUUID,
   Max,
   MaxLength,
   Min,
@@ -48,10 +48,10 @@ interface INumberFieldOptions {
 }
 
 /**
- * Nano id validator
+ * id validator
  */
-export function Nanoid(): PropertyDecorator {
-  return applyDecorators(Length(12, 12));
+export function IsID(): PropertyDecorator {
+  return applyDecorators(IsUUID());
 }
 
 export function NumberField(

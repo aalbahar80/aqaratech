@@ -1,6 +1,6 @@
 import { IsOptional } from 'class-validator';
 import { DateType } from 'src/decorators/date-type.decorator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 export class ByMonthDto {
   amount: number;
@@ -8,15 +8,15 @@ export class ByMonthDto {
 }
 
 export class DashboardFilterDto {
-  @Nanoid()
+  @IsID()
   @IsOptional()
   portfolioId?: string;
 
-  @Nanoid()
+  @IsID()
   @IsOptional()
   propertyId?: string;
 
-  @Nanoid()
+  @IsID()
   @IsOptional()
   unitId?: string;
 

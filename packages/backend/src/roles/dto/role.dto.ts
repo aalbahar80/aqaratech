@@ -7,10 +7,10 @@ import {
 import { Role, RoleType } from '@prisma/client';
 import { IsBoolean, IsEmail, IsEnum } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 class RoleRequiredDto {
-  @Nanoid()
+  @IsID()
   organizationId: string;
 
   @ApiProperty({ enum: RoleType, enumName: 'RoleTypeEnum' })
@@ -22,10 +22,10 @@ class RoleRequiredDto {
 }
 
 class RoleOptionalDto {
-  @Nanoid()
+  @IsID()
   portfolioId: string | null;
 
-  @Nanoid()
+  @IsID()
   tenantId: string | null;
 
   @IsBoolean()

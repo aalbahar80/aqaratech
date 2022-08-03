@@ -17,12 +17,12 @@ import {
   IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 
 class UnitRequiredDto {
-  @Nanoid()
+  @IsID()
   propertyId: string;
 
   @Length(1, 255)

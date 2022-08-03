@@ -3,10 +3,10 @@ import { Portfolio } from '@prisma/client';
 import { IsPhoneNumber, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 class PortfolioRequiredDto {
-  @Nanoid()
+  @IsID()
   organizationId: string;
 
   @Length(1, 255)

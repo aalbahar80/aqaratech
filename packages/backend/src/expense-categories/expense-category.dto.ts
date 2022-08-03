@@ -7,13 +7,13 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 export class ExpenseCategoryDto {
   constructor(partial: Partial<ExpenseCategoryDto>) {
     Object.assign(this, partial);
   }
-  @Nanoid()
+  @IsID()
   id: string;
 
   @IsString()

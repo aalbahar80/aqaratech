@@ -1,20 +1,20 @@
 import { IsOptional } from 'class-validator';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 export class FindExpenseTreeDto {
   @IsOptional()
-  @Nanoid()
+  @IsID()
   organizationId?: string;
 
   @IsOptional()
-  @Nanoid()
+  @IsID()
   portfolioId?: string;
 
   @IsOptional()
-  @Nanoid()
+  @IsID()
   propertyId?: string;
 
   @IsOptional()
-  @Nanoid()
+  @IsID()
   unitId?: string;
 }

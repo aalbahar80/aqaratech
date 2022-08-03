@@ -22,10 +22,10 @@ import {
   IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { Nanoid } from 'src/decorators/field.decorators';
+import { IsID } from 'src/decorators/field.decorators';
 
 class PropertyRequiredDto {
-  @Nanoid()
+  @IsID()
   portfolioId: string;
 
   @Length(1, 255)
