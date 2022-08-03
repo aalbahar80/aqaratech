@@ -83,7 +83,7 @@
 								</div>
 							</div>
 
-							{#each schedule as trx, idx (trx.nanoid)}
+							{#each schedule as trx, idx (trx.tempid)}
 								<div
 									animate:flip={{ duration: 200 }}
 									transition:fade|local={{ duration: 100 }}
