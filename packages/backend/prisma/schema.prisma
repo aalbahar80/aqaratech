@@ -9,12 +9,8 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-// generator dbml {
-//     provider = "prisma-dbml-generator"
-// }
-
 model User {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -31,7 +27,7 @@ enum RoleType {
 }
 
 model Role {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -52,7 +48,7 @@ model Role {
 }
 
 model Tenant {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -76,7 +72,7 @@ model Tenant {
 }
 
 model Portfolio {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -97,7 +93,7 @@ model Portfolio {
 }
 
 model Organization {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -116,7 +112,7 @@ model Organization {
 }
 
 model OrganizationSettings {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -127,7 +123,7 @@ model OrganizationSettings {
 }
 
 model Plan {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -140,7 +136,7 @@ model Plan {
 }
 
 model PlanInvoice {
-  id        String   @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -153,7 +149,7 @@ model PlanInvoice {
 }
 
 model Expense {
-  id                 String            @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id                 String            @id @default(uuid())
   unitId             String?
   propertyId         String?
   portfolioId        String
@@ -177,7 +173,7 @@ model Expense {
 }
 
 model Lease {
-  id            String         @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id            String         @id @default(uuid())
   tenantId      String
   unitId        String
   createdAt     DateTime       @default(now())
@@ -198,7 +194,7 @@ model Lease {
 }
 
 model MaintenanceOrder {
-  id          String     @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id          String     @id @default(uuid())
   tenantId    String?
   unitId      String?
   propertyId  String?
@@ -222,7 +218,7 @@ model MaintenanceOrder {
 }
 
 model Property {
-  id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id                String             @id @default(uuid())
   portfolioId       String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
@@ -246,7 +242,7 @@ model Property {
 }
 
 model LeaseInvoice {
-  id          String    @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   dueAt       DateTime?
@@ -263,7 +259,7 @@ model LeaseInvoice {
 }
 
 model Unit {
-  id                String             @id @default(dbgenerated("nanoid()")) @db.VarChar(12)
+  id                String             @id @default(uuid())
   propertyId        String
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
