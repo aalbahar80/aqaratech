@@ -113,31 +113,10 @@ export class ExpenseCategoriesService {
     categories.forEach((c) => {
       const category = c as Prisma.JsonObject;
       if (category.id === expenseCategoryId) {
-        this.logger.debug({ updateExpenseCategoryDto });
-        this.logger.debug({ beforeUpdate: category });
-        // TODO Use class-tranformer instead
-        // only update the fields that exist in the DTO and are not undefined
-
-        // TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
-        const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
-          'parentId',
-          'labelEn',
-          'labelAr',
-          'description',
-        ];
-
-        updatableKeys.forEach((key) => {
-          if (
-            key in updateExpenseCategoryDto &&
-            updateExpenseCategoryDto[key] !== undefined
-          ) {
-            this.logger.debug(
-              `updating ${key} from ${category[key]} to ${updateExpenseCategoryDto[key]}`,
-            );
-            category[key] = updateExpenseCategoryDto[key];
-          }
+        this.applyChanges({
+          original: category,
+          submitted: updateExpenseCategoryDto,
         });
-        this.logger.debug({ afterUpdate: category });
       }
     });
 
@@ -196,5 +175,36 @@ export class ExpenseCategoriesService {
       );
       throw new InternalServerErrorException();
     }
+  }
+
+  applyChanges({
+    original,
+    submitted,
+  }: {
+    original: Prisma.JsonObject;
+    submitted: UpdateExpenseCategoryDto;
+  }) {
+    this.logger.debug({ submitted });
+    this.logger.debug({ beforeUpdate: original });
+    // TODO Use class-tranformer instead
+    // only update the fields that exist in the submitted DTO and are not undefined
+
+    // TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
+    const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
+      'parentId',
+      'labelEn',
+      'labelAr',
+      'description',
+    ];
+
+    updatableKeys.forEach((key) => {
+      if (key in submitted && submitted[key] !== undefined) {
+        this.logger.debug(
+          `updating ${key} from ${original[key]} to ${submitted[key]}`,
+        );
+        original[key] = submitted[key];
+      }
+    });
+    this.logger.debug({ afterUpdate: original });
   }
 }
