@@ -40,7 +40,7 @@
 			label: 'Name (english)',
 		}),
 		new Field('labelAr', {
-			value: data?.labelEn,
+			value: data?.labelAr,
 			label: 'Name (arabic)',
 		}),
 		...(formType === 'create'
