@@ -1,4 +1,4 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import { zodIsDateRequired } from '$lib/utils/zod-validators';
 import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
@@ -11,7 +11,7 @@ export const updateSchema = z.object({
 });
 
 export const createSchema = updateSchema.extend({
-	portfolioId: zodnanoid,
-	propertyId: zodnanoid.nullable(),
-	unitId: zodnanoid.nullable(),
+	portfolioId: isID,
+	propertyId: isID.nullable(),
+	unitId: isID.nullable(),
 });

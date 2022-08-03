@@ -1,10 +1,10 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import { zodIsDateOptional } from '$lib/utils/zod-validators';
 import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 export const schema = z.object({
-	id: zodnanoid.optional(),
+	id: isID.optional(),
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 	label: z.string().nullable().transform(trim).transform(falsyToNull),
 	phone: z

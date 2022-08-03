@@ -1,10 +1,10 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import { z } from 'zod';
 
 export const base = z.object({
-	organizationId: zodnanoid.optional(),
-	portfolioId: zodnanoid.optional(),
-	tenantId: zodnanoid.optional(),
+	organizationId: isID.optional(),
+	portfolioId: isID.optional(),
+	tenantId: isID.optional(),
 	email: z.string().email(),
 });
 

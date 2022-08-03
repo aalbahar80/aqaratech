@@ -1,3 +1,3 @@
 import { z } from 'zod';
 
-export const zodnanoid = z.string().min(12).max(12);
+export const isID = z.string().uuid();

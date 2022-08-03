@@ -1,4 +1,4 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import {
 	zodIsDateOptional,
 	zodIsDateRequired,
@@ -18,7 +18,7 @@ const base = z.object({
 });
 
 const createBase = base.extend({
-	leaseId: zodnanoid,
+	leaseId: isID,
 });
 
 const refined = (s: ZodSchema) =>

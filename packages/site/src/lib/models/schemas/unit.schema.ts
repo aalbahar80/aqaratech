@@ -1,4 +1,4 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import {
 	falsyToNull,
 	falsyToNullExceptZero,
@@ -7,7 +7,7 @@ import {
 import { z } from 'zod';
 
 export const updateSchema = z.object({
-	id: zodnanoid.optional(),
+	id: isID.optional(),
 	label: z.string().nullable().transform(trim).transform(falsyToNull),
 	unitNumber: z
 		.string()
@@ -35,5 +35,5 @@ export const updateSchema = z.object({
 });
 
 export const createSchema = updateSchema.extend({
-	propertyId: zodnanoid,
+	propertyId: isID,
 });

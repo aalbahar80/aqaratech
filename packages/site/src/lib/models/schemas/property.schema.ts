@@ -1,4 +1,4 @@
-import { zodnanoid } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/nano-id.schema';
 import type { ZodDto } from '$lib/models/types/zod-dto.type';
 import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import type { CreatePropertyDto, UpdatePropertyDto } from '@self/sdk';
@@ -35,7 +35,7 @@ export const updateSchema = z.object({
 });
 
 export const createSchema = updateSchema.extend({
-	portfolioId: zodnanoid,
+	portfolioId: isID,
 });
 
 // Attempt to cast the DTO to the schema to keep them in sync
