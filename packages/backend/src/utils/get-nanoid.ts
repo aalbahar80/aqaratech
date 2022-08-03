@@ -1,4 +1,3 @@
-import { customAlphabet } from 'nanoid';
+import { randomUUID } from 'node:crypto';
 
-export const generateId = (): string =>
-  customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 12)();
+export const generateId = (): string => randomUUID();
