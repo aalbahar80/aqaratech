@@ -1,4 +1,4 @@
-import { isID } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/id.schema';
 import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 

@@ -1,4 +1,4 @@
-import { isID } from '$lib/models/schemas/nano-id.schema';
+import { isID } from '$lib/models/schemas/id.schema';
 import { z } from 'zod';
 
 export const base = z.object({
