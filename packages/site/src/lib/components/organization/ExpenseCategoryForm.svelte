@@ -5,7 +5,10 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { expenseTreeRoute } from '$lib/utils/route-helpers';
-	import { schema } from '$models/schemas/expenseCategory.schema';
+	import {
+		createSchema,
+		updateSchema,
+	} from '$models/schemas/expenseCategory.schema';
 	import type { ExpenseCategoryDto } from '@self/sdk';
 
 	type TExpenseCategoryDto = $$Generic<
@@ -40,19 +43,23 @@
 			value: data?.labelEn,
 			label: 'Name (arabic)',
 		}),
-		new Field('isGroup', {
-			label: 'Create as group?',
-			type: 'checkbox',
-			value: data?.isGroup ?? false,
-			autoInit: true,
-			hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". \n\n Expense Category: Holds expense entries.',
-		}),
+		...(formType === 'create'
+			? [
+					new Field('isGroup', {
+						label: 'Create as group?',
+						type: 'checkbox',
+						value: data?.isGroup ?? false,
+						autoInit: true,
+						hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". \n\n Expense Category: Holds expense entries.',
+					}),
+			  ]
+			: []),
 	];
 </script>
 
 {#if formType === 'update'}
 	<Form
-		{schema}
+		schema={updateSchema}
 		entityTitle="expenseCategories"
 		{formType}
 		{basicFields}
@@ -77,7 +84,7 @@
 	/>
 {:else}
 	<Form
-		{schema}
+		schema={createSchema}
 		entityTitle="expenseCategories"
 		{formType}
 		{basicFields}
