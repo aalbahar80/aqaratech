@@ -13,7 +13,7 @@ import {
 } from 'src/expense-categories/expense-category.dto';
 import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { generateId } from 'src/utils/get-nanoid';
+import { generateId } from 'src/utils/generate-id';
 
 @Injectable()
 export class ExpenseCategoriesService {

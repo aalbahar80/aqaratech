@@ -1,5 +1,5 @@
 import type { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
-import { generateId } from 'src/utils/get-nanoid';
+import { generateId } from 'src/utils/generate-id';
 
 /**
  * Returns a default expense category tree with random ids.
@@ -27,7 +27,7 @@ export const generateExpenseCategoryTree = (): ExpenseCategoryDto[] => {
 };
 
 /**
- * Generate a random nanoid for both the `id` and `parentId` fields.
+ * Generate a random id for both the `id` and `parentId` fields.
  */
 // prettier-ignore
 const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [

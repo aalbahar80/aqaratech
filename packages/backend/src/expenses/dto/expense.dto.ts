@@ -50,7 +50,7 @@ class ExpenseOptionalDto {
   @IsOptional()
   maintenanceOrderId: string | null;
 
-  @IsString() // Use nanoid?
+  @IsID()
   @IsOptional()
   categoryId: string | null;
 }
