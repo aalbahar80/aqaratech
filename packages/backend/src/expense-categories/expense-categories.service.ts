@@ -112,12 +112,32 @@ export class ExpenseCategoriesService {
 
     categories.forEach((c) => {
       const category = c as Prisma.JsonObject;
-      // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
       if (category.id === expenseCategoryId) {
-        category.labelEn = updateExpenseCategoryDto.labelEn;
-        category.labelAr = updateExpenseCategoryDto.labelAr;
-        category.description = updateExpenseCategoryDto.description;
-        category.isGroup = updateExpenseCategoryDto.isGroup;
+        this.logger.debug({ updateExpenseCategoryDto });
+        this.logger.debug({ beforeUpdate: category });
+        // TODO Use class-tranformer instead
+        // only update the fields that exist in the DTO and are not undefined
+
+        // TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
+        const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
+          'parentId',
+          'labelEn',
+          'labelAr',
+          'description',
+        ];
+
+        updatableKeys.forEach((key) => {
+          if (
+            key in updateExpenseCategoryDto &&
+            updateExpenseCategoryDto[key] !== undefined
+          ) {
+            this.logger.debug(
+              `updating ${key} from ${category[key]} to ${updateExpenseCategoryDto[key]}`,
+            );
+            category[key] = updateExpenseCategoryDto[key];
+          }
+        });
+        this.logger.debug({ afterUpdate: category });
       }
     });
 
@@ -130,6 +150,7 @@ export class ExpenseCategoriesService {
       categories: updated.expenseCategoryTree,
     });
 
+    // TODO return the updated expenseCategory for easier testing
     return expenseCategoryId;
   }
 
