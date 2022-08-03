@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -68,19 +69,21 @@ export class ExpenseCategoriesService {
   }) {
     const categories = await this.fetchJsonCategories({ organizationId });
 
+    // Currently, this applies the changes to all categories.
     categories.forEach((c) => {
       const category = c as Prisma.JsonObject;
-      const changed = updateAllExpenseCategoriesDto.items.find(
+      const submitted = updateAllExpenseCategoriesDto.items.find(
         (item) => item.id === category.id,
       );
-      // TODO if we add new fields to the ExpenseCategoryDto, we need to add them here
-      if (changed) {
-        category.parentId = changed.parentId;
-        category.labelEn = changed.labelEn;
-        category.labelAr = changed.labelAr;
-        category.description = changed.description;
-        category.isGroup = changed.isGroup;
+      if (!submitted) {
+        throw new BadRequestException(
+          `No expenseCategory with id ${category.id} found in updateAll`,
+        );
       }
+      this.applyChanges({
+        original: category,
+        submitted: submitted,
+      });
     });
 
     const updated = await this.prisma.organizationSettings.update({
