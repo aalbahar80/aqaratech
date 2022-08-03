@@ -54,7 +54,6 @@ importers:
       jwks-rsa: 2.1.4
       lodash: 4.17.21
       meilisearch: 0.26.0
-      nanoid: 3.3.4
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.12
@@ -100,7 +99,6 @@ importers:
       jwks-rsa: 2.1.4
       lodash: 4.17.21
       meilisearch: 0.26.0
-      nanoid: 3.3.4
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.12
@@ -212,7 +210,6 @@ importers:
       dotenv: 16.0.1
       microbundle: 0.15.0
       ms: 3.0.0-canary.1
-      nanoid: 4.0.0
       prisma: 4.1.1
       sade: 1.8.1
       ts-node: 10.9.1
@@ -227,7 +224,6 @@ importers:
       dotenv: 16.0.1
       microbundle: 0.15.0_ts-node@10.9.1
       ms: 3.0.0-canary.1
-      nanoid: 4.0.0
       prisma: 4.1.1
       sade: 1.8.1
       ts-node: 10.9.1_e2tlcjkk7tlngjdlhzx5hjlnv4
@@ -286,7 +282,6 @@ importers:
       just-diff: 5.0.3
       lodash-es: 4.17.21
       logrocket: 3.0.1
-      nanoid: 4.0.0
       postcss: 8.4.14
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13
@@ -358,7 +353,6 @@ importers:
       just-diff: 5.0.3
       lodash-es: 4.17.21
       logrocket: 3.0.1
-      nanoid: 4.0.0
       postcss: 8.4.14
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
@@ -9525,11 +9519,6 @@ packages:
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
-  /nanoid/4.0.0:
-    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
-    engines: {node: ^14 || ^16 || >=18}
     hasBin: true
     dev: true
 

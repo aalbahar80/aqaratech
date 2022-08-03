@@ -65,7 +65,6 @@
     "just-diff": "5.0.3",
     "lodash-es": "4.17.21",
     "logrocket": "3.0.1",
-    "nanoid": "4.0.0",
     "postcss": "8.4.14",
     "prettier": "2.7.1",
     "prettier-plugin-tailwindcss": "0.1.13",

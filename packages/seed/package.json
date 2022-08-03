@@ -23,7 +23,6 @@
         "dotenv": "16.0.1",
         "microbundle": "0.15.0",
         "ms": "3.0.0-canary.1",
-        "nanoid": "4.0.0",
         "prisma": "4.1.1",
         "sade": "1.8.1",
         "ts-node": "10.9.1",
