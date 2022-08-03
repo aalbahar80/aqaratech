@@ -1,10 +1,36 @@
 import type { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
+import { generateId } from 'src/utils/get-nanoid';
+
+/**
+ * Returns a default expense category tree with random ids.
+ */
+export const generateExpenseCategoryTree = (): ExpenseCategoryDto[] => {
+  const mappedIds = new Map<string, string>();
+
+  defaultExpenseCategoryTree.forEach((category) => {
+    mappedIds.set(category.id, generateId());
+  });
+
+  const withRandomIds = defaultExpenseCategoryTree.map((category) => {
+    const newId = mappedIds.get(category.id);
+    const newParentId = category.parentId
+      ? mappedIds.get(category.parentId)
+      : null;
+    return {
+      ...category,
+      id: newId ?? generateId(),
+      parentId: newParentId || null,
+    };
+  });
+
+  return withRandomIds;
+};
 
 /**
  * Generate a random nanoid for both the `id` and `parentId` fields.
  */
 // prettier-ignore
-export const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [
+const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [
   {"id":"1","labelAr":"المصاريف الرأسمالية","labelEn":"CapEx","parentId":null,"isGroup":true},
   {"id":"2","labelAr":"عقود الصيانة السنوية","labelEn":"Annual Contracts","parentId":"1","isGroup":true},
   {"id":"3","labelAr":"","labelEn":"AC Contract","parentId":"2","isGroup":false},

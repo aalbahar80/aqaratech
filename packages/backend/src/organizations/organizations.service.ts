@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { defaultExpenseCategoryTree } from 'src/constants/default-expense-categories';
+import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -43,7 +43,7 @@ export class OrganizationsService {
         organizationSettings: {
           create: {
             expenseCategoryTree:
-              defaultExpenseCategoryTree as unknown as Prisma.JsonArray,
+              generateExpenseCategoryTree() as unknown as Prisma.JsonArray,
           },
         },
       },

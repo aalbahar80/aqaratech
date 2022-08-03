@@ -45,7 +45,7 @@ export async function seed({
 	printOnly = false,
 }: { sample?: boolean; printOnly?: boolean } = {}) {
 	let userCount = 5;
-	let orgCount = 3;
+	let orgCount = 1;
 	let roleCount = 5;
 	let portfolioCount = 9;
 	let propertyMin = 2;
