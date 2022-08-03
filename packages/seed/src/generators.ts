@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Role } from "@prisma/client";
+import { randomUUID } from "crypto";
 import { addDays, addMinutes, addMonths, subDays } from "date-fns";
-import { customAlphabet } from "nanoid";
 import {
 	areas,
 	coordinates,
@@ -12,18 +12,17 @@ import {
 // consistent id's for testing
 export const testPassword = "test12";
 export const testOrgEmail = "org.demo@mailthink.net";
-export const testOrgId = "hdmp5pje1a7o";
+export const testOrgId = "f79a7bd6-698b-4b56-9e86-4338690a7929";
 export const testPortfolioEmail = "client.dev@mailthink.net";
-export const testPortfolioId = "portfolio-1a";
+export const testPortfolioId = "62357de0-03c7-446c-a414-ac6de3ac9bbb";
 export const testTenantEmail = "tenant.dev@mailthink.net";
-export const testTenantId = "tenant-1aaaa";
+export const testTenantId = "e6258358-b4f6-4825-9245-0e21c54b557a";
 
 export const timespan = 2;
 export const createdAt = () => faker.date.past(timespan);
 export const updatedAt = () => faker.date.past(timespan);
 
-export const generateId = (): string =>
-	customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 12)();
+export const generateId = (): string => randomUUID();
 
 const unitTypeValues = unitTypeOptions
 	.filter((u) => u.value)
