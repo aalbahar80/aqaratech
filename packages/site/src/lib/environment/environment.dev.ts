@@ -4,25 +4,12 @@ import { config } from 'dotenv';
 
 config();
 
-const getOrigin = (localhostAllowed = true): string => {
-	const origin = process.env.URL_ORIGIN;
-	if (
-		origin?.includes('dev') ||
-		origin?.includes('stage') ||
-		origin?.includes('nest')
-	) {
-		return origin;
+const getOrigin = (): string => {
+	const explicitOrigin = process.env.VITE_SITE_URL || process.env.URL_ORIGIN;
+	if (explicitOrigin) {
+		return explicitOrigin;
 	} else if (process.env.VERCEL) {
 		return `https://${process.env.VERCEL_URL}`;
-	} else if (process.env.RENDER_ENV_IS_DOCKER) {
-		return `https://${process.env.RENDER_EXTERNAL_HOSTNAME}`;
-	} else if (process.env.AUTH0_CALLBACK_URL) {
-		return `https://${process.env.AUTH0_CALLBACK_URL}`;
-	} else if (process.env.VITE_SITE_URL) {
-		// replaces URL_ORIGIN 's functionality
-		return process.env.VITE_SITE_URL;
-	} else if (!localhostAllowed) {
-		return 'http://127.0.0.1:3000';
 	} else {
 		return 'http://localhost:3000';
 	}
