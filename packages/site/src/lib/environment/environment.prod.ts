@@ -48,19 +48,5 @@ export const productionEnvironment: EnvironmentConfig = {
 			],
 		},
 	},
-	myfatoorahConfig: {
-		MYFATOORAH_BASE_URL: 'https://api.myfatoorah.com',
-		MYFATOORAH_TOKEN: process.env.MYFATOORAH_TOKEN,
-		MYFATOORAH_CALLBACK_URL: 'https://aqaratech.com',
-	},
-	twilioConfig: {
-		TWILIO_ACCOUNT_SID: 'ACfbe9edeaa4a47886a21f4be094a9c60e',
-		TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-		TWILIO_FROM_NUMBER: '+19148099539',
-		TWILIO_MESSAGING_SERVICE_SID: 'MG3f2cf0ea4f8d7c554cad650ef646da65',
-	},
-	mailConfig: {
-		POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
-	},
 	debug: false,
 };

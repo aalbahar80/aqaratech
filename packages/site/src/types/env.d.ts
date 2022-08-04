@@ -22,12 +22,8 @@ declare global {
 			 */
 			readonly AUTH0_DEFAULT_DOMAIN: string;
 
-			readonly MYFATOORAH_TOKEN: string;
-			readonly TWILIO_AUTH_TOKEN: string;
-
 			/**
 			 * The current url origin where the site is hosted.
-			 * Used for callbacks (Twilio, myFatoorah).
 			 * Handles production, vercel previews, and local dev.
 			 * Returns a preview branch's dedicated domain if it exists `https://stage.letand.be`,
 			 * otherwise return the deployment domain  `https://my-site-7q03y4pi5.vercel.app`.
@@ -54,8 +50,6 @@ declare global {
 			 * The git branch of the commit the deployment was triggered by. Example: `improve-about-page`.
 			 */
 			readonly VERCEL_GIT_COMMIT_REF: string;
-
-			readonly POSTMARK_TOKEN: string;
 
 			/**
 			 * Api url reachable from the client.

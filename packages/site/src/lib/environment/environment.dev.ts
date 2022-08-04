@@ -72,20 +72,5 @@ export const developmentEnvironment: EnvironmentConfig = {
 			],
 		},
 	},
-	myfatoorahConfig: {
-		MYFATOORAH_BASE_URL: 'https://apitest.myfatoorah.com',
-		MYFATOORAH_TOKEN:
-			'HKcuHSpmaDG3SDluux5XDOm6aucEO3KKddJcDNZ71CRYgTNRhKRJXV4LezbvXV2mw3gJ3uH5fZr0Hpi-55p1Yo9Bpr7aX3OsGuNGllBdpCUfli2wXfPnlbwtfKVY1UnOUsqeoFUUjD7SbsOZY5Rz_OgL26dd-bLDX4ToB08XuudcxKzNqCKncqP-4maqQlOdGUm1krElqwzReJK5U4OX1PFy7xNAABRIztQ0OHSiuge4l2m-WwvLZ_47BBK2P_uXAY1UI0g5OB3_Pyy9soZ4v9lAPM2Mb1rVBRZ0LbkS0LQquIJjRaOZzPymzsdcGJfpOgg3VrmpbUUma6I0tCSeorlLveuYPW0sYszzrTVuDDYQ_DvMe1jtQZFDHsH_cPP4YGIBJEC0F92gj7yU3T3p47hKAmrqiWC63fKvRsOVNZHrceCa6RlCNLyBR6qszh5YIKWo8yC2EqbNkb4bFstQ4NL7oFUnIC2nqCQ4Awfts5u85ygBaN1uLtxDKxUAgN3ZyteyGaYndjSl2AFBtae4mrPz7Q_dMHp8rY4AA0KLOG9fqpDzdcGEeYlE-dMQtpStvhHwty9Pob5-eTk4xXIBUGHedVI5eSdpyuj_xT3tgasHaJhQi5J9NTDphCiBCTa2YZYiMzXVx78NiuDuP-ytp9Y42nbqF4X3BJ2j1BkmoAql7sTR3P-VPJ8CL9PD2_9SAUtgIw',
-		MYFATOORAH_CALLBACK_URL: getOrigin(false),
-	},
-	twilioConfig: {
-		TWILIO_ACCOUNT_SID: 'ACbffc494534d2b9823213e4538d71c98d',
-		TWILIO_AUTH_TOKEN: 'a94743f7f5baf621a2f2535f05c03970',
-		TWILIO_FROM_NUMBER: '+15005550006',
-		TWILIO_MESSAGING_SERVICE_SID: 'MG3f2cf0ea4f8d7c554cad650ef646da65',
-	},
-	mailConfig: {
-		POSTMARK_TOKEN: 'aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca',
-	},
 	debug: true,
 };
