@@ -26,8 +26,8 @@ RUN pnpm --filter=@self/site --filter=@self/sdk run build
 
 WORKDIR /app/packages/site
 
-ARG SITE_ORIGIN
-ENV SITE_ORIGIN_2=${SITE_ORIGIN}
+ARG VITE_SITE_URL
+ENV VITE_SITE_URL_2=${VITE_SITE_URL}
 
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-CMD ["sh", "-c", "ORIGIN=$SITE_ORIGIN_2 node build/index.js"]
+CMD ["sh", "-c", "ORIGIN=$VITE_SITE_URL_2 node build/index.js"]

@@ -4,7 +4,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       readonly DATABASE_URL: string;
-      readonly SITE_ORIGIN: string;
+      readonly VITE_SITE_URL: string;
       readonly POSTMARK_TOKEN: string;
       readonly MEILISEARCH_HOST: string;
       readonly MEILISEARCH_API_KEY: string;
