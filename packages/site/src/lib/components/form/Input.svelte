@@ -163,16 +163,4 @@
 	.form__input--warn {
 		@apply border-yellow-500 text-yellow-600 focus:invalid:border-yellow-500 focus:invalid:ring-yellow-500;
 	}
-
-	/* Remove arrow steppers */
-	/* Firefox */
-	input[type='number']:not([id='cycleCount']) {
-		-moz-appearance: textfield;
-	}
-	/* Chrome, Safari, Edge, Opera */
-	input:not([id='cycleCount'])::-webkit-outer-spin-button,
-	input:not([id='cycleCount'])::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
 </style>
