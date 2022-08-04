@@ -67,12 +67,15 @@
 
 		onSubmit: async (original) => {
 			console.debug({ originalFormValues: original });
-			const value = await onSubmit(original);
+			const parsed = schema.parse(original);
+			console.debug({ parsed });
+			const value = await onSubmit(parsed);
 			onSuccess(value);
 		},
 
 		onError: async (error: any) => {
 			let message = '';
+			console.error(error);
 			if (error instanceof ResponseError) {
 				const data = await error.response.json();
 				console.error(data);
@@ -82,7 +85,7 @@
 				props: {
 					kind: 'error',
 					title: 'Error',
-					subtitle: message,
+					subtitle: message || 'See console for more details.',
 				},
 			});
 		},
