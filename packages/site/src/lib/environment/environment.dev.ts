@@ -1,10 +1,10 @@
-import { PUBLIC_SITE_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 
 const getOrigin = (): string => {
-	if (PUBLIC_SITE_URL) {
-		return PUBLIC_SITE_URL;
+	if (env.PUBLIC_SITE_URL) {
+		return env.PUBLIC_SITE_URL;
 	} else if (import.meta.env.VITE_VERCEL_URL) {
 		return `https://${import.meta.env.VITE_VERCEL_URL}`;
 	} else {

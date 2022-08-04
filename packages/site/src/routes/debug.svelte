@@ -4,11 +4,6 @@
 	import { assets, base } from '$app/paths';
 	import { navigating, page, session, updated } from '$app/stores';
 	import { env } from '$env/dynamic/public';
-	import {
-		PUBLIC_API_URL,
-		PUBLIC_API_URL_LOCAL,
-		PUBLIC_SITE_URL,
-	} from '$env/static/public';
 
 	export let processEnv: Record<string, any>;
 	export let environment: Record<string, any>;
@@ -26,11 +21,11 @@
 <div class="prose">
 	<pre>{JSON.stringify(env, null, 2)}</pre>
 	<h3>PUBLIC_SITE_URL</h3>
-	<pre>{JSON.stringify(PUBLIC_SITE_URL, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(PUBLIC_SITE_URL, null, 2)}</pre>
 	<h3>PUBLIC_API_URL</h3>
 	<pre>{JSON.stringify(PUBLIC_API_URL, null, 2)}</pre>
 	<h3>PUBLIC_API_URL_LOCAL</h3>
-	<pre>{JSON.stringify(PUBLIC_API_URL_LOCAL, null, 2)}</pre>
+	<pre>{JSON.stringify(PUBLIC_API_URL_LOCAL, null, 2)}</pre> -->
 	<h3>importmetaenv</h3>
 	<pre>{JSON.stringify(import.meta.env, null, 2)}</pre>
 	<h3>import.meta.url</h3>

@@ -1,4 +1,4 @@
-import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { environment } from '$environment';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
@@ -152,8 +152,8 @@ export const handleError: HandleError = async ({ error, event }) => {
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
-	const basePath = PUBLIC_API_URL;
-	const newPath = PUBLIC_API_URL_LOCAL;
+	const basePath = env.PUBLIC_API_URL;
+	const newPath = env.PUBLIC_API_URL_LOCAL;
 
 	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);

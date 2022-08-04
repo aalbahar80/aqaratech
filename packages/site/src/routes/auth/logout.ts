@@ -1,4 +1,4 @@
-import { PUBLIC_SITE_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { environment } from '$environment';
 import type { RequestHandler } from '@sveltejs/kit';
 
@@ -14,7 +14,7 @@ export const GET: RequestHandler = (req) => {
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = authConfig.AUTH0_CLIENT_ID;
-	const redirectUrl = PUBLIC_SITE_URL || `${req.url.origin}`;
+	const redirectUrl = env.PUBLIC_SITE_URL || `${req.url.origin}`;
 	const query = new URLSearchParams({
 		client_id: clientId,
 		returnTo: redirectUrl,

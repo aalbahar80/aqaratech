@@ -1,4 +1,4 @@
-import { AUTH0_CLIENT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 
@@ -9,7 +9,7 @@ export const productionEnvironment: EnvironmentConfig = {
 	urlOrigin: 'https://aqaratech.com',
 	authConfig: {
 		AUTH0_CLIENT_ID: 'BiIwmY0aGldYHDkkdEVsTBbKAAE1AaQV',
-		AUTH0_CLIENT_SECRET: AUTH0_CLIENT_SECRET,
+		AUTH0_CLIENT_SECRET: env.AUTH0_CLIENT_SECRET,
 		AUTH0_DOMAIN: 'https://auth.aqaratech.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://aqaratech.eu.auth0.com',
 		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_UD1FC1yzwrtoAAKe',
