@@ -89,8 +89,7 @@ const getProfile = async (
 
 	const config = new Configuration({
 		headers,
-		basePath:
-			import.meta.env.VITE_API_URL_LOCAL || import.meta.env.VITE_API_URL,
+		basePath: import.meta.env.API_URL_LOCAL || import.meta.env.PUBLIC_API_URL,
 	});
 
 	// Either get the user or return undefined.

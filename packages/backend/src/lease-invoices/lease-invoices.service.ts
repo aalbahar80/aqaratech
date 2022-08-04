@@ -160,7 +160,7 @@ export class LeaseInvoicesService {
 
   @OnEvent('invoice.send')
   async sendEmail(payload: InvoiceSendEvent) {
-    const origin = this.configService.get('siteConfig.VITE_SITE_URL', {
+    const origin = this.configService.get('siteConfig.PUBLIC_SITE_URL', {
       infer: true,
     });
 

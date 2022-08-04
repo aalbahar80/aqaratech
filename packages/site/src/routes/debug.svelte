@@ -3,6 +3,8 @@
 	import { browser, dev, prerendering } from '$app/env';
 	import { assets, base } from '$app/paths';
 	import { navigating, page, session, updated } from '$app/stores';
+	import { env } from '$env/dynamic/public';
+	// import { env } from '$env/dynamic/private';
 
 	export let processEnv: Record<string, any>;
 	export let environment: Record<string, any>;
@@ -18,12 +20,13 @@
 </script>
 
 <div class="prose">
+	<pre>{JSON.stringify(env, null, 2)}</pre>
 	<h3>User</h3>
 	<pre>{JSON.stringify($session.user, null, 2)}</pre>
 	<h3>importmetaenvapiurl.viteapiurl</h3>
-	<pre>{JSON.stringify(import.meta.env.VITE_API_URL, null, 2)}</pre>
+	<pre>{JSON.stringify(import.meta.env.PUBLIC_API_URL, null, 2)}</pre>
 	<h3>importmetaenv[viteapiurl]</h3>
-	<pre>{JSON.stringify(import.meta.env['VITE_API_URL'], null, 2)}</pre>
+	<pre>{JSON.stringify(import.meta.env['PUBLIC_API_URL'], null, 2)}</pre>
 	<h3>importmetaenv</h3>
 	<pre>{JSON.stringify(import.meta.env, null, 2)}</pre>
 	<h3>import.meta.url</h3>

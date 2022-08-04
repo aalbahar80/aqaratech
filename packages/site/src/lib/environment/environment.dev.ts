@@ -5,7 +5,7 @@ import { config } from 'dotenv';
 config();
 
 const getOrigin = (): string => {
-	const explicitOrigin = process.env.VITE_SITE_URL || process.env.URL_ORIGIN;
+	const explicitOrigin = process.env.PUBLIC_SITE_URL || process.env.URL_ORIGIN;
 	if (explicitOrigin) {
 		return explicitOrigin;
 	} else if (process.env.VERCEL) {

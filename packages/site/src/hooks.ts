@@ -168,8 +168,8 @@ export const handleError: HandleError = async ({ error, event }) => {
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
-	const basePath = import.meta.env.VITE_API_URL;
-	const newPath = import.meta.env.VITE_API_URL_LOCAL;
+	const basePath = import.meta.env.PUBLIC_API_URL;
+	const newPath = import.meta.env.API_URL_LOCAL;
 
 	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);

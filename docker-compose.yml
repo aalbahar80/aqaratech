@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: ./Dockerfile.site
       args:
-        VITE_SITE_URL: $VITE_SITE_URL
+        PUBLIC_SITE_URL: $PUBLIC_SITE_URL
     depends_on:
       - backend
     networks:

@@ -89,7 +89,7 @@ export class RolesService {
 
   @OnEvent('role.created')
   async sendWelcomeEmail(payload: RoleCreatedEvent) {
-    const origin = this.configService.get('siteConfig.VITE_SITE_URL', {
+    const origin = this.configService.get('siteConfig.PUBLIC_SITE_URL', {
       infer: true,
     });
 

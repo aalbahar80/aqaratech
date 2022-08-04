@@ -13,7 +13,7 @@ export const GET: RequestHandler = (req) => {
 	// redirect to auth0 logout (global sign out)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = authConfig.AUTH0_CLIENT_ID;
-	const redirectUrl = import.meta.env.VITE_SITE_URL || `${req.url.origin}`;
+	const redirectUrl = import.meta.env.PUBLIC_SITE_URL || `${req.url.origin}`;
 	const query = new URLSearchParams({
 		client_id: clientId,
 		returnTo: redirectUrl,

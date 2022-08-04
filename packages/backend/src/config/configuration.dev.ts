@@ -24,6 +24,6 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
     API_KEY: process.env.MEILI_MASTER_KEY || 'MASTER_KEY',
   },
   siteConfig: {
-    VITE_SITE_URL: process.env.VITE_SITE_URL || 'http://localhost:3000',
+    PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || 'http://localhost:3000',
   },
 });

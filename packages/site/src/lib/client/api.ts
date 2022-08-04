@@ -31,8 +31,8 @@ export const api = ({
 		...(roleId ? { 'x-role-id': roleId } : {}),
 	};
 
-	// const basePath = import.meta.env.VITE_API_URL || 'http://localhost:3002';
-	const basePath = import.meta.env.VITE_API_URL;
+	// const basePath = import.meta.env.PUBLIC_API_URL || 'http://localhost:3002';
+	const basePath = import.meta.env.PUBLIC_API_URL;
 	// const basePath = 'http://localhost:3002';
 	// const basePath = 'https://localhost/api';
 	// const basePath = 'https://localhost/api/';

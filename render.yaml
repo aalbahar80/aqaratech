@@ -12,7 +12,7 @@ services:
     envVars:
       - key: AUTH0_CLIENT_SECRET
         sync: false
-      - key: VITE_SITE_URL
+      - key: PUBLIC_SITE_URL
         sync: false
       - key: DATABASE_URL
         fromDatabase:
@@ -40,11 +40,11 @@ services:
     envVars:
       - key: AUTH0_CLIENT_SECRET
         sync: false
-      - key: VITE_SITE_URL
+      - key: PUBLIC_SITE_URL
         sync: false
-      - key: VITE_API_URL
+      - key: PUBLIC_API_URL
         sync: false
-      - key: VITE_API_URL_LOCAL
+      - key: API_URL_LOCAL
         fromService:
           name: backend
           type: web
