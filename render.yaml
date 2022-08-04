@@ -10,6 +10,8 @@ services:
     healthCheckPath: /health
     autoDeploy: true
     envVars:
+      - key: AUTH0_CLIENT_SECRET
+        sync: false
       - key: VITE_SITE_URL
         sync: false
       - key: DATABASE_URL
