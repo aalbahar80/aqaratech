@@ -1,10 +1,8 @@
-import { dev } from '$app/env';
 import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
 import { environment } from '$environment';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
-import * as Sentry from '@sentry/node';
 import type {
 	ExternalFetch,
 	GetSession,
@@ -12,21 +10,6 @@ import type {
 	HandleError,
 } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
-
-if (
-	process.env.VERCEL_ENV === 'production' ||
-	process.env.VERCEL_ENV === 'preview'
-) {
-	Sentry.init({
-		dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-		tracesSampleRate: 0.25,
-		release: import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localServerRelease',
-		environment: process.env.VERCEL
-			? process.env.VERCEL_GIT_COMMIT_REF
-			: 'localServer',
-		debug: dev,
-	});
-}
 
 export const getSession: GetSession = async ({ locals }) => {
 	// If idToken validation fails, we set both user and isAuthenticated to false
@@ -59,7 +42,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.idToken = cookies.idToken;
 		} catch (e) {
 			console.error(e);
-			Sentry.captureException(e);
+			// Sentry.captureException(e);
 		}
 	}
 	event.locals.isAuthenticated = isAuthenticated;
@@ -158,14 +141,14 @@ export const handleError: HandleError = async ({ error, event }) => {
 		console.error(resDetails);
 	}
 
-	const user = event.locals.user;
-	Sentry.captureException(error, {
-		user: {
-			id: user?.id || '',
-			email: user?.email || '',
-			username: user?.fullName || '',
-		},
-	});
+	// const user = event.locals.user;
+	// Sentry.captureException(error, {
+	// 	user: {
+	// 		id: user?.id || '',
+	// 		email: user?.email || '',
+	// 		username: user?.fullName || '',
+	// 	},
+	// });
 };
 
 export const externalFetch: ExternalFetch = async (request) => {

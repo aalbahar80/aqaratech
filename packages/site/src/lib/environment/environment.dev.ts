@@ -1,15 +1,12 @@
+import { PUBLIC_SITE_URL } from '$env/static/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
-import { config } from 'dotenv';
-
-config();
 
 const getOrigin = (): string => {
-	const explicitOrigin = process.env.PUBLIC_SITE_URL || process.env.URL_ORIGIN;
-	if (explicitOrigin) {
-		return explicitOrigin;
-	} else if (process.env.VERCEL) {
-		return `https://${process.env.VERCEL_URL}`;
+	if (PUBLIC_SITE_URL) {
+		return PUBLIC_SITE_URL;
+	} else if (import.meta.env.VITE_VERCEL_URL) {
+		return `https://${import.meta.env.VITE_VERCEL_URL}`;
 	} else {
 		return 'http://localhost:3000';
 	}

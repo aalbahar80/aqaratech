@@ -51,12 +51,6 @@ declare global {
 			readonly VERCEL: string;
 
 			/**
-			 * Email used for myfatoorah invoices when not in production
-			 * The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`
-			 */
-			readonly VERCEL_URL: string;
-
-			/**
 			 * The Environment that the app is deployed an running on. The value can be either `production`, `preview`, or `development`.
 			 */
 			readonly VERCEL_ENV: 'production' | 'preview' | 'development';

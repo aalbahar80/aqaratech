@@ -12,6 +12,9 @@ interface ImportMetaEnv {
 	// See https://vercel.com/docs/concepts/projects/environment-variables
 	// for information about these environment variables
 	readonly VITE_VERCEL_ENV: 'production' | 'preview' | 'development';
+	/**
+	 * The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`
+	 */
 	readonly VITE_VERCEL_URL: string;
 
 	/**
