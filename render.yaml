@@ -38,7 +38,7 @@ services:
       - key: AUTH0_CLIENT_SECRET
         sync: false
       - key: VITE_SITE_URL
-        value: true
+        sync: false
       - key: VITE_API_URL
         sync: false
       - key: VITE_API_URL_LOCAL
@@ -46,6 +46,8 @@ services:
           name: backend
           type: web
           property: hostport
+      - key: PORT
+        value: 3000
     buildFilter:
       paths:
         - packages/site/**
