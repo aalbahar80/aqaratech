@@ -32,7 +32,10 @@
 			tooltip: 'Bathrooms',
 		},
 		{
-			label: `${unit.size?.toLocaleString()} m²`,
+			label:
+				typeof unit.size === 'number'
+					? `${unit.size?.toLocaleString()} m²`
+					: unit.size,
 			tooltip: 'Size',
 			icon: GisMeasure,
 		},
