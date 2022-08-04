@@ -56,6 +56,6 @@ services:
         - packages/site/**/*.spec.ts
 
 databases:
-  - name: elephant
+  - name: elephanttwo
     region: frankfurt
     plan: Standard
