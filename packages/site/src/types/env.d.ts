@@ -16,10 +16,6 @@ declare global {
 			 * otherwise return the deployment domain  `https://my-site-7q03y4pi5.vercel.app`.
 			 */
 			readonly PUBLIC_SITE_URL: string | undefined;
-			/**
-			 * Same as PUBLIC_SITE_URL, but for backwards compatibility.
-			 */
-			readonly URL_ORIGIN: string | undefined;
 
 			/**
 			 * REQUIRED
