@@ -1,16 +1,14 @@
 services:
-  # Nestjs server
   - type: web
-    name: nestjs-dev
-    env: node
+    name: backend
+    env: docker
     repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
     plan: Standard
-    branch: initNestjs
+    branch: render-caddy
+    dockerfilePath: ./Dockerfile.backend
     # numInstances: 1
     # maxInstances: 1
-    buildCommand: pnpm install --filter @self/backend... && cd packages/backend && pnpm build
-    startCommand: cd packages/backend && pnpm run start:prod
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -28,25 +26,34 @@ services:
 
   # Sveltekit site
   - type: web
-    name: site-docker
+    name: site
     env: docker
     repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
     plan: standard
-    branch: initNestjs
+    branch: render-caddy
     dockerfilePath: ./Dockerfile.site
-    # healthCheckPath: /
+    healthCheckPath: /health
     envVars:
-      - key: VITE_RENDER
+      - key: AUTH0_CLIENT_SECRET
+        sync: false
+      - key: VITE_SITE_URL
         value: true
       - key: VITE_API_URL
         sync: false
-      - key: AUTH0_CLIENT_SECRET
-        sync: false
+      - key: VITE_API_URL_LOCAL
+        fromService:
+          name: backend
+          type: web
+          property: hostport
+    buildFilter:
+      paths:
+        - packages/site/**
+        - packages/sdk/**
+      ignoredPaths:
+        - packages/site/**/*.spec.ts
 
 databases:
   - name: elephant
     region: frankfurt
     plan: Standard
-    # databaseName: postgres # optional (Render may add a suffix)
-    # user: postgres # optional
