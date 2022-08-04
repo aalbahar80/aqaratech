@@ -2,9 +2,35 @@
 	import type { UnitDto } from '@self/sdk';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import FaSolidBath from '~icons/fa-solid/bath';
+	import Fa6SolidBed from '~icons/fa6-solid/bed';
+	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
+	import GisMeasure from '~icons/gis/measure';
 
 	export let unit: UnitDto;
-	export let icons: any[];
+
+	$: icons = [
+		{
+			label: unit.bed,
+			icon: Fa6SolidBed,
+			tooltip: 'Bedrooms',
+		},
+		{
+			label: unit.bath,
+			icon: FaSolidBath,
+			tooltip: 'Bathrooms',
+		},
+		{
+			label: `${unit.size?.toLocaleString()} m²`,
+			tooltip: 'Size',
+			icon: GisMeasure,
+		},
+		{
+			label: unit.floor,
+			icon: Fa6SolidElevator,
+			tooltip: 'Elevator',
+		},
+	];
 </script>
 
 <a href={`/units/${unit.id}`} class="block hover:bg-gray-50">
