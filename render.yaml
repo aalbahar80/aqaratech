@@ -5,7 +5,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.backend
     repo: https://github.com/aqaratech/aqtech.git
-    branch: render-caddy
+    branch: initNestjs
     plan: Starter Plus
     healthCheckPath: /health
     autoDeploy: true
@@ -33,7 +33,7 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.site
     repo: https://github.com/aqaratech/aqtech.git
-    branch: render-caddy
+    branch: initNestjs
     plan: Starter Plus
     healthCheckPath: /health
     autoDeploy: true
