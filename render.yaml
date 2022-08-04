@@ -1,20 +1,20 @@
 services:
   - type: web
     name: backend
-    env: docker
-    repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
-    plan: Standard
-    branch: render-caddy
+    env: docker
     dockerfilePath: ./Dockerfile.backend
-    # numInstances: 1
-    # maxInstances: 1
+    repo: https://github.com/aqaratech/aqtech.git
+    branch: render-caddy
+    plan: Starter Plus
     healthCheckPath: /health
     autoDeploy: true
     envVars:
+      - key: VITE_SITE_URL
+        sync: false
       - key: DATABASE_URL
         fromDatabase:
-          name: elephant
+          name: aqaratechdb
           property: connectionString
       - key: PORT
         value: 3002
@@ -27,13 +27,14 @@ services:
   # Sveltekit site
   - type: web
     name: site
-    env: docker
-    repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
-    plan: Standard
-    branch: render-caddy
+    env: docker
     dockerfilePath: ./Dockerfile.site
+    repo: https://github.com/aqaratech/aqtech.git
+    branch: render-caddy
+    plan: Starter Plus
     healthCheckPath: /health
+    autoDeploy: true
     envVars:
       - key: AUTH0_CLIENT_SECRET
         sync: false
@@ -56,6 +57,6 @@ services:
         - packages/site/**/*.spec.ts
 
 databases:
-  - name: elephanttwo
+  - name: aqaratechdb
     region: frankfurt
     plan: Standard
