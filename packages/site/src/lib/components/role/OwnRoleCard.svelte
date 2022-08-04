@@ -8,10 +8,8 @@
 
 	export let role: ValidatedRoleDto;
 	export let icons: any[];
-	console.log({ role }, 'OwnRoleCard.svelte ~ 11');
 
 	const meta = getRoleMeta(role);
-	console.log({ meta }, 'OwnRoleCard.svelte ~ 13');
 </script>
 
 <a href={`/auth/roles/${role.id}`} class="block hover:bg-gray-50">
