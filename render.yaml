@@ -30,7 +30,7 @@ services:
     env: docker
     repo: https://github.com/aqaratech/aqtech.git
     region: frankfurt
-    plan: standard
+    plan: Standard
     branch: render-caddy
     dockerfilePath: ./Dockerfile.site
     healthCheckPath: /health
