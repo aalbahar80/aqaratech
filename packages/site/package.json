@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
     "autoprefixer": "10.4.8",
-    "chart.js": "3.9.1",
+    "chart.js": "3.8.2",
     "chartjs-adapter-date-fns": "2.0.0",
     "cookie": "0.5.0",
     "cross-env": "7.0.3",

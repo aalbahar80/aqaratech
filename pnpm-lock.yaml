@@ -259,7 +259,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.32.0
       '@typescript-eslint/parser': 5.32.0
       autoprefixer: 10.4.8
-      chart.js: 3.9.1
+      chart.js: 3.8.2
       chartjs-adapter-date-fns: 2.0.0
       cookie: 0.5.0
       cross-env: 7.0.3
@@ -329,8 +329,8 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.32.0_iosr3hrei2tubxveewluhu5lhy
       '@typescript-eslint/parser': 5.32.0_qugx7qdu5zevzvxaiqyxfiwquq
       autoprefixer: 10.4.8_postcss@8.4.14
-      chart.js: 3.9.1
-      chartjs-adapter-date-fns: 2.0.0_chart.js@3.9.1
+      chart.js: 3.8.2
+      chartjs-adapter-date-fns: 2.0.0_chart.js@3.8.2
       cookie: 0.5.0
       cross-env: 7.0.3
       d3: 7.6.1
@@ -5249,16 +5249,16 @@ packages:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
 
-  /chart.js/3.9.1:
-    resolution: {integrity: sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==}
+  /chart.js/3.8.2:
+    resolution: {integrity: sha512-7rqSlHWMUKFyBDOJvmFGW2lxULtcwaPLegDjX/Nu5j6QybY+GCiQkEY+6cqHw62S5tcwXMD8Y+H5OBGoR7d+ZQ==}
     dev: true
 
-  /chartjs-adapter-date-fns/2.0.0_chart.js@3.9.1:
+  /chartjs-adapter-date-fns/2.0.0_chart.js@3.8.2:
     resolution: {integrity: sha512-rmZINGLe+9IiiEB0kb57vH3UugAtYw33anRiw5kS2Tu87agpetDDoouquycWc9pRsKtQo5j+vLsYHyr8etAvFw==}
     peerDependencies:
       chart.js: ^3.0.0
     dependencies:
-      chart.js: 3.9.1
+      chart.js: 3.8.2
     dev: true
 
   /check-disk-space/3.3.1:
