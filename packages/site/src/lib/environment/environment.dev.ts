@@ -7,6 +7,7 @@ const getOrigin = (): string => {
 		return env.PUBLIC_SITE_URL;
 	} else if (import.meta.env.VITE_VERCEL_URL) {
 		return `https://${import.meta.env.VITE_VERCEL_URL}`;
+		// TODO do same for cloudflare pages
 	} else {
 		return 'http://localhost:3000';
 	}
