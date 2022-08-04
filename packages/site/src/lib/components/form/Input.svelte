@@ -113,7 +113,7 @@
 			<input
 				type={field.type}
 				name={field.name}
-				value={field.value || ''}
+				value={field.value ?? ''}
 				id={field.name}
 				class="form__input"
 				disabled={field.disabled}
