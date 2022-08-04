@@ -44,7 +44,7 @@ services:
         sync: false
       - key: PUBLIC_API_URL
         sync: false
-      - key: API_URL_LOCAL
+      - key: PUBLIC_API_URL_LOCAL
         fromService:
           name: backend
           type: web

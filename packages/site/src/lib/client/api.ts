@@ -1,3 +1,4 @@
+import { PUBLIC_API_URL } from '$env/static/public';
 import {
 	AggregateApi,
 	Configuration,
@@ -31,11 +32,7 @@ export const api = ({
 		...(roleId ? { 'x-role-id': roleId } : {}),
 	};
 
-	// const basePath = import.meta.env.PUBLIC_API_URL || 'http://localhost:3002';
-	const basePath = import.meta.env.PUBLIC_API_URL;
-	// const basePath = 'http://localhost:3002';
-	// const basePath = 'https://localhost/api';
-	// const basePath = 'https://localhost/api/';
+	const basePath = PUBLIC_API_URL;
 
 	const config = new Configuration({
 		...(loadFetch ? { fetchApi: loadFetch } : {}),

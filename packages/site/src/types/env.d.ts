@@ -43,7 +43,7 @@ declare global {
 			 *
 			 * For example, your load function might make a request to a public URL like https://api.yourapp.com when the user performs a client-side navigation to the respective page, but during SSR it might make sense to hit the API directly (bypassing whatever proxies and load balancers sit between it and the public internet).
 			 */
-			readonly API_URL_LOCAL: string;
+			readonly PUBLIC_API_URL_LOCAL: string;
 
 			/**
 			 * An indicator that the app is deployed and running on Vercel. Example: `1`.
