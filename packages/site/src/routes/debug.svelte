@@ -25,8 +25,6 @@
 
 <div class="prose">
 	<pre>{JSON.stringify(env, null, 2)}</pre>
-	<h3>User</h3>
-	<pre>{JSON.stringify($session.user, null, 2)}</pre>
 	<h3>PUBLIC_SITE_URL</h3>
 	<pre>{JSON.stringify(PUBLIC_SITE_URL, null, 2)}</pre>
 	<h3>PUBLIC_API_URL</h3>
@@ -41,6 +39,8 @@
 	<pre>{JSON.stringify(import.meta, null, 2)}</pre>
 	<h3>$app/env</h3>
 	<pre>{JSON.stringify(appEnv, null, 2)}</pre>
+	<h3>User</h3>
+	<pre>{JSON.stringify($session.user, null, 2)}</pre>
 	<h3>environment config</h3>
 	<pre>{JSON.stringify(environment, null, 2)}</pre>
 	<h3>processEnv</h3>
