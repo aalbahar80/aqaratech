@@ -5,7 +5,7 @@ import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import {
 	areas,
 	coordinates,
-	defaultExpenseCategoryTree,
+	generateExpenseCategoryTree,
 	unitTypeOptions,
 } from "./constants.js";
 
@@ -42,6 +42,8 @@ const fakePerson = () => {
 	const label = `${firstName} ${lastName}`;
 	return { fullName, label };
 };
+
+const tree = generateExpenseCategoryTree();
 
 export const fakeUser = () => {
 	return {
@@ -85,7 +87,7 @@ export const fakeOrganizationSettings = (orgId: string) => ({
 	organizationId: orgId ?? generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
-	expenseCategoryTree: defaultExpenseCategoryTree,
+	expenseCategoryTree: tree,
 });
 
 export const fakePortfolio = (orgId?: string) => {
@@ -239,9 +241,7 @@ export const fakeExpense = () => ({
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
 	amount: +faker.finance.amount(10, 250, 0),
-	categoryId: faker.helpers.arrayElement(
-		defaultExpenseCategoryTree.filter((c) => !c.isGroup)
-	).id,
+	categoryId: faker.helpers.arrayElement(tree.filter((c) => !c.isGroup)).id,
 	memo: faker.lorem.sentences(),
 	postAt: faker.date.past(timespan),
 });
