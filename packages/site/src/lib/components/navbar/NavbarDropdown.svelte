@@ -35,7 +35,7 @@
 		<DropdownMenu>
 			{#each getNavOptions($session.user) as option}
 				<MenuItem let:active>
-					<a href={option.href} sveltekit:reload>
+					<a href={option.href}>
 						<MenuIconItem {option} {active} />
 					</a>
 				</MenuItem>
