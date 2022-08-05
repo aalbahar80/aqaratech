@@ -4,11 +4,11 @@ import { test } from "../config";
 test.use({ storageState: "./storageState.json" });
 test("smoke", async ({ page }, info) => {
 	await page.goto("/");
-	await page.locator("text=Portfolios").click();
-	await expect(page).toHaveURL("http://localhost:3000/portfolios");
+	await page.locator('a:has-text("Properties")').click();
+	await expect(page).toHaveURL("http://localhost:3000/properties");
 
-	await page.locator("text=Create new portfolio").click();
-	await expect(page).toHaveURL("http://localhost:3000/portfolios/new");
+	await page.locator("text=Create new property").click();
+	await expect(page).toHaveURL("http://localhost:3000/properties/new");
 
 	await page.locator('input[name="fullName"]').click();
 	await page.locator('input[name="fullName"]').fill("John Doe");
@@ -27,7 +27,7 @@ test("smoke", async ({ page }, info) => {
 	await page.locator("text=Create new").click();
 
 	const id = new RegExp(
-		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`
+		`/properties/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`
 	);
 	await expect(page).toHaveURL(id);
 	const url = page.url();
@@ -35,15 +35,15 @@ test("smoke", async ({ page }, info) => {
 	// take screenshot
 	info.snapshotDir;
 
-	expect(page.locator("text=Portfolio")).toBeTruthy();
+	expect(page.locator("text=property")).toBeTruthy();
 	await page.screenshot({
 		fullPage: true,
-		path: info.snapshotDir + "/portfolio-linux.png",
+		path: info.snapshotDir + "/property-linux.png",
 	});
 
 	await page.locator("text=Edit").click();
 	const edit = new RegExp(
-		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`
+		`/properties/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`
 	);
 	await expect(page).toHaveURL(edit);
 	await page.locator("text=Save changes").click();
@@ -52,8 +52,8 @@ test("smoke", async ({ page }, info) => {
 	await expect(page).toHaveURL(url);
 
 	// match screenshot
-	expect(page.locator("text=Portfolio")).toBeTruthy();
+	expect(page.locator("text=property")).toBeTruthy();
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
-		name: "portfolio.png",
+		name: "property.png",
 	});
 });
