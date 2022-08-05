@@ -30,6 +30,10 @@ test("test", async ({ page }) => {
 		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`
 	);
 	await expect(page).toHaveURL(id);
+	const before = await page.screenshot({
+		fullPage: true,
+		path: "./portfolio.png",
+	});
 
 	await page.locator("text=Edit").click();
 
@@ -37,4 +41,7 @@ test("test", async ({ page }) => {
 		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`
 	);
 	await expect(page).toHaveURL(edit);
+	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+		name: "portfolio.png",
+	});
 });
