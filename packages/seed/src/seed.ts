@@ -374,6 +374,7 @@ export async function seed({
 
 		console.time("expenses created");
 		await prisma.expense.createMany({
+			//@ts-ignore
 			data: expenses,
 		});
 		console.timeEnd("expenses created");
