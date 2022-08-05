@@ -1,0 +1,19 @@
+{
+  "name": "@self/test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "1.24.2",
+    "@self/seed": "workspace:0.0.1",
+    "@tsconfig/node18": "1.0.1",
+    "playwright": "1.24.2",
+    "typescript": "4.7.4"
+  }
+}

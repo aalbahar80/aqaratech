@@ -368,6 +368,20 @@ importers:
       vite: 3.0.4
       zod: 3.17.10
 
+  packages/test:
+    specifiers:
+      '@playwright/test': 1.24.2
+      '@self/seed': workspace:0.0.1
+      '@tsconfig/node18': 1.0.1
+      playwright: 1.24.2
+      typescript: 4.7.4
+    devDependencies:
+      '@playwright/test': 1.24.2
+      '@self/seed': link:../seed
+      '@tsconfig/node18': 1.0.1
+      playwright: 1.24.2
+      typescript: 4.7.4
+
 packages:
 
   /@ampproject/remapping/2.2.0:
@@ -3564,6 +3578,10 @@ packages:
 
   /@tsconfig/node16/1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
+    dev: true
+
+  /@tsconfig/node18/1.0.1:
+    resolution: {integrity: sha512-sNFeK6X2ATlhlvzyH4kKYQlfHXE2f2/wxtB9ClvYXevWpmwkUT7VaSrjIN9E76Qebz8qP5JOJJ9jD3QoD/Z9TA==}
     dev: true
 
   /@types/aria-query/4.2.2:
@@ -10199,6 +10217,15 @@ packages:
     resolution: {integrity: sha512-zfAoDoPY/0sDLsgSgLZwWmSCevIg1ym7CppBwllguVBNiHeixZkc1AdMuYUPZC6AdEYc4CxWEyLMBTw2YcmRrA==}
     engines: {node: '>=14'}
     hasBin: true
+    dev: true
+
+  /playwright/1.24.2:
+    resolution: {integrity: sha512-iMWDLgaFRT+7dXsNeYwgl8nhLHsUrzFyaRVC+ftr++P1dVs70mPrFKBZrGp1fOKigHV9d1syC03IpPbqLKlPsg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      playwright-core: 1.24.2
     dev: true
 
   /pluralize/8.0.0:
