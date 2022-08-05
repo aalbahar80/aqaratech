@@ -45,10 +45,7 @@ services:
       - key: PUBLIC_API_URL
         sync: false
       - key: PUBLIC_API_URL_LOCAL
-        fromService:
-          name: backend
-          type: web
-          property: hostport
+        sync: false
       - key: PORT
         value: 3000
     buildFilter:
