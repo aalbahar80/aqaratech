@@ -36,8 +36,7 @@ test("smoke", async ({ page }, info) => {
 	info.snapshotDir;
 
 	expect(page.locator("text=Portfolio")).toBeTruthy();
-	await page.screenshot({
-		fullPage: true,
+	await page.locator("#detailsPane").screenshot({
 		path: info.snapshotDir + "/portfolio-linux.png",
 	});
 
@@ -53,7 +52,7 @@ test("smoke", async ({ page }, info) => {
 
 	// match screenshot
 	expect(page.locator("text=Portfolio")).toBeTruthy();
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+	expect(await page.locator("#detailsPane").screenshot()).toMatchSnapshot({
 		name: "portfolio.png",
 	});
 });

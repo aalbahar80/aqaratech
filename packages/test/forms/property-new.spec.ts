@@ -41,8 +41,7 @@ test("smoke", async ({ page }, info) => {
 
 	// take screenshot
 	expect(page.locator("text=property")).toBeTruthy();
-	await page.screenshot({
-		fullPage: true,
+	await page.locator("#detailsPane").screenshot({
 		path: info.snapshotDir + "/property-linux.png",
 	});
 
@@ -58,7 +57,7 @@ test("smoke", async ({ page }, info) => {
 
 	// match screenshot
 	expect(page.locator("text=property")).toBeTruthy();
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+	expect(await page.locator("#detailsPane").screenshot()).toMatchSnapshot({
 		name: "property.png",
 	});
 });
