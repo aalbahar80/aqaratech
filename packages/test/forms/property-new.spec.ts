@@ -10,19 +10,26 @@ test("smoke", async ({ page }, info) => {
 	await page.locator("text=Create new property").click();
 	await expect(page).toHaveURL("http://localhost:3000/properties/new");
 
-	await page.locator('input[name="fullName"]').click();
-	await page.locator('input[name="fullName"]').fill("John Doe");
+	// fill form
 
+	// portfolio
+	await page.locator('input:below(:text("Portfolio"))').first().click();
+	await page.locator("div:nth-child(1) > .relative").first().click();
+	await page.locator("li >> nth=0").first().click();
+
+	await page.locator('input:below(:text("Area"))').first().click();
+	await page.locator("text=Nuzha | النزهة").click();
+
+	await page.locator('input[name="block"]').click();
+	await page.locator('input[name="block"]').fill("2");
+	await page.locator('input[name="avenue"]').click();
+	await page.locator('input[name="avenue"]').fill("3");
+	await page.locator('input[name="street"]').click();
+	await page.locator('input[name="street"]').fill("4");
+	await page.locator('input[name="number"]').click();
+	await page.locator('input[name="number"]').fill("5");
 	await page.locator('input[name="label"]').click();
-	await page.locator('input[name="label"]').fill("JD");
-
-	await page.locator('input[name="phone"]').click();
-	await page.locator('input[name="phone"]').fill("91234567");
-
-	await page.locator('input[name="civilid"]').click();
-	await page.locator('input[name="civilid"]').fill("123456789012");
-
-	await page.locator('input[name="dob"]').fill("2022-08-05");
+	await page.locator('input[name="label"]').fill("myproperty");
 
 	await page.locator("text=Create new").click();
 
@@ -33,8 +40,6 @@ test("smoke", async ({ page }, info) => {
 	const url = page.url();
 
 	// take screenshot
-	info.snapshotDir;
-
 	expect(page.locator("text=property")).toBeTruthy();
 	await page.screenshot({
 		fullPage: true,
