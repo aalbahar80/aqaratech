@@ -1,6 +1,16 @@
 import type { LeaseInvoiceDto } from '@self/sdk';
 import type jsPDFInvoiceTemplate from 'jspdf-invoice-template';
 
+/**
+ * Only works in browser. Do not call server-side.
+ */
+export const createPDF = async (invoice: LeaseInvoiceDto) => {
+	// use inline import because package only works in browser
+	const pdfPkg = (await import('jspdf-invoice-template')).default;
+	const props = preparePDF(invoice);
+	pdfPkg(props);
+};
+
 type PdfProps = Parameters<typeof jsPDFInvoiceTemplate>[0];
 type OutputType =
 	| 'save'
@@ -20,7 +30,7 @@ type OutputType =
  * const props = invoiceToPdf(invoice); // prepare
  * jsPDFInvoiceTemplate(props); // create pdf
  */
-export const invoiceToPdf = (invoice: LeaseInvoiceDto): PdfProps => {
+export const preparePDF = (invoice: LeaseInvoiceDto): PdfProps => {
 	const outputType: OutputType = 'dataurlnewwindow';
 	defaultObj.outputType = outputType;
 	return defaultObj;
