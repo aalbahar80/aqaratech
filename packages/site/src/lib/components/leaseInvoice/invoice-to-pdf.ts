@@ -33,6 +33,10 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	// Tenant
 	defaultObj.contact.name = invoice.breadcrumbs.tenant.label;
 
+	// Address
+	const address = `${invoice.breadcrumbs.property.label}`;
+	defaultObj.contact.address = address;
+
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
 	defaultObj.invoice.invGenDate = `Invoice date: ${postAt}`;
@@ -81,22 +85,21 @@ const defaultObj: PdfProps = {
 	fileName: 'Invoice.pdf',
 	orientationLandscape: false,
 	compress: true,
-	logo: {
-		src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/logo.png',
-		width: 53.33, //aspect ratio = width/height
-		height: 26.66,
-		margin: {
-			top: 0, //negative or positive num, from the current position
-			left: 0, //negative or positive num, from the current position
-		},
-	},
+	// logo: {
+	// 	src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/logo.png',
+	// 	width: 53.33, //aspect ratio = width/height
+	// 	height: 26.66,
+	// 	margin: {
+	// 		top: 0, //negative or positive num, from the current position
+	// 		left: 0, //negative or positive num, from the current position
+	// 	},
+	// },
 	business: {
 		name: 'Aqaratech',
 		website: 'www.aqaratech.com',
 	},
 	contact: {
 		label: 'Invoice issued for:',
-		address: '123 Main St',
 	},
 	invoice: {
 		// label: 'Invoice #: ',

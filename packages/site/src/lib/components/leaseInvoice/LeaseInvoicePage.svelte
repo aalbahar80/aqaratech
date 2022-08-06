@@ -45,7 +45,7 @@
 		/> -->
 		<Button
 			icon={DocumentText}
-			text="PDF"
+			text="Print"
 			as="button"
 			on:click={() =>
 				createPDF({ invoice: trx, outputType: 'dataurlnewwindow' })}
