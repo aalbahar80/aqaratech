@@ -1,5 +1,5 @@
 import type { LeaseInvoiceDto } from '@self/sdk';
-import type jsPDFInvoiceTemplate from 'jspdf-invoice-template';
+import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
 /**
  * Only works in browser. Do not call server-side.
