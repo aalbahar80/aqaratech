@@ -1,13 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
-	import { expenseTreeRoute } from '$lib/utils/route-helpers';
+	import { settings } from '$lib/utils/route-helpers';
 	import Fa6SolidNetworkWired from '~icons/fa6-solid/network-wired';
 
-	const subNavigation = [
+	$: subroutes = settings($page.params.id as string);
+	$: subNavigation = [
+		{
+			name: 'Organization',
+			href: subroutes.organization,
+			icon: Fa6SolidNetworkWired,
+		},
 		{
 			name: 'Expense Tree',
-			href: expenseTreeRoute($page.params.id as string),
+			href: subroutes.tree,
 			icon: Fa6SolidNetworkWired,
 		},
 	];

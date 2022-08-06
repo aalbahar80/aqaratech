@@ -1,6 +1,6 @@
 import { dev } from '$app/env';
 import { LOGOUT } from '$lib/constants/routes';
-import { expenseTreeRoute } from '$lib/utils/route-helpers';
+import { settings } from '$lib/utils/route-helpers';
 import type { SvelteComponentTyped } from 'svelte';
 import HeroiconsSolidCode from '~icons/heroicons-solid/code';
 import HeroiconsSolidCog from '~icons/heroicons-solid/cog';
@@ -39,7 +39,7 @@ export const getNavOptions = (user: App.Session['user']): NavOption[] => [
 		? [
 				{
 					label: 'Settings',
-					href: expenseTreeRoute(user?.role.organizationId),
+					href: settings(user?.role.organizationId).organization,
 					icon: HeroiconsSolidCog,
 					hideOnPopover: true,
 				},

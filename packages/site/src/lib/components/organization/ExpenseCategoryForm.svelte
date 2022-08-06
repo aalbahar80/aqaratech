@@ -4,7 +4,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
-	import { expenseTreeRoute } from '$lib/utils/route-helpers';
+	import { settings } from '$lib/utils/route-helpers';
 	import {
 		createSchema,
 		updateSchema,
@@ -79,7 +79,7 @@
 				throw new Error('organizationId not found');
 			}
 			addSuccessToast();
-			return goto(expenseTreeRoute(organizationId) + '#' + value);
+			return goto(settings(organizationId).tree + '#' + value);
 		}}
 	/>
 {:else}
@@ -98,7 +98,7 @@
 				throw new Error('organiztionId not found');
 			}
 			addSuccessToast();
-			return goto(expenseTreeRoute(organizationId) + '#' + value);
+			return goto(settings(organizationId).tree + '#' + value);
 		}}
 	/>
 {/if}

@@ -1,5 +1,5 @@
-import type { EntityTitle } from '$lib/models/types/entity.type';
 import { entityNameMap } from '$lib/constants/names';
+import type { EntityTitle } from '$lib/models/types/entity.type';
 
 type Predefined = Map<string, any> | false | undefined;
 
@@ -19,5 +19,7 @@ export const create = ({
 	}
 };
 
-export const expenseTreeRoute = (orgId: string) =>
-	`/organizations/${orgId}/settings/expense-tree`;
+export const settings = (orgId: string) => ({
+	organization: `/organizations/${orgId}/settings/organization`,
+	tree: `/organizations/${orgId}/settings/tree`,
+});
