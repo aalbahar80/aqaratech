@@ -23,9 +23,10 @@ const refined = (s: typeof base | typeof createBase) =>
 	s
 		.refine(
 			(val) => {
-				console.table(val);
 				return (
-					val.dueAt === null || val.dueAt === '' || val.postAt <= val.dueAt
+					val.dueAt === null ||
+					val.dueAt === '' ||
+					Date.parse(val.postAt) <= Date.parse(val.dueAt)
 				);
 			},
 			{
@@ -53,7 +54,7 @@ export const warnSchema = z
 			val.paidAt === null ||
 			val.paidAt === '' ||
 			!val.postAt ||
-			new Date(val.postAt) <= new Date(val.paidAt),
+			Date.parse(val.postAt) <= Date.parse(val.paidAt),
 		{
 			path: ['paidAt'],
 			message: 'Payment date is before post date',
