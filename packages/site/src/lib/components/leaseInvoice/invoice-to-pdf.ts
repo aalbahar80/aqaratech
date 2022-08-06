@@ -13,9 +13,14 @@ type OutputType =
 	| 'pdfjsnewwindow'
 	| 'pdfobjectnewwindow';
 
-// TODO: move to server?
+/**
+ * Takes a lease invoice and returns a object that can be used to create a pdf.
+ *
+ * @example
+ * const props = invoiceToPdf(invoice); // prepare
+ * jsPDFInvoiceTemplate(props); // create pdf
+ */
 export const invoiceToPdf = (invoice: LeaseInvoiceDto): PdfProps => {
-	console.log({ invoice }, 'invoice-to-pdf.ts ~ 10');
 	const outputType: OutputType = 'dataurlnewwindow';
 	defaultObj.outputType = outputType;
 	return defaultObj;
