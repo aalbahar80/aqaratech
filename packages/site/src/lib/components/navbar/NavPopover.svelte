@@ -74,7 +74,7 @@
 							{#if !option.hideOnPopover}
 								<a
 									href={option.href}
-									sveltekit:reload={option.external || null}
+									sveltekit:reload={option.external || true}
 									on:click={() => close(null)}
 								>
 									<PopoverItem option={{ label: option.label }} />
