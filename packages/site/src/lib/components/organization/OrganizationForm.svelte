@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
@@ -44,18 +44,36 @@
 	];
 </script>
 
-<!-- TODO add onUpdate callback -->
-<Form
-	{schema}
-	entityTitle="organizations"
-	{formType}
-	{basicFields}
-	onSubmit={(values) =>
-		$page.stuff.api.organizations.create({
-			createOrganizationDto: values,
-		})}
-	onSuccess={(value) => {
-		addSuccessToast();
-		return goto(`/auth/roles/${value.roleId}`);
-	}}
-/>
+{#if formType === 'update'}
+	<Form
+		{schema}
+		entityTitle="organizations"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			data &&
+			$page.stuff.api.organizations.update({
+				id: data.id,
+				updateOrganizationDto: values,
+			})}
+		onSuccess={() => {
+			addSuccessToast();
+			return goto(`/users/${$session.user?.id}/roles`);
+		}}
+	/>
+{:else}
+	<Form
+		{schema}
+		entityTitle="organizations"
+		{formType}
+		{basicFields}
+		onSubmit={(values) =>
+			$page.stuff.api.organizations.create({
+				createOrganizationDto: values,
+			})}
+		onSuccess={() => {
+			addSuccessToast();
+			return goto(`/users/${$session.user?.id}/roles`);
+		}}
+	/>
+{/if}

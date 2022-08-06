@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiHeader,
@@ -24,6 +32,7 @@ import {
   CreateOrganizationDto,
   OrganizationCreatedDto,
   OrganizationDto,
+  UpdateOrganizationDto,
 } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
@@ -55,6 +64,16 @@ export class OrganizationsController {
   @ApiOkResponse({ type: OrganizationDto })
   findOne(@Param('id') id: string): Promise<OrganizationDto> {
     return this.organizationsService.findOne({ id });
+  }
+
+  @Patch(':id')
+  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @ApiOkResponse({ type: String })
+  update(
+    @Param('id') id: string,
+    @Body() updateOrganizationDto: UpdateOrganizationDto,
+  ): Promise<string> {
+    return this.organizationsService.update({ id, updateOrganizationDto });
   }
 
   @Get(':id/roles')

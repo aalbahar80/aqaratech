@@ -1910,6 +1910,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
       tags: *ref_21
+    patch:
+      operationId: update
+      parameters:
+        - *ref_20
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_21
   /organizations/{id}/roles:
     get:
       operationId: findRoles
@@ -3550,6 +3573,16 @@ components:
       required:
         - organization
         - roleId
+    UpdateOrganizationDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 255
+        label:
+          type: string
+          nullable: true
     ByMonthDto:
       type: object
       properties:

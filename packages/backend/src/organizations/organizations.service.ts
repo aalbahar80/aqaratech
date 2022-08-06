@@ -2,7 +2,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
-import { CreateOrganizationDto } from 'src/organizations/dto/organization.dto';
+import {
+  CreateOrganizationDto,
+  UpdateOrganizationDto,
+} from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -56,6 +59,23 @@ export class OrganizationsService {
   async findOne({ id }: { id: string }) {
     const data = await this.prisma.organization.findUnique({ where: { id } });
     return data;
+  }
+
+  async update({
+    id,
+    updateOrganizationDto,
+  }: {
+    id: string;
+    updateOrganizationDto: UpdateOrganizationDto;
+  }) {
+    const updated = await this.prisma.organization.update({
+      where: { id },
+      data: {
+        fullName: updateOrganizationDto.fullName,
+        label: updateOrganizationDto.label,
+      },
+    });
+    return updated.id;
   }
 
   async remove({ id }: { id: string }) {
