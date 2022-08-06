@@ -40,11 +40,13 @@ interface PDFOptions {
 	outputType: OutputType;
 }
 
-const defaultObj = {
-	// outputType: 'save',
+/**
+ * https://github.com/edisonneza/jspdf-invoice-template
+ */
+const defaultObj: PdfProps = {
 	outputType: 'dataurlnewwindow',
 	returnJsPDFDocObject: true,
-	fileName: 'Invoice 2022',
+	fileName: 'Invoice.pdf',
 	orientationLandscape: false,
 	compress: true,
 	logo: {
@@ -58,29 +60,20 @@ const defaultObj = {
 	},
 	stamp: {
 		inAllPages: true,
-		src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
-		width: 20, //aspect ratio = width/height
-		height: 20,
-		margin: {
-			top: 0, //negative or positive num, from the current position
-			left: 0, //negative or positive num, from the current position
-		},
+		// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
+		src: 'http://localhost:3000/paid-stamp.png',
+		// original aspect ratio = 2185/1332 = 1.64
+		width: 48,
+		height: 30,
+		margin: { top: -150, left: 130 },
 	},
 	business: {
-		name: 'Business Name',
-		address: 'Albania, Tirane ish-Dogana, Durres 2001',
-		phone: '(+355) 069 11 11 111',
-		email: 'email@example.com',
-		email_1: 'info@example.al',
-		website: 'www.example.al',
+		name: 'Aqaratech',
+		website: 'www.aqaratech.com',
 	},
 	contact: {
 		label: 'Invoice issued for:',
-		name: 'Client Name',
-		address: 'Albania, Tirane, Astir',
-		phone: '(+355) 069 22 22 222',
-		email: 'client@website.al',
-		otherInfo: 'www.website.al',
+		name: 'TENANTNAMEHERE',
 	},
 	invoice: {
 		label: 'Invoice #: ',
@@ -113,7 +106,7 @@ const defaultObj = {
 			{ title: 'Unit' },
 			{ title: 'Total' },
 		],
-		table: Array.from(Array(15), (item, index) => [
+		table: Array.from(Array(1), (item, index) => [
 			index + 1,
 			'There are many variations ',
 			'Lorem Ipsum is simply dummy text dummy text ',
@@ -126,36 +119,20 @@ const defaultObj = {
 			{
 				col1: 'Total:',
 				col2: '145,250.50',
-				col3: 'ALL',
+				// col3: 'ALL',
 				style: {
 					fontSize: 14, //optional, default 12
 				},
 			},
-			{
-				col1: 'VAT:',
-				col2: '20',
-				col3: '%',
-				style: {
-					fontSize: 10, //optional, default 12
-				},
-			},
-			{
-				col1: 'SubTotal:',
-				col2: '116,199.90',
-				col3: 'ALL',
-				style: {
-					fontSize: 10, //optional, default 12
-				},
-			},
 		],
 
-		invDescLabel: 'Invoice Note',
-		invDesc:
-			"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+		// invDescLabel: 'Invoice Note',
+		// 	invDesc:
+		// 		"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
 	},
-	footer: {
-		text: 'The invoice is created on a computer and is valid without the signature and stamp.',
-	},
-	pageEnable: true,
-	pageLabel: 'Page ',
+	// footer: {
+	// 	text: 'The invoice is created on a computer and is valid without the signature and stamp.',
+	// },
+	// pageEnable: true,
+	// pageLabel: 'Page ',
 };
