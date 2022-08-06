@@ -15,16 +15,6 @@ export function falsyToNullExceptZero<T>(v: T) {
 	return isNumber(v) ? v : null;
 }
 
-export function strToDate(v: unknown) {
-	if (v instanceof Date) {
-		return v;
-	} else if (typeof v === 'string' || typeof v === 'number') {
-		return new Date(v);
-	} else {
-		return;
-	}
-}
-
 // TODO Doesn't infer correctly
 export function undefinedToNull<T>(v: T) {
 	return v === undefined ? null : v;

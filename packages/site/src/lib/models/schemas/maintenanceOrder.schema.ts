@@ -1,5 +1,6 @@
 import { isID } from '$lib/models/schemas/id.schema';
-import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
+import { zodIsDateOptional } from '$lib/utils/zod-validators';
+import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
 const baseSchema = z.object({
@@ -11,9 +12,7 @@ const baseSchema = z.object({
 		.transform(falsyToNull),
 	description: z.string().nullable().transform(trim).transform(falsyToNull),
 	status: z.string().min(1, { message: 'Required' }).nullable(),
-	completedAt: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	completedAt: zodIsDateOptional(),
 	propertyId: isID.nullable(),
 	portfolioId: isID.nullable(),
 	unitId: isID.nullable(),

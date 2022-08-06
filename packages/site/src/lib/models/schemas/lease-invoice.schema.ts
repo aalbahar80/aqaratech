@@ -3,13 +3,11 @@ import {
 	zodIsDateOptional,
 	zodIsDateRequired,
 } from '$lib/utils/zod-validators';
-import { falsyToNull, strToDate, trim } from '$lib/zodTransformers.js';
-import { z, ZodSchema } from 'zod';
+import { falsyToNull, trim } from '$lib/zodTransformers.js';
+import { z } from 'zod';
 
 const base = z.object({
-	dueAt: z
-		.union([z.null(), z.literal(''), z.preprocess(strToDate, z.date())])
-		.transform(falsyToNull),
+	dueAt: zodIsDateOptional(),
 	postAt: zodIsDateRequired(),
 	paidAt: zodIsDateOptional(),
 	isPaid: z.boolean(),
@@ -21,7 +19,7 @@ const createBase = base.extend({
 	leaseId: isID,
 });
 
-const refined = (s: ZodSchema) =>
+const refined = (s: typeof base | typeof createBase) =>
 	s
 		.refine(
 			(val) => {
