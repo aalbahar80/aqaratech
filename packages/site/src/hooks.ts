@@ -1,5 +1,6 @@
 import { env } from '$env/dynamic/public';
 import { environment } from '$environment';
+import { LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
@@ -47,11 +48,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 				return new Response('Session expired', {
 					status: 302,
 					headers: {
-						Location: '/auth/login',
+						Location: LOGIN,
 					},
 				});
 			} else {
-				console.warn(`Invalid idToken: ${cookies.idToken}`);
+				console.warn(
+					`Invalid idToken: ${cookies.idToken}. Redirecting to ${LOGOUT} .`,
+				);
+				return new Response('', {
+					status: 302,
+					headers: {
+						Location: LOGOUT,
+					},
+				});
 				// Sentry.captureException(e);
 			}
 		}
