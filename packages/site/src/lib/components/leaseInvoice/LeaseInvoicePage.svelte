@@ -5,11 +5,12 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { createPDF } from '$lib/components/leaseInvoice/invoice-to-pdf';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { LeaseInvoiceDto } from '@self/sdk';
-	import { Mail } from '@steeze-ui/heroicons';
+	import { DocumentText, Mail } from '@steeze-ui/heroicons';
 
 	type Transaction = LeaseInvoiceDto;
 	export let trx: Transaction;
@@ -42,6 +43,15 @@
 			text={'Copy public URL'}
 			solid
 		/> -->
+		<Button
+			icon={DocumentText}
+			text="PDF"
+			as="button"
+			on:click={() =>
+				createPDF({ invoice: trx, outputType: 'dataurlnewwindow' })}
+			class="w-full sm:w-auto"
+			prefetch
+		/>
 		<Button
 			icon={Mail}
 			text={'Send email reminder'}
