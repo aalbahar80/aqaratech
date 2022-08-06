@@ -21,45 +21,45 @@ export const createPDF = async (options: PDFOptions) => {
 export const preparePDF = (options: PDFOptions): PdfProps => {
 	if (
 		// to make typescript happy
-		!defaultObj.footer ||
-		!defaultObj.invoice ||
-		!defaultObj.contact ||
-		!defaultObj.invoice.additionalRows
+		!pdf.footer ||
+		!pdf.invoice ||
+		!pdf.contact ||
+		!pdf.invoice.additionalRows
 	) {
 		throw new Error('Missing required properties');
 	}
 
 	const { invoice } = options;
-	defaultObj.outputType = options.outputType;
+	pdf.outputType = options.outputType;
 	const total = invoice.amount.toLocaleString('en-KW', {
 		style: 'currency',
 		currency: 'KWD',
 	});
-	defaultObj.returnJsPDFDocObject = true;
+	pdf.returnJsPDFDocObject = true;
 
-	defaultObj.footer.text = invoice.id;
-	defaultObj.invoice.table = [['1', invoice.memo, total]];
-	defaultObj.invoice.additionalRows[0].col2 = total;
+	pdf.footer.text = invoice.id;
+	pdf.invoice.table = [['1', invoice.memo, total]];
+	pdf.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
-	defaultObj.contact.name = invoice.breadcrumbs.tenant.label;
+	pdf.contact.name = invoice.breadcrumbs.tenant.label;
 
 	// Address
 	const property = invoice.breadcrumbs.property.label;
 	const unit = invoice.breadcrumbs.unit.label;
-	defaultObj.contact.address = property;
-	defaultObj.contact.otherInfo = unit;
+	pdf.contact.address = property;
+	pdf.contact.otherInfo = unit;
 
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
-	defaultObj.invoice.invGenDate = `Invoice date: ${postAt}`;
+	pdf.invoice.invGenDate = `Invoice date: ${postAt}`;
 	if (invoice.isPaid && invoice.paidAt) {
-		defaultObj.stamp = stamp;
+		pdf.stamp = stamp;
 		const paidAt = invoice.paidAt.split('T')[0];
-		defaultObj.invoice.invDate = `Payment date: ${paidAt}`;
+		pdf.invoice.invDate = `Payment date: ${paidAt}`;
 	}
 
-	return defaultObj;
+	return pdf;
 };
 
 type PdfProps = Parameters<typeof jsPDFInvoiceTemplate>[0];
@@ -92,7 +92,7 @@ const stamp: PdfProps['stamp'] = {
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
  */
-const defaultObj: PdfProps = {
+const pdf: PdfProps = {
 	outputType: 'dataurlnewwindow',
 	returnJsPDFDocObject: true,
 	fileName: 'Invoice.pdf',
