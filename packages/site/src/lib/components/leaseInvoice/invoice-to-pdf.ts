@@ -21,8 +21,14 @@ export const createPDF = async (options: PDFOptions) => {
 export const preparePDF = (options: PDFOptions): PdfProps => {
 	const { invoice } = options;
 	defaultObj.outputType = options.outputType;
+	const total = invoice.amount.toLocaleString('en-KW', {
+		style: 'currency',
+		currency: 'KWD',
+	});
 
 	defaultObj.footer.text = invoice.id;
+	defaultObj.invoice.table = [['1', invoice.memo, total]];
+	defaultObj.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
 	defaultObj.contact.name = invoice.breadcrumbs.tenant.label;
@@ -90,11 +96,11 @@ const defaultObj: PdfProps = {
 	},
 	contact: {
 		label: 'Invoice issued for:',
-		name: 'TENANTNAMEHERE',
+		address: '123 Main St',
 	},
 	invoice: {
-		label: 'Invoice #: ',
-		num: 19,
+		// label: 'Invoice #: ',
+		// num: 19,
 		headerBorder: true,
 		tableBodyBorder: true,
 		header: [
@@ -105,36 +111,17 @@ const defaultObj: PdfProps = {
 				},
 			},
 			{
-				title: 'Title',
-				style: {
-					width: 30,
-				},
-			},
-			{
 				title: 'Description',
 				style: {
-					width: 80,
+					width: 140,
 				},
 			},
-			{ title: 'Price' },
-			{ title: 'Quantity' },
-			{ title: 'Unit' },
 			{ title: 'Total' },
 		],
-		table: Array.from(Array(1), (item, index) => [
-			index + 1,
-			'There are many variations ',
-			'Lorem Ipsum is simply dummy text dummy text ',
-			200.5,
-			4.5,
-			'm2',
-			400.5,
-		]),
 		additionalRows: [
 			{
 				col1: 'Total:',
-				col2: '145,250.50',
-				// col3: 'ALL',
+				// col2: 'AMOUNT',
 				style: {
 					fontSize: 14, //optional, default 12
 				},
