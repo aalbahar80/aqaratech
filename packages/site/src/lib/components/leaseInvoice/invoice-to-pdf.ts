@@ -48,7 +48,7 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	const property = invoice.breadcrumbs.property.label;
 	const unit = invoice.breadcrumbs.unit.label;
 	pdf.contact.address = property;
-	pdf.contact.otherInfo = unit;
+	pdf.contact.phone = unit;
 
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
