@@ -10,6 +10,7 @@ import type {
 	HandleError,
 } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
+import { errors } from 'jose';
 
 export const getSession: GetSession = async ({ locals }) => {
 	// If idToken validation fails, we set both user and isAuthenticated to false
@@ -42,7 +43,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.locals.idToken = cookies.idToken;
 		} catch (e) {
 			console.error(e);
-			// Sentry.captureException(e);
+			if (e instanceof errors.JWTExpired) {
+				return new Response('Session expired', {
+					status: 302,
+					headers: {
+						Location: '/auth/login',
+					},
+				});
+			} else {
+				console.warn(`Invalid idToken: ${cookies.idToken}`);
+				// Sentry.captureException(e);
+			}
 		}
 	}
 	event.locals.isAuthenticated = isAuthenticated;

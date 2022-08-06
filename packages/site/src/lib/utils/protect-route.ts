@@ -19,6 +19,10 @@ export const protectRoute = (session: App.Session, pathname: string) => {
 	}
 
 	if (shouldRedirect) {
+		console.log(
+			`[PROTECT-ROUTE] Redirecting from ${pathname} to ${redirectUrl}`,
+		);
+		console.debug(session);
 		return {
 			redirect: redirectUrl,
 			status: 302,
