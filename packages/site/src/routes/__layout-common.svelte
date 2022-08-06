@@ -6,7 +6,7 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
-	import { protectRoute } from '$lib/utils/auth';
+	import { protectRoute } from '$lib/utils/protect-route';
 	import type { Scope } from '@sentry/browser';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
