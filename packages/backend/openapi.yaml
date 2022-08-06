@@ -3529,8 +3529,8 @@ components:
       properties:
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
+          minLength: 3
+          maxLength: 100
         label:
           type: string
           nullable: true
@@ -3552,8 +3552,8 @@ components:
           readOnly: true
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
+          minLength: 3
+          maxLength: 100
         label:
           type: string
           nullable: true
@@ -3578,8 +3578,8 @@ components:
       properties:
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
+          minLength: 3
+          maxLength: 100
         label:
           type: string
           nullable: true

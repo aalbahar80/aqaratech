@@ -4,7 +4,7 @@ import { IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
 class OrganizationRequiredDto {
-  @Length(1, 255)
+  @Length(3, 100)
   fullName: string;
 }
 
