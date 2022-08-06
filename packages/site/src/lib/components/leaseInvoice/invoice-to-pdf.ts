@@ -7,17 +7,8 @@ import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 export const createPDF = async (options: PDFOptions) => {
 	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
 	const pdfPkg = await import('../../pdf/jspdf-invoice-template');
-	// pdfPkg.jsPDF.API.events.
-	// const parameters: PdfProps = {};
-
 	const props = preparePDF(options);
-	const doc = pdfPkg.default(props).jsPDFDocObject;
-
-	// set font
-	console.log({ doc }, 'invoice-to-pdf.ts ~ 21');
-	if (!doc) return;
-	doc?.output('dataurlnewwindow');
-	// a?.output('dataurlnewwindow');
+	pdfPkg.default(props).jsPDFDocObject;
 };
 
 /**
