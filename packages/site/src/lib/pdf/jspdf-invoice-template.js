@@ -1,4 +1,6 @@
 import { jsPDF } from 'jspdf';
+import AmiriRegular from './Amiri-Regular.ttf?raw';
+// import AmiriRegular from './Amiri-Regular.ttf';
 
 const OutputType = {
 	Save: 'save', //save pdf as a file
@@ -170,12 +172,26 @@ function jsPDFInvoiceTemplate(props) {
 			throw Error('Length of header and table column must be equal.');
 	}
 
+	// jsPDF requires us to add/set fonts before adding text. So I had to copy the jspdf-inoice-template source code
+	// and add the fonts before adding text. This is done so we can use the invoice template.
+	//
+	// https://github.com/parallax/jsPDF/blob/2d9a91916471f1fbe465dbcdc05db0cf22d720ec/test/specs/arabic.spec.js#L7
+	// https://github.com/edisonneza/jspdf-invoice-template/issues/20
+
 	const options = {
 		orientation: param.orientationLandscape ? 'landscape' : '',
 		compress: param.compress,
+
+		// added for arabic support
+		filters: ['ASCIIHexEncode'],
+		putOnlyUsedFonts: true,
 	};
 
 	var doc = new jsPDF(options);
+
+	doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
+	doc.addFont('/Amiri-Regular.ttf', 'Amiri', 'normal');
+	doc.setFont('Amiri'); // set font
 
 	var docWidth = doc.internal.pageSize.width;
 	var docHeight = doc.internal.pageSize.height;

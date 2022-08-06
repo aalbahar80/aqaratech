@@ -1,20 +1,14 @@
 import type { LeaseInvoiceDto } from '@self/sdk';
 import type jsPDFInvoiceTemplate from 'jspdf-invoice-template';
-// import AmiriRegular from './Amiri-Regular.ttf?raw';
-import AmiriRegular from './Amiri-Regular.ttf';
 
 /**
  * Only works in browser. Do not call server-side.
  */
 export const createPDF = async (options: PDFOptions) => {
 	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
-	const pdfPkg = await import('jspdf-invoice-template');
+	const pdfPkg = await import('../../pdf/jspdf-invoice-template');
 	// pdfPkg.jsPDF.API.events.
 	// const parameters: PdfProps = {};
-	// const doc = new pdfPkg.jsPDF({
-	// 	filters: ['ASCIIHexEncode'],
-	// 	putOnlyUsedFonts: true,
-	// });
 
 	const props = preparePDF(options);
 	const doc = pdfPkg.default(props).jsPDFDocObject;
@@ -22,12 +16,8 @@ export const createPDF = async (options: PDFOptions) => {
 	// set font
 	console.log({ doc }, 'invoice-to-pdf.ts ~ 21');
 	if (!doc) return;
-	doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
-	doc.addFont('/Amiri-Regular.ttf', 'Amiri', 'normal');
-	doc.setFont('Amiri'); // set font
-	doc.setFontSize(50);
-	doc.text('مال غرب الجهر', 50, 50);
 	doc?.output('dataurlnewwindow');
+	// a?.output('dataurlnewwindow');
 };
 
 /**
