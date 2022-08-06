@@ -19,6 +19,16 @@ export const createPDF = async (options: PDFOptions) => {
  * jsPDFInvoiceTemplate(props); // create pdf
  */
 export const preparePDF = (options: PDFOptions): PdfProps => {
+	if (
+		// to make typescript happy
+		!defaultObj.footer ||
+		!defaultObj.invoice ||
+		!defaultObj.contact ||
+		!defaultObj.invoice.additionalRows
+	) {
+		throw new Error('Missing required properties');
+	}
+
 	const { invoice } = options;
 	defaultObj.outputType = options.outputType;
 	const total = invoice.amount.toLocaleString('en-KW', {
@@ -35,8 +45,10 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	defaultObj.contact.name = invoice.breadcrumbs.tenant.label;
 
 	// Address
-	const address = `${invoice.breadcrumbs.property.label}`;
-	defaultObj.contact.address = address;
+	const property = invoice.breadcrumbs.property.label;
+	const unit = invoice.breadcrumbs.unit.label;
+	defaultObj.contact.address = property;
+	defaultObj.contact.otherInfo = unit;
 
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
