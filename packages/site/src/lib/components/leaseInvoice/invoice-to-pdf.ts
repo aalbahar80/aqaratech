@@ -19,7 +19,21 @@ export const createPDF = async (options: PDFOptions) => {
  * jsPDFInvoiceTemplate(props); // create pdf
  */
 export const preparePDF = (options: PDFOptions): PdfProps => {
+	const { invoice } = options;
 	defaultObj.outputType = options.outputType;
+
+	// Tenant
+	defaultObj.contact.name = options.invoice.breadcrumbs.tenant.label;
+
+	// Dates
+	const postAt = invoice.postAt.split('T')[0];
+	defaultObj.invoice.invGenDate = `Invoice date: ${postAt}`;
+	if (invoice.isPaid && invoice.paidAt) {
+		defaultObj.stamp = stamp;
+		const paidAt = invoice.paidAt.split('T')[0];
+		defaultObj.invoice.invDate = `Payment date: ${paidAt}`;
+	}
+
 	return defaultObj;
 };
 
@@ -40,6 +54,16 @@ interface PDFOptions {
 	outputType: OutputType;
 }
 
+const stamp: PdfProps['stamp'] = {
+	inAllPages: true,
+	// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
+	src: 'http://localhost:3000/paid-stamp.png',
+	// original aspect ratio = 2185/1332 = 1.64
+	width: 48,
+	height: 30,
+	margin: { top: -150, left: 130 },
+};
+
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
  */
@@ -58,15 +82,6 @@ const defaultObj: PdfProps = {
 			left: 0, //negative or positive num, from the current position
 		},
 	},
-	stamp: {
-		inAllPages: true,
-		// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
-		src: 'http://localhost:3000/paid-stamp.png',
-		// original aspect ratio = 2185/1332 = 1.64
-		width: 48,
-		height: 30,
-		margin: { top: -150, left: 130 },
-	},
 	business: {
 		name: 'Aqaratech',
 		website: 'www.aqaratech.com',
@@ -78,8 +93,6 @@ const defaultObj: PdfProps = {
 	invoice: {
 		label: 'Invoice #: ',
 		num: 19,
-		invDate: 'Payment Date: 01/01/2021 18:12',
-		invGenDate: 'Invoice Date: 02/02/2021 10:17',
 		headerBorder: true,
 		tableBodyBorder: true,
 		header: [
