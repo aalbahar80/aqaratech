@@ -6,9 +6,25 @@ import type jsPDFInvoiceTemplate from 'jspdf-invoice-template';
  */
 export const createPDF = async (options: PDFOptions) => {
 	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
-	const pdfPkg = (await import('jspdf-invoice-template')).default;
+	const pdfPkg = await import('jspdf-invoice-template');
+	// const parameters: PdfProps = {};
+	// const doc = new pdfPkg.jsPDF({
+	// 	filters: ['ASCIIHexEncode'],
+	// 	putOnlyUsedFonts: true,
+	// });
+
 	const props = preparePDF(options);
-	pdfPkg(props);
+	const doc = pdfPkg.default(props).jsPDFDocObject;
+
+	// set font
+	console.log({ doc }, 'invoice-to-pdf.ts ~ 21');
+	if (!doc) return;
+	// doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
+	doc.addFont('/Amiri-Regular.ttf', 'Amiri', 'normal');
+	doc.setFont('Amiri'); // set font
+	doc.setFontSize(50);
+	doc.text('مال غرب الجهر', 50, 50);
+	doc?.output('dataurlnewwindow');
 };
 
 /**
@@ -25,6 +41,7 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 		style: 'currency',
 		currency: 'KWD',
 	});
+	defaultObj.returnJsPDFDocObject = true;
 
 	defaultObj.footer.text = invoice.id;
 	defaultObj.invoice.table = [['1', invoice.memo, total]];
