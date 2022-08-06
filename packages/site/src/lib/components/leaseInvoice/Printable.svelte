@@ -5,4 +5,6 @@
 	export let invoice: LeaseInvoiceDto;
 </script>
 
-<button on:click={() => createPDF(invoice)}>Print me</button>
+<button on:click={() => createPDF({ invoice, outputType: 'dataurlnewwindow' })}
+	>Print me</button
+>

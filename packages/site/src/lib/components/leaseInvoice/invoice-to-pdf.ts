@@ -4,11 +4,23 @@ import type jsPDFInvoiceTemplate from 'jspdf-invoice-template';
 /**
  * Only works in browser. Do not call server-side.
  */
-export const createPDF = async (invoice: LeaseInvoiceDto) => {
-	// use inline import because package only works in browser
+export const createPDF = async (options: PDFOptions) => {
+	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
 	const pdfPkg = (await import('jspdf-invoice-template')).default;
-	const props = preparePDF(invoice);
+	const props = preparePDF(options);
 	pdfPkg(props);
+};
+
+/**
+ * Returns a object that can be used to create a pdf.
+ *
+ * @example
+ * const props = invoiceToPdf({ invoice, outputType: 'dataurlnewwindow' }); // prepare
+ * jsPDFInvoiceTemplate(props); // create pdf
+ */
+export const preparePDF = (options: PDFOptions): PdfProps => {
+	defaultObj.outputType = options.outputType;
+	return defaultObj;
 };
 
 type PdfProps = Parameters<typeof jsPDFInvoiceTemplate>[0];
@@ -23,21 +35,14 @@ type OutputType =
 	| 'pdfjsnewwindow'
 	| 'pdfobjectnewwindow';
 
-/**
- * Takes a lease invoice and returns a object that can be used to create a pdf.
- *
- * @example
- * const props = invoiceToPdf(invoice); // prepare
- * jsPDFInvoiceTemplate(props); // create pdf
- */
-export const preparePDF = (invoice: LeaseInvoiceDto): PdfProps => {
-	const outputType: OutputType = 'dataurlnewwindow';
-	defaultObj.outputType = outputType;
-	return defaultObj;
-};
+interface PDFOptions {
+	invoice: LeaseInvoiceDto;
+	outputType: OutputType;
+}
 
 const defaultObj = {
-	outputType: 'save',
+	// outputType: 'save',
+	outputType: 'dataurlnewwindow',
 	returnJsPDFDocObject: true,
 	fileName: 'Invoice 2022',
 	orientationLandscape: false,
