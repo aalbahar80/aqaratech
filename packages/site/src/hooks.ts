@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/public';
 import { environment } from '$environment';
-import { LOGIN, LOGOUT } from '$lib/constants/routes';
+import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
@@ -36,7 +36,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// Validate idToken, set locals.isAuthenticated to true if valid
 	let isAuthenticated = false;
-	if (cookies.idToken) {
+
+	// A user with an expired token needs a way to re-authenticate,
+	// so we don't want to validate the token if the user is trying to log in.
+	// If we do want to validate it either way, we need to make sure to not place
+	// the user in a redirect loop:
+	// idToken expired => redirect to login => idToken expired => redirect to login => ...
+	const PUBLIC_ENDPOINTS = [LOGIN, LOGOUT, AUTH_CALLBACK];
+	if (cookies.idToken && !PUBLIC_ENDPOINTS.includes(event.url.pathname)) {
 		try {
 			await validateToken(cookies.idToken);
 			isAuthenticated = true;
