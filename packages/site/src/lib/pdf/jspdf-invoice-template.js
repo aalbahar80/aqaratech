@@ -1,5 +1,5 @@
 import { jsPDF } from 'jspdf';
-import AmiriRegular from './Amiri-Regular.ttf?raw';
+import AmiriRegular from '../../../static/Amiri-Regular.ttf?raw';
 // import AmiriRegular from './Amiri-Regular.ttf';
 
 const OutputType = {
