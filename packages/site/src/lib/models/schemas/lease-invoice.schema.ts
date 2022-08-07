@@ -6,43 +6,71 @@ import {
 import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
 
-const base = z.object({
-	dueAt: zodIsDateOptional(),
-	postAt: zodIsDateRequired(),
-	paidAt: zodIsDateOptional(),
-	isPaid: z.boolean(),
-	amount: z.number().gt(0),
-	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
-});
+export const updateSchema = z
+	.object({
+		dueAt: zodIsDateOptional(),
+		postAt: zodIsDateRequired(),
+		paidAt: zodIsDateOptional(),
+		isPaid: z.boolean(),
+		amount: z.number().gt(0),
+		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
+	})
+	.refine(
+		(val) => {
+			return (
+				val.dueAt === null ||
+				val.dueAt === '' ||
+				Date.parse(val.postAt) <= Date.parse(val.dueAt)
+			);
+		},
+		{
+			path: ['dueAt'],
+			message: 'Due date cannot be before post date',
+		},
+	)
+	.refine(
+		(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
+		(val) => ({
+			path: ['paidAt'],
+			message: val.isPaid
+				? 'If this transaction is paid, you must enter a payment date'
+				: 'If this transaction is not paid, you must clear the payment date',
+		}),
+	);
 
-const createBase = base.extend({
-	leaseId: isID,
-});
-
-const refined = (s: typeof base | typeof createBase) =>
-	s
-		.refine(
-			(val) => {
-				return (
-					val.dueAt === null ||
-					val.dueAt === '' ||
-					Date.parse(val.postAt) <= Date.parse(val.dueAt)
-				);
-			},
-			{
-				path: ['dueAt'],
-				message: 'Due date cannot be before post date',
-			},
-		)
-		.refine(
-			(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
-			(val) => ({
-				path: ['paidAt'],
-				message: val.isPaid
-					? 'If this transaction is paid, you must enter a payment date'
-					: 'If this transaction is not paid, you must clear the payment date',
-			}),
-		);
+export const createSchema = z
+	.object({
+		leaseId: isID,
+		// dupes
+		dueAt: zodIsDateOptional(),
+		postAt: zodIsDateRequired(),
+		paidAt: zodIsDateOptional(),
+		isPaid: z.boolean(),
+		amount: z.number().gt(0),
+		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
+	})
+	.refine(
+		(val) => {
+			return (
+				val.dueAt === null ||
+				val.dueAt === '' ||
+				Date.parse(val.postAt) <= Date.parse(val.dueAt)
+			);
+		},
+		{
+			path: ['dueAt'],
+			message: 'Due date cannot be before post date',
+		},
+	)
+	.refine(
+		(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
+		(val) => ({
+			path: ['paidAt'],
+			message: val.isPaid
+				? 'If this transaction is paid, you must enter a payment date'
+				: 'If this transaction is not paid, you must clear the payment date',
+		}),
+	);
 
 export const warnSchema = z
 	.object({
@@ -60,6 +88,3 @@ export const warnSchema = z
 			message: 'Payment date is before post date',
 		},
 	);
-
-export const updateSchema = refined(base);
-export const createSchema = refined(createBase);
