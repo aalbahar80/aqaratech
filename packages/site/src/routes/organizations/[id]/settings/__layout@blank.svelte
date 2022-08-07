@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import { settings } from '$lib/utils/route-helpers';
+	import BxsBusiness from '~icons/bxs/business';
 	import Fa6SolidNetworkWired from '~icons/fa6-solid/network-wired';
 
 	$: subroutes = settings($page.params.id as string);
@@ -9,7 +10,7 @@
 		{
 			name: 'Organization',
 			href: subroutes.organization,
-			icon: Fa6SolidNetworkWired,
+			icon: BxsBusiness,
 		},
 		{
 			name: 'Expense Tree',
