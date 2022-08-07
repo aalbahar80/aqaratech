@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import RoleCard from '$components/role/RoleCard.svelte';
+	import MemberCard from '$components/role/MemberCard.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
@@ -35,7 +35,7 @@
 			},
 		]}
 		<li>
-			<RoleCard
+			<MemberCard
 				{role}
 				{icons}
 				on:delete={(e) => {
