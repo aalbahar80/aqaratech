@@ -3,7 +3,7 @@
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ExpensesTable from '$lib/components/dashboard/cards/ExpensesTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/components/form/inputs/Select.svelte';
 	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '@self/sdk';
 
 	export let expenses: PaginatedExpenseDto;

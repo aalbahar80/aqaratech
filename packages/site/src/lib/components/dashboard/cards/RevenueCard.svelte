@@ -4,7 +4,7 @@
 	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
 	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/components/form/inputs/Select.svelte';
 	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 
 	export let invoices: PaginatedLeaseInvoiceDto;

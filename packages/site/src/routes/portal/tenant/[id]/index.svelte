@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/components/form/inputs/Select.svelte';
 	import TrxList from '$lib/components/trx/TrxList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { LoadEvent } from '@sveltejs/kit';

@@ -6,7 +6,7 @@
 		defaultRangeEnd,
 		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
 	import type { PropertyDto, UnitDto } from '@self/sdk';
 
