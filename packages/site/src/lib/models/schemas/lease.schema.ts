@@ -15,7 +15,7 @@ export const createBase = base.extend({
 	unitId: isID,
 });
 
-export const refined = (s: typeof base | typeof createBase) =>
+export const refined = (s: typeof createBase) =>
 	s
 		.refine(
 			(val) =>
@@ -34,5 +34,6 @@ export const refined = (s: typeof base | typeof createBase) =>
 			},
 		);
 
+// @ts-ignore
 export const updateSchema = refined(base);
 export const createSchema = refined(createBase);
