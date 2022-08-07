@@ -50,7 +50,7 @@
 						type: 'checkbox',
 						value: data?.isGroup ?? false,
 						autoInit: true,
-						hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". \n\n Expense Category: Holds expense entries.',
+						hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". Groups can be deeply nested. \n\n Expense Category: Holds expense entries.',
 					}),
 			  ]
 			: []),
