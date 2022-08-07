@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import LeaseInvoiceList from '$lib/components/leaseInvoice/LeaseInvoiceList.svelte';
-	import MemberList from '$lib/components/role/MemberList.svelte';
+	import MemberList from '$lib/components/member/MemberList.svelte';
 	import { countries } from '$lib/constants/countries';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { create } from '$lib/utils/route-helpers';

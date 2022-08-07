@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import MemberList from '$lib/components/role/MemberList.svelte';
+	import MemberList from '$lib/components/member/MemberList.svelte';
 	import type { OrganizationDto, PaginatedRoleDto } from '@self/sdk';
 
 	export let organization: OrganizationDto;

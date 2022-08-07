@@ -3,7 +3,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
-	import MemberList from '$lib/components/role/MemberList.svelte';
+	import MemberList from '$lib/components/member/MemberList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type {
 		PaginatedPropertyDto,
