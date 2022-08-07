@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import OwnRoleList from '$lib/components/role/OwnRoleList.svelte';
+	import RoleList from '$lib/components/role/RoleList.svelte';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -14,4 +14,4 @@
 	export let user: Prop['user'];
 </script>
 
-<OwnRoleList roles={user.roles} />
+<RoleList roles={user.roles} />

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import OwnRoleCard from '$lib/components/role/OwnRoleCard.svelte';
+	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import type { EntityName } from '$lib/constants/names';
 	import type { ValidatedRoleDto } from '@self/sdk';
@@ -35,7 +35,7 @@
 			},
 		]}
 		<li>
-			<OwnRoleCard
+			<RoleCard
 				{role}
 				{icons}
 				on:delete={(e) => {
