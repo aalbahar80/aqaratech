@@ -9,12 +9,7 @@ export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 			navLinks: [
 				{ label: 'Portfolios', href: '/portfolios' },
 				{ label: 'Properties', href: '/properties' },
-				// { label: 'Units', href: '/units' },
 				{ label: 'Leases', href: '/leases' },
-				{ label: 'Tenants', href: '/tenants' },
-				// { label: 'Transactions', href: '/invoices' },
-				// { label: 'Expenses', href: '/expenses' },
-				// { label: 'Maintenance', href: '/maintenanceOrders' },
 			],
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
@@ -24,7 +19,6 @@ export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 			navLinks: [
 				{ label: 'Properties', href: '/properties' },
 				{ label: 'Leases', href: '/leases' },
-				{ label: 'Tenants', href: '/tenants' },
 			],
 		};
 	} else if (role.roleType === 'TENANT') {
