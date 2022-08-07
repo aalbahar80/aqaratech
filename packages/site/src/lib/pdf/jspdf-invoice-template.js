@@ -1,5 +1,5 @@
 import { jsPDF } from 'jspdf';
-import AmiriRegular from '../../../static/Amiri-Regular.ttf?raw';
+// import AmiriRegular from '../../../src/Amiri-Regular.ttf';
 // import AmiriRegular from './Amiri-Regular.ttf';
 
 const OutputType = {
@@ -189,7 +189,7 @@ function jsPDFInvoiceTemplate(props) {
 
 	var doc = new jsPDF(options);
 
-	doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
+	// doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
 	doc.addFont('/Amiri-Regular.ttf', 'Amiri', 'normal');
 	doc.setFont('Amiri'); // set font
 
