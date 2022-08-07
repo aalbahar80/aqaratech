@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Chart from '$lib/components/Chart.svelte';
+	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenuePie } from '$lib/components/charts/revenue-pie';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
 
