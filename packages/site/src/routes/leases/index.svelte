@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import FilterBar from '$lib/components/FilterBar.svelte';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import { create } from '$lib/utils/route-helpers';
