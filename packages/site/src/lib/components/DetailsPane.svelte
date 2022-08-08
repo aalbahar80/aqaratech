@@ -2,11 +2,15 @@
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
-	import { PaperClip, Trash } from '@steeze-ui/heroicons';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	export let details: [string, string | null][];
-	export let files: [string, string][] | undefined = undefined;
+	export let files: [string, string][] | undefined = [['a', 'df']];
 </script>
 
 <div id="detailsPane">
@@ -50,16 +54,16 @@
 										<HybridButton />
 									</div>
 									<div slot="menu">
-										<DropdownMenu
-											options={[
-												{
-													label: 'Delete',
-													icon: Trash,
-													// TODO
-													onClick: () => {},
-												},
-											]}
-										/>
+										<DropdownMenu>
+											<MenuItem as="div" let:active>
+												<button on:click={() => {}} class="w-full">
+													<MenuItemChild {active}>
+														<MenuItemIcon icon={Fa6SolidTrashCan} />
+														Delete
+													</MenuItemChild>
+												</button>
+											</MenuItem>
+										</DropdownMenu>
 									</div>
 								</Dropdown>
 							</li>
