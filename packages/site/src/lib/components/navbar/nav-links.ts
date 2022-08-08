@@ -11,7 +11,7 @@ import MaterialSymbolsAddBusinessRounded from '~icons/material-symbols/add-busin
 interface NavOption {
 	label: string;
 	href: string;
-	icon?: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+	icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
 	external?: boolean;
 	hideOnPopover?: boolean;
 }

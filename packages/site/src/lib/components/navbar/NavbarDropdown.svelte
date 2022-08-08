@@ -2,7 +2,8 @@
 	import { session } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
-	import MenuIconItem from '$lib/components/buttons/MenuIconItem.svelte';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { ChevronDown } from '@steeze-ui/heroicons';
@@ -34,9 +35,12 @@
 	<div slot="menu">
 		<DropdownMenu>
 			{#each getNavOptions($session.user) as option}
-				<MenuItem let:active>
+				<MenuItem as="div" let:active>
 					<a href={option.href} sveltekit:reload>
-						<MenuIconItem {option} {active} />
+						<MenuItemChild {active}>
+							<MenuItemIcon icon={option.icon} />
+							{option.label}
+						</MenuItemChild>
 					</a>
 				</MenuItem>
 			{/each}
