@@ -7,7 +7,6 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
-	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
@@ -23,7 +22,6 @@
 	export let id: string;
 	export let entity: EntityTitle;
 	export let icons: IconTooltip[] | undefined = undefined;
-	export let extraMenuItems: MenuOption[] = [];
 	export let onDelete: (() => void) | undefined = undefined;
 
 	let isOpen = false;
@@ -67,9 +65,10 @@
 					<HybridButton />
 				</div>
 				<div slot="menu">
-					<DropdownMenu options={[...extraMenuItems]}>
+					<DropdownMenu>
+						<slot name="menu-items" />
 						<MenuItem as="div" let:active>
-							<label type="file" for="file-upload" class="cursor-pointer">
+							<label type="file" for="file-upload">
 								<input
 									id="file-upload"
 									name="file-upload"

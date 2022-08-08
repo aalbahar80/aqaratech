@@ -58,7 +58,7 @@
 			<Badge label={badge.label} badgeColor={badge.color} />
 			<Dropdown>
 				<div slot="menu">
-					<DropdownMenu class="bottom-10">
+					<DropdownMenu>
 						<MenuItem as="div" let:active>
 							<a href={`/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`}>
 								<MenuItemChild {active}>

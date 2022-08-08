@@ -1,17 +1,21 @@
 <script lang="ts">
 	import Button from '$lib/components/buttons/Button.svelte';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
+	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
+	import { create } from '$lib/utils/route-helpers';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type {
 		PaginatedPropertyDto,
 		PaginatedRoleDto,
 		PortfolioDto,
 	} from '@self/sdk';
-	import { CreditCard, PresentationChartBar } from '@steeze-ui/heroicons';
-	import { create } from '$lib/utils/route-helpers';
+	import { PresentationChartBar } from '@steeze-ui/heroicons';
+	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
@@ -27,21 +31,22 @@
 	] as [string, string | null][];
 </script>
 
-<Heading
-	title="Portfolio"
-	id={portfolio.id}
-	entity="portfolios"
-	extraMenuItems={[
-		{
-			icon: CreditCard,
-			label: 'Create expense',
-			href: create({
-				entity: 'expenses',
-				predefined: new Map([['portfolioId', portfolio.id]]),
-			}),
-		},
-	]}
->
+<Heading title="Portfolio" id={portfolio.id} entity="portfolios">
+	<div slot="menu-items">
+		<MenuItem as="div" let:active>
+			<a
+				href={create({
+					entity: 'expenses',
+					predefined: new Map([['portfolioId', portfolio.id]]),
+				})}
+			>
+				<MenuItemChild {active}>
+					<MenuItemIcon icon={HeroiconsSolidCreditCard} />
+					Create expense
+				</MenuItemChild>
+			</a>
+		</MenuItem>
+	</div>
 	<svelte:fragment slot="actions">
 		<Button
 			icon={PresentationChartBar}
