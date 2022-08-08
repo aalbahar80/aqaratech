@@ -2,6 +2,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { create } from '$lib/utils/route-helpers';
 	import type { PropertyDto } from '@self/sdk';
 	import { CreditCard } from '@steeze-ui/heroicons';
 
@@ -28,7 +29,13 @@
 		{
 			icon: CreditCard,
 			label: 'Create expense',
-			href: `/expenses/new?portfolioId=${property.portfolioId}&propertyId=${property.id}`,
+			href: create({
+				entity: 'expenses',
+				predefined: new Map([
+					['portfolioId', property.portfolioId],
+					['propertyId', property.id],
+				]),
+			}),
 		},
 	]}
 >

@@ -3,6 +3,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { kwdFormat } from '$lib/utils/common';
+	import { create } from '$lib/utils/route-helpers';
 	import type { UnitDto } from '@self/sdk';
 	import { CreditCard } from '@steeze-ui/heroicons';
 	import FaSolidBath from '~icons/fa-solid/bath';
@@ -56,7 +57,14 @@
 		{
 			icon: CreditCard,
 			label: 'Create expense',
-			href: `/expenses/new?portfolioId=${unit.breadcrumbs.portfolio.id}&propertyId=${unit.propertyId}&unitId=${unit.id}`,
+			href: create({
+				entity: 'expenses',
+				predefined: new Map([
+					['portfolioId', unit.breadcrumbs.portfolio.id],
+					['propertyId', unit.propertyId],
+					['unitId', unit.id],
+				]),
+			}),
 		},
 	]}
 >

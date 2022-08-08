@@ -11,6 +11,7 @@
 		PortfolioDto,
 	} from '@self/sdk';
 	import { CreditCard, PresentationChartBar } from '@steeze-ui/heroicons';
+	import { create } from '$lib/utils/route-helpers';
 
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
@@ -34,7 +35,10 @@
 		{
 			icon: CreditCard,
 			label: 'Create expense',
-			href: `/expenses/new?portfolioId=${portfolio.id}`,
+			href: create({
+				entity: 'expenses',
+				predefined: new Map([['portfolioId', portfolio.id]]),
+			}),
 		},
 	]}
 >
