@@ -5,6 +5,7 @@
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
+	import FileInput from '$lib/components/form/inputs/FileInput.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
@@ -68,13 +69,8 @@
 					<DropdownMenu>
 						<slot name="menu-items" />
 						<MenuItem as="div" let:active>
-							<label type="file" for="file-upload">
-								<input
-									id="file-upload"
-									name="file-upload"
-									type="file"
-									class="sr-only"
-								/>
+							<label type="file" for="file-upload" class="cursor-pointer">
+								<FileInput />
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidPaperclip} />
 									Attach file
