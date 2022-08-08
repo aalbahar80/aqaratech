@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
@@ -11,8 +12,17 @@
 		['Name', organization.fullName],
 		...(organization.label ? [['Label', organization.label]] : []),
 	] as [string, string | null][];
+
+	const onDelete = async () => {
+		await goto(`/auth/logout`);
+	};
 </script>
 
-<Heading title="Organization" id={organization.id} entity="organizations" />
+<Heading
+	title="Organization"
+	id={organization.id}
+	entity="organizations"
+	{onDelete}
+/>
 <DetailsPane {details} />
 <MemberList {roles} />

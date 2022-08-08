@@ -34,9 +34,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const cookies = parse(event.request.headers.get('cookie') || '');
 
-	// Validate idToken, set locals.isAuthenticated to true if valid
-	let isAuthenticated = false;
-
 	// A user with an expired token needs a way to re-authenticate,
 	// so we don't want to validate the token if the user is trying to log in.
 	// If we do want to validate it either way, we need to make sure to not place
@@ -45,8 +42,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const PUBLIC_ENDPOINTS = [LOGIN, LOGOUT, AUTH_CALLBACK];
 	if (cookies.idToken && !PUBLIC_ENDPOINTS.includes(event.url.pathname)) {
 		try {
+			console.log('validating idToken');
 			await validateToken(cookies.idToken);
-			isAuthenticated = true;
+			event.locals.isAuthenticated = true;
 			// only set idToken in locals if it is valid
 			event.locals.idToken = cookies.idToken;
 		} catch (e) {
@@ -71,26 +69,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 				// Sentry.captureException(e);
 			}
 		}
-	}
-	event.locals.isAuthenticated = isAuthenticated;
 
-	// attempt to get user from backend, set in locals.user
-	// We don't validate accessToken in the frontend. We only pass it along to the server.
-	if (cookies.accessToken) {
-		// Don't try to get user if we don't have an accessToken
-		// TODO what about public pages? what about public pages when a user is signed in?
-		const user = await getUser({
-			token: cookies.accessToken,
-			selectedRoleId: cookies.xRoleId,
-		});
-		event.locals.user = user;
-		event.locals.accessToken = cookies.accessToken;
+		// attempt to get user from backend, set in locals.user
+		// We don't validate accessToken in the frontend. We only pass it along to the server.
+		// This will only run if the idToken is valid && the route is not public.
+		if (cookies.accessToken) {
+			// Don't try to get user if we don't have an accessToken
+			// TODO what about public pages? what about public pages when a user is signed in?
+			const user = await getUser({
+				token: cookies.accessToken,
+				selectedRoleId: cookies.xRoleId,
+			});
+			event.locals.user = user;
+			event.locals.accessToken = cookies.accessToken;
 
-		// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
-		// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
-		// Additionally, if the user never changes roles,
-		// this will take care of setting & persisting the default role.
-		event.locals.xRoleId = user?.role.id;
+			// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
+			// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
+			// Additionally, if the user never changes roles,
+			// this will take care of setting & persisting the default role.
+			event.locals.xRoleId = user?.role.id;
+		}
 	}
 
 	const response = await resolve(event);

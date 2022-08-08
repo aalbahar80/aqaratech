@@ -8,6 +8,7 @@
 	export let id: string;
 	export let entity: EntityTitle;
 	export let isOpen: boolean;
+	export let onDelete: (() => void) | undefined = undefined;
 
 	let isLoading = false;
 
@@ -17,7 +18,11 @@
 			await $page.stuff.api[entity].remove({ id });
 			isLoading = false;
 			isOpen = false;
-			await goto(`/${entity}`);
+			if (onDelete) {
+				onDelete();
+			} else {
+				await goto(`/${entity}`);
+			}
 
 			// add toast after awaiting goto() to avoid weird modal behavior
 			addToast({
