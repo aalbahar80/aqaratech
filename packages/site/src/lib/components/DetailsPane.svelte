@@ -1,19 +1,12 @@
 <script lang="ts">
-	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
-	import type { MenuOption } from '$lib/models/interfaces/option.interface';
-	import { PaperClip, Pencil, Trash } from '@steeze-ui/heroicons';
+	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import { PaperClip, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let details: [string, string | null][];
 	export let files: [string, string][] | undefined = undefined;
-
-	const hideFiles = true;
-	const options: MenuOption[] = [
-		{ label: 'Update', href: '#', icon: Pencil },
-		{ label: 'Remove', href: '#', icon: Trash },
-	];
 </script>
 
 <div id="detailsPane">
@@ -24,7 +17,7 @@
 				<dd class="definition">{value ?? '-'}</dd>
 			</div>
 		{/each}
-		{#if files && !hideFiles}
+		{#if files?.length}
 			<div class="row">
 				<dt class="label">Files</dt>
 				<dd class="definition">
@@ -44,15 +37,29 @@
 									<span class="ml-2 w-0 flex-1 truncate">{key}</span>
 								</div>
 								<Dropdown>
+									<div slot="beforeButton">
+										<a
+											href={value}
+											class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+										>
+											View
+										</a>
+									</div>
 									<div slot="button">
-										<!-- See heading.svelte for updated example to avoid overlap  -->
-										<!-- Investigate layout shift -->
-										<HybridButton
-											defaultOption={{ label: 'View', href: value }}
-										/>
+										<!-- Rename to HybridButtonChevron  -->
+										<HybridButton />
 									</div>
 									<div slot="menu">
-										<DropdownMenu {options} class="bottom-10" />
+										<DropdownMenu
+											options={[
+												{
+													label: 'Delete',
+													icon: Trash,
+													// TODO
+													onClick: () => {},
+												},
+											]}
+										/>
 									</div>
 								</Dropdown>
 							</li>
