@@ -79,6 +79,7 @@ export class OrganizationsService {
   }
 
   async remove({ id }: { id: string }) {
-    return this.prisma.organization.delete({ where: { id } });
+    const removed = await this.prisma.organization.delete({ where: { id } });
+    return removed.id;
   }
 }

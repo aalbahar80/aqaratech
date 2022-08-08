@@ -14,8 +14,6 @@
 	const handleConfirm = async () => {
 		isLoading = true;
 		try {
-			// await new Promise((resolve) => setTimeout(resolve, 200));
-			//@ts-ignore
 			await $page.stuff.api[entity].remove({ id });
 			isLoading = false;
 			isOpen = false;

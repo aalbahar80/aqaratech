@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -75,6 +76,15 @@ export class OrganizationsController {
   ): Promise<string> {
     return this.organizationsService.update({ id, updateOrganizationDto });
   }
+
+  @Delete(':id')
+  @CheckAbilities({ action: Action.Delete, subject: 'Organization' })
+  @ApiOkResponse({ type: String })
+  remove(@Param('id') id: string): Promise<string> {
+    return this.organizationsService.remove({ id });
+  }
+
+  // ### ROLES ###
 
   @Get(':id/roles')
   // TODO configure orgs in CASL
