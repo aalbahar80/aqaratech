@@ -8,17 +8,17 @@ import {
 	type ValidatedUserDto,
 } from '@self/sdk';
 
-const getDefaultRole = (roles: ValidatedRoleDto[]): RoleSK => {
+const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
 
 	if (!defaultRole) {
-		// TODO: handle new user signups/invitations
-		throw new Error('User has no roles.');
+		return undefined;
+	} else {
+		return {
+			...defaultRole,
+			meta: getRoleMeta(defaultRole),
+		};
 	}
-	return {
-		...defaultRole,
-		meta: getRoleMeta(defaultRole),
-	};
 };
 
 /**
@@ -60,13 +60,8 @@ export const getUser = async ({
 	} else {
 		role = getDefaultRole(roles);
 		console.warn(
-			`No role selected, attempting to use default role: ${role.id}`,
+			`No role selected, attempting to use default role: ${role?.id}`,
 		);
-	}
-
-	// TODO dedupe error
-	if (!role) {
-		throw new Error('Unable to find role.');
 	}
 
 	const user: User = {

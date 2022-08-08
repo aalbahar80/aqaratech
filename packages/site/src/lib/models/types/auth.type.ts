@@ -38,5 +38,5 @@ export type RoleSK = ValidatedRoleDto & {
 
 export type User = Omit<ValidatedUserDto, 'roles'> & {
 	roles: RoleSK[];
-	role: RoleSK;
+	role: RoleSK | undefined;
 };
