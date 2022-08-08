@@ -60,7 +60,7 @@
 	</svelte:fragment>
 </Heading>
 <DetailsPane {details} {files} />
-{#if $session.user?.role.roleType === 'ORGADMIN'}
+{#if $session.user?.role?.roleType === 'ORGADMIN'}
 	<MemberList {roles} />
 {/if}
 <LeaseList

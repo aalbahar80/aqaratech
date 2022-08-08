@@ -87,7 +87,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
 			// Additionally, if the user never changes roles,
 			// this will take care of setting & persisting the default role.
-			event.locals.xRoleId = user?.role.id;
+			event.locals.xRoleId = user?.role?.id;
 		}
 	}
 

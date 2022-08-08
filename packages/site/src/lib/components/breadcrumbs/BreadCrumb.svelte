@@ -13,7 +13,7 @@
 		? R.pipe(
 				R.toPairs(crumbs),
 				R.filter((c) => {
-					if ($session.user?.role.roleType === 'TENANT') {
+					if ($session.user?.role?.roleType === 'TENANT') {
 						return tenantCrumbs.includes(c[0]);
 					}
 					return !R.isNil(c[1]);

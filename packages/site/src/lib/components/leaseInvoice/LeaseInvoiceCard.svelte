@@ -61,7 +61,7 @@
 								label: 'View',
 								href: `/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`,
 							},
-							...($session.user?.role.roleType === 'ORGADMIN'
+							...($session.user?.role?.roleType === 'ORGADMIN'
 								? [
 										{
 											icon: invoice.isPaid ? X : Check,

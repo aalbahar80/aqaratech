@@ -13,7 +13,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.role.meta.navLinks || [];
+	const navigation = $session.user?.role?.meta.navLinks || [];
 </script>
 
 <Popover as="header" let:close>

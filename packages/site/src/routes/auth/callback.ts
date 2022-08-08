@@ -55,7 +55,7 @@ export const GET: RequestHandler = async (req) => {
 	const user = await getUser({ token: req.locals.accessToken });
 
 	// If user does not exist in db, redirect to welcome page
-	const location = user?.role.meta.home || '/welcome';
+	const location = user?.role?.meta.home || '/welcome';
 
 	return {
 		status: 302,

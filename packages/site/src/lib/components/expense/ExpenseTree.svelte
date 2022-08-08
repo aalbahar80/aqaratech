@@ -67,7 +67,7 @@
 		{`${node.data.labelEn}`}
 	</b>
 	<a
-		href={`/organizations/${$session.user?.role.organizationId}/expenseCategories/${node.data.id}/edit`}
+		href={`/organizations/${$session.user?.role?.organizationId}/expenseCategories/${node.data.id}/edit`}
 		class="py-2 text-xs font-medium text-indigo-600"
 	>
 		Edit

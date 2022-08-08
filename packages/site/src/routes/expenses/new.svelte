@@ -16,7 +16,7 @@
 			stuff.api!.properties.findAll({ take: 1000 }),
 			stuff.api!.units.findAll({ take: 1000 }),
 			stuff.api!.meta.findExpenseTypes({
-				organizationId: session.user?.role.organizationId,
+				organizationId: session.user?.role?.organizationId,
 			}),
 		]);
 

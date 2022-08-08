@@ -25,7 +25,7 @@
 		const apiClient = api({
 			loadFetch: fetch,
 			token: session.accessToken,
-			roleId: session.user?.role.id,
+			roleId: session.user?.role?.id,
 		});
 		return {
 			...protectRoute(session, pathname),
@@ -46,7 +46,7 @@
 			if ($session.user) {
 				LogRocket.identify($session.user.id || '', {
 					email: $session.user.email,
-					roleId: $session.user.role.id,
+					roleId: $session.user.role?.id || '',
 					name: $session.user.fullName || '',
 				});
 			}
@@ -62,7 +62,7 @@
 					import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
 			});
 			Sentry.configureScope((scope: Scope) => {
-				scope.setTag('role', $session.user?.role.roleType || '');
+				scope.setTag('role', $session.user?.role?.roleType || '');
 				scope.setUser({
 					id: $session.user?.id || '',
 					email: $session.user?.email || '',

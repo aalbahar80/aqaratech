@@ -16,9 +16,9 @@
 	>
 		<div class="pr-3">
 			{#if $session.user}
-				<p>{$session.user?.role.organization.fullName}</p>
+				<p>{$session.user?.role?.organization.fullName}</p>
 				<span class="font-medium text-slate-300 group-hover:text-white">
-					{$session.user?.role.meta.roleLabel}
+					{$session.user?.role?.meta.roleLabel}
 				</span>
 			{:else}
 				<p>Welcome to Aqaratech</p>

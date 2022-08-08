@@ -71,7 +71,7 @@
 		<h3 class="text-center">عقد ايجار</h3>
 		<p class="m-1">
 			الطرف الأول:
-			{$session.user?.role.organization.fullName}
+			{$session.user?.role?.organization.fullName}
 		</p>
 		<br />
 		{#each Object.entries(fillable) as field}

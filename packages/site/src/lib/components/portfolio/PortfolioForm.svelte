@@ -71,7 +71,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			const organizationId = $session.user?.role.organizationId;
+			const organizationId = $session.user?.role?.organizationId;
 			if (!organizationId) {
 				// type hack
 				throw new Error('No organizationId found in session');

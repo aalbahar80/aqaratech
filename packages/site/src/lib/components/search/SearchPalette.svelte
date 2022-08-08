@@ -37,10 +37,10 @@
 	export let open = false;
 
 	const search = async (q: string) => {
-		if (!q || !$session.user?.role.organizationId) return;
+		if (!q || !$session.user?.role?.organizationId) return;
 		try {
 			groups = (await $page.stuff.api.organizations.search({
-				id: $session.user?.role.organizationId,
+				id: $session.user?.role?.organizationId,
 				query: q,
 			})) as Groups;
 		} catch (e) {

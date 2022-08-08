@@ -17,9 +17,9 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 		selectedRoleId: params.id,
 	});
 
-	locals.xRoleId = user?.role.id || '';
+	locals.xRoleId = user?.role?.id || '';
 
-	const location = user?.role.meta.home || '/';
+	const location = user?.role?.meta.home || '/';
 
 	return {
 		status: 302,

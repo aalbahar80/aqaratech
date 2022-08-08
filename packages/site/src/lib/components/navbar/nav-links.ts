@@ -35,7 +35,7 @@ export const getNavOptions = (user: App.Session['user']): NavOption[] => [
 					icon: MaterialSymbolsAddBusinessRounded,
 				},
 		  ]),
-	...(user?.role.roleType === 'ORGADMIN'
+	...(user?.role && user.role.roleType === 'ORGADMIN'
 		? [
 				{
 					label: 'Settings',

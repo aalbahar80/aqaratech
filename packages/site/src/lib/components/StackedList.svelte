@@ -10,7 +10,7 @@
 	export let entityTitle: EntityTitle | undefined = undefined;
 	export let nameMap = entityTitle ? entityNameMap[entityTitle] : undefined;
 
-	export let hideActions = $session.user?.role.roleType !== 'ORGADMIN';
+	export let hideActions = $session.user?.role?.roleType !== 'ORGADMIN';
 </script>
 
 <section class="overflow-hidden rounded-md bg-white shadow">

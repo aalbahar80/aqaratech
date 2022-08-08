@@ -7,7 +7,7 @@
 	import NavbarIcon from '$lib/components/navbar/NavbarIcon.svelte';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.role.meta.navLinks || [];
+	const navigation = $session.user?.role?.meta.navLinks || [];
 </script>
 
 <div class="bg-gray-900 py-1.5 print:hidden">
@@ -31,7 +31,7 @@
 			{/each}
 		</div>
 
-		<!-- {#if $session.user?.role.roleType === 'ORGADMIN'}
+		<!-- {#if $session.user?.role?.roleType === 'ORGADMIN'}
 			<SearchButton />
 		{/if} -->
 

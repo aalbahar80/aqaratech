@@ -11,7 +11,7 @@
 		const [expense, expenseTypes] = await Promise.all([
 			stuff.api!.expenses.findOne({ id: params.id }),
 			stuff.api!.meta.findExpenseTypes({
-				organizationId: session.user?.role.organizationId,
+				organizationId: session.user?.role?.organizationId,
 			}),
 		]);
 
