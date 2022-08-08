@@ -7,7 +7,7 @@
 	import { entityNameMap } from '$lib/constants/names';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import { Trash } from '@steeze-ui/heroicons';
+	import { PaperClip, Trash } from '@steeze-ui/heroicons';
 
 	type IconTooltip = {
 		label: string | number | null | undefined;
@@ -21,6 +21,7 @@
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let extraMenuItems: MenuOption[] = [];
 	export let onDelete: (() => void) | undefined = undefined;
+	export let hideAttach = false;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -66,6 +67,15 @@
 					<DropdownMenu
 						options={[
 							...extraMenuItems,
+							...(hideAttach
+								? []
+								: [
+										{
+											label: 'Attach file',
+											icon: PaperClip,
+											onClick: () => {}, // TODO s3 upload
+										},
+								  ]),
 							{
 								label: 'Delete',
 								icon: Trash,

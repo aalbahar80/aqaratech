@@ -23,6 +23,7 @@
 	id={organization.id}
 	entity="organizations"
 	{onDelete}
+	hideAttach
 />
 <DetailsPane {details} />
 <MemberList {roles} />
