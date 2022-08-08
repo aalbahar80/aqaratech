@@ -6,6 +6,7 @@ import * as cookieParser from 'cookie-parser';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { setupSwagger } from 'src/swagger';
+import { getMiddleware } from 'swagger-stats';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -43,7 +44,19 @@ async function bootstrap() {
     enabled: false,
   });
 
-  setupSwagger(app);
+  const document = setupSwagger(app);
+
+  app.use(
+    getMiddleware({
+      swaggerSpec: document,
+      authentication: true,
+      onAuthenticate: function (req: any, username: string, password: string) {
+        // simple check for username and password
+        return username === 'username' && password === 'password';
+      },
+    }),
+  );
+
   console.log('OpenApi schema generated');
   if (process.env.GENERATE_OPENAPI_SCHEMA) {
     console.log('Quitting...');

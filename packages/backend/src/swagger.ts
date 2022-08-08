@@ -107,4 +107,6 @@ export const setupSwagger = (app: INestApplication) => {
       persistAuthorization: true,
     },
   });
+
+  return document;
 };
