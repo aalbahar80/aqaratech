@@ -3,8 +3,8 @@
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
-		const user = await stuff.api!.users.findOne({ id: params.id });
+	export const load = async ({ stuff }: LoadEvent<{ id: string }>) => {
+		const user = await stuff.api!.users.findProfile();
 		return { props: { user } };
 	};
 </script>
