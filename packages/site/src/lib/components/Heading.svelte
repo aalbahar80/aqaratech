@@ -3,11 +3,15 @@
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { MenuOption } from '$lib/models/interfaces/option.interface';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
-	import { PaperClip, Trash } from '@steeze-ui/heroicons';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
+	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	type IconTooltip = {
 		label: string | number | null | undefined;
@@ -21,7 +25,6 @@
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let extraMenuItems: MenuOption[] = [];
 	export let onDelete: (() => void) | undefined = undefined;
-	export let hideAttach = false;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -64,25 +67,24 @@
 					<HybridButton />
 				</div>
 				<div slot="menu">
-					<DropdownMenu
-						options={[
-							...extraMenuItems,
-							...(hideAttach
-								? []
-								: [
-										{
-											label: 'Attach file',
-											icon: PaperClip,
-											onClick: () => {}, // TODO s3 upload
-										},
-								  ]),
-							{
-								label: 'Delete',
-								icon: Trash,
-								onClick: openModal,
-							},
-						]}
-					/>
+					<DropdownMenu options={[...extraMenuItems]}>
+						<MenuItem as="div" let:active>
+							<a href={'#'}>
+								<MenuItemChild {active}>
+									<MenuItemIcon icon={Fa6SolidPaperclip} />
+									Attach file
+								</MenuItemChild>
+							</a>
+						</MenuItem>
+						<MenuItem as="div" let:active>
+							<button on:click={openModal} class="w-full">
+								<MenuItemChild {active}>
+									<MenuItemIcon icon={Fa6SolidTrashCan} />
+									Delete
+								</MenuItemChild>
+							</button>
+						</MenuItem>
+					</DropdownMenu>
 				</div>
 			</Dropdown>
 		</div>
