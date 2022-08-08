@@ -3,11 +3,15 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { RoleDto } from '@self/sdk';
-	import { Mail, Trash } from '@steeze-ui/heroicons';
 	import { createEventDispatcher } from 'svelte';
 	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
+	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
+	import HeroiconsSolidMail from '~icons/heroicons-solid/mail';
 
 	export let role: RoleDto;
 	export let icons: any[];
@@ -28,13 +32,11 @@
 			{/if}
 			<Dropdown>
 				<div slot="menu">
-					<DropdownMenu
-						class="bottom-10"
-						options={[
-							{
-								icon: Mail,
-								label: 'Resend email',
-								onClick: () => {
+					<DropdownMenu class="bottom-10">
+						<MenuItem as="div" let:active>
+							<button
+								class="w-full"
+								on:click={() => {
 									$page.stuff.api.roles
 										.sendInvite({ id: role.id })
 										.then(() => {
@@ -43,12 +45,18 @@
 											);
 										})
 										.catch(handleApiError);
-								},
-							},
-							{
-								icon: Trash,
-								label: 'Remove',
-								onClick: () => {
+								}}
+							>
+								<MenuItemChild {active}>
+									<MenuItemIcon icon={HeroiconsSolidMail} />
+									Resend email
+								</MenuItemChild>
+							</button>
+						</MenuItem>
+						<MenuItem as="div" let:active>
+							<button
+								class="w-full"
+								on:click={() => {
 									$page.stuff.api.roles
 										.remove({ id: role.id })
 										.then((id) => {
@@ -56,10 +64,15 @@
 											addSuccessToast(`${role.email} has been removed`);
 										})
 										.catch(handleApiError);
-								},
-							},
-						]}
-					/>
+								}}
+							>
+								<MenuItemChild {active}>
+									<MenuItemIcon icon={Fa6SolidTrashCan} />
+									Remove
+								</MenuItemChild>
+							</button>
+						</MenuItem>
+					</DropdownMenu>
 				</div>
 			</Dropdown>
 		</div>

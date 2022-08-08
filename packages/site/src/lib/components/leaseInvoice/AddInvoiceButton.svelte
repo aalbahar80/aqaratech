@@ -2,8 +2,11 @@
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import { DocumentDuplicate } from '@steeze-ui/heroicons';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import Fa6SolidLayerGroup from '~icons/fa6-solid/layer-group';
 
 	export let leaseId: string;
 </script>
@@ -25,14 +28,15 @@
 		<HybridButton />
 	</div>
 	<div slot="menu">
-		<DropdownMenu
-			options={[
-				{
-					label: 'Add multiple invoices',
-					icon: DocumentDuplicate,
-					href: `/invoices/new-multiple?leaseId=${leaseId}`,
-				},
-			]}
-		/>
+		<DropdownMenu>
+			<MenuItem as="div" let:active>
+				<a href={`/invoices/new-multiple?leaseId=${leaseId}`} sveltekit:reload>
+					<MenuItemChild {active}>
+						<MenuItemIcon icon={Fa6SolidLayerGroup} />
+						Add multiple invoices
+					</MenuItemChild>
+				</a>
+			</MenuItem>
+		</DropdownMenu>
 	</div>
 </Dropdown>
