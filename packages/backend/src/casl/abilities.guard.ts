@@ -104,16 +104,15 @@ export class AbilitiesGuard implements CanActivate {
         `Cache miss: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
 
-      // TODO make async
-      const userP = await this.usersService.findOneByEmail(
-        authenticatedUser.email,
-      );
-      const abilityP = await this.caslAbilityFactory.defineAbility({
-        email: authenticatedUser.email,
-        xRoleId,
-      });
+      const [validatedUser, ability] = await Promise.all([
+        this.usersService.findOneByEmail(authenticatedUser.email),
+        this.caslAbilityFactory.defineAbility({
+          email: authenticatedUser.email,
+          xRoleId,
+        }),
+      ]);
 
-      const role = userP.roles.find((r) => r.id === xRoleId);
+      const role = validatedUser.roles.find((r) => r.id === xRoleId);
       if (!role) {
         this.logger.error(
           `Role ${xRoleId} not found for user ${authenticatedUser.email}`,
@@ -121,7 +120,7 @@ export class AbilitiesGuard implements CanActivate {
         throw new InternalServerErrorException();
       }
 
-      user = { ...userP, ability: abilityP, xRoleId, role };
+      user = { ...validatedUser, ability, xRoleId, role };
 
       // TODO handle cache ttl/invalidation
       // TODO use cache key variable
