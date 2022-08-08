@@ -2,13 +2,21 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
   Param,
+  ParseFilePipe,
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
+  ApiBody,
+  ApiConsumes,
   ApiCreatedResponse,
   ApiHeader,
   ApiOkResponse,
@@ -26,6 +34,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { FileUploadDto } from 'src/organizations/dto/file-upload.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchService } from 'src/search/search.service';
@@ -103,5 +112,27 @@ export class OrganizationsController {
   @Get(':id/search')
   search(@Param('id') id: string, @Query('query') query: string) {
     return this.searchService.search({ query, organizationId: id });
+  }
+
+  @Post(':id/upload')
+  // TODO ability check
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'List of files',
+    type: FileUploadDto,
+  })
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 10000 }),
+          new FileTypeValidator({ fileType: 'jpeg' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    console.log(file);
   }
 }

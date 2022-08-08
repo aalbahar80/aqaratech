@@ -2036,6 +2036,22 @@ paths:
               schema:
                 type: object
       tags: *ref_21
+  /organizations/{id}/upload:
+    post:
+      operationId: uploadFile
+      parameters:
+        - *ref_20
+      requestBody:
+        required: true
+        description: List of files
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -3600,6 +3616,14 @@ components:
         label:
           type: string
           nullable: true
+    FileUploadDto:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+      required:
+        - file
     ByMonthDto:
       type: object
       properties:
