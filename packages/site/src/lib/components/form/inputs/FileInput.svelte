@@ -1,17 +1,21 @@
 <script lang="ts">
-	const uploadFile = (e: Event) => {
-		console.log({ e }, 'FileInput.svelte ~ 4');
-		// const file = e.target?.files[0];
-		// debugger;
+	// import { listFiles } from '$lib/utils/file-upload';
+
+	const uploadFile = async (e: Event) => {
+		// console.log({ e }, 'FileInput.svelte ~ 4');
+		const element = e.target as HTMLInputElement | null;
+		const file = element?.files?.[0];
+		if (!file) return;
+
+		// upload
+		// await listFiles();
 	};
-	let files: FileList = [];
-	$: console.log(files);
 </script>
 
 <input
 	id="file-upload"
 	name="file-upload"
 	type="file"
+	on:change={uploadFile}
 	class="sr-only"
-	bind:files
 />
