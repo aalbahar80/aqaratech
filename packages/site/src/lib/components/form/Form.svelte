@@ -92,7 +92,7 @@
 	});
 </script>
 
-<div class="mx-auto h-full py-8 sm:w-[500px]">
+<div class="mx-auto py-8 sm:w-[500px]">
 	<form
 		use:form
 		class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
