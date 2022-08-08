@@ -69,12 +69,18 @@
 				<div slot="menu">
 					<DropdownMenu options={[...extraMenuItems]}>
 						<MenuItem as="div" let:active>
-							<a href={'#'}>
+							<label type="file" for="file-upload" class="cursor-pointer">
+								<input
+									id="file-upload"
+									name="file-upload"
+									type="file"
+									class="sr-only"
+								/>
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidPaperclip} />
 									Attach file
 								</MenuItemChild>
-							</a>
+							</label>
 						</MenuItem>
 						<MenuItem as="div" let:active>
 							<button on:click={openModal} class="w-full">
