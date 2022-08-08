@@ -79,7 +79,11 @@ export class OrganizationsService {
   }
 
   async remove({ id }: { id: string }) {
-    const removed = await this.prisma.organization.delete({ where: { id } });
-    return removed.id;
+    await this.prisma.role.deleteMany({ where: { organizationId: id } });
+    const deactivated = await this.prisma.organization.update({
+      where: { id },
+      data: { isActive: false },
+    });
+    return deactivated.id;
   }
 }

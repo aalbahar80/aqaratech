@@ -99,6 +99,7 @@ model Organization {
 
   fullName String  @default("")
   label    String?
+  isActive Boolean @default(true)
 
   roles      Role[]
   portfolios Portfolio[]
