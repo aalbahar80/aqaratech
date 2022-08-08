@@ -8,7 +8,7 @@
 	import { CreditCard } from '@steeze-ui/heroicons';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
-	import Fa6SolidElevator from '~icons/fa6-solid/elevator';
+	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
 	import GisMeasure from '~icons/gis/measure';
 
 	export let unit: UnitDto;
@@ -42,8 +42,8 @@
 		},
 		{
 			label: unit.floor,
-			icon: Fa6SolidElevator,
-			tooltip: 'Elevator',
+			icon: Fa6SolidStairs,
+			tooltip: 'Floor',
 		},
 	];
 </script>
