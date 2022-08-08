@@ -193,9 +193,15 @@ export class AbilitiesGuard implements CanActivate {
       return this.canActivate(context);
     }
 
-    this.logger.log(
-      `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
-    );
+    if (isAllowed) {
+      this.logger.log(
+        `User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
+      );
+    } else {
+      this.logger.log(
+        `User ${request.user.email} has been denied access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
+      );
+    }
 
     // attach ability to request, to be used by services for any further permission checks
     // TODO spreading here works ok for nested object?
