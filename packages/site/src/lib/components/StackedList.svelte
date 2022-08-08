@@ -13,10 +13,12 @@
 	export let hideActions = $session.user?.role?.roleType !== 'ORGADMIN';
 </script>
 
-<section class="overflow-hidden rounded-md bg-white shadow">
+<section class="rounded-md bg-white shadow">
 	{#if count}
 		<!-- Section Heading -->
-		<div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+		<div
+			class="rounded-t-md border-b border-gray-200 bg-white px-4 py-5 sm:px-6"
+		>
 			<div
 				class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap"
 			>

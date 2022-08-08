@@ -22,7 +22,7 @@
 </script>
 
 <div
-	class="flex items-center justify-between rounded-lg rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow sm:px-6"
+	class="flex items-center justify-between rounded-md rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow-sm sm:px-6"
 >
 	<div class="flex flex-1 sm:hidden">
 		<a

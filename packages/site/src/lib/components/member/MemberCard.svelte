@@ -32,7 +32,7 @@
 			{/if}
 			<Dropdown>
 				<div slot="menu">
-					<DropdownMenu class="bottom-10">
+					<DropdownMenu>
 						<MenuItem as="div" let:active>
 							<button
 								class="w-full"
