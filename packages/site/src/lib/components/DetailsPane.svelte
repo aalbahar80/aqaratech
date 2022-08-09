@@ -44,18 +44,17 @@
 								</div>
 								<Dropdown>
 									<div slot="beforeButton">
-										<!-- TODO add file href -->
-										<a
-											href={file.label}
-											on:click={() => {
-												return $page.stuff.api.files.findOne({
+										<button
+											on:click={async () => {
+												const url = await $page.stuff.api.files.findOne({
 													fileId: 'invoice1',
 												});
+												window.open(url, '_blank');
 											}}
 											class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
 										>
 											View
-										</a>
+										</button>
 									</div>
 									<div slot="button">
 										<!-- Rename to HybridButtonChevron  -->
