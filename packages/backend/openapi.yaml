@@ -2346,50 +2346,13 @@ paths:
       operationId: findAll
       parameters:
         - *ref_26
-        - name: relation
+        - name: relationKey
           required: true
           in: query
           schema:
-            type: array
-            items:
-              type: string
-        - name: tenantId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: expenseId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: leaseId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: leaseInvoiceId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: maintenanceOrderId
-          required: false
+            $ref: '#/components/schemas/FileForeignKeys'
+        - name: relationValue
+          required: true
           in: query
           schema:
             type: string
@@ -3868,6 +3831,17 @@ components:
         - createdAt
         - updatedAt
         - fileName
+    FileForeignKeys:
+      type: string
+      enum:
+        - tenantId
+        - portfolioId
+        - propertyId
+        - unitId
+        - expenseId
+        - leaseId
+        - leaseInvoiceId
+        - maintenanceOrderId
     BreadcrumbsDto:
       type: object
       properties:

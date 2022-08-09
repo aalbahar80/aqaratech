@@ -1,8 +1,10 @@
-export type FileForeignKeys =
-  | 'portfolioId'
-  | 'propertyId'
-  | 'unitId'
-  | 'expenseId'
-  | 'leaseId'
-  | 'leaseInvoiceId'
-  | 'maintenanceOrderId';
+export enum FileForeignKeys {
+  tenantId = 'tenantId',
+  portfolioId = 'portfolioId',
+  propertyId = 'propertyId',
+  unitId = 'unitId',
+  expenseId = 'expenseId',
+  leaseId = 'leaseId',
+  leaseInvoiceId = 'leaseInvoiceId',
+  maintenanceOrderId = 'maintenanceOrderId',
+}

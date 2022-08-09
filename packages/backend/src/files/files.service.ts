@@ -49,8 +49,8 @@ export class FilesService {
     user: IUser;
   }): Promise<WithCount<FileDto>> {
     const filter: Prisma.FileWhereInput = {
-      [fileFindAllOptionsDto.relation[0]]: {
-        equals: fileFindAllOptionsDto.relation[1],
+      [fileFindAllOptionsDto.relationKey]: {
+        equals: fileFindAllOptionsDto.relationValue,
       },
     };
     // TODO accessiblyBy
