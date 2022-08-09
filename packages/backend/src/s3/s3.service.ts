@@ -4,12 +4,13 @@ import {
   GetObjectCommandInput,
   ListObjectsV2Command,
   ListObjectsV2CommandInput,
+  NoSuchBucket,
   PutObjectCommand,
   PutObjectCommandInput,
   S3Client,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
@@ -45,6 +46,7 @@ export class S3Service {
   }
 
   private _client: S3Client;
+  private readonly logger = new Logger(S3Service.name);
 
   async putObject(params: PutObjectCommandInput) {
     const uploaded = await this._client.send(
@@ -57,8 +59,20 @@ export class S3Service {
   }
 
   async listObjects(options: ListObjectsV2CommandInput) {
-    const objects = await this._client.send(new ListObjectsV2Command(options));
-    return objects;
+    try {
+      const objects = await this._client.send(
+        new ListObjectsV2Command(options),
+      );
+      return objects;
+    } catch (error) {
+      if (error instanceof NoSuchBucket) {
+        this.logger.debug(`No bucket found: ${options.Bucket}`);
+        return undefined;
+      } else {
+        this.logger.error(error);
+        throw error;
+      }
+    }
   }
 
   async getObject(options: GetObjectCommandInput) {

@@ -62,8 +62,8 @@ export class FilesService {
     console.log(objects, 'files.service.ts ~ 68');
 
     return {
-      total: objects.KeyCount || 0,
-      results: objects.Contents?.map((e) => new FileDto(e)) || [],
+      total: objects?.KeyCount || 0,
+      results: objects?.Contents?.map((e) => new FileDto(e)) || [],
     };
   }
 
