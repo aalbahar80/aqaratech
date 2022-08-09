@@ -90,7 +90,7 @@ model Portfolio {
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
-  files PortfolioFile[]
+  files File[]
 }
 
 model Organization {
@@ -225,7 +225,7 @@ model Property {
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
-  files             PropertyFile[]
+  files             File[]
 }
 
 model LeaseInvoice {
@@ -264,37 +264,15 @@ model Unit {
 }
 
 model File {
-  id        String         @id @default(uuid())
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  label     String
-  fileName  String
-  portfolio PortfolioFile?
-  property  PropertyFile?
-}
-
-model PortfolioFile {
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  fileId String @unique
-  file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  label     String
+  fileName  String
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
-  @@id([fileId, portfolioId])
-}
-
-model PropertyFile {
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  fileId String @unique
-  file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
-
   propertyId String
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-
-  @@id([fileId, propertyId])
 }
