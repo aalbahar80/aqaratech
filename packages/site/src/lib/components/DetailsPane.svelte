@@ -17,6 +17,7 @@
 	export let files: PaginatedFileDto;
 </script>
 
+<pre>{JSON.stringify(files, null, 2)}</pre>
 <div id="detailsPane">
 	<dl class="rounded-lg shadow">
 		{#each details as [key, value]}
@@ -43,7 +44,9 @@
 										class="h-5 w-5 flex-shrink-0 text-gray-400"
 										aria-hidden="true"
 									/>
-									<span class="ml-2 w-0 flex-1 truncate">{file.key}</span>
+									<span class="ml-2 w-0 flex-1 truncate">
+										{file.key.split('/').slice(-1)}
+									</span>
 								</div>
 								<Dropdown>
 									<div slot="beforeButton">
