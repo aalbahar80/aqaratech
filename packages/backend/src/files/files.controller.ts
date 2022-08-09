@@ -18,6 +18,7 @@ import {
   ApiCreatedResponse,
   ApiExtraModels,
   ApiHeader,
+  getSchemaPath,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -45,18 +46,19 @@ export class FilesController {
   @ApiConsumes('multipart/form-data')
   @ApiExtraModels(CreateFileDto)
   @ApiBody({
+    // type: CreateFileDto,
     schema: {
       allOf: [
+        { $ref: getSchemaPath(CreateFileDto) },
         {
-          type: 'object',
           properties: {
+            // TODO file should be required
             file: {
               type: 'string',
               format: 'binary',
             },
           },
         },
-        { $ref: '#/components/schemas/CreateFileDto' },
       ],
     },
   })

@@ -2327,12 +2327,11 @@ paths:
           multipart/form-data:
             schema:
               allOf:
-                - type: object
-                  properties:
+                - $ref: '#/components/schemas/CreateFileDto'
+                - properties:
                     file:
                       type: string
                       format: binary
-                - $ref: '#/components/schemas/CreateFileDto'
       responses:
         '201':
           description: ''
