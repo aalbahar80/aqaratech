@@ -9,6 +9,8 @@ export interface EntityName {
 	pluralCap: string;
 	idField: string;
 }
+type EntityNameMap = Record<EntityTitle, EntityName>;
+export type EntityIdField = typeof entityNameMap[EntityTitle]['idField'];
 
 const organization = satisfies<EntityName>()({
 	urlName: 'organizations',
@@ -116,10 +118,8 @@ const file = satisfies<EntityName>()({
 	singularCap: 'File',
 	plural: 'files',
 	pluralCap: 'Files',
-	idField: 'fileId', // unused
+	idField: '',
 });
-
-type EntityNameMap = Record<EntityTitle, EntityName>;
 
 export const entityNameMap = satisfies<EntityNameMap>()({
 	organizations: organization,

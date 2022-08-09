@@ -1,4 +1,4 @@
-import { entityNameMap } from '$lib/constants/names';
+import { entityNameMap, type EntityIdField } from '$lib/constants/names';
 import type { EntityTitle } from '$lib/models/types/entity.type';
 
 type Predefined = Map<string, any> | false | undefined;
@@ -42,12 +42,12 @@ export const createFileHref = (pathname: string) => {
 	return href;
 };
 
-export const idFieldToUrlName = (field: string) => {
-	const entity = Object.keys(entityNameMap).find(
-		(key) => entityNameMap[key].idField === field,
+export const idFieldToUrlName = (field: EntityIdField) => {
+	const entity = Object.entries(entityNameMap).find(
+		([, value]) => value.idField === field,
 	);
 	if (entity) {
-		return entityNameMap[entity].urlName;
+		return entity[1].urlName;
 	} else {
 		throw new Error(`Could not find urlName for idField: ${field}`);
 	}
