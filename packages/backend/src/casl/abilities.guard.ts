@@ -151,6 +151,12 @@ export class AbilitiesGuard implements CanActivate {
       if (requestHasParams && !rule.skipParamCheck) {
         const params = rule.params || ['id'];
 
+        // TODO current implementation is misleading. Rename params to idParam. Where the passed in
+        // param name should always be mapped to the `id` of the subject.
+        //
+        // Example: @CheckAbilities(CreateTenant, params: ['orgId']), means that
+        // subjectFields = { id: request.params.orgId } // what docs imply as current
+        // subjectFields = { orgId: request.params.orgId } // actual current
         const subjectFields: Record<string, any> = {};
         params.forEach((param) => {
           const paramValue = request.params[param];

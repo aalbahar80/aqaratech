@@ -27,8 +27,8 @@ import { FileUploadDto } from 'src/organizations/dto/file-upload.dto';
 import { FilesService } from './files.service';
 
 @ApiHeader({ name: ROLE_HEADER })
-@Controller('organization/:organizationId/files')
-@ApiTags('files')
+@Controller('organization/:id/files')
+@ApiTags('organization/:id/files')
 @SwaggerAuth()
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
@@ -37,7 +37,7 @@ export class FilesController {
   @CheckAbilities({
     action: Action.Update, // vs Action.Create?
     subject: 'Organization',
-    params: ['organizationId'],
+    params: ['id'],
   })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
