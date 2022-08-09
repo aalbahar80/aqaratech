@@ -36,7 +36,7 @@ export class LoggingInterceptor implements NestInterceptor {
           this.logger.log(
             `Response: ${
               Date.now() - now
-            }ms - ${method} ${url} ${statusCode} - ${userAgent} ${ip}`,
+            }ms - ${statusCode} ${method} ${url} - ${userAgent} ${ip}`,
           );
           this.logger.debug('Response:', res);
         },
