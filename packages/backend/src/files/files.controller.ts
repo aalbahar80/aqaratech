@@ -27,18 +27,14 @@ import { FileUploadDto } from 'src/organizations/dto/file-upload.dto';
 import { FilesService } from './files.service';
 
 @ApiHeader({ name: ROLE_HEADER })
-@Controller('organization/:id/files')
-@ApiTags('organization/:id/files')
+@Controller('files')
+@ApiTags('files')
 @SwaggerAuth()
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
   @Post()
-  @CheckAbilities({
-    action: Action.Update, // vs Action.Create?
-    subject: 'Organization',
-    params: ['id'],
-  })
+  @CheckAbilities({ action: Action.Create, subject: 'File' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'List of files',
@@ -46,6 +42,7 @@ export class FilesController {
   })
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(
+    @User() user: IUser,
     @UploadedFile(
       new ParseFilePipe({
         validators: [new MaxFileSizeValidator({ maxSize: 10000000 })],
@@ -54,7 +51,7 @@ export class FilesController {
     file: Express.Multer.File,
     @Body() createFileDto: CreateFileDto,
   ) {
-    return this.filesService.create({ file, createFileDto });
+    return this.filesService.create({ user, file, createFileDto });
   }
 
   @Get()

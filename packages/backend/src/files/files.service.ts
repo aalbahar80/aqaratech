@@ -1,4 +1,6 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
+import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
@@ -13,10 +15,17 @@ export class FilesService {
   async create({
     createFileDto,
     file,
+    user,
   }: {
     createFileDto: CreateFileDto;
     file: Express.Multer.File;
+    user: IUser;
   }) {
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Create,
+      subject('File', createFileDto),
+    );
+
     await this.s3.putObject({
       Key: file.filename,
       Body: file.buffer,
