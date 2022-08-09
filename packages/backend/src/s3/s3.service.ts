@@ -43,6 +43,22 @@ export class S3Service {
         secretAccessKey,
       },
     });
+
+    // https://developers.cloudflare.com/r2/platform/s3-compatibility/extensions/#cf-create-bucket-if-missing
+    this._client.middlewareStack.add(
+      (next) => (args) => {
+        if (
+          typeof args.request === 'object' &&
+          args.request &&
+          'headers' in args.request
+        ) {
+          const request = args.request as any;
+          request.headers['cf-create-bucket-if-missing'] = 'true';
+        }
+        return next(args);
+      },
+      { step: 'build' },
+    );
   }
 
   private _client: S3Client;
