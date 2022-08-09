@@ -80,6 +80,7 @@ export class OrganizationsService {
   }
 
   async remove({ id }: { id: string }) {
+    // TODO set org.isActive to false, delete all portfolios and tenants, which should cascade down
     await this.prisma.role.deleteMany({ where: { organizationId: id } });
     const deactivated = await this.prisma.organization.update({
       where: { id },
