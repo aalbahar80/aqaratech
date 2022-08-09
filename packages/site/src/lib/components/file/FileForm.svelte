@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
+	import { idFieldToUrlName } from '$lib/utils/route-helpers';
 
 	export let relationKey: string;
 	export let relationValue: string;
@@ -32,4 +34,5 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => $page.stuff.api.files.create(values)}
+	onSuccess={() => goto(`/${idFieldToUrlName(relationKey)}/${relationValue}`)}
 />

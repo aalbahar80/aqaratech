@@ -41,3 +41,14 @@ export const createFileHref = (pathname: string) => {
 	});
 	return href;
 };
+
+export const idFieldToUrlName = (field: string) => {
+	const entity = Object.keys(entityNameMap).find(
+		(key) => entityNameMap[key].idField === field,
+	);
+	if (entity) {
+		return entityNameMap[entity].urlName;
+	} else {
+		throw new Error(`Could not find urlName for idField: ${field}`);
+	}
+};

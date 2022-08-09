@@ -27,7 +27,7 @@ export class FilesService {
     );
 
     await this.s3.putObject({
-      Key: file.filename,
+      Key: createFileDto.fileName, // TODO set programmatically
       Body: file.buffer,
     });
 
