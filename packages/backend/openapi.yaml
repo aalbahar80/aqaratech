@@ -2332,6 +2332,7 @@ paths:
                     file:
                       type: string
                       format: binary
+              $ref: '#/components/schemas/CreateFileDto'
       responses:
         '201':
           description: ''

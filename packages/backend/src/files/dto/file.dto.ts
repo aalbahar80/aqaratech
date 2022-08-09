@@ -1,5 +1,5 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
 
 export class FileDto {
@@ -22,7 +22,7 @@ export class CreateFileDto {
   // @IsEnum(FileForeignKeys)
   // relationValue: FileForeignKeys;
 
-  @IsID()
+  @IsString()
   relationKey: string;
 
   @IsID()
@@ -32,5 +32,6 @@ export class CreateFileDto {
   fileName: string;
 
   @IsString()
+  @IsOptional()
   label?: string | null;
 }

@@ -46,13 +46,12 @@ export class FilesController {
   @ApiConsumes('multipart/form-data')
   @ApiExtraModels(CreateFileDto)
   @ApiBody({
-    // type: CreateFileDto,
+    type: CreateFileDto,
     schema: {
       allOf: [
         { $ref: getSchemaPath(CreateFileDto) },
         {
           properties: {
-            // TODO file should be required
             file: {
               type: 'string',
               format: 'binary',
