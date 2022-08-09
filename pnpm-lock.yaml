@@ -11,6 +11,7 @@ importers:
   packages/backend:
     specifiers:
       '@aws-sdk/client-s3': 3.142.0
+      '@aws-sdk/s3-request-presigner': 3.145.0
       '@casl/ability': 6.0.0
       '@casl/prisma': 1.0.4
       '@nestjs/axios': 0.1.0
@@ -79,6 +80,7 @@ importers:
       typescript: 4.7.4
     dependencies:
       '@aws-sdk/client-s3': 3.142.0
+      '@aws-sdk/s3-request-presigner': 3.145.0
       '@casl/ability': 6.0.0
       '@casl/prisma': 1.0.4_dm2kwd2au6hytwlyhdhk5gkxem
       '@nestjs/axios': 0.1.0_t6wygpagnzylhnpg25zual64b4
@@ -1094,6 +1096,22 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /@aws-sdk/s3-request-presigner/3.145.0:
+    resolution: {integrity: sha512-GFUyhtF8RfGjsgadkuruJVdoxwQrEweTuAJPrfIn6FIYnPofJ/8BiYt43xsxlh3BGrEulu9hwOoI0ZIVabcsXw==}
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-sdk-s3': 3.127.0
+      '@aws-sdk/protocol-http': 3.127.0
+      '@aws-sdk/signature-v4-multi-region': 3.130.0
+      '@aws-sdk/smithy-client': 3.142.0
+      '@aws-sdk/types': 3.127.0
+      '@aws-sdk/util-create-request': 3.142.0
+      '@aws-sdk/util-format-url': 3.127.0
+      tslib: 2.4.0
+    transitivePeerDependencies:
+      - '@aws-sdk/signature-v4-crt'
+    dev: false
+
   /@aws-sdk/service-error-classification/3.127.0:
     resolution: {integrity: sha512-wjZY9rnlA8SPrICUumTYicEKtK4/yKB62iadUk66hxe8MrH8JhuHH2NqIad0Pt/bK/YtNVhd3yb4pRapOeY5qQ==}
     engines: {node: '>= 12.0.0'}
@@ -1205,6 +1223,16 @@ packages:
       tslib: 2.4.0
     dev: false
 
+  /@aws-sdk/util-create-request/3.142.0:
+    resolution: {integrity: sha512-NP7v7Cf251Irbwa25aFcUCSaL7/JbxdlgVDyXtXlAQ6j+USIz0MczdHKnX5bRgnnloCJv7I4f935ZApLIVLh5w==}
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-stack': 3.127.0
+      '@aws-sdk/smithy-client': 3.142.0
+      '@aws-sdk/types': 3.127.0
+      tslib: 2.4.0
+    dev: false
+
   /@aws-sdk/util-defaults-mode-browser/3.142.0:
     resolution: {integrity: sha512-vVB/CrodMmIfv4v54MyBlKO0sQSI/+Mvs4g5gMyVjmT4a+1gnktJQ9R6ZHQ2/ErGewcra6eH9MU5T0r1kYe0+w==}
     engines: {node: '>= 10.0.0'}
@@ -1223,6 +1251,15 @@ packages:
       '@aws-sdk/credential-provider-imds': 3.127.0
       '@aws-sdk/node-config-provider': 3.127.0
       '@aws-sdk/property-provider': 3.127.0
+      '@aws-sdk/types': 3.127.0
+      tslib: 2.4.0
+    dev: false
+
+  /@aws-sdk/util-format-url/3.127.0:
+    resolution: {integrity: sha512-leZeq6vxm6MSpu9Ruc5WKr7pzJ8kVXNJVerB4ixEk5KtFPPrJDw7MoEtnbnhVzhraLUnqHqYvrb6OlmkkISR+Q==}
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/querystring-builder': 3.127.0
       '@aws-sdk/types': 3.127.0
       tslib: 2.4.0
     dev: false

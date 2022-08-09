@@ -80,10 +80,6 @@ export class FilesService {
   }
 
   async findOne({ fileId }: { fileId: string }) {
-    // const file = await this.prisma.file.findUnique({
-    //   where: { id: fileId },
-    // });
-    // const object = await this.s3.getObject({ Key: file.fileName });
     return this.s3.getObject({ Key: fileId });
   }
 

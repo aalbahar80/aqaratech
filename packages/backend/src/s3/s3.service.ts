@@ -6,6 +6,7 @@ import {
   PutObjectCommandInput,
   S3Client,
 } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -65,11 +66,12 @@ export class S3Service {
   }
 
   async getObject(params: Omit<GetObjectCommandInput, 'Bucket'>) {
-    return this._client.send(
-      new GetObjectCommand({
-        ...params,
-        Bucket: this._bucket,
-      }),
-    );
+    const command = new GetObjectCommand({
+      ...params,
+      Bucket: this._bucket,
+    });
+
+    const url = await getSignedUrl(this._client, command, { expiresIn: 3600 });
+    return url;
   }
 }
