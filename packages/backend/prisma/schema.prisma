@@ -89,6 +89,8 @@ model Portfolio {
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  files PortfolioFile[]
 }
 
 model Organization {
@@ -223,6 +225,7 @@ model Property {
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
+  files             PropertyFile[]
 }
 
 model LeaseInvoice {
@@ -258,4 +261,40 @@ model Unit {
   expenses          Expense[]
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
+}
+
+model File {
+  id            String          @id @default(uuid())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  label         String
+  fileName      String
+  PropertyFile  PropertyFile[]
+  PortfolioFile PortfolioFile[]
+}
+
+model PortfolioFile {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fileId String
+  file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@id([fileId, portfolioId])
+}
+
+model PropertyFile {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fileId String
+  file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@id([fileId, propertyId])
 }
