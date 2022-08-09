@@ -9,7 +9,8 @@ type FieldType =
 	| 'datetime-local'
 	| 'select'
 	| 'checkbox'
-	| 'radio';
+	| 'radio'
+	| 'file';
 
 export class Field {
 	type: FieldType = 'text';

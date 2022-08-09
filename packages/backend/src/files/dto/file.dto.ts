@@ -7,13 +7,13 @@ import { IsID } from 'src/decorators/field.decorators';
 class FileRequiredDto {
   @IsString()
   fileName: string;
-
-  @IsString()
-  label: string;
 }
 
 class FileOptionalDto {
-  // TODO validate only one of these is present
+  @IsString()
+  label?: string | null;
+
+  // TODO validate only exactly one of these is present
   @IsID()
   @IsOptional()
   // TODO remove question mark?

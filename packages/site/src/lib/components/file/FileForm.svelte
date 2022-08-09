@@ -3,7 +3,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedFile } from '$lib/models/interfaces/predefined.interface';
-	import { createSchema } from '$models/schemas/lease-invoice.schema';
+	import { schema } from '$lib/models/schemas/file-schema';
 
 	export let predefined: PredefinedFile;
 
@@ -54,11 +54,15 @@
 		new Field('label', {
 			value: '',
 		}),
+		new Field('file', {
+			value: '',
+			type: 'file',
+		}),
 	];
 </script>
 
 <Form
-	schema={createSchema}
+	{schema}
 	entityTitle="files"
 	formType="create"
 	{basicFields}

@@ -3812,6 +3812,7 @@ components:
           type: string
         label:
           type: string
+          nullable: true
         portfolioId:
           type: string
           nullable: true
@@ -3835,7 +3836,6 @@ components:
           nullable: true
       required:
         - fileName
-        - label
     FileDto:
       type: object
       properties:
@@ -3854,6 +3854,7 @@ components:
           type: string
         label:
           type: string
+          nullable: true
         portfolioId:
           type: string
           nullable: true
@@ -3880,7 +3881,6 @@ components:
         - createdAt
         - updatedAt
         - fileName
-        - label
     BreadcrumbsDto:
       type: object
       properties:

@@ -273,7 +273,7 @@ model File {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  label     String
+  label     String?
   fileName  String
 
   tenantId String?
