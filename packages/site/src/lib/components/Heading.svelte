@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -8,6 +8,7 @@
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import { createFileHref } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
@@ -68,8 +69,7 @@
 					<DropdownMenu>
 						<slot name="menu-items" />
 						<MenuItem as="div" let:active>
-							<!-- TODO fix href -->
-							<a href="/files/new">
+							<a href={createFileHref($page.url.pathname)}>
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidPaperclip} />
 									Attach files

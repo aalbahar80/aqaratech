@@ -23,3 +23,21 @@ export const settings = (orgId: string) => ({
 	organization: `/organizations/${orgId}/settings/organization`,
 	tree: `/organizations/${orgId}/settings/expense-tree`,
 });
+
+const inferRoute = (pathname: string) => {
+	const [, entity, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
+	if (entity && id) {
+		return { entity: entity as EntityTitle, id };
+	} else {
+		throw new Error(`Could not infer route from pathname: ${pathname}`);
+	}
+};
+
+export const createFileHref = (pathname: string) => {
+	const current = inferRoute(pathname);
+	const href = create({
+		entity: 'files',
+		predefined: new Map([[entityNameMap[current.entity].idField, current.id]]),
+	});
+	return href;
+};
