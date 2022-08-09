@@ -66,7 +66,6 @@ export class CaslAbilityFactory {
 
     can(Action.Read, ['User'], { id: { equals: user.id } });
 
-    // ### Role: Organization Admin###
     if (role.roleType === 'ORGADMIN') {
       await this.orgAdminAbility.define(role, can);
     } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
@@ -75,11 +74,7 @@ export class CaslAbilityFactory {
       await this.tenantAbility.define(role, can);
     }
 
-    this.logger.log(
-      `Defined manageable entities for role ${role.id} in ${
-        Date.now() - now
-      }ms`,
-    );
+    this.logger.log( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore
 
     return build();
   }
