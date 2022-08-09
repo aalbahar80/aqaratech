@@ -1,17 +1,15 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
 export class FilesService {
-  constructor(private prisma: PrismaService, private s3: S3Service) {}
+  constructor(private s3: S3Service) {}
 
   async create({
     createFileDto,

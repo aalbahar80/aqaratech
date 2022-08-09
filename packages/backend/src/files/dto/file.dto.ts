@@ -2,7 +2,6 @@ import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { IntersectionType, PartialType } from '@nestjs/swagger';
 import { File } from '@prisma/client';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { IsID } from 'src/decorators/field.decorators';
 
 class FileRequiredDto {
