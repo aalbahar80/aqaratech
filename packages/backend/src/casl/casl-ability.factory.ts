@@ -16,6 +16,7 @@ import {
   Unit,
   User,
 } from '@prisma/client';
+import { PortfolioAbility } from 'src/casl/abilities/portfolio-ability';
 import { TenantAbility } from 'src/casl/abilities/tenant-ability';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -23,6 +24,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class CaslAbilityFactory {
   constructor(
     private prisma: PrismaService,
+    private portfolioAbility: PortfolioAbility,
     private tenantAbility: TenantAbility,
   ) {}
 
@@ -306,133 +308,13 @@ export class CaslAbilityFactory {
         ],
       });
     } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-      // ### Role: Portfolio ###
-      const tenantsQ = this.prisma.tenant.findMany({
-        select: { id: true },
-        where: {
-          leases: {
-            some: {
-              unit: { property: { portfolioId: { equals: role.portfolioId } } },
-            },
-          },
-        },
-      });
-
-      const propertiesQ = this.prisma.property.findMany({
-        select: { id: true },
-        where: { portfolioId: { equals: role.portfolioId } },
-      });
-
-      const unitsQ = this.prisma.unit.findMany({
-        select: { id: true },
-        where: { property: { portfolioId: { equals: role.portfolioId } } },
-      });
-
-      const leasesQ = this.prisma.lease.findMany({
-        select: { id: true },
-        where: {
-          unit: { property: { portfolioId: { equals: role.portfolioId } } },
-        },
-      });
-
-      const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
-        select: { id: true },
-        where: {
-          lease: {
-            unit: { property: { portfolioId: { equals: role.portfolioId } } },
-          },
-        },
-      });
-
-      const expensesQ = this.prisma.expense.findMany({
-        select: { id: true },
-        where: {
-          OR: [
-            { portfolioId: { equals: role.portfolioId } },
-            { property: { portfolioId: { equals: role.portfolioId } } },
-            {
-              unit: { property: { portfolioId: { equals: role.portfolioId } } },
-            },
-          ],
-        },
-      });
-
-      const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
-        select: { id: true },
-        where: {
-          OR: [
-            { portfolioId: { equals: role.portfolioId } },
-            { property: { portfolioId: { equals: role.portfolioId } } },
-            {
-              unit: { property: { portfolioId: { equals: role.portfolioId } } },
-            },
-          ],
-        },
-      });
-
-      const [
-        tenants,
-        properties,
-        units,
-        leases,
-        leaseInvoices,
-        expenses,
-        maintenanceOrders,
-      ] = await Promise.all([
-        tenantsQ,
-        propertiesQ,
-        unitsQ,
-        leasesQ,
-        leaseInvoicesQ,
-        expensesQ,
-        maintenanceOrdersQ,
-      ]);
-
-      const readable: PortfolioReadableResources = {
-        tenants: tenants.map((i) => i.id),
-        portfolios: [role.portfolioId],
-        properties: properties.map((i) => i.id),
-        units: units.map((i) => i.id),
-        leases: leases.map((i) => i.id),
-        leaseInvoices: leaseInvoices.map((i) => i.id),
-        expenses: expenses.map((i) => i.id),
-        maintenanceOrders: maintenanceOrders.map((i) => i.id),
+      // type hack
+      const portfolioRole = {
+        ...role,
+        roleType: role.roleType,
+        portfolioId: role.portfolioId,
       };
-
-      // TODO: limit fields
-      can(Action.Read, ['Role'], { tenantId: { in: readable.tenants } });
-
-      can(Action.Read, 'Tenant', {
-        id: { in: readable.tenants },
-      });
-
-      can(Action.Read, ['Portfolio'], {
-        id: { in: readable.portfolios },
-      });
-
-      can(Action.Read, ['Property'], {
-        id: { in: readable.properties },
-      });
-
-      can(Action.Read, ['Unit'], {
-        id: { in: readable.units },
-      });
-
-      can(Action.Read, ['Lease'], {
-        id: { in: readable.leases },
-      });
-
-      can(Action.Read, ['LeaseInvoice'], {
-        id: { in: readable.leaseInvoices },
-      });
-
-      can(Action.Read, ['Expense'], {
-        id: { in: readable.expenses },
-      });
-
-      can(Action.Read, ['MaintenanceOrder'], {
-        id: { in: readable.maintenanceOrders },
-      });
+      await this.portfolioAbility.define(portfolioRole, can);
     } else if (role.roleType === 'TENANT' && role.tenantId) {
       // type hack
       const tenantRole = {
@@ -498,14 +380,3 @@ export interface Resources {
 }
 
 type OrgManageableResources = Resources;
-type PortfolioReadableResources = Pick<
-  Resources,
-  | 'tenants'
-  | 'portfolios'
-  | 'properties'
-  | 'units'
-  | 'leases'
-  | 'leaseInvoices'
-  | 'expenses'
-  | 'maintenanceOrders'
->;
