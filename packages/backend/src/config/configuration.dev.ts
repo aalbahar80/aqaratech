@@ -26,4 +26,13 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
   siteConfig: {
     PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || 'http://localhost:3000',
   },
+  r2Config: {
+    R2_ACCOUNT_ID:
+      process.env.R2_ACCOUNT_ID || '8aa55983de332834393a9f4c4fbf1e35',
+    R2_ACCESS_KEY_ID:
+      process.env.R2_ACCESS_KEY_ID || '54ab96f25c44b09ab1f47d586f363ec1',
+    R2_SECRET_ACCESS_KEY:
+      process.env.R2_SECRET_ACCESS_KEY ||
+      'a37d8ba3101b0635f5aa119c9aafad6f0dfffc318948f91a54c24fcf6c4cd9bf',
+  },
 });

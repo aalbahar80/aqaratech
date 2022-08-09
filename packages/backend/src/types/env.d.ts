@@ -4,11 +4,19 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       readonly DATABASE_URL: string;
+
       readonly PUBLIC_SITE_URL: string;
+
+      readonly AUTH0_CLIENT_SECRET: string;
+
       readonly POSTMARK_TOKEN: string;
+
+      readonly R2_ACCOUNT_ID: string;
+      readonly R2_ACCESS_KEY_ID: string;
+      readonly R2_SECRET_ACCESS_KEY: string;
+
       readonly MEILISEARCH_HOST: string;
       readonly MEILISEARCH_API_KEY: string;
-      readonly AUTH0_CLIENT_SECRET: string;
     }
   }
 }

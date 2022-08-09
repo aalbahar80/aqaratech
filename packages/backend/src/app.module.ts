@@ -14,6 +14,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
+import { S3Service } from 'src/s3/s3.service';
 import { AggregateModule } from './aggregate/aggregate.module';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
@@ -24,9 +25,11 @@ import { PostmarkModule } from './postmark/postmark.module';
 import { PostmarkService } from './postmark/postmark.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrometheusModule } from './prometheus/prometheus.module';
+import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
+import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
@@ -38,7 +41,6 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
-import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 
 @Module({
   imports: [
@@ -66,6 +68,7 @@ import { ExpenseCategoriesModule } from './expense-categories/expense-categories
     EventEmitterModule.forRoot(),
     PostmarkModule,
     ExpenseCategoriesModule,
+    S3Module,
   ],
   controllers: [AppController],
   providers: [
@@ -78,6 +81,7 @@ import { ExpenseCategoriesModule } from './expense-categories/expense-categories
     { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
     { provide: APP_GUARD, useClass: AbilitiesGuard },
     { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
+    S3Service,
     PostmarkService,
   ],
 })

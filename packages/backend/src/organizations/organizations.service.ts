@@ -1,3 +1,4 @@
+import { ListObjectsV2Command, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
@@ -7,10 +8,11 @@ import {
   UpdateOrganizationDto,
 } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private s3: S3Service) {}
 
   private readonly logger = new Logger(OrganizationsService.name);
 
@@ -85,5 +87,28 @@ export class OrganizationsService {
       data: { isActive: false },
     });
     return deactivated.id;
+  }
+
+  async uploadFile({ file }: { file: Express.Multer.File }) {
+    console.log(file);
+    // TODO move to s3 service
+
+    // upload file to bucket
+    const uploaded = await this.s3.send(
+      new PutObjectCommand({
+        Bucket: 'bucket-test-1',
+        Key: file.originalname,
+        Body: file.buffer,
+      }),
+    );
+    console.log(uploaded);
+
+    // list objects in bucket
+    const result = await this.s3.send(
+      new ListObjectsV2Command({ Bucket: 'bucket-test-1' }),
+    );
+    console.log(result);
+
+    return { uploaded, result };
   }
 }
