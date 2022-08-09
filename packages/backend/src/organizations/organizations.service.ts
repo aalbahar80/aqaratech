@@ -88,23 +88,4 @@ export class OrganizationsService {
     });
     return deactivated.id;
   }
-
-  // ### FILES ###
-
-  async uploadFile({ file }: { file: Express.Multer.File }) {
-    console.log(file); // TODO remove
-
-    await this.s3.putObject({
-      Key: file.filename,
-      Body: file.buffer,
-    });
-
-    // TODO only return necessary fields
-    await this.s3.listObjects();
-  }
-
-  async findFiles() {
-    // TODO only return necessary fields
-    return await this.s3.listObjects();
-  }
 }

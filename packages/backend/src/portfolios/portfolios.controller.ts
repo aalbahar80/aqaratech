@@ -131,4 +131,18 @@ export class PortfoliosController {
     };
     return this.unitsService.findAll({ user, pageOptionsDto, where });
   }
+
+  // @Get(':id/files')
+  // @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  // @ApiPaginatedResponse(FileDto)
+  // findFiles(
+  //   @User() user: IUser,
+  //   @Query() pageOptionsDto: PageOptionsDto,
+  //   @Param('id') id: string,
+  // ): Promise<WithCount<FileDto>> {
+  //   const where: Prisma.FileWhereInput = {
+  //     property: { portfolioId: { equals: id } },
+  //   };
+  //   return this.filesService.findAll({ user, pageOptionsDto });
+  // }
 }

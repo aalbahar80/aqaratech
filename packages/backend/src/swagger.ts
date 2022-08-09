@@ -19,6 +19,7 @@ import { dump } from 'js-yaml';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
+import { FilesModule } from 'src/files/files.module';
 import { MetaModule } from 'src/meta/meta.module';
 
 export const setupSwagger = (app: INestApplication) => {
@@ -75,6 +76,7 @@ export const setupSwagger = (app: INestApplication) => {
       AggregateModule,
       MetaModule,
       ExpenseCategoriesModule,
+      FilesModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
     ignoreGlobalPrefix: true,

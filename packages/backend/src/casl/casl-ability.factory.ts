@@ -3,6 +3,7 @@ import { PrismaAbility, Subjects } from '@casl/prisma';
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import {
   Expense,
+  File,
   Lease,
   LeaseInvoice,
   MaintenanceOrder,
@@ -108,6 +109,7 @@ export type Subject = Subjects<{
   LeaseInvoice: P<LeaseInvoice>;
   Unit: P<Unit>;
   User: P<User>;
+  File: P<File>;
 }>;
 
 type Resource = string;
@@ -122,4 +124,5 @@ export interface Resources {
   leaseInvoices: Resource[];
   expenses: Resource[];
   maintenanceOrders: Resource[];
+  files: Resource[];
 }

@@ -2036,34 +2036,6 @@ paths:
               schema:
                 type: object
       tags: *ref_21
-  /organizations/{id}/files:
-    post:
-      operationId: uploadFile
-      parameters:
-        - *ref_20
-      requestBody:
-        required: true
-        description: List of files
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/FileUploadDto'
-      responses:
-        '201':
-          description: ''
-      tags: *ref_21
-    get:
-      operationId: findFiles
-      parameters:
-        - *ref_20
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
@@ -2340,6 +2312,144 @@ paths:
               schema:
                 type: string
       tags: *ref_25
+  /organization/{organizationId}/files:
+    post:
+      operationId: uploadFile
+      parameters:
+        - &ref_26
+          name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: List of files
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_27
+        - files
+    get:
+      operationId: findAll
+      parameters:
+        - *ref_26
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 1000
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedFileDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfFileDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/FileDto'
+      tags: *ref_27
+  /organization/{organizationId}/files/{fileId}:
+    get:
+      operationId: findFile
+      parameters:
+        - *ref_26
+        - name: fileId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *ref_27
+    delete:
+      operationId: remove
+      parameters:
+        - *ref_26
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_27
 info:
   title: Aqaratech API
   description: The Aqratech API description
@@ -3628,14 +3738,6 @@ components:
         label:
           type: string
           nullable: true
-    FileUploadDto:
-      type: object
-      properties:
-        file:
-          type: string
-          format: binary
-      required:
-        - file
     ByMonthDto:
       type: object
       properties:
@@ -3694,6 +3796,44 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
+    FileUploadDto:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+      required:
+        - file
+    FileDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        fileName:
+          type: string
+        label:
+          type: string
+        portfolioId:
+          type: string
+          nullable: true
+        propertyId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - fileName
+        - label
     BreadcrumbsDto:
       type: object
       properties:

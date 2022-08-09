@@ -41,6 +41,7 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { UsersModule } from './users/users.module';
     PostmarkModule,
     ExpenseCategoriesModule,
     S3Module,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [
