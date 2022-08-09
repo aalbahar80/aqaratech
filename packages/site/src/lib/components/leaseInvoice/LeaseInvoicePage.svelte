@@ -9,11 +9,12 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto, PaginatedFileDto } from '@self/sdk';
 	import { DocumentText, Mail } from '@steeze-ui/heroicons';
 
 	type Transaction = LeaseInvoiceDto;
 	export let trx: Transaction;
+	export let files: PaginatedFileDto;
 
 	$: details = [
 		['Post Date', toUTCFormat(trx.postAt)],
@@ -70,5 +71,5 @@
 </Heading>
 <Badge {label} {badgeColor} />
 <div class="grid gap-y-6">
-	<DetailsPane {details} />
+	<DetailsPane {details} {files} />
 </div>
