@@ -1,6 +1,7 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
+import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 
 export class FileDto {
   constructor(obj: NonNullable<ListObjectsV2Output['Contents']>[0]) {
@@ -15,15 +16,14 @@ export class FileDto {
 }
 
 export class CreateFileDto {
+  // This breaks file uploads. See sdk/dist/fileApi.js
   // @ApiProperty({
   //   enum: FileForeignKeys,
   //   enumName: 'FileForeignKeys',
   // })
-  // @IsEnum(FileForeignKeys)
-  // relationValue: FileForeignKeys;
 
-  @IsString()
-  relationKey: string;
+  @IsEnum(FileForeignKeys)
+  relationKey: FileForeignKeys;
 
   @IsID()
   relationValue: string;

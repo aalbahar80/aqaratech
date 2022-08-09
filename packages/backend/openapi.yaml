@@ -2350,6 +2350,15 @@ paths:
           required: true
           in: query
           schema:
+            enum:
+              - tenantId
+              - portfolioId
+              - propertyId
+              - unitId
+              - expenseId
+              - leaseId
+              - leaseInvoiceId
+              - maintenanceOrderId
             type: string
         - name: relationValue
           required: true
@@ -3759,6 +3768,15 @@ components:
       type: object
       properties:
         relationKey:
+          enum:
+            - tenantId
+            - portfolioId
+            - propertyId
+            - unitId
+            - expenseId
+            - leaseId
+            - leaseInvoiceId
+            - maintenanceOrderId
           type: string
         relationValue:
           type: string

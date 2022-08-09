@@ -5,9 +5,9 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
 	import { idFieldToUrlName } from '$lib/utils/route-helpers';
-	import type { FileForeignKeys } from '@self/sdk';
+	import type { CreateRelationKeyEnum } from '@self/sdk';
 
-	export let relationKey: FileForeignKeys;
+	export let relationKey: CreateRelationKeyEnum;
 	export let relationValue: string;
 
 	const basicFields = [
