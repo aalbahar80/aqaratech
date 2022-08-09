@@ -39,6 +39,9 @@
 	entityTitle="files"
 	formType="create"
 	{basicFields}
-	onSubmit={(values) => $page.stuff.api.files.create(values)}
+	onSubmit={(values) => {
+		console.log({ values }, 'FileForm.svelte ~ 43');
+		return $page.stuff.api.files.create(values);
+	}}
 	onSuccess={() => goto(`/${idFieldToUrlName(relationKey)}/${relationValue}`)}
 />

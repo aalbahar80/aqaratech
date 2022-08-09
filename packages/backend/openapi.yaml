@@ -2327,12 +2327,12 @@ paths:
           multipart/form-data:
             schema:
               allOf:
-                - $ref: '#/components/schemas/CreateFileDto'
                 - type: object
                   properties:
                     file:
                       type: string
                       format: binary
+                - $ref: '#/components/schemas/CreateFileDto'
       responses:
         '201':
           description: ''
@@ -2350,7 +2350,7 @@ paths:
           required: true
           in: query
           schema:
-            $ref: '#/components/schemas/FileForeignKeys'
+            type: string
         - name: relationValue
           required: true
           in: query
@@ -3755,22 +3755,11 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
-    FileForeignKeys:
-      type: string
-      enum:
-        - tenantId
-        - portfolioId
-        - propertyId
-        - unitId
-        - expenseId
-        - leaseId
-        - leaseInvoiceId
-        - maintenanceOrderId
     CreateFileDto:
       type: object
       properties:
         relationKey:
-          $ref: '#/components/schemas/FileForeignKeys'
+          type: string
         relationValue:
           type: string
         fileName:

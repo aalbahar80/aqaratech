@@ -47,7 +47,6 @@ export class FilesController {
   @ApiBody({
     schema: {
       allOf: [
-        { $ref: '#/components/schemas/CreateFileDto' },
         {
           type: 'object',
           properties: {
@@ -57,6 +56,7 @@ export class FilesController {
             },
           },
         },
+        { $ref: '#/components/schemas/CreateFileDto' },
       ],
     },
   })

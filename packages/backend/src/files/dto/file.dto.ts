@@ -1,8 +1,6 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
-import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 
 export class FileDto {
   constructor(obj: NonNullable<ListObjectsV2Output['Contents']>[0]) {
@@ -17,9 +15,15 @@ export class FileDto {
 }
 
 export class CreateFileDto {
-  @IsEnum(FileForeignKeys)
-  @ApiProperty({ enum: FileForeignKeys, enumName: 'FileForeignKeys' })
-  relationKey: FileForeignKeys;
+  // @ApiProperty({
+  //   enum: FileForeignKeys,
+  //   enumName: 'FileForeignKeys',
+  // })
+  // @IsEnum(FileForeignKeys)
+  // relationValue: FileForeignKeys;
+
+  @IsID()
+  relationKey: string;
 
   @IsID()
   relationValue: string;

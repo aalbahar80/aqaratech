@@ -1,13 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum } from 'class-validator';
-import { IsID } from 'src/decorators/field.decorators';
-import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
+import { PickType } from '@nestjs/swagger';
+import { CreateFileDto } from 'src/files/dto/file.dto';
 
-export class FileFindAllOptionsDto {
-  @IsEnum(FileForeignKeys)
-  @ApiProperty({ enum: FileForeignKeys, enumName: 'FileForeignKeys' })
-  relationKey: FileForeignKeys;
-
-  @IsID()
-  relationValue: string;
-}
+export class FileFindAllOptionsDto extends PickType(CreateFileDto, [
+  'relationKey',
+  'relationValue',
+]) {}
