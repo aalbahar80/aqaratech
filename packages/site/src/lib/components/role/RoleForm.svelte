@@ -23,7 +23,7 @@
 
 <Form
 	schema={createSchema}
-	entityTitle="roles"
+	entityTitle="members"
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {

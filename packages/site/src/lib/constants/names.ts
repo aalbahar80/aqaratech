@@ -23,11 +23,20 @@ const organization = satisfies<EntityName>()({
 
 const role = satisfies<EntityName>()({
 	urlName: 'roles',
+	plural: 'roles',
+	pluralCap: 'Roles',
+	singular: 'organization',
+	singularCap: 'Role',
+	idField: '',
+});
+
+const member = satisfies<EntityName>()({
+	urlName: 'roles',
 	singular: 'member',
 	singularCap: 'Member',
 	plural: 'members',
 	pluralCap: 'Members',
-	idField: 'roleId',
+	idField: '',
 });
 
 // do the same for tenant,unit,property,lease,invoice,maintenanceOrder, and expense
@@ -124,6 +133,7 @@ const file = satisfies<EntityName>()({
 export const entityNameMap = satisfies<EntityNameMap>()({
 	organizations: organization,
 	roles: role,
+	members: member,
 	tenants: tenant,
 	portfolios: portfolio,
 	properties: property,

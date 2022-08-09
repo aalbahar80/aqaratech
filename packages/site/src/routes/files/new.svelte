@@ -16,7 +16,7 @@
 			maintenanceOrderId: url.searchParams.get('maintenanceOrderId'),
 		};
 
-		const relation = Object.entries(predefined).find(([key, value]) => value);
+		const relation = Object.entries(predefined).find(([, value]) => value);
 		const relationKey = relation?.[0];
 		const relationValue = relation?.[1];
 

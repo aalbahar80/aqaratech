@@ -2,7 +2,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { EntityName } from '$lib/constants/names';
+	import { entityNameMap } from '$lib/constants/names';
 	import type { ValidatedRoleDto } from '@self/sdk';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
@@ -10,18 +10,14 @@
 	export let roles: ValidatedRoleDto[];
 
 	const formUrl = '/organizations/new';
-
-	const nameMap: EntityName = {
-		idField: 'roleId',
-		plural: 'roles',
-		pluralCap: 'Roles',
-		singular: 'Organization',
-		singularCap: 'Role',
-		urlName: 'roles',
-	};
 </script>
 
-<StackedList {nameMap} count={roles.length} {formUrl} hideActions={false}>
+<StackedList
+	nameMap={entityNameMap.roles}
+	count={roles.length}
+	{formUrl}
+	hideActions={false}
+>
 	{#each roles as role (role.id)}
 		{@const icons = [
 			{
@@ -46,7 +42,7 @@
 	{/each}
 	<div slot="emptyState">
 		<EmptyState
-			{nameMap}
+			nameMap={entityNameMap.roles}
 			message="No roles have been created yet."
 			buttonText="Create new organization"
 			{formUrl}

@@ -101,7 +101,7 @@
 		<div class="flex flex-col justify-between">
 			<div class="divide-y divide-gray-200 px-4 sm:px-6">
 				<h1 class="py-4 text-lg font-medium text-gray-700">
-					{formType === 'update' ? 'Edit ' : 'New '}{entityNameMap[entityTitle]
+					{formType === 'update' ? 'Edit ' : 'Add '}{entityNameMap[entityTitle]
 						.singularCap}
 				</h1>
 				<div class="space-y-6 pt-6 pb-5">
@@ -130,7 +130,7 @@
 		</div>
 		<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
 			<Button
-				text={formType === 'update' ? 'Save changes' : 'Create new'}
+				text="Save"
 				disabled={!noErrorMsg || $isSubmitting}
 				loading={$isSubmitting}
 			/>

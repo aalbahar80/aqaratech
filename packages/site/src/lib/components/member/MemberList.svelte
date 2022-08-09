@@ -21,7 +21,7 @@
 	});
 </script>
 
-<StackedList entityTitle="roles" count={roles.results.length} {formUrl}>
+<StackedList entityTitle="members" count={roles.results.length} {formUrl}>
 	{#each roles.results as role (role.id)}
 		{@const icons = [
 			{
@@ -46,7 +46,7 @@
 	{/each}
 	<div slot="emptyState">
 		<EmptyState
-			nameMap={entityNameMap['roles']}
+			nameMap={entityNameMap.members}
 			message="No members have been invited yet."
 			buttonText="Invite member"
 			{formUrl}
