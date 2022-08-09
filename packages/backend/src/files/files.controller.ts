@@ -87,18 +87,18 @@ export class FilesController {
   }
 
   @Get(':fileId')
-  @CheckAbilities({ action: Action.Read, subject: 'File', params: ['fileId'] })
+  // @CheckAbilities({ action: Action.Read, subject: 'File', params: ['fileId'] })
   @ApiOkResponse({ type: String })
   async findOne(@Param('fileId') fileId: string): Promise<string> {
     return this.filesService.findOne({ fileId });
   }
 
   @Delete(':fileId')
-  @CheckAbilities({
-    action: Action.Delete,
-    subject: 'File',
-    params: ['fileId'],
-  })
+  // @CheckAbilities({
+  //   action: Action.Delete,
+  //   subject: 'File',
+  //   params: ['fileId'],
+  // })
   @ApiOkResponse({ type: String })
   async remove(@Param('fileId') fileId: string): Promise<string> {
     console.log({ fileId }, 'files.controller.ts ~ 104');
