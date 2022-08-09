@@ -2351,14 +2351,14 @@ paths:
           in: query
           schema:
             enum:
-              - tenantId
-              - portfolioId
-              - propertyId
-              - unitId
-              - expenseId
-              - leaseId
-              - leaseInvoiceId
-              - maintenanceOrderId
+              - tenants
+              - portfolios
+              - properties
+              - units
+              - expenses
+              - leases
+              - leaseInvoices
+              - maintenanceOrders
             type: string
         - name: relationValue
           required: true
@@ -3769,14 +3769,14 @@ components:
       properties:
         relationKey:
           enum:
-            - tenantId
-            - portfolioId
-            - propertyId
-            - unitId
-            - expenseId
-            - leaseId
-            - leaseInvoiceId
-            - maintenanceOrderId
+            - tenants
+            - portfolios
+            - properties
+            - units
+            - expenses
+            - leases
+            - leaseInvoices
+            - maintenanceOrders
           type: string
         relationValue:
           type: string

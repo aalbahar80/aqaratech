@@ -37,7 +37,10 @@ export const createFileHref = (pathname: string) => {
 	const current = inferRoute(pathname);
 	const href = create({
 		entity: 'files',
-		predefined: new Map([[entityNameMap[current.entity].idField, current.id]]),
+		predefined: new Map([
+			['relationKey', current.entity],
+			['relationValue', current.id],
+		]),
 	});
 	return href;
 };

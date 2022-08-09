@@ -4,7 +4,6 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
-	import { idFieldToUrlName } from '$lib/utils/route-helpers';
 	import type { CreateRelationKeyEnum } from '@self/sdk';
 
 	export let relationKey: CreateRelationKeyEnum;
@@ -40,8 +39,7 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {
-		console.log({ values }, 'FileForm.svelte ~ 43');
 		return $page.stuff.api.files.create(values);
 	}}
-	onSuccess={() => goto(`/${idFieldToUrlName(relationKey)}/${relationValue}`)}
+	onSuccess={() => goto(`/${relationKey}/${relationValue}`)}
 />

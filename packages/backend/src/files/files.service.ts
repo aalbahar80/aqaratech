@@ -2,6 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { entityMap } from 'src/constants/entity';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
@@ -21,16 +22,19 @@ export class FilesService {
     file: Express.Multer.File;
     user: IUser;
   }) {
+    const key = createFileDto.relationKey;
+    const id = createFileDto.relationValue;
+    const singularCap = entityMap[key].singularCap;
+
     ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('File', createFileDto),
+      Action.Update,
+      subject(singularCap, { id: id }),
     );
-    console.log({ createFileDto }, 'files.service.ts ~ 28');
-    console.log({ file }, 'files.service.ts ~ 29');
-    const key = this.extrapolateKey(createFileDto);
+
+    const prefix = `${entityMap[key].urlName}/${id}`;
     const uploaded = await this.s3.putObject({
       Bucket: user.role.organizationId,
-      Key: key, // TODO set programmatically
+      Key: `${prefix}/${createFileDto.fileName}`,
       Body: file.buffer,
       ContentType: file.mimetype,
     });
@@ -84,22 +88,23 @@ export class FilesService {
   extrapolateKey(fileFindAllOptionsDto: FileFindAllOptionsDto) {
     const key = fileFindAllOptionsDto.relationKey;
     const id = fileFindAllOptionsDto.relationValue;
+    const singularCap = entityMap[key].singularCap;
 
-    if (key === FileForeignKeys.tenantId) {
-      return `tenants/${id}`;
-    } else if (key === FileForeignKeys.portfolioId) {
+    if (key === FileForeignKeys.TENANT) {
+      return `${key}/${id}`;
+    } else if (key === FileForeignKeys.PORTFOLIO) {
       return `portfolios/${id}`;
-    } else if (key === FileForeignKeys.propertyId) {
+    } else if (key === FileForeignKeys.PROPERTY) {
       return `properties/${id}`;
-    } else if (key === FileForeignKeys.unitId) {
+    } else if (key === FileForeignKeys.UNIT) {
       return `units/${id}`;
-    } else if (key === FileForeignKeys.leaseId) {
+    } else if (key === FileForeignKeys.LEASE) {
       return `leases/${id}`;
-    } else if (key === FileForeignKeys.leaseInvoiceId) {
+    } else if (key === FileForeignKeys.LEASEINVOICE) {
       return `leaseInvoices/${id}`;
-    } else if (key === FileForeignKeys.expenseId) {
+    } else if (key === FileForeignKeys.EXPENSE) {
       return `expenses/${id}`;
-    } else if (key === FileForeignKeys.maintenanceOrderId) {
+    } else if (key === FileForeignKeys.MAINTENANCEORDER) {
       return `maintenanceOrders/${id}`;
     } else {
       throw new Error(`Invalid key: ${key}. Value: ${id}`);

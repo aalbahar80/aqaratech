@@ -1,24 +1,10 @@
 export enum FileForeignKeys {
-  tenantId = 'tenantId',
-  portfolioId = 'portfolioId',
-  propertyId = 'propertyId',
-  unitId = 'unitId',
-  expenseId = 'expenseId',
-  leaseId = 'leaseId',
-  leaseInvoiceId = 'leaseInvoiceId',
-  maintenanceOrderId = 'maintenanceOrderId',
+  TENANT = 'tenants',
+  PORTFOLIO = 'portfolios',
+  PROPERTY = 'properties',
+  UNIT = 'units',
+  EXPENSE = 'expenses',
+  LEASE = 'leases',
+  LEASEINVOICE = 'leaseInvoices',
+  MAINTENANCEORDER = 'maintenanceOrders',
 }
-
-// export const FileForeignKeys: {
-//   tenantId: 'tenantId',
-//   portfolioId: 'portfolioId',
-//   propertyId: 'propertyId',
-//   unitId: 'unitId',
-//   expenseId: 'expenseId',
-//   leaseId: 'leaseId',
-//   leaseInvoiceId: 'leaseInvoiceId',
-//   maintenanceOrderId: 'maintenanceOrderId',
-// };
-
-// export type FileForeignKeys =
-//   typeof FileForeignKeys[keyof typeof FileForeignKeys];
