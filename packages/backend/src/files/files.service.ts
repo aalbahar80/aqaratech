@@ -71,9 +71,6 @@ export class FilesService {
   }
 
   remove(id: string) {
-    // TODO delete in s3
-
-    // TODO delete in db
-    throw new Error('Method not implemented.');
+    return this.s3.removeObject({ Key: id });
   }
 }

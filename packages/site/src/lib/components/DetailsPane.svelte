@@ -5,6 +5,7 @@
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { PaginatedFileDto } from '@self/sdk';
 	import { PaperClip } from '@steeze-ui/heroicons';
@@ -49,7 +50,8 @@
 												const url = await $page.stuff.api.files.findOne({
 													fileId: file.key,
 												});
-												window.open(url, '_blank');
+												// opens in new tab because of content-disposition header
+												window.open(url);
 											}}
 											class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
 										>
@@ -63,7 +65,24 @@
 									<div slot="menu">
 										<DropdownMenu>
 											<MenuItem as="div" let:active>
-												<button on:click={() => {}} class="w-full">
+												<button
+													class="w-full"
+													on:click={async () => {
+														try {
+															console.log(file.key);
+															await $page.stuff.api.files.remove({
+																fileId: file.key,
+															});
+															files.results = [...files.results].filter(
+																(f) => f.key !== file.key,
+															);
+															addSuccessToast();
+														} catch (e) {
+															console.error(e);
+															handleApiError(e);
+														}
+													}}
+												>
 													<MenuItemChild {active}>
 														<MenuItemIcon icon={Fa6SolidTrashCan} />
 														Delete

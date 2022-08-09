@@ -4,6 +4,7 @@ import {
   ListObjectsV2Command,
   PutObjectCommand,
   PutObjectCommandInput,
+  DeleteObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
@@ -73,5 +74,14 @@ export class S3Service {
 
     const url = await getSignedUrl(this._client, command, { expiresIn: 3600 });
     return url;
+  }
+
+  async removeObject(params: Omit<GetObjectCommandInput, 'Bucket'>) {
+    return this._client.send(
+      new DeleteObjectCommand({
+        ...params,
+        Bucket: this._bucket,
+      }),
+    );
   }
 }

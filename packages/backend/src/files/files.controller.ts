@@ -99,8 +99,10 @@ export class FilesController {
     subject: 'File',
     params: ['fileId'],
   })
-  remove(@Param('id') id: string): Promise<string> {
-    // @ts-ignore
-    return this.filesService.remove(id);
+  @ApiOkResponse({ type: String })
+  async remove(@Param('fileId') fileId: string): Promise<string> {
+    console.log({ fileId }, 'files.controller.ts ~ 104');
+    await this.filesService.remove(fileId);
+    return fileId;
   }
 }
