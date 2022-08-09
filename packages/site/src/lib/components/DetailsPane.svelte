@@ -10,6 +10,7 @@
 	import type { PaginatedFileDto } from '@self/sdk';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { flip } from 'svelte/animate';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	export let details: [string, string | null][];
@@ -33,6 +34,7 @@
 					>
 						{#each files.results as file (file.key)}
 							<li
+								animate:flip={{ duration: 200 }}
 								class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
 							>
 								<div class="flex w-0 flex-1 items-center">
@@ -69,7 +71,6 @@
 													class="w-full"
 													on:click={async () => {
 														try {
-															console.log(file.key);
 															await $page.stuff.api.files.remove({
 																fileId: file.key,
 															});
