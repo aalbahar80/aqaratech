@@ -264,20 +264,20 @@ model Unit {
 }
 
 model File {
-  id            String          @id @default(uuid())
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  label         String
-  fileName      String
-  PropertyFile  PropertyFile[]
-  PortfolioFile PortfolioFile[]
+  id        String         @id @default(uuid())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  label     String
+  fileName  String
+  portfolio PortfolioFile?
+  property  PropertyFile?
 }
 
 model PortfolioFile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fileId String
+  fileId String @unique
   file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
 
   portfolioId String
@@ -290,7 +290,7 @@ model PropertyFile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fileId String
+  fileId String @unique
   file   File   @relation(fields: [fileId], references: [id], onDelete: Cascade)
 
   propertyId String
