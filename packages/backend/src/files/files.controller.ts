@@ -12,7 +12,14 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiHeader, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiExtraModels,
+  ApiHeader,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -23,7 +30,6 @@ import { User } from 'src/decorators/user.decorator';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { FileUploadDto } from 'src/organizations/dto/file-upload.dto';
 import { FilesService } from './files.service';
 
 @ApiHeader({ name: ROLE_HEADER })
@@ -36,12 +42,26 @@ export class FilesController {
   @Post()
   @CheckAbilities({ action: Action.Create, subject: 'File' })
   @ApiConsumes('multipart/form-data')
+  @ApiExtraModels(CreateFileDto)
   @ApiBody({
-    description: 'List of files',
-    type: FileUploadDto,
+    schema: {
+      allOf: [
+        { $ref: '#/components/schemas/CreateFileDto' },
+        {
+          type: 'object',
+          properties: {
+            file: {
+              type: 'string',
+              format: 'binary',
+            },
+          },
+        },
+      ],
+    },
   })
+  @ApiCreatedResponse({ type: String })
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(
+  create(
     @User() user: IUser,
     @UploadedFile(
       new ParseFilePipe({
@@ -50,7 +70,7 @@ export class FilesController {
     )
     file: Express.Multer.File,
     @Body() createFileDto: CreateFileDto,
-  ) {
+  ): Promise<string> {
     return this.filesService.create({ user, file, createFileDto });
   }
 
@@ -67,7 +87,7 @@ export class FilesController {
 
   @Get(':fileId')
   @CheckAbilities({ action: Action.Read, subject: 'File', params: ['fileId'] })
-  findFile(@Param('fileId') fileId: string) {
+  findOne(@Param('fileId') fileId: string) {
     return this.filesService.findOne({ fileId });
   }
 
@@ -77,7 +97,8 @@ export class FilesController {
     subject: 'File',
     params: ['fileId'],
   })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<string> {
+    // @ts-ignore
     return this.filesService.remove(id);
   }
 }

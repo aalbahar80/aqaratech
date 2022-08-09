@@ -4,6 +4,7 @@ import {
 	Configuration,
 	ExpenseCategoriesApi,
 	ExpensesApi,
+	FilesApi,
 	LeaseInvoicesApi,
 	LeasesApi,
 	MetaApi,
@@ -55,6 +56,7 @@ export const api = ({
 		meta: new MetaApi(config),
 		users: new UsersApi(config),
 		expenseCategories: new ExpenseCategoriesApi(config),
+		files: new FilesApi(config),
 	};
 };
 

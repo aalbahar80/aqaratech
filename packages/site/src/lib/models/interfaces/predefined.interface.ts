@@ -36,3 +36,14 @@ export interface PredefinedLease {
 export interface PredefinedInvoice {
 	leaseId: SearchParam;
 }
+
+export interface PredefinedFile {
+	tenantId: SearchParam;
+	portfolioId: SearchParam;
+	propertyId: SearchParam;
+	unitId: SearchParam;
+	expenseId: SearchParam;
+	leaseId: SearchParam;
+	leaseInvoiceId: SearchParam;
+	maintenanceOrderId: SearchParam;
+}

@@ -13,6 +13,7 @@ class FileRequiredDto {
 }
 
 class FileOptionalDto {
+  // TODO validate only one of these is present
   @IsID()
   @IsOptional()
   // TODO remove question mark?
@@ -22,6 +23,31 @@ class FileOptionalDto {
   @IsOptional()
   // TODO remove question mark?
   propertyId?: string | null;
+
+  @IsID()
+  @IsOptional()
+  // TODO remove question mark?
+  unitId?: string | null;
+
+  @IsID()
+  @IsOptional()
+  // TODO remove question mark?
+  expenseId?: string | null;
+
+  @IsID()
+  @IsOptional()
+  // TODO remove question mark?
+  leaseId?: string | null;
+
+  @IsID()
+  @IsOptional()
+  // TODO remove question mark?
+  leaseInvoiceId?: string | null;
+
+  @IsID()
+  @IsOptional()
+  // TODO remove question mark?
+  maintenanceOrderId?: string | null;
 }
 
 export class FileDto extends IntersectionType(

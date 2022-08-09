@@ -2312,9 +2312,9 @@ paths:
               schema:
                 type: string
       tags: *ref_25
-  /organization/{organizationId}/files:
+  /files:
     post:
-      operationId: uploadFile
+      operationId: create
       parameters:
         - &ref_26
           name: x-role-id
@@ -2323,11 +2323,16 @@ paths:
             type: string
       requestBody:
         required: true
-        description: List of files
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/FileUploadDto'
+              allOf:
+                - $ref: '#/components/schemas/CreateFileDto'
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary
       responses:
         '201':
           description: ''
@@ -2419,9 +2424,9 @@ paths:
                         items:
                           $ref: '#/components/schemas/FileDto'
       tags: *ref_27
-  /organization/{organizationId}/files/{fileId}:
+  /files/{fileId}:
     get:
-      operationId: findFile
+      operationId: findOne
       parameters:
         - *ref_26
         - name: fileId
@@ -2449,6 +2454,10 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: string
       tags: *ref_27
 info:
   title: Aqaratech API
@@ -3796,14 +3805,37 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
-    FileUploadDto:
+    CreateFileDto:
       type: object
       properties:
-        file:
+        fileName:
           type: string
-          format: binary
+        label:
+          type: string
+        portfolioId:
+          type: string
+          nullable: true
+        propertyId:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        expenseId:
+          type: string
+          nullable: true
+        leaseId:
+          type: string
+          nullable: true
+        leaseInvoiceId:
+          type: string
+          nullable: true
+        maintenanceOrderId:
+          type: string
+          nullable: true
       required:
-        - file
+        - fileName
+        - label
     FileDto:
       type: object
       properties:
@@ -3826,6 +3858,21 @@ components:
           type: string
           nullable: true
         propertyId:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        expenseId:
+          type: string
+          nullable: true
+        leaseId:
+          type: string
+          nullable: true
+        leaseInvoiceId:
+          type: string
+          nullable: true
+        maintenanceOrderId:
           type: string
           nullable: true
       required:

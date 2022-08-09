@@ -48,6 +48,7 @@
 		</h2>
 	</div>
 
+	<FileInput />
 	{#if $session.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
@@ -69,13 +70,13 @@
 					<DropdownMenu>
 						<slot name="menu-items" />
 						<MenuItem as="div" let:active>
-							<label type="file" for="file-upload" class="cursor-pointer">
-								<FileInput />
+							<!-- TODO fix href -->
+							<a href="/files/new">
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidPaperclip} />
-									Attach file
+									Attach files
 								</MenuItemChild>
-							</label>
+							</a>
 						</MenuItem>
 						<MenuItem as="div" let:active>
 							<button on:click={openModal} class="w-full">

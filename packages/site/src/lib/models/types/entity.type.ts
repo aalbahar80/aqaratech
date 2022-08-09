@@ -8,5 +8,6 @@ export type EntityTitle =
 	| 'leaseInvoices'
 	| 'expenses'
 	| 'roles'
-	| 'expenseCategories';
+	| 'expenseCategories'
+	| 'files';
 // | 'maintenanceOrders';

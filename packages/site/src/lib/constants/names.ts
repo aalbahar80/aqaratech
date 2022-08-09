@@ -108,6 +108,15 @@ const expenseCategory: EntityName = {
 // 	pluralCap: 'MaintenanceOrders',
 // 	idField: 'maintenanceOrderId',
 // };
+//
+const file: EntityName = {
+	urlName: 'files',
+	singular: 'file',
+	singularCap: 'File',
+	plural: 'files',
+	pluralCap: 'Files',
+	idField: 'fileId', // unused
+};
 
 type EntityNameMap = Record<EntityTitle, EntityName>;
 
@@ -123,4 +132,5 @@ export const entityNameMap: EntityNameMap = {
 	// maintenanceOrders: maintenanceOrder,
 	expenses: expense,
 	expenseCategories: expenseCategory,
+	files: file,
 };
