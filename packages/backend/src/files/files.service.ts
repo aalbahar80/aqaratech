@@ -2,7 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
+import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -25,7 +25,6 @@ export class FilesService {
       Action.Create,
       subject('File', createFileDto),
     );
-
     await this.s3.putObject({
       Key: createFileDto.fileName, // TODO set programmatically
       Body: file.buffer,
@@ -42,10 +41,10 @@ export class FilesService {
   }
 
   async findAll({
-    pageOptionsDto,
+    fileFindAllOptionsDto,
     user,
   }: {
-    pageOptionsDto: ExpensePageOptionsDto; // change to FilePageOptionsDto
+    fileFindAllOptionsDto: FileFindAllOptionsDto; // change to FilePageOptionsDto
     user: IUser;
   }): Promise<WithCount<FileDto>> {
     // TODO accessiblyBy

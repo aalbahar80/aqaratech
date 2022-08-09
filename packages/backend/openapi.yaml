@@ -2346,47 +2346,7 @@ paths:
       operationId: findAll
       parameters:
         - *ref_26
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 1000
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
+        - name: tenantId
           required: false
           in: query
           schema:
@@ -2402,6 +2362,26 @@ paths:
           schema:
             type: string
         - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: expenseId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: leaseId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: leaseInvoiceId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: maintenanceOrderId
           required: false
           in: query
           schema:

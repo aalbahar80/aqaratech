@@ -9,7 +9,7 @@ import {
   Post,
   Query,
   UploadedFile,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
@@ -18,7 +18,7 @@ import {
   ApiCreatedResponse,
   ApiExtraModels,
   ApiHeader,
-  ApiTags,
+  ApiTags
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -27,7 +27,7 @@ import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
+import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { FilesService } from './files.service';
@@ -80,9 +80,9 @@ export class FilesController {
   @ApiPaginatedResponse(FileDto)
   findAll(
     @User() user: IUser,
-    @Query() pageOptionsDto: ExpensePageOptionsDto, // TODO change to FilePageOptionsDto
+    @Query() fileFindAllOptionsDto: FileFindAllOptionsDto, // TODO change to FilePageOptionsDto
   ): Promise<WithCount<FileDto>> {
-    return this.filesService.findAll({ pageOptionsDto, user });
+    return this.filesService.findAll({ fileFindAllOptionsDto, user });
   }
 
   @Get(':fileId')
