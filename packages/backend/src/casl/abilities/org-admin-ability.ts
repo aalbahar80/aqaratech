@@ -12,7 +12,9 @@ export class OrgAdminAbility {
   async define(role: Role, can: any) {
     this.logger.log('Defining ability for role', role.id);
 
-    // TODO throw if roleType is not OrgAdmin
+    if (role.roleType !== 'ORGADMIN') {
+      throw new Error('roleType is not ORGADMIN');
+    }
 
     const rolesQ = this.prisma.role.findMany({
       where: {

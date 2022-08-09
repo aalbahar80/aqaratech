@@ -70,21 +70,9 @@ export class CaslAbilityFactory {
     if (role.roleType === 'ORGADMIN') {
       await this.orgAdminAbility.define(role, can);
     } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-      // type hack
-      const portfolioRole = {
-        ...role,
-        roleType: role.roleType,
-        portfolioId: role.portfolioId,
-      };
-      await this.portfolioAbility.define(portfolioRole, can);
+      await this.portfolioAbility.define(role, can);
     } else if (role.roleType === 'TENANT' && role.tenantId) {
-      // type hack
-      const tenantRole = {
-        ...role,
-        roleType: role.roleType,
-        tenantId: role.tenantId,
-      };
-      await this.tenantAbility.define(tenantRole, can);
+      await this.tenantAbility.define(role, can);
     }
 
     this.logger.log(

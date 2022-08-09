@@ -9,8 +9,13 @@ export class TenantAbility {
 
   private readonly logger = new Logger(TenantAbility.name);
 
-  async define(role: TenantRole, can: any) {
+  async define(role: Role, can: any) {
     this.logger.log('Defining ability for role', role.id);
+
+    if (role.roleType !== 'TENANT' || !role.tenantId) {
+      throw new Error('roleType is not tenant or tenantId is not set');
+    }
+
     // TODO restrict fields
     const leasesQ = this.prisma.lease.findMany({
       select: { id: true },
@@ -59,8 +64,6 @@ export class TenantAbility {
   }
 }
 
-// TODO ts-toolbelt to make tenantId not nullable
-type TenantRole = Omit<Role, 'tenantId'> & { tenantId: string };
 type TenantReadableResources = Pick<
   Resources,
   'tenants' | 'leases' | 'leaseInvoices' | 'maintenanceOrders'

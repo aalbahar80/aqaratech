@@ -9,8 +9,12 @@ export class PortfolioAbility {
 
   private readonly logger = new Logger(PortfolioAbility.name);
 
-  async define(role: PortfolioRole, can: any) {
+  async define(role: Role, can: any) {
     this.logger.log('Defining ability for role', role.id);
+
+    if (role.roleType !== 'PORTFOLIO' || !role.portfolioId) {
+      throw new Error('roleType is not portfolio or portfolioId is not set');
+    }
 
     const tenantsQ = this.prisma.tenant.findMany({
       select: { id: true },
@@ -141,8 +145,6 @@ export class PortfolioAbility {
   }
 }
 
-// TODO ts-toolbelt to make portfolioId not nullable
-type PortfolioRole = Omit<Role, 'portfolioId'> & { portfolioId: string };
 type PortfolioReadableResources = Pick<
   Resources,
   | 'tenants'
