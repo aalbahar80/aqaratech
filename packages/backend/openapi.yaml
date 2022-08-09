@@ -2387,10 +2387,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *ref_27
     delete:
       operationId: remove

@@ -26,6 +26,16 @@ export class FilesService {
       Action.Create,
       subject('File', createFileDto),
     );
+    // console.log({ createFileDto }, 'files.service.ts ~ 28');
+    // console.log({ file }, 'files.service.ts ~ 29');
+    const portfolioId = 'ced80d8b-1c20-4da2-b654-b3afa672e520';
+    await this.prisma.file.create({
+      data: {
+        fileName: createFileDto.fileName,
+        label: createFileDto.label,
+        portfolio: { connect: { id: portfolioId } }, // TODO don't hardcode portfolioId
+      },
+    });
     await this.s3.putObject({
       Key: createFileDto.fileName, // TODO set programmatically
       Body: file.buffer,
@@ -60,14 +70,21 @@ export class FilesService {
     ]);
 
     console.log({ files }, 'files.service.ts ~ 64');
+
+    const objects = await this.s3.listObjects();
+    console.log({ objects }, 'files.service.ts ~ 68');
+
     return { total, results: files.map((e) => new FileDto(e)) };
+    // @ts-ignore
+    // return { total, results: objects };
   }
 
   async findOne({ fileId }: { fileId: string }) {
-    const file = await this.prisma.file.findUnique({
-      where: { id: fileId },
-    });
-    return file;
+    // const file = await this.prisma.file.findUnique({
+    //   where: { id: fileId },
+    // });
+    // const object = await this.s3.getObject({ Key: file.fileName });
+    return this.s3.getObject({ Key: fileId });
   }
 
   remove(id: string) {

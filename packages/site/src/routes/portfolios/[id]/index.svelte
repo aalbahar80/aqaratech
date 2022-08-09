@@ -10,15 +10,20 @@
 		url,
 	}: LoadEvent<{ id: string }>) => {
 		const sParams = parseParams(url);
+		const id = params.id;
 
-		const [portfolio, properties, roles] = await Promise.all([
-			stuff.api!.portfolios.findOne({ id: params.id }),
-			stuff.api!.portfolios.findProperties({ id: params.id, ...sParams }),
+		const [portfolio, properties, roles, files] = await Promise.all([
+			stuff.api!.portfolios.findOne({ id }),
+			stuff.api!.portfolios.findProperties({ id, ...sParams }),
 			// TODO handle pagination & default limit
-			stuff.api!.portfolios.findRoles({ id: params.id }),
+			stuff.api!.portfolios.findRoles({ id }),
+			stuff.api!.files.findAll({
+				relationKey: 'portfolioId',
+				relationValue: id,
+			}),
 		]);
 
-		return { props: { portfolio, properties, roles } };
+		return { props: { portfolio, properties, roles, files } };
 	};
 </script>
 
@@ -27,6 +32,7 @@
 	export let portfolio: Prop['portfolio'];
 	export let properties: Prop['properties'];
 	export let roles: Prop['roles'];
+	export let files: Prop['files'];
 </script>
 
-<PortfolioPage {portfolio} {properties} {roles} />
+<PortfolioPage {portfolio} {properties} {roles} {files} />

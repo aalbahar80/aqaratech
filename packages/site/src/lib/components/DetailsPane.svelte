@@ -1,16 +1,18 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import type { PaginatedFileDto } from '@self/sdk';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	export let details: [string, string | null][];
-	export let files: [string, string][] | undefined = [['a', 'df']];
+	export let files: PaginatedFileDto;
 </script>
 
 <div id="detailsPane">
@@ -21,14 +23,14 @@
 				<dd class="definition">{value ?? '-'}</dd>
 			</div>
 		{/each}
-		{#if files?.length}
+		{#if files.results.length}
 			<div class="row">
 				<dt class="label">Files</dt>
 				<dd class="definition">
 					<ul
 						class="divide-y divide-gray-200 rounded-md border border-gray-200"
 					>
-						{#each files as [key, value]}
+						{#each files.results as file}
 							<li
 								class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
 							>
@@ -38,12 +40,18 @@
 										class="h-5 w-5 flex-shrink-0 text-gray-400"
 										aria-hidden="true"
 									/>
-									<span class="ml-2 w-0 flex-1 truncate">{key}</span>
+									<span class="ml-2 w-0 flex-1 truncate">{file.fileName}</span>
 								</div>
 								<Dropdown>
 									<div slot="beforeButton">
+										<!-- TODO add file href -->
 										<a
-											href={value}
+											href={file.label}
+											on:click={() => {
+												return $page.stuff.api.files.findOne({
+													fileId: 'invoice1',
+												});
+											}}
 											class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
 										>
 											View

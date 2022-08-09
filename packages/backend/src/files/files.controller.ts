@@ -4,12 +4,14 @@ import {
   Delete,
   Get,
   MaxFileSizeValidator,
+  NotFoundException,
   Param,
   ParseFilePipe,
   Post,
   Query,
+  StreamableFile,
   UploadedFile,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
@@ -18,7 +20,8 @@ import {
   ApiCreatedResponse,
   ApiExtraModels,
   ApiHeader,
-  ApiTags
+  ApiProduces,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -87,8 +90,15 @@ export class FilesController {
 
   @Get(':fileId')
   @CheckAbilities({ action: Action.Read, subject: 'File', params: ['fileId'] })
-  findOne(@Param('fileId') fileId: string) {
-    return this.filesService.findOne({ fileId });
+  // @ApiProduces('application/octet-stream')
+  async findOne(@Param('fileId') fileId: string): Promise<StreamableFile> {
+    const file = await this.filesService.findOne({ fileId });
+    if (file.Body) {
+      // @ts-ignore
+      return new StreamableFile(file.Body);
+    } else {
+      throw new NotFoundException();
+    }
   }
 
   @Delete(':fileId')

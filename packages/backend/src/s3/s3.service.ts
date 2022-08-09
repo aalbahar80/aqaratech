@@ -1,5 +1,11 @@
-import { PutObjectCommandInput, S3Client } from '@aws-sdk/client-s3';
-import { ListObjectsV2Command, PutObjectCommand } from '@aws-sdk/client-s3';
+import {
+  GetObjectCommand,
+  GetObjectCommandInput,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  PutObjectCommandInput,
+  S3Client,
+} from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -56,5 +62,14 @@ export class S3Service {
     );
     console.log(objects);
     return objects;
+  }
+
+  async getObject(params: Omit<GetObjectCommandInput, 'Bucket'>) {
+    return this._client.send(
+      new GetObjectCommand({
+        ...params,
+        Bucket: this._bucket,
+      }),
+    );
   }
 }

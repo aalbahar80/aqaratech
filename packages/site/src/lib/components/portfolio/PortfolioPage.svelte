@@ -10,6 +10,7 @@
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type {
+		PaginatedFileDto,
 		PaginatedPropertyDto,
 		PaginatedRoleDto,
 		PortfolioDto,
@@ -20,6 +21,7 @@
 	export let portfolio: PortfolioDto;
 	export let properties: PaginatedPropertyDto;
 	export let roles: PaginatedRoleDto;
+	export let files: PaginatedFileDto;
 
 	$: details = [
 		...(portfolio.label ? [['Label', portfolio.label]] : []),
@@ -58,6 +60,6 @@
 		/>
 	</svelte:fragment>
 </Heading>
-<DetailsPane {details} />
+<DetailsPane {details} {files} />
 <PropertyList {properties} />
 <MemberList {roles} />
