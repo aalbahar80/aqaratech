@@ -3789,48 +3789,13 @@ components:
     FileDto:
       type: object
       properties:
-        id:
+        Key:
           type: string
-          readOnly: true
-        createdAt:
-          format: date-time
-          type: string
-          readOnly: true
-        updatedAt:
-          format: date-time
-          type: string
-          readOnly: true
-        fileName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        portfolioId:
-          type: string
-          nullable: true
-        propertyId:
-          type: string
-          nullable: true
-        unitId:
-          type: string
-          nullable: true
-        expenseId:
-          type: string
-          nullable: true
-        leaseId:
-          type: string
-          nullable: true
-        leaseInvoiceId:
-          type: string
-          nullable: true
-        maintenanceOrderId:
-          type: string
-          nullable: true
+        Size:
+          type: number
       required:
-        - id
-        - createdAt
-        - updatedAt
-        - fileName
+        - Key
+        - Size
     FileForeignKeys:
       type: string
       enum:

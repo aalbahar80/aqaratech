@@ -1,6 +1,7 @@
+import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { IntersectionType, PartialType } from '@nestjs/swagger';
 import { File } from '@prisma/client';
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { IsID } from 'src/decorators/field.decorators';
 
@@ -50,10 +51,17 @@ class FileOptionalDto {
   maintenanceOrderId?: string | null;
 }
 
-export class FileDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(FileRequiredDto, FileOptionalDto),
-) {}
+export class FileDto {
+  constructor(obj: NonNullable<ListObjectsV2Output['Contents']>[0]) {
+    Object.assign(this, obj);
+  }
+
+  @IsString()
+  Key: string;
+
+  @IsNumber()
+  Size: number;
+}
 
 export class CreateFileDto
   extends IntersectionType(FileRequiredDto, PartialType(FileOptionalDto))

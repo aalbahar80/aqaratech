@@ -50,9 +50,10 @@ export class S3Service {
       new PutObjectCommand({
         ...params,
         Bucket: this._bucket,
+        ContentDisposition: 'inline',
       }),
     );
-    console.log(uploaded);
+    return uploaded;
   }
 
   async listObjects() {
@@ -61,7 +62,6 @@ export class S3Service {
         Bucket: this._bucket,
       }),
     );
-    console.log(objects);
     return objects;
   }
 

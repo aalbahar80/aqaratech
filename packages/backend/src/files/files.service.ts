@@ -26,29 +26,15 @@ export class FilesService {
       Action.Create,
       subject('File', createFileDto),
     );
-    // console.log({ createFileDto }, 'files.service.ts ~ 28');
-    // console.log({ file }, 'files.service.ts ~ 29');
-    const portfolioId = 'ced80d8b-1c20-4da2-b654-b3afa672e520';
-    await this.prisma.file.create({
-      data: {
-        fileName: createFileDto.fileName,
-        label: createFileDto.label,
-        portfolio: { connect: { id: portfolioId } }, // TODO don't hardcode portfolioId
-      },
-    });
-    await this.s3.putObject({
+    console.log({ createFileDto }, 'files.service.ts ~ 28');
+    console.log({ file }, 'files.service.ts ~ 29');
+    const uploaded = await this.s3.putObject({
       Key: createFileDto.fileName, // TODO set programmatically
       Body: file.buffer,
+      ContentType: file.mimetype,
     });
-
-    const created = await this.prisma.file.create({
-      data: {
-        ...createFileDto,
-        // TODO add file url
-      },
-    });
-
-    return created.id;
+    console.log({ uploaded }, 'files.service.ts ~ 36');
+    return createFileDto.fileName;
   }
 
   async findAll({
@@ -58,25 +44,26 @@ export class FilesService {
     fileFindAllOptionsDto: FileFindAllOptionsDto; // change to FilePageOptionsDto
     user: IUser;
   }): Promise<WithCount<FileDto>> {
-    const filter: Prisma.FileWhereInput = {
-      [fileFindAllOptionsDto.relationKey]: {
-        equals: fileFindAllOptionsDto.relationValue,
-      },
-    };
+    // const filter: Prisma.FileWhereInput = {
+    //   [fileFindAllOptionsDto.relationKey]: {
+    //     equals: fileFindAllOptionsDto.relationValue,
+    //   },
+    // };
     // TODO accessiblyBy
-    const [files, total] = await Promise.all([
-      this.prisma.file.findMany({ where: filter }),
-      this.prisma.file.count({ where: filter }),
-    ]);
+    // const [files, total] = await Promise.all([
+    //   this.prisma.file.findMany({ where: filter }),
+    //   this.prisma.file.count({ where: filter }),
+    // ]);
 
-    console.log({ files }, 'files.service.ts ~ 64');
+    // console.log({ files }, 'files.service.ts ~ 64');
 
     const objects = await this.s3.listObjects();
-    console.log({ objects }, 'files.service.ts ~ 68');
+    console.log(objects, 'files.service.ts ~ 68');
 
-    return { total, results: files.map((e) => new FileDto(e)) };
-    // @ts-ignore
-    // return { total, results: objects };
+    return {
+      total: objects.KeyCount || 0,
+      results: objects.Contents?.map((e) => new FileDto(e)) || [],
+    };
   }
 
   async findOne({ fileId }: { fileId: string }) {

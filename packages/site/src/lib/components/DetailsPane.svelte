@@ -30,7 +30,7 @@
 					<ul
 						class="divide-y divide-gray-200 rounded-md border border-gray-200"
 					>
-						{#each files.results as file}
+						{#each files.results as file (file.key)}
 							<li
 								class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
 							>
@@ -40,14 +40,14 @@
 										class="h-5 w-5 flex-shrink-0 text-gray-400"
 										aria-hidden="true"
 									/>
-									<span class="ml-2 w-0 flex-1 truncate">{file.fileName}</span>
+									<span class="ml-2 w-0 flex-1 truncate">{file.key}</span>
 								</div>
 								<Dropdown>
 									<div slot="beforeButton">
 										<button
 											on:click={async () => {
 												const url = await $page.stuff.api.files.findOne({
-													fileId: 'invoice1',
+													fileId: file.key,
 												});
 												window.open(url, '_blank');
 											}}
