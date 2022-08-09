@@ -16,11 +16,15 @@ import {
   Unit,
   User,
 } from '@prisma/client';
+import { TenantAbility } from 'src/casl/abilities/tenant-ability';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CaslAbilityFactory {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private tenantAbility: TenantAbility,
+  ) {}
 
   private readonly logger = new Logger(CaslAbilityFactory.name);
 
@@ -430,52 +434,13 @@ export class CaslAbilityFactory {
         id: { in: readable.maintenanceOrders },
       });
     } else if (role.roleType === 'TENANT' && role.tenantId) {
-      // ### Role: Tenant###
-      // TODO restrict fields
-      const leasesQ = this.prisma.lease.findMany({
-        select: { id: true },
-        where: { tenantId: { equals: role.tenantId } },
-      });
-
-      const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
-        select: { id: true },
-        where: { lease: { tenantId: { equals: role.tenantId } } },
-      });
-
-      const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
-        select: { id: true },
-        where: { tenantId: { equals: role.tenantId } },
-      });
-
-      const [leases, leaseInvoices, maintenanceOrders] = await Promise.all([
-        leasesQ,
-        leaseInvoicesQ,
-        maintenanceOrdersQ,
-      ]);
-
-      const readable: TenantReadableResources = {
-        tenants: [role.tenantId],
-        leases: leases.map((i) => i.id),
-        leaseInvoices: leaseInvoices.map((i) => i.id),
-        maintenanceOrders: maintenanceOrders.map((i) => i.id),
+      // type hack
+      const tenantRole = {
+        ...role,
+        roleType: role.roleType,
+        tenantId: role.tenantId,
       };
-
-      can(Action.Read, 'Tenant', {
-        id: { in: readable.tenants },
-      });
-
-      can(Action.Read, ['Lease'], {
-        id: { in: readable.leases },
-      });
-
-      // TODO some fields should be public
-      can(Action.Read, ['LeaseInvoice'], {
-        id: { in: readable.leaseInvoices },
-      });
-
-      can(Action.Read, ['MaintenanceOrder'], {
-        id: { in: readable.maintenanceOrders },
-      });
+      await this.tenantAbility.define(tenantRole, can);
     }
 
     this.logger.log(
@@ -519,7 +484,7 @@ export type Subject = Subjects<{
 }>;
 
 type Resource = string;
-interface Resources {
+export interface Resources {
   orgs: Resource[];
   roles: Resource[];
   tenants: Resource[];
@@ -543,8 +508,4 @@ type PortfolioReadableResources = Pick<
   | 'leaseInvoices'
   | 'expenses'
   | 'maintenanceOrders'
->;
-type TenantReadableResources = Pick<
-  Resources,
-  'tenants' | 'leases' | 'leaseInvoices' | 'maintenanceOrders'
 >;
