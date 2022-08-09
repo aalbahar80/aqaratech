@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Delete,
-  FileTypeValidator,
   Get,
   MaxFileSizeValidator,
   Param,
@@ -114,8 +113,9 @@ export class OrganizationsController {
     return this.searchService.search({ query, organizationId: id });
   }
 
-  @Post(':id/upload')
+  @Post(':id/files')
   // TODO ability check
+  @SkipAbilityCheck()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'List of files',
@@ -125,14 +125,18 @@ export class OrganizationsController {
   uploadFile(
     @UploadedFile(
       new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 10000 }),
-          new FileTypeValidator({ fileType: 'jpeg' }),
-        ],
+        validators: [new MaxFileSizeValidator({ maxSize: 10000000 })],
       }),
     )
     file: Express.Multer.File,
   ) {
-    console.log(file);
+    return this.organizationsService.uploadFile({ file });
+  }
+
+  @Get(':id/files')
+  // TODO ability check
+  @SkipAbilityCheck()
+  findFiles() {
+    return this.organizationsService.findFiles();
   }
 }

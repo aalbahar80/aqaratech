@@ -2036,7 +2036,7 @@ paths:
               schema:
                 type: object
       tags: *ref_21
-  /organizations/{id}/upload:
+  /organizations/{id}/files:
     post:
       operationId: uploadFile
       parameters:
@@ -2051,6 +2051,18 @@ paths:
       responses:
         '201':
           description: ''
+      tags: *ref_21
+    get:
+      operationId: findFiles
+      parameters:
+        - *ref_20
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
       tags: *ref_21
   /aggregate/incomeByMonth:
     get:

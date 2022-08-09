@@ -1,4 +1,3 @@
-import { ListObjectsV2Command, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
@@ -89,26 +88,22 @@ export class OrganizationsService {
     return deactivated.id;
   }
 
+  // ### FILES ###
+
   async uploadFile({ file }: { file: Express.Multer.File }) {
-    console.log(file);
-    // TODO move to s3 service
+    console.log(file); // TODO remove
 
-    // upload file to bucket
-    const uploaded = await this.s3.send(
-      new PutObjectCommand({
-        Bucket: 'bucket-test-1',
-        Key: file.originalname,
-        Body: file.buffer,
-      }),
-    );
-    console.log(uploaded);
+    await this.s3.putObject({
+      Key: file.filename,
+      Body: file.buffer,
+    });
 
-    // list objects in bucket
-    const result = await this.s3.send(
-      new ListObjectsV2Command({ Bucket: 'bucket-test-1' }),
-    );
-    console.log(result);
+    // TODO only return necessary fields
+    await this.s3.listObjects();
+  }
 
-    return { uploaded, result };
+  async findFiles() {
+    // TODO only return necessary fields
+    return await this.s3.listObjects();
   }
 }

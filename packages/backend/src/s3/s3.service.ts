@@ -1,10 +1,11 @@
-import { S3Client } from '@aws-sdk/client-s3';
+import { PutObjectCommandInput, S3Client } from '@aws-sdk/client-s3';
+import { ListObjectsV2Command, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
-export class S3Service extends S3Client {
+export class S3Service {
   constructor(readonly configService: ConfigService<EnvironmentConfig>) {
     const accountId = configService.get('r2Config.R2_ACCOUNT_ID', {
       infer: true,
@@ -24,7 +25,7 @@ export class S3Service extends S3Client {
       throw new Error('R2 config not found');
     }
 
-    super({
+    this._client = new S3Client({
       region: 'auto',
       endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
       credentials: {
@@ -32,5 +33,28 @@ export class S3Service extends S3Client {
         secretAccessKey,
       },
     });
+  }
+
+  private _client: S3Client;
+  private readonly _bucket = 'bucket-test-1';
+
+  async putObject(params: Omit<PutObjectCommandInput, 'Bucket'>) {
+    const uploaded = await this._client.send(
+      new PutObjectCommand({
+        ...params,
+        Bucket: this._bucket,
+      }),
+    );
+    console.log(uploaded);
+  }
+
+  async listObjects() {
+    const objects = await this._client.send(
+      new ListObjectsV2Command({
+        Bucket: this._bucket,
+      }),
+    );
+    console.log(objects);
+    return objects;
   }
 }
