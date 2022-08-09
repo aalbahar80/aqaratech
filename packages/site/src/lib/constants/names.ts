@@ -91,7 +91,7 @@ const invoice = satisfies<EntityName>()({
 	singularCap: 'Invoice',
 	plural: 'invoices',
 	pluralCap: 'Invoices',
-	idField: 'invoiceId',
+	idField: 'leaseInvoiceId',
 });
 
 const expense = satisfies<EntityName>()({
@@ -112,14 +112,14 @@ const expenseCategory = satisfies<EntityName>()({
 	idField: '',
 });
 
-// const maintenanceOrder = satisfies<EntityName>()({
-// 	urlName: 'maintenanceOrders',
-// 	singular: 'maintenanceOrder',
-// 	singularCap: 'MaintenanceOrder',
-// 	plural: 'maintenanceOrders',
-// 	pluralCap: 'MaintenanceOrders',
-// 	idField: 'maintenanceOrderId',
-// });
+const maintenanceOrder = satisfies<EntityName>()({
+	urlName: 'maintenanceOrders',
+	singular: 'maintenanceOrder',
+	singularCap: 'MaintenanceOrder',
+	plural: 'maintenanceOrders',
+	pluralCap: 'MaintenanceOrders',
+	idField: 'maintenanceOrderId',
+});
 
 const file = satisfies<EntityName>()({
 	urlName: 'files',
@@ -140,7 +140,7 @@ export const entityNameMap = satisfies<EntityNameMap>()({
 	units: unit,
 	leases: lease,
 	leaseInvoices: invoice,
-	// maintenanceOrders: maintenanceOrder,
+	maintenanceOrders: maintenanceOrder,
 	expenses: expense,
 	expenseCategories: expenseCategory,
 	files: file,

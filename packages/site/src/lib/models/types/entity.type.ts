@@ -10,5 +10,5 @@ export type EntityTitle =
 	| 'roles'
 	| 'members'
 	| 'expenseCategories'
-	| 'files';
-// | 'maintenanceOrders';
+	| 'files'
+	| 'maintenanceOrders';

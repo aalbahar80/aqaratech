@@ -3755,47 +3755,6 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
-    CreateFileDto:
-      type: object
-      properties:
-        fileName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        portfolioId:
-          type: string
-          nullable: true
-        propertyId:
-          type: string
-          nullable: true
-        unitId:
-          type: string
-          nullable: true
-        expenseId:
-          type: string
-          nullable: true
-        leaseId:
-          type: string
-          nullable: true
-        leaseInvoiceId:
-          type: string
-          nullable: true
-        maintenanceOrderId:
-          type: string
-          nullable: true
-      required:
-        - fileName
-    FileDto:
-      type: object
-      properties:
-        Key:
-          type: string
-        Size:
-          type: number
-      required:
-        - Key
-        - Size
     FileForeignKeys:
       type: string
       enum:
@@ -3807,6 +3766,32 @@ components:
         - leaseId
         - leaseInvoiceId
         - maintenanceOrderId
+    CreateFileDto:
+      type: object
+      properties:
+        relationKey:
+          $ref: '#/components/schemas/FileForeignKeys'
+        relationValue:
+          type: string
+        fileName:
+          type: string
+        label:
+          type: string
+          nullable: true
+      required:
+        - relationKey
+        - relationValue
+        - fileName
+    FileDto:
+      type: object
+      properties:
+        Key:
+          type: string
+        Size:
+          type: number
+      required:
+        - Key
+        - Size
     BreadcrumbsDto:
       type: object
       properties:
