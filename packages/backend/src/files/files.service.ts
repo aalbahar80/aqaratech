@@ -27,6 +27,7 @@ export class FilesService {
     console.log({ createFileDto }, 'files.service.ts ~ 28');
     console.log({ file }, 'files.service.ts ~ 29');
     const uploaded = await this.s3.putObject({
+      Bucket: user.role.organizationId,
       Key: createFileDto.fileName, // TODO set programmatically
       Body: file.buffer,
       ContentType: file.mimetype,
@@ -55,7 +56,9 @@ export class FilesService {
 
     // console.log({ files }, 'files.service.ts ~ 64');
 
-    const objects = await this.s3.listObjects();
+    const objects = await this.s3.listObjects({
+      Bucket: user.role.organizationId,
+    });
     console.log(objects, 'files.service.ts ~ 68');
 
     return {
@@ -64,11 +67,14 @@ export class FilesService {
     };
   }
 
-  async findOne({ fileId }: { fileId: string }) {
-    return this.s3.getObject({ Key: fileId });
+  async findOne({ fileId, user }: { fileId: string; user: IUser }) {
+    return this.s3.getObject({ Bucket: user.role.organizationId, Key: fileId });
   }
 
-  remove(id: string) {
-    return this.s3.removeObject({ Key: id });
+  async remove({ id, user }: { id: string; user: IUser }) {
+    return this.s3.removeObject({
+      Bucket: user.role.organizationId,
+      Key: id,
+    });
   }
 }

@@ -1,10 +1,11 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   GetObjectCommandInput,
   ListObjectsV2Command,
+  ListObjectsV2CommandInput,
   PutObjectCommand,
   PutObjectCommandInput,
-  DeleteObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
@@ -44,44 +45,30 @@ export class S3Service {
   }
 
   private _client: S3Client;
-  private readonly _bucket = 'bucket-test-1';
 
-  async putObject(params: Omit<PutObjectCommandInput, 'Bucket'>) {
+  async putObject(params: PutObjectCommandInput) {
     const uploaded = await this._client.send(
       new PutObjectCommand({
         ...params,
-        Bucket: this._bucket,
         ContentDisposition: 'inline',
       }),
     );
     return uploaded;
   }
 
-  async listObjects() {
-    const objects = await this._client.send(
-      new ListObjectsV2Command({
-        Bucket: this._bucket,
-      }),
-    );
+  async listObjects(options: ListObjectsV2CommandInput) {
+    const objects = await this._client.send(new ListObjectsV2Command(options));
     return objects;
   }
 
-  async getObject(params: Omit<GetObjectCommandInput, 'Bucket'>) {
-    const command = new GetObjectCommand({
-      ...params,
-      Bucket: this._bucket,
-    });
+  async getObject(options: GetObjectCommandInput) {
+    const command = new GetObjectCommand(options);
 
     const url = await getSignedUrl(this._client, command, { expiresIn: 3600 });
     return url;
   }
 
-  async removeObject(params: Omit<GetObjectCommandInput, 'Bucket'>) {
-    return this._client.send(
-      new DeleteObjectCommand({
-        ...params,
-        Bucket: this._bucket,
-      }),
-    );
+  async removeObject(options: GetObjectCommandInput) {
+    return this._client.send(new DeleteObjectCommand(options));
   }
 }
