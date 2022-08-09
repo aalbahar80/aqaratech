@@ -57,7 +57,7 @@ export class S3Service {
         }
         return next(args);
       },
-      { step: 'build' },
+      { step: 'serialize' }, // throws SignatureDoesNotMatch error for presigned URL's if step is set to 'build'
     );
   }
 
