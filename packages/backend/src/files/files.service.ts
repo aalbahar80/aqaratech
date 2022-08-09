@@ -1,5 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
@@ -47,12 +48,18 @@ export class FilesService {
     fileFindAllOptionsDto: FileFindAllOptionsDto; // change to FilePageOptionsDto
     user: IUser;
   }): Promise<WithCount<FileDto>> {
+    const filter: Prisma.FileWhereInput = {
+      [fileFindAllOptionsDto.relation[0]]: {
+        equals: fileFindAllOptionsDto.relation[1],
+      },
+    };
     // TODO accessiblyBy
     const [files, total] = await Promise.all([
-      this.prisma.file.findMany(),
-      this.prisma.file.count(),
+      this.prisma.file.findMany({ where: filter }),
+      this.prisma.file.count({ where: filter }),
     ]);
 
+    console.log({ files }, 'files.service.ts ~ 64');
     return { total, results: files.map((e) => new FileDto(e)) };
   }
 

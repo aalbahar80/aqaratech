@@ -2346,6 +2346,13 @@ paths:
       operationId: findAll
       parameters:
         - *ref_26
+        - name: relation
+          required: true
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
         - name: tenantId
           required: false
           in: query
