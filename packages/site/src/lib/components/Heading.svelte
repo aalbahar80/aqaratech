@@ -5,7 +5,6 @@
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import FileInput from '$lib/components/form/inputs/FileInput.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { entityNameMap } from '$lib/constants/names';
 	import type { EntityTitle } from '$lib/models/types/entity.type';
@@ -48,7 +47,6 @@
 		</h2>
 	</div>
 
-	<FileInput />
 	{#if $session.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
