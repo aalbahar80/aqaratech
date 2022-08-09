@@ -70,6 +70,7 @@ CREATE TABLE "Organization" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "fullName" TEXT NOT NULL DEFAULT '',
     "label" TEXT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
     "planId" TEXT,
 
     CONSTRAINT "Organization_pkey" PRIMARY KEY ("id")
@@ -234,49 +235,76 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "OrganizationSettings_organizationId_key" ON "OrganizationSettings"("organizationId");
 
 -- CreateIndex
-CREATE INDEX "Expense_unitId_idx" ON "Expense"("unitId");
-
--- CreateIndex
-CREATE INDEX "Expense_propertyId_idx" ON "Expense"("propertyId");
-
--- CreateIndex
-CREATE INDEX "Expense_portfolioId_idx" ON "Expense"("portfolioId");
-
--- CreateIndex
-CREATE INDEX "Expense_maintenanceOrderId_idx" ON "Expense"("maintenanceOrderId");
-
--- CreateIndex
-CREATE INDEX "Expense_categoryId_idx" ON "Expense"("categoryId");
-
--- CreateIndex
-CREATE INDEX "Lease_tenantId_idx" ON "Lease"("tenantId");
-
--- CreateIndex
-CREATE INDEX "Lease_unitId_idx" ON "Lease"("unitId");
-
--- CreateIndex
-CREATE INDEX "MaintenanceOrder_tenantId_idx" ON "MaintenanceOrder"("tenantId");
-
--- CreateIndex
-CREATE INDEX "MaintenanceOrder_unitId_idx" ON "MaintenanceOrder"("unitId");
-
--- CreateIndex
-CREATE INDEX "MaintenanceOrder_propertyId_idx" ON "MaintenanceOrder"("propertyId");
-
--- CreateIndex
-CREATE INDEX "MaintenanceOrder_portfolioId_idx" ON "MaintenanceOrder"("portfolioId");
-
--- CreateIndex
-CREATE INDEX "Property_portfolioId_idx" ON "Property"("portfolioId");
-
--- CreateIndex
-CREATE INDEX "LeaseInvoice_leaseId_idx" ON "LeaseInvoice"("leaseId");
-
--- CreateIndex
-CREATE INDEX "Unit_propertyId_idx" ON "Unit"("propertyId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "_OrganizationToPlanInvoice_AB_unique" ON "_OrganizationToPlanInvoice"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_OrganizationToPlanInvoice_B_index" ON "_OrganizationToPlanInvoice"("B");
+
+-- AddForeignKey
+ALTER TABLE "Role" ADD CONSTRAINT "Role_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Role" ADD CONSTRAINT "Role_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Role" ADD CONSTRAINT "Role_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Role" ADD CONSTRAINT "Role_tenantId_fkey" FOREIGN KEY ("tenantId") REFERENCES "Tenant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Tenant" ADD CONSTRAINT "Tenant_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Portfolio" ADD CONSTRAINT "Portfolio_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Organization" ADD CONSTRAINT "Organization_planId_fkey" FOREIGN KEY ("planId") REFERENCES "Plan"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "OrganizationSettings" ADD CONSTRAINT "OrganizationSettings_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_maintenanceOrderId_fkey" FOREIGN KEY ("maintenanceOrderId") REFERENCES "MaintenanceOrder"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_unitId_fkey" FOREIGN KEY ("unitId") REFERENCES "Unit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Lease" ADD CONSTRAINT "Lease_tenantId_fkey" FOREIGN KEY ("tenantId") REFERENCES "Tenant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Lease" ADD CONSTRAINT "Lease_unitId_fkey" FOREIGN KEY ("unitId") REFERENCES "Unit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MaintenanceOrder" ADD CONSTRAINT "MaintenanceOrder_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MaintenanceOrder" ADD CONSTRAINT "MaintenanceOrder_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MaintenanceOrder" ADD CONSTRAINT "MaintenanceOrder_tenantId_fkey" FOREIGN KEY ("tenantId") REFERENCES "Tenant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MaintenanceOrder" ADD CONSTRAINT "MaintenanceOrder_unitId_fkey" FOREIGN KEY ("unitId") REFERENCES "Unit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Property" ADD CONSTRAINT "Property_portfolioId_fkey" FOREIGN KEY ("portfolioId") REFERENCES "Portfolio"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LeaseInvoice" ADD CONSTRAINT "LeaseInvoice_leaseId_fkey" FOREIGN KEY ("leaseId") REFERENCES "Lease"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Unit" ADD CONSTRAINT "Unit_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_OrganizationToPlanInvoice" ADD CONSTRAINT "_OrganizationToPlanInvoice_A_fkey" FOREIGN KEY ("A") REFERENCES "Organization"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_OrganizationToPlanInvoice" ADD CONSTRAINT "_OrganizationToPlanInvoice_B_fkey" FOREIGN KEY ("B") REFERENCES "PlanInvoice"("id") ON DELETE CASCADE ON UPDATE CASCADE;

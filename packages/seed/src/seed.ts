@@ -323,15 +323,14 @@ export async function seed({
 		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
 		await prisma.organizationSettings.createMany({
-			//@ts-ignore
 			data: organizations.map((o) => fakeOrganizationSettings(o.id)),
 		});
-		//@ts-ignore
-		await prisma.role.createMany({ data: roles });
 		await prisma.portfolio.createMany({ data: portfolios });
+		await prisma.tenant.createMany({ data: tenants });
+		// @ts-ignore
+		await prisma.role.createMany({ data: roles });
 		await prisma.property.createMany({ data: properties });
 		await prisma.unit.createMany({ data: units });
-		await prisma.tenant.createMany({ data: tenants });
 		if (leases.length) {
 			await prisma.lease.createMany({ data: leases });
 		}
