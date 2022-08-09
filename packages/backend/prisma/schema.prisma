@@ -164,12 +164,6 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
-
-  @@index([unitId])
-  @@index([propertyId])
-  @@index([portfolioId])
-  @@index([maintenanceOrderId])
-  @@index([categoryId])
 }
 
 model Lease {
@@ -188,9 +182,6 @@ model Lease {
   tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
   leaseInvoices LeaseInvoice[]
-
-  @@index([tenantId])
-  @@index([unitId])
 }
 
 model MaintenanceOrder {
@@ -210,11 +201,6 @@ model MaintenanceOrder {
   tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
   expenses    Expense[]
-
-  @@index([tenantId])
-  @@index([unitId])
-  @@index([propertyId])
-  @@index([portfolioId])
 }
 
 model Property {
@@ -237,8 +223,6 @@ model Property {
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
-
-  @@index([portfolioId])
 }
 
 model LeaseInvoice {
@@ -254,8 +238,6 @@ model LeaseInvoice {
   mfPaymentId String?
   leaseId     String
   lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
-
-  @@index([leaseId])
 }
 
 model Unit {
@@ -276,6 +258,4 @@ model Unit {
   expenses          Expense[]
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
-
-  @@index([propertyId])
 }
