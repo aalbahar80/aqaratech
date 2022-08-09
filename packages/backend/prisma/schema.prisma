@@ -68,6 +68,7 @@ model Tenant {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
   roles Role[]
+  files File[]
 }
 
 model Portfolio {
@@ -166,6 +167,7 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  files              File[]
 }
 
 model Lease {
@@ -184,6 +186,7 @@ model Lease {
   tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
   leaseInvoices LeaseInvoice[]
+  files         File[]
 }
 
 model MaintenanceOrder {
@@ -203,6 +206,7 @@ model MaintenanceOrder {
   tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
   expenses    Expense[]
+  files       File[]
 }
 
 model Property {
@@ -241,6 +245,7 @@ model LeaseInvoice {
   mfPaymentId String?
   leaseId     String
   lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+  files       File[]
 }
 
 model Unit {
@@ -261,6 +266,7 @@ model Unit {
   expenses          Expense[]
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
+  files             File[]
 }
 
 model File {
@@ -270,9 +276,27 @@ model File {
   label     String
   fileName  String
 
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
   portfolioId String?
   portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   propertyId String?
   property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  unitId String?
+  unit   Unit?   @relation(fields: [unitId], references: [id], onDelete: Cascade)
+
+  expenseId String?
+  expense   Expense? @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+
+  leaseId String?
+  lease   Lease?  @relation(fields: [leaseId], references: [id], onDelete: Cascade)
+
+  leaseInvoiceId String?
+  leaseInvoice   LeaseInvoice? @relation(fields: [leaseInvoiceId], references: [id], onDelete: Cascade)
+
+  maintenanceOrderId String?
+  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Cascade)
 }
