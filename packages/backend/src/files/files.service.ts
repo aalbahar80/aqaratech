@@ -67,9 +67,13 @@ export class FilesService {
     directoryRequestDto: DirectoryRequestDto;
     user: IUser;
   }): Promise<WithCount<FileDto>> {
-    const { bucket, directory } = directoryRequestDto;
+    const { bucket, directory, entity } = directoryRequestDto;
 
     // TODO ability check here
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Read,
+      subject(entity, { id: createFileDto.relationValue }),
+    );
 
     type s3Objects = ListObjectsV2CommandOutput | undefined;
     let objects: s3Objects;

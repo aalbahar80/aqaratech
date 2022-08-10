@@ -1,6 +1,7 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { Expose } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { entityMap, EntitySingularCap } from 'src/constants/entity';
 import { IsID } from 'src/decorators/field.decorators';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { IUser } from 'src/interfaces/user.interface';
@@ -21,6 +22,10 @@ export class DirectoryRequestDto {
   constructor({ directory, user }: { directory: string; user: IUser }) {
     this.bucket = user.role.organizationId;
     this.directory = directory;
+
+    // use getter instead?
+    const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
+    this.entity = entityMap[relationKey].singularCap;
   }
 
   @IsString()
@@ -28,6 +33,9 @@ export class DirectoryRequestDto {
 
   @IsString()
   directory: string; // aka prefix, used as cache key
+
+  @IsString()
+  entity: EntitySingularCap; // for ability check
 }
 
 export class FileRequestDto extends DirectoryRequestDto {
