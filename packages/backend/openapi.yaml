@@ -3767,6 +3767,8 @@ components:
     CreateFileDto:
       type: object
       properties:
+        organizationId:
+          type: string
         relationKey:
           enum:
             - tenants
@@ -3786,6 +3788,7 @@ components:
           type: string
           nullable: true
       required:
+        - organizationId
         - relationKey
         - relationValue
         - fileName
