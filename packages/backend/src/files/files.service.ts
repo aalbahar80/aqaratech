@@ -67,12 +67,11 @@ export class FilesService {
     directoryRequestDto: DirectoryRequestDto;
     user: IUser;
   }): Promise<WithCount<FileDto>> {
-    const { bucket, directory, entity } = directoryRequestDto;
+    const { bucket, directory, entity, entityId } = directoryRequestDto;
 
-    // TODO ability check here
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Read,
-      subject(entity, { id: createFileDto.relationValue }),
+      subject(entity, { id: entityId }),
     );
 
     type s3Objects = ListObjectsV2CommandOutput | undefined;
@@ -113,7 +112,12 @@ export class FilesService {
     fileRequestDto: FileRequestDto;
     user: IUser;
   }) {
-    // TODO ability check here
+    const { entity, entityId } = fileRequestDto;
+
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Read,
+      subject(entity, { id: entityId }),
+    );
 
     // attempt to get from cache
     let presignedUrl: string;
@@ -149,10 +153,14 @@ export class FilesService {
     fileRequestDto: FileRequestDto;
     user: IUser;
   }) {
-    // TODO ability check here
+    const { key, directory, bucket, entity, entityId } = fileRequestDto;
+
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Delete,
+      subject(entity, { id: entityId }),
+    );
 
     // bust cache for file and directory (prefix)
-    const { key, directory, bucket } = fileRequestDto;
     this.logger.debug(`CACHE BUST: key: ${key} - directory: ${directory}`);
     await this.cacheManager.del(key);
     await this.cacheManager.del(directory);

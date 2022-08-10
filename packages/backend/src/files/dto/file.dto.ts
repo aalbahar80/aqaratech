@@ -23,9 +23,11 @@ export class DirectoryRequestDto {
     this.bucket = user.role.organizationId;
     this.directory = directory;
 
-    // use getter instead?
+    // use getters instead?
     const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
     this.entity = entityMap[relationKey].singularCap;
+
+    this.entityId = directory.split('/')[1];
   }
 
   @IsString()
@@ -36,6 +38,9 @@ export class DirectoryRequestDto {
 
   @IsString()
   entity: EntitySingularCap; // for ability check
+
+  @IsID()
+  entityId: string; // for ability check
 }
 
 export class FileRequestDto extends DirectoryRequestDto {
