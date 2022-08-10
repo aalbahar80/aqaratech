@@ -4,7 +4,6 @@ import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { entityMap } from 'src/constants/entity';
 import {
   CreateFileDto,
   DirectoryRequestDto,
@@ -32,16 +31,15 @@ export class FilesService {
     file: Express.Multer.File;
     user: IUser;
   }) {
-    const { bucket, directory, key } = createFileDto.fileRequestDto;
+    const { bucket, directory, key, entity, entityId } =
+      createFileDto.fileRequestDto;
     this.logger.debug(
       `Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
     );
 
-    const singularCap = entityMap[createFileDto.relationKey].singularCap;
-
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject(singularCap, { id: createFileDto.relationValue }),
+      subject(entity, { id: entityId }),
     );
 
     // bust cache for file and directory (prefix)
@@ -112,7 +110,7 @@ export class FilesService {
     fileRequestDto: FileRequestDto;
     user: IUser;
   }) {
-    const { entity, entityId } = fileRequestDto;
+    const { key, bucket, entity, entityId } = fileRequestDto;
 
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Read,
@@ -122,7 +120,7 @@ export class FilesService {
     // attempt to get from cache
     let presignedUrl: string;
 
-    const cacheKey = fileRequestDto.key;
+    const cacheKey = key;
     const cached = await this.cacheManager.get<string>(cacheKey);
 
     if (cached) {
@@ -133,8 +131,8 @@ export class FilesService {
 
       // get fresh from s3
       presignedUrl = await this.s3.getObject({
-        Bucket: fileRequestDto.bucket,
-        Key: fileRequestDto.key,
+        Bucket: bucket,
+        Key: key,
       });
 
       // set cache
