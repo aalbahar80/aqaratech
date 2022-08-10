@@ -85,7 +85,10 @@ export class FilesService {
       this.logger.debug(`CACHE MISS: files.findAll cacheKey: ${cacheKey}`);
 
       // get fresh from s3
-      objects = await this.s3.listObjects({ Bucket: bucket });
+      objects = await this.s3.listObjects({
+        Bucket: bucket,
+        Prefix: directory,
+      });
 
       // set cache
       await this.cacheManager.set<s3Objects>(cacheKey, objects, {
