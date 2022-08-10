@@ -28,7 +28,12 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
-import { CreateFileDto, FileDto, FileRequestDto } from 'src/files/dto/file.dto';
+import {
+  CreateFileDto,
+  DirectoryRequestDto,
+  FileDto,
+  FileRequestDto,
+} from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { FilesService } from './files.service';
 
@@ -79,7 +84,10 @@ export class FilesController {
     @User() user: IUser,
     @Query() fileFindAllOptionsDto: FileFindAllOptionsDto, // TODO change to FilePageOptionsDto
   ): Promise<WithCount<FileDto>> {
-    return this.filesService.findAll({ fileFindAllOptionsDto, user });
+    const { relationKey, relationValue } = fileFindAllOptionsDto;
+    const directory = `${relationKey}/${relationValue}`;
+    const directoryRequestDto = new DirectoryRequestDto({ directory, user });
+    return this.filesService.findAll({ directoryRequestDto, user });
   }
 
   @Get(':fileId')

@@ -17,6 +17,19 @@ export class FileDto {
   Size: number;
 }
 
+export class DirectoryRequestDto {
+  constructor({ directory, user }: { directory: string; user: IUser }) {
+    this.bucket = user.role.organizationId;
+    this.directory = directory;
+  }
+
+  @IsString()
+  bucket: string;
+
+  @IsString()
+  directory: string; // aka prefix, used as cache key
+}
+
 export class FileRequestDto {
   constructor({ key, user }: { key: string; user: IUser }) {
     this.bucket = user.role.organizationId;

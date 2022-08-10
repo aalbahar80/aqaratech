@@ -5,8 +5,12 @@ import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { entityMap } from 'src/constants/entity';
-import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
-import { CreateFileDto, FileDto, FileRequestDto } from 'src/files/dto/file.dto';
+import {
+  CreateFileDto,
+  DirectoryRequestDto,
+  FileDto,
+  FileRequestDto,
+} from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { S3Service } from 'src/s3/s3.service';
 
@@ -57,19 +61,21 @@ export class FilesService {
   }
 
   async findAll({
-    fileFindAllOptionsDto,
+    directoryRequestDto,
     user,
   }: {
-    fileFindAllOptionsDto: FileFindAllOptionsDto; // change to FilePageOptionsDto
+    directoryRequestDto: DirectoryRequestDto;
     user: IUser;
   }): Promise<WithCount<FileDto>> {
+    const { bucket, directory } = directoryRequestDto;
+
     // TODO ability check here
 
     type s3Objects = ListObjectsV2CommandOutput | undefined;
     let objects: s3Objects;
 
     // attempt to get from cache
-    const cacheKey = user.role.organizationId; // TODO use fileRequestDto?
+    const cacheKey = directory;
     const cached = await this.cacheManager.get<s3Objects>(cacheKey);
 
     if (cached) {
@@ -79,9 +85,7 @@ export class FilesService {
       this.logger.debug(`CACHE MISS: files.findAll cacheKey: ${cacheKey}`);
 
       // get fresh from s3
-      objects = await this.s3.listObjects({
-        Bucket: user.role.organizationId, // TODO use fileRequestDto.bucket?
-      });
+      objects = await this.s3.listObjects({ Bucket: bucket });
 
       // set cache
       await this.cacheManager.set<s3Objects>(cacheKey, objects, {
@@ -141,14 +145,14 @@ export class FilesService {
     // TODO ability check here
 
     // bust cache for file and directory (prefix)
-    const cacheKey = fileRequestDto.key;
-    this.logger.debug(`CACHE BUST: key: ${cacheKey}`);
-    await this.cacheManager.del(cacheKey);
-    await this.cacheManager.del(fileRequestDto.directory);
+    const { key, directory, bucket } = fileRequestDto;
+    this.logger.debug(`CACHE BUST: key: ${key} - directory: ${directory}`);
+    await this.cacheManager.del(key);
+    await this.cacheManager.del(directory);
 
     await this.s3.removeObject({
-      Bucket: fileRequestDto.bucket,
-      Key: fileRequestDto.key,
+      Bucket: bucket,
+      Key: key,
     });
   }
 }
