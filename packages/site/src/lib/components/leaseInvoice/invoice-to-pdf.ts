@@ -82,7 +82,7 @@ interface PDFOptions {
 const stamp: PdfProps['stamp'] = {
 	inAllPages: true,
 	// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
-	src: 'http://localhost:3000/paid-stamp.png',
+	src: '/paid-stamp.png',
 	// original aspect ratio = 2185/1332 = 1.64
 	width: 48,
 	height: 30,
