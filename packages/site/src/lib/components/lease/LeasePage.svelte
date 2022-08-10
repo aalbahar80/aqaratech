@@ -2,30 +2,16 @@
 	import Button from '$components/buttons/Button.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import LeaseInvoiceList from '$lib/components/leaseInvoice/LeaseInvoiceList.svelte';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import { create } from '$lib/utils/route-helpers';
-	import type { LeaseDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseDto } from '@self/sdk';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 
 	export let lease: LeaseDto;
-	export let invoices: PaginatedLeaseInvoiceDto;
 
-	$: details = [
-		['Tenant', lease.breadcrumbs.tenant.label],
-		['Start Date', toUTCFormat(lease.start)],
-		['End Date', toUTCFormat(lease.end)],
-		['Monthly Rent', kwdFormat(lease.monthlyRent)],
-		['Deposit', kwdFormat(lease.deposit)],
-		['License', lease.license || '-'],
-	] as [string, string | null][];
-
-	const files: [string, string][] = [['Lease', 'TODO implement']];
 	const icons = [
 		{
 			label: `Expiry: ${formatDistance(new Date(lease.end), new Date(), {
@@ -74,5 +60,3 @@
 	</svelte:fragment>
 </Heading>
 <Badge label={badge.label} badgeColor={badge.color} />
-<DetailsPane {details} {files} />
-<LeaseInvoiceList leaseInvoices={invoices} leaseId={lease.id} />
