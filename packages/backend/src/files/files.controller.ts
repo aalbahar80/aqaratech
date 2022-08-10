@@ -18,12 +18,10 @@ import {
   ApiCreatedResponse,
   ApiExtraModels,
   ApiHeader,
-  getSchemaPath,
   ApiOkResponse,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger';
-import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -42,7 +40,6 @@ export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'File' })
   @ApiConsumes('multipart/form-data')
   @ApiExtraModels(CreateFileDto)
   @ApiBody({
@@ -77,8 +74,6 @@ export class FilesController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'File' })
-  // TODO ability check in service, or use accessibleBy
   @ApiPaginatedResponse(FileDto)
   findAll(
     @User() user: IUser,
@@ -88,7 +83,6 @@ export class FilesController {
   }
 
   @Get(':fileId')
-  // @CheckAbilities({ action: Action.Read, subject: 'File', params: ['fileId'] })
   @ApiOkResponse({ type: String })
   async findOne(
     @User() user: IUser,
@@ -98,11 +92,6 @@ export class FilesController {
   }
 
   @Delete(':fileId')
-  // @CheckAbilities({
-  //   action: Action.Delete,
-  //   subject: 'File',
-  //   params: ['fileId'],
-  // })
   @ApiOkResponse({ type: String })
   async remove(
     @User() user: IUser,

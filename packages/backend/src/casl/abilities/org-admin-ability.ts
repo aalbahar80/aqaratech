@@ -101,24 +101,6 @@ export class OrgAdminAbility {
       },
     });
 
-    const filesQ = this.prisma.file.findMany({
-      select: { id: true },
-      where: {
-        OR: [
-          { tenant: { organizationId: { equals: role.organizationId } } },
-          { portfolio: { organizationId: { equals: role.organizationId } } },
-          { property: { portfolio: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
-          { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } }, }, }, // prettier-ignore
-
-          // we use the shortest route to organizationId
-          { lease: { tenant: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
-          { leaseInvoice: { lease: { tenant: { organizationId: { equals: role.organizationId } } } } }, // prettier-ignore
-          { expense: { portfolio: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
-          { maintenanceOrder: { portfolio: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
-        ],
-      },
-    });
-
     const [
       roles,
       tenants,
@@ -129,7 +111,6 @@ export class OrgAdminAbility {
       leaseInvoices,
       expenses,
       maintenanceOrders,
-      files,
     ] = await Promise.all([
       rolesQ,
       tenantsQ,
@@ -140,7 +121,6 @@ export class OrgAdminAbility {
       leaseInvoicesQ,
       expensesQ,
       maintenanceOrdersQ,
-      filesQ,
     ]);
 
     const manageable: OrgManageableResources = {
@@ -154,7 +134,6 @@ export class OrgAdminAbility {
       leaseInvoices: leaseInvoices.map((i) => i.id),
       expenses: expenses.map((i) => i.id),
       maintenanceOrders: maintenanceOrders.map((i) => i.id),
-      files: files.map((i) => i.id),
     };
 
     // TODO: limit fields
@@ -276,23 +255,6 @@ export class OrgAdminAbility {
             { portfolioId: { in: manageable.portfolios } },
           ],
         },
-      ],
-    });
-
-    can([Action.Read, Action.Update, Action.Delete], ['File'], {
-      id: { in: manageable.files },
-    });
-
-    can(Action.Create, ['File'], {
-      OR: [
-        { tenantId: { in: manageable.tenants } },
-        { portfolioId: { in: manageable.portfolios } },
-        { propertyId: { in: manageable.properties } },
-        { unitId: { in: manageable.units } },
-        { leaseId: { in: manageable.leases } },
-        { leaseInvoiceId: { in: manageable.leaseInvoices } },
-        { expenseId: { in: manageable.expenses } },
-        { maintenanceOrderId: { in: manageable.maintenanceOrders } },
       ],
     });
   }

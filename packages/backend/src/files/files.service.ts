@@ -49,18 +49,7 @@ export class FilesService {
     fileFindAllOptionsDto: FileFindAllOptionsDto; // change to FilePageOptionsDto
     user: IUser;
   }): Promise<WithCount<FileDto>> {
-    // const filter: Prisma.FileWhereInput = {
-    //   [fileFindAllOptionsDto.relationKey]: {
-    //     equals: fileFindAllOptionsDto.relationValue,
-    //   },
-    // };
-    // TODO accessiblyBy
-    // const [files, total] = await Promise.all([
-    //   this.prisma.file.findMany({ where: filter }),
-    //   this.prisma.file.count({ where: filter }),
-    // ]);
-
-    // console.log({ files }, 'files.service.ts ~ 64');
+    // TODO ability check here
 
     const objects = await this.s3.listObjects({
       Bucket: user.role.organizationId,
@@ -74,10 +63,12 @@ export class FilesService {
   }
 
   async findOne({ fileId, user }: { fileId: string; user: IUser }) {
+    // TODO ability check here
     return this.s3.getObject({ Bucket: user.role.organizationId, Key: fileId });
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {
+    // TODO ability check here
     return this.s3.removeObject({
       Bucket: user.role.organizationId,
       Key: id,
