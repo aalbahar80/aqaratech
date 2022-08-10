@@ -65,6 +65,7 @@ export class S3Service {
   private readonly logger = new Logger(S3Service.name);
 
   async putObject(params: PutObjectCommandInput) {
+    this.logger.debug(`Putting object in bucket ${params.Bucket}`);
     const uploaded = await this._client.send(
       new PutObjectCommand({
         ...params,
@@ -75,6 +76,7 @@ export class S3Service {
   }
 
   async listObjects(options: ListObjectsV2CommandInput) {
+    this.logger.debug(`Listing objects in bucket ${options.Bucket}`);
     try {
       const objects = await this._client.send(
         new ListObjectsV2Command(options),
@@ -92,9 +94,13 @@ export class S3Service {
   }
 
   async getObject(options: GetObjectCommandInput) {
+    this.logger.debug(`Getting object in bucket ${options.Bucket}`);
     const command = new GetObjectCommand(options);
 
-    const url = await getSignedUrl(this._client, command, { expiresIn: 3600 });
+    const url = await getSignedUrl(this._client, command, { expiresIn: 3600 }); // TODO consolidate ttl with cache ttl
+    this.logger.debug(
+      `Returning signed url for Key: ${options.Key}: - URL: ${url}`,
+    );
     return url;
   }
 

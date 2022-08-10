@@ -28,7 +28,7 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
-import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
+import { CreateFileDto, FileDto, FileRequestDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { FilesService } from './files.service';
 
@@ -88,7 +88,9 @@ export class FilesController {
     @User() user: IUser,
     @Param('fileId') fileId: string,
   ): Promise<string> {
-    return this.filesService.findOne({ fileId, user });
+    const fileRequestDto = new FileRequestDto({ key: fileId, user });
+    console.log({ fileRequestDto }, 'files.controller.ts ~ 94');
+    return this.filesService.findOne({ fileRequestDto, user });
   }
 
   @Delete(':fileId')
@@ -97,7 +99,8 @@ export class FilesController {
     @User() user: IUser,
     @Param('fileId') fileId: string,
   ): Promise<string> {
-    await this.filesService.remove({ id: fileId, user });
+    const fileRequestDto = new FileRequestDto({ key: fileId, user });
+    await this.filesService.remove({ fileRequestDto, user });
     return fileId;
   }
 }
