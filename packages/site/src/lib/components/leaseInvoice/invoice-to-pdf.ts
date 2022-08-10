@@ -19,6 +19,9 @@ export const createPDF = async (options: PDFOptions) => {
  * jsPDFInvoiceTemplate(props); // create pdf
  */
 export const preparePDF = (options: PDFOptions): PdfProps => {
+	// clone defaultPdfOptions to ensure that the original is not mutated
+	const pdf = { ...defaultPdfOptions };
+
 	if (
 		// to make typescript happy
 		!pdf.footer ||
@@ -53,6 +56,7 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
 	pdf.invoice.invGenDate = `Invoice date: ${postAt}`;
+	console.log({ invoice }, 'invoice-to-pdf.ts ~ 56');
 	if (invoice.isPaid && invoice.paidAt) {
 		pdf.stamp = stamp;
 		const paidAt = invoice.paidAt.split('T')[0];
@@ -92,7 +96,7 @@ const stamp: PdfProps['stamp'] = {
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
  */
-const pdf: PdfProps = {
+const defaultPdfOptions: PdfProps = {
 	outputType: 'dataurlnewwindow',
 	returnJsPDFDocObject: true,
 	fileName: 'Invoice.pdf',
