@@ -49,11 +49,12 @@ async function bootstrap() {
   app.use(
     getMiddleware({
       swaggerSpec: document,
-      authentication: true,
-      onAuthenticate: function (req: any, username: string, password: string) {
-        // simple check for username and password
-        return username === 'username' && password === 'password';
-      },
+      authentication: false,
+      // hostname: process.env.PUBLIC_API_URL,
+      // onAuthenticate: function (req: any, username: string, password: string) {
+      // simple check for username and password
+      // return username === 'username' && password === 'password';
+      // },
     }),
   );
 
