@@ -8,8 +8,10 @@
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
+	import { kwdFormat } from '$lib/utils/common';
 	import { parseParams } from '$lib/utils/parse-params';
 	import { create } from '$lib/utils/route-helpers';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -37,6 +39,7 @@
 
 		const [
 			unit,
+			files,
 			leases,
 			invoicesGrouped,
 			expensesGrouped,
@@ -47,6 +50,10 @@
 			categories,
 		] = await Promise.all([
 			stuff.api!.units.findOne({ id: unitId }),
+			stuff.api!.files.findAll({
+				relationKey: 'units',
+				relationValue: unitId,
+			}),
 			stuff.api!.units.findLeases({ id: unitId, ...sParams }),
 
 			stuff.api!.aggregate.getIncomeByMonth(filter),
@@ -68,6 +75,7 @@
 		return {
 			props: {
 				unit,
+				files,
 				leases,
 				invoicesGrouped,
 				expensesGrouped,
@@ -84,6 +92,7 @@
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let unit: Prop['unit'];
+	export let files: Prop['files'];
 	export let leases: Prop['leases'];
 
 	export let invoicesGrouped: Prop['invoicesGrouped'];
@@ -95,34 +104,42 @@
 	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
 
 	export let categories: Prop['categories'];
+
+	$: details = [
+		...(unit.label ? [['Label', unit.label]] : []),
+		['Unit Number', unit.unitNumber],
+		['Type', unit.type],
+		['Market Rent', kwdFormat(unit.marketRent)],
+		['Usage', unit.usage],
+	] as [string, string | null][];
 </script>
 
-<UnitPage {unit}>
-	<LeaseList
-		{leases}
-		formUrl={(function () {
-			const base = create({ entity: 'leases' });
-			const searchParams = new URLSearchParams({
-				portfolioId: unit.breadcrumbs.portfolio.id,
-				propertyId: unit.propertyId,
-				unitId: unit.id,
-			});
-			return `${base}?${searchParams.toString()}`;
-		})()}
-		showIndex
-	/>
-	<DashboardFilter
-		properties={[]}
-		units={[unit]}
-		disabledPropertySelector
-		disabledUnitSelector
-	/>
-	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
-	<RevenueCard
-		{invoices}
-		{invoicesGroupedPaid}
-		{invoicesGroupedUnpaid}
-		disabledPropertyBreakdown
-	/>
-	<ExpensesCard {expenses} {categories} />
-</UnitPage>
+<UnitPage {unit} />
+<DetailsPane {details} {files} />
+<LeaseList
+	{leases}
+	formUrl={(function () {
+		const base = create({ entity: 'leases' });
+		const searchParams = new URLSearchParams({
+			portfolioId: unit.breadcrumbs.portfolio.id,
+			propertyId: unit.propertyId,
+			unitId: unit.id,
+		});
+		return `${base}?${searchParams.toString()}`;
+	})()}
+	showIndex
+/>
+<DashboardFilter
+	properties={[]}
+	units={[unit]}
+	disabledPropertySelector
+	disabledUnitSelector
+/>
+<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
+<RevenueCard
+	{invoices}
+	{invoicesGroupedPaid}
+	{invoicesGroupedUnpaid}
+	disabledPropertyBreakdown
+/>
+<ExpensesCard {expenses} {categories} />

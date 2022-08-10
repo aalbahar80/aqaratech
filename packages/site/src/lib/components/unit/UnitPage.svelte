@@ -2,9 +2,7 @@
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { kwdFormat } from '$lib/utils/common';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { UnitDto } from '@self/sdk';
@@ -15,14 +13,6 @@
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let unit: UnitDto;
-
-	$: details = [
-		...(unit.label ? [['Label', unit.label]] : []),
-		['Unit Number', unit.unitNumber],
-		['Type', unit.type],
-		['Market Rent', kwdFormat(unit.marketRent)],
-		['Usage', unit.usage],
-	] as [string, string | null][];
 
 	const icons = [
 		{
@@ -75,6 +65,3 @@
 		<BreadCrumb crumbs={unit.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
-
-<DetailsPane {details} />
-<slot />
