@@ -67,10 +67,10 @@ export class FilesService {
     const cached = await this.cacheManager.get<s3Objects>(cacheKey);
 
     if (cached) {
-      this.logger.debug(`findAll: found in cache for ${cacheKey}`);
+      this.logger.debug(`CACHE HIT: files.findAll cacheKey: ${cacheKey}`);
       objects = cached;
     } else {
-      this.logger.debug(`findAll: not found in cache for ${cacheKey}`);
+      this.logger.debug(`CACHE MISS: files.findAll cacheKey: ${cacheKey}`);
 
       // get fresh from s3
       objects = await this.s3.listObjects({
@@ -105,10 +105,10 @@ export class FilesService {
     const cached = await this.cacheManager.get<string>(cacheKey);
 
     if (cached) {
-      this.logger.debug(`findOne: found in cache for ${cacheKey}`);
+      this.logger.debug(`CACHE HIT: files.findOne cacheKey: ${cacheKey}`);
       presignedUrl = cached;
     } else {
-      this.logger.debug(`findOne: not found in cache for ${cacheKey}`);
+      this.logger.debug(`CACHE MISS: files.findOne cacheKey: ${cacheKey}`);
 
       // get fresh from s3
       presignedUrl = await this.s3.getObject({
@@ -136,7 +136,7 @@ export class FilesService {
 
     // bust cache
     const cacheKey = fileRequestDto.key;
-    this.logger.debug(`busting cache for ${cacheKey}`);
+    this.logger.debug(`CACHE BUST: cacheKey: ${cacheKey}`);
     await this.cacheManager.del(cacheKey);
 
     await this.s3.removeObject({

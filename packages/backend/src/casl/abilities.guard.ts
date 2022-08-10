@@ -94,14 +94,14 @@ export class AbilitiesGuard implements CanActivate {
     let user: IUser;
 
     if (cached) {
-      this.logger.log(
-        `Cache hit: User ${request.user.email} - RoleId: ${xRoleId}`,
+      this.logger.debug(
+        `CACHE HIT: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
 
       user = cached;
     } else {
-      this.logger.log(
-        `Cache miss: User ${request.user.email} - RoleId: ${xRoleId}`,
+      this.logger.debug(
+        `CACHE MISS: User ${request.user.email} - RoleId: ${xRoleId}`,
       );
 
       const [validatedUser, ability] = await Promise.all([
@@ -186,11 +186,12 @@ export class AbilitiesGuard implements CanActivate {
     // Fallback in case of bad cache
     if (!isAllowed && cached) {
       // prettier-ignore
-      this.logger.log('Permission denied in guard. Invalidating cache and reattempting.');
+      this.logger.debug('Permission denied in guard. Invalidating cache and reattempting.');
 
       // TODO sec don't determine role here, do it in frontend. Currently, there's no
       // guarantee the xRoleId we're using in the cache key is the one resolved
       // by casl.defineAbility.
+      this.logger.debug(`CACHE BUST: userCacheKey: ${userCacheKey}`);
       await this.cacheManager.del(userCacheKey);
 
       // try again
