@@ -32,7 +32,7 @@ export class FilesService {
     file: Express.Multer.File;
     user: IUser;
   }) {
-    const { bucket, directory, key } = createFileDto;
+    const { bucket, directory, key } = createFileDto.fileRequestDto;
     this.logger.debug(
       `Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
     );

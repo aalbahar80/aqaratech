@@ -66,17 +66,11 @@ export class CreateFileDto {
   label?: string | null;
 
   @Expose({ toClassOnly: true })
-  get bucket(): string {
-    return this.organizationId;
-  }
-
-  @Expose({ toClassOnly: true })
-  get directory(): string {
-    return `${this.relationKey}/${this.relationValue}`;
-  }
-
-  @Expose({ toClassOnly: true })
-  get key(): string {
-    return `${this.directory}/${this.fileName}`;
+  get fileRequestDto(): FileRequestDto {
+    const key = `${this.relationKey}/${this.relationValue}/${this.fileName}`; // TODO dedupe
+    return new FileRequestDto({
+      key: key,
+      user: { role: { organizationId: this.organizationId } } as IUser, // TODO just pass string
+    });
   }
 }
