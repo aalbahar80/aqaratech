@@ -6,7 +6,6 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { entityMap } from 'src/constants/entity';
 import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
-import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { CreateFileDto, FileDto, FileRequestDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { S3Service } from 'src/s3/s3.service';
@@ -144,32 +143,5 @@ export class FilesService {
       Bucket: fileRequestDto.bucket,
       Key: fileRequestDto.key,
     });
-  }
-
-  // a function to create an object key based on fileFindAllOptionsDto
-  extrapolateKey(fileFindAllOptionsDto: FileFindAllOptionsDto) {
-    const key = fileFindAllOptionsDto.relationKey;
-    const id = fileFindAllOptionsDto.relationValue;
-    const singularCap = entityMap[key].singularCap;
-
-    if (key === FileForeignKeys.TENANT) {
-      return `${key}/${id}`;
-    } else if (key === FileForeignKeys.PORTFOLIO) {
-      return `portfolios/${id}`;
-    } else if (key === FileForeignKeys.PROPERTY) {
-      return `properties/${id}`;
-    } else if (key === FileForeignKeys.UNIT) {
-      return `units/${id}`;
-    } else if (key === FileForeignKeys.LEASE) {
-      return `leases/${id}`;
-    } else if (key === FileForeignKeys.LEASEINVOICE) {
-      return `leaseInvoices/${id}`;
-    } else if (key === FileForeignKeys.EXPENSE) {
-      return `expenses/${id}`;
-    } else if (key === FileForeignKeys.MAINTENANCEORDER) {
-      return `maintenanceOrders/${id}`;
-    } else {
-      throw new Error(`Invalid key: ${key}. Value: ${id}`);
-    }
   }
 }
