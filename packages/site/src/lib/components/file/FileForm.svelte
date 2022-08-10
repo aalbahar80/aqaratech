@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
@@ -10,6 +10,11 @@
 	export let relationValue: string;
 
 	const basicFields = [
+		new Field('organizationId', {
+			value: $session.user?.role?.organizationId,
+			disabled: true,
+			autoInit: true,
+		}),
 		new Field('relationKey', {
 			value: relationKey,
 			disabled: true,

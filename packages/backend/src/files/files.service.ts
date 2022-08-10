@@ -28,25 +28,31 @@ export class FilesService {
     file: Express.Multer.File;
     user: IUser;
   }) {
-    const key = createFileDto.relationKey;
-    const id = createFileDto.relationValue;
-    const singularCap = entityMap[key].singularCap;
+    const { bucket, directory, key } = createFileDto;
+    this.logger.debug(
+      `Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
+    );
+
+    const singularCap = entityMap[createFileDto.relationKey].singularCap;
 
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject(singularCap, { id: id }),
+      subject(singularCap, { id: createFileDto.relationValue }),
     );
 
-    // TODO bust cache
+    // bust cache for file and directory (prefix)
+    this.logger.debug(`CACHE BUST: key: ${key}`);
+    await this.cacheManager.del(key);
+    await this.cacheManager.del(directory);
 
-    const prefix = `${entityMap[key].urlName}/${id}`;
     const uploaded = await this.s3.putObject({
-      Bucket: user.role.organizationId,
-      Key: `${prefix}/${createFileDto.fileName}`,
+      Bucket: bucket,
+      Key: key,
       Body: file.buffer,
       ContentType: file.mimetype,
     });
-    console.log({ uploaded }, 'files.service.ts ~ 36');
+    this.logger.debug(uploaded);
+
     return createFileDto.fileName;
   }
 
@@ -134,10 +140,11 @@ export class FilesService {
   }) {
     // TODO ability check here
 
-    // bust cache
+    // bust cache for file and directory (prefix)
     const cacheKey = fileRequestDto.key;
-    this.logger.debug(`CACHE BUST: cacheKey: ${cacheKey}`);
+    this.logger.debug(`CACHE BUST: key: ${cacheKey}`);
     await this.cacheManager.del(cacheKey);
+    await this.cacheManager.del(fileRequestDto.directory);
 
     await this.s3.removeObject({
       Bucket: fileRequestDto.bucket,

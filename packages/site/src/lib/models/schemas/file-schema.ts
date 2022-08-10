@@ -4,6 +4,7 @@ import { CreateRelationKeyEnum } from '@self/sdk';
 import { z } from 'zod';
 
 export const schema = z.object({
+	organizationId: isID,
 	fileName: z.string().min(1, { message: 'Required' }).transform(trim),
 	file: z.any(),
 
