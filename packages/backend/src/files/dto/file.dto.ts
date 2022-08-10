@@ -1,6 +1,6 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { Expose } from 'class-transformer';
-import { Allow, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { IUser } from 'src/interfaces/user.interface';
@@ -59,26 +59,17 @@ export class CreateFileDto {
   @IsOptional()
   label?: string | null;
 
-  // @ApiHideProperty()
-  // @Expose({ toClassOnly: true })
-  @Allow()
-  @Expose()
+  @Expose({ toClassOnly: true })
   get bucket(): string {
     return this.organizationId;
   }
 
-  // @ApiHideProperty()
-  // @Expose({ toClassOnly: true })
-  @Allow()
-  @Expose()
+  @Expose({ toClassOnly: true })
   get directory(): string {
     return `${this.relationKey}/${this.relationValue}`;
   }
 
-  // @ApiHideProperty()
-  // @Expose({ toClassOnly: true })
-  @Allow()
-  @Expose()
+  @Expose({ toClassOnly: true })
   get key(): string {
     return `${this.directory}/${this.fileName}`;
   }
