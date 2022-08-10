@@ -2383,14 +2383,13 @@ paths:
                         items:
                           $ref: '#/components/schemas/FileDto'
       tags: *ref_27
-  /files/{fileId}:
-    get:
-      operationId: findOne
+    delete:
+      operationId: remove
       parameters:
         - *ref_26
-        - name: fileId
+        - name: key
           required: true
-          in: path
+          in: query
           schema:
             type: string
       responses:
@@ -2401,13 +2400,14 @@ paths:
               schema:
                 type: string
       tags: *ref_27
-    delete:
-      operationId: remove
+  /files/find-one:
+    get:
+      operationId: findOne
       parameters:
         - *ref_26
-        - name: fileId
+        - name: key
           required: true
-          in: path
+          in: query
           schema:
             type: string
       responses:

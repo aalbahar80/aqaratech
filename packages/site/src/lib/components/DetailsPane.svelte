@@ -14,7 +14,7 @@
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	export let details: [string, string | null][];
-	export let files: PaginatedFileDto;
+	export let files: PaginatedFileDto | undefined = undefined;
 </script>
 
 <div id="detailsPane">
@@ -25,7 +25,7 @@
 				<dd class="definition">{value ?? '-'}</dd>
 			</div>
 		{/each}
-		{#if files.results.length}
+		{#if files?.results.length}
 			<div class="row">
 				<dt class="label">Files</dt>
 				<dd class="definition">
@@ -51,8 +51,9 @@
 									<div slot="beforeButton">
 										<button
 											on:click={async () => {
+												// encode file name to avoid special characters
 												const url = await $page.stuff.api.files.findOne({
-													fileId: file.key,
+													key: file.key,
 												});
 												// opens in new tab because of content-disposition header
 												window.open(url);
@@ -73,8 +74,13 @@
 													class="w-full"
 													on:click={async () => {
 														try {
+															if (!files) {
+																// redundant type check
+																return;
+															}
+															// encode file name to avoid special characters
 															await $page.stuff.api.files.remove({
-																fileId: file.key,
+																key: file.key,
 															});
 															files.results = [...files.results].filter(
 																(f) => f.key !== file.key,

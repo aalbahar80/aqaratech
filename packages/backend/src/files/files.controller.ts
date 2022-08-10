@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   MaxFileSizeValidator,
-  Param,
   ParseFilePipe,
   Post,
   Query,
@@ -27,7 +26,10 @@ import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { FileFindAllOptionsDto } from 'src/files/dto/file-find-all-options.dto';
+import {
+  FileFindAllOptionsDto,
+  FileFindOneOptionsDto,
+} from 'src/files/dto/file-find-all-options.dto';
 import {
   CreateFileDto,
   DirectoryRequestDto,
@@ -82,7 +84,7 @@ export class FilesController {
   @ApiPaginatedResponse(FileDto)
   findAll(
     @User() user: IUser,
-    @Query() fileFindAllOptionsDto: FileFindAllOptionsDto, // TODO change to FilePageOptionsDto
+    @Query() fileFindAllOptionsDto: FileFindAllOptionsDto,
   ): Promise<WithCount<FileDto>> {
     const { relationKey, relationValue } = fileFindAllOptionsDto;
     const directory = `${relationKey}/${relationValue}`;
@@ -90,26 +92,29 @@ export class FilesController {
     return this.filesService.findAll({ directoryRequestDto, user });
   }
 
-  @Get(':fileId')
+  @Get('/find-one')
   @ApiOkResponse({ type: String })
   async findOne(
     @User() user: IUser,
-    @Param('fileId') fileId: string,
+    @Query() fileFindOneOptionsDto: FileFindOneOptionsDto,
   ): Promise<string> {
-    console.log({ fileId }, 'files.controller.ts ~ 99');
-    const fileRequestDto = new FileRequestDto({ key: fileId, user });
+    console.log({ fileFindOneOptionsDto }, 'files.controller.ts ~ 99');
+    const fileRequestDto = new FileRequestDto({
+      key: fileFindOneOptionsDto.key,
+      user,
+    });
     return this.filesService.findOne({ fileRequestDto, user });
   }
 
-  @Delete(':fileId')
+  @Delete()
   @ApiOkResponse({ type: String })
   async remove(
     @User() user: IUser,
-    @Param('fileId') fileId: string,
+    @Query() fileFindOneOptionsDto: FileFindOneOptionsDto,
   ): Promise<string> {
-    console.log({ fileId }, 'files.controller.ts ~ 99');
-    const fileRequestDto = new FileRequestDto({ key: fileId, user });
+    const key = fileFindOneOptionsDto.key;
+    const fileRequestDto = new FileRequestDto({ key, user });
     await this.filesService.remove({ fileRequestDto, user });
-    return fileId;
+    return key;
   }
 }
