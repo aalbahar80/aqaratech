@@ -1,18 +1,9 @@
 <script lang="ts">
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { ExpenseDto } from '@self/sdk';
 
 	export let expense: ExpenseDto;
-
-	$: details = [
-		['Post Date', toUTCFormat(expense.postAt)],
-		['Amount', kwdFormat(expense.amount)],
-		['Category', expense.expenseType?.labelEn],
-		['Memo', expense.memo],
-	] as [string, string | null][];
 </script>
 
 <Heading title="Expense" id={expense.id} entity="expenses">
@@ -20,4 +11,3 @@
 		<BreadCrumb crumbs={expense.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
-<DetailsPane {details} />
