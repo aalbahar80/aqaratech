@@ -46,7 +46,9 @@ export class DirectoryRequestDto {
 export class FileRequestDto extends DirectoryRequestDto {
   constructor({ key, user }: { key: string; user: IUser }) {
     // set directory to everything before the last slash
+    console.log({ key }, 'file.dto.ts ~ 49');
     const directory = key.split('/').slice(0, -1).join('/');
+    console.log({ directory }, 'file.dto.ts ~ 50');
     super({ directory, user });
     this.key = key;
   }
@@ -71,6 +73,7 @@ export class CreateFileDto {
   @IsID()
   relationValue: string;
 
+  // TODO check name has no delimiters (:/ or whitespace)
   @IsString()
   fileName: string;
 

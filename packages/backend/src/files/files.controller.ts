@@ -96,6 +96,7 @@ export class FilesController {
     @User() user: IUser,
     @Param('fileId') fileId: string,
   ): Promise<string> {
+    console.log({ fileId }, 'files.controller.ts ~ 99');
     const fileRequestDto = new FileRequestDto({ key: fileId, user });
     return this.filesService.findOne({ fileRequestDto, user });
   }
@@ -106,6 +107,7 @@ export class FilesController {
     @User() user: IUser,
     @Param('fileId') fileId: string,
   ): Promise<string> {
+    console.log({ fileId }, 'files.controller.ts ~ 99');
     const fileRequestDto = new FileRequestDto({ key: fileId, user });
     await this.filesService.remove({ fileRequestDto, user });
     return fileId;
