@@ -89,7 +89,6 @@ export class FilesController {
     @Param('fileId') fileId: string,
   ): Promise<string> {
     const fileRequestDto = new FileRequestDto({ key: fileId, user });
-    console.log({ fileRequestDto }, 'files.controller.ts ~ 94');
     return this.filesService.findOne({ fileRequestDto, user });
   }
 
