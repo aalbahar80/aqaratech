@@ -2,7 +2,6 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
@@ -10,18 +9,6 @@
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let property: PropertyDto;
-
-	$: details = [
-		...(property.label ? [['Label', property.label]] : []),
-		['Address', property.breadcrumbs.property.label],
-		['Area', property.area],
-		['Block', property.block],
-		['Avenue', property.avenue],
-		['Street', property.street],
-		['Number', property.number],
-		['Parcel', property.parcel],
-		['Paci', property.paci],
-	] as [string, string | null][];
 </script>
 
 <Heading title="Property" id={property.id} entity="properties">
@@ -47,6 +34,3 @@
 		<BreadCrumb crumbs={property.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
-
-<DetailsPane {details} />
-<slot />

@@ -8,6 +8,7 @@
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
+	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
@@ -37,6 +38,7 @@
 
 		const [
 			property,
+			files,
 			units,
 			invoicesGrouped,
 			expensesGrouped,
@@ -47,6 +49,10 @@
 			categories,
 		] = await Promise.all([
 			stuff.api!.properties.findOne({ id: propertyId }),
+			stuff.api!.files.findAll({
+				relationKey: 'properties',
+				relationValue: propertyId,
+			}),
 			stuff.api!.properties.findUnits({ id: propertyId, ...sParams }),
 
 			stuff.api!.aggregate.getIncomeByMonth(filter),
@@ -65,6 +71,7 @@
 		return {
 			props: {
 				property,
+				files,
 				units,
 				invoicesGrouped,
 				expensesGrouped,
@@ -81,6 +88,7 @@
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let property: Prop['property'];
+	export let files: Prop['files'];
 	export let units: Prop['units'];
 
 	export let invoicesGrouped: Prop['invoicesGrouped'];
@@ -92,21 +100,33 @@
 	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
 
 	export let categories: Prop['categories'];
+
+	$: details = [
+		...(property.label ? [['Label', property.label]] : []),
+		['Address', property.breadcrumbs.property.label],
+		['Area', property.area],
+		['Block', property.block],
+		['Avenue', property.avenue],
+		['Street', property.street],
+		['Number', property.number],
+		['Parcel', property.parcel],
+		['Paci', property.paci],
+	] as [string, string | null][];
 </script>
 
-<PropertyPage {property}>
-	<UnitsList {units} />
-	<DashboardFilter
-		properties={[property]}
-		units={units.results}
-		disabledPropertySelector
-	/>
-	<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
-	<RevenueCard
-		{invoices}
-		{invoicesGroupedPaid}
-		{invoicesGroupedUnpaid}
-		disabledPropertyBreakdown
-	/>
-	<ExpensesCard {expenses} {categories} />
-</PropertyPage>
+<PropertyPage {property} />
+<DetailsPane {details} {files} />
+<UnitsList {units} />
+<DashboardFilter
+	properties={[property]}
+	units={units.results}
+	disabledPropertySelector
+/>
+<NetIncomeCard {invoicesGrouped} {expensesGrouped} />
+<RevenueCard
+	{invoices}
+	{invoicesGroupedPaid}
+	{invoicesGroupedUnpaid}
+	disabledPropertyBreakdown
+/>
+<ExpensesCard {expenses} {categories} />
