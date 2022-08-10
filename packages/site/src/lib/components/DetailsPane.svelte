@@ -17,7 +17,6 @@
 	export let files: PaginatedFileDto;
 </script>
 
-<pre>{JSON.stringify(files, null, 2)}</pre>
 <div id="detailsPane">
 	<dl class="rounded-lg shadow">
 		{#each details as [key, value]}
