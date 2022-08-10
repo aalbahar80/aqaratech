@@ -30,23 +30,16 @@ export class DirectoryRequestDto {
   directory: string; // aka prefix, used as cache key
 }
 
-export class FileRequestDto {
+export class FileRequestDto extends DirectoryRequestDto {
   constructor({ key, user }: { key: string; user: IUser }) {
-    this.bucket = user.role.organizationId;
-
-    this.key = key;
     // set directory to everything before the last slash
-    this.directory = key.split('/').slice(0, -1).join('/');
+    const directory = key.split('/').slice(0, -1).join('/');
+    super({ directory, user });
+    this.key = key;
   }
 
   @IsString()
-  bucket: string;
-
-  @IsString()
   key: string; // full key (directory + filename)
-
-  @IsString()
-  directory: string; // aka prefix, used as cache key
 }
 
 export class CreateFileDto {
