@@ -10,10 +10,7 @@ services:
     healthCheckPath: /health
     autoDeploy: true
     envVars:
-      - key: AUTH0_CLIENT_SECRET
-        sync: false
-      - key: PUBLIC_SITE_URL
-        sync: false
+      - fromGroup: common-vars
       - key: R2_ACCOUNT_ID
         sync: false
       - key: R2_ACCESS_KEY_ID
@@ -44,13 +41,8 @@ services:
     healthCheckPath: /health
     autoDeploy: true
     envVars:
+      - fromGroup: common-vars
       - key: AUTH0_CLIENT_SECRET
-        sync: false
-      - key: PUBLIC_SITE_URL
-        sync: false
-      - key: PUBLIC_API_URL
-        sync: false
-      - key: PUBLIC_API_URL_LOCAL
         sync: false
       - key: PORT
         value: 3000
@@ -65,3 +57,13 @@ databases:
   - name: aqaratechdb
     region: frankfurt
     plan: Standard
+
+envVarGroups:
+  - name: common-vars
+    envVars:
+      - key: PUBLIC_SITE_URL
+        sync: false
+      - key: PUBLIC_API_URL
+        sync: false
+      - key: PUBLIC_API_URL_LOCAL
+        sync: false
