@@ -27,8 +27,7 @@ ENV NODE_ENV=production
 
 COPY --from=backend /app/pruned .
 
-
-# generate prisma client
-# RUN ./node_modules/.bin/prisma2 generate
+# generate prisma client & install engine
+RUN ./node_modules/.bin/prisma2 generate
 
 CMD ["npm", "run", "start:prod"]
