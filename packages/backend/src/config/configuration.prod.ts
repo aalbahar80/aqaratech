@@ -4,8 +4,6 @@ export const productionEnvironment = (): EnvironmentConfig => ({
   type: 'PRODUCTION',
   envName: 'prod',
   authConfig: {
-    AUTH0_CLIENT_ID: 'BiIwmY0aGldYHDkkdEVsTBbKAAE1AaQV',
-    AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
     AUTH0_DOMAIN: 'https://auth.aqaratech.com',
     AUTH0_API_NAMESPACE: 'https://aqaratech.com',
     AUTH0_API_AUDIENCE: 'https://aqaratech.com/api',

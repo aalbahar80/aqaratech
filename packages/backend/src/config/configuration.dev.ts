@@ -4,9 +4,6 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
   type: 'DEVELOPMENT',
   envName: 'dev',
   authConfig: {
-    AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-    AUTH0_CLIENT_SECRET:
-      'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
     AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
     AUTH0_API_NAMESPACE: 'https://letand.be',
     AUTH0_API_AUDIENCE: 'letand.be/api',
