@@ -1,5 +1,7 @@
 FROM node:16.9 as site
 
+ARG PUBLIC_SITE_URL
+
 # use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
 # https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
@@ -28,7 +30,6 @@ FROM node:16.9-alpine as production
 
 WORKDIR /app
 ENV NODE_ENV=production
-ARG PUBLIC_SITE_URL
 ENV PUBLIC_SITE_URL_2=${PUBLIC_SITE_URL}
 
 COPY --from=site /app/pruned .
