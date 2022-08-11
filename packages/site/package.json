@@ -1,6 +1,9 @@
 {
   "name": "@self/site",
   "version": "0.0.1",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
