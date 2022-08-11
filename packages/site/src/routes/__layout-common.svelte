@@ -7,9 +7,6 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { protectRoute } from '$lib/utils/protect-route';
-	import type { Scope } from '@sentry/browser';
-	import * as Sentry from '@sentry/browser';
-	import { BrowserTracing } from '@sentry/tracing'; // has to be after @sentry/browser
 	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
@@ -50,31 +47,6 @@
 					name: $session.user.fullName || '',
 				});
 			}
-
-			Sentry.init({
-				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-				integrations: [new BrowserTracing()],
-				tracesSampleRate: 0.25,
-				// debug: dev,
-				environment:
-					import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ?? 'localBrowser',
-				release:
-					import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ?? 'localBrowserRelease',
-			});
-			Sentry.configureScope((scope: Scope) => {
-				scope.setTag('role', $session.user?.role?.roleType || '');
-				scope.setUser({
-					id: $session.user?.id || '',
-					email: $session.user?.email || '',
-					name: $session.user?.fullName || '',
-				});
-			});
-
-			LogRocket.getSessionURL((sessionURL) => {
-				Sentry.configureScope((scope) => {
-					scope.setExtra('sessionURL', sessionURL);
-				});
-			});
 		}
 	});
 </script>
