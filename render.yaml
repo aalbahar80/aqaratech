@@ -5,8 +5,8 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.backend
     repo: https://github.com/aqaratech/aqtech.git
-    branch: initNestjs
-    plan: Starter Plus
+    branch: master
+    plan: Standard
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -36,8 +36,8 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile.site
     repo: https://github.com/aqaratech/aqtech.git
-    branch: initNestjs
-    plan: Starter Plus
+    branch: master
+    plan: Standard
     healthCheckPath: /health
     autoDeploy: true
     envVars:
