@@ -1,7 +1,5 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import * as Sentry from '@sentry/node';
-import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
@@ -34,15 +32,6 @@ async function bootstrap() {
   );
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
-
-  Sentry.init({
-    // dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-    dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-    tracesSampleRate: 1.0,
-    serverName: 'Aqaratech API - Nest',
-    environment: 'nestjs-dev',
-    enabled: false,
-  });
 
   const document = setupSwagger(app);
 
