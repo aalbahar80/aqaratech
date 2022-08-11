@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.4
+
 # https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
 # TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
 # Optimize: https://docs.docker.com/get-started/09_image_best/

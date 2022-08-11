@@ -1,6 +1,9 @@
+# syntax=docker/dockerfile:1.4
+
 FROM node:16.9 as site
 
 ARG PUBLIC_SITE_URL
+RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} PUBLIC_SITE_URL_2 ${PUBLIC_SITE_URL_2} NODE_ENV ${NODE_ENV} PORT ${PORT} AAA=${PORT} BBB=${PUBLIC_SITE_URL} CCC=${PUBLIC_SITE_URL_2} DDD=$PUBLIC_SITE_URL_2 EEE=$PUBLIC_SITE_URL"
 
 # use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
@@ -27,14 +30,13 @@ RUN pnpm --filter=@self/site deploy pruned
 
 
 FROM node:16.9-alpine as production
+ARG PUBLIC_SITE_URL
+RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} PUBLIC_SITE_URL_2 ${PUBLIC_SITE_URL_2} NODE_ENV ${NODE_ENV} PORT ${PORT} AAA=${PORT} BBB=${PUBLIC_SITE_URL} CCC=${PUBLIC_SITE_URL_2} DDD=$PUBLIC_SITE_URL_2 EEE=$PUBLIC_SITE_URL"
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PUBLIC_SITE_URL_2=${PUBLIC_SITE_URL}
 
 COPY --from=site /app/pruned .
 
-RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} PUBLIC_SITE_URL_2 ${PUBLIC_SITE_URL_2} NODE_ENV ${NODE_ENV} PORT ${PORT} AAA=${PORT} BBB=${PUBLIC_SITE_URL} CCC=${PUBLIC_SITE_URL_2} DDD=$PUBLIC_SITE_URL_2 EEE=$PUBLIC_SITE_URL"
-
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL_2 node build/index.js"]
+CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL node build/index.js"]
