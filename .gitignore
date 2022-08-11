@@ -9,3 +9,4 @@ node_modules
 # packages/site/tests/config/*StorageState.json
 .vercel
 .turbo
+pruned

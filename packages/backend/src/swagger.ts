@@ -95,7 +95,11 @@ export const setupSwagger = (app: INestApplication) => {
   );
 
   // For consumption of @self/sdk
-  writeFileSync('../sdk/openapi.yaml', dump(document, {}));
+  try {
+    writeFileSync('../sdk/openapi.yaml', dump(document, {}));
+  } catch (e) {
+    console.log(e);
+  }
 
   SwaggerModule.setup('swagger', app, document, {
     swaggerOptions: {
