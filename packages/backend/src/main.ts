@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
+import * as csurf from 'csurf';
 import helmet from 'helmet';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -30,9 +31,15 @@ async function bootstrap() {
     },
   });
 
-  app.use(helmet());
-
+  app.use(helmet()); // before other middleware
   app.use(cookieParser());
+  app.use(
+    // has to be after cookieParser()
+    csurf({
+      cookie: true,
+    }),
+  );
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
