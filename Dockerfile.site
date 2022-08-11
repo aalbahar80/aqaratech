@@ -33,5 +33,7 @@ ENV PUBLIC_SITE_URL_2=${PUBLIC_SITE_URL}
 
 COPY --from=site /app/pruned .
 
+RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} PUBLIC_SITE_URL_2 ${PUBLIC_SITE_URL_2} NODE_ENV ${NODE_ENV} PORT ${PORT} AAA=${PORT} BBB=${PUBLIC_SITE_URL} CCC=${PUBLIC_SITE_URL_2} DDD=$PUBLIC_SITE_URL_2 EEE=$PUBLIC_SITE_URL"
+
 # https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
 CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL_2 node build/index.js"]
