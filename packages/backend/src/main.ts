@@ -1,13 +1,21 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
+import { ROLE_HEADER } from 'src/constants/header-role';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { setupSwagger } from 'src/swagger';
 import { getMiddleware } from 'swagger-stats';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  if (!process.env.PUBLIC_SITE_URL) {
+    console.error('PUBLIC_SITE_URL is not set');
+  } else {
+    console.log('PUBLIC_SITE_URL: ', process.env.PUBLIC_SITE_URL);
+  }
+
   const app = await NestFactory.create(AppModule, {
     logger: [
       ...(process.env?.AQ_DEBUG_NEST == '1' ? ['debug'] : ([] as any[])),
@@ -15,8 +23,14 @@ async function bootstrap() {
       'warn',
       'error',
     ],
-    cors: true, // TODO adjust in prod
+    cors: {
+      origin: process.env.PUBLIC_SITE_URL,
+      allowedHeaders: ['Authorization', ROLE_HEADER],
+      maxAge: 24 * 60 * 60,
+    },
   });
+
+  app.use(helmet());
 
   app.use(cookieParser());
   app.useGlobalPipes(
@@ -26,8 +40,8 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       whitelist: true,
       // validateCustomDecorators: true, // fails eveything?
-      enableDebugMessages: true, // TODO prod remove
-      //  disableErrorMessages: true, // TODO prod only
+      enableDebugMessages: process.env.AQ_DEBUG_NEST == '1',
+      disableErrorMessages: process.env.AQ_DEBUG_NEST == '1',
     }),
   );
 

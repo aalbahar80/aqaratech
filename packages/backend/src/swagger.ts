@@ -29,11 +29,10 @@ export const setupSwagger = async (app: INestApplication) => {
     .addTag('aqaratech')
     // first server will be the default one in generated sdk
     .addServer('http://localhost:3002')
-    // .setBasePath('http://localhost:3005')
-    .addServer('https://nestjs-dev.onrender.com')
-    .addServer('https://api.nest.letand.be')
     .addServer('https://aqar.live/api')
-    .addServer('https://d164hjk5s8rpsc.cloudfront.net')
+    .addServer('https://aqaratech.net/api')
+    // .setBasePath('/api')
+    // .addBearerAuth()
     .addSecurityRequirements('oauth-swagger')
     .addOAuth2(
       {
