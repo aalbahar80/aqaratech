@@ -1,23 +1,33 @@
-FROM node:16
-
+# https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
+# TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
 # Optimize: https://docs.docker.com/get-started/09_image_best/
+
+FROM node:16 as backend
+
+# Blocked by https://github.com/stalniy/casl/issues/621
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
 COPY pnpm-lock.yaml ./
-RUN pnpm fetch 
+RUN pnpm fetch
 
 ADD . ./
-# TODO only intall be stuff
-# RUN pnpm install -r --offline 
-RUN pnpm --filter=. --filter=@self/backend... install --prod=false
-
-# https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
-# TODO copy over the modules from above onto a `slim` image
+# skip prisma client generation here?
+RUN pnpm --filter=. --filter=@self/backend... install --offline
 
 RUN pnpm --filter=@self/backend run build 
 
-# TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
-WORKDIR /app/packages/backend
+RUN pnpm --filter=@self/backend --prod deploy pruned
 
-CMD ["pnpm", "run", "start:prod"]
+
+FROM node:16-alpine as production
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+COPY --from=backend /app/pruned .
+
+# generate prisma client & install engine
+RUN ./node_modules/.bin/prisma2 generate
+
+CMD ["npm", "run", "start:prod"]

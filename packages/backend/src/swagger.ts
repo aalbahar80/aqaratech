@@ -15,14 +15,13 @@ import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
-import { dump } from 'js-yaml';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
 import { FilesModule } from 'src/files/files.module';
 import { MetaModule } from 'src/meta/meta.module';
 
-export const setupSwagger = (app: INestApplication) => {
+export const setupSwagger = async (app: INestApplication) => {
   const config = new DocumentBuilder()
     .setTitle('Aqaratech API')
     .setDescription('The Aqratech API description')
@@ -86,16 +85,16 @@ export const setupSwagger = (app: INestApplication) => {
     },
   });
 
-  // For consumption of swagger-ui
-  writeFileSync(
-    './openapi.yaml',
-    dump(document, {
-      // schema: 'http://json-schema.org/draft-04/schema#',
-    }),
-  );
-
-  // For consumption of @self/sdk
-  writeFileSync('../sdk/openapi.yaml', dump(document, {}));
+  if (process.env.NODE_ENV !== 'production') {
+    const { dump } = await import('js-yaml');
+    // For consumption of swagger-ui
+    writeFileSync(
+      './openapi.yaml',
+      dump(document, {
+        // schema: 'http://json-schema.org/draft-04/schema#',
+      }),
+    );
+  }
 
   SwaggerModule.setup('swagger', app, document, {
     swaggerOptions: {

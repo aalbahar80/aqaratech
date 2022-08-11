@@ -28,7 +28,6 @@ importers:
       '@nestjs/terminus': 9.1.0
       '@nestjs/testing': 9.0.8
       '@prisma/client': 4.1.1
-      '@self/seed': workspace:0.0.1
       '@sentry/node': 7.8.1
       '@sentry/tracing': 7.8.1
       '@types/cache-manager': 4.0.1
@@ -122,7 +121,6 @@ importers:
       '@nestjs/cli': 9.0.0
       '@nestjs/schematics': 9.0.1_nobats3jkocaued6l3papcxri4
       '@nestjs/testing': 9.0.8_lwpb2d46aphloofqfhxfte74su
-      '@self/seed': link:../seed
       '@types/cache-manager': 4.0.1
       '@types/cookie-parser': 1.4.3
       '@types/express': 4.17.13
