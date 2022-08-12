@@ -68,6 +68,8 @@ model Tenant {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
   roles Role[]
+
+  @@index([organizationId])
 }
 
 model Portfolio {
@@ -89,6 +91,8 @@ model Portfolio {
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId])
 }
 
 model Organization {
@@ -164,6 +168,10 @@ model Expense {
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+
+  @@index([portfolioId])
+  @@index([propertyId])
+  @@index([unitId])
 }
 
 model Lease {
@@ -182,6 +190,9 @@ model Lease {
   tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
   leaseInvoices LeaseInvoice[]
+
+  @@index([tenantId])
+  @@index([unitId])
 }
 
 model MaintenanceOrder {
@@ -223,6 +234,8 @@ model Property {
   expenses          Expense[]
   maintenanceOrders MaintenanceOrder[]
   units             Unit[]
+
+  @@index([portfolioId])
 }
 
 model LeaseInvoice {
@@ -238,6 +251,8 @@ model LeaseInvoice {
   mfPaymentId String?
   leaseId     String
   lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  @@index([leaseId])
 }
 
 model Unit {
@@ -258,4 +273,6 @@ model Unit {
   expenses          Expense[]
   leases            Lease[]
   maintenanceOrders MaintenanceOrder[]
+
+  @@index([propertyId])
 }
