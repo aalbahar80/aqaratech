@@ -44,15 +44,6 @@ export class PortfolioAbility {
       },
     });
 
-    const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
-      select: { id: true },
-      where: {
-        lease: {
-          unit: { property: { portfolioId: { equals: role.portfolioId } } },
-        },
-      },
-    });
-
     const expensesQ = this.prisma.expense.findMany({
       select: { id: true },
       where: {
@@ -79,30 +70,21 @@ export class PortfolioAbility {
       },
     });
 
-    const [
-      tenants,
-      properties,
-      units,
-      leases,
-      leaseInvoices,
-      expenses,
-      maintenanceOrders,
-    ] = await Promise.all([
-      tenantsQ,
-      propertiesQ,
-      unitsQ,
-      leasesQ,
-      leaseInvoicesQ,
-      expensesQ,
-      maintenanceOrdersQ,
-    ]);
+    const [tenants, properties, units, leases, expenses, maintenanceOrders] =
+      await Promise.all([
+        tenantsQ,
+        propertiesQ,
+        unitsQ,
+        leasesQ,
+        expensesQ,
+        maintenanceOrdersQ,
+      ]);
 
     const readable: PortfolioReadableResources = {
       tenants: tenants.map((i) => i.id),
       properties: properties.map((i) => i.id),
       units: units.map((i) => i.id),
       leases: leases.map((i) => i.id),
-      leaseInvoices: leaseInvoices.map((i) => i.id),
       expenses: expenses.map((i) => i.id),
       maintenanceOrders: maintenanceOrders.map((i) => i.id),
     };
@@ -131,7 +113,7 @@ export class PortfolioAbility {
     });
 
     can(Action.Read, ['LeaseInvoice'], {
-      id: { in: readable.leaseInvoices },
+      lease: { unit: { property: { portfolioId: { equals: role.portfolioId } } } }, // prettier-ignore
     });
 
     can(Action.Read, ['Expense'], {
@@ -150,7 +132,6 @@ type PortfolioReadableResources = Pick<
   | 'properties'
   | 'units'
   | 'leases'
-  | 'leaseInvoices'
   | 'expenses'
   | 'maintenanceOrders'
 >;

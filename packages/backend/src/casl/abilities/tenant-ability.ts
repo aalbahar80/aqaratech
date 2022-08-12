@@ -22,25 +22,18 @@ export class TenantAbility {
       where: { tenantId: { equals: role.tenantId } },
     });
 
-    const leaseInvoicesQ = this.prisma.leaseInvoice.findMany({
-      select: { id: true },
-      where: { lease: { tenantId: { equals: role.tenantId } } },
-    });
-
     const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
       select: { id: true },
       where: { tenantId: { equals: role.tenantId } },
     });
 
-    const [leases, leaseInvoices, maintenanceOrders] = await Promise.all([
+    const [leases, maintenanceOrders] = await Promise.all([
       leasesQ,
-      leaseInvoicesQ,
       maintenanceOrdersQ,
     ]);
 
     const readable: TenantReadableResources = {
       leases: leases.map((i) => i.id),
-      leaseInvoices: leaseInvoices.map((i) => i.id),
       maintenanceOrders: maintenanceOrders.map((i) => i.id),
     };
 
@@ -54,7 +47,7 @@ export class TenantAbility {
 
     // TODO some fields should be public
     can(Action.Read, ['LeaseInvoice'], {
-      id: { in: readable.leaseInvoices },
+      lease: { tenantId: { equals: role.tenantId } },
     });
 
     can(Action.Read, ['MaintenanceOrder'], {
@@ -63,7 +56,4 @@ export class TenantAbility {
   }
 }
 
-type TenantReadableResources = Pick<
-  Resources,
-  'leases' | 'leaseInvoices' | 'maintenanceOrders'
->;
+type TenantReadableResources = Pick<Resources, 'leases' | 'maintenanceOrders'>;
