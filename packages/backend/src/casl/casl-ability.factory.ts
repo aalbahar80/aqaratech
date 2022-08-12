@@ -123,3 +123,7 @@ export interface Resources {
   expenses: Resource[];
   maintenanceOrders: Resource[];
 }
+
+// Can type exported for use in dependent ability classes.
+type TAbilityBuilder = AbilityBuilder<AppAbility>;
+export type TCan = TAbilityBuilder['can'];

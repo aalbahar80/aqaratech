@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Role } from '@prisma/client';
-import { Action, Resources } from 'src/casl/casl-ability.factory';
+import { Action, Resources, TCan } from 'src/casl/casl-ability.factory';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class PortfolioAbility {
 
   private readonly logger = new Logger(PortfolioAbility.name);
 
-  async define(role: Role, can: any) {
+  async define(role: Role, can: TCan) {
     this.logger.log('Defining ability for role', role.id);
 
     if (role.roleType !== 'PORTFOLIO' || !role.portfolioId) {
