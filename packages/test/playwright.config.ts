@@ -10,5 +10,19 @@ const config: PlaywrightTestConfig = {
 		video: "on-first-retry",
 		baseURL: "http://localhost:3000/",
 	},
+	webServer: [
+		{
+			cwd: "../../packages/backend",
+			command: "pnpm run dev",
+			port: 3002,
+			reuseExistingServer: !process.env.CI,
+		},
+		{
+			cwd: "../../packages/site",
+			command: "pnpm run dev",
+			port: 3000,
+			reuseExistingServer: !process.env.CI,
+		},
+	],
 };
 export default config;
