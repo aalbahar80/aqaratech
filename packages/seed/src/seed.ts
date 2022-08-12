@@ -19,10 +19,13 @@ import {
 	generateId,
 	testOrgEmail,
 	testOrgId,
+	testOrgRoleId,
 	testPortfolioEmail,
 	testPortfolioId,
+	testPortfolioRoleId,
 	testTenantEmail,
 	testTenantId,
+	testTenantRoleId,
 	timespan,
 	updatedAt,
 } from "./generators.js";
@@ -72,7 +75,7 @@ export async function seed({
 
 	const roles: Partial<Role>[] = [];
 	roles.push({
-		id: generateId(),
+		id: testOrgRoleId,
 		organizationId: organizations[0]!.id,
 		userId: users[0]!.id,
 		roleType: "ORGADMIN",
@@ -96,7 +99,7 @@ export async function seed({
 	});
 
 	roles.push({
-		id: generateId(),
+		id: testPortfolioRoleId,
 		userId: users[0]!.id,
 		organizationId: organizations[0]!.id,
 		portfolioId: portfolios[0]!.id,
@@ -169,7 +172,7 @@ export async function seed({
 	});
 
 	roles.push({
-		id: generateId(),
+		id: testTenantRoleId,
 		userId: users[0]!.id,
 		organizationId: organizations[0]!.id,
 		tenantId: tenants[0]!.id,
