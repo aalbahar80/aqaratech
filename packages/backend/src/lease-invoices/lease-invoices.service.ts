@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -41,10 +40,15 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('LeaseInvoice', createLeaseInvoiceDto),
-    );
+    // throws error if user cannot create invoice
+    await this.prisma.lease.findFirstOrThrow({
+      where: {
+        AND: [
+          { id: createLeaseInvoiceDto.leaseId },
+          accessibleBy(user.ability, Action.Update).Lease,
+        ],
+      },
+    });
 
     const toCreate = R.omit(createLeaseInvoiceDto, ['leaseId']);
     const created = await this.prisma.leaseInvoice.create({
@@ -106,10 +110,12 @@ export class LeaseInvoicesService {
     updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject('LeaseInvoice', { id, ...updateLeaseInvoiceDto }),
-    );
+    // throws error if user cannot update invoice
+    await this.prisma.leaseInvoice.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Update).LeaseInvoice],
+      },
+    });
 
     const updated = await this.prisma.leaseInvoice.update({
       where: { id },

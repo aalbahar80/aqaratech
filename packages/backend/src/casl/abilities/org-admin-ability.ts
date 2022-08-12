@@ -209,13 +209,8 @@ export class OrgAdminAbility {
 
     can(Action.Manage, ['LeaseInvoice'], {
       OR: [
-        { leaseId: { in: manageable.leases } },
-        {
-          OR: [
-            { lease: { tenant: { organizationId: { equals: role.organizationId } }, }, }, // prettier-ignore
-            { lease: { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, }, // prettier-ignore
-          ],
-        },
+        { lease: { tenant: { organizationId: { equals: role.organizationId } }, }, }, // prettier-ignore
+        { lease: { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, }, // prettier-ignore
       ],
     });
 
