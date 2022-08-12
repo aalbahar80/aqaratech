@@ -21,7 +21,7 @@ test("existing user can create new org", async ({ page }) => {
 	await page.locator('input[name="fullName"]').fill("My new organization");
 	await page.locator('input[name="label"]').click();
 	await page.locator('input[name="label"]').fill("newOrg");
-	await page.locator("text=Create new").click();
+	await page.locator("text=Save").click();
 
 	const locator = page.locator(
 		'button:has-text("My new organization Organization")'

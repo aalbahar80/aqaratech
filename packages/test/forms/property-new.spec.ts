@@ -31,7 +31,7 @@ test("smoke", async ({ page }, info) => {
 	await page.locator('input[name="label"]').click();
 	await page.locator('input[name="label"]').fill("myproperty");
 
-	await page.locator("text=Create new").click();
+	await page.locator("text=Save").click();
 
 	const id = new RegExp(
 		`/properties/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`
@@ -50,7 +50,7 @@ test("smoke", async ({ page }, info) => {
 		`/properties/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`
 	);
 	await expect(page).toHaveURL(edit);
-	await page.locator("text=Save changes").click();
+	await page.locator("text=Save").click();
 
 	// ensure same entity
 	await expect(page).toHaveURL(url);

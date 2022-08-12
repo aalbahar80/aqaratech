@@ -24,7 +24,7 @@ test('Lease transactions have correct dates', async ({ page }) => {
 	await page.locator('#count').fill('12');
 	await Promise.all([
 		page.waitForNavigation(),
-		page.locator('button:has-text("Create new")').click(),
+		page.locator('button:has-text("Save)').click(),
 	]);
 
 	const table = page.locator('table');

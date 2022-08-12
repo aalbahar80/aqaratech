@@ -24,7 +24,7 @@ test("smoke", async ({ page }, info) => {
 
 	await page.locator('input[name="dob"]').fill("2022-08-05");
 
-	await page.locator("text=Create new").click();
+	await page.locator("text=Save").click();
 
 	const id = new RegExp(
 		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`
@@ -45,7 +45,7 @@ test("smoke", async ({ page }, info) => {
 		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`
 	);
 	await expect(page).toHaveURL(edit);
-	await page.locator("text=Save changes").click();
+	await page.locator("text=Save").click();
 
 	// ensure same entity
 	await expect(page).toHaveURL(url);
