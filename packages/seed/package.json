@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "7.3.0",
-    "@prisma/client": "4.1.1",
+    "@prisma/client": "4.2.1",
     "@tsconfig/esm": "1.0.2",
     "@tsconfig/node16": "1.0.3",
     "@types/node": "18.6.3",
@@ -22,7 +22,7 @@
     "dotenv": "16.0.1",
     "microbundle": "0.15.0",
     "ms": "3.0.0-canary.1",
-    "prisma": "4.1.1",
+    "prisma": "4.2.1",
     "sade": "1.8.1",
     "typescript": "4.7.4"
   }

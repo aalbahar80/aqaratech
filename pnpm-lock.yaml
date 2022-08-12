@@ -27,7 +27,7 @@ importers:
       '@nestjs/swagger': 6.0.5
       '@nestjs/terminus': 9.1.0
       '@nestjs/testing': 9.0.8
-      '@prisma/client': 4.1.1
+      '@prisma/client': 4.2.1
       '@types/cache-manager': 4.0.1
       '@types/cookie-parser': 1.4.3
       '@types/csurf': 1.11.2
@@ -62,7 +62,7 @@ importers:
       passport-jwt: 4.0.0
       postmark: 3.0.12
       prettier: 2.7.1
-      prisma: 4.1.1
+      prisma: 4.2.1
       prisma-dbml-generator: 0.9.1
       prom-client: 14.0.1
       reflect-metadata: 0.1.13
@@ -83,7 +83,7 @@ importers:
       '@aws-sdk/client-s3': 3.142.0
       '@aws-sdk/s3-request-presigner': 3.145.0
       '@casl/ability': 6.0.0
-      '@casl/prisma': 1.0.4_dm2kwd2au6hytwlyhdhk5gkxem
+      '@casl/prisma': 1.0.4_5mumb4mgod622um2bzqom4lygy
       '@nestjs/axios': 0.1.0_t6wygpagnzylhnpg25zual64b4
       '@nestjs/common': 9.0.8_mgy7w2bm3yhmntrbe3boyroj6m
       '@nestjs/config': 2.2.0_t6wygpagnzylhnpg25zual64b4
@@ -94,7 +94,7 @@ importers:
       '@nestjs/platform-express': 9.0.8_cw6o3dkuyuli4a5gq7b223evly
       '@nestjs/swagger': 6.0.5_t5c7ncqnk2fwu54zrommbwzp4i
       '@nestjs/terminus': 9.1.0_xnayqdq75yqw5n74qxixs6awam
-      '@prisma/client': 4.1.1_prisma@4.1.1
+      '@prisma/client': 4.2.1_prisma@4.2.1
       cache-manager: 4.1.0
       class-transformer: 0.5.1
       class-validator: 0.13.2
@@ -109,7 +109,7 @@ importers:
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.12
-      prisma: 4.1.1
+      prisma: 4.2.1
       prom-client: 14.0.1
       reflect-metadata: 0.1.13
       remeda: 1.0.1
@@ -212,7 +212,7 @@ importers:
   packages/seed:
     specifiers:
       '@faker-js/faker': 7.3.0
-      '@prisma/client': 4.1.1
+      '@prisma/client': 4.2.1
       '@tsconfig/esm': 1.0.2
       '@tsconfig/node16': 1.0.3
       '@types/node': 18.6.3
@@ -220,12 +220,12 @@ importers:
       dotenv: 16.0.1
       microbundle: 0.15.0
       ms: 3.0.0-canary.1
-      prisma: 4.1.1
+      prisma: 4.2.1
       sade: 1.8.1
       typescript: 4.7.4
     devDependencies:
       '@faker-js/faker': 7.3.0
-      '@prisma/client': 4.1.1_prisma@4.1.1
+      '@prisma/client': 4.2.1_prisma@4.2.1
       '@tsconfig/esm': 1.0.2
       '@tsconfig/node16': 1.0.3
       '@types/node': 18.6.3
@@ -233,7 +233,7 @@ importers:
       dotenv: 16.0.1
       microbundle: 0.15.0
       ms: 3.0.0-canary.1
-      prisma: 4.1.1
+      prisma: 4.2.1
       sade: 1.8.1
       typescript: 4.7.4
 
@@ -1381,7 +1381,7 @@ packages:
     dependencies:
       '@ampproject/remapping': 2.2.0
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.18.10
+      '@babel/generator': 7.18.12
       '@babel/helper-compilation-targets': 7.18.9_@babel+core@7.18.10
       '@babel/helper-module-transforms': 7.18.9
       '@babel/helpers': 7.18.9
@@ -1444,8 +1444,8 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/generator/7.18.10:
-    resolution: {integrity: sha512-0+sW7e3HjQbiHbj1NeU/vN8ornohYlacAfZIaXhdoGweQqgcNy69COVciYYqEXJ/v+9OBA7Frxm4CVAuNqKeNA==}
+  /@babel/generator/7.18.12:
+    resolution: {integrity: sha512-dfQ8ebCN98SvyL7IxNMCUtZQSq5R7kxgN+r8qYTGDmmSion1hX2C0zq2yo1bsCDhXixokv1SAWTZUMYbO/V5zg==}
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.18.10
@@ -2885,7 +2885,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/generator': 7.18.10
+      '@babel/generator': 7.18.12
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.18.9
       '@babel/helper-hoist-variables': 7.18.6
@@ -2969,14 +2969,14 @@ packages:
       '@ucast/mongo2js': 1.3.3
     dev: false
 
-  /@casl/prisma/1.0.4_dm2kwd2au6hytwlyhdhk5gkxem:
+  /@casl/prisma/1.0.4_5mumb4mgod622um2bzqom4lygy:
     resolution: {integrity: sha512-l7I7vmx0WnOW2+6p7+IO8Horktu8h9+tjk9GaTDOrjBCHC5ev71yTjWrG3Rq2KTcnfzPkGRve5rlkxVcRLMd1Q==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0
     dependencies:
       '@casl/ability': 6.0.0
-      '@prisma/client': 4.1.1_prisma@4.1.1
+      '@prisma/client': 4.2.1_prisma@4.2.1
       '@ucast/core': 1.10.1
       '@ucast/js': 3.0.2
     dev: false
@@ -3930,8 +3930,8 @@ packages:
     resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
     dev: true
 
-  /@prisma/client/4.1.1_prisma@4.1.1:
-    resolution: {integrity: sha512-2pXuIUYxHv5H9o6QTa1VIsl4yMgsAjKQOitlo8WVTB+vo73rmMJITBPavdGUZSWUc7adMkFzEV3y5rVTUQr77Q==}
+  /@prisma/client/4.2.1_prisma@4.2.1:
+    resolution: {integrity: sha512-PZBkY60+k5oix+e6IUfl3ub8TbRLNsPLdfWrdy2eh80WcHTaT+/UfvXf/B7gXedH7FRtbPFHZXk1hZenJiJZFQ==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -3940,8 +3940,8 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8
-      prisma: 4.1.1
+      '@prisma/engines-version': 4.2.0-33.2920a97877e12e055c1333079b8d19cee7f33826
+      prisma: 4.2.1
 
   /@prisma/debug/3.10.0:
     resolution: {integrity: sha512-rPf9EhhQ82bxuVz3lRkHSWyJTBluyDH1RSvzmiEZorpxxdqZSFxlk1gGxIEuu+T9dAhY1dtCq4E679SSycGHUQ==}
@@ -3977,16 +3977,16 @@ packages:
       undici: 3.3.6
     dev: true
 
-  /@prisma/engines-version/4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8:
-    resolution: {integrity: sha512-cRRJwpHFGFJZvtHbY3GZjMffNBEjjZk68ztn+S2hDgPCGB4H66IK26roK94GJxBodSehwRJ0wGyebC2GoIH1JQ==}
+  /@prisma/engines-version/4.2.0-33.2920a97877e12e055c1333079b8d19cee7f33826:
+    resolution: {integrity: sha512-tktkqdiwqE4QhmE088boPt+FwPj1Jub/zk+5F6sEfcRHzO5yz9jyMD5HFVtiwxZPLx/8Xg9ElnuTi8E5lWVQFQ==}
 
   /@prisma/engines/3.11.0-48.b371888aaf8f51357c7457d836b86d12da91658b:
     resolution: {integrity: sha512-m9iZd5F5vP6A2IvKWfHpOO/qK8OOO9nbsV/pdyEkF/1WNe0E8SIWFBKb+HcMLkG9OFbDDBy8QItXmp/mIULuwQ==}
     requiresBuild: true
     dev: true
 
-  /@prisma/engines/4.1.1:
-    resolution: {integrity: sha512-DCw8L/SS0IXqmj5IW/fMxOXiifnsfjBzDfRhf0j3NFWqvMCh9OtfjmXQZxVgI2mwvJLc/5jzXhkiWT39qS09dA==}
+  /@prisma/engines/4.2.1:
+    resolution: {integrity: sha512-0KqBwREUOjBiHwITsQzw2DWfLHjntvbqzGRawj4sBMnIiL5CXwyDUKeHOwXzKMtNr1rEjxEsypM14g0CzLRK3g==}
     requiresBuild: true
 
   /@prisma/fetch-engine/3.11.0-48.b371888aaf8f51357c7457d836b86d12da91658b:
@@ -6123,8 +6123,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001373
-      electron-to-chromium: 1.4.206
+      caniuse-lite: 1.0.30001375
+      electron-to-chromium: 1.4.217
       node-releases: 2.0.6
       update-browserslist-db: 1.0.5_browserslist@4.21.3
     dev: true
@@ -6231,6 +6231,10 @@ packages:
 
   /caniuse-lite/1.0.30001373:
     resolution: {integrity: sha512-pJYArGHrPp3TUqQzFYRmP/lwJlj8RCbVe3Gd3eJQkAV8SAC6b19XS9BjMvRdvaS8RMkaTN8ZhoHP6S1y8zzwEQ==}
+    dev: true
+
+  /caniuse-lite/1.0.30001375:
+    resolution: {integrity: sha512-kWIMkNzLYxSvnjy0hL8w1NOaWNr2rn39RTAVyIwcw8juu60bZDWiF1/loOYANzjtJmy6qPgNmn38ro5Pygagdw==}
     dev: true
 
   /canvg/3.0.10:
@@ -7407,8 +7411,8 @@ packages:
     resolution: {integrity: sha512-ola5UH0xAP1oYY0FFUsPvwtucEzCQHucXnT7PQ1zjHJMccZhCDktEugI++JUR3YuIs7Ff7afz+OVEhVAIMhLAQ==}
     dev: true
 
-  /electron-to-chromium/1.4.206:
-    resolution: {integrity: sha512-h+Fadt1gIaQ06JaIiyqPsBjJ08fV5Q7md+V8bUvQW/9OvXfL2LRICTz2EcnnCP7QzrFTS6/27MRV6Bl9Yn97zA==}
+  /electron-to-chromium/1.4.217:
+    resolution: {integrity: sha512-iX8GbAMij7cOtJPZo02CClpaPMWjvN5meqXiJXkBgwvraNWTNH0Z7F9tkznI34JRPtWASoPM/xWamq3oNb49GA==}
     dev: true
 
   /emittery/0.10.2:
@@ -12058,13 +12062,13 @@ packages:
       - supports-color
     dev: true
 
-  /prisma/4.1.1:
-    resolution: {integrity: sha512-yw50J8If2dKP4wYIi695zthsCASQFHiogGvUHHWd3falx/rpsD6Sb1LMLRV9nO3iGG3lozxNJ2PSINxK7xwdpg==}
+  /prisma/4.2.1:
+    resolution: {integrity: sha512-HuYqnTDgH8atjPGtYmY0Ql9XrrJnfW7daG1PtAJRW0E6gJxc50lY3vrIDn0yjMR3TvRlypjTcspQX8DT+xD4Sg==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.1.1
+      '@prisma/engines': 4.2.1
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
