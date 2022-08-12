@@ -37,11 +37,17 @@ export class AggregateService {
     return groupByMonth(leaseInvoices);
   }
 
-  async expensesByMonth({ filter }: { filter?: DashboardFilterDto }) {
-    // TODO ability check
+  async expensesByMonth({
+    filter,
+    user,
+  }: {
+    filter?: DashboardFilterDto;
+    user: IUser;
+  }) {
     const expenses = await this.prisma.expense.findMany({
       where: {
         AND: [
+          accessibleBy(user.ability, Action.Read).Expense,
           this.expensesService.parseLocationFilter({ filter }),
           { postAt: { gte: filter?.start, lte: filter?.end } },
         ],

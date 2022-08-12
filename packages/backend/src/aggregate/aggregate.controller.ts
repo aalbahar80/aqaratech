@@ -28,8 +28,9 @@ export class AggregateController {
   @ApiOkResponse({ type: ByMonthDto, isArray: true })
   @Get('/expensesByMonth')
   getExpensesByMonth(
+    @User() user: IUser,
     @Query() filter: DashboardFilterDto,
   ): Promise<ByMonthDto[]> {
-    return this.aggregateService.expensesByMonth({ filter });
+    return this.aggregateService.expensesByMonth({ filter, user });
   }
 }
