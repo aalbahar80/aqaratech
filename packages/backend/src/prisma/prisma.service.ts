@@ -26,6 +26,18 @@ export class PrismaService
       },
       log: [...(debug ? ['query'] : ([] as any[])), 'info', 'warn', 'error'],
     });
+
+    if (debug) {
+      // @ts-ignore
+      this.$on('query', (e) => {
+        // @ts-ignore
+        console.log('Query: ' + e.query);
+        // @ts-ignore
+        console.log('Params: ' + e.params);
+        // @ts-ignore
+        console.log('Duration: ' + e.duration + 'ms');
+      });
+    }
   }
 
   async onModuleInit() {
