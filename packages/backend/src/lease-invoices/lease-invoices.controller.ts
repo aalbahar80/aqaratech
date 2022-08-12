@@ -83,10 +83,9 @@ export class LeaseInvoicesController {
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: String })
-  remove(@Param('id') id: string): Promise<string> {
-    return this.leaseInvoicesService.remove({ id });
+  remove(@Param('id') id: string, @User() user: IUser): Promise<string> {
+    return this.leaseInvoicesService.remove({ id, user });
   }
 
   @Post('/:id/send-email')

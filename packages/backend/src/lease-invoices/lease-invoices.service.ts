@@ -126,8 +126,14 @@ export class LeaseInvoicesService {
     return updated.id;
   }
 
-  async remove({ id }: { id: string }) {
-    const removed = await this.prisma.leaseInvoice.delete({ where: { id } });
+  async remove({ id, user }: { id: string; user: IUser }) {
+    const removed = await this.prisma.leaseInvoice.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Delete).LeaseInvoice],
+      },
+    });
+
+    await this.prisma.leaseInvoice.delete({ where: { id } });
     return removed.id;
   }
 
