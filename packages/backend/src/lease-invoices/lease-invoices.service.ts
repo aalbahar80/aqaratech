@@ -93,9 +93,11 @@ export class LeaseInvoicesService {
     return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
   }
 
-  async findOne({ id }: { id: string }) {
-    const data = await this.prisma.leaseInvoice.findUnique({
-      where: { id },
+  async findOne({ id, user }: { id: string; user: IUser }) {
+    const data = await this.prisma.leaseInvoice.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Read).LeaseInvoice],
+      },
       include: { lease: crumbs.lease },
     });
     return new LeaseInvoiceDto(data);

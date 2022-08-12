@@ -59,10 +59,12 @@ export class LeaseInvoicesController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: LeaseInvoiceDto })
-  findOne(@Param('id') id: string): Promise<LeaseInvoiceDto> {
-    return this.leaseInvoicesService.findOne({ id });
+  findOne(
+    @Param('id') id: string,
+    @User() user: IUser,
+  ): Promise<LeaseInvoiceDto> {
+    return this.leaseInvoicesService.findOne({ id, user });
   }
 
   @Patch(':id')
