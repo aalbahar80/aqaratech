@@ -1,13 +1,12 @@
 <script lang="ts" context="module">
 	// This is a base layout for other layouts to extend.
-	import { navigating, page, session } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import { api } from '$lib/client/api';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { protectRoute } from '$lib/utils/protect-route';
-	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
@@ -35,10 +34,12 @@
 	};
 </script>
 
-<script lang="ts">
+<!-- <script lang="ts">
 	onMount(() => {
 		const href = window.location.href;
-		if (!href.includes('localhost') && !href.includes('127.0.0.1')) {
+		const isProd = import.meta.env.VITE_VERCEL_ENV === 'production';
+		// if (!href.includes('localhost') && !href.includes('127.0.0.1')) {
+		if (isProd) {
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($session.user) {
 				LogRocket.identify($session.user.id || '', {
@@ -49,7 +50,7 @@
 			}
 		}
 	});
-</script>
+</script> -->
 
 <MetaTags
 	title="Aqaratech"
