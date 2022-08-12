@@ -89,8 +89,7 @@ export class LeaseInvoicesController {
   }
 
   @Post('/:id/send-email')
-  @CheckAbilities({ action: Action.Update, subject: 'LeaseInvoice' })
-  sendEmail(@Param('id') id: string) {
-    return this.leaseInvoicesService.sendInvoice(id);
+  sendEmail(@Param('id') id: string, @User() user: IUser) {
+    return this.leaseInvoicesService.sendInvoice({ id, user });
   }
 }

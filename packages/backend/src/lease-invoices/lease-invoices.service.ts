@@ -137,9 +137,11 @@ export class LeaseInvoicesService {
     return removed.id;
   }
 
-  async sendInvoice(id: string) {
-    const invoice = await this.prisma.leaseInvoice.findUnique({
-      where: { id },
+  async sendInvoice({ id, user }: { id: string; user: IUser }) {
+    const invoice = await this.prisma.leaseInvoice.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Update).LeaseInvoice],
+      },
       select: {
         id: true,
         amount: true,
