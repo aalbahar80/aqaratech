@@ -11,11 +11,14 @@ export {
 	fakeUnit,
 	testOrgEmail,
 	testOrgId,
+	testOrgRoleId,
 	testPassword,
 	testPortfolioEmail,
 	testPortfolioId,
+	testPortfolioRoleId,
 	testTenantEmail,
 	testTenantId,
+	testTenantRoleId,
 	timespan,
 } from "./generators.js";
 export { seed } from "./seed.js";
