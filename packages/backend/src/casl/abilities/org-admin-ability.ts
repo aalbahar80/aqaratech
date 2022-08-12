@@ -124,7 +124,6 @@ export class OrgAdminAbility {
     ]);
 
     const manageable: OrgManageableResources = {
-      orgs: [role.organizationId], // TODO consider contraining to superadmins only
       roles: roles.map((r) => r.id),
       tenants: tenants.map((i) => i.id),
       portfolios: portfolios.map((i) => i.id),
@@ -139,7 +138,7 @@ export class OrgAdminAbility {
     // TODO: limit fields
     // TODO only superadmins can manage orgs/orgSettings?
     can([Action.Read, Action.Update], ['Organization'], {
-      id: { in: manageable.orgs },
+      id: { equals: role.organizationId },
     });
 
     // TODO: limit fields
@@ -149,7 +148,7 @@ export class OrgAdminAbility {
         { id: { in: manageable.roles } },
         {
           OR: [
-            { organizationId: { in: manageable.orgs } },
+            { organizationId: { equals: role.organizationId } },
             { portfolioId: { in: manageable.portfolios } },
             { tenantId: { in: manageable.tenants } },
           ],
@@ -159,7 +158,7 @@ export class OrgAdminAbility {
 
     can(Action.Manage, ['Role'], {
       OR: [
-        { organizationId: { in: manageable.orgs } },
+        { organizationId: { equals: role.organizationId } },
         { portfolioId: { in: manageable.portfolios } },
         { tenantId: { in: manageable.tenants } },
       ],
@@ -169,14 +168,14 @@ export class OrgAdminAbility {
     can(Action.Manage, ['Tenant'], {
       OR: [
         { id: { in: manageable.tenants } },
-        { organizationId: { in: manageable.orgs } }, // new tenant
+        { organizationId: { equals: role.organizationId } }, // new tenant
       ],
     });
 
     can(Action.Manage, ['Portfolio'], {
       OR: [
         { id: { in: manageable.portfolios } },
-        { organizationId: { in: manageable.orgs } },
+        { organizationId: { equals: role.organizationId } },
       ],
     });
 

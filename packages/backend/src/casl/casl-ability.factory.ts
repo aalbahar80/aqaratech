@@ -112,7 +112,6 @@ export type Subject = Subjects<{
 
 type Resource = string;
 export interface Resources {
-  orgs: Resource[];
   roles: Resource[];
   tenants: Resource[];
   portfolios: Resource[];

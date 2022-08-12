@@ -99,7 +99,6 @@ export class PortfolioAbility {
 
     const readable: PortfolioReadableResources = {
       tenants: tenants.map((i) => i.id),
-      portfolios: [role.portfolioId],
       properties: properties.map((i) => i.id),
       units: units.map((i) => i.id),
       leases: leases.map((i) => i.id),
@@ -116,7 +115,7 @@ export class PortfolioAbility {
     });
 
     can(Action.Read, ['Portfolio'], {
-      id: { in: readable.portfolios },
+      id: { equals: role.portfolioId },
     });
 
     can(Action.Read, ['Property'], {
@@ -148,7 +147,6 @@ export class PortfolioAbility {
 type PortfolioReadableResources = Pick<
   Resources,
   | 'tenants'
-  | 'portfolios'
   | 'properties'
   | 'units'
   | 'leases'

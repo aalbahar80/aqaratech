@@ -39,14 +39,13 @@ export class TenantAbility {
     ]);
 
     const readable: TenantReadableResources = {
-      tenants: [role.tenantId],
       leases: leases.map((i) => i.id),
       leaseInvoices: leaseInvoices.map((i) => i.id),
       maintenanceOrders: maintenanceOrders.map((i) => i.id),
     };
 
     can(Action.Read, 'Tenant', {
-      id: { in: readable.tenants },
+      id: { equals: role.tenantId },
     });
 
     can(Action.Read, ['Lease'], {
@@ -66,5 +65,5 @@ export class TenantAbility {
 
 type TenantReadableResources = Pick<
   Resources,
-  'tenants' | 'leases' | 'leaseInvoices' | 'maintenanceOrders'
+  'leases' | 'leaseInvoices' | 'maintenanceOrders'
 >;
