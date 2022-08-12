@@ -32,4 +32,7 @@ COPY --from=backend /app/pruned .
 # generate prisma client & install engine
 RUN ./node_modules/.bin/prisma2 generate
 
+# NO-OP, for convenience only
+EXPOSE 3002
+
 CMD ["npm", "run", "start:prod"]
