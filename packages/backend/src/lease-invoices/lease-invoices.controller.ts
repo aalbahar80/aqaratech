@@ -14,8 +14,6 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -39,7 +37,6 @@ export class LeaseInvoicesController {
   constructor(private readonly leaseInvoicesService: LeaseInvoicesService) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
   @ApiCreatedResponse({ type: String })
   create(
     @User() user: IUser,
@@ -49,7 +46,6 @@ export class LeaseInvoicesController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'LeaseInvoice' })
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findAll(
     @User() user: IUser,
@@ -68,7 +64,6 @@ export class LeaseInvoicesController {
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'LeaseInvoice' })
   @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
