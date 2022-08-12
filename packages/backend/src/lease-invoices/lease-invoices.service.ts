@@ -40,11 +40,11 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
-    // throws error if user cannot create invoice
     await this.prisma.lease.findFirstOrThrow({
       where: {
         AND: [
           { id: createLeaseInvoiceDto.leaseId },
+          // throws error if user cannot update _lease_
           accessibleBy(user.ability, Action.Update).Lease,
         ],
       },
