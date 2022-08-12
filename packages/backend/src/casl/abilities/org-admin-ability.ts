@@ -207,15 +207,15 @@ export class OrgAdminAbility {
       ],
     });
 
-    // Seperate Read ability for better performance
-    can(Action.Read, ['LeaseInvoice'], {
-      id: { in: manageable.leaseInvoices },
-    });
-
-    can([Action.Create, Action.Update, Action.Delete], ['LeaseInvoice'], {
+    can(Action.Manage, ['LeaseInvoice'], {
       OR: [
-        { id: { in: manageable.leaseInvoices } },
         { leaseId: { in: manageable.leases } },
+        {
+          OR: [
+            { lease: { tenant: { organizationId: { equals: role.organizationId } }, }, }, // prettier-ignore
+            { lease: { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, }, // prettier-ignore
+          ],
+        },
       ],
     });
 
