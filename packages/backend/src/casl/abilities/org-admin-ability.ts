@@ -64,18 +64,6 @@ export class OrgAdminAbility {
     });
 
     // prettier-ignore
-    const expensesQ = this.prisma.expense.findMany({
-      select: { id: true },
-      where: {
-        OR: [
-          { portfolio: { organizationId: { equals: role.organizationId} } },
-          { property: { portfolio: { organizationId: { equals: role.organizationId} } } },
-          { unit: { property: { portfolio: { organizationId: { equals: role.organizationId} } } } },
-        ],
-      },
-    });
-
-    // prettier-ignore
     const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
       select: { id: true },
       where: {
@@ -96,7 +84,6 @@ export class OrgAdminAbility {
       units,
       leases,
       // leaseInvoices,
-      expenses,
       maintenanceOrders,
     ] = await Promise.all([
       rolesQ,
@@ -105,7 +92,6 @@ export class OrgAdminAbility {
       propertiesQ,
       unitsQ,
       leasesQ,
-      expensesQ,
       maintenanceOrdersQ,
     ]);
 
@@ -116,7 +102,6 @@ export class OrgAdminAbility {
       properties: properties.map((i) => i.id),
       units: units.map((i) => i.id),
       leases: leases.map((i) => i.id),
-      expenses: expenses.map((i) => i.id),
       maintenanceOrders: maintenanceOrders.map((i) => i.id),
     };
 
@@ -199,22 +184,11 @@ export class OrgAdminAbility {
       ],
     });
 
-    // Seperate Read ability for better performance
-    can(Action.Read, ['Expense'], {
-      id: { in: manageable.expenses },
-    });
-
-    can([Action.Create, Action.Update, Action.Delete], ['Expense'], {
+    can(Action.Manage, ['Expense'], {
       OR: [
-        { id: { in: manageable.expenses } },
-        {
-          OR: [
-            { unitId: { in: manageable.units } },
-            { propertyId: { in: manageable.properties } },
-            { portfolioId: { in: manageable.portfolios } },
-            // {maintenanceOrderId: { in: manageable.maintenanceOrders } },
-          ],
-        },
+        { portfolio: { organizationId: { equals: role.organizationId } } },
+        { property: { portfolio: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
+        { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, // prettier-ignore
       ],
     });
 
@@ -247,6 +221,5 @@ type OrgManageableResources = Pick<
   | 'properties'
   | 'units'
   | 'leases'
-  | 'expenses'
   | 'maintenanceOrders'
 >;
