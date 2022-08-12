@@ -73,7 +73,7 @@ export class LeaseInvoicesService {
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [
-        accessibleBy(user.ability).LeaseInvoice,
+        accessibleBy(user.ability, Action.Read).LeaseInvoice,
         ...this.parseFilter({ pageOptionsDto }),
         ...(where ? [where] : []), // combine with other filters/remove?
       ],
