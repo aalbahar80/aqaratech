@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../config";
 
-test.use({ storageState: "./storageState.json" });
 test("existing user can create new org", async ({ page }) => {
 	page.goto("/");
 

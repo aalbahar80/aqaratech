@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../config";
 
-test.use({ storageState: "./storageState.json" });
 test("smoke", async ({ page }, info) => {
 	await page.goto("/");
 	await page.locator('a:has-text("Properties")').click();
