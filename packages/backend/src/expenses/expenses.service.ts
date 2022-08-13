@@ -174,8 +174,15 @@ export class ExpensesService {
     return updated.id;
   }
 
-  async remove({ id }: { id: string }) {
-    const deleted = await this.prisma.expense.delete({ where: { id } });
+  async remove({ id, user }: { id: string; user: IUser }) {
+    const deleted = await this.prisma.expense.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Delete).Expense],
+      },
+      select: { id: true },
+    });
+
+    await this.prisma.expense.delete({ where: { id: deleted.id } });
     return deleted.id;
   }
 

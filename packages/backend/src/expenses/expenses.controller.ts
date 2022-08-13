@@ -75,9 +75,8 @@ export class ExpensesController {
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Expense' })
   @ApiOkResponse({ type: String })
-  remove(@Param('id') id: string): Promise<string> {
-    return this.expensesService.remove({ id });
+  remove(@User() user: IUser, @Param('id') id: string): Promise<string> {
+    return this.expensesService.remove({ id, user });
   }
 }
