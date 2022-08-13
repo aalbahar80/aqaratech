@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -28,10 +27,15 @@ export class ExpensesService {
     createExpenseDto: CreateExpenseDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('Expense', createExpenseDto),
-    );
+    await this.prisma.portfolio.findFirstOrThrow({
+      where: {
+        AND: [
+          { id: createExpenseDto.portfolioId },
+          // throws error if user cannot update _portfolio+
+          accessibleBy(user.ability, Action.Update).Portfolio,
+        ],
+      },
+    });
 
     // VALIDATE EXPENSE CATEGORY
 
