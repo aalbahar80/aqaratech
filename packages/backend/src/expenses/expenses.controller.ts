@@ -49,7 +49,6 @@ export class ExpensesController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiPaginatedResponse(ExpenseDto)
   findAll(
     @User() user: IUser,

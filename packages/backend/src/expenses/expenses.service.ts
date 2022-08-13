@@ -83,7 +83,7 @@ export class ExpensesService {
 
     const filter: Prisma.ExpenseWhereInput = {
       AND: [
-        accessibleBy(user.ability).Expense,
+        accessibleBy(user.ability, Action.Read).Expense,
         this.parseLocationFilter({ filter: pageOptionsDto }),
         { postAt: { gte: start, lte: end } },
       ],
