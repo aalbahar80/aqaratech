@@ -34,7 +34,7 @@ const users = [
 
 for (const user of users) {
 	test.describe(`${user.role} login:`, async () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeAll(async ({ page }) => {
 			await page.goto("/");
 			await page.locator("text=Log In >> visible=true").click();
 
