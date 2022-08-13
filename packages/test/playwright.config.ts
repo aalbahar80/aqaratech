@@ -5,10 +5,13 @@ const config: PlaywrightTestConfig = {
 	use: {
 		storageState: "storageState.json",
 		headless: false,
-		viewport: { width: 1280, height: 720 },
 		ignoreHTTPSErrors: true,
 		video: "on-first-retry",
 		baseURL: "http://localhost:3000/",
+		viewport: { width: 1920, height: 1080 },
+		launchOptions: {
+			args: ["--window-position=0,0"],
+		},
 	},
 	webServer: [
 		{
