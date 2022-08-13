@@ -64,7 +64,6 @@ export class ExpensesController {
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Expense' })
   @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,

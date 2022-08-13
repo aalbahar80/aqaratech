@@ -155,10 +155,11 @@ export class ExpensesService {
     updateExpenseDto: UpdateExpenseDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject('Expense', { id, ...updateExpenseDto }),
-    );
+    await this.prisma.expense.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Update).Expense],
+      },
+    });
 
     // VALIDATE EXPENSE CATEGORY
 
