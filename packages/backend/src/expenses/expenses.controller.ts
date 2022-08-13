@@ -58,7 +58,6 @@ export class ExpensesController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseDto })
   findOne(@User() user: IUser, @Param('id') id: string): Promise<ExpenseDto> {
     return this.expensesService.findOne({ id, user });

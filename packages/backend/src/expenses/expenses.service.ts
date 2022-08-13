@@ -7,6 +7,7 @@ import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import {
   CreateExpenseDto,
@@ -14,7 +15,6 @@ import {
   UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -122,8 +122,10 @@ export class ExpensesService {
     )?.organizationId;
 
     const [data, settings] = await Promise.all([
-      this.prisma.expense.findUnique({
-        where: { id },
+      this.prisma.expense.findFirstOrThrow({
+        where: {
+          AND: [{ id }, accessibleBy(user.ability, Action.Read).Expense],
+        },
         include: {
           portfolio: crumbs.portfolio,
           property: crumbs.property,
