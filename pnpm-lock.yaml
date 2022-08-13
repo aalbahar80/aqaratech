@@ -154,7 +154,6 @@ importers:
   packages/docs:
     specifiers:
       '@iconify-json/ri': 1.1.2
-      '@playwright/test': 1.23.2
       '@sveltejs/adapter-auto': 1.0.0-next.53
       '@sveltejs/adapter-static': 1.0.0-next.34
       '@sveltejs/kit': 1.0.0-next.357
@@ -176,7 +175,6 @@ importers:
       unplugin-icons: 0.14.3
     devDependencies:
       '@iconify-json/ri': 1.1.2
-      '@playwright/test': 1.23.2
       '@sveltejs/adapter-auto': 1.0.0-next.53
       '@sveltejs/adapter-static': 1.0.0-next.34
       '@sveltejs/kit': 1.0.0-next.357_svelte@3.49.0
@@ -3916,15 +3914,6 @@ packages:
     resolution: {integrity: sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==}
     engines: {node: '>=10.13.0'}
     dev: false
-
-  /@playwright/test/1.23.2:
-    resolution: {integrity: sha512-umaEAIwQGfbezixg3raSOraqbQGSqZP988sOaMdpA2wj3Dr6ykOscrMukyK3U6edxhpS0N8kguAFZoHwCEfTig==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dependencies:
-      '@types/node': 18.0.3
-      playwright-core: 1.23.2
-    dev: true
 
   /@playwright/test/1.25.0:
     resolution: {integrity: sha512-j4EZhTTQI3dBeWblE21EV//swwmBtOpIrLdOIJIRv4uqsLdHgBg1z+JtTg+AeC5o2bAXIE26kDNW5A0TimG8Bg==}
@@ -11557,12 +11546,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
-    dev: true
-
-  /playwright-core/1.23.2:
-    resolution: {integrity: sha512-UGbutIr0nBALDHWW/HcXfyK6ZdmefC99Moo4qyTr89VNIkYZuDrW8Sw554FyFUamcFSdKOgDPk6ECSkofGIZjQ==}
-    engines: {node: '>=14'}
-    hasBin: true
     dev: true
 
   /playwright-core/1.25.0:
