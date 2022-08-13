@@ -29,12 +29,12 @@ class ExpenseRequiredDto {
 
   @DateType()
   postAt: Date;
-
-  @IsString()
-  memo: string | null;
 }
 
 class ExpenseOptionalDto {
+  @IsString()
+  memo: string | null;
+
   @IsID()
   @IsOptional()
   // TODO remove question mark?

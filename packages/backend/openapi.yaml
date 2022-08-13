@@ -3526,7 +3526,6 @@ components:
         - postAt
         - portfolioId
         - amount
-        - memo
     ExpenseBreadcrumbsDto:
       type: object
       properties:
