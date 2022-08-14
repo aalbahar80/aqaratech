@@ -67,11 +67,11 @@ export class CaslAbilityFactory {
     can(Action.Read, ['User'], { id: { equals: user.id } });
 
     if (role.roleType === 'ORGADMIN') {
-      await this.orgAdminAbility.define(role, can);
+      this.orgAdminAbility.define(role, can);
     } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-      await this.portfolioAbility.define(role, can);
+      this.portfolioAbility.define(role, can);
     } else if (role.roleType === 'TENANT' && role.tenantId) {
-      await this.tenantAbility.define(role, can);
+      this.tenantAbility.define(role, can);
     }
 
     this.logger.log( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore

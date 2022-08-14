@@ -1,12 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { Action, TCan } from 'src/casl/casl-ability.factory';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TenantAbility {
-  constructor(private prisma: PrismaService) {}
-
   private readonly logger = new Logger(TenantAbility.name);
 
   define(role: Role, can: TCan) {
