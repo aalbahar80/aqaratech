@@ -124,7 +124,6 @@ export class TenantsController {
   }
 
   @Get(':id/roles')
-  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,

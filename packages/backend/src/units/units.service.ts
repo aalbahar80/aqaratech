@@ -50,7 +50,10 @@ export class UnitsService {
     const { page, take } = pageOptionsDto;
 
     const filter: Prisma.UnitWhereInput = {
-      AND: [accessibleBy(user.ability).Unit, ...(where ? [where] : [])],
+      AND: [
+        accessibleBy(user.ability, Action.Read).Unit,
+        ...(where ? [where] : []),
+      ],
     };
 
     const [data, total] = await Promise.all([

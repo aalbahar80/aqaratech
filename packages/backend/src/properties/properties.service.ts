@@ -53,7 +53,10 @@ export class PropertiesService {
     const { page, take } = pageOptionsDto;
 
     const filter: Prisma.PropertyWhereInput = {
-      AND: [accessibleBy(user.ability).Property, ...(where ? [where] : [])],
+      AND: [
+        accessibleBy(user.ability, Action.Read).Property,
+        ...(where ? [where] : []),
+      ],
     };
 
     const [results, total] = await Promise.all([

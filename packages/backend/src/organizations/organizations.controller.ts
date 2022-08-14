@@ -87,8 +87,6 @@ export class OrganizationsController {
   // ### ROLES ###
 
   @Get(':id/roles')
-  // TODO configure orgs in CASL
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' })
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,
