@@ -9,7 +9,7 @@
 				id: params.id,
 			}),
 			stuff.api!.files.findAll({
-				relationKey: 'leaseInvoices',
+				relationKey: 'leaseInvoice',
 				relationValue: params.id,
 			}),
 		]);

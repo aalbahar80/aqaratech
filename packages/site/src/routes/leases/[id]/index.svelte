@@ -18,7 +18,7 @@
 		const [lease, files, invoices] = await Promise.all([
 			stuff.api!.leases.findOne({ id: leaseId }),
 			stuff.api!.files.findAll({
-				relationKey: 'leases',
+				relationKey: 'lease',
 				relationValue: leaseId,
 			}),
 			stuff.api!.leases.findInvoices({ id: leaseId, page, take: 100 }),

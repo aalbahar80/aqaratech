@@ -51,7 +51,7 @@
 		] = await Promise.all([
 			stuff.api!.units.findOne({ id: unitId }),
 			stuff.api!.files.findAll({
-				relationKey: 'units',
+				relationKey: 'unit',
 				relationValue: unitId,
 			}),
 			stuff.api!.units.findLeases({ id: unitId, ...sParams }),

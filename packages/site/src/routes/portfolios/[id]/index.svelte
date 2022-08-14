@@ -22,7 +22,7 @@
 			// TODO handle pagination & default limit
 			stuff.api!.portfolios.findRoles({ id }),
 			stuff.api!.files.findAll({
-				relationKey: 'portfolios',
+				relationKey: 'portfolio',
 				relationValue: id,
 			}),
 		]);

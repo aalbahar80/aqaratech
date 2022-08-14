@@ -23,7 +23,7 @@
 		const [tenant, files, leases, invoices, roles] = await Promise.all([
 			stuff.api!.tenants.findOne({ id: tenantId }),
 			stuff.api!.files.findAll({
-				relationKey: 'tenants',
+				relationKey: 'tenant',
 				relationValue: tenantId,
 			}),
 			stuff.api!.tenants.findLeases({ id: tenantId }),

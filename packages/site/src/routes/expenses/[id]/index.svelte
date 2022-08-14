@@ -11,7 +11,7 @@
 		const [expense, files] = await Promise.all([
 			stuff.api!.expenses.findOne({ id: expenseId }),
 			stuff.api!.files.findAll({
-				relationKey: 'expenses',
+				relationKey: 'expense',
 				relationValue: params.id,
 			}),
 		]);
