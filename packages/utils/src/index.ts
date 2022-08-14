@@ -1,2 +1,8 @@
-export { Entity } from "./entity";
-export { entitiesMap, EntityIdField, EntityNames } from "./entity-map";
+export { DBEntity, Entity, NonDBEntity } from "./entity";
+export {
+	DBEntitiesMap,
+	entitiesMap,
+	EntitiesMap,
+	EntityNames,
+	NonDBEntitiesMap,
+} from "./entity-map";

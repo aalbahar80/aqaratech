@@ -1,4 +1,4 @@
-import { Entity } from "./entity";
+import { DBEntity, Entity, NonDBEntity } from "./entity";
 import { satisfies } from "./satisfies";
 
 export interface EntityNames {
@@ -10,11 +10,13 @@ export interface EntityNames {
 	idField: string | null;
 }
 
-type EntitiesMap = Record<Entity, EntityNames>;
-export type EntityIdField = typeof entitiesMap[Entity]["idField"];
+export type EntitiesMap<T extends Entity> = typeof entitiesMap[T];
+export type DBEntitiesMap = EntitiesMap<DBEntity>;
+export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
 const organization = satisfies<EntityNames>()({
 	urlName: "organizations",
+	caslName: "Organization",
 	singular: "organization",
 	singularCap: "Organization",
 	plural: "organizations",
@@ -24,6 +26,7 @@ const organization = satisfies<EntityNames>()({
 
 const role = satisfies<EntityNames>()({
 	urlName: "roles",
+	caslName: "Role",
 	plural: "roles",
 	pluralCap: "Roles",
 	singular: "organization",
@@ -42,6 +45,7 @@ const member = satisfies<EntityNames>()({
 
 const tenant = satisfies<EntityNames>()({
 	urlName: "tenants",
+	caslName: "Tenant",
 	singular: "tenant",
 	singularCap: "Tenant",
 	plural: "tenants",
@@ -51,6 +55,7 @@ const tenant = satisfies<EntityNames>()({
 
 const portfolio = satisfies<EntityNames>()({
 	urlName: "portfolios",
+	caslName: "Portfolio",
 	singular: "portfolio",
 	singularCap: "Portfolio",
 	plural: "portfolios",
@@ -60,6 +65,7 @@ const portfolio = satisfies<EntityNames>()({
 
 const property = satisfies<EntityNames>()({
 	urlName: "properties",
+	caslName: "Property",
 	singular: "property",
 	singularCap: "Property",
 	plural: "properties",
@@ -69,6 +75,7 @@ const property = satisfies<EntityNames>()({
 
 const unit = satisfies<EntityNames>()({
 	urlName: "units",
+	caslName: "Unit",
 	singular: "unit",
 	singularCap: "Unit",
 	plural: "units",
@@ -78,6 +85,7 @@ const unit = satisfies<EntityNames>()({
 
 const lease = satisfies<EntityNames>()({
 	urlName: "leases",
+	caslName: "Lease",
 	singular: "lease",
 	singularCap: "Lease",
 	plural: "leases",
@@ -87,6 +95,7 @@ const lease = satisfies<EntityNames>()({
 
 const leaseInvoice = satisfies<EntityNames>()({
 	urlName: "leaseInvoices",
+	caslName: "LeaseInvoice",
 	singular: "leaseInvoice",
 	singularCap: "Lease Invoice",
 	plural: "leaseInvoices",
@@ -96,6 +105,7 @@ const leaseInvoice = satisfies<EntityNames>()({
 
 const expense = satisfies<EntityNames>()({
 	urlName: "expenses",
+	caslName: "Expense",
 	singular: "expense",
 	singularCap: "Expense",
 	plural: "expenses",
@@ -105,6 +115,7 @@ const expense = satisfies<EntityNames>()({
 
 const maintenanceOrder = satisfies<EntityNames>()({
 	urlName: "maintenanceOrders",
+	caslName: "MaintenanceOrder",
 	singular: "maintenanceOrder",
 	singularCap: "Maintenance Order",
 	plural: "maintenanceOrders",
@@ -130,7 +141,7 @@ const file = satisfies<EntityNames>()({
 	idField: null,
 });
 
-export const entitiesMap = satisfies<EntitiesMap>()({
+export const entitiesMap = {
 	tenant,
 	portfolio,
 	property,
@@ -144,4 +155,4 @@ export const entitiesMap = satisfies<EntitiesMap>()({
 	member,
 	expenseCategory,
 	file,
-});
+};

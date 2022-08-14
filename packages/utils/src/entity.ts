@@ -1,4 +1,8 @@
-export type Entity =
+export type Entity = DBEntity | NonDBEntity;
+
+export type DBEntity =
+	| "organization"
+	| "role"
 	| "tenant"
 	| "portfolio"
 	| "property"
@@ -6,9 +10,6 @@ export type Entity =
 	| "lease"
 	| "leaseInvoice"
 	| "expense"
-	| "maintenanceOrder"
-	| "organization"
-	| "role"
-	| "member"
-	| "expenseCategory"
-	| "file";
+	| "maintenanceOrder";
+
+export type NonDBEntity = "member" | "expenseCategory" | "file";

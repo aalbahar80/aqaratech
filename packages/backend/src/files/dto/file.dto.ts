@@ -1,7 +1,7 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
+import { DBEntitiesMap, entitiesMap } from '@self/utils';
 import { Expose } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
-import { entityMap, EntitySingularCap } from 'src/constants/entity';
 import { IsID } from 'src/decorators/field.decorators';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { IUser } from 'src/interfaces/user.interface';
@@ -25,7 +25,7 @@ export class DirectoryRequestDto {
 
     // use getters instead?
     const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
-    this.entity = entityMap[relationKey].singularCap;
+    this.entity = entitiesMap[relationKey].caslName;
 
     this.entityId = directory.split('/')[1];
   }
@@ -37,7 +37,7 @@ export class DirectoryRequestDto {
   directory: string; // aka prefix, used as cache key
 
   @IsString()
-  entity: EntitySingularCap; // for ability check
+  entity: DBEntitiesMap['caslName']; // for ability check
 
   @IsID()
   entityId: string; // for ability check

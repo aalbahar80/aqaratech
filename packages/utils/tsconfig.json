@@ -1,5 +1,5 @@
 {
-	"extends": "@tsconfig/esm/tsconfig.json",
+	// "extends": "@tsconfig/esm/tsconfig.json",
 	"compilerOptions": {
 		"moduleResolution": "Node",
 		"lib": ["esnext"],
