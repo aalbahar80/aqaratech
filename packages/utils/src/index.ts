@@ -6,3 +6,4 @@ export {
 	EntityNames,
 	NonDBEntitiesMap,
 } from "./entity-map";
+export { isEntity } from "./is-entity";

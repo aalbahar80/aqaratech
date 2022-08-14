@@ -7,7 +7,7 @@ type FindIdFromArray = string | undefined;
 export interface PredefinedRole {
 	entity: Entity;
 	entityId: string;
-	idField: DBEntitiesMap['idField'];
+	idField: NonNullable<DBEntitiesMap['idField']>;
 	roleType: RoleTypeEnum;
 }
 
