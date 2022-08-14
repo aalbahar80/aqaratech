@@ -55,7 +55,6 @@ export class PropertiesController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiPaginatedResponse(PropertyDto)
   findAll(
     @User() user: IUser,
@@ -65,10 +64,9 @@ export class PropertiesController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiOkResponse({ type: PropertyDto })
-  findOne(@Param('id') id: string): Promise<PropertyDto> {
-    return this.propertiesService.findOne({ id });
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
+    return this.propertiesService.findOne({ id, user });
   }
 
   @Patch(':id')

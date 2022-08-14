@@ -73,9 +73,11 @@ export class PropertiesService {
     return { total, results: results.map((p) => new PropertyDto(p)) };
   }
 
-  async findOne({ id }: { id: string }) {
-    const property = await this.prisma.property.findUnique({
-      where: { id },
+  async findOne({ id, user }: { id: string; user: IUser }) {
+    const property = await this.prisma.property.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Read).Property],
+      },
       include: { portfolio: crumbs.portfolio },
     });
 
