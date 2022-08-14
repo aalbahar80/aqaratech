@@ -1,6 +1,7 @@
 import { ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
-import { ForbiddenError, subject } from '@casl/ability';
+import { accessibleBy } from '@casl/prisma';
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import { DBEntity, entitiesMap } from '@self/utils';
 import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -11,6 +12,7 @@ import {
   FileRequestDto,
 } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
@@ -18,6 +20,7 @@ export class FilesService {
   constructor(
     private s3: S3Service,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private prisma: PrismaService,
   ) {}
 
   private readonly logger = new Logger(FilesService.name);
@@ -37,10 +40,12 @@ export class FilesService {
       `Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
     );
 
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(entity, { id: entityId }),
-    );
+    await this.canAccess({
+      entity,
+      entityId,
+      user,
+      action: Action.Update,
+    });
 
     // bust cache for file and directory (prefix)
     this.logger.debug(`CACHE BUST: key: ${key}`);
@@ -67,10 +72,12 @@ export class FilesService {
   }): Promise<WithCount<FileDto>> {
     const { bucket, directory, entity, entityId } = directoryRequestDto;
 
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Read,
-      subject(entity, { id: entityId }),
-    );
+    await this.canAccess({
+      entity,
+      entityId,
+      user,
+      action: Action.Read,
+    });
 
     type s3Objects = ListObjectsV2CommandOutput | undefined;
     let objects: s3Objects;
@@ -112,10 +119,12 @@ export class FilesService {
   }) {
     const { key, bucket, entity, entityId } = fileRequestDto;
 
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Read,
-      subject(entity, { id: entityId }),
-    );
+    await this.canAccess({
+      entity,
+      entityId,
+      user,
+      action: Action.Read,
+    });
 
     // attempt to get from cache
     let presignedUrl: string;
@@ -153,10 +162,12 @@ export class FilesService {
   }) {
     const { key, directory, bucket, entity, entityId } = fileRequestDto;
 
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Delete,
-      subject(entity, { id: entityId }),
-    );
+    await this.canAccess({
+      entity,
+      entityId,
+      user,
+      action: Action.Update,
+    });
 
     // bust cache for file and directory (prefix)
     this.logger.debug(`CACHE BUST: key: ${key} - directory: ${directory}`);
@@ -166,6 +177,29 @@ export class FilesService {
     await this.s3.removeObject({
       Bucket: bucket,
       Key: key,
+    });
+  }
+
+  async canAccess({
+    entity,
+    entityId,
+    user,
+    action,
+  }: {
+    entity: DBEntity;
+    entityId: string;
+    user: IUser;
+    action: Action;
+  }) {
+    const entityMap = entitiesMap[entity];
+    // @ts-ignore
+    await this.prisma[entity].findFirstOrThrow({
+      where: {
+        AND: [
+          { id: entityId },
+          accessibleBy(user.ability, action)[entityMap.caslName],
+        ],
+      },
     });
   }
 }

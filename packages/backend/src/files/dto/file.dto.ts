@@ -25,7 +25,7 @@ export class DirectoryRequestDto {
 
     // use getters instead?
     const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
-    this.entity = entitiesMap[relationKey].caslName;
+    this.entity = entitiesMap[relationKey].singular;
 
     this.entityId = directory.split('/')[1];
   }
@@ -37,7 +37,7 @@ export class DirectoryRequestDto {
   directory: string; // aka prefix, used as cache key
 
   @IsString()
-  entity: DBEntitiesMap['caslName']; // for ability check
+  entity: DBEntitiesMap['singular']; // for ability check
 
   @IsID()
   entityId: string; // for ability check
