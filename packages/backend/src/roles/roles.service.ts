@@ -3,6 +3,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
@@ -138,7 +139,10 @@ export class RolesService {
     const { page, take } = pageOptionsDto;
 
     const filter: Prisma.RoleWhereInput = {
-      AND: [accessibleBy(user.ability).Role, ...(where ? [where] : [])],
+      AND: [
+        accessibleBy(user.ability, Action.Read).Role,
+        ...(where ? [where] : []),
+      ],
     };
 
     // TODO fix filter/select

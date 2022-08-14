@@ -15,8 +15,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -90,7 +88,6 @@ export class PortfoliosController {
   }
 
   @Get(':id/roles')
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,
@@ -102,7 +99,6 @@ export class PortfoliosController {
   }
 
   @Get(':id/properties')
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(PropertyDto)
   findProperties(
     @User() user: IUser,
@@ -114,7 +110,6 @@ export class PortfoliosController {
   }
 
   @Get(':id/units')
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(UnitDto)
   findUnits(
     @User() user: IUser,
