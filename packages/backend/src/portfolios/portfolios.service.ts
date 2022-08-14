@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import * as R from 'remeda';
@@ -17,17 +16,21 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class PortfoliosService {
   constructor(private prisma: PrismaService) {}
 
-  create({
+  async create({
     createPortfolioDto,
     user,
   }: {
     createPortfolioDto: CreatePortfolioDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('Portfolio', createPortfolioDto),
-    );
+    await this.prisma.organization.findFirstOrThrow({
+      where: {
+        AND: [
+          { id: createPortfolioDto.organizationId },
+          accessibleBy(user.ability, Action.Update).Organization,
+        ],
+      },
+    });
 
     const toCreate = R.omit(createPortfolioDto, ['organizationId']);
     return this.prisma.portfolio.create({
@@ -80,10 +83,11 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject('Portfolio', { id, ...updatePortfolioDto }),
-    );
+    await this.prisma.portfolio.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Update).Portfolio],
+      },
+    });
 
     return this.prisma.portfolio.update({
       where: { id },
@@ -91,7 +95,13 @@ export class PortfoliosService {
     });
   }
 
-  async remove({ id }: { id: string }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
+    await this.prisma.portfolio.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Delete).Portfolio],
+      },
+    });
+
     return this.prisma.portfolio.delete({ where: { id } });
   }
 }

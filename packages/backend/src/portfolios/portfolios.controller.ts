@@ -50,7 +50,6 @@ export class PortfoliosController {
   ) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
   @ApiCreatedResponse({ type: PortfolioDto })
   create(
     @User() user: IUser,
@@ -75,7 +74,6 @@ export class PortfoliosController {
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
   update(
     @User() user: IUser,
@@ -86,10 +84,9 @@ export class PortfoliosController {
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  remove(@Param('id') id: string): Promise<PortfolioDto> {
-    return this.portfoliosService.remove({ id });
+  remove(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
+    return this.portfoliosService.remove({ id, user });
   }
 
   @Get(':id/roles')
