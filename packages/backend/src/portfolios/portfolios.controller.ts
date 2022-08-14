@@ -60,7 +60,6 @@ export class PortfoliosController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(PortfolioDto)
   findAll(
     @User() user: IUser,
@@ -70,10 +69,9 @@ export class PortfoliosController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
-  findOne(@Param('id') id: string): Promise<PortfolioDto> {
-    return this.portfoliosService.findOne({ id });
+  findOne(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
+    return this.portfoliosService.findOne({ id, user });
   }
 
   @Patch(':id')

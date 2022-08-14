@@ -52,18 +52,22 @@ export class PortfoliosService {
         take,
         skip: (page - 1) * take,
         orderBy: { createdAt: 'desc' },
-        where: accessibleBy(user.ability).Portfolio,
+        where: accessibleBy(user.ability, Action.Read).Portfolio,
       }),
       this.prisma.portfolio.count({
-        where: accessibleBy(user.ability).Portfolio,
+        where: accessibleBy(user.ability, Action.Read).Portfolio,
       }),
     ]);
 
     return { total, results };
   }
 
-  async findOne({ id }: { id: string }) {
-    const data = await this.prisma.portfolio.findUnique({ where: { id } });
+  async findOne({ id, user }: { id: string; user: IUser }) {
+    const data = await this.prisma.portfolio.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Read).Portfolio],
+      },
+    });
     return data;
   }
 
