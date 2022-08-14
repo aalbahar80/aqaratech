@@ -1,6 +1,2 @@
 export { Entity } from "./entity";
-export {
-	EntityIdField,
-	EntityNames as EntityName,
-	entityNameMap,
-} from "./entity-map";
+export { entitiesMap, EntityIdField, EntityNames } from "./entity-map";
