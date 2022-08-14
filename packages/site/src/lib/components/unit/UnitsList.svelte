@@ -9,7 +9,7 @@
 	export let units: PaginatedUnitDto;
 
 	const formUrl = create({
-		entity: 'units',
+		entity: 'unit',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
 			new Map<string, any>([
@@ -18,7 +18,7 @@
 	});
 </script>
 
-<StackedList entityTitle="units" count={units.results.length} {formUrl}>
+<StackedList entity="unit" count={units.results.length} {formUrl}>
 	{#each units.results as unit (unit.id)}
 		<li>
 			<UnitCard {unit} />

@@ -9,7 +9,7 @@
 	export let portfolios: PaginatedPortfolioDto;
 
 	const formUrl = create({
-		entity: 'portfolios',
+		entity: 'portfolio',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
 			new Map<string, any>([
@@ -18,11 +18,7 @@
 	});
 </script>
 
-<StackedList
-	entityTitle="portfolios"
-	count={portfolios.results.length}
-	{formUrl}
->
+<StackedList entity="portfolio" count={portfolios.results.length} {formUrl}>
 	{#each portfolios.results as portfolio (portfolio.id)}
 		<li>
 			<PortfolioCard {portfolio} />

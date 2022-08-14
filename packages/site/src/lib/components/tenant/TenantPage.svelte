@@ -7,7 +7,7 @@
 	export let tenant: TenantDto;
 </script>
 
-<Heading title="Tenant" id={tenant.id} entity="tenants">
+<Heading title="Tenant" id={tenant.id} entity="tenant">
 	<svelte:fragment slot="actions">
 		<Button
 			icon={Collection}

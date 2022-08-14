@@ -137,7 +137,7 @@
 {#if formType === 'update'}
 	<Form
 		schema={updateSchema}
-		entityTitle="leases"
+		entity="lease"
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
@@ -150,7 +150,7 @@
 {:else}
 	<Form
 		schema={createSchema}
-		entityTitle="leases"
+		entity="lease"
 		{formType}
 		{basicFields}
 		{relationalFields}

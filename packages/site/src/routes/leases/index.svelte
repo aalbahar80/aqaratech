@@ -132,7 +132,7 @@
 <div class="">
 	<LeaseList
 		{leases}
-		formUrl={create({ entity: 'leases' })}
+		formUrl={create({ entity: 'lease' })}
 		--border-radius-b="0"
 	/>
 </div>

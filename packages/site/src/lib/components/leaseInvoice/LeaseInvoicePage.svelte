@@ -30,7 +30,7 @@
 	const { label, color: badgeColor } = getInvoiceBadge(trx);
 </script>
 
-<Heading title="Invoice" id={trx.id} entity="leaseInvoices">
+<Heading title="Invoice" id={trx.id} entity="leaseInvoice">
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={trx.breadcrumbs} />
 	</svelte:fragment>

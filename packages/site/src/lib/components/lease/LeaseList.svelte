@@ -11,7 +11,7 @@
 	export let formUrl: string;
 </script>
 
-<StackedList entityTitle="leases" count={leases.results.length} {formUrl}>
+<StackedList entity="lease" count={leases.results.length} {formUrl}>
 	{#each leases.results as lease, index (lease.id)}
 		<li in:fade|local={{ duration: 200 }} animate:flip={{ duration: 200 }}>
 			<LeaseCard

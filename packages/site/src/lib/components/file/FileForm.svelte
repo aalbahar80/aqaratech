@@ -40,7 +40,7 @@
 
 <Form
 	{schema}
-	entityTitle="files"
+	entity="file"
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {

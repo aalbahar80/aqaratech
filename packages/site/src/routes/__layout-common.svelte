@@ -7,7 +7,6 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { protectRoute } from '$lib/utils/protect-route';
-	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
 	import type { Load } from './__types/__layout-common';

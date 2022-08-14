@@ -119,7 +119,7 @@
 <LeaseList
 	{leases}
 	formUrl={(function () {
-		const base = create({ entity: 'leases' });
+		const base = create({ entity: 'lease' });
 		const searchParams = new URLSearchParams({
 			portfolioId: unit.breadcrumbs.portfolio.id,
 			propertyId: unit.propertyId,

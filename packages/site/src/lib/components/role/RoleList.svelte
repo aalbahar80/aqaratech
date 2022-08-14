@@ -2,8 +2,8 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import type { ValidatedRoleDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
@@ -13,7 +13,7 @@
 </script>
 
 <StackedList
-	nameMap={entityNameMap.roles}
+	entityMap={entitiesMap.role}
 	count={roles.length}
 	{formUrl}
 	hideActions={false}
@@ -42,7 +42,7 @@
 	{/each}
 	<div slot="emptyState">
 		<EmptyState
-			nameMap={entityNameMap.roles}
+			entityMap={entitiesMap.role}
 			message="No roles have been created yet."
 			buttonText="Create new organization"
 			{formUrl}

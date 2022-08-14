@@ -21,7 +21,7 @@
 <Heading
 	title="Organization"
 	id={organization.id}
-	entity="organizations"
+	entity="organization"
 	{onDelete}
 />
 <DetailsPane {details} />

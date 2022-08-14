@@ -1,22 +1,21 @@
 <script context="module" lang="ts">
 	import RoleForm from '$lib/components/role/RoleForm.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import type { PredefinedRole } from '$lib/models/interfaces/predefined.interface';
-	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import { entitiesMap, type Entity } from '@self/utils';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ url }: LoadEvent) => {
 		// Check correct url params are present
-		const entity = url.searchParams.get('entity') as EntityTitle | null;
+		const entity = url.searchParams.get('entity') as Entity | null;
 		const entityId = url.searchParams.get('entityId');
 
 		let roleType: PredefinedRole['roleType'] | undefined = undefined;
-		if (entity === 'organizations') {
+		if (entity === 'organization') {
 			roleType = 'ORGADMIN';
-		} else if (entity === 'portfolios') {
+		} else if (entity === 'portfolio') {
 			roleType = 'PORTFOLIO';
-		} else if (entity === 'tenants') {
+		} else if (entity === 'tenant') {
 			roleType = 'TENANT';
 		}
 
@@ -24,7 +23,7 @@
 			throw new Error('No predefined role in url');
 		}
 
-		const idField = entityNameMap[entity]?.idField as string | undefined;
+		const idField = entitiesMap[entity]?.idField as string | undefined;
 
 		if (!idField) {
 			throw new Error('Unable to get idField');

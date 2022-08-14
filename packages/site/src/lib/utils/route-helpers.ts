@@ -1,8 +1,4 @@
-import {
-	entityNameMap,
-	type EntityIdField,
-	type EntityTitle,
-} from '$lib/constants/names';
+import { entitiesMap, type EntitiesMap, type Entity } from '@self/utils';
 
 type Predefined = Map<string, any> | false | undefined;
 
@@ -10,10 +6,10 @@ export const create = ({
 	entity,
 	predefined,
 }: {
-	entity: EntityTitle;
+	entity: Entity;
 	predefined?: Predefined;
 }) => {
-	const formBaseUrl = `/${entityNameMap[entity].urlName}/new`;
+	const formBaseUrl = `/${entitiesMap[entity].urlName}/new`;
 
 	if (predefined) {
 		return `${formBaseUrl}?${new URLSearchParams([...predefined])}`;
@@ -30,7 +26,7 @@ export const settings = (orgId: string) => ({
 const inferRoute = (pathname: string) => {
 	const [, entity, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
 	if (entity && id) {
-		return { entity: entity as EntityTitle, id };
+		return { entity: entity as Entity, id };
 	} else {
 		throw new Error(`Could not infer route from pathname: ${pathname}`);
 	}
@@ -48,8 +44,10 @@ export const createFileHref = (pathname: string) => {
 	return href;
 };
 
-export const idFieldToUrlName = (field: EntityIdField) => {
-	const entity = Object.entries(entityNameMap).find(
+export const idFieldToUrlName = <T extends Entity>(
+	field: EntitiesMap<T>['idField'],
+): EntitiesMap<T>['urlName'] => {
+	const entity = Object.entries(entitiesMap).find(
 		([, value]) => value.idField === field,
 	);
 	if (entity) {

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { addToast } from '$lib/stores/toast';
+	import { entitiesMap, type Entity } from '@self/utils';
 	import Modal from './Modal.svelte';
 
 	export let id: string;
-	export let entity: EntityTitle;
+	export let entity: Entity;
 	export let isOpen: boolean;
 	export let onDelete: (() => void) | undefined = undefined;
 
@@ -15,7 +15,8 @@
 	const handleConfirm = async () => {
 		isLoading = true;
 		try {
-			await $page.stuff.api[entity].remove({ id });
+			const plural = entitiesMap[entity].plural;
+			await $page.stuff.api[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
 			if (onDelete) {

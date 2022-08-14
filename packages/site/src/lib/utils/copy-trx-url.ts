@@ -1,9 +1,9 @@
-import { entityNameMap } from '$lib/constants/names';
 import { addToast } from '$lib/stores/toast';
+import { entitiesMap } from '@self/utils';
 
 export const copyTrxUrl = (id: string, origin: string) => {
 	navigator.clipboard
-		.writeText(`${origin}/${entityNameMap.leaseInvoices.urlName}/${id}`)
+		.writeText(`${origin}/${entitiesMap.leaseInvoice.urlName}/${id}`)
 		.catch((e) => {
 			console.error(e);
 			addToast({

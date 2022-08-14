@@ -79,7 +79,7 @@
 {#if formType === 'update'}
 	<Form
 		{schema}
-		entityTitle="tenants"
+		entity="tenant"
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
@@ -92,7 +92,7 @@
 {:else}
 	<Form
 		{schema}
-		entityTitle="tenants"
+		entity="tenant"
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {

@@ -12,12 +12,12 @@
 	export let portfolio: PortfolioDto;
 </script>
 
-<Heading title="Portfolio" id={portfolio.id} entity="portfolios">
+<Heading title="Portfolio" id={portfolio.id} entity="portfolio">
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
 				href={create({
-					entity: 'expenses',
+					entity: 'expense',
 					predefined: new Map([['portfolioId', portfolio.id]]),
 				})}
 			>

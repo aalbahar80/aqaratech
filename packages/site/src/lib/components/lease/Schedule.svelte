@@ -3,9 +3,9 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import type { LeaseDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';
@@ -38,7 +38,7 @@
 		});
 		console.debug(created);
 
-		goto(`/${entityNameMap.leases.urlName}/${lease.id}`);
+		goto(`/${entitiesMap.lease.urlName}/${lease.id}`);
 	};
 </script>
 

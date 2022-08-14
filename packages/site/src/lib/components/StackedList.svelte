@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { session } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import { entityNameMap } from '$lib/constants/names';
-	import type { EntityTitle } from '$lib/models/types/entity.type';
+	import { entitiesMap, type Entity } from '@self/utils';
 
 	export let count: number;
 	export let formUrl: string;
 	// TODO make type either nameMap or EntityTitle
-	export let entityTitle: EntityTitle | undefined = undefined;
-	export let nameMap = entityTitle ? entityNameMap[entityTitle] : undefined;
+	export let entity: Entity | undefined = undefined;
+	export let entityMap = entity ? entitiesMap[entity] : undefined;
 
 	export let hideActions = $session.user?.role?.roleType !== 'ORGADMIN';
 </script>
@@ -24,7 +23,7 @@
 			>
 				<div class="ml-4 mt-2">
 					<h3 class="text-lg font-medium leading-6 text-gray-900">
-						{nameMap?.pluralCap}
+						{entityMap?.pluralCap}
 					</h3>
 				</div>
 
@@ -35,7 +34,7 @@
 								href={formUrl}
 								class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 							>
-								Create new {nameMap?.singular}
+								Create new {entityMap?.singular}
 							</a>
 						</slot>
 					</div>
@@ -48,7 +47,7 @@
 		</ul>
 	{:else}
 		<slot name="emptyState">
-			<EmptyState {nameMap} {formUrl} />
+			<EmptyState {entityMap} {formUrl} />
 		</slot>
 	{/if}
 </section>

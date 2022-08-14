@@ -9,6 +9,7 @@ export interface EntityNames {
 	pluralCap: string;
 	idField: string | null;
 }
+type EntityMap = Record<Entity, EntityNames>;
 
 export type EntitiesMap<T extends Entity> = typeof entitiesMap[T];
 export type DBEntitiesMap = EntitiesMap<DBEntity>;
@@ -141,7 +142,7 @@ const file = satisfies<EntityNames>()({
 	idField: null,
 });
 
-export const entitiesMap = {
+export const entitiesMap = satisfies<EntityMap>()({
 	tenant,
 	portfolio,
 	property,
@@ -155,4 +156,4 @@ export const entitiesMap = {
 	member,
 	expenseCategory,
 	file,
-};
+});

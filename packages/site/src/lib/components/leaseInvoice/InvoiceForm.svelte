@@ -84,7 +84,7 @@
 	<Form
 		schema={updateSchema}
 		{warnSchema}
-		entityTitle="leaseInvoices"
+		entity="leaseInvoice"
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
@@ -98,7 +98,7 @@
 	<Form
 		schema={createSchema}
 		{warnSchema}
-		entityTitle="leaseInvoices"
+		entity="leaseInvoice"
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>

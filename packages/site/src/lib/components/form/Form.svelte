@@ -4,12 +4,11 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/inputs/SelectEntity.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import type { Field, SelectField } from '$lib/models/classes/Field.class';
-	import type { EntityTitle } from '$lib/models/types/entity.type';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
 	import { ResponseError } from '@self/sdk';
+	import { entitiesMap, type Entity } from '@self/utils';
 	import { createForm } from 'felte';
 	import type { z, ZodSchema } from 'zod';
 
@@ -19,7 +18,7 @@
 	export let formType: 'create' | 'update';
 	export let schema: Schema;
 	export let warnSchema: ZodSchema | undefined = undefined;
-	export let entityTitle: EntityTitle;
+	export let entity: Entity;
 	export let basicFields: Field[];
 	export let relationalFields: SelectField[] = [];
 	export let onSubmit: (values: z.infer<Schema>) => Promise<Submitted>;
@@ -30,7 +29,7 @@
 		} else if ('id' in value) {
 			id = value.id;
 		}
-		return goto(`/${entityNameMap[entityTitle].urlName}/${id}`);
+		return goto(`/${entitiesMap[entity].urlName}/${id}`);
 	};
 
 	$: noErrorMsg = Object.values($errors).every((e) => e === null);
@@ -101,7 +100,7 @@
 		<div class="flex flex-col justify-between">
 			<div class="divide-y divide-gray-200 px-4 sm:px-6">
 				<h1 class="py-4 text-lg font-medium text-gray-700">
-					{formType === 'update' ? 'Edit ' : 'Add '}{entityNameMap[entityTitle]
+					{formType === 'update' ? 'Edit ' : 'Add '}{entitiesMap[entity]
 						.singularCap}
 				</h1>
 				<div class="space-y-6 pt-6 pb-5">

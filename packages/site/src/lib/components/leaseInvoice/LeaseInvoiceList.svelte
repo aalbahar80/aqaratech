@@ -12,10 +12,10 @@
 
 <!-- TODO handle pagination -->
 <StackedList
-	entityTitle="leaseInvoices"
+	entity="leaseInvoice"
 	count={leaseInvoices.results.length}
 	formUrl={create({
-		entity: 'leaseInvoices',
+		entity: 'leaseInvoice',
 		predefined: new Map([['leaseId', leaseId]]),
 	})}
 >

@@ -5,12 +5,12 @@
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { LeaseInvoiceDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarDay from '~icons/fa6-solid/calendar-day';
 	import Fa6SolidEye from '~icons/fa6-solid/eye';
@@ -60,7 +60,7 @@
 				<div slot="menu">
 					<DropdownMenu>
 						<MenuItem as="div" let:active>
-							<a href={`/${entityNameMap.leaseInvoices.urlName}/${invoice.id}`}>
+							<a href={`/${entitiesMap.leaseInvoice.urlName}/${invoice.id}`}>
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidEye} />
 									View

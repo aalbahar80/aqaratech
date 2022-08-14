@@ -1,13 +1,13 @@
-import type { EntityTitle } from '$lib/models/types/entity.type';
 import type { RoleTypeEnum } from '@self/sdk';
+import type { DBEntitiesMap, Entity } from '@self/utils';
 
 type SearchParam = string | null;
 type FindIdFromArray = string | undefined;
 
 export interface PredefinedRole {
-	entity: EntityTitle;
+	entity: Entity;
 	entityId: string;
-	idField: string;
+	idField: DBEntitiesMap['idField'];
 	roleType: RoleTypeEnum;
 }
 

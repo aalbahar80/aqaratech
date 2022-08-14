@@ -6,7 +6,7 @@
 	export let expense: ExpenseDto;
 </script>
 
-<Heading title="Expense" id={expense.id} entity="expenses">
+<Heading title="Expense" id={expense.id} entity="expense">
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={expense.breadcrumbs} />
 	</svelte:fragment>

@@ -4,16 +4,16 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { entityNameMap } from '$lib/constants/names';
 	import { create } from '$lib/utils/route-helpers';
 	import type { PaginatedRoleDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: PaginatedRoleDto;
 
 	const formUrl = create({
-		entity: 'roles',
+		entity: 'role',
 		predefined: new Map<string, any>([
 			['entity', $page.url.pathname.split('/')[1]],
 			['entityId', $page.url.pathname.split('/')[2]],
@@ -21,7 +21,7 @@
 	});
 </script>
 
-<StackedList entityTitle="members" count={roles.results.length} {formUrl}>
+<StackedList entity="member" count={roles.results.length} {formUrl}>
 	{#each roles.results as role (role.id)}
 		{@const icons = [
 			{
@@ -46,7 +46,7 @@
 	{/each}
 	<div slot="emptyState">
 		<EmptyState
-			nameMap={entityNameMap.members}
+			entityMap={entitiesMap.member}
 			message="No members have been invited yet."
 			buttonText="Invite member"
 			{formUrl}

@@ -74,7 +74,7 @@
 <LeaseList
 	{leases}
 	formUrl={(function () {
-		const base = create({ entity: 'leases' });
+		const base = create({ entity: 'lease' });
 		const searchParams = new URLSearchParams({
 			tenantId: tenant.id,
 		});

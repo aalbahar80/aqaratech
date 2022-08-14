@@ -19,7 +19,7 @@
 </script>
 
 <StackedList
-	entityTitle="organizations"
+	entity="organization"
 	count={organizations.results.length}
 	{formUrl}
 >

@@ -9,7 +9,7 @@
 	export let tenants: PaginatedTenantDto;
 
 	const formUrl = create({
-		entity: 'tenants',
+		entity: 'tenant',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
 			new Map<string, any>([
@@ -18,7 +18,7 @@
 	});
 </script>
 
-<StackedList entityTitle="tenants" count={tenants.results.length} {formUrl}>
+<StackedList entity="tenant" count={tenants.results.length} {formUrl}>
 	{#each tenants.results as tenant (tenant.id)}
 		<li>
 			<TenantCard {tenant} />

@@ -25,7 +25,7 @@
 	const badge = getLeaseBadge(lease);
 </script>
 
-<Heading title="Lease" id={lease.id} entity="leases" {icons}>
+<Heading title="Lease" id={lease.id} entity="lease" {icons}>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={lease.breadcrumbs} />
 	</svelte:fragment>
@@ -36,7 +36,7 @@
 			text="Renew"
 			as="a"
 			href={(function () {
-				const base = create({ entity: 'leases' });
+				const base = create({ entity: 'lease' });
 				const searchParams = new URLSearchParams({
 					portfolioId: lease.breadcrumbs.portfolio.id,
 					tenantId: lease.breadcrumbs.tenant.id,

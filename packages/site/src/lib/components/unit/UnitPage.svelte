@@ -41,12 +41,12 @@
 	];
 </script>
 
-<Heading title="Unit" id={unit.id} entity="units" {icons}>
+<Heading title="Unit" id={unit.id} entity="unit" {icons}>
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
 				href={create({
-					entity: 'expenses',
+					entity: 'expense',
 					predefined: new Map([
 						['portfolioId', unit.breadcrumbs.portfolio.id],
 						['propertyId', unit.propertyId],
