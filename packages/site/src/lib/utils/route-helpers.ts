@@ -1,5 +1,8 @@
-import { entityNameMap, type EntityIdField } from '$lib/constants/names';
-import type { EntityTitle } from '$lib/models/types/entity.type';
+import {
+	entityNameMap,
+	type EntityIdField,
+	type EntityTitle,
+} from '$lib/constants/names';
 
 type Predefined = Map<string, any> | false | undefined;
 
@@ -36,7 +39,7 @@ const inferRoute = (pathname: string) => {
 export const createFileHref = (pathname: string) => {
 	const current = inferRoute(pathname);
 	const href = create({
-		entity: 'files',
+		entity: 'file',
 		predefined: new Map([
 			['relationKey', current.entity],
 			['relationValue', current.id],

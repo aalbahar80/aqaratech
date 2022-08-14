@@ -1,14 +1,14 @@
 import { satisfies } from 'src/utils/satisfies';
 
 type EntityTitle =
-  | 'tenants'
-  | 'portfolios'
-  | 'properties'
-  | 'expenses'
-  | 'units'
-  | 'leases'
-  | 'leaseInvoices'
-  | 'maintenanceOrders';
+  | 'tenant'
+  | 'portfolio'
+  | 'property'
+  | 'unit'
+  | 'lease'
+  | 'leaseInvoice'
+  | 'expense'
+  | 'maintenanceOrder';
 
 export interface EntityName {
   urlName: string;
@@ -16,11 +16,13 @@ export interface EntityName {
   singularCap: string;
   plural: string;
   pluralCap: string;
-  idField: string;
+  idField: string | null;
 }
+
 type EntityNameMap = Record<EntityTitle, EntityName>;
 export type EntityIdField = typeof entityMap[EntityTitle]['idField'];
 export type EntitySingularCap = typeof entityMap[EntityTitle]['singularCap'];
+export type EntitySingular = typeof entityMap[EntityTitle]['singular'];
 
 const tenant = satisfies<EntityName>()({
   urlName: 'tenants',
@@ -67,14 +69,13 @@ const lease = satisfies<EntityName>()({
   idField: 'leaseId',
 });
 
-// change to leaseInvoice
-const invoice = satisfies<EntityName>()({
-  urlName: 'invoices',
-  singular: 'invoice',
-  singularCap: 'LeaseInvoice',
-  plural: 'invoices',
-  pluralCap: 'Invoices',
-  idField: 'leaseInvoiceId',
+const leaseInvoice = satisfies<EntityName>()({
+  urlName: 'leaseInvoices',
+  singular: 'leaseInvoice',
+  singularCap: 'Lease Invoice',
+  plural: 'leaseInvoices',
+  pluralCap: 'Lease Invoices',
+  idField: null,
 });
 
 const expense = satisfies<EntityName>()({
@@ -83,25 +84,25 @@ const expense = satisfies<EntityName>()({
   singularCap: 'Expense',
   plural: 'expenses',
   pluralCap: 'Expenses',
-  idField: 'expenseId',
+  idField: null,
 });
 
 const maintenanceOrder = satisfies<EntityName>()({
   urlName: 'maintenanceOrders',
   singular: 'maintenanceOrder',
-  singularCap: 'MaintenanceOrder',
+  singularCap: 'Maintenance Order',
   plural: 'maintenanceOrders',
-  pluralCap: 'MaintenanceOrders',
-  idField: 'maintenanceOrderId',
+  pluralCap: 'Maintenance Orders',
+  idField: null,
 });
 
 export const entityMap = satisfies<EntityNameMap>()({
-  tenants: tenant,
-  portfolios: portfolio,
-  properties: property,
-  units: unit,
-  expenses: expense,
-  leases: lease,
-  leaseInvoices: invoice,
-  maintenanceOrders: maintenanceOrder,
+  tenant,
+  portfolio,
+  property,
+  unit,
+  expense,
+  lease,
+  leaseInvoice,
+  maintenanceOrder,
 });

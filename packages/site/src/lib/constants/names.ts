@@ -1,5 +1,19 @@
-import type { EntityTitle } from '$lib/models/types/entity.type';
 import { satisfies } from '$lib/utils/satisfies';
+
+export type EntityTitle =
+	| 'tenant'
+	| 'portfolio'
+	| 'property'
+	| 'unit'
+	| 'lease'
+	| 'leaseInvoice'
+	| 'expense'
+	| 'maintenanceOrder'
+	| 'organization'
+	| 'role'
+	| 'member'
+	| 'expenseCategory'
+	| 'file';
 
 export interface EntityName {
 	urlName: string;
@@ -7,39 +21,11 @@ export interface EntityName {
 	singularCap: string;
 	plural: string;
 	pluralCap: string;
-	idField: string;
+	idField: string | null;
 }
 type EntityNameMap = Record<EntityTitle, EntityName>;
 export type EntityIdField = typeof entityNameMap[EntityTitle]['idField'];
 
-const organization = satisfies<EntityName>()({
-	urlName: 'organizations',
-	singular: 'organization',
-	singularCap: 'Organization',
-	plural: 'organizations',
-	pluralCap: 'Organizations',
-	idField: 'organizationId',
-});
-
-const role = satisfies<EntityName>()({
-	urlName: 'roles',
-	plural: 'roles',
-	pluralCap: 'Roles',
-	singular: 'organization',
-	singularCap: 'Role',
-	idField: '',
-});
-
-const member = satisfies<EntityName>()({
-	urlName: 'roles',
-	singular: 'member',
-	singularCap: 'Member',
-	plural: 'members',
-	pluralCap: 'Members',
-	idField: '',
-});
-
-// do the same for tenant,unit,property,lease,invoice,maintenanceOrder, and expense
 const tenant = satisfies<EntityName>()({
 	urlName: 'tenants',
 	singular: 'tenant',
@@ -85,13 +71,13 @@ const lease = satisfies<EntityName>()({
 	idField: 'leaseId',
 });
 
-const invoice = satisfies<EntityName>()({
-	urlName: 'invoices',
-	singular: 'invoice',
-	singularCap: 'Invoice',
-	plural: 'invoices',
-	pluralCap: 'Invoices',
-	idField: 'leaseInvoiceId',
+const leaseInvoice = satisfies<EntityName>()({
+	urlName: 'leaseInvoices',
+	singular: 'leaseInvoice',
+	singularCap: 'Lease Invoice',
+	plural: 'leaseInvoices',
+	pluralCap: 'Lease Invoices',
+	idField: null,
 });
 
 const expense = satisfies<EntityName>()({
@@ -100,7 +86,43 @@ const expense = satisfies<EntityName>()({
 	singularCap: 'Expense',
 	plural: 'expenses',
 	pluralCap: 'Expenses',
-	idField: 'expenseId',
+	idField: null,
+});
+
+const maintenanceOrder = satisfies<EntityName>()({
+	urlName: 'maintenanceOrders',
+	singular: 'maintenanceOrder',
+	singularCap: 'Maintenance Order',
+	plural: 'maintenanceOrders',
+	pluralCap: 'Maintenance Orders',
+	idField: null,
+});
+
+const organization = satisfies<EntityName>()({
+	urlName: 'organizations',
+	singular: 'organization',
+	singularCap: 'Organization',
+	plural: 'organizations',
+	pluralCap: 'Organizations',
+	idField: 'organizationId',
+});
+
+const role = satisfies<EntityName>()({
+	urlName: 'roles',
+	plural: 'roles',
+	pluralCap: 'Roles',
+	singular: 'organization',
+	singularCap: 'Role',
+	idField: '',
+});
+
+const member = satisfies<EntityName>()({
+	urlName: 'roles',
+	singular: 'member',
+	singularCap: 'Member',
+	plural: 'members',
+	pluralCap: 'Members',
+	idField: '',
 });
 
 const expenseCategory = satisfies<EntityName>()({
@@ -110,15 +132,6 @@ const expenseCategory = satisfies<EntityName>()({
 	plural: 'expense categories',
 	pluralCap: 'Expense Categories',
 	idField: '',
-});
-
-const maintenanceOrder = satisfies<EntityName>()({
-	urlName: 'maintenanceOrders',
-	singular: 'maintenanceOrder',
-	singularCap: 'MaintenanceOrder',
-	plural: 'maintenanceOrders',
-	pluralCap: 'MaintenanceOrders',
-	idField: 'maintenanceOrderId',
 });
 
 const file = satisfies<EntityName>()({
@@ -131,17 +144,17 @@ const file = satisfies<EntityName>()({
 });
 
 export const entityNameMap = satisfies<EntityNameMap>()({
-	organizations: organization,
-	roles: role,
-	members: member,
-	tenants: tenant,
-	portfolios: portfolio,
-	properties: property,
-	units: unit,
-	leases: lease,
-	leaseInvoices: invoice,
-	maintenanceOrders: maintenanceOrder,
-	expenses: expense,
-	expenseCategories: expenseCategory,
-	files: file,
+	tenant,
+	portfolio,
+	property,
+	unit,
+	expense,
+	lease,
+	leaseInvoice,
+	maintenanceOrder,
+	organization,
+	role,
+	member,
+	expenseCategory,
+	file,
 });
