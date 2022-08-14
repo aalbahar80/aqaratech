@@ -87,6 +87,10 @@ model Portfolio {
   maintenanceOrders MaintenanceOrder[]
   properties        Property[]
 
+  Unit         Unit[]
+  Lease        Lease[]
+  LeaseInvoice LeaseInvoice[]
+
   roles Role[]
 
   organizationId String
@@ -163,7 +167,6 @@ model Expense {
   id                 String            @id @default(uuid())
   unitId             String?
   propertyId         String?
-  portfolioId        String
   maintenanceOrderId String?
   categoryId         String?
   createdAt          DateTime          @default(now())
@@ -171,13 +174,15 @@ model Expense {
   amount             Float
   postAt             DateTime
   memo               String?
-  portfolio          Portfolio         @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
   property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
 
   @@index([portfolioId])
   @@index([propertyId])
@@ -205,33 +210,39 @@ model Lease {
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
   @@index([tenantId])
   @@index([unitId])
   @@index([organizationId])
+  @@index([portfolioId])
 }
 
 model MaintenanceOrder {
-  id          String     @id @default(uuid())
+  id          String    @id @default(uuid())
   tenantId    String?
   unitId      String?
   propertyId  String?
-  portfolioId String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   completedAt DateTime?
   title       String?
   description String?
   status      String?
-  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-  property    Property?  @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-  tenant      Tenant?    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-  unit        Unit?      @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  tenant      Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit        Unit?     @relation(fields: [unitId], references: [id], onDelete: Restrict)
   expenses    Expense[]
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
   @@index([organizationId])
+  @@index([portfolioId])
 }
 
 model Property {
@@ -279,8 +290,12 @@ model LeaseInvoice {
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
   @@index([leaseId])
   @@index([organizationId])
+  @@index([portfolioId])
 }
 
 model Unit {
@@ -305,6 +320,10 @@ model Unit {
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
 
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
   @@index([propertyId])
   @@index([organizationId])
+  @@index([portfolioId])
 }
