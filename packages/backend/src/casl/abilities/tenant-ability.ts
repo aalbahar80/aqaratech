@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Role } from '@prisma/client';
-import { Action, Resources, TCan } from 'src/casl/casl-ability.factory';
+import { Action, TCan } from 'src/casl/casl-ability.factory';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -9,40 +9,19 @@ export class TenantAbility {
 
   private readonly logger = new Logger(TenantAbility.name);
 
-  async define(role: Role, can: TCan) {
+  define(role: Role, can: TCan) {
     this.logger.log('Defining ability for role', role.id);
 
     if (role.roleType !== 'TENANT' || !role.tenantId) {
       throw new Error('roleType is not tenant or tenantId is not set');
     }
 
-    // TODO restrict fields
-    const leasesQ = this.prisma.lease.findMany({
-      select: { id: true },
-      where: { tenantId: { equals: role.tenantId } },
-    });
-
-    const maintenanceOrdersQ = this.prisma.maintenanceOrder.findMany({
-      select: { id: true },
-      where: { tenantId: { equals: role.tenantId } },
-    });
-
-    const [leases, maintenanceOrders] = await Promise.all([
-      leasesQ,
-      maintenanceOrdersQ,
-    ]);
-
-    const readable: TenantReadableResources = {
-      leases: leases.map((i) => i.id),
-      maintenanceOrders: maintenanceOrders.map((i) => i.id),
-    };
-
     can(Action.Read, 'Tenant', {
       id: { equals: role.tenantId },
     });
 
     can(Action.Read, ['Lease'], {
-      id: { in: readable.leases },
+      tenantId: { equals: role.tenantId },
     });
 
     // TODO some fields should be public
@@ -51,9 +30,7 @@ export class TenantAbility {
     });
 
     can(Action.Read, ['MaintenanceOrder'], {
-      id: { in: readable.maintenanceOrders },
+      tenantId: { equals: role.tenantId },
     });
   }
 }
-
-type TenantReadableResources = Pick<Resources, 'leases' | 'maintenanceOrders'>;
