@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -26,10 +25,14 @@ export class PropertiesService {
     createPropertyDto: CreatePropertyDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('Property', createPropertyDto),
-    );
+    await this.prisma.portfolio.findFirstOrThrow({
+      where: {
+        AND: [
+          { id: createPropertyDto.portfolioId },
+          accessibleBy(user.ability, Action.Update).Portfolio,
+        ],
+      },
+    });
 
     const toCreate = R.omit(createPropertyDto, ['portfolioId']);
     const created = await this.prisma.property.create({
@@ -93,10 +96,11 @@ export class PropertiesService {
     updatePropertyDto: UpdatePropertyDto;
     user: IUser;
   }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject('Property', { id, ...updatePropertyDto }),
-    );
+    await this.prisma.property.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Update).Property],
+      },
+    });
 
     const updated = await this.prisma.property.update({
       where: { id },
@@ -105,7 +109,12 @@ export class PropertiesService {
     return updated.id;
   }
 
-  async remove({ id }: { id: string }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
+    await this.prisma.property.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Delete).Property],
+      },
+    });
     const deleted = await this.prisma.property.delete({ where: { id } });
     return deleted.id;
   }
