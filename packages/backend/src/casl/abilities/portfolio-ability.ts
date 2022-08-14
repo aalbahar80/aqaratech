@@ -15,11 +15,11 @@ export class PortfolioAbility {
 
     // TODO: limit fields
     can(Action.Read, ['Role'], {
-      tenant: { leases: { some: { unit: { property: { portfolioId: { equals: role.portfolioId } } } } } }, // prettier-ignore
+      tenant: { leases: { some: { portfolioId: { equals: role.portfolioId } } } }, // prettier-ignore
     });
 
     can(Action.Read, 'Tenant', {
-      leases: { some: { unit: { property: { portfolioId: { equals: role.portfolioId } } } } }, // prettier-ignore
+      leases: { some: { portfolioId: { equals: role.portfolioId } } }, // prettier-ignore
     });
 
     can(Action.Read, ['Portfolio'], {
@@ -31,31 +31,23 @@ export class PortfolioAbility {
     });
 
     can(Action.Read, ['Unit'], {
-      property: { portfolioId: { equals: role.portfolioId } },
+      portfolioId: { equals: role.portfolioId },
     });
 
     can(Action.Read, ['Lease'], {
-      unit: { property: { portfolioId: { equals: role.portfolioId } } },
+      portfolioId: { equals: role.portfolioId },
     });
 
     can(Action.Read, ['LeaseInvoice'], {
-      lease: { unit: { property: { portfolioId: { equals: role.portfolioId } } } }, // prettier-ignore
+      portfolioId: { equals: role.portfolioId },
     });
 
     can(Action.Read, ['Expense'], {
-      OR: [
-        { portfolioId: { equals: role.portfolioId } },
-        { property: { portfolioId: { equals: role.portfolioId } } },
-        { unit: { property: { portfolioId: { equals: role.portfolioId } } } },
-      ],
+      portfolioId: { equals: role.portfolioId },
     });
 
     can(Action.Read, ['MaintenanceOrder'], {
-      OR: [
-        { portfolioId: { equals: role.portfolioId } },
-        { property: { portfolioId: { equals: role.portfolioId } } },
-        { unit: { property: { portfolioId: { equals: role.portfolioId } } } },
-      ],
+      portfolioId: { equals: role.portfolioId },
     });
   }
 }

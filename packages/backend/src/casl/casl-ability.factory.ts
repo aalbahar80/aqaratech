@@ -41,7 +41,7 @@ export class CaslAbilityFactory {
     const now = Date.now();
 
     const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
-    const { can, build } = new AbilityBuilder(AppAbility);
+    const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
     // We use email (NOT xRoleId) to find the user/role info.
     // Email is verified by Auth0/jwt, so it's safe to use.
@@ -67,7 +67,7 @@ export class CaslAbilityFactory {
     can(Action.Read, ['User'], { id: { equals: user.id } });
 
     if (role.roleType === 'ORGADMIN') {
-      this.orgAdminAbility.define(role, can);
+      this.orgAdminAbility.define(role, can, cannot);
     } else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
       this.portfolioAbility.define(role, can);
     } else if (role.roleType === 'TENANT' && role.tenantId) {
@@ -126,3 +126,4 @@ export interface Resources {
 // Can type exported for use in dependent ability classes.
 type TAbilityBuilder = AbilityBuilder<AppAbility>;
 export type TCan = TAbilityBuilder['can'];
+export type TCannot = TAbilityBuilder['cannot'];

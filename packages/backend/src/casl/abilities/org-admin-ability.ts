@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Role } from '@prisma/client';
-import { Action, TCan } from 'src/casl/casl-ability.factory';
+import { Action, TCan, TCannot } from 'src/casl/casl-ability.factory';
 
 @Injectable()
 export class OrgAdminAbility {
   private readonly logger = new Logger(OrgAdminAbility.name);
 
-  define(role: Role, can: TCan) {
+  define(role: Role, can: TCan, cannot: TCannot) {
     this.logger.log('Defining ability for role', role.id);
 
     if (role.roleType !== 'ORGADMIN') {
@@ -26,7 +26,6 @@ export class OrgAdminAbility {
       organizationId: { equals: role.organizationId },
     });
 
-    // TODO handle updating parentId's by adding a cannot clause
     can(Action.Manage, ['Tenant'], {
       organizationId: { equals: role.organizationId }, // new tenant
     });
@@ -36,37 +35,45 @@ export class OrgAdminAbility {
     });
 
     can(Action.Manage, ['Property'], {
-      portfolio: { organizationId: { equals: role.organizationId } },
+      organizationId: { equals: role.organizationId },
     });
 
     can(Action.Manage, ['Unit'], {
-      property: { portfolio: { organizationId: { equals: role.organizationId } } }, // prettier-ignore
+      organizationId: { equals: role.organizationId },
     });
 
     can(Action.Manage, ['Lease'], {
-      OR: [
-        { tenant: { organizationId: { equals: role.organizationId } } },
-        { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, // prettier-ignore
-      ],
+      organizationId: { equals: role.organizationId },
     });
 
     can(Action.Manage, ['LeaseInvoice'], {
-      OR: [
-        { lease: { tenant: { organizationId: { equals: role.organizationId } }, }, }, // prettier-ignore
-        { lease: { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, }, // prettier-ignore
-      ],
+      organizationId: { equals: role.organizationId },
     });
 
     can(Action.Manage, ['Expense'], {
-      OR: [
-        { portfolio: { organizationId: { equals: role.organizationId } } },
-        { property: { portfolio: { organizationId: { equals: role.organizationId } } } }, // prettier-ignore
-        { unit: { property: { portfolio: { organizationId: { equals: role.organizationId } } } } }, // prettier-ignore
-      ],
+      organizationId: { equals: role.organizationId },
     });
 
-    // can(Action.Manage, ['MaintenanceOrder'], {
-    //   organizationId: { equals: role.organizationId }, // new tenant
-    // });
+    can(Action.Manage, ['MaintenanceOrder'], {
+      organizationId: { equals: role.organizationId },
+    });
+
+    // These fields are never allowed to be updated. This is necessary to prevent data from going out of sync.
+    cannot(Action.Update, 'all', ['organizationId', 'portfolioId']);
+
+    // Restrict updating any foreign key.
+    cannot(Action.Update, 'all', [
+      'organizationId',
+      'portfolioId',
+      'propertyId',
+      'unitId',
+      'leaseId',
+      'leaseInvoiceId',
+      'expenseId',
+      'maintenanceOrderId',
+    ]);
+    // cannot(Action.Update, 'Unit', ['propertyId']);
+    // cannot(Action.Update, 'Lease', ['unitId', 'tenantId']);
+    // cannot(Action.Update, 'LeaseInvoice', ['leaseId']);
   }
 }
