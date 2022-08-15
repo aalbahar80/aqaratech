@@ -59,9 +59,7 @@ export class OrgAdminAbility {
     });
 
     // These fields are never allowed to be updated. This is necessary to prevent data from going out of sync.
-    cannot(Action.Update, 'all', ['organizationId', 'portfolioId']);
-
-    // Restrict updating any foreign key.
+    // Restrict updating any foreign key. Especially important for the organizationId, portfolioId, tenantId.
     cannot(Action.Update, 'all', [
       'organizationId',
       'portfolioId',
@@ -72,8 +70,5 @@ export class OrgAdminAbility {
       'expenseId',
       'maintenanceOrderId',
     ]);
-    // cannot(Action.Update, 'Unit', ['propertyId']);
-    // cannot(Action.Update, 'Lease', ['unitId', 'tenantId']);
-    // cannot(Action.Update, 'LeaseInvoice', ['leaseId']);
   }
 }
