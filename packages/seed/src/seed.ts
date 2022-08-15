@@ -111,12 +111,12 @@ export async function seed({
 	const properties = portfolios.flatMap((portfolio) =>
 		Array.from(
 			{ length: faker.datatype.number({ min: propertyMin, max: propertyMax }) },
-			() => fakeProperty(portfolio.id)
+			() => fakeProperty(portfolio.id, portfolio.organizationId)
 		)
 	);
 	const units = properties.flatMap((property) =>
 		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-			fakeUnit(property.id)
+			fakeUnit(property.id, property.organizationId)
 		)
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
@@ -191,7 +191,13 @@ export async function seed({
 	const leaseInvoices = leases.length
 		? leases.flatMap((lease) =>
 				Array.from({ length: trxPerLease }, (_, n) =>
-					fakeLeaseInvoice(lease.id, lease.monthlyRent, lease.start, n)
+					fakeLeaseInvoice(
+						lease.id,
+						lease.monthlyRent,
+						lease.start,
+						n,
+						lease.organizationId
+					)
 				)
 		  )
 		: [];
@@ -259,9 +265,18 @@ export async function seed({
 			expenses.push({
 				...expense,
 				portfolioId: portfolio.id,
+
 				...(includeProperty &&
-					randomProperty && { propertyId: randomProperty?.id }),
-				...(includeUnit && randomUnit && { unitId: randomUnit?.id }),
+					randomProperty && {
+						propertyId: randomProperty?.id,
+						organizationId: randomProperty?.organizationId,
+					}),
+
+				...(includeUnit &&
+					randomUnit && {
+						unitId: randomUnit?.id,
+						organizationId: randomUnit?.organizationId,
+					}),
 			});
 		}
 	});

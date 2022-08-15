@@ -135,7 +135,7 @@ export const fakeTenant = (orgId?: string) => {
 	};
 };
 
-export const fakeUnit = (propertyId?: string) => ({
+export const fakeUnit = (propertyId?: string, orgaizationId?: string) => ({
 	id: generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
@@ -148,9 +148,10 @@ export const fakeUnit = (propertyId?: string) => ({
 	type: faker.helpers.arrayElement(unitTypeValues),
 	usage: null,
 	propertyId: propertyId ?? generateId(),
+	organizationId: orgaizationId ?? generateId(),
 });
 
-export const fakeProperty = (portfolioId?: string) => {
+export const fakeProperty = (portfolioId?: string, organizationId?: string) => {
 	const random = Math.floor(Math.random() * coordinates.length);
 	const propCoordinates = coordinates[random];
 	return {
@@ -170,6 +171,7 @@ export const fakeProperty = (portfolioId?: string) => {
 		parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
 		paci: faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
 		portfolioId: portfolioId ?? generateId(),
+		organizationId: organizationId ?? generateId(),
 	};
 };
 
@@ -177,7 +179,8 @@ export const fakeLeaseInvoice = (
 	leaseId: string,
 	amount: number,
 	leaseStart: Date,
-	count: number
+	count: number,
+	organizationId?: string
 ) => {
 	const nextMonth = new Date(
 		Date.UTC(leaseStart.getFullYear(), leaseStart.getMonth() + 1, 1)
@@ -200,6 +203,7 @@ export const fakeLeaseInvoice = (
 			  )
 			: null,
 		leaseId,
+		organizationId: organizationId ?? generateId(),
 	};
 };
 
@@ -219,7 +223,8 @@ export const fakeLeaseInvoiceBasic = () => {
 export const fakeLease = (
 	tenantId?: string,
 	unitId?: string,
-	startDate?: Date
+	startDate?: Date,
+	organizationId?: string
 ) => {
 	const start = startDate ?? faker.date.past(timespan);
 	const end = subDays(addMonths(start, 12), 1);
@@ -235,6 +240,7 @@ export const fakeLease = (
 		canPay: true,
 		tenantId: tenantId ?? generateId(),
 		unitId: unitId ?? generateId(),
+		organizationId: organizationId ?? generateId(),
 		notify: true,
 	};
 };
