@@ -17,6 +17,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class PortfoliosService {
   constructor(private prisma: PrismaService) {}
+  Subject = 'Portfolio' as const;
 
   async create({
     createPortfolioDto,
@@ -91,14 +92,14 @@ export class PortfoliosService {
     fields.forEach((field) => {
       ForbiddenError.from(user.ability)
         .setMessage(`You are not allowed to update ${field}`)
-        .throwUnlessCan(Action.Update, 'Portfolio', field);
+        .throwUnlessCan(Action.Update, this.Subject, field);
     });
 
     // check if user has permission to update specific instance
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
       // TODO add organizationId to portfolioDto
-      subject('Portfolio', updatePortfolioDto),
+      subject(this.Subject, updatePortfolioDto),
     );
 
     return this.prisma.portfolio.update({
