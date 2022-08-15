@@ -135,7 +135,11 @@ export const fakeTenant = (orgId?: string) => {
 	};
 };
 
-export const fakeUnit = (propertyId?: string, orgaizationId?: string) => ({
+export const fakeUnit = (
+	propertyId?: string,
+	portfolioId?: string,
+	orgaizationId?: string
+) => ({
 	id: generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
@@ -148,6 +152,7 @@ export const fakeUnit = (propertyId?: string, orgaizationId?: string) => ({
 	type: faker.helpers.arrayElement(unitTypeValues),
 	usage: null,
 	propertyId: propertyId ?? generateId(),
+	portfolioId: portfolioId ?? generateId(),
 	organizationId: orgaizationId ?? generateId(),
 });
 
@@ -180,6 +185,7 @@ export const fakeLeaseInvoice = (
 	amount: number,
 	leaseStart: Date,
 	count: number,
+	portfolioId?: string,
 	organizationId?: string
 ) => {
 	const nextMonth = new Date(
@@ -203,6 +209,7 @@ export const fakeLeaseInvoice = (
 			  )
 			: null,
 		leaseId,
+		portfolioId: portfolioId ?? generateId(),
 		organizationId: organizationId ?? generateId(),
 	};
 };
@@ -224,6 +231,7 @@ export const fakeLease = (
 	tenantId?: string,
 	unitId?: string,
 	startDate?: Date,
+	portfolioId?: string,
 	organizationId?: string
 ) => {
 	const start = startDate ?? faker.date.past(timespan);
@@ -240,6 +248,7 @@ export const fakeLease = (
 		canPay: true,
 		tenantId: tenantId ?? generateId(),
 		unitId: unitId ?? generateId(),
+		portfolioId: portfolioId ?? generateId(),
 		organizationId: organizationId ?? generateId(),
 		notify: true,
 	};
@@ -255,7 +264,10 @@ export const fakeExpense = () => ({
 	postAt: faker.date.past(timespan),
 });
 
-export const fakeMaintenanceOrder = () => ({
+export const fakeMaintenanceOrder = (
+	portfolioId?: string,
+	organizationId?: string
+) => ({
 	id: generateId(),
 	createdAt: createdAt(),
 	updatedAt: updatedAt(),
@@ -263,4 +275,6 @@ export const fakeMaintenanceOrder = () => ({
 	title: faker.company.bs(),
 	description: faker.lorem.sentences(),
 	status: faker.helpers.arrayElement(["pending", "completed", "closed"]),
+	portfolioId: portfolioId ?? generateId(),
+	organizationId: organizationId ?? generateId(),
 });

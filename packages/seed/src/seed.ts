@@ -116,7 +116,7 @@ export async function seed({
 	);
 	const units = properties.flatMap((property) =>
 		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-			fakeUnit(property.id, property.organizationId)
+			fakeUnit(property.id, property.portfolioId, property.organizationId)
 		)
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
@@ -140,7 +140,13 @@ export async function seed({
 
 		tenants.push(tenantN);
 		tenantLoop: while (date < new Date()) {
-			const leaseN = fakeLease(tenantN.id, unit.id, date);
+			const leaseN = fakeLease(
+				tenantN.id,
+				unit.id,
+				date,
+				unit.portfolioId,
+				unit.organizationId
+			);
 			leases.push({ ...leaseN });
 
 			const renewal = Math.random() > 0.3;
@@ -196,6 +202,7 @@ export async function seed({
 						lease.monthlyRent,
 						lease.start,
 						n,
+						lease.portfolioId,
 						lease.organizationId
 					)
 				)
@@ -207,32 +214,38 @@ export async function seed({
 		// add either a portfolio or a property or a unit
 		const random = faker.datatype.number({ min: 0, max: 2 });
 		if (random === 0) {
+			const portfolio =
+				portfolios.length > 0
+					? portfolios[faker.datatype.number(portfolios.length - 1)] ?? null
+					: null;
 			return {
 				...mo,
-				portfolioId:
-					portfolios.length > 0
-						? portfolios[faker.datatype.number(portfolios.length - 1)]?.id ??
-						  null
-						: null,
+				portfolioId: portfolio?.id ?? null,
+				organizationId: portfolio?.organizationId ?? null,
 			};
 		}
 		if (random === 1) {
+			const property =
+				properties.length > 0
+					? properties[faker.datatype.number(properties.length - 1)] ?? null
+					: null;
 			return {
 				...mo,
-				propertyId:
-					properties.length > 0
-						? properties[faker.datatype.number(properties.length - 1)]?.id ??
-						  null
-						: null,
+				propertyId: property?.id ?? null,
+				portfolioId: property?.portfolioId ?? null,
+				organizationId: property?.organizationId ?? null,
 			};
 		}
 		if (random === 2) {
+			const unit =
+				units.length > 0
+					? units[faker.datatype.number(units.length - 1)] ?? null
+					: null;
 			return {
 				...mo,
-				unitId:
-					units.length > 0
-						? units[faker.datatype.number(units.length - 1)]?.id ?? null
-						: null,
+				unitId: unit?.id ?? null,
+				portfolioId: unit?.portfolioId ?? null,
+				organizationId: unit?.organizationId ?? null,
 			};
 		}
 		return mo;
