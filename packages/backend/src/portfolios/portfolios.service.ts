@@ -1,5 +1,7 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { instanceToPlain } from 'class-transformer';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -83,11 +85,21 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    await this.prisma.portfolio.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Update).Portfolio],
-      },
+    const fields = R.keys(instanceToPlain(updatePortfolioDto));
+
+    // check if user has permission to update fields
+    fields.forEach((field) => {
+      ForbiddenError.from(user.ability)
+        .setMessage(`You are not allowed to update ${field}`)
+        .throwUnlessCan(Action.Update, 'Portfolio', field);
     });
+
+    // check if user has permission to update specific instance
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      // TODO add organizationId to portfolioDto
+      subject('Portfolio', updatePortfolioDto),
+    );
 
     return this.prisma.portfolio.update({
       where: { id },
