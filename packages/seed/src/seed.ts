@@ -278,17 +278,16 @@ export async function seed({
 			expenses.push({
 				...expense,
 				portfolioId: portfolio.id,
+				organizationId: portfolio.organizationId,
 
 				...(includeProperty &&
 					randomProperty && {
 						propertyId: randomProperty?.id,
-						organizationId: randomProperty?.organizationId,
 					}),
 
 				...(includeUnit &&
 					randomUnit && {
 						unitId: randomUnit?.id,
-						organizationId: randomUnit?.organizationId,
 					}),
 			});
 		}
