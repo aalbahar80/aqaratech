@@ -1,8 +1,8 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { instanceToPlain } from 'class-transformer';
 import * as R from 'remeda';
+import { canUpdateFields } from 'src/casl/can-update-fields';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -86,13 +86,10 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    const fields = R.keys(instanceToPlain(updatePortfolioDto));
-
-    // check if user has permission to update fields
-    fields.forEach((field) => {
-      ForbiddenError.from(user.ability)
-        .setMessage(`You are not allowed to update ${field}`)
-        .throwUnlessCan(Action.Update, this.SubjectType, field);
+    canUpdateFields({
+      user,
+      subjectType: this.SubjectType,
+      instance: updatePortfolioDto,
     });
 
     // check if user has permission to update specific instance
