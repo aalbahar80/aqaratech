@@ -22,39 +22,39 @@ export class OrgAdminAbility {
     // TODO: limit fields
     // TODO only superadmins can manage org roles?
 
-    can(Action.Manage, ['Role'], {
+    can(Action.Manage, 'Role', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['Tenant'], {
+    can(Action.Manage, 'Tenant', {
       organizationId: { equals: role.organizationId }, // new tenant
     });
 
-    can(Action.Manage, ['Portfolio'], {
+    can(Action.Manage, 'Portfolio', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['Property'], {
+    can(Action.Manage, 'Property', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['Unit'], {
+    can(Action.Manage, 'Unit', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['Lease'], {
+    can(Action.Manage, 'Lease', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['LeaseInvoice'], {
+    can(Action.Manage, 'LeaseInvoice', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['Expense'], {
+    can(Action.Manage, 'Expense', {
       organizationId: { equals: role.organizationId },
     });
 
-    can(Action.Manage, ['MaintenanceOrder'], {
+    can(Action.Manage, 'MaintenanceOrder', {
       organizationId: { equals: role.organizationId },
     });
 
