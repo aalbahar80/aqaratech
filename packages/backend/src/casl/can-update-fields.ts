@@ -5,6 +5,8 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
 
 // TODO move to class?
+// TODO strip out fields that are not allowed to be updated
+// instead of throwing error?
 export const canUpdateFields = ({
   user,
   subjectType,
@@ -19,6 +21,7 @@ export const canUpdateFields = ({
   // check if user has permission to update fields
   fields.forEach((field) => {
     ForbiddenError.from(user.ability)
+      // TODO return this message in the error
       .setMessage(`You are not allowed to update ${field}`)
       .throwUnlessCan(Action.Update, subjectType, field);
   });
