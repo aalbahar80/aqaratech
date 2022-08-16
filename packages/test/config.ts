@@ -1,6 +1,12 @@
-import { test as base } from "@playwright/test";
+import { Page, test as base } from "@playwright/test";
 
-export const test = base.extend({
+type MyFixtures = {
+	page: Page;
+	token: string;
+	apiBaseURL: string;
+};
+
+export const test = base.extend<MyFixtures>({
 	page: async ({ page }, use) => {
 		page.addInitScript({
 			content: `
@@ -17,5 +23,19 @@ export const test = base.extend({
 			return res;
 		};
 		await use(page);
+	},
+	token: async ({}, use) => {
+		let token: string;
+		try {
+			const cookies = (await import("./storageState.json")).cookies;
+			token = cookies.find((c) => c.name === "accessToken").value;
+		} catch (e) {
+			console.log(e);
+		}
+		await use(token);
+	},
+	apiBaseURL: async ({}, use) => {
+		const apiBaseUrl = "http://localhost:3002";
+		await use(apiBaseUrl);
 	},
 });

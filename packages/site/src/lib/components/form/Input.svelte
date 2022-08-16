@@ -50,6 +50,7 @@
 	{#if field instanceof SelectField}
 		{#if field.combobox}
 			<Combobox
+				inputId={field.name}
 				options={field.options}
 				initialValue={field.value}
 				disabled={field.disabled}

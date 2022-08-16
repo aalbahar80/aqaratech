@@ -47,6 +47,7 @@
 {#if fields[3] && fields[3].name === 'tenantId'}
 	<InputWrapper field={fields[3]}>
 		<Combobox
+			inputId={fields[3].name}
 			options={fields[3].options}
 			initialValue={fields[3].value}
 			disabled={fields[3].disabled}
@@ -62,6 +63,7 @@
 {#if fields[0] && fields[0].name === 'portfolioId'}
 	<InputWrapper field={fields[0]}>
 		<Combobox
+			inputId={fields[0].name}
 			options={fields[0].options}
 			initialValue={fields[0].value}
 			disabled={fields[0].disabled}
@@ -79,6 +81,7 @@
 {#if fields[1] && fields[1].name === 'propertyId'}
 	<InputWrapper field={fields[1]}>
 		<Combobox
+			inputId={fields[1].name}
 			bind:this={propertySelector}
 			options={filteredProperties}
 			initialValue={fields[1].value}
@@ -97,6 +100,7 @@
 {#if fields[2] && fields[2].name === 'unitId'}
 	<InputWrapper field={fields[2]}>
 		<Combobox
+			inputId={fields[2].name}
 			bind:this={unitSelector}
 			options={filteredUnits}
 			initialValue={fields[2].value}
