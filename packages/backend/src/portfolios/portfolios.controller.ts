@@ -37,6 +37,8 @@ import {
 } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
+const SubjectType = 'Portfolio' as const;
+
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('portfolios')
 @ApiTags('portfolios')
@@ -50,7 +52,7 @@ export class PortfoliosController {
   ) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
+  @CheckAbilities({ action: Action.Create, subject: SubjectType })
   @ApiCreatedResponse({ type: PortfolioDto })
   create(
     @User() user: IUser,
@@ -60,7 +62,7 @@ export class PortfoliosController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiPaginatedResponse(PortfolioDto)
   findAll(
     @User() user: IUser,
@@ -70,14 +72,14 @@ export class PortfoliosController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: PortfolioDto })
   findOne(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.findOne({ id, user });
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Portfolio' })
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
   @ApiOkResponse({ type: PortfolioDto })
   update(
     @User() user: IUser,
@@ -88,7 +90,7 @@ export class PortfoliosController {
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: PortfolioDto })
   remove(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.remove({ id, user });
@@ -133,7 +135,7 @@ export class PortfoliosController {
   }
 
   // @Get(':id/files')
-  // @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
+  // @CheckAbilities({ action: Action.Read, subject: SubjectType})
   // @ApiPaginatedResponse(FileDto)
   // findFiles(
   //   @User() user: IUser,
