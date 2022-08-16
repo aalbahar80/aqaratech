@@ -32,7 +32,7 @@
 		new Field('organizationId', {
 			required: true,
 			disabled: true,
-			value: data?.organizationId,
+			value: data?.organizationId || $session.user?.role?.organizationId,
 		}),
 		new Field('fullName', {
 			required: true,
