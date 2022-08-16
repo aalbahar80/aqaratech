@@ -1,10 +1,8 @@
 import { faker } from "@faker-js/faker";
-import { Role } from "@prisma/client";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
 import {
-	createdAt,
 	fakeExpense,
 	fakeLease,
 	fakeLeaseInvoice,
@@ -15,21 +13,12 @@ import {
 	fakeProperty,
 	fakeTenant,
 	fakeUnit,
-	fakeUser,
-	generateId,
-	testOrgEmail,
 	testOrgId,
-	testOrgRoleId,
-	testPortfolioEmail,
-	testPortfolioId,
-	testPortfolioRoleId,
-	testTenantEmail,
 	testTenantId,
-	testTenantRoleId,
 	timespan,
-	updatedAt,
 } from "./generators.js";
 import prisma from "./prisma.js";
+import { sample } from "./sample-data.js";
 
 config({
 	path: "../backend/prisma/.env",
@@ -44,9 +33,8 @@ const randId = <T extends { id: string }>(entities: T[]): string => {
 };
 
 export async function seed({
-	sample = true,
 	printOnly = false,
-}: { sample?: boolean; printOnly?: boolean } = {}) {
+}: { printOnly?: boolean } = {}) {
 	let userCount = 5;
 	let orgCount = 1;
 	let roleCount = 5;
@@ -66,47 +54,17 @@ export async function seed({
 	// }
 
 	const organizations = Array.from({ length: orgCount }, fakeOrganization);
-	organizations[0]!.id = testOrgId;
 
-	const users = Array.from({ length: userCount }, fakeUser);
-	users[0]!.email = testOrgEmail;
-	users[1]!.email = testPortfolioEmail;
-	users[2]!.email = testTenantEmail;
+	const users = sample.users;
 
-	const roles: Partial<Role>[] = [];
-	roles.push({
-		id: testOrgRoleId,
-		organizationId: organizations[0]!.id,
-		userId: users[0]!.id,
-		roleType: "ORGADMIN",
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
-	});
+	const roles = sample.roles;
 
-	const portfolios = Array.from({ length: portfolioCount }, () =>
-		fakePortfolio(randId(organizations))
+	const portfolios = sample.portfolios;
+	portfolios.concat(
+		Array.from({ length: portfolioCount }, () =>
+			fakePortfolio(randId(organizations))
+		) as any
 	);
-	portfolios[0]!.id = testPortfolioId;
-	portfolios[0]!.organizationId = testOrgId;
-	roles.push({
-		id: generateId(),
-		userId: users[1]!.id,
-		organizationId: testOrgId,
-		portfolioId: portfolios[0]!.id,
-		roleType: "PORTFOLIO",
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
-	});
-
-	roles.push({
-		id: testPortfolioRoleId,
-		userId: users[0]!.id,
-		organizationId: organizations[0]!.id,
-		portfolioId: portfolios[0]!.id,
-		roleType: "PORTFOLIO",
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
-	});
 
 	const properties = portfolios.flatMap((portfolio) =>
 		Array.from(
@@ -167,26 +125,6 @@ export async function seed({
 		}
 	});
 
-	roles.push({
-		id: generateId(),
-		userId: users[2]!.id,
-		organizationId: testOrgId,
-		tenantId: tenants[0]!.id,
-		roleType: "TENANT",
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
-	});
-
-	roles.push({
-		id: testTenantRoleId,
-		userId: users[0]!.id,
-		organizationId: organizations[0]!.id,
-		tenantId: tenants[0]!.id,
-		roleType: "TENANT",
-		createdAt: createdAt(),
-		updatedAt: updatedAt(),
-	});
-
 	// test that all tenantIds in leases are in tenants
 	leases.forEach((lease) => {
 		if (!tenants.find((tenant) => tenant.id === lease.tenantId)) {
@@ -221,7 +159,7 @@ export async function seed({
 			return {
 				...mo,
 				portfolioId: portfolio?.id ?? null,
-				organizationId: portfolio?.organizationId ?? null,
+				organizationId: portfolio?.organizationId,
 			};
 		}
 		if (random === 1) {
@@ -233,7 +171,7 @@ export async function seed({
 				...mo,
 				propertyId: property?.id ?? null,
 				portfolioId: property?.portfolioId ?? null,
-				organizationId: property?.organizationId ?? null,
+				organizationId: property?.organizationId,
 			};
 		}
 		if (random === 2) {
@@ -245,13 +183,14 @@ export async function seed({
 				...mo,
 				unitId: unit?.id ?? null,
 				portfolioId: unit?.portfolioId ?? null,
-				organizationId: unit?.organizationId ?? null,
+				organizationId: unit?.organizationId,
 			};
 		}
 		return mo;
 	});
 
 	type Expense = ReturnType<typeof fakeExpense> & {
+		organizationId?: string;
 		portfolioId?: string;
 		propertyId?: string;
 		unitId?: string;
@@ -277,17 +216,19 @@ export async function seed({
 
 			expenses.push({
 				...expense,
-				portfolioId: portfolio.id,
-				organizationId: portfolio.organizationId,
+				portfolioId: portfolio.id!,
+				organizationId: testOrgId,
 
 				...(includeProperty &&
 					randomProperty && {
 						propertyId: randomProperty?.id,
+						organizationId: testOrgId,
 					}),
 
 				...(includeUnit &&
 					randomUnit && {
 						unitId: randomUnit?.id,
+						organizationId: testOrgId,
 					}),
 			});
 		}
@@ -395,6 +336,7 @@ export async function seed({
 			// create the chunks
 			maintenanceOrdersChunks.forEach(async (chunk) => {
 				await prisma.maintenanceOrder.createMany({
+					// @ts-ignore
 					data: chunk,
 				});
 			}),

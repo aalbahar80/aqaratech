@@ -22,3 +22,4 @@ export {
 	timespan,
 } from "./generators.js";
 export { seed } from "./seed.js";
+export { sample } from "./sample-data";
