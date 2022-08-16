@@ -38,12 +38,14 @@ const roles = Prisma.validator<Prisma.RoleCreateManyArgs["data"]>()([
 		userId: users[0]!.id,
 		organizationId: testOrgId,
 		roleType: "PORTFOLIO",
+		portfolioId: testPortfolioId,
 	},
 	{
 		id: testTenantRoleId,
 		userId: users[0]!.id,
 		organizationId: testOrgId,
 		roleType: "TENANT",
+		tenantId: testTenantId,
 	},
 ]);
 

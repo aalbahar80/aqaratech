@@ -7,7 +7,7 @@ test.use({
 	},
 });
 
-const notAccessible = ["/organizations", "/users"];
+const notAccessible = [];
 const accessible = [
 	"/tenants",
 	"/portfolios",
@@ -25,9 +25,7 @@ const accessible = [
 for (const route of accessible) {
 	test(`should be able to get ${route}`, async ({ request, token }) => {
 		const res = await request.get(route, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+			headers: { Authorization: `Bearer ${token}` },
 		});
 		await expect(res).toBeOK();
 	});
@@ -37,19 +35,15 @@ for (const route of accessible) {
 for (const route of notAccessible) {
 	test(`should not be able to get ${route}`, async ({ request, token }) => {
 		const res = await request.get(route, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+			headers: { Authorization: `Bearer ${token}` },
 		});
-		await expect(res).not.toBeOK();
+		expect(res.status()).toBe(403);
 	});
 }
 
 test('can get files from "/files"', async ({ request, token }) => {
 	const res = await request.get("/files", {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
+		headers: { Authorization: `Bearer ${token}` },
 		params: {
 			relationKey: "portfolio",
 			relationValue: testPortfolioId,
