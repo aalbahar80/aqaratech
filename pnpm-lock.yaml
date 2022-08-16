@@ -304,7 +304,7 @@ importers:
       typescript: 4.7.4
       unplugin-icons: 0.14.8
       vite: 3.0.7
-      zod: 3.17.10
+      zod: 3.18.0
     dependencies:
       '@self/utils': link:../utils
       '@types/debounce': 1.2.1
@@ -312,7 +312,7 @@ importers:
     devDependencies:
       '@felte/reporter-svelte': 1.1.2_svelte@3.49.0
       '@felte/reporter-tippy': 1.1.2_tippy.js@6.3.7
-      '@felte/validator-zod': 1.0.10_zod@3.17.10
+      '@felte/validator-zod': 1.0.10_zod@3.18.0
       '@iconify/json': 2.1.87
       '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.49.0
       '@self/sdk': link:../sdk
@@ -372,7 +372,7 @@ importers:
       typescript: 4.7.4
       unplugin-icons: 0.14.8_vite@3.0.7
       vite: 3.0.7
-      zod: 3.17.10
+      zod: 3.18.0
 
   packages/test:
     specifiers:
@@ -3108,14 +3108,14 @@ packages:
       tippy.js: 6.3.7
     dev: true
 
-  /@felte/validator-zod/1.0.10_zod@3.17.10:
+  /@felte/validator-zod/1.0.10_zod@3.18.0:
     resolution: {integrity: sha512-Il4/Lq5XrMeDxqXZjRvleXTTxlhpJJpKJIHBe3acvT5WmfWyeV1Iygb+zI5zDOQ5NHGk4kGkLNfzW5+rY1sRnw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       zod: ^3.2.0
     dependencies:
       '@felte/common': 1.1.1
-      zod: 3.17.10
+      zod: 3.18.0
     dev: true
 
   /@hapi/b64/5.0.0:
@@ -14722,6 +14722,6 @@ packages:
       readable-stream: 3.6.0
     dev: true
 
-  /zod/3.17.10:
-    resolution: {integrity: sha512-IHXnQYQuOOOL/XgHhgl8YjNxBHi3xX0mVcHmqsvJgcxKkEczPshoWdxqyFwsARpf41E0v9U95WUROqsHHxt0UQ==}
+  /zod/3.18.0:
+    resolution: {integrity: sha512-gwTm8RfUCe8l9rDwN5r2A17DkAa8Ez4Yl4yXqc5VqeGaXaJahzYYXbTwvhroZi0SNBqTwh/bKm2N0mpCzuw4bA==}
     dev: true
