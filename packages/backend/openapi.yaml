@@ -1613,12 +1613,11 @@ paths:
                         items:
                           $ref: '#/components/schemas/LeaseDto'
       tags: *ref_13
-  /users:
+  /users/me:
     get:
-      operationId: findAll
+      operationId: findProfile
       parameters:
-        - &ref_14
-          name: x-role-id
+        - name: x-role-id
           in: header
           schema:
             type: string
@@ -1628,59 +1627,16 @@ paths:
           content:
             application/json:
               schema:
-                title: PaginatedUserDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUserDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UserDto'
-      tags: &ref_15
+                $ref: '#/components/schemas/ValidatedUserDto'
+        '404':
+          description: ''
+      tags:
         - users
-  /users/me:
-    get:
-      operationId: findProfile
-      parameters:
-        - *ref_14
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags: *ref_15
-  /users/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - *ref_14
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags: *ref_15
   /expenses:
     post:
       operationId: create
       parameters:
-        - &ref_16
+        - &ref_14
           name: x-role-id
           in: header
           schema:
@@ -1698,12 +1654,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: &ref_17
+      tags: &ref_15
         - expenses
     get:
       operationId: findAll
       parameters:
-        - *ref_16
+        - *ref_14
         - name: page
           required: false
           in: query
@@ -1781,12 +1737,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_17
+      tags: *ref_15
   /expenses/{id}:
     get:
       operationId: findOne
       parameters:
-        - *ref_16
+        - *ref_14
         - name: id
           required: true
           in: path
@@ -1799,11 +1755,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_17
+      tags: *ref_15
     patch:
       operationId: update
       parameters:
-        - *ref_16
+        - *ref_14
         - name: id
           required: true
           in: path
@@ -1822,11 +1778,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: *ref_17
+      tags: *ref_15
     delete:
       operationId: remove
       parameters:
-        - *ref_16
+        - *ref_14
         - name: id
           required: true
           in: path
@@ -1839,12 +1795,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_17
+      tags: *ref_15
   /search:
     post:
       operationId: initSearch
       parameters:
-        - &ref_18
+        - &ref_16
           name: x-role-id
           in: header
           schema:
@@ -1852,12 +1808,12 @@ paths:
       responses:
         '201':
           description: ''
-      tags: &ref_19
+      tags: &ref_17
         - search
     delete:
       operationId: remove
       parameters:
-        - *ref_18
+        - *ref_16
       responses:
         '200':
           description: ''
@@ -1867,12 +1823,12 @@ paths:
                 type: array
                 items:
                   type: object
-      tags: *ref_19
+      tags: *ref_17
   /organizations:
     post:
       operationId: create
       parameters:
-        - &ref_20
+        - &ref_18
           name: x-role-id
           in: header
           schema:
@@ -1890,13 +1846,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationCreatedDto'
-      tags: &ref_21
+      tags: &ref_19
         - organizations
   /organizations/{id}:
     get:
       operationId: findOne
       parameters:
-        - *ref_20
+        - *ref_18
         - name: id
           required: true
           in: path
@@ -1909,11 +1865,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_21
+      tags: *ref_19
     patch:
       operationId: update
       parameters:
-        - *ref_20
+        - *ref_18
         - name: id
           required: true
           in: path
@@ -1932,11 +1888,11 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_21
+      tags: *ref_19
     delete:
       operationId: remove
       parameters:
-        - *ref_20
+        - *ref_18
         - name: id
           required: true
           in: path
@@ -1949,12 +1905,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_21
+      tags: *ref_19
   /organizations/{id}/roles:
     get:
       operationId: findRoles
       parameters:
-        - *ref_20
+        - *ref_18
         - name: page
           required: false
           in: query
@@ -2012,12 +1968,12 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_21
+      tags: *ref_19
   /organizations/{id}/search:
     get:
       operationId: search
       parameters:
-        - *ref_20
+        - *ref_18
         - name: id
           required: true
           in: path
@@ -2035,12 +1991,12 @@ paths:
             application/json:
               schema:
                 type: object
-      tags: *ref_21
+      tags: *ref_19
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
       parameters:
-        - &ref_22
+        - &ref_20
           name: x-role-id
           in: header
           schema:
@@ -2119,13 +2075,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: &ref_23
+      tags: &ref_21
         - aggregate
   /aggregate/expensesByMonth:
     get:
       operationId: getExpensesByMonth
       parameters:
-        - *ref_22
+        - *ref_20
         - name: start
           required: false
           in: query
@@ -2160,7 +2116,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: *ref_23
+      tags: *ref_21
   /meta/expenseTree:
     get:
       operationId: findExpenseTypes
@@ -2200,7 +2156,7 @@ paths:
     post:
       operationId: create
       parameters:
-        - &ref_24
+        - &ref_22
           name: x-role-id
           in: header
           schema:
@@ -2218,12 +2174,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: &ref_25
+      tags: &ref_23
         - expense-categories
     get:
       operationId: findAll
       parameters:
-        - *ref_24
+        - *ref_22
       responses:
         '200':
           description: ''
@@ -2233,11 +2189,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
+      tags: *ref_23
     patch:
       operationId: updateAll
       parameters:
-        - *ref_24
+        - *ref_22
       requestBody:
         required: true
         content:
@@ -2253,12 +2209,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
+      tags: *ref_23
   /expense-categories/{id}:
     get:
       operationId: findOne
       parameters:
-        - *ref_24
+        - *ref_22
         - name: id
           required: true
           in: path
@@ -2271,11 +2227,11 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_25
+      tags: *ref_23
     patch:
       operationId: update
       parameters:
-        - *ref_24
+        - *ref_22
         - name: id
           required: true
           in: path
@@ -2294,11 +2250,11 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_25
+      tags: *ref_23
     delete:
       operationId: remove
       parameters:
-        - *ref_24
+        - *ref_22
         - name: id
           required: true
           in: path
@@ -2311,12 +2267,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_25
+      tags: *ref_23
   /files:
     post:
       operationId: create
       parameters:
-        - &ref_26
+        - &ref_24
           name: x-role-id
           in: header
           schema:
@@ -2340,12 +2296,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: &ref_27
+      tags: &ref_25
         - files
     get:
       operationId: findAll
       parameters:
-        - *ref_26
+        - *ref_24
         - name: relationKey
           required: true
           in: query
@@ -2382,11 +2338,11 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/FileDto'
-      tags: *ref_27
+      tags: *ref_25
     delete:
       operationId: remove
       parameters:
-        - *ref_26
+        - *ref_24
         - name: key
           required: true
           in: query
@@ -2399,12 +2355,12 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_27
+      tags: *ref_25
   /files/find-one:
     get:
       operationId: findOne
       parameters:
-        - *ref_26
+        - *ref_24
         - name: key
           required: true
           in: query
@@ -2417,7 +2373,7 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_27
+      tags: *ref_25
 info:
   title: Aqaratech API
   description: The Aqratech API description

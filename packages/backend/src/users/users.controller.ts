@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import {
   ApiHeader,
   ApiNotFoundResponse,
@@ -6,14 +6,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
-import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { Action } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
-import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
-import { UserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
+import { ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
 @ApiHeader({ name: ROLE_HEADER })
@@ -23,12 +20,12 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'User' })
-  @ApiPaginatedResponse(UserDto)
-  findAll() {
-    return this.usersService.findAll();
-  }
+  // @Get()
+  // @CheckAbilities({ action: Action.Read, subject: 'User' })
+  // @ApiPaginatedResponse(UserDto)
+  // findAll() {
+  //   return this.usersService.findAll();
+  // }
 
   // Don't check abilities here. This endpoint will return a user's role data,
   // which is necessary to pass ability.guard will be used to determine the user's abilities.
@@ -45,11 +42,11 @@ export class UsersController {
     return this.usersService.findOneByEmail(user.email);
   }
 
-  @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'User' })
-  @ApiOkResponse({ type: ValidatedUserDto })
-  @ApiNotFoundResponse()
-  findOne(@Param('id') id: string): Promise<ValidatedUserDto> {
-    return this.usersService.findOne(id);
-  }
+  // @Get(':id')
+  // @CheckAbilities({ action: Action.Read, subject: 'User' })
+  // @ApiOkResponse({ type: ValidatedUserDto })
+  // @ApiNotFoundResponse()
+  // findOne(@Param('id') id: string): Promise<ValidatedUserDto> {
+  //   return this.usersService.findOne(id);
+  // }
 }
