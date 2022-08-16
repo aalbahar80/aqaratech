@@ -35,9 +35,6 @@ const randId = <T extends { id: string }>(entities: T[]): string => {
 export async function seed({
 	printOnly = false,
 }: { printOnly?: boolean } = {}) {
-	let userCount = 5;
-	let orgCount = 1;
-	let roleCount = 5;
 	let portfolioCount = 9;
 	let propertyMin = 2;
 	let propertyMax = 20;
@@ -53,10 +50,8 @@ export async function seed({
 	// 	trxPerLease = 3;
 	// }
 
-	const organizations = Array.from({ length: orgCount }, fakeOrganization);
-
+	const organizations = sample.organizations;
 	const users = sample.users;
-
 	const roles = sample.roles;
 
 	const portfolios = sample.portfolios;
