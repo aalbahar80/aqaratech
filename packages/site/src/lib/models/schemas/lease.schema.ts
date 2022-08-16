@@ -9,6 +9,7 @@ export const updateSchema = z
 		end: zodIsDateRequired(),
 		notify: z.boolean(),
 		canPay: z.boolean(),
+		organizationId: isID,
 	})
 
 	.refine(
@@ -32,12 +33,14 @@ export const createSchema = z
 	.object({
 		tenantId: isID,
 		unitId: isID,
+		portfolioId: isID,
 		// dupes
 		monthlyRent: z.number().min(1),
 		start: zodIsDateRequired(),
 		end: zodIsDateRequired(),
 		notify: z.boolean(),
 		canPay: z.boolean(),
+		organizationId: isID,
 	})
 	.refine(
 		(val) =>

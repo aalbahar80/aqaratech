@@ -2,8 +2,8 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -18,6 +18,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class LeasesService {
   constructor(private prisma: PrismaService) {}
+  SubjectType = 'Lease' as const;
 
   async create({
     createLeaseDto,
@@ -28,18 +29,10 @@ export class LeasesService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Lease', createLeaseDto),
+      subject(this.SubjectType, createLeaseDto),
     );
 
-    const toCreate = R.omit(createLeaseDto, ['tenantId', 'unitId']);
-    const created = await this.prisma.lease.create({
-      data: {
-        ...toCreate,
-        unit: { connect: { id: createLeaseDto.unitId } },
-        tenant: { connect: { id: createLeaseDto.tenantId } },
-      },
-    });
-    return created.id;
+    return this.prisma.lease.create({ data: createLeaseDto });
   }
 
   async findAll({
@@ -133,14 +126,16 @@ export class LeasesService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Lease', { id, ...updateLeaseDto }),
+      subject(this.SubjectType, updateLeaseDto),
     );
 
-    const updated = await this.prisma.lease.update({
-      where: { id },
-      data: updateLeaseDto,
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updateLeaseDto,
     });
-    return updated.id;
+
+    return this.prisma.lease.update({ where: { id }, data: frisked });
   }
 
   async remove({ id }: { id: string }) {
@@ -162,6 +157,7 @@ export class LeasesService {
       data: {
         leaseInvoices: {
           createMany: {
+            // @ts-ignore
             data: createManyLeaseInvoicesDto,
           },
         },

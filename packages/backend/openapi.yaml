@@ -639,7 +639,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialLeaseDto'
       tags: &ref_7
         - leases
     get:
@@ -738,7 +738,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialLeaseDto'
       tags: *ref_7
     delete:
       operationId: remove
@@ -2700,6 +2700,10 @@ components:
           type: string
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         tenantId:
           type: string
         unitId:
@@ -2723,6 +2727,8 @@ components:
         - start
         - end
         - breadcrumbs
+        - organizationId
+        - portfolioId
         - tenantId
         - unitId
         - monthlyRent
@@ -2964,6 +2970,10 @@ components:
           type: string
         end:
           type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         tenantId:
           type: string
         unitId:
@@ -2983,15 +2993,65 @@ components:
       required:
         - start
         - end
+        - organizationId
+        - portfolioId
         - tenantId
         - unitId
         - monthlyRent
+    PartialLeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        start:
+          type: string
+        end:
+          type: string
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        monthlyRent:
+          type: number
+          minimum: 1
+        deposit:
+          type: number
+        canPay:
+          type: boolean
+        notify:
+          type: boolean
+        license:
+          type: string
+          nullable: true
     UpdateLeaseDto:
       type: object
       properties:
         start:
           type: string
         end:
+          type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        tenantId:
+          type: string
+        unitId:
           type: string
         monthlyRent:
           type: number

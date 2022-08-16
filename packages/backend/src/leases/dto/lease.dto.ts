@@ -2,7 +2,6 @@ import {
   ApiHideProperty,
   ApiProperty,
   IntersectionType,
-  OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
@@ -21,6 +20,12 @@ import { IsID } from 'src/decorators/field.decorators';
 import { UnitDto } from 'src/units/dto/unit.dto';
 
 class LeaseRequiredDto {
+  @IsID()
+  organizationId: string;
+
+  @IsID()
+  portfolioId: string;
+
   @IsID()
   tenantId: string;
 
@@ -58,10 +63,13 @@ class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'unit',
 ]) {}
 
-export class LeaseDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
-) {
+export class LeaseDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
+  )
+  implements Lease
+{
   constructor(partial: Partial<LeaseDto>) {
     super();
     Object.assign(this, partial);
@@ -91,10 +99,10 @@ export class LeaseDto extends IntersectionType(
   }
 }
 
+export class PartialLeaseDto extends PartialType(LeaseDto) {}
+
 export class CreateLeaseDto
   extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
   implements Partial<Lease> {}
 
-export class UpdateLeaseDto extends PartialType(
-  OmitType(CreateLeaseDto, ['tenantId', 'unitId']),
-) {}
+export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {}
