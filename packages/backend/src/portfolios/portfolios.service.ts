@@ -1,8 +1,8 @@
-import { permittedFieldsOf } from '@casl/ability/extra';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { instanceToPlain } from 'class-transformer';
 import * as R from 'remeda';
+import { frisk } from 'src/casl/can-update-fields';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -86,45 +86,21 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    // canUpdateFields({
-    //   user,
-    //   subjectType: this.SubjectType,
-    //   instance: updatePortfolioDto,
-    // });
-
-    /**
-     * Strip out fields that are not permitted to be updated by the user.
-     */
-    const fields = R.keys(instanceToPlain(updatePortfolioDto));
-    const permittedFields = permittedFieldsOf(
-      user.ability,
+    // check if user has permission to update specific instance
+    ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      this.SubjectType,
-      { fieldsFrom: (rule) => rule.fields || fields },
+      // TODO add organizationId to portfolioDto
+      subject(this.SubjectType, updatePortfolioDto),
     );
-    // @ts-ignore
-    const toUpdate = R.pick(updatePortfolioDto, permittedFields);
 
-    console.log({ toUpdate }, 'portfolios.service.ts ~ 109');
-    console.log({ fields }, 'portfolios.service.ts ~ 104');
-    console.log({ permittedFields }, 'portfolios.service.ts ~ 105');
-
-    // // check if user has permission to update specific instance
-    // ForbiddenError.from(user.ability).throwUnlessCan(
-    //   Action.Update,
-    //   // TODO add organizationId to portfolioDto
-    //   subject(this.SubjectType, updatePortfolioDto),
-    // );
-
-    // ForbiddenError.from(user.ability).throwUnlessCan(
-    //   Action.Update,
-    //   subject(this.SubjectType, updatePortfolioDto),
-    // );
-
-    return this.prisma.portfolio.update({
-      where: { id },
-      data: updatePortfolioDto,
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updatePortfolioDto,
     });
+    console.log({ frisked }, 'portfolios.service.ts ~ 109'); // TODO rm
+
+    return this.prisma.portfolio.update({ where: { id }, data: frisked });
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

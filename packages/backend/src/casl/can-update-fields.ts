@@ -1,28 +1,30 @@
-import { ForbiddenError } from '@casl/ability';
+import { permittedFieldsOf } from '@casl/ability/extra';
 import { instanceToPlain } from 'class-transformer';
 import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { IUser } from 'src/interfaces/user.interface';
 
 // TODO move to class?
-// TODO strip out fields that are not allowed to be updated
-// instead of throwing error?
-export const canUpdateFields = ({
+/**
+ * Strip out fields that are not permitted to be updated by the user.
+ */
+export const frisk = ({
   user,
-  subjectType,
+  SubjectType,
   instance,
 }: {
   user: IUser;
-  subjectType: any;
+  SubjectType: any;
   instance: any;
 }) => {
   const fields = R.keys(instanceToPlain(instance));
-
-  // check if user has permission to update fields
-  fields.forEach((field) => {
-    ForbiddenError.from(user.ability)
-      // TODO return this message in the error
-      .setMessage(`You are not allowed to update ${field}`)
-      .throwUnlessCan(Action.Update, subjectType, field);
-  });
+  const permittedFields = permittedFieldsOf(
+    user.ability,
+    Action.Update,
+    SubjectType,
+    { fieldsFrom: (rule) => rule.fields || fields },
+  );
+  // TODO log difference
+  const frisked = R.pick(instance, permittedFields);
+  return frisked;
 };
