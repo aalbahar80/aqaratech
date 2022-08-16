@@ -77,16 +77,8 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			const organizationId = $session.user?.role?.organizationId;
-			if (!organizationId) {
-				// type hack
-				throw new Error('No organizationId found in session');
-			}
 			return $page.stuff.api.portfolios.create({
-				createPortfolioDto: {
-					...values,
-					organizationId,
-				},
+				createPortfolioDto: values,
 			});
 		}}
 	/>
