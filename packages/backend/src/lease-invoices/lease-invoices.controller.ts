@@ -14,6 +14,8 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -30,6 +32,8 @@ import {
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from './lease-invoices.service';
 
+const SubjectType = 'LeaseInvoice';
+
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('leaseInvoices')
 @ApiTags('leaseInvoices')
@@ -38,6 +42,7 @@ export class LeaseInvoicesController {
   constructor(private readonly leaseInvoicesService: LeaseInvoicesService) {}
 
   @Post()
+  @CheckAbilities({ action: Action.Create, subject: SubjectType })
   @ApiCreatedResponse({ type: PartialLeaseInvoiceDto })
   create(
     @User() user: IUser,
@@ -47,6 +52,7 @@ export class LeaseInvoicesController {
   }
 
   @Get()
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findAll(
     @User() user: IUser,
@@ -56,6 +62,7 @@ export class LeaseInvoicesController {
   }
 
   @Get(':id')
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: LeaseInvoiceDto })
   findOne(
     @Param('id') id: string,
@@ -65,6 +72,7 @@ export class LeaseInvoicesController {
   }
 
   @Patch(':id')
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
   @ApiOkResponse({ type: PartialLeaseInvoiceDto })
   update(
     @User() user: IUser,
@@ -79,12 +87,14 @@ export class LeaseInvoicesController {
   }
 
   @Delete(':id')
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: String })
   remove(@Param('id') id: string, @User() user: IUser): Promise<string> {
     return this.leaseInvoicesService.remove({ id, user });
   }
 
   @Post('/:id/send-email')
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
   sendEmail(@Param('id') id: string, @User() user: IUser) {
     return this.leaseInvoicesService.sendInvoice({ id, user });
   }
