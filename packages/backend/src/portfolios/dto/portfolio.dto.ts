@@ -27,10 +27,12 @@ class PortfolioOptionalDto {
   dob: Date | null;
 }
 
-export class PortfolioDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
-) {}
+export class PortfolioDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
+  )
+  implements Portfolio {}
 
 export class CreatePortfolioDto
   extends IntersectionType(
