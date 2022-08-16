@@ -1,4 +1,4 @@
-import { IntersectionType, OmitType, PartialType } from '@nestjs/swagger';
+import { IntersectionType, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
 import { IsPhoneNumber, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -39,6 +39,4 @@ export class CreatePortfolioDto
   )
   implements Partial<Portfolio> {}
 
-export class UpdatePortfolioDto extends PartialType(
-  OmitType(CreatePortfolioDto, ['organizationId']),
-) {}
+export class UpdatePortfolioDto extends PartialType(CreatePortfolioDto) {}

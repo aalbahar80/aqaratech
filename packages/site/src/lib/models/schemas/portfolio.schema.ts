@@ -38,4 +38,5 @@ export const schema = z.object({
 		.transform(trim)
 		.transform(falsyToNull),
 	dob: zodIsDateOptional(),
+	organizationId: isID,
 });

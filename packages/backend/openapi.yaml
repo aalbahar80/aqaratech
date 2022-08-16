@@ -3093,6 +3093,8 @@ components:
         dob:
           type: string
           nullable: true
+        organizationId:
+          type: string
         fullName:
           type: string
           minLength: 1

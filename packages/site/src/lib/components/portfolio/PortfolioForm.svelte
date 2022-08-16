@@ -29,6 +29,11 @@
 	export let data: TPortfolioDto = undefined as TPortfolioDto;
 
 	const basicFields = [
+		new Field('organizationId', {
+			required: true,
+			disabled: true,
+			value: data?.organizationId,
+		}),
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,
