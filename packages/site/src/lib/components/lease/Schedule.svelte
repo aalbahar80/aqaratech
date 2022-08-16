@@ -34,6 +34,8 @@
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
 				...invoice,
 				postAt: `${invoice.postAt}T00:00:00.000Z`,
+				organizationId: lease.organizationId,
+				portfolioId: lease.portfolioId,
 			})),
 		});
 		console.debug(created);
