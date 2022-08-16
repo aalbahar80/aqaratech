@@ -2,7 +2,6 @@ import {
   ApiHideProperty,
   ApiProperty,
   IntersectionType,
-  OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
@@ -22,6 +21,12 @@ import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 
 class UnitRequiredDto {
+  @IsID()
+  organizationId: string;
+
+  @IsID()
+  portfolioId: string;
+
   @IsID()
   propertyId: string;
 
@@ -61,9 +66,7 @@ export class CreateUnitDto
   extends IntersectionType(UnitRequiredDto, PartialType(UnitOptionalDto))
   implements Partial<Unit> {}
 
-export class UpdateUnitDto extends PartialType(
-  OmitType(CreateUnitDto, ['propertyId']),
-) {}
+export class UpdateUnitDto extends PartialType(CreateUnitDto) {}
 
 // OutputDtos
 
@@ -79,10 +82,13 @@ export class UnitVacancy {
   vacancyDate: Date | null;
 }
 
-export class UnitDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(UnitRequiredDto, UnitOptionalDto),
-) {
+export class UnitDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(UnitRequiredDto, UnitOptionalDto),
+  )
+  implements Unit
+{
   constructor(partial: Partial<UnitDto>) {
     super();
     Object.assign(this, partial);
@@ -129,3 +135,5 @@ export class UnitDto extends IntersectionType(
     };
   }
 }
+
+export class PartialUnitDto extends PartialType(UnitDto) {}

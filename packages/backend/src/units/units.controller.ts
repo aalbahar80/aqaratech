@@ -27,8 +27,15 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+  CreateUnitDto,
+  PartialUnitDto,
+  UnitDto,
+  UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
+
+const SubjectType = 'Unit';
 
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('units')
@@ -41,17 +48,17 @@ export class UnitsController {
   ) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'Unit' })
-  @ApiCreatedResponse({ type: String })
+  @CheckAbilities({ action: Action.Create, subject: SubjectType })
+  @ApiCreatedResponse({ type: PartialUnitDto })
   create(
     @User() user: IUser,
     @Body() createUnitDto: CreateUnitDto,
-  ): Promise<string> {
+  ): Promise<PartialUnitDto> {
     return this.unitsService.create({ createUnitDto, user });
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiPaginatedResponse(UnitDto)
   findAll(
     @User() user: IUser,
@@ -61,32 +68,35 @@ export class UnitsController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: UnitDto })
   findOne(@Param('id') id: string): Promise<UnitDto> {
     return this.unitsService.findOne({ id });
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Unit' })
-  @ApiOkResponse({ type: String })
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
+  @ApiOkResponse({ type: PartialUnitDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateUnitDto: UpdateUnitDto,
-  ): Promise<string> {
+  ): Promise<PartialUnitDto> {
     return this.unitsService.update({ id, updateUnitDto, user });
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Unit' })
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: String })
   remove(@Param('id') id: string): Promise<string> {
     return this.unitsService.remove({ id });
   }
 
   @Get(':id/leases')
-  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Lease' },
+  )
   @ApiPaginatedResponse(LeaseDto)
   findLeases(
     @User() user: IUser,

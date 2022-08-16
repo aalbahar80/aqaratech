@@ -1432,7 +1432,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialUnitDto'
       tags: &ref_13
         - units
     get:
@@ -1531,7 +1531,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialUnitDto'
       tags: *ref_13
     delete:
       operationId: remove
@@ -3251,6 +3251,10 @@ components:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         propertyId:
           type: string
         unitNumber:
@@ -3291,6 +3295,8 @@ components:
         - updatedAt
         - vacancy
         - breadcrumbs
+        - organizationId
+        - portfolioId
         - propertyId
         - unitNumber
         - floor
@@ -3392,6 +3398,10 @@ components:
     CreateUnitDto:
       type: object
       properties:
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         propertyId:
           type: string
         unitNumber:
@@ -3427,11 +3437,75 @@ components:
           type: string
           nullable: true
       required:
+        - organizationId
+        - portfolioId
         - propertyId
         - unitNumber
+    PartialUnitDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        vacancy:
+          $ref: '#/components/schemas/UnitVacancy'
+        breadcrumbs:
+          $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+          minLength: 1
+          maxLength: 255
+        floor:
+          type: number
+          nullable: true
+        size:
+          type: number
+          nullable: true
+          minimum: 1
+        bed:
+          type: number
+          nullable: true
+          minimum: 1
+        bath:
+          type: number
+          nullable: true
+          minimum: 1
+        marketRent:
+          type: number
+          nullable: true
+          minimum: 1
+        type:
+          type: string
+          nullable: true
+        usage:
+          type: string
+          nullable: true
+        label:
+          type: string
+          nullable: true
     UpdateUnitDto:
       type: object
       properties:
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
         unitNumber:
           type: string
           minLength: 1

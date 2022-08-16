@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { unitTypeOptions } from '$lib/constants/unit-options';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
+	import {
+		OrganizationIdField,
+		PortfolioIdField,
+	} from '$lib/utils/form/common-fields';
 	import { createSchema, updateSchema } from '$models/schemas/unit.schema';
 	import type {
 		PaginatedPortfolioDto,
@@ -75,6 +79,9 @@
 			: [];
 
 	const basicFields = [
+		OrganizationIdField(
+			data?.organizationId || $session.user?.role?.organizationId,
+		),
 		new SelectField('type', {
 			value: data?.type,
 			options: unitTypeOptions,

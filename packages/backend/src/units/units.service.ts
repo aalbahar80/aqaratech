@@ -2,8 +2,8 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -14,6 +14,7 @@ import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 @Injectable()
 export class UnitsService {
   constructor(private prisma: PrismaService) {}
+  SubjectType = 'Unit' as const;
 
   async create({
     createUnitDto,
@@ -24,18 +25,11 @@ export class UnitsService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Unit', createUnitDto),
+      subject(this.SubjectType, createUnitDto),
     );
 
-    const toCreate = R.omit(createUnitDto, ['propertyId']);
-    const created = await this.prisma.unit.create({
-      data: {
-        ...toCreate,
-        property: { connect: { id: createUnitDto.propertyId } },
-      },
-    });
-
-    return created.id;
+    const created = await this.prisma.unit.create({ data: createUnitDto });
+    return created;
   }
 
   async findAll({
@@ -98,14 +92,20 @@ export class UnitsService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Unit', { id, ...updateUnitDto }),
+      subject(this.SubjectType, updateUnitDto),
     );
+
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updateUnitDto,
+    });
 
     const updated = await this.prisma.unit.update({
       where: { id },
-      data: updateUnitDto,
+      data: frisked,
     });
-    return updated.id;
+    return updated;
   }
 
   async remove({ id }: { id: string }) {

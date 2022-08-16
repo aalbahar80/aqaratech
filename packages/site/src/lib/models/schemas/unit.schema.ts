@@ -32,8 +32,10 @@ export const updateSchema = z.object({
 		.nonnegative()
 		.nullish()
 		.transform(falsyToNullExceptZero),
+	organizationId: isID,
 });
 
 export const createSchema = updateSchema.extend({
+	portfolioId: isID,
 	propertyId: isID,
 });
