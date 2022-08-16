@@ -7,14 +7,12 @@ import {
 	fakeLease,
 	fakeLeaseInvoice,
 	fakeMaintenanceOrder,
-	fakeOrganization,
 	fakeOrganizationSettings,
 	fakePortfolio,
 	fakeProperty,
 	fakeTenant,
 	fakeUnit,
 	testOrgId,
-	testTenantId,
 	timespan,
 } from "./generators.js";
 import prisma from "./prisma.js";
@@ -95,11 +93,10 @@ export async function seed({
 		let tenantN = fakeTenant(unitOrganizationId);
 
 		if (idx === 0) {
-			tenantN.id = testTenantId;
-			tenantN.organizationId = testOrgId;
+			tenantN = sample.tenants[0] as any;
 		}
 
-		tenants.push(tenantN);
+		tenants.push(tenantN as any);
 		tenantLoop: while (date < new Date()) {
 			const leaseN = fakeLease(
 				tenantN.id,
@@ -122,7 +119,7 @@ export async function seed({
 				const tenantSearch = faker.datatype.number({ min: 1, max: 30 * 6 });
 				date = addDays(leaseN.end, tenantSearch);
 				tenantN = fakeTenant(unitOrganizationId);
-				tenants.push(tenantN);
+				tenants.push(tenantN as any);
 				continue tenantLoop;
 			}
 		}
