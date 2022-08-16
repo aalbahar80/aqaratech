@@ -6,6 +6,7 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import { entitiesMap } from '@self/utils';
 	import Fa6SolidLayerGroup from '~icons/fa6-solid/layer-group';
 
 	export let leaseId: string;
@@ -30,7 +31,10 @@
 	<div slot="menu">
 		<DropdownMenu>
 			<MenuItem as="div" let:active>
-				<a href={`/invoices/new-multiple?leaseId=${leaseId}`} sveltekit:reload>
+				<a
+					href={`/${entitiesMap.leaseInvoice.urlName}/new-multiple?leaseId=${leaseId}`}
+					sveltekit:reload
+				>
 					<MenuItemChild {active}>
 						<MenuItemIcon icon={Fa6SolidLayerGroup} />
 						Add multiple invoices

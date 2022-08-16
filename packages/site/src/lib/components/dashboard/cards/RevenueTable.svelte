@@ -3,6 +3,7 @@
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
 
@@ -28,7 +29,7 @@
 			},
 			view: {
 				label: 'View',
-				href: `/invoices/${i.id}`,
+				href: `/${entitiesMap.leaseInvoice.urlName}/${i.id}`,
 			},
 		};
 	});

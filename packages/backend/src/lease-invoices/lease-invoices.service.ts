@@ -4,6 +4,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
+import { entitiesMap } from '@self/utils';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
@@ -183,8 +184,8 @@ export class LeaseInvoicesService {
         amount: kwdFormat(payload.invoice.amount),
         date: payload.invoice.postAt.toISOString().split('T')[0],
         trxUrl: origin
-          ? `${origin}/invoices/${payload.invoice.id}`
-          : `https://aqaratech.com/invoices/${payload.invoice.id}`,
+          ? `${origin}/${entitiesMap.leaseInvoice.urlName}/${payload.invoice.id}`
+          : `https://aqaratech.com/${entitiesMap.leaseInvoice.urlName}/${payload.invoice.id}`,
         monthYear: new Date(payload.invoice.postAt).toLocaleDateString(
           'en-US',
           {

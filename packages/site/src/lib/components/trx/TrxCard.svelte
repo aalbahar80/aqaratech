@@ -4,6 +4,7 @@
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import type { LeaseInvoiceDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -48,7 +49,7 @@
 				{#if invoice.isPaid}
 					<span class="mt-4 sm:mt-0">
 						<a
-							href={`/invoices/${invoice.id}`}
+							href={`/${entitiesMap.leaseInvoice.urlName}/${invoice.id}`}
 							class="font-medium text-indigo-600 hover:text-indigo-500"
 						>
 							Details <span aria-hidden="true"> &rarr;</span>
