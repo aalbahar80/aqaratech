@@ -1,4 +1,4 @@
-import { testTenantRoleId } from "@self/seed";
+import { testPortfolioId, testTenantRoleId } from "@self/seed";
 import { expect, test } from "../../token";
 
 test.use({
@@ -11,7 +11,6 @@ const accessible = ["/leases", "/leaseInvoices"];
 const notAccessible = [
 	"/users",
 	"/organizations",
-	"/tenants",
 	"/portfolios",
 	"/properties",
 	"/units",
@@ -45,3 +44,28 @@ for (const route of notAccessible) {
 		await expect(res).not.toBeOK();
 	});
 }
+
+test("can only get self from /tenants", async ({ request, token }) => {
+	const res = await request.get("/tenants", {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	const body = await res.json();
+	expect(body.results.length).toBe(1);
+});
+
+test('cannot get files from "/files"', async ({ request, token }) => {
+	const res = await request.get("/files", {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		params: {
+			relationKey: "portfolio",
+			relationValue: testPortfolioId,
+			// relationKey: "tenant",
+			// relationValue: testTenantId,
+		},
+	});
+	await expect(res).not.toBeOK();
+});

@@ -1,4 +1,4 @@
-import { testPortfolioRoleId } from "@self/seed";
+import { testPortfolioId, testPortfolioRoleId } from "@self/seed";
 import { expect, test } from "../../token";
 
 test.use({
@@ -7,10 +7,8 @@ test.use({
 	},
 });
 
-const notAccessible = ["/organizations"];
+const notAccessible = ["/organizations", "/users"];
 const accessible = [
-	"/users",
-	"/organizations",
 	"/tenants",
 	"/portfolios",
 	"/properties",
@@ -20,8 +18,7 @@ const accessible = [
 	"/expenses",
 	"/aggregate/incomeByMonth",
 	"/aggregate/expensesByMonth",
-	"/search",
-	"/files",
+	// "/search",
 ];
 
 // check all accessible routes
@@ -47,3 +44,16 @@ for (const route of notAccessible) {
 		await expect(res).not.toBeOK();
 	});
 }
+
+test('can get files from "/files"', async ({ request, token }) => {
+	const res = await request.get("/files", {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		params: {
+			relationKey: "portfolio",
+			relationValue: testPortfolioId,
+		},
+	});
+	await expect(res).toBeOK();
+});
