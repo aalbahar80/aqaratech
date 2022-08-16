@@ -1,7 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -31,13 +30,7 @@ export class PortfoliosService {
       subject(this.SubjectType, createPortfolioDto),
     );
 
-    const toCreate = R.omit(createPortfolioDto, ['organizationId']);
-    return this.prisma.portfolio.create({
-      data: {
-        ...toCreate,
-        organization: { connect: { id: createPortfolioDto.organizationId } },
-      },
-    });
+    return this.prisma.portfolio.create({ data: createPortfolioDto });
   }
 
   async findAll({
