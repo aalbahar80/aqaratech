@@ -3,6 +3,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
+	import { OrganizationIdField } from '$lib/utils/form/organization-id-field';
 	import { schema } from '$models/schemas/portfolio.schema';
 	import type { PortfolioDto } from '@self/sdk';
 
@@ -29,12 +30,9 @@
 	export let data: TPortfolioDto = undefined as TPortfolioDto;
 
 	const basicFields = [
-		new Field('organizationId', {
-			required: true,
-			disabled: true,
-			hidden: true,
-			value: data?.organizationId || $session.user?.role?.organizationId,
-		}),
+		OrganizationIdField(
+			data?.organizationId || $session.user?.role?.organizationId,
+		),
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,
