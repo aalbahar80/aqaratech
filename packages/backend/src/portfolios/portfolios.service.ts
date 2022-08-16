@@ -26,14 +26,10 @@ export class PortfoliosService {
     createPortfolioDto: CreatePortfolioDto;
     user: IUser;
   }) {
-    await this.prisma.organization.findFirstOrThrow({
-      where: {
-        AND: [
-          { id: createPortfolioDto.organizationId },
-          accessibleBy(user.ability, Action.Update).Organization,
-        ],
-      },
-    });
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, createPortfolioDto),
+    );
 
     const toCreate = R.omit(createPortfolioDto, ['organizationId']);
     return this.prisma.portfolio.create({
