@@ -249,6 +249,7 @@
 					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `<style>` tag -->
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
 					<li
+						data-testid={item.value}
 						value={item}
 						class={classes(
 							'relative cursor-default select-none py-2 pl-3 pr-9',
