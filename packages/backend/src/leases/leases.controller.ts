@@ -41,7 +41,7 @@ import {
 } from 'src/leases/dto/lease.dto';
 import { LeasesService } from './leases.service';
 
-const SubjectType = 'Portfolio';
+const SubjectType = 'Lease';
 
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('leases')

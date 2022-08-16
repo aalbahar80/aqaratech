@@ -97,7 +97,10 @@ export class PortfoliosController {
   }
 
   @Get(':id/roles')
-  @CheckAbilities({ action: Action.Read, subject: 'Role' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Role' },
+  )
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,
@@ -109,7 +112,10 @@ export class PortfoliosController {
   }
 
   @Get(':id/properties')
-  @CheckAbilities({ action: Action.Read, subject: 'Property' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Property' },
+  )
   @ApiPaginatedResponse(PropertyDto)
   findProperties(
     @User() user: IUser,
@@ -121,7 +127,10 @@ export class PortfoliosController {
   }
 
   @Get(':id/units')
-  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Unit' },
+  )
   @ApiPaginatedResponse(UnitDto)
   findUnits(
     @User() user: IUser,

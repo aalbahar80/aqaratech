@@ -102,7 +102,7 @@ export class TenantsController {
   @Get(':id/leases')
   @CheckAbilities(
     { action: Action.Read, subject: SubjectType },
-    { action: Action.Create, subject: 'Lease' },
+    { action: Action.Read, subject: 'Lease' },
   )
   @ApiPaginatedResponse(LeaseDto)
   findLeases(

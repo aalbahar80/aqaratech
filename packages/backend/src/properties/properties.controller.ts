@@ -92,7 +92,10 @@ export class PropertiesController {
   }
 
   @Get(':id/units')
-  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Unit' },
+  )
   @ApiPaginatedResponse(UnitDto)
   findUnits(
     @User() user: IUser,
