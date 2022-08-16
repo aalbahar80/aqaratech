@@ -3,6 +3,9 @@ node_modules
 Dockerfile.backend
 Dockerfile.site
 
+.env
+**/.env
+
 ######################### COMMON ###############################################
 # https://raw.githubusercontent.com/erdaltsksn/dockerignore/main/templates/Common.dockerignore
 ################################################################################
