@@ -2,7 +2,6 @@ import {
   ApiHideProperty,
   ApiProperty,
   IntersectionType,
-  OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
@@ -22,6 +21,9 @@ import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto'
 
 class ExpenseRequiredDto {
   @IsID()
+  organizationId: string;
+
+  @IsID()
   portfolioId: string;
 
   @IsPositive()
@@ -37,13 +39,11 @@ class ExpenseOptionalDto {
 
   @IsID()
   @IsOptional()
-  // TODO remove question mark?
-  unitId?: string | null;
+  unitId: string | null;
 
   @IsID()
   @IsOptional()
-  // TODO remove question mark?
-  propertyId?: string | null;
+  propertyId: string | null;
 
   // TODO remove from schema
   @IsID()
@@ -60,10 +60,13 @@ class ExpenseBreadcrumbsDto extends IntersectionType(
   PartialType(PickType(BreadcrumbsDto, ['property', 'unit'])),
 ) {}
 
-export class ExpenseDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(ExpenseRequiredDto, ExpenseOptionalDto),
-) {
+export class ExpenseDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(ExpenseRequiredDto, ExpenseOptionalDto),
+  )
+  implements Expense
+{
   constructor(partial: Partial<ExpenseDto>, tree?: ExpenseCategoryDto[]) {
     super();
     Object.assign(this, partial);
@@ -118,10 +121,10 @@ export class ExpenseDto extends IntersectionType(
   }
 }
 
+export class PartialExpenseDto extends PartialType(ExpenseDto) {}
+
 export class CreateExpenseDto
   extends IntersectionType(ExpenseRequiredDto, PartialType(ExpenseOptionalDto))
   implements Partial<Expense> {}
 
-export class UpdateExpenseDto extends PartialType(
-  OmitType(CreateExpenseDto, ['portfolioId']),
-) {}
+export class UpdateExpenseDto extends PartialType(CreateExpenseDto) {}

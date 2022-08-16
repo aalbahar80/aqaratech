@@ -1,9 +1,10 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
@@ -19,6 +20,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class ExpensesService {
   constructor(private prisma: PrismaService) {}
+  SubjectType = 'Expense' as const;
 
   async create({
     createExpenseDto,
@@ -27,15 +29,10 @@ export class ExpensesService {
     createExpenseDto: CreateExpenseDto;
     user: IUser;
   }) {
-    await this.prisma.portfolio.findFirstOrThrow({
-      where: {
-        AND: [
-          { id: createExpenseDto.portfolioId },
-          // throws error if user cannot update _portfolio+
-          accessibleBy(user.ability, Action.Update).Portfolio,
-        ],
-      },
-    });
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Create,
+      subject(this.SubjectType, createExpenseDto),
+    );
 
     // VALIDATE EXPENSE CATEGORY
 
@@ -43,31 +40,7 @@ export class ExpensesService {
       await this.validateCategoryId(createExpenseDto.categoryId, user);
     }
 
-    // INSERT
-
-    const toCreate = R.omit(createExpenseDto, [
-      'portfolioId',
-      'propertyId',
-      'unitId',
-      'maintenanceOrderId',
-    ]);
-
-    const created = await this.prisma.expense.create({
-      data: {
-        ...toCreate,
-        portfolio: { connect: { id: createExpenseDto.portfolioId } },
-        ...(createExpenseDto.propertyId && {
-          property: { connect: { id: createExpenseDto.propertyId } },
-        }),
-        ...(createExpenseDto.unitId && {
-          unit: { connect: { id: createExpenseDto.unitId } },
-        }),
-        // ...(createExpenseDto.maintenanceOrderId && {
-        //   unit: { connect: { id: createExpenseDto.maintenanceOrderId } },
-        // }),
-      },
-    });
-    return created.id;
+    return this.prisma.expense.create({ data: createExpenseDto });
   }
 
   async findAll({
@@ -159,24 +132,23 @@ export class ExpensesService {
     updateExpenseDto: UpdateExpenseDto;
     user: IUser;
   }) {
-    await this.prisma.expense.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Update).Expense],
-      },
-    });
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, updateExpenseDto),
+    );
 
     // VALIDATE EXPENSE CATEGORY
-
     if (updateExpenseDto.categoryId) {
       await this.validateCategoryId(updateExpenseDto.categoryId, user);
     }
 
-    // INSERT
-    const updated = await this.prisma.expense.update({
-      where: { id },
-      data: updateExpenseDto,
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updateExpenseDto,
     });
-    return updated.id;
+
+    return this.prisma.expense.update({ where: { id }, data: frisked });
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

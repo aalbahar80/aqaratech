@@ -8,6 +8,7 @@ export const updateSchema = z.object({
 	categoryId: z.string().nullable().transform(falsyToNull),
 	postAt: zodIsDateRequired(),
 	memo: z.string().transform(trim).transform(falsyToNull).nullable(),
+	organizationId: isID,
 });
 
 export const createSchema = updateSchema.extend({

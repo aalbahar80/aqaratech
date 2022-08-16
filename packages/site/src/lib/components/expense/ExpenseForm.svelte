@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toOptions } from '$lib/utils/expense-type-options';
+	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
 	import type {
 		ExpenseCategoryDto,
@@ -93,6 +94,9 @@
 			: [];
 
 	const basicFields = [
+		OrganizationIdField(
+			data?.organizationId || $session.user?.role?.organizationId,
+		),
 		new Field('amount', {
 			required: true,
 			type: 'number',
