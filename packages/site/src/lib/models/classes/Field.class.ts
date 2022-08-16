@@ -28,6 +28,7 @@ export class Field {
 	description = '';
 	required = false; // TODO: derive from zod schema
 	disabled = false;
+	hidden = false;
 	/**
 	 * If true, the value of this field will be passed to Felte's `initialValues` argument.
 	 *

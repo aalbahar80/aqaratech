@@ -29,7 +29,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div>
+<div class:sr-only={field.hidden}>
 	{#if field.type !== 'checkbox'}
 		<div class="flex items-center gap-2">
 			<label for={field.name} class="text-sm font-medium text-gray-700">
