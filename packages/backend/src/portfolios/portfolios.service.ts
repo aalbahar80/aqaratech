@@ -26,7 +26,7 @@ export class PortfoliosService {
     user: IUser;
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
+      Action.Create,
       subject(this.SubjectType, createPortfolioDto),
     );
 
