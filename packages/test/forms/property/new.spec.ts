@@ -2,12 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../../config";
 
 test("smoke", async ({ page }, info) => {
-	await page.goto("/");
-	await page.locator('a:has-text("Properties")').click();
-	await expect(page).toHaveURL("http://localhost:3000/properties");
-
-	await page.locator("text=Create new property").click();
-	await expect(page).toHaveURL("http://localhost:3000/properties/new");
+	await page.goto("/properties/new");
 
 	// fill form
 

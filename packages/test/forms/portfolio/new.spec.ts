@@ -2,12 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../../config";
 
 test("smoke", async ({ page }, info) => {
-	await page.goto("/");
-	await page.locator("text=Portfolios").click();
-	await expect(page).toHaveURL("http://localhost:3000/portfolios");
-
-	await page.locator("text=Create new portfolio").click();
-	await expect(page).toHaveURL("http://localhost:3000/portfolios/new");
+	await page.goto("/portfolios/new");
 
 	await page.locator('input[name="fullName"]').click();
 	await page.locator('input[name="fullName"]').fill("John Doe");
