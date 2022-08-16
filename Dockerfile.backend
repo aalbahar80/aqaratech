@@ -14,10 +14,13 @@ COPY pnpm-lock.yaml ./
 RUN pnpm fetch
 
 ADD . ./
-# skip prisma client generation here?
+
+# ENV PRISMA_SKIP_POSTINSTALL_GENERATE=1
+
+# Frozen lockfile here?
 RUN pnpm --filter=. --filter=@self/backend... install --offline
 
-RUN pnpm --filter=@self/backend run build 
+RUN pnpm --filter=@self/backend... run build 
 
 RUN pnpm --filter=@self/backend --prod deploy pruned
 
