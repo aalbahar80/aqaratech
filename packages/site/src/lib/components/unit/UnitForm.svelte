@@ -6,10 +6,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
-	import {
-		OrganizationIdField,
-		PortfolioIdField,
-	} from '$lib/utils/form/common-fields';
+	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { createSchema, updateSchema } from '$models/schemas/unit.schema';
 	import type {
 		PaginatedPortfolioDto,
