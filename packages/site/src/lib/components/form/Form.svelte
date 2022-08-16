@@ -32,7 +32,7 @@
 		return goto(`/${entitiesMap[entity].urlName}/${id}`);
 	};
 
-	$: noErrorMsg = Object.values($errors).every((e) => e === null);
+	// $: noErrorMsg = Object.values($errors).every((e) => e === null);
 
 	// Manually pass initialValues for fields that do not use the `name` attribute.
 	const initialValues = [...basicFields, ...relationalFields].reduce<
@@ -128,11 +128,7 @@
 			</div>
 		</div>
 		<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
-			<Button
-				text="Save"
-				disabled={!noErrorMsg || $isSubmitting}
-				loading={$isSubmitting}
-			/>
+			<Button text="Save" disabled={$isSubmitting} loading={$isSubmitting} />
 		</div>
 	</form>
 	{#if dev}
