@@ -23,7 +23,7 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
 
 # static environment variables should be available at this point
 # TODO move env var to bash script
-RUN pnpm --filter=@self/site --filter=@self/sdk run build 
+RUN pnpm --filter=@self/site --filter=@self/sdk run build
 
 RUN pnpm --filter=@self/site deploy pruned
 
