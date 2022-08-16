@@ -40,6 +40,8 @@ import {
 } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
 
+const SubjectType = 'Tenant';
+
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('tenants')
 @ApiTags('tenants')
@@ -53,17 +55,17 @@ export class TenantsController {
   ) {}
 
   @Post()
-  @CheckAbilities({ action: Action.Create, subject: 'Tenant' })
-  @ApiCreatedResponse({ type: String })
+  @CheckAbilities({ action: Action.Create, subject: SubjectType })
+  @ApiCreatedResponse({ type: TenantDto })
   create(
     @User() user: IUser,
     @Body() createTenantDto: CreateTenantDto,
-  ): Promise<string> {
+  ): Promise<TenantDto> {
     return this.tenantsService.create({ createTenantDto, user });
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiPaginatedResponse(TenantDto)
   findAll(
     @User() user: IUser,
@@ -73,32 +75,35 @@ export class TenantsController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: TenantDto })
   findOne(@Param('id') id: string): Promise<TenantDto> {
     return this.tenantsService.findOne({ id });
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Tenant' })
-  @ApiOkResponse({ type: String })
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
+  @ApiOkResponse({ type: TenantDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateTenantDto: UpdateTenantDto,
-  ): Promise<string> {
+  ): Promise<TenantDto> {
     return this.tenantsService.update({ id, updateTenantDto, user });
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Tenant' })
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: String })
   remove(@Param('id') id: string): Promise<string> {
     return this.tenantsService.remove({ id });
   }
 
   @Get(':id/leases')
-  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Create, subject: 'Lease' },
+  )
   @ApiPaginatedResponse(LeaseDto)
   findLeases(
     @User() user: IUser,
@@ -110,7 +115,10 @@ export class TenantsController {
   }
 
   @Get(':id/invoices')
-  @CheckAbilities({ action: Action.Read, subject: 'Tenant' })
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'LeaseInvoice' },
+  )
   @ApiPaginatedResponse(LeaseInvoiceDto)
   findInvoices(
     @User() user: IUser,
@@ -124,6 +132,10 @@ export class TenantsController {
   }
 
   @Get(':id/roles')
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Role' },
+  )
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,

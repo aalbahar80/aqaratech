@@ -4,6 +4,7 @@
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
+	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { schema } from '$models/schemas/tenant.schema';
 	import type { TenantDto } from '@self/sdk';
 
@@ -30,6 +31,9 @@
 	export let data: TTenantDto = undefined as TTenantDto;
 
 	const basicFields = [
+		OrganizationIdField(
+			data?.organizationId || $session.user?.role?.organizationId,
+		),
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,
@@ -96,16 +100,8 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			const organizationId = $session.user?.role?.organizationId;
-			if (!organizationId) {
-				// type hack
-				throw new Error('No organizationId found in session');
-			}
 			return $page.stuff.api.tenants.create({
-				createTenantDto: {
-					...values,
-					organizationId,
-				},
+				createTenantDto: values,
 			});
 		}}
 	/>

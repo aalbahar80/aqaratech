@@ -1,3 +1,4 @@
+import { isID } from '$lib/models/schemas/id.schema';
 import { zodIsDateOptional } from '$lib/utils/zod-validators';
 import { digitsOnly, falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
@@ -40,4 +41,5 @@ export const schema = z.object({
 	residencyNum: z.string().nullable().transform(trim).transform(falsyToNull),
 	nationality: z.string().nullable().transform(trim).transform(falsyToNull),
 	residencyEnd: zodIsDateOptional(),
+	organizationId: isID,
 });

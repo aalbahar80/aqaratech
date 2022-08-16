@@ -1,8 +1,8 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -16,6 +16,7 @@ import {
 @Injectable()
 export class TenantsService {
   constructor(private prisma: PrismaService) {}
+  SubjectType = 'Tenant' as const;
 
   async create({
     createTenantDto,
@@ -26,17 +27,10 @@ export class TenantsService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Create,
-      subject('Tenant', createTenantDto),
+      subject(this.SubjectType, createTenantDto),
     );
 
-    const toCreate = R.omit(createTenantDto, ['organizationId']);
-    const created = await this.prisma.tenant.create({
-      data: {
-        ...toCreate,
-        organization: { connect: { id: createTenantDto.organizationId } },
-      },
-    });
-    return created.id;
+    return this.prisma.tenant.create({ data: createTenantDto });
   }
 
   async findAll({
@@ -91,14 +85,16 @@ export class TenantsService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject('Tenant', { id, ...updateTenantDto }),
+      subject(this.SubjectType, updateTenantDto),
     );
 
-    const updated = await this.prisma.tenant.update({
-      where: { id },
-      data: updateTenantDto,
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updateTenantDto,
     });
-    return updated.id;
+
+    return this.prisma.tenant.update({ where: { id }, data: frisked });
   }
 
   async remove({ id }: { id: string }) {
