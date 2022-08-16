@@ -1,4 +1,4 @@
-import { Portfolio, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import {
 	testOrgEmail,
 	testOrgId,
@@ -46,9 +46,6 @@ const roles = Prisma.validator<Prisma.RoleCreateManyArgs["data"]>()([
 		roleType: "TENANT",
 	},
 ]);
-// id: "1df75d02-c437-4f20-a4e8-0a8754e84302",
-// id: "a7ce3151-2e4a-4eba-bbe0-5a600f23a829",
-// id: "2b66cc94-1ec9-4aff-a6ab-d7a9cf2b57f6",
 
 const organizations = Prisma.validator<
 	Prisma.OrganizationCreateManyArgs["data"]
@@ -89,6 +86,20 @@ const properties = Prisma.validator<Prisma.PropertyCreateManyArgs["data"]>()([
 	},
 ]);
 
+const units = Prisma.validator<Prisma.UnitCreateManyArgs["data"]>()([
+	{
+		id: "1df75d02-c437-4f20-a4e8-0a8754e84302",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		propertyId: properties[0]!.id,
+		unitNumber: "99",
+		type: "فيلا",
+	},
+]);
+
+// id: "a7ce3151-2e4a-4eba-bbe0-5a600f23a829",
+// id: "2b66cc94-1ec9-4aff-a6ab-d7a9cf2b57f6",
+
 export const sample = {
 	users,
 	roles,
@@ -96,4 +107,5 @@ export const sample = {
 	tenants,
 	portfolios,
 	properties,
+	units,
 };

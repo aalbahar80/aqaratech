@@ -66,16 +66,24 @@ export async function seed({
 		) as any
 	);
 
-	const properties = portfolios.flatMap((portfolio) =>
-		Array.from(
-			{ length: faker.datatype.number({ min: propertyMin, max: propertyMax }) },
-			() => fakeProperty(portfolio.id, portfolio.organizationId)
-		)
+	const properties = sample.properties;
+	properties.concat(
+		portfolios.flatMap((portfolio) =>
+			Array.from(
+				{
+					length: faker.datatype.number({ min: propertyMin, max: propertyMax }),
+				},
+				() => fakeProperty(portfolio.id, portfolio.organizationId)
+			)
+		) as any
 	);
-	const units = properties.flatMap((property) =>
-		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-			fakeUnit(property.id, property.portfolioId, property.organizationId)
-		)
+	const units = sample.units;
+	units.concat(
+		properties.flatMap((property) =>
+			Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
+				fakeUnit(property.id, property.portfolioId, property.organizationId)
+			)
+		) as any
 	);
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
