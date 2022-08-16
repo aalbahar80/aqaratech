@@ -18,7 +18,8 @@ const accessible = [
 	"/leases",
 	"/leaseInvoices",
 	"/expenses",
-	"/aggregate",
+	"/aggregate/incomeByMonth",
+	"/aggregate/expensesByMonth",
 	"/search",
 	"/files",
 ];
