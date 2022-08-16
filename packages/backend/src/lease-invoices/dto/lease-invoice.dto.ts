@@ -20,6 +20,12 @@ import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
 
 class LeaseInvoiceRequiredDto {
+  @IsID()
+  organizationId: string;
+
+  @IsID()
+  portfolioId: string;
+
   @IsPositive()
   amount: number;
 
@@ -56,10 +62,13 @@ class LeaseInvoiceBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'lease',
 ]) {}
 
-export class LeaseInvoiceDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(LeaseInvoiceRequiredDto, LeaseInvoiceOptionalDto),
-) {
+export class LeaseInvoiceDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(LeaseInvoiceRequiredDto, LeaseInvoiceOptionalDto),
+  )
+  implements LeaseInvoice
+{
   constructor(partial: Partial<LeaseInvoiceDto>) {
     super();
     Object.assign(this, partial);
@@ -97,6 +106,8 @@ export class LeaseInvoiceDto extends IntersectionType(
   }
 }
 
+export class PartialLeaseInvoiceDto extends PartialType(LeaseInvoiceDto) {}
+
 export class CreateLeaseInvoiceDto
   extends IntersectionType(
     LeaseInvoiceRequiredDto,
@@ -109,6 +120,4 @@ export class CreateManyLeaseInvoicesDto extends OmitType(
   ['leaseId'],
 ) {}
 
-export class UpdateLeaseInvoiceDto extends PartialType(
-  OmitType(CreateLeaseInvoiceDto, ['leaseId']),
-) {}
+export class UpdateLeaseInvoiceDto extends PartialType(CreateLeaseInvoiceDto) {}

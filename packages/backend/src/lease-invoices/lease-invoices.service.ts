@@ -1,11 +1,12 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
-import * as R from 'remeda';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -30,6 +31,7 @@ export class LeaseInvoicesService {
     private readonly eventEmitter: EventEmitter2,
     readonly configService: ConfigService<EnvironmentConfig>,
   ) {}
+  SubjectType = 'LeaseInvoice' as const;
 
   private readonly logger = new Logger(LeaseInvoicesService.name);
 
@@ -40,24 +42,12 @@ export class LeaseInvoicesService {
     createLeaseInvoiceDto: CreateLeaseInvoiceDto;
     user: IUser;
   }) {
-    await this.prisma.lease.findFirstOrThrow({
-      where: {
-        AND: [
-          { id: createLeaseInvoiceDto.leaseId },
-          // throws error if user cannot update _lease_
-          accessibleBy(user.ability, Action.Update).Lease,
-        ],
-      },
-    });
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Create,
+      subject(this.SubjectType, createLeaseInvoiceDto),
+    );
 
-    const toCreate = R.omit(createLeaseInvoiceDto, ['leaseId']);
-    const created = await this.prisma.leaseInvoice.create({
-      data: {
-        ...toCreate,
-        lease: { connect: { id: createLeaseInvoiceDto.leaseId } },
-      },
-    });
-    return created.id;
+    return this.prisma.leaseInvoice.create({ data: createLeaseInvoiceDto });
   }
 
   async findAll({
@@ -112,18 +102,18 @@ export class LeaseInvoicesService {
     updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
     user: IUser;
   }) {
-    // throws error if user cannot update invoice
-    await this.prisma.leaseInvoice.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Update).LeaseInvoice],
-      },
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, updateLeaseInvoiceDto),
+    );
+
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updateLeaseInvoiceDto,
     });
 
-    const updated = await this.prisma.leaseInvoice.update({
-      where: { id },
-      data: updateLeaseInvoiceDto,
-    });
-    return updated.id;
+    return this.prisma.leaseInvoice.update({ where: { id }, data: frisked });
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

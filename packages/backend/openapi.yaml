@@ -452,7 +452,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
       tags: &ref_5
         - leaseInvoices
     get:
@@ -581,7 +581,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
       tags: *ref_5
     delete:
       operationId: remove
@@ -2787,6 +2787,10 @@ components:
           nullable: true
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
@@ -2806,6 +2810,8 @@ components:
         - updatedAt
         - postAt
         - breadcrumbs
+        - organizationId
+        - portfolioId
         - amount
         - leaseId
         - isPaid
@@ -2924,6 +2930,10 @@ components:
         paidAt:
           type: string
           nullable: true
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
@@ -2939,8 +2949,51 @@ components:
           nullable: true
       required:
         - postAt
+        - organizationId
+        - portfolioId
         - amount
         - leaseId
+    PartialLeaseInvoiceDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          format: date-time
+          type: string
+          readOnly: true
+        updatedAt:
+          format: date-time
+          type: string
+          readOnly: true
+        postAt:
+          type: string
+        dueAt:
+          type: string
+          nullable: true
+        paidAt:
+          type: string
+          nullable: true
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        amount:
+          type: number
+          minimum: 1
+        leaseId:
+          type: string
+        isPaid:
+          type: boolean
+        memo:
+          type: string
+          nullable: true
+        mfPaymentId:
+          type: string
+          nullable: true
     UpdateLeaseInvoiceDto:
       type: object
       properties:
@@ -2952,9 +3005,15 @@ components:
         paidAt:
           type: string
           nullable: true
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
+        leaseId:
+          type: string
         isPaid:
           type: boolean
         memo:
@@ -3076,6 +3135,10 @@ components:
         paidAt:
           type: string
           nullable: true
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         amount:
           type: number
           minimum: 1
@@ -3089,6 +3152,8 @@ components:
           nullable: true
       required:
         - postAt
+        - organizationId
+        - portfolioId
         - amount
     CreatePortfolioDto:
       type: object

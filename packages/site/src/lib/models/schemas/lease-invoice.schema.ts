@@ -14,6 +14,7 @@ export const updateSchema = z
 		isPaid: z.boolean(),
 		amount: z.number().gt(0),
 		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
+		organizationId: isID,
 	})
 	.refine(
 		(val) => {
@@ -41,6 +42,7 @@ export const updateSchema = z
 export const createSchema = z
 	.object({
 		leaseId: isID,
+		portfolioId: isID,
 		// dupes
 		dueAt: zodIsDateOptional(),
 		postAt: zodIsDateRequired(),
@@ -48,6 +50,7 @@ export const createSchema = z
 		isPaid: z.boolean(),
 		amount: z.number().gt(0),
 		memo: z.string().transform(trim).transform(falsyToNull).nullable(),
+		organizationId: isID,
 	})
 	.refine(
 		(val) => {

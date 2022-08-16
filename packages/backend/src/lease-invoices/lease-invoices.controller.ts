@@ -25,6 +25,7 @@ import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-opt
 import {
   CreateLeaseInvoiceDto,
   LeaseInvoiceDto,
+  PartialLeaseInvoiceDto,
   UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from './lease-invoices.service';
@@ -37,11 +38,11 @@ export class LeaseInvoicesController {
   constructor(private readonly leaseInvoicesService: LeaseInvoicesService) {}
 
   @Post()
-  @ApiCreatedResponse({ type: String })
+  @ApiCreatedResponse({ type: PartialLeaseInvoiceDto })
   create(
     @User() user: IUser,
     @Body() createLeaseInvoiceDto: CreateLeaseInvoiceDto,
-  ): Promise<string> {
+  ): Promise<PartialLeaseInvoiceDto> {
     return this.leaseInvoicesService.create({ createLeaseInvoiceDto, user });
   }
 
@@ -64,12 +65,12 @@ export class LeaseInvoicesController {
   }
 
   @Patch(':id')
-  @ApiOkResponse({ type: String })
+  @ApiOkResponse({ type: PartialLeaseInvoiceDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
-  ): Promise<string> {
+  ): Promise<PartialLeaseInvoiceDto> {
     return this.leaseInvoicesService.update({
       id,
       updateLeaseInvoiceDto,
