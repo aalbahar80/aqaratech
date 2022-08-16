@@ -10,7 +10,7 @@
 		createSchema,
 		updateSchema,
 	} from '$lib/models/schemas/property.schema';
-	import { OrganizationIdField } from '$lib/utils/form/organization-id-field';
+	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;

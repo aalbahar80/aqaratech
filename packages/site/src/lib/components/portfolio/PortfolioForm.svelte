@@ -3,7 +3,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
-	import { OrganizationIdField } from '$lib/utils/form/organization-id-field';
+	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { schema } from '$models/schemas/portfolio.schema';
 	import type { PortfolioDto } from '@self/sdk';
 

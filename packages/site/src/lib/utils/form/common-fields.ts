@@ -7,3 +7,11 @@ export const OrganizationIdField = (value: string | undefined) =>
 		hidden: true,
 		value,
 	});
+
+export const PortfolioIdField = (value: string | undefined) =>
+	new Field('portfolioId', {
+		required: true,
+		disabled: true,
+		hidden: true,
+		value,
+	});
