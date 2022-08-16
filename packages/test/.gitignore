@@ -4,4 +4,4 @@ playwright-report/
 storageState.json
 
 # */*snapshots/*
-*/*snapshots/*.png
+**/*snapshots/*.png
