@@ -8,14 +8,14 @@ import { IUser } from 'src/interfaces/user.interface';
 /**
  * Strip out fields that are not permitted to be updated by the user.
  */
-export const frisk = ({
+export const frisk = <T extends Record<string, any>>({
   user,
   SubjectType,
   instance,
 }: {
   user: IUser;
   SubjectType: any;
-  instance: any;
+  instance: T;
 }) => {
   const fields = R.keys(instanceToPlain(instance));
   const permittedFields = permittedFieldsOf(
