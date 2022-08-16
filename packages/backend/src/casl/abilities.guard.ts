@@ -1,4 +1,3 @@
-import { subject } from '@casl/ability';
 import {
   CACHE_MANAGER,
   CanActivate,
@@ -129,8 +128,6 @@ export class AbilitiesGuard implements CanActivate {
       });
     }
 
-    const requestHasParams = Object.keys(request.params).length > 0;
-
     /**
      * `isAllowed` here refers to the rule defined in the guard decorator.
      * _Not_ to be confused with rules defined in the service.
@@ -148,36 +145,7 @@ export class AbilitiesGuard implements CanActivate {
      * TODO should this also be invalidated?
      */
     const isAllowed = rules.every((rule) => {
-      if (requestHasParams && !rule.skipParamCheck) {
-        const params = rule.params || ['id'];
-
-        // TODO current implementation is misleading. Rename params to idParam. Where the passed in
-        // param name should always be mapped to the `id` of the subject.
-        //
-        // Example: @CheckAbilities(CreateTenant, params: ['orgId']), means that
-        // subjectFields = { id: request.params.orgId } // what docs imply as current
-        // subjectFields = { orgId: request.params.orgId } // actual current
-        const subjectFields: Record<string, any> = {};
-        params.forEach((param) => {
-          const paramValue = request.params[param];
-          if (paramValue) {
-            subjectFields[param] = paramValue;
-          } else {
-            this.logger.warn(
-              `param with name ${param} was either not found in request or was falsy`,
-            );
-          }
-        });
-
-        // TODO fix type
-        return user.ability.can(
-          rule.action,
-          // @ts-ignore
-          subject(rule.subject, { ...subjectFields }),
-        );
-      } else {
-        return user.ability.can(rule.action, rule.subject);
-      }
+      return user.ability.can(rule.action, rule.subject);
     });
 
     // TODO add event listener to invalidate all cache entries whenever resource is created/updated

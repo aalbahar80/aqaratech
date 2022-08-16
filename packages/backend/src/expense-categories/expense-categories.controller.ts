@@ -78,11 +78,7 @@ export class ExpenseCategoriesController {
 
   // TODO ability check
   @Patch(':id')
-  @CheckAbilities({
-    action: Action.Update,
-    subject: 'Organization',
-    skipParamCheck: true,
-  })
+  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
   @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
