@@ -15,6 +15,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -48,6 +50,7 @@ export class PortfoliosController {
   ) {}
 
   @Post()
+  @CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
   @ApiCreatedResponse({ type: PortfolioDto })
   create(
     @User() user: IUser,
@@ -57,6 +60,7 @@ export class PortfoliosController {
   }
 
   @Get()
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiPaginatedResponse(PortfolioDto)
   findAll(
     @User() user: IUser,
@@ -66,12 +70,14 @@ export class PortfoliosController {
   }
 
   @Get(':id')
+  @CheckAbilities({ action: Action.Read, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
   findOne(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.findOne({ id, user });
   }
 
   @Patch(':id')
+  @CheckAbilities({ action: Action.Update, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
   update(
     @User() user: IUser,
@@ -82,12 +88,14 @@ export class PortfoliosController {
   }
 
   @Delete(':id')
+  @CheckAbilities({ action: Action.Delete, subject: 'Portfolio' })
   @ApiOkResponse({ type: PortfolioDto })
   remove(@User() user: IUser, @Param('id') id: string): Promise<PortfolioDto> {
     return this.portfoliosService.remove({ id, user });
   }
 
   @Get(':id/roles')
+  @CheckAbilities({ action: Action.Read, subject: 'Role' })
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,
@@ -99,6 +107,7 @@ export class PortfoliosController {
   }
 
   @Get(':id/properties')
+  @CheckAbilities({ action: Action.Read, subject: 'Property' })
   @ApiPaginatedResponse(PropertyDto)
   findProperties(
     @User() user: IUser,
@@ -110,6 +119,7 @@ export class PortfoliosController {
   }
 
   @Get(':id/units')
+  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
   @ApiPaginatedResponse(UnitDto)
   findUnits(
     @User() user: IUser,
