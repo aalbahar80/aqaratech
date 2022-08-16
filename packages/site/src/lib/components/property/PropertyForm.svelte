@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page, session } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { areas } from '$lib/constants/areas-kwt';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
-	import { createSchema, updateSchema } from '$models/schemas/property.schema';
+	import {
+		createSchema,
+		updateSchema,
+	} from '$lib/models/schemas/property.schema';
+	import { OrganizationIdField } from '$lib/utils/form/organization-id-field';
 	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;
@@ -64,6 +68,9 @@
 			: [];
 
 	const basicFields = [
+		OrganizationIdField(
+			data?.organizationId || $session.user?.role?.organizationId,
+		),
 		new SelectField('area', {
 			required: true,
 			value: data?.area,

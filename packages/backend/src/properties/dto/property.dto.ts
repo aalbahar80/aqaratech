@@ -2,7 +2,6 @@ import {
   ApiHideProperty,
   ApiProperty,
   IntersectionType,
-  OmitType,
   PartialType,
   PickType,
 } from '@nestjs/swagger';
@@ -25,6 +24,9 @@ import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
 
 class PropertyRequiredDto {
+  @IsID()
+  organizationId: string;
+
   @IsID()
   portfolioId: string;
 
@@ -69,10 +71,13 @@ class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
   'property',
 ]) {}
 
-export class PropertyDto extends IntersectionType(
-  AbstractDto,
-  IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
-) {
+export class PropertyDto
+  extends IntersectionType(
+    AbstractDto,
+    IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
+  )
+  implements Property
+{
   constructor(partial: Partial<PropertyDto>) {
     super();
     Object.assign(this, partial);
@@ -113,6 +118,4 @@ export class CreatePropertyDto
   )
   implements Partial<Property> {}
 
-export class UpdatePropertyDto extends PartialType(
-  OmitType(CreatePropertyDto, ['portfolioId']),
-) {}
+export class UpdatePropertyDto extends PartialType(CreatePropertyDto) {}

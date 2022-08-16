@@ -1230,7 +1230,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PropertyDto'
       tags: &ref_11
         - properties
     get:
@@ -1329,7 +1329,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/PropertyDto'
       tags: *ref_11
     delete:
       operationId: remove
@@ -3140,6 +3140,8 @@ components:
           type: string
         breadcrumbs:
           $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+        organizationId:
+          type: string
         portfolioId:
           type: string
         area:
@@ -3183,6 +3185,7 @@ components:
         - updatedAt
         - address
         - breadcrumbs
+        - organizationId
         - portfolioId
         - area
         - block
@@ -3301,6 +3304,8 @@ components:
     CreatePropertyDto:
       type: object
       properties:
+        organizationId:
+          type: string
         portfolioId:
           type: string
         area:
@@ -3339,11 +3344,16 @@ components:
           type: number
           nullable: true
       required:
+        - organizationId
         - portfolioId
         - area
     UpdatePropertyDto:
       type: object
       properties:
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
         area:
           type: string
           nullable: true

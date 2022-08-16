@@ -1,8 +1,9 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import * as R from 'remeda';
 import { Action } from 'src/casl/casl-ability.factory';
+import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -17,6 +18,7 @@ import {
 @Injectable()
 export class PropertiesService {
   constructor(private prisma: PrismaService) {}
+  SubjectType = 'Property' as const;
 
   async create({
     createPropertyDto,
@@ -25,23 +27,15 @@ export class PropertiesService {
     createPropertyDto: CreatePropertyDto;
     user: IUser;
   }) {
-    await this.prisma.portfolio.findFirstOrThrow({
-      where: {
-        AND: [
-          { id: createPropertyDto.portfolioId },
-          accessibleBy(user.ability, Action.Update).Portfolio,
-        ],
-      },
-    });
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, createPropertyDto),
+    );
 
-    const toCreate = R.omit(createPropertyDto, ['portfolioId']);
     const created = await this.prisma.property.create({
-      data: {
-        ...toCreate,
-        portfolio: { connect: { id: createPropertyDto.portfolioId } },
-      },
+      data: createPropertyDto,
     });
-    return created.id;
+    return new PropertyDto(created);
   }
 
   async findAll({
@@ -96,17 +90,22 @@ export class PropertiesService {
     updatePropertyDto: UpdatePropertyDto;
     user: IUser;
   }) {
-    await this.prisma.property.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Update).Property],
-      },
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, updatePropertyDto),
+    );
+
+    const frisked = frisk({
+      user,
+      SubjectType: this.SubjectType,
+      instance: updatePropertyDto,
     });
 
     const updated = await this.prisma.property.update({
       where: { id },
-      data: updatePropertyDto,
+      data: frisked,
     });
-    return updated.id;
+    return new PropertyDto(updated);
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

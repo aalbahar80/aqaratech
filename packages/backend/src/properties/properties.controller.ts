@@ -15,6 +15,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -32,6 +34,8 @@ import { UnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
+const SubjectType = 'Property';
+
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('properties')
 @ApiTags('properties')
@@ -43,15 +47,17 @@ export class PropertiesController {
   ) {}
 
   @Post()
-  @ApiCreatedResponse({ type: String })
+  @CheckAbilities({ action: Action.Create, subject: SubjectType })
+  @ApiCreatedResponse({ type: PropertyDto })
   create(
     @User() user: IUser,
     @Body() createPropertyDto: CreatePropertyDto,
-  ): Promise<string> {
+  ): Promise<PropertyDto> {
     return this.propertiesService.create({ createPropertyDto, user });
   }
 
   @Get()
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiPaginatedResponse(PropertyDto)
   findAll(
     @User() user: IUser,
@@ -61,28 +67,32 @@ export class PropertiesController {
   }
 
   @Get(':id')
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: PropertyDto })
   findOne(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.findOne({ id, user });
   }
 
   @Patch(':id')
-  @ApiOkResponse({ type: String })
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
+  @ApiOkResponse({ type: PropertyDto })
   update(
     @User() user: IUser,
     @Param('id') id: string,
     @Body() updatePropertyDto: UpdatePropertyDto,
-  ): Promise<string> {
+  ): Promise<PropertyDto> {
     return this.propertiesService.update({ id, updatePropertyDto, user });
   }
 
   @Delete(':id')
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: String })
   remove(@User() user: IUser, @Param('id') id: string): Promise<string> {
     return this.propertiesService.remove({ id, user });
   }
 
   @Get(':id/units')
+  @CheckAbilities({ action: Action.Read, subject: 'Unit' })
   @ApiPaginatedResponse(UnitDto)
   findUnits(
     @User() user: IUser,
