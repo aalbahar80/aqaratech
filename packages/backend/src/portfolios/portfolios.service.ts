@@ -86,10 +86,8 @@ export class PortfoliosService {
     updatePortfolioDto: UpdatePortfolioDto;
     user: IUser;
   }) {
-    // check if user has permission to update specific instance
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      // TODO add organizationId to portfolioDto
       subject(this.SubjectType, updatePortfolioDto),
     );
 
@@ -98,7 +96,6 @@ export class PortfoliosService {
       SubjectType: this.SubjectType,
       instance: updatePortfolioDto,
     });
-    console.log({ frisked }, 'portfolios.service.ts ~ 109'); // TODO rm
 
     return this.prisma.portfolio.update({ where: { id }, data: frisked });
   }
