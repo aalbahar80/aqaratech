@@ -23,7 +23,7 @@ export class HealthService {
     private promClientService: PrometheusService, // private anyOtherService: AnyOtherService,
     readonly configService: ConfigService<EnvironmentConfig>,
   ) {
-    const url = configService.get('apiConfig.PUBLIC_API_URL', {
+    const url = configService.get('apiConfig.PUBLIC_API_URL_LOCAL', {
       infer: true,
     });
 
