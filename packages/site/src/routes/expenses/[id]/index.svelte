@@ -8,21 +8,16 @@
 	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
 		const expenseId = params.id;
 
-		const [expense, files] = await Promise.all([
+		const [expense] = await Promise.all([
 			stuff.api!.expenses.findOne({ id: expenseId }),
-			stuff.api!.files.findAll({
-				relationKey: 'expense',
-				relationValue: params.id,
-			}),
 		]);
-		return { props: { expense, files } };
+		return { props: { expense } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let expense: Prop['expense'];
-	export let files: Prop['files'];
 
 	$: details = [
 		['Post Date', toUTCFormat(expense.postAt)],
@@ -33,4 +28,4 @@
 </script>
 
 <ExpensePage {expense} />
-<DetailsPane {details} {files} />
+<DetailsPane {details} />

@@ -4,24 +4,19 @@
 	import type { LP } from 'src/types/load-props';
 
 	export const load = async ({ params, stuff }: LoadEvent<{ id: string }>) => {
-		const [leaseInvoice, files] = await Promise.all([
+		const [leaseInvoice] = await Promise.all([
 			stuff.api!.leaseInvoices.findOne({
 				id: params.id,
 			}),
-			stuff.api!.files.findAll({
-				relationKey: 'leaseInvoice',
-				relationValue: params.id,
-			}),
 		]);
 
-		return { props: { leaseInvoice, files } };
+		return { props: { leaseInvoice } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let leaseInvoice: Prop['leaseInvoice'];
-	export let files: Prop['files'];
 </script>
 
-<LeaseInvoicePage trx={leaseInvoice} {files} />
+<LeaseInvoicePage trx={leaseInvoice} />

@@ -39,7 +39,6 @@
 
 		const [
 			unit,
-			files,
 			leases,
 			invoicesGrouped,
 			expensesGrouped,
@@ -50,10 +49,6 @@
 			categories,
 		] = await Promise.all([
 			stuff.api!.units.findOne({ id: unitId }),
-			stuff.api!.files.findAll({
-				relationKey: 'unit',
-				relationValue: unitId,
-			}),
 			stuff.api!.units.findLeases({ id: unitId, ...sParams }),
 
 			stuff.api!.aggregate.getIncomeByMonth(filter),
@@ -75,7 +70,6 @@
 		return {
 			props: {
 				unit,
-				files,
 				leases,
 				invoicesGrouped,
 				expensesGrouped,
@@ -92,7 +86,6 @@
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let unit: Prop['unit'];
-	export let files: Prop['files'];
 	export let leases: Prop['leases'];
 
 	export let invoicesGrouped: Prop['invoicesGrouped'];
@@ -115,7 +108,7 @@
 </script>
 
 <UnitPage {unit} />
-<DetailsPane {details} {files} />
+<DetailsPane {details} />
 <LeaseList
 	{leases}
 	formUrl={(function () {

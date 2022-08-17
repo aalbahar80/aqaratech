@@ -15,23 +15,18 @@
 		const { page } = parseParams(url);
 		const leaseId = params.id;
 
-		const [lease, files, invoices] = await Promise.all([
+		const [lease, invoices] = await Promise.all([
 			stuff.api!.leases.findOne({ id: leaseId }),
-			stuff.api!.files.findAll({
-				relationKey: 'lease',
-				relationValue: leaseId,
-			}),
 			stuff.api!.leases.findInvoices({ id: leaseId, page, take: 100 }),
 		]);
 
-		return { props: { lease, files, invoices } };
+		return { props: { lease, invoices } };
 	};
 </script>
 
 <script lang="ts">
 	type Prop = LP<typeof load>;
 	export let lease: Prop['lease'];
-	export let files: Prop['files'];
 	export let invoices: Prop['invoices'];
 
 	$: details = [
@@ -45,5 +40,5 @@
 </script>
 
 <LeasePage {lease} />
-<DetailsPane {details} {files} />
+<DetailsPane {details} />
 <LeaseInvoiceList leaseInvoices={invoices} leaseId={lease.id} />

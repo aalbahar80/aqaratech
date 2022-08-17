@@ -20,18 +20,14 @@
 		const sParams = parseParams(url);
 		const tenantId = params.id;
 
-		const [tenant, files, leases, invoices, roles] = await Promise.all([
+		const [tenant, leases, invoices, roles] = await Promise.all([
 			stuff.api!.tenants.findOne({ id: tenantId }),
-			stuff.api!.files.findAll({
-				relationKey: 'tenant',
-				relationValue: tenantId,
-			}),
 			stuff.api!.tenants.findLeases({ id: tenantId }),
 			stuff.api!.tenants.findInvoices({ id: tenantId, ...sParams }),
 			stuff.api!.tenants.findRoles({ id: tenantId }),
 		]);
 
-		return { props: { tenant, files, leases, invoices, roles } };
+		return { props: { tenant, leases, invoices, roles } };
 	};
 </script>
 
@@ -41,7 +37,6 @@
 	export let leases: Prop['leases'];
 	export let invoices: Prop['invoices'];
 	export let roles: Prop['roles'];
-	export let files: Prop['files'];
 
 	$: details = [
 		['Name', tenant.fullName],
@@ -65,7 +60,7 @@
 
 <TenantPage {tenant} />
 
-<DetailsPane {details} {files} />
+<DetailsPane {details} />
 
 {#if $session.user?.role?.roleType === 'ORGADMIN'}
 	<MemberList {roles} />
