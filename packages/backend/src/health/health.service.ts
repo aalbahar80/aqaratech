@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   HealthCheck,
   HealthCheckResult,
@@ -7,6 +8,7 @@ import {
 } from '@nestjs/terminus';
 import { HealthIndicator } from 'src/health/interfaces/health-indicator.interface';
 import { NestjsHealthIndicator } from 'src/health/models/nestjs-health.indicator';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { PrometheusService } from 'src/prometheus/prometheus.service';
 // import { AnyOtherService } from '../any-other-module/any-other.service';
 // import { AnyOtherHealthIndicator } from './models/any-other-health.indicator';
@@ -19,15 +21,18 @@ export class HealthService {
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
     private promClientService: PrometheusService, // private anyOtherService: AnyOtherService,
+    readonly configService: ConfigService<EnvironmentConfig>,
   ) {
+    const url = configService.get('apiConfig.PUBLIC_API_URL', {
+      infer: true,
+    });
+
+    if (!url) {
+      throw new Error('[Health Service] PUBLIC_API_URL not found');
+    }
+
     this.listOfThingsToMonitor = [
-      new NestjsHealthIndicator(
-        this.http,
-        process.env.NODE_ENV === 'production'
-          ? 'https://nestjs-dev.onrender.com' // TODO use render's env var
-          : 'http://localhost:3002',
-        this.promClientService,
-      ),
+      new NestjsHealthIndicator(this.http, url, this.promClientService),
       // new AnyOtherHealthIndicator(this.anyOtherService, this.promClientService),
       // add site check?
     ];
