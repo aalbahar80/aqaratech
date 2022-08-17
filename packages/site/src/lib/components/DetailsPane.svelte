@@ -9,7 +9,6 @@
 	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { PaginatedFileDto } from '@self/sdk';
-	import { fromUrl } from '@self/utils';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { onMount } from 'svelte';
@@ -21,11 +20,14 @@
 
 	onMount(async () => {
 		const route = inferRoute($page.url.pathname);
-		const entity = fromUrl(route.entity);
-		files = await $page.stuff.api.files.findAll({
-			relationKey: entity.urlName,
-			relationValue: route.id,
-		});
+		try {
+			files = await $page.stuff.api.files.findAll({
+				relationKey: route.entity.singular,
+				relationValue: route.id,
+			});
+		} catch (e) {
+			handleApiError(e);
+		}
 	});
 </script>
 
