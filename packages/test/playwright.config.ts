@@ -4,7 +4,7 @@ const config: PlaywrightTestConfig = {
 	reporter: [["list"], ["html", { open: "on-failure" }]],
 	use: {
 		storageState: "storageState.json",
-		headless: false,
+		headless: true,
 		ignoreHTTPSErrors: true,
 		video: "on-first-retry",
 		baseURL: "http://localhost:3000/",
