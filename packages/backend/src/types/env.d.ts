@@ -6,6 +6,8 @@ declare global {
       readonly DATABASE_URL: string;
 
       readonly PUBLIC_SITE_URL: string;
+      readonly PUBLIC_API_URL: string;
+      readonly PUBLIC_API_URL_LOCAL: string;
 
       readonly AUTH0_CLIENT_SECRET: string;
 

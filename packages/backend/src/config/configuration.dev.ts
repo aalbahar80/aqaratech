@@ -3,6 +3,10 @@ import type { EnvironmentConfig } from '../interfaces/environment.interface';
 export const developmentEnvironment = (): EnvironmentConfig => ({
   type: 'DEVELOPMENT',
   envName: 'dev',
+  apiConfig: {
+    PUBLIC_API_URL: process.env.PUBLIC_API_URL,
+    PUBLIC_API_URL_LOCAL: process.env.PUBLIC_API_URL_LOCAL,
+  },
   authConfig: {
     AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
     AUTH0_API_NAMESPACE: 'https://letand.be',

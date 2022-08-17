@@ -3,6 +3,10 @@ import type { EnvironmentConfig } from '../interfaces/environment.interface';
 export const productionEnvironment = (): EnvironmentConfig => ({
   type: 'PRODUCTION',
   envName: 'prod',
+  apiConfig: {
+    PUBLIC_API_URL: process.env.PUBLIC_API_URL,
+    PUBLIC_API_URL_LOCAL: process.env.PUBLIC_API_URL_LOCAL,
+  },
   authConfig: {
     AUTH0_DOMAIN: 'https://auth.aqaratech.com',
     AUTH0_API_NAMESPACE: 'https://aqaratech.com',
