@@ -15,6 +15,8 @@ export type EntitiesMap<T extends Entity> = typeof entitiesMap[T];
 export type DBEntitiesMap = EntitiesMap<DBEntity>;
 export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
+export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
+
 const organization = satisfies<EntityNames>()({
 	urlName: "organizations",
 	caslName: "Organization",

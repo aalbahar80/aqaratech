@@ -6,15 +6,27 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { PaginatedFileDto } from '@self/sdk';
+	import { fromUrl } from '@self/utils';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { onMount } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	export let details: [string, string | null][];
-	export let files: PaginatedFileDto | undefined = undefined;
+	let files: PaginatedFileDto | undefined = undefined;
+
+	onMount(async () => {
+		const route = inferRoute($page.url.pathname);
+		const entity = fromUrl(route.entity);
+		files = await $page.stuff.api.files.findAll({
+			relationKey: entity.urlName,
+			relationValue: route.id,
+		});
+	});
 </script>
 
 <div id="detailsPane">

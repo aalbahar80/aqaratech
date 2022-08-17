@@ -23,10 +23,10 @@ export const settings = (orgId: string) => ({
 	tree: `/organizations/${orgId}/settings/expense-tree`,
 });
 
-const inferRoute = (pathname: string) => {
+export const inferRoute = (pathname: string) => {
 	const [, entity, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
 	if (entity && id) {
-		return { entity: entity as Entity, id };
+		return { entity: entity as EntitiesMap<Entity>['urlName'], id };
 	} else {
 		throw new Error(`Could not infer route from pathname: ${pathname}`);
 	}
@@ -44,15 +44,15 @@ export const createFileHref = (pathname: string) => {
 	return href;
 };
 
-export const idFieldToUrlName = <T extends Entity>(
-	field: EntitiesMap<T>['idField'],
-): EntitiesMap<T>['urlName'] => {
-	const entity = Object.entries(entitiesMap).find(
-		([, value]) => value.idField === field,
-	);
-	if (entity) {
-		return entity[1].urlName;
-	} else {
-		throw new Error(`Could not find urlName for idField: ${field}`);
-	}
-};
+// export const idFieldToUrlName = <T extends Entity>(
+// 	field: EntitiesMap<T>['idField'],
+// ): EntitiesMap<T>['urlName'] => {
+// 	const entity = Object.entries(entitiesMap).find(
+// 		([, value]) => value.idField === field,
+// 	);
+// 	if (entity) {
+// 		return entity[1].urlName;
+// 	} else {
+// 		throw new Error(`Could not find urlName for idField: ${field}`);
+// 	}
+// };
