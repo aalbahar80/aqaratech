@@ -10,6 +10,7 @@ export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 				{ label: 'Portfolios', href: '/portfolios' },
 				{ label: 'Properties', href: '/properties' },
 				{ label: 'Leases', href: '/leases' },
+				{ label: 'Tenants', href: '/tenants' },
 			],
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
