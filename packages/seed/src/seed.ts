@@ -303,7 +303,7 @@ export async function seed({
 		await prisma.property.createMany({ data: properties });
 		await prisma.unit.createMany({ data: units });
 		if (leases.length) {
-			await prisma.lease.createMany({ data: leases });
+			await prisma.lease.createMany({ data: [...leases, ...sample.leases] });
 		}
 		// define a function to split the maintenance orders into n chunks
 		const split = <T>(array: T[], n: number): T[][] => {

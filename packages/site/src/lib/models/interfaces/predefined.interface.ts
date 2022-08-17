@@ -34,7 +34,8 @@ export interface PredefinedLease {
 }
 
 export interface PredefinedInvoice {
-	leaseId: SearchParam;
+	leaseId: string;
+	portfolioId: string;
 }
 
 export interface PredefinedFile {

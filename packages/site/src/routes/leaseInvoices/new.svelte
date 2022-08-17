@@ -4,9 +4,17 @@
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ url }: LoadEvent) => {
+	export const load = async ({ url, stuff }: LoadEvent) => {
+		const leaseId = url.searchParams.get('leaseId');
+
+		if (!leaseId) {
+			throw new Error('No leaseId provided');
+		}
+
+		const lease = await stuff.api!.leases.findOne({ id: leaseId });
 		const predefined: PredefinedInvoice = {
-			leaseId: url.searchParams.get('leaseId'),
+			leaseId: lease.id,
+			portfolioId: lease.portfolioId,
 		};
 
 		return { props: { predefined } };

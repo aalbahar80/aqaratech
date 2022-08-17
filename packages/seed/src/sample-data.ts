@@ -99,7 +99,19 @@ const units = Prisma.validator<Prisma.UnitCreateManyArgs["data"]>()([
 	},
 ]);
 
-// id: "a7ce3151-2e4a-4eba-bbe0-5a600f23a829",
+const leases = Prisma.validator<Prisma.LeaseCreateManyArgs["data"]>()([
+	{
+		id: "a7ce3151-2e4a-4eba-bbe0-5a600f23a829",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		start: new Date("2020-01-01"),
+		end: new Date("2020-12-31"),
+		unitId: units[0]!.id,
+		tenantId: tenants[0]!.id,
+		monthlyRent: 1000,
+	},
+]);
+
 // id: "2b66cc94-1ec9-4aff-a6ab-d7a9cf2b57f6",
 
 export const sample = {
@@ -110,4 +122,5 @@ export const sample = {
 	portfolios,
 	properties,
 	units,
+	leases,
 };

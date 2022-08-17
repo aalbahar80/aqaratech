@@ -3,7 +3,10 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
+	import {
+		OrganizationIdField,
+		PortfolioIdField,
+	} from '$lib/utils/form/common-fields';
 	import {
 		createSchema,
 		updateSchema,
@@ -41,6 +44,7 @@
 		OrganizationIdField(
 			data?.organizationId || $session.user?.role?.organizationId,
 		),
+		PortfolioIdField(data?.portfolioId || predefined?.portfolioId),
 		new Field('leaseId', {
 			value: data?.leaseId || predefined?.leaseId,
 			disabled: true,
