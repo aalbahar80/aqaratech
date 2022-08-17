@@ -56,6 +56,5 @@ test('cannot get files from "/files"', async ({ request, token }) => {
 			// relationValue: testTenantId,
 		},
 	});
-	const body = await res.json();
-	expect(body.results.length).toBe(0);
+	expect(res.status()).toBe(403);
 });
