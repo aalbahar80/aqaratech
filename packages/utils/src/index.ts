@@ -7,4 +7,4 @@ export {
 	NonDBEntitiesMap,
 } from "./entity-map";
 export { fromUrl } from "./from-url";
-export { isEntity } from "./is-entity";
+export { isEntity, isEntityUrlName } from "./is-entity";

@@ -1,4 +1,9 @@
-import { entitiesMap, type EntitiesMap, type Entity } from '@self/utils';
+import {
+	entitiesMap,
+	fromUrl,
+	isEntityUrlName,
+	type Entity,
+} from '@self/utils';
 
 type Predefined = Map<string, any> | false | undefined;
 
@@ -24,9 +29,11 @@ export const settings = (orgId: string) => ({
 });
 
 export const inferRoute = (pathname: string) => {
-	const [, entity, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
-	if (entity && id) {
-		return { entity: entity as EntitiesMap<Entity>['urlName'], id };
+	const [, urlName, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
+
+	if (urlName && isEntityUrlName(urlName) && id) {
+		const entity = fromUrl(urlName);
+		return { entity, id };
 	} else {
 		throw new Error(`Could not infer route from pathname: ${pathname}`);
 	}
@@ -37,7 +44,7 @@ export const createFileHref = (pathname: string) => {
 	const href = create({
 		entity: 'file',
 		predefined: new Map([
-			['relationKey', current.entity],
+			['relationKey', current.entity.singularCap],
 			['relationValue', current.id],
 		]),
 	});

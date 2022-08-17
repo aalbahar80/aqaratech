@@ -1,9 +1,6 @@
-import { Entity } from "entity";
-import { EntitiesMap, entitiesMap, UEntityMap } from "./entity-map";
+import { entitiesMap, UEntityMap, URLName } from "./entity-map";
 
-export const fromUrl = <T extends EntitiesMap<Entity>["urlName"]>(
-	urlName: T
-): UEntityMap => {
+export const fromUrl = (urlName: URLName): UEntityMap => {
 	const entity = Object.entries(entitiesMap).find(
 		([, value]) => value.urlName === urlName
 	);

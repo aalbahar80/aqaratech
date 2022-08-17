@@ -16,6 +16,7 @@ export type DBEntitiesMap = EntitiesMap<DBEntity>;
 export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
 export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
+export type URLName = UEntityMap["urlName"];
 
 const organization = satisfies<EntityNames>()({
 	urlName: "organizations",
