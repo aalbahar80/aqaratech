@@ -20,7 +20,7 @@
 	</div>
 {/if}
 
-{#if p >= 0.4}
+{#if p >= 0.8}
 	<div class="fade" />
 {/if}
 
