@@ -76,6 +76,7 @@
 											await $page.stuff.api.leaseInvoices.update({
 												id: invoice.id,
 												updateLeaseInvoiceDto: {
+													organizationId: invoice.organizationId,
 													isPaid: !invoice.isPaid,
 													paidAt: invoice.isPaid
 														? null

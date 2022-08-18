@@ -34,14 +34,25 @@ const test = base.extend<MyFixtures>({
 test("can toggle paid status", async ({ page, invoice }) => {
 	await page.goto(`leases/${lease.id}`);
 	const card = page.locator(`data-testid=${invoice.id}`);
+	const badgeDue = card.locator("text=Due");
 
 	// Due badge exists
-	expect.soft(card.locator("text=Due")).toBeVisible();
+	await expect.soft(badgeDue).toBeVisible();
 
-	const btn = card.locator("data-testid=dropdown-menu");
-	await btn.click();
-	const toggle = card.locator('button:has-text("Mark as paid")');
-	await toggle.click();
+	// Mark as paid
+	const menu = card.locator("data-testid=dropdown-menu");
+	await menu.click();
+	await card.locator('button:has-text("Mark as paid")').click();
+
+	// Paid badge exists
+	await expect.soft(card.locator("text=Paid")).toBeVisible();
+
+	// Mark as unpaid
+	await menu.click();
+	await card.locator('button:has-text("Mark as unpaid")').click();
+
+	// Due badge exists
+	await expect.soft(badgeDue).toBeVisible();
 });
 
 type Invoice = typeof sample.leaseInvoices[number];
