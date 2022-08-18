@@ -47,8 +47,7 @@
 			icon={DocumentText}
 			text="Print"
 			as="button"
-			on:click={() =>
-				createPDF({ invoice: trx, outputType: 'dataurlnewwindow' })}
+			on:click={() => createPDF({ invoice: trx, outputType: 'save' })}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
