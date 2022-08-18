@@ -15,23 +15,26 @@
 			value: $session.user?.role?.organizationId,
 			disabled: true,
 			autoInit: true,
+			hidden: true,
 		}),
 		new Field('relationKey', {
 			value: relationKey,
 			disabled: true,
 			autoInit: true,
+			hidden: true,
 		}),
 		new Field('relationValue', {
 			value: relationValue,
 			disabled: true,
 			autoInit: true,
+			hidden: true,
 		}),
 		new Field('fileName', {
 			value: '',
 		}),
-		new Field('label', {
-			value: '',
-		}),
+		// new Field('label', {
+		// 	value: '',
+		// }),
 		new Field('file', {
 			value: '',
 			type: 'file',
