@@ -81,7 +81,7 @@ export class OrganizationsService {
   }) {
     ForbiddenError.from(user.ability).throwUnlessCan(
       Action.Update,
-      subject(this.SubjectType, updateOrganizationDto),
+      subject(this.SubjectType, { ...updateOrganizationDto, id }),
     );
 
     const updated = await this.prisma.organization.update({
@@ -102,13 +102,6 @@ export class OrganizationsService {
 
     // TODO delete s3 bucket
     // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
-    const organization = await this.prisma.organization.findUnique({
-      where: { id },
-    });
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Delete,
-      subject(this.SubjectType, organization),
-    );
     const deleted = await this.prisma.organization.delete({ where: { id } });
     return deleted;
   }
