@@ -62,12 +62,8 @@ export class ExpenseCategoriesController {
     return this.expenseCategoriesService.updateAll({
       organizationId: user.role.organizationId,
       updateAllExpenseCategoriesDto,
+      user,
     });
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.expenseCategoriesService.findOne(+id);
   }
 
   @Patch(':id')

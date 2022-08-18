@@ -74,10 +74,17 @@ export class ExpenseCategoriesService {
   async updateAll({
     organizationId,
     updateAllExpenseCategoriesDto,
+    user,
   }: {
     organizationId: string;
     updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
+    user: IUser;
   }) {
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, { id: organizationId }),
+    );
+
     const categories = await this.fetchJsonCategories({ organizationId });
 
     // Currently, this applies the changes to all categories.
@@ -107,10 +114,6 @@ export class ExpenseCategoriesService {
     });
 
     return newCategories as unknown as ExpenseCategoryDto[];
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} expenseCategory`;
   }
 
   async update({
