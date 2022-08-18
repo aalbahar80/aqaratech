@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve("./global-setup"),
 	reporter: [["list"], ["html", { open: "on-failure" }]],
+	retries: 2,
 	use: {
 		storageState: "storageState.json",
 		headless: true,
