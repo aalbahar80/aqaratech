@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
-	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
 		DialogDescription,
