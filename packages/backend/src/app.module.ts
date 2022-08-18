@@ -31,9 +31,9 @@ import { SearchModule } from './search/search.module';
 // resources
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
+import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
-import { MetaModule } from './meta/meta.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PropertiesModule } from './properties/properties.module';
@@ -41,7 +41,6 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
-import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -65,7 +64,6 @@ import { FilesModule } from './files/files.module';
     RolesModule,
     OrganizationsModule,
     AggregateModule,
-    MetaModule,
     EventEmitterModule.forRoot(),
     PostmarkModule,
     ExpenseCategoriesModule,

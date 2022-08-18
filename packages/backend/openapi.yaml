@@ -2117,41 +2117,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
       tags: *ref_21
-  /meta/expenseTree:
-    get:
-      operationId: findExpenseTypes
-      parameters:
-        - name: organizationId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags:
-        - meta
   /expense-categories:
     post:
       operationId: create
