@@ -64,7 +64,7 @@
 				...filter,
 				paidStatus: 'unpaid',
 			}),
-			stuff.api!.meta.findExpenseTypes({ unitId }),
+			stuff.api!.expenseCategories.findAll(),
 		]);
 
 		return {

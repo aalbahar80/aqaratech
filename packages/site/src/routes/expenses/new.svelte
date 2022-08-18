@@ -4,7 +4,7 @@
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
-	export const load = async ({ stuff, url, session }: LoadEvent) => {
+	export const load = async ({ stuff, url }: LoadEvent) => {
 		const predefined: PredefinedExpense = {
 			portfolioId: url.searchParams.get('portfolioId'),
 			propertyId: url.searchParams.get('propertyId'),
@@ -15,9 +15,7 @@
 			stuff.api!.portfolios.findAll({ take: 1000 }),
 			stuff.api!.properties.findAll({ take: 1000 }),
 			stuff.api!.units.findAll({ take: 1000 }),
-			stuff.api!.meta.findExpenseTypes({
-				organizationId: session.user?.role?.organizationId,
-			}),
+			stuff.api!.expenseCategories.findAll(),
 		]);
 
 		return {

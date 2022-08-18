@@ -50,7 +50,8 @@ export class ExpenseCategoriesController {
   }
 
   @Get()
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' }) // TODO: expensetree field should be accessible by portfolio users
+  // OrgId is trusted (inferred from the token). Therefore, being able to read an expense is sufficient.
+  @CheckAbilities({ action: Action.Read, subject: 'Expense' })
   @ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
   findAll(@User() user: IUser): Promise<ExpenseCategoryDto[]> {
     return this.expenseCategoriesService.findAll({

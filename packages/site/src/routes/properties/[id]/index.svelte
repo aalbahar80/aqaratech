@@ -60,7 +60,7 @@
 				...filter,
 				paidStatus: 'unpaid',
 			}),
-			stuff.api!.meta.findExpenseTypes({ propertyId }),
+			stuff.api!.expenseCategories.findAll(),
 		]);
 
 		return {
