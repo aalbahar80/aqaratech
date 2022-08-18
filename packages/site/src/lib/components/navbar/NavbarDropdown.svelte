@@ -12,7 +12,6 @@
 
 <Dropdown>
 	<div
-		data-testid="navbar-dropdown"
 		slot="button"
 		class="group inline-flex items-center rounded border border-transparent px-4 py-2  text-sm font-medium text-white hover:bg-gray-700"
 	>

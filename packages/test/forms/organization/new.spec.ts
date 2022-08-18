@@ -7,7 +7,7 @@ test("existing user can create new org", async ({ page }) => {
 	// wait a bit for dropdown to load
 	await new Promise((resolve) => setTimeout(resolve, 1000));
 
-	await page.locator("data-testid=navbar-dropdown").click();
+	await page.locator("data-testid=dropdown-menu").click();
 	await page.locator("text=Switch Role").click();
 	await page.locator("text=Create new Organization").click();
 	await expect(page).toHaveURL("http://localhost:3000/organizations/new");

@@ -7,9 +7,11 @@
 	<div class="flex">
 		<slot name="beforeButton" />
 		<MenuButton>
-			<slot name="button">
-				<ThreeDotsButton />
-			</slot>
+			<div data-testid="dropdown-menu">
+				<slot name="button">
+					<ThreeDotsButton />
+				</slot>
+			</div>
 		</MenuButton>
 	</div>
 
