@@ -17,6 +17,7 @@
 		stuff,
 		url,
 	}: LoadEvent<{ id: string }>) => {
+		// TODO handle pagination defaults
 		const sParams = parseParams(url);
 		const tenantId = params.id;
 

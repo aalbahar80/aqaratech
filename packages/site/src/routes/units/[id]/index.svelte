@@ -24,6 +24,7 @@
 		url,
 	}: LoadEvent<{ id: string }>) => {
 		const unitId = params.id;
+		// TODO handle pagination defaults
 		const sParams = parseParams(url);
 		const filter = {
 			...sParams,
