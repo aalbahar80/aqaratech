@@ -24,8 +24,6 @@ export const developmentEnvironment: EnvironmentConfig = {
 			'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 		AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
-		AUTH0_ROLE_ID_PROPERTY_OWNER: 'rol_n6YdReDFqv4IG60y',
-		AUTH0_ROLE_ID_TENANT: 'rol_7C04rw2vmXs2pOTx',
 		AUTH0_REDIRECT_URI: `${getOrigin()}${AUTH_CALLBACK}`,
 		AUTH0_API_NAMESPACE: 'https://letand.be',
 		AUTH0_API_AUDIENCE: 'letand.be/api',
