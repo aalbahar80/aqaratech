@@ -37,6 +37,8 @@ import {
 } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
+const SubjectType = 'Organization';
+
 @ApiHeader({ name: ROLE_HEADER })
 @Controller('organizations')
 @ApiTags('organizations')
@@ -61,7 +63,7 @@ export class OrganizationsController {
   }
 
   @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @ApiOkResponse({ type: OrganizationDto })
   findOne(
     @User() user: IUser,
@@ -71,7 +73,7 @@ export class OrganizationsController {
   }
 
   @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: 'Organization' })
+  @CheckAbilities({ action: Action.Update, subject: SubjectType })
   @ApiOkResponse({ type: String })
   update(
     @User() user: IUser,
@@ -86,7 +88,7 @@ export class OrganizationsController {
   }
 
   @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: 'Organization' })
+  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: OrganizationDto })
   remove(
     @User() user: IUser,
@@ -98,6 +100,10 @@ export class OrganizationsController {
   // ### ROLES ###
 
   @Get(':id/roles')
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Role' },
+  )
   @ApiPaginatedResponse(RoleDto)
   findRoles(
     @User() user: IUser,
@@ -108,9 +114,10 @@ export class OrganizationsController {
     return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 
-  @CheckAbilities({ action: Action.Read, subject: 'Organization' })
+  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @Get(':id/search')
   search(@Param('id') id: string, @Query('query') query: string) {
+    // TODO prod ability check
     return this.searchService.search({ query, organizationId: id });
   }
 }
