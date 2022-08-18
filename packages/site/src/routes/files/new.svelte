@@ -12,7 +12,9 @@
 			throw new Error('Insufficient URL parameters');
 		}
 
-		const valid = Object.keys(CreateRelationKeyEnum).includes(relationKey);
+		const valid = Object.values(CreateRelationKeyEnum).find(
+			(key) => key === relationKey,
+		);
 		if (!valid) {
 			throw new Error('Invalid URL parameters');
 		}

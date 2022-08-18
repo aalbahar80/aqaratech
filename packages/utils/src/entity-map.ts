@@ -2,6 +2,7 @@ import { DBEntity, Entity, NonDBEntity } from "./entity";
 import { satisfies } from "./satisfies";
 
 export interface EntityNames {
+	title: string;
 	urlName: string;
 	singular: string;
 	singularCap: string;
@@ -17,8 +18,10 @@ export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
 export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
 export type URLName = UEntityMap["urlName"];
+export type EntityTitle = UEntityMap["title"];
 
 const organization = satisfies<EntityNames>()({
+	title: "organization",
 	urlName: "organizations",
 	caslName: "Organization",
 	singular: "organization",
@@ -29,6 +32,7 @@ const organization = satisfies<EntityNames>()({
 });
 
 const role = satisfies<EntityNames>()({
+	title: "role",
 	urlName: "roles",
 	caslName: "Role",
 	plural: "roles",
@@ -39,6 +43,7 @@ const role = satisfies<EntityNames>()({
 });
 
 const member = satisfies<EntityNames>()({
+	title: "member",
 	urlName: "roles",
 	singular: "member",
 	singularCap: "Member",
@@ -48,6 +53,7 @@ const member = satisfies<EntityNames>()({
 });
 
 const tenant = satisfies<EntityNames>()({
+	title: "tenant",
 	urlName: "tenants",
 	caslName: "Tenant",
 	singular: "tenant",
@@ -58,6 +64,7 @@ const tenant = satisfies<EntityNames>()({
 });
 
 const portfolio = satisfies<EntityNames>()({
+	title: "portfolio",
 	urlName: "portfolios",
 	caslName: "Portfolio",
 	singular: "portfolio",
@@ -68,6 +75,7 @@ const portfolio = satisfies<EntityNames>()({
 });
 
 const property = satisfies<EntityNames>()({
+	title: "property",
 	urlName: "properties",
 	caslName: "Property",
 	singular: "property",
@@ -78,6 +86,7 @@ const property = satisfies<EntityNames>()({
 });
 
 const unit = satisfies<EntityNames>()({
+	title: "unit",
 	urlName: "units",
 	caslName: "Unit",
 	singular: "unit",
@@ -88,6 +97,7 @@ const unit = satisfies<EntityNames>()({
 });
 
 const lease = satisfies<EntityNames>()({
+	title: "lease",
 	urlName: "leases",
 	caslName: "Lease",
 	singular: "lease",
@@ -98,6 +108,7 @@ const lease = satisfies<EntityNames>()({
 });
 
 const leaseInvoice = satisfies<EntityNames>()({
+	title: "leaseInvoice",
 	urlName: "leaseInvoices",
 	caslName: "LeaseInvoice",
 	singular: "leaseInvoice",
@@ -108,6 +119,7 @@ const leaseInvoice = satisfies<EntityNames>()({
 });
 
 const expense = satisfies<EntityNames>()({
+	title: "expense",
 	urlName: "expenses",
 	caslName: "Expense",
 	singular: "expense",
@@ -118,6 +130,7 @@ const expense = satisfies<EntityNames>()({
 });
 
 const maintenanceOrder = satisfies<EntityNames>()({
+	title: "maintenanceOrder",
 	urlName: "maintenanceOrders",
 	caslName: "MaintenanceOrder",
 	singular: "maintenanceOrder",
@@ -128,6 +141,7 @@ const maintenanceOrder = satisfies<EntityNames>()({
 });
 
 const expenseCategory = satisfies<EntityNames>()({
+	title: "expenseCategory",
 	urlName: "expenseCategories",
 	singular: "expense category",
 	singularCap: "Expense Category",
@@ -137,6 +151,7 @@ const expenseCategory = satisfies<EntityNames>()({
 });
 
 const file = satisfies<EntityNames>()({
+	title: "file",
 	urlName: "files",
 	singular: "file",
 	singularCap: "File",

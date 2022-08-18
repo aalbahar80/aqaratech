@@ -44,7 +44,7 @@ export const createFileHref = (pathname: string) => {
 	const href = create({
 		entity: 'file',
 		predefined: new Map([
-			['relationKey', current.entity.singularCap],
+			['relationKey', current.entity.title],
 			['relationValue', current.id],
 		]),
 	});
