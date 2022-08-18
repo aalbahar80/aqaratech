@@ -29,7 +29,7 @@ export const settings = (orgId: string) => ({
 });
 
 export const inferRoute = (pathname: string) => {
-	const [, urlName, id] = pathname.match(/^\/([^/]+)\/([^/]+)$/) || [];
+	const [, urlName, id] = pathname.split('/');
 
 	if (urlName && isEntityUrlName(urlName) && id) {
 		const entity = fromUrl(urlName);
