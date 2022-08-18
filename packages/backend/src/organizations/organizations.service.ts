@@ -60,7 +60,12 @@ export class OrganizationsService {
     return { organization, roleId: organization.roles[0].id };
   }
 
-  async findOne({ id }: { id: string }) {
+  async findOne({ id, user }: { id: string; user: IUser }) {
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Read,
+      subject(this.SubjectType, { id }),
+    );
+
     const data = await this.prisma.organization.findUnique({ where: { id } });
     return data;
   }
@@ -68,10 +73,17 @@ export class OrganizationsService {
   async update({
     id,
     updateOrganizationDto,
+    user,
   }: {
     id: string;
     updateOrganizationDto: UpdateOrganizationDto;
+    user: IUser;
   }) {
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Update,
+      subject(this.SubjectType, updateOrganizationDto),
+    );
+
     const updated = await this.prisma.organization.update({
       where: { id },
       data: {
@@ -83,6 +95,11 @@ export class OrganizationsService {
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Delete,
+      subject(this.SubjectType, { id }),
+    );
+
     // TODO delete s3 bucket
     // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
     const organization = await this.prisma.organization.findUnique({

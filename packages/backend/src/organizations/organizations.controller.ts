@@ -63,18 +63,26 @@ export class OrganizationsController {
   @Get(':id')
   @CheckAbilities({ action: Action.Read, subject: 'Organization' })
   @ApiOkResponse({ type: OrganizationDto })
-  findOne(@Param('id') id: string): Promise<OrganizationDto> {
-    return this.organizationsService.findOne({ id });
+  findOne(
+    @User() user: IUser,
+    @Param('id') id: string,
+  ): Promise<OrganizationDto> {
+    return this.organizationsService.findOne({ id, user });
   }
 
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Organization' })
   @ApiOkResponse({ type: String })
   update(
+    @User() user: IUser,
     @Param('id') id: string,
     @Body() updateOrganizationDto: UpdateOrganizationDto,
   ): Promise<string> {
-    return this.organizationsService.update({ id, updateOrganizationDto });
+    return this.organizationsService.update({
+      id,
+      updateOrganizationDto,
+      user,
+    });
   }
 
   @Delete(':id')
