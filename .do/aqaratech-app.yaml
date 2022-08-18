@@ -3,13 +3,12 @@ alerts:
   - rule: DOMAIN_LIVE
   - rule: DOMAIN_FAILED
 databases:
-  - db_name: aqratechdb
-    db_user: aqaratechdb
-    engine: PG
-    name: aqaratechdb
+  - engine: PG
+    name: stagedb
     num_nodes: 1
+    size: db-s-dev-database
+    version: "12"
     production: false
-    version: "14"
 domains:
   - domain: stage.aqaratech.net
     type: PRIMARY
@@ -32,13 +31,13 @@ envs:
   - key: AQ_DEBUG_PRISMA
     scope: RUN_AND_BUILD_TIME
     value: "0"
-name: aqaratech-app
+name: aqaratech-app-stage
 region: fra
 services:
   - envs:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
-        value: ${aqaratechdb.DATABASE_URL}
+        value: ${stagedb.DATABASE_URL}
     health_check:
       http_path: /health
     http_port: 3002
