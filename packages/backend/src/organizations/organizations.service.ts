@@ -1,7 +1,9 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { Action } from 'src/casl/casl-ability.factory';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
-import { AuthenticatedUser } from 'src/interfaces/user.interface';
+import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {
   CreateOrganizationDto,
   UpdateOrganizationDto,
@@ -12,6 +14,7 @@ import { S3Service } from 'src/s3/s3.service';
 @Injectable()
 export class OrganizationsService {
   constructor(private prisma: PrismaService, private s3: S3Service) {}
+  SubjectType = 'Organization' as const;
 
   private readonly logger = new Logger(OrganizationsService.name);
 
@@ -79,14 +82,17 @@ export class OrganizationsService {
     return updated.id;
   }
 
-  async remove({ id }: { id: string }) {
-    // TODO set org.isActive to false, delete all portfolios and tenants, which should cascade down
+  async remove({ id, user }: { id: string; user: IUser }) {
     // TODO delete s3 bucket
-    await this.prisma.role.deleteMany({ where: { organizationId: id } });
-    const deactivated = await this.prisma.organization.update({
+    // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
+    const organization = await this.prisma.organization.findUnique({
       where: { id },
-      data: { isActive: false },
     });
-    return deactivated.id;
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Delete,
+      subject(this.SubjectType, organization),
+    );
+    const deleted = await this.prisma.organization.delete({ where: { id } });
+    return deleted;
   }
 }

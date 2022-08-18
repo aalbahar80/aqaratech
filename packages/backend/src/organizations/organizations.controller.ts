@@ -79,9 +79,12 @@ export class OrganizationsController {
 
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: 'Organization' })
-  @ApiOkResponse({ type: String })
-  remove(@Param('id') id: string): Promise<string> {
-    return this.organizationsService.remove({ id });
+  @ApiOkResponse({ type: OrganizationDto })
+  remove(
+    @User() user: IUser,
+    @Param('id') id: string,
+  ): Promise<OrganizationDto> {
+    return this.organizationsService.remove({ id, user });
   }
 
   // ### ROLES ###

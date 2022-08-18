@@ -9,6 +9,7 @@
 	export let entity: Entity;
 	export let isOpen: boolean;
 	export let onDelete: (() => void) | undefined = undefined;
+	export let deletePrompt: string | undefined = undefined;
 
 	let isLoading = false;
 
@@ -52,4 +53,5 @@
 	{handleConfirm}
 	title="Delete"
 	description="Are you sure?"
+	{deletePrompt}
 />

@@ -15,7 +15,7 @@ export class OrgAdminAbility {
 
     // TODO: limit fields
     // TODO only superadmins can manage orgs/orgSettings?
-    can([Action.Read, Action.Update], ['Organization'], {
+    can([Action.Read, Action.Update, Action.Delete], ['Organization'], {
       id: { equals: role.organizationId },
     });
 

@@ -23,6 +23,7 @@
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let onDelete: (() => void) | undefined = undefined;
+	export let deletePrompt: string | undefined = undefined;
 
 	let isOpen = false;
 	const openModal = () => {
@@ -50,7 +51,7 @@
 	{#if $session.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
-			<ModalDelete bind:isOpen {id} {entity} {onDelete} />
+			<ModalDelete bind:isOpen {id} {entity} {onDelete} {deletePrompt} />
 			<Dropdown>
 				<div slot="beforeButton">
 					<a

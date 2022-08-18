@@ -39,7 +39,7 @@ model Role {
   user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   portfolioId    String?
   portfolio      Portfolio?   @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   tenantId       String?
@@ -65,7 +65,7 @@ model Tenant {
   maintenanceOrders MaintenanceOrder[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   roles Role[]
 
@@ -94,7 +94,7 @@ model Portfolio {
   roles Role[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@index([organizationId])
 }
@@ -133,7 +133,7 @@ model OrganizationSettings {
 
   expenseCategoryTree Json
 
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String       @unique
 }
 
@@ -179,7 +179,7 @@ model Expense {
   unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
@@ -208,7 +208,7 @@ model Lease {
   leaseInvoices LeaseInvoice[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
@@ -236,7 +236,7 @@ model MaintenanceOrder {
   expenses    Expense[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
@@ -267,7 +267,7 @@ model Property {
   units             Unit[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@index([portfolioId])
   @@index([organizationId])
@@ -288,7 +288,7 @@ model LeaseInvoice {
   lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
@@ -318,7 +318,7 @@ model Unit {
   maintenanceOrders MaintenanceOrder[]
 
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)

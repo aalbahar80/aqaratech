@@ -22,6 +22,7 @@
 	title="Organization"
 	id={organization.id}
 	entity="organization"
+	deletePrompt={organization.fullName}
 	{onDelete}
 />
 <DetailsPane {details} />
