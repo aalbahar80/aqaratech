@@ -112,7 +112,40 @@ const leases = Prisma.validator<Prisma.LeaseCreateManyArgs["data"]>()([
 	},
 ]);
 
-// id: "2b66cc94-1ec9-4aff-a6ab-d7a9cf2b57f6",
+const leaseInvoices = Prisma.validator<
+	Prisma.LeaseInvoiceCreateManyArgs["data"]
+>()([
+	{
+		id: "2b66cc94-1ec9-4aff-a6ab-d7a9cf2b57f6",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		leaseId: leases[0]!.id,
+		amount: 1000,
+		postAt: new Date("2020-01-01"),
+		dueAt: new Date("2020-01-10"),
+		isPaid: false,
+	},
+	{
+		id: "bdf188e7-1de4-46d8-a2fa-8a2158124f51",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		leaseId: leases[0]!.id,
+		amount: 1001,
+		postAt: new Date("2020-01-01"),
+		dueAt: new Date("2020-01-10"),
+		isPaid: true,
+	},
+	{
+		id: "8190bf8d-9f18-439c-b087-31ea4950a13d",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		leaseId: leases[0]!.id,
+		amount: 1002,
+		postAt: new Date("2020-01-01"),
+		dueAt: new Date("2020-01-10"),
+		isPaid: true,
+	},
+]);
 
 export const sample = {
 	users,
@@ -123,4 +156,5 @@ export const sample = {
 	properties,
 	units,
 	leases,
+	leaseInvoices,
 };

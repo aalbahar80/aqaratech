@@ -49,7 +49,7 @@
 	];
 </script>
 
-<div class="px-4 py-4 sm:px-6">
+<div class="px-4 py-4 sm:px-6" data-testid={invoice.id}>
 	<div class="flex h-12 items-center justify-between">
 		<p class="select-all truncate text-sm font-medium text-indigo-600">
 			{kwdFormat(invoice.amount)}
@@ -111,12 +111,15 @@
 	</div>
 	<div class="mt-2 sm:flex sm:justify-between">
 		<div class="sm:flex sm:space-x-4">
-			<p class="flex items-center text-sm text-gray-500">
+			<p
+				class="flex items-center text-sm text-gray-500"
+				class:invisible={!invoice.memo}
+			>
 				<MajesticonsNoteText
 					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 					aria-hidden="true"
 				/>
-				{invoice.memo}
+				{invoice.memo || ''}
 			</p>
 		</div>
 	</div>

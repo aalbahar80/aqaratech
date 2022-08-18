@@ -53,31 +53,30 @@ export async function seed({
 	const roles = sample.roles;
 
 	const portfolios = sample.portfolios;
-	portfolios.concat(
-		Array.from({ length: portfolioCount }, () =>
-			fakePortfolio(randId(organizations))
-		) as any
+	const randomPortfolios = Array.from({ length: portfolioCount }, () =>
+		fakePortfolio(testOrgId)
 	);
+	portfolios.push(...(randomPortfolios as any));
 
 	const properties = sample.properties;
-	properties.concat(
-		portfolios.flatMap((portfolio) =>
-			Array.from(
-				{
-					length: faker.datatype.number({ min: propertyMin, max: propertyMax }),
-				},
-				() => fakeProperty(portfolio.id, portfolio.organizationId)
-			)
-		) as any
+	const randomProperties = portfolios.flatMap((portfolio) =>
+		Array.from(
+			{
+				length: faker.datatype.number({ min: propertyMin, max: propertyMax }),
+			},
+			() => fakeProperty(portfolio.id, portfolio.organizationId)
+		)
 	);
+	properties.push(...(randomProperties as any));
+
 	const units = sample.units;
-	units.concat(
-		properties.flatMap((property) =>
-			Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-				fakeUnit(property.id, property.portfolioId, property.organizationId)
-			)
-		) as any
+	const randomUnits = properties.flatMap((property) =>
+		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
+			fakeUnit(property.id, property.portfolioId, property.organizationId)
+		)
 	);
+	units.push(...(randomUnits as any));
+
 	const tenants: ReturnType<typeof fakeTenant>[] = [];
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit, idx) => {
@@ -132,7 +131,8 @@ export async function seed({
 		}
 	});
 
-	const leaseInvoices = leases.length
+	const leaseInvoices = sample.leaseInvoices;
+	const randomLeaseInvoices = leases.length
 		? leases.flatMap((lease) =>
 				Array.from({ length: trxPerLease }, (_, n) =>
 					fakeLeaseInvoice(
@@ -146,6 +146,7 @@ export async function seed({
 				)
 		  )
 		: [];
+	leaseInvoices.push(...(randomLeaseInvoices as any));
 
 	const maintenanceOrders = Array.from({ length: moCount }, () => {
 		const mo = fakeMaintenanceOrder();
