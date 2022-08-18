@@ -4,7 +4,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { create } from '$lib/utils/route-helpers';
+	import { create, inferRoute } from '$lib/utils/route-helpers';
 	import type { PaginatedRoleDto } from '@self/sdk';
 	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
@@ -12,11 +12,13 @@
 
 	export let roles: PaginatedRoleDto;
 
+	// TODO needs to be reactive?
+	const route = inferRoute($page.url.pathname);
 	const formUrl = create({
 		entity: 'role',
 		predefined: new Map<string, any>([
-			['entity', $page.url.pathname.split('/')[1]],
-			['entityId', $page.url.pathname.split('/')[2]],
+			['entity', route.entity.title],
+			['entityId', route.id],
 		]),
 	});
 </script>
