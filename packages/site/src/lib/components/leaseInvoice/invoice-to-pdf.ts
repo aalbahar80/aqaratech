@@ -1,4 +1,5 @@
 import type { LeaseInvoiceDto } from '@self/sdk';
+import { satisfies } from '@self/utils';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
 /**
@@ -18,22 +19,12 @@ export const createPDF = async (options: PDFOptions) => {
  * const props = invoiceToPdf({ invoice, outputType: 'dataurlnewwindow' }); // prepare
  * jsPDFInvoiceTemplate(props); // create pdf
  */
-export const preparePDF = (options: PDFOptions): PdfProps => {
+export const preparePDF = (options: PDFOptions) => {
 	// clone defaultPdfOptions to ensure that the original is not mutated
 	const pdf = { ...defaultPdfOptions };
 
-	if (
-		// to make typescript happy
-		!pdf.footer ||
-		!pdf.invoice ||
-		!pdf.contact ||
-		!pdf.invoice.additionalRows
-	) {
-		throw new Error('Missing required properties');
-	}
-
 	const { invoice } = options;
-	pdf.outputType = options.outputType;
+	pdf.outputType = options.outputType as any;
 	const total = invoice.amount.toLocaleString('en-KW', {
 		style: 'currency',
 		currency: 'KWD',
@@ -41,7 +32,7 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	pdf.returnJsPDFDocObject = true;
 
 	pdf.footer.text = invoice.id;
-	pdf.invoice.table = [['1', invoice.memo, total]];
+	pdf.invoice.table = [['1', invoice.memo || '', total]];
 	pdf.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
@@ -56,9 +47,8 @@ export const preparePDF = (options: PDFOptions): PdfProps => {
 	// Dates
 	const postAt = invoice.postAt.split('T')[0];
 	pdf.invoice.invGenDate = `Invoice date: ${postAt}`;
-	console.log({ invoice }, 'invoice-to-pdf.ts ~ 56');
 	if (invoice.isPaid && invoice.paidAt) {
-		pdf.stamp = stamp;
+		pdf.stamp = stamp as any;
 		const paidAt = invoice.paidAt.split('T')[0];
 		pdf.invoice.invDate = `Payment date: ${paidAt}`;
 	}
@@ -83,7 +73,7 @@ interface PDFOptions {
 	outputType: OutputType;
 }
 
-const stamp: PdfProps['stamp'] = {
+const stamp = satisfies<PdfProps['stamp']>()({
 	inAllPages: true,
 	// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
 	src: '/paid-stamp.png',
@@ -91,13 +81,14 @@ const stamp: PdfProps['stamp'] = {
 	width: 48,
 	height: 30,
 	margin: { top: -150, left: 130 },
-};
+});
 
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
  */
-const defaultPdfOptions: PdfProps = {
-	outputType: 'dataurlnewwindow',
+
+const defaultPdfOptions = satisfies<PdfProps>()({
+	outputType: 'save',
 	returnJsPDFDocObject: true,
 	fileName: 'Invoice.pdf',
 	orientationLandscape: false,
@@ -116,9 +107,15 @@ const defaultPdfOptions: PdfProps = {
 		website: 'www.aqaratech.com',
 	},
 	contact: {
+		name: '',
+		address: '',
+		phone: '',
 		label: 'Invoice issued for:',
 	},
 	invoice: {
+		invDate: '',
+		invGenDate: '',
+		table: [['', '', '']],
 		// label: 'Invoice #: ',
 		// num: 19,
 		headerBorder: true,
@@ -136,12 +133,17 @@ const defaultPdfOptions: PdfProps = {
 					width: 140,
 				},
 			},
-			{ title: 'Total' },
+			{
+				title: 'Total',
+				style: {
+					width: 40,
+				},
+			},
 		],
 		additionalRows: [
 			{
 				col1: 'Total:',
-				// col2: 'AMOUNT',
+				col2: '',
 				style: {
 					fontSize: 14, //optional, default 12
 				},
@@ -155,6 +157,7 @@ const defaultPdfOptions: PdfProps = {
 	footer: {
 		text: 'The invoice is created on a computer and is valid without the signature and stamp.',
 	},
+	stamp: undefined,
 	pageEnable: true,
 	pageLabel: 'Page ',
-};
+});
