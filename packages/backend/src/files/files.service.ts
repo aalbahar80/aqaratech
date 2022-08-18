@@ -192,7 +192,7 @@ export class FilesService {
     action: Action;
   }) {
     const entityMap = entitiesMap[entity];
-    // @ts-ignore
+    // @ts-expect-error - uniontype not cutting it
     await this.prisma[entity].findFirstOrThrow({
       where: {
         AND: [

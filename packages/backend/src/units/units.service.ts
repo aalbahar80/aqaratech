@@ -57,7 +57,8 @@ export class UnitsService {
         orderBy: { unitNumber: 'asc' },
         where: filter,
         include: {
-          // TODO sort it. it affects vacancy calculation
+          // TODO sort it. it affects vacancy calculation. Add sorted index?
+          // TODO optimize it. set aq_prisma_debug = 1 and see the query. n+1?
           leases: { select: { start: true, end: true } },
           property: crumbs.property,
         },
