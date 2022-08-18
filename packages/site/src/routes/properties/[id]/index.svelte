@@ -10,6 +10,7 @@
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
+	import { incompleteResultAlert } from '$lib/components/toast/narrow-filters-alert';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import { parseParams } from '$lib/utils/parse-params';
 	import type { LoadEvent } from '@sveltejs/kit';
@@ -105,6 +106,8 @@
 		['Parcel', property.parcel],
 		['Paci', property.paci],
 	] as [string, string | null][];
+
+	$: incompleteResultAlert(invoices, expenses);
 </script>
 
 <PropertyPage {property} />

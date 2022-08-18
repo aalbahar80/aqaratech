@@ -8,6 +8,7 @@
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
+	import { incompleteResultAlert } from '$lib/components/toast/narrow-filters-alert';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -88,6 +89,8 @@
 	export let invoicesGroupedUnpaid: Prop['invoicesGroupedUnpaid'];
 
 	export let categories: Prop['categories'];
+
+	$: incompleteResultAlert(invoices, expenses);
 </script>
 
 <div class="prose">
