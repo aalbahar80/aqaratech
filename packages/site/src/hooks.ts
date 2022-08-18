@@ -137,7 +137,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 
 	if (environment.envName !== 'prod') {
-		response.headers.set('X-Robots-Tag', 'noindex'); // TODO remove in prod
+		response.headers.set('X-Robots-Tag', 'noindex');
 	}
 	return response;
 };

@@ -25,7 +25,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     }
 
     this.logger.debug('Enforcing jwt-auth.guard');
-    // TODO remove manual return type annotation
     return super.canActivate(context) as Promise<boolean>;
   }
 }

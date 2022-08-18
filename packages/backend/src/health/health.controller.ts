@@ -7,7 +7,7 @@ import { HealthService } from 'src/health/health.service';
 export class HealthController {
   constructor(private healthService: HealthService) {}
 
-  @Public() // TODO prod remove
+  @Public()
   @Get()
   public async check(): Promise<HealthCheckResult> {
     return await this.healthService.check();
