@@ -10,7 +10,7 @@
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import { incompleteResultAlert } from '$lib/components/toast/narrow-filters-alert';
+	import { incompleteResultAlert } from '$lib/components/toast/incomplete-result-alert';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import { parseParams } from '$lib/utils/parse-params';
