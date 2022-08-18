@@ -38,28 +38,3 @@ export const inferRoute = (pathname: string) => {
 		throw new Error(`Could not infer route from pathname: ${pathname}`);
 	}
 };
-
-export const createFileHref = (pathname: string) => {
-	const current = inferRoute(pathname);
-	const href = create({
-		entity: 'file',
-		predefined: new Map([
-			['relationKey', current.entity.title],
-			['relationValue', current.id],
-		]),
-	});
-	return href;
-};
-
-// export const idFieldToUrlName = <T extends Entity>(
-// 	field: EntitiesMap<T>['idField'],
-// ): EntitiesMap<T>['urlName'] => {
-// 	const entity = Object.entries(entitiesMap).find(
-// 		([, value]) => value.idField === field,
-// 	);
-// 	if (entity) {
-// 		return entity[1].urlName;
-// 	} else {
-// 		throw new Error(`Could not find urlName for idField: ${field}`);
-// 	}
-// };

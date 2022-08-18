@@ -6,6 +6,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { hasFileSupport } from '$lib/utils/file';
 	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { PaginatedFileDto } from '@self/sdk';
@@ -21,10 +22,11 @@
 	onMount(async () => {
 		const route = inferRoute($page.url.pathname);
 		try {
-			files = await $page.stuff.api.files.findAll({
-				relationKey: route.entity.singular,
-				relationValue: route.id,
-			});
+			if (hasFileSupport(route.entity.title))
+				files = await $page.stuff.api.files.findAll({
+					relationKey: route.entity.title,
+					relationValue: route.id,
+				});
 		} catch (e) {
 			handleApiError(e);
 		}

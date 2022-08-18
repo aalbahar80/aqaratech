@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import FileForm from '$lib/components/file/FileForm.svelte';
-	import { CreateRelationKeyEnum } from '@self/sdk';
+	import { hasFileSupport } from '$lib/utils/file';
 	import type { LoadEvent } from '@sveltejs/kit';
 	import type { LP } from 'src/types/load-props';
 
@@ -12,19 +12,11 @@
 			throw new Error('Insufficient URL parameters');
 		}
 
-		const valid = Object.values(CreateRelationKeyEnum).find(
-			(key) => key === relationKey,
-		);
-		if (!valid) {
+		if (!hasFileSupport(relationKey)) {
 			throw new Error('Invalid URL parameters');
 		}
 
-		return {
-			props: {
-				relationKey: relationKey as CreateRelationKeyEnum,
-				relationValue,
-			},
-		};
+		return { props: { relationKey, relationValue } };
 	};
 </script>
 

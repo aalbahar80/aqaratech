@@ -2,7 +2,7 @@ import { DBEntity, Entity, NonDBEntity } from "./entity";
 import { satisfies } from "./satisfies";
 
 export interface EntityNames {
-	title: string;
+	title: Entity;
 	urlName: string;
 	singular: string;
 	singularCap: string;
@@ -18,7 +18,6 @@ export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
 export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
 export type URLName = UEntityMap["urlName"];
-export type EntityTitle = UEntityMap["title"];
 
 const organization = satisfies<EntityNames>()({
 	title: "organization",

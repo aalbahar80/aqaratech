@@ -6,7 +6,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { createFileHref } from '$lib/utils/route-helpers';
+	import { createFileHref } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';

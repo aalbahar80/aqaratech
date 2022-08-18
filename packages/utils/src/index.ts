@@ -4,7 +4,6 @@ export {
 	entitiesMap,
 	EntitiesMap,
 	EntityNames,
-	EntityTitle,
 	NonDBEntitiesMap,
 } from "./entity-map";
 export { fromUrl } from "./from-url";
