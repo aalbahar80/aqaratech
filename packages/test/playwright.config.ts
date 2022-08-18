@@ -12,6 +12,12 @@ const config: PlaywrightTestConfig = {
 		launchOptions: {
 			args: ["--window-position=0,0"],
 		},
+		trace: {
+			mode: "on",
+			screenshots: true,
+			snapshots: true,
+			sources: true,
+		},
 	},
 	webServer: [
 		{
