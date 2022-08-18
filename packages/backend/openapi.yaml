@@ -2176,23 +2176,6 @@ paths:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_23
   /expense-categories/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - *ref_22
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_23
     patch:
       operationId: update
       parameters:
@@ -2208,23 +2191,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateExpenseCategoryDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_23
-    delete:
-      operationId: remove
-      parameters:
-        - *ref_22
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         '200':
           description: ''
