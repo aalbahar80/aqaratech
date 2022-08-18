@@ -15,6 +15,7 @@
 			value: predefined.entityId,
 			disabled: true,
 			autoInit: true,
+			hidden: true,
 			type: 'text',
 		}),
 		new Field('email', { type: 'email' }),

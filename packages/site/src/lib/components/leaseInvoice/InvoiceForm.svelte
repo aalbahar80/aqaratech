@@ -49,6 +49,7 @@
 			value: data?.leaseId || predefined?.leaseId,
 			disabled: true,
 			autoInit: true,
+			hidden: true,
 		}),
 		new Field('isPaid', {
 			label: 'Paid',
