@@ -5,6 +5,7 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
 	import type { CreateRelationKeyEnum } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 
 	export let relationKey: CreateRelationKeyEnum;
 	export let relationValue: string;
@@ -46,5 +47,6 @@
 	onSubmit={(values) => {
 		return $page.stuff.api.files.create(values);
 	}}
-	onSuccess={() => goto(`/${relationKey}/${relationValue}`)}
+	onSuccess={() =>
+		goto(`/${entitiesMap[relationKey].urlName}/${relationValue}`)}
 />
