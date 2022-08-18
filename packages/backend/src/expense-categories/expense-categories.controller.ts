@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import {
   ApiCreatedResponse,
   ApiHeader,
@@ -46,6 +38,7 @@ export class ExpenseCategoriesController {
     return this.expenseCategoriesService.create({
       organizationId: user.role.organizationId,
       createExpenseCategoryDto,
+      user,
     });
   }
 
@@ -77,7 +70,6 @@ export class ExpenseCategoriesController {
     return this.expenseCategoriesService.findOne(+id);
   }
 
-  // TODO ability check
   @Patch(':id')
   @CheckAbilities({ action: Action.Update, subject: 'Organization' })
   @ApiOkResponse({ type: String })
@@ -90,11 +82,7 @@ export class ExpenseCategoriesController {
       organizationId: user.role.organizationId,
       expenseCategoryId: id,
       updateExpenseCategoryDto,
+      user,
     });
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.expenseCategoriesService.remove(+id);
   }
 }
