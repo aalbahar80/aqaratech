@@ -52,6 +52,7 @@
 							<li
 								animate:flip={{ duration: 200 }}
 								class="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
+								data-testid={file.key}
 							>
 								<div class="flex w-0 flex-1 items-center">
 									<Icon

@@ -7,6 +7,7 @@ import { test } from "../../config";
 const fileEntity = entitiesMap.file;
 const portfolioEntity = entitiesMap.portfolio;
 const portfolio = sample.portfolios[0];
+const localFilePath = "./forms/file/upload-test.png";
 
 const params = new URLSearchParams({
 	relationKey: portfolioEntity.title,
@@ -14,9 +15,9 @@ const params = new URLSearchParams({
 });
 
 const url = `/${fileEntity.urlName}/new?${params.toString()}`;
+
 test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 	const fileName = "test-file-upload";
-	const localFilePath = "./forms/file/upload-test.png";
 
 	// upload file
 	await page.goto(url);
@@ -27,23 +28,14 @@ test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 	await expect(page).toHaveURL(`/${portfolioEntity.urlName}/${portfolio.id}`);
 
 	// grab uploaded file
-	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
-	const response = await request.get(
-		`http://localhost:3002/${
-			fileEntity.urlName
-		}/find-one?key=${encodeURIComponent(key)}`,
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-				"x-role-id": testOrgRoleId,
-			},
-		}
-	);
-	expect(response.status()).toBe(200);
-
-	const presignedUrl = await response.text();
-	const response2 = await request.get(presignedUrl);
-	const uploadedFile = await response2.body();
+	const presignedUrl = await getPresignedUrl({
+		fileName,
+		token,
+		apiBaseURL,
+		request,
+	});
+	const res = await request.get(presignedUrl);
+	const uploadedFile = await res.body();
 
 	// file buffer matches
 	const localFile = await promises.readFile(localFilePath);
@@ -54,7 +46,6 @@ test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 });
 
 test("files can be deleted", async ({ page, request, token, apiBaseURL }) => {
-	const localFilePath = "./forms/file/upload-test.png";
 	const fileName = "test-file-delete";
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 
@@ -67,7 +58,12 @@ test("files can be deleted", async ({ page, request, token, apiBaseURL }) => {
 	await expect(page).toHaveURL(`/${portfolioEntity.urlName}/${portfolio.id}`);
 
 	// grab uploaded file
-	const presignedUrl = await getPresignedUrl({ request, fileName, token });
+	const presignedUrl = await getPresignedUrl({
+		fileName,
+		token,
+		apiBaseURL,
+		request,
+	});
 	const res = await request.get(presignedUrl);
 	const uploadedFile = await res.body();
 
@@ -91,16 +87,18 @@ const getPresignedUrl = async ({
 	request,
 	fileName,
 	token,
+	apiBaseURL,
 }: {
 	request: APIRequestContext;
 	fileName: string;
 	token: string;
+	apiBaseURL: string;
 }) => {
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 	const response = await request.get(
-		`http://localhost:3002/${
-			fileEntity.urlName
-		}/find-one?key=${encodeURIComponent(key)}`,
+		`${apiBaseURL}/${fileEntity.urlName}/find-one?key=${encodeURIComponent(
+			key
+		)}`,
 		{
 			headers: {
 				Authorization: `Bearer ${token}`,
