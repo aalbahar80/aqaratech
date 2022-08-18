@@ -6,7 +6,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
-	import { createFileHref } from '$lib/utils/file';
+	import { createFileHref, hasFileSupport } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
@@ -67,14 +67,16 @@
 				<div slot="menu">
 					<DropdownMenu>
 						<slot name="menu-items" />
-						<MenuItem as="div" let:active>
-							<a href={createFileHref($page.url.pathname)}>
-								<MenuItemChild {active}>
-									<MenuItemIcon icon={Fa6SolidPaperclip} />
-									Attach files
-								</MenuItemChild>
-							</a>
-						</MenuItem>
+						{#if hasFileSupport(entity)}
+							<MenuItem as="div" let:active>
+								<a href={createFileHref($page.url.pathname)}>
+									<MenuItemChild {active}>
+										<MenuItemIcon icon={Fa6SolidPaperclip} />
+										Attach files
+									</MenuItemChild>
+								</a>
+							</MenuItem>
+						{/if}
 						<MenuItem as="div" let:active>
 							<button on:click={openModal} class="w-full">
 								<MenuItemChild {active}>
