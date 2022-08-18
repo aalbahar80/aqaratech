@@ -56,6 +56,8 @@ declare namespace App {
 	}
 
 	interface PublicEnv {
+		readonly PUBLIC_AQARATECH_ENV: string | undefined;
+
 		/**
 		 * OPTIONAL
 		 *

@@ -3,6 +3,8 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      readonly PUBLIC_AQARATECH_ENV: string;
+
       readonly DATABASE_URL: string;
 
       readonly PUBLIC_SITE_URL: string;
