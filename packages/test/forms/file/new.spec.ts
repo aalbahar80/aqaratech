@@ -1,4 +1,4 @@
-import { expect } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { sample, testOrgRoleId } from "@self/seed";
 import { entitiesMap } from "@self/utils";
 import { promises } from "node:fs";
@@ -14,7 +14,7 @@ const params = new URLSearchParams({
 });
 
 const url = `/${fileEntity.urlName}/new?${params.toString()}`;
-test("files can be uploaded", async ({ page, request, token }) => {
+test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 	const fileName = "test-file-upload";
 	const localFilePath = "./forms/file/upload-test.png";
 
@@ -53,9 +53,10 @@ test("files can be uploaded", async ({ page, request, token }) => {
 	expect(uploadedFile.length).toEqual(localFile.length);
 });
 
-test("files can be deleted", async ({ page, request, token }) => {
-	const fileName = "test-file-delete";
+test("files can be deleted", async ({ page, request, token, apiBaseURL }) => {
 	const localFilePath = "./forms/file/upload-test.png";
+	const fileName = "test-file-delete";
+	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 
 	// upload file
 	await page.goto(url);
@@ -66,6 +67,35 @@ test("files can be deleted", async ({ page, request, token }) => {
 	await expect(page).toHaveURL(`/${portfolioEntity.urlName}/${portfolio.id}`);
 
 	// grab uploaded file
+	const presignedUrl = await getPresignedUrl({ request, fileName, token });
+	const res = await request.get(presignedUrl);
+	const uploadedFile = await res.body();
+
+	// file buffer matches
+	const localFile = await promises.readFile(localFilePath);
+	expect(uploadedFile.toString()).toEqual(localFile.toString());
+
+	// file size matches
+	expect(uploadedFile.length).toEqual(localFile.length);
+
+	// delete file
+	const card = page.locator(`data-testid=${key}`);
+	await card.locator("data-testid=dropdown-menu").click();
+	await page.locator('button:has-text("Delete")').click();
+
+	const res2 = await request.get(presignedUrl);
+	expect(res2.status()).toBe(404);
+});
+
+const getPresignedUrl = async ({
+	request,
+	fileName,
+	token,
+}: {
+	request: APIRequestContext;
+	fileName: string;
+	token: string;
+}) => {
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 	const response = await request.get(
 		`http://localhost:3002/${
@@ -81,36 +111,5 @@ test("files can be deleted", async ({ page, request, token }) => {
 	expect(response.status()).toBe(200);
 
 	const presignedUrl = await response.text();
-	const response2 = await request.get(presignedUrl);
-	const uploadedFile = await response2.body();
-
-	// file buffer matches
-	const localFile = await promises.readFile(localFilePath);
-	expect(uploadedFile.toString()).toEqual(localFile.toString());
-
-	// file size matches
-	expect(uploadedFile.length).toEqual(localFile.length);
-
-	// delete file
-	const card = page.locator(`data-testid=${key}`);
-	const menu = card.locator("data-testid=dropdown-menu");
-	await menu.click();
-	await page.locator('button:has-text("Delete")').click();
-
-	await page.waitForTimeout(5000);
-	const response3 = await request.get(
-		`http://localhost:3002/${
-			fileEntity.urlName
-		}/find-one?key=${encodeURIComponent(key)}`,
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-				"x-role-id": testOrgRoleId,
-			},
-		}
-	);
-
-	const presignedUrl2 = await response3.text();
-	const response4 = await request.get(presignedUrl2);
-	expect(response4.status()).toBe(404);
-});
+	return presignedUrl;
+};
