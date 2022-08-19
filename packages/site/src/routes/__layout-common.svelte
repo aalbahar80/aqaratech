@@ -62,7 +62,7 @@
 {/if}
 
 <div>
-	{#if import.meta.env.VITE_VERCEL_ENV !== 'production'}
+	{#if env.PUBLIC_AQARATECH_ENV !== 'production'}
 		<Alert />
 	{/if}
 	<ToastParent />
