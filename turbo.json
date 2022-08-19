@@ -1,56 +1,43 @@
 {
-    "$schema": "https://turborepo.org/schema.json",
-    "baseBranch": "origin/dev",
-    "pipeline": {
-        "build": {
-            "dependsOn": [
-                "^build"
-            ],
-            "outputs": [
-                ".svelte-kit/**",
-                "dist/**",
-                "build/**",
-                ".vercel_build_output/**"
-            ]
-        },
-        "package": {
-            "outputs": [
-                "package/**"
-            ]
-        },
-        "test": {
-            "dependsOn": [
-                "package",
-                "build"
-            ],
-            "outputs": [
-                "playwright-report",
-                "test-results"
-            ],
-            "cache": false
-        },
-        "lint": {
-            "outputs": []
-        },
-        "dev": {
-            "cache": false
-        },
-        "preview": {
-            "dependsOn": [
-                "build"
-            ]
-        },
-        "seed": {
-            "dependsOn": [
-                "build"
-            ],
-            "cache": false
-        }
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        "dist/**",
+        "build/**",
+        ".vercel_build_output/**"
+      ]
     },
-    "globalDependencies": [
-        "**/.env",
-        "**/.env.*",
-        ".env",
-        ".env.test"
-    ]
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "playwright-report",
+        "test-results"
+      ],
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "preview": {
+      "dependsOn": [
+        "build"
+      ]
+    }
+  },
+  "globalDependencies": [
+    "**/.env",
+    "**/.env.*",
+    ".env",
+    ".env.test"
+  ]
 }
