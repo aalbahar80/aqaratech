@@ -18,6 +18,7 @@ const url = `/${fileEntity.urlName}/new?${params.toString()}`;
 
 test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 	const fileName = "test-file-upload";
+	// TODO add random characters to file name for cleaner testing
 
 	// upload file
 	await page.goto(url);

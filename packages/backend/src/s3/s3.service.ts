@@ -53,11 +53,17 @@ export class S3Service {
           'headers' in args.request
         ) {
           const request = args.request as any;
-          request.headers['cf-create-bucket-if-missing'] = 'true';
+          const isPutObject =
+            request.method === 'PUT' && request.query['x-id'] === 'PutObject';
+          if (isPutObject) {
+            // throws SignatureDoesNotMatch error if trying to get presigned URL.
+            // So only add this header if we are putting an object.
+            request.headers['cf-create-bucket-if-missing'] = 'true';
+          }
         }
         return next(args);
       },
-      { step: 'serialize' }, // throws SignatureDoesNotMatch error for presigned URL's if step is set to 'build'
+      { step: 'build' },
     );
   }
 
