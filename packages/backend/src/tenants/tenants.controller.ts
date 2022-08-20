@@ -142,7 +142,7 @@ export class TenantsController {
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
   ): Promise<WithCount<RoleDto>> {
-    const where: Prisma.RoleWhereInput = { tenantId: id };
+    const where: Prisma.RoleWhereInput = { tenantId: id, roleType: 'TENANT' };
     return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 }

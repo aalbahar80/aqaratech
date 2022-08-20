@@ -110,7 +110,10 @@ export class OrganizationsController {
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
   ): Promise<WithCount<RoleDto>> {
-    const where: Prisma.RoleWhereInput = { organizationId: id };
+    const where: Prisma.RoleWhereInput = {
+      organizationId: id,
+      roleType: 'ORGADMIN',
+    };
     return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 

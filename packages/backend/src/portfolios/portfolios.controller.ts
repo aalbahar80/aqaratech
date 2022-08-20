@@ -107,7 +107,10 @@ export class PortfoliosController {
     @Query() pageOptionsDto: PageOptionsDto,
     @Param('id') id: string,
   ): Promise<WithCount<RoleDto>> {
-    const where: Prisma.RoleWhereInput = { portfolioId: id };
+    const where: Prisma.RoleWhereInput = {
+      portfolioId: id,
+      roleType: 'PORTFOLIO',
+    };
     return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 
