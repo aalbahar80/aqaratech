@@ -11,7 +11,7 @@ const org = sample.organizations[0];
 const portfolio = sample.portfolios[0];
 const tenant = sample.tenants[0];
 
-test("org roles", async ({ request, token }) => {
+test("org members", async ({ request, token }) => {
 	const res = await request.get(`/organizations/${org.id}/roles`, {
 		headers: { authorization: `Bearer ${token}` },
 	});
@@ -19,36 +19,48 @@ test("org roles", async ({ request, token }) => {
 	expect(res.status()).toBe(200);
 	const body = await res.json();
 
-	console.log({ res: body.results }, "find-roles.spec.ts ~ 22");
-	const roleTypes: string[] = body.results.map(({ roleType }) => roleType);
-
-	roleTypes.forEach((roleType) => {
-		expect(roleType).toBe("ORGADMIN");
+	body.results.forEach((role) => {
+		expect(role).toMatchObject({
+			organizationId: org.id,
+			roleType: "ORGADMIN",
+			portfolioId: null,
+			tenantId: null,
+		});
 	});
 });
 
-// test("portfolio roles", async ({ request, token }) => {
-// 	const res = await request.get(`/portfolios/${portfolio.id}/roles`, {
-// 		headers: { authorization: `Bearer ${token}` },
-// 	});
+test("portfolio members", async ({ request, token }) => {
+	const res = await request.get(`/portfolios/${portfolio.id}/roles`, {
+		headers: { authorization: `Bearer ${token}` },
+	});
 
-// 	expect(res.status()).toBe(200);
-// 	const body = await res.json();
+	expect(res.status()).toBe(200);
+	const body = await res.json();
 
-// 	expect(body.results).toEqual(
-// 		expect.arrayContaining([expect.objectContaining({ roleType: "PORTFOLIO" })])
-// 	);
-// });
+	body.results.forEach((role) => {
+		expect(role).toMatchObject({
+			organizationId: org.id,
+			roleType: "PORTFOLIO",
+			portfolioId: portfolio.id,
+			tenantId: null,
+		});
+	});
+});
 
-// test("tenant roles", async ({ request, token }) => {
-// 	const res = await request.get(`/tenants/${tenant.id}/roles`, {
-// 		headers: { authorization: `Bearer ${token}` },
-// 	});
+test("tenant members", async ({ request, token }) => {
+	const res = await request.get(`/tenants/${tenant.id}/roles`, {
+		headers: { authorization: `Bearer ${token}` },
+	});
 
-// 	expect(res.status()).toBe(200);
-// 	const body = await res.json();
+	expect(res.status()).toBe(200);
+	const body = await res.json();
 
-// 	expect(body.results).toEqual(
-// 		expect.arrayContaining([expect.objectContaining({ roleType: "TENANT" })])
-// 	);
-// });
+	body.results.forEach((role) => {
+		expect(role).toMatchObject({
+			organizationId: org.id,
+			roleType: "TENANT",
+			portfolioId: null,
+			tenantId: tenant.id,
+		});
+	});
+});
