@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
+import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ExpensesService } from 'src/expenses/expenses.service';
@@ -93,15 +94,6 @@ export class AggregateService {
       },
     });
 
-    type Occupancy = {
-      date: Date;
-      unitCount: number;
-      occupied: number;
-      occupiedPct: number;
-      vacant: number;
-      vacantPct: number;
-    };
-
     const days: Occupancy[] = [];
 
     // loop through each day in the range
@@ -123,7 +115,7 @@ export class AggregateService {
       const vacantPct = Math.round((vacant / unitCount) * 100);
 
       days.push({
-        date: new Date(date),
+        date: date.getTime(),
         unitCount,
         occupied,
         occupiedPct,

@@ -1,5 +1,5 @@
 export class Occupancy {
-  date: Date;
+  date: number;
   unitCount: number;
   occupied: number;
   occupiedPct: number;

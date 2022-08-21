@@ -254,12 +254,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -495,12 +495,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -803,12 +803,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -1696,12 +1696,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -2037,12 +2037,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -2083,12 +2083,12 @@ paths:
       parameters:
         - *ref_20
         - name: start
-          required: false
+          required: true
           in: query
           schema:
             type: string
         - name: end
-          required: false
+          required: true
           in: query
           schema:
             type: string
@@ -2116,6 +2116,46 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
+      tags: *ref_21
+  /aggregate/occupancy:
+    get:
+      operationId: getOccupancy
+      parameters:
+        - *ref_20
+        - name: start
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Occupancy'
       tags: *ref_21
   /expense-categories:
     post:
@@ -3848,6 +3888,28 @@ components:
       required:
         - amount
         - date
+    Occupancy:
+      type: object
+      properties:
+        date:
+          type: number
+        unitCount:
+          type: number
+        occupied:
+          type: number
+        occupiedPct:
+          type: number
+        vacant:
+          type: number
+        vacantPct:
+          type: number
+      required:
+        - date
+        - unitCount
+        - occupied
+        - occupiedPct
+        - vacant
+        - vacantPct
     CreateExpenseCategoryDto:
       type: object
       properties:
