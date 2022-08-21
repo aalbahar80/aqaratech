@@ -102,8 +102,7 @@ Create a treemap from a d3-hierarchy.
 				<!-- only display label if square is big enough -->
 				{@const width = (node.x1 - node.x0) / ($extents.x2 - $extents.x1)}
 				{@const height = (node.y1 - node.y0) / ($extents.y1 - $extents.y2)}
-				{@const label = getLabel(node)}
-				{@debug width, height, label, $extents}
+				{@const area = width * height}
 
 				<div
 					in:fade={{ duration: 400 }}
@@ -112,13 +111,16 @@ Create a treemap from a d3-hierarchy.
 					on:click={() => select(node)}
 				>
 					<div class="node-contents">
-						{#if getLink}
-							<div
-								class={classes(
-									height > width ? 'flex-col' : 'flex-row',
-									'flex text-sm gap-x-2 flex-nowrap text-ellipsis',
-								)}
-							>
+						<div
+							class={classes(
+								height > width ? 'flex-col' : 'flex-row',
+								'flex flex-nowrap gap-x-2 text-ellipsis overflow-hidden',
+							)}
+							class:text-xs={area < 0.03}
+							class:text-md={area > 0.03 && area < 0.07}
+							class:text-xl={area > 0.07}
+						>
+							{#if getLink}
 								<a
 									class="align-middle text-lg text-indigo-600"
 									class:hidden={node.children}
@@ -127,10 +129,12 @@ Create a treemap from a d3-hierarchy.
 								>
 									&#8599;
 								</a>
+							{/if}
+							{#if area > 0.012}
 								<strong>{getLabel(node) ?? ''}</strong>
 								<span>{kwdFormat(node.value)}</span>
-							</div>
-						{/if}
+							{/if}
+						</div>
 					</div>
 				</div>
 			{/if}
