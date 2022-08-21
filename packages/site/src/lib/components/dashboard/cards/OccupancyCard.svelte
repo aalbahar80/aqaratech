@@ -10,6 +10,7 @@
 	title="Occpancy"
 	subtitle="The total amount of expenses by category & property."
 	empty={occupancy.length < 1}
+	tabbed={false}
 >
 	<div slot="chart">
 		<OccupancyHeatmap {occupancy} />
