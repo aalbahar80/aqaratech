@@ -8,7 +8,7 @@
 	import { clickOutside } from '$lib/utils/click-outside';
 	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import debounce from 'debounce';
+	import debounce from 'debounce'; // TODO optimize use lodash debounce?
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
