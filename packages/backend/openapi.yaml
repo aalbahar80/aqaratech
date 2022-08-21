@@ -254,12 +254,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -495,12 +495,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -803,12 +803,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -1696,12 +1696,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -2037,12 +2037,12 @@ paths:
           schema:
             type: object
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -2083,12 +2083,12 @@ paths:
       parameters:
         - *ref_20
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string
@@ -2123,12 +2123,12 @@ paths:
       parameters:
         - *ref_20
         - name: start
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: end
-          required: true
+          required: false
           in: query
           schema:
             type: string

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
 	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
+	import OccupancyCard from '$lib/components/dashboard/cards/OccupancyCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import { incompleteResultAlert } from '$lib/components/toast/incomplete-result-alert';
@@ -30,3 +31,5 @@
 	invoicesGroupedUnpaid={data.invoicesGroupedUnpaid}
 />
 <ExpensesCard expenses={data.expenses} categories={data.categories} />
+
+<OccupancyCard occupancy={data.occupancy} />
