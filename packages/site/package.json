@@ -59,7 +59,7 @@
     "jsdom": "20.0.0",
     "jsonwebtoken": "8.5.1",
     "jspdf": "2.5.1",
-    "just-diff": "5.0.3",
+    "just-diff": "5.1.1",
     "lodash-es": "4.17.21",
     "logrocket": "3.0.1",
     "postcss": "8.4.16",

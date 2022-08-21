@@ -35,7 +35,7 @@ importers:
       '@types/express': 4.17.13
       '@types/jest': 28.1.7
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.182
+      '@types/lodash': 4.14.184
       '@types/multer': 1.4.7
       '@types/node': 18.7.8
       '@types/passport-jwt': 3.0.6
@@ -125,7 +125,7 @@ importers:
       '@types/express': 4.17.13
       '@types/jest': 28.1.7
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.182
+      '@types/lodash': 4.14.184
       '@types/multer': 1.4.7
       '@types/node': 18.7.8
       '@types/passport-jwt': 3.0.6
@@ -265,7 +265,7 @@ importers:
       jsdom: 20.0.0
       jsonwebtoken: 8.5.1
       jspdf: 2.5.1
-      just-diff: 5.0.3
+      just-diff: 5.1.1
       lodash-es: 4.17.21
       logrocket: 3.0.1
       postcss: 8.4.16
@@ -325,7 +325,7 @@ importers:
       jsdom: 20.0.0
       jsonwebtoken: 8.5.1
       jspdf: 2.5.1
-      just-diff: 5.0.3
+      just-diff: 5.1.1
       lodash-es: 4.17.21
       logrocket: 3.0.1
       postcss: 8.4.16
@@ -3450,6 +3450,10 @@ packages:
 
   /@types/lodash/4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
+    dev: true
+
+  /@types/lodash/4.14.184:
+    resolution: {integrity: sha512-RoZphVtHbxPZizt4IcILciSWiC6dcn+eZ8oX9IWEYfDMcocdd42f7NPI6fQj+6zI8y4E0L7gu2pcZKLGTRaV9Q==}
     dev: true
 
   /@types/lru-cache/7.10.10:
@@ -8053,8 +8057,8 @@ packages:
       verror: 1.10.0
     dev: false
 
-  /just-diff/5.0.3:
-    resolution: {integrity: sha512-a8p80xcpJ6sdurk5PxDKb4mav9MeKjA3zFKZpCWBIfvg8mznfnmb13MKZvlrwJ+Lhis0wM3uGAzE0ArhFHvIcg==}
+  /just-diff/5.1.1:
+    resolution: {integrity: sha512-u8HXJ3HlNrTzY7zrYYKjNEfBlyjqhdBkoyTVdjtn7p02RJD5NvR8rIClzeGA7t+UYP1/7eAkWNLU0+P3QrEqKQ==}
     dev: true
 
   /jwa/1.4.1:
@@ -11137,7 +11141,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 21.0.1
+      yargs-parser: 21.1.1
     dev: true
 
   /yocto-queue/0.1.0:
