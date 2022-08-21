@@ -58,12 +58,13 @@ async function bootstrap() {
   app.use(
     getMiddleware({
       swaggerSpec: document,
-      authentication: false,
-      // hostname: process.env.PUBLIC_API_URL,
-      // onAuthenticate: function (req: any, username: string, password: string) {
-      // simple check for username and password
-      // return username === 'username' && password === 'password';
-      // },
+      hostname: process.env.PUBLIC_SITE_URL, // https://aqaratech.com
+      uriPath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
+      authentication: true,
+      onAuthenticate: function (req: any, username: string, password: string) {
+        // simple check for username and password
+        return username === 'aq-admin' && password === 'aq-swaggerstats12';
+      },
     }),
   );
 
