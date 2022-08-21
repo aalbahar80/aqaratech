@@ -98,6 +98,12 @@ Create a treemap from a d3-hierarchy.
 	>
 		<Treemap {root} let:node>
 			{#if is_visible(node, selected)}
+				<!-- only display label if square is big enough -->
+				{@const width = (node.x1 - node.x0) / ($extents.x2 - $extents.x1)}
+				{@const height = (node.y1 - node.y0) / ($extents.y1 - $extents.y2)}
+				{@const label = getLabel(node)}
+				{@debug width, height, label, $extents}
+
 				<div
 					in:fade={{ duration: 400 }}
 					class="node"
@@ -106,17 +112,23 @@ Create a treemap from a d3-hierarchy.
 				>
 					<div class="node-contents">
 						{#if getLink}
-							<a
-								class="inline-block align-middle text-indigo-600"
-								class:hidden={node.children}
-								href={getLink(node)}
-								target="_blank"
-							>
-								&#8599;
-							</a>
+							<div>
+								<a
+									class="align-middle text-indigo-600"
+									class:hidden={node.children}
+									href={getLink(node)}
+									target="_blank"
+								>
+									&#8599;
+								</a>
+								<p class="overflow-hidden overflow-ellipsis text-sm">
+									<strong>{getLabel(node) ?? ''}</strong>
+									<span class:block={height > width}
+										>{kwdFormat(node.value)}</span
+									>
+								</p>
+							</div>
 						{/if}
-						<strong>{getLabel(node) ?? ''}</strong>
-						<span>{kwdFormat(node.value)}</span>
 					</div>
 				</div>
 			{/if}
@@ -159,15 +171,5 @@ Create a treemap from a d3-hierarchy.
 
 	.node:not(.leaf) .node-contents {
 		background-color: hsl(240, 8%, 44%);
-	}
-
-	strong,
-	span {
-		display: block;
-		font-size: 12px;
-		/* white-space: nowrap; */
-		line-height: 1;
-		text-overflow: ellipsis;
-		overflow: hidden;
 	}
 </style>
