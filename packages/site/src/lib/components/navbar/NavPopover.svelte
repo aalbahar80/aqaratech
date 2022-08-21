@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page } from '$app/stores';
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
 	import { LOGIN } from '$lib/constants/routes';
@@ -13,7 +13,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.role?.meta.navLinks || [];
+	const navigation = $page.data.user?.role?.meta.navLinks || [];
 </script>
 
 <Popover as="header" let:close>
@@ -70,7 +70,7 @@
 						{/each}
 
 						<!-- General nav links -->
-						{#each getNavOptions($session.user) as option (option.label)}
+						{#each getNavOptions($page.data.user) as option (option.label)}
 							{#if !option.hideOnPopover}
 								<a
 									href={option.href}
@@ -83,7 +83,7 @@
 						{/each}
 					</div>
 
-					{#if !$session.isAuthenticated}
+					{#if !$page.data.isAuthenticated}
 						<div class="mt-6 px-5">
 							<a
 								href={LOGIN}

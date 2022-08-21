@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { startCase } from '$lib/utils/common';
@@ -37,10 +38,10 @@
 	export let open = false;
 
 	const search = async (q: string) => {
-		if (!q || !$session.user?.role?.organizationId) return;
+		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
-			groups = (await $page.stuff.api.organizations.search({
-				id: $session.user?.role?.organizationId,
+			groups = (await api($page.data.apiConfig).organizations.search({
+				id: $page.data.user?.role?.organizationId,
 				query: q,
 			})) as Groups;
 		} catch (e) {

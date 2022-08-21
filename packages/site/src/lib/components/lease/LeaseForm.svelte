@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
@@ -106,7 +107,7 @@
 
 	const basicFields = [
 		OrganizationIdField(
-			data?.organizationId || $session.user?.role?.organizationId,
+			data?.organizationId || $page.data.user?.role?.organizationId,
 		),
 		new Field('monthlyRent', {
 			type: 'number',
@@ -146,7 +147,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			$page.stuff.api.leases.update({
+			api($page.data.apiConfig).leases.update({
 				id: data.id,
 				updateLeaseDto: values,
 			})}
@@ -159,6 +160,6 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			$page.stuff.api.leases.create({ createLeaseDto: values })}
+			api($page.data.apiConfig).leases.create({ createLeaseDto: values })}
 	/>
 {/if}

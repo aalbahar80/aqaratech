@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page } from '$app/stores';
 	import type { EntityNames } from '@self/utils';
 	import { FolderAdd, Plus } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const hideActions = $session.user?.role?.roleType !== 'ORGADMIN';
+	const hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 	export let entityMap: EntityNames | undefined = undefined;
 	export let formUrl: string;
 	export let message: string = `Get started by creating a new ${entityMap?.singular}.`;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import { api } from '$lib/client/api';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -57,8 +58,8 @@
 			solid
 			disabled={!sendEnabled}
 			on:click={() => {
-				$page.stuff.api.leaseInvoices
-					.sendEmail({ id: trx.id })
+				api($page.data.apiConfig)
+					.leaseInvoices.sendEmail({ id: trx.id })
 					.then((res) => {
 						addSuccessToast(res);
 					})

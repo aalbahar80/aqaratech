@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -67,13 +68,13 @@
 								</MenuItemChild>
 							</a>
 						</MenuItem>
-						{#if $session.user?.role?.roleType === 'ORGADMIN'}
+						{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 							<MenuItem as="div" let:active>
 								<button
 									class="w-full"
 									on:click={async () => {
 										try {
-											await $page.stuff.api.leaseInvoices.update({
+											await api($page.data.apiConfig).leaseInvoices.update({
 												id: invoice.id,
 												updateLeaseInvoiceDto: {
 													organizationId: invoice.organizationId,
@@ -85,7 +86,9 @@
 											});
 
 											addSuccessToast('Invoice updated');
-											invoice = await $page.stuff.api.leaseInvoices.findOne({
+											invoice = await api(
+												$page.data.apiConfig,
+											).leaseInvoices.findOne({
 												id: invoice.id,
 											});
 										} catch (e) {

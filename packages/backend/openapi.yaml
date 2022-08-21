@@ -2376,11 +2376,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         dob:
@@ -2417,6 +2415,8 @@ components:
         - id
         - createdAt
         - updatedAt
+        - dob
+        - residencyEnd
         - organizationId
         - fullName
         - label
@@ -2574,11 +2574,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         start:
@@ -2657,11 +2655,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         postAt:
@@ -2696,6 +2692,8 @@ components:
         - createdAt
         - updatedAt
         - postAt
+        - dueAt
+        - paidAt
         - breadcrumbs
         - organizationId
         - portfolioId
@@ -2723,11 +2721,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         roleType:
@@ -2789,11 +2785,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         fullName:
@@ -2847,11 +2841,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         postAt:
@@ -2951,11 +2943,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         start:
@@ -3073,11 +3063,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         dob:
@@ -3102,6 +3090,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - dob
         - organizationId
         - fullName
         - label
@@ -3149,11 +3138,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         address:
@@ -3260,11 +3247,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         vacancy:
@@ -3468,11 +3453,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         vacancy:
@@ -3565,11 +3548,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         fullName:
@@ -3683,11 +3664,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         postAt:
@@ -3727,11 +3706,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         postAt:
@@ -3825,11 +3802,9 @@ components:
           type: string
           readOnly: true
         createdAt:
-          format: date-time
           type: string
           readOnly: true
         updatedAt:
-          format: date-time
           type: string
           readOnly: true
         fullName:

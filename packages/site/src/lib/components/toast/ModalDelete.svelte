@@ -17,7 +17,7 @@
 		isLoading = true;
 		try {
 			const plural = entitiesMap[entity].plural;
-			await $page.stuff.api[plural].remove({ id });
+			await $page.data.api[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
 			if (onDelete) {

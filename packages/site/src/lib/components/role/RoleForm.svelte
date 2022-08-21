@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedRole } from '$lib/models/interfaces/predefined.interface';
@@ -28,12 +29,12 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {
-		const organizationId = $session.user?.role?.organizationId;
+		const organizationId = $page.data.user?.role?.organizationId;
 		if (!organizationId) {
 			// type hack
 			throw new Error('No organizationId found in session');
 		}
-		return $page.stuff.api.roles.create({
+		return api($page.data.apiConfig).roles.create({
 			createRoleDto: {
 				roleType: predefined.roleType,
 				organizationId,

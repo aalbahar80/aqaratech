@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
@@ -52,13 +53,13 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			$page.stuff.api.organizations.update({
+			api($page.data.apiConfig).organizations.update({
 				id: data.id,
 				updateOrganizationDto: values,
 			})}
 		onSuccess={() => {
 			addSuccessToast();
-			return goto(`/users/${$session.user?.id}/roles`);
+			return goto(`/users/${$page.data.user?.id}/roles`);
 		}}
 	/>
 {:else}
@@ -68,12 +69,12 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			$page.stuff.api.organizations.create({
+			api($page.data.apiConfig).organizations.create({
 				createOrganizationDto: values,
 			})}
 		onSuccess={() => {
 			addSuccessToast();
-			return goto(`/users/${$session.user?.id}/roles`);
+			return goto(`/users/${$page.data.user?.id}/roles`);
 		}}
 	/>
 {/if}

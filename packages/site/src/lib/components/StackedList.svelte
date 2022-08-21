@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { entitiesMap, type Entity } from '@self/utils';
 
@@ -9,7 +9,7 @@
 	export let entity: Entity | undefined = undefined;
 	export let entityMap = entity ? entitiesMap[entity] : undefined;
 
-	export let hideActions = $session.user?.role?.roleType !== 'ORGADMIN';
+	export let hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
 
 <section class="rounded-md bg-white shadow">

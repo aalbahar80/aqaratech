@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
@@ -32,7 +33,7 @@
 
 	const basicFields = [
 		OrganizationIdField(
-			data?.organizationId || $session.user?.role?.organizationId,
+			data?.organizationId || $page.data.user?.role?.organizationId,
 		),
 		new Field('fullName', {
 			required: true,
@@ -88,7 +89,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data && // type hack
-			$page.stuff.api.tenants.update({
+			api($page.data.apiConfig).tenants.update({
 				id: data.id,
 				updateTenantDto: values,
 			})}
@@ -100,7 +101,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return $page.stuff.api.tenants.create({
+			return api($page.data.apiConfig).tenants.create({
 				createTenantDto: values,
 			});
 		}}

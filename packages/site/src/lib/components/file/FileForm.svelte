@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
@@ -12,7 +13,7 @@
 
 	const basicFields = [
 		new Field('organizationId', {
-			value: $session.user?.role?.organizationId,
+			value: $page.data.user?.role?.organizationId,
 			disabled: true,
 			autoInit: true,
 			hidden: true,
@@ -48,7 +49,7 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {
-		return $page.stuff.api.files.create(values);
+		return api($page.data.apiConfig).files.create(values);
 	}}
 	onSuccess={() =>
 		goto(`/${entitiesMap[relationKey].urlName}/${relationValue}`)}

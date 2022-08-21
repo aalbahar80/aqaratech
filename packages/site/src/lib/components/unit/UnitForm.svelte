@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { unitTypeOptions } from '$lib/constants/unit-options';
@@ -77,7 +78,7 @@
 
 	const basicFields = [
 		OrganizationIdField(
-			data?.organizationId || $session.user?.role?.organizationId,
+			data?.organizationId || $page.data.user?.role?.organizationId,
 		),
 		new SelectField('type', {
 			value: data?.type,
@@ -106,7 +107,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			$page.stuff.api.units.update({
+			api($page.data.apiConfig).units.update({
 				id: data.id,
 				updateUnitDto: values,
 			})}
@@ -119,6 +120,6 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			$page.stuff.api.units.create({ createUnitDto: values })}
+			api($page.data.apiConfig).units.create({ createUnitDto: values })}
 	/>
 {/if}

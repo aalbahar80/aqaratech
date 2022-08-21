@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import type { BreadcrumbsDto } from '@self/sdk';
 	import * as R from 'remeda';
@@ -13,7 +13,7 @@
 		? R.pipe(
 				R.toPairs(crumbs),
 				R.filter((c) => {
-					if ($session.user?.role?.roleType === 'TENANT') {
+					if ($page.data.user?.role?.roleType === 'TENANT') {
 						return tenantCrumbs.includes(c[0]);
 					}
 					return !R.isNil(c[1]);

@@ -29,7 +29,7 @@
 			{
 				label:
 					'Added ' +
-					formatDistance(role.createdAt, new Date(), {
+					formatDistance(new Date(role.createdAt), new Date(), {
 						addSuffix: true,
 					}),
 				icon: Fa6SolidUserPlus,

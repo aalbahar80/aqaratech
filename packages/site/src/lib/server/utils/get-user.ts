@@ -34,7 +34,7 @@ export const getUser = async ({
 }: {
 	token: string;
 	selectedRoleId?: string;
-}): Promise<App.Session['user']> => {
+}): Promise<User | undefined> => {
 	const profile = await getProfile(token);
 
 	// User not in our db, nothing more to do.

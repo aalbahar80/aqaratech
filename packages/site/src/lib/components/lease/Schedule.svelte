@@ -2,6 +2,7 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import type { LeaseDto } from '@self/sdk';
@@ -29,7 +30,7 @@
 	);
 
 	const onSubmit = async () => {
-		const created = await $page.stuff.api.leases.createInvoices({
+		const created = await api($page.data.apiConfig).leases.createInvoices({
 			id: lease.id,
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
 				...invoice,

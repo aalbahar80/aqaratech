@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
@@ -42,7 +43,7 @@
 
 	const basicFields = [
 		OrganizationIdField(
-			data?.organizationId || $session.user?.role?.organizationId,
+			data?.organizationId || $page.data.user?.role?.organizationId,
 		),
 		PortfolioIdField(data?.portfolioId || predefined?.portfolioId),
 		new Field('leaseId', {
@@ -98,7 +99,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			$page.stuff.api.leaseInvoices.update({
+			api($page.data.apiConfig).leaseInvoices.update({
 				id: data.id,
 				updateLeaseInvoiceDto: values,
 			})}
@@ -111,6 +112,8 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			$page.stuff.api.leaseInvoices.create({ createLeaseInvoiceDto: values })}
+			api($page.data.apiConfig).leaseInvoices.create({
+				createLeaseInvoiceDto: values,
+			})}
 	/>
 {/if}

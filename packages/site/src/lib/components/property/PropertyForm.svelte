@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { areas } from '$lib/constants/areas-kwt';
 	import { labelHint } from '$lib/constants/form-hints';
@@ -69,7 +70,7 @@
 
 	const basicFields = [
 		OrganizationIdField(
-			data?.organizationId || $session.user?.role?.organizationId,
+			data?.organizationId || $page.data.user?.role?.organizationId,
 		),
 		new SelectField('area', {
 			required: true,
@@ -116,7 +117,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			$page.stuff.api.properties.update({
+			api($page.data.apiConfig).properties.update({
 				id: data.id,
 				updatePropertyDto: values,
 			})}
@@ -129,7 +130,7 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			$page.stuff.api.properties.create({
+			api($page.data.apiConfig).properties.create({
 				createPropertyDto: values,
 			})}
 	/>

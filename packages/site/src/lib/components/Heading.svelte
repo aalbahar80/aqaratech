@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page, session } from '$app/stores';
+	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -48,7 +48,7 @@
 		</h2>
 	</div>
 
-	{#if $session.user?.role?.roleType === 'ORGADMIN'}
+	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
 			<ModalDelete bind:isOpen {id} {entity} {onDelete} {deletePrompt} />
@@ -115,7 +115,7 @@
 	{/if}
 
 	<!-- Actions -->
-	{#if $$slots.actions && $session.user?.role?.roleType === 'ORGADMIN'}
+	{#if $$slots.actions && $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<div
 			class="col-span-full col-start-1 flex flex-col justify-between gap-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:gap-x-4 sm:gap-y-0"
 		>

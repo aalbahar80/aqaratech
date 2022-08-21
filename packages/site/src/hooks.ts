@@ -4,24 +4,9 @@ import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
-import type {
-	ExternalFetch,
-	GetSession,
-	Handle,
-	HandleError,
-} from '@sveltejs/kit';
+import type { ExternalFetch, Handle, HandleError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
-
-export const getSession: GetSession = async ({ locals }) => {
-	// If idToken validation fails, we set both user and isAuthenticated to false
-	// even though locals.user was populated using a valid accessToken.
-	return {
-		user: locals.isAuthenticated ? locals.user : undefined,
-		accessToken: locals.accessToken ?? '',
-		isAuthenticated: locals.isAuthenticated,
-	};
-};
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();

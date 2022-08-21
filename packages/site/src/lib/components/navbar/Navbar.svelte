@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session } from '$app/stores';
+	import { page } from '$app/stores';
 	import NavPopover from '$components/navbar/NavPopover.svelte';
 	import DashboardButton from '$lib/components/navbar/DashboardButton.svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
@@ -7,7 +7,7 @@
 	import NavbarIcon from '$lib/components/navbar/NavbarIcon.svelte';
 
 	// Needs to be reactive?
-	const navigation = $session.user?.role?.meta.navLinks || [];
+	const navigation = $page.data.user?.role?.meta.navLinks || [];
 </script>
 
 <div class="bg-gray-900 py-1.5 print:hidden">
@@ -31,11 +31,11 @@
 			{/each}
 		</div>
 
-		<!-- {#if $session.user?.role?.roleType === 'ORGADMIN'}
+		<!-- {#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 			<SearchButton />
 		{/if} -->
 
-		{#if $session.isAuthenticated}
+		{#if $page.data.isAuthenticated}
 			<div class="hidden lg:flex lg:items-center lg:space-x-6">
 				<NavbarDropdown />
 			</div>
@@ -45,7 +45,7 @@
 
 		<div
 			class="-mr-2 flex items-center gap-6 lg:hidden"
-			class:hidden={!$session.isAuthenticated}
+			class:hidden={!$page.data.isAuthenticated}
 		>
 			<NavPopover {navigation} />
 		</div>
