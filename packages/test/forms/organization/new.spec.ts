@@ -13,21 +13,28 @@ test("existing user can create new org", async ({ page }) => {
 	await expect(page).toHaveURL("http://localhost:3000/organizations/new");
 	await new Promise((resolve) => setTimeout(resolve, 1000)); // hydration (used sveltekit:reload)
 
-	await page.locator('input[name="fullName"]').fill("My new organization");
+	const name = getName();
+	await page.locator('input[name="fullName"]').fill(name);
 	await page.locator('input[name="label"]').fill("newOrg");
 	await page.locator("text=Save").click();
 
-	const locator = page.locator("text=My new organization");
+	const locator = page.locator(`text=${name}`);
 	await expect(locator).toBeVisible();
 });
 
 test("can be submitted", async ({ page }) => {
 	await page.goto("/organizations/new");
 
-	await page.locator('input[name="fullName"]').fill("My Second Org");
+	const name = getName();
+	await page.locator('input[name="fullName"]').fill(name);
 	await page.locator('input[name="label"]').fill("Org 2");
 	await page.locator("text=Save").click();
 
-	const locator = page.locator("text=My Second Org");
+	const locator = page.locator(`text=${name}`);
 	await expect(locator).toBeVisible();
 });
+
+const getName = () => {
+	const random = Math.random().toString(36).substring(7);
+	return `Test Organization ${random}`;
+};
