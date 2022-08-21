@@ -66,8 +66,9 @@ export class AggregateService {
     filter: DashboardFilterDto;
     user: IUser;
   }) {
-    const start = filter.start;
-    const end = filter.end;
+    // TODO fix type error
+    const start = filter.start!;
+    const end = filter.end!;
 
     const units = await this.prisma.unit.findMany({
       where: {
