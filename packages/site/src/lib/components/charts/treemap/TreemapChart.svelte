@@ -1,5 +1,6 @@
 <script>
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
+	import { classes } from '$lib/utils/classes';
 	import { kwdFormat } from '$lib/utils/common';
 	import * as Pancake from '@sveltejs/pancake';
 	import * as d3 from 'd3';
@@ -112,21 +113,22 @@ Create a treemap from a d3-hierarchy.
 				>
 					<div class="node-contents">
 						{#if getLink}
-							<div>
+							<div
+								class={classes(
+									height > width ? 'flex-col' : 'flex-row',
+									'flex text-sm gap-x-2 flex-nowrap text-ellipsis',
+								)}
+							>
 								<a
-									class="align-middle text-indigo-600"
+									class="align-middle text-lg text-indigo-600"
 									class:hidden={node.children}
 									href={getLink(node)}
 									target="_blank"
 								>
 									&#8599;
 								</a>
-								<p class="overflow-hidden overflow-ellipsis text-sm">
-									<strong>{getLabel(node) ?? ''}</strong>
-									<span class:block={height > width}
-										>{kwdFormat(node.value)}</span
-									>
-								</p>
+								<strong>{getLabel(node) ?? ''}</strong>
+								<span>{kwdFormat(node.value)}</span>
 							</div>
 						{/if}
 					</div>
