@@ -47,4 +47,20 @@ export class AggregateController {
   ): Promise<ByMonthDto[]> {
     return this.aggregateService.expensesByMonth({ filter, user });
   }
+
+  @Get('/occupancy')
+  @CheckAbilities(
+    { action: Action.Read, subject: 'Portfolio' },
+    { action: Action.Read, subject: 'Property' },
+    { action: Action.Read, subject: 'Unit' },
+    { action: Action.Read, subject: 'Lease' },
+  )
+  @ApiOkResponse({ type: ByMonthDto, isArray: true })
+  getOccupancy(
+    @User() user: IUser,
+    @Query() filter: DashboardFilterDto,
+  ): Promise<ByMonthDto[]> {
+    // @ts-ignore
+    return this.aggregateService.getOccupancy({ filter, user });
+  }
 }

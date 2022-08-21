@@ -57,4 +57,74 @@ export class AggregateService {
 
     return groupByMonth(expenses);
   }
+
+  async getOccupancy({
+    filter,
+    user,
+  }: {
+    filter?: DashboardFilterDto;
+    user: IUser;
+  }) {
+    const units = await this.prisma.unit.findMany({
+      select: {
+        id: true,
+        createdAt: true,
+        leases: {
+          select: {
+            start: true,
+            end: true,
+            unitId: true,
+          },
+        },
+      },
+    });
+
+    const startDate = new Date('2022-07-01');
+    const endDate = new Date();
+
+    type Occupancy = {
+      date: Date;
+      unitCount: number;
+      occupied: number;
+      occupiedPct: number;
+      vacant: number;
+      vacantPct: number;
+    };
+
+    const days: Occupancy[] = [];
+
+    // loop through each day in the range
+    for (
+      let date = startDate;
+      date <= endDate;
+      date.setDate(date.getDate() + 1)
+    ) {
+      // only count units if data is after the unit creation date
+      const createdUnits = units.filter((unit) => {
+        return unit.createdAt <= date;
+      });
+      const unitCount = createdUnits.length;
+
+      const occupied = createdUnits.filter((unit) => {
+        return unit.leases.some((lease) => {
+          return lease.start <= date && lease.end >= date;
+        });
+      }).length;
+
+      const vacant = unitCount - occupied;
+      const occupiedPct = Math.round((occupied / unitCount) * 100);
+      const vacantPct = Math.round((vacant / unitCount) * 100);
+
+      days.push({
+        date: new Date(date),
+        unitCount,
+        occupied,
+        occupiedPct,
+        vacant,
+        vacantPct,
+      });
+    }
+
+    return days;
+  }
 }
