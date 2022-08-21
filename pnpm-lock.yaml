@@ -273,6 +273,7 @@ importers:
       svelte: 3.49.0
       svelte-check: 2.8.1
       svelte-dnd-action: 0.9.19
+      svelte-frappe-charts: 1.9.2
       svelte-meta-tags: 2.6.2
       svelte-preprocess: 4.10.7
       tailwindcss: 3.1.8
@@ -333,6 +334,7 @@ importers:
       svelte: 3.49.0
       svelte-check: 2.8.1_vylzxgme5yisu3bsyvcau4hjtq
       svelte-dnd-action: 0.9.19
+      svelte-frappe-charts: 1.9.2_svelte@3.49.0
       svelte-meta-tags: 2.6.2
       svelte-preprocess: 4.10.7_fje22ktja5v2dh6nbkissncqme
       tailwindcss: 3.1.8_postcss@8.4.16
@@ -6867,6 +6869,10 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
+  /frappe-charts/1.6.2:
+    resolution: {integrity: sha512-9TC3/+YVUi84yYoEbxFiSqu+1FQ5If/ydUNj6i8FRpwynd08t6a7RkS+IRJozAk6NfdL8/LVTTE1DUOjjKZZxg==}
+    dev: true
+
   /fresh/0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -9848,6 +9854,15 @@ packages:
 
   /svelte-dnd-action/0.9.19:
     resolution: {integrity: sha512-1Jsym2HN0TJVUl09wLGASkHg937+ZecnnekPiwC0J6K7mCzOxCuIQSVnIxoQLLeiXv74joNVNpVofX9Z0jM4Vw==}
+    dev: true
+
+  /svelte-frappe-charts/1.9.2_svelte@3.49.0:
+    resolution: {integrity: sha512-FYwbI5lY6fiN8b+5IFu6RvcgpWpCKTTpL0sGCqbwgbth4cIZoOjIAdU7JbzjuaF5mUCHRt4TSnGEsK+345C2hw==}
+    peerDependencies:
+      svelte: ^3.0.0
+    dependencies:
+      frappe-charts: 1.6.2
+      svelte: 3.49.0
     dev: true
 
   /svelte-hmr/0.14.12_svelte@3.49.0:
