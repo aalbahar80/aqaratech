@@ -74,7 +74,6 @@ importers:
       swagger-ui-express: 4.5.0
       ts-jest: 28.0.8
       ts-loader: 9.3.1
-      ts-toolbelt: 9.6.0
       tsconfig-paths: 4.1.0
       tsx: 3.8.2
       typescript: 4.7.4
@@ -116,7 +115,6 @@ importers:
       rxjs: 7.5.6
       swagger-stats: 0.99.2_prom-client@14.0.1
       swagger-ui-express: 4.5.0_express@4.18.1
-      ts-toolbelt: 9.6.0
     devDependencies:
       '@nestjs/cli': 9.0.0
       '@nestjs/schematics': 9.0.1_nobats3jkocaued6l3papcxri4
@@ -283,7 +281,6 @@ importers:
       svelte2tsx: 0.5.14
       tailwindcss: 3.1.8
       tippy.js: 6.3.7
-      ts-toolbelt: 9.6.0
       tslib: 2.4.0
       typescript: 4.7.4
       unplugin-icons: 0.14.8
@@ -346,7 +343,6 @@ importers:
       svelte2tsx: 0.5.14_uslzfc62di2n2otc2tvfklnwji
       tailwindcss: 3.1.8_postcss@8.4.16
       tippy.js: 6.3.7
-      ts-toolbelt: 9.6.0
       tslib: 2.4.0
       typescript: 4.7.4
       unplugin-icons: 0.14.8_vite@3.0.9
@@ -10360,6 +10356,7 @@ packages:
 
   /ts-toolbelt/9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
+    dev: false
 
   /tsconfig-paths-webpack-plugin/3.5.2:
     resolution: {integrity: sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==}
