@@ -4,6 +4,7 @@ import {
   ByMonthDto,
   DashboardFilterDto,
 } from 'src/aggregate/dto/aggregate.dto';
+import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -55,12 +56,11 @@ export class AggregateController {
     { action: Action.Read, subject: 'Unit' },
     { action: Action.Read, subject: 'Lease' },
   )
-  @ApiOkResponse({ type: ByMonthDto, isArray: true })
+  @ApiOkResponse({ type: Occupancy, isArray: true })
   getOccupancy(
     @User() user: IUser,
     @Query() filter: DashboardFilterDto,
-  ): Promise<ByMonthDto[]> {
-    // @ts-ignore
+  ): Promise<Occupancy[]> {
     return this.aggregateService.getOccupancy({ filter, user });
   }
 }
