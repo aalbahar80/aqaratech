@@ -63,7 +63,7 @@ importers:
       postmark: 3.0.12
       prettier: 2.7.1
       prisma: 4.2.1
-      prom-client: 14.0.1
+      prom-client: 13.2.0
       reflect-metadata: 0.1.13
       remeda: 1.0.1
       rimraf: 3.0.2
@@ -108,12 +108,12 @@ importers:
       passport-jwt: 4.0.0
       postmark: 3.0.12
       prisma: 4.2.1
-      prom-client: 14.0.1
+      prom-client: 13.2.0
       reflect-metadata: 0.1.13
       remeda: 1.0.1
       rimraf: 3.0.2
       rxjs: 7.5.6
-      swagger-stats: 0.99.2_prom-client@14.0.1
+      swagger-stats: 0.99.2_prom-client@13.2.0
       swagger-ui-express: 4.5.0_express@4.18.1
     devDependencies:
       '@nestjs/cli': 9.0.0
@@ -9000,11 +9000,19 @@ packages:
     resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
     dev: true
 
+  /prom-client/13.2.0:
+    resolution: {integrity: sha512-wGr5mlNNdRNzEhRYXgboUU2LxHWIojxscJKmtG3R8f4/KiWqyYgXTLHs0+Ted7tG3zFT7pgHJbtomzZ1L0ARaQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      tdigest: 0.1.2
+    dev: false
+
   /prom-client/14.0.1:
     resolution: {integrity: sha512-HxTArb6fkOntQHoRGvv4qd/BkorjliiuO2uSWC2KC17MUTKYttWdDoXX/vxOhQdkoECEM9BBH0pj2l8G8kev6w==}
     engines: {node: '>=10'}
     dependencies:
       tdigest: 0.1.2
+    dev: true
 
   /prompts/2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
@@ -9971,7 +9979,7 @@ packages:
     dev: true
     optional: true
 
-  /swagger-stats/0.99.2_prom-client@14.0.1:
+  /swagger-stats/0.99.2_prom-client@13.2.0:
     resolution: {integrity: sha512-ssZi59v3d1P2WyTxrujthOjjKR4zDLuUgcCiOr8iXKhpqdz8ffyKSDRaZudHDe+VerbhkONRyxY3Th+Bah8s+Q==}
     peerDependencies:
       prom-client: '>= 10 <= 13'
@@ -9981,7 +9989,7 @@ packages:
       debug: 4.3.4
       moment: 2.29.4
       path-to-regexp: 6.2.1
-      prom-client: 14.0.1
+      prom-client: 13.2.0
       qs: 6.11.0
       request: 2.88.2
       send: 0.17.2

@@ -62,7 +62,7 @@
     "passport-jwt": "4.0.0",
     "postmark": "3.0.12",
     "prisma": "4.2.1",
-    "prom-client": "14.0.1",
+    "prom-client": "13.2.0",
     "reflect-metadata": "0.1.13",
     "remeda": "1.0.1",
     "rimraf": "3.0.2",
