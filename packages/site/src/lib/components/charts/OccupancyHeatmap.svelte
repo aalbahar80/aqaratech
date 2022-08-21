@@ -6,10 +6,10 @@
 	export let occupancy: Occupancy[];
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 
-	$: tuples = occupancy.map((o) => [o.date / 1000, o.occupiedPct]);
-
 	$: data = {
-		dataPoints: R.fromPairs(tuples),
+		dataPoints: R.fromPairs(
+			occupancy.map((o) => [o.date / 1000, o.occupiedPct]),
+		),
 		start: new Date(occupancy[0]!.date),
 		end: new Date(occupancy[occupancy.length - 1]!.date),
 	};
