@@ -6,12 +6,9 @@
 	export let occupancy: Occupancy[];
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 
-	const tuples: [number, number][] = occupancy.map((o) => [
-		o.date / 1000,
-		o.occupiedPct,
-	]);
+	$: tuples = occupancy.map((o) => [o.date / 1000, o.occupiedPct]);
 
-	let data = {
+	$: data = {
 		dataPoints: R.fromPairs(tuples),
 		start: new Date(occupancy[0]!.date),
 		end: new Date(occupancy[occupancy.length - 1]!.date),
