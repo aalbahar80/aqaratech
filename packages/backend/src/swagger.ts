@@ -28,8 +28,6 @@ export const setupSwagger = async (app: INestApplication) => {
     .addTag('aqaratech')
     // first server will be the default one in generated sdk
     .addServer('http://localhost:3002')
-    .addServer('https://aqar.live/api')
-    .addServer('https://aqaratech.net/api')
     // .setBasePath('/api')
     // .addBearerAuth()
     .addSecurityRequirements('oauth-swagger')
@@ -82,7 +80,7 @@ export const setupSwagger = async (app: INestApplication) => {
     },
   });
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.PUBLIC_AQARATECH_ENV !== 'production') {
     const { dump } = await import('js-yaml');
     // For consumption of swagger-ui
     writeFileSync(
@@ -91,20 +89,20 @@ export const setupSwagger = async (app: INestApplication) => {
         // schema: 'http://json-schema.org/draft-04/schema#',
       }),
     );
-  }
 
-  SwaggerModule.setup('swagger', app, document, {
-    swaggerOptions: {
-      // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
-      oauth: {
-        clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-        clientSecret:
-          'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
-        scopes: ['openid', 'profile', 'email'], // default scopes to request
+    SwaggerModule.setup('swagger', app, document, {
+      swaggerOptions: {
+        // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
+        oauth: {
+          clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
+          clientSecret:
+            'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
+          scopes: ['openid', 'profile', 'email'], // default scopes to request
+        },
+        persistAuthorization: true,
       },
-      persistAuthorization: true,
-    },
-  });
+    });
+  }
 
   return document;
 };

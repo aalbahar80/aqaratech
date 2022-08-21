@@ -53,7 +53,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
-  const document = setupSwagger(app);
+  const document = await setupSwagger(app);
 
   app.use(
     getMiddleware({

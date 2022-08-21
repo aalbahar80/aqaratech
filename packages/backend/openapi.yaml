@@ -2315,8 +2315,6 @@ tags:
     description: ''
 servers:
   - url: http://localhost:3002
-  - url: https://aqar.live/api
-  - url: https://aqaratech.net/api
 components:
   securitySchemes:
     oauth-swagger:
