@@ -1,7 +1,10 @@
 import { protectRoute } from '$lib/server/utils/protect-route';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ locals, url: { pathname } }) => {
+export const load: LayoutServerLoad.common = async ({
+	locals,
+	url: { pathname },
+}) => {
 	protectRoute({
 		isAuthenticated: locals.isAuthenticated,
 		pathname,
