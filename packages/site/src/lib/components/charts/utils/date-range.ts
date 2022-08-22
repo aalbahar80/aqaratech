@@ -50,3 +50,11 @@ export const getOneYearAgo = () => {
 	);
 	return oneYearAgo;
 };
+
+export const getOneYearLater = () => {
+	const now = new Date();
+	const oneYearLater = new Date(
+		Date.UTC(now.getFullYear() + 1, now.getMonth(), now.getDate()),
+	);
+	return oneYearLater;
+};

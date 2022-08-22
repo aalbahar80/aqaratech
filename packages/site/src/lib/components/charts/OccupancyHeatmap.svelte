@@ -11,6 +11,7 @@
 	import * as R from 'remeda';
 
 	export let occupancy: Occupancy[];
+	export let title = '';
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 
 	let innerWidth: number | undefined;
@@ -33,6 +34,13 @@
 
 {#key data}
 	<div class="overflow-x-auto py-4">
-		<FrappeChart type="heatmap" {data} {colors} countLabel="%" />
+		<FrappeChart
+			type="heatmap"
+			{title}
+			{data}
+			{colors}
+			height={200}
+			countLabel="%"
+		/>
 	</div>
 {/key}

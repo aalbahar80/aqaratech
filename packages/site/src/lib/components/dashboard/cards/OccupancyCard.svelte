@@ -11,9 +11,14 @@
 	subtitle="Percentage of occupied units"
 	empty={occupancy.length < 1}
 	tabbed={false}
-	chartHeight={500}
+	chartHeight={1000}
 >
 	<div slot="chart">
 		<OccupancyHeatmap {occupancy} />
+		<div class="py-8" />
+		<OccupancyHeatmap
+			{occupancy}
+			title="Expected occupancy for the upcoming year"
+		/>
 	</div>
 </DashCard>

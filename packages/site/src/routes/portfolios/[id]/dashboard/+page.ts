@@ -20,6 +20,7 @@ export const load: PageLoad = async ({
 		invoicesGroupedPaid,
 		invoicesGroupedUnpaid,
 		occupancy,
+		futureOccupancy,
 		categories,
 	] = await Promise.all([
 		parentStuff.api!.portfolios.findProperties({ id: portfolioId }),
@@ -41,6 +42,7 @@ export const load: PageLoad = async ({
 		invoicesGroupedPaid,
 		invoicesGroupedUnpaid,
 		occupancy,
+		futureOccupancy,
 		categories,
 	};
 };

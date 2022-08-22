@@ -4,6 +4,7 @@ import {
 	defaultRange,
 	defaultRangeEnd,
 	getOneYearAgo,
+	getOneYearLater,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
 import { parseParams } from '$lib/utils/parse-params';
@@ -61,6 +62,12 @@ export const getDashboardData = async ({
 				filter.start || rangeStart(defaultRange),
 				getOneYearAgo().toISOString(),
 			),
+		}),
+		// future occupancy
+		api.aggregate.getOccupancy({
+			...filter,
+			start: new Date().toISOString(),
+			end: getOneYearLater().toISOString(),
 		}),
 		api.expenseCategories.findAll(),
 	] as const;

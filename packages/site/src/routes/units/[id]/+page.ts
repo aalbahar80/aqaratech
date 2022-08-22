@@ -23,6 +23,7 @@ export const load: PageLoad = async ({
 		invoicesGroupedPaid,
 		invoicesGroupedUnpaid,
 		occupancy,
+		futureOccupancy,
 		categories,
 	] = await Promise.all([
 		parentStuff.api.units.findOne({ id: unitId }),
@@ -40,6 +41,7 @@ export const load: PageLoad = async ({
 		invoicesGroupedPaid,
 		invoicesGroupedUnpaid,
 		occupancy,
+		futureOccupancy,
 		categories,
 	};
 };
