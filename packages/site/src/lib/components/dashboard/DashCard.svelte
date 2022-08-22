@@ -8,6 +8,7 @@
 	export let subtitle = '';
 	export let empty = false;
 	export let tabbed = true;
+	export let chartHeight = 1000;
 
 	const tabs = [
 		{ name: 'Chart', icon: ChartBar },
@@ -21,7 +22,7 @@
 
 	const recalcHeight = (tab: 'Chart' | 'Data', h: typeof heightTable) => {
 		if (tab === 'Chart') {
-			$height = 1000;
+			$height = chartHeight;
 		} else {
 			const newHeight = h ?? 0;
 			$height = 200 + newHeight;

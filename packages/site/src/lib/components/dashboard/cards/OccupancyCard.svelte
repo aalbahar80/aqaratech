@@ -8,12 +8,13 @@
 
 <DashCard
 	title="Occupancy"
-	subtitle=""
+	subtitle="Percentage of occupied units"
 	empty={occupancy.length < 1}
 	tabbed={false}
+	chartHeight={500}
 >
 	<div slot="chart">
-		<div class="overflow-x-auto">
+		<div class="overflow-x-auto py-4">
 			<OccupancyHeatmap {occupancy} />
 		</div>
 	</div>

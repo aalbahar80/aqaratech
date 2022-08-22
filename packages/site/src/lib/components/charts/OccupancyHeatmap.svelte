@@ -1,4 +1,7 @@
 <script lang="ts">
+	// Frappe: https://frappe.io/charts/docs/basic/heatmap
+	// Layercake alternative: https://layercake.graphics/example-ssr/Calendar/
+
 	import type { Occupancy } from '@self/sdk';
 	import * as R from 'remeda';
 	import Chart from 'svelte-frappe-charts';
@@ -15,4 +18,4 @@
 	};
 </script>
 
-<Chart type="heatmap" title="Percentage of occupied units" {data} {colors} />
+<Chart type="heatmap" {data} {colors} />
