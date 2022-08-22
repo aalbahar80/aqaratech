@@ -105,7 +105,7 @@ export class UnitDto
   @ApiProperty()
   @Expose()
   get vacancy(): UnitVacancy {
-    const isVacant = this.leases.some(
+    const isOccupied = this.leases.some(
       (l) => l.start <= new Date() && l.end >= new Date(),
     );
     const lease = this.leases[0];
@@ -118,7 +118,7 @@ export class UnitDto
 
     const vacancyDate = lease?.end ?? null;
 
-    return { isVacant, vacancyDistance, vacancyDate };
+    return { isVacant: !isOccupied, vacancyDistance, vacancyDate };
   }
 
   @ApiProperty()
