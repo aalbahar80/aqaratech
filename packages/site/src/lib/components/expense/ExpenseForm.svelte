@@ -54,7 +54,7 @@
 	export let units: TUnits = undefined as TUnits;
 
 	const relationalFields: SelectField<RelOption>[] =
-		formType === 'create' && portfolios && properties && units
+		formType === 'create' && portfolios
 			? [
 					new SelectField('portfolioId', {
 						label: 'Portfolio',
@@ -73,7 +73,7 @@
 						value: predefined?.propertyId,
 						combobox: true,
 						autoInit: true,
-						options: properties.results.map((property) => ({
+						options: properties?.results.map((property) => ({
 							value: property.id,
 							label: property.breadcrumbs.property.label,
 							meta: { parentId: property.portfolioId },
@@ -85,7 +85,7 @@
 						value: predefined?.unitId,
 						combobox: true,
 						autoInit: true,
-						options: units.results.map((unit) => ({
+						options: units?.results.map((unit) => ({
 							value: unit.id,
 							label: unit.breadcrumbs.unit.label,
 							meta: { parentId: unit.propertyId },
