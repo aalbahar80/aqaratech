@@ -1,3 +1,4 @@
+import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import {
 	defaultRange,
 	defaultRangeEnd,
@@ -41,21 +42,7 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api.units.findOne({ id: unitId }),
 		parentStuff.api.units.findLeases({ id: unitId, ...sParams }),
-
-		parentStuff.api.aggregate.getIncomeByMonth(filter),
-		parentStuff.api.aggregate.getExpensesByMonth(filter),
-		parentStuff.api.leaseInvoices.findAll(filter),
-		parentStuff.api.expenses.findAll(filter), // TODO filter serverside
-
-		parentStuff.api.aggregate.getIncomeByMonth({
-			...filter,
-			paidStatus: 'paid',
-		}),
-		parentStuff.api.aggregate.getIncomeByMonth({
-			...filter,
-			paidStatus: 'unpaid',
-		}),
-		parentStuff.api.expenseCategories.findAll(),
+		...(await getDashboardData(parentStuff.api, filter)),
 	]);
 
 	return {

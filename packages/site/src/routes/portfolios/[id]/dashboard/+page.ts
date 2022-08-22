@@ -1,8 +1,7 @@
+import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import {
-	clampedDate,
 	defaultRange,
 	defaultRangeEnd,
-	getOneYearAgo,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
 import type { PageLoad } from './$types';
@@ -42,30 +41,7 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api!.portfolios.findProperties({ id: portfolioId }),
 		parentStuff.api!.portfolios.findUnits({ id: portfolioId }),
-
-		parentStuff.api!.aggregate.getIncomeByMonth(filter),
-		parentStuff.api!.aggregate.getExpensesByMonth(filter),
-		parentStuff.api!.leaseInvoices.findAll(filter),
-		parentStuff.api!.expenses.findAll(filter), // TODO filter serverside
-
-		parentStuff.api!.aggregate.getIncomeByMonth({
-			...filter,
-			paidStatus: 'paid',
-		}),
-		parentStuff.api!.aggregate.getIncomeByMonth({
-			...filter,
-			paidStatus: 'unpaid',
-		}),
-		parentStuff.api!.aggregate.getOccupancy({
-			...filter,
-			// Always get the last year's occupancy (atleast)
-			start: clampedDate(
-				filter.start || rangeStart(defaultRange),
-				filter.start || rangeStart(defaultRange),
-				getOneYearAgo().toISOString(),
-			),
-		}),
-		parentStuff.api!.expenseCategories.findAll(),
+		...(await getDashboardData(parentStuff.api, filter)),
 	]);
 
 	return {
