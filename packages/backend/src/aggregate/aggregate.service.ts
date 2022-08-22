@@ -89,7 +89,7 @@ export class AggregateService {
         },
       },
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
     });
 
@@ -99,18 +99,17 @@ export class AggregateService {
       return days;
     }
 
+    // avoid looping over dates where no units are created
     const firstUnitCreatedAt = units[0].createdAt;
+    const start =
+      filter.start! > firstUnitCreatedAt ? filter.start! : firstUnitCreatedAt;
 
     // fallback to getting data for next two years max
     const oneYear = 1000 * 60 * 60 * 24 * 365;
     const end = filter.end || new Date(Date.now() + oneYear * 2);
 
     // loop through each day in the range
-    for (
-      let date = firstUnitCreatedAt;
-      date <= end;
-      date.setDate(date.getDate() + 1)
-    ) {
+    for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
       // only count units if data is after the unit creation date
       const createdUnits = units.filter((unit) => {
         return unit.createdAt <= date;
