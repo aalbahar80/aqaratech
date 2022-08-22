@@ -28,6 +28,7 @@ type ChartOptions = {
 	isNavigable: boolean;
 	valuesOverPoints: boolean;
 	maxSlices: number;
+	countLabel: string;
 };
 
 type ChartType =
@@ -66,8 +67,9 @@ type LineOptions = {
 };
 
 type Data = {
-	labels: string[];
-	datasets: Dataset[];
+	labels?: string[];
+	datasets?: Dataset[];
+	dataPoints?: HeatmapDatapoints;
 
 	chartType?: ChartType;
 
@@ -79,3 +81,5 @@ type Dataset = {
 	name?: string;
 	values: number[];
 };
+
+type HeatmapDatapoints = Record<number, number>;

@@ -18,6 +18,7 @@
 	export let valuesOverPoints: boolean = false;
 	export let isNavigable: boolean = false;
 	export let maxSlices: number = 3;
+	export let countLabel: string = '';
 
 	/**
 	 *  COMPONENT
@@ -75,6 +76,7 @@
 			valuesOverPoints,
 			isNavigable,
 			maxSlices,
+			countLabel,
 		} as ChartOptions);
 	});
 
