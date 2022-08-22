@@ -354,6 +354,7 @@ importers:
       '@self/utils': workspace:1.0.0
       '@tsconfig/node18': 1.0.1
       '@types/node': 18.7.8
+      dotenv: 16.0.1
       typescript: 4.7.4
     dependencies:
       '@self/utils': link:../utils
@@ -362,6 +363,7 @@ importers:
       '@self/seed': link:../seed
       '@tsconfig/node18': 1.0.1
       '@types/node': 18.7.8
+      dotenv: 16.0.1
       typescript: 4.7.4
 
   packages/utils:

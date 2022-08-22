@@ -5,7 +5,7 @@ import { test as base } from "../config";
 const lease = sample.leases[0];
 
 const test = base.extend<MyFixtures>({
-	invoice: async ({ page, request, token }, use) => {
+	invoice: async ({ page, request, token, apiBaseURL }, use) => {
 		await page.goto(`leases/${lease.id}`);
 
 		const data: Omit<Invoice, "id"> = {
@@ -19,7 +19,7 @@ const test = base.extend<MyFixtures>({
 			isPaid: false,
 		};
 
-		const res = await request.post("http://localhost:3002/leaseInvoices", {
+		const res = await request.post(`${apiBaseURL}/leaseInvoices`, {
 			data,
 			headers: {
 				authorization: `Bearer ${token}`,

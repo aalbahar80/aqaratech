@@ -35,7 +35,7 @@ export const test = base.extend<MyFixtures>({
 		await use(token);
 	},
 	apiBaseURL: async ({}, use) => {
-		const apiBaseUrl = "http://localhost:3002";
+		const apiBaseUrl = process.env.PUBLIC_API_URL;
 		await use(apiBaseUrl);
 	},
 });
