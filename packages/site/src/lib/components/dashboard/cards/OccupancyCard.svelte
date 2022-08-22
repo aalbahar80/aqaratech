@@ -9,7 +9,7 @@
 
 <DashCard
 	title="Occupancy"
-	subtitle="Percentage of occupied units"
+	subtitle="Percentage of occupied units."
 	empty={occupancy.length < 1}
 	tabbed={false}
 	chartHeight={750}
