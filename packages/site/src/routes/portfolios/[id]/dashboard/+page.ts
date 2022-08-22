@@ -1,6 +1,8 @@
 import {
+	clampedDate,
 	defaultRange,
 	defaultRangeEnd,
+	getOneYearAgo,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
 import type { PageLoad } from './$types';
@@ -56,6 +58,12 @@ export const load: PageLoad = async ({
 		}),
 		parentStuff.api!.aggregate.getOccupancy({
 			...filter,
+			// Always get the last year's occupancy (atleast)
+			start: clampedDate(
+				filter.start || rangeStart(defaultRange),
+				filter.start || rangeStart(defaultRange),
+				getOneYearAgo().toISOString(),
+			),
 		}),
 		parentStuff.api!.expenseCategories.findAll(),
 	]);
