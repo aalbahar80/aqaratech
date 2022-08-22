@@ -15,7 +15,11 @@
 	chartHeight={1000}
 >
 	<div slot="chart">
-		<OccupancyHeatmap {occupancy} shouldClamp />
+		<OccupancyHeatmap
+			{occupancy}
+			shouldClamp
+			title="Historical occupancy rates"
+		/>
 		<div class="py-8" />
 		<OccupancyHeatmap
 			occupancy={futureOccupancy}
