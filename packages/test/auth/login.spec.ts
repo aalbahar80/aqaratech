@@ -55,6 +55,8 @@ const test = base.extend<MyFixtures>({
 });
 
 test("login", async ({ page, baseURL }) => {
+	const domain = new URL(baseURL).hostname;
+
 	const cookies = await page.context().cookies();
 	const accessToken = cookies.find((c) => c.name === "accessToken");
 
@@ -65,7 +67,7 @@ test("login", async ({ page, baseURL }) => {
 		value: expect.stringMatching(
 			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
 		),
-		domain: baseURL.replace(/^https?:\/\//, ""),
+		domain,
 		path: "/",
 		expires: expect.any(Number),
 		httpOnly: true,
@@ -79,7 +81,7 @@ test("login", async ({ page, baseURL }) => {
 		value: expect.stringMatching(
 			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
 		),
-		domain: baseURL.replace(/^https?:\/\//, ""),
+		domain,
 		path: "/",
 		expires: expect.any(Number),
 		httpOnly: true,

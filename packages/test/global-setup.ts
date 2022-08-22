@@ -4,21 +4,24 @@ import { testOrgEmail, testPassword } from "@self/seed";
 async function globalSetup(config: FullConfig) {
 	// await seed();
 
+	const { baseURL, storageState, ignoreHTTPSErrors } = config.projects[0].use;
 	// avoid logging in again if cookies have not expired
 	try {
 		const cookies = (await import("./storageState.json")).cookies;
 		const accessToken = cookies.find((c) => c.name === "accessToken");
 		if (accessToken) {
 			const hasExpired = accessToken.expires < Date.now() / 1000;
+			const domain = new URL(baseURL).hostname;
+			const isSameDomain = domain === accessToken.domain;
 
-			if (!hasExpired) {
+			if (!hasExpired && isSameDomain) {
 				console.log(
 					"[Global Setup] Skipping login because access token is still valid"
 				);
 				return;
 			} else {
 				console.log(
-					"[Global Setup] Access token has expired. Logging in again"
+					"[Global Setup] Access token has expired or domain is different. Logging in again"
 				);
 			}
 		}
@@ -28,7 +31,6 @@ async function globalSetup(config: FullConfig) {
 
 	const email = testOrgEmail;
 	const password = testPassword;
-	const { baseURL, storageState, ignoreHTTPSErrors } = config.projects[0].use;
 
 	const browser = await chromium.launch();
 	const page = await browser.newPage({ ignoreHTTPSErrors });
