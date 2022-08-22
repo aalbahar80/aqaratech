@@ -54,6 +54,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-svelte3": "4.0.0",
     "felte": "1.2.3",
+    "frappe-charts": "1.6.2",
     "fuse.js": "6.6.2",
     "jose": "4.9.0",
     "jsdom": "20.0.0",

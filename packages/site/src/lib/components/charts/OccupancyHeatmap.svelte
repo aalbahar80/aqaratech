@@ -1,10 +1,12 @@
 <script lang="ts">
 	// Frappe: https://frappe.io/charts/docs/basic/heatmap
+	// Example: https://github.dev/frappe/charts/blob/7adc904b08fbb45fb30372d9c6a3c3df43f80085/docs/index.html#L174
 	// Layercake alternative: https://layercake.graphics/example-ssr/Calendar/
 
+	// forked from svelte-frappe-charts to add functionality (mainly countLabel prop) - reuse package once functionality is merged
+	import FrappeChart from '$lib/components/charts/FrappeChart.svelte';
 	import type { Occupancy } from '@self/sdk';
 	import * as R from 'remeda';
-	import Chart from 'svelte-frappe-charts';
 
 	export let occupancy: Occupancy[];
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
@@ -30,6 +32,6 @@
 
 {#key data}
 	<div class="overflow-x-auto py-4">
-		<Chart type="heatmap" {data} {colors} />
+		<FrappeChart type="heatmap" countLabel="%" />
 	</div>
 {/key}

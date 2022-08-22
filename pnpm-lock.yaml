@@ -258,6 +258,7 @@ importers:
       eslint-config-prettier: 8.5.0
       eslint-plugin-svelte3: 4.0.0
       felte: 1.2.3
+      frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.9.0
       jsdom: 20.0.0
@@ -319,6 +320,7 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.22.0
       eslint-plugin-svelte3: 4.0.0_laaqauvsmoyypsiqkozwyi2fn4
       felte: 1.2.3_svelte@3.49.0
+      frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.9.0
       jsdom: 20.0.0
