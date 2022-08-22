@@ -5,7 +5,7 @@ test("existing user can create new org", async ({ page, isMobile }) => {
 	await page.goto("/");
 
 	// wait a bit for dropdown to load
-	await new Promise((resolve) => setTimeout(resolve, 1000));
+	await page.waitForLoadState("networkidle"); // otherwise flaky/no hydration
 	if (isMobile) {
 		await page.locator('button:has-text("Open main menu")').click();
 	} else {
@@ -15,7 +15,7 @@ test("existing user can create new org", async ({ page, isMobile }) => {
 	await page.locator("text=Switch Role").click();
 	await page.locator("text=Create new Organization").click();
 	await expect(page).toHaveURL("/organizations/new");
-	await new Promise((resolve) => setTimeout(resolve, 1000)); // hydration (used sveltekit:reload)
+	await page.waitForLoadState("networkidle"); // otherwise flaky/no hydration
 
 	const name = getName();
 	await page.locator('input[name="fullName"]').fill(name);
