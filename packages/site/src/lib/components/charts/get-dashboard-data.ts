@@ -6,12 +6,29 @@ import {
 	getOneYearAgo,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
-import type { AggregateApiGetOccupancyRequest } from '@self/sdk';
 
-export const getDashboardData = async (
-	api: Api,
-	filter: AggregateApiGetOccupancyRequest,
-) => {
+export const getDashboardData = async ({
+	api,
+	searchParams,
+	portfolioId,
+	propertyId,
+	unitId,
+}: {
+	api: Api;
+	searchParams: URLSearchParams;
+	portfolioId?: string;
+	propertyId?: string;
+	unitId?: string;
+}) => {
+	const filter = {
+		portfolioId,
+		propertyId: propertyId || searchParams.get('propertyId') || undefined,
+		unitId: unitId || searchParams.get('unitId') || undefined,
+		start: searchParams.get('start') || undefined,
+		end: searchParams.get('end') || undefined,
+		take: 1000,
+	};
+
 	if (!filter.start && !filter.end) {
 		filter.start = rangeStart(defaultRange);
 		filter.end = defaultRangeEnd();

@@ -13,11 +13,6 @@ export const load: PageLoad = async ({
 	// TODO handle pagination defaults
 	const filter = {
 		...sParams,
-		propertyId,
-		unitId: searchParams.get('unitId') || undefined,
-		start: searchParams.get('start') || undefined,
-		end: searchParams.get('end') || undefined,
-		take: 1000,
 	};
 
 	const parentStuff = await parent();
@@ -35,7 +30,11 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api!.properties.findOne({ id: propertyId }),
 		parentStuff.api!.properties.findUnits({ id: propertyId, ...sParams }),
-		...(await getDashboardData(parentStuff.api, filter)),
+		...(await getDashboardData({
+			api: parentStuff.api,
+			searchParams,
+			propertyId,
+		})),
 	]);
 
 	return {

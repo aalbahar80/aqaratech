@@ -7,14 +7,6 @@ export const load: PageLoad = async ({
 	parent,
 }) => {
 	const portfolioId = params.id;
-	const filter = {
-		portfolioId,
-		propertyId: searchParams.get('propertyId') || undefined,
-		unitId: searchParams.get('unitId') || undefined,
-		start: searchParams.get('start') || undefined,
-		end: searchParams.get('end') || undefined,
-		take: 1000,
-	};
 
 	const parentStuff = await parent();
 
@@ -32,7 +24,11 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api!.portfolios.findProperties({ id: portfolioId }),
 		parentStuff.api!.portfolios.findUnits({ id: portfolioId }),
-		...(await getDashboardData(parentStuff.api, filter)),
+		...(await getDashboardData({
+			api: parentStuff.api,
+			searchParams,
+			portfolioId,
+		})),
 	]);
 
 	return {

@@ -13,9 +13,6 @@ export const load: PageLoad = async ({
 	const filter = {
 		...sParams,
 		unitId,
-		start: searchParams.get('start') || undefined,
-		end: searchParams.get('end') || undefined,
-		take: 1000,
 	};
 
 	const parentStuff = await parent();
@@ -33,7 +30,7 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api.units.findOne({ id: unitId }),
 		parentStuff.api.units.findLeases({ id: unitId, ...sParams }),
-		...(await getDashboardData(parentStuff.api, filter)),
+		...(await getDashboardData({ api: parentStuff.api, searchParams, unitId })),
 	]);
 
 	return {
