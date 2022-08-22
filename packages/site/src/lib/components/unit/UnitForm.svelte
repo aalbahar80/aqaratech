@@ -48,7 +48,7 @@
 	export let properties: TProperties = undefined as TProperties;
 
 	const relationalFields: SelectField<RelOption>[] =
-		formType === 'create' && portfolios && properties
+		formType === 'create' && portfolios
 			? [
 					new SelectField('portfolioId', {
 						label: 'Portfolio',
@@ -67,7 +67,7 @@
 						value: predefined?.propertyId,
 						combobox: true,
 						autoInit: true,
-						options: properties.results.map((property) => ({
+						options: properties?.results.map((property) => ({
 							value: property.id,
 							label: property.breadcrumbs.property.label,
 							meta: { parentId: property.portfolioId },

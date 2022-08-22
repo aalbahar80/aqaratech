@@ -7,7 +7,9 @@ export const load: PageLoad = async ({ url: { searchParams }, parent }) => {
 	};
 
 	const parentStuff = await parent();
-	const portfolios = await parentStuff.api.portfolios.findAll();
+	const portfolios = await parentStuff.api.portfolios.findAll({
+		take: 1000,
+	});
 
 	return { portfolios, predefined };
 };

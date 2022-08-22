@@ -16,7 +16,7 @@ export interface PredefinedProperty {
 }
 
 export interface PredefinedUnit {
-	portfolioId: FindIdFromArray;
+	portfolioId: SearchParam;
 	propertyId: SearchParam;
 }
 
