@@ -6,7 +6,6 @@
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import { incompleteResultAlert } from '$lib/components/toast/incomplete-result-alert';
 	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import { create } from '$lib/utils/route-helpers';
@@ -21,8 +20,6 @@
 		['Market Rent', kwdFormat(data.unit.marketRent)],
 		['Usage', data.unit.usage],
 	] as [string, string | null][];
-
-	$: incompleteResultAlert(data.invoices, data.expenses);
 </script>
 
 <UnitPage unit={data.unit} />

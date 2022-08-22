@@ -6,7 +6,6 @@
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
-	import { incompleteResultAlert } from '$lib/components/toast/incomplete-result-alert';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
 	import type { PageData } from './$types';
 
@@ -22,7 +21,6 @@
 		['Paci', data.property.paci],
 	] as [string, string | null][];
 
-	$: incompleteResultAlert(data.invoices, data.expenses);
 	export let data: PageData;
 </script>
 

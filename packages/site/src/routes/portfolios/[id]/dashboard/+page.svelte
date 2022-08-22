@@ -4,12 +4,9 @@
 	import OccupancyCard from '$lib/components/dashboard/cards/OccupancyCard.svelte';
 	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
-	import { incompleteResultAlert } from '$lib/components/toast/incomplete-result-alert';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-
-	$: incompleteResultAlert(data.invoices, data.expenses);
 </script>
 
 <div class="prose">
