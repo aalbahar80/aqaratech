@@ -1,6 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import InputWrapper from '$lib/components/form/inputs/InputWrapper.svelte';
+	import {
+		propertiesToOptions,
+		unitsToOptions,
+	} from '$lib/components/form/inputs/to-options';
 	import type { SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import { createEventDispatcher } from 'svelte';
@@ -68,10 +74,19 @@
 			initialValue={fields[0].value}
 			disabled={fields[0].disabled}
 			invalid={errors.portfolioId}
-			on:select={(e) => {
+			on:select={async (e) => {
 				propertySelector?.clear();
-				portfolioId = e.detail.value;
-				dispatch('select', { name: 'portfolioId', value: e.detail.value });
+				const newSelection = e.detail.value;
+				if (typeof newSelection === 'string') {
+					const children = await api(
+						$page.data.apiConfig,
+					).portfolios.findProperties({
+						id: newSelection,
+					});
+					fields[1].options = propertiesToOptions(children);
+				}
+				portfolioId = newSelection;
+				dispatch('select', { name: 'portfolioId', value: newSelection });
 			}}
 		/>
 	</InputWrapper>
@@ -87,10 +102,19 @@
 			initialValue={fields[1].value}
 			disabled={fields[1].disabled}
 			invalid={errors.propertyId}
-			on:select={(e) => {
+			on:select={async (e) => {
 				unitSelector?.clear();
-				propertyId = e.detail.value;
-				dispatch('select', { name: 'propertyId', value: e.detail.value });
+				const newSelection = e.detail.value;
+				if (typeof newSelection === 'string') {
+					const children = await api($page.data.apiConfig).properties.findUnits(
+						{
+							id: newSelection,
+						},
+					);
+					fields[2].options = unitsToOptions(children);
+				}
+				propertyId = newSelection;
+				dispatch('select', { name: 'propertyId', value: newSelection });
 			}}
 		/>
 	</InputWrapper>
