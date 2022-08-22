@@ -15,4 +15,4 @@
 	};
 </script>
 
-<Chart type="heatmap" {data} {colors} />
+<Chart type="heatmap" title="Percentage of occupied units" {data} {colors} />

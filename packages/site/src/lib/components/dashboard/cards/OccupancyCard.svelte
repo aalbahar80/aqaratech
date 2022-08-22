@@ -7,12 +7,14 @@
 </script>
 
 <DashCard
-	title="Occpancy"
-	subtitle="The total amount of expenses by category & property."
+	title="Occupancy"
+	subtitle=""
 	empty={occupancy.length < 1}
 	tabbed={false}
 >
 	<div slot="chart">
-		<OccupancyHeatmap {occupancy} />
+		<div class="overflow-x-auto">
+			<OccupancyHeatmap {occupancy} />
+		</div>
 	</div>
 </DashCard>
