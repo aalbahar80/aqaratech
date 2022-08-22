@@ -1,4 +1,4 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices, type PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve("./global-setup"),
 	reporter: [["list"], ["html", { open: "on-failure" }]],
@@ -10,9 +10,6 @@ const config: PlaywrightTestConfig = {
 		video: "on-first-retry",
 		baseURL: "http://localhost:3000/",
 		viewport: { width: 1920, height: 1080 },
-		launchOptions: {
-			args: ["--window-position=0,0"],
-		},
 		trace: {
 			mode: "on",
 			screenshots: true,
@@ -32,6 +29,28 @@ const config: PlaywrightTestConfig = {
 			command: "pnpm run dev",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
+		},
+	],
+	projects: [
+		{
+			name: "chromium",
+			use: {
+				...devices["Desktop Chrome"],
+				launchOptions: {
+					args: ["--window-position=0,0"],
+				},
+			},
+		},
+		{
+			name: "firefox",
+			use: { ...devices["Desktop Firefox"] },
+			testIgnore: ["**/api/**"],
+		},
+		{
+			name: "pixel5",
+			use: { ...devices["Pixel 5"] },
+			retries: 2,
+			testIgnore: ["**/api/**"],
 		},
 	],
 };
