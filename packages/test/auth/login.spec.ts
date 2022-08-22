@@ -54,42 +54,35 @@ const test = base.extend<MyFixtures>({
 	},
 });
 
-test.describe(`${user.role} login:`, async () => {
-	test(`redirected to correct url`, async ({ page }) => {
-		await expect(page).toHaveURL(user.destination);
+test("login", async ({ page, baseURL }) => {
+	const cookies = await page.context().cookies();
+	const accessToken = cookies.find((c) => c.name === "accessToken");
+
+	await expect.soft(page).toHaveURL(user.destination);
+
+	expect.soft(accessToken).toMatchObject({
+		name: "accessToken",
+		value: expect.stringMatching(
+			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
+		),
+		domain: baseURL.replace(/^https?:\/\//, ""),
+		path: "/",
+		expires: expect.any(Number),
+		httpOnly: true,
+		secure: true,
 	});
 
-	test("accessToken exists", async ({ page, baseURL }) => {
-		const cookies = await page.context().cookies();
-		const accessToken = cookies.find((c) => c.name === "accessToken");
+	const idToken = cookies.find((c) => c.name === "idToken");
 
-		expect(accessToken).toMatchObject({
-			name: "accessToken",
-			value: expect.stringMatching(
-				/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
-			),
-			domain: baseURL.replace(/^https?:\/\//, ""),
-			path: "/",
-			expires: expect.any(Number),
-			httpOnly: true,
-			secure: true,
-		});
-	});
-
-	test("idToken exists", async ({ page, baseURL }) => {
-		const cookies = await page.context().cookies();
-		const idToken = cookies.find((c) => c.name === "idToken");
-
-		expect(idToken).toMatchObject({
-			name: "idToken",
-			value: expect.stringMatching(
-				/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
-			),
-			domain: baseURL.replace(/^https?:\/\//, ""),
-			path: "/",
-			expires: expect.any(Number),
-			httpOnly: true,
-			secure: true,
-		});
+	expect.soft(idToken).toMatchObject({
+		name: "idToken",
+		value: expect.stringMatching(
+			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
+		),
+		domain: baseURL.replace(/^https?:\/\//, ""),
+		path: "/",
+		expires: expect.any(Number),
+		httpOnly: true,
+		secure: true,
 	});
 });
