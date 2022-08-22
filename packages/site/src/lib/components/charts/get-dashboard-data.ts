@@ -2,6 +2,7 @@ import type { Api } from '$lib/client/api';
 import {
 	clampedDate,
 	defaultRange,
+	defaultRangeEnd,
 	getOneYearAgo,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
@@ -11,6 +12,11 @@ export const getDashboardData = async (
 	api: Api,
 	filter: AggregateApiGetOccupancyRequest,
 ) => {
+	if (!filter.start && !filter.end) {
+		filter.start = rangeStart(defaultRange);
+		filter.end = defaultRangeEnd();
+	}
+
 	const requests = [
 		api.aggregate.getIncomeByMonth(filter),
 		api.aggregate.getExpensesByMonth(filter),

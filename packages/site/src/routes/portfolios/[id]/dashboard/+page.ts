@@ -1,9 +1,4 @@
 import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
-import {
-	defaultRange,
-	defaultRangeEnd,
-	rangeStart,
-} from '$lib/components/charts/utils/date-range';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
@@ -21,10 +16,6 @@ export const load: PageLoad = async ({
 		take: 1000,
 	};
 
-	if (!filter.start && !filter.end) {
-		filter.start = rangeStart(defaultRange);
-		filter.end = defaultRangeEnd();
-	}
 	const parentStuff = await parent();
 
 	const [
