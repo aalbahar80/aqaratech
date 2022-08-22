@@ -1,13 +1,17 @@
-import { expect } from "@playwright/test";
+import { expect, Locator } from "@playwright/test";
 import { test } from "../../config";
 
-test("existing user can create new org", async ({ page }) => {
+test("existing user can create new org", async ({ page, isMobile }) => {
 	await page.goto("/");
 
 	// wait a bit for dropdown to load
 	await new Promise((resolve) => setTimeout(resolve, 1000));
+	if (isMobile) {
+		await page.locator('button:has-text("Open main menu")').click();
+	} else {
+		await page.locator("data-testid=dropdown-menu").click();
+	}
 
-	await page.locator("data-testid=dropdown-menu").click();
 	await page.locator("text=Switch Role").click();
 	await page.locator("text=Create new Organization").click();
 	await expect(page).toHaveURL("/organizations/new");

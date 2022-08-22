@@ -54,18 +54,19 @@ const config: PlaywrightTestConfig = {
 		},
 		{
 			name: "pixel5",
-			use: { ...devices["Pixel 5"] },
+			use: { ...devices["Pixel 5"], isMobile: true },
 			testIgnore: ["**/api/**"],
 		},
 		{
+			// requires https
 			name: "iphone",
+			use: { ...devices["iPhone 8 landscape"], isMobile: true },
 
-			use: { ...devices["iPhone 8 landscape"] },
 			testIgnore: ["**/api/**"],
 		},
 		{
+			// requires https
 			name: "safari",
-
 			use: { ...devices["Desktop Safari"] },
 			testIgnore: ["**/api/**"],
 		},
