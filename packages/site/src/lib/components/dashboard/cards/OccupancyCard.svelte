@@ -4,6 +4,7 @@
 	import type { Occupancy } from '@self/sdk';
 
 	export let occupancy: Occupancy[];
+	export let futureOccupancy: Occupancy[];
 </script>
 
 <DashCard
@@ -17,7 +18,7 @@
 		<OccupancyHeatmap {occupancy} />
 		<div class="py-8" />
 		<OccupancyHeatmap
-			{occupancy}
+			occupancy={futureOccupancy}
 			title="Expected occupancy for the upcoming year"
 		/>
 	</div>

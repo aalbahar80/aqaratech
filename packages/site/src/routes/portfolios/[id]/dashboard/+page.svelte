@@ -32,4 +32,7 @@
 />
 <ExpensesCard expenses={data.expenses} categories={data.categories} />
 
-<OccupancyCard occupancy={data.occupancy} />
+<OccupancyCard
+	occupancy={data.occupancy}
+	futureOccupancy={data.futureOccupancy}
+/>
