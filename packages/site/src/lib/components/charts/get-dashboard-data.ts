@@ -6,6 +6,7 @@ import {
 	getOneYearAgo,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
+import { parseParams } from '$lib/utils/parse-params';
 
 export const getDashboardData = async ({
 	api,
@@ -20,7 +21,11 @@ export const getDashboardData = async ({
 	propertyId?: string;
 	unitId?: string;
 }) => {
+	const sParams = parseParams(searchParams);
+
+	// TODO handle pagination defaults
 	const filter = {
+		...sParams,
 		portfolioId,
 		propertyId: propertyId || searchParams.get('propertyId') || undefined,
 		unitId: unitId || searchParams.get('unitId') || undefined,
