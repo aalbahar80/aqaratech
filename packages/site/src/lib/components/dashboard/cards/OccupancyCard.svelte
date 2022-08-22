@@ -12,7 +12,7 @@
 	subtitle="Percentage of occupied units"
 	empty={occupancy.length < 1}
 	tabbed={false}
-	chartHeight={1000}
+	chartHeight={750}
 >
 	<div slot="chart">
 		<OccupancyHeatmap
