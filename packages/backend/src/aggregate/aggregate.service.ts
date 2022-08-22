@@ -4,6 +4,7 @@ import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/casl-ability.factory';
+import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
@@ -49,7 +50,7 @@ export class AggregateService {
       where: {
         AND: [
           accessibleBy(user.ability, Action.Read).Expense,
-          this.expensesService.parseLocationFilter({ filter }),
+          parseLocationFilter({ filter, entity: 'Expense' }),
           { postAt: { gte: filter?.start, lte: filter?.end } },
         ],
       },
@@ -74,7 +75,7 @@ export class AggregateService {
       where: {
         AND: [
           accessibleBy(user.ability, Action.Read).Unit,
-          // this.expensesService.parseLocationFilter({ filter }),
+          parseLocationFilter({ filter, entity: 'Unit' }),
         ],
       },
       select: {

@@ -2,11 +2,11 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import {
@@ -61,7 +61,7 @@ export class ExpensesService {
     const filter: Prisma.ExpenseWhereInput = {
       AND: [
         accessibleBy(user.ability, Action.Read).Expense,
-        this.parseLocationFilter({ filter: pageOptionsDto }),
+        parseLocationFilter({ filter: pageOptionsDto, entity: 'Expense' }),
         { postAt: { gte: start, lte: end } },
       ],
     };
@@ -164,18 +164,6 @@ export class ExpensesService {
   }
 
   // ::: HELPERS :::
-
-  parseLocationFilter({ filter }: { filter?: DashboardFilterDto }) {
-    let locationFilter: Prisma.ExpenseWhereInput;
-    if (filter?.unitId) {
-      locationFilter = { unitId: filter.unitId };
-    } else if (filter?.propertyId) {
-      locationFilter = { propertyId: filter.propertyId };
-    } else {
-      locationFilter = { portfolioId: filter?.portfolioId };
-    }
-    return locationFilter;
-  }
 
   async validateCategoryId(categoryId: string, user: IUser) {
     // TODO use this instead:
