@@ -5,7 +5,6 @@ import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/casl-ability.factory';
 import { parseLocationFilter } from 'src/common/parse-location-filter';
-import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -16,7 +15,6 @@ export class AggregateService {
   constructor(
     private prisma: PrismaService,
     private leaseInvoicesService: LeaseInvoicesService,
-    private expensesService: ExpensesService,
   ) {}
 
   async incomeByMonth({
