@@ -82,6 +82,7 @@
 						$page.data.apiConfig,
 					).portfolios.findProperties({
 						id: newSelection,
+						take: 1000,
 					});
 					fields[1].options = propertiesToOptions(children);
 				}
@@ -109,6 +110,7 @@
 					const children = await api($page.data.apiConfig).properties.findUnits(
 						{
 							id: newSelection,
+							take: 1000,
 						},
 					);
 					fields[2].options = unitsToOptions(children);
