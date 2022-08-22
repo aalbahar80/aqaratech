@@ -10,7 +10,7 @@ test("existing user can create new org", async ({ page }) => {
 	await page.locator("data-testid=dropdown-menu").click();
 	await page.locator("text=Switch Role").click();
 	await page.locator("text=Create new Organization").click();
-	await expect(page).toHaveURL("http://localhost:3000/organizations/new");
+	await expect(page).toHaveURL("/organizations/new");
 	await new Promise((resolve) => setTimeout(resolve, 1000)); // hydration (used sveltekit:reload)
 
 	const name = getName();

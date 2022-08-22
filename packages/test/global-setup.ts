@@ -28,15 +28,16 @@ async function globalSetup(config: FullConfig) {
 
 	const email = testOrgEmail;
 	const password = testPassword;
+	const { baseURL, storageState, ignoreHTTPSErrors } = config.projects[0].use;
 
 	const browser = await chromium.launch();
-	const page = await browser.newPage();
-	await page.goto("http://localhost:3000");
+	const page = await browser.newPage({ ignoreHTTPSErrors });
+	await page.goto(baseURL);
 	await page.locator("text=Log In >> visible=true").click();
 	await page.fill('input[name="username"]', email);
 	await page.fill('input[name="password"]', password);
 	await page.click('button[name="action"]');
-	await page.context().storageState({ path: "storageState.json" });
+	await page.context().storageState({ path: storageState.toString() });
 	await browser.close();
 }
 

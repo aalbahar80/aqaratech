@@ -59,7 +59,7 @@ test.describe(`${user.role} login:`, async () => {
 		await expect(page).toHaveURL(user.destination);
 	});
 
-	test("accessToken exists", async ({ page }) => {
+	test("accessToken exists", async ({ page, baseURL }) => {
 		const cookies = await page.context().cookies();
 		const accessToken = cookies.find((c) => c.name === "accessToken");
 
@@ -68,7 +68,7 @@ test.describe(`${user.role} login:`, async () => {
 			value: expect.stringMatching(
 				/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
 			),
-			domain: "localhost",
+			domain: baseURL.replace(/^https?:\/\//, ""),
 			path: "/",
 			expires: expect.any(Number),
 			httpOnly: true,
@@ -76,7 +76,7 @@ test.describe(`${user.role} login:`, async () => {
 		});
 	});
 
-	test("idToken exists", async ({ page }) => {
+	test("idToken exists", async ({ page, baseURL }) => {
 		const cookies = await page.context().cookies();
 		const idToken = cookies.find((c) => c.name === "idToken");
 
@@ -85,7 +85,7 @@ test.describe(`${user.role} login:`, async () => {
 			value: expect.stringMatching(
 				/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
 			),
-			domain: "localhost",
+			domain: baseURL.replace(/^https?:\/\//, ""),
 			path: "/",
 			expires: expect.any(Number),
 			httpOnly: true,
