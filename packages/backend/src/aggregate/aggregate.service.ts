@@ -67,10 +67,6 @@ export class AggregateService {
     filter: DashboardFilterDto;
     user: IUser;
   }) {
-    // TODO fix type error
-    const start = filter.start!;
-    const end = filter.end!;
-
     const units = await this.prisma.unit.findMany({
       where: {
         AND: [
@@ -84,8 +80,8 @@ export class AggregateService {
         leases: {
           where: {
             // TODO check if this is correct
-            start: { lte: end },
-            end: { gte: start },
+            start: { lte: filter.end },
+            end: { gte: filter.start },
           },
           select: {
             start: true,
@@ -94,12 +90,29 @@ export class AggregateService {
           },
         },
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     const days: Occupancy[] = [];
 
+    if (!units.length) {
+      return days;
+    }
+
+    const firstUnitCreatedAt = units[0].createdAt;
+
+    // fallback to getting data for next two years max
+    const oneYear = 1000 * 60 * 60 * 24 * 365;
+    const end = filter.end || new Date(Date.now() + oneYear * 2);
+
     // loop through each day in the range
-    for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+    for (
+      let date = firstUnitCreatedAt;
+      date <= end;
+      date.setDate(date.getDate() + 1)
+    ) {
       // only count units if data is after the unit creation date
       const createdUnits = units.filter((unit) => {
         return unit.createdAt <= date;
