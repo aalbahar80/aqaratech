@@ -14,10 +14,6 @@
 	chartHeight={500}
 >
 	<div slot="chart">
-		{#key occupancy}
-			<div class="overflow-x-auto py-4">
-				<OccupancyHeatmap {occupancy} />
-			</div>
-		{/key}
+		<OccupancyHeatmap {occupancy} />
 	</div>
 </DashCard>

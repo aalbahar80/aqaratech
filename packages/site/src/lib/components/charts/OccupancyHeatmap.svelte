@@ -9,11 +9,13 @@
 	export let occupancy: Occupancy[];
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 
+	let innerWidth: number | undefined;
+	$: isLargeScreen = innerWidth && innerWidth > 500;
 	const oneYearAgo = new Date();
 	oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-	const earliest = new Date(occupancy[0]!.date);
-	const start = earliest > oneYearAgo ? oneYearAgo : earliest;
+	$: earliest = new Date(occupancy[0]!.date);
+	$: start = isLargeScreen && earliest > oneYearAgo ? oneYearAgo : earliest;
 
 	$: data = {
 		dataPoints: R.fromPairs(
@@ -24,4 +26,10 @@
 	};
 </script>
 
-<Chart type="heatmap" {data} {colors} />
+<svelte:window bind:innerWidth />
+
+{#key data}
+	<div class="overflow-x-auto py-4">
+		<Chart type="heatmap" {data} {colors} />
+	</div>
+{/key}
