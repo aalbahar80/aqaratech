@@ -25,7 +25,12 @@ async function bootstrap() {
     ],
     cors: {
       origin: process.env.PUBLIC_SITE_URL,
-      allowedHeaders: ['Authorization', ROLE_HEADER, 'Content-Type'],
+      allowedHeaders: [
+        'Authorization',
+        ROLE_HEADER,
+        'Content-Type',
+        'x-sws-authenticated',
+      ],
       maxAge: 24 * 60 * 60,
     },
   });
