@@ -88,6 +88,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const maxAge = 60 * 60 * 24 * 7;
 
+	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
 	response.headers.append(
 		'Set-Cookie',
 		serialize('idToken', event.locals.idToken || '', {
