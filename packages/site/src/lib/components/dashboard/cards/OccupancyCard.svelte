@@ -15,7 +15,7 @@
 	chartHeight={1000}
 >
 	<div slot="chart">
-		<OccupancyHeatmap {occupancy} />
+		<OccupancyHeatmap {occupancy} shouldClamp />
 		<div class="py-8" />
 		<OccupancyHeatmap
 			occupancy={futureOccupancy}

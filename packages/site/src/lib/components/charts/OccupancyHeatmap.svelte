@@ -12,6 +12,7 @@
 
 	export let occupancy: Occupancy[];
 	export let title = '';
+	export let shouldClamp = false;
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 
 	let innerWidth: number | undefined;
@@ -19,7 +20,10 @@
 	const oneYearAgo = getOneYearAgo();
 
 	$: earliest = new Date(occupancy[0]!.date);
-	$: start = isLargeScreen && earliest > oneYearAgo ? oneYearAgo : earliest;
+	$: start =
+		shouldClamp && isLargeScreen && earliest > oneYearAgo
+			? oneYearAgo
+			: earliest;
 
 	$: data = {
 		dataPoints: R.fromPairs(
