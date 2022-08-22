@@ -2,6 +2,12 @@
   http_port 2016
 }
 
-site.localhost
+site.localhost {
+  reverse_proxy localhost:3000
+}
 
-reverse_proxy localhost:3000
+api.localhost {
+  reverse_proxy localhost:3002
+}
+
+# run with `sudo caddy run`
