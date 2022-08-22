@@ -65,11 +65,11 @@ async function bootstrap() {
       swaggerSpec: document,
       hostname: process.env.PUBLIC_SITE_URL, // https://aqaratech.com
       uriPath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
-      authentication: true,
-      onAuthenticate: function (req: any, username: string, password: string) {
-        // simple check for username and password
-        return username === 'aq-admin' && password === 'aq-swaggerstats12';
-      },
+      // authentication: true,
+      // onAuthenticate: function (req: any, username: string, password: string) {
+      //   // simple check for username and password
+      //   return username === 'aq-admin' && password === 'aq-swaggerstats12';
+      // },
     }),
   );
 
