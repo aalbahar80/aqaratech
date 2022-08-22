@@ -77,7 +77,7 @@
 			on:select={async (e) => {
 				propertySelector?.clear();
 				const newSelection = e.detail.value;
-				if (typeof newSelection === 'string') {
+				if (typeof newSelection === 'string' && fields[1]) {
 					const children = await api(
 						$page.data.apiConfig,
 					).portfolios.findProperties({
@@ -105,7 +105,7 @@
 			on:select={async (e) => {
 				unitSelector?.clear();
 				const newSelection = e.detail.value;
-				if (typeof newSelection === 'string') {
+				if (typeof newSelection === 'string' && fields[2]) {
 					const children = await api($page.data.apiConfig).properties.findUnits(
 						{
 							id: newSelection,
