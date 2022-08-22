@@ -1,0 +1,7 @@
+{
+  http_port 2016
+}
+
+site.localhost
+
+reverse_proxy localhost:3000
