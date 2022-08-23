@@ -2,29 +2,17 @@ import { env } from '$env/dynamic/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 
-const getOrigin = (): string => {
-	if (env.PUBLIC_SITE_URL) {
-		return env.PUBLIC_SITE_URL;
-	} else if (import.meta.env.VITE_VERCEL_URL) {
-		return `https://${import.meta.env.VITE_VERCEL_URL}`;
-		// TODO do same for cloudflare pages
-		// https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables
-	} else {
-		return 'http://localhost:3000';
-	}
-};
-
 export const developmentEnvironment: EnvironmentConfig = {
 	type: 'DEVELOPMENT',
 	envName: 'dev',
-	urlOrigin: getOrigin(),
+	urlOrigin: env.PUBLIC_SITE_URL,
 	authConfig: {
 		AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
 		AUTH0_CLIENT_SECRET:
 			'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 		AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
-		AUTH0_REDIRECT_URI: `${getOrigin()}${AUTH_CALLBACK}`,
+		AUTH0_REDIRECT_URI: `${env.PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
 		AUTH0_API_NAMESPACE: 'https://letand.be',
 		AUTH0_API_AUDIENCE: 'letand.be/api',
 		JWKS: {

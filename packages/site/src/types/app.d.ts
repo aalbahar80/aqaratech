@@ -45,8 +45,6 @@ declare namespace App {
 		readonly PUBLIC_AQARATECH_ENV: string | undefined;
 
 		/**
-		 * OPTIONAL
-		 *
 		 * The current url origin where the site is hosted.
 		 * In development, this could be `http://localhost:3000`.
 		 * In a docker environment behind a reverse proxy, this could be something like: `https://aqar.live`,
@@ -54,7 +52,7 @@ declare namespace App {
 		 * Returns a preview branch's dedicated domain if it exists `https://stage.letand.be`,
 		 * otherwise return the deployment domain  `https://my-site-7q03y4pi5.vercel.app`.
 		 */
-		readonly PUBLIC_SITE_URL: string | undefined;
+		readonly PUBLIC_SITE_URL: string;
 
 		/**
 		 * REQUIRED
