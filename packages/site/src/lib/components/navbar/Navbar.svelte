@@ -5,6 +5,7 @@
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import NavbarDropdown from '$lib/components/navbar/NavbarDropdown.svelte';
 	import NavbarIcon from '$lib/components/navbar/NavbarIcon.svelte';
+	import SearchButton from '$lib/components/search/SearchButton.svelte';
 
 	// Needs to be reactive?
 	const navigation = $page.data.user?.role?.meta.navLinks || [];
@@ -17,23 +18,25 @@
 	>
 		<NavbarIcon />
 
-		<div class="flex flex-auto space-x-4 justify-self-start lg:ml-10">
+		<div
+			class="hidden flex-auto space-x-4 justify-self-start lg:ml-10 lg:flex "
+		>
 			<DashboardButton />
 			<!-- Large screen: nav links -->
 			{#each navigation as item (item.label)}
 				<a
 					sveltekit:prefetch
 					href={item.href}
-					class="hidden rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white lg:flex"
+					class="flex rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
 				>
 					{item.label}
 				</a>
 			{/each}
 		</div>
 
-		<!-- {#if $page.data.user?.role?.roleType === 'ORGADMIN'}
+		{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 			<SearchButton />
-		{/if} -->
+		{/if}
 
 		{#if $page.data.isAuthenticated}
 			<div class="hidden lg:flex lg:items-center lg:space-x-6">
