@@ -193,13 +193,14 @@ export class SearchService {
     const properties = await this.prisma.property.findMany({
       select: {
         id: true,
+        label: true,
         area: true,
         paci: true,
         street: true,
         parcel: true,
         block: true,
         number: true,
-        portfolio: { select: { organizationId: true } },
+        organizationId: true,
       },
     });
 
@@ -208,11 +209,12 @@ export class SearchService {
       return {
         id,
         title: getAddress(property),
+        label: property.label,
         area: property.area,
         paci: property.paci,
         parcel: property.parcel,
         street: property.street,
-        organizationId: property.portfolio.organizationId,
+        organizationId: property.organizationId,
       };
     });
 
