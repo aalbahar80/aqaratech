@@ -131,38 +131,39 @@
 					{/if}
 
 					{#if hasHits}
-						<ListboxOptions
-							static
-							class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
-						>
-							{#each Object.entries(groups) as [category, items] (category)}
-								<li>
-									<h2
-										class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
-									>
-										{startCase(category)}
-									</h2>
-									<ul class="mt-2 text-sm text-gray-800">
-										{#each items.hits as item (item.id)}
-											<Hoverable let:hovering>
-												<ListboxOption value={item}>
-													<div
-														class={classes(
-															'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
-															hovering
-																? 'bg-indigo-600 text-white [&_mark]:text-white [&_mark]:bg-inherit'
-																: '[&_mark]:text-indigo-600 [&_mark]:bg-inherit [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
-														)}
-													>
-														{@html item._formatted.title}
-														<!-- example: abc<mark>def</mark>hij <mark>ح</mark>افظ المحجوب -->
-													</div>
-												</ListboxOption>
-											</Hoverable>
-										{/each}
-									</ul>
-								</li>
-							{/each}
+						<ListboxOptions static>
+							<div
+								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
+							>
+								{#each Object.entries(groups) as [category, items] (category)}
+									<li>
+										<h2
+											class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
+										>
+											{startCase(category)}
+										</h2>
+										<ul class="mt-2 text-sm text-gray-800">
+											{#each items.hits as item (item.id)}
+												<Hoverable let:hovering>
+													<ListboxOption value={item}>
+														<div
+															class={classes(
+																'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
+																hovering
+																	? 'bg-indigo-600 text-white [&_mark]:text-white [&_mark]:bg-inherit'
+																	: '[&_mark]:text-indigo-600 [&_mark]:bg-inherit [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
+															)}
+														>
+															{@html item._formatted.title}
+															<!-- example: abc<mark>def</mark>hij <mark>ح</mark>افظ المحجوب -->
+														</div>
+													</ListboxOption>
+												</Hoverable>
+											{/each}
+										</ul>
+									</li>
+								{/each}
+							</div>
 						</ListboxOptions>
 					{/if}
 
