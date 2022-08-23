@@ -31,7 +31,9 @@ test("smoke", async ({ page }, info) => {
 
 	expect(page.locator("text=Portfolio")).toBeTruthy();
 	await page.locator("#detailsPane").screenshot({
-		path: info.snapshotDir + `/portfolio-${info.snapshotSuffix}.png`,
+		path:
+			info.snapshotDir +
+			`/portfolio-${info.snapshotSuffix}-${info.project.name}.png`,
 	});
 
 	await page.locator("text=Edit").click();

@@ -29,7 +29,9 @@ test("smoke", async ({ page }, info) => {
 
 	expect(page.locator("text=Tenant")).toBeTruthy();
 	await page.locator("#detailsPane").screenshot({
-		path: info.snapshotDir + `/tenant-${info.snapshotSuffix}.png`,
+		path:
+			info.snapshotDir +
+			`/tenant-${info.snapshotSuffix}-${info.project.name}.png`,
 	});
 
 	await page.locator("text=Edit").click();

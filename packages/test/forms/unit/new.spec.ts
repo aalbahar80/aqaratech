@@ -25,7 +25,9 @@ test("smoke", async ({ page }, info) => {
 	// take screenshot
 	expect(page.locator("text=unit")).toBeTruthy();
 	await page.locator("#detailsPane").screenshot({
-		path: info.snapshotDir + `/unit-${info.snapshotSuffix}.png`,
+		path:
+			info.snapshotDir +
+			`/unit-${info.snapshotSuffix}-${info.project.name}.png`,
 	});
 
 	await page.locator("text=Edit").click();
