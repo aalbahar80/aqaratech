@@ -149,12 +149,8 @@ export class SearchService {
     });
 
     const index = this._client.index<typeof documents[0]>('tenants');
-    await index.updateSettings({
-      filterableAttributes: ['organizationId'],
-    });
-    return index.addDocuments(documents, {
-      primaryKey: 'id',
-    });
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+    return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
   async addPortfolios() {
@@ -184,8 +180,8 @@ export class SearchService {
     });
 
     const index = this._client.index('portfolios');
-    await index.updateFilterableAttributes(['organizationId']);
-    return index.addDocuments(documents);
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+    return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
   async addProperties() {
@@ -219,7 +215,7 @@ export class SearchService {
     });
 
     const index = this._client.index('properties');
-    await index.updateFilterableAttributes(['organizationId']);
-    return index.addDocuments(documents);
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+    return index.addDocuments(documents, { primaryKey: 'id' });
   }
 }
