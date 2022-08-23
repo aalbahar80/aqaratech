@@ -57,7 +57,7 @@
     "helmet": "5.1.1",
     "jwks-rsa": "2.1.4",
     "lodash": "4.17.21",
-    "meilisearch": "0.26.0",
+    "meilisearch": "0.27.0",
     "passport": "0.6.0",
     "passport-jwt": "4.0.0",
     "postmark": "3.0.13",

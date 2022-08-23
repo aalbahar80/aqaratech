@@ -57,7 +57,7 @@ importers:
       js-yaml: 4.1.0
       jwks-rsa: 2.1.4
       lodash: 4.17.21
-      meilisearch: 0.26.0
+      meilisearch: 0.27.0
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.13
@@ -102,7 +102,7 @@ importers:
       helmet: 5.1.1
       jwks-rsa: 2.1.4
       lodash: 4.17.21
-      meilisearch: 0.26.0
+      meilisearch: 0.27.0
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.13
@@ -4529,8 +4529,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001375
-      electron-to-chromium: 1.4.217
+      caniuse-lite: 1.0.30001382
+      electron-to-chromium: 1.4.227
       node-releases: 2.0.6
       update-browserslist-db: 1.0.5_browserslist@4.21.3
     dev: true
@@ -4621,8 +4621,8 @@ packages:
     resolution: {integrity: sha512-pJYArGHrPp3TUqQzFYRmP/lwJlj8RCbVe3Gd3eJQkAV8SAC6b19XS9BjMvRdvaS8RMkaTN8ZhoHP6S1y8zzwEQ==}
     dev: true
 
-  /caniuse-lite/1.0.30001375:
-    resolution: {integrity: sha512-kWIMkNzLYxSvnjy0hL8w1NOaWNr2rn39RTAVyIwcw8juu60bZDWiF1/loOYANzjtJmy6qPgNmn38ro5Pygagdw==}
+  /caniuse-lite/1.0.30001382:
+    resolution: {integrity: sha512-2rtJwDmSZ716Pxm1wCtbPvHtbDWAreTPxXbkc5RkKglow3Ig/4GNGazDI9/BVnXbG/wnv6r3B5FEbkfg9OcTGg==}
     dev: true
 
   /canvg/3.0.10:
@@ -5520,8 +5520,8 @@ packages:
     resolution: {integrity: sha512-ola5UH0xAP1oYY0FFUsPvwtucEzCQHucXnT7PQ1zjHJMccZhCDktEugI++JUR3YuIs7Ff7afz+OVEhVAIMhLAQ==}
     dev: true
 
-  /electron-to-chromium/1.4.217:
-    resolution: {integrity: sha512-iX8GbAMij7cOtJPZo02CClpaPMWjvN5meqXiJXkBgwvraNWTNH0Z7F9tkznI34JRPtWASoPM/xWamq3oNb49GA==}
+  /electron-to-chromium/1.4.227:
+    resolution: {integrity: sha512-I9VVajA3oswIJOUFg2PSBqrHLF5Y+ahIfjOV9+v6uYyBqFZutmPxA6fxocDUUmgwYevRWFu1VjLyVG3w45qa/g==}
     dev: true
 
   /emittery/0.10.2:
@@ -8328,8 +8328,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  /meilisearch/0.26.0:
-    resolution: {integrity: sha512-2JAxwqahhv5ToIDLdQAmQJcb3YuoH41m1L4WTtX+zeKeClnkowSxA1CHff+n4K6iEYxF5GiMxpqPsWTt4nQKFA==}
+  /meilisearch/0.27.0:
+    resolution: {integrity: sha512-kZOZFIuSO7c6xRf+Y2/9/h6A9pl0sCl/G44X4KuaSwxGbruOZPhmxbeVEgLHBv4pUFvQ56rNVTA/2d/5GCU1YA==}
     dependencies:
       cross-fetch: 3.1.5
     transitivePeerDependencies:

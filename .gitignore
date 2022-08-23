@@ -10,3 +10,5 @@ node_modules
 .vercel
 .turbo
 pruned
+
+meili_data
