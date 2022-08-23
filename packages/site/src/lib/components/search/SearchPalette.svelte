@@ -111,7 +111,7 @@
 						/>
 					</div>
 
-					{#if query === ''}
+					{#if query === '' && !hasHits}
 						<div
 							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
 						>
@@ -134,6 +134,7 @@
 						<ListboxOptions static>
 							<div
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
+								style="max-height: 80vh"
 							>
 								{#each Object.entries(groups) as [category, items] (category)}
 									<li>
