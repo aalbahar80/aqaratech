@@ -1,7 +1,10 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
+import { Action } from 'src/casl/casl-ability.factory';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { getAddress } from 'src/utils/address';
 
@@ -28,10 +31,18 @@ export class SearchService {
   async search({
     query,
     organizationId,
+    user,
   }: {
     query: string;
     organizationId: string;
+    user: IUser;
   }) {
+    // search is only allowed for admins
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Manage,
+      subject('Organization', { id: organizationId }),
+    );
+
     const indexNames = ['portfolios', 'properties', 'tenants'] as const;
 
     // get indexes and search
@@ -137,9 +148,13 @@ export class SearchService {
       };
     });
 
-    const index = this._client.index('tenants');
-    await index.updateFilterableAttributes(['organizationId']);
-    return index.addDocuments(documents);
+    const index = this._client.index<typeof documents[0]>('tenants');
+    await index.updateSettings({
+      filterableAttributes: ['organizationId'],
+    });
+    return index.addDocuments(documents, {
+      primaryKey: 'id',
+    });
   }
 
   async addPortfolios() {

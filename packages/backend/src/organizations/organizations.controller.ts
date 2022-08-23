@@ -117,10 +117,13 @@ export class OrganizationsController {
     return this.rolesService.findAll({ user, pageOptionsDto, where });
   }
 
-  @CheckAbilities({ action: Action.Read, subject: SubjectType })
   @Get(':id/search')
-  search(@Param('id') id: string, @Query('query') query: string) {
-    // TODO prod ability check
-    return this.searchService.search({ query, organizationId: id });
+  @CheckAbilities({ action: Action.Manage, subject: SubjectType })
+  search(
+    @User() user: IUser,
+    @Param('id') id: string,
+    @Query('query') query: string,
+  ) {
+    return this.searchService.search({ query, organizationId: id, user });
   }
 }
