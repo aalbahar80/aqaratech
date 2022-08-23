@@ -28,7 +28,7 @@
 	}
 	interface Group {
 		hits: Item[];
-		nbHits: number;
+		estimatedTotalHits: number;
 	}
 	type Groups = Record<string, Group>;
 
@@ -44,13 +44,16 @@
 				id: $page.data.user?.role?.organizationId,
 				query: q,
 			})) as Groups;
+			console.log({ groups }, 'SearchPalette.svelte ~ 47');
 		} catch (e) {
 			console.error(e);
 		}
 	};
 
 	$: search(query);
-	$: hasHits = Object.values(groups).some((groupHits) => groupHits.nbHits > 0);
+	$: hasHits = Object.values(groups).some(
+		(groupHits) => groupHits.estimatedTotalHits > 0,
+	);
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
