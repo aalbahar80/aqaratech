@@ -19,6 +19,9 @@ const config = {
 	kit: {
 		adapter:
 			process.env.VERCEL || process.env.CF_PAGES ? adapter() : adapterNode(),
+		env: {
+			dir: '../../',
+		},
 	},
 	// vitePlugin: {
 	// 	experimental: {
