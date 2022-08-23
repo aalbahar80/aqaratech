@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
+	import { portfoliosToOptions } from '$lib/components/form/inputs/to-options';
 	import { areas } from '$lib/constants/areas-kwt';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
@@ -52,18 +53,7 @@
 						value: data?.breadcrumbs?.portfolio.id || predefined?.portfolioId,
 						autoInit: true,
 						combobox: true,
-						options:
-							formType === 'create'
-								? portfolios.results.map((portfolio) => ({
-										value: portfolio.id,
-										label: portfolio.fullName,
-								  }))
-								: [
-										{
-											value: data?.breadcrumbs?.portfolio.id,
-											label: data?.breadcrumbs?.portfolio.label!, // temp
-										},
-								  ],
+						options: portfoliosToOptions(portfolios),
 					}),
 			  ]
 			: [];

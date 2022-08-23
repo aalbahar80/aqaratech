@@ -1,4 +1,21 @@
-import type { PaginatedPropertyDto, PaginatedUnitDto } from '@self/sdk';
+import type {
+	PaginatedPortfolioDto,
+	PaginatedPropertyDto,
+	PaginatedTenantDto,
+	PaginatedUnitDto,
+} from '@self/sdk';
+
+export const tenantsToOptions = (tenants: PaginatedTenantDto) =>
+	tenants.results.map((tenant) => ({
+		value: tenant.id,
+		label: tenant.fullName,
+	}));
+
+export const portfoliosToOptions = (portfolios: PaginatedPortfolioDto) =>
+	portfolios.results.map((portfolio) => ({
+		value: portfolio.id,
+		label: portfolio.fullName,
+	}));
 
 export const propertiesToOptions = (properties: PaginatedPropertyDto) =>
 	properties.results.map((property) => ({

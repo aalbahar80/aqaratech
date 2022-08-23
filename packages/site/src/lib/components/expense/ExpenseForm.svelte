@@ -2,6 +2,11 @@
 	import { page } from '$app/stores';
 	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
+	import {
+		portfoliosToOptions,
+		propertiesToOptions,
+		unitsToOptions,
+	} from '$lib/components/form/inputs/to-options';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
@@ -62,10 +67,7 @@
 						value: predefined?.portfolioId,
 						combobox: true,
 						autoInit: true,
-						options: portfolios.results.map((portfolio) => ({
-							value: portfolio.id,
-							label: portfolio.fullName,
-						})),
+						options: portfoliosToOptions(portfolios),
 					}),
 					new SelectField('propertyId', {
 						label: 'Property',
@@ -73,11 +75,7 @@
 						value: predefined?.propertyId,
 						combobox: true,
 						autoInit: true,
-						options: properties?.results.map((property) => ({
-							value: property.id,
-							label: property.breadcrumbs.property.label,
-							meta: { parentId: property.portfolioId },
-						})),
+						options: properties ? propertiesToOptions(properties) : undefined,
 					}),
 					new SelectField('unitId', {
 						label: 'Unit',
@@ -85,11 +83,7 @@
 						value: predefined?.unitId,
 						combobox: true,
 						autoInit: true,
-						options: units?.results.map((unit) => ({
-							value: unit.id,
-							label: unit.breadcrumbs.unit.label,
-							meta: { parentId: unit.propertyId },
-						})),
+						options: units ? unitsToOptions(units) : undefined,
 					}),
 			  ]
 			: [];

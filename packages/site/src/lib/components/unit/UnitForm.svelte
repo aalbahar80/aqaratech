@@ -2,6 +2,10 @@
 	import { page } from '$app/stores';
 	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
+	import {
+		portfoliosToOptions,
+		propertiesToOptions,
+	} from '$lib/components/form/inputs/to-options';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { unitTypeOptions } from '$lib/constants/unit-options';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
@@ -56,10 +60,7 @@
 						value: predefined?.portfolioId,
 						combobox: true,
 						autoInit: true,
-						options: portfolios.results.map((portfolio) => ({
-							value: portfolio.id,
-							label: portfolio.fullName,
-						})),
+						options: portfoliosToOptions(portfolios),
 					}),
 					new SelectField('propertyId', {
 						label: 'Property',
@@ -67,11 +68,7 @@
 						value: predefined?.propertyId,
 						combobox: true,
 						autoInit: true,
-						options: properties?.results.map((property) => ({
-							value: property.id,
-							label: property.breadcrumbs.property.label,
-							meta: { parentId: property.portfolioId },
-						})),
+						options: properties ? propertiesToOptions(properties) : undefined,
 					}),
 			  ]
 			: [];
