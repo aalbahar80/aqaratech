@@ -9,10 +9,12 @@ const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve("./global-setup"),
 	reporter: [["list"], ["html", { open: "on-failure" }]],
 	retries: 2,
+	timeout: 15 * 1000,
 	use: {
 		storageState: "storageState.json",
 		headless: true,
 		ignoreHTTPSErrors: true,
+		bypassCSP: true,
 		video: "on-first-retry",
 		baseURL: process.env.PUBLIC_SITE_URL,
 		viewport: { width: 1920, height: 1080 },
@@ -60,8 +62,10 @@ const config: PlaywrightTestConfig = {
 		{
 			// requires https
 			name: "iphone",
-			use: { ...devices["iPhone 8 landscape"], isMobile: true },
-
+			use: {
+				...devices["iPhone 8"],
+				isMobile: true,
+			},
 			testIgnore: ["**/api/**"],
 		},
 		{
