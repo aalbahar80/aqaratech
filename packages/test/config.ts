@@ -8,6 +8,7 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
 	page: async ({ page }, use) => {
+		// TODO replace with page.goto(url, { waitUntil: "networkidle" })
 		page.addInitScript({
 			content: `
 				addEventListener('sveltekit:start', () => {

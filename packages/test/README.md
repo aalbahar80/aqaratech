@@ -1,4 +1,7 @@
-Webkit browser testing requires https
+Webkit browsers testing requires https
+
+- caddy kinda works but gets an ssl error
+- cloudflare tunnel works but is slow
 
 ```bash
 sudo caddy run

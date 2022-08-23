@@ -3,7 +3,7 @@ import { sample } from "@self/seed";
 import { test } from "../../config";
 
 test("smoke", async ({ page }, info) => {
-	await page.goto("/leases/new");
+	await page.goto("/leases/new", { waitUntil: "networkidle" });
 
 	await page.locator("#tenantId").click();
 	await page.locator(`text=${sample.tenants[0].fullName}`).click();

@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../../config";
 
 test("smoke", async ({ page }, info) => {
-	await page.goto("/portfolios/new");
+	await page.goto("/portfolios/new", { waitUntil: "networkidle" });
 
 	await page.locator('input[name="fullName"]').click();
 	await page.locator('input[name="fullName"]').fill("John Doe");
