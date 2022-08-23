@@ -11,7 +11,7 @@
 <!-- https://daisyui.com/components/kbd/ -->
 <!-- use svelte:window to set event listener instead? -->
 <button
-	class="flex flex-1 justify-center px-8 lg:ml-6 lg:justify-end"
+	class="flex flex-auto justify-center lg:justify-end"
 	use:shortcut={{ control: true, code: 'KeyK' }}
 	on:click={() => {
 		open = true;
