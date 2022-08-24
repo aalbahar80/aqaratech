@@ -212,7 +212,8 @@
 		<button
 			class="mr-4"
 			hidden={!selection}
-			on:click|preventDefault={() => {
+			tabindex="-1"
+			on:mousedown={(e) => {
 				clear();
 			}}
 		>
@@ -224,6 +225,7 @@
 			/>
 		</button>
 		<button
+			tabindex="-1"
 			on:click|preventDefault={() => {
 				forceOpen = !forceOpen;
 			}}
