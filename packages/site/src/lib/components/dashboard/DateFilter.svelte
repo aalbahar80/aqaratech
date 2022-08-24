@@ -23,9 +23,13 @@
 
 	$: rangeValid = start && end && new Date(start) < new Date(end);
 
-	const handleRange = debounce((url: URL) => {
-		goto(url, { noscroll: true, keepfocus: true });
-	}, 200);
+	const handleRange = debounce(
+		async (url: URL) => {
+			await goto(url, { noscroll: true, keepfocus: true });
+		},
+		200,
+		false,
+	);
 
 	const isReasonable = (value: string) => {
 		const date = new Date(value);
@@ -66,13 +70,13 @@
 			class="date-input"
 			class:date-input-invalid={!rangeValid}
 			value={start ? toDateInput(new Date(start)) : ''}
-			on:change={(e) => {
+			on:change={async (e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
 				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('start', date);
-					handleRange(url);
+					await handleRange(url);
 				}
 			}}
 		/>
@@ -84,13 +88,13 @@
 			class="date-input"
 			class:date-input-invalid={!rangeValid}
 			value={end ? toDateInput(new Date(end)) : ''}
-			on:change={(e) => {
+			on:change={async (e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
 				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('end', date);
-					handleRange(url);
+					await handleRange(url);
 				}
 			}}
 		/>
