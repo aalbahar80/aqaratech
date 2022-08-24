@@ -2,10 +2,6 @@ import { Tenant } from '@prisma/client';
 import { Expose } from 'class-transformer';
 
 export class TenantIndexed implements Partial<Tenant> {
-  constructor(partial: Partial<TenantIndexed>) {
-    Object.assign(this, partial);
-  }
-
   id: string;
   fullName: string;
   label: string | null;
@@ -25,6 +21,6 @@ export class UpdateIndexEvent {
   constructor(
     // TODO add types
     public readonly indexName: 'tenants',
-    public readonly instance: any,
+    public readonly instance: Record<string, any>,
   ) {}
 }

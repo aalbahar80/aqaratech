@@ -2,6 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
+import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
 import { TenantIndexed, UpdateIndexEvent } from 'src/events/tenant-input.event';
@@ -28,7 +29,8 @@ export class SearchService {
   }
 
   readonly client: MeiliSearch;
-  indexNames = ['portfolios', 'properties', 'tenants'] as const;
+  // indexNames = ['portfolios', 'properties', 'tenants'] as const;
+  indexNames = ['tenants'] as const;
 
   async search({
     query,
@@ -54,21 +56,22 @@ export class SearchService {
 
     const results = await Promise.all(
       indexes.map((index, n) => {
+        const indexName = this.indexNames[n];
         return this.searchIndex({
           index,
           filter: `organizationId = ${organizationId}`,
           query,
           createUrl(id) {
-            return `/${this.indexNames[n]}/${id}`;
+            return `/${indexName}/${id}`;
           },
         });
       }),
     );
 
     const result: Record<typeof this.indexNames[number], any> = {
-      portfolios: results[0],
-      properties: results[1],
-      tenants: results[2],
+      // portfolios: results[0],
+      // properties: results[1],
+      tenants: results[0],
     };
 
     return result;
@@ -103,7 +106,6 @@ export class SearchService {
 
   @OnEvent('update.index')
   updateIndex(payload: UpdateIndexEvent) {
-    console.log('update index', payload);
     const { indexName, instance } = payload;
     const index = this.client.index(indexName);
     return index.addDocuments([instance]);
@@ -116,6 +118,14 @@ export class SearchService {
         return this.client.deleteIndex(index.uid);
       }),
     );
+  }
+
+  /**
+   * common logic for all indices
+   */
+  async initIndex(indexName: string) {
+    const index = this.client.index(indexName);
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
   }
 
   async init() {
@@ -147,19 +157,15 @@ export class SearchService {
       },
     });
 
-    const documents = tenants.map((tenant) => new TenantIndexed(tenant));
+    const documents = tenants.map((tenant) => {
+      const instance = plainToClass(TenantIndexed, tenant);
+      const plain = instanceToPlain(instance); // to expose custom getters
+      return plain;
+    });
 
     const index = this.client.index('tenants');
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
-  }
-
-  /**
-   * common logic for all indices
-   */
-  async initIndex(indexName: string) {
-    const index = this.client.index(indexName);
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
   }
 
   async initPortfolios() {

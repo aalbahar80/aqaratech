@@ -2,6 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -40,7 +41,10 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(this.indexName, new TenantIndexed(tenant)),
+      new UpdateIndexEvent(
+        'tenants',
+        instanceToPlain(plainToClass(TenantIndexed, tenant)),
+      ),
     );
 
     return tenant;
@@ -114,7 +118,10 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(this.indexName, new TenantIndexed(tenant)),
+      new UpdateIndexEvent(
+        'tenants',
+        instanceToPlain(plainToClass(TenantIndexed, tenant)),
+      ),
     );
 
     return tenant;
