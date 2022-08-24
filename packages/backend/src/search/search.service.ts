@@ -1,5 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 import { entitiesMap } from '@self/utils';
@@ -32,10 +32,16 @@ export class SearchService implements OnModuleInit {
     this.client = new MeiliSearch({ host, apiKey });
   }
 
+  private readonly logger = new Logger(SearchService.name);
+
   async onModuleInit() {
     // attempts to initialize every time nest starts
     // If this becomes an expensive operation in the future, we can implement an alternative (cron, hueristics, etc)
-    await this.init();
+    try {
+      await this.init();
+    } catch (e) {
+      this.logger.error('Error initializing search service', e);
+    }
   }
 
   readonly client: MeiliSearch;
