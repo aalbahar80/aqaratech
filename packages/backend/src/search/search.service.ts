@@ -23,10 +23,10 @@ export class SearchService {
     if (!host || !apiKey) {
       throw new Error('MeiliSearch config is not set');
     }
-    this._client = new MeiliSearch({ host, apiKey });
+    this.client = new MeiliSearch({ host, apiKey });
   }
 
-  private _client: MeiliSearch;
+  private client: MeiliSearch;
 
   async search({
     query,
@@ -48,7 +48,7 @@ export class SearchService {
     // get indexes and search
     const indexes = await Promise.all(
       indexNames.map((indexName) => {
-        return this._client.getIndex(indexName);
+        return this.client.getIndex(indexName);
       }),
     );
 
@@ -102,10 +102,10 @@ export class SearchService {
   }
 
   async remove() {
-    const indexes = await this._client.getIndexes();
+    const indexes = await this.client.getIndexes();
     return await Promise.all(
       indexes.results.map((index) => {
-        return this._client.deleteIndex(index.uid);
+        return this.client.deleteIndex(index.uid);
       }),
     );
   }
@@ -148,7 +148,7 @@ export class SearchService {
       };
     });
 
-    const index = this._client.index<typeof documents[0]>('tenants');
+    const index = this.client.index<typeof documents[0]>('tenants');
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
@@ -179,7 +179,7 @@ export class SearchService {
       };
     });
 
-    const index = this._client.index('portfolios');
+    const index = this.client.index('portfolios');
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
@@ -214,7 +214,7 @@ export class SearchService {
       };
     });
 
-    const index = this._client.index('properties');
+    const index = this.client.index('properties');
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
