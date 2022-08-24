@@ -2,10 +2,10 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
-import { Tenant } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { TenantInputEvent } from 'src/events/tenant-input.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SearchService } from 'src/search/search.service';
@@ -40,7 +40,7 @@ export class TenantsService {
 
     const tenant = await this.prisma.tenant.create({ data: createTenantDto });
 
-    this.eventEmitter.emit('tenant.input', tenant);
+    this.eventEmitter.emit('tenant.input', new TenantInputEvent(tenant));
 
     return tenant;
   }
@@ -111,7 +111,7 @@ export class TenantsService {
       data: frisked,
     });
 
-    this.eventEmitter.emit('tenant.input', tenant);
+    this.eventEmitter.emit('tenant.input', new TenantInputEvent(tenant));
 
     return tenant;
   }
@@ -122,7 +122,8 @@ export class TenantsService {
   }
 
   @OnEvent('tenant.input')
-  async updateSearchIndex(tenant: Tenant) {
+  async updateSearchIndex(payload: TenantInputEvent) {
+    const tenant = payload.tenant;
     const index = await this.searchService.client.getIndex(this.indexName);
     // TODO dry up with search service
     return index.addDocuments([
