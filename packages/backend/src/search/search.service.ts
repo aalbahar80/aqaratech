@@ -122,7 +122,7 @@ export class SearchService implements OnModuleInit {
   }
 
   @OnEvent('update.index')
-  updateIndex(payload: UpdateIndexEvent) {
+  async updateIndex(payload: UpdateIndexEvent) {
     const { indexName, items, classConstructor } = payload;
     const index = this.client.index(indexName);
 
@@ -132,7 +132,11 @@ export class SearchService implements OnModuleInit {
       return plain;
     });
 
-    return index.addDocuments(documents);
+    try {
+      await index.addDocuments(documents);
+    } catch (e) {
+      this.logger.error(e);
+    }
   }
 
   async remove() {
