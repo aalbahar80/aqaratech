@@ -5,7 +5,7 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { TenantInputEvent } from 'src/events/tenant-input.event';
+import { TenantIndexEvent } from 'src/events/tenant-input.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SearchService } from 'src/search/search.service';
@@ -40,7 +40,7 @@ export class TenantsService {
 
     const tenant = await this.prisma.tenant.create({ data: createTenantDto });
 
-    this.eventEmitter.emit('tenant.input', new TenantInputEvent(tenant));
+    this.eventEmitter.emit('tenant.index', new TenantIndexEvent([tenant]));
 
     return tenant;
   }
@@ -111,7 +111,7 @@ export class TenantsService {
       data: frisked,
     });
 
-    this.eventEmitter.emit('tenant.input', new TenantInputEvent(tenant));
+    this.eventEmitter.emit('tenant.index', new TenantIndexEvent([tenant]));
 
     return tenant;
   }
@@ -121,25 +121,23 @@ export class TenantsService {
     return deleted.id;
   }
 
-  @OnEvent('tenant.input')
-  async updateSearchIndex(payload: TenantInputEvent) {
-    const tenant = payload.tenant;
+  @OnEvent('tenant.index')
+  async updateSearchIndex(payload: TenantIndexEvent) {
+    const tenants = payload.tenants.map((tenant) => ({
+      id: tenant.id,
+      fullName: tenant.fullName,
+      label: tenant.label,
+      phone: tenant.phone,
+      passportNum: tenant.passportNum,
+      civilid: tenant.civilid,
+      residencyNum: tenant.residencyNum,
+      title: tenant.fullName,
+      // TODO handle emails/roles
+      // email: tenant.roles.map((role) => role.user.email),
+      organizationId: tenant.organizationId,
+    }));
     const index = await this.searchService.client.getIndex(this.indexName);
     // TODO dry up with search service
-    return index.addDocuments([
-      {
-        id: tenant.id,
-        fullName: tenant.fullName,
-        label: tenant.label,
-        phone: tenant.phone,
-        passportNum: tenant.passportNum,
-        civilid: tenant.civilid,
-        residencyNum: tenant.residencyNum,
-        title: tenant.fullName,
-        // TODO handle emails/roles
-        // email: tenant.roles.map((role) => role.user.email),
-        organizationId: tenant.organizationId,
-      },
-    ]);
+    return index.addDocuments(tenants);
   }
 }

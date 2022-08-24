@@ -1,5 +1,5 @@
 import { Tenant } from '@prisma/client';
 
-export class TenantInputEvent {
-  constructor(public readonly tenant: Tenant) {}
+export class TenantIndexEvent {
+  constructor(public readonly tenants: Tenant[]) {}
 }
