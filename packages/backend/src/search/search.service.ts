@@ -63,11 +63,9 @@ export class SearchService {
         const indexName = this.indexNames[n];
         return this.searchIndex({
           index,
+          indexName,
           filter: `organizationId = ${organizationId}`,
           query,
-          createUrl(id) {
-            return `/${indexName}/${id}`;
-          },
         });
       }),
     );
@@ -83,13 +81,13 @@ export class SearchService {
 
   async searchIndex({
     index,
+    indexName,
     query,
-    createUrl,
     filter,
   }: {
     index: Index;
+    indexName: TIndexName;
     query: string;
-    createUrl: (id: string) => string;
     filter?: Filter | undefined;
   }) {
     const data = await index.search(query, {
@@ -102,7 +100,7 @@ export class SearchService {
 
     data.hits = data.hits.map((hit) => ({
       ...hit,
-      url: createUrl(hit.id),
+      url: `/${entitiesMap[indexName].urlName}/${hit.id}`,
     }));
 
     return data;
