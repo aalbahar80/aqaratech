@@ -41,10 +41,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(
-        'tenants',
-        instanceToPlain(plainToClass(TenantIndexed, tenant)),
-      ),
+      new UpdateIndexEvent('tenants', tenant, TenantIndexed),
     );
 
     return tenant;
@@ -118,10 +115,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(
-        'tenants',
-        instanceToPlain(plainToClass(TenantIndexed, tenant)),
-      ),
+      new UpdateIndexEvent('tenants', tenant, TenantIndexed),
     );
 
     return tenant;

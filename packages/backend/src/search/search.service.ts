@@ -106,9 +106,12 @@ export class SearchService {
 
   @OnEvent('update.index')
   updateIndex(payload: UpdateIndexEvent) {
-    const { indexName, instance } = payload;
+    const { indexName, obj, classConstructor } = payload;
     const index = this.client.index(indexName);
-    return index.addDocuments([instance]);
+
+    const instance = plainToClass(classConstructor, obj);
+    const plain = instanceToPlain(instance); // to expose custom getters
+    return index.addDocuments([plain]);
   }
 
   async remove() {
