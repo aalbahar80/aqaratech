@@ -28,6 +28,7 @@ export class SearchService {
   }
 
   readonly client: MeiliSearch;
+  indexNames = ['portfolios', 'properties', 'tenants'] as const;
 
   async search({
     query,
@@ -44,11 +45,9 @@ export class SearchService {
       subject('Organization', { id: organizationId }),
     );
 
-    const indexNames = ['portfolios', 'properties', 'tenants'] as const;
-
     // get indexes and search
     const indexes = await Promise.all(
-      indexNames.map((indexName) => {
+      this.indexNames.map((indexName) => {
         return this.client.getIndex(indexName);
       }),
     );
@@ -60,13 +59,13 @@ export class SearchService {
           filter: `organizationId = ${organizationId}`,
           query,
           createUrl(id) {
-            return `/${indexNames[n]}/${id}`;
+            return `/${this.indexNames[n]}/${id}`;
           },
         });
       }),
     );
 
-    const result: Record<typeof indexNames[number], any> = {
+    const result: Record<typeof this.indexNames[number], any> = {
       portfolios: results[0],
       properties: results[1],
       tenants: results[2],
@@ -120,9 +119,15 @@ export class SearchService {
   }
 
   async init() {
+    // create indexes, set common settings
+    await Promise.all(
+      this.indexNames.map((indexName) => this.initIndex(indexName)),
+    );
+
+    // add all documents to their respective indices
     return await Promise.all([
       this.initTenants(),
-      // this.addPortfolios(),
+      this.initPortfolios(),
       // this.addProperties(),
     ]);
   }
@@ -149,36 +154,44 @@ export class SearchService {
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
-  // async addPortfolios() {
-  //   const portfolios = await this.prisma.portfolio.findMany({
-  //     select: {
-  //       id: true,
-  //       fullName: true,
-  //       label: true,
-  //       phone: true,
-  //       civilid: true,
-  //       organizationId: true,
-  //       roles: { select: { user: { select: { email: true } } } },
-  //     },
-  //   });
+  /**
+   * common logic for all indices
+   */
+  async initIndex(indexName: string) {
+    const index = this.client.index(indexName);
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+  }
 
-  //   const documents = portfolios.map((portfolio) => {
-  //     return {
-  //       id: portfolio.id,
-  //       fullName: portfolio.fullName,
-  //       label: portfolio.label,
-  //       phone: portfolio.phone,
-  //       civilid: portfolio.civilid,
-  //       organizationId: portfolio.organizationId,
-  //       title: portfolio.fullName,
-  //       email: portfolio.roles.map((role) => role.user.email),
-  //     };
-  //   });
+  async initPortfolios() {
+    const portfolios = await this.prisma.portfolio.findMany({
+      select: {
+        id: true,
+        fullName: true,
+        label: true,
+        phone: true,
+        civilid: true,
+        organizationId: true,
+        roles: { select: { user: { select: { email: true } } } },
+      },
+    });
 
-  //   const index = this.client.index('portfolios');
-  //   await index.updateSettings({ filterableAttributes: ['organizationId'] });
-  //   return index.addDocuments(documents, { primaryKey: 'id' });
-  // }
+    const documents = portfolios.map((portfolio) => {
+      return {
+        id: portfolio.id,
+        fullName: portfolio.fullName,
+        label: portfolio.label,
+        phone: portfolio.phone,
+        civilid: portfolio.civilid,
+        organizationId: portfolio.organizationId,
+        title: portfolio.fullName,
+        email: portfolio.roles.map((role) => role.user.email),
+      };
+    });
+
+    const index = this.client.index('portfolios');
+    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+    return index.addDocuments(documents, { primaryKey: 'id' });
+  }
 
   // async addProperties() {
   //   // TODO only fetch relevant fields
