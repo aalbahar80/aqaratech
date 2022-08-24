@@ -23,7 +23,7 @@ export class TenantsService {
     private readonly eventEmitter: EventEmitter2,
   ) {}
   SubjectType = 'Tenant' as const;
-  IndexName = 'tenants' as const;
+  IndexName = 'tenant' as const;
   IndexConstructor = TenantIndexed;
 
   async create({

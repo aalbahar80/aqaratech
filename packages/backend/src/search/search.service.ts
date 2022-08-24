@@ -5,7 +5,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
-import { UpdateIndexEvent } from 'src/events/update-index.event';
+import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -30,8 +30,8 @@ export class SearchService {
   }
 
   readonly client: MeiliSearch;
-  // indexNames = ['portfolios', 'properties', 'tenants'] as const;
-  indexNames = ['tenants'] as const;
+  // indexNames: TIndexName[] = ['portfolios', 'properties', 'tenants'] as const;
+  indexNames: TIndexName[] = ['tenant'];
 
   async search({
     query,

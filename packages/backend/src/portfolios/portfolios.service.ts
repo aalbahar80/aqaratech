@@ -1,11 +1,14 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
+import { PortfolioIndexed } from 'src/portfolios/dto/portfolio-indexed';
 import {
   CreatePortfolioDto,
   PortfolioDto,
@@ -15,8 +18,13 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PortfoliosService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
   SubjectType = 'Portfolio' as const;
+  IndexName = 'portfolio' as const;
+  IndexConstructor = PortfolioIndexed;
 
   async create({
     createPortfolioDto,
@@ -30,7 +38,16 @@ export class PortfoliosService {
       subject(this.SubjectType, createPortfolioDto),
     );
 
-    return this.prisma.portfolio.create({ data: createPortfolioDto });
+    const portfolio = this.prisma.portfolio.create({
+      data: createPortfolioDto,
+    });
+
+    this.eventEmitter.emit(
+      'update.index',
+      new UpdateIndexEvent(portfolio, this.IndexName, this.IndexConstructor),
+    );
+
+    return portfolio;
   }
 
   async findAll({
@@ -86,7 +103,17 @@ export class PortfoliosService {
       instance: updatePortfolioDto,
     });
 
-    return this.prisma.portfolio.update({ where: { id }, data: frisked });
+    const portfolio = this.prisma.portfolio.update({
+      where: { id },
+      data: frisked,
+    });
+
+    this.eventEmitter.emit(
+      'update.index',
+      new UpdateIndexEvent(portfolio, this.IndexName, this.IndexConstructor),
+    );
+
+    return portfolio;
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {
