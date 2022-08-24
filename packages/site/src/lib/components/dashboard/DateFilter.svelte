@@ -8,7 +8,6 @@
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
-	import debounce from 'debounce';
 
 	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
 	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
@@ -23,13 +22,9 @@
 
 	$: rangeValid = start && end && new Date(start) < new Date(end);
 
-	const handleRange = debounce(
-		async (url: URL) => {
-			await goto(url, { noscroll: true, keepfocus: true });
-		},
-		200,
-		false,
-	);
+	const handleRange = async (url: URL) => {
+		await goto(url, { noscroll: true, keepfocus: true });
+	};
 
 	const isReasonable = (value: string) => {
 		const date = new Date(value);
@@ -70,13 +65,13 @@
 			class="date-input"
 			class:date-input-invalid={!rangeValid}
 			value={start ? toDateInput(new Date(start)) : ''}
-			on:change={async (e) => {
+			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
 				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('start', date);
-					await handleRange(url);
+					handleRange(url);
 				}
 			}}
 		/>
@@ -88,13 +83,13 @@
 			class="date-input"
 			class:date-input-invalid={!rangeValid}
 			value={end ? toDateInput(new Date(end)) : ''}
-			on:change={async (e) => {
+			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
 				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('end', date);
-					await handleRange(url);
+					handleRange(url);
 				}
 			}}
 		/>
