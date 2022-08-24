@@ -1,11 +1,12 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TenantsService } from 'src/tenants/tenants.service';
 import { getAddress } from 'src/utils/address';
 
 @Injectable()
@@ -13,6 +14,8 @@ export class SearchService {
   constructor(
     private prisma: PrismaService,
     readonly configService: ConfigService<EnvironmentConfig>,
+    @Inject(forwardRef(() => TenantsService))
+    private readonly tenantService: TenantsService,
   ) {
     const host = configService.get('meiliSearchConfig.HOST', {
       infer: true,
