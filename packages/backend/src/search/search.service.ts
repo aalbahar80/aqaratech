@@ -150,7 +150,7 @@ export class SearchService {
     return await Promise.all([
       this.initTenants(),
       this.initPortfolios(),
-      this.addProperties(),
+      this.initProperties(),
     ]);
   }
 
@@ -194,7 +194,7 @@ export class SearchService {
     });
   }
 
-  async addProperties() {
+  async initProperties() {
     // TODO only fetch relevant fields
     const properties = await this.prisma.property.findMany({
       select: {
