@@ -1,21 +1,18 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
+import { TenantIndexed } from 'src/events/tenant-input.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TenantsService } from 'src/tenants/tenants.service';
-import { getAddress } from 'src/utils/address';
 
 @Injectable()
 export class SearchService {
   constructor(
     private prisma: PrismaService,
     readonly configService: ConfigService<EnvironmentConfig>,
-    @Inject(forwardRef(() => TenantsService))
-    private readonly tenantService: TenantsService,
   ) {
     const host = configService.get('meiliSearchConfig.HOST', {
       infer: true,
@@ -116,8 +113,8 @@ export class SearchService {
   async init() {
     return await Promise.all([
       this.addTenants(),
-      this.addPortfolios(),
-      this.addProperties(),
+      // this.addPortfolios(),
+      // this.addProperties(),
     ]);
   }
 
@@ -136,89 +133,76 @@ export class SearchService {
       },
     });
 
-    const documents = tenants.map((tenant) => {
-      return {
-        id: tenant.id,
-        fullName: tenant.fullName,
-        label: tenant.label,
-        phone: tenant.phone,
-        passportNum: tenant.passportNum,
-        civilid: tenant.civilid,
-        residencyNum: tenant.residencyNum,
-        title: tenant.fullName,
-        email: tenant.roles.map((role) => role.user.email),
-        organizationId: tenant.organizationId,
-      };
-    });
+    const documents = tenants.map((tenant) => new TenantIndexed(tenant));
 
-    const index = this.client.index<typeof documents[0]>('tenants');
+    const index = this.client.index('tenants');
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
-  async addPortfolios() {
-    const portfolios = await this.prisma.portfolio.findMany({
-      select: {
-        id: true,
-        fullName: true,
-        label: true,
-        phone: true,
-        civilid: true,
-        organizationId: true,
-        roles: { select: { user: { select: { email: true } } } },
-      },
-    });
+  // async addPortfolios() {
+  //   const portfolios = await this.prisma.portfolio.findMany({
+  //     select: {
+  //       id: true,
+  //       fullName: true,
+  //       label: true,
+  //       phone: true,
+  //       civilid: true,
+  //       organizationId: true,
+  //       roles: { select: { user: { select: { email: true } } } },
+  //     },
+  //   });
 
-    const documents = portfolios.map((portfolio) => {
-      return {
-        id: portfolio.id,
-        fullName: portfolio.fullName,
-        label: portfolio.label,
-        phone: portfolio.phone,
-        civilid: portfolio.civilid,
-        organizationId: portfolio.organizationId,
-        title: portfolio.fullName,
-        email: portfolio.roles.map((role) => role.user.email),
-      };
-    });
+  //   const documents = portfolios.map((portfolio) => {
+  //     return {
+  //       id: portfolio.id,
+  //       fullName: portfolio.fullName,
+  //       label: portfolio.label,
+  //       phone: portfolio.phone,
+  //       civilid: portfolio.civilid,
+  //       organizationId: portfolio.organizationId,
+  //       title: portfolio.fullName,
+  //       email: portfolio.roles.map((role) => role.user.email),
+  //     };
+  //   });
 
-    const index = this.client.index('portfolios');
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
-    return index.addDocuments(documents, { primaryKey: 'id' });
-  }
+  //   const index = this.client.index('portfolios');
+  //   await index.updateSettings({ filterableAttributes: ['organizationId'] });
+  //   return index.addDocuments(documents, { primaryKey: 'id' });
+  // }
 
-  async addProperties() {
-    // TODO only fetch relevant fields
-    const properties = await this.prisma.property.findMany({
-      select: {
-        id: true,
-        label: true,
-        area: true,
-        paci: true,
-        street: true,
-        parcel: true,
-        block: true,
-        number: true,
-        organizationId: true,
-      },
-    });
+  // async addProperties() {
+  //   // TODO only fetch relevant fields
+  //   const properties = await this.prisma.property.findMany({
+  //     select: {
+  //       id: true,
+  //       label: true,
+  //       area: true,
+  //       paci: true,
+  //       street: true,
+  //       parcel: true,
+  //       block: true,
+  //       number: true,
+  //       organizationId: true,
+  //     },
+  //   });
 
-    const documents = properties.map((property) => {
-      const { id } = property;
-      return {
-        id,
-        title: getAddress(property),
-        label: property.label,
-        area: property.area,
-        paci: property.paci,
-        parcel: property.parcel,
-        street: property.street,
-        organizationId: property.organizationId,
-      };
-    });
+  //   const documents = properties.map((property) => {
+  //     const { id } = property;
+  //     return {
+  //       id,
+  //       title: getAddress(property),
+  //       label: property.label,
+  //       area: property.area,
+  //       paci: property.paci,
+  //       parcel: property.parcel,
+  //       street: property.street,
+  //       organizationId: property.organizationId,
+  //     };
+  //   });
 
-    const index = this.client.index('properties');
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
-    return index.addDocuments(documents, { primaryKey: 'id' });
-  }
+  //   const index = this.client.index('properties');
+  //   await index.updateSettings({ filterableAttributes: ['organizationId'] });
+  //   return index.addDocuments(documents, { primaryKey: 'id' });
+  // }
 }
