@@ -165,7 +165,6 @@ export class SearchService {
         civilid: true,
         residencyNum: true,
         organizationId: true,
-        roles: { select: { user: { select: { email: true } } } },
       },
     });
 
@@ -185,7 +184,6 @@ export class SearchService {
         phone: true,
         civilid: true,
         organizationId: true,
-        roles: { select: { user: { select: { email: true } } } },
       },
     });
 
