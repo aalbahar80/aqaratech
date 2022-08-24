@@ -1,14 +1,17 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PropertyIndexed } from 'src/properties/dto/property-indexed';
 import {
   CreatePropertyDto,
   PropertyDto,
@@ -17,8 +20,13 @@ import {
 
 @Injectable()
 export class PropertiesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
   SubjectType = 'Property' as const;
+  IndexName = 'property' as const;
+  IndexConstructor = PropertyIndexed;
 
   async create({
     createPropertyDto,
@@ -35,7 +43,14 @@ export class PropertiesService {
     const created = await this.prisma.property.create({
       data: createPropertyDto,
     });
-    return new PropertyDto(created);
+    const property = new PropertyDto(created);
+
+    this.eventEmitter.emit(
+      'update.index',
+      new UpdateIndexEvent([property], this.IndexName, this.IndexConstructor),
+    );
+
+    return property;
   }
 
   async findAll({
@@ -105,7 +120,14 @@ export class PropertiesService {
       where: { id },
       data: frisked,
     });
-    return new PropertyDto(updated);
+    const property = new PropertyDto(updated);
+
+    this.eventEmitter.emit(
+      'update.index',
+      new UpdateIndexEvent([property], this.IndexName, this.IndexConstructor),
+    );
+
+    return property;
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

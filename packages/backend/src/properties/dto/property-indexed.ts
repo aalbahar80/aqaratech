@@ -1,0 +1,25 @@
+import { Property } from '@prisma/client';
+import { Expose } from 'class-transformer';
+
+export class PropertyIndexed implements Partial<Property> {
+  id: string;
+  organizationId: string;
+  label: string | null;
+  area: string;
+  block: string | null;
+  street: string | null;
+  number: string | null;
+  paci: string | null;
+
+  @Expose()
+  get address(): string {
+    return [this.area, 'ق', this.block, 'م', this.number]
+      .filter(Boolean)
+      .join(' ');
+  }
+
+  @Expose()
+  get title(): string {
+    return this.address;
+  }
+}

@@ -4,7 +4,10 @@ type AnyClassConstructor = {
   new (...args: any[]): any;
 };
 
-export type TIndexName = Extract<EntityNames['title'], 'tenant' | 'portfolio'>;
+export type TIndexName = Extract<
+  EntityNames['title'],
+  'tenant' | 'portfolio' | 'property'
+>;
 
 export class UpdateIndexEvent {
   constructor(

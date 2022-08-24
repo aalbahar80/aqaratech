@@ -9,7 +9,9 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
+import { PortfolioIndexed } from 'src/portfolios/dto/portfolio-indexed';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PropertyIndexed } from 'src/properties/dto/property-indexed';
 import { TenantIndexed } from 'src/tenants/dto/tenant-indexed';
 
 @Injectable()
@@ -34,6 +36,7 @@ export class SearchService {
   indexNames: TIndexName[] = [
     entitiesMap.tenant.title,
     entitiesMap.portfolio.title,
+    entitiesMap.property.title,
   ];
 
   async search({
@@ -73,7 +76,7 @@ export class SearchService {
     const result: Record<typeof this.indexNames[number], any> = {
       tenant: results[0],
       portfolio: results[1],
-      // property: results[2],
+      property: results[2],
     };
 
     return result;
@@ -147,7 +150,7 @@ export class SearchService {
     return await Promise.all([
       this.initTenants(),
       this.initPortfolios(),
-      // this.addProperties(),
+      this.addProperties(),
     ]);
   }
 
@@ -186,56 +189,33 @@ export class SearchService {
       },
     });
 
-    const documents = portfolios.map((portfolio) => {
-      return {
-        id: portfolio.id,
-        fullName: portfolio.fullName,
-        label: portfolio.label,
-        phone: portfolio.phone,
-        civilid: portfolio.civilid,
-        organizationId: portfolio.organizationId,
-        title: portfolio.fullName,
-        email: portfolio.roles.map((role) => role.user.email),
-      };
+    await this.updateIndex({
+      indexName: entitiesMap.portfolio.title,
+      items: portfolios,
+      classConstructor: PortfolioIndexed,
     });
-
-    const index = this.client.index(entitiesMap.portfolio.title);
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
-    return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
-  // async addProperties() {
-  //   // TODO only fetch relevant fields
-  //   const properties = await this.prisma.property.findMany({
-  //     select: {
-  //       id: true,
-  //       label: true,
-  //       area: true,
-  //       paci: true,
-  //       street: true,
-  //       parcel: true,
-  //       block: true,
-  //       number: true,
-  //       organizationId: true,
-  //     },
-  //   });
+  async addProperties() {
+    // TODO only fetch relevant fields
+    const properties = await this.prisma.property.findMany({
+      select: {
+        id: true,
+        label: true,
+        area: true,
+        paci: true,
+        street: true,
+        parcel: true,
+        block: true,
+        number: true,
+        organizationId: true,
+      },
+    });
 
-  //   const documents = properties.map((property) => {
-  //     const { id } = property;
-  //     return {
-  //       id,
-  //       title: getAddress(property),
-  //       label: property.label,
-  //       area: property.area,
-  //       paci: property.paci,
-  //       parcel: property.parcel,
-  //       street: property.street,
-  //       organizationId: property.organizationId,
-  //     };
-  //   });
-
-  //   const index = this.client.index('property');
-  //   await index.updateSettings({ filterableAttributes: ['organizationId'] });
-  //   return index.addDocuments(documents, { primaryKey: 'id' });
-  // }
+    await this.updateIndex({
+      indexName: entitiesMap.property.title,
+      items: properties,
+      classConstructor: PropertyIndexed,
+    });
+  }
 }
