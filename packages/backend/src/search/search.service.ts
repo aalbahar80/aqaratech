@@ -110,12 +110,16 @@ export class SearchService {
 
   @OnEvent('update.index')
   updateIndex(payload: UpdateIndexEvent) {
-    const { indexName, obj, classConstructor } = payload;
+    const { indexName, items, classConstructor } = payload;
     const index = this.client.index(indexName);
 
-    const instance = plainToClass(classConstructor, obj);
-    const plain = instanceToPlain(instance); // to expose custom getters
-    return index.addDocuments([plain]);
+    const documents = items.map((item) => {
+      const instance = plainToClass(classConstructor, item);
+      const plain = instanceToPlain(instance); // to expose custom getters
+      return plain;
+    });
+
+    return index.addDocuments(documents);
   }
 
   async remove() {
@@ -164,15 +168,11 @@ export class SearchService {
       },
     });
 
-    const documents = tenants.map((tenant) => {
-      const instance = plainToClass(TenantIndexed, tenant);
-      const plain = instanceToPlain(instance); // to expose custom getters
-      return plain;
+    await this.updateIndex({
+      indexName: entitiesMap.tenant.title,
+      items: tenants,
+      classConstructor: TenantIndexed,
     });
-
-    const index = this.client.index(entitiesMap.tenant.title);
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
-    return index.addDocuments(documents, { primaryKey: 'id' });
   }
 
   async initPortfolios() {

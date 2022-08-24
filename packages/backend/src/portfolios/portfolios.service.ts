@@ -44,7 +44,7 @@ export class PortfoliosService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(portfolio, this.IndexName, this.IndexConstructor),
+      new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
     );
 
     return portfolio;
@@ -110,7 +110,7 @@ export class PortfoliosService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(portfolio, this.IndexName, this.IndexConstructor),
+      new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
     );
 
     return portfolio;

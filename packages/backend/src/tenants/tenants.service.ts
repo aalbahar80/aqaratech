@@ -42,7 +42,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(tenant, this.IndexName, this.IndexConstructor),
+      new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
     );
 
     return tenant;
@@ -116,7 +116,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent(tenant, this.IndexName, this.IndexConstructor),
+      new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
     );
 
     return tenant;
