@@ -9,10 +9,10 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
-import { PortfolioIndexed } from 'src/portfolios/dto/portfolio-indexed';
+import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-indexed';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyIndexed } from 'src/properties/dto/property-indexed';
-import { TenantIndexed } from 'src/tenants/dto/tenant-indexed';
+import { PropertySearchDocument } from 'src/properties/dto/property-indexed';
+import { TenantSearchDocument } from 'src/tenants/dto/tenant-indexed';
 
 @Injectable()
 export class SearchService {
@@ -172,7 +172,7 @@ export class SearchService {
     await this.updateIndex({
       indexName: entitiesMap.tenant.title,
       items: tenants,
-      classConstructor: TenantIndexed,
+      classConstructor: TenantSearchDocument,
     });
   }
 
@@ -192,7 +192,7 @@ export class SearchService {
     await this.updateIndex({
       indexName: entitiesMap.portfolio.title,
       items: portfolios,
-      classConstructor: PortfolioIndexed,
+      classConstructor: PortfolioSearchDocument,
     });
   }
 
@@ -215,7 +215,7 @@ export class SearchService {
     await this.updateIndex({
       indexName: entitiesMap.property.title,
       items: properties,
-      classConstructor: PropertyIndexed,
+      classConstructor: PropertySearchDocument,
     });
   }
 }

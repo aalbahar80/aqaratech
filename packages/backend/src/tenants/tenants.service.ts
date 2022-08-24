@@ -8,7 +8,7 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TenantIndexed } from 'src/tenants/dto/tenant-indexed';
+import { TenantSearchDocument } from 'src/tenants/dto/tenant-indexed';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import {
   CreateTenantDto,
@@ -24,7 +24,7 @@ export class TenantsService {
   ) {}
   SubjectType = 'Tenant' as const;
   IndexName = 'tenant' as const;
-  IndexConstructor = TenantIndexed;
+  IndexConstructor = TenantSearchDocument;
 
   async create({
     createTenantDto,

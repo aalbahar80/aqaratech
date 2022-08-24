@@ -1,7 +1,7 @@
 import { Tenant } from '@prisma/client';
 import { Expose } from 'class-transformer';
 
-export class TenantIndexed implements Partial<Tenant> {
+export class TenantSearchDocument implements Partial<Tenant> {
   id: string;
   fullName: string;
   label: string | null;

@@ -11,7 +11,7 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyIndexed } from 'src/properties/dto/property-indexed';
+import { PropertySearchDocument } from 'src/properties/dto/property-indexed';
 import {
   CreatePropertyDto,
   PropertyDto,
@@ -26,7 +26,7 @@ export class PropertiesService {
   ) {}
   SubjectType = 'Property' as const;
   IndexName = 'property' as const;
-  IndexConstructor = PropertyIndexed;
+  IndexConstructor = PropertySearchDocument;
 
   async create({
     createPropertyDto,

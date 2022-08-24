@@ -1,7 +1,7 @@
 import { Portfolio } from '@prisma/client';
 import { Expose } from 'class-transformer';
 
-export class PortfolioIndexed implements Partial<Portfolio> {
+export class PortfolioSearchDocument implements Partial<Portfolio> {
   id: string;
   fullName: string;
   label: string | null;

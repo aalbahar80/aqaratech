@@ -8,7 +8,7 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
-import { PortfolioIndexed } from 'src/portfolios/dto/portfolio-indexed';
+import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-indexed';
 import {
   CreatePortfolioDto,
   PortfolioDto,
@@ -24,7 +24,7 @@ export class PortfoliosService {
   ) {}
   SubjectType = 'Portfolio' as const;
   IndexName = 'portfolio' as const;
-  IndexConstructor = PortfolioIndexed;
+  IndexConstructor = PortfolioSearchDocument;
 
   async create({
     createPortfolioDto,
