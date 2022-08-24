@@ -26,6 +26,17 @@
 	const handleRange = debounce((url: URL) => {
 		goto(url, { noscroll: true, keepfocus: true });
 	}, 200);
+
+	const isReasonable = (value: string) => {
+		const date = new Date(value);
+		const year = date.getFullYear();
+		return (
+			date instanceof Date &&
+			!isNaN(date.getTime()) &&
+			year > 1900 &&
+			year < 2100
+		);
+	};
 </script>
 
 <div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
@@ -58,7 +69,7 @@
 			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
-				if (new Date(date).getFullYear() > 1900) {
+				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('start', date);
 					handleRange(url);
@@ -76,7 +87,7 @@
 			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
-				if (new Date(date).getFullYear() > 1900) {
+				if (isReasonable(date)) {
 					const url = new URL($page.url);
 					url.searchParams.set('end', date);
 					handleRange(url);
