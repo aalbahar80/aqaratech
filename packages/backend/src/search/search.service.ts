@@ -26,7 +26,7 @@ export class SearchService {
     this.client = new MeiliSearch({ host, apiKey });
   }
 
-  private client: MeiliSearch;
+  readonly client: MeiliSearch;
 
   async search({
     query,
