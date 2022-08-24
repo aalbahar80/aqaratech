@@ -1,8 +1,10 @@
+import { EntityNames } from '@self/utils';
+
 type AnyClassConstructor = {
   new (...args: any[]): any;
 };
 
-export type TIndexName = 'tenant' | 'portfolio';
+export type TIndexName = Extract<EntityNames['title'], 'tenant' | 'portfolio'>;
 
 export class UpdateIndexEvent {
   constructor(

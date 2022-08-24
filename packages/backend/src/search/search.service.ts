@@ -2,6 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
+import { entitiesMap } from '@self/utils';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -30,8 +31,10 @@ export class SearchService {
   }
 
   readonly client: MeiliSearch;
-  // indexNames: TIndexName[] = ['portfolios', 'properties', 'tenants'] as const;
-  indexNames: TIndexName[] = ['tenant'];
+  indexNames: TIndexName[] = [
+    entitiesMap.tenant.title,
+    entitiesMap.portfolio.title,
+  ];
 
   async search({
     query,
@@ -70,9 +73,9 @@ export class SearchService {
     );
 
     const result: Record<typeof this.indexNames[number], any> = {
-      // portfolios: results[0],
-      // properties: results[1],
-      tenants: results[0],
+      tenant: results[0],
+      portfolio: results[1],
+      // property: results[2],
     };
 
     return result;
@@ -167,7 +170,7 @@ export class SearchService {
       return plain;
     });
 
-    const index = this.client.index('tenants');
+    const index = this.client.index(entitiesMap.tenant.title);
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
@@ -198,7 +201,7 @@ export class SearchService {
       };
     });
 
-    const index = this.client.index('portfolios');
+    const index = this.client.index(entitiesMap.portfolio.title);
     await index.updateSettings({ filterableAttributes: ['organizationId'] });
     return index.addDocuments(documents, { primaryKey: 'id' });
   }
@@ -233,7 +236,7 @@ export class SearchService {
   //     };
   //   });
 
-  //   const index = this.client.index('properties');
+  //   const index = this.client.index('property');
   //   await index.updateSettings({ filterableAttributes: ['organizationId'] });
   //   return index.addDocuments(documents, { primaryKey: 'id' });
   // }
