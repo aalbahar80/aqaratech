@@ -9,11 +9,13 @@ import { SearchService } from 'src/search/search.service';
 export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
+  // TODO remove once the onModuleInit is stable
   @Post('/')
   initSearch() {
     return this.searchService.init();
   }
 
+  // TODO remove once the onModuleInit is stable
   @Delete('/')
   remove() {
     return this.searchService.remove();

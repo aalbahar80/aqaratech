@@ -1,5 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 import { entitiesMap } from '@self/utils';
@@ -15,7 +15,7 @@ import { PropertySearchDocument } from 'src/properties/dto/property-search-docum
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 @Injectable()
-export class SearchService {
+export class SearchService implements OnModuleInit {
   constructor(
     private prisma: PrismaService,
     readonly configService: ConfigService<EnvironmentConfig>,
@@ -30,6 +30,12 @@ export class SearchService {
       throw new Error('MeiliSearch config is not set');
     }
     this.client = new MeiliSearch({ host, apiKey });
+  }
+
+  async onModuleInit() {
+    // attempts to initialize every time nest starts
+    // If this becomes an expensive operation in the future, we can implement an alternative (cron, hueristics, etc)
+    await this.init();
   }
 
   readonly client: MeiliSearch;
