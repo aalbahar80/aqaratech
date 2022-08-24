@@ -24,8 +24,8 @@
 	$: rangeValid = start && end && new Date(start) < new Date(end);
 
 	const handleRange = debounce((url: URL) => {
-		goto(url, { noscroll: true });
-	}, 300);
+		goto(url, { noscroll: true, keepfocus: true });
+	}, 200);
 </script>
 
 <div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
@@ -41,7 +41,7 @@
 					const url = new URL($page.url);
 					url.searchParams.set('start', rangeStart(value));
 					url.searchParams.set('end', new Date().toISOString());
-					handleRange(url);
+					goto(url, { noscroll: true, keepfocus: true });
 				}
 			}}
 		/>
@@ -58,9 +58,11 @@
 			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
-				const url = new URL($page.url);
-				url.searchParams.set('start', date);
-				handleRange(url);
+				if (new Date(date).getFullYear() > 1900) {
+					const url = new URL($page.url);
+					url.searchParams.set('start', date);
+					handleRange(url);
+				}
 			}}
 		/>
 
@@ -74,9 +76,11 @@
 			on:change={(e) => {
 				const baseDate = e.currentTarget.value;
 				const date = `${baseDate}T00:00:00.000Z`;
-				const url = new URL($page.url);
-				url.searchParams.set('end', date);
-				handleRange(url);
+				if (new Date(date).getFullYear() > 1900) {
+					const url = new URL($page.url);
+					url.searchParams.set('end', date);
+					handleRange(url);
+				}
 			}}
 		/>
 	</div>
