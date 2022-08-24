@@ -5,10 +5,11 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
-import { TenantIndexed, UpdateIndexEvent } from 'src/events/tenant-input.event';
+import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TenantIndexed } from 'src/tenants/dto/tenant-indexed';
 
 @Injectable()
 export class SearchService {
