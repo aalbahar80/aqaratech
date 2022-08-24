@@ -1,9 +1,10 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { OnEvent } from '@nestjs/event-emitter';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
-import { TenantIndexed } from 'src/events/tenant-input.event';
+import { TenantIndexed, UpdateIndexEvent } from 'src/events/tenant-input.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -101,6 +102,14 @@ export class SearchService {
     return data;
   }
 
+  @OnEvent('update.index')
+  updateIndex(payload: UpdateIndexEvent) {
+    console.log('update index', payload);
+    const { indexName, instance } = payload;
+    const index = this.client.index(indexName);
+    return index.addDocuments([instance]);
+  }
+
   async remove() {
     const indexes = await this.client.getIndexes();
     return await Promise.all(
@@ -112,13 +121,13 @@ export class SearchService {
 
   async init() {
     return await Promise.all([
-      this.addTenants(),
+      this.initTenants(),
       // this.addPortfolios(),
       // this.addProperties(),
     ]);
   }
 
-  async addTenants() {
+  async initTenants() {
     const tenants = await this.prisma.tenant.findMany({
       select: {
         id: true,
