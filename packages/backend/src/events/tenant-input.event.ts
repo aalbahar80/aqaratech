@@ -24,8 +24,8 @@ type AnyClassConstructor = {
 export class UpdateIndexEvent {
   constructor(
     // TODO add types
-    public readonly indexName: 'tenants',
     public readonly obj: Record<string, any>,
+    public readonly indexName: 'tenants',
     public readonly classConstructor: AnyClassConstructor,
   ) {}
 }

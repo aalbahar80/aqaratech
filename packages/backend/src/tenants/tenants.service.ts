@@ -2,7 +2,6 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -23,7 +22,8 @@ export class TenantsService {
     private readonly eventEmitter: EventEmitter2,
   ) {}
   SubjectType = 'Tenant' as const;
-  indexName = 'tenants' as const;
+  IndexName = 'tenants' as const;
+  IndexConstructor = TenantIndexed;
 
   async create({
     createTenantDto,
@@ -41,7 +41,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent('tenants', tenant, TenantIndexed),
+      new UpdateIndexEvent(tenant, this.IndexName, this.IndexConstructor),
     );
 
     return tenant;
@@ -115,7 +115,7 @@ export class TenantsService {
 
     this.eventEmitter.emit(
       'update.index',
-      new UpdateIndexEvent('tenants', tenant, TenantIndexed),
+      new UpdateIndexEvent(tenant, this.IndexName, this.IndexConstructor),
     );
 
     return tenant;
