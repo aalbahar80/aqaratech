@@ -8,6 +8,7 @@
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
+	import debounce from 'debounce';
 
 	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
 	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
@@ -21,6 +22,10 @@
 	];
 
 	$: rangeValid = start && end && new Date(start) < new Date(end);
+
+	const handleRange = debounce((url: URL) => {
+		goto(url, { noscroll: true });
+	}, 300);
 </script>
 
 <div class="flex flex-col gap-1 md:w-3/5 md:flex-auto md:flex-row">
@@ -36,7 +41,7 @@
 					const url = new URL($page.url);
 					url.searchParams.set('start', rangeStart(value));
 					url.searchParams.set('end', new Date().toISOString());
-					goto(url, { noscroll: true });
+					handleRange(url);
 				}
 			}}
 		/>
@@ -55,7 +60,7 @@
 				const date = `${baseDate}T00:00:00.000Z`;
 				const url = new URL($page.url);
 				url.searchParams.set('start', date);
-				goto(url, { noscroll: true });
+				handleRange(url);
 			}}
 		/>
 
@@ -71,7 +76,7 @@
 				const date = `${baseDate}T00:00:00.000Z`;
 				const url = new URL($page.url);
 				url.searchParams.set('end', date);
-				goto(url, { noscroll: true });
+				handleRange(url);
 			}}
 		/>
 	</div>
