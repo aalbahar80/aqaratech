@@ -11,7 +11,7 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { UpdateIndexEvent } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertySearchDocument } from 'src/properties/dto/property-indexed';
+import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
 import {
   CreatePropertyDto,
   PropertyDto,

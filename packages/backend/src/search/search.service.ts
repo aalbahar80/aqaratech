@@ -9,10 +9,10 @@ import { Action } from 'src/casl/casl-ability.factory';
 import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
-import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-indexed';
+import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertySearchDocument } from 'src/properties/dto/property-indexed';
-import { TenantSearchDocument } from 'src/tenants/dto/tenant-indexed';
+import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
+import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 @Injectable()
 export class SearchService {
