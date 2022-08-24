@@ -19,6 +19,7 @@
 	);
 </script>
 
+<!-- Use on:someEvent|once to display the payment successful badge? See docs abount `once` event modifier  -->
 <TrxList invoices={filtered}>
 	<Select
 		disabled={data.leases.results.length < 2}
