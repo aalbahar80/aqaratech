@@ -111,7 +111,7 @@
 						/>
 					</div>
 
-					{#if query === '' && !hasHits}
+					{#if query === ''}
 						<div
 							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
 						>
@@ -122,15 +122,13 @@
 								theme="outline"
 							/>
 							<p class="mt-4 font-semibold text-gray-900">
-								Search for clients and projects
+								Search for tenants, portfolios, or properties.
 							</p>
-							<p class="mt-2 text-gray-500">
-								Quickly access clients and projects by running a global search.
-							</p>
+							<p class="mt-2 text-gray-500">Search by name, address, etc.</p>
 						</div>
 					{/if}
 
-					{#if hasHits}
+					{#if hasHits && query !== ''}
 						<ListboxOptions static>
 							<div
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
