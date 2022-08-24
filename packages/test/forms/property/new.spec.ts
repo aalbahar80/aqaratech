@@ -1,17 +1,18 @@
 import { expect } from "@playwright/test";
+import { sample } from "@self/seed";
 import { test } from "../../config";
 
 test("smoke", async ({ page }, info) => {
 	await page.goto("/properties/new");
+	const portfolio = sample.portfolios[0];
 
 	// fill form
 
 	// portfolio
-	await page.locator('input:below(:text("Portfolio"))').first().click();
-	await page.locator("div:nth-child(1) > .relative").first().click();
-	await page.locator("li >> nth=0").first().click();
+	await page.locator("#portfolioId").click();
+	await page.locator(`text=${portfolio.fullName}`).click();
 
-	await page.locator('input:below(:text("Area"))').first().click();
+	await page.locator("#area").click();
 	await page.locator("text=Nuzha | النزهة").click();
 
 	await page.locator('input[name="block"]').click();

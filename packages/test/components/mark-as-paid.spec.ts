@@ -45,7 +45,7 @@ test("can toggle paid status", async ({ page, invoice }) => {
 	await card.locator('button:has-text("Mark as paid")').click();
 
 	// Paid badge exists
-	await expect.soft(card.locator("text=Paid")).toBeVisible();
+	await expect.soft(card.locator("#badge >> text=Paid")).toBeVisible();
 
 	// Mark as unpaid
 	await menu.click();
