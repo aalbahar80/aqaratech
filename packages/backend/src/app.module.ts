@@ -35,6 +35,7 @@ import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { PayoutsModule } from './payouts/payouts.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PropertiesModule } from './properties/properties.module';
 import { RolesModule } from './roles/roles.module';
@@ -69,6 +70,7 @@ import { UsersModule } from './users/users.module';
     ExpenseCategoriesModule,
     S3Module,
     FilesModule,
+    PayoutsModule,
   ],
   controllers: [AppController],
   providers: [
