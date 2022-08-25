@@ -46,9 +46,9 @@ export class SearchService implements OnModuleInit {
 
   readonly client: MeiliSearch;
   indexNames: TIndexName[] = [
-    entitiesMap.tenant.title,
     entitiesMap.portfolio.title,
     entitiesMap.property.title,
+    entitiesMap.tenant.title,
   ];
 
   async search({
@@ -74,24 +74,21 @@ export class SearchService implements OnModuleInit {
     );
 
     const results = await Promise.all(
-      indexes.map((index, n) => {
+      indexes.map(async (index, n) => {
         const indexName = this.indexNames[n];
-        return this.searchIndex({
-          index,
-          indexName,
-          filter: `organizationId = ${organizationId}`,
-          query,
-        });
+        return {
+          entityTitle: indexName,
+          ...(await this.searchIndex({
+            index,
+            indexName,
+            filter: `organizationId = ${organizationId}`,
+            query,
+          })),
+        };
       }),
     );
 
-    const result: Record<typeof this.indexNames[number], any> = {
-      tenant: results[0],
-      portfolio: results[1],
-      property: results[2],
-    };
-
-    return result;
+    return results;
   }
 
   async searchIndex({

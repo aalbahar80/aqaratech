@@ -28,6 +28,7 @@ import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
+import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
 import {
   CreateOrganizationDto,
@@ -119,11 +120,12 @@ export class OrganizationsController {
 
   @Get(':id/search')
   @CheckAbilities({ action: Action.Manage, subject: SubjectType })
+  @ApiOkResponse({ type: SearchDto, isArray: true })
   search(
     @User() user: IUser,
     @Param('id') id: string,
     @Query('query') query: string,
-  ) {
+  ): Promise<SearchDto[]> {
     return this.searchService.search({ query, organizationId: id, user });
   }
 }
