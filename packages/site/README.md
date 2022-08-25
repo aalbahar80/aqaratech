@@ -32,11 +32,24 @@ pnpm exec eslint .
 
 ```bash
 node --inspect node_modules/.bin/svelte-kit dev
+
+# alternative
+pnpm build && node --inspect-brk build/index.js
 ```
 
 ```bash
 cd packages/site
 node ./node_modules/@sveltejs/kit/svelte-kit.js dev
+```
+
+```bash
+cd packages/site
+
+# npx vite --port 3000 --debug
+pnpm run debug
+
+# use `debugger` statement
+# attach to running process in vscode
 ```
 
 ```json
