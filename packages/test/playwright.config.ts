@@ -69,11 +69,13 @@ const config: PlaywrightTestConfig = {
 			testIgnore: ["**/api/**"],
 		},
 		{
-			// requires https, run with npx vite dev --https, and use basicSslplugin.
+			// requires https, run with npx vite dev --https, and use basicSslplugin, set .env vars to https.
+			// STATUS: blocked by cors (backend is http while site is https)
 			// https://vitejs.dev/guide/migration.html#automatic-https-certificate-generation
 			name: "safari",
 			use: { ...devices["Desktop Safari"] },
 			testIgnore: ["**/api/**"],
+			timeout: 30 * 1000,
 		},
 	],
 };
