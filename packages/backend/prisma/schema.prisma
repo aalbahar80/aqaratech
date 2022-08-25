@@ -71,6 +71,7 @@ model Organization {
 
   planInvoices         PlanInvoice[]
   organizationSettings OrganizationSettings?
+  Payout               Payout[]
 }
 
 model OrganizationSettings {
@@ -160,6 +161,7 @@ model Portfolio {
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  Payout         Payout[]
 
   @@index([organizationId])
 }
@@ -327,4 +329,21 @@ model MaintenanceOrder {
 
   @@index([organizationId])
   @@index([portfolioId])
+}
+
+model Payout {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  amount    Float
+  postAt    DateTime
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
+  @@index([organizationId])
 }
