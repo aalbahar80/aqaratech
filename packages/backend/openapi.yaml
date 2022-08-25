@@ -1798,7 +1798,7 @@ paths:
       tags: *ref_15
   /search:
     post:
-      operationId: initSearch
+      operationId: reindexAll
       parameters:
         - &ref_16
           name: x-role-id

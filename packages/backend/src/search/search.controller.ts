@@ -9,10 +9,11 @@ import { SearchService } from 'src/search/search.service';
 export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
-  // TODO remove once the onModuleInit is stable
+  // TODO restrict to aqaratech-staff
   @Post('/')
-  initSearch() {
-    return this.searchService.init();
+  async reindexAll() {
+    await this.searchService.remove();
+    await this.searchService.init();
   }
 
   // TODO remove once the onModuleInit is stable
