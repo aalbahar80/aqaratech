@@ -246,6 +246,7 @@ importers:
       '@types/lodash-es': 4.17.6
       '@typescript-eslint/eslint-plugin': 5.34.0
       '@typescript-eslint/parser': 5.34.0
+      '@vitejs/plugin-basic-ssl': 0.1.2
       autoprefixer: 10.4.8
       chart.js: 3.8.2
       chartjs-adapter-date-fns: 2.0.0
@@ -308,6 +309,7 @@ importers:
       '@types/lodash-es': 4.17.6
       '@typescript-eslint/eslint-plugin': 5.34.0_euudt5oqhhodkyae5tf6wjmsda
       '@typescript-eslint/parser': 5.34.0_4rv7y5c6xz3vfxwhbrcxxi73bq
+      '@vitejs/plugin-basic-ssl': 0.1.2_vite@3.0.9
       autoprefixer: 10.4.8_postcss@8.4.16
       chart.js: 3.8.2
       chartjs-adapter-date-fns: 2.0.0_chart.js@3.8.2
@@ -3905,6 +3907,15 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: true
+
+  /@vitejs/plugin-basic-ssl/0.1.2_vite@3.0.9:
+    resolution: {integrity: sha512-EdwCHnbkakR6YPupySZm1WoCDRPaw9c5jObAo2pCRv8Ja2TESFC6Sc8RUOcKuihfjARDfszbBf+YEQwHY9s9wg==}
+    engines: {node: '>=14.6.0'}
+    peerDependencies:
+      vite: ^3.0.0-beta.0
+    dependencies:
+      vite: 3.0.9
     dev: true
 
   /@webassemblyjs/ast/1.11.1:

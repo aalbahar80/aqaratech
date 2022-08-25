@@ -59,21 +59,22 @@ const config: PlaywrightTestConfig = {
 			use: { ...devices["Pixel 5"], isMobile: true },
 			testIgnore: ["**/api/**"],
 		},
-		// {
-		// 	// requires https
-		// 	name: "iphone",
-		// 	use: {
-		// 		...devices["iPhone 8"],
-		// 		isMobile: true,
-		// 	},
-		// 	testIgnore: ["**/api/**"],
-		// },
-		// {
-		// 	// requires https
-		// 	name: "safari",
-		// 	use: { ...devices["Desktop Safari"] },
-		// 	testIgnore: ["**/api/**"],
-		// },
+		{
+			// requires https
+			name: "iphone",
+			use: {
+				...devices["iPhone 8"],
+				isMobile: true,
+			},
+			testIgnore: ["**/api/**"],
+		},
+		{
+			// requires https, run with npx vite dev --https, and use basicSslplugin.
+			// https://vitejs.dev/guide/migration.html#automatic-https-certificate-generation
+			name: "safari",
+			use: { ...devices["Desktop Safari"] },
+			testIgnore: ["**/api/**"],
+		},
 	],
 };
 export default config;

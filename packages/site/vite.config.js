@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+// import basicSsl from '@vitejs/plugin-basic-ssl';
 import { resolve } from 'path';
 import icons from 'unplugin-icons/vite';
 
@@ -26,7 +27,11 @@ const config = {
 			$environment: resolve('.', './src/lib/environment'),
 		},
 	},
-	plugins: [sveltekit(), icons({ compiler: 'svelte' })],
+	plugins: [
+		sveltekit(),
+		icons({ compiler: 'svelte' }),
+		// basicSsl(),
+	],
 	ssr: {
 		noExternal: ['@self/sdk', 'chart.js'],
 	},

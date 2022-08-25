@@ -42,6 +42,7 @@
     "@types/lodash-es": "4.17.6",
     "@typescript-eslint/eslint-plugin": "5.34.0",
     "@typescript-eslint/parser": "5.34.0",
+    "@vitejs/plugin-basic-ssl": "0.1.2",
     "autoprefixer": "10.4.8",
     "chart.js": "3.8.2",
     "chartjs-adapter-date-fns": "2.0.0",
