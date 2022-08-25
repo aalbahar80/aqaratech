@@ -46,59 +46,6 @@ model Role {
   tenant         Tenant?      @relation(fields: [tenantId], references: [id], onDelete: Restrict)
 }
 
-model Tenant {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  fullName     String    @default("")
-  label        String?
-  civilid      String?
-  dob          DateTime?
-  phone        String?
-  passportNum  String?
-  nationality  String?
-  residencyNum String?
-  residencyEnd DateTime?
-
-  leases            Lease[]
-  maintenanceOrders MaintenanceOrder[]
-
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  roles Role[]
-
-  @@index([organizationId])
-}
-
-model Portfolio {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  fullName String    @default("")
-  label    String?
-  civilid  String?
-  phone    String?
-  dob      DateTime?
-
-  expenses          Expense[]
-  maintenanceOrders MaintenanceOrder[]
-  properties        Property[]
-
-  Unit         Unit[]
-  Lease        Lease[]
-  LeaseInvoice LeaseInvoice[]
-
-  roles Role[]
-
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  @@index([organizationId])
-}
-
 model Organization {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -163,20 +110,105 @@ model PlanInvoice {
   organizations Organization[]
 }
 
-model Expense {
-  id                 String            @id @default(uuid())
-  unitId             String?
-  propertyId         String?
-  maintenanceOrderId String?
-  categoryId         String?
-  createdAt          DateTime          @default(now())
-  updatedAt          DateTime          @updatedAt
-  amount             Float
-  postAt             DateTime
-  memo               String?
-  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
-  property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-  unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+model Tenant {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fullName     String    @default("")
+  label        String?
+  civilid      String?
+  dob          DateTime?
+  phone        String?
+  passportNum  String?
+  nationality  String?
+  residencyNum String?
+  residencyEnd DateTime?
+
+  leases            Lease[]
+  maintenanceOrders MaintenanceOrder[]
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  roles Role[]
+
+  @@index([organizationId])
+}
+
+model Portfolio {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fullName String    @default("")
+  label    String?
+  civilid  String?
+  phone    String?
+  dob      DateTime?
+
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  properties        Property[]
+
+  Unit         Unit[]
+  Lease        Lease[]
+  LeaseInvoice LeaseInvoice[]
+
+  roles Role[]
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+}
+
+model Property {
+  id                String             @id @default(uuid())
+  portfolioId       String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  area              String?
+  block             String?
+  avenue            String?
+  street            String?
+  number            String?
+  parcel            String?
+  paci              String?
+  cost              Float?
+  label             String?
+  long              Float?
+  lat               Float?
+  portfolio         Portfolio          @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+  expenses          Expense[]
+  maintenanceOrders MaintenanceOrder[]
+  units             Unit[]
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
+  @@index([organizationId])
+}
+
+model Unit {
+  id                String             @id @default(uuid())
+  propertyId        String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  unitNumber        String
+  floor             Float?
+  size              Float?
+  bed               Float?
+  bath              Float?
+  marketRent        Float?
+  type              String?
+  usage             String?
+  label             String?
+  property          Property           @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  expenses          Expense[]
+  leases            Lease[]
+  maintenanceOrders MaintenanceOrder[]
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
@@ -184,10 +216,9 @@ model Expense {
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
 
-  @@index([portfolioId])
   @@index([propertyId])
-  @@index([unitId])
   @@index([organizationId])
+  @@index([portfolioId])
 }
 
 model Lease {
@@ -219,60 +250,6 @@ model Lease {
   @@index([portfolioId])
 }
 
-model MaintenanceOrder {
-  id          String    @id @default(uuid())
-  tenantId    String?
-  unitId      String?
-  propertyId  String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  completedAt DateTime?
-  title       String?
-  description String?
-  status      String?
-  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-  tenant      Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-  unit        Unit?     @relation(fields: [unitId], references: [id], onDelete: Restrict)
-  expenses    Expense[]
-
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  portfolioId String
-  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-
-  @@index([organizationId])
-  @@index([portfolioId])
-}
-
-model Property {
-  id                String             @id @default(uuid())
-  portfolioId       String
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  area              String?
-  block             String?
-  avenue            String?
-  street            String?
-  number            String?
-  parcel            String?
-  paci              String?
-  cost              Float?
-  label             String?
-  long              Float?
-  lat               Float?
-  portfolio         Portfolio          @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
-  expenses          Expense[]
-  maintenanceOrders MaintenanceOrder[]
-  units             Unit[]
-
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-
-  @@index([portfolioId])
-  @@index([organizationId])
-}
-
 model LeaseInvoice {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
@@ -298,24 +275,20 @@ model LeaseInvoice {
   @@index([portfolioId])
 }
 
-model Unit {
-  id                String             @id @default(uuid())
-  propertyId        String
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  unitNumber        String
-  floor             Float?
-  size              Float?
-  bed               Float?
-  bath              Float?
-  marketRent        Float?
-  type              String?
-  usage             String?
-  label             String?
-  property          Property           @relation(fields: [propertyId], references: [id], onDelete: Restrict)
-  expenses          Expense[]
-  leases            Lease[]
-  maintenanceOrders MaintenanceOrder[]
+model Expense {
+  id                 String            @id @default(uuid())
+  unitId             String?
+  propertyId         String?
+  maintenanceOrderId String?
+  categoryId         String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  amount             Float
+  postAt             DateTime
+  memo               String?
+  maintenanceOrder   MaintenanceOrder? @relation(fields: [maintenanceOrderId], references: [id], onDelete: Restrict)
+  property           Property?         @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  unit               Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
@@ -323,7 +296,34 @@ model Unit {
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
 
+  @@index([portfolioId])
   @@index([propertyId])
+  @@index([unitId])
+  @@index([organizationId])
+}
+
+model MaintenanceOrder {
+  id          String    @id @default(uuid())
+  tenantId    String?
+  unitId      String?
+  propertyId  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+  title       String?
+  description String?
+  status      String?
+  property    Property? @relation(fields: [propertyId], references: [id], onDelete: Restrict)
+  tenant      Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit        Unit?     @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  expenses    Expense[]
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
   @@index([organizationId])
   @@index([portfolioId])
 }
