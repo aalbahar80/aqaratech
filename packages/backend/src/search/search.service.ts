@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 import { entitiesMap } from '@self/utils';
 import { instanceToPlain, plainToClass } from 'class-transformer';
+import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
 import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
@@ -65,6 +66,11 @@ export class SearchService implements OnModuleInit {
       Action.Manage,
       subject('Organization', { id: organizationId }),
     );
+
+    if (!isUUID(organizationId)) {
+      // might be overkill, but just in case
+      throw new Error('Invalid organization id');
+    }
 
     // get indexes and search
     const indexes = await Promise.all(

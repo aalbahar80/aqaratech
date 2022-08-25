@@ -38,7 +38,7 @@ export class PortfoliosService {
       subject(this.SubjectType, createPortfolioDto),
     );
 
-    const portfolio = this.prisma.portfolio.create({
+    const portfolio = await this.prisma.portfolio.create({
       data: createPortfolioDto,
     });
 
@@ -103,7 +103,7 @@ export class PortfoliosService {
       instance: updatePortfolioDto,
     });
 
-    const portfolio = this.prisma.portfolio.update({
+    const portfolio = await this.prisma.portfolio.update({
       where: { id },
       data: frisked,
     });
