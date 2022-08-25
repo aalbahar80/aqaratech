@@ -119,7 +119,13 @@ export class AbilitiesGuard implements CanActivate {
         throw new InternalServerErrorException();
       }
 
-      user = { ...validatedUser, ability, xRoleId, role };
+      user = {
+        ...validatedUser,
+        ability,
+        xRoleId,
+        role,
+        isAqaratechStaff: false,
+      };
 
       // TODO handle cache ttl/invalidation
       // TODO use cache key variable
@@ -184,6 +190,7 @@ export class AbilitiesGuard implements CanActivate {
       ...user,
       ability: user.ability,
       xRoleId,
+      isAqaratechStaff: false,
     } as IUser;
 
     return isAllowed;
