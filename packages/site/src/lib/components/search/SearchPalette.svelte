@@ -4,7 +4,6 @@
 	import { api } from '$lib/client/api';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { startCase } from '$lib/utils/common';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -14,6 +13,8 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
+	import type { SearchDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	// TODO optimize use lodash debounce?
@@ -28,13 +29,8 @@
 			title: string;
 		};
 	}
-	interface Group {
-		hits: Item[];
-		estimatedTotalHits: number;
-	}
-	type Groups = Record<string, Group>;
 
-	let groups: Groups = {};
+	let groups: SearchDto[] = [];
 
 	let query = '';
 	export let open = false;
@@ -42,10 +38,10 @@
 	const search = debounce(async (q: string) => {
 		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
-			groups = (await api($page.data.apiConfig).organizations.search({
+			groups = await api($page.data.apiConfig).organizations.search({
 				id: $page.data.user?.role?.organizationId,
 				query: q,
-			})) as Groups;
+			});
 		} catch (e) {
 			console.error(e);
 		}
@@ -135,15 +131,15 @@
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
 								style="max-height: 70vh"
 							>
-								{#each Object.entries(groups) as [category, items] (category)}
+								{#each groups as group (group.entityTitle)}
 									<li>
 										<h2
 											class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
 										>
-											{startCase(category)}
+											{entitiesMap[group.entityTitle].pluralCap}
 										</h2>
 										<ul class="mt-2 text-sm text-gray-800">
-											{#each items.hits as item (item.id)}
+											{#each group.hits as item (item.id)}
 												<Hoverable let:hovering>
 													<ListboxOption value={item}>
 														<div
