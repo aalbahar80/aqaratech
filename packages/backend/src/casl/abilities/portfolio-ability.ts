@@ -49,5 +49,9 @@ export class PortfolioAbility {
     can(Action.Read, ['MaintenanceOrder'], {
       portfolioId: { equals: role.portfolioId },
     });
+
+    can(Action.Read, ['Payout'], {
+      portfolioId: { equals: role.portfolioId },
+    });
   }
 }

@@ -7,6 +7,7 @@ import {
   LeaseInvoice,
   MaintenanceOrder,
   Organization,
+  Payout,
   Plan,
   PlanInvoice,
   Portfolio,
@@ -99,6 +100,7 @@ export type Subject = Subjects<{
   Lease: P<Lease>;
   MaintenanceOrder: P<MaintenanceOrder>;
   Organization: P<Organization>;
+  Payout: P<Payout>;
   Plan: P<Plan>;
   PlanInvoice: P<PlanInvoice>;
   Portfolio: P<Portfolio>;
@@ -109,19 +111,6 @@ export type Subject = Subjects<{
   Unit: P<Unit>;
   User: P<User>;
 }>;
-
-type Resource = string;
-export interface Resources {
-  roles: Resource[];
-  tenants: Resource[];
-  portfolios: Resource[];
-  properties: Resource[];
-  units: Resource[];
-  leases: Resource[];
-  leaseInvoices: Resource[];
-  expenses: Resource[];
-  maintenanceOrders: Resource[];
-}
 
 // Can type exported for use in dependent ability classes.
 type TAbilityBuilder = AbilityBuilder<AppAbility>;
