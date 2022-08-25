@@ -136,7 +136,7 @@ export class SearchService implements OnModuleInit {
     });
 
     try {
-      await index.addDocuments(documents);
+      await index.addDocuments(documents, { primaryKey: 'id' });
     } catch (e) {
       this.logger.error(e);
     }
