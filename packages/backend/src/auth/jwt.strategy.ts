@@ -4,7 +4,9 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { AQARATECH_STAFF_ROLE } from 'src/constants/aqaratech-staff-role';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
@@ -60,7 +62,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param payload
    * access token as received from Auth0
    */
-  async validate(payload: any): Promise<{ email: string }> {
+  validate(payload: any): AuthenticatedUser {
     const apiNamespace = this.configService.get(
       'authConfig.AUTH0_API_NAMESPACE',
       { infer: true },
@@ -77,8 +79,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new Error('email must be set');
     }
 
+    const auth0Roles = payload[`${apiNamespace}/roles`] as unknown as string[];
+    const isAqaratechStaff = auth0Roles.includes(AQARATECH_STAFF_ROLE);
+
     this.logger.debug(`Validated user with email ${email}`);
 
-    return { email };
+    return { email, isAqaratechStaff };
   }
 }
