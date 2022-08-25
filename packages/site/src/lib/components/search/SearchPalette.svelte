@@ -46,7 +46,6 @@
 				id: $page.data.user?.role?.organizationId,
 				query: q,
 			})) as Groups;
-			console.log({ groups }, 'SearchPalette.svelte ~ 47');
 		} catch (e) {
 			console.error(e);
 		}
@@ -134,7 +133,7 @@
 						<ListboxOptions static>
 							<div
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
-								style="max-height: 80vh"
+								style="max-height: 70vh"
 							>
 								{#each Object.entries(groups) as [category, items] (category)}
 									<li>
