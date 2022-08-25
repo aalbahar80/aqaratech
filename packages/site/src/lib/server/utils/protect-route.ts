@@ -14,7 +14,7 @@ export const protectRoute = ({
 }) => {
 	const publicUrl = ['/'].includes(pathname);
 	const canAccess =
-		publicUrl || (isAuthenticated && user && isAccessible({ user, pathname }));
+		publicUrl || (isAuthenticated && isAccessible({ user, pathname }));
 
 	if (canAccess) {
 		return;
