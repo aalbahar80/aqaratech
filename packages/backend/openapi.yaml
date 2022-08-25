@@ -3880,15 +3880,35 @@ components:
         label:
           type: string
           nullable: true
+    FormattedHit:
+      type: object
+      properties:
+        title:
+          type: string
+      required:
+        - title
+    Hit:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        _formatted:
+          $ref: '#/components/schemas/FormattedHit'
+      required:
+        - id
+        - title
+        - _formatted
     SearchDto:
       type: object
       properties:
-        entityTitle:
-          type: object
         hits:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/Hit'
+        entityTitle:
+          type: object
         offset:
           type: number
         limit:
@@ -3902,8 +3922,8 @@ components:
         estimatedTotalHits:
           type: number
       required:
-        - entityTitle
         - hits
+        - entityTitle
         - offset
         - limit
         - processingTimeMs

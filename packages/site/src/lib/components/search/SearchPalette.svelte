@@ -20,16 +20,6 @@
 	// TODO optimize use lodash debounce?
 	import debounce from 'debounce';
 
-	interface Item {
-		id: number;
-		title: string;
-		category: string;
-		url: string;
-		_formatted: {
-			title: string;
-		};
-	}
-
 	let groups: SearchDto[] = [];
 
 	let query = '';
