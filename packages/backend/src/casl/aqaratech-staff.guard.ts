@@ -17,12 +17,15 @@ export class AqaratechStaffGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<IRequest>();
     const authenticatedUser = request.user;
 
+    let isAllowed: boolean;
     if (authenticatedUser.isAqaratechStaff) {
-      return true;
+      isAllowed = true;
     } else {
-      // throw instead?
-      return false;
+      isAllowed = false;
     }
+
+    this.logger.debug(`isAllowed: ${isAllowed}`);
+    return isAllowed;
   }
 }
 

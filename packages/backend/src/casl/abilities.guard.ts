@@ -66,7 +66,7 @@ export class AbilitiesGuard implements CanActivate {
 
     if (isPublic || skipAbilityCheck) {
       this.logger.debug(
-        `Public route, skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`,
+        `Skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`,
       );
       return true;
     }
