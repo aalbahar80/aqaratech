@@ -23,7 +23,7 @@
 			if (onDelete) {
 				onDelete();
 			} else {
-				await goto(`/${entity}`);
+				await goto(`/${entitiesMap[entity].urlName}`);
 			}
 
 			// add toast after awaiting goto() to avoid weird modal behavior
