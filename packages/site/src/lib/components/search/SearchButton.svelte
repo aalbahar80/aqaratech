@@ -7,7 +7,6 @@
 	let open = false;
 </script>
 
-<SearchPalette bind:open />
 <!-- https://daisyui.com/components/kbd/ -->
 <!-- use svelte:window to set event listener instead? -->
 <button
@@ -17,6 +16,7 @@
 		open = true;
 	}}
 >
+	<SearchPalette bind:open />
 	<div
 		class="w-full max-w-lg lg:max-w-xs"
 		on:click={() => {
