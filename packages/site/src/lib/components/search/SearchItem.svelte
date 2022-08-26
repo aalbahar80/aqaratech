@@ -22,7 +22,7 @@
 
 	const hiddenFields = ['title', 'id', 'organizationId'];
 
-	const highlightedFields = R.pickBy(
+	$: highlightedFields = R.pickBy(
 		item._formatted,
 		(val: string, key) =>
 			typeof val === 'string' &&
