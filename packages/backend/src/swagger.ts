@@ -1,8 +1,10 @@
 import { AggregateModule } from 'src/aggregate/aggregate.module';
 import { ExpensesModule } from 'src/expenses/expenses.module';
+import { FilesModule } from 'src/files/files.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
 import { OrganizationsModule } from 'src/organizations/organizations.module';
+import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
@@ -10,7 +12,6 @@ import { SearchModule } from 'src/search/search.module';
 import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
-import { AppModule } from './app.module';
 
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -18,7 +19,7 @@ import { writeFileSync } from 'fs';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
-import { FilesModule } from 'src/files/files.module';
+import { AppModule } from './app.module';
 
 export const setupSwagger = async (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -71,6 +72,7 @@ export const setupSwagger = async (app: INestApplication) => {
       AggregateModule,
       ExpenseCategoriesModule,
       FilesModule,
+      PayoutsModule,
     ],
     extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
     ignoreGlobalPrefix: true,
