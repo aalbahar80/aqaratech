@@ -46,7 +46,10 @@
 			<div class="flex">
 				<svelte:component
 					this={icon}
-					class="mr-2 h-6 w-6 flex-none text-gray-400 text-opacity-40"
+					class={classes(
+						'mr-2 h-6 w-6 flex-none text-opacity-40',
+						hovering ? 'text-white text-opacity-70' : 'text-gray-400',
+					)}
 					aria-hidden="true"
 				/>
 				<div class="flex flex-col gap-y-1">
