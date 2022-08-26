@@ -111,7 +111,7 @@ export class SearchService implements OnModuleInit {
     const data = await index.search(query, {
       highlightPreTag: '<mark>',
       highlightPostTag: '</mark>',
-      attributesToHighlight: ['title'],
+      attributesToHighlight: ['*'],
       limit: 20,
       filter,
     });
