@@ -278,3 +278,11 @@ export const fakeMaintenanceOrder = (
 	portfolioId: portfolioId ?? generateId(),
 	organizationId: organizationId ?? generateId(),
 });
+
+export const fakePayout = () => ({
+	id: generateId(),
+	createdAt: createdAt(),
+	updatedAt: updatedAt(),
+	amount: +faker.finance.amount(10, 250, 0),
+	postAt: faker.date.past(timespan),
+});

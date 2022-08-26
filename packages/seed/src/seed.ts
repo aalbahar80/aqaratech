@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { Payout } from "@prisma/client";
 import { addDays } from "date-fns";
 import { config } from "dotenv";
 import { inspect } from "util";
@@ -8,6 +9,7 @@ import {
 	fakeLeaseInvoice,
 	fakeMaintenanceOrder,
 	fakeOrganizationSettings,
+	fakePayout,
 	fakePortfolio,
 	fakeProperty,
 	fakeTenant,
@@ -39,6 +41,7 @@ export async function seed({
 	let unitMax = 20;
 	let moCount = 100;
 	let expenseCount = 1000;
+	let payoutCount = 10;
 	let trxPerLease = 12;
 	const min = 1;
 
@@ -235,6 +238,19 @@ export async function seed({
 		}
 	});
 
+	const payouts = portfolios.flatMap((portfolio) => {
+		const portfolioPayouts: Payout[] = [];
+		for (let i = 0; i < payoutCount; i++) {
+			const payout = fakePayout();
+			portfolioPayouts.push({
+				...payout,
+				portfolioId: portfolio.id,
+				organizationId: testOrgId,
+			});
+		}
+		return portfolioPayouts;
+	});
+
 	// count the number of tenants with a lease
 	const tenantsWithLease = tenants.filter((tenant) =>
 		leases.find((lease) => lease.tenantId === tenant.id)
@@ -261,7 +277,7 @@ export async function seed({
 	console.log(`${unitsWithLease} units with a lease`);
 
 	console.log("Seeding to database:", process.env.DATABASE_URL);
-	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${leaseInvoices.length} leaseInvoices \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses`;
+	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${leaseInvoices.length} leaseInvoices \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses \n ${payouts.length} payouts`;
 	console.log(summary);
 
 	if (printOnly) {
@@ -298,6 +314,7 @@ export async function seed({
 			data: organizations.map((o) => fakeOrganizationSettings(o.id)),
 		});
 		await prisma.portfolio.createMany({ data: portfolios });
+		await prisma.payout.createMany({ data: payouts });
 		await prisma.tenant.createMany({ data: tenants });
 		// @ts-ignore
 		await prisma.role.createMany({ data: roles });
