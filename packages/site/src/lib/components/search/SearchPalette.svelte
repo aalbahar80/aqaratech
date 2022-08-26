@@ -138,7 +138,7 @@
 										</h2>
 										<ul class="mt-2 text-sm text-gray-800">
 											{#each group.hits as item (item.id)}
-												<div animate:flip={{ duration: 200 }}>
+												<div animate:flip={{ duration: 300 }}>
 													<SearchItem {item} icon={icons[group.entityTitle]} />
 												</div>
 											{/each}
