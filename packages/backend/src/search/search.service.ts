@@ -158,9 +158,10 @@ export class SearchService implements OnModuleInit {
   async initIndex<T extends InitIndexParams['indexName']>(
     ...arg: ExtractParams<T>
   ) {
-    const index = await this.client.index(arg[0]).updateSettings({
+    await this.client.index(arg[0]).updateSettings({
       filterableAttributes: ['organizationId'], // required for authz
-      // @ts-ignore
+      // @ts-expect-error until better type inference is available
+      // https://twitter.com/AndaristRake/status/1509880643668389888
       searchableAttributes: arg[1], // order sets relevance score
     });
   }
