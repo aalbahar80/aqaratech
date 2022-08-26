@@ -13,6 +13,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
+import { ExtractParams, InitIndexParams } from 'src/search/dto/search-index';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 @Injectable()
@@ -154,16 +155,42 @@ export class SearchService implements OnModuleInit {
   /**
    * common logic for all indices
    */
-  async initIndex(indexName: string) {
-    const index = this.client.index(indexName);
-    await index.updateSettings({ filterableAttributes: ['organizationId'] });
+  async initIndex<T extends InitIndexParams['indexName']>(
+    ...arg: ExtractParams<T>
+  ) {
+    const index = await this.client.index(arg[0]).updateSettings({
+      filterableAttributes: ['organizationId'], // required for authz
+      // @ts-ignore
+      searchableAttributes: arg[1], // order sets relevance score
+    });
   }
 
   async init() {
-    // create indexes, set common settings
-    await Promise.all(
-      this.indexNames.map((indexName) => this.initIndex(indexName)),
-    );
+    await this.initIndex(entitiesMap.tenant.title, [
+      'title',
+      'fullName',
+      'label',
+      'phone',
+      'civilid',
+      'passportNum',
+      'residencyNum',
+    ]);
+
+    await this.initIndex(entitiesMap.portfolio.title, [
+      'title',
+      'fullName',
+      'label',
+      'phone',
+      'civilid',
+    ]);
+
+    await this.initIndex(entitiesMap.property.title, [
+      'address',
+      'label',
+      'paci',
+      'area',
+      'street',
+    ]);
 
     // add all documents to their respective indices
     return await Promise.all([
