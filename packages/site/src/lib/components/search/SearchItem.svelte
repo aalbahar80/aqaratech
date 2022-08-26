@@ -45,18 +45,18 @@
 					class="mr-2 h-6 w-6 flex-none text-gray-400 text-opacity-40"
 					aria-hidden="true"
 				/>
-				<div>
-					<p class="pb-2">
+				<div class="flex flex-col gap-y-1">
+					<p>
 						{@html item._formatted.title}
 					</p>
-					{#each Object.entries(highlightedFields) as [key, val]}
-						<p class="text-sm font-light">
-							<span class="">
+					<p class="flex flex-col gap-y-1 text-sm font-light">
+						{#each Object.entries(highlightedFields) as [key, val]}
+							<p>
 								{startCase(key)}:
-							</span>
-							{@html val}
-						</p>
-					{/each}
+								{@html val}
+							</p>
+						{/each}
+					</p>
 				</div>
 			</div>
 		</div>
