@@ -53,10 +53,12 @@
 					<p>
 						{@html item._formatted.title}
 					</p>
-					<div class="flex flex-col gap-y-1 text-sm font-light">
+					<div class="flex flex-col gap-y-1 text-xs font-light">
 						{#each Object.entries(highlightedFields) as [key, val]}
 							<p>
-								{startCase(key)}:
+								<span class="font-extralight">
+									{startCase(key)}:
+								</span>
 								{@html val}
 							</p>
 						{/each}
