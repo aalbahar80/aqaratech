@@ -22,12 +22,11 @@
 			val.includes('<mark>') &&
 			key !== 'title' &&
 			key !== 'organizationId' &&
-			// key !== 'id' &&
+			key !== 'id' &&
 			item[key] !== item.title,
 	);
 </script>
 
-<!-- <pre>{JSON.stringify(highlightedFields, null, 2)}</pre> -->
 <Hoverable let:hovering>
 	<ListboxOption value={item}>
 		<div
@@ -39,10 +38,8 @@
 			)}
 		>
 			{@html item._formatted.title}
-			<!-- example: abc<mark>def</mark>hij <mark>ح</mark>افظ المحجوب -->
 		</div>
 		{#each Object.entries(highlightedFields) as [key, val]}
-			<!-- Avoid displaying duplicate title + address/fullName/etc -->
 			<div
 				class={classes(
 					'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
