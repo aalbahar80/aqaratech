@@ -163,6 +163,13 @@ export class SearchService implements OnModuleInit {
       // @ts-expect-error until better type inference is available
       // https://twitter.com/AndaristRake/status/1509880643668389888
       searchableAttributes: arg[1], // order sets relevance score
+      typoTolerance: {
+        minWordSizeForTypos: {
+          // https://docs.meilisearch.com/learn/configuration/typo_tolerance.html#configuring-typo-tolerance
+          oneTypo: 3, // default: 5
+          twoTypos: 6, // default: 9
+        },
+      },
     });
   }
 
