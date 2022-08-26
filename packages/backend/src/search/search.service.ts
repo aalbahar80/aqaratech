@@ -195,13 +195,13 @@ export class SearchService implements OnModuleInit {
 
     // add all documents to their respective indices
     return await Promise.all([
-      this.initTenants(),
-      this.initPortfolios(),
-      this.initProperties(),
+      this.initTenantDocuments(),
+      this.initPortfolioDocuments(),
+      this.initPropertyDocuments(),
     ]);
   }
 
-  async initTenants() {
+  async initTenantDocuments() {
     const tenants = await this.prisma.tenant.findMany({
       select: {
         id: true,
@@ -222,7 +222,7 @@ export class SearchService implements OnModuleInit {
     });
   }
 
-  async initPortfolios() {
+  async initPortfolioDocuments() {
     const portfolios = await this.prisma.portfolio.findMany({
       select: {
         id: true,
@@ -241,7 +241,7 @@ export class SearchService implements OnModuleInit {
     });
   }
 
-  async initProperties() {
+  async initPropertyDocuments() {
     // TODO only fetch relevant fields
     const properties = await this.prisma.property.findMany({
       select: {
