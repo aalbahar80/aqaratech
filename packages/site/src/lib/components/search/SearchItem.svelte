@@ -4,7 +4,7 @@
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import { startCase } from 'lodash-es';
 	import * as R from 'remeda';
-	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
+	import type { SvelteComponentTyped } from 'svelte';
 
 	type Obj = {
 		id: string;
@@ -16,6 +16,9 @@
 	} & Obj;
 
 	export let item: Item;
+	export let icon: typeof SvelteComponentTyped<
+		svelte.JSX.IntrinsicElements['svg']
+	>;
 
 	const hiddenFields = ['title', 'id', 'organizationId'];
 
@@ -41,7 +44,8 @@
 			)}
 		>
 			<div class="flex">
-				<HeroiconsOutlineFolder
+				<svelte:component
+					this={icon}
 					class="mr-2 h-6 w-6 flex-none text-gray-400 text-opacity-40"
 					aria-hidden="true"
 				/>

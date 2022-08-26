@@ -18,6 +18,9 @@
 	// TODO optimize use lodash debounce?
 	import debounce from 'debounce';
 	import { flip } from 'svelte/animate';
+	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
+	import HeroiconsOutlineOfficeBuilding from '~icons/heroicons-outline/office-building';
+	import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 
 	let groups: SearchDto[] = [];
 
@@ -40,6 +43,12 @@
 	$: hasHits = Object.values(groups).some(
 		(groupHits) => groupHits.estimatedTotalHits > 0,
 	);
+
+	const icons = {
+		tenant: HeroiconsOutlineUser,
+		portfolio: HeroiconsOutlineFolder,
+		property: HeroiconsOutlineOfficeBuilding,
+	};
 </script>
 
 <TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
@@ -130,7 +139,7 @@
 										<ul class="mt-2 text-sm text-gray-800">
 											{#each group.hits as item (item.id)}
 												<div animate:flip={{ duration: 200 }}>
-													<SearchItem {item} />
+													<SearchItem {item} icon={icons[group.entityTitle]} />
 												</div>
 											{/each}
 										</ul>
