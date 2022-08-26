@@ -3,7 +3,16 @@
 	import { classes } from '$lib/utils/classes';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 
-	export let item;
+	type Obj = {
+		id: string;
+		title: string;
+	} & Record<string, any>;
+
+	type Item = {
+		_formatted: Obj;
+	} & Obj;
+
+	export let item: Item;
 </script>
 
 <Hoverable let:hovering>
