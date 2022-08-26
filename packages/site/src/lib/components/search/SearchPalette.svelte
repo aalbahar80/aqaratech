@@ -17,6 +17,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	// TODO optimize use lodash debounce?
 	import debounce from 'debounce';
+	import { flip } from 'svelte/animate';
 
 	let groups: SearchDto[] = [];
 
@@ -128,7 +129,9 @@
 										</h2>
 										<ul class="mt-2 text-sm text-gray-800">
 											{#each group.hits as item (item.id)}
-												<SearchItem {item} />
+												<div animate:flip={{ duration: 200 }}>
+													<SearchItem {item} />
+												</div>
 											{/each}
 										</ul>
 									</li>
