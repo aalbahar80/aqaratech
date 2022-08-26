@@ -3,6 +3,7 @@
 	import { classes } from '$lib/utils/classes';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import * as R from 'remeda';
+	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
 
 	type Obj = {
 		id: string;
@@ -37,13 +38,21 @@
 					: '[&_mark]:text-indigo-600 [&_mark]:bg-inherit [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
 			)}
 		>
-			{@html item._formatted.title}
-			{#each Object.entries(highlightedFields) as [key, val]}
-				<p>
-					{key}:
-					{@html val}
-				</p>
-			{/each}
+			<div class="flex">
+				<HeroiconsOutlineFolder
+					class="mr-2 h-6 w-6 flex-none self-center align-middle text-gray-400 text-opacity-40"
+					aria-hidden="true"
+				/>
+				<div class="">
+					{@html item._formatted.title}
+					{#each Object.entries(highlightedFields) as [key, val]}
+						<p>
+							{key}:
+							{@html val}
+						</p>
+					{/each}
+				</div>
+			</div>
 		</div>
 	</ListboxOption>
 </Hoverable>
