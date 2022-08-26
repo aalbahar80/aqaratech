@@ -2,6 +2,7 @@
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
+	import { startCase } from 'lodash-es';
 	import * as R from 'remeda';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
 
@@ -16,15 +17,16 @@
 
 	export let item: Item;
 
+	const hiddenFields = ['title', 'id', 'organizationId'];
+
 	const highlightedFields = R.pickBy(
 		item._formatted,
 		(val: string, key) =>
 			typeof val === 'string' &&
 			val.includes('<mark>') &&
-			key !== 'title' &&
-			key !== 'organizationId' &&
-			key !== 'id' &&
-			item[key] !== item.title,
+			!hiddenFields.includes(key) &&
+			item[key] !== item.title && // hide any field if it matches title
+			(key !== 'label' || !item._formatted.title.includes('<mark>')), // hide label if title is already highlighted
 	);
 </script>
 
@@ -40,14 +42,18 @@
 		>
 			<div class="flex">
 				<HeroiconsOutlineFolder
-					class="mr-2 h-6 w-6 flex-none self-center align-middle text-gray-400 text-opacity-40"
+					class="mr-2 h-6 w-6 flex-none text-gray-400 text-opacity-40"
 					aria-hidden="true"
 				/>
-				<div class="">
-					{@html item._formatted.title}
+				<div>
+					<p class="pb-2">
+						{@html item._formatted.title}
+					</p>
 					{#each Object.entries(highlightedFields) as [key, val]}
-						<p>
-							{key}:
+						<p class="text-sm font-light">
+							<span class="">
+								{startCase(key)}:
+							</span>
 							{@html val}
 						</p>
 					{/each}
