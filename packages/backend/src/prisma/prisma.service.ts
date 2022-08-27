@@ -10,10 +10,14 @@ import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class PrismaService
-  extends PrismaClient<{
-    rejectOnNotFound: (e: Error) => Error;
-    log: Prisma.PrismaClientOptions['log'];
-  }>
+  extends PrismaClient<
+    {
+      rejectOnNotFound: (e: Error) => Error;
+      log: Prisma.PrismaClientOptions['log'];
+    },
+    'query',
+    'rejectOnNotFound'
+  >
   implements OnModuleInit
 {
   constructor(readonly configService: ConfigService<EnvironmentConfig>) {
@@ -28,13 +32,9 @@ export class PrismaService
     });
 
     if (debug) {
-      // @ts-ignore
       this.$on('query', (e) => {
-        // @ts-ignore
         console.log('Query: ' + e.query);
-        // @ts-ignore
         console.log('Params: ' + e.params);
-        // @ts-ignore
         console.log('Duration: ' + e.duration + 'ms');
       });
     }
