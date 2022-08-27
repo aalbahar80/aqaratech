@@ -60,7 +60,7 @@ export class ExpenseCategoriesService {
   }
 
   async findAll({ organizationId }: { organizationId: string }) {
-    const data = await this.prisma.organizationSettings.findUnique({
+    const data = await this.prisma.organizationSettings.findUniqueOrThrow({
       where: { organizationId },
     });
     const settings = new OrganizationSettingsDto({
@@ -161,7 +161,7 @@ export class ExpenseCategoriesService {
 
   async fetchJsonCategories({ organizationId }: { organizationId: string }) {
     // Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
-    const settings = await this.prisma.organizationSettings.findUnique({
+    const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
       where: { organizationId },
       select: { expenseCategoryTree: true },
     });

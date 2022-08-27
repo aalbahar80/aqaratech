@@ -81,7 +81,7 @@ export class ExpensesService {
       this.prisma.expense.count({ where: filter }),
 
       // TODO get from orgservice
-      this.prisma.organizationSettings.findUnique({
+      this.prisma.organizationSettings.findUniqueOrThrow({
         where: { organizationId },
         select: { expenseCategoryTree: true },
       }),
@@ -111,7 +111,7 @@ export class ExpensesService {
       }),
 
       // TODO get from orgservice
-      this.prisma.organizationSettings.findUnique({
+      this.prisma.organizationSettings.findUniqueOrThrow({
         where: { organizationId },
         select: { expenseCategoryTree: true },
       }),
@@ -172,7 +172,7 @@ export class ExpensesService {
       (r) => r.id === user.xRoleId,
     )?.organizationId;
 
-    const settings = await this.prisma.organizationSettings.findUnique({
+    const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
       where: { organizationId },
       select: { expenseCategoryTree: true },
     });

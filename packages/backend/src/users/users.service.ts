@@ -19,7 +19,7 @@ export class UsersService {
   // }
 
   // findOne(id: string): Promise<ValidatedUserDto> {
-  //   return this.prisma.user.findUnique({
+  //   return this.prisma.user.findUniqueOrThrow({
   //     where: { id },
   //     include: {
   //       roles: {
@@ -30,7 +30,7 @@ export class UsersService {
   // }
 
   async findOneByEmail(email: string): Promise<ValidatedUserDto> {
-    return this.prisma.user.findUnique({
+    return this.prisma.user.findUniqueOrThrow({
       where: { email },
       include: {
         roles: {
@@ -40,7 +40,7 @@ export class UsersService {
     });
   }
   async getRoles(id: string) {
-    const result = await this.prisma.user.findUnique({
+    const result = await this.prisma.user.findUniqueOrThrow({
       where: { id },
       select: {
         roles: true,

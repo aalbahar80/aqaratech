@@ -66,7 +66,9 @@ export class OrganizationsService {
       subject(this.SubjectType, { id }),
     );
 
-    const data = await this.prisma.organization.findUnique({ where: { id } });
+    const data = await this.prisma.organization.findUniqueOrThrow({
+      where: { id },
+    });
     return data;
   }
 

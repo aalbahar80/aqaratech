@@ -98,7 +98,7 @@ export class RolesService {
       this.logger.warn('No site origin configured');
     }
 
-    const role = await this.prisma.role.findUnique({
+    const role = await this.prisma.role.findUniqueOrThrow({
       where: { id: payload.roleId },
       include: {
         user: { select: { email: true } },

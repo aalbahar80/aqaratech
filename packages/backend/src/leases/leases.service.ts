@@ -89,7 +89,7 @@ export class LeasesService {
   }
 
   async findOne({ id }: { id: string }) {
-    const data = await this.prisma.lease.findUnique({
+    const data = await this.prisma.lease.findUniqueOrThrow({
       where: { id },
       include: {
         tenant: { select: { id: true, fullName: true } },

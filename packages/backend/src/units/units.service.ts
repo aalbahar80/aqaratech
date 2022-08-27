@@ -70,7 +70,7 @@ export class UnitsService {
   }
 
   async findOne({ id }: { id: string }): Promise<UnitDto> {
-    const data = await this.prisma.unit.findUnique({
+    const data = await this.prisma.unit.findUniqueOrThrow({
       where: { id },
       include: {
         // TODO sort it. it affects vacancy calculation

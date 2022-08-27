@@ -45,7 +45,7 @@ export class CaslAbilityFactory {
 
     // We use email (NOT xRoleId) to find the user/role info.
     // Email is verified by Auth0/jwt, so it's safe to use.
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUniqueOrThrow({
       where: { email },
       include: { roles: true },
     });
