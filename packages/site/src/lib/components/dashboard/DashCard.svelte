@@ -2,14 +2,12 @@
 	import IncompleteDataAlert from '$lib/components/dashboard/IncompleteDataAlert.svelte';
 	import Tabs from '$lib/components/Tabs.svelte';
 	import { ChartBar, Database } from '@steeze-ui/heroicons';
-	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
 
 	export let title: string;
 	export let subtitle = '';
 	export let empty = false;
 	export let tabbed = true;
-	export let chartHeight = 1000;
 	export let showAlert = false;
 
 	const tabs = [
@@ -19,24 +17,10 @@
 
 	type TabName = typeof tabs[number]['name'];
 	let tab: TabName = 'Chart';
-	const height = tweened(900);
-	let heightTable: number | undefined;
-
-	const recalcHeight = (tab: 'Chart' | 'Data', h: typeof heightTable) => {
-		if (tab === 'Chart') {
-			$height = chartHeight;
-		} else {
-			const newHeight = h ?? 0;
-			$height = 200 + newHeight;
-		}
-	};
-
-	$: recalcHeight(tab, heightTable);
 </script>
 
 <div
 	class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl"
-	style:height={`${$height}px`}
 	data-test-id="dashcard"
 >
 	<div class="prose prose-base">
@@ -66,7 +50,7 @@
 			</div>
 			<slot name="chart" />
 		{:else}
-			<div bind:offsetHeight={heightTable}>
+			<div>
 				<div in:fade class="overflow-x-auto overflow-y-hidden">
 					<slot name="data" />
 				</div>
