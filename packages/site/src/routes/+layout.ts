@@ -1,7 +1,7 @@
 import { api } from '$lib/client/api';
 import type { LayoutLoad } from './$types';
 
-export const load: LayoutLoad.common = async ({ fetch, data }) => {
+export const load: LayoutLoad = async ({ fetch, data }) => {
 	const apiClient = api({
 		loadFetch: fetch,
 		token: data.accessToken,
