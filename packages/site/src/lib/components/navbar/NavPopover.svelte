@@ -12,8 +12,7 @@
 	import { Menu, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	// Needs to be reactive?
-	const navigation = $page.data.user?.role?.meta.navLinks || [];
+	export let navigation;
 </script>
 
 <Popover as="header" let:close>
