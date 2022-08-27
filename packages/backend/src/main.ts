@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { getMiddleware } from 'swagger-stats';
 import { AppModule } from './app.module';
@@ -55,6 +56,10 @@ async function bootstrap() {
       disableErrorMessages: process.env.AQ_DEBUG_NEST != '1',
     }),
   );
+
+  // https://docs.nestjs.com/recipes/prisma#issues-with-enableshutdownhooks
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
