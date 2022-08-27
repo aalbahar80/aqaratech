@@ -19,7 +19,6 @@
 	title="Revenue"
 	subtitle="Breakdown of rent income by status & property."
 	empty={invoices.results.length < 1}
-	showAlert={invoices.pagination.hasNextPage}
 >
 	<div slot="groupBy" class="flex h-14 pb-4 md:w-2/5">
 		<span

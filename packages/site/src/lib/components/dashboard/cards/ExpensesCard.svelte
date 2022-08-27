@@ -16,7 +16,6 @@
 	title="Expenses"
 	subtitle="The total amount of expenses by category & property."
 	empty={expenses.results.length < 1}
-	showAlert={expenses.pagination.hasNextPage}
 >
 	<div slot="groupBy" class="flex h-14 pb-4 md:w-2/5">
 		<span
