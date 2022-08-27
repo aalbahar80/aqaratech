@@ -44,7 +44,9 @@ export class PrismaService
     await this.$connect();
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   async enableShutdownHooks(app: INestApplication) {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.$on('beforeExit', async () => {
       await app.close();
     });
