@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { getButtons } from '$lib/components/table/pagination';
+	import { DEFAULT_PAGINATION_KEY } from '$lib/constants/pagination-keys';
 	import { classes } from '$lib/utils/classes';
 	import { getQuery } from '$lib/utils/set-query';
 	import type { PaginatedDto } from '@self/sdk';
@@ -8,11 +9,12 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let pagination: PaginatedDto;
+	export let key = DEFAULT_PAGINATION_KEY;
 
 	const getPageHref = (newPage: number, url: URL) =>
 		getQuery({
 			url,
-			queries: [{ title: 'p', value: newPage }],
+			queries: [{ title: key, value: newPage }],
 		}).href;
 
 	$: nextPageHref = getPageHref(pagination.page + 1, $page.url);

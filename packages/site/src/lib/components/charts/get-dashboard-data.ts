@@ -7,6 +7,10 @@ import {
 	getOneYearLater,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
+import {
+	EXPENSE_PAGINATION_KEY,
+	LEASE_INVOICE_PAGINATION_KEY,
+} from '$lib/constants/pagination-keys';
 import { parseParams } from '$lib/utils/parse-params';
 
 export const getDashboardData = async ({
@@ -32,7 +36,7 @@ export const getDashboardData = async ({
 		unitId: unitId || searchParams.get('unitId') || undefined,
 		start: searchParams.get('start') || undefined,
 		end: searchParams.get('end') || undefined,
-		take: 1000,
+		take: 20,
 	};
 
 	if (!filter.start && !filter.end) {
@@ -43,8 +47,14 @@ export const getDashboardData = async ({
 	const requests = [
 		api.aggregate.getIncomeByMonth(filter),
 		api.aggregate.getExpensesByMonth(filter),
-		api.leaseInvoices.findAll(filter),
-		api.expenses.findAll(filter), // TODO filter serverside
+		api.leaseInvoices.findAll({
+			...filter,
+			page: +(searchParams.get(LEASE_INVOICE_PAGINATION_KEY) || 1),
+		}),
+		api.expenses.findAll({
+			...filter,
+			page: +(searchParams.get(EXPENSE_PAGINATION_KEY) || 1),
+		}), // TODO filter serverside
 
 		api.aggregate.getIncomeByMonth({
 			...filter,
