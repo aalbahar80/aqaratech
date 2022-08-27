@@ -30,7 +30,8 @@
 	<nav class="flex" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
 			{#each truthyCrumbs as [title, crumb], idx}
-				{@const currentPage = $page.url.pathname === crumb.href}
+				{@const href = `/${entitiesMap[title].urlName}/${crumb.id}`}
+				{@const currentPage = $page.url.pathname === href}
 				{#if crumb}
 					<li>
 						<div class="flex items-center">
@@ -46,7 +47,7 @@
 								</svg>
 							{/if}
 							<a
-								href={currentPage ? null : crumb.href}
+								href={currentPage ? null : href}
 								class={classes(
 									'text-sm font-medium',
 									currentPage
