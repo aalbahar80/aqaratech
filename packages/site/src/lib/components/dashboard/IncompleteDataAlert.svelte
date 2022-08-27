@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let count: number;
+</script>
+
 <div class="flex">
 	<div class="flex-shrink-0 self-center">
 		<!-- Heroicon name: solid/exclamation -->
@@ -16,7 +20,7 @@
 		</svg>
 	</div>
 	<p class="pl-2 text-sm text-yellow-700">
-		Only the first 1,000 results are shown. Please use the filters to narrow
-		your search.
+		Only the first {count} results are shown. Please use the filters to narrow your
+		search.
 	</p>
 </div>

@@ -4,6 +4,7 @@
 	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
 	import RevenueTable from '$lib/components/dashboard/cards/RevenueTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+	import IncompleteDataAlert from '$lib/components/dashboard/IncompleteDataAlert.svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '@self/sdk';
 
@@ -20,6 +21,11 @@
 	subtitle="Breakdown of rent income by status & property."
 	empty={invoices.results.length < 1}
 >
+	<div slot="alert">
+		{#if invoices.pagination.hasNextPage}
+			<IncompleteDataAlert count={invoices.pagination.pageSize} />
+		{/if}
+	</div>
 	<div slot="groupBy" class="flex h-14 pb-4 md:w-2/5">
 		<span
 			class="mt-1 inline-flex w-full items-center break-words rounded-none rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 shadow-sm sm:text-sm"

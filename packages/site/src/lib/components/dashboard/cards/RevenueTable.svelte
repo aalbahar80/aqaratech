@@ -1,7 +1,5 @@
 <script lang="ts">
-	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { LEASE_INVOICE_PAGINATION_KEY } from '$lib/constants/pagination-keys';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
@@ -57,10 +55,10 @@
 </script>
 
 <CondensedTable {table}>
-	<div slot="pagination">
+	<!-- <div slot="pagination">
 		<AnchorPagination
 			pagination={invoices.pagination}
 			key={LEASE_INVOICE_PAGINATION_KEY}
 		/>
-	</div>
+	</div> -->
 </CondensedTable>

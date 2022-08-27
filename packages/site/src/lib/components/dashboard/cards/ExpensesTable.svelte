@@ -1,7 +1,5 @@
 <script lang="ts">
-	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { EXPENSE_PAGINATION_KEY } from '$lib/constants/pagination-keys';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedExpenseDto } from '@self/sdk';
@@ -59,10 +57,10 @@
 </script>
 
 <CondensedTable {table}>
-	<div slot="pagination">
+	<!-- <div slot="pagination">
 		<AnchorPagination
 			pagination={expenses.pagination}
 			key={EXPENSE_PAGINATION_KEY}
 		/>
-	</div>
+	</div> -->
 </CondensedTable>

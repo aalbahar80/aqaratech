@@ -1,5 +1,4 @@
 <script lang="ts">
-	import IncompleteDataAlert from '$lib/components/dashboard/IncompleteDataAlert.svelte';
 	import Tabs from '$lib/components/Tabs.svelte';
 	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import { fade } from 'svelte/transition';
@@ -8,7 +7,6 @@
 	export let subtitle = '';
 	export let empty = false;
 	export let tabbed = true;
-	export let showAlert = false;
 
 	const tabs = [
 		{ name: 'Chart', icon: ChartBar },
@@ -26,9 +24,7 @@
 	<div class="prose prose-base">
 		<h3>{title}</h3>
 		<p>{subtitle}</p>
-		{#if showAlert}
-			<IncompleteDataAlert />
-		{/if}
+		<slot name="alert" />
 	</div>
 	{#if empty}
 		<div
