@@ -17,7 +17,8 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "test": "playwright test",
     "report": "playwright show-report",
-    "debug": "vite --port 3000 --debug"
+    "debug": "vite --port 3000 --debug",
+    "preview:tunnel": "PUBLIC_API_URL_LOCAL=http://localhost:3002 PUBLIC_API_URL=https://api.aqar.live PUBLIC_SITE_URL=https://site.aqar.live PORT=3000 node build/index.js"
   },
   "devDependencies": {
     "@felte/reporter-svelte": "1.1.3",
