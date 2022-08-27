@@ -13,7 +13,7 @@ import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 
 @Injectable()
 export class UnitsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
   SubjectType = 'Unit' as const;
 
   async create({

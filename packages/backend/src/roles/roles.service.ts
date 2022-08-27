@@ -16,7 +16,7 @@ import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 @Injectable()
 export class RolesService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private postmarkService: PostmarkService,
     private readonly eventEmitter: EventEmitter2,
     readonly configService: ConfigService<EnvironmentConfig>,

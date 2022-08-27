@@ -13,7 +13,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class AggregateService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private leaseInvoicesService: LeaseInvoicesService,
   ) {}
 

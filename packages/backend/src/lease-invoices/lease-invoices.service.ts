@@ -27,7 +27,7 @@ import { kwdFormat } from 'src/utils/format';
 @Injectable()
 export class LeaseInvoicesService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private postmarkService: PostmarkService,
     private readonly eventEmitter: EventEmitter2,
     readonly configService: ConfigService<EnvironmentConfig>,

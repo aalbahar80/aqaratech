@@ -20,7 +20,7 @@ export class FilesService {
   constructor(
     private s3: S3Service,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
   ) {}
 
   private readonly logger = new Logger(FilesService.name);

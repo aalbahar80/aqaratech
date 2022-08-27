@@ -19,7 +19,7 @@ import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 @Injectable()
 export class SearchService implements OnModuleInit {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     readonly configService: ConfigService<EnvironmentConfig>,
   ) {
     const host = configService.get('meiliSearchConfig.HOST', {

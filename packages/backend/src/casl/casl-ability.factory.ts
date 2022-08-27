@@ -24,7 +24,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class CaslAbilityFactory {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private orgAdminAbility: OrgAdminAbility,
     private portfolioAbility: PortfolioAbility,
     private tenantAbility: TenantAbility,

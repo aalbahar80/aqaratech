@@ -19,7 +19,7 @@ import {
 @Injectable()
 export class TenantsService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private readonly eventEmitter: EventEmitter2,
   ) {}
   SubjectType = 'Tenant' as const;

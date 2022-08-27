@@ -21,7 +21,7 @@ import {
 @Injectable()
 export class PropertiesService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private readonly eventEmitter: EventEmitter2,
   ) {}
   SubjectType = 'Property' as const;

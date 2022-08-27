@@ -20,7 +20,7 @@ import { generateId } from 'src/utils/generate-id';
 
 @Injectable()
 export class ExpenseCategoriesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
   SubjectType = 'Organization' as const;
 
   private readonly logger = new Logger(ExpenseCategoriesService.name);

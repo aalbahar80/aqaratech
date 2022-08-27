@@ -8,7 +8,7 @@ export class MetricsService {
   constructor(
     private promClientService: PrometheusService,
     private healthService: HealthService,
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
   ) {}
 
   public get metrics(): Promise<string> {

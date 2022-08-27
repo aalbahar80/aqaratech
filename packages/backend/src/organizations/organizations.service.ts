@@ -13,7 +13,7 @@ import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService, private s3: S3Service) {}
+  constructor(private readonly prisma: PrismaService, private s3: S3Service) {}
   SubjectType = 'Organization' as const;
 
   private readonly logger = new Logger(OrganizationsService.name);

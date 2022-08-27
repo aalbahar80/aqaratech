@@ -19,7 +19,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class PortfoliosService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private readonly eventEmitter: EventEmitter2,
   ) {}
   SubjectType = 'Portfolio' as const;

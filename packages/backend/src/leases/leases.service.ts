@@ -17,7 +17,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class LeasesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
   SubjectType = 'Lease' as const;
 
   async create({
