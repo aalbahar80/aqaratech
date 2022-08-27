@@ -5,17 +5,20 @@
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedExpenseDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 
 	export let expenses: PaginatedExpenseDto;
 
 	$: tabular = expenses.results.map((i) => {
 		const property = {
 			label: i.breadcrumbs?.property?.label ?? 'General',
-			href: i.breadcrumbs?.property?.href ?? `/portfolios/${i.portfolioId}`,
+			href: i.propertyId
+				? `/${entitiesMap.property.urlName}/${i.propertyId}`
+				: `/portfolios/${i.portfolioId}`,
 		};
 		const unit = {
 			label: property.label ? i.breadcrumbs?.unit?.label : '',
-			href: property.label ? i.breadcrumbs?.unit?.href : '',
+			href: property.label ? `/${entitiesMap.unit.urlName}/${i.unitId}` : '',
 			extraStyles: i.breadcrumbs?.unit ? [''] : ['invisible'],
 		};
 		return {

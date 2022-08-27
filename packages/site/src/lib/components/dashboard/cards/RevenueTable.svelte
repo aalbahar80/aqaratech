@@ -23,11 +23,11 @@
 			},
 			property: {
 				label: i.breadcrumbs.property.label,
-				href: i.breadcrumbs.property.href,
+				href: `/${entitiesMap.property.urlName}/${i.breadcrumbs.property.id}`,
 			},
 			unit: {
 				label: i.breadcrumbs.unit.label,
-				href: i.breadcrumbs.unit.href,
+				href: `/${entitiesMap.unit.urlName}/${i.breadcrumbs.unit.id}`,
 			},
 			view: {
 				label: 'View',

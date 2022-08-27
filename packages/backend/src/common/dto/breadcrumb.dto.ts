@@ -60,9 +60,6 @@ export class BreadcrumbDto {
   rel: Rel;
 
   @ApiProperty()
-  href: string;
-
-  @ApiProperty()
   id: string;
 
   @ApiProperty()
@@ -74,22 +71,16 @@ export class BreadcrumbDto {
     this.id = id;
 
     if (rel === Rel.Tenant) {
-      this.href = `/tenants/${id}`;
       this.label = labelParams.fullName;
     } else if (rel === Rel.Portfolio) {
-      this.href = `/portfolios/${id}`;
       this.label = labelParams.fullName;
     } else if (rel === Rel.Property) {
-      this.href = `/properties/${id}`;
       this.label = getAddress(labelParams);
     } else if (rel === Rel.Unit) {
-      this.href = `/units/${id}`;
       this.label = getUnitLabel(labelParams);
     } else if (rel === Rel.Lease) {
-      this.href = `/leases/${id}`;
       this.label = labelParams.id;
     } else if (rel === Rel.MaintenanceOrder) {
-      this.href = `/maintenanceOrders/${id}`;
       this.label = labelParams.id;
     }
   }

@@ -2713,15 +2713,12 @@ components:
             - Lease
             - Maintenance Order
           type: string
-        href:
-          type: string
         id:
           type: string
         label:
           type: string
       required:
         - rel
-        - href
         - id
         - label
     LeaseBreadcrumbsDto:
