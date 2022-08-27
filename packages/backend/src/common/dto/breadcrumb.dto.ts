@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { Rel } from 'src/constants/rel.enum';
 import { getAddress, getUnitLabel } from 'src/utils/address';
 
@@ -56,7 +56,7 @@ type BreadcrumbDtoParameters =
 // }
 
 export class BreadcrumbDto {
-  @ApiProperty({ enum: Rel })
+  @ApiHideProperty()
   rel: Rel;
 
   @ApiProperty()
@@ -67,7 +67,6 @@ export class BreadcrumbDto {
 
   constructor(labelParams: BreadcrumbDtoParameters) {
     const { rel, id } = labelParams;
-    this.rel = rel;
     this.id = id;
 
     if (rel === Rel.Tenant) {

@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import type { BreadcrumbsDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import * as R from 'remeda';
 
 	export let crumbs: Partial<BreadcrumbsDto> | undefined;
@@ -28,7 +29,7 @@
 {#if crumbs}
 	<nav class="flex" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
-			{#each truthyCrumbs as [_, crumb], idx}
+			{#each truthyCrumbs as [title, crumb], idx}
 				{@const currentPage = $page.url.pathname === crumb.href}
 				{#if crumb}
 					<li>
@@ -55,7 +56,7 @@
 								class:ml-4={idx !== 0}
 								sveltekit:prefetch
 							>
-								{crumb?.rel}
+								{entitiesMap[title].singularCap}
 							</a>
 						</div>
 					</li>

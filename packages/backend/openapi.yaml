@@ -2704,21 +2704,11 @@ components:
     BreadcrumbDto:
       type: object
       properties:
-        rel:
-          enum:
-            - Tenant
-            - Portfolio
-            - Property
-            - Unit
-            - Lease
-            - Maintenance Order
-          type: string
         id:
           type: string
         label:
           type: string
       required:
-        - rel
         - id
         - label
     LeaseBreadcrumbsDto:
