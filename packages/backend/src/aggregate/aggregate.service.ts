@@ -122,17 +122,16 @@ export class AggregateService {
         });
       }).length;
 
-      const vacant = unitCount - occupied;
+      // const vacant = unitCount - occupied;
       const occupiedPct = Math.round((occupied / unitCount) * 100);
-      const vacantPct = Math.round((vacant / unitCount) * 100);
 
       days.push({
         date: date.getTime(),
-        unitCount,
-        occupied,
         occupiedPct,
-        vacant,
-        vacantPct,
+        // occupied,
+        // vacantPct,
+        // vacant,
+        // unitCount,
       });
     }
 

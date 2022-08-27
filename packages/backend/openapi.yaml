@@ -3924,23 +3924,11 @@ components:
       properties:
         date:
           type: number
-        unitCount:
-          type: number
-        occupied:
-          type: number
         occupiedPct:
-          type: number
-        vacant:
-          type: number
-        vacantPct:
           type: number
       required:
         - date
-        - unitCount
-        - occupied
         - occupiedPct
-        - vacant
-        - vacantPct
     CreateExpenseCategoryDto:
       type: object
       properties:
