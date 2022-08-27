@@ -226,7 +226,7 @@ export class LeaseInvoicesService {
       locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
     } else {
       locationFilter = {
-        lease: { unit: { property: { portfolioId: filter?.portfolioId } } },
+        lease: { portfolioId: filter?.portfolioId },
       };
     }
     return locationFilter;
