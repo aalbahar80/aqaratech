@@ -8,6 +8,7 @@ import {
 	LeaseInvoicesApi,
 	LeasesApi,
 	OrganizationsApi,
+	PayoutsApi,
 	PortfoliosApi,
 	PropertiesApi,
 	RolesApi,
@@ -55,6 +56,7 @@ export const api = ({
 		users: new UsersApi(config),
 		expenseCategories: new ExpenseCategoriesApi(config),
 		files: new FilesApi(config),
+		payouts: new PayoutsApi(config),
 	};
 };
 

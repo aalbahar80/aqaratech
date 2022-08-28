@@ -128,6 +128,17 @@ const expense = satisfies<EntityNames>()({
 	idField: null,
 });
 
+const payout = satisfies<EntityNames>()({
+	title: "payout",
+	urlName: "payouts",
+	caslName: "Payout",
+	singular: "payout",
+	singularCap: "Payout",
+	plural: "payouts",
+	pluralCap: "Payouts",
+	idField: null,
+});
+
 const maintenanceOrder = satisfies<EntityNames>()({
 	title: "maintenanceOrder",
 	urlName: "maintenanceOrders",
@@ -165,6 +176,7 @@ export const entitiesMap = satisfies<EntityMap>()({
 	property,
 	unit,
 	expense,
+	payout,
 	lease,
 	leaseInvoice,
 	maintenanceOrder,

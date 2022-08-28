@@ -6,7 +6,9 @@
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import type { PortfolioDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import { PresentationChartBar } from '@steeze-ui/heroicons';
+	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let portfolio: PortfolioDto;
@@ -14,6 +16,19 @@
 
 <Heading title="Portfolio" id={portfolio.id} entity="portfolio">
 	<div slot="menu-items">
+		<MenuItem as="div" let:active>
+			<a
+				href={create({
+					entity: 'payout',
+					predefined: new Map([[entitiesMap.portfolio.idField, portfolio.id]]),
+				})}
+			>
+				<MenuItemChild {active}>
+					<MenuItemIcon icon={Fa6SolidMoneyBillTransfer} />
+					Create payout
+				</MenuItemChild>
+			</a>
+		</MenuItem>
 		<MenuItem as="div" let:active>
 			<a
 				href={create({

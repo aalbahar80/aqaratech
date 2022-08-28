@@ -8,6 +8,7 @@ export const dbEntity = [
 	"lease",
 	"leaseInvoice",
 	"expense",
+	"payout",
 	"maintenanceOrder",
 ] as const;
 

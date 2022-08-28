@@ -38,6 +38,10 @@ export interface PredefinedInvoice {
 	portfolioId: string;
 }
 
+export interface PredefinedPayout {
+	portfolioId: SearchParam;
+}
+
 export interface PredefinedFile {
 	tenantId: SearchParam;
 	portfolioId: SearchParam;
