@@ -7,5 +7,6 @@ import { AggregateService } from './aggregate.service';
   controllers: [AggregateController],
   providers: [AggregateService],
   imports: [LeaseInvoicesModule],
+  exports: [AggregateService],
 })
 export class AggregateModule {}

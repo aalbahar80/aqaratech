@@ -11,14 +11,15 @@ export const load: PageLoad = async ({
 	const sParams = parseParams(searchParams);
 	const id = params.id;
 
-	const [portfolio, properties, roles, payouts] = await Promise.all([
+	const [portfolio, properties, roles, payouts, balance] = await Promise.all([
 		parentStuff.api!.portfolios.findOne({ id }),
 		parentStuff.api!.portfolios.findProperties({ id, ...sParams }),
 		// TODO handle pagination & default limit
 		parentStuff.api!.portfolios.findRoles({ id }),
 		// TODO handle pagination & default limit
 		parentStuff.api!.portfolios.findPayouts({ id }),
+		parentStuff.api!.portfolios.findBalance({ id }),
 	]);
 
-	return { portfolio, properties, roles, payouts };
+	return { portfolio, properties, roles, payouts, balance };
 };

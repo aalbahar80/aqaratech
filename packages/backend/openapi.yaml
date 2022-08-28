@@ -1272,6 +1272,24 @@ paths:
                         items:
                           $ref: '#/components/schemas/PayoutDto'
       tags: *ref_9
+  /portfolios/{id}/balance:
+    get:
+      operationId: findBalance
+      parameters:
+        - *ref_8
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: number
+      tags: *ref_9
   /properties:
     post:
       operationId: create
@@ -1815,392 +1833,11 @@ paths:
               schema:
                 type: string
       tags: *ref_15
-  /users/me:
-    get:
-      operationId: findProfile
-      parameters:
-        - name: x-role-id
-          in: header
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags:
-        - users
-  /expenses:
-    post:
-      operationId: create
-      parameters:
-        - &ref_16
-          name: x-role-id
-          in: header
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateExpenseDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PartialExpenseDto'
-      tags: &ref_17
-        - expenses
-    get:
-      operationId: findAll
-      parameters:
-        - *ref_16
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 1000
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedExpenseDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfExpenseDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_17
-  /expenses/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - *ref_16
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_17
-    patch:
-      operationId: update
-      parameters:
-        - *ref_16
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PartialExpenseDto'
-      tags: *ref_17
-    delete:
-      operationId: remove
-      parameters:
-        - *ref_16
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_17
-  /search:
-    post:
-      operationId: reindexAll
-      parameters:
-        - &ref_18
-          name: x-role-id
-          in: header
-          schema:
-            type: string
-      responses:
-        '201':
-          description: ''
-      tags: &ref_19
-        - search
-    delete:
-      operationId: remove
-      parameters:
-        - *ref_18
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-      tags: *ref_19
-  /organizations:
-    post:
-      operationId: create
-      parameters:
-        - &ref_20
-          name: x-role-id
-          in: header
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateOrganizationDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationCreatedDto'
-      tags: &ref_21
-        - organizations
-  /organizations/{id}:
-    get:
-      operationId: findOne
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_21
-    patch:
-      operationId: update
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateOrganizationDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_21
-    delete:
-      operationId: remove
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_21
-  /organizations/{id}/roles:
-    get:
-      operationId: findRoles
-      parameters:
-        - *ref_20
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 1000
-            default: 20
-            type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedRoleDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfRoleDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/RoleDto'
-      tags: *ref_21
-  /organizations/{id}/search:
-    get:
-      operationId: search
-      parameters:
-        - *ref_20
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: query
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SearchDto'
-      tags: *ref_21
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
       parameters:
-        - &ref_22
+        - &ref_16
           name: x-role-id
           in: header
           schema:
@@ -2279,13 +1916,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: &ref_23
+      tags: &ref_17
         - aggregate
   /aggregate/expensesByMonth:
     get:
       operationId: getExpensesByMonth
       parameters:
-        - *ref_22
+        - *ref_16
         - name: start
           required: false
           in: query
@@ -2320,12 +1957,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: *ref_23
+      tags: *ref_17
   /aggregate/occupancy:
     get:
       operationId: getOccupancy
       parameters:
-        - *ref_22
+        - *ref_16
         - name: start
           required: false
           in: query
@@ -2360,6 +1997,387 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Occupancy'
+      tags: *ref_17
+  /users/me:
+    get:
+      operationId: findProfile
+      parameters:
+        - name: x-role-id
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatedUserDto'
+        '404':
+          description: ''
+      tags:
+        - users
+  /expenses:
+    post:
+      operationId: create
+      parameters:
+        - &ref_18
+          name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialExpenseDto'
+      tags: &ref_19
+        - expenses
+    get:
+      operationId: findAll
+      parameters:
+        - *ref_18
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 1000
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedExpenseDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfExpenseDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ExpenseDto'
+      tags: *ref_19
+  /expenses/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - *ref_18
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+      tags: *ref_19
+    patch:
+      operationId: update
+      parameters:
+        - *ref_18
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialExpenseDto'
+      tags: *ref_19
+    delete:
+      operationId: remove
+      parameters:
+        - *ref_18
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_19
+  /search:
+    post:
+      operationId: reindexAll
+      parameters:
+        - &ref_20
+          name: x-role-id
+          in: header
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: &ref_21
+        - search
+    delete:
+      operationId: remove
+      parameters:
+        - *ref_20
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: *ref_21
+  /organizations:
+    post:
+      operationId: create
+      parameters:
+        - &ref_22
+          name: x-role-id
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCreatedDto'
+      tags: &ref_23
+        - organizations
+  /organizations/{id}:
+    get:
+      operationId: findOne
+      parameters:
+        - *ref_22
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_23
+    patch:
+      operationId: update
+      parameters:
+        - *ref_22
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_23
+    delete:
+      operationId: remove
+      parameters:
+        - *ref_22
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_23
+  /organizations/{id}/roles:
+    get:
+      operationId: findRoles
+      parameters:
+        - *ref_22
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: take
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 1000
+            default: 20
+            type: number
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/CombinedEnum'
+        - name: sortOrder
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/SortOrderEnum'
+        - name: filter
+          required: false
+          in: query
+          schema:
+            type: object
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_23
+  /organizations/{id}/search:
+    get:
+      operationId: search
+      parameters:
+        - *ref_22
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: query
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchDto'
       tags: *ref_23
   /expense-categories:
     post:
@@ -3840,6 +3858,26 @@ components:
         amount:
           type: number
           minimum: 1
+    ByMonthDto:
+      type: object
+      properties:
+        amount:
+          type: number
+        date:
+          type: string
+      required:
+        - amount
+        - date
+    Occupancy:
+      type: object
+      properties:
+        date:
+          type: number
+        occupiedPct:
+          type: number
+      required:
+        - date
+        - occupiedPct
     ValidatedUserDto:
       type: object
       properties:
@@ -4168,26 +4206,6 @@ components:
         - processingTimeMs
         - query
         - estimatedTotalHits
-    ByMonthDto:
-      type: object
-      properties:
-        amount:
-          type: number
-        date:
-          type: string
-      required:
-        - amount
-        - date
-    Occupancy:
-      type: object
-      properties:
-        date:
-          type: number
-        occupiedPct:
-          type: number
-      required:
-        - date
-        - occupiedPct
     CreateExpenseCategoryDto:
       type: object
       properties:

@@ -15,6 +15,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { AggregateService } from 'src/aggregate/aggregate.service';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -51,6 +52,7 @@ export class PortfoliosController {
     private readonly rolesService: RolesService,
     private readonly propertiesService: PropertiesService,
     private readonly payoutsService: PayoutsService,
+    private readonly aggregateService: AggregateService,
     private unitsService: UnitsService,
   ) {}
 
@@ -162,5 +164,16 @@ export class PortfoliosController {
   ): Promise<WithCount<PayoutDto>> {
     const where: Prisma.PayoutWhereInput = { portfolioId: { equals: id } };
     return this.payoutsService.findAll({ user, pageOptionsDto, where });
+  }
+
+  @Get(':id/balance')
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Payout' },
+    { action: Action.Read, subject: 'Expense' },
+    { action: Action.Read, subject: 'LeaseInvoice' },
+  )
+  findBalance(@User() user: IUser, @Param('id') id: string) {
+    return this.aggregateService.getBalance({ portfolioId: id, user });
   }
 }

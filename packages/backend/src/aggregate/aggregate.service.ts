@@ -1,3 +1,4 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
@@ -136,5 +137,55 @@ export class AggregateService {
     }
 
     return days;
+  }
+
+  async getBalance({
+    portfolioId,
+    user,
+  }: {
+    portfolioId: string;
+    user: IUser;
+  }) {
+    const portfolio = await this.prisma.portfolio.findUniqueOrThrow({
+      where: { id: portfolioId },
+      select: {
+        id: true,
+        organizationId: true,
+      },
+    });
+
+    ForbiddenError.from(user.ability).throwUnlessCan(
+      Action.Read,
+      subject('Portfolio', portfolio),
+    );
+
+    const leaseInvoices = await this.prisma.leaseInvoice.aggregate({
+      _sum: { amount: true },
+      where: {
+        portfolioId: portfolioId,
+        isPaid: true,
+      },
+    });
+    const leaseInvoiceSum = leaseInvoices._sum.amount || 0;
+
+    const expenses = await this.prisma.expense.aggregate({
+      _sum: { amount: true },
+      where: {
+        portfolioId: portfolioId,
+      },
+    });
+    const expenseSum = expenses._sum.amount || 0;
+
+    const payouts = await this.prisma.payout.aggregate({
+      _sum: { amount: true },
+      where: {
+        portfolioId: portfolioId,
+      },
+    });
+    const payoutSum = payouts._sum.amount || 0;
+
+    const balance = leaseInvoiceSum - expenseSum - payoutSum;
+    console.log({ balance }, 'aggregate.service.ts ~ 166');
+    return balance;
   }
 }
