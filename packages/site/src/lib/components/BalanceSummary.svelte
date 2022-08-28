@@ -12,53 +12,67 @@
 		</div>
 	</div>
 
-	<ul
-		class="flex flex-col divide-y divide-gray-200 odd:bg-green-50 even:bg-white"
-	>
+	<ul class="flex flex-col divide-y divide-gray-200 ">
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Lease Invoices</dt>
-				<dd>{kwdFormat(balance.leaseInvoices)}</dd>
+				<dd>{balance.leaseInvoices.toLocaleString()}</dd>
 			</a>
 		</li>
 
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Expenses</dt>
-				<dd>{kwdFormat(balance.expenses)}</dd>
+				<dd class="text-green-50">{balance.expenses.toLocaleString()}</dd>
 			</a>
 		</li>
 
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Payouts</dt>
-				<dd>{kwdFormat(balance.payouts)}</dd>
+				<dd>{balance.payouts.toLocaleString()}</dd>
 			</a>
 		</li>
 
-		<li class="balance-item">
-			<a href="#1">
+		<li class="total">
+			<div>
 				<dt>Total</dt>
 				<dd>{kwdFormat(balance.total)}</dd>
-			</a>
+			</div>
 		</li>
 	</ul>
 </section>
 
 <style lang="postcss">
-	.balance-item {
-		@apply justify-between p-4 hover:bg-gray-50;
-	}
-	.balance-item a {
-		@apply flex justify-between;
+	.balance-item,
+	.total {
+		@apply justify-between;
 	}
 
-	dt {
+	.balance-item {
+		@apply odd:bg-gray-50 even:bg-white;
+	}
+
+	.balance-item a,
+	.total div {
+		@apply flex justify-between p-4 sm:px-6;
+	}
+
+	a {
+		@apply hover:bg-gray-100;
+	}
+
+	.balance-item dt {
 		@apply text-sm font-medium text-gray-500;
 	}
 
-	dd {
-		@apply text-sm font-medium tabular-nums text-gray-900;
+	.total dt {
+		@apply font-semibold text-gray-500;
+	}
+
+	.balance-item dd,
+	.total dd {
+		@apply text-sm font-medium tabular-nums text-gray-500;
 	}
 
 	section {
