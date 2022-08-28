@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
 import { UnitsModule } from 'src/units/units.module';
@@ -9,6 +10,6 @@ import { PortfoliosService } from './portfolios.service';
   controllers: [PortfoliosController],
   providers: [PortfoliosService],
   exports: [PortfoliosService],
-  imports: [RolesModule, PropertiesModule, UnitsModule],
+  imports: [RolesModule, PropertiesModule, UnitsModule, PayoutsModule],
 })
 export class PortfoliosModule {}

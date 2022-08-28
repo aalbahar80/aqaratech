@@ -24,6 +24,8 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
+import { PayoutDto } from 'src/payouts/dto/payout.dto';
+import { PayoutsService } from 'src/payouts/payouts.service';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
@@ -48,6 +50,7 @@ export class PortfoliosController {
     private readonly portfoliosService: PortfoliosService,
     private readonly rolesService: RolesService,
     private readonly propertiesService: PropertiesService,
+    private readonly payoutsService: PayoutsService,
     private unitsService: UnitsService,
   ) {}
 
@@ -146,17 +149,18 @@ export class PortfoliosController {
     return this.unitsService.findAll({ user, pageOptionsDto, where });
   }
 
-  // @Get(':id/files')
-  // @CheckAbilities({ action: Action.Read, subject: SubjectType})
-  // @ApiPaginatedResponse(FileDto)
-  // findFiles(
-  //   @User() user: IUser,
-  //   @Query() pageOptionsDto: PageOptionsDto,
-  //   @Param('id') id: string,
-  // ): Promise<WithCount<FileDto>> {
-  //   const where: Prisma.FileWhereInput = {
-  //     property: { portfolioId: { equals: id } },
-  //   };
-  //   return this.filesService.findAll({ user, pageOptionsDto });
-  // }
+  @Get(':id/payouts')
+  @CheckAbilities(
+    { action: Action.Read, subject: SubjectType },
+    { action: Action.Read, subject: 'Payout' },
+  )
+  @ApiPaginatedResponse(PayoutDto)
+  findPayouts(
+    @User() user: IUser,
+    @Query() pageOptionsDto: PageOptionsDto,
+    @Param('id') id: string,
+  ): Promise<WithCount<PayoutDto>> {
+    const where: Prisma.PayoutWhereInput = { portfolioId: { equals: id } };
+    return this.payoutsService.findAll({ user, pageOptionsDto, where });
+  }
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
+	import PayoutList from '$lib/components/payout/PayoutList.svelte';
 	import PortfolioPage from '$lib/components/portfolio/PortfolioPage.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
@@ -24,4 +25,5 @@
 <PortfolioPage portfolio={data.portfolio} />
 <DetailsPane {details} />
 <PropertyList properties={data.properties} />
+<PayoutList payouts={data.payouts} />
 <MemberList roles={data.roles} />
