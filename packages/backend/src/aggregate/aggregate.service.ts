@@ -194,7 +194,6 @@ export class AggregateService {
       balance,
     };
 
-    console.log({ sum }, 'aggregate.service.ts ~ 166');
     return sum;
   }
 }
