@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BalanceSummary from '$lib/components/BalanceSummary.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
 	import PayoutList from '$lib/components/payout/PayoutList.svelte';
@@ -24,6 +25,7 @@
 
 <PortfolioPage portfolio={data.portfolio} />
 <DetailsPane {details} />
+<BalanceSummary balance={data.balance} />
 <PropertyList properties={data.properties} />
 <PayoutList payouts={data.payouts} />
 <MemberList roles={data.roles} />
