@@ -8,7 +8,7 @@
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 
 	// Needs to be reactive?
-	const navigation = $page.data.user?.role?.meta.navLinks || [];
+	$: navigation = $page.data.user?.role?.meta.navLinks || [];
 </script>
 
 <div class="bg-gray-900 py-1.5 print:hidden">
