@@ -16,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { AggregateService } from 'src/aggregate/aggregate.service';
+import { BalanceDto } from 'src/aggregate/dto/balance.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -173,7 +174,11 @@ export class PortfoliosController {
     { action: Action.Read, subject: 'Expense' },
     { action: Action.Read, subject: 'LeaseInvoice' },
   )
-  getBalance(@User() user: IUser, @Param('id') id: string) {
+  @ApiOkResponse({ type: BalanceDto })
+  getBalance(
+    @User() user: IUser,
+    @Param('id') id: string,
+  ): Promise<BalanceDto> {
     return this.aggregateService.getBalance({ portfolioId: id, user });
   }
 }

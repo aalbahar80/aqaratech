@@ -185,13 +185,13 @@ export class AggregateService {
     const expenseSum = expenses._sum.amount || 0;
     const payoutSum = payouts._sum.amount || 0;
 
-    const balance = leaseInvoiceSum - expenseSum - payoutSum;
+    const total = leaseInvoiceSum - expenseSum - payoutSum;
 
     const sum = {
       leaseInvoices: leaseInvoiceSum,
       expenses: expenseSum,
       payouts: payoutSum,
-      balance,
+      total,
     };
 
     return sum;

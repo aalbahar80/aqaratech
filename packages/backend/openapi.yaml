@@ -1285,6 +1285,10 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceDto'
       tags: *ref_9
   /properties:
     post:
@@ -3596,6 +3600,22 @@ components:
         - organizationId
         - portfolioId
         - amount
+    BalanceDto:
+      type: object
+      properties:
+        expenses:
+          type: number
+        leaseInvoices:
+          type: number
+        payouts:
+          type: number
+        total:
+          type: number
+      required:
+        - expenses
+        - leaseInvoices
+        - payouts
+        - total
     CreatePropertyDto:
       type: object
       properties:
