@@ -173,7 +173,7 @@ export class PortfoliosController {
     { action: Action.Read, subject: 'Expense' },
     { action: Action.Read, subject: 'LeaseInvoice' },
   )
-  findBalance(@User() user: IUser, @Param('id') id: string) {
+  getBalance(@User() user: IUser, @Param('id') id: string) {
     return this.aggregateService.getBalance({ portfolioId: id, user });
   }
 }

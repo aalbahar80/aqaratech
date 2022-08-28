@@ -1274,7 +1274,7 @@ paths:
       tags: *ref_9
   /portfolios/{id}/balance:
     get:
-      operationId: findBalance
+      operationId: getBalance
       parameters:
         - *ref_8
         - name: id
@@ -1285,10 +1285,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: number
       tags: *ref_9
   /properties:
     post:

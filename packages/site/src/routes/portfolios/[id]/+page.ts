@@ -18,7 +18,7 @@ export const load: PageLoad = async ({
 		parentStuff.api!.portfolios.findRoles({ id }),
 		// TODO handle pagination & default limit
 		parentStuff.api!.portfolios.findPayouts({ id }),
-		parentStuff.api!.portfolios.findBalance({ id }),
+		parentStuff.api!.portfolios.getBalance({ id }),
 	]);
 
 	return { portfolio, properties, roles, payouts, balance };
