@@ -12,6 +12,7 @@
 	title="Payout"
 	id={payout.id}
 	entity="payout"
+	disallowEdit
 	onDelete={async () => {
 		await goto(`/${entitiesMap.portfolio.urlName}/${payout.portfolioId}`);
 	}}
