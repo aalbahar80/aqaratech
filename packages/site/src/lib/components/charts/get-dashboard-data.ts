@@ -43,8 +43,11 @@ export const getDashboardData = async ({
 	const requests = [
 		api.aggregate.getIncomeByMonth(filter),
 		api.aggregate.getExpensesByMonth(filter),
+
+		// Alternative: use stores to avoid refetching everything while paginating
 		api.leaseInvoices.findAll(filter),
 		api.expenses.findAll(filter), // TODO filter serverside
+
 		api.aggregate.getIncomeByMonth({
 			...filter,
 			paidStatus: 'paid',
