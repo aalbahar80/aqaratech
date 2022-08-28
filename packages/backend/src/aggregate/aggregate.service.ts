@@ -159,33 +159,42 @@ export class AggregateService {
       subject('Portfolio', portfolio),
     );
 
-    const leaseInvoices = await this.prisma.leaseInvoice.aggregate({
-      _sum: { amount: true },
-      where: {
-        portfolioId: portfolioId,
-        isPaid: true,
-      },
-    });
+    const [leaseInvoices, expenses, payouts] = await Promise.all([
+      this.prisma.leaseInvoice.aggregate({
+        _sum: { amount: true },
+        where: {
+          portfolioId: portfolioId,
+          isPaid: true,
+        },
+      }),
+      this.prisma.expense.aggregate({
+        _sum: { amount: true },
+        where: {
+          portfolioId: portfolioId,
+        },
+      }),
+      this.prisma.payout.aggregate({
+        _sum: { amount: true },
+        where: {
+          portfolioId: portfolioId,
+        },
+      }),
+    ]);
+
     const leaseInvoiceSum = leaseInvoices._sum.amount || 0;
-
-    const expenses = await this.prisma.expense.aggregate({
-      _sum: { amount: true },
-      where: {
-        portfolioId: portfolioId,
-      },
-    });
     const expenseSum = expenses._sum.amount || 0;
-
-    const payouts = await this.prisma.payout.aggregate({
-      _sum: { amount: true },
-      where: {
-        portfolioId: portfolioId,
-      },
-    });
     const payoutSum = payouts._sum.amount || 0;
 
     const balance = leaseInvoiceSum - expenseSum - payoutSum;
-    console.log({ balance }, 'aggregate.service.ts ~ 166');
-    return balance;
+
+    const sum = {
+      leaseInvoices: leaseInvoiceSum,
+      expenses: expenseSum,
+      payouts: payoutSum,
+      balance,
+    };
+
+    console.log({ sum }, 'aggregate.service.ts ~ 166');
+    return sum;
   }
 }
