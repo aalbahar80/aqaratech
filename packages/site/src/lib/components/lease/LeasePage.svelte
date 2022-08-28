@@ -38,8 +38,8 @@
 			href={(function () {
 				const base = create({ entity: 'lease' });
 				const searchParams = new URLSearchParams({
-					portfolioId: lease.breadcrumbs.portfolio.id,
 					tenantId: lease.breadcrumbs.tenant.id,
+					portfolioId: lease.breadcrumbs.portfolio.id,
 					propertyId: lease.breadcrumbs.property.id,
 					unitId: lease.breadcrumbs.unit.id,
 				});

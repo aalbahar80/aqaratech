@@ -31,3 +31,12 @@ test("unitType is preselected", async ({ page }) => {
 	const el = page.locator("#type");
 	await expect(el).toHaveValue(unit.type);
 });
+
+test("create unit button has predefined params", async ({ page }) => {
+	await page.goto(`/${entitiesMap.property.urlName}/${property.id}`);
+	const el = page.locator("text=Create new unit");
+	await expect(el).toHaveAttribute(
+		"href",
+		`/${entitiesMap.unit.urlName}/new?portfolioId=${portfolio.id}&propertyId=${property.id}`
+	);
+});

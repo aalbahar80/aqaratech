@@ -16,7 +16,10 @@
 		entity: 'unit',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
-			new Map([['propertyId', $page.url.pathname.split('/').pop()]]),
+			new Map([
+				['portfolioId', units.results[0]?.breadcrumbs.portfolio.id],
+				['propertyId', $page.url.pathname.split('/').pop()],
+			]),
 	})}
 >
 	{#each units.results as unit (unit.id)}
