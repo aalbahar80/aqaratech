@@ -7,18 +7,18 @@
 	import type { PaginatedUnitDto } from '@self/sdk';
 
 	export let units: PaginatedUnitDto;
+</script>
 
-	const formUrl = create({
+<StackedList
+	entity="unit"
+	count={units.results.length}
+	formUrl={create({
 		entity: 'unit',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
-			new Map<string, any>([
-				['propertyId', $page.url.pathname.split('/').pop()],
-			]),
-	});
-</script>
-
-<StackedList entity="unit" count={units.results.length} {formUrl}>
+			new Map([['propertyId', $page.url.pathname.split('/').pop()]]),
+	})}
+>
 	{#each units.results as unit (unit.id)}
 		<li>
 			<UnitCard {unit} />

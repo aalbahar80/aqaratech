@@ -7,18 +7,18 @@
 	import type { PaginatedPayoutDto } from '@self/sdk';
 
 	export let payouts: PaginatedPayoutDto;
+</script>
 
-	const formUrl = create({
+<StackedList
+	entity="payout"
+	count={payouts.results.length}
+	formUrl={create({
 		entity: 'payout',
 		predefined:
 			$page.url.pathname.startsWith('/portfolios') &&
-			new Map<string, any>([
-				['portfolioId', $page.url.pathname.split('/').pop()],
-			]),
-	});
-</script>
-
-<StackedList entity="payout" count={payouts.results.length} {formUrl}>
+			new Map([['portfolioId', $page.url.pathname.split('/').pop()]]),
+	})}
+>
 	{#each payouts.results as payout, idx (payout.id)}
 		<li>
 			<PayoutCard {payout} {idx} />

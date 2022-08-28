@@ -12,9 +12,8 @@
 
 	export let roles: PaginatedRoleDto;
 
-	// TODO needs to be reactive? test with search
-	const route = inferRoute($page.url.pathname);
-	const formUrl = create({
+	$: route = inferRoute($page.url.pathname);
+	$: formUrl = create({
 		entity: 'role',
 		predefined: new Map<string, any>([
 			['entity', route.entity.title],

@@ -7,18 +7,18 @@
 	import type { PaginatedPortfolioDto } from '@self/sdk';
 
 	export let portfolios: PaginatedPortfolioDto;
+</script>
 
-	const formUrl = create({
+<StackedList
+	entity="portfolio"
+	count={portfolios.results.length}
+	formUrl={create({
 		entity: 'portfolio',
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
-			new Map<string, any>([
-				['propertyId', $page.url.pathname.split('/').pop()],
-			]),
-	});
-</script>
-
-<StackedList entity="portfolio" count={portfolios.results.length} {formUrl}>
+			new Map([['propertyId', $page.url.pathname.split('/').pop()]]),
+	})}
+>
 	{#each portfolios.results as portfolio (portfolio.id)}
 		<li>
 			<PortfolioCard {portfolio} />
