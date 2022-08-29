@@ -102,8 +102,8 @@
 	};
 
 	let pagination: PaginationState = {
-		pageIndex: 1,
-		pageSize: 20,
+		pageIndex: data.expenses.pagination.page - 1,
+		pageSize: data.expenses.pagination.pageSize,
 	};
 
 	const setPagination: OnChangeFn<PaginationState> = async (updater) => {
