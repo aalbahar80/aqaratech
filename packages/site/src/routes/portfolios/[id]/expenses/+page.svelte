@@ -100,7 +100,7 @@
 
 	let pagination: PaginationState = {
 		pageIndex: 1,
-		pageSize: 10,
+		pageSize: 20,
 	};
 
 	const setPagination: OnChangeFn<PaginationState> = async (updater) => {
@@ -204,7 +204,7 @@
 			{/each}
 		</thead>
 		<tbody>
-			{#each $table.getRowModel().rows.slice(0, 10) as row}
+			{#each $table.getRowModel().rows as row}
 				<tr>
 					{#each row.getVisibleCells() as cell}
 						<td>
