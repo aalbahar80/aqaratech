@@ -13,8 +13,7 @@
 	$: pageSize = table.getState().pagination.pageSize;
 
 	$: idxStart = pageIdx * pageSize + 1;
-	$: idxEnd =
-		pageIdx === table.getPageCount() ? itemCount : idxStart + pageSize;
+	$: idxEnd = idxStart + table.getRowModel().rows.length - 1;
 </script>
 
 <div
