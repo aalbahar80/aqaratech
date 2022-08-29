@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import type { BalanceDto } from '@self/sdk';
 
@@ -16,28 +17,37 @@
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Lease Invoices</dt>
-				<dd>{balance.leaseInvoices.toLocaleString()}</dd>
+				<dd class="text-green-600">{balance.leaseInvoices.toLocaleString()}</dd>
 			</a>
 		</li>
 
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Expenses</dt>
-				<dd class="text-green-50">{balance.expenses.toLocaleString()}</dd>
+				<dd class="text-red-600">{balance.expenses.toLocaleString()}</dd>
 			</a>
 		</li>
 
 		<li class="balance-item">
 			<a href="#1">
 				<dt>Payouts</dt>
-				<dd>{balance.payouts.toLocaleString()}</dd>
+				<dd class="text-gray-500">{balance.payouts.toLocaleString()}</dd>
 			</a>
 		</li>
 
 		<li class="total">
 			<div>
-				<dt>Total</dt>
-				<dd>{kwdFormat(balance.total)}</dd>
+				<dt>
+					Balance
+					<span class="inline-block">
+						<Tooltip text="Invoices - Expenses - Payouts = Balance" />
+					</span>
+				</dt>
+				<div>
+					<dd>
+						{kwdFormat(balance.total)}
+					</dd>
+				</div>
 			</div>
 		</li>
 	</ul>
@@ -72,7 +82,7 @@
 
 	.balance-item dd,
 	.total dd {
-		@apply text-sm font-medium tabular-nums text-gray-500;
+		@apply text-sm font-medium tabular-nums;
 	}
 
 	section {
