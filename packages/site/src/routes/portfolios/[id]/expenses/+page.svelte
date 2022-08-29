@@ -6,6 +6,8 @@
 		getCoreRowModel,
 		getSortedRowModel,
 		type ColumnDef,
+		type OnChangeFn,
+		type SortingState,
 		type TableOptions,
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
@@ -23,6 +25,9 @@
 		{
 			header: 'Amount',
 			accessorKey: 'amount',
+			cell: (info) => {
+				return info.getValue<ExpenseDto['amount']>().toLocaleString();
+			},
 			footer: (props) => props.column.id,
 		},
 		{
@@ -31,14 +36,14 @@
 				{
 					accessorFn: (row) => row.breadcrumbs.property?.label || '',
 					id: 'property',
-					cell: (info) => info.getValue(),
+					// cell: (info) => info.getValue(),
 					header: () => 'Property',
 					footer: (props) => props.column.id,
 				},
 				{
 					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
 					id: 'unit',
-					cell: (info) => info.getValue(),
+					// cell: (info) => info.getValue(),
 					header: () => 'Unit',
 					footer: (props) => props.column.id,
 				},
@@ -46,11 +51,9 @@
 		},
 	];
 
-	// const data = makeData(100_000);
+	let sorting: SortingState = [];
 
-	let sorting = [];
-
-	const setSorting = (updater) => {
+	const setSorting: OnChangeFn<SortingState> = (updater) => {
 		if (updater instanceof Function) {
 			sorting = updater(sorting);
 		} else {
@@ -77,6 +80,7 @@
 		debugTable: true,
 	});
 
+	// const data = makeData(100_000);
 	const refreshData = () => {
 		console.info('refresh');
 		options.update((prev) => ({
