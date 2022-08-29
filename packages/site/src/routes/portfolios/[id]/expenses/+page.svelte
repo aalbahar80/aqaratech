@@ -14,7 +14,6 @@
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
 	import type { PageData } from './$types';
-	import TableExample from './TableExample.svelte';
 
 	export let data: PageData;
 
@@ -103,12 +102,10 @@
 		debugTable: true,
 	});
 
-	// const data = makeData(100_000);
 	const refreshData = () => {
 		console.info('refresh');
 		options.update((prev) => ({
 			...prev,
-			// data: makeData(100_000),
 			data: data.expenses.results,
 		}));
 	};
@@ -195,8 +192,6 @@
 	</div>
 	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
 </div>
-
-<TableExample />
 
 <style>
 	table {
