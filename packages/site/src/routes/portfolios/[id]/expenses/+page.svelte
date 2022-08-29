@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ExpenseDto } from '@self/sdk';
 	import {
 		createSvelteTable,
 		flexRender,
@@ -8,64 +9,44 @@
 		type TableOptions,
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
-	import { makeData, type Person } from './makeData';
+	import type { PageData } from './$types';
+	import TableExample from './TableExample.svelte';
 
-	// import type { PageData } from './$types';
-	// export let data: PageData;
+	export let data: PageData;
 
-	const columns: ColumnDef<Person>[] = [
+	const columns: ColumnDef<ExpenseDto>[] = [
 		{
-			header: 'Name',
+			header: 'Date',
+			accessorKey: 'postAt',
 			footer: (props) => props.column.id,
-			columns: [
-				{
-					accessorKey: 'firstName',
-					cell: (info) => info.getValue(),
-					footer: (props) => props.column.id,
-				},
-				{
-					accessorFn: (row) => row.lastName,
-					id: 'lastName',
-					cell: (info) => info.getValue(),
-					header: () => 'Last Name',
-					footer: (props) => props.column.id,
-				},
-			],
 		},
 		{
-			header: 'Info',
+			header: 'Amount',
+			accessorKey: 'amount',
 			footer: (props) => props.column.id,
+		},
+		{
+			header: 'Location',
 			columns: [
 				{
-					accessorKey: 'age',
-					header: () => 'Age',
+					accessorFn: (row) => row.breadcrumbs.property?.label || '',
+					id: 'property',
+					cell: (info) => info.getValue(),
+					header: () => 'Property',
 					footer: (props) => props.column.id,
 				},
 				{
-					header: 'More Info',
-					columns: [
-						{
-							accessorKey: 'visits',
-							header: () => 'Visits',
-							footer: (props) => props.column.id,
-						},
-						{
-							accessorKey: 'status',
-							header: 'Status',
-							footer: (props) => props.column.id,
-						},
-						{
-							accessorKey: 'progress',
-							header: 'Profile Progress',
-							footer: (props) => props.column.id,
-						},
-					],
+					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
+					id: 'unit',
+					cell: (info) => info.getValue(),
+					header: () => 'Unit',
+					footer: (props) => props.column.id,
 				},
 			],
 		},
 	];
 
-	const data = makeData(100_000);
+	// const data = makeData(100_000);
 
 	let sorting = [];
 
@@ -84,8 +65,8 @@
 		}));
 	};
 
-	const options = writable<TableOptions<Person>>({
-		data,
+	const options = writable<TableOptions<ExpenseDto>>({
+		data: data.expenses.results,
 		columns,
 		state: {
 			sorting,
@@ -100,14 +81,15 @@
 		console.info('refresh');
 		options.update((prev) => ({
 			...prev,
-			data: makeData(100_000),
+			// data: makeData(100_000),
+			data: data.expenses.results,
 		}));
 	};
 
 	const rerender = () => {
 		options.update((options) => ({
 			...options,
-			data,
+			data: data.expenses.results,
 		}));
 	};
 
@@ -186,6 +168,8 @@
 	</div>
 	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
 </div>
+
+<TableExample />
 
 <style>
 	table {
