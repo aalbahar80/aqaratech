@@ -8,8 +8,7 @@
       "outputs": [
         ".svelte-kit/**",
         "dist/**",
-        "build/**",
-        ".vercel_build_output/**"
+        "build/**"
       ]
     },
     "test": {
@@ -26,7 +25,10 @@
       "outputs": []
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "dependsOn": [
+        "^build"
+      ]
     },
     "preview": {
       "dependsOn": [
@@ -37,7 +39,6 @@
   "globalDependencies": [
     "**/.env",
     "**/.env.*",
-    ".env",
-    ".env.test"
+    ".env"
   ]
 }

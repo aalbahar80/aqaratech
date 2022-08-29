@@ -2,13 +2,13 @@
   "name": "aqtech",
   "version": "1.0.0",
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run --filter \\!@self/docs build",
     "preview": "turbo run preview",
     "build:site": "turbo run build --filter=@self/site",
     "build:docs": "turbo run build --filter=@self/docs",
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
     "test": "turbo run test --",
-    "dev": "turbo run dev",
+    "dev": "turbo run --filter \\!@self/docs dev",
     "lint": "turbo run lint"
   },
   "devDependencies": {
