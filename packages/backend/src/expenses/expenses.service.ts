@@ -50,7 +50,7 @@ export class ExpensesService {
     pageOptionsDto: ExpensePageOptionsDto;
     user: IUser;
   }): Promise<WithCount<ExpenseDto>> {
-    const { page, take, start, end } = pageOptionsDto;
+    const { page, take, start, end, sortOrder, orderBy } = pageOptionsDto;
 
     // TODO use this instead:
     // const organizationId = user.role.organizationId;
@@ -66,11 +66,15 @@ export class ExpensesService {
       ],
     };
 
+    const sort = orderBy
+      ? { [orderBy]: sortOrder }
+      : { postAt: 'desc' as Prisma.SortOrder };
+
     const [data, total, settings] = await Promise.all([
       this.prisma.expense.findMany({
         take,
         skip: (page - 1) * take,
-        orderBy: { postAt: 'desc' },
+        orderBy: sort,
         where: filter,
         include: {
           portfolio: crumbs.portfolio,

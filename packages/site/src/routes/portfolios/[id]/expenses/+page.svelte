@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
 		createSvelteTable,
@@ -53,7 +55,7 @@
 
 	let sorting: SortingState = [];
 
-	const setSorting: OnChangeFn<SortingState> = (updater) => {
+	const setSorting: OnChangeFn<SortingState> = async (updater) => {
 		if (updater instanceof Function) {
 			sorting = updater(sorting);
 		} else {
@@ -66,6 +68,25 @@
 				sorting,
 			},
 		}));
+
+		const url = new URL($page.url);
+		const key = sorting[0]?.id;
+		const desc = sorting[0]?.desc;
+
+		key
+			? url.searchParams.set('orderBy', key)
+			: url.searchParams.delete('orderBy');
+
+		if (desc === undefined) {
+			url.searchParams.delete('sortOrder');
+		} else if (desc === true) {
+			url.searchParams.set('sortOrder', 'desc');
+		} else if (desc === false) {
+			url.searchParams.set('sortOrder', 'asc');
+		}
+
+		await goto(url);
+		refreshData();
 	};
 
 	const options = writable<TableOptions<ExpenseDto>>({
@@ -74,6 +95,7 @@
 		state: {
 			sorting,
 		},
+		manualSorting: true,
 		onSortingChange: setSorting,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
