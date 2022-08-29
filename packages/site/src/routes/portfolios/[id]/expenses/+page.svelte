@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { dev } from '$app/env';
+
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { DEFAULT_PAGINATION_KEY } from '$lib/constants/pagination-keys';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
 		createSvelteTable,
@@ -9,6 +12,7 @@
 		getSortedRowModel,
 		type ColumnDef,
 		type OnChangeFn,
+		type PaginationState,
 		type SortingState,
 		type TableOptions,
 	} from '@tanstack/svelte-table';
@@ -56,11 +60,13 @@
 	let sorting: SortingState = [];
 
 	const setSorting: OnChangeFn<SortingState> = async (updater) => {
+		// what is this doing?
 		if (updater instanceof Function) {
 			sorting = updater(sorting);
 		} else {
 			sorting = updater;
 		}
+
 		options.update((old) => ({
 			...old,
 			state: {
@@ -89,17 +95,59 @@
 		refreshData();
 	};
 
+	let pagination: PaginationState = {
+		pageIndex: 1,
+		pageSize: 10,
+	};
+
+	const setPagination: OnChangeFn<PaginationState> = async (updater) => {
+		// what is this doing?
+		if (updater instanceof Function) {
+			pagination = updater(pagination);
+		} else {
+			pagination = updater;
+		}
+
+		options.update((old) => ({
+			...old,
+			state: {
+				...old.state,
+				pagination,
+			},
+		}));
+
+		const url = new URL($page.url);
+
+		url.searchParams.set(
+			DEFAULT_PAGINATION_KEY,
+			pagination.pageIndex.toString(),
+		);
+
+		url.searchParams.set('take', pagination.pageSize.toString());
+
+		await goto(url);
+
+		refreshData();
+	};
+
 	const options = writable<TableOptions<ExpenseDto>>({
 		data: data.expenses.results,
 		columns,
-		state: {
-			sorting,
-		},
+
+		manualPagination: true,
+		pageCount: data.expenses.pagination.pageCount,
+		onPaginationChange: setPagination,
+
 		manualSorting: true,
 		onSortingChange: setSorting,
+		state: {
+			sorting,
+			pagination,
+		},
+
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
-		debugTable: true,
+		debugTable: dev,
 	});
 
 	const refreshData = () => {
@@ -184,6 +232,9 @@
 		</tfoot>
 	</table>
 	<div>{$table.getRowModel().rows.length} Rows</div>
+
+	<!-- <div>{$table.getPaginationRowModel()} Rows</div>
+	<pre>{JSON.stringify($table.getPageOptions(), null, 2)}</pre> -->
 	<div>
 		<button on:click={() => rerender()}>Force Rerender</button>
 	</div>
@@ -191,6 +242,11 @@
 		<button on:click={() => refreshData()}>Refresh Data</button>
 	</div>
 	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
+	<pre>{JSON.stringify($table.getState().pagination, null, 2)}</pre>
+	<div>
+		<button on:click={() => $table.previousPage()}>prev page</button>
+		<button on:click={() => $table.nextPage()}>next page</button>
+	</div>
 </div>
 
 <style>
