@@ -23,6 +23,7 @@
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
 	import type { PageData } from './$types';
+	import TSPagination from './TSPagination.svelte';
 
 	export let data: PageData;
 
@@ -238,6 +239,8 @@
 		</tfoot>
 	</table>
 	<div>{$table.getRowModel().rows.length} Rows</div>
+	<!-- bind table? -->
+	<TSPagination table={$table} itemCount={data.expenses.pagination.itemCount} />
 
 	<!-- <div>{$table.getPaginationRowModel()} Rows</div>
 	<pre>{JSON.stringify($table.getPageOptions(), null, 2)}</pre> -->
@@ -246,23 +249,6 @@
 	</div>
 	<div>
 		<button on:click={() => refreshData()}>Refresh Data</button>
-	</div>
-	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
-	<pre>{JSON.stringify($table.getState().pagination, null, 2)}</pre>
-	<div>
-		<button
-			on:click={() => $table.previousPage()}
-			disabled={!$table.getCanPreviousPage()}>prev page</button
-		>
-		<!-- <button on:click={() => $table.previousPage()}>prev page</button> -->
-		{$table.getCanPreviousPage()}
-		{$table.getCanNextPage()}
-		{data.expenses.pagination.pageCount}
-		<button on:click={() => $table.nextPage()}>next page</button>
-	</div>
-	<div>
-		<button on:click={() => $table.setPageSize(10)}>10</button>
-		<button on:click={() => $table.setPageSize(15)}>25</button>
 	</div>
 </div>
 
