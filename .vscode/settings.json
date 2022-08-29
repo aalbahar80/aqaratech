@@ -1,8 +1,5 @@
 {
 	"css.validate": false,
-	"files.exclude": {
-		// "**/node_modules/": true
-	},
 	"search.exclude": {
 		"**/node_modules": true,
 		"**/bower_components": true,
@@ -22,21 +19,12 @@
 	"editor.fontSize": 16,
 	"editor.suggest.snippetsPreventQuickSuggestions": false, // forces tailwind to take a chill pill
 	"editor.quickSuggestions": {
-		// "other": false, // forces tailwind to take a chill pill
 		"comments": false,
 		"strings": false
 	},
 	"editor.suggest.preview": true,
 	"svelte.plugin.svelte.useNewTransformation": true,
-	// "svelte.plugin.svelte.enable": false,
-	// "eslint.enable": false,
 	"html.autoClosingTags": false,
-	"explorer.experimental.fileNesting.enabled": true,
-	"explorer.experimental.fileNesting.patterns": {
-		"*.ts": "$(capture).test.ts",
-		"package.json": "yarn.lock"
-	},
-	"vim.foldfix": true,
 	"tailwindCSS.files.exclude": [
 		"**/.git/**",
 		"**/node_modules/**",
@@ -46,24 +34,8 @@
 		"package.json"
 	],
 	"js/ts.implicitProjectConfig.strictNullChecks": true,
-	"path-intellisense.ignoreTsConfigBaseUrl": true,
-	// "typescript.inlayHints.parameterTypes.enabled": true,
-	// "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
-	// "typescript.inlayHints.variableTypes.enabled": true,
 	"typescript.preferences.importModuleSpecifier": "non-relative",
-	// BELOW DEBUG SLOW PERFORMANCE
-	// "svelte.trace.server": "verbose",
 	"editor.formatOnType": false,
-	// formatOnSave causes issues with cpu load?
-	// "editor.formatOnSave": false,
-	// "eslint.run": "onSave",
 	"svelte.enable-ts-plugin": true,
 	"editor.formatOnSave": true
-	// "svelte.plugin.svelte.codeActions.enable": false,
-	// "svelte.plugin.svelte.format.enable": false,
-	// "svelte.plugin.typescript.semanticTokens.enable": false,
-	// The setting svelte.plugin.typescript.diagnostics.enable" causes HIGH CPU LOAD,
-	// "svelte.plugin.typescript.diagnostics.enable": false,
-	// "svelte.plugin.typescript.codeActions.enable": false,
-	// "svelte.plugin.svelte.diagnostics.enable": false
 }
