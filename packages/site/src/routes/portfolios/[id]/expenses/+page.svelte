@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import {
 		DEFAULT_PAGINATION_KEY,
+		ORDER_BY,
 		PAGE_SIZE,
 		SORT_ORDER,
 	} from '$lib/constants/pagination-keys';
@@ -84,8 +85,8 @@
 		const desc = sorting[0]?.desc;
 
 		key
-			? url.searchParams.set('orderBy', key)
-			: url.searchParams.delete('orderBy');
+			? url.searchParams.set(ORDER_BY, key)
+			: url.searchParams.delete(ORDER_BY);
 
 		if (desc === undefined) {
 			url.searchParams.delete(SORT_ORDER);

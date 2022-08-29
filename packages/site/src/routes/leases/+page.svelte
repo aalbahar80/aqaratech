@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import { SORT_ORDER } from '$lib/constants/pagination-keys';
+	import { ORDER_BY, SORT_ORDER } from '$lib/constants/pagination-keys';
 	import { create } from '$lib/utils/route-helpers';
 	import { getQuery, type UrlQuery } from '$lib/utils/set-query';
 	import type { PageData } from './$types';
@@ -22,30 +22,30 @@
 			{
 				label: 'Default',
 				value: Sort.Default,
-				action: () => setQuery({ title: 'orderBy', value: null }),
-				active: null === $page.url.searchParams.get('orderBy'),
+				action: () => setQuery({ title: ORDER_BY, value: null }),
+				active: null === $page.url.searchParams.get(ORDER_BY),
 			},
 			{
 				label: 'Created',
 				value: Sort.Created,
-				action: () => setQuery({ title: 'orderBy', value: Sort.Created }),
-				active: Sort.Created === $page.url.searchParams.get('orderBy'),
+				action: () => setQuery({ title: ORDER_BY, value: Sort.Created }),
+				active: Sort.Created === $page.url.searchParams.get(ORDER_BY),
 			},
 			{
 				label: 'Modified',
 				value: Sort.Modified,
-				action: () => setQuery({ title: 'orderBy', value: Sort.Modified }),
-				active: Sort.Modified === $page.url.searchParams.get('orderBy'),
+				action: () => setQuery({ title: ORDER_BY, value: Sort.Modified }),
+				active: Sort.Modified === $page.url.searchParams.get(ORDER_BY),
 			},
 			{
 				label: 'Expiration',
 				value: Sort.Expiration,
 				action: () =>
 					setQuery(
-						{ title: 'orderBy', value: Sort.Expiration },
+						{ title: ORDER_BY, value: Sort.Expiration },
 						{ title: SORT_ORDER, value: 'asc' },
 					),
-				active: Sort.Expiration === $page.url.searchParams.get('orderBy'),
+				active: Sort.Expiration === $page.url.searchParams.get(ORDER_BY),
 			},
 		],
 	};
