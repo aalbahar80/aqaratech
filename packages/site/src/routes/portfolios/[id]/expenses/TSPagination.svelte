@@ -60,7 +60,7 @@
 				</button>
 				{#each getButtons(pageIdx, table.getPageCount()) as button}
 					{#if button}
-						{@const current = button === pageIdx}
+						{@const current = button === pageIdx + 1}
 						<button
 							aria-current={current ? 'page' : null}
 							class={classes(
@@ -69,7 +69,7 @@
 									: 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
 								'relative inline-flex items-center px-4 py-2 border text-sm font-medium',
 							)}
-							on:click={() => table.setPageIndex(button)}
+							on:click={() => table.setPageIndex(button - 1)}
 						>
 							{button}
 						</button>

@@ -134,6 +134,12 @@
 
 		await goto(url);
 
+		// update fresh pagecount from server
+		options.update((old) => ({
+			...old,
+			pageCount: data.expenses.pagination.pageCount,
+		}));
+
 		refreshData();
 	};
 
@@ -249,6 +255,15 @@
 	</div>
 	<div>
 		<button on:click={() => refreshData()}>Refresh Data</button>
+	</div>
+
+	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
+	<pre>{JSON.stringify($table.getState().pagination, null, 2)}</pre>
+	<pre>{JSON.stringify($table.getPageCount(), null, 2)}</pre>
+
+	<div>
+		<button on:click={() => $table.setPageSize(10)}>10</button>
+		<button on:click={() => $table.setPageSize(15)}>25</button>
 	</div>
 </div>
 
