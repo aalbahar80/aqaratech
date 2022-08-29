@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import type { BalanceDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 
 	export let balance: BalanceDto;
 </script>
@@ -14,7 +16,9 @@
 	</div>
 
 	<ul class="flex flex-col divide-y divide-gray-200 ">
-		<BalanceLineItem>
+		<BalanceLineItem
+			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.leaseInvoice.urlName}`}
+		>
 			<div slot="label">Lease Invoices</div>
 			<div slot="definition">
 				<span class="text-green-600">
@@ -23,14 +27,18 @@
 			</div>
 		</BalanceLineItem>
 
-		<BalanceLineItem>
+		<BalanceLineItem
+			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.expense.urlName}`}
+		>
 			<div slot="label">Expenses</div>
 			<div slot="definition">
 				<span class="text-red-600">{balance.expenses.toLocaleString()}</span>
 			</div>
 		</BalanceLineItem>
 
-		<BalanceLineItem>
+		<BalanceLineItem
+			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.payout.urlName}`}
+		>
 			<div slot="label">Payouts</div>
 			<div slot="definition">
 				{balance.payouts.toLocaleString()}

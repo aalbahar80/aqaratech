@@ -1,6 +1,10 @@
+<script lang="ts">
+	export let href: string | undefined = undefined;
+</script>
+
 <li class="justify-between odd:bg-gray-50 even:bg-white">
 	<a
-		href="#1"
+		{href}
 		class="flex items-center justify-between p-4 text-gray-500 hover:bg-gray-100 sm:px-6"
 	>
 		<dt class="text-sm font-medium">
