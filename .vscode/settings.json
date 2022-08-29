@@ -1,30 +1,34 @@
 {
 	"css.validate": false,
-	"search.exclude": {
-		"**/node_modules": true,
-		"**/bower_components": true,
-		"**/*.code-search": true,
-		"packages/site/.svelte-kit/**": true,
-		"**/dist/**": true,
-		"packages/site/package/**": true
-	},
-	"html.autoCreateQuotes": false,
-	"editor.suggest.showWords": false,
-	"editor.fontLigatures": true,
-	"editor.fontFamily": "iosevka",
 	"diffEditor.codeLens": true,
-	"partialDiff.enableTelemetry": false,
-	"editor.minimap.renderCharacters": false,
 	"editor.autoClosingBrackets": "always",
+	"editor.fontFamily": "iosevka",
+	"editor.fontLigatures": true,
 	"editor.fontSize": 16,
-	"editor.suggest.snippetsPreventQuickSuggestions": false, // forces tailwind to take a chill pill
+	"editor.formatOnSave": true,
+	"editor.formatOnType": false,
+	"editor.minimap.renderCharacters": false,
 	"editor.quickSuggestions": {
 		"comments": false,
 		"strings": false
 	},
 	"editor.suggest.preview": true,
-	"svelte.plugin.svelte.useNewTransformation": true,
+	"editor.suggest.showWords": false,
+	"editor.suggest.snippetsPreventQuickSuggestions": false,
 	"html.autoClosingTags": false,
+	"html.autoCreateQuotes": false,
+	"js/ts.implicitProjectConfig.strictNullChecks": true,
+	"partialDiff.enableTelemetry": false,
+	"search.exclude": {
+		"**/*.code-search": true,
+		"**/bower_components": true,
+		"**/dist/**": true,
+		"**/node_modules": true,
+		"packages/site/.svelte-kit/**": true,
+		"packages/site/package/**": true
+	},
+	"svelte.enable-ts-plugin": true,
+	"svelte.plugin.svelte.useNewTransformation": true,
 	"tailwindCSS.files.exclude": [
 		"**/.git/**",
 		"**/node_modules/**",
@@ -33,9 +37,5 @@
 		"**/*.json",
 		"package.json"
 	],
-	"js/ts.implicitProjectConfig.strictNullChecks": true,
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"editor.formatOnType": false,
-	"svelte.enable-ts-plugin": true,
-	"editor.formatOnSave": true
+	"typescript.preferences.importModuleSpecifier": "non-relative"
 }
