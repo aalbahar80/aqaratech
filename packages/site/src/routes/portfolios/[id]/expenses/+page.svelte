@@ -3,7 +3,10 @@
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { DEFAULT_PAGINATION_KEY } from '$lib/constants/pagination-keys';
+	import {
+		DEFAULT_PAGINATION_KEY,
+		PAGE_SIZE,
+	} from '$lib/constants/pagination-keys';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
 		createSvelteTable,
@@ -120,10 +123,11 @@
 
 		url.searchParams.set(
 			DEFAULT_PAGINATION_KEY,
-			pagination.pageIndex.toString(),
+			// add one to handle zero-based index
+			(pagination.pageIndex + 1).toString(),
 		);
 
-		url.searchParams.set('take', pagination.pageSize.toString());
+		url.searchParams.set(PAGE_SIZE, pagination.pageSize.toString());
 
 		await goto(url);
 
@@ -244,8 +248,19 @@
 	<pre>{JSON.stringify($table.getState().sorting, null, 2)}</pre>
 	<pre>{JSON.stringify($table.getState().pagination, null, 2)}</pre>
 	<div>
-		<button on:click={() => $table.previousPage()}>prev page</button>
+		<button
+			on:click={() => $table.previousPage()}
+			disabled={!$table.getCanPreviousPage()}>prev page</button
+		>
+		<!-- <button on:click={() => $table.previousPage()}>prev page</button> -->
+		{$table.getCanPreviousPage()}
+		{$table.getCanNextPage()}
+		{data.expenses.pagination.pageCount}
 		<button on:click={() => $table.nextPage()}>next page</button>
+	</div>
+	<div>
+		<button on:click={() => $table.setPageSize(10)}>10</button>
+		<button on:click={() => $table.setPageSize(15)}>25</button>
 	</div>
 </div>
 
