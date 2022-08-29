@@ -37,17 +37,18 @@
 			columns: [
 				{
 					accessorFn: (row) => row.breadcrumbs.property?.label || '',
-					id: 'property',
+					id: 'propertyId',
 					// cell: (info) => info.getValue(),
 					header: () => 'Property',
 					footer: (props) => props.column.id,
 				},
 				{
 					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
-					id: 'unit',
+					id: 'unitId',
 					// cell: (info) => info.getValue(),
 					header: () => 'Unit',
 					footer: (props) => props.column.id,
+					enableSorting: false,
 				},
 			],
 		},
