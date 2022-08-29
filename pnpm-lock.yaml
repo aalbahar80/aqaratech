@@ -239,6 +239,7 @@ importers:
       '@tailwindcss/aspect-ratio': 0.4.0
       '@tailwindcss/forms': 0.5.2
       '@tailwindcss/typography': 0.5.4
+      '@tanstack/svelte-table': 8.5.11
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
       '@types/debounce': 1.2.1
@@ -302,6 +303,7 @@ importers:
       '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.1.8
       '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.8
       '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
+      '@tanstack/svelte-table': 8.5.11_svelte@3.49.0
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
       '@types/debounce': 1.2.1
@@ -3023,6 +3025,21 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       tailwindcss: 3.1.8_postcss@8.4.16
+    dev: true
+
+  /@tanstack/svelte-table/8.5.11_svelte@3.49.0:
+    resolution: {integrity: sha512-HGWx44Rq9AZ+e/zmnHUqZonDQJh+HUHMV9YR6xAr+7qlXVdc7n/lQleHmlS3LkLLfKkrEUrGPtdXum155phNtg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      svelte: ^3.48.0
+    dependencies:
+      '@tanstack/table-core': 8.5.11
+      svelte: 3.49.0
+    dev: true
+
+  /@tanstack/table-core/8.5.11:
+    resolution: {integrity: sha512-ZN61ockLaIAiiPbZfMKT2S03nbWx28OHg/nAiDnNfmN4QmAMcdwVajPn2QQwnNVGAr4jS4nbhbYzCcjq8livXQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /@tootallnate/once/2.0.0:
