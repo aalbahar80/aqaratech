@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
+	import { SORT_ORDER } from '$lib/constants/pagination-keys';
 	import { create } from '$lib/utils/route-helpers';
 	import { getQuery, type UrlQuery } from '$lib/utils/set-query';
 	import type { PageData } from './$types';
@@ -42,7 +43,7 @@
 				action: () =>
 					setQuery(
 						{ title: 'orderBy', value: Sort.Expiration },
-						{ title: 'sortOrder', value: 'asc' },
+						{ title: SORT_ORDER, value: 'asc' },
 					),
 				active: Sort.Expiration === $page.url.searchParams.get('orderBy'),
 			},

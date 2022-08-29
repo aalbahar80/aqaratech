@@ -6,6 +6,7 @@
 	import {
 		DEFAULT_PAGINATION_KEY,
 		PAGE_SIZE,
+		SORT_ORDER,
 	} from '$lib/constants/pagination-keys';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
@@ -87,11 +88,11 @@
 			: url.searchParams.delete('orderBy');
 
 		if (desc === undefined) {
-			url.searchParams.delete('sortOrder');
+			url.searchParams.delete(SORT_ORDER);
 		} else if (desc === true) {
-			url.searchParams.set('sortOrder', 'desc');
+			url.searchParams.set(SORT_ORDER, 'desc');
 		} else if (desc === false) {
-			url.searchParams.set('sortOrder', 'asc');
+			url.searchParams.set(SORT_ORDER, 'asc');
 		}
 
 		await goto(url);
