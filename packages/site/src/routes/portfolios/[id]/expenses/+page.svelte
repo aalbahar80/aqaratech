@@ -26,9 +26,7 @@
 			header: 'Type',
 			footer: 'Type',
 			accessorFn: (row) => row.expenseType?.labelEn || '',
-			cell: (info) => {
-				return info.getValue<ExpenseDto['amount']>().toLocaleString();
-			},
+			cell: (info) => info.getValue(),
 			enableSorting: false,
 		},
 		{
