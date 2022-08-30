@@ -2,7 +2,6 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
 	import {
 		DEFAULT_PAGINATION_KEY,
 		ORDER_BY,
@@ -195,7 +194,7 @@
 						{#each headerGroup.headers as header}
 							<th
 								colSpan={header.colSpan}
-								class="whitespace-nowrap py-2 px-2 text-left text-sm font-semibold text-gray-900"
+								class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<div
@@ -232,11 +231,9 @@
 									)}
 								/>
 							</td> -->
-							<CondensedCell
-								cell={{
-									label: cell.getValue(),
-								}}
-							/>
+							<td class="py-3 px-2 text-sm text-gray-500">
+								{cell.getValue()}
+							</td>
 						{/each}
 					</tr>
 				{/each}
@@ -247,7 +244,7 @@
 						{#each footerGroup.headers as header}
 							<th
 								colSpan={header.colSpan}
-								class="whitespace-nowrap py-2 px-2 text-left text-sm font-semibold text-gray-900"
+								class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<svelte:component
@@ -269,3 +266,10 @@
 		/>
 	</div>
 </div>
+
+<style lang="postcss">
+	th,
+	td {
+		@apply whitespace-nowrap first:pl-4 last:pr-4;
+	}
+</style>
