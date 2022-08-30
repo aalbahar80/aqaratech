@@ -15,7 +15,7 @@
 		<dt class="text-sm font-medium">
 			<slot name="label" />
 		</dt>
-		<dd class="text-sm font-medium tabular-nums">
+		<dd class="text-sm font-medium slashed-zero tabular-nums">
 			<slot name="definition" />
 		</dd>
 	</a>
