@@ -219,7 +219,7 @@
 					</tr>
 				{/each}
 			</thead>
-			<tbody class="divide-y divide-gray-200">
+			<tbody>
 				{#each $table.getRowModel().rows as row}
 					<tr class="odd:bg-white even:bg-gray-50">
 						{#each row.getVisibleCells() as cell}
@@ -231,7 +231,7 @@
 									)}
 								/>
 							</td> -->
-							<td class="py-3 px-2 text-sm text-gray-500">
+							<td class="py-4 px-2 text-sm text-gray-500">
 								{cell.getValue()}
 							</td>
 						{/each}
