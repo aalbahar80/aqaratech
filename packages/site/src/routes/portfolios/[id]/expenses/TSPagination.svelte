@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { getButtons } from '$lib/components/table/pagination';
-
 	import { classes } from '$lib/utils/classes';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -43,6 +43,18 @@
 				of{' '}
 				<span class="font-medium">{itemCount}</span> results
 			</p>
+		</div>
+		<div class="grow-0">
+			<Select
+				current={table.getState().pagination.pageSize}
+				options={[10, 25, 50, 75, 100].map((size) => ({
+					value: size,
+					label: `Show ${size}`,
+				}))}
+				on:select={(e) => {
+					table.setPageSize(e.detail.value);
+				}}
+			/>
 		</div>
 		<div>
 			<nav

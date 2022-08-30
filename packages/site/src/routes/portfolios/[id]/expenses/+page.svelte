@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/env';
-
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Select from '$lib/components/form/inputs/Select.svelte';
 	import {
 		DEFAULT_PAGINATION_KEY,
 		ORDER_BY,
@@ -246,16 +244,6 @@
 		</tfoot>
 	</table>
 	<TSPagination table={$table} itemCount={data.expenses.pagination.itemCount} />
-	<Select
-		current={$table.getState().pagination.pageSize}
-		options={[10, 25, 50, 75, 100].map((size) => ({
-			value: size,
-			label: size.toString(),
-		}))}
-		on:select={(e) => {
-			$table.setPageSize(e.detail.value);
-		}}
-	/>
 </div>
 
 <style>
