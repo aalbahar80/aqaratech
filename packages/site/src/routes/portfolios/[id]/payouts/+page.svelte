@@ -2,6 +2,7 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { PayoutDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
@@ -21,6 +22,13 @@
 			cell: (info) => {
 				return info.getValue<PayoutDto['amount']>().toLocaleString();
 			},
+		},
+		{
+			header: '',
+			footer: '',
+			id: 'view',
+			accessorFn: (row) => `/${entitiesMap.payout.urlName}/${row.id}`,
+			cell: (info) => info.getValue(),
 		},
 	];
 </script>

@@ -2,6 +2,7 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { LeaseInvoiceDto } from '@self/sdk';
+	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
@@ -49,6 +50,13 @@
 					enableSorting: false,
 				},
 			],
+		},
+		{
+			header: '',
+			footer: '',
+			id: 'view',
+			accessorFn: (row) => `/${entitiesMap.leaseInvoice.urlName}/${row.id}`,
+			cell: (info) => info.getValue(),
 		},
 	];
 </script>

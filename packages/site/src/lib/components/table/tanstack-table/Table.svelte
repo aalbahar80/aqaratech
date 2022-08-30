@@ -191,7 +191,15 @@
 								/>
 							</td> -->
 							<td class="py-4 px-2 text-sm text-gray-500">
-								{cell.getValue()}
+								{#if cell.column.id === 'view'}
+									<a
+										href={cell.getValue()}
+										target="_blank"
+										class="text-indigo-600 hover:text-indigo-900">View</a
+									>
+								{:else}
+									{cell.getValue()}
+								{/if}
 							</td>
 						{/each}
 					</tr>
