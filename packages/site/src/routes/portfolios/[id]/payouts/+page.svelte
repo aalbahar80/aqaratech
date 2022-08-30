@@ -1,0 +1,37 @@
+<script lang="ts">
+	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { toUTCFormat } from '$lib/utils/common';
+	import type { PayoutDto } from '@self/sdk';
+	import type { ColumnDef } from '@tanstack/svelte-table';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	const columns: ColumnDef<PayoutDto>[] = [
+		{
+			header: 'Post Date',
+			footer: 'Post Date',
+			id: 'postAt',
+			accessorFn: (row) => toUTCFormat(row.postAt),
+		},
+		{
+			header: 'Amount (KWD)',
+			footer: 'Amount (KWD)',
+			accessorKey: 'amount',
+			cell: (info) => {
+				return info.getValue<PayoutDto['amount']>().toLocaleString();
+			},
+		},
+	];
+</script>
+
+<Table
+	{columns}
+	items={data.payouts.results}
+	itemCount={data.payouts.pagination.itemCount}
+	pageCount={data.payouts.pagination.pageCount}
+	pagination={{
+		pageIndex: data.payouts.pagination.page - 1,
+		pageSize: data.payouts.pagination.pageSize,
+	}}
+/>

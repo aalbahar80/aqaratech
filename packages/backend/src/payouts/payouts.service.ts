@@ -49,7 +49,7 @@ export class PayoutsService {
     user: IUser;
     where?: Prisma.PayoutWhereInput;
   }): Promise<WithCount<PayoutDto>> {
-    const { page, take } = pageOptionsDto;
+    const { page, take, orderBy, sortOrder } = pageOptionsDto;
 
     const filter: Prisma.PayoutWhereInput = {
       AND: [
@@ -58,11 +58,15 @@ export class PayoutsService {
       ],
     };
 
+    const sort = orderBy
+      ? { [orderBy]: sortOrder }
+      : { createdAt: 'desc' as Prisma.SortOrder };
+
     const [results, total] = await Promise.all([
       this.prisma.payout.findMany({
         take,
         skip: (page - 1) * take,
-        orderBy: { createdAt: 'desc' },
+        orderBy: sort,
         where: filter,
         include: { portfolio: crumbs.portfolio },
       }),
