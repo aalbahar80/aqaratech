@@ -20,6 +20,7 @@
 		type SortingState,
 		type TableOptions,
 	} from '@tanstack/svelte-table';
+	import { afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	type T = $$Generic;
@@ -140,6 +141,11 @@
 	// };
 
 	const table = createSvelteTable(options);
+
+	afterUpdate(() => {
+		// to refresh data when browser back button is pressed
+		refreshData();
+	});
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
