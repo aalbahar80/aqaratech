@@ -9,7 +9,6 @@
 		PAGE_SIZE,
 		SORT_ORDER,
 	} from '$lib/constants/pagination-keys';
-	import { classes } from '$lib/utils/classes';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
@@ -193,13 +192,9 @@
 				{#each $table.getHeaderGroups() as headerGroup}
 					<tr>
 						{#each headerGroup.headers as header}
-							<!-- class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6" -->
 							<th
 								colSpan={header.colSpan}
-								class={classes(
-									'idx' === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
-								)}
+								class="whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<div
@@ -252,10 +247,7 @@
 						{#each footerGroup.headers as header}
 							<th
 								colSpan={header.colSpan}
-								class={classes(
-									'idx' === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
-									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
-								)}
+								class="whitespace-nowrap py-1 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<svelte:component
