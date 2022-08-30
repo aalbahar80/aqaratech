@@ -24,10 +24,10 @@
 			},
 		},
 		{
-			header: 'Memo',
-			footer: 'memo',
-			accessorFn: (row) => row.memo || '',
-			enableSorting: false,
+			header: 'Status',
+			footer: 'Status',
+			id: 'isPaid',
+			accessorFn: (row) => (row.isPaid ? 'Paid' : 'Unpaid'),
 		},
 		{
 			header: 'Location',
