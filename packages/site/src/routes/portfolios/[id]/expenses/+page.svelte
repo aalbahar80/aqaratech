@@ -36,7 +36,7 @@
 		},
 		{
 			header: 'Amount (KWD)',
-			footer: 'Amount',
+			footer: 'Amount (KWD)',
 			accessorKey: 'amount',
 			cell: (info) => {
 				return info.getValue<ExpenseDto['amount']>().toLocaleString();
