@@ -60,7 +60,7 @@ export class LeaseInvoicesService {
     user: IUser;
     where?: Prisma.LeaseInvoiceWhereInput;
   }): Promise<WithCount<LeaseInvoiceDto>> {
-    const { page, take } = pageOptionsDto;
+    const { page, take, sortOrder, orderBy } = pageOptionsDto;
 
     const filter: Prisma.LeaseInvoiceWhereInput = {
       AND: [
@@ -70,11 +70,15 @@ export class LeaseInvoicesService {
       ],
     };
 
+    const sort = orderBy
+      ? { [orderBy]: sortOrder }
+      : { postAt: 'desc' as Prisma.SortOrder };
+
     const [data, total] = await Promise.all([
       this.prisma.leaseInvoice.findMany({
         take,
         skip: (page - 1) * take,
-        orderBy: { postAt: 'desc' },
+        orderBy: sort,
         where: filter,
         include: { lease: crumbs.lease },
       }),
