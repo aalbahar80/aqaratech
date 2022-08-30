@@ -9,8 +9,8 @@
 
 	const columns: ColumnDef<LeaseInvoiceDto>[] = [
 		{
-			header: 'Date',
-			footer: 'Date',
+			header: 'Post Date',
+			footer: 'Post Date',
 			id: 'postAt',
 			accessorFn: (row) => toUTCFormat(row.postAt),
 		},
@@ -38,6 +38,7 @@
 					// cell: (info) => info.getValue(),
 					header: 'Property',
 					footer: 'Property',
+					enableSorting: false,
 				},
 				{
 					accessorFn: (row) => row.breadcrumbs.unit?.label || '',

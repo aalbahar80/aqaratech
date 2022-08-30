@@ -39,6 +39,7 @@
 					// cell: (info) => info.getValue(),
 					header: 'Property',
 					footer: 'Property',
+					enableSorting: false,
 				},
 				{
 					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
