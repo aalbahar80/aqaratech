@@ -1,7 +1,11 @@
 import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ url: { searchParams }, parent }) => {
+export const load: PageLoad = async ({
+	params,
+	url: { searchParams },
+	parent,
+}) => {
 	const parentStuff = await parent();
 
 	const { page, take, sortOrder, orderBy } = parseParams(searchParams);
@@ -10,6 +14,7 @@ export const load: PageLoad = async ({ url: { searchParams }, parent }) => {
 		take,
 		sortOrder,
 		orderBy,
+		portfolioId: params.id,
 	});
 
 	return { expenses };
