@@ -35,12 +35,21 @@
 			accessorFn: (row) => toUTCFormat(row.postAt),
 		},
 		{
-			header: 'Amount',
+			header: 'Amount (KWD)',
 			footer: 'Amount',
 			accessorKey: 'amount',
 			cell: (info) => {
 				return info.getValue<ExpenseDto['amount']>().toLocaleString();
 			},
+		},
+		{
+			header: 'Type',
+			footer: 'Type',
+			accessorFn: (row) => row.expenseType?.labelEn || '',
+			cell: (info) => {
+				return info.getValue<ExpenseDto['amount']>().toLocaleString();
+			},
+			enableSorting: false,
 		},
 		{
 			header: 'Location',
