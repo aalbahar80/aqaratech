@@ -69,6 +69,6 @@
 	pageCount={data.expenses.pagination.pageCount}
 	pagination={{
 		pageIndex: data.expenses.pagination.page - 1,
-		pageSize: data.expenses.pagination.pageSize,
+		pageSize: data.expenses.pagination.take,
 	}}
 />
