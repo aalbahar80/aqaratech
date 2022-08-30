@@ -47,7 +47,7 @@
 		<div class="grow-0">
 			<Select
 				current={table.getState().pagination.pageSize}
-				options={[10, 25, 50, 75, 100].map((size) => ({
+				options={[10, 20, 50, 75, 100].map((size) => ({
 					value: size,
 					label: `Show ${size}`,
 				}))}
