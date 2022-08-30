@@ -219,9 +219,9 @@
 					</tr>
 				{/each}
 			</thead>
-			<tbody class="divide-y divide-gray-200 bg-white">
+			<tbody class="divide-y divide-gray-200">
 				{#each $table.getRowModel().rows as row}
-					<tr>
+					<tr class="odd:bg-white even:bg-gray-50">
 						{#each row.getVisibleCells() as cell}
 							<!-- <td>
 								<svelte:component
