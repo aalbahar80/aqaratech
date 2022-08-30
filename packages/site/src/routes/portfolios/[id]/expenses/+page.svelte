@@ -2,6 +2,7 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import {
 		DEFAULT_PAGINATION_KEY,
 		ORDER_BY,
@@ -23,7 +24,6 @@
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
 	import type { PageData } from './$types';
-	import TSPagination from './TSPagination.svelte';
 
 	export let data: PageData;
 
@@ -269,10 +269,7 @@
 				{/each}
 			</tfoot>
 		</table>
-		<TSPagination
-			table={$table}
-			itemCount={data.expenses.pagination.itemCount}
-		/>
+		<Pagination table={$table} itemCount={data.expenses.pagination.itemCount} />
 	</div>
 </div>
 
