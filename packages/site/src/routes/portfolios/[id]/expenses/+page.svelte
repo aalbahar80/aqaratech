@@ -31,34 +31,35 @@
 	const columns: ColumnDef<ExpenseDto>[] = [
 		{
 			header: 'Date',
+			footer: 'Date',
 			id: 'postAt',
 			accessorFn: (row) => toUTCFormat(row.postAt),
-			footer: (props) => props.column.id,
 		},
 		{
 			header: 'Amount',
+			footer: 'Amount',
 			accessorKey: 'amount',
 			cell: (info) => {
 				return info.getValue<ExpenseDto['amount']>().toLocaleString();
 			},
-			footer: (props) => props.column.id,
 		},
 		{
 			header: 'Location',
+			footer: 'Location',
 			columns: [
 				{
 					accessorFn: (row) => row.breadcrumbs.property?.label || '',
 					id: 'propertyId',
 					// cell: (info) => info.getValue(),
-					header: () => 'Property',
-					footer: (props) => props.column.id,
+					header: 'Property',
+					footer: 'Property',
 				},
 				{
 					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
 					id: 'unitId',
 					// cell: (info) => info.getValue(),
-					header: () => 'Unit',
-					footer: (props) => props.column.id,
+					header: 'Unit',
+					footer: 'Unit',
 					enableSorting: false,
 				},
 			],
@@ -194,7 +195,7 @@
 						{#each headerGroup.headers as header}
 							<th
 								colSpan={header.colSpan}
-								class="whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900"
+								class="whitespace-nowrap py-2 px-2 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<div
@@ -232,7 +233,6 @@
 								/>
 							</td> -->
 							<CondensedCell
-								idx={cell.column.getSortIndex()}
 								cell={{
 									label: cell.getValue(),
 								}}
@@ -247,7 +247,7 @@
 						{#each footerGroup.headers as header}
 							<th
 								colSpan={header.colSpan}
-								class="whitespace-nowrap py-1 text-left text-sm font-semibold text-gray-900"
+								class="whitespace-nowrap py-2 px-2 text-left text-sm font-semibold text-gray-900"
 							>
 								{#if !header.isPlaceholder}
 									<svelte:component
