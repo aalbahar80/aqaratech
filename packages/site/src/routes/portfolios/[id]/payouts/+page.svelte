@@ -40,6 +40,6 @@
 	pageCount={data.payouts.pagination.pageCount}
 	pagination={{
 		pageIndex: data.payouts.pagination.page - 1,
-		pageSize: data.expenses.pagination.take,
+		pageSize: data.payouts.pagination.take,
 	}}
 />
