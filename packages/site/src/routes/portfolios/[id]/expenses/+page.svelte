@@ -2,12 +2,15 @@
 	import { dev } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import CondensedCell from '$lib/components/table/CondensedCell.svelte';
 	import {
 		DEFAULT_PAGINATION_KEY,
 		ORDER_BY,
 		PAGE_SIZE,
 		SORT_ORDER,
 	} from '$lib/constants/pagination-keys';
+	import { classes } from '$lib/utils/classes';
+	import { toUTCFormat } from '$lib/utils/common';
 	import type { ExpenseDto } from '@self/sdk';
 	import {
 		createSvelteTable,
@@ -29,7 +32,8 @@
 	const columns: ColumnDef<ExpenseDto>[] = [
 		{
 			header: 'Date',
-			accessorKey: 'postAt',
+			id: 'postAt',
+			accessorFn: (row) => toUTCFormat(row.postAt),
 			footer: (props) => props.column.id,
 		},
 		{
@@ -180,92 +184,96 @@
 	const table = createSvelteTable(options);
 </script>
 
-<div class="p-2">
-	<div class="h-2" />
-	<table>
-		<thead>
-			{#each $table.getHeaderGroups() as headerGroup}
-				<tr>
-					{#each headerGroup.headers as header}
-						<th colSpan={header.colSpan}>
-							{#if !header.isPlaceholder}
-								<div
-									class:cursor-pointer={header.column.getCanSort()}
-									class:select-none={header.column.getCanSort()}
-									on:click={header.column.getToggleSortingHandler()}
-								>
+<div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
+	<div
+		class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+	>
+		<table class="min-w-full divide-y divide-gray-300">
+			<thead class="bg-gray-50">
+				{#each $table.getHeaderGroups() as headerGroup}
+					<tr>
+						{#each headerGroup.headers as header}
+							<!-- class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6" -->
+							<th
+								colSpan={header.colSpan}
+								class={classes(
+									'idx' === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+								)}
+							>
+								{#if !header.isPlaceholder}
+									<div
+										class:cursor-pointer={header.column.getCanSort()}
+										class:select-none={header.column.getCanSort()}
+										on:click={header.column.getToggleSortingHandler()}
+									>
+										<svelte:component
+											this={flexRender(
+												header.column.columnDef.header,
+												header.getContext(),
+											)}
+										/>
+										{{
+											asc: ' 🔼',
+											desc: ' 🔽',
+										}[header.column.getIsSorted().toString()] ?? ''}
+									</div>
+								{/if}
+							</th>
+						{/each}
+					</tr>
+				{/each}
+			</thead>
+			<tbody class="divide-y divide-gray-200 bg-white">
+				{#each $table.getRowModel().rows as row}
+					<tr>
+						{#each row.getVisibleCells() as cell}
+							<!-- <td>
+								<svelte:component
+									this={flexRender(
+										cell.column.columnDef.cell,
+										cell.getContext(),
+									)}
+								/>
+							</td> -->
+							<CondensedCell
+								idx={cell.column.getSortIndex()}
+								cell={{
+									label: cell.getValue(),
+								}}
+							/>
+						{/each}
+					</tr>
+				{/each}
+			</tbody>
+			<tfoot class="bg-gray-50">
+				{#each $table.getFooterGroups() as footerGroup}
+					<tr>
+						{#each footerGroup.headers as header}
+							<th
+								colSpan={header.colSpan}
+								class={classes(
+									'idx' === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
+								)}
+							>
+								{#if !header.isPlaceholder}
 									<svelte:component
 										this={flexRender(
-											header.column.columnDef.header,
+											header.column.columnDef.footer,
 											header.getContext(),
 										)}
 									/>
-									{{
-										asc: ' 🔼',
-										desc: ' 🔽',
-									}[header.column.getIsSorted().toString()] ?? ''}
-								</div>
-							{/if}
-						</th>
-					{/each}
-				</tr>
-			{/each}
-		</thead>
-		<tbody>
-			{#each $table.getRowModel().rows as row}
-				<tr>
-					{#each row.getVisibleCells() as cell}
-						<td>
-							<svelte:component
-								this={flexRender(cell.column.columnDef.cell, cell.getContext())}
-							/>
-						</td>
-					{/each}
-				</tr>
-			{/each}
-		</tbody>
-		<tfoot>
-			{#each $table.getFooterGroups() as footerGroup}
-				<tr>
-					{#each footerGroup.headers as header}
-						<th colSpan={header.colSpan}>
-							{#if !header.isPlaceholder}
-								<svelte:component
-									this={flexRender(
-										header.column.columnDef.footer,
-										header.getContext(),
-									)}
-								/>
-							{/if}
-						</th>
-					{/each}
-				</tr>
-			{/each}
-		</tfoot>
-	</table>
-	<TSPagination table={$table} itemCount={data.expenses.pagination.itemCount} />
+								{/if}
+							</th>
+						{/each}
+					</tr>
+				{/each}
+			</tfoot>
+		</table>
+		<TSPagination
+			table={$table}
+			itemCount={data.expenses.pagination.itemCount}
+		/>
+	</div>
 </div>
-
-<style>
-	table {
-		border: 1px solid lightgray;
-	}
-
-	tbody {
-		border-bottom: 1px solid lightgray;
-	}
-
-	th {
-		border-bottom: 1px solid lightgray;
-		border-right: 1px solid lightgray;
-		padding: 2px 4px;
-	}
-
-	tfoot {
-		color: gray;
-	}
-
-	tfoot th {
-		font-weight: normal;
-	}
-</style>
