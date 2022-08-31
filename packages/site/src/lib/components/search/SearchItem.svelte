@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
+	import { startCase } from '$lib/utils/common';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
-	import { startCase } from 'lodash-es';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 
