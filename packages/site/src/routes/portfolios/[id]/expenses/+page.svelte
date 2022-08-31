@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { api } from '$lib/client/api';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { downloadBlob } from '$lib/utils/table-utils';
@@ -67,12 +68,16 @@
 </script>
 
 <button
-	on:click={() => {
-		const flat = data.expenses.results.map((e) => flatten(e, ''));
+	on:click={async () => {
+		const dataset = await api($page.data.apiConfig).expenses.findAll({
+			portfolioId: $page.params.id,
+			take: data.expenses.pagination.itemCount,
+		});
+		const flat = dataset.results.map((e) => flatten(e, ''));
 		const csv = Papa.unparse(flat);
 		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 		downloadBlob(blob, 'expenses.csv');
-	}}>Download all</button
+	}}>Export all {data.expenses.pagination.itemCount} results</button
 >
 
 <a href={`data:${$page.url.href}`} download="a.csv">A Download all</a>
