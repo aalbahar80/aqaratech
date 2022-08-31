@@ -22,7 +22,7 @@
 		>
 			<svelte:fragment slot="label">
 				Lease Invoices
-				<Tooltip text="Sum of all _paid_ lease invoices" />
+				<Tooltip text="Sum of all *paid* lease invoices" />
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-green-600">
