@@ -67,20 +67,7 @@
 	];
 </script>
 
-<button
-	on:click={async () => {
-		const dataset = await api($page.data.apiConfig).expenses.findAll({
-			portfolioId: $page.params.id,
-			take: data.expenses.pagination.itemCount,
-		});
-		const flat = dataset.results.map((e) => flatten(e));
-		const csv = Papa.unparse(flat);
-		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-		downloadBlob(blob, 'expenses.csv');
-	}}>Export all {data.expenses.pagination.itemCount} results</button
->
-
-<a href={`data:${$page.url.href}`} download="a.csv">A Download all</a>
+<a href={`${$page.url.href}/csv`} download="a.csv">A Download all</a>
 
 <Table
 	{columns}
