@@ -77,7 +77,7 @@
 >
 	<div slot="header">
 		<div class="text-right">
-			<a href={`${$page.url.href}/csv`} download="expenses.csv">
+			<a href={`${$page.url.pathname}/csv`} download="expenses.csv">
 				<Button variant="text-accent">
 					<svelte:fragment slot="lead">
 						<Fa6SolidFileCsv class="h-4 w-4 flex-shrink-0" />
