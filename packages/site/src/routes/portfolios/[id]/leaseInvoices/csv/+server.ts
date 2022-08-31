@@ -3,13 +3,13 @@ import { respondWithCsv } from '$lib/utils/respond-with-csv';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ params, locals }) => {
-	const expenses = await api({
+	const leaseInvoices = await api({
 		token: locals.accessToken!,
 		roleId: locals.xRoleId,
-	}).expenses.findAll({
+	}).leaseInvoices.findAll({
 		take: 999999999,
 		portfolioId: params.id,
 	});
 
-	return respondWithCsv(expenses.results, 'expenses');
+	return respondWithCsv(leaseInvoices.results, 'leaseInvoices');
 };
