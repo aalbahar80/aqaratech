@@ -73,7 +73,7 @@
 			portfolioId: $page.params.id,
 			take: data.expenses.pagination.itemCount,
 		});
-		const flat = dataset.results.map((e) => flatten(e, ''));
+		const flat = dataset.results.map((e) => flatten(e));
 		const csv = Papa.unparse(flat);
 		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
 		downloadBlob(blob, 'expenses.csv');
