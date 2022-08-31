@@ -10,8 +10,8 @@
 
 	const columns: ColumnDef<ExpenseDto>[] = [
 		{
-			header: 'Date',
-			footer: 'Date',
+			header: 'Post Date',
+			footer: 'Post Date',
 			id: 'postAt',
 			accessorFn: (row) => toUTCFormat(row.postAt),
 		},
