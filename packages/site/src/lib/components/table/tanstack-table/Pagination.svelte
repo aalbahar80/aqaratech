@@ -19,21 +19,36 @@
 <div
 	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
 >
-	<div class="flex flex-1 sm:hidden">
-		<button
-			class="relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			on:click={() => table.previousPage()}
-			disabled={!table.getCanPreviousPage()}
-		>
-			Previous
-		</button>
-		<button
-			class="relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			on:click={() => table.nextPage()}
-			disabled={!table.getCanNextPage()}
-		>
-			Next
-		</button>
+	<div class="flex flex-col gap-y-4 sm:hidden">
+		<div class="flex flex-1 justify-between">
+			<button
+				class="relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				on:click={() => table.previousPage()}
+				disabled={!table.getCanPreviousPage()}
+			>
+				Previous
+			</button>
+			<button
+				class="relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				on:click={() => table.nextPage()}
+				disabled={!table.getCanNextPage()}
+			>
+				Next
+			</button>
+		</div>
+		<div class="flex items-center gap-x-2">
+			Page
+			<input
+				type="number"
+				class="block w-12 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+				on:change={(e) => {
+					const index = e.currentTarget.valueAsNumber;
+					table.setPageIndex(index);
+				}}
+			/>
+			of
+			<span class="font-medium">{table.getPageCount()}</span>
+		</div>
 	</div>
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div>
