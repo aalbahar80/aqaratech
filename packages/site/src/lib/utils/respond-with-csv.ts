@@ -1,7 +1,8 @@
 import { flatten } from '$lib/utils/flatten';
 // import * as Papa from 'papaparse';
 // @ts-expect-error minified version has no types
-import { unparse } from 'papaparse/papaparse.min.js';
+import pkg from 'papaparse/papaparse.min.js';
+const { unparse } = pkg;
 
 /**
  * Nested objects are flattened to dot-notation.
