@@ -38,18 +38,12 @@
 			options={[
 				{ label: 'Category', value: 'categoryTreemap' },
 				{ label: 'Property', value: 'propertyTreemap' },
-				// { label: 'Property 2', value: 'propertyPolar' },
-				// { label: 'Force', value: 'force' },
 			]}
 		/>
 	</div>
 	<div slot="chart">
 		{#if chartType === 'propertyTreemap'}
 			<ExpenseTreemapProperty {expenses} />
-			<!-- {:else if chartType === 'propertyPolar'}
-			<ExpensePolarArea {expenses} />
-			{:else if chartType === 'force'}
-			<ExpensePackForce {expenses} /> -->
 		{:else}
 			<ExpenseTreemapCategory {expenses} {categories} />
 		{/if}
