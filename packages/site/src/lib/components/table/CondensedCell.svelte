@@ -3,13 +3,15 @@
 	import { classes } from '$lib/utils/classes';
 
 	type Weight = 'bold1' | 'bold2' | 'regular';
+	export let idx: number;
 	export let weight: Weight = 'regular';
 	export let cell: TableCellScalar;
 </script>
 
 <td
 	class={classes(
-		'whitespace-nowrap py-3 px-2 text-sm',
+		idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+		'whitespace-nowrap py-2 text-sm',
 		...(cell.extraStyles || []),
 	)}
 	class:text-gray-500={weight === 'regular'}
