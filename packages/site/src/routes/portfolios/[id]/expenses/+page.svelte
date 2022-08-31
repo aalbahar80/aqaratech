@@ -3,8 +3,8 @@
 	import { api } from '$lib/client/api';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
+	import { flatten } from '$lib/utils/flatten';
 	import { downloadBlob } from '$lib/utils/table-utils';
-	import { flatten } from '$lib/utils/to-csv';
 	import type { ExpenseDto } from '@self/sdk';
 	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
