@@ -2,7 +2,7 @@ import * as _ from 'lodash-es';
 
 export function flatten(obj: Record<string, any>, prefix = '') {
 	const propName = prefix ? prefix + '.' : '',
-		ret = {};
+		ret: Record<string, any> = {};
 
 	for (const attr in obj) {
 		if (_.isArray(obj[attr])) {
