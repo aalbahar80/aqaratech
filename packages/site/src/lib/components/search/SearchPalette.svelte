@@ -12,7 +12,7 @@
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
 	import type { SearchDto } from '@self/sdk';
-	import { entitiesMap } from '@self/utils';
+	import { entitiesMap, isEntity } from '@self/utils';
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	// TODO optimize use lodash debounce?
@@ -44,7 +44,7 @@
 		(groupHits) => groupHits.estimatedTotalHits > 0,
 	);
 
-	const icons = {
+	const icons: Record<string, any> = {
 		tenant: HeroiconsOutlineUser,
 		portfolio: HeroiconsOutlineFolder,
 		property: HeroiconsOutlineOfficeBuilding,
@@ -130,20 +130,23 @@
 								style="max-height: 70vh"
 							>
 								{#each groups as group (group.entityTitle)}
-									<li>
-										<h2
-											class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
-										>
-											{entitiesMap[group.entityTitle].pluralCap}
-										</h2>
-										<ul class="mt-2 text-sm text-gray-800">
-											{#each group.hits as item (item.id)}
-												<div animate:flip={{ duration: 300 }}>
-													<SearchItem {item} icon={icons[group.entityTitle]} />
-												</div>
-											{/each}
-										</ul>
-									</li>
+									{@const entityTitle = group.entityTitle}
+									{#if isEntity(entityTitle)}
+										<li>
+											<h2
+												class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
+											>
+												{entitiesMap[entityTitle].pluralCap}
+											</h2>
+											<ul class="mt-2 text-sm text-gray-800">
+												{#each group.hits as item (item.id)}
+													<div animate:flip={{ duration: 300 }}>
+														<SearchItem {item} icon={icons[entityTitle]} />
+													</div>
+												{/each}
+											</ul>
+										</li>
+									{/if}
 								{/each}
 							</div>
 						</ListboxOptions>

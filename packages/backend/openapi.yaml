@@ -4177,11 +4177,16 @@ components:
       type: object
       properties:
         entityTitle:
-          type: object
+          type: string
         hits:
           type: array
           items:
             type: object
+            properties:
+              id:
+                type: string
+              _formatted:
+                type: object
         offset:
           type: number
         limit:
