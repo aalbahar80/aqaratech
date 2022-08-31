@@ -40,10 +40,13 @@
 			Page
 			<input
 				type="number"
-				class="block w-12 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+				value={pageIdx + 1}
+				max={table.getPageCount()}
+				min={1}
+				class="block w-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 				on:change={(e) => {
 					const index = e.currentTarget.valueAsNumber;
-					table.setPageIndex(index);
+					table.setPageIndex(index - 1);
 				}}
 			/>
 			of
