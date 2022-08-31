@@ -1,7 +1,6 @@
 import { api } from '$lib/client/api';
-import { flatten } from '$lib/utils/flatten';
+import { respondWithCsv } from '$lib/utils/respond-with-csv';
 import type { RequestHandler } from '@sveltejs/kit';
-import * as Papa from 'papaparse';
 
 export const GET: RequestHandler = async ({ params, locals }) => {
 	const expenses = await api({
@@ -12,13 +11,5 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		portfolioId: params.id,
 	});
 
-	const flat = expenses.results.map((e) => flatten(e));
-	const csv = Papa.unparse(flat);
-
-	return new Response(csv, {
-		headers: {
-			'Content-Disposition': 'attachment; filename="expenses.csv"',
-			'Content-Type': 'text/csv',
-		},
-	});
+	return respondWithCsv(expenses.results, 'expenses');
 };
