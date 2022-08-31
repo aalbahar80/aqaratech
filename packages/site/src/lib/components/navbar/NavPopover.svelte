@@ -3,6 +3,7 @@
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
 	import { LOGIN } from '$lib/constants/routes';
+	import type { UserMeta } from '$lib/models/types/auth.type';
 	import {
 		Popover,
 		PopoverButton,
@@ -12,7 +13,8 @@
 	import { Menu, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let navigation;
+	// Replace type once $page.data is automatically types
+	export let navigation: NonNullable<UserMeta['navLinks']>;
 </script>
 
 <Popover as="header" let:close>

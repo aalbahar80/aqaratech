@@ -2,7 +2,6 @@ import type { RoleTypeEnum } from '@self/sdk';
 import type { DBEntitiesMap, Entity } from '@self/utils';
 
 type SearchParam = string | null;
-type FindIdFromArray = string | undefined;
 
 export interface PredefinedRole {
 	entity: Entity;

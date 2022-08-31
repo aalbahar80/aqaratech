@@ -213,7 +213,7 @@
 			class="mr-4"
 			hidden={!selection}
 			tabindex="-1"
-			on:mousedown={(e) => {
+			on:mousedown={() => {
 				clear();
 			}}
 		>

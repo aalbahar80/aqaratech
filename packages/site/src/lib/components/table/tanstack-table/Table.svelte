@@ -146,6 +146,13 @@
 		// to refresh data when browser back button is pressed
 		refreshData();
 	});
+
+	const sortIcons: Record<string, any> = {
+		asc: '↑',
+		desc: '↓',
+		// asc: ' 🔼',
+		// desc: ' 🔽',
+	};
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
@@ -176,10 +183,9 @@
 												header.getContext(),
 											)}
 										/>
-										{{
-											asc: ' 🔼',
-											desc: ' 🔽',
-										}[header.column.getIsSorted().toString()] ?? ''}
+										{#if header.column.getIsSorted()}
+											{sortIcons[header.column.getIsSorted().toString()]}
+										{/if}
 									</div>
 								{/if}
 							</th>
@@ -201,8 +207,10 @@
 							</td> -->
 							<td class="py-4 px-2 text-sm text-gray-500">
 								{#if cell.column.id === 'view'}
+									<!-- redundant const for typing purposes -->
+									{@const href = cell.getValue()}
 									<a
-										href={cell.getValue()}
+										href={typeof href === 'string' ? href : undefined}
 										target="_blank"
 										class="text-indigo-600 hover:text-indigo-900">View</a
 									>
