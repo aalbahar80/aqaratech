@@ -159,45 +159,44 @@
 	<div class="text-right">
 		<slot name="header-actions" />
 	</div>
-	<div
-		class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
-	>
-		<table class="min-w-full divide-y divide-gray-300">
-			<thead class="bg-gray-50">
-				{#each $table.getHeaderGroups() as headerGroup}
-					<tr>
-						{#each headerGroup.headers as header}
-							<th
-								colSpan={header.colSpan}
-								class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
-							>
-								{#if !header.isPlaceholder}
-									<div
-										class:cursor-pointer={header.column.getCanSort()}
-										class:select-none={header.column.getCanSort()}
-										on:click={header.column.getToggleSortingHandler()}
-									>
-										<svelte:component
-											this={flexRender(
-												header.column.columnDef.header,
-												header.getContext(),
-											)}
-										/>
-										{#if header.column.getIsSorted()}
-											{sortIcons[header.column.getIsSorted().toString()]}
-										{/if}
-									</div>
-								{/if}
-							</th>
-						{/each}
-					</tr>
-				{/each}
-			</thead>
-			<tbody>
-				{#each $table.getRowModel().rows as row}
-					<tr class="odd:bg-white even:bg-gray-50">
-						{#each row.getVisibleCells() as cell}
-							<!-- <td>
+	<div class="shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+		<div class="overflow-x-auto">
+			<table class="min-w-full divide-y divide-gray-300">
+				<thead class="bg-gray-50">
+					{#each $table.getHeaderGroups() as headerGroup}
+						<tr>
+							{#each headerGroup.headers as header}
+								<th
+									colSpan={header.colSpan}
+									class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
+								>
+									{#if !header.isPlaceholder}
+										<div
+											class:cursor-pointer={header.column.getCanSort()}
+											class:select-none={header.column.getCanSort()}
+											on:click={header.column.getToggleSortingHandler()}
+										>
+											<svelte:component
+												this={flexRender(
+													header.column.columnDef.header,
+													header.getContext(),
+												)}
+											/>
+											{#if header.column.getIsSorted()}
+												{sortIcons[header.column.getIsSorted().toString()]}
+											{/if}
+										</div>
+									{/if}
+								</th>
+							{/each}
+						</tr>
+					{/each}
+				</thead>
+				<tbody>
+					{#each $table.getRowModel().rows as row}
+						<tr class="odd:bg-white even:bg-gray-50">
+							{#each row.getVisibleCells() as cell}
+								<!-- <td>
 								<svelte:component
 									this={flexRender(
 										cell.column.columnDef.cell,
@@ -205,45 +204,46 @@
 									)}
 								/>
 							</td> -->
-							<td class="py-4 px-2 text-sm text-gray-500">
-								{#if cell.column.id === 'view'}
-									<!-- redundant const for typing purposes -->
-									{@const href = cell.getValue()}
-									<a
-										href={typeof href === 'string' ? href : undefined}
-										target="_blank"
-										class="text-indigo-600 hover:text-indigo-900">View</a
-									>
-								{:else}
-									{cell.getValue()}
-								{/if}
-							</td>
-						{/each}
-					</tr>
-				{/each}
-			</tbody>
-			<tfoot class="bg-gray-50">
-				{#each $table.getFooterGroups() as footerGroup}
-					<tr>
-						{#each footerGroup.headers as header}
-							<th
-								colSpan={header.colSpan}
-								class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
-							>
-								{#if !header.isPlaceholder}
-									<svelte:component
-										this={flexRender(
-											header.column.columnDef.footer,
-											header.getContext(),
-										)}
-									/>
-								{/if}
-							</th>
-						{/each}
-					</tr>
-				{/each}
-			</tfoot>
-		</table>
+								<td class="py-4 px-2 text-sm text-gray-500">
+									{#if cell.column.id === 'view'}
+										<!-- redundant const for typing purposes -->
+										{@const href = cell.getValue()}
+										<a
+											href={typeof href === 'string' ? href : undefined}
+											target="_blank"
+											class="text-indigo-600 hover:text-indigo-900">View</a
+										>
+									{:else}
+										{cell.getValue()}
+									{/if}
+								</td>
+							{/each}
+						</tr>
+					{/each}
+				</tbody>
+				<tfoot class="bg-gray-50">
+					{#each $table.getFooterGroups() as footerGroup}
+						<tr>
+							{#each footerGroup.headers as header}
+								<th
+									colSpan={header.colSpan}
+									class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
+								>
+									{#if !header.isPlaceholder}
+										<svelte:component
+											this={flexRender(
+												header.column.columnDef.footer,
+												header.getContext(),
+											)}
+										/>
+									{/if}
+								</th>
+							{/each}
+						</tr>
+					{/each}
+				</tfoot>
+			</table>
+		</div>
 		<Pagination table={$table} {itemCount} />
 	</div>
 </div>
