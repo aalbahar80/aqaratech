@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
+	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import type { BalanceDto } from '@self/sdk';
 	import { entitiesMap } from '@self/utils';
@@ -19,7 +20,10 @@
 		<BalanceLineItem
 			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.leaseInvoice.urlName}`}
 		>
-			<div slot="label">Lease Invoices</div>
+			<svelte:fragment slot="label">
+				Lease Invoices
+				<Tooltip text="Sum of all lease invoices" />
+			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-green-600">
 					{balance.leaseInvoices.toLocaleString()}
@@ -30,7 +34,10 @@
 		<BalanceLineItem
 			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.expense.urlName}`}
 		>
-			<div slot="label">Expenses</div>
+			<svelte:fragment slot="label">
+				Expenses
+				<Tooltip text="Sum of all expenses" />
+			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-red-600">{balance.expenses.toLocaleString()}</span>
 			</div>
@@ -39,16 +46,20 @@
 		<BalanceLineItem
 			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.payout.urlName}`}
 		>
-			<div slot="label">Payouts</div>
+			<svelte:fragment slot="label">
+				Payouts
+				<Tooltip text="Sum of all payouts" />
+			</svelte:fragment>
 			<div slot="definition">
 				{balance.payouts.toLocaleString()}
 			</div>
 		</BalanceLineItem>
 
 		<BalanceLineItem>
-			<div slot="label">
+			<svelte:fragment slot="label">
 				<div class="font-semibold text-gray-500">Balance</div>
-			</div>
+				<Tooltip text="Balance = Lease Invoices - expenses - payouts" />
+			</svelte:fragment>
 			<div slot="definition">{kwdFormat(balance.total)}</div>
 		</BalanceLineItem>
 	</ul>

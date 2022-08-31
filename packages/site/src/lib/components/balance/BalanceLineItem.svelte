@@ -12,7 +12,7 @@
 			href ? 'hover:bg-gray-100' : '',
 		)}
 	>
-		<dt class="text-sm font-medium">
+		<dt class="flex items-center gap-x-1 text-sm font-medium">
 			<slot name="label" />
 		</dt>
 		<dd class="text-sm font-medium slashed-zero tabular-nums">

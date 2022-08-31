@@ -7,5 +7,5 @@
 </script>
 
 <div use:tippyHint={{ content: text }}>
-	<Fa6SolidCircleInfo class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400" />
+	<Fa6SolidCircleInfo class="h-4 w-4 flex-shrink-0 text-gray-400" />
 </div>
