@@ -1,4 +1,4 @@
-export function flatten(obj: Record<string, any>, prefix = '') {
+export function flatten(obj: Record<string, any>, prefix?: string) {
 	const propName = prefix ? prefix + '.' : '',
 		ret: Record<string, any> = {};
 
