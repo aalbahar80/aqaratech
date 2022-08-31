@@ -21,6 +21,7 @@
     "preview:tunnel": "PUBLIC_API_URL_LOCAL=http://localhost:3002 PUBLIC_API_URL=https://api.aqar.live PUBLIC_SITE_URL=https://site.aqar.live PORT=3000 node build/index.js"
   },
   "devDependencies": {
+    "@brainandbones/skeleton": "0.32.19",
     "@felte/reporter-svelte": "1.1.3",
     "@felte/reporter-tippy": "1.1.3",
     "@felte/validator-zod": "1.0.11",

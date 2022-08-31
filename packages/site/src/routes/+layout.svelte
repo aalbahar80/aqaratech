@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
+	import '../styles/theme.postcss'; // skeleton theme/styles
 
 	onMount(() => {
 		if (env.PUBLIC_AQARATECH_ENV === 'production') {

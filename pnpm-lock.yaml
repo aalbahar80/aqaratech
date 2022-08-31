@@ -223,6 +223,7 @@ importers:
 
   packages/site:
     specifiers:
+      '@brainandbones/skeleton': 0.32.19
       '@felte/reporter-svelte': 1.1.3
       '@felte/reporter-tippy': 1.1.3
       '@felte/validator-zod': 1.0.11
@@ -289,6 +290,7 @@ importers:
       vite: 3.0.9
       zod: 3.18.0
     devDependencies:
+      '@brainandbones/skeleton': 0.32.19
       '@felte/reporter-svelte': 1.1.3_svelte@3.49.0
       '@felte/reporter-tippy': 1.1.3_tippy.js@6.3.7
       '@felte/validator-zod': 1.0.11_zod@3.18.0
@@ -1698,6 +1700,10 @@ packages:
 
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+    dev: true
+
+  /@brainandbones/skeleton/0.32.19:
+    resolution: {integrity: sha512-vhpffwplTb6bqt9S+0OxOJZB4bzUcqPIMotMxqth72Cz/rnXOWFqTuTmJmYiUjoCfVSnF5GkszsmD+uUBvqMOg==}
     dev: true
 
   /@casl/ability/6.0.0:

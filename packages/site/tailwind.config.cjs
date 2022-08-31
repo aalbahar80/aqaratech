@@ -3,7 +3,10 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	// content: ['./src/**/*.svelte'],
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		'./node_modules/@brainandbones/skeleton/**/*.{html,js,svelte,ts}',
+	],
 
 	theme: {
 		extend: {
@@ -18,6 +21,7 @@ module.exports = {
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/aspect-ratio'),
+		require('@brainandbones/skeleton/tailwind.cjs'),
 	],
 
 	// corePlugins: {
