@@ -55,13 +55,13 @@ export async function seed({
 	const users = sample.users;
 	const roles = sample.roles;
 
-	const portfolios = sample.portfolios;
+	const portfolios: any[] = [];
 	const randomPortfolios = Array.from({ length: portfolioCount }, () =>
 		fakePortfolio(testOrgId)
 	);
 	portfolios.push(...(randomPortfolios as any));
 
-	const properties = sample.properties;
+	const properties: any[] = [];
 	const randomProperties = portfolios.flatMap((portfolio) =>
 		Array.from(
 			{
@@ -72,7 +72,7 @@ export async function seed({
 	);
 	properties.push(...(randomProperties as any));
 
-	const units = sample.units;
+	const units: any[] = [];
 	const randomUnits = properties.flatMap((property) =>
 		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
 			fakeUnit(property.id, property.portfolioId, property.organizationId)
@@ -313,13 +313,17 @@ export async function seed({
 		await prisma.organizationSettings.createMany({
 			data: organizations.map((o) => fakeOrganizationSettings(o.id)),
 		});
-		await prisma.portfolio.createMany({ data: portfolios });
-		await prisma.payout.createMany({ data: payouts });
+		await prisma.portfolio.createMany({
+			data: [...sample.portfolios, ...portfolios],
+		});
+		await prisma.payout.createMany({ data: [...sample.payouts, ...payouts] });
 		await prisma.tenant.createMany({ data: tenants });
 		// @ts-ignore
 		await prisma.role.createMany({ data: roles });
-		await prisma.property.createMany({ data: properties });
-		await prisma.unit.createMany({ data: units });
+		await prisma.property.createMany({
+			data: [...sample.properties, ...properties],
+		});
+		await prisma.unit.createMany({ data: [...sample.units, ...units] });
 		if (leases.length) {
 			await prisma.lease.createMany({ data: [...leases, ...sample.leases] });
 		}
@@ -364,7 +368,7 @@ export async function seed({
 		console.time("expenses created");
 		await prisma.expense.createMany({
 			//@ts-ignore
-			data: expenses,
+			data: [...sample.expenses, ...expenses],
 		});
 		console.timeEnd("expenses created");
 		console.timeEnd("insert");

@@ -147,6 +147,42 @@ const leaseInvoices = Prisma.validator<
 	},
 ]);
 
+const expenses = Prisma.validator<Prisma.ExpenseCreateManyArgs["data"]>()([
+	{
+		id: "c8a63068-8123-4a4a-84be-c4f61e12a47e",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		amount: 284,
+		postAt: new Date("2020-01-01"),
+		memo: "Expense One",
+	},
+	{
+		id: "5710b05b-bdaf-4a99-9aeb-0a8565986134",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		amount: 429,
+		postAt: new Date("2020-03-21"),
+		memo: "Expense Two",
+	},
+]);
+
+const payouts = Prisma.validator<Prisma.PayoutCreateManyArgs["data"]>()([
+	{
+		id: "63f91b49-b257-4dc7-ab09-2f253b7aec3c",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		amount: 381,
+		postAt: new Date("2020-01-04"),
+	},
+	{
+		id: "03388e4d-cfda-4854-ab5c-0a4bcb9d704a",
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+		amount: 22,
+		postAt: new Date("2020-04-02"),
+	},
+]);
+
 export const sample = {
 	users,
 	roles,
@@ -157,4 +193,6 @@ export const sample = {
 	units,
 	leases,
 	leaseInvoices,
+	expenses,
+	payouts,
 };
