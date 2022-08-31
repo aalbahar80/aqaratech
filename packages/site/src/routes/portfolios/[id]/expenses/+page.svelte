@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import { flatten } from '$lib/utils/flatten';
-	import { downloadBlob } from '$lib/utils/table-utils';
 	import type { ExpenseDto } from '@self/sdk';
 	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
-	import * as Papa from 'papaparse';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -67,7 +63,7 @@
 	];
 </script>
 
-<a href={`${$page.url.href}/csv`} download="a.csv">A Download all</a>
+<a href={`${$page.url.href}/csv`} download="expenses.csv">A Download all</a>
 
 <Table
 	{columns}
