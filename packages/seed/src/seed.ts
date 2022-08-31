@@ -40,7 +40,7 @@ export async function seed({
 	let propertyMax = 20;
 	let unitMax = 20;
 	let moCount = 100;
-	let expenseCount = 1000;
+	let expenseCount = 1100;
 	let payoutCount = 10;
 	let trxPerLease = 12;
 	const min = 1;
