@@ -23,7 +23,10 @@
 >
 	<div slot="alert">
 		{#if invoices.pagination.hasNextPage}
-			<IncompleteDataAlert count={invoices.pagination.pageSize} />
+			<IncompleteDataAlert
+				entity="leaseInvoice"
+				count={invoices.pagination.pageSize}
+			/>
 		{/if}
 	</div>
 	<div slot="groupBy" class="flex h-14 pb-4 md:w-2/5">

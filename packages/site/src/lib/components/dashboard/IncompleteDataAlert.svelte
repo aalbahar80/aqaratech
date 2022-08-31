@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { entitiesMap, type DBEntity } from '@self/utils';
+
 	export let count: number;
+	export let entity: Extract<DBEntity, 'expense' | 'leaseInvoice' | 'payout'>;
 </script>
 
 <div class="flex">
@@ -21,6 +25,10 @@
 	</div>
 	<p class="pl-2 text-sm text-yellow-700">
 		Only the first {count} results are shown. Please use the filters to narrow your
-		search.
+		search or go to the
+		<a
+			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap[entity].urlName}`}
+			target="_blank">{entitiesMap[entity].pluralCap}</a
+		> page to see all results.
 	</p>
 </div>
