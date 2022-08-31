@@ -337,6 +337,7 @@ model Payout {
   updatedAt DateTime @updatedAt
   amount    Float
   postAt    DateTime
+  memo      String?
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)

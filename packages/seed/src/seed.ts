@@ -246,6 +246,7 @@ export async function seed({
 				...payout,
 				portfolioId: portfolio.id,
 				organizationId: testOrgId,
+				memo: faker.lorem.sentence(),
 			});
 		}
 		return portfolioPayouts;

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { api } from '$lib/client/api';
 	import Form from '$lib/components/form/Form.svelte';
@@ -10,7 +9,6 @@
 		PortfolioIdField,
 	} from '$lib/utils/form/common-fields';
 	import { createSchema } from '$models/schemas/payout.schema';
-	import { entitiesMap } from '@self/utils';
 
 	export let predefined: PredefinedPayout;
 
@@ -27,6 +25,9 @@
 			value: new Date().toISOString().split('T')[0],
 			label: 'Post Date',
 		}),
+		new Field('memo', {
+			hint: 'Enter a short description of the expense. This will be visible to the portfolio user.',
+		}),
 	];
 </script>
 
@@ -37,6 +38,4 @@
 	{basicFields}
 	onSubmit={(values) =>
 		api($page.data.apiConfig).payouts.create({ createPayoutDto: values })}
-	onSuccess={() =>
-		goto(`/${entitiesMap.portfolio.urlName}/${predefined.portfolioId}`)}
 />

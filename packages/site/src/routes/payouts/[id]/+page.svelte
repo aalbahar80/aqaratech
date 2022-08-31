@@ -9,6 +9,7 @@
 	$: details = [
 		['Post Date', toUTCFormat(data.payout.postAt)],
 		['Amount', kwdFormat(data.payout.amount)],
+		['Memo', data.payout.memo],
 	] as [string, string | null][];
 </script>
 

@@ -3571,6 +3571,9 @@ components:
         amount:
           type: number
           minimum: 1
+        memo:
+          type: string
+          nullable: true
       required:
         - id
         - createdAt
@@ -3837,6 +3840,9 @@ components:
         amount:
           type: number
           minimum: 1
+        memo:
+          type: string
+          nullable: true
       required:
         - postAt
         - organizationId
@@ -3854,6 +3860,9 @@ components:
         amount:
           type: number
           minimum: 1
+        memo:
+          type: string
+          nullable: true
     ByMonthDto:
       type: object
       properties:

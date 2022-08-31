@@ -7,7 +7,7 @@ import {
 } from '@nestjs/swagger';
 import { Payout } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import { IsPositive } from 'class-validator';
+import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
   BreadcrumbDto,
@@ -30,13 +30,17 @@ class PayoutRequiredDto {
 
   @DateType()
   postAt: Date;
+
+  @IsOptional()
+  @IsString()
+  memo?: string | null;
 }
 
 class PayoutBreadcrumbsDto extends PickType(BreadcrumbsDto, ['portfolio']) {}
 
 export class PayoutDto
   extends IntersectionType(AbstractDto, PayoutRequiredDto)
-  implements Payout
+  implements Partial<Payout>
 {
   constructor(partial: Partial<PayoutDto>) {
     super();
