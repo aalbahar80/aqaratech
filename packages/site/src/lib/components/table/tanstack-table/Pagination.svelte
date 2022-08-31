@@ -16,11 +16,9 @@
 	$: idxEnd = idxStart + table.getRowModel().rows.length - 1;
 </script>
 
-<div
-	class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
->
+<div class="border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
 	<div class="flex flex-col gap-y-4 sm:hidden">
-		<div class="flex flex-1 justify-between">
+		<div class="flex w-full justify-between">
 			<button
 				class="relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 				on:click={() => table.previousPage()}
@@ -43,7 +41,7 @@
 				value={pageIdx + 1}
 				max={table.getPageCount()}
 				min={1}
-				class="block w-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+				class="block w-20 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 				on:change={(e) => {
 					const index = e.currentTarget.valueAsNumber;
 					table.setPageIndex(index - 1);
