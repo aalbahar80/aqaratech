@@ -26,7 +26,7 @@
 			label: 'Post Date',
 		}),
 		new Field('memo', {
-			hint: 'Enter a short description of the expense. This will be visible to the portfolio user.',
+			hint: 'Enter a short description of the payout. This will be visible to the portfolio user.',
 		}),
 	];
 </script>
