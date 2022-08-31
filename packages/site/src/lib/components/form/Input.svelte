@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Combobox from '$components/form/inputs/Combobox.svelte';
 	import Select from '$components/form/inputs/Select.svelte';
+	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { SelectField, type Field } from '$lib/models/classes/Field.class';
 	import { classes } from '$lib/utils/classes';
-	import { tippyHint } from '$lib/utils/tippy';
 	import {
 		Switch,
 		SwitchDescription,
@@ -14,8 +14,6 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
-	import 'tippy.js/dist/tippy.css';
-	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
 
 	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
@@ -39,10 +37,8 @@
 				{/if}
 			</label>
 			{#if field.hint}
-				<div use:tippyHint={{ content: field.hint }}>
-					<Fa6SolidCircleInfo
-						class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
-					/>
+				<div class="mr-1.5">
+					<Tooltip text={field.hint} />
 				</div>
 			{/if}
 		</div>
@@ -75,10 +71,8 @@
 				>
 					{field.label}
 					{#if field.hint}
-						<div use:tippyHint={{ content: field.hint }}>
-							<Fa6SolidCircleInfo
-								class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
-							/>
+						<div class="mr-1.5">
+							<Tooltip text={field.hint} />
 						</div>
 					{/if}
 				</SwitchLabel>
