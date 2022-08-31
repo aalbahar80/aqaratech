@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { LeaseInvoiceDto } from '@self/sdk';
@@ -70,4 +72,10 @@
 		pageIndex: data.invoices.pagination.page - 1,
 		pageSize: data.invoices.pagination.take,
 	}}
-/>
+>
+	<div slot="header-actions">
+		<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
+			<ExportButton />
+		</a>
+	</div>
+</Table>

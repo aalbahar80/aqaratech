@@ -149,7 +149,9 @@
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
-	<slot name="header" />
+	<div class="text-right">
+		<slot name="header-actions" />
+	</div>
 	<div
 		class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
 	>

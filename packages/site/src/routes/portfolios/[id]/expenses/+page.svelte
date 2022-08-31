@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import { Button } from '@brainandbones/skeleton';
 	import type { ExpenseDto } from '@self/sdk';
 	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
-	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -75,16 +74,9 @@
 		pageSize: data.expenses.pagination.take,
 	}}
 >
-	<div slot="header">
-		<div class="text-right">
-			<a href={`${$page.url.pathname}/csv`} download="expenses.csv">
-				<Button variant="text-accent">
-					<svelte:fragment slot="lead">
-						<Fa6SolidFileCsv class="h-4 w-4 flex-shrink-0" />
-					</svelte:fragment>
-					Export All
-				</Button>
-			</a>
-		</div>
+	<div slot="header-actions">
+		<a href={`${$page.url.pathname}/csv`} download="expenses.csv">
+			<ExportButton />
+		</a>
 	</div>
 </Table>
