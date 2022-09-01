@@ -9,7 +9,7 @@
     "build": "vite build",
     "build:vercel": "pnpm --filter=@self/site... build",
     "package": "svelte-kit package",
-    "preview": "vite preview --port 3000",
+    "preview": "PUBLIC_API_URL_LOCAL=http://localhost:3002 PUBLIC_API_URL=http://localhost:3002 PUBLIC_SITE_URL=http://localhost:3000 PORT=3000 node build/index.js",
     "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
     "check:watch": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
