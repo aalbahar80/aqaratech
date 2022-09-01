@@ -1,0 +1,13 @@
+{
+  http_port 2016
+  auto_https off
+  debug
+}
+
+:2016
+
+handle_path /api/* {
+  reverse_proxy localhost:3002
+}
+
+reverse_proxy localhost:3000

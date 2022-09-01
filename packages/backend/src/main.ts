@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { URL } from 'node:url';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
@@ -68,13 +69,14 @@ async function bootstrap() {
   app.use(
     getMiddleware({
       swaggerSpec: document,
-      hostname: process.env.PUBLIC_SITE_URL, // https://aqaratech.com
-      uriPath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
-      // authentication: true,
-      // onAuthenticate: function (req: any, username: string, password: string) {
-      //   // simple check for username and password
-      //   return username === 'aq-admin' && password === 'aq-swaggerstats12';
-      // },
+      hostname: new URL(process.env.PUBLIC_SITE_URL).host, // https://aqaratech.com
+      uriPath: '/swagger-stats',
+      //@ts-ignore
+      cookiePath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
+      authentication: true,
+      onAuthenticate: function (req: any, username: string, password: string) {
+        return username === 'aq-admin' && password === 'aq-swaggerstats12';
+      },
     }),
   );
 
