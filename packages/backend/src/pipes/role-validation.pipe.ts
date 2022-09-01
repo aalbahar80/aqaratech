@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import {
   ArgumentMetadata,
   BadRequestException,
@@ -12,7 +13,7 @@ import { CreateRoleDto } from 'src/roles/dto/role.dto';
  */
 @Injectable()
 export class RoleValidationPipe implements PipeTransform<any, any> {
-  async transform(value: any, { metatype }: ArgumentMetadata) {
+  transform(value: any, { metatype }: ArgumentMetadata) {
     if (!metatype || !this.toValidate(metatype)) {
       return value;
     }

@@ -28,6 +28,7 @@ export class CaslExceptionFilter
     // log exception details
     const response = ctx.getResponse<Response>();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { ability, ...exceptionDetails } = exception;
     // TODO monitor
     this.logger.debug({ ...exceptionDetails });
