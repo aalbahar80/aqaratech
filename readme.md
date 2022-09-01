@@ -30,7 +30,11 @@ Take a look [.env.example](packages/site/.env.example) to know what env vars are
 
 ```bash
 # local
-pnpm test
+pnpm run preview
+# or pnpm run preview:tunnel (set correct .env if tunnel)
+# NOTE: preview mode requires passing in env vars through command line in sveltekit until further notice
+pt
+pt -- --project "chromium"
 
 # docker - using the included convenience bash script
 cd packages/site/tests && ./run-docker-test.sh
