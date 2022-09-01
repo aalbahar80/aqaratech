@@ -1,4 +1,4 @@
-import { dev } from '$app/env';
+import { dev } from '$app/environment';
 import { LOGOUT } from '$lib/constants/routes';
 import type { User } from '$lib/models/types/auth.type';
 import { settings } from '$lib/utils/route-helpers';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';

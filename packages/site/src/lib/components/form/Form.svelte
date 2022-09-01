@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
