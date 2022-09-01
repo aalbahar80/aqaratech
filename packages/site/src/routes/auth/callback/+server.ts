@@ -1,4 +1,4 @@
-import { environment } from '$environment';
+import { environment } from '$aqenvironment';
 import { getUser } from '$lib/server/utils/get-user';
 import type { RequestHandler } from '@sveltejs/kit';
 

@@ -30,8 +30,8 @@ const config = {
 			'$models/*': 'src/lib/models/*',
 			$utils: 'src/lib/utils/index.ts',
 			'$utils/*': 'src/lib/utils/*',
-			$environment: 'src/lib/environment/index.ts',
-			'$environment/*': 'src/lib/environment/*',
+			$aqenvironment: 'src/lib/environment/index.ts',
+			'$aqenvironment/*': 'src/lib/environment/*',
 		},
 	},
 	// vitePlugin: {

@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { environment } from '$environment';
+import { environment } from '$aqenvironment';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
@@ -9,6 +9,7 @@ import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 
 export const handle: Handle = async ({ event, resolve }) => {
+	console.log({ env }, 'hooks.ts ~ 12');
 	const now = Date.now();
 	const method = event.request.method;
 	console.log(

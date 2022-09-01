@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { environment } from '$environment';
+import { environment } from '$aqenvironment';
 import type { RequestHandler } from '@sveltejs/kit';
 
 const { authConfig } = environment;
