@@ -19,20 +19,24 @@ export interface IBreadcrumbs {
 
 export interface TenantLabelParams {
   id: string;
+  label: string | null;
   fullName: string;
 }
 export interface PortfolioLabelParams {
   id: string;
+  label: string | null;
   fullName: string;
 }
 export interface PropertyLabelParams {
   id: string;
+  label: string | null;
   area: string | null;
   block: string | null;
   number: string | null;
 }
 export interface UnitLabelParams {
   id: string;
+  label: string | null;
   type: string | null;
   unitNumber: string;
 }

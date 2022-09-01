@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
+import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -62,24 +63,8 @@ export class LeasesService {
         where: filter,
         orderBy,
         include: {
-          tenant: { select: { id: true, fullName: true } },
-          unit: {
-            select: {
-              id: true,
-              propertyId: true,
-              unitNumber: true,
-              type: true,
-              property: {
-                select: {
-                  id: true,
-                  area: true,
-                  block: true,
-                  number: true,
-                  portfolio: { select: { id: true, fullName: true } },
-                },
-              },
-            },
-          },
+          tenant: crumbs.tenant,
+          unit: crumbs.unit,
         },
       }),
       this.prisma.lease.count({ where: filter }),
@@ -92,24 +77,8 @@ export class LeasesService {
     const data = await this.prisma.lease.findUniqueOrThrow({
       where: { id },
       include: {
-        tenant: { select: { id: true, fullName: true } },
-        unit: {
-          select: {
-            id: true,
-            propertyId: true,
-            unitNumber: true,
-            type: true,
-            property: {
-              select: {
-                id: true,
-                area: true,
-                block: true,
-                number: true,
-                portfolio: { select: { id: true, fullName: true } },
-              },
-            },
-          },
-        },
+        tenant: crumbs.tenant,
+        unit: crumbs.unit,
       },
     });
     return new LeaseDto(data);
