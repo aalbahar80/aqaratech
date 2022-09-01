@@ -8,8 +8,16 @@ export class SearchDto implements SearchResponse {
   @ApiProperty({
     type: 'array',
     items: {
+      title: 'HitDto',
       type: 'object',
-      properties: { id: { type: 'string' }, _formatted: { type: 'object' } },
+      properties: {
+        id: { type: 'string' },
+        title: { type: 'string', nullable: true },
+        formatted: {
+          type: 'object',
+          properties: { title: { type: 'string', nullable: true } },
+        },
+      },
     },
   })
   hits: Hits<Record<string, any>>;

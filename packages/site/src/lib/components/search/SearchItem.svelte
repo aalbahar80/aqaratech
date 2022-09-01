@@ -3,34 +3,27 @@
 	import { classes } from '$lib/utils/classes';
 	import { startCase } from '$lib/utils/common';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
+	import type { HitDto } from '@self/sdk';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 
-	type Obj = {
-		id: string;
-		title: string;
-	} & Record<string, any>;
-
-	type Item = {
-		_formatted: Obj;
-	} & Obj;
-
-	export let item: Item;
+	export let item: HitDto;
 	export let icon: typeof SvelteComponentTyped<
 		svelte.JSX.IntrinsicElements['svg']
 	>;
 
 	const hiddenFields = ['title', 'id', 'organizationId'];
 
-	$: highlightedFields = R.pickBy(
-		item._formatted,
-		(val: string, key) =>
-			typeof val === 'string' &&
-			val.includes('<mark>') &&
-			!hiddenFields.includes(key) &&
-			item[key] !== item.title && // hide any field if it matches title
-			(key !== 'label' || !item._formatted.title.includes('<mark>')), // hide label if title is already highlighted
-	);
+	$: highlightedFields =
+		R.pickBy(
+			item.formatted,
+			(val: string, key) =>
+				typeof val === 'string' &&
+				val.includes('<mark>') &&
+				!hiddenFields.includes(key) &&
+				item[key] !== item.title && // hide any field if it matches title
+				(key !== 'label' || !item.formatted?.title?.includes('<mark>')), // hide label if title is already highlighted
+		) ?? {};
 </script>
 
 <Hoverable let:hovering>
@@ -54,7 +47,7 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
-						{@html item._formatted.title}
+						{@html item.formatted?.title}
 					</p>
 					<div class="flex flex-col gap-y-1 text-xs font-light">
 						{#each Object.entries(highlightedFields) as [key, val]}

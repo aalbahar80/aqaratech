@@ -4174,12 +4174,20 @@ components:
         hits:
           type: array
           items:
+            title: HitDto
             type: object
             properties:
               id:
                 type: string
-              _formatted:
+              title:
+                type: string
+                nullable: true
+              formatted:
                 type: object
+                properties:
+                  title:
+                    type: string
+                    nullable: true
         offset:
           type: number
         limit:

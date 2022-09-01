@@ -117,10 +117,14 @@ export class SearchService implements OnModuleInit {
       filter,
     });
 
-    data.hits = data.hits.map((hit) => ({
-      ...hit,
-      url: `/${entitiesMap[indexName].urlName}/${hit.id}`,
-    }));
+    data.hits = data.hits.map((hit) => {
+      const { _formatted, ...rest } = hit;
+      return {
+        ...rest,
+        formatted: _formatted, // rename because openapi-generator doesn't play nice with leading underscores
+        url: `/${entitiesMap[indexName].urlName}/${hit.id}`,
+      };
+    });
 
     return data;
   }
