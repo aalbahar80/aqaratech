@@ -12,6 +12,9 @@
 	import '../styles/theme.postcss'; // skeleton theme/styles
 
 	onMount(() => {
+		// communicate that the app is ready - used for testing
+		document.body.classList.add('started');
+
 		if (env.PUBLIC_AQARATECH_ENV === 'production') {
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($page.data.user) {

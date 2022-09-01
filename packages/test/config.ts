@@ -9,17 +9,10 @@ type MyFixtures = {
 export const test = base.extend<MyFixtures>({
 	page: async ({ page }, use) => {
 		// TODO replace with page.goto(url, { waitUntil: "networkidle" })
-		page.addInitScript({
-			content: `
-				addEventListener('sveltekit:start', () => {
-					document.body.classList.add('started');
-				});
-			`,
-		});
-
 		const goto = page.goto;
 		page.goto = async function (url, opts) {
 			const res = await goto.call(page, url, opts);
+			// https://github.com/sveltejs/kit/pull/6484
 			await page.waitForSelector("body.started", { timeout: 5000 });
 			return res;
 		};
