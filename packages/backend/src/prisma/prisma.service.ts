@@ -10,7 +10,7 @@ import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class PrismaService
-  extends PrismaClient<Prisma.PrismaClientOptions, 'query', 'rejectOnNotFound'>
+  extends PrismaClient<Prisma.PrismaClientOptions, 'query'>
   implements OnModuleInit
 {
   constructor(readonly configService: ConfigService<EnvironmentConfig>) {
