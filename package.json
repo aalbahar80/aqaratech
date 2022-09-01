@@ -13,5 +13,10 @@
   },
   "devDependencies": {
     "turbo": "1.4.3"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "swagger-stats@0.99.2": "patches/swagger-stats@0.99.2.patch"
+    }
   }
 }
