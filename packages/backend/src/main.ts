@@ -71,7 +71,8 @@ async function bootstrap() {
       swaggerSpec: document,
       hostname: new URL(process.env.PUBLIC_SITE_URL).host, // https://aqaratech.com
       uriPath: '/swagger-stats',
-      //@ts-ignore
+      // @ts-expect-error `cookiePath` is a custom option I added using `pnpm patch`.
+      // Enables serving the swagger-stats UI behind a reverse proxy which strips the /api prefix.
       cookiePath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
       authentication: true,
       onAuthenticate: function (req: any, username: string, password: string) {
