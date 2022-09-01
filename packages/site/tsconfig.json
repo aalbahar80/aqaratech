@@ -12,17 +12,6 @@
 		"noUncheckedIndexedAccess": true,
 		// "exactOptionalPropertyTypes": true,
 		"esModuleInterop": true,
-		"sourceMap": true,
-		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$components/*": ["./src/lib/components/*"],
-			"$models": ["src/lib/models/index.ts"],
-			"$models/*": ["src/lib/models/*"],
-			"$utils": ["src/lib/utils/index.ts"],
-			"$utils/*": ["src/lib/utils/*"],
-			"$environment": ["src/lib/environment/index.ts"],
-			"$environment/*": ["src/lib/environment/*"]
-		}
+		"sourceMap": true
 	}
 }

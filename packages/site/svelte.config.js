@@ -22,6 +22,17 @@ const config = {
 		env: {
 			dir: '../../',
 		},
+		alias: {
+			$lib: 'src/lib',
+			'$lib/*': 'src/lib/*',
+			'$components/*': './src/lib/components/*',
+			$models: 'src/lib/models/index.ts',
+			'$models/*': 'src/lib/models/*',
+			$utils: 'src/lib/utils/index.ts',
+			'$utils/*': 'src/lib/utils/*',
+			$environment: 'src/lib/environment/index.ts',
+			'$environment/*': 'src/lib/environment/*',
+		},
 	},
 	// vitePlugin: {
 	// 	experimental: {
