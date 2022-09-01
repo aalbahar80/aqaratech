@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "turbo run --filter \\!@self/docs build",
-    "preview": "turbo run preview",
+    "preview": "turbo run --filter \\!@self/docs preview",
+    "preview:tunnel": "turbo run --filter \\!@self/docs preview:tunnel",
     "build:site": "turbo run build --filter=@self/site",
     "build:docs": "turbo run build --filter=@self/docs",
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
