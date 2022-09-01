@@ -123,8 +123,8 @@ export class LeasesController {
     { action: Action.Update, subject: SubjectType },
     { action: Action.Update, subject: 'LeaseInvoice' },
   )
-  @ApiOkResponse({ type: String })
   @ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
+  @ApiCreatedResponse({ type: String })
   createInvoices(
     @Param('id') id: string,
     @Body() createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[],

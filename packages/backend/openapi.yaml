@@ -7,10 +7,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: string
   /tenants:
     post:
       operationId: create
@@ -381,18 +377,12 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateRoleDto'
       responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserDto'
         '201':
           description: ''
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/UserDto'
       tags: &ref_3
         - roles
   /roles/{id}:
@@ -861,12 +851,6 @@ paths:
               items:
                 $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
       responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
         '201':
           description: ''
           content:
@@ -2165,6 +2149,8 @@ paths:
   /search:
     post:
       operationId: reindexAll
+      summary: ''
+      description: ''
       parameters:
         - &ref_20
           name: x-role-id
@@ -2183,12 +2169,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
       tags: *ref_21
   /organizations:
     post:
@@ -2514,6 +2494,8 @@ paths:
       tags: *ref_27
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_26
         - name: key
@@ -2532,6 +2514,8 @@ paths:
   /files/find-one:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_26
         - name: key

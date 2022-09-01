@@ -1,7 +1,12 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiHeader, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiHeader,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { ROLE_HEADER } from 'src/constants/header-role';
@@ -25,7 +30,7 @@ export class RolesController {
   @Post()
   // return email string?
   @CheckAbilities({ action: Action.Create, subject: 'Role' })
-  @ApiOkResponse({ type: UserDto })
+  @ApiCreatedResponse({ type: UserDto })
   create(
     @User() user: IUser,
     @Body(new RoleValidationPipe()) createRoleDto: CreateRoleDto,
@@ -38,6 +43,7 @@ export class RolesController {
   }
 
   @CheckAbilities({ action: Action.Delete, subject: 'Role' })
+  @ApiOkResponse({ type: String })
   @Delete(':id')
   remove(@Param('id') id: string): Promise<string> {
     return this.rolesService.remove(id);
