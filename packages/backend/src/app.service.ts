@@ -10,6 +10,6 @@ export class AppService {
   }
 
   async getMetrics() {
-    return this.prisma.$metrics.prometheus();
+    // return this.prisma.$metrics.prometheus();
   }
 }

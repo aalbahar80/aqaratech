@@ -19,12 +19,9 @@ import { AggregateModule } from './aggregate/aggregate.module';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
-import { HealthModule } from './health/health.module';
-import { MetricsModule } from './metrics/metrics.module';
 import { PostmarkModule } from './postmark/postmark.module';
 import { PostmarkService } from './postmark/postmark.service';
 import { PrismaModule } from './prisma/prisma.module';
-import { PrometheusModule } from './prometheus/prometheus.module';
 import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
@@ -58,9 +55,6 @@ import { UsersModule } from './users/users.module';
     LeasesModule,
     LeaseInvoicesModule,
     ExpensesModule,
-    HealthModule,
-    PrometheusModule,
-    MetricsModule,
     SearchModule,
     RolesModule,
     OrganizationsModule,
