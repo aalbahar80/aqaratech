@@ -1,4 +1,3 @@
-import adapter from '@sveltejs/adapter-auto';
 import adapterNode from '@sveltejs/adapter-node';
 import { dirname, join } from 'path';
 import sveltePreprocess from 'svelte-preprocess';
@@ -17,8 +16,7 @@ const config = {
 		}),
 	],
 	kit: {
-		adapter:
-			process.env.VERCEL || process.env.CF_PAGES ? adapter() : adapterNode(),
+		adapter: adapterNode(),
 		env: {
 			dir: '../../',
 		},
