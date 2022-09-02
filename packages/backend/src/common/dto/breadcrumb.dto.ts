@@ -74,13 +74,13 @@ export class BreadcrumbDto {
     this.id = id;
 
     if (rel === Rel.Tenant) {
-      this.label = labelParams.fullName;
+      this.label = labelParams.label || labelParams.fullName;
     } else if (rel === Rel.Portfolio) {
-      this.label = labelParams.fullName;
+      this.label = labelParams.label || labelParams.fullName;
     } else if (rel === Rel.Property) {
-      this.label = getAddress(labelParams);
+      this.label = labelParams.label || getAddress(labelParams);
     } else if (rel === Rel.Unit) {
-      this.label = getUnitLabel(labelParams);
+      this.label = labelParams.label || getUnitLabel(labelParams);
     } else if (rel === Rel.Lease) {
       this.label = labelParams.id;
     } else if (rel === Rel.MaintenanceOrder) {

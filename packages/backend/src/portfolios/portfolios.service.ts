@@ -47,7 +47,7 @@ export class PortfoliosService {
       new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
     );
 
-    return portfolio;
+    return new PortfolioDto(portfolio);
   }
 
   async findAll({
@@ -71,7 +71,7 @@ export class PortfoliosService {
       }),
     ]);
 
-    return { total, results };
+    return { total, results: results.map((r) => new PortfolioDto(r)) };
   }
 
   async findOne({ id, user }: { id: string; user: IUser }) {
@@ -80,7 +80,7 @@ export class PortfoliosService {
         AND: [{ id }, accessibleBy(user.ability, Action.Read).Portfolio],
       },
     });
-    return data;
+    return new PortfolioDto(data);
   }
 
   async update({
@@ -113,7 +113,7 @@ export class PortfoliosService {
       new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
     );
 
-    return portfolio;
+    return new PortfolioDto(portfolio);
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {
@@ -123,6 +123,7 @@ export class PortfoliosService {
       },
     });
 
-    return this.prisma.portfolio.delete({ where: { id } });
+    const portfolio = await this.prisma.portfolio.delete({ where: { id } });
+    return new PortfolioDto(portfolio);
   }
 }

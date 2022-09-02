@@ -2611,6 +2611,8 @@ components:
         residencyEnd:
           type: string
           nullable: true
+        title:
+          type: string
         organizationId:
           type: string
         fullName:
@@ -2641,6 +2643,7 @@ components:
         - updatedAt
         - dob
         - residencyEnd
+        - title
         - organizationId
         - fullName
         - label
@@ -3282,6 +3285,8 @@ components:
         dob:
           type: string
           nullable: true
+        title:
+          type: string
         organizationId:
           type: string
         fullName:
@@ -3302,6 +3307,7 @@ components:
         - createdAt
         - updatedAt
         - dob
+        - title
         - organizationId
         - fullName
         - label

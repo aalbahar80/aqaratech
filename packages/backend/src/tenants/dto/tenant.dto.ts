@@ -1,5 +1,6 @@
-import { IntersectionType, PartialType } from '@nestjs/swagger';
+import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
+import { Expose } from 'class-transformer';
 import {
   IsISO31661Alpha3,
   IsPhoneNumber,
@@ -54,6 +55,12 @@ export class TenantDto
   constructor(partial: Partial<TenantDto>) {
     super();
     Object.assign(this, partial);
+  }
+
+  @ApiProperty()
+  @Expose()
+  get title(): string {
+    return this.label || this.fullName;
   }
 }
 

@@ -45,7 +45,7 @@ export class TenantsService {
       new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
     );
 
-    return tenant;
+    return new TenantDto(tenant);
   }
 
   async findAll({
@@ -69,7 +69,7 @@ export class TenantsService {
       }),
     ]);
 
-    return { total, results };
+    return { total, results: results.map((t) => new TenantDto(t)) };
   }
 
   async findOne({ id }: { id: string }) {
@@ -119,7 +119,7 @@ export class TenantsService {
       new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
     );
 
-    return tenant;
+    return new TenantDto(tenant);
   }
 
   async remove({ id }: { id: string }) {
