@@ -17,9 +17,7 @@
       "outputs": [
         ".svelte-kit/**",
         "dist/**",
-        "build/**",
-        "openapi.yaml",
-        "./openapi.yaml"
+        "build/**"
       ]
     },
     "dev": {
