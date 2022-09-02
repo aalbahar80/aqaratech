@@ -3,7 +3,6 @@
   "pipeline": {
     "build": {
       "dependsOn": [
-        "^generate-sdk",
         "^build"
       ],
       "outputs": [
@@ -27,7 +26,6 @@
     "dev": {
       "cache": false,
       "dependsOn": [
-        "^generate-sdk",
         "^build"
       ],
       "outputs": [
@@ -35,15 +33,6 @@
         "dist/**",
         "build/**",
         "openapi.yaml"
-      ]
-    },
-    "generate-sdk": {
-      "inputs": [
-        "openapi.yaml"
-      ],
-      "outputs": [
-        "src/**",
-        "dist/**"
       ]
     },
     "preview": {
