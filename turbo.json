@@ -1,6 +1,15 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "@self/sdk#build": {
+      "inputs": [
+        "openapi.yaml"
+      ],
+      "outputs": [
+        "src/**",
+        "dist/**"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"
@@ -12,16 +21,6 @@
         "openapi.yaml",
         "./openapi.yaml"
       ]
-    },
-    "test": {
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "playwright-report",
-        "test-results"
-      ],
-      "cache": false
     },
     "dev": {
       "cache": false,
@@ -35,18 +34,19 @@
         "openapi.yaml"
       ]
     },
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "playwright-report",
+        "test-results"
+      ],
+      "cache": false
+    },
     "preview": {
       "dependsOn": [
         "build"
-      ]
-    },
-    "@self/sdk#build": {
-      "inputs": [
-        "openapi.yaml"
-      ],
-      "outputs": [
-        "src/**",
-        "dist/**"
       ]
     },
     "preview:tunnel": {
