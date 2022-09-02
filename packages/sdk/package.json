@@ -8,7 +8,7 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "generate-sdk": "pnpm run generate && tsc",
+        "build": "pnpm run generate && tsc",
         "dev:watch": "tsx watcher.ts",
         "generate": "rm -rf ./src && rm -rf ./dist && openapi-generator-cli generate"
     },

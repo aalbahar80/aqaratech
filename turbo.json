@@ -51,6 +51,15 @@
         "build"
       ]
     },
+    "@self/sdk#build": {
+      "inputs": [
+        "openapi.yaml"
+      ],
+      "outputs": [
+        "src/**",
+        "dist/**"
+      ]
+    },
     "preview:tunnel": {
       "dependsOn": [
         "build"
