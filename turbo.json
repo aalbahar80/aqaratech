@@ -8,7 +8,9 @@
       "outputs": [
         ".svelte-kit/**",
         "dist/**",
-        "build/**"
+        "build/**",
+        "openapi.yaml",
+        "./openapi.yaml"
       ]
     },
     "test": {
@@ -27,7 +29,24 @@
     "dev": {
       "cache": false,
       "dependsOn": [
-        "^build"
+        "^build",
+        "^generate-sdk"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        "dist/**",
+        "build/**",
+        "openapi.yaml",
+        "./openapi.yaml"
+      ]
+    },
+    "generate-sdk": {
+      "inputs": [
+        "openapi.yaml"
+      ],
+      "outputs": [
+        "dist/**",
+        "build/**"
       ]
     },
     "preview": {
@@ -45,6 +64,7 @@
     "**/.env",
     "**/.env.*",
     ".env",
-    "./openapi.yaml"
+    "./openapi.yaml",
+    "openapi.yaml"
   ]
 }
