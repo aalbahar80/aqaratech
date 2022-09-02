@@ -6,7 +6,7 @@
     "generators": {
       "fetch-client": {
         "generatorName": "typescript-fetch",
-        "inputSpec": "../backend/openapi.yaml",
+        "inputSpec": "./openapi.yaml",
         "output": "src",
         "skipValidateSpec": true,
         "additionalProperties": {

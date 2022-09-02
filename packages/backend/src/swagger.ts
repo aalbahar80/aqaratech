@@ -86,7 +86,7 @@ export const setupSwagger = async (app: INestApplication) => {
     const { dump } = await import('js-yaml');
     // For consumption of swagger-ui
     writeFileSync(
-      './openapi.yaml',
+      '../sdk/openapi.yaml',
       dump(document, {
         // schema: 'http://json-schema.org/draft-04/schema#',
       }),
