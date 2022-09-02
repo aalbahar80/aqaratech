@@ -3,6 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": [
+        "^generate-sdk",
         "^build"
       ],
       "outputs": [
@@ -23,21 +24,17 @@
       ],
       "cache": false
     },
-    "lint": {
-      "outputs": []
-    },
     "dev": {
       "cache": false,
       "dependsOn": [
-        "^build",
-        "^generate-sdk"
+        "^generate-sdk",
+        "^build"
       ],
       "outputs": [
         ".svelte-kit/**",
         "dist/**",
         "build/**",
-        "openapi.yaml",
-        "./openapi.yaml"
+        "openapi.yaml"
       ]
     },
     "generate-sdk": {
@@ -45,8 +42,8 @@
         "openapi.yaml"
       ],
       "outputs": [
-        "dist/**",
-        "build/**"
+        "src/**",
+        "dist/**"
       ]
     },
     "preview": {
@@ -63,8 +60,6 @@
   "globalDependencies": [
     "**/.env",
     "**/.env.*",
-    ".env",
-    "./openapi.yaml",
-    "openapi.yaml"
+    ".env"
   ]
 }
