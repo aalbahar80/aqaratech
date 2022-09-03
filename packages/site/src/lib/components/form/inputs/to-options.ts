@@ -8,13 +8,13 @@ import type {
 export const tenantsToOptions = (tenants: PaginatedTenantDto) =>
 	tenants.results.map((tenant) => ({
 		value: tenant.id,
-		label: tenant.fullName,
+		label: tenant.title,
 	}));
 
 export const portfoliosToOptions = (portfolios: PaginatedPortfolioDto) =>
 	portfolios.results.map((portfolio) => ({
 		value: portfolio.id,
-		label: portfolio.fullName,
+		label: portfolio.title,
 	}));
 
 export const propertiesToOptions = (properties: PaginatedPropertyDto) =>
