@@ -4310,13 +4310,13 @@ components:
     FileDto:
       type: object
       properties:
-        Key:
+        key:
           type: string
-        Size:
+        size:
           type: number
       required:
-        - Key
-        - Size
+        - key
+        - size
     BreadcrumbsDto:
       type: object
       properties:
