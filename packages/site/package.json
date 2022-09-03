@@ -72,7 +72,7 @@
     "prettier": "2.7.1",
     "prettier-plugin-tailwindcss": "0.1.13",
     "remeda": "1.1.0",
-    "svelte": "3.50.0",
+    "svelte": "3.49.0",
     "svelte-check": "2.9.0",
     "svelte-dnd-action": "0.9.19",
     "svelte-frappe-charts": "1.9.2",

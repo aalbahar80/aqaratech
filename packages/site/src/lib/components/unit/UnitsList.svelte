@@ -1,12 +1,43 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import UnitCard from '$components/unit/UnitCard.svelte';
+	import RadioButtons from '$lib/components/buttons/RadioButtons.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
+	import UnitCard from '$lib/components/unit/UnitCard.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedUnitDto } from '@self/sdk';
+	import type { PaginatedUnitDto, UnitDto } from '@self/sdk';
+	import { flip } from 'svelte/animate';
+	import { writable } from 'svelte/store';
 
 	export let units: PaginatedUnitDto;
+
+	const options = [
+		{
+			label: 'Type',
+			value: 'type',
+		},
+		{
+			label: 'Number',
+			value: 'number',
+		},
+	];
+
+	const sortBy = writable<typeof options[number]>(options[0]);
+
+	$: {
+		let sorted: UnitDto[] = units.results;
+		if (units && $sortBy.value === 'type') {
+			sorted = units.results.sort((a, b) =>
+				(a.type || '').localeCompare(b.type || ''),
+			);
+		} else if (units && $sortBy.value === 'number') {
+			sorted = units.results.sort((a, b) => +a.unitNumber - +b.unitNumber);
+		}
+		units = {
+			...units,
+			results: sorted,
+		};
+	}
 </script>
 
 <StackedList
@@ -22,8 +53,11 @@
 			]),
 	})}
 >
+	<div slot="secondary">
+		<RadioButtons {options} bind:selected={$sortBy} />
+	</div>
 	{#each units.results as unit (unit.id)}
-		<li>
+		<li animate:flip={{ duration: 300 }}>
 			<UnitCard {unit} />
 		</li>
 	{/each}
