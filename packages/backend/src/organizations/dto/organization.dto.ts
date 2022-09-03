@@ -1,5 +1,6 @@
-import { IntersectionType, PartialType } from '@nestjs/swagger';
+import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Organization } from '@prisma/client';
+import { Expose } from 'class-transformer';
 import { IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 
@@ -16,7 +17,18 @@ class OrganizationOptionalDto {
 export class OrganizationDto extends IntersectionType(
   AbstractDto,
   IntersectionType(OrganizationRequiredDto, OrganizationOptionalDto),
-) {}
+) {
+  constructor(partial: Partial<OrganizationDto>) {
+    super();
+    Object.assign(this, partial);
+  }
+
+  @ApiProperty()
+  @Expose()
+  get title(): string {
+    return this.label || this.fullName;
+  }
+}
 
 export class CreateOrganizationDto
   extends IntersectionType(

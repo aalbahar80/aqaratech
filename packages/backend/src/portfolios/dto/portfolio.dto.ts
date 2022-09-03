@@ -35,6 +35,11 @@ export class PortfolioDto
   )
   implements Portfolio
 {
+  constructor(partial: Partial<PortfolioDto>) {
+    super();
+    Object.assign(this, partial);
+  }
+
   @ApiProperty()
   @Expose()
   get title(): string {

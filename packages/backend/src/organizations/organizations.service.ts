@@ -6,6 +6,7 @@ import { generateExpenseCategoryTree } from 'src/constants/default-expense-categ
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {
   CreateOrganizationDto,
+  OrganizationDto,
   UpdateOrganizationDto,
 } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -57,7 +58,10 @@ export class OrganizationsService {
       include: { roles: true }, // used to redirect user to switch roles in frontend
     });
 
-    return { organization, roleId: organization.roles[0].id };
+    return {
+      organization: new OrganizationDto(organization),
+      roleId: organization.roles[0].id,
+    };
   }
 
   async findOne({ id, user }: { id: string; user: IUser }) {
@@ -69,7 +73,7 @@ export class OrganizationsService {
     const data = await this.prisma.organization.findUniqueOrThrow({
       where: { id },
     });
-    return data;
+    return new OrganizationDto(data);
   }
 
   async update({
@@ -105,6 +109,6 @@ export class OrganizationsService {
     // TODO delete s3 bucket
     // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
     const deleted = await this.prisma.organization.delete({ where: { id } });
-    return deleted;
+    return new OrganizationDto(deleted);
   }
 }

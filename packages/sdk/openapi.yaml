@@ -4139,6 +4139,8 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        title:
+          type: string
         fullName:
           type: string
           minLength: 3
@@ -4150,6 +4152,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - title
         - fullName
         - label
     OrganizationCreatedDto:
