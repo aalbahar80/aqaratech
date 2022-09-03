@@ -119,13 +119,7 @@ export class UnitDto
       (l) => l.start <= new Date() && l.end >= new Date(),
     );
 
-    const latestLease = this.leases.reduce(
-      // @ts-ignore
-      (prev, current) => (prev && prev.end > current.end ? prev : current),
-      undefined,
-    );
-
-    if (!latestLease) {
+    if (!this.leases.length) {
       return {
         isVacant: true,
         vacancyDate: this.createdAt,
@@ -134,6 +128,8 @@ export class UnitDto
         }),
       };
     }
+
+    const latestLease = this.leases[0]; // already sorted by end date
 
     const vacancyDistance = formatDistance(latestLease.end, new Date(), {
       addSuffix: true,
