@@ -10,12 +10,12 @@ export class SearchDto implements SearchResponse {
     items: {
       title: 'HitDto',
       type: 'object',
-      required: ['id', 'url', 'formatted'],
+      required: ['id', 'url', '_formatted'],
       properties: {
         id: { type: 'string' },
         title: { type: 'string', nullable: true },
         url: { type: 'string' },
-        formatted: {
+        _formatted: {
           type: 'object',
           properties: { title: { type: 'string', nullable: true } },
         },

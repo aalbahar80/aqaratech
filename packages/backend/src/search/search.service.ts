@@ -120,10 +120,8 @@ export class SearchService implements OnModuleInit {
     });
 
     const hitsWithUrl = data.hits.map((hit) => {
-      const { _formatted, ...rest } = hit;
       return {
-        ...rest,
-        formatted: _formatted, // rename because openapi-generator doesn't play nice with leading underscores
+        ...hit,
         url: `/${entitiesMap[indexName].urlName}/${hit.id}`,
       };
     });

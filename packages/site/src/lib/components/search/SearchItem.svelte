@@ -2,12 +2,13 @@
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { startCase } from '$lib/utils/common';
+	import type { Rename } from '$lib/utils/rename';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import type { HitDto } from '@self/sdk';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 
-	export let item: HitDto;
+	export let item: Rename<HitDto, 'formatted', '_formatted'>;
 	export let icon: typeof SvelteComponentTyped<
 		svelte.JSX.IntrinsicElements['svg']
 	>;
@@ -16,7 +17,7 @@
 
 	$: highlightedFields =
 		R.pickBy(
-			item.formatted,
+			item._formatted,
 			(val, key: string) =>
 				typeof val === 'string' &&
 				val.includes('<mark>') &&
@@ -24,7 +25,7 @@
 				key in item &&
 				// @ts-expect-error
 				item[key] !== item.title && // hide any field if it matches title
-				(key !== 'label' || !item.formatted?.title?.includes('<mark>')), // hide label if title is already highlighted
+				(key !== 'label' || !item._formatted?.title?.includes('<mark>')), // hide label if title is already highlighted
 		) ?? {};
 </script>
 
@@ -49,7 +50,7 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
-						{@html item.formatted?.title}
+						{@html item._formatted?.title}
 					</p>
 					<div class="flex flex-col gap-y-1 text-xs font-light">
 						{#each Object.entries(highlightedFields) as [key, val]}

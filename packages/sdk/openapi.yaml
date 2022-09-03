@@ -4196,7 +4196,7 @@ components:
             required:
               - id
               - url
-              - formatted
+              - _formatted
             properties:
               id:
                 type: string
@@ -4205,7 +4205,7 @@ components:
                 nullable: true
               url:
                 type: string
-              formatted:
+              _formatted:
                 type: object
                 properties:
                   title:
