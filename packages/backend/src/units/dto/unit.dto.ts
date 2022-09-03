@@ -19,6 +19,7 @@ import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
+import { getUnitLabel } from 'src/utils/address';
 
 class UnitRequiredDto {
   @IsID()
@@ -101,6 +102,15 @@ export class UnitDto
   @ApiHideProperty()
   @Exclude()
   property: IBreadcrumbs['property'];
+
+  @ApiProperty()
+  @Expose()
+  get title(): string {
+    return (
+      this.label ||
+      getUnitLabel({ type: this.type, unitNumber: this.unitNumber })
+    );
+  }
 
   @ApiProperty()
   @Expose()

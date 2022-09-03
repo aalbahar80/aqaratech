@@ -3362,6 +3362,8 @@ components:
           readOnly: true
         address:
           type: string
+        title:
+          type: string
         breadcrumbs:
           $ref: '#/components/schemas/PropertyBreadcrumbsDto'
         organizationId:
@@ -3408,6 +3410,7 @@ components:
         - createdAt
         - updatedAt
         - address
+        - title
         - breadcrumbs
         - organizationId
         - portfolioId
@@ -3469,6 +3472,8 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        title:
+          type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
@@ -3515,6 +3520,7 @@ components:
         - id
         - createdAt
         - updatedAt
+        - title
         - vacancy
         - breadcrumbs
         - organizationId
@@ -3735,6 +3741,8 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        title:
+          type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:

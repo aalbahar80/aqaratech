@@ -97,6 +97,12 @@ export class PropertyDto
 
   @ApiProperty()
   @Expose()
+  get title(): string {
+    return this.label || this.address;
+  }
+
+  @ApiProperty()
+  @Expose()
   get breadcrumbs(): PropertyBreadcrumbsDto {
     return {
       portfolio: new BreadcrumbDto({
