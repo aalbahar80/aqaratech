@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 
@@ -30,7 +31,7 @@ export class UsersService {
   // }
 
   async findOneByEmail(email: string): Promise<ValidatedUserDto> {
-    return this.prisma.user.findUniqueOrThrow({
+    const user = await this.prisma.user.findUniqueOrThrow({
       where: { email },
       include: {
         roles: {
@@ -38,7 +39,16 @@ export class UsersService {
         },
       },
     });
+
+    return {
+      ...user,
+      roles: user.roles.map((role) => ({
+        ...role,
+        organization: new OrganizationDto(role.organization),
+      })),
+    };
   }
+
   async getRoles(id: string) {
     const result = await this.prisma.user.findUniqueOrThrow({
       where: { id },

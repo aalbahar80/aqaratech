@@ -57,6 +57,7 @@ export class ValidatedUserDto extends UserDto {
               properties: {
                 id: { type: 'string' },
                 fullName: { type: 'string' },
+                title: { type: 'string' },
               },
             },
           },
@@ -64,5 +65,7 @@ export class ValidatedUserDto extends UserDto {
       ],
     },
   })
-  roles: (RoleDto & { organization: { id: string; fullName: string } })[];
+  roles: (RoleDto & {
+    organization: { id: string; fullName: string; title: string };
+  })[];
 }

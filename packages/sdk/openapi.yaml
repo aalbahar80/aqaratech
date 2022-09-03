@@ -3916,6 +3916,8 @@ components:
                         type: string
                       fullName:
                         type: string
+                      title:
+                        type: string
         email:
           type: string
       required:
