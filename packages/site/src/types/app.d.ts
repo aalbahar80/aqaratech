@@ -105,5 +105,10 @@ declare namespace svelte.JSX {
 		 * Custom event I created to use along with `use:clickOutside` to detect when the user clicks outside of a component.
 		 */
 		onoutclick?: CompositionEventHandler<T>;
+
+		/**
+		 * Frappe Charts event. Create a better type if using this.
+		 */
+		'ondata-select'?: any;
 	}
 }

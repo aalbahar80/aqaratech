@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-expect-error
 	import Chart from 'svelte-frappe-charts';
 
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
