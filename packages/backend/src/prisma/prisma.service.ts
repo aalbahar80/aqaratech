@@ -1,9 +1,4 @@
-import {
-  INestApplication,
-  Injectable,
-  NotFoundException,
-  OnModuleInit,
-} from '@nestjs/common';
+import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -18,9 +13,6 @@ export class PrismaService
       infer: true,
     });
     super({
-      rejectOnNotFound(e) {
-        throw new NotFoundException(e.message);
-      },
       log: [...(debug ? ['query'] : ([] as any[])), 'info', 'warn', 'error'],
     });
 

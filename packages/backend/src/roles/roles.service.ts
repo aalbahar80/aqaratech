@@ -61,7 +61,6 @@ export class RolesService {
         portfolioId: createRoleDto.portfolioId,
         tenantId: createRoleDto.tenantId,
       },
-      rejectOnNotFound: false,
     });
 
     if (existingRole) {
