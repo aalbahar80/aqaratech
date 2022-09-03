@@ -109,7 +109,9 @@ export class SearchService implements OnModuleInit {
     query: string;
     filter?: Filter | undefined;
   }) {
-    const data = await index.search(query, {
+    const data = await index.search<
+      TenantSearchDocument | PortfolioSearchDocument | PropertySearchDocument
+    >(query, {
       highlightPreTag: '<mark>',
       highlightPostTag: '</mark>',
       attributesToHighlight: ['*'],
@@ -117,7 +119,7 @@ export class SearchService implements OnModuleInit {
       filter,
     });
 
-    data.hits = data.hits.map((hit) => {
+    const hitsWithUrl = data.hits.map((hit) => {
       const { _formatted, ...rest } = hit;
       return {
         ...rest,
@@ -126,7 +128,10 @@ export class SearchService implements OnModuleInit {
       };
     });
 
-    return data;
+    return {
+      ...data,
+      hits: hitsWithUrl,
+    };
   }
 
   @OnEvent('update.index')
