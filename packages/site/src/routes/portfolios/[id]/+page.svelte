@@ -10,8 +10,7 @@
 	export let data: PageData;
 
 	$: details = [
-		...(data.portfolio.label ? [['Label', data.portfolio.label]] : []),
-		['Name', data.portfolio.fullName],
+		['Full Name', data.portfolio.fullName],
 		['Label', data.portfolio.label],
 		['Phone', data.portfolio.phone],
 		['Civil ID', data.portfolio.civilid],

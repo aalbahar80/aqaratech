@@ -13,8 +13,7 @@
 	export let data: PageData;
 
 	$: details = [
-		['Name', data.tenant.fullName],
-		...(data.tenant.label ? [['Label', data.tenant.label]] : []),
+		['Full Name', data.tenant.fullName],
 		['Label', data.tenant.label],
 		['Phone', data.tenant.phone],
 		['Date of Birth', data.tenant.dob ? toUTCFormat(data.tenant.dob) : ''],
