@@ -68,23 +68,19 @@
 					{/if}
 				{/each}
 			</div>
-			<!-- bug: null is being typecasted to 1/1/1970 -->
-			{#if unit.vacancy?.vacancyDistance && unit.vacancy.vacancyDate}
-				<!-- <pre>{JSON.stringify(unit.vacancy, null, 2)}</pre> -->
-				<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-					<Icon
-						src={Calendar}
-						class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-						aria-hidden="true"
-					/>
-					<p>
-						Vacancy:
-						<time dateTime={unit.vacancy.vacancyDate.toISOString()}>
-							{unit.vacancy.vacancyDistance}</time
-						>
-					</p>
-				</div>
-			{/if}
+			<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+				<Icon
+					src={Calendar}
+					class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+					aria-hidden="true"
+				/>
+				<p>
+					Vacancy:
+					<time dateTime={unit.vacancy.vacancyDate}>
+						{unit.vacancy.vacancyDistance}</time
+					>
+				</p>
+			</div>
 		</div>
 	</div>
 </a>

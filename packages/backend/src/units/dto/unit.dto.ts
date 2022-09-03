@@ -79,8 +79,8 @@ export class UnitBreadcrumbsDto extends PickType(BreadcrumbsDto, [
 
 export class UnitVacancy {
   isVacant: boolean;
-  vacancyDistance: string | null;
-  vacancyDate: Date | null;
+  vacancyDistance: string;
+  vacancyDate: Date;
 }
 
 export class UnitDto
@@ -118,17 +118,33 @@ export class UnitDto
     const isOccupied = this.leases.some(
       (l) => l.start <= new Date() && l.end >= new Date(),
     );
-    const lease = this.leases[0];
 
-    const vacancyDistance = lease?.end
-      ? formatDistance(this.leases[0].end, new Date(), {
+    const latestLease = this.leases.reduce(
+      // @ts-ignore
+      (prev, current) => (prev && prev.end > current.end ? prev : current),
+      undefined,
+    );
+
+    if (!latestLease) {
+      return {
+        isVacant: true,
+        vacancyDate: this.createdAt,
+        vacancyDistance: formatDistance(this.createdAt, new Date(), {
           addSuffix: true,
-        })
-      : '';
+        }),
+      };
+    }
 
-    const vacancyDate = lease?.end ?? null;
+    const vacancyDistance = formatDistance(latestLease.end, new Date(), {
+      addSuffix: true,
+    });
 
-    return { isVacant: !isOccupied, vacancyDistance, vacancyDate };
+    const data = {
+      isVacant: !isOccupied,
+      vacancyDistance,
+      vacancyDate: latestLease.end,
+    };
+    return data;
   }
 
   @ApiProperty()

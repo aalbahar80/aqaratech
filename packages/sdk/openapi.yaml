@@ -3432,11 +3432,9 @@ components:
           type: boolean
         vacancyDistance:
           type: string
-          nullable: true
         vacancyDate:
           format: date-time
           type: string
-          nullable: true
       required:
         - isVacant
         - vacancyDistance
