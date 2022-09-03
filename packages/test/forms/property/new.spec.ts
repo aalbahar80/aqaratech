@@ -10,7 +10,7 @@ test("smoke", async ({ page }, info) => {
 
 	// portfolio
 	await page.locator("#portfolioId").click();
-	await page.locator(`text=${portfolio.fullName}`).click();
+	await page.locator(`text=${portfolio.label}`).click();
 
 	await page.locator("#area").click();
 	await page.locator("text=Nuzha | النزهة").click();

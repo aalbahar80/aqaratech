@@ -10,7 +10,7 @@ test("smoke", async ({ page }, info) => {
 	await page.goto(`/expenses/new`);
 
 	await page.locator("#portfolioId").click();
-	await page.locator(`text=${portfolio.fullName}`).click();
+	await page.locator(`text=${portfolio.label}`).click();
 
 	await page.locator("#propertyId").click();
 	await page.locator(`data-testid=${property.id}`).click();
