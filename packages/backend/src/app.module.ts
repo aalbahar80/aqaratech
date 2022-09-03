@@ -2,7 +2,6 @@ import {
   CacheModule,
   ClassSerializerInterceptor,
   Module,
-  Scope,
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -72,7 +71,6 @@ import { UsersModule } from './users/users.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
-      scope: Scope.REQUEST,
     },
     {
       provide: APP_INTERCEPTOR,
