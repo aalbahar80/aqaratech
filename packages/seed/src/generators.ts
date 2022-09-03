@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Role } from "@prisma/client";
+import { Property, Role } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { addDays, addMinutes, addMonths, subDays } from "date-fns";
 import {
@@ -41,7 +41,7 @@ const fakePerson = () => {
 	const firstName = faker.name.firstName(gender);
 	const middleName = faker.name.middleName(gender);
 	const lastName = faker.name.lastName(gender);
-	const fullName = `${firstName} ${middleName} ${lastName}`;
+	const fullName = `${firstName} ${middleName} ${lastName} - FULLNAME`;
 	const label = `${firstName} ${lastName}`;
 	return { fullName, label };
 };
@@ -101,7 +101,7 @@ export const fakePortfolio = (orgId?: string) => {
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		label,
+		label: faker.helpers.arrayElement([`${label} - LABEL`, null]),
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
@@ -118,7 +118,7 @@ export const fakeTenant = (orgId?: string) => {
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
 		fullName,
-		label,
+		label: faker.helpers.arrayElement([`${label} - LABEL`, null]),
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
@@ -139,38 +139,58 @@ export const fakeUnit = (
 	propertyId?: string,
 	portfolioId?: string,
 	orgaizationId?: string
-) => ({
-	id: generateId(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	floor: faker.datatype.number({ min: -2, max: 10 }),
-	size: faker.datatype.number({ min: 1, max: 2000 }),
-	bed: faker.datatype.number({ min: 1, max: 10 }),
-	bath: faker.datatype.number({ min: 1, max: 10 }),
-	marketRent: +faker.finance.amount(100, 3000, 0),
-	unitNumber: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	type: faker.helpers.arrayElement(unitTypeValues),
-	usage: null,
-	propertyId: propertyId ?? generateId(),
-	portfolioId: portfolioId ?? generateId(),
-	organizationId: orgaizationId ?? generateId(),
-});
-
-export const fakeProperty = (portfolioId?: string, organizationId?: string) => {
-	const random = Math.floor(Math.random() * coordinates.length);
-	const propCoordinates = coordinates[random];
+) => {
+	const type = faker.helpers.arrayElement(unitTypeValues);
+	const unitNumber = faker.datatype.number({ min: 1, max: 100 }).toString();
+	const title = `${type} ${unitNumber}`;
 	return {
 		id: generateId(),
 		createdAt: createdAt(),
 		updatedAt: updatedAt(),
-		area: areas[Math.floor(Math.random() * areas.length)]![1],
-		block: faker.datatype.number({ min: 1, max: 13 }).toString(),
+		floor: faker.datatype.number({ min: -2, max: 10 }),
+		size: faker.datatype.number({ min: 1, max: 2000 }),
+		bed: faker.datatype.number({ min: 1, max: 10 }),
+		bath: faker.datatype.number({ min: 1, max: 10 }),
+		marketRent: +faker.finance.amount(100, 3000, 0),
+		unitNumber,
+		type,
+		usage: null,
+		propertyId: propertyId ?? generateId(),
+		portfolioId: portfolioId ?? generateId(),
+		organizationId: orgaizationId ?? generateId(),
+		label: faker.helpers.arrayElement([`${title} - LABEL`, null]),
+	};
+};
+
+const getAddress = (property: Pick<Property, "area" | "block" | "number">) => {
+	return [property.area, "ق", property.block, "م", property.number]
+		.filter(Boolean)
+		.join(" ");
+};
+
+export const fakeProperty = (portfolioId?: string, organizationId?: string) => {
+	const random = Math.floor(Math.random() * coordinates.length);
+	const propCoordinates = coordinates[random];
+
+	const area = areas[Math.floor(Math.random() * areas.length)]![1];
+	const block = faker.datatype.number({ min: 1, max: 13 }).toString();
+	const number = faker.datatype.number({ min: 1, max: 100 }).toString();
+
+	const address = getAddress({ area, block, number });
+
+	return {
+		id: generateId(),
+		createdAt: createdAt(),
+		updatedAt: updatedAt(),
+		label: faker.helpers.arrayElement([`${address} - LABEL`, null]),
+		area,
+		block,
+		number,
 		street: `شارع ${faker.helpers.arrayElement([
 			faker.name.lastName(),
 			faker.datatype.number({ min: 1, max: 500 }).toString(),
 		])}`,
 		avenue: null,
-		number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 		lat: propCoordinates?.[0] ?? 0,
 		long: propCoordinates?.[1] ?? 0,
 		parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
