@@ -98,7 +98,6 @@ export class FilesController {
     @User() user: IUser,
     @Query() fileFindOneOptionsDto: FileFindOneOptionsDto,
   ): Promise<string> {
-    console.log({ fileFindOneOptionsDto }, 'files.controller.ts ~ 99');
     const fileRequestDto = new FileRequestDto({
       key: fileFindOneOptionsDto.key,
       user,
