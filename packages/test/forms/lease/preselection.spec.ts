@@ -14,14 +14,14 @@ const url = `/${entitiesMap.lease.urlName}/new?tenantId=${tenant.id}&portfolioId
 test("tenant is preselected", async ({ page }) => {
 	await page.goto(url);
 	const el = page.locator("#tenantId");
-	await expect(el).toHaveValue(tenant.fullName);
+	await expect(el).toHaveValue(tenant.label);
 	await expect(el).toHaveAttribute("data-value", tenant.id);
 });
 
 test("portfolio is preselected", async ({ page }) => {
 	await page.goto(url);
 	const el = page.locator("#portfolioId");
-	await expect(el).toHaveValue(portfolio.fullName);
+	await expect(el).toHaveValue(portfolio.label);
 	await expect(el).toHaveAttribute("data-value", portfolio.id);
 });
 
