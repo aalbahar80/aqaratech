@@ -17,7 +17,7 @@
 	>
 		<div class="pr-3">
 			{#if $page.data.user?.role}
-				<p>{$page.data.user?.role?.organization.fullName}</p>
+				<p>{$page.data.user?.role?.organization.title}</p>
 				<span class="font-medium text-slate-300 group-hover:text-white">
 					{$page.data.user?.role?.meta.roleLabel}
 				</span>
