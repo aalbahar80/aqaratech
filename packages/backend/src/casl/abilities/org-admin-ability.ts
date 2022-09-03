@@ -1,14 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { Action, TCan, TCannot } from 'src/casl/casl-ability.factory';
 
 @Injectable()
 export class OrgAdminAbility {
-  private readonly logger = new Logger(OrgAdminAbility.name);
-
   define(role: Role, can: TCan, cannot: TCannot) {
-    this.logger.log('Defining ability for role', role.id);
-
     if (role.roleType !== 'ORGADMIN') {
       throw new Error('roleType is not ORGADMIN');
     }

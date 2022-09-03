@@ -1,14 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { Action, TCan } from 'src/casl/casl-ability.factory';
 
 @Injectable()
 export class TenantAbility {
-  private readonly logger = new Logger(TenantAbility.name);
-
   define(role: Role, can: TCan) {
-    this.logger.log('Defining ability for role', role.id);
-
     if (role.roleType !== 'TENANT' || !role.tenantId) {
       throw new Error('roleType is not tenant or tenantId is not set');
     }
