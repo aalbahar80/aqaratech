@@ -46,11 +46,6 @@
       "dependsOn": [
         "build"
       ]
-    },
-    "preview:tunnel": {
-      "dependsOn": [
-        "build"
-      ]
     }
   },
   "globalDependencies": [
