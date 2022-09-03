@@ -3,7 +3,8 @@
   "pipeline": {
     "@self/sdk#build": {
       "inputs": [
-        "openapi.yaml"
+        "openapi.yaml",
+        "openapitools.json"
       ],
       "outputs": [
         "src/**",

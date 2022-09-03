@@ -16,7 +16,8 @@
           "withInterfaces": true,
           "prefixParameterInterfaces": true,
           "disallowAdditionalPropertiesIfNotPresent": false,
-          "legacyDiscriminatorBehavior": false
+          "legacyDiscriminatorBehavior": false,
+          "withoutRuntimeChecks": true
         }
       }
     }
