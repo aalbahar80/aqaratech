@@ -9,7 +9,6 @@ import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log({ env }, 'hooks.ts ~ 12');
 	const now = Date.now();
 	const method = event.request.method;
 	console.log(
