@@ -35,7 +35,9 @@ export class UsersService {
       where: { email },
       include: {
         roles: {
-          include: { organization: { select: { id: true, fullName: true } } },
+          include: {
+            organization: { select: { id: true, fullName: true, label: true } },
+          },
         },
       },
     });

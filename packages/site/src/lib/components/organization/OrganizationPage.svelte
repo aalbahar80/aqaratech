@@ -10,7 +10,7 @@
 
 	$: details = [
 		['Name', organization.fullName],
-		...(organization.label ? [['Label', organization.label]] : []),
+		['Label', organization.label],
 	] as [string, string | null][];
 
 	const onDelete = async () => {

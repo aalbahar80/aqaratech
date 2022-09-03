@@ -16,7 +16,7 @@
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex h-12 items-center justify-between">
 			<p class="select-all truncate text-sm font-medium text-indigo-600">
-				{role.organization.fullName}
+				{role.organization.title}
 			</p>
 			<div class="flex place-items-center space-x-4">
 				{#if role.roleType === 'ORGADMIN'}
