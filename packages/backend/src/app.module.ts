@@ -14,6 +14,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
+import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { S3Service } from 'src/s3/s3.service';
 import { AggregateModule } from './aggregate/aggregate.module';
 import { AuthModule } from './auth/auth.module';
@@ -72,6 +73,10 @@ import { UsersModule } from './users/users.module';
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
       scope: Scope.REQUEST,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TimeoutInterceptor,
     },
     AppService,
     { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
