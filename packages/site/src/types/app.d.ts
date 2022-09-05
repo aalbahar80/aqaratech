@@ -42,7 +42,7 @@ declare namespace App {
 	}
 
 	interface PublicEnv {
-		readonly PUBLIC_AQARATECH_ENV: string | undefined;
+		readonly PUBLIC_AQARATECH_ENV: 'production' | 'development' | undefined;
 
 		/**
 		 * The current url origin where the site is hosted.

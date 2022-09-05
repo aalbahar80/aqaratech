@@ -318,7 +318,11 @@ export async function seed({
 			data: [...sample.portfolios, ...portfolios],
 		});
 		await prisma.payout.createMany({ data: [...sample.payouts, ...payouts] });
-		await prisma.tenant.createMany({ data: tenants });
+		await prisma.tenant.createMany({
+			// @ts-ignore
+			// skip the first tenant, it's already in the sample data
+			data: [...sample.tenants.slice(1), ...tenants],
+		});
 		// @ts-ignore
 		await prisma.role.createMany({ data: roles });
 		await prisma.property.createMany({

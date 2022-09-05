@@ -67,6 +67,12 @@ const portfolios = Prisma.validator<Prisma.PortfolioCreateManyArgs["data"]>()([
 		fullName: "Portfolio One",
 		label: "Port 1",
 	},
+	{
+		id: "23f5fb25-875b-492d-b3f2-a57db2d4bc44",
+		organizationId: testOrgId,
+		fullName: "Portfolio updateable",
+		label: "Port 2",
+	},
 ]);
 
 const tenants = Prisma.validator<Prisma.TenantCreateManyArgs["data"]>()([
@@ -75,6 +81,12 @@ const tenants = Prisma.validator<Prisma.TenantCreateManyArgs["data"]>()([
 		organizationId: testOrgId,
 		fullName: "Tenant One",
 		label: "Tenant 1",
+	},
+	{
+		id: "723c124e-b566-408e-9aa4-6d5dd3d4929e",
+		organizationId: testOrgId,
+		fullName: "Tenant updateable",
+		label: "Tenant 2",
 	},
 ]);
 
