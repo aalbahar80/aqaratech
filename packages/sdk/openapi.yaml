@@ -2330,6 +2330,30 @@ paths:
                 $ref: '#/components/schemas/OrganizationCreatedDto'
       tags: &ref_23
         - organizations
+    get:
+      operationId: findAll
+      summary: ''
+      description: ''
+      parameters:
+        - *ref_22
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedOrganizationDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfOrganizationDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_23
   /organizations/{id}:
     get:
       operationId: findOne

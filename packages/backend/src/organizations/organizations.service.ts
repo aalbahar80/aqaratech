@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 import { Action } from 'src/casl/casl-ability.factory';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
@@ -98,6 +99,15 @@ export class OrganizationsService {
       },
     });
     return updated.id;
+  }
+
+  async findAll() {
+    const [results, total] = await Promise.all([
+      this.prisma.organization.findMany(),
+      this.prisma.organization.count(),
+    ]);
+
+    return { total, results: plainToInstance(OrganizationDto, results) };
   }
 
   async remove({ id, user }: { id: string; user: IUser }) {

@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -17,6 +18,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -59,8 +61,17 @@ export class OrganizationsController {
     @UserBasic() user: AuthenticatedUser,
     @Body() createOrganizationDto: CreateOrganizationDto,
   ): Promise<OrganizationCreatedDto> {
+    console.log({ user }, 'organizations.controller.ts ~ 64');
     // also returns the roleId for the created organization admin
     return this.organizationsService.create({ createOrganizationDto, user });
+  }
+
+  @Get()
+  @SkipAbilityCheck()
+  @UseGuards(AqaratechStaffGuard)
+  @ApiPaginatedResponse(OrganizationDto)
+  findAll(): Promise<WithCount<OrganizationDto>> {
+    return this.organizationsService.findAll();
   }
 
   @Get(':id')
