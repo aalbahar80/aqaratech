@@ -3,13 +3,21 @@ paths:
   /:
     get:
       operationId: getHello
+      summary: ''
+      description: ''
       parameters: []
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: string
   /tenants:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_0
           name: x-role-id
@@ -33,6 +41,8 @@ paths:
         - tenants
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: page
@@ -90,6 +100,8 @@ paths:
   /tenants/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: id
@@ -107,6 +119,8 @@ paths:
       tags: *ref_1
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: id
@@ -130,6 +144,8 @@ paths:
       tags: *ref_1
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: id
@@ -148,6 +164,8 @@ paths:
   /tenants/{id}/leases:
     get:
       operationId: findLeases
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: page
@@ -210,6 +228,8 @@ paths:
   /tenants/{id}/invoices:
     get:
       operationId: findInvoices
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: page
@@ -302,6 +322,8 @@ paths:
   /tenants/{id}/roles:
     get:
       operationId: findRoles
+      summary: ''
+      description: ''
       parameters:
         - *ref_0
         - name: page
@@ -364,6 +386,8 @@ paths:
   /roles:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_2
           name: x-role-id
@@ -388,6 +412,8 @@ paths:
   /roles/{id}:
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_2
         - name: id
@@ -406,6 +432,8 @@ paths:
   /roles/{id}/send-invite:
     post:
       operationId: sendInvite
+      summary: ''
+      description: ''
       parameters:
         - *ref_2
         - name: id
@@ -420,6 +448,8 @@ paths:
   /leaseInvoices:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_4
           name: x-role-id
@@ -443,6 +473,8 @@ paths:
         - leaseInvoices
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_4
         - name: page
@@ -530,6 +562,8 @@ paths:
   /leaseInvoices/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_4
         - name: id
@@ -547,6 +581,8 @@ paths:
       tags: *ref_5
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_4
         - name: id
@@ -570,6 +606,8 @@ paths:
       tags: *ref_5
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_4
         - name: id
@@ -588,6 +626,8 @@ paths:
   /leaseInvoices/{id}/send-email:
     post:
       operationId: sendEmail
+      summary: ''
+      description: ''
       parameters:
         - *ref_4
         - name: id
@@ -606,6 +646,8 @@ paths:
   /leases:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_6
           name: x-role-id
@@ -629,6 +671,8 @@ paths:
         - leases
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: page
@@ -686,6 +730,8 @@ paths:
   /leases/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: id
@@ -703,6 +749,8 @@ paths:
       tags: *ref_7
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: id
@@ -726,6 +774,8 @@ paths:
       tags: *ref_7
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: id
@@ -744,6 +794,8 @@ paths:
   /leases/{id}/invoices:
     get:
       operationId: findInvoices
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: id
@@ -835,6 +887,8 @@ paths:
       tags: *ref_7
     post:
       operationId: createInvoices
+      summary: ''
+      description: ''
       parameters:
         - *ref_6
         - name: id
@@ -861,6 +915,8 @@ paths:
   /portfolios:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_8
           name: x-role-id
@@ -884,6 +940,8 @@ paths:
         - portfolios
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: page
@@ -941,6 +999,8 @@ paths:
   /portfolios/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: id
@@ -958,6 +1018,8 @@ paths:
       tags: *ref_9
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: id
@@ -981,6 +1043,8 @@ paths:
       tags: *ref_9
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: id
@@ -999,6 +1063,8 @@ paths:
   /portfolios/{id}/roles:
     get:
       operationId: findRoles
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: page
@@ -1061,6 +1127,8 @@ paths:
   /portfolios/{id}/properties:
     get:
       operationId: findProperties
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: page
@@ -1123,6 +1191,8 @@ paths:
   /portfolios/{id}/units:
     get:
       operationId: findUnits
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: page
@@ -1185,6 +1255,8 @@ paths:
   /portfolios/{id}/payouts:
     get:
       operationId: findPayouts
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: page
@@ -1247,6 +1319,8 @@ paths:
   /portfolios/{id}/balance:
     get:
       operationId: getBalance
+      summary: ''
+      description: ''
       parameters:
         - *ref_8
         - name: id
@@ -1265,6 +1339,8 @@ paths:
   /properties:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_10
           name: x-role-id
@@ -1288,6 +1364,8 @@ paths:
         - properties
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_10
         - name: page
@@ -1345,6 +1423,8 @@ paths:
   /properties/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_10
         - name: id
@@ -1362,6 +1442,8 @@ paths:
       tags: *ref_11
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_10
         - name: id
@@ -1385,6 +1467,8 @@ paths:
       tags: *ref_11
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_10
         - name: id
@@ -1403,6 +1487,8 @@ paths:
   /properties/{id}/units:
     get:
       operationId: findUnits
+      summary: ''
+      description: ''
       parameters:
         - *ref_10
         - name: page
@@ -1465,6 +1551,8 @@ paths:
   /units:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_12
           name: x-role-id
@@ -1488,6 +1576,8 @@ paths:
         - units
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_12
         - name: page
@@ -1545,6 +1635,8 @@ paths:
   /units/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_12
         - name: id
@@ -1562,6 +1654,8 @@ paths:
       tags: *ref_13
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_12
         - name: id
@@ -1585,6 +1679,8 @@ paths:
       tags: *ref_13
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_12
         - name: id
@@ -1603,6 +1699,8 @@ paths:
   /units/{id}/leases:
     get:
       operationId: findLeases
+      summary: ''
+      description: ''
       parameters:
         - *ref_12
         - name: page
@@ -1665,6 +1763,8 @@ paths:
   /payouts:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_14
           name: x-role-id
@@ -1688,6 +1788,8 @@ paths:
         - payouts
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_14
         - name: page
@@ -1745,6 +1847,8 @@ paths:
   /payouts/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_14
         - name: id
@@ -1762,6 +1866,8 @@ paths:
       tags: *ref_15
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_14
         - name: id
@@ -1785,6 +1891,8 @@ paths:
       tags: *ref_15
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_14
         - name: id
@@ -1803,6 +1911,8 @@ paths:
   /aggregate/incomeByMonth:
     get:
       operationId: getIncomeByMonth
+      summary: ''
+      description: ''
       parameters:
         - &ref_16
           name: x-role-id
@@ -1887,6 +1997,8 @@ paths:
   /aggregate/expensesByMonth:
     get:
       operationId: getExpensesByMonth
+      summary: ''
+      description: ''
       parameters:
         - *ref_16
         - name: start
@@ -1927,6 +2039,8 @@ paths:
   /aggregate/occupancy:
     get:
       operationId: getOccupancy
+      summary: ''
+      description: ''
       parameters:
         - *ref_16
         - name: start
@@ -1967,6 +2081,8 @@ paths:
   /users/me:
     get:
       operationId: findProfile
+      summary: ''
+      description: ''
       parameters:
         - name: x-role-id
           in: header
@@ -1986,6 +2102,8 @@ paths:
   /expenses:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_18
           name: x-role-id
@@ -2009,6 +2127,8 @@ paths:
         - expenses
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_18
         - name: page
@@ -2091,6 +2211,8 @@ paths:
   /expenses/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_18
         - name: id
@@ -2108,6 +2230,8 @@ paths:
       tags: *ref_19
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_18
         - name: id
@@ -2131,6 +2255,8 @@ paths:
       tags: *ref_19
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_18
         - name: id
@@ -2164,15 +2290,25 @@ paths:
         - search
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_20
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
       tags: *ref_21
   /organizations:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_22
           name: x-role-id
@@ -2197,6 +2333,8 @@ paths:
   /organizations/{id}:
     get:
       operationId: findOne
+      summary: ''
+      description: ''
       parameters:
         - *ref_22
         - name: id
@@ -2214,6 +2352,8 @@ paths:
       tags: *ref_23
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_22
         - name: id
@@ -2237,6 +2377,8 @@ paths:
       tags: *ref_23
     delete:
       operationId: remove
+      summary: ''
+      description: ''
       parameters:
         - *ref_22
         - name: id
@@ -2255,6 +2397,8 @@ paths:
   /organizations/{id}/roles:
     get:
       operationId: findRoles
+      summary: ''
+      description: ''
       parameters:
         - *ref_22
         - name: page
@@ -2317,6 +2461,8 @@ paths:
   /organizations/{id}/search:
     get:
       operationId: search
+      summary: ''
+      description: ''
       parameters:
         - *ref_22
         - name: id
@@ -2342,6 +2488,8 @@ paths:
   /expense-categories:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_24
           name: x-role-id
@@ -2365,6 +2513,8 @@ paths:
         - expense-categories
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_24
       responses:
@@ -2379,6 +2529,8 @@ paths:
       tags: *ref_25
     patch:
       operationId: updateAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_24
       requestBody:
@@ -2400,6 +2552,8 @@ paths:
   /expense-categories/{id}:
     patch:
       operationId: update
+      summary: ''
+      description: ''
       parameters:
         - *ref_24
         - name: id
@@ -2424,6 +2578,8 @@ paths:
   /files:
     post:
       operationId: create
+      summary: ''
+      description: ''
       parameters:
         - &ref_26
           name: x-role-id
@@ -2453,6 +2609,8 @@ paths:
         - files
     get:
       operationId: findAll
+      summary: ''
+      description: ''
       parameters:
         - *ref_26
         - name: relationKey
