@@ -56,9 +56,14 @@ export const isAccessible = ({
 		return true;
 	}
 
-	if (isAqaratechStaff) {
-		return ACCESSIBLE_ROUTES.STAFF.some((route) => pathname.startsWith(route));
-	} else if (user?.role?.roleType === 'ORGADMIN') {
+	if (
+		isAqaratechStaff &&
+		ACCESSIBLE_ROUTES.STAFF.some((route) => pathname.startsWith(route))
+	) {
+		return true;
+	}
+
+	if (user?.role?.roleType === 'ORGADMIN') {
 		return ACCESSIBLE_ROUTES.ORGADMIN.some((route) =>
 			pathname.startsWith(route),
 		);
