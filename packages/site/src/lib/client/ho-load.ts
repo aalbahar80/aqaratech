@@ -1,11 +1,13 @@
 import { api, type Api } from '$lib/client/api';
-import type { PageLoad } from './$types';
+import type { Load } from '@sveltejs/kit';
 
-type LoadArgs = Parameters<PageLoad>[0];
-type Callback<T, WithApi = false> = (
-	args: WithApi extends true ? LoadArgs & { api: Api } : LoadArgs,
-) => Promise<T>;
-type Fancy = <T>(fn: Callback<T, true>) => Callback<T>;
+type Callback<T extends Load, K, WithApi = false> = (
+	args: WithApi extends true
+		? Parameters<T>[0] & { api: Api }
+		: Parameters<T>[0],
+) => Promise<K>;
+
+type Fancy = <T extends Load, K>(fn: Callback<T, K, true>) => Callback<T, K>;
 
 export const fancy: Fancy = (fn) => {
 	return async (args) => {
