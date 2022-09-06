@@ -61,7 +61,6 @@ export class OrganizationsController {
     @UserBasic() user: AuthenticatedUser,
     @Body() createOrganizationDto: CreateOrganizationDto,
   ): Promise<OrganizationCreatedDto> {
-    console.log({ user }, 'organizations.controller.ts ~ 64');
     // also returns the roleId for the created organization admin
     return this.organizationsService.create({ createOrganizationDto, user });
   }
