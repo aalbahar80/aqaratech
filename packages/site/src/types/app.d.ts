@@ -33,6 +33,7 @@ declare namespace App {
 		idToken: string | undefined;
 		xRoleId: string | undefined;
 		isAuthenticated: boolean;
+		isAqaratechStaff: boolean;
 	}
 
 	// interface Platform {}

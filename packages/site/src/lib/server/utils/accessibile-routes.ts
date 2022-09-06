@@ -7,6 +7,7 @@ export const ACCESSIBLE_ROUTES = {
 		'/welcome',
 		'/organizations/new',
 	],
+	STAFF: ['/admin'],
 	ORGADMIN: [
 		'/organizations',
 		'/tenants',
@@ -43,9 +44,11 @@ export const ACCESSIBLE_ROUTES = {
 export const isAccessible = ({
 	user,
 	pathname,
+	isAqaratechStaff,
 }: {
 	user: User | undefined;
 	pathname: string;
+	isAqaratechStaff: boolean;
 }) => {
 	if (
 		ACCESSIBLE_ROUTES.AUTHENTICATED.some((route) => pathname.startsWith(route))
@@ -53,7 +56,9 @@ export const isAccessible = ({
 		return true;
 	}
 
-	if (user?.role?.roleType === 'ORGADMIN') {
+	if (isAqaratechStaff) {
+		return ACCESSIBLE_ROUTES.STAFF.some((route) => pathname.startsWith(route));
+	} else if (user?.role?.roleType === 'ORGADMIN') {
 		return ACCESSIBLE_ROUTES.ORGADMIN.some((route) =>
 			pathname.startsWith(route),
 		);

@@ -1,3 +1,4 @@
+export { AQARATECH_STAFF_ROLE } from "./constants/aqaratech-staff-role";
 export { DBEntity, dbEntity, Entity, NonDBEntity, nonDbEntity } from "./entity";
 export {
 	DBEntitiesMap,

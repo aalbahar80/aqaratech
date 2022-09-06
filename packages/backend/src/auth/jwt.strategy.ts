@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
+import { AQARATECH_STAFF_ROLE } from '@self/utils';
 import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AQARATECH_STAFF_ROLE } from 'src/constants/aqaratech-staff-role';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';

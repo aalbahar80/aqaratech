@@ -1,7 +1,8 @@
-import { env } from '$env/dynamic/public';
 import { environment } from '$aqenvironment';
+import { env } from '$env/dynamic/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
+import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
 import type { ResponseError } from '@self/sdk';
 import type { ExternalFetch, Handle, HandleError } from '@sveltejs/kit';
@@ -28,7 +29,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (cookies.idToken && !PUBLIC_ENDPOINTS.includes(event.url.pathname)) {
 		try {
 			console.log('validating idToken');
-			await validateToken(cookies.idToken);
+			const payload = await validateToken(cookies.idToken);
+			event.locals.isAqaratechStaff = isAqaratechStaff(payload);
 			event.locals.isAuthenticated = true;
 			// only set idToken in locals if it is valid
 			event.locals.idToken = cookies.idToken;

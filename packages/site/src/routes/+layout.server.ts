@@ -6,6 +6,7 @@ export const load: LayoutServerLoad = async ({ locals, url: { pathname } }) => {
 		isAuthenticated: locals.isAuthenticated,
 		pathname,
 		user: locals.user,
+		isAqaratechStaff: locals.isAqaratechStaff,
 	});
 
 	// If idToken validation fails, we set both user and isAuthenticated to false

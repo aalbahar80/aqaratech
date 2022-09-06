@@ -7,16 +7,19 @@ export const protectRoute = ({
 	isAuthenticated,
 	pathname,
 	user,
+	isAqaratechStaff,
 }: {
 	isAuthenticated: boolean;
 	pathname: string;
 	user?: User;
+	isAqaratechStaff: boolean;
 }) => {
 	const publicUrl = ['/'].includes(pathname);
 	// As things stand, this check only runs server-side.
 	// Not applicable when client-side routing is used.
 	const canAccess =
-		publicUrl || (isAuthenticated && isAccessible({ user, pathname }));
+		publicUrl ||
+		(isAuthenticated && isAccessible({ user, pathname, isAqaratechStaff }));
 
 	if (canAccess) {
 		return;
