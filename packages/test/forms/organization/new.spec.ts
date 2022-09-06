@@ -17,28 +17,31 @@ test("existing user can create new org", async ({ page, isMobile }) => {
 	await expect(page).toHaveURL("/organizations/new");
 	await page.waitForLoadState("networkidle"); // otherwise flaky/no hydration
 
-	const name = getName();
+	const { name, label } = getName();
 	await page.locator('input[name="fullName"]').fill(name);
-	await page.locator('input[name="label"]').fill("newOrg");
+	await page.locator('input[name="label"]').fill(label);
 	await page.locator("text=Save").click();
 
-	const locator = page.locator(`text=${name}`);
+	const locator = page.locator(`text=${label}`);
 	await expect(locator).toBeVisible();
 });
 
 test("can be submitted", async ({ page }) => {
 	await page.goto("/organizations/new");
 
-	const name = getName();
+	const { name, label } = getName();
 	await page.locator('input[name="fullName"]').fill(name);
-	await page.locator('input[name="label"]').fill("Org 2");
+	await page.locator('input[name="label"]').fill(label);
 	await page.locator("text=Save").click();
 
-	const locator = page.locator(`text=${name}`);
+	const locator = page.locator(`text=${label}`);
 	await expect(locator).toBeVisible();
 });
 
 const getName = () => {
 	const random = Math.random().toString(36).substring(7);
-	return `Test Organization ${random}`;
+	return {
+		name: `Test Organization ${random}`,
+		label: `test-org-${random}`,
+	};
 };
