@@ -239,7 +239,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.88
-      '@sveltejs/kit': 1.0.0-next.469
+      '@sveltejs/kit': 1.0.0-next.467
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
@@ -305,7 +305,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.88
-      '@sveltejs/kit': 1.0.0-next.469_svelte@3.49.0+vite@3.1.0
+      '@sveltejs/kit': 1.0.0-next.467_svelte@3.49.0+vite@3.1.0
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
@@ -2914,8 +2914,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.469_svelte@3.49.0+vite@3.1.0:
-    resolution: {integrity: sha512-gNQ52zeGpQo/Fl1jEK7pLFpt5Nl3SOvgR3a7dXVFYk+M6njAGmlhwlxianDp/iBa3T+Aky62L01ARnVP3DTCnw==}
+  /@sveltejs/kit/1.0.0-next.467_svelte@3.49.0+vite@3.1.0:
+    resolution: {integrity: sha512-lq9DHdOJ9G0tvgZ0lBA306VTVhPHLAe+EW9tfEgtvAFhNAAI91THqDJO9vUJaWXMW489SeEoGlMlIUARfXyMlA==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -2923,11 +2923,11 @@ packages:
       svelte: ^3.44.0
       vite: ^3.1.0-beta.1
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 1.0.4_svelte@3.49.0+vite@3.1.0
+      '@sveltejs/vite-plugin-svelte': 1.0.5_svelte@3.49.0+vite@3.1.0
       cookie: 0.5.0
       devalue: 3.1.3
       kleur: 4.1.5
-      magic-string: 0.26.3
+      magic-string: 0.26.2
       mime: 3.0.0
       node-fetch: 3.2.10
       sade: 1.8.1
@@ -2971,13 +2971,13 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/1.0.4_svelte@3.49.0+vite@3.1.0:
-    resolution: {integrity: sha512-UZco2fdj0OVuRWC0SUJjEOftITc2IeHLFJNp00ym9MuQ9dShnlO4P29G8KUxRlcS7kSpzHuko6eCR9MOALj7lQ==}
+  /@sveltejs/vite-plugin-svelte/1.0.5_svelte@3.49.0+vite@3.1.0:
+    resolution: {integrity: sha512-CmSdSow0Dr5ua1A11BQMtreWnE0JZmkVIcRU/yG3PKbycKUpXjNdgYTWFSbStLB0vdlGnBbm2+Y4sBVj+C+TIw==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
       diff-match-patch: ^1.0.5
       svelte: ^3.44.0
-      vite: ^3.0.0 || ^3.1.0-beta.1
+      vite: ^3.0.0
     peerDependenciesMeta:
       diff-match-patch:
         optional: true
