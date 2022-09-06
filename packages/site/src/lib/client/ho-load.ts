@@ -12,8 +12,7 @@ export const fancy: Fancy = (fn) => {
 		const parentData = await args.parent();
 		const apiClient = api({
 			loadFetch: args.fetch,
-			token: parentData.accessToken,
-			roleId: parentData.user?.role?.id,
+			...parentData.apiConfig,
 		});
 		return fn.call(null, { ...args, api: apiClient });
 	};
