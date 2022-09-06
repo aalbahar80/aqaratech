@@ -7,7 +7,9 @@ type Callback<T extends Load, K, WithApi = false> = (
 		: Parameters<T>[0],
 ) => Promise<K>;
 
-type Fancy = <T extends Load, K>(fn: Callback<T, K, true>) => Callback<T, K>;
+type Fancy = <ThisLoad extends Load, Output>(
+	fn: Callback<ThisLoad, Output, true>,
+) => Callback<ThisLoad, Output>;
 
 export const fancy: Fancy = (fn) => {
 	return async (args) => {
