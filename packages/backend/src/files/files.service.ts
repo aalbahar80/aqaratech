@@ -5,6 +5,7 @@ import { DBEntity, entitiesMap } from '@self/utils';
 import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { S3_TTL } from 'src/constants/s3-ttl';
 import {
   CreateFileDto,
   DirectoryRequestDto,
@@ -146,7 +147,7 @@ export class FilesService {
 
       // set cache
       await this.cacheManager.set<string>(cacheKey, presignedUrl, {
-        ttl: 60 * 60 * 24, // TODO set to half time of presigned url duration
+        ttl: S3_TTL / 2,
       });
     }
 
