@@ -2,6 +2,7 @@
 
 FROM node:16.9 as site
 
+# Should be supplied from the command line: `--build-arg GREET=World`
 ARG PUBLIC_AQARATECH_ENV
 ARG PUBLIC_SITE_URL
 ARG PUBLIC_API_URL
