@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # build
 docker build -t aqaratech-api -f "Dockerfile.backend" .
 
