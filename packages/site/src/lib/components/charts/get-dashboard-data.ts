@@ -68,7 +68,7 @@ export const getDashboardData = async ({
 		// future occupancy
 		api.aggregate.getOccupancy({
 			...filter,
-			start: new Date().toISOString(),
+			start: new Date().toISOString().split('T')[0], // including time will cause the query to be refetech on the client because the url will be slightly different
 			end: getOneYearLater().toISOString(),
 		}),
 		api.expenseCategories.findAll(),
