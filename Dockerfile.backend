@@ -11,14 +11,16 @@ FROM node:16 as backend
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
 COPY pnpm-lock.yaml ./
-RUN pnpm fetch
+
+# Only fetch once bug is fixed. Also add --offline to install command. https://github.com/pnpm/pnpm/issues/5268
+# RUN pnpm fetch 
 
 ADD . ./
 
 # ENV PRISMA_SKIP_POSTINSTALL_GENERATE=1
 
 # Frozen lockfile here?
-RUN pnpm --filter=. --filter=@self/backend... install --offline
+RUN pnpm --filter=. --filter=@self/backend... install
 
 RUN pnpm --filter=@self/backend... run build 
 
