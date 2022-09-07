@@ -2,8 +2,6 @@
 
 FROM node:16.9 as site
 
-ARG PUBLIC_SITE_URL
-
 # use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
 # https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
@@ -25,6 +23,7 @@ RUN pnpm --filter=@self/site... run build
 
 RUN pnpm --filter=@self/site deploy pruned
 
+ARG PUBLIC_SITE_URL
 
 FROM node:16.9-alpine as production
 
