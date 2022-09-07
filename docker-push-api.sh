@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # build
-docker build -t aqaratech-api -f "Dockerfile.backend" .
-
-# tag
-docker tag aqaratech-api registry.digitalocean.com/aqtech/aqaratech-api
+docker build -t registry.digitalocean.com/aqtech/aqaratech-api -f "Dockerfile.backend" .
 
 # push
 docker push registry.digitalocean.com/aqtech/aqaratech-api
