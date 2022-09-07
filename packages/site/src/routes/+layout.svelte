@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_AQARATECH_ENV } from '$env/static/public';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -9,13 +9,14 @@
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
-	import '../styles/theme.postcss'; // skeleton theme/styles
+	import '../styles/theme.postcss';
+	// skeleton theme/styles
 
 	onMount(() => {
 		// communicate that the app is ready - used for testing
 		document.body.classList.add('started');
 
-		if (env.PUBLIC_AQARATECH_ENV === 'production') {
+		if (PUBLIC_AQARATECH_ENV === 'production') {
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($page.data.user) {
 				LogRocket.identify($page.data.user.id || '', {
@@ -39,7 +40,7 @@
 {/if}
 
 <div>
-	{#if env.PUBLIC_AQARATECH_ENV !== 'production'}
+	{#if PUBLIC_AQARATECH_ENV !== 'production'}
 		<Alert />
 	{/if}
 	<ToastParent />

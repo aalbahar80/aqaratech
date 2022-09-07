@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/public';
+import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { getRoleMeta } from '$lib/server/utils/get-role-meta';
 import {
@@ -85,7 +85,7 @@ const getProfile = async (
 
 	const config = new Configuration({
 		headers,
-		basePath: env.PUBLIC_API_URL_LOCAL || env.PUBLIC_API_URL,
+		basePath: PUBLIC_API_URL_LOCAL || PUBLIC_API_URL,
 	});
 
 	// Either get the user or return undefined.

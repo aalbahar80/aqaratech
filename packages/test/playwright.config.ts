@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve("./global-setup"),
 	reporter: [["list"], ["html", { open: "on-failure" }]],
 	retries: 2,
-	timeout: 15 * 1000,
+	timeout: 5 * 1000,
 	use: {
 		storageState: "storageState.json",
 		headless: true,

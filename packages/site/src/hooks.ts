@@ -1,5 +1,5 @@
 import { environment } from '$aqenvironment';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
@@ -165,8 +165,8 @@ export const handleError: HandleError = async ({ error, event }) => {
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
-	const basePath = env.PUBLIC_API_URL;
-	const newPath = env.PUBLIC_API_URL_LOCAL;
+	const basePath = PUBLIC_API_URL;
+	const newPath = PUBLIC_API_URL_LOCAL;
 
 	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);

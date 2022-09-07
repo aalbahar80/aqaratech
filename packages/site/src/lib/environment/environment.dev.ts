@@ -1,18 +1,18 @@
-import { env } from '$env/dynamic/public';
+import { PUBLIC_SITE_URL } from '$env/static/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
 
 export const developmentEnvironment: EnvironmentConfig = {
 	type: 'DEVELOPMENT',
 	envName: 'dev',
-	urlOrigin: env.PUBLIC_SITE_URL,
+	urlOrigin: PUBLIC_SITE_URL,
 	authConfig: {
 		AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
 		AUTH0_CLIENT_SECRET:
 			'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 		AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 		AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
-		AUTH0_REDIRECT_URI: `${env.PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
+		AUTH0_REDIRECT_URI: `${PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
 		AUTH0_API_NAMESPACE: 'https://letand.be',
 		AUTH0_API_AUDIENCE: 'letand.be/api',
 		JWKS: {

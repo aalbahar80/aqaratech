@@ -43,6 +43,10 @@ declare namespace App {
 	}
 
 	interface PublicEnv {
+		// TODO: since the introduction of $env/static & $env/dynamic, manually defining types here is no longer necessary
+		// Consider removing this interface while keeping the documentation
+		// https://kit.svelte.dev/docs/modules#$env-dynamic-private
+
 		readonly PUBLIC_AQARATECH_ENV: 'production' | 'development' | undefined;
 
 		/**
