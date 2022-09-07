@@ -2,13 +2,6 @@
 
 FROM node:16.9 as site
 
-# Should be supplied from the command line: `--build-arg GREET=World`
-ARG PUBLIC_AQARATECH_ENV
-ARG PUBLIC_SITE_URL
-ARG PUBLIC_API_URL
-ARG PUBLIC_API_URL_LOCAL
-ARG AUTH0_CLIENT_SECRET
-
 # use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
 # https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
@@ -26,20 +19,22 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
 
 # https://github.com/mhart/alpine-node#example-dockerfile-for-your-own-nodejs-project
 
-# static environment variables should be available at this point
-# TODO move env var to bash script
-RUN pnpm --filter=@self/site... run build
+# Should be supplied from the command line: `--build-arg GREET=World`
+# Safe for secrets as long as not re-declared in final image: https://vsupalov.com/build-docker-image-clone-private-repo-ssh-key/#multi-stage-builds
+ARG PUBLIC_AQARATECH_ENV
+ARG PUBLIC_SITE_URL
+ARG PUBLIC_API_URL
+ARG PUBLIC_API_URL_LOCAL
+ARG AUTH0_CLIENT_SECRET
+
+RUN PUBLIC_AQARATECH_ENV=$PUBLIC_AQARATECH_ENV PUBLIC_SITE_URL=$PUBLIC_SITE_URL PUBLIC_API_URL=$PUBLIC_API_URL PUBLIC_API_URL_LOCAL=$PUBLIC_API_URL_LOCAL AUTH0_CLIENT_SECRET=$AUTH0_CLIENT_SECRET pnpm --filter=@self/site... run build
 
 RUN pnpm --filter=@self/site deploy pruned
 
 
 FROM node:16.9-alpine as production
 
-ARG PUBLIC_AQARATECH_ENV
 ARG PUBLIC_SITE_URL
-ARG PUBLIC_API_URL
-ARG PUBLIC_API_URL_LOCAL
-ARG AUTH0_CLIENT_SECRET
 RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} INBRACKETS=${PUBLIC_SITE_URL} NOBRACKETS=$PUBLIC_SITE_URL"
 
 WORKDIR /app
@@ -54,4 +49,4 @@ EXPOSE 3000
 
 # ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
 # Rest of the env vars are to be consumed by sveltekit's $env/static
-CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL PORT=3000 PUBLIC_AQARATECH_ENV=$PUBLIC_AQARATECH_ENV PUBLIC_SITE_URL=$PUBLIC_SITE_URL PUBLIC_API_URL=$PUBLIC_API_URL PUBLIC_API_URL_LOCAL=$PUBLIC_API_URL_LOCAL AUTH0_CLIENT_SECRET=$AUTH0_CLIENT_SECRET node build/index.js"]
+CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL PORT=3000 node build/index.js"]
