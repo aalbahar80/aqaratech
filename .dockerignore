@@ -2,6 +2,8 @@
 node_modules
 Dockerfile.backend
 Dockerfile.site
+docker-push-api.sh
+docker-push-site.sh
 
 .env
 **/.env
