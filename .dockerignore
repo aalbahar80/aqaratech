@@ -5,9 +5,6 @@ Dockerfile.site
 docker-push-api.sh
 docker-push-site.sh
 
-.env
-**/.env
-
 ######################### COMMON ###############################################
 # https://raw.githubusercontent.com/erdaltsksn/dockerignore/main/templates/Common.dockerignore
 ################################################################################
