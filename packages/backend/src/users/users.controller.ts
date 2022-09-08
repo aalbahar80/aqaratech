@@ -1,4 +1,4 @@
-import { CacheTTL, Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import {
   ApiHeader,
   ApiNotFoundResponse,
@@ -9,7 +9,6 @@ import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
-import { HttpCacheInterceptor } from 'src/interceptors/http-cache.interceptor';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
@@ -36,8 +35,6 @@ export class UsersController {
   // User will then use role data to set a role header to gain access
   // to endpoints that require an ability check.
   @Get('me')
-  @CacheTTL(120)
-  @UseInterceptors(HttpCacheInterceptor)
   @SkipAbilityCheck()
   @ApiOkResponse({ type: ValidatedUserDto })
   @ApiNotFoundResponse()
