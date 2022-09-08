@@ -2,6 +2,6 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ parent }) => {
 	const parentStuff = await parent();
-	const user = await parentStuff.api.users.findProfile();
+	const user = parentStuff.user;
 	return { user };
 };
