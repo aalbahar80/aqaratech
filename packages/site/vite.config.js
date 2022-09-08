@@ -26,6 +26,26 @@ const config = {
 	ssr: {
 		noExternal: ['@self/sdk', 'chart.js'],
 	},
+	// esbuild: {
+	// 	sourcemap: true, // no effect?
+	// },
+	build: {
+		sourcemap: true,
+		rollupOptions: {
+			// with rollupOptions, source maps work for BUILD: pnpm build && node --inspect -r source-map-support/register build/index.js
+			// without rollupOptions, source maps work for PREVIEW: pnpm build && npx vite preview --port 3000
+			output: {
+				sourcemap: true,
+				sourcemapPathTransform: (relativeSourcePath) => {
+					if (relativeSourcePath.includes('../src')) {
+						// adjust path by one level down
+						return relativeSourcePath.replace('../src', 'src');
+					}
+					return relativeSourcePath;
+				},
+			},
+		},
+	},
 };
 
 export default config;

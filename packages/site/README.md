@@ -31,25 +31,16 @@ pnpm exec eslint .
 # Debugging (server)
 
 ```bash
-node --inspect node_modules/.bin/svelte-kit dev
+# run vite preview then attach vscode debugger
+npx vite preview --port 3000
 
-# alternative
-pnpm build && node --inspect-brk build/index.js
-```
+# run build output then attach vscode debugger (need to install source-map-support for node)
+pnpm add source-map-support -DE
+pnpm build && node --inspect -r source-map-support/register build/index.js
 
-```bash
-cd packages/site
-node ./node_modules/@sveltejs/kit/svelte-kit.js dev
-```
+# vite also has a debug flag
 
-```bash
-cd packages/site
-
-# npx vite --port 3000 --debug
-pnpm run debug
-
-# use `debugger` statement
-# attach to running process in vscode
+npx vite --port 3000 --debug
 ```
 
 ```json

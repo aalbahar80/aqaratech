@@ -280,6 +280,7 @@ importers:
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13
       remeda: 1.1.0
+      source-map-support: 0.5.21
       svelte: 3.49.0
       svelte-check: 2.9.0
       svelte-dnd-action: 0.9.19
@@ -346,6 +347,7 @@ importers:
       prettier: 2.7.1
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
       remeda: 1.1.0
+      source-map-support: 0.5.21
       svelte: 3.49.0
       svelte-check: 2.9.0_vylzxgme5yisu3bsyvcau4hjtq
       svelte-dnd-action: 0.9.19

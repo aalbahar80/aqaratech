@@ -10,11 +10,16 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	preprocess: [
 		sveltePreprocess({
+			sourceMap: true,
 			postcss: {
 				configFilePath: join(__dirname, 'postcss.config.cjs'),
 			},
 		}),
 	],
+	compilerOptions: {
+		enableSourcemap: true,
+		sourcemap: true,
+	},
 	kit: {
 		adapter: adapterNode(),
 		env: {
