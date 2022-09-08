@@ -5,7 +5,10 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { UpdateIndexEvent } from 'src/events/update-index.event';
+import {
+  RemoveDocumentsEvent,
+  UpdateIndexEvent,
+} from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
@@ -122,8 +125,20 @@ export class TenantsService {
     return new TenantDto(tenant);
   }
 
-  async remove({ id }: { id: string }) {
+  async remove({ id, user }: { id: string; user: IUser }) {
+    await this.prisma.tenant.findFirstOrThrow({
+      where: {
+        AND: [{ id }, accessibleBy(user.ability, Action.Delete).Tenant],
+      },
+    });
+
+    this.eventEmitter.emit(
+      'remove.documents',
+      new RemoveDocumentsEvent([id], this.IndexName),
+    );
+
     const deleted = await this.prisma.tenant.delete({ where: { id } });
-    return deleted.id;
+
+    return new TenantDto(deleted);
   }
 }

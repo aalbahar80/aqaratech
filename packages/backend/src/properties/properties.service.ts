@@ -8,7 +8,10 @@ import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { UpdateIndexEvent } from 'src/events/update-index.event';
+import {
+  RemoveDocumentsEvent,
+  UpdateIndexEvent,
+} from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
@@ -136,7 +139,14 @@ export class PropertiesService {
         AND: [{ id }, accessibleBy(user.ability, Action.Delete).Property],
       },
     });
+
+    this.eventEmitter.emit(
+      'remove.documents',
+      new RemoveDocumentsEvent([id], this.IndexName),
+    );
+
     const deleted = await this.prisma.property.delete({ where: { id } });
-    return deleted.id;
+
+    return new PropertyDto(deleted);
   }
 }

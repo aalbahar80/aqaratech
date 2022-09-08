@@ -7,7 +7,11 @@ import { instanceToPlain, plainToClass } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/casl-ability.factory';
-import { TIndexName, UpdateIndexEvent } from 'src/events/update-index.event';
+import {
+  RemoveDocumentsEvent,
+  TIndexName,
+  UpdateIndexEvent,
+} from 'src/events/update-index.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
@@ -148,6 +152,15 @@ export class SearchService implements OnModuleInit {
     } catch (e) {
       this.logger.error(e);
     }
+  }
+
+  @OnEvent('remove.documents')
+  async removeDocuments(payload: RemoveDocumentsEvent) {
+    const { indexName, ids } = payload;
+
+    const index = this.client.index(indexName);
+
+    await index.deleteDocuments(ids);
   }
 
   async remove() {

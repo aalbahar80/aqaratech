@@ -87,7 +87,7 @@ export class PropertiesController {
   @Delete(':id')
   @CheckAbilities({ action: Action.Delete, subject: SubjectType })
   @ApiOkResponse({ type: String })
-  remove(@User() user: IUser, @Param('id') id: string): Promise<string> {
+  remove(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
     return this.propertiesService.remove({ id, user });
   }
 

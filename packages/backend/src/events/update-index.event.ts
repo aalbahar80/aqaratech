@@ -25,3 +25,10 @@ export class UpdateIndexEvent {
     public readonly classConstructor: AnyClassConstructor,
   ) {}
 }
+
+export class RemoveDocumentsEvent {
+  constructor(
+    public readonly ids: string[],
+    public readonly indexName: TIndexName,
+  ) {}
+}
