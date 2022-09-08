@@ -32,6 +32,8 @@ async function bootstrap() {
         ROLE_HEADER,
         'Content-Type',
         'x-sws-authenticated',
+        'baggage', // sentry
+        'sentry-trace', // sentry
       ],
       maxAge: 24 * 60 * 60,
     },
