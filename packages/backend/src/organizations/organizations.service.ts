@@ -116,9 +116,13 @@ export class OrganizationsService {
       subject(this.SubjectType, { id }),
     );
 
-    // TODO delete s3 bucket
+    await this.s3.deleteBucket(id);
+    this.logger.log(`Deleted bucket ${id}`);
+
     // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
     const deleted = await this.prisma.organization.delete({ where: { id } });
+    this.logger.log(`Deleted organization ${id}`);
+
     return new OrganizationDto(deleted);
   }
 }

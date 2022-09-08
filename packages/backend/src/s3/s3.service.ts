@@ -1,4 +1,5 @@
 import {
+  DeleteBucketCommand,
   DeleteObjectCommand,
   GetObjectCommand,
   GetObjectCommandInput,
@@ -115,5 +116,32 @@ export class S3Service {
 
   async removeObject(options: GetObjectCommandInput) {
     return this._client.send(new DeleteObjectCommand(options));
+  }
+
+  async deleteBucket(bucketName: string) {
+    // delete all objects in bucket
+    const objects = await this.listObjects({
+      Bucket: bucketName,
+    });
+
+    if (objects?.Contents) {
+      await Promise.all(
+        objects.Contents.map((object) =>
+          this.removeObject({
+            Bucket: bucketName,
+            Key: object.Key,
+          }),
+        ),
+      );
+    }
+
+    // delete bucket
+    const deleted = await this._client.send(
+      new DeleteBucketCommand({
+        Bucket: bucketName,
+      }),
+    );
+
+    return deleted;
   }
 }
