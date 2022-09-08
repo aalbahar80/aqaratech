@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build site",
+			"type": "shell",
+			"command": "npx turbo run build --filter @self/site"
+		}
+	]
+}

@@ -2,9 +2,9 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "debug site/build",
 			"type": "node",
 			"request": "launch",
-			"name": "debug site/build",
 			"cwd": "${workspaceFolder}/packages/site",
 			"skipFiles": ["<node_internals>/**"],
 			"args": [
@@ -13,73 +13,31 @@
 				"source-map-support/register",
 				"build/index.js"
 			],
+			"console": "internalConsole",
+			"preLaunchTask": "build site"
+		},
+		{
+			"name": "debug site/preview",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/packages/site",
+			"skipFiles": ["<node_internals>/**"],
+			"args": [
+				"--inspect",
+				"./node_modules/vite/bin/vite",
+				"preview",
+				"--port",
+				"3000"
+			],
 			"console": "internalConsole"
 		},
 		{
-			"type": "node",
-			// "type": "pwa-node",
-			"request": "launch",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["./node_modules/.bin/svelte-kit", "dev"],
-			// "args": ["./node_modules/.bin/svelte-kit", "dev"]
-			"protocol": "inspector",
-			"cwd": "${workspaceFolder}/packages/site",
-			"name": "sveltekit ssr: debug2",
-			"skipFiles": ["<node_internals>/**"]
-		},
-		{
-			"type": "node",
-			// "type": "pwa-node",
-			"request": "launch",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["./node_modules/.bin/svelte-kit", "preview"],
-			// "args": ["./node_modules/.bin/svelte-kit", "dev"]
-			"protocol": "inspector",
-			"cwd": "${workspaceFolder}/packages/site",
-			"name": "sveltekit ssr: debug2 preview",
-			"skipFiles": ["<node_internals>/**"]
-		},
-		{
-			"name": "Debug server",
+			"name": "debug site/dev (manual)",
 			"type": "node",
 			"request": "launch",
-			"runtimeExecutable": "node",
-			"runtimeArgs": [
-				"--inspect-brk",
-				"--enable-source-maps",
-				"${workspaceFolder}/packages/site/node_modules/@sveltejs/kit/svelte-kit.js",
-				"dev"
-			],
 			"cwd": "${workspaceFolder}/packages/site",
-			// "console": "externalTerminal",
-			"autoAttachChildProcesses": true
-			// "outFiles": [
-			// 	"${workspaceFolder}/packages/site/**/*.ts",
-			// 	"!**/node_modules/**"
-			// ]
-			// "args": ["./node_modules/.bin/svelte-kit", "dev"],
-			// "protocol": "inspector",
-			// "env": {
-			// 	"NODE_OPTIONS": "--inspect"
-			// },
-			// "enableContentValidation": true,
-			// "localRoot": "${workspaceFolder}/packages/site/node_modules/.bin/svelte-kit",
-			// "program": "${workspaceFolder}/packages/site/node_modules/.bin/svelte-kit",
-			// "pauseForSourceMap": true,
-			// "resolveSourceMapLocations": [
-			// 	"${workspaceFolder}/packages/site/.svelte-kit/**/*.js",
-			// 	"${workspaceFolder}/**",
-			// 	"!**/node_modules/**"
-			// ]
-		},
-		{
-			"type": "pwa-chrome",
-			"request": "launch",
-			// "skipFiles": ["${workspaceFolder}/node_modules/**/*.js"],
-			"name": "Debug client",
-			// "preLaunchTask": "npm: start",
-			"url": "http://localhost:3000",
-			"webRoot": "${workspaceFolder}/packages/site/src"
+			"skipFiles": ["<node_internals>/**"],
+			"args": ["./node_modules/vite/bin/vite", "dev", "--port", "3000"]
 		}
 	]
 }
