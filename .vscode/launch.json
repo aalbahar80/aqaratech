@@ -3,6 +3,20 @@
 	"configurations": [
 		{
 			"type": "node",
+			"request": "launch",
+			"name": "debug site/build",
+			"cwd": "${workspaceFolder}/packages/site",
+			"skipFiles": ["<node_internals>/**"],
+			"args": [
+				"--inspect",
+				"-r",
+				"source-map-support/register",
+				"build/index.js"
+			],
+			"console": "internalConsole"
+		},
+		{
+			"type": "node",
 			// "type": "pwa-node",
 			"request": "launch",
 			"runtimeExecutable": "pnpm",
