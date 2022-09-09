@@ -27,6 +27,7 @@ Sentry.init({
 });
 
 async function bootstrap() {
+  console.log(`Version: ${version}`);
   if (!process.env.PUBLIC_SITE_URL) {
     console.error('PUBLIC_SITE_URL is not set');
   } else {
