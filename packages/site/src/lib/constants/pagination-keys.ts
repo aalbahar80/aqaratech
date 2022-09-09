@@ -5,5 +5,4 @@ export const EXPENSE_PAGINATION_KEY = 'expense-page';
 export const PAGE_SIZE = 'take';
 export const SORT_ORDER = 'sortOrder';
 export const ORDER_BY = 'orderBy';
-export const SEARCH_QUERY = 'q';
 // export const FILTER = 'filter';
