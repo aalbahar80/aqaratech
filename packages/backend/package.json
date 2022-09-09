@@ -49,6 +49,8 @@
     "@nestjs/terminus": "9.1.1",
     "@prisma/client": "4.3.1",
     "@self/utils": "workspace:1.0.0",
+    "@sentry/node": "7.12.1",
+    "@sentry/tracing": "7.12.1",
     "cache-manager": "4.1.0",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",

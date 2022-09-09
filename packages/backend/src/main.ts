@@ -1,5 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import * as Sentry from '@sentry/node';
+import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { URL } from 'node:url';
@@ -10,6 +12,19 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { getMiddleware } from 'swagger-stats';
 import { AppModule } from './app.module';
+// import { version } from '../package.json';
+
+Sentry.init({
+  dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
+  tracesSampleRate: 1.0,
+  environment: process.env.PUBLIC_AQARATECH_ENV,
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+  ],
+  // dsn: process.env.SENTRY_DSN,
+  // release: `v${version}`,
+});
 
 async function bootstrap() {
   if (!process.env.PUBLIC_SITE_URL) {
@@ -38,6 +53,10 @@ async function bootstrap() {
       maxAge: 24 * 60 * 60,
     },
   });
+
+  app.use(Sentry.Handlers.requestHandler());
+  app.use(Sentry.Handlers.tracingHandler());
+  app.use(Sentry.Handlers.errorHandler());
 
   app.use(helmet()); // before other middleware
   app.use(cookieParser());
