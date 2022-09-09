@@ -56,7 +56,7 @@ async function bootstrap() {
 
   app.use(Sentry.Handlers.requestHandler());
   app.use(Sentry.Handlers.tracingHandler());
-  app.use(Sentry.Handlers.errorHandler());
+  // app.use(Sentry.Handlers.errorHandler());
 
   app.use(helmet()); // before other middleware
   app.use(cookieParser());
