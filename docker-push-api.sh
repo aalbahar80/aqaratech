@@ -4,4 +4,4 @@
 docker build -t registry.digitalocean.com/aqtech/aqaratech-api:$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' packages/backend/package.json) -f "Dockerfile.backend" .
 
 # push
-docker push registry.digitalocean.com/aqtech/aqaratech-api
+docker push registry.digitalocean.com/aqtech/aqaratech-api:$(awk -F'"' '/"version": ".+"/{ print $4; exit; }' packages/backend/package.json)
