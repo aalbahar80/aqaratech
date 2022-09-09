@@ -13,6 +13,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
+    "@changesets/cli": "2.24.4",
     "turbo": "1.4.5"
   },
   "pnpm": {
