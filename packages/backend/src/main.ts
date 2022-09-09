@@ -16,7 +16,7 @@ import { AppModule } from './app.module';
 
 Sentry.init({
   dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-  tracesSampleRate: 1.0,
+  tracesSampleRate: process.env.PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
   environment: process.env.PUBLIC_AQARATECH_ENV,
   integrations: [
     // enable HTTP calls tracing

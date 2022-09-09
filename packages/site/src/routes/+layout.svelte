@@ -12,6 +12,7 @@
 	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
+	import { version } from '../../package.json';
 	import '../styles/tailwind.css';
 	import '../styles/theme.postcss';
 	import type { PageData } from './$types';
@@ -22,6 +23,25 @@
 		// communicate that the app is ready - used for testing
 		document.body.classList.add('started');
 
+		Sentry.init({
+			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
+			integrations: [new BrowserTracing()],
+			tracesSampleRate: PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
+			debug: dev,
+			environment: PUBLIC_AQARATECH_ENV,
+			release: `v${version}`,
+		});
+
+		Sentry.configureScope((scope: Scope) => {
+			scope.setTag('roleType', data.user?.role?.roleType || '');
+			scope.setUser({
+				id: data.user?.id || '',
+				email: data.user?.email || '',
+				username: data.user?.fullName || '',
+				roleId: data.user?.role?.id || '',
+			});
+		});
+
 		if (PUBLIC_AQARATECH_ENV === 'production') {
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($page.data.user) {
@@ -31,25 +51,6 @@
 					name: $page.data.user.fullName || '',
 				});
 			}
-
-			Sentry.init({
-				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-				integrations: [new BrowserTracing()],
-				tracesSampleRate: 0.25,
-				debug: dev,
-				environment: PUBLIC_AQARATECH_ENV,
-				release: '0.0.0',
-			});
-
-			Sentry.configureScope((scope: Scope) => {
-				scope.setTag('roleType', data.user?.role?.roleType || '');
-				scope.setUser({
-					id: data.user?.id || '',
-					email: data.user?.email || '',
-					username: data.user?.fullName || '',
-					roleId: data.user?.role?.id || '',
-				});
-			});
 
 			LogRocket.getSessionURL((sessionURL) => {
 				Sentry.configureScope((scope) => {
