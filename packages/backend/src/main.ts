@@ -11,10 +11,11 @@ import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { getMiddleware } from 'swagger-stats';
+import { version } from '../package.json';
 import { AppModule } from './app.module';
-// import { version } from '../package.json';
 
 Sentry.init({
+  // TODO use environment variable to set the DSN
   dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
   tracesSampleRate: process.env.PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
   environment: process.env.PUBLIC_AQARATECH_ENV,
@@ -22,8 +23,7 @@ Sentry.init({
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),
   ],
-  // dsn: process.env.SENTRY_DSN,
-  // release: `v${version}`,
+  release: `v${version}`,
 });
 
 async function bootstrap() {
