@@ -54,6 +54,7 @@ async function bootstrap() {
     },
   });
 
+  // https://github.com/novuhq/novu/blob/2a4e53e13d9c25ddc01acba27c1cf9cf479a9ba6/apps/api/src/bootstrap.ts#L47
   app.use(Sentry.Handlers.requestHandler());
   app.use(Sentry.Handlers.tracingHandler());
   // app.use(Sentry.Handlers.errorHandler());
