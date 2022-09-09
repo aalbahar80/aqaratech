@@ -7,7 +7,6 @@ import { SortOrder } from 'src/constants/sort-order.enum';
 import {
   // EnumFieldOptional,
   NumberFieldOptional,
-  StringFieldOptional,
 } from '../../decorators/field.decorators';
 
 const Combined = {
@@ -46,9 +45,6 @@ export class PageOptionsDto {
   get skip(): number {
     return (this.page - 1) * this.take;
   }
-
-  @StringFieldOptional()
-  readonly q?: string;
 
   @ApiPropertyOptional({ enum: Combined, enumName: 'CombinedEnum' })
   @IsOptional()
