@@ -48,6 +48,19 @@ Requires [.env.test](packages/site/.env.test.example) for the db connection stri
 pnpm build
 ```
 
+### Update 📦
+
+```bash
+# create a changeset file
+npx changset
+
+# consume changest file, update versions in package.json + update CHANGELOG.md
+npx changest version
+
+# publish changed packages to npm (not used)
+# npx changest publish
+```
+
 ## Deploy:
 
 Site and docs are deployed on vercel as sepereate projects.
