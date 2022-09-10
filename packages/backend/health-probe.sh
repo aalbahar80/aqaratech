@@ -13,6 +13,14 @@ timeout=$2
 interval=1
 elapsed=0
 
+if [ $# -eq 0 ]; then
+    echo "Invalid arguments"
+
+    echo "Usage: health-probe.sh <url> <timeout>"
+    echo "Example: health-probe.sh http://localhost:8080/health 60"
+    exit 1
+fi
+
 while [ $elapsed -lt $timeout ]; do
   status=$(curl -s -o /dev/null -w "%{http_code}" $url)
   if [ $status -eq 200 ]; then
