@@ -19,6 +19,7 @@ Sentry.init({
   dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
   tracesSampleRate: process.env.PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
   environment: process.env.PUBLIC_AQARATECH_ENV,
+  debug: process.env.AQ_DEBUG_NEST == '1',
   integrations: [
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),

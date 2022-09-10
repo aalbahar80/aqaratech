@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
 	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import { PUBLIC_AQARATECH_ENV } from '$env/static/public';
+	import {
+		PUBLIC_AQARATECH_ENV,
+		PUBLIC_AQ_DEBUG_SITE,
+	} from '$env/static/public';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -27,7 +29,7 @@
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 			integrations: [new BrowserTracing()],
 			tracesSampleRate: PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
-			debug: dev,
+			debug: PUBLIC_AQ_DEBUG_SITE === '1',
 			environment: PUBLIC_AQARATECH_ENV,
 			release: `v${data.version}`,
 		});
