@@ -24,7 +24,7 @@ Sentry.init({
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),
   ],
-  release: `v${version}`,
+  release: version,
 });
 
 async function bootstrap() {

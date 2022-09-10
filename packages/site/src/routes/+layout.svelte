@@ -32,7 +32,7 @@
 			tracesSampleRate: PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
 			debug: PUBLIC_AQ_DEBUG_SITE === '1',
 			environment: PUBLIC_AQARATECH_ENV,
-			release: `v${data.version}`,
+			release: data.version,
 		});
 
 		Sentry.configureScope((scope: Scope) => {

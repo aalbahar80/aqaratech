@@ -1,15 +1,34 @@
 import { environment } from '$aqenvironment';
-import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
+import {
+	PUBLIC_API_URL,
+	PUBLIC_API_URL_LOCAL,
+	PUBLIC_AQ_DEBUG_SITE,
+} from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
 import { getSentryUser } from '$lib/utils/sentry-utils';
 import type { ResponseError } from '@self/sdk';
-import * as Sentry from '@sentry/svelte';
+import * as Sentry from '@sentry/node';
 import type { ExternalFetch, Handle, HandleError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
+import { version } from '../package.json';
+// import * as Tracing from '@sentry/tracing';
+
+Sentry.init({
+	// TODO use environment variable to set the DSN
+	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
+	tracesSampleRate: 1,
+	environment: process.env.PUBLIC_AQARATECH_ENV,
+	debug: PUBLIC_AQ_DEBUG_SITE === '1',
+	// integrations: [
+	// enable HTTP calls tracing
+	// new Sentry.Integrations.Http({ tracing: true }),
+	// ],
+	release: version,
+});
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();
