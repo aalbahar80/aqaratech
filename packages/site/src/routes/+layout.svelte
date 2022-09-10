@@ -12,7 +12,6 @@
 	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
-	import { version } from '../../package.json';
 	import '../styles/tailwind.css';
 	import '../styles/theme.postcss';
 	import type { PageData } from './$types';
@@ -30,7 +29,7 @@
 			tracesSampleRate: PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
 			debug: dev,
 			environment: PUBLIC_AQARATECH_ENV,
-			release: `v${version}`,
+			release: `v${data.version}`,
 		});
 
 		Sentry.configureScope((scope: Scope) => {
