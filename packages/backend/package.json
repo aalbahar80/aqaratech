@@ -27,7 +27,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "postinstall": "prisma generate",
-    "oas-gen": "GENERATE_OPENAPI_SCHEMA=1 nest start"
+    "oas-gen": "GENERATE_OPENAPI_SCHEMA=1 nest start",
+    "health-check": "./health-probe.sh http://localhost:3002 10"
   },
   "prisma": {
     "seed": "tsx ../seed/src/go-seed.ts"

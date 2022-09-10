@@ -14,6 +14,22 @@
         "dist/**"
       ]
     },
+    "@self/site#dev": {
+      "dependsOn": [
+        "@self/backend#health-check"
+      ],
+      "outputs": [
+        ".svelte-kit/**"
+      ]
+    },
+    "@self/site#preview": {
+      "dependsOn": [
+        "@self/backend#health-check"
+      ]
+    },
+    "health-check": {
+      "cache": false
+    },
     "build": {
       "dependsOn": [
         "^build"
