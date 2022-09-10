@@ -13,11 +13,25 @@ timeout=$2
 interval=1
 elapsed=0
 
+echo "Checking $url every $interval seconds for $timeout seconds"
+
 if [ $# -eq 0 ]; then
-    echo "Invalid arguments"
+    echo "No arguments provided"
 
     echo "Usage: health-probe.sh <url> <timeout>"
     echo "Example: health-probe.sh http://localhost:8080/health 60"
+    exit 1
+fi
+
+# check if correct url is provided
+if [[ $url != http* ]]; then
+    echo "Invalid url"
+    exit 1
+fi
+
+# check if timeout is a number
+if ! [[ $timeout =~ ^[0-9]+$ ]]; then
+    echo "Invalid timeout"
     exit 1
 fi
 
