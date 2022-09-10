@@ -1,35 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "@self/sdk#build": {
-      "dependsOn": [
-        "@self/backend#build"
-      ],
-      "inputs": [
-        "openapi.yaml",
-        "openapitools.json"
-      ],
-      "outputs": [
-        "src/**",
-        "dist/**"
-      ]
-    },
-    "@self/site#dev": {
-      "dependsOn": [
-        "@self/backend#health-check"
-      ],
-      "outputs": [
-        ".svelte-kit/**"
-      ]
-    },
-    "@self/site#preview": {
-      "dependsOn": [
-        "@self/backend#health-check"
-      ]
-    },
-    "health-check": {
-      "cache": false
-    },
     "build": {
       "dependsOn": [
         "^build"
@@ -65,6 +36,35 @@
     "preview": {
       "dependsOn": [
         "build"
+      ]
+    },
+    "@self/sdk#build": {
+      "dependsOn": [
+        "@self/backend#build"
+      ],
+      "inputs": [
+        "openapi.yaml",
+        "openapitools.json"
+      ],
+      "outputs": [
+        "src/**",
+        "dist/**"
+      ]
+    },
+    "health-check": {
+      "cache": false
+    },
+    "@self/site#dev": {
+      "dependsOn": [
+        "@self/backend#health-check"
+      ],
+      "outputs": [
+        ".svelte-kit/**"
+      ]
+    },
+    "@self/site#preview": {
+      "dependsOn": [
+        "@self/backend#health-check"
       ]
     }
   },
