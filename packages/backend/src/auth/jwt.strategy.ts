@@ -37,11 +37,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       return token;
     };
     super({
-      // TODO: simplify configService vars
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
+        cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
         rateLimit: true,
-        jwksRequestsPerMinute: 5,
         jwksUri,
       }),
       // jwtFromRequest: cookieExtractor,
