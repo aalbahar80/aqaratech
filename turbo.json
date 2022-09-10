@@ -2,6 +2,9 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "@self/sdk#build": {
+      "dependsOn": [
+        "@self/backend#build"
+      ],
       "inputs": [
         "openapi.yaml",
         "openapitools.json"
