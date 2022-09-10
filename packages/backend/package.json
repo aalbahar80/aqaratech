@@ -28,7 +28,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "postinstall": "prisma generate",
     "oas-gen": "GENERATE_OPENAPI_SCHEMA=1 nest start",
-    "health-check": "./health-probe.sh http://localhost:3002 10"
+    "health-check": "./health-probe.sh $(awk '/^PUBLIC_API_URL_LOCAL/' ../../.env | awk -F '=' '{print $2}') 10"
   },
   "prisma": {
     "seed": "tsx ../seed/src/go-seed.ts"

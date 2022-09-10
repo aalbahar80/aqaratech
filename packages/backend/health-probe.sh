@@ -16,13 +16,13 @@ elapsed=0
 while [ $elapsed -lt $timeout ]; do
   status=$(curl -s -o /dev/null -w "%{http_code}" $url)
   if [ $status -eq 200 ]; then
-    echo "API is healthy"
+    echo "$url is healthy"
     exit 0
   fi
-  echo "API not ready, waiting $interval seconds"
+  echo "$url not ready, waiting $interval seconds"
   sleep $interval
   elapsed=$((elapsed + interval))
 done
 
-echo "API not ready after $timeout seconds"
+echo "$url not ready after $timeout seconds"
 exit 1
