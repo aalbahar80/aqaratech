@@ -8,6 +8,7 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
+	import { getSentryUser } from '$lib/utils/sentry-utils';
 	import type { Scope } from '@sentry/svelte';
 	import * as Sentry from '@sentry/svelte';
 	import { BrowserTracing } from '@sentry/tracing';
@@ -36,12 +37,7 @@
 
 		Sentry.configureScope((scope: Scope) => {
 			scope.setTag('roleType', data.user?.role?.roleType || '');
-			scope.setUser({
-				id: data.user?.id || '',
-				email: data.user?.email || '',
-				username: data.user?.fullName || '',
-				roleId: data.user?.role?.id || '',
-			});
+			scope.setUser(getSentryUser(data.user));
 		});
 
 		if (PUBLIC_AQARATECH_ENV === 'production') {

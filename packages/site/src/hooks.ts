@@ -4,7 +4,9 @@ import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
+import { getSentryUser } from '$lib/utils/sentry-utils';
 import type { ResponseError } from '@self/sdk';
+import * as Sentry from '@sentry/svelte';
 import type { ExternalFetch, Handle, HandleError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
@@ -154,14 +156,9 @@ export const handleError: HandleError = async ({ error, event }) => {
 		console.error(resDetails);
 	}
 
-	// const user = event.locals.user;
-	// Sentry.captureException(error, {
-	// 	user: {
-	// 		id: user?.id || '',
-	// 		email: user?.email || '',
-	// 		username: user?.fullName || '',
-	// 	},
-	// });
+	Sentry.captureException(error, {
+		user: getSentryUser(event.locals.user),
+	});
 };
 
 export const externalFetch: ExternalFetch = async (request) => {
