@@ -27,6 +27,7 @@
     "@rgossiaux/svelte-headlessui": "1.0.2",
     "@self/sdk": "workspace:0.0.1",
     "@self/utils": "workspace:1.0.0",
+    "@sentry/node": "7.12.1",
     "@sentry/svelte": "7.12.1",
     "@sentry/tracing": "7.12.1",
     "@steeze-ui/heroicons": "1.1.1",

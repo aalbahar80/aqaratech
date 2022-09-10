@@ -59,11 +59,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -182,11 +177,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -246,11 +236,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -340,11 +325,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -491,11 +471,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -689,11 +664,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -817,11 +787,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -958,11 +923,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1081,11 +1041,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1145,11 +1100,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1209,11 +1159,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1273,11 +1218,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1382,11 +1322,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1505,11 +1440,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1594,11 +1524,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1717,11 +1642,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1806,11 +1726,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -1933,11 +1848,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -2145,11 +2055,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
@@ -2439,11 +2344,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: q
-          required: false
-          in: query
-          schema:
-            type: string
         - name: orderBy
           required: false
           in: query
