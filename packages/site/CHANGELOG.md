@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.1.6
+
+### Patch Changes
+
+- aefe254f: upgrade node to 18.9
+
 ## 0.1.5
 
 ### Patch Changes
