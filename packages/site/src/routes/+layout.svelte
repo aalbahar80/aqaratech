@@ -4,6 +4,7 @@
 	import {
 		PUBLIC_AQARATECH_ENV,
 		PUBLIC_AQ_DEBUG_SITE,
+		PUBLIC_TRACE_RATE,
 	} from '$env/static/public';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
@@ -27,7 +28,7 @@
 			// TODO: use environment variable to set the DSN
 			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 			integrations: [new BrowserTracing()],
-			tracesSampleRate: PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
+			tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
 			debug: PUBLIC_AQ_DEBUG_SITE === '1',
 			environment: PUBLIC_AQARATECH_ENV,
 			release: data.version,
