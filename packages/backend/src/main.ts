@@ -70,7 +70,7 @@ async function bootstrap() {
       whitelist: true,
       // validateCustomDecorators: true, // fails eveything?
       enableDebugMessages: process.env.AQ_DEBUG_NEST == '1',
-      disableErrorMessages: process.env.AQ_DEBUG_NEST != '1',
+      disableErrorMessages: false,
     }),
   );
 
