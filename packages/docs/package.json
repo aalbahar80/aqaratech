@@ -1,6 +1,6 @@
 {
   "name": "@self/docs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "svelte-kit dev -p 3001",
     "preview": "svelte-kit preview -p 3001",
