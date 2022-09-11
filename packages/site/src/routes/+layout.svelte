@@ -11,7 +11,6 @@
 	import { getSentryUser } from '$lib/utils/sentry-utils';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
-	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
@@ -20,7 +19,7 @@
 
 	export let data: PageData;
 
-	onMount(() => {
+	onMount(async () => {
 		// communicate that the app is ready - used for testing
 		document.body.classList.add('started');
 
@@ -40,6 +39,7 @@
 		});
 
 		if (PUBLIC_AQARATECH_ENV === 'production') {
+			const LogRocket = await import('logrocket');
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($page.data.user) {
 				LogRocket.identify($page.data.user.id || '', {
@@ -48,7 +48,6 @@
 					name: $page.data.user.fullName || '',
 				});
 			}
-
 			LogRocket.getSessionURL((sessionURL) => {
 				Sentry.configureScope((scope) => {
 					scope.setExtra('sessionURL', sessionURL);
