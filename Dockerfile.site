@@ -38,6 +38,8 @@ COPY --from=site /app/pruned .
 # NO-OP, for convenience only
 EXPOSE 3000
 
+ARG PUBLIC_SITE_URL
+ENV ORIGIN=$PUBLIC_SITE_URL
 RUN echo "ENV sanity check: ORIGIN=${ORIGIN} PUBLIC_SITE_URL ${PUBLIC_SITE_URL} INBRACKETS=${PUBLIC_SITE_URL} NOBRACKETS=$PUBLIC_SITE_URL"
 
 # CMD ["sh", "-c", "node build/index.js"]
