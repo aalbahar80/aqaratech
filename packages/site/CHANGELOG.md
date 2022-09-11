@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.1.2
+
+### Patch Changes
+
+- move origin env to build command
+
 ## 0.1.1
 
 ### Patch Changes
