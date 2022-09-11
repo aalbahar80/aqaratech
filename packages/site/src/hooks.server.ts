@@ -1,21 +1,17 @@
 import { environment } from '$aqenvironment';
-import {
-	PUBLIC_API_URL,
-	PUBLIC_API_URL_LOCAL,
-	PUBLIC_AQ_DEBUG_SITE,
-} from '$env/static/public';
+import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
-import { getSentryUser } from '$lib/utils/sentry-utils';
+import { addTraceToHead, getSentryUser } from '$lib/utils/sentry-utils';
 import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
+import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 import { version } from '../package.json';
-import '@sentry/tracing';
 // import * as Tracing from '@sentry/tracing';
 
 Sentry.init({
@@ -125,7 +121,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 		description: 'resolve',
 	});
 
-	const response = await resolve(event);
+	const response = await resolve(event, {
+		transformPageChunk({ html, done }) {
+			return addTraceToHead({ html, span: spanResolve });
+		},
+	});
 
 	spanResolve.finish();
 

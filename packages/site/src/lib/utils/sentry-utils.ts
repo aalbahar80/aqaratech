@@ -1,4 +1,5 @@
 import type { User } from '$lib/models/types/auth.type';
+import type { Span } from '@sentry/tracing';
 
 export const getSentryUser = (user: User | undefined) => ({
 	id: user?.id || '',
@@ -6,3 +7,27 @@ export const getSentryUser = (user: User | undefined) => ({
 	username: user?.fullName || '',
 	roleId: user?.role?.id || '',
 });
+
+/**
+ * add custom meta tags to the head of the page
+ */
+export const addTraceToHead = ({
+	html,
+	span,
+}: {
+	html: string;
+	span: Span;
+}) => {
+	const metaTags = {
+		'sentry-trace': span.toTraceparent(),
+		// TODO: add baggage: https://docs.sentry.io/platforms/javascript/performance/connect-services/#pageload
+	};
+
+	const customMetaTagsHtml = Object.entries(metaTags)
+		.map(([name, content]) => `<meta name="${name}" content="${content}">`)
+		.join('');
+
+	const modifiedHtml = html.replace('<head>', `<head>${customMetaTagsHtml}`);
+
+	return modifiedHtml;
+};
