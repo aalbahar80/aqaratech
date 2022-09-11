@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.1.4
+
+### Patch Changes
+
+- b2f98d5b: don't use api middleware
+
 ## 0.1.3
 
 ### Patch Changes
