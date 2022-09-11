@@ -10,7 +10,6 @@ import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
 import { addTraceToHead, getSentryUser } from '$lib/utils/sentry-utils';
-import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -184,7 +183,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handleError: HandleServerError = async ({ error, event }) => {
+export const handleError: HandleServerError = ({ error, event }) => {
 	console.error(error);
 	const { locals, params } = event;
 	const details = {
@@ -194,19 +193,6 @@ export const handleError: HandleServerError = async ({ error, event }) => {
 		params,
 	};
 	console.error(details);
-
-	const thrown = error as Error | ResponseError;
-	const res = 'response' in thrown ? thrown.response : undefined;
-	if (res) {
-		const body = await res.json();
-		const resDetails = {
-			name: 'Response Error (from handleError)',
-			status: res.status,
-			url: res.url,
-			body,
-		};
-		console.error(resDetails);
-	}
 
 	Sentry.captureException(error, {
 		user: getSentryUser(event.locals.user),
