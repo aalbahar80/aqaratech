@@ -18,6 +18,8 @@ import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
+console.log('Version: ', __AQARATECH_APP_VERSION__);
+
 Sentry.init({
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
