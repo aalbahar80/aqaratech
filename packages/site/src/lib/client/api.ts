@@ -70,6 +70,7 @@ export const api = ({
 	if (traceValue) {
 		// TODO avoid reusing api() more than once to ensure no duplicate trace headers
 		// Applying middleware to the Config class causes loadFetch to be not used (duplicate data requests)
+		// Alternative: update node version in production 18.3.0+
 		headers['sentry-trace'] = traceValue;
 	}
 
