@@ -50,7 +50,7 @@
 								<!-- {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ */} -->
 								<img
 									class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-									src="https://tailwindui.com/img/component-images/cloud-illustration-teal-cyan.svg"
+									src="/placeholders/cloud-illustration-teal-cyan.svg"
 									alt=""
 								/>
 							</div>

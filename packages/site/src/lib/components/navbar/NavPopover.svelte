@@ -44,7 +44,7 @@
 					<div>
 						<img
 							class="h-8 w-auto"
-							src="https://tailwindui.com/img/logos/workflow-mark-teal-500-cyan-600.svg"
+							src="/placeholders/workflow-mark-teal-500-cyan-600.svg"
 							alt=""
 						/>
 					</div>
