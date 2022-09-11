@@ -19,11 +19,13 @@ COPY pnpm-lock.yaml ./
 ADD . ./
 RUN pnpm --filter=. --filter=@self/site... install --prod=false
 
-RUN pnpm --filter=@self/site... run build
+ARG PUBLIC_SITE_URL
+
+# ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
+RUN ORIGIN=$PUBLIC_SITE_URL PORT=3000 pnpm --filter=@self/site... run build
 
 RUN pnpm --filter=@self/site deploy pruned
 
-ARG PUBLIC_SITE_URL
 
 FROM node:16.9-alpine as production
 
@@ -38,5 +40,5 @@ EXPOSE 3000
 ARG PUBLIC_SITE_URL
 RUN echo "ENV sanity check: PUBLIC_SITE_URL ${PUBLIC_SITE_URL} INBRACKETS=${PUBLIC_SITE_URL} NOBRACKETS=$PUBLIC_SITE_URL"
 
-# ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-CMD ["sh", "-c", "ORIGIN=$PUBLIC_SITE_URL PORT=3000 node build/index.js"]
+# CMD ["sh", "-c", "node build/index.js"]
+CMD node build/index.js
