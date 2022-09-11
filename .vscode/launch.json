@@ -2,6 +2,20 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "(attach) site/build",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/packages/site",
+			"skipFiles": ["<node_internals>/**"],
+			"args": [
+				"--inspect",
+				"-r",
+				"source-map-support/register",
+				"build/index.js"
+			],
+			"console": "internalConsole"
+		},
+		{
 			"name": "debug site/build",
 			"type": "node",
 			"request": "launch",
