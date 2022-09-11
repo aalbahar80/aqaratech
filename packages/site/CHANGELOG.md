@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.1.3
+
+### Patch Changes
+
+- set origin as perma env var
+
 ## 0.1.2
 
 ### Patch Changes
