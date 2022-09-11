@@ -7,6 +7,8 @@ import {
 	type ValidatedRoleDto,
 	type ValidatedUserDto,
 } from '@self/sdk';
+import * as Sentry from '@sentry/node';
+import '@sentry/tracing'; // TODO: remove?
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
@@ -80,6 +82,11 @@ const getProfile = async (
 	// If session.user isn't used for sensitive data, we can just use the same strategy we use for persisting the x-role-id header/cookie.
 	const now = Date.now();
 
+	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
+	const span = transaction?.startChild({
+		op: 'getProfile',
+	});
+
 	// users/me doesn't require the x-role-id header, but it does require the accessToken.
 	const headers = { Authorization: `Bearer ${token}` };
 
@@ -96,6 +103,7 @@ const getProfile = async (
 			`Fetched user info for ${user.email} in ${Date.now() - now}ms`,
 		);
 
+		span?.finish();
 		return user;
 	} catch (e) {
 		console.error(e);
