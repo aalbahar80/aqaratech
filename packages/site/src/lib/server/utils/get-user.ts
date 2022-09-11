@@ -1,6 +1,6 @@
 import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
-import { getRoleMeta } from '$lib/server/utils/get-role-meta';
+import { getRoleMeta } from '$lib/utils/get-role-meta';
 import {
 	Configuration,
 	UsersApi,
