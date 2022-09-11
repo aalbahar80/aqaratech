@@ -82,13 +82,20 @@ const getProfile = async (
 	// If session.user isn't used for sensitive data, we can just use the same strategy we use for persisting the x-role-id header/cookie.
 	const now = Date.now();
 
+	// users/me doesn't require the x-role-id header, but it does require the accessToken.
+	const headers: Record<string, string> = { Authorization: `Bearer ${token}` };
+
+	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
 	const span = transaction?.startChild({
 		op: 'getProfile',
 	});
 
-	// users/me doesn't require the x-role-id header, but it does require the accessToken.
-	const headers = { Authorization: `Bearer ${token}` };
+	if (span) {
+		headers['sentry-trace'] = `${span.toTraceparent()}`;
+	} else {
+		console.warn('[getProfile] Could not get span/tranaction');
+	}
 
 	const config = new Configuration({
 		headers,
