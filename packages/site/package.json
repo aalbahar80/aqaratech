@@ -16,7 +16,8 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "test": "playwright test",
     "report": "playwright show-report",
-    "debug": "vite --port 3000 --debug"
+    "debug": "vite --port 3000 --debug",
+    "sentry:sourcemaps": "sentry-cli sourcemaps upload ./build/ --org aqaratech --project site-client --project site-server --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)"
   },
   "devDependencies": {
     "@brainandbones/skeleton": "0.32.19",
