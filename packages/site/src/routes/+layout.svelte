@@ -25,36 +25,39 @@
 		// communicate that the app is ready - used for testing
 		document.body.classList.add('started');
 
-		Sentry.init({
-			// TODO: use environment variable to set the DSN
-			dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
-			integrations: [new BrowserTracing()],
-			tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
-			debug: PUBLIC_AQ_DEBUG_SITE === '1',
-			environment: PUBLIC_AQARATECH_ENV,
-			release: __AQARATECH_APP_VERSION__,
-		});
+		// https://github.com/bluwy/vite-plugin-iso-import#what-happens-if-i-use-an-import-value-that-has-been-stripped-off
+		if (!import.meta.env.SSR) {
+			Sentry.init({
+				// TODO: use environment variable to set the DSN
+				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
+				integrations: [new BrowserTracing()],
+				tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
+				debug: PUBLIC_AQ_DEBUG_SITE === '1',
+				environment: PUBLIC_AQARATECH_ENV,
+				release: __AQARATECH_APP_VERSION__,
+			});
 
-		Sentry.configureScope((scope) => {
-			scope.setTag('roleType', data.user?.role?.roleType || '');
-			scope.setUser(getSentryUser(data.user));
-		});
+			Sentry.configureScope((scope) => {
+				scope.setTag('roleType', data.user?.role?.roleType || '');
+				scope.setUser(getSentryUser(data.user));
+			});
 
-		if (PUBLIC_AQARATECH_ENV === 'production') {
-			// const LogRocket = await import('logrocket');
-			LogRocket.init('n4p0hb/aqaratech');
-			if ($page.data.user) {
-				LogRocket.identify($page.data.user.id || '', {
-					email: $page.data.user.email,
-					roleId: $page.data.user.role?.id || '',
-					name: $page.data.user.fullName || '',
+			if (PUBLIC_AQARATECH_ENV === 'production') {
+				// const LogRocket = await import('logrocket');
+				LogRocket.init('n4p0hb/aqaratech');
+				if ($page.data.user) {
+					LogRocket.identify($page.data.user.id || '', {
+						email: $page.data.user.email,
+						roleId: $page.data.user.role?.id || '',
+						name: $page.data.user.fullName || '',
+					});
+				}
+				LogRocket.getSessionURL((sessionURL) => {
+					Sentry.configureScope((scope) => {
+						scope.setExtra('sessionURL', sessionURL);
+					});
 				});
 			}
-			LogRocket.getSessionURL((sessionURL) => {
-				Sentry.configureScope((scope) => {
-					scope.setExtra('sessionURL', sessionURL);
-				});
-			});
 		}
 	});
 </script>
