@@ -47,7 +47,7 @@ export class SentryInterceptor implements NestInterceptor {
         },
       }),
       finalize(() => {
-        transaction?.finish();
+        transaction.finish();
       }),
     );
   }
