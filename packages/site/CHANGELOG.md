@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.1.5
+
+### Patch Changes
+
+- 93266a70: persist origin var in docker
+
 ## 0.1.4
 
 ### Patch Changes
