@@ -22,7 +22,7 @@ RUN pnpm --filter=. --filter=@self/site... install --prod=false
 ARG PUBLIC_SITE_URL
 
 # ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-RUN ORIGIN=$PUBLIC_SITE_URL PORT=3000 pnpm --filter=@self/site... run build
+RUN ORIGIN=${PUBLIC_SITE_URL} PORT=3000 pnpm --filter=@self/site... run build
 
 RUN pnpm --filter=@self/site deploy pruned
 
