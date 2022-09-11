@@ -15,6 +15,7 @@ import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 import { version } from '../package.json';
+import '@sentry/tracing';
 // import * as Tracing from '@sentry/tracing';
 
 Sentry.init({
@@ -22,15 +23,28 @@ Sentry.init({
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
 	tracesSampleRate: 1,
 	environment: process.env.PUBLIC_AQARATECH_ENV,
-	debug: PUBLIC_AQ_DEBUG_SITE === '1',
-	// integrations: [
-	// enable HTTP calls tracing
-	// new Sentry.Integrations.Http({ tracing: true }),
-	// ],
+	// debug: PUBLIC_AQ_DEBUG_SITE === '1',
+	debug: true,
+	integrations: [
+		// 	// enable HTTP calls tracing
+		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
+		new Sentry.Integrations.Console(),
+	],
 	release: version,
 });
 
+console.error('sentry initialized');
+
 export const handle: Handle = async ({ event, resolve }) => {
+	const transaction = Sentry.startTransaction({
+		op: 'sveltekit.handle',
+		name: event.request.method + ' ' + event.request.url,
+	});
+
+	Sentry.configureScope((scope) => {
+		scope.setSpan(transaction);
+	});
+
 	const now = Date.now();
 	const method = event.request.method;
 	console.log(
@@ -38,6 +52,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 			event.routeId
 		} ${event.request.headers.get('user-agent')}`,
 	);
+
+	const spanCookies = transaction.startChild({
+		op: 'sveltekit.parseCookies',
+		description: 'parse cookies',
+	});
 
 	const cookies = parse(event.request.headers.get('cookie') || '');
 
@@ -99,7 +118,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
+	spanCookies.finish();
+
+	const spanResolve = transaction.startChild({
+		op: 'sveltekit.resolve',
+		description: 'resolve',
+	});
+
 	const response = await resolve(event);
+
+	spanResolve.finish();
 
 	console.log(
 		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
@@ -148,6 +176,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (environment.envName !== 'prod') {
 		response.headers.set('X-Robots-Tag', 'noindex');
 	}
+
+	transaction.finish();
 	return response;
 };
 
