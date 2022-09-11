@@ -2,6 +2,8 @@
 /// <reference types="vite/client" />
 /// <reference types="unplugin-icons/types/svelte" />
 
+declare const __AQARATECH_APP_VERSION__: string;
+
 interface Auth0Profile {
 	sub: string | undefined;
 	name: string;

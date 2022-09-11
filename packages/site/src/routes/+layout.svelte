@@ -31,7 +31,7 @@
 			tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
 			debug: PUBLIC_AQ_DEBUG_SITE === '1',
 			environment: PUBLIC_AQARATECH_ENV,
-			release: data.version,
+			release: __AQARATECH_APP_VERSION__,
 		});
 
 		Sentry.configureScope((scope) => {

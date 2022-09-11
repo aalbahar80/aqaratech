@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import icons from 'unplugin-icons/vite';
 import { isoImport } from 'vite-plugin-iso-import';
+import { version } from './package.json';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 
 /** @type {import('vite').UserConfig} */
@@ -12,13 +13,16 @@ const config = {
 	// 		inline: ['date-fns'],
 	// 	},
 	// },
+
 	define:
 		process.env.NODE_ENV === 'production'
 			? {
 					__SENTRY_DEBUG__: false,
-					VITE_MY_VAR: 'SOME_VALUE',
+					__AQARATECH_APP_VERSION__: JSON.stringify(version),
 			  }
-			: undefined,
+			: {
+					__AQARATECH_APP_VERSION__: JSON.stringify(version),
+			  },
 	plugins: [
 		sveltekit(),
 		icons({ compiler: 'svelte' }),

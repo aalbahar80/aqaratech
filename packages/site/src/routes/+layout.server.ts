@@ -1,5 +1,4 @@
 import { protectRoute } from '$lib/server/utils/protect-route';
-import { version } from '../../package.json';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals, url: { pathname } }) => {
@@ -17,6 +16,5 @@ export const load: LayoutServerLoad = async ({ locals, url: { pathname } }) => {
 		user: locals.isAuthenticated ? locals.user : undefined,
 		accessToken: locals.accessToken ?? '',
 		isAuthenticated: locals.isAuthenticated,
-		version,
 	};
 };

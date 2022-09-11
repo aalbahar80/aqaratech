@@ -16,7 +16,6 @@ import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
-import { version } from '../package.json';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 Sentry.init({
@@ -30,7 +29,7 @@ Sentry.init({
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
 		new Sentry.Integrations.Console(),
 	],
-	release: version,
+	release: __AQARATECH_APP_VERSION__,
 });
 
 export const handle: Handle = async ({ event, resolve }) => {

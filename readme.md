@@ -24,7 +24,7 @@ pnpm outdated --long -r # view outdated deps
 pnpm update -iLr # interactively update deps
 ```
 
-Take a look [.env.example](packages/site/.env.example) to know what env vars are required.
+Take a look [.env.example](.env.example) to know what env vars are required.
 
 ### Test 🧪
 
