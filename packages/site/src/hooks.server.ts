@@ -1,5 +1,9 @@
 import { environment } from '$aqenvironment';
-import { PUBLIC_API_URL, PUBLIC_API_URL_LOCAL } from '$env/static/public';
+import {
+	PUBLIC_API_URL,
+	PUBLIC_API_URL_LOCAL,
+	PUBLIC_AQ_DEBUG_SITE,
+} from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
@@ -12,15 +16,14 @@ import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 import { version } from '../package.json';
-// import * as Tracing from '@sentry/tracing';
+// import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 Sentry.init({
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
 	tracesSampleRate: 1,
 	environment: process.env.PUBLIC_AQARATECH_ENV,
-	// debug: PUBLIC_AQ_DEBUG_SITE === '1',
-	debug: true,
+	debug: PUBLIC_AQ_DEBUG_SITE === '1',
 	integrations: [
 		// 	// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
@@ -122,7 +125,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	const response = await resolve(event, {
-		transformPageChunk({ html, done }) {
+		transformPageChunk({ html }) {
 			return addTraceToHead({ html, span: spanResolve });
 		},
 	});
@@ -211,6 +214,7 @@ export const handleError: HandleServerError = async ({ error, event }) => {
 };
 
 export const handleFetch: HandleFetch = async ({ request }) => {
+	// Runs when a load uses `fetch()` on the server
 	const basePath = PUBLIC_API_URL;
 	const newPath = PUBLIC_API_URL_LOCAL;
 
