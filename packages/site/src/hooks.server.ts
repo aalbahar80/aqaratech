@@ -32,8 +32,6 @@ Sentry.init({
 	release: version,
 });
 
-console.error('sentry initialized');
-
 export const handle: Handle = async ({ event, resolve }) => {
 	const transaction = Sentry.startTransaction({
 		op: 'sveltekit.handle',
