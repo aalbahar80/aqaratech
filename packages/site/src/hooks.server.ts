@@ -2,6 +2,7 @@ import { environment } from '$aqenvironment';
 import {
 	PUBLIC_API_URL,
 	PUBLIC_API_URL_LOCAL,
+	PUBLIC_AQARATECH_ENV,
 	PUBLIC_AQ_DEBUG_SITE,
 	PUBLIC_TRACE_RATE,
 } from '$env/static/public';
@@ -18,12 +19,13 @@ import { errors } from 'jose';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
+console.log('ORIGIN: ', process.env.ORIGIN);
 
 Sentry.init({
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
 	tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
-	environment: process.env.PUBLIC_AQARATECH_ENV,
+	environment: PUBLIC_AQARATECH_ENV,
 	debug: PUBLIC_AQ_DEBUG_SITE === '1',
 	integrations: [
 		// 	// enable HTTP calls tracing
