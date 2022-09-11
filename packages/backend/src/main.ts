@@ -18,15 +18,9 @@ import { AppModule } from './app.module';
 Sentry.init({
   // TODO use environment variable to set the DSN
   dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-  // tracesSampleRate: process.env.PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
-  tracesSampleRate: 1,
+  tracesSampleRate: process.env.PUBLIC_AQARATECH_ENV !== 'production' ? 0.5 : 1,
   environment: process.env.PUBLIC_AQARATECH_ENV,
-  // debug: process.env.AQ_DEBUG_NEST == '1',
-  debug: true,
-  // integrations: [
-  // enable HTTP calls tracing
-  // new Sentry.Integrations.Http({ tracing: true }),
-  // ],
+  debug: process.env.AQ_DEBUG_NEST == '1',
   release: version,
 });
 
@@ -58,11 +52,6 @@ async function bootstrap() {
       maxAge: 24 * 60 * 60,
     },
   });
-
-  // https://github.com/novuhq/novu/blob/2a4e53e13d9c25ddc01acba27c1cf9cf479a9ba6/apps/api/src/bootstrap.ts#L47
-  // app.use(Sentry.Handlers.requestHandler());
-  // app.use(Sentry.Handlers.tracingHandler());
-  // app.use(Sentry.Handlers.errorHandler());
 
   app.use(helmet()); // before other middleware
   app.use(cookieParser());
