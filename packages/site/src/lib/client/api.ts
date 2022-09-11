@@ -17,6 +17,8 @@ import {
 	UnitsApi,
 	UsersApi,
 } from '@self/sdk';
+import * as SentryNode from '@sentry/node?server';
+import * as SentrySvelte from '@sentry/svelte?client';
 import type { LoadEvent } from '@sveltejs/kit';
 
 export const api = ({
@@ -28,10 +30,33 @@ export const api = ({
 	token: string;
 	roleId?: string | undefined;
 }) => {
-	const headers = {
+	const headers: Record<string, string> = {
 		Authorization: `Bearer ${token}`,
 		...(roleId ? { 'x-role-id': roleId } : {}),
 	};
+
+	// Sentry
+	let traceValue: string | undefined;
+
+	if (import.meta.env.SSR) {
+		const transactionNode = SentryNode.getCurrentHub()
+			.getScope()
+			?.getTransaction();
+
+		traceValue = transactionNode?.toTraceparent();
+	}
+
+	if (!import.meta.env.SSR) {
+		const transactionSvelte = SentrySvelte.getCurrentHub()
+			.getScope()
+			?.getTransaction();
+
+		traceValue = transactionSvelte?.toTraceparent();
+	}
+
+	if (traceValue) {
+		headers['sentry-trace'] = traceValue;
+	}
 
 	const basePath = PUBLIC_API_URL;
 

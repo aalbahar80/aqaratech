@@ -13,6 +13,7 @@
 		// "exactOptionalPropertyTypes": true,
 		"esModuleInterop": true,
 		"sourceMap": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"plugins": [{ "name": "vite-plugin-iso-import" }]
 	}
 }
