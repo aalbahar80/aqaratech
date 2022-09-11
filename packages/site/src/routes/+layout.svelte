@@ -12,6 +12,7 @@
 	import { getSentryUser } from '$lib/utils/sentry-utils';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
+	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
@@ -40,7 +41,7 @@
 		});
 
 		if (PUBLIC_AQARATECH_ENV === 'production') {
-			const LogRocket = await import('logrocket');
+			// const LogRocket = await import('logrocket');
 			LogRocket.init('n4p0hb/aqaratech');
 			if ($page.data.user) {
 				LogRocket.identify($page.data.user.id || '', {
