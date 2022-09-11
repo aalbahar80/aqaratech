@@ -1,3 +1,4 @@
+import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -116,7 +117,14 @@ export class OrganizationsService {
       subject(this.SubjectType, { id }),
     );
 
-    await this.s3.deleteBucket(id);
+    try {
+      await this.s3.deleteBucket(id);
+    } catch (error) {
+      if (error.name !== 'NoSuchBucket') {
+        // Don't throw if the bucket doesn't exist
+        throw error;
+      }
+    }
     this.logger.log(`Deleted bucket ${id}`);
 
     // TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
