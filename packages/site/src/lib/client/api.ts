@@ -35,35 +35,61 @@ export const api = ({
 		...(roleId ? { 'x-role-id': roleId } : {}),
 	};
 
-	// Sentry
-	let traceValue: string | undefined;
-
-	if (import.meta.env.SSR) {
-		const transactionNode = SentryNode.getCurrentHub()
-			.getScope()
-			?.getTransaction();
-
-		traceValue = transactionNode?.toTraceparent();
-	}
-
-	if (!import.meta.env.SSR) {
-		const transactionSvelte = SentrySvelte.getCurrentHub()
-			.getScope()
-			?.getTransaction();
-
-		traceValue = transactionSvelte?.toTraceparent();
-	}
-
-	if (traceValue) {
-		headers['sentry-trace'] = traceValue;
-	}
-
 	const basePath = PUBLIC_API_URL;
 
 	const config = new Configuration({
 		...(loadFetch ? { fetchApi: loadFetch } : {}),
 		headers,
 		basePath,
+		middleware: [
+			{
+				pre(context) {
+					let traceValue: string | undefined;
+					if (import.meta.env.SSR) {
+						const transactionNode = SentryNode.getCurrentHub()
+							.getScope()
+							?.getTransaction();
+
+						traceValue = transactionNode?.toTraceparent();
+					}
+
+					if (!import.meta.env.SSR) {
+						const transactionSvelte = SentrySvelte.getCurrentHub()
+							.getScope()
+							?.getTransaction();
+
+						if (transactionSvelte) {
+							traceValue = transactionSvelte.toTraceparent();
+						} else {
+							// create a new transaction manually
+							// when running in load in the browser, the Sentry browser SDK does not create a transaction (yet)
+							const transaction = SentrySvelte.startTransaction({
+								op: 'site.api.call',
+								name: 'api()',
+							});
+
+							traceValue = transaction.toTraceparent();
+						}
+					}
+
+					if (traceValue) {
+						const headers = {
+							...context.init.headers,
+							'sentry-trace': traceValue,
+						};
+						return Promise.resolve({
+							url: context.url,
+							init: {
+								...context.init,
+								headers,
+							},
+						});
+					} else {
+						return Promise.resolve(context);
+					}
+				},
+			},
+		],
 	});
 
 	return {
