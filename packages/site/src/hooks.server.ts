@@ -11,7 +11,7 @@ import { validateToken } from '$lib/server/utils/validate';
 import { getSentryUser } from '$lib/utils/sentry-utils';
 import type { ResponseError } from '@self/sdk';
 import * as Sentry from '@sentry/node';
-import type { ExternalFetch, Handle, HandleError } from '@sveltejs/kit';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 import { version } from '../package.json';
@@ -151,7 +151,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handleError: HandleError = async ({ error, event }) => {
+export const handleError: HandleServerError = async ({ error, event }) => {
 	console.error(error);
 	const { locals, params } = event;
 	const details = {
@@ -180,7 +180,7 @@ export const handleError: HandleError = async ({ error, event }) => {
 	});
 };
 
-export const externalFetch: ExternalFetch = async (request) => {
+export const handleFetch: HandleFetch = async ({ request }) => {
 	const basePath = PUBLIC_API_URL;
 	const newPath = PUBLIC_API_URL_LOCAL;
 
