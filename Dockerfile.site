@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM node:16.9 as site
+FROM node:18.9 as site
 
 # use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
 # Install OpenJDK-11
@@ -28,7 +28,7 @@ RUN PORT=3000 pnpm --filter=@self/site... run build
 RUN pnpm --filter=@self/site deploy pruned
 
 
-FROM node:16.9-alpine as production
+FROM node:18.9-alpine as production
 
 WORKDIR /app
 ENV NODE_ENV=production
