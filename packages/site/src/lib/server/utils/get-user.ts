@@ -110,10 +110,11 @@ const getProfile = async (
 			`Fetched user info for ${user.email} in ${Date.now() - now}ms`,
 		);
 
-		span?.finish();
 		return user;
 	} catch (e) {
 		console.error(e);
 		return undefined;
+	} finally {
+		span?.finish();
 	}
 };
