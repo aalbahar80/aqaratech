@@ -9,9 +9,8 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { getSentryUser } from '$lib/utils/sentry-utils';
-	import type { Scope } from '@sentry/svelte';
-	import * as Sentry from '@sentry/svelte';
-	import { BrowserTracing } from '@sentry/tracing';
+	import * as Sentry from '@sentry/svelte?client';
+	import { BrowserTracing } from '@sentry/tracing?client';
 	import LogRocket from 'logrocket';
 	import { onMount } from 'svelte';
 	import { MetaTags } from 'svelte-meta-tags';
@@ -35,7 +34,7 @@
 			release: data.version,
 		});
 
-		Sentry.configureScope((scope: Scope) => {
+		Sentry.configureScope((scope) => {
 			scope.setTag('roleType', data.user?.role?.roleType || '');
 			scope.setUser(getSentryUser(data.user));
 		});

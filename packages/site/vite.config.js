@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-// import basicSsl from '@vitejs/plugin-basic-ssl';
 import icons from 'unplugin-icons/vite';
+import { isoImport } from 'vite-plugin-iso-import';
+// import basicSsl from '@vitejs/plugin-basic-ssl';
 
 /** @type {import('vite').UserConfig} */
 const config = {
@@ -21,6 +22,7 @@ const config = {
 	plugins: [
 		sveltekit(),
 		icons({ compiler: 'svelte' }),
+		isoImport(),
 		// basicSsl(),
 	],
 	ssr: {
