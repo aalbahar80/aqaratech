@@ -4,7 +4,6 @@ import {
 	PUBLIC_API_URL_LOCAL,
 	PUBLIC_AQARATECH_ENV,
 	PUBLIC_AQ_DEBUG_SITE,
-	PUBLIC_SITE_URL,
 	PUBLIC_TRACE_RATE,
 } from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
@@ -15,7 +14,7 @@ import { addTraceToHead, getSentryUser } from '$lib/utils/sentry-utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { parse } from 'cookie';
+import { parse, serialize } from 'cookie';
 import { errors } from 'jose';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
@@ -121,33 +120,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanCookies.finish();
 
-	const maxAge = 60 * 60 * 24 * 7;
-
-	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
-	event.cookies.set('idToken', event.locals.idToken || '', {
-		httpOnly: true,
-		path: '/',
-		maxAge: event.locals.idToken ? maxAge : 0,
-		sameSite: 'none', // TODO research
-		secure: true,
-	});
-
-	event.cookies.set('accessToken', event.locals.accessToken || '', {
-		httpOnly: true,
-		path: '/',
-		maxAge: event.locals.idToken ? maxAge : 0,
-		sameSite: 'none', // TODO research
-		secure: true,
-	});
-
-	event.cookies.set('xRoleId', event.locals.xRoleId || '', {
-		httpOnly: true,
-		path: '/',
-		maxAge: event.locals.xRoleId ? maxAge : 0,
-		sameSite: 'none', // TODO research
-		secure: true,
-	});
-
 	if (environment.envName !== 'prod') {
 		event.setHeaders({
 			'X-Robots-Tag': 'noindex',
@@ -166,6 +138,42 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	spanResolve.finish();
+
+	const maxAge = 60 * 60 * 24 * 7;
+
+	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
+	response.headers.append(
+		'Set-Cookie',
+		serialize('idToken', event.locals.idToken || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.idToken ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
+
+	response.headers.append(
+		'Set-Cookie',
+		serialize('accessToken', event.locals.accessToken || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.accessToken ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
+
+	response.headers.append(
+		'Set-Cookie',
+		serialize('xRoleId', event.locals.xRoleId || '', {
+			httpOnly: true,
+			path: '/',
+			maxAge: event.locals.xRoleId ? maxAge : 0,
+			sameSite: 'none', // TODO research
+			secure: true,
+		}),
+	);
 
 	console.log(
 		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
