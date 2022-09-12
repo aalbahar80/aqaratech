@@ -200,7 +200,7 @@ export const handleFetch: HandleFetch = async ({ request, fetch }) => {
 	const basePath = PUBLIC_API_URL;
 	const newPath = PUBLIC_API_URL_LOCAL;
 
-	request.headers.set('origin', PUBLIC_SITE_URL);
+	// request.headers.set('origin', PUBLIC_SITE_URL);
 
 	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);

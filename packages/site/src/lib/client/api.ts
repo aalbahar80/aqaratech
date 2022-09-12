@@ -1,4 +1,4 @@
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PUBLIC_API_URL, PUBLIC_SITE_URL } from '$env/static/public';
 import {
 	AggregateApi,
 	Configuration,
@@ -33,6 +33,7 @@ export const api = ({
 	const headers: Record<string, string> = {
 		Authorization: `Bearer ${token}`,
 		...(roleId ? { 'x-role-id': roleId } : {}),
+		// origin: PUBLIC_SITE_URL,
 	};
 
 	const basePath = PUBLIC_API_URL;
