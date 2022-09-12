@@ -141,8 +141,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const maxAge = 60 * 60 * 24 * 7;
 
+	// create new headers object to avoid mutating the original
+	const headers = new Headers(response.headers);
+
 	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
-	response.headers.append(
+	headers.append(
 		'Set-Cookie',
 		serialize('idToken', event.locals.idToken || '', {
 			httpOnly: true,
@@ -153,7 +156,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}),
 	);
 
-	response.headers.append(
+	headers.append(
 		'Set-Cookie',
 		serialize('accessToken', event.locals.accessToken || '', {
 			httpOnly: true,
@@ -164,7 +167,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}),
 	);
 
-	response.headers.append(
+	headers.append(
 		'Set-Cookie',
 		serialize('xRoleId', event.locals.xRoleId || '', {
 			httpOnly: true,
@@ -184,7 +187,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 
 	transaction.finish();
-	return response;
+	// create new response object to avoid mutating the original
+	return new Response(response.body, {
+		...response,
+		headers,
+	});
 };
 
 export const handleError: HandleServerError = ({ error, event }) => {
