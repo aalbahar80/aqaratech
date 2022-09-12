@@ -36,7 +36,13 @@ export const api = ({
 		// origin: PUBLIC_SITE_URL,
 	};
 
-	const basePath = PUBLIC_API_URL;
+	let basePath: string;
+
+	if (loadFetch) {
+		basePath = '/api';
+	} else {
+		basePath = PUBLIC_API_URL;
+	}
 
 	// Sentry
 	let traceValue: string | undefined;

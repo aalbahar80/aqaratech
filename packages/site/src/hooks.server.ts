@@ -36,6 +36,10 @@ Sentry.init({
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
+	// if (event.url.pathname.startsWith('/api/')) {
+	// 	return fetch(event.request);
+	// }
+
 	const transaction = Sentry.startTransaction({
 		op: 'sveltekit.handle',
 		name: event.request.method + ' ' + event.request.url,
