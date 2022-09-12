@@ -8,7 +8,10 @@ export const load: PageLoad = async ({ url: { searchParams } }) => {
 	};
 
 	if (!predefined.portfolioId) {
-		throw error(400, 'Insufficient URL parameters');
+		throw error(400, {
+			code: '400',
+			message: 'Insufficient parameters',
+		});
 	}
 
 	return { predefined };
