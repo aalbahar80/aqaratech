@@ -17,7 +17,8 @@
     "test": "playwright test",
     "report": "playwright show-report",
     "debug": "vite --port 3000 --debug",
-    "sentry:sourcemaps": "sentry-cli sourcemaps upload ./build/ --org aqaratech --project site-client --project site-server --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)"
+    "sentry:sourcemaps": "sentry-cli sourcemaps upload ./build/ --org aqaratech --project site-client --project site-server --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)",
+    "sentry:release": "sentry-cli releases deploys $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json) new --org aqaratech --project site-client --project site-server"
   },
   "devDependencies": {
     "@brainandbones/skeleton": "0.32.19",

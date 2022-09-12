@@ -38,9 +38,15 @@
         "build"
       ]
     },
-    "sentry:sourcemaps": {
+    "sentry:release": {
       "dependsOn": [
         "build"
+      ],
+      "outputs": []
+    },
+    "sentry:sourcemaps": {
+      "dependsOn": [
+        "sentry:release"
       ],
       "outputs": []
     },
