@@ -170,7 +170,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	if (environment.envName !== 'prod') {
-		response.headers.set('X-Robots-Tag', 'noindex');
+		event.setHeaders({
+			'X-Robots-Tag': 'noindex',
+		});
 	}
 
 	transaction.finish();
