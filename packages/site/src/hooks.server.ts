@@ -12,11 +12,13 @@ import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
 import {
 	addTraceToHead,
-	captureRedirectError,
 	extractRequestInfo,
 	getSentryUser,
-	isRedirectError,
 } from '$lib/utils/sentry-utils';
+import {
+	captureRedirectError,
+	isRedirectError,
+} from '$lib/utils/sentry/redirect';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';

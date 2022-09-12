@@ -1,7 +1,7 @@
 import type { User } from '$lib/models/types/auth.type';
-import * as Sentry from '@sentry/node';
+import type { Request } from '@sentry/node';
 import type { Span } from '@sentry/tracing';
-import type { HandleServerError, RequestEvent } from '@sveltejs/kit';
+import type { RequestEvent } from '@sveltejs/kit';
 
 export const getSentryUser = (user: User | undefined) => ({
 	id: user?.id || '',
@@ -34,16 +34,7 @@ export const addTraceToHead = ({
 	return modifiedHtml;
 };
 
-interface RedirectError {
-	status: number;
-	location: string;
-}
-
-export const isRedirectError = (error: any): error is RedirectError => {
-	return error.status && error.location;
-};
-
-export const extractRequestInfo = (event: RequestEvent): Sentry.Request => {
+export const extractRequestInfo = (event: RequestEvent): Request => {
 	const info = {
 		// TODO event vs request?
 		method: event.request.method,
@@ -54,25 +45,4 @@ export const extractRequestInfo = (event: RequestEvent): Sentry.Request => {
 	};
 
 	return info;
-};
-
-export const captureRedirectError = ({
-	error,
-	event,
-	info,
-}: {
-	error: RedirectError;
-	event: Parameters<HandleServerError>[0]['event'];
-	info: Sentry.Request;
-}) => {
-	Sentry.captureEvent({
-		message: 'Redirect',
-		tags: {
-			name: 'handleServerError',
-			redirectFrom: event.url.href,
-			status: error.status,
-			location: error.location,
-		},
-		request: info,
-	});
 };
