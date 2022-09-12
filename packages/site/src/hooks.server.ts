@@ -14,7 +14,7 @@ import {
 	addTraceToHead,
 	extractRequestInfo,
 	getSentryUser,
-} from '$lib/utils/sentry-utils';
+} from '$lib/utils/sentry/common';
 import {
 	captureRedirectError,
 	isRedirectError,

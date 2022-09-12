@@ -9,7 +9,7 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
-	import { getSentryUser } from '$lib/utils/sentry-utils';
+	import { getSentryUser } from '$lib/utils/sentry/common';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import LogRocket from 'logrocket';
