@@ -9,6 +9,7 @@
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
     "test": "pnpm run --filter=@self/test test",
     "dev": "turbo run --filter \\!@self/docs dev",
+    "sentry:sourcemaps": "turbo run sentry:sourcemaps",
     "lint": "turbo run lint"
   },
   "devDependencies": {

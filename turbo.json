@@ -38,6 +38,12 @@
         "build"
       ]
     },
+    "sentry:sourcemaps": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
+    },
     "@self/sdk#build": {
       "dependsOn": [
         "@self/backend#build"
