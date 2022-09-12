@@ -199,9 +199,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 
 	transaction.finish();
+
 	// create new response object to avoid mutating the original
 	return new Response(response.body, {
 		...response,
+		status: response.status,
+		statusText: response.statusText,
 		headers,
 	});
 };
