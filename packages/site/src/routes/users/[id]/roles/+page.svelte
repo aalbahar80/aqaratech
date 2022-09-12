@@ -7,4 +7,4 @@
 	// TODO use user provided by layout?
 </script>
 
-<RoleList roles={data.user.roles} />
+<RoleList roles={data.user?.roles || []} />
