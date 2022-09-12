@@ -37,8 +37,9 @@ export const api = ({
 	};
 
 	let basePath: string;
+	const isReverseProxy = PUBLIC_API_URL.endsWith('/api');
 
-	if (loadFetch) {
+	if (loadFetch && isReverseProxy) {
 		basePath = '/api';
 	} else {
 		basePath = PUBLIC_API_URL;
