@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "turbo run --filter \\!@self/docs build",
-    "preview": "PUBLIC_API_URL_LOCAL=http://localhost:3002 PUBLIC_API_URL=http://localhost:3002 PUBLIC_SITE_URL=http://localhost:3000 ORIGIN=http://localhost:3000 turbo run --filter \\!@self/docs preview",
-    "preview:tunnel": "PUBLIC_API_URL_LOCAL=http://localhost:3002 PUBLIC_API_URL=https://api.aqar.live PUBLIC_SITE_URL=https://site.aqar.live ORIGIN=https://site.aqar.live turbo run --filter \\!@self/docs preview",
+    "preview": "turbo run --filter \\!@self/docs preview",
     "build:site": "turbo run build --filter=@self/site",
     "build:docs": "turbo run build --filter=@self/docs",
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",

@@ -4,6 +4,7 @@ import {
 	PUBLIC_API_URL_LOCAL,
 	PUBLIC_AQARATECH_ENV,
 	PUBLIC_AQ_DEBUG_SITE,
+	PUBLIC_SITE_URL,
 	PUBLIC_TRACE_RATE,
 } from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
@@ -201,10 +202,12 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	});
 };
 
-export const handleFetch: HandleFetch = async ({ request }) => {
+export const handleFetch: HandleFetch = async ({ request, fetch }) => {
 	// Runs when a load uses `fetch()` on the server
 	const basePath = PUBLIC_API_URL;
 	const newPath = PUBLIC_API_URL_LOCAL;
+
+	request.headers.set('origin', PUBLIC_SITE_URL);
 
 	if (basePath && newPath && request.url.startsWith(basePath)) {
 		request = new Request(request.url.replace(basePath, newPath), request);
