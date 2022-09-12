@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.3.0
+
+### Minor Changes
+
+- 4b62caa2: add robots.txt, favicon.ico
+
 ## 0.2.0
 
 ### Minor Changes
