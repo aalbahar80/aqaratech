@@ -3,7 +3,7 @@ import {
 	PUBLIC_API_URL,
 	PUBLIC_API_URL_LOCAL,
 	PUBLIC_AQARATECH_ENV,
-	PUBLIC_AQ_DEBUG_SITE,
+	PUBLIC_AQ_DEBUG_SENTRY,
 	PUBLIC_TRACE_RATE,
 } from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
@@ -26,7 +26,7 @@ Sentry.init({
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
 	tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
 	environment: PUBLIC_AQARATECH_ENV,
-	debug: PUBLIC_AQ_DEBUG_SITE === '1',
+	debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
 	integrations: [
 		// 	// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),

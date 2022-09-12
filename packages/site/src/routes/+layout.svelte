@@ -3,7 +3,7 @@
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import {
 		PUBLIC_AQARATECH_ENV,
-		PUBLIC_AQ_DEBUG_SITE,
+		PUBLIC_AQ_DEBUG_SENTRY,
 		PUBLIC_TRACE_RATE,
 	} from '$env/static/public';
 	import Alert from '$lib/components/navbar/Alert.svelte';
@@ -32,9 +32,9 @@
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
 				tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
-				debug: PUBLIC_AQ_DEBUG_SITE === '1',
 				environment: PUBLIC_AQARATECH_ENV,
 				release: __AQARATECH_APP_VERSION__,
+				debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
 			});
 
 			Sentry.configureScope((scope) => {
