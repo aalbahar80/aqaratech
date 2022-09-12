@@ -10,7 +10,13 @@ import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
-import { addTraceToHead, getSentryUser } from '$lib/utils/sentry-utils';
+import {
+	addTraceToHead,
+	captureRedirectError,
+	extractRequestInfo,
+	getSentryUser,
+	isRedirectError,
+} from '$lib/utils/sentry-utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -200,14 +206,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const handleError: HandleServerError = ({ error, event }) => {
 	console.error(error);
-	const { locals, params } = event;
-	const details = {
-		name: 'handleError',
-		url: event.url.href,
-		locals,
-		params,
-	};
-	console.error(details);
+
+	const info = extractRequestInfo(event);
+
+	if (isRedirectError(error)) {
+		captureRedirectError({ error, event, info });
+	}
 
 	Sentry.captureException(error, {
 		user: getSentryUser(event.locals.user),
