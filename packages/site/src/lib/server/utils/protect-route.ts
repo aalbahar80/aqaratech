@@ -14,7 +14,7 @@ export const protectRoute = ({
 	user?: User;
 	isAqaratechStaff: boolean;
 }) => {
-	const publicUrl = ['/'].includes(pathname);
+	const publicUrl = ['/', '/favicon.ico'].includes(pathname);
 	// As things stand, this check only runs server-side.
 	// Not applicable when client-side routing is used.
 	const canAccess =
@@ -32,6 +32,9 @@ export const protectRoute = ({
 		throw redirect(307, LOGIN);
 	} else {
 		console.debug(`[PROTECT-ROUTE] Forbidden`);
-		throw error(403, 'Forbidden');
+		throw error(403, {
+			message: 'Forbidden',
+			code: '403',
+		});
 	}
 };
