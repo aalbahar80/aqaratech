@@ -1,5 +1,11 @@
 # @self/utils
 
+## 1.2.0
+
+### Minor Changes
+
+- 8db623bb: fix double fetch
+
 ## 1.1.1
 
 ### Patch Changes

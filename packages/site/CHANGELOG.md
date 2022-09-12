@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.2.0
+
+### Minor Changes
+
+- 8db623bb: fix double fetch
+
 ## 0.1.6
 
 ### Patch Changes

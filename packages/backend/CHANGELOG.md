@@ -1,5 +1,16 @@
 # @self/backend
 
+## 0.2.0
+
+### Minor Changes
+
+- 8db623bb: fix double fetch
+
+### Patch Changes
+
+- Updated dependencies [8db623bb]
+  - @self/utils@1.2.0
+
 ## 0.1.1
 
 ### Patch Changes
