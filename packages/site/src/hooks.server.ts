@@ -15,7 +15,7 @@ import { addTraceToHead, getSentryUser } from '$lib/utils/sentry-utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { parse, serialize } from 'cookie';
+import { parse } from 'cookie';
 import { errors } from 'jose';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
@@ -121,27 +121,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanCookies.finish();
 
-	const spanResolve = transaction.startChild({
-		op: 'sveltekit.resolve',
-		description: 'resolve',
-	});
-
-	const response = await resolve(event, {
-		transformPageChunk({ html }) {
-			return addTraceToHead({ html, span: spanResolve });
-		},
-	});
-
-	spanResolve.finish();
-
-	console.log(
-		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
-			event.url.pathname
-		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
-			event.locals.user?.email
-		}`,
-	);
-
 	const maxAge = 60 * 60 * 24 * 7;
 
 	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
@@ -174,6 +153,27 @@ export const handle: Handle = async ({ event, resolve }) => {
 			'X-Robots-Tag': 'noindex',
 		});
 	}
+
+	const spanResolve = transaction.startChild({
+		op: 'sveltekit.resolve',
+		description: 'resolve',
+	});
+
+	const response = await resolve(event, {
+		transformPageChunk({ html }) {
+			return addTraceToHead({ html, span: spanResolve });
+		},
+	});
+
+	spanResolve.finish();
+
+	console.log(
+		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
+			event.url.pathname
+		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
+			event.locals.user?.email
+		}`,
+	);
 
 	transaction.finish();
 	return response;
