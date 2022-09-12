@@ -145,38 +145,29 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const maxAge = 60 * 60 * 24 * 7;
 
 	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
-	response.headers.append(
-		'Set-Cookie',
-		serialize('idToken', event.locals.idToken || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.idToken ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	event.cookies.set('idToken', event.locals.idToken || '', {
+		httpOnly: true,
+		path: '/',
+		maxAge: event.locals.idToken ? maxAge : 0,
+		sameSite: 'none', // TODO research
+		secure: true,
+	});
 
-	response.headers.append(
-		'Set-Cookie',
-		serialize('accessToken', event.locals.accessToken || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.accessToken ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	event.cookies.set('accessToken', event.locals.accessToken || '', {
+		httpOnly: true,
+		path: '/',
+		maxAge: event.locals.idToken ? maxAge : 0,
+		sameSite: 'none', // TODO research
+		secure: true,
+	});
 
-	response.headers.append(
-		'Set-Cookie',
-		serialize('xRoleId', event.locals.xRoleId || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.xRoleId ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
+	event.cookies.set('xRoleId', event.locals.xRoleId || '', {
+		httpOnly: true,
+		path: '/',
+		maxAge: event.locals.xRoleId ? maxAge : 0,
+		sameSite: 'none', // TODO research
+		secure: true,
+	});
 
 	if (environment.envName !== 'prod') {
 		response.headers.set('X-Robots-Tag', 'noindex');
