@@ -32,7 +32,7 @@
 						{title}
 					</h1>
 					<p class="mt-1 text-base text-gray-500">
-						{$page.error.message}
+						{$page.error?.message}
 					</p>
 				</div>
 				<div
@@ -59,7 +59,7 @@
 {#if dev}
 	<div class="prose min-h-full min-w-full">
 		<pre class="whitespace-pre-wrap">{JSON.stringify(
-				$page.error.stack,
+				$page.error?.frame,
 				null,
 				2,
 			)}</pre>

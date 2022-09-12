@@ -38,6 +38,12 @@ declare namespace App {
 		isAqaratechStaff: boolean;
 	}
 
+	interface PageError {
+		message: string;
+		code: string;
+		frame?: string;
+	}
+
 	// interface Platform {}
 
 	interface PrivateEnv {
