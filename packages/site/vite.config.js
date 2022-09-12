@@ -4,6 +4,8 @@ import { isoImport } from 'vite-plugin-iso-import';
 import { version } from './package.json';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 
+// TODO don't generate sourcemaps if PUBLIC_AQARATECH_ENV is production
+
 /** @type {import('vite').UserConfig} */
 const config = {
 	// envDir: process.env.RENDER ? resolve(__dirname, '../..') : undefined,
