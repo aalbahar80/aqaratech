@@ -12,7 +12,6 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /app
 COPY pnpm-lock.yaml ./
 
-# Only fetch once bug is fixed. Also add --offline to install command. https://github.com/pnpm/pnpm/issues/5268
 # RUN pnpm fetch 
 
 ADD . ./
