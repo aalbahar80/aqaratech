@@ -25,15 +25,13 @@ ENV ORIGIN=$PUBLIC_SITE_URL
 # ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
 RUN PORT=3000 pnpm --filter=@self/site... run build
 
-RUN pnpm --filter=@self/site deploy pruned
-
-
 FROM node:18.9-alpine as production
 
 WORKDIR /app
 ENV NODE_ENV=production
 
-COPY --from=site /app/pruned .
+COPY --from=site /app/packages/site/build ./build
+COPY --from=site /app/packages/site/package.json ./package.json
 
 # NO-OP, for convenience only
 EXPOSE 3000
