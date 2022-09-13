@@ -10,14 +10,22 @@ RUN apt-get update && \
   apt-get clean;
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
+RUN wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.1.0/openapi-generator-cli-6.1.0.jar -O /var/opt/openapi-generator-cli-6.1.0.jar
+
 WORKDIR /app
+
+
 COPY pnpm-lock.yaml ./
 
 # Only fetch once bug is fixed. Also add --offline to install command. https://github.com/pnpm/pnpm/issues/5268
-# RUN pnpm fetch 
+RUN pnpm fetch 
 
 ADD . ./
-RUN pnpm --filter=. --filter=@self/site... install --prod=false
+
+RUN cp /var/opt/openapi-generator-cli-6.1.0.jar ./packages/sdk/openapi-generator-cli-6.1.0.jar
+
+RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
 
 ARG PUBLIC_SITE_URL
 ENV ORIGIN=$PUBLIC_SITE_URL
