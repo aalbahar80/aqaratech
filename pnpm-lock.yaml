@@ -35,7 +35,7 @@ importers:
       '@nestjs/terminus': 9.1.1
       '@nestjs/testing': 9.0.11
       '@prisma/client': 4.3.1
-      '@self/utils': workspace:1.1.1
+      '@self/utils': workspace:1.2.0
       '@sentry/node': 7.12.1
       '@sentry/tracing': 7.12.1
       '@types/cache-manager': 4.0.2
@@ -248,7 +248,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.90
-      '@sveltejs/kit': 1.0.0-next.480
+      '@sveltejs/kit': 1.0.0-next.481
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
@@ -319,7 +319,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
       '@sveltejs/adapter-node': 1.0.0-next.90
-      '@sveltejs/kit': 1.0.0-next.480_svelte@3.49.0+vite@3.1.0
+      '@sveltejs/kit': 1.0.0-next.481_svelte@3.49.0+vite@3.1.0
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
@@ -379,8 +379,8 @@ importers:
   packages/test:
     specifiers:
       '@playwright/test': 1.25.1
-      '@self/seed': workspace:0.1.1
-      '@self/utils': workspace:1.1.1
+      '@self/seed': workspace:0.2.0
+      '@self/utils': workspace:1.2.0
       '@tsconfig/node18': 1.0.1
       '@types/node': 18.7.15
       dotenv: 16.0.2
@@ -3157,8 +3157,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.480_svelte@3.49.0+vite@3.1.0:
-    resolution: {integrity: sha512-RnltVDZFksAkeIZ0wgMQDr4POz3WZxSDy6D/ycIjrz3VXMDYWxKRqmTEI7Yl7TxPgUabeYHGRm/qI+nSXOb/Yw==}
+  /@sveltejs/kit/1.0.0-next.481_svelte@3.49.0+vite@3.1.0:
+    resolution: {integrity: sha512-rgt6KKjUmx/S/a/duntAp+yds9F3fSm6uq8nvfWHuT1aVGSC5sOdNDrKqck7PCUc9/GPJ6WJu3et5R69hqevRw==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
