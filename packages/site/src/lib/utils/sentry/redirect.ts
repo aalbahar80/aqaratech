@@ -33,6 +33,7 @@ export const captureHandleErrorEvent = ({
 	}
 
 	Sentry.captureEvent({
+		level: 'info',
 		message,
 		tags,
 		request: info,
