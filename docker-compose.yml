@@ -1,21 +1,5 @@
 version: "3.5"
 services:
-  caddy:
-    image: caddy/caddy:2.2.1-alpine
-    container_name: caddy-service
-    restart: unless-stopped
-    ports:
-      - "${CADDY_PORT}:80"
-      - "443:443"
-    volumes:
-      - $PWD/Caddyfile:/etc/caddy/Caddyfile
-      - $PWD/certificate.pem:/etc/ssl/certs/certificate.pem
-      - $PWD/key.pem:/etc/ssl/private/key.pem
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - aq-network
-
   site:
     build:
       context: .
@@ -35,19 +19,12 @@ services:
       context: .
       dockerfile: ./Dockerfile.backend
     depends_on:
-      - redis
       - postgres
     networks:
       - aq-network
     env_file:
       - .env
     restart: unless-stopped
-
-  redis:
-    container_name: redis
-    image: redis:latest
-    networks:
-      - aq-network
 
   postgres:
     container_name: postgres
@@ -73,40 +50,11 @@ services:
     networks:
       - aq-network
 
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - $PWD/packages/backend/prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - '9090:9090'
-    networks:
-      - aq-network
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    restart: unless-stopped
-    links:
-      - prometheus:prometheus
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=12345
-    ports:
-      - '3003:3000'
-    networks:
-      - aq-network
-
 networks:
   aq-network:
     driver: bridge
     name: aq-network
 
 volumes:
-  caddy_data:
-  caddy_config:
   postgres:
   meili_data:
-  grafana-storage:
