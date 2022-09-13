@@ -1,7 +1,7 @@
 import { LOGIN } from '$lib/constants/routes';
 import type { User } from '$lib/models/types/auth.type';
 import { isAccessible } from '$lib/server/utils/accessibile-routes';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 export const protectRoute = ({
 	isAuthenticated,
@@ -32,9 +32,8 @@ export const protectRoute = ({
 		throw redirect(307, LOGIN);
 	} else {
 		console.debug(`[PROTECT-ROUTE] Forbidden`);
-		throw error(403, {
-			message: 'Forbidden',
-			code: '403',
+		throw new Error('Forbidden route', {
+			cause: 'protectRoute() - Forbidden route',
 		});
 	}
 };

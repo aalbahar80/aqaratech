@@ -15,10 +15,7 @@ import {
 	extractRequestInfo,
 	getSentryUser,
 } from '$lib/utils/sentry/common';
-import {
-	captureRedirectError,
-	isRedirectError,
-} from '$lib/utils/sentry/redirect';
+import { captureHandleErrorEvent } from '$lib/utils/sentry/redirect';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -213,13 +210,15 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	console.error(error);
 
 	const info = extractRequestInfo(event);
+	const user = getSentryUser(event.locals.user);
 
-	if (isRedirectError(error)) {
-		captureRedirectError({ error, event, info });
-	}
+	console.debug({ info, user });
+
+	// TODO: Review this manual captureEvent
+	captureHandleErrorEvent({ error, event, info });
 
 	Sentry.captureException(error, {
-		user: getSentryUser(event.locals.user),
+		user,
 	});
 };
 

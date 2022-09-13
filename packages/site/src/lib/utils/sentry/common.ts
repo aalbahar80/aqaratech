@@ -1,5 +1,4 @@
 import type { User } from '$lib/models/types/auth.type';
-import type { Request } from '@sentry/node';
 import type { Span } from '@sentry/tracing';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -34,14 +33,13 @@ export const addTraceToHead = ({
 	return modifiedHtml;
 };
 
-export const extractRequestInfo = (event: RequestEvent): Request => {
+export const extractRequestInfo = (event: RequestEvent) => {
 	const info = {
 		// TODO event vs request?
 		method: event.request.method,
 		url: event.request.url,
 		headers: Object.fromEntries(event.request.headers),
 		query_string: event.url.search,
-		data: event.request.json(),
 	};
 
 	return info;

@@ -10,23 +10,31 @@ export const isRedirectError = (error: any): error is RedirectError => {
 	return error.status && error.location;
 };
 
-export const captureRedirectError = ({
+export const captureHandleErrorEvent = ({
+	message,
 	error,
 	event,
 	info,
 }: {
-	error: RedirectError;
+	message?: string;
+	error: unknown;
 	event: Parameters<HandleServerError>[0]['event'];
 	info: Sentry.Request;
 }) => {
+	const tags: Sentry.Event['tags'] = {
+		name: 'handleServerError',
+	};
+
+	if (isRedirectError(error)) {
+		message = 'Redirect';
+		tags.status = error.status;
+		tags.location = error.location;
+		tags.redirectFrom = event.url.href;
+	}
+
 	Sentry.captureEvent({
-		message: 'Redirect',
-		tags: {
-			name: 'handleServerError',
-			redirectFrom: event.url.href,
-			status: error.status,
-			location: error.location,
-		},
+		message,
+		tags,
 		request: info,
 	});
 };
