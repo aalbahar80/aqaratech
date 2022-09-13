@@ -19,6 +19,7 @@ export const ACCESSIBLE_ROUTES = {
 		'/payouts',
 		'/leaseInvoices',
 		'/maintenanceOrders',
+		'/roles',
 		'/files',
 	],
 	PORTFOLIO: [
