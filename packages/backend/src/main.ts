@@ -11,7 +11,6 @@ import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SentryInterceptor } from 'src/sentry/sentry.interceptor';
 import { setupSwagger } from 'src/swagger';
-import { getMiddleware } from 'swagger-stats';
 import { version } from '../package.json';
 import { AppModule } from './app.module';
 
@@ -82,22 +81,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
-  const document = await setupSwagger(app);
-
-  app.use(
-    getMiddleware({
-      swaggerSpec: document,
-      hostname: new URL(process.env.PUBLIC_SITE_URL).host, // https://aqaratech.com
-      uriPath: '/swagger-stats',
-      // @ts-expect-error `cookiePath` is a custom option I added using `pnpm patch`.
-      // Enables serving the swagger-stats UI behind a reverse proxy which strips the /api prefix.
-      cookiePath: `${process.env.PUBLIC_ROUTE_PATH || ''}` + '/swagger-stats', // prod: /api/swagger-stats dev: /swagger-stats
-      authentication: true,
-      onAuthenticate: function (req: any, username: string, password: string) {
-        return username === 'aq-admin' && password === 'aq-swaggerstats12';
-      },
-    }),
-  );
+  await setupSwagger(app);
 
   console.log('OpenApi schema generated');
   if (process.env.GENERATE_OPENAPI_SCHEMA) {
