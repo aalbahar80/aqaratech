@@ -25,13 +25,15 @@ ADD . ./
 
 RUN cp /var/opt/openapi-generator-cli-6.1.0.jar ./packages/sdk/openapi-generator-cli-6.1.0.jar
 
-RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
+# TODO: need to install backend since turbo thinks it's a dependency. Create new build:docker pipeline that doesn't install backend
+# RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
+RUN pnpm install --prod=false --offline
 
 ARG PUBLIC_SITE_URL
 ENV ORIGIN=$PUBLIC_SITE_URL
 
 # ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-RUN PORT=3000 pnpm --filter=@self/site... run build
+RUN PORT=3000 pnpm run build:site
 
 FROM node:18.9-alpine as production
 
