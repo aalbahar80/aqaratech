@@ -18,9 +18,9 @@ jobs:
           envkey_PUBLIC_TRACE_RATE: 0
           envkey_PUBLIC_AQ_DEBUG_SITE: 0
           envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
+      - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
-      - uses: actions/checkout@v2
       - name: Test
         run: docker run --network aq-network appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
       - name: Test2
