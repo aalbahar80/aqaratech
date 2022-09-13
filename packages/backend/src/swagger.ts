@@ -82,7 +82,7 @@ export const setupSwagger = async (app: INestApplication) => {
     },
   });
 
-  if (process.env.PUBLIC_AQARATECH_ENV !== 'production') {
+  if (process.env.PUBLIC_AQARATECH_ENV !== 'production' && process.env.CI !== 'true') {
     const { dump } = await import('js-yaml');
     // For consumption of swagger-ui
     writeFileSync(

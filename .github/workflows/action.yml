@@ -4,10 +4,26 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          directory: .
+          file_name: .env
+          fail_on_empty: false
+          envkey_PUBLIC_AQARATECH_ENV: development
+          envkey_PUBLIC_SITE_URL: http://site:3000
+          envkey_PUBLIC_API_URL: http://backend:3002
+          envkey_PUBLIC_API_URL_LOCAL: http://backend:3002
+          envkey_AUTH0_CLIENT_SECRET: uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
+          envkey_PUBLIC_TRACE_RATE: 0
+          envkey_PUBLIC_AQ_DEBUG_SITE: 0
+          envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
       - uses: actions/checkout@v2
-      - name: Build the site dockerfile
-        run: docker build -t "site-gh:0.1" -f "Dockerfile.site" .
-      - name: Run the dockerfile
-        run: docker run -p 3000:3000 site-gh:0.1
       - name: Test
-        run: docker run appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+        run: docker run appropriate/curl -s --retry 10 --retry-connrefused http://site:3000/
+      - name: Test2
+        run: docker run appropriate/curl -s --retry 10 --retry-connrefused http://backend:3000/
+      - name: Test3
+        run: docker run --network aq-network appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+      - name: Test4
+        run: docker run --network aq-network appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3002/
