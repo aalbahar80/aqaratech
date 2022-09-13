@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.3.1
+
+### Patch Changes
+
+- 72353c60: allow access to /roles for orgAdmins
+
 ## 0.3.0
 
 ### Minor Changes
