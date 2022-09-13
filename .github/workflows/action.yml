@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the dockerfile
-        run: docker build -t "site-gh:0.1" -f "Dockerfile.backend" .
+      - name: Build the site dockerfile
+        run: docker build -t "site-gh:0.1" -f "Dockerfile.site" .
       - name: Run the dockerfile
-        run: docker run -rm -p 3000:3000 site-gh:0.1
+        run: docker run -p 3000:3000 site-gh:0.1
       - name: Test
         run: docker run appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
