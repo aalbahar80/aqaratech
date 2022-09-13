@@ -4,7 +4,7 @@
 # TODO optimize production build: https://towardsdev.com/nestjs-app-in-docker-47239ca0545c
 # Optimize: https://docs.docker.com/get-started/09_image_best/
 
-FROM node:16 as backend
+FROM node:16 as builder
 
 # Blocked by https://github.com/stalniy/casl/issues/621
 
@@ -26,7 +26,7 @@ RUN pnpm --filter=. --filter=@self/backend... install --offline
 RUN pnpm run build:backend
 
 
-FROM backend as pruned
+FROM builder as pruned
 
 RUN pnpm --filter @self/backend --prod deploy pruned
 
