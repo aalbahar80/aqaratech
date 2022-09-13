@@ -240,14 +240,14 @@ importers:
       '@felte/validator-zod': 1.0.11
       '@iconify/json': 2.1.103
       '@rgossiaux/svelte-headlessui': 1.0.2
-      '@self/sdk': workspace:0.1.1
-      '@self/utils': workspace:1.1.1
+      '@self/sdk': workspace:0.2.0
+      '@self/utils': workspace:1.2.0
       '@sentry/node': 7.12.1
       '@sentry/svelte': 7.12.1
       '@sentry/tracing': 7.12.1
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
-      '@sveltejs/adapter-node': 1.0.0-next.87
+      '@sveltejs/adapter-node': 1.0.0-next.90
       '@sveltejs/kit': 1.0.0-next.480
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
@@ -318,7 +318,7 @@ importers:
       '@sentry/tracing': 7.12.1
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.1
-      '@sveltejs/adapter-node': 1.0.0-next.87
+      '@sveltejs/adapter-node': 1.0.0-next.90
       '@sveltejs/kit': 1.0.0-next.480_svelte@3.49.0+vite@3.1.0
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
@@ -3115,8 +3115,10 @@ packages:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/adapter-node/1.0.0-next.87:
-    resolution: {integrity: sha512-ktvZ0+uthYH6SQMO34acbqkReeIcNMD1b7fnWqRIBj5CrgeBarvmbcj+x3/QKpOIG7s11yjwgYhOGLxZX0VMHw==}
+  /@sveltejs/adapter-node/1.0.0-next.90:
+    resolution: {integrity: sha512-xf2mjGMdtOGm9ht/8a/hndRq/WS+IYX3CDrzrqS53y5gcEElXUMSvBe0W6B4dkbVhvLg8l5gyrfW8bWht2BNlg==}
+    dependencies:
+      esbuild: 0.15.7
     dev: true
 
   /@sveltejs/adapter-static/1.0.0-next.34:

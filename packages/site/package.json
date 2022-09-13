@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "rm -rf ./build && ORIGIN=$(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') vite build",
+    "build": "rm -rf ./build && ORIGIN=$(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') vite build && ./alter-problematic-chunk.sh",
     "package": "svelte-kit package",
     "preview": "PORT=3000 ORIGIN=$(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') node build/index.js",
     "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
@@ -34,7 +34,7 @@
     "@sentry/tracing": "7.12.1",
     "@steeze-ui/heroicons": "1.1.1",
     "@steeze-ui/svelte-icon": "1.3.1",
-    "@sveltejs/adapter-node": "1.0.0-next.87",
+    "@sveltejs/adapter-node": "1.0.0-next.90",
     "@sveltejs/kit": "1.0.0-next.480",
     "@sveltejs/pancake": "0.0.18",
     "@tailwindcss/aspect-ratio": "0.4.2",
