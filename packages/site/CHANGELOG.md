@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.3.2
+
+### Patch Changes
+
+- b75c0a83: capture events in handleServerError
+
 ## 0.3.1
 
 ### Patch Changes
