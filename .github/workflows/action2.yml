@@ -1,0 +1,40 @@
+name: docker-build-push
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          directory: .
+          file_name: .env
+          fail_on_empty: false
+          envkey_PUBLIC_AQARATECH_ENV: development
+          envkey_PUBLIC_SITE_URL: http://site:3000
+          envkey_PUBLIC_API_URL: http://backend:3002
+          envkey_PUBLIC_API_URL_LOCAL: http://backend:3002
+          envkey_AUTH0_CLIENT_SECRET: uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
+          envkey_PUBLIC_TRACE_RATE: 0
+          envkey_PUBLIC_AQ_DEBUG_SITE: 0
+          envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
+
+      - name: Update SHA
+        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/site/_meta
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Build/push container image - site
+        run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)
+
+      - name: Build/push container image - backend
+        run: ./docker-push-api.sh $(echo $GITHUB_SHA | head -c7)
