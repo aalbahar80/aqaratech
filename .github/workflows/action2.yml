@@ -44,9 +44,11 @@ jobs:
           file: ./Dockerfile.site
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: registry.digitalocean.com/aqtech/aqaratech-site:$(echo $GITHUB_SHA | head -c7)-buildkit
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       # - name: Build/push container image - site
       #   run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)
