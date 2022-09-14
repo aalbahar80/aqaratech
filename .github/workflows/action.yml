@@ -1,5 +1,5 @@
 name: docker-1
-on: push
+on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
