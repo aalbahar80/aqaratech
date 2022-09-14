@@ -15,6 +15,7 @@ services:
           - type=gha
           - type=local,src=/tmp/.buildx-cache
         cache-to:
+          - user/app:cache
           - type=local,dest=/tmp/.buildx-cache
           - type=gha
     ports:
