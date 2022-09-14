@@ -58,6 +58,7 @@ jobs:
             type=local,src=/tmp/.buildx-cache
           cache-to: |
             type=local,dest=/tmp/.buildx-cache
+            type=gha,mode=max
           # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
           # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
 
