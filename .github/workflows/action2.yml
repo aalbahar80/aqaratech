@@ -61,8 +61,13 @@ jobs:
           # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
           # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
 
-      - name: Run the stack
-        run: docker-compose up -d
+      # - name: Run the stack
+      #   run: docker-compose up -d
+
+      - name: Bake stack
+        uses: docker/bake-action@v2.2.0
+        with:
+          push: true
 
       - name: Test
         run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
