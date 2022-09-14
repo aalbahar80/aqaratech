@@ -45,10 +45,12 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
-          # cache-from: type=local,src=/tmp/.buildx-cache
-          # cache-to: type=local,dest=/tmp/.buildx-cache
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: |
+            type=gha
+            type=local,dest=/tmp/.buildx-cache
+          cache-to: |
+            type=gha,mode=max
+            type=local,dest=/tmp/.buildx-cache
           # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
           # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
 
