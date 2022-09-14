@@ -47,7 +47,7 @@ jobs:
           tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
           cache-from: |
             type=gha
-            type=local,dest=/tmp/.buildx-cache
+            type=local,src=/tmp/.buildx-cache
           cache-to: |
             type=gha,mode=max
             type=local,dest=/tmp/.buildx-cache
