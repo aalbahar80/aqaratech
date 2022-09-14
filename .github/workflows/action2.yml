@@ -49,6 +49,8 @@ jobs:
           # cache-to: type=local,dest=/tmp/.buildx-cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
+          # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
 
       # - name: Build/push container image - site
       #   run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)
