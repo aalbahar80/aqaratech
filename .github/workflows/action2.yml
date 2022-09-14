@@ -52,6 +52,17 @@ jobs:
           # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
           # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
 
+      - name: Run the stack
+        run: docker-compose up -d
+
+      - name: Test
+        run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+        continue-on-error: true
+
+      - name: Test2
+        run: docker run --network container:site-container  appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+        continue-on-error: true
+
       # - name: Build/push container image - site
       #   run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)
 
