@@ -7,6 +7,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
+
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -22,8 +23,11 @@ jobs:
           envkey_PUBLIC_AQ_DEBUG_SITE: 0
           envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
 
-      - name: Update SHA
-        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/site/_meta
+      - name: Update SHA - site
+        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/packages/site/_meta
+
+      - name: Update SHA - backend
+        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/packages/backend/_meta
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
