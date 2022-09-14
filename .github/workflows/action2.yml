@@ -55,10 +55,10 @@ jobs:
           tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
           cache-from: |
             type=gha
-            type=local,src=/tmp/.buildx-cache
+          # type=local,src=/tmp/.buildx-cache
           cache-to: |
-            type=local,dest=/tmp/.buildx-cache
             type=gha,mode=max
+          # type=local,dest=/tmp/.buildx-cache
           # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
           # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
         continue-on-error: true
