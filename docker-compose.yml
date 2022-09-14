@@ -11,13 +11,9 @@ services:
         tags:
           - registry.digitalocean.com/aqtech/aqaratech-site:latest
         cache-from:
-          - user/app:cache
           - type=gha
-          - type=local,src=/tmp/.buildx-cache
         cache-to:
-          - user/app:cache
-          - type=local,dest=/tmp/.buildx-cache
-          - type=gha
+          - type=gha,mode=max
     ports:
       - "3000:3000"
     env_file:
