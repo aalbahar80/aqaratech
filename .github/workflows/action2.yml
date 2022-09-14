@@ -7,7 +7,7 @@ jobs:
     environment: environment-1
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
@@ -24,12 +24,6 @@ jobs:
           envkey_PUBLIC_AQ_DEBUG_SITE: 0
           envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
 
-      - name: Update SHA - site
-        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/packages/site/_meta
-
-      - name: Update SHA - backend
-        run: echo $GITHUB_SHA > $GITHUB_WORKSPACE/packages/backend/_meta
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
@@ -38,8 +32,12 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Build/push container image - site
         run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)
 
-      - name: Build/push container image - backend
-        run: ./docker-push-api.sh $(echo $GITHUB_SHA | head -c7)
+      # - name: Build/push container image - backend
+      #   run: ./docker-push-api.sh $(echo $GITHUB_SHA | head -c7)
