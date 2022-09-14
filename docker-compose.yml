@@ -1,6 +1,7 @@
 version: "3.5"
 services:
   site:
+    container_name: site-container
     build:
       context: .
       dockerfile: ./Dockerfile.site
@@ -17,6 +18,7 @@ services:
     restart: unless-stopped
 
   backend:
+    container_name: backend-container
     build:
       context: .
       dockerfile: ./Dockerfile.backend
