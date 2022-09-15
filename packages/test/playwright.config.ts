@@ -10,6 +10,7 @@ const config: PlaywrightTestConfig = {
 	reporter: [["list"], ["html", { open: "on-failure" }]],
 	retries: 2,
 	timeout: 5 * 1000,
+	maxFailures: 20,
 	use: {
 		storageState: "storageState.json",
 		headless: true,
@@ -59,24 +60,24 @@ const config: PlaywrightTestConfig = {
 			use: { ...devices["Pixel 5"], isMobile: true },
 			testIgnore: ["**/api/**"],
 		},
-		{
-			// requires https
-			name: "iphone",
-			use: {
-				...devices["iPhone 8"],
-				isMobile: true,
-			},
-			testIgnore: ["**/api/**"],
-		},
-		{
-			// requires https, run with npx vite dev --https, and use basicSslplugin, set .env vars to https.
-			// STATUS: blocked by cors (backend is http while site is https)
-			// https://vitejs.dev/guide/migration.html#automatic-https-certificate-generation
-			name: "safari",
-			use: { ...devices["Desktop Safari"] },
-			testIgnore: ["**/api/**"],
-			timeout: 30 * 1000,
-		},
+		// {
+		// 	// requires https
+		// 	name: "iphone",
+		// 	use: {
+		// 		...devices["iPhone 8"],
+		// 		isMobile: true,
+		// 	},
+		// 	testIgnore: ["**/api/**"],
+		// },
+		// {
+		// 	// requires https, run with npx vite dev --https, and use basicSslplugin, set .env vars to https.
+		// 	// STATUS: blocked by cors (backend is http while site is https)
+		// 	// https://vitejs.dev/guide/migration.html#automatic-https-certificate-generation
+		// 	name: "safari",
+		// 	use: { ...devices["Desktop Safari"] },
+		// 	testIgnore: ["**/api/**"],
+		// 	timeout: 30 * 1000,
+		// },
 	],
 };
 export default config;

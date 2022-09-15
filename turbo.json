@@ -28,8 +28,8 @@
         "build"
       ],
       "outputs": [
-        "playwright-report",
-        "test-results"
+        "playwright-report/**",
+        "test-results/**"
       ],
       "cache": false
     },
