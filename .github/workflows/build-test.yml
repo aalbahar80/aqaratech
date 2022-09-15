@@ -27,9 +27,9 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v3
         with:
-          context: ./
+          context: .
           file: ./Dockerfile.site
-          builder: ${{ steps.buildx.outputs.name }}
+          # builder: ${{ steps.buildx.outputs.name }}
           push: false
           load: true
           tags: registry.digitalocean.com/aqtech/aqaratech-site:test
@@ -41,7 +41,7 @@ jobs:
       - name: Build tester
         uses: docker/build-push-action@v3
         with:
-          context: ./
+          context: .
           file: ./packages/test/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: false
@@ -58,9 +58,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./
+          context: .
           file: ./Dockerfile.site
-          builder: ${{ steps.buildx.outputs.name }}
+          # builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
           tags: registry.digitalocean.com/aqtech/aqaratech-site:test
