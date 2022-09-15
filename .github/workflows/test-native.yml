@@ -72,7 +72,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: printenvs
-      - run: echo ${{ env.VERSION }} ${{ env.VERSION2 }} ${{ env.VERSION3 }} ${{ env.VERSION4 }} ${{ env.VERSION5 }} ${{ env.VERSION6 }} ${{ env.VERSION7 }}
+        run: echo ${{ env.VERSION }} ${{ env.VERSION2 }} ${{ env.VERSION3 }} ${{ env.VERSION4 }} ${{ env.VERSION5 }} ${{ env.VERSION6 }} ${{ env.VERSION7 }}
         env:
           VERSION: $(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')
           VERSION2: grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",'
