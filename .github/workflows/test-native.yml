@@ -103,7 +103,7 @@ jobs:
           tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ env.APP_VERSION }}
         continue-on-error: true
         env:
-          APP_VERSION: echo "abc"
+          APP_VERSION: ${{ echo "abc" }}
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
