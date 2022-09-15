@@ -49,18 +49,19 @@ jobs:
       #     cache-to: type=gha,mode=max
       #   continue-on-error: true
 
-      # - name: Run the stack
-      #   run: docker-compose up -d
-
       - name: Bake stack
         uses: docker/bake-action@v2.2.0
         with:
           builder: ${{ steps.buildx.outputs.name }}
+          load: true
           push: true
           set: |
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
         continue-on-error: true
+
+      - name: Run the stack
+        run: docker-compose up -d
 
       # - name: Test
       #   run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
