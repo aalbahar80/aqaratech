@@ -54,7 +54,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           load: true
-          push: true
+          # push: true
           set: |
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
