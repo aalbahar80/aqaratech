@@ -87,7 +87,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(echo $GITHUB_SHA | head -c7)
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -98,4 +98,4 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(echo $GITHUB_SHA | head -c7)
