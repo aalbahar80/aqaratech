@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: prod
-    needs: test
+    # needs: test
     strategy:
       matrix:
         package: [site, backend]
@@ -65,7 +65,7 @@ jobs:
       - name: Set .env file
         run: |
           cp ./.env.prod ./.env
-          echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
+          echo "AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }}" >> .env
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
