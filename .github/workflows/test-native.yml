@@ -65,6 +65,8 @@ jobs:
         run: |
           cp ./.env.prod ./.env
           echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
+          echo VERSION=$(echo "$GITHUB_SHA | head -c7") >> .env
+        continue-on-error: true
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -80,6 +82,7 @@ jobs:
           VERSION5: $(echo $GITHUB_SHA | head -c7)
           VERSION6: echo $GITHUB_SHA | head -c7
           VERSION7: $(echo "$GITHUB_SHA | head -c7")
+        continue-on-error: true
 
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
@@ -97,7 +100,8 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(echo $GITHUB_SHA | head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(echo $GITHUB_SHA)
+        continue-on-error: true
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -108,4 +112,5 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(echo $GITHUB_SHA | head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(echo "$GITHUB_SHA | head -c7")
+        continue-on-error: true
