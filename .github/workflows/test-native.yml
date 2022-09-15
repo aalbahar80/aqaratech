@@ -36,5 +36,8 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Create test db
+        run: pnpm -F @self/seed e2e:seed
+
       - name: Test
         run: pnpm -F @self/test run test
