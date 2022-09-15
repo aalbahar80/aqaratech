@@ -7,7 +7,10 @@ dotenv({
 
 const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve("./global-setup"),
-	reporter: [["list"], ["html", { open: "on-failure" }]],
+	reporter: [
+		["list"],
+		["html", { open: process.env.CI ? "never" : "on-failure" }],
+	],
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 5 * 1000,
 	maxFailures: 20,
