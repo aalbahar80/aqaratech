@@ -28,14 +28,14 @@ const config: PlaywrightTestConfig = {
 	},
 	webServer: [
 		{
-			cwd: "../../packages/backend",
-			command: "pnpm run dev",
+			cwd: "../../",
+			command: "npx turbo run preview --filter=@self/backend",
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 		},
 		{
-			cwd: "../../packages/site",
-			command: "pnpm run dev",
+			cwd: "../../",
+			command: "npx turbo run preview --filter=@self/site",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 		},
