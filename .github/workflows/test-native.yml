@@ -2,9 +2,9 @@ name: CI-test-native
 on: workflow_dispatch
 
 jobs:
-  build:
+  test:
     name: Build and Test
-    timeout-minutes: 15
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     # To use Remote Caching, uncomment the next lines and follow the steps below.
     # env:
@@ -49,3 +49,45 @@ jobs:
           path: |
             packages/test/playwright-report/
             packages/test/test-results/
+
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set .env file
+        run: cp ./.env.ci ./.env
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.site
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          load: false
+          tags: registry.digitalocean.com/aqtech/aqaratech-site:$(grep '"version":' ./packages/site/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.backend
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          load: false
+          tags: registry.digitalocean.com/aqtech/aqaratech-backend:$(grep '"version":' ./packages/backend/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
