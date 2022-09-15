@@ -17,12 +17,6 @@ until docker exec test-postgres pg_isready -U postgres; do sleep 1; done
 
 echo "Postgres is ready @ $DATABASE_URL. Note the port is $(echo $DATABASE_URL | awk -F ':' '{print $4}')"
 
-# create prisma dir if it doesn't exist
-rm -rf prisma
-mkdir -p prisma
+cd ../backend
 
-# copy schema/migrations, overwriting any existing files
-cp ../backend/prisma/schema.prisma prisma/schema.prisma
-cp -r ../backend/prisma/migrations prisma/migrations
-
-DATABASE_URL=$DATABASE_URL npx prisma migrate reset --force
+npx prisma migrate reset --force
