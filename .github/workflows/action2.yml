@@ -53,8 +53,8 @@ jobs:
         uses: docker/bake-action@v2.2.0
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          load: true
-          # push: true
+          # load: true
+          push: true
           set: |
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
