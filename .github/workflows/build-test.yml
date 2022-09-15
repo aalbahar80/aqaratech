@@ -50,7 +50,7 @@ jobs:
           load: true
           tags: tester
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: type=gha
         continue-on-error: true
 
       - name: Run tests
