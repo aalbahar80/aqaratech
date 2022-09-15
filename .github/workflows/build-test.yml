@@ -9,20 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          directory: .
-          file_name: .env
-          fail_on_empty: false
-          envkey_PUBLIC_AQARATECH_ENV: development
-          envkey_PUBLIC_SITE_URL: http://site:3000
-          envkey_PUBLIC_API_URL: http://backend:3002
-          envkey_PUBLIC_API_URL_LOCAL: http://backend:3002
-          envkey_AUTH0_CLIENT_SECRET: uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
-          envkey_PUBLIC_TRACE_RATE: 0
-          envkey_PUBLIC_AQ_DEBUG_SITE: 0
-          envkey_PUBLIC_AQ_DEBUG_SENTRY: 0
+      - name: Set .env file
+        run: cp ./env.ci ./.env
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -63,6 +51,7 @@ jobs:
           tags: tester
           cache-from: type=gha
           cache-to: type=gha,mode=max
+        continue-on-error: true
 
       - name: Run tests
         run: docker run --rm --network host tester
