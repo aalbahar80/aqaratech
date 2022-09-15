@@ -40,7 +40,7 @@ jobs:
         run: pnpm build
 
       - name: Test
-        run: pnpm test
+        run: pnpm test -- -- --project "chromium"
 
       - uses: actions/upload-artifact@v2
         if: always()
