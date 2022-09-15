@@ -53,7 +53,7 @@ jobs:
   push-site:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: environment-1
+    environment: prod
     strategy:
       matrix:
         package: [site, backend]
@@ -62,7 +62,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set .env file
-        run: cp ./.env.ci ./.env
+        run: |
+          cp ./.env.prod ./.env
+          echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -76,7 +78,8 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push
+      - name: Build and push site
+        if: ${{ matrix.package == site }}
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -85,3 +88,14 @@ jobs:
           push: true
           load: false
           tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
+
+      - name: Build and push backend
+        if: ${{ matrix.package == backend }}
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.${{ matrix.package }}
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          load: false
+          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
