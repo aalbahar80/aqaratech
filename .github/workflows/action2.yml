@@ -53,8 +53,7 @@ jobs:
         uses: docker/bake-action@v2.2.0
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          # load: true
-          push: true
+          load: true
           set: |
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
@@ -62,6 +61,17 @@ jobs:
 
       - name: Run the stack
         run: docker-compose up -d --no-build
+        continue-on-error: true
+
+      - name: Push baked stack
+        uses: docker/bake-action@v2.2.0
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
+        continue-on-error: true
 
       # - name: Test
       #   run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
