@@ -51,6 +51,19 @@ jobs:
         run: docker-compose up -d --no-build
         continue-on-error: true
 
+      - name: Build tester
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          context: ./
+          file: ./packages/test/Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          push: false
+          load: true
+          tags: tester
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Run tests
-        run: docker build -f ./packages/test/Dockerfile -t tester . && docker run --rm --network host tester
+        run: docker run --rm --network host tester
         continue-on-error: true
