@@ -61,7 +61,7 @@ jobs:
         continue-on-error: true
 
       - name: Run the stack
-        run: docker-compose up -d
+        run: docker-compose up -d --no-build
 
       # - name: Test
       #   run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
