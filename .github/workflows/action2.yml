@@ -36,32 +36,18 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v3
-        with:
-          context: ./
-          file: ./Dockerfile.site
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
-          cache-from: |
-            type=gha
-          # type=local,src=/tmp/.buildx-cache
-          cache-to: |
-            type=gha,mode=max
-          # type=local,dest=/tmp/.buildx-cache
-          # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache
-          # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-site:buildcache,mode=max
-        continue-on-error: true
+      # - name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: ./
+      #     file: ./Dockerfile.site
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     push: true
+      #     tags: registry.digitalocean.com/aqtech/aqaratech-site:latest
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+      #   continue-on-error: true
 
       # - name: Run the stack
       #   run: docker-compose up -d
@@ -69,17 +55,22 @@ jobs:
       - name: Bake stack
         uses: docker/bake-action@v2.2.0
         with:
+          builder: ${{ steps.buildx.outputs.name }}
           push: true
-
-      - name: Test
-        run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
         continue-on-error: true
-        timeout-minutes: 1
 
-      - name: Test2
-        run: docker run --network container:site-container  appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
-        continue-on-error: true
-        timeout-minutes: 1
+      # - name: Test
+      #   run: docker run --network host appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+      #   continue-on-error: true
+      #   timeout-minutes: 1
+
+      # - name: Test2
+      #   run: docker run --network container:site-container  appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
+      #   continue-on-error: true
+      #   timeout-minutes: 1
 
       # - name: Build/push container image - site
       #   run: ./docker-push-site.sh $(echo $GITHUB_SHA | head -c7)

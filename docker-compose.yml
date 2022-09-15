@@ -3,6 +3,8 @@ services:
   site:
     container_name: site-container
     build:
+      tags:
+        - "registry.digitalocean.com/aqtech/aqaratech-site:latest"
       context: .
       dockerfile: ./Dockerfile.site
       args:
