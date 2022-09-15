@@ -103,7 +103,7 @@ jobs:
           tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ env.APP_VERSION }}
         continue-on-error: true
         env:
-          APP_VERSION: echo
+          APP_VERSION: echo "abc"
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -114,5 +114,5 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-api:$(echo ${{ GITHUB_SHA }}| head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.sha }}
         continue-on-error: true
