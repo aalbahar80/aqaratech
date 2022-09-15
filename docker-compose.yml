@@ -3,12 +3,13 @@ services:
   site:
     container_name: site-container
     build:
-      tags:
-        - "registry.digitalocean.com/aqtech/aqaratech-site:latest"
       context: .
       dockerfile: ./Dockerfile.site
       args:
         PUBLIC_SITE_URL: http://localhost:3000
+      x-bake:
+        tags:
+          - "registry.digitalocean.com/aqtech/aqaratech-site:latest"
     ports:
       - "3000:3000"
     env_file:
