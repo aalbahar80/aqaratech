@@ -41,7 +41,6 @@ jobs:
 
       - name: Test
         run: pnpm test
-        continue-on-error: true
 
       - uses: actions/upload-artifact@v2
         if: always()
