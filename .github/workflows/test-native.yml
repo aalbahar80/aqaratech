@@ -50,10 +50,11 @@ jobs:
             packages/test/playwright-report/
             packages/test/test-results/
 
-  push-site:
+  push:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: prod
+    needs: test
     strategy:
       matrix:
         package: [site, backend]
@@ -87,7 +88,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ github.sha }}
+          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ github.ref_name }}-${{ github.sha }}
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -98,4 +99,4 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.sha }}
+          tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.ref_name }}-${{ github.sha }}
