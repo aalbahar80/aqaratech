@@ -90,6 +90,8 @@ jobs:
           push: true
           load: false
           tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ github.ref_name }}-${{ github.sha }}
+          cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache
+          cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache,mode=max
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -101,3 +103,5 @@ jobs:
           push: true
           load: false
           tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.ref_name }}-${{ github.sha }}
+          cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-api:buildcache
+          cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-api:buildcache,mode=max
