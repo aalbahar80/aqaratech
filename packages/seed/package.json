@@ -9,9 +9,8 @@
   ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "prep": "pnpm run build && node dist/prep-db.js",
-    "prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma",
-    "e2e:seed": "./create-test-db.sh"
+    "test:e2e:prepare": "./create-test-db.sh",
+    "prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma"
   },
   "devDependencies": {
     "@faker-js/faker": "7.5.0",

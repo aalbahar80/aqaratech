@@ -8,7 +8,7 @@
     "build:backend": "turbo run build --filter=@self/backend",
     "build:docs": "turbo run build --filter=@self/docs",
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
-    "test": "pnpm run --filter=@self/test test",
+    "test": "turbo run test --filter=@self/test",
     "dev": "turbo run --filter \\!@self/docs dev",
     "sentry:sourcemaps": "turbo run sentry:sourcemaps",
     "sentry:release": "turbo run sentry:release",

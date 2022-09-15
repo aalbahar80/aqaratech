@@ -23,16 +23,6 @@
         "openapi.yaml"
       ]
     },
-    "test": {
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "playwright-report/**",
-        "test-results/**"
-      ],
-      "cache": false
-    },
     "preview": {
       "dependsOn": [
         "build"
@@ -77,6 +67,23 @@
     "@self/site#preview": {
       "dependsOn": [
         "@self/backend#health-check"
+      ]
+    },
+    "test:e2e:prepare": {
+      "dependsOn": [
+        "@self/site#build",
+        "@self/backend#build"
+      ],
+      "outputs": [],
+      "cache": false
+    },
+    "@self/test#test": {
+      "dependsOn": [
+        "^test:e2e:prepare"
+      ],
+      "outputs": [
+        "playwright-report/**",
+        "test-results/**"
       ]
     }
   },
