@@ -65,24 +65,11 @@ jobs:
         run: |
           cp ./.env.prod ./.env
           echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
-          echo VERSION=$(echo "$GITHUB_SHA | head -c7") >> .env
-        continue-on-error: true
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: printenvs
-        run: echo ${{ env.VERSION }} ${{ env.VERSION2 }} ${{ env.VERSION3 }} ${{ env.VERSION4 }} ${{ env.VERSION5 }} ${{ env.VERSION6 }} ${{ env.VERSION7 }}
-        env:
-          VERSION: echo "$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')"
-          VERSION2: grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",'
-          VERSION3: $(echo grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')
-          VERSION5: $(echo $GITHUB_SHA | head -c7)
-          VERSION6: echo $GITHUB_SHA | head -c7
-          VERSION7: $(echo "$GITHUB_SHA | head -c7")
-        continue-on-error: true
 
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
@@ -100,10 +87,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ env.APP_VERSION }}
-        continue-on-error: true
-        env:
-          APP_VERSION: ${{ echo "abc" }}
+          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ github.sha }}
 
       - name: Build and push backend
         if: ${{ matrix.package == 'backend' }}
@@ -115,4 +99,3 @@ jobs:
           push: true
           load: false
           tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.sha }}
-        continue-on-error: true
