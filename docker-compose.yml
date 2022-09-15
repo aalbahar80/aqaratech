@@ -11,10 +11,10 @@ services:
       x-bake:
         tags:
           - "registry.digitalocean.com/aqtech/aqaratech-site:latest"
+        cache_to:
+          - "type=gha,mode=max"
       cache_from:
         - "type=gha"
-      cache_to:
-        - "type=gha,mode=max"
     ports:
       - "3000:3000"
     env_file:
