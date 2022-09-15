@@ -12,7 +12,8 @@
     "dev": "turbo run --filter \\!@self/docs dev",
     "sentry:sourcemaps": "turbo run sentry:sourcemaps",
     "sentry:release": "turbo run sentry:release",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed"
   },
   "devDependencies": {
     "@changesets/cli": "2.24.4",

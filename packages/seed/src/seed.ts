@@ -37,12 +37,12 @@ export async function seed({
 }: { printOnly?: boolean } = {}) {
 	let portfolioCount = 9;
 	let propertyMin = 2;
-	let propertyMax = 20;
-	let unitMax = 20;
-	let moCount = 100;
-	let expenseCount = 1100;
+	let propertyMax = 5;
+	let unitMax = 5;
+	let moCount = 10;
+	let expenseCount = 50;
 	let payoutCount = 10;
-	let trxPerLease = 12;
+	let trxPerLease = 5;
 	const min = 1;
 
 	// if (sample) {
