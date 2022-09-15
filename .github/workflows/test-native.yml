@@ -65,7 +65,8 @@ jobs:
       - name: Set .env file
         run: |
           cp ./.env.prod ./.env
-          echo "AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }}" >> .env
+          echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
+          cat .env
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
