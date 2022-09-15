@@ -7,13 +7,6 @@ services:
       dockerfile: ./Dockerfile.site
       args:
         PUBLIC_SITE_URL: http://localhost:3000
-      x-bake:
-        tags:
-          - registry.digitalocean.com/aqtech/aqaratech-site:latest
-        cache-from:
-          - type=gha
-        cache-to:
-          - type=gha,mode=max
     ports:
       - "3000:3000"
     env_file:
