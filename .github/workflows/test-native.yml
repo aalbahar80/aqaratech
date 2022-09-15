@@ -74,7 +74,7 @@ jobs:
       - name: printenvs
         run: echo ${{ env.VERSION }} ${{ env.VERSION2 }} ${{ env.VERSION3 }} ${{ env.VERSION4 }} ${{ env.VERSION5 }} ${{ env.VERSION6 }} ${{ env.VERSION7 }}
         env:
-          VERSION: $(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')
+          VERSION: echo "$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')"
           VERSION2: grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",'
           VERSION3: $(echo grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')
           VERSION5: $(echo $GITHUB_SHA | head -c7)
