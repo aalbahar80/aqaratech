@@ -50,9 +50,13 @@ jobs:
             packages/test/playwright-report/
             packages/test/test-results/
 
-  push:
+  push-site:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: environment-1
+    strategy:
+      matrix:
+        package: [site, backend]
 
     steps:
       - uses: actions/checkout@v3
@@ -76,18 +80,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile.site
+          file: ./Dockerfile.${{ matrix.package }}
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-site:$(grep '"version":' ./packages/site/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
-
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile.backend
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-backend:$(grep '"version":' ./packages/backend/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
+          tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:$(grep '"version":' ./packages/${{ matrix.package }}/package.json | awk '{print $2}' | tr -d '",')-$(echo $GITHUB_SHA | head -c7)
