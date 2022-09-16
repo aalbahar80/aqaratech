@@ -29,12 +29,11 @@ jobs:
 
       - uses: ./.github/actions/build
         with:
-          target: ${{ matrix.package }}
+          package: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - uses: ./.github/actions/release
         with:
-          target: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
           appName: ${{ github.ref }}
