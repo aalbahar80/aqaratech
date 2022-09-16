@@ -1,0 +1,32 @@
+name: Release
+description: Trigger deployment on DigitalOcean
+
+inputs:
+  token:
+    required: true
+    description: DigitalOcean Access Token
+  projectId:
+    required: true
+    description: DigitalOcean Project ID
+  appName:
+    required: true
+    description: DigitalOcean App Platform App Name - Must be unique per project
+
+runs:
+  using: composite
+  steps:
+    - name: yq - portable yaml processor
+      uses: mikefarah/yq@v4.27.5
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ inputs.token }}
+
+    - name: Create deployment on DigitalOcean
+      shell: bash
+      run: |
+        ./.do/deploy.sh
+      env:
+        DO_PROJECT_ID: ${{ inputs.projectId }}
+        DO_APP_NAME: ${{ inputs.appName }}

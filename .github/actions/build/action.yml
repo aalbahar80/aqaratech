@@ -1,6 +1,10 @@
 name: Build
 description: Build & push docker image
+
 inputs:
+  token:
+    required: true
+    description: DigitalOcean Access Token
   package:
     required: true
     description: Used to locate Dockerfile & tag image
@@ -11,7 +15,7 @@ runs:
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
       with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        token: ${{ inputs.token }}
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       shell: bash

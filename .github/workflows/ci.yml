@@ -30,10 +30,14 @@ jobs:
       - uses: ./.github/actions/build
         with:
           target: ${{ matrix.package }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - uses: ./.github/actions/release
         with:
           target: ${{ matrix.package }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          projectId: ${{ secrets.DO_PROJECT_ID }}
+          appName: ${{ github.ref }}
 
       - name: Create Github release
         uses: softprops/action-gh-release@v1
