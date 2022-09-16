@@ -7,6 +7,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # we call `pnpm playwright install` instead
+  # https://github.com/sveltejs/kit/blob/9dbcce994161ec7191a8a8ea5a510437232dd1ce/.github/workflows/ci.yml#L12
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
 
 jobs:
