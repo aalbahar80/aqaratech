@@ -8,7 +8,6 @@ jobs:
     name: Release
     id: release
     timeout-minutes: 10
-    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: yq - portable yaml processor
