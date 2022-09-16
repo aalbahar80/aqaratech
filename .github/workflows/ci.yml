@@ -27,12 +27,12 @@ jobs:
           AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
         run: ./scripts/set-env.sh .env.dev .env AUTH0_CLIENT_SECRET
 
-      - uses: ./.github/build.yml
+      - uses: ./.github/actions/build
         with:
           target: ${{ matrix.package }}
         secrets: inherit
 
-      - uses: ./.github/release.yml
+      - uses: ./.github/actions/release
         with:
           target: ${{ matrix.package }}
         secrets: inherit
