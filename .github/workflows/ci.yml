@@ -6,6 +6,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
   cancel-in-progress: true
 
+env:
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
 jobs:
   test:
     name: Build and Test
@@ -34,6 +37,8 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: "pnpm"
 
+      - run: pnpm -F @self/test exec playwright install chromium
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -41,9 +46,6 @@ jobs:
         shell: bash
         run: |
           cp ./.env.ci ./.env
-
-      - name: Install Playwright Browsers
-        run: cd packages/test && npx playwright install --with-deps
 
       - name: Build
         run: pnpm build
