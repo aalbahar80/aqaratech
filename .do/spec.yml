@@ -1,0 +1,129 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_LIVE
+  - rule: DOMAIN_FAILED
+databases:
+  - engine: PG
+    name: db-stage
+    num_nodes: 1
+    size: db-s-dev-database
+    version: "12"
+    production: false
+# domains:
+#   - domain: aqaratech.com
+#     type: PRIMARY
+envs:
+  - key: PUBLIC_SITE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: ${APP_URL}
+  - key: PUBLIC_API_URL
+    scope: RUN_AND_BUILD_TIME
+    value: ${api.PUBLIC_URL}
+  - key: PUBLIC_API_URL_LOCAL
+    scope: RUN_AND_BUILD_TIME
+    value: ${api.PRIVATE_URL}
+  - key: AQ_DEBUG_NEST
+    scope: RUN_AND_BUILD_TIME
+    value: "1"
+  - key: AQ_DEBUG_PRISMA
+    scope: RUN_AND_BUILD_TIME
+    value: "1"
+  - key: PUBLIC_AQARATECH_ENV
+    scope: RUN_AND_BUILD_TIME
+    value: development
+name: <NAME>
+region: fra
+services:
+  - name: api
+    # image:
+    #   registry_type: DOCR
+    #   repository: aqaratech-api
+    #   tag: 0.2.0
+    routes:
+      - path: /api
+    instance_size_slug: professional-xs
+    instance_count: 1
+    http_port: 3002
+    health_check:
+      failure_threshold: 2
+      http_path: /
+    alerts:
+      - operator: GREATER_THAN
+        rule: CPU_UTILIZATION
+        value: 50
+        window: FIVE_MINUTES
+      - operator: GREATER_THAN
+        rule: MEM_UTILIZATION
+        value: 50
+        window: FIVE_MINUTES
+      - operator: GREATER_THAN
+        rule: RESTART_COUNT
+        value: 2
+        window: FIVE_MINUTES
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${db-stage.DATABASE_URL}
+      - key: POSTMARK_TOKEN
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca
+      - key: R2_ACCOUNT_ID
+        scope: RUN_AND_BUILD_TIME
+        value: 8aa55983de332834393a9f4c4fbf1e35
+      - key: R2_ACCESS_KEY_ID
+        scope: RUN_AND_BUILD_TIME
+        value: 19c40a5035eeb256b8e2fd59811c7203
+      - key: R2_SECRET_ACCESS_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: 2493bd85d0e72adb6979a06c6385468653693f99dc8b108a655de336e3a04bb1
+      # - key: MEILISEARCH_HOST
+      #   scope: RUN_AND_BUILD_TIME
+      #   value: http://104.248.29.78
+      # - key: MEILISEARCH_API_KEY
+      #   scope: RUN_AND_BUILD_TIME
+      #   type: SECRET
+      # value: EV[1:XYkVoJdTHL2e79KZKyxJY9nLdh+wXlOG:lGG1FPHc12i5h+tmrFos07c7+I2kZ2mIin++VyzFNNBPn58F+G+hpX3LiYqrf+4Z]
+      - key: PUBLIC_ROUTE_PATH
+        scope: RUN_AND_BUILD_TIME
+        value: ${_self.PUBLIC_ROUTE_PATH}
+    # log_destinations:
+    #   - logtail:
+    #       token: NxNhbT6iBPCFncTBvoFmS4HG
+    #     name: logtail-addon
+  - name: site
+    # image:
+    #   registry_type: DOCR
+    #   repository: aqaratech-site
+    #   tag: 0.3.1
+    instance_count: 1
+    instance_size_slug: professional-xs
+    routes:
+      - path: /
+    http_port: 3000
+    health_check:
+      failure_threshold: 2
+      http_path: /
+    # log_destinations:
+    #   - logtail:
+    #       token: NxNhbT6iBPCFncTBvoFmS4HG
+    #     name: logtail-addon
+    alerts:
+      - operator: GREATER_THAN
+        rule: CPU_UTILIZATION
+        value: 50
+        window: FIVE_MINUTES
+      - operator: GREATER_THAN
+        rule: MEM_UTILIZATION
+        value: 50
+        window: FIVE_MINUTES
+      - operator: GREATER_THAN
+        rule: RESTART_COUNT
+        value: 2
+        window: FIVE_MINUTES
+    envs:
+      - key: AUTH0_CLIENT_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: <AUTH0_CLIENT_SECRET>
