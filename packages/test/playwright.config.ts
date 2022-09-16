@@ -55,6 +55,7 @@ const config: PlaywrightTestConfig = {
 			},
 		},
 		// {
+		// add browser to ci.yml if enabling, consider installing default browsers if github actions properly caches them
 		// 	name: "firefox",
 		// 	use: { ...devices["Desktop Firefox"] },
 		// 	testIgnore: ["**/api/**"],
