@@ -4,7 +4,6 @@ import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import { URL } from 'node:url';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { ROLE_HEADER } from 'src/constants/header-role';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
