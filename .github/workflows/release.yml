@@ -74,8 +74,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push site
-        if: ${{ matrix.package == 'site' }}
+      - name: Build and push image
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -86,16 +85,3 @@ jobs:
           tags: registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:${{ github.ref_name }}-${{ github.sha }}
           cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache
           cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache,mode=max
-
-      - name: Build and push backend
-        if: ${{ matrix.package == 'backend' }}
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile.${{ matrix.package }}
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          load: false
-          tags: registry.digitalocean.com/aqtech/aqaratech-api:${{ github.ref_name }}-${{ github.sha }}
-          cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-api:buildcache
-          cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-api:buildcache,mode=max
