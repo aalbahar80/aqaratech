@@ -1,64 +1,60 @@
 name: CI
-on: workflow_dispatch
 
-# cancel in-progress runs on new commits to same PR (gitub.event.number)
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
-  cancel-in-progress: true
-
-env:
-  # we call `pnpm playwright install` instead
-  # https://github.com/sveltejs/kit/blob/9dbcce994161ec7191a8a8ea5a510437232dd1ce/.github/workflows/ci.yml#L12
-  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*"
 
 jobs:
-  test:
-    name: Build and Test
-    timeout-minutes: 10
-    # use env for auth0
-    environment: dev
+  build-dev:
     runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+    environment: dev
+    # needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [site, backend]
+        # environments blocked by sk's static/dynamic vars (for /site only)
+        # environment: [dev, prod]
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+      - uses: aqaratech/aqtech/.github/workflows/build.yml@master
         with:
-          fetch-depth: 2
+          target: ${{ matrix.package }}
+        secrets: inherit
 
-      - uses: pnpm/action-setup@v2
+      - uses: aqaratech/aqtech/.github/workflows/release.yml@master
         with:
-          version: 7
+          target: ${{ matrix.package }}
+        secrets: inherit
 
-      - uses: actions/setup-node@v3
+      - name: Create Github release
+        uses: softprops/action-gh-release@v1
         with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
+          prerelease: true
 
-      - run: pnpm install --frozen-lockfile
+  # build-prod:
+  #   runs-on: ubuntu-latest
+  #   environment: prod
+  #   # needs: test
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       package: [site, backend]
+  #       # environments blocked by sk's static/dynamic vars (for /site only)
+  #       # environment: [dev, prod]
 
-      - run: pnpm -F @self/test exec playwright install chromium
+  #   steps:
+  #     - uses: aqaratech/aqtech/.github/workflows/build.yml@master
+  #       with:
+  #         target: ${{ matrix.package }}
+  #       secrets: inherit
 
-      - name: Set .env file
-        shell: bash
-        env:
-          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#example-using-bash
-          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
-        run: ./scripts/set-env.sh .env.ci .env AUTH0_CLIENT_SECRET
+  #     - uses: aqaratech/aqtech/.github/workflows/release.yml@master
+  #       with:
+  #         target: ${{ matrix.package }}
+  #       secrets: inherit
 
-      - run: pnpm build
-
-      - run: pnpm test
-
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: playwright-report
-          retention-days: 2
-          path: |
-            packages/test/playwright-report/
-            packages/test/test-results/
+  #     - name: Create Github release
+  #       uses: softprops/action-gh-release@v1
