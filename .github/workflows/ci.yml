@@ -1,4 +1,4 @@
-name: CI-test-native
+name: CI
 on: workflow_dispatch
 
 jobs:
