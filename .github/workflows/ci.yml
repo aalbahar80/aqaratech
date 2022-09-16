@@ -20,25 +20,27 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: pnpm/action-setup@v2
         with:
-          version: 6.32.2
+          version: 7
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: "pnpm"
-
-      - name: Set .env file
-        run: cp ./.env.ci ./.env
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Set .env file
+        shell: bash
+        run: |
+          cp ./.env.ci ./.env
 
       - name: Install Playwright Browsers
         run: cd packages/test && npx playwright install --with-deps
