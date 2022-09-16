@@ -68,10 +68,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set .env file
+        shell: bash
+        env:
+          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#example-using-bash
+          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
         run: |
           cp ./.env.prod ./.env
-          echo AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }} >> .env
-          cat .env
+          echo AUTH0_CLIENT_SECRET="$AUTH0_CLIENT_SECRET" >> .env
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
