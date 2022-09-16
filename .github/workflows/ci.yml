@@ -25,7 +25,7 @@ jobs:
         shell: bash
         env:
           AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
-        run: ./scripts/set-env.sh .env.dev .env AUTH0_CLIENT_SECRET
+        run: ./scripts/set-env.sh .env.ci .env AUTH0_CLIENT_SECRET
 
       - uses: ./.github/actions/build
         with:
