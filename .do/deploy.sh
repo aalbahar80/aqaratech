@@ -2,9 +2,6 @@
 
 # Script that creates a new deployment for a DigitalOcean App Platform app using doctl
 
-# Get app name from arguments
-DO_APP_NAME=$1
-
 echo "Project ID: $DO_PROJECT_ID"
 
 # If the project ID is empty, exit
@@ -31,5 +28,12 @@ yq -i '
 # Set project as default
 doctl projects update $DO_PROJECT_ID --is_default
 
-# Upsert app
-doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | jq
+# Upsert app. Pretty print deployment info using jq.
+doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | tee deployment.json | jq
+
+# Check for errors in deployment
+if [ $(jq '.errors | length' deployment.json) -gt 0 ]; then
+  echo "Error deploying app"
+  echo "Exiting..."
+  exit 1
+fi
