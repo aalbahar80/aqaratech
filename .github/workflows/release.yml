@@ -1,29 +1,21 @@
 name: Release
+description: Trigger deployment on DigitalOcean
 
-on:
-  workflow_call:
+runs:
+  using: composite
+  steps:
+    - name: yq - portable yaml processor
+      uses: mikefarah/yq@v4.27.5
 
-jobs:
-  release:
-    name: Release
-    id: release
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: yq - portable yaml processor
-        uses: mikefarah/yq@v4.27.5
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Create deployment on DigitalOcean
-        shell: bash
-        run: |
-          ./.do/deploy.sh
-        env:
-          DO_PROJECT_ID: ${{ secrets.DO_PROJECT_ID }}
-          DO_APP_NAME: ${{ github.ref }}
+    - name: Create deployment on DigitalOcean
+      shell: bash
+      run: |
+        ./.do/deploy.sh
+      env:
+        DO_PROJECT_ID: ${{ secrets.DO_PROJECT_ID }}
+        DO_APP_NAME: ${{ github.ref }}
