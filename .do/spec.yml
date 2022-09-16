@@ -31,14 +31,14 @@ envs:
   - key: PUBLIC_AQARATECH_ENV
     scope: RUN_AND_BUILD_TIME
     value: development
-name: <NAME>
+name: REPLACE_NAME
 region: fra
 services:
   - name: backend
     image:
       registry_type: DOCR
       repository: aqaratech-backend
-      tag: <TAG-BACKEND>
+      tag: REPLACE_TAG_BACKEND
     routes:
       - path: /api
     instance_size_slug: professional-xs
@@ -96,7 +96,7 @@ services:
     image:
       registry_type: DOCR
       repository: aqaratech-site
-      tag: <TAG-SITE>
+      tag: REPLACE_TAG_SITE
     instance_count: 1
     instance_size_slug: professional-xs
     routes:
@@ -126,4 +126,4 @@ services:
       - key: AUTH0_CLIENT_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: <AUTH0_CLIENT_SECRET>
+        value: uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
