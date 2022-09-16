@@ -70,8 +70,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      # - name: Deploy DO App
-      #   run: TODO
+      - name: yq - portable yaml processor
+        uses: mikefarah/yq@v4.27.5
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Create Github release
         uses: softprops/action-gh-release@v1
+
+      # - name: Deploy DO App
+      #   run: TODO
