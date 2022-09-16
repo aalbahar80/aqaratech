@@ -37,21 +37,18 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: "pnpm"
 
-      - run: pnpm -F @self/test exec playwright install chromium
+      - run: pnpm install --frozen-lockfile
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - run: pnpm -F @self/test exec playwright install chromium
 
       - name: Set .env file
         shell: bash
         run: |
           cp ./.env.ci ./.env
 
-      - name: Build
-        run: pnpm build
+      - run: pnpm build
 
-      - name: Test
-        run: pnpm test
+      - run: pnpm test
 
       - uses: actions/upload-artifact@v2
         if: failure()
