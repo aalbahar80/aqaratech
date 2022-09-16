@@ -10,23 +10,24 @@ jobs:
   build-dev:
     environment: dev
     uses: aqaratech/aqtech/.github/workflows/build.yml@master
+    secrets: inherit
     with:
       target: ${{ matrix.package }}
-    secrets: inherit
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [site, backend]
+        # environments blocked by sk's static/dynamic vars (for /site only)
+        # environment: [dev, prod]
 
   release-dev:
+    environment: dev
     uses: aqaratech/aqtech/.github/workflows/release.yml@master
+    secrets: inherit
     with:
       target: ${{ matrix.package }}
-    secrets: inherit
 
     # # needs: test
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     package: [site, backend]
-    #     # environments blocked by sk's static/dynamic vars (for /site only)
-    #     # environment: [dev, prod]
 
     # steps:
     #   - uses: actions/checkout@v3
