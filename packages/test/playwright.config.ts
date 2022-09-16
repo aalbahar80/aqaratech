@@ -35,13 +35,13 @@ const config: PlaywrightTestConfig = {
 			cwd: "../../",
 			command: "npx turbo run preview --filter=@self/backend",
 			port: 3002,
-			reuseExistingServer: !process.env.CI,
+			reuseExistingServer: false,
 		},
 		{
 			cwd: "../../",
 			command: "npx turbo run preview --filter=@self/site",
 			port: 3000,
-			reuseExistingServer: !process.env.CI,
+			reuseExistingServer: false,
 		},
 	],
 	projects: [
