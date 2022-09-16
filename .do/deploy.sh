@@ -34,5 +34,5 @@ yq -i '
 # Set project as default
 doctl projects update $DO_PROJECT_ID --is_default
 
-# Create new app deployment
-doctl apps create --spec ./.do/spec.yml --upsert --output json --wait
+# Upsert app
+doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | jq
