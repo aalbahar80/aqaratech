@@ -7,7 +7,7 @@ on:
       - "*"
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: prod
@@ -65,8 +65,13 @@ jobs:
           cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache
           cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ matrix.package }}:buildcache,mode=max
 
-      # - name: Deploy
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # - name: Deploy DO App
       #   run: TODO
 
-      - name: Release
+      - name: Create Github release
         uses: softprops/action-gh-release@v1
