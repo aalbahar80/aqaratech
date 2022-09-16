@@ -65,6 +65,7 @@ jobs:
     environment: prod
     # needs: test
     strategy:
+      fail-fast: false
       matrix:
         package: [site, backend]
         # environments blocked by sk's static/dynamic vars (for /site only)
