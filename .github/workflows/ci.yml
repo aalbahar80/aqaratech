@@ -30,12 +30,10 @@ jobs:
       - uses: ./.github/actions/build
         with:
           target: ${{ matrix.package }}
-        secrets: inherit
 
       - uses: ./.github/actions/release
         with:
           target: ${{ matrix.package }}
-        secrets: inherit
 
       - name: Create Github release
         uses: softprops/action-gh-release@v1
