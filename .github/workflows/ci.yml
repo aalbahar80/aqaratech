@@ -34,14 +34,14 @@ jobs:
           package: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-  release-dev:
+  deploy-dev:
     runs-on: ubuntu-latest
     environment: dev
     needs: build-dev
     steps:
       - uses: actions/checkout@v3
 
-      - uses: ./.github/actions/release
+      - uses: ./.github/actions/deploy
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
