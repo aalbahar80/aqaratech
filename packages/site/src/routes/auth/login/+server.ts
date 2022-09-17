@@ -1,7 +1,5 @@
-import { environment } from '$aqenvironment';
+import { authConfig } from '$lib/environment/auth';
 import type { RequestHandler } from '@sveltejs/kit';
-
-const { authConfig } = environment;
 
 export const GET: RequestHandler = () => {
 	const query = new URLSearchParams({

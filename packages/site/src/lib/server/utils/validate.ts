@@ -1,7 +1,5 @@
-import { environment } from '$aqenvironment';
+import { authConfig } from '$lib/environment/auth';
 import { createLocalJWKSet, jwtVerify } from 'jose';
-
-const { authConfig } = environment;
 
 /**
  * Validates idtoken and returns payload.

@@ -1,8 +1,6 @@
-import { environment } from '$aqenvironment';
+import { authConfig } from '$lib/environment/auth';
 import { getUser } from '$lib/server/utils/get-user';
 import type { RequestHandler } from '@sveltejs/kit';
-
-const { authConfig } = environment;
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 export interface TokenResponse {
