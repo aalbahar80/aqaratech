@@ -1,4 +1,10 @@
 {
 	"editor.detectIndentation": true,
-	"editor.insertSpaces": true
+	"editor.insertSpaces": true,
+	"yaml.schemas": {
+		"https://json.schemastore.org/github-action.json": [
+			"file:///home/hydra/projects/aqtech/.github/workflows/build.yml",
+			"file:///home/hydra/projects/aqtech/.github/workflows/release.yml"
+		]
+	}
 }
