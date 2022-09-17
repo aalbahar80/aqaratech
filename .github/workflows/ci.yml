@@ -43,7 +43,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
-          appName: ${{ github.ref }}
+          appName: ${{ github.ref_name }}
 
       - name: Create Github release
         uses: softprops/action-gh-release@v1
