@@ -1,9 +1,14 @@
 name: Test
-on: workflow_dispatch
 
-# cancel in-progress runs on new commits to same PR (gitub.event.number)
+on:
+  workflow_dispatch:
+  # TODO ignore testing unchanged code by using turbo cache
+  push:
+
+# cancel in-progress runs on new commits to same PR (gitub.event.number), fallback to ref
+# https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
 env:
