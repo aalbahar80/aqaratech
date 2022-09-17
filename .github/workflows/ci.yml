@@ -38,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: build-dev
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
 
