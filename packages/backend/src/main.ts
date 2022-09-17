@@ -80,7 +80,9 @@ async function bootstrap() {
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
-  await setupSwagger(app);
+  if (process.env.NODE_ENV === 'development') {
+    await setupSwagger(app);
+  }
 
   console.log('OpenApi schema generated');
   if (process.env.GENERATE_OPENAPI_SCHEMA) {
