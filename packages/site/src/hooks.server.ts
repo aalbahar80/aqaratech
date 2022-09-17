@@ -1,11 +1,4 @@
 import { environment } from '$aqenvironment';
-import {
-	PUBLIC_API_URL,
-	PUBLIC_API_URL_LOCAL,
-	PUBLIC_AQARATECH_ENV,
-	PUBLIC_AQ_DEBUG_SENTRY,
-	PUBLIC_TRACE_RATE,
-} from '$env/static/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
@@ -29,9 +22,9 @@ console.log('ORIGIN: ', process.env.ORIGIN);
 Sentry.init({
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
-	tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
-	environment: PUBLIC_AQARATECH_ENV,
-	debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
+	tracesSampleRate: +(environment.PUBLIC_TRACE_RATE || 0.1),
+	environment: environment.PUBLIC_AQARATECH_ENV,
+	debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
 	integrations: [
 		// 	// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
@@ -129,7 +122,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanCookies.finish();
 
-	if (environment.envName !== 'prod') {
+	if (environment.PUBLIC_AQARATECH_ENV !== 'production') {
 		event.setHeaders({
 			'X-Robots-Tag': 'noindex',
 		});
@@ -224,8 +217,8 @@ export const handleError: HandleServerError = ({ error, event }) => {
 
 export const handleFetch: HandleFetch = async ({ request, fetch }) => {
 	// Runs when a load uses `fetch()` on the server
-	const basePath = PUBLIC_API_URL;
-	const newPath = PUBLIC_API_URL_LOCAL;
+	const basePath = environment.PUBLIC_API_URL;
+	const newPath = environment.PUBLIC_API_URL_LOCAL;
 
 	// request.headers.set('origin', PUBLIC_SITE_URL);
 

@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import {
-		PUBLIC_AQARATECH_ENV,
-		PUBLIC_AQ_DEBUG_SENTRY,
-		PUBLIC_TRACE_RATE,
-	} from '$env/static/public';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
+	import { environment } from '$lib/environment';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
@@ -31,10 +27,10 @@
 				// TODO: use environment variable to set the DSN
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
-				tracesSampleRate: +(PUBLIC_TRACE_RATE || 0.1),
-				environment: PUBLIC_AQARATECH_ENV,
+				tracesSampleRate: +(environment.PUBLIC_TRACE_RATE || 0.1),
+				environment: environment.PUBLIC_AQARATECH_ENV,
 				release: __AQARATECH_APP_VERSION__,
-				debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
+				debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
 			});
 
 			Sentry.configureScope((scope) => {
@@ -43,8 +39,8 @@
 			});
 
 			if (
-				PUBLIC_AQARATECH_ENV === 'production' ||
-				PUBLIC_AQARATECH_ENV === 'staging'
+				environment.PUBLIC_AQARATECH_ENV === 'production' ||
+				environment.PUBLIC_AQARATECH_ENV === 'staging'
 			) {
 				// const LogRocket = await import('logrocket');
 				LogRocket.init('n4p0hb/aqaratech');
@@ -76,7 +72,7 @@
 {/if}
 
 <div>
-	{#if PUBLIC_AQARATECH_ENV !== 'production'}
+	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
 		<Alert />
 	{/if}
 	<ToastParent />

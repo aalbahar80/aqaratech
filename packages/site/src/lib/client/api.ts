@@ -1,4 +1,4 @@
-import { PUBLIC_API_URL, PUBLIC_SITE_URL } from '$env/static/public';
+import { environment } from '$aqenvironment';
 import {
 	AggregateApi,
 	Configuration,
@@ -37,12 +37,12 @@ export const api = ({
 	};
 
 	let basePath: string;
-	const isReverseProxy = PUBLIC_API_URL.endsWith('/api');
+	const isReverseProxy = environment.PUBLIC_API_URL.endsWith('/api');
 
 	if (loadFetch && isReverseProxy) {
 		basePath = '/api';
 	} else {
-		basePath = PUBLIC_API_URL;
+		basePath = environment.PUBLIC_API_URL;
 	}
 
 	// Sentry
