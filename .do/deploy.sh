@@ -25,6 +25,9 @@ yq -i '
   .services[1].image.tag = strenv(DO_APP_NAME)
 ' ./.do/spec.yml
 
+# Pretty print spec.yml using yq
+yq . ./.do/spec.yml
+
 # Set project as default
 doctl projects update $DO_PROJECT_ID --is_default
 
