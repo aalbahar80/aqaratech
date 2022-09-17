@@ -47,11 +47,6 @@ jobs:
           projectId: ${{ secrets.DO_PROJECT_ID }}
           appName: ${{ github.ref_name }}
 
-      - name: Create Github release
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-
   # build-prod:
   #   runs-on: ubuntu-latest
   #   environment: prod
