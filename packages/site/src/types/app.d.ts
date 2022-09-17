@@ -4,27 +4,6 @@
 
 declare const __AQARATECH_APP_VERSION__: string;
 
-interface Auth0Profile {
-	sub: string | undefined;
-	name: string;
-	email: string;
-	updatedAt: string;
-}
-interface ImportMetaEnv {
-	// See https://vercel.com/docs/concepts/projects/environment-variables
-	// for information about these environment variables
-	readonly VITE_VERCEL_ENV: 'production' | 'preview' | 'development';
-	/**
-	 * The URL of the deployment. Example: `my-site-7q03y4pi5.vercel.app`
-	 */
-	readonly VITE_VERCEL_URL: string;
-
-	/**
-	 * The git branch of the commit the deployment was triggered by. Example: `improve-about-page`.
-	 */
-	readonly VITE_VERCEL_GIT_COMMIT_REF: string;
-}
-
 interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }
