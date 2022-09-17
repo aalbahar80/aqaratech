@@ -42,7 +42,10 @@
 				scope.setUser(getSentryUser(data.user));
 			});
 
-			if (PUBLIC_AQARATECH_ENV === 'production') {
+			if (
+				PUBLIC_AQARATECH_ENV === 'production' ||
+				PUBLIC_AQARATECH_ENV === 'staging'
+			) {
 				// const LogRocket = await import('logrocket');
 				LogRocket.init('n4p0hb/aqaratech');
 				if ($page.data.user) {

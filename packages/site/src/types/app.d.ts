@@ -55,7 +55,11 @@ declare namespace App {
 		// Consider removing this interface while keeping the documentation
 		// https://kit.svelte.dev/docs/modules#$env-dynamic-private
 
-		readonly PUBLIC_AQARATECH_ENV: 'production' | 'development' | undefined;
+		readonly PUBLIC_AQARATECH_ENV:
+			| 'production'
+			| 'development'
+			| 'staging'
+			| undefined;
 
 		/**
 		 * The current url origin where the site is hosted.

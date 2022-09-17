@@ -82,6 +82,8 @@ async function bootstrap() {
 
   if (process.env.NODE_ENV === 'development') {
     await setupSwagger(app);
+  } else {
+    console.warn('Swagger is not enabled in production/staging');
   }
 
   console.log('OpenApi schema generated');

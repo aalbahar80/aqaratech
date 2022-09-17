@@ -30,7 +30,7 @@ envs:
     value: "1"
   - key: PUBLIC_AQARATECH_ENV
     scope: RUN_AND_BUILD_TIME
-    value: development
+    value: staging
 name: REPLACE_NAME
 region: fra
 services:

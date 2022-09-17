@@ -82,35 +82,31 @@ export const setupSwagger = async (app: INestApplication) => {
     },
   });
 
-  if (process.env.NODE_ENV === 'development') {
-    try {
-      const { dump } = await import('js-yaml');
-      // For consumption of swagger-ui
-      writeFileSync(
-        '../sdk/openapi.yaml',
-        dump(document, {
-          // schema: 'http://json-schema.org/draft-04/schema#',
-        }),
-      );
+  try {
+    const { dump } = await import('js-yaml');
+    // For consumption of swagger-ui
+    writeFileSync(
+      '../sdk/openapi.yaml',
+      dump(document, {
+        // schema: 'http://json-schema.org/draft-04/schema#',
+      }),
+    );
 
-      SwaggerModule.setup('swagger', app, document, {
-        swaggerOptions: {
-          // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
-          oauth: {
-            clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-            clientSecret:
-              'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
-            scopes: ['openid', 'profile', 'email'], // default scopes to request
-          },
-          persistAuthorization: true,
+    SwaggerModule.setup('swagger', app, document, {
+      swaggerOptions: {
+        // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
+        oauth: {
+          clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
+          clientSecret:
+            'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
+          scopes: ['openid', 'profile', 'email'], // default scopes to request
         },
-      });
-    } catch (e) {
-      console.error('Could not write swagger file');
-      console.error(e);
-    }
-  } else {
-    console.warn('Swagger is disabled in production');
+        persistAuthorization: true,
+      },
+    });
+  } catch (e) {
+    console.error('Could not write swagger file');
+    console.error(e);
   }
 
   return document;
