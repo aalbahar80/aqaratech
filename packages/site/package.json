@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "rm -rf ./build && ORIGIN=$(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') vite build && ./alter-problematic-chunk.sh",
+    "build": "rm -rf ./build && vite build && ./alter-problematic-chunk.sh",
     "preview": "PORT=3000 ORIGIN=$(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') node build/index.js",
     "check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
     "check:watch": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --watch",

@@ -28,11 +28,7 @@ RUN cp /var/opt/openapi-generator-cli-6.1.0.jar ./packages/sdk/openapi-generator
 # RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
 RUN pnpm install --prod=false --offline
 
-ARG PUBLIC_SITE_URL
-ENV ORIGIN=$PUBLIC_SITE_URL
-
-# ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
-RUN PORT=3000 pnpm run build:site
+RUN pnpm run build:site
 
 FROM node:18.9-alpine as production
 
@@ -45,9 +41,5 @@ COPY --from=site /app/packages/site/package.json ./package.json
 # NO-OP, for convenience only
 EXPOSE 3000
 
-ARG PUBLIC_SITE_URL
-ENV ORIGIN=$PUBLIC_SITE_URL
-RUN echo "ENV sanity check: ORIGIN=${ORIGIN} PUBLIC_SITE_URL ${PUBLIC_SITE_URL} INBRACKETS=${PUBLIC_SITE_URL} NOBRACKETS=$PUBLIC_SITE_URL"
-
-# CMD ["sh", "-c", "node build/index.js"]
-CMD node build/index.js
+# ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
+CMD PORT=3000 node build/index.js
