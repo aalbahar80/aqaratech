@@ -63,6 +63,7 @@
       ]
     },
     "@self/site#preview": {
+      "cache": false,
       "dependsOn": [
         "@self/backend#health-check"
       ]
