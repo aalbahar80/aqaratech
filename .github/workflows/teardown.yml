@@ -1,5 +1,10 @@
 name: Delete App on DigitalOcean
 
+# Deleting a branch should cancel any ongoing tests/deployments for that branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   delete:
 
