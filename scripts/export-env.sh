@@ -6,6 +6,13 @@
 # NOTE: To export into the current shell, run the following command:
 # source ./export-env.sh .env
 
+# https://stackoverflow.com/a/13702462/9689661
+# When running from package.json, replace source with . (dot), like this:
+# . ./scripts/export-env.sh .env
+#
+# Sveltekit preview command:
+# "preview": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
+
 # Start
 
 ENV_FILE=$1
