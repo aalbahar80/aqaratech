@@ -45,7 +45,7 @@ doctl projects resources list $PROJECT_ID --output json | tee project-resources.
 # Check if "do:app:$APP_ID" is in the list
 if [[ $(jq -r '.[] | select(.urn == "do:app:'$APP_ID'") | .urn' project-resources.json) == "do:app:$APP_ID" ]]; then
   echo "Deleting app..."
-  doctl apps delete $APP_ID
+  doctl apps delete $APP_ID --force
 else
   echo "APP DOES NOT BELONG TO SPECIFIED PROJECT!"
   echo "Aborting..."
