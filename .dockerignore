@@ -5,6 +5,7 @@ Dockerfile.backend
 Dockerfile.site
 docker-push-api.sh
 docker-push-site.sh
+.do
 
 ######################### COMMON ###############################################
 # https://raw.githubusercontent.com/erdaltsksn/dockerignore/main/templates/Common.dockerignore

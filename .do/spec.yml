@@ -18,10 +18,10 @@ envs:
     value: ${APP_URL}
   - key: PUBLIC_API_URL
     scope: RUN_AND_BUILD_TIME
-    value: ${api.PUBLIC_URL}
+    value: ${backend.PUBLIC_URL}
   - key: PUBLIC_API_URL_LOCAL
     scope: RUN_AND_BUILD_TIME
-    value: ${api.PRIVATE_URL}
+    value: ${backend.PRIVATE_URL}
   - key: AQ_DEBUG_NEST
     scope: RUN_AND_BUILD_TIME
     value: "1"
