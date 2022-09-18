@@ -4,7 +4,7 @@
 		{
 			"label": "build site",
 			"type": "shell",
-			"command": "npx turbo run build --filter @self/site"
+			"command": "pnpm turbo run build --filter @self/site"
 		}
 	]
 }

@@ -41,7 +41,7 @@ const config = {
 		sourcemap: true,
 		rollupOptions: {
 			// with rollupOptions, source maps work for BUILD: pnpm build && node --inspect -r source-map-support/register build/index.js
-			// without rollupOptions, source maps work for PREVIEW: pnpm build && npx vite preview --port 3000
+			// without rollupOptions, source maps work for PREVIEW: pnpm build && pnpm vite preview --port 3000
 			output: {
 				sourcemap: true,
 				sourcemapPathTransform: (relativeSourcePath) => {
