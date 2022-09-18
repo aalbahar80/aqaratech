@@ -1,4 +1,4 @@
-name: Delete App on DigitalOcean
+name: Teardown DigitalOcean Resources
 
 # Deleting a branch should cancel any ongoing tests/deployments for that branch
 concurrency:
