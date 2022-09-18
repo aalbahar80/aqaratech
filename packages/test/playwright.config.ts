@@ -41,6 +41,7 @@ const config: PlaywrightTestConfig = {
 		},
 		{
 			cwd: "../site",
+			// don't use `pnpm run preview` because sourcing the env file will fail in CI
 			command: "node build/index.js",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
