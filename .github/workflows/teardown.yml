@@ -2,7 +2,7 @@ name: Teardown DigitalOcean Resources
 
 # Deleting a branch should cancel any ongoing tests/deployments for that branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.ref }}
   cancel-in-progress: true
 
 on:
@@ -21,5 +21,11 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - shell: bash
-        run: ./.do/teardown.sh ${{ github.ref_name }} ${{ secrets.DO_PROJECT_ID }}
+      - name: destroy app
+        shell: bash
+        run: |
+          echo "::set-env name=DELETED_BRANCH_REF::${{ github.event.ref }}"
+          echo "DELETED_BRANCH_REF is $DELETED_BRANCH_REF"
+          DELETED_BRANCH_NAME=$(echo $DELETED_BRANCH_REF | sed -e "s#refs/heads/##g")
+          echo "DELETED_BRANCH_NAME is $DELETED_BRANCH_NAME"
+          ./.do/teardown.sh $DELETED_BRANCH_NAME ${{ secrets.DO_PROJECT_ID }}
