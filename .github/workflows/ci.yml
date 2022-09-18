@@ -8,20 +8,21 @@ on:
   workflow_dispatch:
   push:
 
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
 jobs:
-  build-dev:
+  build-backend:
     runs-on: ubuntu-latest
     environment: dev
     # needs: test
     strategy:
       fail-fast: false
       matrix:
-        package: [site, backend]
+        package: [backend]
         # environments blocked by sk's static/dynamic vars (for /site only)
         # environment: [dev, prod]
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
     steps:
       - uses: actions/checkout@v3
@@ -31,10 +32,45 @@ jobs:
           package: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
+  build-site:
+    runs-on: ubuntu-latest
+    environment: dev
+    # needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [site]
+        # environments blocked by sk's static/dynamic vars (for /site only)
+        # environment: [dev, prod]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build:site
+      # - run: docker build -f ./packages/site/Dockerfile .
+      - uses: ./.github/actions/build
+        with:
+          package: ${{ matrix.package }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
   deploy-dev:
     runs-on: ubuntu-latest
     environment: dev
-    needs: build-dev
+    needs: [build-site, build-backend]
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3

@@ -1,44 +1,19 @@
 # syntax=docker/dockerfile:1.4
 
-FROM node:18.9 as site
-
-# use multistage: https://www.howtogeek.com/devops/how-to-deploy-a-caddy-web-server-with-docker/
-# Install OpenJDK-11
-# https://stackoverflow.com/questions/31196567/installing-java-in-docker-image
-RUN apt-get update && \
-  apt-get install -y openjdk-11-jre-headless && \
-  apt-get clean;
-
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
-
-RUN wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.1.0/openapi-generator-cli-6.1.0.jar -O /var/opt/openapi-generator-cli-6.1.0.jar
-
-WORKDIR /app
-
-
-COPY pnpm-lock.yaml ./
-
-RUN pnpm fetch 
-
-ADD . ./
-
-RUN cp /var/opt/openapi-generator-cli-6.1.0.jar ./packages/sdk/openapi-generator-cli-6.1.0.jar
-
-# TODO: need to install backend since turbo thinks it's a dependency. Create new build:docker pipeline that doesn't install backend
-# RUN pnpm --filter=. --filter=@self/site... install --prod=false --offline
-RUN pnpm install --prod=false --offline
-
-RUN pnpm run build:site
-
 FROM node:18.9-alpine as production
 
 WORKDIR /app
+
 ENV NODE_ENV=production
 
-COPY --from=site /app/packages/site/build ./build
-COPY --from=site /app/packages/site/package.json ./package.json
+# Don't run production as root
+RUN addgroup --system --gid 1001 sveltejs
+RUN adduser --system --uid 1001 sveltejs
+USER sveltejs
 
-# NO-OP, for convenience only
+COPY  ./packages/site/build ./build
+COPY  ./packages/site/package.json ./package.json
+
 EXPOSE 3000
 
 # ORIGIN, PORT are for adapter-node: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
