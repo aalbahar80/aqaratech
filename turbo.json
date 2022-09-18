@@ -70,7 +70,6 @@
     },
     "test:e2e": {
       "dependsOn": [
-        "^test:e2e:prepare",
         "@self/site#build",
         "@self/backend#build"
       ],
