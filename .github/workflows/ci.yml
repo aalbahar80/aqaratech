@@ -23,12 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set .env file
-        shell: bash
-        env:
-          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
-        run: ./scripts/set-env.sh .env.ci .env AUTH0_CLIENT_SECRET
-
       - uses: ./.github/actions/build
         with:
           package: ${{ matrix.package }}

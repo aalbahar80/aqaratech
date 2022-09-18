@@ -127,3 +127,6 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
         value: uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf
+      - key: ORIGIN
+        scope: RUN_AND_BUILD_TIME
+        value: ${APP_URL}
