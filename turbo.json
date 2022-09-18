@@ -49,8 +49,8 @@
     },
     "test:e2e": {
       "dependsOn": [
-        "@self/site#build",
-        "@self/backend#build"
+        "^preview",
+        "^health-check"
       ],
       "outputs": [
         "playwright-report/**",

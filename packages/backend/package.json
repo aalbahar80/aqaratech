@@ -27,7 +27,7 @@
     "test:e2e:default": "jest --config ./test/jest-e2e.json",
     "postinstall": "prisma generate",
     "oas-gen": "GENERATE_OPENAPI_SCHEMA=1 nest start",
-    "health-check": "./health-probe.sh $(awk '/^PUBLIC_API_URL_LOCAL/' ../../.env | awk -F '=' '{print $2}') 10",
+    "health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_API_URL_LOCAL/' ../../.env | awk -F '=' '{print $2}') 30",
     "sentry:sourcemaps": "sentry-cli sourcemaps upload ./dist/ --org aqaratech --project backend --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)",
     "sentry:release": "sentry-cli releases new $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json) --org aqaratech --project backend"
   },
