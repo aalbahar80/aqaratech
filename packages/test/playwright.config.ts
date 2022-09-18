@@ -31,16 +31,17 @@ const config: PlaywrightTestConfig = {
 		},
 	},
 	webServer: [
+		// To Debug, use env var: DEBUG=pw:webserver
 		{
-			cwd: "../../",
-			command: "pnpm turbo run preview --filter=@self/backend",
+			cwd: "../backend",
+			command: "npm run preview",
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 		},
 		{
-			cwd: "../../",
-			command: "pnpm turbo run preview --filter=@self/site",
+			cwd: "../site",
+			command: "npm run preview",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,

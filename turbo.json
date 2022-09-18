@@ -18,6 +18,7 @@
       ]
     },
     "preview": {
+      "cache": false,
       "dependsOn": [
         "build"
       ]
@@ -49,8 +50,7 @@
     },
     "test:e2e": {
       "dependsOn": [
-        "^preview",
-        "^health-check"
+        "^build"
       ],
       "outputs": [
         "playwright-report/**",
