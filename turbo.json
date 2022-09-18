@@ -57,11 +57,9 @@
       "cache": false
     },
     "@self/site#dev": {
+      "cache": false,
       "dependsOn": [
         "@self/backend#health-check"
-      ],
-      "outputs": [
-        ".svelte-kit/**"
       ]
     },
     "@self/site#preview": {
