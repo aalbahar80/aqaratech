@@ -53,6 +53,16 @@
         "dist/**"
       ]
     },
+    "test:e2e": {
+      "dependsOn": [
+        "@self/site#build",
+        "@self/backend#build"
+      ],
+      "outputs": [
+        "playwright-report/**",
+        "test-results/**"
+      ]
+    },
     "health-check": {
       "cache": false
     },
@@ -66,16 +76,6 @@
       "cache": false,
       "dependsOn": [
         "@self/backend#health-check"
-      ]
-    },
-    "test:e2e": {
-      "dependsOn": [
-        "@self/site#build",
-        "@self/backend#build"
-      ],
-      "outputs": [
-        "playwright-report/**",
-        "test-results/**"
       ]
     }
   },
