@@ -31,12 +31,33 @@ yq . ./.do/spec.yml
 # Set project as default
 doctl projects update $DO_PROJECT_ID --is_default
 
-# Upsert app. Pretty print deployment info using jq.
-doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | tee deployment.json | jq
+# Check if app exists
+echo "Checking if app exists..."
+doctl apps list --output json | tee apps.json | jq
+
+# Get app ID
+APP_ID=$(jq -r '.[] | select(.spec.name == "'$DO_APP_NAME'") | .id' apps.json)
+
+# If app exists, create a new deployment
+if [ -z "$APP_ID" ]; then
+  echo "App does not exist. Creating app..."
+  doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | tee deployment.json | jq
+  APP_ID=$(jq -r '.id' app.json)
+else
+  # Update app, then create a new deployment
+  echo "App exists. Updating app..."
+  doctl apps update $APP_ID --spec ./.do/spec.yml --output json | jq
+  # Create a new deployment because it's the only way to "Force rebuild".
+  # Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
+  echo "Forcing new deployment..."
+  doctl apps create-deployment $APP_ID --force-rebuild --output json --wait | jq
+fi
 
 # Check for errors in deployment
 if [ $(jq '.errors | length' deployment.json) -gt 0 ]; then
   echo "Error deploying app"
   echo "Exiting..."
   exit 1
+else
+  echo "App deployed successfully"
 fi
