@@ -130,3 +130,17 @@ services:
       - key: ORIGIN
         scope: RUN_AND_BUILD_TIME
         value: ${APP_URL}
+jobs:
+  # DO NOT RUN IN PRODUCTION
+  - name: seed-database
+    kind: POST_DEPLOY
+    run_command: npx prisma migrate reset --force
+    # run_command: ./node_modules/.bin/prisma2 migrate reset --force
+    image:
+      registry_type: DOCR
+      repository: aqaratech-backend
+      tag: REPLACE_TAG_BACKEND
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${db-stage.DATABASE_URL}
