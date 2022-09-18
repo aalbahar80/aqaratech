@@ -1,26 +1,53 @@
 #!/bin/bash
 
 SPEC_NAME=$1
+PROJECT_ID=$2
 
-# List all apps
-doctl app list
-
-# Sample output:
-
-# ID                                      Spec Name                 Default Ingress                                            Active Deployment ID                    In Progress Deployment ID    Created At                       Updated At
-# bea9d854-c465-4d5a-85d3-13e029028e16    init-common-env-module    https://init-common-env-module-gnt4g.ondigitalocean.app    cf46e14b-95af-42f9-b2da-01061c968f7a                                 2022-09-17 23:52:02 +0000 UTC    2022-09-18 00:10:59 +0000 UTC
-# 9034ac21-daa4-49a5-8767-a13d3a25552b    master                    https://master-rhzk5.ondigitalocean.app                    ae19d16f-6786-4977-b1d3-ccb9196176cb                                 2022-09-16 15:47:08 +0000 UTC    2022-09-18 00:25:13 +0000 UTC
-# 5d258d70-3fbd-4909-8eb9-263f17a43dfc    aqaratech-app-prod        https://aqaratech-app-prod-tcxpp.ondigitalocean.app        49bd1665-23c1-468f-a431-2b8d8ec567fc                                 2022-08-18 13:12:38 +0000 UTC    2022-09-18 00:04:51 +0000 UTC
-
-# Select app ID by spec name
-APP_ID=$(doctl apps list | grep $SPEC_NAME | awk '{print $1}')
-
-# Abort if more than one app is found
-if [ $(echo $APP_ID | wc -w) -gt 1 ]; then
-  echo "More than one app found"
+# Check SPEC_NAME is not empty
+if [ -z "$SPEC_NAME" ]; then
+  echo "No spec name provided"
   echo "Exiting..."
   exit 1
 fi
 
-# Delete app by ID
-doctl apps delete $APP_ID
+# Check PROJECT_ID is not empty
+if [ -z "$PROJECT_ID" ]; then
+  echo "No project ID provided"
+  echo "Exiting..."
+  exit 1
+fi
+
+# List all apps
+doctl apps list --output json | tee apps.json | jq
+
+# Sample output: {["id": "1", "spec": {"name": "master"}], ["id": "2", "spec": {"name": "feature-1"}]}
+
+
+# Get app ID
+APP_ID=$(jq -r '.[] | select(.spec.name == "'$SPEC_NAME'") | .id' apps.json)
+
+echo "App found. App ID: $APP_ID"
+
+# Check APP_ID is not empty
+if [ -z "$APP_ID" ]; then
+  echo "No app ID found"
+  echo "Exiting..."
+  exit 1
+fi
+
+# Check that app belongs to the provided project before deleting
+# Get a project's apps, then check if "do:app:$APP_ID" is in the list
+echo "Checking if app belongs to specified project..."
+doctl projects resources list $PROJECT_ID --output json | tee project-resources.json | jq
+
+# Sample output: {["urn": "do:app:1", "status": "ok"], ["urn": "do:app:2", "status": "ok"]}
+
+# Check if "do:app:$APP_ID" is in the list
+if [[ $(jq -r '.[] | select(.urn == "do:app:'$APP_ID'") | .urn' project-resources.json) == "do:app:$APP_ID" ]]; then
+  echo "Deleting app..."
+  doctl apps delete $APP_ID
+else
+  echo "APP DOES NOT BELONG TO SPECIFIED PROJECT!"
+  echo "Aborting..."
+  exit 1
+fi
