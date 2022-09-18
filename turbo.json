@@ -15,12 +15,6 @@
       "cache": false,
       "dependsOn": [
         "^build"
-      ],
-      "outputs": [
-        ".svelte-kit/**",
-        "dist/**",
-        "build/**",
-        "openapi.yaml"
       ]
     },
     "preview": {
