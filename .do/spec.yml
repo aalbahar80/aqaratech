@@ -144,3 +144,4 @@ jobs:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
         value: ${db-stage.DATABASE_URL}
+    instance_size_slug: professional-xs
