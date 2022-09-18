@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "turbo run --filter \\!@self/docs build",
-    "preview": "turbo run --filter \\!@self/docs preview",
+    "preview": "turbo run preview --filter \\!@self/docs",
     "build:site": "turbo run build --filter=@self/site",
     "build:backend": "turbo run build --filter=@self/backend",
     "build:docs": "turbo run build --filter=@self/docs",
