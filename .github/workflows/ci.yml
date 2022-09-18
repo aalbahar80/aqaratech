@@ -13,25 +13,6 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  build-backend:
-    runs-on: ubuntu-latest
-    environment: dev
-    # needs: test
-    strategy:
-      fail-fast: false
-      matrix:
-        package: [backend]
-        # environments blocked by sk's static/dynamic vars (for /site only)
-        # environment: [dev, prod]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: ./.github/actions/build
-        with:
-          package: ${{ matrix.package }}
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
   build-site:
     runs-on: ubuntu-latest
     environment: dev
@@ -40,8 +21,6 @@ jobs:
       fail-fast: false
       matrix:
         package: [site]
-        # environments blocked by sk's static/dynamic vars (for /site only)
-        # environment: [dev, prod]
 
     steps:
       - name: Check out code
@@ -67,7 +46,41 @@ jobs:
           package: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-  deploy-dev:
+  build-backend:
+    runs-on: ubuntu-latest
+    environment: dev
+    # needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [backend]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build:backend
+      - run: pnpm --filter @self/backend --prod deploy pruned
+
+      - uses: ./.github/actions/build
+        with:
+          package: ${{ matrix.package }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+  deploy-app:
     runs-on: ubuntu-latest
     environment: dev
     needs: [build-site, build-backend]
@@ -80,36 +93,3 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
           appName: ${{ github.ref_name }}
-
-  # build-prod:
-  #   runs-on: ubuntu-latest
-  #   environment: prod
-  #   # needs: test
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       package: [site, backend]
-  #       # environments blocked by sk's static/dynamic vars (for /site only)
-  #       # environment: [dev, prod]
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Set .env file
-  #       shell: bash
-  #       env:
-  #         AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
-  #       run: ./scripts/set-env.sh .env.prod .env AUTH0_CLIENT_SECRET
-
-  #     - uses: aqaratech/aqtech/.github/workflows/build.yml@master
-  #       with:
-  #         target: ${{ matrix.package }}
-  #       secrets: inherit
-
-  #     - uses: aqaratech/aqtech/.github/workflows/release.yml@master
-  #       with:
-  #         target: ${{ matrix.package }}
-  #       secrets: inherit
-
-  #     - name: Create Github release
-  #       uses: softprops/action-gh-release@v1
