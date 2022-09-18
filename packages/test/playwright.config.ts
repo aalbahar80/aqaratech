@@ -34,14 +34,14 @@ const config: PlaywrightTestConfig = {
 		// To Debug, use env var: DEBUG=pw:webserver
 		{
 			cwd: "../backend",
-			command: "npm run preview",
+			command: "pnpm run preview",
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 		},
 		{
 			cwd: "../site",
-			command: "npm run preview",
+			command: "pnpm run preview",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
