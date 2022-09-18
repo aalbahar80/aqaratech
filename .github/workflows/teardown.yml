@@ -24,8 +24,9 @@ jobs:
       - name: destroy app
         shell: bash
         run: |
-          echo "::set-env name=DELETED_BRANCH_REF::${{ github.event.ref }}"
           echo "DELETED_BRANCH_REF is $DELETED_BRANCH_REF"
           DELETED_BRANCH_NAME=$(echo $DELETED_BRANCH_REF | sed -e "s#refs/heads/##g")
           echo "DELETED_BRANCH_NAME is $DELETED_BRANCH_NAME"
           ./.do/teardown.sh $DELETED_BRANCH_NAME ${{ secrets.DO_PROJECT_ID }}
+        env:
+          DELETED_BRANCH_REF: ${{ github.event.ref }}
