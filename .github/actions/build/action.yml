@@ -41,7 +41,7 @@ runs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        file: ./${{ inputs.package }}/Dockerfile
+        file: ./packages/${{ inputs.package }}/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
         load: false
