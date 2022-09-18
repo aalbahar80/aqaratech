@@ -41,7 +41,7 @@ const config: PlaywrightTestConfig = {
 		},
 		{
 			cwd: "../site",
-			command: "pnpm run -F @self/backend health-check && pnpm run preview",
+			command: "node build/index.js",
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
