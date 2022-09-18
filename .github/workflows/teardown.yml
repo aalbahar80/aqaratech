@@ -16,7 +16,7 @@ jobs:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ inputs.token }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - uses: actions/checkout@v3
 
