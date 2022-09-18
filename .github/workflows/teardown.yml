@@ -1,0 +1,19 @@
+name: Delete App on DigitalOcean
+
+on:
+  delete:
+
+jobs:
+  destroy:
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ inputs.token }}
+
+      - uses: actions/checkout@v3
+
+      - shell: bash
+        run: ./.do/teardown ${{ github.ref_name }}
