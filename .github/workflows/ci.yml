@@ -72,6 +72,10 @@ jobs:
           cache: "pnpm"
 
       - run: pnpm install --frozen-lockfile
+        env:
+          PRISMA_GENERATE_SKIP_AUTOINSTALL: 1
+          # Also need to remove postinstall script
+
       - run: pnpm run build:backend
       - run: pnpm --filter @self/backend --prod deploy pruned
 
