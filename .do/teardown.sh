@@ -13,7 +13,7 @@ doctl app list
 # 5d258d70-3fbd-4909-8eb9-263f17a43dfc    aqaratech-app-prod        https://aqaratech-app-prod-tcxpp.ondigitalocean.app        49bd1665-23c1-468f-a431-2b8d8ec567fc                                 2022-08-18 13:12:38 +0000 UTC    2022-09-18 00:04:51 +0000 UTC
 
 # Select app ID by spec name
-APP_ID=$(doctl app list | grep $SPEC_NAME | awk '{print $1}')
+APP_ID=$(doctl apps list | grep $SPEC_NAME | awk '{print $1}')
 
 # Abort if more than one app is found
 if [ $(echo $APP_ID | wc -w) -gt 1 ]; then
@@ -23,4 +23,4 @@ if [ $(echo $APP_ID | wc -w) -gt 1 ]; then
 fi
 
 # Delete app by ID
-doctl app delete $APP_ID
+doctl apps delete $APP_ID
