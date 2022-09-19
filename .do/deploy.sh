@@ -42,7 +42,7 @@ APP_ID=$(jq -r '.[] | select(.spec.name == "'$DO_APP_NAME'") | .id' apps.json)
 # If app exists, create a new deployment
 if [ -z "$APP_ID" ]; then
   echo "App does not exist. Creating app..."
-  doctl apps create --spec ./.do/spec.yml --upsert --output json --wait | tee deployment.json | jq
+  doctl apps create --spec ./.do/spec.yml --upsert --output json | tee deployment.json | jq
   APP_ID=$(jq -r '.id' app.json)
 else
   # Update app, then create a new deployment
@@ -51,7 +51,7 @@ else
   # Create a new deployment because it's the only way to "Force rebuild".
   # Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
   echo "Forcing new deployment..."
-  doctl apps create-deployment $APP_ID --force-rebuild --output json --wait | jq
+  doctl apps create-deployment $APP_ID --force-rebuild --output json | jq
 fi
 
 # Check for errors in deployment
