@@ -217,6 +217,7 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	if (isRedirectError(error, event)) {
 		// Most 404's are from random bots, but some may be legit.
 		// So we log them to Sentry as 'info' instead of 'error'.
+		// Alternate solution: https://github.com/sveltejs/kit/issues/6774#issuecomment-1246090470
 		Sentry.captureEvent({
 			level: 'info',
 			message: 'Redirect (404) - HandleServerError',
