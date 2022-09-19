@@ -144,4 +144,12 @@ jobs:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
         value: ${db-stage.DATABASE_URL}
+      - key: GH_TOKEN
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: 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
+      # To be set by .do/deploy.sh script. Order matters.
+      - key: GH_REF
+        scope: RUN_AND_BUILD_TIME
+        value: REPLACE_NAME
     instance_size_slug: professional-xs

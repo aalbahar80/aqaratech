@@ -23,7 +23,8 @@ yq -i '
   .name = strenv(DO_APP_NAME) |
   .services[0].image.tag = strenv(DO_APP_NAME) |
   .services[1].image.tag = strenv(DO_APP_NAME) |
-  .jobs[0].image.tag = strenv(DO_APP_NAME)
+  .jobs[0].image.tag = strenv(DO_APP_NAME) |
+  .jobs[0].envs[2].value = strenv(DO_APP_NAME)
 ' ./.do/spec.yml
 
 # Pretty print spec.yml using yq
