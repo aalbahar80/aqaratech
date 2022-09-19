@@ -56,3 +56,24 @@ declare namespace svelte.JSX {
 		'ondata-select'?: any;
 	}
 }
+
+// vite-plugin-iso-import intellisense workaround (needed for .svelte files & svelte-check)
+// https://github.com/bluwy/vite-plugin-iso-import#using-client-and-server-loses-intellisense
+declare module '@sentry/svelte?client' {
+	import all from '@sentry/svelte';
+	export = all;
+}
+
+declare module '@sentry/tracing?client' {
+	import * as all from '@sentry/tracing';
+	export = all;
+}
+
+declare module '@sentry/node?server' {
+	import * as all from '@sentry/node';
+	export = all;
+}
+
+// fallback - disabled for now
+// declare module '*?client'
+// declare module '*?server'
