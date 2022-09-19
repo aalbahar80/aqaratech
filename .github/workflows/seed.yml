@@ -13,7 +13,7 @@ env:
 
 jobs:
   seed:
-    name: Build and Test
+    name: Seed
     timeout-minutes: 5
     # TODO, find way to restrict access to DigitalOcean prod projects entirely from github's dev environment
     environment: dev
