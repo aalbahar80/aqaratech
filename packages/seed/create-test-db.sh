@@ -4,7 +4,15 @@ DATABASE_URL=$(awk '/^DATABASE_URL/' ../../.env.ci | awk -F '=' '{print $2}')
 
 set -e
 
+echo "Starting script to create test database"
+
 echo "Preparing DB. DATABASE_URL is $DATABASE_URL"
+
+# If DATABASE_URL does not contain "localhost", abort and warn the user
+if [[ $DATABASE_URL != *"localhost"* ]]; then
+  echo "DATABASE_URL does not contain 'localhost'. Aborting."
+  exit 1
+fi
 
 # check if the container is already running, if not, start it
 if ! docker ps | grep test-postgres; then
