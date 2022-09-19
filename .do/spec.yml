@@ -134,8 +134,7 @@ jobs:
   # DO NOT RUN IN PRODUCTION
   - name: seed-database
     kind: POST_DEPLOY
-    run_command: npx prisma migrate reset --force
-    # run_command: ./node_modules/.bin/prisma2 migrate reset --force
+    run_command: .do/trigger-seed-workflow.sh
     image:
       registry_type: DOCR
       repository: aqaratech-backend
