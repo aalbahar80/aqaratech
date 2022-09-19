@@ -72,10 +72,5 @@
         "@self/backend#health-check"
       ]
     }
-  },
-  "globalDependencies": [
-    "**/.env",
-    "**/.env.*",
-    ".env"
-  ]
+  }
 }
