@@ -30,6 +30,7 @@ declare module 'chart.js/dist/chart.esm' {
 	export default Chart;
 }
 
+// Update here: https://github.com/isaacHagoel/svelte-dnd-action/pull/401
 declare type DndEvent = import('svelte-dnd-action').DndEvent;
 declare namespace svelte.JSX {
 	interface HTMLAttributes<T> {
