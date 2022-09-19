@@ -16,7 +16,7 @@ import { AppModule } from './app.module';
 Sentry.init({
   // TODO use environment variable to set the DSN
   dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-  tracesSampleRate: +(process.env.PUBLIC_TRACE_RATE || 0.1),
+  tracesSampleRate: +(process.env.PUBLIC_TRACE_RATE ?? 0.1),
   environment: process.env.PUBLIC_AQARATECH_ENV,
   debug: process.env.PUBLIC_AQ_DEBUG_SENTRY === '1',
   release: version,

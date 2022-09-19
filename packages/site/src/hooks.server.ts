@@ -29,7 +29,7 @@ console.log({
 Sentry.init({
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
-	tracesSampleRate: +(environment.PUBLIC_TRACE_RATE || 0.1),
+	tracesSampleRate: +(environment.PUBLIC_TRACE_RATE ?? 0.1),
 	environment: environment.PUBLIC_AQARATECH_ENV,
 	debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
 	integrations: [
