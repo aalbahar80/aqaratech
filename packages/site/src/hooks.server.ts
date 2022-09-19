@@ -10,7 +10,7 @@ import {
 	extractRequestInfo,
 	getSentryUser,
 } from '$lib/utils/sentry/common';
-import { captureHandleErrorEvent } from '$lib/utils/sentry/redirect';
+import { isRedirectError } from '$lib/utils/sentry/redirect';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -214,8 +214,21 @@ export const handleError: HandleServerError = ({ error, event }) => {
 
 	console.debug({ info, user });
 
-	// TODO: Review this manual captureEvent
-	captureHandleErrorEvent({ error, event, info });
+	if (isRedirectError(error, event)) {
+		// Most 404's are from random bots, but some may be legit.
+		// So we log them to Sentry as 'info' instead of 'error'.
+		Sentry.captureEvent({
+			level: 'info',
+			message: 'Redirect (404) - HandleServerError',
+			tags: {
+				status: error.status,
+				location: error.location,
+				redirectFrom: event.url.href,
+			},
+			request: info,
+		});
+		return;
+	}
 
 	Sentry.captureException(error, {
 		user,
