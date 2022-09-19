@@ -1,0 +1,47 @@
+name: Seed stage db
+
+on:
+  workflow_dispatch:
+    inputs:
+      db_url:
+        description: "URL of database to seed"
+        required: true
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+jobs:
+  seed:
+    name: Build and Test
+    timeout-minutes: 5
+    # TODO, find way to restrict access to DigitalOcean prod projects entirely from github's dev environment
+    environment: dev
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - name: Install deps (seed & backend)
+        run: pnpm -F . -F @self/seed... -F @self/backend... install --frozen-lockfile
+
+      - name: Build deps (seed & backend)
+        run: pnpm turbo run build --filter=@self/backend --filter=@self/seed
+
+      - name: Seed db
+        run: pnpm -F @self/backend exec prisma migrate reset --force
+        env:
+          DATABASE_URL: ${{ github.event.inputs.db_url }}

@@ -31,7 +31,7 @@
     "sentry:release": "sentry-cli releases new $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json) --org aqaratech --project backend"
   },
   "prisma": {
-    "seed": "npx tsx ../seed/src/go-seed.ts"
+    "seed": "tsx ../seed/src/go-seed.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.171.0",
