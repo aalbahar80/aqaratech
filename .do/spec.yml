@@ -146,7 +146,7 @@ services:
 #       - key: GH_TOKEN
 #         scope: RUN_AND_BUILD_TIME
 #         type: SECRET
-#         value: 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
+#         value: <token>
 #       # To be set by .do/deploy.sh script. Order matters.
 #       - key: GH_REF
 #         scope: RUN_AND_BUILD_TIME
