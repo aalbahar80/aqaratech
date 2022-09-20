@@ -28,11 +28,11 @@ jobs:
       - name: Retag site
         shell: bash
         run: |
-          docker tag registry.digitalocean.com/aqaratech/aqaratech-site:master registry.digitalocean.com/aqaratech/aqaratech-site:${{ env.NEW_SITE_TAG }}
-          docker push registry.digitalocean.com/aqaratech/aqaratech-site:${{ env.NEW_SITE_TAG }}
+          docker tag registry.digitalocean.com/aqtech/aqaratech-site:master registry.digitalocean.com/aqtech/aqaratech-site:${{ env.NEW_SITE_TAG }}
+          docker push registry.digitalocean.com/aqtech/aqaratech-site:${{ env.NEW_SITE_TAG }}
 
       - name: Retag backend
         shell: bash
         run: |
-          docker tag registry.digitalocean.com/aqaratech/aqaratech-backend:master registry.digitalocean.com/aqaratech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
-          docker push registry.digitalocean.com/aqaratech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
+          docker tag registry.digitalocean.com/aqtech/aqaratech-backend:master registry.digitalocean.com/aqtech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
+          docker push registry.digitalocean.com/aqtech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
