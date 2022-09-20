@@ -1,5 +1,13 @@
 import { chromium, type FullConfig } from "@playwright/test";
 import { testOrgEmail, testPassword } from "@self/seed";
+import { decodeJwt } from "jose";
+
+const hasExpired = (exp: number) => exp < Date.now() / 1000;
+
+const hasJWTExpired = (token: string) => {
+	const payload = decodeJwt(token);
+	return hasExpired(payload.exp);
+};
 
 async function globalSetup(config: FullConfig) {
 	// await seed();
@@ -8,13 +16,21 @@ async function globalSetup(config: FullConfig) {
 	// avoid logging in again if cookies have not expired
 	try {
 		const cookies = (await import("./storageState.json")).cookies;
+		const idToken = cookies.find((c) => c.name === "idToken");
 		const accessToken = cookies.find((c) => c.name === "accessToken");
-		if (accessToken) {
-			const hasExpired = accessToken.expires < Date.now() / 1000;
+		if (accessToken && idToken) {
+			const hasAnyExpired =
+				// check cookies for expiration
+				hasExpired(idToken.expires) ||
+				hasExpired(accessToken.expires) ||
+				// check tokens for expiration
+				hasJWTExpired(idToken.value) ||
+				hasJWTExpired(accessToken.value);
+
 			const domain = new URL(baseURL).hostname;
 			const isSameDomain = domain === accessToken.domain;
 
-			if (!hasExpired && isSameDomain) {
+			if (!hasAnyExpired && isSameDomain) {
 				console.log(
 					"[Global Setup] Skipping login because access token is still valid"
 				);
