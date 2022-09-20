@@ -28,7 +28,7 @@
     "health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_API_URL_LOCAL/' ../../.env | awk -F '=' '{print $2}') 30",
     "sentry:sourcemaps": "sentry-cli sourcemaps upload ./dist/ --org aqaratech --project backend --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)",
     "sentry:release": "sentry-cli releases new $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json) --org aqaratech --project backend",
-    "api:generate": "./get-openapi.sh && rm -rf ../site/src/api/open-api && openapi-generator-cli generate"
+    "api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate"
   },
   "prisma": {
     "seed": "tsx ../seed/src/go-seed.ts"

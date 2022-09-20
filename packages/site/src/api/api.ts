@@ -16,7 +16,7 @@ import {
 	TenantsApi,
 	UnitsApi,
 	UsersApi,
-} from './open-api';
+} from './openapi';
 import * as SentryNode from '@sentry/node?server';
 import * as SentrySvelte from '@sentry/svelte?client';
 import type { LoadEvent } from '@sveltejs/kit';
