@@ -1,4 +1,4 @@
-import { api } from '$lib/client/api';
+import { api } from '$api';
 import { respondWithCsv } from '$lib/utils/respond-with-csv';
 import type { RequestHandler } from './$types';
 

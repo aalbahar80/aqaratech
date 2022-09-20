@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';

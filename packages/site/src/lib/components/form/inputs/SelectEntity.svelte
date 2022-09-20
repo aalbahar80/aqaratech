@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import InputWrapper from '$lib/components/form/inputs/InputWrapper.svelte';
 	import {

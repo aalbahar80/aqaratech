@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { portfoliosToOptions } from '$lib/components/form/inputs/to-options';
 	import { areas } from '$lib/constants/areas-kwt';

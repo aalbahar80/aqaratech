@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import {
 		Dialog,

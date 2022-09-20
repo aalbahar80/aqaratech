@@ -1,4 +1,4 @@
-import type { Api } from '$lib/client/api';
+import type { Api } from '$api';
 import {
 	clampedDate,
 	defaultRange,

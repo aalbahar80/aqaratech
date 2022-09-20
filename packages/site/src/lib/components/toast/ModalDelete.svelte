@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import { addToast } from '$lib/stores/toast';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import Modal from './Modal.svelte';

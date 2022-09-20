@@ -2,7 +2,7 @@
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import type { LeaseDto } from '@self/sdk';

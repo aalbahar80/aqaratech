@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 
 	import { page } from '$app/stores';
-	import { api } from '$lib/client/api';
+	import { api } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
