@@ -16,6 +16,7 @@
     "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed"
   },
   "devDependencies": {
+    "@changesets/changelog-git": "0.1.12",
     "@changesets/cli": "2.24.4",
     "turbo": "1.4.6"
   }
