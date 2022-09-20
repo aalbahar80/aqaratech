@@ -1,4 +1,4 @@
-import { fancy } from '$lib/client/ho-load';
+import { fancy } from '$api/ho-load';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = fancy(async ({ api }) => {
