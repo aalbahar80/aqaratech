@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenuePie } from '$lib/components/charts/revenue-pie';
-	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
 

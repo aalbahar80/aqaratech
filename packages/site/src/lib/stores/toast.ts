@@ -1,4 +1,4 @@
-import { ResponseError } from '@self/sdk';
+import { ResponseError } from '$api/openapi';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 

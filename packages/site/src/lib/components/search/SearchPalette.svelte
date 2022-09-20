@@ -11,7 +11,7 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
-	import type { SearchDto } from '@self/sdk';
+	import type { SearchDto } from '$api/openapi';
 	import { entitiesMap, isEntity } from '@self/utils';
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

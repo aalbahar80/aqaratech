@@ -5,7 +5,7 @@
 	import { api } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
-	import type { LeaseDto } from '@self/sdk';
+	import type { LeaseDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

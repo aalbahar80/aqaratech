@@ -4,7 +4,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedPropertyDto } from '@self/sdk';
+	import type { PaginatedPropertyDto } from '$api/openapi';
 
 	export let properties: PaginatedPropertyDto;
 </script>

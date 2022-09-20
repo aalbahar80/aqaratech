@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import { create } from '$lib/utils/route-helpers';
-	import type { LeaseDto } from '@self/sdk';
+	import type { LeaseDto } from '$api/openapi';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';

@@ -13,7 +13,7 @@
 		updateSchema,
 	} from '$lib/models/schemas/property.schema';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import type { PaginatedPortfolioDto, PropertyDto } from '@self/sdk';
+	import type { PaginatedPortfolioDto, PropertyDto } from '$api/openapi';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;

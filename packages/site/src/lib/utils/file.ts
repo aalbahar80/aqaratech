@@ -1,5 +1,5 @@
 import { create, inferRoute } from '$lib/utils/route-helpers';
-import { CreateRelationKeyEnum } from '@self/sdk';
+import { CreateRelationKeyEnum } from '$api/openapi';
 
 export const createFileHref = (pathname: string) => {
 	const current = inferRoute(pathname);

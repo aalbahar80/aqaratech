@@ -1,6 +1,6 @@
 <script lang="ts">
 	import InvoiceCard from '$lib/components/trx/TrxCard.svelte';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { FolderAdd } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';

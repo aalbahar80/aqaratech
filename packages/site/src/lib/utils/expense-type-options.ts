@@ -1,5 +1,5 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
-import type { ExpenseCategoryDto } from '@self/sdk';
+import type { ExpenseCategoryDto } from '$api/openapi';
 import * as d3 from 'd3';
 
 export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;

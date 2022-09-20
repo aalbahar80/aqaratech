@@ -1,4 +1,4 @@
-import type { LeaseInvoiceDto } from '@self/sdk';
+import type { LeaseInvoiceDto } from '$api/openapi';
 import { satisfies } from '@self/utils';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 

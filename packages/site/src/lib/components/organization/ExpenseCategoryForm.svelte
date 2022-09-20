@@ -10,7 +10,7 @@
 		createSchema,
 		updateSchema,
 	} from '$models/schemas/expenseCategory.schema';
-	import type { ExpenseCategoryDto } from '@self/sdk';
+	import type { ExpenseCategoryDto } from '$api/openapi';
 
 	type TExpenseCategoryDto = $$Generic<
 		TExpenseCategorys extends undefined ? ExpenseCategoryDto : undefined

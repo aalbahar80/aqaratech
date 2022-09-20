@@ -19,7 +19,7 @@
 		PaginatedPortfolioDto,
 		PaginatedPropertyDto,
 		PaginatedUnitDto,
-	} from '@self/sdk';
+	} from '$api/openapi';
 
 	type TPredefinedExpense = $$Generic<PredefinedExpense | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;

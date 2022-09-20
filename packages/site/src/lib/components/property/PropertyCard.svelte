@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PropertyDto } from '@self/sdk';
+	import type { PropertyDto } from '$api/openapi';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 

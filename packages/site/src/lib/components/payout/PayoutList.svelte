@@ -4,7 +4,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedPayoutDto } from '@self/sdk';
+	import type { PaginatedPayoutDto } from '$api/openapi';
 
 	export let payouts: PaginatedPayoutDto;
 </script>

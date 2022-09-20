@@ -1,4 +1,4 @@
-import type { ValidatedRoleDto, ValidatedUserDto } from '@self/sdk';
+import type { ValidatedRoleDto, ValidatedUserDto } from '$api/openapi';
 import type { JSONWebKeySet } from 'jose';
 
 type AuthConfigKeys =

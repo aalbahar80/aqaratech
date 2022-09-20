@@ -1,4 +1,4 @@
-import type { ExpenseDto } from '@self/sdk';
+import type { ExpenseDto } from '$api/openapi';
 import { Chart } from 'chart.js/dist/chart.esm';
 import { currencyTooltip } from './utils/currency';
 

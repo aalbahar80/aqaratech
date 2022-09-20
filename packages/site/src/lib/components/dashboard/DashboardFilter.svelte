@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DateFilter from '$lib/components/dashboard/DateFilter.svelte';
 	import LocationFilter from '$lib/components/dashboard/LocationFilter.svelte';
-	import type { PropertyDto, UnitDto } from '@self/sdk';
+	import type { PropertyDto, UnitDto } from '$api/openapi';
 
 	export let properties: PropertyDto[];
 	export let units: UnitDto[];

@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { UnitDto } from '@self/sdk';
+	import type { UnitDto } from '$api/openapi';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';

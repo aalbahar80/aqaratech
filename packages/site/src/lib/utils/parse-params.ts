@@ -4,7 +4,7 @@ import {
 	PAGE_SIZE,
 	SORT_ORDER,
 } from '$lib/constants/pagination-keys';
-import type { CombinedEnum, SortOrderEnum } from '@self/sdk';
+import type { CombinedEnum, SortOrderEnum } from '$api/openapi';
 
 export const parseParams = (searchParams: URLSearchParams) => {
 	return {

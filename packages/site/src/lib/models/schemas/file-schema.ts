@@ -1,6 +1,6 @@
 import { isID } from '$lib/models/schemas/id.schema';
 import { trim } from '$lib/zodTransformers.js';
-import { CreateRelationKeyEnum } from '@self/sdk';
+import { CreateRelationKeyEnum } from '$api/openapi';
 import { z } from 'zod';
 
 export const schema = z.object({

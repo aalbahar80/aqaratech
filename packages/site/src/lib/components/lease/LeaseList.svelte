@@ -2,7 +2,7 @@
 	import LeaseCard from '$lib/components/lease/LeaseCard.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { PaginatedLeaseDto } from '@self/sdk';
+	import type { PaginatedLeaseDto } from '$api/openapi';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 

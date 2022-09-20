@@ -7,7 +7,7 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { schema } from '$models/schemas/organization.schema';
-	import type { OrganizationDto } from '@self/sdk';
+	import type { OrganizationDto } from '$api/openapi';
 
 	type TOrganizationDto = $$Generic<
 		TOrganizations extends undefined ? OrganizationDto : undefined

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import type { PaginatedExpenseDto } from '@self/sdk';
+	import type { PaginatedExpenseDto } from '$api/openapi';
 	import * as d3 from 'd3';
 
 	export let expenses: PaginatedExpenseDto;

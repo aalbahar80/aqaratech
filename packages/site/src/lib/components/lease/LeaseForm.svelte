@@ -19,7 +19,7 @@
 		PaginatedPropertyDto,
 		PaginatedTenantDto,
 		PaginatedUnitDto,
-	} from '@self/sdk';
+	} from '$api/openapi';
 
 	type TPredefinedLease = $$Generic<PredefinedLease | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;

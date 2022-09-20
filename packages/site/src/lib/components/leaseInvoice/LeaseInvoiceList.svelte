@@ -4,7 +4,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedLeaseInvoiceDto } from '@self/sdk';
+	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
 
 	export let leaseId: string | undefined = undefined;
 	export let leaseInvoices: PaginatedLeaseInvoiceDto;

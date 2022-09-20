@@ -2,7 +2,7 @@
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { netChart } from '$lib/components/charts/net';
 	import { getColor } from '$lib/utils/colors';
-	import type { ByMonthDto } from '@self/sdk';
+	import type { ByMonthDto } from '$api/openapi';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];

@@ -4,7 +4,7 @@
 
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { PayoutDto } from '@self/sdk';
+	import type { PayoutDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';

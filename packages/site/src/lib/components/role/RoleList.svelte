@@ -2,7 +2,7 @@
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { ValidatedRoleDto } from '@self/sdk';
+	import type { ValidatedRoleDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';

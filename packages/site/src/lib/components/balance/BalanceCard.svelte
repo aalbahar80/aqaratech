@@ -3,7 +3,7 @@
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import type { BalanceDto } from '@self/sdk';
+	import type { BalanceDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 
 	export let balance: BalanceDto;

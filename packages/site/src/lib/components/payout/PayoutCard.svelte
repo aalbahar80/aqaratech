@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PayoutDto } from '@self/sdk';
+	import type { PayoutDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

@@ -7,7 +7,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { schema } from '$models/schemas/tenant.schema';
-	import type { TenantDto } from '@self/sdk';
+	import type { TenantDto } from '$api/openapi';
 
 	type TTenantDto = $$Generic<
 		TPortfolios extends undefined ? TenantDto : undefined

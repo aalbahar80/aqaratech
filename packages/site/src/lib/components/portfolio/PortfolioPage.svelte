@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PortfolioDto } from '@self/sdk';
+	import type { PortfolioDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { PresentationChartBar } from '@steeze-ui/heroicons';
 	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';

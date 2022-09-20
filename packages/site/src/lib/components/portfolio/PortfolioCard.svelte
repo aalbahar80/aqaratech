@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PortfolioDto } from '@self/sdk';
+	import type { PortfolioDto } from '$api/openapi';
 	import { FolderOpen, Phone } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 

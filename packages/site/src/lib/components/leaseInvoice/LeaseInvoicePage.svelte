@@ -10,7 +10,7 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { DocumentText, Mail } from '@steeze-ui/heroicons';
 
 	type Transaction = LeaseInvoiceDto;

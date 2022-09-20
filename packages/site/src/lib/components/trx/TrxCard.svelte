@@ -3,7 +3,7 @@
 	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { Calendar, Cash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

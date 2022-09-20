@@ -1,4 +1,4 @@
-import type { RoleTypeEnum } from '@self/sdk';
+import type { RoleTypeEnum } from '$api/openapi';
 import type { DBEntitiesMap, Entity } from '@self/utils';
 
 type SearchParam = string | null;

@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { Cash } from '@steeze-ui/heroicons';
 
 	export let invoice: LeaseInvoiceDto;

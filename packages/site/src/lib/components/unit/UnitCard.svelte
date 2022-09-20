@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UnitDto } from '@self/sdk';
+	import type { UnitDto } from '$api/openapi';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import FaSolidBath from '~icons/fa-solid/bath';

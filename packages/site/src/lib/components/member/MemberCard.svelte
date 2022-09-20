@@ -8,7 +8,7 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { RoleDto } from '@self/sdk';
+	import type { RoleDto } from '$api/openapi';
 	import { createEventDispatcher } from 'svelte';
 	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';

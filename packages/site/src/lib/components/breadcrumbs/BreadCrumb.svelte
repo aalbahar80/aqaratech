@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
-	import type { BreadcrumbsDto } from '@self/sdk';
+	import type { BreadcrumbsDto } from '$api/openapi';
 	import { entitiesMap, isEntity } from '@self/utils';
 	import * as R from 'remeda';
 

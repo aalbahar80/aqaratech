@@ -6,7 +6,7 @@ import {
 	UsersApi,
 	type ValidatedRoleDto,
 	type ValidatedUserDto,
-} from '@self/sdk';
+} from '$api/openapi';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
 

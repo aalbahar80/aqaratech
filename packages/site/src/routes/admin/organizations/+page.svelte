@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { OrganizationDto } from '@self/sdk';
+	import type { OrganizationDto } from '$api/openapi';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 

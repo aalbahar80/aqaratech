@@ -4,7 +4,7 @@
 	import StackedList from '$lib/components/StackedList.svelte';
 	import TenantCard from '$lib/components/tenant/TenantCard.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedTenantDto } from '@self/sdk';
+	import type { PaginatedTenantDto } from '$api/openapi';
 
 	export let tenants: PaginatedTenantDto;
 </script>

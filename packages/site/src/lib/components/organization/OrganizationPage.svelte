@@ -3,7 +3,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
-	import type { OrganizationDto, PaginatedRoleDto } from '@self/sdk';
+	import type { OrganizationDto, PaginatedRoleDto } from '$api/openapi';
 
 	export let organization: OrganizationDto;
 	export let roles: PaginatedRoleDto;

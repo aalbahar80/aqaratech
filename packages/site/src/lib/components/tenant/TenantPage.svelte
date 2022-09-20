@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import type { TenantDto } from '@self/sdk';
+	import type { TenantDto } from '$api/openapi';
 	import { Collection } from '@steeze-ui/heroicons';
 
 	export let tenant: TenantDto;

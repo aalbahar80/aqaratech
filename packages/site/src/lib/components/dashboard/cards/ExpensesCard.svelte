@@ -5,7 +5,7 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import IncompleteDataAlert from '$lib/components/dashboard/IncompleteDataAlert.svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '@self/sdk';
+	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '$api/openapi';
 
 	export let expenses: PaginatedExpenseDto;
 	export let categories: ExpenseCategoryDto[];

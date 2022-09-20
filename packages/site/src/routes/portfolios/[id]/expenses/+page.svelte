@@ -3,7 +3,7 @@
 	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { ExpenseDto } from '@self/sdk';
+	import type { ExpenseDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';

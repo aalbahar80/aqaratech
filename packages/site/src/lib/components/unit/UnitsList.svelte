@@ -5,7 +5,7 @@
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedUnitDto, UnitDto } from '@self/sdk';
+	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 

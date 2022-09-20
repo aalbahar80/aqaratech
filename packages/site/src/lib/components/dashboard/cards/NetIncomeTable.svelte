@@ -2,7 +2,7 @@
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import type { ByMonthDto } from '@self/sdk';
+	import type { ByMonthDto } from '$api/openapi';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];

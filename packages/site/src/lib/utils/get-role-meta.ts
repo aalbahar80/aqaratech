@@ -1,5 +1,5 @@
 import type { UserMeta } from '$lib/models/types/auth.type';
-import type { ValidatedRoleDto } from '@self/sdk';
+import type { ValidatedRoleDto } from '$api/openapi';
 
 export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 	if (role.roleType === 'ORGADMIN') {

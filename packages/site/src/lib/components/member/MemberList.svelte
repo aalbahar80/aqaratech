@@ -5,7 +5,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create, inferRoute } from '$lib/utils/route-helpers';
-	import type { PaginatedRoleDto } from '@self/sdk';
+	import type { PaginatedRoleDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';

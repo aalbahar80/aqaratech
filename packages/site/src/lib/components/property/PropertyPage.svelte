@@ -5,7 +5,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PropertyDto } from '@self/sdk';
+	import type { PropertyDto } from '$api/openapi';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let property: PropertyDto;

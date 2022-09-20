@@ -6,7 +6,7 @@
 	import { Field } from '$lib/models/classes/Field.class';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { schema } from '$models/schemas/portfolio.schema';
-	import type { PortfolioDto } from '@self/sdk';
+	import type { PortfolioDto } from '$api/openapi';
 
 	type TPortfolioDto = $$Generic<
 		TPortfolios extends undefined ? PortfolioDto : undefined

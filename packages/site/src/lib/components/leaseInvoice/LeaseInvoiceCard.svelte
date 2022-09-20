@@ -10,7 +10,7 @@
 	import { kwdFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarDay from '~icons/fa6-solid/calendar-day';

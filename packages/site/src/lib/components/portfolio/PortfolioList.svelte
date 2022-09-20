@@ -4,7 +4,7 @@
 	import PortfolioCard from '$lib/components/portfolio/PortfolioCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedPortfolioDto } from '@self/sdk';
+	import type { PaginatedPortfolioDto } from '$api/openapi';
 
 	export let portfolios: PaginatedPortfolioDto;
 </script>

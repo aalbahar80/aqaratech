@@ -13,7 +13,7 @@
 		updateSchema,
 		warnSchema,
 	} from '$models/schemas/lease-invoice.schema';
-	import type { LeaseInvoiceDto } from '@self/sdk';
+	import type { LeaseInvoiceDto } from '$api/openapi';
 
 	type TPredefinedInvoice = $$Generic<PredefinedInvoice | undefined>;
 

@@ -10,7 +10,7 @@
 	import { hasFileSupport } from '$lib/utils/file';
 	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PaginatedFileDto } from '@self/sdk';
+	import type { PaginatedFileDto } from '$api/open-api';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { onMount } from 'svelte';

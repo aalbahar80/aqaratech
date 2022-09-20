@@ -3,7 +3,7 @@ import type {
 	PaginatedPropertyDto,
 	PaginatedTenantDto,
 	PaginatedUnitDto,
-} from '@self/sdk';
+} from '$api/openapi';
 
 export const tenantsToOptions = (tenants: PaginatedTenantDto) =>
 	tenants.results.map((tenant) => ({

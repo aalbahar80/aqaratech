@@ -2,7 +2,7 @@
 	import Badge from '$components/Badge.svelte';
 	import { getProgress } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import type { LeaseDto } from '@self/sdk';
+	import type { LeaseDto } from '$api/openapi';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';

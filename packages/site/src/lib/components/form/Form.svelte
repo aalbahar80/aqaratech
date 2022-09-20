@@ -7,7 +7,7 @@
 	import type { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
-	import { ResponseError } from '@self/sdk';
+	import { ResponseError } from '$api/openapi';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import { createForm } from 'felte';
 	import type { z, ZodSchema } from 'zod';

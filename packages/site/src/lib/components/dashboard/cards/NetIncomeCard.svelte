@@ -2,7 +2,7 @@
 	import NetIncomeLineChart from '$lib/components/dashboard/cards/NetIncomeLineChart.svelte';
 	import NetIncomeTable from '$lib/components/dashboard/cards/NetIncomeTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import type { ByMonthDto } from '@self/sdk';
+	import type { ByMonthDto } from '$api/openapi';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];

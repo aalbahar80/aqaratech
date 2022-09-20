@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import type { ExpenseDto } from '@self/sdk';
+	import type { ExpenseDto } from '$api/openapi';
 
 	export let expense: ExpenseDto;
 </script>

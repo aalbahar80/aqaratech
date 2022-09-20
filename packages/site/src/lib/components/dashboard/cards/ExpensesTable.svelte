@@ -2,7 +2,7 @@
 	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
 	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import type { PaginatedExpenseDto } from '@self/sdk';
+	import type { PaginatedExpenseDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 
 	export let expenses: PaginatedExpenseDto;

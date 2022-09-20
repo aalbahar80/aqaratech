@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import type { PayoutDto } from '@self/sdk';
+	import type { PayoutDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 
 	export let payout: PayoutDto;

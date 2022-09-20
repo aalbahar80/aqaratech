@@ -4,7 +4,7 @@
 	import { startCase } from '$lib/utils/common';
 	import type { Rename } from '$lib/utils/rename';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
-	import type { HitDto } from '@self/sdk';
+	import type { HitDto } from '$api/openapi';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 

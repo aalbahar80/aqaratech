@@ -5,7 +5,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
-	import type { CreateRelationKeyEnum } from '@self/sdk';
+	import type { CreateRelationKeyEnum } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 
 	export let relationKey: CreateRelationKeyEnum;
