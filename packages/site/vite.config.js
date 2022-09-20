@@ -32,7 +32,7 @@ const config = {
 		// basicSsl(),
 	],
 	ssr: {
-		noExternal: ['@self/sdk', 'chart.js'],
+		noExternal: ['chart.js'],
 	},
 	// esbuild: {
 	// 	sourcemap: true, // no effect?

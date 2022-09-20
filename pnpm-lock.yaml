@@ -231,7 +231,6 @@ importers:
       '@felte/validator-zod': 1.0.11
       '@iconify/json': 2.1.109
       '@rgossiaux/svelte-headlessui': 1.0.2
-      '@self/sdk': workspace:0.2.0
       '@self/utils': workspace:1.2.0
       '@sentry/node': 7.13.0
       '@sentry/svelte': 7.13.0
@@ -302,7 +301,6 @@ importers:
       '@felte/validator-zod': 1.0.11_zod@3.19.1
       '@iconify/json': 2.1.109
       '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.50.1
-      '@self/sdk': link:../sdk
       '@self/utils': link:../utils
       '@sentry/node': 7.13.0
       '@sentry/svelte': 7.13.0_svelte@3.50.1

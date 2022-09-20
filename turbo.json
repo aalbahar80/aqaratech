@@ -23,19 +23,6 @@
         "build"
       ]
     },
-    "@self/sdk#build": {
-      "dependsOn": [
-        "@self/backend#build"
-      ],
-      "inputs": [
-        "openapi.yaml",
-        "openapitools.json"
-      ],
-      "outputs": [
-        "src/**",
-        "dist/**"
-      ]
-    },
     "test:e2e": {
       "dependsOn": [
         "^build"
