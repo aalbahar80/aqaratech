@@ -12,10 +12,15 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 18.x
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
 
       - run: pnpm install --frozen-lockfile
 
