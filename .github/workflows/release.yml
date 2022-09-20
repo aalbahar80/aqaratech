@@ -14,6 +14,7 @@ jobs:
     env:
       NEW_SITE_TAG: v1.0.0-sample
       NEW_BACKEND_TAG: v1.0.0-sample
+      DOCKER_PREFIX: registry.digitalocean.com/aqtech/aqaratech
 
     steps:
       - name: Install doctl
@@ -28,11 +29,13 @@ jobs:
       - name: Retag site
         shell: bash
         run: |
+          docker pull registry.digitalocean.com/aqtech/aqaratech-site:master
           docker tag registry.digitalocean.com/aqtech/aqaratech-site:master registry.digitalocean.com/aqtech/aqaratech-site:${{ env.NEW_SITE_TAG }}
           docker push registry.digitalocean.com/aqtech/aqaratech-site:${{ env.NEW_SITE_TAG }}
 
       - name: Retag backend
         shell: bash
         run: |
+          docker pull registry.digitalocean.com/aqtech/aqaratech-backend:master
           docker tag registry.digitalocean.com/aqtech/aqaratech-backend:master registry.digitalocean.com/aqtech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
           docker push registry.digitalocean.com/aqtech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
