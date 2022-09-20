@@ -86,13 +86,6 @@ async function bootstrap() {
     console.warn('Swagger is not enabled in production/staging');
   }
 
-  console.log('OpenApi schema generated');
-  if (process.env.GENERATE_OPENAPI_SCHEMA) {
-    console.log('Quitting...');
-    await app.close();
-    process.exit(0);
-  } else {
-    await app.listen(3002);
-  }
+  await app.listen(3002);
 }
 void bootstrap();
