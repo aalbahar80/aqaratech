@@ -17,10 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     # needs: test
-    strategy:
-      fail-fast: false
-      matrix:
-        package: [site]
 
     steps:
       - name: Check out code
@@ -38,22 +34,18 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm -F . -F @self/site... install --frozen-lockfile
       - run: pnpm run build:site
       # - run: docker build -f ./packages/site/Dockerfile .
       - uses: ./.github/actions/build
         with:
-          package: ${{ matrix.package }}
+          package: site
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   build-backend:
     runs-on: ubuntu-latest
     environment: dev
     # needs: test
-    strategy:
-      fail-fast: false
-      matrix:
-        package: [backend]
 
     steps:
       - name: Check out code
@@ -71,7 +63,7 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm -F . -F @self/backend... install --frozen-lockfile
         env:
           PRISMA_GENERATE_SKIP_AUTOINSTALL: 1
           # Also need to remove postinstall script
@@ -81,7 +73,7 @@ jobs:
 
       - uses: ./.github/actions/build
         with:
-          package: ${{ matrix.package }}
+          package: backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   deploy-app:
