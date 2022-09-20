@@ -1,4 +1,4 @@
-import { api } from '$lib/client/api';
+import { api } from '$api';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, data }) => {

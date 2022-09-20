@@ -1,4 +1,4 @@
-import { api, type Api } from '$lib/client/api';
+import { api, type Api } from '$api';
 import type { Load } from '@sveltejs/kit';
 
 type Callback<T extends Load, K, WithApi = false> = (
