@@ -83,6 +83,7 @@ export const setupSwagger = async (app: INestApplication) => {
   });
 
   try {
+    console.log('Setting up swagger...');
     const { dump } = await import('js-yaml');
     // For consumption of swagger-ui
     writeFileSync(
