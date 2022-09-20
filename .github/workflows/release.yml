@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - prod
+
+jobs:
+  prepare-prod:
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      NEW_SITE_TAG: v1.0.0-sample
+      NEW_BACKEND_TAG: v1.0.0-sample
+
+    steps:
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        shell: bash
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Retag site
+        shell: bash
+        run: |
+          docker tag registry.digitalocean.com/aqaratech/aqaratech-site:master registry.digitalocean.com/aqaratech/aqaratech-site:${{ env.NEW_SITE_TAG }}
+          docker push registry.digitalocean.com/aqaratech/aqaratech-site:${{ env.NEW_SITE_TAG }}
+
+      - name: Retag backend
+        shell: bash
+        run: |
+          docker tag registry.digitalocean.com/aqaratech/aqaratech-backend:master registry.digitalocean.com/aqaratech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
+          docker push registry.digitalocean.com/aqaratech/aqaratech-backend:${{ env.NEW_BACKEND_TAG }}
