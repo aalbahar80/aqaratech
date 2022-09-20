@@ -35,6 +35,8 @@ const config = {
 			'$utils/*': 'src/lib/utils/*',
 			$aqenvironment: 'src/lib/environment/index.ts',
 			'$aqenvironment/*': 'src/lib/environment/*',
+			$api: 'src/api/index.ts',
+			'$api/*': 'src/api/*',
 		},
 	},
 	// vitePlugin: {
