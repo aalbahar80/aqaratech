@@ -1,10 +1,5 @@
 name: Teardown DigitalOcean Resources
 
-# Deleting a branch should cancel any ongoing tests/deployments for that branch
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.ref }}
-  cancel-in-progress: true
-
 on:
   delete:
   workflow_dispatch:
