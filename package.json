@@ -13,7 +13,7 @@
     "sentry:release": "turbo run sentry:release",
     "lint": "turbo run lint",
     "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
-    "ci:version": "changeset version"
+    "ci:version": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
     "@changesets/changelog-git": "0.1.12",
