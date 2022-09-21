@@ -1,6 +1,7 @@
 name: Teardown DigitalOcean Resources
 
 on:
+  # TODO don't run when deleting changeset-release/master branch
   delete:
   workflow_dispatch:
 
