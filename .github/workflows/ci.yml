@@ -82,7 +82,7 @@ jobs:
         with:
           package: site
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          customTag: ${{ inputs.environment == 'prod' && needs.get-verion-site.outputs.version || github.ref_name }}
+          customTag: ${{ inputs.environment == 'prod' && needs.get-version-site.outputs.version || github.ref_name }}
 
   get-version-backend:
     runs-on: ubuntu-latest
@@ -146,7 +146,7 @@ jobs:
         with:
           package: backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          customTag: ${{ inputs.environment == 'prod' && needs.get-verion-backend.outputs.version || github.ref_name }}
+          customTag: ${{ inputs.environment == 'prod' && needs.get-version-backend.outputs.version || github.ref_name }}
 
   deploy-app:
     runs-on: ubuntu-latest
