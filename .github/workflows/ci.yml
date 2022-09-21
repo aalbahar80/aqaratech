@@ -83,9 +83,11 @@ jobs:
     steps:
       - id: step1
         run: echo "::set-output name=version::$(jq -r '.version' ./packages/backend/package.json)"
+
   build-backend:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+    needs: [get-version-backend]
     # needs: test
 
     steps:
