@@ -24,6 +24,11 @@ jobs:
       version: ${{ steps.step1.outputs.version }}
       output2: ${{ steps.step2.outputs.test }}
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
       - id: step1
         run: echo "::set-output name=version::$(jq -r '.version' ./packages/site/package.json)"
 
@@ -81,6 +86,11 @@ jobs:
       version: ${{ steps.step1.outputs.version }}
       output2: ${{ steps.step2.outputs.test }}
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
       - id: step1
         run: echo "::set-output name=version::$(jq -r '.version' ./packages/backend/package.json)"
 
