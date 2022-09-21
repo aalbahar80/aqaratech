@@ -1,5 +1,11 @@
 # @self/utils
 
+## 1.3.1
+
+### Patch Changes
+
+- eb4c8f12: bump-all-deps-2
+
 ## 1.3.0
 
 ### Minor Changes
