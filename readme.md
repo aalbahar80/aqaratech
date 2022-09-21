@@ -10,6 +10,8 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 `utils`: Contains code to trigger [`/notify-all`](packages/site/src/routes/transactions/notify-all.ts) webhook to send payment reminders to tenants. Hosted on [render](https://render.com/).
 
+`scripts`: Utility scripts for ci/cd.
+
 ## Develop:
 
 > In the root directory, run `pnpm install`, then:
