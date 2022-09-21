@@ -14,3 +14,4 @@ jobs:
     uses: ./.github/workflows/ci.yml
     with:
       environment: dev
+    secrets: inherit
