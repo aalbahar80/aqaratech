@@ -7,30 +7,31 @@ const siteVersion = argv["site-version"];
 const backendVersion = argv["backend-version"];
 
 const SPEC = "app.yml";
-
 // get app id
 console.log(chalk.blue(`Getting app ${appName} info...`));
 
 const allApps = await $`doctl apps list --format ID,Name --output json`;
 const app = JSON.parse(allApps).find((app) => app.spec.name === appName);
 
+const WILL_CREATE = !app;
+let latestSpec;
 if (!app) {
 	console.log(chalk.red(`App ${appName} not found.`));
-	await $`exit 1`;
+	// await $`zx .do/deploy-new.mjs --app-name ${appName} --site-version ${siteVersion} --backend-version ${backendVersion}`;
+	// If app does not yet exist, use the spec.yml file as a base.
+	latestSpec = YAML.parse(await fs.readFile("spec.yml", "utf8"));
+} else {
+	console.log(chalk.green(`Found App. Name: ${appName} ID: ${appId} .`));
+
+	const appId = app.id;
+
+	// If app already exists, get the latest spec as a base.
+	console.log(chalk.blue(`Getting latest spec for app ${appName}...`));
+	await $`doctl apps spec get ${appId} > ${SPEC}`;
+	latestSpec = YAML.parse(await fs.readFile(SPEC, "utf8"));
 }
 
-const appId = app.id;
-
-// console.log({ app });
-console.log(chalk.blue(`App ${appName} id: ${appId}`));
-
-// get latest spec
-console.log(chalk.blue(`Getting latest spec for app ${appName}...`));
-await $`doctl apps spec get ${appId} > ${SPEC}`;
-const latestSpec = YAML.parse(await fs.readFile(SPEC, "utf8"));
-console.log(latestSpec);
-
-// bump versions
+// bump versions in spec
 console.log(chalk.blue(`Bumping versions...`));
 
 latestSpec.services.forEach((service) => {
@@ -44,10 +45,11 @@ latestSpec.services.forEach((service) => {
 // save spec
 console.log(chalk.blue(`Saving spec...`));
 await fs.writeFile(SPEC, YAML.stringify(latestSpec));
+console.log(latestSpec);
 
 // deploy
 console.log(chalk.blue(`Deploying...`));
-await $`doctl apps update ${appId} --spec ${SPEC} --output json`;
+await $`doctl apps create --upsert ${appId} --spec ${SPEC} --output json`;
 
 // Create a new deployment because it's the only way to "Force rebuild".
 // Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
