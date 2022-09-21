@@ -2,6 +2,9 @@
 
 console.log({ argv });
 
+const releaseOnly = argv["release-only"];
+const sourcemapsOnly = argv["sourcemaps-only"];
+
 const manualVersion = argv.version;
 const fallbackVersion = await $`jq -r .version package.json`;
 
@@ -28,5 +31,11 @@ if (cwd.endsWith("site")) {
 	await $`exit 1`;
 }
 
-await $`sentry-cli releases new ${version} ${org} ${project} --finalize`;
-await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${version}`;
+if (releaseOnly) {
+	await $`sentry-cli releases new ${version} ${org} ${project} --finalize`;
+} else if (sourcemapsOnly) {
+	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${version}`;
+} else {
+	await $`sentry-cli releases new ${version} ${org} ${project} --finalize`;
+	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${version}`;
+}
