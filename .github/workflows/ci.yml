@@ -156,9 +156,30 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set site tag
+        env:
+          FORCE_COLOR: 3
+          IS_PROD: ${{ inputs.environment == 'prod' }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          npx zx <<'EOF'
+          let SITE_TAG;
+          let BACKEND_TAG;
+          if (process.env.IS_PROD) {
+            SITE_TAG = require('./packages/site/package.json').version;
+            BACKEND_TAG = require('./packages/backend/package.json').version;
+          } else {
+            SITE_TAG = process.env.BRANCH_NAME;
+            BACKEND_TAG = process.env.BRANCH_NAME;
+          }
+          await $`echo "SITE_TAG=${SITE_TAG}" >> $GITHUB_ENV`;
+          await $`echo "BACKEND_TAG=${BACKEND_TAG}" >> $GITHUB_ENV`;
+          EOF
+
       - uses: ./.github/actions/deploy
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
-          # TODO get version dynamically
           appName: ${{ github.ref_name }}
+          siteTag: ${{ env.SITE_TAG }}
+          backendTag: ${{ env.BACKEND_TAG }}

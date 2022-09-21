@@ -11,10 +11,10 @@ inputs:
   appName:
     required: true
     description: DigitalOcean App Platform App Name - Must be unique per project
-  siteVersion:
+  siteTag:
     required: true
     description: Version of the site to deploy
-  backendVersion:
+  backendTag:
     required: true
     description: Version of the backend to deploy
 
@@ -34,5 +34,5 @@ runs:
       run: |
         npx zx ./.do/deploy.mjs \
         --app-name ${{ inputs.appName }} \
-        --site-version ${{ inputs.siteVersion }} \
-        --backend-version ${{ inputs.backendVersion }}
+        --site-version ${{ inputs.siteTag }} \
+        --backend-version ${{ inputs.backendTag }}
