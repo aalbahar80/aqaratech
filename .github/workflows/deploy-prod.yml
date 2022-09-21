@@ -47,7 +47,7 @@ jobs:
 
       - name: Delete client sourcemaps
         shell: bash
-        run: ./script/rm-sourcemaps.mjs ./packages/site/build/client --force
+        run: pnpm zx ./script/rm-sourcemaps.mjs ./packages/site/build/client --force
 
       # - run: docker build -f ./packages/site/Dockerfile .
       - uses: ./.github/actions/build
