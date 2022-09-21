@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.2
+
+### Patch Changes
+
+- 5a708e1d: bump-all-deps-3
+
 ## 0.4.1
 
 ### Patch Changes

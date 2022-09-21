@@ -1,5 +1,13 @@
 # @self/backend
 
+## 0.3.2
+
+### Patch Changes
+
+- 5a708e1d: bump-all-deps-3
+- Updated dependencies [5a708e1d]
+  - @self/utils@1.3.2
+
 ## 0.3.1
 
 ### Patch Changes

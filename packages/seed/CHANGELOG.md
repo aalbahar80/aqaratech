@@ -1,5 +1,11 @@
 # @self/seed
 
+## 0.3.2
+
+### Patch Changes
+
+- 5a708e1d: bump-all-deps-3
+
 ## 0.3.1
 
 ### Patch Changes
