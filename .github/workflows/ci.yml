@@ -87,20 +87,6 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - name: debug-sentry
-        shell: bash
-        run: |
-          echo SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
-          echo SENTRY_AUTH_TOKEN_ENV=${{ env.SENTRY_AUTH_TOKEN }}
-          echo TURBO_TOKEN=${{ secrets.TURBO_TOKEN }}
-          echo TURBO_TEAM=${{ secrets.TURBO_TEAM }}
-          echo TURBO_TOKEN_ENV=${{ env.TURBO_TOKEN }}
-          echo TURBO_TEAM_ENV=${{ env.TURBO_TEAM }}
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-
       - run: pnpm -F @self/site run sentry:release --version ${{ needs.get-tags.outputs.siteTag }}
 
       - if: ${{ inputs.environment == 'prod' }}
