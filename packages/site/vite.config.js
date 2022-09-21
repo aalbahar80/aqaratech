@@ -4,6 +4,9 @@ import { isoImport } from 'vite-plugin-iso-import';
 import { version } from './package.json';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 
+// https://vitejs.dev/config/#environment-variables
+// TODO consider using loadEnv helper instead of scripts/export-env.sh in preview command
+
 // TODO don't generate sourcemaps if PUBLIC_AQARATECH_ENV is production
 
 /** @type {import('vite').UserConfig} */
