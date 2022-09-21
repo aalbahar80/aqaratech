@@ -22,12 +22,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 		ssr: {
 			noExternal: ['chart.js'],
 		},
-	};
-
-	/** @type {import('vite').UserConfig} */
-	const dev = {
-		define: { __AQARATECH_APP_VERSION__: JSON.stringify(version) },
 		build: {
+			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
+			// This is to match the random chunk names with their original sourcemaps.
 			sourcemap: true,
 			rollupOptions: {
 				// with rollupOptions, source maps work for BUILD: pnpm build && node --inspect -r source-map-support/register build/index.js
@@ -50,6 +47,11 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 	};
 
 	/** @type {import('vite').UserConfig} */
+	const dev = {
+		define: { __AQARATECH_APP_VERSION__: JSON.stringify(version) },
+	};
+
+	/** @type {import('vite').UserConfig} */
 	const prod = {
 		define: {
 			__AQARATECH_APP_VERSION__: JSON.stringify(version),
@@ -58,13 +60,13 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 	};
 
 	if (process.env.PUBLIC_AQARATECH_ENV === 'production') {
-		console.log('Building for production. No sourcemaps will be generated.');
+		console.log('Building for production.');
 		return {
 			...common,
 			...prod,
 		};
 	} else {
-		console.log('Building for development. Sourcemaps will be generated.');
+		console.log('Building for development.');
 		return {
 			...common,
 			...dev,
