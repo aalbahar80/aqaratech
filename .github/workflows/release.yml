@@ -43,7 +43,7 @@ jobs:
     # Once the PR is merged, this job will build the docker images and trigger a new deployment on DigitalOcean
     # TODO: handle cases where there are no changesets, but it doesn't make sense to deploy
     if: ${{ needs.create-release-PR.outputs.hasChangesets == 'false' }}
-    uses: ./.github/workflows/ci.yml@master
+    uses: ./.github/workflows/ci.yml
     with:
       environment: prod
       siteTag: ${{ needs.create-release-PR.outputs.siteTag }}

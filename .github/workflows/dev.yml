@@ -11,6 +11,6 @@ on:
 
 jobs:
   run-ci:
-    uses: ./.github/workflows/ci.yml@master
+    uses: ./.github/workflows/ci.yml
     with:
       environment: dev
