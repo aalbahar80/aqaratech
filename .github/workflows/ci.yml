@@ -65,8 +65,11 @@ jobs:
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
       # TODO: use tag for sentry release
-      - run: pnpm -F @self/site run sentry:release
-      - run: pnpm -F @self/site run sentry:sourcemaps
+      - if: ${{ inputs.environment == 'prod' }}
+        run: pnpm -F @self/site run sentry:release
+
+      - if: ${{ inputs.environment == 'prod' }}
+        run: pnpm -F @self/site run sentry:sourcemaps
 
       - if: ${{ inputs.environment == 'prod' }}
         name: Delete client sourcemaps
@@ -130,8 +133,11 @@ jobs:
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
       # TODO: implement tag for sentry release
-      - run: pnpm -F @self/backend run sentry:release -- --version ${{ needs.get-version-backend.outputs.version }}
-      - run: pnpm -F @self/backend run sentry:sourcemaps -- --version ${{ needs.get-version-backend.outputs.version }}
+      - if: ${{ inputs.environment == 'prod' }}
+        run: pnpm -F @self/backend run sentry:release -- --version ${{ needs.get-version-backend.outputs.version }}
+
+      - if: ${{ inputs.environment == 'prod' }}
+        run: pnpm -F @self/backend run sentry:sourcemaps -- --version ${{ needs.get-version-backend.outputs.version }}
 
       - run: pnpm --filter @self/backend --prod deploy pruned
 
