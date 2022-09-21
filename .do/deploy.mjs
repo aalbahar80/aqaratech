@@ -13,13 +13,13 @@ console.log(chalk.blue(`Getting app ${appName} info...`));
 const allApps = await $`doctl apps list --format ID,Name --output json`;
 const app = JSON.parse(allApps).find((app) => app.spec.name === appName);
 
-const WILL_CREATE = !app;
 let latestSpec;
 if (!app) {
 	console.log(chalk.red(`App ${appName} not found.`));
 	// await $`zx .do/deploy-new.mjs --app-name ${appName} --site-version ${siteVersion} --backend-version ${backendVersion}`;
 	// If app does not yet exist, use the spec.yml file as a base.
-	latestSpec = YAML.parse(await fs.readFile("spec.yml", "utf8"));
+	latestSpec = YAML.parse(await fs.readFile(".do/spec.yml", "utf8"));
+	latestSpec.name = appName;
 } else {
 	console.log(chalk.green(`Found App. Name: ${appName} ID: ${appId} .`));
 
