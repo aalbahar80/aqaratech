@@ -7,15 +7,30 @@ concurrency:
 on:
   workflow_dispatch:
   push:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
+  get-version-site:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.step1.outputs.version }}
+      output2: ${{ steps.step2.outputs.test }}
+    steps:
+      - id: step1
+        run: echo "::set-output name=version::$(jq -r '.version' ./packages/site/package.json)"
+
   build-site:
     runs-on: ubuntu-latest
-    environment: dev
+    needs: [get-version-site]
+    environment: ${{ inputs.environment }}
     # needs: test
 
     steps:
@@ -36,15 +51,41 @@ jobs:
 
       - run: pnpm -F . -F @self/site... install --frozen-lockfile
       - run: pnpm run build:site
+
+      # START SENTRY ACTION
+      # TODO export to action
+      # TODO add if prod condition here
+      - name: Install sentry-cli
+        shell: bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+
+      # TODO: use tag for sentry release
+      - run: pnpm -F @self/site run sentry:release
+      - run: pnpm -F @self/site run sentry:sourcemaps
+
+      - if: ${{ jobs.build-site.environment == 'prod' }}
+        name: Delete client sourcemaps
+        shell: bash
+        run: pnpm zx ./script/rm-sourcemaps.mjs ./packages/site/build/client --force
+
       # - run: docker build -f ./packages/site/Dockerfile .
       - uses: ./.github/actions/build
         with:
           package: site
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          customTag: ${{ inputs.environment == 'prod' && needs.get-verion-site.outputs.version || github.ref_name }}
 
+  get-version-backend:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.step1.outputs.version }}
+      output2: ${{ steps.step2.outputs.test }}
+    steps:
+      - id: step1
+        run: echo "::set-output name=version::$(jq -r '.version' ./packages/backend/package.json)"
   build-backend:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ inputs.environment }}
     # needs: test
 
     steps:
@@ -69,16 +110,28 @@ jobs:
           # Also need to remove postinstall script
 
       - run: pnpm run build:backend
+
+      # START SENTRY ACTION
+      # TODO export to action
+      - name: Install sentry-cli
+        shell: bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+
+      # TODO: implement tag for sentry release
+      - run: pnpm -F @self/backend run sentry:release -- --version ${{ needs.get-version-backend.outputs.version }}
+      - run: pnpm -F @self/backend run sentry:sourcemaps -- --version ${{ needs.get-version-backend.outputs.version }}
+
       - run: pnpm --filter @self/backend --prod deploy pruned
 
       - uses: ./.github/actions/build
         with:
           package: backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          customTag: ${{ inputs.environment == 'prod' && needs.get-verion-backend.outputs.version || github.ref_name }}
 
   deploy-app:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ inputs.environment }}
     needs: [build-site, build-backend]
     timeout-minutes: 3
     steps:
@@ -88,6 +141,5 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
+          # TODO get version dynamically
           appName: ${{ github.ref_name }}
-          siteVersion: ${{ github.ref_name }}
-          backendVersion: ${{ github.ref_name }}

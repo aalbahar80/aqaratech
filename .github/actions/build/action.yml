@@ -8,6 +8,9 @@ inputs:
   package:
     required: true
     description: Used to locate Dockerfile & tag image
+  customTag:
+    required: true
+    description: Used to tag image
 
 runs:
   using: composite
@@ -31,6 +34,7 @@ runs:
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}},enable=${{ github.event_name == 'push' && github.ref == 'refs/heads/prod' }}
+          type=raw,value=${{ inputs.customTag }}
 
     - name: Set up Docker Buildx
       id: buildx

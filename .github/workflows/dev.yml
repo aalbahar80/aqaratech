@@ -1,0 +1,17 @@
+# this should call ci with the dev environment inputs
+name: CI - dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  run-ci:
+    uses: ./.github/workflows/ci.yml@master
+    with:
+      environment: dev
+    secrets: inherit
