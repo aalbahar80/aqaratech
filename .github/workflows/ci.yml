@@ -165,7 +165,7 @@ jobs:
           npx zx <<'EOF'
           let SITE_TAG;
           let BACKEND_TAG;
-          if (process.env.IS_PROD) {
+          if (process.env.IS_PROD === 'true') {
             SITE_TAG = require('./packages/site/package.json').version;
             BACKEND_TAG = require('./packages/backend/package.json').version;
           } else {
