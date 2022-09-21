@@ -1,7 +1,5 @@
 #!/usr/bin/env zx
 
-import "zx/globals";
-
 console.log({ argv });
 
 const appName = argv["app-name"];

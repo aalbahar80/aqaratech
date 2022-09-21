@@ -38,6 +38,7 @@ jobs:
 
       # START SENTRY ACTION
       # TODO export to action
+      # TODO add if prod condition here
       - name: Install sentry-cli
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
@@ -111,4 +112,5 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
+          # TODO get version dynamically
           appName: ${{ github.ref_name }}
