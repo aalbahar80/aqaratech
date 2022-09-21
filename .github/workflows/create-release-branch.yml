@@ -14,8 +14,8 @@ on:
         default: "patch"
 env:
   FORCE_COLOR: 1
-# permissions:
-#   contents: write
+permissions:
+  contents: write
 jobs:
   create-branch:
     runs-on: ubuntu-latest
