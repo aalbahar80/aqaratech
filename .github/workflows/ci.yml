@@ -89,3 +89,5 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
           appName: ${{ github.ref_name }}
+          siteVersion: ${{ github.ref_name }}
+          backendVersion: ${{ github.ref_name }}

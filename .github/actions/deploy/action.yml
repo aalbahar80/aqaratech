@@ -11,6 +11,12 @@ inputs:
   appName:
     required: true
     description: DigitalOcean App Platform App Name - Must be unique per project
+  siteVersion:
+    required: true
+    description: Version of the site to deploy
+  backendVersion:
+    required: true
+    description: Version of the backend to deploy
 
 runs:
   using: composite
@@ -26,7 +32,7 @@ runs:
     - name: Create deployment on DigitalOcean
       shell: bash
       run: |
-        ./.do/deploy.sh
-      env:
-        DO_PROJECT_ID: ${{ inputs.projectId }}
-        DO_APP_NAME: ${{ inputs.appName }}
+        npx zx ./.do/deploy.mjs \
+        --app-name ${{ inputs.appName }} \
+        --site-version ${{ inputs.siteVersion }} \
+        --backend-version ${{ inputs.backendVersion }}
