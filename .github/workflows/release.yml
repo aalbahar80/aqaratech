@@ -50,5 +50,6 @@ jobs:
     secrets: inherit
     with:
       environment: prod
+      appName: aqaratech-app-prod
       siteTag: ${{ needs.create-release-PR.outputs.siteTag }}
       backendTag: ${{ needs.create-release-PR.outputs.backendTag }}

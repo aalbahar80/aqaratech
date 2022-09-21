@@ -6,6 +6,9 @@ on:
       environment:
         required: true
         type: string
+      appName:
+        required: true
+        type: string
       siteTag:
         required: false
         type: string
@@ -160,6 +163,6 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           projectId: ${{ secrets.DO_PROJECT_ID }}
-          appName: ${{ github.ref_name }}
+          appName: ${{ inputs.appName }}
           siteTag: ${{ needs.get-tags.outputs.siteTag }}
           backendTag: ${{ needs.get-tags.outputs.backendTag }}
