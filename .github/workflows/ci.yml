@@ -63,7 +63,7 @@ jobs:
       - run: pnpm -F @self/site run sentry:release
       - run: pnpm -F @self/site run sentry:sourcemaps
 
-      - if: ${{ jobs.build-site.environment == 'prod' }}
+      - if: ${{ inputs.environment == 'prod' }}
         name: Delete client sourcemaps
         shell: bash
         run: pnpm zx ./script/rm-sourcemaps.mjs ./packages/site/build/client --force
