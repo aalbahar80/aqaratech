@@ -9,12 +9,28 @@ on:
         required: false
       bump-type:
         description: "Version bump type (patch, minor)"
-        type: string
+        type: choice
         required: false
+        options:
+          - major
+          - minor
+          - patch
         default: "patch"
+      ref-type:
+        description: "Create a branch or lightweight tag"
+        type: choice
+        required: false
+        options:
+          - branch
+          - tag
+        default: "branch"
+
 env:
   FORCE_COLOR: 1
-permissions: write-all
+
+permissions:
+  contents: write
+
 jobs:
   create-branch:
     runs-on: ubuntu-latest
@@ -43,7 +59,22 @@ jobs:
           echo "CURRENT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(semver bump ${{ inputs.bump-type }} $(git describe --tags --abbrev=0))" >> $GITHUB_ENV
 
+      - name: Create tag
+        if: inputs.ref-type == 'tag'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const tagName = `v${process.env.NEW_VERSION}`;
+            console.log(`Creating tag: ${tagName}`);
+            await github.request('POST /repos/{owner}/{repo}/git/refs', {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tagName}`,
+              sha: process.env.CURRENT_SHA
+            });
+
       - name: Create branch
+        if: inputs.ref-type == 'branch'
         uses: actions/github-script@v6
         with:
           script: |
