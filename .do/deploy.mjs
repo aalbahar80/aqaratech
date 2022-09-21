@@ -50,3 +50,7 @@ await fs.writeFile(SPEC, YAML.stringify(latestSpec));
 // deploy
 console.log(chalk.blue(`Deploying...`));
 await $`doctl apps update ${appId} --spec ${SPEC} --output json`;
+
+// Create a new deployment because it's the only way to "Force rebuild".
+// Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
+await $`doctl apps create-deployment ${appId} --force-rebuild`;
