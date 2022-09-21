@@ -13,6 +13,13 @@ on:
         required: true
         type: string
 
+env:
+  # Reusable workflows do not inherit secrets from the calling workflow, because the calling workflow does not have an "environment" input.
+  # Instead, use organization/repository secrets. Alternatively, you can convert this workflow to a composite action.
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
 jobs:
   get-tags:
     runs-on: ubuntu-latest
