@@ -1,0 +1,120 @@
+name: Deploy Prod
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "prod"
+
+env:
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+#   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+#   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    environment: prod
+    # needs: test
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - run: pnpm -F . -F @self/site... install --frozen-lockfile
+      - run: PUBLIC_AQARATECH_ENV=production pnpm run build:site
+      # - run: docker build -f ./packages/site/Dockerfile .
+      - uses: ./.github/actions/build
+        with:
+          package: site
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+  build-backend:
+    runs-on: ubuntu-latest
+    environment: prod
+    # needs: test
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - run: pnpm -F . -F @self/backend... install --frozen-lockfile
+        env:
+          PRISMA_GENERATE_SKIP_AUTOINSTALL: 1
+          # Also need to remove postinstall script
+
+      - run: PUBLIC_AQARATECH_ENV=production pnpm run build:backend
+      - run: pnpm --filter @self/backend --prod deploy pruned
+
+      # TODO: delete all sourcemaps/don't upload sourcemaps to docker
+
+      - uses: ./.github/actions/build
+        with:
+          package: backend
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+  sentry:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Install sentry-cli
+        shell: bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm run sentry:release
+      - run: pnpm run sentry:sourcemaps
+
+  deploy-app:
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: [build-site, build-backend]
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/deploy
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          projectId: ${{ secrets.DO_PROJECT_ID }}
+          appName: ${{ github.ref_name }}

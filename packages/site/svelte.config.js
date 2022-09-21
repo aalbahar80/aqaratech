@@ -10,15 +10,15 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	preprocess: [
 		sveltePreprocess({
-			sourceMap: true,
+			sourceMap: process.env.PUBLIC_AQARATECH_ENV !== 'production',
 			postcss: {
 				configFilePath: join(__dirname, 'postcss.config.cjs'),
 			},
 		}),
 	],
 	compilerOptions: {
-		enableSourcemap: true,
-		sourcemap: true,
+		enableSourcemap: process.env.PUBLIC_AQARATECH_ENV !== 'production',
+		sourcemap: process.env.PUBLIC_AQARATECH_ENV !== 'production',
 	},
 	kit: {
 		adapter: adapterNode(),
