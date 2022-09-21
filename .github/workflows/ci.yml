@@ -13,11 +13,6 @@ on:
         required: true
         type: string
 
-env:
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
 jobs:
   get-tags:
     runs-on: ubuntu-latest
