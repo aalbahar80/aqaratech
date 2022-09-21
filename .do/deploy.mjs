@@ -13,7 +13,7 @@ console.log(chalk.blue(`Getting app ${appName} info...`));
 const allApps = await $`doctl apps list --format ID,Name --output json`;
 const app = JSON.parse(allApps).find((app) => app.spec.name === appName);
 
-const appId = "";
+let appId = "";
 let latestSpec;
 if (!app) {
 	console.log(chalk.red(`App ${appName} not found.`));
