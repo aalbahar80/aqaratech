@@ -12,6 +12,12 @@ on:
       environment:
         required: true
         type: string
+      siteTag:
+        required: false
+        type: string
+      backendTag:
+        required: false
+        type: string
 
 env:
   # Reusable workflows do not inherit secrets from the calling workflow, because the calling workflow does not have an "environment" input.
@@ -37,13 +43,15 @@ jobs:
           FORCE_COLOR: 3
           IS_PROD: ${{ inputs.environment == 'prod' }}
           BRANCH_NAME: ${{ github.ref_name }}
+          SITE_TAG: ${{ inputs.siteTag }}
+          BACKEND_TAG: ${{ inputs.backendTag }}
         run: |
           npx zx <<'EOF'
           let SITE_TAG;
           let BACKEND_TAG;
           if (process.env.IS_PROD === 'true') {
-            SITE_TAG = require('./packages/site/package.json').version;
-            BACKEND_TAG = require('./packages/backend/package.json').version;
+            SITE_TAG = process.env.SITE_TAG || `v${require('./package.json').version}`;
+            BACKEND_TAG = process.env.BACKEND_TAG || `v${require('./backend/package.json').version}`;
           } else {
             SITE_TAG = process.env.BRANCH_NAME;
             BACKEND_TAG = process.env.BRANCH_NAME;
@@ -61,7 +69,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [get-tags]
     environment: ${{ inputs.environment }}
-    # needs: test
 
     steps:
       - name: Check out code
@@ -107,7 +114,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [get-tags]
-    # needs: test
 
     steps:
       - name: Check out code
