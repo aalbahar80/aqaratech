@@ -44,8 +44,8 @@ jobs:
           let SITE_TAG;
           let BACKEND_TAG;
           if (process.env.IS_PROD === 'true') {
-            SITE_TAG = process.env.SITE_TAG || `v${require('./package.json').version}`;
-            BACKEND_TAG = process.env.BACKEND_TAG || `v${require('./backend/package.json').version}`;
+            SITE_TAG = process.env.SITE_TAG || `v${require('./packages/site/package.json').version}`;
+            BACKEND_TAG = process.env.BACKEND_TAG || `v${require('./packages/backend/package.json').version}`;
           } else {
             SITE_TAG = process.env.BRANCH_NAME;
             BACKEND_TAG = process.env.BRANCH_NAME;
