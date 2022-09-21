@@ -34,7 +34,21 @@ jobs:
           cache: "pnpm"
 
       - run: pnpm -F . -F @self/site... install --frozen-lockfile
-      - run: PUBLIC_AQARATECH_ENV=production pnpm run build:site
+      - run: pnpm run build:site
+
+      # START SENTRY ACTION
+      # TODO export to action
+      - name: Install sentry-cli
+        shell: bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+
+      - run: pnpm -F @self/site run sentry:release
+      - run: pnpm -F @self/site run sentry:sourcemaps
+
+      - name: Delete client sourcemaps
+        shell: bash
+        run: ./script/rm-sourcemaps.mjs ./packages/site/build/client --force
+
       # - run: docker build -f ./packages/site/Dockerfile .
       - uses: ./.github/actions/build
         with:
@@ -67,7 +81,7 @@ jobs:
           PRISMA_GENERATE_SKIP_AUTOINSTALL: 1
           # Also need to remove postinstall script
 
-      - run: PUBLIC_AQARATECH_ENV=production pnpm run build:backend
+      - run: pnpm run build:backend
       - run: pnpm --filter @self/backend --prod deploy pruned
 
       # TODO: delete all sourcemaps/don't upload sourcemaps to docker
@@ -81,29 +95,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - name: Install sentry-cli
-        shell: bash
-        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
-
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
-      - run: pnpm run sentry:release
-      - run: pnpm run sentry:sourcemaps
 
   deploy-app:
     runs-on: ubuntu-latest
