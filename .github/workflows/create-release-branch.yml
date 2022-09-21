@@ -16,6 +16,7 @@ env:
   FORCE_COLOR: 1
 permissions:
   contents: write
+  pull-requests: write
 jobs:
   create-branch:
     runs-on: ubuntu-latest
