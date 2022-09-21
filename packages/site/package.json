@@ -14,8 +14,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "custom-lint": "eslint . --ext .ts,.svelte",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "sentry:sourcemaps": "sentry-cli sourcemaps upload ./build/ --org aqaratech --project site-client --project site-server --release $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json)",
-    "sentry:release": "sentry-cli releases new $(awk -F'\"' '/\"version\": \".+\"/{ print $4; exit; }' ./package.json) --org aqaratech --project site-client --project site-server --finalize",
+    "sentry:release": "../../scripts/upload-sourcemaps.mjs",
     "health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') 30"
   },
   "devDependencies": {

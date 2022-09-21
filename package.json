@@ -10,7 +10,6 @@
     "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
     "test": "turbo run test:e2e",
     "dev": "turbo run --filter \\!@self/docs dev",
-    "sentry:sourcemaps": "turbo run sentry:sourcemaps",
     "sentry:release": "turbo run sentry:release",
     "lint": "turbo run lint",
     "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed"
