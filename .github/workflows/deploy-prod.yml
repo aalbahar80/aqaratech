@@ -82,19 +82,22 @@ jobs:
           # Also need to remove postinstall script
 
       - run: pnpm run build:backend
-      - run: pnpm --filter @self/backend --prod deploy pruned
 
-      # TODO: delete all sourcemaps/don't upload sourcemaps to docker
+      # START SENTRY ACTION
+      # TODO export to action
+      - name: Install sentry-cli
+        shell: bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+
+      - run: pnpm -F @self/backend run sentry:release
+      - run: pnpm -F @self/backend run sentry:sourcemaps
+
+      - run: pnpm --filter @self/backend --prod deploy pruned
 
       - uses: ./.github/actions/build
         with:
           package: backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-  sentry:
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
 
   deploy-app:
     runs-on: ubuntu-latest
