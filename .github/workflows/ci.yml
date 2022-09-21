@@ -87,7 +87,8 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - shell: bash
+      - name: debug-sentry
+        shell: bash
         run: |
           echo SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
           echo SENTRY_AUTH_TOKEN_ENV=${{ env.SENTRY_AUTH_TOKEN }}
