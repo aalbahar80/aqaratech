@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.0
+
+### Minor Changes
+
+- c633041c: move changeset to github actions
+
 ## 0.3.2
 
 ### Patch Changes

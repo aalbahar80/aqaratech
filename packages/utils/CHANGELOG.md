@@ -1,5 +1,11 @@
 # @self/utils
 
+## 1.3.0
+
+### Minor Changes
+
+- c633041c: move changeset to github actions
+
 ## 1.2.0
 
 ### Minor Changes

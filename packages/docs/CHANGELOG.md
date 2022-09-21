@@ -1,5 +1,11 @@
 # @self/docs
 
+## 0.3.0
+
+### Minor Changes
+
+- c633041c: move changeset to github actions
+
 ## 0.2.0
 
 ### Minor Changes

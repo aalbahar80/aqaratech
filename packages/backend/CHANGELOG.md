@@ -1,5 +1,16 @@
 # @self/backend
 
+## 0.3.0
+
+### Minor Changes
+
+- c633041c: move changeset to github actions
+
+### Patch Changes
+
+- Updated dependencies [c633041c]
+  - @self/utils@1.3.0
+
 ## 0.2.0
 
 ### Minor Changes

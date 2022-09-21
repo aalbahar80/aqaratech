@@ -1,5 +1,16 @@
 # @self/test
 
+## 1.3.0
+
+### Minor Changes
+
+- c633041c: move changeset to github actions
+
+### Patch Changes
+
+- Updated dependencies [c633041c]
+  - @self/utils@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes
