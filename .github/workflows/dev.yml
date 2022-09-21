@@ -12,6 +12,6 @@ on:
 jobs:
   run-ci:
     uses: ./.github/workflows/ci.yml
+    secrets: inherit
     with:
       environment: dev
-    secrets: inherit
