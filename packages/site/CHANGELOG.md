@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.3
+
+### Patch Changes
+
+- 97514772: run pnpm install --lockfile-only after changeset version in CI
+
 ## 0.4.2
 
 ### Patch Changes

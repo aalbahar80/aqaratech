@@ -1,5 +1,11 @@
 # @self/seed
 
+## 0.3.3
+
+### Patch Changes
+
+- 97514772: run pnpm install --lockfile-only after changeset version in CI
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @self/backend
 
+## 0.3.3
+
+### Patch Changes
+
+- 97514772: run pnpm install --lockfile-only after changeset version in CI
+- Updated dependencies [97514772]
+  - @self/utils@1.3.3
+
 ## 0.3.2
 
 ### Patch Changes
