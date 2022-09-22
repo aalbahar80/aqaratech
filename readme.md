@@ -100,3 +100,25 @@ cd packages/utils && npm install && npm run build
 # run
 cd packages/utils && npm run start
 ```
+
+#
+
+To skip deployment on pushed to `master`:
+
+- include `[skip ci]` flag in the commit message
+  - good for adding docs, comments in code, etc
+  - This will not:
+    - open a PR
+    - run tests
+- add a changeset. This will cause a PR to be opened. When that PR is closed, app will be deployed.
+
+```mermaid
+graph TD;
+    A[push to master]-->B[with changesets];
+    A[push to master]-->C[without changesets];
+    A[push to master]-->F[with `skip-ci` flag];
+		B-->E[PR will be created/updated]
+	  C-->D[trigger deployment in production]
+		B-->T[test]
+		C-->T
+```
