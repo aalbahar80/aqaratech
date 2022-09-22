@@ -15,9 +15,9 @@ jobs:
     environment: prod
 
     outputs:
-      siteTag: ${{ steps.changesets.outputs.siteTag }}
+      published: ${{ steps.changesets.outputs.published }}
+      siteTag: ${{ steps.pkgversions.outputs.siteTag }}
       backendTag: ${{ steps.pkgversions.outputs.backendTag }}
-      published: ${{ steps.pkgversions.outputs.published }}
 
     steps:
       - name: Checkout Repo
