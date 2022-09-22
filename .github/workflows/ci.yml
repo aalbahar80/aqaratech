@@ -117,6 +117,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [build-site, build-backend]
+    if: |
+      always() &&
+      (needs.build-site.result == 'success' || needs.build-site.result == 'skipped') &&
+      (needs.build-backend.result == 'success' || needs.build-backend.result == 'skipped')
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
