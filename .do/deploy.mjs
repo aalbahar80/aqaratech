@@ -62,8 +62,16 @@ console.log(chalk.blue(`Bumping versions...`));
 latestSpec.services.forEach((service) => {
 	// Only bump versions when a version is specified.
 	if (siteVersion && service.name === "site") {
+		console.log(
+			chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`)
+		);
 		service.image.tag = siteVersion;
 	} else if (backendVersion && service.name === "backend") {
+		console.log(
+			chalk.green(
+				`Bumping backend from ${service.image.tag} to ${backendVersion}`
+			)
+		);
 		service.image.tag = backendVersion;
 	}
 });
