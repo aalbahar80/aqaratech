@@ -41,9 +41,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - env:
-          publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}
-        run: echo ${{ env.publishedPackages }}
+      - name: Debug changesets output
+        shell: bash
+        run: |
+          echo ${{ steps.changesets.outputs.publishedPackages }}
+          echo ${{ steps.changesets.outputs.published }}
+          echo ${{ steps.changesets.outputs.hasChangesets }}
 
   release:
     needs: [create-release-PR]
