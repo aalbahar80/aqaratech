@@ -14,7 +14,7 @@
     "lint": "turbo run lint",
     "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
     "ci:version": "changeset version && pnpm install --lockfile-only",
-    "ci:publish": "changeset publish"
+    "ci:publish": "changeset tags"
   },
   "devDependencies": {
     "@changesets/changelog-git": "0.1.12",
