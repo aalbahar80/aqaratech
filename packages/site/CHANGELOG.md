@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.4
+
+### Patch Changes
+
+- aa0b4fb4: create failsafe constant file
+
 ## 0.4.3
 
 ### Patch Changes
