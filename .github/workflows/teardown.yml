@@ -9,6 +9,8 @@ jobs:
   destroy:
     environment: dev
     runs-on: ubuntu-latest
+    # don't run for changeset-release branches
+    if: ${{ github.ref != 'refs/heads/changeset-release/master' }}
     steps:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
