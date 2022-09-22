@@ -12,10 +12,10 @@ inputs:
     required: true
     description: DigitalOcean App Platform App Name - Must be unique per project
   siteTag:
-    required: true
+    required: false
     description: Version of the site to deploy
   backendTag:
-    required: true
+    required: false
     description: Version of the backend to deploy
 
 runs:

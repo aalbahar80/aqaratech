@@ -37,9 +37,10 @@ if (!app) {
 console.log(chalk.blue(`Bumping versions...`));
 
 latestSpec.services.forEach((service) => {
-	if (service.name === "site") {
+	// Only bump versions when a version is specified.
+	if (siteVersion && service.name === "site") {
 		service.image.tag = siteVersion;
-	} else if (service.name === "backend") {
+	} else if (backendVersion && service.name === "backend") {
 		service.image.tag = backendVersion;
 	}
 });
@@ -61,5 +62,6 @@ if (WILL_CREATE) {
 
 	// Create a new deployment because it's the only way to "Force rebuild".
 	// Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
-	await $`doctl apps create-deployment ${appId} --force-rebuild`;
+	// WARNING: This will cancel an ongoing deployment. Disabling for now.
+	// await $`doctl apps create-deployment ${appId} --force-rebuild`;
 }
