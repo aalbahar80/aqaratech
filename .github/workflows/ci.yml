@@ -25,6 +25,7 @@ env:
 
 jobs:
   build-site:
+    if: ${{ inputs.siteTag }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
@@ -69,6 +70,7 @@ jobs:
           customTag: ${{ inputs.siteTag }}
 
   build-backend:
+    if: ${{ inputs.backendTag }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
