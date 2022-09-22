@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.11
+
+### Patch Changes
+
+- 537f09c8: only site
+
 ## 0.4.10
 
 ### Patch Changes
