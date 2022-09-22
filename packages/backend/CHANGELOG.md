@@ -1,5 +1,13 @@
 # @self/backend
 
+## 0.3.6
+
+### Patch Changes
+
+- d60dc7d5: add quotes
+- Updated dependencies [d60dc7d5]
+  - @self/utils@1.3.6
+
 ## 0.3.5
 
 ### Patch Changes

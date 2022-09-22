@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.8
+
+### Patch Changes
+
+- d60dc7d5: add quotes
+
 ## 0.4.7
 
 ### Patch Changes

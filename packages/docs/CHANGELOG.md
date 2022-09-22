@@ -1,5 +1,11 @@
 # @self/docs
 
+## 0.3.6
+
+### Patch Changes
+
+- d60dc7d5: add quotes
+
 ## 0.3.5
 
 ### Patch Changes
