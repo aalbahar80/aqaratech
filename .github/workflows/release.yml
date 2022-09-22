@@ -17,7 +17,7 @@ jobs:
     outputs:
       siteTag: ${{ steps.changesets.outputs.siteTag }}
       backendTag: ${{ steps.step1.outputs.backendTag }}
-      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+      published: ${{ steps.changesets.outputs.published }}
 
     steps:
       - name: Checkout Repo
@@ -43,7 +43,9 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          # `version` consumes changesets + creates/updates PR. Run when there are changesets.
           version: pnpm ci:version
+          # `publish` creates tags + releases on github. Runs when no changesets are present (or have been just consumed by `version`).
           publish: pnpm ci:publish
           createGithubReleases: true
         env:
@@ -56,11 +58,10 @@ jobs:
           echo ${{ steps.changesets.outputs.published }}
           echo ${{ steps.changesets.outputs.hasChangesets }}
 
-  release:
+  publish:
     needs: [create-release-PR]
-    # Once the PR is merged, this job will build the docker images and trigger a new deployment on DigitalOcean
-    # TODO: handle cases where there are no changesets, but it doesn't make sense to deploy
-    if: ${{ needs.create-release-PR.outputs.hasChangesets == 'falseDELETEME' }}
+    # Run this job when changesets publishes a new version
+    if: ${{ needs.create-release-PR.outputs.published == 'true' }}
     uses: ./.github/workflows/ci.yml
     secrets: inherit
     with:
