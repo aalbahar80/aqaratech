@@ -2,9 +2,24 @@
 
 console.log({ argv });
 
+let siteVersion = undefined;
+let backendVersion = undefined;
+
+if (
+	typeof argv["site-version"] === "string" &&
+	argv["site-version"].length > 0
+) {
+	siteVersion = argv["site-version"];
+}
+
+if (
+	typeof argv["backend-version"] === "string" &&
+	argv["backend-version"].length > 0
+) {
+	backendVersion = argv["backend-version"];
+}
+
 const appName = argv["app-name"];
-const siteVersion = argv["site-version"];
-const backendVersion = argv["backend-version"];
 
 const SPEC = "app.yml";
 // get app id
@@ -19,6 +34,14 @@ let latestSpec;
 if (!app) {
 	WILL_CREATE = true;
 	console.log(chalk.red(`App ${appName} not found.`));
+
+	// error if no siteVersion or backendVersion
+	if (!siteVersion || !backendVersion) {
+		console.log(chalk.red(`No siteVersion or backendVersion provided.`));
+		console.log(chalk.red(`Cannot create new app without versions.`));
+		await $`exit 1`;
+	}
+
 	// await $`zx .do/deploy-new.mjs --app-name ${appName} --site-version ${siteVersion} --backend-version ${backendVersion}`;
 	// If app does not yet exist, use the spec.yml file as a base.
 	latestSpec = YAML.parse(await fs.readFile(".do/spec.yml", "utf8"));
