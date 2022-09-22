@@ -61,7 +61,7 @@ jobs:
       # Sample publishedPackages: [{"name":"@self/backend","version":"0.3.4"},{"name":"@self/docs","version":"0.3.4"},{"name":"@self/seed","version":"0.3.4"},{"name":"@self/site","version":"0.4.6"},{"name":"@self/test","version":"1.3.4"},{"name":"@self/utils","version":"1.3.4"}]
       - id: pkgversions
         run: |
-          echo ${{ steps.changesets.outputs.publishedPackages }} > publishedPackages.json
+          echo '${{ steps.changesets.outputs.publishedPackages }}' > publishedPackages.json
           SITE_TAG=$(jq -r '.[] | select(.name == "@self/site") | .version' publishedPackages.json)
           BACKEND_TAG=$(jq -r '.[] | select(.name == "@self/backend") | .version' publishedPackages.json)
           echo "::set-output name=siteTag::${SITE_TAG}"
