@@ -1,5 +1,13 @@
 # @self/seed
 
+## 0.3.8
+
+### Patch Changes
+
+- 25770c10: disable force-rebuild
+- 3ddfc9ea: allow bumping one service's version without the other
+- 6863a01b: rm get-tags from ci workflow
+
 ## 0.3.7
 
 ### Patch Changes
