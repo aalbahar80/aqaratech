@@ -41,6 +41,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - env:
+          publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}
+        run: echo ${{ env.publishedPackages }}
+
   release:
     needs: [create-release-PR]
     # Once the PR is merged, this job will build the docker images and trigger a new deployment on DigitalOcean
