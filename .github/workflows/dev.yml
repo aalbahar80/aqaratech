@@ -16,3 +16,6 @@ jobs:
     with:
       environment: dev
       appName: ${{ github.ref_name }}
+      # TODO: It'd be nice to skip building unchanged images
+      siteTag: ${{  github.ref_name  }}
+      backendTag: ${{  github.ref_name  }}
