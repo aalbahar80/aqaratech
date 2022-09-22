@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.7
+
+### Patch Changes
+
+- b30ca271: get prod versions from changesets
+
 ## 0.4.6
 
 ### Patch Changes

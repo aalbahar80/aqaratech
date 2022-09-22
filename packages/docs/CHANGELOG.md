@@ -1,5 +1,11 @@
 # @self/docs
 
+## 0.3.5
+
+### Patch Changes
+
+- b30ca271: get prod versions from changesets
+
 ## 0.3.4
 
 ### Patch Changes

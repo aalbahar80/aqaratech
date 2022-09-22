@@ -1,5 +1,13 @@
 # @self/test
 
+## 1.3.5
+
+### Patch Changes
+
+- b30ca271: get prod versions from changesets
+- Updated dependencies [b30ca271]
+  - @self/utils@1.3.5
+
 ## 1.3.4
 
 ### Patch Changes
