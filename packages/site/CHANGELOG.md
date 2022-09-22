@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.5
+
+### Patch Changes
+
+- 9a170303: debug changesets output summary
+
 ## 0.4.4
 
 ### Patch Changes
