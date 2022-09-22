@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.9
+
+### Patch Changes
+
+- 16980034: fix step output name
+
 ## 0.4.8
 
 ### Patch Changes

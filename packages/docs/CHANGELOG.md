@@ -1,5 +1,11 @@
 # @self/docs
 
+## 0.3.7
+
+### Patch Changes
+
+- 16980034: fix step output name
+
 ## 0.3.6
 
 ### Patch Changes

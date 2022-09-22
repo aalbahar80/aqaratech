@@ -1,5 +1,11 @@
 # @self/utils
 
+## 1.3.7
+
+### Patch Changes
+
+- 16980034: fix step output name
+
 ## 1.3.6
 
 ### Patch Changes

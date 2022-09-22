@@ -1,5 +1,13 @@
 # @self/backend
 
+## 0.3.7
+
+### Patch Changes
+
+- 16980034: fix step output name
+- Updated dependencies [16980034]
+  - @self/utils@1.3.7
+
 ## 0.3.6
 
 ### Patch Changes
