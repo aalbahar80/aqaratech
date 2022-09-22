@@ -1,6 +1,6 @@
 {
   "name": "@self/site",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "files": [
     "build"
   ],
@@ -24,7 +24,7 @@
     "@felte/validator-zod": "1.0.11",
     "@iconify/json": "2.1.109",
     "@rgossiaux/svelte-headlessui": "1.0.2",
-    "@self/utils": "workspace:1.3.3",
+    "@self/utils": "workspace:1.3.4",
     "@sentry/node": "7.13.0",
     "@sentry/svelte": "7.13.0",
     "@sentry/tracing": "7.13.0",

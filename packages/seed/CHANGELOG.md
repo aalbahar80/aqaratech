@@ -1,5 +1,11 @@
 # @self/seed
 
+## 0.3.4
+
+### Patch Changes
+
+- 3a3ed864: bump to use changeset tags
+
 ## 0.3.3
 
 ### Patch Changes

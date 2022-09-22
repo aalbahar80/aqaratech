@@ -1,5 +1,13 @@
 # @self/test
 
+## 1.3.4
+
+### Patch Changes
+
+- 3a3ed864: bump to use changeset tags
+- Updated dependencies [3a3ed864]
+  - @self/utils@1.3.4
+
 ## 1.3.3
 
 ### Patch Changes

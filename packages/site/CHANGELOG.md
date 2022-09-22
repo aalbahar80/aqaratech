@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.6
+
+### Patch Changes
+
+- 3a3ed864: bump to use changeset tags
+
 ## 0.4.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/utils
 
+## 1.3.4
+
+### Patch Changes
+
+- 3a3ed864: bump to use changeset tags
+
 ## 1.3.3
 
 ### Patch Changes
