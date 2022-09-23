@@ -1,4 +1,4 @@
-import { Transform, TransformationType } from 'class-transformer';
+import { Transform } from 'class-transformer';
 // import { parsePhoneNumber } from 'libphonenumber-js';
 import { castArray, isArray, isNil, map, trim } from 'lodash';
 

@@ -103,6 +103,7 @@ export class AggregateService {
     // avoid looping over dates where no units are created
     const firstUnitCreatedAt = units[0].createdAt;
     const start =
+      /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
       filter.start! > firstUnitCreatedAt ? filter.start! : firstUnitCreatedAt;
 
     // fallback to getting data for next two years max

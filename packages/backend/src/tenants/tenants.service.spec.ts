@@ -1,3 +1,5 @@
+// @ts-nocheck
+// file is also ignored by eslint in .eslintignore
 import { ForbiddenException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { fakeTenant } from '@self/seed';
