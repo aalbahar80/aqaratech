@@ -1,20 +1,20 @@
-import { testPortfolioId, testTenantRoleId } from "@self/seed";
-import { expect, test } from "../../token";
+import { testPortfolioId, testTenantRoleId } from '@self/seed';
+import { expect, test } from '../../token';
 
 test.use({
 	extraHTTPHeaders: {
-		"x-role-id": testTenantRoleId,
+		'x-role-id': testTenantRoleId,
 	},
 });
 
-const accessible = ["/leases", "/leaseInvoices"];
+const accessible = ['/leases', '/leaseInvoices'];
 const notAccessible = [
-	"/portfolios",
-	"/properties",
-	"/units",
-	"/expenses",
-	"/aggregate/incomeByMonth",
-	"/aggregate/expensesByMonth",
+	'/portfolios',
+	'/properties',
+	'/units',
+	'/expenses',
+	'/aggregate/incomeByMonth',
+	'/aggregate/expensesByMonth',
 	// "/search",
 ];
 
@@ -38,8 +38,8 @@ for (const route of notAccessible) {
 	});
 }
 
-test("can only get self from /tenants", async ({ request, token }) => {
-	const res = await request.get("/tenants", {
+test('can only get self from /tenants', async ({ request, token }) => {
+	const res = await request.get('/tenants', {
 		headers: { Authorization: `Bearer ${token}` },
 	});
 	const body = await res.json();
@@ -47,10 +47,10 @@ test("can only get self from /tenants", async ({ request, token }) => {
 });
 
 test('cannot get files from "/files"', async ({ request, token }) => {
-	const res = await request.get("/files", {
+	const res = await request.get('/files', {
 		headers: { Authorization: `Bearer ${token}` },
 		params: {
-			relationKey: "portfolio",
+			relationKey: 'portfolio',
 			relationValue: testPortfolioId,
 			// relationKey: "tenant",
 			// relationValue: testTenantId,

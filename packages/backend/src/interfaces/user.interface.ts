@@ -11,12 +11,12 @@ import { ValidatedUserDto } from 'src/users/dto/user.dto';
  * We should expect a user of this type if we use `@SkipAbilityCheck()` on a route handler.
  */
 export interface AuthenticatedUser {
-  email: string;
+	email: string;
 
-  /**
-   * Whether the user has an `aqaratech-staff` role set in their auth0 profile.
-   */
-  isAqaratechStaff: boolean;
+	/**
+	 * Whether the user has an `aqaratech-staff` role set in their auth0 profile.
+	 */
+	isAqaratechStaff: boolean;
 }
 
 /**
@@ -28,8 +28,8 @@ export interface AuthenticatedUser {
  * Additionally, we have calculated and attached the user's ability.
  */
 export interface IUser extends ValidatedUserDto {
-  ability: AppAbility;
-  xRoleId: string;
-  role: ValidatedUserDto['roles'][0];
-  isAqaratechStaff: false;
+	ability: AppAbility;
+	xRoleId: string;
+	role: ValidatedUserDto['roles'][0];
+	isAqaratechStaff: false;
 }

@@ -1,4 +1,4 @@
-import type { F } from "ts-toolbelt";
+import type { F } from 'ts-toolbelt';
 
 export const satisfies =
 	<TWide>() =>

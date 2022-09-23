@@ -9,13 +9,13 @@ import type { MailConfigType } from '../types/mail.type';
 export type EnvironmentType = 'DEVELOPMENT' | 'PRODUCTION';
 
 export interface EnvironmentConfig {
-  type: EnvironmentType;
-  envName: 'dev' | 'prod';
-  apiConfig: ApiConfigType;
-  authConfig: AuthConfigType;
-  mailConfig: MailConfigType;
-  debug: DebugConfigType;
-  meiliSearchConfig: MeiliSearchConfigType;
-  siteConfig: SiteConfigType;
-  r2Config: R2ConfigType;
+	type: EnvironmentType;
+	envName: 'dev' | 'prod';
+	apiConfig: ApiConfigType;
+	authConfig: AuthConfigType;
+	mailConfig: MailConfigType;
+	debug: DebugConfigType;
+	meiliSearchConfig: MeiliSearchConfigType;
+	siteConfig: SiteConfigType;
+	r2Config: R2ConfigType;
 }

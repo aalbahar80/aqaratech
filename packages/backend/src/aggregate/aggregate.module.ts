@@ -4,9 +4,9 @@ import { AggregateController } from './aggregate.controller';
 import { AggregateService } from './aggregate.service';
 
 @Module({
-  controllers: [AggregateController],
-  providers: [AggregateService],
-  imports: [LeaseInvoicesModule],
-  exports: [AggregateService],
+	controllers: [AggregateController],
+	providers: [AggregateService],
+	imports: [LeaseInvoicesModule],
+	exports: [AggregateService],
 })
 export class AggregateModule {}

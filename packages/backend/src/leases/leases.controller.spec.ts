@@ -5,18 +5,18 @@ import { LeasesController } from './leases.controller';
 import { LeasesService } from './leases.service';
 
 describe('LeasesController', () => {
-  let controller: LeasesController;
+	let controller: LeasesController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [LeasesController],
-      providers: [LeasesService, PrismaService, CaslAbilityFactory],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [LeasesController],
+			providers: [LeasesService, PrismaService, CaslAbilityFactory],
+		}).compile();
 
-    controller = module.get<LeasesController>(LeasesController);
-  });
+		controller = module.get<LeasesController>(LeasesController);
+	});
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(controller).toBeDefined();
+	});
 });

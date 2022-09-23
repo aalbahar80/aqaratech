@@ -5,25 +5,25 @@ import { generateId } from 'src/utils/generate-id';
  * Returns a default expense category tree with random ids.
  */
 export const generateExpenseCategoryTree = (): ExpenseCategoryDto[] => {
-  const mappedIds = new Map<string, string>();
+	const mappedIds = new Map<string, string>();
 
-  defaultExpenseCategoryTree.forEach((category) => {
-    mappedIds.set(category.id, generateId());
-  });
+	defaultExpenseCategoryTree.forEach((category) => {
+		mappedIds.set(category.id, generateId());
+	});
 
-  const withRandomIds = defaultExpenseCategoryTree.map((category) => {
-    const newId = mappedIds.get(category.id);
-    const newParentId = category.parentId
-      ? mappedIds.get(category.parentId)
-      : null;
-    return {
-      ...category,
-      id: newId ?? generateId(),
-      parentId: newParentId || null,
-    };
-  });
+	const withRandomIds = defaultExpenseCategoryTree.map((category) => {
+		const newId = mappedIds.get(category.id);
+		const newParentId = category.parentId
+			? mappedIds.get(category.parentId)
+			: null;
+		return {
+			...category,
+			id: newId ?? generateId(),
+			parentId: newParentId || null,
+		};
+	});
 
-  return withRandomIds;
+	return withRandomIds;
 };
 
 /**

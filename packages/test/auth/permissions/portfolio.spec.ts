@@ -1,23 +1,23 @@
-import { testPortfolioId, testPortfolioRoleId } from "@self/seed";
-import { expect, test } from "../../token";
+import { testPortfolioId, testPortfolioRoleId } from '@self/seed';
+import { expect, test } from '../../token';
 
 test.use({
 	extraHTTPHeaders: {
-		"x-role-id": testPortfolioRoleId,
+		'x-role-id': testPortfolioRoleId,
 	},
 });
 
 const notAccessible = [];
 const accessible = [
-	"/tenants",
-	"/portfolios",
-	"/properties",
-	"/units",
-	"/leases",
-	"/leaseInvoices",
-	"/expenses",
-	"/aggregate/incomeByMonth",
-	"/aggregate/expensesByMonth",
+	'/tenants',
+	'/portfolios',
+	'/properties',
+	'/units',
+	'/leases',
+	'/leaseInvoices',
+	'/expenses',
+	'/aggregate/incomeByMonth',
+	'/aggregate/expensesByMonth',
 	// "/search",
 ];
 
@@ -42,10 +42,10 @@ for (const route of notAccessible) {
 }
 
 test('can get files from "/files"', async ({ request, token }) => {
-	const res = await request.get("/files", {
+	const res = await request.get('/files', {
 		headers: { Authorization: `Bearer ${token}` },
 		params: {
-			relationKey: "portfolio",
+			relationKey: 'portfolio',
 			relationValue: testPortfolioId,
 		},
 	});

@@ -4,12 +4,12 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 
 export class OrganizationSettingsDto extends AbstractDto {
-  constructor(partial: Partial<OrganizationSettingsDto>) {
-    super();
-    Object.assign(this, partial);
-  }
-  @IsArray()
-  @Type(() => ExpenseCategoryDto)
-  expenseCategoryTree: ExpenseCategoryDto[];
-  organizationId: string;
+	constructor(partial: Partial<OrganizationSettingsDto>) {
+		super();
+		Object.assign(this, partial);
+	}
+	@IsArray()
+	@Type(() => ExpenseCategoryDto)
+	expenseCategoryTree: ExpenseCategoryDto[];
+	organizationId: string;
 }

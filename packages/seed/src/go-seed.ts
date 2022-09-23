@@ -1,5 +1,5 @@
-import { seed } from "./seed.js";
-import prisma from "./prisma.js";
+import { seed } from './seed.js';
+import prisma from './prisma.js';
 
 seed({ printOnly: false })
 	.catch((e) => {

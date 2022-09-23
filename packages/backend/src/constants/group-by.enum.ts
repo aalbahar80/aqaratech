@@ -1,4 +1,4 @@
 export enum GroupBy {
-  NONE = 'none',
-  MONTHYEAR = 'monthyear',
+	NONE = 'none',
+	MONTHYEAR = 'monthyear',
 }

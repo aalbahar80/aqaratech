@@ -1,30 +1,30 @@
-import { devices, type PlaywrightTestConfig } from "@playwright/test";
-import { config as dotenv } from "dotenv";
+import { devices, type PlaywrightTestConfig } from '@playwright/test';
+import { config as dotenv } from 'dotenv';
 
 dotenv({
-	path: "../../.env",
+	path: '../../.env',
 });
 
 const config: PlaywrightTestConfig = {
-	globalSetup: require.resolve("./global-setup"),
+	globalSetup: require.resolve('./global-setup'),
 	reporter: [
-		["list"],
-		["html", { open: process.env.CI ? "never" : "on-failure" }],
+		['list'],
+		['html', { open: process.env.CI ? 'never' : 'on-failure' }],
 	],
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 5 * 1000,
 	maxFailures: 20,
 	grepInvert: [/smoke/, /file/],
 	use: {
-		storageState: "storageState.json",
+		storageState: 'storageState.json',
 		headless: true,
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
-		video: "on-first-retry",
+		video: 'on-first-retry',
 		baseURL: process.env.PUBLIC_SITE_URL,
 		viewport: { width: 1920, height: 1080 },
 		trace: {
-			mode: "on",
+			mode: 'on',
 			screenshots: true,
 			snapshots: true,
 			sources: true,
@@ -33,16 +33,16 @@ const config: PlaywrightTestConfig = {
 	webServer: [
 		// To Debug, use env var: DEBUG=pw:webserver
 		{
-			cwd: "../backend",
-			command: "pnpm run preview",
+			cwd: '../backend',
+			command: 'pnpm run preview',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 		},
 		{
-			cwd: "../site",
+			cwd: '../site',
 			// don't use `pnpm run preview` because sourcing the env file will fail in CI
-			command: "node build/index.js",
+			command: 'node build/index.js',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
@@ -50,11 +50,11 @@ const config: PlaywrightTestConfig = {
 	],
 	projects: [
 		{
-			name: "chromium",
+			name: 'chromium',
 			use: {
-				...devices["Desktop Chrome"],
+				...devices['Desktop Chrome'],
 				launchOptions: {
-					args: ["--window-position=0,0"],
+					args: ['--window-position=0,0'],
 				},
 			},
 		},

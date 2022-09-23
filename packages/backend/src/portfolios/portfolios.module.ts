@@ -8,15 +8,15 @@ import { PortfoliosController } from './portfolios.controller';
 import { PortfoliosService } from './portfolios.service';
 
 @Module({
-  controllers: [PortfoliosController],
-  providers: [PortfoliosService],
-  exports: [PortfoliosService],
-  imports: [
-    RolesModule,
-    PropertiesModule,
-    UnitsModule,
-    PayoutsModule,
-    AggregateModule,
-  ],
+	controllers: [PortfoliosController],
+	providers: [PortfoliosService],
+	exports: [PortfoliosService],
+	imports: [
+		RolesModule,
+		PropertiesModule,
+		UnitsModule,
+		PayoutsModule,
+		AggregateModule,
+	],
 })
 export class PortfoliosModule {}

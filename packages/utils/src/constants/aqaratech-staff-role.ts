@@ -1,1 +1,1 @@
-export const AQARATECH_STAFF_ROLE = "aqaratech-staff";
+export const AQARATECH_STAFF_ROLE = 'aqaratech-staff';

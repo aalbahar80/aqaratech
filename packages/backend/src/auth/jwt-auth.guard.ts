@@ -8,23 +8,23 @@ import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
  */
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private reflector: Reflector) {
-    super();
-  }
+	constructor(private reflector: Reflector) {
+		super();
+	}
 
-  private readonly logger = new Logger(JwtAuthGuard.name);
+	private readonly logger = new Logger(JwtAuthGuard.name);
 
-  async canActivate(context: ExecutionContext) {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-    if (isPublic) {
-      this.logger.debug('Public route, skipping jwt auth guard');
-      return true;
-    }
+	async canActivate(context: ExecutionContext) {
+		const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+			context.getHandler(),
+			context.getClass(),
+		]);
+		if (isPublic) {
+			this.logger.debug('Public route, skipping jwt auth guard');
+			return true;
+		}
 
-    this.logger.debug('Enforcing jwt-auth.guard');
-    return super.canActivate(context) as Promise<boolean>;
-  }
+		this.logger.debug('Enforcing jwt-auth.guard');
+		return super.canActivate(context) as Promise<boolean>;
+	}
 }

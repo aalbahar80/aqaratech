@@ -1,25 +1,25 @@
-import { faker } from "@faker-js/faker";
-import { Property, Role } from "@prisma/client";
-import { randomUUID } from "crypto";
-import { addDays, addMinutes, addMonths, subDays } from "date-fns";
+import { faker } from '@faker-js/faker';
+import { Property, Role } from '@prisma/client';
+import { randomUUID } from 'crypto';
+import { addDays, addMinutes, addMonths, subDays } from 'date-fns';
 import {
 	areas,
 	coordinates,
 	generateExpenseCategoryTree,
 	unitTypeOptions,
-} from "./constants.js";
+} from './constants.js';
 
 // consistent id's for testing
-export const testPassword = "test12";
-export const testOrgEmail = "org.demo@mailthink.net";
-export const testOrgId = "f79a7bd6-698b-4b56-9e86-4338690a7929";
-export const testOrgRoleId = "e82bdce2-03b6-40aa-9e00-0d95b55b772d";
-export const testPortfolioEmail = "client.dev@mailthink.net";
-export const testPortfolioId = "62357de0-03c7-446c-a414-ac6de3ac9bbb";
-export const testPortfolioRoleId = "27e60270-172f-4ed2-af48-6d43cb8a526b";
-export const testTenantEmail = "tenant.dev@mailthink.net";
-export const testTenantId = "e6258358-b4f6-4825-9245-0e21c54b557a";
-export const testTenantRoleId = "66e2b65c-21cf-4e6f-89c0-710b6766eb37";
+export const testPassword = 'test12';
+export const testOrgEmail = 'org.demo@mailthink.net';
+export const testOrgId = 'f79a7bd6-698b-4b56-9e86-4338690a7929';
+export const testOrgRoleId = 'e82bdce2-03b6-40aa-9e00-0d95b55b772d';
+export const testPortfolioEmail = 'client.dev@mailthink.net';
+export const testPortfolioId = '62357de0-03c7-446c-a414-ac6de3ac9bbb';
+export const testPortfolioRoleId = '27e60270-172f-4ed2-af48-6d43cb8a526b';
+export const testTenantEmail = 'tenant.dev@mailthink.net';
+export const testTenantId = 'e6258358-b4f6-4825-9245-0e21c54b557a';
+export const testTenantRoleId = '66e2b65c-21cf-4e6f-89c0-710b6766eb37';
 
 export const timespan = 2;
 export const createdAt = () => faker.date.past(timespan);
@@ -32,12 +32,12 @@ const unitTypeValues = unitTypeOptions
 	.map((u) => u.value);
 
 export const fakeEmail = () => {
-	const email = faker.internet.email(undefined, undefined, "aqaratech.com");
+	const email = faker.internet.email(undefined, undefined, 'aqaratech.com');
 	return email;
 };
 
 const fakePerson = () => {
-	const gender = Math.random() > 0.5 ? "male" : "female";
+	const gender = Math.random() > 0.5 ? 'male' : 'female';
 	const firstName = faker.name.firstName(gender);
 	const middleName = faker.name.middleName(gender);
 	const lastName = faker.name.lastName(gender);
@@ -105,7 +105,7 @@ export const fakePortfolio = (orgId?: string) => {
 		civilid: faker.datatype
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
-		phone: faker.phone.number("9#######"),
+		phone: faker.phone.number('9#######'),
 		dob: faker.date.past(),
 	};
 };
@@ -123,11 +123,11 @@ export const fakeTenant = (orgId?: string) => {
 			.number({ min: 200000000000, max: 399999999999 })
 			.toString(),
 		dob: faker.date.past(),
-		phone: faker.phone.number("9#######"),
+		phone: faker.phone.number('9#######'),
 		passportNum: faker.datatype
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
-		nationality: faker.address.countryCode("alpha-3"),
+		nationality: faker.address.countryCode('alpha-3'),
 		residencyNum: faker.datatype
 			.number({ min: 100000000, max: 999999999 })
 			.toString(),
@@ -138,7 +138,7 @@ export const fakeTenant = (orgId?: string) => {
 export const fakeUnit = (
 	propertyId?: string,
 	portfolioId?: string,
-	orgaizationId?: string
+	orgaizationId?: string,
 ) => {
 	const type = faker.helpers.arrayElement(unitTypeValues);
 	const unitNumber = faker.datatype.number({ min: 1, max: 100 }).toString();
@@ -162,10 +162,10 @@ export const fakeUnit = (
 	};
 };
 
-const getAddress = (property: Pick<Property, "area" | "block" | "number">) => {
-	return [property.area, "ق", property.block, "م", property.number]
+const getAddress = (property: Pick<Property, 'area' | 'block' | 'number'>) => {
+	return [property.area, 'ق', property.block, 'م', property.number]
 		.filter(Boolean)
-		.join(" ");
+		.join(' ');
 };
 
 export const fakeProperty = (portfolioId?: string, organizationId?: string) => {
@@ -206,10 +206,10 @@ export const fakeLeaseInvoice = (
 	leaseStart: Date,
 	count: number,
 	portfolioId?: string,
-	organizationId?: string
+	organizationId?: string,
 ) => {
 	const nextMonth = new Date(
-		Date.UTC(leaseStart.getFullYear(), leaseStart.getMonth() + 1, 1)
+		Date.UTC(leaseStart.getFullYear(), leaseStart.getMonth() + 1, 1),
 	);
 	const postAt = addMonths(nextMonth, count);
 	const isPaid = postAt < new Date() ? Math.random() > 0.15 : false;
@@ -218,14 +218,14 @@ export const fakeLeaseInvoice = (
 		createdAt: leaseStart,
 		updatedAt: leaseStart,
 		amount,
-		memo: "RENT",
+		memo: 'RENT',
 		postAt,
 		dueAt: addDays(postAt, 14),
 		isPaid,
 		paidAt: isPaid
 			? addMinutes(
 					postAt,
-					faker.datatype.number({ min: 60, max: 60 * 24 * 28 })
+					faker.datatype.number({ min: 60, max: 60 * 24 * 28 }),
 			  )
 			: null,
 		leaseId,
@@ -240,7 +240,7 @@ export const fakeLeaseInvoiceBasic = () => {
 		createdAt: new Date(),
 		updatedAt: new Date(),
 		amount: faker.datatype.number({ min: 200, max: 2000 }),
-		memo: "RENT",
+		memo: 'RENT',
 		postAt: new Date(),
 		dueAt: addDays(new Date(), 14),
 		isPaid: false,
@@ -252,7 +252,7 @@ export const fakeLease = (
 	unitId?: string,
 	startDate?: Date,
 	portfolioId?: string,
-	organizationId?: string
+	organizationId?: string,
 ) => {
 	const start = startDate ?? faker.date.past(timespan);
 	const end = subDays(addMonths(start, 12), 1);
@@ -286,7 +286,7 @@ export const fakeExpense = () => ({
 
 export const fakeMaintenanceOrder = (
 	portfolioId?: string,
-	organizationId?: string
+	organizationId?: string,
 ) => ({
 	id: generateId(),
 	createdAt: createdAt(),
@@ -294,7 +294,7 @@ export const fakeMaintenanceOrder = (
 	completedAt: faker.date.future(1),
 	title: faker.company.bs(),
 	description: faker.lorem.sentences(),
-	status: faker.helpers.arrayElement(["pending", "completed", "closed"]),
+	status: faker.helpers.arrayElement(['pending', 'completed', 'closed']),
 	portfolioId: portfolioId ?? generateId(),
 	organizationId: organizationId ?? generateId(),
 });

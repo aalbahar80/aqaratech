@@ -1,26 +1,26 @@
 {
-  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
-  "spaces": 2,
-  "generator-cli": {
-    "version": "openapi-generator-cli-6.1.0",
-    "storageDir": ".",
-    "generators": {
-      "fetch-client": {
-        "generatorName": "typescript-fetch",
-        "inputSpec": "./openapi.yaml",
-        "output": "../site/src/api/openapi",
-        "skipValidateSpec": true,
-        "additionalProperties": {
-          "supportsES6": true,
-          "typescriptThreePlus": true,
-          "nullSafeAdditionalProps": true,
-          "withInterfaces": true,
-          "prefixParameterInterfaces": true,
-          "disallowAdditionalPropertiesIfNotPresent": false,
-          "legacyDiscriminatorBehavior": false,
-          "withoutRuntimeChecks": true
-        }
-      }
-    }
-  }
+	"$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+	"spaces": 2,
+	"generator-cli": {
+		"version": "openapi-generator-cli-6.1.0",
+		"storageDir": ".",
+		"generators": {
+			"fetch-client": {
+				"generatorName": "typescript-fetch",
+				"inputSpec": "./openapi.yaml",
+				"output": "../site/src/api/openapi",
+				"skipValidateSpec": true,
+				"additionalProperties": {
+					"supportsES6": true,
+					"typescriptThreePlus": true,
+					"nullSafeAdditionalProps": true,
+					"withInterfaces": true,
+					"prefixParameterInterfaces": true,
+					"disallowAdditionalPropertiesIfNotPresent": false,
+					"legacyDiscriminatorBehavior": false,
+					"withoutRuntimeChecks": true
+				}
+			}
+		}
+	}
 }

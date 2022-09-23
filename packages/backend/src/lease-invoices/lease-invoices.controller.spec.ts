@@ -5,18 +5,18 @@ import { LeaseInvoicesController } from './lease-invoices.controller';
 import { LeaseInvoicesService } from './lease-invoices.service';
 
 describe('LeaseInvoicesController', () => {
-  let controller: LeaseInvoicesController;
+	let controller: LeaseInvoicesController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [LeaseInvoicesController],
-      providers: [LeaseInvoicesService, PrismaService, CaslAbilityFactory],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [LeaseInvoicesController],
+			providers: [LeaseInvoicesService, PrismaService, CaslAbilityFactory],
+		}).compile();
 
-    controller = module.get<LeaseInvoicesController>(LeaseInvoicesController);
-  });
+		controller = module.get<LeaseInvoicesController>(LeaseInvoicesController);
+	});
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(controller).toBeDefined();
+	});
 });

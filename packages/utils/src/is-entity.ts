@@ -1,5 +1,5 @@
-import { dbEntity, Entity, nonDbEntity } from "./entity";
-import { entitiesMap, URLName } from "./entity-map";
+import { dbEntity, Entity, nonDbEntity } from './entity';
+import { entitiesMap, URLName } from './entity-map';
 
 export function isEntity(str: any): str is Entity {
 	return dbEntity.includes(str) || nonDbEntity.includes(str);

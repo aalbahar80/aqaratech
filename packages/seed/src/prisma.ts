@@ -1,7 +1,7 @@
-import type { PrismaClient as PrismaClientType } from "@prisma/client";
+import type { PrismaClient as PrismaClientType } from '@prisma/client';
 // TODO avoid ts-ignore below by fixing tsconfig.json
 // @ts-ignore
-import pkg from "@prisma/client";
+import pkg from '@prisma/client';
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient({

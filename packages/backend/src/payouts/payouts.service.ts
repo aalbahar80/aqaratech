@@ -9,120 +9,120 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import {
-  CreatePayoutDto,
-  PayoutDto,
-  UpdatePayoutDto,
+	CreatePayoutDto,
+	PayoutDto,
+	UpdatePayoutDto,
 } from 'src/payouts/dto/payout.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PayoutsService {
-  constructor(private prisma: PrismaService) {}
-  SubjectType = 'Payout' as const;
+	constructor(private prisma: PrismaService) {}
+	SubjectType = 'Payout' as const;
 
-  async create({
-    createPayoutDto,
-    user,
-  }: {
-    createPayoutDto: CreatePayoutDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject(this.SubjectType, createPayoutDto),
-    );
+	async create({
+		createPayoutDto,
+		user,
+	}: {
+		createPayoutDto: CreatePayoutDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			subject(this.SubjectType, createPayoutDto),
+		);
 
-    const created = await this.prisma.payout.create({
-      data: createPayoutDto,
-    });
-    const payout = new PayoutDto(created);
+		const created = await this.prisma.payout.create({
+			data: createPayoutDto,
+		});
+		const payout = new PayoutDto(created);
 
-    return payout;
-  }
+		return payout;
+	}
 
-  async findAll({
-    pageOptionsDto,
-    user,
-    where,
-  }: {
-    pageOptionsDto: PageOptionsDto;
-    user: IUser;
-    where?: Prisma.PayoutWhereInput;
-  }): Promise<WithCount<PayoutDto>> {
-    const { page, take, orderBy, sortOrder } = pageOptionsDto;
+	async findAll({
+		pageOptionsDto,
+		user,
+		where,
+	}: {
+		pageOptionsDto: PageOptionsDto;
+		user: IUser;
+		where?: Prisma.PayoutWhereInput;
+	}): Promise<WithCount<PayoutDto>> {
+		const { page, take, orderBy, sortOrder } = pageOptionsDto;
 
-    const filter: Prisma.PayoutWhereInput = {
-      AND: [
-        accessibleBy(user.ability, Action.Read).Payout,
-        ...(where ? [where] : []),
-      ],
-    };
+		const filter: Prisma.PayoutWhereInput = {
+			AND: [
+				accessibleBy(user.ability, Action.Read).Payout,
+				...(where ? [where] : []),
+			],
+		};
 
-    const sort = orderBy
-      ? { [orderBy]: sortOrder }
-      : { createdAt: 'desc' as Prisma.SortOrder };
+		const sort = orderBy
+			? { [orderBy]: sortOrder }
+			: { createdAt: 'desc' as Prisma.SortOrder };
 
-    const [results, total] = await Promise.all([
-      this.prisma.payout.findMany({
-        take,
-        skip: (page - 1) * take,
-        orderBy: sort,
-        where: filter,
-        include: { portfolio: crumbs.portfolio },
-      }),
-      this.prisma.payout.count({ where: filter }),
-    ]);
+		const [results, total] = await Promise.all([
+			this.prisma.payout.findMany({
+				take,
+				skip: (page - 1) * take,
+				orderBy: sort,
+				where: filter,
+				include: { portfolio: crumbs.portfolio },
+			}),
+			this.prisma.payout.count({ where: filter }),
+		]);
 
-    return { total, results: results.map((p) => new PayoutDto(p)) };
-  }
+		return { total, results: results.map((p) => new PayoutDto(p)) };
+	}
 
-  async findOne({ id, user }: { id: string; user: IUser }) {
-    const payout = await this.prisma.payout.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Read).Payout],
-      },
-      include: { portfolio: crumbs.portfolio },
-    });
+	async findOne({ id, user }: { id: string; user: IUser }) {
+		const payout = await this.prisma.payout.findFirstOrThrow({
+			where: {
+				AND: [{ id }, accessibleBy(user.ability, Action.Read).Payout],
+			},
+			include: { portfolio: crumbs.portfolio },
+		});
 
-    return new PayoutDto(payout);
-  }
+		return new PayoutDto(payout);
+	}
 
-  async update({
-    id,
-    updatePayoutDto,
-    user,
-  }: {
-    id: string;
-    updatePayoutDto: UpdatePayoutDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(this.SubjectType, updatePayoutDto),
-    );
+	async update({
+		id,
+		updatePayoutDto,
+		user,
+	}: {
+		id: string;
+		updatePayoutDto: UpdatePayoutDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Update,
+			subject(this.SubjectType, updatePayoutDto),
+		);
 
-    const frisked = frisk({
-      user,
-      SubjectType: this.SubjectType,
-      instance: updatePayoutDto,
-    });
+		const frisked = frisk({
+			user,
+			SubjectType: this.SubjectType,
+			instance: updatePayoutDto,
+		});
 
-    const updated = await this.prisma.payout.update({
-      where: { id },
-      data: frisked,
-    });
-    const payout = new PayoutDto(updated);
+		const updated = await this.prisma.payout.update({
+			where: { id },
+			data: frisked,
+		});
+		const payout = new PayoutDto(updated);
 
-    return payout;
-  }
+		return payout;
+	}
 
-  async remove({ id, user }: { id: string; user: IUser }) {
-    await this.prisma.payout.findFirstOrThrow({
-      where: {
-        AND: [{ id }, accessibleBy(user.ability, Action.Delete).Payout],
-      },
-    });
-    const deleted = await this.prisma.payout.delete({ where: { id } });
-    return deleted.id;
-  }
+	async remove({ id, user }: { id: string; user: IUser }) {
+		await this.prisma.payout.findFirstOrThrow({
+			where: {
+				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Payout],
+			},
+		});
+		const deleted = await this.prisma.payout.delete({ where: { id } });
+		return deleted.id;
+	}
 }

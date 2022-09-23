@@ -1,18 +1,18 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+	Query,
 } from '@nestjs/common';
 import {
-  ApiCreatedResponse,
-  ApiHeader,
-  ApiOkResponse,
-  ApiTags,
+	ApiCreatedResponse,
+	ApiHeader,
+	ApiOkResponse,
+	ApiTags,
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -24,9 +24,9 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import {
-  CreatePayoutDto,
-  PayoutDto,
-  UpdatePayoutDto,
+	CreatePayoutDto,
+	PayoutDto,
+	UpdatePayoutDto,
 } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from './payouts.service';
 
@@ -37,50 +37,50 @@ const SubjectType = 'Payout';
 @ApiTags('payouts')
 @SwaggerAuth()
 export class PayoutsController {
-  constructor(private readonly payoutsService: PayoutsService) {}
+	constructor(private readonly payoutsService: PayoutsService) {}
 
-  @Post()
-  @CheckAbilities({ action: Action.Create, subject: SubjectType })
-  @ApiCreatedResponse({ type: PayoutDto })
-  create(
-    @User() user: IUser,
-    @Body() createPayoutDto: CreatePayoutDto,
-  ): Promise<PayoutDto> {
-    return this.payoutsService.create({ createPayoutDto, user });
-  }
+	@Post()
+	@CheckAbilities({ action: Action.Create, subject: SubjectType })
+	@ApiCreatedResponse({ type: PayoutDto })
+	create(
+		@User() user: IUser,
+		@Body() createPayoutDto: CreatePayoutDto,
+	): Promise<PayoutDto> {
+		return this.payoutsService.create({ createPayoutDto, user });
+	}
 
-  @Get()
-  @CheckAbilities({ action: Action.Read, subject: SubjectType })
-  @ApiPaginatedResponse(PayoutDto)
-  findAll(
-    @User() user: IUser,
-    @Query() pageOptionsDto: PageOptionsDto,
-  ): Promise<WithCount<PayoutDto>> {
-    return this.payoutsService.findAll({ pageOptionsDto, user });
-  }
+	@Get()
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiPaginatedResponse(PayoutDto)
+	findAll(
+		@User() user: IUser,
+		@Query() pageOptionsDto: PageOptionsDto,
+	): Promise<WithCount<PayoutDto>> {
+		return this.payoutsService.findAll({ pageOptionsDto, user });
+	}
 
-  @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: SubjectType })
-  @ApiOkResponse({ type: PayoutDto })
-  findOne(@User() user: IUser, @Param('id') id: string): Promise<PayoutDto> {
-    return this.payoutsService.findOne({ id, user });
-  }
+	@Get(':id')
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiOkResponse({ type: PayoutDto })
+	findOne(@User() user: IUser, @Param('id') id: string): Promise<PayoutDto> {
+		return this.payoutsService.findOne({ id, user });
+	}
 
-  @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: SubjectType })
-  @ApiOkResponse({ type: PayoutDto })
-  update(
-    @User() user: IUser,
-    @Param('id') id: string,
-    @Body() updatePayoutDto: UpdatePayoutDto,
-  ): Promise<PayoutDto> {
-    return this.payoutsService.update({ id, updatePayoutDto, user });
-  }
+	@Patch(':id')
+	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@ApiOkResponse({ type: PayoutDto })
+	update(
+		@User() user: IUser,
+		@Param('id') id: string,
+		@Body() updatePayoutDto: UpdatePayoutDto,
+	): Promise<PayoutDto> {
+		return this.payoutsService.update({ id, updatePayoutDto, user });
+	}
 
-  @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
-  @ApiOkResponse({ type: String })
-  remove(@User() user: IUser, @Param('id') id: string): Promise<string> {
-    return this.payoutsService.remove({ id, user });
-  }
+	@Delete(':id')
+	@CheckAbilities({ action: Action.Delete, subject: SubjectType })
+	@ApiOkResponse({ type: String })
+	remove(@User() user: IUser, @Param('id') id: string): Promise<string> {
+		return this.payoutsService.remove({ id, user });
+	}
 }

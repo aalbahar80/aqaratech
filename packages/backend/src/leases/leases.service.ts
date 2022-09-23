@@ -10,127 +10,127 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateManyLeaseInvoicesDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import {
-  CreateLeaseDto,
-  LeaseDto,
-  UpdateLeaseDto,
+	CreateLeaseDto,
+	LeaseDto,
+	UpdateLeaseDto,
 } from 'src/leases/dto/lease.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class LeasesService {
-  constructor(private readonly prisma: PrismaService) {}
-  SubjectType = 'Lease' as const;
+	constructor(private readonly prisma: PrismaService) {}
+	SubjectType = 'Lease' as const;
 
-  async create({
-    createLeaseDto,
-    user,
-  }: {
-    createLeaseDto: CreateLeaseDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject(this.SubjectType, createLeaseDto),
-    );
+	async create({
+		createLeaseDto,
+		user,
+	}: {
+		createLeaseDto: CreateLeaseDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			subject(this.SubjectType, createLeaseDto),
+		);
 
-    return this.prisma.lease.create({ data: createLeaseDto });
-  }
+		return this.prisma.lease.create({ data: createLeaseDto });
+	}
 
-  async findAll({
-    pageOptionsDto,
-    user,
-    where,
-  }: {
-    pageOptionsDto: PageOptionsDto;
-    user: IUser;
-    where?: Prisma.LeaseWhereInput;
-  }): Promise<WithCount<LeaseDto>> {
-    const { page, take, filter: qfilter } = pageOptionsDto;
+	async findAll({
+		pageOptionsDto,
+		user,
+		where,
+	}: {
+		pageOptionsDto: PageOptionsDto;
+		user: IUser;
+		where?: Prisma.LeaseWhereInput;
+	}): Promise<WithCount<LeaseDto>> {
+		const { page, take, filter: qfilter } = pageOptionsDto;
 
-    const filter: Prisma.LeaseWhereInput = {
-      AND: [accessibleBy(user.ability).Lease, ...(where ? [where] : [])],
-      ...qfilter,
-    };
+		const filter: Prisma.LeaseWhereInput = {
+			AND: [accessibleBy(user.ability).Lease, ...(where ? [where] : [])],
+			...qfilter,
+		};
 
-    const orderBy = pageOptionsDto.orderBy
-      ? { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder }
-      : { createdAt: 'desc' as Prisma.SortOrder };
+		const orderBy = pageOptionsDto.orderBy
+			? { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder }
+			: { createdAt: 'desc' as Prisma.SortOrder };
 
-    const [data, total] = await Promise.all([
-      this.prisma.lease.findMany({
-        take,
-        skip: (page - 1) * take,
-        where: filter,
-        orderBy,
-        include: {
-          tenant: crumbs.tenant,
-          unit: crumbs.unit,
-        },
-      }),
-      this.prisma.lease.count({ where: filter }),
-    ]);
+		const [data, total] = await Promise.all([
+			this.prisma.lease.findMany({
+				take,
+				skip: (page - 1) * take,
+				where: filter,
+				orderBy,
+				include: {
+					tenant: crumbs.tenant,
+					unit: crumbs.unit,
+				},
+			}),
+			this.prisma.lease.count({ where: filter }),
+		]);
 
-    return { total, results: data.map((l) => new LeaseDto(l)) };
-  }
+		return { total, results: data.map((l) => new LeaseDto(l)) };
+	}
 
-  async findOne({ id }: { id: string }) {
-    const data = await this.prisma.lease.findUniqueOrThrow({
-      where: { id },
-      include: {
-        tenant: crumbs.tenant,
-        unit: crumbs.unit,
-      },
-    });
-    return new LeaseDto(data);
-  }
+	async findOne({ id }: { id: string }) {
+		const data = await this.prisma.lease.findUniqueOrThrow({
+			where: { id },
+			include: {
+				tenant: crumbs.tenant,
+				unit: crumbs.unit,
+			},
+		});
+		return new LeaseDto(data);
+	}
 
-  async update({
-    id,
-    updateLeaseDto,
-    user,
-  }: {
-    id: string;
-    updateLeaseDto: UpdateLeaseDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(this.SubjectType, updateLeaseDto),
-    );
+	async update({
+		id,
+		updateLeaseDto,
+		user,
+	}: {
+		id: string;
+		updateLeaseDto: UpdateLeaseDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Update,
+			subject(this.SubjectType, updateLeaseDto),
+		);
 
-    const frisked = frisk({
-      user,
-      SubjectType: this.SubjectType,
-      instance: updateLeaseDto,
-    });
+		const frisked = frisk({
+			user,
+			SubjectType: this.SubjectType,
+			instance: updateLeaseDto,
+		});
 
-    return this.prisma.lease.update({ where: { id }, data: frisked });
-  }
+		return this.prisma.lease.update({ where: { id }, data: frisked });
+	}
 
-  async remove({ id }: { id: string }) {
-    const deleted = await this.prisma.lease.delete({ where: { id } });
-    return deleted.id;
-  }
+	async remove({ id }: { id: string }) {
+		const deleted = await this.prisma.lease.delete({ where: { id } });
+		return deleted.id;
+	}
 
-  // ::: INVOICES :::
+	// ::: INVOICES :::
 
-  async createInvoices({
-    leaseId,
-    createManyLeaseInvoicesDto,
-  }: {
-    leaseId: string;
-    createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[];
-  }) {
-    const updated = await this.prisma.lease.update({
-      where: { id: leaseId },
-      data: {
-        leaseInvoices: {
-          createMany: {
-            data: createManyLeaseInvoicesDto,
-          },
-        },
-      },
-    });
-    return updated.id;
-  }
+	async createInvoices({
+		leaseId,
+		createManyLeaseInvoicesDto,
+	}: {
+		leaseId: string;
+		createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[];
+	}) {
+		const updated = await this.prisma.lease.update({
+			where: { id: leaseId },
+			data: {
+				leaseInvoices: {
+					createMany: {
+						data: createManyLeaseInvoicesDto,
+					},
+				},
+			},
+		});
+		return updated.id;
+	}
 }

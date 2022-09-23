@@ -1,5 +1,5 @@
 export enum PaidStatus {
-  ALL = 'all',
-  PAID = 'paid',
-  UNPAID = 'unpaid',
+	ALL = 'all',
+	PAID = 'paid',
+	UNPAID = 'unpaid',
 }

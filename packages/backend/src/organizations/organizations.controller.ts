@@ -1,19 +1,19 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-  UseGuards,
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+	Query,
+	UseGuards,
 } from '@nestjs/common';
 import {
-  ApiCreatedResponse,
-  ApiHeader,
-  ApiOkResponse,
-  ApiTags,
+	ApiCreatedResponse,
+	ApiHeader,
+	ApiOkResponse,
+	ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
@@ -33,10 +33,10 @@ import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
 import {
-  CreateOrganizationDto,
-  OrganizationCreatedDto,
-  OrganizationDto,
-  UpdateOrganizationDto,
+	CreateOrganizationDto,
+	OrganizationCreatedDto,
+	OrganizationDto,
+	UpdateOrganizationDto,
 } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
@@ -47,95 +47,95 @@ const SubjectType = 'Organization';
 @ApiTags('organizations')
 @SwaggerAuth()
 export class OrganizationsController {
-  constructor(
-    private readonly organizationsService: OrganizationsService,
-    private rolesService: RolesService,
-    private readonly searchService: SearchService,
-  ) {}
+	constructor(
+		private readonly organizationsService: OrganizationsService,
+		private rolesService: RolesService,
+		private readonly searchService: SearchService,
+	) {}
 
-  @Post()
-  // No need to check abilities here. Any authenticated user can create an organization.
-  @SkipAbilityCheck()
-  @ApiCreatedResponse({ type: OrganizationCreatedDto })
-  create(
-    @UserBasic() user: AuthenticatedUser,
-    @Body() createOrganizationDto: CreateOrganizationDto,
-  ): Promise<OrganizationCreatedDto> {
-    // also returns the roleId for the created organization admin
-    return this.organizationsService.create({ createOrganizationDto, user });
-  }
+	@Post()
+	// No need to check abilities here. Any authenticated user can create an organization.
+	@SkipAbilityCheck()
+	@ApiCreatedResponse({ type: OrganizationCreatedDto })
+	create(
+		@UserBasic() user: AuthenticatedUser,
+		@Body() createOrganizationDto: CreateOrganizationDto,
+	): Promise<OrganizationCreatedDto> {
+		// also returns the roleId for the created organization admin
+		return this.organizationsService.create({ createOrganizationDto, user });
+	}
 
-  @Get()
-  @SkipAbilityCheck()
-  @UseGuards(AqaratechStaffGuard)
-  @ApiPaginatedResponse(OrganizationDto)
-  findAll(): Promise<WithCount<OrganizationDto>> {
-    return this.organizationsService.findAll();
-  }
+	@Get()
+	@SkipAbilityCheck()
+	@UseGuards(AqaratechStaffGuard)
+	@ApiPaginatedResponse(OrganizationDto)
+	findAll(): Promise<WithCount<OrganizationDto>> {
+		return this.organizationsService.findAll();
+	}
 
-  @Get(':id')
-  @CheckAbilities({ action: Action.Read, subject: SubjectType })
-  @ApiOkResponse({ type: OrganizationDto })
-  findOne(
-    @User() user: IUser,
-    @Param('id') id: string,
-  ): Promise<OrganizationDto> {
-    return this.organizationsService.findOne({ id, user });
-  }
+	@Get(':id')
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiOkResponse({ type: OrganizationDto })
+	findOne(
+		@User() user: IUser,
+		@Param('id') id: string,
+	): Promise<OrganizationDto> {
+		return this.organizationsService.findOne({ id, user });
+	}
 
-  @Patch(':id')
-  @CheckAbilities({ action: Action.Update, subject: SubjectType })
-  @ApiOkResponse({ type: String })
-  update(
-    @User() user: IUser,
-    @Param('id') id: string,
-    @Body() updateOrganizationDto: UpdateOrganizationDto,
-  ): Promise<string> {
-    return this.organizationsService.update({
-      id,
-      updateOrganizationDto,
-      user,
-    });
-  }
+	@Patch(':id')
+	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@ApiOkResponse({ type: String })
+	update(
+		@User() user: IUser,
+		@Param('id') id: string,
+		@Body() updateOrganizationDto: UpdateOrganizationDto,
+	): Promise<string> {
+		return this.organizationsService.update({
+			id,
+			updateOrganizationDto,
+			user,
+		});
+	}
 
-  @Delete(':id')
-  @CheckAbilities({ action: Action.Delete, subject: SubjectType })
-  @ApiOkResponse({ type: OrganizationDto })
-  remove(
-    @User() user: IUser,
-    @Param('id') id: string,
-  ): Promise<OrganizationDto> {
-    return this.organizationsService.remove({ id, user });
-  }
+	@Delete(':id')
+	@CheckAbilities({ action: Action.Delete, subject: SubjectType })
+	@ApiOkResponse({ type: OrganizationDto })
+	remove(
+		@User() user: IUser,
+		@Param('id') id: string,
+	): Promise<OrganizationDto> {
+		return this.organizationsService.remove({ id, user });
+	}
 
-  // ### ROLES ###
+	// ### ROLES ###
 
-  @Get(':id/roles')
-  @CheckAbilities(
-    { action: Action.Read, subject: SubjectType },
-    { action: Action.Read, subject: 'Role' },
-  )
-  @ApiPaginatedResponse(RoleDto)
-  findRoles(
-    @User() user: IUser,
-    @Query() pageOptionsDto: PageOptionsDto,
-    @Param('id') id: string,
-  ): Promise<WithCount<RoleDto>> {
-    const where: Prisma.RoleWhereInput = {
-      organizationId: id,
-      roleType: 'ORGADMIN',
-    };
-    return this.rolesService.findAll({ user, pageOptionsDto, where });
-  }
+	@Get(':id/roles')
+	@CheckAbilities(
+		{ action: Action.Read, subject: SubjectType },
+		{ action: Action.Read, subject: 'Role' },
+	)
+	@ApiPaginatedResponse(RoleDto)
+	findRoles(
+		@User() user: IUser,
+		@Query() pageOptionsDto: PageOptionsDto,
+		@Param('id') id: string,
+	): Promise<WithCount<RoleDto>> {
+		const where: Prisma.RoleWhereInput = {
+			organizationId: id,
+			roleType: 'ORGADMIN',
+		};
+		return this.rolesService.findAll({ user, pageOptionsDto, where });
+	}
 
-  @Get(':id/search')
-  @CheckAbilities({ action: Action.Manage, subject: SubjectType })
-  @ApiOkResponse({ type: SearchDto, isArray: true })
-  search(
-    @User() user: IUser,
-    @Param('id') id: string,
-    @Query('query') query: string,
-  ): Promise<SearchDto[]> {
-    return this.searchService.search({ query, organizationId: id, user });
-  }
+	@Get(':id/search')
+	@CheckAbilities({ action: Action.Manage, subject: SubjectType })
+	@ApiOkResponse({ type: SearchDto, isArray: true })
+	search(
+		@User() user: IUser,
+		@Param('id') id: string,
+		@Query('query') query: string,
+	): Promise<SearchDto[]> {
+		return this.searchService.search({ query, organizationId: id, user });
+	}
 }

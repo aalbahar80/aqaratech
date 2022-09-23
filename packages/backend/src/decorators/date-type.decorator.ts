@@ -22,49 +22,49 @@ import { IsDate, isISO8601, IsOptional } from 'class-validator';
  * 2. Class-transformer will convert it to Date since we're using `Type(() => Date)`.
  */
 export function DateType(required = true, readOnly = false): PropertyDecorator {
-  return applyDecorators(
-    // 1. Transform
-    Transform(
-      (p) => {
-        if (
-          // pending bug: strict option not being respected
-          // https://github.com/typestack/class-validator/issues/1061
-          // https://github.com/validatorjs/validator.js/issues/2003
-          isISO8601(p.value, { strict: true }) &&
-          typeof p.value === 'string' &&
-          p.value.length > 10 &&
-          !p.value.endsWith('00:00:00.000Z')
-        ) {
-          console.warn(
-            'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
-            { key: p.key, value: p.value, obj: p.obj },
-          );
-        }
+	return applyDecorators(
+		// 1. Transform
+		Transform(
+			(p) => {
+				if (
+					// pending bug: strict option not being respected
+					// https://github.com/typestack/class-validator/issues/1061
+					// https://github.com/validatorjs/validator.js/issues/2003
+					isISO8601(p.value, { strict: true }) &&
+					typeof p.value === 'string' &&
+					p.value.length > 10 &&
+					!p.value.endsWith('00:00:00.000Z')
+				) {
+					console.warn(
+						'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
+						{ key: p.key, value: p.value, obj: p.obj },
+					);
+				}
 
-        if (isISO8601(p.value)) {
-          return new Date(p.value);
-        } else if (p.value === null || p.value === undefined) {
-          console.log('DateType: null or undefined');
-          return p.value;
-        } else if (typeof p.value === 'string' && required) {
-          // client sends string, but it's not ISO8601. Reject it because it's required.
-          throw new BadRequestException(`Invalid date: ${p.key}: ${p.value}`);
-        } else if (typeof p.value === 'string' && !required) {
-          // tranform it to null. Most commonly this will be an empty string.
-          return null;
-        } else {
-          return p.value;
-        }
-      },
-      { toClassOnly: true },
-    ),
+				if (isISO8601(p.value)) {
+					return new Date(p.value);
+				} else if (p.value === null || p.value === undefined) {
+					console.log('DateType: null or undefined');
+					return p.value;
+				} else if (typeof p.value === 'string' && required) {
+					// client sends string, but it's not ISO8601. Reject it because it's required.
+					throw new BadRequestException(`Invalid date: ${p.key}: ${p.value}`);
+				} else if (typeof p.value === 'string' && !required) {
+					// tranform it to null. Most commonly this will be an empty string.
+					return null;
+				} else {
+					return p.value;
+				}
+			},
+			{ toClassOnly: true },
+		),
 
-    // 2. Validate
-    ...(required ? [] : [IsOptional()]),
-    IsDate(),
-    ApiProperty({
-      type: 'string',
-      ...(readOnly ? { readOnly: true } : {}),
-    }),
-  );
+		// 2. Validate
+		...(required ? [] : [IsOptional()]),
+		IsDate(),
+		ApiProperty({
+			type: 'string',
+			...(readOnly ? { readOnly: true } : {}),
+		}),
+	);
 }

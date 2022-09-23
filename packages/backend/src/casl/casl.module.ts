@@ -6,12 +6,12 @@ import { CaslAbilityFactory } from './casl-ability.factory';
 
 @Global()
 @Module({
-  providers: [
-    CaslAbilityFactory,
-    OrgAdminAbility,
-    PortfolioAbility,
-    TenantAbility,
-  ],
-  exports: [CaslAbilityFactory],
+	providers: [
+		CaslAbilityFactory,
+		OrgAdminAbility,
+		PortfolioAbility,
+		TenantAbility,
+	],
+	exports: [CaslAbilityFactory],
 })
 export class CaslModule {}

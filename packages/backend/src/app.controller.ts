@@ -6,11 +6,11 @@ import { AppService } from './app.service';
 @Controller()
 @SwaggerAuth()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+	constructor(private readonly appService: AppService) {}
 
-  @Public()
-  @Get()
-  getHello(): string {
-    return 'ok';
-  }
+	@Public()
+	@Get()
+	getHello(): string {
+		return 'ok';
+	}
 }

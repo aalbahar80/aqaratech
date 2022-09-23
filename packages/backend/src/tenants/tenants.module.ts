@@ -6,9 +6,9 @@ import { TenantsController } from './tenants.controller';
 import { TenantsService } from './tenants.service';
 
 @Module({
-  controllers: [TenantsController],
-  providers: [TenantsService],
-  exports: [TenantsService],
-  imports: [RolesModule, LeaseInvoicesModule, forwardRef(() => LeasesModule)],
+	controllers: [TenantsController],
+	providers: [TenantsService],
+	exports: [TenantsService],
+	imports: [RolesModule, LeaseInvoicesModule, forwardRef(() => LeasesModule)],
 })
 export class TenantsModule {}

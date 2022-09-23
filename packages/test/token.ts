@@ -1,4 +1,4 @@
-import { test as base } from "@playwright/test";
+import { test as base } from '@playwright/test';
 
 type MyFixtures = {
 	token: string;
@@ -12,8 +12,8 @@ export const test = base.extend<MyFixtures>({
 	token: async ({}, use) => {
 		let token: string;
 		try {
-			const cookies = (await import("./storageState.json")).cookies;
-			token = cookies.find((c) => c.name === "accessToken").value;
+			const cookies = (await import('./storageState.json')).cookies;
+			token = cookies.find((c) => c.name === 'accessToken').value;
 		} catch (e) {
 			console.log(e);
 		}
@@ -21,4 +21,4 @@ export const test = base.extend<MyFixtures>({
 	},
 });
 
-export { expect } from "@playwright/test";
+export { expect } from '@playwright/test';

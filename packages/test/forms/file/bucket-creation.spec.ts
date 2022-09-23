@@ -1,3 +1,3 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 
-test.skip("buckets are created if missing", async ({ request }) => {});
+test.skip('buckets are created if missing', async ({ request }) => {});

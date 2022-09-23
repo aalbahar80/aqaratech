@@ -5,18 +5,18 @@ import { PortfoliosController } from './portfolios.controller';
 import { PortfoliosService } from './portfolios.service';
 
 describe('PortfoliosController', () => {
-  let controller: PortfoliosController;
+	let controller: PortfoliosController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [PortfoliosController],
-      providers: [PortfoliosService, PrismaService, CaslAbilityFactory],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [PortfoliosController],
+			providers: [PortfoliosService, PrismaService, CaslAbilityFactory],
+		}).compile();
 
-    controller = module.get<PortfoliosController>(PortfoliosController);
-  });
+		controller = module.get<PortfoliosController>(PortfoliosController);
+	});
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(controller).toBeDefined();
+	});
 });

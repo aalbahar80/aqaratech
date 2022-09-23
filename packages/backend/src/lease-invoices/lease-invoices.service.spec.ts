@@ -4,17 +4,17 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { LeaseInvoicesService } from './lease-invoices.service';
 
 describe('LeaseInvoicesService', () => {
-  let service: LeaseInvoicesService;
+	let service: LeaseInvoicesService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [LeaseInvoicesService, PrismaService, CaslAbilityFactory],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			providers: [LeaseInvoicesService, PrismaService, CaslAbilityFactory],
+		}).compile();
 
-    service = module.get<LeaseInvoicesService>(LeaseInvoicesService);
-  });
+		service = module.get<LeaseInvoicesService>(LeaseInvoicesService);
+	});
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(service).toBeDefined();
+	});
 });

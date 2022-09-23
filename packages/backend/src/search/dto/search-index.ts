@@ -4,24 +4,24 @@ import { PropertySearchDocument } from 'src/properties/dto/property-search-docum
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 export type InitIndexParams =
-  | {
-      indexName: typeof entitiesMap['tenant']['title'];
-      searchableAttributes: (keyof TenantSearchDocument)[];
-    }
-  | {
-      indexName: typeof entitiesMap['portfolio']['title'];
-      searchableAttributes: (keyof PortfolioSearchDocument)[];
-    }
-  | {
-      indexName: typeof entitiesMap['property']['title'];
-      searchableAttributes: (keyof PropertySearchDocument)[];
-    };
+	| {
+			indexName: typeof entitiesMap['tenant']['title'];
+			searchableAttributes: (keyof TenantSearchDocument)[];
+	  }
+	| {
+			indexName: typeof entitiesMap['portfolio']['title'];
+			searchableAttributes: (keyof PortfolioSearchDocument)[];
+	  }
+	| {
+			indexName: typeof entitiesMap['property']['title'];
+			searchableAttributes: (keyof PropertySearchDocument)[];
+	  };
 
 export type ExtractParams<T> = Extract<
-  InitIndexParams,
-  { indexName: T }
+	InitIndexParams,
+	{ indexName: T }
 > extends {
-  searchableAttributes: infer P;
+	searchableAttributes: infer P;
 }
-  ? [indexName: T, searchableAttributes: P]
-  : [indexName: T];
+	? [indexName: T, searchableAttributes: P]
+	: [indexName: T];

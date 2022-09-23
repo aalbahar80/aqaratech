@@ -2,10 +2,10 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import {
-  ApiCreatedResponse,
-  ApiHeader,
-  ApiOkResponse,
-  ApiTags,
+	ApiCreatedResponse,
+	ApiHeader,
+	ApiOkResponse,
+	ApiTags,
 } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
@@ -22,39 +22,39 @@ import { RolesService } from './roles.service';
 @Controller('roles')
 @ApiTags('roles')
 export class RolesController {
-  constructor(
-    private readonly rolesService: RolesService,
-    private readonly eventEmitter: EventEmitter2,
-  ) {}
+	constructor(
+		private readonly rolesService: RolesService,
+		private readonly eventEmitter: EventEmitter2,
+	) {}
 
-  @Post()
-  // return email string?
-  @CheckAbilities({ action: Action.Create, subject: 'Role' })
-  @ApiCreatedResponse({ type: UserDto })
-  create(
-    @User() user: IUser,
-    @Body(new RoleValidationPipe()) createRoleDto: CreateRoleDto,
-  ) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Create,
-      subject('Role', createRoleDto),
-    );
-    return this.rolesService.create({ createRoleDto, user });
-  }
+	@Post()
+	// return email string?
+	@CheckAbilities({ action: Action.Create, subject: 'Role' })
+	@ApiCreatedResponse({ type: UserDto })
+	create(
+		@User() user: IUser,
+		@Body(new RoleValidationPipe()) createRoleDto: CreateRoleDto,
+	) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			subject('Role', createRoleDto),
+		);
+		return this.rolesService.create({ createRoleDto, user });
+	}
 
-  @CheckAbilities({ action: Action.Delete, subject: 'Role' })
-  @ApiOkResponse({ type: String })
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<string> {
-    return this.rolesService.remove(id);
-  }
+	@CheckAbilities({ action: Action.Delete, subject: 'Role' })
+	@ApiOkResponse({ type: String })
+	@Delete(':id')
+	remove(@Param('id') id: string): Promise<string> {
+		return this.rolesService.remove(id);
+	}
 
-  @CheckAbilities({ action: Action.Manage, subject: 'Role' })
-  @Post(':id/send-invite')
-  sendInvite(@User() user: IUser, @Param('id') id: string) {
-    this.eventEmitter.emit(
-      'role.created',
-      new RoleCreatedEvent(id, user.email),
-    );
-  }
+	@CheckAbilities({ action: Action.Manage, subject: 'Role' })
+	@Post(':id/send-invite')
+	sendInvite(@User() user: IUser, @Param('id') id: string) {
+		this.eventEmitter.emit(
+			'role.created',
+			new RoleCreatedEvent(id, user.email),
+		);
+	}
 }

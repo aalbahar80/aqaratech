@@ -1,9 +1,9 @@
-import { sample, testOrgRoleId } from "@self/seed";
-import { expect, test } from "../../token";
+import { sample, testOrgRoleId } from '@self/seed';
+import { expect, test } from '../../token';
 
 test.use({
 	extraHTTPHeaders: {
-		"x-role-id": testOrgRoleId,
+		'x-role-id': testOrgRoleId,
 	},
 });
 
@@ -14,7 +14,7 @@ test(`can't be created without orgId`, async ({ request, token }) => {
 	const res = await request.post(`/tenants`, {
 		headers: { Authorization: `Bearer ${token}` },
 		data: {
-			fullName: "Test Tenant",
+			fullName: 'Test Tenant',
 		},
 	});
 
@@ -38,7 +38,7 @@ test(`can be created with minimal fields`, async ({ request, token }) => {
 	const res = await request.post(`/tenants`, {
 		headers: { Authorization: `Bearer ${token}` },
 		data: {
-			fullName: "Test Tenant",
+			fullName: 'Test Tenant',
 			organizationId,
 		},
 	});
@@ -52,7 +52,7 @@ test(`can update fullName only`, async ({ request, token }) => {
 		headers: { Authorization: `Bearer ${token}` },
 		data: {
 			organizationId,
-			fullName: "Test Tenant",
+			fullName: 'Test Tenant',
 		},
 	});
 
@@ -64,7 +64,7 @@ test(`can update single field only`, async ({ request, token }) => {
 		headers: { Authorization: `Bearer ${token}` },
 		data: {
 			organizationId,
-			label: "Test Tenant label",
+			label: 'Test Tenant label',
 		},
 	});
 
@@ -77,6 +77,6 @@ test(`returns title field`, async ({ request, token }) => {
 	});
 
 	const data = await res.json();
-	expect.soft(data).toHaveProperty("fullName");
-	expect(data).toHaveProperty("title");
+	expect.soft(data).toHaveProperty('fullName');
+	expect(data).toHaveProperty('title');
 });

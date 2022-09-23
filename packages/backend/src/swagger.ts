@@ -22,93 +22,93 @@ import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categori
 import { AppModule } from './app.module';
 
 export const setupSwagger = async (app: INestApplication) => {
-  const config = new DocumentBuilder()
-    .setTitle('Aqaratech API')
-    .setDescription('The Aqratech API description')
-    .setVersion('1.0')
-    .addTag('aqaratech')
-    // first server will be the default one in generated sdk
-    .addServer('http://localhost:3002')
-    // .setBasePath('/api')
-    // .addBearerAuth()
-    .addSecurityRequirements('oauth-swagger')
-    .addOAuth2(
-      {
-        type: 'oauth2',
-        // scheme: 'Bearer',
-        flows: {
-          authorizationCode: {
-            authorizationUrl:
-              'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
-            tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
-            scopes: {
-              'openid profile email': 'default scope',
-              openid:
-                "to indicate that the application intends to use OIDC to verify the user's identity",
-              profile: 'to get name, nickname, and picture',
-              email: 'to get email and email_verified',
-            },
-          },
-        },
-      },
-      'oauth-swagger',
-    )
-    .build();
+	const config = new DocumentBuilder()
+		.setTitle('Aqaratech API')
+		.setDescription('The Aqratech API description')
+		.setVersion('1.0')
+		.addTag('aqaratech')
+		// first server will be the default one in generated sdk
+		.addServer('http://localhost:3002')
+		// .setBasePath('/api')
+		// .addBearerAuth()
+		.addSecurityRequirements('oauth-swagger')
+		.addOAuth2(
+			{
+				type: 'oauth2',
+				// scheme: 'Bearer',
+				flows: {
+					authorizationCode: {
+						authorizationUrl:
+							'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
+						tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
+						scopes: {
+							'openid profile email': 'default scope',
+							openid:
+								"to indicate that the application intends to use OIDC to verify the user's identity",
+							profile: 'to get name, nickname, and picture',
+							email: 'to get email and email_verified',
+						},
+					},
+				},
+			},
+			'oauth-swagger',
+		)
+		.build();
 
-  const document = SwaggerModule.createDocument(app, config, {
-    include: [
-      AppModule,
-      UsersModule,
-      TenantsModule,
-      PortfoliosModule,
-      PropertiesModule,
-      UnitsModule,
-      LeasesModule,
-      LeaseInvoicesModule,
-      ExpensesModule,
-      SearchModule,
-      RolesModule,
-      OrganizationsModule,
-      AggregateModule,
-      ExpenseCategoriesModule,
-      FilesModule,
-      PayoutsModule,
-    ],
-    extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
-    ignoreGlobalPrefix: true,
+	const document = SwaggerModule.createDocument(app, config, {
+		include: [
+			AppModule,
+			UsersModule,
+			TenantsModule,
+			PortfoliosModule,
+			PropertiesModule,
+			UnitsModule,
+			LeasesModule,
+			LeaseInvoicesModule,
+			ExpensesModule,
+			SearchModule,
+			RolesModule,
+			OrganizationsModule,
+			AggregateModule,
+			ExpenseCategoriesModule,
+			FilesModule,
+			PayoutsModule,
+		],
+		extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
+		ignoreGlobalPrefix: true,
 
-    operationIdFactory(controllerKey, methodKey) {
-      return methodKey;
-    },
-  });
+		operationIdFactory(controllerKey, methodKey) {
+			return methodKey;
+		},
+	});
 
-  try {
-    console.log('Setting up swagger...');
-    const { dump } = await import('js-yaml');
-    // For consumption of swagger-ui
-    writeFileSync(
-      './openapi.yaml',
-      dump(document, {
-        // schema: 'http://json-schema.org/draft-04/schema#',
-      }),
-    );
+	try {
+		console.log('Setting up swagger...');
+		const { dump } = await import('js-yaml');
+		// For consumption of swagger-ui
+		writeFileSync(
+			'./openapi.yaml',
+			dump(document, {
+				// schema: 'http://json-schema.org/draft-04/schema#',
+			}),
+		);
 
-    SwaggerModule.setup('swagger', app, document, {
-      swaggerOptions: {
-        // https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
-        oauth: {
-          clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-          clientSecret:
-            'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
-          scopes: ['openid', 'profile', 'email'], // default scopes to request
-        },
-        persistAuthorization: true,
-      },
-    });
-  } catch (e) {
-    console.error('Could not write swagger file');
-    console.error(e);
-  }
+		SwaggerModule.setup('swagger', app, document, {
+			swaggerOptions: {
+				// https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
+				oauth: {
+					clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
+					clientSecret:
+						'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
+					scopes: ['openid', 'profile', 'email'], // default scopes to request
+				},
+				persistAuthorization: true,
+			},
+		});
+	} catch (e) {
+		console.error('Could not write swagger file');
+		console.error(e);
+	}
 
-  return document;
+	return document;
 };

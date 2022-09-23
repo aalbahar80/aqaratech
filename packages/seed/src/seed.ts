@@ -1,8 +1,8 @@
-import { faker } from "@faker-js/faker";
-import { Payout } from "@prisma/client";
-import { addDays } from "date-fns";
-import { config } from "dotenv";
-import { inspect } from "util";
+import { faker } from '@faker-js/faker';
+import { Payout } from '@prisma/client';
+import { addDays } from 'date-fns';
+import { config } from 'dotenv';
+import { inspect } from 'util';
 import {
 	fakeExpense,
 	fakeLease,
@@ -16,12 +16,12 @@ import {
 	fakeUnit,
 	testOrgId,
 	timespan,
-} from "./generators.js";
-import prisma from "./prisma.js";
-import { sample } from "./sample-data.js";
+} from './generators.js';
+import prisma from './prisma.js';
+import { sample } from './sample-data.js';
 
 config({
-	path: "../backend/prisma/.env",
+	path: '../backend/prisma/.env',
 });
 
 const randId = <T extends { id: string }>(entities: T[]): string => {
@@ -57,7 +57,7 @@ export async function seed({
 
 	const portfolios: any[] = [];
 	const randomPortfolios = Array.from({ length: portfolioCount }, () =>
-		fakePortfolio(testOrgId)
+		fakePortfolio(testOrgId),
 	);
 	portfolios.push(...(randomPortfolios as any));
 
@@ -67,16 +67,16 @@ export async function seed({
 			{
 				length: faker.datatype.number({ min: propertyMin, max: propertyMax }),
 			},
-			() => fakeProperty(portfolio.id, portfolio.organizationId)
-		)
+			() => fakeProperty(portfolio.id, portfolio.organizationId),
+		),
 	);
 	properties.push(...(randomProperties as any));
 
 	const units: any[] = [];
 	const randomUnits = properties.flatMap((property) =>
 		Array.from({ length: faker.datatype.number({ min, max: unitMax }) }, () =>
-			fakeUnit(property.id, property.portfolioId, property.organizationId)
-		)
+			fakeUnit(property.id, property.portfolioId, property.organizationId),
+		),
 	);
 	units.push(...(randomUnits as any));
 
@@ -84,10 +84,10 @@ export async function seed({
 	const leases: ReturnType<typeof fakeLease>[] = [];
 	units.forEach((unit, idx) => {
 		const unitPortfolioId = properties.find(
-			(p) => p.id === unit.propertyId
+			(p) => p.id === unit.propertyId,
 		)!.portfolioId;
 		const unitOrganizationId = portfolios.find(
-			(o) => o.id === unitPortfolioId
+			(o) => o.id === unitPortfolioId,
 		)!.organizationId;
 
 		let date = new Date();
@@ -105,7 +105,7 @@ export async function seed({
 				unit.id,
 				date,
 				unit.portfolioId,
-				unit.organizationId
+				unit.organizationId,
 			);
 			leases.push({ ...leaseN });
 
@@ -144,9 +144,9 @@ export async function seed({
 						lease.start,
 						n,
 						lease.portfolioId,
-						lease.organizationId
-					)
-				)
+						lease.organizationId,
+					),
+				),
 		  )
 		: [];
 	leaseInvoices.push(...(randomLeaseInvoices as any));
@@ -204,12 +204,12 @@ export async function seed({
 		for (let i = 0; i < expenseCount; i++) {
 			const expense = fakeExpense();
 			const ownProperties = properties.filter(
-				(p) => p.portfolioId === portfolio.id
+				(p) => p.portfolioId === portfolio.id,
 			);
 			const randomProperty =
 				ownProperties[faker.datatype.number(ownProperties.length - 1)];
 			const randomPropertyUnits = units.filter(
-				(u) => u.propertyId === randomProperty?.id
+				(u) => u.propertyId === randomProperty?.id,
 			);
 			const randomUnit =
 				randomPropertyUnits[
@@ -254,21 +254,21 @@ export async function seed({
 
 	// count the number of tenants with a lease
 	const tenantsWithLease = tenants.filter((tenant) =>
-		leases.find((lease) => lease.tenantId === tenant.id)
+		leases.find((lease) => lease.tenantId === tenant.id),
 	).length;
 	const homelessTenantCount = tenants.filter(
-		(tenant) => !leases.find((lease) => lease.tenantId === tenant.id)
+		(tenant) => !leases.find((lease) => lease.tenantId === tenant.id),
 	).length;
 
 	const portfoliosWithProperty = portfolios.filter((portfolio) =>
-		properties.find((property) => property.portfolioId === portfolio.id)
+		properties.find((property) => property.portfolioId === portfolio.id),
 	).length;
 	const propsWithUnit = properties.filter((property) =>
-		units.find((unit) => unit.propertyId === property.id)
+		units.find((unit) => unit.propertyId === property.id),
 	).length;
 
 	const unitsWithLease = units.filter((unit) =>
-		leases.find((lease) => lease.unitId === unit.id)
+		leases.find((lease) => lease.unitId === unit.id),
 	).length;
 
 	console.log(`${tenantsWithLease} tenants with a lease`);
@@ -277,7 +277,7 @@ export async function seed({
 	console.log(`${propsWithUnit} properties with a unit`);
 	console.log(`${unitsWithLease} units with a lease`);
 
-	console.log("Seeding to database:", process.env.DATABASE_URL);
+	console.log('Seeding to database:', process.env.DATABASE_URL);
 	const summary = `Totals: \n ${users.length} users \n ${organizations.length} organizations \n ${portfolios.length} portfolios \n ${properties.length} properties \n ${units.length} units \n ${tenants.length} tenants \n ${leases.length} leases \n ${leaseInvoices.length} leaseInvoices \n ${maintenanceOrders.length} maintenance orders \n ${expenses.length} expenses \n ${payouts.length} payouts`;
 	console.log(summary);
 
@@ -294,21 +294,21 @@ export async function seed({
 					maintenanceOrders,
 					expenses,
 				},
-				{ showHidden: false, depth: null, colors: true }
-			)
+				{ showHidden: false, depth: null, colors: true },
+			),
 		);
-		console.log("Sample printed, nothing done to database.");
+		console.log('Sample printed, nothing done to database.');
 		console.log(summary);
 		return;
 	} else {
-		console.log("Done generating fake data.");
+		console.log('Done generating fake data.');
 	}
 
 	try {
 		console.log(`preparing to insert...`);
 		// TODO add a NODE_ENV check to only run this in development
 
-		console.time("insert");
+		console.time('insert');
 		await prisma.user.createMany({ data: users });
 		await prisma.organization.createMany({ data: organizations });
 		await prisma.organizationSettings.createMany({
@@ -344,7 +344,7 @@ export async function seed({
 		};
 
 		if (leaseInvoices.length) {
-			console.time("leaseInvoices created");
+			console.time('leaseInvoices created');
 			// split the maintenance orders into chunks of 10
 			const leaseInvoicesChunks = split(leaseInvoices, 1000);
 			// create the chunks
@@ -353,11 +353,11 @@ export async function seed({
 					data: chunk,
 				});
 			}),
-				console.timeEnd("leaseInvoices created");
+				console.timeEnd('leaseInvoices created');
 		}
 
 		if (maintenanceOrders.length) {
-			console.time("maintenanceOrders created");
+			console.time('maintenanceOrders created');
 			// split the maintenance orders into chunks of 10
 			const maintenanceOrdersChunks = split(maintenanceOrders, 1000);
 			// create the chunks
@@ -367,16 +367,16 @@ export async function seed({
 					data: chunk,
 				});
 			}),
-				console.log("maintenance orders created");
+				console.log('maintenance orders created');
 		}
 
-		console.time("expenses created");
+		console.time('expenses created');
 		await prisma.expense.createMany({
 			//@ts-ignore
 			data: [...sample.expenses, ...expenses],
 		});
-		console.timeEnd("expenses created");
-		console.timeEnd("insert");
+		console.timeEnd('expenses created');
+		console.timeEnd('insert');
 
 		console.log(`${tenantsWithLease} tenants with a lease`);
 		console.log(`${homelessTenantCount} homeless tenants`);

@@ -1,5 +1,5 @@
-import { sample, testOrgRoleId } from "@self/seed";
-import { expect, test } from "../token";
+import { sample, testOrgRoleId } from '@self/seed';
+import { expect, test } from '../token';
 
 const portfolio = sample.portfolios[0];
 const leaseInvoices = sample.leaseInvoices;
@@ -8,7 +8,7 @@ const payouts = sample.payouts;
 
 test.use({
 	extraHTTPHeaders: {
-		"x-role-id": testOrgRoleId,
+		'x-role-id': testOrgRoleId,
 	},
 });
 

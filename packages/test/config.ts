@@ -1,4 +1,4 @@
-import { Page, test as base } from "@playwright/test";
+import { Page, test as base } from '@playwright/test';
 
 type MyFixtures = {
 	page: Page;
@@ -13,7 +13,7 @@ export const test = base.extend<MyFixtures>({
 		page.goto = async function (url, opts) {
 			const res = await goto.call(page, url, opts);
 			// https://github.com/sveltejs/kit/pull/6484
-			await page.waitForSelector("body.started", { timeout: 5000 });
+			await page.waitForSelector('body.started', { timeout: 5000 });
 			return res;
 		};
 		await use(page);
@@ -21,8 +21,8 @@ export const test = base.extend<MyFixtures>({
 	token: async ({}, use) => {
 		let token: string;
 		try {
-			const cookies = (await import("./storageState.json")).cookies;
-			token = cookies.find((c) => c.name === "accessToken").value;
+			const cookies = (await import('./storageState.json')).cookies;
+			token = cookies.find((c) => c.name === 'accessToken').value;
 		} catch (e) {
 			console.log(e);
 		}

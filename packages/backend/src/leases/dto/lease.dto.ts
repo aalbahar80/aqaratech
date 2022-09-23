@@ -1,18 +1,18 @@
 import {
-  ApiHideProperty,
-  ApiProperty,
-  IntersectionType,
-  PartialType,
-  PickType,
+	ApiHideProperty,
+	ApiProperty,
+	IntersectionType,
+	PartialType,
+	PickType,
 } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
 import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
-  BreadcrumbDto,
-  BreadcrumbsDto,
-  IBreadcrumbs,
+	BreadcrumbDto,
+	BreadcrumbsDto,
+	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
@@ -20,89 +20,89 @@ import { IsID } from 'src/decorators/field.decorators';
 import { UnitDto } from 'src/units/dto/unit.dto';
 
 class LeaseRequiredDto {
-  @IsID()
-  organizationId: string;
+	@IsID()
+	organizationId: string;
 
-  @IsID()
-  portfolioId: string;
+	@IsID()
+	portfolioId: string;
 
-  @IsID()
-  tenantId: string;
+	@IsID()
+	tenantId: string;
 
-  @IsID()
-  unitId: string;
+	@IsID()
+	unitId: string;
 
-  @DateType()
-  start: Date;
+	@DateType()
+	start: Date;
 
-  @DateType()
-  end: Date;
+	@DateType()
+	end: Date;
 
-  @IsPositive()
-  monthlyRent: number;
+	@IsPositive()
+	monthlyRent: number;
 }
 
 class LeaseOptionalDto {
-  @IsNumber()
-  deposit: number;
+	@IsNumber()
+	deposit: number;
 
-  @IsBoolean()
-  canPay: boolean;
+	@IsBoolean()
+	canPay: boolean;
 
-  @IsBoolean()
-  notify: boolean;
+	@IsBoolean()
+	notify: boolean;
 
-  @IsString()
-  license: string | null;
+	@IsString()
+	license: string | null;
 }
 
 class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
-  'tenant',
-  'portfolio',
-  'property',
-  'unit',
+	'tenant',
+	'portfolio',
+	'property',
+	'unit',
 ]) {}
 
 export class LeaseDto
-  extends IntersectionType(
-    AbstractDto,
-    IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
-  )
-  implements Lease
+	extends IntersectionType(
+		AbstractDto,
+		IntersectionType(LeaseRequiredDto, LeaseOptionalDto),
+	)
+	implements Lease
 {
-  constructor(partial: Partial<LeaseDto>) {
-    super();
-    Object.assign(this, partial);
-  }
+	constructor(partial: Partial<LeaseDto>) {
+		super();
+		Object.assign(this, partial);
+	}
 
-  @ApiHideProperty()
-  @Exclude()
-  tenant: IBreadcrumbs['tenant'];
+	@ApiHideProperty()
+	@Exclude()
+	tenant: IBreadcrumbs['tenant'];
 
-  @ApiHideProperty()
-  @Exclude()
-  unit: IBreadcrumbs['unit'];
+	@ApiHideProperty()
+	@Exclude()
+	unit: IBreadcrumbs['unit'];
 
-  @ApiProperty()
-  @Expose()
-  get breadcrumbs(): LeaseBreadcrumbsDto {
-    const unit = new UnitDto(this.unit);
-    return {
-      portfolio: unit.breadcrumbs.portfolio,
-      property: unit.breadcrumbs.property,
-      unit: unit.breadcrumbs.unit,
-      tenant: new BreadcrumbDto({
-        rel: Rel.Tenant,
-        ...this.tenant,
-      }),
-    };
-  }
+	@ApiProperty()
+	@Expose()
+	get breadcrumbs(): LeaseBreadcrumbsDto {
+		const unit = new UnitDto(this.unit);
+		return {
+			portfolio: unit.breadcrumbs.portfolio,
+			property: unit.breadcrumbs.property,
+			unit: unit.breadcrumbs.unit,
+			tenant: new BreadcrumbDto({
+				rel: Rel.Tenant,
+				...this.tenant,
+			}),
+		};
+	}
 }
 
 export class PartialLeaseDto extends PartialType(LeaseDto) {}
 
 export class CreateLeaseDto
-  extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
-  implements Partial<Lease> {}
+	extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
+	implements Partial<Lease> {}
 
 export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {}

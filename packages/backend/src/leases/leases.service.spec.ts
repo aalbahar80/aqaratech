@@ -4,17 +4,17 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { LeasesService } from './leases.service';
 
 describe('LeasesService', () => {
-  let service: LeasesService;
+	let service: LeasesService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [LeasesService, PrismaService, CaslAbilityFactory],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			providers: [LeasesService, PrismaService, CaslAbilityFactory],
+		}).compile();
 
-    service = module.get<LeasesService>(LeasesService);
-  });
+		service = module.get<LeasesService>(LeasesService);
+	});
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(service).toBeDefined();
+	});
 });

@@ -1,11 +1,11 @@
-import { expect, Page, test as base } from "@playwright/test";
-import { testOrgEmail, testPassword } from "@self/seed";
+import { expect, Page, test as base } from '@playwright/test';
+import { testOrgEmail, testPassword } from '@self/seed';
 
 const user = {
-	role: "orgadmin",
+	role: 'orgadmin',
 	email: testOrgEmail,
 	password: testPassword,
-	destination: "/",
+	destination: '/',
 };
 
 // const users = [
@@ -39,8 +39,8 @@ const test = base.extend<MyFixtures>({
 		const page = await context.newPage();
 
 		// Login
-		await page.goto("/");
-		await page.locator("text=Log In >> visible=true").click();
+		await page.goto('/');
+		await page.locator('text=Log In >> visible=true').click();
 
 		await page.fill('input[name="username"]', user.email);
 		await page.fill('input[name="password"]', user.password);
@@ -54,35 +54,35 @@ const test = base.extend<MyFixtures>({
 	},
 });
 
-test("login", async ({ page, baseURL }) => {
+test('login', async ({ page, baseURL }) => {
 	const domain = new URL(baseURL).hostname;
 
 	const cookies = await page.context().cookies();
-	const accessToken = cookies.find((c) => c.name === "accessToken");
+	const accessToken = cookies.find((c) => c.name === 'accessToken');
 
 	await expect.soft(page).toHaveURL(user.destination);
 
 	expect.soft(accessToken).toMatchObject({
-		name: "accessToken",
+		name: 'accessToken',
 		value: expect.stringMatching(
-			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
+			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
 		),
 		domain,
-		path: "/",
+		path: '/',
 		expires: expect.any(Number),
 		httpOnly: true,
 		secure: true,
 	});
 
-	const idToken = cookies.find((c) => c.name === "idToken");
+	const idToken = cookies.find((c) => c.name === 'idToken');
 
 	expect.soft(idToken).toMatchObject({
-		name: "idToken",
+		name: 'idToken',
 		value: expect.stringMatching(
-			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/
+			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
 		),
 		domain,
-		path: "/",
+		path: '/',
 		expires: expect.any(Number),
 		httpOnly: true,
 		secure: true,

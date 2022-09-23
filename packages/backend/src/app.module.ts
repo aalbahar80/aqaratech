@@ -1,7 +1,7 @@
 import {
-  CacheModule,
-  ClassSerializerInterceptor,
-  Module,
+	CacheModule,
+	ClassSerializerInterceptor,
+	Module,
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -41,47 +41,47 @@ import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
-    CacheModule.register({ isGlobal: true }),
-    PrismaModule,
-    TenantsModule,
-    PortfoliosModule,
-    CaslModule,
-    AuthModule,
-    UsersModule,
-    PropertiesModule,
-    UnitsModule,
-    LeasesModule,
-    LeaseInvoicesModule,
-    ExpensesModule,
-    SearchModule,
-    RolesModule,
-    OrganizationsModule,
-    AggregateModule,
-    EventEmitterModule.forRoot(),
-    PostmarkModule,
-    ExpenseCategoriesModule,
-    S3Module,
-    FilesModule,
-    PayoutsModule,
-  ],
-  controllers: [AppController],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TimeoutInterceptor,
-    },
-    AppService,
-    { provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
-    { provide: APP_GUARD, useClass: AbilitiesGuard },
-    { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
-    S3Service,
-    PostmarkService,
-  ],
+	imports: [
+		ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
+		CacheModule.register({ isGlobal: true }),
+		PrismaModule,
+		TenantsModule,
+		PortfoliosModule,
+		CaslModule,
+		AuthModule,
+		UsersModule,
+		PropertiesModule,
+		UnitsModule,
+		LeasesModule,
+		LeaseInvoicesModule,
+		ExpensesModule,
+		SearchModule,
+		RolesModule,
+		OrganizationsModule,
+		AggregateModule,
+		EventEmitterModule.forRoot(),
+		PostmarkModule,
+		ExpenseCategoriesModule,
+		S3Module,
+		FilesModule,
+		PayoutsModule,
+	],
+	controllers: [AppController],
+	providers: [
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: LoggingInterceptor,
+		},
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: TimeoutInterceptor,
+		},
+		AppService,
+		{ provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
+		{ provide: APP_GUARD, useClass: AbilitiesGuard },
+		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
+		S3Service,
+		PostmarkService,
+	],
 })
 export class AppModule {}

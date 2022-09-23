@@ -1,8 +1,8 @@
-import { entitiesMap, UEntityMap, URLName } from "./entity-map";
+import { entitiesMap, UEntityMap, URLName } from './entity-map';
 
 export const fromUrl = (urlName: URLName): UEntityMap => {
 	const entity = Object.entries(entitiesMap).find(
-		([, value]) => value.urlName === urlName
+		([, value]) => value.urlName === urlName,
 	);
 	if (entity) {
 		return entity[1];

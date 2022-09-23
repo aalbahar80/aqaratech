@@ -6,8 +6,8 @@ import { OrganizationsController } from './organizations.controller';
 import { OrganizationsService } from './organizations.service';
 
 @Module({
-  controllers: [OrganizationsController],
-  providers: [OrganizationsService],
-  imports: [RolesModule, SearchModule, S3Module],
+	controllers: [OrganizationsController],
+	providers: [OrganizationsService],
+	imports: [RolesModule, SearchModule, S3Module],
 })
 export class OrganizationsModule {}

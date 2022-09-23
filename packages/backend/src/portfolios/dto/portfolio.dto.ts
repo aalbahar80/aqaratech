@@ -7,51 +7,51 @@ import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
 
 class PortfolioRequiredDto {
-  @IsID()
-  organizationId: string;
+	@IsID()
+	organizationId: string;
 
-  @Length(1, 255)
-  fullName: string;
+	@Length(1, 255)
+	fullName: string;
 }
 
 class PortfolioOptionalDto {
-  @IsString()
-  label: string | null;
+	@IsString()
+	label: string | null;
 
-  @IsString()
-  civilid: string | null;
+	@IsString()
+	civilid: string | null;
 
-  @IsPhoneNumber('KW')
-  phone: string | null;
+	@IsPhoneNumber('KW')
+	phone: string | null;
 
-  @DateType(false)
-  dob: Date | null;
+	@DateType(false)
+	dob: Date | null;
 }
 
 export class PortfolioDto
-  extends IntersectionType(
-    AbstractDto,
-    IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
-  )
-  implements Portfolio
+	extends IntersectionType(
+		AbstractDto,
+		IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
+	)
+	implements Portfolio
 {
-  constructor(partial: Partial<PortfolioDto>) {
-    super();
-    Object.assign(this, partial);
-  }
+	constructor(partial: Partial<PortfolioDto>) {
+		super();
+		Object.assign(this, partial);
+	}
 
-  @ApiProperty()
-  @Expose()
-  get title(): string {
-    return this.label || this.fullName;
-  }
+	@ApiProperty()
+	@Expose()
+	get title(): string {
+		return this.label || this.fullName;
+	}
 }
 
 export class CreatePortfolioDto
-  extends IntersectionType(
-    PortfolioRequiredDto,
-    PartialType(PortfolioOptionalDto),
-  )
-  implements Partial<Portfolio> {}
+	extends IntersectionType(
+		PortfolioRequiredDto,
+		PartialType(PortfolioOptionalDto),
+	)
+	implements Partial<Portfolio> {}
 
 export class UpdatePortfolioDto extends PartialType(CreatePortfolioDto) {}

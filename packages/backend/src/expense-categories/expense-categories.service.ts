@@ -1,17 +1,17 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
+	BadRequestException,
+	Injectable,
+	InternalServerErrorException,
+	Logger,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/casl-ability.factory';
 import {
-  CreateExpenseCategoryDto,
-  ExpenseCategoryDto,
-  UpdateAllExpenseCategoriesDto,
-  UpdateExpenseCategoryDto,
+	CreateExpenseCategoryDto,
+	ExpenseCategoryDto,
+	UpdateAllExpenseCategoriesDto,
+	UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
@@ -20,211 +20,211 @@ import { generateId } from 'src/utils/generate-id';
 
 @Injectable()
 export class ExpenseCategoriesService {
-  constructor(private readonly prisma: PrismaService) {}
-  SubjectType = 'Organization' as const;
+	constructor(private readonly prisma: PrismaService) {}
+	SubjectType = 'Organization' as const;
 
-  private readonly logger = new Logger(ExpenseCategoriesService.name);
+	private readonly logger = new Logger(ExpenseCategoriesService.name);
 
-  async create({
-    organizationId,
-    createExpenseCategoryDto,
-    user,
-  }: {
-    organizationId: string;
-    createExpenseCategoryDto: CreateExpenseCategoryDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(this.SubjectType, { id: organizationId }),
-    );
+	async create({
+		organizationId,
+		createExpenseCategoryDto,
+		user,
+	}: {
+		organizationId: string;
+		createExpenseCategoryDto: CreateExpenseCategoryDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Update,
+			subject(this.SubjectType, { id: organizationId }),
+		);
 
-    const categories = await this.fetchJsonCategories({ organizationId });
+		const categories = await this.fetchJsonCategories({ organizationId });
 
-    const id = generateId();
-    categories.push({
-      ...createExpenseCategoryDto,
-      id,
-    });
+		const id = generateId();
+		categories.push({
+			...createExpenseCategoryDto,
+			id,
+		});
 
-    const updated = await this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: { expenseCategoryTree: categories },
-    });
+		const updated = await this.prisma.organizationSettings.update({
+			where: { organizationId },
+			data: { expenseCategoryTree: categories },
+		});
 
-    this.validateJsonCategories({
-      categories: updated.expenseCategoryTree,
-    });
+		this.validateJsonCategories({
+			categories: updated.expenseCategoryTree,
+		});
 
-    return id;
-  }
+		return id;
+	}
 
-  async findAll({ organizationId }: { organizationId: string }) {
-    const data = await this.prisma.organizationSettings.findUniqueOrThrow({
-      where: { organizationId },
-    });
-    const settings = new OrganizationSettingsDto({
-      ...data,
-      expenseCategoryTree:
-        data.expenseCategoryTree as unknown as ExpenseCategoryDto[],
-    });
-    return settings.expenseCategoryTree;
-  }
+	async findAll({ organizationId }: { organizationId: string }) {
+		const data = await this.prisma.organizationSettings.findUniqueOrThrow({
+			where: { organizationId },
+		});
+		const settings = new OrganizationSettingsDto({
+			...data,
+			expenseCategoryTree:
+				data.expenseCategoryTree as unknown as ExpenseCategoryDto[],
+		});
+		return settings.expenseCategoryTree;
+	}
 
-  async updateAll({
-    organizationId,
-    updateAllExpenseCategoriesDto,
-    user,
-  }: {
-    organizationId: string;
-    updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(this.SubjectType, { id: organizationId }),
-    );
+	async updateAll({
+		organizationId,
+		updateAllExpenseCategoriesDto,
+		user,
+	}: {
+		organizationId: string;
+		updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Update,
+			subject(this.SubjectType, { id: organizationId }),
+		);
 
-    const categories = await this.fetchJsonCategories({ organizationId });
+		const categories = await this.fetchJsonCategories({ organizationId });
 
-    // Currently, this applies the changes to all categories.
-    categories.forEach((c) => {
-      const category = c as Prisma.JsonObject;
-      const submitted = updateAllExpenseCategoriesDto.items.find(
-        (item) => item.id === category.id,
-      );
-      if (!submitted) {
-        throw new BadRequestException(
-          `No expenseCategory with id ${category.id} found in updateAll`,
-        );
-      }
-      this.applyChanges({
-        original: category,
-        submitted: submitted,
-      });
-    });
+		// Currently, this applies the changes to all categories.
+		categories.forEach((c) => {
+			const category = c as Prisma.JsonObject;
+			const submitted = updateAllExpenseCategoriesDto.items.find(
+				(item) => item.id === category.id,
+			);
+			if (!submitted) {
+				throw new BadRequestException(
+					`No expenseCategory with id ${category.id} found in updateAll`,
+				);
+			}
+			this.applyChanges({
+				original: category,
+				submitted: submitted,
+			});
+		});
 
-    const updated = await this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: { expenseCategoryTree: categories },
-    });
+		const updated = await this.prisma.organizationSettings.update({
+			where: { organizationId },
+			data: { expenseCategoryTree: categories },
+		});
 
-    const newCategories = this.validateJsonCategories({
-      categories: updated.expenseCategoryTree,
-    });
+		const newCategories = this.validateJsonCategories({
+			categories: updated.expenseCategoryTree,
+		});
 
-    return newCategories as unknown as ExpenseCategoryDto[];
-  }
+		return newCategories as unknown as ExpenseCategoryDto[];
+	}
 
-  async update({
-    organizationId,
-    expenseCategoryId,
-    updateExpenseCategoryDto,
-    user,
-  }: {
-    organizationId: string;
-    expenseCategoryId: string;
-    updateExpenseCategoryDto: UpdateExpenseCategoryDto;
-    user: IUser;
-  }) {
-    ForbiddenError.from(user.ability).throwUnlessCan(
-      Action.Update,
-      subject(this.SubjectType, { id: organizationId }),
-    );
+	async update({
+		organizationId,
+		expenseCategoryId,
+		updateExpenseCategoryDto,
+		user,
+	}: {
+		organizationId: string;
+		expenseCategoryId: string;
+		updateExpenseCategoryDto: UpdateExpenseCategoryDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Update,
+			subject(this.SubjectType, { id: organizationId }),
+		);
 
-    const categories = await this.fetchJsonCategories({ organizationId });
+		const categories = await this.fetchJsonCategories({ organizationId });
 
-    categories.forEach((c) => {
-      const category = c as Prisma.JsonObject;
-      if (category.id === expenseCategoryId) {
-        this.applyChanges({
-          original: category,
-          submitted: updateExpenseCategoryDto,
-        });
-      }
-    });
+		categories.forEach((c) => {
+			const category = c as Prisma.JsonObject;
+			if (category.id === expenseCategoryId) {
+				this.applyChanges({
+					original: category,
+					submitted: updateExpenseCategoryDto,
+				});
+			}
+		});
 
-    const updated = await this.prisma.organizationSettings.update({
-      where: { organizationId },
-      data: { expenseCategoryTree: categories },
-    });
+		const updated = await this.prisma.organizationSettings.update({
+			where: { organizationId },
+			data: { expenseCategoryTree: categories },
+		});
 
-    this.validateJsonCategories({
-      categories: updated.expenseCategoryTree,
-    });
+		this.validateJsonCategories({
+			categories: updated.expenseCategoryTree,
+		});
 
-    // TODO return the updated expenseCategory for easier testing
-    return expenseCategoryId;
-  }
+		// TODO return the updated expenseCategory for easier testing
+		return expenseCategoryId;
+	}
 
-  // HELPERS
+	// HELPERS
 
-  async fetchJsonCategories({ organizationId }: { organizationId: string }) {
-    // Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
-    const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
-      where: { organizationId },
-      select: { expenseCategoryTree: true },
-    });
+	async fetchJsonCategories({ organizationId }: { organizationId: string }) {
+		// Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
+		const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
+			where: { organizationId },
+			select: { expenseCategoryTree: true },
+		});
 
-    const categoriesJson = settings.expenseCategoryTree;
+		const categoriesJson = settings.expenseCategoryTree;
 
-    if (
-      categoriesJson &&
-      typeof categoriesJson === 'object' &&
-      Array.isArray(categoriesJson)
-    ) {
-      const categories = categoriesJson as Prisma.JsonArray;
-      return categories;
-    } else {
-      throw new InternalServerErrorException(
-        'Failed to parse expenseCategoryTree',
-      );
-    }
-  }
+		if (
+			categoriesJson &&
+			typeof categoriesJson === 'object' &&
+			Array.isArray(categoriesJson)
+		) {
+			const categories = categoriesJson as Prisma.JsonArray;
+			return categories;
+		} else {
+			throw new InternalServerErrorException(
+				'Failed to parse expenseCategoryTree',
+			);
+		}
+	}
 
-  validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
-    if (
-      categories &&
-      typeof categories === 'object' &&
-      Array.isArray(categories)
-    ) {
-      return categories;
-    } else {
-      this.logger.warn(
-        'Failed to properly handle JSON value in expenseCategoryTree',
-      );
-      throw new InternalServerErrorException();
-    }
-  }
+	validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
+		if (
+			categories &&
+			typeof categories === 'object' &&
+			Array.isArray(categories)
+		) {
+			return categories;
+		} else {
+			this.logger.warn(
+				'Failed to properly handle JSON value in expenseCategoryTree',
+			);
+			throw new InternalServerErrorException();
+		}
+	}
 
-  applyChanges({
-    original,
-    submitted,
-  }: {
-    original: Prisma.JsonObject;
-    submitted: UpdateExpenseCategoryDto;
-  }) {
-    this.logger.debug({ submitted });
-    this.logger.debug({ beforeUpdate: original });
-    // TODO Use class-tranformer instead
-    // only update the fields that exist in the submitted DTO and are not undefined
+	applyChanges({
+		original,
+		submitted,
+	}: {
+		original: Prisma.JsonObject;
+		submitted: UpdateExpenseCategoryDto;
+	}) {
+		this.logger.debug({ submitted });
+		this.logger.debug({ beforeUpdate: original });
+		// TODO Use class-tranformer instead
+		// only update the fields that exist in the submitted DTO and are not undefined
 
-    // TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
-    const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
-      'parentId',
-      'labelEn',
-      'labelAr',
-      'description',
-    ];
+		// TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
+		const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
+			'parentId',
+			'labelEn',
+			'labelAr',
+			'description',
+		];
 
-    updatableKeys.forEach((key) => {
-      if (key in submitted && submitted[key] !== undefined) {
-        this.logger.debug(
-          `updating ${key} from ${original[key]} to ${submitted[key]}`,
-        );
-        original[key] = submitted[key];
-      }
-    });
-    this.logger.debug({ afterUpdate: original });
-  }
+		updatableKeys.forEach((key) => {
+			if (key in submitted && submitted[key] !== undefined) {
+				this.logger.debug(
+					`updating ${key} from ${original[key]} to ${submitted[key]}`,
+				);
+				original[key] = submitted[key];
+			}
+		});
+		this.logger.debug({ afterUpdate: original });
+	}
 }

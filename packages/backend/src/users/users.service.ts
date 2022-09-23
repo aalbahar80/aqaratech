@@ -5,59 +5,59 @@ import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) {}
 
-  async create({ createUserDto }: { createUserDto: CreateUserDto }) {
-    return this.prisma.user.create({ data: createUserDto });
-  }
+	async create({ createUserDto }: { createUserDto: CreateUserDto }) {
+		return this.prisma.user.create({ data: createUserDto });
+	}
 
-  // findAll() {
-  //   return this.prisma.user.findMany({
-  //     include: {
-  //       roles: true,
-  //     },
-  //   });
-  // }
+	// findAll() {
+	//   return this.prisma.user.findMany({
+	//     include: {
+	//       roles: true,
+	//     },
+	//   });
+	// }
 
-  // findOne(id: string): Promise<ValidatedUserDto> {
-  //   return this.prisma.user.findUniqueOrThrow({
-  //     where: { id },
-  //     include: {
-  //       roles: {
-  //         include: { organization: { select: { id: true, fullName: true } } },
-  //       },
-  //     },
-  //   });
-  // }
+	// findOne(id: string): Promise<ValidatedUserDto> {
+	//   return this.prisma.user.findUniqueOrThrow({
+	//     where: { id },
+	//     include: {
+	//       roles: {
+	//         include: { organization: { select: { id: true, fullName: true } } },
+	//       },
+	//     },
+	//   });
+	// }
 
-  async findOneByEmail(email: string): Promise<ValidatedUserDto> {
-    const user = await this.prisma.user.findUniqueOrThrow({
-      where: { email },
-      include: {
-        roles: {
-          include: {
-            organization: { select: { id: true, fullName: true, label: true } },
-          },
-        },
-      },
-    });
+	async findOneByEmail(email: string): Promise<ValidatedUserDto> {
+		const user = await this.prisma.user.findUniqueOrThrow({
+			where: { email },
+			include: {
+				roles: {
+					include: {
+						organization: { select: { id: true, fullName: true, label: true } },
+					},
+				},
+			},
+		});
 
-    return {
-      ...user,
-      roles: user.roles.map((role) => ({
-        ...role,
-        organization: new OrganizationDto(role.organization),
-      })),
-    };
-  }
+		return {
+			...user,
+			roles: user.roles.map((role) => ({
+				...role,
+				organization: new OrganizationDto(role.organization),
+			})),
+		};
+	}
 
-  async getRoles(id: string) {
-    const result = await this.prisma.user.findUniqueOrThrow({
-      where: { id },
-      select: {
-        roles: true,
-      },
-    });
-    return result;
-  }
+	async getRoles(id: string) {
+		const result = await this.prisma.user.findUniqueOrThrow({
+			where: { id },
+			select: {
+				roles: true,
+			},
+		});
+		return result;
+	}
 }

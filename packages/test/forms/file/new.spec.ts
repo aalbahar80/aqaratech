@@ -1,13 +1,13 @@
-import { APIRequestContext, expect } from "@playwright/test";
-import { sample, testOrgRoleId } from "@self/seed";
-import { entitiesMap } from "@self/utils";
-import { promises } from "node:fs";
-import { test } from "../../config";
+import { APIRequestContext, expect } from '@playwright/test';
+import { sample, testOrgRoleId } from '@self/seed';
+import { entitiesMap } from '@self/utils';
+import { promises } from 'node:fs';
+import { test } from '../../config';
 
 const fileEntity = entitiesMap.file;
 const portfolioEntity = entitiesMap.portfolio;
 const portfolio = sample.portfolios[0];
-const localFilePath = "./forms/file/upload-test.png";
+const localFilePath = './forms/file/upload-test.png';
 
 const params = new URLSearchParams({
 	relationKey: portfolioEntity.title,
@@ -16,15 +16,15 @@ const params = new URLSearchParams({
 
 const url = `/${fileEntity.urlName}/new?${params.toString()}`;
 
-test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
-	const fileName = "test-file-upload";
+test('files can be uploaded', async ({ page, request, token, apiBaseURL }) => {
+	const fileName = 'test-file-upload';
 	// TODO add random characters to file name for cleaner testing
 
 	// upload file
 	await page.goto(url);
 	await page.locator('input[name="fileName"]').fill(fileName);
 	await page.locator('input[name="file"]').setInputFiles(localFilePath);
-	await page.locator("text=Save").click();
+	await page.locator('text=Save').click();
 
 	await expect(page).toHaveURL(`/${portfolioEntity.urlName}/${portfolio.id}`);
 
@@ -46,15 +46,15 @@ test("files can be uploaded", async ({ page, request, token, apiBaseURL }) => {
 	expect(uploadedFile.length).toEqual(localFile.length);
 });
 
-test("files can be deleted", async ({ page, request, token, apiBaseURL }) => {
-	const fileName = "test-file-delete";
+test('files can be deleted', async ({ page, request, token, apiBaseURL }) => {
+	const fileName = 'test-file-delete';
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 
 	// upload file
 	await page.goto(url);
 	await page.locator('input[name="fileName"]').fill(fileName);
 	await page.locator('input[name="file"]').setInputFiles(localFilePath);
-	await page.locator("text=Save").click();
+	await page.locator('text=Save').click();
 
 	await expect(page).toHaveURL(`/${portfolioEntity.urlName}/${portfolio.id}`);
 
@@ -77,7 +77,7 @@ test("files can be deleted", async ({ page, request, token, apiBaseURL }) => {
 
 	// delete file
 	const card = page.locator(`data-testid=${key}`);
-	await card.locator("data-testid=dropdown-menu").click();
+	await card.locator('data-testid=dropdown-menu').click();
 	await page.locator('button:has-text("Delete")').click();
 
 	const res2 = await request.get(presignedUrl);
@@ -98,14 +98,14 @@ const getPresignedUrl = async ({
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 	const response = await request.get(
 		`${apiBaseURL}/${fileEntity.urlName}/find-one?key=${encodeURIComponent(
-			key
+			key,
 		)}`,
 		{
 			headers: {
 				Authorization: `Bearer ${token}`,
-				"x-role-id": testOrgRoleId,
+				'x-role-id': testOrgRoleId,
 			},
-		}
+		},
 	);
 	expect(response.status()).toBe(200);
 
