@@ -1,25 +1,24 @@
 {
-  "name": "aqtech",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "turbo run --filter \\!@self/docs build",
-    "preview": "turbo run preview --filter \\!@self/docs",
-    "build:site": "turbo run build --filter=@self/site",
-    "build:backend": "turbo run build --filter=@self/backend",
-    "build:docs": "turbo run build --filter=@self/docs",
-    "seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
-    "test": "turbo run test:e2e",
-    "dev": "turbo run --filter \\!@self/docs dev",
-    "sentry:release": "turbo run sentry:release",
-    "lint": "turbo run lint",
-    "e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
-    "ci:version": "changeset version && pnpm install --lockfile-only",
-    "ci:publish": "changeset tag"
-  },
-  "devDependencies": {
-    "@changesets/changelog-git": "0.1.12",
-    "@changesets/cli": "2.24.4",
-    "turbo": "1.4.6",
-    "zx": "7.0.8"
-  }
+	"name": "aqtech",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "turbo run --filter build",
+		"preview": "turbo run preview --filter",
+		"build:site": "turbo run build --filter=@self/site",
+		"build:backend": "turbo run build --filter=@self/backend",
+		"seed": "turbo run seed --filter=@self/seed --filter=@self/backend",
+		"test": "turbo run test:e2e",
+		"dev": "turbo run --filter dev",
+		"sentry:release": "turbo run sentry:release",
+		"lint": "turbo run lint",
+		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
+		"ci:version": "changeset version && pnpm install --lockfile-only",
+		"ci:publish": "changeset tag"
+	},
+	"devDependencies": {
+		"@changesets/changelog-git": "0.1.12",
+		"@changesets/cli": "2.24.4",
+		"turbo": "1.4.6",
+		"zx": "7.0.8"
+	}
 }
