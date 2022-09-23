@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let loading: boolean = false;
+	export let loading = false;
 </script>
 
 <svg

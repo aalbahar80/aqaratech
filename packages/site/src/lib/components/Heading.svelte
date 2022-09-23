@@ -25,7 +25,7 @@
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let onDelete: (() => void) | undefined = undefined;
 	export let deletePrompt: string | undefined = undefined;
-	export let disallowEdit: boolean = false;
+	export let disallowEdit = false;
 
 	let isOpen = false;
 	const openModal = () => {

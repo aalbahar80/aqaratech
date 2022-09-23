@@ -7,8 +7,8 @@
 	const hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 	export let entityMap: EntityNames | undefined = undefined;
 	export let formUrl: string;
-	export let message: string = `Get started by creating a new ${entityMap?.singular}.`;
-	export let buttonText: string = `New ${entityMap?.singular}`;
+	export let message = `Get started by creating a new ${entityMap?.singular}.`;
+	export let buttonText = `New ${entityMap?.singular}`;
 </script>
 
 <div class="py-8 text-center sm:py-16">

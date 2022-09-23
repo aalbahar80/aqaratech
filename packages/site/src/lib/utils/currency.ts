@@ -4,20 +4,20 @@ export function Tafgeet(digit: number, currency: string) {
 		arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'SDG';
 
 	//Split fractions
-	var splitted = digit.toString().split('.');
+	const splitted = digit.toString().split('.');
 	this.fraction = 0;
 	if (splitted.length > 1) {
-		var fraction;
+		let fraction;
 		if (splitted[1].length > 1) {
 			fraction = parseInt(splitted[1]);
 			if (fraction >= 1 && fraction <= 99) {
 				this.fraction = splitted[1].length === 1 ? fraction * 10 : fraction;
 			} else {
 				//trim it
-				var trimmed = Array.from(splitted[1]);
+				const trimmed = Array.from(splitted[1]);
 				this.fraction = '';
 				for (
-					var index = 0;
+					let index = 0;
 					index < this.currencies[currency].decimals;
 					index++
 				) {
@@ -33,11 +33,11 @@ export function Tafgeet(digit: number, currency: string) {
 }
 
 Tafgeet.prototype.parse = function () {
-	var serialized = [];
-	var tmp = [];
-	var inc = 1;
-	var count = this.length();
-	var column = this.getColumnIndex();
+	const serialized = [];
+	let tmp = [];
+	let inc = 1;
+	const count = this.length();
+	let column = this.getColumnIndex();
 	if (count >= 16) {
 		console.error('Number out of range!');
 		return;
@@ -59,7 +59,7 @@ Tafgeet.prototype.parse = function () {
 		});
 
 	// Generate concatenation array
-	var concats = [];
+	const concats = [];
 	for (let i = this.getColumnIndex(); i < this.columns.length; i++) {
 		concats[i] = ' و';
 	}
@@ -78,14 +78,14 @@ Tafgeet.prototype.parse = function () {
 		}
 	}
 
-	var str = '';
+	let str = '';
 	str += 'فقط ';
 
 	if (this.length() >= 1 && this.length() <= 3) {
 		str += this.read(this.digit);
 	} else {
 		for (let i = 0; i < serialized.length; i++) {
-			var joinedNumber = parseInt(serialized[i].reverse().join(''));
+			const joinedNumber = parseInt(serialized[i].reverse().join(''));
 			if (joinedNumber == 0) {
 				column++;
 				continue;
@@ -142,7 +142,7 @@ Tafgeet.prototype.addSuffixPrefix = function (arr, column) {
 			);
 		}
 	} else {
-		var joinedNumber = parseInt(arr.join(''));
+		const joinedNumber = parseInt(arr.join(''));
 		if (joinedNumber > 1) {
 			return (
 				this.read(joinedNumber) + ' ' + this[this.columns[column]].singular
@@ -154,8 +154,8 @@ Tafgeet.prototype.addSuffixPrefix = function (arr, column) {
 };
 
 Tafgeet.prototype.read = function (d) {
-	var str = '';
-	var len = Array.from(d.toString()).length;
+	let str = '';
+	const len = Array.from(d.toString()).length;
 	if (len == 1) {
 		str += this.readOnes(d);
 	} else if (len == 2) {
@@ -188,7 +188,7 @@ Tafgeet.prototype.readTens = function (d) {
 };
 
 Tafgeet.prototype.readHundreds = function (d) {
-	var str = '';
+	let str = '';
 	str += this.hundreds['_' + Array.from(d.toString())[0] + '00'];
 
 	if (
@@ -213,7 +213,7 @@ Tafgeet.prototype.length = function () {
 };
 
 Tafgeet.prototype.getColumnIndex = function () {
-	var column = null;
+	let column = null;
 	if (this.length() > 12) {
 		column = 0;
 	} else if (this.length() <= 12 && this.length() > 9) {
@@ -368,6 +368,6 @@ Tafgeet.prototype.currencies = {
 };
 
 export const inWords = (num: number): string => {
-	let stringText: string = new (Tafgeet as any)(num, 'KWD').parse();
+	const stringText: string = new (Tafgeet as any)(num, 'KWD').parse();
 	return stringText;
 };

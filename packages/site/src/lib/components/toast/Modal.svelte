@@ -15,8 +15,8 @@
 	export let isLoading: boolean;
 	export let handleConfirm: () => Promise<void>;
 	export let title: string;
-	export let description: string = '';
-	export let deletePrompt: string = '';
+	export let description = '';
+	export let deletePrompt = '';
 
 	let promptInput = '';
 

@@ -3,13 +3,13 @@
 	import type { IconSource } from '@steeze-ui/heroicons/types';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let loading: boolean = false;
-	export let disabled: boolean = false;
-	export let text: string = '';
+	export let loading = false;
+	export let disabled = false;
+	export let text = '';
 	export let icon: IconSource | undefined = undefined;
-	export let solid: boolean = false;
+	export let solid = false;
 	export let as: 'button' | 'a' | 'div' = 'button';
-	export let href: string = '';
+	export let href = '';
 	export let prefetch: true | undefined = undefined;
 </script>
 

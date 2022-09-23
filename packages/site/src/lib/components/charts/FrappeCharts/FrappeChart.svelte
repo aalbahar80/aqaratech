@@ -6,19 +6,19 @@
 	 *  PROPS
 	 */
 	export let data: Data;
-	export let title: string = '';
+	export let title = '';
 	export let type: ChartType = 'line';
-	export let height: number = 300;
-	export let animate: boolean = true;
+	export let height = 300;
+	export let animate = true;
 	export let axisOptions: AxisOptions = {};
 	export let barOptions: BarOptions = {};
 	export let lineOptions: LineOptions = {};
 	export let tooltipOptions: TooltipOptions = {};
 	export let colors: string[] = [];
-	export let valuesOverPoints: boolean = false;
-	export let isNavigable: boolean = false;
-	export let maxSlices: number = 3;
-	export let countLabel: string = '';
+	export let valuesOverPoints = false;
+	export let isNavigable = false;
+	export let maxSlices = 3;
+	export let countLabel = '';
 
 	/**
 	 *  COMPONENT
