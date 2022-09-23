@@ -1,14 +1,25 @@
+.DS_Store
 node_modules
+build
+dist
+.svelte-kit
+
+.env
+
 .pnpm-store
 .pnpm-debug.log
+package-lock.json
 
-**/*.env
-**/.env
-# .env.local, .env.stage, etc.
-**/.env
-# packages/site/tests/config/*StorageState.json
-.vercel
+
 .turbo
 pruned
-
 meili_data
+build
+
+dist
+
+# test
+test-results/
+playwright-report/
+storageState.json
+**/*snapshots/*.png

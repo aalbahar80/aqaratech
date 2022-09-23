@@ -1,7 +1,0 @@
-test-results/
-playwright-report/
-
-storageState.json
-
-# */*snapshots/*
-**/*snapshots/*.png
