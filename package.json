@@ -10,6 +10,7 @@
 		"test": "turbo run test:e2e",
 		"dev": "turbo run --filter dev",
 		"sentry:release": "turbo run sentry:release",
+		"format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,svelte}\" --ignore-path .gitignore",
 		"lint": "turbo run lint",
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
@@ -18,6 +19,8 @@
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.12",
 		"@changesets/cli": "2.24.4",
+		"prettier": "2.7.1",
+		"prettier-plugin-tailwindcss": "0.1.13",
 		"turbo": "1.4.6",
 		"zx": "7.0.8"
 	}
