@@ -13,6 +13,9 @@
 		"prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma",
 		"check": "tsc --noEmit"
 	},
+	"dependencies": {
+		"eslint-config-custom": "workspace:*"
+	},
 	"devDependencies": {
 		"@faker-js/faker": "7.5.0",
 		"@prisma/client": "4.3.1",

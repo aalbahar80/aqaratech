@@ -11,12 +11,14 @@
 	},
 	"scripts": {
 		"build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
-		"check": "tsc --noEmit"
+		"check": "tsc --noEmit",
+		"lint": "eslint"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0"
 	},
 	"devDependencies": {

@@ -20,6 +20,7 @@
 		"typescript": "4.8.3"
 	},
 	"dependencies": {
-		"@self/utils": "workspace:1.3.8"
+		"@self/utils": "workspace:1.3.8",
+		"eslint-config-custom": "workspace:*"
 	}
 }
