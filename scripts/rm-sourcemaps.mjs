@@ -12,8 +12,8 @@ const force = argv.force;
 
 // check if dir path is provided
 if (!dir) {
-	console.log("Usage: zx rm-source-maps.mjs [path/to/dir]");
-	console.log("Example: zx rm-source-maps.mjs build/client");
+	console.log('Usage: zx rm-source-maps.mjs [path/to/dir]');
+	console.log('Example: zx rm-source-maps.mjs build/client');
 	await $`exit 1`;
 }
 
@@ -35,10 +35,10 @@ if (sourcemaps.length === 0) {
 console.log(`Found ${sourcemaps.length} sourcemaps in ${dir}`);
 
 if (!force) {
-	let answer = await question("Remove sourcemaps?", {
-		choices: ["y", "n"],
+	let answer = await question('Remove sourcemaps?', {
+		choices: ['y', 'n'],
 	});
-	if (answer !== "y") {
+	if (answer !== 'y') {
 		await $`exit 1`;
 	}
 }

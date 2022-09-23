@@ -6,29 +6,29 @@ let siteVersion = undefined;
 let backendVersion = undefined;
 
 if (
-	typeof argv["site-version"] === "string" &&
-	argv["site-version"].length > 0
+	typeof argv['site-version'] === 'string' &&
+	argv['site-version'].length > 0
 ) {
-	siteVersion = argv["site-version"];
+	siteVersion = argv['site-version'];
 }
 
 if (
-	typeof argv["backend-version"] === "string" &&
-	argv["backend-version"].length > 0
+	typeof argv['backend-version'] === 'string' &&
+	argv['backend-version'].length > 0
 ) {
-	backendVersion = argv["backend-version"];
+	backendVersion = argv['backend-version'];
 }
 
-const appName = argv["app-name"];
+const appName = argv['app-name'];
 
-const SPEC = "app.yml";
+const SPEC = 'app.yml';
 // get app id
 console.log(chalk.blue(`Getting app ${appName} info...`));
 
 const allApps = await $`doctl apps list --format ID,Name --output json`;
 const app = JSON.parse(allApps).find((app) => app.spec.name === appName);
 
-let appId = "";
+let appId = '';
 let WILL_CREATE = false;
 let latestSpec;
 if (!app) {
@@ -44,7 +44,7 @@ if (!app) {
 
 	// await $`zx .do/deploy-new.mjs --app-name ${appName} --site-version ${siteVersion} --backend-version ${backendVersion}`;
 	// If app does not yet exist, use the spec.yml file as a base.
-	latestSpec = YAML.parse(await fs.readFile(".do/spec.yml", "utf8"));
+	latestSpec = YAML.parse(await fs.readFile('.do/spec.yml', 'utf8'));
 	latestSpec.name = appName;
 } else {
 	console.log(chalk.green(`Found App. Name: ${appName} ID: ${appId} .`));
@@ -53,7 +53,7 @@ if (!app) {
 	// If app already exists, get the latest spec as a base.
 	console.log(chalk.blue(`Getting latest spec for app ${appName}...`));
 	await $`doctl apps spec get ${appId} > ${SPEC}`;
-	latestSpec = YAML.parse(await fs.readFile(SPEC, "utf8"));
+	latestSpec = YAML.parse(await fs.readFile(SPEC, 'utf8'));
 }
 
 // bump versions in spec
@@ -61,16 +61,16 @@ console.log(chalk.blue(`Bumping versions...`));
 
 latestSpec.services.forEach((service) => {
 	// Only bump versions when a version is specified.
-	if (siteVersion && service.name === "site") {
+	if (siteVersion && service.name === 'site') {
 		console.log(
-			chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`)
+			chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`),
 		);
 		service.image.tag = siteVersion;
-	} else if (backendVersion && service.name === "backend") {
+	} else if (backendVersion && service.name === 'backend') {
 		console.log(
 			chalk.green(
-				`Bumping backend from ${service.image.tag} to ${backendVersion}`
-			)
+				`Bumping backend from ${service.image.tag} to ${backendVersion}`,
+			),
 		);
 		service.image.tag = backendVersion;
 	}
