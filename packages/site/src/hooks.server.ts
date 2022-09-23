@@ -1,6 +1,5 @@
 import { environment } from '$aqenvironment';
-import { env as privateEnv } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
+import { env } from '$env/dynamic/public';
 import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
@@ -11,6 +10,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isRedirectError } from '$lib/utils/sentry/redirect';
+import { envCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -20,10 +20,8 @@ import { errors } from 'jose';
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
 console.log({
-	ORIGIN_process_env: process.env.ORIGIN,
-	ORIGIN_dynamic_private: privateEnv.ORIGIN,
-	PUBLIC_SITE_URL_dynamic_public: publicEnv.PUBLIC_SITE_URL,
-	PUBLIC_SITE_URL_process_env: process.env.PUBLIC_SITE_URL,
+	env,
+	envCheck: envCheck(),
 });
 
 Sentry.init({
