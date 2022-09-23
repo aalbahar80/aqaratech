@@ -40,7 +40,6 @@ importers:
       '@sentry/tracing': 7.13.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
-      '@types/csurf': 1.11.2
       '@types/express': 4.17.14
       '@types/jest': 29.0.3
       '@types/js-yaml': 4.0.5
@@ -124,7 +123,6 @@ importers:
       '@openapitools/openapi-generator-cli': 2.5.2_6upsk27cumvurddzozrxtdvb7e
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
-      '@types/csurf': 1.11.2
       '@types/express': 4.17.14
       '@types/jest': 29.0.3
       '@types/js-yaml': 4.0.5
@@ -3345,12 +3343,6 @@ packages:
     resolution: {integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==}
     dev: true
 
-  /@types/csurf/1.11.2:
-    resolution: {integrity: sha512-9bc98EnwmC1S0aSJiA8rWwXtgXtXHHOQOsGHptImxFgqm6CeH+mIOunHRg6+/eg2tlmDMX3tY7XrWxo2M/nUNQ==}
-    dependencies:
-      '@types/express-serve-static-core': 4.17.30
-    dev: true
-
   /@types/d3-array/3.0.3:
     resolution: {integrity: sha512-Reoy+pKnvsksN0lQUlcH6dOGjRZ/3WRwXR//m+/8lt1BXeI4xyaUZoqULNjyXXRuh0Mj4LNpkCvhUpQlY3X5xQ==}
     dev: true
@@ -3550,14 +3542,6 @@ packages:
 
   /@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
-    dev: true
-
-  /@types/express-serve-static-core/4.17.30:
-    resolution: {integrity: sha512-gstzbTWro2/nFed1WXtf+TtrpwxH7Ggs4RLYTLbeVgIkUQOI3WG/JKjgeOU1zXDvezllupjrf8OPIdvTbIaVOQ==}
-    dependencies:
-      '@types/node': 18.7.18
-      '@types/qs': 6.9.7
-      '@types/range-parser': 1.2.4
     dev: true
 
   /@types/express-serve-static-core/4.17.31:

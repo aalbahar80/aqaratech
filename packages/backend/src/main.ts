@@ -53,12 +53,6 @@ async function bootstrap() {
 
   app.use(helmet()); // before other middleware
   app.use(cookieParser());
-  // app.use(
-  //   // has to be after cookieParser()
-  //   csurf({
-  //     cookie: true,
-  //   }),
-  // );
 
   app.useGlobalPipes(
     new ValidationPipe({
