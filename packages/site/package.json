@@ -12,7 +12,7 @@
 		"check:all": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
 		"check:watch": "svelte-check --use-new-transformation --ignore tests --watch",
 		"custom-lint": "eslint . --ext .ts,.svelte",
-		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"lint": "prettier --ignore-path ../../.gitignore --check --plugin-search-dir=. . && eslint --ignore-path ../../.gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}') 30"
