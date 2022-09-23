@@ -126,7 +126,6 @@ export class LeasesService {
       data: {
         leaseInvoices: {
           createMany: {
-            // @ts-ignore
             data: createManyLeaseInvoicesDto,
           },
         },
