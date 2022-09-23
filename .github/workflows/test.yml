@@ -57,7 +57,7 @@ jobs:
       - run: pnpm build
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
-      - run: pnpm run format
+      - run: pnpm turbo run format
         continue-on-error: true
 
       - run: pnpm run lint
