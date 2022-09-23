@@ -13,6 +13,9 @@
 			"cache": false,
 			"dependsOn": ["build"]
 		},
+		"check": {
+			"outputs": []
+		},
 		"lint": {
 			"outputs": []
 		},

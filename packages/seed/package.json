@@ -10,7 +10,8 @@
 	"scripts": {
 		"build": "tsc --project tsconfig.build.json",
 		"test:e2e:prepare": "./create-test-db.sh",
-		"prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma"
+		"prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma",
+		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "7.5.0",

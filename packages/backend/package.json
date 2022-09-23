@@ -18,6 +18,7 @@
 		"start:prod": "node dist/src/main.js",
 		"preview": "node dist/src/main.js",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+		"check": "tsc --noEmit",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",

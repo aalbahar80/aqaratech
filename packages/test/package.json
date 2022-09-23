@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test:e2e": "DEBUG=pw:webserver pnpm run -F @self/seed test:e2e:prepare && playwright test"
+		"test:e2e": "DEBUG=pw:webserver pnpm run -F @self/seed test:e2e:prepare && playwright test",
+		"check": "tsc --noEmit"
 	},
 	"keywords": [],
 	"author": "",

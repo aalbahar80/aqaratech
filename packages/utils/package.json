@@ -10,7 +10,8 @@
 		"require": "./dist/cjs/index.js"
 	},
 	"scripts": {
-		"build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup"
+		"build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
+		"check": "tsc --noEmit"
 	},
 	"keywords": [],
 	"author": "",
