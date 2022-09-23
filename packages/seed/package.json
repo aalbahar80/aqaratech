@@ -11,6 +11,7 @@
 		"build": "tsc --project tsconfig.build.json",
 		"test:e2e:prepare": "./create-test-db.sh",
 		"prisma:gen": "prisma generate --schema=../backend/prisma/schema.prisma",
+		"lint": "eslint --ignore-path ../../.gitignore .",
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {

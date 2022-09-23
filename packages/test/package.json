@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test:e2e": "DEBUG=pw:webserver pnpm run -F @self/seed test:e2e:prepare && playwright test",
+		"lint": "eslint --ignore-path ../../.gitignore .",
 		"check": "tsc --noEmit"
 	},
 	"keywords": [],

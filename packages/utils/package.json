@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
 		"check": "tsc --noEmit",
-		"lint": "eslint"
+		"lint": "eslint --ignore-path ../../.gitignore ."
 	},
 	"keywords": [],
 	"author": "",
