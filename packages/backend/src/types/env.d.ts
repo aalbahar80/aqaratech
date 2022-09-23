@@ -25,6 +25,13 @@ declare global {
 
       readonly MEILISEARCH_HOST: string;
       readonly MEILISEARCH_API_KEY: string;
+
+      readonly PUBLIC_AQ_DEBUG_SENTRY: string;
+      readonly PUBLIC_TRACE_RATE: string;
+
+      readonly PUBLIC_AQ_DEBUG_NEST: string;
+      readonly PUBLIC_AQ_DEBUG_PRISMA: string;
+      readonly PUBLIC_AQ_DEBUG_SITE: string;
     }
   }
 }

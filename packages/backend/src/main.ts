@@ -10,6 +10,7 @@ import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SentryInterceptor } from 'src/sentry/sentry.interceptor';
 import { setupSwagger } from 'src/swagger';
+import { checkEnv } from 'src/utils/env-check';
 import { version } from '../package.json';
 import { AppModule } from './app.module';
 
@@ -24,11 +25,7 @@ Sentry.init({
 
 async function bootstrap() {
   console.log(`Version: ${version}`);
-  if (!process.env.PUBLIC_SITE_URL) {
-    console.error('PUBLIC_SITE_URL is not set');
-  } else {
-    console.log('PUBLIC_SITE_URL: ', process.env.PUBLIC_SITE_URL);
-  }
+  checkEnv();
 
   const app = await NestFactory.create(AppModule, {
     logger: [
