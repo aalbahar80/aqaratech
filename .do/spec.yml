@@ -133,25 +133,3 @@ services:
       - key: ORIGIN
         scope: RUN_AND_BUILD_TIME
         value: ${APP_URL}
-# jobs:
-#   # DO NOT RUN IN PRODUCTION
-#   - name: seed-database
-#     kind: POST_DEPLOY
-#     run_command: .do/trigger-seed-workflow.sh
-#     image:
-#       registry_type: DOCR
-#       repository: aqaratech-backend
-#       tag: REPLACE_TAG_BACKEND
-#     envs:
-#       - key: DATABASE_URL
-#         scope: RUN_AND_BUILD_TIME
-#         value: ${db-stage.DATABASE_URL}
-#       - key: GH_TOKEN
-#         scope: RUN_AND_BUILD_TIME
-#         type: SECRET
-#         value: <token>
-#       # To be set by .do/deploy.sh script. Order matters.
-#       - key: GH_REF
-#         scope: RUN_AND_BUILD_TIME
-#         value: REPLACE_NAME
-#     instance_size_slug: professional-xs
