@@ -1,4 +1,3 @@
-import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
