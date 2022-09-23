@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { AQARATECH_STAFF_ROLE } from '@self/utils';
-import { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -29,13 +28,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     const jwksUri = `${domain}/.well-known/jwks.json`;
 
-    const cookieExtractor = function (req: Request) {
-      let token = null;
-      if (req && req.headers.cookie) {
-        token = req.cookies['accessToken'];
-      }
-      return token;
-    };
+    // const cookieExtractor = function (req: Request) {
+    //   let token = null;
+    //   if (req && req.headers.cookie) {
+    //     token = req.cookies['accessToken'];
+    //   }
+    //   return token;
+    // };
+
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
