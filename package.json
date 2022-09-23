@@ -14,7 +14,7 @@
 		"format:fix": "prettier --write --ignore-path <(cat .gitignore .prettierignore) .",
 		"lint": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
-		"check": "turbo run check",
+		"check": "turbo run check --continue",
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag"
