@@ -1,7 +1,0 @@
-global:
-  scrape_interval: 5s
-scrape_configs:
-  - job_name: 'atlas-backend-metrics'
-    metrics_path: /metrics
-    static_configs:
-      - targets: ['backend:3002']

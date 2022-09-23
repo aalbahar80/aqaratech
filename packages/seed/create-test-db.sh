@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATABASE_URL=$(awk '/^DATABASE_URL/' ../../.env.ci | awk -F '=' '{print $2}')
+DATABASE_URL=$(awk '/^DATABASE_URL/' ../../.env.test | awk -F '=' '{print $2}')
 
 set -e
 

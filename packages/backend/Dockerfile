@@ -12,6 +12,11 @@ COPY ./pruned .
 # consider deleting auto-installed debian prisma engine (and remove postinstall script)
 RUN ./node_modules/.bin/prisma2 generate
 
+# Don't run production as root
+RUN addgroup --system --gid 1001 nestjs
+RUN adduser --system --uid 1001 nestjs
+USER nestjs
+
 EXPOSE 3002
 
 CMD ["npm", "run", "start:prod"]

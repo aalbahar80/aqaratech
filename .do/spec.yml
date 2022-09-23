@@ -31,6 +31,9 @@ envs:
   - key: PUBLIC_AQARATECH_ENV
     scope: RUN_AND_BUILD_TIME
     value: staging
+  - key: PUBLIC_TRACE_RATE
+    scope: RUN_AND_BUILD_TIME
+    value: "0.5"
 name: REPLACE_NAME
 region: fra
 services:

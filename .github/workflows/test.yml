@@ -52,7 +52,7 @@ jobs:
         env:
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#example-using-bash
           AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
-        run: ./scripts/set-env.sh .env.ci .env AUTH0_CLIENT_SECRET
+        run: ./scripts/set-env.sh .env.test .env AUTH0_CLIENT_SECRET
 
       - run: pnpm build
 

@@ -80,7 +80,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
 
-  if (process.env.PUBLIC_AQARATECH_ENV === 'development') {
+  if (process.env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
     await setupSwagger(app);
   } else {
     console.warn('Swagger is not enabled in production/staging');
