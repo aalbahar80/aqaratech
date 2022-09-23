@@ -13,6 +13,7 @@
 		"format": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,svelte}\" --ignore-path .gitignore",
 		"format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,svelte}\" --ignore-path .gitignore",
 		"lint": "TIMING=1 turbo run lint --continue",
+		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
 		"check": "turbo run check",
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
