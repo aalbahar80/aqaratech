@@ -14,7 +14,7 @@ concurrency:
 env:
   # we call `pnpm playwright install` instead
   # https://github.com/sveltejs/kit/blob/9dbcce994161ec7191a8a8ea5a510437232dd1ce/.github/workflows/ci.yml#L12
-  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
 jobs:
   test:
@@ -41,7 +41,7 @@ jobs:
         with:
           node-version: 18
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
 
@@ -55,6 +55,16 @@ jobs:
         run: ./scripts/set-env.sh .env.test .env AUTH0_CLIENT_SECRET
 
       - run: pnpm build
+
+      # Move format/lint/check to a seperate job when removing `continue-on-error`
+      - run: pnpm run format
+        continue-on-error: true
+
+      - run: pnpm run lint
+        continue-on-error: true
+
+      - run: pnpm run check
+        continue-on-error: true
 
       - run: pnpm test
 

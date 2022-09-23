@@ -13,10 +13,13 @@
 			"cache": false,
 			"dependsOn": ["build"]
 		},
-		"check": {
+		"format": {
 			"outputs": []
 		},
 		"lint": {
+			"outputs": []
+		},
+		"check": {
 			"outputs": []
 		},
 		"test:e2e": {
