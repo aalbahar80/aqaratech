@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       db_url:
-        description: "URL of database to seed"
+        description: 'URL of database to seed'
         required: true
 
 env:
@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 18
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install deps (seed & backend)
         run: pnpm -F . -F @self/seed... -F @self/backend... install --frozen-lockfile

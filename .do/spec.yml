@@ -7,7 +7,7 @@ databases:
     name: db-stage
     num_nodes: 1
     size: db-s-dev-database
-    version: "12"
+    version: '12'
     production: false
 # domains:
 #   - domain: aqaratech.com
@@ -24,16 +24,16 @@ envs:
     value: ${backend.PRIVATE_URL}
   - key: AQ_DEBUG_NEST
     scope: RUN_AND_BUILD_TIME
-    value: "1"
+    value: '1'
   - key: AQ_DEBUG_PRISMA
     scope: RUN_AND_BUILD_TIME
-    value: "1"
+    value: '1'
   - key: PUBLIC_AQARATECH_ENV
     scope: RUN_AND_BUILD_TIME
     value: staging
   - key: PUBLIC_TRACE_RATE
     scope: RUN_AND_BUILD_TIME
-    value: "0.5"
+    value: '0.5'
 name: REPLACE_NAME
 region: fra
 services:

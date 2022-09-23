@@ -43,7 +43,7 @@ jobs:
         with:
           node-version: 18
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -F . -F @self/site... install --frozen-lockfile
       - run: pnpm run build:site
@@ -88,7 +88,7 @@ jobs:
         with:
           node-version: 18
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - run: pnpm -F . -F @self/backend... install --frozen-lockfile
         env:
