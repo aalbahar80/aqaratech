@@ -40,12 +40,12 @@
 							class={classes(
 								!option.disabled
 									? 'cursor-pointer focus:outline-none'
-									: 'opacity-25 cursor-not-allowed',
-								active ? 'ring-2 ring-offset-2 ring-indigo-500' : '',
+									: 'cursor-not-allowed opacity-25',
+								active ? 'ring-2 ring-indigo-500 ring-offset-2' : '',
 								checked
-									? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700'
-									: 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
-								'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1',
+									? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
+									: 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
+								'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1',
 							)}
 						>
 							<RadioGroupLabel as="span">{option.label}</RadioGroupLabel>

@@ -92,9 +92,9 @@
 							aria-current={current ? 'page' : null}
 							class={classes(
 								current
-									? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-									: 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
-								'relative inline-flex items-center px-4 py-2 border text-sm font-medium',
+									? 'z-10 border-indigo-500 bg-indigo-50 text-indigo-600'
+									: 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50',
+								'relative inline-flex items-center border px-4 py-2 text-sm font-medium',
 							)}
 							on:click={() => table.setPageIndex(button - 1)}
 						>

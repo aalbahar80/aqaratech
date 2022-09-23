@@ -11,9 +11,7 @@
 			"problemMatcher": {
 				"owner": "svelte",
 				"applyTo": "allDocuments",
-				"fileLocation": [
-					"absolute"
-				],
+				"fileLocation": ["absolute"],
 				"pattern": [
 					{
 						"regexp": "^(.*?):(\\d+):(\\d+)$",
@@ -26,8 +24,8 @@
 						"severity": 1,
 						"message": 2
 					}
-				],
+				]
 			}
-		},
+		}
 	]
 }

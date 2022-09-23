@@ -10,7 +10,7 @@
 
 <td
 	class={classes(
-		idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+		idx === 0 ? 'pl-4 pr-3 sm:pl-6' : 'px-2',
 		'whitespace-nowrap py-2 text-sm',
 		...(cell.extraStyles || []),
 	)}

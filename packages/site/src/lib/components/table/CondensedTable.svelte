@@ -30,7 +30,7 @@
 							<th
 								scope="col"
 								class={classes(
-									idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+									idx === 0 ? 'pl-4 pr-3 sm:pl-6' : 'px-2',
 									'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
 								)}
 							>
@@ -61,7 +61,7 @@
 						<th
 							scope="col"
 							class={classes(
-								idx === 0 ? 'sm:pl-6 pl-4 pr-3' : 'px-2',
+								idx === 0 ? 'pl-4 pr-3 sm:pl-6' : 'px-2',
 								'whitespace-nowrap py-3.5 text-left text-sm font-semibold text-gray-900',
 							)}
 						>

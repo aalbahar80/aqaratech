@@ -52,7 +52,7 @@
 									class={classes(
 										'text-sm font-medium',
 										currentPage
-											? 'text-indigo-600 font-semibold'
+											? 'font-semibold text-indigo-600'
 											: 'text-gray-500 hover:text-gray-700',
 									)}
 									class:ml-4={idx !== 0}

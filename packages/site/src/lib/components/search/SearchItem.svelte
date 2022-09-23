@@ -35,8 +35,8 @@
 			class={classes(
 				'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
 				hovering
-					? 'bg-indigo-600 text-white [&_mark]:text-white [&_mark]:bg-inherit'
-					: '[&_mark]:text-indigo-600 [&_mark]:bg-inherit [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
+					? 'bg-indigo-600 text-white [&_mark]:bg-inherit [&_mark]:text-white'
+					: '[&_mark]:bg-inherit [&_mark]:text-indigo-600 [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
 			)}
 		>
 			<div class="flex">

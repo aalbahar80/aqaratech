@@ -1,3757 +1,3757 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 
+ *
  * @export
  * @interface ArrayOfExpenseDto
  */
 export interface ArrayOfExpenseDto {
-    /**
-     * 
-     * @type {Array<ExpenseDto>}
-     * @memberof ArrayOfExpenseDto
-     */
-    results?: Array<ExpenseDto>;
+	/**
+	 *
+	 * @type {Array<ExpenseDto>}
+	 * @memberof ArrayOfExpenseDto
+	 */
+	results?: Array<ExpenseDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfFileDto
  */
 export interface ArrayOfFileDto {
-    /**
-     * 
-     * @type {Array<FileDto>}
-     * @memberof ArrayOfFileDto
-     */
-    results?: Array<FileDto>;
+	/**
+	 *
+	 * @type {Array<FileDto>}
+	 * @memberof ArrayOfFileDto
+	 */
+	results?: Array<FileDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfLeaseDto
  */
 export interface ArrayOfLeaseDto {
-    /**
-     * 
-     * @type {Array<LeaseDto>}
-     * @memberof ArrayOfLeaseDto
-     */
-    results?: Array<LeaseDto>;
+	/**
+	 *
+	 * @type {Array<LeaseDto>}
+	 * @memberof ArrayOfLeaseDto
+	 */
+	results?: Array<LeaseDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfLeaseInvoiceDto
  */
 export interface ArrayOfLeaseInvoiceDto {
-    /**
-     * 
-     * @type {Array<LeaseInvoiceDto>}
-     * @memberof ArrayOfLeaseInvoiceDto
-     */
-    results?: Array<LeaseInvoiceDto>;
+	/**
+	 *
+	 * @type {Array<LeaseInvoiceDto>}
+	 * @memberof ArrayOfLeaseInvoiceDto
+	 */
+	results?: Array<LeaseInvoiceDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfOrganizationDto
  */
 export interface ArrayOfOrganizationDto {
-    /**
-     * 
-     * @type {Array<OrganizationDto>}
-     * @memberof ArrayOfOrganizationDto
-     */
-    results?: Array<OrganizationDto>;
+	/**
+	 *
+	 * @type {Array<OrganizationDto>}
+	 * @memberof ArrayOfOrganizationDto
+	 */
+	results?: Array<OrganizationDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfPayoutDto
  */
 export interface ArrayOfPayoutDto {
-    /**
-     * 
-     * @type {Array<PayoutDto>}
-     * @memberof ArrayOfPayoutDto
-     */
-    results?: Array<PayoutDto>;
+	/**
+	 *
+	 * @type {Array<PayoutDto>}
+	 * @memberof ArrayOfPayoutDto
+	 */
+	results?: Array<PayoutDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfPortfolioDto
  */
 export interface ArrayOfPortfolioDto {
-    /**
-     * 
-     * @type {Array<PortfolioDto>}
-     * @memberof ArrayOfPortfolioDto
-     */
-    results?: Array<PortfolioDto>;
+	/**
+	 *
+	 * @type {Array<PortfolioDto>}
+	 * @memberof ArrayOfPortfolioDto
+	 */
+	results?: Array<PortfolioDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfPropertyDto
  */
 export interface ArrayOfPropertyDto {
-    /**
-     * 
-     * @type {Array<PropertyDto>}
-     * @memberof ArrayOfPropertyDto
-     */
-    results?: Array<PropertyDto>;
+	/**
+	 *
+	 * @type {Array<PropertyDto>}
+	 * @memberof ArrayOfPropertyDto
+	 */
+	results?: Array<PropertyDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfRoleDto
  */
 export interface ArrayOfRoleDto {
-    /**
-     * 
-     * @type {Array<RoleDto>}
-     * @memberof ArrayOfRoleDto
-     */
-    results?: Array<RoleDto>;
+	/**
+	 *
+	 * @type {Array<RoleDto>}
+	 * @memberof ArrayOfRoleDto
+	 */
+	results?: Array<RoleDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfTenantDto
  */
 export interface ArrayOfTenantDto {
-    /**
-     * 
-     * @type {Array<TenantDto>}
-     * @memberof ArrayOfTenantDto
-     */
-    results?: Array<TenantDto>;
+	/**
+	 *
+	 * @type {Array<TenantDto>}
+	 * @memberof ArrayOfTenantDto
+	 */
+	results?: Array<TenantDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface ArrayOfUnitDto
  */
 export interface ArrayOfUnitDto {
-    /**
-     * 
-     * @type {Array<UnitDto>}
-     * @memberof ArrayOfUnitDto
-     */
-    results?: Array<UnitDto>;
+	/**
+	 *
+	 * @type {Array<UnitDto>}
+	 * @memberof ArrayOfUnitDto
+	 */
+	results?: Array<UnitDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface BalanceDto
  */
 export interface BalanceDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceDto
-     */
-    expenses: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceDto
-     */
-    leaseInvoices: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceDto
-     */
-    payouts: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BalanceDto
-     */
-    total: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof BalanceDto
+	 */
+	expenses: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof BalanceDto
+	 */
+	leaseInvoices: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof BalanceDto
+	 */
+	payouts: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof BalanceDto
+	 */
+	total: number;
 }
 /**
- * 
+ *
  * @export
  * @interface BreadcrumbDto
  */
 export interface BreadcrumbDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof BreadcrumbDto
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BreadcrumbDto
-     */
-    label: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof BreadcrumbDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof BreadcrumbDto
+	 */
+	label: string;
 }
 /**
- * 
+ *
  * @export
  * @interface BreadcrumbsDto
  */
 export interface BreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof BreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof BreadcrumbsDto
-     */
-    readonly property: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof BreadcrumbsDto
-     */
-    readonly unit: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof BreadcrumbsDto
-     */
-    readonly lease: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof BreadcrumbsDto
-     */
-    tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	readonly property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	readonly unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	readonly lease: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	tenant: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface ByMonthDto
  */
 export interface ByMonthDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof ByMonthDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ByMonthDto
-     */
-    date: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof ByMonthDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ByMonthDto
+	 */
+	date: string;
 }
 
 /**
- * 
+ *
  * @export
  */
 export const CombinedEnum = {
-    Id: 'id',
-    CreatedAt: 'createdAt',
-    UpdatedAt: 'updatedAt',
-    FullName: 'fullName',
-    Label: 'label',
-    Civilid: 'civilid',
-    Dob: 'dob',
-    Phone: 'phone',
-    PassportNum: 'passportNum',
-    Nationality: 'nationality',
-    ResidencyNum: 'residencyNum',
-    ResidencyEnd: 'residencyEnd',
-    OrganizationId: 'organizationId',
-    PortfolioId: 'portfolioId',
-    Area: 'area',
-    Block: 'block',
-    Avenue: 'avenue',
-    Street: 'street',
-    Number: 'number',
-    Parcel: 'parcel',
-    Paci: 'paci',
-    Cost: 'cost',
-    Long: 'long',
-    Lat: 'lat',
-    PropertyId: 'propertyId',
-    UnitNumber: 'unitNumber',
-    Floor: 'floor',
-    Size: 'size',
-    Bed: 'bed',
-    Bath: 'bath',
-    MarketRent: 'marketRent',
-    Type: 'type',
-    Usage: 'usage',
-    TenantId: 'tenantId',
-    UnitId: 'unitId',
-    Start: 'start',
-    End: 'end',
-    MonthlyRent: 'monthlyRent',
-    Deposit: 'deposit',
-    CanPay: 'canPay',
-    Notify: 'notify',
-    License: 'license',
-    DueAt: 'dueAt',
-    PostAt: 'postAt',
-    PaidAt: 'paidAt',
-    IsPaid: 'isPaid',
-    Amount: 'amount',
-    Memo: 'memo',
-    MfPaymentId: 'mfPaymentId',
-    LeaseId: 'leaseId',
-    MaintenanceOrderId: 'maintenanceOrderId',
-    CategoryId: 'categoryId',
-    CompletedAt: 'completedAt',
-    Title: 'title',
-    Description: 'description',
-    Status: 'status'
+	Id: 'id',
+	CreatedAt: 'createdAt',
+	UpdatedAt: 'updatedAt',
+	FullName: 'fullName',
+	Label: 'label',
+	Civilid: 'civilid',
+	Dob: 'dob',
+	Phone: 'phone',
+	PassportNum: 'passportNum',
+	Nationality: 'nationality',
+	ResidencyNum: 'residencyNum',
+	ResidencyEnd: 'residencyEnd',
+	OrganizationId: 'organizationId',
+	PortfolioId: 'portfolioId',
+	Area: 'area',
+	Block: 'block',
+	Avenue: 'avenue',
+	Street: 'street',
+	Number: 'number',
+	Parcel: 'parcel',
+	Paci: 'paci',
+	Cost: 'cost',
+	Long: 'long',
+	Lat: 'lat',
+	PropertyId: 'propertyId',
+	UnitNumber: 'unitNumber',
+	Floor: 'floor',
+	Size: 'size',
+	Bed: 'bed',
+	Bath: 'bath',
+	MarketRent: 'marketRent',
+	Type: 'type',
+	Usage: 'usage',
+	TenantId: 'tenantId',
+	UnitId: 'unitId',
+	Start: 'start',
+	End: 'end',
+	MonthlyRent: 'monthlyRent',
+	Deposit: 'deposit',
+	CanPay: 'canPay',
+	Notify: 'notify',
+	License: 'license',
+	DueAt: 'dueAt',
+	PostAt: 'postAt',
+	PaidAt: 'paidAt',
+	IsPaid: 'isPaid',
+	Amount: 'amount',
+	Memo: 'memo',
+	MfPaymentId: 'mfPaymentId',
+	LeaseId: 'leaseId',
+	MaintenanceOrderId: 'maintenanceOrderId',
+	CategoryId: 'categoryId',
+	CompletedAt: 'completedAt',
+	Title: 'title',
+	Description: 'description',
+	Status: 'status',
 } as const;
 export type CombinedEnum = typeof CombinedEnum[keyof typeof CombinedEnum];
 
 /**
- * 
+ *
  * @export
  * @interface CreateExpenseCategoryDto
  */
 export interface CreateExpenseCategoryDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseCategoryDto
-     */
-    labelEn: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateExpenseCategoryDto
-     */
-    isGroup: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseCategoryDto
-     */
-    parentId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseCategoryDto
-     */
-    labelAr?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseCategoryDto
-     */
-    description?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	labelEn: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	isGroup: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	parentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	labelAr?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	description?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateExpenseDto
  */
 export interface CreateExpenseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateExpenseDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    unitId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    propertyId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    maintenanceOrderId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateExpenseDto
-     */
-    categoryId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateExpenseDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	unitId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	propertyId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	maintenanceOrderId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	categoryId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateLeaseDto
  */
 export interface CreateLeaseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    start: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    end: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    tenantId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    unitId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateLeaseDto
-     */
-    monthlyRent: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateLeaseDto
-     */
-    deposit?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateLeaseDto
-     */
-    canPay?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateLeaseDto
-     */
-    notify?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseDto
-     */
-    license?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	start: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	end: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	tenantId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	unitId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateLeaseDto
+	 */
+	monthlyRent: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateLeaseDto
+	 */
+	deposit?: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseDto
+	 */
+	canPay?: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseDto
+	 */
+	notify?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	license?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateLeaseInvoiceDto
  */
 export interface CreateLeaseInvoiceDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    dueAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    paidAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    leaseId: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    isPaid?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateLeaseInvoiceDto
-     */
-    mfPaymentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	dueAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	paidAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	leaseId: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	isPaid?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	mfPaymentId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateManyLeaseInvoicesDto
  */
 export interface CreateManyLeaseInvoicesDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    dueAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    paidAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    isPaid?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateManyLeaseInvoicesDto
-     */
-    mfPaymentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	dueAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	paidAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	isPaid?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	mfPaymentId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateOrganizationDto
  */
 export interface CreateOrganizationDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganizationDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateOrganizationDto
-     */
-    label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateOrganizationDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateOrganizationDto
+	 */
+	label?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreatePayoutDto
  */
 export interface CreatePayoutDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePayoutDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePayoutDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePayoutDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreatePayoutDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePayoutDto
-     */
-    memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePayoutDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePayoutDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePayoutDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreatePayoutDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePayoutDto
+	 */
+	memo?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreatePortfolioDto
  */
 export interface CreatePortfolioDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    dob?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    civilid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePortfolioDto
-     */
-    phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	dob?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	civilid?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
+	phone?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreatePropertyDto
  */
 export interface CreatePropertyDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    area: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    block?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    avenue?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    street?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    number?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    parcel?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    paci?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreatePropertyDto
-     */
-    cost?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePropertyDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreatePropertyDto
-     */
-    _long?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreatePropertyDto
-     */
-    lat?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	area: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	block?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	avenue?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	street?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	number?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	parcel?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	paci?: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreatePropertyDto
+	 */
+	cost?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreatePropertyDto
+	 */
+	_long?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreatePropertyDto
+	 */
+	lat?: number | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateRoleDto
  */
 export interface CreateRoleDto {
-    /**
-     * 
-     * @type {RoleTypeEnum}
-     * @memberof CreateRoleDto
-     */
-    roleType: RoleTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateRoleDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateRoleDto
-     */
-    email: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateRoleDto
-     */
-    portfolioId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateRoleDto
-     */
-    tenantId?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateRoleDto
-     */
-    isAccepted?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateRoleDto
-     */
-    isDefault?: boolean;
+	/**
+	 *
+	 * @type {RoleTypeEnum}
+	 * @memberof CreateRoleDto
+	 */
+	roleType: RoleTypeEnum;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateRoleDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateRoleDto
+	 */
+	email: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateRoleDto
+	 */
+	portfolioId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateRoleDto
+	 */
+	tenantId?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateRoleDto
+	 */
+	isAccepted?: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateRoleDto
+	 */
+	isDefault?: boolean;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateTenantDto
  */
 export interface CreateTenantDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    dob?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    residencyEnd?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    civilid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    phone?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    passportNum?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    nationality?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateTenantDto
-     */
-    residencyNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	dob?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	residencyEnd?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	civilid?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	passportNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	nationality?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantDto
+	 */
+	residencyNum?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface CreateUnitDto
  */
 export interface CreateUnitDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    propertyId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    unitNumber: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateUnitDto
-     */
-    floor?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateUnitDto
-     */
-    size?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateUnitDto
-     */
-    bed?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateUnitDto
-     */
-    bath?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CreateUnitDto
-     */
-    marketRent?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    type?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    usage?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateUnitDto
-     */
-    label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	propertyId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	unitNumber: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateUnitDto
+	 */
+	floor?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateUnitDto
+	 */
+	size?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateUnitDto
+	 */
+	bed?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateUnitDto
+	 */
+	bath?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateUnitDto
+	 */
+	marketRent?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	type?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	usage?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	label?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface ExpenseBreadcrumbsDto
  */
 export interface ExpenseBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof ExpenseBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof ExpenseBreadcrumbsDto
-     */
-    readonly property?: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof ExpenseBreadcrumbsDto
-     */
-    readonly unit?: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof ExpenseBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof ExpenseBreadcrumbsDto
+	 */
+	readonly property?: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof ExpenseBreadcrumbsDto
+	 */
+	readonly unit?: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface ExpenseCategoryDto
  */
 export interface ExpenseCategoryDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseCategoryDto
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseCategoryDto
-     */
-    labelEn: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseCategoryDto
-     */
-    parentId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseCategoryDto
-     */
-    labelAr: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseCategoryDto
-     */
-    description?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ExpenseCategoryDto
-     */
-    isGroup: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	labelEn: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	parentId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	labelAr: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ExpenseCategoryDto
+	 */
+	isGroup: boolean;
 }
 /**
- * 
+ *
  * @export
  * @interface ExpenseDto
  */
 export interface ExpenseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {ExpenseBreadcrumbsDto}
-     * @memberof ExpenseDto
-     */
-    breadcrumbs: ExpenseBreadcrumbsDto;
-    /**
-     * 
-     * @type {PartialExpenseDtoExpenseType}
-     * @memberof ExpenseDto
-     */
-    expenseType: PartialExpenseDtoExpenseType | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ExpenseDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    memo: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    unitId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    propertyId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    maintenanceOrderId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ExpenseDto
-     */
-    categoryId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {ExpenseBreadcrumbsDto}
+	 * @memberof ExpenseDto
+	 */
+	breadcrumbs: ExpenseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {PartialExpenseDtoExpenseType}
+	 * @memberof ExpenseDto
+	 */
+	expenseType: PartialExpenseDtoExpenseType | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof ExpenseDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	memo: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	unitId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	propertyId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	maintenanceOrderId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	categoryId: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface FileDto
  */
 export interface FileDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof FileDto
-     */
-    key: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof FileDto
-     */
-    size: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof FileDto
+	 */
+	key: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof FileDto
+	 */
+	size: number;
 }
 /**
- * 
+ *
  * @export
  * @interface HitDto
  */
 export interface HitDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof HitDto
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof HitDto
-     */
-    title?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof HitDto
-     */
-    url: string;
-    /**
-     * 
-     * @type {HitDtoFormatted}
-     * @memberof HitDto
-     */
-    formatted: HitDtoFormatted;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof HitDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof HitDto
+	 */
+	title?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof HitDto
+	 */
+	url: string;
+	/**
+	 *
+	 * @type {HitDtoFormatted}
+	 * @memberof HitDto
+	 */
+	formatted: HitDtoFormatted;
 }
 /**
- * 
+ *
  * @export
  * @interface HitDtoFormatted
  */
 export interface HitDtoFormatted {
-    /**
-     * 
-     * @type {string}
-     * @memberof HitDtoFormatted
-     */
-    title?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof HitDtoFormatted
+	 */
+	title?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface LeaseBreadcrumbsDto
  */
 export interface LeaseBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseBreadcrumbsDto
-     */
-    readonly property: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseBreadcrumbsDto
-     */
-    readonly unit: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseBreadcrumbsDto
-     */
-    tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	readonly property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	readonly unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	tenant: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface LeaseDto
  */
 export interface LeaseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    start: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    end: string;
-    /**
-     * 
-     * @type {LeaseBreadcrumbsDto}
-     * @memberof LeaseDto
-     */
-    breadcrumbs: LeaseBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    tenantId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    unitId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof LeaseDto
-     */
-    monthlyRent: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof LeaseDto
-     */
-    deposit: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof LeaseDto
-     */
-    canPay: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof LeaseDto
-     */
-    notify: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseDto
-     */
-    license: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	start: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	end: string;
+	/**
+	 *
+	 * @type {LeaseBreadcrumbsDto}
+	 * @memberof LeaseDto
+	 */
+	breadcrumbs: LeaseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	tenantId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	unitId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof LeaseDto
+	 */
+	monthlyRent: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof LeaseDto
+	 */
+	deposit: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof LeaseDto
+	 */
+	canPay: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof LeaseDto
+	 */
+	notify: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	license: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface LeaseInvoiceBreadcrumbsDto
  */
 export interface LeaseInvoiceBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseInvoiceBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseInvoiceBreadcrumbsDto
-     */
-    readonly property: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseInvoiceBreadcrumbsDto
-     */
-    readonly unit: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseInvoiceBreadcrumbsDto
-     */
-    readonly lease: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof LeaseInvoiceBreadcrumbsDto
-     */
-    tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	readonly property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	readonly unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	readonly lease: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	tenant: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface LeaseInvoiceDto
  */
 export interface LeaseInvoiceDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    dueAt: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    paidAt: string | null;
-    /**
-     * 
-     * @type {LeaseInvoiceBreadcrumbsDto}
-     * @memberof LeaseInvoiceDto
-     */
-    breadcrumbs: LeaseInvoiceBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof LeaseInvoiceDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    leaseId: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof LeaseInvoiceDto
-     */
-    isPaid: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    memo: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof LeaseInvoiceDto
-     */
-    mfPaymentId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	dueAt: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	paidAt: string | null;
+	/**
+	 *
+	 * @type {LeaseInvoiceBreadcrumbsDto}
+	 * @memberof LeaseInvoiceDto
+	 */
+	breadcrumbs: LeaseInvoiceBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof LeaseInvoiceDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	leaseId: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof LeaseInvoiceDto
+	 */
+	isPaid: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	memo: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	mfPaymentId: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface Occupancy
  */
 export interface Occupancy {
-    /**
-     * 
-     * @type {number}
-     * @memberof Occupancy
-     */
-    date: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Occupancy
-     */
-    occupiedPct: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof Occupancy
+	 */
+	date: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof Occupancy
+	 */
+	occupiedPct: number;
 }
 /**
- * 
+ *
  * @export
  * @interface OrganizationCreatedDto
  */
 export interface OrganizationCreatedDto {
-    /**
-     * 
-     * @type {OrganizationDto}
-     * @memberof OrganizationCreatedDto
-     */
-    organization: OrganizationDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationCreatedDto
-     */
-    roleId: string;
+	/**
+	 *
+	 * @type {OrganizationDto}
+	 * @memberof OrganizationCreatedDto
+	 */
+	organization: OrganizationDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationCreatedDto
+	 */
+	roleId: string;
 }
 /**
- * 
+ *
  * @export
  * @interface OrganizationDto
  */
 export interface OrganizationDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    title: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OrganizationDto
-     */
-    label: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	label: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedDto
  */
 export interface PaginatedDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    page: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    take: number;
-    /**
-     * Total number of items in the collection
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    itemCount: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    pageCount: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PaginatedDto
-     */
-    hasPreviousPage: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PaginatedDto
-     */
-    hasNextPage: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    pageSize: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    start: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaginatedDto
-     */
-    end: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	page: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	take: number;
+	/**
+	 * Total number of items in the collection
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	itemCount: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	pageCount: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PaginatedDto
+	 */
+	hasPreviousPage: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PaginatedDto
+	 */
+	hasNextPage: boolean;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	pageSize: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	start: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedDto
+	 */
+	end: number;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedExpenseDto
  */
 export interface PaginatedExpenseDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedExpenseDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<ExpenseDto>}
-     * @memberof PaginatedExpenseDto
-     */
-    results: Array<ExpenseDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedExpenseDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<ExpenseDto>}
+	 * @memberof PaginatedExpenseDto
+	 */
+	results: Array<ExpenseDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedFileDto
  */
 export interface PaginatedFileDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedFileDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<FileDto>}
-     * @memberof PaginatedFileDto
-     */
-    results: Array<FileDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedFileDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<FileDto>}
+	 * @memberof PaginatedFileDto
+	 */
+	results: Array<FileDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedLeaseDto
  */
 export interface PaginatedLeaseDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedLeaseDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<LeaseDto>}
-     * @memberof PaginatedLeaseDto
-     */
-    results: Array<LeaseDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedLeaseDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<LeaseDto>}
+	 * @memberof PaginatedLeaseDto
+	 */
+	results: Array<LeaseDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedLeaseInvoiceDto
  */
 export interface PaginatedLeaseInvoiceDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedLeaseInvoiceDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<LeaseInvoiceDto>}
-     * @memberof PaginatedLeaseInvoiceDto
-     */
-    results: Array<LeaseInvoiceDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedLeaseInvoiceDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<LeaseInvoiceDto>}
+	 * @memberof PaginatedLeaseInvoiceDto
+	 */
+	results: Array<LeaseInvoiceDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedMetaDto
  */
 export interface PaginatedMetaDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedMetaDto
-     */
-    pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedMetaDto
+	 */
+	pagination: PaginatedDto;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedOrganizationDto
  */
 export interface PaginatedOrganizationDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedOrganizationDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<OrganizationDto>}
-     * @memberof PaginatedOrganizationDto
-     */
-    results: Array<OrganizationDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedOrganizationDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<OrganizationDto>}
+	 * @memberof PaginatedOrganizationDto
+	 */
+	results: Array<OrganizationDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedPayoutDto
  */
 export interface PaginatedPayoutDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedPayoutDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<PayoutDto>}
-     * @memberof PaginatedPayoutDto
-     */
-    results: Array<PayoutDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedPayoutDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<PayoutDto>}
+	 * @memberof PaginatedPayoutDto
+	 */
+	results: Array<PayoutDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedPortfolioDto
  */
 export interface PaginatedPortfolioDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedPortfolioDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<PortfolioDto>}
-     * @memberof PaginatedPortfolioDto
-     */
-    results: Array<PortfolioDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedPortfolioDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<PortfolioDto>}
+	 * @memberof PaginatedPortfolioDto
+	 */
+	results: Array<PortfolioDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedPropertyDto
  */
 export interface PaginatedPropertyDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedPropertyDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<PropertyDto>}
-     * @memberof PaginatedPropertyDto
-     */
-    results: Array<PropertyDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedPropertyDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<PropertyDto>}
+	 * @memberof PaginatedPropertyDto
+	 */
+	results: Array<PropertyDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedRoleDto
  */
 export interface PaginatedRoleDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedRoleDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<RoleDto>}
-     * @memberof PaginatedRoleDto
-     */
-    results: Array<RoleDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedRoleDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<RoleDto>}
+	 * @memberof PaginatedRoleDto
+	 */
+	results: Array<RoleDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedTenantDto
  */
 export interface PaginatedTenantDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedTenantDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<TenantDto>}
-     * @memberof PaginatedTenantDto
-     */
-    results: Array<TenantDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedTenantDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<TenantDto>}
+	 * @memberof PaginatedTenantDto
+	 */
+	results: Array<TenantDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface PaginatedUnitDto
  */
 export interface PaginatedUnitDto {
-    /**
-     * 
-     * @type {PaginatedDto}
-     * @memberof PaginatedUnitDto
-     */
-    pagination: PaginatedDto;
-    /**
-     * 
-     * @type {Array<UnitDto>}
-     * @memberof PaginatedUnitDto
-     */
-    results: Array<UnitDto>;
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedUnitDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<UnitDto>}
+	 * @memberof PaginatedUnitDto
+	 */
+	results: Array<UnitDto>;
 }
 
 /**
- * 
+ *
  * @export
  */
 export const PaidStatusEnum = {
-    All: 'all',
-    Paid: 'paid',
-    Unpaid: 'unpaid'
+	All: 'all',
+	Paid: 'paid',
+	Unpaid: 'unpaid',
 } as const;
 export type PaidStatusEnum = typeof PaidStatusEnum[keyof typeof PaidStatusEnum];
 
 /**
- * 
+ *
  * @export
  * @interface PartialExpenseDto
  */
 export interface PartialExpenseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    readonly id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    readonly createdAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    readonly updatedAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    postAt?: string;
-    /**
-     * 
-     * @type {ExpenseBreadcrumbsDto}
-     * @memberof PartialExpenseDto
-     */
-    breadcrumbs?: ExpenseBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialExpenseDto
-     */
-    amount?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    unitId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    propertyId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    maintenanceOrderId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDto
-     */
-    categoryId?: string | null;
-    /**
-     * 
-     * @type {PartialExpenseDtoExpenseType}
-     * @memberof PartialExpenseDto
-     */
-    expenseType?: PartialExpenseDtoExpenseType | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	readonly id?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	readonly createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	readonly updatedAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {ExpenseBreadcrumbsDto}
+	 * @memberof PartialExpenseDto
+	 */
+	breadcrumbs?: ExpenseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialExpenseDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	unitId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	propertyId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	maintenanceOrderId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	categoryId?: string | null;
+	/**
+	 *
+	 * @type {PartialExpenseDtoExpenseType}
+	 * @memberof PartialExpenseDto
+	 */
+	expenseType?: PartialExpenseDtoExpenseType | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PartialExpenseDtoExpenseType
  */
 export interface PartialExpenseDtoExpenseType {
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    labelEn: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    parentId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    labelAr: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    description?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartialExpenseDtoExpenseType
-     */
-    isGroup: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	labelEn: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	parentId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	labelAr: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PartialExpenseDtoExpenseType
+	 */
+	isGroup: boolean;
 }
 /**
- * 
+ *
  * @export
  * @interface PartialLeaseDto
  */
 export interface PartialLeaseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    readonly id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    readonly createdAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    readonly updatedAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    start?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    end?: string;
-    /**
-     * 
-     * @type {LeaseBreadcrumbsDto}
-     * @memberof PartialLeaseDto
-     */
-    breadcrumbs?: LeaseBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    tenantId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    unitId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialLeaseDto
-     */
-    monthlyRent?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialLeaseDto
-     */
-    deposit?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartialLeaseDto
-     */
-    canPay?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartialLeaseDto
-     */
-    notify?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseDto
-     */
-    license?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	readonly id?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	readonly createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	readonly updatedAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	start?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	end?: string;
+	/**
+	 *
+	 * @type {LeaseBreadcrumbsDto}
+	 * @memberof PartialLeaseDto
+	 */
+	breadcrumbs?: LeaseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	tenantId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	unitId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialLeaseDto
+	 */
+	monthlyRent?: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialLeaseDto
+	 */
+	deposit?: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PartialLeaseDto
+	 */
+	canPay?: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PartialLeaseDto
+	 */
+	notify?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	license?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PartialLeaseInvoiceDto
  */
 export interface PartialLeaseInvoiceDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    readonly id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    readonly createdAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    readonly updatedAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    postAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    dueAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    paidAt?: string | null;
-    /**
-     * 
-     * @type {LeaseInvoiceBreadcrumbsDto}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    breadcrumbs?: LeaseInvoiceBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    amount?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    leaseId?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    isPaid?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialLeaseInvoiceDto
-     */
-    mfPaymentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	readonly id?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	readonly createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	readonly updatedAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	dueAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	paidAt?: string | null;
+	/**
+	 *
+	 * @type {LeaseInvoiceBreadcrumbsDto}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	breadcrumbs?: LeaseInvoiceBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	leaseId?: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	isPaid?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	mfPaymentId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PartialUnitDto
  */
 export interface PartialUnitDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    readonly id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    readonly createdAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    readonly updatedAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    title?: string;
-    /**
-     * 
-     * @type {UnitVacancy}
-     * @memberof PartialUnitDto
-     */
-    vacancy?: UnitVacancy;
-    /**
-     * 
-     * @type {UnitBreadcrumbsDto}
-     * @memberof PartialUnitDto
-     */
-    breadcrumbs?: UnitBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    propertyId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    unitNumber?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialUnitDto
-     */
-    floor?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialUnitDto
-     */
-    size?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialUnitDto
-     */
-    bed?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialUnitDto
-     */
-    bath?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PartialUnitDto
-     */
-    marketRent?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    type?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    usage?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PartialUnitDto
-     */
-    label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	readonly id?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	readonly createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	readonly updatedAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	title?: string;
+	/**
+	 *
+	 * @type {UnitVacancy}
+	 * @memberof PartialUnitDto
+	 */
+	vacancy?: UnitVacancy;
+	/**
+	 *
+	 * @type {UnitBreadcrumbsDto}
+	 * @memberof PartialUnitDto
+	 */
+	breadcrumbs?: UnitBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	propertyId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	unitNumber?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialUnitDto
+	 */
+	floor?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialUnitDto
+	 */
+	size?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialUnitDto
+	 */
+	bed?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialUnitDto
+	 */
+	bath?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialUnitDto
+	 */
+	marketRent?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	type?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	usage?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	label?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PayoutBreadcrumbsDto
  */
 export interface PayoutBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof PayoutBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof PayoutBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface PayoutDto
  */
 export interface PayoutDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    postAt: string;
-    /**
-     * 
-     * @type {PayoutBreadcrumbsDto}
-     * @memberof PayoutDto
-     */
-    breadcrumbs: PayoutBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PayoutDto
-     */
-    amount: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PayoutDto
-     */
-    memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {PayoutBreadcrumbsDto}
+	 * @memberof PayoutDto
+	 */
+	breadcrumbs: PayoutBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PayoutDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	memo?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PortfolioDto
  */
 export interface PortfolioDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    dob: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    title: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    label: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    civilid: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PortfolioDto
-     */
-    phone: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	dob: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	label: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	civilid: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	phone: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface PropertyBreadcrumbsDto
  */
 export interface PropertyBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof PropertyBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof PropertyBreadcrumbsDto
-     */
-    readonly property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof PropertyBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof PropertyBreadcrumbsDto
+	 */
+	readonly property: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface PropertyDto
  */
 export interface PropertyDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    address: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    title: string;
-    /**
-     * 
-     * @type {PropertyBreadcrumbsDto}
-     * @memberof PropertyDto
-     */
-    breadcrumbs: PropertyBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    area: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    block: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    avenue: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    street: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    number: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    parcel: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    paci: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PropertyDto
-     */
-    cost: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PropertyDto
-     */
-    label: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PropertyDto
-     */
-    _long: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PropertyDto
-     */
-    lat: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	address: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {PropertyBreadcrumbsDto}
+	 * @memberof PropertyDto
+	 */
+	breadcrumbs: PropertyBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	area: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	block: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	avenue: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	street: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	number: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	parcel: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	paci: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PropertyDto
+	 */
+	cost: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	label: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PropertyDto
+	 */
+	_long: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PropertyDto
+	 */
+	lat: number | null;
 }
 /**
- * 
+ *
  * @export
  * @interface RoleDto
  */
 export interface RoleDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {RoleTypeEnum}
-     * @memberof RoleDto
-     */
-    roleType: RoleTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    userId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    email?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    portfolioId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoleDto
-     */
-    tenantId: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof RoleDto
-     */
-    isAccepted: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof RoleDto
-     */
-    isDefault: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {RoleTypeEnum}
+	 * @memberof RoleDto
+	 */
+	roleType: RoleTypeEnum;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	userId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	email?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	portfolioId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
+	tenantId: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof RoleDto
+	 */
+	isAccepted: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof RoleDto
+	 */
+	isDefault: boolean;
 }
 
 /**
- * 
+ *
  * @export
  */
 export const RoleTypeEnum = {
-    Orgadmin: 'ORGADMIN',
-    Portfolio: 'PORTFOLIO',
-    Tenant: 'TENANT'
+	Orgadmin: 'ORGADMIN',
+	Portfolio: 'PORTFOLIO',
+	Tenant: 'TENANT',
 } as const;
 export type RoleTypeEnum = typeof RoleTypeEnum[keyof typeof RoleTypeEnum];
 
 /**
- * 
+ *
  * @export
  * @interface SearchDto
  */
 export interface SearchDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof SearchDto
-     */
-    entityTitle: string;
-    /**
-     * 
-     * @type {Array<HitDto>}
-     * @memberof SearchDto
-     */
-    hits: Array<HitDto>;
-    /**
-     * 
-     * @type {number}
-     * @memberof SearchDto
-     */
-    offset: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SearchDto
-     */
-    limit: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SearchDto
-     */
-    processingTimeMs: number;
-    /**
-     * 
-     * @type {object}
-     * @memberof SearchDto
-     */
-    facetDistribution?: object;
-    /**
-     * 
-     * @type {string}
-     * @memberof SearchDto
-     */
-    query: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SearchDto
-     */
-    estimatedTotalHits: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof SearchDto
+	 */
+	entityTitle: string;
+	/**
+	 *
+	 * @type {Array<HitDto>}
+	 * @memberof SearchDto
+	 */
+	hits: Array<HitDto>;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof SearchDto
+	 */
+	offset: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof SearchDto
+	 */
+	limit: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof SearchDto
+	 */
+	processingTimeMs: number;
+	/**
+	 *
+	 * @type {object}
+	 * @memberof SearchDto
+	 */
+	facetDistribution?: object;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof SearchDto
+	 */
+	query: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof SearchDto
+	 */
+	estimatedTotalHits: number;
 }
 
 /**
- * 
+ *
  * @export
  */
 export const SortOrderEnum = {
-    Asc: 'asc',
-    Desc: 'desc'
+	Asc: 'asc',
+	Desc: 'desc',
 } as const;
 export type SortOrderEnum = typeof SortOrderEnum[keyof typeof SortOrderEnum];
 
 /**
- * 
+ *
  * @export
  * @interface TenantDto
  */
 export interface TenantDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    dob: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    residencyEnd: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    title: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    label: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    civilid: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    phone: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    passportNum: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    nationality: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TenantDto
-     */
-    residencyNum: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	dob: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	residencyEnd: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	label: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	civilid: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	phone: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	passportNum: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	nationality: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	residencyNum: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UnitBreadcrumbsDto
  */
 export interface UnitBreadcrumbsDto {
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof UnitBreadcrumbsDto
-     */
-    readonly portfolio: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof UnitBreadcrumbsDto
-     */
-    readonly property: BreadcrumbDto;
-    /**
-     * 
-     * @type {BreadcrumbDto}
-     * @memberof UnitBreadcrumbsDto
-     */
-    readonly unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof UnitBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof UnitBreadcrumbsDto
+	 */
+	readonly property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof UnitBreadcrumbsDto
+	 */
+	readonly unit: BreadcrumbDto;
 }
 /**
- * 
+ *
  * @export
  * @interface UnitDto
  */
 export interface UnitDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    title: string;
-    /**
-     * 
-     * @type {UnitVacancy}
-     * @memberof UnitDto
-     */
-    vacancy: UnitVacancy;
-    /**
-     * 
-     * @type {UnitBreadcrumbsDto}
-     * @memberof UnitDto
-     */
-    breadcrumbs: UnitBreadcrumbsDto;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    portfolioId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    propertyId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    unitNumber: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnitDto
-     */
-    floor: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnitDto
-     */
-    size: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnitDto
-     */
-    bed: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnitDto
-     */
-    bath: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UnitDto
-     */
-    marketRent: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    type: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    usage: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitDto
-     */
-    label: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {UnitVacancy}
+	 * @memberof UnitDto
+	 */
+	vacancy: UnitVacancy;
+	/**
+	 *
+	 * @type {UnitBreadcrumbsDto}
+	 * @memberof UnitDto
+	 */
+	breadcrumbs: UnitBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	propertyId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	unitNumber: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UnitDto
+	 */
+	floor: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UnitDto
+	 */
+	size: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UnitDto
+	 */
+	bed: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UnitDto
+	 */
+	bath: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UnitDto
+	 */
+	marketRent: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	type: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	usage: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	label: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UnitVacancy
  */
 export interface UnitVacancy {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UnitVacancy
-     */
-    isVacant: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitVacancy
-     */
-    vacancyDistance: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UnitVacancy
-     */
-    vacancyDate: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UnitVacancy
+	 */
+	isVacant: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitVacancy
+	 */
+	vacancyDistance: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitVacancy
+	 */
+	vacancyDate: string;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateAllExpenseCategoriesDto
  */
 export interface UpdateAllExpenseCategoriesDto {
-    /**
-     * 
-     * @type {Array<UpdateExpenseCategoryDto>}
-     * @memberof UpdateAllExpenseCategoriesDto
-     */
-    items: Array<UpdateExpenseCategoryDto>;
+	/**
+	 *
+	 * @type {Array<UpdateExpenseCategoryDto>}
+	 * @memberof UpdateAllExpenseCategoriesDto
+	 */
+	items: Array<UpdateExpenseCategoryDto>;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateExpenseCategoryDto
  */
 export interface UpdateExpenseCategoryDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    labelEn?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    parentId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    labelAr?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    description?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateExpenseCategoryDto
-     */
-    isGroup?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	labelEn?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	parentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	labelAr?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UpdateExpenseCategoryDto
+	 */
+	isGroup?: boolean;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateExpenseDto
  */
 export interface UpdateExpenseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    postAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateExpenseDto
-     */
-    amount?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    unitId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    propertyId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    maintenanceOrderId?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateExpenseDto
-     */
-    categoryId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateExpenseDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	unitId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	propertyId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	maintenanceOrderId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseDto
+	 */
+	categoryId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateLeaseDto
  */
 export interface UpdateLeaseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    start?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    end?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    tenantId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    unitId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateLeaseDto
-     */
-    monthlyRent?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateLeaseDto
-     */
-    deposit?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateLeaseDto
-     */
-    canPay?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateLeaseDto
-     */
-    notify?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseDto
-     */
-    license?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	start?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	end?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	tenantId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	unitId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateLeaseDto
+	 */
+	monthlyRent?: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateLeaseDto
+	 */
+	deposit?: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UpdateLeaseDto
+	 */
+	canPay?: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UpdateLeaseDto
+	 */
+	notify?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	license?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateLeaseInvoiceDto
  */
 export interface UpdateLeaseInvoiceDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    postAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    dueAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    paidAt?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    amount?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    leaseId?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    isPaid?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    memo?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateLeaseInvoiceDto
-     */
-    mfPaymentId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	dueAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	paidAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	leaseId?: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	isPaid?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	mfPaymentId?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateOrganizationDto
  */
 export interface UpdateOrganizationDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    fullName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateOrganizationDto
+	 */
+	fullName?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateOrganizationDto
+	 */
+	label?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdatePayoutDto
  */
 export interface UpdatePayoutDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePayoutDto
-     */
-    postAt?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePayoutDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePayoutDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdatePayoutDto
-     */
-    amount?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePayoutDto
-     */
-    memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePayoutDto
+	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePayoutDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePayoutDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdatePayoutDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePayoutDto
+	 */
+	memo?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdatePortfolioDto
  */
 export interface UpdatePortfolioDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    dob?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    fullName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    civilid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePortfolioDto
-     */
-    phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	dob?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	fullName?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	civilid?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
+	phone?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdatePropertyDto
  */
 export interface UpdatePropertyDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    area?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    block?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    avenue?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    street?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    number?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    parcel?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    paci?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdatePropertyDto
-     */
-    cost?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdatePropertyDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdatePropertyDto
-     */
-    _long?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdatePropertyDto
-     */
-    lat?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	area?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	block?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	avenue?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	street?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	number?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	parcel?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	paci?: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdatePropertyDto
+	 */
+	cost?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdatePropertyDto
+	 */
+	_long?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdatePropertyDto
+	 */
+	lat?: number | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateTenantDto
  */
 export interface UpdateTenantDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    dob?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    residencyEnd?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    fullName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    label?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    civilid?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    phone?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    passportNum?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    nationality?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateTenantDto
-     */
-    residencyNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	dob?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	residencyEnd?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	fullName?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	civilid?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	passportNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	nationality?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	residencyNum?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UpdateUnitDto
  */
 export interface UpdateUnitDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    organizationId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    portfolioId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    propertyId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    unitNumber?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateUnitDto
-     */
-    floor?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateUnitDto
-     */
-    size?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateUnitDto
-     */
-    bed?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateUnitDto
-     */
-    bath?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpdateUnitDto
-     */
-    marketRent?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    type?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    usage?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUnitDto
-     */
-    label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	organizationId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	portfolioId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	propertyId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	unitNumber?: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateUnitDto
+	 */
+	floor?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateUnitDto
+	 */
+	size?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateUnitDto
+	 */
+	bed?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateUnitDto
+	 */
+	bath?: number | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateUnitDto
+	 */
+	marketRent?: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	type?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	usage?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	label?: string | null;
 }
 /**
- * 
+ *
  * @export
  * @interface UserDto
  */
 export interface UserDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    fullName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDto
-     */
-    email: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UserDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UserDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UserDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UserDto
+	 */
+	fullName?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UserDto
+	 */
+	email: string;
 }
 /**
- * 
+ *
  * @export
  * @interface ValidatedRoleDto
  */
 export interface ValidatedRoleDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {RoleTypeEnum}
-     * @memberof ValidatedRoleDto
-     */
-    roleType: RoleTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    userId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    email?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    organizationId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    portfolioId: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDto
-     */
-    tenantId: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ValidatedRoleDto
-     */
-    isAccepted: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ValidatedRoleDto
-     */
-    isDefault: boolean;
-    /**
-     * 
-     * @type {ValidatedRoleDtoAllOfOrganization}
-     * @memberof ValidatedRoleDto
-     */
-    organization: ValidatedRoleDtoAllOfOrganization;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {RoleTypeEnum}
+	 * @memberof ValidatedRoleDto
+	 */
+	roleType: RoleTypeEnum;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	userId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	email?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	portfolioId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	tenantId: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ValidatedRoleDto
+	 */
+	isAccepted: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ValidatedRoleDto
+	 */
+	isDefault: boolean;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfOrganization}
+	 * @memberof ValidatedRoleDto
+	 */
+	organization: ValidatedRoleDtoAllOfOrganization;
 }
 /**
- * 
+ *
  * @export
  * @interface ValidatedRoleDtoAllOf
  */
 export interface ValidatedRoleDtoAllOf {
-    /**
-     * 
-     * @type {ValidatedRoleDtoAllOfOrganization}
-     * @memberof ValidatedRoleDtoAllOf
-     */
-    organization: ValidatedRoleDtoAllOfOrganization;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfOrganization}
+	 * @memberof ValidatedRoleDtoAllOf
+	 */
+	organization: ValidatedRoleDtoAllOfOrganization;
 }
 /**
- * 
+ *
  * @export
  * @interface ValidatedRoleDtoAllOfOrganization
  */
 export interface ValidatedRoleDtoAllOfOrganization {
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDtoAllOfOrganization
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDtoAllOfOrganization
-     */
-    fullName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedRoleDtoAllOfOrganization
-     */
-    title?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDtoAllOfOrganization
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDtoAllOfOrganization
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDtoAllOfOrganization
+	 */
+	title?: string;
 }
 /**
- * 
+ *
  * @export
  * @interface ValidatedUserDto
  */
 export interface ValidatedUserDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedUserDto
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedUserDto
-     */
-    readonly createdAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedUserDto
-     */
-    readonly updatedAt: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedUserDto
-     */
-    fullName?: string | null;
-    /**
-     * 
-     * @type {Array<ValidatedRoleDto>}
-     * @memberof ValidatedUserDto
-     */
-    roles: Array<ValidatedRoleDto>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidatedUserDto
-     */
-    email: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	fullName?: string | null;
+	/**
+	 *
+	 * @type {Array<ValidatedRoleDto>}
+	 * @memberof ValidatedUserDto
+	 */
+	roles: Array<ValidatedRoleDto>;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	email: string;
 }

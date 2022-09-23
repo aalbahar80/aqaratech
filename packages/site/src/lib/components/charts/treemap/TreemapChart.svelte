@@ -114,7 +114,7 @@ Create a treemap from a d3-hierarchy.
 						<div
 							class={classes(
 								height > width ? 'flex-col' : 'flex-row',
-								'flex flex-nowrap gap-x-2 text-ellipsis overflow-hidden',
+								'flex flex-nowrap gap-x-2 overflow-hidden text-ellipsis',
 							)}
 							class:text-xs={area < 0.03}
 							class:text-md={area > 0.03 && area < 0.07}
