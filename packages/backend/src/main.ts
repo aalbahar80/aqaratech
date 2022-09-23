@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { envCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
@@ -10,7 +11,6 @@ import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SentryInterceptor } from 'src/sentry/sentry.interceptor';
 import { setupSwagger } from 'src/swagger';
-import { checkEnv } from 'src/utils/env-check';
 import { version } from '../package.json';
 import { AppModule } from './app.module';
 
@@ -25,7 +25,7 @@ Sentry.init({
 
 async function bootstrap() {
   console.log(`Version: ${version}`);
-  checkEnv();
+  envCheck();
 
   const app = await NestFactory.create(AppModule, {
     logger: [

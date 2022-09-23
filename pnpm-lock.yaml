@@ -379,12 +379,14 @@ importers:
   packages/utils:
     specifiers:
       '@tsconfig/esm': 1.0.2
+      '@types/node': 18.7.18
       ts-toolbelt: 9.6.0
       typescript: 4.8.3
     dependencies:
       ts-toolbelt: 9.6.0
     devDependencies:
       '@tsconfig/esm': 1.0.2
+      '@types/node': 18.7.18
       typescript: 4.8.3
 
 packages:

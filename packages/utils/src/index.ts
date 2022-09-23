@@ -7,6 +7,7 @@ export {
 	EntityNames,
 	NonDBEntitiesMap,
 } from "./entity-map";
+export { envCheck } from "./env-check";
 export { fromUrl } from "./from-url";
 export { isEntity, isEntityUrlName } from "./is-entity";
 export { satisfies } from "./satisfies";
