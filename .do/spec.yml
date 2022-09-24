@@ -49,7 +49,7 @@ services:
     http_port: 3002
     health_check:
       failure_threshold: 2
-      http_path: /
+      http_path: /health
     alerts:
       - operator: GREATER_THAN
         rule: CPU_UTILIZATION
@@ -107,7 +107,7 @@ services:
     http_port: 3000
     health_check:
       failure_threshold: 2
-      http_path: /
+      http_path: /health
     log_destinations:
       - logtail:
           token: NxNhbT6iBPCFncTBvoFmS4HG
