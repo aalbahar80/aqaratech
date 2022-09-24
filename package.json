@@ -22,7 +22,7 @@
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.12",
 		"@changesets/cli": "2.24.4",
-		"eslint": "8.23.1",
+		"eslint": "8.24.0",
 		"eslint-config-custom": "*",
 		"prettier": "2.7.1",
 		"prettier-plugin-tailwindcss": "0.1.13",
