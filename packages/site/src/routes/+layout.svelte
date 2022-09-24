@@ -26,7 +26,7 @@
 				// TODO: use environment variable to set the DSN
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
-				tracesSampleRate: +(environment.PUBLIC_TRACE_RATE ?? 0.1),
+				tracesSampleRate: +(environment.PUBLIC_TRACE_RATE ?? 0),
 				environment: environment.PUBLIC_AQARATECH_ENV,
 				release: __AQARATECH_APP_VERSION__,
 				debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
