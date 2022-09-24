@@ -1,5 +1,11 @@
 # @self/seed
 
+## 0.3.9
+
+### Patch Changes
+
+- d781c18b: rm unused .env's
+
 ## 0.3.8
 
 ### Patch Changes
