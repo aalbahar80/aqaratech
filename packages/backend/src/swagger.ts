@@ -13,7 +13,7 @@ import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
 
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'fs';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
@@ -83,7 +83,7 @@ export const setupSwagger = async (app: INestApplication) => {
 	});
 
 	try {
-		console.log('Setting up swagger...');
+		Logger.log('Setting up swagger...');
 		const { dump } = await import('js-yaml');
 		// For consumption of swagger-ui
 		writeFileSync(
@@ -106,8 +106,8 @@ export const setupSwagger = async (app: INestApplication) => {
 			},
 		});
 	} catch (e) {
-		console.error('Could not write swagger file');
-		console.error(e);
+		Logger.error('Could not write swagger file');
+		Logger.error(e);
 	}
 
 	return document;

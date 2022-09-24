@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { envCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
@@ -30,7 +30,7 @@ Sentry.init({
 });
 
 async function bootstrap() {
-	console.log(`Version: ${version}`);
+	Logger.log(`Version: ${version}`);
 	envCheck();
 
 	const app = await NestFactory.create(AppModule, {
@@ -80,7 +80,7 @@ async function bootstrap() {
 	if (process.env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
 		await setupSwagger(app);
 	} else {
-		console.warn('Swagger is not enabled in production/staging');
+		Logger.warn('Swagger is not enabled in production/staging');
 	}
 
 	await app.listen(3002);

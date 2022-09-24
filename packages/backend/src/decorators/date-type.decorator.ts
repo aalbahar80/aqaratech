@@ -1,4 +1,4 @@
-import { applyDecorators, BadRequestException } from '@nestjs/common';
+import { applyDecorators, BadRequestException, Logger } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsDate, isISO8601, IsOptional } from 'class-validator';
@@ -35,7 +35,7 @@ export function DateType(required = true, readOnly = false): PropertyDecorator {
 					p.value.length > 10 &&
 					!p.value.endsWith('00:00:00.000Z')
 				) {
-					console.warn(
+					Logger.warn(
 						'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
 						{ key: p.key, value: p.value, obj: p.obj },
 					);
@@ -44,7 +44,7 @@ export function DateType(required = true, readOnly = false): PropertyDecorator {
 				if (isISO8601(p.value)) {
 					return new Date(p.value);
 				} else if (p.value === null || p.value === undefined) {
-					console.log('DateType: null or undefined');
+					Logger.log('DateType: null or undefined');
 					return p.value;
 				} else if (typeof p.value === 'string' && required) {
 					// client sends string, but it's not ISO8601. Reject it because it's required.
