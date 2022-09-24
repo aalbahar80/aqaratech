@@ -66,7 +66,7 @@ export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/`,
+				path: `/health`,
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
