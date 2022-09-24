@@ -1,5 +1,11 @@
 # @self/backend
 
+## 0.3.10
+
+### Patch Changes
+
+- e89e5d62: exclude /health from sentry
+
 ## 0.3.9
 
 ### Patch Changes

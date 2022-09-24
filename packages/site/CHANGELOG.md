@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.4.12
+
+### Patch Changes
+
+- e89e5d62: exclude /health from sentry
+
 ## 0.4.11
 
 ### Patch Changes
