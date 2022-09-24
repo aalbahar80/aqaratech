@@ -8,5 +8,8 @@
 		"@typescript-eslint/parser": "5.38.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-config-turbo": "0.0.4"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
