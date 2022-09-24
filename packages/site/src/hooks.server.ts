@@ -36,6 +36,13 @@ Sentry.init({
 		new Sentry.Integrations.Console(),
 	],
 	release: __AQARATECH_APP_VERSION__,
+	tracesSampler(samplingContext) {
+		const sampleRate = +(process.env.PUBLIC_TRACE_RATE ?? 0);
+		if (samplingContext.transactionContext?.name?.startsWith('/health')) {
+			return 0;
+		}
+		return sampleRate;
+	},
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
