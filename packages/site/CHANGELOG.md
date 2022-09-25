@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.6.2
+
+### Patch Changes
+
+- c5ade245: ignore sourcemap errors
+
 ## 0.6.1
 
 ### Patch Changes
