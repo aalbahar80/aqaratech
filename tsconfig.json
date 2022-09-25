@@ -21,7 +21,7 @@
 		"checkJs": true,
 		"noEmit": true,
 		"resolveJsonModule": true,
-		"types": ["zx", "node"]
+		"types": ["zx", "node"],
+		"module": "ESNext"
 	}
-	// "include": ["*.mjs", "**/*.mjs"]
 }
