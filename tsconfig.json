@@ -1,20 +1,4 @@
-// {
-// 	// add global zx/globals to the global scope
-// 	"typeAcquisition": {
-// 		"include": ["zx/globals"]
-// 	},
-// 	"compilerOptions": {
-// 		"types": ["node", "zx/globals", "zx"]
-// 		// "resolveJsonModule": true,
-// 		// "moduleResolution": "Node",
-// 		// "module": "ESNext",
-// 		// "target": "ESNext"
-// 	},
-// 	"include": ["scripts/**/*"]
-// }
 {
-	// "extends": "../tsconfig.base.json",
-
 	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
 		"allowJs": true,
