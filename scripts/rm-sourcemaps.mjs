@@ -5,8 +5,6 @@
  * Example: zx rm-source-maps.mjs build/client
  */
 
-// import "zx/globals";
-
 const dir = argv._[0];
 const force = argv.force;
 

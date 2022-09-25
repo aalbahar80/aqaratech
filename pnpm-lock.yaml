@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@changesets/changelog-git': 0.1.12
       '@changesets/cli': 2.24.4
+      '@tsconfig/node18-strictest': 1.0.0
       eslint: 8.24.0
       eslint-config-custom: '*'
       prettier: 2.7.1
@@ -15,6 +16,7 @@ importers:
     devDependencies:
       '@changesets/changelog-git': 0.1.12
       '@changesets/cli': 2.24.4
+      '@tsconfig/node18-strictest': 1.0.0
       eslint: 8.24.0
       eslint-config-custom: link:packages/eslint-config-custom
       prettier: 2.7.1
@@ -3079,6 +3081,10 @@ packages:
 
   /@tsconfig/esm/1.0.2:
     resolution: {integrity: sha512-awiISx+G4L+7k97nKnfA5QF6rukawiuycMPfASFHG/0fqjrUlYBuNISy3Yjl1SHIpVi57lYf7dc6L/FoQQCKcA==}
+    dev: true
+
+  /@tsconfig/node18-strictest/1.0.0:
+    resolution: {integrity: sha512-bOuNKwO4Fzbt+Su5wqI9zNHwx5C25gLnutwVQA1sBZk0cW8UjVPVcwzIUhJIIJDUx7zDEbAwdCD2HfvIsV8dYg==}
     dev: true
 
   /@tsconfig/node18/1.0.1:
