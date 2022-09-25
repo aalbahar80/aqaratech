@@ -27,12 +27,11 @@ let sourcemaps = await glob(`${dir}/**/*.map`);
 
 if (sourcemaps.length === 0) {
 	console.log(`No sourcemaps found in ${dir}`);
-	process.exit(0);
 }
 
 console.log(`Found ${sourcemaps.length} sourcemaps in ${dir}`);
 
-if (!force) {
+if (!force && sourcemaps.length > 0) {
 	let answer = await question('Remove sourcemaps?', {
 		choices: ['y', 'n'],
 	});
@@ -41,7 +40,16 @@ if (!force) {
 	}
 }
 
+// Delete sourcemap files
 sourcemaps.forEach(async (sourceMap) => {
 	await $`rm ${sourceMap}`;
 	console.log(`${sourceMap} removed`);
+});
+
+// Delete sourcmap url comments from js files
+let jsFiles = await glob(`${dir}/**/*.js`);
+jsFiles.forEach(async (jsFile) => {
+	await $`sed -i '/sourceMappingURL/d' ${jsFile}`;
+	// await $`sed -i '' -e '//# sourceMappingURL.*/d' ${jsFile}`;
+	console.log(`Removed sourceMappingURL from ${jsFile}`);
 });
