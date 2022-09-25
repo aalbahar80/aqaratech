@@ -4,7 +4,7 @@ console.log({ argv });
 
 const environment = argv['environment'];
 
-const manualVersion = argv.version;
+const manualVersion = argv['version'];
 const fallbackVersion = await $`jq -r .version package.json`;
 
 const version = manualVersion || fallbackVersion.toString().trim();
@@ -52,4 +52,5 @@ const envName = {
 	prod: 'production',
 };
 
+// @ts-expect-error Limited type safety here.
 await $`sentry-cli releases deploys ${prefixedVersion} new -e ${envName[environment]} ${org} ${project}`;

@@ -2,7 +2,14 @@
 
 console.log({ argv });
 
+/**
+ * @type {string | undefined}
+ */
 let siteVersion = undefined;
+
+/**
+ * @type {string | undefined}
+ */
 let backendVersion = undefined;
 
 if (
@@ -26,7 +33,10 @@ const SPEC = 'app.yml';
 console.log(chalk.blue(`Getting app ${appName} info...`));
 
 const allApps = await $`doctl apps list --format ID,Name --output json`;
-const app = JSON.parse(allApps).find((app) => app.spec.name === appName);
+const app = JSON.parse(allApps).find(
+	(/** @type {{ spec: { name: string; }; }} */ app) =>
+		app.spec.name === appName,
+);
 
 let appId = '';
 let WILL_CREATE = false;
@@ -79,22 +89,24 @@ if (!siteVersionChanged && !backendVersionChanged) {
 // bump versions in spec
 console.log(chalk.blue(`Bumping versions...`));
 
-latestSpec.services.forEach((service) => {
-	// Only bump versions when a version is specified.
-	if (siteVersion && service.name === 'site') {
-		console.log(
-			chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`),
-		);
-		service.image.tag = siteVersion;
-	} else if (backendVersion && service.name === 'backend') {
-		console.log(
-			chalk.green(
-				`Bumping backend from ${service.image.tag} to ${backendVersion}`,
-			),
-		);
-		service.image.tag = backendVersion;
-	}
-});
+latestSpec.services.forEach(
+	(/** @type {{ name: string; image: { tag: string; }; }} */ service) => {
+		// Only bump versions when a version is specified.
+		if (siteVersion && service.name === 'site') {
+			console.log(
+				chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`),
+			);
+			service.image.tag = siteVersion;
+		} else if (backendVersion && service.name === 'backend') {
+			console.log(
+				chalk.green(
+					`Bumping backend from ${service.image.tag} to ${backendVersion}`,
+				),
+			);
+			service.image.tag = backendVersion;
+		}
+	},
+);
 
 // save spec
 console.log(chalk.blue(`Saving spec...`));

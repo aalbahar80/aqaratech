@@ -6,7 +6,7 @@
  */
 
 const dir = argv._[0];
-const force = argv.force;
+const force = argv['force'];
 
 // check if dir path is provided
 if (!dir) {
