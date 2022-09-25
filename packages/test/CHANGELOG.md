@@ -1,5 +1,17 @@
 # @self/test
 
+## 1.4.0
+
+### Minor Changes
+
+- ffbab2dd: fetch fresh user data in roles page
+
+### Patch Changes
+
+- Updated dependencies [ffbab2dd]
+  - eslint-config-custom@0.1.0
+  - @self/utils@1.4.0
+
 ## 1.3.8
 
 ### Patch Changes

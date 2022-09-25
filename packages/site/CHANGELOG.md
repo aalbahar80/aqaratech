@@ -1,5 +1,17 @@
 # @self/site
 
+## 0.5.0
+
+### Minor Changes
+
+- ffbab2dd: fetch fresh user data in roles page
+- ffbab2dd: avoid extra calls to sveltekit server
+
+### Patch Changes
+
+- ffbab2dd: create handleClientError hook
+- c8955f5c: use openapi 6.2.0
+
 ## 0.4.12
 
 ### Patch Changes

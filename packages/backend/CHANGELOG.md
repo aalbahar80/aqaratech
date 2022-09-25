@@ -1,5 +1,16 @@
 # @self/backend
 
+## 0.4.0
+
+### Minor Changes
+
+- ffbab2dd: fetch fresh user data in roles page
+
+### Patch Changes
+
+- Updated dependencies [ffbab2dd]
+  - @self/utils@1.4.0
+
 ## 0.3.10
 
 ### Patch Changes
