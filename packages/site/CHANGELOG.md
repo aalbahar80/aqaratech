@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.6.0
+
+### Minor Changes
+
+- c88644f4: better sentry release tracking
+
 ## 0.5.0
 
 ### Minor Changes

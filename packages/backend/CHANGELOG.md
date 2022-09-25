@@ -1,5 +1,16 @@
 # @self/backend
 
+## 0.5.0
+
+### Minor Changes
+
+- c88644f4: better sentry release tracking
+
+### Patch Changes
+
+- Updated dependencies [c88644f4]
+  - @self/utils@1.5.0
+
 ## 0.4.0
 
 ### Minor Changes

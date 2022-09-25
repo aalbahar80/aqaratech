@@ -1,5 +1,17 @@
 # @self/test
 
+## 1.5.0
+
+### Minor Changes
+
+- c88644f4: better sentry release tracking
+
+### Patch Changes
+
+- Updated dependencies [c88644f4]
+  - eslint-config-custom@0.2.0
+  - @self/utils@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes
