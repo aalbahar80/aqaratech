@@ -41,7 +41,7 @@ if (cwd.endsWith('site')) {
 }
 
 await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
-await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
+await $`sentry-cli sourcemaps upload ${dir} ${org} ${project} --release ${prefixedVersion}`;
 
 // Use sentry commit tracking. This will automatically associate commits with releases. AKA `suspect commits`.
 await $`sentry-cli releases set-commits --auto ${prefixedVersion} ${org} ${project}`;
