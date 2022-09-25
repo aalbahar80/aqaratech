@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -97,14 +97,6 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
 		}
 
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
-
 		const response = await this.request(
 			{
 				path: `/search`,
@@ -146,14 +138,6 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 			requestParameters.xRoleId !== null
 		) {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
 		}
 
 		const response = await this.request(

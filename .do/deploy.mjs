@@ -56,6 +56,26 @@ if (!app) {
 	latestSpec = YAML.parse(await fs.readFile(SPEC, 'utf8'));
 }
 
+// check if siteVersion or backendVersion are different from the latest spec
+const siteVersionChanged =
+	siteVersion && siteVersion !== latestSpec.siteVersion;
+const backendVersionChanged =
+	backendVersion && backendVersion !== latestSpec.backendVersion;
+
+// if docker container tag hasn't changed, force a rebuild and exit
+if (!siteVersionChanged && !backendVersionChanged) {
+	console.log(
+		chalk.blue(
+			`No version changes detected. Forcing rebuild without updating spec...`,
+		),
+	);
+
+	// Create a new deployment with the `--force-rebuild` flag to ensure latest version of the container is pulled.
+	await $`doctl apps create-deployment ${appId} --force-rebuild`;
+
+	process.exit(0);
+}
+
 // bump versions in spec
 console.log(chalk.blue(`Bumping versions...`));
 
@@ -90,9 +110,4 @@ if (WILL_CREATE) {
 } else if (appId) {
 	// Update existing app
 	await $`doctl apps update ${appId} --spec ${SPEC} --output json`;
-
-	// Create a new deployment because it's the only way to "Force rebuild".
-	// Otherwise, sometimes the new image is not pulled. Could be because the image tag is the same (e.g. "latest").
-	// WARNING: This will cancel an ongoing deployment. Disabling for now.
-	// await $`doctl apps create-deployment ${appId} --force-rebuild`;
 }

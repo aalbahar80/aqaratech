@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -404,13 +404,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios`,
@@ -477,13 +477,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios`,
@@ -536,13 +536,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}`.replace(
@@ -618,13 +618,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}/payouts`.replace(
@@ -703,13 +703,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}/properties`.replace(
@@ -788,13 +788,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}/roles`.replace(
@@ -870,13 +870,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}/units`.replace(
@@ -932,13 +932,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}/balance`.replace(
@@ -994,13 +994,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}`.replace(
@@ -1068,13 +1068,13 @@ export class PortfoliosApi
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/portfolios/{id}`.replace(

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -300,13 +300,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases`,
@@ -372,13 +372,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases/{id}/invoices`.replace(
@@ -451,13 +451,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases`,
@@ -554,13 +554,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases/{id}/invoices`.replace(
@@ -619,13 +619,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases/{id}`.replace(
@@ -681,13 +681,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases/{id}`.replace(
@@ -755,13 +755,13 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/leases/{id}`.replace(

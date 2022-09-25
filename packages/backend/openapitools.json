@@ -9,7 +9,9 @@
 				"generatorName": "typescript-fetch",
 				"inputSpec": "./openapi.yaml",
 				"output": "../site/src/api/openapi",
-				"skipValidateSpec": true,
+				"removeOperationIdPrefix": true,
+				"skipValidateSpec": false,
+				"enablePostProcessFile": true,
 				"additionalProperties": {
 					"supportsES6": true,
 					"typescriptThreePlus": true,

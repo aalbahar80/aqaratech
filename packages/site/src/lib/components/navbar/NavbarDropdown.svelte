@@ -36,7 +36,7 @@
 		<DropdownMenu>
 			{#each getNavOptions($page.data.user) as option}
 				<MenuItem as="div" let:active>
-					<a href={option.href} sveltekit:reload>
+					<a href={option.href} data-sveltekit-reload>
 						<MenuItemChild {active}>
 							<MenuItemIcon icon={option.icon} />
 							{option.label}

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -346,13 +346,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants`,
@@ -419,13 +419,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants`,
@@ -522,13 +522,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}/invoices`.replace(
@@ -607,13 +607,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}/leases`.replace(
@@ -669,13 +669,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}`.replace(
@@ -751,13 +751,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}/roles`.replace(
@@ -813,13 +813,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}`.replace(
@@ -887,13 +887,13 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/tenants/{id}`.replace(

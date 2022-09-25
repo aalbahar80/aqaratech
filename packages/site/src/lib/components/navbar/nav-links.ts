@@ -1,9 +1,7 @@
-import { dev } from '$app/environment';
 import { LOGOUT } from '$lib/constants/routes';
 import type { User } from '$lib/models/types/auth.type';
 import { settings } from '$lib/utils/route-helpers';
 import type { SvelteComponentTyped } from 'svelte';
-import HeroiconsSolidCode from '~icons/heroicons-solid/code';
 import HeroiconsSolidCog from '~icons/heroicons-solid/cog';
 import HeroiconsSolidLogout from '~icons/heroicons-solid/logout';
 import HeroiconsSolidSwitchHorizontal from '~icons/heroicons-solid/switch-horizontal';
@@ -19,9 +17,6 @@ interface NavOption {
 
 // TODO can user be undefined?
 export const getNavOptions = (user: User): NavOption[] => [
-	...(dev
-		? [{ label: 'Debug', href: '/debug', icon: HeroiconsSolidCode }]
-		: []),
 	...(user
 		? [
 				{

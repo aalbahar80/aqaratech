@@ -23,36 +23,39 @@ import { AppModule } from './app.module';
 
 export const setupSwagger = async (app: INestApplication) => {
 	const config = new DocumentBuilder()
-		.setTitle('Aqaratech API')
-		.setDescription('The Aqratech API description')
+		.setTitle('Aqaratech')
+		.setDescription('Aqaratech API')
 		.setVersion('1.0')
-		.addTag('aqaratech')
-		// first server will be the default one in generated sdk
-		.addServer('http://localhost:3002')
-		// .setBasePath('/api')
-		// .addBearerAuth()
-		.addSecurityRequirements('oauth-swagger')
-		.addOAuth2(
-			{
-				type: 'oauth2',
-				// scheme: 'Bearer',
-				flows: {
-					authorizationCode: {
-						authorizationUrl:
-							'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
-						tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
-						scopes: {
-							'openid profile email': 'default scope',
-							openid:
-								"to indicate that the application intends to use OIDC to verify the user's identity",
-							profile: 'to get name, nickname, and picture',
-							email: 'to get email and email_verified',
-						},
-					},
-				},
-			},
-			'oauth-swagger',
-		)
+		.addBearerAuth({
+			type: 'http',
+			scheme: 'Bearer',
+			bearerFormat: 'JWT',
+			name: 'JWT',
+			description: 'Enter JWT token',
+			in: 'header',
+		})
+		// .addSecurityRequirements('oauth-swagger')
+		// .addOAuth2(
+		// 	{
+		// 		type: 'oauth2',
+		// 		// scheme: 'Bearer',
+		// 		flows: {
+		// 			authorizationCode: {
+		// 				authorizationUrl:
+		// 					'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
+		// 				tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
+		// 				scopes: {
+		// 					'openid profile email': 'default scope',
+		// 					openid:
+		// 						"to indicate that the application intends to use OIDC to verify the user's identity",
+		// 					profile: 'to get name, nickname, and picture',
+		// 					email: 'to get email and email_verified',
+		// 				},
+		// 			},
+		// 		},
+		// 	},
+		// 	'oauth-swagger',
+		// )
 		.build();
 
 	const document = SwaggerModule.createDocument(app, config, {
@@ -76,10 +79,6 @@ export const setupSwagger = async (app: INestApplication) => {
 		],
 		extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
 		ignoreGlobalPrefix: true,
-
-		operationIdFactory(controllerKey, methodKey) {
-			return methodKey;
-		},
 	});
 
 	try {

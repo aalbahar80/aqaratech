@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -216,13 +216,13 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/payouts`,
@@ -289,13 +289,13 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/payouts`,
@@ -348,13 +348,13 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(
@@ -410,13 +410,13 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(
@@ -484,13 +484,13 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		}
 
 		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
+			const token = this.configuration.accessToken;
+			const tokenString = await token('bearer', []);
 
+			if (tokenString) {
+				headerParameters['Authorization'] = `Bearer ${tokenString}`;
+			}
+		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(

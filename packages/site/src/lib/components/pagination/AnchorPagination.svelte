@@ -25,10 +25,10 @@
 
 <div
 	class="flex items-center justify-between rounded-md rounded-t-none border-t border-gray-200 bg-white px-4 py-3 shadow-sm sm:px-6"
+	data-sveltekit-noscroll
 >
 	<div class="flex flex-1 sm:hidden">
 		<a
-			sveltekit:noscroll
 			class="relative inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 			href={pagination.hasPreviousPage ? prevPageHref : null}
 			class:disabled-anchor={!pagination.hasPreviousPage}
@@ -36,7 +36,6 @@
 			Previous
 		</a>
 		<a
-			sveltekit:noscroll
 			class="relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 			href={pagination.hasNextPage ? nextPageHref : null}
 			class:disabled-anchor={!pagination.hasNextPage}
@@ -59,7 +58,6 @@
 				aria-label="Pagination"
 			>
 				<a
-					sveltekit:noscroll
 					class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
 					href={pagination.hasPreviousPage ? prevPageHref : null}
 					class:disabled-anchor={!pagination.hasPreviousPage}
@@ -71,7 +69,6 @@
 					{#if button}
 						{@const current = button === pagination.page}
 						<a
-							sveltekit:noscroll
 							aria-current={current ? 'page' : null}
 							href={getPageHref(button, $page.url)}
 							class={classes(
@@ -92,7 +89,6 @@
 					{/if}
 				{/each}
 				<a
-					sveltekit:noscroll
 					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
 					href={pagination.hasNextPage ? nextPageHref : null}
 					class:disabled-anchor={!pagination.hasNextPage}

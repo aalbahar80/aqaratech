@@ -1,17 +1,24 @@
 <script lang="ts">
+	import type { PortfolioDto } from '$api/openapi';
+	import { afterNavigate, prefetch } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PortfolioDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { PresentationChartBar } from '@steeze-ui/heroicons';
 	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let portfolio: PortfolioDto;
+
+	afterNavigate(async () => {
+		// prefetch in afterNavigate otherwise prefetching will only happen on first load.
+		// Example: Going from /portfolios/1 -> /portfolios/2 from a search result will not trigger prefetching.
+		await prefetch(`/portfolios/${portfolio.id}/dashboard`);
+	});
 </script>
 
 <Heading title="Portfolio" id={portfolio.id} entity="portfolio">

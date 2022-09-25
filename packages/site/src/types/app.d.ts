@@ -14,9 +14,9 @@ declare namespace App {
 		isAqaratechStaff: boolean;
 	}
 
-	interface PageError {
+	interface Error {
 		message: string;
-		code: string;
+		status?: number;
 		frame?: string;
 	}
 

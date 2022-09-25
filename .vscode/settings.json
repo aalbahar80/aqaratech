@@ -5,6 +5,7 @@
 		"https://json.schemastore.org/github-action.json": [
 			"file:///home/hydra/projects/aqtech/.github/workflows/build.yml"
 		],
-		"https://json.schemastore.org/github-workflow.json": "file:///home/hydra/projects/aqtech/.github/workflows/release.yml"
+		"https://json.schemastore.org/github-workflow.json": "file:///home/hydra/projects/aqtech/.github/workflows/release.yml",
+		"https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json": "file:///home/hydra/projects/aqtech/packages/backend/openapi.yaml"
 	}
 }

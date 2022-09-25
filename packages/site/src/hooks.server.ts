@@ -1,9 +1,10 @@
+import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
-import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
+import { LOGIN, LOGOUT } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
-import { isAqaratechStaff } from '$lib/server/utils/is-aqaratech-staff';
 import { validateToken } from '$lib/server/utils/validate';
+import { isAuthRoute } from '$lib/utils/is-public-route';
 import {
 	addTraceToHead,
 	extractRequestInfo,
@@ -79,12 +80,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// If we do want to validate it either way, we need to make sure to not place
 	// the user in a redirect loop:
 	// idToken expired => redirect to login => idToken expired => redirect to login => ...
-	const PUBLIC_ENDPOINTS = [LOGIN, LOGOUT, AUTH_CALLBACK];
-	if (cookies.idToken && !PUBLIC_ENDPOINTS.includes(event.url.pathname)) {
+	if (cookies.idToken && !isAuthRoute(event.url.pathname)) {
 		try {
 			console.log('validating idToken');
-			const payload = await validateToken(cookies.idToken);
-			event.locals.isAqaratechStaff = isAqaratechStaff(payload);
+			await validateToken(cookies.idToken);
 			event.locals.isAuthenticated = true;
 			// only set idToken in locals if it is valid
 			event.locals.idToken = cookies.idToken;
@@ -239,6 +238,15 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	Sentry.captureException(error, {
 		user,
 	});
+
+	if (error instanceof ResponseError) {
+		return {
+			message: error.response.statusText || 'An error occurred',
+			status: error.response.status,
+		};
+	}
+
+	return;
 };
 
 export const handleFetch: HandleFetch = async ({ request, fetch }) => {

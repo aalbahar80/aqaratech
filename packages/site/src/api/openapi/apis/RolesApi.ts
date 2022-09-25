@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -142,14 +142,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
 		}
 
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
-
 		const response = await this.request(
 			{
 				path: `/roles`,
@@ -200,14 +192,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			requestParameters.xRoleId !== null
 		) {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
 		}
 
 		const response = await this.request(
@@ -262,14 +246,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			requestParameters.xRoleId !== null
 		) {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
 		}
 
 		const response = await this.request(

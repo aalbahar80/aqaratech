@@ -63,7 +63,7 @@
 						{#each navigation as option (option.label)}
 							<a
 								on:click={() => close(null)}
-								sveltekit:prefetch
+								data-sveltekit-prefetch
 								href={option.href}
 							>
 								<PopoverItem option={{ label: option.label }} />
@@ -75,7 +75,7 @@
 							{#if !option.hideOnPopover}
 								<a
 									href={option.href}
-									sveltekit:reload={option.external || true}
+									data-sveltekit-reload
 									on:click={() => close(null)}
 								>
 									<PopoverItem option={{ label: option.label }} />
@@ -88,7 +88,7 @@
 						<div class="mt-6 px-5">
 							<a
 								href={LOGIN}
-								sveltekit:reload
+								rel="external"
 								class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700"
 							>
 								Login

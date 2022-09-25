@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+ * Aqaratech
  * Aqaratech API
- * The Aqratech API description
  *
  * The version of the OpenAPI document: 1.0
  *
@@ -195,14 +195,6 @@ export class AggregateApi
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
 		}
 
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
-
 		const response = await this.request(
 			{
 				path: `/aggregate/expensesByMonth`,
@@ -294,14 +286,6 @@ export class AggregateApi
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
 		}
 
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
-		}
-
 		const response = await this.request(
 			{
 				path: `/aggregate/incomeByMonth`,
@@ -367,14 +351,6 @@ export class AggregateApi
 			requestParameters.xRoleId !== null
 		) {
 			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
-		if (this.configuration && this.configuration.accessToken) {
-			// oauth required
-			headerParameters['Authorization'] = await this.configuration.accessToken(
-				'oauth-swagger',
-				[],
-			);
 		}
 
 		const response = await this.request(

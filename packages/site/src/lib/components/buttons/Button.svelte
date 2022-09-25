@@ -18,7 +18,7 @@
 	id="sbutton"
 	class={$$props.class}
 	{href}
-	sveltekit:prefetch={prefetch}
+	data-sveltekit-prefetch={prefetch ? '' : 'off'}
 	type="submit"
 	{disabled}
 	on:click

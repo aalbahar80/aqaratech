@@ -56,7 +56,7 @@
 											: 'text-gray-500 hover:text-gray-700',
 									)}
 									class:ml-4={idx !== 0}
-									sveltekit:prefetch
+									data-sveltekit-prefetch
 								>
 									{entitiesMap[title].singularCap}
 								</a>

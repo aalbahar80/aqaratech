@@ -30,7 +30,7 @@
 												<a
 													href="https://ojab1kn3vda.typeform.com/to/eet5fojG"
 													target="_blank"
-													sveltekit:reload
+													rel="external"
 													type="submit"
 													class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 text-center font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
 													style="-webkit-appearance: none;"

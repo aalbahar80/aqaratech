@@ -33,7 +33,7 @@
 			<MenuItem as="div" let:active>
 				<a
 					href={`/${entitiesMap.leaseInvoice.urlName}/new-multiple?leaseId=${leaseId}`}
-					sveltekit:reload
+					data-sveltekit-reload
 				>
 					<MenuItemChild {active}>
 						<MenuItemIcon icon={Fa6SolidLayerGroup} />

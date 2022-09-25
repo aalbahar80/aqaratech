@@ -1,19 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
-
-	const getTitle = () => {
-		if ($page.status === 404) {
-			return 'Page not found';
-		} else if ($page.status === 403) {
-			return 'Forbidden';
-		} else if ($page.status === 500) {
-			return 'Internal server error';
-		} else {
-			return 'Unknown error';
-		}
-	};
-	const title = getTitle();
 </script>
 
 <div
@@ -22,18 +9,18 @@
 	<div class="mx-auto max-w-max">
 		<main class="sm:flex">
 			<p class="text-4xl font-extrabold text-indigo-600 sm:text-5xl">
-				{$page.status}
+				{$page.error?.status || 500}
 			</p>
 			<div class="sm:ml-6">
 				<div class="sm:border-l sm:border-gray-200 sm:pl-6">
 					<h1
 						class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
 					>
-						{title}
-					</h1>
-					<p class="mt-1 text-base text-gray-500">
 						{$page.error?.message}
-					</p>
+					</h1>
+					<!-- <p class="mt-1 text-base text-gray-500">
+						{$page.error?.message}
+					</p> -->
 				</div>
 				<div
 					class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6"
