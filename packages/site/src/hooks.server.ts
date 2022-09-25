@@ -10,7 +10,7 @@ import {
 	extractRequestInfo,
 	getSentryUser,
 } from '$lib/utils/sentry/common';
-import { isRedirectError } from '$lib/utils/sentry/redirect';
+import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import { envCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
@@ -218,7 +218,7 @@ export const handleError: HandleServerError = ({ error, event }) => {
 
 	console.debug({ info, user });
 
-	if (isRedirectError(error, event)) {
+	if (isNotFoundError(error, event)) {
 		// Most 404's are from random bots, but some may be legit.
 		// So we log them to Sentry as 'info' instead of 'error'.
 		// Alternate solution: https://github.com/sveltejs/kit/issues/6774#issuecomment-1246090470

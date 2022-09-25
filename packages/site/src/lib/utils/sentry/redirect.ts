@@ -8,7 +8,7 @@ interface RedirectError {
 /**
  * Check if the error is a 404.
  */
-export const isRedirectError = (
+export const isNotFoundError = (
 	error: any,
 	event: RequestEvent,
 ): error is RedirectError => {
