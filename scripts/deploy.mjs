@@ -33,6 +33,8 @@ const SPEC = 'app.yml';
 console.log(chalk.blue(`Getting app ${appName} info...`));
 
 const allApps = await $`doctl apps list --format ID,Name --output json`;
+
+// @ts-expect-error zx will automatically use stdout and trim the new line. https://github.com/google/zx#processoutput
 const app = JSON.parse(allApps).find(
 	(/** @type {{ spec: { name: string; }; }} */ app) =>
 		app.spec.name === appName,
