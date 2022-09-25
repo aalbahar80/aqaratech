@@ -13,6 +13,7 @@ if (!dir) {
 	console.log('Usage: zx rm-source-maps.mjs [path/to/dir]');
 	console.log('Example: zx rm-source-maps.mjs build/client');
 	await $`exit 1`;
+	process.exit(1);
 }
 
 // check if dir exists
