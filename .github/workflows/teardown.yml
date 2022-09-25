@@ -27,4 +27,4 @@ jobs:
           echo "DELETED_BRANCH_NAME is $DELETED_BRANCH_NAME"
           ./.do/teardown.sh $DELETED_BRANCH_NAME ${{ secrets.DO_PROJECT_ID }}
         env:
-          DELETED_BRANCH_REF: ${{ github.event.ref }}
+          DELETED_BRANCH_REF: ${{ github.head_ref || github.event.ref }}
