@@ -9,7 +9,7 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-		// 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		'turbo',
 		'prettier',
 	],
@@ -18,8 +18,8 @@ module.exports = {
 		sourceType: 'module',
 		ecmaVersion: 2020,
 		// tsconfigRootDir: __dirname,
-		// tsconfigRootDir: '.',
-		// project: ['./tsconfig.json'],
+		tsconfigRootDir: '.',
+		project: ['./tsconfig.json'],
 	},
 	root: true,
 	rules: {

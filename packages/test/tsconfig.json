@@ -1,9 +1,12 @@
 {
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
 		"types": ["node"],
 		"resolveJsonModule": true,
 		"moduleResolution": "Node",
 		"module": "ESNext",
 		"target": "ESNext"
-	}
+	},
+	"include": ["./**/*.*"],
+	"exclude": ["playwright-report", ".eslintrc.js"]
 }
